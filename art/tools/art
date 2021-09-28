@@ -1,0 +1,649 @@
+# Copyright (C) 2011 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This script is used on host and device. It uses a common subset
+# shell dialect that should work on the host (e.g. bash), and
+# Android (e.g. mksh).
+
+######################################
+# Functions
+######################################
+function find_libdir() {
+  # Get the actual file, $1 is the ART_BINARY_PATH and may be a symbolic link.
+  # Use realpath instead of readlink because Android does not have a readlink.
+  if [[ "$(realpath "$1")" == *dalvikvm64 ]]; then
+    echo "lib64"
+  else
+    echo "lib"
+  fi
+}
+
+function usage() {
+  cat 1>&2 <<EOF
+Usage: art [OPTIONS] [--] [ART_OPTIONS] CLASS
+
+Supported OPTIONS include:
+  --32                     Use the 32-bit Android Runtime.
+  --64                     Use the 64-bit Android Runtime.
+  -d                       Use the debug ART library (libartd.so).
+  --debug                  Equivalent to -d.
+  --gdb                    Launch the Android Runtime in gdb.
+  --gdbserver <comms>      Launch the Android Runtime in gdbserver using the
+                           supplied communication channel.
+  --help                   Display usage message.
+  --invoke-with <program>  Launch the Android Runtime in <program>.
+  --perf                   Launch the Android Runtime with perf recording.
+  --perf-report            Launch the Android Runtime with perf recording with
+                           report upon completion.
+  --profile                Run with profiling, then run using profile data.
+  --verbose                Run script verbosely.
+  --no-clean               Don't cleanup oat directories.
+  --no-compile             Don't invoke dex2oat before running.
+  --allow-default-jdwp     Don't automatically put in -XjdwpProvider:none.
+                           You probably do not want this.
+
+The ART_OPTIONS are passed directly to the Android Runtime.
+
+Example:
+  art --32 -cp my_classes.dex MainClass
+
+Common errors:
+  1) Not having core.art available (see $ANDROID_BUILD_TOP/art/Android.mk).
+     eg m -j32 build-art-host
+  2) Not having boot.art available (see $ANDROID_BUILD_TOP/build/make/core/dex_preopt_libart_boot.mk)
+     eg m -j32 out/target/product/generic_x86_64/dex_bootjars/system/framework/x86_64/boot.art
+EOF
+}
+
+function clean_android_data() {
+  if [ "$DELETE_ANDROID_DATA" = "yes" ]; then
+    rm -rf $ANDROID_DATA
+  fi
+}
+
+# Given 'VAR1=VAL VAR2=VAL2 ... cmd arg1 arg2 ... argN' run the 'cmd' with the args
+# with the modified environment {VAR1=VAL,VAL2=,...}.
+#
+# Also prints the command to be run if verbose mode is enabled.
+function verbose_run() {
+  if [ "$VERBOSE" = "yes" ]; then
+    echo "$@"
+  fi
+
+  env "$@"
+}
+
+# Parse a colon-separated list into an array (e.g. "foo.dex:bar.dex" -> (foo.dex bar.dex))
+PARSE_CLASSPATH_RESULT=()  # Return value will be here due to shell limitations.
+parse_classpath() {
+  local cp="$1"
+  local oldifs=$IFS
+
+  local cp_array
+  cp_array=()
+
+  IFS=":"
+  for part in $cp; do
+    cp_array+=("$part")
+  done
+  IFS=$oldifs
+
+  PARSE_CLASSPATH_RESULT=("${cp_array[@]}")
+}
+
+# Sets 'PARSE_CLASSPATH_RESULT' to an array of class path dex files.
+# e.g. (-cp foo/classes.dex:bar/classes.dex) -> (foo/classes.dex bar/classes.dex)
+find_cp_in_args() {
+  local found="false"
+  local index=0
+  local what
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -cp|-classpath)
+        parse_classpath "$2"
+        # Sets 'PARSE_CLASSPATH_RESULT' to an array of class path dex files.
+        # Subsequent parses will overwrite the preceding.
+        shift
+        ;;
+    esac
+    shift
+  done
+}
+
+# Delete the 'oat' directories relative to the classpath's dex files.
+# e.g. (foo/classes.dex bar/classes.dex) would delete (foo/oat bar/oat) directories.
+cleanup_oat_directory() {
+  local classpath
+  classpath=("$@")
+
+  local dirpath
+
+  for path in "${classpath[@]}"; do
+    dirpath="$(dirname "$path")"
+    [[ -d "$dirpath" ]] && verbose_run rm -rf "$dirpath/oat"
+  done
+}
+
+# Parse -cp <CP>, -classpath <CP>, and $CLASSPATH to find the dex files.
+# Each dex file's directory will have an 'oat' file directory, delete it.
+# Input: Command line arguments to the art script.
+# e.g. -cp foo/classes.dex:bar/classes.dex would delete (foo/oat bar/oat) directories.
+cleanup_oat_directory_for_classpath() {
+  if [ "$CLEAN_OAT_FILES" = "yes" ]; then
+    # First try: Use $CLASSPATH environment variable.
+    parse_classpath "$CLASSPATH"
+    # Second try: Look for latest -cp or -classpath arg which will take precedence.
+    find_cp_in_args "$@"
+
+    cleanup_oat_directory "${PARSE_CLASSPATH_RESULT[@]}"
+  fi
+}
+
+# Attempt to find $ANDROID_ROOT/framework/<isa>/core.art' without knowing what <isa> is.
+function check_if_boot_image_file_exists() {
+  local image_location_dir="$1"
+  local image_location_name="$2"
+
+  # Expand image_files to a list of existing image files on the disk.
+  # If no such files exist, it expands to single element 'dir/*/file' with a literal '*'.
+  local image_files
+  image_files=("$image_location_dir"/*/"$image_location_name") # avoid treating "*" as literal.
+
+  # Array always has at least 1 element. Test explicitly whether the file exists.
+  [[ -e "${image_files[0]}" ]]
+}
+
+# Automatically find the boot image location. It uses core.art by default.
+# On a real device, it might only have a boot.art, so use that instead when core.art does not exist.
+function detect_boot_image_location() {
+  local image_location_dir="$ANDROID_ROOT/framework"
+  local image_location_name="core.art"
+
+  # If there are no existing core.art, try to find boot.art.
+  # If there is no boot.art then leave it as-is, assumes -Ximage is explicitly used.
+  # Otherwise let dalvikvm give the error message about an invalid image file.
+  if ! check_if_boot_image_file_exists "$image_location_dir" "core.art" && \
+       check_if_boot_image_file_exists "$image_location_dir" "boot.art"; then
+    image_location_name="boot.art"
+  fi
+
+  local image_location="$image_location_dir/$image_location_name"
+  echo "$image_location"
+}
+
+function run_dex2oat() {
+  local class_loader_context=
+  for dex_file in "${DEX2OAT_CLASSPATH[@]}"
+  do
+    while [ -h "$dex_file" ]; do
+      # On Mac OS, readlink -f doesn't work.
+      dex_file="$(readlink "$dex_file")"
+    done
+    # Create oat file directory.
+    verbose_run mkdir -p $(dirname "$dex_file")/oat/$ISA
+    local oat_file=$(basename "$dex_file")
+    local oat_file=$(dirname "$dex_file")/oat/$ISA/${oat_file%.*}.odex
+    # When running dex2oat use the exact same context as when running dalvikvm.
+    # (see run_art function)
+    verbose_run ANDROID_DATA=$ANDROID_DATA                    \
+          ANDROID_ROOT=$ANDROID_ROOT                          \
+          ANDROID_I18N_ROOT=$ANDROID_I18N_ROOT                \
+          ANDROID_ART_ROOT=$ANDROID_ART_ROOT                  \
+          ANDROID_TZDATA_ROOT=$ANDROID_TZDATA_ROOT            \
+          LD_LIBRARY_PATH=$LD_LIBRARY_PATH                    \
+          PATH=$ANDROID_ROOT/bin:$PATH                        \
+          LD_USE_LOAD_BIAS=1                                  \
+          ANDROID_LOG_TAGS=$ANDROID_LOG_TAGS                  \
+          $DEX2OAT_BINARY_PATH                                \
+          --runtime-arg -Xnorelocate                          \
+          --boot-image=$DEX2OAT_BOOT_IMAGE                    \
+          --instruction-set=$ISA                              \
+          --class-loader-context="PCL[$class_loader_context]" \
+          "${DEX2OAT_FLAGS[@]}"                               \
+          --dex-file=$dex_file                                \
+          --oat-file=$oat_file
+    if [[ -n $class_loader_context ]]; then
+      class_loader_context+=":"
+    fi
+    class_loader_context+="$dex_file"
+  done
+}
+
+# Extract the dex2oat flags from the list of arguments.
+# -Xcompiler-options arguments are stored in DEX2OAT_FLAGS array
+# -cp argument is split by ':' and stored in DEX2OAT_CLASSPATH
+# -Ximage argument is stored in DEX2OAT_BOOT_IMAGE
+# -Xbootclasspath argument is stored in DEX2OAT_BCP
+# -Xbootclasspath-locations argument is stored in DEX2OAT_BCP_LOCS
+function extract_dex2oat_flags() {
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -Xcompiler-option)
+        DEX2OAT_FLAGS+=("$2")
+        shift
+        ;;
+      -Ximage:*)
+        DEX2OAT_BOOT_IMAGE=$1
+        # Remove '-Ximage:' from the argument.
+        DEX2OAT_BOOT_IMAGE=${DEX2OAT_BOOT_IMAGE##-Ximage:}
+        ;;
+      -Xbootclasspath:*)
+        DEX2OAT_BCP=$1
+        # Remove '-Xbootclasspath:' from the argument.
+        DEX2OAT_BCP=${DEX2OAT_BCP##-Xbootclasspath:}
+        ;;
+      -Xbootclasspath-locations:*)
+        DEX2OAT_BCP_LOCS=$1
+        # Remove '-Xbootclasspath-locations:' from the argument.
+        DEX2OAT_BCP_LOCS=${DEX2OAT_BCP_LOCS##-Xbootclasspath-locations:}
+        ;;
+      -cp)
+        # Reset any previously parsed classpath, just like dalvikvm
+        # only supports one -cp argument.
+        DEX2OAT_CLASSPATH=()
+        # TODO: support -classpath and CLASSPATH
+        local oifs=$IFS
+        IFS=':'
+        for classpath_elem in $2
+        do
+          DEX2OAT_CLASSPATH+=("$classpath_elem")
+        done
+        shift
+        IFS=$oifs
+        ;;
+    esac
+    shift
+  done
+}
+
+# Runs dalvikvm, returns its exit code.
+# (Oat directories are cleaned up in between runs)
+function run_art() {
+  local ret
+
+  # Run dalvikvm.
+  verbose_run ANDROID_DATA="$ANDROID_DATA"                  \
+              ANDROID_ROOT="$ANDROID_ROOT"                  \
+              ANDROID_I18N_ROOT="$ANDROID_I18N_ROOT"        \
+              ANDROID_ART_ROOT="$ANDROID_ART_ROOT"          \
+              ANDROID_TZDATA_ROOT="$ANDROID_TZDATA_ROOT"    \
+              LD_LIBRARY_PATH="$LD_LIBRARY_PATH"            \
+              PATH="$ANDROID_ROOT/bin:$PATH"                \
+              LD_USE_LOAD_BIAS=1                            \
+              ANDROID_LOG_TAGS="$ANDROID_LOG_TAGS"          \
+              $LAUNCH_WRAPPER $ART_BINARY_PATH $lib         \
+              -XXlib:"$LIBART"                              \
+              -Xnorelocate                                  \
+              -Ximage:"$DEFAULT_IMAGE_LOCATION"             \
+              "$@"
+  ret=$?
+
+  # Avoid polluting disk with 'oat' files after dalvikvm has finished.
+  cleanup_oat_directory_for_classpath "$@"
+
+  # Forward exit code of dalvikvm.
+  return $ret
+}
+
+######################################
+# Globals
+######################################
+ART_BINARY=dalvikvm
+DEX2OAT_BINARY=dex2oat
+DEX2OAT_SUFFIX=""
+DELETE_ANDROID_DATA="no"
+LAUNCH_WRAPPER=
+LIBART=libart.so
+JIT_PROFILE="no"
+ALLOW_DEFAULT_JDWP="no"
+VERBOSE="no"
+CLEAN_OAT_FILES="yes"
+RUN_DEX2OAT="yes"
+EXTRA_OPTIONS=()
+DEX2OAT_FLAGS=()
+DEX2OAT_CLASSPATH=()
+
+# Parse arguments
+while [[ "$1" = "-"* ]]; do
+  case "$1" in
+  --)
+    # No more arguments for this script.
+    shift
+    break
+    ;;
+  --32)
+    ART_BINARY=dalvikvm32
+    DEX2OAT_SUFFIX=32
+    ;;
+  --64)
+    ART_BINARY=dalvikvm64
+    DEX2OAT_SUFFIX=64
+    ;;
+  -d)
+    ;& # Fallthrough
+  --debug)
+    LIBART="libartd.so"
+    DEX2OAT_BINARY="dex2oatd"
+    # Expect that debug mode wants all checks.
+    EXTRA_OPTIONS+=(-XX:SlowDebug=true)
+    ;;
+  --gdbserver)
+    LAUNCH_WRAPPER="gdbserver $2"
+    shift
+    ;;
+  --gdb)
+    LIBART="libartd.so"
+    LAUNCH_WRAPPER="gdb --args"
+    ;;
+  --help)
+    usage
+    exit 0
+    ;;
+  --invoke-with)
+    LAUNCH_WRAPPER=$2
+    shift
+    ;;
+  --perf)
+    PERF="record"
+    ;;
+  --perf-report)
+    PERF="report"
+    ;;
+  --profile)
+    JIT_PROFILE="yes"
+    ;;
+  --verbose)
+    VERBOSE="yes"
+    ;;
+  --no-clean)
+    CLEAN_OAT_FILES="no"
+    ;;
+  --no-compile)
+    CLEAN_OAT_FILES="no"
+    RUN_DEX2OAT="no"
+    ;;
+  --allow-default-jdwp)
+    ALLOW_DEFAULT_JDWP="yes"
+    ;;
+  --*)
+    echo "unknown option: $1" 1>&2
+    usage
+    exit 1
+    ;;
+  *)
+    break
+    ;;
+  esac
+  shift
+done
+
+if [ $# -eq 0 ]; then
+  usage
+  exit 1
+fi
+
+# Follow all sym links to get the program name.
+if [[ -n "$BASH_SOURCE" ]]; then
+  PROG_NAME="$BASH_SOURCE"
+else
+  PROG_NAME="$0"
+fi
+while [ -h "$PROG_NAME" ]; do
+  # On Mac OS, readlink -f doesn't work.
+  PROG_NAME="$(readlink "$PROG_NAME")"
+done
+
+PROG_DIR="$(cd "${PROG_NAME%/*}" ; pwd -P)"
+ANDROID_ROOT="$(cd $PROG_DIR/..; pwd -P)"
+
+# If ANDROID_I18N_ROOT is not set, try to detect whether we are running on
+# target or host and set that environment variable to the usual default value.
+if [ -z "$ANDROID_I18N_ROOT" ]; then
+  # This script is used on host and target (device). However, the (expected)
+  # default value `ANDROID_I18N_ROOT` is not the same on host and target:
+  # - on host, `ANDROID_I18N_ROOT` is expected to be
+  #   "$ANDROID_ROOT/com.android.i18n";
+  # - on target, `ANDROID_I18N_ROOT` is expected to be
+  #   "/apex/com.android.i18n".
+  #
+  # We use the presence/absence of the `$ANDROID_ROOT/../apex` directory to
+  # determine whether we are on target or host (this is brittle, but simple).
+  if [ -d "$ANDROID_ROOT/../apex" ]; then
+    # Target case.
+    ANDROID_I18N_ROOT="/apex/com.android.i18n"
+  else
+    # Host case.
+    ANDROID_I18N_ROOT="$ANDROID_ROOT/com.android.i18n"
+  fi
+fi
+
+# If ANDROID_ART_ROOT is not set, try to detect whether we are running on
+# target or host and set that environment variable to the usual default value.
+if [ -z "$ANDROID_ART_ROOT" ]; then
+  # This script is used on host and target (device). However, the (expected)
+  # default value `ANDROID_ART_ROOT` is not the same on host and target:
+  # - on host, `ANDROID_ART_ROOT` is expected to be
+  #   "$ANDROID_ROOT/com.android.art";
+  # - on target, `ANDROID_ART_ROOT` is expected to be
+  #   "/apex/com.android.art".
+  #
+  # We use the presence/absence of the `$ANDROID_ROOT/../apex` directory to
+  # determine whether we are on target or host (this is brittle, but simple).
+  if [ -d "$ANDROID_ROOT/../apex" ]; then
+    # Target case.
+    ANDROID_ART_ROOT="/apex/com.android.art"
+  else
+    # Host case.
+    ANDROID_ART_ROOT="$ANDROID_ROOT/com.android.art"
+  fi
+fi
+
+# If ANDROID_TZDATA_ROOT is not set, try to detect whether we are running on
+# target or host and set that environment variable to the usual default value.
+if [ -z "$ANDROID_TZDATA_ROOT" ]; then
+  # This script is used on host and target (device). However, the (expected)
+  # default value `ANDROID_TZDATA_ROOT` is not the same on host and target:
+  # - on host, `ANDROID_TZDATA_ROOT` is expected to be
+  #   "$ANDROID_ROOT/com.android.tzdata";
+  # - on target, `ANDROID_TZDATA_ROOT` is expected to be
+  #   "/apex/com.android.tzdata".
+  #
+  # We use the presence/absence of the `$ANDROID_ROOT/../apex` directory to
+  # determine whether we are on target or host (this is brittle, but simple).
+  if [ -d "$ANDROID_ROOT/../apex" ]; then
+    # Target case.
+    ANDROID_TZDATA_ROOT="/apex/com.android.tzdata"
+  else
+    # Host case.
+    ANDROID_TZDATA_ROOT="$ANDROID_ROOT/com.android.tzdata"
+  fi
+fi
+
+ART_BINARY_PATH=$ANDROID_ROOT/bin/$ART_BINARY
+
+if [ ! -x "$ART_BINARY_PATH" ]; then
+  cat 1>&2 <<EOF
+Android Runtime not found: $ART_BINARY_PATH
+This script should be in the same directory as the Android Runtime ($ART_BINARY).
+EOF
+  exit 1
+fi
+
+DEX2OAT_BINARY_PATH=$ANDROID_ROOT/bin/$DEX2OAT_BINARY$DEX2OAT_SUFFIX
+
+if [ ! -x "$DEX2OAT_BINARY_PATH" ]; then
+  echo "Warning: Android Compiler not found: $DEX2OAT_BINARY_PATH"
+fi
+
+######################################
+# Main program
+######################################
+
+# If android logging is not explicitly set, only print warnings and errors.
+if [ -z "$ANDROID_LOG_TAGS" ]; then
+  ANDROID_LOG_TAGS='*:w'
+fi
+
+LIBDIR="$(find_libdir $ART_BINARY_PATH)"
+LD_LIBRARY_PATH=$ANDROID_ROOT/$LIBDIR
+DEFAULT_IMAGE_LOCATION="$(detect_boot_image_location)"
+DEX2OAT_BOOT_IMAGE="$DEFAULT_IMAGE_LOCATION"
+ISA=$(LD_LIBRARY_PATH=$LD_LIBRARY_PATH $ART_BINARY_PATH -showversion | (read art version number isa && echo $isa))
+
+# Extract the dex2oat flags from the list of arguments.
+# -Xcompiler-options arguments are stored in DEX2OAT_FLAGS array
+# -cp argument is split by ':' and stored in DEX2OAT_CLASSPATH
+# -Ximage argument is stored in DEX2OAT_BOOT_IMAGE
+extract_dex2oat_flags "$@"
+
+# If ANDROID_DATA is the system ANDROID_DATA or is not set, use our own,
+# and ensure we delete it at the end.
+if [ "$ANDROID_DATA" = "/data" ] || [ "$ANDROID_DATA" = "" ]; then
+  if [[ $PWD != / ]]; then
+    ANDROID_DATA="$PWD/android-data$$"
+  else
+    # Use /data/local/tmp when running this from adb shell, since it starts out in /
+    # by default.
+    ANDROID_DATA="$ANDROID_DATA/local/tmp/android-data$$"
+  fi
+  mkdir -p "$ANDROID_DATA"
+  DELETE_ANDROID_DATA="yes"
+fi
+
+if [[ "$DEX2OAT_BCP" = "" && "$DEX2OAT_BCP_LOCS" != "" ]]; then
+  echo "Cannot use -Xbootclasspath-locations without -Xbootclasspath"
+  exit 1
+fi
+
+if [[ "$DEX2OAT_BOOT_IMAGE" = *core*.art && "$DEX2OAT_BCP" = "" ]]; then
+  # Note: This must start with the CORE_IMG_JARS in Android.common_path.mk
+  # because that's what we use for compiling the core.art image.
+  # It may contain additional modules from TEST_CORE_JARS.
+  core_jars_list="core-oj core-libart core-icu4j okhttp bouncycastle apache-xml conscrypt"
+  core_jars_suffix=
+  if [[ -e $ANDROID_ROOT/framework/core-oj-hostdex.jar ]]; then
+    core_jars_suffix=-hostdex
+    core_locations_dir=$ANDROID_ROOT/framework
+    prefix=$PWD/
+    if [[ ${core_locations_dir:0:${#prefix}} = $prefix ]]; then
+      core_locations_dir="${core_locations_dir##$prefix}"
+    fi
+  elif [[ -e $ANDROID_ROOT/framework/core-oj-testdex.jar ]]; then
+    core_jars_suffix=-testdex
+    core_locations_dir=/system/framework
+  fi
+  if [[ $core_jars_suffix != "" ]]; then
+    boot_separator=""
+    for boot_module in ${core_jars_list}; do
+      DEX_FILENAME="$boot_module$core_jars_suffix.jar"
+      DEX2OAT_BCP+="$boot_separator$ANDROID_ROOT/framework/${DEX_FILENAME}"
+      DEX2OAT_BCP_LOCS+="$boot_separator$core_locations_dir/${DEX_FILENAME}"
+      boot_separator=":"
+    done
+    if [ "$VERBOSE" = "yes" ]; then
+      echo "Using predefined -Xbootclasspath for image $DEX2OAT_BOOT_IMAGE:"
+      echo DEX2OAT_BOOT_IMAGE=$DEX2OAT_BOOT_IMAGE
+      echo DEX2OAT_BCP=$DEX2OAT_BCP
+      echo DEX2OAT_BCP_LOCS=$DEX2OAT_BCP_LOCS
+    fi
+  fi
+fi
+
+if [ "$DEX2OAT_BCP" != "" ]; then
+  EXTRA_OPTIONS+=("-Xbootclasspath:$DEX2OAT_BCP")
+  DEX2OAT_FLAGS+=("--runtime-arg" "-Xbootclasspath:$DEX2OAT_BCP")
+  if [ "$DEX2OAT_BCP_LOCS" != "" ]; then
+    EXTRA_OPTIONS+=("-Xbootclasspath-locations:$DEX2OAT_BCP_LOCS")
+    DEX2OAT_FLAGS+=("--runtime-arg" \
+                    "-Xbootclasspath-locations:$DEX2OAT_BCP_LOCS")
+  fi
+fi
+
+if [ "$PERF" != "" ]; then
+  LAUNCH_WRAPPER="perf record -g --call-graph dwarf -F 10000 -o $ANDROID_DATA/perf.data -e cycles:u $LAUNCH_WRAPPER"
+  DEX2OAT_FLAGS+=(--generate-debug-info)
+fi
+
+if [ "$ALLOW_DEFAULT_JDWP" = "no" ]; then
+  EXTRA_OPTIONS+=(-XjdwpProvider:none)
+fi
+
+# First cleanup any left-over 'oat' files from the last time dalvikvm was run.
+cleanup_oat_directory_for_classpath "$@"
+
+# Protect additional arguments in quotes to preserve whitespaces (used by
+# run-jdwp-test.sh when running on device), '$' (may be used as part of
+# classpath) and other special characters when evaluated.
+EXTRA_OPTIONS+=("$@")
+
+if [ "$JIT_PROFILE" = "yes" ]; then
+  # Create the profile. The runtime expects profiles to be created before
+  # execution.
+  PROFILE_PATH="$ANDROID_DATA/primary.prof"
+  touch "$PROFILE_PATH"
+
+  run_art -Xjitsaveprofilinginfo               \
+          -Xps-min-methods-to-save:1           \
+          -Xps-min-classes-to-save:1           \
+          -Xps-min-notification-before-wake:10 \
+          -Xps-profile-path:$PROFILE_PATH      \
+          -Xusejit:true                        \
+          ${EXTRA_OPTIONS[@]}                  \
+          &> "$ANDROID_DATA/profile_gen.log"
+  EXIT_STATUS=$?
+
+  if [ $EXIT_STATUS != 0 ]; then
+    echo "Profile run failed: " >&2
+    cat "$ANDROID_DATA/profile_gen.log" >&2
+    clean_android_data
+    exit $EXIT_STATUS
+  fi
+
+  # Wipe dalvik-cache so that a subsequent run_art must regenerate it.
+  # Leave $ANDROID_DATA intact since it contains our profile file.
+  rm -rf "$ANDROID_DATA/dalvik-cache"
+
+  # Append arguments so next invocation of run_art uses the profile.
+  DEX2OAT_FLAGS+=(--profile-file="$PROFILE_PATH")
+fi
+
+if [ -x "$DEX2OAT_BINARY_PATH" ]; then
+  if [ "$RUN_DEX2OAT" = "yes" ]; then
+    # Run dex2oat before launching ART to generate the oat files for the classpath.
+    run_dex2oat
+  fi
+fi
+
+# Do not continue if the dex2oat failed.
+EXIT_STATUS=$?
+if [ $EXIT_STATUS != 0 ]; then
+  echo "Failed dex2oat invocation" >&2
+  exit $EXIT_STATUS
+fi
+
+run_art "${EXTRA_OPTIONS[@]}"
+EXIT_STATUS=$?
+
+if [ "$PERF" != "" ]; then
+  if [ "$PERF" = report ]; then
+    perf report -i $ANDROID_DATA/perf.data
+  fi
+  echo "Perf data saved in: $ANDROID_DATA/perf.data"
+else
+  # Perf output is placed under $ANDROID_DATA so not cleaned when perf options used.
+  clean_android_data
+fi
+
+exit $EXIT_STATUS

@@ -1,0 +1,185 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "recovery_test_defaults",
+
+    defaults: [
+        "recovery_defaults",
+    ],
+
+    include_dirs: [
+        "bootable/recovery",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "libcrypto",
+        "libcutils",
+        "liblog",
+        "libpng",
+        "libprocessgroup",
+        "libselinux",
+        "libz",
+        "libziparchive",
+    ],
+
+    target: {
+        android: {
+            shared_libs: [
+                "libutils",
+                "libvndksupport",
+            ],
+        },
+
+        host: {
+            static_libs: [
+                "libutils",
+            ],
+        },
+    },
+}
+
+// libapplypatch, libapplypatch_modes
+libapplypatch_static_libs = [
+    "libapplypatch_modes",
+    "libapplypatch",
+    "libedify",
+    "libotautil",
+    "libbsdiff",
+    "libbspatch",
+    "libdivsufsort",
+    "libdivsufsort64",
+    "libutils",
+    "libbase",
+    "libbrotli",
+    "libbz",
+    "libz",
+    "libziparchive",
+]
+
+// librecovery_defaults uses many shared libs that we want to avoid using in tests (e.g. we don't
+// have 32-bit android.hardware.health@2.0.so or libbootloader_message.so on marlin).
+librecovery_static_libs = [
+    "librecovery",
+    "librecovery_fastboot",
+    "libinstall",
+    "librecovery_ui",
+    "libminui",
+    "libfusesideload",
+    "libbootloader_message",
+    "libotautil",
+
+    "libhealthhalutils",
+    "libvintf",
+
+    "android.hardware.health@2.0",
+    "android.hardware.health@1.0",
+    "libext4_utils",
+    "libfs_mgr",
+    "libhidl-gen-utils",
+    "libhidlbase",
+    "liblp",
+    "libtinyxml2",
+    "libc++fs",
+]
+
+cc_test {
+    name: "recovery_unit_test",
+    isolated: true,
+    require_root: true,
+
+    defaults: [
+        "recovery_test_defaults",
+        "libupdater_defaults",
+        "libupdater_device_defaults",
+    ],
+
+    test_suites: ["device-tests"],
+
+    srcs: [
+        "unit/*.cpp",
+    ],
+
+    static_libs: libapplypatch_static_libs + librecovery_static_libs + [
+        "librecovery_ui",
+        "libfusesideload",
+        "libminui",
+        "librecovery_utils",
+        "librkutility",
+        "libotautil",
+        "libupdater_device",
+        "libupdater_core",
+        "libupdate_verifier",
+
+        "libgtest_prod",
+        "libprotobuf-cpp-lite",
+    ],
+
+    data: [
+        "testdata/*",
+        ":res-testdata",
+    ],
+}
+
+cc_test {
+    name: "recovery_manual_test",
+    isolated: true,
+
+    defaults: [
+        "recovery_test_defaults",
+    ],
+
+    test_suites: ["device-tests"],
+
+    srcs: [
+        "manual/recovery_test.cpp",
+    ],
+}
+
+cc_test_host {
+    name: "recovery_host_test",
+    isolated: true,
+
+    defaults: [
+        "recovery_test_defaults",
+        "libupdater_defaults",
+    ],
+
+    srcs: [
+        "unit/host/*",
+    ],
+
+    static_libs: [
+        "libupdater_host",
+        "libupdater_core",
+        "libimgdiff",
+        "libbsdiff",
+        "libdivsufsort64",
+        "libdivsufsort",
+        "libfstab",
+        "libc++fs",
+    ],
+
+    test_suites: ["general-tests"],
+
+    data: ["testdata/*"],
+
+    target: {
+        darwin: {
+            // libapplypatch in "libupdater_defaults" is not available on the Mac.
+            enabled: false,
+        },
+    },
+}

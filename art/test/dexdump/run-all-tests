@@ -1,0 +1,125 @@
+#!/bin/bash
+#
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Set up prog to be the path of this script, including following symlinks,
+# and set up progdir to be the fully-qualified pathname of its directory.
+prog="$0"
+while [ -h "${prog}" ]; do
+    newProg=`/bin/ls -ld "${prog}"`
+    newProg=`expr "${newProg}" : ".* -> \(.*\)$"`
+    if expr "x${newProg}" : 'x/' >/dev/null; then
+        prog="${newProg}"
+    else
+        progdir=`dirname "${prog}"`
+        prog="${progdir}/${newProg}"
+    fi
+done
+oldwd=`pwd`
+progdir=`dirname "${prog}"`
+cd "${progdir}"
+progdir=`pwd`
+prog="${progdir}"/`basename "${prog}"`
+
+# Set up a temp directory for output.
+tmpdir=/tmp/test-$$
+mkdir ${tmpdir}
+
+# Set up tools and commands to run
+DEXDUMP="${ANDROID_HOST_OUT}/bin/dexdump"
+DEXLIST="${ANDROID_HOST_OUT}/bin/dexlist"
+
+declare -A SUFFIX_COMMAND_MAP
+SUFFIX_COMMAND_MAP[txt]="${DEXDUMP} -adfh"
+SUFFIX_COMMAND_MAP[xml]="${DEXDUMP} -e -l xml"
+SUFFIX_COMMAND_MAP[lst]="${DEXLIST}"
+
+# Parse command-line options
+UPDATE="no"
+USAGE="no"
+while [ $# -ne 0 ]; do
+  case "$1" in
+    --update)
+      UPDATE="yes"
+      ;;
+    *)
+      echo "Unknown option $1" 1>&2
+      USAGE="yes"
+      ;;
+  esac
+  shift
+done
+
+if [ "${USAGE}" = "yes" ]; then
+  cat 1>&2 <<USAGE_END
+Usage:
+  ${prog##*/} [--update]
+Options:
+  --update     Update reference outputs
+USAGE_END
+  exit 1
+fi
+
+if [ "${UPDATE}" = "yes" ]; then
+  for dex in *.dex; do
+    for suffix in ${!SUFFIX_COMMAND_MAP[@]}; do
+      new_output=${dex%%.*}.${suffix}
+      ${SUFFIX_COMMAND_MAP[${suffix}]} ${dex} > ${new_output}
+      if [ $? -ne 0 ]; then
+        echo "Failed running ${SUFFIX_COMMAND_MAP[${suffix}]} ${dex} > ${new_output}" 2>&1
+        exit 1
+      fi
+    done
+  done
+  exit 0
+fi
+
+# Run the tests.
+passed=0
+failed=0
+for dex in *.dex; do
+  echo ${dex}
+  for suffix in ${!SUFFIX_COMMAND_MAP[@]}; do
+    expected_output=${dex%%.*}.${suffix}
+    actual_output=${tmpdir}/${expected_output}
+    cmd="${SUFFIX_COMMAND_MAP[${suffix}]} ${dex}"
+    ${cmd} > ${actual_output}
+    cmp ${expected_output} ${actual_output}
+    if [ "$?" = "0" ]; then
+        ((passed += 1))
+    else
+        ((failed += 1))
+        echo failed: ${cmd}
+    fi
+  done
+done
+
+# Report results.
+echo
+echo "passed: ${passed} test(s)"
+echo "failed: ${failed} test(s)"
+echo
+
+# Clean up, cd back to original dir.
+rm -rf ${tmpdir}
+cd ${oldwd}
+
+# Return status.
+if [ "${failed}" != "0" ]; then
+  echo failed
+  exit 1
+fi
+exit 0
+

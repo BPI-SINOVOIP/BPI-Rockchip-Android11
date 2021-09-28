@@ -1,0 +1,156 @@
+python_binary_host {
+    name: "manifest_fixer",
+    main: "manifest_fixer.py",
+    srcs: [
+        "manifest_fixer.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+    libs: [
+        "manifest_utils",
+    ],
+}
+
+python_test_host {
+    name: "manifest_fixer_test",
+    main: "manifest_fixer_test.py",
+    srcs: [
+        "manifest_fixer_test.py",
+        "manifest_fixer.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+    libs: [
+        "manifest_utils",
+    ],
+    test_suites: ["general-tests"],
+}
+
+python_library_host {
+    name: "manifest_utils",
+    srcs: [
+        "manifest.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+}
+
+python_binary_host {
+    name: "manifest_check",
+    main: "manifest_check.py",
+    srcs: [
+        "manifest_check.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+    libs: [
+        "manifest_utils",
+    ],
+}
+
+python_test_host {
+    name: "manifest_check_test",
+    main: "manifest_check_test.py",
+    srcs: [
+        "manifest_check_test.py",
+        "manifest_check.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+    libs: [
+        "manifest_utils",
+    ],
+    test_suites: ["general-tests"],
+}
+
+python_binary_host {
+    name: "jsonmodify",
+    main: "jsonmodify.py",
+    srcs: [
+        "jsonmodify.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    }
+}
+
+python_binary_host {
+    name: "test_config_fixer",
+    main: "test_config_fixer.py",
+    srcs: [
+        "test_config_fixer.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+    libs: [
+        "manifest_utils",
+    ],
+}
+
+python_test_host {
+    name: "test_config_fixer_test",
+    main: "test_config_fixer_test.py",
+    srcs: [
+        "test_config_fixer_test.py",
+        "test_config_fixer.py",
+    ],
+    version: {
+        py2: {
+            enabled: true,
+        },
+        py3: {
+            enabled: false,
+        },
+    },
+    libs: [
+        "manifest_utils",
+    ],
+    test_suites: ["general-tests"],
+}
+
+python_binary_host {
+    name: "lint-project-xml",
+    main: "lint-project-xml.py",
+    srcs: ["lint-project-xml.py"],
+}

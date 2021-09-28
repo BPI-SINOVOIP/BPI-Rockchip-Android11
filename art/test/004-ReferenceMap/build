@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# Copyright (C) 2015 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Stop if something fails.
+set -e
+
+# This test depends on the exact format of the DEX file. Since dx is deprecated,
+# the classes.dex file is packaged as a test input. It was created with:
+#
+# $ javac -g -Xlint:-options -source 1.7 -target 1.7 -d classes src/Main.java
+# $ dx --debug --dex --output=classes.dex classes
+
+# Wrapper function for javac which for this test does nothing as the
+# test uses a pre-built DEX file.
+function javac_wrapper {
+  # Nothing to compile, using dx generated classes.dex.
+  return 0
+}
+
+export -f javac_wrapper
+export JAVAC=javac_wrapper
+
+# Do not invoke D8 for this test.
+export D8=':'
+
+######################################################################
+
+jar -cf classes.jar classes.dex
+./default-build "$@"

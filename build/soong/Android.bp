@@ -1,0 +1,205 @@
+subdirs = [
+    "androidmk",
+    "bpfix",
+    "cmd/*",
+    "fs",
+    "finder",
+    "jar",
+    "zip",
+    "third_party/zip",
+    "ui/*",
+]
+
+bootstrap_go_package {
+    name: "soong",
+    pkgPath: "android/soong",
+    deps: [
+        "blueprint",
+    ],
+    srcs: [
+        "doc.go",
+    ],
+}
+
+//
+// Defaults to enable various configurations of host bionic
+//
+
+cc_defaults {
+    name: "linux_bionic_supported",
+    host_supported: true,
+    target: {
+        host: {
+            enabled: false,
+        },
+        linux_bionic: {
+            enabled: true,
+        },
+    },
+}
+
+//
+// C static libraries extracted from the gcc toolchain
+//
+
+toolchain_library {
+    name: "libatomic",
+    defaults: ["linux_bionic_supported"],
+    vendor_available: true,
+    ramdisk_available: true,
+    recovery_available: true,
+    native_bridge_supported: true,
+
+    arch: {
+        arm: {
+            src: "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/arm-linux-androideabi/lib/libatomic.a",
+        },
+        arm64: {
+            src: "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/aarch64-linux-android/lib64/libatomic.a",
+        },
+        x86: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/x86_64-linux-android/lib/libatomic.a",
+        },
+        x86_64: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/x86_64-linux-android/lib64/libatomic.a",
+        },
+    },
+}
+
+toolchain_library {
+    name: "libgcc",
+    defaults: ["linux_bionic_supported"],
+    vendor_available: true,
+    recovery_available: true,
+    native_bridge_supported: true,
+
+    arch: {
+        arm: {
+            src: "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/lib/gcc/arm-linux-androideabi/4.9.x/libgcc.a",
+        },
+        arm64: {
+            src: "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/lib/gcc/aarch64-linux-android/4.9.x/libgcc.a",
+        },
+        x86: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/lib/gcc/x86_64-linux-android/4.9.x/32/libgcc.a",
+        },
+        x86_64: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/lib/gcc/x86_64-linux-android/4.9.x/libgcc.a",
+        },
+    },
+}
+
+toolchain_library {
+    name: "libgcc_stripped",
+    defaults: ["linux_bionic_supported"],
+    vendor_available: true,
+    ramdisk_available: true,
+    recovery_available: true,
+    native_bridge_supported: true,
+    sdk_version: "current",
+
+    arch: {
+        arm: {
+            src: "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/lib/gcc/arm-linux-androideabi/4.9.x/libgcc.a",
+            repack_objects_to_keep: ["unwind-arm.o", "libunwind.o", "pr-support.o"],
+        },
+        arm64: {
+            src: "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/lib/gcc/aarch64-linux-android/4.9.x/libgcc.a",
+            repack_objects_to_keep: ["unwind-dw2.o", "unwind-dw2-fde-dip.o"],
+        },
+        x86: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/lib/gcc/x86_64-linux-android/4.9.x/32/libgcc.a",
+            repack_objects_to_keep: ["unwind-dw2.o", "unwind-dw2-fde-dip.o"],
+        },
+        x86_64: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/lib/gcc/x86_64-linux-android/4.9.x/libgcc.a",
+            repack_objects_to_keep: ["unwind-dw2.o", "unwind-dw2-fde-dip.o"],
+        },
+    },
+}
+
+toolchain_library {
+    name: "libwinpthread",
+    host_supported: true,
+    enabled: false,
+    target: {
+        windows: {
+            enabled: true,
+        },
+        windows_x86: {
+            src: "prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/lib32/libwinpthread.a",
+        },
+        windows_x86_64: {
+            src: "prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/lib/libwinpthread.a",
+        },
+    },
+    notice: ":mingw-libwinpthread-notice",
+}
+
+toolchain_library {
+    name: "libgcov",
+    defaults: ["linux_bionic_supported"],
+
+    arch: {
+        arm: {
+            src: "prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/lib/gcc/arm-linux-androideabi/4.9.x/libgcov.a",
+        },
+        arm64: {
+            src: "prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/lib/gcc/aarch64-linux-android/4.9.x/libgcov.a",
+        },
+        x86: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/lib/gcc/x86_64-linux-android/4.9.x/32/libgcov.a",
+        },
+        x86_64: {
+            src: "prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9/lib/gcc/x86_64-linux-android/4.9.x/libgcov.a",
+        },
+    },
+}
+
+kernel_headers {
+    name: "device_kernel_headers",
+    vendor: true,
+    recovery_available: true,
+}
+
+cc_genrule {
+    name: "host_bionic_linker_asm",
+    host_supported: true,
+    device_supported: false,
+    target: {
+        linux_bionic: {
+            enabled: true,
+        },
+        linux_glibc: {
+            enabled: false,
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
+    tools: ["extract_linker"],
+    cmd: "$(location) -s $(out) $(in)",
+    srcs: [":linker"],
+    out: ["linker.s"],
+}
+
+cc_genrule {
+    name: "host_bionic_linker_flags",
+    host_supported: true,
+    device_supported: false,
+    target: {
+        linux_bionic: {
+            enabled: true,
+        },
+        linux_glibc: {
+            enabled: false,
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
+    tools: ["extract_linker"],
+    cmd: "$(location) -f $(out) $(in)",
+    srcs: [":linker"],
+    out: ["linker.flags"],
+}

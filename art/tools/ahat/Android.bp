@@ -1,0 +1,61 @@
+// Copyright 2018 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+droiddoc_host {
+    name: "ahat-docs",
+    srcs: [
+        "src/main/**/*.java",
+    ],
+    custom_template: "droiddoc-templates-sdk",
+    args: "-stubpackages com.android.ahat:com.android.ahat.*",
+    check_api: {
+        current: {
+            api_file: "etc/ahat_api.txt",
+            removed_api_file: "etc/ahat_removed_api.txt",
+        },
+    },
+}
+
+// --- ahat.jar ----------------
+java_binary_host {
+    name: "ahat",
+    visibility: [
+        "//libcore/metrictests/memory/host",
+    ],
+    wrapper: "ahat",
+    srcs: ["src/main/**/*.java"],
+    manifest: "etc/ahat.mf",
+    java_resources: ["etc/style.css"],
+    javacflags: ["-Xdoclint:all/protected"],
+}
+
+// --- ahat-test-dump.jar --------------
+java_test_helper_library {
+    name: "ahat-test-dump",
+    srcs: ["src/test-dump/**/*.java"],
+    sdk_version: "core_platform",
+    optimize: {
+        obfuscate: true,
+        enabled: true,
+        proguard_flags_files: ["etc/test-dump.pro"],
+    },
+}
+
+// --- ahat-ri-test-dump.jar -------
+java_test_helper_library {
+    host_supported: true,
+    device_supported: false,
+    name: "ahat-ri-test-dump",
+    srcs: ["src/ri-test-dump/**/*.java"],
+}
