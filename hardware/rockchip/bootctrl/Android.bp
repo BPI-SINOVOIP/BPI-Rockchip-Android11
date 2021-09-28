@@ -1,0 +1,173 @@
+cc_defaults {
+    name: "bootctrl_defaults",
+    cflags: [
+        "-D_FILE_OFFSET_BITS=64",
+        "-D_POSIX_C_SOURCE=199309L",
+        "-Wa,--noexecstack",
+        "-Werror",
+        "-Wall",
+        "-Wextra",
+        "-Wformat=2",
+        "-Wmissing-prototypes",
+        "-Wno-psabi",
+        "-Wno-unused-parameter",
+        "-Wno-format",
+        "-ffunction-sections",
+        "-fstack-protector-strong",
+        "-g",
+        "-DAVB_AB_I_UNDERSTAND_LIBAVB_AB_IS_DEPRECATED",
+        "-DAVB_COMPILATION",
+    ],
+    cppflags: [
+        "-Wnon-virtual-dtor",
+        "-fno-strict-aliasing",
+        "-DAVB_AB_I_UNDERSTAND_LIBAVB_AB_IS_DEPRECATED",
+    ],
+    ldflags: [
+        "-Wl,--gc-sections",
+        "-rdynamic",
+    ],
+}
+
+cc_defaults {
+    name: "bootctrl_sources",
+    srcs: [
+        "libavb/avb_chain_partition_descriptor.c",
+        "libavb/avb_cmdline.c",
+        "libavb/avb_crc32.c",
+        "libavb/avb_crypto.c",
+        "libavb/avb_descriptor.c",
+        "libavb/avb_footer.c",
+        "libavb/avb_hash_descriptor.c",
+        "libavb/avb_hashtree_descriptor.c",
+        "libavb/avb_kernel_cmdline_descriptor.c",
+        "libavb/avb_property_descriptor.c",
+        "libavb/avb_rsa.c",
+        "libavb/avb_sha256.c",
+        "libavb/avb_sha512.c",
+        "libavb/avb_slot_verify.c",
+        "libavb/avb_util.c",
+        "libavb/avb_vbmeta_image.c",
+        "libavb/avb_version.c",
+    ],
+}
+
+cc_library_static {
+    name: "libavbuser_proprietary",
+    defaults: [
+        "bootctrl_defaults",
+        "bootctrl_sources",
+    ],
+    vendor: true,
+    recovery_available: true,
+    relative_install_path: "hw",
+    export_include_dirs: ["."],
+    header_libs: [
+        "libhardware_headers",
+        "libsystem_headers",
+    ],
+    shared_libs: ["libbase"],
+    static_libs: ["libfstab"],
+    cflags: [
+        "-DAVB_AB_I_UNDERSTAND_LIBAVB_AB_IS_DEPRECATED",
+    ],
+    srcs: [
+        "libavb/avb_sysdeps_posix.c",
+        "libavb_ab/avb_ab_flow.c",
+        "libavb_user/avb_ops_user.cpp",
+        "libavb_user/avb_user_verity.c",
+    ],
+}
+
+cc_library {
+    name: "bootctrl.rk30board",
+    defaults: [
+        "bootctrl_defaults",
+        "bootctrl_sources",
+    ],
+    vendor: true,
+    recovery_available: true,
+    relative_install_path: "hw",
+
+    header_libs: [
+        "libhardware_headers",
+        "libsystem_headers",
+    ],
+    static_libs: [
+        "libavbuser_proprietary",
+        "libfstab",
+        "libbootloader_message_vendor",
+    ],
+    shared_libs: [
+        "libbase",
+        "libcutils",
+        "liblog",
+        "android.hardware.boot@1.1",
+    ],
+    cflags: [
+        "-DAVB_AB_I_UNDERSTAND_LIBAVB_AB_IS_DEPRECATED",
+    ],
+    srcs: [
+        "libavb/avb_sysdeps_posix.c",
+        "libavb_ab/avb_ab_flow.c",
+        "libavb_user/avb_ops_user.cpp",
+        "libavb_user/avb_user_verity.c",
+        "boot_control_avb.cpp",
+        "rk_boot_control.cpp",
+    ],
+}
+
+cc_defaults {
+    name: "libboot_control_rockchip_defaults",
+    vendor: true,
+    recovery_available: true,
+    relative_install_path: "hw",
+
+    cflags: [
+        "-D_FILE_OFFSET_BITS=64",
+        "-Werror",
+        "-Wall",
+        "-Wextra",
+    ],
+
+    header_libs: [
+        "libhardware_headers",
+        "libsystem_headers",
+    ],
+
+    shared_libs: [
+        "android.hardware.boot@1.1",
+        "libbase",
+        "liblog",
+    ],
+    static_libs: [
+        "libbootloader_message_vendor",
+        "libfstab",
+    ],
+}
+
+cc_library {
+    name: "android.hardware.boot@1.1-impl-rockchip",
+    stem: "android.hardware.boot@1.0-impl-1.1-rockchip",
+    defaults: [
+        "hidl_defaults",
+        "libboot_control_rockchip_defaults",
+    ],
+    relative_install_path: "hw",
+    vendor: true,
+    recovery_available: true,
+    srcs: ["BootControl.cpp"],
+
+    shared_libs: [
+        "liblog",
+        "libhidlbase",
+        "libhardware",
+        "libutils",
+        "android.hardware.boot@1.0",
+        "android.hardware.boot@1.1",
+    ],
+    static_libs: [
+        "libfstab",
+        "bootctrl.rk30board",
+    ],
+}

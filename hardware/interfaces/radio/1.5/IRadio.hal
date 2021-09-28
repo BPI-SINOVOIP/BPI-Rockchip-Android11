@@ -1,0 +1,341 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.radio@1.5;
+
+import @1.0::CdmaSmsMessage;
+import @1.2::DataRequestReason;
+import @1.4::IRadio;
+import @1.5::AccessNetwork;
+import @1.5::DataProfileInfo;
+import @1.5::IndicationFilter;
+import @1.5::LinkAddress;
+import @1.5::NetworkScanRequest;
+import @1.5::PersoSubstate;
+import @1.5::RadioAccessNetworks;
+import @1.5::RadioAccessSpecifier;
+import @1.5::SignalThresholdInfo;
+
+/**
+ * This interface is used by telephony and telecom to talk to cellular radio.
+ * All the functions have minimum one parameter:
+ * serial: which corresponds to serial no. of request. Serial numbers must only be memorized for the
+ * duration of a method call. If clients provide colliding serials (including passing the same
+ * serial to different methods), multiple responses (one for each method call) must still be served.
+ * setResponseFunctions must work with @1.5::IRadioResponse and @1.5::IRadioIndication.
+ */
+interface IRadio extends @1.4::IRadio {
+    /**
+     * Sets the signal strength reporting criteria.
+     *
+     * The resulting reporting rules are the AND of all the supplied criteria. For each RAN
+     * The hysteresisDb and thresholds apply to only the following measured quantities:
+     * -GERAN    - RSSI
+     * -CDMA2000 - RSSI
+     * -UTRAN    - RSCP
+     * -EUTRAN   - RSRP/RSRQ/RSSNR
+     * -NGRAN    - SSRSRP/SSRSRQ/SSSINR
+     *
+     * Note: Reporting criteria must be individually set for each RAN. For each RAN, if none of
+     * reporting criteria of any measurement is set enabled
+     * (see @1.5::SignalThresholdInfo.isEnabled), the reporting criteria for this RAN is
+     * implementation-defined. For each RAN, if any of reporting criteria of any measure is set
+     * enabled, the reporting criteria of the other measures in this RAN are set disabled
+     * (see @1.5::SignalThresholdInfo.isEnabled) until they are set enabled.
+     *
+     * Response callback is
+     * IRadioResponse.setSignalStrengthReportingCriteriaResponse_1_5()
+     *
+     * @param serial Serial number of request.
+     * @param signalThresholdInfo Signal threshold info including the threshold values,
+     *                            hysteresisDb, hysteresisMs and isEnabled.
+     *                            See @1.5::SignalThresholdInfo for details.
+     * @param accessNetwork The type of network for which to apply these thresholds.
+     */
+    oneway setSignalStrengthReportingCriteria_1_5(int32_t serial,
+            SignalThresholdInfo signalThresholdInfo, AccessNetwork accessNetwork);
+
+    /**
+     * Sets the link capacity reporting criteria.
+     *
+     * The resulting reporting criteria are the AND of all the supplied criteria.
+     *
+     * Note: Reporting criteria must be individually set for each RAN. If unset, reporting criteria
+     * for that RAN are implementation-defined.
+     *
+     * Response callback is IRadioResponse.setLinkCapacityReportingCriteriaResponse_1_5().
+     *
+     * @param serial Serial number of request.
+     * @param hysteresisMs A hysteresis time in milliseconds to prevent flapping. A value of 0
+     *     disables hysteresis.
+     * @param hysteresisDlKbps An interval in kbps defining the required magnitude change between DL
+     *     reports. hysteresisDlKbps must be smaller than the smallest threshold delta. A value of 0
+     *     disables hysteresis.
+     * @param hysteresisUlKbps An interval in kbps defining the required magnitude change between UL
+     *     reports. hysteresisUlKbps must be smaller than the smallest threshold delta. A value of 0
+     *     disables hysteresis.
+     * @param thresholdsDownlinkKbps A vector of trigger thresholds in kbps for downlink reports. A
+     *     vector size of 0 disables the use of DL thresholds for reporting.
+     * @param thresholdsUplinkKbps A vector of trigger thresholds in kbps for uplink reports. A
+     *     vector size of 0 disables the use of UL thresholds for reporting.
+     * @param accessNetwork The type of network for which to apply these thresholds.
+     */
+    oneway setLinkCapacityReportingCriteria_1_5(int32_t serial, int32_t hysteresisMs,
+            int32_t hysteresisDlKbps, int32_t hysteresisUlKbps, vec<int32_t> thresholdsDownlinkKbps,
+            vec<int32_t> thresholdsUplinkKbps, AccessNetwork accessNetwork);
+
+    /**
+     * Enable or disable UiccApplications on the SIM. If disabled:
+     *  - Modem will not register on any network.
+     *  - SIM must be PRESENT, and the IccId of the SIM must still be accessible.
+     *  - The corresponding modem stack is still functional, e.g. able to make emergency calls or
+     *    do network scan.
+     * By default if this API is not called, the uiccApplications must be enabled automatically.
+     * It must work for both single SIM and DSDS cases for UX consistency.
+     * The preference is per SIM, and must be remembered over power cycle, modem reboot, or SIM
+     * insertion / unplug.
+     *
+     * @param serial Serial number of request.
+     * @param enable true if to enable uiccApplications, false to disable.
+
+     * Response callback is IRadioResponse.enableUiccApplicationsResponse()
+     */
+    oneway enableUiccApplications(int32_t serial, bool enable);
+
+    /**
+     * Whether uiccApplications are enabled, or disabled.
+     *
+     * By default uiccApplications must be enabled, unless enableUiccApplications() with enable
+     * being false is called.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response callback is IRadioResponse.areUiccApplicationsEnabledResponse()
+     */
+    oneway areUiccApplicationsEnabled(int32_t serial);
+
+    /**
+     * Specify which bands modem's background scan must act on.
+     * If specifyChannels is true, it only scans bands specified in specifiers.
+     * If specifyChannels is false, it scans all bands.
+     *
+     * For example, CBRS is only on LTE band 48. By specifying this band,
+     * modem saves more power.
+     *
+     * @param serial Serial number of request.
+     * @param specifyChannels whether to scan bands defined in specifiers.
+     * @param specifiers which bands to scan. Only used if specifyChannels is true.
+     *
+     * Response callback is IRadioResponse.setSystemSelectionChannelsResponse()
+     */
+    oneway setSystemSelectionChannels_1_5(int32_t serial, bool specifyChannels,
+            vec<RadioAccessSpecifier> specifiers);
+
+    /**
+     * Starts a network scan.
+     *
+     * @param serial Serial number of request.
+     * @param request Defines the radio networks/bands/channels which need to be scanned.
+     *
+     * Same API as @1.4::IRadio.startNetworkScan_1_4, except using the
+     * 1.5 NetworkScanRequest as the input param.
+     */
+    oneway startNetworkScan_1_5(int32_t serial, NetworkScanRequest request);
+
+    /**
+     * Setup a packet data connection. If DataCallResponse.status returns DataCallFailCause:NONE,
+     * the data connection must be added to data calls and a unsolDataCallListChanged() must be
+     * sent. The call remains until removed by subsequent unsolDataCallIstChanged(). It may be
+     * lost due to many factors, including deactivateDataCall() being issued, the radio powered
+     * off, reception lost or even transient factors like congestion. This data call list is
+     * returned by getDataCallList() and dataCallListChanged().
+     *
+     * The Radio is expected to:
+     *   - Create one data call context.
+     *   - Create and configure a dedicated interface for the context.
+     *   - The interface must be point to point.
+     *   - The interface is configured with one or more addresses and is capable of sending and
+     *     receiving packets. The prefix length of the addresses must be /32 for IPv4 and /128
+     *     for IPv6.
+     *   - Must not modify routing configuration related to this interface; routing management is
+     *     exclusively within the purview of the Android OS.
+     *   - Support simultaneous data call contexts up to DataRegStateResult.maxDataCalls specified
+     *     in the response of getDataRegistrationState.
+     *
+     * @param serial Serial number of request.
+     * @param accessNetwork The access network to setup the data call. If the data connection cannot
+     *     be established on the specified access network, the setup request must be failed.
+     * @param dataProfileInfo Data profile info.
+     * @param roamingAllowed Indicates whether or not data roaming is allowed by the user.
+     * @param reason The request reason. Must be DataRequestReason.NORMAL or
+     *     DataRequestReason.HANDOVER.
+     * @param addresses If the reason is DataRequestReason.HANDOVER, this indicates the list of link
+     *     addresses of the existing data connection. This parameter must be ignored unless reason
+     *     is DataRequestReason.HANDOVER.
+     * @param dnses If the reason is DataRequestReason.HANDOVER, this indicates the list of DNS
+     *     addresses of the existing data connection. The format is defined in RFC-4291 section
+     *     2.2. For example, "192.0.1.3" or "2001:db8::1". This parameter must be ignored unless
+     *     reason is DataRequestReason.HANDOVER.
+     *
+     * Response function is IRadioResponse.setupDataCallResponse_1_5()
+     *
+     * Note this API is the same as the 1.4 version except using the
+     * 1.5 AccessNetwork, DataProfileInto, and LinkAddress as the input param.
+     */
+    oneway setupDataCall_1_5(int32_t serial, AccessNetwork accessNetwork,
+            DataProfileInfo dataProfileInfo, bool roamingAllowed,
+            DataRequestReason reason, vec<LinkAddress> addresses, vec<string> dnses);
+
+    /**
+     * Set an APN to initial attach network.
+     *
+     * @param serial Serial number of request.
+     * @param dataProfileInfo data profile containing APN settings
+     *
+     * Response callback is IRadioResponse.setInitialAttachApnResponse_1_5()
+     *
+     * Note this API is the same as the 1.4 version except using the 1.5 DataProfileInfo
+     * as the input param.
+     */
+    oneway setInitialAttachApn_1_5(int32_t serial, DataProfileInfo dataProfileInfo);
+
+    /**
+     * Send data profiles of the current carrier to the modem.
+     *
+     * @param serial Serial number of request.
+     * @param profiles Array of DataProfileInfo to set.
+     *
+     * Response callback is IRadioResponse.setDataProfileResponse_1_5()
+     *
+     * Note this API is the same as the 1.4 version except using the 1.5 DataProfileInfo
+     * as the input param.
+     */
+    oneway setDataProfile_1_5(int32_t serial, vec<DataProfileInfo> profiles);
+
+    /**
+     * Toggle radio on and off (for "airplane" mode)
+     * If the radio is turned off/on the radio modem subsystem
+     * is expected return to an initialized state. For instance,
+     * any voice and data calls must be terminated and all associated
+     * lists emptied.
+     *
+     * When setting radio power on to exit from airplane mode to place an emergency call on this
+     * logical modem, powerOn, forEmergencyCall and preferredForEmergencyCall must be true. In
+     * this case, this modem is optimized to scan only emergency call bands, until:
+     * 1) Emergency call is completed; or
+     * 2) Another setRadioPower_1_5 is issued with forEmergencyCall being false or
+     * preferredForEmergencyCall being false; or
+     * 3) Timeout after 30 seconds if dial or emergencyDial is not called.
+     * Once one of these conditions is reached, the modem should move into normal operation.
+     *
+     * @param serial Serial number of request.
+     * @param powerOn To turn on radio -> on = true, to turn off radio -> on = false.
+     * @param forEmergencyCall To indication to radio if this request is due to emergency call.
+     *      No effect if powerOn is false.
+     * @param preferredForEmergencyCall indicate whether the following emergency call will be sent
+     *      on this modem or not. No effect if forEmergencyCall is false, or powerOn is false.
+     *
+     * Response callback is IRadioConfigResponse. setRadioPowerResponse_1_5.
+     */
+    oneway setRadioPower_1_5(int32_t serial, bool powerOn, bool forEmergencyCall,
+            bool preferredForEmergencyCall);
+
+    /**
+     * Sets the indication filter.
+     *
+     * Prevents the reporting of specified unsolicited indications from the radio. This is used
+     * for power saving in instances when those indications are not needed. If unset, defaults to
+     * @1.5::IndicationFilter:ALL.
+     *
+     * @param serial Serial number of request.
+     * @param indicationFilter 32-bit bitmap of IndicationFilter. Bits set to 1 indicate the
+     *     indications are enabled. See @1.5::IndicationFilter for the definition of each bit.
+     *
+     * Response callback is IRadioResponse.setIndicationFilterResponse()
+     */
+    oneway setIndicationFilter_1_5(int32_t serial, bitfield<IndicationFilter> indicationFilter);
+
+    /**
+     * Get all the barring info for the current camped cell applicable to the current user.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response callback is IRadioResponse.getBarringInfoResponse()
+     */
+    oneway getBarringInfo(int32_t serial);
+
+    /**
+     * Request current voice registration state.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response function is IRadioResponse.getVoiceRegistrationStateResponse_1_5()
+     */
+    oneway getVoiceRegistrationState_1_5(int32_t serial);
+
+    /**
+     * Request current data registration state.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response function is IRadioResponse.getDataRegistrationStateResponse_1_5()
+     */
+    oneway getDataRegistrationState_1_5(int32_t serial);
+
+    /*
+     * Manually select a specified network.
+     * This request must not respond until the new operator is selected and registered.
+     * Per TS 23.122, the RAN is just the initial suggested value.
+     * If registration fails, the RAN is not available afterwards, or the RAN is not within
+     * the network types specified by IRadio::setPreferredNetworkTypeBitmap, then the modem
+     * will need to select the next best RAN for network registration.
+     *
+     * @param serial Serial number of request.
+     * @param operatorNumeric String specifying MCCMNC of network to select (eg "310170").
+     * @param ran Initial suggested radio access network type. If value is UNKNOWN, the modem
+     *     will select the next best RAN for network registration.
+     *
+     * Response function is IRadioResponse.setNetworkSelectionModeManualResponse_1_5()
+     */
+    oneway setNetworkSelectionModeManual_1_5(int32_t serial, string operatorNumeric,
+            RadioAccessNetworks ran);
+
+    /**
+     * Send an SMS message. Identical to sendCdmaSms,
+     * except that more messages are expected to be sent soon.
+     *
+     * @param serial Serial number of request.
+     * @param sms Cdma Sms to be sent described by CdmaSmsMessage in types.hal
+     *
+     * Response callback is IRadioResponse.sendCdmaSMSExpectMoreResponse()
+     */
+    oneway sendCdmaSmsExpectMore(int32_t serial, CdmaSmsMessage sms);
+
+    /**
+     * Request that deactivates one category of device personalization. Device personalization
+     * generally binds the device so it can only be used on one carrier or even one carrier subnet
+     * (See TS 22.022). When the user has gained the rights to unbind the device (at the end of a
+     * contract period or other event), the controlKey will be delivered to either the user for
+     * manual entry or to a carrier app on the device for automatic entry.
+     *
+     * @param serial Serial number of request.
+     * @param persoType SIM personalization type.
+     * @param controlKey the unlock code for removing persoType personalization from this device
+     *
+     * Response function is IRadioResponse.supplySimDepersonalizationResponse()
+     */
+    oneway supplySimDepersonalization(int32_t serial, PersoSubstate persoType, string controlKey);
+};

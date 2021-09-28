@@ -1,0 +1,115 @@
+//
+// Copyright (C) 2018 Fuzhou Rockchip Electronics Co.Ltd.
+//
+// Modification based on code covered by the Apache License, Version 2.0 (the "License").
+// You may not use this software except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS TO YOU ON AN "AS IS" BASIS
+// AND ANY AND ALL WARRANTIES AND REPRESENTATIONS WITH RESPECT TO SUCH SOFTWARE, WHETHER EXPRESS,
+// IMPLIED, STATUTORY OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY IMPLIED WARRANTIES OF TITLE,
+// NON-INFRINGEMENT, MERCHANTABILITY, SATISFACTROY QUALITY, ACCURACY OR FITNESS FOR A PARTICULAR
+// PURPOSE ARE DISCLAIMED.
+//
+// IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+// GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+BOARD_USES_DRM_HWCOMPOSER = ["true"]
+// ANDROIDMK TRANSLATION ERROR: unsupported conditional
+// ifeq ($(strip $(BOARD_USES_DRM_HWCOMPOSER)),true)
+
+MAJOR_VERSION = ["\"RK_GRAPHICS_VER=commit-id:" + "__builtin_func:shell cd <'LOCAL_PATH' unset> && git log  -1 --oneline | awk '{print $1}'" + "\""]
+cc_library_shared {
+    name: "hwcomposer." + TARGET_BOARD_HARDWARE,
+
+    shared_libs: [
+        "libcutils",
+        "libhardware",
+        "liblog",
+        "libsync_vendor",
+        "libui",
+        "libutils",
+        "librga",
+        "libjpeg",
+        "libpng",
+        "libandroidicu",
+        "libdng_sdk",
+        "libexpat",
+        "libft2",
+        "libz",
+    ],
+
+    whole_static_libs: [
+        "libskia",
+        "libarect",
+        "libsfntly",
+        "libwebp-decode",
+        "libwebp-encode",
+    ],
+
+    static_libs: ["libtinyxml2"],
+
+    include_dirs: [
+        "hardware/rockchip/libgralloc",
+        "external/tinyxml2",
+        "external/libdrm",
+        "external/libdrm/include/drm",
+        "system/core/include/utils",
+        "system/core",
+        "system/core/libsync/include",
+        "hardware/rockchip/librga",
+        "external/skia/src/core",
+        "frameworks/native/include",
+        "external/libjpeg-turbo",
+        "external/libpng",
+    ],
+
+    srcs: [
+        "autolock.cpp",
+        "hwcomposer.cpp",
+        "separate_rects.cpp",
+        "vsyncworker.cpp",
+        "worker.cpp",
+        "hwc_util.cpp",
+        "hwc_rockchip.cpp",
+        "hwc_debug.cpp",
+        "einkcompositorworker.cpp",
+    ],
+
+    cppflags: ["-DRK_GRAPHICS_VER=\\\"" + MAJOR_VERSION + "\\\""],
+
+    proprietary: true,
+
+    cflags: [
+        "-Wno-unused-function",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+
+    relative_install_path: "hw",
+
+    vendor: true,
+
+}
+
+// ANDROIDMK TRANSLATION ERROR: endif from unsupported conditional
+// endif

@@ -1,0 +1,78 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.keymaster@4.1;
+
+import @4.0::ErrorCode;
+import @4.0::Tag;
+import @4.0::TagType;
+
+enum Tag : @4.0::Tag {
+    /**
+     * Keys tagged with EARLY_BOOT_ONLY may only be used, or created, during early boot, until
+     * IKeymasterDevice::earlyBootEnded() is called.
+     */
+    EARLY_BOOT_ONLY = TagType:BOOL | 305,
+
+    /**
+     * DEVICE_UNIQUE_ATTESTATION is an argument to IKeymasterDevice::attestKey().  It indicates that
+     * attestation using a device-unique key is requested, rather than a batch key.  When a
+     * device-unique key is used, only the attestation certificate is returned; no additional
+     * chained certificates are provided.  It's up to the caller to recognize the device-unique
+     * signing key.  Only SecurityLevel::STRONGBOX IKeymasterDevices may support device-unique
+     * attestations.  SecurityLevel::TRUSTED_ENVIRONMENT IKeymasterDevices must return
+     * ErrorCode::INVALID_ARGUMENT if they receive DEVICE_UNIQUE_ATTESTATION.
+     * SecurityLevel::STRONGBOX IKeymasterDevices need not support DEVICE_UNIQUE_ATTESTATION, and
+     * return ErrorCode::CANNOT_ATTEST_IDS if they do not support it.
+     *
+     * IKeymasterDevice implementations that support device-unique attestation MUST add the
+     * DEVICE_UNIQUE_ATTESTATION tag to device-unique attestations.
+     */
+    DEVICE_UNIQUE_ATTESTATION = TagType:BOOL | 720,
+
+    /**
+     * IDENTITY_CREDENTIAL_KEY is never used by IKeymasterDevice, is not a valid argument to key
+     * generation or any operation, is never returned by any method and is never used in a key
+     * attestation.  It is used in attestations produced by the IIdentityCredential HAL when that
+     * HAL attests to Credential Keys.  IIdentityCredential produces Keymaster-style attestations.
+     */
+    IDENTITY_CREDENTIAL_KEY = TagType:BOOL | 721,
+
+    /**
+     * To prevent keys from being compromised if an attacker acquires read access to system / kernel
+     * memory, some inline encryption hardware supports protecting storage encryption keys in hardware
+     * without software having access to or the ability to set the plaintext keys. Instead, software
+     * only sees wrapped version of these keys.
+     *
+     * STORAGE_KEY is used to denote that a key generated or imported is a key used for storage
+     * encryption. Keys of this type can either be generated or imported or secure imported using
+     * keymaster. exportKey() can be used to re-wrap storage key with a per-boot ephemeral key wrapped
+     * key once the key characteristics are enforced.
+     *
+     * Keys with this tag cannot be used for any operation within keymaster.
+     * ErrorCode::INVALID_OPERATION is returned when a key with Tag::STORAGE_KEY is provided to
+     * begin().
+     */
+    STORAGE_KEY = TagType:BOOL | 722,
+};
+
+enum ErrorCode : @4.0::ErrorCode {
+    EARLY_BOOT_ENDED = -73,
+    ATTESTATION_KEYS_NOT_PROVISIONED = -74,
+    ATTESTATION_IDS_NOT_PROVISIONED = -75,
+    INVALID_OPERATION = -76,
+    STORAGE_KEY_UNSUPPORTED = -77,
+};

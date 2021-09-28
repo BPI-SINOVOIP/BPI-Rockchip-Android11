@@ -1,0 +1,11 @@
+allow pixelstats_vendor sysfs_scsi_devices_0000:dir search;
+allow pixelstats_vendor sysfs_scsi_devices_0000:file r_file_perms;
+allow pixelstats_vendor sysfs_fs_f2fs:dir search;
+allow pixelstats_vendor sysfs_fs_f2fs:file r_file_perms;
+get_prop(pixelstats_vendor, boottime_public_prop)
+
+allow pixelstats_vendor fwk_stats_hwservice:hwservice_manager find;
+binder_call(pixelstats_vendor, stats_service_server)
+
+allow pixelstats_vendor sysfs_zram:dir search;
+allow pixelstats_vendor sysfs_zram:file r_file_perms;

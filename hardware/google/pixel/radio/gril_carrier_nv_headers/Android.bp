@@ -1,0 +1,10 @@
+cc_library_headers {
+    name: "gril_carrier_nv_headers",
+    sanitize:{
+          integer_overflow: true,
+    },
+    vendor: true,
+    export_include_dirs: [
+          "inc/",
+    ],
+}

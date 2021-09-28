@@ -1,0 +1,155 @@
+cc_library_shared {
+
+    name: "ese_spi_nxp",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+
+    srcs: [
+        "libese-spi/p73/lib/phNxpEseDataMgr.cpp",
+        "libese-spi/p73/lib/phNxpEseProto7816_3.cpp",
+        "libese-spi/p73/lib/phNxpEse_Api.cpp",
+        "libese-spi/p73/pal/phNxpEsePal.cpp",
+        "libese-spi/p73/pal/spi/phNxpEsePal_spi.cpp",
+        "libese-spi/p73/spm/phNxpEse_Spm.cpp",
+        "libese-spi/p73/utils/ese_config.cpp",
+        "libese-spi/p73/utils/config.cpp",
+        "libese-spi/p73/utils/ringbuffer.cpp",
+        "libese-spi/src/adaptation/NfcAdaptation.cpp",
+    ],
+
+    local_include_dirs: [
+        "libese-spi/p73/lib",
+        "libese-spi/p73/pal/spi",
+        "libese-spi/p73/utils",
+        "libese-spi/src/include",
+    ],
+    export_include_dirs: [
+        "extns/impl",
+        "libese-spi/common/include",
+        "libese-spi/p73/common",
+        "libese-spi/p73/inc",
+        "libese-spi/p73/pal",
+    ],
+
+    cflags: [
+        "-DANDROID",
+        "-DBUILDCFG=1",
+        "-DNXP_EXTNS=TRUE",
+        "-Wall",
+        "-Werror",
+    ],
+
+    shared_libs: [
+        "android.hardware.nfc@1.0",
+        "android.hardware.nfc@1.1",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "libutils",
+        "liblog",
+        "libbase",
+        "vendor.nxp.nxpese@1.0",
+        "vendor.nxp.nxpnfc@1.0",
+    ],
+}
+
+cc_library_shared {
+
+    name: "ls_client",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+
+    srcs: [
+        "ls_client/src/LsLib.cpp",
+        "ls_client/src/LsClient.cpp",
+    ],
+
+    export_include_dirs: ["ls_client/inc"],
+
+    shared_libs: [
+        "ese_spi_nxp",
+        "libcutils",
+        "liblog",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "libcrypto"
+    ],
+}
+
+cc_defaults {
+    name: "android.hardware.secure_element@1.1_defaults",
+    relative_install_path: "hw",
+    proprietary: true,
+    defaults: ["hidl_defaults"],
+    srcs: [
+        "1.1/NxpEseService.cpp",
+        "1.1/SecureElement.cpp",
+        "extns/impl/NxpEse.cpp",
+    ],
+
+    shared_libs: [
+        "android.hardware.secure_element@1.0",
+        "android.hardware.secure_element@1.1",
+        "ese_spi_nxp",
+        "libbase",
+        "ls_client",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "vendor.nxp.nxpese@1.0",
+        "vendor.nxp.nxpnfc@1.0",
+    ],
+}
+
+cc_defaults {
+    name: "android.hardware.secure_element@1.0_defaults",
+    relative_install_path: "hw",
+    proprietary: true,
+    defaults: ["hidl_defaults"],
+    srcs: [
+        "1.0/NxpEseService.cpp",
+        "1.0/SecureElement.cpp",
+        "extns/impl/NxpEse.cpp",
+    ],
+
+    shared_libs: [
+        "android.hardware.secure_element@1.0",
+        "ese_spi_nxp",
+        "libbase",
+        "ls_client",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "vendor.nxp.nxpese@1.0",
+        "vendor.nxp.nxpnfc@1.0",
+    ],
+}
+
+cc_binary {
+    name: "android.hardware.secure_element@1.0-service",
+    init_rc: ["1.0/android.hardware.secure_element@1.0-service.rc"],
+    defaults: ["android.hardware.secure_element@1.0_defaults"],
+}
+
+cc_binary {
+    name: "android.hardware.secure_element@1.0-service-disabled",
+    init_rc: ["1.0/android.hardware.secure_element@1.0-service-disabled.rc"],
+    defaults: ["android.hardware.secure_element@1.0_defaults"],
+}
+
+cc_binary {
+    name: "android.hardware.secure_element@1.1-service",
+    init_rc: ["1.1/android.hardware.secure_element@1.1-service.rc"],
+    defaults: ["android.hardware.secure_element@1.1_defaults"],
+}
+
+cc_binary {
+    name: "android.hardware.secure_element@1.1-service-disabled",
+    init_rc: ["1.1/android.hardware.secure_element@1.1-service-disabled.rc"],
+    defaults: ["android.hardware.secure_element@1.1_defaults"],
+}

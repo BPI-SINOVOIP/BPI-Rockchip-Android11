@@ -1,0 +1,24 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "org.apache.harmony.crypto.tests.javax.crypto"
+        },
+        {
+          "include-filter": "org.apache.harmony.crypto.tests.javax.crypto.func"
+        },
+        {
+          "include-filter": "libcore.javax.crypto"
+        },
+        {
+          "include-filter": "com.android.org.conscrypt.javax.crypto"
+        },
+        {
+          "include-filter": "org.apache.harmony.crypto.tests.javax.crypto.serialization"
+        }
+      ]
+    }
+  ]
+}

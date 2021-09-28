@@ -1,0 +1,11 @@
+cc_binary {
+    name: "rkhelper",
+    srcs: [
+        "main.cpp",
+    ],
+    vendor: true,
+    shared_libs: [
+         "liblog",
+         "libcutils",
+    ],
+}

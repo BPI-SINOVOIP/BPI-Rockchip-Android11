@@ -1,0 +1,65 @@
+cc_binary {
+    name: "android.hardware.gatekeeper@1.0-service.optee",
+    defaults: ["hidl_defaults"],
+    relative_install_path: "hw",
+    vendor: true,
+    init_rc: ["android.hardware.gatekeeper@1.0-service.optee.rc"],
+    vintf_fragments: ["android.hardware.gatekeeper@1.0-service.optee.xml"],
+    srcs: [
+        "service.cpp",
+    ],
+
+    shared_libs: [
+        "android.hardware.gatekeeper@1.0",
+        "libbase",
+        "libhardware",
+        "libhidlbase",
+        "libutils",
+        "liblog",
+        "libRkgatekeeper",
+    ],
+}
+
+cc_rockchip_prebuilt_obj {
+    name: "0b82bae5-0cd0-49a5-9521516dba9c43ba.ta",
+    src: "v1/ta/0b82bae5-0cd0-49a5-9521516dba9c43ba.ta",
+    vendor: true,
+    sub_dir: "lib/optee_armtz",
+}
+
+cc_rockchip_prebuilt_obj {
+    name: "0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta",
+    src: "v2/ta/0b82bae5-0cd0-49a5-9521-516dba9c43ba.ta",
+    vendor: true,
+    sub_dir: "lib/optee_armtz",
+}
+
+
+cc_rockchip_prebuilt_library_shared {
+
+    name: "libRkTeeGatekeeper",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+    optee: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libRkgatekeeper",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/arm64/libRkgatekeeper.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/arm/libRkgatekeeper.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

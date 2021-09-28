@@ -1,0 +1,114 @@
+/*
+ * Copyright (C) 2019 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package arm.graphics.privatebuffer@1.0;
+
+import android.hardware.graphics.common@1.1::BufferUsage;
+
+/*
+ * Plane information of a buffer.
+ * Multiple planes can be described as a vector (e.g. vec<PlaneLayout>)
+ */
+struct PlaneLayout {
+    /*
+     * Offset to plane (in bytes),
+     * from the start of the allocation.
+     */
+    uint32_t offset;
+
+    /*
+     * Byte Stride: number of bytes between two vertically adjacent
+     * pixels in given plane. This can be mathematically described by:
+     *
+     * byteStride = ALIGN(allocWidth * bpp / 8, alignment)
+     *
+     * where,
+     *
+     * alloc_width: width of plane in pixels (c.f. pixel_stride)
+     * bpp: average bits per pixel
+     * alignment (in bytes): dependent upon pixel format and usage
+     *
+     * For uncompressed allocations, byte_stride might contain additional
+     * padding beyond the alloc_width. For AFBC, alignment is zero.
+     */
+    uint32_t byteStride;
+
+    /*
+     * Dimensions of plane (in pixels).
+     *
+     * For single plane formats, pixels equates to luma samples.
+     * For multi-plane formats, pixels equates to the number of sample sites
+     * for the corresponding plane, even if subsampled.
+     *
+     * AFBC compressed formats: requested width/height are rounded-up
+     * to a whole AFBC superblock/tile (next superblock at minimum).
+     * Uncompressed formats: dimensions typically match width and height
+     * but might require pixel stride alignment.
+     *
+     * See 'byteStride' for relationship between byte_stride and alloc_width.
+     *
+     * Any crop rectangle set for the buffer must be wholly within the
+     * allocation dimensions. The crop region top-left will be relative to the
+     * start of allocation.
+     */
+    uint32_t allocWidth;
+    uint32_t allocHeight;
+};
+
+/*
+ * Bits 28-31 and 48-63 are reserved for vendor extensions.
+ */
+enum BufferUsage : common@1.1::BufferUsage {
+    NO_AFBC = 1ULL << 28,
+    AFBC_PADDING = 1ULL << 29,
+};
+
+enum Error : uint32_t {
+    /*
+     * Operation completed successfully.
+     */
+    NONE = 0,
+
+    /*
+     * The native_handle_t is invalid.
+     */
+    BAD_HANDLE = 1,
+
+    /*
+     * Access to the mutable attributes failed.
+     */
+    ATTRIBUTE_ACCESS_FAILED = 2,
+
+    /*
+     * The mutable attribute has not been set to any value.
+     */
+    ATTRIBUTE_NOT_SET = 3,
+};
+
+/*
+ * The Crop Rectangle region of a buffer.
+ */
+struct CropRectangle {
+    /* Y Offset from the origin in pixels. */
+    uint32_t top;
+    /* X Offset from the origin in pixels. */
+    uint32_t left;
+    /* Pixel width of the cropped region. */
+    uint32_t width;
+    /* Pixel height of the cropped region. */
+    uint32_t height;
+};

@@ -1,0 +1,16 @@
+type hal_googlebattery, domain;
+type hal_googlebattery_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_googlebattery)
+
+r_dir_file(hal_googlebattery, sysfs_batteryinfo)
+
+allow hal_googlebattery sysfs_batteryinfo:file rw_file_perms;
+allow hal_googlebattery self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow hal_googlebattery sysfs_chargelevel:file rw_file_perms;
+
+set_prop(hal_googlebattery, vendor_battery_defender_prop)
+
+hwbinder_use(hal_googlebattery)
+add_hwservice(hal_googlebattery, hal_googlebattery_hwservice)
+get_prop(hal_googlebattery, hwservicemanager_prop)

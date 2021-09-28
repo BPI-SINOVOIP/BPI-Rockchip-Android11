@@ -1,0 +1,30 @@
+#!/bin/sh
+
+if [ $(basename "$0") != "install" ]; then
+  if [ -x "$0.local" ]; then
+    "$0.local" "$@" || exit $?
+  fi
+  if [ -x hooks/$(basename $0) ]; then
+    hooks/$(basename $0) "$0" || exit $?
+  fi
+else
+  pushd "$(git rev-parse --show-toplevel)"
+  python <<\EOF
+import os, os.path
+TOP = os.path.realpath(".")
+HOOKS = os.path.realpath(".git/hooks")
+src = os.path.join(TOP, "hooks", "install")
+for hook in os.listdir("hooks"):
+  if hook != "install":
+    tgt = HOOKS + os.sep + hook
+    # there is a file there
+    if os.path.isfile(tgt) and os.access(tgt, os.X_OK):
+      if os.path.realpath(tgt) != src:
+        print("hook " + hook + " is already installed. Moving to " + hook + ".local")
+        os.rename(tgt, tgt + ".local")
+    if os.path.lexists(tgt):
+      os.unlink(tgt)
+    os.symlink(os.path.relpath(os.path.realpath("hooks/install"), os.path.realpath(".git/hooks/")), tgt)
+EOF
+  popd
+fi

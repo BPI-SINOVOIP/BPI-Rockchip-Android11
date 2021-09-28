@@ -1,0 +1,17 @@
+cc_binary {
+    name: "android.hardware.lights-service.rockchip",
+    relative_install_path: "hw",
+    init_rc: ["lights-rockchip.rc"],
+    vintf_fragments: ["lights-rockchip.xml"],
+    vendor: true,
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libbinder_ndk",
+        "android.hardware.light-ndk_platform",
+    ],
+    srcs: [
+        "Lights.cpp",
+        "main.cpp",
+    ],
+}

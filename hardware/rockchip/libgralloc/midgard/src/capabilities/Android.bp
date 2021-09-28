@@ -1,0 +1,72 @@
+/*
+ * Copyright (C) 2020 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+soong_config_module_type {
+	name: "arm_gralloc_capabilities_cc_defaults_midgard",
+	module_type: "cc_defaults",
+	config_namespace: "arm_gralloc",
+	properties: [
+		"cflags",
+	],
+}
+
+arm_gralloc_capabilities_cc_defaults_midgard {
+	name: "arm_gralloc_capabilities_defaults_midgard",
+	defaults: [
+		"arm_gralloc_defaults_midgard",
+	],
+	cflags: [
+		"-DMALI_VIDEO_VERSION=0",
+	],
+	arch: {
+		arm: {
+			cflags: [
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH1=\"/vendor/lib/egl/\"",
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH2=\"/system/lib/egl/\"",
+				"-DMALI_GRALLOC_DPU_LIBRARY_PATH=\"/vendor/lib/hw/\"",
+				"-DMALI_GRALLOC_DPU_AEU_LIBRARY_PATH=\"/vendor/lib/hw/\"",
+			],
+		},
+		arm64: {
+			cflags: [
+				/* Individually configurable */
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH1=\"/vendor/lib64/egl/\"",
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH2=\"/system/lib64/egl/\"",
+				"-DMALI_GRALLOC_DPU_LIBRARY_PATH=\"/vendor/lib64/hw/\"",
+				"-DMALI_GRALLOC_DPU_AEU_LIBRARY_PATH=\"/vendor/lib64/hw/\"",
+			],
+		},
+	},
+	srcs: [
+		"src/gralloc_capabilities.cpp",
+	],
+	shared_libs: [
+		"libhardware",
+		"liblog",
+		"libcutils",
+		"libsync",
+		"libutils",
+	],
+}
+
+cc_library_static {
+	name: "libgralloc_capabilities_midgard",
+	defaults: [
+		"arm_gralloc_capabilities_defaults_midgard",
+		"arm_gralloc_version_defaults_midgard",
+	],
+}

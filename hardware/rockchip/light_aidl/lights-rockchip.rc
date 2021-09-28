@@ -1,0 +1,5 @@
+service vendor.light-rockchip /vendor/bin/hw/android.hardware.lights-service.rockchip
+    class hal
+    user system
+    group system
+    shutdown critical

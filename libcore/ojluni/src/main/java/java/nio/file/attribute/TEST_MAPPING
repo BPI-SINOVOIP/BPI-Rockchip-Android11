@@ -1,0 +1,20 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.nio.file.attribute"
+        }
+      ]
+    },
+    {
+      "name": "CtsLibcoreOjTestCases",
+      "options": [
+        {
+          "include-filter": "test.java.nio.file.attribute"
+        }
+      ]
+    }
+  ]
+}

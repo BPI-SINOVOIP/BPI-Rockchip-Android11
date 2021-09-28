@@ -1,0 +1,18 @@
+cc_prebuilt_library_shared {
+    name: "vulkan.rk30board",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["vendor/lib64/hw/vulkan.rk30board.so"],
+        },
+        lib32: {
+            srcs: ["vendor/lib/hw/vulkan.rk30board.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    vendor: true,
+    check_elf_files: false,
+    relative_install_path: "hw",
+}

@@ -1,0 +1,5 @@
+service vendor.power-aidl-rockchip /vendor/bin/hw/android.hardware.power-service.rockchip
+    class hal
+    user root
+    group system
+    capabilities DAC_OVERRIDE

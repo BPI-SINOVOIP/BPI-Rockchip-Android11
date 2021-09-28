@@ -1,0 +1,16 @@
+aidl_interface {
+    name: "pixel-power-ext",
+    vendor_available: true,
+    srcs: [
+        "google/hardware/power/extension/pixel/IPowerExt.aidl",
+    ],
+
+    stability: "vintf",
+
+    backend: {
+        java: {
+            platform_apis: true,
+        },
+    },
+    versions: ["1"],
+}

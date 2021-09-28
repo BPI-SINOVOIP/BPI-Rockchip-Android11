@@ -1,0 +1,1068 @@
+// Copyright (C) 2007 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//
+// Definitions for building the Android core library and associated tests.
+//
+
+// The Android core library provides low-level APIs for use by the rest of the
+// Android software stack. It is made up of various parts, some of which can be
+// found in libcore/ and other parts that can be found in various external/
+// directories.
+//
+// libcore has some sub-directories that follow a common structure:
+// e.g. dalvik, dom, harmony-tests, json, jsr166-tests, luni, libart, ojluni,
+// support, xml, xmlpull.
+//
+// The structure of these is generally:
+//
+//   src/
+//       main/               # To be shipped on every device.
+//            java/          # Java source for library code.
+//            native/        # C/C++ source for library code.
+//            resources/     # Support files.
+//       test/               # Built only on demand, for testing.
+//            java/          # Java source for tests.
+//            native/        # C/C++ source for tests (rare).
+//            resources/     # Support files.
+//
+// All subdirectories are optional.
+
+build = [
+    "openjdk_java_files.bp",
+    "non_openjdk_java_files.bp",
+]
+
+// The Java files and their associated resources.
+filegroup {
+    name: "core-luni-resources",
+    visibility: [
+        "//libcore:__subpackages__",
+    ],
+    path: "luni/src/main/java/",
+    srcs: [
+        "luni/src/main/java/java/util/logging/logging.properties",
+        "luni/src/main/java/java/security/security.properties",
+    ],
+}
+
+filegroup {
+    name: "core-ojluni-resources",
+    visibility: [
+        "//libcore:__subpackages__",
+    ],
+    path: "ojluni/src/main/resources/",
+    srcs: [
+        "ojluni/src/main/resources/**/*",
+    ],
+}
+
+core_resources = [
+    ":core-luni-resources",
+    ":core-ojluni-resources",
+]
+
+// The source files that go into core-oj.
+filegroup {
+    name: "core_oj_java_files",
+    visibility: [
+        "//libcore:__subpackages__",
+    ],
+    srcs: [":openjdk_java_files"],
+}
+
+// OpenJDK source is not annotated with @hide so we need this separate
+// filegroup for just the parts that contribute to the API.
+filegroup {
+    name: "core_oj_api_files",
+    srcs: [":openjdk_javadoc_files"],
+}
+
+// The source files that go into core-libart.
+filegroup {
+    name: "core_libart_java_files",
+    visibility: [
+        "//libcore:__subpackages__",
+    ],
+    srcs: [
+        ":non_openjdk_java_files",
+    ],
+}
+
+// Some parts of libart are not annotated with @hide so we need this separate
+// filegroup for just the parts that contribute to the API.
+filegroup {
+    name: "core_libart_api_files",
+    srcs: [
+        ":non_openjdk_javadoc_files",
+    ],
+}
+
+// The set of files for the ART module that contribute to one or more API
+// surfaces. This includes files that are in the public API as well as those
+// that are not but which have been marked up with @hide plus one or more of
+// the API defining annotations.
+//
+// Some source files in :core_oj_api_files and :openjdk_mmodule_extra_files are
+// annotated by applying annotations to the .annotated.java stubs files in
+// ojluni/annotated/mmodules and rather than in the original source. See the comments
+// in openjdk_java_files.bp for more details.
+filegroup {
+    name: "art_module_api_files",
+    visibility: [
+        "//libcore:__subpackages__",
+    ],
+    srcs: [
+        ":apache-xml_api_files",
+        ":bouncycastle_java_files",
+        ":core_oj_api_files",
+        ":core_libart_api_files",
+        ":okhttp_api_files",
+        ":openjdk_mmodule_extra_files",
+    ],
+}
+
+java_defaults {
+    name: "libcore_java_defaults",
+    javacflags: [
+        //"-Xlint:all",
+        //"-Xlint:-serial,-deprecation,-unchecked",
+    ],
+    dxflags: ["--core-library"],
+    errorprone: {
+        javacflags: [
+            "-Xep:MissingOverride:OFF", // Ignore missing @Override.
+            "-Xep:ConstantOverflow:WARN", // Known constant overflow in SplittableRandom
+        ],
+    },
+}
+
+//
+// Build for the target (device).
+//
+
+// A target used to bootstrap compilation for the core library.
+//
+// See core-all-system-modules for more details.
+java_library {
+    name: "core-all",
+    defaults: ["libcore_java_defaults"],
+
+    srcs: [
+        // Use the source code for the I18N module intra core API as using the
+        // compiled version does not work due to limitations in either soong or the javac
+        // toolchain. See http://b/142056316 for more details.
+        ":i18n-module-intra-core-api-stubs-source",
+        ":core_oj_java_files",
+        ":core_libart_java_files",
+        ":openjdk_lambda_stub_files",
+        ":openjdk_generated_annotation_stub_files",
+        ":app-compat-annotations-source",
+    ],
+
+    sdk_version: "none",
+    system_modules: "none",
+    patch_module: "java.base",
+    openjdk9: {
+        srcs: ["luni/src/module/java/module-info.java"],
+    },
+
+    java_resources: core_resources,
+    java_version: "1.9",
+
+    installable: false,
+
+    plugins: [
+        "compat-changeid-annotation-processor",
+        "unsupportedappusage-annotation-processor",
+    ],
+}
+
+platform_compat_config {
+    name: "libcore-platform-compat-config",
+    src: ":core-all",
+}
+
+// A system modules definition for use by core library targets only. It only
+// contains the core-all jar, which contains the classes that end up in core-oj,
+// core-libart as well as the lambda stubs needed to compile Java lambda code.
+// It does not contain other parts of core library like conscrypt, bouncycastle,
+// etc. This system_modules definition is used to bootstrap compilation for
+// other parts of the core library like core-oj, core-libart, conscrypt,
+// bouncycastle, etc.
+java_system_modules {
+    name: "core-all-system-modules",
+
+    // Visibility is deliberately restricted to a small set of build modules that
+    // the core library team control.
+    visibility: [
+        "//external/apache-harmony:__subpackages__",
+        "//external/apache-xml",
+        "//external/okhttp",
+        "//libcore:__subpackages__",
+    ],
+
+    libs: ["core-all"],
+}
+
+// Contains the parts of core library associated with OpenJDK.
+java_library {
+    name: "core-oj",
+    visibility: [
+        "//art/build/apex",
+        "//external/wycheproof",
+        "//libcore/benchmarks",
+    ],
+    apex_available: [
+        "com.android.art.release",
+        "com.android.art.debug",
+    ],
+    defaults: ["libcore_java_defaults"],
+    installable: true,
+    hostdex: true,
+
+    srcs: [":core_oj_java_files"],
+    java_resources: core_resources,
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    patch_module: "java.base",
+
+    jacoco: {
+        exclude_filter: [
+            "java.lang.Class",
+            "java.lang.Long",
+            "java.lang.Number",
+            "java.lang.Object",
+            "java.lang.String",
+            "java.lang.invoke.MethodHandle",
+            "java.lang.ref.Reference",
+            "java.lang.reflect.Proxy",
+            "java.util.AbstractMap",
+            "java.util.HashMap",
+            "java.util.HashMap$Node",
+            "java.util.Map",
+        ],
+    },
+
+    notice: "ojluni/NOTICE",
+
+}
+
+// Contains parts of core library not associated with OpenJDK. Contains not
+// just java.*, javax.* code but also android.system.* and various internal
+// libcore.* packages.
+java_library {
+    name: "core-libart",
+    visibility: [
+        "//art/build/apex",
+        "//external/robolectric-shadows",
+        "//external/wycheproof",
+        "//libcore/benchmarks",
+        "//frameworks/layoutlib",
+    ],
+    apex_available: [
+        "com.android.art.release",
+        "com.android.art.debug",
+    ],
+    defaults: ["libcore_java_defaults"],
+    installable: true,
+    hostdex: true,
+
+    srcs: [":core_libart_java_files"],
+    java_version: "1.9",
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    patch_module: "java.base",
+
+    jacoco: {
+        exclude_filter: [
+            "java.lang.DexCache",
+            "dalvik.system.ClassExt",
+        ],
+    },
+
+    target: {
+        hostdex: {
+            required: [
+                // Files used to simulate the /system, runtime APEX and tzdata
+                // APEX dir structure on host.
+                "icu_tzdata.dat_host_tzdata_apex",
+                "tzdata_host",
+                "tzdata_host_tzdata_apex",
+                "tzlookup.xml_host_tzdata_apex",
+                "tz_version_host",
+                "tz_version_host_tzdata_apex",
+            ],
+        },
+    },
+}
+
+// Provided solely to contribute information about which hidden parts of the
+// core-oj API are used by apps.
+//
+// The build system determines that this library provides hiddenapi information
+// for the core-oj bootjar because its name is of the form <x>-hiddenapi, where
+// <x> is the name of a boot jar. That triggers the generation of a flags.csv
+// file which encapsulates information extracted from the UnsupportedAppUsage
+// annotations in the dex. The information from that file is then encoded into
+// the core-oj file.
+//
+// Usually, e.g. for core-libart, the UnsupportedAppUsage annotations are
+// added to the source that is compiled directly into the bootjar and the build
+// system extracts the information about UnsupportedAppUsage directly from
+// there.
+//
+// This approach of having separate annotated source and a separate build
+// target was taken for ojluni to avoid having to maintain local patches in the
+// ojluni source for UnsupportedAppUsage annotations as that would make it more
+// difficult to pull down changes from upstream.
+//
+java_library {
+    name: "core-oj-hiddenapi",
+    // Do not allow this to be accessed from outside this directory.
+    visibility: ["//visibility:private"],
+    defaults: ["libcore_java_defaults"],
+    compile_dex: true,
+
+    srcs: [":openjdk_hiddenapi_javadoc_files"],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    patch_module: "java.base",
+    plugins: ["unsupportedappusage-annotation-processor"],
+}
+
+//
+// Guaranteed unstripped versions of core-oj and core-libart.
+//
+// The build system may or may not strip the core-oj and core-libart jars,
+// but these will not be stripped. See b/24535627.
+//
+
+java_library {
+    name: "core-oj-testdex",
+    installable: true,
+    static_libs: ["core-oj"],
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    dxflags: ["--core-library"],
+    dex_preopt: {
+        enabled: false,
+    },
+    java_version: "1.9",
+    notice: "ojluni/NOTICE",
+}
+
+java_library {
+    name: "core-libart-testdex",
+    installable: true,
+    static_libs: ["core-libart"],
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    dxflags: ["--core-library"],
+    dex_preopt: {
+        enabled: false,
+    },
+    notice: "ojluni/NOTICE",
+}
+
+java_defaults {
+    name: "core_lambda_stubs_defaults",
+    defaults: ["libcore_java_defaults"],
+    hostdex: true,
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    patch_module: "java.base",
+
+    notice: "ojluni/NOTICE",
+
+    installable: false,
+    include_srcs: true,
+}
+
+// Creates a jar that exists to satisfy javac when compiling source code that
+// contains lambdas. This contains all classes / methods required by javac
+// when generating invoke-dynamic lambda implementation code, even those that
+// are also in the public SDK API from API level 26 onwards.
+java_library {
+    name: "core-lambda-stubs",
+    visibility: ["//visibility:public"],
+    defaults: ["core_lambda_stubs_defaults"],
+    srcs: [
+        ":openjdk_lambda_stub_files",
+        ":openjdk_lambda_duplicate_stub_files",
+    ],
+    // This jar is packaged as part of the SDK, use -target 8 so that it works
+    // with old JDKs.
+    java_version: "1.8",
+}
+
+// An alternative to core-lambda-stubs that omits openjdk_lambda_duplicate_stub_files
+// because those classes are also part of the core library public SDK API
+// (since API level 26).
+java_library {
+    name: "core-lambda-stubs-for-system-modules",
+    visibility: [
+        "//libcore/mmodules/core_platform_api",
+    ],
+    defaults: ["core_lambda_stubs_defaults"],
+    srcs: [
+        ":openjdk_lambda_stub_files",
+    ],
+    include_srcs: true,
+}
+
+// Creates a jar that exists to satisfy javac when compiling source code that
+// contains @Generated annotations, which are produced by some code generation
+// tools (notably dagger) but aren't part of the Android API.
+// See http://b/123891440.
+java_library {
+    name: "core-generated-annotation-stubs",
+    visibility: [
+        "//libcore/mmodules/core_platform_api",
+    ],
+    defaults: ["libcore_java_defaults"],
+    srcs: [
+        ":openjdk_generated_annotation_stub_files",
+    ],
+    hostdex: true,
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    patch_module: "java.base",
+    notice: "ojluni/NOTICE",
+    installable: false,
+    include_srcs: true,
+}
+
+// Builds libcore test rules
+java_library_static {
+    name: "core-test-rules",
+    visibility: [
+        "//art/build/sdk",
+        "//external/conscrypt",
+        "//external/conscrypt/apex/tests",
+        "//frameworks/base/location/tests/locationtests",
+        "//frameworks/base/core/tests/coretests",
+        "//frameworks/base/wifi/tests",
+        "//cts/tests/tests/util",
+    ],
+    hostdex: true,
+    srcs: [
+        "dalvik/test-rules/src/main/**/*.java",
+        "test-rules/src/main/**/*.java",
+    ],
+    static_libs: ["junit"],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+}
+
+// Builds platform_compat test rules
+java_library_static {
+    name: "core-compat-test-rules",
+    visibility: [
+        "//art/build/sdk",
+        "//frameworks/base/tests/PlatformCompatGating/test-rules",
+    ],
+    srcs: [
+        "luni/src/main/java/android/compat/**/*.java",
+        "test-rules/src/platform_compat/**/*.java",
+        "luni/src/main/java/libcore/api/CorePlatformApi.java",
+        "luni/src/main/java/libcore/api/IntraCoreApi.java",
+    ],
+    static_libs: [
+        "junit",
+        "guava",
+    ],
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    // This builds classes that are in the java.base Java module:
+    patch_module: "java.base",
+    hostdex: true,
+}
+
+// Builds the core-tests-support library used by various tests.
+java_library_static {
+    name: "core-tests-support",
+    visibility: [
+        "//art/build/sdk",
+        "//cts/apps/CtsVerifier",
+        "//cts/tests/tests/keystore",
+        "//cts/tests/tests/net",
+        "//cts/tests/tests/net/api23Test",
+        "//external/apache-harmony",
+        "//frameworks/base/core/tests/coretests",
+        "//libcore/benchmarks",
+        "//packages/apps/KeyChain/tests",
+        "//system/timezone/distro/core",
+    ],
+    hostdex: true,
+    srcs: ["support/src/test/java/**/*.java"],
+
+    sdk_version: "core_platform",
+    libs: ["junit"],
+    static_libs: [
+        "bouncycastle-unbundled",
+        "bouncycastle-bcpkix-unbundled",
+        "bouncycastle-ocsp-unbundled",
+    ],
+}
+
+// Builds the jsr166-tests library.
+java_test {
+    name: "jsr166-tests",
+    visibility: [
+        "//cts/tests/libcore/jsr166",
+    ],
+    srcs: ["jsr166-tests/src/test/java/**/*.java"],
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "junit",
+    ],
+}
+
+// A filegroup that provides access to a source file for a toolchain test that
+// checks Java 9 language features are handled properly by JarJar.
+filegroup {
+    name: "core-java-9-language-features-source",
+    srcs: ["luni/src/main/java/libcore/internal/Java9LanguageFeatures.java"],
+    visibility: ["//libcore/luni/src/test/java9language"],
+}
+
+genrule {
+    name: "core-tests-smali-dex",
+    srcs: ["luni/src/test/java/**/*.smali"],
+    cmd: "$(location smali) ass --api 28 -o $(out) $(in)",
+    out: ["core-tests-smali.dex"],
+    tools: ["smali"],
+}
+
+// Builds the core-tests library.
+java_test {
+    name: "core-tests",
+    visibility: [
+        "//cts/tests/libcore/luni",
+    ],
+    defaults: ["libcore_java_defaults"],
+    hostdex: true,
+    srcs: [
+        "dalvik/src/test/java/**/*.java",
+        "dalvik/test-rules/src/test/java/**/*.java",
+        "dom/src/test/java/**/*.java",
+        "harmony-tests/src/test/java/**/*.java",
+        "json/src/test/java/**/*.java",
+        "luni/src/test/java/**/*.java",
+        "test-rules/src/test/java/**/*.java",
+        "xml/src/test/java/**/*.java",
+    ],
+    exclude_srcs: [
+        "harmony-tests/src/test/java/org/apache/harmony/tests/javax/net/ssl/*.java",
+        "luni/src/test/java/libcore/java/util/zip/Zip64Test.java",
+        "luni/src/test/java/libcore/java/util/zip/Zip64FileTest.java",
+        "luni/src/test/java/libcore/javax/crypto/**/*.java",
+        "luni/src/test/java/libcore/javax/net/ssl/**/*.java",
+        "luni/src/test/java/org/apache/harmony/crypto/**/*.java",
+    ],
+
+    java_resource_dirs: [
+        "*/src/test/java",
+        "*/src/test/resources",
+    ],
+    exclude_java_resource_dirs: [
+        "ojluni/src/test/java",
+        "ojluni/src/test/resources",
+    ],
+
+    java_resources: [
+        ":annotations-test",
+        ":filesystemstest",
+        ":parameter-metadata-test",
+        ":core-tests-smali-dex",
+    ],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "okhttp",
+        "bouncycastle",
+    ],
+
+    static_libs: [
+        "core-compat-test-rules",
+        "core-java-9-language-tests",
+        "core-test-rules",
+        "core-tests-support",
+        "junit-params",
+        "libcore-crypto-tests",
+        "mockftpserver",
+        "mockito-target",
+        "mockwebserver",
+        "nist-pkix-tests",
+        "slf4j-jdk14",
+        "sqlite-jdbc",
+        "tzdata-testing",
+        "truth-prebuilt-jar",
+    ],
+
+    errorprone: {
+        javacflags: [
+            "-Xep:TryFailThrowable:ERROR",
+            "-Xep:ComparisonOutOfRange:ERROR",
+        ],
+    },
+
+    test_config: "AndroidTest-core-tests.xml",
+}
+
+java_test {
+    name: "libcore-crypto-tests",
+
+    visibility: [
+        "//art/build/sdk",
+        "//external/conscrypt/apex/tests",
+    ],
+    srcs: [
+        "harmony-tests/src/test/java/org/apache/harmony/tests/javax/net/ssl/*.java",
+        "luni/src/test/java/libcore/javax/crypto/**/*.java",
+        "luni/src/test/java/libcore/javax/net/ssl/**/*.java",
+        "luni/src/test/java/org/apache/harmony/crypto/**/*.java",
+    ],
+    exclude_srcs: [
+        "luni/src/test/java/org/apache/harmony/crypto/tests/javax/crypto/SealedObjectTest.java",
+    ],
+
+    java_resource_dirs: [
+        "luni/src/test/java",
+        "luni/src/test/resources",
+        "support/src/test/java",
+    ],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+
+    static_libs: [
+        "core-test-rules",
+        "core-tests-support",
+        "junit-params",
+        "mockito-target",
+    ],
+}
+
+// Builds the core-ojtests library that contains test code from OpenJDK.
+java_test {
+    name: "core-ojtests",
+    defaults: ["libcore_java_defaults"],
+    hostdex: true,
+
+    srcs: [
+        "ojluni/src/test/java/**/*.java",
+    ],
+    java_resource_dirs: [
+        "ojluni/src/test/java",
+        "ojluni/src/test/resources",
+    ],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "okhttp",
+        "bouncycastle",
+    ],
+
+    static_libs: ["testng"],
+
+    // ojluni/src/test/java/util/stream/{bootlib,boottest}
+    // contains tests that are in packages from java.base;
+    // By default, OpenJDK 9's javac will only compile such
+    // code if it's declared to also be in java.base at
+    // compile time.
+    //
+    // For now, we use patch_module to put all sources
+    // and dependencies from this make target into java.base;
+    // other source directories in this make target are in
+    // packages not from java.base; if this becomes a problem
+    // in future, this could be addressed eg. by splitting
+    // boot{lib,test} out into a separate make target,
+    // deleting those tests or moving them to a different
+    // package.
+    patch_module: "java.base",
+}
+
+// Builds the core-ojtests-public library. Excludes any private API tests.
+// Like core-ojtests but smaller.
+java_test {
+    name: "core-ojtests-public",
+    visibility: [
+        "//cts/tests/libcore/ojluni",
+    ],
+    defaults: ["libcore_java_defaults"],
+    srcs: [
+        "ojluni/src/test/java/**/*.java",
+    ],
+    // Filter out the following:
+    // 1.) DeserializeMethodTest and SerializedLambdaTest, because they depends on stub classes
+    //     and won't actually run, and
+    // 2.) util/stream/boot*. Those directories contain classes in the package java.util.stream;
+    //     excluding them means we don't need patch_module: "java.base"
+    exclude_srcs: [
+        "**/DeserializeMethodTest.java",
+        "**/SerializedLambdaTest.java",
+        "ojluni/src/test/java/util/stream/boot*/**/*",
+    ],
+    java_resource_dirs: [
+        "ojluni/src/test/java",
+        "ojluni/src/test/resources",
+        // Include source code as part of JAR
+        "ojluni/src/test/dist",
+    ],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "bouncycastle",
+        "okhttp",
+        "testng",
+    ],
+}
+
+// Exports annotated stubs source files in ojluni/annotations/sdk to make them
+// available to metalava. Used for nullability annotations in OpenJDK source.
+droiddoc_exported_dir {
+    name: "ojluni-annotated-sdk-stubs",
+    path: "ojluni/annotations/sdk",
+}
+
+droiddoc_exported_dir {
+    name: "ojluni-annotated-nullability-stubs",
+    path: "ojluni/annotations/sdk/nullability",
+}
+
+// Exports annotated stubs source files in ojluni/annotations/mmodules to make
+// them available to metalava. Used for core platform API and intra-core API
+// annotations in OpenJDK source.
+droiddoc_exported_dir {
+    name: "ojluni-annotated-mmodule-stubs",
+    visibility: [
+        "//libcore/mmodules/core_platform_api",
+        "//libcore/mmodules/intracoreapi",
+    ],
+    path: "ojluni/annotations/mmodule",
+}
+
+// A file containing the list of tags that are "known" to us from the OpenJdk
+// source code and so should not cause an error or warning.
+filegroup {
+    name: "known-oj-tags",
+    visibility: [
+        "//frameworks/base",
+    ],
+    srcs: [
+        "known_oj_tags.txt",
+    ],
+}
+
+// A special set of stubs containing the minimal set of self consistent
+// classes for which a system module can be created. Every system module must
+// contain the java.lang classes so the set was constructed by starting with
+// the java.lang classes and then adding their transitive dependencies without
+// splitting packages. So, if one class from a package is used then all classes
+// in that package were added to the set.
+//
+// Needed for java-current-stubs-system-modules.
+droidstubs {
+    name: "java-current-stubs-source",
+    srcs: [
+        ":core_oj_api_files",
+        ":core_libart_api_files",
+    ],
+    java_version: "1.9",
+    installable: false,
+    sdk_version: "none",
+    system_modules: "none",
+
+    args: "--stub-packages java.*:javax.*:org.w3c.dom.*:org.xml.sax.*",
+}
+
+java_library {
+    name: "java.current.stubs",
+    srcs: [":java-current-stubs-source"],
+    errorprone: {
+        javacflags: [
+            "-Xep:MissingOverride:OFF",
+        ],
+    },
+    patch_module: "java.base",
+    sdk_version: "none",
+    system_modules: "none",
+}
+
+// A special set of system modules needed to build art.module.public.api.stubs
+// that contain nullability annotations when targeting java language level 1.9
+// and above.
+java_system_modules {
+    name: "java-current-stubs-system-modules",
+    libs: [
+        // Minimal set of classes required for a system module.
+        "java.current.stubs",
+
+        // The nullability annotations used by the generated stubs.
+        "stub-annotations",
+    ],
+}
+
+// http://b/129765390 Rewrite links to "platform" or "technotes" folders
+// which are siblings (and thus outside of) {@docRoot}.
+//
+// We have to escape \ as \\ and $ as $$ here because they get resolved by
+// different layers of the build tooling. The arguments are wrapped in '' so
+// that the shell doesn't add yet another level of escaping.
+rewrite_openjdk_doc_args = "--replace-documentation " +
+    // packages whose descendants to apply replacement to (all packages from
+    // libcore/ojluni/src/main/java that contribute to documentation).
+    "com.sun:java:javax:jdk.net:sun " +
+    // regex of the string to replace
+    "'(<a\\s+href\\s?=[\\*\\s]*\")(?:(?:\\{@docRoot\\}/\\.\\./)|(?:(?:\\.\\./)+))((?:platform|technotes).+)\">' " +
+    // replacement (with $1, $2 backreferences to the regex groups)
+    "'$$1https://docs.oracle.com/javase/8/docs/$$2\">' "
+
+// Generates stubs for the parts of the public SDK API provided by the ART module.
+//
+// Only for use by art.module.public.api.stubs target below and the building of the
+// public API.
+droidstubs {
+    name: "art-module-public-api-stubs-source",
+    visibility: [
+        "//frameworks/base",
+    ],
+    srcs: [
+        ":core_oj_api_files",
+        ":core_libart_api_files",
+    ],
+    java_version: "1.9",
+    installable: false,
+    sdk_version: "none",
+    system_modules: "java-current-stubs-system-modules",
+    libs: [
+        // Provide access to I18N constants that are used to initialize
+        // constants in the public API. i.e. to allow the value of the
+        // java.text.CollectionElementIterator.NULLORDER to be initialized from
+        // android.icu.text.CollationElementIterator.NULLORDER.
+        "i18n.module.intra.core.api.stubs",
+    ],
+
+    args: rewrite_openjdk_doc_args,
+
+    create_doc_stubs: true,
+
+    // Emit nullability annotations from the source to the stub files.
+    annotations_enabled: true,
+
+    merge_annotations_dirs: [
+        "ojluni-annotated-sdk-stubs",
+    ],
+}
+
+// A stubs target containing the parts of the public SDK API provided by the ART module.
+java_library {
+    name: "art.module.public.api.stubs",
+    srcs: [":art-module-public-api-stubs-source"],
+    errorprone: {
+        javacflags: [
+            "-Xep:MissingOverride:OFF",
+        ],
+    },
+    patch_module: "java.base",
+    sdk_version: "none",
+    system_modules: "java-current-stubs-system-modules",
+}
+
+// Used when compiling higher-level code against art.module.public.api.stubs.
+//
+// This is only intended for use within core libraries and must not be used
+// from outside.
+java_system_modules {
+    name: "art-module-public-api-stubs-system-modules",
+    visibility: [
+        "//art/build/sdk",
+        "//external/conscrypt",
+        "//external/icu/android_icu4j",
+        "//external/wycheproof",
+    ],
+    libs: [
+        "art.module.public.api.stubs",
+        // This one is not on device but it's needed when javac compiles code
+        // containing lambdas.
+        "core-lambda-stubs-for-system-modules",
+        // This one is not on device but it's needed when javac compiles code
+        // containing @Generated annotations produced by some code generation
+        // tools.
+        // See http://b/123891440.
+        "core-generated-annotation-stubs",
+
+        // Ensure that core libraries that depend on the public API can access
+        // the UnsupportedAppUsage, CorePlatformApi and IntraCoreApi
+        // annotations.
+        "art.module.api.annotations.for.system.modules",
+
+        // Make nullability annotations available when compiling public stubs.
+        // They are provided as a separate library because while the
+        // annotations are not themselves part of the public API provided by
+        // this module they are used in the stubs.
+        "stub-annotations",
+    ],
+}
+
+// A stubs target containing the parts of the public SDK API provided by the
+// core library.
+//
+// Don't use this directly, use "sdk_version: core_current".
+java_library {
+    name: "core.current.stubs",
+    visibility: ["//visibility:public"],
+    static_libs: [
+        "art.module.public.api.stubs",
+        "conscrypt.module.public.api.stubs",
+        "i18n.module.public.api.stubs",
+    ],
+    sdk_version: "none",
+    system_modules: "none",
+
+    dist: {
+        targets: [
+            "sdk",
+            "win_sdk",
+        ],
+    },
+}
+
+// Distributed with the SDK for turning into system modules to compile apps
+// against.
+java_library {
+    name: "core-current-stubs-for-system-modules",
+    visibility: ["//development/sdk"],
+    static_libs: [
+        "core.current.stubs",
+        // This one is not on device but it's needed when javac compiles code
+        // containing lambdas.
+        "core-lambda-stubs-for-system-modules",
+        // This one is not on device but it's needed when javac compiles code
+        // containing @Generated annotations produced by some code generation
+        // tools.
+        // See http://b/123891440.
+        "core-generated-annotation-stubs",
+    ],
+    sdk_version: "none",
+    system_modules: "none",
+    dist: {
+        dest: "core-for-system-modules.jar",
+        targets: [
+            "sdk",
+            "win_sdk",
+        ],
+    },
+}
+
+// Used when compiling higher-level code against core.current.stubs.
+java_system_modules {
+    name: "core-current-stubs-system-modules",
+    visibility: ["//visibility:public"],
+    libs: [
+        "core-current-stubs-for-system-modules",
+    ],
+}
+
+// Target for validating nullability annotations for correctness and
+// completeness. To check that there are no nullability errors:
+//   m art-module-public-api-stubs-nullability-validation
+// To check that there are only the expected nullability warnings:
+//   m art-module-public-api-stubs-nullability-validation-check-nullability-warnings
+// (If that check fails, it will provide instructions on how to proceed,
+// including the command to run to update the expected warnings file.)
+droidstubs {
+    name: "art-module-public-api-stubs-nullability-validation",
+    srcs: [":art_module_api_files"],
+    installable: false,
+    sdk_version: "none",
+    system_modules: "none",
+    annotations_enabled: true,
+    args: "--hide-annotation libcore.api.Hide " +
+        "--validate-nullability-from-merged-stubs ",
+    merge_inclusion_annotations_dirs: ["ojluni-annotated-mmodule-stubs"],
+    merge_annotations_dirs: [
+        // N.B. Stubs in this filegroup will be validated:
+        "ojluni-annotated-nullability-stubs",
+    ],
+    // The list of classes which have nullability annotations included in the source.
+    // (This is in addition to those which have annotations in the merged stubs.)
+    validate_nullability_from_list: "nullability_annotated_classes.txt",
+    // The expected set of warnings about missing annotations:
+    check_nullability_warnings: "nullability_warnings.txt",
+}
+
+// A host library containing time zone related classes. Used for
+// host-side tools and tests that have to deal with Android
+// time zone data.
+java_library_host {
+    name: "timezone-host",
+    visibility: [
+        "//art/build/sdk",
+        "//system/timezone/distro/core",
+    ],
+    srcs: [":timezone_host_files"],
+}
+
+// A special set of system modules for building the following library for use
+// in the art-module-public-api-system-modules.
+java_system_modules {
+    name: "api-annotations-system-modules",
+    libs: [
+        "art.module.public.api.stubs",
+    ],
+}
+
+// A library that contains annotations that define API surfaces (core
+// platform, intra core and the hidden API) along with some supporting
+// constants. The annotations are source only and do not introduce any runtime
+// dependencies. Specially built for use in system modules definitions to
+// avoid introducing compile time cycles.
+java_library {
+    name: "art.module.api.annotations.for.system.modules",
+    srcs: [
+        ":api_surface_annotation_files",
+    ],
+
+    installable: false,
+    sdk_version: "none",
+    system_modules: "api-annotations-system-modules",
+    patch_module: "java.base",
+}
+
+// Create a library containing the api surface annotations, built against
+// core_current for use by the annotation processor in frameworks/base.
+java_library {
+    name: "art.module.api.annotations",
+    visibility: [
+        "//frameworks/base",
+    ],
+    host_supported: true,
+    srcs: [
+        ":api_surface_annotation_files",
+    ],
+    java_version: "1.9",
+    sdk_version: "core_current",
+}

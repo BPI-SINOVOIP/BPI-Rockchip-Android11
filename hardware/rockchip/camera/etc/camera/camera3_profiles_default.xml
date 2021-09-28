@@ -1,0 +1,3026 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (c) 2018, Fuzhou Rockchip Electronics Co., Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<CameraSettings>
+    <!-- each camera has a Profiles node
+         name: sensor name, case sensitive, should be the same as sensor driver
+         moduleId: unique id for the camera, should be the same as sensor DTS setting
+         cameraId: no much meaning now, could be 0 or 1.
+    -->
+    <!-- RAW SENSOR REFERENCE SETTING -->
+    <Profiles cameraId="0" name="ov13850" moduleId="m00">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/> <!-- SHOULD NOT EDIT -->
+        </Supported_hardware>
+
+       <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <control.aeAvailableTargetFpsRanges value="7,7,15,30,30,30"/> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <!-- JPEG -->
+            <jpeg.maxSize value="20000000"/> <!-- not less than max_blob_width*max_blob_height*3/2 -->
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/>
+            <scaler.availableStreamConfigurations value="
+                BLOB,4096x3072,OUTPUT,
+                BLOB,2112x1568,OUTPUT,
+                BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,352x288,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,4096x3072,OUTPUT,
+                YCbCr_420_888,2112x1568,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,352x288,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,4096x3072,OUTPUT,
+                IMPLEMENTATION_DEFINED,2112x1568,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,352x288,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableMinFrameDurations value="
+                BLOB,4096x3072,150000000,
+                BLOB,2112x1568,33333333,
+                BLOB,1920x1080,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,352x288,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,4096x3072,50000000,
+                YCbCr_420_888,2112x1568,33333333,
+                YCbCr_420_888,1920x1080,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,352x288,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,4096x3072,150000000,
+                IMPLEMENTATION_DEFINED,2112x1568,33333333,
+                IMPLEMENTATION_DEFINED,1920x1080,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,352x288,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableStallDurations value="
+                                                   BLOB,4096x3072,150000000,
+                                                   BLOB,2112x1568,33333333,
+                                                   BLOB,1920x1080,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,352x288,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <sensor.info.activeArraySize value="0,0,4224,3136"/> <!-- sensor max output frame size,left & top should be 0 -->
+            <sensor.info.sensitivityRange value="32,2400"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.exposureTimeRange value="100000,200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.maxFrameDuration value="200000000"/> <!-- COULD NOT EDIT, not unsed now --> 
+            <sensor.info.pixelArraySize value="4224x3136"/> <!-- sensor max output frame size -->
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- SHOULD NOT EDIT -->
+           <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Control -->
+            <control.availableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.aeAvailableAntibandingModes value="50HZ,60Hz"/> <!-- SHOULD NOT EDIT, not support AUTO now -->
+            <control.aeAvailableModes value="ON"/> <!-- remove ON_AUTO_FLASH,ON_ALWAYS_FLASH if flash is not available-->
+            <control.aeLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.aeCompensationRange value="0,0"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.aeCompensationStep value="0,1"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.afAvailableModes value="AUTO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,OFF"/> <!-- set to OFF if af is not available -->
+            <control.availableEffects value="OFF"/> <!-- SHOULD NOT EDIT, not support any efffect now -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/> <!-- SHOULD NOT EDIT -->
+            <control.awbLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.availableSceneModes value="DISABLED"/> <!-- SHOULD NOT EDIT, not support any scene mode now -->
+            <control.availableVideoStabilizationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <control.maxRegions value="1,0,1"/> <!-- SHOULD NOT EDIT -->
+            <!-- Lens Info-->
+            <lens.info.availableApertures value="2.0"/> <!-- refer to sensor module spec -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- refer to sensor module spec -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- refer to sensor module spec, can't be 0 if af is available -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/> <!-- BACK or FRONT -->
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/> <!-- SHOULD NOT EDIT -->
+            <request.pipelineMaxDepth value="4"/> <!-- could be increased -->
+            <request.maxNumInputStreams value="0"/> <!-- SHOULD NOT EDIT -->
+            <request.partialResultCount value="1"/> <!-- SHOULD NOT EDIT -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+            <request.availableCharacteristicsKeys value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/> <!-- not greater than 4.0 -->
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/> <!-- SHOULD NOT EDIT -->
+            <scaler.croppingType value="CENTER_ONLY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.info.timestampSource value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- SHOULD NOT EDIT -->
+            <sensor.blackLevelPattern value="0,0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.orientation value="90"/> <!-- 0,90,180 or 270 -->
+            <sensor.profileHueSatMapDimensions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/> <!-- SHOULD NOT EDIT -->
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/> <!-- SHOULD NOT EDIT -->
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.histogramBucketCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.maxFaceCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableHotPixelMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableLensShadingMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/> <!-- TRUE if flash is available -->
+            <flash.info.chargeDuration value="1000000"/> <!-- SHOULD NOT EDIT -->
+            <flash.maxEnergy value="10"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/> <!-- SHOULD NOT EDIT -->
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="4224x3136,2112x1568"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- skip frames when streaming on -->
+        </Sensor_info_RKISP1>
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+    <!-- RAW SENSOR REFERENCE SETTING -->
+    <Profiles cameraId="0" name="imx258" moduleId="m00">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/> <!-- SHOULD NOT EDIT -->
+        </Supported_hardware>
+
+       <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+             <control.aeAvailableTargetFpsRanges value="15,15,10,20,20,20,10,30,30,30"/> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <!-- JPEG -->
+            <jpeg.maxSize value="20000000"/> <!-- not less than max_blob_width*max_blob_height*3/2 -->
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/>
+            <scaler.availableStreamConfigurations value="
+                BLOB,4096x3072,OUTPUT,
+                BLOB,2096x1560,OUTPUT,
+                BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,352x288,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,4096x3072,OUTPUT,
+                YCbCr_420_888,2096x1560,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,352x288,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,4096x3072,OUTPUT,
+                IMPLEMENTATION_DEFINED,2096x1560,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,352x288,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableMinFrameDurations value="
+                BLOB,4096x3072,50000000,
+                BLOB,2096x1560,33333333,
+                BLOB,1920x1080,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,352x288,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,4096x3072,50000000,
+                YCbCr_420_888,2096x1560,33333333,
+                YCbCr_420_888,1920x1080,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,352x288,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,4096x3072,50000000,
+                IMPLEMENTATION_DEFINED,2096x1560,33333333,
+                IMPLEMENTATION_DEFINED,1920x1080,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,352x288,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableStallDurations value="
+                                                   BLOB,4096x3072,66666666,
+                                                   BLOB,2096x1560,33333333,
+                                                   BLOB,1920x1080,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,352x288,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <sensor.info.activeArraySize value="0,0,4208,3120"/> <!-- sensor max output frame size,left & top should be 0 -->
+            <sensor.info.sensitivityRange value="32,2400"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.exposureTimeRange value="100000,200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.maxFrameDuration value="200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.pixelArraySize value="4208x3120"/> <!-- sensor max output frame size -->
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- SHOULD NOT EDIT --> 
+            <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Control -->
+            <control.availableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.aeAvailableAntibandingModes value="50HZ,60Hz"/> <!-- SHOULD NOT EDIT, not support AUTO now -->
+            <control.aeAvailableModes value="ON,ON_AUTO_FLASH,ON_ALWAYS_FLASH"/> <!-- remove ON_AUTO_FLASH,ON_ALWAYS_FLASH if flash is not available-->
+            <control.aeLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+
+            <control.aeCompensationRange value="0,0"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.aeCompensationStep value="0,1"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.afAvailableModes value="AUTO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,OFF"/> <!-- set to OFF if af is not available -->
+            <control.availableEffects value="OFF"/> <!-- SHOULD NOT EDIT, not support any efffect now -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/> <!-- SHOULD NOT EDIT -->
+            <control.awbLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.availableSceneModes value="DISABLED"/> <!-- SHOULD NOT EDIT, not support any scene mode now -->
+            <control.availableVideoStabilizationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <control.maxRegions value="1,0,1"/> <!-- SHOULD NOT EDIT -->
+
+            <!-- Lens Info-->
+            <lens.info.availableApertures value="2.0"/> <!-- refer to sensor module spec -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- refer to sensor module spec -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- refer to sensor module spec, can't be 0 if af is available -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/> <!-- BACK or FRONT -->
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/> <!-- SHOULD NOT EDIT -->
+            <request.pipelineMaxDepth value="4"/> <!-- could be increased -->
+            <request.maxNumInputStreams value="0"/> <!-- SHOULD NOT EDIT -->
+            <request.partialResultCount value="1"/> <!-- SHOULD NOT EDIT -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+            <request.availableCharacteristicsKeys value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/> <!-- not greater than 4.0 -->
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/> <!-- SHOULD NOT EDIT -->
+            <scaler.croppingType value="CENTER_ONLY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.info.timestampSource value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- SHOULD NOT EDIT -->
+            <sensor.blackLevelPattern value="0,0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.orientation value="90"/> <!-- 0,90,180 or 270 -->
+            <sensor.profileHueSatMapDimensions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/> <!-- SHOULD NOT EDIT -->
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/> <!-- SHOULD NOT EDIT -->
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.histogramBucketCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.maxFaceCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableHotPixelMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableLensShadingMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash info -->
+            <flash.info.available value="TRUE"/> <!-- TRUE if flash is available -->
+            <flash.info.chargeDuration value="1000000"/> <!-- SHOULD NOT EDIT -->
+            <flash.maxEnergy value="10"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/> <!-- SHOULD NOT EDIT -->
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="4208x3120,2096x1560"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- skip frames when streaming on -->
+        </Sensor_info_RKISP1>
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+	<Profiles cameraId="0" name="ov5695" moduleId="m00">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <!-- <control.aeAvailableTargetFpsRanges value="15,30,30,30,60,60"/> -->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/>
+            <!-- JPEG -->
+            <jpeg.maxSize value="7558272"/>  <!-- 2592*1944*1.5 -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/> <!-- INCREASING ORDER -->
+            <scaler.availableStreamConfigurations value="BLOB,2592x1944,OUTPUT,
+                BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,2592x1944,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,2592x1944,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+				IMPLEMENTATION_DEFINED,176x144,OUTPUT"/>
+            <scaler.availableMinFrameDurations value="BLOB,2592x1944,33333333,
+                BLOB,1920x1080,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,2592x1944,33333333,
+                YCbCr_420_888,1920x1080,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,2592x1944,33333333,
+                IMPLEMENTATION_DEFINED,1920x1080,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" />
+            <scaler.availableStallDurations value="BLOB,2592x1944,33333333,
+                                                   BLOB,1920x1080,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" />
+            <sensor.info.activeArraySize value="0,0,2592,1944"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+            <sensor.info.exposureTimeRange value="100000,333333330"/>
+            <sensor.info.maxFrameDuration value="66666666"/>
+            <sensor.info.pixelArraySize value="2592x1944"/>
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- HAL may override this value from CMC for RAW sensors -->
+    						   
+            <!--************************AUTO GENERATE END*************************-->
+	
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/>
+            <!-- Control -->
+            <control.availableModes value="AUTO"/>
+            <control.aeAvailableAntibandingModes value="OFF,50HZ,60Hz,AUTO"/>
+            <control.aeAvailableModes value="ON,OFF"/>
+            <control.aeLockAvailable value="FALSE"/>
+            <control.aeCompensationRange value="-6,6"/>
+            <control.aeCompensationStep value="1,3"/>
+            <control.afAvailableModes value="OFF,AUTO,MACRO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,EDOF"/>
+            <control.availableEffects value="OFF"/>
+            <!-- <control.awbAvailableModes value="AUTO"/> -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/>
+            <control.awbLockAvailable value="true"/>
+            <control.availableSceneModes value="DISABLED"/>
+            <control.availableVideoStabilizationModes value="OFF"/>
+            <control.maxRegions value="1,0,1"/>
+            <!-- Lens Info-->
+            <!-- TODO: availableApertures now is fake for we do not get the real apertures -->
+            <lens.info.availableApertures value="2.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- OPTIONS: OFF, ON -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/>
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/>
+            <request.pipelineMaxDepth value="4"/>
+            <request.maxNumInputStreams value="0"/>
+            <request.partialResultCount value="1"/>
+            <!-- <request.availableCapabilities value="BACKWARD_COMPATIBLE,YUV_REPROCESSING,PRIVATE_REPROCESSING"/> -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/>
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+		sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+            <request.availableCharacteristicsKeys value="0"/>
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/>
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/>
+
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+            <sensor.orientation value="90"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/>
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/>
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/>
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/>
+            <statistics.info.histogramBucketCount value="0"/>
+            <statistics.info.maxFaceCount value="0"/>
+            <statistics.info.availableHotPixelMapModes value="OFF"/>
+            <statistics.info.availableLensShadingMapModes value="OFF"/>
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/>
+            <flash.maxEnergy value="0"/>
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/>
+            <flash.info.chargeDuration value="1000000"/>
+            <flash.maxEnergy value="10"/>
+            <!-- Sync -->
+            <sync.maxLatency value="PER_FRAME_CONTROL"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/>
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/>
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/>
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="2592x1944"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+
+            <frame.initialSkip value="0"/> <!-- should equal actual skipFrames - 2 for driver dropped 2 frames -->
+
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+	<Profiles cameraId="0" name="ov8858" moduleId="m00">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+	
+            <!-- <control.aeAvailableTargetFpsRanges value="15,30,30,30,60,60"/> -->
+            <control.aeAvailableTargetFpsRanges value="15,15,15,30,30,30"/>
+            <!-- JPEG -->
+            <jpeg.maxSize value="11985408"/>  <!-- 3264*2448*1.5 -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/> <!-- INCREASING ORDER -->
+    	
+	    <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/>
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/>
+            <scaler.availableStreamConfigurations value="BLOB,3264x2448,OUTPUT,
+                BLOB,2592x1944,OUTPUT,
+                BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,3264x2448,OUTPUT,
+                YCbCr_420_888,2592x1944,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,3264x2448,OUTPUT,
+                IMPLEMENTATION_DEFINED,2592x1944,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT"/>
+            <scaler.availableMinFrameDurations value="BLOB,3264x2448,66666666,
+                BLOB,2592x1944,66666666,
+                BLOB,1920x1080,66666666,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,3264x2448,66666666,
+                YCbCr_420_888,2592x1944,66666666,
+                YCbCr_420_888,1920x1080,66666666,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,3264x2448,66666666,
+                IMPLEMENTATION_DEFINED,2592x1944,66666666,
+                IMPLEMENTATION_DEFINED,1920x1080,66666666,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" />
+            <scaler.availableStallDurations value="BLOB,3264x2448,66666666,
+                                                   BLOB,2592x1944,66666666,
+                                                   BLOB,1920x1080,66666666,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" />
+            <sensor.info.activeArraySize value="0,0,3264,2448"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+            <sensor.info.exposureTimeRange value="100000,333333330"/>
+            <sensor.info.maxFrameDuration value="66666666"/>	 
+            <sensor.info.pixelArraySize value="3264x2448"/>
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- HAL may override this value from CMC for RAW sensors -->	    	       
+           <!--************************AUTO GENERATE END*************************-->
+ 
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/>
+            <!-- Control -->
+            <control.availableModes value="AUTO"/>
+            <control.aeAvailableAntibandingModes value="OFF,50HZ,60Hz,AUTO"/>
+            <control.aeAvailableModes value="ON,OFF"/>
+            <control.aeLockAvailable value="FALSE"/>
+
+            <control.aeCompensationRange value="-6,6"/>
+            <control.aeCompensationStep value="1,3"/>
+            <control.afAvailableModes value="OFF"/>
+            <control.availableEffects value="OFF"/>
+            <!-- <control.awbAvailableModes value="AUTO"/> -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/>
+            <control.awbLockAvailable value="true"/>
+            <control.availableSceneModes value="DISABLED"/>
+            <control.availableVideoStabilizationModes value="OFF"/>
+            <control.maxRegions value="1,0,0"/>
+            <!-- Lens Info-->
+            <!-- TODO: availableApertures now is fake for we do not get the real apertures -->
+            <lens.info.availableApertures value="2.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- OPTIONS: OFF, ON -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.minimumFocusDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/>
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/>
+            <request.pipelineMaxDepth value="4"/>
+            <request.maxNumInputStreams value="0"/>
+            <request.partialResultCount value="1"/>
+            <!-- <request.availableCapabilities value="BACKWARD_COMPATIBLE,YUV_REPROCESSING,PRIVATE_REPROCESSING"/> -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/>
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+		sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+            <request.availableCharacteristicsKeys value="0"/>
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- HAL may override this value from CMC for RAW sensors -->
+
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+
+            <sensor.orientation value="90"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/>
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/>
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/>
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/>
+            <statistics.info.histogramBucketCount value="0"/>
+            <statistics.info.maxFaceCount value="0"/>
+            <statistics.info.availableHotPixelMapModes value="OFF"/>
+            <statistics.info.availableLensShadingMapModes value="OFF"/>
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/>
+            <flash.maxEnergy value="0"/>
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/>
+            <flash.info.chargeDuration value="1000000"/>
+            <flash.maxEnergy value="10"/>
+            <!-- Sync -->
+            <sync.maxLatency value="PER_FRAME_CONTROL"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/>
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/>
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/>
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="264x2448, 1632x1224"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="3"/> <!-- should equal actual skipFrames - 2 for driver dropped 2 frames -->
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+
+
+      <Profiles cameraId="0" name="RK1608-dphy" moduleId="m00">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <!-- JPEG -->
+            <jpeg.maxSize value="20000000"/> <!-- not less than max_blob_width*max_blob_height*3/2 -->
+            /* TODO */
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/>
+            <scaler.availableStreamConfigurations value="BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,352x288,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,352x288,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,352x288,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableMinFrameDurations value="BLOB,1920x1080,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,352x288,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,1920x1080,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,352x288,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,1920x1080,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,352x288,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableStallDurations value="BLOB,1920x1080,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,352x288,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <sensor.info.activeArraySize value="0,0,1920,1080"/> <!-- sensor max output frame size,left & top should be 0 -->
+            <sensor.info.sensitivityRange value="32,2400"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.exposureTimeRange value="100000,200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.maxFrameDuration value="200000000"/> <!-- COULD NOT EDIT, not unsed now --> 
+            <sensor.info.pixelArraySize value="1920x1080"/> <!-- sensor max output frame size -->
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- SHOULD NOT EDIT -->
+            <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Control -->
+            <control.availableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.aeAvailableAntibandingModes value="50HZ,60Hz"/> <!-- SHOULD NOT EDIT, not support AUTO now -->
+            <control.aeAvailableModes value="ON"/> <!-- remove ON_AUTO_FLASH,ON_ALWAYS_FLASH if flash is not available-->
+            <control.aeLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.aeCompensationRange value="0,0"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.aeCompensationStep value="0,1"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.afAvailableModes value="AUTO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,OFF"/> <!-- set to OFF if af is not available -->
+            <control.availableEffects value="OFF"/> <!-- SHOULD NOT EDIT, not support any efffect now -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/> <!-- SHOULD NOT EDIT -->
+            <control.awbLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.availableSceneModes value="DISABLED"/> <!-- SHOULD NOT EDIT, not support any scene mode now -->
+            <control.availableVideoStabilizationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <control.maxRegions value="1,0,1"/> <!-- SHOULD NOT EDIT -->
+            <!-- Lens Info-->
+            <lens.info.availableApertures value="2.0"/> <!-- refer to sensor module spec -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- refer to sensor module spec -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- refer to sensor module spec, can't be 0 if af is available -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/> <!-- BACK or FRONT -->
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/> <!-- SHOULD NOT EDIT -->
+            <request.pipelineMaxDepth value="4"/> <!-- could be increased -->
+            <request.maxNumInputStreams value="0"/> <!-- SHOULD NOT EDIT -->
+            <request.partialResultCount value="1"/> <!-- SHOULD NOT EDIT -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+            <request.availableCharacteristicsKeys value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/> <!-- not greater than 4.0 -->
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/> <!-- SHOULD NOT EDIT -->
+            <scaler.croppingType value="CENTER_ONLY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.info.timestampSource value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- SHOULD NOT EDIT -->
+            <sensor.blackLevelPattern value="0,0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.orientation value="90"/> <!-- 0,90,180 or 270 -->
+            <sensor.profileHueSatMapDimensions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/> <!-- SHOULD NOT EDIT -->
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/> <!-- SHOULD NOT EDIT -->
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.histogramBucketCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.maxFaceCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableHotPixelMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableLensShadingMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/> <!-- TRUE if flash is available -->
+            <flash.info.chargeDuration value="1000000"/> <!-- SHOULD NOT EDIT -->
+            <flash.maxEnergy value="10"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/> <!-- SHOULD NOT EDIT -->
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="1920x1080"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- skip frames when streaming on -->
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+  <Profiles cameraId="0" name="usbacm-video-control" moduleId="m00">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+	
+            <!-- <control.aeAvailableTargetFpsRanges value="15,30,30,30,60,60"/> -->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/>
+	
+            <!-- JPEG -->
+            <jpeg.maxSize value="19267584"/>  <!-- w*h*1.5 -->
+            <!-- /* TODO */ -->
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <!-- buf hw encode may not support such thumbnail size, so if we should change the jpeg output size? -->
+            <jpeg.availableThumbnailSizes value="0,0,128,96,160,96,160,120,256,196"/>
+            <!-- <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/> -->
+	
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/>
+			<scaler.availableStreamConfigurations value="
+				BLOB,2560x1440,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,352x288,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,2560x1440,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,352x288,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,2560x1440,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,352x288,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT"/>
+			<scaler.availableMinFrameDurations value="
+				BLOB,2560x1440,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,352x288,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,2560x1440,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                IMPLEMENTATION_DEFINED,2560x1440,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,352x288,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" />
+			<scaler.availableStallDurations value="
+												   BLOB,2560x1440,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,352x288,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" />
+            <!-- Sensor Info -->
+            <sensor.info.activeArraySize value="0,0,2560,1440"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+            <sensor.info.exposureTimeRange value="100000,333333330"/>
+            <sensor.info.maxFrameDuration value="66666666"/>
+            <sensor.info.pixelArraySize value="2560x1440"/>
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!--************************AUTO GENERATE END*************************-->
+						   	
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/>
+            <!-- Control -->
+            <control.availableModes value="AUTO"/>
+            <control.aeAvailableAntibandingModes value="OFF,50HZ,60Hz,AUTO"/>
+            <control.aeAvailableModes value="ON"/>
+            <control.aeLockAvailable value="FALSE"/>
+            <control.aeCompensationRange value="-6,6"/>
+            <control.aeCompensationStep value="1,3"/>
+            <control.afAvailableModes value="OFF"/>
+            <control.availableEffects value="OFF"/>
+            <!-- <control.awbAvailableModes value="AUTO"/> -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/>
+            <control.awbLockAvailable value="false"/>
+            <control.availableSceneModes value="DISABLED"/>
+            <control.availableVideoStabilizationModes value="OFF"/>
+            <control.maxRegions value="1,0,1"/>
+            <!-- Lens Info-->
+            <!-- TODO: availableApertures now is fake for we do not get the real apertures -->
+            <lens.info.availableApertures value="2.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- OPTIONS: OFF, ON -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/>
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/>
+            <request.pipelineMaxDepth value="4"/>
+            <request.maxNumInputStreams value="0"/>
+            <request.partialResultCount value="1"/>
+            <!-- <request.availableCapabilities value="BACKWARD_COMPATIBLE,YUV_REPROCESSING,PRIVATE_REPROCESSING"/> -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/>
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+            <request.availableCharacteristicsKeys value="0"/>
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/>
+
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+            <sensor.orientation value="90"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/>
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/>
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/>
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/>
+            <statistics.info.histogramBucketCount value="0"/>
+            <statistics.info.maxFaceCount value="0"/>
+            <statistics.info.availableHotPixelMapModes value="OFF"/>
+            <statistics.info.availableLensShadingMapModes value="OFF"/>
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/>
+            <flash.maxEnergy value="0"/>
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/>
+            <flash.info.chargeDuration value="1000000"/>
+            <flash.maxEnergy value="10"/>
+            <!-- Sync -->
+            <sync.maxLatency value="PER_FRAME_CONTROL"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/>
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/>
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/>
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+	
+            <supportTuningSize value="2560x1440"/>
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+	    
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_SOC"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="3"/> <!-- camera3 HAL CPF parameters moved here end-->
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles> 
+    <!-- SOC SENSOR REFERENCE SETTING -->
+    <Profiles cameraId="1" name="gc2145" moduleId="m01">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/> <!-- SHOULD NOT EDIT -->
+        </Supported_hardware>
+
+       <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <control.aeAvailableTargetFpsRanges value="15,20,20,20,15,30,30,30"/> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <!-- JPEG -->
+            <jpeg.maxSize value="2880000"/> <!-- not less than max_blob_width*max_blob_height*3/2 -->
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,128,96,160,96,160,120"/>
+            <scaler.availableStreamConfigurations value="
+                BLOB,1600x1200,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,352x288,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,1600x1200,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,352x288,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,1600x1200,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,352x288,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableMinFrameDurations value="
+                BLOB,1600x1200,50125313,
+                BLOB,1280x720,50125313,
+                BLOB,640x480,33333333,
+                BLOB,352x288,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,1600x1200,50125313,
+                YCbCr_420_888,1280x720,50125313,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,352x288,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,1600x1200,50125313,
+                IMPLEMENTATION_DEFINED,1280x720,50125313,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,352x288,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableStallDurations value="
+                                                   BLOB,1600x1200,50125313,
+                                                   BLOB,1280x720,50125313,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,352x288,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <sensor.info.activeArraySize value="0,0,1600,1200"/> <!-- sensor max output frame size,left & top should be 0 -->
+            <sensor.info.sensitivityRange value="32,2400"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.exposureTimeRange value="100000,200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.maxFrameDuration value="200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.pixelArraySize value="1600x1200"/> <!-- sensor max output frame size -->
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- SHOULD NOT EDIT -->
+            <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Control -->
+            <control.availableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.aeAvailableAntibandingModes value="AUTO"/> <!-- SHOULD NOT EDIT --> 
+            <control.aeAvailableModes value="ON"/> <!-- add ON_AUTO_FLASH,ON_ALWAYS_FLASH if flash is available -->
+            <control.aeLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+
+            <control.aeCompensationRange value="0,0"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.aeCompensationStep value="0,1"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.afAvailableModes value="OFF"/> <!-- set to OFF if af is not available -->
+            <control.availableEffects value="OFF"/> <!-- SHOULD NOT EDIT, not support any efffect now -->
+            <control.awbAvailableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.awbLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.availableSceneModes value="DISABLED"/> <!-- SHOULD NOT EDIT, not support any scene mode now -->
+            <control.availableVideoStabilizationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <control.maxRegions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+
+            <!-- Lens Info-->
+            <lens.info.availableApertures value="2.0"/> <!-- refer to sensor module spec -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- refer to sensor module spec -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.minimumFocusDistance value="0.0"/> <!-- refer to sensor module spec, can't be 0 if af is available -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/> <!-- BACK or FRONT -->
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/> <!-- SHOULD NOT EDIT -->
+            <request.pipelineMaxDepth value="4"/> <!-- could be increased -->
+            <request.maxNumInputStreams value="0"/> <!-- SHOULD NOT EDIT -->
+            <request.partialResultCount value="1"/> <!-- SHOULD NOT EDIT -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+            <request.availableCharacteristicsKeys value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="3.0"/> <!-- not greater than 4.0 -->
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/> <!-- SHOULD NOT EDIT -->
+            <scaler.croppingType value="CENTER_ONLY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.info.timestampSource value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- SHOULD NOT EDIT -->
+            <sensor.blackLevelPattern value="0,0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.orientation value="90"/> <!-- 0,90,180 or 270 -->
+            <sensor.profileHueSatMapDimensions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/> <!-- SHOULD NOT EDIT -->
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/> <!-- SHOULD NOT EDIT -->
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.histogramBucketCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.maxFaceCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableHotPixelMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableLensShadingMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/> <!-- TRUE if flash is available -->
+            <flash.info.chargeDuration value="1000000"/> <!-- SHOULD NOT EDIT -->
+            <flash.maxEnergy value="10"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/> <!-- SHOULD NOT EDIT -->
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_SOC"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- skip frames when streaming on -->
+        </Sensor_info_RKISP1>
+    </Profiles>
+    <Profiles cameraId="1" name="gc0329" moduleId="m01">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/>
+            <!-- JPEG -->
+            <jpeg.maxSize value="2880000"/>  <!-- 1600*1200*1.5 -->
+            <jpeg.availableThumbnailSizes value="0,0,128,96,160,96,160,120"/>
+            <scaler.availableStreamConfigurations value="BLOB,640x480,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+				IMPLEMENTATION_DEFINED,320x240,OUTPUT" />
+            <scaler.availableMinFrameDurations value="BLOB,640x480,33333333,
+                BLOB,640x480,33333333,
+                BLOB,320x240,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,320x240,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333" />
+            <scaler.availableStallDurations value="BLOB,640x480,33333333,
+                BLOB,320x240,33333333" />
+            <sensor.info.activeArraySize value="0,0,640,480"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+            <sensor.info.exposureTimeRange value="100000,333333330"/>
+            <sensor.info.maxFrameDuration value="66666666"/>
+            <sensor.info.pixelArraySize value="640x480"/>
+            <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/>
+            <!-- Control -->
+            <control.availableModes value="AUTO"/>
+            <control.aeAvailableAntibandingModes value="AUTO"/>
+            <control.aeAvailableModes value="ON"/>
+            <control.aeLockAvailable value="FALSE"/>
+            <control.aeCompensationRange value="0,0"/>
+            <control.aeCompensationStep value="0,1"/>
+            <control.afAvailableModes value="OFF"/>
+            <control.availableEffects value="OFF"/>
+            <control.awbAvailableModes value="AUTO"/>
+            <control.awbLockAvailable value="FALSE"/>
+            <control.availableSceneModes value="DISABLED"/>
+            <control.availableVideoStabilizationModes value="OFF"/>
+            <control.maxRegions value="0,0,0"/>
+            <!-- Lens Info-->
+            <!-- TODO: availableApertures now is fake for we do not get the OV2685 real apertures -->
+            <lens.info.availableApertures value="2.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- OPTIONS: OFF, ON -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.minimumFocusDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!-- Lens -->
+            <lens.facing value="FRONT"/>
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/>
+            <request.pipelineMaxDepth value="6"/>
+            <request.maxNumInputStreams value="0"/>
+            <request.partialResultCount value="1"/>
+            <!-- <request.availableCapabilities value="BACKWARD_COMPATIBLE,YUV_REPROCESSING,PRIVATE_REPROCESSING"/> -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/>
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+            <request.availableCharacteristicsKeys value="0"/>
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="3.0"/>
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/>
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="GRBG"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+            <sensor.maxAnalogSensitivity value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.orientation value="0"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/>
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/>
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/>
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/>
+            <statistics.info.histogramBucketCount value="0"/>
+            <statistics.info.maxFaceCount value="0"/>
+            <statistics.info.availableHotPixelMapModes value="OFF"/>
+            <statistics.info.availableLensShadingMapModes value="OFF"/>
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/>
+            <flash.maxEnergy value="0"/>
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/>
+            <flash.info.chargeDuration value="1000000"/>
+            <flash.maxEnergy value="10"/>
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/>
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/>
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/>
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_SOC"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- should equal actual skipFrames - 2 for driver dropped 2 frames -->
+        </Sensor_info_RKISP1>
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+    <Profiles cameraId="1" name="gc0312" moduleId="m01">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <!-- JPEG -->
+            <jpeg.maxSize value="2880000"/> <!-- not less than max_blob_width*max_blob_height*3/2 -->
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,128,96,160,96,160,120"/>
+            <scaler.availableStreamConfigurations value="BLOB,640x480,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+				IMPLEMENTATION_DEFINED,320x240,OUTPUT" />
+            <scaler.availableMinFrameDurations value="BLOB,640x480,33333333,
+                BLOB,640x480,33333333,
+                BLOB,320x240,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,320x240,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333" />
+            <scaler.availableStallDurations value="BLOB,640x480,33333333,
+                BLOB,320x240,33333333" />
+            <sensor.info.activeArraySize value="0,0,640,480"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+            <sensor.info.exposureTimeRange value="100000,200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.maxFrameDuration value="200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.pixelArraySize value="640x480"/>
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Control -->
+            <control.availableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.aeAvailableAntibandingModes value="AUTO"/> <!-- SHOULD NOT EDIT --> 
+            <control.aeAvailableModes value="ON"/> <!-- add ON_AUTO_FLASH,ON_ALWAYS_FLASH if flash is available -->
+            <control.aeLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.aeCompensationRange value="0,0"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.aeCompensationStep value="0,1"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.afAvailableModes value="OFF"/> <!-- set to OFF if af is not available -->
+            <control.availableEffects value="OFF"/> <!-- SHOULD NOT EDIT, not support any efffect now -->
+            <control.awbAvailableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.awbLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.availableSceneModes value="DISABLED"/> <!-- SHOULD NOT EDIT, not support any scene mode now -->
+            <control.availableVideoStabilizationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <control.maxRegions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Lens Info-->
+            <lens.info.availableApertures value="2.0"/> <!-- refer to sensor module spec -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- refer to sensor module spec -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.minimumFocusDistance value="0.0"/> <!-- refer to sensor module spec, can't be 0 if af is available -->
+            <!-- Lens -->
+            <lens.facing value="BACK"/> <!-- BACK or FRONT -->
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/> <!-- SHOULD NOT EDIT -->
+            <request.pipelineMaxDepth value="4"/> <!-- could be increased -->
+            <request.maxNumInputStreams value="0"/> <!-- SHOULD NOT EDIT -->
+            <request.partialResultCount value="1"/> <!-- SHOULD NOT EDIT -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+            <request.availableCharacteristicsKeys value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="3.0"/> <!-- not greater than 4.0 -->
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/> <!-- SHOULD NOT EDIT -->
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="GRBG"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+            <sensor.orientation value="270"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/> <!-- SHOULD NOT EDIT -->
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/> <!-- SHOULD NOT EDIT -->
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.histogramBucketCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.maxFaceCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableHotPixelMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableLensShadingMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/> <!-- TRUE if flash is available -->
+            <flash.info.chargeDuration value="1000000"/> <!-- SHOULD NOT EDIT -->
+            <flash.maxEnergy value="10"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/> <!-- SHOULD NOT EDIT -->
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_SOC"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- skip frames when streaming on -->
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+    <Profiles cameraId="1" name="ov2718" moduleId="m01">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <!-- JPEG -->
+            <jpeg.maxSize value="20000000"/> <!-- not less than max_blob_width*max_blob_height*3/2 -->
+            /* TODO */
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/>
+            <scaler.availableStreamConfigurations value="BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,352x288,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,352x288,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,352x288,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableMinFrameDurations value="BLOB,1920x1080,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,352x288,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,1920x1080,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,352x288,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,1920x1080,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,352x288,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <scaler.availableStallDurations value="BLOB,1920x1080,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,352x288,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333" /> <!-- critical field, refer to doc camera_hal3_user_manual_vx.x.pdf -->
+            <sensor.info.activeArraySize value="0,0,1920,1080"/> <!-- sensor max output frame size,left & top should be 0 -->
+            <sensor.info.sensitivityRange value="32,2400"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.exposureTimeRange value="100000,200000000"/> <!-- COULD NOT EDIT, not unsed now -->
+            <sensor.info.maxFrameDuration value="200000000"/> <!-- COULD NOT EDIT, not unsed now --> 
+            <sensor.info.pixelArraySize value="1920x1080"/> <!-- sensor max output frame size -->
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- SHOULD NOT EDIT -->
+            <!--************************AUTO GENERATE END*************************-->
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Control -->
+            <control.availableModes value="AUTO"/> <!-- SHOULD NOT EDIT -->
+            <control.aeAvailableAntibandingModes value="50HZ,60Hz"/> <!-- SHOULD NOT EDIT, not support AUTO now -->
+            <control.aeAvailableModes value="ON"/> <!-- remove ON_AUTO_FLASH,ON_ALWAYS_FLASH if flash is not available-->
+            <control.aeLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.aeCompensationRange value="0,0"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.aeCompensationStep value="0,1"/> <!-- SHOULD NOT EDIT, not suppoted now -->
+            <control.afAvailableModes value="AUTO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,OFF"/> <!-- set to OFF if af is not available -->
+            <control.availableEffects value="OFF"/> <!-- SHOULD NOT EDIT, not support any efffect now -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/> <!-- SHOULD NOT EDIT -->
+            <control.awbLockAvailable value="FALSE"/> <!-- SHOULD NOT EDIT, not support TRUE now -->
+            <control.availableSceneModes value="DISABLED"/> <!-- SHOULD NOT EDIT, not support any scene mode now -->
+            <control.availableVideoStabilizationModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <control.maxRegions value="1,0,1"/> <!-- SHOULD NOT EDIT -->
+            <!-- Lens Info-->
+            <lens.info.availableApertures value="2.0"/> <!-- refer to sensor module spec -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- refer to sensor module spec -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- SHOULD NOT EDIT -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- refer to sensor module spec, can't be 0 if af is available -->
+            <!-- Lens -->
+            <lens.facing value="FRONT"/> <!-- BACK or FRONT -->
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/> <!-- SHOULD NOT EDIT -->
+            <request.pipelineMaxDepth value="4"/> <!-- could be increased -->
+            <request.maxNumInputStreams value="0"/> <!-- SHOULD NOT EDIT -->
+            <request.partialResultCount value="1"/> <!-- SHOULD NOT EDIT -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/> <!-- SHOULD NOT EDIT -->
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/> <!-- SHOULD NOT EDIT -->
+            <request.availableCharacteristicsKeys value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/> <!-- not greater than 4.0 -->
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/> <!-- SHOULD NOT EDIT -->
+            <scaler.croppingType value="CENTER_ONLY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- SHOULD NOT EDIT, not unsed now -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.info.timestampSource value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- SHOULD NOT EDIT -->
+            <sensor.blackLevelPattern value="0,0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.orientation value="90"/> <!-- 0,90,180 or 270 -->
+            <sensor.profileHueSatMapDimensions value="0,0,0"/> <!-- SHOULD NOT EDIT -->
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/> <!-- SHOULD NOT EDIT -->
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/> <!-- SHOULD NOT EDIT -->
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.histogramBucketCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.maxFaceCount value="0"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableHotPixelMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <statistics.info.availableLensShadingMapModes value="OFF"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/> <!-- SHOULD NOT EDIT -->
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/> <!-- TRUE if flash is available -->
+            <flash.info.chargeDuration value="1000000"/> <!-- SHOULD NOT EDIT -->
+            <flash.maxEnergy value="10"/> <!-- SHOULD NOT EDIT -->
+            <!-- Sync -->
+            <sync.maxLatency value="UNKNOWN"/> <!-- SHOULD NOT EDIT -->
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/> <!-- SHOULD NOT EDIT -->
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/> <!-- SHOULD NOT EDIT -->
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="1920x1080"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- skip frames when streaming on -->
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+    <Profiles cameraId="0" name="gc2355" moduleId="m01">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!-- <control.aeAvailableTargetFpsRanges value="15,30,30,30,60,60"/> -->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/>
+	    
+            <!--************************AUTO GENERATE START*************************-->
+            <!-- JPEG -->
+            <jpeg.maxSize value="2880000"/>   <!-- 1600*1200*1.5 -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/> <!-- INCREASING ORDER -->
+            <scaler.availableStreamConfigurations value="BLOB,1600x1200,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,800x600,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                BLOB,176x144,OUTPUT,
+                YCbCr_420_888,1600x1200,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,800x600,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                YCbCr_420_888,176x144,OUTPUT,
+                IMPLEMENTATION_DEFINED,1600x1200,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,800x600,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+                IMPLEMENTATION_DEFINED,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,176x144,OUTPUT" />
+            <scaler.availableMinFrameDurations value="BLOB,1600x1200,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,800x600,33333333,
+                BLOB,640x480,33333333,
+                BLOB,320x240,33333333,
+                BLOB,176x144,33333333,
+                YCbCr_420_888,1600x1200,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,800x600,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,320x240,33333333,
+                YCbCr_420_888,176x144,33333333,
+                IMPLEMENTATION_DEFINED,1600x1200,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,800x600,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333,
+                IMPLEMENTATION_DEFINED,176x144,33333333"/>
+            <scaler.availableStallDurations value="BLOB,1600x1200,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,800x600,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,320x240,33333333,
+                                                   BLOB,176x144,33333333"/>
+            <sensor.info.activeArraySize value="0,0,1600,1200"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+
+            <sensor.info.exposureTimeRange value="100000,133333333"/>
+            <sensor.info.maxFrameDuration value="66666666"/>
+
+            <sensor.info.pixelArraySize value="1600x1200"/>
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!--************************AUTO GENERATE END*************************-->
+	
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/>
+            <!-- Control -->
+            <control.availableModes value="AUTO"/>
+            <control.aeAvailableAntibandingModes value="OFF,50HZ,60Hz,AUTO"/>
+            <control.aeAvailableModes value="ON,OFF"/>
+            <control.aeLockAvailable value="FALSE"/>
+            <control.aeCompensationRange value="-6,6"/>
+            <control.aeCompensationStep value="1,3"/>
+            <control.afAvailableModes value="OFF,AUTO,MACRO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,EDOF"/>
+            <control.availableEffects value="OFF"/>
+            <!-- <control.awbAvailableModes value="AUTO"/> -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/>
+            <control.awbLockAvailable value="true"/>
+            <control.availableSceneModes value="DISABLED"/>
+            <control.availableVideoStabilizationModes value="OFF"/>
+            <control.maxRegions value="1,0,1"/>
+            <!-- Lens Info-->
+            <!-- TODO: availableApertures now is fake for we do not get the real apertures -->
+            <lens.info.availableApertures value="2.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- OPTIONS: OFF, ON -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!-- Lens -->
+            <lens.facing value="FRONT"/>
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/>
+            <request.pipelineMaxDepth value="4"/>
+            <request.maxNumInputStreams value="0"/>
+            <request.partialResultCount value="1"/>
+            <!-- <request.availableCapabilities value="BACKWARD_COMPATIBLE,YUV_REPROCESSING,PRIVATE_REPROCESSING"/> -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/>
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+            <request.availableCharacteristicsKeys value="0"/>
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/>
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/>
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="RGGB"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+            <sensor.orientation value="90"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/>
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/>
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/>
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/>
+            <statistics.info.histogramBucketCount value="0"/>
+            <statistics.info.maxFaceCount value="0"/>
+            <statistics.info.availableHotPixelMapModes value="OFF"/>
+            <statistics.info.availableLensShadingMapModes value="OFF"/>
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/>
+            <flash.maxEnergy value="0"/>
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/>
+            <flash.info.chargeDuration value="1000000"/>
+            <flash.maxEnergy value="10"/>
+            <!-- Sync -->
+            <sync.maxLatency value="PER_FRAME_CONTROL"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/>
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/>
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/>
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="1600x1200"/> <!-- refer to IQ file -->
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+	    
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+
+            <frame.initialSkip value="3"/> <!-- camera3 HAL CPF parameters moved here end-->
+
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+    <Profiles cameraId="1" name="ov4689" moduleId="m01">
+        <Supported_hardware>
+            <hwType value="SUPPORTED_HW_RKISP1"/>
+        </Supported_hardware>
+
+        <Android_metadata> <!-- Android static metadata only -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+	
+            <!-- <control.aeAvailableTargetFpsRanges value="15,30,30,30,60,60"/> -->
+            <control.aeAvailableTargetFpsRanges value="15,30,30,30"/>
+	
+            <!-- JPEG -->
+            <jpeg.maxSize value="6128640"/>  <!-- w*h*1.5 -->
+            <!-- /* TODO  */ -->
+            <!-- The aspect ratio of the largest thumbnail size will be same as the aspect ratio of largest JPEG output size -->
+            <jpeg.availableThumbnailSizes value="0,0,160,120,320,180,320,240"/> <!-- INCREASING ORDER -->
+            <scaler.availableStreamConfigurations value="BLOB,2688x1520,OUTPUT,
+                BLOB,1920x1080,OUTPUT,
+                BLOB,1280x960,OUTPUT,
+                BLOB,1280x720,OUTPUT,
+                BLOB,640x480,OUTPUT,
+                BLOB,320x240,OUTPUT,
+                YCbCr_420_888,2688x1520,OUTPUT,
+                YCbCr_420_888,1920x1080,OUTPUT,
+                YCbCr_420_888,1280x960,OUTPUT,
+                YCbCr_420_888,1280x720,OUTPUT,
+                YCbCr_420_888,640x480,OUTPUT,
+                YCbCr_420_888,320x240,OUTPUT,
+                IMPLEMENTATION_DEFINED,2688x1520,OUTPUT,
+                IMPLEMENTATION_DEFINED,1920x1080,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x960,OUTPUT,
+                IMPLEMENTATION_DEFINED,1280x720,OUTPUT,
+                IMPLEMENTATION_DEFINED,640x480,OUTPUT,
+				IMPLEMENTATION_DEFINED,320x240,OUTPUT" />
+            <scaler.availableMinFrameDurations value="BLOB,2688x1520,33333333,
+                BLOB,1920x1080,33333333,
+                BLOB,1280x960,33333333,
+                BLOB,1280x720,33333333,
+                BLOB,640x480,33333333,
+                BLOB,320x240,33333333,
+                YCbCr_420_888,2688x1520,33333333,
+                YCbCr_420_888,1920x1080,33333333,
+                YCbCr_420_888,1280x960,33333333,
+                YCbCr_420_888,1280x720,33333333,
+                YCbCr_420_888,640x480,33333333,
+                YCbCr_420_888,320x240,33333333,
+                IMPLEMENTATION_DEFINED,2688x1520,33333333,
+                IMPLEMENTATION_DEFINED,1920x1080,33333333,
+                IMPLEMENTATION_DEFINED,1280x960,33333333,
+                IMPLEMENTATION_DEFINED,1280x720,33333333,
+                IMPLEMENTATION_DEFINED,640x480,33333333,
+                IMPLEMENTATION_DEFINED,320x240,33333333" />
+            <scaler.availableStallDurations value="BLOB,2688x1520,33333333,
+                                                   BLOB,1920x1080,33333333,
+                                                   BLOB,1280x960,33333333,
+                                                   BLOB,1280x720,33333333,
+                                                   BLOB,640x480,33333333,
+                                                   BLOB,320x240,33333333" />
+            <sensor.info.activeArraySize value="0,0,2688,1520"/>
+            <sensor.info.sensitivityRange value="32,2400"/>
+            <sensor.info.exposureTimeRange value="100000,333333330"/>
+            <sensor.info.maxFrameDuration value="66666666"/>
+            <sensor.info.pixelArraySize value="2688x1520"/>
+            <sensor.maxAnalogSensitivity value="2400"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!--************************AUTO GENERATE END*************************-->
+						   
+	
+            <!-- Color Correction -->
+            <colorCorrection.availableAberrationModes value="OFF"/>
+            <!-- Control -->
+            <control.availableModes value="AUTO"/>
+            <control.aeAvailableAntibandingModes value="OFF,50HZ,60Hz,AUTO"/>
+            <control.aeAvailableModes value="ON,OFF"/>
+            <control.aeLockAvailable value="FALSE"/>
+            <control.aeCompensationRange value="-6,6"/>
+            <control.aeCompensationStep value="1,3"/>
+            <control.afAvailableModes value="OFF,AUTO,MACRO,CONTINUOUS_VIDEO,CONTINUOUS_PICTURE,EDOF"/>
+            <control.availableEffects value="OFF"/>
+            <!-- <control.awbAvailableModes value="AUTO"/> -->
+            <control.awbAvailableModes value="AUTO,INCANDESCENT,FLUORESCENT,DAYLIGHT,CLOUDY_DAYLIGHT"/>
+            <control.awbLockAvailable value="false"/>
+            <control.availableSceneModes value="DISABLED"/>
+            <control.availableVideoStabilizationModes value="OFF"/>
+            <control.maxRegions value="1,0,1"/>
+            <!-- Lens Info-->
+            <!-- TODO: availableApertures now is fake for we do not get the real apertures -->
+            <lens.info.availableApertures value="2.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableFocalLengths value="2.04"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.availableOpticalStabilization value="OFF"/> <!-- OPTIONS: OFF, ON -->
+            <lens.info.hyperfocalDistance value="0.0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <lens.info.minimumFocusDistance value="0.1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <!-- Lens -->
+            <lens.facing value="FRONT"/>
+            <!-- Request -->
+            <request.maxNumOutputStreams value="1,2,1"/>
+            <request.pipelineMaxDepth value="4"/>
+            <request.maxNumInputStreams value="0"/>
+            <request.partialResultCount value="1"/>
+            <!-- <request.availableCapabilities value="BACKWARD_COMPATIBLE,YUV_REPROCESSING,PRIVATE_REPROCESSING"/> -->
+            <request.availableCapabilities value="BACKWARD_COMPATIBLE"/>
+            <request.availableRequestKeys value="blackLevel.lock,
+                colorCorrection.aberrationMode,
+                colorCorrection.gains,
+                colorCorrection.transform,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.aeRegions,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.aperture,
+                lens.focalLength,
+                lens.opticalStabilizationMode,
+                noiseReduction.mode,
+                scaler.cropRegion,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+
+            <request.availableResultKeys value="colorCorrection.mode,
+                colorCorrection.transform,
+                colorCorrection.gains,
+                colorCorrection.aberrationCorrectionMode,
+                control.aeAntibandingMode,
+                control.aeExposureCompensation,
+                control.aeLock,
+                control.aeMode,
+                control.aeTargetFpsRange,
+                control.aePrecaptureTrigger,
+                control.afMode,
+                control.afRegions,
+                control.afTrigger,
+                control.awbLock,
+                control.awbMode,
+                control.captureIntent,
+                control.effectMode,
+                control.mode,
+                control.sceneMode,
+                control.videoStabilizationMode,
+                control.aeState,
+                control.afState,
+                control.awbState,
+                sync.frameNumber,
+                edge.mode,
+                flash.mode,
+                jpeg.gpsLocation,
+                jpeg.orientation,
+                jpeg.quality,
+                jpeg.thumbnailQuality,
+                jpeg.thumbnailSize,
+                lens.focalLength,
+                lens.aperture,
+                lens.opticalStabilizationMode,
+                request.pipelineDepth,
+                scaler.cropRegion,
+                sensor.testPatternData,
+                sensor.testPatternMode,
+                sensor.timestamp,
+                sensor.frameDuration,	
+                sensor.rollingShutterSkew,
+                statistics.faceDetectMode,
+                statistics.hotPixelMapMode,
+                statistics.faces,
+                noiseReduction.mode,
+                statistics.sceneFlicker,
+                statistics.lensShadingMapMode
+                "/>
+            <request.availableCharacteristicsKeys value="0"/>
+            <!-- Scaler -->
+            <scaler.availableMaxDigitalZoom value="4.0"/>
+            <scaler.availableInputOutputFormatsMap value="IMPLEMENTATION_DEFINED,2,YCbCr_420_888,BLOB,YCbCr_420_888,2,YCbCr_420_888,BLOB"/>
+            <scaler.croppingType value="CENTER_ONLY"/>
+            <!-- Sensor Info -->
+            <sensor.info.colorFilterArrangement value="BGGR"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.physicalSize value="5.5,4.5"/> <!-- 4224x1.12um 3136x1.12um -->
+            <sensor.info.whiteLevel value="0"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.info.timestampSource value="UNKNOWN"/>
+            <!-- Sensor -->
+            <sensor.baseGainFactor value="0,1"/> <!-- HAL may override this value from CMC for RAW sensors -->
+            <sensor.blackLevelPattern value="0,0,0,0"/>
+            <sensor.orientation value="90"/>
+            <sensor.profileHueSatMapDimensions value="0,0,0"/>
+            <sensor.availableTestPatternModes value="OFF,COLOR_BARS"/>
+            <!-- Info -->
+            <info.supportedHardwareLevel value="LIMITED"/>
+            <!-- shading -->
+            <!-- <shading.availableModes value="OFF"/> -->
+            <!-- Statistics Info -->
+            <statistics.info.availableFaceDetectModes value="OFF"/>
+            <statistics.info.histogramBucketCount value="0"/>
+            <statistics.info.maxFaceCount value="0"/>
+            <statistics.info.availableHotPixelMapModes value="OFF"/>
+            <statistics.info.availableLensShadingMapModes value="OFF"/>
+            <!-- Flash -->
+            <flash.colorTemperature value="0"/>
+            <flash.maxEnergy value="0"/>
+            <!-- Flash info -->
+            <flash.info.available value="FALSE"/>
+            <flash.info.chargeDuration value="1000000"/>
+            <flash.maxEnergy value="10"/>
+            <!-- Sync -->
+            <sync.maxLatency value="PER_FRAME_CONTROL"/>
+            <!-- maxCaptureStall -->
+            <reprocess.maxCaptureStall value="4"/>
+            <!-- Edge -->
+            <edge.availableEdgeModes value="OFF,FAST,HIGH_QUALITY"/>
+            <!-- Noise Reduction -->
+            <noiseReduction.availableNoiseReductionModes value="OFF,FAST,HIGH_QUALITY"/>
+
+        </Android_metadata>
+
+<!-- ******************PSL specific section start **************************************************************-->
+        <Hal_tuning_RKISP1> <!-- Parameters to tune the HAL and hacks for the HAL that are camera dependent -->
+            <!-- if forceAutoGenAndroidMetas is configred "true", those settings below between 'AUTO GENERATE START' -->
+            <!--and 'AUTO GENERATE END' will be covered by CameraHal, if you want to configure manually, you must set-->
+            <!-- forceAutoGenAndroidMetas to "false" firstly, this feature is supported from CameraHal version 2.1.0-->
+            <!--************************AUTO GENERATE START*************************-->
+            <supportTuningSize value="2688x1520"/>
+            <!--************************AUTO GENERATE END*************************-->
+            <forceAutoGenAndroidMetas value="false"/>
+        </Hal_tuning_RKISP1>
+
+        <Sensor_info_RKISP1> <!-- Information that parametrizes the behavior or qualities of the physical sensor -->
+            <sensorType value="SENSOR_TYPE_RAW"/> <!-- SENSOR_TYPE_SOC or SENSOR_TYPE_RAW -->
+            <frame.initialSkip value="0"/> <!-- should equal actual skipFrames - 2 for driver dropped 2 frames -->
+
+        </Sensor_info_RKISP1>
+
+<!-- ******************PSL specific section end **************************************************************-->
+    </Profiles>
+    <hal_tuning> <!-- Parameters to tune the HAL that are camera independent but common across PSL's -->
+        <!-- gfxHalToV4L2PixelFmtTable
+          This table encodes the agreement between the Camera HAL and the
+          Gfx and video HAL's. It maps the gfxHAL pixel formats (that the client
+          can request for a stream) to concrete V4L2 pixel formats that
+          the Camera HW can provide.
+          This is needed for several reasons:
+          - the pixel layout is not well defined (implementation_defined)
+          - the pixel layout changes from sensor to sensor (RAW)
+          Most entries are camera independent but some are not.
+          For camera dependent entries sensorId field is used.
+        -->
+        <gfxHalToV4L2PixelFmtTable.impl_defined_preview value="V4L2_PIX_FMT_NV12"/> <!-- SHOULD NOT EDIT -->
+        <gfxHalToV4L2PixelFmtTable.impl_defined_video value="V4L2_PIX_FMT_NV12"/> <!-- SHOULD NOT EDIT -->
+        <gfxHalToV4L2PixelFmtTable.raw_sensor sensorId="0" value="V4L2_PIX_FMT_SBGGR10"/> <!-- SHOULD NOT EDIT -->
+        <gfxHalToV4L2PixelFmtTable.ycbcr_420_888 value="V4L2_PIX_FMT_NV12"/> <!-- SHOULD NOT EDIT -->
+    </hal_tuning>
+</CameraSettings>

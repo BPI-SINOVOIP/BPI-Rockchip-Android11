@@ -1,0 +1,57 @@
+on early-boot
+
+    mkdir /mnt/vendor/persist/haptics 0770 system system
+    chmod 770 /mnt/vendor/persist/haptics
+    chmod 440 /mnt/vendor/persist/haptics/cs40l25a.cal
+    chown system system /mnt/vendor/persist/haptics
+    chown system system /mnt/vendor/persist/haptics/cs40l25a.cal
+
+    chown system system /sys/class/leds/vibrator/device/asp_enable
+    chown system system /sys/class/leds/vibrator/device/comp_enable
+    chown system system /sys/class/leds/vibrator/device/cp_dig_scale
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_duration
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_index
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_q_sub
+    chown system system /sys/class/leds/vibrator/device/cp_trigger_queue
+    chown system system /sys/class/leds/vibrator/device/dig_scale
+    chown system system /sys/class/leds/vibrator/device/exc_enable
+    chown system system /sys/class/leds/vibrator/device/f0_stored
+    chown system system /sys/class/leds/vibrator/device/fw_rev
+    chown system system /sys/class/leds/vibrator/device/gpio1_fall_dig_scale
+    chown system system /sys/class/leds/vibrator/device/gpio1_fall_index
+    chown system system /sys/class/leds/vibrator/device/gpio1_rise_dig_scale
+    chown system system /sys/class/leds/vibrator/device/gpio1_rise_index
+    chown system system /sys/class/leds/vibrator/device/heartbeat
+    chown system system /sys/class/leds/vibrator/device/hw_reset
+    chown system system /sys/class/leds/vibrator/device/num_waves
+    chown system system /sys/class/leds/vibrator/device/q_stored
+    chown system system /sys/class/leds/vibrator/device/redc_comp_enable
+    chown system system /sys/class/leds/vibrator/device/redc_stored
+    chown system system /sys/class/leds/vibrator/device/standby_timeout
+    chown system system /sys/class/leds/vibrator/device/vbatt_max
+    chown system system /sys/class/leds/vibrator/device/vbatt_min
+    chown system system /sys/class/leds/vibrator/device/vibe_state
+
+service vendor.vibrator.cs40l25 /vendor/bin/hw/android.hardware.vibrator-service.cs40l25
+    class hal
+    user system
+    group system
+
+    setenv PROPERTY_PREFIX ro.vibrator.hal.
+    setenv CALIBRATION_FILEPATH /mnt/vendor/persist/haptics/cs40l25a.cal
+
+    setenv HWAPI_PATH_PREFIX /sys/class/leds/vibrator/
+    setenv HWAPI_DEBUG_PATHS "
+        device/asp_enable
+        device/f0_stored
+        device/fw_rev
+        device/gpio1_fall_dig_scale
+        device/gpio1_fall_index
+        device/gpio1_rise_dig_scale
+        device/gpio1_rise_index
+        device/heartbeat
+        device/num_waves
+        device/q_stored
+        device/redc_stored
+        state
+        "

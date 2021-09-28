@@ -1,0 +1,26 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.util"
+        },
+        {
+          "include-filter": "org.apache.harmony.tests.java.util"
+        }
+      ]
+    },
+    {
+      "name": "CtsLibcoreOjTestCases",
+      "options": [
+        {
+          "include-filter": "test.java.util"
+        },
+        {
+          "include-filter": "org.openjdk.tests.java.util"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+//
+// Copyright (C) 2017 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+bootstrap_go_package {
+    name: "soong-libcameradevice",
+    pkgPath: "android/soong/libcameradevice",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+          "Android.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_libcameradevice {
+   name: "cc_libcameradevice_defaults"
+}
+
+cc_library_headers {
+    name: "camera.device@3.4-impl_headers",
+    vendor: true,
+    export_include_dirs: ["include/device_v3_4_impl"],
+}
+
+cc_library_headers {
+    name: "camera.device@3.4-external-impl_headers",
+    vendor: true,
+    export_include_dirs: ["include/ext_device_v3_4_impl"],
+}
+
+cc_library_shared {
+    name: "camera.device@3.4-impl",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+    vendor: true,
+    srcs: [
+        "CameraDevice.cpp",
+        "CameraDeviceSession.cpp",
+        "convert.cpp",
+    ],
+    shared_libs: [
+        "libhidlbase",
+        "libutils",
+        "libcutils",
+        "camera.device@3.2-impl",
+        "camera.device@3.3-impl",
+        "android.hardware.camera.device@3.2",
+        "android.hardware.camera.device@3.3",
+        "android.hardware.camera.device@3.4",
+        "android.hardware.camera.provider@2.4",
+        "android.hardware.graphics.mapper@2.0",
+        "android.hardware.graphics.mapper@3.0",
+        "android.hardware.graphics.mapper@4.0",
+        "liblog",
+        "libgralloctypes",
+        "libhardware",
+        "libcamera_metadata",
+        "libfmq",
+    ],
+    static_libs: [
+        "android.hardware.camera.common@1.0-helper",
+    ],
+    local_include_dirs: ["include/device_v3_4_impl"],
+    export_shared_lib_headers: [
+        "libfmq",
+    ],
+}
+
+cc_library_shared {
+    name: "camera.device@3.4-external-impl",
+    defaults: [
+        "hidl_defaults",
+        "cc_libcameradevice_defaults"
+    ],
+    proprietary: true,
+    vendor: true,
+    srcs: [
+        "ExternalCameraDevice.cpp",
+        "ExternalCameraDeviceSession.cpp",
+        "ExternalFakeCameraDevice.cpp",
+        "ExternalFakeCameraDeviceSession.cpp",
+        "ExternalCameraUtils.cpp",
+        "RgaCropScale.cpp",
+        "ExternalCameraMemManager.cpp",
+        "rkvpu_dec_api.cpp"
+    ],
+    include_dirs: [
+        "hardware/rockchip/libhwjpeg/inc",
+        "hardware/rockchip/libhwjpeg/inc/mpp_inc",
+        "hardware/rockchip/librga",
+        "external/libdrm/include/drm",
+    ],
+    header_libs: [
+        "gl_headers",
+        "libbase_headers",
+        "libnativebase_headers",
+        "libhardware_headers",
+        "libui_headers",
+    ],
+    shared_libs: [
+        "libhidlbase",
+        "libutils",
+        "libcutils",
+        "camera.device@3.2-impl",
+        "camera.device@3.3-impl",
+        "android.hardware.camera.device@3.2",
+        "android.hardware.camera.device@3.3",
+        "android.hardware.camera.device@3.4",
+        "android.hardware.camera.provider@2.4",
+        "liblog",
+        "libgralloctypes",
+        "libhardware",
+        "libcamera_metadata",
+        "libfmq",
+        "libsync",
+        "libyuv",
+        "libjpeg",
+        "libexif",
+        "libtinyxml2",
+        "libui",
+        "librga",
+        "libhwjpeg",
+        "libvpu",
+        "libbase",
+        "android.hardware.graphics.allocator@2.0",
+        "android.hardware.graphics.allocator@3.0",
+        "android.hardware.graphics.allocator@4.0",
+        "android.hardware.graphics.common-ndk_platform",
+        "android.hardware.graphics.common@1.2",
+        "android.hardware.graphics.mapper@2.0",
+        "android.hardware.graphics.mapper@2.1",
+        "android.hardware.graphics.mapper@3.0",
+        "android.hardware.graphics.mapper@4.0",
+    ],
+    static_libs: [
+        "android.hardware.camera.common@1.0-helper",
+        "libgrallocusage",
+    ],
+    // bufferhub is not used when building libgui for vendors
+    target: {
+        vendor: {
+            cflags: ["-DLIBUI_IN_VNDK"],
+            exclude_srcs: [
+            ],
+            exclude_header_libs: [
+            ],
+            exclude_shared_libs: [
+            ],
+        },
+    },
+    cppflags: [
+        "-Wno-error",
+        "-Wno-unused",
+        "-DRK_HW_JPEG_DECODER",
+    ],
+    local_include_dirs: [
+        "include/ext_device_v3_4_impl",
+        "include/vpu_inc"],
+    export_shared_lib_headers: [
+        "libfmq",
+        "libhwjpeg",
+        "android.hardware.graphics.common@1.2",
+        "android.hardware.graphics.common-ndk_platform",
+        "android.hardware.graphics.mapper@4.0",
+        "android.hardware.graphics.allocator@4.0",
+        "libgralloctypes",
+    ],
+	min_sdk_version: "29",
+}

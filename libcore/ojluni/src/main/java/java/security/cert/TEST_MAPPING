@@ -1,0 +1,29 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "tests.security.cert"
+        },
+        {
+          "include-filter": "tests.targets.security.cert"
+        },
+        {
+          "include-filter": "com.android.org.conscrypt.java.security.cert"
+        },
+        {
+          "include-filter": "libcore.java.security.cert"
+        }
+      ]
+    },
+    {
+      "name": "CtsLibcoreOjTestCases",
+      "options": [
+        {
+          "include-filter": "test.java.security.cert"
+        }
+      ]
+    }
+  ]
+}

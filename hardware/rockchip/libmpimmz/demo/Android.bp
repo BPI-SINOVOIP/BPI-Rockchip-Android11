@@ -1,0 +1,38 @@
+cc_binary {
+    name: "mpimmz_rga_demo",
+    srcs: ["mpimmz_rga_demo.cpp"],
+    include_dirs: [
+        "hardware/rockchip/libmpimmz/include",
+        "hardware/rockchip/librga",
+        "hardware/libhardware/include",
+        "frameworks/native/libs/nativewindow/include",
+    ],
+    shared_libs: [
+        "libutils",
+        "librga",
+        "libmpimmz",
+        "libcutils",
+        "libui",
+        "libhardware",
+        "libnativewindow",
+    ],
+    cflags: ["-Werror"],
+}
+
+cc_binary {
+    name: "mpimmz_binder_demo",
+    srcs: ["mpimmz_binder_demo.cpp"],
+    include_dirs: [
+        "hardware/rockchip/libmpimmz/include",
+        "system/core/include",
+        "frameworks/native/include",
+    ],
+    shared_libs: [
+        "libutils",
+        "libcutils",
+        "libbinder",
+        "libmpimmz",
+    ],
+    cflags: ["-Werror"],
+}
+

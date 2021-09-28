@@ -1,0 +1,23 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.time.format"
+        }
+      ]
+    },
+    {
+      "name": "CtsLibcoreOjTestCases",
+      "options": [
+        {
+          "include-filter": "tck.java.time.format"
+        },
+        {
+          "include-filter": "test.java.time.format"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+// Signature format: 2.0
+package dalvik.annotation.compat {
+
+  @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public class VersionCodes {
+    field @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public static final int Q = 29; // 0x1d
+  }
+
+}
+
+package dalvik.system {
+
+  @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public final class BlockGuard {
+    method @NonNull @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public static dalvik.system.BlockGuard.Policy getThreadPolicy();
+  }
+
+  @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public static interface BlockGuard.Policy {
+    method @libcore.api.IntraCoreApi public void onNetwork();
+  }
+
+  @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public final class CloseGuard {
+    method @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public void close();
+    method @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public static dalvik.system.CloseGuard get();
+    method @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public void open(String);
+    method @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public void warnIfOpen();
+  }
+
+}
+
+package java.net {
+
+  public class Socket implements java.io.Closeable {
+    method public java.io.FileDescriptor getFileDescriptor$();
+  }
+
+}
+
+package java.security.spec {
+
+  public class ECParameterSpec implements java.security.spec.AlgorithmParameterSpec {
+    method public String getCurveName();
+    method public void setCurveName(String);
+  }
+
+}
+
+package libcore.api {
+
+  @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.SOURCE) @java.lang.annotation.Target({java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.ANNOTATION_TYPE}) @libcore.api.IntraCoreApi public @interface CorePlatformApi {
+  }
+
+  @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.SOURCE) @java.lang.annotation.Target({java.lang.annotation.ElementType.TYPE, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.ANNOTATION_TYPE}) @libcore.api.IntraCoreApi public @interface IntraCoreApi {
+  }
+
+}
+
+package libcore.io {
+
+  @libcore.api.IntraCoreApi public final class AsynchronousCloseMonitor {
+    method @libcore.api.IntraCoreApi public static void signalBlockedThreads(java.io.FileDescriptor);
+  }
+
+}
+
+package libcore.net {
+
+  @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public abstract class NetworkSecurityPolicy {
+    method @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public static libcore.net.NetworkSecurityPolicy getInstance();
+    method @libcore.api.CorePlatformApi @libcore.api.IntraCoreApi public abstract boolean isCertificateTransparencyVerificationRequired(String);
+  }
+
+}
+
+package libcore.util {
+
+  @java.lang.annotation.Documented @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.SOURCE) @java.lang.annotation.Target({java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.TYPE_USE}) @libcore.api.IntraCoreApi public @interface NonNull {
+  }
+
+}
+
+package sun.security.x509 {
+
+  public class AlgorithmId implements java.io.Serializable {
+    method public static sun.security.x509.AlgorithmId get(String) throws java.security.NoSuchAlgorithmException;
+    method public String getName();
+  }
+
+}
+

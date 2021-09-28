@@ -1,0 +1,33 @@
+//
+// SECTION 1: build test for jpeg decoder
+//
+
+cc_binary {
+    name: "jpegd_test",
+    vendor: true,
+    srcs: ["jpeg_dec_test.cpp"],
+    shared_libs: [
+        "liblog",
+        "libhwjpeg",
+    ],
+    header_libs: ["libhwjpeg_headers"],
+    export_header_lib_headers: ["libhwjpeg_headers"],
+    // compile_multilib: "32",
+}
+
+//
+// SECTION 2: build test for jpeg encoder
+//
+
+cc_binary {
+    name: "jpege_test",
+    vendor: true,
+    srcs: ["jpeg_enc_test.cpp"],
+    shared_libs: [
+        "liblog",
+        "libhwjpeg",
+    ],
+    header_libs: ["libhwjpeg_headers"],
+    export_header_lib_headers: ["libhwjpeg_headers"],
+    // compile_multilib: "32",
+}

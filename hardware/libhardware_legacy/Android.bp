@@ -1,0 +1,87 @@
+// Copyright 2006 The Android Open Source Project
+
+cc_library_headers {
+    name: "libhardware_legacy_headers",
+    vendor_available: true,
+    export_include_dirs: ["include"],
+
+    header_libs: ["libcutils_headers"],
+    export_header_lib_headers: ["libcutils_headers"],
+}
+
+cc_defaults {
+    name: "libpower_defaults",
+    defaults: ["system_suspend_defaults"],
+    cflags: [
+        "-Wexit-time-destructors",
+        "-fno-c++-static-destructors",
+    ],
+}
+
+cc_library {
+    name: "libpower",
+    defaults: ["libpower_defaults"],
+    srcs: ["power.cpp"],
+    export_include_dirs: ["include"],
+    shared_libs: ["android.system.suspend@1.0"],
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
+}
+
+cc_test {
+    name: "libpower_test",
+    defaults: ["libpower_defaults"],
+    srcs: ["power_test.cpp"],
+    static_libs: ["libpower"],
+    shared_libs: [
+        "android.system.suspend@1.0",
+        "suspend_control_aidl_interface-cpp",
+    ],
+    test_suites: ["device-tests"],
+    require_root: true,
+}
+
+cc_library_shared {
+    name: "libhardware_legacy",
+    defaults: ["libpower_defaults"],
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
+
+    shared_libs: [
+        "android.system.suspend@1.0",
+        "libdl",
+    ],
+
+    header_libs: [
+        "libhardware_legacy_headers",
+    ],
+    export_header_lib_headers: ["libhardware_legacy_headers"],
+
+    export_include_dirs: ["include"],
+
+    cflags: [
+        "-DQEMU_HARDWARE",
+        "-Wall",
+        "-Werror",
+    ],
+
+    srcs: [
+        "power.cpp",
+        "uevent.c",
+    ],
+}
+
+cc_test {
+    name: "block_suspend",
+    defaults: ["libpower_defaults"],
+    srcs: ["block_suspend.cpp"],
+    static_libs: ["libpower"],
+    shared_libs: [
+        "android.system.suspend@1.0",
+    ],
+    gtest: false,
+}

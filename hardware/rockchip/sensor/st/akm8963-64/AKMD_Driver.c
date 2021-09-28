@@ -1,0 +1,575 @@
+/******************************************************************************
+ *
+ *  $Id: $
+ *
+ * -- Copyright Notice --
+ *
+ * Copyright (c) 2004 Asahi Kasei Microdevices Corporation, Japan
+ * All Rights Reserved.
+ *
+ * This software program is the proprietary program of Asahi Kasei Microdevices
+ * Corporation("AKM") licensed to authorized Licensee under the respective
+ * agreement between the Licensee and AKM only for use with AKM's electronic
+ * compass IC.
+ *
+ * THIS SOFTWARE IS PROVIDED TO YOU "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABLITY, FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT OF
+ * THIRD PARTY RIGHTS, AND WE SHALL NOT BE LIABLE FOR ANY LOSSES AND DAMAGES
+ * WHICH MAY OCCUR THROUGH USE OF THIS SOFTWARE.
+ *
+ * -- End Asahi Kasei Microdevices Copyright Notice --
+ *
+ ******************************************************************************/
+#include <fcntl.h>
+#include "AKCommon.h"		// DBGPRINT()
+#include "AKMD_Driver.h"
+#include "Acc_mma8452.h"
+
+#define AKM_MEASURE_RETRY_NUM	5
+int s_fdDev = -1;
+
+#ifdef AKMD_FOR_AK09911
+#define MSENSOR_NAME      "/dev/akm_dev"
+#else
+#define MSENSOR_NAME      "/dev/akm8963_dev"
+#endif
+
+#define GSENSOR_NAME      "/dev/gsensor"
+int g_file_acc = -1;
+
+/* Include proper acceleration file. */
+#ifdef AKMD_ACC_EXTERNAL
+#include "Acc_aot.h"
+static ACCFNC_INITDEVICE Acc_InitDevice		= AOT_InitDevice;
+static ACCFNC_DEINITDEVICE Acc_DeinitDevice = AOT_DeinitDevice;
+static ACCFNC_SET_ENABLE Acc_SetEnable		= AOT_SetEnable;
+static ACCFNC_SET_DELAY Acc_SetDelay		= AOT_SetDelay;
+static ACCFNC_GETACCDATA Acc_GetAccData		= AOT_GetAccData;
+static ACCFNC_GETACCOFFSET Acc_GetAccOffset	= AOT_GetAccOffset;
+static ACCFNC_GETACCVEC Acc_GetAccVector	= AOT_GetAccVector;
+
+#else
+#ifdef AKMD_ACC_ADXL346
+#include "Acc_adxl34x.h"
+static ACCFNC_INITDEVICE Acc_InitDevice		= ADXL_InitDevice;
+static ACCFNC_DEINITDEVICE Acc_DeinitDevice = ADXL_DeinitDevice;
+static ACCFNC_SET_ENABLE Acc_SetEnable		= ADXL_SetEnable;
+static ACCFNC_SET_DELAY Acc_SetDelay		= ADXL_SetDelay;
+static ACCFNC_GETACCDATA Acc_GetAccData		= ADXL_GetAccData;
+static ACCFNC_GETACCOFFSET Acc_GetAccOffset	= ADXL_GetAccOffset;
+static ACCFNC_GETACCVEC Acc_GetAccVector	= ADXL_GetAccVector;
+#endif
+#ifdef AKMD_ACC_KXTF9
+#include "Acc_kxtf9.h"
+static ACCFNC_INITDEVICE Acc_InitDevice		= KXTF9_InitDevice;
+static ACCFNC_DEINITDEVICE Acc_DeinitDevice = KXTF9_DeinitDevice;
+static ACCFNC_SET_ENABLE Acc_SetEnable		= KXTF9_SetEnable;
+static ACCFNC_SET_DELAY Acc_SetDelay		= KXTF9_SetDelay;
+static ACCFNC_GETACCDATA Acc_GetAccData		= KXTF9_GetAccData;
+static ACCFNC_GETACCOFFSET Acc_GetAccOffset	= KXTF9_GetAccOffset;
+static ACCFNC_GETACCVEC Acc_GetAccVector	= KXTF9_GetAccVector;
+#endif
+#ifdef AKMD_ACC_DUMMY
+#include "Acc_dummy.h"
+static ACCFNC_INITDEVICE Acc_InitDevice		= ACC_DUMMY_InitDevice;
+static ACCFNC_DEINITDEVICE Acc_DeinitDevice	= ACC_DUMMY_DeinitDevice;
+static ACCFNC_SET_ENABLE Acc_SetEnable		= ACC_DUMMY_SetEnable;
+static ACCFNC_SET_DELAY  Acc_SetDelay		= ACC_DUMMY_SetDelay;
+static ACCFNC_GETACCDATA Acc_GetAccData		= ACC_DUMMY_GetAccData;
+static ACCFNC_GETACCOFFSET Acc_GetAccOffset	= ACC_DUMMY_GetAccOffset;
+static ACCFNC_GETACCVEC Acc_GetAccVector	= ACC_DUMMY_GetAccVector;
+#endif
+#endif
+
+/*!
+ Open device driver.
+ This function opens both device drivers of magnetic sensor and acceleration
+ sensor. Additionally, some initial hardware settings are done, such as
+ measurement range, built-in filter function and etc.
+ @return If this function succeeds, the return value is #AKD_SUCCESS.
+ Otherwise the return value is #AKD_FAIL.
+ */
+int16_t AKD_InitDevice(void)
+{
+	if (s_fdDev < 0) {
+		// Open magnetic sensor's device driver.
+		//if ((s_fdDev = open("/dev/" AKM_MISCDEV_NAME, O_RDWR)) < 0) {
+		if ((s_fdDev = open(MSENSOR_NAME, O_RDWR)) < 0) {
+			AKMERROR_STR("open");
+			goto INIT_FAIL;
+		}
+	}
+#if 0
+	if (Acc_InitDevice() != AKD_SUCCESS) {
+		goto INIT_FAIL;
+	}
+#endif
+#if 0
+	if (g_file_acc < 0)
+	{
+		if((g_file_acc = open(GSENSOR_NAME, O_RDWR)) < 0)
+		{
+			AKMERROR_STR("open");
+			goto INIT_FAIL;
+		}
+	}
+#endif
+	return AKD_SUCCESS;
+
+INIT_FAIL:
+	AKD_DeinitDevice();
+	return AKD_FAIL;
+}
+
+/*!
+ Close device driver.
+ This function closes both device drivers of magnetic sensor and acceleration
+ sensor.
+ */
+void AKD_DeinitDevice(void)
+{
+	if (s_fdDev >= 0) {
+		close(s_fdDev);
+		s_fdDev = -1;
+	}
+#if 0
+	//Acc_DeinitDevice();
+	if (g_file_acc >= 0) {
+		close(g_file_acc);
+		g_file_acc = -1;
+	}
+#endif
+}
+
+/*!
+ Writes data to a register of the AKM E-Compass.  When more than one byte of
+ data is specified, the data is written in contiguous locations starting at an
+ address specified in \a address.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[in] address Specify the address of a register in which data is to be
+ written.
+ @param[in] data Specify data to write or a pointer to a data array containing
+ the data.  When specifying more than one byte of data, specify the starting
+ address of the array.
+ @param[in] numberOfBytesToWrite Specify the number of bytes that make up the
+ data to write.  When a pointer to an array is specified in data, this argument
+ equals the number of elements of the array.
+ */
+int16_t AKD_TxData(
+		const BYTE address,
+		const BYTE * data,
+		const uint16_t numberOfBytesToWrite)
+{
+	int i;
+	char buf[AKM_RWBUF_SIZE];
+
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (numberOfBytesToWrite > (AKM_RWBUF_SIZE-2)) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+
+	buf[0] = numberOfBytesToWrite + 1;
+	buf[1] = address;
+
+	for (i = 0; i < numberOfBytesToWrite; i++) {
+		buf[i + 2] = data[i];
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_WRITE, buf) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	} else {
+
+#if ENABLE_AKMDEBUG
+		AKMDEBUG(AKMDBG_MAGDRV, "MAGDRV: addr(HEX)=%02x data(HEX)=", address);
+		for (i = 0; i < numberOfBytesToWrite; i++) {
+			AKMDEBUG(AKMDBG_MAGDRV, " %02x", data[i]);
+		}
+		AKMDEBUG(AKMDBG_MAGDRV, "\n");
+#endif
+		return AKD_SUCCESS;
+	}
+}
+
+/*!
+ Acquires data from a register or the EEPROM of the AKM E-Compass.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[in] address Specify the address of a register from which data is to be
+ read.
+ @param[out] data Specify a pointer to a data array which the read data are
+ stored.
+ @param[in] numberOfBytesToRead Specify the number of bytes that make up the
+ data to read.  When a pointer to an array is specified in data, this argument
+ equals the number of elements of the array.
+ */
+int16_t AKD_RxData(
+		const BYTE address,
+		BYTE * data,
+		const uint16_t numberOfBytesToRead)
+{
+	int i;
+	char buf[AKM_RWBUF_SIZE];
+
+	memset(data, 0, numberOfBytesToRead);
+
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (numberOfBytesToRead > (AKM_RWBUF_SIZE-1)) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+
+	buf[0] = numberOfBytesToRead;
+	buf[1] = address;
+
+	if (ioctl(s_fdDev, ECS_IOCTL_READ, buf) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	} else {
+		for (i = 0; i < numberOfBytesToRead; i++) {
+			data[i] = buf[i + 1];
+		}
+#if ENABLE_AKMDEBUG
+		AKMDEBUG(AKMDBG_MAGDRV, "MAGDRV: addr(HEX)=%02x len=%d data(HEX)=",
+				address, numberOfBytesToRead);
+		for (i = 0; i < numberOfBytesToRead; i++) {
+			AKMDEBUG(AKMDBG_MAGDRV, " %02x", data[i]);
+		}
+		AKMDEBUG(AKMDBG_MAGDRV, "\n");
+#endif
+		return AKD_SUCCESS;
+	}
+}
+
+/*!
+ Reset the e-compass.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ */
+int16_t AKD_Reset(void) {
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_RESET, NULL) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+	return AKD_SUCCESS;
+}
+
+/*!
+ Get magnetic sensor information from device. This function returns WIA value.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[out] data An information data array. The size should be larger than
+ #AKM_SENSOR_INFO_SIZE
+ */
+int16_t AKD_GetSensorInfo(BYTE data[AKM_SENSOR_INFO_SIZE])
+{
+	memset(data, 0, AKM_SENSOR_INFO_SIZE);
+
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_GET_INFO, data) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+	return AKD_SUCCESS;
+}
+
+/*!
+ Get magnetic sensor configuration from device. This function returns ASA value.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[out] data An configuration data array. The size should be larger than
+ #AKM_SENSOR_CONF_SIZE
+ */
+int16_t AKD_GetSensorConf(BYTE data[AKM_SENSOR_CONF_SIZE])
+{
+	memset(data, 0, AKM_SENSOR_CONF_SIZE);
+
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_GET_CONF, data) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+	return AKD_SUCCESS;
+}
+
+
+/*!
+ Acquire magnetic data from AKM E-Compass. If measurement is not done, this
+ function waits until measurement completion.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[out] data A magnetic data array. The size should be larger than
+ #AKM_SENSOR_DATA_SIZE.
+ */
+int16_t AKD_GetMagneticData(BYTE data[AKM_SENSOR_DATA_SIZE])
+{
+	int ret;
+	int i;
+
+	memset(data, 0, AKM_SENSOR_DATA_SIZE);
+
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+
+	for (i = 0; i < AKM_MEASURE_RETRY_NUM; i++) {
+		ret = ioctl(s_fdDev, ECS_IOCTL_GETDATA, data);//KY TODO
+
+		if (ret >= 0) {
+			/* Success */
+			break;
+		}
+		if (errno != EAGAIN) {
+			AKMERROR_STR("ioctl");
+			return AKD_FAIL;
+		}
+		AKMDEBUG(AKMDBG_MAGDRV, "MAGDRV: Try Again.");
+		usleep(AKM_MEASURE_TIME_US);
+	}
+
+	if (i >= AKM_MEASURE_RETRY_NUM) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+#ifdef AKMD_AK099XX
+	AKMDEBUG(AKMDBG_MAGDRV,
+			"MAGDRV: bdata(HEX)= %02x %02x %02x %02x %02x %02x %02x %02x %02x\n",
+			data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]);
+#else
+	AKMDEBUG(AKMDBG_MAGDRV,
+			"MAGDRV: bdata(HEX)= %02x %02x %02x %02x %02x %02x %02x %02x\n",
+			data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
+#endif
+
+	return AKD_SUCCESS;
+}
+
+/*!
+ Set calculated data to device driver.
+ @param[in] buf
+ */
+void AKD_SetYPR(const int buf[AKM_YPR_DATA_SIZE])
+{
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_SET_YPR, buf) < 0) {
+		AKMERROR_STR("ioctl");
+	}
+}
+
+/*!
+ */
+int16_t AKD_GetOpenStatus(int* status)
+{
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_GET_OPEN_STATUS, status) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+	return AKD_SUCCESS;
+}
+
+/*!
+ */
+int16_t AKD_GetCloseStatus(int* status)
+{
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_GET_CLOSE_STATUS, status) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+	return AKD_SUCCESS;
+}
+
+/*!
+ Set AKM E-Compass to the specific mode.
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[in] mode This value should be one of the AKM_MODE which is defined in
+ header file.
+ */
+int16_t AKD_SetMode(const BYTE mode)
+{
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_SET_MODE, &mode) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+	AKMDEBUG(AKMDBG_MAGDRV,"MAGDRV: mode=%d\n", mode);
+	return AKD_SUCCESS;
+}
+
+/*!
+ Acquire delay
+ @return If this function succeeds, the return value is #AKD_SUCCESS. Otherwise
+ the return value is #AKD_FAIL.
+ @param[out] delay A delay in microsecond.
+ */
+int16_t AKD_GetDelay(int64_t delay[AKM_NUM_SENSORS])
+{
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_GET_DELAY, delay) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+#if ENABLE_AKMDEBUG
+#if (AKM_NUM_SENSORS == 1)
+	AKMDEBUG(AKMDBG_MAGDRV,"MAGDRV: delay=%lld\n", delay[0]);
+#endif
+#if (AKM_NUM_SENSORS == 2)
+	AKMDEBUG(AKMDBG_MAGDRV,"MAGDRV: delay=%lld,%lld\n", delay[0], delay[1]);
+#endif
+#if (AKM_NUM_SENSORS == 3)
+	AKMDEBUG(AKMDBG_MAGDRV,"MAGDRV: delay=%lld,%lld,%lld\n", delay[0], delay[1], delay[2]);
+#endif
+#endif
+
+	return AKD_SUCCESS;
+}
+
+/*!
+ Get layout information from device driver, i.e. platform data.
+ */
+int16_t AKD_GetLayout(int16_t* layout)
+{
+	char tmp;
+
+	if (s_fdDev < 0) {
+		AKMERROR;
+		return AKD_FAIL;
+	}
+	if (ioctl(s_fdDev, ECS_IOCTL_GET_LAYOUT, &tmp) < 0) {
+		AKMERROR_STR("ioctl");
+		return AKD_FAIL;
+	}
+
+	*layout = tmp;
+	ALOGE("%s: layout=%d\n", __FUNCTION__, tmp);
+
+	return AKD_SUCCESS;
+}
+
+/*!  */
+int16_t AKD_AccSetEnable(int8_t enabled)
+{
+	//return Acc_SetEnable(enabled);
+	return AKD_SUCCESS;
+}
+
+/*!  */
+int16_t AKD_AccSetDelay(int64_t delay)
+{
+	//return Acc_SetDelay(delay);
+	return AKD_SUCCESS;
+}
+
+/*!
+ Convert Acceleration sensor coordinate system from Android's one to AK's one.
+ In Android coordinate system, 1G = 9.8f (m/s^2). In AK coordinate system, 
+ 1G = 720 (LSB).
+ @param[in] fData A acceleration data array. The coordinate system of this data 
+ should follows the definition of Android.
+ @param[out] data A acceleration data array. The coordinate system of the 
+ acquired data follows the definition of AK. 
+ */
+void Android2AK(int fData[], int16_t data[3])
+{
+/*
+	data[0] = fData[1] / 9.8f * -720;
+	data[1] = fData[0] / 9.8f * 720;
+	data[2] = fData[2] / 9.8f * -720;
+*/
+// data[] is mg unit, so data[] / 9800 * 720 = data[]  *72 /980
+	#if 0
+	data[0] = fData[1] * 72 / -980;
+	data[1] = fData[0] * 72 / 980;
+	data[2] = fData[2] * 72 / -980;
+	AKMDEBUG(AKMDBG_MAGDRV, "Get gsensor data %d, %d, %d.\n", data[0], data[1], data[2]);
+	#else  //for AK8963C LIB
+	data[0] = fData[0] * 72 / 980;
+	data[1] = fData[1] * 72 / 980;
+	data[2] = fData[2] * 72 / 980;
+	AKMDEBUG(AKMDBG_MAGDRV, "Get gsensor data %d, %d, %d.\n", data[0], data[1], data[2]);
+	#endif
+
+}
+
+/*!  */
+int16_t AKD_GetAccelerationData(int16_t data[3])
+{
+//	return Acc_GetAccData(data);
+
+#if 0
+	int fData[3];
+	char buf[64];
+	if(ioctl(g_file_acc, GSENSOR_IOCTL_READ_SENSORDATA, (void*)buf) < 0)
+	{
+		AKMDEBUG(AKMDBG_MAGDRV, "Get gsensor data error.\n");
+		return AKD_FAIL;
+	}
+	else
+	{		
+		sscanf(buf, "%x %x %x", &fData[0], &fData[1], &fData[2]);
+		Android2AK(fData, data);
+		return AKD_SUCCESS;
+	}
+#else
+	return AKD_SUCCESS;
+#endif
+}
+
+/*!  */
+int16_t AKD_GetAccelerationOffset(int16_t offset[3])
+{
+	//return Acc_GetAccOffset(offset);
+	offset[0] = 0;
+	offset[1] = 0;
+	offset[2] = 0;
+	return AKD_SUCCESS;
+}
+
+/*!  */
+void AKD_GetAccelerationVector(
+	const int16_t data[3],
+	const int16_t offset[3],
+	int16_t vec[3])
+{
+	//Acc_GetAccVector(data, offset, vec);
+	vec[0] = (int16_t)(data[0] - offset[0]);
+	vec[1] = (int16_t)(data[1] - offset[1]);
+	vec[2] = (int16_t)(data[2] - offset[2]);
+}
+

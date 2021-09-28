@@ -1,0 +1,47 @@
+/*
+ * List of test cases known to fail on a virtual device.
+ *
+ * Many are because of the network environment used by some or all of the
+ * virtual devices during CTS runs.
+ *
+ * See: https://cloud.google.com/vpc/docs/vpc
+ * As of 2019-05: "VPC networks only support IPv4 unicast traffic. They do not
+ * support broadcast, multicast, or IPv6 traffic within the network: VMs in the
+ * VPC network can only send to IPv4 destinations and only receive traffic from
+ * IPv4 sources.
+ */
+[
+{
+  description: "IPv6 connectivity not yet supported in virtual device testing infra",
+  result: EXEC_FAILED,
+  name: "libcore.java.net.SocketTest#testSocketTestAllAddresses",
+  bug: 30965313
+},
+{
+  description: "Virtual devices do not implement the SELinux policy (forbid hard link) asserted by this test",
+  name: "libcore.java.nio.file.Files2Test#test_createLink",
+  bug: 35670953
+},
+{
+  description: "multicast not supported in virtual device testing infra",
+  names: ["org.apache.harmony.tests.java.net.MulticastSocketTest",
+          "libcore.java.net.MulticastSocketTest#testGroupReceiveIPv6",
+          "libcore.java.nio.channels.DatagramChannelMulticastTest#test_joinAnySource_IPv4",
+          "libcore.java.nio.channels.DatagramChannelMulticastTest#test_joinAnySource_multicastLoopOption_IPv4"
+          ],
+  bug: 35922755
+},
+{
+  description: "DNS lookups of {1.2.3.4.} do not reliably fail on GCE networks",
+  names: ["libcore.java.net.InetAddressTest#test_getByName_invalid[1]"],
+  bug: 35922755
+},
+{
+  description: "Kernels between 4.4 and 4.9 interpret the backlog parameter differently than we
+                expect, causing this test to fail, and our emulators currently use those kernel
+                versions.  See b/31960002 for a full discussion and references to the upstream
+                changes.",
+  name: "libcore.javax.net.ServerSocketFactoryTest#testCreateServerSocketWithPortNoBacklog",
+  bug: 73535217
+}
+]

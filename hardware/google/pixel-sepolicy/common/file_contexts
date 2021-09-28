@@ -1,0 +1,9 @@
+/mnt/vendor/persist(/.*)?       u:object_r:persist_file:s0
+/vendor/firmware_mnt(/.*)?      u:object_r:firmware_file:s0
+/persist(/.*)?                  u:object_r:persist_file:s0
+
+/vendor/bin/init\.insmod\.sh                        u:object_r:init-insmod-sh_exec:s0
+/vendor/bin/grep                                    u:object_r:vendor_toolbox_exec:s0
+/vendor/bin/awk                                     u:object_r:vendor_toolbox_exec:s0
+/vendor/bin/cp                                      u:object_r:vendor_toolbox_exec:s0
+/vendor/bin/toolbox_vendor                          u:object_r:vendor_toolbox_exec:s0

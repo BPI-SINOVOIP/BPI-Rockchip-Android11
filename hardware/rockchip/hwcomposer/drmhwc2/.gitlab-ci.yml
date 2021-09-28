@@ -1,0 +1,15 @@
+image: ubuntu:16.04
+
+before_script:
+  - apt-get --quiet update --yes >/dev/null
+  - apt-get --quiet install --yes clang-format-5.0 git >/dev/null
+
+stages:
+  - style
+
+checkstyle:
+  stage: style
+  script: "./.gitlab-ci-checkcommit.sh"
+  artifacts:
+    when: on_failure
+    untracked: true

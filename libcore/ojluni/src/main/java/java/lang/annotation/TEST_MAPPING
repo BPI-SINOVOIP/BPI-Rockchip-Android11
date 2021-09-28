@@ -1,0 +1,18 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.lang.reflect.annotations"
+        },
+        {
+          "include-filter": "libcore.java.lang.annotation"
+        },
+        {
+          "include-filter": "org.apache.harmony.annotation.tests.java.lang.annotation"
+        }
+      ]
+    }
+  ]
+}

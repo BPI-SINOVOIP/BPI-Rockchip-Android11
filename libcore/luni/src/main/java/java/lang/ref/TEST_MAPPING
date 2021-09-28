@@ -1,0 +1,15 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.lang.ref"
+        },
+        {
+          "include-filter": "org.apache.harmony.tests.java.lang.ref"
+        }
+      ]
+    }
+  ]
+}

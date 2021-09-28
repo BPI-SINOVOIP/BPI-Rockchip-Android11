@@ -1,0 +1,46 @@
+/*
+ * Copyright (C) 2019-2020 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+cc_library_shared {
+    name: "arm.graphics.privatebuffer@1.0-impl",
+    defaults: ["arm_defaults"],
+    relative_install_path: "hw",
+    vendor: true,
+    product_variables: {
+        platform_sdk_version: {
+            cflags: ["-DPLATFORM_SDK_VERSION=%d"],
+        },
+    },
+    srcs: [
+        "Accessor.cpp",
+        "AttributeAccessor.cpp",
+    ],
+    shared_libs: [
+        "libhidlbase",
+        "libutils",
+        "arm.graphics.privatebuffer@1.0",
+        "android.hardware.graphics.common@1.1",
+        "android.hardware.graphics.common@1.2",
+        "liblog",
+        "libdrm",
+        "libhardware",
+    ],
+    static_libs: [
+        "libgralloc_drmutils",
+    ],
+    cflags: ["-DLOG_TAG=\"PrivateBufferHal\""],
+}

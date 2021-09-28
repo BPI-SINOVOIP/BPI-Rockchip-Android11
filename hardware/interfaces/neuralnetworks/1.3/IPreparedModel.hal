@@ -1,0 +1,286 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.neuralnetworks@1.3;
+
+import @1.2::IPreparedModel;
+import @1.2::MeasureTiming;
+import @1.2::OutputShape;
+import @1.2::Timing;
+import ErrorStatus;
+import OptionalTimeoutDuration;
+import OptionalTimePoint;
+import Request;
+import IExecutionCallback;
+import IFencedExecutionCallback;
+
+/**
+ * IPreparedModel describes a model that has been prepared for execution and
+ * is used to launch executions.
+ */
+interface IPreparedModel extends @1.2::IPreparedModel {
+    /**
+     * Launches an asynchronous execution on a prepared model.
+     *
+     * The execution is performed asynchronously with respect to the caller.
+     * execute_1_3 must verify the inputs to the function are correct, and the usages
+     * of memory pools allocated by IDevice::allocate are valid. If there is
+     * an error, execute_1_3 must immediately invoke the callback with the
+     * appropriate ErrorStatus value, then return with the same ErrorStatus. If
+     * the inputs to the function are valid and there is no error, execute_1_3 must
+     * launch an asynchronous task to perform the execution in the background,
+     * and immediately return with ErrorStatus::NONE. If the asynchronous task
+     * fails to launch, execute_1_3 must immediately invoke the callback with
+     * ErrorStatus::GENERAL_FAILURE, then return with
+     * ErrorStatus::GENERAL_FAILURE.
+     *
+     * When the asynchronous task has finished its execution, it must
+     * immediately invoke the callback object provided as an input to the
+     * execute_1_3 function. This callback must be provided with the ErrorStatus of
+     * the execution.
+     *
+     * If the launch is successful, the caller must not change the content of
+     * any data object referenced by 'request' (described by the
+     * {@link @1.0::DataLocation} of a {@link @1.0::RequestArgument}) until the
+     * asynchronous task has invoked the callback object. The asynchronous task
+     * must not change the content of any of the data objects corresponding to
+     * 'request' inputs.
+     *
+     * If the prepared model was prepared from a model wherein all tensor
+     * operands have fully specified dimensions, and the inputs to the function
+     * are valid, then:
+     * - the execution should launch successfully (ErrorStatus::NONE): There
+     *   must be no failure unless the device itself is in a bad state.
+     * - if at execution time every operation's input operands have legal
+     *   values, the execution should complete successfully (ErrorStatus::NONE):
+     *   There must be no failure unless the device itself is in a bad state.
+     *
+     * execute_1_3 can be called with an optional deadline. If the execution
+     * is not able to be completed before the provided deadline, the execution
+     * may be aborted, and either {@link
+     * ErrorStatus::MISSED_DEADLINE_TRANSIENT} or {@link
+     * ErrorStatus::MISSED_DEADLINE_PERSISTENT} may be returned. The error due
+     * to an abort must be sent the same way as other errors, described above.
+     *
+     * Any number of calls to the execute* and executeSynchronously* functions,
+     * in any combination, may be made concurrently, even on the same
+     * IPreparedModel object.
+     *
+     * @param request The input and output information on which the prepared
+     *                model is to be executed.
+     * @param measure Specifies whether or not to measure duration of the execution.
+     *                The duration runs from the time the driver sees the call
+     *                to the execute_1_3 function to the time the driver invokes
+     *                the callback.
+     * @param deadline The time by which the execution is expected to complete.
+     *                 If the execution cannot be completed by the deadline, the
+     *                 execution may be aborted.
+     * @param loopTimeoutDuration The maximum amount of time that should be spent
+     *                            executing a {@link OperationType::WHILE}
+     *                            operation. If a loop condition model does not
+     *                            output false within this duration, the
+     *                            execution must be aborted. If no loop timeout
+     *                            duration is provided, the maximum amount of
+     *                            time is {@link LoopTimeoutDurationNs::DEFAULT}.
+     *                            When provided, the duration must not exceed
+     *                            {@link LoopTimeoutDurationNs::MAXIMUM}.
+     * @param callback A callback object used to return the error status of
+     *                 the execution, shape information of model output operands, and
+     *                 duration of execution. The callback object's notify function must
+     *                 be called exactly once, even if the execution was
+     *                 unsuccessful.
+     * @return status Error status of the call, must be:
+     *                - NONE if task is successfully launched
+     *                - DEVICE_UNAVAILABLE if driver is offline or busy
+     *                - GENERAL_FAILURE if there is an unspecified error
+     *                - OUTPUT_INSUFFICIENT_SIZE if provided output buffer is
+     *                  not large enough to store the resultant values
+     *                - INVALID_ARGUMENT if one of the input arguments is
+     *                  invalid
+     *                - MISSED_DEADLINE_* if the execution is aborted because it
+     *                  cannot be completed by the deadline
+     *                - RESOURCE_EXHAUSTED_* if the task was aborted by the
+     *                  driver
+     */
+    execute_1_3(Request request, MeasureTiming measure, OptionalTimePoint deadline,
+                OptionalTimeoutDuration loopTimeoutDuration, IExecutionCallback callback)
+        generates (ErrorStatus status);
+
+    /**
+     * Performs a synchronous execution on a prepared model.
+     *
+     * The execution is performed synchronously with respect to the caller.
+     * executeSynchronously_1_3 must verify the inputs to the function are
+     * correct, and the usages of memory pools allocated by IDevice::allocate
+     * are valid. If there is an error, executeSynchronously_1_3 must immediately
+     * return with the appropriate ErrorStatus value. If the inputs to the
+     * function are valid and there is no error, executeSynchronously_1_3 must
+     * perform the execution, and must not return until the execution is
+     * complete.
+     *
+     * The caller must not change the content of any data object referenced by
+     * 'request' (described by the {@link @1.0::DataLocation} of a
+     * {@link @1.0::RequestArgument}) until executeSynchronously_1_3
+     * returns. executeSynchronously_1_3 must not change the content of any of the
+     * data objects corresponding to 'request' inputs.
+     *
+     * If the prepared model was prepared from a model wherein all tensor
+     * operands have fully specified dimensions, and the inputs to the function
+     * are valid, and at execution time every operation's input operands have
+     * legal values, then the execution should complete successfully
+     * (ErrorStatus::NONE): There must be no failure unless the device itself is
+     * in a bad state.
+     *
+     * executeSynchronously_1_3 may be called with an optional deadline. If the
+     * execution is not able to be completed before the provided deadline, the
+     * execution may be aborted, and either {@link
+     * ErrorStatus::MISSED_DEADLINE_TRANSIENT} or {@link
+     * ErrorStatus::MISSED_DEADLINE_PERSISTENT} may be returned. The error due
+     * to an abort must be sent the same way as other errors, described above.
+     *
+     * Any number of calls to the execute* and executeSynchronously* functions,
+     * in any combination, may be made concurrently, even on the same
+     * IPreparedModel object.
+     *
+     * @param request The input and output information on which the prepared
+     *                model is to be executed.
+     * @param measure Specifies whether or not to measure duration of the execution.
+     *                The duration runs from the time the driver sees the call
+     *                to the executeSynchronously_1_3 function to the time the driver
+     *                returns from the function.
+     * @param deadline The time by which the execution is expected to complete.
+     *                 If the execution cannot be finished by the deadline, the
+     *                 execution may be aborted.
+     * @param loopTimeoutDuration The maximum amount of time that should be spent
+     *                            executing a {@link OperationType::WHILE}
+     *                            operation. If a loop condition model does not
+     *                            output false within this duration, the
+     *                            execution must be aborted. If no loop timeout
+     *                            duration is provided, the maximum amount of
+     *                            time is {@link LoopTimeoutDurationNs::DEFAULT}.
+     *                            When provided, the duration must not exceed
+     *                            {@link LoopTimeoutDurationNs::MAXIMUM}.
+     * @return status Error status of the execution, must be:
+     *                - NONE if execution is performed successfully
+     *                - DEVICE_UNAVAILABLE if driver is offline or busy
+     *                - GENERAL_FAILURE if there is an unspecified error
+     *                - OUTPUT_INSUFFICIENT_SIZE if at least one output
+     *                  operand buffer is not large enough to store the
+     *                  corresponding output
+     *                - INVALID_ARGUMENT if one of the input arguments is
+     *                  invalid
+     *                - MISSED_DEADLINE_* if the execution is aborted because it
+     *                  cannot be completed by the deadline
+     *                - RESOURCE_EXHAUSTED_* if the task was aborted by the
+     *                  driver
+     * @return outputShapes A list of shape information of model output operands.
+     *                      The index into "outputShapes" corresponds to the index
+     *                      of the output operand in the Request outputs vector.
+     *                      outputShapes must be empty unless the status is either
+     *                      NONE or OUTPUT_INSUFFICIENT_SIZE.
+     * @return timing Duration of execution. Unless measure is YES and status is
+     *                NONE, all times must be reported as UINT64_MAX. A driver may
+     *                choose to report any time as UINT64_MAX, indicating that
+     *                measurement is not available.
+     */
+    executeSynchronously_1_3(Request request, MeasureTiming measure,
+                             OptionalTimePoint deadline,
+                             OptionalTimeoutDuration loopTimeoutDuration)
+                  generates (ErrorStatus status, vec<OutputShape> outputShapes,
+                             Timing timing);
+
+    /**
+     * Launch a fenced asynchronous execution on a prepared model.
+     *
+     * The execution is performed asynchronously with respect to the caller.
+     * executeFenced must verify the inputs to the function are correct, and the usages
+     * of memory pools allocated by IDevice::allocate are valid. If there is an error,
+     * executeFenced must immediately return with the corresponding ErrorStatus, an empty
+     * handle for syncFence, and nullptr for callback. If the inputs to the function
+     * are valid and there is no error, executeFenced must dispatch an asynchronous task
+     * to perform the execution in the background, and immediately return with
+     * ErrorStatus::NONE, a sync fence that will be signaled once the execution is completed,
+     * and a callback that can be used by the client to query the duration and runtime error
+     * status. If the task has finished before the call returns, an empty handle may be returned
+     * for syncFence. The execution must wait for all the sync fences (if any) in waitFor
+     * to be signaled before starting the actual execution.
+     *
+     * When the asynchronous task has finished its execution, it must
+     * immediately signal the syncFence returned from the executeFenced call. After
+     * the syncFence is signaled, the task must not modify the content of
+     * any data object referenced by 'request' (described by the
+     * {@link @1.0::DataLocation} of a {@link @1.0::RequestArgument}).
+     *
+     * executeFenced may be called with an optional deadline and an optional duration.
+     * If the execution is not able to be completed before the provided deadline or
+     * within the timeout duration (measured from when all sync fences in waitFor are
+     * signaled), whichever comes earlier, the execution may be aborted, and either
+     * {@link ErrorStatus::MISSED_DEADLINE_TRANSIENT} or {@link
+     * ErrorStatus::MISSED_DEADLINE_PERSISTENT} may be returned. The error due
+     * to an abort must be sent the same way as other errors, described above.
+     *
+     * If any of the sync fences in waitFor changes to error status after the executeFenced
+     * call succeeds, or the execution is aborted because it cannot finish before the deadline
+     * has been reached or the duration has elapsed, the driver must immediately set the returned
+     * syncFence to error status.
+     *
+     * Any number of calls to the executeFenced, execute* and executeSynchronously*
+     * functions, in any combination, may be made concurrently, even on the same
+     * IPreparedModel object.
+     *
+     * @param request The input and output information on which the prepared
+     *                model is to be executed. The outputs in the request must have
+     *                fully specified dimensions.
+     * @param waitFor A vector of sync fence file descriptors.
+     *                Execution must not start until all sync fences have been signaled.
+     * @param measure Specifies whether or not to measure duration of the execution.
+     * @param deadline The time by which the execution is expected to complete.
+     *                 If the execution cannot be finished by the deadline, the
+     *                 execution may be aborted.
+     * @param loopTimeoutDuration The maximum amount of time that should be spent
+     *                            executing a {@link OperationType::WHILE}
+     *                            operation. If a loop condition model does not
+     *                            output false within this duration, the
+     *                            execution must be aborted. If no loop timeout
+     *                            duration is provided, the maximum amount of
+     *                            time is {@link LoopTimeoutDurationNs::DEFAULT}.
+     *                            When provided, the duration must not exceed
+     *                            {@link LoopTimeoutDurationNs::MAXIMUM}.
+     * @param duration The length of time within which the execution is expected
+     *                 to complete after all sync fences in waitFor are signaled.
+     *                 If the execution cannot be finished within the duration,
+     *                 the execution may be aborted.
+     * @return status Error status of the call, must be:
+     *                - NONE if task is successfully launched
+     *                - DEVICE_UNAVAILABLE if driver is offline or busy
+     *                - GENERAL_FAILURE if there is an unspecified error
+     *                - INVALID_ARGUMENT if one of the input arguments is invalid, including
+     *                                   fences in error states.
+     *                - MISSED_DEADLINE_* if the execution is aborted because it
+     *                  cannot be completed by the deadline
+     *                - RESOURCE_EXHAUSTED_* if the task was aborted by the
+     *                  driver
+     * @return syncFence The sync fence that will be signaled when the task is completed.
+     *                   The sync fence will be set to error if a critical error,
+     *                   e.g. hardware failure or kernel panic, occurs when doing execution.
+     * @return callback The IFencedExecutionCallback can be used to query information like duration
+     *                  and error status when the execution is completed.
+     */
+    executeFenced(Request request, vec<handle> waitFor, MeasureTiming measure,
+                  OptionalTimePoint deadline, OptionalTimeoutDuration loopTimeoutDuration,
+                  OptionalTimeoutDuration duration)
+        generates (ErrorStatus status, handle syncFence, IFencedExecutionCallback callback);
+};

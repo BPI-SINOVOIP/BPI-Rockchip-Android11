@@ -1,0 +1,67 @@
+V0.0.1
+    - release the initial RK Camera Hal3 version
+    - inital version supports following features:
+        - preview, recording, snapshot(HW jpeg encoder)
+        - digital zoom(by RGA)
+        - Support up to 4 streams, including one input/bidrection stream.
+          And these 4 streams can have different size.
+        - AE and AWB
+    - TODOS:
+        - AF
+        - manual 3A controls
+V1.0.1
+    - move all 3A control logics to camera engine(also called control loop)
+      project, the project path is :
+      ssh://<user name>@10.10.10.58:29418/camera_engine_rkisp
+    - support AF
+    - have been roughly tested by quality department
+V1.1.0
+    - support YUV/IMP reprocess streams
+    - support RAW sensor, verified raw sensor list is as follow:
+    - support Android 7.x/8.x/9.x
+      - ov13850
+      - ov5695
+    - speed up still picture taken for API 1.0 and video start/stop
+    - new camera engine project git repsitory:
+      ssh://<user name>@10.10.10.29:29418/linux/external/camera_engine_rkisp
+    - fix a lot of CTS issues for RAW and SoC sensor
+V1.2.0
+    - support Android 9.x + RK1608
+    - support hw jpeg encode
+    - support get HalVersion by Cmd: $ adb shell getprop |grep "vendor.cam.hal3.ver"
+    - fix compile error for rk3368 Android9.x
+    - fix video issue: HAL runs lower and lower after long time video recording running
+    - fix videoSnapshot issue
+V1.9.0
+    - support pipeline auto select, don't need graph_settings_xx.xml anymore
+    - support raw data dump
+    - support several sensor configs in camera3_profiles.xml and iqfiles auto match
+    - support reconfig pipeline in hal3 when capture need switch resolution
+    - support rk3368 platform gralloc
+    - support ov13850 full resolution
+    - add android performance trace for KPI case debugging
+    - add pre-allocate gralloc buffer to speed up capture
+    - fix some issue, refer to gitlog for detail
+    matched librkisp version:
+      v1.9.0
+    matched rkisp1 driver version:
+      v0.1.1
+V1.9.1
+	- support flashlight
+	matched librkisp version:
+	  v2.0.1
+	matched rkisp1 driver version:
+	  v0.1.3
+V2.0.0
+	- support flashlight fully, HAL3 API2.4 torch interface
+	- support IQ tool tuning online for rk3326, notice that
+	  rk3399,rk3288 are not ready
+	- optimize still picture performance
+	- support mirror for front camera(disabled by default)
+	matched librkisp version:
+		V2.2.0
+	matched rkisp1 driver version:
+		v0.1.5
+V2.1.0
+    - construct sensor's some static metadatas before ctrloop starting.
+    - add forceAutoGenAndroidMetas in camera3_profiles.xml.

@@ -1,0 +1,70 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package hardware.google.media.c2@1.0;
+
+/**
+ * This callback interface is used for handling notifications from IComponent.
+ */
+interface IComponentListener {
+
+    /**
+     * Notify the listener that some works have been completed.
+     */
+    oneway onWorkDone(WorkBundle workBundle);
+
+    /**
+     * Notify the listener that the component is tripped.
+     */
+    oneway onTripped(vec<SettingResult> settingResults);
+
+    /**
+     * Notify the listener of an error.
+     *
+     * @param status Error type. \p status may be `OK`, which means that an
+     *     error has occurred, but the error type is unknown.
+     * @param errorCode Additional error code. The framework may not recognize
+     *     this.
+     */
+    oneway onError(Status status, uint32_t errorCode);
+
+    /**
+     * Information about rendering of a frame.
+     */
+    struct RenderedFrame {
+        /**
+         * Id of the buffer queue containing the rendered buffer.
+         */
+        uint64_t bufferQueueId;
+        /**
+         * Id of the slot of the rendered buffer.
+         */
+        int32_t slotId;
+        /**
+         * Timestamp of the rendering (consistent with timestamps in
+         * the associated BufferQueue).
+         */
+        int64_t timestampNs;
+    };
+
+    /**
+     * Notify the listener that frames are rendered.
+     *
+     * @param renderedFrames List of information about renderings of frames.
+     */
+    oneway onFramesRendered(vec<RenderedFrame> renderedFrames);
+};
+

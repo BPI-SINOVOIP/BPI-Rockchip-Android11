@@ -1,0 +1,15 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "org.apache.harmony.logging.tests.java.util.logging"
+        },
+        {
+          "include-filter": "libcore.java.util.logging"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1108 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.radio@1.5;
+
+import @1.0::ApnAuthType;
+import @1.0::AppStatus;
+import @1.0::DataProfileId;
+import @1.0::DataProfileInfoType;
+import @1.0::GsmSignalStrength;
+import @1.0::LteSignalStrength;
+import @1.0::PersoSubstate;
+import @1.0::RadioError;
+import @1.0::RegState;
+import @1.0::TimeStampType;
+import @1.1::EutranBands;
+import @1.1::GeranBands;
+import @1.1::RadioAccessNetworks;
+import @1.1::ScanStatus;
+import @1.1::ScanType;
+import @1.1::UtranBands;
+import @1.2::CellConnectionStatus;
+import @1.2::CellIdentityCdma;
+import @1.2::CellIdentityGsm;
+import @1.2::CellIdentityWcdma;
+import @1.2::CellIdentityTdscdma;
+import @1.2::CellIdentityLte;
+import @1.2::CellInfoCdma;
+import @1.2::IndicationFilter;
+import @1.2::TdscdmaSignalStrength;
+import @1.2::WcdmaSignalStrength;
+import @1.4::AccessNetwork;
+import @1.4::ApnTypes;
+import @1.4::CardStatus;
+import @1.4::CellIdentityNr;
+import @1.4::DataCallFailCause;
+import @1.4::DataConnActiveStatus;
+import @1.4::LteVopsInfo;
+import @1.4::NrIndicators;
+import @1.4::NrSignalStrength;
+import @1.4::PdpProtocolType;
+import @1.4::RadioAccessFamily;
+import @1.4::RadioTechnology;
+
+import android.hidl.safe_union@1.0::Monostate;
+
+/**
+ * Defining signal strength type.
+ */
+enum SignalMeasurementType : int32_t {
+    /**
+     * Received Signal Strength Indication.
+     * Range: -113 dBm and -51 dBm
+     * Used RAN: GERAN, CDMA2000
+     * Reference: 3GPP TS 27.007 section 8.5.
+     */
+    RSSI = 1,
+    /**
+     * Received Signal Code Power.
+     * Range: -120 dBm to -25 dBm;
+     * Used RAN: UTRAN
+     * Reference: 3GPP TS 25.123, section 9.1.1.1
+     */
+    RSCP = 2,
+    /**
+     * Reference Signal Received Power.
+     * Range: -140 dBm to -44 dBm;
+     * Used RAN: EUTRAN
+     * Reference: 3GPP TS 36.133 9.1.4
+     */
+    RSRP = 3,
+    /**
+     * Reference Signal Received Quality
+     * Range: -34 dB to 3 dB;
+     * Used RAN: EUTRAN
+     * Reference: 3GPP TS 36.133 v12.6.0 section 9.1.7
+     */
+    RSRQ = 4,
+    /**
+     * Reference Signal Signal to Noise Ratio
+     * Range: -20 dB to 30 dB;
+     * Used RAN: EUTRAN
+     * Note: this field is optional; how to support it can be decided by the
+     * corresponding vendor. Though the response code is not enforced,
+     * vendor's implementation must ensure this interface not crashing.
+     */
+    RSSNR = 5,
+    /**
+     * 5G SS reference signal received power.
+     * Range: -140 dBm to -44 dBm.
+     * Used RAN: NGRAN
+     * Reference: 3GPP TS 38.215.
+     */
+    SSRSRP = 6,
+    /**
+     * 5G SS reference signal received quality.
+     * Range: -20 dB to -3 dB.
+     * Used RAN: NGRAN
+     * Reference: 3GPP TS 38.215.
+     */
+    SSRSRQ = 7,
+    /**
+     * 5G SS signal-to-noise and interference ratio.
+     * Range: -23 dB to 40 dB
+     * Used RAN: NGRAN
+     * Reference: 3GPP TS 38.215 section 5.1.*, 3GPP TS 38.133 section 10.1.16.1.
+     */
+    SSSINR = 8,
+};
+
+/**
+ * Contains the threshold values of each signal measurement type.
+ */
+struct SignalThresholdInfo {
+    /** Signal Measurement Type */
+    SignalMeasurementType signalMeasurement;
+
+    /** A hysteresis time in milliseconds to prevent flapping. A value of 0 disables hysteresis. */
+    int32_t hysteresisMs;
+
+    /**
+     * An interval in dB defining the required magnitude change between reports.
+     * hysteresisDb must be smaller than the smallest threshold delta.
+     * An interval value of 0 disables hysteresis.
+     */
+    int32_t hysteresisDb;
+
+    /**
+     * List of threshold values.
+     * Range and unit must reference specific @1.5::SignalMeasurementType.
+     * The threshold values for which to apply criteria.
+     * A vector size of 0 disables the use of thresholds for reporting.
+     */
+    vec<int32_t> thresholds;
+
+    /**
+     * Indicates whether the reporting criteria of the corresponding measurement is enabled
+     * (isEnabled==true) or disabled (isEnabled==false).
+     *
+     * If enabled, modem must trigger the report based on the criteria.
+     * If disabled, modem must not trigger the report based on the criteria.
+     */
+    bool isEnabled;
+};
+
+enum AccessNetwork : @1.4::AccessNetwork {
+    /**
+     * Next-Generation Radio Access Network (NGRAN).
+     * Note NGRAN is only for standalone mode. Non-standalone mode uses AccessNetwork EUTRAN.
+     */
+    NGRAN = 6,
+};
+
+enum RadioAccessNetworks : @1.1::RadioAccessNetworks {
+    UNKNOWN = 0,
+    /** Next Generation Radio Access Network */
+    NGRAN = 4,
+    /** CDMA 2000 Network */
+    CDMA2000 = 5,
+};
+
+/**
+ * Overwritten from @1.1::RadioAccessSpecifier to add NGRAN and NgranBands.
+ */
+struct RadioAccessSpecifier {
+    /**
+     * The type of network to scan.
+     */
+    RadioAccessNetworks radioAccessNetwork;
+
+    /**
+     * The frequency bands to scan.
+     * Maximum length of the vector is 8.
+     */
+    safe_union Bands {
+        /** Valid only if radioAccessNetwork = GERAN. */
+        vec<GeranBands> geranBands;
+        /** Valid only if radioAccessNetwork = UTRAN. */
+        vec<UtranBands> utranBands;
+        /** Valid only if radioAccessNetwork = EUTRAN. */
+        vec<EutranBands> eutranBands;
+        /** Valid only if radioAccessNetwork = NGRAN. */
+        vec<NgranBands> ngranBands;
+    } bands;
+
+    /**
+     * The radio channels to scan as defined in 3GPP TS 25.101 and 36.101.
+     * Maximum length of the vector is 32.
+     */
+    vec<int32_t> channels;
+};
+
+/**
+ * IRadio 1.5 supports NGRAN bands up to V16.2.0
+ */
+enum NgranBands : int32_t {
+    /** 3GPP TS 38.101-1, Table 5.2-1: FR1 bands */
+    BAND_1 = 1,
+    BAND_2 = 2,
+    BAND_3 = 3,
+    BAND_5 = 5,
+    BAND_7 = 7,
+    BAND_8 = 8,
+    BAND_12 = 12,
+    BAND_14 = 14,
+    BAND_18 = 18,
+    BAND_20 = 20,
+    BAND_25 = 25,
+    BAND_28 = 28,
+    BAND_29 = 29,
+    BAND_30 = 30,
+    BAND_34 = 34,
+    BAND_38 = 38,
+    BAND_39 = 39,
+    BAND_40 = 40,
+    BAND_41 = 41,
+    BAND_48 = 48,
+    BAND_50 = 50,
+    BAND_51 = 51,
+    BAND_65 = 65,
+    BAND_66 = 66,
+    BAND_70 = 70,
+    BAND_71 = 71,
+    BAND_74 = 74,
+    BAND_75 = 75,
+    BAND_76 = 76,
+    BAND_77 = 77,
+    BAND_78 = 78,
+    BAND_79 = 79,
+    BAND_80 = 80,
+    BAND_81 = 81,
+    BAND_82 = 82,
+    BAND_83 = 83,
+    BAND_84 = 84,
+    BAND_86 = 86,
+    BAND_89 = 89,
+    BAND_90 = 90,
+    BAND_91 = 91,
+    BAND_92 = 92,
+    BAND_93 = 93,
+    BAND_94 = 94,
+    BAND_95 = 95,
+    /** 3GPP TS 38.101-2, Table 5.2-1: FR2 bands */
+    BAND_257 = 257,
+    BAND_258 = 258,
+    BAND_260 = 260,
+    BAND_261 = 261,
+};
+
+/**
+ * Extended from @1.1 UtranBands to add TD-SCDMA bands
+ * IRadio 1.5 supports UTRAN bands up to V15.0.0
+ */
+enum UtranBands : @1.1::UtranBands {
+    /** TD-SCDMA bands. 3GPP TS 25.102, Table 5.2: Frequency bands */
+    BAND_A = 101,
+    BAND_B = 102,
+    BAND_C = 103,
+    BAND_D = 104,
+    BAND_E = 105,
+    BAND_F = 106,
+};
+
+/**
+ * Extended from @1.1 EutranBands to add more bands from 3GPP TS 36.101, Table 5.5: Operating bands
+ * IRadio 1.5 supports EUTRAN bands up to V16.4.0
+ */
+enum EutranBands : @1.1::EutranBands {
+    BAND_49 = 49,
+    BAND_50 = 50,
+    BAND_51 = 51,
+    BAND_52 = 52,
+    BAND_53 = 53,
+    BAND_71 = 71,
+    BAND_72 = 72,
+    BAND_73 = 73,
+    BAND_74 = 74,
+    BAND_85 = 85,
+    BAND_87 = 87,
+    BAND_88 = 88,
+};
+
+/**
+ * Overwritten from @1.2::NetworkScanRequest to update RadioAccessSpecifier to 1.5 version.
+ */
+struct NetworkScanRequest {
+    ScanType type;
+
+    /**
+     * Time interval in seconds between the completion of one scan and the start of
+     * a subsequent scan.
+     * Implementations may ignore this field unless the 'type' is 'PERIODIC'.
+     * Range: ScanIntervalRange:MIN to ScanIntervalRange:MAX
+     */
+    int32_t interval;
+
+    /**
+     * Networks with bands/channels to scan
+     * Maximum length of the vector is RadioConst:RADIO_ACCESS_SPECIFIER_MAX_SIZE
+     */
+    vec<RadioAccessSpecifier> specifiers;
+
+    /**
+     * Maximum duration of the periodic search (in seconds).
+     * If the search lasts maxSearchTime, it must be terminated.
+     * Range: MaxSearchTimeRange:MIN to MaxSearchTimeRange:MAX
+     */
+    int32_t maxSearchTime;
+
+    /**
+     * Indicates whether the modem must report incremental results of the network scan
+     * to the client.
+     * FALSE – Incremental results must not be reported.
+     * TRUE  – Incremental must be reported.
+     */
+    bool incrementalResults;
+
+    /**
+     * Indicates the periodicity with which the modem must report incremental results to
+     * the client (in seconds).
+     * Implementations may ignore this value if the incremental results are not requested.
+     * This value must be less than or equal to maxSearchTime.
+     * Range: IncrementalResultsPeriodicityRange:MIN to IncrementalResultsPeriodicityRange:MAX
+     */
+    int32_t incrementalResultsPeriodicity;
+
+    /**
+     * Describes the List of PLMN ids (MCC-MNC)
+     * If any PLMN of this list is found, search must end at that point and results with all
+     * PLMN found until that point should be sent as response.
+     * If the list is not sent, search to be completed until end and all PLMNs found to be
+     * reported.
+     */
+    vec<string> mccMncs;
+};
+
+enum ApnTypes : @1.4::ApnTypes {
+    /**
+     * APN type for XCAP
+     * NOTE: Due to the addition of this new value, the value ALL defined in
+     * 1.0::ApnTypes is deprecated and should not be used.
+     */
+    XCAP = 1 << 11,
+};
+
+/**
+ * Overwritten from @1.4::DataProfileInfo to update ApnTypes to 1.5 version and replace mtu with
+ * mtuV4 and mtuV6. In the future, this must be extended instead of overwritten.
+ */
+struct DataProfileInfo {
+    /** ID of the data profile. */
+    DataProfileId profileId;
+
+    /** The APN name. */
+    string apn;
+
+    /** PDP_type values. */
+    PdpProtocolType protocol;
+
+    /** PDP_type values used on roaming network. */
+    PdpProtocolType roamingProtocol;
+
+    /** APN authentication type. */
+    ApnAuthType authType;
+
+    /** The username for APN, or empty string. */
+    string user;
+
+    /** The password for APN, or empty string. */
+    string password;
+
+    /** Data profile technology type. */
+    DataProfileInfoType type;
+
+    /** The period in seconds to limit the maximum connections. */
+    int32_t maxConnsTime;
+
+    /** The maximum connections during maxConnsTime. */
+    int32_t maxConns;
+
+    /**
+     * The required wait time in seconds after a successful UE initiated disconnect of a given PDN
+     * connection before the device can send a new PDN connection request for that given PDN.
+     */
+    int32_t waitTime;
+
+    /** True to enable the profile, false to disable. */
+    bool enabled;
+
+    /** Supported APN types bitmap. See ApnTypes for the value of each bit. */
+    bitfield<ApnTypes> supportedApnTypesBitmap;
+
+    /** The bearer bitmap. See RadioAccessFamily for the value of each bit. */
+    bitfield<RadioAccessFamily> bearerBitmap;
+
+    /** Maximum transmission unit (MTU) size in bytes for IPv4. */
+    int32_t mtuV4;
+
+    /** Maximum transmission unit (MTU) size in bytes for IPv6. */
+    int32_t mtuV6;
+
+    /**
+     * True if this data profile was used to bring up the last default (i.e internet) data
+     * connection successfully.
+     */
+    bool preferred;
+
+    /**
+     * If true, modem must persist this data profile and profileId must not be
+     * set to DataProfileId.INVALID. If the same data profile exists, this data profile must
+     * overwrite it.
+     */
+    bool persistent;
+};
+
+/**
+ * The properties of the link address. This enum reflects the definition in
+ * if_addr.h in Linux kernel.
+ */
+enum AddressProperty : int32_t {
+    NONE = 0,
+
+    /** Indicates this address is deprecated */
+    DEPRECATED = 0x20,
+};
+
+/**
+ * Describes a data link address for mobile data connection.
+ */
+struct LinkAddress {
+    /**
+     * The format is IP address with optional "/"
+     * prefix length (The format is defined in RFC-4291 section 2.3). For example, "192.0.1.3",
+     * "192.0.1.11/16", or "2001:db8::1/64". Typically one IPv4 or one IPv6 or one of each. If
+     * the prefix length is absent, then the addresses are assumed to be point to point with
+     * IPv4 with prefix length 32 or IPv6 with prefix length 128.
+     */
+    string address;
+
+    /**
+     * The properties of the link address
+     */
+    bitfield<AddressProperty> properties;
+
+    /**
+     * The time, as reported by SystemClock.elapsedRealtime(), when this link address will be or
+     * was deprecated. -1 indicates this information is not available. At the time existing
+     * connections can still use this address until it expires, but new connections should use the
+     * new address. LONG_MAX(0x7FFFFFFFFFFFFFFF) indicates this link address will never be
+     * deprecated.
+     */
+    uint64_t deprecationTime;
+
+    /**
+     * The time, as reported by SystemClock.elapsedRealtime(), when this link address will expire
+     * and be removed from the interface. -1 indicates this information is not available.
+     * LONG_MAX(0x7FFFFFFFFFFFFFFF) indicates this link address will never expire.
+     */
+    uint64_t expirationTime;
+};
+
+/**
+ * Overwritten from @1.4::SetupDataCallResult in order to update the addresses to 1.5 version.
+ * In 1.5 the type of addresses changes to vector of LinkAddress, and mtu is replaced by
+ * mtuV4 and mtuV6.
+ */
+struct SetupDataCallResult {
+    /** Data call fail cause. DataCallFailCause.NONE if no error. */
+    DataCallFailCause cause;
+
+    /**
+     * If status != DataCallFailCause.NONE, this field indicates the suggested retry back-off timer
+     * value RIL wants to override the one pre-configured in FW. The unit is milliseconds.
+     * The value < 0 means no value is suggested.
+     * The value 0 means retry must be done ASAP.
+     * The value of INT_MAX(0x7fffffff) means no retry.
+     */
+    int32_t suggestedRetryTime;
+
+    /** Context ID, uniquely identifies this call. */
+    int32_t cid;
+
+    /** Data connection active status. */
+    DataConnActiveStatus active;
+
+    /**
+     * PDP_type values. If cause is DataCallFailCause.ONLY_SINGLE_BEARER_ALLOWED, this is the type
+     * supported such as "IP" or "IPV6".
+     */
+    PdpProtocolType type;
+
+    /** The network interface name. */
+    string ifname;
+
+    /**
+     * List of link address.
+     */
+    vec<LinkAddress> addresses;
+
+    /**
+     * List of DNS server addresses, e.g., "192.0.1.3" or "192.0.1.11 2001:db8::1". Empty if no dns
+     * server addresses returned.
+     */
+    vec<string> dnses;
+
+    /**
+     * List of default gateway addresses, e.g., "192.0.1.3" or "192.0.1.11 2001:db8::1".
+     * When empty, the addresses represent point to point connections.
+     */
+    vec<string> gateways;
+
+    /**
+     * List of P-CSCF(Proxy Call State Control Function) addresses via PCO(Protocol Configuration
+     * Option), e.g., "2001:db8::1 2001:db8::2 2001:db8::3". Empty if not IMS client.
+     */
+    vec<string> pcscf;
+
+    /**
+     * MTU received from network for IPv4.
+     * Value <= 0 means network has either not sent a value or sent an invalid value.
+     */
+    int32_t mtuV4;
+
+    /**
+     * MTU received from network for IPv6.
+     * Value <= 0 means network has either not sent a value or sent an invalid value.
+     */
+    int32_t mtuV6;
+};
+
+enum Domain : int32_t {
+    /** Circuit-switched */
+    CS = 1 << 0,
+
+    /** Packet-switched */
+    PS = 1 << 1,
+};
+
+struct ClosedSubscriberGroupInfo {
+    /**
+     * Indicates whether the cell is restricted to only CSG members. A cell not broadcasting the
+     * CSG Indication but reporting CSG information is considered a Hybrid Cell.
+     * Refer to the "csg-Indication" field in 3GPP TS 36.331 section 6.2.2
+     * SystemInformationBlockType1.
+     * Also refer to "CSG Indicator" in 3GPP TS 25.331 section 10.2.48.8.1 and TS 25.304.
+     */
+    bool csgIndication;
+
+    /**
+     * The human-readable name of the closed subscriber group operating this cell.
+     * Refer to "hnb-Name" in TS 36.331 section 6.2.2 SystemInformationBlockType9.
+     * Also refer to "HNB Name" in 3GPP TS25.331 section 10.2.48.8.23 and TS 23.003 section 4.8.
+     */
+    string homeNodebName;
+
+    /**
+     * The identity of the closed subscriber group that the cell belongs to.
+     * Refer to "CSG-Identity" in TS 36.336 section 6.3.4.
+     * Also refer to "CSG Identity" in 3GPP TS 25.331 section 10.3.2.8 and TS 23.003 section 4.7.
+     */
+    int32_t csgIdentity;
+};
+
+safe_union OptionalCsgInfo {
+    /**
+     * If no CSG info is provided by the cell, then this structure shall be present.
+     */
+    Monostate noinit;
+
+    /**
+     * If CSG info is provided by the cell, this structure shall be present.
+     */
+    ClosedSubscriberGroupInfo csgInfo;
+};
+
+struct CellIdentityGsm {
+    /**
+     * The fields "mcc" and "mnc" must contain the PLMN-ID of the primary PLMN of this cell.
+     */
+    @1.2::CellIdentityGsm base;
+
+    /** Additional PLMN-IDs beyond the primary PLMN broadcast for this cell */
+    vec<string> additionalPlmns;
+};
+
+struct CellIdentityWcdma {
+    /**
+     * The fields "mcc" and "mnc" must contain the PLMN-ID of the primary PLMN of this cell.
+     */
+    @1.2::CellIdentityWcdma base;
+
+    /** Additional PLMN-IDs beyond the primary PLMN broadcast for this cell */
+    vec<string> additionalPlmns;
+
+    /** Information about any closed subscriber group ID for this cell */
+    OptionalCsgInfo optionalCsgInfo;
+};
+
+struct CellIdentityTdscdma {
+    /**
+     * The fields "mcc" and "mnc" must contain the PLMN-ID of the primary PLMN of this cell.
+     */
+    @1.2::CellIdentityTdscdma base;
+
+    /** Additional PLMN-IDs beyond the primary PLMN broadcast for this cell */
+    vec<string> additionalPlmns;
+
+    /** Information about any closed subscriber group ID for this cell */
+    OptionalCsgInfo optionalCsgInfo;
+};
+
+struct CellIdentityLte {
+    /**
+     * The fields "mcc" and "mnc" must contain the PLMN-ID of the primary PLMN of this cell.
+     */
+    @1.2::CellIdentityLte base;
+
+    /** Additional PLMN-IDs beyond the primary PLMN broadcast for this cell */
+    vec<string> additionalPlmns;
+
+    /** Information about any closed subscriber group ID for this cell */
+    OptionalCsgInfo optionalCsgInfo;
+
+    /** Bands used by the cell. */
+    vec<EutranBands> bands;
+};
+
+/**
+ * The CellIdentity structure should be reported once for each element of the PLMN-IdentityInfoList
+ * broadcast in SIB1 CellAccessRelatedInfo as per 3GPP TS 38.331 Section 6.3.2.
+ */
+struct CellIdentityNr {
+    /**
+     * The fields "mcc" and "mnc" must contain the PLMN-ID of the primary PLMN of this cell.
+     */
+    @1.4::CellIdentityNr base;
+
+    /** Additional PLMN-IDs beyond the primary PLMN broadcast for this cell */
+    vec<string> additionalPlmns;
+
+    /** Bands used by the cell. */
+    vec<NgranBands> bands;
+};
+
+struct CellInfoGsm {
+    CellIdentityGsm cellIdentityGsm;
+    GsmSignalStrength signalStrengthGsm;
+};
+
+struct CellInfoWcdma {
+    CellIdentityWcdma cellIdentityWcdma;
+    WcdmaSignalStrength signalStrengthWcdma;
+};
+
+struct CellInfoTdscdma {
+    CellIdentityTdscdma cellIdentityTdscdma;
+    TdscdmaSignalStrength signalStrengthTdscdma;
+};
+
+struct CellInfoLte {
+    CellIdentityLte cellIdentityLte;
+    LteSignalStrength signalStrengthLte;
+};
+
+struct CellInfoNr {
+    CellIdentityNr cellIdentityNr;
+    NrSignalStrength signalStrengthNr;
+};
+
+struct CellInfo {
+    /**
+     * True if this cell is registered false if not registered.
+     */
+    bool registered;
+    /**
+     * Type of time stamp represented by timeStamp.
+     */
+    TimeStampType timeStampType;
+    /**
+     * Time in nanos as returned by ril_nano_time.
+     */
+    uint64_t timeStamp;
+    /**
+     * Connection status for the cell.
+     */
+    CellConnectionStatus connectionStatus;
+
+    safe_union CellInfoRatSpecificInfo {
+        /**
+         * 3gpp CellInfo types.
+         */
+        CellInfoGsm gsm;
+        CellInfoWcdma wcdma;
+        CellInfoTdscdma tdscdma;
+        CellInfoLte lte;
+        CellInfoNr nr;
+
+        /**
+         * 3gpp2 CellInfo types;
+         */
+        CellInfoCdma cdma;
+    } ratSpecificInfo;
+};
+
+/** A union representing the CellIdentity of a single cell. */
+safe_union CellIdentity {
+    Monostate noinit;
+
+    CellIdentityGsm gsm;
+    CellIdentityWcdma wcdma;
+    CellIdentityTdscdma tdscdma;
+    CellIdentityCdma cdma;
+    CellIdentityLte lte;
+    CellIdentityNr nr;
+};
+
+struct BarringInfo {
+    /**
+     * Combined list of barring services for UTRAN, EUTRAN, and NGRAN.
+     *
+     * Barring information is defined in:
+     * -UTRAN - 3gpp 25.331 Sec 10.2.48.8.6.
+     * -EUTRAN - 3gpp 36.331 Sec 6.3.1 SystemInformationBlockType2
+     * -NGRAN - 3gpp 38.331 Sec 6.3.2 UAC-BarringInfo and 22.261 Sec 6.22.2.[2-3]
+     */
+    enum ServiceType : int32_t {
+        /** Applicable to UTRAN */
+        /** Barring for all CS services, including registration */
+        CS_SERVICE,
+        /** Barring for all PS services, including registration */
+        PS_SERVICE,
+        /** Barring for mobile-originated circuit-switched voice calls */
+        CS_VOICE,
+
+        /** Applicable to EUTRAN, NGRAN */
+        /** Barring for mobile-originated signalling for any purpose */
+        MO_SIGNALLING,
+        /** Barring for mobile-originated internet or other interactive data */
+        MO_DATA,
+        /** Barring for circuit-switched fallback calling */
+        CS_FALLBACK,
+        /** Barring for IMS voice calling */
+        MMTEL_VOICE,
+        /** Barring for IMS video calling */
+        MMTEL_VIDEO,
+
+        /** Applicable to UTRAN, EUTRAN, NGRAN */
+        /** Barring for emergency services, either CS or emergency MMTEL */
+        EMERGENCY,
+        /** Barring for short message services */
+        SMS,
+
+        /** Operator-specific barring codes; applicable to NGRAN */
+        OPERATOR_1 = 1001,
+        OPERATOR_2 = 1002,
+        OPERATOR_3 = 1003,
+        OPERATOR_4 = 1004,
+        OPERATOR_5 = 1005,
+        OPERATOR_6 = 1006,
+        OPERATOR_7 = 1007,
+        OPERATOR_8 = 1008,
+        OPERATOR_9 = 1009,
+        OPERATOR_10 = 1010,
+        OPERATOR_11 = 1011,
+        OPERATOR_12 = 1012,
+        OPERATOR_13 = 1013,
+        OPERATOR_14 = 1014,
+        OPERATOR_15 = 1015,
+        OPERATOR_16 = 1016,
+        OPERATOR_17 = 1017,
+        OPERATOR_18 = 1018,
+        OPERATOR_19 = 1019,
+        OPERATOR_20 = 1020,
+        OPERATOR_21 = 1021,
+        OPERATOR_22 = 1022,
+        OPERATOR_23 = 1023,
+        OPERATOR_24 = 1024,
+        OPERATOR_25 = 1025,
+        OPERATOR_26 = 1026,
+        OPERATOR_27 = 1027,
+        OPERATOR_28 = 1028,
+        OPERATOR_29 = 1029,
+        OPERATOR_30 = 1030,
+        OPERATOR_31 = 1031,
+        OPERATOR_32 = 1032,
+    } serviceType;
+
+    /** The type of barring applied to the service */
+    enum BarringType : int32_t {
+        /** Device is not barred for the given service */
+        NONE,
+        /** Device may be barred based on time and probability factors */
+        CONDITIONAL,
+        /* Device is unconditionally barred */
+        UNCONDITIONAL,
+    } barringType;
+
+    /** Type-specific barring info if applicable */
+    safe_union BarringTypeSpecificInfo {
+        /** Barring type is either none or unconditional */
+        Monostate noinit;
+
+        /** Must be included if barring is conditional */
+        struct Conditional {
+            /** The barring factor as a percentage 0-100 */
+            int32_t factor;
+
+            /** The number of seconds between re-evaluations of barring */
+            int32_t timeSeconds;
+
+            /**
+             * Indicates whether barring is currently being applied.
+             *
+             * <p>True if the UE applies barring to a conditionally barred
+             * service based on the conditional barring parameters.
+             *
+             * <p>False if the service is conditionally barred but barring
+             * is not currently applied, which could be due to either the
+             * barring criteria not having been evaluated (if the UE has not
+             * attempted to use the service) or due to the criteria being
+             * evaluated and the UE being permitted to use the service
+             * despite conditional barring.
+             */
+            bool isBarred;
+        } conditional;
+    } barringTypeSpecificInfo;
+};
+
+enum IndicationFilter : @1.2::IndicationFilter {
+    /** Control the unsolicited sending of registration failure reports via onRegistrationFailed */
+    REGISTRATION_FAILURE = 1 << 5,
+    /** Control the unsolicited sending of barring info updates via onBarringInfo */
+    BARRING_INFO = 1 << 6,
+};
+
+/**
+ * Call fail causes for Circuit-switched service enumerated in 3GPP TS 24.008, 10.5.3.6 and
+ * 10.5.147. Additional detail is available in 3GPP TS 24.008 Annex G.
+ */
+enum RegistrationFailCause : int32_t {
+    /** 0 - None */
+    NONE = 0,
+    /** 2 - IMSI unknown in HLR */
+    IMSI_UNKNOWN_IN_HLR = 2,
+    /** 3 - Illegal MS */
+    ILLEGAL_MS = 3,
+    /** 4 - Illegal ME */
+    IMSI_UNKNOWN_IN_VLR = 4,
+    /** 5 - PLMN not allowed */
+    IMEI_NOT_ACCEPTED = 5,
+    /** 6 - Location area not allowed */
+    ILLEGAL_ME = 6,
+    /** 7 - Roaming not allowed */
+    GPRS_SERVICES_NOT_ALLOWED = 7,
+    /** 8 - No Suitable Cells in this Location Area */
+    GPRS_AND_NON_GPRS_SERVICES_NOT_ALLOWED = 8,
+    /** 9 - Network failure */
+    MS_IDENTITY_CANNOT_BE_DERIVED_BY_NETWORK = 9,
+    /** 10 - Persistent location update reject */
+    IMPLICITLY_DETACHED = 10,
+    /** 11 - PLMN not allowed */
+    PLMN_NOT_ALLOWED = 11,
+    /** 12 - Location area not allowed */
+    LOCATION_AREA_NOT_ALLOWED = 12,
+    /** 13 - Roaming not allowed in this Location Area */
+    ROAMING_NOT_ALLOWED = 13,
+    /** 14 - GPRS Services not allowed in this PLMN */
+    GPRS_SERVICES_NOT_ALLOWED_IN_PLMN = 14,
+    /** 15 - No Suitable Cells in this Location Area */
+    NO_SUITABLE_CELLS = 15,
+    /** 16 - MSC temporarily not reachable */
+    MSC_TEMPORARILY_NOT_REACHABLE = 15,
+    /** 17 - Network Failure */
+    NETWORK_FAILURE = 17,
+    /** 20 - MAC Failure */
+    MAC_FAILURE = 20,
+    /** 21 - Sync Failure */
+    SYNC_FAILURE = 21,
+    /** 22 - Congestion */
+    CONGESTION = 22,
+    /** 23 - GSM Authentication unacceptable */
+    GSM_AUTHENTICATION_UNACCEPTABLE = 23,
+    /** 25 - Not Authorized for this CSG */
+    NOT_AUTHORIZED_FOR_THIS_CSG = 25,
+    /** 28 SMS provided via GPRS in this routing area */
+    SMS_PROVIDED_BY_GPRS_IN_ROUTING_AREA,
+    /** 32 - Service option not supported */
+    SERVICE_OPTION_NOT_SUPPORTED = 32,
+    /** 33 - Requested service option not subscribed */
+    SERVICE_OPTION_NOT_SUBSCRIBED = 33,
+    /** 34 - Service option temporarily out of order */
+    SERVICE_OPTION_TEMPORARILY_OUT_OF_ORDER = 34,
+    /** 38 - Call cannot be identified */
+    CALL_CANNOT_BE_IDENTIFIED = 38,
+    /** 40 No PDP context activated */
+    NO_PDP_CONTEXT_ACTIVATED = 40,
+    /** 48-63 - Retry upon entry into a new cell */
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_1 = 48,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_2 = 49,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_3 = 50,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_4 = 51,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_5 = 52,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_6 = 53,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_7 = 54,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_8 = 55,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_9 = 56,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_10 = 57,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_11 = 58,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_12 = 59,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_13 = 60,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_14 = 61,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_15 = 62,
+    RETRY_UPON_ENTRY_INTO_NEW_CELL_16 = 63,
+    /** 95 - Semantically incorrect message */
+    SEMANTICALLY_INCORRECT_MESSAGE = 95,
+    /** 96 - Invalid mandatory information */
+    INVALID_MANDATORY_INFORMATION = 96,
+    /** 97 - Message type non-existent or not implemented */
+    MESSAGE_TYPE_NON_EXISTENT_OR_NOT_IMPLEMENTED = 97,
+    /** 98 - Message type not compatible with protocol state */
+    MESSAGE_TYPE_NOT_COMPATIBLE_WITH_PROTOCOL_STATE = 98,
+    /** 99 - Information element non-existent or not implemented */
+    INFORMATION_ELEMENT_NON_EXISTENT_OR_NOT_IMPLEMENTED = 99,
+    /** 100 - Conditional IE error */
+    CONDITIONAL_IE_ERROR = 100,
+    /** 101 - Message not compatible with protocol state */
+    MESSAGE_NOT_COMPATIBLE_WITH_PROTOCOL_STATE = 101,
+    /** 111 - Protocol error, unspecified */
+    PROTOCOL_ERROR_UNSPECIFIED = 111,
+};
+
+enum PrlIndicator : int32_t {
+    NOT_REGISTERED = -1,
+    NOT_IN_PRL = 0,
+    IN_PRL = 1,
+};
+
+struct RegStateResult {
+    /**
+     * Registration state
+     *
+     * If the RAT is indicated as a GERAN, UTRAN, or CDMA2000 technology, this value reports
+     * registration in the Circuit-switched domain.
+     * If the RAT is indicated as an EUTRAN, NGRAN, or another technology that does not support
+     * circuit-switched services, this value reports registration in the Packet-switched domain.
+     */
+    RegState regState;
+
+    /**
+     * Indicates the available voice radio technology, valid values as
+     * defined by RadioTechnology.
+     */
+    RadioTechnology rat;
+
+    /**
+     * Cause code reported by the network in case registration fails. This will be a mobility
+     * management cause code defined for MM, GMM, MME or equivalent as appropriate for the RAT.
+     */
+    RegistrationFailCause reasonForDenial;
+
+    /** CellIdentity */
+    CellIdentity cellIdentity;
+
+    /**
+     * The most-recent PLMN-ID upon which the UE registered (or attempted to register if a failure
+     * is reported in the reasonForDenial field). This PLMN shall be in standard format consisting
+     * of a 3 digit MCC concatenated with a 2 or 3 digit MNC.
+     */
+    string registeredPlmn;
+
+    /**
+     * Access-technology-specific registration information, such as for CDMA2000.
+     */
+    safe_union AccessTechnologySpecificInfo {
+        Monostate noinit;
+
+        struct Cdma2000RegistrationInfo {
+            /**
+             * Concurrent services support indicator. if registered on a CDMA system.
+             * false - Concurrent services not supported,
+             * true - Concurrent services supported
+             */
+            bool cssSupported;
+
+            /**
+             * TSB-58 Roaming Indicator if registered on a CDMA or EVDO system or -1 if not.
+             * Valid values are 0-255.
+             */
+            int32_t roamingIndicator;
+
+            /**
+             * Indicates whether the current system is in the PRL if registered on a CDMA or EVDO
+             * system or -1 if not. 0=not in the PRL, 1=in the PRL.
+             */
+            PrlIndicator systemIsInPrl;
+
+            /**
+             * Default Roaming Indicator from the PRL if registered on a CDMA or EVDO system or -1
+             * if not.
+             * Valid values are 0-255.
+             */
+            int32_t defaultRoamingIndicator;
+        } cdmaInfo;
+
+        struct EutranRegistrationInfo {
+            /**
+             * Network capabilities for voice over PS services. This info is valid only on LTE
+             * network and must be present when device is camped on LTE. VopsInfo must be empty when
+             * device is camped only on 2G/3G.
+             */
+            LteVopsInfo lteVopsInfo;
+
+            /**
+             * The parameters of NR 5G Non-Standalone. This value is only valid on E-UTRAN,
+             * otherwise must be empty.
+             */
+            NrIndicators nrIndicators;
+        } eutranInfo;
+    } accessTechnologySpecificInfo;
+};
+
+/** Overwritten from @1.4::NetworkScanResult in order to update the CellInfo to 1.5 version. */
+struct NetworkScanResult {
+    /**
+     * The status of the scan.
+     */
+    ScanStatus status;
+
+    /**
+     * The error code of the incremental result.
+     */
+    RadioError error;
+
+    /**
+     * List of network information as CellInfo.
+     */
+    vec<CellInfo> networkInfos;
+};
+
+/**
+ * Additional personalization categories in addition to those specified in 3GPP TS 22.022 and
+ * 3GPP2 C.S0068-0.
+ */
+enum PersoSubstate : @1.0::PersoSubstate {
+    /**
+     * The device is personalized using the content of the Service Provider Name (SPN) in the SIM
+     * card.
+     */
+    SIM_SPN,
+    SIM_SPN_PUK,
+    /**
+     * Service Provider and Equivalent Home PLMN
+     * The device is personalized using both the content of the GID1 (equivalent to service provider
+     * personalization) and the content of the Equivalent Home PLMN (EHPLMN) in the SIM card.
+     * If the GID1 in the SIM is absent, then just the content of the Equivalent Home PLMN
+     * is matched.
+     */
+    SIM_SP_EHPLMN,
+    SIM_SP_EHPLMN_PUK,
+    /**
+     * Device is personalized using the first digits of the ICCID of the SIM card.
+     */
+    SIM_ICCID,
+    SIM_ICCID_PUK,
+    /**
+     * Device is personalized using the content of the IMPI in the ISIM.
+     */
+    SIM_IMPI,
+    SIM_IMPI_PUK,
+    /**
+     * Network Subset and Service Provider
+     * Device is personalized using both the content of GID1 (equivalent to service provider
+     * personalization) and the first digits of the IMSI (equivalent to network subset
+     * personalization).
+     */
+    SIM_NS_SP,
+    SIM_NS_SP_PUK,
+};
+
+/** Extended from @1.0::AppStatus to update PersoSubstate to 1.5 version. */
+struct AppStatus {
+    @1.0::AppStatus base;
+
+    /** Applicable only if appState == SUBSCRIPTION_PERSO */
+    PersoSubstate persoSubstate;
+};
+
+
+/** Extended from @1.4::CardStatus to use 1.5 version of AppStatus. */
+struct CardStatus {
+    @1.4::CardStatus base;
+
+    /** size <= RadioConst::CARD_MAX_APPS */
+    vec<AppStatus> applications;
+};

@@ -1,0 +1,122 @@
+/*
+ * Copyright (C) 2019 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package arm.graphics.privatebuffer@1.0;
+
+import android.hardware.graphics.common@1.2::PixelFormat;
+import IAttributeAccessor;
+
+/* This is the client-facing interface that is able to interpret the buffer data. */
+interface IAccessor {
+
+    /**
+     * Returns the file descriptor of a buffer allocation and
+     * the size of its contents.
+     *
+     * @param bufferHandle represents the buffer
+     * @return error is NONE or BAD_HANDLE.
+     * @return fd is the file descriptor.
+     * @return size is the allocated size in bytes.
+     */
+    getAllocation(handle bufferHandle)
+        generates (Error error, int32_t fd, uint32_t size);
+
+    /**
+     * Returns the pixel base format and modifier of a buffer's contents.
+     *
+     * @param bufferHandle represents the buffer.
+     * @return error is NONE or BAD_HANDLE.
+     * @return drmFourcc the DRM fourcc representing the pixel format.
+     * @return drmModifier the IP specific format modifiers.
+     * @note Some modifiers such as YUV transform may change during the lifetime
+     *       of the buffer. This function returns only the 'immutable' format
+     *       modifiers that are never changed during the lifetime of the buffer.
+     *       The remaining 'mutable' modifiers must be queried through other
+     *       mechanisms.
+     */
+    getAllocatedFormat(handle bufferHandle)
+        generates (Error error, uint32_t drmFourcc, uint64_t drmModifier);
+
+    /**
+     * Returns the requested width and height of a buffer in pixels.
+     *
+     * The allocated width and height (which may be greater than that requested),
+     * can be found in allocWidth and allocWeight of PlaneLayout which is
+     * queried through getPlaneLayout().
+     *
+     * @param bufferHandle represents the buffer.
+     * @return error is NONE or BAD_HANDLE.
+     * @return width is the buffer width in pixels.
+     * @return height is the buffer height in pixels.
+     */
+    getRequestedDimensions(handle bufferHandle)
+        generates (Error error, uint32_t width, uint32_t height);
+
+    /**
+     * Returns the requested HAL format of a buffer.
+     *
+     * The allocated format, which may differ from the requested format to
+     * optimize performance, can be queried through getAllocatedFormat().
+     *
+     * @param bufferHandle represents the buffer.
+     * @return error is NONE or BAD_HANDLE.
+     * @return requestedformat is the requested pixel format.
+     */
+     getRequestedFormat(handle bufferHandle)
+         generates (Error error, PixelFormat requestedFormat);
+
+    /**
+     * Returns the combined producer and consumer buffer usage.
+     *
+     * @param bufferHandle represents the buffer
+     * @return error is NONE or BAD_HANDLE.
+     * @return usage is the combined producer and consumer usage
+     */
+    getUsage(handle bufferHandle)
+        generates (Error error, BufferUsage usage);
+
+    /**
+     * Returns the number of layers in a buffer.
+     *
+     * @param bufferHandle represents the buffer
+     * @return error is NONE or BAD_HANDLE.
+     * @return layerCount is the number of layers (not planes) of a buffer
+     */
+    getLayerCount(handle bufferHandle)
+        generates (Error error, uint32_t layerCount);
+
+    /**
+     * Returns the planar information about a buffer.
+     *
+     * @param bufferHandle represents the buffer
+     * @return error is NONE or BAD_HANDLE.
+     * @return layout is contains the layout of each plane.
+     *         The number of planes is equal to layout.size().
+     */
+    getPlaneLayout(handle bufferHandle)
+        generates (Error error, vec<PlaneLayout> layout);
+
+    /**
+     * Returns an accessor for the buffer's mutable attributes.
+     *
+     * @param bufferHandle represents the buffer
+     * @return error is NONE, BAD_HANDLE or ATTRIBUTE_ACCESS_FAILED.
+     * @return accessor is an interface for accessing each mutable attribute.
+     */
+    getAttributeAccessor(handle bufferHandle)
+        generates (Error error, IAttributeAccessor accessor);
+};

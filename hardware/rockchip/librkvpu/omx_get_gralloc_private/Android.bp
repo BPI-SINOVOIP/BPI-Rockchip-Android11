@@ -1,0 +1,57 @@
+bootstrap_go_package {
+    name: "soong-libgralloc_priv",
+    pkgPath: "android/soong/libgralloc_priv",
+    deps:[
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs:[
+        "Android.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_libgralloc_priv {
+    name: "cc_libgralloc_priv_defaults"
+}
+
+cc_library_shared {
+    name: "libgralloc_priv",
+    vendor_available: true,
+
+    defaults:[
+        "cc_libgralloc_priv_defaults"
+    ],
+
+    header_libs: [
+        "liblog_headers",
+    ],
+    srcs: [
+        "gralloc_priv_omx.cpp",
+    ],
+
+    include_dirs: [
+        "hardware/libhardware/include/",
+        "system/core/liblog/include",
+        "system/core/libcutils/include",
+        "hardware/libhardware/modules/gralloc",
+        "system/core/libsystem/include",
+        "system/memory/libion/original-kernel-headers",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libutils",
+    ],
+
+    cflags:[
+        "-DRK_DRM_GRALLOC=1",
+        "-DMALI_AFBC_GRALLOC=1",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+}

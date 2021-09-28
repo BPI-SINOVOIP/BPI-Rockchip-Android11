@@ -1,0 +1,124 @@
+cc_binary {
+    name: "android.hardware.keymaster@4.0-service.optee",
+    defaults: ["hidl_defaults"],
+    relative_install_path: "hw",
+    vendor: true,
+    init_rc: ["android.hardware.keymaster@4.0-service.optee.rc"],
+    vintf_fragments: ["android.hardware.keymaster@4.0-service.optee.xml"],
+    srcs: [
+        "service.cpp",
+    ],
+
+    shared_libs: [
+        "android.hardware.keymaster@4.0",
+        "libkeymaster4support",
+        "libbase",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "libRkkeymaster4",
+        "libRkkeymaster_messages",
+        "libRkkeymaster_portable",
+        "libRkpurekeymasterdevice",
+        "libRkTeeKeymaster",
+        "liblog",
+        "libutils",
+    ],
+}
+
+cc_rockchip_prebuilt_obj {
+    name: "258be795-f9ca-40e6-a8699ce6886c5d5d.ta",
+    src:  "v1/ta/258be795-f9ca-40e6-a8699ce6886c5d5d.ta",
+    vendor: true,
+    sub_dir: "lib/optee_armtz",
+}
+
+cc_rockchip_prebuilt_obj {
+    name: "258be795-f9ca-40e6-a869-9ce6886c5d5d.ta",
+    src: "v2/ta/258be795-f9ca-40e6-a869-9ce6886c5d5d.ta",
+    vendor: true,
+    sub_dir: "lib/optee_armtz",
+}
+
+cc_rockchip_prebuilt_library_shared {
+
+    name: "libRkTeeKeymaster",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+    optee: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libRkkeymaster4",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/arm64/libRkkeymaster4.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/arm/libRkkeymaster4.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libRkkeymaster_messages",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/arm64/libRkkeymaster_messages.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/arm/libRkkeymaster_messages.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libRkkeymaster_portable",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/arm64/libRkkeymaster_portable.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/arm/libRkkeymaster_portable.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libRkpurekeymasterdevice",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/arm64/libRkpurekeymasterdevice.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/arm/libRkpurekeymasterdevice.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

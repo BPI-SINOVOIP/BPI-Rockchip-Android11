@@ -1,0 +1,120 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.tests.safeunion@1.0;
+
+import IOtherInterface;
+
+import android.hidl.safe_union@1.0::Monostate;
+
+interface ISafeUnion {
+
+    enum BitField : uint8_t {
+        V0 = 1 << 0,
+        V1 = 1 << 1,
+        V2 = 1 << 2,
+        V3 = 1 << 3,
+    };
+
+    struct J {
+        vec<uint32_t> j1;
+        uint8_t[65] j2;
+        string j3;
+    };
+
+    safe_union SmallSafeUnion {
+        Monostate noinit;
+
+        uint8_t a;
+    };
+
+    safe_union LargeSafeUnion {
+        Monostate noinit;
+
+        int8_t a;
+        uint16_t b;
+        int32_t c;
+        uint64_t d;
+
+        int8_t[13] e;
+        int64_t[5] f;
+
+        string g;
+        vec<bool> h;
+        vec<uint64_t> i;
+
+        J j;
+        struct K {
+            uint8_t k1;
+            uint64_t k2;
+        } k;
+
+        SmallSafeUnion l;
+
+        BitField m;
+        bitfield<BitField> n;
+    };
+
+    safe_union InterfaceTypeSafeUnion {
+        Monostate noinit;
+
+        uint32_t a;
+        int8_t[7] b;
+        IOtherInterface c;
+        string d;
+        vec<string> e;
+        handle f;
+        vec<handle> g;
+    };
+
+    safe_union HandleTypeSafeUnion {
+        Monostate noinit;
+
+        handle a;
+        handle[5] b;
+        vec<handle> c;
+    };
+
+    newLargeSafeUnion() generates (LargeSafeUnion myUnion);
+    setA(LargeSafeUnion myUnion, int8_t a) generates (LargeSafeUnion myUnion);
+    setB(LargeSafeUnion myUnion, uint16_t b) generates (LargeSafeUnion myUnion);
+    setC(LargeSafeUnion myUnion, int32_t c) generates (LargeSafeUnion myUnion);
+    setD(LargeSafeUnion myUnion, uint64_t d) generates (LargeSafeUnion myUnion);
+    setE(LargeSafeUnion myUnion, int8_t[13] e) generates (LargeSafeUnion myUnion);
+    setF(LargeSafeUnion myUnion, int64_t[5] f) generates (LargeSafeUnion myUnion);
+    setG(LargeSafeUnion myUnion, string g) generates (LargeSafeUnion myUnion);
+    setH(LargeSafeUnion myUnion, vec<bool> h) generates (LargeSafeUnion myUnion);
+    setI(LargeSafeUnion myUnion, vec<uint64_t> i) generates (LargeSafeUnion myUnion);
+    setJ(LargeSafeUnion myUnion, J j) generates (LargeSafeUnion myUnion);
+    setK(LargeSafeUnion myUnion, LargeSafeUnion.K k) generates (LargeSafeUnion myUnion);
+    setL(LargeSafeUnion myUnion, SmallSafeUnion l) generates (LargeSafeUnion myUnion);
+    setM(LargeSafeUnion myUnion, BitField m) generates (LargeSafeUnion myUnion);
+    setN(LargeSafeUnion myUnion, bitfield<BitField> m) generates (LargeSafeUnion myUnion);
+
+    newInterfaceTypeSafeUnion() generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceA(InterfaceTypeSafeUnion myUnion, uint32_t a) generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceB(InterfaceTypeSafeUnion myUnion, int8_t[7] b) generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceC(InterfaceTypeSafeUnion myUnion, IOtherInterface c) generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceD(InterfaceTypeSafeUnion myUnion, string d) generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceE(InterfaceTypeSafeUnion myUnion, vec<string> e) generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceF(InterfaceTypeSafeUnion myUnion, handle f) generates (InterfaceTypeSafeUnion myUnion);
+    setInterfaceG(InterfaceTypeSafeUnion myUnion, vec<handle> g) generates (InterfaceTypeSafeUnion myUnion);
+
+    newHandleTypeSafeUnion() generates (HandleTypeSafeUnion myUnion);
+    setHandleA(HandleTypeSafeUnion myUnion, handle a) generates (HandleTypeSafeUnion myUnion);
+    setHandleB(HandleTypeSafeUnion myUnion, handle[5] b) generates (HandleTypeSafeUnion myUnion);
+    setHandleC(HandleTypeSafeUnion myUnion, vec<handle> c) generates (HandleTypeSafeUnion myUnion);
+};

@@ -1,0 +1,21 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.javax.net.ssl"
+        },
+        {
+          "include-filter": "com.android.org.conscrypt.javax.net.ssl"
+        },
+        {
+          "include-filter": "org.apache.harmony.tests.javax.net.ssl"
+        },
+        {
+          "include-filter": "org.apache.harmony.luni.tests.internal.net.www.protocol.https"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.radio@1.4;
+
+import @1.0::Dial;
+import @1.2::DataRequestReason;
+import @1.2::NetworkScanRequest;
+import @1.3::IRadio;
+import @1.4::AccessNetwork;
+import @1.4::CarrierRestrictionsWithPriority;
+import @1.4::DataProfileInfo;
+import @1.4::EmergencyCallRouting;
+import @1.4::EmergencyServiceCategory;
+import @1.4::RadioAccessFamily;
+import @1.4::SimLockMultiSimPolicy;
+
+/**
+ * This interface is used by telephony and telecom to talk to cellular radio.
+ * All the functions have minimum one parameter:
+ * serial: which corresponds to serial no. of request. Serial numbers must only be memorized for the
+ * duration of a method call. If clients provide colliding serials (including passing the same
+ * serial to different methods), multiple responses (one for each method call) must still be served.
+ * setResponseFunctions must work with @1.1::IRadioResponse and @1.1::IRadioIndication.
+ */
+interface IRadio extends @1.3::IRadio {
+    /**
+     * Setup a packet data connection. If DataCallResponse.status returns DataCallFailCause:NONE,
+     * the data connection must be added to data calls and a unsolDataCallListChanged() must be
+     * sent. The call remains until removed by subsequent unsolDataCallIstChanged(). It may be
+     * lost due to many factors, including deactivateDataCall() being issued, the radio powered
+     * off, reception lost or even transient factors like congestion. This data call list is
+     * returned by getDataCallList() and dataCallListChanged().
+     *
+     * The Radio is expected to:
+     *   - Create one data call context.
+     *   - Create and configure a dedicated interface for the context.
+     *   - The interface must be point to point.
+     *   - The interface is configured with one or more addresses and is capable of sending and
+     *     receiving packets. The prefix length of the addresses must be /32 for IPv4 and /128
+     *     for IPv6.
+     *   - Must not modify routing configuration related to this interface; routing management is
+     *     exclusively within the purview of the Android OS.
+     *   - Support simultaneous data call contexts up to DataRegStateResult.maxDataCalls specified
+     *     in the response of getDataRegistrationState.
+     *
+     * @param serial Serial number of request.
+     * @param accessNetwork The access network to setup the data call. If the data connection cannot
+     *     be established on the specified access network, the setup request must be failed.
+     * @param dataProfileInfo Data profile info.
+     * @param roamingAllowed Indicates whether or not data roaming is allowed by the user.
+     * @param reason The request reason. Must be DataRequestReason.NORMAL or
+     *     DataRequestReason.HANDOVER.
+     * @param addresses If the reason is DataRequestReason.HANDOVER, this indicates the list of link
+     *     addresses of the existing data connection. The format is IP address with optional "/"
+     *     prefix length (The format is defined in RFC-4291 section 2.3). For example, "192.0.1.3",
+     *     "192.0.1.11/16", or "2001:db8::1/64". Typically one IPv4 or one IPv6 or one of each. If
+     *     the prefix length is absent, then the addresses are assumed to be point to point with
+     *     IPv4 with prefix length 32 or IPv6 with prefix length 128. This parameter must be ignored
+     *     unless reason is DataRequestReason.HANDOVER.
+     * @param dnses If the reason is DataRequestReason.HANDOVER, this indicates the list of DNS
+     *     addresses of the existing data connection. The format is defined in RFC-4291 section
+     *     2.2. For example, "192.0.1.3" or "2001:db8::1". This parameter must be ignored unless
+     *     reason is DataRequestReason.HANDOVER.
+     *
+     * Response function is IRadioResponse.setupDataCallResponse()
+     *
+     * Note this API is same as 1.2 version except using the 1.4 AccessNetwork as the input param.
+     */
+    oneway setupDataCall_1_4(int32_t serial, AccessNetwork accessNetwork,
+            DataProfileInfo dataProfileInfo, bool roamingAllowed,
+            DataRequestReason reason, vec<string> addresses, vec<string> dnses);
+
+    /**
+     * Set an apn to initial attach network
+     *
+     * @param serial Serial number of request.
+     * @param dataProfileInfo data profile containing APN settings
+     *
+     * Response callback is IRadioResponse.setInitialAttachApnResponse()
+     */
+    oneway setInitialAttachApn_1_4(int32_t serial, DataProfileInfo dataProfileInfo);
+
+    /**
+     * Send data profiles of the current carrier to the modem.
+     *
+     * @param serial Serial number of request.
+     * @param profiles Array of DataProfile to set.
+     *
+     * Response callback is IRadioResponse.setDataProfileResponse()
+     */
+    oneway setDataProfile_1_4(int32_t serial, vec<DataProfileInfo> profiles);
+
+    /**
+     * Initiate emergency voice call, with zero or more emergency service category(s), zero or
+     * more emergency Uniform Resource Names (URN), and routing information for handling the call.
+     * Android uses this request to make its emergency call instead of using @1.0::IRadio.dial
+     * if the 'address' in the 'dialInfo' field is identified as an emergency number by Android.
+     *
+     * In multi-sim scenario, if the emergency number is from a specific subscription, this radio
+     * request is sent through the IRadio service that serves the subscription, no matter of the
+     * PUK/PIN state of the subscription and the service state of the radio.
+     *
+     * Some countries or carriers require some emergency numbers that must be handled with normal
+     * call routing if possible or emergency routing. 1) if the 'routing' field is specified as
+     * @1.4::EmergencyNumberRouting#NORMAL, the implementation must try the full radio service to
+     * use normal call routing to handle the call; if service cannot support normal routing, the
+     * implementation must use emergency routing to handle the call. 2) if 'routing' is specified
+     * as @1.4::EmergencyNumberRouting#EMERGENCY, the implementation must use emergency routing to
+     * handle the call. 3) if 'routing' is specified as @1.4::EmergencyNumberRouting#UNKNOWN,
+     * Android does not know how to handle the call.
+     *
+     * If the dialed emergency number does not have a specified emergency service category, the
+     * 'categories' field is set to @1.4::EmergencyServiceCategory#UNSPECIFIED; if the dialed
+     * emergency number does not have specified emergency Uniform Resource Names, the 'urns' field
+     * is set to an empty list. If the underlying technology used to request emergency services
+     * does not support the emergency service category or emergency uniform resource names, the
+     * field 'categories' or 'urns' may be ignored.
+     *
+     * In the scenarios that the 'address' in the 'dialInfo' field has other functions besides the
+     * emergency number function, if the 'hasKnownUserIntentEmergency' field is true, the user's
+     * intent for this dial request is emergency call, and the modem must treat this as an actual
+     * emergency dial; if the 'hasKnownUserIntentEmergency' field is false, Android does not know
+     * user's intent for this call.
+     *
+     * If 'isTesting' is true, this request is for testing purpose, and must not be sent to a real
+     * emergency service; otherwise it's for a real emergency call request.
+     *
+     * Reference: 3gpp 22.101, Section 10 - Emergency Calls;
+     *            3gpp 23.167, Section 6 - Functional description;
+     *            3gpp 24.503, Section 5.1.6.8.1 - General;
+     *            RFC 5031
+     *
+     * @param serial Serial number of request.
+     * @param dialInfo the same @1.0::Dial information used by @1.0::IRadio.dial.
+     * @param categories bitfield<@1.4::EmergencyServiceCategory> the Emergency Service Category(s)
+     *     of the call.
+     * @param urns the emergency Uniform Resource Names (URN)
+     * @param routing @1.4::EmergencyCallRouting the emergency call routing information.
+     * @param hasKnownUserIntentEmergency Flag indicating if user's intent for the emergency call
+     *     is known.
+     * @param isTesting Flag indicating if this request is for testing purpose.
+     *
+     * Response function is IRadioResponse.emergencyDialResponse()
+     */
+    oneway emergencyDial(int32_t serial, Dial dialInfo,
+            bitfield<EmergencyServiceCategory> categories, vec<string> urns,
+            EmergencyCallRouting routing, bool hasKnownUserIntentEmergency, bool isTesting);
+
+    /**
+     * Starts a network scan
+     *
+     * @param serial Serial number of request.
+     * @param request Defines the radio networks/bands/channels which need to be scanned.
+     *
+     * Same API as @1.2::IRadio.startNetworkScan_1_2, except using the
+     * @1.4::IRadioResponse.startNetworkScanResponse_1_4 as the response.
+     */
+    oneway startNetworkScan_1_4(int32_t serial, NetworkScanRequest request);
+
+    /**
+     * Query the preferred network type bitmap.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response callback is IRadioResponse.getPreferredNetworkTypeBitmapResponse()
+     */
+    oneway getPreferredNetworkTypeBitmap(int32_t serial);
+
+    /**
+     * Requests to set the preferred network type for searching and registering.
+     *
+     * @param serial Serial number of request.
+     * @param networkTypeBitmap a 32-bit bitmap of RadioAccessFamily.
+     *
+     * Response callback is IRadioResponse.setPreferredNetworkTypeBitmapResponse()
+     */
+    oneway setPreferredNetworkTypeBitmap(
+            int32_t serial, bitfield<RadioAccessFamily> networkTypeBitmap);
+
+    /**
+     * Set carrier restrictions. Expected modem behavior:
+     *  If never receives this command:
+     *  - Must allow all carriers
+     *  Receives this command:
+     *  - Only allow carriers specified in carriers. The restriction persists across power cycles
+     *    and FDR. If a present SIM is allowed, modem must not reload the SIM. If a present SIM is
+     *    *not* allowed, modem must detach from the registered network and only keep emergency
+     *    service, and notify Android SIM refresh reset with new SIM state being
+     *    CardState:RESTRICTED. Emergency service must be enabled.
+     *
+     * @param serial Serial number of request.
+     * @param carriers CarrierRestrictionsWithPriority consisting allowed and excluded carriers
+     *        as defined in types.hal
+     * @param multiSimPolicy Policy to be used for devices with multiple SIMs.
+     *
+     * Response callback is IRadioResponse.setAllowedCarriersResponse_1_4()
+     */
+    oneway setAllowedCarriers_1_4(int32_t serial, CarrierRestrictionsWithPriority carriers,
+            SimLockMultiSimPolicy multiSimPolicy);
+
+    /**
+     * Get carrier restrictions.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response callback is IRadioResponse.getAllowedCarriersResponse_1_4()
+     */
+    oneway getAllowedCarriers_1_4(int32_t serial);
+
+    /**
+     * Requests current signal strength and associated information.  Must succeed if radio is on.
+     *
+     * @param serial Serial number of request.
+     *
+     * Response function is IRadioResponse.getSignalStrengthResponse_1_4()
+     */
+    oneway getSignalStrength_1_4(int32_t serial);
+};

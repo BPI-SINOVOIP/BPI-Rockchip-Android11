@@ -1,0 +1,162 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.tv.tuner@1.0;
+
+import IDvr;
+import IDvrCallback;
+import IFilter;
+import IFilterCallback;
+import ITimeFilter;
+
+/**
+ * Demultiplexer(Demux) takes a single multiplexed input and splits it into
+ * one or more output.
+ */
+interface IDemux {
+    /**
+     * Set a frontend resource as data input of the demux
+     *
+     * It is used by the client to specify a hardware frontend as data source of
+     * this demux instance. A demux instance can have only one data source.
+     *
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_STATE if failed for wrong state.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    setFrontendDataSource(FrontendId frontendId) generates (Result result);
+
+    /**
+     * Open a new filter in the demux
+     *
+     * It is used by the client to open a filter in the demux.
+     *
+     * @param type the type of the filter to be added.
+     * @param bufferSize the buffer size of the filter to be opened. It's used
+     * to create a FMQ(Fast Message Queue) to hold data output from the filter.
+     * @param cb the callback for the filter to be used to send notifications
+     * back to the client.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_STATE if failed for wrong state.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     * @return filter the filter instance of the newly added.
+     */
+    openFilter(DemuxFilterType type, uint32_t bufferSize, IFilterCallback cb)
+        generates (Result result, IFilter filter);
+
+    /**
+     * Open time filter of the demux
+     *
+     * It is used by the client to open time filter of the demux.
+     *
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         UNAVAILABLE if time filter is not supported.
+     *         INVALID_STATE if failed for wrong state.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     * @return timeFilter the time filter instance of the newly added.
+     */
+    openTimeFilter() generates (Result result, ITimeFilter timeFilter);
+
+    /**
+     * Get hardware sync ID for audio and video.
+     *
+     * It is used by the client to get the hardware sync ID for audio and video.
+     *
+     * @param filter the filter instance.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_ARGUMENT if failed for a wrong filter ID.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     * @return avSyncHwId the id of hardware A/V sync.
+     */
+    getAvSyncHwId(IFilter filter) generates (Result result, AvSyncHwId avSyncHwId);
+
+    /**
+     * Get current time stamp to use for A/V sync
+     *
+     * It is used by the client to get current time stamp for A/V sync. HW is
+     * supported to increment and maintain current time stamp.
+     *
+     * @param avSyncHwId the hardware id of A/V sync.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_ARGUMENT if failed for a wrong hardware ID of A/V sync.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     * @return time the current time stamp of hardware A/V sync. The time stamp
+     * based on 90KHz has the same format as PTS (Presentation Time Stamp).
+     */
+    getAvSyncTime(AvSyncHwId avSyncHwId) generates (Result result, uint64_t time);
+
+    /**
+     * Close the Demux instance
+     *
+     * It is used by the client to release the demux instance. HAL clear
+     * underneath resource. client mustn't access the instance any more.
+     *
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    close() generates (Result result);
+
+    /**
+     * Open a DVR (Digital Video Record) instance in the demux
+     *
+     * It is used by the client to record and playback.
+     *
+     * @param type specify which kind of DVR to open.
+     * @param bufferSize the buffer size of the output to be added. It's used to
+     * create a FMQ(Fast Message Queue) to hold data from selected filters.
+     * @param cb the callback for the DVR to be used to send notifications
+     * back to the client.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         OUT_OF_MEMORY if failed for not enough memory.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     * @return dvr a DVR instance.
+     */
+    openDvr(DvrType type, uint32_t bufferSize, IDvrCallback cb)
+        generates (Result result, IDvr dvr);
+
+    /**
+     * Connect Conditional Access Modules (CAM) through Common Interface (CI)
+     *
+     * It is used by the client to connect CI-CAM. The demux uses the output
+     * from the frontend as the input by default, and must change to use the
+     * output from CI-CAM as the input after this call take place.
+     *
+     * @param ciCamId specify CI-CAM Id to connect.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    connectCiCam(uint32_t ciCamId) generates (Result result);
+
+    /**
+     * Disconnect Conditional Access Modules (CAM)
+     *
+     * It is used by the client to disconnect CI-CAM. The demux will use the
+     * output from the frontend as the input after this call take place.
+     *
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    disconnectCiCam() generates (Result result);
+};

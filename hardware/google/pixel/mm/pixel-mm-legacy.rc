@@ -1,0 +1,48 @@
+#
+# Copyright (C) 2020 The Android Open-Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+on property:sys.boot_completed=1
+    # Create mm_event trace point.
+    # For legacy devices, only mm_event is using this trace instance.
+    # Debugfs is only used in legacy devices and going to be deprecated.
+    # If others want to put more,it should get hard review from pixel-perf-team.
+    mkdir /sys/kernel/debug/tracing/instances/pixel-trace 0755 system system
+    chown system system /sys/kernel/debug/tracing/instances/pixel-trace/trace
+    chmod 0660 /sys/kernel/debug/tracing/instances/pixel-trace/trace
+    chown system system /sys/kernel/debug/tracing/instances/pixel-trace/tracing_on
+    chmod 0660 /sys/kernel/debug/tracing/instances/pixel-trace/tracing_on
+    write /sys/kernel/debug/tracing/instances/pixel-trace/buffer_size_kb 64
+    write /sys/kernel/debug/tracing/instances/pixel-trace/events/mm_event/enable 1
+    write /sys/kernel/debug/tracing/instances/pixel-trace/events/f2fs/f2fs_iostat/enable 1
+    write /sys/kernel/debug/tracing/instances/pixel-trace/events/ufs/ufs_stats/enable 1
+
+# turns off tracing right before bugreporting to keep more traces
+on property:init.svc.dumpstatez=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.dumpstatez=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1
+
+on property:init.svc.bugreport=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.bugreport=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1
+
+on property:init.svc.bugreportd=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.bugreportd=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1

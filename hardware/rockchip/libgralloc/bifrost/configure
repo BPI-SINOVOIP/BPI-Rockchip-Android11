@@ -1,0 +1,196 @@
+#!/usr/bin/env bash
+
+# Copyright (C) 2019-2020 Arm Limited.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# This script selects the build configuration to use for Gralloc.
+# The Arm Reference Gralloc supports multiple versions of Android and Gralloc APIs.
+# This script must be used before the build stage to select what to build, consistently with the target Android system.
+#
+# The Arm Reference Gralloc supports the following combinations:
+# - Gralloc 4 APIs on Android 11
+# This uses Blueprint as a build system.
+
+# - Gralloc 3 APIs on Android 10
+# This uses Makefiles as a build system.
+# The privatebuffer interface is enabled by default, but can be disabled (not recommended.)
+#
+# The script determines automatically what to do from the environment, which requires a previous "lunch".
+#
+# When not in a "lunched" shell, the Android version can be set to 'n' by specifying:
+# ANDROID_n=y
+# The Android version affects whether the private buffer interface build is enabled or not.
+# It will be enabled on Android version 10 unless overriden with the PRIVATE_BUFFER_INTERFACE option.
+#
+# The Android version also affects the Gralloc version which is then used to decide
+# whether the Blueprint build files are enabled.
+# Defaults are:
+#   Android 9 : Gralloc 2, use makefiles.
+#   Android 10: Gralloc 3, use makefiles.
+#   Android 11: Gralloc 4, use Blueprint.
+#
+# To override the default Gralloc version to n use:
+# GRALLOC_n=y
+# Note that this does not mean that that version of Gralloc will be built, it only controls
+# whether makefiles or Blueprint files are enabled.
+#
+# The script does not check that the combination of options specified is valid.
+
+set -e
+
+PLATFORM_VERSION=0
+GRALLOC_VERSION=0
+
+# In a lunched shell auto detect the Android version.
+if [ ! -z $ANDROID_BUILD_TOP ]; then
+    PLATFORM_VERSION=$(${ANDROID_BUILD_TOP}/build/soong/soong_ui.bash --dumpvar-mode PLATFORM_VERSION 2>/dev/null)
+    # Adjust for early access versions that use a capital letter eg. Q -> 10
+    if [[ $PLATFORM_VERSION == [A-Z] ]]; then
+        PLATFORM_VERSION=$(printf "%d" "'$PLATFORM_VERSION")
+        PLATFORM_VERSION=$(($PLATFORM_VERSION - 71))
+    fi
+fi
+
+SELECTED_PLATFORM=0
+for arg in "$@"; do
+    case $arg in
+    ANDROID_9=y)
+        SELECTED_PLATFORM=9
+        ;;
+    ANDROID_10=y)
+        SELECTED_PLATFORM=10
+        ;;
+    ANDROID_11=y)
+        SELECTED_PLATFORM=11
+        ;;
+    PRIVATEBUFFER_INTERFACE=y)
+        PRIVATE_BUFFER=1
+        ;;
+    PRIVATEBUFFER_INTERFACE=n)
+        PRIVATE_BUFFER=0
+        ;;
+    GRALLOC_2=y)
+        GRALLOC_VERSION=2
+        ;;
+    GRALLOC_3=y)
+        GRALLOC_VERSION=3
+        ;;
+    GRALLOC_4=y)
+        GRALLOC_VERSION=4
+        ;;
+    *)
+        echo "$arg ignored"
+        ;;
+    esac
+done
+
+if [ $PLATFORM_VERSION != 0 ] && [ $SELECTED_PLATFORM != 0 ] && [ $PLATFORM_VERSION != $SELECTED_PLATFORM ]; then
+   echo "ANDROID_${SELECTED_PLATFORM} ignored. Using detected Android version of ${PLATFORM_VERSION}"
+elif [ $SELECTED_PLATFORM != 0 ]; then
+    PLATFORM_VERSION=$SELECTED_PLATFORM
+fi
+
+if [ $PLATFORM_VERSION = 0 ] && [ $GRALLOC_VERSION = 0 ] && [ -z $PRIVATE_BUFFER ]; then
+    echo "Error: no Android version detected or specified. It is recommended to run from a lunched shell."
+    exit 1
+fi
+
+if [ -z $PRIVATE_BUFFER ] && [ $PLATFORM_VERSION = 10 ]; then
+    PRIVATE_BUFFER=1
+fi
+
+if [ -z $PRIVATE_BUFFER ]; then
+    PRIVATE_BUFFER=0
+fi
+
+if [ $GRALLOC_VERSION = 0 ]; then
+    case $PLATFORM_VERSION in
+    9)
+        GRALLOC_VERSION=2
+        ;;
+    10)
+        GRALLOC_VERSION=3
+        ;;
+    11)
+        GRALLOC_VERSION=4
+        ;;
+    esac
+fi
+
+if [ $PRIVATE_BUFFER = 1 ]; then
+    echo "Private buffer interface build enabled."
+fi
+
+# command pushd `dirname $0` > /dev/null
+command pushd $(pwd) > /dev/null
+
+# Clean all build files
+find . \( -name "Android.bp" ! -wholename "*src/Android.bp" \) -delete
+if [ -f Android.mk ]; then
+    mv Android.mk Android.mk.disabled
+fi
+
+if [ $PRIVATE_BUFFER = 1 ]; then
+    cp interfaces/Android.bp.disabled interfaces/Android.bp
+    for path in `find interfaces/graphics -name Android.bp.disabled`; do
+        dir=`dirname $path`
+        cp $dir/Android.bp.disabled $dir/Android.bp
+    done
+    cp interfaces/libs/drmutils/Android.bp.disabled interfaces/libs/drmutils/Android.bp
+fi
+
+if [ $GRALLOC_VERSION = 0 ]; then
+    echo "Warning: no Gralloc version selected. No build files enabled."
+    exit
+else
+    echo "Enabling build files for Gralloc version ${GRALLOC_VERSION}"
+fi
+
+if [ $GRALLOC_VERSION = 2 ] || [ $GRALLOC_VERSION = 3 ]; then
+    cp Android.mk.disabled Android.mk
+fi
+
+# Stable AIDL and DRM utils interfaces
+AIDL_FILES="interfaces/aidl/Android.bp.disabled
+            interfaces/libs/drmutils/Android.bp.disabled"
+
+# Blueprint files for all modules common to all Gralloc versions
+COMMON_FILES="Android.bp.disabled
+              src/core/Android.bp.disabled
+              src/capabilities/Android.bp.disabled
+              src/allocator/Android.bp.disabled
+              src/hidl_common/Android.bp.disabled"
+
+# Blueprint files for tests
+if [ -d tests ]; then
+    TEST_FILES=`find tests -name Android.bp.disabled`
+else
+    TEST_FILES=
+fi
+
+if [ $GRALLOC_VERSION = 4 ]; then
+    GRALLOC4_FILES="${AIDL_FILES}
+                    ${COMMON_FILES}
+                    ${TEST_FILES}
+                    service/4.x/Android.bp.disabled
+                    src/4.x/Android.bp.disabled"
+
+    for FILE in $GRALLOC4_FILES; do
+        cp "${FILE}" "${FILE%.disabled}"
+    done
+fi
+
+command popd > /dev/null

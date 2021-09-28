@@ -1,0 +1,132 @@
+/*
+ * Copyright (C) 2020 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+soong_config_module_type {
+	name: "arm_gralloc_cc_defaults",
+	module_type: "cc_defaults",
+	config_namespace: "arm_gralloc",
+	variables: [
+		"mali_display_version",
+		"gralloc_hwc_force_bgra_8888",
+		"gralloc_hwc_fb_disable_afbc",
+		"gralloc_camera_write_raw16",
+	],
+	properties: [
+		"cflags",
+	],
+}
+
+soong_config_string_variable {
+	name: "mali_display_version",
+	values: [
+		"v0",
+		"v500",
+		"v550",
+		"v650",
+		"v71",
+	],
+}
+
+soong_config_bool_variable {
+	name: "gralloc_hwc_force_bgra_8888",
+}
+soong_config_bool_variable {
+	name: "gralloc_hwc_fb_disable_afbc",
+}
+soong_config_bool_variable {
+	name: "gralloc_camera_write_raw16",
+}
+
+arm_gralloc_cc_defaults {
+	name: "arm_gralloc_defaults",
+	owner: "arm",
+	vendor: true,
+	proprietary: true,
+	cflags: [
+		"-ldl",
+		"-Wundef",
+		"-Werror",
+		"-DGRALLOC_LIBRARY_BUILD=1",
+		"-DDISABLE_FRAMEBUFFER_HAL=1",
+		"-DGRALLOC_USE_LEGACY_CALCS=0",
+		"-DGRALLOC_USE_LEGACY_LOCK=0",
+	],
+	product_variables: {
+		platform_sdk_version: {
+			cflags: ["-DPLATFORM_SDK_VERSION=%d"],
+		},
+	},
+	header_libs: [
+		"libgralloc_headers",
+	],
+	target: {
+		android: {
+			cflags: [
+				"-DGRALLOC_HOST_BUILD=0",
+			],
+		},
+		host: {
+			cflags: [
+				"-DGRALLOC_HOST_BUILD=1",
+			],
+		},
+	},
+	soong_config_variables: {
+		mali_display_version: {
+			v0: {
+				cflags: [
+					"-DMALI_DISPLAY_VERSION=0",
+				],
+			},
+			v500: {
+				cflags: [
+					"-DMALI_DISPLAY_VERSION=500",
+				],
+			},
+			v550: {
+				cflags: [
+					"-DMALI_DISPLAY_VERSION=550",
+				],
+			},
+			v650: {
+				cflags: [
+					"-DMALI_DISPLAY_VERSION=650",
+				],
+			},
+			v71: {
+				cflags: [
+					"-DMALI_DISPLAY_VERSION=71",
+				],
+			},
+		},
+		gralloc_hwc_force_bgra_8888: {
+			cflags: [
+				"-DGRALLOC_HWC_FORCE_BGRA_8888=1",
+			],
+		},
+		gralloc_hwc_fb_disable_afbc: {
+			cflags: [
+				"-DGRALLOC_HWC_FB_DISABLE_AFBC=1",
+			],
+		},
+		gralloc_camera_write_raw16: {
+			cflags: [
+				"-DGRALLOC_CAMERA_WRITE_RAW16=1",
+			],
+		},
+	},
+}

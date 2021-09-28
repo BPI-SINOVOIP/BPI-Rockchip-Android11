@@ -1,0 +1,15 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.javax.sql"
+        },
+        {
+          "include-filter": "org.apache.harmony.sql.tests.javax.sql"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+# To find and bind Google Battery HAL
+allow turbo_adapter hal_googlebattery_hwservice:hwservice_manager find;
+binder_call(turbo_adapter, hal_googlebattery)

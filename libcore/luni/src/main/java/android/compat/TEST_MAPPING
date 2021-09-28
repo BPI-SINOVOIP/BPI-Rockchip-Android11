@@ -1,0 +1,17 @@
+{
+  "presubmit": [
+    // Unit tests for CoreCompatChangeRule
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.junit.util.compat"
+        }
+      ]
+    },
+    // CTS test for CompatChanges System
+    {
+      "name": "CtsAppCompatHostTestCases"
+    }
+  ]
+}

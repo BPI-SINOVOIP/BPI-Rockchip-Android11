@@ -1,0 +1,335 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.radio@1.5;
+
+import @1.0::RadioResponseInfo;
+import @1.0::SendSmsResult;
+import @1.4::IRadioResponse;
+import @1.5::BarringInfo;
+import @1.5::CardStatus;
+import @1.5::CellIdentity;
+import @1.5::CellInfo;
+import @1.5::PersoSubstate;
+import @1.5::RegStateResult;
+import @1.5::SetupDataCallResult;
+
+/**
+ * Interface declaring response functions to solicited radio requests.
+ */
+interface IRadioResponse extends @1.4::IRadioResponse {
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:RADIO_NOT_AVAILABLE
+     */
+    oneway setSignalStrengthReportingCriteriaResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     */
+    oneway setLinkCapacityReportingCriteriaResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:SIM_ABSENT
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:BUSY
+     */
+    oneway enableUiccApplicationsResponse(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param enabled whether Uicc applications are enabled.
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:SIM_ABSENT
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     */
+    oneway areUiccApplicationsEnabledResponse(RadioResponseInfo info, bool enabled);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:INVALID_ARGUMENTS
+     */
+    oneway setSystemSelectionChannelsResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:DEVICE_IN_USE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:MODEM_ERR
+     *   RadioError:INVALID_ARGUMENTS
+     */
+    oneway startNetworkScanResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param dcResponse SetupDataCallResult defined in types.hal
+     *
+     * Valid errors returned:
+     *   RadioError:NONE must be returned on both success and failure of setup with the
+     *              DataCallResponse.status containing the actual status
+     *              For all other errors the DataCallResponse is ignored.
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:OP_NOT_ALLOWED_BEFORE_REG_TO_NW
+     *   RadioError:OP_NOT_ALLOWED_DURING_VOICE_CALL
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:NO_RESOURCES
+     *   RadioError:SIM_ABSENT
+     */
+    oneway setupDataCallResponse_1_5(RadioResponseInfo info, SetupDataCallResult dcResponse);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param dcResponse List of SetupDataCallResult as defined in types.hal
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:NO_RESOURCES
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     *   RadioError:SIM_ABSENT
+     */
+    oneway getDataCallListResponse_1_5(RadioResponseInfo info, vec<SetupDataCallResult> dcResponse);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:SUBSCRIPTION_NOT_AVAILABLE
+     *   RadioError:NO_MEMORY
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:SYSTEM_ERR
+     *   RadioError:MODEM_ERR
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:NOT_PROVISIONED
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     *   RadioError:NO_RESOURCES
+     *   RadioError:CANCELLED
+     */
+    oneway setInitialAttachApnResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:SUBSCRIPTION_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:NO_MEMORY
+     *   RadioError:NO_RESOURCES
+     *   RadioError:CANCELLED
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     *   RadioError:SIM_ABSENT
+     */
+    oneway setDataProfileResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:INVALID_ARGUMENTS
+     */
+    oneway setRadioPowerResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:SYSTEM_ERR
+     */
+    oneway setIndicationFilterResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param cellIdentity CellIdentity for the barring infos.
+     * @param barringInfos a vector of barring info for all barring service types
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:MODEM_ERR
+     */
+    oneway getBarringInfoResponse(RadioResponseInfo info, CellIdentity cellIdentity,
+            vec<BarringInfo> barringInfos);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param voiceRegResponse Current Voice registration response as defined by RegStateResult
+     *        in types.hal
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     */
+    oneway getVoiceRegistrationStateResponse_1_5(RadioResponseInfo info,
+            RegStateResult voiceRegResponse);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param dataRegResponse Current Data registration response as defined by RegStateResult in
+     *        types.hal
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:NOT_PROVISIONED
+     */
+    oneway getDataRegistrationStateResponse_1_5(RadioResponseInfo info,
+            RegStateResult dataRegResponse);
+
+    /**
+     * This is identitcal to getCellInfoListResponse_1_4 but uses an updated version of CellInfo.
+     *
+     * @param info Response info struct containing response type, serial no. and error
+     * @param cellInfo List of current cell information known to radio
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     */
+    oneway getCellInfoListResponse_1_5(RadioResponseInfo info, vec<CellInfo> cellInfo);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:ILLEGAL_SIM_OR_ME
+     *   RadioError:OPERATION_NOT_ALLOWED
+     *   RadioError:INVALID_STATE
+     *   RadioError:NO_MEMORY
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:SYSTEM_ERR
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:MODEM_ERR
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     *   RadioError:NO_RESOURCES
+     *   RadioError:CANCELLED
+     *
+     * Returns RadioError:ILLEGAL_SIM_OR_ME when the failure is permanent and
+     * no retries needed, such as illegal SIM or ME.
+     */
+    oneway setNetworkSelectionModeManualResponse_1_5(RadioResponseInfo info);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param sms Response to sms sent as defined by SendSmsResult in types.hal
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:SMS_SEND_FAIL_RETRY
+     *   RadioError:NETWORK_REJECT
+     *   RadioError:INVALID_STATE
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:NO_MEMORY
+     *   RadioError:REQUEST_RATE_LIMITED
+     *   RadioError:INVALID_SMS_FORMAT
+     *   RadioError:SYSTEM_ERR
+     *   RadioError:FDN_CHECK_FAILURE
+     *   RadioError:ENCODING_ERR
+     *   RadioError:INVALID_SMSC_ADDRESS
+     *   RadioError:MODEM_ERR
+     *   RadioError:NETWORK_ERR
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     *   RadioError:INVALID_MODEM_STATE
+     *   RadioError:NETWORK_NOT_READY
+     *   RadioError:OPERATION_NOT_ALLOWED
+     *   RadioError:NO_RESOURCES
+     *   RadioError:CANCELLED
+     *   RadioError:SIM_ABSENT
+     */
+    oneway sendCdmaSmsExpectMoreResponse(RadioResponseInfo info, SendSmsResult sms);
+
+    /**
+     * @param info Response info struct contatining response type, serial no. and error
+     * @param persoType SIM Personalisation type
+     * @param remainingRetries postiive values indicates number of retries remaining,
+     * must be equal to -1 if number of retries is infinite.
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:PASSWORD_INCORRECT (code is invalid)
+     *   RadioError:NO_MEMORY
+     *   RadioError:INVALID_SIM_STATE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:SYSTEM_ERR
+     *   RadioError:MODEM_ERR
+     *   RadioError:INVALID_ARGUMENTS
+     *   RadioError:NO_RESOURCES
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     */
+    oneway supplySimDepersonalizationResponse(RadioResponseInfo info,
+            PersoSubstate persoType, int32_t remainingRetries);
+
+    /**
+     * @param info Response info struct containing response type, serial no. and error
+     * @param cardStatus ICC card status as defined by CardStatus in types.hal
+     *
+     * Valid errors returned:
+     *   RadioError:NONE
+     *   RadioError:RADIO_NOT_AVAILABLE
+     *   RadioError:INTERNAL_ERR
+     *   RadioError:NO_RESOURCES
+     *   RadioError:REQUEST_NOT_SUPPORTED
+     */
+    oneway getIccCardStatusResponse_1_5(RadioResponseInfo info, CardStatus cardStatus);
+};

@@ -1,0 +1,106 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.tv.tuner@1.0;
+
+import ILnbCallback;
+
+/**
+ * A Tuner LNB (low-noise block downconverter) is used by satellite frontend
+ * to receive the microwave signal from the satellite, amplify it, and
+ * downconvert the frequency to a lower frequency.
+ */
+interface ILnb {
+    /**
+     * Set the lnb callback.
+     *
+     * ILnbCallback is used by the client to receive events from the Lnb.
+     * Only one callback per ILnb instance is supported. The callback
+     * will be replaced if it's set again.
+     *
+     * @param callback Callback object to pass Lnb events to the system.
+     *        The previously registered callback must be replaced with this one.
+     *        It can be null.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_STATE if callback can't be set at current stage,
+     *         UNKNOWN_ERROR if callback setting failed for other reasons.
+     */
+    setCallback(ILnbCallback callback) generates (Result result);
+
+    /**
+     * Set the lnb's power voltage.
+     *
+     * @param voltage the power's voltage the Lnb to use.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_ARGUMENT if the selected voltage isn't allowed,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    setVoltage(LnbVoltage voltage) generates (Result result);
+
+    /**
+     * Set the lnb's tone mode.
+     *
+     * @param tone the tone mode the Lnb to use.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_ARGUMENT if the selected tone mode isn't allowed,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    setTone(LnbTone tone) generates (Result result);
+
+    /**
+     * Select the lnb's position.
+     *
+     * @param position the position the Lnb to use.
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_ARGUMENT if the selected position isn't allowed,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    setSatellitePosition(LnbPosition position) generates (Result result);
+
+    /**
+     *  Sends DiSEqC (Digital Satellite Equipment Control) message.
+     *
+     * Client sends DiSeqc message to DiSEqc to LNB. The response message from
+     * the device comes back to the client through frontend's callback
+     * onDiseqcMessage.
+     *
+     * @param diseqcMessage a byte array of data for DiSEqC message which is
+     *        specified by EUTELSAT Bus Functional Specification Version 4.2.
+     *
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         INVALID_STATE if the frontend can't send DiSEqc Message, such as
+     *         cable frontend.
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    sendDiseqcMessage(vec<uint8_t> diseqcMessage) generates (Result result);
+
+    /**
+     * Releases the LNB instance
+     *
+     * Associated resources are released.  close may be called more than once.
+     * Calls to any other method after this will return an error
+     *
+     * @return result Result status of the operation.
+     *         SUCCESS if successful,
+     *         UNKNOWN_ERROR if failed for other reasons.
+     */
+    close() generates (Result result);
+};

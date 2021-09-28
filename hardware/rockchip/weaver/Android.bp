@@ -1,0 +1,118 @@
+bootstrap_go_package {
+    name: "soong-libRkTeeWeaver",
+    pkgPath: "android/soong/libRkTeeWeaver",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+        "Android.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_libRkTeeWeaver {
+    name: "cc_libRkTeeWeaver_defaults"
+}
+
+// FIXME: your file license if you have one
+cc_library_shared {
+    name: "android.hardware.weaver@1.0-impl",
+    relative_install_path: "hw",
+    proprietary: true,
+    srcs: [
+        "Weaver.cpp",
+    ],
+    defaults: [
+        "cc_libRkTeeWeaver_defaults"
+    ],
+    shared_libs: [
+        "libbase",
+        "libcutils",
+        "libhidlbase",
+        "libutils",
+        "liblog",
+        "android.hardware.weaver@1.0",
+    ],
+}
+
+cc_binary {
+    name: "android.hardware.weaver@1.0-service",
+    defaults: ["hidl_defaults"],
+    relative_install_path: "hw",
+    proprietary: true,
+    init_rc: ["android.hardware.weaver@1.0-service.rc"],
+    vintf_fragments: ["android.hardware.weaver@1.0-service.xml"],
+    srcs: ["service.cpp"],
+
+    shared_libs: [
+        "libbase",
+        "libcutils",
+        "liblog",
+        "libcutils",
+        "libdl",
+        "libbase",
+        "libutils",
+        "libhardware",
+        "libhidlbase",
+        "android.hardware.weaver@1.0",
+    ],
+
+}
+cc_prebuilt_library_shared {
+    name: "libRkTeeWeaver.v1",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/v1/lib64/libRkTeeWeaver.v1.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/v1/lib/libRkTeeWeaver.v1.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libteec",
+    ],
+    check_elf_files: false,
+    vendor: true,
+}
+cc_prebuilt_library_shared {
+    name: "libRkTeeWeaver.v2",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/v2/lib64/libRkTeeWeaver.v2.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/v2/lib/libRkTeeWeaver.v2.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libteec",
+    ],
+    check_elf_files: false,
+    vendor: true,
+}
+cc_rockchip_prebuilt_obj {
+    name: "481a57df-aec8-47ad-92f5eb9fc24f64a6.ta",
+    src: "prebuilts/v1/481a57df-aec8-47ad-92f5eb9fc24f64a6.ta",
+    vendor: true,
+    sub_dir: "lib/optee_armtz",
+}
+
+cc_rockchip_prebuilt_obj {
+    name: "481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta",
+    src: "prebuilts/v2/481a57df-aec8-47ad-92f5-eb9fc24f64a6.ta",
+    vendor: true,
+    sub_dir: "lib/optee_armtz",
+}

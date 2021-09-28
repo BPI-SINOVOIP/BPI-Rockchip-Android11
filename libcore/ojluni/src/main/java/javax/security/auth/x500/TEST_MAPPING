@@ -1,0 +1,15 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.javax.security.auth.x500"
+        },
+        {
+          "include-filter": "org.apache.harmony.tests.javax.security.auth.x500"
+        }
+      ]
+    }
+  ]
+}

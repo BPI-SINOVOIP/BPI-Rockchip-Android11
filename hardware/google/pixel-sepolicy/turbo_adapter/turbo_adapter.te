@@ -1,0 +1,13 @@
+# Normal platform_apps cannot access PowerHAL, so we need to define our own domain. Unfortunately
+# this means that TurboAdapter doesn't get the platform_app permissions any more, so we need to
+# list everything that it needs here.
+
+type turbo_adapter, domain, coredomain;
+
+app_domain(turbo_adapter)
+
+# To use ServiceManager
+allow turbo_adapter app_api_service:service_manager find;
+
+# To find and call hal_power_default so turbo can obtain the service extension (IPowerExt)
+hal_client_domain(turbo_adapter, hal_power)

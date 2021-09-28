@@ -1,0 +1,52 @@
+Acc_dummy.c
+    : 操作 g sensor 设备, dummy 实现. 
+Acc_mma8452.c
+Acc_mma8452.h
+    : 操作 g sensor 设备 (mma8452). 接受 AK8975Driver.c 的调用. 
+
+AK8975Driver.c
+AK8975Driver.h
+    : 实现对 AKM 设备 和 acc 设备的交互, 获取 sensor 数据等. 
+
+AKCommon.h
+AKCompass.h
+
+akmd2_dox
+    : doxygen 的配置文件.
+
+Android.mk
+
+CustomerSpec.h
+
+DispMessage.c
+DispMessage.h
+
+FileIO.c
+FileIO.h
+
+libAK8975\
+    : akmd 依赖的静态 lib.
+    AK8975.h
+    AKCertification.h
+    AKConfigure.h
+    AKDirection6D.h
+    AKHDOE.h
+    AKHFlucCheck.h
+    AKManualCal.h
+    AKMDevice.h
+    AKVersion.h
+    libAK8975.a
+    README
+
+main.c
+    : 入口 main() 所在. 
+
+Measure.c
+Measure.h
+    : 获取, 计算 sensor 数据 线程的实现主体. 
+
+misc.c
+misc.h
+
+TestLimit.h
+

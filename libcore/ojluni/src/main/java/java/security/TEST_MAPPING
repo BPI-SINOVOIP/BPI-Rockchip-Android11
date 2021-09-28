@@ -1,0 +1,30 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "org.apache.harmony.tests.javax.security"
+        },
+        {
+          "include-filter": "org.apache.harmony.security.tests.java.security"
+        },
+        {
+          "include-filter": "tests.targets.security"
+        },
+        {
+          "include-filter": "com.android.org.conscrypt.java.security"
+        },
+        {
+          "include-filter": "tests.java.security"
+        },
+        {
+          "include-filter": "tests.security"
+        },
+        {
+          "include-filter": "libcore.java.security"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+// Define the soong config module for Pixel in this Android.bp
+
+soong_config_module_type {
+    name: "pixel_glog_cc_defaults",
+    module_type: "cc_defaults",
+    config_namespace: "glog",
+    bool_variables: ["enable_glog"],
+    properties: ["cflags", "shared_libs", "header_libs"],
+}

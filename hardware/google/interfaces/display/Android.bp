@@ -1,0 +1,19 @@
+aidl_interface {
+    name: "com.google.hardware.pixel.display",
+    vendor_available: true,
+    srcs: [
+        "com/google/hardware/pixel/display/*.aidl",
+    ],
+
+    stability: "vintf",
+
+    backend: {
+        java: {
+            platform_apis: true,
+        },
+        cpp: {
+            enabled: false,
+        },
+    },
+    versions: ["1"],
+}

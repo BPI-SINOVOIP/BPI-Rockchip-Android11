@@ -1,0 +1,79 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.hardware.keymaster@4.1;
+
+import @4.0::ErrorCode;
+import @4.0::HardwareAuthToken;
+import @4.0::IKeymasterDevice;
+import @4.0::KeyParameter;
+import @4.0::KeyPurpose;
+import @4.0::OperationHandle;
+import @4.0::VerificationToken;
+
+/**
+ * @4.1::IKeymasterDevice is a minor extension to @4.0::IKeymasterDevice.  It adds support for
+ *
+ * - Partial hardware enforcment of UNLOCKED_DEVICE_REQUIRED keys;
+ * - Device-unique attestaion;
+ * - Early boot only keys;
+ * - Better cleanup of operations when clients die without completing or aborting them.
+ *
+ * @4.1::IKeymasterDevice::attestKey() must produce attestations with keymasterVersion 41.  An
+ * oversight in the original numbering left no room for minor versions, so starting with 4.1 the
+ * versions will be numbered as major_version * 10 + minor version.  The addition of new attestable
+ * tags changes the attestation format again, slightly, so the attestationVersion must be 4.
+ */
+interface IKeymasterDevice extends @4.0::IKeymasterDevice {
+    /**
+     * Called by client to notify the IKeymasterDevice that the device is now locked, and keys with
+     * the UNLOCKED_DEVICE_REQUIRED tag should no longer be usable.  When this function is called,
+     * the IKeymasterDevice should note the current timestamp, and attempts to use
+     * UNLOCKED_DEVICE_REQUIRED keys must be rejected with Error::DEVICE_LOCKED until an
+     * authentication token with a later timestamp is presented.  If the `passwordOnly' argument is
+     * set to true the sufficiently-recent authentication token must indicate that the user
+     * authenticated with a password, not a biometric.
+     *
+     * Note that the IKeymasterDevice UNLOCKED_DEVICE_REQUIRED semantics are slightly different from
+     * the UNLOCKED_DEVICE_REQUIRED semantics enforced by keystore.  Keystore handles device locking
+     * on a per-user basis.  Because auth tokens do not contain an Android user ID, it's not
+     * possible to replicate the keystore enformcement logic in IKeymasterDevice.  So from the
+     * IKeymasterDevice perspective, any user unlock unlocks all UNLOCKED_DEVICE_REQUIRED keys.
+     * Keystore will continue enforcing the per-user device locking.
+     *
+     * @param passwordOnly specifies whether the device must be unlocked with a password, rather
+     * than a biometric, before UNLOCKED_DEVICE_REQUIRED keys can be used.
+     *
+     * @param verificationToken is used by StrongBox implementations of IKeymasterDevice.  It
+     * provides the StrongBox IKeymasterDevice with a fresh, MACed timestamp which it can use as the
+     * device-lock time, for future comparison against auth tokens when operations using
+     * UNLOCKED_DEVICE_REQUIRED keys are attempted.  Unless the auth token timestamp is newer than
+     * the timestamp in the verificationToken, the device is still considered to be locked.
+     * Crucially, if a StrongBox IKeymasterDevice receives a deviceLocked() call with a verification
+     * token timestamp that is less than the timestamp in the last deviceLocked() call, it must
+     * ignore the new timestamp.  TEE IKeymasterDevice implementations will receive an empty
+     * verificationToken (zero values and empty vectors) and should use their own clock as the
+     * device-lock time.
+     */
+    deviceLocked(bool passwordOnly, VerificationToken verificationToken) generates (ErrorCode error);
+
+    /**
+     * Called by client to notify the IKeymasterDevice that the device has left the early boot
+     * state, and that keys with the EARLY_BOOT_ONLY tag may no longer be used.  All attempts to use
+     * an EARLY_BOOT_ONLY key after this method is called must fail with Error::INVALID_KEY_BLOB.
+     */
+    earlyBootEnded() generates (ErrorCode error);
+};

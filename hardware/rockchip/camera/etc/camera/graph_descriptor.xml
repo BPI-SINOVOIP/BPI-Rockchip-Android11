@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (c) 2018, Fuzhou Rockchip Electronics Co., Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<graph_descriptor>
+    <nodes>
+        <node name="sensor" stream_id="1" type="source" vflip="0" hflip="0">
+            <port id="0" name="port_0" type="port" direction="1"/>
+        </node>
+
+        <node name="csi_be_soc" type="hw" stream_id="1" subsystem="imgu">
+            <!-- ports -->
+            <port name="input" id="0" direction="0"/>
+            <port name="output" id="1" direction="1"/>
+            <!-- ports end -->
+        </node>
+
+        <node name="imgu" type="hw" stream_id="1" pg_id="0" subsystem="imgu">
+            <!-- ports -->
+            <port name="input" id="0" direction="0"/>
+            <port name="output" id="2" direction="1">
+                <options attribute="format">
+                    <option value="NV16">
+                        <!-- settings applied when switching to NV16!-->
+                        <apply>
+                            <imgu>
+                                <non_scaled_output format="NV16"/>
+                            </imgu>
+                        </apply>
+                    </option>
+                </options>
+            </port>
+            <!-- ports end -->
+        </node>
+        <sink name="preview"/>
+        <sink name="video"/>
+        <sink name="still"/>
+        <sink name="raw"/>
+    </nodes>
+    <graphs>
+        <!-- for mipi camera -->
+        <graph id="1" name="Full graph">
+            <connection source="sensor:port_0" sink="csi_be_soc:input"/>
+            <connection source="csi_be_soc:output" sink="imgu:input"/>
+            <connection source="imgu:output" sink="preview"/>
+            <connection source="imgu:output" sink="video"/>
+            <connection source="imgu:output" sink="still"/>
+            <connection source="imgu:output" sink="raw"/>
+        </graph>
+        <!-- for DVP camera -->
+        <graph id="2" name="Full graph">
+            <connection source="sensor:port_0" sink="imgu:input"/>
+            <connection source="imgu:output" sink="preview"/>
+            <connection source="imgu:output" sink="video"/>
+            <connection source="imgu:output" sink="still"/>
+            <connection source="imgu:output" sink="raw"/>
+        </graph>
+    </graphs>
+</graph_descriptor>

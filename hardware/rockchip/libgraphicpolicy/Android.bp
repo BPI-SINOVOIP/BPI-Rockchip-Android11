@@ -1,0 +1,16 @@
+cc_prebuilt_library_shared {
+    vendor_available: true,
+    name: "libgraphicpolicy",
+    target: {
+        android_arm: {
+            srcs: ["armeabi-v7a/libgraphicpolicy.so"],
+        },
+        android_arm64: {
+            srcs: ["arm64-v8a/libgraphicpolicy.so"],
+        },
+    },
+    shared_libs: ["liblog","libstdc++"],
+    strip: {
+        none: true,
+    },
+}

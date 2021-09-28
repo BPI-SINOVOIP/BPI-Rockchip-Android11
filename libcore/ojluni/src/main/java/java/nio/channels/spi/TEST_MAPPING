@@ -1,0 +1,18 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.nio.channels.spi"
+        },
+        {
+          "include-filter": "org.apache.harmony.nio.tests.java.nio.channels.spi"
+        },
+        {
+          "include-filter": "org.apache.harmony.tests.java.nio.channels.spi"
+        }
+      ]
+    }
+  ]
+}

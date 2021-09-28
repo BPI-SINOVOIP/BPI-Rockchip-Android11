@@ -1,0 +1,26 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.time.temporal"
+        }
+      ]
+    },
+    {
+      "name": "CtsLibcoreOjTestCases",
+      "options": [
+        {
+          "include-filter": "test.java.time.temporal"
+        },
+        {
+          "include-filter": "tck.java.time.temporal"
+        },
+        {
+          "include-filter": "tck.java.time.temporal.serial"
+        }
+      ]
+    }
+  ]
+}

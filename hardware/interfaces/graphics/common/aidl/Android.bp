@@ -1,0 +1,32 @@
+aidl_interface {
+    name: "android.hardware.graphics.common",
+    host_supported: true,
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+        support_system_process: true,
+    },
+    srcs: [
+        "android/hardware/graphics/common/*.aidl",
+    ],
+    stability: "vintf",
+    imports: [
+        "android.hardware.common",
+    ],
+    backend: {
+        java: {
+            enabled: false,
+        },
+        cpp: {
+            enabled: false,
+        },
+        ndk: {
+            apex_available: [
+                "//apex_available:platform",
+                "com.android.media.swcodec",
+            ],
+            min_sdk_version: "29",
+        },
+    },
+    versions: ["1"],
+}

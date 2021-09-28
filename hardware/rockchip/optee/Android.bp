@@ -1,0 +1,23 @@
+cc_rockchip_prebuilt_library_shared {
+    name: "libteec",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+    optee: true,
+}
+
+cc_rockchip_prebuilt_binary {
+    name: "tee-supplicant",
+    init_rc: ["init.tee-supplicant.rc"],
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+    optee: true,
+    shared_libs: [
+        "libteec",
+    ]
+}

@@ -1,0 +1,18 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreOjTestCases",
+      "options": [
+        {
+          "include-filter": "java.util.stream"
+        },
+        {
+          "include-filter": "org.openjdk.tests.java.util.stream"
+        },
+        {
+          "include-filter": "org.openjdk.testlib.java.util.stream"
+        }
+      ]
+    }
+  ]
+}

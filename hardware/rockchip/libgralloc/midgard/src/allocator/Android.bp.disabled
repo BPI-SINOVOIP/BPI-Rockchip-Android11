@@ -1,0 +1,100 @@
+/*
+ * Copyright (C) 2020 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+soong_config_module_type {
+	name: "arm_gralloc_allocator_cc_defaults",
+	module_type: "cc_defaults",
+	config_namespace: "arm_gralloc",
+	variables: [
+		"gralloc_use_ion_dma_heap",
+		"gralloc_use_ion_compound_page_heap",
+		"gralloc_init_afbc",
+		"gralloc_use_ion_dmabuf_sync",
+	],
+	properties: [
+		"cflags",
+	],
+}
+
+soong_config_bool_variable {
+	name: "gralloc_use_ion_dma_heap",
+}
+soong_config_bool_variable {
+	name: "gralloc_use_ion_compound_page_heap",
+}
+soong_config_bool_variable {
+	name: "gralloc_init_afbc",
+}
+soong_config_bool_variable {
+	name: "gralloc_use_ion_dmabuf_sync",
+}
+
+arm_gralloc_allocator_cc_defaults {
+	name: "arm_gralloc_allocator_defaults",
+	defaults: [
+		"arm_gralloc_defaults",
+	],
+	soong_config_variables: {
+		gralloc_use_ion_dma_heap: {
+			cflags: [
+				"-DGRALLOC_USE_ION_DMA_HEAP=1",
+			],
+		},
+		gralloc_use_ion_compound_page_heap: {
+			cflags: [
+				"-DGRALLOC_USE_ION_COMPOUND_PAGE_HEAP=1",
+			],
+		},
+		gralloc_init_afbc: {
+			cflags: [
+				"-DGRALLOC_INIT_AFBC=1",
+			],
+		},
+		gralloc_use_ion_dmabuf_sync: {
+			cflags: [
+				"-DGRALLOC_USE_ION_DMABUF_SYNC=1",
+			],
+		},
+	},
+	srcs: [
+		"mali_gralloc_ion.cpp",
+		"mali_gralloc_shared_memory.cpp",
+	],
+	static_libs: [
+		"libarect",
+	],
+	shared_libs: [
+		"libhardware",
+		"liblog",
+		"libcutils",
+		"libion",
+		"libsync",
+		"libutils",
+		"libnativewindow",
+	],
+	header_libs: [
+		"libnativebase_headers",
+	],
+}
+
+cc_library_static {
+	name: "libgralloc_allocator",
+	defaults: [
+		"arm_gralloc_allocator_defaults",
+		"arm_gralloc_version_defaults",
+	],
+}

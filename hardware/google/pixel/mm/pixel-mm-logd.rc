@@ -1,0 +1,19 @@
+on property:persist.vendor.log.mm=1
+    mkdir /data/vendor/mm 0700 root system
+    mkdir /data/vendor/mm/vmstat 0700 root system
+    mkdir /data/vendor/mm/stat 0700 root system
+    mkdir /data/vendor/mm/kswapd 0700 root system
+    mkdir /data/vendor/mm/kcompactd 0700 root system
+    start vendor.mm.logd
+
+on property:persist.vendor.log.mm=0
+    stop vendor.mm.logd
+
+on property:persist.vendor.log.mm=1 && property:persist.vendor.log.mm.interval=*
+    restart vendor.mm.logd
+
+service vendor.mm.logd /vendor/bin/mm_logd ${persist.vendor.log.mm.interval:-60}
+    class main
+    user root
+    group root system
+    disabled

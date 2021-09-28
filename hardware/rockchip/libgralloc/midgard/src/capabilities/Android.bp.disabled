@@ -1,0 +1,170 @@
+/*
+ * Copyright (C) 2020 Arm Limited.
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+soong_config_module_type {
+	name: "arm_gralloc_capabilities_cc_defaults",
+	module_type: "cc_defaults",
+	config_namespace: "arm_gralloc",
+	variables: [
+		"mali_gpu_support_afbc_basic",
+		"mali_gpu_support_afbc_splitblk",
+		"mali_gpu_support_afbc_wideblk",
+		"mali_gpu_support_afbc_tiled_headers",
+		"mali_gpu_support_afbc_yuv_write",
+		"mali_video_version",
+		"gralloc_arm_no_external_afbc",
+		"mali_gralloc_api_tests",
+	],
+	properties: [
+		"cflags",
+	],
+}
+
+soong_config_string_variable {
+	name: "mali_video_version",
+	values: [
+		"v0",
+		"v500",
+		"v550",
+		"v61",
+	],
+}
+
+soong_config_bool_variable {
+	name: "mali_gpu_support_afbc_basic",
+}
+soong_config_bool_variable {
+	name: "mali_gpu_support_afbc_splitblk",
+}
+soong_config_bool_variable {
+	name: "mali_gpu_support_afbc_wideblk",
+}
+soong_config_bool_variable {
+	name: "mali_gpu_support_afbc_tiled_headers",
+}
+soong_config_bool_variable {
+	name: "mali_gpu_support_afbc_yuv_write",
+}
+soong_config_bool_variable {
+	name: "gralloc_arm_no_external_afbc",
+}
+soong_config_bool_variable {
+	name: "mali_gralloc_api_tests",
+}
+
+arm_gralloc_capabilities_cc_defaults {
+	name: "arm_gralloc_capabilities_defaults",
+	defaults: [
+		"arm_gralloc_defaults",
+	],
+	soong_config_variables: {
+		mali_gpu_support_afbc_basic: {
+			cflags: [
+				"-DMALI_GPU_SUPPORT_AFBC_BASIC=1",
+			],
+		},
+		mali_gpu_support_afbc_splitblk: {
+			cflags: [
+				"-DMALI_GPU_SUPPORT_AFBC_SPLITBLK=1",
+			],
+		},
+		mali_gpu_support_afbc_wideblk: {
+			cflags: [
+				"-DMALI_GPU_SUPPORT_AFBC_WIDEBLK=1",
+			],
+		},
+		mali_gpu_support_afbc_tiled_headers: {
+			cflags: [
+				"-DMALI_GPU_SUPPORT_AFBC_TILED_HEADERS=1",
+			],
+		},
+		mali_gpu_support_afbc_yuv_write: {
+			cflags: [
+				"-DMALI_GPU_SUPPORT_AFBC_YUV_WRITE=1",
+			],
+		},
+		gralloc_arm_no_external_afbc: {
+			cflags: [
+				"-DGRALLOC_ARM_NO_EXTERNAL_AFBC=1",
+			],
+		},
+		mali_video_version: {
+			v0: {
+				cflags: [
+					"-DMALI_VIDEO_VERSION=0",
+				],
+			},
+			v500: {
+				cflags: [
+					"-DMALI_VIDEO_VERSION=500",
+				],
+			},
+			v550: {
+				cflags: [
+					"-DMALI_VIDEO_VERSION=550",
+				],
+			},
+			v61: {
+				cflags: [
+					"-DMALI_VIDEO_VERSION=61",
+				],
+			},
+		},
+		mali_gralloc_api_tests: {
+			cflags: [
+				"-DMALI_GRALLOC_VENDOR_VPU=1",
+			]
+		}
+	},
+	arch: {
+		arm: {
+			cflags: [
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH1=\"/vendor/lib/egl/\"",
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH2=\"/system/lib/egl/\"",
+				"-DMALI_GRALLOC_DPU_LIBRARY_PATH=\"/vendor/lib/hw/\"",
+				"-DMALI_GRALLOC_DPU_AEU_LIBRARY_PATH=\"/vendor/lib/hw/\"",
+			],
+		},
+		arm64: {
+			cflags: [
+				/* Individually configurable */
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH1=\"/vendor/lib64/egl/\"",
+				"-DMALI_GRALLOC_GPU_LIBRARY_PATH2=\"/system/lib64/egl/\"",
+				"-DMALI_GRALLOC_DPU_LIBRARY_PATH=\"/vendor/lib64/hw/\"",
+				"-DMALI_GRALLOC_DPU_AEU_LIBRARY_PATH=\"/vendor/lib64/hw/\"",
+			],
+		},
+	},
+	srcs: [
+		"src/gralloc_capabilities.cpp",
+	],
+	shared_libs: [
+		"libhardware",
+		"liblog",
+		"libcutils",
+		"libsync",
+		"libutils",
+	],
+}
+
+cc_library_static {
+	name: "libgralloc_capabilities",
+	defaults: [
+		"arm_gralloc_capabilities_defaults",
+		"arm_gralloc_version_defaults",
+	],
+}

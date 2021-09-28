@@ -1,0 +1,3 @@
+# To allow Settings to find and bind Google Battery HAL
+allow system_app hal_googlebattery_hwservice:hwservice_manager find;
+binder_call(system_app, hal_googlebattery)
