@@ -1,0 +1,23 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_ShowHomeButton'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies effects of ShowHomeButton policy.
+
+If the policy is set to True then the user can see the Home button
+in Chrome. If the policy is set to False/Not Set then users won't
+see the Home button in Chrome.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_ShowHomeButton', **args_dict)

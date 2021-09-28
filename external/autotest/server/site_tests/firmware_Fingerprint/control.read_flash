@@ -1,0 +1,35 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "firmware_Fingerprint.ReadFlash"
+PURPOSE = """
+Verify that fingerprint flash cannot be read.
+"""
+CRITERIA = """
+Fails if reading from flash succeeds.
+"""
+ATTRIBUTES = "suite:fingerprint"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo, fingerprint"
+JOB_RETRIES = 0
+
+DOC = """
+Attempts to read flash from RW firmware and validates that it fails. Then
+attempts to read flash from RO firmware and validates that it fails.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("firmware_Fingerprint", host=host, test_exe="read_flash.sh")
+
+parallel_simple(run, machines)

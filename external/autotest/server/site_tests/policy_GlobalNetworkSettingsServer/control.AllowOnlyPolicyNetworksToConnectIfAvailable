@@ -1,0 +1,31 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_GlobalNetworkSettingsServer.AllowOnlyPolicyNetworksToConnectIfAvailable'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test sets up a policy and user defined network. The
+GlobalNetworkConfiguration policy 'AllowOnlyPolicyNetworksToConnectIfAvailable'
+is set to True. Only the policy defined network should be allowed to connect.
+The test then turns off the policy network and the user network should be
+allowed to connect.
+
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_GlobalNetworkSettingsServer',
+                 raw_cmdline_args=args,
+                 host=host,
+                 gnc_settings={
+                    'AllowOnlyPolicyNetworksToConnectIfAvailable': True
+                 })
+
+
+parallel_simple(run, machines)

@@ -1,0 +1,17 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, Chromium OS"
+NAME = "autoupdate_BadMetadata"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+PURPOSE = "Test an update with bad metadata in the omaha response."
+TIME = "SHORT"
+
+DOC = """
+Test an update with bad metadata in the omaha response.
+"""
+
+job.run_test('autoupdate_BadMetadata')

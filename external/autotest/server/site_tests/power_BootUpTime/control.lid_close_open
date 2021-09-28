@@ -1,0 +1,31 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Intel"
+NAME = "power_BootUpTime.lid_close_open"
+PURPOSE = "To check the boot up time using lid close/open"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "power"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:bootup_time"
+DEPENDENCIES = "servo"
+JOB_RETRIES = 3
+
+DOC = """
+Lid close/open and determine the boot up time
+Boot up time should be <= 8.0 Secs
+"""
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("power_BootUpTime", host=host, cmdline_args=args,
+                 boot_type='lid_close_open', disable_sysinfo=False,
+                 tag='lid_close_open')
+
+parallel_simple(run, machines)

@@ -1,0 +1,988 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+include "annotator/entity-data.fbs";
+include "annotator/experimental/experimental.fbs";
+include "annotator/grammar/dates/dates.fbs";
+include "utils/codepoint-range.fbs";
+include "utils/flatbuffers.fbs";
+include "utils/grammar/rules.fbs";
+include "utils/intents/intent-config.fbs";
+include "utils/normalization.fbs";
+include "utils/resources.fbs";
+include "utils/tokenizer.fbs";
+include "utils/zlib/buffer.fbs";
+
+file_identifier "TC2 ";
+
+// The possible model modes, represents a bit field.
+namespace libtextclassifier3;
+enum ModeFlag : int {
+  NONE = 0,
+  ANNOTATION = 1,
+  CLASSIFICATION = 2,
+  ANNOTATION_AND_CLASSIFICATION = 3,
+  SELECTION = 4,
+  ANNOTATION_AND_SELECTION = 5,
+  CLASSIFICATION_AND_SELECTION = 6,
+  ALL = 7,
+}
+
+// Enum for specifying the annotation usecase.
+namespace libtextclassifier3;
+enum AnnotationUsecase : int {
+  // Results are optimized for Smart{Select,Share,Linkify}.
+  ANNOTATION_USECASE_SMART = 0,
+  // Smart{Select,Share,Linkify}
+
+  // Results are optimized for using TextClassifier as an infrastructure that
+  // annotates as much as possible.
+  ANNOTATION_USECASE_RAW = 1,
+}
+
+namespace libtextclassifier3;
+enum DatetimeExtractorType : int {
+  UNKNOWN_DATETIME_EXTRACTOR_TYPE = 0,
+  AM = 1,
+  PM = 2,
+  JANUARY = 3,
+  FEBRUARY = 4,
+  MARCH = 5,
+  APRIL = 6,
+  MAY = 7,
+  JUNE = 8,
+  JULY = 9,
+  AUGUST = 10,
+  SEPTEMBER = 11,
+  OCTOBER = 12,
+  NOVEMBER = 13,
+  DECEMBER = 14,
+  NEXT = 15,
+  NEXT_OR_SAME = 16,
+  LAST = 17,
+  NOW = 18,
+  TOMORROW = 19,
+  YESTERDAY = 20,
+  PAST = 21,
+  FUTURE = 22,
+  DAY = 23,
+  WEEK = 24,
+  MONTH = 25,
+  YEAR = 26,
+  MONDAY = 27,
+  TUESDAY = 28,
+  WEDNESDAY = 29,
+  THURSDAY = 30,
+  FRIDAY = 31,
+  SATURDAY = 32,
+  SUNDAY = 33,
+  DAYS = 34,
+  WEEKS = 35,
+  MONTHS = 36,
+
+  // TODO(zilka): Make the following 3 values singular for consistency.
+  HOURS = 37,
+
+  MINUTES = 38,
+  SECONDS = 39,
+  YEARS = 40,
+  DIGITS = 41,
+  SIGNEDDIGITS = 42,
+  ZERO = 43,
+  ONE = 44,
+  TWO = 45,
+  THREE = 46,
+  FOUR = 47,
+  FIVE = 48,
+  SIX = 49,
+  SEVEN = 50,
+  EIGHT = 51,
+  NINE = 52,
+  TEN = 53,
+  ELEVEN = 54,
+  TWELVE = 55,
+  THIRTEEN = 56,
+  FOURTEEN = 57,
+  FIFTEEN = 58,
+  SIXTEEN = 59,
+  SEVENTEEN = 60,
+  EIGHTEEN = 61,
+  NINETEEN = 62,
+  TWENTY = 63,
+  THIRTY = 64,
+  FORTY = 65,
+  FIFTY = 66,
+  SIXTY = 67,
+  SEVENTY = 68,
+  EIGHTY = 69,
+  NINETY = 70,
+  HUNDRED = 71,
+  THOUSAND = 72,
+}
+
+namespace libtextclassifier3;
+enum DatetimeGroupType : int {
+  GROUP_UNKNOWN = 0,
+  GROUP_UNUSED = 1,
+  GROUP_YEAR = 2,
+  GROUP_MONTH = 3,
+  GROUP_DAY = 4,
+  GROUP_HOUR = 5,
+  GROUP_MINUTE = 6,
+  GROUP_SECOND = 7,
+  GROUP_AMPM = 8,
+  GROUP_RELATIONDISTANCE = 9,
+  GROUP_RELATION = 10,
+  GROUP_RELATIONTYPE = 11,
+
+  // Dummy groups serve just as an inflator of the selection. E.g. we might want
+  // to select more text than was contained in an envelope of all extractor
+  // spans.
+  GROUP_DUMMY1 = 12,
+
+  GROUP_DUMMY2 = 13,
+}
+
+// Options for the model that predicts text selection.
+namespace libtextclassifier3;
+table SelectionModelOptions {
+  // If true, before the selection is returned, the unpaired brackets contained
+  // in the predicted selection are stripped from the both selection ends.
+  // The bracket codepoints are defined in the Unicode standard:
+  // http://www.unicode.org/Public/UNIDATA/BidiBrackets.txt
+  strip_unpaired_brackets:bool = true;
+
+  // Number of hypothetical click positions on either side of the actual click
+  // to consider in order to enforce symmetry.
+  symmetry_context_size:int;
+
+  // Number of examples to bundle in one batch for inference.
+  batch_size:int = 1024;
+
+  // Whether to always classify a suggested selection or only on demand.
+  always_classify_suggested_selection:bool = false;
+}
+
+// Options for the model that classifies a text selection.
+namespace libtextclassifier3;
+table ClassificationModelOptions {
+  // Limits for phone numbers.
+  phone_min_num_digits:int = 7;
+
+  phone_max_num_digits:int = 15;
+
+  // Limits for addresses.
+  address_min_num_tokens:int;
+
+  // Maximum number of tokens to attempt a classification (-1 is unlimited).
+  max_num_tokens:int = -1;
+}
+
+// Options for post-checks, checksums and verification to apply on a match.
+namespace libtextclassifier3;
+table VerificationOptions {
+  verify_luhn_checksum:bool = false;
+
+  // Lua verifier to use.
+  // Index of the lua verifier in the model.
+  lua_verifier:int = -1;
+}
+
+// Behaviour of rule capturing groups.
+// This specifies how the text and span of a capturing group, in a regular
+// expression or from a capturing match in a grammar rule, should be handled.
+namespace libtextclassifier3;
+table CapturingGroup {
+  // If true, the span of the capturing group will be used to
+  // extend the selection.
+  extend_selection:bool = true;
+
+  // If set, the text of the capturing group will be used to set a field in
+  // the classfication result entity data.
+  entity_field_path:FlatbufferFieldPath;
+
+  // If set, the flatbuffer entity data will be merged with the
+  // classification result entity data.
+  serialized_entity_data:string (shared);
+
+  // If set, normalization to apply before text is used in entity data.
+  normalization_options:NormalizationOptions;
+
+  entity_data:EntityData;
+}
+
+// List of regular expression matchers to check.
+namespace libtextclassifier3.RegexModel_;
+table Pattern {
+  // The name of the collection of a match.
+  collection_name:string (shared);
+
+  // The pattern to check.
+  pattern:string (shared);
+
+  // The modes for which to apply the patterns.
+  enabled_modes:ModeFlag = ALL;
+
+  // The final score to assign to the results of this pattern.
+  target_classification_score:float = 1;
+
+  // Priority score used for conflict resolution with the other models.
+  priority_score:float = 0;
+
+  // If true, will use an approximate matching implementation implemented
+  // using Find() instead of the true Match(). This approximate matching will
+  // use the first Find() result and then check that it spans the whole input.
+  use_approximate_matching:bool = false;
+
+  compressed_pattern:CompressedBuffer;
+
+  // Verification to apply on a match.
+  verification_options:VerificationOptions;
+
+  capturing_group:[CapturingGroup];
+
+  // Entity data to set for a match.
+  serialized_entity_data:string (shared);
+
+  entity_data:EntityData;
+}
+
+namespace libtextclassifier3;
+table RegexModel {
+  patterns:[RegexModel_.Pattern];
+
+  // If true, will compile the regexes only on first use.
+  lazy_regex_compilation:bool = true;
+
+  // Lua scripts for match verification.
+  // The verifier can access:
+  // * `context`: The context as a string.
+  // * `match`: The groups of the regex match as an array, each group gives
+  // * `begin`: span start
+  // * `end`: span end
+  // * `text`: the text
+  // The verifier is expected to return a boolean, indicating whether the
+  // verification succeeded or not.
+  lua_verifier:[string];
+}
+
+// List of regex patterns.
+namespace libtextclassifier3.DatetimeModelPattern_;
+table Regex {
+  pattern:string (shared);
+
+  // The ith entry specifies the type of the ith capturing group.
+  // This is used to decide how the matched content has to be parsed.
+  groups:[DatetimeGroupType];
+
+  compressed_pattern:CompressedBuffer;
+}
+
+namespace libtextclassifier3;
+table DatetimeModelPattern {
+  regexes:[DatetimeModelPattern_.Regex];
+
+  // List of locale indices in DatetimeModel that represent the locales that
+  // these patterns should be used for. If empty, can be used for all locales.
+  locales:[int];
+
+  // The final score to assign to the results of this pattern.
+  target_classification_score:float = 1;
+
+  // Priority score used for conflict resolution with the other models.
+  priority_score:float = 0;
+
+  // The modes for which to apply the patterns.
+  enabled_modes:ModeFlag = ALL;
+
+  // The annotation usecases for which to apply the patterns.
+  // This is a flag field for values of AnnotationUsecase.
+  enabled_annotation_usecases:uint = 4294967295;
+}
+
+namespace libtextclassifier3;
+table DatetimeModelExtractor {
+  extractor:DatetimeExtractorType;
+  pattern:string (shared);
+  locales:[int];
+  compressed_pattern:CompressedBuffer;
+}
+
+namespace libtextclassifier3;
+table DatetimeModel {
+  // List of BCP 47 locale strings representing all locales supported by the
+  // model. The individual patterns refer back to them using an index.
+  locales:[string];
+
+  patterns:[DatetimeModelPattern];
+  extractors:[DatetimeModelExtractor];
+
+  // If true, will use the extractors for determining the match location as
+  // opposed to using the location where the global pattern matched.
+  use_extractors_for_locating:bool = true;
+
+  // List of locale ids, rules of whose are always run, after the requested
+  // ones.
+  default_locales:[int];
+
+  // If true, will generate the alternative interpretations for ambiguous
+  // datetime expressions.
+  generate_alternative_interpretations_when_ambiguous:bool = false;
+
+  // If true, will compile the regexes only on first use.
+  lazy_regex_compilation:bool = true;
+
+  // If true, will give only future dates (when the day is not specified).
+  prefer_future_for_unspecified_date:bool = false;
+}
+
+// Configuration for the tokenizer.
+namespace libtextclassifier3;
+table GrammarTokenizerOptions {
+  tokenization_type:TokenizationType = ICU;
+
+  // If true, white space tokens will be kept when using the icu tokenizer.
+  icu_preserve_whitespace_tokens:bool = false;
+
+  // Codepoint ranges that determine what role the different codepoints play
+  // during tokenized. The ranges must not overlap.
+  tokenization_codepoint_config:[TokenizationCodepointRange];
+
+  // A set of codepoint ranges to use in the mixed tokenization mode to identify
+  // stretches of tokens to re-tokenize using the internal tokenizer.
+  internal_tokenizer_codepoint_ranges:[CodepointRange];
+
+  // If true, tokens will be also split when the codepoint's script_id changes
+  // as defined in TokenizationCodepointRange.
+  tokenize_on_script_change:bool = false;
+}
+
+// Options for grammar date/datetime/date range annotations.
+namespace libtextclassifier3.GrammarDatetimeModel_;
+table AnnotationOptions {
+  // If enabled, extract special day offset like today, yesterday, etc.
+  enable_special_day_offset:bool = true;
+
+  // If true, merge the adjacent day of week, time and date. e.g.
+  // "20/2/2016 at 8pm" is extracted as a single instance instead of two
+  // instance: "20/2/2016" and "8pm".
+  merge_adjacent_components:bool = true;
+
+  // List the extra id of requested dates.
+  extra_requested_dates:[string];
+
+  // If true, try to include preposition to the extracted annotation. e.g.
+  // "at 6pm". if it's false, only 6pm is included. offline-actions has
+  // special requirements to include preposition.
+  include_preposition:bool = true;
+
+  // If enabled, extract range in date annotator.
+  // input: Monday, 5-6pm
+  // If the flag is true, The extracted annotation only contains 1 range
+  // instance which is from Monday 5pm to 6pm.
+  // If the flag is false, The extracted annotation contains two date
+  // instance: "Monday" and "6pm".
+  enable_date_range:bool = true;
+  reserved_6:int16 (deprecated);
+
+  // If enabled, the rule priority score is used to set the priority score of
+  // the annotation.
+  // In case of false the annotation priority score is set from
+  // GrammarDatetimeModel's priority_score
+  use_rule_priority_score:bool = false;
+
+  // If enabled, annotator will try to resolve the ambiguity by generating
+  // possible alternative interpretations of the input text
+  // e.g. '9:45' will be resolved to '9:45 AM' and '9:45 PM'.
+  generate_alternative_interpretations_when_ambiguous:bool;
+
+  // List of spans which grammar will ignore during the match e.g. if
+  // “@” is in the allowed span list and input is “12 March @ 12PM” then “@”
+  // will be ignored and 12 March @ 12PM will be translate to
+  // {Day:12 Month: March Hour: 12 MERIDIAN: PM}.
+  // This can also be achieved by adding additional rules e.g.
+  // <Digit_Day> <Month> <Time>
+  // <Digit_Day> <Month> @ <Time>
+  // Though this is doable in the grammar but requires multiple rules, this
+  // list enables the rule to represent multiple rules.
+  ignored_spans:[string];
+}
+
+namespace libtextclassifier3;
+table GrammarDatetimeModel {
+  // List of BCP 47 locale strings representing all locales supported by the
+  // model.
+  locales:[string];
+
+  // If true, will give only future dates (when the day is not specified).
+  prefer_future_for_unspecified_date:bool = false;
+
+  // Grammar specific tokenizer options.
+  grammar_tokenizer_options:GrammarTokenizerOptions;
+
+  // The modes for which to apply the grammars.
+  enabled_modes:ModeFlag = ALL;
+
+  // The datetime grammar rules.
+  datetime_rules:dates.DatetimeRules;
+
+  // The final score to assign to the results of grammar model
+  target_classification_score:float = 1;
+
+  // The priority score used for conflict resolution with the other models.
+  priority_score:float = 0;
+
+  // Options for grammar annotations.
+  annotation_options:GrammarDatetimeModel_.AnnotationOptions;
+}
+
+namespace libtextclassifier3.DatetimeModelLibrary_;
+table Item {
+  key:string (shared);
+  value:DatetimeModel;
+}
+
+// A set of named DateTime models.
+namespace libtextclassifier3;
+table DatetimeModelLibrary {
+  models:[DatetimeModelLibrary_.Item];
+}
+
+// Classification result to instantiate for a rule match.
+namespace libtextclassifier3.GrammarModel_;
+table RuleClassificationResult {
+  // The name of the collection.
+  collection_name:string (shared);
+
+  // The score.
+  target_classification_score:float = 1;
+
+  // The priority score used for conflict resolution with the other models.
+  priority_score:float = 0;
+
+  // Behaviour of capturing matches.
+  capturing_group:[CapturingGroup];
+
+  // Entity data to set for a match.
+  serialized_entity_data:string (shared);
+
+  // Enabled modes.
+  enabled_modes:ModeFlag = ALL;
+
+  entity_data:EntityData;
+}
+
+// Configuration for grammar based annotators.
+namespace libtextclassifier3;
+table GrammarModel {
+  // The grammar rules.
+  rules:grammar.RulesSet;
+
+  rule_classification_result:[GrammarModel_.RuleClassificationResult];
+
+  // Number of tokens in the context to use for classification and text
+  // selection suggestion.
+  // A value -1 uses the full context.
+  context_left_num_tokens:int;
+
+  context_right_num_tokens:int;
+
+  // Grammar specific tokenizer options.
+  tokenizer_options:GrammarTokenizerOptions;
+}
+
+namespace libtextclassifier3;
+table MoneyParsingOptions {
+  // Separators (codepoints) marking decimal or thousand in the money amount.
+  separators:[int];
+}
+
+namespace libtextclassifier3.ModelTriggeringOptions_;
+table CollectionToPriorityEntry {
+  key:string (key, shared);
+  value:float;
+}
+
+// Options controlling the output of the Tensorflow Lite models.
+namespace libtextclassifier3;
+table ModelTriggeringOptions {
+  // Lower bound threshold for filtering annotation model outputs.
+  min_annotate_confidence:float = 0;
+
+  // The modes for which to enable the models.
+  enabled_modes:ModeFlag = ALL;
+
+  // Comma-separated list of locales (BCP 47 tags) that dictionary
+  // classification supports.
+  dictionary_locales:string (shared);
+
+  // Comma-separated list of locales (BCP 47 tags) that the model supports, that
+  // are used to prevent  triggering on input in unsupported languages. If
+  // empty, the model will trigger on all inputs.
+  locales:string (shared);
+
+  // Priority score assigned to the "other" class from ML model.
+  other_collection_priority_score:float = -1000;
+
+  // Priority score assigned to knowledge engine annotations.
+  knowledge_priority_score:float = 0;
+  reserved_7:int16 (deprecated);
+
+  // Apply a factor to the priority score for entities that are added to this
+  // map. Key: collection type e.g. "address", "phone"..., Value: float number.
+  // NOTE: The entries here need to be sorted since we use LookupByKey.
+  collection_to_priority:[ModelTriggeringOptions_.CollectionToPriorityEntry];
+}
+
+// Options controlling the output of the classifier.
+namespace libtextclassifier3;
+table OutputOptions {
+  // Lists of collection names that will be filtered out at the output:
+  // - For annotation, the spans of given collection are simply dropped.
+  // - For classification, the result is mapped to the class "other".
+  // - For selection, the spans of given class are returned as
+  // single-selection.
+  filtered_collections_annotation:[string];
+
+  filtered_collections_classification:[string];
+  filtered_collections_selection:[string];
+}
+
+namespace libtextclassifier3.Model_;
+table EmbeddingPruningMask {
+  // If true, use pruning mask. In this case, we use mask
+  // pruning_mask to determine the mapping of hashed-charactergrams.
+  enabled:bool;
+
+  // Packing of the binary pruning mask into uint64 values.
+  pruning_mask:[ulong] (force_align: 16);
+
+  // Number of buckets before pruning.
+  full_num_buckets:int;
+
+  // Index of row of compressed embedding matrix to which all pruned buckets
+  // are mapped.
+  pruned_row_bucket_id:int;
+}
+
+namespace libtextclassifier3.Model_;
+table ConflictResolutionOptions {
+  // If true, will prioritize the longest annotation during conflict
+  // resolution.
+  prioritize_longest_annotation:bool = false;
+
+  // If true, the annotator will perform conflict resolution between the
+  // different sub-annotators also in the RAW mode. If false, no conflict
+  // resolution will be performed in RAW mode.
+  do_conflict_resolution_in_raw_mode:bool = true;
+}
+
+namespace libtextclassifier3;
+table Model {
+  // Comma-separated list of locales supported by the model as BCP 47 tags.
+  locales:string (shared);
+
+  version:int;
+
+  // A name for the model that can be used for e.g. logging.
+  name:string (shared);
+
+  selection_feature_options:FeatureProcessorOptions;
+  classification_feature_options:FeatureProcessorOptions;
+
+  // Tensorflow Lite models.
+  selection_model:[ubyte] (force_align: 16);
+
+  classification_model:[ubyte] (force_align: 16);
+  embedding_model:[ubyte] (force_align: 16);
+
+  // Options for the different models.
+  selection_options:SelectionModelOptions;
+
+  classification_options:ClassificationModelOptions;
+  regex_model:RegexModel;
+  datetime_model:DatetimeModel;
+
+  // Options controlling the output of the models.
+  triggering_options:ModelTriggeringOptions;
+
+  // Global switch that controls if SuggestSelection(), ClassifyText() and
+  // Annotate() will run. If a mode is disabled it returns empty/no-op results.
+  enabled_modes:ModeFlag = ALL;
+
+  // If true, will snap the selections that consist only of whitespaces to the
+  // containing suggested span. Otherwise, no suggestion is proposed, since the
+  // selections are not part of any token.
+  snap_whitespace_selections:bool = true;
+
+  // Global configuration for the output of SuggestSelection(), ClassifyText()
+  // and Annotate().
+  output_options:OutputOptions;
+
+  // Configures how Intents should be generated on Android.
+  android_intent_options:AndroidIntentFactoryOptions;
+
+  intent_options:IntentFactoryModel;
+
+  // Model resources.
+  resources:ResourcePool;
+
+  // Schema data for handling entity data.
+  entity_data_schema:[ubyte];
+
+  number_annotator_options:NumberAnnotatorOptions;
+  duration_annotator_options:DurationAnnotatorOptions;
+
+  // Comma-separated list of locales (BCP 47 tags) that the model supports, that
+  // are used to prevent  triggering on input in unsupported languages. If
+  // empty, the model will trigger on all inputs.
+  triggering_locales:string (shared);
+
+  embedding_pruning_mask:Model_.EmbeddingPruningMask;
+  grammar_datetime_model:GrammarDatetimeModel;
+  contact_annotator_options:ContactAnnotatorOptions;
+  money_parsing_options:MoneyParsingOptions;
+  translate_annotator_options:TranslateAnnotatorOptions;
+  grammar_model:GrammarModel;
+  conflict_resolution_options:Model_.ConflictResolutionOptions;
+  experimental_model:ExperimentalModel;
+}
+
+// Method for selecting the center token.
+namespace libtextclassifier3.FeatureProcessorOptions_;
+enum CenterTokenSelectionMethod : int {
+  DEFAULT_CENTER_TOKEN_METHOD = 0,
+  // Invalid option.
+
+  // Use click indices to determine the center token.
+  CENTER_TOKEN_FROM_CLICK = 1,
+
+  // Use selection indices to get a token range, and select the middle of it
+  // as the center token.
+  CENTER_TOKEN_MIDDLE_OF_SELECTION = 2,
+}
+
+// Bounds-sensitive feature extraction configuration.
+namespace libtextclassifier3.FeatureProcessorOptions_;
+table BoundsSensitiveFeatures {
+  // Enables the extraction of bounds-sensitive features, instead of the click
+  // context features.
+  enabled:bool;
+
+  // The numbers of tokens to extract in specific locations relative to the
+  // bounds.
+  // Immediately before the span.
+  num_tokens_before:int;
+
+  // Inside the span, aligned with the beginning.
+  num_tokens_inside_left:int;
+
+  // Inside the span, aligned with the end.
+  num_tokens_inside_right:int;
+
+  // Immediately after the span.
+  num_tokens_after:int;
+
+  // If true, also extracts the tokens of the entire span and adds up their
+  // features forming one "token" to include in the extracted features.
+  include_inside_bag:bool;
+
+  // If true, includes the selection length (in the number of tokens) as a
+  // feature.
+  include_inside_length:bool;
+
+  // If true, for selection, single token spans are not run through the model
+  // and their score is assumed to be zero.
+  score_single_token_spans_as_zero:bool;
+}
+
+namespace libtextclassifier3;
+table FeatureProcessorOptions {
+  // Number of buckets used for hashing charactergrams.
+  num_buckets:int = -1;
+
+  // Size of the embedding.
+  embedding_size:int = -1;
+
+  // Number of bits for quantization for embeddings.
+  embedding_quantization_bits:int = 8;
+
+  // Context size defines the number of words to the left and to the right of
+  // the selected word to be used as context. For example, if context size is
+  // N, then we take N words to the left and N words to the right of the
+  // selected word as its context.
+  context_size:int = -1;
+
+  // Maximum number of words of the context to select in total.
+  max_selection_span:int = -1;
+
+  // Orders of charactergrams to extract. E.g., 2 means character bigrams, 3
+  // character trigrams etc.
+  chargram_orders:[int];
+
+  // Maximum length of a word, in codepoints.
+  max_word_length:int = 20;
+
+  // If true, will use the unicode-aware functionality for extracting features.
+  unicode_aware_features:bool = false;
+
+  // Whether to extract the token case feature.
+  extract_case_feature:bool = false;
+
+  // Whether to extract the selection mask feature.
+  extract_selection_mask_feature:bool = false;
+
+  // List of regexps to run over each token. For each regexp, if there is a
+  // match, a dense feature of 1.0 is emitted. Otherwise -1.0 is used.
+  regexp_feature:[string];
+
+  // Whether to remap all digits to a single number.
+  remap_digits:bool = false;
+
+  // Whether to lower-case each token before generating hashgrams.
+  lowercase_tokens:bool;
+
+  // If true, the selection classifier output will contain only the selections
+  // that are feasible (e.g., those that are shorter than max_selection_span),
+  // if false, the output will be a complete cross-product of possible
+  // selections to the left and possible selections to the right, including the
+  // infeasible ones.
+  // NOTE: Exists mainly for compatibility with older models that were trained
+  // with the non-reduced output space.
+  selection_reduced_output_space:bool = true;
+
+  // Collection names.
+  collections:[string];
+
+  // An index of collection in collections to be used if a collection name can't
+  // be mapped to an id.
+  default_collection:int = -1;
+
+  // If true, will split the input by lines, and only use the line that contains
+  // the clicked token.
+  only_use_line_with_click:bool = false;
+
+  // If true, will split tokens that contain the selection boundary, at the
+  // position of the boundary.
+  // E.g. "foo{bar}@google.com" -> "foo", "bar", "@google.com"
+  split_tokens_on_selection_boundaries:bool = false;
+
+  // Codepoint ranges that determine how different codepoints are tokenized.
+  // The ranges must not overlap.
+  tokenization_codepoint_config:[TokenizationCodepointRange];
+
+  center_token_selection_method:FeatureProcessorOptions_.CenterTokenSelectionMethod;
+
+  // If true, span boundaries will be snapped to containing tokens and not
+  // required to exactly match token boundaries.
+  snap_label_span_boundaries_to_containing_tokens:bool;
+
+  // A set of codepoint ranges supported by the model.
+  supported_codepoint_ranges:[CodepointRange];
+
+  // A set of codepoint ranges to use in the mixed tokenization mode to identify
+  // stretches of tokens to re-tokenize using the internal tokenizer.
+  internal_tokenizer_codepoint_ranges:[CodepointRange];
+
+  // Minimum ratio of supported codepoints in the input context. If the ratio
+  // is lower than this, the feature computation will fail.
+  min_supported_codepoint_ratio:float = 0;
+
+  // Used for versioning the format of features the model expects.
+  // - feature_version == 0:
+  // For each token the features consist of:
+  // - chargram embeddings
+  // - dense features
+  // Chargram embeddings for tokens are concatenated first together,
+  // and at the end, the dense features for the tokens are concatenated
+  // to it. So the resulting feature vector has two regions.
+  feature_version:int = 0;
+
+  tokenization_type:TokenizationType = INTERNAL_TOKENIZER;
+  icu_preserve_whitespace_tokens:bool = false;
+
+  // List of codepoints that will be stripped from beginning and end of
+  // predicted spans.
+  ignored_span_boundary_codepoints:[int];
+
+  bounds_sensitive_features:FeatureProcessorOptions_.BoundsSensitiveFeatures;
+
+  // List of allowed charactergrams. The extracted charactergrams are filtered
+  // using this list, and charactergrams that are not present are interpreted as
+  // out-of-vocabulary.
+  // If no allowed_chargrams are specified, all charactergrams are allowed.
+  // The field is typed as bytes type to allow non-UTF8 chargrams.
+  allowed_chargrams:[string];
+
+  // If true, tokens will be also split when the codepoint's script_id changes
+  // as defined in TokenizationCodepointRange.
+  tokenize_on_script_change:bool = false;
+
+  // If true, the pipe character '|' will be used as a newline character when
+  // splitting lines.
+  use_pipe_character_for_newline:bool = true;
+}
+
+namespace libtextclassifier3;
+table NumberAnnotatorOptions {
+  // If true, number and percentage annotations will be produced.
+  enabled:bool = false;
+
+  // Score to assign to the annotated numbers and percentages in the annotator.
+  score:float = 1;
+
+  // Number priority score used for conflict resolution with the other models.
+  priority_score:float = 0;
+
+  // The modes in which to enable number and percentage annotations.
+  enabled_modes:ModeFlag = ALL;
+
+  // The annotation usecases for which to produce number annotations.
+  // This is a flag field for values of AnnotationUsecase.
+  enabled_annotation_usecases:uint = 4294967295;
+
+  // [Deprecated] A list of codepoints that can form a prefix of a valid number.
+  allowed_prefix_codepoints:[int];
+
+  // [Deprecated] A list of codepoints that can form a suffix of a valid number.
+  allowed_suffix_codepoints:[int];
+
+  // [Deprecated] List of codepoints that will be stripped from beginning of
+  // predicted spans.
+  ignored_prefix_span_boundary_codepoints:[int];
+
+  // [Deprecated] List of codepoints that will be stripped from end of predicted
+  // spans.
+  ignored_suffix_span_boundary_codepoints:[int];
+
+  // [Deprecated] If true, percent annotations will be produced.
+  enable_percentage:bool = false;
+
+  // Zero separated and ordered list of suffixes that mark a percent.
+  percentage_pieces_string:string (shared);
+
+  // [Deprecated] List of suffixes offsets in the percent_pieces_string string.
+  percentage_pieces_offsets:[int];
+
+  // Priority score for the percentage annotation.
+  percentage_priority_score:float = 1;
+
+  // Float number priority score used for conflict resolution with the other
+  // models.
+  float_number_priority_score:float = 0;
+
+  // The maximum number of digits an annotated number can have. Requirement:
+  // the value should be less or equal to 20.
+  max_number_of_digits:int = 20;
+
+  // The annotation usecases for which to produce percentage annotations.
+  // This is a flag field for values of AnnotationUsecase.
+  percentage_annotation_usecases:uint = 2;
+}
+
+// DurationAnnotator is so far tailored for English and Japanese only.
+namespace libtextclassifier3;
+table DurationAnnotatorOptions {
+  // If true, duration annotations will be produced.
+  enabled:bool = false;
+
+  // Score to assign to the annotated durations from the annotator.
+  score:float = 1;
+
+  // Priority score used for conflict resolution with the other models.
+  priority_score:float = 0;
+
+  // The modes in which to enable duration annotations.
+  enabled_modes:ModeFlag = ALL;
+
+  // The annotation usecases for which to produce duration annotations.
+  enabled_annotation_usecases:uint = 4294967295;
+
+  // Durations typically look like XX hours and XX minutes etc... The list of
+  // strings below enumerate variants of "hours", "minutes", etc. in these
+  // expressions. These are verbatim strings that are matched against tokens in
+  // the input.
+  week_expressions:[string];
+
+  day_expressions:[string];
+  hour_expressions:[string];
+  minute_expressions:[string];
+  second_expressions:[string];
+
+  // List of expressions that doesn't break a duration expression (can become
+  // a part of it) but has not semantic meaning.
+  filler_expressions:[string];
+
+  // List of expressions that mean half of a unit of duration (e.g. "half an
+  // hour").
+  half_expressions:[string];
+
+  // Set of condepoints that can split the Annotator tokens to sub-tokens for
+  // sub-token matching.
+  sub_token_separator_codepoints:[int];
+
+  // If this is true, unit must be associated with quantity. For example, a
+  // phrase "minute" is not parsed as one minute duration if this is true.
+  require_quantity:bool;
+
+  // If this is true, dangling quantity is included in the annotation. For
+  // example, "10 minutes 20" is interpreted as 10 minutes and 20 seconds.
+  enable_dangling_quantity_interpretation:bool = true;
+}
+
+namespace libtextclassifier3;
+table ContactAnnotatorOptions {
+  // Supported for English genitives only so far.
+  enable_declension:bool;
+
+  // For each language there is a customized list of supported declensions.
+  language:string (shared);
+}
+
+namespace libtextclassifier3.TranslateAnnotatorOptions_;
+enum Algorithm : int {
+  DEFAULT_ALGORITHM = 0,
+  BACKOFF = 1,
+}
+
+// Backoff is the algorithm shipped with Android Q.
+namespace libtextclassifier3.TranslateAnnotatorOptions_;
+table BackoffOptions {
+  // The minimum size of text to prefer for detection (in codepoints).
+  min_text_size:int = 20;
+
+  // For reducing the score when text is less than the preferred size.
+  penalize_ratio:float = 1;
+
+  // Original detection score to surrounding text detection score ratios.
+  subject_text_score_ratio:float = 0.4;
+}
+
+namespace libtextclassifier3;
+table TranslateAnnotatorOptions {
+  enabled:bool = false;
+
+  // Score to assign to the classification results.
+  score:float = 1;
+
+  // Priority score used for conflict resolution with the other models.
+  priority_score:float;
+
+  algorithm:TranslateAnnotatorOptions_.Algorithm;
+  backoff_options:TranslateAnnotatorOptions_.BackoffOptions;
+}
+
+root_type libtextclassifier3.Model;

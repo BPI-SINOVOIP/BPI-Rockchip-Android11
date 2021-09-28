@@ -1,0 +1,34 @@
+[cfi]
+src:*external/libavc/*
+
+[integer]
+# decoder/ih264d_dpb_mgr.c:1174: 2 - 3 cannot be represented in type 'unsigned int'
+fun:ih264d_do_mmco_buffer
+# decoder/ih264d_parse_bslice.c:1388:21: 1 + 4294967295 cannot be represented in type 'unsigned int'
+# decoder/ih264d_parse_bslice.c:1391:22: 1 + 4294967295 cannot be represented in type 'unsigned int'
+fun:ih264d_decode_bslice
+# decoder/ih264d_utils.c:389: 0 - 1 cannot be represented in type 'unsigned int'
+fun:ih264d_decode_pic_order_cnt
+# decoder/ih264d_vui.c:76: 1 + 4294967295 cannot be represented in type 'unsigned int'
+fun:ih264d_parse_hrd_parametres
+# decoder/ih264d_dpb_mgr.c:751: 4294967295 + 1 cannot be represented in type 'unsigned int'
+# decoder/ih264d_dpb_mgr.c:755: 1 - 16 cannot be represented in type 'unsigned int'
+# decoder/ih264d_dpb_mgr.c:762: 4294967295 + 1 cannot be represented in type 'unsigned int'
+fun:ih264d_ref_idx_reordering
+# decoder/ih264d_process_bslice.c:785: 5 - 4294967242 cannot be represented in type 'unsigned int'
+# decoder/ih264d_process_bslice.c:796: 3 - 4294967242 cannot be represented in type 'unsigned int'
+fun:ih264d_decode_temporal_direct
+# encoder/ime.c:153: 0 - 1 cannot be represented in type 'UWORD32'
+fun:ime_diamond_search_16x16
+# encoder/irc_rate_control_api.c:1251: 1000 * 1065353216 cannot be represented in type 'unsigned int'
+fun:irc_change_frame_rate
+# encoder/irc_rate_control_api.c:310: 6000000 * 1000 cannot be represented in type 'unsigned int'
+fun:irc_initialise_rate_control
+
+# Numerous overflows in multiple functions, CAVLC is a compression technique.
+src:*/decoder/ih264d_parse_cavlc.c
+src:*/encoder/ih264e_cavlc.c
+
+# Performance related
+fun:ih264e_pack_c_mb
+fun:ime_compute_satqd_16x16_lumainter_a9q

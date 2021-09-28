@@ -1,0 +1,100 @@
+'\" t
+.\"     Title: wl_display_connect
+.\"    Author: David Herrmann <dh.herrmann@googlemail.com>
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: September 2012
+.\"    Manual: wl_display_connect
+.\"    Source: wayland-client
+.\"  Language: English
+.\"
+.TH "WL_DISPLAY_CONNECT" "3" "September 2012" "wayland-client" "wl_display_connect"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+wl_display_connect, wl_display_connect_to_fd \- Connect to a Wayland socket
+.SH "SYNOPSIS"
+.sp
+.ft B
+.nf
+#include <wayland\-client\&.h>
+.fi
+.ft
+.HP \w'struct\ wl_display\ *wl_display_connect('u
+.BI "struct wl_display *wl_display_connect(const\ char\ *" "name" ");"
+.HP \w'struct\ wl_display\ *wl_display_connect_to_fd('u
+.BI "struct wl_display *wl_display_connect_to_fd(int\ " "fd" ");"
+.SH "DESCRIPTION"
+.PP
+\fBwl_display_connect\fR
+connects to a Wayland socket that was previously opened by a Wayland server\&. The server socket must be placed in
+\fBXDG_RUNTIME_DIR\fR
+when
+\fBWAYLAND_DISPLAY\fR
+(or
+\fIname\fR, see below) is a simple name, for this function to find it\&. The server socket is also allowed to exist at an arbitrary path; usage details follow\&. See below for compatibility issue details\&.
+.PP
+The
+\fIname\fR
+argument specifies the name of the socket or
+\fBNULL\fR
+to use the default (which is
+\fB"wayland\-0"\fR)\&. The environment variable
+\fBWAYLAND_DISPLAY\fR
+replaces the default value\&. If
+\fIname\fR
+is an absolute path, then that path is used as the Wayland socket to which the connection is attempted\&. Note that in combination with the default\-value behavior described above, this implies that setting
+\fBWAYLAND_DISPLAY\fR
+to an absolute path will implicitly cause
+\fIname\fR
+to take on that absolute path if
+\fIname\fR
+is
+\fBNULL\fR\&. If
+\fBWAYLAND_SOCKET\fR
+is set, this function behaves like
+\fBwl_display_connect_to_fd\fR
+with the file\-descriptor number taken from the environment variable\&.
+.PP
+Support for interpreting
+\fBWAYLAND_DISPLAY\fR
+as an absolute path is a change in behavior compared to
+\fBwl_display_connect\fR\*(Aqs behavior in versions 1\&.14 and older of Wayland\&. It is no longer guaranteed in versions 1\&.15 and higher that the Wayland socket chosen is equivalent to manually constructing a socket pathname by concatenating
+\fBXDG_RUNTIME_DIR\fR
+and
+\fBWAYLAND_DISPLAY\fR\&. Manual construction of the socket path must account for the possibility that
+\fBWAYLAND_DISPLAY\fR
+contains an absolute path\&.
+.PP
+\fBwl_display_connect_to_fd\fR
+connects to a Wayland socket with an explicit file\-descriptor\&. The file\-descriptor is passed as argument
+\fIfd\fR\&.
+.SH "RETURN VALUE"
+.PP
+\fBwl_display_connect\fR
+and
+\fBwl_display_connect_to_fd\fR
+return a new display context object or NULL on failure\&.
+\fIerrno\fR
+is set correspondingly\&.
+.SH "SEE ALSO"
+.PP
+\fBwayland-client\fR(7),
+\fBwl_display_disconnect\fR(3),
+\fBwl_display_iterate\fR(3)

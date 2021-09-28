@@ -1,0 +1,95 @@
+#!/usr/bin/env python
+# Copyright 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+"""Dump DAPM widgets status as a 'dot' graph file.
+
+To generate widget status for a device run
+  ssh $REMOTE asoc_dapm_graph > dot.txt && dot -Kfdp -Tpng dot.txt -o widgets.png
+"""
+
+from __future__ import print_function
+import os
+import platform
+import re
+import sys
+import time
+
+ROOTDIR = '/sys/kernel/debug/asoc/'
+# Some widget names are widely used by many codecs, adding them to the graph
+# creates a mess.
+IGNORE_WIDGETS = ('Playback', 'Capture', 'bias_level')
+
+
+def handle_widgets(path):
+  """Reads DAPM widget information from sysfs and generates dot graph entry.
+
+  Args:
+    path: path for sysfs file that exports information about DAPM widget.
+  """
+  for w in os.listdir(path):
+    if w in IGNORE_WIDGETS:
+      continue
+
+    with open(os.path.join(path, w)) as f:
+      lines = f.readlines()
+
+    active = lines[0].startswith(w + ': On ')
+    color = 'green' if active else 'red'
+    print('\t"%s" [color = %s]' % (w, color))
+
+    for l in lines[1:]:
+      l = l.rstrip()
+      # The string format is (in/out) "switch" "widget".
+      edge = filter(None, re.split(r' (in|out)  "(.+)" "(.+)"', l))
+
+      if len(edge) != 3:
+        continue
+
+      direction = edge[0]
+      source = edge[2]
+
+      if source in IGNORE_WIDGETS:
+        continue
+
+      # We need to output the edge only once (e.g. inbound).
+      if direction != 'in':
+        continue
+
+      print('\t"%s" -> "%s"' % (source, w))
+
+
+def handle_card(path):
+  """Generates dot graph file for the given card.
+
+  Args:
+    path: path to sysfs directory that exports DAPM information for a sound card.
+  """
+  host = platform.uname()[1]
+  print('// Generated %s at %s.' % (time.strftime("%c"), host))
+  print('// To visualize the graph run "dot -Kfdp -Tpng $SCRIPT_OUTPUT_FILE -o widgets.png".')
+  print('digraph G {')
+  print('\tbgcolor = grey')
+  for root, dirs, files in os.walk(path):
+    if 'dapm' in dirs:
+      handle_widgets(os.path.join(root, 'dapm'))
+      dirs.remove('dapm')
+  print('}')
+
+
+def main(argv):
+  for c in os.listdir(ROOTDIR):
+    path = os.path.join(ROOTDIR, c)
+    # We assume that directories in ROOTDIR are cards.
+    if os.path.isdir(path):
+      handle_card(path)
+      sys.exit(0)
+
+  print('No cards found', file=sys.stderr)
+  sys.exit(1)
+
+
+if __name__ == '__main__':
+  main(sys.argv[1:])
+

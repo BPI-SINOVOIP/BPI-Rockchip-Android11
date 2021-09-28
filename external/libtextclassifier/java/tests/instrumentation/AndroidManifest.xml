@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.textclassifier.tests">
+
+  <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="30"/>
+  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+  <application>
+    <uses-library android:name="android.test.runner"/>
+  </application>
+
+  <instrumentation
+      android:name="androidx.test.runner.AndroidJUnitRunner"
+      android:targetPackage="com.android.textclassifier.tests"/>
+</manifest>

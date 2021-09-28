@@ -1,0 +1,10 @@
+[ -e $IGT_BENCHMARKS/vgem_mmap ] || return 1
+sudo -n true || return 1
+
+for i in fault clear write read; do
+	name="vgem:mmap::$i"
+	test_name="$test_name $name"
+	eval "${name}_run() { sudo $IGT_BENCHMARKS/vgem_mmap -d $i -r \$1 ; } "
+done
+
+test_exec_time=2

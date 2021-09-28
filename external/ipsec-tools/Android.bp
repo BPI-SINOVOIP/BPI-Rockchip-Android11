@@ -1,0 +1,112 @@
+//
+// Copyright (C) 2011 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+cc_binary {
+    name: "racoon",
+
+    srcs: [
+        "src/racoon/algorithm.c",
+        "src/racoon/crypto_openssl.c",
+        "src/racoon/genlist.c",
+        "src/racoon/handler.c",
+        "src/racoon/isakmp.c",
+        "src/racoon/isakmp_agg.c",
+        "src/racoon/isakmp_base.c",
+        "src/racoon/isakmp_cfg.c",
+        "src/racoon/isakmp_frag.c",
+        "src/racoon/isakmp_ident.c",
+        "src/racoon/isakmp_inf.c",
+        "src/racoon/isakmp_newg.c",
+        "src/racoon/isakmp_quick.c",
+        "src/racoon/isakmp_unity.c",
+        "src/racoon/isakmp_xauth.c",
+        "src/racoon/ipsec_doi.c",
+        "src/racoon/nattraversal.c",
+        "src/racoon/oakley.c",
+        "src/racoon/pfkey.c",
+        "src/racoon/policy.c",
+        "src/racoon/proposal.c",
+        "src/racoon/remoteconf.c",
+        "src/racoon/schedule.c",
+        "src/racoon/sockmisc.c",
+        "src/racoon/str2val.c",
+        "src/racoon/strnames.c",
+        "src/racoon/vendorid.c",
+        "src/racoon/vmbuf.c",
+        "main.c",
+        "setup.c",
+    ],
+
+    local_include_dirs: [
+        "src/include-glibc",
+        "src/racoon",
+        "src/racoon/missing",
+    ],
+
+    static_libs: ["libipsec"],
+
+    shared_libs: [
+        "libcutils",
+        "liblog",
+        "libcrypto",
+        "libkeystore-engine",
+        "libnetd_client",
+    ],
+
+    cflags: [
+        "-DANDROID_CHANGES",
+        "-DHAVE_CONFIG_H",
+        "-D_BSD_SOURCE=1",
+
+        "-Wno-sign-compare",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-parameter",
+        "-Wno-pointer-sign",
+        "-Werror",
+
+        // Turn off unused XXX warnings. Should be removed/fixed when syncing with upstream. b/18523687, b/18632512
+        "-Wno-unused-variable",
+        "-Wno-unused-but-set-variable",
+        "-Wno-unused-function",
+        "-Wno-unused-label",
+        "-Wno-unused-value",
+    ],
+
+    init_rc: ["racoon.rc"],
+}
+
+cc_library_static {
+    name: "libipsec",
+
+    srcs: [
+        "src/libipsec/pfkey.c",
+        "src/libipsec/ipsec_strerror.c",
+    ],
+
+    cflags: [
+        "-DANDROID_CHANGES",
+        "-DHAVE_CONFIG_H",
+
+        "-Wno-sign-compare",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-parameter",
+        "-Wno-pointer-sign",
+        "-Werror",
+    ],
+
+    local_include_dirs: ["src/include-glibc"],
+    export_include_dirs: ["src/libipsec"],
+}

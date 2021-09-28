@@ -1,0 +1,15 @@
+NAME = "platform_LowMemoryTest.form"
+PURPOSE = "Tab discarding functional tests with forms."
+CRITERIA = """Failed if oom-kill is invoked."""
+ATTRIBUTES = "suite:crosbolt_perf_nightly"
+AUTHOR="Vovo Yang"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+DOC = """
+This is a low memory policy functional test. It creates several web page
+with random javascript data and a form with pending data.
+"""
+
+job.run_test('platform_LowMemoryTest', flavor='form')

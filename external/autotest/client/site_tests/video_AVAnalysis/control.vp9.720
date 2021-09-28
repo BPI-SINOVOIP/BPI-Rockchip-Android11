@@ -1,0 +1,25 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "vsuley@google.com"
+NAME = "video_AVAnalysis.vp9.720"
+PURPOSE = "Play bar-coded video on ChromeOS DUT so it can be recorded for analysis."
+CRITERIA = """
+This test does not verify anything yet. Just plays a video so it can be recorded.
+"""
+ATTRIBUTES = "suite:cros-av-analysis"
+TIME = "LONG"
+TEST_CATEGORY = "General"
+TEST_CLASS = "video"
+TEST_TYPE = "client"
+JOB_RETRIES = 0
+
+DOC = """
+This test plays a bar-coded video file on DUT so it can be recorded.
+"""
+
+video = ('http://crosvideo2.appspot.com/ava.html?'
+         'codec=avas_vp9_720_60&cycle=true&mute=true')
+
+job.run_test('video_AVAnalysis', video=video, tag='vp9.720')

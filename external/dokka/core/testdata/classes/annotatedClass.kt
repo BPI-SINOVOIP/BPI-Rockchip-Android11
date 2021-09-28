@@ -1,0 +1,1 @@
+@Strictfp class Foo() {}

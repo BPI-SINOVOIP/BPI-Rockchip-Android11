@@ -1,0 +1,234 @@
+URL: https://github.com/Kotlin/dokka
+License: Apache 2
+Description: "Dokka is a documentation engine for Kotlin and Java."
+
+Changes in this fork
+--------------------
+This fork of Dokka contains changes for generating reference documentation on
+developer.android.com.
+
+This repository was previously hosted at https://github.com/google/dokka, and
+moved to AOSP as of commit 4ff3d4153ca344398bffcdaaa28f1a1f6e76f6ad.  It was
+initally forked from https://github.com/Kotlin/dokka after commit
+7a066afb0ba47b5b57e98a5d821a0cbe97322670.
+
+Development took place on the "devsite-with-java-layout-html" on both the
+upstream Dokka repository and the fork on GitHub.  For a complete list of
+changes, see
+
+https://github.com/google/dokka/compare/7a066afb0ba47b5b57e98a5d821a0cbe97322670...4ff3d4153ca344398bffcdaaa28f1a1f6e76f6ad
+
+which is echoed here:
+
+commit 4ff3d4153ca344398bffcdaaa28f1a1f6e76f6ad
+Author: Gautam Ajjarapu <gautam@ajjarapu.com>
+Date:   Fri Jun 14 13:54:08 2019 -0700
+
+    Automate Downloading of Code Samples (#58)
+
+commit 47cc6dcfb4b39f0ecbb5aba53c34aa7d54a1a01e
+Author: Gautam Ajjarapu <ajjarapu@google.com>
+Date:   Fri Jun 7 16:03:00 2019 -0700
+
+    API Info Alignment Fix (#56)
+
+    * alignment fix
+
+    * Removed temporary solution of using method parameter inHeader because
+      changing api-info div solved spacing problem
+
+commit b2821b7a89ce501b9e8edea26b2defa03dcc6bc8
+Author: mvivo <mvivo@google.com>
+Date:   Tue May 21 15:53:43 2019 +0200
+
+    Adds API info to classes
+
+commit 04c35131eb4df0899430308c203520627deab0b4
+Author: Tiem Song <tiem@google.com>
+Date:   Fri Apr 26 12:36:59 2019 -0700
+
+    Update Dokka to version 0.9.17-g002
+
+commit d0449587ad7e380846c078ecc3714ce3a326448a
+Author: Tiem Song <tiem@google.com>
+Date:   Fri Apr 26 11:07:17 2019 -0700
+
+    Process rowspan
+
+    This is a follow up PR to #45
+
+commit d8d07776f790f6be848c6ce6a085dbd00c52ea43
+Author: Manuel Vivo <manuelvicnt@gmail.com>
+Date:   Fri Apr 26 19:23:16 2019 +0200
+
+     Process HTML code in comments (#45)
+
+    * Handle Special Reference for callouts
+
+    * Process HTML code in comments
+
+    * Adds colspan to td & th
+
+commit f76cba219c2fcc051f4f19b72df58d14f3c542fc
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Wed Apr 24 15:57:39 2019 +0200
+
+    Processes @sample in Java documentation
+
+commit d0bda76a4d07d467594f3fed4359faab74e51608
+Author: mvivo <mvivo@google.com>
+Date:   Thu Apr 25 15:07:32 2019 +0200
+
+    Adds devsite-heading HTML tag to table headers
+
+commit 8fcffad51ef034e38d100693fac755cae0766d73
+Author: Manuel Vivo <manuelvicnt@gmail.com>
+Date:   Thu Apr 25 07:38:21 2019 +0200
+
+    Display deprecated in a callout and class index (#41)
+
+    * Display deprecated callout in classes and enums
+
+    * Follow Google style reference guide
+
+    * Make deprecation message generic
+
+    * Add deprecation message to class index
+
+    * Add HtmlFormatTest back
+
+    * Extends wording to more classes
+
+commit 1f903e7ebe2e29bcf6773615525d991f49707b5d
+Author: mvivo <mvivo@google.com>
+Date:   Mon Apr 22 16:19:44 2019 +0200
+
+    Adds enum table to class summary
+
+commit 3caaa4425bd146b07077d6e040776fd1a5ba6933
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Wed Apr 10 20:42:34 2019 +0200
+
+    Display XML attributes with a short description
+
+commit 200d6131c1aea49db8d5a9ed0a120ab46834da37
+Author: mvivo <mvivo@google.com>
+Date:   Wed Apr 10 15:26:06 2019 +0200
+
+    Follow Google style reference
+
+commit e4ecf324642e0b7a359aa163848df6996ec7a57f
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Tue Apr 9 19:34:01 2019 +0200
+
+    Handle Special Reference for callouts
+
+commit 6c41c5db202ddda907e79a7a63f7c306c81636a3
+Author: Tiem Song <tiem@google.com>
+Date:   Thu Apr 11 09:17:20 2019 -0700
+
+    Update Dokka to version 0.9.17-g001
+
+    This release also uses the new naming convention, using a -gXXX suffix
+    instead of a -g<Date> suffix.
+
+commit 83b513effdb12e74f5560a464c266b1965bf44c2
+Author: mvivo <mvivo@google.com>
+Date:   Wed Apr 10 16:19:31 2019 +0200
+
+    Add tests to CodeNode
+
+commit f9e69f02ae6704ec797b390b178886c4d53bacb2
+Author: mvivo <mvivo@google.com>
+Date:   Tue Apr 9 16:29:23 2019 +0200
+
+    Add Java multiline code
+
+commit 47f3ab52ba16b72ed346db82dd1dd36de23367af
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Mon Apr 8 20:27:04 2019 +0200
+
+    Remove deprecated version in classes
+
+commit 9e26ab39a86f18c919257763733ec7a36080065b
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Mon Apr 8 20:20:02 2019 +0200
+
+    Add description to XML attributes
+
+commit 7c70db208725d6442b3739a42cc4d7351dde48d9
+Author: Tiem Song <tiem@google.com>
+Date:   Fri Apr 5 10:04:47 2019 -0700
+
+    Rename minApiLevel method
+
+    This method was originally created to fetch the API level for minimum API
+    usage.  The logic of the method itself doesn't really pertain to minimum or
+    deprecation - it's just finding a Doc Tag from the data elements.  Thus,
+    this method should be renamed apiLevel() or something similar, with the
+    "min" part removed to avoid confusion.
+
+    Bug: 129726096
+
+commit b64371e2845b0a05dcf2f50a383bd043fc750384
+Author: Tiem Song <tiem@google.com>
+Date:   Thu Apr 4 16:19:06 2019 -0700
+
+    Update package for StringExtensions
+
+    This is to fix issues when developing on a case sensitive file system /
+    MacOS.  This is a continuation of
+    https://github.com/google/dokka/pull/29.
+
+commit 7baef1414f61adcd77963581bffcd0f80d820059
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Wed Apr 3 20:09:15 2019 +0200
+
+    Fix tests broken by pull 32
+
+commit daf718e858242a82b42d3cecd9ec6d23e680f9da
+Author: Manuel Vivo <mvivo@google.com>
+Date:   Wed Apr 3 11:39:44 2019 +0200
+
+    Strikethrough words are inline
+
+commit 67b37de06ed23105a4f78957f1a99654459028b9
+Author: Manuel Vivo <manuelvicnt@gmail.com>
+Date:   Wed Apr 3 19:00:09 2019 +0200
+
+    List functions in alphabetical order (#32)
+
+    * List functions in alphabetical order
+
+    * Order other members alphabetically
+
+commit 97871cf42bf724645eb2ed4d1dd16304083e44cd
+Author: Manuel Vivo <manuelvicnt@gmail.com>
+Date:   Tue Apr 2 22:15:22 2019 +0200
+
+    Show summary on deprecated methods (#31)
+
+commit b5e480e1c087b5a5307a9176bb2835ebbebee8b0
+Author: Manuel Vivo <manuelvicnt@gmail.com>
+Date:   Tue Apr 2 22:12:56 2019 +0200
+
+    Process deprecatedSince annotation (#30)
+
+    * Process deprecatedSince annotation
+
+    * Add info to class
+
+    * Capitalize wording
+
+commit f4f7e6fa673fe13fff68dd1bf3c005bf9d94875c
+Author: mvivo <mvivo@google.com>
+Date:   Fri Mar 29 12:20:59 2019 +0100
+
+    Improve Java enums documentation
+
+commit c1c86b92c15b97e7aec41ed9892aa6965974d66f
+Author: Tiem Song <tiem@google.com>
+Date:   Fri Mar 29 10:45:06 2019 -0700
+
+    Move StringExtensions file to Utilities directory
+

@@ -1,0 +1,24 @@
+AUTHOR = "puthik"
+NAME = "power_VideoCall.25min"
+PURPOSE = "Simulates video call multitasking."
+CRITERIA = "This test is a benchmark."
+TIME = "LONG"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test simulates video call multitasking and record power related statistic.
+
+Workload
+- Camera preview in 720p using VP9 codec.
+- Four 720p 30fps video playback with two VP8 videos and two VP9 videos.
+- Google Doc with emulated typing.
+
+The version runs for 25 minutes as it is common duration of the video call.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_VideoCall', pdash_note=pdash_note, duration=1500,
+             tag=NAME.split('.')[1])

@@ -1,0 +1,51 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "The Chromium OS Authors,chromeos-audio-sw@google.com"
+NAME = "audio_essential"
+PURPOSE = "Suite for testing essential audio functionalities."
+
+TIME = "MEDIUM"
+TEST_CATEGORY = "General"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+Audio tests that cover audio functionalities that are essential to the
+Chrome OS audio stack.
+
+Generally the tests require chameleon and audio boards connected.
+Together with DUT and jack plugger bundled in audio-box environment for
+end-to-end testing. Details on go/audioboard, go/audiobox, go/ab-care-and-feed
+go/chameleon-audio-conf and go/cras-test-green.
+
+The audio boxes set up for this suites shouldn't be with USB audio peripherals
+as there is a known issue that USB chameleon connection might cause
+interference.
+
+"""
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+# Values specified in this bug template will override default values when
+# filing bugs on tests that are a part of this suite. If left unspecified
+# the bug filer will fallback to it's defaults.
+_BUG_TEMPLATE = {
+    'components': ['OS>Kernel>Audio'],
+    'owner': 'cychiang@chromium.org',
+    'status': None,
+    'summary': None,
+    'title': None,
+    'cc': ['kalin@chromium.org', 'conradlo@chromium.org',
+           'chromeos-audio-bugs@google.com']
+}
+
+args_dict['name'] = NAME
+args_dict['job'] = job
+args_dict['add_experimental'] = True
+args_dict['max_runtime_mins'] = 120
+args_dict['bug_template'] = _BUG_TEMPLATE
+
+dynamic_suite.reimage_and_run(**args_dict)

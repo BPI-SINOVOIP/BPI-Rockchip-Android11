@@ -1,0 +1,19 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'kathrelkeld, pawliczek, Chrome OS Team'
+NAME = 'policy_NativePrintersBulkAccessMode.blacklist'
+ATTRIBUTES = 'suite:bvt-perbuild, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effect of NativePrintersBulkAccessMode policy on which
+printers are displayed for use on a managed account.
+
+'''
+
+job.run_test('policy_NativePrintersBulkAccessMode', case=(None, 'blacklist'))

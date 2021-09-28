@@ -1,0 +1,34 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file has been automatically generated. Do not edit!
+
+AUTHOR = 'ARC++ Team'
+NAME = 'cheets_CTS_P.9.0_r11.x86.all.CtsDeqpTestCases_-_CtsDeqpTestCases'
+ATTRIBUTES = 'suite:arc-cts-qual'
+DEPENDENCIES = 'arc, cts_abi_x86'
+JOB_RETRIES = 1
+TEST_TYPE = 'server'
+TIME = 'LONG'
+MAX_RESULT_SIZE_KB = 1024000
+DOC = 'Run module CtsDeqpTestCases of the Android Compatibility Test Suite (CTS) using x86 ABI in the ARC++ container.'
+
+def run_TS(machine):
+    host_list = [hosts.create_host(machine)]
+    job.run_test(
+        'cheets_CTS_P',
+        hosts=host_list,
+        iterations=1,
+        max_retry=15,
+        tag='9.0_r11.x86.all.CtsDeqpTestCases_-_CtsDeqpTestCases',
+        test_name='cheets_CTS_P.9.0_r11.x86.all.CtsDeqpTestCases_-_CtsDeqpTestCases',
+        run_template=['run', 'commandAndExit', 'cts', '--module', 'CtsDeqpTestCases'],
+        retry_template=['run', 'commandAndExit', 'retry', '--retry', '{session_id}'],
+        target_module='all.CtsDeqpTestCases_-_CtsDeqpTestCases',
+        target_plan=None,
+        bundle='x86',
+        uri='gs://chromeos-arc-images/cts/bundle/P/android-cts-9.0_r11-linux_x86-x86.zip',
+        timeout=72000)
+
+parallel_simple(run_TS, machines)

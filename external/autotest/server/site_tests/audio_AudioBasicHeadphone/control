@@ -1,0 +1,33 @@
+# Copyright 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "chromeos-chameleon"
+NAME = "audio_AudioBasicHeadphone"
+PURPOSE = "Remotely controlled headphone audio test."
+CRITERIA = "This test will fail if the captured audio does not match original file."
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "audio"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:audio_essential"
+# Currently, CrOS audio team rely on the audio_box to mark tests that should
+# run on a dedicated pool of DUTs.
+# This test doesn't necessarily need to be in a audio box.
+DEPENDENCIES = "audio_box, test_audiojack"
+JOB_RETRIES = 1
+
+DOC = """
+This test remotely tests headphone audio function.
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test("audio_AudioBasicHeadphone", host=host)
+
+parallel_simple(run, machines)

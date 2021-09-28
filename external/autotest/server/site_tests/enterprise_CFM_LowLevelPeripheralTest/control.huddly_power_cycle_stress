@@ -1,0 +1,42 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+from autotest_lib.server.cros.cfm.configurable_test.dsl import *
+from autotest_lib.server import utils
+
+AUTHOR = "kerl@google.com, chromeos-meetings@google.com"
+NAME = "enterprise_CFM_LowLevelPeripheralTest.huddly_power_cycle_stress"
+PURPOSE = "Stresses an Huddly device by repeatedly power cycling its USB port."
+CRITERIA = ("Huddly detectable as a USB device after each cycle "
+            "and no crash files appear")
+ATTRIBUTES = "suite:hotrod"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Stress"
+TEST_TYPE = "server"
+DEPENDENCIES="huddly"
+
+DOC = """
+Repeatedly power cycle the connected Huddly and verify it appears
+as a USB device after each cycle. Verifies that no new crash files
+appear.
+"""
+
+cfm_test = CfmTest(
+    configuration=Configuration(skip_enrollment=True),
+    scenario=Scenario(
+        AssertUsbDevices([HUDDLY_GO]),
+        RepeatTimes(10, Scenario(
+            PowerCycleUsbPort([HUDDLY_GO]),
+            AssertNoNewCrashes()
+        ))
+    ),
+)
+
+def run_test(machine):
+    job.run_test("enterprise_CFM_LowLevelPeripheralTest",
+                 cfm_test = cfm_test,
+                 tag = 'huddly_power_cycle_stress',
+                 host = hosts.create_host(machine))
+
+
+parallel_simple(run_test, machines)

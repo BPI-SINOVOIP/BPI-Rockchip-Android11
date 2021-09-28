@@ -1,0 +1,55 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// A library of shared initialization code for use by the direct users of
+// ICU4C only.
+cc_library_static {
+    name: "libandroidicuinit",
+    host_supported: true,
+    native_bridge_supported: true,
+    srcs: ["IcuRegistration.cpp"],
+    shared_libs: [
+        "libbase",
+        "libicuuc",
+        "liblog",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    export_include_dirs: ["include"],
+    export_shared_lib_headers: [
+        "libbase",
+    ],
+    target: {
+        android: {
+            cflags: [
+                // -DANDROID_LINK_SHARED_ICU4C to enable access to the full ICU4C.
+                // See external/icu/android_icu4c/include/uconfig_local.h
+                // for more information.
+                "-DANDROID_LINK_SHARED_ICU4C",
+            ],
+        },
+    },
+    visibility: [
+        "//external/icu/libandroidicu",
+        "//external/icu/icu4c/source/test:__subpackages__",
+        "//libcore",
+    ],
+
+    apex_available: [
+        "com.android.art.release",
+        "com.android.art.debug",
+    ],
+}

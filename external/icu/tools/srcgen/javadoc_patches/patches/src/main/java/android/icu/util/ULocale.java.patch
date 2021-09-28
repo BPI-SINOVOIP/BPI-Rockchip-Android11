@@ -1,0 +1,32 @@
+--- android_icu4j/src/main/java/android/icu/util/ULocale.java	2019-12-19 21:05:06.890553695 +0000
++++ android_icu4j/src/main/java/android/icu/util/ULocale.java	2019-12-19 21:05:27.638617146 +0000
+@@ -90,19 +90,6 @@
+  * to canonical form, or the <code>canonicalInstance</code> factory method
+  * can be called.
+  *
+- * <p>This class provides selectors {@link #VALID_LOCALE} and {@link
+- * #ACTUAL_LOCALE} intended for use in methods named
+- * <tt>getLocale()</tt>.  These methods exist in several ICU classes,
+- * including {@link android.icu.util.Calendar}, {@link
+- * android.icu.util.Currency}, {@link android.icu.text.UFormat},
+- * {@link android.icu.text.BreakIterator},
+- * {@link android.icu.text.Collator},
+- * {@link android.icu.text.DateFormatSymbols}, and {@link
+- * android.icu.text.DecimalFormatSymbols} and their subclasses, if
+- * any. Once an object of one of these classes has been created,
+- * <tt>getLocale()</tt> may be called on it to determine the valid and
+- * actual locale arrived at during the object's construction.
+- *
+  * <p>Note: The <i>actual</i> locale is returned correctly, but the <i>valid</i>
+  * locale is not, in most cases.
+  *
+@@ -797,8 +784,7 @@
+      * <strong>[icu] Note:</strong> Unlike the Locale API, this returns an array of <code>ULocale</code>,
+      * not <code>Locale</code>.
+      *
+-     * <p>Returns a list of all installed locales. This is equivalent to calling
+-     * {@link #getAvailableLocalesByType} with AvialableType.DEFAULT.
++     * <p>Returns a list of all installed locales.
+      */
+     public static ULocale[] getAvailableLocales() {
+         return ICUResourceBundle.getAvailableULocales().clone();

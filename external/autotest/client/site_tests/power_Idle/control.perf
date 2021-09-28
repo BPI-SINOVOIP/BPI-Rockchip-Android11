@@ -1,0 +1,49 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_Idle.perf"
+PURPOSE = "Measure power usage when system is idle with perf enabled."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test records power related statistics while the system is idling.
+
+    Current tests,
+
+      | test# | seconds | display   | bluetooth |
+      -------------------------------------------
+      | 1     | 120     | off       | off       |
+      | 2     | 120     | default   | off       |
+      | 3     | 120     | default   | on - idle |
+      | 4     | 120     | off       | on - idle |
+"""
+
+args_dict = utils.args_to_dict(args)
+
+kwargs = {
+  'pdash_note': args_dict.get('pdash_note', ''),
+  'tag': NAME.split('.')[1]
+}
+
+if 'idle_secs' in args_dict:
+  kwargs['idle_secs'] = float(args_dict['idle_secs'])
+
+if 'warmup_secs' in args_dict:
+  kwargs['warmup_secs'] = float(args_dict['warmup_secs'])
+
+job.default_profile_only = True
+job.profilers.add('top')
+job.profilers.add('turbostat')
+job.profilers.add('cros_perf', interval=30)
+
+job.run_test('power_Idle', **kwargs)
+
+job.profilers.delete('cros_perf')
+job.profilers.delete('top')
+job.profilers.delete('turbostat')

@@ -1,0 +1,35 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "rzakarian"
+NAME = "policy_WilcoServerUSBPowershare.enabled"
+CRITERIA = "This test will fail if servo does not work as expected."
+TIME = "LONG"
+TEST_CATEGORY = "General"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+ATTRIBUTES = "suite:wilco_bve"
+
+DOC = """
+This test verifies the USB power output when the device is off with the
+DeviceUsbPowerShareEnabled policy set. If the policy is set to True or
+not set, power should be provided. If the policy is set to False power
+should not be provided.
+
+"""
+
+client_test = 'policy_WilcoUSBPowershare'
+case = True
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('policy_WilcoServerUSBPowershare', host=host,
+                 client_test=client_test, case=case)
+
+parallel_simple(run, machines)

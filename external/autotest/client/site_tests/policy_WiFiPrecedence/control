@@ -1,0 +1,25 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+NAME = 'policy_WiFiPrecedence'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effect of policy_WiFiPrecedence policy on Chrome OS behavior.
+
+The DUT is given 2 network configurations and connects to the one with the
+higher precedence.
+
+Trigger this through the 'policy_WiFiPrecedenceServer' test.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_WiFiPrecedence', **args_dict)
+

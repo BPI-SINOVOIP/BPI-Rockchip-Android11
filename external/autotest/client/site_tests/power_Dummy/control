@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_Dummy"
+PURPOSE = "Dummy client test for testing power autotest infrastructures."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = ""
+
+DOC = """
+Dummy client test for testing power telemetry wrapper tests, measurement
+loggers, and measurement dashboards. Run for a short amount of time, collect
+logger data, and upload to power dashboard.
+Loggers included in this test are all loggers in power_test and
+power_dashboard.SimplePowerLoggerDashboard.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Dummy', pdash_note=pdash_note)

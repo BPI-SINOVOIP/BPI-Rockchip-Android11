@@ -1,0 +1,25 @@
+FROM debian:stretch-backports
+
+RUN apt-get update
+RUN apt-get install -y \
+			gcc \
+			flex \
+			bison \
+			pkg-config \
+			libatomic1 \
+			libpciaccess-dev \
+			libkmod-dev \
+			libprocps-dev \
+			libdw-dev \
+			zlib1g-dev \
+			liblzma-dev \
+			libcairo-dev \
+			libpixman-1-dev \
+			libudev-dev \
+			libxrandr-dev \
+			libxv-dev \
+			x11proto-dri2-dev
+
+RUN apt-get install -t stretch-backports -y \
+					meson \
+					libdrm-dev

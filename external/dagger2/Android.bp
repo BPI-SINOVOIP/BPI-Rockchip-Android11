@@ -1,0 +1,214 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+java_import_host {
+    name: "dagger2-auto-common",
+    jars: ["lib/auto-common-0.10.jar"],
+}
+
+java_import_host {
+    name: "dagger2-auto-factory-jar",
+    jars: ["lib/auto-factory-1.0-beta6.jar"],
+}
+
+java_plugin {
+    name: "dagger2-auto-factory",
+    processor_class: "com.google.auto.factory.processor.AutoFactoryProcessor",
+    static_libs: [
+        "dagger2-auto-factory-jar",
+        "dagger2-auto-common",
+        "guava",
+        "javapoet",
+        "dagger2-google-java-format",
+    ],
+}
+
+java_import_host {
+    name: "dagger2-auto-service-jar",
+    jars: ["lib/auto-service-1.0-rc5.jar"],
+}
+
+java_import_host {
+    name: "dagger2-auto-service-annotations",
+    jars: ["lib/auto-service-annotations-1.0-rc5.jar"],
+}
+
+java_plugin {
+    name: "dagger2-auto-service",
+    processor_class: "com.google.auto.service.processor.AutoServiceProcessor",
+    static_libs: [
+        "dagger2-auto-common",
+        "dagger2-auto-service-jar",
+        "dagger2-auto-service-annotations",
+        "guava",
+    ],
+}
+
+java_import_host {
+    name: "dagger2-auto-value-jar",
+    jars: ["lib/auto-value-1.6.5.jar"],
+}
+
+java_import_host {
+    name: "dagger2-auto-value-annotations",
+    jars: ["lib/auto-value-annotations-1.6.5.jar"],
+}
+
+java_plugin {
+    name: "dagger2-auto-value",
+    processor_class: "com.google.auto.value.processor.AutoValueProcessor",
+    static_libs: [
+        "dagger2-auto-value-jar",
+        "dagger2-auto-value-annotations",
+    ],
+}
+
+java_plugin {
+    name: "dagger2-auto-annotation",
+    processor_class: "com.google.auto.value.processor.AutoAnnotationProcessor",
+    static_libs: ["dagger2-auto-value-jar"],
+}
+
+java_import_host {
+    name: "dagger2-google-java-format",
+    jars: ["lib/google-java-format-1.7-all-deps.jar"],
+}
+
+java_import_host {
+    name: "dagger2-inject",
+    jars: ["lib/javax.inject-1.jar"],
+}
+
+java_import_host {
+    name: "dagger2-bootstrap-compiler-jar",
+    jars: ["java/dagger/internal/codegen/bootstrap_compiler_deploy.jar"],
+}
+
+java_plugin {
+    name: "dagger2-bootstrap-compiler",
+    processor_class: "dagger.internal.codegen.ComponentProcessor",
+    generates_api: true,
+    static_libs: ["dagger2-bootstrap-compiler-jar"],
+}
+
+java_library_host {
+    name: "dagger2",
+
+    srcs: [
+        "java/dagger/*.java",
+        "java/dagger/internal/*.java",
+        "java/dagger/multibindings/*.java",
+        "java/dagger/releasablereferences/*.java",
+    ],
+    exclude_srcs: ["java/dagger/android/**/*.java"],
+
+    static_libs: ["dagger2-inject"],
+
+    libs: ["guava"],
+
+    java_version: "1.8",
+}
+
+// build dagger2 producers library
+// ============================================================
+
+java_library_host {
+    name: "dagger2-producers",
+
+    srcs: ["java/dagger/producers/**/*.java"],
+
+    static_libs: [
+        "dagger2-inject",
+        "error_prone_annotations",
+    ],
+
+    libs: [
+        "dagger2",
+        "dagger2-android-annotation-stubs",
+        "guava",
+    ],
+
+    java_version: "1.8",
+}
+
+// build dagger2 compiler plugin
+// ============================================================
+
+java_plugin {
+    name: "dagger2-compiler",
+    processor_class: "dagger.internal.codegen.ComponentProcessor",
+    generates_api: true,
+    use_tools_jar: true,
+
+    srcs: [
+        "java/dagger/internal/codegen/**/*.java",
+        "java/dagger/internal/codegen/**/*.proto",
+
+        "java/dagger/model/*.java",
+        "java/dagger/spi/*.java",
+    ],
+
+    exclude_srcs: [
+        "java/dagger/internal/codegen/BindingGraphStatisticsCollector.java",
+        "java/dagger/internal/codegen/DaggerKythePlugin.java",
+    ],
+
+    // Manually include META-INF/services/javax.annotation.processing.Processor
+    // as the AutoService processor doesn't work properly.
+    java_resource_dirs: ["resources"],
+
+    static_libs: [
+        "dagger2",
+        "dagger2-auto-common",
+        "dagger2-auto-factory",
+        "dagger2-auto-service",
+        "dagger2-auto-value",
+        "dagger2-google-java-format",
+        "dagger2-inject",
+        "dagger2-producers",
+        "guava",
+        "javapoet",
+    ],
+
+    // shade guava to avoid conflicts with guava embedded in Error Prone.
+    jarjar_rules: "jarjar-rules.txt",
+
+    libs: [
+        "dagger2-android-annotation-stubs",
+    ],
+
+    plugins: [
+        "dagger2-auto-factory",
+        "dagger2-auto-service",
+        "dagger2-auto-value",
+        "dagger2-auto-annotation",
+        "dagger2-bootstrap-compiler",
+    ],
+
+    proto: {
+        type: "full",
+        include_dirs: ["external/protobuf/src/"],
+    },
+
+    java_version: "1.8",
+}
+
+// Compile  dummy implementations of annotations used by dagger2 but not
+// present in the Android tree.
+java_library {
+    name: "dagger2-android-annotation-stubs",
+    host_supported: true,
+    sdk_version: "core_current",
+    srcs: ["android-annotation-stubs/src/**/*.java"],
+}

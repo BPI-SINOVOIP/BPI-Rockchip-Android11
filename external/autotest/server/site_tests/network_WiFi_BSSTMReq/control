@@ -1,0 +1,25 @@
+# Copyright 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'matthewmwang'
+TIME = 'SHORT'
+NAME = 'network_WiFi_BSSTMReq'
+TEST_TYPE = 'Server'
+ATTRIBUTES = ('suite:wifi_matfunc, suite:wifi_release,')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+WiFi_BSSTMReq test configures two APs with the same ssid and runs the
+network_WiFi_BSSTMReq test which uses these APs to test a BSS Transition
+Management Request.
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_BSSTMReq',
+                 host=host,
+                 raw_cmdline_args=args)
+
+
+parallel_simple(run, machines)

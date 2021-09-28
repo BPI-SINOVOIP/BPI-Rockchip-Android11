@@ -1,0 +1,31 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'briannorris'
+NAME = 'network_WiFi_APSupportedRates.11g'
+TIME = 'SHORT'
+TEST_TYPE = 'Server'
+# TODO(crbug.com/953702): move to wifi_matfunc once stable.
+ATTRIBUTES = ('suite:wifi_flaky')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+Verify that we respond sanely to APs that disable certain legacy bitrates.
+"""
+
+from autotest_lib.server.cros.network import hostap_config
+
+def run(machine):
+    ap_config = hostap_config.HostapConfig(channel=6,
+        mode=hostap_config.HostapConfig.MODE_11G,
+        supported_rates=[24, 36, 48, 54],
+        basic_rates=[24])
+
+    job.run_test('network_WiFi_APSupportedRates',
+                 host=hosts.create_host(machine),
+                 raw_cmdline_args=args,
+                 additional_params=ap_config)
+
+
+parallel_simple(run, machines)

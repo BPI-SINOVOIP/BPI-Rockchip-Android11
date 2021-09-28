@@ -1,0 +1,27 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "yrizk@chromium.org"
+NAME = "enterprise_CFM_MimoUpdater"
+TEST_TYPE = "server"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+PURPOSE = "Server-side test for sanity check on mimo-updater."
+CRITERIA = "Fails if the Autotest framework doesn't work as expected."
+ATTRIBUTES = "suite:hotrod"
+
+DOC = """
+This test verifies that all large pieces of the mimo displaylink 
+firmware updater are working correctly: namely that the updater 
+determines that an update is needed correctly and that it does 
+the update correctly.
+"""
+
+def run_test(machine):
+    host = hosts.create_host(machine)
+    job.run_test("enterprise_CFM_MimoUpdater", host=host)
+
+parallel_simple(run_test, machines)

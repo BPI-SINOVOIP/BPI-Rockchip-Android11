@@ -1,0 +1,75 @@
+genrule {
+    name: "iw_version",
+    cmd: "echo '#include \"iw.h\"' >$(out) && " +
+        "echo \"const char iw_version[] = $$(grep ^VERSION $(location version.sh) | sed \"s/VERSION=//\");\" >>$(out)",
+    srcs: ["version.sh"],
+    out: ["version.c"],
+}
+
+cc_defaults {
+    name: "iw_common",
+
+    srcs: [
+        "iw.c",
+        "genl.c",
+        "event.c",
+        "info.c",
+        "phy.c",
+        "interface.c",
+        "ibss.c",
+        "station.c",
+        "survey.c",
+        "util.c",
+        "ocb.c",
+        "mesh.c",
+        "mpath.c",
+        "mpp.c",
+        "scan.c",
+        "reg.c",
+        "reason.c",
+        "status.c",
+        "connect.c",
+        "link.c",
+        "offch.c",
+        "ps.c",
+        "cqm.c",
+        "bitrate.c",
+        "wowlan.c",
+        "coalesce.c",
+        "roc.c",
+        "p2p.c",
+        "vendor.c",
+        "sections.c",
+
+        ":iw_version",
+    ],
+
+    cflags: [
+        "-D_GNU_SOURCE",
+        "-DCONFIG_LIBNL20",
+
+        // Silence some warnings for now. Needs to be fixed upstream. b/26105799
+        "-Wno-unused-parameter",
+        "-Wno-sign-compare",
+        "-Wno-format",
+        "-Wno-absolute-value",
+        "-Wno-enum-conversion",
+        "-Werror",
+    ],
+
+    ldflags: ["-Wl,--no-gc-sections"],
+    shared_libs: ["libnl"],
+}
+
+cc_binary {
+    name: "iw",
+
+    defaults: ["iw_common"],
+}
+
+cc_binary {
+    name: "iw_vendor",
+    stem: "iw",
+    vendor: true,
+    defaults: ["iw_common"],
+}

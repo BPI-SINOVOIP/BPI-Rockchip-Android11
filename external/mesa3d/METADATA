@@ -1,0 +1,27 @@
+# *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+#     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+#     DEPENDING ON IT IN YOUR PROJECT. ***
+name: "mesa3d"
+description:
+    "Mesa (or Mesa 3D) is a library which provides the OpenGL, OpenGL ES, EGL, "
+    "Vulkan and other standard graphics APIs, and the userspace part of the "
+    "graphics hardware drivers required to accelerate these APIs."
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://www.mesa3d.org/"
+  }
+  url {
+    type: GIT
+    value: "git://anongit.freedesktop.org/git/mesa/mesa"
+  }
+  version: "17.0.4"
+  last_upgrade_date { year: 2017 month: 5 day: 22 }
+  # would be NOTICE save for:
+  #   include/drm-uapi/etnaviv_drm.h
+  # and RESTRICTED save for:
+  #   docs/README.VCE
+  #   docs/README.UVD
+  license_type: BY_EXCEPTION_ONLY
+}

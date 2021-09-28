@@ -1,0 +1,43 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'pauletti, kirtika'
+NAME = 'network_WiFi_VisibleScan.5VHT80'
+TIME = 'SHORT'
+TEST_TYPE = 'Server'
+ATTRIBUTES = ('suite:wifi_matfunc')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test scans for networks, with a shill profile that does not
+contain any hidden networks. The test verifies that 802.11 probe
+frames are seen over-the-air, and that the probe frames specify
+a broadcast scan. This test has the AP use an 80 MHz channel.
+
+"""
+
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    n_caps = [hostap_config.HostapConfig.N_CAPABILITY_HT40_PLUS]
+    ac_caps = [hostap_config.HostapConfig.AC_CAPABILITY_SHORT_GI_80]
+    ac_mode = hostap_config.HostapConfig.MODE_11AC_PURE
+    channel_width_80_mhz = hostap_config.HostapConfig.VHT_CHANNEL_WIDTH_80
+    configurations = [hostap_config.HostapConfig(
+                                  channel=149,
+                                  mode=ac_mode,
+                                  n_capabilities=n_caps,
+                                  vht_channel_width=channel_width_80_mhz,
+                                  vht_center_channel=155,
+                                  ac_capabilities=ac_caps)]
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_VisibleScan',
+                 tag=NAME.split('.')[1],
+                 host=host,
+                 raw_cmdline_args=args,
+                 additional_params=configurations)
+
+
+parallel_simple(run, machines)

@@ -1,0 +1,27 @@
+# Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "firmware_UpdaterModes"
+ATTRIBUTES = "suite:faft, suite:faft_bios, suite:faft_bios_au_1, suite:faft_bios_au_2, suite:faft_bios_au_3, suite:faft_lv5, suite:faft_bios_tot"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+
+DOC = """
+Test chromeos-firmwareupdate modes via --emulate, to avoid wearing out flash
+"""
+
+from autotest_lib.client.common_lib import utils
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run_firmwareupdate(machine):
+    # Setup the client machine.
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('firmware_UpdaterModes', host=host, cmdline_args=args)
+
+parallel_simple(run_firmwareupdate, machines)

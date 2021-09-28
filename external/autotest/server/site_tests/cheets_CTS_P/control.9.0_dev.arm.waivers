@@ -1,0 +1,35 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file is not auto-generated. Don't delete it.
+
+AUTHOR = 'ARC++ Team'
+NAME = 'cheets_CTS_P.9.0_dev.arm.waivers'
+ATTRIBUTES = 'suite:arc-cts, suite:arc-cts-qual, suite:arc-cts-unibuild'
+DEPENDENCIES = 'arc'
+JOB_RETRIES = 1
+TEST_TYPE = 'server'
+TIME = 'MEDIUM'
+MAX_RESULT_SIZE_KB = 512000
+DOC = 'Run waived tests of the Android Compatibility Test Suite (CTS) using arm ABI in the ARC++ container.'
+
+def run_TS(machine):
+    host_list = [hosts.create_host(machine)]
+    job.run_test(
+        'cheets_CTS_P',
+        hosts=host_list,
+        iterations=1,
+        needs_push_media=False,
+        tag='9.0_dev.arm.waivers',
+        test_name='cheets_CTS_P.9.0_dev.arm.waivers',
+        run_template=['run', 'commandAndExit', 'cts', '--subplan', 'waivers'],
+        retry_template=['run', 'commandAndExit', 'retry', '--retry', '{session_id}'],
+        target_module='cts-dev',
+        target_plan='waivers',
+        load_waivers=False,
+        bundle='arm',
+        uri='gs://chromeos-arc-images/cts/bundle/P/android-cts-6191687-linux_x86-arm.zip',
+        timeout=7200)
+
+parallel_simple(run_TS, machines)

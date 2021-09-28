@@ -1,0 +1,25 @@
+//#############################################
+// Compile Robolectric utils
+//#############################################
+
+java_library_host {
+    name: "Robolectric_utils",
+    srcs: ["src/main/java/**/*.java"],
+}
+
+//#############################################
+// Compile Robolectric utils tests
+//#############################################
+
+java_test_host {
+    name: "Robolectric_utils_tests",
+    srcs: ["src/test/java/**/*.java"],
+    static_libs: [
+        "Robolectric_utils",
+        "hamcrest",
+        "guava",
+        "junit",
+        "truth-prebuilt",
+    ],
+    test_suites: ["general-tests"],
+}

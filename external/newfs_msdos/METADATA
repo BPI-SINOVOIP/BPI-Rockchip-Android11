@@ -1,0 +1,17 @@
+name: "newfs_msdos"
+description:
+    "This is the FreeBSD newfs_msdos."
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/freebsd/freebsd/tree/master/sbin/newfs_msdos"
+  }
+  url {
+    type: ARCHIVE
+    value: "https://github.git.corp.google.com/freebsd/freebsd/+archive/b25a2bc/sbin/newfs_msdos.tar.gz"
+  }
+  version: "b25a2bc"
+  last_upgrade_date { year: 2018 month: 4 day: 26 }
+  license_type: NOTICE
+}

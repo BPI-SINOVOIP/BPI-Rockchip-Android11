@@ -1,0 +1,166 @@
+# Copyright (C) 2018 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//common-mk/pkg_config.gni")
+
+group("all") {
+  deps = [
+    ":bsdiff",
+    ":bspatch",
+    ":libbsdiff",
+    ":libbspatch",
+  ]
+  if (use.test) {
+    deps += [ ":bsdiff_test" ]
+  }
+  if (use.fuzzer) {
+    deps += [ ":bspatch_fuzzer" ]
+  }
+}
+
+config("target_defaults") {
+  cflags = [
+    "-Wextra",
+    "-Wno-unused-parameter",
+  ]
+  cflags_cc = [ "-Wnon-virtual-dtor" ]
+  defines = [ "_FILE_OFFSET_BITS=64" ]
+  include_dirs = [
+      "include",
+      # We need this include dir because we include all the local code as
+      # "bsdiff/...".
+      "${platform2_root}/../aosp/external",
+  ]
+  libs = [ "bz2" ]
+}
+
+pkg_config("libbspatch_config") {
+  pkg_deps = [ "libbrotlidec" ]
+}
+
+static_library("libbspatch") {
+  configs += [
+   "//common-mk:nouse_thin_archive",
+   ":target_defaults",
+   ":libbspatch_config"
+  ]
+  configs -= [ "//common-mk:use_thin_archive" ]
+  sources = [
+    "brotli_decompressor.cc",
+    "bspatch.cc",
+    "buffer_file.cc",
+    "bz2_decompressor.cc",
+    "decompressor_interface.cc",
+    "extents.cc",
+    "extents_file.cc",
+    "file.cc",
+    "logging.cc",
+    "memory_file.cc",
+    "patch_reader.cc",
+    "sink_file.cc",
+    "utils.cc",
+  ]
+}
+
+executable("bspatch") {
+  configs += [ ":target_defaults" ]
+  deps = [ ":libbspatch" ]
+  sources = [
+    "bspatch_main.cc",
+  ]
+}
+
+pkg_config("libbsdiff_config") {
+  pkg_deps = [
+    "libbrotlienc",
+    "libdivsufsort",
+    "libdivsufsort64",
+  ]
+}
+
+static_library("libbsdiff") {
+  configs += [
+    "//common-mk:nouse_thin_archive",
+    ":target_defaults",
+    ":libbsdiff_config",
+  ]
+  configs -= [ "//common-mk:use_thin_archive" ]
+  sources = [
+    "brotli_compressor.cc",
+    "bsdiff.cc",
+    "bz2_compressor.cc",
+    "compressor_buffer.cc",
+    "diff_encoder.cc",
+    "endsley_patch_writer.cc",
+    "logging.cc",
+    "patch_writer.cc",
+    "patch_writer_factory.cc",
+    "split_patch_writer.cc",
+    "suffix_array_index.cc",
+  ]
+}
+
+executable("bsdiff") {
+  configs += [ ":target_defaults" ]
+  deps = [ ":libbsdiff" ]
+  sources = [
+    "bsdiff_arguments.cc",
+    "bsdiff_main.cc",
+  ]
+}
+
+if (use.test) {
+  executable("bsdiff_test") {
+    configs += [
+      "//common-mk:test",
+      ":target_defaults",
+    ]
+    deps = [
+      "//common-mk/testrunner",
+      ":libbspatch",
+      ":libbsdiff",
+    ]
+    sources = [
+      "brotli_compressor_unittest.cc",
+      "brotli_decompressor_unittest.cc",
+      "bsdiff_arguments.cc",
+      "bsdiff_arguments_unittest.cc",
+      "bsdiff_unittest.cc",
+      "bspatch_unittest.cc",
+      "bz2_decompressor_unittest.cc",
+      "diff_encoder_unittest.cc",
+      "endsley_patch_writer_unittest.cc",
+      "extents_file_unittest.cc",
+      "extents_unittest.cc",
+      "patch_reader_unittest.cc",
+      "patch_writer_unittest.cc",
+      "split_patch_writer_unittest.cc",
+      "suffix_array_index_unittest.cc",
+      "test_utils.cc",
+    ]
+  }
+}
+
+if (use.fuzzer) {
+  executable("bspatch_fuzzer") {
+    configs += [
+      "//common-mk/common_fuzzer",
+      ":target_defaults",
+    ]
+    deps = [ ":libbspatch" ]
+    sources = [
+      "bspatch_fuzzer.cc",
+    ]
+  }
+}

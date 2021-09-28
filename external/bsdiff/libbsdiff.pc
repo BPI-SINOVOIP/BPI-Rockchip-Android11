@@ -1,0 +1,9 @@
+# This file is for libbsdiff in Chrome OS.
+
+Name: libbsdiff
+Description: bsdiff library for generating delta patches
+Version: 4.3.1
+# libbsdiff library is static lib ATM, so we don't use private versions of Libs
+# and Requires fields.
+Libs: -lbsdiff -lbz2
+Requires: libbrotlienc libdivsufsort libdivsufsort64

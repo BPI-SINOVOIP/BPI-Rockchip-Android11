@@ -1,0 +1,50 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "firmware_Fingerprint.RDP0"
+PURPOSE = """
+Verify that we can read flash when RDP (readout protection) is set to level 0.
+"""
+CRITERIA = """
+Fails if the bytes that we read do not exactly match the firmware that was
+flashed.
+"""
+ATTRIBUTES = "suite:fingerprint"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo, fingerprint"
+JOB_RETRIES = 0
+
+DOC = """
+The test setup ensures that neither hardware or software write protect is
+enabled, which means that RDP is set to level 0. The test script then reads the
+flash and verifies that the bytes exactly match the originally flashed
+firmware.
+"""
+
+test_images = [ 'TEST_IMAGE_ORIGINAL' ]
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("firmware_Fingerprint", host=host,
+                 test_exe="rdp0.sh",
+                 test_exe_args=test_images,
+                 enable_hardware_write_protect=False,
+                 enable_software_write_protect=False,
+                 # This test requires a forced flash without entropy
+                 # initialization to ensure that we get an exact match between
+                 # the original firmware that was flashed and the value that is
+                 # read.
+                 force_firmware_flashing=True,
+                 init_entropy=False)
+
+parallel_simple(run, machines)

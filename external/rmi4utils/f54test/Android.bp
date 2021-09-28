@@ -1,0 +1,16 @@
+cc_binary {
+    name: "f54test",
+    srcs: [
+        "main.cpp",
+        "f54test.cpp",
+        "testutil.cpp",
+        "display.cpp",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-sometimes-uninitialized",
+        "-Wno-unused-parameter",
+    ],
+    static_libs: ["rmidevice"],
+}

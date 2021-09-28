@@ -1,0 +1,79 @@
+// Copyright (C) 2017 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_library_headers {
+    name: "flatbuffer_headers",
+    export_include_dirs: ["include"],
+    vendor_available: true,
+    sdk_version: "current",
+    apex_available: [
+        "com.android.neuralnetworks",
+        "test_com.android.neuralnetworks",
+        "com.android.extservices",
+        "//apex_available:platform",
+    ],
+}
+
+cc_binary_host {
+    name: "flatc",
+
+    cppflags: [
+        "-fsigned-char",
+        "-pedantic",
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-Werror=shadow",
+        "-Wno-implicit-fallthrough", // in idl_gen_general.cpp and reflection.cpp
+    ],
+
+    local_include_dirs: [
+        "grpc",
+        "include",
+    ],
+
+    srcs: [
+        "src/code_generators.cpp",
+        "src/flatc.cpp",
+        "src/flatc_main.cpp",
+        "src/idl_gen_cpp.cpp",
+        "src/idl_gen_dart.cpp",
+        "src/idl_gen_fbs.cpp",
+        "src/idl_gen_general.cpp",
+        "src/idl_gen_go.cpp",
+        "src/idl_gen_grpc.cpp",
+        "src/idl_gen_js_ts.cpp",
+        "src/idl_gen_json_schema.cpp",
+        "src/idl_gen_lua.cpp",
+        "src/idl_gen_lobster.cpp",
+        "src/idl_gen_php.cpp",
+        "src/idl_gen_python.cpp",
+        "src/idl_gen_rust.cpp",
+        "src/idl_gen_text.cpp",
+        "src/idl_parser.cpp",
+        "src/reflection.cpp",
+        "src/util.cpp",
+        "grpc/src/compiler/cpp_generator.cc",
+        "grpc/src/compiler/go_generator.cc",
+        "grpc/src/compiler/java_generator.cc",
+    ],
+}
+
+java_library {
+    name: "flatbuffers-java",
+    srcs: ["java/**/*.java"],
+    sdk_version: "current",
+
+    java_version: "1.8",
+}

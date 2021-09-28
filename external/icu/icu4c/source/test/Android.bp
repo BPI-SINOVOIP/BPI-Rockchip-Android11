@@ -1,0 +1,55 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+subdirs = [
+    "cintltst",
+    "intltest",
+]
+
+cc_defaults {
+    name: "icu_test_defaults",
+    gtest: false,
+    rtti: true,
+    cflags: [
+        "-Wno-deprecated-declarations",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-function",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+    c_std: "c11",
+    cpp_std: "c++11",
+    shared_libs: [
+        "libicuuc",
+        "libicui18n",
+        "libbase",
+        "liblog",
+    ],
+
+    static_libs: [
+        "libicuctest",
+        "libicutoolutil",
+        "libandroidicuinit",
+    ],
+}
+
+genrule {
+    name: "icu4c_test_data",
+    srcs: [
+        "testdata/**/*",
+    ],
+    out: ["icu4c_test_data.zip"],
+    tools: ["soong_zip"],
+    cmd: "$(location soong_zip) -o $(out) -C external/icu/icu4c/source/test/testdata -D external/icu/icu4c/source/test/testdata",
+}

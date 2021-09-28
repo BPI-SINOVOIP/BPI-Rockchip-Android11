@@ -1,0 +1,11 @@
+[package]
+name = "cras_tests"
+version = "0.1.0"
+authors = ["The Chromium OS Authors"]
+edition = "2018"
+
+[dependencies]
+audio_streams = { path = "../../../audio_streams" } # provided by ebuild
+getopts = "0.2.18"
+libcras = { path = "../libcras" } # provided by ebuild
+sys_util = { path = "../../../../../platform/crosvm/sys_util" } # provided by ebuild

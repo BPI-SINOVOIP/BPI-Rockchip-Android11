@@ -1,0 +1,301 @@
+image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-fedora:latest
+variables:
+  MESON_OPTIONS: >
+    -Dlibdrm_drivers=intel,nouveau,amdgpu
+    -Doverlay=enabled
+    -Dchamelium=enabled
+    -Dvalgrind=enabled
+    -Dman=enabled
+    -Dtests=enabled
+    -Drunner=enabled
+    -Dlibunwind=enabled
+  LANG: "C.UTF-8"
+
+stages:
+  - containers
+  - build
+  - test
+  - deploy
+
+#################### BUILD #########################
+
+build:tests-fedora:
+  stage: build
+  script:
+    - meson $MESON_OPTIONS build
+    - ninja -C build
+    - ninja -C build igt-gpu-tools-doc
+  artifacts:
+    paths:
+      - build
+
+build:tests-fedora-no-libunwind:
+  stage: build
+  script:
+    - dnf remove -y libunwind-devel
+    - meson -Dlibunwind=disabled build
+    - ninja -C build
+
+# documentation building is different with meson<0.47
+build:tests-fedora-oldest-meson:
+  stage: build
+  script:
+    - dnf remove -y meson
+    - pip3 install /usr/src/meson-*.tar.gz
+    - meson $MESON_OPTIONS build
+    - ninja -C build
+    - ninja -C build igt-gpu-tools-doc
+
+build:tests-fedora-clang:
+  stage: build
+  variables:
+    CC: clang
+  script:
+    - meson $MESON_OPTIONS build
+    - ninja -C build
+  artifacts:
+    paths:
+      - build
+
+build:tests-debian-meson:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian:latest
+  stage: build
+  script:
+    - meson $MESON_OPTIONS build
+    - ninja -C build
+    - cp build/tests/test-list.txt meson-test-list.txt
+  artifacts:
+    paths:
+      - meson-test-list.txt
+
+build:tests-debian-minimal:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-minimal:latest
+  stage: build
+  script:
+    - meson -Dtests=disabled -Dlibdrm_drivers="" build
+    - ninja -C build
+  artifacts:
+    paths:
+      - build
+
+build:tests-debian-meson-armhf:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-armhf:latest
+  stage: build
+  script:
+    - export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig/
+    - meson --cross-file meson-cross-armhf.txt build
+    - ninja -C build
+  artifacts:
+    paths:
+      - build
+
+build:tests-debian-meson-arm64:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-arm64:latest
+  stage: build
+  script:
+    - export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig/
+    - meson --cross-file meson-cross-arm64.txt build
+    - ninja -C build
+  artifacts:
+    paths:
+      - build
+
+build:tests-debian-meson-mips:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-mips:latest
+  stage: build
+  script:
+    - export PKG_CONFIG_PATH=/usr/lib/mips-linux-gnu/pkgconfig/
+    - meson --cross-file meson-cross-mips.txt build
+    - ninja -C build
+  artifacts:
+    paths:
+      - build
+
+build:tests-debian-autotools:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian:latest
+  stage: build
+  script:
+    - ./autogen.sh --enable-{chamelium,audio,intel,amdgpu,nouveau,tests,runner}
+    - make -j
+    - cp tests/test-list.txt autotools-test-list.txt
+  artifacts:
+    paths:
+      - autotools-test-list.txt
+
+#################### TEST ##########################
+
+test:ninja-test:
+  dependencies:
+    - build:tests-fedora
+  stage: test
+  script: ninja -C build test
+
+test:ninja-test-clang:
+  dependencies:
+    - build:tests-fedora-clang
+  variables:
+    CC: clang
+  stage: test
+  script: ninja -C build test
+
+test:ninja-test-minimal:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-minimal:latest
+  dependencies:
+    - build:tests-debian-minimal
+  stage: test
+  script: ninja -C build test
+
+test:ninja-test-arm64:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-arm64:latest
+  dependencies:
+    - build:tests-debian-meson-arm64
+  stage: test
+  script:
+    - export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig/
+    - env > build/envdump.txt
+    - ninja -C build test
+  artifacts:
+    paths:
+      - build
+    when: on_failure
+
+test:ninja-test-armhf:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-armhf:latest
+  dependencies:
+    - build:tests-debian-meson-armhf
+  stage: test
+  script:
+    - export PKG_CONFIG_PATH=/usr/lib/arm-linux-gnueabihf/pkgconfig/
+    - env > build/envdump.txt
+    - ninja -C build test
+  artifacts:
+    paths:
+      - build
+    when: on_failure
+
+test:ninja-test-mips:
+  image: $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-mips:latest
+  dependencies:
+    - build:tests-debian-meson-mips
+  stage: test
+  script:
+    - export PKG_CONFIG_PATH=/usr/lib/mips-linux-gnu/pkgconfig/
+    - env > build/envdump.txt
+    - ninja -C build test
+  artifacts:
+    paths:
+      - build
+    when: on_failure
+
+test:test-list-diff:
+  dependencies:
+    - build:tests-debian-autotools
+    - build:tests-debian-meson
+  stage: test
+  script: diff <(sed "s/ /\n/g" meson-test-list.txt| grep -v 'vc4\|v3d\|panfrost' | sort) <(sed "s/ /\n/g" autotools-test-list.txt | sort)
+
+################### DEPLOY #########################
+
+pages:
+  when: manual
+  dependencies:
+    - build:tests-fedora
+  stage: deploy
+  script:
+    - ninja -C build igt-gpu-tools-doc
+    - cp -r build/docs/reference/igt-gpu-tools/html public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+
+################# CONTAINERS #######################
+
+containers:igt-debian:
+  stage: containers
+  image: docker:stable
+  only:
+    changes:
+      - Dockerfile.debian-minimal
+      - Dockerfile.debian
+      - .gitlab-ci.yml
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-minimal -t igt-debian-minimal -f Dockerfile.debian-minimal .
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian -f Dockerfile.debian .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-minimal
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian
+
+containers:igt-debian-armhf:
+  stage: containers
+  image: docker:stable
+  only:
+    changes:
+      - Dockerfile.debian-armhf
+      - .gitlab-ci.yml
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-armhf -f Dockerfile.debian-armhf .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-armhf
+
+containers:igt-debian-arm64:
+  stage: containers
+  image: docker:stable
+  only:
+    changes:
+      - Dockerfile.debian-arm64
+      - .gitlab-ci.yml
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-arm64 -f Dockerfile.debian-arm64 .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-arm64
+
+containers:igt-debian-mips:
+  stage: containers
+  image: docker:stable
+  only:
+    changes:
+      - Dockerfile.debian-mips
+      - .gitlab-ci.yml
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-mips -f Dockerfile.debian-mips .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/igt-debian-mips
+
+containers:igt-fedora:
+  stage: containers
+  image: docker:stable
+  only:
+    changes:
+      - Dockerfile.fedora
+      - .gitlab-ci.yml
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/igt-fedora -f Dockerfile.fedora .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/igt-fedora

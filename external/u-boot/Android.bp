@@ -1,0 +1,128 @@
+// Copyright 2018 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// NOTE: image-sig (RSA signature) support is broken because the U-Boot code
+// requires API features from openssl which are not provided by boringssl
+
+cc_defaults {
+    name: "uboot_host_defaults",
+
+    cflags: [
+        "-D__KERNEL_STRICT_NAMES",
+        "-D_GNU_SOURCE",
+        "-DMKIMAGE_DTC=\"dtc\"",
+        "-DUSE_HOSTCC",
+        "-Wno-missing-field-initializers",
+        "-Wno-pointer-arith",
+        "-Wno-unused-parameter",
+        "-Wno-visibility",
+        "-Wno-sign-compare",
+        "-include linux/kconfig.h",
+        "-include compiler.h",
+    ],
+
+    local_include_dirs: [
+        "prebuilt-intermediates",
+    ],
+
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+}
+
+cc_binary_host {
+    name: "mkimage",
+
+    defaults: ["uboot_host_defaults"],
+
+    srcs: [
+        "common/bootm.c",
+        "common/hash.c",
+        "common/image.c",
+        "common/image-fit.c",
+        "lib/crc16.c",
+        "lib/crc32.c",
+        "lib/fdtdec.c",
+        "lib/fdtdec_common.c",
+        "lib/libfdt/fdt_region.c",
+        "lib/libfdt/fdt_ro.c",
+        "lib/md5.c",
+        "lib/rc4.c",
+        "lib/sha1.c",
+        "lib/sha256.c",
+        "tools/aisimage.c",
+        "tools/atmelimage.c",
+        "tools/default_image.c",
+        "tools/fit_common.c",
+        "tools/fit_image.c",
+        "tools/gpimage.c",
+        "tools/gpimage-common.c",
+        "tools/image-host.c",
+        "tools/imagetool.c",
+        "tools/imx8image.c",
+        "tools/imx8mimage.c",
+        "tools/imximage.c",
+        "tools/kwbimage.c",
+        "tools/libfdt/fdt.c",
+        "tools/libfdt/fdt_addresses.c",
+        "tools/libfdt/fdt_empty_tree.c",
+        "tools/libfdt/fdt_overlay.c",
+        "tools/libfdt/fdt_rw.c",
+        "tools/libfdt/fdt_strerror.c",
+        "tools/libfdt/fdt_sw.c",
+        "tools/libfdt/fdt_wip.c",
+        "tools/lpc32xximage.c",
+        "tools/mkimage.c",
+        "tools/mtk_image.c",
+        "tools/mxsimage.c",
+        "tools/omapimage.c",
+        "tools/os_support.c",
+        "tools/pbl_crc32.c",
+        "tools/pblimage.c",
+        "tools/rkcommon.c",
+        "tools/rkimage.c",
+        "tools/rksd.c",
+        "tools/rkspi.c",
+        "tools/socfpgaimage.c",
+        "tools/stm32image.c",
+        "tools/ublimage.c",
+        "tools/vybridimage.c",
+        "tools/zynqimage.c",
+        "tools/zynqmpbif.c",
+        "tools/zynqmpimage.c",
+    ],
+
+    local_include_dirs: [
+        "scripts/dtc/libfdt",
+        "tools",
+    ],
+}
+
+cc_binary_host {
+    name: "mkenvimage",
+
+    defaults: ["uboot_host_defaults"],
+
+    srcs: [
+        "lib/crc32.c",
+        "tools/mkenvimage.c",
+        "tools/os_support.c",
+    ],
+
+    local_include_dirs: [
+        "tools",
+    ],
+}

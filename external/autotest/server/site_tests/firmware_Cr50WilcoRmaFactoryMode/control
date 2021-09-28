@@ -1,0 +1,38 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "alevkoy"
+NAME = "firmware_Cr50WilcoRmaFactoryMode"
+PURPOSE = "Verify Wilco-specific Cr50 behavior for factory mode"
+ATTRIBUTES = "suite:faft_wilco, suite:faft_cr50_prepvt, suite:faft_cr50_pvt"
+TIME = "SHORT"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo, board:sarien"
+JOB_RETRIES = 0
+
+DOC = """Make sure Cr50's factory mode sets GPIOs correctly.
+
+Cr50 drives the GPIO lines ENTRY_TO_FACT_MODE and SPI_CHROME_SEL, connected to
+the Wilco EC. Normally, ENTRY_TO_FACT_MODE is deasserted, and CHROME_SEL is
+asserted. When Cr50 enters factory mode, they should each switch. When Cr50
+leaves factory mode, they should go back to the original state.
+"""
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+
+    iterations = int(args_dict.get("iterations", 1))
+
+    job.run_test("firmware_Cr50WilcoRmaFactoryMode", host=host,
+            cmdline_args=args, full_args=args_dict, iterations=iterations)
+
+parallel_simple(run, machines)

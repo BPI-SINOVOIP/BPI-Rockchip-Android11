@@ -1,0 +1,35 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "bvt-tast-informational"
+PURPOSE = "Runs informational Tast tests."
+
+TIME = "SHORT"
+TEST_CATEGORY = "General"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+This suite is used to run all informational Tast integration tests (exercising
+ARC, Chrome, and the OS itself) on release (a.k.a. canary) builders. See
+http://go/tast for more information about Tast.
+
+The only Autotest tests executed by this suite are tast.informational-*, which
+are server tests that execute the tast executable. The tast executable runs
+individual Tast tests. The results of these Tast tests are available via
+Stainless. The tast.informational-* tests and this suite always pass as long as
+the tast executable itself does not report failure (due to e.g. a lost SSH
+connection to the DUT or a timeout).
+"""
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+args_dict['name'] = NAME
+args_dict['max_runtime_mins'] = 60
+args_dict['timeout_mins'] = 1440
+args_dict['job'] = job
+
+dynamic_suite.reimage_and_run(**args_dict)

@@ -1,0 +1,24 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'The Chromium OS Authors,chromeos-audio@google.com'
+NAME = 'audio_CrasDevSwitchStress.input'
+ATTRIBUTES = "suite:audio"
+PURPOSE = 'Test device buffer can stay at reasonable level at repeated switching'
+CRITERIA = """
+Fail if device buffer drifts too high.
+"""
+TIME='MEDIUM'
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = "audio"
+TEST_TYPE = 'client'
+
+DOC = """
+Test device buffer can stay at reasonable level under repeated switching.
+"""
+
+job.run_test('audio_CrasDevSwitchStress',
+             type_a='MIC',
+             type_b='INTERNAL_MIC',
+             pinned_type='INTERNAL_MIC')

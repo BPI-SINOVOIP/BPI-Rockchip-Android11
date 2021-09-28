@@ -1,0 +1,23 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = 'hardware_UnsafeMemory.quick'
+AUTHOR = 'puthik'
+PURPOSE = 'Make sure that hardware_UnsafeMemory working properly.'
+CRITERIA = 'Fails if memory is unsafe'
+TIME = 'SHORT'
+TEST_CATEGORY = 'security'
+TEST_CLASS = 'hardware'
+TEST_TYPE = 'client'
+JOB_RETRIES = 0
+
+DOC = """
+This test uses rowhammer-test to find memory faults that may lead to violations
+of runtime expectations.
+
+The quick version run for 30 seconds to make sure that the test is working.
+"""
+
+# Run the test for 30 seconds.
+job.run_test('hardware_UnsafeMemory', sec=30, tag=NAME.split('.')[1])

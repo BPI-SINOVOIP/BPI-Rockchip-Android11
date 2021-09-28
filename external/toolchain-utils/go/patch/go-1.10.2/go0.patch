@@ -1,0 +1,45 @@
+testenv: look for "go" executable in path.
+
+--- src/go/build/deps_test.go
++++ src/go/build/deps_test.go
+@@ -182,17 +182,17 @@ var pkgDeps = map[string][]string{
+ 	"runtime/debug":  {"L2", "fmt", "io/ioutil", "os", "time"},
+ 	"runtime/pprof":  {"L2", "compress/gzip", "context", "encoding/binary", "fmt", "io/ioutil", "os", "text/tabwriter", "time"},
+ 	"runtime/trace":  {"L0"},
+ 	"text/tabwriter": {"L2"},
+ 
+ 	"testing":          {"L2", "flag", "fmt", "internal/race", "os", "runtime/debug", "runtime/pprof", "runtime/trace", "time"},
+ 	"testing/iotest":   {"L2", "log"},
+ 	"testing/quick":    {"L2", "flag", "fmt", "reflect", "time"},
+-	"internal/testenv": {"L2", "OS", "flag", "testing", "syscall"},
++	"internal/testenv": {"L2", "OS", "os/exec", "flag", "testing", "syscall"},
+ 
+ 	// L4 is defined as L3+fmt+log+time, because in general once
+ 	// you're using L3 packages, use of fmt, log, or time is not a big deal.
+ 	"L4": {
+ 		"L3",
+ 		"fmt",
+ 		"log",
+ 		"time",
+--- src/internal/testenv/testenv.go
++++ src/internal/testenv/testenv.go
+@@ -43,16 +43,19 @@ func HasGoBuild() bool {
+ 	switch runtime.GOOS {
+ 	case "android", "nacl":
+ 		return false
+ 	case "darwin":
+ 		if strings.HasPrefix(runtime.GOARCH, "arm") {
+ 			return false
+ 		}
+ 	}
++	if _, err := exec.LookPath("go"); err != nil {
++		return false
++	}
+ 	return true
+ }
+ 
+ // MustHaveGoBuild checks that the current system can build programs with ``go build''
+ // and then run them with os.StartProcess or exec.Command.
+ // If not, MustHaveGoBuild calls t.Skip with an explanation.
+ func MustHaveGoBuild(t testing.TB) {
+ 	if os.Getenv("GO_GCFLAGS") != "" {

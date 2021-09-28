@@ -1,0 +1,45 @@
+cc_binary {
+    name: "stressapptest",
+
+    srcs: [
+        "src/main.cc",
+        "src/adler32memcpy.cc",
+        "src/disk_blocks.cc",
+        "src/error_diag.cc",
+        "src/finelock_queue.cc",
+        "src/logger.cc",
+        "src/os.cc",
+        "src/os_factory.cc",
+        "src/pattern.cc",
+        "src/queue.cc",
+        "src/sat.cc",
+        "src/sat_factory.cc",
+        "src/worker.cc",
+    ],
+
+    arch: {
+        mips: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
+
+    cflags: [
+        "-DHAVE_CONFIG_H",
+        "-DANDROID",
+        "-DNDEBUG",
+        "-UDEBUG",
+        "-DCHECKOPTS",
+
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-#warnings",
+        "-Wno-implicit-fallthrough",
+    ],
+}

@@ -1,0 +1,19 @@
+[ -e $IGT_BENCHMARKS/prime_lookup ] || return 1
+sudo -n true || return 1
+
+for ndev in 1 4 16 64 256 1024; do
+    for nobj in 1 8 64 512 4096 32768; do
+	for nage in 1 8 64 512 4096 32768; do
+	    name="prime:lookup:$dev:$obj:$nage"
+	    test_name="$test_name $name"
+	    eval "${name}_run() { sudo $IGT_BENCHMARKS/prime_lookup -d $ndev -o $nobj -a $nage ; }"
+
+	    name="prime:lookup:$dev:$obj:$nage:forked"
+	    test_name="$test_name $name"
+	    eval "${name}_run() { sudo $IGT_BENCHMARKS/prime_lookup -d $ndev -o $nobj -a $nage -f ; }"
+	done
+    done
+done
+
+test_exec_time=3
+test_invert=1

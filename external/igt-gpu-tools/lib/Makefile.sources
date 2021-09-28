@@ -1,0 +1,165 @@
+lib_source_list =	 	\
+	debug.h			\
+	drmtest.c		\
+	drmtest.h		\
+	i830_reg.h		\
+	i915/gem_context.c	\
+	i915/gem_context.h	\
+	i915/gem_engine_topology.c	\
+	i915/gem_engine_topology.h	\
+	i915/gem_scheduler.c	\
+	i915/gem_scheduler.h	\
+	i915/gem_submission.c	\
+	i915/gem_submission.h	\
+	i915/gem_ring.h	\
+	i915/gem_ring.c	\
+	i915/gem_mman.c	\
+	i915/gem_mman.h	\
+	i915/gem_vm.c	\
+	i915/gem_vm.h	\
+	i915_3d.h		\
+	i915_reg.h		\
+	i915_pciids.h		\
+	igt.h			\
+	igt_debugfs.c		\
+	igt_debugfs.h		\
+	igt_device.c		\
+	igt_device.h		\
+	igt_aux.c		\
+	igt_aux.h		\
+	igt_color_encoding.c	\
+	igt_color_encoding.h	\
+	igt_edid.c		\
+	igt_edid.h		\
+	igt_eld.c		\
+	igt_eld.h		\
+	igt_gpu_power.c		\
+	igt_gpu_power.h		\
+	igt_gt.c		\
+	igt_gt.h		\
+	igt_gvt.c		\
+	igt_gvt.h		\
+	igt_halffloat.c		\
+	igt_halffloat.h		\
+	igt_infoframe.c		\
+	igt_infoframe.h		\
+	igt_matrix.c		\
+	igt_matrix.h		\
+	igt_primes.c		\
+	igt_primes.h		\
+	igt_rand.c		\
+	igt_rand.h		\
+	igt_rc.h		\
+	igt_stats.c		\
+	igt_stats.h		\
+	igt_sysfs.c		\
+	igt_sysfs.h		\
+	igt_sysrq.c		\
+	igt_sysrq.h		\
+	igt_x86.h		\
+	igt_x86.c		\
+	igt_vgem.c		\
+	igt_vgem.h		\
+	instdone.c		\
+	instdone.h		\
+	intel_aub.h		\
+	intel_batchbuffer.c	\
+	intel_batchbuffer.h	\
+	intel_chipset.c		\
+	intel_chipset.h		\
+	intel_device_info.c	\
+	intel_os.c		\
+	intel_io.h		\
+	intel_mmio.c		\
+	intel_reg.h		\
+	ioctl_wrappers.c	\
+	ioctl_wrappers.h	\
+	media_fill.c		\
+	media_fill.h            \
+	media_spin.h		\
+	media_spin.c		\
+	gpgpu_fill.h		\
+	gpgpu_fill.c		\
+	gpu_cmds.h		\
+	gpu_cmds.c		\
+	gen7_media.h            \
+	gen8_media.h            \
+	rendercopy_i915.c	\
+	rendercopy_i830.c	\
+	gen4_render.h		\
+	gen6_render.h		\
+	gen7_render.h		\
+	gen8_render.h		\
+	gen9_render.h		\
+	rendercopy_gen4.c	\
+	rendercopy_gen6.c	\
+	rendercopy_gen7.c	\
+	rendercopy_gen8.c	\
+	rendercopy_gen9.c	\
+	rendercopy.h		\
+	surfaceformat.h		\
+	sw_sync.c		\
+	sw_sync.h		\
+	intel_reg_map.c		\
+	intel_iosf.c		\
+	igt_kms.c		\
+	igt_kms.h		\
+	igt_fb.c		\
+	igt_fb.h		\
+	igt_core.c		\
+	igt_core.h		\
+	igt_draw.c		\
+	igt_draw.h		\
+	igt_pm.c		\
+	igt_pm.h		\
+	igt_dummyload.c		\
+	igt_dummyload.h		\
+	uwildmat/uwildmat.h	\
+	uwildmat/uwildmat.c	\
+	igt_kmod.c		\
+	igt_kmod.h		\
+	igt_syncobj.c		\
+	igt_syncobj.h		\
+	igt_psr.c		\
+	igt_psr.h		\
+	igt_v3d.c		\
+	igt_v3d.h		\
+	igt_vc4.c		\
+	igt_vc4.h		\
+	igt_amd.c		\
+	igt_amd.h		\
+	$(NULL)
+
+.PHONY: version.h.tmp
+
+# leaving a space here to work around automake's conditionals
+ ifeq ($(GIT_HASH),no)
+$(IGT_LIB_PATH)/version.h.tmp:
+	@echo '#define IGT_GIT_SHA1 "git"' >> $@
+ else
+$(IGT_LIB_PATH)/version.h.tmp:
+	@touch $@
+	@if test -d $(GPU_TOOLS_PATH)/.git; then \
+		if which git > /dev/null 2>&1; then \
+			cd $(GPU_TOOLS_PATH); \
+			git log -n 1 --oneline | \
+			sed 's/^\([^ ]*\) .*/#define IGT_GIT_SHA1 "g\1"/' ; \
+		else \
+			echo '#define IGT_GIT_SHA1 "NO-GIT"' ; \
+		fi \
+	else \
+		echo '#define IGT_GIT_SHA1 "NOT-GIT"' ; \
+	fi >> $@
+ endif # GIT_HASH
+
+
+$(IGT_LIB_PATH)/version.h: $(IGT_LIB_PATH)/version.h.tmp
+	@if ! cmp -s $(IGT_LIB_PATH)/version.h.tmp $(IGT_LIB_PATH)/version.h; then \
+		mv $(IGT_LIB_PATH)/version.h.tmp $(IGT_LIB_PATH)/version.h ; \
+	else \
+		rm $(IGT_LIB_PATH)/version.h.tmp ; \
+	fi
+
+BUILT_SOURCES = $(IGT_LIB_PATH)/version.h
+CLEANFILES = $(IGT_LIB_PATH)/version.h $(IGT_LIB_PATH)/version.h.tmp
+

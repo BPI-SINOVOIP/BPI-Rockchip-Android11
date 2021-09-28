@@ -1,0 +1,37 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterSASanity.sa_adapter_pairable_timeout_test'
+PURPOSE = 'Test PairableTimout Property'
+CRITERIA = 'Controller should become not pairable after timeout'
+ATTRIBUTES = 'suite:bluetooth, suite:bluetooth_standalone'
+TIME = 'MEDIUM'
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth'
+
+DOC = """
+    Verify that PairableTimeout Property works as expected
+
+    - Set and Read back PairableTimeout and make sure the values match
+    - Set pairable
+    - Check that adapter is pairable till PairableTimeout and then it
+      is not pairable
+    - Set PairableTimeout to default value at the end of the test.
+
+    """
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('bluetooth_AdapterSASanity', host=host,
+                 num_iterations=1, test_name=NAME.split('.')[1])
+
+parallel_simple(run, machines)

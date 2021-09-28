@@ -1,0 +1,33 @@
+PPPoL2TP-Android plugin
+=======================
+
+This PPPoL2TP-Android plugin was written for AOSP project from scratch. It has
+nothing to do with pppol2tp plugin from upstream ppp project [1].
+
+This plugin adds support for upstream kernel L2TP implementation in pppd
+daemon. Only LAC part of L2TP is implemented, as we don't use Android devices
+in LNS mode.
+
+In general case, the execution flow for VPN startup on Android devices is:
+ 1. Run IPSec client (racoon)
+ 2. Run L2TP client (mtpd)
+ 3. mtpd obtains "remote tunnel ID" and "remote session ID" from L2TP server
+ 4. mtpd creates L2TP sockets (see [2] for details):
+    - tunnel management PPPoX socket
+    - session PPPoX data socket
+ 5. mtpd runs pppd, passing arguments for pppol2tp-android plugin
+ 6. pppd dlopen() pppol2tp-android plugin (because it receives corresponding\
+    arguments from mtpd)
+
+Main task of this plugin is to obtain session_fd socket from mtpd and pass it
+back to pppd when .connect() callback is executed. In this respect it's similar
+to old pppox.c implementation. The differences are next:
+ 1. pppol2tp-android also obtains the second socket (for tunnel management)
+    which allows us to handle it properly
+ 2. pppol2tp-android handles the setting of MTU/MRU size (which can be passed
+    to the plugin with pppd parameters) via kernel L2TP implementation
+ 3. pppol2tp-android plugin is actually loaded dynamically with dlopen(),
+    as opposed to pppox.c which is hard-coded into pppd code
+
+[1] https://github.com/paulusmack/ppp
+[2] https://www.kernel.org/doc/Documentation/networking/l2tp.txt

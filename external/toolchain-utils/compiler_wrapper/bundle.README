@@ -1,0 +1,18 @@
+Copyright 2019 The Chromium OS Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+
+Toolchain utils compiler wrapper sources.
+
+Build the wrapper:
+./build --config=<config name> --use_ccache=<bool> \
+  --use_llvm_next=<bool> --output_file=<file>
+
+ATTENTION:
+The files in this folder are generated. Do not modify manually!
+
+To update:
+- modify third_party/toolchain_utils/compiler_wrapper
+- run third_party/toolchain_utils/compiler_wrapper/bundle.py --output_dir=...
+
+Source: https://chromium-review.googlesource.com/q/{change_id}

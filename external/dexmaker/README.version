@@ -1,0 +1,20 @@
+URL: https://github.com/linkedin/dexmaker/
+Version: master (8ff85edb2793cc1e0f6a93c67b127cb9c43d924e)
+License: Apache 2.0
+Description:
+Dexmaker is a Java-language API for doing compile time or runtime code generation targeting the Dalvik VM. Unlike cglib or ASM, this library creates Dalvik .dex files instead of Java .class files.
+
+It has a small, close-to-the-metal API. This API mirrors the Dalvik bytecode specification giving you tight control over the bytecode emitted. Code is generated instruction-by-instruction; you bring your own abstract syntax tree if you need one. And since it uses Dalvik's dx tool as a backend, you get efficient register allocation and regular/wide instruction selection for free.
+
+It includes a stock code generator for class proxies. If you just want to do AOP or class mocking, you don't need to mess around with bytecodes.
+
+Local Modifications:
+        Add ability to run dexmaker tests from within the source tree (I1b146841099b54f64d4a7dfe743b88717793619a)
+        Allow to share classloader via dexmaker.share_classloader system property (I324cddd644610eef811c620a1fccf6a24b2b9406)
+        Do not read Build.VERSION to allow non-standard Android distributions (Ia8c4ba4c82cd6f193c565f1bfe48faffc4aac08f)
+        Temporarily ignore failing test (Ibf7b6c2eb05c5ff83f0817f9224369e20c0b775d)
+        Restrict InspectClass to current thread. (Ic62951ff81bed60ac7512455fad65210e4b728a9, need upstreaming)
+        Exclude Stress#mockALot from presubmit (Ic9a2927ffa07924bd759429e31c56dc1b71a826c)
+        Extend timeout of Stress#mockALot() for CTS. (Iad30a8cb07b38054b490b7006d11908fc752a024)
+        Update to Mockito 2.25.0 and impl InlineMockMaker (29a8674036d345e4ec8635b1d38d8b2a4fe91980a, need upstreaming)
+	guessPath not to depend on the first level of app directory (I66f1d7036949c2f05e6d37bc270d47f8e77e51c1, need upstreaming)

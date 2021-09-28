@@ -1,0 +1,20 @@
+name: "GWP-ASan"
+description:
+    "GWP-ASan is a sampled allocator framework that assists in finding "
+    "use-after-free and heap-buffer-overflow bugs in production environments. "
+    "It informally is a recursive acronym, 'GWP-ASan Will Provide Allocation "
+    "SANity'. "
+    "GWP-ASan is based on the classic Electric Fence Malloc Debugger "
+    "<https://linux.die.net/man/3/efence>, with a key adaptation. Notably, we "
+    "only choose a very small percentage of allocations to sample, and apply "
+    "guard pages to these sampled allocations only. The sampling is small "
+    "enough to allow us to have very low performance overhead."
+
+third_party {
+  url {
+    type: GIT
+    value: "https://github.com/llvm/llvm-project.git"
+  }
+  version: "8f5e1755ca385566c0352a9bd292218cebfd3d0b"
+  last_upgrade_date { year: 2019 month: 8 day: 21 }
+}

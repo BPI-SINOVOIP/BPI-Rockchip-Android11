@@ -1,0 +1,62 @@
+cc_defaults {
+    name: "libjsoncpp_defaults",
+
+    srcs: [
+        "src/lib_json/json_reader.cpp",
+        "src/lib_json/json_value.cpp",
+        "src/lib_json/json_writer.cpp",
+    ],
+
+    local_include_dirs: [
+        "src/lib_json",
+    ],
+
+    include_build_directory: false,
+
+    export_include_dirs: ["include"],
+
+    cflags: [
+        "-DJSON_USE_EXCEPTION=0",
+        "-Wall",
+        "-Werror",
+        "-Wno-implicit-fallthrough",
+        // src/lib_json/json_reader.cpp:210  has -Wno-implicit-fallthrough
+    ],
+
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
+}
+
+cc_library {
+    name: "libjsoncpp",
+    defaults: ["libjsoncpp_defaults"],
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+        support_system_process: true,
+    },
+    host_supported: true,
+    recovery_available: true,
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    native_bridge_supported: true,
+    min_sdk_version: "29",
+}
+
+cc_library_static {
+    name: "libjsoncpp_ndk",
+    defaults: ["libjsoncpp_defaults"],
+    sdk_version: "9",
+    stl: "libc++_static",
+}
+
+cc_library_headers {
+    name: "libjsoncpp_headers",
+    export_include_dirs: ["include"],
+    host_supported: true,
+}

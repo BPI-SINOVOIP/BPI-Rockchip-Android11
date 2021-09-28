@@ -1,0 +1,15 @@
+NAME = "platform_LowMemoryTest.67_percent_random"
+PURPOSE = "Tab discarding functional tests."
+CRITERIA = """Failed if oom-kill is invoked."""
+ATTRIBUTES = "suite:crosbolt_perf_perbuild"
+AUTHOR="Vovo Yang"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+DOC = """
+This is a low memory policy functional test. It creates several web pages
+with javascript data. 67 percent of the data are random data.
+"""
+
+job.run_test('platform_LowMemoryTest', flavor='random', random_ratio=0.666)

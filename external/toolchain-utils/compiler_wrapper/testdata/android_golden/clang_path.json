@@ -1,0 +1,230 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang.real",
+          "args": [
+            "main.cc"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "WITH_TIDY=1"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang++",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang++.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang-tidy",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang-tidy.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "WITH_TIDY=1"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang-tidy",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang-tidy.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "a/b/c/d/e/f/g/clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "a/b/c/d/e/f/g/clang.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "symlinked/clang_other",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "symlinked/clang.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "PATH=/tmp/stable/pathenv"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/pathenv/clang.real",
+          "args": [
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc",
+          "--gomacc-path",
+          "/tmp/stable/gomacc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/gomacc",
+          "args": [
+            "/tmp/stable/clang.real",
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  }
+]

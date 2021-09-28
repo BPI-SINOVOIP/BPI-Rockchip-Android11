@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_EnterpriseForceInstallCustom.run'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+DEPENDENCIES = "arc"
+
+DOC = '''
+Verify the ARC EnterpriseForceInstall subpolicy will determine if an
+application is installed or not.
+
+'''
+
+job.run_test('policy_EnterpriseForceInstallCustom')

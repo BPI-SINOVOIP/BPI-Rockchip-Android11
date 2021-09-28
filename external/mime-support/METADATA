@@ -1,0 +1,17 @@
+name: "mime-support"
+description:
+    "Android's copy of the mime.types file from Debian's mime-support package."
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://salsa.debian.org/debian/mime-support"
+  }
+  url {
+    type: GIT
+    value: "https://salsa.debian.org/debian/mime-support/blob/debian/3.63/mime.types"
+  }
+  version: "Debian/3.63"
+  last_upgrade_date { year: 2019 month: 10 day: 3 }
+  license_type: UNENCUMBERED
+}

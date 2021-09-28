@@ -1,0 +1,35 @@
+// Copyright (C) 2015 The Android Open Source Project
+
+cc_library {
+    name: "liblz4",
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.adbd",
+        "com.android.art.debug", // from libartbase
+        "com.android.art.release",
+    ],
+    recovery_available: true,
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
+    host_supported: true,
+    // TODO(b/153609531): remove when no longer needed.
+    native_bridge_supported: true,
+    target: {
+        windows: {
+            enabled: true,
+            shared: {
+                enabled: false,
+            },
+        },
+    },
+    srcs: [
+        "lz4.c",
+        "lz4hc.c",
+        "lz4frame.c",
+        "xxhash.c",
+    ],
+    cflags: ["-Wall", "-Werror"],
+    export_include_dirs: ["."],
+}

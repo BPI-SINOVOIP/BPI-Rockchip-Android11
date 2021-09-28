@@ -1,0 +1,23 @@
+# GLES2 Tests to exclude when Testing ANGLE.
+
+# anglebug.com/2830
+dEQP-GLES2.functional.rasterization.primitives.line_loop
+dEQP-GLES2.functional.rasterization.primitives.line_strip
+dEQP-GLES2.functional.rasterization.primitives.lines
+dEQP-GLES2.functional.clipping.line.long_line_clip
+
+# anglebug.com/2808 -- b/118636566
+dEQP-GLES2.functional.shaders.builtin_variable.fragcoord_w
+
+# b/150483224
+dEQP-GLES2.functional.multisampled_render_to_texture.readpixels
+
+# b/152117891
+dEQP-GLES2.functional.uniform_api.value.assigned.by_pointer.render.struct_in_array#sampler2D_samplerCube_both
+dEQP-GLES2.functional.uniform_api.value.assigned.by_pointer.render.nested_structs_arrays#sampler2D_samplerCube_vertex
+dEQP-GLES2.functional.uniform_api.value.assigned.by_pointer.render.nested_structs_arrays#sampler2D_samplerCube_fragment
+dEQP-GLES2.functional.uniform_api.value.assigned.by_pointer.render.nested_structs_arrays#sampler2D_samplerCube_both
+dEQP-GLES2.functional.uniform_api.value.assigned.by_value.render.struct_in_array#sampler2D_samplerCube_both
+dEQP-GLES2.functional.uniform_api.value.assigned.by_value.render.nested_structs_arrays#sampler2D_samplerCube_vertex
+dEQP-GLES2.functional.uniform_api.value.assigned.by_value.render.nested_structs_arrays#sampler2D_samplerCube_fragment
+dEQP-GLES2.functional.uniform_api.value.assigned.by_value.render.nested_structs_arrays#sampler2D_samplerCube_both

@@ -1,0 +1,29 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "allenwebb"
+NAME = "firmware_Cr50PinWeaverServer"
+PURPOSE = "Validate PinWeaver functionality on Cr50"
+ATTRIBUTES = "suite:experimental, suite:faft_cr50_pvt, suite:faft_cr50_prepvt"
+TIME = "SHORT"
+TEST_TYPE = "server"
+
+DOC = """
+Check that PinWeaver functionality on Cr50 works as intended across hard
+reboots of Cr50. A server test is needed because when Cr50 reboots the
+device needs to restart.
+
+If the device doesn't have Cr50, the test returns success without
+resetting the machine.
+"""
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test("firmware_Cr50PinWeaverServer", host=host, cmdline_args=args)
+
+parallel_simple(run, machines)

@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.0'
+
+    defaultConfig {
+        // Most backup classes (e.g. SharedPreferencesBackupHelper) were added
+        // in Froyo.
+        minSdkVersion 8
+        targetSdkVersion 28
+    }
+
+    publishNonDefault true
+
+    buildTypes {
+        shadow
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            java.excludes = ['com/google/android/libraries/backup/shadow/**']
+        }
+
+        shadow {
+            java.srcDirs = ['src']
+            java.includes = ['com/google/android/libraries/backup/shadow/**']
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-annotations:25.+'
+    shadowCompile 'junit:junit:4.+'
+    shadowCompile 'org.robolectric:robolectric:3.1-rc1'
+    shadowCompile 'org.robolectric:shadows-core:3.1-rc1'
+}

@@ -1,0 +1,21 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "mqg"
+NAME = "power_Speedometer2"
+PURPOSE = "Run Speedometer2 test and collect power data."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = ""
+
+DOC = """
+Run Speedometer2 test and collect power data. Test should be ~3 minutes.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Speedometer2', pdash_note=pdash_note)

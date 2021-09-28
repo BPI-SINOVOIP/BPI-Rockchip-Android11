@@ -1,0 +1,27 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_DeviceServer.SystemTimezone_notset'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+
+DOC = """
+Sets up and runs the client test for the SystemTimezone
+policy.
+
+"""
+
+client_test = 'policy_SystemTimezone'
+case = None
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_DeviceServer', host=host,
+                  client_test=client_test, case=case)
+
+parallel_simple(run, machines)

@@ -1,0 +1,29 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "frankhu@chromium.org"
+NAME = "enterprise_CFM_BizlinkUpdater"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+JOB_RETRIES = 3
+
+DOC = """
+Tests the Bizlink FW updater. The test does the following:
+1) flashes an older version megachips firmware to the Bizlink dongle
+2) reboots the device trigger the firmware updater to flash the new firmware
+3) verifies udev triggered the Bizlink FW updater to flash the latest FW to the
+ dongle by checking the FW version on the dongle
+"""
+
+args_dict = utils.args_to_dict(args)
+
+def run_test(machine):
+    host = hosts.create_host(machine, servo_args=None)
+    job.run_test(NAME, host=host)
+
+parallel_simple(run_test, machines)

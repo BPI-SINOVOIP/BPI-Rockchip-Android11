@@ -1,0 +1,372 @@
+// See com.google.currysrc.aosp.Annotations.addUnsupportedAppUsage(Path) method for details on the
+// syntax.
+[
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getAlpnSelectedProtocol()",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLSocket#getApplicationProtocol()}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getApplicationProtocols()",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#getApplicationProtocols()}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getChannelId()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getHostname()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getHostnameOrIP()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getNpnSelectedProtocol()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#getSoWriteTimeout()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setAlpnProtocols(byte[])",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setApplicationProtocols(java.lang.String[])}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setAlpnProtocols(String[])",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setApplicationProtocols(java.lang.String[])}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setApplicationProtocols(String[])",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setApplicationProtocols(java.lang.String[])}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setChannelIdEnabled(boolean)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setChannelIdPrivateKey(PrivateKey)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setHandshakeTimeout(int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setHostname(String)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setServerNames}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setNpnProtocols(byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setSoWriteTimeout(int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.AbstractConscryptSocket#setUseSessionTickets(boolean)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link android.net.ssl.SSLSockets#setUseSessionTickets}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.ClientSessionContext#getSession(String,int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.ClientSessionContext#setPersistentCache(SSLClientSessionCache)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.ConscryptEngineSocket#setHostname(String)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setServerNames}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.ConscryptEngineSocket#setUseSessionTickets(boolean)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link android.net.ssl.SSLSockets#setUseSessionTickets}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.ConscryptFileDescriptorSocket#setHostname(String)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setServerNames}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.ConscryptFileDescriptorSocket#setUseSessionTickets(boolean)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link android.net.ssl.SSLSockets#setUseSessionTickets}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.FileClientSessionCache$Impl#getSessionData(String,int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.FileClientSessionCache#usingDirectory(File)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#ASN1_seq_pack_X509(long[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#ASN1_seq_unpack_X509_bio(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#ASN1_TIME_to_Calendar(long,Calendar)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#BIO_free_all(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#create_BIO_InputStream(OpenSSLBIOInputStream,boolean)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#create_BIO_OutputStream(OutputStream)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#d2i_PKCS7_bio(long,int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#d2i_SSL_SESSION(byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#d2i_X509(byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#d2i_X509_bio(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#d2i_X509_CRL_bio(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EC_GROUP_clear_free(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EC_GROUP_new_by_curve_name(String)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EC_POINT_clear_free(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_CIPHER_CTX_new()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_CIPHER_iv_length(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_get_cipherbyname(String)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_get_digestbyname(String)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_MD_CTX_create()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_MD_CTX_destroy(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_MD_size(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_PKEY_free(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#EVP_PKEY_new_RSA(byte[],byte[],byte[],byte[],byte[],byte[],byte[],byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#get_X509_REVOKED_ext_oids(long,int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#get_X509_REVOKED_revocationDate(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#i2d_PKCS7(long[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#i2d_SSL_SESSION(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#i2d_X509_REVOKED(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#PEM_read_bio_PKCS7(long,int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#PEM_read_bio_X509(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#PEM_read_bio_X509_CRL(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#RAND_bytes(byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#RSA_generate_key_ex(int,byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#SSL_CTX_new()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#SSL_SESSION_cipher(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#SSL_SESSION_free(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#SSL_SESSION_get_time(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#SSL_SESSION_get_version(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#SSL_SESSION_session_id(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#X509_REVOKED_dup(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#X509_REVOKED_get_ext(long,String)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#X509_REVOKED_get_ext_oid(long,String)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#X509_REVOKED_get_serialNumber(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#X509_REVOKED_print(long,long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.NativeCrypto#X509_supported_extension(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLBIOInputStream#OpenSSLBIOInputStream(InputStream,boolean)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLBIOInputStream#getBioContext()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLBIOInputStream#release()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLContextImpl$TLSv12#TLSv12()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLContextImpl#OpenSSLContextImpl()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLContextImpl#getPreferred()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLKey#OpenSSLKey(long)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLKey#fromPrivateKey(PrivateKey)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLKey#getNativeRef()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLKey#getPublicKey()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLKeyHolder#getOpenSSLKey()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLProvider#OpenSSLProvider()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLRandom#OpenSSLRandom()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketFactoryImpl#OpenSSLSocketFactoryImpl()"
+  },
+  {
+    "@location": "field:com.android.org.conscrypt.OpenSSLSocketFactoryImpl#sslParameters"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#getAlpnSelectedProtocol()",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLSocket#getApplicationProtocol()}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#getChannelId()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#getHostname()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#getHostnameOrIP()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#getNpnSelectedProtocol()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#getSoWriteTimeout()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setAlpnProtocols(byte[])",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setApplicationProtocols(java.lang.String[])}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setAlpnProtocols(String[])",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setApplicationProtocols(java.lang.String[])}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setChannelIdEnabled(boolean)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setChannelIdPrivateKey(PrivateKey)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setHandshakeTimeout(int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setHostname(String)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link javax.net.ssl.SSLParameters#setServerNames}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setNpnProtocols(byte[])"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setSoWriteTimeout(int)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLSocketImpl#setUseSessionTickets(boolean)",
+    "maxTargetSdk": "dalvik.annotation.compat.VersionCodes.Q",
+    "publicAlternatives": "Use {@link android.net.ssl.SSLSockets#setUseSessionTickets}."
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.OpenSSLX509Certificate#fromX509PemInputStream(InputStream)"
+  },
+  {
+    "@location": "field:com.android.org.conscrypt.OpenSSLX509Certificate#mContext"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.SSLParametersImpl#getDefault()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.SSLParametersImpl#getDefaultX509TrustManager()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.SSLParametersImpl#getX509TrustManager()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.SSLParametersImpl#setEnabledProtocols(String[])"
+  },
+  {
+    "@location": "field:com.android.org.conscrypt.SSLParametersImpl#x509TrustManager"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.TrustedCertificateStore#TrustedCertificateStore()"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.TrustedCertificateStore#getCertificateChain(X509Certificate)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.TrustManagerImpl#TrustManagerImpl(KeyStore)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.TrustManagerImpl#checkServerTrusted(X509Certificate[],String,String)"
+  },
+  {
+    "@location": "method:com.android.org.conscrypt.X509PublicKey#X509PublicKey(String,byte[])"
+  }
+]

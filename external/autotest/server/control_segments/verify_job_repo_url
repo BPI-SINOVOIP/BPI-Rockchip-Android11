@@ -1,0 +1,10 @@
+from autotest_lib.server import utils
+
+
+def install(machine):
+    logging.info('Verifying job repo url for machine %s', machine)
+    host = hosts.create_host(machine)
+    host.verify_job_repo_url(job.tag)
+
+
+job.parallel_simple(install, machines, log=False)

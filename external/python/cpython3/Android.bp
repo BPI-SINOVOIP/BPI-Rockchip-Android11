@@ -1,0 +1,375 @@
+// Copyright 2019 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+build = [
+    "Android-bionic.bp",
+    "Android-linux_x86_64.bp",
+    "Android-darwin_x86_64.bp",
+]
+
+cc_defaults {
+    name: "py3-interp-defaults",
+    cflags: [
+        "-fwrapv",
+        "-O3",
+        "-Wall",
+        "-Wstrict-prototypes",
+        "-DPy_BUILD_CORE",
+        "-Werror",
+        "-Wno-invalid-source-encoding",
+        "-Wno-int-conversion",
+        "-Wno-missing-field-initializers",
+        "-Wno-null-pointer-arithmetic",
+        "-Wno-register",
+        "-Wno-shift-count-overflow",
+        "-Wno-sign-compare",
+        "-Wno-tautological-compare",
+        "-Wno-tautological-constant-out-of-range-compare",
+        "-Wno-unused-function",
+        "-Wno-unused-parameter",
+        "-Wno-unused-result",
+    ],
+    local_include_dirs: [
+        "Include",
+        "Include/internal",
+    ],
+    static_libs: ["libffi"],
+    target: {
+        android: {
+            local_include_dirs: ["android/bionic/pyconfig"],
+        },
+        android_arm: {
+            cflags: ["-DSOABI=\"cpython-38android-arm-android-bionic\""],
+        },
+        android_arm64: {
+            cflags: ["-DSOABI=\"cpython-38android-arm64-android-bionic\""],
+        },
+        android_x86: {
+            cflags: ["-DSOABI=\"cpython-38android-x86-android-bionic\""],
+        },
+        android_x86_64: {
+            cflags: ["-DSOABI=\"cpython-38android-x86_64-android-bionic\""],
+        },
+        // Regenerate include dirs with android_regen.sh
+        darwin_x86_64: {
+            local_include_dirs: ["android/darwin_x86_64/pyconfig"],
+            cflags: [
+                "-Wno-deprecated-declarations",
+                "-Wno-pointer-arith",
+                "-DSOABI=\"cpython-38android-x86_64-darwin\"",
+            ],
+        },
+        linux_bionic: {
+            // NB linux_bionic is a 'host' architecture but it uses the bionic libc like 'android'
+            // targets so use the android pyconfig.
+            local_include_dirs: ["android/bionic/pyconfig"],
+            cflags: ["-DSOABI=\"cpython-38android-x86_64-linux-bionic\""],
+        },
+        linux_glibc_x86: {
+            enabled: false,
+        },
+        linux_glibc_x86_64: {
+            local_include_dirs: ["android/linux_x86_64/pyconfig"],
+            cflags: ["-DSOABI=\"cpython-38android-x86_64-linux-gnu\""],
+        },
+        windows: {
+            enabled: false,
+        },
+    },
+    host_supported: true,
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+}
+
+cc_library_static {
+    name: "py3-interp",
+    defaults: ["py3-interp-defaults"],
+    cflags: ["-DPy_BUILD_CORE"],
+    srcs: [
+        // Makefile.pre.in PARSER_OBJS
+        "Parser/acceler.c",
+        "Parser/grammar1.c",
+        "Parser/listnode.c",
+        "Parser/myreadline.c",
+        "Parser/node.c",
+        "Parser/parser.c",
+        "Parser/parsetok.c",
+        "Parser/token.c",
+        "Parser/tokenizer.c",
+
+        // Makefile.pre.in OBJECT_OBJS
+        "Objects/abstract.c",
+        "Objects/accu.c",
+        "Objects/boolobject.c",
+        "Objects/bytes_methods.c",
+        "Objects/bytearrayobject.c",
+        "Objects/bytesobject.c",
+        "Objects/call.c",
+        "Objects/capsule.c",
+        "Objects/cellobject.c",
+        "Objects/classobject.c",
+        "Objects/codeobject.c",
+        "Objects/complexobject.c",
+        "Objects/descrobject.c",
+        "Objects/enumobject.c",
+        "Objects/exceptions.c",
+        "Objects/genobject.c",
+        "Objects/fileobject.c",
+        "Objects/floatobject.c",
+        "Objects/frameobject.c",
+        "Objects/funcobject.c",
+        "Objects/interpreteridobject.c",
+        "Objects/iterobject.c",
+        "Objects/listobject.c",
+        "Objects/longobject.c",
+        "Objects/dictobject.c",
+        "Objects/odictobject.c",
+        "Objects/memoryobject.c",
+        "Objects/methodobject.c",
+        "Objects/moduleobject.c",
+        "Objects/namespaceobject.c",
+        "Objects/object.c",
+        "Objects/obmalloc.c",
+        "Objects/picklebufobject.c",
+        "Objects/rangeobject.c",
+        "Objects/setobject.c",
+        "Objects/sliceobject.c",
+        "Objects/structseq.c",
+        "Objects/tupleobject.c",
+        "Objects/typeobject.c",
+        "Objects/unicodeobject.c",
+        "Objects/unicodectype.c",
+        "Objects/weakrefobject.c",
+
+        // Makefile.pre.in PYTHON_OBJS
+        "Python/_warnings.c",
+        "Python/Python-ast.c",
+        "Python/asdl.c",
+        "Python/ast.c",
+        "Python/ast_opt.c",
+        "Python/ast_unparse.c",
+        "Python/bltinmodule.c",
+        "Python/ceval.c",
+        "Python/codecs.c",
+        "Python/compile.c",
+        "Python/context.c",
+        "Python/dynamic_annotations.c",
+        "Python/errors.c",
+        "Python/frozen.c",
+        "Python/frozenmain.c",
+        "Python/future.c",
+        "Python/getargs.c",
+        "Python/getcompiler.c",
+        "Python/getcopyright.c",
+        "Python/getplatform.c",
+        "Python/getversion.c",
+        "Python/graminit.c",
+        "Python/hamt.c",
+        "Python/import.c",
+        "Python/importdl.c",
+        "Python/initconfig.c",
+        "Python/marshal.c",
+        "Python/modsupport.c",
+        "Python/mysnprintf.c",
+        "Python/mystrtoul.c",
+        "Python/pathconfig.c",
+        "Python/peephole.c",
+        "Python/preconfig.c",
+        "Python/pyarena.c",
+        "Python/pyctype.c",
+        "Python/pyfpe.c",
+        "Python/pyhash.c",
+        "Python/pylifecycle.c",
+        "Python/pymath.c",
+        "Python/pystate.c",
+        "Python/pythonrun.c",
+        "Python/pytime.c",
+        "Python/bootstrap_hash.c",
+        "Python/structmember.c",
+        "Python/symtable.c",
+        "Python/sysmodule.c",
+        "Python/thread.c",
+        "Python/traceback.c",
+        "Python/getopt.c",
+        "Python/pystrcmp.c",
+        "Python/pystrtod.c",
+        "Python/pystrhex.c",
+        "Python/dtoa.c",
+        "Python/formatter_unicode.c",
+        "Python/fileutils.c",
+        "Python/dynload_shlib.c",
+    ],
+
+    target: {
+        linux: {
+            cflags: [
+                "-DPLATFORM=\"linux2\"",
+            ],
+        },
+        darwin_x86_64: {
+            cflags: [
+                "-DPLATFORM=\"darwin\"",
+            ],
+        },
+    },
+}
+
+cc_defaults {
+    name: "py3-launcher-defaults",
+    defaults: ["py3-interp-defaults"],
+    cflags: [
+        "-DVERSION=\"3.8\"",
+        "-DVPATH=\"\"",
+        "-DPREFIX=\"\"",
+        "-DEXEC_PREFIX=\"\"",
+        "-DPYTHONPATH=\"..:\"",
+        "-DANDROID_SKIP_ZIP_PATH",
+        "-DANDROID_SKIP_EXEC_PREFIX_PATH",
+        "-DANDROID_LIB_PYTHON_PATH=\"internal/stdlib\"",
+        "-DDATE=\"Dec 31 1969\"",
+        "-DTIME=\"23:59:59\"",
+    ],
+    static_libs: [
+        "libbase",
+        "libexpat",
+        "libz",
+    ],
+    target: {
+        linux_glibc_x86_64: {
+            host_ldlibs: ["-lutil"],
+        },
+        linux: {
+            // Due to test infra limitations, Python native symbols are linked
+            // statically to py3-launcher(s). Hence, need this flag to export
+            // these symbols so that runtime imported native extensions can use
+            // them (e.g. PyBaseObject_Type)
+            ldflags: ["-Wl,--export-dynamic"],
+        },
+        darwin: {
+            host_ldlibs: [
+                "-framework SystemConfiguration",
+                "-framework CoreFoundation",
+            ],
+        },
+        host: {
+            static_libs: [
+                "libsqlite",
+                "liblog",
+            ],
+        },
+        android: {
+            shared_libs: [
+                // Use shared libsqlite for device side, otherwise
+                // the executable size will be really huge.
+                "libsqlite",
+                // Dependency from libbase
+                "liblog",
+            ],
+        },
+    },
+}
+
+cc_library_static {
+    name: "py3-launcher-lib",
+    defaults: ["py3-launcher-defaults"],
+    cflags: ["-DPy_BUILD_CORE"],
+    srcs: [
+        // Makefile.pre.in MODULE_OBJS
+        "Modules/getpath.c",
+        "Modules/main.c",
+        "Modules/gcmodule.c",
+
+        // Makefile.pre.in LIBRARY_OBJS_OMIT_FROZEN
+        "Modules/getbuildinfo.c",
+    ],
+    whole_static_libs: [
+        "py3-interp",
+        "py3-c-modules",
+    ],
+    target: {
+        android: {
+            srcs: ["android/bionic/config.c"],
+        },
+        linux_bionic: {
+            srcs: ["android/bionic/config.c"],
+        },
+        linux_glibc_x86_64: {
+            srcs: ["android/linux_x86_64/config.c"],
+        },
+        darwin: {
+            srcs: ["android/darwin_x86_64/config.c"],
+        },
+    },
+}
+
+cc_binary {
+    name: "py3-launcher",
+    defaults: ["py3-launcher-defaults"],
+    srcs: ["android/launcher_main.cpp"],
+    static_libs: ["py3-launcher-lib"],
+}
+
+cc_binary {
+    name: "py3-launcher-autorun",
+    defaults: ["py3-launcher-defaults"],
+    srcs: ["android/launcher_main.cpp"],
+    static_libs: ["py3-launcher-lib"],
+    cflags: ["-DANDROID_AUTORUN"],
+}
+
+python_binary_host {
+    name: "py3-cmd",
+    autorun: false,
+    version: {
+        py3: {
+            embedded_launcher: true,
+        },
+    },
+}
+
+// Enabled extension py3-c-modules.
+
+cc_library_static {
+    name: "py3-c-modules",
+    defaults: ["py3-interp-defaults"],
+    cflags: [
+        "-DPy_BUILD_CORE_BUILTIN",
+        "-DUSE_PYEXPAT_CAPI",
+    ],
+    static_libs: [
+        "libexpat",
+        "libz",
+    ],
+    target: {
+        android: {
+            srcs: [":py3-c-modules-bionic"],
+        },
+        linux_bionic: {
+            srcs: [":py3-c-modules-bionic"],
+        },
+        linux_glibc_x86_64: {
+            srcs: [":py3-c-modules-linux_x86_64"],
+        },
+        darwin: {
+            srcs: [":py3-c-modules-darwin_x86_64"],
+        },
+    },
+}

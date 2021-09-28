@@ -1,0 +1,52 @@
+// Signature format: 2.0
+package android.icu.impl {
+
+  public class CalendarAstronomer {
+    ctor public CalendarAstronomer(double, double);
+    method public long getSunRiseSet(boolean);
+    method public void setTime(long);
+  }
+
+  public class TimeZoneAdapter extends java.util.TimeZone {
+    method public static java.util.TimeZone wrap(android.icu.util.TimeZone);
+  }
+
+}
+
+package android.icu.text {
+
+  public final class StringPrep {
+    method public static android.icu.text.StringPrep getInstance(int);
+    method public String prepare(String, int) throws android.icu.text.StringPrepParseException;
+    field public static final int DEFAULT = 0; // 0x0
+    field public static final int RFC3920_RESOURCEPREP = 8; // 0x8
+  }
+
+}
+
+package android.icu.util {
+
+  public abstract class BasicTimeZone extends android.icu.util.TimeZone {
+    method public abstract android.icu.util.TimeZoneTransition getNextTransition(long, boolean);
+  }
+
+  public class Region implements java.lang.Comparable<android.icu.util.Region> {
+    method public static java.util.Set<android.icu.util.Region> getAvailable(android.icu.util.Region.RegionType);
+  }
+
+  public enum Region.RegionType {
+    enum_constant public static final android.icu.util.Region.RegionType TERRITORY;
+  }
+
+  public abstract class TimeZoneRule implements java.io.Serializable {
+    method public int getDSTSavings();
+  }
+
+  public class TimeZoneTransition {
+    method public android.icu.util.TimeZoneRule getFrom();
+    method public long getTime();
+    method public android.icu.util.TimeZoneRule getTo();
+  }
+
+}
+

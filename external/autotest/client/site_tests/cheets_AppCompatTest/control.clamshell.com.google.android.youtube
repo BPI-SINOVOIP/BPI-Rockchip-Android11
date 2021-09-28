@@ -1,0 +1,22 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+
+AUTHOR = "bneella@"
+NAME = "cheets_AppCompatTest.clamshell.com.google.android.youtube"
+PURPOSE = "Runs AppCompat's UIAutomator tests."
+ATTRIBUTES = "suite:app-compat"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "login"
+TEST_TYPE = "client"
+
+DOC = """
+This test starts Android container, then kicks of the UIAutomator tests from
+the AppCompat team. It then saves logcat, bugreport, and screenshots to the
+resultsdir.
+"""
+
+job.run_test('cheets_AppCompatTest', pkg_name='com.google.android.youtube',
+             touch_view_mode=False)

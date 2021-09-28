@@ -1,0 +1,1248 @@
+<?xml version="1.0"?>
+<!--
+
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+-->
+<document>
+  <properties>
+    <title>Commons Compress User Guide</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
+    <section name="General Notes">
+
+      <subsection name="Archivers and Compressors">
+        <p>Commons Compress calls all formats that compress a single
+        stream of data compressor formats while all formats that
+        collect multiple entries inside a single (potentially
+        compressed) archive are archiver formats.</p>
+
+        <p>The compressor formats supported are gzip, bzip2, xz, lzma,
+        Pack200, DEFLATE, Brotli, DEFLATE64, ZStandard and Z, the archiver formats are 7z, ar, arj,
+        cpio, dump, tar and zip.  Pack200 is a special case as it can
+        only compress JAR files.</p>
+
+        <p>We currently only provide read support for arj,
+        dump, Brotli, DEFLATE64 and Z.  arj can only read uncompressed archives, 7z can read
+        archives with many compression and encryption algorithms
+        supported by 7z but doesn't support encryption when writing
+        archives.</p>
+      </subsection>
+
+      <subsection name="Buffering">
+        <p>The stream classes all wrap around streams provided by the
+          calling code and they work on them directly without any
+          additional buffering.  On the other hand most of them will
+          benefit from buffering so it is highly recommended that
+          users wrap their stream
+          in <code>Buffered<em>(In|Out)</em>putStream</code>s before
+          using the Commons Compress API.</p>
+
+      </subsection>
+
+      <subsection name="Factories">
+
+        <p>Compress provides factory methods to create input/output
+          streams based on the names of the compressor or archiver
+          format as well as factory methods that try to guess the
+          format of an input stream.</p>
+
+        <p>To create a compressor writing to a given output by using
+          the algorithm name:</p>
+        <source><![CDATA[
+CompressorOutputStream gzippedOut = new CompressorStreamFactory()
+    .createCompressorOutputStream(CompressorStreamFactory.GZIP, myOutputStream);
+]]></source>
+
+        <p>Make the factory guess the input format for a given
+        archiver stream:</p>
+        <source><![CDATA[
+ArchiveInputStream input = new ArchiveStreamFactory()
+    .createArchiveInputStream(originalInput);
+]]></source>
+
+        <p>Make the factory guess the input format for a given
+        compressor stream:</p>
+        <source><![CDATA[
+CompressorInputStream input = new CompressorStreamFactory()
+    .createCompressorInputStream(originalInput);
+]]></source>
+
+        <p>Note that there is no way to detect the lzma or Brotli formats so only
+        the two-arg version of
+        <code>createCompressorInputStream</code> can be used.  Prior
+        to Compress 1.9 the .Z format hasn't been auto-detected
+        either.</p>
+
+      </subsection>
+
+      <subsection name="Restricting Memory Usage">
+        <p>Starting with Compress 1.14
+        <code>CompressorStreamFactory</code> has an optional
+        constructor argument that can be used to set an upper limit of
+        memory that may be used while decompressing or compressing a
+        stream. As of 1.14 this setting only affects decompressing Z,
+        XZ and LZMA compressed streams.</p>
+        <p>For the Snappy and LZ4 formats the amount of memory used
+        during compression is directly proportional to the window
+        size.</p>
+      </subsection>
+
+      <subsection name="Statistics">
+        <p>Starting with Compress 1.17 most of the
+        <code>CompressorInputStream</code> implementations as well as
+        <code>ZipArchiveInputStream</code> and all streams returned by
+        <code>ZipFile.getInputStream</code> implement the
+        <code>InputStreamStatistics</code>
+        interface. <code>SevenZFile</code> provides statistics for the
+        current entry via the
+        <code>getStatisticsForCurrentEntry</code> method. This
+        interface can be used to track progress while extracting a
+        stream or to detect potential <a
+        href="https://en.wikipedia.org/wiki/Zip_bomb">zip bombs</a>
+        when the compression ration becomes suspiciously large.</p>
+      </subsection>
+
+    </section>
+    <section name="Archivers">
+
+      <subsection name="Unsupported Features">
+        <p>Many of the supported formats have developed different
+        dialects and extensions and some formats allow for features
+        (not yet) supported by Commons Compress.</p>
+
+        <p>The <code>ArchiveInputStream</code> class provides a method
+        <code>canReadEntryData</code> that will return false if
+        Commons Compress can detect that an archive uses a feature
+        that is not supported by the current implementation.  If it
+        returns false you should not try to read the entry but skip
+        over it.</p>
+
+      </subsection>
+
+      <subsection name="Entry Names">
+        <p>All archive formats provide meta data about the individual
+        archive entries via instances of <code>ArchiveEntry</code> (or
+        rather subclasses of it). When reading from an archive the
+        information provided the <code>getName</code> method is the
+        raw name as stored inside of the archive. There is no
+        guarantee the name represents a relative file name or even a
+        valid file name on your target operating system at all. You
+        should double check the outcome when you try to create file
+        names from entry names.</p>
+      </subsection>
+
+      <subsection name="Common Extraction Logic">
+        <p>Apart from 7z all formats provide a subclass of
+        <code>ArchiveInputStream</code> that can be used to create an
+        archive. For 7z <code>SevenZFile</code> provides a similar API
+        that does not represent a stream as our implementation
+        requires random access to the input and cannot be used for
+        general streams. The ZIP implementation can benefit a lot from
+        random access as well, see the <a
+        href="zip.html#ZipArchiveInputStream_vs_ZipFile">zip
+        page</a> for details.</p>
+
+        <p>Assuming you want to extract an archive to a target
+        directory you'd call <code>getNextEntry</code>, verify the
+        entry can be read, construct a sane file name from the entry's
+        name, create a <codee>File</codee> and write all contents to
+        it - here <code>IOUtils.copy</code> may come handy. You do so
+        for every entry until <code>getNextEntry</code> returns
+        <code>null</code>.</p>
+
+        <p>A skeleton might look like:</p>
+
+        <source><![CDATA[
+File targetDir = ...
+try (ArchiveInputStream i = ... create the stream for your format, use buffering...) {
+    ArchiveEntry entry = null;
+    while ((entry = i.getNextEntry()) != null) {
+        if (!i.canReadEntryData(entry)) {
+            // log something?
+            continue;
+        }
+        String name = fileName(targetDir, entry);
+        File f = new File(name);
+        if (entry.isDirectory()) {
+            if (!f.isDirectory() && !f.mkdirs()) {
+                throw new IOException("failed to create directory " + f);
+            }
+        } else {
+            File parent = f.getParentFile();
+            if (!parent.isDirectory() && !parent.mkdirs()) {
+                throw new IOException("failed to create directory " + parent);
+            }
+            try (OutputStream o = Files.newOutputStream(f.toPath())) {
+                IOUtils.copy(i, o);
+            }
+        }
+    }
+}
+]]></source>
+
+        <p>where the hypothetical <code>fileName</code> method is
+        written by you and provides the absolute name for the file
+        that is going to be written on disk. Here you should perform
+        checks that ensure the resulting file name actually is a valid
+        file name on your operating system or belongs to a file inside
+        of <code>targetDir</code> when using the entry's name as
+        input.</p>
+
+        <p>If you want to combine an archive format with a compression
+        format - like when reading a "tar.gz" file - you wrap the
+        <code>ArchiveInputStream</code> around
+        <code>CompressorInputStream</code> for example:</p>
+
+        <source><![CDATA[
+try (InputStream fi = Files.newInputStream(Paths.get("my.tar.gz"));
+     InputStream bi = new BufferedInputStream(fi);
+     InputStream gzi = new GzipCompressorInputStream(bi);
+     ArchiveInputStream o = new TarArchiveInputStream(gzi)) {
+}
+]]></source>
+
+      </subsection>
+
+      <subsection name="Common Archival Logic">
+        <p>Apart from 7z all formats that support writing provide a
+        subclass of <code>ArchiveOutputStream</code> that can be used
+        to create an archive. For 7z <code>SevenZOutputFile</code>
+        provides a similar API that does not represent a stream as our
+        implementation requires random access to the output and cannot
+        be used for general streams. The
+        <code>ZipArchiveOutputStream</code> class will benefit from
+        random access as well but can be used for non-seekable streams
+        - but not all features will be available and the archive size
+        might be slightly bigger, see <a
+        href="zip.html#ZipArchiveOutputStream">the zip page</a> for
+        details.</p>
+
+        <p>Assuming you want to add a collection of files to an
+        archive, you can first use <code>createArchiveEntry</code> for
+        each file. In general this will set a few flags (usually the
+        last modified time, the size and the information whether this
+        is a file or directory) based on the <code>File</code>
+        instance. Alternatively you can create the
+        <code>ArchiveEntry</code> subclass corresponding to your
+        format directly. Often you may want to set additional flags
+        like file permissions or owner information before adding the
+        entry to the archive.</p>
+
+        <p>Next you use <code>putArchiveEntry</code> in order to add
+        the entry and then start using <code>write</code> to add the
+        content of the entry - here <code>IOUtils.copy</code> may
+        come handy. Finally you invoke
+        <code>closeArchiveEntry</code> once you've written all content
+        and before you add the next entry.</p>
+
+        <p>Once all entries have been added you'd invoke
+        <code>finish</code> and finally <code>close</code> the
+        stream.</p>
+
+        <p>A skeleton might look like:</p>
+
+        <source><![CDATA[
+Collection<File> filesToArchive = ...
+try (ArchiveOutputStream o = ... create the stream for your format ...) {
+    for (File f : filesToArchive) {
+        // maybe skip directories for formats like AR that don't store directories
+        ArchiveEntry entry = o.createArchiveEntry(f, entryName(f));
+        // potentially add more flags to entry
+        o.putArchiveEntry(entry);
+        if (f.isFile()) {
+            try (InputStream i = Files.newInputStream(f.toPath())) {
+                IOUtils.copy(i, o);
+            }
+        }
+        o.closeArchiveEntry();
+    }
+    out.finish();
+}
+]]></source>
+
+        <p>where the hypothetical <code>entryName</code> method is
+        written by you and provides the name for the entry as it is
+        going to be written to the archive.</p>
+
+        <p>If you want to combine an archive format with a compression
+        format - like when creating a "tar.gz" file - you wrap the
+        <code>ArchiveOutputStream</code> around a
+        <code>CompressorOutputStream</code> for example:</p>
+
+        <source><![CDATA[
+try (OutputStream fo = Files.newOutputStream(Paths.get("my.tar.gz"));
+     OutputStream gzo = new GzipCompressorOutputStream(fo);
+     ArchiveOutputStream o = new TarArchiveOutputStream(gzo)) {
+}
+]]></source>
+
+      </subsection>
+
+      <subsection name="7z">
+
+        <p>Note that Commons Compress currently only supports a subset
+        of compression and encryption algorithms used for 7z archives.
+        For writing only uncompressed entries, LZMA, LZMA2, BZIP2 and
+        Deflate are supported - in addition to those reading supports
+        AES-256/SHA-256 and DEFLATE64.</p>
+
+        <p>Multipart archives are not supported at all.</p>
+
+        <p>7z archives can use multiple compression and encryption
+        methods as well as filters combined as a pipeline of methods
+        for its entries.  Prior to Compress 1.8 you could only specify
+        a single method when creating archives - reading archives
+        using more than one method has been possible before.  Starting
+        with Compress 1.8 it is possible to configure the full
+        pipeline using the <code>setContentMethods</code> method of
+        <code>SevenZOutputFile</code>.  Methods are specified in the
+        order they appear inside the pipeline when creating the
+        archive, you can also specify certain parameters for some of
+        the methods - see the Javadocs of
+        <code>SevenZMethodConfiguration</code> for details.</p>
+
+        <p>When reading entries from an archive the
+        <code>getContentMethods</code> method of
+        <code>SevenZArchiveEntry</code> will properly represent the
+        compression/encryption/filter methods but may fail to
+        determine the configuration options used.  As of Compress 1.8
+        only the dictionary size used for LZMA2 can be read.</p>
+
+        <p>Currently solid compression - compressing multiple files
+        as a single block to benefit from patterns repeating accross
+        files - is only supported when reading archives.  This also
+        means compression ratio will likely be worse when using
+        Commons Compress compared to the native 7z executable.</p>
+
+        <p>Reading or writing requires a
+        <code>SeekableByteChannel</code> that will be obtained
+        transparently when reading from or writing to a file. The
+        class
+        <code>org.apache.commons.compress.utils.SeekableInMemoryByteChannel</code>
+        allows you to read from or write to an in-memory archive.</p>
+
+        <p>Adding an entry to a 7z archive:</p>
+<source><![CDATA[
+SevenZOutputFile sevenZOutput = new SevenZOutputFile(file);
+SevenZArchiveEntry entry = sevenZOutput.createArchiveEntry(fileToArchive, name);
+sevenZOutput.putArchiveEntry(entry);
+sevenZOutput.write(contentOfEntry);
+sevenZOutput.closeArchiveEntry();
+]]></source>
+
+        <p>Uncompressing a given 7z archive (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+SevenZFile sevenZFile = new SevenZFile(new File("archive.7z"));
+SevenZArchiveEntry entry = sevenZFile.getNextEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    sevenZFile.read(content, offset, content.length - offset);
+}
+]]></source>
+
+          <p>Uncompressing a given in-memory 7z archive:</p>
+          <source><![CDATA[
+byte[] inputData; // 7z archive contents
+SeekableInMemoryByteChannel inMemoryByteChannel = new SeekableInMemoryByteChannel(inputData);
+SevenZFile sevenZFile = new SevenZFile(inMemoryByteChannel);
+SevenZArchiveEntry entry = sevenZFile.getNextEntry();
+sevenZFile.read();  // read current entry's data
+]]></source>
+
+          <h4><a name="Encrypted 7z Archives"></a>Encrypted 7z Archives</h4>
+
+          <p>Currently Compress supports reading but not writing of
+          encrypted archives. When reading an encrypted archive a
+          password has to be provided to one of
+          <code>SevenZFile</code>'s constructors. If you try to read
+          an encrypted archive without specifying a password a
+          <code>PasswordRequiredException</code> (a subclass of
+          <code>IOException</code>) will be thrown.</p>
+
+          <p>When specifying the password as a <code>byte[]</code> one
+          common mistake is to use the wrong encoding when creating
+          the <code>byte[]</code> from a <code>String</code>. The
+          <code>SevenZFile</code> class expects the bytes to
+          correspond to the UTF16-LE encoding of the password. An
+          example of reading an encrypted archive is</p>
+
+<source><![CDATA[
+SevenZFile sevenZFile = new SevenZFile(new File("archive.7z"), "secret".getBytes(StandardCharsets.UTF_16LE));
+SevenZArchiveEntry entry = sevenZFile.getNextEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    sevenZFile.read(content, offset, content.length - offset);
+}
+]]></source>
+
+        <p>Starting with Compress 1.17 new constructors have been
+        added that accept the password as <code>char[]</code> rather
+        than a <code>byte[]</code>. We recommend you use these in
+        order to avoid the problem above.</p>
+
+<source><![CDATA[
+SevenZFile sevenZFile = new SevenZFile(new File("archive.7z"), "secret".toCharArray());
+SevenZArchiveEntry entry = sevenZFile.getNextEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    sevenZFile.read(content, offset, content.length - offset);
+}
+]]></source>
+
+      </subsection>
+
+      <subsection name="ar">
+
+        <p>In addition to the information stored
+          in <code>ArchiveEntry</code> a <code>ArArchiveEntry</code>
+          stores information about the owner user and group as well as
+          Unix permissions.</p>
+
+        <p>Adding an entry to an ar archive:</p>
+<source><![CDATA[
+ArArchiveEntry entry = new ArArchiveEntry(name, size);
+arOutput.putArchiveEntry(entry);
+arOutput.write(contentOfEntry);
+arOutput.closeArchiveEntry();
+]]></source>
+
+        <p>Reading entries from an ar archive:</p>
+<source><![CDATA[
+ArArchiveEntry entry = (ArArchiveEntry) arInput.getNextEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    arInput.read(content, offset, content.length - offset);
+}
+]]></source>
+
+        <p>Traditionally the AR format doesn't allow file names longer
+          than 16 characters.  There are two variants that circumvent
+          this limitation in different ways, the GNU/SRV4 and the BSD
+          variant.  Commons Compress 1.0 to 1.2 can only read archives
+          using the GNU/SRV4 variant, support for the BSD variant has
+          been added in Commons Compress 1.3.  Commons Compress 1.3
+          also optionally supports writing archives with file names
+          longer than 16 characters using the BSD dialect, writing
+          the SVR4/GNU dialect is not supported.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Version of Apache Commons Compress</th>
+              <th>Support for Traditional AR Format</th>
+              <th>Support for GNU/SRV4 Dialect</th>
+              <th>Support for BSD Dialect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.0 to 1.2</td>
+              <td>read/write</td>
+              <td>read</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>1.3 and later</td>
+              <td>read/write</td>
+              <td>read</td>
+              <td>read/write</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>It is not possible to detect the end of an AR archive in a
+        reliable way so <code>ArArchiveInputStream</code> will read
+        until it reaches the end of the stream or fails to parse the
+        stream's content as AR entries.</p>
+
+      </subsection>
+
+      <subsection name="arj">
+
+        <p>Note that Commons Compress doesn't support compressed,
+        encrypted or multi-volume ARJ archives, yet.</p>
+
+        <p>Uncompressing a given arj archive (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+ArjArchiveEntry entry = arjInput.getNextEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    arjInput.read(content, offset, content.length - offset);
+}
+]]></source>
+      </subsection>
+
+      <subsection name="cpio">
+
+        <p>In addition to the information stored
+          in <code>ArchiveEntry</code> a <code>CpioArchiveEntry</code>
+          stores various attributes including information about the
+          original owner and permissions.</p>
+
+        <p>The cpio package supports the "new portable" as well as the
+          "old" format of CPIO archives in their binary, ASCII and
+          "with CRC" variants.</p>
+
+        <p>Adding an entry to a cpio archive:</p>
+<source><![CDATA[
+CpioArchiveEntry entry = new CpioArchiveEntry(name, size);
+cpioOutput.putArchiveEntry(entry);
+cpioOutput.write(contentOfEntry);
+cpioOutput.closeArchiveEntry();
+]]></source>
+
+        <p>Reading entries from an cpio archive:</p>
+<source><![CDATA[
+CpioArchiveEntry entry = cpioInput.getNextCPIOEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    cpioInput.read(content, offset, content.length - offset);
+}
+]]></source>
+
+        <p>Traditionally CPIO archives are written in blocks of 512
+        bytes - the block size is a configuration parameter of the
+        <code>Cpio*Stream</code>'s constuctors.  Starting with version
+        1.5 <code>CpioArchiveInputStream</code> will consume the
+        padding written to fill the current block when the end of the
+        archive is reached.  Unfortunately many CPIO implementations
+        use larger block sizes so there may be more zero-byte padding
+        left inside the original input stream after the archive has
+        been consumed completely.</p>
+
+      </subsection>
+
+      <subsection name="jar">
+        <p>In general, JAR archives are ZIP files, so the JAR package
+          supports all options provided by the <a href="#zip">ZIP</a> package.</p>
+
+        <p>To be interoperable JAR archives should always be created
+          using the UTF-8 encoding for file names (which is the
+          default).</p>
+
+        <p>Archives created using <code>JarArchiveOutputStream</code>
+          will implicitly add a <code>JarMarker</code> extra field to
+          the very first archive entry of the archive which will make
+          Solaris recognize them as Java archives and allows them to
+          be used as executables.</p>
+
+        <p>Note that <code>ArchiveStreamFactory</code> doesn't
+          distinguish ZIP archives from JAR archives, so if you use
+          the one-argument <code>createArchiveInputStream</code>
+          method on a JAR archive, it will still return the more
+          generic <code>ZipArchiveInputStream</code>.</p>
+
+        <p>The <code>JarArchiveEntry</code> class contains fields for
+          certificates and attributes that are planned to be supported
+          in the future but are not supported as of Compress 1.0.</p>
+
+        <p>Adding an entry to a jar archive:</p>
+<source><![CDATA[
+JarArchiveEntry entry = new JarArchiveEntry(name, size);
+entry.setSize(size);
+jarOutput.putArchiveEntry(entry);
+jarOutput.write(contentOfEntry);
+jarOutput.closeArchiveEntry();
+]]></source>
+
+        <p>Reading entries from an jar archive:</p>
+<source><![CDATA[
+JarArchiveEntry entry = jarInput.getNextJarEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    jarInput.read(content, offset, content.length - offset);
+}
+]]></source>
+      </subsection>
+
+      <subsection name="dump">
+
+        <p>In addition to the information stored
+          in <code>ArchiveEntry</code> a <code>DumpArchiveEntry</code>
+          stores various attributes including information about the
+          original owner and permissions.</p>
+
+        <p>As of Commons Compress 1.3 only dump archives using the
+          new-fs format - this is the most common variant - are
+          supported.  Right now this library supports uncompressed and
+          ZLIB compressed archives and can not write archives at
+          all.</p>
+
+        <p>Reading entries from an dump archive:</p>
+<source><![CDATA[
+DumpArchiveEntry entry = dumpInput.getNextDumpEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    dumpInput.read(content, offset, content.length - offset);
+}
+]]></source>
+
+        <p>Prior to version 1.5 <code>DumpArchiveInputStream</code>
+        would close the original input once it had read the last
+        record.  Starting with version 1.5 it will not close the
+        stream implicitly.</p>
+
+      </subsection>
+
+      <subsection name="tar">
+
+        <p>The TAR package has a <a href="tar.html">dedicated
+            documentation page</a>.</p>
+
+        <p>Adding an entry to a tar archive:</p>
+<source><![CDATA[
+TarArchiveEntry entry = new TarArchiveEntry(name);
+entry.setSize(size);
+tarOutput.putArchiveEntry(entry);
+tarOutput.write(contentOfEntry);
+tarOutput.closeArchiveEntry();
+]]></source>
+
+        <p>Reading entries from an tar archive:</p>
+<source><![CDATA[
+TarArchiveEntry entry = tarInput.getNextTarEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    tarInput.read(content, offset, content.length - offset);
+}
+]]></source>
+      </subsection>
+
+      <subsection name="zip">
+        <p>The ZIP package has a <a href="zip.html">dedicated
+            documentation page</a>.</p>
+
+        <p>Adding an entry to a zip archive:</p>
+<source><![CDATA[
+ZipArchiveEntry entry = new ZipArchiveEntry(name);
+entry.setSize(size);
+zipOutput.putArchiveEntry(entry);
+zipOutput.write(contentOfEntry);
+zipOutput.closeArchiveEntry();
+]]></source>
+
+        <p><code>ZipArchiveOutputStream</code> can use some internal
+          optimizations exploiting <code>SeekableByteChannel</code> if it
+          knows it is writing to a seekable output rather than a non-seekable
+          stream.  If you are writing to a file, you should use the
+          constructor that accepts a <code>File</code> or
+          <code>SeekableByteChannel</code> argument rather
+          than the one using an <code>OutputStream</code> or the
+          factory method in <code>ArchiveStreamFactory</code>.</p>
+
+        <p>Reading entries from an zip archive:</p>
+<source><![CDATA[
+ZipArchiveEntry entry = zipInput.getNextZipEntry();
+byte[] content = new byte[entry.getSize()];
+LOOP UNTIL entry.getSize() HAS BEEN READ {
+    zipInput.read(content, offset, content.length - offset);
+}
+]]></source>
+
+        <p>Reading entries from an zip archive using the
+          recommended <code>ZipFile</code> class:</p>
+<source><![CDATA[
+ZipArchiveEntry entry = zipFile.getEntry(name);
+InputStream content = zipFile.getInputStream(entry);
+try {
+    READ UNTIL content IS EXHAUSTED
+} finally {
+    content.close();
+}
+]]></source>
+
+          <p>Reading entries from an in-memory zip archive using
+              <code>SeekableInMemoryByteChannel</code> and <code>ZipFile</code> class:</p>
+<source><![CDATA[
+byte[] inputData; // zip archive contents
+SeekableInMemoryByteChannel inMemoryByteChannel = new SeekableInMemoryByteChannel(inputData);
+ZipFile zipFile = new ZipFile(inMemoryByteChannel);
+ZipArchiveEntry archiveEntry = zipFile.getEntry("entryName");
+InputStream inputStream = zipFile.getInputStream(archiveEntry);
+inputStream.read() // read data from the input stream
+]]></source>
+
+          <p>Creating a zip file with multiple threads:</p>
+
+          A simple implementation to create a zip file might look like this:
+
+<source>
+public class ScatterSample {
+
+  ParallelScatterZipCreator scatterZipCreator = new ParallelScatterZipCreator();
+  ScatterZipOutputStream dirs = ScatterZipOutputStream.fileBased(File.createTempFile("scatter-dirs", "tmp"));
+
+  public ScatterSample() throws IOException {
+  }
+
+  public void addEntry(ZipArchiveEntry zipArchiveEntry, InputStreamSupplier streamSupplier) throws IOException {
+     if (zipArchiveEntry.isDirectory() &amp;&amp; !zipArchiveEntry.isUnixSymlink())
+        dirs.addArchiveEntry(ZipArchiveEntryRequest.createZipArchiveEntryRequest(zipArchiveEntry, streamSupplier));
+     else
+        scatterZipCreator.addArchiveEntry( zipArchiveEntry, streamSupplier);
+  }
+
+  public void writeTo(ZipArchiveOutputStream zipArchiveOutputStream)
+  throws IOException, ExecutionException, InterruptedException {
+     dirs.writeTo(zipArchiveOutputStream);
+     dirs.close();
+     scatterZipCreator.writeTo(zipArchiveOutputStream);
+  }
+}
+</source>
+      </subsection>
+
+    </section>
+    <section name="Compressors">
+
+      <subsection name="Concatenated Streams">
+        <p>For the bzip2, gzip and xz formats as well as the framed
+        lz4 format a single compressed file
+        may actually consist of several streams that will be
+        concatenated by the command line utilities when decompressing
+        them.  Starting with Commons Compress 1.4 the
+        <code>*CompressorInputStream</code>s for these formats support
+        concatenating streams as well, but they won't do so by
+        default.  You must use the two-arg constructor and explicitly
+        enable the support.</p>
+      </subsection>
+
+      <subsection name="Brotli">
+
+        <p>The implementation of this package is provided by the
+          <a href="https://github.com/google/brotli">Google Brotli dec</a> library.</p>
+
+        <p>Uncompressing a given Brotli compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.br"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+BrotliCompressorInputStream brIn = new BrotliCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = brIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+brIn.close();
+]]></source>
+      </subsection>
+
+      <subsection name="bzip2">
+
+        <p>Note that <code>BZipCompressorOutputStream</code> keeps
+          hold of some big data structures in memory.  While it is
+          recommended for <em>any</em> stream that you close it as soon as
+          you no longer need it, this is even more important
+          for <code>BZipCompressorOutputStream</code>.</p>
+
+        <p>Uncompressing a given bzip2 compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.bz2"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+BZip2CompressorInputStream bzIn = new BZip2CompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = bzIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+bzIn.close();
+]]></source>
+
+        <p>Compressing a given file using bzip2 (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.gz"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+BZip2CompressorOutputStream bzOut = new BZip2CompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    bzOut.write(buffer, 0, n);
+}
+bzOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="DEFLATE">
+
+        <p>The implementation of the DEFLATE/INFLATE code used by this
+        package is provided by the <code>java.util.zip</code> package
+        of the Java class library.</p>
+
+        <p>Uncompressing a given DEFLATE compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("some-file"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+DeflateCompressorInputStream defIn = new DeflateCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = defIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+defIn.close();
+]]></source>
+
+        <p>Compressing a given file using DEFLATE (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("some-file"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+DeflateCompressorOutputStream defOut = new DeflateCompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    defOut.write(buffer, 0, n);
+}
+defOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="DEFLATE64">
+
+        <p>Uncompressing a given DEFLATE64 compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("some-file"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+Deflate64CompressorInputStream defIn = new Deflate64CompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = defIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+defIn.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="gzip">
+
+        <p>The implementation of the DEFLATE/INFLATE code used by this
+        package is provided by the <code>java.util.zip</code> package
+        of the Java class library.</p>
+
+        <p>Uncompressing a given gzip compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.gz"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+GzipCompressorInputStream gzIn = new GzipCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = gzIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+gzIn.close();
+]]></source>
+
+        <p>Compressing a given file using gzip (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.gz"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+GzipCompressorOutputStream gzOut = new GzipCompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    gzOut.write(buffer, 0, n);
+}
+gzOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="LZ4">
+
+        <p>There are two different "formats" used for <a
+        href="http://lz4.github.io/lz4/">lz4</a>. The format called
+        "block format" only contains the raw compressed data while the
+        other provides a higher level "frame format" - Commons
+        Compress offers two different stream classes for reading or
+        writing either format.</p>
+
+        <p>Uncompressing a given frame LZ4 file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.lz4"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+FramedLZ4CompressorInputStream zIn = new FramedLZ4CompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = zIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+zIn.close();
+]]></source>
+
+        <p>Compressing a given file using the LZ4 frame format (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.lz4"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+FramedLZ4CompressorOutputStream lzOut = new FramedLZ4CompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    lzOut.write(buffer, 0, n);
+}
+lzOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="lzma">
+
+        <p>The implementation of this package is provided by the
+          public domain <a href="https://tukaani.org/xz/java.html">XZ
+          for Java</a> library.</p>
+
+        <p>Uncompressing a given lzma compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.lzma"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+LZMACompressorInputStream lzmaIn = new LZMACompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = xzIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+lzmaIn.close();
+]]></source>
+
+        <p>Compressing a given file using lzma (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.lzma"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+LZMACompressorOutputStream lzOut = new LZMACompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    lzOut.write(buffer, 0, n);
+}
+lzOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="Pack200">
+
+        <p>The Pack200 package has a <a href="pack200.html">dedicated
+          documentation page</a>.</p>
+
+        <p>The implementation of this package is provided by
+          the <code>java.util.zip</code> package of the Java class
+          library.</p>
+
+        <p>Uncompressing a given pack200 compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.pack"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.jar"));
+Pack200CompressorInputStream pIn = new Pack200CompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = pIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+pIn.close();
+]]></source>
+
+        <p>Compressing a given jar using pack200 (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.jar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.pack"));
+BufferedOutputStream out = new BufferedInputStream(fout);
+Pack200CompressorOutputStream pOut = new Pack200CompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    pOut.write(buffer, 0, n);
+}
+pOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="Snappy">
+
+        <p>There are two different "formats" used for <a
+        href="https://github.com/google/snappy/">Snappy</a>, one only
+        contains the raw compressed data while the other provides a
+        higher level "framing format" - Commons Compress offers two
+        different stream classes for reading either format.</p>
+
+        <p>Starting with 1.12 we've added support for different
+        dialects of the framing format that can be specified when
+        constructing the stream. The <code>STANDARD</code> dialect
+        follows the "framing format" specification while the
+        <code>IWORK_ARCHIVE</code> dialect can be used to parse IWA
+        files that are part of Apple's iWork 13 format. If no dialect
+        has been specified, <code>STANDARD</code> is used. Only the
+        <code>STANDARD</code> format can be detected by
+        <code>CompressorStreamFactory</code>.</p>
+
+        <p>Uncompressing a given framed Snappy file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.sz"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+FramedSnappyCompressorInputStream zIn = new FramedSnappyCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = zIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+zIn.close();
+]]></source>
+
+        <p>Compressing a given file using framed Snappy (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.sz"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+FramedSnappyCompressorOutputStream snOut = new FramedSnappyCompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    snOut.write(buffer, 0, n);
+}
+snOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="XZ">
+
+        <p>The implementation of this package is provided by the
+          public domain <a href="https://tukaani.org/xz/java.html">XZ
+          for Java</a> library.</p>
+
+        <p>When you try to open an XZ stream for reading using
+        <code>CompressorStreamFactory</code>, Commons Compress will
+        check whether the XZ for Java library is available.  Starting
+        with Compress 1.9 the result of this check will be cached
+        unless Compress finds OSGi classes in its classpath.  You can
+        use <code>XZUtils#setCacheXZAvailability</code> to overrride
+        this default behavior.</p>
+
+        <p>Uncompressing a given XZ compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.xz"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+XZCompressorInputStream xzIn = new XZCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = xzIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+xzIn.close();
+]]></source>
+
+        <p>Compressing a given file using XZ (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.xz"));
+BufferedOutputStream out = new BufferedInputStream(fout);
+XZCompressorOutputStream xzOut = new XZCompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    xzOut.write(buffer, 0, n);
+}
+xzOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="Z">
+
+        <p>Uncompressing a given Z compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.Z"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+ZCompressorInputStream zIn = new ZCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = zIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+zIn.close();
+]]></source>
+
+      </subsection>
+
+      <subsection name="Zstandard">
+
+        <p>The implementation of this package is provided by the
+          <a href="https://github.com/luben/zstd-jni">Zstandard JNI</a> library.</p>
+
+        <p>Uncompressing a given Zstandard compressed file (you would
+          certainly add exception handling and make sure all streams
+          get closed properly):</p>
+<source><![CDATA[
+InputStream fin = Files.newInputStream(Paths.get("archive.tar.zstd"));
+BufferedInputStream in = new BufferedInputStream(fin);
+OutputStream out = Files.newOutputStream(Paths.get("archive.tar"));
+ZstdCompressorInputStream zsIn = new ZstdCompressorInputStream(in);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = zsIn.read(buffer))) {
+    out.write(buffer, 0, n);
+}
+out.close();
+zsIn.close();
+]]></source>
+
+        <p>Compressing a given file using the Zstandard format (you
+        would certainly add exception handling and make sure all
+        streams get closed properly):</p>
+<source><![CDATA[
+InputStream in = Files.newInputStream(Paths.get("archive.tar"));
+OutputStream fout = Files.newOutputStream(Paths.get("archive.tar.zstd"));
+BufferedOutputStream out = new BufferedOutputStream(fout);
+ZstdCompressorOutputStream zOut = new ZstdCompressorOutputStream(out);
+final byte[] buffer = new byte[buffersize];
+int n = 0;
+while (-1 != (n = in.read(buffer))) {
+    zOut.write(buffer, 0, n);
+}
+zOut.close();
+in.close();
+]]></source>
+
+      </subsection>
+    </section>
+
+    <section name="Extending Commons Compress">
+
+        <p>
+          Starting in release 1.13, it is now possible to add Compressor- and ArchiverStream implementations using the 
+          Java's <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html">ServiceLoader</a> 
+          mechanism.
+        </p>
+
+    <subsection name="Extending Commons Compress Compressors">
+
+        <p>
+          To provide your own compressor, you must make available on the classpath a file called 
+          <code>META-INF/services/org.apache.commons.compress.compressors.CompressorStreamProvider</code>.
+        </p>
+        <p>
+          This file MUST contain one fully-qualified class name per line.
+        </p>
+        <p>
+          For example:
+        </p>
+        <pre>org.apache.commons.compress.compressors.TestCompressorStreamProvider</pre>
+        <p>
+          This class MUST implement the Commons Compress interface 
+          <a href="apidocs/org/apache/commons/compress/compressors/CompressorStreamProvider.html">org.apache.commons.compress.compressors.CompressorStreamProvider</a>.
+        </p>
+    </subsection>
+
+    <subsection name="Extending Commons Compress Archivers">
+
+        <p>
+          To provide your own compressor, you must make available on the classpath a file called 
+          <code>META-INF/services/org.apache.commons.compress.archivers.ArchiveStreamProvider</code>.
+        </p>
+        <p>
+          This file MUST contain one fully-qualified class name per line.
+        </p>
+        <p>
+          For example:
+        </p>
+        <pre>org.apache.commons.compress.archivers.TestArchiveStreamProvider</pre>
+        <p>
+          This class MUST implement the Commons Compress interface 
+          <a href="apidocs/org/apache/commons/compress/archivers/ArchiveStreamProvider.html">org.apache.commons.compress.archivers.ArchiveStreamProvider</a>.
+        </p>
+    </subsection>
+
+    </section>
+  </body>
+</document>

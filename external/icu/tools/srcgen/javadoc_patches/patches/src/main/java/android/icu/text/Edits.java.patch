@@ -1,0 +1,23 @@
+--- android_icu4j/src/main/java/android/icu/text/Edits.java	2018-10-22 05:12:27.128614515 +0100
++++ android_icu4j/src/main/java/android/icu/text/Edits.java	2018-10-22 05:12:45.632675685 +0100
+@@ -49,8 +49,7 @@
+  * <p>
+  * The "fine changes" and "coarse changes" iterators will step through only the change edits when their
+  * {@link Edits.Iterator#next()} methods are called. They are identical to the non-change iterators when
+- * their {@link Edits.Iterator#findSourceIndex(int)} or {@link Edits.Iterator#findDestinationIndex(int)}
+- * methods are used to walk through the string.
++ * their {@link Edits.Iterator#findSourceIndex(int)} method is used to walk through the string.
+  * <p>
+  * For examples of how to use this class, see the test <code>TestCaseMapEditsIteratorDocs</code> in
+  * UCharacterCaseTest.java.
+@@ -251,8 +250,8 @@
+      * starts at {@link #sourceIndex()} and runs for {@link #oldLength()} chars; the destination string
+      * span starts at {@link #destinationIndex()} and runs for {@link #newLength()} chars.
+      * <p>
+-     * The iterator can be moved between edits using the {@link #next()}, {@link #findSourceIndex(int)},
+-     * and {@link #findDestinationIndex(int)} methods. Calling any of these methods mutates the iterator
++     * The iterator can be moved between edits using the {@link #next()} and
++     * {@link #findSourceIndex(int)} methods. Calling any of these methods mutates the iterator
+      * to make it point to the corresponding edit.
+      * <p>
+      * For more information, see the documentation for {@link Edits}.

@@ -1,0 +1,45 @@
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import logging
+
+from autotest_lib.client.common_lib import error
+from autotest_lib.client.common_lib import utils
+from autotest_lib.client.common_lib.cros import dev_server
+from autotest_lib.server import host_attributes
+
+AUTHOR = "Chrome OS Team"
+NAME = "platform_InstallTestImage"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Install"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+
+DOC = """
+This test installs a specified test image onto a servo-connected DUT.
+The principle purpose is to allow installing a known-good image onto
+a wedged unit that would otherwise have to be re-imaged manually.
+
+Here is the command to install a recovery image with a locally attached
+servo:
+    test_that -b ${BOARD} ${IP_ADDRESS} \
+        --args="image=$IMAGE_PATH" platform_InstallTestImage
+
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+image_url = args_dict.get("image", None)
+
+def run(machine):
+    # Setup the client machine.
+    host = hosts.create_host(machine, servo_args=servo_args)
+    # If we're invoked from test_that, the user can pass an
+    # optional "image" argument.  If it's omitted, we want to pass
+    # `None` to the test.
+    job.fast = True
+    job.run_test("platform_InstallTestImage", host=host, local=False,
+                 disable_sysinfo=True, image_url=image_url)
+
+parallel_simple(run, machines)

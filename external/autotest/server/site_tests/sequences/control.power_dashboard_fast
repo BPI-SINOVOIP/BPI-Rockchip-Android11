@@ -1,0 +1,86 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "puthik"
+NAME = "power_Dashboard.fast"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "suite"
+TEST_TYPE = "server"
+
+DOC = """
+Sequence to make sure that power_Dashboard tests work fine.
+"""
+
+from autotest_lib.client.common_lib import utils
+
+# Need separate list for client and server test due to how these test work.
+CLIENT_TESTS = [
+    ('power_Standby', {
+        'tag' : '36sec', 'sample_hours' : 0.01, 'test_hours' : 0.01,
+        'bypass_check' : True}),
+    ('power_LoadTest', {
+        'tag' : 'fast', 'loop_time' : 180, 'loop_count' : 1,
+        'test_low_batt_p' : 6, 'check_network': False, 'ac_ok' : True,
+        'gaia_login' : False}),
+    ('power_Idle', {
+        'tag' : 'fast', 'warmup_secs' : 2, 'idle_secs' : 10}),
+    ('power_VideoPlayback', {
+        'tag' : 'fast', 'secs_per_video' : 10, 'fast' : True }),
+    ('power_VideoPlayback', {
+        'tag' : 'sw_decoder_fast', 'use_hw_decode' : False,
+        'secs_per_video' : 10, 'fast' : True }),
+    ('power_Display', {
+        'tag' : 'fast', 'secs_per_page' : 2}),
+    ('power_WebGL', {
+        'tag' : 'fast', 'duration' : 10}),
+]
+
+# Tagged test name and sweetberry interval
+SWEETBERRY_TESTS = [
+    ('power_Standby.36sec', 1),
+    ('power_LoadTest.fast', 1),
+    ('power_Idle.fast', 1),
+    ('power_VideoPlayback.fast', 1),
+    ('power_VideoPlayback.sw_decoder_fast', 1),
+    ('power_Display.fast', 1),
+    ('power_WebGL.fast', 1),
+]
+
+POWERLOG_TESTNAME = 'power_PowerlogWrapper'
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+pdash_note = args_dict.get('pdash_note', '')
+sweetberry_serial = args_dict.get('sweetberry_serial', None)
+
+def run_client_test(machine):
+    client = hosts.create_host(machine)
+    client_at = autotest.Autotest(client)
+    for test, argv in CLIENT_TESTS:
+        client.reboot()
+        argv['pdash_note'] = pdash_note
+        client_at.run_test(test, **argv)
+
+def run_sweetberry_wrapper_test(machine):
+    client = hosts.create_host(machine)
+    for test, sweetberry_interval in SWEETBERRY_TESTS:
+        client.reboot()
+        argv = {
+            'pdash_note': pdash_note,
+            'test': test,
+            'sweetberry_interval': sweetberry_interval,
+        }
+        job.run_test(POWERLOG_TESTNAME, host=client, config=argv, tag=test)
+
+
+if sweetberry_serial:
+    parallel_simple(run_sweetberry_wrapper_test, machines)
+else:
+    job.parallel_on_machines(run_client_test, machines)

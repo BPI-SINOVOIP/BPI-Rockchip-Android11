@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote  name="cros"
+           fetch="https://chromium.googlesource.com"
+           review="chromium-review.googlesource.com" />
+  <remote  name="cros-internal"
+           fetch="https://chrome-internal-review.googlesource.com"
+           review="chrome-internal-review.googlesource.com" />
+<!--  We track master branch now because we build Docker images and use those to track testing and release rather than the prod ref.-->
+  <default revision="refs/heads/master"
+           remote="cros" />
+
+  <project path="autotest"
+           name="chromiumos/third_party/autotest" />
+
+  <project remote="cros-internal" path="autotest/site_utils/autotest_private"
+           name="chromeos/autotest-private" />
+
+  <!-- end chromeos projects -->
+
+</manifest>

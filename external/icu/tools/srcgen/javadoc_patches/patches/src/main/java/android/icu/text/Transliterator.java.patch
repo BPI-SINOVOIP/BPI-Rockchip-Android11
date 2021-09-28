@@ -1,0 +1,113 @@
+--- android_icu4j/src/main/java/android/icu/text/Transliterator.java	2018-11-09 19:42:31.006222883 +0000
++++ android_icu4j/src/main/java/android/icu/text/Transliterator.java	2018-11-09 19:42:48.586308127 +0000
+@@ -181,19 +181,6 @@
+  * returned by {@link #getDisplayName}.
+  *
+  * <p>
+- * <b>Factory methods and registration</b>
+- *
+- * <p>
+- * In general, client code should use the factory method <code>getInstance()</code> to obtain an instance of a
+- * transliterator given its ID. Valid IDs may be enumerated using <code>getAvailableIDs()</code>. Since transliterators
+- * are stateless, multiple calls to <code>getInstance()</code> with the same ID will return the same object.
+- *
+- * <p>
+- * In addition to the system transliterators registered at startup, user transliterators may be registered by calling
+- * <code>registerInstance()</code> at run time. To register a transliterator subclass without instantiating it (until it
+- * is needed), users may call <code>registerClass()</code>.
+- *
+- * <p>
+  * <b>Composed transliterators</b>
+  *
+  * <p>
+@@ -213,16 +200,6 @@
+  * transliterator is instantiated, it appears externally to be a standard transliterator (e.g., getID() returns
+  * "Devanagari-Gujarati").
+  *
+- * <p>
+- * <b>Subclassing</b>
+- *
+- * <p>
+- * Subclasses must implement the abstract method <code>handleTransliterate()</code>.
+- * <p>
+- * Subclasses should override the <code>transliterate()</code> method taking a <code>Replaceable</code> and the
+- * <code>transliterate()</code> method taking a <code>String</code> and <code>StringBuffer</code> if the performance of
+- * these methods can be improved over the performance obtained by the default implementations in this class.
+- *
+  * <p><b>Rule syntax</b>
+  *
+  * <p>A set of rules determines how to perform translations.
+@@ -828,7 +805,6 @@
+      * transliterated into the translation buffer at
+      * <code>index.contextLimit</code>.  If <code>null</code> then no text
+      * is inserted.
+-     * @see #handleTransliterate
+      * @exception IllegalArgumentException if <code>index</code>
+      * is invalid
+      */
+@@ -1372,7 +1348,6 @@
+      * Returns a programmatic identifier for this transliterator.
+      * If this identifier is passed to <code>getInstance()</code>, it
+      * will return this object, if it has been registered.
+-     * @see #registerClass
+      * @see #getAvailableIDs
+      */
+     public final String getID() {
+@@ -1533,8 +1508,7 @@
+ 
+     /**
+      * Returns a <code>Transliterator</code> object given its ID.
+-     * The ID must be either a system transliterator ID or a ID registered
+-     * using <code>registerClass()</code>.
++     * The ID must be a system transliterator ID.
+      *
+      * @param ID a valid ID, as enumerated by <code>getAvailableIDs()</code>
+      * @return A <code>Transliterator</code> object with the given ID
+@@ -1546,15 +1520,13 @@
+ 
+     /**
+      * Returns a <code>Transliterator</code> object given its ID.
+-     * The ID must be either a system transliterator ID or a ID registered
+-     * using <code>registerClass()</code>.
++     * The ID must be a system transliterator ID.
+      *
+      * @param ID a valid ID, as enumerated by <code>getAvailableIDs()</code>
+      * @param dir either FORWARD or REVERSE.  If REVERSE then the
+      * inverse of the given ID is instantiated.
+      * @return A <code>Transliterator</code> object with the given ID
+      * @exception IllegalArgumentException if the given ID is invalid.
+-     * @see #registerClass
+      * @see #getAvailableIDs
+      * @see #getID
+      */
+@@ -1760,12 +1732,9 @@
+      * input text by this Transliterator.  This incorporates this
+      * object's current filter; if the filter is changed, the return
+      * value of this function will change.  The default implementation
+-     * returns an empty set.  Some subclasses may override {@link
+-     * #handleGetSourceSet} to return a more precise result.  The
+-     * return result is approximate in any case and is intended for
+-     * use by tests, tools, or utilities.
++     * returns an empty set. The return result is approximate in any case
++     * and is intended for use by tests, tools, or utilities.
+      * @see #getTargetSet
+-     * @see #handleGetSourceSet
+      */
+     public final UnicodeSet getSourceSet() {
+         UnicodeSet result = new UnicodeSet();
+@@ -1906,7 +1875,6 @@
+      * @return a transliterator that is an inverse, not necessarily
+      * exact, of this transliterator, or <code>null</code> if no such
+      * transliterator is registered.
+-     * @see #registerClass
+      */
+     public final Transliterator getInverse() {
+         return getInstance(ID, REVERSE);
+@@ -2052,7 +2020,6 @@
+      *
+      * @return An <code>Enumeration</code> over <code>String</code> objects
+      * @see #getInstance
+-     * @see #registerClass
+      */
+     public static final Enumeration<String> getAvailableIDs() {
+         return registry.getAvailableIDs();

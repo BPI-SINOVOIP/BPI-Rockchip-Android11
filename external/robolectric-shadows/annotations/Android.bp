@@ -1,0 +1,13 @@
+//#############################################
+// Compile Robolectric annotations
+//#############################################
+
+java_library_host {
+    name: "Robolectric_annotations",
+    static_libs: [
+        "Robolectric_shadowapi",
+        "jsr305",
+    ],
+    libs: ["robolectric-host-android_all"],
+    srcs: ["src/main/java/**/*.java"],
+}

@@ -1,0 +1,29 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = 'kathrelkeld'
+NAME = 'policy_AUServer.TargetVersion.short_prefix'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+
+DOC = """
+Sets up and runs the client test for the DeviceTargetVersionPrefix
+policy.
+
+"""
+args_dict = utils.args_to_dict(args)
+client_test = 'policy_DeviceTargetVersionPrefix'
+case = 'short_prefix'
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_AUServer', host=host, client_test=client_test,
+                 case=case, **args_dict)
+
+parallel_simple(run, machines)

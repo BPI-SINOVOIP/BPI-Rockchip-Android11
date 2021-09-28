@@ -1,0 +1,74 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "servo_LabstationVerification.local"
+PURPOSE = "Ensure labstation images can provide basic lab functionality."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+
+DOC = """
+This test is a wrapper around a few functionality tests surrounding servo,
+servod, and basic lab functionality. As this test is designed to test the
+labstation serving servod itself, instead of specific DUTs functionality,
+it should be independent of what DUT is on the other side.
+
+This test makes the following assumptions:
+1. There is a servo device attached to the labstation being tested.
+1.1 There is a usb stick in the imaging slot on the servo device.
+
+2. There is a DUT attached to the servo mentioned in 1.
+
+3. The DUT is connected to the internet via ethernet through the servo.
+3.1 The DUT is connected to the same subnet as the labstation.
+
+4. The shared network supports IPv6 with IEEE EUI-64 (from EUI-48/mac) node
+addresses
+
+4.1: There is also a way for local testing to specify dut_ip=${IP} in the args
+to skip IP inferring and use a known IP.
+
+.local version assumes that there is an image already installed on the USB stick
+This allows the test to skip any devserver flakiness and can be used for
+local image validation. Just make sure the image on the stick is actually
+an image for the DUT that is connected.
+
+A note on failures:
+- Failures might occur if the test to install test images fails to query
+the right devserver. This will cause platform_InstallTestImage and the
+subsequent test to fail as well. This is a known issue when kicking it off
+from a workstation for example. (crbug.com/c/953113).
+
+Sample usage:
+test_that <labstation ip> servo_LabstationVerification
+
+test_that <labstation ip> servo_LabstationVerification --args="dut_ip=${DUT_IP}"
+// To skip DUT ip inferring and use a known DUT ip
+
+
+A fun note:
+If the labstation being tested is running an image that has already been
+qualified, this test can also be used to see whether a (new) DUT is likely
+to have lab deployment issues that are specific to the DUT as the test goes
+through a lot of the flow that deployment goes through, and also tests some
+basic features like console access and powerstate, which could trip up many
+tests or repairs.
+"""
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test("servo_LabstationVerification", host=host, local=True,
+                 config=args_dict, disable_sysinfo=True)
+
+parallel_simple(run, machines)

@@ -1,0 +1,15 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsLibcoreTestCases",
+      "options": [
+        {
+          "include-filter": "libcore.java.nio.charset"
+        },
+        {
+          "include-filter": "org.apache.harmony.tests.java.nio.charset"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "__type__":"TestrunResult",
+  "results_version":10,
+  "name":"normal-run",
+  "uname":"Linux hostname 4.18.0-1-amd64 #1 SMP Debian 4.18.6-1 (2018-09-06) x86_64",
+  "time_elapsed":{
+    "__type__":"TimeAttribute",
+    "start":1539953735.1110389,
+    "end":1539953735.1723731
+  },
+  "tests":{
+    "igt@successtest@first-subtest":{
+      "out":"Starting subtest: first-subtest\nSubtest first-subtest: SUCCESS (0.000s)\n",
+      "igt-version":"IGT-Version: 1.23-g0c763bfd (x86_64) (Linux: 4.18.0-1-amd64 x86_64)",
+      "result":"warn",
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0
+      },
+      "err":"Starting subtest: first-subtest\nThis is a warning line\nSubtest first-subtest: SUCCESS (0.000s)\n",
+	"dmesg":"<6> [3216186.095083] Console: switching to colour dummy device 80x25\n<6> [3216186.095097] [IGT] successtest: executing\n<6> [3216186.101115] [IGT] successtest: starting subtest first-subtest\n<3> [3216186.101159] Warning from kernel\n<6> [3216186.101160] [IGT] successtest: exiting, ret=0\n<6> [3216186.101299] Console: switching to colour frame buffer device 240x75\n"
+    },
+    "igt@successtest@second-subtest":{
+      "out":"Starting subtest: second-subtest\nSubtest second-subtest: SUCCESS (0.000s)\n",
+      "igt-version":"IGT-Version: 1.23-g0c763bfd (x86_64) (Linux: 4.18.0-1-amd64 x86_64)",
+      "result":"pass",
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0
+      },
+      "err":"Starting subtest: second-subtest\nSubtest second-subtest: SUCCESS (0.000s)\n",
+      "dmesg":"<6> [3216186.111837] Console: switching to colour dummy device 80x25\n<6> [3216186.111851] [IGT] successtest: executing\n<6> [3216186.114762] [IGT] successtest: starting subtest second-subtest\n<6> [3216186.114814] [IGT] successtest: exiting, ret=0\n<6> [3216186.114933] Console: switching to colour frame buffer device 240x75\n"
+    },
+    "igt@no-subtests":{
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0.01
+      },
+      "result":"pass",
+      "out":"IGT-Version: 1.23-g0c763bfd (x86_64) (Linux: 4.18.0-1-amd64 x86_64)\nSUCCESS (0.000s)\n",
+      "igt-version":"IGT-Version: 1.23-g0c763bfd (x86_64) (Linux: 4.18.0-1-amd64 x86_64)",
+      "err":"",
+      "dmesg":"<6> [3216186.123400] Console: switching to colour dummy device 80x25\n<6> [3216186.123414] [IGT] no-subtests: executing\n<6> [3216186.125204] [IGT] no-subtests: exiting, ret=0\n<6> [3216186.125374] Console: switching to colour frame buffer device 240x75\n"
+    },
+    "igt@skippers@skip-one":{
+      "out":"Test requirement not met in function __real_main3, file ..\/runner\/testdata\/skippers.c:6:\nTest requirement: false\nSkipping from fixture\nLast errno: 2, No such file or directory\nSubtest skip-one: SKIP\n",
+      "igt-version":"IGT-Version: 1.23-g0c763bfd (x86_64) (Linux: 4.18.0-1-amd64 x86_64)",
+      "result":"skip",
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0
+      },
+      "err":"Subtest skip-one: SKIP\n",
+      "dmesg":"<6> [3216186.135188] Console: switching to colour dummy device 80x25\n<6> [3216186.135212] [IGT] skippers: executing\n<6> [3216186.137075] [IGT] skippers: exiting, ret=77\n<6> [3216186.137206] Console: switching to colour frame buffer device 240x75\n"
+    },
+    "igt@skippers@skip-two":{
+      "out":"Test requirement not met in function __real_main3, file ..\/runner\/testdata\/skippers.c:6:\nTest requirement: false\nSkipping from fixture\nLast errno: 2, No such file or directory\nSubtest skip-two: SKIP\n",
+      "igt-version":"IGT-Version: 1.23-g0c763bfd (x86_64) (Linux: 4.18.0-1-amd64 x86_64)",
+      "result":"skip",
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0
+      },
+      "err":"Subtest skip-two: SKIP\n",
+      "dmesg":"<6> [3216186.145899] Console: switching to colour dummy device 80x25\n<6> [3216186.145912] [IGT] skippers: executing\n<6> [3216186.147754] [IGT] skippers: exiting, ret=77\n<6> [3216186.147894] Console: switching to colour frame buffer device 240x75\n"
+    }
+  },
+  "totals":{
+    "":{
+      "crash":0,
+      "pass":2,
+      "dmesg-fail":0,
+      "dmesg-warn":0,
+      "skip":2,
+      "incomplete":0,
+      "timeout":0,
+      "notrun":0,
+      "fail":0,
+      "warn":1
+    },
+    "root":{
+      "crash":0,
+      "pass":2,
+      "dmesg-fail":0,
+      "dmesg-warn":0,
+      "skip":2,
+      "incomplete":0,
+      "timeout":0,
+      "notrun":0,
+      "fail":0,
+      "warn":1
+    },
+    "igt@successtest":{
+      "crash":0,
+      "pass":1,
+      "dmesg-fail":0,
+      "dmesg-warn":0,
+      "skip":0,
+      "incomplete":0,
+      "timeout":0,
+      "notrun":0,
+      "fail":0,
+      "warn":1
+    },
+    "igt@no-subtests":{
+      "crash":0,
+      "pass":1,
+      "dmesg-fail":0,
+      "dmesg-warn":0,
+      "skip":0,
+      "incomplete":0,
+      "timeout":0,
+      "notrun":0,
+      "fail":0,
+      "warn":0
+    },
+    "igt@skippers":{
+      "crash":0,
+      "pass":0,
+      "dmesg-fail":0,
+      "dmesg-warn":0,
+      "skip":2,
+      "incomplete":0,
+      "timeout":0,
+      "notrun":0,
+      "fail":0,
+      "warn":0
+    }
+  },
+  "runtimes":{
+    "igt@successtest":{
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0.027
+      }
+    },
+    "igt@no-subtests":{
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0.01
+      }
+    },
+    "igt@skippers":{
+      "time":{
+        "__type__":"TimeAttribute",
+        "start":0,
+        "end":0.020999999999999998
+      }
+    }
+  }
+}

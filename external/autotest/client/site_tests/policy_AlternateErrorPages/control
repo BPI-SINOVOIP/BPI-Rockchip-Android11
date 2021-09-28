@@ -1,0 +1,21 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_AlternateErrorPages'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of policy_AlternateErrorPages policy.
+The control files will enable, disable, and not set the policy.
+When the policy is Enabled, the URL error page will give the user suggestions
+for alterate pages. E.g., "Did you mean ..."
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_AlternateErrorPages', **args_dict)

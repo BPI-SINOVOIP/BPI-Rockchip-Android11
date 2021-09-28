@@ -1,0 +1,40 @@
+# Copyright 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'matthewmwang'
+TIME = 'SHORT'
+NAME = 'network_WiFi_RoamFT.EAP'
+TEST_TYPE = 'Server'
+ATTRIBUTES = ('suite:wifi_matfunc')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test attempts to verify that we can roam between two APs using the FT-EAP
+key management suite (i.e. WPA-EAP with Fast BSS Transition) in full view of the
+DUT. Fast BSS Transition is part of the 802.11r protocol, which describes a
+procedure for fast roaming from one AP to another within an SSID.
+"""
+
+from autotest_lib.client.common_lib.cros import site_eap_certs
+from autotest_lib.client.common_lib.cros.network import xmlrpc_security_types
+
+def run(machine):
+    ft_eap_config = xmlrpc_security_types.WPAEAPConfig(
+        server_ca_cert=site_eap_certs.ca_cert_1,
+        server_cert=site_eap_certs.server_cert_1,
+        server_key=site_eap_certs.server_private_key_1,
+        client_ca_cert=site_eap_certs.ca_cert_1,
+        client_cert=site_eap_certs.client_cert_1,
+        client_key=site_eap_certs.client_private_key_1,
+        wpa_mode=xmlrpc_security_types.WPAConfig.MODE_PURE_WPA2,
+        ft_mode=xmlrpc_security_types.WPAConfig.FT_MODE_PURE)
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_RoamFT',
+                 tag=NAME.split('.')[1],
+                 host=host,
+                 raw_cmdline_args=args,
+                 additional_params=[ft_eap_config])
+
+
+parallel_simple(run, machines)

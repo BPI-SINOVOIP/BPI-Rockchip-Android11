@@ -1,0 +1,23 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_DefaultSearchProvider'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of the DefaultSearchProviderSearchURL and
+DefaultSearchProviderKeyword policy. When the DefaultSearchProviderSearchURL
+policy is set, the specified search url will be used when a value is entered
+in the omnibox. When the DefaultSearchProviderKeyword is set, the value will
+trigger the shortcut used in the omnibox to trigger the search for this
+provider.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+job.run_test('policy_DefaultSearchProvider', **args_dict)

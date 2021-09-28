@@ -1,0 +1,51 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterSASanity.sa_suspend_resume_advertising_test'
+PURPOSE = 'Test bluetooth adapter advertising across suspend/resume.'
+CRITERIA = 'Adapter should advertise with correct parameters.'
+ATTRIBUTES = 'suite:bluetooth_flaky'
+TIME = 'SHORT'  # ~3 minutes on Eve
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth'
+
+DOC = """
+This test case verifies that the Bluetooth adapter of the DUT can
+behave as a Bluetooth low-energy device and advertise correctly around
+a suspend/resume.
+
+This autotest include the following test cases:
+    self.test_case_SI200_RA3_CD_SR_CD_UA3()
+    self.test_case_RA3_CD_SI200_CD_SR_CD_UA3()
+    self.test_case_SI200_RA1_CD_SR_CD_UA1()
+    self.test_case_RA1_CD_SI200_CD_SR_CD_UA1()
+
+Mnemonics of the test cases:
+    CD: check advertising duration and intervals
+    RA: register advertisements
+    UA: unregister advertisements
+    SI: set advertising intervals
+    RS: reset advertising
+    FRA: fail to register extra advertisements when max ones have
+         been registered.
+    FSI: fail to set advertising intervals beyond legitimate range
+         of [20 ms, 10,240 ms].
+    PC: power cycle the bluetooth adapter (controller).
+    SR: suspend and resume the DUT (chromebook)
+
+"""
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('bluetooth_AdapterSASanity', host=host,
+                  num_iterations=1, test_name=NAME.split('.')[1])
+
+parallel_simple(run, machines)

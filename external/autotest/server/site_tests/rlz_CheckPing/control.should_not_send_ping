@@ -1,0 +1,33 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "kyleshima, Chromium OS"
+NAME = "rlz_CheckPing.should_not_send_ping"
+PURPOSE = "Test rlz related vpd setting: should_send_rlz_ping."
+TIME = "Short"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:rlz"
+DOC = """
+This tests that no first-use event (CAF) ping is sent if the
+should_send_rlz_ping vpd setting has not been set to 1. The install event
+(CAI) ping will still be sent once the ping delay has elapsed.
+"""
+
+import datetime
+
+from autotest_lib.client.common_lib import utils
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test(
+        'rlz_CheckPing', host=host,
+        rlz_embargo_end_date=(
+            datetime.date.today() - datetime.timedelta(days=2)),
+        should_send_rlz_ping=0, **args_dict)
+
+job.parallel_simple(run, machines)

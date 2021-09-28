@@ -1,0 +1,15 @@
+// GENERATED, do not edit
+// for changes, see genmakefiles.py
+cc_library_static {
+    name: "v8_libsampler",
+    defaults: ["v8_defaults"],
+    srcs: ["src/libsampler/sampler.cc"],
+    local_include_dirs: [
+        "src",
+        "include",
+    ],
+    apex_available: [
+        "com.android.art.debug",
+        "com.android.art.release",
+    ],
+}

@@ -1,0 +1,22 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "wzang"
+NAME = "enterprise_OnlineDemoMode"
+ATTRIBUTES = "suite:bvt-perbuild"
+TIME = "SHORT"
+TEST_CATEGORY = "Enterprise"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+JOB_RETRIES = 2
+
+DOC = """
+This test enrolls a Chrome OS device to online demo mode.
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('enterprise_OnlineDemoMode', host=host)
+
+job.parallel_simple(run, machines)

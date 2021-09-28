@@ -1,0 +1,34 @@
+class ConstructorCalls {
+
+    void testNormalConstructor() {
+        new OtherClass();
+    }
+
+    void testInnerClassConstructor() {
+        OtherClass oc = new OtherClass();
+        oc.new InnerClass();
+    }
+
+    void testInnerClassConstructorWithNewScope() {
+        new OtherClass().new InnerClass();
+    }
+
+    void testInnerInnerClassConstructor() {
+        new OtherClass().new InnerClass().new InnerInnerClass();
+    }
+}
+
+class OtherClass {
+
+    OtherClass() {}
+
+    class InnerClass {
+
+        InnerClass() {}
+
+        class InnerInnerClass {
+
+            InnerInnerClass() {}
+        }
+    }
+}

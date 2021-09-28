@@ -1,0 +1,26 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "telemetry_Sanity"
+PURPOSE = "Run telemetry_sanity.py."
+CRITERIA = """
+Test will fail if telemetry_sanity fails.
+"""
+# crbug.com/930157: This test is flaky and blocks CQ, disable it until fixed.
+ATTRIBUTES = "suite:bvt-perbuild, suite:smoke"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "login"
+TEST_TYPE = "client"
+
+DOC = """
+This test runs telemetry_sanity.py
+"""
+
+job.run_test('telemetry_Sanity',
+             count=1,
+             run_cryptohome=True,
+             run_incognito=False,  # crbug.com/970065.
+             run_screenlock=True)

@@ -1,0 +1,45 @@
+FROM fedora:30
+
+RUN dnf install -y \
+	gcc flex bison libatomic meson ninja-build xdotool \
+	'pkgconfig(libdrm)' \
+	'pkgconfig(pciaccess)' \
+	'pkgconfig(libkmod)' \
+	'pkgconfig(libprocps)' \
+	'pkgconfig(libunwind)' \
+	'pkgconfig(libdw)' \
+	'pkgconfig(pixman-1)' \
+	'pkgconfig(valgrind)' \
+	'pkgconfig(cairo)' \
+	'pkgconfig(libudev)' \
+	'pkgconfig(glib-2.0)' \
+	'pkgconfig(gsl)' \
+	'pkgconfig(alsa)' \
+	'pkgconfig(xmlrpc)' \
+	'pkgconfig(xmlrpc_util)' \
+	'pkgconfig(xmlrpc_client)' \
+	'pkgconfig(json-c)' \
+	'pkgconfig(gtk-doc)' \
+	'pkgconfig(xv)' \
+	'pkgconfig(xrandr)' \
+	python3-docutils
+
+# We need peg to build overlay
+RUN dnf install -y make
+RUN mkdir /tmp/peg
+WORKDIR /tmp/peg
+# originaly from http://piumarta.com/software/peg/
+RUN curl -O https://intel-gfx-ci.01.org/mirror/peg/peg-0.1.18.tar.gz
+RUN tar xf peg-0.1.18.tar.gz
+RUN cd peg-0.1.18 && make PREFIX=/usr install
+RUN rm -fr /tmp/peg
+
+# For compile-testing on clang
+RUN dnf install -y clang
+
+# Meson version switching shenanigans
+WORKDIR /usr/src
+RUN curl -O https://files.pythonhosted.org/packages/c0/9b/44cdb8adcbb186be6cba5c93718d0c68f177b0e8082ae00cafa63a1d3535/meson-0.47.0.tar.gz
+
+# Cleanup workdir
+WORKDIR /

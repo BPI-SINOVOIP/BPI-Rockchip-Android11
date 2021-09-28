@@ -1,0 +1,588 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang++",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang++",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "CLANG=somepath/clang"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "somepath/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "-Xclang-path=/somedir",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/somedir/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "-resource-dir=someResourceDir",
+            "--gcc-toolchain=/usr",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "-Xclang-path=/somedir",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/gomacc",
+          "args": [
+            "/somedir/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "-resource-dir=someResourceDir",
+            "--gcc-toolchain=/usr",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "-Xclang-path=/somedir",
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/somedir/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "-resource-dir=someResourceDir",
+            "--gcc-toolchain=/usr",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./a/b/c/d/e/f/g/x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "a/b/usr/bin/clang",
+          "args": [
+            "--sysroot=/tmp/stable/a/b/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-Ba/b/bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./symlinked/x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "a/b/usr/bin/clang",
+          "args": [
+            "--sysroot=/tmp/stable/a/b/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-Ba/b/bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "somedir/x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "PATH=/tmp/stable/pathenv"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  }
+]

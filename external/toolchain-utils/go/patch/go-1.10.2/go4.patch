@@ -1,0 +1,199 @@
+runtime, crypto/x509: add -target flag.
+
+--- src/crypto/x509/x509_test.go
++++ src/crypto/x509/x509_test.go
+@@ -13,29 +13,32 @@ import (
+ 	"crypto/rsa"
+ 	_ "crypto/sha256"
+ 	_ "crypto/sha512"
+ 	"crypto/x509/pkix"
+ 	"encoding/asn1"
+ 	"encoding/base64"
+ 	"encoding/hex"
+ 	"encoding/pem"
++	"flag"
+ 	"fmt"
+ 	"internal/testenv"
+ 	"math/big"
+ 	"net"
+ 	"net/url"
+ 	"os/exec"
+ 	"reflect"
+ 	"runtime"
+ 	"strings"
+ 	"testing"
+ 	"time"
+ )
+ 
++var target = flag.String("target", "", "if non empty, use 'go_target' to compile test files and 'go_target_exec' to run the binaries")
++
+ func TestParsePKCS1PrivateKey(t *testing.T) {
+ 	block, _ := pem.Decode([]byte(pemPrivateKey))
+ 	priv, err := ParsePKCS1PrivateKey(block.Bytes)
+ 	if err != nil {
+ 		t.Errorf("Failed to parse private key: %s", err)
+ 		return
+ 	}
+ 	if priv.PublicKey.N.Cmp(rsaPrivateKey.PublicKey.N) != 0 ||
+@@ -1089,17 +1092,23 @@ func TestParsePEMCRL(t *testing.T) {
+ 	}
+ 
+ 	// Can't check the signature here without a package cycle.
+ }
+ 
+ func TestImports(t *testing.T) {
+ 	testenv.MustHaveGoRun(t)
+ 
+-	if err := exec.Command(testenv.GoToolPath(t), "run", "x509_test_import.go").Run(); err != nil {
++	var cmd *exec.Cmd
++	if *target == "" {
++		cmd = exec.Command(testenv.GoToolPath(t), "run", "x509_test_import.go")
++	} else {
++		cmd = exec.Command("go_"+*target, "run", "-exec", "go_"+*target+"_exec", "x509_test_import.go")
++	}
++	if err := cmd.Run(); err != nil {
+ 		t.Errorf("failed to run x509_test_import.go: %s", err)
+ 	}
+ }
+ 
+ const derCRLBase64 = "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"
+ 
+ const pemCRLBase64 = "LS0tLS1CRUdJTiBYNTA5IENSTC0tLS0tDQpNSUlCOWpDQ0FWOENBUUV3RFFZSktvWklodmNOQVFFRkJRQXdiREVhTUJnR0ExVUVDaE1SVWxOQklGTmxZM1Z5DQphWFI1SUVsdVl5NHhIakFjQmdOVkJBTVRGVkpUUVNCUWRXSnNhV01nVW05dmRDQkRRU0IyTVRFdU1Dd0dDU3FHDQpTSWIzRFFFSkFSWWZjbk5oYTJWdmJuSnZiM1J6YVdkdVFISnpZWE5sWTNWeWFYUjVMbU52YlJjTk1URXdNakl6DQpNVGt5T0RNd1doY05NVEV3T0RJeU1Ua3lPRE13V2pDQmpEQktBaEVBckRxb2g5RkhKSFhUN09QZ3V1bjQrQmNODQpNRGt4TVRBeU1UUXlOekE1V2pBbU1Bb0dBMVVkRlFRRENnRUpNQmdHQTFVZEdBUVJHQTh5TURBNU1URXdNakUwDQpNalExTlZvd1BnSVJBTEd6blowOTVQQjVhQU9MUGc1N2ZNTVhEVEF5TVRBeU16RTBOVEF4TkZvd0dqQVlCZ05WDQpIUmdFRVJnUE1qQXdNakV3TWpNeE5EVXdNVFJhb0RBd0xqQWZCZ05WSFNNRUdEQVdnQlQxVERGNlVRTS9MTmVMDQpsNWx2cUhHUXEzZzltekFMQmdOVkhSUUVCQUlDQUlRd0RRWUpLb1pJaHZjTkFRRUZCUUFEZ1lFQUZVNUFzNk16DQpxNVBSc2lmYW9iUVBHaDFhSkx5QytNczVBZ2MwYld5QTNHQWR4dXI1U3BQWmVSV0NCamlQL01FSEJXSkNsQkhQDQpHUmNxNXlJZDNFakRrYUV5eFJhK2k2N0x6dmhJNmMyOUVlNks5cFNZd2ppLzdSVWhtbW5Qclh0VHhsTDBsckxyDQptUVFKNnhoRFJhNUczUUE0Q21VZHNITnZicnpnbUNZcHZWRT0NCi0tLS0tRU5EIFg1MDkgQ1JMLS0tLS0NCg0K"
+ 
+--- src/runtime/crash_cgo_test.go
++++ src/runtime/crash_cgo_test.go
+@@ -279,17 +279,17 @@ func testCgoPprof(t *testing.T, buildArg, runArg string) {
+ 	}
+ 	testenv.MustHaveGoRun(t)
+ 
+ 	exe, err := buildTestProg(t, "testprogcgo", buildArg)
+ 	if err != nil {
+ 		t.Fatal(err)
+ 	}
+ 
+-	got, err := testenv.CleanCmdEnv(exec.Command(exe, runArg)).CombinedOutput()
++	got, err := testenv.CleanCmdEnv(goExecCmd(exe, runArg)).CombinedOutput()
+ 	if err != nil {
+ 		if testenv.Builder() == "linux-amd64-alpine" {
+ 			// See Issue 18243 and Issue 19938.
+ 			t.Skipf("Skipping failing test on Alpine (golang.org/issue/18243). Ignoring error: %v", err)
+ 		}
+ 		t.Fatal(err)
+ 	}
+ 	fn := strings.TrimSpace(string(got))
+--- src/runtime/crash_test.go
++++ src/runtime/crash_test.go
+@@ -17,16 +17,35 @@ import (
+ 	"runtime"
+ 	"strconv"
+ 	"strings"
+ 	"sync"
+ 	"testing"
+ 	"time"
+ )
+ 
++var target = flag.String("target", "", "if non empty, use 'go_target' to compile test files and 'go_target_exec' to run the binaries")
++
++func goCmd(t *testing.T) string {
++	if *target != "" {
++		return "go_" + *target
++	}
++	return testenv.GoToolPath(t)
++}
++
++func goExecCmd(name string, arg ...string) *exec.Cmd {
++	var cmd []string
++	if *target != "" {
++		cmd = append(cmd, "go_"+*target+"_exec")
++	}
++	cmd = append(cmd, name)
++	cmd = append(cmd, arg...)
++	return exec.Command(cmd[0], cmd[1:]...)
++}
++
+ var toRemove []string
+ 
+ func TestMain(m *testing.M) {
+ 	status := m.Run()
+ 	for _, file := range toRemove {
+ 		os.RemoveAll(file)
+ 	}
+ 	os.Exit(status)
+@@ -50,17 +69,17 @@ func runTestProg(t *testing.T, binary, name string, env ...string) string {
+ 
+ 	testenv.MustHaveGoBuild(t)
+ 
+ 	exe, err := buildTestProg(t, binary)
+ 	if err != nil {
+ 		t.Fatal(err)
+ 	}
+ 
+-	cmd := testenv.CleanCmdEnv(exec.Command(exe, name))
++	cmd := testenv.CleanCmdEnv(goExecCmd(exe, name))
+ 	cmd.Env = append(cmd.Env, env...)
+ 	if testing.Short() {
+ 		cmd.Env = append(cmd.Env, "RUNTIME_TEST_SHORT=1")
+ 	}
+ 	var b bytes.Buffer
+ 	cmd.Stdout = &b
+ 	cmd.Stderr = &b
+ 	if err := cmd.Start(); err != nil {
+@@ -125,17 +144,17 @@ func buildTestProg(t *testing.T, binary string, flags ...string) (string, error)
+ 		name += "_" + strings.Join(flags, "_")
+ 	}
+ 	target, ok := testprog.target[name]
+ 	if ok {
+ 		return target.exe, target.err
+ 	}
+ 
+ 	exe := filepath.Join(testprog.dir, name+".exe")
+-	cmd := exec.Command(testenv.GoToolPath(t), append([]string{"build", "-o", exe}, flags...)...)
++	cmd := exec.Command(goCmd(t), append([]string{"build", "-o", exe}, flags...)...)
+ 	cmd.Dir = "testdata/" + binary
+ 	out, err := testenv.CleanCmdEnv(cmd).CombinedOutput()
+ 	if err != nil {
+ 		target.err = fmt.Errorf("building %s %v: %v\n%s", binary, flags, err, out)
+ 		testprog.target[name] = target
+ 		return "", target.err
+ 	}
+ 	target.exe = exe
+@@ -456,17 +475,17 @@ func TestPanicLoop(t *testing.T) {
+ func TestMemPprof(t *testing.T) {
+ 	testenv.MustHaveGoRun(t)
+ 
+ 	exe, err := buildTestProg(t, "testprog")
+ 	if err != nil {
+ 		t.Fatal(err)
+ 	}
+ 
+-	got, err := testenv.CleanCmdEnv(exec.Command(exe, "MemProf")).CombinedOutput()
++	got, err := testenv.CleanCmdEnv(goExecCmd(exe, "MemProf")).CombinedOutput()
+ 	if err != nil {
+ 		t.Fatal(err)
+ 	}
+ 	fn := strings.TrimSpace(string(got))
+ 	defer os.Remove(fn)
+ 
+ 	for try := 0; try < 2; try++ {
+ 		cmd := testenv.CleanCmdEnv(exec.Command(testenv.GoToolPath(t), "tool", "pprof", "-alloc_space", "-top"))
+--- src/runtime/crash_unix_test.go
++++ src/runtime/crash_unix_test.go
+@@ -244,17 +244,17 @@ func testPanicSystemstackInternal() {
+ }
+ 
+ func TestSignalExitStatus(t *testing.T) {
+ 	testenv.MustHaveGoBuild(t)
+ 	exe, err := buildTestProg(t, "testprog")
+ 	if err != nil {
+ 		t.Fatal(err)
+ 	}
+-	err = testenv.CleanCmdEnv(exec.Command(exe, "SignalExitStatus")).Run()
++	err = testenv.CleanCmdEnv(goExecCmd(exe, "SignalExitStatus")).Run()
+ 	if err == nil {
+ 		t.Error("test program succeeded unexpectedly")
+ 	} else if ee, ok := err.(*exec.ExitError); !ok {
+ 		t.Errorf("error (%v) has type %T; expected exec.ExitError", err, err)
+ 	} else if ws, ok := ee.Sys().(syscall.WaitStatus); !ok {
+ 		t.Errorf("error.Sys (%v) has type %T; expected syscall.WaitStatus", ee.Sys(), ee.Sys())
+ 	} else if !ws.Signaled() || ws.Signal() != syscall.SIGTERM {
+ 		t.Errorf("got %v; expected SIGTERM", ee)

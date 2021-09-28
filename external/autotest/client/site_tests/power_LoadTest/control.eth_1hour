@@ -1,0 +1,29 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_LoadTest.eth_1hour"
+ATTRIBUTES = ""
+PURPOSE = "Measure power draw when system is under load."
+CRITERIA = "This test is a benchmark."
+TIME = "LONG"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test runs a load test consisting of cycling though web pages, playing
+videos, etc. and measures battery power draw. The maximum duration of this test
+in seconds is determined by the loop_time * loop_cnt.
+"""
+loop_time = 3600
+loop_count = 1
+
+# Run this test to verify PLT on systems where wlan is not properly running
+# yet.
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_LoadTest', loop_time=loop_time, loop_count=loop_count,
+             test_low_batt_p=6, check_network=False, tag=NAME.split('.')[1],
+             pdash_note=pdash_note)

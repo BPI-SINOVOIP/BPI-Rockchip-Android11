@@ -1,0 +1,35 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "allenwebb"
+NAME = "firmware_Cr50PinWeaverServer.faft_cr50_tot"
+PURPOSE = "Validate PinWeaver functionality on Cr50"
+ATTRIBUTES = "suite:faft_cr50_tot"
+TIME = "SHORT"
+TEST_TYPE = "server"
+
+DOC = """
+Check that PinWeaver functionality on Cr50 works as intended across hard
+reboots of Cr50. A server test is needed because when Cr50 reboots the
+device needs to restart.
+
+If the device doesn't have Cr50, the test returns success without
+resetting the machine.
+
+This test is applicable when using ToT cr50 module.
+TODO(crbug.com/1014572) Drop this control file once suites can inject test args.
+"""
+
+args_dict = utils.args_to_dict(args)
+
+# crbug.com/1014572: Inject test args.
+args_dict['tot_test_run'] = 'true'
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test("firmware_Cr50PinWeaverServer", host=host, cmdline_args=args)
+
+parallel_simple(run, machines)

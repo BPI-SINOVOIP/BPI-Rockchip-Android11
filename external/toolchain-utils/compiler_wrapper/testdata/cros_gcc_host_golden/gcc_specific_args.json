@@ -1,0 +1,80 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-march=goldmont",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-march=goldmont",
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-march=goldmont-plus",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-march=goldmont-plus",
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-march=skylake",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-march=skylake",
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  }
+]

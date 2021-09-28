@@ -1,0 +1,19 @@
+name: "pybind11"
+description:
+    "pybind11 is a lightweight header-only library that exposes C++ types in "
+    "Python and vice versa, mainly to create Python bindings of existing C++ "
+    "code."
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://pybind11.readthedocs.io/en/stable/"
+  }
+  url {
+   type: GIT
+    value: "https://github.com/pybind/pybind11.git"
+  }
+  version: "v2.4.3"
+  last_upgrade_date { year: 2019 month: 11 day: 4 }
+  license_type: NOTICE
+}
+

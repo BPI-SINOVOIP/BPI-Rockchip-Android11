@@ -1,0 +1,73 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+// Controls the type of tokenization the model will use for the input text.
+namespace libtextclassifier3;
+enum TokenizationType : int {
+  INVALID_TOKENIZATION_TYPE = 0,
+
+  // Use the internal tokenizer for tokenization.
+  INTERNAL_TOKENIZER = 1,
+
+  // Use ICU for tokenization.
+  ICU = 2,
+
+  // First apply ICU tokenization. Then identify stretches of tokens
+  // consisting only of codepoints in internal_tokenizer_codepoint_ranges
+  // and re-tokenize them using the internal tokenizer.
+  MIXED = 3,
+
+  // Tokenizer parsing out numbers, words and separators.
+  LETTER_DIGIT = 4,
+}
+
+// Role of the codepoints in the range.
+namespace libtextclassifier3.TokenizationCodepointRange_;
+enum Role : int {
+  // Concatenates the codepoint to the current run of codepoints.
+  DEFAULT_ROLE = 0,
+
+  // Splits a run of codepoints before the current codepoint.
+  SPLIT_BEFORE = 1,
+
+  // Splits a run of codepoints after the current codepoint.
+  SPLIT_AFTER = 2,
+
+  // Each codepoint will be a separate token. Good e.g. for Chinese
+  // characters.
+  TOKEN_SEPARATOR = 3,
+
+  // Discards the codepoint.
+  DISCARD_CODEPOINT = 4,
+
+  // Common values:
+  // Splits on the characters and discards them. Good e.g. for the space
+  // character.
+  WHITESPACE_SEPARATOR = 7,
+}
+
+// Represents a codepoint range [start, end) with its role for tokenization.
+namespace libtextclassifier3;
+table TokenizationCodepointRange {
+  start:int;
+  end:int;
+  role:TokenizationCodepointRange_.Role;
+
+  // Integer identifier of the script this range denotes. Negative values are
+  // reserved for Tokenizer's internal use.
+  script_id:int;
+}
+

@@ -1,0 +1,171 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "FORCE_DISABLE_WERROR=1"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "FORCE_DISABLE_WERROR=1"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        },
+        "stderr": "-Werror originalerror",
+        "exitcode": 1
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-Wno-error"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "FORCE_DISABLE_WERROR=1"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stderr": "-Werror originalerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        },
+        "stderr": "-Werror originalerror",
+        "exitcode": 1
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-Wno-error"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  }
+]

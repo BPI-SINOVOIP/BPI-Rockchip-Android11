@@ -1,0 +1,20 @@
+# Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'pstew, quiche, wiley, briannorris'
+NAME = 'network_WlanRegulatory'
+ATTRIBUTES = 'suite:wifi_matfunc'
+TIME = 'SHORT'
+TEST_TYPE = 'client'
+# To be safe, let's avoid setting non-default regulatory domains outside of an
+# RF chamber.
+DEPENDENCIES = 'wificell'
+
+DOC = """
+Ensure the regulatory database is sane and that we can successfully switch
+domains using the "iw" userspace utility.
+"""
+
+
+job.run_test('network_WlanRegulatory')

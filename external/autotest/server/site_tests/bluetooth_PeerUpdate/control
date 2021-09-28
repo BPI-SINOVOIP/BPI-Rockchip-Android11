@@ -1,0 +1,59 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_PeerUpdate'
+PURPOSE = 'Update chameleond on Bluetooth peer device'
+CRITERIA = 'Bluetooth peer should be present'
+ATTRIBUTES = 'suite:bluetooth, suite:bluetooth_e2e, suite:bluetooth_flaky'
+TIME = 'SHORT'    # This test takes about 1 minutes while running locally
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_peer'
+
+DOC = """
+
+This is not a test. This 'test' checks the chameleond version on the
+Bluetooth peer and updates if it is less that expected version in the test.
+
+Use this test if you have made a change to chameleond which should be deployed
+in the lab.
+
+Please follow the steps to update chameleond version in the lab.
+
+1) Test and update chameleond code
+- Deploy the change in chameleon in a local bt peer
+  and run bluetooth_AdapterQuickSanity against it.
+- Increase self.bt_pkg_version in 'chameleond/drivers/fpga_tio.py'
+- Merge the changes
+
+2) Update test and merge changes to this test
+
+After chameleond changes are merged
+- run make in chamleon folder
+- copy dist/chameleond-0.0.2.tar.gz to server/site_tests/bluetooth_PeerUpdate
+- Change CUR_BT_PKG_VERSION in bluetooth_PeerUpdate.py
+- merge the change
+
+Once the change is merged, the test will be run in the lab and peer devices
+will be updated.
+
+Note: Due to way the scheduler works, if there is more than one DUT of same
+model, test will be run only on one of them. Thus the process is indeterministic
+now but over a large period of time all the peer devices in the lab should(?)
+be updated.
+
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_PeerUpdate', host=host)
+
+parallel_simple(run, machines)

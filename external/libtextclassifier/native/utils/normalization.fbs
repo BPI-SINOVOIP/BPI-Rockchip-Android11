@@ -1,0 +1,40 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+// The possible codepoint wise normalization operations.
+namespace libtextclassifier3.NormalizationOptions_;
+enum CodepointwiseNormalizationOp : int {
+  NONE = 0,
+
+  // Lower-case the string.
+  LOWERCASE = 1,
+
+  // Upper-case the string.
+  UPPERCASE = 4,
+
+  // Remove whitespace.
+  DROP_WHITESPACE = 8,
+
+  // Remove punctuation.
+  DROP_PUNCTUATION = 16,
+}
+
+namespace libtextclassifier3;
+table NormalizationOptions {
+  // Codepoint wise normalizations to apply, represents a bit field.
+  codepointwise_normalization:uint;
+}
+

@@ -1,0 +1,48 @@
+option('overlay',
+       type : 'feature',
+       description : 'Build overlay tool')
+
+option('overlay_backends',
+       type : 'array',
+       value : ['auto'],
+       choices : [ 'auto', 'x', 'xv' ],
+       description : 'Overlay backends to enable')
+
+option('chamelium',
+       type : 'feature',
+       description : 'Build Chamelium test')
+
+option('valgrind',
+       type : 'feature',
+       description : 'Build with support for valgrind annotations')
+
+option('man',
+       type : 'feature',
+       description : 'Build man pages')
+
+option('docs',
+       type : 'feature',
+       description : 'Build documentation')
+
+option('tests',
+       type : 'feature',
+       description : 'Build tests')
+
+option('libdrm_drivers',
+       type : 'array',
+       value : ['auto'],
+       choices : ['', 'auto', 'intel', 'nouveau', 'amdgpu'],
+       description : 'libdrm libraries to be used')
+
+option('libunwind',
+       type : 'feature',
+       description : 'Use libunwind')
+
+option('runner',
+       type : 'feature',
+       description : 'Build test runner')
+
+option('use_rpath',
+       type : 'boolean',
+       value : false,
+       description : 'Set runpath on installed executables for libigt.so')

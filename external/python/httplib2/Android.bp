@@ -1,0 +1,50 @@
+// Copyright 2018 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+filegroup {
+    // "cacerts.txt" are identical save for the fact that py3 cacerts.txt has
+    // a newline at the end while py2 cacerts.txt doesn't.
+    name: "cacert_data",
+    srcs: ["python3/httplib2/cacerts.txt"],
+    path: "python3/httplib2",
+}
+
+filegroup {
+    name: "py2_httplib2_srcs",
+    srcs: ["python2/httplib2/*.py"],
+    path: "python2/httplib2",
+}
+
+filegroup {
+    name: "py3_httplib2_srcs",
+    srcs: ["python3/httplib2/*.py"],
+    path: "python3/httplib2",
+}
+
+python_library {
+    name: "py-httplib2",
+    host_supported: true,
+    data: [":cacert_data"],
+    pkg_path: "httplib2",
+    version: {
+          py2: {
+              enabled: true,
+              srcs: [":py2_httplib2_srcs"],
+          },
+          py3: {
+              enabled: true,
+              srcs: [":py3_httplib2_srcs"],
+          },
+    },
+}

@@ -1,0 +1,76 @@
+
+[all]
+fs<3,>=2.2.0
+lxml<5,>=4.0
+zopfli>=0.1.4
+lz4>=1.7.4.2
+matplotlib
+sympy
+
+[all:platform_python_implementation != "PyPy"]
+brotli>=1.0.1
+scipy
+
+[all:platform_python_implementation == "PyPy"]
+brotlipy>=0.7.0
+munkres
+
+[all:python_version < "3.4"]
+enum34>=1.1.6
+singledispatch>=3.4.0.3
+typing>=3.6.4
+
+[all:python_version < "3.8" and platform_python_implementation != "PyPy"]
+unicodedata2>=12.0.0
+
+[all:sys_platform == "darwin"]
+xattr
+
+[graphite]
+lz4>=1.7.4.2
+
+[interpolatable]
+
+[interpolatable:platform_python_implementation != "PyPy"]
+scipy
+
+[interpolatable:platform_python_implementation == "PyPy"]
+munkres
+
+[lxml]
+lxml<5,>=4.0
+
+[lxml:python_version < "3.4"]
+singledispatch>=3.4.0.3
+typing>=3.6.4
+
+[plot]
+matplotlib
+
+[symfont]
+sympy
+
+[type1]
+
+[type1:sys_platform == "darwin"]
+xattr
+
+[ufo]
+fs<3,>=2.2.0
+
+[ufo:python_version < "3.4"]
+enum34>=1.1.6
+
+[unicode]
+
+[unicode:python_version < "3.8" and platform_python_implementation != "PyPy"]
+unicodedata2>=12.0.0
+
+[woff]
+zopfli>=0.1.4
+
+[woff:platform_python_implementation != "PyPy"]
+brotli>=1.0.1
+
+[woff:platform_python_implementation == "PyPy"]
+brotlipy>=0.7.0

@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# Travis build script, cf.
+# https://docs.travis-ci.com/user/customizing-the-build/#Implementing-Complex-Build-Steps.
+
+set -o errexit
+set -o xtrace
+
+case "$TASK" in
+  "CHECK_GIT_HISTORY")
+    python "$(dirname "$0")"/check-git-history.py
+    ;;
+  "BUILD")
+    case "$TRAVIS_OS_NAME" in
+      "linux")
+        source /opt/jdk_switcher/jdk_switcher.sh
+        export JAVA8_HOME="$(jdk_switcher home oraclejdk8)"
+        case "$TRAVIS_JDK_VERSION" in
+          "oraclejdk9")
+            ./gradlew clean assemble check --stacktrace
+            ;;
+          "oraclejdk8")
+            export JAVA_HOMES="$(jdk_switcher home openjdk6)/jre:$(jdk_switcher home openjdk7)/jre:$(jdk_switcher home oraclejdk8)/jre:$(jdk_switcher home oraclejdk9)"
+            ./gradlew clean assemble --stacktrace
+            ./gradlew check :opencensus-all:jacocoTestReport
+            ./gradlew verGJF
+            ;;
+          "openjdk7")
+            # "./gradlew classes testClasses" is a workaround for
+            # https://github.com/gradle/gradle/issues/2421.
+            # See https://github.com/gradle/gradle/issues/2421#issuecomment-319916874.
+            JAVA_HOME="$(jdk_switcher home openjdk8)" ./gradlew classes testClasses
+            ./gradlew clean assemble --stacktrace
+            ./gradlew check
+            ;;
+          *)
+            echo "Unknown JDK version $TRAVIS_JDK_VERSION"
+            exit 1
+            ;;
+        esac
+        ;;
+      "osx")
+        # OS X is a separate case, because the JDK version is determined by the OS X image:
+        # https://docs.travis-ci.com/user/reference/osx/#JDK-and-OS-X
+        ./gradlew clean assemble --stacktrace
+        ./gradlew check
+        ;;
+      *)
+        echo "Unknown OS name $TRAVIS_OS_NAME"
+        exit 1
+        ;;
+    esac
+    ;;
+  "CHECKER_FRAMEWORK")
+    ./gradlew clean assemble -PcheckerFramework=true
+    ;;
+  "CHECK_EXAMPLES_LICENSE")
+    curl -L -o checkstyle-8.12-all.jar https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.12/checkstyle-8.12-all.jar
+    java -DrootDir=. -jar checkstyle-8.12-all.jar -c buildscripts/checkstyle.xml examples/src/
+    ;;
+  "CHECK_EXAMPLES_FORMAT")
+    curl -L -o google-java-format-1.5-all-deps.jar https://github.com/google/google-java-format/releases/download/google-java-format-1.5/google-java-format-1.5-all-deps.jar
+    java -jar google-java-format-1.5-all-deps.jar --set-exit-if-changed --dry-run `find examples/src/ -name '*.java'`
+    ;;
+  "BUILD_EXAMPLES_GRADLE")
+    pushd examples && ./gradlew clean assemble --stacktrace && popd
+    ;;
+  "BUILD_EXAMPLES_MAVEN")
+    pushd examples && mvn clean package appassembler:assemble -e && popd
+    ;;
+  "BUILD_EXAMPLES_BAZEL")
+    pushd examples && bazel clean && bazel build :all && popd
+    ;;
+  *)
+    echo "Unknown task $TASK"
+    exit 1
+    ;;
+esac

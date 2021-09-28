@@ -1,0 +1,15 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = 'blktestsSuiteLoopOverFile'
+AUTHOR = 'The Chromium OS Authors'
+TIME = 'MEDIUM'
+TEST_CLASS = 'kernel'
+TEST_CATEGORY = 'Functional'
+TEST_TYPE = 'client'
+DOC = """
+
+"""
+
+job.run_test('blktests', timeout=200)

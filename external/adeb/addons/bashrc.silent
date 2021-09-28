@@ -1,0 +1,4 @@
+source .bashrc.common
+
+homedir=$( getent passwd "$USER" | cut -d: -f6 )
+export HOME=$homedir

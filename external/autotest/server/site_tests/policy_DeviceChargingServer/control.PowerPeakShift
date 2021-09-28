@@ -1,0 +1,134 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+from autotest_lib.server.hosts import cros_host
+
+AUTHOR = 'ncrews'
+DEPENDENCIES = "servo"
+NAME = 'policy_DeviceChargingServer.PowerPeakShift'
+TIME = 'LONG'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = "suite:wilco_bve"
+
+DOC = """
+Ensures the DUT's battery level is in a testable range, clears the TPM if
+needed, and then runs the specified client test to verify charging behavior
+is consistent with policies.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = cros_host.CrosHost.get_servo_arguments(args_dict)
+
+client_test = 'policy_DeviceScheduledCharging'
+
+# The lowest |DevicePowerPeakShift.battery_threshold| we can set is 15%. We need
+# to be able to set it to below our current battery level.
+MIN_BATTERY_LEVEL = 16
+
+# Various interesting day_config values of the policy, assuming the time
+# is noon on a Monday.
+BEFORE_START_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'start_time':{'hour':21, 'minute':0},
+                 'end_time':{'hour':22, 'minute':0},
+                 'charge_start_time':{'hour':23, 'minute':0},
+                }]
+}
+START_THRU_END_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'start_time':{'hour':1, 'minute':0},
+                 'end_time':{'hour':22, 'minute':0},
+                 'charge_start_time':{'hour':23, 'minute':0},
+                }]
+}
+END_THRU_CHARGE_START_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'start_time':{'hour':1, 'minute':0},
+                 'end_time':{'hour':2, 'minute':0},
+                 'charge_start_time':{'hour':23, 'minute':0},
+                }]
+}
+AFTER_CHARGE_START_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'start_time':{'hour':1, 'minute':0},
+                 'end_time':{'hour':2, 'minute':0},
+                 'charge_start_time':{'hour':3, 'minute':0},
+                }]
+}
+
+# A test case consists of the policies, plus the expected power behavior.
+TEST_CASES = [
+    ({'DevicePowerPeakShiftEnabled': False,
+      'DevicePowerPeakShiftBatteryThreshold': 0,
+      'DevicePowerPeakShiftDayConfig':{}},
+     'ON_AC_AND_CHARGING'),
+
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 15,
+      'DevicePowerPeakShiftDayConfig': BEFORE_START_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 15,
+      'DevicePowerPeakShiftDayConfig': START_THRU_END_DAY_CONFIG},
+     'NOT_ON_AC_AND_NOT_CHARGING'),
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 15,
+      'DevicePowerPeakShiftDayConfig': END_THRU_CHARGE_START_DAY_CONFIG},
+     'ON_AC_AND_NOT_CHARGING'),
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 15,
+      'DevicePowerPeakShiftDayConfig': AFTER_CHARGE_START_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 100,
+      'DevicePowerPeakShiftDayConfig': BEFORE_START_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 100,
+      'DevicePowerPeakShiftDayConfig': START_THRU_END_DAY_CONFIG},
+     'ON_AC_AND_NOT_CHARGING'),
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 100,
+      'DevicePowerPeakShiftDayConfig': END_THRU_CHARGE_START_DAY_CONFIG},
+     'ON_AC_AND_NOT_CHARGING'),
+    ({'DevicePowerPeakShiftEnabled': True,
+      'DevicePowerPeakShiftBatteryThreshold': 100,
+      'DevicePowerPeakShiftDayConfig': AFTER_CHARGE_START_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+]
+
+# These are used to cleanup the DUT and to prep the DUT before each test case.
+# See the test for more info.
+ON_AC_AND_NOT_CHARGING_POLICIES = {
+    'DevicePowerPeakShiftEnabled': True,
+    'DevicePowerPeakShiftBatteryThreshold': 15,
+    'DevicePowerPeakShiftDayConfig': END_THRU_CHARGE_START_DAY_CONFIG
+}
+ON_AC_AND_CHARGING_POLICIES = {
+    'DevicePowerPeakShiftEnabled': False,
+    'DevicePowerPeakShiftBatteryThreshold': 0,
+    'DevicePowerPeakShiftDayConfig': {}
+}
+PREP_POLICIES = {
+    'ON_AC_AND_CHARGING'         : (ON_AC_AND_NOT_CHARGING_POLICIES,
+                                    'ON_AC_AND_NOT_CHARGING'),
+    'ON_AC_AND_NOT_CHARGING'     : (ON_AC_AND_CHARGING_POLICIES,
+                                    'ON_AC_AND_CHARGING'),
+    'NOT_ON_AC_AND_NOT_CHARGING' : (ON_AC_AND_CHARGING_POLICIES,
+                                    'ON_AC_AND_CHARGING'),
+}
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('policy_DeviceChargingServer',
+                 host=host,
+                 client_test=client_test,
+                 test_cases=TEST_CASES,
+                 min_battery_level=MIN_BATTERY_LEVEL,
+                 prep_policies=PREP_POLICIES)
+
+parallel_simple(run, machines)

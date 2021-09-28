@@ -1,0 +1,31 @@
+AUTHOR = "Chrome OS Team"
+NAME = "power_Display.cabc"
+PURPOSE = "Measure display power usage."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test records power related statistics while displaying different static
+pages using settings that usually utilize panel CABC algorithm.
+"""
+
+CABC_PAGES = ['white', 'black',
+              'white', 'grey10',
+              'white', 'grey20',
+              'white', 'grey30',
+              'white', 'grey40',
+              'white', 'grey50',
+              'white', 'checker1',
+              'white', 'checker90',
+              'white', 'checker80',
+              'white', 'checker70',
+              'white', 'checker60',
+              'white', 'checker50']
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Display', tag=NAME.split('.')[1], pages=CABC_PAGES,
+             secs_per_page=20, seconds_period=1, pdash_note=pdash_note)

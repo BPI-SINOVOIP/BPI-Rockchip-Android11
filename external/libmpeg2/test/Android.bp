@@ -1,0 +1,21 @@
+cc_test {
+    name: "mpeg2dec",
+    host_supported:true,
+    gtest: false,
+    cflags: [
+        "-DPROFILE_ENABLE",
+        "-DMD5_DISABLE",
+        "-DARM",
+        "-fPIC",
+        "-Wall",
+        "-Werror",
+    ],
+    srcs: ["decoder/main.c"],
+    static_libs: ["libmpeg2dec"],
+    shared_libs: ["liblog"],
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+}

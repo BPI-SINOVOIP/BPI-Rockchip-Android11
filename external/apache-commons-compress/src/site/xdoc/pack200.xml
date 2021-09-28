@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+-->
+<document>
+  <properties>
+    <title>Commons Compress Pack200 Package</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
+    <section name="The Pack200 package">
+
+      <p>The Pack200 algorithm is not a general purpose compression
+      algorithm but one specialized for compressing JAR archives.  JAR
+      archives compressed with Pack200 will in general be different
+      from the original archive when decompressed again.  More
+      information can be found in the Javadocs of the <a
+      href="https://docs.oracle.com/javase/7/docs/api/java/util/jar/Pack200.Packer.html">Pack200.Packer
+      class</a>.</p>
+
+      <p>While the <code>pack200</code> command line utility of the
+      JDK creates GZip compressed archives (<code>.pack.gz</code>) by
+      default, the streams provided by the Pack200 package only
+      perform the actual Pack200 operation.  Wrap them in an
+      additional <code>GzipCompressor(In|Out)putStream</code> in order to deal
+      with deflated streams.</p>
+
+      <subsection name="Pack200Strategy">
+
+        <p>The Pack200-API provided by the java class library is not
+        streaming friendly as it wants to consume its input completely
+        in a single operation.  Because of this
+        <code>Pack200CompressorInputStream</code>'s constructor will immediately
+        unpack the stream, cache the results and provide an input
+        stream to the cache.</p>
+
+        <p><code>Pack200CompressorOutputStream</code> will cache all data that
+        is written to it and then pack it once the <code>finish</code>
+        or <code>close</code> method is called.</p>
+
+        <p>Two different caching modes are available - "in memory",
+        which is the default, and "temporary file".  By default data
+        is cached in memory but you should switch to the temporary
+        file option if your archives are really big.</p>
+
+        <p>Given there always is an intermediate result
+        the <code>getBytesRead</code> and <code>getCount</code>
+        methods of <code>Pack200CompressorInputStream</code> are
+        meaningless (read from the real stream or from the
+        intermediate result?)  and always return 0.</p>
+
+      </subsection>
+
+      <subsection name="Normalization">
+
+        <p>As a pack/unpack cycle may create a JAR archive that is
+        different from the original, digital signatures created for
+        the initial JAR will be broken by the process.  There is a way
+        to "normalize" JAR archives prior to packing them that ensures
+        signatures applied to the "normalized" JAR will still be valid
+        aftre a pack/unpack cycle - see <a
+        href="https://download.oracle.com/javase/7/docs/api/java/util/jar/Pack200.Packer.html">Pack200.Packer</a>'s
+        javadocs.</p>
+
+        <p>The <code>Pack200Utils</code> class in the
+        <code>pack200</code> package provides several overloads of a
+        <code>normalize</code> method that can be used to prepare a
+        JAR archive in place or to a separate file.</p>
+
+      </subsection>
+
+    </section>
+</body>
+</document>

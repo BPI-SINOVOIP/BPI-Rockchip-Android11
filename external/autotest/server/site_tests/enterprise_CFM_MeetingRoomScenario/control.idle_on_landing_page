@@ -1,0 +1,38 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+from autotest_lib.server.cros.cfm.configurable_test.dsl import *
+from autotest_lib.server import utils
+
+AUTHOR = "malmnas@google.com, chromeos-meetings@google.com"
+NAME = "enterprise_CFM_MeetingRoomScenario.idle_on_landing_page"
+PURPOSE = "Tests what happens when CfM stays idle on landing page."
+CRITERIA = "No unexpected resource leakes."
+ATTRIBUTES = "suite:hotrod"
+DEPENDENCIES = "meet_app"
+TIME = "LONG"
+TEST_CATEGORY = "Functional"
+TEST_TYPE = "server"
+
+DOC = """
+Stay idle on the landing page for a long time.
+"""
+
+cfm_test = CfmTest(
+    scenario=Scenario(
+        RebootDut(restart_chrome_for_cfm=True),
+        WaitForMeetingsLandingPage(),
+        StartPerfMetricsCollection(),
+        Sleep(15 * 60),
+        StopPerfMetricsCollection(),
+        UploadPerfMetrics(),
+    ),
+)
+
+def run_test(machine):
+    job.run_test("enterprise_CFM_MeetingRoomScenario",
+                 cfm_test = cfm_test,
+                 tag = 'idle_on_landing_page',
+                 host = hosts.create_host(machine))
+
+parallel_simple(run_test, machines)

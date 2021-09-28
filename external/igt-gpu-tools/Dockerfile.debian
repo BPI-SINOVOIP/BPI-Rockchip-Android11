@@ -1,0 +1,24 @@
+FROM igt-debian-minimal
+
+RUN apt-get update
+RUN apt-get install -y \
+			libunwind-dev \
+			libgsl-dev \
+			libasound2-dev \
+			libxmlrpc-core-c3-dev \
+			libjson-c-dev \
+			libcurl4-openssl-dev \
+			python-docutils \
+			valgrind \
+			peg
+
+RUN apt-get install -t stretch-backports -y \
+					libdrm-intel1
+
+# autotools build deps
+RUN apt-get install -y \
+			autoconf \
+			automake \
+			xutils-dev \
+			libtool \
+			make

@@ -1,0 +1,38 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "shijinabraham@chromium.org"
+NAME = "enterprise_CFM_LogitechMeetupUpdater"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "enterprise"
+ATTRIBUTES = "suite:hotrod"
+TEST_TYPE = "server"
+JOB_RETRIES = 0
+DEPENDENCIES = "meetup"
+
+
+DOC = """
+This test verifies that the Logitech Meetup firmware updater is working
+as intended. This test performs the following
+- Make the rootfs writable.
+- Backup the original firmware.
+- Copy older firmware bundled with test.
+- Force upgrade the Meetup device to older firmware.
+- Powercycle the usb port to trigger the firmware updater.
+- Confirm firmware has been updated.
+- Cleanup
+This test will work on guado and fizz Chromeboxes with Logitech Meetup
+device connected
+"""
+
+args_dict = utils.args_to_dict(args)
+
+def run_test(machine):
+    host = hosts.create_host(machine, servo_args=None)
+    job.run_test(NAME, host=host)
+
+parallel_simple(run_test, machines)

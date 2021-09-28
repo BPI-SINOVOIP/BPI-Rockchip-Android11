@@ -1,0 +1,98 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "ppp_defaults",
+    cflags: [
+        "-DCHAPMS=1",
+        "-DMPPE=1",
+        "-DINET6=1",
+        "-DUSE_OPENSSL=1",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-parameter",
+        "-Werror",
+        "-Wno-pointer-sign",
+    ],
+    local_include_dirs: ["include"],
+}
+
+cc_binary {
+    name: "pppd",
+    defaults: ["ppp_defaults"],
+
+    srcs: [
+        "auth.c",
+        "ccp.c",
+        "chap-md5.c",
+        "chap-new.c",
+        "chap_ms.c",
+        "demand.c",
+        "eap.c",
+        "ecp.c",
+        "eui64.c",
+        "fsm.c",
+        "ipcp.c",
+        "ipv6cp.c",
+        "lcp.c",
+        "magic.c",
+        "main.c",
+        "options.c",
+        "pppcrypt.c",
+        "pppox.c",
+        "session.c",
+        "sys-linux.c",
+        "tty.c",
+        "upap.c",
+        "utils.c",
+    ],
+
+    // options.c:623:21: error: passing 'const char *' to parameter of
+    // type 'char *' discards qualifiers.
+    // [-Werror,-Wincompatible-pointer-types-discards-qualifiers]
+    clang_cflags: ["-Wno-incompatible-pointer-types-discards-qualifiers"],
+
+    shared_libs: [
+        "libdl",
+        "liblog",
+        "libcutils",
+        "libcrypto",
+    ],
+
+    cflags: [
+        "-Wno-empty-body",
+        "-Wno-attributes",
+        "-Wno-sign-compare",
+        "-DPLUGIN",
+    ],
+
+    ldflags: ["-rdynamic"],
+    required: [
+        "pppol2tp-android",
+        "pppopptp-android",
+    ],
+}
+
+cc_library_shared {
+    name: "pppol2tp-android",
+    defaults: ["ppp_defaults"],
+    srcs: ["plugins/pppol2tp-android/pppol2tp-android.c"],
+    allow_undefined_symbols: true,
+}
+
+cc_library_shared {
+    name: "pppopptp-android",
+    defaults: ["ppp_defaults"],
+    srcs: ["plugins/pppopptp-android/pppopptp-android.c"],
+    allow_undefined_symbols: true,
+}

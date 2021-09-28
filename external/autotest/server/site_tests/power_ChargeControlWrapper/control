@@ -1,0 +1,43 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "mqg"
+NAME = "power_ChargeControlWrapper"
+PURPOSE = "Use Servo v4 to control charging / discharging the DUT"
+TIME = "LONG"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "power"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+DUT is connected to Servo v4 via USB type-C, and Servo v4 is connected to AC
+power.
+
+Sample usage:
+test_that <ip address of DUT> power_ChargeControlWrapper \
+--args 'servo_host=localhost servo_port=9999 test=power_Dummy'
+
+What are the parameters:
+test: the client test to run in wrapper test; required.
+servo_host: host of servod instance; required.
+servo_port: port that the servod instance is on; required.
+"""
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("power_ChargeControlWrapper", host=host, config=args_dict)
+
+parallel_simple(run, machines)

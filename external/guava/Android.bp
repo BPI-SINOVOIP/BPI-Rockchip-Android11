@@ -1,0 +1,90 @@
+// Copyright (C) 2010 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+java_library {
+    name: "guava",
+    host_supported: true,
+    hostdex: true,
+    sdk_version: "core_current",
+    target: {
+        android: {
+            static_libs: ["guava-android"],
+        },
+        host: {
+            static_libs: ["guava-jre"],
+        },
+    },
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+}
+
+java_library {
+    name: "guava-both",
+    host_supported: true,
+    sdk_version: "core_current",
+    srcs: ["futures/failureaccess/**/*.java"],
+    static_libs: ["jsr305"],
+    libs: [
+        "guava-android-annotation-stubs",
+        "error_prone_annotations",
+    ],
+    java_version: "1.8",
+}
+
+java_library_host {
+    name: "guava-jre",
+    srcs: ["guava/src/**/*.java"],
+    static_libs: ["guava-both"],
+    libs: [
+        "guava-android-annotation-stubs",
+        "error_prone_annotations",
+    ],
+    java_version: "1.8",
+}
+
+// Guava for Android can't compile against an Android bootclasspath, compile
+// it for the host and then use it on the device.  It uses reflection to
+// prevent calling into methods that don't exist on Android.
+java_library_host {
+    name: "guava-android-host",
+    srcs: ["android/guava/src/**/*.java"],
+    static_libs: ["guava-both"],
+    libs: [
+        "guava-android-annotation-stubs",
+        "error_prone_annotations",
+    ],
+    java_version: "1.8",
+}
+
+java_host_for_device {
+    name: "guava-android",
+    libs: ["guava-android-host"],
+}
+
+// Compatibility name for existing host modules
+java_library_host {
+    name: "guavalib",
+    static_libs: ["guava"],
+}
+
+// Compile dummy implementations of annotations used by guava but not
+// present in the Android tree.
+java_library {
+    name: "guava-android-annotation-stubs",
+    host_supported: true,
+    sdk_version: "core_current",
+    srcs: ["android-annotation-stubs/src/**/*.java"],
+}

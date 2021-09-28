@@ -1,0 +1,40 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib.cros.cfm.usb import cfm_usb_devices
+from autotest_lib.server import utils
+
+
+AUTHOR = "shijinabraham@chromium.org"
+NAME = "enterprise_CFM_Aver520Updater.vc520"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "enterprise"
+ATTRIBUTES = "suite:hotrod"
+TEST_TYPE = "server"
+DEPENDENCIES = "aver-vc520"
+
+
+DOC = """
+This test verifies that the Aver VC520 camera firmware updater is working
+as intended. This test performs the following
+- Make the rootfs writable.
+- Backup the original firmware.
+- Copy older firmware bundled with test.
+- Force upgrade the Aver device to older firmware.
+- Powercycle the usb port to trigger the firmware updater.
+- Confirm firmware has been updated.
+- Cleanup
+This test will work on guado and fizz Chromeboxes with Aver VC520 Camera
+connected
+"""
+
+args_dict = utils.args_to_dict(args)
+
+def run_test(machine):
+    test_name = "enterprise_CFM_Aver520Updater"
+    host = hosts.create_host(machine, servo_args=None)
+    job.run_test(test_name, host=host, camera=cfm_usb_devices.AVER_VC520_CAMERA)
+
+parallel_simple(run_test, machines)

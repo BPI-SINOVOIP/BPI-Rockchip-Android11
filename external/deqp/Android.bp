@@ -1,0 +1,105 @@
+build = ["AndroidGen.bp"]
+
+cc_library_shared {
+    name: "libdeqp",
+    defaults: ["libdeqp_gen"],
+
+    tidy_checks: [
+        // The clang-tidy google-explicit-constructor warning is issued to nearly
+        // 1000 conversion constructors in this project. They are from more than
+        // 500 source files. Most of them should be declared explicit, but many
+        // of them need to be implicit. Until we correctly mark them as explicit
+        // or NOLINT(implicit), we suppress the google-explicit-constructor check.
+        "-google-explicit-constructor",
+
+        "-google-build-explicit-make-pair",
+        "-google-global-names-in-headers",
+        "-google-runtime-member-string-references",
+        "-google-runtime-operator",
+    ],
+
+    include_dirs: [
+        "external/deqp-deps/SPIRV-Headers/include",
+    ],
+
+    shared_libs: [
+        "libEGL",
+        "libGLESv2",
+        "libandroid",
+        "liblog",
+        "libm",
+        "libc",
+        "libz",
+        "libdl",
+    ],
+
+    static_libs: [
+        "libpng_ndk",
+        "deqp_OSDependent",
+        "deqp_OGLCompiler",
+        "deqp_HLSL",
+        "deqp_glslang",
+        "deqp_SPIRV",
+        "deqp_spirv-tools",
+        "deqp_amber",
+    ],
+
+    cflags: [
+        "-DDEQP_SUPPORT_GLES1=1",
+        "-DDE_ANDROID_API=28",
+        "-D_XOPEN_SOURCE=600",
+        "-DDEQP_TARGET_NAME=\"android\"",
+        "-DQP_SUPPORT_PNG=1",
+        "-DDEQP_HAVE_GLSLANG=1",
+        "-DDEQP_HAVE_SPIRV_TOOLS=1",
+        "-Wall",
+        "-Werror",
+        "-Wconversion",
+        "-fwrapv",
+        "-Wno-implicit-fallthrough",
+        "-Wno-sign-conversion",
+        "-Wno-unused-private-field",
+        "-DENABLE_HLSL",
+    ],
+
+    sdk_version: "27",
+    cppflags: [
+        "-Wno-non-virtual-dtor",
+        "-Wno-delete-non-virtual-dtor",
+        "-Wno-implicit-int-conversion",
+        "-Wno-missing-field-initializers",
+        "-Wno-switch",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+        "-fexceptions",
+    ],
+    rtti: true,
+    stl: "c++_static",
+}
+
+android_test {
+    name: "com.drawelements.deqp",
+
+    test_suites: [
+        "cts",
+        "mts",
+        "vts10",
+    ],
+
+    srcs: ["android/package/src/**/*.java"],
+    resource_dirs: ["android/package/res"],
+    manifest: "android/package/AndroidManifest-integration.xml",
+
+    asset_dirs: [
+        "data",
+        "external/vulkancts/data",
+        "external/graphicsfuzz/data",
+    ],
+
+    jni_libs: ["libdeqp"],
+
+    compile_multilib: "both",
+
+    // We could go down all the way to API-13 for 32bit. 22 is required for 64bit ARM.
+    sdk_version: "test_current",
+}

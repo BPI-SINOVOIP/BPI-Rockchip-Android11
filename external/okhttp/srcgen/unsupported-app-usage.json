@@ -1,0 +1,211 @@
+// See com.google.currysrc.aosp.Annotations.addUnsupportedAppUsage(Path) method for details on the
+// syntax.
+[
+  {
+    "@location": "method:com.android.okhttp.Connection#getSocket()"
+  },
+  {
+    "@location": "field:com.android.okhttp.ConnectionPool#connections"
+  },
+  {
+    "@location": "field:com.android.okhttp.ConnectionPool#keepAliveDurationNs"
+  },
+  {
+    "@location": "field:com.android.okhttp.ConnectionPool#maxIdleConnections"
+  },
+  {
+    "@location": "field:com.android.okhttp.ConnectionPool#systemDefault"
+  },
+  {
+    "@location": "method:com.android.okhttp.HttpUrl$Builder#build()"
+  },
+  {
+    "@location": "method:com.android.okhttp.HttpUrl#encodedPath()"
+  },
+  {
+    "@location": "method:com.android.okhttp.HttpUrl#newBuilder()"
+  },
+  {
+    "@location": "method:com.android.okhttp.HttpUrl#parse(String)"
+  },
+  {
+    "@location": "method:com.android.okhttp.HttpUrl#query()"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HeaderParser#skipUntil(String,int,String)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HeaderParser#skipWhitespace(String,int)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpDate#format(Date)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpDate#parse(String)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpEngine#getConnection()"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpEngine#hasResponse()"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.http.HttpEngine#httpStream"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpEngine#networkRequest(Request)"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.http.HttpEngine#networkRequest"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.http.HttpEngine#priorResponse"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpEngine#readResponse()"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpEngine#sendRequest()"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.http.HttpEngine#sentRequestMillis"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.http.HttpEngine#userResponse"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.HttpEngine#writingRequestHeaders()"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.http.RouteSelector#hasNext()"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.huc.HttpsURLConnectionImpl#delegate"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.huc.HttpURLConnectionImpl#client"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.huc.HttpURLConnectionImpl#httpEngine"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#Internal()"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#addLenient(Headers.Builder,String)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#addLenient(Headers.Builder,String,String)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#apply(ConnectionSpec,SSLSocket,boolean)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#callEngineGetStreamAllocation(Call)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#callEnqueue(Call,Callback,boolean)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#connectionBecameIdle(ConnectionPool,RealConnection)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#get(ConnectionPool,Address,StreamAllocation)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#getHttpUrlChecked(String)"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.Internal#instance"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#internalCache(OkHttpClient)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#put(ConnectionPool,RealConnection)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#routeDatabase(ConnectionPool)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Internal#setCache(OkHttpClient,InternalCache)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Platform#get()"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Platform#logW(String)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Util#closeAll(Closeable,Closeable)"
+  },
+  {
+    "@location": "method:com.android.okhttp.internal.Util#closeQuietly(Closeable)"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.Util#EMPTY_BYTE_ARRAY"
+  },
+  {
+    "@location": "field:com.android.okhttp.internal.Util#UTF_8"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#OkHttpClient()"
+  },
+  {
+    "@location": "field:com.android.okhttp.OkHttpClient#connectionPool"
+  },
+  {
+    "@location": "field:com.android.okhttp.OkHttpClient#DEFAULT_PROTOCOLS"
+  },
+  {
+    "@location": "field:com.android.okhttp.OkHttpClient#dns"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#getConnectionPool()"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#getCookieHandler()"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#getHostnameVerifier()"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#getProxy()"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#getProxySelector()"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#getSslSocketFactory()"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#setProtocols(List<Protocol>)"
+  },
+  {
+    "@location": "method:com.android.okhttp.OkHttpClient#setRetryOnConnectionFailure(boolean)"
+  },
+  {
+    "@location": "field:com.android.okhttp.Request#headers"
+  },
+  {
+    "@location": "field:com.android.okhttp.Request#method"
+  },
+  {
+    "@location": "field:com.android.okhttp.Request#url"
+  },
+  {
+    "@location": "field:com.android.okhttp.Response#code"
+  },
+  {
+    "@location": "field:com.android.okhttp.Response#headers"
+  },
+  {
+    "@location": "field:com.android.okhttp.Response#message"
+  },
+  {
+    "@location": "field:com.android.okhttp.Response#networkResponse"
+  },
+  {
+    "@location": "field:com.android.okhttp.Response#protocol"
+  }
+]

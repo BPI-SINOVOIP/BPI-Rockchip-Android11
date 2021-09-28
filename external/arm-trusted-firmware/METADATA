@@ -1,0 +1,18 @@
+name: "arm-trusted-firmware"
+description:
+    "The Trusted Firmware-A project provides a reference implementation
+    of secure world software for Armv7-A and Armv8-A class processors."
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://developer.trustedfirmware.org/dashboard/view/6/"
+  }
+  url {
+    type: GIT
+    value: "https://github.com/ARM-software/arm-trusted-firmware.git"
+  }
+  version: "v2.2"
+  last_upgrade_date { year: 2020 month: 2 day: 5 }
+  license_type: NOTICE
+}

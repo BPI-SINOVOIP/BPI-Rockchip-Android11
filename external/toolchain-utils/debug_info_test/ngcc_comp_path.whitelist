@@ -1,0 +1,24 @@
+# CrOS packages are compiled in /tmp/$board/portage/${CATEGORY}/${P}.
+# They can be matched by .*/portage/${CATEGORY}/${PN}-.*
+.*/portage/chromeos-base/ec-utils-.*
+.*/portage/dev-libs/elfutils-.*
+.*/portage/dev-libs/libusb-.*
+.*/portage/dev-util/perf-.*
+.*/portage/media-libs/arc-cros-gralloc-.*
+.*/portage/media-video/yavta-.*
+.*/portage/sys-apps/cavium-n3fips-driver-.*
+.*/portage/sys-apps/cavium-n3fips-tools-.*
+.*/portage/sys-apps/busybox-.*
+.*/portage/sys-apps/snaggletooth-drivers-.*
+.*/portage/sys-boot/syslinux-.*
+.*/portage/sys-kernel/chromeos-kernel-.*
+.*/portage/sys-kernel/fzm-kmod.*
+.*/portage/sys-kernel/kernel-.*
+.*/portage/sys-kernel/.*-kernel.*
+.*/portage/sys-kernel/ti-uio-module-drv-.*
+.*/portage/sys-libs/gcc-libs-.*
+# glibc and libgcc are built in different ways.
+# and libstdc++.
+.*/glibc-.*/
+.*/libgcc/.*
+.*/libstdc\+\+-.*

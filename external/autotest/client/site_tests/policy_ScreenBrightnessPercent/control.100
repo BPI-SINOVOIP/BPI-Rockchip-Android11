@@ -1,0 +1,22 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_ScreenBrightnessPercent.100'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+DEPENDENCIES = 'internal_display'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify the screen brightness is properly set to 100%.
+
+'''
+
+
+job.run_test('policy_ScreenBrightnessPercent',
+             case=100)
+

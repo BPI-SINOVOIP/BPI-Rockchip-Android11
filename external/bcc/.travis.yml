@@ -1,0 +1,8 @@
+language: generic
+install:
+  - sudo apt-get install -y python-pip
+  - sudo pip install pep8
+script:
+  - set -euo pipefail
+  - ./scripts/check-helpers.sh
+  - ./scripts/py-style-check.sh

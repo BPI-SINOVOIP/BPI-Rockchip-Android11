@@ -1,0 +1,9 @@
+[
+  {
+    "description": "SSHFS filesystem with custom credentials",
+    "test_mount_source_uri": "sshfs://chronos@localhost:",
+    "expected_mount_status": 0,
+    "expected_mount_path": "/media/fuse/chronos@localhost:",
+    "expected_file": "/media/fuse/chronos@localhost:/.ssh"
+  }
+]

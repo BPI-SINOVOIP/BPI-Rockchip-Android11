@@ -1,0 +1,27 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+NAME = 'policy_ExternalStorageReadOnly'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effect of ExternalStorageReadOnly policy on Chrome OS behavior.
+
+This test verifies the effect of the ExternalStorageReadOnly user policy on
+Chrome OS client behavior. It exercises all valid policy values across three
+test cases: 'True_Block', 'NotSet_Allow', and 'False_Allow'.
+
+This test requires some sort of external storage to be connected to the DUT to
+pass. If running on a lab machine, trigger this through the
+policy_ExternalStorageReadOnlyServer server test.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_ExternalStorageReadOnly', **args_dict)

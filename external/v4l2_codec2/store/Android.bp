@@ -1,0 +1,30 @@
+cc_library_shared {
+    name: "libv4l2_codec2_store",
+    vendor: true,
+
+    defaults: [
+        "libcodec2-impl-defaults",
+    ],
+
+    srcs: [
+        "V4L2ComponentStore.cpp",
+    ],
+    export_include_dirs: [
+        "include",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "liblog",
+    ],
+    static_libs: [
+        "libv4l2_codec2_common",
+    ],
+
+    cflags: [
+      "-Werror",
+      "-Wall",
+      "-Wthread-safety",  // Check thread annotation at build time.
+    ],
+}
+

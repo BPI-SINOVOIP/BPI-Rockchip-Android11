@@ -1,0 +1,11 @@
+[package]
+name = "kvm"
+version = "0.1.0"
+authors = ["The Chromium OS Authors"]
+edition = "2018"
+
+[dependencies]
+kvm_sys = { path = "../kvm_sys" }
+libc = "*"
+msg_socket = { path = "../msg_socket" }
+sys_util = { path = "../sys_util" }

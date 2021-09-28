@@ -1,0 +1,175 @@
+#!/bin/bash -x
+# Utilities to interact with android more easily
+
+function run_quiet() { eval "$* >/dev/null 2>&1"; }
+
+make_csv() {
+	out=""
+	in=$1
+	for p in $in; do
+		if [ "x$out" == "x" ]; then
+			out=$p
+		else
+			out="$out,$p"
+		fi
+	done
+	echo $out
+}
+
+make_spaces() {
+	out=""
+	in=$1
+	for p in $in; do
+		if [ "x$out" == "x" ]; then
+			out=$p
+		else
+			out="$out $p"
+		fi
+	done
+	echo $out
+}
+
+cmd_exists() {
+	which $1 > /dev/null
+	return $?
+}
+
+do_adb_root() {
+	ADB="$1"
+	$ADB root > /dev/null 2>&1
+	return $?
+}
+
+die() {
+	exit_code=$1
+	msg=$2
+	c_error "$msg"
+	exit $exit_code
+}
+
+die_if_no_androdeb() {
+	set +e
+	$ADB shell ls /data/androdeb/debian > /dev/null 2>&1
+	if [ $? -ne 0 ]; then die 8 "Existing androdeb env not found on device. $1"; fi
+	set -e
+}
+
+#  Helper function to count number of source arguments in a list
+#  when more than one argument is supplied, it is assumed the last argument
+#  is a destination
+count_sources() {
+	local source_count=$#
+	if [ $source_count -gt 1 ]; then
+		source_count=$((source_count - 1))
+	fi
+	echo "$source_count"
+}
+
+# Borrowed from project LISA.
+################################################################################
+# Logging functions
+################################################################################
+c_error() {
+	NOW=$(date +"%H:%m:%S")
+	# If there is only one parameter, let's assume it's just the message
+	if [ $# -gt 1 ]; then
+		local parent_lineno="$1"
+		local message="$2"
+		echo -e "${red}$NOW - ERROR: on or near line ${parent_lineno}: ${message}${nocol}"
+		return
+	fi
+
+	local message="$1"
+	echo -e "${red}$NOW - ERROR   : ${message}${nocol}"
+}
+
+c_warning() {
+	NOW=$(date +"%H:%m:%S")
+	# If there is only one parameter, let's assume it's just the message
+	if [ $# -gt 1 ]; then
+		local parent_lineno="$1"
+		local message="$2"
+		echo -e "${yellow}$NOW - WARNING: on or near line ${parent_lineno}: ${message}${nocol}"
+		return
+	fi
+	local message="$1"
+	echo -e "${yellow}$NOW - WARNING : ${message}${nocol}"
+}
+
+c_info() {
+	NOW=$(date +"%H:%m:%S")
+	# If there is only one parameter, let's assume it's just the message
+	if [ $# -gt 1 ]; then
+		local parent_lineno="$1"
+		local message="$2"
+		echo -e "${blue}$NOW - INFO: on or near line ${parent_lineno}: ${message}${nocol}"
+		return
+	fi
+	local message="$1"
+	echo -e "${blue}$NOW - INFO    : ${message}${nocol}"
+}
+
+d_notify() {
+	MESSAGE=$1
+	ICON=$2
+	# Let's try to send a desktop notification,
+	# silently fails if there is not support.
+	notify-send \
+		--icon=$ICON \
+		--urgency=critical \
+		--expire-time=1500 \
+		"Test Series" \
+		"$MESSAGE" \
+		2>/dev/null
+}
+
+my_tput() {
+	if [ "${TERM-dumb}" == dumb ]; then
+		return
+	fi
+	tput $*
+}
+
+box_out()
+{
+	local s=("$@") b w
+	for l in "${s[@]}"; do
+		((w<${#l})) && { b="$l"; w="${#l}"; }
+	done
+	my_tput setaf 3
+	echo -e "|-${b//?/-}-|"
+	for l in "${s[@]}"; do
+		printf '| %s%*s%s |\n' "$(my_tput setaf 4)" "-$w" "$l" "$(my_tput setaf 3)"
+		# echo "|-${b//?/-}-|"
+	done
+	echo "|-${b//?/-}-|"
+	my_tput sgr 0
+}
+
+
+################################################################################
+# Colors
+################################################################################
+
+if [ -t 1 ]; then
+	ncolors=$(my_tput colors)
+	if [ -n "${ncolors}" ] && [ ${ncolors} -ge 8 ]; then
+		nocol='\e[0m' # No Color
+		white='\e[1;37m'
+		black='\e[0;30m'
+		blue='\e[0;34m'
+		lblue='\e[1;34m'
+		green='\e[0;32m'
+		lgreen='\e[1;32m'
+		cyan='\e[0;36m'
+		lcyan='\e[1;36m'
+		red='\e[0;31m'
+		lred='\e[1;31m'
+		purple='\e[0;35m'
+		lpurple='\e[1;35m'
+		brown='\e[0;33m'
+		yellow='\e[1;33m'
+		grey='\e[0;30m'
+		lgrey='\e[0;37m'
+	fi
+fi

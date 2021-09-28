@@ -1,0 +1,14 @@
+The copybara command is used to import changes from the upstream llvm-project
+git repository into Android.
+
+Internal copybara documentation:
+
+go/copybara
+
+Command used to initialize the repo:
+
+copybara --init-history --ignore-noop --squash --squash-skip-history copybara/copy.bara.sky
+
+Run this command to import changes when scudo upstream changes:
+
+copybara copybara/copy.bara.sky

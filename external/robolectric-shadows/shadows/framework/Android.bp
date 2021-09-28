@@ -1,0 +1,26 @@
+//#############################################
+// Compile Robolectric shadows framework
+//#############################################
+
+java_library_host {
+    name: "Robolectric_shadows_framework",
+    libs: [
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "Robolectric_resources",
+        "Robolectric_utils",
+        "robolectric-accessibility-test-framework-2.1",
+        "robolectric-javax.annotation-api-1.2",
+        "hamcrest-library",
+        "hamcrest",
+        "robolectric-sqlite4java-0.282",
+        "guava",
+        "icu4j",
+        "jsr305",
+        "robolectric-host-android_all",
+    ],
+    plugins: ["Robolectric_processor"],
+    javacflags: ["-Aorg.robolectric.annotation.processing.shadowPackage=org.robolectric"],
+    srcs: ["src/main/java/**/*.java"],
+    java_resource_dirs: ["src/main/resources"],
+}

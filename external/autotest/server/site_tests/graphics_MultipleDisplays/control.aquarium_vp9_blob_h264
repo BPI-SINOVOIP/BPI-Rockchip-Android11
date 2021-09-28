@@ -1,0 +1,31 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "chromeos-chameleon"
+NAME = "graphics_MultipleDisplays.aquarium_vp9_blob_h264"
+PURPOSE = "Test WebGL and video playback on internal and external displays."
+CRITERIA = "All tests must not crash/hang the GPU."
+ATTRIBUTES = ""
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "graphics"
+TEST_TYPE = "server"
+DEPENDENCIES = 'chameleon'
+
+DOC = """
+This test runs WebGL Aquarium and 1080p60 VP9 playback on the internal display.
+On the external display it opens windows for Blob and 1080p60 H.264 playback.
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test("graphics_MultipleDisplays", host=host,
+                 subtest='aquarium+vp9+blob+h264')
+
+parallel_simple(run, machines)

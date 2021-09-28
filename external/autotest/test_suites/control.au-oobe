@@ -1,0 +1,28 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Kyle Shimabukuro <kyleshima@chromium.org>"
+NAME = "au-oobe"
+PURPOSE = "Suite for out-of-box-experience autoupdate tests."
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+This suite runs the out-of-box-experience autoupdate tests. Includes full
+and delta forced auto updates from FSI builds, non-blocking auto updates
+from FSI builds, and cases which ensure the forced auto update is not skipped
+in the event of interruptions (network interruptions, reboot, suspend).
+"""
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+args_dict['name'] = NAME
+args_dict['add_experimental'] = True
+args_dict['max_runtime_mins'] = 60
+args_dict['job'] = job
+
+dynamic_suite.reimage_and_run(**args_dict)

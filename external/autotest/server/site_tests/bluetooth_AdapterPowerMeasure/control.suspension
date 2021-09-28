@@ -1,0 +1,36 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import advertisements_data
+
+
+AUTHOR = 'Chrome OS Team'
+NAME = 'bluetooth_AdapterPowerMeasure.suspension'
+PURPOSE = 'Test power consumption of Bluetooth chip during system suspension.'
+CRITERIA = 'Bluetooth chip should consume power less than specified.'
+ATTRIBUTES = 'suite:bluetooth'
+TIME = 'SHORT'   # Takes about 2 mins
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_base'
+
+DOC = """
+This test case verifies that the Bluetooth chip of the DUT does
+not consume power more than specified during system suspension.
+
+This autotest include the following test cases:
+     self.test_case_suspend_power_measurement()
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterPowerMeasure', host=host, max_power_mw=3,
+                 num_iterations=1)
+
+parallel_simple(run, machines)

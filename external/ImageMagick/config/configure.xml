@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuremap [
+  <!ELEMENT configuremap (configure)+>
+  <!ATTLIST configuremap xmlns CDATA #FIXED ''>
+  <!ELEMENT configure EMPTY>
+  <!ATTLIST configure xmlns CDATA #FIXED '' name NMTOKEN #REQUIRED
+    value CDATA #REQUIRED>
+]>
+<!--
+  ImageMagick build configuration.
+-->
+<configuremap>
+  <configure name="CC" value="/src/ndk/out/android-ndk-r21-canary/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android28-clang"/>
+  <configure name="CFLAGS" value=" -fopenmp -fPIE -fPIC -Wall -fexceptions -pthread -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16"/>
+  <configure name="CODER_PATH" value="/usr/local/lib/ImageMagick-7.0.9/modules-Q16HDRI/coders"/>
+  <configure name="CONFIGURE_PATH" value="/usr/local/etc/ImageMagick-7/"/>
+  <configure name="CONFIGURE" value="./configure  '--host=x86_64-linux-android' '--without-zlib' 'host_alias=x86_64-linux-android' 'CC=/src/ndk/out/android-ndk-r21-canary/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android28-clang' 'CFLAGS=-fPIE -fPIC' 'LDFLAGS=-pie' 'CXX=/src/ndk/out/android-ndk-r21-canary/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android28-clang++'"/>
+  <configure name="COPYRIGHT" value="Copyright (C) 1999-2020 ImageMagick Studio LLC"/>
+  <configure name="CPPFLAGS" value="-I/usr/local/include/ImageMagick-7"/>
+  <configure name="CXXFLAGS" value="-g -O2 -pthread"/>
+  <configure name="CXX" value="/src/ndk/out/android-ndk-r21-canary/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android28-clang++"/>
+  <configure name="DEFS" value="-DHAVE_CONFIG_H"/>
+  <configure name="DELEGATES" value="mpeg ps"/>
+  <configure name="DISTCHECK_CONFIG_FLAGS" value="'CC=/src/ndk/out/android-ndk-r21-canary/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android28-clang' 'CFLAGS=-fPIE -fPIC' 'CXX=/src/ndk/out/android-ndk-r21-canary/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android28-clang++' 'LDFLAGS=-pie'  --disable-deprecated  --with-quantum-depth=16  --with-jemalloc=no  --with-umem=no  --with-zlib=no  --with-autotrace=no  --with-gslib=no  --with-fontpath=  --with-rsvg=no  --with-perl=no "/>
+  <configure name="DOCUMENTATION_PATH" value="/usr/local/share/doc/ImageMagick-7"/>
+  <configure name="EXEC-PREFIX" value="/usr/local"/>
+  <configure name="EXECUTABLE_PATH" value="/usr/local/bin"/>
+  <configure name="FEATURES" value="DPC HDRI Cipher OpenMP"/>
+  <configure name="FILTER_PATH" value="/usr/local/lib/ImageMagick-7.0.9/modules-Q16HDRI/filters"/>
+  <configure name="GIT_REVISION" value="16588:7fdd47ede:20191227" />
+  <configure name="HOST" value="x86_64-pc-linux-android"/>
+  <configure name="INCLUDE_PATH" value="/usr/local/include/ImageMagick-7"/>
+  <configure name="LDFLAGS" value="-L/usr/local/lib -pie"/>
+  <configure name="LIBRARY_PATH" value="/usr/local/lib/ImageMagick-7.0.9"/>
+  <configure name="LIBS" value="                                        -lm      "/>
+  <configure name="LIB_VERSION_NUMBER" value="7,0,9,13"/>
+  <configure name="LIB_VERSION" value="0x709"/>
+  <configure name="NAME" value="ImageMagick"/>
+  <configure name="PCFLAGS" value="-fopenmp -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16"/>
+  <configure name="PREFIX" value="/usr/local"/>
+  <configure name="QuantumDepth" value="16"/>
+  <configure name="RELEASE_DATE" value="2019-12-29"/>
+  <configure name="SHAREARCH_PATH" value="/usr/local/lib/ImageMagick-7.0.9/config-Q16HDRI"/>
+  <configure name="SHARE_PATH" value="/usr/local/share/ImageMagick-7"/>
+  <configure name="TARGET_CPU" value="x86_64"/>
+  <configure name="TARGET_OS" value="linux-android"/>
+  <configure name="TARGET_VENDOR" value="pc"/>
+  <configure name="VERSION" value="7.0.9"/>
+  <configure name="WEBSITE" value="https://imagemagick.org"/>
+</configuremap>

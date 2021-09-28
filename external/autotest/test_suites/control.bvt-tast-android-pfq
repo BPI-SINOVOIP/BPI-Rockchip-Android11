@@ -1,0 +1,32 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "bvt-tast-android-pfq"
+PURPOSE = "Tests critical ARC functionality for Android PFQ using Tast."
+
+TIME = "SHORT"
+TEST_CATEGORY = "General"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+This suite verifies ARC's basic functionality for the Android Pre-Flight Queue
+by running ARC-specific Tast integration tests that must always pass against a
+DUT. See http://go/tast for more information about Tast.
+
+The only Autotest test executed by this suite is tast.critical-android, which is
+a server test that executes the tast executable. The tast executable runs
+individual Tast tests. If any of these Tast tests fail, then
+tast.critical-android (and this suite) fail. """
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+args_dict['name'] = NAME
+args_dict['max_runtime_mins'] = 20
+args_dict['timeout_mins'] = 1440
+args_dict['job'] = job
+
+dynamic_suite.reimage_and_run(**args_dict)

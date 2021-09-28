@@ -1,0 +1,27 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "kyleshima, Chromium OS"
+NAME = "rlz_CheckPing.no_embargo_date"
+PURPOSE = "Test rlz related vpd setting: rlz_emargo_end_date."
+TIME = "Short"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:rlz"
+DOC = """
+This tests the RLZ install event (CAI) and first-use event (CAF) pings are
+sent on first use, even if the rlz_embargo_end_date has not been set in the
+vpd.
+"""
+
+from autotest_lib.client.common_lib import utils
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('rlz_CheckPing', host=host, **args_dict)
+
+job.parallel_simple(run, machines)

@@ -1,0 +1,38 @@
+This directory contains test lists to be used for vc4's DRM support. The files
+are passed to piglit with the --test-list parameter directly.
+
+The test lists are contained in the IGT repository for several
+reasons:
+
+- The lists stay synchronized with the IGT codebase.
+- Public availability. Kernel developers can see what tests are run,
+  and can see what changes are done to the set, when, and why.
+- Explicit test lists in general make it possible to implement a new
+  test without having it run by everyone else before the tests and / or setup
+  are ready for it.
+
+Changing the test lists should only happen with approval from the vc4
+maintainer, Eric Anholt (eric@anholt.net).
+
+============
+vc4.testlist
+============
+
+This test list is meant as a general test suite without any time
+restriction for the vc4 DRM driver, combining generic DRM and KMS tests.
+
+======================
+vc4-chamelium.testlist
+======================
+
+This test list is meant to test the vc4 driver using Google's Chamelium
+board as a testing device. This doesn't have any time restriction, and
+will include test that will run for a significant time.
+
+===========================
+vc4-chamelium-fast.testlist
+===========================
+
+This test list is a variant of the previous one, with only tests
+supposed to run quickly. Therefore, the whole suite should be pretty
+fast to execute and is meant to be used as a fast-loop CI.

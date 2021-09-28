@@ -1,0 +1,33 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file has been automatically generated. Do not edit!
+
+AUTHOR = 'ARC++ Team'
+NAME = 'cheets_CTS_Q.10_r1.x86.CtsLiblogTestCases'
+ATTRIBUTES = 'suite:arc-cts-q'
+DEPENDENCIES = 'arc, cts_abi_x86'
+JOB_RETRIES = 1
+TEST_TYPE = 'server'
+TIME = 'MEDIUM'
+MAX_RESULT_SIZE_KB = 512000
+DOC = 'Run module CtsLiblogTestCases of the Android Compatibility Test Suite (CTS) using x86 ABI in the ARC++ container.'
+
+def run_TS(machine):
+    host_list = [hosts.create_host(machine)]
+    job.run_test(
+        'cheets_CTS_Q',
+        hosts=host_list,
+        iterations=1,
+        tag='10_r1.x86.CtsLiblogTestCases',
+        test_name='cheets_CTS_Q.10_r1.x86.CtsLiblogTestCases',
+        run_template=['run', 'commandAndExit', 'cts', '--module', 'CtsLiblogTestCases', '--logcat-on-failure'],
+        retry_template=['run', 'commandAndExit', 'retry', '--retry', '{session_id}'],
+        target_module='CtsLiblogTestCases',
+        target_plan=None,
+        bundle='x86',
+        uri='gs://chromeos-arc-images/cts/bundle/Q/android-cts-10_r1-linux_x86-x86.zip',
+        timeout=3600)
+
+parallel_simple(run_TS, machines)

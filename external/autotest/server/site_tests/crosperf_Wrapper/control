@@ -1,0 +1,35 @@
+# Copyright (c) 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+
+AUTHOR = "zhizhouy@chromium.org, chromeos-toolchain@google.com"
+NAME = "crosperf_Wrapper"
+TIME = "LONG"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "performance"
+TEST_TYPE = "server"
+JOB_RETRIES = 0
+
+DOC = """
+This wraps up various performance client tests under the crosperf script.
+This is part of Chrome OS Toolchain testing platform.
+This is only used by crosperf to run a client test on certain device.
+"""
+
+# Put the args into the args_dict.
+args_dict = utils.args_to_dict(args)
+
+def run_crosperf_Wrapper(machine):
+    dut = hosts.create_host(machine)
+    job.run_test('crosperf_Wrapper',
+                 test_name=args_dict.get('test', ''),
+                 test_args=args_dict.get('test_args', ''),
+                 dut_config_str=args_dict.get('dut_config', ''),
+                 dut=dut)
+
+# run the test in multiple machines
+
+job.parallel_simple(run_crosperf_Wrapper, machines)
+

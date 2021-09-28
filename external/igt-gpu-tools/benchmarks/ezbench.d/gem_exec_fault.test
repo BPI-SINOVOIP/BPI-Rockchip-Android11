@@ -1,0 +1,22 @@
+[ -e $IGT_BENCHMARKS/gem_exec_fault ] || return 1
+sudo -n true || return 1
+
+ring=rcs # rcs bcs vcs vecs all
+while read x size; do
+    name="gem:exec:fault:$size"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_exec_fault -s $x -e $ring -r \$1 ; }"
+
+    name="gem:exec:fault:$size:forked"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_exec_fault -f -s $x -e $ring -r \$1 ; }"
+done<<SIZES
+4096		4KiB
+65536		64KiB
+1048576		1MiB
+16777216	16MiB
+268435456	256MiB
+SIZES
+
+test_exec_time=3
+test_invert=1

@@ -1,0 +1,43 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterCLSanity.cl_HID_keyboard_reports_test'
+PURPOSE = ('Test bluetooth adapter receiving reports from '
+           'bluetooth HID devices.')
+CRITERIA = 'Adapter should receive HID events correctly.'
+ATTRIBUTES = 'suite:bluetooth, suite:bluetooth_e2e'
+TIME = 'SHORT'  # ~2 minutes on octopus
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_peer'
+
+DOC = """
+Verify that the bluetooth adapter of the DUT could receive HID reports
+sent from a connected bluetooth device correctly.
+
+Specifically, the following subtests are executed in this autotest.
+    - test_reset_on_adapter
+    - test_pairable
+    - test_discover_device
+    - test_pairing
+    - test_connection_by_adapter
+    - test_keyboard_input_from_trace
+    - test_disconnection_by_adapter
+    - test_remove_pairing
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterCLSanity', host=host,
+                  num_iterations=1, test_name=NAME.split('.')[1])
+
+parallel_simple(run, machines)

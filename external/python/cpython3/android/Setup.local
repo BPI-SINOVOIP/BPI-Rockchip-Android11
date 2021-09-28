@@ -1,0 +1,62 @@
+# These come from looking through setup.py
+
+array arraymodule.c
+cmath cmathmodule.c _math.c
+math mathmodule.c _math.c
+_contextvars _contextvarsmodule.c
+time timemodule.c
+_datetime _datetimemodule.c
+_random _randommodule.c
+_bisect _bisectmodule.c
+_heapq _heapqmodule.c
+_pickle _pickle.c
+atexit atexitmodule.c
+_json _json.c
+_lsprof _lsprof.c rotatingtree.c
+unicodedata unicodedata.c
+_opcode _opcode.c
+_asyncio _asynciomodule.c
+_abc _abc.c
+_queue _queuemodule.c
+_statistics _statisticsmodule.c
+fcntl fcntlmodule.c
+pwd pwdmodule.c
+grp grpmodule.c
+select selectmodule.c
+parser parsermodule.c
+mmap mmapmodule.c
+syslog syslogmodule.c
+_xxsubinterpreters _xxsubinterpretersmodule.c
+_csv _csv.c
+_posixsubprocess _posixsubprocess.c
+_socket socketmodule.c
+termios termios.c
+resource resource.c
+zlib zlibmodule.c
+binascii binascii.c
+pyexpat pyexpat.c
+_multibytecodec cjkcodecs/multibytecodec.c
+_codecs_kr cjkcodecs/_codecs_kr.c
+_codecs_jp cjkcodecs/_codecs_jp.c
+_codecs_cn cjkcodecs/_codecs_cn.c
+_codecs_tw cjkcodecs/_codecs_tw.c
+_codecs_hk cjkcodecs/_codecs_hk.c
+_codecs_iso2022 cjkcodecs/_codecs_iso2022.c
+
+_multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
+
+_ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/stgdict.c _ctypes/cfield.c
+
+# TODO: get this working with boringssl
+#_ssl _ssl.c _ssl/debughelpers.c
+#_hashlib _hashopenssl.c
+
+_sha256 sha256module.c
+_sha512 sha512module.c
+_md5 md5module.c
+_sha1 sha1module.c
+
+# TODO: _blake2
+# TODO: _sha3
+
+_struct _struct.c

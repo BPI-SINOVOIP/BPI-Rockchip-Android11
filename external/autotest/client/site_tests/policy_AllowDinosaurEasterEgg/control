@@ -1,0 +1,19 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_AllowDinosaurEasterEgg'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of policy_AllowDinosaurEasterEgg policy.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_AllowDinosaurEasterEgg', **args_dict)

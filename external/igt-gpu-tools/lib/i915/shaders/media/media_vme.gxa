@@ -1,0 +1,51 @@
+/*
+* Copyright (c) 2018, Intel Corporation
+*
+* Permission is hereby granted, free of charge, to any person obtaining a
+* copy of this software and associated documentation files (the "Software"),
+* to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense,
+* and/or sell copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included
+* in all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+* OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+* OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+* ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+       mov (8|M0)       r1.8<1>:w       0x20000000:v
+       mov (8|M0)       r20.0<1>:w      0x1:v
+(W)    mov (1|M0)       r1.2<1>:f       0x3818000C:f
+       mov (8|M0)       r20.8<1>:w      0x10:v
+       mov (8|M0)       r21.0<1>:w      0x10000:v
+(W)    mov (1|M0)       r1.3<1>:f       0x22222222:f
+       add (1|M0)       a0.0<1>:d       r1.0<0;1,0>:d     276307968:d
+       mov (8|M0)       r2.0<1>:f       0x0:f
+       mov (8|M0)       r5.0<1>:f       0x0:f
+       mov (8|M0)       r6.0<1>:f       0x0:f
+       mov (8|M0)       r9.0<1>:f       0x0:f
+       mov (8|M0)       r3.0<1>:d       r1.8<8;8,1>:w
+       mul (8|M0)       r4.0<1>:d       r1.2<0;1,0>:d     r20.0<8;8,1>:w
+       mul (8|M0)       r7.0<1>:d       r20.8<8;8,1>:w    256:w
+       mul (8|M0)       r8.0<1>:d       r1.3<0;1,0>:d     r21.0<8;8,1>:w
+(W)    mov (1|M0)       r17.2<1>:f      0x0:f
+       send (16|M0)     r10:uw          r2:f              0xD     a0.0{NoPreempt}
+       mov (1|M0)       r10.14<1>:hf    0xBEEF:hf
+(W)    add (1|M0)       a0.0<1>:ud      r1.1<0;1,0>:ud    0x20A0400:ud
+       mov (1|M0)       r10.15<1>:hf    0xDEAD:hf
+(W)    mov (1|M0)       r18.2<1>:f      0x8:f
+(W)    mov (1|M0)       r19.2<1>:f      0xC:f
+(W)    mov (8|M0)       r127.0<1>:f     r0.0<8;8,1>:f
+(W)    sends (16|M0)    null:uw         r17               r10     0x10A    a0.0
+(W)    add (1|M0)       a0.0<1>:ud      r1.1<0;1,0>:ud    0x20A0300:ud
+(W)    sends (16|M0)    null:uw         r18               r14     0x8A     a0.0
+(W)    add (1|M0)       a0.0<1>:ud      r1.1<0;1,0>:ud    0x20A0200:ud
+(W)    sends (8|M0)     null:ud         r19               r16     0x4A     a0.0
+(W)    send (8|M0)      null            r127:f            0x27    0x2000010 {EOT}

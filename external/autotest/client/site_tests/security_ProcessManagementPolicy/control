@@ -1,0 +1,31 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+TIME="SHORT"
+AUTHOR = "The Chromium OS Authors"
+DOC = """
+Linux provides no way to give a process the CAP_SETUID runtime capability
+without indescriminately allowing that process to change UID to any user on the
+system, including the root user. This is an obstacle to sandboxing system
+services in ChromeOS that spawn programs which setuid() to a different user.
+To solve this problem, we have added functionality to the ChromiumOS LSM which
+allows for configuring per-UID policies in ChromeOS that restrict which UIDs
+can be switched to by processes spawned under the restricted UID.
+"""
+NAME = "security_ProcessManagementPolicy"
+PURPOSE = """
+Prevent compromised non-root processes from being able to escalate
+privileges to root through a simple setuid() call.
+"""
+CRITERIA = """
+This autotest ensures that restricted users can only setuid() to UIDs approved
+by the security policy installed on the system.
+"""
+ATTRIBUTES = "suite:bvt-perbuild"
+TEST_CLASS = "security"
+TEST_CATEGORY = "Functional"
+TEST_TYPE = "client"
+JOB_RETRIES = 2
+
+job.run_test("security_ProcessManagementPolicy")

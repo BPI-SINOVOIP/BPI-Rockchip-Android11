@@ -1,0 +1,31 @@
+# Regex file for performing data modifications in FilterFactory.
+## Variables go here ##
+
+## XPath replacements ##
+# xpath ; {old_xpath} ; {new_xpath} ; {options}
+# XPaths can be either regexes or literal XPaths, but using literal XPaths will
+# speed up the filtering process.
+# Possible options:
+#   locale={locale_pattern}
+# Android patch (b/36123938) begin.
+xpath ; //ldml/localeDisplayNames/territories/territory[@type="FK"][@alt="variant"] ; //ldml/localeDisplayNames/territories/territory[@type="FK"]
+# Android patch (b/36123938) end.
+xpath ; //ldml/localeDisplayNames/territories/territory[@type="HK"][@alt="short"] ; //ldml/localeDisplayNames/territories/territory[@type="HK"]
+# Android patch (b/36123938) begin.
+xpath ; //ldml/localeDisplayNames/territories/territory[@type="MK"][@alt="variant"] ; //ldml/localeDisplayNames/territories/territory[@type="MK"]
+# Android patch (b/36123938) end.
+xpath ; //ldml/localeDisplayNames/territories/territory[@type="MO"][@alt="short"] ; //ldml/localeDisplayNames/territories/territory[@type="MO"]
+# Android patch (b/8264703) begin.
+xpath ; //ldml/localeDisplayNames/territories/territory[@type="PS"][@alt="short"] ; //ldml/localeDisplayNames/territories/territory[@type="PS"]
+# Android patch (b/8264703) end.
+# Android patch (b/21295835) begin.
+xpath ; //ldml/numbers/currencies/currency[@type="UAH"]/symbol[@alt="variant"] ; //ldml/numbers/currencies/currency[@type="UAH"]/symbol
+# Android patch (b/21295835) end.
+
+## Value substitutions ##
+# value ; {old_value} ; {new_value} ; {options}
+# Possible options:
+#   locale={locale_pattern}
+#   xpath={xpath}
+# example:
+#   value ; ₹ ; Rs. ; xpath=//ldml/numbers/currencies/currency[@type="INR"]/symbol

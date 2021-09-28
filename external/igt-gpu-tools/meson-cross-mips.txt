@@ -1,0 +1,12 @@
+[binaries]
+c = '/usr/bin/mips-linux-gnu-gcc'
+ar = '/usr/bin/mips-linux-gnu-gcc-ar'
+strip = '/usr/bin/mips-linux-gnu-strip'
+pkgconfig = 'pkg-config'
+exe_wrapper = 'qemu-mips'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'mips'
+cpu = 'mips'
+endian = 'big'

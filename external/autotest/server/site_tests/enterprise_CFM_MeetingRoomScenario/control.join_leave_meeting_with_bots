@@ -1,0 +1,57 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+from autotest_lib.server.cros.cfm.configurable_test.dsl import *
+
+AUTHOR = "dtosic@google.com, chromeos-meetings@google.com"
+NAME = "enterprise_CFM_MeetingRoomScenario.join_leave_meeting_with_bots"
+PURPOSE = "Tests what happens when CfM repeatedly joins and leaves a meeting."
+CRITERIA = "No unexpected resource leaks."
+ATTRIBUTES = "suite:hotrod"
+DEPENDENCIES = "meet_app"
+TIME = "LONG"
+TEST_CATEGORY = "Performance"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+
+DOC = """
+Repeat for 6 cycles:
+    1) Join an existing meeting with 7 speaking bot participants.
+    2) Idle in the meeting for 5 minutes
+    3) Leave the meeting
+
+The total test duration is ~30 minutes.
+"""
+
+IN_CALL_IDLE_DURATION_SEC = 5 * 60
+IDLE_ON_LANDING_PAGE_SEC = 30
+REPETITION_COUNT = 6
+BOT_COUNT = 7
+BOT_TTL_MIN = ((IN_CALL_IDLE_DURATION_SEC + IDLE_ON_LANDING_PAGE_SEC) * REPETITION_COUNT + 60) / 60
+
+cfm_test = CfmTest(
+    scenario=Scenario(
+        CreateMeetingWithBots(BOT_COUNT, BOT_TTL_MIN, muted=False),
+        WaitForMeetingsLandingPage(),
+        StartPerfMetricsCollection(),
+        RepeatTimes(REPETITION_COUNT,
+            Scenario(
+                JoinMeetingWithBots(),
+                Sleep(IN_CALL_IDLE_DURATION_SEC),
+                LeaveMeeting(),
+                # Idle a bit after leaving a call.
+                # This is closer to real-user behaviour.
+                Sleep(IDLE_ON_LANDING_PAGE_SEC),
+        )),
+        StopPerfMetricsCollection(),
+        UploadPerfMetrics(),
+    ),
+)
+
+def run_test(machine):
+    job.run_test("enterprise_CFM_MeetingRoomScenario",
+                 cfm_test = cfm_test,
+                 tag = 'join_leave_meeting_with_bots',
+                 host = hosts.create_host(machine))
+
+parallel_simple(run_test, machines)

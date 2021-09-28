@@ -1,0 +1,15 @@
+--- android_icu4j/src/main/java/android/icu/text/MeasureFormat.java	2019-09-13 12:40:40.773483778 +0100
++++ android_icu4j/src/main/java/android/icu/text/MeasureFormat.java	2019-09-13 12:41:03.369567130 +0100
+@@ -58,12 +58,6 @@
+  * A formatter for Measure objects.
+  *
+  * <p>
+- * <strong>IMPORTANT:</strong> New users are strongly encouraged to see if
+- * {@link NumberFormatter} fits their use case.  Although not deprecated, this
+- * class, MeasureFormat, is provided for backwards compatibility only.
+- * <hr>
+- *
+- * <p>
+  * To format a Measure object, first create a formatter object using a MeasureFormat factory method. Then
+  * use that object's format or formatMeasures methods.
+  *

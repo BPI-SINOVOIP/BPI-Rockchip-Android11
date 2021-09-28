@@ -1,0 +1,193 @@
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import logging
+from autotest_lib.client.bin import sysinfo
+from autotest_lib.client.common_lib import error, utils
+from autotest_lib.client.cros import constants
+from autotest_lib.server import host_attributes
+
+AUTHOR = "Chromium OS"
+NAME = "autoupdate_EndToEndTest"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+JOB_RETRIES = 1
+BUG_TEMPLATE = {
+    'cc': ['chromeos-installer-alerts@google.com'],
+    'components': ['Internals>Installer'],
+}
+
+# Skip provision special task for AU tests.
+DEPENDENCIES = "skip_provision"
+
+# Disable server-side packaging support for this test.
+# This control file is used as the template for paygen_au_canary suite, which
+# creates the control files during paygen. Therefore, autotest server package
+# does not have these test control files for paygen_au_canary suite.
+REQUIRE_SSP = False
+
+DOC = """
+This is an end-to-end update test of Chrome OS releases. Given a test
+configuration, it will perform an end-to-end test of a Chrome OS update
+payload. A test configuration can be given as command-line arguments (see
+below) or instantiated inline as local varibles.
+
+To invoke this test locally:
+
+  test_that <DUT-IPADDR> autoupdate_EndToEndTest --args="<ARGLIST>"
+
+where ARGLIST is a whitespace separated list of the following key=value pairs.
+Values pertaining to the test case include:
+
+  name=TAG           name tag for the test (e.g. 'nmo', 'npo' or 'fsi')
+  update_type=full|delta  type of update being applied, either 'full' or 'delta'
+  source_release=REL      source image release version (e.g. 2672.0.0)
+  target_release=REL      target image release version (e.g. 2673.0.0)
+  source_payload_uri=URI  URI of the source full payload. None means don't
+                          install a source image (assume it's preinstalled).
+  source_archive_uri=URI  (optional) URI of where the artifacts for the source
+                          image (e.g.  stateful update) are located. If not
+                          provided, the test will attempt using the same
+                          location as source_payload_uri.  This is required for
+                          any test where the location of the full (source)
+                          payload is separate from that of its build artifacts
+                          (e.g. it is in gs://chromeos-releases/).
+  target_payload_uri=URI  URI of the target payload
+  target_archive_uri=URI  (optional) URI of where the artifacts for the target
+                          image (e.g. stateful update) are located. If not
+                          provided, the test will attempt using the test job's
+                          repo ID (if present), otherwise default to the same
+                          location as target_payload_uri.  Normally, this is
+                          only needed for local (non-AFE) runs where the
+                          payload location is separate from that of the build
+                          artifacts (e.g. it is in gs://chromeos-releases).
+
+
+To run locally:
+1. Find the Google Storage URIs of the images you want to use during the test.
+    You can choose payloads from this bucket: gs://chromeos-releases/
+    (https://pantheon.corp.google.com/storage/browser/chromeos-releases/)
+
+    Sample from gs://chromeos-releases:
+      gs://chromeos-releases/dev-channel/samus/9433.0.0/payloads/chromeos_9433.0
+      .0_samus_dev-channel_full_test.bin-1e2db02f3bd9d9ebe74dc81fc7038919
+
+2. Choose the devserver you want to use.
+    This test uses a devserver to control the autoupdate. You can point to a
+    devserver on your workstation to aid debugging or you can choose to use a
+    devserver in the lab.
+
+    To start your own devserver, run this (outside the chroot):
+    src/platform/dev/devserver.py --port=8084
+
+    For a devserver running on your workstation use 127.0.0.1 as the hostname.
+    For a devserver running in the lab the port is usually 8082.
+
+    Add this line to src/third_party/autotest/files/shadow_config.ini in the [CROS] section:
+    dev_server = http://<hostname>:<port>
+    (If shadow_config.ini doesn't exist, you can create it, add [CROS], and add the above.)
+
+    The devserver needs to be able to reach the DUT you choose in the next
+    section. Use this instruction to find the list of lab devservers:
+        atest server list | grep devserver
+
+3. Choose the DUT you want to use for the test.
+   You can use a DUT on your desk connected to corp or you can lock a DUT
+   in the lab for use in the test.
+
+4. Setup ssh correctly.
+    You will need to setup a number of ssh keys and then copy them to
+    your chroot so that you can ssh into a devserver from there.
+
+    Run ssh-keygen to generate your id_rsa and id_rsa.pub files into ~/.ssh/
+
+    Download the testing_rsa ssh keys from here:
+    https://chromium.googlesource.com/chromiumos/chromite/+/master/ssh_keys
+    Save both to ~/.ssh
+    chmod 600 ~/.ssh/testing_rsa* (otherwise permissions are too loose and
+    will be ignored)
+
+    Add these lines to your ~/.ssh/config
+    Host *.cros
+      User root
+      IdentityFile /usr/local/google/home/<your ldap here>/.ssh/testing_rsa
+
+    You should now be able to ssh into DUTs in the lab without a password.
+
+    Follow these instructions to setup the ssh access to lab devservers:
+    https://sites.google.com/a/google.com/chromeos/for-team-members/infrastructure/chromeos-admin/devserver-access
+        You'll need appropriate group membership to be able to access the
+        Valentine secret for the devserver file.
+
+    Get access to "Access To Chrome Lab or Cautotest" from:
+    https://sphinx.corp.google.com/sphinx/#accessChangeRequest:systemName=default-mnp-use-cases
+
+    Check that you can now ssh into a lab devserver without a password.
+
+    Finally and most importantly, copy the ssh files to your chroot's .ssh
+    folder so you can ssh from there:
+      cp -a ~/.ssh/. ~/chromiumos/chroot/home/${USER}/.ssh/
+
+5. Make sure you have your gsutil permissions (your .boto file).
+    Your .boto file must be available inside the chroot.
+    cp ~/.boto chroot/home/<user>/
+
+    Make sure the gsutil command is available outside the chroot (note:
+    the gsutil package in Ubuntu is not what you're looking for.)
+
+6. Kick off the test with test_that from a chroot. e.g
+      test_that <IP OF DUT> autoupdate_EndToEndTest
+      --args="target_release=10906.0.0
+      source_payload_uri='gs://chromeos-releases/canary-channel/nami/10760.0
+      .0/payloads/chromeos_10760.0.0_nami_canary-channel_full_test
+      .bin-cee25d306d164f7514e26efb34f8f57d'
+      target_payload_uri='gs://chromeos-releases/canary-channel/nami/10906.0
+      .0/payloads/chromeos_10760.0.0-10906.0.0_nami_canary-channel_delta_test
+      .bin-98f9af8d919605fc3ee1391eaa79c7e6'
+      source_release=10760.0.0 update_type=delta"
+
+7. Unlock any DUTs you locked for debugging when you are done.
+
+"""
+
+TEST_CONF_KEYS = (
+    'name', 'update_type', 'source_release', 'target_release',
+    'source_payload_uri', 'source_archive_uri', 'target_payload_uri',
+    'target_archive_uri', 'payload_type')
+
+
+args_dict = utils.args_to_dict(args)
+
+# Create test configuration based on command-line arguments (higher precedence,
+# for test_that invocation) and local variables (lower precedence,
+# for Autotest front-end invocation).
+test_conf = {}
+for key in TEST_CONF_KEYS:
+    test_conf[key] = args_dict.get(key) or locals().get(key)
+
+
+def run_test(machine):
+    """Execute a test configuration on a given machine."""
+    host = hosts.create_host(machine)
+    # Save preserved log after autoupdate is completed.
+    job.sysinfo.add_logdir(
+        sysinfo.logdir(constants.AUTOUPDATE_PRESERVE_LOG))
+    try:
+        job.run_test(
+                "autoupdate_EndToEndTest",
+                tag='%s_%s' % (test_conf['name'], test_conf['update_type']),
+                host=host, test_conf=test_conf)
+    except Exception as e:
+        if not issubclass(type(e), error.TestBaseException):
+            error_msg = 'Received test error: %s' % e
+            logging.error(error_msg)
+            raise error.TestError(error_msg)
+
+        raise
+
+
+# Invoke parallel tests.
+parallel_simple(run_test, machines)

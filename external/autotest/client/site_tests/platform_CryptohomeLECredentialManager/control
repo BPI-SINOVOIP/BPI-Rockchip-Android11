@@ -1,0 +1,21 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "allenwebb"
+NAME = "platform_CryptohomeLECredentialManager"
+PURPOSE = "Validate PinWeaver functionality on Cr50"
+ATTRIBUTES = ""
+TIME = "SHORT"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+
+DOC = """
+Test the functionality of le_credential_manager. This feature handles
+low entropy credentials such as PINs and uses Cr50 to exchange the low
+entropy credential for a high entropy credential while enforcing limits
+on how often attempts can be made. The high entropy credential is needed
+to mount the user's home directory.
+"""
+
+job.run_test('platform_CryptohomeLECredentialManager')

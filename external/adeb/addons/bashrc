@@ -1,0 +1,21 @@
+# The bannered bashrc
+source .bashrc.common
+
+if [ ! -f .banner.shown ]; then
+
+echo ""
+echo "##########################################################"
+echo "# Welcome to androdeb environment running on Android!    #"
+echo "# Questions to: Joel Fernandes <joel@joelfernandes.org>  #"
+echo "                                                         #"
+echo " Try running vim, gcc, clang, git, make, perf, filetop   #"
+echo "  ..etc or apt-get install something.                    #"
+echo "##########################################################"
+echo ""
+
+touch .banner.shown
+
+fi
+
+homedir=$( getent passwd "$USER" | cut -d: -f6 )
+export HOME=$homedir

@@ -1,0 +1,18 @@
+homepage: "https://code.videolan.org/videolan/dav1d"
+primary_contact: "janne.grunau@gmail.com"
+auto_ccs:
+  - "rsbultje@gmail.com"
+  - "kempfjb@gmail.com"
+  - "b@rr-dav.id.au"
+  - "dav1d-fuzz@videolan.org"
+vendor_ccs:
+  - "twsmith@mozilla.com"
+  - "cdiehl@mozilla.com"
+sanitizers:
+  - address
+  - memory
+  - undefined
+coverage_extra_args: -ignore-filename-regex=.*dump.h
+architectures:
+  - i386
+  - x86_64

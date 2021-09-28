@@ -1,0 +1,588 @@
+NOUVEAU_TESTS = \
+	prime_nv_api \
+	prime_nv_pcopy \
+	prime_nv_test \
+	$(NULL)
+
+AMDGPU_TESTS = \
+	amdgpu/amd_basic \
+	amdgpu/amd_bypass \
+	amdgpu/amd_color \
+	amdgpu/amd_cs_nop \
+	amdgpu/amd_prime \
+	amdgpu/amd_abm \
+	$(NULL)
+
+TESTS_progs = \
+	core_auth \
+	core_getclient \
+	core_getstats \
+	core_getversion \
+	core_setmaster_vs_auth \
+	debugfs_test \
+	dmabuf \
+	drm_import_export \
+	drm_mm \
+	drm_read \
+	kms_3d \
+	kms_addfb_basic \
+	kms_atomic \
+	kms_atomic_interruptible \
+	kms_atomic_transition \
+	kms_available_modes_crc \
+	kms_big_fb \
+	kms_busy \
+	kms_ccs \
+	kms_color \
+	kms_concurrent \
+	kms_content_protection\
+	kms_crtc_background_color \
+	kms_cursor_crc \
+	kms_cursor_edge_walk \
+	kms_cursor_legacy \
+	kms_dp_dsc \
+	kms_draw_crc \
+	kms_fbcon_fbt \
+	kms_fence_pin_leak \
+	kms_flip \
+	kms_flip_event_leak \
+	kms_flip_tiling \
+	kms_force_connector_basic \
+	kms_frontbuffer_tracking \
+	kms_getfb \
+	kms_hdmi_inject \
+	kms_invalid_dotclock \
+	kms_lease \
+	kms_legacy_colorkey \
+	kms_mmap_write_crc \
+	kms_panel_fitting \
+	kms_pipe_b_c_ivb \
+	kms_pipe_crc_basic \
+	kms_plane \
+	kms_plane_alpha_blend \
+	kms_plane_cursor \
+	kms_plane_lowres \
+	kms_plane_multiple \
+	kms_plane_scaling \
+	kms_prime \
+	kms_prop_blob \
+	kms_properties \
+	kms_psr \
+	kms_psr2_su \
+	kms_pwrite_crc \
+	kms_rmfb \
+	kms_rotation_crc \
+	kms_selftest \
+	kms_sequence \
+	kms_setmode \
+	kms_sysfs_edid_timing \
+	kms_tv_load_detect \
+	kms_universal_plane \
+	kms_vblank \
+	kms_vrr \
+	meta_test \
+	perf \
+	perf_pmu \
+	prime_busy \
+	prime_mmap \
+	prime_mmap_coherency \
+	prime_mmap_kms \
+	prime_self_import \
+	prime_udl \
+	prime_vgem \
+	sw_sync \
+	syncobj_basic \
+	syncobj_wait \
+	template \
+	tools_test \
+	vgem_basic \
+	vgem_slow \
+	$(NULL)
+
+TESTS_progs += gem_bad_reloc
+gem_bad_reloc_SOURCES = i915/gem_bad_reloc.c
+
+TESTS_progs += gem_basic
+gem_basic_SOURCES = i915/gem_basic.c
+
+TESTS_progs += gem_busy
+gem_busy_SOURCES = i915/gem_busy.c
+
+TESTS_progs += gem_caching
+gem_caching_SOURCES = i915/gem_caching.c
+
+TESTS_progs += gem_close
+gem_close_SOURCES = i915/gem_close.c
+
+TESTS_progs += gem_close_race
+gem_close_race_SOURCES = i915/gem_close_race.c
+
+TESTS_progs += gem_concurrent_blit
+gem_concurrent_blit_SOURCES = i915/gem_concurrent_blit.c
+
+TESTS_progs += gem_cpu_reloc
+gem_cpu_reloc_SOURCES = i915/gem_cpu_reloc.c
+
+TESTS_progs += gem_create
+gem_create_SOURCES = i915/gem_create.c
+
+TESTS_progs += gem_cs_prefetch
+gem_cs_prefetch_SOURCES = i915/gem_cs_prefetch.c
+
+TESTS_progs += gem_cs_tlb
+gem_cs_tlb_SOURCES = i915/gem_cs_tlb.c
+
+TESTS_progs += gem_ctx_bad_destroy
+gem_ctx_bad_destroy_SOURCES = i915/gem_ctx_bad_destroy.c
+
+TESTS_progs += gem_ctx_clone
+gem_ctx_clone_SOURCES = i915/gem_ctx_clone.c
+
+TESTS_progs += gem_ctx_create
+gem_ctx_create_SOURCES = i915/gem_ctx_create.c
+
+TESTS_progs += gem_ctx_engines
+gem_ctx_engines_SOURCES = i915/gem_ctx_engines.c
+
+TESTS_progs += gem_ctx_exec
+gem_ctx_exec_SOURCES = i915/gem_ctx_exec.c
+
+TESTS_progs += gem_ctx_isolation
+gem_ctx_isolation_SOURCES = i915/gem_ctx_isolation.c
+
+TESTS_progs += gem_ctx_param
+gem_ctx_param_SOURCES = i915/gem_ctx_param.c
+
+TESTS_progs += gem_ctx_shared
+gem_ctx_shared_SOURCES = i915/gem_ctx_shared.c
+
+TESTS_progs += gem_ctx_sseu
+gem_ctx_sseu_SOURCES = i915/gem_ctx_sseu.c
+
+TESTS_progs += gem_ctx_switch
+gem_ctx_switch_SOURCES = i915/gem_ctx_switch.c
+
+TESTS_progs += gem_ctx_thrash
+gem_ctx_thrash_SOURCES = i915/gem_ctx_thrash.c
+
+TESTS_progs += gem_double_irq_loop
+gem_double_irq_loop_SOURCES = i915/gem_double_irq_loop.c
+
+TESTS_progs += gem_eio
+gem_eio_SOURCES = i915/gem_eio.c
+
+TESTS_progs += gem_evict_alignment
+gem_evict_alignment_SOURCES = i915/gem_evict_alignment.c
+
+TESTS_progs += gem_evict_everything
+gem_evict_everything_SOURCES = i915/gem_evict_everything.c
+
+TESTS_progs += gem_exec_alignment
+gem_exec_alignment_SOURCES = i915/gem_exec_alignment.c
+
+TESTS_progs += gem_exec_async
+gem_exec_async_SOURCES = i915/gem_exec_async.c
+
+TESTS_progs += gem_exec_await
+gem_exec_await_SOURCES = i915/gem_exec_await.c
+
+TESTS_progs += gem_exec_bad_domains
+gem_exec_bad_domains_SOURCES = i915/gem_exec_bad_domains.c
+
+TESTS_progs += gem_exec_balancer
+gem_exec_balancer_SOURCES = i915/gem_exec_balancer.c
+
+TESTS_progs += gem_exec_basic
+gem_exec_basic_SOURCES = i915/gem_exec_basic.c
+
+TESTS_progs += gem_exec_big
+gem_exec_big_SOURCES = i915/gem_exec_big.c
+
+TESTS_progs += gem_exec_blt
+gem_exec_blt_SOURCES = i915/gem_exec_blt.c
+
+TESTS_progs += gem_exec_capture
+gem_exec_capture_SOURCES = i915/gem_exec_capture.c
+
+TESTS_progs += gem_exec_create
+gem_exec_create_SOURCES = i915/gem_exec_create.c
+
+TESTS_progs += gem_exec_faulting_reloc
+gem_exec_faulting_reloc_SOURCES = i915/gem_exec_faulting_reloc.c
+
+TESTS_progs += gem_exec_fence
+gem_exec_fence_SOURCES = i915/gem_exec_fence.c
+
+TESTS_progs += gem_exec_flush
+gem_exec_flush_SOURCES = i915/gem_exec_flush.c
+
+TESTS_progs += gem_exec_gttfill
+gem_exec_gttfill_SOURCES = i915/gem_exec_gttfill.c
+
+TESTS_progs += gem_exec_latency
+gem_exec_latency_SOURCES = i915/gem_exec_latency.c
+
+TESTS_progs += gem_exec_lut_handle
+gem_exec_lut_handle_SOURCES = i915/gem_exec_lut_handle.c
+
+TESTS_progs += gem_exec_nop
+gem_exec_nop_SOURCES = i915/gem_exec_nop.c
+
+TESTS_progs += gem_exec_parallel
+gem_exec_parallel_SOURCES = i915/gem_exec_parallel.c
+
+TESTS_progs += gem_exec_params
+gem_exec_params_SOURCES = i915/gem_exec_params.c
+
+TESTS_progs += gem_exec_parse
+gem_exec_parse_SOURCES = i915/gem_exec_parse.c
+
+TESTS_progs += gem_exec_reloc
+gem_exec_reloc_SOURCES = i915/gem_exec_reloc.c
+
+TESTS_progs += gem_exec_reuse
+gem_exec_reuse_SOURCES = i915/gem_exec_reuse.c
+
+TESTS_progs += gem_exec_schedule
+gem_exec_schedule_SOURCES = i915/gem_exec_schedule.c
+
+TESTS_progs += gem_exec_store
+gem_exec_store_SOURCES = i915/gem_exec_store.c
+
+TESTS_progs += gem_exec_suspend
+gem_exec_suspend_SOURCES = i915/gem_exec_suspend.c
+
+TESTS_progs += gem_exec_whisper
+gem_exec_whisper_SOURCES = i915/gem_exec_whisper.c
+
+TESTS_progs += gem_fd_exhaustion
+gem_fd_exhaustion_SOURCES = i915/gem_fd_exhaustion.c
+
+TESTS_progs += gem_fence_thrash
+gem_fence_thrash_SOURCES = i915/gem_fence_thrash.c
+
+TESTS_progs += gem_fence_upload
+gem_fence_upload_SOURCES = i915/gem_fence_upload.c
+
+TESTS_progs += gem_fenced_exec_thrash
+gem_fenced_exec_thrash_SOURCES = i915/gem_fenced_exec_thrash.c
+
+TESTS_progs += gem_flink_basic
+gem_flink_basic_SOURCES = i915/gem_flink_basic.c
+
+TESTS_progs += gem_flink_race
+gem_flink_race_SOURCES = i915/gem_flink_race.c
+
+TESTS_progs += gem_gpgpu_fill
+gem_gpgpu_fill_SOURCES = i915/gem_gpgpu_fill.c
+
+TESTS_progs += gem_gtt_cpu_tlb
+gem_gtt_cpu_tlb_SOURCES = i915/gem_gtt_cpu_tlb.c
+
+TESTS_progs += gem_gtt_hog
+gem_gtt_hog_SOURCES = i915/gem_gtt_hog.c
+
+TESTS_progs += gem_gtt_speed
+gem_gtt_speed_SOURCES = i915/gem_gtt_speed.c
+
+TESTS_progs += gem_largeobject
+gem_largeobject_SOURCES = i915/gem_largeobject.c
+
+TESTS_progs += gem_linear_blits
+gem_linear_blits_SOURCES = i915/gem_linear_blits.c
+
+TESTS_progs += gem_lut_handle
+gem_lut_handle_SOURCES = i915/gem_lut_handle.c
+
+TESTS_progs += gem_madvise
+gem_madvise_SOURCES = i915/gem_madvise.c
+
+TESTS_progs += gem_media_fill
+gem_media_fill_SOURCES = i915/gem_media_fill.c
+
+TESTS_progs += gem_media_vme
+gem_media_vme_SOURCES = i915/gem_media_vme.c
+
+TESTS_progs += gem_mmap
+gem_mmap_SOURCES = i915/gem_mmap.c
+
+TESTS_progs += gem_mmap_gtt
+gem_mmap_gtt_SOURCES = i915/gem_mmap_gtt.c
+
+TESTS_progs += gem_mmap_offset_exhaustion
+gem_mmap_offset_exhaustion_SOURCES = i915/gem_mmap_offset_exhaustion.c
+
+TESTS_progs += gem_mmap_wc
+gem_mmap_wc_SOURCES = i915/gem_mmap_wc.c
+
+TESTS_progs += gem_mocs_settings
+gem_mocs_settings_SOURCES = i915/gem_mocs_settings.c
+
+TESTS_progs += gem_partial_pwrite_pread
+gem_partial_pwrite_pread_SOURCES = i915/gem_partial_pwrite_pread.c
+
+TESTS_progs += gem_persistent_relocs
+gem_persistent_relocs_SOURCES = i915/gem_persistent_relocs.c
+
+TESTS_progs += gem_pipe_control_store_loop
+gem_pipe_control_store_loop_SOURCES = i915/gem_pipe_control_store_loop.c
+
+TESTS_progs += gem_ppgtt
+gem_ppgtt_SOURCES = i915/gem_ppgtt.c
+
+TESTS_progs += gem_pread
+gem_pread_SOURCES = i915/gem_pread.c
+
+TESTS_progs += gem_pread_after_blit
+gem_pread_after_blit_SOURCES = i915/gem_pread_after_blit.c
+
+TESTS_progs += gem_pwrite
+gem_pwrite_SOURCES = i915/gem_pwrite.c
+
+TESTS_progs += gem_pwrite_pread
+gem_pwrite_pread_SOURCES = i915/gem_pwrite_pread.c
+
+TESTS_progs += gem_pwrite_snooped
+gem_pwrite_snooped_SOURCES = i915/gem_pwrite_snooped.c
+
+TESTS_progs += gem_read_read_speed
+gem_read_read_speed_SOURCES = i915/gem_read_read_speed.c
+
+TESTS_progs += gem_readwrite
+gem_readwrite_SOURCES = i915/gem_readwrite.c
+
+TESTS_progs += gem_reg_read
+gem_reg_read_SOURCES = i915/gem_reg_read.c
+
+TESTS_progs += gem_reloc_overflow
+gem_reloc_overflow_SOURCES = i915/gem_reloc_overflow.c
+
+TESTS_progs += gem_reloc_vs_gpu
+gem_reloc_vs_gpu_SOURCES = i915/gem_reloc_vs_gpu.c
+
+TESTS_progs += gem_render_copy
+gem_render_copy_SOURCES = i915/gem_render_copy.c
+
+TESTS_progs += gem_render_copy_redux
+gem_render_copy_redux_SOURCES = i915/gem_render_copy_redux.c
+
+TESTS_progs += gem_render_linear_blits
+gem_render_linear_blits_SOURCES = i915/gem_render_linear_blits.c
+
+TESTS_progs += gem_render_tiled_blits
+gem_render_tiled_blits_SOURCES = i915/gem_render_tiled_blits.c
+
+TESTS_progs += gem_request_retire
+gem_request_retire_SOURCES = i915/gem_request_retire.c
+
+TESTS_progs += gem_reset_stats
+gem_reset_stats_SOURCES = i915/gem_reset_stats.c
+
+TESTS_progs += gem_ring_sync_copy
+gem_ring_sync_copy_SOURCES = i915/gem_ring_sync_copy.c
+
+TESTS_progs += gem_ring_sync_loop
+gem_ring_sync_loop_SOURCES = i915/gem_ring_sync_loop.c
+
+TESTS_progs += gem_ringfill
+gem_ringfill_SOURCES = i915/gem_ringfill.c
+
+TESTS_progs += gem_set_tiling_vs_blt
+gem_set_tiling_vs_blt_SOURCES = i915/gem_set_tiling_vs_blt.c
+
+TESTS_progs += gem_set_tiling_vs_gtt
+gem_set_tiling_vs_gtt_SOURCES = i915/gem_set_tiling_vs_gtt.c
+
+TESTS_progs += gem_set_tiling_vs_pwrite
+gem_set_tiling_vs_pwrite_SOURCES = i915/gem_set_tiling_vs_pwrite.c
+
+TESTS_progs += gem_shrink
+gem_shrink_SOURCES = i915/gem_shrink.c
+
+TESTS_progs += gem_softpin
+gem_softpin_SOURCES = i915/gem_softpin.c
+
+TESTS_progs += gem_spin_batch
+gem_spin_batch_SOURCES = i915/gem_spin_batch.c
+
+TESTS_progs += gem_stolen
+gem_stolen_SOURCES = i915/gem_stolen.c
+
+TESTS_progs += gem_storedw_batches_loop
+gem_storedw_batches_loop_SOURCES = i915/gem_storedw_batches_loop.c
+
+TESTS_progs += gem_storedw_loop
+gem_storedw_loop_SOURCES = i915/gem_storedw_loop.c
+
+TESTS_progs += gem_streaming_writes
+gem_streaming_writes_SOURCES = i915/gem_streaming_writes.c
+
+TESTS_progs += gem_sync
+gem_sync_SOURCES = i915/gem_sync.c
+
+TESTS_progs += gem_threaded_access_tiled
+gem_threaded_access_tiled_SOURCES = i915/gem_threaded_access_tiled.c
+
+TESTS_progs += gem_tiled_blits
+gem_tiled_blits_SOURCES = i915/gem_tiled_blits.c
+
+TESTS_progs += gem_tiled_fence_blits
+gem_tiled_fence_blits_SOURCES = i915/gem_tiled_fence_blits.c
+
+TESTS_progs += gem_tiled_partial_pwrite_pread
+gem_tiled_partial_pwrite_pread_SOURCES = i915/gem_tiled_partial_pwrite_pread.c
+
+TESTS_progs += gem_tiled_pread_basic
+gem_tiled_pread_basic_SOURCES = i915/gem_tiled_pread_basic.c
+
+TESTS_progs += gem_tiled_pread_pwrite
+gem_tiled_pread_pwrite_SOURCES = i915/gem_tiled_pread_pwrite.c
+
+TESTS_progs += gem_tiled_swapping
+gem_tiled_swapping_SOURCES = i915/gem_tiled_swapping.c
+
+TESTS_progs += gem_tiled_wb
+gem_tiled_wb_SOURCES = i915/gem_tiled_wb.c
+
+TESTS_progs += gem_tiled_wc
+gem_tiled_wc_SOURCES = i915/gem_tiled_wc.c
+
+TESTS_progs += gem_tiling_max_stride
+gem_tiling_max_stride_SOURCES = i915/gem_tiling_max_stride.c
+
+TESTS_progs += gem_unfence_active_buffers
+gem_unfence_active_buffers_SOURCES = i915/gem_unfence_active_buffers.c
+
+TESTS_progs += gem_unref_active_buffers
+gem_unref_active_buffers_SOURCES = i915/gem_unref_active_buffers.c
+
+TESTS_progs += gem_userptr_blits
+gem_userptr_blits_SOURCES = i915/gem_userptr_blits.c
+
+TESTS_progs += gem_wait
+gem_wait_SOURCES = i915/gem_wait.c
+
+TESTS_progs += gem_workarounds
+gem_workarounds_SOURCES = i915/gem_workarounds.c
+
+TESTS_progs += gem_write_read_ring_switch
+gem_write_read_ring_switch_SOURCES = i915/gem_write_read_ring_switch.c
+
+TESTS_progs += gen3_mixed_blits
+gen3_mixed_blits_SOURCES = i915/gen3_mixed_blits.c
+
+TESTS_progs += gen3_render_linear_blits
+gen3_render_linear_blits_SOURCES = i915/gen3_render_linear_blits.c
+
+TESTS_progs += gen3_render_mixed_blits
+gen3_render_mixed_blits_SOURCES = i915/gen3_render_mixed_blits.c
+
+TESTS_progs += gen3_render_tiledx_blits
+gen3_render_tiledx_blits_SOURCES = i915/gen3_render_tiledx_blits.c
+
+TESTS_progs += gen3_render_tiledy_blits
+gen3_render_tiledy_blits_SOURCES = i915/gen3_render_tiledy_blits.c
+
+TESTS_progs += i915_fb_tiling
+i915_fb_tiling_SOURCES = i915/i915_fb_tiling.c
+
+TESTS_progs += i915_getparams_basic
+i915_getparams_basic_SOURCES = i915/i915_getparams_basic.c
+
+TESTS_progs += i915_hangman
+i915_hangman_SOURCES = i915/i915_hangman.c
+
+TESTS_progs += i915_module_load
+i915_module_load_SOURCES = i915/i915_module_load.c
+
+TESTS_progs += i915_pm_backlight
+i915_pm_backlight_SOURCES = i915/i915_pm_backlight.c
+
+TESTS_progs += i915_pm_lpsp
+i915_pm_lpsp_SOURCES = i915/i915_pm_lpsp.c
+
+TESTS_progs += i915_pm_rc6_residency
+i915_pm_rc6_residency_SOURCES = i915/i915_pm_rc6_residency.c
+
+TESTS_progs += i915_pm_rpm
+i915_pm_rpm_SOURCES = i915/i915_pm_rpm.c
+
+TESTS_progs += i915_pm_rps
+i915_pm_rps_SOURCES = i915/i915_pm_rps.c
+
+TESTS_progs += i915_pm_sseu
+i915_pm_sseu_SOURCES = i915/i915_pm_sseu.c
+
+TESTS_progs += i915_query
+i915_query_SOURCES = i915/i915_query.c
+
+TESTS_progs += i915_selftest
+i915_selftest_SOURCES = i915/i915_selftest.c
+
+TESTS_progs += i915_suspend
+i915_suspend_SOURCES = i915/i915_suspend.c
+
+TESTS_progs += gem_vm_create
+gem_vm_create_SOURCES = i915/gem_vm_create.c
+
+TESTS_progs_X = gem_concurrent_all
+gem_concurrent_all_SOURCES = i915/gem_concurrent_all.c
+
+kernel_tests = \
+	$(TESTS_progs) \
+	$(TESTS_scripts) \
+	$(NULL)
+
+# This target contains testcases with lots of subtests.
+# It was split from kernel_tests because of the overhead of listing all
+# the subtests in piglit
+extra_kernel_tests = \
+	$(TESTS_progs_X) \
+	$(NULL)
+
+
+kernel_tests_full = \
+	$(kernel_tests) \
+	$(extra_kernel_tests) \
+	$(NULL)
+
+# IMPORTANT: These tests here are all disabled because the result in sometime
+# unrecoverable gpu hangs. Don't put real testcases here.
+HANG = gem_bad_batch
+gem_bad_batch_SOURCES = i915/gem_bad_batch.c
+
+HANG += gem_hang
+gem_hang_SOURCES = i915/gem_hang.c
+
+HANG += gem_bad_blit
+gem_bad_blit_SOURCES = i915/gem_bad_blit.c
+
+HANG += gem_bad_address
+gem_bad_address_SOURCES = i915/gem_bad_address.c
+
+HANG += gem_non_secure_batch
+gem_non_secure_batch_SOURCES = i915/gem_non_secure_batch.c
+
+	$(NULL)
+
+scripts = \
+	ddx_intel_after_fbdev \
+	$(NULL)
+
+IMAGES = pass.png 1080p-left.png 1080p-right.png
+
+testdisplay_SOURCES = \
+	testdisplay.c \
+	testdisplay.h \
+	testdisplay_hotplug.c \
+	$(NULL)
+
+check_SCRIPTS = igt_command_line.sh \
+	$(NULL)
+
+TESTS = $(check_SCRIPTS) \
+	$(NULL)
+
+common_files = \
+	       eviction_common.c \
+	       $(NULL)

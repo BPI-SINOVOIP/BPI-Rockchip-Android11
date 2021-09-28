@@ -1,0 +1,2969 @@
+From b5b548a4be9f1ced6f5599b62765216f9ab8af00 Mon Sep 17 00:00:00 2001
+From: Ecco Park <eccopark@google.com>
+Date: Tue, 8 May 2018 13:44:14 -0700
+Subject: [PATCH 1/1] ksoap2 update
+
+Change-Id: Iace4c0f3cb31c9532c5fa0c44c2dc863bd81b23e
+Signed-off-by: Ecco Park <eccopark@google.com>
+---
+ .../main/java/org/ksoap2/SoapEnvelope.java    |  17 +-
+ .../src/main/java/org/ksoap2/SoapFault12.java |  13 +-
+ .../serialization/AttributeContainer.java     | 128 +++++-
+ .../java/org/ksoap2/serialization/DM.java     |  57 ++-
+ .../ksoap2/serialization/HasAttributes.java   |  16 +
+ .../ksoap2/serialization/HasInnerText.java    |  17 +
+ .../ksoap2/serialization/KvmSerializable.java |  25 +-
+ .../org/ksoap2/serialization/Marshal.java     |   3 +-
+ .../ksoap2/serialization/MarshalBase64.java   |   3 +-
+ .../org/ksoap2/serialization/MarshalDate.java |   3 +-
+ .../serialization/MarshalHashtable.java       |   8 +-
+ .../org/ksoap2/serialization/SoapObject.java  | 340 +++++++++++++-
+ .../ksoap2/serialization/SoapPrimitive.java   |  20 +-
+ .../SoapSerializationEnvelope.java            | 419 ++++++++++++------
+ .../org/ksoap2/serialization/ValueWriter.java |  13 +
+ .../ksoap2/transport/ServiceConnection.java   |  13 +-
+ .../java/org/ksoap2/transport/Transport.java  | 131 ++++--
+ .../ksoap2/serialization/MarshalFloat.java    |   3 +-
+ .../transport/HttpResponseException.java      |  60 +++
+ .../org/ksoap2/transport/HttpTransportSE.java | 348 +++++++--------
+ .../transport/HttpsServiceConnectionSE.java   |  58 ++-
+ .../ksoap2/transport/HttpsTransportSE.java    |  81 ++--
+ .../transport/KeepAliveHttpsTransportSE.java  |  20 +-
+ .../ksoap2/transport/ServiceConnectionSE.java |  44 +-
+ 24 files changed, 1298 insertions(+), 542 deletions(-)
+ create mode 100644 ksoap2-base/src/main/java/org/ksoap2/serialization/HasAttributes.java
+ create mode 100644 ksoap2-base/src/main/java/org/ksoap2/serialization/HasInnerText.java
+ create mode 100644 ksoap2-base/src/main/java/org/ksoap2/serialization/ValueWriter.java
+ create mode 100644 ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpResponseException.java
+
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/SoapEnvelope.java b/ksoap2-base/src/main/java/org/ksoap2/SoapEnvelope.java
+index 8a0b894..1c43656 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/SoapEnvelope.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/SoapEnvelope.java
+@@ -54,10 +54,8 @@ public class SoapEnvelope {
+     /** Namespace constant: http://www.w3.org/1999/XMLSchema */
+     public static final String XSI1999 = "http://www.w3.org/1999/XMLSchema-instance";
+ 
+-    //public static final String NS20 = "http://www.wi-fi-org/specifications/hotspot2dot0/spp/1.0/";
+     public static final String NS20 = "http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/spp";
+ 
+-    //public static final String OMADM12 = "http://www.openmobilealliance.org/tech/DTD/dm_ddf-v1_2.dtd";
+ 
+     /**
+      * Returns true for the string values "1" and "true", ignoring upper/lower
+@@ -105,9 +103,8 @@ public class SoapEnvelope {
+     /** Xml Schema data namespace, set by the constructor */
+     public String xsd;
+ 
+-    ///M: HS20 Add by Jungo
++    // HS20 change
+     public String ns;
+-    public String omadm;
+ 
+     /**
+      * Initializes a SOAP Envelope. The version parameter must be set to one of
+@@ -129,10 +126,8 @@ public class SoapEnvelope {
+             enc = SoapEnvelope.ENC2003;
+             env = SoapEnvelope.ENV2003;
+         }
+-
++        // HS20 change
+         ns = SoapEnvelope.NS20;
+-        //omadm = SoapEnvelope.OMADM12;
+-
+     }
+ 
+     /** Parses the SOAP envelope from the given parser */
+@@ -206,13 +201,9 @@ public class SoapEnvelope {
+      * given XML writer.
+      */
+     public void write(XmlSerializer writer) throws IOException {
+-        ///M: HS20 modify by Jungo
+-        //writer.setPrefix("i", xsi);
+-        //writer.setPrefix("d", xsd);
+-        //writer.setPrefix("c", enc);
+-        writer.setPrefix("soap", env);//the prefix for namespace env in xml output
++        // HS 2.0 changes
++        writer.setPrefix("soap", env); //the prefix for namespace env in xml output
+         writer.setPrefix("spp", ns);
+-        //writer.setPrefix("omadm", omadm);
+ 
+         writer.startTag(env, "Envelope");
+         writer.startTag(env, "Header");
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/SoapFault12.java b/ksoap2-base/src/main/java/org/ksoap2/SoapFault12.java
+index 5667cb4..3f39147 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/SoapFault12.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/SoapFault12.java
+@@ -72,27 +72,28 @@ public class SoapFault12 extends SoapFault {
+ 
+         while (parser.nextTag() == XmlPullParser.START_TAG) {
+             String name = parser.getName();
++            String namespace = parser.getNamespace();
+             parser.nextTag();
+-            if (name.equals("Code")) {
++            if (name.toLowerCase().equals("Code".toLowerCase())) {
+                 this.Code = new Node();
+                 this.Code.parse(parser);
+-            } else if (name.equals("Reason")) {
++            } else if (name.toLowerCase().equals("Reason".toLowerCase())) {
+                 this.Reason = new Node();
+                 this.Reason.parse(parser);
+-            } else if (name.equals("Node")) {
++            } else if (name.toLowerCase().equals("Node".toLowerCase())) {
+                 this.Node = new Node();
+                 this.Node.parse(parser);
+-            } else if (name.equals("Role")) {
++            } else if (name.toLowerCase().equals("Role".toLowerCase())) {
+                 this.Role = new Node();
+                 this.Role.parse(parser);
+-            } else if (name.equals("Detail")) {
++            } else if (name.toLowerCase().equals("Detail".toLowerCase())) {
+                 this.Detail = new Node();
+                 this.Detail.parse(parser);
+             } else {
+                 throw new RuntimeException("unexpected tag:" + name);
+             }
+ 
+-            parser.require(XmlPullParser.END_TAG, SoapEnvelope.ENV2003, name);
++            parser.require(XmlPullParser.END_TAG, namespace, name);
+         }
+         parser.require(XmlPullParser.END_TAG, SoapEnvelope.ENV2003, "Fault");
+         parser.nextTag();
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/AttributeContainer.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/AttributeContainer.java
+index 6b83847..34d2723 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/AttributeContainer.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/AttributeContainer.java
+@@ -3,8 +3,8 @@ package org.ksoap2.serialization;
+ 
+ import java.util.Vector;
+ 
+-public class AttributeContainer {
+-    private Vector attributes = new Vector();
++public class AttributeContainer implements HasAttributes{
++    protected Vector attributes = new Vector();
+ 
+     /**
+      * Places AttributeInfo of desired attribute into a designated AttributeInfo object
+@@ -29,9 +29,9 @@ public class AttributeContainer {
+         return ((AttributeInfo) attributes.elementAt(index)).getValue();
+     }
+ 
+-    /**
+-    * Get the attribute's toString value.
+-    */
++     /**
++     * Get the attribute's toString value.
++     */
+     public String getAttributeAsString(int index) {
+         AttributeInfo attributeInfo = (AttributeInfo) attributes.elementAt(index);
+         return attributeInfo.getValue().toString();
+@@ -51,6 +51,20 @@ public class AttributeContainer {
+         }
+     }
+ 
++    /**
++     * Get the attribute with the given name
++     *
++     * @throws RuntimeException if the attribute does not exist
++     */
++    public Object getAttribute(String namespace,String name) {
++        Integer i = attributeIndex(namespace,name);
++        if (i != null) {
++            return getAttribute(i.intValue());
++        } else {
++            throw new RuntimeException("illegal property: " + name);
++        }
++    }
++
+     /**
+      * Get the toString value of the attribute with the given name.
+      *
+@@ -65,6 +79,19 @@ public class AttributeContainer {
+         }
+     }
+ 
++    /**
++     * Get the toString value of the attribute with the given name.
++     *
++     * @throws RuntimeException if the attribute does not exist
++     */
++    public String getAttributeAsString(String namespace,String name) {
++        Integer i = attributeIndex(namespace,name);
++        if (i != null) {
++            return getAttribute(i.intValue()).toString();
++        } else {
++            throw new RuntimeException("illegal property: " + name);
++        }
++    }
+     /**
+      * Knows whether the given attribute exists
+      */
+@@ -76,6 +103,16 @@ public class AttributeContainer {
+         }
+     }
+ 
++    /**
++     * Knows whether the given attribute exists
++     */
++    public boolean hasAttribute(final String namespace,final String name) {
++        if (attributeIndex(namespace,name) != null) {
++            return true;
++        } else {
++            return false;
++        }
++    }
+     /**
+      * Get an attribute without chance of throwing an exception
+      *
+@@ -91,6 +128,21 @@ public class AttributeContainer {
+         }
+     }
+ 
++    /**
++     * Get an attribute without chance of throwing an exception
++     *
++     * @param name the name of the attribute to retrieve
++     * @return the value of the attribute if it exists; {@code null} if it does not exist
++     */
++    public Object getAttributeSafely(String namespace,String name) {
++        Integer i = attributeIndex(namespace,name);
++        if (i != null) {
++            return getAttribute(i.intValue());
++        } else {
++            return null;
++        }
++    }
++
+     /**
+      * Get an attributes' toString value without chance of throwing an
+      * exception.
+@@ -108,6 +160,23 @@ public class AttributeContainer {
+         }
+     }
+ 
++    /**
++     * Get an attributes' toString value without chance of throwing an
++     * exception.
++
++     * @param name
++     * @return the value of the attribute,s toString method if it exists; ""
++     * if it does not exist
++     */
++    public Object getAttributeSafelyAsString(String namespace,String name) {
++        Integer i = attributeIndex(namespace,name);
++        if (i != null) {
++            return getAttribute(i.intValue()).toString();
++        } else {
++            return "";
++        }
++    }
++
+     private Integer attributeIndex(String name) {
+         for (int i = 0; i < attributes.size(); i++) {
+             if (name.equals(((AttributeInfo) attributes.elementAt(i)).getName())) {
+@@ -117,6 +186,16 @@ public class AttributeContainer {
+         return null;
+     }
+ 
++    private Integer attributeIndex(String namespace,String name) {
++        for (int i = 0; i < attributes.size(); i++) {
++            AttributeInfo attrInfo=(AttributeInfo) attributes.elementAt(i);
++            if (name.equals(attrInfo.getName()) && namespace.equals(attrInfo.getNamespace())) {
++                return new Integer(i);
++            }
++        }
++        return null;
++    }
++
+     /**
+      * Returns the number of attributes
+      *
+@@ -160,13 +239,25 @@ public class AttributeContainer {
+      * @return {@code this} object.
+      */
+     public void addAttribute(String name, Object value) {
++        addAttribute(null,name,value);
++    }
++
++    /**
++     * Adds a attribute (parameter) to the object.
++     *
++     * @param namespace  The namespace of the attribute
++     * @param name  The name of the attribute
++     * @param value the value of the attribute
++     * @return {@code this} object.
++     */
++    public void addAttribute(String namespace,String name, Object value) {
+         AttributeInfo attributeInfo = new AttributeInfo();
+         attributeInfo.name = name;
++        attributeInfo.namespace = namespace;
+         attributeInfo.type = value == null ? PropertyInfo.OBJECT_CLASS : value.getClass();
+         attributeInfo.value = value;
+         addAttribute(attributeInfo);
+     }
+-
+     /**
+      * Add an attribute if the value is not null.
+      * @param name
+@@ -178,6 +269,18 @@ public class AttributeContainer {
+         }
+     }
+ 
++    /**
++     * Add an attribute if the value is not null.
++     * @param namespace  The namespace of the attribute
++     * @param name
++     * @param value
++     */
++    public void addAttributeIfValue(String namespace,String name, Object value) {
++        if (value != null) {
++            addAttribute(namespace,name, value);
++        }
++    }
++
+     /**
+      * Add a new attribute by providing an {@link AttributeInfo} object.  {@code AttributeInfo}
+      * contains all data about the attribute, including name and value.}
+@@ -198,4 +301,17 @@ public class AttributeContainer {
+             attributes.addElement(attributeInfo);
+         }
+     }
++
++
++    public void setAttribute(AttributeInfo info) {
++
++
++    }
++
++
++    public void getAttribute(int index, AttributeInfo info) {
++
++
++    }
++
+ }
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/DM.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/DM.java
+index 78d4449..255126e 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/DM.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/DM.java
+@@ -20,9 +20,12 @@
+ 
+ package org.ksoap2.serialization;
+ 
+-import java.io.*;
+-import org.xmlpull.v1.*;
+-import org.ksoap2.*;
++import java.io.IOException;
++
++import org.ksoap2.SoapEnvelope;
++import org.xmlpull.v1.XmlPullParser;
++import org.xmlpull.v1.XmlPullParserException;
++import org.xmlpull.v1.XmlSerializer;
+ 
+ /**
+  * This class is not public, so save a few bytes by using a short class name (DM
+@@ -30,8 +33,7 @@ import org.ksoap2.*;
+  */
+ class DM implements Marshal {
+ 
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo expected)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo excepted)
+             throws IOException, XmlPullParserException {
+         String text = parser.nextText();
+         switch (name.charAt(0)) {
+@@ -49,9 +51,10 @@ class DM implements Marshal {
+     }
+ 
+     /**
+-     * Write the instance out. In case it is an AttributeContainer write those our first though.
+-     * @param writer
+-     *            the xml serializer.
++     * Write the instance out. In case it is an AttributeContainer write those our first though. 
++     * If it HasAttributes then write the attributes and values.
++     *
++     * @param writer   the xml serializer.
+      * @param instance
+      * @throws IOException
+      */
+@@ -62,11 +65,43 @@ class DM implements Marshal {
+             for (int counter = 0; counter < cnt; counter++) {
+                 AttributeInfo attributeInfo = new AttributeInfo();
+                 attributeContainer.getAttributeInfo(counter, attributeInfo);
+-                writer.attribute(attributeInfo.getNamespace(), attributeInfo.getName(),
+-                        attributeInfo.getValue().toString());
++                try {
++                    attributeContainer.getAttribute(counter, attributeInfo);
++                } catch (Exception e) {
++                    e.printStackTrace();
++                }
++                if (attributeInfo.getValue() != null) {
++                    writer.attribute(attributeInfo.getNamespace(), attributeInfo.getName(),
++                            (attributeInfo.getValue() != null) ? attributeInfo.getValue().toString() : "");
++                }
++            }
++        } else if (instance instanceof HasAttributes) {
++            HasAttributes soapObject = (HasAttributes) instance;
++            int cnt = soapObject.getAttributeCount();
++            for (int counter = 0; counter < cnt; counter++) {
++                AttributeInfo attributeInfo = new AttributeInfo();
++                soapObject.getAttributeInfo(counter, attributeInfo);
++                try {
++                    soapObject.getAttribute(counter, attributeInfo);
++                } catch (Exception e) {
++                    e.printStackTrace();
++                }
++                if (attributeInfo.getValue() != null) {
++                    writer.attribute(attributeInfo.getNamespace(), attributeInfo.getName(),
++                            attributeInfo.getValue() != null ? attributeInfo.getValue().toString() : "");
++                }
+             }
+         }
+-        writer.text(instance.toString());
++
++        if(instance  instanceof ValueWriter)
++        {
++            ((ValueWriter)instance).write(writer);
++        }
++        else
++        {
++            writer.text(instance.toString());
++        }
++
+     }
+ 
+     public void register(SoapSerializationEnvelope cm) {
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/HasAttributes.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/HasAttributes.java
+new file mode 100644
+index 0000000..b513138
+--- /dev/null
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/HasAttributes.java
+@@ -0,0 +1,16 @@
++package org.ksoap2.serialization;
++
++/**
++ * Common inteface for classes which want to serialize attributes to outgoing soap message
++ *
++ * @author robocik
++ */
++public interface HasAttributes {
++    int getAttributeCount();
++
++    void getAttributeInfo(int index, AttributeInfo info);
++
++    void getAttribute(int index, AttributeInfo info);
++
++    void setAttribute(AttributeInfo info);
++}
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/HasInnerText.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/HasInnerText.java
+new file mode 100644
+index 0000000..b35c35b
+--- /dev/null
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/HasInnerText.java
+@@ -0,0 +1,17 @@
++package org.ksoap2.serialization;
++/**
++ * Interface for classes requiring inner text of xml  tags
++ *
++ * @author satansly
++ */
++public interface HasInnerText {
++     /**
++     * Gets the inner text of xml tags
++     */
++    Object getInnerText();
++
++    /**
++     * @param s String to be set as inner text for an outgoing soap object
++     */
++    void setInnerText(Object s);
++}
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/KvmSerializable.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/KvmSerializable.java
+index bded0c0..09d7b32 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/KvmSerializable.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/KvmSerializable.java
+@@ -39,31 +39,26 @@ public interface KvmSerializable {
+      */
+     Object getProperty(int index);
+ 
+-    /** 
+-     * @return the number of serializable properties 
++    /**
++     * @return the number of serializable properties
+      */
+     int getPropertyCount();
+ 
+     /**
+      * Sets the property with the given index to the given value.
+-     * 
+-     * @param index
+-     *            the index to be set
+-     * @param value
+-     *            the value of the property
++     *
++     * @param index the index to be set
++     * @param value the value of the property
+      */
+     void setProperty(int index, Object value);
+ 
+     /**
+      * Fills the given property info record.
+-     * 
+-     * @param index
+-     *            the index to be queried
+-     * @param properties
+-     *            information about the (de)serializer.  Not frequently used.
+-     * @param info
+-     *            The return parameter, to be filled with information about the
+-     *            property with the given index.
++     *
++     * @param index      the index to be queried
++     * @param properties information about the (de)serializer.  Not frequently used.
++     * @param info       The return parameter, to be filled with information about the
++     *                   property with the given index.
+      */
+     void getPropertyInfo(int index, Hashtable properties, PropertyInfo info);
+ 
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/Marshal.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/Marshal.java
+index cfa9d81..100f107 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/Marshal.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/Marshal.java
+@@ -41,8 +41,7 @@ public interface Marshal {
+      *            the namespace.
+      * @return the object read from the xml stream.
+      */
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo expected)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo expected)
+             throws IOException, XmlPullParserException;
+ 
+     /**
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalBase64.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalBase64.java
+index 2f8420c..2239027 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalBase64.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalBase64.java
+@@ -31,8 +31,7 @@ import org.xmlpull.v1.*;
+ public class MarshalBase64 implements Marshal {
+     public static Class BYTE_ARRAY_CLASS = new byte[0].getClass();
+ 
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo expected)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo expected)
+             throws IOException, XmlPullParserException {
+         return Base64.decode(parser.nextText());
+     }
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalDate.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalDate.java
+index 3e4fa06..489ba3b 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalDate.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalDate.java
+@@ -31,8 +31,7 @@ import org.ksoap2.kobjects.isodate.*;
+ public class MarshalDate implements Marshal {
+     public static Class DATE_CLASS = new Date().getClass();
+ 
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo expected)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo expected)
+             throws IOException, XmlPullParserException {
+         return IsoDate.stringToDate(parser.nextText(), IsoDate.DATE_TIME);
+     }
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalHashtable.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalHashtable.java
+index d2367e9..0c6b53e 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalHashtable.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/MarshalHashtable.java
+@@ -46,8 +46,7 @@ public class MarshalHashtable implements Marshal {
+     public static final Class HASHTABLE_CLASS = new Hashtable().getClass();
+     SoapSerializationEnvelope envelope;
+ 
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo expected)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo expected)
+             throws IOException, XmlPullParserException {
+         Hashtable instance = new Hashtable();
+         String elementName = parser.getName();
+@@ -81,7 +80,7 @@ public class MarshalHashtable implements Marshal {
+             Object key = keys.nextElement();
+             item.setProperty(0, key);
+             item.setProperty(1, h.get(key));
+-            envelope.writeObjectBody(writer, item);
++            envelope.writeObjectBodyWithAttributes(writer, item);
+             writer.endTag("", "item");
+         }
+     }
+@@ -89,7 +88,6 @@ public class MarshalHashtable implements Marshal {
+     class ItemSoapObject extends SoapObject {
+         Hashtable h;
+         int resolvedIndex = -1;
+-
+         ItemSoapObject(Hashtable h) {
+             super(null, null);
+             this.h = h;
+@@ -107,7 +105,7 @@ public class MarshalHashtable implements Marshal {
+                 Object resolved = resolvedIndex == 0 ? getProperty(0) : getProperty(1);
+                 if (index == 0) {
+                     h.put(value, resolved);
+-                } else {
++                } else  {
+                     h.put(resolved, value);
+                 }
+             }
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapObject.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapObject.java
+index 24a1ffe..f11210a 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapObject.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapObject.java
+@@ -38,7 +38,7 @@ import java.util.*;
+  * KvmSerializable interface.
+  */
+ 
+-public class SoapObject extends AttributeContainer implements KvmSerializable {
++public class SoapObject extends AttributeContainer implements KvmSerializable, HasInnerText {
+ 
+     private static final String EMPTY_STRING = "";
+     /**
+@@ -54,6 +54,8 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+      */
+     protected Vector properties = new Vector();
+ 
++    protected Object innerText;
++
+     // TODO: accessing properties and attributes would work much better if we
+     // kept a list of known properties instead of iterating through the list
+     // each time
+@@ -181,6 +183,230 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+         }
+     }
+ 
++    /**
++     * Get the property with the given name
++     *
++     * return null
++     *             if the property does not exist
++     */
++    public Object getProperty(String namespace,String name) {
++        Integer index = propertyIndex(namespace,name);
++        if (index != null) {
++            return getProperty(index.intValue());
++        }
++        else {
++            throw new RuntimeException("illegal property: " + name);
++        }
++    }
++
++    /**
++     * Get a property using namespace and name without chance of throwing an exception
++     *
++     * @return the property if it exists; if not, {@link NullSoapObject} is
++     *         returned
++     */
++    public Object getPropertyByNamespaceSafely(final String namespace, final String name) {
++        Integer i = propertyIndex(namespace,name);
++        if (i != null) {
++            return getProperty(i.intValue());
++        } else {
++            return new NullSoapObject();
++        }
++    }
++
++    /**
++     * Get the toString value of a property without chance of throwing an
++     * exception
++     *
++     * @return the string value of the property if it exists; if not, #EMPTY_STRING is
++     *         returned
++     */
++    public String getPropertyByNamespaceSafelyAsString(final String namespace,final String name) {
++        Integer i = propertyIndex(namespace,name);
++        if (i != null) {
++            Object foo = getProperty(i.intValue());
++            if (foo == null) {
++                return EMPTY_STRING;
++            } else {
++                return foo.toString();
++            }
++        } else {
++            return EMPTY_STRING;
++        }
++    }
++
++    /**
++     * Get a property without chance of throwing an exception. An object can be
++     * provided to this method; if the property is not found, this object will
++     * be returned.
++     *
++     * @param defaultThing
++     *            the object to return if the property is not found
++     * @return the property if it exists; defaultThing if the property does not
++     *         exist
++     */
++    public Object getPropertySafely(final String namespace,final String name, final Object defaultThing) {
++        Integer i = propertyIndex(namespace,name);
++        if (i != null) {
++            return getProperty(i.intValue());
++        } else {
++            return defaultThing;
++        }
++    }
++
++    /**
++     * Get the toString value of a property without chance of throwing an
++     * exception. An object can be provided to this method; if the property is
++     * not found, this object's string representation will be returned.
++     *
++     * @param defaultThing
++     *            toString of the object to return if the property is not found
++     * @return the property toString if it exists; defaultThing toString if the
++     *         property does not exist, if the defaultThing is null #EMPTY_STRING
++     *         is returned
++     */
++    public String getPropertySafelyAsString(final String namespace,final String name,
++                                            final Object defaultThing) {
++        Integer i = propertyIndex(namespace,name);
++        if (i != null) {
++            Object property = getProperty(i.intValue());
++            if (property != null) {
++                return property.toString();
++            } else {
++                return EMPTY_STRING;
++            }
++        } else {
++            if (defaultThing != null) {
++                return defaultThing.toString();
++            } else {
++                return EMPTY_STRING;
++            }
++        }
++    }
++
++    /**
++     * Get the primitive property with the given name.
++     *
++     * @param name
++     * @return PropertyInfo containing an empty string if property either complex or empty
++     */
++    public Object getPrimitiveProperty(final String namespace,final String name){
++        Integer index = propertyIndex(namespace,name);
++        if (index != null){
++            PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
++                return propertyInfo.getValue();
++            } else {
++                propertyInfo = new PropertyInfo();
++                propertyInfo.setType(String.class);
++                propertyInfo.setValue(EMPTY_STRING);
++                propertyInfo.setName(name);
++                propertyInfo.setNamespace(namespace);
++                return (Object) propertyInfo.getValue();
++            }
++        } else {
++            throw new RuntimeException("illegal property: " + name);
++        }
++    }
++
++    /**
++     * Get the toString value of the primitive property with the given name.
++     * Returns empty string if property either complex or empty
++     *
++     * @param name
++     * @return the string value of the property
++     */
++    public String getPrimitivePropertyAsString(final String namespace,final String name){
++        Integer index = propertyIndex(namespace,name);
++        if (index != null){
++            PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
++                return propertyInfo.getValue().toString();
++            } else {
++                return EMPTY_STRING;
++            }
++        } else {
++            throw new RuntimeException("illegal property: " + name);
++        }
++    }
++
++    /**
++     * Get the toString value of a primitive property without chance of throwing an
++     * exception
++     *
++     * @param name
++     * @return the string value of the property if it exists and is primitive; if not, #EMPTY_STRING is
++     *         returned
++     */
++    public Object getPrimitivePropertySafely(final String namespace,final String name) {
++        Integer index = propertyIndex(namespace,name);
++        if (index != null){
++            PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
++                return propertyInfo.getValue().toString();
++            } else {
++                propertyInfo = new PropertyInfo();
++                propertyInfo.setType(String.class);
++                propertyInfo.setValue(EMPTY_STRING);
++                propertyInfo.setName(name);
++                propertyInfo.setNamespace(namespace);
++                return (Object) propertyInfo.getValue();
++            }
++        } else {
++            return new NullSoapObject();
++        }
++    }
++
++    /**
++     * Get the toString value of a primitive property without chance of throwing an
++     * exception
++     *
++     * @param name
++     * @return the string value of the property if it exists and is primitive; if not, #EMPTY_STRING is
++     *         returned
++     */
++    public String getPrimitivePropertySafelyAsString(final String namespace,final String name) {
++        Integer index = propertyIndex(namespace,name);
++        if (index != null){
++            PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
++                return propertyInfo.getValue().toString();
++            } else {
++                return EMPTY_STRING;
++            }
++        } else {
++            return EMPTY_STRING;
++        }
++    }
++
++    /**
++     * Knows whether the given property exists
++     */
++    public boolean hasProperty(final String namespace,final String name) {
++        if (propertyIndex(namespace,name) != null) {
++            return true;
++        } else {
++            return false;
++        }
++    }
++
++    /**
++     * Get the toString value of the property.
++     *
++     * @param namespace
++     * @param name
++     * @return
++     */
++
++    public String getPropertyAsString(String namespace,String name) {
++        Integer index = propertyIndex(namespace,name);
++        if (index != null) {
++            return getProperty(index.intValue()).toString();
++        } else {
++            throw new RuntimeException("illegal property: " + name);
++        }
++    }
++
+     /**
+      * Get the toString value of the property.
+      *
+@@ -301,9 +527,9 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+      */
+     public Object getPrimitiveProperty(final String name) {
+         Integer index = propertyIndex(name);
+-        if (index != null) {
++        if (index != null){
+             PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
+-            if (propertyInfo.getType() != SoapObject.class) {
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
+                 return propertyInfo.getValue();
+             } else {
+                 propertyInfo = new PropertyInfo();
+@@ -326,9 +552,9 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+      */
+     public String getPrimitivePropertyAsString(final String name) {
+         Integer index = propertyIndex(name);
+-        if (index != null) {
++        if (index != null){
+             PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
+-            if (propertyInfo.getType() != SoapObject.class) {
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
+                 return propertyInfo.getValue().toString();
+             } else {
+                 return EMPTY_STRING;
+@@ -348,9 +574,9 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+      */
+     public Object getPrimitivePropertySafely(final String name) {
+         Integer index = propertyIndex(name);
+-        if (index != null) {
++        if (index != null){
+             PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
+-            if (propertyInfo.getType() != SoapObject.class) {
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
+                 return propertyInfo.getValue().toString();
+             } else {
+                 propertyInfo = new PropertyInfo();
+@@ -374,9 +600,9 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+      */
+     public String getPrimitivePropertySafelyAsString(final String name) {
+         Integer index = propertyIndex(name);
+-        if (index != null) {
++        if (index != null){
+             PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(index.intValue());
+-            if (propertyInfo.getType() != SoapObject.class) {
++            if (propertyInfo.getType()!=SoapObject.class && propertyInfo.getValue()!=null){
+                 return propertyInfo.getValue().toString();
+             } else {
+                 return EMPTY_STRING;
+@@ -397,6 +623,18 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+         return null;
+     }
+ 
++
++    private Integer propertyIndex(String namespace,String name) {
++        if (name != null && namespace!=null) {
++            for (int i = 0; i < properties.size(); i++) {
++                PropertyInfo info= (PropertyInfo) properties.elementAt(i);
++                if (name.equals(info.getName()) && namespace.equals(info.getNamespace())) {
++                    return new Integer(i);
++                }
++            }
++        }
++        return null;
++    }
+     /**
+      * Returns the number of properties
+      *
+@@ -453,6 +691,17 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+         }
+     }
+ 
++    public PropertyInfo getPropertyInfo(int index) {
++        Object element = properties.elementAt(index);
++        if (element instanceof PropertyInfo) {
++            PropertyInfo p = (PropertyInfo) element;
++            return p;
++        } else {
++            // SoapObject
++            return null;
++        }
++    }
++
+     /**
+      * Creates a new SoapObject based on this, allows usage of SoapObjects as
+      * templates. One application is to set the expected return type of a soap
+@@ -466,17 +715,17 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+             Object prop = properties.elementAt(propIndex);
+             if (prop instanceof PropertyInfo) {
+                 PropertyInfo propertyInfo = (PropertyInfo) properties.elementAt(propIndex);
+-                PropertyInfo propertyInfoClonned = (PropertyInfo) propertyInfo.clone();
+-                o.addProperty(propertyInfoClonned);
+-            } else if (prop instanceof SoapObject) {
+-                o.addSoapObject(((SoapObject) prop).newInstance());
++                PropertyInfo propertyInfoClonned = (PropertyInfo)propertyInfo.clone();
++                o.addProperty( propertyInfoClonned );
++            } else if(prop instanceof SoapObject) {
++                o.addSoapObject(((SoapObject)prop).newInstance());
+             }
+         }
+         for (int attribIndex = 0; attribIndex < getAttributeCount(); attribIndex++) {
+             AttributeInfo newAI = new AttributeInfo();
+             getAttributeInfo(attribIndex, newAI);
+             AttributeInfo attributeInfo = newAI; // (AttributeInfo)
+-                                                 // attributes.elementAt(attribIndex);
++                                                    // attributes.elementAt(attribIndex);
+             o.addAttribute(attributeInfo);
+         }
+         return o;
+@@ -513,11 +762,49 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+         propertyInfo.type = value == null ? PropertyInfo.OBJECT_CLASS : value
+                 .getClass();
+         propertyInfo.value = value;
++        return addProperty(propertyInfo);
++    }
++
++    /**
++     * Adds a property (parameter) to the object. This is essentially a sub
++     * element.
++     *
++     * @param namespace
++     *            The namespace of the property
++     * @param name
++     *            The name of the property
++     * @param value
++     *            the value of the property
++     */
++    public SoapObject addProperty(String namespace,String name, Object value) {
++        PropertyInfo propertyInfo = new PropertyInfo();
++        propertyInfo.name = name;
+         propertyInfo.namespace = namespace;
+-        ///M: HS20 modify by Jungo
++        propertyInfo.type = value == null ? PropertyInfo.OBJECT_CLASS : value
++                .getClass();
++        propertyInfo.value = value;
+         return addProperty(propertyInfo);
+     }
+ 
++    /**
++     * Add a property only if the value is not null.
++     *
++     * @param namespace
++     *            The namespace of the property
++     * @param name
++     *            The name of the property
++     * @param value
++     *            the value of the property
++     * @return
++     */
++    public SoapObject addPropertyIfValue(String namespace,String name, Object value) {
++        if (value != null) {
++            return addProperty(namespace,name, value);
++        } else {
++            return this;
++        }
++    }
++
+     /**
+      * Add a property only if the value is not null.
+      *
+@@ -597,12 +884,12 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+         StringBuffer buf = new StringBuffer(EMPTY_STRING + name + "{");
+         for (int i = 0; i < getPropertyCount(); i++) {
+             Object prop = properties.elementAt(i);
+-            if (prop instanceof PropertyInfo) {
++            if(prop instanceof PropertyInfo) {
+                 buf.append(EMPTY_STRING)
+-                        .append(((PropertyInfo) prop).getName())
+-                        .append("=")
+-                        .append(getProperty(i))
+-                        .append("; ");
++                    .append(((PropertyInfo) prop).getName())
++                    .append("=")
++                    .append(getProperty(i))
++                    .append("; ");
+             } else {
+                 buf.append(((SoapObject) prop).toString());
+             }
+@@ -610,4 +897,17 @@ public class SoapObject extends AttributeContainer implements KvmSerializable {
+         buf.append("}");
+         return buf.toString();
+     }
++    public Object getInnerText() {
++         return innerText;
++    }
++
++    public void setInnerText(Object innerText)
++    {
++        this.innerText=innerText;
++    }
++
++    public void removePropertyInfo(Object info)
++    {
++        properties.remove(info);
++    }
+ }
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapPrimitive.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapPrimitive.java
+index d09f7a7..32fe333 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapPrimitive.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapPrimitive.java
+@@ -34,11 +34,14 @@ package org.ksoap2.serialization;
+  */
+ 
+ public class SoapPrimitive extends AttributeContainer {
+-    String namespace;
+-    String name;
+-    String value;
++    protected String namespace;
++    protected String name;
++    protected Object value;
+ 
+-    public SoapPrimitive(String namespace, String name, String value) {
++    public  static final Object NullSkip = new Object();
++    public  static final Object NullNilElement = new Object();
++
++    public SoapPrimitive(String namespace, String name, Object value) {
+         this.namespace = namespace;
+         this.name = name;
+         this.value = value;
+@@ -50,7 +53,7 @@ public class SoapPrimitive extends AttributeContainer {
+         }
+         SoapPrimitive p = (SoapPrimitive) o;
+         boolean varsEqual = name.equals(p.name)
+-                && (namespace == null ? p.namespace == null : namespace.equals(p.namespace))
++                && (namespace == null ? p.namespace == null:namespace.equals(p.namespace))
+                 && (value == null ? (p.value == null) : value.equals(p.value));
+         return varsEqual && attributesAreEqual(p);
+     }
+@@ -60,7 +63,7 @@ public class SoapPrimitive extends AttributeContainer {
+     }
+ 
+     public String toString() {
+-        return value;
++        return value != null ? value.toString() : null;
+     }
+ 
+     public String getNamespace() {
+@@ -70,4 +73,9 @@ public class SoapPrimitive extends AttributeContainer {
+     public String getName() {
+         return name;
+     }
++
++    public Object getValue() {
++        return value;
++    }
++
+ }
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapSerializationEnvelope.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapSerializationEnvelope.java
+index dae09d2..ceeb3f4 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapSerializationEnvelope.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/SoapSerializationEnvelope.java
+@@ -27,9 +27,9 @@ import org.xmlpull.v1.XmlPullParserException;
+ import org.xmlpull.v1.XmlSerializer;
+ 
+ import java.io.IOException;
++import java.util.ArrayList;
+ import java.util.Hashtable;
+ import java.util.Vector;
+-import java.io.ByteArrayOutputStream;
+ 
+ import org.kxml2.io.*;
+ 
+@@ -43,29 +43,29 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+     protected static final int QNAME_TYPE = 1;
+     protected static final int QNAME_NAMESPACE = 0;
+     protected static final int QNAME_MARSHAL = 3;
++    protected static final String NULL_LABEL = "null";
++    protected static final String NIL_LABEL = "nil";
++    static final Marshal DEFAULT_MARSHAL = new DM();
+     private static final String ANY_TYPE_LABEL = "anyType";
+     private static final String ARRAY_MAPPING_NAME = "Array";
+-    private static final String NULL_LABEL = "null";
+-    private static final String NIL_LABEL = "nil";
+     private static final String HREF_LABEL = "href";
+     private static final String ID_LABEL = "id";
+     private static final String ROOT_LABEL = "root";
+     private static final String TYPE_LABEL = "type";
+     private static final String ITEM_LABEL = "item";
+     private static final String ARRAY_TYPE_LABEL = "arrayType";
+-    static final Marshal DEFAULT_MARSHAL = new DM();
+     public Hashtable properties = new Hashtable();
+-
+-    Hashtable idMap = new Hashtable();
+-    Vector multiRef; // = new Vector();
+-
+     /**
+      * Set this variable to true if you don't want that type definitions for complex types/objects
+      * are automatically generated (with type "anyType") in the XML-Request, if you don't call the
+      * Method addMapping. This is needed by some Servers which have problems with these type-definitions.
+      */
+     public boolean implicitTypes;
+-
++    /**
++     * If set to true then all properties with null value will be skipped from the soap message.
++     * If false then null properties will be sent as <element nil="true" />
++     */
++    public boolean skipNullProperties;
+     /**
+      * Set this variable to true for compatibility with what seems to be the default encoding for
+      * .Net-Services. This feature is an extremely ugly hack. A much better option is to change the
+@@ -96,9 +96,10 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+      * Set to true to add and ID and ROOT label to the envelope. Change to false for compatibility with WSDL.
+      */
+     protected boolean addAdornments = true;
++    Hashtable idMap = new Hashtable();
++    Vector multiRef; // = new Vector();
+ 
+-    public SoapSerializationEnvelope(int version)
+-    {
++    public SoapSerializationEnvelope(int version) {
+         super(version);
+         addMapping(enc, ARRAY_MAPPING_NAME, PropertyInfo.VECTOR_CLASS);
+         DEFAULT_MARSHAL.register(this);
+@@ -107,23 +108,21 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+     /**
+      * @return the addAdornments
+      */
+-    public boolean isAddAdornments()
+-    {
++    public boolean isAddAdornments() {
+         return addAdornments;
+     }
+ 
+     /**
+-     * @param addAdornments
+-     *            the addAdornments to set
++     * @param addAdornments the addAdornments to set
+      */
+-    public void setAddAdornments(boolean addAdornments)
+-    {
++    public void setAddAdornments(boolean addAdornments) {
+         this.addAdornments = addAdornments;
+     }
+ 
+     /**
+      * Set the bodyOut to be empty so that no un-needed xml is create. The null value for bodyOut will
+      * cause #writeBody to skip writing anything redundant.
++     *
+      * @param emptyBody
+      * @see "http://code.google.com/p/ksoap2-android/issues/detail?id=77"
+      */
+@@ -133,8 +132,7 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         }
+     }
+ 
+-    public void parseBody(XmlPullParser parser) throws IOException, XmlPullParserException
+-    {
++    public void parseBody(XmlPullParser parser) throws IOException, XmlPullParserException {
+         bodyIn = null;
+         parser.nextTag();
+         if (parser.getEventType() == XmlPullParser.START_TAG && parser.getNamespace().equals(env)
+@@ -161,10 +159,11 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         }
+     }
+ 
+-    /** Read a SoapObject. This extracts any attributes and then reads the object as a KvmSerializable. */
++    /**
++     * Read a SoapObject. This extracts any attributes and then reads the object as a KvmSerializable.
++     */
+     protected void readSerializable(XmlPullParser parser, SoapObject obj) throws IOException,
+-            XmlPullParserException
+-    {
++            XmlPullParserException {
+         for (int counter = 0; counter < parser.getAttributeCount(); counter++) {
+             String attributeName = parser.getAttributeName(counter);
+             String value = parser.getAttributeValue(counter);
+@@ -173,11 +172,21 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         readSerializable(parser, (KvmSerializable) obj);
+     }
+ 
+-    /** Read a KvmSerializable. */
++    /**
++     * Read a KvmSerializable.
++     */
+     protected void readSerializable(XmlPullParser parser, KvmSerializable obj) throws IOException,
+-            XmlPullParserException
+-    {
+-        while (parser.nextTag() != XmlPullParser.END_TAG) {
++            XmlPullParserException {
++        int tag = 0;
++        try {
++            tag = parser.nextTag();
++        } catch (XmlPullParserException e) {
++            if(obj instanceof HasInnerText){
++                 ((HasInnerText)obj).setInnerText((parser.getText() != null) ? parser.getText() : "");
++            }
++            tag = parser.nextTag();
++        }
++        while (tag != XmlPullParser.END_TAG) {
+             String name = parser.getName();
+             if (!implicitTypes || !(obj instanceof SoapObject)) {
+                 PropertyInfo info = new PropertyInfo();
+@@ -188,8 +197,7 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+                     info.clear();
+                     obj.getPropertyInfo(i, properties, info);
+ 
+-                    if ((name.equals(info.name) && info.namespace == null)
+-                            ||
++                    if ((name.equals(info.name) && info.namespace == null) ||
+                             (name.equals(info.name) && parser.getNamespace().equals(info.namespace))) {
+                         propertyFound = true;
+                         obj.setProperty(i, read(parser, obj, i, null, null, info));
+@@ -199,21 +207,42 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+                 if (!propertyFound) {
+                     if (avoidExceptionForUnknownProperty) {
+                         // Dummy loop to read until corresponding END tag
+-                        while (parser.next() != XmlPullParser.END_TAG
+-                                || !name.equals(parser.getName())) {
++                        while (parser.next() != XmlPullParser.END_TAG || !name.equals(parser.getName())) {
+                         }
+                         ;
+                     } else {
+                         throw new RuntimeException("Unknown Property: " + name);
+                     }
++                } else {
++                    if (obj instanceof HasAttributes) {
++                        HasAttributes soapObject = (HasAttributes) obj;
++                        int cnt = parser.getAttributeCount();
++                        for (int counter = 0; counter < cnt; counter++) {
++                            AttributeInfo attributeInfo = new AttributeInfo();
++                            attributeInfo.setName(parser.getAttributeName(counter));
++                            attributeInfo.setValue(parser.getAttributeValue(counter));
++                            attributeInfo.setNamespace(parser.getAttributeNamespace(counter));
++                            attributeInfo.setType(parser.getAttributeType(counter));
++                            soapObject.setAttribute(attributeInfo);
++
++                        }
++                    }
+                 }
+             } else {
+                 // I can only make this work for SoapObjects - hence the check above
+                 // I don't understand namespaces well enough to know whether it is correct in the next line...
+-                ((SoapObject) obj).addProperty(parser.getName(),
+-                        read(parser, obj, obj.getPropertyCount(),
+-                                ((SoapObject) obj).getNamespace(), name, PropertyInfo.OBJECT_TYPE));
++                ((SoapObject) obj).addProperty(parser.getName(), read(parser, obj, obj.getPropertyCount(),
++                        ((SoapObject) obj).getNamespace(), name, PropertyInfo.OBJECT_TYPE));
++            }
++            try {
++                tag = parser.nextTag();
++            } catch (XmlPullParserException e) {
++                if(obj instanceof HasInnerText){
++                    ((HasInnerText)obj).setInnerText((parser.getText() != null) ? parser.getText() : "");
++                }
++                tag = parser.nextTag();
+             }
++
+         }
+         parser.require(XmlPullParser.END_TAG, null, null);
+     }
+@@ -278,9 +307,8 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+             }
+ 
+             while (parser.getEventType() != XmlPullParser.END_TAG) {
+-                so.addProperty(parser.getName(),
+-                        read(parser, so, so.getPropertyCount(), null, null,
+-                                PropertyInfo.OBJECT_TYPE));
++                so.addProperty(parser.getNamespace(),parser.getName(), read(parser, so, so.getPropertyCount(),
++                        null, null, PropertyInfo.OBJECT_TYPE));
+                 parser.nextTag();
+             }
+             result = so;
+@@ -293,12 +321,15 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         if (value == null) {
+             return dflt;
+         }
+-        return value.length() - start < 3 ? dflt : Integer.parseInt(value.substring(start + 1,
+-                value.length() - 1));
++        try {
++            return value.length() - start < 3 ? dflt : Integer.parseInt(value.substring(start + 1,
++                    value.length() - 1));
++        } catch (Exception ex) {
++            return dflt;
++        }
+     }
+ 
+-    protected void readVector(XmlPullParser parser, Vector v, PropertyInfo elementType)
+-            throws IOException,
++    protected void readVector(XmlPullParser parser, Vector v, PropertyInfo elementType) throws IOException,
+             XmlPullParserException {
+         String namespace = null;
+         String name = null;
+@@ -337,14 +368,23 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         parser.require(XmlPullParser.END_TAG, null, null);
+     }
+ 
++    /**
++     * This method returns id from the href attribute value.
++     * By default we assume that href value looks like this: #id so we basically have to remove the first character.
++     * But in theory there could be a different value format, like cid:value, etc...
++     */
++    protected String getIdFromHref(String hrefValue) {
++        return hrefValue.substring(1);
++    }
++
+     /**
+      * Builds an object from the XML stream. This method is public for usage in conjuction with Marshal
+      * subclasses. Precondition: On the start tag of the object or property, so href can be read.
+      */
+ 
+-    public Object read(XmlPullParser parser, Object owner, int index, String namespace,
+-            String name,
+-            PropertyInfo expected) throws IOException, XmlPullParserException {
++    public Object read(XmlPullParser parser, Object owner, int index, String namespace, String name, 
++            PropertyInfo expected) 
++            throws IOException, XmlPullParserException {
+         String elementName = parser.getName();
+         String href = parser.getAttributeValue(null, HREF_LABEL);
+         Object obj;
+@@ -352,7 +392,7 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+             if (owner == null) {
+                 throw new RuntimeException("href at root level?!?");
+             }
+-            href = href.substring(1);
++            href = getIdFromHref(href);
+             obj = idMap.get(href);
+             if (obj == null || obj instanceof FwdRef) {
+                 FwdRef f = new FwdRef();
+@@ -402,21 +442,8 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+             }
+             // finally, care about the id....
+             if (id != null) {
+-                Object hlp = idMap.get(id);
+-                if (hlp instanceof FwdRef) {
+-                    FwdRef f = (FwdRef) hlp;
+-                    do {
+-                        if (f.obj instanceof KvmSerializable) {
+-                            ((KvmSerializable) f.obj).setProperty(f.index, obj);
+-                        } else {
+-                            ((Vector) f.obj).setElementAt(obj, f.index);
+-                        }
+-                        f = f.next;
+-                    } while (f != null);
+-                } else if (hlp != null) {
+-                    throw new RuntimeException("double ID");
+-                }
+-                idMap.put(id, obj);
++                resolveReference(id, obj);
++
+             }
+         }
+ 
+@@ -424,12 +451,30 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         return obj;
+     }
+ 
++    protected void resolveReference(String id, Object obj) {
++        Object hlp = idMap.get(id);
++        if (hlp instanceof FwdRef) {
++            FwdRef f = (FwdRef) hlp;
++            do {
++                if (f.obj instanceof KvmSerializable) {
++                    ((KvmSerializable) f.obj).setProperty(f.index, obj);
++                } else {
++                    ((Vector) f.obj).setElementAt(obj, f.index);
++                }
++                f = f.next;
++            }
++            while (f != null);
++        } else if (hlp != null) {
++            throw new RuntimeException("double ID");
++        }
++        idMap.put(id, obj);
++    }
++
+     /**
+      * Returns a new object read from the given parser. If no mapping is found, null is returned. This method
+      * is used by the SoapParser in order to convert the XML code to Java objects.
+      */
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo expected)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo expected)
+             throws IOException, XmlPullParserException {
+         Object obj = qNameToClass.get(new SoapPrimitive(namespace, name, null));
+         if (obj == null) {
+@@ -448,10 +493,30 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+                 throw new RuntimeException(e.toString());
+             }
+         }
++        if (obj instanceof HasAttributes) {
++            HasAttributes soapObject = (HasAttributes) obj;
++            int cnt = parser.getAttributeCount();
++            for (int counter = 0; counter < cnt; counter++) {
++
++                AttributeInfo attributeInfo = new AttributeInfo();
++                attributeInfo.setName(parser.getAttributeName(counter));
++                attributeInfo.setValue(parser.getAttributeValue(counter));
++                attributeInfo.setNamespace(parser.getAttributeNamespace(counter));
++                attributeInfo.setType(parser.getAttributeType(counter));
++
++                soapObject.setAttribute(attributeInfo);
++
++            }
++        }
++
+         // ok, obj is now the instance, fill it....
+         if (obj instanceof SoapObject) {
+             readSerializable(parser, (SoapObject) obj);
+         } else if (obj instanceof KvmSerializable) {
++
++            if(obj instanceof HasInnerText){
++                ((HasInnerText)obj).setInnerText((parser.getText() != null) ? parser.getText() : "");
++            }
+             readSerializable(parser, (KvmSerializable) obj);
+         } else if (obj instanceof Vector) {
+             readVector(parser, (Vector) obj, expected.elementType);
+@@ -476,15 +541,11 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         }
+         if (type instanceof SoapObject) {
+             SoapObject so = (SoapObject) type;
+-            return new Object[] {
+-                    so.getNamespace(), so.getName(), null, null
+-            };
++            return new Object[]{so.getNamespace(), so.getName(), null, null};
+         }
+         if (type instanceof SoapPrimitive) {
+             SoapPrimitive sp = (SoapPrimitive) type;
+-            return new Object[] {
+-                    sp.getNamespace(), sp.getName(), null, DEFAULT_MARSHAL
+-            };
++            return new Object[]{sp.getNamespace(), sp.getName(), null, DEFAULT_MARSHAL};
+         }
+         if ((type instanceof Class) && type != PropertyInfo.OBJECT_CLASS) {
+             Object[] tmp = (Object[]) classToQName.get(((Class) type).getName());
+@@ -492,9 +553,7 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+                 return tmp;
+             }
+         }
+-        return new Object[] {
+-                xsd, ANY_TYPE_LABEL, null, null
+-        };
++        return new Object[]{xsd, ANY_TYPE_LABEL, null, null};
+     }
+ 
+     /**
+@@ -503,11 +562,8 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+      */
+     public void addMapping(String namespace, String name, Class clazz, Marshal marshal) {
+         qNameToClass
+-                .put(new SoapPrimitive(namespace, name, null), marshal == null ? (Object) clazz
+-                        : marshal);
+-        classToQName.put(clazz.getName(), new Object[] {
+-                namespace, name, null, marshal
+-        });
++                .put(new SoapPrimitive(namespace, name, null), marshal == null ? (Object) clazz : marshal);
++        classToQName.put(clazz.getName(), new Object[]{namespace, name, null, marshal});
+     }
+ 
+     /**
+@@ -528,11 +584,14 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+     /**
+      * Response from the soap call. Pulls the object from the wrapper object and returns it.
+      *
+-     * @since 2.0.3
+      * @return response from the soap call.
+      * @throws SoapFault
++     * @since 2.0.3
+      */
+     public Object getResponse() throws SoapFault {
++        if (bodyIn == null) {
++            return null;
++        }
+         if (bodyIn instanceof SoapFault) {
+             throw (SoapFault) bodyIn;
+         }
+@@ -554,8 +613,7 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+     /**
+      * Serializes the request object to the given XmlSerliazer object
+      *
+-     * @param writer
+-     *            XmlSerializer object to write the body into.
++     * @param writer XmlSerializer object to write the body into.
+      */
+     public void writeBody(XmlSerializer writer) throws IOException {
+         // allow an empty body without any tags in it
+@@ -564,36 +622,48 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+             multiRef = new Vector();
+             multiRef.addElement(bodyOut);
+             Object[] qName = getInfo(null, bodyOut);
+-            writer.startTag((dotNet) ? "" : (String) qName[QNAME_NAMESPACE],
+-                    (String) qName[QNAME_TYPE]); //<spp:sppPostDevData
+-            if (dotNet) {
+-                writer.attribute(null, "xmlns", (String) qName[QNAME_NAMESPACE]);
+-            }
++            
++            writer.startTag((dotNet) ? "" : (String) qName[QNAME_NAMESPACE], (String) qName[QNAME_TYPE]);
++            
++                if (dotNet) {
++                    writer.attribute(null, "xmlns", (String) qName[QNAME_NAMESPACE]);
++                }
++
+             if (addAdornments) {
+                 writer.attribute(null, ID_LABEL, qName[2] == null ? ("o" + 0) : (String) qName[2]);
+                 writer.attribute(enc, ROOT_LABEL, "1");
+             }
+-            writeElement(writer, bodyOut, null, qName[QNAME_MARSHAL]); //....
+-            writer.endTag((dotNet) ? "" : (String) qName[QNAME_NAMESPACE],
+-                    (String) qName[QNAME_TYPE]);//</spp:sppPostDevData>
++            writeElement(writer, bodyOut, null, qName[QNAME_MARSHAL]);
++            writer.endTag((dotNet) ? "" : (String) qName[QNAME_NAMESPACE], (String) qName[QNAME_TYPE]);
+         }
+     }
+ 
+-    /**
+-     * Writes the body of an SoapObject. This method write the attributes and then calls
+-     * "writeObjectBody (writer, (KvmSerializable)obj);"
+-     */
+-    public void writeObjectBody(XmlSerializer writer, SoapObject obj) throws IOException {
+-        SoapObject soapObject = (SoapObject) obj;
++    private void writeAttributes(XmlSerializer writer, HasAttributes obj) throws IOException {
++        HasAttributes soapObject = (HasAttributes) obj;
+         int cnt = soapObject.getAttributeCount();
+         for (int counter = 0; counter < cnt; counter++) {
+             AttributeInfo attributeInfo = new AttributeInfo();
+             soapObject.getAttributeInfo(counter, attributeInfo);
+-            writer.attribute(attributeInfo.getNamespace(), attributeInfo.getName(), attributeInfo
+-                    .getValue()
+-                    .toString());
++            soapObject.getAttribute(counter, attributeInfo);
++            if (attributeInfo.getValue() != null) {
++                writer.attribute(attributeInfo.getNamespace(), attributeInfo.getName(),
++                        attributeInfo.getValue().toString());
++            }
++        }
++    }
++
++    public void writeArrayListBodyWithAttributes(XmlSerializer writer, KvmSerializable obj) throws IOException {
++        if (obj instanceof HasAttributes) {
++            writeAttributes(writer, (HasAttributes) obj);
+         }
+-        writeObjectBody(writer, (KvmSerializable) obj);
++        writeArrayListBody(writer, (ArrayList) obj);
++    }
++
++    public void writeObjectBodyWithAttributes(XmlSerializer writer, KvmSerializable obj) throws IOException {
++        if (obj instanceof HasAttributes) {
++            writeAttributes(writer, (HasAttributes) obj);
++        }
++        writeObjectBody(writer, obj);
+     }
+ 
+     /**
+@@ -614,9 +684,12 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+             if (!(prop instanceof SoapObject)) {
+                 // prop is a PropertyInfo
+                 if ((propertyInfo.flags & PropertyInfo.TRANSIENT) == 0) {
+-                    writer.startTag(propertyInfo.namespace, propertyInfo.name);
+-                    writeProperty(writer, obj.getProperty(i), propertyInfo);
+-                    writer.endTag(propertyInfo.namespace, propertyInfo.name);
++                    Object objValue = obj.getProperty(i);
++                    if ((prop != null || !skipNullProperties) && (objValue != SoapPrimitive.NullSkip)) {
++                        writer.startTag(propertyInfo.namespace, propertyInfo.name);
++                        writeProperty(writer, objValue, propertyInfo);
++                        writer.endTag(propertyInfo.namespace, propertyInfo.name);
++                    }
+                 }
+             } else {
+                 // prop is a SoapObject
+@@ -633,46 +706,47 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+                     name = (String) qName[QNAME_TYPE];
+                 }
+ 
+-                // treat MO data as CDATA
+-                if (name.equals("DevInfo") || name.equals("DevDetail")
+-                        || name.equals("PerProviderSubscription") || // format v4
+-                        name.equals("MgmtTree") // format v6
+-                ) {
+-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+-                    XmlSerializer xw = new KXmlSerializer();
+-                    xw.setOutput(bos, "UTF-8");
+-                    xw.startTag((dotNet) ? "" : namespace, name);
+-                    if (!implicitTypes) {
+-                        String prefix = writer.getPrefix(namespace, true);
+-                        writer.attribute(xsi, TYPE_LABEL, prefix + ":" + type);
+-                    }
+-                    writeObjectBody(xw, nestedSoap);
+-                    xw.endTag((dotNet) ? "" : namespace, name);
+-                    xw.flush();
+-                    //bos.write('\r');
+-                    //bos.write('\n');
+-                    bos.flush();
+-                    writer.cdsect(bos.toString());
++                // prefer the namespace from the property info
++                if (propertyInfo.namespace != null && propertyInfo.namespace.length() > 0) {
++                    namespace = propertyInfo.namespace;
++                } else {
++                    namespace = (String) qName[QNAME_NAMESPACE];
++                }
++
++                writer.startTag(namespace, name);
++                if (!implicitTypes) {
++                    String prefix = writer.getPrefix(namespace, true);
++                    writer.attribute(xsi, TYPE_LABEL, prefix + ":" + type);
++                }
++                writeObjectBodyWithAttributes(writer, nestedSoap);
++                writer.endTag(namespace, name);
++            }
++        }
++        writeInnerText(writer, obj);
++
++    }
++
++    private void writeInnerText(XmlSerializer writer, KvmSerializable obj) throws IOException {
++        if(obj instanceof HasInnerText){
++
++            Object value=((HasInnerText)obj).getInnerText();
++            if (value != null) {
++                if(value instanceof ValueWriter)
++                {
++                    ((ValueWriter)value).write(writer);
+                 }
+                 else
+                 {
+-                    writer.startTag((dotNet) ? "" : namespace, name);
+-                    if (!implicitTypes) {
+-                        String prefix = writer.getPrefix(namespace, true);
+-                        writer.attribute(xsi, TYPE_LABEL, prefix + ":" + type);
+-                    }
+-                    writeObjectBody(writer, nestedSoap);
+-                    writer.endTag((dotNet) ? "" : namespace, name);
++                    writer.cdsect(value.toString());
+                 }
++
+             }
+         }
+     }
+ 
+-    protected void writeProperty(XmlSerializer writer, Object obj, PropertyInfo type)
+-            throws IOException {
+-        if (obj == null) {
+-            ///M: Modify for HS20
+-            //writer.attribute(xsi, version >= VER12 ? NIL_LABEL : NULL_LABEL, "true");
++    protected void writeProperty(XmlSerializer writer, Object obj, PropertyInfo type) throws IOException {
++        if (obj == null || obj == SoapPrimitive.NullNilElement) {
++            writer.attribute(xsi, version >= VER12 ? NIL_LABEL : NULL_LABEL, "true");
+             return;
+         }
+         Object[] qName = getInfo(null, obj);
+@@ -692,15 +766,19 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         }
+     }
+ 
+-    private void writeElement(XmlSerializer writer, Object element, PropertyInfo type,
+-            Object marshal)
++    protected void writeElement(XmlSerializer writer, Object element, PropertyInfo type, Object marshal)
+             throws IOException {
+         if (marshal != null) {
+             ((Marshal) marshal).writeInstance(writer, element);
+-        } else if (element instanceof SoapObject) {
+-            writeObjectBody(writer, (SoapObject) element);
+-        } else if (element instanceof KvmSerializable) {
+-            writeObjectBody(writer, (KvmSerializable) element);
++        } else if (element instanceof KvmSerializable || element == SoapPrimitive.NullNilElement
++                || element == SoapPrimitive.NullSkip) {
++            if (element instanceof ArrayList) {
++                writeArrayListBodyWithAttributes(writer, (KvmSerializable) element);
++            } else {
++                writeObjectBodyWithAttributes(writer, (KvmSerializable) element);
++            }
++        } else if (element instanceof HasAttributes) {
++            writeAttributes(writer, (HasAttributes) element);
+         } else if (element instanceof Vector) {
+             writeVectorBody(writer, (Vector) element, type.elementType);
+         } else {
+@@ -708,6 +786,65 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+         }
+     }
+ 
++    protected void writeArrayListBody(XmlSerializer writer, ArrayList list)
++            throws IOException {
++        KvmSerializable obj = (KvmSerializable) list;
++        int cnt = list.size();
++        PropertyInfo propertyInfo = new PropertyInfo();
++        String namespace;
++        String name;
++        String type;
++        for (int i = 0; i < cnt; i++) {
++            // get the property
++            Object prop = obj.getProperty(i);
++            // and importantly also get the property info which holds the name potentially!
++            obj.getPropertyInfo(i, properties, propertyInfo);
++
++            if (!(prop instanceof SoapObject)) {
++                // prop is a PropertyInfo
++                if ((propertyInfo.flags & PropertyInfo.TRANSIENT) == 0) {
++                    Object objValue = obj.getProperty(i);
++                    if ((prop != null || !skipNullProperties) && (objValue != SoapPrimitive.NullSkip)) {
++                        writer.startTag(propertyInfo.namespace, propertyInfo.name);
++                        writeProperty(writer, objValue, propertyInfo);
++                        writer.endTag(propertyInfo.namespace, propertyInfo.name);
++                    }
++                }
++            } else {
++
++                // prop is a SoapObject
++                SoapObject nestedSoap = (SoapObject) prop;
++                // lets get the info from the soap object itself
++                Object[] qName = getInfo(null, nestedSoap);
++                namespace = (String) qName[QNAME_NAMESPACE];
++                type = (String) qName[QNAME_TYPE];
++
++                // prefer the name from the property info
++                if (propertyInfo.name != null && propertyInfo.name.length() > 0) {
++                    name = propertyInfo.name;
++                } else {
++                    name = (String) qName[QNAME_TYPE];
++                }
++
++                // prefer the namespace from the property info
++                if (propertyInfo.namespace != null && propertyInfo.namespace.length() > 0) {
++                    namespace = propertyInfo.namespace;
++                } else {
++                    namespace = (String) qName[QNAME_NAMESPACE];
++                }
++
++                writer.startTag(namespace, name);
++                if (!implicitTypes) {
++                    String prefix = writer.getPrefix(namespace, true);
++                    writer.attribute(xsi, TYPE_LABEL, prefix + ":" + type);
++                }
++                writeObjectBodyWithAttributes(writer, nestedSoap);
++                writer.endTag(namespace, name);
++            }
++        }
++        writeInnerText(writer, obj);
++    }
++
+     protected void writeVectorBody(XmlSerializer writer, Vector vector, PropertyInfo elementType)
+             throws IOException {
+         String itemsTagName = ITEM_LABEL;
+@@ -727,9 +864,13 @@ public class SoapSerializationEnvelope extends SoapEnvelope
+ 
+         // This removes the arrayType attribute from the xml for arrays(required for most .Net services to work)
+         if (!implicitTypes) {
+-            writer.attribute(enc, ARRAY_TYPE_LABEL, writer.getPrefix((String) arrType[0], false)
+-                    + ":"
++            writer.attribute(enc, ARRAY_TYPE_LABEL, writer.getPrefix((String) arrType[0], false) + ":"
+                     + arrType[1] + "[" + cnt + "]");
++        } else {
++            // Get the namespace from mappings if available when arrayType is removed for .Net
++            if (itemsNamespace == null) {
++                itemsNamespace = (String) arrType[0];
++            }
+         }
+ 
+         boolean skipped = false;
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/serialization/ValueWriter.java b/ksoap2-base/src/main/java/org/ksoap2/serialization/ValueWriter.java
+new file mode 100644
+index 0000000..fdbaa21
+--- /dev/null
++++ b/ksoap2-base/src/main/java/org/ksoap2/serialization/ValueWriter.java
+@@ -0,0 +1,13 @@
++package org.ksoap2.serialization;
++
++import org.xmlpull.v1.XmlSerializer;
++
++import java.io.IOException;
++
++/**
++ * Created by robocik on 2015-09-25.
++ */
++public interface ValueWriter
++{
++    void write(XmlSerializer writer) throws IOException;
++}
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/transport/ServiceConnection.java b/ksoap2-base/src/main/java/org/ksoap2/transport/ServiceConnection.java
+index 8e14ee7..9dd3837 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/transport/ServiceConnection.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/transport/ServiceConnection.java
+@@ -21,8 +21,10 @@
+ 
+ package org.ksoap2.transport;
+ 
++import java.io.IOException;
++import java.io.InputStream;
++import java.io.OutputStream;
+ import java.util.List;
+-import java.io.*;
+ 
+ /**
+  * Interface to allow the abstraction of the raw transport information
+@@ -58,6 +60,13 @@ public interface ServiceConnection {
+      */
+     public List getResponseProperties() throws IOException;
+ 
++    /**
++     * Returns the numerical HTTP status to the caller
++     * @return an integer status value
++     * @throws IOException
++     */
++    public int getResponseCode() throws IOException;
++
+     /**
+      * Set properties on the outgoing connection.
+      * 
+@@ -88,6 +97,8 @@ public interface ServiceConnection {
+      **/
+     public void setFixedLengthStreamingMode(int contentLength);
+ 
++    public void setChunkedStreamingMode();
++
+     /**
+      * Open and return the outputStream to the endpoint.
+      * 
+diff --git a/ksoap2-base/src/main/java/org/ksoap2/transport/Transport.java b/ksoap2-base/src/main/java/org/ksoap2/transport/Transport.java
+index b2f6587..2f3d523 100644
+--- a/ksoap2-base/src/main/java/org/ksoap2/transport/Transport.java
++++ b/ksoap2-base/src/main/java/org/ksoap2/transport/Transport.java
+@@ -23,9 +23,13 @@
+ 
+ package org.ksoap2.transport;
+ 
++import java.util.HashMap;
++import java.util.Iterator;
+ import java.util.List;
+ import java.io.*;
++import java.net.MalformedURLException;
+ import java.net.Proxy;
++import java.net.URL;
+ 
+ import org.ksoap2.*;
+ import org.kxml2.io.*;
+@@ -40,9 +44,9 @@ import org.xmlpull.v1.*;
+ abstract public class Transport {
+ 
+     /**
+-     * Added to enable web service interactions on the emulator
+-     * to be debugged with Fiddler2 (Windows) but provides utility
+-     * for other proxy requirements.
++     * Added to enable web service interactions on the emulator to be debugged
++     * with Fiddler2 (Windows) but provides utility for other proxy
++     * requirements.
+      */
+     protected Proxy proxy;
+     protected String url;
+@@ -61,6 +65,12 @@ abstract public class Transport {
+ 
+     private int bufferLength = ServiceConnection.DEFAULT_BUFFER_SIZE;
+ 
++    private HashMap prefixes = new HashMap();
++
++    public HashMap getPrefixes() {
++        return prefixes;
++    }
++
+     public Transport() {
+     }
+ 
+@@ -82,9 +92,12 @@ abstract public class Transport {
+     /**
+      * Construct the transport object
+      * 
+-     * @param proxy Specifies the proxy server to use for 
+-     * accessing the web service or <code>null</code> if a direct connection is available
+-     * @param url Specifies the web service url
++     * @param proxy
++     *            Specifies the proxy server to use for accessing the web
++     *            service or <code>null</code> if a direct connection is
++     *            available
++     * @param url
++     *            Specifies the web service url
+      * 
+      */
+     public Transport(Proxy proxy, String url) {
+@@ -114,23 +127,30 @@ abstract public class Transport {
+         xp.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true);
+         xp.setInput(is, null);
+         envelope.parse(xp);
++        /*
++         * Fix memory leak when running on android in strict mode. Issue 133
++         */
++        is.close();
+     }
+ 
+     /**
+      * Serializes the request.
+      */
+-    protected byte[] createRequestData(SoapEnvelope envelope, String encoding) throws IOException {
+-        System.out.println("createRequestData");
++    protected byte[] createRequestData(SoapEnvelope envelope, String encoding)
++            throws IOException {
+         ByteArrayOutputStream bos = new ByteArrayOutputStream(bufferLength);
+         byte result[] = null;
+         bos.write(xmlVersionTag.getBytes());
+-        System.out.println("bos.write");
+         XmlSerializer xw = new KXmlSerializer();
+-        System.out.println("new KXmlSerializer");
++
++        final Iterator keysIter = prefixes.keySet().iterator();
++
+         xw.setOutput(bos, encoding);
+-        System.out.println("xw.setOutput");
++        while (keysIter.hasNext()) {
++            String key = (String) keysIter.next();
++            xw.setPrefix(key, (String) prefixes.get(key));
++        }
+         envelope.write(xw);
+-        System.out.println("envelope.write");
+         xw.flush();
+         bos.write('\r');
+         bos.write('\n');
+@@ -138,14 +158,14 @@ abstract public class Transport {
+         result = bos.toByteArray();
+         xw = null;
+         bos = null;
+-        System.out.println("createRequestData end");
+         return result;
+     }
+ 
+     /**
+      * Serializes the request.
+      */
+-    protected byte[] createRequestData(SoapEnvelope envelope) throws IOException {
++    protected byte[] createRequestData(SoapEnvelope envelope)
++            throws IOException {
+         return createRequestData(envelope, null);
+     }
+ 
+@@ -159,6 +179,12 @@ abstract public class Transport {
+         this.url = url;
+     }
+ 
++    public String getUrl()
++    {
++        return url;
++    }
++
++
+     /**
+      * Sets the version tag for the outgoing soap call. Example <?xml
+      * version=\"1.0\" encoding=\"UTF-8\"?>
+@@ -177,57 +203,94 @@ abstract public class Transport {
+     }
+ 
+     /**
+-     * Perform a soap call with a given namespace and the given envelope providing
+-     * any extra headers that the user requires such as cookies. Headers that are
+-     * returned by the web service will be returned to the caller in the form of a
+-     * <code>List</code> of <code>HeaderProperty</code> instances.
++     * Perform a soap call with a given namespace and the given envelope
++     * providing any extra headers that the user requires such as cookies.
++     * Headers that are returned by the web service will be returned to the
++     * caller in the form of a <code>List</code> of <code>HeaderProperty</code>
++     * instances.
++     * 
++     * @param soapAction
++     *            the namespace with which to perform the call in.
++     * @param envelope
++     *            the envelope the contains the information for the call.
++     * @param headers
++     *            <code>List</code> of <code>HeaderProperty</code> headers to
++     *            send with the SOAP request.
++     * 
++     * @return Headers returned by the web service as a <code>List</code> of
++     *         <code>HeaderProperty</code> instances.
++     */
++    abstract public List call(String soapAction, SoapEnvelope envelope,
++            List headers) throws IOException, XmlPullParserException;
++
++    /**
++     * Perform a soap call with a given namespace and the given envelope
++     * providing any extra headers that the user requires such as cookies.
++     * Headers that are returned by the web service will be returned to the
++     * caller in the form of a <code>List</code> of <code>HeaderProperty</code>
++     * instances.
+      * 
+-     * @param targetNamespace
++     * @param soapAction
+      *            the namespace with which to perform the call in.
+      * @param envelope
+      *            the envelope the contains the information for the call.
+      * @param headers
+-     *   <code>List</code> of <code>HeaderProperty</code> headers to send with the SOAP request.
++     *            <code>List</code> of <code>HeaderProperty</code> headers to
++     *            send with the SOAP request.
++     * @param outputFile
++     *            a file to stream the response into rather than parsing it,
++     *            streaming happens when file is not null
+      * 
+      * @return Headers returned by the web service as a <code>List</code> of
+-     * <code>HeaderProperty</code> instances.
++     *         <code>HeaderProperty</code> instances.
+      */
+-    abstract public List call(String targetNamespace, SoapEnvelope envelope, List headers)
+-            throws IOException, XmlPullParserException;
++    abstract public List call(String soapAction, SoapEnvelope envelope,
++            List headers, File outputFile) throws IOException,
++            XmlPullParserException;
+ 
+     /**
+      * Perform a soap call with a given namespace and the given envelope.
+      * 
+-     * @param targetNamespace
++     * @param soapAction
+      *            the namespace with which to perform the call in.
+      * @param envelope
+      *            the envelope the contains the information for the call.
+      */
+-    public void call(String targetNamespace, SoapEnvelope envelope) throws IOException,
+-            XmlPullParserException {
+-        call(targetNamespace, envelope, null);
++    public void call(String soapAction, SoapEnvelope envelope)
++            throws IOException, XmlPullParserException {
++        call(soapAction, envelope, null);
+     }
+ 
+     /**
+      * Return the name of the host that is specified as the web service target
+-     *
++     * 
+      * @return Host name
+      */
+-    abstract public String getHost();
++    public String getHost() throws MalformedURLException {
++
++        return new URL(url).getHost();
++    }
+ 
+     /**
+-     * Return the port number of the host that is specified as the web service target
+-     *
++     * Return the port number of the host that is specified as the web service
++     * target
++     * 
+      * @return Port number
+      */
+-    abstract public int getPort();
++    public int getPort() throws MalformedURLException {
++
++        return new URL(url).getPort();
++    }
+ 
+     /**
+      * Return the path to the web service target
+-     *
++     * 
+      * @return The URL's path
+      */
+-    abstract public String getPath();
++    public String getPath() throws MalformedURLException {
++
++        return new URL(url).getPath();
++    }
+ 
+     abstract public ServiceConnection getServiceConnection() throws IOException;
+ }
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/serialization/MarshalFloat.java b/ksoap2-j2se/src/main/java/org/ksoap2/serialization/MarshalFloat.java
+index 71c8caa..61a5e2c 100644
+--- a/ksoap2-j2se/src/main/java/org/ksoap2/serialization/MarshalFloat.java
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/serialization/MarshalFloat.java
+@@ -27,8 +27,7 @@ import org.xmlpull.v1.*;
+ 
+ public class MarshalFloat implements Marshal {
+ 
+-    public Object readInstance(XmlPullParser parser, String namespace, String name,
+-            PropertyInfo propertyInfo)
++    public Object readInstance(XmlPullParser parser, String namespace, String name, PropertyInfo propertyInfo)
+             throws IOException, XmlPullParserException {
+         String stringValue = parser.nextText();
+         Object result;
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpResponseException.java b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpResponseException.java
+new file mode 100644
+index 0000000..f7fb866
+--- /dev/null
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpResponseException.java
+@@ -0,0 +1,60 @@
++package org.ksoap2.transport;
++
++import java.io.IOException;
++import java.util.List;
++
++/**
++ * HttpResponseException is an IOException that is to be thrown when a Http response code is different from 200.
++ * It allows for easier retrieval of the Http response code from the connection.
++ *
++ * @author Rui Pereira <syshex@gmail.com>
++ */
++public class HttpResponseException extends IOException {
++
++    private int statusCode;
++    private List responseHeaders;
++
++    public HttpResponseException(int statusCode) {
++        super();
++        this.statusCode = statusCode;
++    }
++
++    public HttpResponseException(String detailMessage, int statusCode) {
++        super(detailMessage);
++        this.statusCode = statusCode;
++    }
++
++    public HttpResponseException(String detailMessage, int statusCode,List responseHeaders) {
++        super(detailMessage);
++        this.statusCode = statusCode;
++        this.responseHeaders=responseHeaders;
++    }
++
++    public HttpResponseException(String message, Throwable cause, int statusCode) {
++        super(message, cause);
++        this.statusCode = statusCode;
++    }
++
++    public HttpResponseException(Throwable cause, int statusCode) {
++        super(cause);
++        this.statusCode = statusCode;
++    }
++
++    /**
++     * Returns the unexpected Http response code
++     *
++     * @return response code
++     */
++    public int getStatusCode() {
++        return statusCode;
++    }
++
++    /**
++     * Returns all http headers from this response
++     *
++     * @return response code
++     */
++    public List getResponseHeaders() {
++        return responseHeaders;
++    }
++}
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpTransportSE.java b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpTransportSE.java
+index d92ac09..920ca60 100644
+--- a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpTransportSE.java
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpTransportSE.java
+@@ -25,24 +25,21 @@
+ 
+ package org.ksoap2.transport;
+ 
+-import java.util.List;
+-import java.util.zip.GZIPInputStream;
++import org.ksoap2.HeaderProperty;
++import org.ksoap2.SoapEnvelope;
++import org.ksoap2.serialization.*;
++import org.xmlpull.v1.XmlPullParserException;
++
+ import java.io.*;
+-import java.net.MalformedURLException;
+ import java.net.Proxy;
+-import java.net.URL;
+-
+-import org.ksoap2.*;
+-import org.ksoap2.serialization.SoapSerializationEnvelope;
+-import org.xmlpull.v1.*;
++import java.util.*;
++import java.util.zip.GZIPInputStream;
+ 
+ /**
+  * A J2SE based HttpTransport layer.
+  */
+ public class HttpTransportSE extends Transport {
+ 
+-    private ServiceConnection serviceConnection;
+-
+     /**
+      * Creates instance of HttpTransportSE with set url
+      * 
+@@ -107,249 +104,254 @@ public class HttpTransportSE extends Transport {
+      *            the desired soapAction
+      * @param envelope
+      *            the envelope containing the information for the soap call.
++     * @throws HttpResponseException
+      * @throws IOException
+      * @throws XmlPullParserException
+      */
+-    public void call(String soapAction, SoapEnvelope envelope) throws IOException,
+-            XmlPullParserException {
+-
++    public void call(String soapAction, SoapEnvelope envelope)
++            throws HttpResponseException, IOException, XmlPullParserException {
++            
+         call(soapAction, envelope, null);
+     }
+ 
++    public List call(String soapAction, SoapEnvelope envelope, List headers)
++            throws HttpResponseException, IOException, XmlPullParserException {
++        return call(soapAction, envelope, headers, null);
++    }
++
+     /**
+-     * 
+-     * set the desired soapAction header field
+-     * 
++     * Perform a soap call with a given namespace and the given envelope providing
++     * any extra headers that the user requires such as cookies. Headers that are
++     * returned by the web service will be returned to the caller in the form of a
++     * <code>List</code> of <code>HeaderProperty</code> instances.
++     *
+      * @param soapAction
+-     *            the desired soapAction
++     *            the namespace with which to perform the call in.
+      * @param envelope
+-     *            the envelope containing the information for the soap call.
++     *            the envelope the contains the information for the call.
+      * @param headers
+-     *              a list of HeaderProperties to be http header properties when establishing the connection
++     *   <code>List</code> of <code>HeaderProperty</code> headers to send with the SOAP request.
++     * @param outputFile
++     *              a file to stream the response into rather than parsing it, streaming happens when file is not null
+      *
+-     * @return <code>CookieJar</code> with any cookies sent by the server
+-     * @throws IOException
+-     * @throws XmlPullParserException
++     * @return Headers returned by the web service as a <code>List</code> of
++     * <code>HeaderProperty</code> instances.
++     *
++     * @throws HttpResponseException
++     *              an IOException when Http response code is different from 200
+      */
+-    public List call(String soapAction, SoapEnvelope envelope, List headers)
+-            throws IOException, XmlPullParserException {
++    public List call(String soapAction, SoapEnvelope envelope, List headers, File outputFile)
++        throws HttpResponseException, IOException, XmlPullParserException {
+ 
+         if (soapAction == null) {
+             soapAction = "\"\"";
+         }
+ 
+-        System.out.println("call action:" + soapAction);
+         byte[] requestData = createRequestData(envelope, "UTF-8");
+ 
+-        if (requestData != null) {
+-            requestDump = debug ? new String(requestData) : null;
+-        }
+-        else {
+-            requestDump = null;
+-        }
++        requestDump = debug ? new String(requestData) : null;
+         responseDump = null;
+-
+-        System.out.println("requestDump:" + requestDump);
++        System.out.println("requestDump: " + requestDump);
+         ServiceConnection connection = getServiceConnection();
+-        System.out.println("connection:" + connection);
+ 
+         connection.setRequestProperty("User-Agent", USER_AGENT);
+         // SOAPAction is not a valid header for VER12 so do not add
+         // it
+         // @see "http://code.google.com/p/ksoap2-android/issues/detail?id=67
+-        System.out.println("envelope:" + envelope);
+-        if (envelope != null) {
+-            if (envelope.version != SoapSerializationEnvelope.VER12) {
+-                connection.setRequestProperty("SOAPAction", soapAction);
+-            }
++        if (envelope.version != SoapSerializationEnvelope.VER12) {
++            connection.setRequestProperty("SOAPAction", soapAction);
++        }
+ 
+-            if (envelope.version == SoapSerializationEnvelope.VER12) {
+-                connection.setRequestProperty("Content-Type", CONTENT_TYPE_SOAP_XML_CHARSET_UTF_8);
+-            } else {
+-                connection.setRequestProperty("Content-Type", CONTENT_TYPE_XML_CHARSET_UTF_8);
+-            }
++        if (envelope.version == SoapSerializationEnvelope.VER12) {
++            connection.setRequestProperty("Content-Type", CONTENT_TYPE_SOAP_XML_CHARSET_UTF_8);
++        } else {
++            connection.setRequestProperty("Content-Type", CONTENT_TYPE_XML_CHARSET_UTF_8);
++        }
+ 
+-            connection.setRequestProperty("Connection", "close");
+-            connection.setRequestProperty("Accept-Encoding", "gzip");
+-            connection.setRequestProperty("Content-Length", "" + requestData.length);
++        // this seems to cause issues so we are removing it
++        //connection.setRequestProperty("Connection", "close");
++        connection.setRequestProperty("Accept-Encoding", "gzip");
+ 
+-            //M: Retry for HTTP Authentication
+-            //connection.setFixedLengthStreamingMode(requestData.length);
+ 
+-            // Pass the headers provided by the user along with the call
+-            if (headers != null) {
+-                for (int i = 0; i < headers.size(); i++) {
+-                    HeaderProperty hp = (HeaderProperty) headers.get(i);
+-                    connection.setRequestProperty(hp.getKey(), hp.getValue());
+-                }
++        // Pass the headers provided by the user along with the call
++        if (headers != null) {
++            for (int i = 0; i < headers.size(); i++) {
++                HeaderProperty hp = (HeaderProperty) headers.get(i);
++                connection.setRequestProperty(hp.getKey(), hp.getValue());
+             }
+-
+-            connection.setRequestMethod("POST");
+-
+-        }
+-        else {
+-            connection.setRequestProperty("Connection", "close");
+-            connection.setRequestProperty("Accept-Encoding", "gzip");
+-            connection.setRequestMethod("GET");
+         }
+ 
+-        if (requestData != null) {
+-            OutputStream os = connection.openOutputStream();
+-
+-            os.write(requestData, 0, requestData.length);
+-            os.flush();
+-            os.close();
+-            requestData = null;
+-        }
+-        InputStream is;
++        connection.setRequestMethod("POST");
++        sendData(requestData, connection,envelope);
++        requestData = null;
++        InputStream is = null;
+         List retHeaders = null;
++        byte[] buf = null; // To allow releasing the resource after used
++        int contentLength = 8192; // To determine the size of the response and adjust buffer size
+         boolean gZippedContent = false;
+-        boolean bcaCert = false;
++        boolean xmlContent = false;
++        int status = connection.getResponseCode();
+ 
+         try {
+             retHeaders = connection.getResponseProperties();
+-            System.out.println("[HttpTransportSE] retHeaders = " + retHeaders);
++
+             for (int i = 0; i < retHeaders.size(); i++) {
+-                HeaderProperty hp = (HeaderProperty) retHeaders.get(i);
++                HeaderProperty hp = (HeaderProperty)retHeaders.get(i);
+                 // HTTP response code has null key
+                 if (null == hp.getKey()) {
+                     continue;
+                 }
++
++                // If we know the size of the response, we should use the size to initiate vars
++                if (hp.getKey().equalsIgnoreCase("content-length") ) {
++                    if ( hp.getValue() != null ) {
++                        try {
++                            contentLength = Integer.parseInt( hp.getValue() );
++                        } catch ( NumberFormatException nfe ) {
++                            contentLength = 8192;
++                        }
++                    }
++                }
++
++
++                // Check the content-type header to see if we're getting back XML, in case of a
++                // SOAP fault on 500 codes
++                if (hp.getKey().equalsIgnoreCase("Content-Type")
++                        && hp.getValue().contains("xml")) {
++                    xmlContent = true;
++                }
++
++
+                 // ignoring case since users found that all smaller case is used on some server
+                 // and even if it is wrong according to spec, we rather have it work..
+                 if (hp.getKey().equalsIgnoreCase("Content-Encoding")
+-                        && hp.getValue().equalsIgnoreCase("gzip")) {
++                     && hp.getValue().equalsIgnoreCase("gzip")) {
+                     gZippedContent = true;
+                 }
+             }
+-            if (gZippedContent) {
+-                is = getUnZippedInputStream(connection.openInputStream());
+-            } else {
+-                is = connection.openInputStream();
+-            }
+-        } catch (IOException e) {
+-            if (gZippedContent) {
+-                is = getUnZippedInputStream(connection.getErrorStream());
+-            } else {
+-                is = connection.getErrorStream();
+-            }
+ 
+-            if (is == null) {
+-                connection.disconnect();
+-                throw (e);
++            //first check the response code....
++            if (status != 200 && status != 202) {
++                //202 is a correct status returned by WCF OneWay operation
++                throw new HttpResponseException("HTTP request failed, HTTP status: " + status, status,retHeaders);
+             }
+-        }
+-
+-        if (debug) {
+-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+-            byte[] buf = new byte[8192];
+ 
+-            while (true) {
+-                int rd = is.read(buf, 0, 8192);
+-                if (rd == -1) {
+-                    break;
++            if (contentLength > 0) {
++                if (gZippedContent) {
++                    is = getUnZippedInputStream(
++                            new BufferedInputStream(connection.openInputStream(),contentLength));
++                } else {
++                    is = new BufferedInputStream(connection.openInputStream(),contentLength);
++                }
++            }
++        } catch (IOException e) {
++            if (contentLength > 0) {
++                if(gZippedContent) {
++                    is = getUnZippedInputStream(
++                            new BufferedInputStream(connection.getErrorStream(),contentLength));
++                } else {
++                    is = new BufferedInputStream(connection.getErrorStream(),contentLength);
+                 }
+-                bos.write(buf, 0, rd);
+             }
+ 
+-            bos.flush();
+-            buf = bos.toByteArray();
++            if ( e instanceof HttpResponseException) {
++                if (!xmlContent) {
++                    if (debug && is != null) {
++                        //go ahead and read the error stream into the debug buffers/file if needed.
++                        readDebug(is, contentLength, outputFile);
++                    }
+ 
+-            responseDump = new String(buf);
++                    //we never want to drop through to attempting to parse the HTTP error stream as a SOAP response.
++                    connection.disconnect();
++                    throw e;
++                }
++            }
++        }
+ 
+-            System.out.println("responseDump:" + responseDump);
+-            is.close();
+-            is = new ByteArrayInputStream(buf);
++        if (debug) {
++            is = readDebug(is, contentLength, outputFile);
+         }
+ 
+-        if (envelope != null) {
+-            parseResponse(envelope, is);
++        if(is!=null)
++        {
++            parseResponse(envelope, is,retHeaders);
+         }
+ 
++        // release all resources 
++        // input stream is will be released inside parseResponse
++        is = null;
++        buf = null;
++        //This fixes Issue 173 read my explanation here: https://code.google.com/p/ksoap2-android/issues/detail?id=173
++        connection.disconnect();
++        connection = null;
+         return retHeaders;
+     }
+ 
+-    private InputStream getUnZippedInputStream(InputStream inputStream) throws IOException {
+-        /* workaround for Android 2.3 
+-           (see http://stackoverflow.com/questions/5131016/)
+-        */
+-        try {
+-            return (GZIPInputStream) inputStream;
+-        } catch (ClassCastException e) {
+-            return new GZIPInputStream(inputStream);
+-        }
+-    }
++    protected void sendData(byte[] requestData, ServiceConnection connection, SoapEnvelope envelope)
++            throws IOException
++    {
++        connection.setRequestProperty("Content-Length", "" + requestData.length);
++        connection.setFixedLengthStreamingMode(requestData.length);
+ 
+-    public ServiceConnection getServiceConnection() throws IOException {
+-        if (serviceConnection == null) {
+-            System.out.println("new ServiceConnectionSE:" + proxy + " " + url + " " + timeout);
+-            serviceConnection = new ServiceConnectionSE(proxy, url, timeout);
+-        }
+-        return serviceConnection;
++        OutputStream os = connection.openOutputStream();
++        os.write(requestData, 0, requestData.length);
++        os.flush();
++        os.close();
+     }
+ 
+-    public String getHost() {
+-
+-        String retVal = null;
+-
+-        try {
+-            retVal = new URL(url).getHost();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
+-        }
+-
+-        return retVal;
++    protected void parseResponse(SoapEnvelope envelope, InputStream is,List returnedHeaders)
++            throws XmlPullParserException, IOException
++    {
++        parseResponse(envelope, is);
+     }
+ 
+-    public int getPort() {
+-
+-        int retVal = -1;
+ 
+-        try {
+-            retVal = new URL(url).getPort();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
++    private InputStream readDebug(InputStream is, int contentLength, File outputFile) throws IOException {
++        OutputStream bos;
++        if (outputFile != null) {
++            bos = new FileOutputStream(outputFile);
++        } else {
++            // If known use the size if not use default value
++            bos = new ByteArrayOutputStream( (contentLength > 0 ) ? contentLength : 256*1024);
+         }
+ 
+-        return retVal;
+-    }
+-
+-    public String getPath() {
+-
+-        String retVal = null;
++        byte[] buf = new byte[256];
+ 
+-        try {
+-            retVal = new URL(url).getPath();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
++        while (true) {
++            int rd = is.read(buf, 0, 256);
++            if (rd == -1) {
++                break;
++            }
++            bos.write(buf, 0, rd);
+         }
+ 
+-        return retVal;
+-    }
+-
+-    public String getQuery() {
+-
+-        String retVal = null;
+-
+-        try {
+-            retVal = new URL(url).getQuery();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
++        bos.flush();
++        if (bos instanceof ByteArrayOutputStream) {
++            buf = ((ByteArrayOutputStream) bos).toByteArray();
++        }
++        bos = null;
++        responseDump = new String(buf);
++        is.close();
++        System.out.println("responseDump: " + requestDump);
++        if (outputFile != null) {
++            return new FileInputStream(outputFile);
++        } else {
++            return new ByteArrayInputStream(buf);
+         }
+-
+-        return retVal;
+     }
+ 
+-    /**
+-     * @hide
+-     */
+-    public byte[] getRequestData(SoapEnvelope envelope, String encoding) {
++    private InputStream getUnZippedInputStream(InputStream inputStream) throws IOException {
++        /* workaround for Android 2.3 
++           (see http://stackoverflow.com/questions/5131016/)
++        */
+         try {
+-            return createRequestData(envelope, encoding);
+-        } catch (Exception e) {
+-            e.printStackTrace();
++            return (GZIPInputStream) inputStream;
++        } catch (ClassCastException e) {
++            return new GZIPInputStream(inputStream);
+         }
++    }
+ 
+-        return null;
++    public ServiceConnection getServiceConnection() throws IOException {
++        return new ServiceConnectionSE(proxy, url, timeout);
+     }
+ }
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsServiceConnectionSE.java b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsServiceConnectionSE.java
+index 9ad9ba9..376c7d8 100644
+--- a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsServiceConnectionSE.java
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsServiceConnectionSE.java
+@@ -1,21 +1,16 @@
+ 
+ package org.ksoap2.transport;
+ 
++import org.ksoap2.HeaderProperty;
++
++import javax.net.ssl.HttpsURLConnection;
++import javax.net.ssl.SSLSocketFactory;
+ import java.io.IOException;
+ import java.io.InputStream;
+ import java.io.OutputStream;
++import java.net.Proxy;
+ import java.net.URL;
+-import java.util.Iterator;
+-import java.util.LinkedList;
+-import java.util.Map;
+-import java.util.List;
+-import java.util.Set;
+-
+-import javax.net.ssl.HostnameVerifier;
+-import javax.net.ssl.SSLSocketFactory;
+-import javax.net.ssl.HttpsURLConnection;
+-//import com.android.okhttp.internal.http.HttpsURLConnectionImpl;
+-import org.ksoap2.HeaderProperty;
++import java.util.*;
+ 
+ /**
+  * HttpsServiceConnectionSE is a service connection that uses a https url connection and requires explicit setting of
+@@ -49,10 +44,29 @@ public class HttpsServiceConnectionSE implements ServiceConnection {
+      * @param timeout the timeout for the connection in milliseconds
+      * @throws IOException
+      */
+-    public HttpsServiceConnectionSE(String host, int port, String file,
+-            int timeout) throws IOException {
+-        connection = (HttpsURLConnection) new URL(HttpsTransportSE.PROTOCOL, host, port, file)
+-                .openConnection();
++    public HttpsServiceConnectionSE(String host, int port, String file, int timeout) throws IOException {
++        this(null, host, port, file, timeout);
++    }
++
++    /**
++     * Create the transport with the supplied parameters.
++     * @param proxy proxy server to use
++     * @param host the name of the host e.g. webservices.somewhere.com
++     * @param port the http port to connect on
++     * @param file the path to the file on the webserver that represents the
++     * webservice e.g. /api/services/myservice.jsp
++     * @param timeout the timeout for the connection in milliseconds
++     * @throws IOException
++     */
++    public HttpsServiceConnectionSE(Proxy proxy, String host, int port, String file, int timeout) throws IOException {
++
++        if (proxy == null) {
++            connection = (HttpsURLConnection) new URL(HttpsTransportSE.PROTOCOL, host, port, file).openConnection();
++        } else {
++            connection =
++                    (HttpsURLConnection) new URL(HttpsTransportSE.PROTOCOL, host, port, file).openConnection(proxy);
++        }
++
+         updateConnectionParameters(timeout);
+     }
+ 
+@@ -89,6 +103,10 @@ public class HttpsServiceConnectionSE implements ServiceConnection {
+         return retList;
+     }
+ 
++    public int getResponseCode() throws IOException {
++        return connection.getResponseCode();
++    }
++
+     public void setRequestProperty(String key, String value) {
+         connection.setRequestProperty(key, value);
+     }
+@@ -101,6 +119,11 @@ public class HttpsServiceConnectionSE implements ServiceConnection {
+         connection.setFixedLengthStreamingMode(contentLength);
+     }
+ 
++    public void setChunkedStreamingMode() {
++        connection.setChunkedStreamingMode(0);
++    }
++
++
+     public OutputStream openOutputStream() throws IOException {
+         return connection.getOutputStream();
+     }
+@@ -128,9 +151,4 @@ public class HttpsServiceConnectionSE implements ServiceConnection {
+     public void setSSLSocketFactory(SSLSocketFactory sf) {
+         connection.setSSLSocketFactory(sf);
+     }
+-
+-    public void setHostnameVerifier(HostnameVerifier v) {
+-        connection.setHostnameVerifier(v);
+-    }
+-
+ }
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsTransportSE.java b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsTransportSE.java
+index d220ac9..a7d7023 100644
+--- a/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsTransportSE.java
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/transport/HttpsTransportSE.java
+@@ -1,8 +1,8 @@
+-
+ package org.ksoap2.transport;
+ 
+ import java.io.IOException;
+ import java.net.MalformedURLException;
++import java.net.Proxy;
+ import java.net.URL;
+ 
+ /**
+@@ -14,17 +14,31 @@ import java.net.URL;
+ public class HttpsTransportSE extends HttpTransportSE {
+ 
+     static final String PROTOCOL = "https";
++    private static final String PROTOCOL_FULL = PROTOCOL + "://";
++    
++    //connection instance, used for setting the SSLSocketFactory
++    private HttpsServiceConnectionSE connection;
+ 
+-    private ServiceConnection serviceConnection = null;
+-    private final String host;
+-    private final int port;
+-    private final String file;
+-    private final int timeout;
++    protected final String host;
++    protected final int port;
++    protected final String file;
+ 
+-    public HttpsTransportSE(String host, int port, String file, int timeout) {
+-        super(HttpsTransportSE.PROTOCOL + "://" + host + ":" + port + file);
+-        System.out.println("Establistion connection to: " + HttpsTransportSE.PROTOCOL + "://"
+-                + host + ":" + port + file);
++    public HttpsTransportSE (String host, int port, String file, int timeout) {
++        super(HttpsTransportSE.PROTOCOL_FULL + host + ":" + port + file, timeout);
++        this.host = host;
++        this.port = port;
++        this.file = file;
++    }
++
++    /**
++     * Creates instance of HttpTransportSE with set url and defines a
++     * proxy server to use to access it
++     *
++     * @param proxy
++     * Proxy information or <code>null</code> for direct access
++     */
++    public HttpsTransportSE(Proxy proxy, String host, int port, String file, int timeout) {
++        super(proxy, HttpsTransportSE.PROTOCOL_FULL + host + ":" + port + file);
+         this.host = host;
+         this.port = port;
+         this.file = file;
+@@ -37,48 +51,11 @@ public class HttpsTransportSE extends HttpTransportSE {
+      */
+     public ServiceConnection getServiceConnection() throws IOException
+     {
+-        if (serviceConnection == null) {
+-            serviceConnection = new HttpsServiceConnectionSE(host, port, file, timeout);
+-        }
+-        return serviceConnection;
+-    }
+-
+-    public String getHost() {
+-
+-        String retVal = null;
+-
+-        try {
+-            retVal = new URL(url).getHost();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
++        if(connection != null) {
++            return connection;
++        } else {
++            connection = new HttpsServiceConnectionSE(proxy, host, port, file, timeout);
++            return connection;
+         }
+-
+-        return retVal;
+-    }
+-
+-    public int getPort() {
+-
+-        int retVal = -1;
+-
+-        try {
+-            retVal = new URL(url).getPort();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
+-        }
+-
+-        return retVal;
+-    }
+-
+-    public String getPath() {
+-
+-        String retVal = null;
+-
+-        try {
+-            retVal = new URL(url).getPath();
+-        } catch (MalformedURLException e) {
+-            e.printStackTrace();
+-        }
+-
+-        return retVal;
+     }
+ }
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/transport/KeepAliveHttpsTransportSE.java b/ksoap2-j2se/src/main/java/org/ksoap2/transport/KeepAliveHttpsTransportSE.java
+index 287fed1..65ba582 100644
+--- a/ksoap2-j2se/src/main/java/org/ksoap2/transport/KeepAliveHttpsTransportSE.java
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/transport/KeepAliveHttpsTransportSE.java
+@@ -24,18 +24,8 @@ import java.io.IOException;
+  */
+ public class KeepAliveHttpsTransportSE extends HttpsTransportSE
+ {
+-    private final String host;
+-    private final int port;
+-    private final String file;
+-    private final int timeout;
+-    private ServiceConnection serviceConnection;
+-
+-    public KeepAliveHttpsTransportSE(String host, int port, String file, int timeout) {
++    public KeepAliveHttpsTransportSE (String host, int port, String file, int timeout) {
+         super(host, port, file, timeout);
+-        this.host = host;
+-        this.port = port;
+-        this.file = file;
+-        this.timeout = timeout;
+     }
+ 
+     /**
+@@ -47,11 +37,9 @@ public class KeepAliveHttpsTransportSE extends HttpsTransportSE
+     //@Override
+     public ServiceConnection getServiceConnection() throws IOException
+     {
+-        if (serviceConnection == null) {
+-            serviceConnection = new HttpsServiceConnectionSEIgnoringConnectionClose(host, port,
+-                    file, timeout);
+-            serviceConnection.setRequestProperty("Connection", "keep-alive");
+-        }
++        ServiceConnection serviceConnection = 
++                new HttpsServiceConnectionSEIgnoringConnectionClose(host, port, file, timeout);
++        serviceConnection.setRequestProperty("Connection", "keep-alive");
+         return serviceConnection;
+     }
+ 
+diff --git a/ksoap2-j2se/src/main/java/org/ksoap2/transport/ServiceConnectionSE.java b/ksoap2-j2se/src/main/java/org/ksoap2/transport/ServiceConnectionSE.java
+index 029ee9a..bfdfe11 100644
+--- a/ksoap2-j2se/src/main/java/org/ksoap2/transport/ServiceConnectionSE.java
++++ b/ksoap2-j2se/src/main/java/org/ksoap2/transport/ServiceConnectionSE.java
+@@ -21,16 +21,16 @@
+ 
+ package org.ksoap2.transport;
+ 
+-import java.io.*;
+-import java.net.*;
+-import java.util.Iterator;
+-import java.util.LinkedList;
+-import java.util.List;
+-import java.util.Map;
+-import java.util.Set;
+-
+ import org.ksoap2.HeaderProperty;
+ 
++import java.io.IOException;
++import java.io.InputStream;
++import java.io.OutputStream;
++import java.net.HttpURLConnection;
++import java.net.Proxy;
++import java.net.URL;
++import java.util.*;
++
+ /**
+  * Connection for J2SE environments.
+  */
+@@ -80,23 +80,29 @@ public class ServiceConnectionSE implements ServiceConnection {
+         connection.disconnect();
+     }
+ 
+-    public List getResponseProperties() {
+-        Map properties = connection.getHeaderFields();
+-        Set keys = properties.keySet();
++    public List getResponseProperties() throws IOException {
+         List retList = new LinkedList();
+ 
+-        for (Iterator i = keys.iterator(); i.hasNext();) {
+-            String key = (String) i.next();
+-            List values = (List) properties.get(key);
+-
+-            for (int j = 0; j < values.size(); j++) {
+-                retList.add(new HeaderProperty(key, (String) values.get(j)));
++        Map properties = connection.getHeaderFields();
++        if(properties != null) {
++            Set keys = properties.keySet();
++            for (Iterator i = keys.iterator(); i.hasNext();) {
++                String key = (String) i.next();
++                List values = (List) properties.get(key);
++
++                for (int j = 0; j < values.size(); j++) {
++                    retList.add(new HeaderProperty(key, (String) values.get(j)));
++                }
+             }
+         }
+ 
+         return retList;
+     }
+ 
++    public int getResponseCode() throws IOException {
++        return connection.getResponseCode();
++    }
++
+     public void setRequestProperty(String string, String soapAction) {
+         connection.setRequestProperty(string, soapAction);
+     }
+@@ -116,6 +122,10 @@ public class ServiceConnectionSE implements ServiceConnection {
+         connection.setFixedLengthStreamingMode(contentLength);
+     }
+ 
++    public void setChunkedStreamingMode() {
++        connection.setChunkedStreamingMode(0);
++    }
++
+     public OutputStream openOutputStream() throws IOException {
+         return connection.getOutputStream();
+     }
+-- 
+2.17.0.441.gb46fe60e1d-goog
+

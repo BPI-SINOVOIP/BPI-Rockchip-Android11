@@ -1,0 +1,36 @@
+cc_test {
+    name: "C2VEACompIntf_test",
+    vendor: true,
+
+    srcs: [
+        "C2CompIntfTest.cpp",
+        "C2VEACompIntf_test.cpp",
+    ],
+
+    shared_libs: [
+        "libchrome",
+        "libcodec2",
+        "libcodec2_vndk",
+        "libcutils",
+        "liblog",
+        "libui",
+        "libutils",
+        "libv4l2_codec2_accel",
+        "libv4l2_codec2_components",
+    ],
+    include_dirs: [
+        "external/v4l2_codec2/accel",
+        "external/v4l2_codec2/common/include",
+        "external/v4l2_codec2/components/include",
+        "frameworks/av/media/codec2/components/base/include",
+        "frameworks/av/media/codec2/core/include",
+        "frameworks/av/media/codec2/vndk/include",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+    ldflags: ["-Wl,-Bsymbolic"],
+    clang: true,
+}

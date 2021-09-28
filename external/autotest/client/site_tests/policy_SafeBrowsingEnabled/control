@@ -1,0 +1,22 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_SafeBrowsingEnabled'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies effects of SafeBrowsingEnabled policy.
+
+This test checks the SafeBrowsingEnabled policy. It sets the policy to
+True, False, and None.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_SafeBrowsingEnabled', **args_dict)

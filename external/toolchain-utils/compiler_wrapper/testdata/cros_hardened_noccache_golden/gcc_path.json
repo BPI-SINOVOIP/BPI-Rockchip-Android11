@@ -1,0 +1,197 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./a/b/c/d/e/f/g/x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./a/b/c/d/e/f/g/x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/tmp/stable/a/b/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./symlinked/x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./symlinked/x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/tmp/stable/a/b/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "PATH=/tmp/stable/pathenv"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/pathenv/x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  }
+]

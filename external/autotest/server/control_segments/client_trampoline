@@ -1,0 +1,13 @@
+# client_trampoline
+#
+# This control file is used to install and re-exec the actual client test
+# control file on the host.
+#
+# This control file relies on a trampoline_testname global variable that
+# is inserted at the top of this file by server_job.run().
+
+def _client_trampoline():
+    path = job.stage_control_file(trampoline_testname)
+    execfile(path, globals(), globals())
+
+_client_trampoline()

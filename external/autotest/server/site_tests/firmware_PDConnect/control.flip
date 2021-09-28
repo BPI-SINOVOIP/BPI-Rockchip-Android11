@@ -1,0 +1,35 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "firmware_PDConnect.flip"
+PURPOSE = "Servo based PD Connect/Disconnect test"
+ATTRIBUTES = "suite:faft_pd"
+CRITERIA = "This test will fail if PD connection is not successful each attempt"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+
+DOC = """
+This test checks:
+  - PD Dual role mode is operational in the DUT
+  - Abiility to disconnect, then reconnect establishing a successful PD contract
+
+This subtest is testing the other CC pin.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+pdtester_args = hosts.CrosHost.get_pdtester_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args,
+                             pdtester_args=pdtester_args)
+    job.run_test("firmware_PDConnect", host=host, cmdline_args=args,
+                 disable_sysinfo=True, flip_cc=True, tag="flip")
+
+parallel_simple(run, machines)

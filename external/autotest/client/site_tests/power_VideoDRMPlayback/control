@@ -1,0 +1,15 @@
+AUTHOR = "puthik"
+NAME = "power_VideoDRMPlayback"
+PURPOSE = "Measure encrypted video playback power usage."
+CRITERIA = "This test is a benchmark."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+DOC = """
+This test records power related statistics while playing encrypted video file
+in various format.
+"""
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_VideoDRMPlayback', pdash_note=pdash_note)

@@ -1,0 +1,19 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'kathrelkeld'
+NAME = 'policy_DeviceAutoUpdateDisabled'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Called through the policy_AUServer test only.  Verifies whether the device
+can or cannot Autoupdate with the DeviceAutoUpdateDisabled policy set.
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_DeviceAutoUpdateDisabled', **args_dict)

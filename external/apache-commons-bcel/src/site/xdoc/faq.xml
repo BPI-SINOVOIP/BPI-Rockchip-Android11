@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+    * Licensed to the Apache Software Foundation (ASF) under one
+    * or more contributor license agreements.  See the NOTICE file
+    * distributed with this work for additional information
+    * regarding copyright ownership.  The ASF licenses this file
+    * to you under the Apache License, Version 2.0 (the
+    * "License"); you may not use this file except in compliance
+    * with the License.  You may obtain a copy of the License at
+    * 
+    *   http://www.apache.org/licenses/LICENSE-2.0
+    * 
+    * Unless required by applicable law or agreed to in writing,
+    * software distributed under the License is distributed on an
+    * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    * KIND, either express or implied.  See the License for the
+    * specific language governing permissions and limitations
+    * under the License.    
+-->
+
+<document>
+
+  <properties>
+    <title>BCEL FAQ</title>
+  </properties> 
+
+  <body>
+
+  <section name="FAQ">
+    <p>
+      <b>Q: </b>How can I ... with BCEL?
+      <br/>
+      <b>A: </b>Take a look at
+      <tt>org.apache.bcel.util.BCELifier</tt>, it takes a given class
+      and converts it to a BCEL program (in Java, of course). It will
+      show you how certain code is generated using BCEL.
+    </p>
+
+    <p>
+      <b>Q: </b> Is the BCEL thread-safe?
+      <br/>
+      <b>A: </b>BCEL was (deliberately) not designed for thread
+      safety. See <a href="http://java.sun.com/docs/books/cp/">
+      "Concurrent Programming in Java"</a>, by Doug Lea,
+      for an excellent reference on how to build thread-safe wrappers.
+    </p>
+
+    <p>
+      <b>Q: </b> Can I use BCEL in a commercial product?
+      <br/>
+      <b>A: </b> Yes, this is covered by the <a
+      href="http://www.apache.org/licenses/">Apache License</a>, if you add a note about the original
+      author and where to find the sources, i.e., 
+      <a href="http://commons.apache.org/bcel/">http://commons.apache.org/bcel/</a>
+    </p>
+
+    <p>
+      <b>Q: </b> (Typically for users of Xalan (XSLTC)) I'm getting
+      <pre>
+      ClassGenException: Branch target offset too large for short
+      </pre>
+      when compiling large files.
+      <br/>
+
+      <b>A: </b> The answer lies in internal limitations of the JVM,
+      branch instruction like goto can not address offsets larger than
+      a short integer, i.e. offsets >= 32767.<br/>
+      The solution is to split the branch into in intermediate hops,
+      which the XSLTC obviously doesn't take care off.
+      (In fact you could replace gotos with the goto_w instruction,
+      but this wouldn't help in the other cases).
+    </p>
+
+    <p>
+      <b>Q:</b> Can I create or modify classes dynamically with BCEL?
+      <br/>
+      <b>A:</b> BCEL contains useful classes in the
+      <tt>util</tt> package, namely <tt>ClassLoader</tt> and
+       <tt>JavaWrapper</tt>. Take a look at the <tt> ProxyCreator</tt> example.
+    </p>
+
+    <p>
+      <b>Q:</b> I get a verification error, what can I do?
+      <br/>
+      <b>A:</b> Use the JustIce verifier that comes together with BCEL
+      to get more detailed information:
+       <pre>
+       java org.apache.bcel.verifier.Verifier &lt;your class&gt;</pre>
+    </p>
+    
+    </section>
+<!--
+    <p>
+      <b>Q: </b>
+      <br/>
+      <b>A: </b>
+    </p>
+-->
+</body>
+</document>

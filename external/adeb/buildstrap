@@ -1,0 +1,76 @@
+#!/bin/bash
+
+spath="$(dirname "$(readlink -f "$0")")"
+source $spath/utils/support
+source $spath/utils/banners
+
+ARCH=$1
+DISTRO=$2
+TDIR=$3
+OUT_TMP=$4
+PACKAGES=$5
+EXTRA_FILES="$(cat $6)"
+INSTALL_BCC=$7
+SKIP_DEVICE=$8		# Skip any device-specific stages
+VARIANT="--variant=minbase"
+
+time qemu-debootstrap --arch $ARCH --include=$PACKAGES $VARIANT \
+	$DISTRO $OUT_TMP http://deb.debian.org/debian/
+
+# Some reason debootstrap leaves these mounted
+umount $OUT_TMP/proc/sys/fs/binfmt_misc || true
+umount $OUT_TMP/proc || true
+
+# Make bash the default shell
+chroot $OUT_TMP rm /bin/sh || true
+chroot $OUT_TMP ln -s /bin/bash /bin/sh || true
+cp $spath/addons/bashrc $OUT_TMP/.bashrc
+cp $spath/addons/bashrc.common $OUT_TMP/.bashrc.common
+cp $spath/addons/bashrc.silent $OUT_TMP/.bashrc.silent
+cp $spath/addons/get_kvers.sh $OUT_TMP/
+
+for f in $EXTRA_FILES; do
+	if [ $f == "none" ]; then continue; fi
+	cp $f $OUT_TMP/
+done
+
+# Cleanup
+rm -rf $OUT_TMP/lib/udev/*
+rm -rf $OUT_TMP/var/lib/apt/lists/*
+rm -rf $OUT_TMP/var/cache/apt/archives/*deb
+rm -rf $OUT_TMP/usr/share/locale/*
+rm -rf $OUT_TMP/usr/lib/share/locale/*
+rm -rf $OUT_TMP/usr/share/doc/*
+rm -rf $OUT_TMP/usr/lib/share/doc/*
+rm -rf $OUT_TMP/usr/share/ieee-data/*
+rm -rf $OUT_TMP/usr/lib/share/ieee-data/*
+rm -rf $OUT_TMP/usr/share/man/*
+rm -rf $OUT_TMP/usr/lib/share/man/*
+
+# Fix apt-get issue: Android requires _apt user to be in the
+# AID_INET group which is also android specific.
+grep -ri _apt:x:100:65534 $OUT_TMP/etc/passwd > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+	c_warning "_apt user cannot be added to AID_INET group"
+else
+	sed -i -e 's/_apt:x:100:65534/_apt:x:100:3003/' $OUT_TMP/etc/passwd
+fi
+
+# Add a default DNS server
+echo "nameserver 4.2.2.2" > $OUT_TMP/etc/resolv.conf
+
+# Clone BCC if needed
+if [ $INSTALL_BCC -eq 1 ]; then
+	git clone https://github.com/iovisor/bcc.git $TDIR/debian/bcc-master
+	cp $spath/bcc/build-bcc.sh $TDIR/debian/bcc-master/;
+fi
+
+# Should be really do this?
+chmod -R 0777 $TDIR/
+
+[ $SKIP_DEVICE -eq 0 ] || exit 0
+
+c_info "Compressing new filesystem to prepare to push to Android /data/androdeb/"
+tar -zcf $TDIR/deb.tar.gz -C $TDIR debian
+
+chmod 0777 $TDIR/deb.tar.gz

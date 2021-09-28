@@ -1,0 +1,308 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "WITH_TIDY=1"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang-tidy",
+          "args": [
+            "-checks=*,google*,-bugprone-narrowing-conversions,-cppcoreguidelines-*,-fuchsia-*,-google-build-using-namespace,-google-default-arguments,-google-explicit-constructor,-google-readability*,-google-runtime-int,-google-runtime-references,-hicpp-avoid-c-arrays,-hicpp-braces-around-statements,-hicpp-no-array-decay,-hicpp-signed-bitwise,-hicpp-uppercase-literal-suffix,-hicpp-use-auto,-llvm-namespace-comment,-misc-non-private-member-variables-in-classes,-misc-unused-parameters,-modernize-*,-readability-*",
+            "main.cc",
+            "--",
+            "-resource-dir=someResourceDir",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "WITH_TIDY=1",
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang-tidy",
+          "args": [
+            "-checks=*,google*,-bugprone-narrowing-conversions,-cppcoreguidelines-*,-fuchsia-*,-google-build-using-namespace,-google-default-arguments,-google-explicit-constructor,-google-readability*,-google-runtime-int,-google-runtime-references,-hicpp-avoid-c-arrays,-hicpp-braces-around-statements,-hicpp-no-array-decay,-hicpp-signed-bitwise,-hicpp-uppercase-literal-suffix,-hicpp-use-auto,-llvm-namespace-comment,-misc-non-private-member-variables-in-classes,-misc-unused-parameters,-modernize-*,-readability-*",
+            "main.cc",
+            "--",
+            "-resource-dir=someResourceDir",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "WITH_TIDY=1",
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerrorclang-tidy failed"
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang-tidy",
+          "args": [
+            "-checks=*,google*,-bugprone-narrowing-conversions,-cppcoreguidelines-*,-fuchsia-*,-google-build-using-namespace,-google-default-arguments,-google-explicit-constructor,-google-readability*,-google-runtime-int,-google-runtime-references,-hicpp-avoid-c-arrays,-hicpp-braces-around-statements,-hicpp-no-array-decay,-hicpp-signed-bitwise,-hicpp-uppercase-literal-suffix,-hicpp-use-auto,-llvm-namespace-comment,-misc-non-private-member-variables-in-classes,-misc-unused-parameters,-modernize-*,-readability-*",
+            "main.cc",
+            "--",
+            "-resource-dir=someResourceDir",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "WITH_TIDY=1",
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "--print-resource-dir"
+          ]
+        },
+        "stdout": "someResourceDir"
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang-tidy",
+          "args": [
+            "-checks=*,google*,-bugprone-narrowing-conversions,-cppcoreguidelines-*,-fuchsia-*,-google-build-using-namespace,-google-default-arguments,-google-explicit-constructor,-google-readability*,-google-runtime-int,-google-runtime-references,-hicpp-avoid-c-arrays,-hicpp-braces-around-statements,-hicpp-no-array-decay,-hicpp-signed-bitwise,-hicpp-uppercase-literal-suffix,-hicpp-use-auto,-llvm-namespace-comment,-misc-non-private-member-variables-in-classes,-misc-unused-parameters,-modernize-*,-readability-*",
+            "main.cc",
+            "--",
+            "-resource-dir=someResourceDir",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        }
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/clang",
+          "args": [
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-fuse-ld=lld",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-Wno-unknown-warning-option",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  }
+]

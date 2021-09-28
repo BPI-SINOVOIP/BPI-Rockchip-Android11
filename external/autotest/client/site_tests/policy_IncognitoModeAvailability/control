@@ -1,0 +1,22 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_IncognitoModeAvailability'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies effects of IncognitoModeAvailable policy.
+
+This test verifies Available as well as Disabled policy. It does
+not verify Forced because when trying to run the test setup in
+Incognito mode the test fails.
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_IncognitoModeAvailability', **args_dict)

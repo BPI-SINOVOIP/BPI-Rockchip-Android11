@@ -1,0 +1,53 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'harpreet'
+NAME = 'network_WiFi_ChaosConnectDisconnect.static_5Ghz'
+TIME = 'LONG'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:wifi_interop'
+DEPENDENCIES = 'chaos_dut'
+MAX_RESULT_SIZE_KB = 512000
+
+DOC = """
+This script iterates through all 5Ghz access points in Chaos chamber.
+"""
+
+from autotest_lib.server.cros.ap_configurators import ap_spec
+from autotest_lib.server.cros.chaos_lib import static_runner
+
+def run_chaos_static(machine):
+    host = hosts.create_host(machine)
+    # Test all 5Ghz static APs on channel 36, 40, 44, 48, 149, 153, 157 and 161
+    ap_specs = [ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 36,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 40,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 44,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 48,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 149,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 153,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 157,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC),
+                ap_spec.APSpec(band=ap_spec.BAND_5GHZ,
+                               channel = 161,
+                               configurator_type=ap_spec.CONFIGURATOR_STATIC)]
+
+    for spec in ap_specs:
+        runner = static_runner.StaticRunner(
+                'network_WiFi_ChaosConnectDisconnect', host, spec)
+        runner.run(job)
+
+parallel_simple(run_chaos_static, machines)

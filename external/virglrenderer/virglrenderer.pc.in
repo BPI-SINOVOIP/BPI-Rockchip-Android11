@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: virglrenderer
+Description: virgl GL renderer
+Version: @PACKAGE_VERSION@
+Cflags: -I${includedir} -I${includedir}/virgl
+Libs: -L${libdir} -lvirglrenderer

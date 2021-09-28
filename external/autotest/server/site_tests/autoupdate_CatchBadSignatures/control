@@ -1,0 +1,152 @@
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+
+AUTHOR = "Chromium OS"
+NAME = "autoupdate_CatchBadSignatures"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+JOB_RETRIES = 2
+# TODO(jorgelo): move this to bvt-cq after crbug.com/427384 is fixed.
+ATTRIBUTES = "suite:au-perbuild"
+BUG_TEMPLATE = {
+    'cc': ['chromeos-installer-alerts@google.com'],
+    'components': ['Internals>Installer'],
+}
+
+DOC = """
+This is a test to verify that update_engine correctly checks signatures in the
+metadata hash and the update payload itself. This is achieved by feeding updates
+to update_engine where the private key used to make the signature, intentionally
+does not match with the public key used for verification.
+
+By its very nature, this test requires an image signed with a well-known
+key. Since payload-generation is a resource-intensive process, we prepare the
+image ahead of time. Also, since the image is never successfully applied, we can
+get away with not caring that the image is built for one board but used on
+another.
+
+If you ever need to replace the test image and payloads, follow these simple
+(jk!) steps:
+
+  1. Build a test image:
+
+     $ cd ~/trunk/src/scripts
+     $ ./build_packages --board=${BOARD}
+     $ ./build_image --board=${BOARD} --noenable_rootfs_verification test
+
+     Alternatively, you can use any kind of Chrome OS image you already have or
+     downloaded.
+
+  2. Reduce the size of Rootfs and Kernel partitions. This is done so these
+     autotests don't have to download a huge payload as the payload is not going
+     to be applied fully anyway. This can be done many ways. One is:
+
+     $ sudo losetup -fP chromiumos_test_image.bin
+
+     At this point take a note of which loopback device was set up for the
+     image. e.g. /dev/loop1
+
+     $ sudo mkfs.ext4 -b 4k /dev/loop1p3 100  # For ROOT-A
+     $ sudo mkfs.ext4 -b 4k /dev/loop1p4 100  # For KERN-B
+     $ mkdir rootfs kernel
+     $ sudo mount /dev/loop1p3 rootfs
+     $ sudo mount /dev/loop1p4 kernel
+
+     Now you need a lsb-release file copied from any Chrome OS.
+
+     $ mkdir rootfs/etc && touch cp <lsb-release> rootfs/etc
+     $ touch kernel/fake-kernel.bin # Optional
+     $ sudo umount rootfs kernel
+
+     Now, the chromiumos_test_image.bin has very small Rootfs and Kernel
+     partitions.
+
+  3. Generate a full payload in which its metadata and payload signatures are
+     signed by two different private keys. An update payload has two signatures
+     embedded in it. The first is the signature of the header (metadata
+     signature) and the second is the signature of the entire payload (payload
+     signature). We do two tests here: One that makes sure the metadata
+     signature verification fails if signed incorrectly (we do this by sending a
+     different public key that doesn't verify the aforementioned signature). The
+     second one to make sure the metadata signature verification passes fine,
+     but the payload signature verification fails. One (not so) simple, but
+     available way of doing this is as follows:
+
+     Since we can't generate a payload with metadata and payload signatures
+     signed by different keys (simply we haven't designed tools for that), we
+     need to sign a payload two times with different keys and swap the payload
+     signature of one of them with the other.
+
+     $ mkdir key1 key2
+     $ cros_generate_update_payload \
+         --image chromiumos_test_image.bin \
+         --output key1/full.bin \
+         --work_dir key1 \
+         --private_key ~/trunk/src/aosp/system/update_engine/unittest_key.pem
+     $ cros_generate_update_payload \
+         --image chromiumos_test_image.bin \
+         --output key2/full.bin \
+         --work_dir key2 \
+         --private_key ~/trunk/src/aosp/system/update_engine/unittest_key2.pem
+
+     Now we should re-sign an unsigned image (key1/delta.bin) with metadata
+     signature from key1 and payload signature from key2 directories. Because we
+     passed the --work_dir flag, the intermediate temporary files (including
+     signature files) are saved in those directories.
+
+     $ delta_generator \
+        --in_file=key1/delta.bin \
+        --metadata_signature_file=key1/signature_metadata_<hash>.bin \
+        --payload_signature_file=key2/signature_payload_<hash>.bin \
+        --out_file=autoupdate_CatchBadSignatures.bin
+
+     This file is signed and ready to be tested.
+
+  4. Generate/modify a payload properties file. For each payload we need a
+     payload properties file in JSON format. This file has already been
+     generated in the previous step when we generated the signed image. We just
+     need to modify it.
+
+     $ cp key1/delta.bin.json autoupdate_CatchBadSignatures.bin.json
+
+     However, since we re-signed the payload, we need to calculate its SHA256
+     hash again. Easy way to do this is to use either delta_generator or
+     cros_generate_update_payload as:
+
+     $  cros_generate_update_payload \
+        --payload autoupdate_CatchBadSignatures.bin --output foo.json
+
+     Open autoupdate_CatchBadSignatures.bin.json and replace the value of
+     sha256_hex with the one from foo.json. Also empty the value of 'appid'
+     (keep its key) to empty string.
+
+  5. Replace _IMAGE_PUBLIC_KEY2 in this file with value in
+     key2/full.bin.json. (You don't need to do this step if you used the same
+     keys as mentioned above.)
+
+  6. Upload the generated payload and its properties file to the public
+     gsbucket.
+
+  7. Now run the test and ensure that it passes.
+
+    $ cd ~/trunk/src/scripts
+    $ test_that -b ${BOARD} --fast <DUT_IP> autoupdate_CatchBadSignatures
+
+With this in place, you can now run the test:
+
+  $ test_that <DUT_IP> autoupdate_CatchBadSignatures -b ${BOARD}
+
+"""
+
+def run_test(machine):
+    """Execute a test configuration on a given machine."""
+    host = hosts.create_host(machine)
+    job.run_test("autoupdate_CatchBadSignatures", host=host)
+
+# Invoke parallel tests.
+parallel_simple(run_test, machines)

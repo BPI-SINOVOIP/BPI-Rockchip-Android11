@@ -1,0 +1,21 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_PinnedLauncherApps.pinned'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify the PinnedLauncherApps policy will pin apps to the launch bar, as well
+as lock them. Additionally verify when the policy is removed the user can
+remove the app from the launch bar.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_PinnedLauncherApps', **args_dict)

@@ -1,0 +1,35 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+TIME="SHORT"
+AUTHOR = "The Chromium OS Authors"
+DOC = """
+When mounting a filesystem, Linux provides no way to specify that symlink
+traversal should be blocked on the given filesystem. For user-supplied
+filesystems in particular (sshfs, external storage media, etc.), we wish to
+block symlink traversal to prevent CrOS code (e.g. the Files app) from being
+tricked into following unexpected symlinks. We have added functionality to the
+chromiumos LSM to enable a "nosymfollow" option, which can be provided as part
+of the mount command to ensure the kernel does not allow symlink traversal on
+the filesystem. This test does not test the interaction of the chromiumos LSM
+code with SELinux code. That is done in
+security_NosymfollowMountOption.test_selinux_interaction
+"""
+NAME = "security_NosymfollowMountOption.baseline"
+PURPOSE = """
+Ensure the blocking of symlink traversal on a per-filesystem basis works as
+expected.
+"""
+CRITERIA = """
+This autotest ensures that symlink traversal is blocked on filesystems that
+were mounted with the "nosymfollow" option, as well as that filesystems
+mounted without that option can still traverse symlinks.
+"""
+ATTRIBUTES = "suite:bvt-perbuild"
+TEST_CLASS = "security"
+TEST_CATEGORY = "Functional"
+TEST_TYPE = "client"
+JOB_RETRIES = 2
+
+job.run_test("security_NosymfollowMountOption", test_selinux_interaction=False)

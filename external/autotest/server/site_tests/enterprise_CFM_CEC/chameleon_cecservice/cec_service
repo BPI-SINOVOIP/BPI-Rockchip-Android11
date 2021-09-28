@@ -1,0 +1,73 @@
+#!/usr/bin/python2
+
+import sys
+import time
+from time import sleep
+import util
+import it6803
+
+usage = """\
+Usage:
+  cec_service               -- print command usage
+  cec_service start         -- run cec service
+"""
+
+powerOn = True
+
+def main(cmdline):
+    args = [''] * 4
+    for i, x in enumerate(cmdline):
+        args[i] = x
+    cmd = args[1]
+
+    if cmd == '': cmd = 'help'
+    fname = 'cmd_' + cmd
+
+    if fname in globals():
+        if args[2] == '':
+            globals()[fname]()
+        else:
+            globals()[fname](args[2])
+    else:
+        print 'Unknown command', cmd
+
+def cmd_start():
+    it6803.cec_open()
+    it6803.cec_init()
+    while True:
+        code = it6803.cec_msg_receive()
+        if code is not None:
+            if code == 0x36:
+                handle_standBy()
+            elif code == 0x04:
+                handle_imageOn()
+            elif code == 0x8F:
+                handle_powerStatus()
+            else:
+                print 'Unknow command'
+    it6803.cec_close()
+    return
+
+def handle_standBy():
+    global powerOn
+    powerOn = False
+    return
+
+def handle_imageOn():
+    global powerOn
+    powerOn = True
+    return
+
+def handle_powerStatus():
+    global powerOn
+    print 'power status: {}'.format(powerOn)
+    if powerOn:
+        it6803.cec_msg_poweron()
+    else:
+        it6803.cec_msg_poweroff()
+    it6803.cec_transmit()
+    return
+
+
+if __name__ == '__main__':
+    main(sys.argv)

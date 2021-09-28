@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_WiFiTypesServer'
+TEST_TYPE = 'Server'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+'policy_WiFiTypesServer' test configures multiple APs and runs the client
+side 'policy_WiFiTypes' test on APs with various authentication types
+and checks that they all are able to connect.
+
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_WiFiTypesServer',
+                 raw_cmdline_args=args,
+                 host=host)
+
+
+parallel_simple(run, machines)

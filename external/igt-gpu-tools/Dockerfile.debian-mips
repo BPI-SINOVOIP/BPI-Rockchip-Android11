@@ -1,0 +1,39 @@
+FROM debian:stretch-backports
+
+RUN apt-get update
+RUN apt-get install -y \
+			flex \
+			bison \
+			pkg-config \
+			x11proto-dri2-dev \
+			python-docutils \
+			valgrind \
+			peg
+
+RUN dpkg --add-architecture mips
+RUN apt-get update
+RUN apt-get install -y \
+			gcc-mips-linux-gnu \
+			libatomic1:mips \
+			libpciaccess-dev:mips \
+			libkmod-dev:mips \
+			libprocps-dev:mips \
+			libunwind-dev:mips \
+			libdw-dev:mips \
+			zlib1g-dev:mips \
+			liblzma-dev:mips \
+			libcairo-dev:mips \
+			libpixman-1-dev:mips \
+			libudev-dev:mips \
+			libgsl-dev:mips \
+			libasound2-dev:mips \
+			libjson-c-dev:mips \
+			libcurl4-openssl-dev:mips \
+			libxrandr-dev:mips \
+			libxv-dev:mips
+
+RUN apt-get install -t stretch-backports -y \
+			meson \
+			libdrm-dev:mips \
+			qemu-user \
+			qemu-user-static

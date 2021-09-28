@@ -1,0 +1,28 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+@include /usr/share/policy/crosvm/common_device.policy
+
+writev: 1
+pwrite64: 1
+stat: 1
+lstat: 1
+open: 1
+openat: 1
+fstat: 1
+ioctl: arg1 == FIOCLEX
+link: 1
+unlink: 1
+rename: 1
+pread64: 1
+getdents: 1
+mkdir: 1
+rmdir: 1
+fsync: 1
+fdatasync: 1
+utimensat: 1
+ftruncate: 1
+fchown: arg1 == 0xffffffff && arg2 == 0xffffffff
+statfs: 1
+newfstatat: 1

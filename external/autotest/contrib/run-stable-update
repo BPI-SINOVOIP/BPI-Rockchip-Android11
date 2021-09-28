@@ -1,0 +1,43 @@
+#!/bin/bash
+# Copyright (c) 2015 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+SCRIPT_DIR=$(dirname $(readlink -f $0))
+cd ${SCRIPT_DIR}/..
+
+LOGDIR=logs/stable-version
+ASSIGN_STABLE=site_utils/stable_images/assign_stable_images.py
+
+mkdir -p ${LOGDIR}
+NOTIFY=(
+  chromeos-test-monitors@google.com
+)
+
+# Redirect onto a log file.  For debug purposes, skip redirection if
+# there's a command line argument (we ignore what the argument is), or
+# if there's no log directory.
+#
+TAG=$(date '+%Y-%W')
+if [ $# -eq 0 -a -d ${LOGDIR} ]; then
+    LOGFILE="update-${TAG}.log"
+    exec >>${LOGDIR}/${LOGFILE} 2>&1
+fi
+
+trap 'rm -f ${TMPFILE}' EXIT
+TMPFILE=$(mktemp)
+
+date
+$ASSIGN_STABLE --web localhost 2>&1 | tee ${TMPFILE}
+echo
+
+# If we have a log directory, clean it up, and send e-mail notification.
+# The log files change name each week, so by throwing out all but the
+# most recent 14 files, we keep about 3 months of history, plus this
+# week's log.
+#
+if [ -d ${LOGDIR} ]; then
+    SUBJECT="Stable version update summary ${TAG}"
+    site_utils/gmail_lib.py -s "${SUBJECT}" "${NOTIFY[@]}" <${TMPFILE}
+    rm -f $(ls -r ${LOGDIR}/update-*.log | sed '1,14 d')
+fi

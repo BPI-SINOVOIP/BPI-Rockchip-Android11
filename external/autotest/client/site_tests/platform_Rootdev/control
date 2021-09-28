@@ -1,0 +1,25 @@
+# Copyright (c) 2009 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Kobic@codeaurora.org (Kobi Cohen-Arazi)"
+NAME = "platform_Rootdev"
+PURPOSE = "Test rootdev correctness"
+CRITERIA = """
+Will check it with options to rootdev e.g. -d
+it should be /dev/sd{a,b} (-d) or /dev/nvme0n1 or mmcblk0
+"""
+ATTRIBUTES = "suite:regression"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+
+DOC = """
+Definitions of the results:
+
+it should be /dev/sda (-d) or /dev/nvme0n1 or mmcblk0
+
+"""
+
+job.run_test('platform_Rootdev')

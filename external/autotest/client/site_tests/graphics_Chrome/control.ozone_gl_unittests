@@ -1,0 +1,24 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "chromeos-gfx"
+NAME = "graphics_Chrome.ozone_gl_unittests"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "graphics"
+TEST_TYPE = "client"
+
+ATTRIBUTES = "suite:bvt-perbuild"
+
+UNITTESTS_BINARY_NAME = 'ozone_gl_unittests'
+# Execution timeout: very generous since its goal is to avoid hangs.
+TIMEOUT_SECONDS = 300
+DOC = """
+Runs ozone_gl_unittests.  This is a simple binary that initializes Ozone - DRM
+and uses it to create a DmaBuf NativePixmap and allocate a GLImageEGL.
+"""
+
+job.run_test('graphics_Chrome',
+             unittests_binary_name=UNITTESTS_BINARY_NAME,
+             unittests_timeout=TIMEOUT_SECONDS)

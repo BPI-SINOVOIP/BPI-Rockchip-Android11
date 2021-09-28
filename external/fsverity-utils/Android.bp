@@ -1,0 +1,11 @@
+cc_binary {
+    name: "fsverity",
+    host_supported: true,
+    shared_libs: ["libcrypto"],
+    cflags: [
+        "-Wall",
+        "-Wno-pointer-arith",
+        "-D_FILE_OFFSET_BITS=64"
+    ],
+    srcs: ["*.c"],
+}

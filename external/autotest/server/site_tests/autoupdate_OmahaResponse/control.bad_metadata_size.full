@@ -1,0 +1,26 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, Chromium OS"
+NAME = "autoupdate_OmahaResponse.bad_metadata_size.full"
+PURPOSE = "Tests that an update fails when the metadata size value is invalid."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:au-perbuild"
+DOC = """
+Tests that an update fails when the metadata size value is invalid.
+"""
+
+from autotest_lib.client.common_lib import utils
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('autoupdate_OmahaResponse', host=host, full_payload=True,
+                 bad_metadata_size=True, **args_dict)
+
+job.parallel_simple(run, machines)

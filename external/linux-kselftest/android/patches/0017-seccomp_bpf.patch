@@ -1,0 +1,134 @@
+Disable further incompatible seccomp subtests.
+
+Bug: 147676645
+
+--- a/tools/testing/selftests/seccomp/seccomp_bpf.c
++++ b/tools/testing/selftests/seccomp/seccomp_bpf.c
+@@ -13,12 +13,14 @@
+  * we need to use the kernel's siginfo.h file and trick glibc
+  * into accepting it.
+  */
++#if defined(__GLIBC_PREREQ)
+ #if !__GLIBC_PREREQ(2, 26)
+ # include <asm/siginfo.h>
+ # define __have_siginfo_t 1
+ # define __have_sigval_t 1
+ # define __have_sigevent_t 1
+ #endif
++#endif
+ 
+ #include <errno.h>
+ #include <linux/filter.h>
+@@ -475,6 +477,8 @@
+ 	EXPECT_EQ(EINVAL, errno);
+ }
+ 
++/* b/147676645 */
++#if 0
+ TEST(log_all)
+ {
+ 	struct sock_filter filter[] = {
+@@ -496,6 +500,7 @@
+ 	/* getppid() should succeed and be logged (no check for logging) */
+ 	EXPECT_EQ(parent, syscall(__NR_getppid));
+ }
++#endif
+ 
+ TEST_SIGNAL(unknown_ret_is_kill_inside, SIGSYS)
+ {
+@@ -748,6 +753,8 @@
+ 	exit(42);
+ }
+ 
++/* b/147676645 */
++#if 0
+ TEST(KILL_thread)
+ {
+ 	int status;
+@@ -766,6 +773,7 @@
+ 	ASSERT_TRUE(WIFEXITED(status));
+ 	ASSERT_EQ(42, WEXITSTATUS(status));
+ }
++#endif
+ 
+ TEST(KILL_process)
+ {
+@@ -1313,6 +1321,8 @@
+ 	EXPECT_EQ(-1, syscall(__NR_getpid));
+ }
+ 
++/* b/147676645 */
++#if 0
+ TEST_F(precedence, log_is_fifth)
+ {
+ 	pid_t mypid, parent;
+@@ -1352,6 +1362,7 @@
+ 	/* Should also work just fine */
+ 	EXPECT_EQ(mypid, syscall(__NR_getpid));
+ }
++#endif
+ 
+ #ifndef PTRACE_O_TRACESECCOMP
+ #define PTRACE_O_TRACESECCOMP	0x00000080
+@@ -1871,6 +1882,8 @@
+ 		free(self->prog.filter);
+ }
+ 
++/* b/147676645 */
++#if 0
+ TEST_F(TRACE_syscall, ptrace_syscall_redirected)
+ {
+ 	/* Swap SECCOMP_RET_TRACE tracer for PTRACE_SYSCALL tracer. */
+@@ -1903,6 +1916,7 @@
+ 	/* Tracer should skip the gettid syscall, resulting fake pid. */
+ 	EXPECT_SYSCALL_RETURN(45000, syscall(__NR_gettid));
+ }
++#endif
+ 
+ TEST_F(TRACE_syscall, syscall_allowed)
+ {
+@@ -2181,6 +2195,8 @@
+ 	}
+ }
+ 
++/* b/147676645 */
++#if 0
+ /*
+  * Test detection of known and unknown filter flags. Userspace needs to be able
+  * to check if a filter flag is supported by the current kernel and a good way
+@@ -2270,6 +2286,7 @@
+ 		       flag);
+ 	}
+ }
++#endif
+ 
+ TEST(TSYNC_first)
+ {
+@@ -2916,6 +2933,8 @@
+ 		_metadata->passed = 0;
+ }
+ 
++/* b/147676645 */
++#if 0
+ TEST_SIGNAL(filter_flag_log, SIGSYS)
+ {
+ 	struct sock_filter allow_filter[] = {
+@@ -3077,7 +3096,10 @@
+ skip:
+ 	ASSERT_EQ(0, kill(pid, SIGKILL));
+ }
++#endif
+ 
++/* b/147676645 */
++#if 0
+ static int user_trap_syscall(int nr, unsigned int flags)
+ {
+ 	struct sock_filter filter[] = {
+@@ -3618,6 +3640,7 @@
+ 		}
+ 	}
+ }
++#endif
+ 
+ /*
+  * TODO:

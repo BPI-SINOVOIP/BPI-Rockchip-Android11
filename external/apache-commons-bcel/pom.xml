@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  * Licensed to the Apache Software Foundation (ASF) under one
+  * or more contributor license agreements. See the NOTICE file
+  * distributed with this work for additional information
+  * regarding copyright ownership. The ASF licenses this file
+  * to you under the Apache License, Version 2.0 (the
+  * "License"); you may not use this file except in compliance
+  * with the License. You may obtain a copy of the License at
+  *
+  * http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing,
+  * software distributed under the License is distributed on an
+  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  * KIND, either express or implied. See the License for the
+  * specific language governing permissions and limitations
+  * under the License.
+-->
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-parent</artifactId>
+    <version>42</version>
+  </parent>
+
+  <groupId>org.apache.bcel</groupId>
+  <artifactId>bcel</artifactId>
+  <packaging>jar</packaging>
+  <version>6.2</version>
+  <name>Apache Commons BCEL</name>
+  <description>Apache Commons Bytecode Engineering Library</description>
+
+  <url>http://commons.apache.org/proper/commons-bcel</url>
+  <inceptionYear>2004</inceptionYear>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <commons.componentid>bcel</commons.componentid>
+    <commons.module.name>org.apache.bcel</commons.module.name>
+    <commons.release.version>6.2</commons.release.version>
+    <commons.release.desc>(Java 7+)</commons.release.desc>
+    <commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-bcel</commons.scmPubUrl>
+    <!-- Configuration properties for the OSGi maven-bundle-plugin -->
+    <commons.osgi.symbolicName>org.apache.${commons.componentid}</commons.osgi.symbolicName>
+    <commons.osgi.export>org.apache.bcel.*;version=${project.version};-noimport:=true</commons.osgi.export>
+    <commons.osgi.import>*</commons.osgi.import>
+    <commons.osgi.dynamicImport />
+    <commons.osgi.private />
+    <commons.jira.id>BCEL</commons.jira.id>
+    <commons.jira.pid>12314220</commons.jira.pid>
+    <commons.findbugs.version>3.0.5</commons.findbugs.version>
+    <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
+    <commons.clirr.version>2.8</commons.clirr.version>
+    <jna.version>4.5.0</jna.version>
+  </properties>
+
+  <!-- Cannot be added to Commons Parent, see https://issues.apache.org/jira/browse/COMMONSSITE-26 -->
+  <distributionManagement>
+    <site>
+      <id>apache.website</id>
+      <name>Apache Website</name>
+      <url>scp://people.apache.org/www/commons.apache.org/${commons.componentid}/</url>
+    </site>
+  </distributionManagement>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>The Apache Software Foundation</name>
+    <url>http://www.apache.org/</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>Dave Brosius</name>
+      <id>dbrosius</id>
+      <email>dbrosius at mebigfatguy.com</email>
+    </developer>
+
+    <developer>
+      <name>Torsten Curdt</name>
+      <id>tcurdt</id>
+      <email>tcurdt at apache.org</email>
+      <organization>ASF</organization>
+      <organizationUrl>http://www.apache.org/</organizationUrl>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <name>Markus Dahm</name>
+      <id>mdahm</id>
+      <email>m.dahm at gmx.de</email>
+      <organization>it-frameworksolutions</organization>
+    </developer>
+
+    <developer>
+      <name>Jason van Zyl</name>
+      <email>jason at zenplex.com</email>
+    </developer>
+
+    <developer>
+      <id>ggregory</id>
+      <name>Gary Gregory</name>
+      <email>ggregory@apache.org</email>
+      <organization>Rocket Software</organization>
+      <roles>
+        <role>PMC Member</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+    </developer>
+
+  </developers>
+
+  <contributors>
+
+    <contributor>
+      <name>Enver Haase</name>
+      <email>enver at convergence.de</email>
+    </contributor>
+
+    <contributor>
+      <name>David Dixon-Peugh</name>
+      <email>dixonpeugh at yahoo.com</email>
+    </contributor>
+
+    <contributor>
+      <name>Patrick Beard</name>
+      <email>beard at netscape.com</email>
+    </contributor>
+
+    <contributor>
+      <name>Conor MacNeill</name>
+      <email>conor at cortexbusiness.com.au</email>
+    </contributor>
+
+    <contributor>
+      <name>Costin Manolache</name>
+      <email>cmanolache at yahoo.com</email>
+    </contributor>
+
+    <contributor>
+      <name>Bill Pugh</name>
+      <email>bill.pugh at gmail.com</email>
+    </contributor>
+
+    <contributor>
+      <name>First Hop Ltd / Torsten Rueger</name>
+    </contributor>
+
+    <contributor>
+      <name>Jérôme Leroux</name>
+    </contributor>
+
+    <contributor>
+      <name>Mark Roberts</name>
+    </contributor>
+
+    <contributor>
+      <name>Sam Yoon</name>
+    </contributor>
+  </contributors>
+
+  <mailingLists>
+    <mailingList>
+      <name>BCEL User List</name>
+      <subscribe>user-subscribe@commons.apache.org</subscribe>
+      <unsubscribe>user-unsubscribe@commons.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/commons-user/</archive>
+    </mailingList>
+    <mailingList>
+      <name>BCEL Developer List</name>
+      <subscribe>dev-subscribe@commons.apache.org</subscribe>
+      <unsubscribe>dev-unsubscribe@commons.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/commons-dev/</archive>
+    </mailingList>
+  </mailingLists>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>http://issues.apache.org/jira/browse/BCEL</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/commons/proper/bcel/trunk</developerConnection>
+    <url>http://svn.apache.org/repos/asf/commons/proper/bcel/trunk</url>
+  </scm>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>${commons.rat.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>src/test/resources/**</exclude>
+            <exclude>docs/*.bib</exclude>
+            <exclude>docs/*.mdl</exclude>
+            <exclude>docs/eps/*</exclude>
+            <exclude>**/*.eps</exclude>
+            <exclude>**/*.bnf</exclude>
+            <exclude>**/*.mini</exclude>
+            <exclude>TODO.JustIce</exclude>
+            <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <!-- Allow Clirr to be run from command line -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>clirr-maven-plugin</artifactId>
+        <version>${commons.clirr.version}</version>
+        <configuration>
+          <minSeverity>${minSeverity}</minSeverity>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <!-- Temporary fix for BCEL-293, remove this after this has implemented in parent pom -->
+        <configuration>
+          <archive combine.children="append">
+            <manifestEntries>
+              <Automatic-Module-Name>org.apache.bcel</Automatic-Module-Name>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <testExcludes>
+            <testExclude>**/*Benchmark*</testExclude>
+          </testExcludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <property>
+              <!-- Suppress the stats, but keep the test as it exercises the code -->
+              <name>PerformanceTest.report</name>
+              <value>false</value>
+            </property>
+          </systemProperties>
+          <includes>
+            <include>**/*TestCase.java</include>
+            <include>**/PerformanceTest.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/Abstract*</exclude>
+            <!-- Takes rather a long time (especially rt.jar) ; only needs to be done occasionally -->
+            <exclude>**/JDKClassDumpTestCase.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <!-- These need to be specified because CP includes a descriptor -->
+          <descriptors>
+            <descriptor>src/assembly/bin.xml</descriptor>
+            <descriptor>src/assembly/src.xml</descriptor>
+          </descriptors>
+          <tarLongFileMode>gnu</tarLongFileMode>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <configuration>
+          <ignorePathsToDelete>
+            <ignorePathToDelete>javadocs</ignorePathToDelete>
+          </ignorePathsToDelete>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+          <!-- Needed to define config_loc -->
+          <propertyExpansion>config_loc=${basedir}</propertyExpansion>
+          <enableRulesSummary>false</enableRulesSummary>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <!--
+        <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jardiff-maven-plugin</artifactId>
+        <configuration>
+        <artifacts>
+        <artifact>
+        <version>5.2</version>
+        </artifact>
+        <artifact>
+        <groupId>bcel</groupId>
+        <version>5.1</version>
+        </artifact>
+        </artifacts>
+        </configuration>
+        </plugin>
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.plugin.version}</version>
+        <configuration>
+          <configLocation>${basedir}/src/conf/checkstyle.xml</configLocation>
+          <!-- Needed to define config_loc -->
+          <propertyExpansion>config_loc=${basedir}</propertyExpansion>
+          <enableRulesSummary>false</enableRulesSummary>
+        </configuration>
+        <!-- We need to specify reportSets because 2.9.1 creates two reports -->
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.8</version>
+        <configuration>
+          <targetJdk>${maven.compiler.target}</targetJdk>
+          <linkXref>true</linkXref>
+          <rulesets>
+            <ruleset>${basedir}/src/conf/pmd.xml</ruleset>
+          </rulesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>${commons.findbugs.version}</version>
+        <configuration>
+          <threshold>Normal</threshold>
+          <effort>Default</effort>
+          <excludeFilterFile>${basedir}/src/conf/findbugs-exclude-filter.xml</excludeFilterFile>
+          <fork>true</fork>
+          <jvmArgs>-Duser.language=en</jvmArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>taglist-maven-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <tags>
+            <tag>TODO</tag>
+            <tag>NOPMD</tag>
+            <tag>NOTE</tag>
+          </tags>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>${commons.rat.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>src/test/resources/**</exclude>
+            <exclude>docs/*.bib</exclude>
+            <exclude>docs/*.mdl</exclude>
+            <exclude>docs/eps/*</exclude>
+            <exclude>**/*.eps</exclude>
+            <exclude>**/*.bnf</exclude>
+            <exclude>**/*.mini</exclude>
+            <exclude>TODO.JustIce</exclude>
+            <exclude>src/examples/Mini/MiniParser$JJCalls</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>${jna.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna-platform</artifactId>
+      <version>${jna.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.7</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <!--
+        Profile to ignore certain Clirr errors
+        To show all the errors, use -P!quieten-clirr or -Dclirr.allDifferences
+    -->
+    <profile>
+      <id>quieten-clirr</id>
+      <activation>
+        <!-- Enable unless the following is defined -->
+        <property>
+          <name>!clirr.allDifferences</name>
+        </property>
+      </activation>
+      <properties>
+        <!-- It's not possible to undefine this once defined, so we define it in a profile that is normally active -->
+        <clirr.ignoredDifferencesFile>${basedir}/src/conf/clirr-ignored-diffs.xml</clirr.ignoredDifferencesFile>
+      </properties>
+    </profile>
+    <!-- Profile to build and run PerformanceTest. Use 'mvn test -Pjdk-rt' -->
+    <profile>
+      <id>jdk-rt</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${commons.surefire.version}</version>
+            <configuration>
+              <includes>
+                <include>**/PerformanceTest.java</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Profile to build and run the benchmarks. Use 'mvn test -Pbenchmark', and add '-Dbenchmark=foo' to run only the foo benchmark -->
+    <profile>
+      <id>benchmark</id>
+
+      <properties>
+        <skipTests>true</skipTests>
+        <benchmark>org.apache</benchmark>
+        <jmh.version>1.19</jmh.version>
+      </properties>
+
+      <dependencies>
+        <dependency>
+          <groupId>org.openjdk.jmh</groupId>
+          <artifactId>jmh-core</artifactId>
+          <version>${jmh.version}</version>
+          <scope>test</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>org.openjdk.jmh</groupId>
+          <artifactId>jmh-generator-annprocess</artifactId>
+          <version>${jmh.version}</version>
+          <scope>test</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.6</version>
+          <scope>test</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-collections4</artifactId>
+          <version>4.1</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+
+      <build>
+        <plugins>
+          <!-- Enable the compilation of the benchmarks -->
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${commons.compiler.version}</version>
+            <configuration combine.self="override">
+              <testIncludes>
+                <testInclude>**/*</testInclude>
+              </testIncludes>
+            </configuration>
+          </plugin>
+
+          <!-- Hook the benchmarks to the test phase -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <id>benchmark</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <classpathScope>test</classpathScope>
+                  <executable>java</executable>
+                  <arguments>
+                    <argument>-classpath</argument>
+                    <classpath />
+                    <argument>org.openjdk.jmh.Main</argument>
+                    <argument>-rf</argument>
+                    <argument>json</argument>
+                    <argument>-rff</argument>
+                    <argument>target/jmh-result.json</argument>
+                    <argument>${benchmark}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>jdk8-javadoc</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <properties>
+        <additionalparam>-Xdoclint:none</additionalparam>
+      </properties>
+    </profile>
+  </profiles>
+
+</project>

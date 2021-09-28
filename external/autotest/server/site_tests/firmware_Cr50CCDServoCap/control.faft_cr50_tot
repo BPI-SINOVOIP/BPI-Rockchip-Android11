@@ -1,0 +1,42 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "mruthven"
+NAME = "firmware_Cr50CCDServoCap.faft_cr50_tot"
+PURPOSE = "Verify uart control"
+ATTRIBUTES = "suite:faft_cr50_tot"
+TIME = "SHORT"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+Verify cr50 handles enabling/disabling uart, i2c, and spi if servo is
+disconnected/connected.
+
+This must be done using servo instead of CCD, because we need to be able to
+simulate servo disconnect.
+
+This test is applicable when using ToT cr50 module.
+TODO(crbug.com/1014572) Drop this control file once suites can inject test args.
+"""
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+# crbug.com/1014572: Inject test args.
+args_dict['tot_test_run'] = 'true'
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    iterations = int(args_dict.get("iterations", "1"))
+
+    job.run_test("firmware_Cr50CCDServoCap", host=host, cmdline_args=args,
+                 full_args=args_dict, iterations=iterations)
+
+parallel_simple(run, machines)

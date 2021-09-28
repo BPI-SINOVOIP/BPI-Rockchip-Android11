@@ -1,0 +1,67 @@
+//#############################################
+// Compile Robolectric processor
+//#############################################
+
+java_plugin {
+    name: "Robolectric_processor",
+    processor_class: "org.robolectric.annotation.processing.RobolectricProcessor",
+    srcs: ["src/main/java/**/*.java"],
+    java_resource_dirs: ["src/main/resources"],
+    java_resources: ["sdks.txt"],
+    use_tools_jar: true,
+    static_libs: [
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "asm-commons-6.0",
+        "guava",
+        "asm-tree-6.0",
+        "gson-prebuilt-jar",
+        "asm-6.0",
+        "jsr305",
+    ],
+
+    openjdk9: {
+        javacflags: [
+            "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+            "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+        ],
+    },
+}
+
+//#############################################
+// Compile Robolectric processor tests
+//#############################################
+java_test_host {
+    name: "Robolectric_processor_tests",
+    srcs: ["src/test/java/**/*.java"],
+    java_resource_dirs: ["src/test/resources"],
+    java_resources: [":Robolectric_processor_tests_resources"],
+
+    static_libs: [
+        "Robolectric_annotations",
+        "Robolectric_processor",
+        "Robolectric_shadowapi",
+        "robolectric-javax.annotation-api-1.2",
+        "robolectric-compile-testing-0.15",
+        "mockito",
+        "hamcrest",
+        "guava",
+        "objenesis",
+        "junit",
+        "truth-prebuilt",
+        "gson-prebuilt-jar",
+        "jsr305",
+    ],
+
+    test_suites: ["general-tests"],
+
+    // Disable annotation processing while compiling tests to avoid executing RobolectricProcessor.
+    javacflags: ["-proc:none"],
+}
+
+// Workaround: java_resource_dirs ignores *.java files
+filegroup {
+    name: "Robolectric_processor_tests_resources",
+    path: "src/test/resources",
+    srcs: ["src/test/resources/**/*.java"],
+}

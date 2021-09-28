@@ -1,0 +1,52 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterLESanity.le_mouse_reports'
+PURPOSE = ('Batch of Bluetooth LE sanity tests')
+CRITERIA = 'Pass all sanity test'
+ATTRIBUTES = 'suite:bluetooth, suite:bluetooth_e2e'
+TIME = 'MEDIUM'
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_ble_hid'
+
+DOC = """
+
+     Server side bluetooth tests about sending bluetooth HID reports.
+
+     This test tries to send HID reports to a DUT and verifies if the DUT
+     could receive the reports correctly. For the time being, only bluetooth
+     mouse events are tested. Bluetooth keyboard events will be supported
+     later.
+
+
+    - test_pairing
+    - test_connection_by_adapter
+    - test_mouse_left_click
+    - test_mouse_right_click
+    - test_mouse_move_in_x
+    - test_mouse_move_in_y
+    - test_mouse_move_in_xy
+    - test_mouse_scroll_down
+    - test_mouse_scroll_up
+    - test_mouse_click_and_drag
+    - test_disconnection_by_adapter
+    - test_remove_pairing
+
+    """
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterLESanity', host=host,
+                  num_iterations=1, test_name=NAME.split('.')[1])
+
+parallel_simple(run, machines)

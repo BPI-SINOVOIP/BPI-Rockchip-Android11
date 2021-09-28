@@ -1,0 +1,24 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'ncrews'
+NAME = 'policy_DeviceCharging'
+TIME = 'LONG'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies that the DeviceBatteryChargeMode policy works.
+
+This test is kicked off via policy_DeviceChargingServer server test. It requires
+a Servo v4 and Servo Micro attached to the DUT. Also, it requires that the
+battery is not full, and that the battery is above |MIN_BATTERY_LEVEL|, so that
+the policies can get fully tested. The server test should take care of this
+setup.
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_DeviceCharging', **args_dict)

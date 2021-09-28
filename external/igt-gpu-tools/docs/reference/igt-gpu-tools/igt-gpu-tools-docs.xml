@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+<book id="index">
+  <bookinfo>
+    <title>igt-gpu-tools Reference Manual</title>
+    <releaseinfo>
+      for igt-gpu-tools &version;.
+    </releaseinfo>
+  </bookinfo>
+
+  <chapter>
+    <title>API Reference</title>
+    <xi:include href="xml/drmtest.xml"/>
+    <xi:include href="xml/igt_alsa.xml"/>
+    <xi:include href="xml/igt_audio.xml"/>
+    <xi:include href="xml/igt_aux.xml"/>
+    <xi:include href="xml/igt_chamelium.xml"/>
+    <xi:include href="xml/igt_core.xml"/>
+    <xi:include href="xml/igt_debugfs.xml"/>
+    <xi:include href="xml/igt_device.xml"/>
+    <xi:include href="xml/igt_draw.xml"/>
+    <xi:include href="xml/igt_dummyload.xml"/>
+    <xi:include href="xml/igt_fb.xml"/>
+    <xi:include href="xml/igt_frame.xml"/>
+    <xi:include href="xml/igt_gt.xml"/>
+    <xi:include href="xml/igt_gvt.xml"/>
+    <xi:include href="xml/igt_kmod.xml"/>
+    <xi:include href="xml/igt_kms.xml"/>
+    <xi:include href="xml/igt_pm.xml"/>
+    <xi:include href="xml/igt_primes.xml"/>
+    <xi:include href="xml/igt_rand.xml"/>
+    <xi:include href="xml/igt_stats.xml"/>
+    <xi:include href="xml/igt_syncobj.xml"/>
+    <xi:include href="xml/igt_sysfs.xml"/>
+    <xi:include href="xml/igt_vc4.xml"/>
+    <xi:include href="xml/igt_vgem.xml"/>
+    <xi:include href="xml/igt_x86.xml"/>
+    <xi:include href="xml/intel_batchbuffer.xml"/>
+    <xi:include href="xml/intel_chipset.xml"/>
+    <xi:include href="xml/intel_io.xml"/>
+    <xi:include href="xml/ioctl_wrappers.xml"/>
+    <xi:include href="xml/sw_sync.xml"/>
+
+  </chapter>
+  <chapter>
+    <title>igt/i915 API Reference</title>
+    <xi:include href="xml/gem_context.xml"/>
+    <xi:include href="xml/gem_scheduler.xml"/>
+    <xi:include href="xml/gem_submission.xml"/>
+  </chapter>
+  <xi:include href="xml/igt_test_programs.xml"/>
+
+  <xi:include href="xml/annotation-glossary.xml"><xi:fallback /></xi:include>
+  <index id="full-api-index">
+    <title>API Index</title>
+    <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
+  </index>
+  <index id="deprecated-api-index" role="deprecated">
+    <title>Index of deprecated API</title>
+    <xi:include href="xml/api-index-deprecated.xml"><xi:fallback /></xi:include>
+  </index>
+</book>

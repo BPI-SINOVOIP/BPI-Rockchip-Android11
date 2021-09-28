@@ -1,0 +1,39 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'Chromium OS team'
+NAME = 'tast.runtime-probe'
+TIME = 'MEDIUM'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:runtime_probe_perbuild'
+
+# tast.py uses binaries installed from autotest_server_package.tar.bz2.
+REQUIRE_SSP = True
+
+DOC = '''
+Run runtime-probe tests.
+
+Tast is an integration-testing framework analagous to the test-running portion
+of Autotest. See https://chromium.googlesource.com/chromiumos/platform/tast/ for
+more information.
+
+This test runs runtime-probe Tast test.
+'''
+import json
+import tempfile
+import yaml
+
+def run(machine):
+    host = hosts.create_host(machine)
+    with tempfile.NamedTemporaryFile(suffix='.yaml') as temp_file:
+        host_info = host.host_info_store.get()
+        yaml.dump({"autotest.host_info_labels": json.dumps(host_info.labels)},
+                  stream=temp_file)
+        job.run_test('tast',
+                     host=host,
+                     test_exprs=['(!disabled && "group:runtime_probe")'],
+                     command_args=args,
+                     varsfiles=[temp_file.name])
+
+parallel_simple(run, machines)

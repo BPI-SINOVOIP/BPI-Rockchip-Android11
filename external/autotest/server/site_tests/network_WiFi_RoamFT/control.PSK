@@ -1,0 +1,35 @@
+# Copyright 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'matthewmwang'
+TIME = 'SHORT'
+NAME = 'network_WiFi_RoamFT.PSK'
+TEST_TYPE = 'Server'
+ATTRIBUTES = ('suite:wifi_matfunc')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test attempts to verify that we can roam between two APs using the FT-PSK
+key management suite (i.e. WPA-PSK with Fast BSS Transition) in full view of the
+DUT. Fast BSS Transition is part of the 802.11r protocol, which describes a
+procedure for fast roaming from one AP to another within an SSID.
+"""
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_security_types
+
+def run(machine):
+    ft_psk_config = xmlrpc_security_types.WPAConfig(
+        psk='chromeos',
+        wpa_mode=xmlrpc_security_types.WPAConfig.MODE_PURE_WPA2,
+        wpa2_ciphers=[xmlrpc_security_types.WPAConfig.CIPHER_CCMP],
+        ft_mode=xmlrpc_security_types.WPAConfig.FT_MODE_PURE)
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_RoamFT',
+                 tag=NAME.split('.')[1],
+                 host=host,
+                 raw_cmdline_args=args,
+                 additional_params=[ft_psk_config])
+
+
+parallel_simple(run, machines)

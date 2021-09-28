@@ -1,0 +1,21 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_ForceYouTubeRestrict.Moderate'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies effects of ForceYouTubeRestrict policy.
+
+If the policy is set to Moderate than the user will not be able to view some
+restricted videos on YouTube.
+
+'''
+
+job.run_test('policy_ForceYouTubeRestrict', case='Moderate')

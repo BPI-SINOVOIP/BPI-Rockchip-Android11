@@ -1,0 +1,26 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "kalin"
+NAME = "platform_PrintJob"
+TIME = "SHORT"
+TEST_TYPE = "client"
+CRITERIA = """
+The test fails in cases of DUT is:
+- unable to find the printer emulated by chameleon after set in print dialog
+- unable to receive notification for successful print job
+"""
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform, desktopui"
+ATTRIBUTES = "suite:platform_test_nightly"
+JOB_RETRIES = 1
+DEPENDENCIES = "test_usbprinting, chameleon"
+
+DOC = """
+This is a test that emulates a printer using chameleon board
+connected via USB cable, sets the printer, and sends a print job
+"""
+
+host = next(iter(job.hosts))
+job.run_test('platform_PrintJob', host=host, args=args)

@@ -1,0 +1,21 @@
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = "platform_AnomalyDetector"
+AUTHOR = "chromeos-kernel@google.com"
+PURPOSE = "Checks that the anomaly detector is collecting log anomalies"
+CRITERIA = "The detector must create a file when a test warning is produced"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "Platform"
+TEST_TYPE = "Client"
+ATTRIBUTES = "suite:bvt-perbuild"
+
+DOC = """
+This checks that the anomaly detector is operational by generating
+a test kernel warning and verifying that the detector daemon collects it.
+More functionality is tested by the compile-time test.
+"""
+
+job.run_test('platform_AnomalyDetector')

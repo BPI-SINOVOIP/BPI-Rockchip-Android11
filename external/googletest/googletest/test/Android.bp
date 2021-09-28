@@ -1,0 +1,187 @@
+// Copyright (C) 2016 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "gtest_test_defaults",
+    host_supported: true,
+    gtest: false,
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-sign-compare",
+        // because gtest_unittest.cc wants anonymous enum type.
+        "-Wno-unnamed-type-template-args",
+        "-Wno-unused-private-field",
+    ],
+    include_dirs: ["external/googletest/googletest"],
+    static_libs: ["libgtest"],
+    relative_install_path: "gtest_tests",
+    no_named_install_directory: true,
+}
+
+cc_defaults {
+    name: "gtest_ndk_test_defaults",
+    gtest: false,
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-sign-compare",
+        "-Wno-unnamed-type-template-args",
+        "-Wno-unused-private-field",
+    ],
+    include_dirs: ["external/googletest/googletest"],
+    static_libs: ["libgtest_ndk_c++"],
+    relative_install_path: "gtest_ndk_tests",
+    no_named_install_directory: true,
+    sdk_version: "9",
+    stl: "c++_static",
+}
+
+cc_test {
+    name: "gtest_tests",
+    defaults: ["gtest_test_defaults"],
+    test_per_src: true,
+    srcs: [
+        "googletest-death-test-test.cc",
+        "googletest-filepath-test.cc",
+        "googletest-listener-test.cc",
+        "googletest-message-test.cc",
+        "googletest-options-test.cc",
+        "googletest-port-test.cc",
+        "googletest-printers-test.cc",
+        "googletest-test-part-test.cc",
+        "gtest-unittest-api_test.cc",
+        "gtest_main_unittest.cc",
+        "gtest_pred_impl_unittest.cc",
+        "gtest_skip_test.cc",
+        "gtest_sole_header_test.cc",
+        "gtest_unittest.cc",
+    ],
+    static_libs: ["libgtest_main"],
+}
+
+cc_test {
+    name: "gtest_tests_no_main",
+    defaults: ["gtest_test_defaults"],
+    test_per_src: true,
+    srcs: [
+        "gtest_environment_test.cc",
+        "gtest_no_test_unittest.cc",
+        "gtest_premature_exit_test.cc",
+        "gtest_repeat_test.cc",
+        "gtest_stress_test.cc",
+
+        // Tests are disabled because Android doesn't build gtest with exceptions
+        // "gtest_throw_on_failure_ex_test.cc",
+        // "gtest_assert_by_exception_test.cc",
+    ],
+}
+
+cc_test {
+    name: "googletest-param-test-test",
+    defaults: ["gtest_test_defaults"],
+    srcs: [
+        "googletest-param-test-test.cc",
+        "googletest-param-test2-test.cc",
+    ],
+}
+
+cc_test {
+    name: "gtest-typed-test_test",
+    defaults: ["gtest_test_defaults"],
+    srcs: [
+        "gtest-typed-test_test.cc",
+        "gtest-typed-test2_test.cc",
+    ],
+    static_libs: ["libgtest_main"],
+}
+
+cc_test {
+    name: "gtest_prod_test",
+    defaults: ["gtest_test_defaults"],
+    srcs: [
+        "gtest_prod_test.cc",
+        "production.cc",
+    ],
+    static_libs: ["libgtest_main"],
+}
+
+cc_test {
+    name: "gtest_ndk_tests",
+    defaults: ["gtest_ndk_test_defaults"],
+    test_per_src: true,
+    srcs: [
+        "googletest-death-test-test.cc",
+        "googletest-filepath-test.cc",
+        "googletest-listener-test.cc",
+        "googletest-message-test.cc",
+        "googletest-options-test.cc",
+        "googletest-port-test.cc",
+        "googletest-printers-test.cc",
+        "googletest-test-part-test.cc",
+        "gtest-unittest-api_test.cc",
+        "gtest_main_unittest.cc",
+        "gtest_pred_impl_unittest.cc",
+        "gtest_skip_test.cc",
+        "gtest_sole_header_test.cc",
+        "gtest_unittest.cc",
+    ],
+    static_libs: ["libgtest_main_ndk_c++"],
+}
+
+cc_test {
+    name: "gtest_ndk_tests_no_main",
+    defaults: ["gtest_ndk_test_defaults"],
+    test_per_src: true,
+    srcs: [
+        "gtest_environment_test.cc",
+        "gtest_no_test_unittest.cc",
+        "gtest_premature_exit_test.cc",
+        "gtest_repeat_test.cc",
+        "gtest_stress_test.cc",
+
+        // Tests are disabled because Android doesn't build gtest with exceptions
+        // "gtest_throw_on_failure_ex_test.cc",
+        // "gtest_assert_by_exception_test.cc",
+    ],
+}
+
+cc_test {
+    name: "googletest-param-test-test_ndk",
+    defaults: ["gtest_ndk_test_defaults"],
+    srcs: [
+        "googletest-param-test-test.cc",
+        "googletest-param-test2-test.cc",
+    ],
+}
+
+cc_test {
+    name: "gtest-typed-test_test_ndk",
+    defaults: ["gtest_ndk_test_defaults"],
+    srcs: [
+        "gtest-typed-test_test.cc",
+        "gtest-typed-test2_test.cc",
+    ],
+    static_libs: ["libgtest_main_ndk_c++"],
+}
+
+cc_test {
+    name: "gtest_prod_test_ndk",
+    defaults: ["gtest_ndk_test_defaults"],
+    srcs: [
+        "gtest_prod_test.cc",
+        "production.cc",
+    ],
+    static_libs: ["libgtest_main_ndk_c++"],
+}

@@ -1,0 +1,20 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = "graphics_KernelConfig"
+AUTHOR = "The Chromium OS Authors"
+PURPOSE = "Verify various graphics kernel flags."
+CRITERIA = "Fails if kernel configuration is unexpected."
+ATTRIBUTES = 'suite:graphics_per-day, suite:graphics_system'
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = 'graphics'
+TEST_TYPE = "client"
+JOB_RETRIES = 2
+
+DOC = """
+    Check that the reported kernel config has no unexpected state.
+"""
+
+job.run_test('graphics_KernelConfig')

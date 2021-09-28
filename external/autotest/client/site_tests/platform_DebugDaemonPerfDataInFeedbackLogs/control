@@ -1,0 +1,24 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "chinglin yu"
+NAME = "platform_DebugDaemonPerfDataInFeedbackLogs"
+PURPOSE = "Verify that feedback logs contain perf data"
+
+CRITERIA = """
+GetFeedbackLogs must contain a perf profile.
+"""
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+JOB_RETRIES = 2
+
+ATTRIBUTES = "suite:bvt-perbuild"
+
+DOC = """
+Exercises the debugd GetFeedbackLogs API and checks for a valid perf profile.
+"""
+
+job.run_test('platform_DebugDaemonPerfDataInFeedbackLogs')

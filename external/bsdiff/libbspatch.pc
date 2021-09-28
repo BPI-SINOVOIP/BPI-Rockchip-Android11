@@ -1,0 +1,9 @@
+# This file is for libbspatch in Chrome OS.
+
+Name: libbspatch
+Description: bspatch library for applying delta patches
+Version: 4.3.1
+# libbspatch library is static lib ATM, so we don't use private versions of Libs
+# and Requires fields.
+Libs: -lbspatch -lbz2
+Requires: libbrotlidec

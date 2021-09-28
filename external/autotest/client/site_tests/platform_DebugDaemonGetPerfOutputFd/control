@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "ChromeOS Team"
+NAME = "platform_DebugDaemonGetPerfOutputFd"
+PURPOSE = "Verify that debugd's GetPerfOutputFd and StopPerf works."
+
+CRITERIA = """
+GetPerfOutputFd must return a valid, non-empty protobuf through the pipe.
+StopPerf must stop the perf session.
+"""
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+JOB_RETRIES = 2
+
+ATTRIBUTES = "suite:bvt-perbuild"
+
+DOC = """
+Exercises the debugd GetPerfOutputFd and StopPerf API.
+"""
+
+job.run_test('platform_DebugDaemonGetPerfOutputFd')

@@ -1,0 +1,3 @@
+job.profilers.add('screenshot')
+job.run_test('sleeptest', seconds=10)
+job.profilers.delete('screenshot')

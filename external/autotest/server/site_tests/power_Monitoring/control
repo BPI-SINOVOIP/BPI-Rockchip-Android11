@@ -1,0 +1,68 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "coconutruben"
+NAME = "power_Monitoring"
+PURPOSE = "Continuously measure power with servod while running client tests."
+CRITERIA = "This test is a wrapper for ServodWrapper wrapped test(s)."
+TIME = "LONG"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+This wrapper test runs the tests specified under a given suite in a continuous
+loop for a given amount of time. If the DUT runs out of power, the test charges
+it before continuing the test suite.
+
+So this test is designed to collect all relevant power tests for many loops.
+This has three main advantages and use cases:
+- There is a wider spread of battery charge percentages that tests run under
+  as tests don't recharge at the end individually.
+- This runs as a one stop test and requires less configuration and scheduling.
+- As this runs as one test this allows to collect multiple samples of the same
+  client test under the same OS image in environments where a new test triggers
+  an image update.
+
+Based on the above this test might be a good fit for your use case or not.
+
+This test makes the following assumptions:
+1. The DUT is attached to a servo device that supports charging and
+discharging (currently only v4).
+
+2. Servod is already running, and its host and port are provided to this
+autotest.
+
+3. The workstation (or where the autotest is kicked off from) should be in same
+timezone with the DUT.
+
+Sample usage:
+test_that <ip address of DUT> power_Monitoring --args \
+'suite=power_monitoring runtime_hr=20 servo_host=localhost servo_port=9999'
+
+What are the parameters (all optional with defaults):
+suite: the test suite to run.
+runtime_hr: desired runtime in hours.
+start_charging_level: battery charge percent when charging triggers.
+stop_charging_level: battery charge percent when charging stops.
+servo_host: host of servod instance.
+servo_port: port that the servod instance is on.
+pdash_note: User supplied note to tag the specific test; optional.
+"""
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('power_Monitoring', host=host, config=args_dict,
+                 disable_sysinfo=True)
+parallel_simple(run, machines)

@@ -1,0 +1,107 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-march=goldmont",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wtrampolines",
+            "-march=silvermont",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-march=goldmont-plus",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wtrampolines",
+            "-march=silvermont",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-march=skylake",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "-Wtrampolines",
+            "-march=corei7",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  }
+]

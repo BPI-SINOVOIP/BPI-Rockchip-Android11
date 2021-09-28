@@ -1,0 +1,29 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterSRSanity.sr_peer_wake_le_hid'
+PURPOSE = ('Single run of a test')
+CRITERIA = 'Pass test'
+ATTRIBUTES = 'suite:bluetooth_flaky'
+TIME = 'SHORT'
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_hid, chameleon:bt_ble_hid'
+
+DOC = """ Single run of a Suspend-Resume sanity testcase. """
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterSRSanity', host=host, num_iterations=1,
+                 test_name=NAME.split('.')[1])
+
+parallel_simple(run, machines)

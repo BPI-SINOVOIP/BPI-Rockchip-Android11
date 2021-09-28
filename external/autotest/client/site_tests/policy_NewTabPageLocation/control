@@ -1,0 +1,25 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_NewTabPageLocation'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effect of NewTabPageLocation policy on client behavior.
+
+If the NewTabPageLocation is set and the user goes to a newtab
+the set URL should load.
+
+If the NewTabPageLocation is not set and the user goes to a newtab
+then chrome://newtab/ should open.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_HomepageLocation', **args_dict)

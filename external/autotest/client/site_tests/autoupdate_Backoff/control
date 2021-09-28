@@ -1,0 +1,18 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+TIME='Short'
+AUTHOR = 'Chromium OS'
+DOC = """
+Client side test of the update_engine backoff mechanism.
+This will be called from the server tests: autoupdate_OmahaResponse.backoff*
+"""
+
+NAME = 'autoupdate_Backoff'
+PURPOSE = 'Client side test of the update_engine backoff mechanism.'
+TEST_CLASS = 'platform'
+TEST_CATEGORY = 'Functional'
+TEST_TYPE = 'client'
+
+job.run_test('autoupdate_Backoff')

@@ -1,0 +1,15 @@
+Any Android specific modifications to upstream libpng (the version
+specified in METADATA) should be listed here:
+
+(1) Android has added the following files.
+    pngusr.h
+    Android.bp
+    CleanSpec.mk
+    MODULE_LICENSE_BSD_LIKE
+    METADATA
+    OWNERS
+
+(2) pnglibconf.h
+    This is copied from scripts/pnglibconf.h.prebuilt.
+    Android has undefined PNG_WARNINGS_SUPPORTED and
+    PNG_READ_OPT_PLTE_SUPPORTED.

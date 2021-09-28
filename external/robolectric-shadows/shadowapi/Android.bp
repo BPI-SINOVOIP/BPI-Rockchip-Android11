@@ -1,0 +1,25 @@
+//#############################################
+// Compile Robolectric shadowapi
+//#############################################
+
+java_library_host {
+    name: "Robolectric_shadowapi",
+    libs: ["jsr305"],
+    srcs: ["src/main/java/**/*.java"],
+}
+
+//#############################################
+// Compile Robolectric shadowapi tests
+//#############################################
+java_test_host {
+    name: "Robolectric_shadowapi_tests",
+    srcs: ["src/test/java/**/*.java"],
+    static_libs: [
+        "Robolectric_shadowapi",
+        "hamcrest",
+        "guava",
+        "junit",
+        "truth-prebuilt",
+    ],
+    test_suites: ["general-tests"],
+}

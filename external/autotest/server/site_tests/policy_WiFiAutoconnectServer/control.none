@@ -1,0 +1,36 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_WiFiAutoconnectServer.none'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+'policy_WiFiAutoconnectServer' test configures an AP and runs the client
+side 'policy_WiFiAutoconnect' test which uses the AP to test network
+autoconnect policies with autoconnect unset.
+
+"""
+
+
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    channel = 6
+    n_mode = hostap_config.HostapConfig.MODE_11N_MIXED
+    ap_config = hostap_config.HostapConfig(channel=channel, mode=n_mode)
+
+    host = hosts.create_host(machine)
+    job.run_test('policy_WiFiAutoconnectServer',
+                 raw_cmdline_args=args,
+                 autoconnect=None,
+                 additional_params=ap_config,
+                 host=host)
+
+
+parallel_simple(run, machines)

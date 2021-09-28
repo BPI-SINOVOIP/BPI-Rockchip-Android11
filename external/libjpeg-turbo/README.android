@@ -1,0 +1,25 @@
+Any Android specific modifications to upstream libjpeg-turbo (the version
+specified in METADATA) should be listed here:
+
+(1) jconfig.h and jconfigint.h
+
+These are included upstream as jconfig.h.in and jconfigint.h.in.
+We have the option autogenerate these platform/version specific files (using
+the libjpeg-turbo build system) or to manually create them.
+
+Autogenerating these files on linux gets us most of the way, but we've needed
+to add some multi-platform flexibility to the INLINE and SIZEOF_SIZE_T macros.
+
+(2) simd/arm64/jsimd_neon.S
+
+To support execute-only memory layouts, constants in handwritten assembly have
+been moved into a dedicated rodata section.
+
+There's a pull request upstream for this as well. If that's accepted, this
+can be removed as an Android-specific modification.
+https://github.com/libjpeg-turbo/libjpeg-turbo/pull/318
+
+(3) jdapistd.c
+
+Includes a cherry-pick of
+https://github.com/libjpeg-turbo/libjpeg-turbo/commit/6d2e8837b440ce4d8befd805a5abc0d351028d70

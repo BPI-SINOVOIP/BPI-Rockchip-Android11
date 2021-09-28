@@ -1,0 +1,26 @@
+This directory contains test lists to be used for v3d's DRM support. The files
+are passed to piglit with the --test-list parameter directly.
+
+The test lists are contained in the IGT repository for several
+reasons:
+
+- The lists stay synchronized with the IGT codebase.
+- Public availability. Kernel developers can see what tests are run,
+  and can see what changes are done to the set, when, and why.
+- Explicit test lists in general make it possible to implement a new
+  test without having it run by everyone else before the tests and / or setup
+  are ready for it.
+
+Changing the test lists should only happen with approval from the v3d
+maintainer, Eric Anholt (eric@anholt.net).
+
+============
+v3d.testlist
+============
+
+This test list is meant as a general test suite without any time
+restriction for the v3d DRM driver, combining generic DRM and KMS
+tests.  As a reminder, you can run this with the meson build using:
+
+./build/runner/igt_runner --test-list tests/v3d_ci/v3d.testlist \
+  build/tests -o results

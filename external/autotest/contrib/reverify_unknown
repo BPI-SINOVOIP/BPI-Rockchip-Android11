@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Force a repair special task for any host that hasn't seen activity in
+# the past day.
+#
+# Various scripts/cron jobs look for DUTs that aren't working.  To be
+# conservative, those scripts assume that a DUT that hasn't run any jobs
+# within a reasonable time interval isn't working, since some of the
+# ways a DUT may be unavailable manifest as inactivity.
+#
+# In some cases, we'd like to be more certain as to a DUT's status.
+# This script goes through the entire AFE hosts table, and identifies
+# unlocked hosts that would otherwise be flagged as "not working due to
+# lack of activity", and forces a repair task.
+#
+# We use a repair task (as opposed to verify) for various reasons:
+#   + If a DUT is working, repair and verify perform the same checks,
+#     and generally run in the same time.
+#   + If a DUT is broken, a verify task will fail and invoke repair,
+#     which will take longer than just repair alone.
+#   + Repair tasks that pass update labels; without this, labels could
+#     become out-of-date simply because a DUT is idle.
+#
+# Locked hosts are skipped because they can't run jobs and because we
+# want them to show up as suspicious anyway.
+
+
+cd $(dirname $0)/..
+
+# Gather all the hosts under supervision of the lab techs.
+# Basically, that's any host in any managed pool.
+
+GET_HOSTS='
+  /pool:(suites|bvt|cq|continuous|cts|arc-presubmit|crosperf|performance)/ {
+    print $1
+  }
+'
+HOSTS=( $(cli/atest host list --unlocked | awk "$GET_HOSTS") )
+
+
+# Go through the gathered hosts, and use dut_status to find the
+# ones with unknown state (anything without a positive "OK" or
+# "NO" diagnosis).
+
+NEED_CHECK='
+  /OK/ || /NO/ { next }
+  /^chromeos/ { print $1 }
+'
+CHECK=( $(site_utils/dut_status.py -d 19 "${HOSTS[@]}" | awk "$NEED_CHECK") )
+
+contrib/repair_hosts "${CHECK[@]}"

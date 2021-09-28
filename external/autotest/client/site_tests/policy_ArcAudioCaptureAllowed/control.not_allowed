@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_ArcAudioCaptureAllowed.not_allowed'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+DEPENDENCIES = "arc"
+
+DOC = '''
+Verify when the 'ArcAudioCaptureAllowed' policy is set to False the ARC
+microphone will be muted.
+
+'''
+
+job.run_test('policy_ArcAudioCaptureAllowed', case=False)

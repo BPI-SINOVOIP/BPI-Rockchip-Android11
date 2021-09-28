@@ -1,0 +1,261 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-clang-syntax",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu",
+            "-fsyntax-only",
+            "-stdlib=libstdc++"
+          ]
+        }
+      },
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-clang-syntax",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/gomacc",
+          "args": [
+            "../../usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu",
+            "-fsyntax-only",
+            "-stdlib=libstdc++"
+          ]
+        }
+      },
+      {
+        "cmd": {
+          "path": "/tmp/stable/gomacc",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-clang-syntax",
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu",
+            "-fsyntax-only",
+            "-stdlib=libstdc++"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-clang-syntax",
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "../../usr/bin/clang",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu",
+            "-fsyntax-only",
+            "-stdlib=libstdc++"
+          ]
+        }
+      },
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  }
+]

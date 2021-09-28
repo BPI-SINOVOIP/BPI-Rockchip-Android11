@@ -1,0 +1,16 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'pauletti'
+NAME = 'network_WiFiHECaps.11ax_supported'
+ATTRIBUTES = 'suite:wifi_flaky'
+TIME = 'SHORT'
+TEST_TYPE = 'client'
+
+DOC = """
+This test checks that a device supports the 802.11ax WiFi standard (i.e., that
+it is capable of receiving and transmitting High Efficiency (HE) PPDUs).
+"""
+
+job.run_test('network_WiFiHECaps', tag=NAME.split('.')[1])

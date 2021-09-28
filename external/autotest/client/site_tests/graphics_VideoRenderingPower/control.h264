@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "chromeos-gfx"
+NAME = "graphics_VideoRenderingPower.h264"
+PURPOSE = "Measure power consumption of H264 (a.k.a AVC1) video rendering"
+
+ATTRIBUTES = "suite:graphics, suite:graphics_browser, suite:bvt-perbuild"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Performance"
+TEST_CLASS = "graphics"
+TEST_TYPE = "client"
+
+DOC = """
+This test calculates and outputs the power consumption while a H264 video is
+being rendered on the screen, with different high level options: e.g. hardware
+overlays on/off.
+"""
+
+VIDEO_URL = 'http://crosvideo.appspot.com/?codec=h264&resolution=720&loop=true&mute=true'
+VIDEO_SHORT_NAME = 'h264_720p'
+job.run_test('graphics_VideoRenderingPower',
+             video_url=VIDEO_URL,
+             video_short_name=VIDEO_SHORT_NAME)

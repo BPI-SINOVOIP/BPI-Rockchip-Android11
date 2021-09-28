@@ -1,0 +1,39 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "firmware_SetSerialNumber"
+PURPOSE = "Servo based test to set serial number in firmware."
+CRITERIA = """
+This test will fail if after setting the serial number in firmware:
+* The device is not in normal mode
+* The serial number is not set in VPD
+* Flash write protect is not enabled
+"""
+ATTRIBUTES = ""
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+JOB_RETRIES = 1
+
+DOC = """
+Test that setting the serial number in firmware during an onsite RMA works.
+Mainboards for onsite RMA will have WP# asserted, flash WP bit cleared,
+the serial_number in VPD set to all spaces, and be in dev mode. After the
+serial number is set in firmware flash write protect will be enabled and
+the device will be in normal mode.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run_SetSerialNumber(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("firmware_SetSerialNumber", host=host, cmdline_args=args,
+                 disable_sysinfo=True, tag="dev")
+
+parallel_simple(run_SetSerialNumber, machines)

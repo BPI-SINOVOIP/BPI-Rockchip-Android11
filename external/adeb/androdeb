@@ -1,0 +1,386 @@
+#!/bin/bash -e
+#
+# (c) Joel Fernandes <joel@joelfernandes.org>
+
+VERSION=v0.99g
+
+spath="$(dirname "$(readlink -f "$0")")"
+# spath=$( cd "$(dirname "$0")" ; pwd -P )
+curdir=$( pwd -P )
+source $spath/utils/support
+source $spath/utils/banners
+
+# Set default vars
+DISTRO=buster; ARCH=arm64
+ADB="adb"
+FULL=0				# Default to a minimal install
+DOWNLOAD=1			# Default to downloading from web
+SKIP_DEVICE=0			# Skip device preparation
+INSTALL_BCC=0			# Decide if BCC is to be installed
+
+# Default packages
+PACKAGES=""
+DEFAULT_PACKAGES="bash ca-certificates apt net-tools iputils-ping procps vim"
+
+EXTRA_FILES="none"
+
+config_full_build() {
+	for f in $(ls $spath/packages); do source $spath/packages/$f; done;
+}
+
+# Parse command line parameters
+if [ $# -lt 1 ]; then usage; fi; POSITIONAL=()
+while [[ $# -gt 0 ]]; do key="$1";
+
+# If its shell mode, any future args become shell's args
+if [ "x$ASHELL" == "x1" ]; then
+	if [ -z "$SHELL_ARGS" ]; then
+		SHELL_ARGS=$key
+	else
+		SHELL_ARGS="$SHELL_ARGS $key"
+	fi
+	shift || true; continue
+fi
+
+case $key in
+    shell) ASHELL=1;     shift || true;     ;;
+    remove) REMOVE=1;     shift || true;     ;;
+    git-pull) GIT_PULL=1; shift || true; ;;
+    pull) PULL=1; shift || true; break	;;
+    push) PUSH=1; shift || true; break	;;
+    prepare) PREPARE=1;  shift || true;    ;;
+    --full) FULL=1; config_full_build; shift || true; ;;
+    --arch) ARCH=$2; shift || true; shift || true; ;;
+    --archive) DOWNLOAD=0; TARF=$2; shift || true; shift || true; ;;
+    --bcc) FULL=1; source $spath/packages/bcc; shift || true;     ;;
+    --kernelsrc) KERNELSRC="$2"; shift || true;     shift || true;     ;;
+    --skip-install) SKIP_INSTALL=1; shift || true; ;;
+    --kernel-headers-targz) KERNELHDRS=$2; shift || true;	shift || true;	;;
+    --tempdir) TDIR="$2"; shift || true;     shift || true;     ;;
+    --build) DOWNLOAD=0;  shift || true;     ;;
+    --buildtar) BTAR=1; DOWNLOAD=0; TARDIR="$2"; shift || true;     shift || true;     ;;
+    --device|-s) ADB="$ADB -s $2"; shift || true; shift || true; ;;
+    --build-image) BI=1; BUILD_IMAGEF=$2; SKIP_DEVICE=1; DOWNLOAD=0; shift || true; shift || true; ;;
+    --debug) set -x; shift || true; ;;
+    *) c_error "Unknown option ($1)"; usage; ;;
+esac
+done
+
+[ -z $ASHELL ] && box_out "adeb: $VERSION"
+
+if [ $FULL -eq 1 ]; then
+	FNAME=androdeb-fs.tgz.zip
+	FNAME_UZ=androdeb-fs.tgz
+else
+	FNAME=androdeb-fs-minimal.tgz.zip
+	FNAME_UZ=androdeb-fs-minimal.tgz
+fi
+
+if [ ! -z $BTAR ] && [ -z $TARDIR ]; then
+	TARDIR=$spath
+fi
+
+if [ ! -z "$GIT_PULL" ]; then
+	c_info "Updating androdeb by git pull"
+	cd $spath
+	git pull
+	c_info "Done."
+	exit 0
+fi
+
+if [ ! -z "$PULL" ]; then
+	if [ $1 == "-a" ]; then
+		PRESERVE="-a"
+		c_info "Preserving filestamps and mode"
+		shift || true
+	fi
+	file_count=`count_sources $@`
+	i=0
+	while [ $i -lt $file_count ]; do
+		files["$i"]=/data/androdeb/debian/$1
+		shift || true
+		i=$((i + 1))
+	done
+	$ADB pull $PRESERVE "${files[@]}" "$@"
+	exit 0
+fi
+
+if [ ! -z "$PUSH" ]; then
+	file_count=`count_sources $@`
+	i=0
+	while [ $i -lt $file_count ]; do
+		files["$i"]=$1
+		shift || true
+		i=$((i + 1))
+	done
+	dest=/data/androdeb/debian/$1
+	$ADB push $sync "${files[@]}" $dest
+	exit 0
+fi
+
+if [[ ! -z ${TARDIR+x} ]] && [[ ! -d $TARDIR ]]; then die 7 "Tar dir specified doesn't exist"; fi
+
+if [ -z $BI ]; then
+	[ -z $ASHELL ] && c_info "Looking for device.."
+	set +e
+	do_adb_root "$ADB"
+
+	if [ $? -ne 0 ]; then
+		c_error "adb root failed, make sure:"
+		c_error " * If multiple devices connected, provide --device <serialno>  (or -s <serialno>)"
+		c_error " * Try to run \"adb root\" manually and see if it works. Typically this needs a userdebug build."
+		c_error ""
+		c_error "Note: adb can be typically obtained using the android-tools-adb or the adb"
+		c_error "packages on your distro, or by installing the Android SDK."
+		die 3 "Exiting."
+	fi
+	set -e
+else
+	[ ! -z $BUILD_IMAGEF ] || die 8 "--build-image passed but no image file provided"
+fi
+
+if [ ! -z "$REMOVE" ]; then
+	die_if_no_androdeb "Nothing to remove."
+	$ADB shell /data/androdeb/device-umount-all || true;
+	$ADB shell rm -rf /data/androdeb; exit 0; fi
+
+##########################################################
+#  SHELL
+##########################################################
+if [ ! -z ${ASHELL+x} ]; then
+	set +e; $ADB shell ls /data/androdeb/debian/.bashrc > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+	   die 2 "Device doesn't have an androdeb environment, run \"./androdeb prepare\" first";
+	fi; set -e
+
+	if [ ! -z ${SHELL_ARGS+x} ]; then
+		# Explanation of quotes:
+		# Outer quote is so that androdeb's bash passes the SHELL_ARGS as a single
+		# argument to $ADB shell. Inner quotes is so that run-command can receive all
+		# the args even though they may be separated by spaces. \m/
+		$ADB shell -t /data/androdeb/run-command "\"$SHELL_ARGS\""
+	else
+		$ADB shell -t /data/androdeb/run
+	fi
+
+	exit 0
+fi
+
+##########################################################
+#  PREPARE 
+##########################################################
+
+function do_cleanup() {
+	rm -rf $TDIR/*; if [ $MKTEMP -eq 1 ]; then rm -rf $TDIR; fi
+}
+
+function push_unpack_headers() {
+	die_if_no_androdeb "Couldn't update headers."
+
+	c_info "Storing kernel headers into androdeb /kernel-headers/"
+	$ADB shell rm -rf /data/androdeb/debian/kernel-headers/
+	$ADB shell mkdir  /data/androdeb/debian/kernel-headers/
+	run_quiet $ADB push $TDIR_ABS/kh.tgz /data/androdeb/
+	$ADB shell tar -xvf /data/androdeb/kh.tgz -C /data/androdeb/debian/kernel-headers/ > /dev/null
+	$ADB shell rm /data/androdeb/kh.tgz
+}
+
+function push_unpack_tarred_headers() {
+	die_if_no_androdeb "Couldn't update headers."
+
+	$ADB shell rm -rf /data/androdeb/debian/kernel-headers/
+	$ADB shell mkdir  /data/androdeb/debian/kernel-headers/
+
+	c_info "Pushing headers tar onto device"
+	run_quiet $ADB push $1 /data/androdeb/
+
+	c_info "Storing kernel headers into androdeb root directory"
+	$ADB shell tar -xvf /data/androdeb/$(basename $1) -C /data/androdeb/debian/ > /dev/null
+
+	$ADB shell rm /data/androdeb/$(basename $1)
+}
+
+function all_done_banner() {
+	c_info "All done! Run \"adeb shell\" to enter environment"
+}
+
+function detect_repo_url() {
+	ADEB_REPO_URL=`cd $spath && git config -l | grep -m1 remote | grep url | sed -e "s/.*url=//" \
+		 -e "s/.*@//"  \
+		 -e "s/https:\/\///" \
+		 -e "s/:/\//"  \
+		 -e "s/\.git$//"`"/"
+	c_info "Detected URL: $ADEB_REPO_URL"
+}
+
+function check_repo_url () {
+	if [ -z $ADEB_REPO_URL ]; then
+		c_info "No repository URL provided in enviromnent. Attempting to auto-detect it"
+		detect_repo_url
+	fi
+
+	if [ -z $ADEB_REPO_URL ]; then
+		c_warning "Automatic download is disabled. To enable it, please set the \$ADEB_REPO_URL"
+		c_warning "environment variable as recommended in the setup instructions in the README.md"
+		do_cleanup
+		exit 0
+	fi
+}
+
+function download_headers() {
+	KERNEL_MAJOR=`$ADB shell uname -r | cut -d - -f 1 | cut -d . -f 1`
+	KERNEL_MINOR=`$ADB shell uname -r | cut -d - -f 1 | cut -d . -f 2`
+	KERNEL_VERSION="$KERNEL_MAJOR.$KERNEL_MINOR"
+	PREBUILT_HEADERS_FILE=headers-$ARCH-$KERNEL_VERSION.tar.gz.zip
+
+	check_repo_url
+
+	curl -L https://$ADEB_REPO_URL/releases/download/$VERSION/$PREBUILT_HEADERS_FILE --output $TDIR_ABS/$PREBUILT_HEADERS_FILE ||
+		   die 9 "Failed to download kernel headers. Please check your internet connection and repository URL"
+
+	unzip -e $TDIR_ABS/$PREBUILT_HEADERS_FILE -d $TDIR_ABS/ ||
+		   die 10 "Failed to download kernel headers. Kernel $KERNEL_VERSION for $ARCH may not be supported or ADEB_REPO_URL is incorrect."
+	KERNELHDRS=$TDIR_ABS/`echo "$PREBUILT_HEADERS_FILE" | sed "s/.zip//"`
+}
+
+# Prepare is the last command checked
+if [ -z "$PREPARE" ]; then usage; fi
+
+if [ ! -z "$TARF" ] && [ ! -f $TARF ] && [ -z "$DOWNLOAD" ]; then die 5 "archive provided doesn't exist"; fi
+
+if [ ! -z "$KERNELSRC" ] && [ ! -d $KERNELSRC ]; then die 6 "Kernel source directory provided doesn't exist"; fi
+
+if [ ! -z "$KERNELHDRS" ] && [ ! -f $KERNELHDRS ]; then die 7 "Kernel headers tar.gz doesn't exist"; fi
+
+print_prepare_banner
+
+# Where do we want to store temporary files
+MKTEMP=0; if [[ -z ${TDIR+x} ]]  || [[ ! -d "${TDIR}" ]]; then
+	TDIR=`mktemp -d`; MKTEMP=1; fi
+rm -rf $TDIR/*
+TDIR_ABS=$( cd "$TDIR" ; pwd -P )
+
+if [ $DOWNLOAD -eq 1 ]; then
+   c_info "Downloading Androdeb from the web..."; c_info ""
+
+   # Github dropped tar gz support! ##?#??#! Now we've to zip everything.
+   check_repo_url
+
+   curl -L https://$ADEB_REPO_URL/releases/download/$VERSION/$FNAME --output $TDIR_ABS/$FNAME ||
+		   die 9 "Failed to download adeb release."
+
+   unzip -e $TDIR_ABS/$FNAME -d $TDIR_ABS/ ||
+		   die 10 "Failed to download adeb release. Double check the ADEB_REPO_URL value."
+   TARF=$TDIR_ABS/$FNAME_UZ
+fi
+
+if [ ! -z "$FULL" ] && [ -z "$KERNELSRC" ] && [ -z "$KERNELHDRS" ] && [ -z "$BI" ]; then
+	c_info "Kernel headers are needed but none were provided. Downloading pre-built headers"
+	download_headers
+fi
+
+OUT_TMP=$TDIR/debian; rm -rf $OUT_TMP; mkdir -p $OUT_TMP
+
+# Unpack the supplied kernel headers tar.gz directly into androdeb root
+if [ ! -z "$KERNELHDRS" ]; then
+	c_info "Building updating kernel headers from supplied tar.gz ($KERNELHDRS)"
+
+	# Is header tar gz update the only thing left to do?
+	if [[ ! -z "$SKIP_INSTALL" ]]; then
+		c_info "Skipping install"
+		push_unpack_tarred_headers $KERNELHDRS; do_cleanup; all_done_banner; exit 0; fi
+
+	tar -xvf $KERNELHDRS -C $OUT_TMP/ > /dev/null
+fi
+
+# Package kernel headers
+if [ ! -z "$KERNELSRC" ]; then
+	c_info "Building and updating kernel headers from kernel source dir ($KERNELSRC)"
+	$spath/bcc/build-kheaders-targz.sh ${KERNELSRC} $TDIR_ABS/kh.tgz > /dev/null
+
+	# Is header update the only thing left to do?
+	if [[ ! -z "$SKIP_INSTALL" ]]; then
+		c_info "Skipping install"
+		push_unpack_headers; do_cleanup; all_done_banner; exit 0; fi
+
+	mkdir $OUT_TMP/kernel-headers
+	tar -xvf $TDIR_ABS/kh.tgz -C $OUT_TMP/kernel-headers/ > /dev/null
+fi
+
+# Build FS from existing tar, very simple.
+if [ ! -z "$TARF" ]; then
+	c_info "Using archive at $TARF for filesystem preparation"
+	$ADB shell mkdir -p /data/androdeb/
+
+	c_info "Pushing filesystem to device.."
+	run_quiet $ADB push $TARF /data/androdeb/deb.tar.gz
+
+	c_info "Pushing addons to device.."
+	run_quiet $ADB push $spath/addons/* /data/androdeb/
+
+	c_info "Unpacking filesystem in device.."
+	run_quiet $ADB shell /data/androdeb/device-unpack
+
+	if [ ! -z "$KERNELHDRS" ]; then push_unpack_tarred_headers $KERNELHDRS; fi
+	if [ ! -z "$KERNELSRC" ]; then push_unpack_headers; fi
+
+	do_cleanup; all_done_banner; exit 0
+fi
+
+PACKAGES+="$DEFAULT_PACKAGES"
+c_info "Using temporary directory: $TDIR"
+
+if [[ $EUID -ne 0 ]]; then c_info "The next stage runs as sudo, please enter password if asked."; fi
+
+ex_files=$(mktemp); echo $EXTRA_FILES > $ex_files
+
+sudo $spath/buildstrap $ARCH $DISTRO $TDIR $OUT_TMP \
+		"$(make_csv "$PACKAGES")"\
+		$ex_files $INSTALL_BCC $SKIP_DEVICE
+rm $ex_files
+
+# If we only wanted to prepare a rootfs and don't have
+# a device connected, then just echo that and skip cleanup
+if [ $SKIP_DEVICE -eq 1 ]; then
+	c_info "Device preparation is being skipped for the selected options"
+	c_info "any builds that need to happen on device may be cloned but not built."
+
+	if [ ! -z $BI ]; then
+		sudo $spath/buildimage $OUT_TMP $(dirname $BUILD_IMAGEF)/$(basename $BUILD_IMAGEF)
+		sudo chmod a+rw $(dirname $BUILD_IMAGEF)/$(basename $BUILD_IMAGEF)
+		c_info "Your .img has been built! Enjoy!"
+	fi
+
+	do_cleanup
+	exit 0
+fi
+
+# Push tar to device and start unpack
+$ADB shell mkdir -p /data/androdeb/
+$ADB push $TDIR/deb.tar.gz /data/androdeb/
+$ADB push $spath/addons/* /data/androdeb/
+$ADB shell /data/androdeb/device-unpack
+
+# Build BCC and install bcc on device if needed
+if [ $INSTALL_BCC -eq 1 ]; then
+	$ADB shell /data/androdeb/run-command /bcc-master/build-bcc.sh;
+fi
+
+# Extract a tar of the built, compiled and installed androdeb env
+if [[ ! -z ${TARDIR+x} ]]; then
+	c_info "Creating tarball"
+	pushd $TARDIR
+	if [ $INSTALL_BCC -eq 0 ]; then
+		mv $TDIR/deb.tar.gz $FNAME_UZ
+	else
+		$ADB shell /data/androdeb/build-debian-tar
+		$ADB pull /data/androdeb/androdeb-fs.tgz $FNAME_UZ
+		$ADB shell rm /data/androdeb/androdeb-fs.tgz;
+	fi
+	zip -r $FNAME $FNAME_UZ
+	popd
+fi
+
+do_cleanup
+
+all_done_banner

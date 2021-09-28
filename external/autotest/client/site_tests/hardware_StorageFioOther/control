@@ -1,0 +1,26 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = 'hardware_StorageFioOther.test'
+AUTHOR = 'The Chromium OS Authors'
+PURPOSE = 'Benchmark storage performance using an external device'
+CRITERIA = 'This test is a benchmark'
+TIME = 'MEDIUM'
+TEST_CLASS = 'hardware'
+TEST_CATEGORY = 'Performance'
+TEST_TYPE = 'client'
+
+DOC = """
+This test uses FIO to spawn a number of threads to perform a particular type of
+I/O. This test will use block sizs of 4k, 8k, and 16k. It will also attempt
+to simulate the disk traffic during a boot, login, and web surfing. It tests
+both sequential and random data access.
+"""
+
+job.run_test('hardware_StorageFioOther',
+               constraints=[
+                        '_seq_read_read_bw >= 10 * 1024',
+                        '_seq_write_write_bw >= 10 * 1024',
+                        '_16k_write_write_iops >= 500',
+               ])

@@ -1,0 +1,39 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "firmware_Fingerprint.SoftwareWriteProtect"
+PURPOSE = """
+Verify that software write protect cannot be disabled when hardware write
+protect is enabled.
+"""
+CRITERIA = """
+Fails if we can disable software write protect from RO or RW."
+"""
+ATTRIBUTES = "suite:fingerprint"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo, fingerprint"
+JOB_RETRIES = 0
+
+DOC = """
+Reboots to RO, attempts to disable software write protect while hardware write
+protect is enabled and verifies that it fails. Then reboots to RW, attempts to
+disable software write protect while hardware write protect is enabled and
+verifies that it fails.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("firmware_Fingerprint", host=host,
+                 test_exe="sw_write_protect.sh")
+
+parallel_simple(run, machines)

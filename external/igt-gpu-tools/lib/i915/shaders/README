@@ -1,0 +1,25 @@
+This directory is for shaders used in media_fill, gpgpu_fill, rendercopy
+and media_spin libraries.
+
+Till Gen8 shaders were generated using intel-gen4asm script (implementation in
+assembler/ directory). From Gen8 it is possible to use Intel Graphics Assembler
+to generate binary from asm instructions.
+https://github.com/intel/intel-graphics-compiler
+    1. Clone IGC project
+    2. Go to igc/visa/iga
+    3. Build iga
+        cmake . && make
+
+For maintaining compatibility with our tests there is a bin to hex converter
+written in python:
+    $>converter.py input_file > output_file
+e.g.$>python converter.py gen9_iga_output > gen9_hex_array
+
+Commands used to generate the shader on gen7
+$> m4 gpgpu_fill.gxa > gpgpu_fill.gxm
+$> intel-gen4asm -g 7 -o <output> gpgpu_fill.gxm
+
+Commands used to generate the shader on gen8
+$> m4 media_fill.gxa > media_fill.gxm
+$> intel-gen4asm -g 8 -o <output> media_fill.gxm
+

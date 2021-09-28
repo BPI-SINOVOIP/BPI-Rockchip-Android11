@@ -1,0 +1,111 @@
+igt@meta_test(@.*)?
+###############################################
+# Kernel selftests (run separately)
+###############################################
+igt@i915_selftest(@.*)?
+igt@drm_mm(@.*)?
+###############################################
+# Handle module reloads with great care!
+#
+# Reloading a module is more likely to leave
+# the machine in an unexpected state than other
+# self-contained tests, leading to random
+# failures in tests run afterwards.
+###############################################
+igt@i915_module_load(@.*)?
+igt@i915_pm_rpm@module-reload
+igt@i915_pm_rpm@gem-execbuf-stress-extra-wait
+###############################################
+# GEM
+###############################################
+igt@gem_busy@(?!.*basic).*hang.*
+igt@gem_close_race@(?!.*basic).*
+igt@gem_concurrent_blit(@.*)?
+igt@gem_cs_prefetch(@.*)?
+igt@gem_ctx_create@(?!.*basic).*
+igt@gem_ctx_exec@(?!.*basic).*
+igt@gem_ctx_shared@*exhaust*
+igt@gem_ctx_switch@.*(forked|interruptible).*
+igt@gem_ctx_thrash(@.*)?
+igt@gem_evict_alignment(@.*)?
+igt@gem_evict_everything(@.*)?
+igt@gem_exec_alignment@(?!.*single).*
+igt@gem_exec_big@(?!.*single).*
+igt@gem_exec_capture@many-(?!4K-).*
+igt@gem_exec_fence@(?!.*basic).*
+igt@gem_exec_flush@(?!.*basic).*
+igt@gem_exec_gttfill@(?!.*basic).*
+igt@gem_exec_latency(@.*)?
+igt@gem_exec_lut_handle(@.*)?
+igt@gem_exec_nop@(?!.*basic).*
+igt@gem_exec_reloc@(?!.*basic).*
+igt@gem_exec_suspend@(?!.*basic).*
+igt@gem_exec_whisper@(?!normal$).*
+igt@gem_fd_exhaustion(@.*)?
+igt@gem_fence_upload(@.*)?
+igt@gem_gtt_hog(@.*)?
+igt@gem_gtt_speed(@.*)?
+igt@gem_hangcheck_forcewake(@.*)?
+igt@gem_lut_handle(@.*)?
+igt@gem_mmap_gtt@.*(huge|swap|clflush).*
+igt@gem_mmap@.*(swap|huge).*
+igt@gem_mocs_settings@.*(suspend|hibernate).*
+igt@gem_pin(@.*)?
+igt@gem_pread_after_blit(@.*)?
+igt@gem_pwrite_pread@.*performance.*
+igt@gem_read_read_speed(@.*)?
+igt@gem_reloc_overflow(@.*)?
+igt@gem_reloc_vs_gpu(@.*)?
+igt@gem_render_linear_blits@(?!.*basic).*
+igt@gem_render_tiled_blits@(?!.*basic).*
+igt@gem_reset_stats(@.*)?
+igt@gem_ringfill@(?!.*basic).*
+igt@gem_ring_sync_copy(@.*)?
+igt@gem_ring_sync_loop(@.*)?
+igt@gem_seqno_wrap(@.*)?
+igt@gem_shrink@(?!reclaim$).*
+igt@gem_softpin@.*(hang|S4).*
+igt@gem_spin_batch(@.*)?
+igt@gem_stolen@.*hibernate.*
+igt@gem_storedw_batches_loop(@.*)?
+igt@gem_storedw_loop(@.*)?
+igt@gem_streaming_writes(@.*)?
+igt@gem_sync@(?!.*basic).*
+igt@gem_tiled_swapping@(?!non-threaded).*
+igt@gem_userptr_blits@(major|minor|forked|mlocked|swapping).*
+igt@gem_wait@.*hang.*
+igt@gem_write_read_ring_switch(@.*)?
+###############################################
+# GEM: Not worth fixing
+###############################################
+igt@gem_exec_parse@.*lri.*
+###############################################
+# There are no DRRS capable displays in CI lab
+###############################################
+igt@kms_frontbuffer_tracking@.*drrs.*
+###############################################
+# Broadcom
+###############################################
+igt@vc4_.*
+###############################################
+# AMD
+###############################################
+igt@amdgpu/.*
+###############################################
+# Hibernate: not configured correctly on CI
+###############################################
+igt@.*@.*-hibernate
+igt@gem_softpin@noreloc-s4
+igt@gem_workarounds@hibernate-.*
+igt@gem_exec_suspend@basic-s4$
+igt@gem_ctx_isolation@.*-s4
+###############################################
+# Out-of-memory: spammy and often broken
+###############################################
+igt@i915_suspend@shrink
+###############################################
+# pipe-d, pipe-e, pipe-f no current HW support
+###############################################
+igt@.*@.*pipe-d-.*
+igt@.*@.*pipe-e-.*
+igt@.*@.*pipe-f-.*

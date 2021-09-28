@@ -1,0 +1,221 @@
+--- android_icu4j/src/main/java/android/icu/text/NumberFormat.java	2018-10-19 11:01:09.353895065 +0100
++++ android_icu4j/src/main/java/android/icu/text/NumberFormat.java	2018-10-19 11:01:28.681998885 +0100
+@@ -39,7 +39,7 @@
+  *
+  * <p>
+  * <strong>IMPORTANT:</strong> New users are strongly encouraged to see if
+- * {@link NumberFormatter} fits their use case.  Although not deprecated, this
++ * {@code NumberFormatter} fits their use case.  Although not deprecated, this
+  * class, NumberFormat, is only provided for java.text.NumberFormat compatibility.
+  * <hr>
+  *
+@@ -551,9 +551,6 @@
+     //============== Locale Stuff =====================
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns the default number format for the current default <code>FORMAT</code> locale.
+      * The default format is one of the styles provided by the other
+      * factory methods: getNumberInstance, getIntegerInstance,
+@@ -567,9 +564,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns the default number format for the specified locale.
+      * The default format is one of the styles provided by the other
+      * factory methods: getNumberInstance, getCurrencyInstance or getPercentInstance.
+@@ -580,9 +574,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns the default number format for the specified locale.
+      * The default format is one of the styles provided by the other
+      * factory methods: getNumberInstance, getCurrencyInstance or getPercentInstance.
+@@ -593,9 +584,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a specific style number format for default <code>FORMAT</code> locale.
+      * @param style  number format style
+      * @see Category#FORMAT
+@@ -605,9 +593,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a specific style number format for a specific locale.
+      * @param inLocale  the specific locale.
+      * @param style     number format style
+@@ -618,9 +603,6 @@
+ 
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a general-purpose number format for the current default <code>FORMAT</code> locale.
+      * @see Category#FORMAT
+      */
+@@ -629,9 +611,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a general-purpose number format for the specified locale.
+      */
+     public static NumberFormat getNumberInstance(Locale inLocale) {
+@@ -639,9 +618,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a general-purpose number format for the specified locale.
+      */
+     public static NumberFormat getNumberInstance(ULocale inLocale) {
+@@ -649,9 +625,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns an integer number format for the current default <code>FORMAT</code> locale. The
+      * returned number format is configured to round floating point numbers
+      * to the nearest integer using IEEE half-even rounding (see {@link
+@@ -668,9 +641,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns an integer number format for the specified locale. The
+      * returned number format is configured to round floating point numbers
+      * to the nearest integer using IEEE half-even rounding (see {@link
+@@ -687,9 +657,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns an integer number format for the specified locale. The
+      * returned number format is configured to round floating point numbers
+      * to the nearest integer using IEEE half-even rounding (see {@link
+@@ -705,9 +672,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a currency format for the current default <code>FORMAT</code> locale.
+      * @return a number format for currency
+      * @see Category#FORMAT
+@@ -717,9 +681,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a currency format for the specified locale.
+      * @return a number format for currency
+      */
+@@ -728,9 +689,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a currency format for the specified locale.
+      * @return a number format for currency
+      */
+@@ -739,9 +697,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a percentage format for the current default <code>FORMAT</code> locale.
+      * @return a number format for percents
+      * @see Category#FORMAT
+@@ -751,9 +706,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a percentage format for the specified locale.
+      * @return a number format for percents
+      */
+@@ -762,9 +714,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a percentage format for the specified locale.
+      * @return a number format for percents
+      */
+@@ -773,9 +722,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a scientific format for the current default <code>FORMAT</code> locale.
+      * @return a scientific number format
+      * @see Category#FORMAT
+@@ -785,9 +731,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a scientific format for the specified locale.
+      * @return a scientific number format
+      */
+@@ -796,9 +739,6 @@
+     }
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * <strong>[icu]</strong> Returns a scientific format for the specified locale.
+      * @return a scientific number format
+      */
+@@ -1319,9 +1259,6 @@
+ 
+ 
+     /**
+-     * <strong>NOTE:</strong> New users are strongly encouraged to use
+-     * {@link NumberFormatter} instead of NumberFormat.
+-     * <hr>
+      * Returns a specific style number format for a specific locale.
+      * @param desiredLocale  the specific locale.
+      * @param choice         number format style

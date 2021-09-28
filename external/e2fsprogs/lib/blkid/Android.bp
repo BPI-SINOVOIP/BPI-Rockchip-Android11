@@ -1,0 +1,87 @@
+// Copyright 2017 The Android Open Source Project
+
+cc_library {
+    name: "libext2_blkid",
+    host_supported: true,
+    ramdisk_available: true,
+    recovery_available: true,
+    unique_host_soname: true,
+    defaults: ["e2fsprogs-defaults"],
+    srcs: [
+        "cache.c",
+        "dev.c",
+        "devname.c",
+        "devno.c",
+        "getsize.c",
+        "llseek.c",
+        "probe.c",
+        "read.c",
+        "resolve.c",
+        "save.c",
+        "tag.c",
+        "version.c",
+    ],
+    shared_libs: ["libext2_uuid"],
+
+    target: {
+        windows: {
+            include_dirs: [ "external/e2fsprogs/include/mingw" ],
+            cflags: [
+                "-Wno-pointer-to-int-cast",
+                "-Wno-unused-variable",
+            ],
+            clang_cflags: [
+                "-Wno-error=typedef-redefinition",
+            ],
+            enabled: true
+        },
+        android: {
+            srcs: [
+                "libiconv/libcharset/lib/localcharset.c",
+                "libiconv/lib/iconv.c",
+                "libiconv/lib/relocatable.c",
+            ],
+            cflags: [
+                "-include external/e2fsprogs/include/mingw/sys/sysmacros.h",
+                "-Wno-pointer-to-int-cast",
+                "-Wno-unused-variable",
+                "-DUSING_ICONV",
+                "-DHAVE_ERRNO_H",
+                "-DHAVE_LSEEK64",
+                "-DHAVE_LSEEK64_PROTOTYPE",
+                "-Wno-multichar",
+                "-Wno-unused-parameter",
+                "-Wno-sign-compare",
+                "-Wno-missing-field-initializers",
+                "-Wno-static-in-inline",
+                "-Wno-parentheses-equality",
+                "-DANDROID",
+                "-DLIBDIR=\"c\"",
+                "-DBUILDING_LIBICONV",
+                "-DIN_LIBRARY",
+            ],
+            local_include_dirs: [
+                "libiconv/include",
+                "libiconv/libcharset",
+                "libiconv/lib",
+                "libiconv/libcharset/include",
+                "libiconv/srclib",
+            ],
+        },
+    },
+
+    cflags: [
+        "-Wno-error=attributes",
+        "-Wno-error=pointer-sign",
+        "-Wno-unused-parameter",
+        "-fno-strict-aliasing",
+        "-Wno-unused-variable",
+        "-Wno-implicit-function-declaration",
+        "-Wno-sign-compare",
+        "-Wno-missing-field-initializers",
+    ],
+
+    header_libs: ["libext2-headers"],
+    export_include_dirs: ["."],
+    export_header_lib_headers: ["libext2-headers"],
+}

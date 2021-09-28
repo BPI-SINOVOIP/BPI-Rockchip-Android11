@@ -1,0 +1,39 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'zmarcus'
+NAME = 'network_WiFi_AssocConfigPerformance'
+TIME = 'SHORT'
+TEST_TYPE = 'Server'
+# ATTRIBUTES = ('suite:wifi_perf')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+Tests the time taken to authenticate, associate, and get an IP.
+Also measures the speed of resuming a connection after a suspend
+"""
+
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_datatypes
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    channel = 36
+    n_caps = [hostap_config.HostapConfig.N_CAPABILITY_HT40]
+    mode = hostap_config.HostapConfig.MODE_11N_PURE
+
+    configurations = [hostap_config.HostapConfig(
+                               channel=channel,
+                               n_capabilities=n_caps,
+                               mode=mode)]
+    job.run_test('network_WiFi_AssocConfigPerformance',
+                 host=hosts.create_host(machine),
+                 num_iterations=5,
+                 suspend_duration=30,
+                 raw_cmdline_args=args,
+                 additional_params=configurations)
+
+
+parallel_simple(run, machines)

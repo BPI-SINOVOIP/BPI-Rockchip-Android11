@@ -1,0 +1,340 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-noccache",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "GOMACC_PATH=someNonExistingPath"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "../../usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002",
+            "CCACHE_CPP2=yes"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/gomacc",
+          "args": [
+            "../../usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "-nopie",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "../../usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002",
+            "CCACHE_CPP2=yes"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "-D__KERNEL__",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "../../usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "-fno-stack-protector",
+            "-D__KERNEL__",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002",
+            "CCACHE_CPP2=yes"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./armv7a-cros-linux-gnueabihf-clang",
+        "args": [
+          "-D__KERNEL__",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "../../usr/bin/clang",
+            "--sysroot=/usr/armv7a-cros-linux-gnueabihf",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-D_FORTIFY_SOURCE=2",
+            "-mthumb",
+            "-fno-stack-protector",
+            "-D__KERNEL__",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "armv7a-cros-linux-gnueabihf"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/armv7a-cros-linux-gnueabihf",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002",
+            "CCACHE_CPP2=yes"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "--sysroot=xyz",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "../../usr/bin/clang",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "--sysroot=xyz",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002",
+            "CCACHE_CPP2=yes"
+          ]
+        }
+      }
+    ]
+  }
+]

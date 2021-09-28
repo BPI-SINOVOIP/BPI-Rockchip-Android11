@@ -1,0 +1,8 @@
+Regarding the two dead sym links WD15 Dock and WD19 Dock
+
+ALSA has added a ucm for the ucm the sym links they point to and the ucm
+has been patched in the chromiumos overlay. Unfortunately the alsa-lib
+installs via Makefile and make HATES files with spaces, so we are keeping
+the sym links here (even though they appear dead) they are NOT. Once
+deployed with alsa-lib 1.1.8 they will have a proper target on a dut.
+

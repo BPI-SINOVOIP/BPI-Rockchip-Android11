@@ -1,0 +1,41 @@
+core.workflow(
+    name = "default",
+    origin = git.origin(
+        url = "https://github.com/llvm/llvm-project.git",
+        ref = "master",
+    ),
+    origin_files = glob(
+        [
+            "compiler-rt/lib/scudo/standalone/**",
+            "compiler-rt/LICENSE.TXT",
+        ],
+        exclude = [
+            "**/CMakeLists.txt",
+        ],
+    ),
+    destination = git.gerrit_destination(
+        url = "https://android.googlesource.com/platform/external/scudo",
+        fetch = "master",
+    ),
+    destination_files = glob(
+        [
+            "standalone/**",
+            "LICENSE.TXT",
+        ],
+        exclude = [
+            "**/Android.bp"
+        ],
+    ),
+    mode = "SQUASH",
+    authoring = authoring.pass_thru(
+        "Dynamic Tools Team <dynamic-tools@google.com>"
+    ),
+    transformations = [
+        core.move("compiler-rt/lib/scudo/standalone/", "standalone"),
+        core.move("compiler-rt/LICENSE.TXT", "LICENSE.TXT"),
+        metadata.squash_notes(
+            prefix = "Imported Scudo Standalone changes:\n\n",
+            oldest_first = True,
+        ),
+    ],
+)

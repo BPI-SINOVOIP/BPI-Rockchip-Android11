@@ -1,0 +1,55 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server.cros.dynamic_suite import constants
+
+AUTHOR = "Chromium OS"
+ATTRIBUTES = "suite:kernel_per-build_regression"
+NAME = "autoupdate_StatefulCompatibility.kernel_transition"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+
+DOC = """
+This is an auto update test to check the compatibility of the stateful
+partition between updates. This control file is specifically meant for
+-kernelnext boards. Any board that declares USE=kernel-transition will attempt
+to run this test. For boards in the form "<board>-kernelnext" this test will
+search for an image matching "<board>". For boards in any other form this test
+will search for an image matching "<board>-kernelnext".
+
+For example the samus board, which declares USE=kernel-transition, will target a
+samus-kernelnext image to run an upgrade test against, and the samus-kernelnext
+board, which also declares USE=kernel-transition, will target a samus image to
+downgrade test against.
+"""
+
+TEST_CONF_KEYS = (
+    'source_payload_uri', 'target_payload_uri', 'target_board',
+    'target_version_regex')
+
+test_conf = {}
+for key in TEST_CONF_KEYS:
+    test_conf[key] = None
+
+def run_test(machine):
+    """Execute a test configuration on a given machine."""
+    host = hosts.create_host(machine)
+    board = host.get_board().replace(constants.BOARD_PREFIX, '')
+
+    # <board>-kernelnext downgrade tests to <board>
+    # <board> upgrade tests to <board>-kernelnext
+    if board.endswith('kernelnext'):
+        target_board = board.replace('-kernelnext', '')
+    else:
+        target_board = board + '-kernelnext'
+
+    test_conf['target_board'] = target_board
+    test_conf['target_version_regex'] = 'LATEST-[0-9]*'
+    job.run_test("autoupdate_StatefulCompatibility", host=host,
+                 test_conf=test_conf, max_image_checks=20)
+
+# Invoke parallel tests.
+parallel_simple(run_test, machines)

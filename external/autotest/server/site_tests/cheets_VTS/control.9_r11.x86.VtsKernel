@@ -1,0 +1,33 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file has been automatically generated. Do not edit!
+
+AUTHOR = 'ARC++ Team'
+NAME = 'cheets_VTS.9_r11.x86.VtsKernel'
+ATTRIBUTES = 'suite:arc-vts'
+DEPENDENCIES = 'arc'
+JOB_RETRIES = 1
+TEST_TYPE = 'server'
+TIME = 'MEDIUM'
+MAX_RESULT_SIZE_KB = 512000
+DOC = 'Run module VtsKernelApiSysfsTest, VtsKernelBinderTest, VtsKernelConfig, VtsKernelDeviceTreeEarlyMount, VtsKernelFuzzTest, VtsKernelHwBinder, VtsKernelLibcutilsTest, VtsKernelLinuxKselftest, VtsKernelLinuxKselftestPresubmit, VtsKernelLinuxKselftestStaging, VtsKernelLtp, VtsKernelLtpStaging, VtsKernelNetBpfTest, VtsKernelNetTest, VtsKernelNetdTest, VtsKernelProcFileApi, VtsKernelQtaguidTest, VtsKernelRootDir, VtsKernelSelinuxFileApi, VtsKernelSyscallExistence, VtsKernelSystemAsRoot, VtsKernelTunTest, VtsKernelVersion of the Vendor Test Suite (VTS) using x86 ABI in the ARC++ container.'
+
+def run_TS(machine):
+    host_list = [hosts.create_host(machine)]
+    job.run_test(
+        'cheets_VTS',
+        hosts=host_list,
+        iterations=1,
+        tag='9_r11.x86.VtsKernel',
+        test_name='cheets_VTS.9_r11.x86.VtsKernel',
+        run_template=['run', 'commandAndExit', 'vts', '--include-filter', 'VtsKernelApiSysfsTest', '--include-filter', 'VtsKernelBinderTest', '--include-filter', 'VtsKernelConfig', '--include-filter', 'VtsKernelDeviceTreeEarlyMount', '--include-filter', 'VtsKernelFuzzTest', '--include-filter', 'VtsKernelHwBinder', '--include-filter', 'VtsKernelLibcutilsTest', '--include-filter', 'VtsKernelLinuxKselftest', '--include-filter', 'VtsKernelLinuxKselftestPresubmit', '--include-filter', 'VtsKernelLinuxKselftestStaging', '--include-filter', 'VtsKernelLtp', '--include-filter', 'VtsKernelLtpStaging', '--include-filter', 'VtsKernelNetBpfTest', '--include-filter', 'VtsKernelNetTest', '--include-filter', 'VtsKernelNetdTest', '--include-filter', 'VtsKernelProcFileApi', '--include-filter', 'VtsKernelQtaguidTest', '--include-filter', 'VtsKernelRootDir', '--include-filter', 'VtsKernelSelinuxFileApi', '--include-filter', 'VtsKernelSyscallExistence', '--include-filter', 'VtsKernelSystemAsRoot', '--include-filter', 'VtsKernelTunTest', '--include-filter', 'VtsKernelVersion', '--logcat-on-failure'],
+        retry_template=['run', 'commandAndExit', 'retry', '--retry', '{session_id}'],
+        target_module='VtsKernel',
+        target_plan=None,
+        bundle='x86',
+        uri='gs://chromeos-arc-images/vts/VTS-9_r11_x86.zip',
+        timeout=43200)
+
+parallel_simple(run_TS, machines)

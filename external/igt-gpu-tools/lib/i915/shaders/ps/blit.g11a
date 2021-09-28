@@ -1,0 +1,22 @@
+/*  This is the same shader as for previous gens. On Gen 11 instruction pln was deleted and needs to be replaced by mad.
+This shader was generated using IGA tool (not assembler integrated into IGT)
+*/
+
+(W) mad(8|M0) acc0.0<1>:nf r6.7<0;0>:f r2.0<8;1>:f r6.0<0>:f
+(W) mad(8|M0) r10.0<1>:f acc0.0<8;1>:nf r3.0<8;1>:f r6.1<0>:f
+
+(W) mad(8|M0) acc0.0<1>:nf r6.0<0;0>:f r4.0<8;1>:f r6.0<0>:f
+(W) mad(8|M0) r11.0<1>:f acc0.0<8;1>:nf r5.0<8;1>:f r6.1<0>:f
+
+(W) mad(8|M0) acc0.0<1>:nf r6.4<0;0>:f r2.0<8;1>:f r6.4<0>:f
+(W) mad(8|M0) r12.0<1>:f acc0.0<8;1>:nf r3.0<8;1>:f r6.5<0>:f
+
+(W) mad(8|M0) acc0.0<1>:nf r6.0<0;0>:f r4.0<8;1>:f r6.4<0>:f
+(W) mad(8|M0) r13.0<1>:f acc0.0<8;1>:nf r5.0<8;1>:f r6.5<0>:f
+
+(W) send(16|M0) r112:f r10:ub 0x10000002 0x08840001 //  SAMPLER  wr:4, rd:8, fc: 0x40001
+    mov (16|M0)              r113.0<1>:f   r12.0<8;8,1>:f
+    mov (16|M0)              r115.0<1>:f   r14.0<8;8,1>:f
+    mov (16|M0)              r117.0<1>:f   r16.0<8;8,1>:f
+    mov (16|M0)              r119.0<1>:f   r18.0<8;8,1>:f
+(W) send(16|M0) null:f r112:ub 0x10000025 0x10031000 {EOT} //  DP_RC  wr:8, rd:0, Render Target Write msc:16, to #0

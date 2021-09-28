@@ -1,0 +1,16 @@
+[package]
+name = "arch"
+version = "0.1.0"
+authors = ["The Chromium OS Authors"]
+edition = "2018"
+
+[dependencies]
+byteorder = "*"
+devices = { path = "../devices" }
+io_jail = { path = "../io_jail" }
+kernel_cmdline = { path = "../kernel_cmdline" }
+kvm = { path = "../kvm" }
+libc = "*"
+resources = { path = "../resources" }
+sync = { path = "../sync" }
+sys_util = { path = "../sys_util" }

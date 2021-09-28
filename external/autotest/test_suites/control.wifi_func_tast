@@ -1,0 +1,31 @@
+# Copyright (c) 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "deanliao@chromium.org"
+NAME = "wifi_func_tast"
+PURPOSE = "Test basic WiFi functionalities using Tast framework."
+
+TIME = "SHORT"
+TEST_CATEGORY = "General"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+The suite is the Tast counterpart of suite:wifi_matfunc.
+
+The reason why we need a separate suite is because "test_that" command
+cannot run Tast tests if devserver is not presented (crbug.com/948805).
+Placing Tast tests on this suite can avoid possible regression of
+suite:wifi_matfunc.
+"""
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+args_dict['add_experimental'] = True
+args_dict['max_runtime_mins'] = 60
+args_dict['name'] = NAME
+args_dict['job'] = job
+
+dynamic_suite.reimage_and_run(**args_dict)

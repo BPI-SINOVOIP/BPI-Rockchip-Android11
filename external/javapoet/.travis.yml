@@ -1,0 +1,46 @@
+language: java
+
+matrix:
+  include:
+    - env: JDK='Oracle JDK 8'
+      jdk: oraclejdk8
+    - env: JDK='Oracle JDK 9'
+      jdk: oraclejdk9
+    - env: JDK='Oracle JDK 10'
+      install: . ./install-jdk.sh -F 10 -L BCL
+    - env: JDK='OpenJDK 10'
+      install: . ./install-jdk.sh -F 10 -L GPL
+    - env: JDK='Oracle JDK 11'
+      install: . ./install-jdk.sh -F 11 -L BCL
+    - env: JDK='OpenJDK 11'
+      install: . ./install-jdk.sh -F 11 -L GPL
+  allow_failures:
+    # ErrorProne/javac is not yet working on JDK 11
+    - env: JDK='Oracle JDK 11'
+    - env: JDK='OpenJDK 11'
+
+# Direct usage of `install-jdk.sh` might be superseded by https://github.com/travis-ci/travis-build/pull/1347
+before_install:
+  - unset _JAVA_OPTIONS
+  - wget https://github.com/sormuras/bach/raw/1.0.1/install-jdk.sh
+
+after_success:
+  - .buildscript/deploy_snapshot.sh
+
+env:
+  global:
+    - secure: "nkVNCk8H2orIZOmow0t+Qub1lFQCYpJgNZf17zYI5x0JVqQNCqkcTYYDHqzwkvkmixXFCrfYZQuXy7x2qg9zjCX+vmhlmiMWwe8dNa34OLTseuuR2irS0C8nRGRYxKM7EGenRZSqbFVUksKRm2iWnHKxtmCzeDaS7MoMit2wdUo="
+    - secure: "j8+hPaZnyM+UlOBYOEA96fPbVWbN6bMQ28SGQnFMwxo2axHi9ww9Au1N7002HzHnxX8iyesdWFBigArnEL8zKEoXH9Bmur0sn3Ys4bu72C3ozscP4cjXfYSHj8aVLp1EIMdQPDF7MkCccx9l7ONdsW0ltmdiVUtDxzqkH+63WLU="
+
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2

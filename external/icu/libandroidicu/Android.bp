@@ -1,0 +1,94 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// A shared library for use on Android by frameworks and other code outside
+// of the ART mainline module. It provides a subset of ICU APIs, some
+// Android extensions and stable symbols. Most Android target code should
+// depend on this library.
+//
+// With the exception of a few special cases like host apex build targets,
+// host binaries should use libicuuc + libicui18n directly.
+cc_library_shared {
+    name: "libandroidicu",
+
+    // Most code is imported via libandroidicu_static.
+    srcs: [
+        "aicu/AIcu.cpp",
+    ],
+    // host_supported is required for host apex. This library is not intended
+    // for general host use.
+    host_supported: true,
+    native_bridge_supported: true,
+    unique_host_soname: true,
+    apex_available: [
+        "com.android.art.release",
+        "com.android.art.debug",
+        // b/133140750 Clean this up. This is due to the dependency to from libmedia
+        "//apex_available:platform",
+    ],
+
+    // include/aicu/: extra utility APIs added by android
+    // include/unicode/: Includes modified C headers from ICU4C,
+    //                   but excludes C++ headers.
+    // include/uconfig_local.h: local configuration specific for libandroidicu
+    export_include_dirs: ["include"],
+
+    // The implementation of libandroidicu depends on libicuuc and and libicui18n,
+    // but we need to export the headers in include/.
+    //
+    // However, include/unicode has a copy of a subset of header files
+    // as in libicuuc and libicui18n. We can't build C/C++ codes against
+    // both set of headers, since the headers have the same relative paths,
+    // and the compiler will find it ambiguous.
+    //
+    // Instead, we build the implementation of the shim libaray
+    // as a static library aganist libicuuc and libicui18n first,
+    // and export the headers in include/.
+    whole_static_libs: ["libandroidicu_static"],
+    shared_libs: [
+        "libbase",
+        "libicuuc",
+        "libicui18n",
+        "liblog",
+    ],
+    stubs: {
+        symbol_file: "libandroidicu.map.txt",
+        versions: [
+            "1",
+        ],
+    },
+    cppflags: [
+        "-std=c++11", // Use the same C++ version as libicuuc
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    target: {
+        android: {
+            cflags: [
+                "-DANDROID_LINK_SHARED_ICU4C",
+            ],
+            version_script: "libandroidicu.map.txt",
+            static_libs: [
+                "libandroidicuinit",
+            ],
+        },
+        windows: {
+            enabled: true,
+        },
+    },
+}
+
+// TODO: http://b/120776993 Testing for libandroidicu

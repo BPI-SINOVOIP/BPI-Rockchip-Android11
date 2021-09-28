@@ -1,0 +1,50 @@
+diff --git test/chanlinear.go test/chanlinear.go
+index 55fee4ab9b..89533da282 100644
+--- test/chanlinear.go
++++ test/chanlinear.go
+@@ -1,4 +1,4 @@
+-// +build darwin linux
++// +build darwin linux android
+ // run
+ 
+ // Copyright 2014 The Go Authors. All rights reserved.
+diff --git a/test/fixedbugs/bug385_64.go b/test/fixedbugs/bug385_64.go
+index 0f941ca2f4..3bcd62f3ad 100644
+--- test/fixedbugs/bug385_64.go
++++ test/fixedbugs/bug385_64.go
+@@ -1,4 +1,4 @@
+-// +build amd64
++// +build amd64 arm64
+ // errorcheck
+ 
+ // Copyright 2011 The Go Authors. All rights reserved.
+diff --git test/fixedbugs/issue10607.go test/fixedbugs/issue10607.go
+index 8831547da8..9ee6c72bc6 100644
+--- test/fixedbugs/issue10607.go
++++ test/fixedbugs/issue10607.go
+@@ -1,4 +1,4 @@
+-// +build linux,!ppc64
++// +build linux,!ppc64 android
+ // run
+ 
+ // Copyright 2015 The Go Authors. All rights reserved.
+diff --git test/maplinear.go test/maplinear.go
+index 34d0914914..afddab627d 100644
+--- test/maplinear.go
++++ test/maplinear.go
+@@ -1,4 +1,4 @@
+-// +build darwin linux
++// +build darwin linux android
+ // run
+ 
+ // Copyright 2013 The Go Authors. All rights reserved.
+diff --git test/recover4.go test/recover4.go
+index 67ed970ecb..95a89dab00 100644
+--- test/recover4.go
++++ test/recover4.go
+@@ -1,4 +1,4 @@
+-// +build linux darwin
++// +build linux android darwin
+ // run
+ 
+ // Copyright 2015 The Go Authors. All rights reserved.

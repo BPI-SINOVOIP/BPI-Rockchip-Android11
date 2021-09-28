@@ -1,0 +1,13 @@
+name: "SPIRV-Tools"
+description:
+    "The SPIR-V Tools project provides an API and commands for processing "
+    "SPIR-V modules."
+
+third_party {
+  url {
+    type: GIT
+    value: "https://github.com/KhronosGroup/SPIRV-Tools.git"
+  }
+  version: "eea449a1e82ab6a860b68f9b0a23f0432fe9939f"
+  last_upgrade_date { year: 2018 month: 12 day: 17 }
+}

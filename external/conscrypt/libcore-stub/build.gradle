@@ -1,0 +1,19 @@
+description = 'Conscrypt: libcore Stub'
+
+configurations {
+    publicApiDocs
+}
+
+dependencies {
+    // This is used for the @Internal annotation processing in JavaDoc
+    publicApiDocs project(':conscrypt-api-doclet')
+
+    // Only compile against this. Other modules will embed the generated code directly.
+    compileOnly project(':conscrypt-constants'),
+                configurations.publicApiDocs
+
+    compile libraries.junit
+}
+
+// Disable the javadoc task.
+tasks.withType(Javadoc).all { enabled = false }

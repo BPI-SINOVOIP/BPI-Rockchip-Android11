@@ -1,0 +1,14 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, Chromium OS"
+NAME = "desktopui_CheckRlzPingSent"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+PURPOSE = "Tests that the CAF and CAI rlz pings are sent after ping timeout."
+TIME = "SHORT"
+DOC = """ Tests that the CAF and CAI rlz pings are sent after ping timeout. """
+
+job.run_test('desktopui_CheckRlzPingSent')

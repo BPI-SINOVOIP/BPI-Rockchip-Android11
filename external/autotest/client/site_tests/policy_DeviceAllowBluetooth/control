@@ -1,0 +1,21 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_DeviceAllowBluetooth'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Called through the policy_DeviceAllowBluetooth test only. Verifies
+whether bluetooth is available or not. This test is kicked off via
+policy_DeviceServer server test.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_DeviceAllowBluetooth', **args_dict)

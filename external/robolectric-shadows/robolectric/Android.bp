@@ -1,0 +1,78 @@
+//#############################################
+// Compile Robolectric robolectric
+//#############################################
+
+java_library_host {
+    name: "Robolectric_robolectric",
+    libs: [
+        "Robolectric_shadows_framework",
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "Robolectric_resources",
+        "Robolectric_sandbox",
+        "Robolectric_junit",
+        "Robolectric_utils",
+        "robolectric-host-androidx-test-ext-junit",
+        "robolectric-host-androidx-test-monitor",
+        "robolectric-maven-ant-tasks-2.1.3",
+        "bouncycastle-unbundled",
+        "asm-commons-6.0",
+        "guava",
+        "robolectric-xstream-1.4.8",
+        "asm-tree-6.0",
+        "junit",
+        "robolectric-ant-1.8.0",
+        "asm-6.0",
+        "jsr305",
+        "robolectric-host-android_all",
+    ],
+    srcs: ["src/main/java/**/*.java"],
+
+    java_resources: [":robolectric-version.properties"],
+}
+
+genrule {
+    name: "robolectric-version.properties",
+    out: ["robolectric-version.properties"],
+    cmd: "echo -n 'robolectric.version=4.0-SNAPSHOT' > $(out)",
+}
+
+//#############################################
+// Compile Robolectric robolectric tests
+//#############################################
+java_test_host {
+    name: "Robolectric_robolectric_tests",
+    srcs: ["src/test/java/**/*.java"],
+    java_resource_dirs: ["src/test/resources"],
+    static_libs: [
+        "Robolectric_robolectric",
+        "Robolectric_shadows_framework",
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "Robolectric_resources",
+        "Robolectric_sandbox",
+        "Robolectric_junit",
+        "Robolectric_utils",
+        "robolectric-host-androidx-test-ext-junit",
+        "robolectric-host-androidx-test-monitor",
+        "robolectric-host-androidx-test-core",
+        "robolectric-maven-ant-tasks-2.1.3",
+        "mockito",
+        "bouncycastle-unbundled",
+        "hamcrest",
+        "robolectric-sqlite4java-0.282",
+        "asm-commons-6.0",
+        "robolectric-diffutils-1.3.0",
+        "guava",
+        "objenesis",
+        "robolectric-xstream-1.4.8",
+        "asm-tree-6.0",
+        "junit",
+        "icu4j",
+        "truth-prebuilt",
+        "robolectric-ant-1.8.0",
+        "asm-6.0",
+        "jsr305",
+    ],
+    libs: ["robolectric-host-android_all"],
+}

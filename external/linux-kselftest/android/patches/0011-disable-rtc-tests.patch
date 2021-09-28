@@ -1,0 +1,20 @@
+Do not run unnecessary or incompatible rtc tests on Android.
+
+--- a/tools/testing/selftests/rtc/rtctest.c
++++ b/tools/testing/selftests/rtc/rtctest.c
+@@ -49,6 +49,7 @@
+ 	       rtc_tm.tm_hour, rtc_tm.tm_min, rtc_tm.tm_sec);
+ }
+ 
++#ifndef __ANDROID__ // b/31578457
+ TEST_F_TIMEOUT(rtc, uie_read, NUM_UIE + 2) {
+ 	int i, rc, irq = 0;
+ 	unsigned long data;
+@@ -312,6 +313,7 @@
+ 	new = timegm((struct tm *)&tm);
+ 	ASSERT_EQ(new, secs);
+ }
++#endif
+ 
+ static void __attribute__((constructor))
+ __constructor_order_last(void)

@@ -1,0 +1,38 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "The Chromium OS Authors"
+NAME = "platform_PrinterPpds.all_test"
+TIME = "LENGTHY"
+TEST_TYPE = "client"
+CRITERIA = """
+The test fails in case of malfunctioning of CUPS printing stack (cupsd,
+cupstestppd, cups filters) for at least one of tested PPD files or when at least
+one of produced outputs differs from expected output (it is checked by comparing
+digests).
+"""
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+ATTRIBUTES = "suite:cups_weekly"
+JOB_RETRIES = 0
+
+DOC = """
+This is a test that for all available PPD files runs the following procedure:
+1. Add an Generic printer to CUPS server (user-provided ppd file).
+2. Print test PDF documents (from docs directory).
+3. Check CUPS logs for any errors.
+4. Compare digests of obtained outputs with expected ones (from digests
+    directory).
+5. Remove the printer.
+When printing the PDF, the printing request sent to a printer is caught by
+a fake printer. Intercepted output is verified when possible by comparing
+its digest with the expected one.
+See readme.txt for details.
+"""
+
+job.run_test(
+        'platform_PrinterPpds',
+        path_docs='docs',
+        path_ppds='ppds_all',
+        path_digests='digests')

@@ -1,0 +1,77 @@
+
+cc_defaults {
+    name: "libdynamic_depth-defaults",
+    cflags: [
+        "-DUNIX_ENV=1",
+        "-Werror",
+        "-Wno-reorder",
+        "-Wno-unused-parameter",
+        "-Wno-ignored-qualifiers",
+        "-Wno-macro-redefined",
+    ],
+    rtti: true,
+    cppflags: ["-fno-exceptions"],
+    clang: true,
+    sanitize: {
+        misc_undefined: [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+}
+
+cc_library_headers {
+  name: "libdynamic_depth-public_headers",
+  export_include_dirs: ["includes"],
+}
+
+cc_library_headers {
+  name: "libdynamic_depth-internal_headers",
+  export_include_dirs: ["internal"],
+}
+
+cc_library {
+    name: "libdynamic_depth",
+    defaults: ["libdynamic_depth-defaults"],
+    vendor_available: false,
+    header_libs: [
+        "libdynamic_depth-public_headers",
+        "libdynamic_depth-internal_headers",
+    ],
+    srcs: ["internal/**/*.cc"],
+    shared_libs: [
+        "libbase",
+        "libimage_io",
+        "libxml2",
+    ],
+}
+
+cc_library_static {
+    name: "libdynamic_depth_ndk",
+    defaults: ["libdynamic_depth-defaults"],
+    vendor_available: false,
+    export_include_dirs: [
+        "includes",
+        "internal"
+    ],
+    srcs: ["internal/**/*.cc"],
+    shared_libs: [
+        "liblog",
+    ],
+    static_libs: [
+        "libimage_io_ndk",
+        "libbase_ndk",
+        "libxml2_ndk",
+    ],
+    cflags: [
+        "-fvisibility=hidden",
+        "-DSTATIC_LIBXML=1",
+    ],
+    sdk_version: "current",
+    stl: "c++_static",
+}

@@ -1,0 +1,36 @@
+//#############################################
+// Compile Robolectric resources
+//#############################################
+
+java_library_host {
+    name: "Robolectric_resources",
+    srcs: ["src/main/java/**/*.java"],
+    libs: [
+        "Robolectric_annotations",
+        "Robolectric_utils",
+        "guava",
+        "jsr305",
+    ],
+}
+
+//#############################################
+// Compile Robolectric resources tests
+//#############################################
+
+java_test_host {
+    name: "Robolectric_resources_tests",
+    srcs: ["src/test/java/**/*.java"],
+    static_libs: [
+        "Robolectric_resources",
+        "Robolectric_annotations",
+        "Robolectric_utils",
+        "mockito",
+        "hamcrest",
+        "guava",
+        "objenesis",
+        "junit",
+        "truth-prebuilt",
+        "jsr305",
+    ],
+    test_suites: ["general-tests"],
+}

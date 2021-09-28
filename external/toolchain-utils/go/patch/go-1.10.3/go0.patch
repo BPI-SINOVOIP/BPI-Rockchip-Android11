@@ -1,0 +1,27 @@
+diff --git src/go/build/deps_test.go src/go/build/deps_test.go
+index 29dbe47d29..53e0e287bc 100644
+--- src/go/build/deps_test.go
++++ src/go/build/deps_test.go
+@@ -191,7 +191,7 @@ var pkgDeps = map[string][]string{
+ 	"testing":          {"L2", "flag", "fmt", "internal/race", "os", "runtime/debug", "runtime/pprof", "runtime/trace", "time"},
+ 	"testing/iotest":   {"L2", "log"},
+ 	"testing/quick":    {"L2", "flag", "fmt", "reflect", "time"},
+-	"internal/testenv": {"L2", "OS", "flag", "testing", "syscall"},
++	"internal/testenv": {"L2", "OS", "os.exec", "flag", "testing", "syscall"},
+ 
+ 	// L4 is defined as L3+fmt+log+time, because in general once
+ 	// you're using L3 packages, use of fmt, log, or time is not a big deal.
+diff --git src/internal/testenv/testenv.go src/internal/testenv/testenv.go
+index 8f69fe0da5..d52b85e122 100644
+--- src/internal/testenv/testenv.go
++++ src/internal/testenv/testenv.go
+@@ -48,6 +48,9 @@ func HasGoBuild() bool {
+ 			return false
+ 		}
+ 	}
++	if _, err := exec.LookPath("go"); err != nil {
++	        return false
++	}
+ 	return true
+ }
+ 

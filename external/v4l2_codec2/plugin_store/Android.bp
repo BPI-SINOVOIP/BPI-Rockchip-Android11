@@ -1,0 +1,42 @@
+cc_library_shared {
+    name: "libc2plugin_store",
+    vendor: true,
+
+    defaults: [
+        "libcodec2-impl-defaults",
+    ],
+
+    srcs: [
+        "C2VdaBqBlockPool.cpp",
+        "C2VdaPooledBlockPool.cpp",
+        "V4L2PluginStore.cpp",
+        "VendorAllocatorLoader.cpp",
+    ],
+    export_include_dirs: [
+        "include",
+    ],
+
+    header_libs: [
+        "libcodec2_internal",
+    ],
+    shared_libs: [
+        "android.hardware.graphics.bufferqueue@2.0",
+        "libchrome",
+        "libcutils",
+        "libhardware",
+        "libhidlbase",
+        "libnativewindow",
+        "liblog",
+        "libstagefright_bufferpool@1.0",
+        "libstagefright_bufferqueue_helper",
+        "libstagefright_foundation",
+        "libui",
+    ],
+
+    cflags: [
+      "-Werror",
+      "-Wall",
+      "-Wno-unused-parameter",  // needed for libchrome/base codes
+      "-Wthread-safety",
+    ],
+}

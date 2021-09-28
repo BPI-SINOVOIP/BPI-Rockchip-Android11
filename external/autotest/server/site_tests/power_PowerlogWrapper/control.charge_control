@@ -1,0 +1,68 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "mqg"
+NAME = "power_PowerlogWrapper.charge_control"
+PURPOSE = "Measure power with powerlog tool while running a client test."
+CRITERIA = "This test is a wrapper for a client test."
+TIME = "LONG"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+This wrapper test automates the process of power measurement with powerlog tool
+while running a client test. It also uses Servo v4 to control charging and
+discharging the DUT. Please check the client test's control file for any
+hardware requirement, e.g. no AC power, no Ethernet.
+
+This test makes the following assumptions:
+1. Sweetberry config files are in directory
+/usr/lib64/python2.7/site-packages/servo/data/
+For example,
+/usr/lib64/python2.7/site-packages/servo/data/eve_rev7.board
+/usr/lib64/python2.7/site-packages/servo/data/eve_rev7.scenario
+
+2. The workstation (or where the autotest is kicked off from) should be in same
+timezone with the DUT.
+
+3. Servod is started for the Servo v4 connected to the DUT. AC should be plugged
+into the Servo v4.
+
+Sample usage:
+test_that <ip address of DUT> power_PowerlogWrapper --args \
+'test=power_LoadTest.fast servo_host=localhost servo_port=9999 sweetberry_interval=1 sweetberry_config=eve_rev7'
+
+What are the parameters:
+test: the client test to run in wrapper test; DUT power is measured during this
+      client test; required.
+servo_host: host of servod instance; required.
+servo_port: port that the servod instance is on; required.
+sweetberry_interval: number of seconds between each Sweetberry measurement;
+                     optional.
+sweetberry_config: use [].board and [].scenario as configuration file for
+                   Sweetberry measurement; optional.
+sweetberry_serial: serial number of sweetberry to use; If not supplied use
+                   the first sweetberry found; optional.
+pdash_note: User supplied note to tag the specific test; optional.
+"""
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('power_PowerlogWrapper', host=host, tag=NAME.split('.')[1],
+                 config=args_dict, charge_control=True)
+
+parallel_simple(run, machines)

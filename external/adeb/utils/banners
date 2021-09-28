@@ -1,0 +1,59 @@
+#!/bin/bash -x
+
+print_prepare_banner() {
+	c_info "Preparing device..."
+	if [ $FULL -eq 1 ]; then
+		c_info "Doing a full install."
+	else
+		c_info "Doing a base install."
+	fi
+	c_info ""
+}
+
+usage() {
+	c_info "USAGE:"
+	c_info "adeb"
+	c_info "	shell		Enter the androdeb shell environment and get to work!"
+	c_info "	remove		Remove androdeb from the device"
+	c_info "	git-pull	Git pull androdeb to update it on your host"
+	c_info "	pull		Copy files from the androdeb filesystem in the device"
+	c_info "	push		Copy files to the androdeb filesystem in the device"
+	c_info ""
+	c_info "	prepare		Prepare the device (when running for the first time)"
+	c_info "			By default, this will download and install a base image."
+	c_info "	** Folowing are the prepare options **"
+	c_info "	  --full	Pass this to prepare to download and install the full image which"
+	c_info "			contains compilers, editors, tracers etc."
+	c_info ""
+	c_info "	  --build	Instead of download, build and install the image onto the device"
+	c_info ""
+	c_info "	  --archive	Use archive for root fs (overrides all other prepare options)"
+	c_info ""
+	c_info "	  --buildtar	While preparing, also build a tar.gz.zip file of the filesystem,"
+	c_info "				this is how images that are downloaded by prepare are built"
+	c_info ""
+	c_info "	  --build-image	Build an ext4 .img with the base image and BCC (useful for Qemu)"
+	c_info ""
+	c_info "	** Folowing are misc build options **"
+	c_info "	  --tempdir	Use a specific temporary directory for build operation"
+	c_info "	  --arch		Specify an ARCH to build for (default arm64)"
+	c_info "	  --distro	Debian distro to base on (default is buster)"
+	c_info ""
+	c_info "	** Folowing are the options for BCC **"
+	c_info "	  --bcc		Build and install BCC onto the device, from source"
+	c_info "			BCC is already included in 'prepare --full'"
+	c_info ""
+	c_info "	  --kernelsrc	 Extract kernel headers for BCC from this directory"
+	c_info ""
+	c_info "	  --skip-install Pass this to --kernelsrc if you wish to only extra/install kernel headers"
+	c_info "			 and would like to exit after that (skips build/install of everything else)"
+	c_info ""
+	c_info "	** Folowing are device specific options ** "
+	c_info "	--device	Serial number of adb device."
+	c_info "	      -s	Serial number of adb device."
+	c_info ""
+	c_info "	--debug		Debug all execution."
+	exit 1
+}
+
+

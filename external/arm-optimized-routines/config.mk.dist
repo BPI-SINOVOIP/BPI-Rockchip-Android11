@@ -1,0 +1,55 @@
+# Example config.mk
+#
+# Copyright (c) 2018-2019, Arm Limited.
+# SPDX-License-Identifier: MIT
+
+# Subprojects to build
+SUBS = math string
+
+HOST_CC = gcc
+HOST_CFLAGS = -std=c99 -O2
+HOST_CFLAGS += -Wall -Wno-unused-function
+
+CC = $(CROSS_COMPILE)gcc
+CFLAGS = -std=c99 -pipe -O3
+CFLAGS += -Wall -Wno-missing-braces
+CFLAGS += -Werror=implicit-function-declaration
+
+# Enable debug info.
+HOST_CFLAGS += -g
+CFLAGS += -g
+
+# Optimize the shared libraries on aarch64 assuming they fit in 1M.
+#CFLAGS_SHARED = -fPIC -mcmodel=tiny
+
+# Use for cross compilation with gcc.
+#CROSS_COMPILE = aarch64-none-linux-gnu-
+
+# Use with cross testing.
+#EMULATOR = qemu-aarch64-static
+#EMULATOR = sh -c 'scp $$1 user@host:/dir && ssh user@host /dir/"$$@"' --
+
+# Additional flags for subprojects.
+math-cflags =
+math-ldlibs =
+math-ulpflags =
+math-testflags =
+string-cflags =
+
+# Use if mpfr is available on the target for ulp error checking.
+#math-ldlibs += -lmpfr -lgmp
+#math-cflags += -DUSE_MPFR
+
+# Use with gcc.
+math-cflags += -frounding-math -fexcess-precision=standard -fno-stack-protector
+math-cflags += -ffp-contract=fast -fno-math-errno
+
+# Use with clang.
+#math-cflags += -ffp-contract=fast
+
+# Disable vector math code
+#math-cflags += -DWANT_VMATH=0
+
+# Disable fenv checks
+#math-ulpflags = -q -f
+#math-testflags = -nostatus

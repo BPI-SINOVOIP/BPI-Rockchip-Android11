@@ -1,0 +1,20 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = "power_LowMemorySuspend"
+PURPOSE = "Low memory suspension tests."
+CRITERIA = """Fails if system hang or reboot during this test."""
+ATTRIBUTES = "suite:crosbolt_perf_weekly"
+AUTHOR="Vovo Yang"
+TIME = "LONG"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+DOC = """
+This is a suspending stress test. It suspends the system many times
+when memory is low. It simulates the memory fragmentation by creating
+many tabs and cycling tabs.
+"""
+
+job.run_test('power_LowMemorySuspend')

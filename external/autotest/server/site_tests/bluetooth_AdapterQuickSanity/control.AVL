@@ -1,0 +1,32 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-chameleon'
+NAME = 'bluetooth_AdapterQuickSanity.AVL'
+PURPOSE = ('Package of Bluetooth quick sanity tests')
+CRITERIA = 'Pass all sanity test'
+ATTRIBUTES = 'suite:bluetooth'
+TIME = 'MEDIUM' # Takes 10 minutes on Guado
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_ble_hid'
+
+DOC = """
+    The AVL test run a subset of tests in quick sanity.
+    Tests included here should be very robust and stable.
+    """
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterQuickSanity', host=host,
+                  num_iterations=1, flag='AVL')
+
+parallel_simple(run, machines)

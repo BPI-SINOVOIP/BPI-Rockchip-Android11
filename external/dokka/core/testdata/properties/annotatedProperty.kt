@@ -1,0 +1,1 @@
+@Strictfp var property = "test"

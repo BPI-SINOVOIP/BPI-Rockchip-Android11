@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Copyright (c) 2015 Google Inc.
+#
+# This is a pre-push hook that does the following before uploading a
+# CL for review:
+# 1) check that python sources have been formatted with yapf.
+# 2) allows the user to run the unit tests.
+
+mydir="$(dirname "$(readlink -m "$0")")"
+
+z40=0000000000000000000000000000000000000000
+
+while IFS=' ' read local_ref local_sha remote_ref remote_sha; do
+  if [[ "$local_sha" != $z40 ]]; then
+    if [[ "$remote_sha" == $z40 ]]; then
+      # New branch, examine commit on top of branch.
+      range="$local_sha"
+    else
+      # Update to existing branch, examine new commits
+      range="$remote_sha..$local_sha"
+    fi
+    all_files="$(git show --pretty="format:" --name-only "${range}")"
+    # Note that ${all_files} may include files that were deleted. Hence, we
+    # ignore any complaints about missing files.
+    IGNORE_MISSING=1 "${mydir}/check-presubmit" ${all_files} || exit 1
+  fi
+done
+
+exit 0

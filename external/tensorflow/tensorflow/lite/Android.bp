@@ -1,0 +1,128 @@
+// Copyright (C) 2017 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "tflite_defaults",
+    header_libs: [
+        "tensorflow_headers",
+    ],
+    cflags: [
+        "-DTF_LITE_DISABLE_X86_NEON",
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-Wno-unused-parameter",
+    ],
+    shared_libs: [
+        "liblog",
+    ],
+}
+
+cc_library_static {
+    name: "libtflite_context",
+    defaults: ["tflite_defaults"],
+    srcs: ["c/common.c"],
+    cflags: [
+        "-Wno-typedef-redefinition",
+        "-Wno-visibility",
+    ],
+}
+
+cc_library_static {
+    name: "libtflite_framework",
+    defaults: ["tflite_defaults"],
+    rtti: true,
+    srcs: [
+        "allocation.cc",
+        "arena_planner.cc",
+        "core/api/error_reporter.cc",
+        "core/api/flatbuffer_conversions.cc",
+        "core/api/op_resolver.cc",
+        "core/api/tensor_utils.cc",
+        "core/subgraph.cc",
+        "delegates/nnapi/nnapi_delegate.cc",
+        "delegates/nnapi/quant_lstm_sup.cc",
+        "external_cpu_backend_context.cc",
+        "graph_info.cc",
+        "interpreter.cc",
+        "minimal_logging.cc",
+        "minimal_logging_android.cc",
+        "mmap_allocation.cc",
+        "model.cc",
+        "mutable_op_resolver.cc",
+        "nnapi/nnapi_implementation.cc",
+        "nnapi/nnapi_util.cc",
+        "optional_debug_tools.cc",
+        "simple_memory_arena.cc",
+        "stderr_reporter.cc",
+        "string_util.cc",
+        "tools/optimize/sparsity/format_converter.cc",
+        "util.cc",
+        "kernels/cpu_backend_context.cc",
+        "kernels/cpu_backend_gemm_eigen.cc",
+        "kernels/eigen_support.cc",
+        "experimental/resource/resource_variable.cc",
+        "experimental/ruy/allocator.cc",
+        "experimental/ruy/block_map.cc",
+        "experimental/ruy/blocking_counter.cc",
+        "experimental/ruy/context.cc",
+        "experimental/ruy/detect_arm.cc",
+        "experimental/ruy/detect_x86.cc",
+        "experimental/ruy/have_built_path_for_avx2.cc",
+        "experimental/ruy/have_built_path_for_avx512.cc",
+        "experimental/ruy/have_built_path_for_avxvnni.cc",
+        "experimental/ruy/have_built_path_for_sse42.cc",
+        "experimental/ruy/kernel_arm32.cc",
+        "experimental/ruy/kernel_arm64.cc",
+        "experimental/ruy/pack_arm.cc",
+        "experimental/ruy/prepacked_cache.cc",
+        "experimental/ruy/thread_pool.cc",
+        "experimental/ruy/trmul.cc",
+        "experimental/ruy/tune.cc",
+        "experimental/ruy/wait.cc",
+    ],
+    header_libs: [
+        "libeigen",
+        "flatbuffer_headers",
+        "gemmlowp_headers",
+    ],
+    cflags: [
+        "-Wno-deprecated-declarations",
+        "-Wno-extern-c-compat",
+        "-Wno-ignored-attributes",
+        "-Wno-invalid-partial-specialization",
+        "-Wno-mismatched-tags",
+        "-Wno-sign-compare",
+        "-Wno-unused-const-variable",
+        "-Wno-unused-lambda-capture",
+    ],
+}
+
+cc_library_shared {
+    name: "libtflite",
+    defaults: ["tflite_defaults"],
+    shared_libs: [
+        "libtextclassifier_hash",
+    ],
+    whole_static_libs: [
+        "libtflite_context",
+        "libtflite_framework",
+        "libtflite_kernels",
+    ],
+    stl: "libc++_static",
+}
+
+build = [
+    "tflite_static.bp",
+]

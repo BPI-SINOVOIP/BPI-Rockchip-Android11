@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+  <!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+  <!ENTITY version SYSTEM "version.xml">
+]>
+
+<chapter id="test-programs">
+  <title>Test Programs</title>
+
+  <refentry id="igt-test-programs-common-features">
+    <refnamediv>
+      <refname>Common Features</refname>
+      <refpurpose>Features available in all test programs</refpurpose>
+    </refnamediv>
+    <refsect1>
+      <title>Command Line Options</title>
+      <para>
+        All tests support the following command line options:
+
+        <variablelist>
+          <varlistentry>
+            <term><option>--list-subtests</option></term>
+            <listitem><para>
+                list the available subtests and exit
+            </para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><option>--run-subtest <replaceable>subtest</replaceable></option></term>
+            <listitem><para>
+                run the specified subtest
+            </para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><option>--debug[=log-domain]</option></term>
+            <listitem><para>
+                print extra debugging information when running tests and
+                optionally only show the messages from the specified log domain
+                (use "application" to specify the default application domain)
+            </para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><option>--help-description</option></term>
+            <listitem><para>
+                print a short description of the test and exit
+            </para></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term><option>--help</option></term>
+            <listitem><para>
+                print help and exit
+            </para></listitem>
+          </varlistentry>
+        </variablelist>
+      </para>
+    </refsect1>
+
+    <refsect1>
+      <title>Exit Status</title>
+      <para>
+      The following exit status codes are defined:
+
+      <informaltable pgwide="1" frame="none">
+        <tgroup cols="3" align="left">
+          <thead>
+            <row><entry>Name</entry><entry>Value</entry><entry>Description</entry></row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>#IGT_EXIT_SUCCESS</entry>
+              <entry>0</entry>
+              <entry>The test was successful</entry>
+            </row>
+            <row>
+              <entry>#IGT_EXIT_SKIP</entry>
+              <entry>77</entry>
+              <entry>The test was skipped</entry>
+            </row>
+            <row>
+              <entry>#IGT_EXIT_INVALID</entry>
+              <entry>79</entry>
+              <entry>An invalid option or subtest was specified</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+
+      Any other exit status indicates a test failure.
+    </para>
+    </refsect1>
+  </refentry>
+
+  <refentry id="igt-amdgpu-tests">
+    <refnamediv>
+      <refname>AMDGPU Tests</refname>
+      <refpurpose>Tests for amdgpu driver behaviour</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_amdgpu_programs.xml"/>
+    <xi:include href="igt_test_programs_amdgpu_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-chamelium-tests">
+    <refnamediv>
+      <refname>Chamelium Tests</refname>
+      <refpurpose>Tests using the Chamelium platform</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_chamelium_programs.xml"/>
+    <xi:include href="igt_test_programs_chamelium_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-core-tests">
+    <refnamediv>
+      <refname>Core Tests</refname>
+      <refpurpose>Tests for core drm ioctls and behaviour</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_core_programs.xml"/>
+    <xi:include href="igt_test_programs_core_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-debugfs-tests">
+    <refnamediv>
+      <refname>Debugfs Tests</refname>
+      <refpurpose>Tests for debugfs behaviour</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_debugfs_programs.xml"/>
+    <xi:include href="igt_test_programs_debugfs_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-drm-tests">
+    <refnamediv>
+      <refname>DRM Tests</refname>
+      <refpurpose>Tests for libdrm behaviour</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_drm_programs.xml"/>
+    <xi:include href="igt_test_programs_drm_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-gem-tests">
+    <refnamediv>
+      <refname>GEM Tests</refname>
+      <refpurpose>Tests for the graphics execution manager</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_gem_programs.xml"/>
+    <xi:include href="igt_test_programs_gem_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-gen3-tests">
+    <refnamediv>
+      <refname>Gen 3 Tests</refname>
+      <refpurpose>Tests specific to gen 3</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_gen3_programs.xml"/>
+    <xi:include href="igt_test_programs_gen3_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-gen7-tests">
+    <refnamediv>
+      <refname>Gen 7 Tests</refname>
+      <refpurpose>Tests specific to gen 7</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_gen7_programs.xml"/>
+    <xi:include href="igt_test_programs_gen7_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-gvt-tests">
+    <refnamediv>
+      <refname>GVT Tests</refname>
+      <refpurpose>Tests for graphics virtualization technology</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_gvt_programs.xml"/>
+    <xi:include href="igt_test_programs_gvt_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-i915-tests">
+    <refnamediv>
+      <refname>i915 Tests</refname>
+      <refpurpose>Tests for overall i915 driver behaviour</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_i915_programs.xml"/>
+    <xi:include href="igt_test_programs_i915_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-kms-tests">
+    <refnamediv>
+      <refname>KMS Tests</refname>
+      <refpurpose>Tests for kernel mode setting</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_kms_programs.xml"/>
+    <xi:include href="igt_test_programs_kms_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-meta-tests">
+    <refnamediv>
+      <refname>Meta Tests</refname>
+      <refpurpose>Tests for the CI system itself</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_meta_programs.xml"/>
+    <xi:include href="igt_test_programs_meta_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-perf-tests">
+    <refnamediv>
+      <refname>Perf Tests</refname>
+      <refpurpose>Tests for the performance metrics</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_perf_programs.xml"/>
+    <xi:include href="igt_test_programs_perf_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-pm-tests">
+    <refnamediv>
+      <refname>PM Tests</refname>
+      <refpurpose>Tests for power management features</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_pm_programs.xml"/>
+    <xi:include href="igt_test_programs_pm_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-prime-tests">
+    <refnamediv>
+      <refname>Prime Tests</refname>
+      <refpurpose>Tests for buffer sharing</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_prime_programs.xml"/>
+    <xi:include href="igt_test_programs_prime_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-sw-sync-tests">
+    <refnamediv>
+      <refname>SW Sync Tests</refname>
+      <refpurpose>Tests for software sync (fencing)</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_sw_sync_programs.xml"/>
+    <xi:include href="igt_test_programs_sw_sync_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-testdisplay-tests">
+    <refnamediv>
+      <refname>Display Tests</refname>
+      <refpurpose>Tests for display validation</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_testdisplay_programs.xml"/>
+    <xi:include href="igt_test_programs_testdisplay_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-tools-tests">
+    <refnamediv>
+      <refname>Tools Tests</refname>
+      <refpurpose>Tests for IGT tools behaviour</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_tools_programs.xml"/>
+    <xi:include href="igt_test_programs_tools_description.xml"/>
+  </refentry>
+
+  <refentry id="igt-vgem-tests">
+    <refnamediv>
+      <refname>vGEM Tests</refname>
+      <refpurpose>Tests for the vitual graphics execution manager</refpurpose>
+    </refnamediv>
+    <xi:include href="igt_test_programs_vgem_programs.xml"/>
+    <xi:include href="igt_test_programs_vgem_description.xml"/>
+  </refentry>
+
+  <glossary>
+    <title>Glossary</title>
+
+    <para>The following terms are commonly used in test names to describe
+      various features of the test and can be used to filter and select
+      particular tests.</para>
+
+    <glossentry id="invalid">
+      <glossterm>invalid</glossterm>
+      <glossdef>
+        <para>Negative tests to validate kernel interface input validation.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="hang">
+      <glossterm>hang</glossterm>
+      <glossdef>
+        <para>Tests that provoke gpu hangs.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="swap">
+      <glossterm>swap</glossterm>
+      <glossdef>
+        <para>Tests that force their full working sets through swap.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="thrash">
+      <glossterm>thrash</glossterm>
+      <glossdef>
+        <para>Tests that tend to have really slow forward progress due to gtt/memory/.. thrashing.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="crc">
+      <glossterm>crc</glossterm>
+      <glossdef>
+        <para>Tests that use the display CRC infrastructure to check the results.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="tiled">
+      <glossterm>tiled</glossterm>
+      <glossdef>
+        <para>Tests that exercise behaviour on tiled buffers.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="tiling">
+      <glossterm>tiling</glossterm>
+      <glossdef>
+        <para>Tests that exercise behaviour on tiled buffers.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="rte">
+      <glossterm>rte</glossterm>
+      <glossdef>
+        <para>Runtime environment checks.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="ctx">
+      <glossterm>ctx</glossterm>
+      <glossdef>
+        <para>Tests that exercise the hardware context support.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="render">
+      <glossterm>render</glossterm>
+      <glossdef>
+        <para>Tests which apply to the render ring.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="blt">
+      <glossterm>blt</glossterm>
+      <glossdef>
+        <para>Tests which apply to the blt ring.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="bsd">
+      <glossterm>bsd</glossterm>
+      <glossdef>
+        <para>Tests which apply to the bsd ring.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="vebox">
+      <glossterm>vebox</glossterm>
+      <glossdef>
+        <para>Tests which apply to the vebox ring.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="exec">
+      <glossterm>exec</glossterm>
+      <glossdef>
+        <para>Tests that exercise the execbuf code in various ways.</para>
+      </glossdef>
+    </glossentry>
+
+    <glossentry id="rpm">
+      <glossterm>rpm</glossterm>
+      <glossdef>
+        <para>Runtime power management tests.</para>
+      </glossdef>
+    </glossentry>
+  </glossary>
+</chapter>

@@ -1,0 +1,21 @@
+{
+    "platform": "hatch",
+    "chrome_ec": true,
+    "ec_capability": [
+        "battery",
+        "cbi",
+        "charging",
+        "keyboard",
+        "lid",
+        "x86",
+        "usb",
+        "smart_usb_charge"
+    ],
+    "firmware_screen": 15,
+    "spi_voltage": "pp3300",
+    "dark_resume_capable": true,
+    "custom_usb_enable_names": [
+        "EN_USB_A_5V"
+    ],
+    "smm_store": false
+}

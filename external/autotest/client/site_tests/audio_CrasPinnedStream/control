@@ -1,0 +1,30 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'The Chromium OS Audio Team, chromeos-audio@google.com'
+NAME = 'audio_CrasPinnedStream'
+PURPOSE = """
+Test that all audio recording still works when multiple devices records
+simultaneously. This is essential for enabling assistant.
+"""
+CRITERIA = """
+Check if the internal mic can record samples while the headset is also
+recording.
+"""
+ATTRIBUTES = "suite:audio, suite:partners"
+TIME = 'SHORT'
+TEST_CATEGORY = 'PLAYBACKCAPTURE'
+TEST_CLASS = "audio"
+TEST_TYPE = 'client'
+DEPENDENCIES = 'audio_loopback_dongle'
+
+DOC = """
+Test that we can record from multiple devices simultaneously.
+
+NOTE: For this test to pass you need to have the line out looped back to mic-in.
+This can be through a 3.5mm male-to-male cable or a loopback dongle depending on
+your device.
+"""
+
+job.run_test('audio_CrasPinnedStream', constraints=['rms_value > 0.05'])

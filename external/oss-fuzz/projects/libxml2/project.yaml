@@ -1,0 +1,20 @@
+homepage: "http://www.xmlsoft.org/"
+primary_contact: "wellnhofer@aevum.de"
+vendor_ccs:
+  - "akilsrin@apple.com"
+  - "ddkilzer@apple.com"
+  - "benl@google.com"
+sanitizers:
+  - address
+  - memory
+  - undefined
+labels:
+  libxml2_xml_reader_for_file_fuzzer:
+    - sundew
+architectures:
+  - x86_64
+  - i386
+fuzzing_engines:
+  - libfuzzer
+  - honggfuzz
+  - afl

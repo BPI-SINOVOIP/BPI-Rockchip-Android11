@@ -1,0 +1,112 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "BISECT_STAGE=someBisectStage",
+      "HOME=/user/home"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/env",
+          "args": [
+            "python",
+            "-c",
+            "\nimport bisect_driver\nimport shlex\nimport sys\n\ndef ExpandArgs(args, target):\n\tfor arg in args:\n\t\tif arg[0] == '@':\n\t\t\twith open(arg[1:], 'rb') as f:\n\t\t\t\tExpandArgs(shlex.split(f.read()), target)\n\t\telse:\n\t\t\ttarget.append(arg)\n\treturn target\n\nstage = sys.argv[1]\ndir = sys.argv[2]\nexecargs = ExpandArgs(sys.argv[3:], [])\n\nsys.exit(bisect_driver.bisect_driver(stage, dir, execargs))\n",
+            "someBisectStage",
+            "/user/home/ANDROID_BISECT",
+            "/tmp/stable/clang.real",
+            "main.cc"
+          ],
+          "env_updates": [
+            "PYTHONPATH=/somepath/test_binary"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "BISECT_STAGE=someBisectStage",
+      "BISECT_DIR=someBisectDir",
+      "HOME=/user/home"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/env",
+          "args": [
+            "python",
+            "-c",
+            "\nimport bisect_driver\nimport shlex\nimport sys\n\ndef ExpandArgs(args, target):\n\tfor arg in args:\n\t\tif arg[0] == '@':\n\t\t\twith open(arg[1:], 'rb') as f:\n\t\t\t\tExpandArgs(shlex.split(f.read()), target)\n\t\telse:\n\t\t\ttarget.append(arg)\n\treturn target\n\nstage = sys.argv[1]\ndir = sys.argv[2]\nexecargs = ExpandArgs(sys.argv[3:], [])\n\nsys.exit(bisect_driver.bisect_driver(stage, dir, execargs))\n",
+            "someBisectStage",
+            "someBisectDir",
+            "/tmp/stable/clang.real",
+            "main.cc"
+          ],
+          "env_updates": [
+            "PYTHONPATH=/somepath/test_binary"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "BISECT_STAGE=someBisectStage",
+      "BISECT_DIR=someBisectDir",
+      "HOME=/user/home"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "/tmp/stable/clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/env",
+          "args": [
+            "python",
+            "-c",
+            "\nimport bisect_driver\nimport shlex\nimport sys\n\ndef ExpandArgs(args, target):\n\tfor arg in args:\n\t\tif arg[0] == '@':\n\t\t\twith open(arg[1:], 'rb') as f:\n\t\t\t\tExpandArgs(shlex.split(f.read()), target)\n\t\telse:\n\t\t\ttarget.append(arg)\n\treturn target\n\nstage = sys.argv[1]\ndir = sys.argv[2]\nexecargs = ExpandArgs(sys.argv[3:], [])\n\nsys.exit(bisect_driver.bisect_driver(stage, dir, execargs))\n",
+            "someBisectStage",
+            "someBisectDir",
+            "/tmp/stable/clang.real",
+            "main.cc"
+          ],
+          "env_updates": [
+            "PYTHONPATH=/somepath/test_binary"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  }
+]

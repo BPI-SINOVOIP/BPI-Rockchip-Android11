@@ -1,0 +1,93 @@
+cc_defaults {
+    name: "curl_common_defaults",
+    cflags: [
+        "-Wpointer-arith",
+        "-Wwrite-strings",
+        "-Wunused",
+        "-Winline",
+        "-Wnested-externs",
+        "-Wmissing-declarations",
+        "-Wmissing-prototypes",
+        "-Wno-long-long",
+        "-Wfloat-equal",
+        "-Wno-multichar",
+        "-Wno-sign-compare",
+        "-Wno-format-nonliteral",
+        "-Wendif-labels",
+        "-Wstrict-prototypes",
+        "-Wdeclaration-after-statement",
+        "-Wno-system-headers",
+        "-DHAVE_CONFIG_H",
+        // TODO(avakulenko): Android.mk had this for OS version string:
+        // "Android $(PLATFORM_VERSION) $(TARGET_ARCH_VARIANT)"
+        // but Soong doesn't have access to those config variables yet.
+        "-DOS=\"Android\"",
+        "-Werror",
+        // Bug: http://b/29823425 Disable -Wvarargs for Clang update to r271374
+        "-Wno-varargs",
+    ],
+    local_include_dirs: ["include", "lib"],
+    multilib: {
+        lib32: {
+            cflags: [
+                "-DSIZEOF_LONG=4",
+                "-DSIZEOF_LONG_LONG=8",
+                "-DSIZEOF_SIZE_T=4",
+                "-DSIZEOF_TIME_T=4",
+            ],
+        },
+        lib64: {
+            cflags: [
+                "-DSIZEOF_LONG=8",
+                "-DSIZEOF_LONG_LONG=8",
+                "-DSIZEOF_SIZE_T=8",
+                "-DSIZEOF_TIME_T=8",
+            ],
+        },
+    },
+}
+
+cc_library {
+    name: "libcurl",
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
+    defaults: ["curl_common_defaults"],
+    export_include_dirs: ["include"],
+    host_supported: true,
+    cflags: [
+        "-DBUILDING_LIBCURL",
+    ],
+    srcs:[
+        "lib/**/*.c",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "libssl",
+        "libz",
+    ],
+    target: {
+        host: {
+            cflags: ["-D_GNU_SOURCE=1"],
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
+    unique_host_soname: true,
+}
+
+cc_binary {
+    name: "curl",
+    defaults: ["curl_common_defaults"],
+    srcs: [
+        "src/*.c",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "libssl",
+        "libz",
+    ],
+    static_libs: ["libcurl"],
+}

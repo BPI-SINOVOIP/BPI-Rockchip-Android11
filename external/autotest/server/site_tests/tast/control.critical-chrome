@@ -1,0 +1,44 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'Chromium OS team'
+NAME = 'tast.critical-chrome'
+TIME = 'MEDIUM'
+TEST_TYPE = 'Server'
+# Android changes can't break Chrome tests (so we don't need to run them in the
+# Android PFQ), but OS changes can (so we need to run them in the CQ).
+ATTRIBUTES = 'suite:bvt-tast-cq, suite:bvt-tast-chrome-pfq'
+MAX_RESULT_SIZE_KB = 50 * 1024
+
+# tast.py uses binaries installed from autotest_server_package.tar.bz2.
+REQUIRE_SSP = True
+
+DOC = '''
+Run the Tast must-pass Chrome test suite.
+
+Tast is an integration-testing framework analagous to the test-running portion
+of Autotest. See https://chromium.googlesource.com/chromiumos/platform/tast/ for
+more information.
+
+This test runs Chrome-dependent Tast-based tests that are required to pass
+against a remote DUT. It fails if any individual Tast tests fail.
+
+See http://go/tast-failures for information about investigating failures.
+'''
+
+def run(machine):
+    # TODO(crbug.com/992303): Fix android condition.
+    job.run_test('tast',
+                 host=hosts.create_host(machine),
+                 test_exprs=['('
+                             '!disabled && '
+                             '("group:mainline" || !"group:*") && '
+                             '!informational && '
+                             '"dep:chrome" && '
+                             '!"dep:android*"'
+                             ')'],
+                 ignore_test_failures=False, max_run_sec=3600,
+                 command_args=args)
+
+parallel_simple(run, machines)

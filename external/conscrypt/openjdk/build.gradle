@@ -1,0 +1,459 @@
+import aQute.bnd.gradle.BundleTaskConvention
+import org.codehaus.groovy.runtime.InvokerHelper
+
+apply plugin: 'biz.aQute.bnd.builder'
+
+description = 'Conscrypt: OpenJdk'
+
+ext {
+    jniSourceDir = "$rootDir/common/src/jni"
+    assert file("$jniSourceDir").exists()
+
+    // Build the list of classifiers that will be used in the build.
+    arch32Name = 'x86'
+    arch64Name = 'x86_64'
+    nativeClassifiers = []
+    nativeClassifier64Bit = null
+    nativeClassifier32Bit = null
+    preferredClassifier = null
+    preferredSourceSet = null
+    preferredNativeFileDir = null
+    if (build64Bit) {
+        // Add the 64-Bit classifier first, as the preferred classifier.
+        nativeClassifier64Bit = classifierFor(osName, arch64Name)
+        nativeClassifiers += nativeClassifier64Bit
+        preferredClassifier = nativeClassifier64Bit
+        preferredSourceSet = sourceSetName(preferredClassifier)
+        preferredNativeFileDir = nativeResourcesDir(preferredClassifier)
+    }
+    if (build32Bit) {
+        nativeClassifier32Bit = classifierFor(osName, arch32Name)
+        nativeClassifiers += nativeClassifier32Bit
+        if (preferredClassifier == null) {
+            preferredClassifier = nativeClassifier32Bit
+            preferredSourceSet = sourceSetName(preferredClassifier)
+            preferredNativeFileDir = nativeResourcesDir(preferredClassifier)
+        }
+    }
+}
+
+sourceSets {
+
+    main {
+        java {
+            srcDirs += "${rootDir}/common/src/main/java"
+            srcDirs += project(':conscrypt-constants').sourceSets.main.java.srcDirs
+        }
+        resources {
+            srcDirs += "build/generated/resources"
+        }
+    }
+
+    platform {
+        java {
+            srcDirs = [ "src/main/java" ]
+            includes = [ "org/conscrypt/Platform.java" ]
+        }
+    }
+
+    test {
+        java {
+            srcDirs += "${rootDir}/common/src/test/java"
+        }
+        resources {
+            srcDirs += "${rootDir}/common/src/test/resources"
+            // This shouldn't be needed but seems to help IntelliJ locate the native artifact.
+            srcDirs += preferredNativeFileDir
+        }
+    }
+
+    // Add the source sets for each of the native build
+    nativeClassifiers.each { nativeClassifier ->
+        def sourceSetName = sourceSetName(nativeClassifier)
+
+        // Main sources for the native build
+        "$sourceSetName" {
+            output.dir(nativeResourcesDir(nativeClassifier), builtBy: "copyNativeLib${sourceSetName}")
+        }
+    }
+}
+
+compileJava {
+    dependsOn generateProperties
+}
+
+task platformJar(type: Jar) {
+    from sourceSets.platform.output
+}
+
+if (isExecutableOnPath('cpplint')) {
+    task cpplint(type: Exec) {
+        executable = 'cpplint'
+
+        // TODO(nmittler): Is there a better way of getting the JNI sources?
+        def pattern = ['**/*.cc', '**/*.h']
+        def sourceFiles = fileTree(dir: jniSourceDir, includes: pattern).asPath.tokenize(':')
+        // Adding roots so that class #ifdefs don't require full path from the project root.
+        args = sourceFiles
+
+        // Capture stderr from the process
+        errorOutput = new ByteArrayOutputStream();
+
+        // Need to ignore exit value so that doLast will execute.
+        ignoreExitValue = true
+
+        doLast {
+            // Create the report file.
+            def reportDir = file("${buildDir}/cpplint")
+            reportDir.mkdirs();
+            def reportFile = new File(reportDir, "report.txt")
+            def reportStream = new FileOutputStream(reportFile)
+
+            try {
+                // Check for failure
+                if (execResult != null) {
+                    execResult.assertNormalExitValue()
+                }
+            } catch (Exception e) {
+                // The process failed - get the error report from the stderr.
+                String report = errorOutput.toString();
+
+                // Write the report to the console.
+                System.err.println(report)
+
+                // Also write the report file.
+                reportStream.write(report.bytes);
+
+                // Extension method cpplint.output() can be used to obtain the report
+                ext.output = {
+                    return report
+                }
+
+                // Rethrow the exception to terminate the build.
+                throw e;
+            } finally {
+                reportStream.close();
+            }
+        }
+    }
+    check.dependsOn cpplint
+}
+
+configurations {
+    publicApiDocs
+    platform
+}
+
+artifacts {
+    platform platformJar
+}
+
+apply from: "$rootDir/gradle/publishing.gradle"
+publishing.publications.maven {
+    artifact sourcesJar
+    artifact javadocJar
+}
+
+jar.manifest {
+    attributes ('BoringSSL-Version' : boringSslVersion,
+                'Automatic-Module-Name' : 'org.conscrypt',
+                'Bundle-SymbolicName': 'org.conscrypt',
+                '-exportcontents': 'org.conscrypt.*')
+}
+
+dependencies {
+    // This is used for the @Internal annotation processing in JavaDoc
+    publicApiDocs project(':conscrypt-api-doclet')
+
+    // This is listed as compile-only, but we absorb its contents.
+    compileOnly project(':conscrypt-constants')
+
+    testImplementation project(':conscrypt-constants'),
+            project(':conscrypt-testing'),
+            libraries.junit,
+            libraries.mockito
+
+    testRuntimeClasspath sourceSets["$preferredSourceSet"].output
+
+    platformCompileOnly sourceSets.main.output
+}
+
+nativeClassifiers.each { nativeClassifier ->
+    // Create the JAR task and add it's output to the published archives for this project
+    addNativeJar(nativeClassifier)
+
+    // Build the classes as part of the standard build.
+    classes.dependsOn sourceSet(nativeClassifier).classesTaskName
+}
+
+// Adds a JAR task for the native library.
+def addNativeJar(nativeClassifier) {
+    // Create a JAR for this configuration and add it to the output archives.
+    SourceSet sourceSet = sourceSet(nativeClassifier)
+    def jarTaskName = sourceSet.jarTaskName
+    task "$jarTaskName"(type: Jar) { Jar t ->
+        // Depend on the regular classes task
+        dependsOn classes
+        manifest = jar.manifest
+        classifier = nativeClassifier
+
+        from sourceSet.output + sourceSets.main.output
+
+        // add OSGI headers
+        t.convention.plugins.bundle = new BundleTaskConvention(t)
+        t.doLast {
+            t.buildBundle()
+        }
+    }
+
+    def jarTask = tasks["$jarTaskName"]
+
+    // Add the jar task to the standard build.
+    jar.dependsOn jarTask
+
+    // Add it to the publishing archives list.
+    publishing.publications.maven.artifact jarTask
+}
+
+
+// Check which version
+def javaError = new ByteArrayOutputStream()
+exec {
+    executable test.executable
+    System.out.println("Running tests with java executable: " + test.executable + ".")
+    args = ['-version']
+    ignoreExitValue true
+    errorOutput = javaError
+}
+
+def suiteClass = (javaError.toString() =~ /"1[.]7[.].*"/) ?
+        "org/conscrypt/ConscryptJava7Suite.class" : "org/conscrypt/ConscryptSuite.class";
+
+test {
+    include suiteClass, "org/conscrypt/ConscryptOpenJdkSuite.class"
+}
+
+task testEngineSocket(type: Test) {
+    include suiteClass, "org/conscrypt/ConscryptOpenJdkSuite.class"
+    InvokerHelper.setProperties(testLogging, test.testLogging.properties)
+    systemProperties = test.systemProperties
+    systemProperty "org.conscrypt.useEngineSocketByDefault", true
+}
+check.dependsOn testEngineSocket
+
+// Tests that involve interoperation with the OpenJDK TLS provider (generally to
+// test renegotiation, since we don't support initiating renegotiation but do
+// support peer-initiated renegotiation).  The JDK TLS provider doesn't work
+// if Conscrypt is installed as the default provider, so these need to live in
+// a different task than the other tests, most of which need Conscrypt to be
+// installed to function.
+task testInterop(type: Test) {
+    include "org/conscrypt/ConscryptEngineTest.class"
+    include "org/conscrypt/RenegotiationTest.class"
+}
+check.dependsOn testInterop
+
+jacocoTestReport {
+    additionalSourceDirs.from files("$rootDir/openjdk/src/test/java", "$rootDir/common/src/main/java")
+    executionData tasks.withType(Test)
+}
+
+javadoc {
+    dependsOn(configurations.publicApiDocs)
+    options.doclet = "org.conscrypt.doclet.FilterDoclet"
+    options.docletpath = configurations.publicApiDocs.files as List
+}
+
+model {
+    platforms {
+        x86 {
+            architecture arch32Name
+        }
+        x86_64 {
+            architecture arch64Name
+        }
+    }
+
+    buildTypes {
+        release
+    }
+
+    components {
+        // Builds the JNI library.
+        conscrypt_openjdk_jni(NativeLibrarySpec) {
+            if (build32Bit) { targetPlatform arch32Name }
+            if (build64Bit) { targetPlatform arch64Name }
+
+            sources {
+                cpp {
+                    source {
+                        srcDirs "$jniSourceDir/main/cpp"
+                        include "**/*.cc"
+                    }
+                }
+            }
+
+            binaries {
+                // Build the JNI lib as a shared library.
+                withType (SharedLibraryBinarySpec) {
+                    cppCompiler.define "CONSCRYPT_OPENJDK"
+
+                    // Set up 32-bit vs 64-bit build
+                    def building64Bit = false
+                    def libPath
+                    if (targetPlatform.getArchitecture().getName() == "x86") {
+                        libPath = "$boringssl32BuildDir"
+                    } else if (targetPlatform.getArchitecture().getName() == "x86-64") {
+                        libPath = "$boringssl64BuildDir"
+                        building64Bit = true
+                    } else {
+                        throw new GradleException("Unknown architecture: " +
+                                targetPlatform.getArchitecture().name)
+                    }
+
+                    if (toolChain in Clang || toolChain in Gcc) {
+                        cppCompiler.args "-Wall",
+                                "-fPIC",
+                                "-O3",
+                                "-std=c++11",
+                                "-I$jniSourceDir/main/include",
+                                "-I$jniSourceDir/unbundled/include",
+                                "-I$boringsslIncludeDir",
+                                "-I$jdkIncludeDir",
+                                "-I$jdkIncludeDir/linux",
+                                "-I$jdkIncludeDir/darwin",
+                                "-I$jdkIncludeDir/win32"
+                        if (rootProject.hasProperty('checkErrorQueue')) {
+                            System.out.println("Compiling with error queue checking enabled")
+                            cppCompiler.define "CONSCRYPT_CHECK_ERROR_QUEUE"
+                        }
+
+                        // Static link to BoringSSL
+                        linker.args "-O3",
+                                "-fvisibility=hidden",
+                                "-lstdc++",
+                                "-lpthread",
+                                libPath + "/ssl/libssl.a",
+                                libPath + "/crypto/libcrypto.a"
+                    } else if (toolChain in VisualCpp) {
+                        cppCompiler.define "DLL_EXPORT"
+                        cppCompiler.define "WIN32_LEAN_AND_MEAN"
+                        cppCompiler.define "NOMINMAX"
+                        if (building64Bit) {
+                            cppCompiler.define "WIN64"
+                        }
+                        cppCompiler.define "_WINDOWS"
+                        cppCompiler.define "UNICODE"
+                        cppCompiler.define "_UNICODE"
+                        cppCompiler.define "NDEBUG"
+
+                        cppCompiler.args "/nologo",
+                                "/MT",
+                                "/WX-",
+                                "/Wall",
+                                "/O2",
+                                "/Oi",
+                                "/Ot",
+                                "/GL",
+                                "/GS",
+                                "/Gy",
+                                "/fp:precise",
+                                "-wd4514", // Unreferenced inline function removed
+                                "-wd4548", // Expression before comma has no effect
+                                "-wd4625", // Copy constructor was implicitly defined as deleted
+                                "-wd4626", // Assignment operator was implicitly defined as deleted
+                                "-wd4710", // function not inlined
+                                "-wd4711", // function inlined
+                                "-wd4820", // Extra padding added to struct
+                                "-wd4946", // reinterpret_cast used between related classes:
+                                "-wd4996", // Thread safety for strerror
+                                "-wd5027", // Move assignment operator was implicitly defined as deleted
+                                "-I$jniSourceDir/main/include",
+                                "-I$jniSourceDir/unbundled/include",
+                                "-I$boringsslIncludeDir",
+                                "-I$jdkIncludeDir",
+                                "-I$jdkIncludeDir/win32"
+
+                        // Static link to BoringSSL
+                        linker.args "-WX",
+                                "ws2_32.lib",
+                                "advapi32.lib",
+                                "${libPath}\\ssl\\ssl.lib",
+                                "${libPath}\\crypto\\crypto.lib"
+                    }
+                }
+
+                // Never build a static library.
+                withType(StaticLibraryBinarySpec) {
+                    buildable = false
+                }
+            }
+        }
+    }
+
+    tasks { t ->
+        $.binaries.withType(SharedLibraryBinarySpec).each { binary ->
+            // Build the native artifact classifier from the OS and architecture.
+            def archName = binary.targetPlatform.architecture.name.replaceAll('-', '_')
+            def classifier = classifierFor(osName, archName)
+            def sourceSetName = sourceSetName("$classifier")
+            def source = binary.sharedLibraryFile
+
+            // Copies the native library to a resource location that will be included in the jar.
+            def copyTaskName = "copyNativeLib${sourceSetName}"
+            task "$copyTaskName"(type: Copy, dependsOn: binary.tasks.link) {
+                from source
+                // Rename the artifact to include the generated classifier
+                rename '(.+)(\\.[^\\.]+)', "\$1-$classifier\$2"
+                // Everything under will be included in the native jar.
+                into nativeResourcesDir(classifier) + '/META-INF/native'
+            }
+
+            // Now define a task to strip the release binary (linux only)
+            if (osName == 'linux' && (!rootProject.hasProperty('nostrip') ||
+                    !rootProject.nostrip.toBoolean())) {
+                def stripTask = binary.tasks.taskName("strip")
+                    task "$stripTask"(type: Exec) {
+                        dependsOn binary.tasks.link
+                        executable "strip"
+                        args binary.tasks.link.linkedFile.asFile.get()
+                    }
+                project.tasks["$copyTaskName"].dependsOn stripTask
+            }
+        }
+    }
+}
+
+boolean isExecutableOnPath(executable) {
+    FilenameFilter filter = new FilenameFilter() {
+        @Override
+        boolean accept(File dir, String name) {
+            return executable.equals(name);
+        }
+    }
+    for(String folder : System.getenv('PATH').split("" + File.pathSeparatorChar)) {
+        File[] files = file(folder).listFiles(filter)
+        if (files != null && files.size() > 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+String nativeResourcesDir(nativeClassifier) {
+    def sourceSetName = sourceSetName(nativeClassifier)
+    "${buildDir}/${sourceSetName}/native-resources"
+}
+
+SourceSet sourceSet(classifier) {
+    sourceSets[sourceSetName(classifier)]
+}
+
+static String classifierFor(osName, archName) {
+    "${osName}-${archName}"
+}
+
+static String sourceSetName(classifier) {
+    classifier.replaceAll("-", "_")
+}
+

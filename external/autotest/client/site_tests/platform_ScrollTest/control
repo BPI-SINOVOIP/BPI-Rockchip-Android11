@@ -1,0 +1,21 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = "platform_ScrollTest"
+PURPOSE = "Scroll up and down pressure test."
+CRITERIA = """
+
+"""
+AUTHOR="Yi Xu"
+ATTRIBUTES = "suite:crosbolt_perf_nightly"
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "performance"
+TEST_TYPE = "client"
+DOC = """
+Opens some tough compositing websites, verify the fps rate when the page is
+scrolled up and down.
+"""
+
+job.run_test('platform_ScrollTest')

@@ -1,0 +1,19 @@
+name: "mock"
+description:
+    "mock is a library for testing in Python. It allows you to replace parts of "
+    "your system under test with mock objects and make assertions about how "
+    "they have been used."
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://pypi.org/project/mock/"
+  }
+  url {
+    type: GIT
+    value: "https://github.com/testing-cabal/mock"
+  }
+  version: "2.0.0"
+  last_upgrade_date { year: 2018 month: 8 day: 1 }
+  license_type: NOTICE
+}

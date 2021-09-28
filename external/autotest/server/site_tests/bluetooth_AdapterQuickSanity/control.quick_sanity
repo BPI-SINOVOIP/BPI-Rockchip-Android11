@@ -1,0 +1,38 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterQuickSanity'
+PURPOSE = ('Package of Bluetooth quick sanity tests')
+CRITERIA = 'Pass all sanity test'
+ATTRIBUTES = 'suite:bluetooth_e2e, suite:bluetooth_sanity'
+TIME = 'MEDIUM' # Takes 10 minutes on Guado
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_ble_hid'
+
+DOC = """
+    This class implements a Bluetooth quick sanity package, using
+    methods provided in BluetoothAdapterQuickTests,
+    The package is running several sub batches of tests.
+    A batch is defined as a set of tests, preferably with a common subject, e.g
+    'LE Sanity' batch.
+    The quick sanity test pacakge is imporving test time by doing the minimal
+    cleanups between each test and test batches, saving the auto-test ramp up
+    time of about 90-120 second per test.
+    """
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterQuickSanity', host=host,
+                  num_iterations=1, flag='Quick Sanity')
+
+parallel_simple(run, machines)

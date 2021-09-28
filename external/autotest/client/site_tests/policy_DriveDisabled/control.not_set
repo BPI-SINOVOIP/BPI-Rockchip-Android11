@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_DriveDisabled.not_set'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify when the 'policy_DriveDisabled' policy is not set, Google Drive acess
+within the Chrome OS is allowed.
+
+'''
+
+job.run_test('policy_DriveDisabled',
+             case='not_set')

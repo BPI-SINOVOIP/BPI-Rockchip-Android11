@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_HomepageLocation'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effect of HomepageLocation policy on client behavior.
+
+If the HomepageLocation is set and the user goes to the homepage
+the set URL should load.
+
+If the HomepageLocation is not set and the user goes to the homepage
+then chrome://newtab/ should open.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_HomepageLocation', **args_dict)

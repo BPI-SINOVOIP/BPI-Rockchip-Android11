@@ -1,0 +1,26 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./gcc.real",
+          "args": [
+            "-Wno-maybe-uninitialized",
+            "-Wno-unused-local-typedefs",
+            "-Wno-deprecated-declarations",
+            "main.cc"
+          ]
+        }
+      }
+    ]
+  }
+]

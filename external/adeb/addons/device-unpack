@@ -1,0 +1,28 @@
+#!/system/bin/sh
+
+set -e
+
+# Script to do unpack of rootfs, ensures proper tear down
+# of existing environment. Expects debian rootfs in
+# /data/deb.tar.gz which it will delete after successful
+# unpack of rootfs.
+
+spath=$( cd "$(dirname "$0")" ; pwd -P )
+
+if [ ! -f /data/androdeb/deb.tar.gz ]; then
+	echo "Debian rootfs tar doesn't existing at /data/deb.tar.gz"
+	echo "Run androdeb with device connected first"
+	exit 1
+fi
+
+if [ -d /data/androdeb/debian ]; then
+	echo "androdeb environment already exists, doing a tear down"
+	/data/androdeb/device-umount-all
+	rm -rf /data/androdeb/debian
+fi
+
+
+tar -zxf /data/androdeb/deb.tar.gz -C /data/androdeb/ || die 2 "Couldn't unpack due to tar -x errors"
+rm /data/androdeb/deb.tar.gz
+
+echo "Unpack of rootfs successful!"

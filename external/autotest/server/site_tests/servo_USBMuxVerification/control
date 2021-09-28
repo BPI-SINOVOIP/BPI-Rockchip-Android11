@@ -1,0 +1,41 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "coconutruben"
+NAME = "servo_USBMuxVerification"
+PURPOSE = "Validate the usb mux on servo can face both host and DUT."
+CRITERIA = "This test is a wrapper for a client test."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "servo"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+
+This test is to validate whether the usb stick on a (lab) servo device i.e. v2,
+v3, and v4, can switch properly between servo host and dut host. It simply
+checks that the stick becomes visible on the right side, given the mux state
+and power state of the port.
+
+Notes:
+- Test fails if the servo doesn't have an image usb port
+- Test fails if no usb block device with vid/pid/serial plugged into said port
+"""
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test("servo_USBMuxVerification", host=host)
+
+parallel_simple(run, machines)

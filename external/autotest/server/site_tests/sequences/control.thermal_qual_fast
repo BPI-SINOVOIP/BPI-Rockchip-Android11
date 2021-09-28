@@ -1,0 +1,58 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "puthik"
+NAME = "ThermalQual.fast"
+TIME = "SHORT"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "suite"
+TEST_TYPE = "server"
+DOC = """
+Make sure that ThermalQual.full works.
+"""
+
+from autotest_lib.client.common_lib import utils
+
+# Need separate list for client and server test due to how these test work.
+CLIENT_TESTS = [
+    ('power_Speedometer2', {
+        'tag' : 'thermal_qual_fast_before'
+    }),
+    ('power_BatteryCharge', {
+        'percent_target_charge' : 10, 'max_run_time': 600
+    }),
+    ('power_ThermalLoad', {
+        'tag' : 'fast', 'force_discharge' : True, 'duration': 180,
+        'second_period' : 1
+    }),
+    ('power_BatteryDrain', {
+        'force_discharge' : True, 'drain_to_percent' : 99, 'drain_timeout': 600
+    }),
+    ('power_WaitForCoolDown', {}),
+    ('power_VideoCall', {
+        'tag' : 'fast', 'duration': 180, 'second_period' : 5
+    }),
+    ('power_Speedometer2', {
+        'tag' : 'thermal_qual_fast_after'
+    }),
+]
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+pdash_note = args_dict.get('pdash_note', '')
+
+def run_client_test(machine):
+    client = hosts.create_host(machine)
+    client_at = autotest.Autotest(client)
+
+    for test, argv in CLIENT_TESTS:
+        argv['pdash_note'] = pdash_note
+        client_at.run_test(test, **argv)
+
+job.parallel_on_machines(run_client_test, machines)

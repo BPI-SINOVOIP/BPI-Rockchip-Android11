@@ -1,0 +1,17 @@
+AUTHOR = "Chrome OS Team"
+NAME = "power_WebGL"
+PURPOSE = "Measure WebGL power usage."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = "suite:power_sanity, suite:power_daily, suite:power_monitoring"
+
+DOC = """
+This test records power related statistics while open WebGL heavy page.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_WebGL', pdash_note=pdash_note)

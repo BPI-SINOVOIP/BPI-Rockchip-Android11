@@ -1,0 +1,31 @@
+# Copyright (c) 2010 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "logging_UserCrash"
+PURPOSE = "Verify user space crashes are handled appropriately."
+CRITERIA = """
+Fails if any of the following conditions occur:
+  - expected core pattern is not output
+  - user space crash handling is not running
+  - forced crash does not occur
+  - forced segv message is not found
+  - core pattern is not recognized as as 'core'
+  - crash is sent without user consent
+"""
+ATTRIBUTES = "suite:bvt-cq, suite:smoke"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "logging"
+TEST_TYPE = "client"
+# Reboot in the lab after the test ends. Since we lock the core_pattern
+# at the end of the test, we should reboot to restore the state of the
+# device.
+DEPENDENCIES='cleanup-reboot'
+
+DOC = """
+Test that user space crashes are detected and handled appropriately.
+"""
+
+job.run_test('logging_UserCrash')

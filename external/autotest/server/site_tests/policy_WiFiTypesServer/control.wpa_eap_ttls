@@ -1,0 +1,58 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_WiFiTypesServer.wpa_eap_ttls'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+'policy_WiFiTypesServer.wpa_eap_ttls' test configures a EAP-TTLS network and
+runs the client side 'policy_WiFiTypes' test that configures the user network
+policy and attempts to connect to the AP.
+
+"""
+
+from autotest_lib.client.common_lib.cros import site_eap_certs
+from autotest_lib.client.common_lib.cros.network import xmlrpc_security_types
+from autotest_lib.client.cros.enterprise.network_config import NetworkConfig
+from autotest_lib.server.cros.network import hostap_config
+
+def run(machine):
+    TTLS = xmlrpc_security_types.Tunneled1xConfig.LAYER1_TYPE_TTLS
+    MSCHAPV2 = xmlrpc_security_types.Tunneled1xConfig.LAYER2_TYPE_MSCHAPV2
+    identity = 'chromeos'
+    password = 'chromeos'
+
+    eap_config = xmlrpc_security_types.Tunneled1xConfig(
+            site_eap_certs.ca_cert_1,
+            site_eap_certs.server_cert_1,
+            site_eap_certs.server_private_key_1,
+            site_eap_certs.ca_cert_1,
+            identity,
+            password,
+            inner_protocol=MSCHAPV2,
+            outer_protocol=TTLS)
+    ap_config = hostap_config.HostapConfig(
+            frequency=2412,
+            mode=hostap_config.HostapConfig.MODE_11G,
+            security_config=eap_config)
+
+    network = NetworkConfig(security='WPA-EAP',
+                            eap='EAP-TTLS',
+                            identity=identity,
+                            password=password,
+                            ca_cert=site_eap_certs.ca_cert_1)
+
+    host = hosts.create_host(machine)
+    job.run_test('policy_WiFiTypesServer',
+                 raw_cmdline_args=args,
+                 host=host,
+                 ap_config=ap_config,
+                 network=network)
+
+
+parallel_simple(run, machines)

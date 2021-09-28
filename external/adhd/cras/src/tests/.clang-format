@@ -1,0 +1,14 @@
+BasedOnStyle: Chromium
+
+# Taken from:
+#   git grep -h '^#define [^[:space:]]*FOREACH[^[:space:]]*(' cras/ \
+#   | sed "s,^#define \([^[:space:]]*FOREACH[^[:space:]]*\)(.*$,  - '\1'," \
+#   | sort | uniq
+
+ForEachMacros:
+  - 'ARRAY_ELEMENT_FOREACH'
+  - 'DL_FOREACH'
+  - 'DL_FOREACH_INTERNAL'
+  - 'LL_FOREACH'
+  - 'LL_FOREACH_SAFE'
+

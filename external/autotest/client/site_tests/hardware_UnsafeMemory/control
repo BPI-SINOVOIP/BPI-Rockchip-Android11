@@ -1,0 +1,23 @@
+# Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = 'hardware_UnsafeMemory'
+AUTHOR = 'drewry'
+PURPOSE = 'Check for unsafe memory with https://code.google.com/a/google.com/p/rowhammer-test/'
+CRITERIA = 'Fails if memory is unsafe'
+TIME = 'MEDIUM'
+TEST_CATEGORY = 'security'
+TEST_CLASS = 'hardware'
+TEST_TYPE = 'client'
+# TODO(wad) once we have an arm and 32-bit build, we need it in hwqual.
+#SUITE = 'hwqual'
+JOB_RETRIES = 0
+
+DOC = """
+This test uses rowhammer-test to find memory faults that may lead to violations
+of runtime expectations.
+"""
+
+# Run the test for 5 hours.
+job.run_test('hardware_UnsafeMemory', sec=5*60*60)

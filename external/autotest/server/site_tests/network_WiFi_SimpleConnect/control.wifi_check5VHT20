@@ -1,0 +1,40 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'pauletti'
+NAME = 'network_WiFi_SimpleConnect.wifi_check5VHT20'
+TIME = 'SHORT'
+TEST_TYPE = 'Server'
+ATTRIBUTES = ('suite:wifi_flaky', 'subsystem:wifi')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test verifies that DUT can connect to an open 802.11ac network
+on channel 60 with a channel width of 20MHz.
+"""
+
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_datatypes
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    ac_mode = hostap_config.HostapConfig.MODE_11AC_PURE
+    # Because of the way the hostap width flag works, the VHT_CHANNEL_WIDTH_40
+    # is the correct configuration option for VHT20 and VHT40
+    channel_width = hostap_config.HostapConfig.VHT_CHANNEL_WIDTH_40
+    configurations = [(hostap_config.HostapConfig(
+                                  channel=60,
+                                  mode=ac_mode,
+                                  vht_channel_width=channel_width),
+                       xmlrpc_datatypes.AssociationParameters())]
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_SimpleConnect',
+                 tag=NAME.split('.')[1],
+                 host=host,
+                 raw_cmdline_args=args,
+                 additional_params=configurations)
+
+
+parallel_simple(run, machines)

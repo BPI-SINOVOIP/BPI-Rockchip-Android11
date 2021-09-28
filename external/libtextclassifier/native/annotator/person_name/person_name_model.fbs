@@ -1,0 +1,57 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+file_identifier "TC2 ";
+
+// Next ID: 2
+namespace libtextclassifier3.PersonNameModel_;
+table PersonName {
+  // Person name which is considered by the person name annotator. This
+  // attribute should contain 'atomic' person names, e.g., 'John' and 'Doe'
+  // should be two separate person names.
+  // required
+  person_name:string (shared);
+}
+
+// Next ID: 6
+namespace libtextclassifier3;
+table PersonNameModel {
+  // Decides if the person name annotator is enabled.
+  // required
+  enabled:bool;
+
+  // List of all person names which are considered by the person name annotator.
+  person_names:[PersonNameModel_.PersonName];
+
+  // Decides if the English genitive ending 's is stripped, e.g., if Peter's is
+  // stripped to Peter before looking for the name in the dictionary. required
+  strip_english_genitive_ending:bool;
+
+  // List of codepoints that are considered as 'end of person name' indicator in
+  // the heuristic to find the longest person name match.
+  // required
+  end_of_person_name_indicators:[int];
+
+  // Decides if only capitalized names should be annotated. In general, a
+  // capitalized name starts with an uppercase character and continues with
+  // lower case characters. In order to capture names such as O'Conell and
+  // McFee, this heursistic considers names as capitalized if they start with an
+  // upper case character and have at least one lower case character.
+  // required
+  annotate_capitalized_names_only:bool;
+}
+
+root_type libtextclassifier3.PersonNameModel;

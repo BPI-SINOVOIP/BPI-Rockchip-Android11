@@ -1,0 +1,34 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_BatteryDrain"
+PURPOSE = "Drain the battery quickly, as a utility for other tests."
+CRITERIA = """
+DUT must not be on AC power, and battery must drop to or below the
+specified threshold within the given timeout in seconds.
+"""
+TIME = "MEDIUM"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test drains the battery quickly, as a utility for other tests. It requires
+that AC power is not supplied, so you will have to turn it off via servo in a
+server test. You can specify a battery threshold to drain to, and a timeout in
+seconds.
+"""
+
+args_dict = utils.args_to_dict(args)
+
+drain_to_percent = args_dict.get('drain_to_percent', '99')
+drain_to_percent = float(drain_to_percent)
+
+drain_timeout = args_dict.get('drain_timeout', '300')
+drain_timeout = int(drain_timeout)
+
+job.run_test('power_BatteryDrain',
+             drain_to_percent=drain_to_percent,
+             drain_timeout=drain_timeout)

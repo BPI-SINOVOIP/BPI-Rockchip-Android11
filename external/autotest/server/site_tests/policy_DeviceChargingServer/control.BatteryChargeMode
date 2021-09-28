@@ -1,0 +1,79 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+from autotest_lib.server.hosts import cros_host
+
+AUTHOR = 'ncrews'
+DEPENDENCIES = "servo"
+NAME = 'policy_DeviceChargingServer.BatteryChargeMode'
+TIME = 'LONG'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = "suite:wilco_bve"
+
+DOC = """
+Ensures the DUT's battery level is in a testable range, clears the TPM if
+needed, and then runs the specified client test to verify charging behavior
+is consistent with policies.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = cros_host.CrosHost.get_servo_arguments(args_dict)
+
+client_test = 'policy_DeviceCharging'
+
+# When DeviceBatteryChargeMode is set to BATTERY_CHARGE_PRIMARILY_AC_USE, then
+# the DUT will not charge when above 86%. In order to test this, we need to be
+# above this threshold.
+MIN_BATTERY_LEVEL = 87
+
+# A test case consists of the policies, plus the expected power behavior.
+TEST_CASES = [
+    ({'DeviceBatteryChargeMode': 1}, # BATTERY_CHARGE_STANDARD
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceBatteryChargeMode': 2}, # BATTERY_CHARGE_EXPRESS_CHARGE
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceBatteryChargeMode': 3}, # BATTERY_CHARGE_PRIMARILY_AC_USE
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceBatteryChargeMode': 4}, # `BATTERY_CHARGE_ADAPTIVE
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceBatteryChargeMode': 5, # BATTERY_CHARGE_CUSTOM
+      'DeviceBatteryChargeCustomStartCharging': 50,
+      'DeviceBatteryChargeCustomStopCharging': 60},
+     'ON_AC_AND_NOT_CHARGING'),
+    ({'DeviceBatteryChargeMode': 5, # BATTERY_CHARGE_CUSTOM
+      'DeviceBatteryChargeCustomStartCharging': 50,
+      'DeviceBatteryChargeCustomStopCharging': 100},
+     'ON_AC_AND_CHARGING'),
+]
+
+# These are used to cleanup the DUT and to prep the DUT before each test case.
+# See the test for more info.
+ON_AC_AND_CHARGING_POLICIES = {
+    'DeviceBatteryChargeMode': 1, # BATTERY_CHARGE_STANDARD
+}
+ON_AC_AND_NOT_CHARGING_POLICIES = {
+    'DeviceBatteryChargeMode': 5, # BATTERY_CHARGE_CUSTOM
+    'DeviceBatteryChargeCustomStartCharging': 50,
+    'DeviceBatteryChargeCustomStopCharging': 60,
+}
+PREP_POLICIES = {
+    'ON_AC_AND_CHARGING'         : (ON_AC_AND_NOT_CHARGING_POLICIES,
+                                    'ON_AC_AND_NOT_CHARGING'),
+    'ON_AC_AND_NOT_CHARGING'     : (ON_AC_AND_CHARGING_POLICIES,
+                                    'ON_AC_AND_CHARGING'),
+}
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('policy_DeviceChargingServer',
+                 host=host,
+                 client_test=client_test,
+                 test_cases=TEST_CASES,
+                 min_battery_level=MIN_BATTERY_LEVEL,
+                 prep_policies=PREP_POLICIES)
+
+parallel_simple(run, machines)

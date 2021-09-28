@@ -1,0 +1,48 @@
+{
+   malloc/__emutls_get_address
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:__emutls_get_address
+}
+{
+   malloc/__dtoa
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:__dtoa
+}
+{
+   malloc/tlv_get_addr
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:tlv_get_addr
+}
+{
+   malloc/__cxa_get_globals
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:__cxa_get_globals
+}
+{
+   malloc/ImageLoader
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:_ZN11ImageLoader15runInitializersERKNS_11LinkContextERNS_21InitializerTimingListE
+}
+{
+   malloc/fwrite
+   Memcheck:Leak
+   fun:malloc
+   fun:__smakebuf
+   fun:__swsetup
+   fun:__sfvwrite
+   fun:fwrite
+   ...
+}

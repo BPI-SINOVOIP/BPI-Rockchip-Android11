@@ -1,0 +1,25 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_AutotestSanity'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy, suite:bvt-perbuild, suite:smoke'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+# TODO(rzakarian): create enterprise dependency or figure out if 'arc' is good
+# enough.
+DEPENDENCIES = 'arc'
+
+DOC = '''
+Super small autotest to be put on CQ.
+
+The purpose of this autotest is to verify that all the basics of the
+Enteprise autotest work. Policy is set and applied.
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_AutotestSanity', **args_dict)

@@ -1,0 +1,58 @@
+//#############################################
+// Compile Robolectric shadows supportv4
+//#############################################
+
+java_library_host {
+    name: "Robolectric_shadows_supportv4",
+    libs: [
+        "Robolectric_shadows_framework",
+        "Robolectric_annotations",
+        "Robolectric_robolectric",
+        "Robolectric_shadowapi",
+        "Robolectric_utils",
+        "robolectric-javax.annotation-api-1.2",
+        "robolectric-host-android-support-v4",
+        "robolectric-host-android_all",
+    ],
+    plugins: ["Robolectric_processor"],
+    javacflags: ["-Aorg.robolectric.annotation.processing.shadowPackage=org.robolectric.shadows.support.v4"],
+    srcs: ["src/main/java/**/*.java"],
+}
+
+//#############################################
+// Compile Robolectric shadows supportv4 tests
+//#############################################
+
+java_test_host {
+    name: "Robolectric_shadows_supportv4_tests",
+    srcs: ["src/test/java/**/*.java"],
+    java_resource_dirs: ["src/test/resources"],
+    static_libs: [
+        "Robolectric_shadows_supportv4",
+        "Robolectric_shadows_framework",
+        "Robolectric_annotations",
+        "Robolectric_robolectric",
+        "Robolectric_resources",
+        "Robolectric_shadowapi",
+        "Robolectric_sandbox",
+        "Robolectric_junit",
+        "Robolectric_utils",
+        "robolectric-accessibility-test-framework-2.1",
+        "robolectric-host-android-support-v4",
+        "robolectric-maven-ant-tasks-2.1.3",
+        "hamcrest-library",
+        "mockito",
+        "bouncycastle-unbundled",
+        "hamcrest",
+        "asm-commons-6.0",
+        "guava",
+        "objenesis",
+        "asm-tree-6.0",
+        "junit",
+        "truth-prebuilt",
+        "robolectric-ant-1.8.0",
+        "asm-6.0",
+        "jsr305",
+    ],
+    libs: ["robolectric-host-android_all"],
+}

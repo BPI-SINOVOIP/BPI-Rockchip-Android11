@@ -1,0 +1,142 @@
+//
+// Copyright (C) 2012 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+package {
+    default_visibility: ["//visibility:private"],
+}
+
+// The source files that contribute to Android's core library APIs.
+filegroup {
+    name: "okhttp_api_files",
+    visibility: ["//libcore"],
+    // Use the repackaged version of android as that is what is used by Android core library
+    // APIs.
+    srcs: ["repackaged/android/src/main/java/com/android/okhttp/internalandroidapi/**/*.java"],
+}
+
+nojarjar_visibility = [
+    "//art/build/sdk",
+    "//cts/tests/libcore/okhttp",
+]
+
+// non-jarjar'd version of okhttp to compile the tests against
+java_library {
+    name: "okhttp-nojarjar",
+    visibility: nojarjar_visibility,
+    srcs: [
+        "android/src/main/java/**/*.java",
+        "okhttp/src/main/java/**/*.java",
+        "okhttp-urlconnection/src/main/java/**/*.java",
+        "okhttp-android-support/src/main/java/**/*.java",
+        "okio/okio/src/main/java/**/*.java",
+    ],
+    exclude_srcs: ["okhttp/src/main/java/com/squareup/okhttp/internal/Platform.java"],
+
+    hostdex: true,
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "conscrypt.module.intra.core.api.stubs",
+    ],
+    java_version: "1.7",
+}
+
+java_library {
+    name: "okhttp",
+    visibility: [
+        "//art/build/apex",
+        "//external/robolectric-shadows",
+        "//libcore",
+    ],
+    srcs: [
+        // Although some of the classes in the android/ directory are already in the correct
+        // package and do not need to be moved to another package they are transformed as they
+        // reference other classes that do require repackaging.
+        "repackaged/android/src/main/java/**/*.java",
+        "repackaged/okhttp/src/main/java/**/*.java",
+        "repackaged/okhttp-urlconnection/src/main/java/**/*.java",
+        "repackaged/okhttp-android-support/src/main/java/**/*.java",
+        "repackaged/okio/okio/src/main/java/**/*.java",
+    ],
+
+    hostdex: true,
+    installable: true,
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "conscrypt.module.intra.core.api.stubs",
+    ],
+    java_version: "1.7",
+    apex_available: [
+        "com.android.art.debug",
+        "com.android.art.release",
+    ],
+}
+
+// A guaranteed unstripped version of okhttp.
+// The build system may or may not strip the okhttp jar, but this one will
+// not be stripped. See b/24535627.
+java_library {
+    name: "okhttp-testdex",
+    visibility: [
+        "//art:__subpackages__",
+    ],
+    static_libs: ["okhttp"],
+
+    installable: true,
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "conscrypt.module.intra.core.api.stubs",
+    ],
+    dex_preopt: {
+        enabled: false,
+    },
+    java_version: "1.7",
+}
+
+java_library {
+    name: "okhttp-tests-nojarjar",
+    visibility: nojarjar_visibility,
+    srcs: [
+        "android/test/java/**/*.java",
+        "okhttp-android-support/src/test/java/**/*.java",
+        "okhttp-testing-support/src/main/java/**/*.java",
+        "okhttp-tests/src/test/java/**/*.java",
+        "okhttp-urlconnection/src/test/java/**/*.java",
+        "okhttp-ws/src/main/java/**/*.java",
+        "okhttp-ws-tests/src/test/java/**/*.java",
+        "okio/okio/src/test/java/**/*.java",
+        "mockwebserver/src/main/java/**/*.java",
+        "mockwebserver/src/test/java/**/*.java",
+    ],
+    // Exclude test Android currently has problems with due to @Parameterized (requires JUnit 4.11).
+    exclude_srcs: ["okhttp-tests/src/test/java/com/squareup/okhttp/WebPlatformUrlTest.java"],
+
+    sdk_version: "none",
+    system_modules: "core-all-system-modules",
+    libs: [
+        "okhttp-nojarjar",
+        "junit",
+        "conscrypt.module.intra.core.api.stubs",
+        "bouncycastle-unbundled",
+    ],
+
+    java_version: "1.7",
+}

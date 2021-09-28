@@ -1,0 +1,63 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+
+AUTHOR = "Chromium OS"
+NAME = "autoupdate_StatefulCompatibility"
+TIME = "LONG"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+
+DOC = """
+This is an auto update test to check the compatibility of the stateful
+partition between updates. This is mostly intended to be used for the
+kernel-next boards to check rollback compatibility but can be used for any
+pair of images.
+
+To specify args for this test invoke this test with:
+    test_that <DUT-IPADDR> autoupdate_StatefulCompatibility --args="<ARGLIST>"
+
+where ARGLIST is a whitespace separated list of the following key=value pairs.
+Values pertaining to the test case include:
+
+    source_payload_uri          (optional) the Google Storage bucket URI for
+                                the source payload to be installed. If not
+                                specified the test will run on the currently
+                                installed image.
+    target_payload_uri          (optional) the Google Storage bucket URI for
+                                the target payload to be installed. If not
+                                specified that target_board and
+                                target_version_regex fields are required.
+    target_board                (optional) the board name for the target image
+                                to be installed.
+    target_version_regex        (optional) the version of the target image to
+                                install. The test will search through all builds
+                                that match this prefix and find the most recent
+                                image that passed all tests.
+                                Examples: 'LATEST-[0-9]*' or 'R75-*'
+
+To run locally see the instructions in the autoupdate_EndToEndTest.
+"""
+
+TEST_CONF_KEYS = (
+    'source_payload_uri', 'target_payload_uri', 'target_board',
+    'target_version_regex')
+
+
+args_dict = utils.args_to_dict(args)
+
+test_conf = {}
+for key in TEST_CONF_KEYS:
+    test_conf[key] = args_dict.get(key) or locals().get(key)
+
+def run_test(machine):
+    """Execute a test configuration on a given machine."""
+    host = hosts.create_host(machine)
+    job.run_test("autoupdate_StatefulCompatibility", host=host,
+                 test_conf=test_conf, max_image_checks=20)
+
+# Invoke parallel tests.
+parallel_simple(run_test, machines)

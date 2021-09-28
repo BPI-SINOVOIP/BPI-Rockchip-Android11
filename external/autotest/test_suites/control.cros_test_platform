@@ -1,0 +1,36 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Test Platform Team"
+NAME = "cros_test_platform"
+PURPOSE = "Entry point for cros_test_platform execution of autotest tests."
+
+DOC = """
+This suite is used as an entry point for cros_test_platform, to allow it to
+inject arbitrary arguments into dynamic_suite.reimage_and_run, by
+supplying these arguments as a json-encoded args dictionary (with name
+args_dict_json).
+
+This suite should not be used for any other purpose.
+"""
+
+import json
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+
+TIME = "SHORT"
+TEST_CATEGORY = "General"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+# Load and overwrite args_dict.
+args_dict_json = args_dict['args_dict_json']
+args_dict.update(dynamic_suite.byteify(json.loads(args_dict_json)))
+
+# Inject handle to current job instance.
+args_dict['job'] = job
+
+dynamic_suite.reimage_and_run(**args_dict)

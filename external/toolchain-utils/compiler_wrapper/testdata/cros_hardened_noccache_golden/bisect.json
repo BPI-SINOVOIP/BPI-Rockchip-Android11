@@ -1,0 +1,181 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "BISECT_STAGE=someBisectStage",
+      "HOME=/user/home"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/env",
+          "args": [
+            "python",
+            "-c",
+            "\nimport bisect_driver\nimport shlex\nimport sys\n\ndef ExpandArgs(args, target):\n\tfor arg in args:\n\t\tif arg[0] == '@':\n\t\t\twith open(arg[1:], 'rb') as f:\n\t\t\t\tExpandArgs(shlex.split(f.read()), target)\n\t\telse:\n\t\t\ttarget.append(arg)\n\treturn target\n\nstage = sys.argv[1]\ndir = sys.argv[2]\nexecargs = ExpandArgs(sys.argv[3:], [])\n\nsys.exit(bisect_driver.bisect_driver(stage, dir, execargs))\n",
+            "someBisectStage",
+            "/tmp/sysroot_bisect",
+            "/usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "PYTHONPATH=/somepath/test_binary"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "BISECT_STAGE=someBisectStage",
+      "BISECT_DIR=someBisectDir",
+      "HOME=/user/home"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/env",
+          "args": [
+            "python",
+            "-c",
+            "\nimport bisect_driver\nimport shlex\nimport sys\n\ndef ExpandArgs(args, target):\n\tfor arg in args:\n\t\tif arg[0] == '@':\n\t\t\twith open(arg[1:], 'rb') as f:\n\t\t\t\tExpandArgs(shlex.split(f.read()), target)\n\t\telse:\n\t\t\ttarget.append(arg)\n\treturn target\n\nstage = sys.argv[1]\ndir = sys.argv[2]\nexecargs = ExpandArgs(sys.argv[3:], [])\n\nsys.exit(bisect_driver.bisect_driver(stage, dir, execargs))\n",
+            "someBisectStage",
+            "someBisectDir",
+            "/usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "PYTHONPATH=/somepath/test_binary"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "BISECT_STAGE=someBisectStage",
+      "BISECT_DIR=someBisectDir",
+      "HOME=/user/home"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-clang",
+        "args": [
+          "main.cc"
+        ]
+      },
+      "stdout": "somemessage",
+      "stderr": "someerror",
+      "exitcode": 1
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/env",
+          "args": [
+            "python",
+            "-c",
+            "\nimport bisect_driver\nimport shlex\nimport sys\n\ndef ExpandArgs(args, target):\n\tfor arg in args:\n\t\tif arg[0] == '@':\n\t\t\twith open(arg[1:], 'rb') as f:\n\t\t\t\tExpandArgs(shlex.split(f.read()), target)\n\t\telse:\n\t\t\ttarget.append(arg)\n\treturn target\n\nstage = sys.argv[1]\ndir = sys.argv[2]\nexecargs = ExpandArgs(sys.argv[3:], [])\n\nsys.exit(bisect_driver.bisect_driver(stage, dir, execargs))\n",
+            "someBisectStage",
+            "someBisectDir",
+            "/usr/bin/clang",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-Qunused-arguments",
+            "-grecord-gcc-switches",
+            "-fno-addrsig",
+            "-Wno-tautological-constant-compare",
+            "-Wno-tautological-unsigned-enum-zero-compare",
+            "-Wno-unknown-warning-option",
+            "-Wno-section",
+            "-static-libgcc",
+            "-fuse-ld=lld",
+            "-Wno-reorder-init-list",
+            "-Wno-final-dtor-non-final-class",
+            "-Wno-return-stack-address",
+            "-Werror=poison-system-directories",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-Wno-implicit-int-float-conversion",
+            "-B../../bin",
+            "-target",
+            "x86_64-cros-linux-gnu"
+          ],
+          "env_updates": [
+            "PYTHONPATH=/somepath/test_binary"
+          ]
+        },
+        "stdout": "somemessage",
+        "stderr": "someerror",
+        "exitcode": 1
+      }
+    ]
+  }
+]

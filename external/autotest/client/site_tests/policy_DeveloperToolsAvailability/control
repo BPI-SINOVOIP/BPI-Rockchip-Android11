@@ -1,0 +1,19 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'carvalheira'
+NAME = 'policy_DeveloperToolsAvailability'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of the DeveloperToolsAvailability policy.
+It verifies the Disabled, Available and DisabledOnExtensions states.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+job.run_test('policy_DeveloperToolsAvailability', **args_dict)

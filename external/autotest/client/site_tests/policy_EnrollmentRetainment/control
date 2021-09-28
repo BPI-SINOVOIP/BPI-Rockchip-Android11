@@ -1,0 +1,21 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_EnrollmentRetainment'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Called through the stress_EnrollmentRetainnment server test only. This test
+continiously restarts the DUT, logs in with a user setup in cpanel, and
+verifies that a device policy for that user is set.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_EnrollmentRetainment', **args_dict)

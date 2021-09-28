@@ -1,0 +1,45 @@
+[ -e $IGT_BENCHMARKS/gem_busy ] || return 1
+sudo -n true || return 1
+
+for ring in rcs bcs vcs vecs all; do
+while read label mode; do
+    name="gem:busy:$label:$ring"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:forked"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -f -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:wait"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -w -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:wait:forked"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -w -f -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:dmabuf"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -d -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:dmabuf:forked"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -d -f -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:sync-file"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -s -e $ring -r \$1 ; }"
+
+    name="gem:busy:$label:$ring:sync-file:forked"
+    test_name="$test_name $name"
+    eval "${name}_run() { sudo $IGT_BENCHMARKS/gem_busy $mode -s -f -e $ring -r \$1 ; }"
+done<<MODES
+read
+write		-W
+idle		-I
+MODES
+done
+
+test_exec_time=3
+test_invert=1

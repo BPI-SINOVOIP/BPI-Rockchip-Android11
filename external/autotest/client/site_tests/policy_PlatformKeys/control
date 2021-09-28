@@ -1,0 +1,28 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+NAME = 'policy_PlatformKeys'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+policy_PlatformKeys tests the chrome.enterprise.platformKeys API. It uses the
+"platformKeys Test Extension" to access the API.
+
+It tests the methods:
+- getToken
+- getCertificates
+- importCertificate
+- removeCertificate
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_PlatformKeys', **args_dict)
+

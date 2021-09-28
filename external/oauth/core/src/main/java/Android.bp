@@ -1,0 +1,6 @@
+// Build the client static library for the Google Services Framework
+java_library {
+    name: "oauth",
+    srcs: ["net/**/*.java"],
+    sdk_version: "8",
+}

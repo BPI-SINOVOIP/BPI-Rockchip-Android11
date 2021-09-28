@@ -1,0 +1,68 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_WiFiPrecedenceServer.connectable_vs_not_connectable'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+'policy_WiFiPrecedenceServer.connectable_vs_not_connectable' sets up both
+a WPA-PSK and Open network. The client test is given a network policy for
+both networks with AutoConnect=True, but the PSK network is given the wrong
+password.
+
+The open network should connect as the PSK network is inaccessible.
+
+"""
+
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_security_types
+from autotest_lib.client.cros.enterprise.network_config import NetworkConfig
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    password = 'chromeos'
+    incorrect_password = 'android'
+    ssid1 = 'Network1'
+    ssid2 = 'Network2'
+    n_mode = hostap_config.HostapConfig.MODE_11N_MIXED
+
+    ap_configs = []
+    ap_configs.append(hostap_config.HostapConfig(
+            channel=5,
+            mode=n_mode,
+            ssid=ssid1))
+
+    wpa_config = xmlrpc_security_types.WPAConfig(
+            psk=password,
+            wpa_mode=xmlrpc_security_types.WPAConfig.MODE_PURE_WPA2,
+            wpa2_ciphers=[xmlrpc_security_types.WPAConfig.CIPHER_CCMP])
+    ap_configs.append(hostap_config.HostapConfig(
+            channel=149,
+            mode=n_mode,
+            ssid=ssid2,
+            security_config=wpa_config))
+
+    # Client network configurations.
+    network1_config = NetworkConfig(ssid1, autoconnect=True)
+    network2_config = NetworkConfig(ssid2,
+                                    security='WPA-PSK',
+                                    password=incorrect_password,
+                                    autoconnect=True)
+
+    host = hosts.create_host(machine)
+    job.run_test('policy_WiFiPrecedenceServer',
+                 raw_cmdline_args=args,
+                 host=host,
+                 ap_configs=ap_configs,
+                 network1_config=network1_config,
+                 network2_config=network2_config,
+                 precedence=1)
+
+
+parallel_simple(run, machines)

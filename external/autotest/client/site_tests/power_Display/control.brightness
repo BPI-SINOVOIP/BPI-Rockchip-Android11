@@ -1,0 +1,21 @@
+AUTHOR = "Chrome OS Team"
+NAME = "power_Display.brightness"
+PURPOSE = "Measure display power usage at each brightness."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test records power related statistics while displaying different static
+pages with each of Chrome OS's 16 brightness levels.
+"""
+
+BRIGHTNESS_PAGES = ['white', 'black', 'checker1']
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Display', brightness='all', tag=NAME.split('.')[1],
+             pages=BRIGHTNESS_PAGES, secs_per_page=20, seconds_period=1,
+             pdash_note=pdash_note)

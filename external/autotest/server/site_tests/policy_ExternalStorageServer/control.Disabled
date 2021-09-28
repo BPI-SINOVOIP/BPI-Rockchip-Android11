@@ -1,0 +1,32 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = 'timkovich'
+NAME = 'policy_ExternalStorageServer.Disabled'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+DEPENDENCIES = 'servo'
+
+DOC = """
+This test connects the servo repair USB stick to the DUT, then runs the
+client-side tests for the ExternalStorageDisabled policy. At the end of the
+test it disconnects the USB stick.
+
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('policy_ExternalStorageServer',
+                 host=host,
+                 client_test='policy_ExternalStorageDisabled')
+
+parallel_simple(run, machines)

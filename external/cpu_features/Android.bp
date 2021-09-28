@@ -1,0 +1,325 @@
+// This Blueprint file loosely follows the logic of cpu_features'
+// CMakeLists.txt and test/CMakeLists.txt files.
+
+cc_defaults {
+    name: "cpu_features-defaults",
+    host_supported: true,
+    local_include_dirs: [
+        "include",
+    ],
+    cflags: [
+        // Reserve 1024 bytes on the stack when reading from `/proc/cpuinfo`.
+        "-DSTACK_LINE_READER_BUFFER_SIZE=1024",
+        "-Wno-gnu-designator",
+    ],
+}
+
+cc_library {
+    name: "libcpu_features-utils",
+    defaults: ["cpu_features-defaults"],
+    srcs: [
+        "src/filesystem.c",
+        "src/stack_line_reader.c",
+        "src/string_view.c",
+    ],
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
+}
+
+cc_library {
+    name: "libcpu_features-unix_based_hardware_detection",
+    defaults: ["cpu_features-defaults"],
+    srcs: [
+        "src/hwcaps.c",
+        "src/unix_features_aggregator.c",
+    ],
+    cflags: [
+        "-DHAVE_DLFCN_H",
+    ],
+    target: {
+        bionic: {
+            cflags: [
+                "-DHAVE_STRONG_GETAUXVAL",
+            ],
+        },
+    },
+    static_libs: [
+        "libcpu_features-utils",
+    ],
+}
+
+cc_library {
+    name: "libcpu_features",
+    defaults: [
+        "cpu_features-defaults",
+    ],
+    export_include_dirs: ["include"],
+    whole_static_libs: [
+        "libcpu_features-utils",
+    ],
+    arch: {
+        arm: {
+            srcs: [
+                "src/cpuinfo_arm.c",
+            ],
+            whole_static_libs: [
+                "libcpu_features-unix_based_hardware_detection",
+            ],
+        },
+        arm64: {
+            srcs: [
+                "src/cpuinfo_aarch64.c",
+            ],
+            whole_static_libs: [
+                "libcpu_features-unix_based_hardware_detection",
+            ],
+            cflags: [
+                "-Wno-gnu-designator",
+            ],
+        },
+        x86: {
+            srcs: [
+                "src/cpuinfo_x86.c",
+            ],
+            cflags: [
+                "-Wno-unused-variable",
+            ],
+        },
+        x86_64: {
+            srcs: [
+                "src/cpuinfo_x86.c",
+            ],
+            cflags: [
+                "-Wno-unused-variable",
+            ],
+        },
+    },
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
+}
+
+cc_binary {
+    name: "list_cpu_features",
+    defaults: [
+        "cpu_features-defaults",
+    ],
+    srcs: [
+        "src/utils/list_cpu_features.c",
+    ],
+    static_libs: [
+        "libcpu_features",
+    ],
+}
+
+// Tests.
+
+cc_defaults {
+    name: "cpu_features-test-defaults",
+    test_suites: ["device-tests"],
+    host_supported: true,
+    compile_multilib: "both",
+    local_include_dirs: [
+        "include",
+    ],
+    cflags: [
+        "-DCPU_FEATURES_TEST",
+    ],
+}
+
+cc_test_library {
+    name: "libcpu_features-string_view",
+    defaults: ["cpu_features-test-defaults"],
+    srcs: [
+        "src/string_view.c",
+    ],
+}
+
+cc_test_library {
+    name: "libcpu_features-filesystem_for_testing",
+    defaults: ["cpu_features-test-defaults"],
+    cflags: [
+        "-DCPU_FEATURES_MOCK_FILESYSTEM",
+        // TODO: Handle unused parameters in
+        // test/filesystem_for_testing.cc and remove this flag.
+        "-Wno-unused-parameter",
+    ],
+    srcs: [
+        "test/filesystem_for_testing.cc",
+    ],
+}
+
+cc_test_library {
+    name: "libcpu_features-hwcaps_for_testing",
+    defaults: ["cpu_features-test-defaults"],
+    cflags: [
+        "-DCPU_FEATURES_MOCK_GET_ELF_HWCAP_FROM_GETAUXVAL",
+    ],
+    srcs: [
+        "test/hwcaps_for_testing.cc",
+    ],
+    static_libs: [
+        "libcpu_features-string_view",
+        "libcpu_features-filesystem_for_testing",
+    ],
+}
+
+cc_defaults {
+    name: "stack_line_reader-defaults",
+    cflags: [
+        "-DSTACK_LINE_READER_BUFFER_SIZE=1024",
+    ],
+}
+
+cc_test_library {
+    name: "libcpu_features-stack_line_reader",
+    defaults: [
+        "cpu_features-test-defaults",
+        "stack_line_reader-defaults",
+    ],
+    srcs: [
+        "src/stack_line_reader.c",
+    ],
+    static_libs: [
+        "libcpu_features-filesystem_for_testing",
+        "libcpu_features-string_view",
+    ],
+}
+
+cc_test_library {
+    name: "libcpu_features-stack_line_reader_for_test",
+    defaults: ["cpu_features-test-defaults"],
+    cflags: [
+        "-DSTACK_LINE_READER_BUFFER_SIZE=16",
+    ],
+    srcs: [
+        "src/stack_line_reader.c",
+    ],
+    whole_static_libs: [
+        "libcpu_features-filesystem_for_testing",
+        "libcpu_features-string_view",
+    ],
+}
+
+cc_test_library {
+    name: "libcpu_features-all_libraries",
+    defaults: [
+        "cpu_features-test-defaults",
+        "stack_line_reader-defaults",
+    ],
+    srcs: [
+        "src/unix_features_aggregator.c",
+    ],
+    whole_static_libs: [
+        "libcpu_features-filesystem_for_testing",
+        "libcpu_features-hwcaps_for_testing",
+        "libcpu_features-stack_line_reader",
+        "libcpu_features-string_view",
+    ],
+}
+
+cc_test {
+    name: "cpu_features-bit_utils_test",
+    defaults: ["cpu_features-test-defaults"],
+    srcs: [
+        "test/bit_utils_test.cc",
+    ],
+}
+
+cc_test {
+    name: "cpu_features-string_view_test",
+    defaults: ["cpu_features-test-defaults"],
+    srcs: [
+        "test/string_view_test.cc",
+        "src/string_view.c",
+    ],
+    static_libs: [
+        "libcpu_features-string_view",
+    ],
+}
+
+cc_test {
+    name: "cpu_features-stack_line_reader_test",
+    defaults: [
+        "cpu_features-test-defaults",
+        "stack_line_reader-defaults",
+    ],
+    cflags: [
+        // TODO: Handle unused funtions in
+        // test/stack_line_reader_test.cc and remove this flag.
+        "-Wno-unused-function",
+    ],
+    srcs: [
+        "test/stack_line_reader_test.cc",
+    ],
+    static_libs: [
+        "libcpu_features-stack_line_reader_for_test",
+    ],
+}
+
+cc_test {
+    name: "cpu_features-unix_features_aggregator_test",
+    defaults: ["cpu_features-test-defaults"],
+    srcs: [
+        "test/unix_features_aggregator_test.cc",
+    ],
+    static_libs: [
+        "libcpu_features-all_libraries",
+    ],
+}
+
+cc_test {
+    name: "cpu_features-cpuinfo_test",
+    defaults: [
+        "cpu_features-test-defaults",
+    ],
+    static_libs: [
+        "libcpu_features-all_libraries",
+    ],
+    arch: {
+        x86: {
+            cflags: [
+                "-DCPU_FEATURES_MOCK_CPUID_X86",
+                "-Wno-unused-variable",
+            ],
+            srcs: [
+                "test/cpuinfo_x86_test.cc",
+                "src/cpuinfo_x86.c",
+            ],
+        },
+        x86_64: {
+            cflags: [
+                "-DCPU_FEATURES_MOCK_CPUID_X86",
+                "-Wno-unused-variable",
+            ],
+            srcs: [
+                "test/cpuinfo_x86_test.cc",
+                "src/cpuinfo_x86.c",
+            ],
+        },
+        arm: {
+            cflags: [
+                "-DSTACK_LINE_READER_BUFFER_SIZE=1024",
+            ],
+            srcs: [
+                "test/cpuinfo_arm_test.cc",
+                "src/cpuinfo_arm.c",
+            ],
+        },
+        arm64: {
+            cflags: [
+                "-DSTACK_LINE_READER_BUFFER_SIZE=1024",
+                "-Wno-gnu-designator",
+            ],
+            srcs: [
+                "test/cpuinfo_aarch64_test.cc",
+                "src/cpuinfo_aarch64.c",
+            ],
+        },
+    },
+}

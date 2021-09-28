@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_SystemTimezone'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+This test verifies the effect of the SystemTimezone user policy on Chrome OS
+client behavior. This policy does not take effect until the user logs out.
+
+A test case shall pass if:
+ - The proper timezone is set
+ - The timezone reported by the DATE function is correct
+ - When the timezone is not set, it is user adjustable
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_SystemTimezone', **args_dict)

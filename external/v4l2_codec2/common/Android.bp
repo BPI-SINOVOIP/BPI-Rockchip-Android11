@@ -1,0 +1,37 @@
+cc_library {
+    name: "libv4l2_codec2_common",
+    vendor: true,
+
+    defaults: [
+        "libcodec2-impl-defaults",
+    ],
+
+    srcs: [
+        "EncodeHelpers.cpp",
+        "FormatConverter.cpp",
+        "V4L2ComponentCommon.cpp",
+        "VideoTypes.cpp",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    shared_libs: [
+        "libchrome",
+        "libcutils",
+        "liblog",
+        "libui",
+        "libutils",
+        "libv4l2_codec2_accel"
+    ],
+
+    static_libs: [
+        "libyuv_static"
+    ],
+
+    cflags: [
+      "-Werror",
+      "-Wall",
+    ],
+}

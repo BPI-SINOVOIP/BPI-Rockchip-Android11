@@ -1,0 +1,24 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+NAME = 'policy_GlobalNetworkSettings'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+This test should be run through the 'policy_GlobalNetworkSettingsServer' test.
+
+'policy_GlobalNetworkSettings' sets GlobalNetworkConfiguration policy
+and attempts to connect to policy and user defined networks. Fails if DUT
+behavior does not match expected policy behavior.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_GlobalNetworkSettings', **args_dict)
+

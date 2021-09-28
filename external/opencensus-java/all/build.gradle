@@ -1,0 +1,105 @@
+description = "OpenCensus All"
+
+def subprojects = [
+        project(':opencensus-api'),
+        project(':opencensus-impl-core'),
+        project(':opencensus-impl'),
+        project(':opencensus-impl-lite'),
+        project(':opencensus-testing'),
+        project(':opencensus-contrib-agent'),
+        project(':opencensus-contrib-appengine-standard-util'),
+        project(':opencensus-contrib-dropwizard'),
+        project(':opencensus-contrib-exemplar-util'),
+        project(':opencensus-contrib-grpc-util'),
+        project(':opencensus-contrib-grpc-metrics'),
+        project(':opencensus-contrib-http-util'),
+        project(':opencensus-contrib-log-correlation-log4j2'),
+        project(':opencensus-contrib-log-correlation-stackdriver'),
+        project(':opencensus-contrib-monitored-resource-util'),
+        project(':opencensus-contrib-spring'),
+        project(':opencensus-contrib-spring-sleuth-v1x'),
+        project(':opencensus-contrib-zpages'),
+        project(':opencensus-exporter-trace-logging'),
+        project(':opencensus-exporter-trace-ocagent'),
+        project(':opencensus-exporter-trace-stackdriver'),
+        project(':opencensus-exporter-trace-zipkin'),
+        project(':opencensus-exporter-trace-jaeger'),
+        project(':opencensus-exporter-stats-signalfx'),
+        project(':opencensus-exporter-stats-stackdriver'),
+        project(':opencensus-exporter-stats-prometheus'),
+]
+
+// A subset of subprojects for which we want to publish javadoc.
+def subprojects_javadoc = [
+        project(':opencensus-api'),
+        project(':opencensus-testing'),
+        project(':opencensus-contrib-agent'),
+        project(':opencensus-contrib-appengine-standard-util'),
+        project(':opencensus-contrib-dropwizard'),
+        project(':opencensus-contrib-exemplar-util'),
+        project(':opencensus-contrib-grpc-util'),
+        project(':opencensus-contrib-grpc-metrics'),
+        project(':opencensus-contrib-http-util'),
+        project(':opencensus-contrib-log-correlation-log4j2'),
+        project(':opencensus-contrib-log-correlation-stackdriver'),
+        project(':opencensus-contrib-monitored-resource-util'),
+        project(':opencensus-contrib-spring'),
+        project(':opencensus-contrib-spring-sleuth-v1x'),
+        project(':opencensus-contrib-zpages'),
+        project(':opencensus-exporter-trace-logging'),
+        project(':opencensus-exporter-trace-ocagent'),
+        project(':opencensus-exporter-trace-stackdriver'),
+        project(':opencensus-exporter-trace-zipkin'),
+        project(':opencensus-exporter-trace-jaeger'),
+        project(':opencensus-exporter-stats-signalfx'),
+        project(':opencensus-exporter-stats-stackdriver'),
+        project(':opencensus-exporter-stats-prometheus'),
+]
+
+for (subproject in rootProject.subprojects) {
+    if (subproject == project) {
+        continue
+    }
+    evaluationDependsOn(subproject.path)
+}
+
+dependencies {
+    compile subprojects
+}
+
+javadoc {
+    classpath = files(subprojects_javadoc.collect { subproject ->
+        subproject.javadoc.classpath
+    })
+    for (subproject in subprojects_javadoc) {
+        if (subproject == project) {
+            continue;
+        }
+        source subproject.javadoc.source
+        options.links subproject.javadoc.options.links.toArray(new String[0])
+    }
+    exclude 'io/opencensus/internal/**'
+}
+
+task jacocoMerge(type: JacocoMerge) {
+    dependsOn(subprojects.jacocoTestReport.dependsOn)
+    mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
+    destinationFile = file("${buildDir}/jacoco/test.exec")
+    executionData = files(subprojects.jacocoTestReport.executionData)
+            .filter { f -> f.exists() }
+}
+
+jacocoTestReport {
+    dependsOn(jacocoMerge)
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    classDirectories = files(classDirectories.files.collect {
+        fileTree(dir: it)
+    })
+}

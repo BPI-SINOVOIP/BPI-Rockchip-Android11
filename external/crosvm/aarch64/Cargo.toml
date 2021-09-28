@@ -1,0 +1,19 @@
+[package]
+name = "aarch64"
+version = "0.1.0"
+authors = ["The Chromium OS Authors"]
+edition = "2018"
+
+[dependencies]
+arch = { path = "../arch" }
+data_model = { path = "../data_model" }
+devices = { path = "../devices" }
+io_jail = { path = "../io_jail" }
+kernel_cmdline = { path = "../kernel_cmdline" }
+kvm = { path = "../kvm" }
+kvm_sys = { path = "../kvm_sys" }
+libc = "*"
+remain = "*"
+resources = { path = "../resources" }
+sync = { path = "../sync" }
+sys_util = { path = "../sys_util" }

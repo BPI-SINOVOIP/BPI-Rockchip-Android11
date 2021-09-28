@@ -1,0 +1,30 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.cros.audio import audio_test_data
+from autotest_lib.client.cros.chameleon import chameleon_audio_ids
+from autotest_lib.server import utils
+
+AUTHOR = "Intel"
+NAME = "audio_AudioNodeSwitch.HDMI_while_playing_audio"
+PURPOSE = "Check if audio is routing through HDMI node"
+CRITERIA = "This test will fail if audio is not routing through selected node"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "audio"
+TEST_TYPE = "server"
+DEPENDENCIES = "audio_box, test_audio_jack_usb_hdmi"
+
+DOC = """
+This test remotely tests audio nodes selection and audio routing.
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test("audio_AudioNodeSwitch", host=host, hdmi_node=True,
+                 play_audio=True, tag='HDMI')
+parallel_simple(run, machines)

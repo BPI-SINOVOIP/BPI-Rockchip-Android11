@@ -1,0 +1,29 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "dianwa@google.com"
+NAME = "enterprise_CFM_CEC"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+
+JOB_RETRIES = 0
+DEPENDENCIES = ""
+
+DOC = """
+This test performs the CEC feature in HDMI cable in Teemo
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run_test(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test(NAME, host=host)
+
+
+parallel_simple(run_test, machines)

@@ -1,0 +1,19 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'Intel'
+NAME = 'display_InternalDisplayRotation'
+PURPOSE = 'To test the internal display rotations'
+CRITERIA = 'This test fails if rotation is not set'
+ATTRIBUTES = "suite:platform_internal_display"
+TIME = 'SHORT'
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'display'
+TEST_TYPE = 'client'
+
+DOC = """
+Change orientation of internal display
+"""
+
+job.run_test('display_InternalDisplayRotation')

@@ -1,0 +1,43 @@
+# Copyright (c) 2010 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_Draw.Aquarium"
+PURPOSE = "Stress system similar to Factory Run-in."
+CRITERIA = "This test is a benchmark."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test will run for 3600 seconds by default.
+
+This test tries to emulate the factory Run-In test workload in order to
+(more) easily replicate issues that might happen in the factory test.
+"""
+
+tag = 'PowerDraw'
+seconds = 3600
+
+
+def run_power_draw():
+    job.run_test('power_Draw', seconds=seconds, tag=tag)
+
+
+# wait 20 seconds to give WebGLAquarium a chance to get started.
+# Aquarium wants to see idle CPU before it will start.
+# And if the CPU is too hot, it will sleep for 60 seconds.
+def run_sat():
+    job.run_test('hardware_SAT', seconds=seconds, wait_secs=120,
+                 free_memory_fraction=0.80, tag=tag)
+
+
+def run_aquarium():
+    job.run_test('graphics_WebGLAquarium', test_duration_secs=seconds,
+                 test_setting_num_fishes=(1000,), ac_ok=True,
+                 tag=tag)
+
+
+job.parallel([run_power_draw], [run_sat], [run_aquarium])

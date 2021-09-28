@@ -1,0 +1,39 @@
+# Copyright (c) 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "aluo"
+NAME = "firmware_FAFTModeTransitions.normal_u"
+PURPOSE = "Test FAFT ability to switch from normal to another mode and back"
+CRITERIA = "This test will fail if FAFT can not switch from normal and back again."
+ATTRIBUTES = "suite:faft_framework"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+JOB_RETRIES = 4
+
+DOC = """
+This test checks the following mode transitions:
+  - Transition from normal to dev and back.
+  - Transition from normal to rec and back.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+
+def run_faftmodetransitions(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+
+    job.run_test(
+            "firmware_FAFTModeTransitions",
+            host=host,
+            cmdline_args=args,
+            disable_sysinfo=True,
+            mode_seq=["normal", "dev", "normal", "rec", "normal"])
+
+
+parallel_simple(run_faftmodetransitions, machines)

@@ -1,0 +1,783 @@
+
+<html meta charset="UTF8">
+<head>
+  <!-- Load c3.css -->
+  <link href="https://rawgit.com/masayuki0812/c3/master/c3.css" rel="stylesheet" type="text/css">
+  <!-- Load d3.js and c3.js -->
+  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+  <script src="https://rawgit.com/masayuki0812/c3/master/c3.js" charset="utf-8"></script>
+  <style type="text/css">
+    .c3-grid text {
+        fill: grey;
+    }
+    .event_log_box {
+      font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+      font-size: 20px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 300;
+      line-height: 26.4px;
+      white-space: pre;
+      height:50%;
+      width:48%;
+      border:1px solid #ccc;
+      overflow:auto;
+    }
+    .checkbox {
+      font-size: 30px;
+      border: 2px;
+    }
+    .device {
+      font-size: 15px;
+    }
+    .stream{
+      font-size: 15px;
+    }
+    .fetch{
+    }
+    .wake{
+    }
+  </style>
+  <script type="text/javascript">
+    var selected = null;
+    draw_chart = function() {
+      var chart = c3.generate({
+        data: {
+          x: 'time',
+          columns: [
+            ['time',                   38274.654909156, 38274.657371167, 38274.657668959, 38274.676688159, 38274.676725281, 38274.676926906, 38274.677252890, 38274.697879928, 38274.697916480, 38274.698114806, 38274.698417024, 38274.719199290, 38274.719236981, 38274.719359698, 38274.719663005, 38274.740686503, 38274.740723661, 38274.740850997, 38274.741173582, 38274.762025805, 38274.762062690, 38274.762153748, 38274.762452548, 38274.783326364, 38274.783362532, 38274.783489920, 38274.783790725, 38274.804671376, 38274.804708721, 38274.804838233, 38274.805159078, 38274.826024162, 38274.826062337, 38274.826152748, 38274.826451927, 38274.847346397, 38274.847382560, 38274.847510294, 38274.847815798, 38274.868739650, 38274.868776554, 38274.868889760, 38274.869207769, 38274.890021859, 38274.890059702, 38274.890149892, 38274.890446925, 38274.911642356, 38274.911677780, 38274.911875825, 38274.912200713, 38274.932637511, 38274.932673739, 38274.932804355, 38274.933129716, 38274.954030314, 38274.954067674, 38274.954159335, 38274.954466654, 38274.975643692, 38274.975680354, 38274.975807387, 38274.976120622, 38274.996667671, 38274.996704048, 38274.996833804, 38274.997146185, 38275.017877797, 38275.017914904, 38275.018030670, 38275.018320047, 38275.039145228, 38275.039181369, 38275.039303282, 38275.039595139, 38275.060732607, 38275.060769291, 38275.060896906, 38275.061209809, 38275.082027553, 38275.082064736, 38275.082153665, 38275.082440331, 38275.103326735, 38275.103362951, 38275.103561185, 38275.103915541, 38275.124657946, 38275.124694671, 38275.124818548, 38275.125130858, 38275.146029029, 38275.146065845, 38275.146157000, 38275.146444659, 38275.167643000, 38275.167679011, 38275.167806856, 38275.168119122, 38275.188729928, 38275.188766573, 38275.188894276, 38275.189205852, 38275.210020752, 38275.210058744, 38275.210148466, 38275.210434597],
+            ['buffer_level',           null, 928, 1952, 1040, 1040, 1040, 2016, 1056, 1056, 1008, 2032, 1024, 1024, 1024, 2048, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032, 1024, 1024, 1024, 2048, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032, 1024, 1024, 1024, 2048, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032, 1024, 1024, 1024, 2000, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032, 1024, 1024, 1024, 2000, 1040, 1040, 1040, 2016, 1056, 1056, 1008, 2032, 1024, 1024, 1024, 2048, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032, 1024, 1024, 1024, 2048, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032, 1024, 1024, 1024, 2000, 1040, 1040, 1040, 2016, 1008, 1008, 1008, 2032],
+          ],
+          type: 'bar',
+          types: {
+            buffer_level: 'line',
+          },
+          onclick: function (d, i) {
+            elm = document.getElementById(d.x.toFixed(9));
+            if (selected)
+              selected.style.color = '';
+            if (elm === null) {
+              console.error("Can not find element by ID %s", d.x.toFixed(9));
+              return;
+            }
+            elm.style.color = 'blue';
+            elm.scrollIntoView();
+            selected = elm;
+          },
+        },
+        zoom: {
+          enabled: true,
+        },
+
+        grid: {
+          x: {
+            lines: [
+              {value: 38274.654888011, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.654909156, text: "Added Device 6", position: "start", class: "device"}, {value: 38274.654958862, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.655022911, text: "Add stream 1d0000", position: "middle", class: "stream"}, {value: 38274.655046329, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.656503188, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.676639948, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.676860551, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.697833022, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.698048577, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.719153430, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.719301220, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.740639477, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.740793102, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.761962963, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.762102057, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.783277641, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.783432165, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.804623390, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.804780617, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.825958417, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.826100424, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.847298285, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.847453266, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.868691938, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.868834120, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.889955591, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.890097300, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.911593780, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.911810046, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.932589800, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.932746675, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.953964062, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.954106963, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.975595442, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.975750291, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38274.996619059, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38274.996775539, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.017830417, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.017961913, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.039099808, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.039242696, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.060684606, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.060839575, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.081962397, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.082101703, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.103278902, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.103495004, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.124610042, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.124760504, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.145964152, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.146104176, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.167594886, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.167749677, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.188682360, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.188837092, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.209955429, text: "Fetch 1d0000", position: "end", class: "fetch"}, {value: 38275.210096165, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.222778298, text: "num_fds 1", position: "middle", class: "wake"}, {value: 38275.222796197, text: "Remove stream 1d0000", position: "middle", class: "stream"},
+            ],
+          },
+        },
+
+        axis: {
+          y: {min: 0, max: 2048},
+        },
+      });
+    };
+
+    logs = `Audio Debug Stats:
+-------------devices------------
+Output dev: kbl_r5514_5663_max: :0,0
+buffer_size: 16384
+min_buffer_level: 0
+min_cb_level: 8192
+max_cb_level: 0
+frame_rate: 48000
+num_channels: 2
+est_rate_ratio: 1.000000
+num_underruns: 0
+num_severe_underruns: 0
+highest_hw_level: 2048
+runtime: 2.148581272
+software_gain_scaler: 0.000000
+
+-------------stream_dump------------
+Audio Thread Event Log:
+start at 2874
+<label id="38204.803651654">2019-08-19T10:36:44.803651654 cras atlog  SLEEP                          sleep:000000000.000000000 longest_wake:001565104</label>
+<label id="38274.654888011">2019-08-19T10:37:54.654888011 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.654901579">2019-08-19T10:37:54.654901579 cras atlog  PB_MSG                         msg_id:0</label>
+<label id="38274.654906341">2019-08-19T10:37:54.654906341 cras atlog  FILL_ODEV_ZEROS                dev:6 write:0</label>
+<label id="38274.654909156">2019-08-19T10:37:54.654909156 cras atlog  DEV_ADDED                      dev:6</label>
+<label id="38274.654950513">2019-08-19T10:37:54.654950513 cras atlog  SLEEP                          sleep:000000000.000000000 longest_wake:001565104</label>
+<label id="38274.654958862">2019-08-19T10:37:54.654958862 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.654966799">2019-08-19T10:37:54.654966799 cras atlog  PB_MSG                         msg_id:3</label>
+<label id="38274.654969277">2019-08-19T10:37:54.654969277 cras atlog  WRITE_STREAMS_WAIT             stream:1d0000</label>
+<label id="38274.655022911">2019-08-19T10:37:54.655022911 cras atlog  STREAM_ADDED                   id:1d0000 dev:6</label>
+<label id="38274.655046329">2019-08-19T10:37:54.655046329 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:288</label>
+<label id="38274.655069609">2019-08-19T10:37:54.655069609 cras atlog  SLEEP                          sleep:000000000.000000000 longest_wake:001565104</label>
+<label id="38274.656503188">2019-08-19T10:37:54.656503188 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.656538337">2019-08-19T10:37:54.656538337 cras atlog  FILL_ODEV_ZEROS                dev:6 write:1024</label>
+<label id="38274.656869440">2019-08-19T10:37:54.656869440 cras atlog  ODEV_START                     dev:6 min_cb_level:1024</label>
+<label id="38274.657368663">2019-08-19T10:37:54.657368663 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.657365837</label>
+<label id="38274.657371167">2019-08-19T10:37:54.657371167 cras atlog  FILL_AUDIO                     dev:6 hw_level:928</label>
+<label id="38274.657376118">2019-08-19T10:37:54.657376118 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.657385868">2019-08-19T10:37:54.657385868 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.657395667">2019-08-19T10:37:54.657395667 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.657398033">2019-08-19T10:37:54.657398033 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.657646876">2019-08-19T10:37:54.657646876 cras atlog  FILL_AUDIO_DONE                hw_level:928 total_written:1024 min_cb_level:1024</label>
+<label id="38274.657668959">2019-08-19T10:37:54.657668959 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1952 sleep:1904</label>
+<label id="38274.657671042">2019-08-19T10:37:54.657671042 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.697332693</label>
+<label id="38274.657676157">2019-08-19T10:37:54.657676157 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.676321391</label>
+<label id="38274.657680973">2019-08-19T10:37:54.657680973 cras atlog  SLEEP                          sleep:000000000.018647412 longest_wake:001565104</label>
+<label id="38274.676595788">2019-08-19T10:37:54.676595788 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.676639948">2019-08-19T10:37:54.676639948 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38274.676685281">2019-08-19T10:37:54.676685281 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.676683159</label>
+<label id="38274.676688159">2019-08-19T10:37:54.676688159 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.676694319">2019-08-19T10:37:54.676694319 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.676696512">2019-08-19T10:37:54.676696512 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.676699365">2019-08-19T10:37:54.676699365 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.676705462">2019-08-19T10:37:54.676705462 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38274.676725281">2019-08-19T10:37:54.676725281 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38274.676727345">2019-08-19T10:37:54.676727345 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.697389256</label>
+<label id="38274.676734968">2019-08-19T10:37:54.676734968 cras atlog  SLEEP                          sleep:000000000.020659324 longest_wake:001565104</label>
+<label id="38274.676860551">2019-08-19T10:37:54.676860551 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.676924328">2019-08-19T10:37:54.676924328 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.676922156</label>
+<label id="38274.676926906">2019-08-19T10:37:54.676926906 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.676931349">2019-08-19T10:37:54.676931349 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.676943036">2019-08-19T10:37:54.676943036 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.676953027">2019-08-19T10:37:54.676953027 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.676955453">2019-08-19T10:37:54.676955453 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.677231898">2019-08-19T10:37:54.677231898 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38274.677252890">2019-08-19T10:37:54.677252890 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38274.677254980">2019-08-19T10:37:54.677254980 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.718250167</label>
+<label id="38274.677259823">2019-08-19T10:37:54.677259823 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.697654724</label>
+<label id="38274.677264536">2019-08-19T10:37:54.677264536 cras atlog  SLEEP                          sleep:000000000.020396980 longest_wake:001565104</label>
+<label id="38274.697789394">2019-08-19T10:37:54.697789394 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.697833022">2019-08-19T10:37:54.697833022 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38274.697876956">2019-08-19T10:37:54.697876956 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.697874846</label>
+<label id="38274.697879928">2019-08-19T10:37:54.697879928 cras atlog  FILL_AUDIO                     dev:6 hw_level:1056</label>
+<label id="38274.697885964">2019-08-19T10:37:54.697885964 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.697888192">2019-08-19T10:37:54.697888192 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.697891024">2019-08-19T10:37:54.697891024 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.697897003">2019-08-19T10:37:54.697897003 cras atlog  FILL_AUDIO_DONE                hw_level:1056 total_written:0 min_cb_level:1024</label>
+<label id="38274.697916480">2019-08-19T10:37:54.697916480 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1056 sleep:1008</label>
+<label id="38274.697918569">2019-08-19T10:37:54.697918569 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.718913723</label>
+<label id="38274.697926449">2019-08-19T10:37:54.697926449 cras atlog  SLEEP                          sleep:000000000.020992361 longest_wake:001565104</label>
+<label id="38274.698048577">2019-08-19T10:37:54.698048577 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.698112219">2019-08-19T10:37:54.698112219 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.698110036</label>
+<label id="38274.698114806">2019-08-19T10:37:54.698114806 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.698119339">2019-08-19T10:37:54.698119339 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.698133295">2019-08-19T10:37:54.698133295 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.698138449">2019-08-19T10:37:54.698138449 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.698140835">2019-08-19T10:37:54.698140835 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.698396787">2019-08-19T10:37:54.698396787 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38274.698417024">2019-08-19T10:37:54.698417024 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38274.698419100">2019-08-19T10:37:54.698419100 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.739747637</label>
+<label id="38274.698423907">2019-08-19T10:37:54.698423907 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.718988057</label>
+<label id="38274.698428623">2019-08-19T10:37:54.698428623 cras atlog  SLEEP                          sleep:000000000.020566258 longest_wake:001565104</label>
+<label id="38274.719109903">2019-08-19T10:37:54.719109903 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.719153430">2019-08-19T10:37:54.719153430 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38274.719196387">2019-08-19T10:37:54.719196387 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.719194274</label>
+<label id="38274.719199290">2019-08-19T10:37:54.719199290 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.719205301">2019-08-19T10:37:54.719205301 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.719207458">2019-08-19T10:37:54.719207458 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.719210354">2019-08-19T10:37:54.719210354 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.719216842">2019-08-19T10:37:54.719216842 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38274.719236981">2019-08-19T10:37:54.719236981 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38274.719239068">2019-08-19T10:37:54.719239068 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.739567597</label>
+<label id="38274.719246952">2019-08-19T10:37:54.719246952 cras atlog  SLEEP                          sleep:000000000.020325687 longest_wake:001565104</label>
+<label id="38274.719301220">2019-08-19T10:37:54.719301220 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.719357382">2019-08-19T10:37:54.719357382 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.719355237</label>
+<label id="38274.719359698">2019-08-19T10:37:54.719359698 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.719362947">2019-08-19T10:37:54.719362947 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.719377071">2019-08-19T10:37:54.719377071 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.719382615">2019-08-19T10:37:54.719382615 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.719384824">2019-08-19T10:37:54.719384824 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.719643101">2019-08-19T10:37:54.719643101 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38274.719663005">2019-08-19T10:37:54.719663005 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2048 sleep:2000</label>
+<label id="38274.719664987">2019-08-19T10:37:54.719664987 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.761327047</label>
+<label id="38274.719669473">2019-08-19T10:37:54.719669473 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.740321390</label>
+<label id="38274.719673899">2019-08-19T10:37:54.719673899 cras atlog  SLEEP                          sleep:000000000.020654025 longest_wake:001565104</label>
+<label id="38274.740595499">2019-08-19T10:37:54.740595499 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.740639477">2019-08-19T10:37:54.740639477 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38274.740683615">2019-08-19T10:37:54.740683615 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.740681512</label>
+<label id="38274.740686503">2019-08-19T10:37:54.740686503 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.740692464">2019-08-19T10:37:54.740692464 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.740694600">2019-08-19T10:37:54.740694600 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.740697433">2019-08-19T10:37:54.740697433 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.740703643">2019-08-19T10:37:54.740703643 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38274.740723661">2019-08-19T10:37:54.740723661 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38274.740725763">2019-08-19T10:37:54.740725763 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.761387612</label>
+<label id="38274.740733471">2019-08-19T10:37:54.740733471 cras atlog  SLEEP                          sleep:000000000.020659319 longest_wake:001565104</label>
+<label id="38274.740793102">2019-08-19T10:37:54.740793102 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.740848639">2019-08-19T10:37:54.740848639 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.740846573</label>
+<label id="38274.740850997">2019-08-19T10:37:54.740850997 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.740854311">2019-08-19T10:37:54.740854311 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.740868736">2019-08-19T10:37:54.740868736 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.740873892">2019-08-19T10:37:54.740873892 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.740875997">2019-08-19T10:37:54.740875997 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.741153121">2019-08-19T10:37:54.741153121 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38274.741173582">2019-08-19T10:37:54.741173582 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38274.741175606">2019-08-19T10:37:54.741175606 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.782171115</label>
+<label id="38274.741180302">2019-08-19T10:37:54.741180302 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.761654723</label>
+<label id="38274.741184669">2019-08-19T10:37:54.741184669 cras atlog  SLEEP                          sleep:000000000.020476747 longest_wake:001565104</label>
+<label id="38274.761922026">2019-08-19T10:37:54.761922026 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.761962963">2019-08-19T10:37:54.761962963 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38274.762022826">2019-08-19T10:37:54.762022826 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.762020513</label>
+<label id="38274.762025805">2019-08-19T10:37:54.762025805 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.762031594">2019-08-19T10:37:54.762031594 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.762033738">2019-08-19T10:37:54.762033738 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.762036536">2019-08-19T10:37:54.762036536 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.762042425">2019-08-19T10:37:54.762042425 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38274.762062690">2019-08-19T10:37:54.762062690 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38274.762065186">2019-08-19T10:37:54.762065186 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.782060173</label>
+<label id="38274.762072982">2019-08-19T10:37:54.762072982 cras atlog  SLEEP                          sleep:000000000.019992102 longest_wake:001565104</label>
+<label id="38274.762102057">2019-08-19T10:37:54.762102057 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.762151699">2019-08-19T10:37:54.762151699 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.762149704</label>
+<label id="38274.762153748">2019-08-19T10:37:54.762153748 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.762156523">2019-08-19T10:37:54.762156523 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.762170916">2019-08-19T10:37:54.762170916 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.762175916">2019-08-19T10:37:54.762175916 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.762178058">2019-08-19T10:37:54.762178058 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.762432618">2019-08-19T10:37:54.762432618 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38274.762452548">2019-08-19T10:37:54.762452548 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38274.762454582">2019-08-19T10:37:54.762454582 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.803783385</label>
+<label id="38274.762458984">2019-08-19T10:37:54.762458984 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.782988056</label>
+<label id="38274.762463390">2019-08-19T10:37:54.762463390 cras atlog  SLEEP                          sleep:000000000.020531186 longest_wake:001565104</label>
+<label id="38274.783234058">2019-08-19T10:37:54.783234058 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.783277641">2019-08-19T10:37:54.783277641 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38274.783323456">2019-08-19T10:37:54.783323456 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.783321345</label>
+<label id="38274.783326364">2019-08-19T10:37:54.783326364 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.783332069">2019-08-19T10:37:54.783332069 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.783334227">2019-08-19T10:37:54.783334227 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.783337045">2019-08-19T10:37:54.783337045 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.783343042">2019-08-19T10:37:54.783343042 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38274.783362532">2019-08-19T10:37:54.783362532 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38274.783364628">2019-08-19T10:37:54.783364628 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.803693148</label>
+<label id="38274.783372345">2019-08-19T10:37:54.783372345 cras atlog  SLEEP                          sleep:000000000.020325873 longest_wake:001565104</label>
+<label id="38274.783432165">2019-08-19T10:37:54.783432165 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.783487514">2019-08-19T10:37:54.783487514 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.783485428</label>
+<label id="38274.783489920">2019-08-19T10:37:54.783489920 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.783493117">2019-08-19T10:37:54.783493117 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.783507178">2019-08-19T10:37:54.783507178 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.783512206">2019-08-19T10:37:54.783512206 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.783514361">2019-08-19T10:37:54.783514361 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.783772851">2019-08-19T10:37:54.783772851 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38274.783790725">2019-08-19T10:37:54.783790725 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2048 sleep:2000</label>
+<label id="38274.783792763">2019-08-19T10:37:54.783792763 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.825454687</label>
+<label id="38274.783797423">2019-08-19T10:37:54.783797423 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.804321389</label>
+<label id="38274.783801803">2019-08-19T10:37:54.783801803 cras atlog  SLEEP                          sleep:000000000.020526265 longest_wake:001565104</label>
+<label id="38274.804579013">2019-08-19T10:37:54.804579013 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.804623390">2019-08-19T10:37:54.804623390 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38274.804668478">2019-08-19T10:37:54.804668478 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.804666367</label>
+<label id="38274.804671376">2019-08-19T10:37:54.804671376 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.804677338">2019-08-19T10:37:54.804677338 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.804679504">2019-08-19T10:37:54.804679504 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.804682310">2019-08-19T10:37:54.804682310 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.804688741">2019-08-19T10:37:54.804688741 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38274.804708721">2019-08-19T10:37:54.804708721 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38274.804710807">2019-08-19T10:37:54.804710807 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.825372685</label>
+<label id="38274.804718659">2019-08-19T10:37:54.804718659 cras atlog  SLEEP                          sleep:000000000.020659270 longest_wake:001565104</label>
+<label id="38274.804780617">2019-08-19T10:37:54.804780617 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.804835890">2019-08-19T10:37:54.804835890 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.804833797</label>
+<label id="38274.804838233">2019-08-19T10:37:54.804838233 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.804841501">2019-08-19T10:37:54.804841501 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.804855352">2019-08-19T10:37:54.804855352 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.804860473">2019-08-19T10:37:54.804860473 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.804862636">2019-08-19T10:37:54.804862636 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.805138821">2019-08-19T10:37:54.805138821 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38274.805159078">2019-08-19T10:37:54.805159078 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38274.805161124">2019-08-19T10:37:54.805161124 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.846156596</label>
+<label id="38274.805165757">2019-08-19T10:37:54.805165757 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.825654722</label>
+<label id="38274.805170306">2019-08-19T10:37:54.805170306 cras atlog  SLEEP                          sleep:000000000.020491218 longest_wake:001565104</label>
+<label id="38274.825913546">2019-08-19T10:37:54.825913546 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.825958417">2019-08-19T10:37:54.825958417 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38274.826020986">2019-08-19T10:37:54.826020986 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.826018114</label>
+<label id="38274.826024162">2019-08-19T10:37:54.826024162 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.826030236">2019-08-19T10:37:54.826030236 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.826032511">2019-08-19T10:37:54.826032511 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.826035326">2019-08-19T10:37:54.826035326 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.826041230">2019-08-19T10:37:54.826041230 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38274.826062337">2019-08-19T10:37:54.826062337 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38274.826064399">2019-08-19T10:37:54.826064399 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.846059769</label>
+<label id="38274.826072024">2019-08-19T10:37:54.826072024 cras atlog  SLEEP                          sleep:000000000.019992730 longest_wake:001565104</label>
+<label id="38274.826100424">2019-08-19T10:37:54.826100424 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.826150628">2019-08-19T10:37:54.826150628 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.826148583</label>
+<label id="38274.826152748">2019-08-19T10:37:54.826152748 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.826155423">2019-08-19T10:37:54.826155423 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.826170179">2019-08-19T10:37:54.826170179 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.826175702">2019-08-19T10:37:54.826175702 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.826177885">2019-08-19T10:37:54.826177885 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.826431854">2019-08-19T10:37:54.826431854 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38274.826451927">2019-08-19T10:37:54.826451927 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38274.826453912">2019-08-19T10:37:54.826453912 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.867782437</label>
+<label id="38274.826458354">2019-08-19T10:37:54.826458354 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.846988055</label>
+<label id="38274.826462711">2019-08-19T10:37:54.826462711 cras atlog  SLEEP                          sleep:000000000.020531841 longest_wake:001565104</label>
+<label id="38274.847254169">2019-08-19T10:37:54.847254169 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.847298285">2019-08-19T10:37:54.847298285 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38274.847343532">2019-08-19T10:37:54.847343532 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.847341437</label>
+<label id="38274.847346397">2019-08-19T10:37:54.847346397 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.847352242">2019-08-19T10:37:54.847352242 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.847354402">2019-08-19T10:37:54.847354402 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.847357232">2019-08-19T10:37:54.847357232 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.847363049">2019-08-19T10:37:54.847363049 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38274.847382560">2019-08-19T10:37:54.847382560 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38274.847384657">2019-08-19T10:37:54.847384657 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.867713298</label>
+<label id="38274.847392466">2019-08-19T10:37:54.847392466 cras atlog  SLEEP                          sleep:000000000.020325941 longest_wake:001565104</label>
+<label id="38274.847453266">2019-08-19T10:37:54.847453266 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.847507893">2019-08-19T10:37:54.847507893 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.847505842</label>
+<label id="38274.847510294">2019-08-19T10:37:54.847510294 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.847513378">2019-08-19T10:37:54.847513378 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.847527509">2019-08-19T10:37:54.847527509 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.847532608">2019-08-19T10:37:54.847532608 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.847534792">2019-08-19T10:37:54.847534792 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.847794682">2019-08-19T10:37:54.847794682 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38274.847815798">2019-08-19T10:37:54.847815798 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2048 sleep:2000</label>
+<label id="38274.847818230">2019-08-19T10:37:54.847818230 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.889479489</label>
+<label id="38274.847822643">2019-08-19T10:37:54.847822643 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.868321388</label>
+<label id="38274.847827174">2019-08-19T10:37:54.847827174 cras atlog  SLEEP                          sleep:000000000.020500850 longest_wake:001565104</label>
+<label id="38274.868647280">2019-08-19T10:37:54.868647280 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.868691938">2019-08-19T10:37:54.868691938 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38274.868736756">2019-08-19T10:37:54.868736756 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.868734631</label>
+<label id="38274.868739650">2019-08-19T10:37:54.868739650 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.868745553">2019-08-19T10:37:54.868745553 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.868747712">2019-08-19T10:37:54.868747712 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.868750515">2019-08-19T10:37:54.868750515 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.868756826">2019-08-19T10:37:54.868756826 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38274.868776554">2019-08-19T10:37:54.868776554 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38274.868778635">2019-08-19T10:37:54.868778635 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.889440503</label>
+<label id="38274.868786877">2019-08-19T10:37:54.868786877 cras atlog  SLEEP                          sleep:000000000.020658858 longest_wake:001565104</label>
+<label id="38274.868834120">2019-08-19T10:37:54.868834120 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.868887396">2019-08-19T10:37:54.868887396 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.868885395</label>
+<label id="38274.868889760">2019-08-19T10:37:54.868889760 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.868892743">2019-08-19T10:37:54.868892743 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.868906663">2019-08-19T10:37:54.868906663 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.868911746">2019-08-19T10:37:54.868911746 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.868913920">2019-08-19T10:37:54.868913920 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.869187106">2019-08-19T10:37:54.869187106 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38274.869207769">2019-08-19T10:37:54.869207769 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38274.869209841">2019-08-19T10:37:54.869209841 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.910204925</label>
+<label id="38274.869214453">2019-08-19T10:37:54.869214453 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.889654721</label>
+<label id="38274.869218854">2019-08-19T10:37:54.869218854 cras atlog  SLEEP                          sleep:000000000.020442575 longest_wake:001565104</label>
+<label id="38274.889911594">2019-08-19T10:37:54.889911594 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.889955591">2019-08-19T10:37:54.889955591 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38274.890001028">2019-08-19T10:37:54.890001028 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.889998910</label>
+<label id="38274.890021859">2019-08-19T10:37:54.890021859 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.890028088">2019-08-19T10:37:54.890028088 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.890030382">2019-08-19T10:37:54.890030382 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.890033213">2019-08-19T10:37:54.890033213 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.890039166">2019-08-19T10:37:54.890039166 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38274.890059702">2019-08-19T10:37:54.890059702 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38274.890061783">2019-08-19T10:37:54.890061783 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.910057166</label>
+<label id="38274.890069206">2019-08-19T10:37:54.890069206 cras atlog  SLEEP                          sleep:000000000.019992855 longest_wake:001565104</label>
+<label id="38274.890097300">2019-08-19T10:37:54.890097300 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.890147785">2019-08-19T10:37:54.890147785 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.890145728</label>
+<label id="38274.890149892">2019-08-19T10:37:54.890149892 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.890152824">2019-08-19T10:37:54.890152824 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.890166719">2019-08-19T10:37:54.890166719 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.890171766">2019-08-19T10:37:54.890171766 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.890173949">2019-08-19T10:37:54.890173949 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.890427138">2019-08-19T10:37:54.890427138 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38274.890446925">2019-08-19T10:37:54.890446925 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38274.890448924">2019-08-19T10:37:54.890448924 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.931777812</label>
+<label id="38274.890453296">2019-08-19T10:37:54.890453296 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.910988054</label>
+<label id="38274.890457622">2019-08-19T10:37:54.890457622 cras atlog  SLEEP                          sleep:000000000.020536883 longest_wake:001565104</label>
+<label id="38274.911549604">2019-08-19T10:37:54.911549604 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.911593780">2019-08-19T10:37:54.911593780 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38274.911639463">2019-08-19T10:37:54.911639463 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.911637349</label>
+<label id="38274.911642356">2019-08-19T10:37:54.911642356 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.911648354">2019-08-19T10:37:54.911648354 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.911650495">2019-08-19T10:37:54.911650495 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.911653308">2019-08-19T10:37:54.911653308 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.911659036">2019-08-19T10:37:54.911659036 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38274.911677780">2019-08-19T10:37:54.911677780 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38274.911679870">2019-08-19T10:37:54.911679870 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.932008544</label>
+<label id="38274.911687437">2019-08-19T10:37:54.911687437 cras atlog  SLEEP                          sleep:000000000.020326063 longest_wake:001565104</label>
+<label id="38274.911810046">2019-08-19T10:37:54.911810046 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.911873260">2019-08-19T10:37:54.911873260 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.911871103</label>
+<label id="38274.911875825">2019-08-19T10:37:54.911875825 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.911880257">2019-08-19T10:37:54.911880257 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.911894516">2019-08-19T10:37:54.911894516 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.911899775">2019-08-19T10:37:54.911899775 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.911902141">2019-08-19T10:37:54.911902141 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.912179567">2019-08-19T10:37:54.912179567 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38274.912200713">2019-08-19T10:37:54.912200713 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2000 sleep:1952</label>
+<label id="38274.912202795">2019-08-19T10:37:54.912202795 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.952864609</label>
+<label id="38274.912207619">2019-08-19T10:37:54.912207619 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.932321387</label>
+<label id="38274.912212340">2019-08-19T10:37:54.912212340 cras atlog  SLEEP                          sleep:000000000.020115853 longest_wake:001565104</label>
+<label id="38274.932544653">2019-08-19T10:37:54.932544653 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.932589800">2019-08-19T10:37:54.932589800 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38274.932634557">2019-08-19T10:37:54.932634557 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.932632438</label>
+<label id="38274.932637511">2019-08-19T10:37:54.932637511 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.932643460">2019-08-19T10:37:54.932643460 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.932645626">2019-08-19T10:37:54.932645626 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.932648431">2019-08-19T10:37:54.932648431 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.932654361">2019-08-19T10:37:54.932654361 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38274.932673739">2019-08-19T10:37:54.932673739 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38274.932675817">2019-08-19T10:37:54.932675817 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.953337688</label>
+<label id="38274.932683307">2019-08-19T10:37:54.932683307 cras atlog  SLEEP                          sleep:000000000.020659279 longest_wake:001565104</label>
+<label id="38274.932746675">2019-08-19T10:37:54.932746675 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.932802037">2019-08-19T10:37:54.932802037 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.932799966</label>
+<label id="38274.932804355">2019-08-19T10:37:54.932804355 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.932807409">2019-08-19T10:37:54.932807409 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.932821550">2019-08-19T10:37:54.932821550 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.932826892">2019-08-19T10:37:54.932826892 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.932829082">2019-08-19T10:37:54.932829082 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.933108135">2019-08-19T10:37:54.933108135 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38274.933129716">2019-08-19T10:37:54.933129716 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38274.933131709">2019-08-19T10:37:54.933131709 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.974126349</label>
+<label id="38274.933136150">2019-08-19T10:37:54.933136150 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.953654720</label>
+<label id="38274.933140489">2019-08-19T10:37:54.933140489 cras atlog  SLEEP                          sleep:000000000.020520690 longest_wake:001565104</label>
+<label id="38274.953927204">2019-08-19T10:37:54.953927204 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.953964062">2019-08-19T10:37:54.953964062 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1296</label>
+<label id="38274.954027217">2019-08-19T10:37:54.954027217 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.954024954</label>
+<label id="38274.954030314">2019-08-19T10:37:54.954030314 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.954036483">2019-08-19T10:37:54.954036483 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.954038676">2019-08-19T10:37:54.954038676 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.954041528">2019-08-19T10:37:54.954041528 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.954047105">2019-08-19T10:37:54.954047105 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38274.954067674">2019-08-19T10:37:54.954067674 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38274.954069771">2019-08-19T10:37:54.954069771 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.974064924</label>
+<label id="38274.954077360">2019-08-19T10:37:54.954077360 cras atlog  SLEEP                          sleep:000000000.019992481 longest_wake:001565104</label>
+<label id="38274.954106963">2019-08-19T10:37:54.954106963 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.954157230">2019-08-19T10:37:54.954157230 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.954155178</label>
+<label id="38274.954159335">2019-08-19T10:37:54.954159335 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38274.954162037">2019-08-19T10:37:54.954162037 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.954177049">2019-08-19T10:37:54.954177049 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.954182292">2019-08-19T10:37:54.954182292 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.954184412">2019-08-19T10:37:54.954184412 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.954439987">2019-08-19T10:37:54.954439987 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:0</label>
+<label id="38274.954442042">2019-08-19T10:37:54.954442042 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.954444204">2019-08-19T10:37:54.954444204 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.954446985">2019-08-19T10:37:54.954446985 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38274.954466654">2019-08-19T10:37:54.954466654 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38274.954468696">2019-08-19T10:37:54.954468696 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.995797668</label>
+<label id="38274.954473224">2019-08-19T10:37:54.954473224 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.974988053</label>
+<label id="38274.954477555">2019-08-19T10:37:54.954477555 cras atlog  SLEEP                          sleep:000000000.020517058 longest_wake:001565104</label>
+<label id="38274.975550997">2019-08-19T10:37:54.975550997 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.975595442">2019-08-19T10:37:54.975595442 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38274.975640808">2019-08-19T10:37:54.975640808 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.975638709</label>
+<label id="38274.975643692">2019-08-19T10:37:54.975643692 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.975649536">2019-08-19T10:37:54.975649536 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.975651738">2019-08-19T10:37:54.975651738 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.975654643">2019-08-19T10:37:54.975654643 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.975660861">2019-08-19T10:37:54.975660861 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38274.975680354">2019-08-19T10:37:54.975680354 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38274.975682447">2019-08-19T10:37:54.975682447 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:54.996011143</label>
+<label id="38274.975690215">2019-08-19T10:37:54.975690215 cras atlog  SLEEP                          sleep:000000000.020326081 longest_wake:001565104</label>
+<label id="38274.975750291">2019-08-19T10:37:54.975750291 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.975805101">2019-08-19T10:37:54.975805101 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.975802996</label>
+<label id="38274.975807387">2019-08-19T10:37:54.975807387 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38274.975810666">2019-08-19T10:37:54.975810666 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.975813858">2019-08-19T10:37:54.975813858 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.975818840">2019-08-19T10:37:54.975818840 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.975820997">2019-08-19T10:37:54.975820997 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.976100465">2019-08-19T10:37:54.976100465 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38274.976120622">2019-08-19T10:37:54.976120622 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2000 sleep:1952</label>
+<label id="38274.976122691">2019-08-19T10:37:54.976122691 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.016784703</label>
+<label id="38274.976127066">2019-08-19T10:37:54.976127066 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:54.996321386</label>
+<label id="38274.976131378">2019-08-19T10:37:54.976131378 cras atlog  SLEEP                          sleep:000000000.020196437 longest_wake:001565104</label>
+<label id="38274.996575651">2019-08-19T10:37:54.996575651 cras atlog  WAKE                           num_fds:0</label>
+<label id="38274.996619059">2019-08-19T10:37:54.996619059 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38274.996664756">2019-08-19T10:37:54.996664756 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.996662645</label>
+<label id="38274.996667671">2019-08-19T10:37:54.996667671 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.996673482">2019-08-19T10:37:54.996673482 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38274.996675649">2019-08-19T10:37:54.996675649 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38274.996678438">2019-08-19T10:37:54.996678438 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38274.996684371">2019-08-19T10:37:54.996684371 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38274.996704048">2019-08-19T10:37:54.996704048 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38274.996706108">2019-08-19T10:37:54.996706108 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.017368028</label>
+<label id="38274.996713503">2019-08-19T10:37:54.996713503 cras atlog  SLEEP                          sleep:000000000.020659377 longest_wake:001565104</label>
+<label id="38274.996775539">2019-08-19T10:37:54.996775539 cras atlog  WAKE                           num_fds:1</label>
+<label id="38274.996831459">2019-08-19T10:37:54.996831459 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:54.996829346</label>
+<label id="38274.996833804">2019-08-19T10:37:54.996833804 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38274.996837127">2019-08-19T10:37:54.996837127 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38274.996840252">2019-08-19T10:37:54.996840252 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38274.996845333">2019-08-19T10:37:54.996845333 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38274.996847487">2019-08-19T10:37:54.996847487 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38274.997125727">2019-08-19T10:37:54.997125727 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38274.997146185">2019-08-19T10:37:54.997146185 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38274.997148232">2019-08-19T10:37:54.997148232 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.038143682</label>
+<label id="38274.997152901">2019-08-19T10:37:54.997152901 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.017654719</label>
+<label id="38274.997157330">2019-08-19T10:37:54.997157330 cras atlog  SLEEP                          sleep:000000000.020504113 longest_wake:001565104</label>
+<label id="38275.017787246">2019-08-19T10:37:55.017787246 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.017830417">2019-08-19T10:37:55.017830417 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38275.017874949">2019-08-19T10:37:55.017874949 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.017872854</label>
+<label id="38275.017877797">2019-08-19T10:37:55.017877797 cras atlog  FILL_AUDIO                     dev:6 hw_level:1056</label>
+<label id="38275.017883494">2019-08-19T10:37:55.017883494 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.017885650">2019-08-19T10:37:55.017885650 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.017888461">2019-08-19T10:37:55.017888461 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.017894387">2019-08-19T10:37:55.017894387 cras atlog  FILL_AUDIO_DONE                hw_level:1056 total_written:0 min_cb_level:1024</label>
+<label id="38275.017914904">2019-08-19T10:37:55.017914904 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1056 sleep:1008</label>
+<label id="38275.017917003">2019-08-19T10:37:55.017917003 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.038912232</label>
+<label id="38275.017924426">2019-08-19T10:37:55.017924426 cras atlog  SLEEP                          sleep:000000000.020992719 longest_wake:001565104</label>
+<label id="38275.017961913">2019-08-19T10:37:55.017961913 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.018028433">2019-08-19T10:37:55.018028433 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.018026226</label>
+<label id="38275.018030670">2019-08-19T10:37:55.018030670 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.018034173">2019-08-19T10:37:55.018034173 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.018037396">2019-08-19T10:37:55.018037396 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.018042811">2019-08-19T10:37:55.018042811 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.018044970">2019-08-19T10:37:55.018044970 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.018299235">2019-08-19T10:37:55.018299235 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38275.018320047">2019-08-19T10:37:55.018320047 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38275.018322052">2019-08-19T10:37:55.018322052 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.059651033</label>
+<label id="38275.018326693">2019-08-19T10:37:55.018326693 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.038988052</label>
+<label id="38275.018331332">2019-08-19T10:37:55.018331332 cras atlog  SLEEP                          sleep:000000000.020663485 longest_wake:001565104</label>
+<label id="38275.039056011">2019-08-19T10:37:55.039056011 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.039099808">2019-08-19T10:37:55.039099808 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38275.039142359">2019-08-19T10:37:55.039142359 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.039140236</label>
+<label id="38275.039145228">2019-08-19T10:37:55.039145228 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38275.039150986">2019-08-19T10:37:55.039150986 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.039153113">2019-08-19T10:37:55.039153113 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.039155910">2019-08-19T10:37:55.039155910 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.039161845">2019-08-19T10:37:55.039161845 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38275.039181369">2019-08-19T10:37:55.039181369 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38275.039183576">2019-08-19T10:37:55.039183576 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.059512041</label>
+<label id="38275.039191418">2019-08-19T10:37:55.039191418 cras atlog  SLEEP                          sleep:000000000.020325678 longest_wake:001565104</label>
+<label id="38275.039242696">2019-08-19T10:37:55.039242696 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.039300872">2019-08-19T10:37:55.039300872 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.039298791</label>
+<label id="38275.039303282">2019-08-19T10:37:55.039303282 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38275.039307147">2019-08-19T10:37:55.039307147 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.039310453">2019-08-19T10:37:55.039310453 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.039315591">2019-08-19T10:37:55.039315591 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.039317911">2019-08-19T10:37:55.039317911 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.039574431">2019-08-19T10:37:55.039574431 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38275.039595139">2019-08-19T10:37:55.039595139 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2048 sleep:2000</label>
+<label id="38275.039597215">2019-08-19T10:37:55.039597215 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.081259079</label>
+<label id="38275.039602049">2019-08-19T10:37:55.039602049 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.060321385</label>
+<label id="38275.039606641">2019-08-19T10:37:55.039606641 cras atlog  SLEEP                          sleep:000000000.020721508 longest_wake:001565104</label>
+<label id="38275.060641094">2019-08-19T10:37:55.060641094 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.060684606">2019-08-19T10:37:55.060684606 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38275.060729748">2019-08-19T10:37:55.060729748 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.060727630</label>
+<label id="38275.060732607">2019-08-19T10:37:55.060732607 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38275.060738367">2019-08-19T10:37:55.060738367 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.060740520">2019-08-19T10:37:55.060740520 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.060743314">2019-08-19T10:37:55.060743314 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.060749371">2019-08-19T10:37:55.060749371 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38275.060769291">2019-08-19T10:37:55.060769291 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38275.060771405">2019-08-19T10:37:55.060771405 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.081432962</label>
+<label id="38275.060778851">2019-08-19T10:37:55.060778851 cras atlog  SLEEP                          sleep:000000000.020659012 longest_wake:001565104</label>
+<label id="38275.060839575">2019-08-19T10:37:55.060839575 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.060894607">2019-08-19T10:37:55.060894607 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.060892493</label>
+<label id="38275.060896906">2019-08-19T10:37:55.060896906 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38275.060900273">2019-08-19T10:37:55.060900273 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.060903465">2019-08-19T10:37:55.060903465 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.060908541">2019-08-19T10:37:55.060908541 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.060910667">2019-08-19T10:37:55.060910667 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.061189546">2019-08-19T10:37:55.061189546 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38275.061209809">2019-08-19T10:37:55.061209809 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38275.061211862">2019-08-19T10:37:55.061211862 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.102207100</label>
+<label id="38275.061216513">2019-08-19T10:37:55.061216513 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.081654718</label>
+<label id="38275.061221096">2019-08-19T10:37:55.061221096 cras atlog  SLEEP                          sleep:000000000.020440532 longest_wake:001565104</label>
+<label id="38275.081923521">2019-08-19T10:37:55.081923521 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.081962397">2019-08-19T10:37:55.081962397 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38275.082024685">2019-08-19T10:37:55.082024685 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.082022354</label>
+<label id="38275.082027553">2019-08-19T10:37:55.082027553 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.082033348">2019-08-19T10:37:55.082033348 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.082035492">2019-08-19T10:37:55.082035492 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.082038363">2019-08-19T10:37:55.082038363 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.082044372">2019-08-19T10:37:55.082044372 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38275.082064736">2019-08-19T10:37:55.082064736 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38275.082066844">2019-08-19T10:37:55.082066844 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.102062036</label>
+<label id="38275.082074672">2019-08-19T10:37:55.082074672 cras atlog  SLEEP                          sleep:000000000.019992279 longest_wake:001565104</label>
+<label id="38275.082101703">2019-08-19T10:37:55.082101703 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.082151613">2019-08-19T10:37:55.082151613 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.082149632</label>
+<label id="38275.082153665">2019-08-19T10:37:55.082153665 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.082156304">2019-08-19T10:37:55.082156304 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.082159578">2019-08-19T10:37:55.082159578 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.082164588">2019-08-19T10:37:55.082164588 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.082166781">2019-08-19T10:37:55.082166781 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.082420700">2019-08-19T10:37:55.082420700 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38275.082440331">2019-08-19T10:37:55.082440331 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38275.082442354">2019-08-19T10:37:55.082442354 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.123771185</label>
+<label id="38275.082446864">2019-08-19T10:37:55.082446864 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.102988051</label>
+<label id="38275.082451229">2019-08-19T10:37:55.082451229 cras atlog  SLEEP                          sleep:000000000.020543317 longest_wake:001565104</label>
+<label id="38275.103235081">2019-08-19T10:37:55.103235081 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.103278902">2019-08-19T10:37:55.103278902 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38275.103323855">2019-08-19T10:37:55.103323855 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.103321735</label>
+<label id="38275.103326735">2019-08-19T10:37:55.103326735 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38275.103332368">2019-08-19T10:37:55.103332368 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.103334547">2019-08-19T10:37:55.103334547 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.103337442">2019-08-19T10:37:55.103337442 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.103343414">2019-08-19T10:37:55.103343414 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38275.103362951">2019-08-19T10:37:55.103362951 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38275.103365027">2019-08-19T10:37:55.103365027 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.123693749</label>
+<label id="38275.103372515">2019-08-19T10:37:55.103372515 cras atlog  SLEEP                          sleep:000000000.020326206 longest_wake:001565104</label>
+<label id="38275.103495004">2019-08-19T10:37:55.103495004 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.103558662">2019-08-19T10:37:55.103558662 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.103556509</label>
+<label id="38275.103561185">2019-08-19T10:37:55.103561185 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38275.103565634">2019-08-19T10:37:55.103565634 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.103568909">2019-08-19T10:37:55.103568909 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.103574106">2019-08-19T10:37:55.103574106 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.103576534">2019-08-19T10:37:55.103576534 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.103894760">2019-08-19T10:37:55.103894760 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38275.103915541">2019-08-19T10:37:55.103915541 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2048 sleep:2000</label>
+<label id="38275.103917608">2019-08-19T10:37:55.103917608 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.145579387</label>
+<label id="38275.103922443">2019-08-19T10:37:55.103922443 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.124321384</label>
+<label id="38275.103927126">2019-08-19T10:37:55.103927126 cras atlog  SLEEP                          sleep:000000000.020401063 longest_wake:001565104</label>
+<label id="38275.124565623">2019-08-19T10:37:55.124565623 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.124610042">2019-08-19T10:37:55.124610042 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38275.124655051">2019-08-19T10:37:55.124655051 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.124652899</label>
+<label id="38275.124657946">2019-08-19T10:37:55.124657946 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38275.124663566">2019-08-19T10:37:55.124663566 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.124665720">2019-08-19T10:37:55.124665720 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.124668612">2019-08-19T10:37:55.124668612 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.124674855">2019-08-19T10:37:55.124674855 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38275.124694671">2019-08-19T10:37:55.124694671 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38275.124696783">2019-08-19T10:37:55.124696783 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.145358605</label>
+<label id="38275.124704191">2019-08-19T10:37:55.124704191 cras atlog  SLEEP                          sleep:000000000.020659309 longest_wake:001565104</label>
+<label id="38275.124760504">2019-08-19T10:37:55.124760504 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.124816244">2019-08-19T10:37:55.124816244 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.124814108</label>
+<label id="38275.124818548">2019-08-19T10:37:55.124818548 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38275.124821764">2019-08-19T10:37:55.124821764 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.124825000">2019-08-19T10:37:55.124825000 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.124830095">2019-08-19T10:37:55.124830095 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.124832256">2019-08-19T10:37:55.124832256 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.125110455">2019-08-19T10:37:55.125110455 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38275.125130858">2019-08-19T10:37:55.125130858 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38275.125132923">2019-08-19T10:37:55.125132923 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.166128332</label>
+<label id="38275.125137438">2019-08-19T10:37:55.125137438 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.145654717</label>
+<label id="38275.125141823">2019-08-19T10:37:55.125141823 cras atlog  SLEEP                          sleep:000000000.020519397 longest_wake:001565104</label>
+<label id="38275.145927558">2019-08-19T10:37:55.145927558 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.145964152">2019-08-19T10:37:55.145964152 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1296</label>
+<label id="38275.146026003">2019-08-19T10:37:55.146026003 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.146023734</label>
+<label id="38275.146029029">2019-08-19T10:37:55.146029029 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.146034797">2019-08-19T10:37:55.146034797 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.146036944">2019-08-19T10:37:55.146036944 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.146039804">2019-08-19T10:37:55.146039804 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.146045532">2019-08-19T10:37:55.146045532 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38275.146065845">2019-08-19T10:37:55.146065845 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38275.146067907">2019-08-19T10:37:55.146067907 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.166063093</label>
+<label id="38275.146075679">2019-08-19T10:37:55.146075679 cras atlog  SLEEP                          sleep:000000000.019992516 longest_wake:001565104</label>
+<label id="38275.146104176">2019-08-19T10:37:55.146104176 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.146154911">2019-08-19T10:37:55.146154911 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.146152940</label>
+<label id="38275.146157000">2019-08-19T10:37:55.146157000 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.146159732">2019-08-19T10:37:55.146159732 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.146162656">2019-08-19T10:37:55.146162656 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.146167707">2019-08-19T10:37:55.146167707 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.146169907">2019-08-19T10:37:55.146169907 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.146425051">2019-08-19T10:37:55.146425051 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38275.146444659">2019-08-19T10:37:55.146444659 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38275.146446660">2019-08-19T10:37:55.146446660 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.187775515</label>
+<label id="38275.146451169">2019-08-19T10:37:55.146451169 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.166988050</label>
+<label id="38275.146455570">2019-08-19T10:37:55.146455570 cras atlog  SLEEP                          sleep:000000000.020539017 longest_wake:001565104</label>
+<label id="38275.167553074">2019-08-19T10:37:55.167553074 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.167594886">2019-08-19T10:37:55.167594886 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1312</label>
+<label id="38275.167640114">2019-08-19T10:37:55.167640114 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.167637997</label>
+<label id="38275.167643000">2019-08-19T10:37:55.167643000 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38275.167648699">2019-08-19T10:37:55.167648699 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.167650882">2019-08-19T10:37:55.167650882 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.167653697">2019-08-19T10:37:55.167653697 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.167659615">2019-08-19T10:37:55.167659615 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:0 min_cb_level:1024</label>
+<label id="38275.167679011">2019-08-19T10:37:55.167679011 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1024 sleep:976</label>
+<label id="38275.167681098">2019-08-19T10:37:55.167681098 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.188009795</label>
+<label id="38275.167688811">2019-08-19T10:37:55.167688811 cras atlog  SLEEP                          sleep:000000000.020326143 longest_wake:001565104</label>
+<label id="38275.167749677">2019-08-19T10:37:55.167749677 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.167804583">2019-08-19T10:37:55.167804583 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.167802506</label>
+<label id="38275.167806856">2019-08-19T10:37:55.167806856 cras atlog  FILL_AUDIO                     dev:6 hw_level:1024</label>
+<label id="38275.167810111">2019-08-19T10:37:55.167810111 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.167813451">2019-08-19T10:37:55.167813451 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.167818458">2019-08-19T10:37:55.167818458 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.167820591">2019-08-19T10:37:55.167820591 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.168098935">2019-08-19T10:37:55.168098935 cras atlog  FILL_AUDIO_DONE                hw_level:1024 total_written:1024 min_cb_level:1024</label>
+<label id="38275.168119122">2019-08-19T10:37:55.168119122 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2000 sleep:1952</label>
+<label id="38275.168121172">2019-08-19T10:37:55.168121172 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.208783150</label>
+<label id="38275.168125546">2019-08-19T10:37:55.168125546 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.188321383</label>
+<label id="38275.168129938">2019-08-19T10:37:55.168129938 cras atlog  SLEEP                          sleep:000000000.020197922 longest_wake:001565104</label>
+<label id="38275.188638183">2019-08-19T10:37:55.188638183 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.188682360">2019-08-19T10:37:55.188682360 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1328</label>
+<label id="38275.188727068">2019-08-19T10:37:55.188727068 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.188724948</label>
+<label id="38275.188729928">2019-08-19T10:37:55.188729928 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38275.188735860">2019-08-19T10:37:55.188735860 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.188738005">2019-08-19T10:37:55.188738005 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.188740801">2019-08-19T10:37:55.188740801 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.188746886">2019-08-19T10:37:55.188746886 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:0 min_cb_level:1024</label>
+<label id="38275.188766573">2019-08-19T10:37:55.188766573 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1040 sleep:992</label>
+<label id="38275.188768680">2019-08-19T10:37:55.188768680 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.209430581</label>
+<label id="38275.188776647">2019-08-19T10:37:55.188776647 cras atlog  SLEEP                          sleep:000000000.020659030 longest_wake:001565104</label>
+<label id="38275.188837092">2019-08-19T10:37:55.188837092 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.188891865">2019-08-19T10:37:55.188891865 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.188889848</label>
+<label id="38275.188894276">2019-08-19T10:37:55.188894276 cras atlog  FILL_AUDIO                     dev:6 hw_level:1040</label>
+<label id="38275.188897503">2019-08-19T10:37:55.188897503 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.188900748">2019-08-19T10:37:55.188900748 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.188905918">2019-08-19T10:37:55.188905918 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.188908049">2019-08-19T10:37:55.188908049 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.189185844">2019-08-19T10:37:55.189185844 cras atlog  FILL_AUDIO_DONE                hw_level:1040 total_written:1024 min_cb_level:1024</label>
+<label id="38275.189205852">2019-08-19T10:37:55.189205852 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2016 sleep:1968</label>
+<label id="38275.189207862">2019-08-19T10:37:55.189207862 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.230203316</label>
+<label id="38275.189212302">2019-08-19T10:37:55.189212302 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.209654716</label>
+<label id="38275.189216722">2019-08-19T10:37:55.189216722 cras atlog  SLEEP                          sleep:000000000.020444572 longest_wake:001565104</label>
+<label id="38275.209911683">2019-08-19T10:37:55.209911683 cras atlog  WAKE                           num_fds:0</label>
+<label id="38275.209955429">2019-08-19T10:37:55.209955429 cras atlog  WRITE_STREAMS_FETCH_STREAM     id:1d0000 cbth:1024 delay:1344</label>
+<label id="38275.210000864">2019-08-19T10:37:55.210000864 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.209998749</label>
+<label id="38275.210020752">2019-08-19T10:37:55.210020752 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.210026614">2019-08-19T10:37:55.210026614 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:0 cb_pending:1</label>
+<label id="38275.210028898">2019-08-19T10:37:55.210028898 cras atlog  WRITE_STREAMS_MIX              write_limit:0 max_offset:0</label>
+<label id="38275.210031723">2019-08-19T10:37:55.210031723 cras atlog  WRITE_STREAMS_MIXED            write_limit:0</label>
+<label id="38275.210038139">2019-08-19T10:37:55.210038139 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:0 min_cb_level:1024</label>
+<label id="38275.210058744">2019-08-19T10:37:55.210058744 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:1008 sleep:960</label>
+<label id="38275.210060812">2019-08-19T10:37:55.210060812 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.230056030</label>
+<label id="38275.210068424">2019-08-19T10:37:55.210068424 cras atlog  SLEEP                          sleep:000000000.019992546 longest_wake:001565104</label>
+<label id="38275.210096165">2019-08-19T10:37:55.210096165 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.210146366">2019-08-19T10:37:55.210146366 cras atlog  FILL_AUDIO_TSTAMP              dev:6 tstamp: 10:37:55.210144294</label>
+<label id="38275.210148466">2019-08-19T10:37:55.210148466 cras atlog  FILL_AUDIO                     dev:6 hw_level:1008</label>
+<label id="38275.210151084">2019-08-19T10:37:55.210151084 cras atlog  WRITE_STREAMS_STREAM           id:1d0000 shm_frames:1024 cb_pending:0</label>
+<label id="38275.210154312">2019-08-19T10:37:55.210154312 cras atlog  WRITE_STREAMS_MIX              write_limit:1024 max_offset:0</label>
+<label id="38275.210159347">2019-08-19T10:37:55.210159347 cras atlog  DEV_STREAM_MIX                 written:1024 read:1024</label>
+<label id="38275.210161490">2019-08-19T10:37:55.210161490 cras atlog  WRITE_STREAMS_MIXED            write_limit:1024</label>
+<label id="38275.210414903">2019-08-19T10:37:55.210414903 cras atlog  FILL_AUDIO_DONE                hw_level:1008 total_written:1024 min_cb_level:1024</label>
+<label id="38275.210434597">2019-08-19T10:37:55.210434597 cras atlog  SET_DEV_WAKE                   dev:6 hw_level:2032 sleep:1984</label>
+<label id="38275.210436597">2019-08-19T10:37:55.210436597 cras atlog  DEV_SLEEP_TIME                 dev:6 wake: 10:37:55.251765477</label>
+<label id="38275.210441028">2019-08-19T10:37:55.210441028 cras atlog  STREAM_SLEEP_TIME              id:1d0000 wake: 10:37:55.230988049</label>
+<label id="38275.210445345">2019-08-19T10:37:55.210445345 cras atlog  SLEEP                          sleep:000000000.020549158 longest_wake:001565104</label>
+<label id="38275.222778298">2019-08-19T10:37:55.222778298 cras atlog  WAKE                           num_fds:1</label>
+<label id="38275.222790909">2019-08-19T10:37:55.222790909 cras atlog  PB_MSG                         msg_id:7</label>
+<label id="38275.222796197">2019-08-19T10:37:55.222796197 cras atlog  STREAM_REMOVED                 id:1d0000</label>`;
+    put_logs = function () {
+      document.getElementById('logs').innerHTML = logs;
+    };
+
+    set_initial_checkbox_value = function () {
+      document.getElementById('device').checked = true;
+      document.getElementById('stream').checked = true;
+      document.getElementById('fetch').checked = true;
+      document.getElementById('wake').checked = true;
+    }
+
+    window.onload = function() {
+      draw_chart();
+      put_logs();
+      set_initial_checkbox_value();
+    };
+
+    function handleClick(checkbox) {
+      var class_name = checkbox.id;
+      var elements = document.getElementsByClassName(class_name);
+      var i;
+
+      if (checkbox.checked) {
+        display_value = "block";
+      } else {
+        display_value = "none"
+      }
+
+      console.log("change " + class_name + " to " + display_value);
+      for (i = 0; i < elements.length; i++) {
+        elements[i].style.display = display_value;
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="chart" style="height:50%; width:100%" ></div>
+  <div style="margin:0 auto"; class="checkbox">
+      <label><input type="checkbox" onclick="handleClick(this);" id="device">Show device removed/added event</label>
+      <label><input type="checkbox" onclick="handleClick(this);" id="stream">Show stream removed/added event</label>
+      <label><input type="checkbox" onclick="handleClick(this);" id="fetch">Show fetch event</label>
+      <label><input type="checkbox" onclick="handleClick(this);" id="wake">Show wake by num_fds=1 event</label>
+  </div>
+  <div class="event_log_box", id="logs", style="float:left;"></div>
+  <textarea class="event_log_box", id="text", style="float:right;"></textarea>
+</body>
+</html>

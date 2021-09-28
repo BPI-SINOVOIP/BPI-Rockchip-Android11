@@ -1,0 +1,100 @@
+// Signature format: 2.0
+package com.android.org.conscrypt {
+
+  public interface CertPinManager {
+  }
+
+  public final class ClientSessionContext implements javax.net.ssl.SSLSessionContext {
+    method public final java.util.Enumeration<byte[]> getIds();
+    method public final javax.net.ssl.SSLSession getSession(byte[]);
+    method public final int getSessionCacheSize();
+    method public final int getSessionTimeout();
+    method public void setPersistentCache(com.android.org.conscrypt.SSLClientSessionCache);
+    method public final void setSessionCacheSize(int) throws java.lang.IllegalArgumentException;
+    method public final void setSessionTimeout(int) throws java.lang.IllegalArgumentException;
+  }
+
+  public final class Conscrypt {
+    method public static javax.net.ssl.X509TrustManager getDefaultX509TrustManager() throws java.security.KeyManagementException;
+  }
+
+  public interface ConscryptCertStore {
+  }
+
+  public final class FileClientSessionCache {
+    method public static com.android.org.conscrypt.SSLClientSessionCache usingDirectory(java.io.File) throws java.io.IOException;
+  }
+
+  public final class OpenSSLProvider extends java.security.Provider {
+    ctor public OpenSSLProvider();
+  }
+
+  public abstract class OpenSSLSocketImpl extends javax.net.ssl.SSLSocket {
+    method public void addHandshakeCompletedListener(javax.net.ssl.HandshakeCompletedListener);
+    method public final void connect(java.net.SocketAddress) throws java.io.IOException;
+    method public final void connect(java.net.SocketAddress, int) throws java.io.IOException;
+    method @Deprecated public final byte[] getAlpnSelectedProtocol();
+    method @Deprecated public final byte[] getNpnSelectedProtocol();
+    method public final int getPort();
+    method public final int getSoTimeout() throws java.net.SocketException;
+    method public void removeHandshakeCompletedListener(javax.net.ssl.HandshakeCompletedListener);
+    method public final void sendUrgentData(int) throws java.io.IOException;
+    method @Deprecated public final void setAlpnProtocols(byte[]);
+    method public abstract void setChannelIdPrivateKey(java.security.PrivateKey);
+    method public void setHandshakeTimeout(int) throws java.net.SocketException;
+    method public void setHostname(String);
+    method @Deprecated public final void setNpnProtocols(byte[]);
+    method public final void setOOBInline(boolean) throws java.net.SocketException;
+    method public final void setSoTimeout(int) throws java.net.SocketException;
+    method public void setSoWriteTimeout(int) throws java.net.SocketException;
+    method public abstract void setUseSessionTickets(boolean);
+  }
+
+  public interface SSLClientSessionCache {
+  }
+
+  public final class TrustManagerImpl extends javax.net.ssl.X509ExtendedTrustManager {
+    ctor public TrustManagerImpl(java.security.KeyStore);
+    ctor public TrustManagerImpl(java.security.KeyStore, com.android.org.conscrypt.CertPinManager, com.android.org.conscrypt.ConscryptCertStore);
+    method public void checkClientTrusted(java.security.cert.X509Certificate[], String) throws java.security.cert.CertificateException;
+    method public void checkClientTrusted(java.security.cert.X509Certificate[], String, java.net.Socket) throws java.security.cert.CertificateException;
+    method public void checkClientTrusted(java.security.cert.X509Certificate[], String, javax.net.ssl.SSLEngine) throws java.security.cert.CertificateException;
+    method public java.util.List<java.security.cert.X509Certificate> checkServerTrusted(java.security.cert.X509Certificate[], String, String) throws java.security.cert.CertificateException;
+    method public java.util.List<java.security.cert.X509Certificate> getTrustedChainForServer(java.security.cert.X509Certificate[], String, java.net.Socket) throws java.security.cert.CertificateException;
+    method public java.util.List<java.security.cert.X509Certificate> getTrustedChainForServer(java.security.cert.X509Certificate[], String, javax.net.ssl.SSLEngine) throws java.security.cert.CertificateException;
+    method public void handleTrustStorageUpdate();
+  }
+
+  public final class TrustedCertificateIndex {
+    ctor public TrustedCertificateIndex();
+    method public java.util.Set<java.security.cert.TrustAnchor> findAllByIssuerAndSignature(java.security.cert.X509Certificate);
+    method public java.security.cert.TrustAnchor findByIssuerAndSignature(java.security.cert.X509Certificate);
+    method public java.security.cert.TrustAnchor findBySubjectAndPublicKey(java.security.cert.X509Certificate);
+    method public java.security.cert.TrustAnchor index(java.security.cert.X509Certificate);
+  }
+
+  public class TrustedCertificateStore implements com.android.org.conscrypt.ConscryptCertStore {
+    ctor public TrustedCertificateStore();
+    method public java.util.Set<java.lang.String> aliases();
+    method public java.util.Set<java.lang.String> allSystemAliases();
+    method public boolean containsAlias(String);
+    method public void deleteCertificateEntry(String) throws java.security.cert.CertificateException, java.io.IOException;
+    method public java.util.Set<java.security.cert.X509Certificate> findAllIssuers(java.security.cert.X509Certificate);
+    method public java.security.cert.X509Certificate findIssuer(java.security.cert.X509Certificate);
+    method public java.security.cert.Certificate getCertificate(String);
+    method public java.security.cert.Certificate getCertificate(String, boolean);
+    method public String getCertificateAlias(java.security.cert.Certificate);
+    method public String getCertificateAlias(java.security.cert.Certificate, boolean);
+    method public java.util.List<java.security.cert.X509Certificate> getCertificateChain(java.security.cert.X509Certificate) throws java.security.cert.CertificateException;
+    method public java.io.File getCertificateFile(java.io.File, java.security.cert.X509Certificate);
+    method public java.util.Date getCreationDate(String);
+    method public java.security.cert.X509Certificate getTrustAnchor(java.security.cert.X509Certificate);
+    method public void installCertificate(java.security.cert.X509Certificate) throws java.security.cert.CertificateException, java.io.IOException;
+    method public static final boolean isUser(String);
+    method public boolean isUserAddedCertificate(java.security.cert.X509Certificate);
+    method public static void setDefaultUserDirectory(java.io.File);
+    method public java.util.Set<java.lang.String> userAliases();
+  }
+
+}
+

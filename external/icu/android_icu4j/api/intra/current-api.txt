@@ -1,0 +1,238 @@
+// Signature format: 2.0
+package android.icu.impl {
+
+  public abstract class CacheValue<V> {
+    method public static void setStrength(android.icu.impl.CacheValue.Strength);
+  }
+
+  public enum CacheValue.Strength {
+    enum_constant public static final android.icu.impl.CacheValue.Strength SOFT;
+    enum_constant public static final android.icu.impl.CacheValue.Strength STRONG;
+  }
+
+  public final class ICUData {
+    field public static final String ICU_BASE_NAME = "android/icu/impl/data/icudt66b";
+  }
+
+  public class ICUResourceBundle extends android.icu.util.UResourceBundle {
+    method public String getStringWithFallback(String) throws java.util.MissingResourceException;
+    method public android.icu.impl.ICUResourceBundle getWithFallback(String) throws java.util.MissingResourceException;
+  }
+
+  public class JavaTimeZone extends android.icu.util.TimeZone {
+    ctor public JavaTimeZone(java.util.TimeZone, String);
+  }
+
+  public final class ZoneMeta {
+    method public static String getCanonicalCLDRID(String);
+  }
+
+}
+
+package android.icu.impl.number {
+
+  public class DecimalFormatProperties implements java.lang.Cloneable java.io.Serializable {
+  }
+
+  public enum DecimalFormatProperties.ParseMode {
+    enum_constant public static final android.icu.impl.number.DecimalFormatProperties.ParseMode JAVA_COMPATIBILITY;
+  }
+
+}
+
+package android.icu.text {
+
+  public class DateFormatSymbols implements java.lang.Cloneable java.io.Serializable {
+    ctor @Deprecated public DateFormatSymbols(android.icu.util.ULocale, String);
+    method public String[] getNarrowEras();
+  }
+
+  public class DateTimePatternGenerator implements java.lang.Cloneable android.icu.util.Freezable<android.icu.text.DateTimePatternGenerator> {
+    method @Deprecated public static android.icu.text.DateTimePatternGenerator getFrozenInstance(android.icu.util.ULocale);
+  }
+
+  public class DecimalFormat extends android.icu.text.NumberFormat {
+    method @Deprecated public void setParseStrictMode(android.icu.impl.number.DecimalFormatProperties.ParseMode);
+  }
+
+  public abstract class IDNA {
+    method @Deprecated public static StringBuffer convertIDNToASCII(String, int) throws android.icu.text.StringPrepParseException;
+    method @Deprecated public static StringBuffer convertIDNToUnicode(String, int) throws android.icu.text.StringPrepParseException;
+  }
+
+  public final class Normalizer implements java.lang.Cloneable {
+    method @Deprecated public static boolean isNormalized(String, android.icu.text.Normalizer.Mode, int);
+    method @Deprecated public static String normalize(String, android.icu.text.Normalizer.Mode);
+    field @Deprecated public static final android.icu.text.Normalizer.Mode NFC;
+    field @Deprecated public static final android.icu.text.Normalizer.Mode NFD;
+    field @Deprecated public static final android.icu.text.Normalizer.Mode NFKC;
+    field @Deprecated public static final android.icu.text.Normalizer.Mode NFKD;
+  }
+
+  @Deprecated public abstract static class Normalizer.Mode {
+  }
+
+  public abstract class TimeZoneNames implements java.io.Serializable {
+    method public java.util.Collection<android.icu.text.TimeZoneNames.MatchInfo> find(CharSequence, int, java.util.EnumSet<android.icu.text.TimeZoneNames.NameType>);
+    method @Deprecated public void getDisplayNames(String, android.icu.text.TimeZoneNames.NameType[], long, String[], int);
+  }
+
+  public static class TimeZoneNames.MatchInfo {
+    method public int matchLength();
+    method public String mzID();
+    method public android.icu.text.TimeZoneNames.NameType nameType();
+    method public String tzID();
+  }
+
+}
+
+package android.icu.util {
+
+  public class AnnualTimeZoneRule extends android.icu.util.TimeZoneRule {
+    method public int getEndYear();
+    method public android.icu.util.DateTimeRule getRule();
+    field public static final int MAX_YEAR = 2147483647; // 0x7fffffff
+  }
+
+  public abstract class BasicTimeZone extends android.icu.util.TimeZone {
+    method public abstract android.icu.util.TimeZoneTransition getNextTransition(long, boolean);
+    method public abstract android.icu.util.TimeZoneTransition getPreviousTransition(long, boolean);
+    method public abstract android.icu.util.TimeZoneRule[] getTimeZoneRules();
+  }
+
+  public abstract class Calendar implements java.lang.Cloneable java.lang.Comparable<android.icu.util.Calendar> java.io.Serializable {
+    method public static String getDateTimeFormatString(android.icu.util.ULocale, String, int, int);
+  }
+
+  public class DateTimeRule implements java.io.Serializable {
+    method public int getDateRuleType();
+    method public int getRuleDayOfMonth();
+    method public int getRuleDayOfWeek();
+    method public int getRuleMillisInDay();
+    method public int getRuleMonth();
+    method public int getTimeRuleType();
+    field public static final int DOM = 0; // 0x0
+    field public static final int DOW = 1; // 0x1
+    field public static final int DOW_GEQ_DOM = 2; // 0x2
+    field public static final int DOW_LEQ_DOM = 3; // 0x3
+    field public static final int STANDARD_TIME = 1; // 0x1
+    field public static final int UTC_TIME = 2; // 0x2
+    field public static final int WALL_TIME = 0; // 0x0
+  }
+
+  public class InitialTimeZoneRule extends android.icu.util.TimeZoneRule {
+  }
+
+  public final class LocaleData {
+    method public static android.icu.util.VersionInfo getCLDRVersion();
+    method public String getDelimiter(int);
+    method public static android.icu.text.UnicodeSet getExemplarSet(android.icu.util.ULocale, int, int);
+    method public android.icu.text.UnicodeSet getExemplarSet(int, int);
+    method public static android.icu.util.LocaleData getInstance(android.icu.util.ULocale);
+    method public static android.icu.util.LocaleData getInstance();
+    method public static android.icu.util.LocaleData.MeasurementSystem getMeasurementSystem(android.icu.util.ULocale);
+    method public boolean getNoSubstitute();
+    method public static android.icu.util.LocaleData.PaperSize getPaperSize(android.icu.util.ULocale);
+    method public void setNoSubstitute(boolean);
+    field public static final int ALT_QUOTATION_END = 3; // 0x3
+    field public static final int ALT_QUOTATION_START = 2; // 0x2
+    field public static final int ES_INDEX = 2; // 0x2
+    field public static final int ES_STANDARD = 0; // 0x0
+    field public static final int QUOTATION_END = 1; // 0x1
+    field public static final int QUOTATION_START = 0; // 0x0
+  }
+
+  public static final class LocaleData.MeasurementSystem {
+    field public static final android.icu.util.LocaleData.MeasurementSystem SI;
+    field public static final android.icu.util.LocaleData.MeasurementSystem UK;
+    field public static final android.icu.util.LocaleData.MeasurementSystem US;
+  }
+
+  public static final class LocaleData.PaperSize {
+    method public int getHeight();
+    method public int getWidth();
+  }
+
+  public abstract class TimeZone implements java.lang.Cloneable android.icu.util.Freezable<android.icu.util.TimeZone> java.io.Serializable {
+    method @Deprecated public static void setICUDefault(android.icu.util.TimeZone);
+  }
+
+  public abstract class TimeZoneRule implements java.io.Serializable {
+    method public int getDSTSavings();
+    method public int getRawOffset();
+  }
+
+  public class TimeZoneTransition {
+    method public android.icu.util.TimeZoneRule getFrom();
+    method public long getTime();
+    method public android.icu.util.TimeZoneRule getTo();
+  }
+
+  public final class ULocale implements java.lang.Comparable<android.icu.util.ULocale> java.io.Serializable {
+    method @Deprecated public static String getRegionForSupplementalData(android.icu.util.ULocale, boolean);
+  }
+
+  public abstract class UResourceBundle extends java.util.ResourceBundle {
+    ctor public UResourceBundle();
+    method public static android.icu.util.UResourceBundle getBundleInstance(String, java.util.Locale);
+    method public static android.icu.util.UResourceBundle getBundleInstance(String, android.icu.util.ULocale);
+    method public String[] getStringArray();
+  }
+
+}
+
+package com.android.icu.charset {
+
+  public final class CharsetICU extends java.nio.charset.Charset {
+    method public static java.nio.charset.Charset charsetForName(String);
+    method public static String[] getAvailableCharsetNames();
+  }
+
+}
+
+package com.android.icu.util {
+
+  public class CaseMapperNative {
+    method public static String toLowerCase(String, java.util.Locale);
+    method public static String toUpperCase(String, java.util.Locale);
+  }
+
+  public class Icu4cMetadata {
+    method public static String getCldrVersion();
+    method public static String getIcuVersion();
+    method public static String getTzdbVersion();
+    method public static String getUnicodeVersion();
+  }
+
+  public final class LocaleNative {
+    method public static String getDisplayCountry(java.util.Locale, java.util.Locale);
+    method public static String getDisplayLanguage(java.util.Locale, java.util.Locale);
+    method public static String getDisplayScript(java.util.Locale, java.util.Locale);
+    method public static String getDisplayVariant(java.util.Locale, java.util.Locale);
+  }
+
+}
+
+package com.android.icu.util.regex {
+
+  public class MatcherNative {
+    method public static com.android.icu.util.regex.MatcherNative create(com.android.icu.util.regex.PatternNative);
+    method public boolean find(int, int[]);
+    method public boolean findNext(int[]);
+    method public int getMatchedGroupIndex(String);
+    method public int groupCount();
+    method public boolean hitEnd();
+    method public boolean lookingAt(int[]);
+    method public boolean matches(int[]);
+    method public boolean requireEnd();
+    method public void setInput(String, int, int);
+    method public void useAnchoringBounds(boolean);
+    method public void useTransparentBounds(boolean);
+  }
+
+  public class PatternNative {
+    method public static com.android.icu.util.regex.PatternNative create(String, int);
+  }
+
+}
+

@@ -1,0 +1,112 @@
+diff --git a/Android.patch b/Android.patch
+new file mode 100644
+index 0000000..e69de29
+diff --git a/include/fuse_kernel.h b/include/fuse_kernel.h
+index 2971d29..8a45f42 100644
+--- a/include/fuse_kernel.h
++++ b/include/fuse_kernel.h
+@@ -425,6 +425,9 @@ enum fuse_opcode {
+ 
+ 	/* CUSE specific operations */
+ 	CUSE_INIT		= 4096,
++
++        /* Android specific operations */
++        FUSE_CANONICAL_PATH     = 2016,
+ };
+ 
+ enum fuse_notify_code {
+diff --git a/include/fuse_lowlevel.h b/include/fuse_lowlevel.h
+index 18c6363..e81c282 100644
+--- a/include/fuse_lowlevel.h
++++ b/include/fuse_lowlevel.h
+@@ -317,6 +317,18 @@ struct fuse_lowlevel_ops {
+ 	 */
+ 	void (*readlink) (fuse_req_t req, fuse_ino_t ino);
+ 
++        /**
++	 * Return canonical path for inotify
++	 *
++	 * Valid replies:
++	 *   fuse_reply_canonical_path
++	 *   fuse_reply_err
++	 *
++	 * @param req request handle
++	 * @param ino the inode number
++	 */
++	void (*canonical_path) (fuse_req_t req, fuse_ino_t ino);
++
+ 	/**
+ 	 * Create file node
+ 	 *
+@@ -1337,6 +1349,18 @@ int fuse_reply_attr(fuse_req_t req, const struct stat *attr,
+  */
+ int fuse_reply_readlink(fuse_req_t req, const char *link);
+ 
++/**
++ * Reply with the canonical path for inotify
++ *
++ * Possible requests:
++ *   canonical_path
++ *
++ * @param req request handle
++ * @param path to canonicalize
++ * @return zero for success, -errno for failure to send reply
++ */
++int fuse_reply_canonical_path(fuse_req_t req, const char *path);
++
+ /**
+  * Reply with open parameters
+  *
+diff --git a/lib/fuse_lowlevel.c b/lib/fuse_lowlevel.c
+index f2d7038..334b497 100644
+--- a/lib/fuse_lowlevel.c
++++ b/lib/fuse_lowlevel.c
+@@ -450,6 +450,11 @@ int fuse_reply_readlink(fuse_req_t req, const char *linkname)
+ 	return send_reply_ok(req, linkname, strlen(linkname));
+ }
+ 
++int fuse_reply_canonical_path(fuse_req_t req, const char *path)
++{
++	return send_reply_ok(req, path, strlen(path));
++}
++
+ int fuse_reply_open(fuse_req_t req, const struct fuse_file_info *f)
+ {
+ 	struct fuse_open_out arg;
+@@ -1202,6 +1207,16 @@ static void do_readlink(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
+ 		fuse_reply_err(req, ENOSYS);
+ }
+ 
++static void do_canonical_path(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
++{
++	(void) inarg;
++
++	if (req->se->op.canonical_path)
++		req->se->op.canonical_path(req, nodeid);
++	else
++		fuse_reply_err(req, ENOSYS);
++}
++
+ static void do_mknod(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
+ {
+ 	struct fuse_mknod_in *arg = (struct fuse_mknod_in *) inarg;
+@@ -2456,6 +2471,7 @@ static struct {
+ 	[FUSE_GETATTR]	   = { do_getattr,     "GETATTR"     },
+ 	[FUSE_SETATTR]	   = { do_setattr,     "SETATTR"     },
+ 	[FUSE_READLINK]	   = { do_readlink,    "READLINK"    },
++        [FUSE_CANONICAL_PATH] = { do_canonical_path, "CANONICAL_PATH" },
+ 	[FUSE_SYMLINK]	   = { do_symlink,     "SYMLINK"     },
+ 	[FUSE_MKNOD]	   = { do_mknod,       "MKNOD"	     },
+ 	[FUSE_MKDIR]	   = { do_mkdir,       "MKDIR"	     },
+diff --git a/lib/fuse_versionscript b/lib/fuse_versionscript
+index d18ba29..4c075a3 100644
+--- a/lib/fuse_versionscript
++++ b/lib/fuse_versionscript
+@@ -163,6 +163,7 @@ FUSE_3.7 {
+ 	global:
+ 		fuse_set_log_func;
+ 		fuse_log;
++		fuse_reply_canonical_path;
+ } FUSE_3.3;
+ 
+ # Local Variables:

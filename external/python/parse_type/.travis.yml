@@ -1,0 +1,20 @@
+language: python
+sudo: false
+python:
+  - "3.7"
+  - "2.7"
+  - "3.8-dev"
+  - "pypy"
+  - "pypy3"
+
+# -- TEST-BALLON: Check if Python 3.6 is actually Python 3.5.1 or newer
+matrix:
+  allow_failures:
+    - python: "3.8-dev"
+    - python: "nightly"
+
+install:
+  - pip install -U -r py.requirements/ci.travis.txt
+  - python setup.py -q install
+script:
+  - pytest tests

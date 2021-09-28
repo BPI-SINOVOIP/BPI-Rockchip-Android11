@@ -1,0 +1,394 @@
+// Copyright (C) 2017 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_library_headers {
+    name: "libtextclassifier_hash_headers",
+    vendor_available: true,
+    export_include_dirs: ["."],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.neuralnetworks",
+        "test_com.android.neuralnetworks",
+    ],
+}
+
+cc_defaults {
+    name: "libtextclassifier_hash_defaults",
+    srcs: [
+        "utils/hash/farmhash.cc",
+        "util/hash/hash.cc",
+    ],
+    cflags: [
+        "-DNAMESPACE_FOR_HASH_FUNCTIONS=farmhash",
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-function",
+    ],
+}
+
+cc_library_shared {
+    name: "libtextclassifier_hash",
+    defaults: ["libtextclassifier_hash_defaults"],
+    vendor_available: true,
+    double_loadable: true,
+}
+
+cc_library_static {
+    name: "libtextclassifier_hash_static",
+    defaults: ["libtextclassifier_hash_defaults"],
+    vendor_available: true,
+    sdk_version: "current",
+    stl: "libc++_static",
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.neuralnetworks",
+        "test_com.android.neuralnetworks",
+        "com.android.extservices",
+    ],
+}
+
+cc_defaults {
+    name: "libtextclassifier_defaults",
+    stl: "libc++_static",
+    sdk_version: "current",
+    // For debug / treemap purposes.
+    //strip: {
+    //    keep_symbols: true,
+    //},
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-deprecated-declarations",
+        "-Wno-ignored-qualifiers",
+        "-Wno-missing-field-initializers",
+        "-Wno-sign-compare",
+        "-Wno-tautological-constant-out-of-range-compare",
+        "-Wno-undefined-var-template",
+        "-Wno-unused-function",
+        "-Wno-unused-parameter",
+        "-Wno-extern-c-compat",
+
+        "-funsigned-char",
+        "-fvisibility=hidden",
+        "-DLIBTEXTCLASSIFIER_UNILIB_ICU",
+        "-DZLIB_CONST",
+        "-DSAFTM_COMPACT_LOGGING",
+        "-DTC3_WITH_ACTIONS_OPS",
+        "-DTC3_UNILIB_JAVAICU",
+        "-DTC3_CALENDAR_JAVAICU",
+        "-DTC3_AOSP"
+    ],
+
+    product_variables: {
+        debuggable: {
+            // Only enable debug logging in userdebug/eng builds.
+            cflags: ["-DTC3_DEBUG_LOGGING=1"],
+        },
+    },
+
+    generated_headers: [
+        "libtextclassifier_fbgen_flatbuffers",
+        "libtextclassifier_fbgen_tokenizer",
+        "libtextclassifier_fbgen_codepoint_range",
+        "libtextclassifier_fbgen_entity-data",
+        "libtextclassifier_fbgen_zlib_buffer",
+        "libtextclassifier_fbgen_resources_extra",
+        "libtextclassifier_fbgen_intent_config",
+        "libtextclassifier_fbgen_annotator_model",
+        "libtextclassifier_fbgen_annotator_experimental_model",
+        "libtextclassifier_fbgen_actions_model",
+        "libtextclassifier_fbgen_tflite_text_encoder_config",
+        "libtextclassifier_fbgen_lang_id_embedded_network",
+        "libtextclassifier_fbgen_lang_id_model",
+        "libtextclassifier_fbgen_actions-entity-data",
+        "libtextclassifier_fbgen_normalization",
+        "libtextclassifier_fbgen_language-tag",
+        "libtextclassifier_fbgen_person_name_model",
+        "libtextclassifier_fbgen_grammar_dates",
+        "libtextclassifier_fbgen_timezone_code",
+        "libtextclassifier_fbgen_grammar_rules"
+    ],
+
+    header_libs: [
+        "tensorflow_headers",
+        "flatbuffer_headers",
+    ],
+
+    shared_libs: [
+        "liblog",
+    ],
+
+    static_libs: [
+        "liblua",
+        "libutf",
+        "libtflite_static",
+        "libz_current",
+    ],
+}
+
+// -----------------
+// Generate headers with FlatBuffer schema compiler.
+// -----------------
+genrule_defaults {
+	name: "fbgen",
+    tools: ["flatc"],
+    // "depfile" is used here in conjunction with flatc's -M to gather the deps
+    cmd: "$(location flatc) --cpp --no-union-value-namespacing --gen-object-api --keep-prefix -I external/libtextclassifier/native -M $(in) >$(depfile) && " +
+        "$(location flatc) --cpp --no-union-value-namespacing --gen-object-api --keep-prefix -I external/libtextclassifier/native -o $$(dirname $(out)) $(in)",
+    depfile: true,
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_flatbuffers",
+    srcs: ["utils/flatbuffers.fbs"],
+    out: ["utils/flatbuffers_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_tokenizer",
+    srcs: ["utils/tokenizer.fbs"],
+    out: ["utils/tokenizer_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_codepoint_range",
+    srcs: ["utils/codepoint-range.fbs"],
+    out: ["utils/codepoint-range_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_resources_extra",
+    srcs: ["utils/resources.fbs"],
+    out: ["utils/resources_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_entity-data",
+    srcs: ["annotator/entity-data.fbs"],
+    out: ["annotator/entity-data_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_zlib_buffer",
+    srcs: ["utils/zlib/buffer.fbs"],
+    out: ["utils/zlib/buffer_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_intent_config",
+    srcs: ["utils/intents/intent-config.fbs"],
+    out: ["utils/intents/intent-config_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_annotator_model",
+    srcs: ["annotator/model.fbs"],
+    out: ["annotator/model_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_annotator_experimental_model",
+    srcs: ["annotator/experimental/experimental.fbs"],
+    out: ["annotator/experimental/experimental_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_actions_model",
+    srcs: ["actions/actions_model.fbs"],
+    out: ["actions/actions_model_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_tflite_text_encoder_config",
+    srcs: ["utils/tflite/text_encoder_config.fbs"],
+    out: ["utils/tflite/text_encoder_config_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_lang_id_embedded_network",
+    srcs: ["lang_id/common/flatbuffers/embedding-network.fbs"],
+    out: ["lang_id/common/flatbuffers/embedding-network_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_lang_id_model",
+    srcs: ["lang_id/common/flatbuffers/model.fbs"],
+    out: ["lang_id/common/flatbuffers/model_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_actions-entity-data",
+    srcs: ["actions/actions-entity-data.fbs"],
+    out: ["actions/actions-entity-data_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_normalization",
+    srcs: ["utils/normalization.fbs"],
+    out: ["utils/normalization_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_language-tag",
+    srcs: ["utils/i18n/language-tag.fbs"],
+    out: ["utils/i18n/language-tag_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_person_name_model",
+    srcs: ["annotator/person_name/person_name_model.fbs"],
+    out: ["annotator/person_name/person_name_model_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_grammar_dates",
+    srcs: ["annotator/grammar/dates/dates.fbs"],
+    out: ["annotator/grammar/dates/dates_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_timezone_code",
+    srcs: ["annotator/grammar/dates/timezone-code.fbs"],
+    out: ["annotator/grammar/dates/timezone-code_generated.h"],
+    defaults: ["fbgen"],
+}
+
+genrule {
+    name: "libtextclassifier_fbgen_grammar_rules",
+    srcs: ["utils/grammar/rules.fbs"],
+    out: ["utils/grammar/rules_generated.h"],
+    defaults: ["fbgen"],
+}
+
+// -----------------
+// libtextclassifier
+// -----------------
+cc_library_shared {
+    name: "libtextclassifier",
+    defaults: ["libtextclassifier_defaults"],
+
+    srcs: ["**/*.cc"],
+    exclude_srcs: [
+        "**/*_test.cc",
+        "**/*-test-lib.cc",
+        "**/testing/*.cc",
+        "**/*test-util.*",
+        "**/*test-utils.*",
+        "**/*_test-include.*",
+        "**/*unittest.cc",
+    ],
+
+    version_script: "jni.lds",
+
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.extservices",
+    ],
+}
+
+// -----------------------
+// libtextclassifier_tests
+// -----------------------
+cc_test {
+    name: "libtextclassifier_tests",
+    defaults: ["libtextclassifier_defaults"],
+
+    test_suites: ["device-tests", "mts"],
+
+    data: [
+        "annotator/test_data/**/*",
+        "actions/test_data/**/*",
+    ],
+
+    srcs: ["**/*.cc"],
+
+    static_libs: [
+        "libgmock_ndk",
+        "libgtest_ndk_c++",
+    ],
+
+    multilib: {
+        lib32: {
+            suffix: "32",
+            cppflags: ["-DTC3_TEST_DATA_DIR=\"/data/nativetest/libtextclassifier_tests/test_data/\""],
+        },
+        lib64: {
+            suffix: "64",
+            cppflags: ["-DTC3_TEST_DATA_DIR=\"/data/nativetest64/libtextclassifier_tests/test_data/\""],
+        },
+    },
+}
+
+// ----------------
+// Annotator models
+// ----------------
+
+prebuilt_etc {
+    name: "libtextclassifier_annotator_en_model",
+    filename: "textclassifier.en.model",
+    owner: "google",
+    src: "models/textclassifier.en.model",
+    sub_dir: "textclassifier",
+}
+
+prebuilt_etc {
+    name: "libtextclassifier_annotator_universal_model",
+    filename: "textclassifier.universal.model",
+    owner: "google",
+    src: "models/textclassifier.universal.model",
+    sub_dir: "textclassifier",
+}
+
+// ---------------------------
+// Actions Suggestions models
+// ---------------------------
+
+prebuilt_etc {
+    name: "libtextclassifier_actions_suggestions_universal_model",
+    filename: "actions_suggestions.universal.model",
+    owner: "google",
+    src: "models/actions_suggestions.universal.model",
+    sub_dir: "textclassifier",
+}
+
+// ------------
+// LangId model
+// ------------
+
+prebuilt_etc {
+    name: "libtextclassifier_lang_id_model",
+    filename: "lang_id.model",
+    owner: "google",
+    src: "models/lang_id.model",
+    sub_dir: "textclassifier",
+}

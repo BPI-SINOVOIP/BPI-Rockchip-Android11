@@ -1,0 +1,66 @@
+# This experiment template shows how to run Telemetry tests (using autotest)
+# with explicitly specified DUT configurations.
+#
+# You should replace all the placeholders, marked by angle-brackets,
+# with the appropriate actual values.
+
+name: dut_config_telemetry_crosperf_example
+board: <your-board-goes-here>
+
+# Note:  You can specify multiple remotes, to run your tests in parallel on
+# multiple machines. e.g. "remote: test-machine-1.com test-machine2.come
+# test-machine3.com"
+remote: <your-remote-goes-here>
+
+# DUT configuration parameters. All are optional.
+#
+# Run turbostat process in background. Default: True.
+turbostat: <True|False>
+# Run top process in background with specified interval of sampling in
+# seconds, type float. 0 - don't run top.
+# Default: 0
+# Recommended values 1-5 (Lower number provides more accurate data).
+# NOTE: Running top with interval 1-5 sec has insignificant
+# performance impact (performance degradation does not exceed 0.3%).
+top_interval: <interval_in_seconds_float>
+# One of Intel Pstate modes defined in kernel command line:
+# active, passive, no_hwp.
+intel_pstate: <active|passive|no_hwp>
+# Wait until CPU cools down to a specified temperature
+# in Celsius or cooldown_time timeout reaches zero
+# (whichever happens first). Default: 40.
+cooldown_temp: <temperature-threshold-for-cooldown>
+# Timeout specified in minutes for CPU cooling down
+# to cooldown_temp temperature. Zero value disables cooldown.
+# Default: 0.
+cooldown_time: <time-to-cooldown-in-minutes>
+# CPU governor.
+# See: https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt
+# for available values (they might differ for ARM and Intel).
+governor: <one-of-scaling_available_governors-values>
+# Restrict CPU usage to predefined "models":
+# all, big_only, little_only, exclusive_cores.
+cpu_usage: <usage-model>
+# Setup CPU frequency as percent of max_freq.
+# Default: 100
+cpu_freq_pct: <0-100>
+
+# The example below will run Telemetry toolchain performance benchmarks.
+# The exact list of benchmarks that will be run can be seen in
+# crosperf/experiment_factory.py
+benchmark: all_toolchain_perf {
+    suite: telemetry_Crosperf
+    run_local: False
+    iterations: 1
+}
+
+# NOTE: You must specify at least one image; you may specify more than one.
+# Replace <path-to-your-chroot-goes-here> and <board-goes-here> below.
+vanilla_image {
+  chromeos_image:<path-to-your-chroot>/src/build/images/<board>/vanilla-image/chromiumos_test_image.bin
+}
+
+# Replace the chromeos image below with the actual path to your test image.
+test_image {
+  chromeos_image:<path-to-your-chroot>/src/build/images/<board>/test-image/chromiumos_test_image.bin
+}

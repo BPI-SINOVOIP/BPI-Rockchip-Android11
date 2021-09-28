@@ -1,0 +1,38 @@
+/**
+ * The default build is with CMake Plugin.
+ * If Android.mk build system is required, src/main/cpp/Android.mk is
+ * a workable, just add hooks to this file to replace cmake at the "cmake"
+ * location.
+ */
+
+apply plugin: 'com.android.application'
+
+android {
+        compileSdkVersion 28
+
+        defaultConfig {
+            applicationId 'org.drrickorang.loopback'
+            minSdkVersion 14
+            targetSdkVersion  26
+            externalNativeBuild.cmake {
+                arguments "-DANDROID_STL=c++_static"
+            }
+        }
+
+	externalNativeBuild {
+	    cmake {
+	        path 'src/main/cpp/CMakeLists.txt'
+	    }
+	}
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles.add file('proguard.cfg')
+            }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
+}

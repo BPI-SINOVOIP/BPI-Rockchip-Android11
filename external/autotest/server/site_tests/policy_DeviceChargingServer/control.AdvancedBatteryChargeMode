@@ -1,0 +1,106 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+from autotest_lib.server.hosts import cros_host
+
+AUTHOR = 'ncrews'
+DEPENDENCIES = "servo"
+NAME = 'policy_DeviceChargingServer.AdvancedBatteryChargeMode'
+TIME = 'LONG'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = "suite:wilco_bve"
+
+DOC = """
+Ensures the DUT's battery level is in a testable range, clears the TPM if
+needed, and then runs the specified client test to verify charging behavior
+is consistent with policies.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = cros_host.CrosHost.get_servo_arguments(args_dict)
+
+client_test = 'policy_DeviceScheduledCharging'
+
+# When AdvancedBatteryChargeMode is enabled, and the time is outside of the work
+# period, the battery should not charge above 90%. Therefore we need to be above
+# 90% so we can test this.
+MIN_BATTERY_LEVEL = 91
+
+# Various interesting day_config values of the policy, assuming the time
+# is noon on a Monday.
+BEFORE_START_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'charge_start_time':{'hour':22, 'minute':0},
+                 'charge_end_time':{'hour':23, 'minute':0},
+                }]
+}
+START_THRU_END_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'charge_start_time':{'hour':1, 'minute':0},
+                 'charge_end_time':{'hour':23, 'minute':0},
+                }]
+}
+AFTER_END_DAY_CONFIG = {
+    'entries': [{'day': 'MONDAY',
+                 'charge_start_time':{'hour':1, 'minute':0},
+                 'charge_end_time':{'hour':2, 'minute':0},
+                }]
+}
+
+# A test case consists of the policies, plus the expected power behavior.
+TEST_CASES = [
+    ({'DeviceAdvancedBatteryChargeModeEnabled': False,
+      'DeviceAdvancedBatteryChargeModeDayConfig': BEFORE_START_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceAdvancedBatteryChargeModeEnabled': False,
+      'DeviceAdvancedBatteryChargeModeDayConfig': START_THRU_END_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceAdvancedBatteryChargeModeEnabled': False,
+      'DeviceAdvancedBatteryChargeModeDayConfig': AFTER_END_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+
+    ({'DeviceAdvancedBatteryChargeModeEnabled': True,
+      'DeviceAdvancedBatteryChargeModeDayConfig': BEFORE_START_DAY_CONFIG},
+     'ON_AC_AND_NOT_CHARGING'),
+    ({'DeviceAdvancedBatteryChargeModeEnabled': True,
+      'DeviceAdvancedBatteryChargeModeDayConfig': START_THRU_END_DAY_CONFIG},
+     'ON_AC_AND_CHARGING'),
+    ({'DeviceAdvancedBatteryChargeModeEnabled': True,
+      'DeviceAdvancedBatteryChargeModeDayConfig': AFTER_END_DAY_CONFIG},
+     'ON_AC_AND_NOT_CHARGING'),
+]
+
+# These are used to cleanup the DUT and to prep the DUT before each test case.
+# See the test for more info.
+ON_AC_AND_CHARGING_POLICIES = {
+    'DeviceAdvancedBatteryChargeModeEnabled': False,
+    'DeviceAdvancedBatteryChargeModeDayConfig': BEFORE_START_DAY_CONFIG
+}
+ON_AC_AND_NOT_CHARGING_POLICIES = {
+    'DeviceAdvancedBatteryChargeModeEnabled': True,
+    'DeviceAdvancedBatteryChargeModeDayConfig': BEFORE_START_DAY_CONFIG
+}
+PREP_POLICIES = {
+    'ON_AC_AND_CHARGING'         : (ON_AC_AND_NOT_CHARGING_POLICIES,
+                                    'ON_AC_AND_NOT_CHARGING'),
+    'ON_AC_AND_NOT_CHARGING'     : (ON_AC_AND_CHARGING_POLICIES,
+                                    'ON_AC_AND_CHARGING'),
+    'NOT_ON_AC_AND_NOT_CHARGING' : (ON_AC_AND_CHARGING_POLICIES,
+                                    'ON_AC_AND_CHARGING'),
+}
+
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('policy_DeviceChargingServer',
+                 host=host,
+                 client_test=client_test,
+                 test_cases=TEST_CASES,
+                 min_battery_level=MIN_BATTERY_LEVEL,
+                 prep_policies=PREP_POLICIES)
+
+parallel_simple(run, machines)

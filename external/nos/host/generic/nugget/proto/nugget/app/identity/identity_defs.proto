@@ -1,0 +1,46 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package nugget.app.identity;
+
+/**
+ * The ResultCode enumeration is used to convey the status of an operation.
+ */
+enum ResultCode {
+  STATUS_OK = 0;
+  STATUS_FAILED = 1;
+  STATUS_CIPHER_SUITE_NOT_SUPPORTED = 2;
+  STATUS_INVALID_DATA = 3;
+  STATUS_INVALID_AUTH_TOKEN = 4;
+  STATUS_INVALID_ITEMS_REQUEST_MESSAGE = 5;
+  STATUS_READER_SIGNATURE_CHECK_FAILED = 6;
+  STATUS_EPHEMERAL_PUBLIC_KEY_NOT_FOUND = 7;
+  STATUS_USER_AUTHENTICATION_FAILED = 8;
+  STATUS_READER_AUTHENTICATION_FAILED = 9;
+  STATUS_NO_ACCESS_CONTROL_PROFILES = 10;
+  STATUS_NOT_IN_REQUEST_MESSAGE = 11;
+  STATUS_SESSION_TRANSCRIPT_MISMATCH = 12;
+};
+
+enum EicAccessCheckResult {
+  EIC_ACCESS_CHECK_RESULT_OK = 0;
+  EIC_ACCESS_CHECK_RESULT_FAILED = 1;
+  EIC_ACCESS_CHECK_RESULT_NO_ACCESS_CONTROL_PROFILES = 2;
+  EIC_ACCESS_CHECK_RESULT_USER_AUTHENTICATION_FAILED = 3;
+  EIC_ACCESS_CHECK_RESULT_READER_AUTHENTICATION_FAILED = 4;
+};

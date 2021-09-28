@@ -1,0 +1,32 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "rzakarian"
+NAME = "policy_DeviceBootOnAcEnabled.true"
+CRITERIA = "This test will fail if servo does not work as expected."
+TIME = "LONG"
+TEST_CATEGORY = "General"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+Test that verifies DeviceBootOnAcEnabled policy.
+If this policy is set to true then boot on AC will always be enabled.
+If this policy is set to false, boot on AC will always be disabled.
+If this policy is left unset, boot on AC is disabled.
+
+"""
+
+case = True
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('policy_DeviceBootOnAcEnabled', host=host, case=case)
+
+parallel_simple(run, machines)

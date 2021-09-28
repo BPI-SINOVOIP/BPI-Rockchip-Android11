@@ -1,0 +1,56 @@
+#!/bin/bash
+set -e -o pipefail
+
+# This script copies a locally built GLIBC to a remote device.
+#
+# Usage: push_glibc <target>...
+#
+# This script works with 64-bit (amd64 or arm64) ChromeOS targets.
+# It copies both 32-bit and 64-bit glibc loaders onto the device.
+# This allows loading and running both 32-bit and 64-bit binaries
+# on the same device.
+
+for target in "$@"
+do
+	echo -n "pushing glibc to ${target} ... "
+	case "$(ssh -i ${HOME}/.ssh/testing_rsa ${target} uname -m)" in
+		x86_64)
+			glibc="/usr/x86_64-cros-linux-gnu/lib64"
+			loader="ld-linux-x86-64.so.2"
+			glibc32="/usr/i686-pc-linux-gnu/lib"
+			loader32="ld-linux.so.2"
+			;;
+		aarch64)
+			glibc="/usr/aarch64-cros-linux-gnu/lib64"
+			loader="ld-linux-aarch64.so.1"
+			glibc32="/usr/armv7a-cros-linux-gnueabihf/lib"
+			loader32="ld-linux-armhf.so.3"
+			;;
+		*)
+			echo "unknown arch"
+			continue
+			;;
+	esac
+
+	target_sh ${target} "rm -rf /tmp/glibc"
+	target_sh ${target} "mkdir -p /tmp/glibc"
+	target_cp "${glibc}" ${target}:/tmp/glibc
+
+	target_sh ${target} "rm -rf /tmp/glibc32"
+	target_sh ${target} "mkdir -p /tmp/glibc32"
+	target_cp "${glibc32}" ${target}:/tmp/glibc32
+
+	echo "#!/bin/bash" > /tmp/ld.so
+	echo "LD_LIBRARY_PATH=/tmp/glibc/${glibc##*/} exec /tmp/glibc/${glibc##*/}/${loader} \"\$@\"" >> /tmp/ld.so
+	chmod +x /tmp/ld.so
+	target_cp /tmp/ld.so ${target}:/tmp/glibc
+	rm /tmp/ld.so
+
+	echo "#!/bin/bash" > /tmp/ld.so
+	echo "LD_LIBRARY_PATH=/tmp/glibc32/${glibc32##*/} exec /tmp/glibc32/${glibc32##*/}/${loader32} \"\$@\"" >> /tmp/ld.so
+	chmod +x /tmp/ld.so
+	target_cp /tmp/ld.so ${target}:/tmp/glibc32
+	rm /tmp/ld.so
+
+	echo "done"
+done

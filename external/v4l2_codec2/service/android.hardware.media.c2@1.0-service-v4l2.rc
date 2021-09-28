@@ -1,0 +1,7 @@
+service android-hardware-media-c2-v4l2-hal-1-0 /vendor/bin/hw/android.hardware.media.c2@1.0-service-v4l2
+    class hal
+    user media
+    group mediadrm drmrpc
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+    setenv MESA_GLSL_CACHE_DISABLE 1

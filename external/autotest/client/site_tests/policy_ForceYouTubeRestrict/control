@@ -1,0 +1,28 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_ForceYouTubeRestrict'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies effects of ForceYouTubeRestrict policy.
+
+This test verifies four states of this policy: Strict, Moderate,
+Disabled and Not Set.
+
+If the policy is set to Strict than the user will not be able to view any
+restricted videos on YouTube. If the policy is set to Moderate than the
+user will not be able to watch some restricted videos. If the policy is
+Disabled or Not Set the user will be able to watch everything. In both cases,
+Strict and Moderate, the user will not be able to toggle restricted settings
+on the website.
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_ForceYouTubeRestrict', **args_dict)

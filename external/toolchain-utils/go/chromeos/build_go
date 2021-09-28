@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e -o pipefail
+
+# This script builds the go cross compilers for ChromeOS targets.
+#
+# Usage: build_go
+#
+# It assumes that the "x86_64-cros-linux-gnu" toolchain is already installed.
+# It assumes that the "armv7a-cros-linux-gnueabihf" toolchain is
+# already installed.
+# It assumes that the "aarch64-cros-linux-gnu" toolchain is already installed.
+
+if [[ ! -e "make.bash" && -e "src/make.bash" ]]
+then
+	cd src
+fi
+
+# Build the Go toolchain for amd64 targets.
+GOOS="linux" GOARCH="amd64" CGO_ENABLED="1" \
+	CC_FOR_TARGET="x86_64-cros-linux-gnu-clang" \
+	CXX_FOR_TARGET="x86_64-cros-linux-gnu-clang++" \
+	./make.bash --no-clean
+GOOS="linux" GOARCH="amd64" CGO_ENABLED="1" \
+	CC="x86_64-cros-linux-gnu-clang" \
+	CXX="x86_64-cros-linux-gnu-clang++" \
+	../bin/go install -v -buildmode=pie std
+
+# Build the Go toolchain for arm targets.
+GOOS="linux" GOARCH="arm" CGO_ENABLED="1" \
+	CC_FOR_TARGET="armv7a-cros-linux-gnueabihf-clang" \
+	CXX_FOR_TARGET="armv7a-cros-linux-gnueabihf-clang++" \
+	./make.bash --no-clean
+GOOS="linux" GOARCH="arm" CGO_ENABLED="1" \
+	CC="armv7a-cros-linux-gnueabihf-clang" \
+	CXX="armv7a-cros-linux-gnueabihf-clang++" \
+	../bin/go install -v -buildmode=pie std
+
+# Build the Go toolchain for arm64 targets.
+GOOS="linux" GOARCH="arm64" CGO_ENABLED="1" \
+	CC_FOR_TARGET="aarch64-cros-linux-gnu-clang" \
+	CXX_FOR_TARGET="aarch64-cros-linux-gnu-clang++" \
+	./make.bash --no-clean
+GOOS="linux" GOARCH="arm64" CGO_ENABLED="1" \
+	CC="aarch64-cros-linux-gnu-clang" \
+	CXX="aarch64-cros-linux-gnu-clang++" \
+	../bin/go install -v -buildmode=pie std

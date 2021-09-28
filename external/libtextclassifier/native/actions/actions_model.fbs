@@ -1,0 +1,556 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+include "actions/actions-entity-data.fbs";
+include "annotator/model.fbs";
+include "utils/codepoint-range.fbs";
+include "utils/flatbuffers.fbs";
+include "utils/grammar/rules.fbs";
+include "utils/intents/intent-config.fbs";
+include "utils/normalization.fbs";
+include "utils/resources.fbs";
+include "utils/tokenizer.fbs";
+include "utils/zlib/buffer.fbs";
+
+file_identifier "TC3A";
+
+// Prediction type for a multi-task model.
+namespace libtextclassifier3;
+enum PredictionType : int {
+  UNSUPPORTED = 0,
+  NEXT_MESSAGE_PREDICTION = 1,
+  INTENT_TRIGGERING = 2,
+  ENTITY_ANNOTATION = 3,
+}
+
+// Prediction metadata for an arbitrary task.
+namespace libtextclassifier3;
+table PredictionMetadata {
+  prediction_type:PredictionType;
+  task_spec:ActionSuggestionSpec;
+  output_suggestions:int;
+  output_suggestions_scores:int;
+  output_suggestions_spans:int;
+}
+
+namespace libtextclassifier3.TensorflowLiteModelSpec_;
+table InputNameIndexEntry {
+  key:string (key, shared);
+  value:int;
+}
+
+// TensorFlow Lite model for suggesting actions.
+namespace libtextclassifier3;
+table TensorflowLiteModelSpec {
+  // TensorFlow Lite model for suggesting actions.
+  tflite_model:[ubyte] (force_align: 16);
+
+  // Input specification.
+  // (num messages,) int32 tensor, the user id per message.
+  input_user_id:int = 0;
+
+  // (num messages,) string tensor, each message of the conversation.
+  input_context:int = 1;
+
+  // int, the number of messages in the conversation.
+  input_context_length:int = 2;
+
+  // (num messages,) float tensor, the time difference in seconds of the
+  // messages in the conversation.
+  input_time_diffs:int = 3;
+
+  // int, the number of smart replies to produce.
+  input_num_suggestions:int = 4;
+
+  // float, the output diversification distance parameter.
+  reserved_7:int (deprecated);
+
+  // float, the empirical probability factor parameter.
+  reserved_8:int (deprecated);
+
+  // float, the confidence threshold.
+  reserved_9:int (deprecated);
+
+  // Input port for hashed and embedded tokens, a (num messages, max tokens,
+  // embedding size) float tensor specifying the embeddings of each token of
+  // each message in the conversation.
+  input_token_embeddings:int = -1;
+
+  // Input port for the number of tokens per message.
+  // (num messages) int32 tensor specifying the number of tokens in each message
+  // in the conversation.
+  input_num_tokens:int = -1;
+
+  // Output specification.
+  output_replies:int = 0;
+
+  output_replies_scores:int = 1;
+  output_sensitive_topic_score:int = 3;
+  output_triggering_score:int = 4;
+  output_actions_scores:int = 5;
+
+  // Model setup.
+  // When true, the inputs are resized to the concrete input sizes before
+  // inference otherwise, it's assumed that the model has the correct input
+  // shapes set.
+  resize_inputs:bool = false;
+
+  // Input port for the hashed, embedded and flattened/concatenated tokens.
+  // A (max tokens, embedding_size) float tensor specifying the embeddings of
+  // each token.
+  input_flattened_token_embeddings:int = -1;
+
+  // Generalized output specification that handles arbitrary number of
+  // prediction tasks.
+  prediction_metadata:[PredictionMetadata];
+
+  // Map of additional input tensor name to its index.
+  input_name_index:[TensorflowLiteModelSpec_.InputNameIndexEntry];
+}
+
+// Configuration for the tokenizer.
+namespace libtextclassifier3;
+table ActionsTokenizerOptions {
+  type:TokenizationType = INTERNAL_TOKENIZER;
+
+  // If true, white space tokens will be kept when using the icu tokenizer.
+  icu_preserve_whitespace_tokens:bool = false;
+
+  // Codepoint ranges that determine what role the different codepoints play
+  // during tokenized. The ranges must not overlap.
+  tokenization_codepoint_config:[TokenizationCodepointRange];
+
+  // A set of codepoint ranges to use in the mixed tokenization mode to identify
+  // stretches of tokens to re-tokenize using the internal tokenizer.
+  internal_tokenizer_codepoint_ranges:[CodepointRange];
+
+  // If true, tokens will be also split when the codepoint's script_id changes
+  // as defined in TokenizationCodepointRange.
+  tokenize_on_script_change:bool = false;
+}
+
+// Configuration for the feature processor.
+namespace libtextclassifier3;
+table ActionsTokenFeatureProcessorOptions {
+  // Tokenizer options.
+  tokenizer_options:ActionsTokenizerOptions;
+
+  // Serialized TensorFlow Lite model with weights for the token embeddings.
+  embedding_model:[ubyte] (force_align: 16);
+
+  // Size of the embedding.
+  embedding_size:int = -1;
+
+  // Number of bits for quantization for embeddings.
+  embedding_quantization_bits:int = 8;
+
+  // Number of buckets used for hashing charactergrams.
+  num_buckets:int = -1;
+
+  // Orders of charactergrams to extract, e.g. 2 means character bigrams, 3
+  // character trigrams etc.
+  chargram_orders:[int];
+
+  // Whether to extract the token case feature.
+  extract_case_feature:bool;
+
+  // If true, will use the unicode-aware functionality for extracting features.
+  unicode_aware_features:bool;
+
+  // Regexp features to extract.
+  regexp_features:[string];
+
+  // Whether to remap digits to a single number.
+  remap_digits:bool;
+
+  // Whether to lowercase all tokens.
+  lowercase_tokens:bool;
+
+  // Maximum length of a word.
+  max_token_length:int = 20;
+
+  // The `max_num_tokens_per_message` and `min_num_tokens_per_message` are
+  // applied when tokens are embedded per message.
+  // If set and the number of tokens of a message is bigger than this limit,
+  // tokens at the beginning of the message are dropped to fit the limit.
+  max_num_tokens_per_message:int = -1;
+
+  // If set, the tokens of each message will be padded to this fixed number of
+  // tokens.
+  min_num_tokens_per_message:int = -1;
+
+  // If set and the total number of concatenated tokens is bigger than this
+  // limit, tokens at the start of the conversation are dropped.
+  max_num_total_tokens:int = -1;
+
+  // If set and the total number of concatenaed tokens is smaller than this
+  // limit, the conversation is padded with padding tokens.
+  min_num_total_tokens:int = -1;
+
+  // Id that is used as encoding of the padding token.
+  padding_token_id:int = 0;
+
+  // Id that is used as encoding of the start of message token.
+  start_token_id:int = 1;
+
+  // Id that is used as encoding of the end of message token.
+  end_token_id:int = 2;
+}
+
+// N-Gram based linear regression model.
+namespace libtextclassifier3;
+table NGramLinearRegressionModel {
+  // A flat list of all the hashed n-grams concatenated back to back. Elements
+  // should only ever be accessed via the offset table below.
+  hashed_ngram_tokens:[uint];
+
+  // Offsets to the start of the n-grams in hashed_ngram_tokens. The last
+  // element in this array is the length of hashed_ngrams to make it easier to
+  // compute n-gram lengths.
+  ngram_start_offsets:[ushort];
+
+  // Weights of the n-grams.
+  ngram_weights:[float];
+
+  // The default weight assigned to n-grams that weren't matched.
+  default_token_weight:float;
+
+  // Maximum n-gram length to consider when calculating the denominatior.
+  // This should usually be the same as max_ngram_length but can diverge
+  // if additional (longer) n-grams are added to a model as part of a minor
+  // update.
+  max_denom_ngram_length:int;
+
+  // If non-zero, the order of the skip-gram to match.
+  max_skips:int;
+
+  // The threshold above which the model output is considered positive.
+  threshold:float;
+
+  // Model specific tokenizer options.
+  // If not specified, will reuse the feature processor tokenizer.
+  tokenizer_options:ActionsTokenizerOptions;
+}
+
+namespace libtextclassifier3;
+table TriggeringPreconditions {
+  // Lower bound thresholds for the smart reply model prediction output.
+  min_smart_reply_triggering_score:float;
+
+  // Maximum sensitive score for which actions and smart replies are shown.
+  max_sensitive_topic_score:float = 1;
+
+  // Whether to suppress all model output when a conversation is classified as
+  // sensitive.
+  suppress_on_sensitive_topic:bool = true;
+
+  // Thresholds on the model prediction input.
+  // The minimal length of input to consider for prediction.
+  min_input_length:int = 0;
+
+  // The maximal length of input to consider for prediciton, -1 if unbounded.
+  max_input_length:int = -1;
+
+  // Minimal fraction of messages in the input conversation that need to match
+  // a locale that the model can handle.
+  min_locale_match_fraction:float = 0.75;
+
+  handle_missing_locale_as_supported:bool = false;
+  handle_unknown_locale_as_supported:bool = false;
+
+  // Filter input with low-confidence triggers.
+  suppress_on_low_confidence_input:bool = true;
+
+  // Same as low_confidence_rules in ActionsModel.
+  // NOTE: Only fill this when the TriggeringPreconditions are pushed separately
+  // as a flag value (i.e. as overlay).
+  low_confidence_rules:RulesModel;
+
+  reserved_11:float (deprecated);
+  reserved_12:float (deprecated);
+  reserved_13:float (deprecated);
+
+  // Smart reply thresholds.
+  min_reply_score_threshold:float = 0;
+}
+
+namespace libtextclassifier3;
+table ActionSuggestionSpec {
+  // Type of the action suggestion.
+  type:string (shared);
+
+  // Text of a smart reply action.
+  response_text:string (shared);
+
+  // Score.
+  score:float;
+
+  // Additional entity information.
+  serialized_entity_data:string (shared);
+
+  // Priority score used for internal conflict resolution.
+  priority_score:float = 0;
+
+  entity_data:ActionsEntityData;
+}
+
+// Options to specify triggering behaviour per action class.
+namespace libtextclassifier3;
+table ActionTypeOptions {
+  // The name of the predicted action.
+  name:string (shared);
+
+  // Triggering behaviour.
+  // Whether the action class is considered in the model output or not.
+  enabled:bool = true;
+
+  // Minimal output score threshold.
+  min_triggering_score:float = 0;
+
+  // The action to trigger.
+  action:ActionSuggestionSpec;
+}
+
+namespace libtextclassifier3.AnnotationActionsSpec_;
+table AnnotationMapping {
+  // The annotation collection.
+  annotation_collection:string (shared);
+
+  // The action name to use.
+  action:ActionSuggestionSpec;
+
+  // Whether to use the score of the annotation as the action score.
+  use_annotation_score:bool = true;
+
+  // Minimum threshold for the annotation score for filtering.
+  min_annotation_score:float;
+
+  // If set, the text of the annotation will be used to set a field in the
+  // action entity data.
+  entity_field:FlatbufferFieldPath;
+
+  // If set, normalization to apply to the annotation text.
+  normalization_options:NormalizationOptions;
+}
+
+// Configuration for actions based on annotatations.
+namespace libtextclassifier3;
+table AnnotationActionsSpec {
+  annotation_mapping:[AnnotationActionsSpec_.AnnotationMapping];
+
+  // Whether to deduplicate annotations by type and text prior to generating
+  // actions.
+  deduplicate_annotations:bool = true;
+
+  // Annotation usecase to specify for text annotation.
+  annotation_usecase:AnnotationUsecase = ANNOTATION_USECASE_SMART;
+
+  // Maximum number of recent messages to consider from any person.
+  // We consider at most `max_history_from_any_person` many recent messages if
+  // they were received from different users or at most the maximum of this and
+  // `max_history_from_last_person` if they are all from the same user.
+  max_history_from_any_person:int = 1;
+
+  // Maximum number of recent messages to consider from the last person.
+  max_history_from_last_person:int = 1;
+
+  // Whether to include messages from the local user.
+  include_local_user_messages:bool = false;
+
+  // Whether to only consider messages up to the last one sent by the local
+  // user.
+  only_until_last_sent:bool = true;
+
+  // If true, annotator would populate serialized_entity_data in the results.
+  is_serialized_entity_data_enabled:bool = true;
+}
+
+// Ranking options.
+namespace libtextclassifier3;
+table RankingOptions {
+  // When true, actions suggestions are deduplicated by `type`, `response_text`
+  // and associated annotations, keeping the higher scoring actions.
+  deduplicate_suggestions:bool = true;
+
+  // When true, actions are deduplicated by the span they are referring to.
+  deduplicate_suggestions_by_span:bool = true;
+
+  // Optional script to run for ranking and filtering the action suggestions.
+  // The following global variables are available to the script:
+  // * input: (optionally deduplicated) action suggestions, via the `actions`
+  // global
+  // * output: indices of the actions to keep in the provided order.
+  lua_ranking_script:string (shared);
+
+  compressed_lua_ranking_script:CompressedBuffer;
+
+  // If true, suppresses smart replies if other smart actions are suggested.
+  suppress_smart_replies_with_actions:bool = false;
+
+  // If true, keep actions from the same entities together for ranking.
+  group_by_annotations:bool = true;
+}
+
+// Entity data to set from capturing groups.
+namespace libtextclassifier3.RulesModel_.RuleActionSpec_;
+table RuleCapturingGroup {
+  // The id of group.
+  group_id:int;
+
+  // If set, the text of the capturing group will be used to set a field
+  // in the action entity data.
+  entity_field:FlatbufferFieldPath;
+
+  // If set, the capturing group will be used to create a text annotation
+  // with the given name and type.
+  annotation_type:string (shared);
+
+  annotation_name:string (shared);
+
+  // If set, the capturing group text will be used to create a text
+  // reply.
+  text_reply:ActionSuggestionSpec;
+
+  // If set, normalization to apply to the capturing group text.
+  normalization_options:NormalizationOptions;
+
+  // If set to true, an existing annotator annotation will be used to
+  // create the actions suggestions text annotation.
+  use_annotation_match:bool;
+
+  // If set, merge in fixed entity data for a match.
+  entity_data:ActionsEntityData;
+}
+
+// The actions to produce upon triggering.
+namespace libtextclassifier3.RulesModel_;
+table RuleActionSpec {
+  // The action.
+  action:ActionSuggestionSpec;
+
+  capturing_group:[RuleActionSpec_.RuleCapturingGroup];
+}
+
+// List of regular expression matchers.
+namespace libtextclassifier3.RulesModel_;
+table RegexRule {
+  // The regular expression pattern.
+  pattern:string (shared);
+
+  compressed_pattern:CompressedBuffer;
+  actions:[RuleActionSpec];
+
+  // Patterns for post-checking the outputs.
+  output_pattern:string (shared);
+
+  compressed_output_pattern:CompressedBuffer;
+}
+
+// Action configuration.
+// Specifies an action rules match.
+namespace libtextclassifier3.RulesModel_.GrammarRules_;
+table RuleMatch {
+  // The actions to produce as part of this match.
+  // These are indices into the `actions` array below.
+  action_id:[uint];
+}
+
+// Configuration for actions based on context-free grammars.
+namespace libtextclassifier3.RulesModel_;
+table GrammarRules {
+  // The tokenizer config.
+  tokenizer_options:ActionsTokenizerOptions;
+
+  // The grammar.
+  rules:grammar.RulesSet;
+
+  rule_match:[GrammarRules_.RuleMatch];
+
+  // The action specifications used by the rule matches.
+  actions:[RuleActionSpec];
+}
+
+// Rule based actions.
+namespace libtextclassifier3;
+table RulesModel {
+  regex_rule:[RulesModel_.RegexRule];
+
+  // If true, will compile the regexes only on first use.
+  lazy_regex_compilation:bool = true;
+
+  grammar_rules:RulesModel_.GrammarRules;
+}
+
+namespace libtextclassifier3;
+table ActionsModel {
+  // Comma-separated list of locales supported by the model as BCP 47 tags.
+  locales:string (shared);
+
+  // Version of the actions model.
+  version:int;
+
+  // A name for the model that can be used e.g. for logging.
+  name:string (shared);
+
+  tflite_model_spec:TensorflowLiteModelSpec;
+
+  // Output classes.
+  smart_reply_action_type:string (shared);
+
+  action_type:[ActionTypeOptions];
+
+  // Triggering conditions of the model.
+  preconditions:TriggeringPreconditions;
+
+  // Default number of smart reply predictions.
+  num_smart_replies:int = 3;
+
+  // Length of message history to consider, -1 if unbounded.
+  max_conversation_history_length:int = 1;
+
+  // Configuration for mapping annotations to action suggestions.
+  annotation_actions_spec:AnnotationActionsSpec;
+
+  // Configuration for rules.
+  rules:RulesModel;
+
+  // Configuration for intent generation on Android.
+  android_intent_options:IntentFactoryModel;
+
+  // Model resources.
+  resources:ResourcePool;
+
+  // Schema data for handling entity data.
+  actions_entity_data_schema:[ubyte];
+
+  // Action ranking options.
+  ranking_options:RankingOptions;
+
+  // Lua based actions.
+  lua_actions_script:string (shared);
+
+  compressed_lua_actions_script:CompressedBuffer;
+
+  // Low confidence classifiers.
+  low_confidence_rules:RulesModel;
+
+  low_confidence_ngram_model:NGramLinearRegressionModel;
+
+  // Feature processor options.
+  feature_processor_options:ActionsTokenFeatureProcessorOptions;
+}
+
+root_type libtextclassifier3.ActionsModel;

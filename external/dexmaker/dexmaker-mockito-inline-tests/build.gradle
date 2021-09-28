@@ -1,0 +1,54 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.13"
+    }
+}
+
+apply plugin: "net.ltgt.errorprone"
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    android {
+        lintOptions {
+            disable 'InvalidPackage'
+            warning 'NewApi'
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion 28
+        targetSdkVersion 28
+        versionName VERSION_NAME
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    externalNativeBuild {
+        cmake {
+            path 'CMakeLists.txt'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    google()
+}
+
+dependencies {
+    implementation project(':dexmaker-mockito-tests')
+    compileOnly project(':dexmaker-mockito-inline')
+    androidTestImplementation project(':dexmaker-mockito-inline')
+
+    implementation 'junit:junit:4.12'
+    implementation 'com.android.support.test:runner:1.0.2'
+    api 'org.mockito:mockito-core:2.25.0', { exclude group: 'net.bytebuddy' }
+}

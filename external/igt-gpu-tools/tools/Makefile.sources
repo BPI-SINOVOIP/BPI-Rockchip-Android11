@@ -1,0 +1,68 @@
+noinst_PROGRAMS =		\
+	hsw_compute_wrpll	\
+	skl_compute_wrpll	\
+	skl_ddb_allocation	\
+	cnl_compute_wrpll 	\
+	$(NULL)
+
+tools_prog_lists =		\
+	igt_stats		\
+	dpcd_reg		\
+	intel_audio_dump	\
+	intel_reg		\
+	intel_backlight		\
+	intel_bios_dumper	\
+	intel_display_crc	\
+	intel_display_poller	\
+	intel_forcewaked	\
+	intel_gpu_frequency	\
+	intel_firmware_decode	\
+	intel_gpu_time		\
+	intel_gpu_top		\
+	intel_gtt		\
+	intel_guc_logger        \
+	intel_infoframes	\
+	intel_l3_parity		\
+	intel_lid		\
+	intel_opregion_decode	\
+	intel_panel_fitter	\
+	intel_reg_checker	\
+	intel_residency		\
+	intel_stepping		\
+	intel_vbt_decode	\
+	intel_watermark		\
+	intel_gem_info		\
+	intel_gvtg_test     \
+	$(NULL)
+
+dist_bin_SCRIPTS = intel_gpu_abrt
+
+LIBDRM_INTEL_BIN =		\
+	intel_dump_decode	\
+	intel_error_decode	\
+	intel_framebuffer_dump	\
+	intel_perf_counters	\
+	$(NULL)
+
+intel_reg_SOURCES =		\
+	intel_reg.c		\
+	intel_reg_decode.c	\
+	intel_reg_spec.c	\
+	intel_reg_spec.h
+
+intel_vbt_decode_SOURCES =	\
+	intel_vbt_decode.c	\
+	intel_vbt_defs.h \
+	intel_bios.h
+
+intel_l3_parity_SOURCES =	\
+	intel_l3_parity.c	\
+	intel_l3_parity.h	\
+	intel_l3_udev_listener.c
+
+intel_dp_compliance_SOURCES = \
+        intel_dp_compliance.c \
+        intel_dp_compliance.h \
+        intel_dp_compliance_hotplug.c \
+        $(NULL)
+

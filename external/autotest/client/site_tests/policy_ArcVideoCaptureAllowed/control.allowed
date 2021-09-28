@@ -1,0 +1,21 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_ArcVideoCaptureAllowed.allow'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+DEPENDENCIES = "arc"
+
+DOC = '''
+Verify when the 'ArcVideoCaptureAllowed' policy is set to True (allow) the ARC
+Camera within the ARC container can be launched.
+
+'''
+
+job.run_test('policy_ArcVideoCaptureAllowed',
+             case=True)

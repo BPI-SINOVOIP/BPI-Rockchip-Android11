@@ -1,0 +1,43 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "ckclark@chromium.org, chromeos-runtime-probe@google.com"
+NAME = "runtime_probe_perbuild"
+PURPOSE = "Runtime Probe tests"
+
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+ChromeOS Runtime Probe tests.
+
+This suite is used as an entry point for runtime_probe_perbuild, which passes
+cros labels in host info store as references to runtime probe tast tests for
+comparison with probed component names.
+"""
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+
+# Values specified in this bug template will override default values when
+# filing bugs on tests that are a part of this suite. If left unspecified
+# the bug filer will fallback to its defaults.
+_BUG_TEMPLATE = {
+    'labels': ['Type-Bug', 'Cros-Runtime-Probe-Test'],
+    'owner': 'ckclark@chromium.org',
+    'cc': ['chromeos-runtime-probe@google.com']
+}
+
+args_dict['max_runtime_mins'] = 10
+args_dict['timeout_mins'] = 10
+args_dict['file_bugs'] = True
+args_dict['name'] = 'runtime_probe_perbuild'
+args_dict['job'] = job
+args_dict['add_experimental'] = True
+args_dict['bug_template'] = _BUG_TEMPLATE
+
+dynamic_suite.reimage_and_run(**args_dict)

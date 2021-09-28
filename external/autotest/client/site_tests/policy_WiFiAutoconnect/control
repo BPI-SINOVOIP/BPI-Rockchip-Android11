@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+NAME = 'policy_WiFiAutoconnect'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effect of policy_WiFiAutoconnect policy on Chrome OS behavior.
+
+Sets network configuration policy and then verifies that device autoconnects
+(or doesn't) based on policy settings.
+
+Trigger this through the 'policy_WiFiAutoconnectServer' test.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_WiFiAutoconnect', **args_dict)
+

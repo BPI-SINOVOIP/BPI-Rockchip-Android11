@@ -1,0 +1,38 @@
+def destDir = (System.getenv("DIST_DIR") == null) ? file("dist") : file(System.getenv("DIST_DIR"))
+
+def hostTestDir = new File(destDir, "host-test-reports")
+
+allprojects { project ->
+    project.tasks.withType(Test) { task ->
+        def report = task.reports.junitXml
+        if (report.isEnabled()) {
+            def zipTask = project.tasks.create("zipResultsOf${project.name}", Zip) {
+                destinationDir = hostTestDir
+                archiveName = "${project.name}.zip"
+            }
+            task.finalizedBy(zipTask)
+            task.doFirst {
+                zipTask.from(report.destination)
+            }
+        }
+        task.ignoreFailures = true
+    }
+    if (project.rootProject == project) {
+        def zipMaven = project.tasks.create("zipMaven", Zip) {
+            from file("${project.buildDir}/dist-maven")
+            destinationDir destDir
+            archiveName = "maven.zip"
+        }
+
+        def copyRepository = project.tasks.create("copyRepository", Copy) {
+            from file("${project.buildDir}/dist-maven")
+            into "${destDir}/repository"
+        }
+
+        [copyRepository, zipMaven].forEach {
+            it.dependsOn(":runners:android-gradle-plugin:publishToDistMaven")
+            it.dependsOn(":runners:gradle-plugin:publishToDistMaven")
+            it.dependsOn(":runners:fatjar:publishToDistMaven")
+        }
+    }
+}

@@ -1,0 +1,24 @@
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "cts_N"
+PURPOSE = "Test that the moblab has the correct setup for cts_N suite"
+ATTRIBUTES = "suite:check_setup_cts_N"
+TIME = "SHORT"
+TEST_CATEGORY = "General"
+TEST_CLASS = "dummy"
+TEST_TYPE = "server"
+REQUIRE_SSP = False
+
+DOC = """
+Test that the moblab has 5 live DUTs connected, and that at least one of those
+DUTs has each required label
+"""
+
+def run(machine):
+    job.run_test('moblab_Setup', host=hosts.create_host(machine),
+      required_duts=5, required_labels=['lighting', 'noloopback'])
+
+parallel_simple(run, machines)

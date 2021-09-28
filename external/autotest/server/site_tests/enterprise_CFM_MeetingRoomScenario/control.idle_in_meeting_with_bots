@@ -1,0 +1,42 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+from autotest_lib.server.cros.cfm.configurable_test.dsl import *
+
+AUTHOR = "dtosic@google.com, chromeos-meetings@google.com"
+NAME = "enterprise_CFM_MeetingRoomScenario.idle_in_meeting_with_bots"
+PURPOSE = "Tests what happens when CfM stays idle in a meeting."
+CRITERIA = "No unexpected resource leaks."
+ATTRIBUTES = "suite:hotrod"
+DEPENDENCIES = "meet_app"
+TIME = "LONG"
+TEST_CATEGORY = "Performance"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+
+DOC = """
+Stay idle in a meeting for a long time.
+"""
+
+DURATION_MIN = 20
+BOT_COUNT = 7
+
+cfm_test = CfmTest(
+    scenario=Scenario(
+        WaitForMeetingsLandingPage(),
+        CreateMeetingWithBots(BOT_COUNT, DURATION_MIN, muted=True),
+        JoinMeetingWithBots(),
+        StartPerfMetricsCollection(),
+        Sleep(DURATION_MIN * 60),
+        StopPerfMetricsCollection(),
+        UploadPerfMetrics(),
+    ),
+)
+
+def run_test(machine):
+    job.run_test("enterprise_CFM_MeetingRoomScenario",
+                 cfm_test = cfm_test,
+                 tag = 'idle_in_meeting_with_bots',
+                 host = hosts.create_host(machine))
+
+parallel_simple(run_test, machines)

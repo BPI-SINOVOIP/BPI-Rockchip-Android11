@@ -1,0 +1,14 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, Chromium OS"
+NAME = "autoupdate_LoginStartUpdateLogout"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+PURPOSE = "Tests logging in and out during an update."
+TIME = "SHORT"
+DOC = """ Tests logging in and out during an update. """
+
+job.run_test('autoupdate_LoginStartUpdateLogout')

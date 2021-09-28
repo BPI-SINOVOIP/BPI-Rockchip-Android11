@@ -1,0 +1,27 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+TIME="SHORT"
+AUTHOR = "The Chromium OS Authors"
+DOC = """
+Similar to security_NosymfollowMountOption.baseline, except mounts
+filesystems with SELinux custom mount strings for extra testing alongside
+SELinux.
+"""
+NAME = "security_NosymfollowMountOption.test_selinux_interaction"
+PURPOSE = """
+Make sure that the "nosymfollow" functionality of the chromiumos LSM works
+alongside SELinux.
+"""
+CRITERIA = """
+Same as security_NosymfollowMountOption.baseline with the added criteria that
+the chromiumos LSM code works alongside SELinux being enabled.
+"""
+ATTRIBUTES = "suite:bvt-perbuild"
+TEST_CLASS = "security"
+TEST_CATEGORY = "Functional"
+TEST_TYPE = "client"
+JOB_RETRIES = 2
+
+job.run_test("security_NosymfollowMountOption", test_selinux_interaction=True)

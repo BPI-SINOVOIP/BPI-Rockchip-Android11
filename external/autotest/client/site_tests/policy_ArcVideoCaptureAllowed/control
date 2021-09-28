@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_ArcVideoCaptureAllowed'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+DEPENDENCIES = "arc"
+
+DOC = '''
+Verify that the ArcVideoCaptureAllowed ChromeOS Policy propagates to the ARC
+clouddpc setting."
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_ArcVideoCaptureAllowed', **args_dict)

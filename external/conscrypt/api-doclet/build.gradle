@@ -1,0 +1,6 @@
+description = 'Conscrypt: API Doclet'
+
+dependencies {
+    // This should be removed when upgrading to Gradle 5.x
+    compile files(org.gradle.internal.jvm.Jvm.current().toolsJar)
+}

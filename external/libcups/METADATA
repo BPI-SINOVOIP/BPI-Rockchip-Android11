@@ -1,0 +1,18 @@
+name: "libcups"
+description: "CUPS is the standards-based, open source printing system."
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://www.cups.org/"
+  }
+  url {
+    type: ARCHIVE
+    value: "https://github.com/apple/cups/releases/download/v2.2.6/cups-2.2.6-source.tar.gz"
+  }
+  version: "v2.2.6"
+  last_upgrade_date {
+    year: 2018
+    month: 3
+    day: 16
+  }
+}

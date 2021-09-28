@@ -1,0 +1,116 @@
+{
+    "Android Sync Framework" : {
+        "include_tests" : "gem_exec_fence|gem_exec_async|sw_sync|fence",
+        "exclude_tests" : "kms_busy@extended|fbc",
+        "target_rate" : 90
+    },
+    "atomic" : {
+        "include_tests" : "kms|testdisplay",
+        "exclude_tests" : "kms_busy@extended|fbc",
+        "target_rate" : 90
+    },
+    "core" : {
+        "include_tests" : "core",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "debugfs" : {
+        "include_tests" : "debugfs",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "drm" : {
+        "include_tests" : "drm",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "gem" : {
+        "include_tests" : "gem",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "hang" : {
+        "comment" : "gpu hang recovery",
+	"include_tests" : "hang",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "i915" : {
+        "include_tests" : "i915",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "kms" : {
+        "include_tests" : "kms",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "kms-cursor" : {
+        "comment" : "cursor support",
+        "include_tests" : "kms_cursor",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "kms-pipe_color" : {
+        "include_tests" : "kms_pipe_color",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "kms-flip" : {
+        "comment" : "vblank timestamps and async flips",
+        "include_tests" : "kms_flip",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm" : {
+        "include_tests" : "pm_|suspend|resume",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-fbc" : {
+        "include_tests" : "fbc",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-dpms" : {
+        "include_tests" : "dpms",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-lpsp" : {
+        "include_tests" : "lpsp",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-psr" : {
+        "include_tests" : "psr",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-rpm" : {
+        "include_tests" : "rpm",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-rps" : {
+        "include_tests" : "rps",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "pm-sseu" : {
+        "comment" : "subslice ungating - sseu",
+        "include_tests" : "sseu",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "prime" : {
+        "include_tests" : "prime",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    },
+    "sysfs" : {
+        "include_tests" : "sysfs",
+        "exclude_tests" : "",
+        "target_rate" : 90
+    }
+}

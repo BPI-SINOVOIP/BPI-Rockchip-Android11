@@ -1,0 +1,33 @@
+# Copyright 2019 Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'yshavit@chromium.org'
+NAME = 'bluetooth_AdapterAudioLink'
+ATTRIBUTES = 'suite:bluetooth_flaky'
+# The default net duration of the test (excluding initializations)
+# is 1 minute (12 interations of 5 seconds audio).
+# Initialization time varies, usualy it takes about 2 minutes.
+TIME = 'SHORT'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'Server'
+DEPENDENCIES = 'bluetooth, chameleon:bt_a2dp_sink'
+
+DOC = """
+Bluetooth audio test to verify that audio connection can be established
+and stay connected during audio. In the futuer the test can be expanded
+to test audio quality etc.
+"""
+
+from autotest_lib.server.cros.bluetooth import bluetooth_tester
+from autotest_lib.server import utils
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args)
+    job.run_test('bluetooth_AdapterAudioLink', host=host)
+
+
+parallel_simple(run, machines)

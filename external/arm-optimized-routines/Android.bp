@@ -1,0 +1,101 @@
+cc_defaults {
+    name: "arm-optimized-routines-defaults",
+    host_supported: true,
+    cflags: [
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-O2",
+        "-ffp-contract=fast",
+        "-fno-math-errno",
+
+        // bionic configuration.
+
+        // We're actually implementing bionic here, so we don't want <math.h>
+        // to try to be helpful by renaming long double routines.
+        "-D__BIONIC_LP32_USE_LONG_DOUBLE",
+        "-DFLT_EVAL_METHOD=0",
+
+        // arm-optimized-routines configuration.
+
+        // BSD libm doesn't set errno, and bionic was based on the BSDs.
+        // https://github.com/ARM-software/optimized-routines/issues/16#issuecomment-572009659
+        "-DWANT_ERRNO=0",
+        // TODO: we may want the vector code in future, but it's not ready yet.
+        "-DWANT_VMATH=0",
+    ],
+    local_include_dirs: ["math/include"],
+}
+
+cc_library {
+    name: "libarm-optimized-routines-math",
+    defaults: ["arm-optimized-routines-defaults"],
+    ramdisk_available: true,
+    recovery_available: true,
+    native_bridge_supported: true,
+    srcs: [
+        "math/*.c",
+    ],
+
+    // arch-specific settings
+    arch: {
+        arm64: {
+            cflags: [
+                "-DHAVE_FAST_FMA=1",
+            ],
+        },
+    },
+
+    target: {
+        darwin: {
+            enabled: false,
+        },
+        linux_bionic: {
+            enabled: true,
+        },
+    },
+    stl: "none",
+    static: {
+        system_shared_libs: [],
+    },
+}
+
+// adb shell "/data/nativetest64/mathtest/mathtest /data/nativetest64/mathtest/test/testcases/directed/*"
+// adb shell "/data/nativetest/mathtest/mathtest /data/nativetest/mathtest/test/testcases/directed/*"
+cc_test {
+    name: "mathtest",
+    defaults: ["arm-optimized-routines-defaults"],
+    gtest: false,
+    cflags: ["-Wno-missing-braces"],
+    srcs: ["math/test/mathtest.c"],
+    data: ["math/test/testcases/directed/*.tst"],
+    target: {
+        darwin: {
+            enabled: false,
+        },
+        linux_bionic: {
+            enabled: true,
+        },
+    },
+}
+
+cc_test {
+    name: "ulp",
+    defaults: ["arm-optimized-routines-defaults"],
+    gtest: false,
+    srcs: ["math/test/ulp.c"],
+    data: ["math/test/runulp.sh"],
+}
+
+sh_test {
+    name: "arm-optimized-routines-tests",
+    src: "run-arm-optimized-routines-tests-on-android.sh",
+    filename: "run-arm-optimized-routines-tests-on-android.sh",
+    test_suites: ["general-tests"],
+    host_supported: true,
+    device_supported: false,
+    test_config: "arm-optimized-routines-tests.xml",
+    target_required: [
+        "mathtest",
+        "ulp",
+    ],
+}

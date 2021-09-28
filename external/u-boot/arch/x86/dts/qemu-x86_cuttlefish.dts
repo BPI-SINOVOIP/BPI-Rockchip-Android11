@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Copyright (C) 2019, Google, Inc.
+ */
+
+/dts-v1/;
+
+#include "qemu-x86_i440fx.dts"
+
+&serial {
+	reg = <0x2f8 8>;
+};

@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_WilcoOnNonWilcoDevice'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verifies that non Wilco devices are not crashed by Wilco policies.
+This test is kicked off via policy_WilcoServerOnNonWilcoDevice server test.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_WilcoOnNonWilcoDevice', **args_dict)

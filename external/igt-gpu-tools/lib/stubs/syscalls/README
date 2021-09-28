@@ -1,0 +1,6 @@
+This directory contains stub implementations for syscalls missing from libc.
+This provides a way to build IGT on an old system, but it will not run
+correctly if the kernel is missing the functionality provided. In order to
+add a new definition, follow the same directory hierarchy as the standard
+location in which the header is defined so we don't have to clutter the
+codebase to support old systems.

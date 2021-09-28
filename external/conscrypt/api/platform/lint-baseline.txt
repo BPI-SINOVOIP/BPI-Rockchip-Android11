@@ -1,0 +1,21 @@
+// Baseline format: 1.0
+AcronymName: com.android.org.conscrypt.OpenSSLSocketImpl#getOOBInline():
+    Acronyms should not be capitalized in method names: was `getOOBInline`, should this be `getOobInline`?
+
+
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#bind(java.net.SocketAddress) parameter #0:
+    Missing nullability on parameter `bindpoint` in method `bind`
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getChannel():
+    Missing nullability on method `getChannel` return
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getInetAddress():
+    Missing nullability on method `getInetAddress` return
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getInputStream():
+    Missing nullability on method `getInputStream` return
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getLocalAddress():
+    Missing nullability on method `getLocalAddress` return
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getLocalSocketAddress():
+    Missing nullability on method `getLocalSocketAddress` return
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getOutputStream():
+    Missing nullability on method `getOutputStream` return
+MissingNullability: com.android.org.conscrypt.OpenSSLSocketImpl#getRemoteSocketAddress():
+    Missing nullability on method `getRemoteSocketAddress` return

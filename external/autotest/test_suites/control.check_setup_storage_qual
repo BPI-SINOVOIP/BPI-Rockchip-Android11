@@ -1,0 +1,30 @@
+# Copyright 2017 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "check_setup_storage_qual"
+PURPOSE = """
+Test moblab has correct DUT configuration for storage qual suite
+"""
+
+TIME = "SHORT"
+TEST_CATEGORY = "Setup"
+TEST_CLASS = "suite"
+TEST_TYPE = "Server"
+
+DOC = """
+Tests that moblab has the minimum number of DUTs, with correct labels. This
+test relieves the pain point of kicking off a long running test suite, but
+having a handful of tests fail, or not run at all because some the DUT setup
+wasn't correct.
+"""
+
+import common
+from autotest_lib.server.cros.dynamic_suite import dynamic_suite
+
+args_dict['add_experimental'] = True
+args_dict['name'] = NAME
+args_dict['job'] = job
+
+dynamic_suite.reimage_and_run(**args_dict)

@@ -1,0 +1,114 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file is not auto-generated. Don't delete it.
+
+# Boring.
+import logging
+import pprint
+from autotest_lib.client.bin import utils
+
+usage = """
+1) To run agains a particular $DUT use
+   test_that --args="module=GtsMediaTestCases test=com.google.android.media.gts.MediaCodecStressTest#testDecodeDecodeCompositeDisplay1080p" $DUT cheets_GTS_N.tradefed-run-test
+
+2) To run against a lab pool use
+    run_suite.py --board=eve --build=$TRYJOB_BUILD --suite_name arc-gts-test --pool cts --no_wait True --priority CQ --timeout_mins 6160 --retry False --num 1 --suite_min_duts 1 --test_args="{'module' : 'GtsMediaTestCases', 'test' : 'com.google.android.media.gts.MediaCodecStressTest#testDecodeDecodeCompositeDisplay1080p'}"
+"""
+
+def usage_error():
+    logging.info('Example usage:')
+    logging.info(usage)
+    raise SystemExit
+
+pp = pprint.PrettyPrinter()
+logging.info(
+    '***********************************************************************')
+
+# Define the variables that we are going to use and set sensible defaults.
+gts_module = ''
+gts_retry = 5
+gts_revision = '7_r2-5805161'  # TODO(ihf): Set this default value from generator.
+gts_test = ''
+gts_timeout = 600
+
+# Pull parameters either from run_suite or test_that.
+if 'args_dict' in vars():
+    logging.info('Raw test options from run_suite:')
+    pp.pprint(args_dict)
+elif args:
+    logging.info('Raw test options from test_that:')
+    pp.pprint(args)
+    args_dict = utils.args_to_dict(args)
+else:
+    usage_error()
+
+gts_module = args_dict.get('module', gts_module)
+gts_revision = args_dict.get('revision', gts_revision)
+gts_test = args_dict.get('test', gts_test)
+gts_timeout = float(args_dict.get('timeout', gts_timeout))
+gts_retry = int(args_dict.get('max_retry', gts_retry))
+
+# Sanity checks.
+logging.error('Running module %s with test %s on revision %s',
+              gts_module, gts_test, gts_revision)
+if not gts_module or not gts_revision or not gts_test:
+    usage_error()
+
+# And we are getting ready for tradefed.
+uri = ('gs://chromeos-arc-images/cts/bundle/android-gts-' + gts_revision + '.zip')
+run_template = ['run', 'commandAndExit', 'gts',
+                '--include-filter', gts_module + ' ' + gts_test,
+                '--ignore-business-logic-failure']
+retry_template = ['run', 'commandAndExit', 'retry',
+                  '--retry', '{session_id}']
+# Unfortunately super long test names can cause problems. Try to get the
+# rightmost element and use that as a simplified name.
+# TODO(ihf): fix pipeline so it works with super long names.
+simplified_test = gts_test
+if '#' in gts_test:
+    simplified_test = gts_test.split('#')[-1]
+elif '.' in gts_test:
+    simplified_test = gts_test.split('.')[-1]
+tag = 'tradefed-run-test.%s.%s' % (gts_module, simplified_test)
+
+# The usual testing stanza. We are suppressing some DEPENDENCIES on purpose.
+AUTHOR = 'ARC++ Team'
+NAME = 'cheets_GTS_N.tradefed-run-test'
+ATTRIBUTES = 'suite:arc-gts-test'
+DEPENDENCIES = 'arc'
+JOB_RETRIES = 0
+TEST_TYPE = 'server'
+TIME = 'LONG'
+MAX_RESULT_SIZE_KB = 256000
+DOC = ('Run a test of the Android Google Test Suite (GTS) in the ARC++ '
+       'container.')
+
+# And launch.
+def run_TS(machine):
+    host_list = [hosts.create_host(machine)]
+    job.run_test(
+        'cheets_GTS_N',
+        hosts=host_list,
+        iterations=1,
+        max_retry=gts_retry,
+        needs_push_media=True,
+        tag=tag,
+        test_name=NAME,
+        authkey='gs://chromeos-arc-images/cts/bundle/gts-arc.json',
+        run_template=run_template,
+        retry_template=retry_template,
+        target_module=None,
+        target_plan=None,
+        uri=uri,
+        login_precondition_commands=[
+            'lsblk -do NAME,RM | sed -n s/1$//p | xargs -n1 eject'
+        ],
+        precondition_commands=[
+            'echo $(({0} % 2 * 2 + 1)) > /proc/sys/kernel/perf_event_paranoid',
+            'modprobe configs'
+        ],
+        timeout=gts_timeout)
+
+parallel_simple(run_TS, machines)

@@ -1,0 +1,59 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_WiFiPrecedenceServer.managed_vs_unmanaged'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+'policy_WiFiPrecedenceServer.managed_vs_unmanaged' sets up two APs.
+The client test is given a network policy for one of the networks.
+The DUT then connects to the unmanaged network so that the DUT "remembers"
+that network.
+
+The DUT should connect to the managed network specified in the user policy.
+
+"""
+
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_security_types
+from autotest_lib.client.cros.enterprise.network_config import NetworkConfig
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    ssid1 = 'Network1'
+    ssid2 = 'Network2'
+    n_mode = hostap_config.HostapConfig.MODE_11N_MIXED
+
+    ap_configs = []
+    ap_configs.append(hostap_config.HostapConfig(
+            channel=5,
+            mode=n_mode,
+            ssid=ssid1))
+
+    ap_configs.append(hostap_config.HostapConfig(
+            channel=149,
+            mode=n_mode,
+            ssid=ssid2))
+
+    # Client network configurations.
+    network1_config = NetworkConfig(ssid1, autoconnect=True)
+    network2_config = NetworkConfig(ssid2)
+
+    host = hosts.create_host(machine)
+    job.run_test('policy_WiFiPrecedenceServer',
+                 raw_cmdline_args=args,
+                 host=host,
+                 ap_configs=ap_configs,
+                 network1_config=network1_config,
+                 network2_config=network2_config,
+                 precedence=1,
+                 test='managed_vs_unmanaged')
+
+
+parallel_simple(run, machines)

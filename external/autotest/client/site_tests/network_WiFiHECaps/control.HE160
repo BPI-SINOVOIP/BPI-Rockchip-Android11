@@ -1,0 +1,22 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'pauletti'
+NAME = 'network_WiFiHECaps.HE160'
+ATTRIBUTES = 'suite:wifi_flaky'
+TIME = 'SHORT'
+TEST_TYPE = 'client'
+
+DOC = """
+This test checks that a device which supports the 802.11ax WiFi standard is
+able to function on an High Efficiency 160 MHz wide channel (HE160). HE PHY
+implementation is expected on all devices which support 802.11ax frame formats
+(i.e. HE PPDU).
+"""
+
+from autotest_lib.client.common_lib.cros.network import iw_runner
+
+job.run_test('network_WiFiHECaps', tag=NAME.split('.')[1],
+             features=[[iw_runner.HE_PHY_5HE160,
+                        iw_runner.HE_PHY_5HE160_80_80]])

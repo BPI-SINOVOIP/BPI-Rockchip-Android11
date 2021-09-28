@@ -1,0 +1,36 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Intel"
+NAME = "display_CheckModesAfterSignOutSignIn.Mirrored"
+PURPOSE = "To Check the display mode is preserved after sign out and signin"
+CRITERIA = "This test will fail if the display mode is not preserved"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "display"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:display, suite:chameleon_hdmi"
+DEPENDENCIES = "chameleon, servo"
+JOB_RETRIES = 2
+DOC = """
+1. Boot the Chromebook and login
+2. Set Mirrored mode
+3. Press Ctrl+Shift+Q twice to logout
+4. Login to chrome book and check the display mode
+
+test_that -b $board $dut_ip $test_name --args="chameleon_host=$chameleon_ip"
+"""
+
+args_dict = utils.args_to_dict(args)
+chameleon_args = hosts.CrosHost.get_chameleon_arguments(args_dict)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+def run(machine):
+    host = hosts.create_host(machine, chameleon_args=chameleon_args,
+                             servo_args=servo_args)
+    job.run_test("display_CheckModesAfterSignOutSignIn", host=host,
+                 tag='Mirrored')
+
+parallel_simple(run, machines)

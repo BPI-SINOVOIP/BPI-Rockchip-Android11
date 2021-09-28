@@ -1,0 +1,37 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, Chromium OS"
+NAME = "autoupdate_OmahaResponse.local"
+PURPOSE = "Test different things in the omaha response from your workstation."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+DOC = """
+Change the various arguments to the test to test different things in the
+omaha response. Example:
+
+switch_urls: Test switching between the two UrlBase URLs when there is an
+error downloading from the first URL.
+bad_sha256: Tests that when the SHA256 value is invalid the update fails.
+bad_metadata_size: Tests when the metadata size value is invalid the update
+fails.
+test_backoff: tests that we do/dont backoff when an update fails.
+backoff: True if we should backoff. False otherwise.
+
+"""
+
+from autotest_lib.client.common_lib import utils
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('autoupdate_OmahaResponse', host=host, full_payload=True,
+                 running_at_desk=True, switch_urls=False, bad_sha256=False,
+                 bad_metadata_size=False, test_backoff=True, backoff=True,
+                 **args_dict)
+
+job.parallel_simple(run, machines)

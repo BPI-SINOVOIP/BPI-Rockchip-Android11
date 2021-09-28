@@ -1,0 +1,28 @@
+[package]
+name = "crosvm-fuzz"
+version = "0.0.1"
+authors = ["The Chromium OS Authors"]
+edition = "2018"
+
+[dependencies]
+devices = { path = "../devices" }
+kernel_loader = { path = "../kernel_loader" }
+libc = "*"
+qcow = { path = "../qcow" }
+sys_util = { path = "../sys_util" }
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "crosvm_block_fuzzer"
+path = "block_fuzzer.rs"
+
+[[bin]]
+name = "crosvm_qcow_fuzzer"
+path = "qcow_fuzzer.rs"
+
+[[bin]]
+name = "crosvm_zimage_fuzzer"
+path = "zimage_fuzzer.rs"

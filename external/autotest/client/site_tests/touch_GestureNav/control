@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "kalin"
+NAME = "touch_GestureNav"
+PURPOSE = "Test that three-finger touchpad gesture can switch tabs."
+CRITERIA = """
+This test will fail if, after playback of two fingers for back/forward
+long swipes, the active tab does not navigate as expected.
+"""
+ATTRIBUTES = "suite:touch"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "touch"
+TEST_TYPE = "client"
+DEPENDENCIES = "touchpad"
+
+DOC = """
+Plays back touchpad gestures (if present) and checks for back/fwd navigation.
+Ignores devices without touchpads.
+Checks that the two finger long swipe is navigating back and froward.
+"""
+
+job.run_test('touch_GestureNav')

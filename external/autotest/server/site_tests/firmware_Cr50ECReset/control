@@ -1,0 +1,35 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "mruthven"
+NAME = "firmware_Cr50ECReset"
+PURPOSE = "Verify Cr50 EC reset."
+ATTRIBUTES = "suite:faft_cr50_prepvt, suite:faft_cr50_pvt"
+TIME = "SHORT"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """Make sure 'cr50 ecrst' works as intended
+
+EC_RST_L needs to be able to wake the EC from hibernate and hold the EC in
+reset. This test verifies the hardware works as intended
+"""
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+
+    iterations = int(args_dict.get("iterations", 1))
+
+    job.run_test("firmware_Cr50ECReset", host=host, cmdline_args=args,
+                 full_args=args_dict, iterations=iterations)
+
+parallel_simple(run, machines)

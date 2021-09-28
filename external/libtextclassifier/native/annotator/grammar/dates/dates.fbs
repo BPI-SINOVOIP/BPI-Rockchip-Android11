@@ -1,0 +1,351 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+include "annotator/grammar/dates/timezone-code.fbs";
+include "utils/grammar/rules.fbs";
+
+// Type identifiers of all non-trivial matches.
+namespace libtextclassifier3.dates;
+enum MatchType : int {
+  UNKNOWN = 0,
+
+  // Match of a date extraction rule.
+  DATETIME_RULE = 1,
+
+  // Match of a date range extraction rule.
+  DATETIME_RANGE_RULE = 2,
+
+  // Match defined by an ExtractionRule (e.g., a single time-result that is
+  // matched by a time-rule, which is ready to be output individually, with
+  // this kind of match, we can retrieve it in range rules).
+  DATETIME = 3,
+
+  // Match defined by TermValue.
+  TERM_VALUE = 4,
+
+  // Matches defined by Nonterminal.
+  NONTERMINAL = 5,
+
+  DIGITS = 6,
+  YEAR = 7,
+  MONTH = 8,
+  DAY = 9,
+  HOUR = 10,
+  MINUTE = 11,
+  SECOND = 12,
+  FRACTION_SECOND = 13,
+  DAY_OF_WEEK = 14,
+  TIME_VALUE = 15,
+  TIME_SPAN = 16,
+  TIME_ZONE_NAME = 17,
+  TIME_ZONE_OFFSET = 18,
+  TIME_PERIOD = 19,
+  RELATIVE_DATE = 20,
+  COMBINED_DIGITS = 21,
+}
+
+namespace libtextclassifier3.dates;
+enum BCAD : int {
+  BCAD_NONE = -1,
+  BC = 0,
+  AD = 1,
+}
+
+namespace libtextclassifier3.dates;
+enum DayOfWeek : int {
+  DOW_NONE = -1,
+  SUNDAY = 1,
+  MONDAY = 2,
+  TUESDAY = 3,
+  WEDNESDAY = 4,
+  THURSDAY = 5,
+  FRIDAY = 6,
+  SATURDAY = 7,
+}
+
+namespace libtextclassifier3.dates;
+enum TimespanCode : int {
+  TIMESPAN_CODE_NONE = -1,
+  AM = 0,
+  PM = 1,
+  NOON = 2,
+  MIDNIGHT = 3,
+
+  // English "tonight".
+  TONIGHT = 11,
+}
+
+// The datetime grammar rules.
+namespace libtextclassifier3.dates;
+table DatetimeRules {
+  // The context free grammar rules.
+  rules:grammar.RulesSet;
+
+  // Values associated with grammar rule matches.
+  extraction_rule:[ExtractionRuleParameter];
+
+  term_value:[TermValue];
+  nonterminal_value:[NonterminalValue];
+}
+
+namespace libtextclassifier3.dates;
+table TermValue {
+  value:int;
+
+  // A time segment e.g. 10AM - 12AM
+  time_span_spec:TimeSpanSpec;
+
+  // Time zone information representation
+  time_zone_name_spec:TimeZoneNameSpec;
+}
+
+// Define nonterms from terms or other nonterms.
+namespace libtextclassifier3.dates;
+table NonterminalValue {
+  // Mapping value.
+  value:TermValue;
+
+  // Parameter describing formatting choices for nonterminal messages
+  nonterminal_parameter:NonterminalParameter;
+
+  // Parameter interpreting past/future dates (e.g. "last year")
+  relative_parameter:RelativeParameter;
+
+  // Format info for nonterminals representing times.
+  time_value_parameter:TimeValueParameter;
+
+  // Parameter describing the format of time-zone info - e.g. "UTC-8"
+  time_zone_offset_parameter:TimeZoneOffsetParameter;
+}
+
+namespace libtextclassifier3.dates.RelativeParameter_;
+enum RelativeType : int {
+  NONE = 0,
+  YEAR = 1,
+  MONTH = 2,
+  DAY = 3,
+  WEEK = 4,
+  HOUR = 5,
+  MINUTE = 6,
+  SECOND = 7,
+}
+
+namespace libtextclassifier3.dates.RelativeParameter_;
+enum Period : int {
+  PERIOD_UNKNOWN = 0,
+  PERIOD_PAST = 1,
+  PERIOD_FUTURE = 2,
+}
+
+// Relative interpretation.
+// Indicates which day the day of week could be, for example "next Friday"
+// could means the Friday which is the closest Friday or the Friday in the
+// next week.
+namespace libtextclassifier3.dates.RelativeParameter_;
+enum Interpretation : int {
+  UNKNOWN = 0,
+
+  // The closest X in the past.
+  NEAREST_LAST = 1,
+
+  // The X before the closest X in the past.
+  SECOND_LAST = 2,
+
+  // The closest X in the future.
+  NEAREST_NEXT = 3,
+
+  // The X after the closest X in the future.
+  SECOND_NEXT = 4,
+
+  // X in the previous one.
+  PREVIOUS = 5,
+
+  // X in the coming one.
+  COMING = 6,
+
+  // X in current one, it can be both past and future.
+  CURRENT = 7,
+
+  // Some X.
+  SOME = 8,
+
+  // The closest X, it can be both past and future.
+  NEAREST = 9,
+}
+
+namespace libtextclassifier3.dates;
+table RelativeParameter {
+  type:RelativeParameter_.RelativeType = NONE;
+  period:RelativeParameter_.Period = PERIOD_UNKNOWN;
+  day_of_week_interpretation:[RelativeParameter_.Interpretation];
+}
+
+namespace libtextclassifier3.dates.NonterminalParameter_;
+enum Flag : int {
+  IS_SPELLED = 1,
+}
+
+namespace libtextclassifier3.dates;
+table NonterminalParameter {
+  // Bit-wise OR Flag.
+  flag:uint = 0;
+
+  combined_digits_format:string (shared);
+}
+
+namespace libtextclassifier3.dates.TimeValueParameter_;
+enum TimeValueValidation : int {
+  // Allow extra spaces between sub-components in time-value.
+  ALLOW_EXTRA_SPACE = 1,
+  // 1 << 0
+
+  // Disallow colon- or dot-context with digits for time-value.
+  DISALLOW_COLON_DOT_CONTEXT = 2,
+  // 1 << 1
+}
+
+namespace libtextclassifier3.dates;
+table TimeValueParameter {
+  validation:uint = 0;
+  // Bitwise-OR
+
+  flag:uint = 0;
+  // Bitwise-OR
+}
+
+namespace libtextclassifier3.dates.TimeZoneOffsetParameter_;
+enum Format : int {
+  // Offset is in an uncategorized format.
+  FORMAT_UNKNOWN = 0,
+
+  // Offset contains 1-digit hour only, e.g. "UTC-8".
+  FORMAT_H = 1,
+
+  // Offset contains 2-digit hour only, e.g. "UTC-08".
+  FORMAT_HH = 2,
+
+  // Offset contains 1-digit hour and minute, e.g. "UTC-8:00".
+  FORMAT_H_MM = 3,
+
+  // Offset contains 2-digit hour and minute, e.g. "UTC-08:00".
+  FORMAT_HH_MM = 4,
+
+  // Offset contains 3-digit hour-and-minute, e.g. "UTC-800".
+  FORMAT_HMM = 5,
+
+  // Offset contains 4-digit hour-and-minute, e.g. "UTC-0800".
+  FORMAT_HHMM = 6,
+}
+
+namespace libtextclassifier3.dates;
+table TimeZoneOffsetParameter {
+  format:TimeZoneOffsetParameter_.Format = FORMAT_UNKNOWN;
+}
+
+namespace libtextclassifier3.dates.ExtractionRuleParameter_;
+enum ExtractionValidation : int {
+  // Boundary checking for final match.
+  LEFT_BOUND = 1,
+
+  RIGHT_BOUND = 2,
+  SPELLED_YEAR = 4,
+  SPELLED_MONTH = 8,
+  SPELLED_DAY = 16,
+
+  // Without this validation-flag set, unconfident time-zone expression
+  // are discarded in the output-callback, e.g. "-08:00, +8".
+  ALLOW_UNCONFIDENT_TIME_ZONE = 32,
+}
+
+// Parameter info for extraction rule, help rule explanation.
+namespace libtextclassifier3.dates;
+table ExtractionRuleParameter {
+  // Bit-wise OR Validation.
+  validation:uint = 0;
+
+  priority_delta:int;
+  id:string (shared);
+
+  // The score reflects the confidence score of the date/time match, which is
+  // set while creating grammar rules.
+  // e.g. given we have the rule which detect "22.33" as a HH.MM then because
+  // of ambiguity the confidence of this match maybe relatively less.
+  annotator_priority_score:float;
+}
+
+// Internal structure used to describe an hour-mapping segment.
+namespace libtextclassifier3.dates.TimeSpanSpec_;
+table Segment {
+  // From 0 to 24, the beginning hour of the segment, always included.
+  begin:int;
+
+  // From 0 to 24, the ending hour of the segment, not included if the
+  // segment is not closed. The value 0 means the beginning of the next
+  // day, the same value as "begin" means a time-point.
+  end:int;
+
+  // From -24 to 24, the mapping offset in hours from spanned expressions
+  // to 24-hour expressions. The value 0 means identical mapping.
+  offset:int;
+
+  // True if the segment is a closed one instead of a half-open one.
+  // Always set it to true when describing time-points.
+  is_closed:bool = false;
+
+  // True if a strict check should be performed onto the segment which
+  // disallows already-offset hours to be used in spanned expressions,
+  // e.g. 15:30PM.
+  is_strict:bool = false;
+
+  // True if the time-span can be used without an explicitly specified
+  // hour value, then it can generate an exact time point (the "begin"
+  // o'clock sharp, like "noon") or a time range, like "Tonight".
+  is_stand_alone:bool = false;
+}
+
+namespace libtextclassifier3.dates;
+table TimeSpanSpec {
+  code:TimespanCode;
+  segment:[TimeSpanSpec_.Segment];
+}
+
+namespace libtextclassifier3.dates.TimeZoneNameSpec_;
+enum TimeZoneType : int {
+  // The corresponding name might represent a standard or daylight-saving
+  // time-zone, depending on some external information, e.g. the date.
+  AMBIGUOUS = 0,
+
+  // The corresponding name represents a standard time-zone.
+  STANDARD = 1,
+
+  // The corresponding name represents a daylight-saving time-zone.
+  DAYLIGHT = 2,
+}
+
+namespace libtextclassifier3.dates;
+table TimeZoneNameSpec {
+  code:TimezoneCode;
+  type:TimeZoneNameSpec_.TimeZoneType = AMBIGUOUS;
+
+  // Set to true if the corresponding name is internationally used as an
+  // abbreviation (or expression) of UTC. For example, "GMT" and "Z".
+  is_utc:bool = false;
+
+  // Set to false if the corresponding name is not an abbreviation. For example,
+  // "Pacific Time" and "China Standard Time".
+  is_abbreviation:bool = true;
+}
+

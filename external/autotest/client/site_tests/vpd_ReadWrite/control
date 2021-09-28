@@ -1,0 +1,19 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock@"
+NAME = "vpd_ReadWrite"
+PURPOSE = "Verify reading and writing to VPD"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "rlz"
+TEST_TYPE = "client"
+
+DOC = """
+This test checks that repeatedly writing to and reading from vpd works reliably.
+"""
+
+job.run_test('vpd_ReadWrite', repetitions=100)
+
+

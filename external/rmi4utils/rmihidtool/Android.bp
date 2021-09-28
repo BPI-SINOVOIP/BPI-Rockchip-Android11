@@ -1,0 +1,10 @@
+cc_binary {
+    name: "rmihidtool",
+    srcs: ["main.cpp"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+    static_libs: ["rmidevice"],
+}

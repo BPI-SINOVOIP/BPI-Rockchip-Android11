@@ -1,0 +1,55 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_WiFiPrecedenceServer.autoconnect_vs_no_autoconnect'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+'policy_WiFiPrecedenceServer.autoconnect_vs_no_autoconnect' sets up an AP.
+The client test is given two network policies for the same network, one with
+AutoConnect=True and one with AutoConnect=False.
+
+The DUT should autoconnect to the network.
+
+"""
+
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_security_types
+from autotest_lib.client.cros.enterprise.network_config import NetworkConfig
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    ssid = 'User Network'
+    n_mode = hostap_config.HostapConfig.MODE_11N_MIXED
+
+    ap_configs = []
+    ap_configs.append(hostap_config.HostapConfig(
+            channel=5,
+            mode=n_mode,
+            ssid=ssid))
+
+    ap_configs.append(hostap_config.HostapConfig(
+            channel=149,
+            mode=n_mode,
+            ssid=ssid))
+
+    # Client network configurations.
+    network1_config = NetworkConfig(ssid, autoconnect=False)
+    network2_config = NetworkConfig(ssid, autoconnect=True)
+
+    host = hosts.create_host(machine)
+    job.run_test('policy_WiFiPrecedenceServer',
+                 raw_cmdline_args=args,
+                 host=host,
+                 ap_configs=ap_configs,
+                 network1_config=network1_config,
+                 network2_config=network2_config)
+
+
+parallel_simple(run, machines)

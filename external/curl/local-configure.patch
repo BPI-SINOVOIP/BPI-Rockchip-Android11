@@ -1,0 +1,84 @@
+Index: curl/lib/curl_config.h
+===================================================================
+--- curl.orig/lib/curl_config.h
++++ curl/lib/curl_config.h
+@@ -473,7 +473,7 @@
+ #define HAVE_NETDB_H 1
+ 
+ /* Define to 1 if you have the <netinet/in6.h> header file. */
+-#define HAVE_NETINET_IN6_H 1
++/* #undef HAVE_NETINET_IN6_H */
+ 
+ /* Define to 1 if you have the <netinet/in.h> header file. */
+ #define HAVE_NETINET_IN_H 1
+@@ -513,7 +513,7 @@
+ #define HAVE_OPENSSL_RSA_H 1
+ 
+ /* if you have the function SRP_Calc_client_key */
+-#define HAVE_OPENSSL_SRP 1
++/* #undef HAVE_OPENSSL_SRP */
+ 
+ /* Define to 1 if you have the <openssl/ssl.h> header file. */
+ #define HAVE_OPENSSL_SSL_H 1
+@@ -836,9 +836,6 @@
+ /* Define absolute filename for winbind's ntlm_auth helper. */
+ /* #undef NTLM_WB_FILE */
+ 
+-/* cpu-machine-OS */
+-#define OS "arm-unknown-linux-androideabi"
+-
+ /* Name of package */
+ #define PACKAGE "curl"
+ 
+@@ -894,7 +891,7 @@
+ #define SELECT_TYPE_ARG5 struct timeval *
+ 
+ /* Define to the function return type for select. */
+-#define SELECT_TYPE_RETV int
++#define SELECT_TYPE_RETV ssize_t
+ 
+ /* Define to the type qualifier of arg 2 for send. */
+ #define SEND_QUAL_ARG2 const
+@@ -920,24 +917,9 @@
+ /* The number of bytes in type int */
+ #define SIZEOF_INT 4
+ 
+-/* The number of bytes in type long */
+-#define SIZEOF_LONG 8
+-
+-/* The number of bytes in type long long */
+-/* #undef SIZEOF_LONG_LONG */
+-
+-/* The number of bytes in type off_t */
+-#define SIZEOF_OFF_T 8
+-
+ /* The number of bytes in type short */
+ #define SIZEOF_SHORT 2
+ 
+-/* The number of bytes in type size_t */
+-#define SIZEOF_SIZE_T 8
+-
+-/* The number of bytes in type time_t */
+-#define SIZEOF_TIME_T 8
+-
+ /* Define to 1 if you have the ANSI C header files. */
+ #define STDC_HEADERS 1
+ 
+@@ -1026,7 +1008,7 @@
+ /* #undef USE_THREADS_WIN32 */
+ 
+ /* Use TLS-SRP authentication */
+-#define USE_TLS_SRP 1
++/* #undef USE_TLS_SRP */
+ 
+ /* Use Unix domain sockets */
+ #define USE_UNIX_SOCKETS 1
+@@ -1068,7 +1050,7 @@
+ #endif
+ 
+ /* Number of bits in a file offset, on hosts where this is settable. */
+-/* #undef _FILE_OFFSET_BITS */
++#define _FILE_OFFSET_BITS 64
+ 
+ /* Define for large files, on AIX-style hosts. */
+ /* #undef _LARGE_FILES */

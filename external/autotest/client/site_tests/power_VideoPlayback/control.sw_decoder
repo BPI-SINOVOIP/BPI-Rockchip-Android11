@@ -1,0 +1,21 @@
+AUTHOR = "Chrome OS Team"
+NAME = "power_VideoPlayback.sw_decoder"
+PURPOSE = "Measure video playback power usage."
+CRITERIA = "This test is a benchmark."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = "suite:power_sanity, suite:power_daily, suite:power_monitoring"
+
+DOC = """
+This test records power related statistics while play back video file in various
+format.
+
+This version of the test forces Chrome to use software decoder.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_VideoPlayback', use_hw_decode=False, tag=NAME.split('.')[1],
+             pdash_note=pdash_note)

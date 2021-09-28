@@ -1,0 +1,225 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+namespace libtextclassifier3.EntityData_.Datetime_;
+enum Granularity : int {
+  GRANULARITY_UNKNOWN = -1,
+  GRANULARITY_YEAR = 0,
+  GRANULARITY_MONTH = 1,
+  GRANULARITY_WEEK = 2,
+  GRANULARITY_DAY = 3,
+  GRANULARITY_HOUR = 4,
+  GRANULARITY_MINUTE = 5,
+  GRANULARITY_SECOND = 6,
+}
+
+namespace libtextclassifier3.EntityData_.Datetime_.DatetimeComponent_;
+enum ComponentType : int {
+  UNSPECIFIED = 0,
+  YEAR = 1,
+  MONTH = 2,
+  WEEK = 3,
+  DAY_OF_WEEK = 4,
+  DAY_OF_MONTH = 5,
+  HOUR = 6,
+  MINUTE = 7,
+  SECOND = 8,
+  MERIDIEM = 9,
+  ZONE_OFFSET = 10,
+  DST_OFFSET = 11,
+}
+
+// Enum to identify if the datetime component are relative or absolute.
+namespace libtextclassifier3.EntityData_.Datetime_.DatetimeComponent_;
+enum RelationType : int {
+  RELATION_UNSPECIFIED = 0,
+
+  // Absolute represents the datetime component that need no further
+  // calculation e.g. in a datetime span "21-03-2019" components
+  // year=2019, month=3 and day=21 is explicitly mentioned in the span
+  ABSOLUTE = 1,
+
+  // Identify datetime component where datetime expressions are relative.
+  // e.g. "three days ago", "2 days after March 1st", "next monday",
+  // "last Mondays".
+  RELATIVE = 2,
+}
+
+namespace libtextclassifier3.EntityData_.Datetime_;
+table DatetimeComponent {
+  component_type:DatetimeComponent_.ComponentType = UNSPECIFIED;
+  absolute_value:int;
+  relative_count:int;
+  relation_type:DatetimeComponent_.RelationType = RELATION_UNSPECIFIED;
+}
+
+namespace libtextclassifier3.EntityData_;
+table Datetime {
+  time_ms_utc:long;
+  granularity:Datetime_.Granularity = GRANULARITY_UNKNOWN;
+  datetime_component:[Datetime_.DatetimeComponent];
+}
+
+namespace libtextclassifier3.EntityData_;
+table Contact {
+  name:string (shared);
+  given_name:string (shared);
+  nickname:string (shared);
+  email_address:string (shared);
+  phone_number:string (shared);
+  contact_id:string (shared);
+}
+
+namespace libtextclassifier3.EntityData_;
+table App {
+  name:string (shared);
+  package_name:string (shared);
+}
+
+// The issuer/network of the payment card.
+namespace libtextclassifier3.EntityData_.PaymentCard_;
+enum CardNetwork : int {
+  UNKNOWN_CARD_NETWORK = 0,
+  AMEX = 1,
+  DINERS_CLUB = 2,
+  DISCOVER = 3,
+  INTER_PAYMENT = 4,
+  JCB = 5,
+  MAESTRO = 6,
+  MASTERCARD = 7,
+  MIR = 8,
+  TROY = 9,
+  UNIONPAY = 10,
+  VISA = 11,
+}
+
+// Details about a payment card.
+namespace libtextclassifier3.EntityData_;
+table PaymentCard {
+  card_network:PaymentCard_.CardNetwork;
+
+  // The card number.
+  card_number:string (shared);
+}
+
+// Details about a flight number.
+namespace libtextclassifier3.EntityData_;
+table Flight {
+  // The IATA or ICAO airline code of the flight number.
+  airline_code:string (shared);
+
+  // The flight number.
+  flight_number:string (shared);
+}
+
+// Details about an ISBN number.
+namespace libtextclassifier3.EntityData_;
+table Isbn {
+  // The (normalized) number.
+  number:string (shared);
+}
+
+// Details about an IBAN number.
+namespace libtextclassifier3.EntityData_;
+table Iban {
+  // The (normalized) number.
+  number:string (shared);
+
+  // The country code.
+  country_code:string (shared);
+}
+
+// The issuer/network of the package tracking number.
+namespace libtextclassifier3.EntityData_.ParcelTracking_;
+enum Carrier : int {
+  UNKNOWN_CARRIER = 0,
+  FEDEX = 1,
+  UPS = 2,
+  DHL = 3,
+  USPS = 4,
+  ONTRAC = 5,
+  LASERSHIP = 6,
+  ISRAEL_POST = 7,
+  SWISS_POST = 8,
+  MSC = 9,
+  AMAZON = 10,
+  I_PARCEL = 11,
+}
+
+// Details about a tracking number.
+namespace libtextclassifier3.EntityData_;
+table ParcelTracking {
+  carrier:ParcelTracking_.Carrier;
+  tracking_number:string (shared);
+}
+
+// Parsed money amount.
+namespace libtextclassifier3.EntityData_;
+table Money {
+  // String representation of currency, unnormalized.
+  unnormalized_currency:string (shared);
+
+  // Whole part of the amount (e.g. 123 from "CHF 123.45").
+  amount_whole_part:int;
+
+  // Decimal part of the amount (e.g. 45 from "CHF 123.45").
+  amount_decimal_part:int;
+
+  // Money amount (e.g. 123.45 from "CHF 123.45").
+  unnormalized_amount:string (shared);
+}
+
+namespace libtextclassifier3.EntityData_.Translate_;
+table LanguagePredictionResult {
+  // BCP 47 tag for the language prediction result.
+  language_tag:string (shared);
+
+  // Confidence score for the language prediction result.
+  confidence_score:float;
+}
+
+// Details about detected foreign text.
+namespace libtextclassifier3.EntityData_;
+table Translate {
+  language_prediction_results:[Translate_.LanguagePredictionResult];
+}
+
+// Represents an entity annotated in text.
+namespace libtextclassifier3;
+table EntityData {
+  // Codepoint indices of the annotation, start is inclusive, end is
+  // exclusive.
+  start:int;
+
+  end:int;
+
+  // The entity type, as in the TextClassifier APIs.
+  type:string (shared);
+
+  datetime:EntityData_.Datetime;
+  reserved_5:int (deprecated);
+  contact:EntityData_.Contact;
+  app:EntityData_.App;
+  payment_card:EntityData_.PaymentCard;
+  flight:EntityData_.Flight;
+  isbn:EntityData_.Isbn;
+  iban:EntityData_.Iban;
+  parcel:EntityData_.ParcelTracking;
+  money:EntityData_.Money;
+  translate:EntityData_.Translate;
+}
+
+root_type libtextclassifier3.EntityData;

@@ -1,0 +1,215 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+include "utils/i18n/language-tag.fbs";
+include "utils/zlib/buffer.fbs";
+
+// The terminal rules map as sorted strings table.
+// The sorted terminal strings table is represented as offsets into the
+// global strings pool, this allows to save memory between localized
+// rules sets.
+namespace libtextclassifier3.grammar.RulesSet_.Rules_;
+table TerminalRulesMap {
+  // The offsets into the terminals pool.
+  terminal_offsets:[uint];
+
+  // The lhs set associated with a terminal rule.
+  // This is an offset into the (deduplicated) global `lhs_set` vector.
+  lhs_set_index:[uint];
+
+  // Bounds the lengths of the terminal strings for quick early lookup
+  // abort.
+  min_terminal_length:int;
+
+  max_terminal_length:int;
+}
+
+namespace libtextclassifier3.grammar.RulesSet_.Rules_;
+struct UnaryRulesEntry {
+  key:uint (key);
+  value:uint;
+}
+
+// One key, value pair entry in the binary rules hash map.
+// The key is a pair of nonterminals and the value the index of the lhs set.
+namespace libtextclassifier3.grammar.RulesSet_.Rules_;
+struct BinaryRule {
+  // The two rhs nonterminals.
+  rhs_first:uint;
+
+  rhs_second:uint;
+
+  // The lhs set associated with this binary rule.
+  // This is an offset into the (deduplicated) global `lhs_set` vector.
+  lhs_set_index:uint;
+}
+
+// One bucket in the binary rule hash map that contains all entries for a
+// given hash value.
+namespace libtextclassifier3.grammar.RulesSet_.Rules_;
+table BinaryRuleTableBucket {
+  rules:[BinaryRule];
+}
+
+namespace libtextclassifier3.grammar.RulesSet_;
+table Rules {
+  // The locale this rule set applies to.
+  locale:[LanguageTag];
+
+  terminal_rules:Rules_.TerminalRulesMap;
+  lowercase_terminal_rules:Rules_.TerminalRulesMap;
+
+  // The unary rules map.
+  // This is a map from a nonterminal to an lhs set index into the
+  // (deduplicated) global `lhs_set` vector.
+  unary_rules:[Rules_.UnaryRulesEntry];
+
+  // The binary rules (hash) map.
+  // This is a map from nonterminal pair to an lhs set index into the
+  // (deduplicated) global `lhs_set` vector.
+  binary_rules:[Rules_.BinaryRuleTableBucket];
+}
+
+// A set of lhs nonterminals associated with a rule match.
+// Most commonly, that is just the id of the lhs nonterminal of the rule that
+// is triggered, in this case `lhs` is set to the id of the nonterminal.
+// If a callback needs to be triggered, lhs is the (negated) index into the
+// `lhs` vector below that specifies additionally to the nonterminal, also the
+// callback and parameter to call.
+namespace libtextclassifier3.grammar.RulesSet_;
+table LhsSet {
+  lhs:[int];
+}
+
+namespace libtextclassifier3.grammar.RulesSet_;
+struct Lhs {
+  // The lhs nonterminal.
+  nonterminal:uint;
+
+  // The id of the callback to trigger.
+  callback_id:uint;
+
+  // A parameter to pass when invoking the callback.
+  callback_param:ulong;
+
+  // The maximum amount of whitespace allowed between the two parts.
+  // A value of -1 allows for unbounded whitespace.
+  max_whitespace_gap:byte;
+}
+
+namespace libtextclassifier3.grammar.RulesSet_.Nonterminals_;
+table AnnotationNtEntry {
+  key:string (key, shared);
+  value:int;
+}
+
+// Usage of pre-defined non-terminals that the lexer can generate if used by
+// the grammar.
+namespace libtextclassifier3.grammar.RulesSet_;
+table Nonterminals {
+  // Id of the nonterminal indicating the start of input.
+  start_nt:int;
+
+  // Id of the nonterminal indicating the end of input.
+  end_nt:int;
+
+  // Id of the nonterminal indicating a token.
+  token_nt:int;
+
+  // Id of the nonterminal indicating a string of digits.
+  digits_nt:int;
+
+  // `n_digits_nt[k]` is the id of the nonterminal indicating a string of
+  // `k` digits.
+  n_digits_nt:[int];
+
+  // Id of the nonterminal indicating a word or token boundary.
+  wordbreak_nt:int;
+
+  // Id of the nonterminal indicating an uppercase token.
+  uppercase_token_nt:int;
+
+  // Predefined nonterminals for annotations.
+  // Maps annotation/collection names to non-terminal ids.
+  annotation_nt:[Nonterminals_.AnnotationNtEntry];
+}
+
+// Callback information.
+namespace libtextclassifier3.grammar.RulesSet_;
+struct Callback {
+  // Whether the callback is a filter.
+  is_filter:bool;
+}
+
+namespace libtextclassifier3.grammar.RulesSet_;
+struct CallbackEntry {
+  key:uint (key);
+  value:Callback;
+}
+
+namespace libtextclassifier3.grammar.RulesSet_.DebugInformation_;
+table NonterminalNamesEntry {
+  key:int (key);
+  value:string (shared);
+}
+
+// Debug information for e.g. printing parse trees and show match
+// information.
+namespace libtextclassifier3.grammar.RulesSet_;
+table DebugInformation {
+  nonterminal_names:[DebugInformation_.NonterminalNamesEntry];
+}
+
+// Regex annotators.
+namespace libtextclassifier3.grammar.RulesSet_;
+table RegexAnnotator {
+  // The pattern to run.
+  pattern:string (shared);
+
+  compressed_pattern:CompressedBuffer;
+
+  // The nonterminal to trigger.
+  nonterminal:uint;
+}
+
+// Context free grammar rules representation.
+// Rules are represented in (mostly) Chomsky Normal Form, where all rules are
+// of the following form, either:
+// * <nonterm> ::= term
+// * <nonterm> ::= <nonterm>
+// * <nonterm> ::= <nonterm> <nonterm>
+// The `terminals`, `unary_rules` and `binary_rules` maps below represent
+// these sets of rules.
+namespace libtextclassifier3.grammar;
+table RulesSet {
+  rules:[RulesSet_.Rules];
+  lhs_set:[RulesSet_.LhsSet];
+  lhs:[RulesSet_.Lhs];
+
+  // Terminals string pool.
+  // The strings are zero-byte delimited and offset indexed by
+  // `terminal_offsets` in the terminals rules map.
+  terminals:string (shared);
+
+  nonterminals:RulesSet_.Nonterminals;
+  callback:[RulesSet_.CallbackEntry];
+  debug_information:RulesSet_.DebugInformation;
+  regex_annotator:[RulesSet_.RegexAnnotator];
+
+  // If true, will compile the regexes only on first use.
+  lazy_regex_compilation:bool;
+}
+

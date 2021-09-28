@@ -1,0 +1,27 @@
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "chromeos-performance"
+NAME = "graphics_WebGLAquarium.memory_pressure"
+PURPOSE = "Execute the WebGL aquarium test suite under memory pressure."
+CRITERIA = "All suite tests must not crash/hang."
+#TODO(cylee): enable test once it passes reliably. (crbug.com/1013343 )
+#ATTRIBUTES = "suite:crosbolt_perf_weekly"
+# TODO(ihf): cleanup-reboot is suspected to not work properly (crbug.com/829219).
+# Once we know this is fixed, change TIME = "MEDIUM".
+DEPENDENCIES = "cleanup-reboot"
+# FAST tests tend to run towards the end of a suite, where memory_pressure can do less damage
+# to tests that follow.
+TIME = "FAST"
+TEST_CATEGORY = "Performance"
+TEST_CLASS = "graphics"
+TEST_TYPE = "client"
+
+DOC = """
+This runs the WebGL aquarium test under memory pressure.
+"""
+
+job.run_test('graphics_WebGLAquarium',
+             tag='memory_pressure',
+             memory_pressure={'memory_to_reserve_mb': 200})

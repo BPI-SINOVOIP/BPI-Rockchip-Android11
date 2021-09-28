@@ -1,0 +1,26 @@
+project_id: $project_id
+project_name: "$project_name"
+reference_video_id: $vid_id
+reference_video_name: "$vid_name"
+test_video_location: "$filepath"
+triggered_by: "$triggered_by"
+run_information {
+    device: "$board"
+    build: "$build"
+    profile: "profile"
+    extra_information {
+        key: "extra_info_key"
+        value: "extra_info_value"
+    }
+}
+extra_results {
+    name: "extra_result_name"
+    value: 10.0
+}
+job_settings {
+    freezing_smoothness: $check_smoothness
+    psnr_ssim: $check_psnr
+    av_sync: $check_sync
+    audio: $check_audio
+    color: $check_color
+}

@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.13"
+    }
+}
+
+apply plugin: "net.ltgt.errorprone"
+apply plugin: 'java'
+apply from: "$rootDir/gradle/publishing.gradle"
+
+version = VERSION_NAME
+description = "Implementation of the Mockito API for use on the Android Dalvik VM"
+
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation project(':dexmaker')
+
+    implementation 'org.mockito:mockito-core:2.25.0', { exclude group: 'net.bytebuddy' }
+}

@@ -1,0 +1,56 @@
+# ./cachestat -h
+USAGE: ./cachestat [-T] [ interval [count] ]
+
+show Linux page cache hit/miss statistics including read and write hit %
+
+optional arguments:
+  -T              include timestamp on output
+
+examples:
+    ./cachestat             # run with default option of 5 seconds delay
+    ./cachestat -T          # run with default option of 5 seconds delay with timestamps
+    ./cachestat 1           # print every second hit/miss stats
+    ./cachestat -T 1        # include timestamps with one second samples
+    ./cachestat 1 5         # run with interval of one second for five iterations
+    ./cachestat -T 1 5      # include timestamps with interval of one second for five iterations
+    
+
+Following commands show a 2GB file being read into the page cache.
+
+Command used to generate activity:
+# dd if=/root/tmpfile of=/dev/null bs=8192
+
+Output from cachestat running simultatenously:
+# ./tools/cachestat.py 1
+   TOTAL   MISSES     HITS  DIRTIES   BUFFERS_MB  CACHED_MB
+       1        0        1        0            8        283
+       0        0        0        0            8        283
+       0        0        0        2            8        283
+       0        0        0        0            8        283
+   10009     9173      836        2            9        369
+  152032   152032        0        0            9       1028
+  157408   157405        3        0            9       1707
+  150432   150432        0        0            9       2331
+       0        0        0        0            9       2331
+       1        1        0        1            9       2331
+       0        0        0        0            9       2331
+       0        0        0        0            9       2331
+       0        0        0        0            9       2331
+
+The misses counter reflects a 2GB file being read and almost everything being
+a page cache miss.
+
+Below shows an example of a new 100MB file added to page cache, by using
+the command: dd if=/dev/zero of=/root/tmpfile2 bs=4k count=$((256*100))
+
+# ./tools/cachestat.py 1
+   TOTAL   MISSES     HITS  DIRTIES   BUFFERS_MB  CACHED_MB
+       0        0        0        0           15       2440
+       0        0        0        0           15       2440
+       0        0        0        0           15       2440
+    1758        0     1758    25603           15       2540
+       0        0        0        0           15       2540
+       0        0        0        0           15       2541
+
+~25600 pages are being dirtied (writes) which corresponds to the 100MB file
+added to the page cache.

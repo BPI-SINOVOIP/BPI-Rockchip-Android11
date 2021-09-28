@@ -1,0 +1,172 @@
+## This file contains all cxx headers from i18n & common directories for shim
+## library generator which strips all C++ APIs. This file used to be present at
+## icu4c/source/test/hdrtst/cxxfiles.txt but after 65.1 it was removed so
+## (at least in 65.1 upgrade) it is manually constructed.
+##
+## To construct this file the following steps were performed
+## (pseudocode, variables refer sets, operators as in
+##  https://docs.python.org/2/library/stdtypes.html#set):
+##
+## CXX64  = <files from cxxfiles.txt from ICU 64.2>
+## I18N   = <files from icu4c/source/i18n/unicode>
+## COMMON = <files from icu4c/source/common/unicode>
+## NEW    = CXX64 - (i18N | COMMON)
+##
+## Now manually filter out C headers from NEW set and paste them below, commenting
+## out non-C++ APIs which results only two new C++ files (localpointer and localematcher):
+#parseerr.h
+#icuplug.h
+#ptypes.h
+#utf_old.h
+#utf16.h
+#utf.h
+#utf8.h
+#utf32.h
+#stringoptions.h
+# icudataver.h
+# putil.h
+# docmain.h
+# platform.h
+
+localpointer.h
+localematcher.h
+
+## Further until the end of file is a copy of cxxfiles.txt from ICU 64.2:
+# Copyright (C) 2016 and later: Unicode, Inc. and others.
+# License & terms of use: http://www.unicode.org/copyright.html
+# Copyright (c) 2001-2016 International Business Machines
+# Corporation and others. All Rights Reserved.
+# Begin temporary addition.
+# These are very bad "C" APIs that do not work with a C compiler and
+# violate many ICU coding guidelines. These were added with ticket #5996.
+# Temporarily marked as C++ for the hdrtst to pass.
+# These are gone in ICU 50.1, remove
+#vzone.h
+#zrule.h
+#ztrans.h
+# End temporary addition.
+# common & i18n
+alphaindex.h
+appendable.h
+bidi.h
+basictz.h
+bmsearch.h
+brkiter.h
+bytestream.h
+bytestrie.h
+bytestriebuilder.h
+calendar.h
+caniter.h
+casemap.h
+char16ptr.h
+chariter.h
+choicfmt.h
+coleitr.h
+coll.h
+colldata.h
+compactdecimalformat.h
+convert.h
+cpdtrans.h
+curramt.h
+currunit.h
+currpinf.h
+datefmt.h
+dbbi.h
+dcfmtsym.h
+decimfmt.h
+dtintrv.h
+dtitvinf.h
+dtitvfmt.h
+dtfmtsym.h
+dtptngen.h
+dtrule.h
+edits.h
+enumset.h
+errorcode.h
+fieldpos.h
+filteredbrk.h
+fmtable.h
+format.h
+formattedvalue.h
+fpositer.h
+gender.h
+gregocal.h
+idna.h
+listformatter.h
+localebuilder.h
+locdspnm.h
+locid.h
+measfmt.h
+measunit.h
+measure.h
+messagepattern.h
+msgfmt.h
+normalizer2.h
+normlzr.h
+nounit.h
+numberformatter.h
+numberrangeformatter.h
+numfmt.h
+numsys.h
+parsepos.h
+plurfmt.h
+plurrule.h
+rbbi.h
+rbnf.h
+rbtz.h
+regex.h
+region.h
+reldatefmt.h
+rep.h
+resbund.h
+schriter.h
+scientificformathelper.h
+scientificnumberformatter.h
+search.h
+selfmt.h
+simpleformatter.h
+simpletz.h
+smpdtfmt.h
+sortkey.h
+std_string.h
+strenum.h
+stringtriebuilder.h
+stringpiece.h
+stsearch.h
+symtable.h
+tblcoll.h
+timezone.h
+tmunit.h
+tmutamt.h
+tmutfmt.h
+translit.h
+tzfmt.h
+tznames.h
+tzrule.h
+tztrans.h
+ucharstrie.h
+ucharstriebuilder.h
+uchriter.h
+unifilt.h
+unifunct.h
+unimatch.h
+unirepl.h
+uniset.h
+unistr.h
+uobject.h
+usetiter.h
+vtzone.h
+# io library
+ustream.h
+# layout & layoutex
+LayoutEngine.h
+LEFontInstance.h
+LEGlyphFilter.h
+LEGlyphStorage.h
+LELanguages.h
+LEScripts.h
+LESwaps.h
+# LETypes.h -- C header
+# loengine.h -- C header
+ParagraphLayout.h
+RunArrays.h

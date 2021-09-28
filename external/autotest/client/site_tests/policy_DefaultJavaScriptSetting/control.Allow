@@ -1,0 +1,20 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_DefaultJavaScriptSetting.Allow'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of DefaultJavaScriptSetting policy.
+
+Sets DefaultJavaScriptSetting to Allow, goes to a webpage with
+JavaScript and verify that it loaded.
+'''
+
+job.run_test('policy_DefaultJavaScriptSetting', case='Allow')

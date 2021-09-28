@@ -1,0 +1,20 @@
+include README.rst
+include LICENSE
+include .coveragerc
+include .editorconfig
+include *.py
+include *.rst
+include *.txt
+include *.ini
+include *.cfg
+include *.yaml
+include bin/invoke*
+
+recursive-include bin           *.sh *.py *.cmd
+recursive-include py.requirements  *.txt
+recursive-include tasks         *.py *.txt *.rst *.zip
+recursive-include tests         *.py
+# -- DISABLED: recursive-include docs          *.rst *.txt *.py
+
+prune .tox
+prune .venv*

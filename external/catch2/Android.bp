@@ -1,0 +1,107 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "libcatch2-defaults",
+    host_supported: true,
+    local_include_dirs: ["include"],  // cc_test ignores export_include_dirs
+    export_include_dirs: ["include"],
+    srcs: ["include/**/*.cpp"],
+    exclude_srcs: ["include/catch_with_main.cpp"],
+}
+
+// !!! IMPORTANT: Use 'whole_static_libs' or the linker will dead-code-eliminate
+// parts of the important code (the console and junit reporters).
+
+// Android users: libcatch2-main is what you want 99% of the time.
+// Using the pre-defined main speeds up compilation significantly.
+// If for some reason you want to provide your own `main`, use "libcatch2"
+// See also docs/configuration.md
+cc_library_static {
+    name: "libcatch2-main",
+    defaults: [
+        "libcatch2-defaults",
+    ],
+    srcs: [
+        "include/catch_with_main.cpp",
+    ],
+}
+
+// libcatch2 without the pre-defined main.
+// This is only useful if your program will define its own main.
+cc_library_static {
+    name: "libcatch2",
+    defaults: [
+        "libcatch2-defaults",
+    ],
+    cflags: ["-DCATCH_CONFIG_DISABLE_EXCEPTIONS"],
+}
+
+// This rule can be used by other external/ projects that depend on catch2
+// without turning off exceptions.
+cc_library_static {
+    name: "libcatch2-upstream",
+    defaults: [
+        "libcatch2-defaults",
+    ],
+    cflags: ["-fexceptions"],
+}
+
+// Configurations meant for validating upstream. Not intended to be used by anything else.
+
+cc_defaults {
+    name: "libcatch2-defaults-tests",
+    host_supported: true,
+    srcs: [
+        "projects/SelfTest/**/*.cpp",
+    ],
+    // This directory just re-includes existing tests 100x over.
+    // This is extremely slow to build, we don't lose coverage by excluding it.
+    exclude_srcs: [
+        "projects/SelfTest/CompileTimePerfTests/**/*.cpp",
+    ],
+}
+
+// Upstream config: Exceptions are enabled.
+// This should be validated first after an upstream merge.
+cc_test {
+    name: "libcatch2-tests-upstream",
+    defaults: [
+        "libcatch2-defaults-tests",
+    ],
+
+    gtest: false,
+    cflags: ["-fexceptions"],
+
+    whole_static_libs: [
+        "libcatch2-upstream",
+    ],
+}
+
+// Android config: Exceptions are disabled.
+// This should be validated second after an upstream merge.
+cc_test {
+    name: "libcatch2-tests",
+    defaults: [
+        "libcatch2-defaults-tests",
+    ],
+    cflags: [
+        "-DCATCH_CONFIG_DISABLE_EXCEPTIONS",
+        "-Wno-unused-function",
+    ],
+    gtest: false,
+    whole_static_libs: [
+        "libcatch2",
+    ],
+}

@@ -1,0 +1,19 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dtosic@chromium.org, wirebrand@chromium.org"
+NAME = "enterprise_CFM_AtrusUpdaterStress"
+TIME = "LONG"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "enterprise"
+ATTRIBUTES = "suite:hotrod"
+TEST_TYPE = "client"
+DEPENDENCIES = "atrus"
+
+DOC = """
+This test repeatedly runs a firmware upgrade of the device. During the upgrade
+transfer of the binary, and writing of the binary to flash is validated.
+"""
+
+job.run_test('enterprise_CFM_AtrusUpdaterStress', repeat=10)

@@ -1,0 +1,44 @@
+java_import {
+    name: "kotlin-annotations",
+    host_supported: true,
+    jars: ["lib/annotations-13.0.jar"],
+    sdk_version: "core_current",
+}
+
+java_import {
+    name: "kotlin-reflect",
+    host_supported: true,
+    jars: ["lib/kotlin-reflect.jar"],
+    sdk_version: "core_current",
+}
+
+java_import {
+    name: "kotlin-stdlib",
+    host_supported: true,
+    jars: ["lib/kotlin-stdlib.jar"],
+    sdk_version: "core_current",
+}
+
+java_import {
+    name: "kotlin-stdlib-jdk7",
+    host_supported: true,
+    jars: ["lib/kotlin-stdlib-jdk7.jar"],
+    sdk_version: "core_current",
+}
+
+java_import {
+    name: "kotlin-stdlib-jdk8",
+    host_supported: true,
+    jars: ["lib/kotlin-stdlib-jdk8.jar"],
+    sdk_version: "core_current",
+}
+
+java_import {
+    name: "kotlin-test",
+    host_supported: true,
+    jars: [
+        "lib/kotlin-test.jar",
+        "lib/kotlin-test-junit.jar",
+    ],
+    sdk_version: "core_current",
+}

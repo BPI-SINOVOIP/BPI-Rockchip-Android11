@@ -1,0 +1,86 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+clock_gettime: 1
+# Allow ioctl command of type 'A' and 'U' for SNDRV_PCM_IOCTL_* and
+# SNDRV_CTL_IOCTL_*, and EVIOCGSW(8), EVIOCGNAME(256), EVIOCGBIT(0x05, 8),
+# HCIGETDEVINFO
+ioctl: arg1 in 0xffff41ff && arg1 & 0x00004100 || arg1 in 0xffff55ff && arg1 & 0x00005500 || arg1 == 0x8008451b || arg1 == 0x81004506 || arg1 == 0x80084525 || arg1 == 0x800448d3
+ppoll: 1
+read: 1
+write: 1
+newfstatat: 1
+fstat: 1
+openat: 1
+close: 1
+readlinkat: 1
+getrandom: 1
+faccessat: 1
+# Don't allow mmap or mprotect with both PROT_WRITE and PROT_EXEC
+mmap: arg2 in 0xfffffffb || arg2 in 0xfffffffd
+mprotect: arg2 in 0xfffffffb || arg2 in 0xfffffffd
+sendmsg: 1
+rt_sigaction: 1
+lseek: 1
+recvmsg: 1
+fcntl: 1
+getdents64: 1
+sendto: 1
+brk: 1
+munmap: 1
+socket: arg0 == AF_UNIX || arg0 == AF_BLUETOOTH || arg0 == AF_NETLINK
+statfs: 1
+getsockopt: 1
+accept: 1
+pipe2: 1
+prctl: arg0 == PR_SET_NAME
+futex: 1
+ftruncate: 1
+connect: 1
+bind: 1
+clock_getres: 1
+clone: 1
+epoll_create1: 1
+epoll_ctl: 1
+epoll_pwait: 1
+execve: 1
+exit: 1
+exit_group: 1
+fchmod: 1
+fchmodat: 1
+flock: 1
+flock: 1
+getegid: 1
+geteuid: 1
+getgid: 1
+getresgid: 1
+getresuid: 1
+getrlimit: 1
+getsockname: 1
+gettid: 1
+gettimeofday: 1
+getuid: 1
+lgetxattr: 1
+listen: 1
+lsetxattr: 1
+madvise: 1
+nanosleep: 1
+restart_syscall: 1
+rt_sigprocmask: 1
+rt_sigreturn: 1
+sched_get_priority_max: 1
+sched_get_priority_min: 1
+sched_setscheduler: 1
+setrlimit: 1
+set_robust_list: 1
+setsockopt: 1
+set_tid_address: 1
+sysinfo: 1
+uname: 1
+unlinkat: 1
+getpid: 1
+prlimit64: 1
+tgkill: 1
+mremap: 1
+dup: 1

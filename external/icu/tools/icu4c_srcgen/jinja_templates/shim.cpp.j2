@@ -1,0 +1,55 @@
+{#
+Copyright (C) 2018 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+{#
+
+  Jinja2 is used for templating throughout this file. {% and {{ indicate the
+  beginning of a Jinja2 templated section, and {# begins a comment.
+
+  See http://jinja.pocoo.org/ for more information
+#}
+{{ '/* GENERATED SOURCE. DO NOT MODIFY. */' }}
+{{ '/* Run external/icu/tools/icu4c_srcgen/generate_libandroidicu.py to regenerate */' }}
+{{ '// © 2018 and later: Unicode, Inc. and others.' }}
+{{ '// License & terms of use: http://www.unicode.org/copyright.html' }}
+
+{% for header in icu_headers|sort %}
+#include <{{ header }}>
+{% endfor %}
+
+extern "C" {
+{# Generates a wrapper function for each exposed ICU function. #}
+{% for func in functions %}
+{{ func.result_type }} {{ func.name }}_android({{ func.param_str }}) {
+  {% if func.is_variadic and func.return_void %}
+  va_list args;
+  va_start(args, {{ func.last_param }});
+  {{ func.callee }}({{ func.arg_str }});
+  va_end(args);
+  return;
+  {% elif func.is_variadic %}
+  va_list args;
+  va_start(args, {{ func.last_param }});
+  {{ func.result_type }} ret = {{ func.callee }}({{ func.arg_str }});
+  va_end(args);
+  return ret;
+  {% elif func.return_void %}
+  {{ func.callee }}({{ func.arg_str }});
+  {% else %}
+  return {{ func.callee }}({{ func.arg_str }});
+  {% endif %}
+}
+{% endfor %}
+}

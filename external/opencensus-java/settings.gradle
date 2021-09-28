@@ -1,0 +1,79 @@
+rootProject.name = "opencensus-java"
+
+include ":opencensus-api"
+include ":opencensus-impl-core"
+include ":opencensus-impl-lite"
+include ":opencensus-impl"
+include ":opencensus-testing"
+include ":opencensus-exporter-trace-instana"
+include ":opencensus-exporter-trace-logging"
+include ":opencensus-exporter-trace-ocagent"
+include ":opencensus-exporter-trace-stackdriver"
+include ":opencensus-exporter-trace-zipkin"
+include ":opencensus-exporter-trace-jaeger"
+include ":opencensus-exporter-stats-signalfx"
+include ":opencensus-exporter-stats-stackdriver"
+include ":opencensus-exporter-stats-prometheus"
+include ":opencensus-contrib-agent"
+include ":opencensus-contrib-appengine-standard-util"
+include ":opencensus-contrib-dropwizard"
+include ":opencensus-contrib-exemplar-util"
+include ":opencensus-contrib-grpc-metrics"
+include ":opencensus-contrib-grpc-util"
+include ":opencensus-contrib-http-util"
+include ":opencensus-contrib-log-correlation-log4j2"
+include ":opencensus-contrib-log-correlation-stackdriver"
+include ":opencensus-contrib-monitored-resource-util"
+include ":opencensus-contrib-spring"
+include ":opencensus-contrib-spring-sleuth-v1x"
+
+project(':opencensus-api').projectDir = "$rootDir/api" as File
+project(':opencensus-impl-core').projectDir = "$rootDir/impl_core" as File
+project(':opencensus-impl-lite').projectDir = "$rootDir/impl_lite" as File
+project(':opencensus-impl').projectDir = "$rootDir/impl" as File
+project(':opencensus-testing').projectDir = "$rootDir/testing" as File
+project(':opencensus-contrib-agent').projectDir = "$rootDir/contrib/agent" as File
+project(':opencensus-contrib-appengine-standard-util').projectDir =
+        "$rootDir/contrib/appengine_standard_util" as File
+project(':opencensus-contrib-dropwizard').projectDir = "$rootDir/contrib/dropwizard" as File
+project(':opencensus-contrib-exemplar-util').projectDir = "$rootDir/contrib/exemplar_util" as File
+project(':opencensus-contrib-grpc-metrics').projectDir = "$rootDir/contrib/grpc_metrics" as File
+project(':opencensus-contrib-grpc-util').projectDir = "$rootDir/contrib/grpc_util" as File
+project(':opencensus-contrib-http-util').projectDir = "$rootDir/contrib/http_util" as File
+project(':opencensus-contrib-log-correlation-log4j2').projectDir =
+        "$rootDir/contrib/log_correlation/log4j2" as File
+project(':opencensus-contrib-log-correlation-stackdriver').projectDir =
+        "$rootDir/contrib/log_correlation/stackdriver" as File
+project(':opencensus-contrib-monitored-resource-util').projectDir =
+        "$rootDir/contrib/monitored_resource_util" as File
+project(':opencensus-contrib-spring').projectDir = "$rootDir/contrib/spring" as File
+project(':opencensus-contrib-spring-sleuth-v1x').projectDir =
+        "$rootDir/contrib/spring_sleuth_v1x" as File
+project(':opencensus-exporter-stats-signalfx').projectDir =
+        "$rootDir/exporters/stats/signalfx" as File
+project(':opencensus-exporter-stats-stackdriver').projectDir =
+        "$rootDir/exporters/stats/stackdriver" as File
+project(':opencensus-exporter-stats-prometheus').projectDir =
+        "$rootDir/exporters/stats/prometheus" as File
+project(':opencensus-exporter-trace-instana').projectDir =
+        "$rootDir/exporters/trace/instana" as File
+project(':opencensus-exporter-trace-logging').projectDir =
+        "$rootDir/exporters/trace/logging" as File
+project(':opencensus-exporter-trace-ocagent').projectDir =
+        "$rootDir/exporters/trace/ocagent" as File
+project(':opencensus-exporter-trace-stackdriver').projectDir =
+        "$rootDir/exporters/trace/stackdriver" as File
+project(':opencensus-exporter-trace-zipkin').projectDir = "$rootDir/exporters/trace/zipkin" as File
+project(':opencensus-exporter-trace-jaeger').projectDir = "$rootDir/exporters/trace/jaeger" as File
+
+
+// Java8 projects only
+if (JavaVersion.current().isJava8Compatible()) {
+    include ":opencensus-all"
+    include ":opencensus-benchmarks"
+    include ":opencensus-contrib-zpages"
+
+    project(':opencensus-all').projectDir = "$rootDir/all" as File
+    project(':opencensus-benchmarks').projectDir = "$rootDir/benchmarks" as File
+    project(':opencensus-contrib-zpages').projectDir = "$rootDir/contrib/zpages" as File
+}

@@ -1,0 +1,42 @@
+<html>
+<head>
+  <title>Video playback</title>
+</head>
+<body>
+  <video id='video1' muted></video>
+</body>
+<script type='text/javascript'>
+  const video = document.getElementById('video1');
+
+  function load_data_url(url) {
+    video.src = url;
+    video.onloadedmetadata = () => {
+      // Enlarge |video| but keep it inside the viewport; |height| also has to
+      // account for the Shelf (taskbar) at the bottom. |video| will be rendered
+      // inside that area respecting its aspect ratio.
+      video.width = Math.min(video.videoWidth, window.innerWidth * 0.9);
+      video.height = Math.min(video.videoHeight, window.innerHeight * 0.9);
+      video.loop = true;
+      video.play();
+    };
+
+    video.onplay = () => {
+      setInterval(draw_pass, 100);
+    }
+
+    video.load();
+  }
+
+  var draw_passes_count = 0;
+  function draw_pass() {
+    // <video> doesn't have a way to count the amount of played back frames, so
+    // we'll just count time intervals then.
+    draw_passes_count++;
+  }
+
+  function get_draw_passes_count() {
+    return draw_passes_count;
+  }
+
+</script>
+</html>

@@ -1,0 +1,17 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "emaxx, apronin"
+NAME = "platform_CryptohomeTpmLiveTest"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+JOB_RETRIES = 1
+
+DOC = """
+This test runs cryptohome's TPM live tests.
+"""
+
+job.run_test('platform_CryptohomeTpmLiveTest')

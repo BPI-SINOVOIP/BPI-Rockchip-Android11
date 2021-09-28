@@ -1,0 +1,22 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'pauletti'
+NAME = 'network_WiFiHECaps.MU_MIMO'
+ATTRIBUTES = 'suite:wifi_flaky'
+TIME = 'SHORT'
+TEST_TYPE = 'client'
+
+DOC = """
+This test checks that a device which supports the 802.11ax WiFi also supports
+Multi-User Multi Input Multi Output (MU-MIMO) downlink (DL) and uplink (UL).
+"""
+
+from autotest_lib.client.common_lib.cros.network import iw_runner
+
+job.run_test('network_WiFiHECaps', tag=NAME.split('.')[1],
+        features=[[iw_runner.HE_PHY_FULL_BAND_UL_MU_MIMO,
+                   iw_runner.HE_PHY_PART_BAND_UL_MU_MIMO],
+                  [iw_runner.HE_PHY_PART_BAND_DL_MU_MIMO]])
+

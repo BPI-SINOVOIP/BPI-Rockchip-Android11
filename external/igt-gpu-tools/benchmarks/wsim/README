@@ -1,0 +1,277 @@
+Workload descriptor format
+==========================
+
+ctx.engine.duration_us.dependency.wait,...
+<uint>.<str>.<uint>[-<uint>]|*.<int <= 0>[/<int <= 0>][...].<0|1>,...
+B.<uint>
+M.<uint>.<str>[|<str>]...
+P|S|X.<uint>.<int>
+d|p|s|t|q|a|T.<int>,...
+b.<uint>.<str>[|<str>].<str>
+f
+
+For duration a range can be given from which a random value will be picked
+before every submit. Since this and seqno management requires CPU access to
+objects, care needs to be taken in order to ensure the submit queue is deep
+enough these operations do not affect the execution speed unless that is
+desired.
+
+Additional workload steps are also supported:
+
+ 'd' - Adds a delay (in microseconds).
+ 'p' - Adds a delay relative to the start of previous loop so that the each loop
+       starts execution with a given period.
+ 's' - Synchronises the pipeline to a batch relative to the step.
+ 't' - Throttle every n batches.
+ 'q' - Throttle to n max queue depth.
+ 'f' - Create a sync fence.
+ 'a' - Advance the previously created sync fence.
+ 'B' - Turn on context load balancing.
+ 'b' - Set up engine bonds.
+ 'M' - Set up engine map.
+ 'P' - Context priority.
+ 'S' - Context SSEU configuration.
+ 'T' - Terminate an infinite batch.
+ 'X' - Context preemption control.
+
+Engine ids: DEFAULT, RCS, BCS, VCS, VCS1, VCS2, VECS
+
+Example (leading spaces must not be present in the actual file):
+----------------------------------------------------------------
+
+  1.VCS1.3000.0.1
+  1.RCS.500-1000.-1.0
+  1.RCS.3700.0.0
+  1.RCS.1000.-2.0
+  1.VCS2.2300.-2.0
+  1.RCS.4700.-1.0
+  1.VCS2.600.-1.1
+  p.16000
+
+The above workload described in human language works like this:
+
+  1.   A batch is sent to the VCS1 engine which will be executing for 3ms on the
+       GPU and userspace will wait until it is finished before proceeding.
+  2-4. Now three batches are sent to RCS with durations of 0.5-1.5ms (random
+       duration range), 3.7ms and 1ms respectively. The first batch has a data
+       dependency on the preceding VCS1 batch, and the last of the group depends
+       on the first from the group.
+  5.   Now a 2.3ms batch is sent to VCS2, with a data dependency on the 3.7ms
+       RCS batch.
+  6.   This is followed by a 4.7ms RCS batch with a data dependency on the 2.3ms
+       VCS2 batch.
+  7.   Then a 0.6ms VCS2 batch is sent depending on the previous RCS one. In the
+       same step the tool is told to wait for the batch completes before
+       proceeding.
+  8.   Finally the tool is told to wait long enough to ensure the next iteration
+       starts 16ms after the previous one has started.
+
+When workload descriptors are provided on the command line, commas must be used
+instead of new lines.
+
+Multiple dependencies can be given separated by forward slashes.
+
+Example:
+
+  1.VCS1.3000.0.1
+  1.RCS.3700.0.0
+  1.VCS2.2300.-1/-2.0
+
+I this case the last step has a data dependency on both first and second steps.
+
+Batch durations can also be specified as infinite by using the '*' in the
+duration field. Such batches must be ended by the terminate command ('T')
+otherwise they will cause a GPU hang to be reported.
+
+Sync (fd) fences
+----------------
+
+Sync fences are also supported as dependencies.
+
+To use them put a "f<N>" token in the step dependecy list. N is this case the
+same relative step offset to the dependee batch, but instead of the data
+dependency an output fence will be emitted at the dependee step, and passed in
+as a dependency in the current step.
+
+Example:
+
+  1.VCS1.3000.0.0
+  1.RCS.500-1000.-1/f-1.0
+
+In this case the second step will have both a data dependency and a sync fence
+dependency on the previous step.
+
+Example:
+
+  1.RCS.500-1000.0.0
+  1.VCS1.3000.f-1.0
+  1.VCS2.3000.f-2.0
+
+VCS1 and VCS2 batches will have a sync fence dependency on the RCS batch.
+
+Example:
+
+  1.RCS.500-1000.0.0
+  f
+  2.VCS1.3000.f-1.0
+  2.VCS2.3000.f-2.0
+  1.RCS.500-1000.0.1
+  a.-4
+  s.-4
+  s.-4
+
+VCS1 and VCS2 batches have an input sync fence dependecy on the standalone fence
+created at the second step. They are submitted ahead of time while still not
+runnable. When the second RCS batch completes the standalone fence is signaled
+which allows the two VCS batches to be executed. Finally we wait until the both
+VCS batches have completed before starting the (optional) next iteration.
+
+Submit fences
+-------------
+
+Submit fences are a type of input fence which are signalled when the originating
+batch buffer is submitted to the GPU. (In contrary to normal sync fences, which
+are signalled when completed.)
+
+Submit fences have the identical syntax as the sync fences with the lower-case
+'s' being used to select them. Eg:
+
+  1.RCS.500-1000.0.0
+  1.VCS1.3000.s-1.0
+  1.VCS2.3000.s-2.0
+
+Here VCS1 and VCS2 batches will only be submitted for executing once the RCS
+batch enters the GPU.
+
+Context priority
+----------------
+
+  P.1.-1
+  1.RCS.1000.0.0
+  P.2.1
+  2.BCS.1000.-2.0
+
+Context 1 is marked as low priority (-1) and then a batch buffer is submitted
+against it. Context 2 is marked as high priority (1) and then a batch buffer
+is submitted against it which depends on the batch from context 1.
+
+Context priority command is executed at workload runtime and is valid until
+overriden by another (optional) same context priority change. Actual driver
+ioctls are executed only if the priority level has changed for the context.
+
+Context preemption control
+--------------------------
+
+  X.1.0
+  1.RCS.1000.0.0
+  X.1.500
+  1.RCS.1000.0.0
+
+Context 1 is marked as non-preemptable batches and a batch is sent against 1.
+The same context is then marked to have batches which can be preempted every
+500us and another batch is submitted.
+
+Same as with context priority, context preemption commands are valid until
+optionally overriden by another preemption control change on the same context.
+
+Engine maps
+-----------
+
+Engine maps are a per context feature which changes the way engine selection is
+done in the driver.
+
+Example:
+
+  M.1.VCS1|VCS2
+
+This sets up context 1 with an engine map containing VCS1 and VCS2 engine.
+Submission to this context can now only reference these two engines.
+
+Engine maps can also be defined based on class like VCS.
+
+Example:
+
+M.1.VCS
+
+This sets up the engine map to all available VCS class engines.
+
+Context load balancing
+----------------------
+
+Context load balancing (aka Virtual Engine) is an i915 feature where the driver
+will pick the best engine (most idle) to submit to given previously configured
+engine map.
+
+Example:
+
+  B.1
+
+This enables load balancing for context number one.
+
+Engine bonds
+------------
+
+Engine bonds are extensions on load balanced contexts. They allow expressing
+rules of engine selection between two co-operating contexts tied with submit
+fences. In other words, the rule expression is telling the driver: "If you pick
+this engine for context one, then you have to pick that engine for context two".
+
+Syntax is:
+  b.<context>.<engine_list>.<master_engine>
+
+Engine list is a list of one or more sibling engines separated by a pipe
+character (eg. "VCS1|VCS2").
+
+There can be multiple bonds tied to the same context.
+
+Example:
+
+  M.1.RCS|VECS
+  B.1
+  M.2.VCS1|VCS2
+  B.2
+  b.2.VCS1.RCS
+  b.2.VCS2.VECS
+
+This tells the driver that if it picked RCS for context one, it has to pick VCS1
+for context two. And if it picked VECS for context one, it has to pick VCS1 for
+context two.
+
+If we extend the above example with more workload directives:
+
+  1.DEFAULT.1000.0.0
+  2.DEFAULT.1000.s-1.0
+
+We get to a fully functional example where two batch buffers are submitted in a
+load balanced fashion, telling the driver they should run simultaneously and
+that valid engine pairs are either RCS + VCS1 (for two contexts respectively),
+or VECS + VCS2.
+
+This can also be extended using sync fences to improve chances of the first
+submission not getting on the hardware after the second one. Second block would
+then look like:
+
+  f
+  1.DEFAULT.1000.f-1.0
+  2.DEFAULT.1000.s-1.0
+  a.-3
+
+Context SSEU configuration
+--------------------------
+
+  S.1.1
+  1.RCS.1000.0.0
+  S.2.-1
+  2.RCS.1000.0.0
+
+Context 1 is configured to run with one enabled slice (slice mask 1) and a batch
+is sumitted against it. Context 2 is configured to run with all slices (this is
+the default so the command could also be omitted) and a batch submitted against
+it.
+
+This shows the dynamic SSEU reconfiguration cost beween two contexts competing
+for the render engine.
+
+Slice mask of -1 has a special meaning of "all slices". Otherwise any integer
+can be specifying as the slice mask, but beware any apart from 1 and -1 can make
+the workload not portable between different GPUs.

@@ -1,0 +1,35 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+from autotest_lib.server.cros.bluetooth import bluetooth_test
+
+AUTHOR = 'chromeos-bluetooth'
+NAME = 'bluetooth_AdapterSASanity.sa_valid_id_test'
+PURPOSE = 'Check whether the chromebook is using a Google Bluetooth ID.'
+CRITERIA = """
+This test will fail if the Bluetooth ID does not match the expected format.
+"""
+ATTRIBUTES = 'suite:bvt-perbuild, suite:bluetooth_flaky'
+TIME = 'SHORT'
+TEST_CATEGORY = 'Functional'
+TEST_CLASS = 'bluetooth'
+TEST_TYPE = 'server'
+DEPENDENCIES = 'bluetooth'
+
+DOC = """
+Checks the Bluetooth ID of the system.  If the ID is not "00E0:24..:0400" the
+test will fail.  It does not check the platform-specific number in the ID.
+
+A platform should not FSI without an assigned Bluetooth ID from Google.
+"""
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('bluetooth_AdapterSASanity', host=host,
+                  num_iterations=1, test_name=NAME.split('.')[1])
+
+parallel_simple(run, machines)

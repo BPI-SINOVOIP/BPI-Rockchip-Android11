@@ -1,0 +1,118 @@
+version: 2.1
+
+orbs:
+  python: cjw296/python-ci@2
+
+jobs:
+  check-package:
+    parameters:
+      image:
+        type: string
+      python:
+        type: string
+        default: "python"
+    docker:
+      - image: << parameters.image >>
+    steps:
+      - python/check-package:
+          package: "mock"
+          test:
+          - run:
+              name: "Import package"
+              command: << parameters.python >> -c "import mock"
+
+
+common: &common
+  jobs:
+    - python/pip-run-tests:
+        name: python27
+        image: circleci/python:2.7
+    - python/pip-run-tests:
+        name: python34
+        image: circleci/python:3.4
+    - python/pip-run-tests:
+        name: python35
+        image: circleci/python:3.5
+    - python/pip-run-tests:
+        name: python36
+        image: circleci/python:3.6
+    - python/pip-run-tests:
+        name: python37
+        image: circleci/python:3.7
+    - python/pip-run-tests:
+        name: pypy27
+        image: pypy:2.7
+    - python/pip-run-tests:
+        name: pypy36
+        image: pypy:3.6
+
+    - python/coverage:
+        name: coverage
+        requires:
+          - python27
+          - python34
+          - python35
+          - python36
+          - python37
+          - pypy27
+          - pypy36
+
+    - python/pip-docs:
+        name: docs
+        requires:
+          - coverage
+
+    - python/pip-setuptools-build-package:
+        name: package
+        requires:
+          - docs
+        filters:
+          branches:
+            only: master
+
+    - check-package:
+        name: check-package-python27
+        image: circleci/python:2.7
+        requires:
+          - package
+
+    - check-package:
+        name: check-package-python37
+        image: circleci/python:3.7
+        requires:
+          - package
+
+    - check-package:
+        name: check-package-pypy27
+        image: pypy:2.7
+        python: pypy
+        requires:
+          - package
+
+    - check-package:
+        name: check-package-pypy36
+        image: pypy:3.6
+        python: pypy3
+        requires:
+          - package
+
+    - python/release:
+        name: release
+        config: .carthorse.yml
+        requires:
+          - check-package-python27
+          - check-package-python37
+          - check-package-pypy27
+          - check-package-pypy36
+
+workflows:
+  push:
+    <<: *common
+  periodic:
+    <<: *common
+    triggers:
+      - schedule:
+          cron: "0 1 * * *"
+          filters:
+            branches:
+              only: master

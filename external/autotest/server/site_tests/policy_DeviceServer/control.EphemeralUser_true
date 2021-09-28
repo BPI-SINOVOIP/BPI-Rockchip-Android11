@@ -1,0 +1,27 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_DeviceServer.EphemeralUser_true'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+
+DOC = """
+Sets up and runs the client test for the DeviceEphemeralUsersEnabled
+policy.
+
+"""
+
+client_test = 'policy_DeviceEphemeralUsersEnabled'
+case = True
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_DeviceServer', host=host,
+                  client_test=client_test, case=case)
+
+parallel_simple(run, machines)

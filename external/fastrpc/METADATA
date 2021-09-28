@@ -1,0 +1,17 @@
+name: "fastrpc"
+description:
+    "FastRPC is an in-kernel IPC mechanism for clients to make remote method "
+    "invocations across DSP/APPS boundaries. The intent of Qualcomm FastRPC is "
+    "allowing tasks to be easily offloading to the DSP hardware, such as easily "
+    "punting work from the Snapdragon processor to the Qualcomm Hexagon on "
+    "capable SoCs."
+
+third_party {
+  url {
+    type: GIT
+    value: "https://source.codeaurora.org/quic/lc/chromiumos/third_party/fastrpc"
+  }
+  version: "c2d1cdc0fb781ee673077c5d4b243eb239c73bb5"
+  last_upgrade_date { year: 2019 month: 11 day: 6 }
+}
+

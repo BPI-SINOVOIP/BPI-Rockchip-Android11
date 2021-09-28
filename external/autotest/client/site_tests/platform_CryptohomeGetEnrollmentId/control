@@ -1,0 +1,20 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "platform_CryptohomeGetEnrollmentId"
+PURPOSE = "Verify that a valid Enrollment ID can be obtained when the stable device secret is present on the device."
+CRITERIA = "This test will fail if the command cryptohome --get_enrollment_id fails or if the printed value is not 64 hex characters (32 bytes)."
+TIME = "SHORT"
+TEST_CATEGORY = "Functionality"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+ATTRIBUTES = "suite:bvt-perbuild"
+
+DOC = """
+Verifies that a valid enrollment ID (64 bytes) is returned by cryptohome when
+the serial_number is present on the device.
+"""
+
+job.run_test('platform_CryptohomeGetEnrollmentId')

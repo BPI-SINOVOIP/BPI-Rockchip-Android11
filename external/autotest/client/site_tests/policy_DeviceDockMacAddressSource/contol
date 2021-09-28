@@ -1,0 +1,28 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_DeviceDockMacAddressSource'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of DeviceDockMacAddressSource policy.
+
+This test is kicked off via policy_DeviceDockMacAddressSource server test.
+
+This test checks which MAC address will be used when a
+dock is connected to the device.
+
+1 = Device's designated dock MAC address
+2 = Device's built-in NIC MAC address
+3 = Dock's built-in NIC MAC address
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_DeviceDockMacAddressSource', **args_dict)

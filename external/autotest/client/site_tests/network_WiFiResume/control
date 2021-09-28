@@ -1,0 +1,17 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'kirtika'
+NAME = 'network_WiFiResume'
+ATTRIBUTES = ('suite:network_nightly, suite:bvt-perbuild,'
+              'suite:wificell-pre-cq')
+TIME = 'SHORT'
+TEST_TYPE = 'client'
+
+DOC = """
+Ensure wifi interface is found after suspend-resume.
+"""
+
+
+job.run_test('network_WiFiResume')

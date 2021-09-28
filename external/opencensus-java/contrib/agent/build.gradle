@@ -1,0 +1,246 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '2.0.2'
+}
+
+description = 'OpenCensus Agent'
+
+def agentPackage = 'io.opencensus.contrib.agent'
+def agentMainClass = "${agentPackage}.AgentMain"
+
+// The package containing the classes that need to be loaded by the bootstrap classloader because
+// they are used from classes loaded by the bootstrap classloader.
+def agentBootstrapPackage = "${agentPackage}.bootstrap"
+def agentBootstrapPackageDir = agentBootstrapPackage.replace('.', '/') + '/'
+def agentBootstrapClasses = agentBootstrapPackageDir + '**'
+
+// The package to which we relocate all third party packages. This avoids any conflicts of the
+// agent's classes with the app's classes, which are loaded by the same classloader (the system
+// classloader).
+def agentRepackaged = "${agentPackage}.deps"
+
+dependencies {
+  compileOnly libraries.auto_service
+  compileOnly libraries.grpc_context
+  compileOnly project(':opencensus-api')
+  compile libraries.byte_buddy
+  compile libraries.config
+  compile libraries.findbugs_annotations
+  compile libraries.guava
+
+  signature 'org.codehaus.mojo.signature:java17:1.0@signature'
+}
+
+jar {
+  manifest {
+    // Set the required manifest attributes for the Java agent, cf.
+    // https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html.
+    attributes 'Premain-Class': agentMainClass
+    attributes 'Can-Retransform-Classes': true
+  }
+}
+
+// Create bootstrap.jar containing the classes that need to be loaded by the bootstrap
+// classloader.
+task bootstrapJar(type: Jar) {
+  // Output to 'bootstrap.jar'.
+  baseName = 'bootstrap'
+  version = null
+
+  from sourceSets.main.output
+  include agentBootstrapClasses
+}
+
+shadowJar.dependsOn bootstrapJar
+
+// Bundle the agent's classes and dependencies into a single, self-contained JAR file.
+shadowJar {
+  // Output to opencensus-contrib-agent-VERSION.jar.
+  classifier = null
+
+  // Include only the following dependencies (excluding transitive dependencies).
+  dependencies {
+    include(dependency(libraries.byte_buddy))
+    include(dependency(libraries.config))
+    include(dependency(libraries.guava))
+  }
+
+  // Exclude cruft which still snuck in.
+  exclude 'META-INF/maven/**'
+  exclude agentBootstrapClasses
+
+  // Relocate third party packages to avoid any conflicts of the agent's classes with the app's
+  // classes, which are loaded by the same classloader (the system classloader).
+  // Byte Buddy:
+  relocate 'net.bytebuddy', agentRepackaged + '.bytebuddy'
+  // Config:
+  relocate 'com.typesafe.config', agentRepackaged + '.config'
+  // Guava:
+  relocate 'com.google.common', agentRepackaged + '.guava'
+  relocate 'com.google.thirdparty.publicsuffix', agentRepackaged + '.publicsuffix'
+
+  doLast {
+    def agentPackageDir = agentPackage.replace('.', '/') + '/'
+    def agentBootstrapJar = agentPackageDir + 'bootstrap.jar'
+
+    // Bundle bootstrap.jar.
+    ant.jar(update: 'true', destfile: shadowJar.archivePath) {
+      mappedresources {
+        fileset(file: bootstrapJar.archivePath)
+        globmapper(from: '*', to: agentBootstrapJar)
+      }
+    }
+
+    // Assert that there's nothing obviously wrong with the JAR's contents.
+    new java.util.zip.ZipFile(shadowJar.archivePath).withCloseable {
+      // Must have bundled the bootstrap.jar.
+      assert it.entries().any { it.name == agentBootstrapJar }
+
+      it.entries().each { entry ->
+        // Must not contain anything outside of ${agentPackage}, ...
+        assert entry.name.startsWith(agentPackageDir) ||
+               // ... except for the expected entries.
+               [ agentPackageDir,
+                 'META-INF/MANIFEST.MF',
+                 'META-INF/services/io.opencensus.contrib.agent.instrumentation.Instrumenter',
+                 'reference.conf',
+               ].any { entry.isDirectory() ? it.startsWith(entry.name) : it == entry.name }
+        // Also, should not have the bootstrap classes.
+        assert !entry.name.startsWith(agentBootstrapPackageDir)
+      }
+    }
+  }
+}
+
+jar.finalizedBy shadowJar
+
+// TODO(stschmidt): Proguard-shrink the agent JAR.
+
+// Integration tests. The setup was initially based on
+// https://www.petrikainulainen.net/programming/gradle/getting-started-with-gradle-integration-testing/.
+// We run the same suite of integration tests on different Java versions with the agent enabled.
+// The JAVA_HOMES environment variable lists the home directories of the Java installations used
+// for integration testing.
+
+// The default JAR has been replaced with a self-contained JAR by the shadowJar task. Therefore,
+// remove all declared dependencies from the generated Maven POM for said JAR.
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      pom.whenConfigured {
+        dependencies = []
+      }
+    }
+  }
+}
+
+sourceSets {
+  integrationTest {
+    java {
+      compileClasspath += main.output + test.output
+      runtimeClasspath += main.output + test.output
+      srcDir file('src/integration-test/java')
+    }
+    resources.srcDir file('src/integration-test/resources')
+  }
+}
+
+configurations {
+  integrationTestCompile.extendsFrom testCompile
+  integrationTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+  integrationTestCompile project(':opencensus-api')
+  integrationTestCompile project(':opencensus-testing')
+  integrationTestRuntime libraries.grpc_context
+  integrationTestRuntime project(':opencensus-impl-lite')
+}
+
+// Disable checkstyle for integration tests if not java8.
+checkstyleIntegrationTest.enabled = JavaVersion.current().isJava8Compatible()
+
+// Disable findbugs for integration tests, too.
+findbugsIntegrationTest.enabled = false
+
+def javaExecutables = (System.getenv('JAVA_HOMES') ?: '')
+    .tokenize(File.pathSeparator)
+    .plus(System.getProperty('java.home'))
+    .collect { org.apache.tools.ant.taskdefs.condition.Os.isFamily(
+                   org.apache.tools.ant.taskdefs.condition.Os.FAMILY_WINDOWS)
+                   ? "${it}/bin/java.exe"
+                   : "${it}/bin/java" }
+    .collect { new File(it).getCanonicalPath() }
+    .unique()
+
+assert javaExecutables.size > 0 :
+       'No Java executables found for running integration tests'
+
+task integrationTest
+
+javaExecutables.eachWithIndex { javaExecutable, index ->
+  def perVersionIntegrationTest = task("integrationTest_${index}", type: Test) {
+    testLogging {
+      // Let Gradle output the stdout and stderr from tests, too. This is useful for investigating
+      // test failures on Travis, where we can't view Gradle's test reports.
+      showStandardStreams = true
+
+      // Include the exception message and full stacktrace for failed tests.
+      exceptionFormat 'full'
+    }
+
+    dependsOn shadowJar
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+
+    executable = javaExecutable
+
+    // The JaCoCo agent must be specified first so that it can instrument our agent.
+    // This is a work around for the issue that the JaCoCo agent is added last, cf.
+    // https://discuss.gradle.org/t/jacoco-gradle-adds-the-agent-last-to-jvm-args/7124.
+    doFirst {
+      jvmArgs jacoco.asJvmArg  // JaCoCo agent first.
+      jvmArgs "-javaagent:${shadowJar.archivePath}"  // Our agent second.
+      jacoco.enabled = false  // Don't add the JaCoCo agent again.
+    }
+
+    doFirst { logger.lifecycle("Running integration tests using ${javaExecutable}.") }
+  }
+
+  integrationTest.dependsOn perVersionIntegrationTest
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
+
+// Merge JaCoCo's execution data from all tests into the main test's execution data file.
+task jacocoMerge(type: JacocoMerge) {
+  tasks.withType(Test).each { testTask ->
+    dependsOn testTask
+    executionData testTask.jacoco.destinationFile
+  }
+  doLast {
+    destinationFile.renameTo test.jacoco.destinationFile
+  }
+}
+
+jacocoTestReport.dependsOn jacocoMerge
+
+// JMH benchmarks
+
+dependencies {
+  jmh libraries.grpc_context
+}
+
+// Make the agent JAR available using a fixed file name so that we don't have to modify the JMH
+// benchmarks whenever the version changes.
+task agentJar(type: Copy) {
+  dependsOn shadowJar
+
+  from shadowJar.archivePath
+  into libsDir
+  rename { 'agent.jar' }
+}
+
+jmhJar.dependsOn agentJar
+jmhJar.dependsOn integrationTest

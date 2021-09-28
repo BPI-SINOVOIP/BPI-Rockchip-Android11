@@ -1,0 +1,26 @@
+description = 'OpenCensus gRPC Util'
+
+apply plugin: 'java'
+
+[compileJava, compileTestJava].each() {
+    it.sourceCompatibility = 1.6
+    it.targetCompatibility = 1.6
+}
+
+dependencies {
+    compile project(':opencensus-api')
+
+    compile (libraries.grpc_core) {
+        // Prefer library version.
+        exclude group: 'com.google.errorprone', module: 'error_prone_annotations'
+
+        // Prefer library version.
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+
+        // We will always be more up to date.
+        exclude group: 'io.opencensus', module: 'opencensus-api'
+    }
+
+    signature "org.codehaus.mojo.signature:java17:1.0@signature"
+    signature "net.sf.androidscents.signature:android-api-level-14:4.0_r4@signature"
+}

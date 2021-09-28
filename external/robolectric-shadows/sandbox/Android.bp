@@ -1,0 +1,45 @@
+//#############################################
+// Compile Robolectric sandbox
+//#############################################
+
+java_library_host {
+    name: "Robolectric_sandbox",
+    srcs: ["src/main/java/**/*.java"],
+    libs: [
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "Robolectric_utils",
+        "asm-commons-6.0",
+        "guava",
+        "asm-tree-6.0",
+        "asm-6.0",
+        "jsr305",
+    ],
+}
+
+//#############################################
+// Compile Robolectric sandbox tests
+//#############################################
+
+java_test_host {
+    name: "Robolectric_sandbox_tests",
+    srcs: ["src/test/java/**/*.java"],
+    static_libs: [
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "Robolectric_sandbox",
+        "Robolectric_junit",
+        "Robolectric_utils",
+        "mockito",
+        "hamcrest",
+        "asm-commons-6.0",
+        "guava",
+        "objenesis",
+        "asm-tree-6.0",
+        "junit",
+        "truth-prebuilt",
+        "asm-6.0",
+        "jsr305",
+    ],
+    test_suites: ["general-tests"],
+}

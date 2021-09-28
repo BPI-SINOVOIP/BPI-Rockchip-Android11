@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>Canvas 3D</title>
+</head>
+<body>
+  <div style="position:relative; padding: 25px">
+    <canvas id='canvas1' style="position:absolute;"></canvas>
+  </div>
+</body>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas1');
+  var ctx = canvas.getContext('webgl');
+
+  // Some devices, e.g. krane, have a non-zero rotation in landscape mode. We
+  // precompensate this via the rotateZ CSS transform. See crbug.com/1046109.
+  const angle = screen.orientation.angle % 360;
+  canvas.style.transform = `rotateZ(${angle}deg)`;
+
+  // Make the canvas large but still falling inside the viewport; |height|
+  // also has to account for the Shelf (taskbar) at the bottom.
+  const integerWidth = Math.min(500, Math.floor(window.innerWidth * 0.9));
+  const integerHeight = Math.min(300, Math.floor(window.innerHeight * 0.9));
+
+  // We need subpixel accuracy for non-integer aspect ratios crbug.com/1042110.
+  const dpr = window.devicePixelRatio || 1;
+  canvas.style.border = `${1 / dpr}px solid black`;
+  if (angle % 180 == 90) {
+    canvas.width = integerHeight;
+    canvas.height = integerWidth;
+    canvas.style.width = `${integerHeight / dpr}px`;
+    canvas.style.height = `${integerWidth / dpr}px`;
+
+    // On krane, the canvas needs to be shifted "rightwards" when the screen is
+    // rotated 90 or 270 degrees, to bring it in view, see crbug.com/1046445/
+    const offset = ((integerWidth / dpr) - (integerHeight / dpr)) / 2;
+    canvas.style.left = `${offset}px`;
+    //canvas.style.top = `-${offset}px`;
+  } else {
+    canvas.width = integerWidth;
+    canvas.height = integerHeight;
+    canvas.style.width = `${integerWidth / dpr}px`;
+    canvas.style.height = `${integerHeight / dpr}px`;
+  }
+
+  var draw_passes_count = 0;
+  function draw_pass() {
+    // Consider a seeded random number generator if there are reproducibility
+    // problems.
+    ctx.clearColor(0, Math.random(), 0, 1.0);
+    ctx.clear(ctx.COLOR_BUFFER_BIT);
+    draw_passes_count++;
+  }
+  setInterval(draw_pass, 1000);
+
+  function get_draw_passes_count() {
+    return draw_passes_count;
+  }
+
+</script>
+</html>

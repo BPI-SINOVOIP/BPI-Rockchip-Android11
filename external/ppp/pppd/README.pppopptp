@@ -1,0 +1,25 @@
+PPPoPPTP-Android plugin
+=======================
+
+This plugin was written for AOSP project from scratch. It has nothing to do with
+accel-pptp plugin [1].
+
+This plugin adds support for upstream kernel PPTP implementation in pppd daemon.
+Only PNS (client) part of PPTP is implemented, as we don't use Android devices
+in PAC mode.
+
+In general case, the execution flow for VPN startup on Android devices is:
+ 1. Run PPTP client (mtpd)
+ 2. mtpd obtains remote Call ID on OCRP (Outgoing-Call-Reply) packet
+ 3. mtpd creates PPTP socket
+ 4. mtpd runs pppd, passing PPTP socket as to pppopptp-android (as parameter)
+ 5. pppd dlopen() pppopptp-android plugin (because it received corresponding
+    arguments from mtpd)
+
+Main task of this plugin is to obtain PPTP socket FD from mtpd and pass it
+back to pppd when .connect() callback is executed.
+
+All control packets are handled in mtpd. PPP packets (like LCP) are handled in
+pppd. Data packets are handled by kernel PPTP driver.
+
+[1] http://accel-pptp.sourceforge.net/

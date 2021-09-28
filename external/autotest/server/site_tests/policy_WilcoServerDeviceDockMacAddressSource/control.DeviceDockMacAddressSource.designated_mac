@@ -1,0 +1,30 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "rzakarian"
+NAME = "policy_WilcoServerDeviceDockMacAddressSource.designated_mac"
+TIME = "LONG"
+TEST_CATEGORY = "General"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:wilco_bve_dock"
+
+DOC = """
+This test verifies the MAC address of the dock with the
+policy_DeviceDockMacAddressSource set. If the policy is set to 1 then the
+dock should use the designated MAC address of the DUT.
+
+"""
+
+client_test = 'policy_DeviceDockMacAddressSource'
+case = 'designated_mac'
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_WilcoServerDeviceDockMacAddressSource', host=host,
+                 client_test=client_test, case=case)
+
+parallel_simple(run, machines)

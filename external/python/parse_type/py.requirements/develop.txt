@@ -1,0 +1,34 @@
+# ============================================================================
+# PYTHON PACKAGE REQUIREMENTS FOR: parse_type -- For development only
+# ============================================================================
+
+# -- DEVELOPMENT SUPPORT:
+invoke >= 1.2.0
+six >= 1.11.0
+pathlib;    python_version <= '3.4'
+
+# -- HINT: path.py => path (python-install-package was renamed for python3)
+path.py >= 11.5.0; python_version <  '3.5'
+path >= 13.1.0;    python_version >= '3.5'
+
+# For cleanup of python files: py.cleanup
+pycmd
+
+# -- PROJECT ADMIN SUPPORT:
+# OLD: bumpversion
+bump2version >= 0.5.6
+
+# -- RELEASE MANAGEMENT: Push package to pypi.
+twine >= 1.13.0
+
+# -- PYTHON2/PYTHON3 COMPATIBILITY:
+modernize >= 0.5
+
+pylint
+
+# -- RELATED:
+-r testing.txt
+-r docs.txt
+
+# -- DISABLED:
+# -r optional.txt

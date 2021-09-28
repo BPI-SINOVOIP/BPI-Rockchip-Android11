@@ -1,0 +1,21 @@
+name: "Scudo Standalone"
+description:
+    "Scudo is a dynamic user-mode memory allocator, or heap allocator, designed "
+    "to be resilient against heap-related vulnerabilities (such as heap-based "
+    "buffer overflow, use after free, and double free) while maintaining "
+    "performance. It provides the standard C allocation and deallocation "
+    "primitives (such as malloc and free), as well as the C++ primitives (such "
+    "as new and delete)."
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "http://llvm.org"
+  }
+  url {
+    type: GIT
+    value: "https://github.com/llvm/llvm-project.git"
+  }
+  version: "161cca266a9d0b6deb5f1fd2de8ad543649a7fa1"
+  last_upgrade_date { year: 2019 month: 9 day: 10 }
+}

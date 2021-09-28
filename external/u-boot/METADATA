@@ -1,0 +1,17 @@
+name: "u-boot"
+description:
+    ""
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "http://www.denx.de/wiki/U-Boot/WebHome"
+  }
+  url {
+    type: ARCHIVE
+    value: "git://git.denx.de/u-boot.git"
+  }
+  version: "2020.01"
+  last_upgrade_date { year: 2020 month: 1 day: 23 }
+  license_type: RESTRICTED
+}

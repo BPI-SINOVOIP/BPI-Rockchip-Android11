@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Copy and remotely execute a binary on the marlin device.
+#
+# For this to work, the corresponding adb_marlin wrapper
+# must exist to tell adb the serial number of the device.
+
+GOOS="android" GOARCH="arm64" exec go_target_exec marlin "$@"

@@ -1,0 +1,11 @@
+GPIO0_GPIO0:    read 1 drive 1
+GPIO0_GPIO1:    read 0 drive 0
+GPIO0_GPIO2:    read 0 drive 0
+(?P<ccd_enabled>GPIO0_GPIO5:    read 0 drive 0)?
+(?P<closed_source_set1>GPIO0_GPIO11:   read 1 drive 1)?
+(?P<closed_source_set1>GPIO0_GPIO12:   read 0 drive 0)?
+GPIO1_GPIO0:    read 1 INT_RISING
+(?P<closed_source_set1>GPIO1_GPIO2:    read 0 INT_HIGH)?
+(?P<ccd_enabled_without_servo_block>GPIO1_GPIO3: read 0 INT_HIGH)?
+GPIO1_GPIO4:    read 1 INT_FALLING
+GPIO1_GPIO5:    read 0 drive 1

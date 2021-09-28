@@ -1,0 +1,33 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, kyleshima, Chromium OS"
+NAME = "rlz_CheckPing.guest"
+PURPOSE = "Tests that CAI and CAF RLZ pings are sent in guest mode."
+TIME = "Short"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:rlz"
+DOC = """
+This tests the RLZ client install (CAI) and first-use event (CAF) pings are
+sent on first use of the device in guest mode, as long as the device has been
+properly 'locked' by doing a normal user sign-in first.
+"""
+
+import datetime
+
+from autotest_lib.client.common_lib import utils
+
+args_dict = utils.args_to_dict(args)
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test(
+        'rlz_CheckPing', host=host, logged_in=False,
+        rlz_embargo_end_date=(
+            datetime.date.today() - datetime.timedelta(days=2)),
+        **args_dict)
+
+job.parallel_simple(run, machines)

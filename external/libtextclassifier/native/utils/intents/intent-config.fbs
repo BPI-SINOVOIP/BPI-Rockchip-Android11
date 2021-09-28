@@ -1,0 +1,201 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+include "utils/zlib/buffer.fbs";
+
+// The type of variable to fetch.
+namespace libtextclassifier3;
+enum AndroidSimpleIntentGeneratorVariableType : int {
+  INVALID_VARIABLE = 0,
+
+  // The raw text that was classified.
+  RAW_TEXT = 1,
+
+  // Text as a URL with explicit protocol. If no protocol was specified, http
+  // is prepended.
+  URL_TEXT = 2,
+
+  // The raw text, but URL encoded.
+  URL_ENCODED_TEXT = 3,
+
+  // For dates/times: the instant of the event in UTC millis.
+  EVENT_TIME_MS_UTC = 4,
+
+  // For dates/times: the start of the event in UTC millis.
+  EVENT_START_MS_UTC = 5,
+
+  // For dates/times: the end of the event in UTC millis.
+  EVENT_END_MS_UTC = 6,
+
+  // Name of the package that's running the classifier.
+  PACKAGE_NAME = 7,
+}
+
+// Enumerates the possible extra types for the simple intent generator.
+namespace libtextclassifier3;
+enum AndroidSimpleIntentGeneratorExtraType : int {
+  INVALID_EXTRA_TYPE = 0,
+  STRING = 1,
+  // Use string_ field.
+
+  BOOL = 2,
+  // Use bool_ field.
+
+  VARIABLE_AS_LONG = 3,
+  // Use int32_ field for the variable index.
+}
+
+// Enumerates the possible condition types for the simple intent generator.
+namespace libtextclassifier3;
+enum AndroidSimpleIntentGeneratorConditionType : int {
+  INVALID_CONDITION_TYPE = 0,
+
+  // Queries the UserManager for the given boolean restriction. The condition
+  // passes if the result is of getBoolean is false. The name of the
+  // restriction to check is in the string_ field.
+  USER_RESTRICTION_NOT_SET = 1,
+
+  // Checks that the parsed event start time is at least a give number of
+  // milliseconds in the future. (Only valid if there is a parsed event
+  // time) The offset is stored in the int64_ field.
+  EVENT_START_IN_FUTURE_MS = 2,
+}
+
+// Describes how intents for the various entity types should be generated on
+// Android. This is distributed through the model, but not used by
+// libtextclassifier yet - rather, it's passed to the calling Java code, which
+// implements the Intent generation logic.
+namespace libtextclassifier3;
+table AndroidIntentFactoryOptions {
+  entity:[AndroidIntentFactoryEntityOptions];
+}
+
+// Describes how intents should be generated for a particular entity type.
+namespace libtextclassifier3;
+table AndroidIntentFactoryEntityOptions {
+  // The entity type as defined by one of the TextClassifier ENTITY_TYPE
+  // constants. (e.g. "address", "phone", etc.)
+  entity_type:string (shared);
+
+  // List of generators for all the different types of intents that should
+  // be made available for the entity type.
+  generator:[AndroidIntentGeneratorOptions];
+}
+
+// Configures a single Android Intent generator.
+namespace libtextclassifier3;
+table AndroidIntentGeneratorOptions {
+  // Strings for UI elements.
+  strings:[AndroidIntentGeneratorStrings];
+
+  // Generator specific configuration.
+  simple:AndroidSimpleIntentGeneratorOptions;
+}
+
+// Language dependent configuration for an Android Intent generator.
+namespace libtextclassifier3;
+table AndroidIntentGeneratorStrings {
+  // BCP 47 tag for the supported locale. Note that because of API level
+  // restrictions, this must /not/ use wildcards. To e.g. match all English
+  // locales, use only "en" and not "en_*". Reference the java.util.Locale
+  // constructor for details.
+  language_tag:string (shared);
+
+  // Title shown for the action (see RemoteAction.getTitle).
+  title:string (shared);
+
+  // Description shown for the action (see
+  // RemoteAction.getContentDescription).
+  description:string (shared);
+}
+
+// An extra to set on a simple intent generator Intent.
+namespace libtextclassifier3;
+table AndroidSimpleIntentGeneratorExtra {
+  // The name of the extra to set.
+  name:string (shared);
+
+  // The type of the extra to set.
+  type:AndroidSimpleIntentGeneratorExtraType;
+
+  string_:string (shared);
+  bool_:bool;
+  int32_:int;
+}
+
+// A condition that needs to be fulfilled for an Intent to get generated.
+namespace libtextclassifier3;
+table AndroidSimpleIntentGeneratorCondition {
+  type:AndroidSimpleIntentGeneratorConditionType;
+  string_:string (shared);
+  int32_:int;
+  int64_:long;
+}
+
+// Configures an intent generator where the logic is simple to be expressed with
+// basic rules - which covers the vast majority of use cases and is analogous
+// to Android Actions.
+// Most strings (action, data, type, ...) may contain variable references. To
+// use them, the generator must first declare all the variables it wishes to use
+// in the variables field. The values then become available as numbered
+// arguments (using the normal java.util.Formatter syntax) in the order they
+// were specified.
+namespace libtextclassifier3;
+table AndroidSimpleIntentGeneratorOptions {
+  // The action to set on the Intent (see Intent.setAction). Supports variables.
+  action:string (shared);
+
+  // The data to set on the Intent (see Intent.setData). Supports variables.
+  data:string (shared);
+
+  // The type to set on the Intent (see Intent.setType). Supports variables.
+  type:string (shared);
+
+  // The list of all the extras to add to the Intent.
+  extra:[AndroidSimpleIntentGeneratorExtra];
+
+  // The list of all the variables that become available for substitution in
+  // the action, data, type and extra strings. To e.g. set a field to the value
+  // of the first variable, use "%0$s".
+  variable:[AndroidSimpleIntentGeneratorVariableType];
+
+  // The list of all conditions that need to be fulfilled for Intent generation.
+  condition:[AndroidSimpleIntentGeneratorCondition];
+}
+
+// Describes how intents should be generated for a particular entity type.
+namespace libtextclassifier3.IntentFactoryModel_;
+table IntentGenerator {
+  // The type of the intent generator, e.g. the entity type as defined by
+  // on the TextClassifier ENTITY_TYPE constants e.g. "address", "phone", etc.
+  type:string (shared);
+
+  // The template generator lua code, either as text source or precompiled
+  // bytecode.
+  lua_template_generator:[ubyte];
+
+  compressed_lua_template_generator:CompressedBuffer;
+}
+
+// Describes how intents for the various entity types should be generated.
+namespace libtextclassifier3;
+table IntentFactoryModel {
+  generator:[IntentFactoryModel_.IntentGenerator];
+
+  // Whether to precompile the generators when loading.
+  precompile_generators:bool = false;
+}
+

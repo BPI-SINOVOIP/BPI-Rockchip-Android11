@@ -1,0 +1,46 @@
+# =========================================================================
+# COVERAGE CONFIGURATION FILE: .coveragerc
+# =========================================================================
+# LANGUAGE: Python
+# SEE ALSO:
+#  * http://nedbatchelder.com/code/coverage/
+#  * http://nedbatchelder.com/code/coverage/config.html
+# =========================================================================
+
+[run]
+# data_file = .coverage
+source   = parse_type
+branch   = True
+parallel = True
+omit = mock.py, ez_setup.py, distribute.py
+
+
+[report]
+ignore_errors = True
+show_missing  = True
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if False:
+    if __name__ == .__main__.:
+
+
+[html]
+directory = build/coverage.html
+title = Coverage Report: parse_type
+
+[xml]
+output = build/coverage.xml
+

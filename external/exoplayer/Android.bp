@@ -1,0 +1,112 @@
+//
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+// Exposes ExoPlayer classes required for implementing the MediaParser API.
+android_library {
+    name: "exoplayer2-extractor",
+    manifest: "tree/library/extractor/src/main/AndroidManifest.xml",
+    srcs: [
+        "tree/library/extractor/src/main/java/**/*.java",
+        "tree/library/common/src/main/java/**/*.java",
+    ],
+    sdk_version: "29", // Needs to be a prebuilt, so not "current".
+    apex_available: [
+        "com.android.media",
+    ],
+    min_sdk_version: "16", // match with tree/constants.gradle
+    static_libs: [
+        "exoplayer2-extractor-annotation-stubs",
+        "androidx.annotation_annotation",
+        "jsr305",
+    ],
+    jarjar_rules: "exoplayer2-extractor-jarjar-rules.txt",
+    visibility: ["//frameworks/base:__subpackages__"],
+    notice: "LICENSE",
+}
+
+// Compile dummy implementations of annotations used by exoplayer but not
+// present in the Android tree.
+java_library {
+    name: "exoplayer2-extractor-annotation-stubs",
+    host_supported: true,
+    sdk_version: "core_current",
+    apex_available: [
+        "com.android.media",
+    ],
+    min_sdk_version: "16",
+    srcs: ["annotation-stubs/src/**/*.java"],
+    static_libs: ["jsr305"],
+    visibility: ["//visibility:private"],
+}
+
+// Exposes util classes for testing MediaParser.
+android_library {
+    name: "exoplayer2-extractor-test-utils",
+    manifest: "tree/library/extractor/src/test/AndroidManifest.xml",
+    srcs: [
+        "tree/testutils/src/main/java/com/google/android/exoplayer2/testutil/Dumper.java",
+        "tree/testutils/src/main/java/com/google/android/exoplayer2/testutil/FakeExtractorInput.java",
+        "tree/testutils/src/main/java/com/google/android/exoplayer2/testutil/FakeExtractorOutput.java",
+        "tree/testutils/src/main/java/com/google/android/exoplayer2/testutil/FakeTrackOutput.java",
+        "tree/testutils/src/main/java/com/google/android/exoplayer2/testutil/TestUtil.java",
+        "tree/library/core/src/main/java/com/google/android/exoplayer2/database/DatabaseProvider.java",
+        "tree/library/core/src/main/java/com/google/android/exoplayer2/database/DefaultDatabaseProvider.java",
+    ],
+    sdk_version: "29",
+    static_libs: [
+        "exoplayer2-extractor",
+        "exoplayer2-extractor-annotation-stubs",
+        "androidx.annotation_annotation",
+        "truth-prebuilt",
+        "junit",
+        "androidx.test.core",
+    ],
+    jarjar_rules: "exoplayer2-extractor-jarjar-rules.txt",
+    visibility: ["//cts/tests/tests/mediaparser:__subpackages__"],
+    notice: "LICENSE",
+}
+
+// Exposes the assets for testing MediaParser.
+android_library {
+    name: "exoplayer2-extractor-tests-assets",
+    manifest: "tree/library/extractor/src/main/AndroidManifest.xml",
+    srcs: [],
+    sdk_version: "29",
+    visibility: ["//cts/tests/tests/mediaparser:__subpackages__"],
+    asset_dirs: ["tree/testdata/src/test/assets/"],
+    // Do not compress media files.
+    aaptflags: [
+        "-0 .ac3",
+        "-0 .ac4",
+        "-0 .adts",
+        "-0 .amr",
+        "-0 .eac3",
+        "-0 .flac",
+        "-0 .flv",
+        "-0 .id3",
+        "-0 .mkv",
+        "-0 .mp3",
+        "-0 .mp4",
+        "-0 .mpg",
+        "-0 .ogg",
+        "-0 .opus",
+        "-0 .ps",
+        "-0 .rawcc",
+        "-0 .ts",
+        "-0 .wav",
+        "-0 .webm",
+    ],
+}

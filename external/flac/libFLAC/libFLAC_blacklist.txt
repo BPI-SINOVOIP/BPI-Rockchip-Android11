@@ -1,0 +1,14 @@
+[integer]
+# Preemptive due to: while(lag--)
+fun:FLAC__lpc_compute_autocorrelation
+# libFLAC/stream_encoder.c:3982: 4294967292 + 128 cannot be represented in type 'unsigned int'
+fun:precompute_partition_info_sums_
+
+src:*/libFLAC/crc.c
+src:*/libFLAC/md5.c
+src:*/libFLAC/bitmath.c
+src:*/libFLAC/bitreader.c
+src:*/libFLAC/bitwriter.c
+
+# Performance related
+fun:FLAC__lpc_restore_signal_wide

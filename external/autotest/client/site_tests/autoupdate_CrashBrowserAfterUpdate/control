@@ -1,0 +1,14 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "dhaddock, Chromium OS"
+NAME = "autoupdate_CrashBrowserAfterUpdate"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "client"
+PURPOSE = "Tests crashing the browser after an update is complete."
+TIME = "SHORT"
+DOC = """ Tests crashing the browser after an update is complete. """
+
+job.run_test('autoupdate_CrashBrowserAfterUpdate')

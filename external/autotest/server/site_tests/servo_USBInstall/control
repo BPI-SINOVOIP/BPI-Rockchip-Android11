@@ -1,0 +1,28 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "Chrome OS Team"
+NAME = "servo_USBInstall"
+PURPOSE = "Force reinstall cros to a dut from the servo."
+TIME = "MEDIUM"
+TEST_CATEGORY = "Install"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+This test will do the same thing as ServoInstallRepair does, but with out
+need any trigger. It will install cros on the dut use the image from USB
+that plugged into the servo.
+"""
+
+args_dict = utils.args_to_dict(args)
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('servo_USBInstall', host=host)
+
+parallel_simple(run, machines)

@@ -1,0 +1,336 @@
+// Copyright 2018, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Include generated Android.bp files
+build = [
+    "Android.libbase.bp",
+    "Android.libplatform.bp",
+    "Android.libsampler.bp",
+    "Android.base.bp",
+    "Android.initializers.bp",
+    "Android.torque.bp",
+]
+
+cc_defaults {
+    name: "v8_defaults",
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-endif-labels",
+        "-Wno-implicit-fallthrough",
+        "-Wno-import",
+        "-Wno-format",
+        "-Wno-unused-variable",
+        "-Wno-unused-parameter",
+        "-Wno-unused-private-field",
+        "-Wno-sign-compare",
+        "-Wno-missing-field-initializers",
+        "-Wno-ignored-qualifiers",
+        "-Wno-undefined-var-template",
+//        "-Wno-null-pointer-arithmetic",
+        "-Wno-non-virtual-dtor",
+        "-Wno-user-defined-warnings",
+        "-Wno-unused-lambda-capture",
+	    "-Wno-missing-braces",
+        "-fno-exceptions",
+        "-fvisibility=hidden",
+        "-fno-rtti",
+        "-g0",
+        "-Os",
+        "-DV8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64",
+        "-DV8_ATOMIC_OBJECT_FIELD_WRITES",
+        "-DV8_ATOMIC_MARKING_STATE",
+        "-DV8_ENABLE_LAZY_SOURCE_POSITIONS",
+        "-DV8_ENABLE_REGEXP_INTERPRETER_THREADED_DISPATCH",
+        "-DV8_SNAPSHOT_COMPRESSION",
+        "-DV8_NO_ARGUMENTS_ADAPTOR",
+        "-DDISABLE_UNTRUSTED_CODE_MITIGATIONS",
+    ],
+    cpp_std: "gnu++14",
+    arch: {
+        arm: {
+            cflags: [
+                "-DV8_TARGET_ARCH_ARM",
+                "-DV8_SHARED_RO_HEAP",
+            ],
+        },
+        arm64: {
+            cflags: ["-DV8_TARGET_ARCH_ARM64"],
+        },
+        x86: {
+            cflags: ["-DV8_TARGET_ARCH_IA32"],
+        },
+        x86_64: {
+            cflags: ["-DV8_TARGET_ARCH_X64"],
+        },
+    },
+}
+
+cc_library_static {
+    name: "libv8",
+    defaults: [
+        "v8_defaults",
+        "v8_snapshot"
+    ],
+    whole_static_libs: [
+        "v8_base",
+        "v8_libbase",
+        "v8_libplatform",
+        "v8_libsampler",
+        "v8_zlib",
+    ],
+    local_include_dirs: [
+        "third_party/zlib"
+    ],
+    generated_headers: [
+        "v8_generate_bytecode_builtins_list"
+    ],
+
+    export_include_dirs: ["include"],
+    apex_available: [
+        "com.android.art.debug",
+        "com.android.art.release",
+    ],
+}
+
+cc_binary {
+    name: "v8_mksnapshot_32",
+    defaults: ["v8_mksnapshot_base"],
+    compile_multilib: "32",
+}
+
+cc_binary {
+    name: "v8_mksnapshot_64",
+    defaults: ["v8_mksnapshot_base"],
+    compile_multilib: "64",
+}
+
+cc_defaults {
+    name: "v8_mksnapshot_base",
+    defaults: [
+        "v8_defaults",
+        "v8_torque_headers"
+    ],
+    srcs: [
+        "src/snapshot/embedded/embedded-empty.cc",
+        "src/snapshot/embedded/embedded-file-writer.cc",
+        "src/snapshot/embedded/platform-embedded-file-writer-aix.cc",
+        "src/snapshot/embedded/platform-embedded-file-writer-base.cc",
+        "src/snapshot/embedded/platform-embedded-file-writer-generic.cc",
+        "src/snapshot/embedded/platform-embedded-file-writer-mac.cc",
+        "src/snapshot/embedded/platform-embedded-file-writer-win.cc",
+        "src/snapshot/mksnapshot.cc",
+        "src/snapshot/snapshot-empty.cc",
+        ":v8_init",
+    ],
+    // From v8_initializers
+    arch: {
+        arm: {
+            srcs: [
+                "src/builtins/arm/builtins-arm.cc",
+            ],
+        },
+        arm64: {
+            srcs: [
+                "src/builtins/arm64/builtins-arm64.cc",
+            ],
+        },
+        x86: {
+            srcs: [
+                "src/builtins/ia32/builtins-ia32.cc",
+            ],
+        },
+        x86_64: {
+            srcs: [
+                "src/builtins/x64/builtins-x64.cc",
+            ],
+        },
+    },
+    generated_headers: [
+        "v8_generate_bytecode_builtins_list"
+    ],
+
+    static_libs: [
+        "v8_base",
+        "v8_libplatform",
+        "v8_libsampler",
+        "v8_libbase",
+        "v8_zlib",
+    ],
+    shared_libs: [
+        "liblog",
+    ],
+    local_include_dirs: ["include"],
+}
+
+cc_binary_host {
+    name: "v8_bytecode_builtins_list_generator",
+    defaults: ["v8_defaults"],
+    host_ldlibs: ["-lrt"],
+    srcs: [
+        "src/builtins/generate-bytecodes-builtins-list.cc",
+        "src/interpreter/bytecode-operands.cc",
+        "src/interpreter/bytecodes.cc",
+    ],
+    static_libs: [
+        "v8_libbase",
+    ],
+}
+
+genrule {
+    name: "v8_generate_bytecode_builtins_list",
+    tools: ["v8_bytecode_builtins_list_generator"],
+    srcs: [],
+    cmd: "mkdir -p $(genDir)/builtins-generated/ && $(location v8_bytecode_builtins_list_generator) $(out)",
+    out: [
+        "builtins-generated/bytecodes-builtins-list.h"
+    ],
+}
+
+cc_binary_host {
+    name: "v8_torque",
+    defaults: ["v8_defaults"],
+    cflags: [
+        "-fexceptions",
+        "-frtti",
+    ],
+    host_ldlibs: ["-lrt"],
+    srcs: [
+        "src/torque/cc-generator.cc",
+        "src/torque/cfg.cc",
+        "src/torque/class-debug-reader-generator.cc",
+        "src/torque/csa-generator.cc",
+        "src/torque/declarable.cc",
+        "src/torque/declaration-visitor.cc",
+        "src/torque/declarations.cc",
+        "src/torque/earley-parser.cc",
+        "src/torque/global-context.cc",
+        "src/torque/implementation-visitor.cc",
+        "src/torque/instance-type-generator.cc",
+        "src/torque/instructions.cc",
+        "src/torque/server-data.cc",
+        "src/torque/source-positions.cc",
+        "src/torque/torque-code-generator.cc",
+        "src/torque/torque-compiler.cc",
+        "src/torque/torque-parser.cc",
+        "src/torque/type-inference.cc",
+        "src/torque/type-oracle.cc",
+        "src/torque/type-visitor.cc",
+        "src/torque/types.cc",
+        "src/torque/utils.cc",
+        "src/torque/torque.cc",
+    ],
+    static_libs: [
+        "v8_libbase",
+    ],
+}
+
+cc_defaults {
+    name: "v8_snapshot",
+    defaults: ["v8_torque_headers"],
+    srcs: [
+        "src/init/setup-isolate-deserialize.cc",
+    ],
+    arch: {
+        arm: {
+            srcs: [
+                "snapshot/embedded-arm.S",
+                "snapshot/snapshot-arm.cc",
+            ],
+        },
+        arm64: {
+            srcs: [
+                "snapshot/embedded-arm64.S",
+                "snapshot/snapshot-arm64.cc",
+            ],
+        },
+        x86: {
+            srcs: [
+                "snapshot/embedded-x86.S",
+                "snapshot/snapshot-x86.cc",
+            ],
+        },
+        x86_64: {
+            srcs: [
+                "snapshot/embedded-x86_64.S",
+                "snapshot/snapshot-x86_64.cc",
+            ],
+        },
+    },
+}
+
+cc_defaults {
+    name: "v8_torque_headers",
+    arch: {
+        arm: {
+            generated_headers: [
+                "v8_torque_file_32",
+            ],
+        },
+        arm64: {
+            generated_headers: [
+                "v8_torque_file",
+            ],
+        },
+        x86: {
+            generated_headers: [
+                "v8_torque_file_32",
+            ],
+        },
+        x86_64: {
+            generated_headers: [
+                "v8_torque_file",
+            ],
+        },
+    },
+}
+
+filegroup {
+    name: "v8_init",
+    srcs: [
+        "src/init/setup-isolate-full.cc",
+        ":v8_initializers",
+    ]
+}
+
+cc_library_static {
+    name: "v8_zlib",
+    defaults: ["v8_defaults"],
+    cflags: ["-Wno-error"],
+    srcs: [
+        "third_party/zlib/adler32.c",
+        "third_party/zlib/compress.c",
+        "third_party/zlib/cpu_features.c",
+        "third_party/zlib/crc32.c",
+        "third_party/zlib/deflate.c",
+        "third_party/zlib/gzclose.c",
+        "third_party/zlib/gzlib.c",
+        "third_party/zlib/gzread.c",
+        "third_party/zlib/gzwrite.c",
+        "third_party/zlib/infback.c",
+        "third_party/zlib/inffast.c",
+        "third_party/zlib/inftrees.c",
+        "third_party/zlib/trees.c",
+        "third_party/zlib/uncompr.c",
+        "third_party/zlib/zutil.c",
+        "third_party/zlib/inflate.c",
+    ],
+    host_supported: true,
+    local_include_dirs: ["third_party/zlib"],
+    apex_available: [
+        "com.android.art.debug",
+        "com.android.art.release",
+    ],
+}

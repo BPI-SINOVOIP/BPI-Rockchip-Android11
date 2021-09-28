@@ -1,0 +1,2603 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no' ?><?xml-stylesheet type="text/xsl" href="compatibility_result.xsl"?>
+<Result start="1574806920561" end="1574821648666" start_display="Tue Nov 26 14:22:00 PST 2019" end_display="Tue Nov 26 18:27:28 PST 2019" suite_name="CTS" suite_version="9.0_r9" suite_plan="cts" suite_build_number="5793965" report_version="5.0" command_line_args="cts --include-filter CtsMediaTestCases --logcat-on-failure -s chromeos6-row2-rack22-host15:22" devices="chromeos6-row2-rack22-host15:22" host_name="test-chromeos6-row2-rack22-host15" os_name="Linux" os_version="4.15.0-55-generic" os_arch="amd64" java_vendor="Oracle Corporation" java_version="1.8.0_45-internal">
+  <Build build_abis_64="" build_manufacturer="Google" build_abis_32="x86,armeabi-v7a,armeabi" build_product="asuka" build_brand="google" build_board="asuka" build_serial="65602BCDBA8BD79EDD44" build_version_security_patch="2019-11-01" build_reference_fingerprint="" build_fingerprint="google/asuka/asuka_cheets:9/R78-12499.77.0/6026164:user/release-keys" build_version_sdk="28" build_abis="x86,armeabi-v7a,armeabi" build_device="asuka_cheets" build_abi="x86" build_model="Dell Chromebook 13 (3380)" build_id="R78-12499.77.0" build_abi2="" build_version_incremental="6026164" build_version_release="9" build_version_base_os="" build_type="user" build_tags="release-keys" run_history='[{"startTime":1574806920561,"endTime":1574821648666}]' />
+  <RunHistory>
+    <Run start="1574806920561" end="1574821648666" />
+  </RunHistory>
+  <Summary pass="2153" failed="0" modules_done="1" modules_total="1" />
+  <Module name="CtsMediaTestCases" abi="armeabi-v7a" runtime="14645648" done="true" pass="2153">
+    <TestCase name="android.media.cts.AdaptivePlaybackTest">
+      <Test result="pass" name="testH263_adaptiveDrc" />
+      <Test result="pass" name="testH263_adaptiveEarlyEos" />
+      <Test result="pass" name="testH263_adaptiveEosFlushSeek" />
+      <Test result="pass" name="testH263_adaptiveReconfigDrc" />
+      <Test result="pass" name="testH263_adaptiveSkipAhead" />
+      <Test result="pass" name="testH263_adaptiveSkipBack" />
+      <Test result="pass" name="testH263_adaptiveSmallReconfigDrc" />
+      <Test result="pass" name="testH263_earlyEos" />
+      <Test result="pass" name="testH263_eosFlushSeek" />
+      <Test result="pass" name="testH263_flushConfigureDrc" />
+      <Test result="pass" name="testH264_adaptiveDrc" />
+      <Test result="pass" name="testH264_adaptiveDrcEarlyEos" />
+      <Test result="pass" name="testH264_adaptiveEarlyEos" />
+      <Test result="pass" name="testH264_adaptiveEosFlushSeek" />
+      <Test result="pass" name="testH264_adaptiveReconfigDrc" />
+      <Test result="pass" name="testH264_adaptiveSkipAhead" />
+      <Test result="pass" name="testH264_adaptiveSkipBack" />
+      <Test result="pass" name="testH264_adaptiveSmallDrc" />
+      <Test result="pass" name="testH264_adaptiveSmallReconfigDrc" />
+      <Test result="pass" name="testH264_earlyEos" />
+      <Test result="pass" name="testH264_eosFlushSeek" />
+      <Test result="pass" name="testH264_flushConfigureDrc" />
+      <Test result="pass" name="testHEVC_adaptiveDrc" />
+      <Test result="pass" name="testHEVC_adaptiveDrcEarlyEos" />
+      <Test result="pass" name="testHEVC_adaptiveEarlyEos" />
+      <Test result="pass" name="testHEVC_adaptiveEosFlushSeek" />
+      <Test result="pass" name="testHEVC_adaptiveReconfigDrc" />
+      <Test result="pass" name="testHEVC_adaptiveSkipAhead" />
+      <Test result="pass" name="testHEVC_adaptiveSkipBack" />
+      <Test result="pass" name="testHEVC_adaptiveSmallDrc" />
+      <Test result="pass" name="testHEVC_adaptiveSmallReconfigDrc" />
+      <Test result="pass" name="testHEVC_earlyEos" />
+      <Test result="pass" name="testHEVC_eosFlushSeek" />
+      <Test result="pass" name="testHEVC_flushConfigureDrc" />
+      <Test result="pass" name="testMpeg4_adaptiveDrc" />
+      <Test result="pass" name="testMpeg4_adaptiveEarlyEos" />
+      <Test result="pass" name="testMpeg4_adaptiveEosFlushSeek" />
+      <Test result="pass" name="testMpeg4_adaptiveReconfigDrc" />
+      <Test result="pass" name="testMpeg4_adaptiveSkipAhead" />
+      <Test result="pass" name="testMpeg4_adaptiveSkipBack" />
+      <Test result="pass" name="testMpeg4_adaptiveSmallReconfigDrc" />
+      <Test result="pass" name="testMpeg4_earlyEos" />
+      <Test result="pass" name="testMpeg4_eosFlushSeek" />
+      <Test result="pass" name="testMpeg4_flushConfigureDrc" />
+      <Test result="pass" name="testVP8_adaptiveDrc" />
+      <Test result="pass" name="testVP8_adaptiveDrcEarlyEos" />
+      <Test result="pass" name="testVP8_adaptiveEarlyEos" />
+      <Test result="pass" name="testVP8_adaptiveEosFlushSeek" />
+      <Test result="pass" name="testVP8_adaptiveReconfigDrc" />
+      <Test result="pass" name="testVP8_adaptiveSkipAhead" />
+      <Test result="pass" name="testVP8_adaptiveSkipBack" />
+      <Test result="pass" name="testVP8_adaptiveSmallDrc" />
+      <Test result="pass" name="testVP8_adaptiveSmallReconfigDrc" />
+      <Test result="pass" name="testVP8_earlyEos" />
+      <Test result="pass" name="testVP8_eosFlushSeek" />
+      <Test result="pass" name="testVP8_flushConfigureDrc" />
+      <Test result="pass" name="testVP9_adaptiveDrc" />
+      <Test result="pass" name="testVP9_adaptiveDrcEarlyEos" />
+      <Test result="pass" name="testVP9_adaptiveEarlyEos" />
+      <Test result="pass" name="testVP9_adaptiveEosFlushSeek" />
+      <Test result="pass" name="testVP9_adaptiveReconfigDrc" />
+      <Test result="pass" name="testVP9_adaptiveSkipAhead" />
+      <Test result="pass" name="testVP9_adaptiveSkipBack" />
+      <Test result="pass" name="testVP9_adaptiveSmallDrc" />
+      <Test result="pass" name="testVP9_adaptiveSmallReconfigDrc" />
+      <Test result="pass" name="testVP9_earlyEos" />
+      <Test result="pass" name="testVP9_eosFlushSeek" />
+      <Test result="pass" name="testVP9_flushConfigureDrc" />
+    </TestCase>
+    <TestCase name="android.media.cts.AsyncPlayerTest">
+      <Test result="pass" name="testAsyncPlayer" />
+      <Test result="pass" name="testAsyncPlayerAudioAttributes" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioAttributesTest">
+      <Test result="pass" name="testGetVolumeControlStreamVsLegacyStream" />
+      <Test result="pass" name="testParcelableDescribeContents" />
+      <Test result="pass" name="testParcelableWriteToParcelCreate" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioEffectTest">
+      <Test result="pass" name="test0_0QueryEffects" />
+      <Test result="pass" name="test1_3GetEnabledAfterRelease" />
+      <Test result="pass" name="test1_4InsertOnMediaPlayer" />
+      <Test result="pass" name="test1_5AuxiliaryOnMediaPlayer" />
+      <Test result="pass" name="test1_6AuxiliaryOnMediaPlayerFailure" />
+      <Test result="pass" name="test1_7AuxiliaryOnAudioTrack" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0SetParameterByteArrayByteArray" />
+      <Test result="pass" name="test3_1SetParameterIntInt" />
+      <Test result="pass" name="test3_2SetParameterIntShort" />
+      <Test result="pass" name="test3_3SetParameterIntByteArray" />
+      <Test result="pass" name="test3_4SetParameterIntArrayIntArray" />
+      <Test result="pass" name="test3_5SetParameterIntArrayShortArray" />
+      <Test result="pass" name="test3_6SetParameterIntArrayByteArray" />
+      <Test result="pass" name="test3_7SetParameterAfterRelease" />
+      <Test result="pass" name="test3_8GetParameterAfterRelease" />
+      <Test result="pass" name="test4_0setEnabledLowerPriority" />
+      <Test result="pass" name="test4_1setParameterLowerPriority" />
+      <Test result="pass" name="test4_2ControlStatusListener" />
+      <Test result="pass" name="test4_3EnableStatusListener" />
+      <Test result="pass" name="test4_4ParameterChangedListener" />
+      <Test result="pass" name="test5_0Command" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioFocusTest">
+      <Test result="pass" name="testAudioFocusRequestBuilderDefault" />
+      <Test result="pass" name="testAudioFocusRequestCopyBuilder" />
+      <Test result="pass" name="testAudioFocusRequestForceDuckNotA11y" />
+      <Test result="pass" name="testAudioFocusRequestGainLoss" />
+      <Test result="pass" name="testAudioFocusRequestGainLossHandler" />
+      <Test result="pass" name="testAudioFocusRequestGainLossTransient" />
+      <Test result="pass" name="testAudioFocusRequestGainLossTransientDuck" />
+      <Test result="pass" name="testAudioFocusRequestGainLossTransientDuckHandler" />
+      <Test result="pass" name="testAudioFocusRequestGainLossTransientHandler" />
+      <Test result="pass" name="testInvalidAudioFocusRequestDelayNoListener" />
+      <Test result="pass" name="testInvalidAudioFocusRequestPauseOnDuckNoListener" />
+      <Test result="pass" name="testNullListenerHandlerNpe" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioFormatTest">
+      <Test result="pass" name="testBuilderForCopy" />
+      <Test result="pass" name="testParcel" />
+      <Test result="pass" name="testPartialFormatBuilderForCopyChanIdxMask" />
+      <Test result="pass" name="testPartialFormatBuilderForCopyChanMask" />
+      <Test result="pass" name="testPartialFormatBuilderForCopyEncoding" />
+      <Test result="pass" name="testPartialFormatBuilderForCopyRate" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioManagerTest">
+      <Test result="pass" name="testAccessMode" />
+      <Test result="pass" name="testAccessRingMode" />
+      <Test result="pass" name="testAccessibilityVolume" />
+      <Test result="pass" name="testAdjustSuggestedStreamVolumeWithIllegalArguments" />
+      <Test result="pass" name="testAdjustVolumeInAlarmsOnlyMode" />
+      <Test result="pass" name="testAdjustVolumeInPriorityOnly" />
+      <Test result="pass" name="testAdjustVolumeInTotalSilenceMode" />
+      <Test result="pass" name="testAdjustVolumeWithIllegalDirection" />
+      <Test result="pass" name="testCheckingZenModeBlockDoesNotRequireNotificationPolicyAccess" />
+      <Test result="pass" name="testGetMicrophones" />
+      <Test result="pass" name="testGetStreamVolumeDb" />
+      <Test result="pass" name="testGetStreamVolumeDbWithIllegalArguments" />
+      <Test result="pass" name="testMicrophoneMute" />
+      <Test result="pass" name="testMicrophoneMuteIntent" />
+      <Test result="pass" name="testMusicActive" />
+      <Test result="pass" name="testMuteDndAffectedStreams" />
+      <Test result="pass" name="testMuteDndUnaffectedStreams" />
+      <Test result="pass" name="testMuteFixedVolume" />
+      <Test result="pass" name="testPriorityOnlyAlarmsAllowed" />
+      <Test result="pass" name="testPriorityOnlyChannelsCanBypassDnd" />
+      <Test result="pass" name="testPriorityOnlyMediaAllowed" />
+      <Test result="pass" name="testPriorityOnlyMuteAll" />
+      <Test result="pass" name="testPriorityOnlyRingerAllowed" />
+      <Test result="pass" name="testPriorityOnlySystemAllowed" />
+      <Test result="pass" name="testRouting" />
+      <Test result="pass" name="testSetInvalidRingerMode" />
+      <Test result="pass" name="testSetRingerModePolicyAccess" />
+      <Test result="pass" name="testSetStreamVolumeInAlarmsOnlyMode" />
+      <Test result="pass" name="testSetStreamVolumeInPriorityOnlyMode" />
+      <Test result="pass" name="testSetStreamVolumeInTotalSilenceMode" />
+      <Test result="pass" name="testSetVoiceCallVolumeToZeroPermission" />
+      <Test result="pass" name="testSoundEffects" />
+      <Test result="pass" name="testVibrateNotification" />
+      <Test result="pass" name="testVibrateRinger" />
+      <Test result="pass" name="testVolume" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioNativeTest">
+      <Test result="pass" name="testAppendixBBufferQueue" />
+      <Test result="pass" name="testAppendixBRecording" />
+      <Test result="pass" name="testInputChannelMasks" />
+      <Test result="pass" name="testOutputChannelMasks" />
+      <Test result="pass" name="testPlayStreamData" />
+      <Test result="pass" name="testRecordAudit" />
+      <Test result="pass" name="testRecordStreamData" />
+      <Test result="pass" name="testStereo16Playback" />
+      <Test result="pass" name="testStereo16Record" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioPlayRoutingNative">
+      <Test result="pass" name="testAquireDefaultProxy" />
+      <Test result="pass" name="testAquirePreRealizeDefaultProxy" />
+      <Test result="pass" name="testRouting" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioPlaybackConfigurationTest">
+      <Test result="pass" name="testCallbackMediaPlayer" />
+      <Test result="pass" name="testCallbackMediaPlayerHandler" />
+      <Test result="pass" name="testCallbackMediaPlayerRelease" />
+      <Test result="pass" name="testGetterMediaPlayer" />
+      <Test result="pass" name="testGetterSoundPool" />
+      <Test result="pass" name="testParcelableWriteToParcel" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioPreProcessingTest">
+      <Test result="pass" name="test1_1NsCreateAndRelease" />
+      <Test result="pass" name="test1_2NsSetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1AecCreateAndRelease" />
+      <Test result="pass" name="test2_2AecSetEnabledGetEnabled" />
+      <Test result="pass" name="test3_1AgcCreateAndRelease" />
+      <Test result="pass" name="test3_2AgcSetEnabledGetEnabled" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioPresentationTest">
+      <Test result="pass" name="testGetters" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioRecordAppOpTest">
+      <Test result="pass" name="testRecordAppOps" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioRecordRoutingNative">
+      <Test result="pass" name="testAquireDefaultProxy" />
+      <Test result="pass" name="testAquirePreRealizeDefaultProxy" />
+      <Test result="pass" name="testRouting" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioRecordTest">
+      <Test result="pass" name="testAudioRecordAuditByteBufferResamplerStereoFloat" />
+      <Test result="pass" name="testAudioRecordAuditChannelIndex2" />
+      <Test result="pass" name="testAudioRecordAuditChannelIndex5" />
+      <Test result="pass" name="testAudioRecordAuditChannelIndexMonoFloat" />
+      <Test result="pass" name="testAudioRecordBufferSize" />
+      <Test result="pass" name="testAudioRecordBuilderDefault" />
+      <Test result="pass" name="testAudioRecordBuilderParams" />
+      <Test result="pass" name="testAudioRecordBuilderPartialFormat" />
+      <Test result="pass" name="testAudioRecordLocalMono16Bit">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>7.1688596491228065</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioRecordLocalMono16BitShort">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>2.5416666666666665</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioRecordLocalNonblockingStereoFloat">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>1.75</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioRecordMonoFloat">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>12.958881578947368</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioRecordOP" />
+      <Test result="pass" name="testAudioRecordProperties" />
+      <Test result="pass" name="testAudioRecordResamplerMono8Bit">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>0.0</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioRecordResamplerStereo8Bit">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>3.5</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioRecordStereo16Bit">
+        <Summary>
+          <Metric source="android.media.cts.AudioRecordTest#doTest:1339" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>3.5</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testGetActiveMicrophones" />
+      <Test result="pass" name="testRecordNoDataForIdleUids" />
+      <Test result="pass" name="testSynchronizedRecord" />
+      <Test result="pass" name="testTimestamp" />
+      <Test result="pass" name="testVoiceCallAudioSourcePermissions" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioRecord_BufferSizeTest">
+      <Test result="pass" name="testGetMinBufferSize" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioRecordingConfigurationTest">
+      <Test result="pass" name="testAudioManagerGetActiveRecordConfigurations" />
+      <Test result="pass" name="testCallback" />
+      <Test result="pass" name="testCallbackHandler" />
+      <Test result="pass" name="testParcel" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioTrackLatencyTest">
+      <Test result="pass" name="testGetUnderrunCount" />
+      <Test result="pass" name="testGetUnderrunCountSleep" />
+      <Test result="pass" name="testOutputLowLatency" />
+      <Test result="pass" name="testPlayPauseSmallBuffer" />
+      <Test result="pass" name="testPlaySmallBuffer" />
+      <Test result="pass" name="testSetBufferSize" />
+      <Test result="pass" name="testTrackBufferSize" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioTrackSurroundTest">
+      <Test result="pass" name="testIEC61937_Errors" />
+      <Test result="pass" name="testLoadSineSweep" />
+      <Test result="pass" name="testPcmSupport" />
+      <Test result="pass" name="testPlayAC3Bytes" />
+      <Test result="pass" name="testPlayAC3Shorts" />
+      <Test result="pass" name="testPlayIEC61937_32000" />
+      <Test result="pass" name="testPlayIEC61937_44100" />
+      <Test result="pass" name="testPlayIEC61937_48000" />
+      <Test result="pass" name="testPlaySineSweepBytes" />
+      <Test result="pass" name="testPlaySineSweepBytes48000" />
+      <Test result="pass" name="testPlaySineSweepBytesMono" />
+      <Test result="pass" name="testPlaySineSweepShorts" />
+      <Test result="pass" name="testPlaySineSweepShortsMono" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioTrackTest">
+      <Test result="pass" name="testAudioTrackBufferSize" />
+      <Test result="pass" name="testAudioTrackLargeFrameCount" />
+      <Test result="pass" name="testAudioTrackProperties" />
+      <Test result="pass" name="testBuilderAttributesPerformanceMode" />
+      <Test result="pass" name="testBuilderAttributesStream" />
+      <Test result="pass" name="testBuilderDefault" />
+      <Test result="pass" name="testBuilderFormat" />
+      <Test result="pass" name="testBuilderSession" />
+      <Test result="pass" name="testConstructorMono16MusicStatic" />
+      <Test result="pass" name="testConstructorMono16MusicStream" />
+      <Test result="pass" name="testConstructorMono8MusicStatic" />
+      <Test result="pass" name="testConstructorMono8MusicStream" />
+      <Test result="pass" name="testConstructorStereo16MusicStatic" />
+      <Test result="pass" name="testConstructorStereo16MusicStream" />
+      <Test result="pass" name="testConstructorStereo8MusicStatic" />
+      <Test result="pass" name="testConstructorStereo8MusicStream" />
+      <Test result="pass" name="testConstructorStreamType" />
+      <Test result="pass" name="testFastTimestamp">
+        <Summary>
+          <Metric source="android.media.cts.AudioTrackTest#doTestTimestamp:2198" message="average_jitter" score_type="lower_better" score_unit="ms">
+            <Value>0.1547618955373764</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testGetMinBufferSizeTooHighSR" />
+      <Test result="pass" name="testGetMinBufferSizeTooLowSR" />
+      <Test result="pass" name="testGetTimestamp">
+        <Summary>
+          <Metric source="android.media.cts.AudioTrackTest#doTestTimestamp:2198" message="average_jitter" score_type="lower_better" score_unit="ms">
+            <Value>0.1490119844675064</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testPlayChannelIndexStreamBuffer" />
+      <Test result="pass" name="testPlayStaticData" />
+      <Test result="pass" name="testPlayStaticDataShort" />
+      <Test result="pass" name="testPlayStreamByteBuffer" />
+      <Test result="pass" name="testPlayStreamData" />
+      <Test result="pass" name="testPlayStreamDataShort" />
+      <Test result="pass" name="testPlaybackHeadPositionAfterFlush" />
+      <Test result="pass" name="testPlaybackHeadPositionAfterFlushAndPlay" />
+      <Test result="pass" name="testPlaybackHeadPositionAfterInit" />
+      <Test result="pass" name="testPlaybackHeadPositionAfterPause" />
+      <Test result="pass" name="testPlaybackHeadPositionAfterStop" />
+      <Test result="pass" name="testPlaybackHeadPositionIncrease" />
+      <Test result="pass" name="testReloadStaticData" />
+      <Test result="pass" name="testSetGetPlaybackRate" />
+      <Test result="pass" name="testSetLoopPointsEndTooFar" />
+      <Test result="pass" name="testSetLoopPointsLoopTooLong" />
+      <Test result="pass" name="testSetLoopPointsStartAfterEnd" />
+      <Test result="pass" name="testSetLoopPointsStartTooFar" />
+      <Test result="pass" name="testSetLoopPointsStream" />
+      <Test result="pass" name="testSetLoopPointsSuccess" />
+      <Test result="pass" name="testSetPlaybackHeadPositionPaused" />
+      <Test result="pass" name="testSetPlaybackHeadPositionPlaying" />
+      <Test result="pass" name="testSetPlaybackHeadPositionStopped" />
+      <Test result="pass" name="testSetPlaybackHeadPositionTooFar" />
+      <Test result="pass" name="testSetPlaybackRate" />
+      <Test result="pass" name="testSetPlaybackRateTwiceOutputSR" />
+      <Test result="pass" name="testSetPlaybackRateUninit" />
+      <Test result="pass" name="testSetPlaybackRateZero" />
+      <Test result="pass" name="testSetPresentationDefaultTrack" />
+      <Test result="pass" name="testSetStereoVolumeMax" />
+      <Test result="pass" name="testSetStereoVolumeMid" />
+      <Test result="pass" name="testSetStereoVolumeMin" />
+      <Test result="pass" name="testSetVolumeMax" />
+      <Test result="pass" name="testSetVolumeMid" />
+      <Test result="pass" name="testSetVolumeMin" />
+      <Test result="pass" name="testStopDrain" />
+      <Test result="pass" name="testVariableRatePlayback" />
+      <Test result="pass" name="testVariableSpeedPlayback" />
+      <Test result="pass" name="testWriteByte" />
+      <Test result="pass" name="testWriteByte8bit" />
+      <Test result="pass" name="testWriteByteNegativeOffset" />
+      <Test result="pass" name="testWriteByteNegativeSize" />
+      <Test result="pass" name="testWriteByteOffsetTooBig" />
+      <Test result="pass" name="testWriteByteSizeTooBig" />
+      <Test result="pass" name="testWriteShort" />
+      <Test result="pass" name="testWriteShort8bit" />
+      <Test result="pass" name="testWriteShortNegativeOffset" />
+      <Test result="pass" name="testWriteShortNegativeSize" />
+      <Test result="pass" name="testWriteShortOffsetTooBig" />
+      <Test result="pass" name="testWriteShortSizeTooBig" />
+    </TestCase>
+    <TestCase name="android.media.cts.AudioTrack_ListenerTest">
+      <Test result="pass" name="testAudioTrackCallback">
+        <Summary>
+          <Metric source="android.media.cts.AudioTrack_ListenerTest#doTest:223" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>9.347127739984884</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAudioTrackCallbackWithHandler">
+        <Summary>
+          <Metric source="android.media.cts.AudioTrack_ListenerTest#doTest:223" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>7.776177955844914</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testStaticAudioTrackCallback">
+        <Summary>
+          <Metric source="android.media.cts.AudioTrack_ListenerTest#doTest:223" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>7.776177955844914</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testStaticAudioTrackCallbackWithHandler">
+        <Summary>
+          <Metric source="android.media.cts.AudioTrack_ListenerTest#doTest:223" message="unified_abs_diff" score_type="lower_better" score_unit="ms">
+            <Value>9.514361300075587</Value>
+          </Metric>
+        </Summary>
+      </Test>
+    </TestCase>
+    <TestCase name="android.media.cts.BassBoostTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0Strength" />
+      <Test result="pass" name="test1_1Properties" />
+      <Test result="pass" name="test1_2SetStrengthAfterRelease" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0ControlStatusListener" />
+      <Test result="pass" name="test3_1EnableStatusListener" />
+      <Test result="pass" name="test3_2ParameterChangedListener" />
+    </TestCase>
+    <TestCase name="android.media.cts.CamcorderProfileTest">
+      <Test result="pass" name="testGet" />
+      <Test result="pass" name="testGetWithId" />
+    </TestCase>
+    <TestCase name="android.media.cts.CameraProfileTest">
+      <Test result="pass" name="testGetImageEncodingQualityParameter" />
+      <Test result="pass" name="testGetWithId" />
+    </TestCase>
+    <TestCase name="android.media.cts.DecodeAccuracyTest">
+      <Test result="pass" name="testGLViewDecodeAccuracy[0]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[10]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[11]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[12]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[13]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[14]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[15]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[16]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[17]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[18]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[19]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[1]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[20]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[21]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[22]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[23]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[24]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[25]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[26]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[27]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[28]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[29]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[2]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[30]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[31]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[32]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[33]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[34]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[35]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[36]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[37]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[38]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[39]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[3]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[40]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[41]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[42]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[43]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[44]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[45]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[46]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[47]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[48]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[49]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[4]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[50]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[51]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[52]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[53]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[54]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[55]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[56]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[57]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[58]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[59]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[5]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[60]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[61]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[62]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[63]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[64]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[65]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[6]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[7]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[8]" />
+      <Test result="pass" name="testGLViewDecodeAccuracy[9]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[0]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[10]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[11]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[12]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[13]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[14]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[15]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[16]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[17]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[18]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[19]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[1]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[20]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[21]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[22]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[23]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[24]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[25]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[26]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[27]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[28]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[29]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[2]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[30]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[31]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[32]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[33]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[34]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[35]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[36]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[37]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[38]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[39]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[3]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[40]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[41]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[42]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[43]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[44]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[45]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[46]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[47]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[48]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[49]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[4]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[50]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[51]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[52]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[53]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[54]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[55]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[56]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[57]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[58]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[59]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[5]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[60]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[61]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[62]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[63]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[64]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[65]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[6]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[7]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[8]" />
+      <Test result="pass" name="testGLViewLargerHeightDecodeAccuracy[9]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[0]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[10]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[11]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[12]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[13]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[14]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[15]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[16]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[17]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[18]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[19]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[1]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[20]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[21]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[22]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[23]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[24]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[25]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[26]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[27]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[28]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[29]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[2]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[30]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[31]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[32]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[33]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[34]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[35]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[36]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[37]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[38]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[39]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[3]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[40]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[41]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[42]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[43]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[44]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[45]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[46]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[47]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[48]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[49]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[4]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[50]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[51]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[52]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[53]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[54]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[55]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[56]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[57]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[58]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[59]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[5]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[60]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[61]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[62]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[63]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[64]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[65]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[6]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[7]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[8]" />
+      <Test result="pass" name="testGLViewLargerWidthDecodeAccuracy[9]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[0]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[10]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[11]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[12]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[13]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[14]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[15]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[16]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[17]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[18]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[19]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[1]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[20]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[21]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[22]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[23]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[24]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[25]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[26]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[27]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[28]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[29]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[2]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[30]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[31]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[32]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[33]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[34]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[35]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[36]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[37]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[38]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[39]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[3]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[40]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[41]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[42]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[43]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[44]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[45]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[46]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[47]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[48]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[49]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[4]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[50]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[51]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[52]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[53]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[54]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[55]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[56]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[57]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[58]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[59]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[5]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[60]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[61]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[62]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[63]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[64]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[65]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[6]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[7]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[8]" />
+      <Test result="pass" name="testSurfaceViewLargerHeightDecodeAccuracy[9]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[0]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[10]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[11]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[12]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[13]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[14]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[15]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[16]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[17]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[18]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[19]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[1]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[20]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[21]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[22]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[23]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[24]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[25]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[26]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[27]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[28]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[29]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[2]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[30]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[31]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[32]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[33]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[34]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[35]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[36]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[37]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[38]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[39]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[3]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[40]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[41]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[42]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[43]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[44]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[45]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[46]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[47]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[48]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[49]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[4]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[50]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[51]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[52]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[53]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[54]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[55]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[56]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[57]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[58]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[59]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[5]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[60]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[61]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[62]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[63]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[64]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[65]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[6]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[7]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[8]" />
+      <Test result="pass" name="testSurfaceViewLargerWidthDecodeAccuracy[9]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[0]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[10]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[11]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[12]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[13]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[14]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[15]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[16]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[17]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[18]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[19]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[1]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[20]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[21]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[22]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[23]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[24]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[25]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[26]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[27]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[28]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[29]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[2]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[30]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[31]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[32]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[33]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[34]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[35]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[36]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[37]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[38]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[39]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[3]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[40]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[41]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[42]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[43]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[44]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[45]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[46]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[47]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[48]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[49]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[4]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[50]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[51]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[52]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[53]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[54]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[55]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[56]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[57]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[58]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[59]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[5]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[60]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[61]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[62]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[63]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[64]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[65]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[6]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[7]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[8]" />
+      <Test result="pass" name="testSurfaceViewVideoDecodeAccuracy[9]" />
+    </TestCase>
+    <TestCase name="android.media.cts.DecodeEditEncodeTest">
+      <Test result="pass" name="testVideoEdit720p" />
+      <Test result="pass" name="testVideoEditQCIF" />
+      <Test result="pass" name="testVideoEditQVGA" />
+    </TestCase>
+    <TestCase name="android.media.cts.DecoderConformanceTest">
+      <Test result="pass" name="testVP9Goog" />
+      <Test result="pass" name="testVP9Other" />
+    </TestCase>
+    <TestCase name="android.media.cts.DecoderTest">
+      <Test result="pass" name="testBFrames" />
+      <Test result="pass" name="testBug11696552" />
+      <Test result="pass" name="testCodecBasicH263" />
+      <Test result="pass" name="testCodecBasicH264" />
+      <Test result="pass" name="testCodecBasicHEVC" />
+      <Test result="pass" name="testCodecBasicMpeg4" />
+      <Test result="pass" name="testCodecBasicVP8" />
+      <Test result="pass" name="testCodecBasicVP9" />
+      <Test result="pass" name="testCodecEarlyEOSH263" />
+      <Test result="pass" name="testCodecEarlyEOSH264" />
+      <Test result="pass" name="testCodecEarlyEOSHEVC" />
+      <Test result="pass" name="testCodecEarlyEOSMpeg4" />
+      <Test result="pass" name="testCodecEarlyEOSVP8" />
+      <Test result="pass" name="testCodecEarlyEOSVP9" />
+      <Test result="pass" name="testCodecResetsH263WithSurface" />
+      <Test result="pass" name="testCodecResetsH263WithoutSurface" />
+      <Test result="pass" name="testCodecResetsH264WithSurface" />
+      <Test result="pass" name="testCodecResetsH264WithoutSurface" />
+      <Test result="pass" name="testCodecResetsHEVCWithSurface" />
+      <Test result="pass" name="testCodecResetsHEVCWithoutSurface" />
+      <Test result="pass" name="testCodecResetsM4a" />
+      <Test result="pass" name="testCodecResetsMp3" />
+      <Test result="pass" name="testCodecResetsMpeg4WithSurface" />
+      <Test result="pass" name="testCodecResetsMpeg4WithoutSurface" />
+      <Test result="pass" name="testCodecResetsVP8WithSurface" />
+      <Test result="pass" name="testCodecResetsVP8WithoutSurface" />
+      <Test result="pass" name="testCodecResetsVP9WithSurface" />
+      <Test result="pass" name="testCodecResetsVP9WithoutSurface" />
+      <Test result="pass" name="testDecode51M4a" />
+      <Test result="pass" name="testDecodeAacEldM4a" />
+      <Test result="pass" name="testDecodeAacLcM4a" />
+      <Test result="pass" name="testDecodeAacLcMcM4a" />
+      <Test result="pass" name="testDecodeAacTs" />
+      <Test result="pass" name="testDecodeFlac" />
+      <Test result="pass" name="testDecodeFragmented" />
+      <Test result="pass" name="testDecodeHeAacM4a" />
+      <Test result="pass" name="testDecodeHeAacMcM4a" />
+      <Test result="pass" name="testDecodeHeAacV2M4a" />
+      <Test result="pass" name="testDecodeM4a" />
+      <Test result="pass" name="testDecodeMonoGsm" />
+      <Test result="pass" name="testDecodeMonoM4a" />
+      <Test result="pass" name="testDecodeMonoMp3" />
+      <Test result="pass" name="testDecodeMonoOgg" />
+      <Test result="pass" name="testDecodeMp3Lame" />
+      <Test result="pass" name="testDecodeMp3Smpb" />
+      <Test result="pass" name="testDecodeOgg" />
+      <Test result="pass" name="testDecodeOpus" />
+      <Test result="pass" name="testDecodeVorbis" />
+      <Test result="pass" name="testDecodeWav" />
+      <Test result="pass" name="testDecodeWithEOSOnLastBuffer" />
+      <Test result="pass" name="testEOSBehaviorH263" />
+      <Test result="pass" name="testEOSBehaviorH264" />
+      <Test result="pass" name="testEOSBehaviorHEVC" />
+      <Test result="pass" name="testEOSBehaviorMpeg4" />
+      <Test result="pass" name="testEOSBehaviorVP8" />
+      <Test result="pass" name="testEOSBehaviorVP9" />
+      <Test result="pass" name="testFlush" />
+      <Test result="pass" name="testH264ColorAspects">
+        <Summary>
+          <Metric source="android.media.cts.DecoderTest#testColorAspects:516" message="result" score_type="higher_better" score_unit="count">
+            <Value>1.0</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testH264Decode30fps1280x720" />
+      <Test result="pass" name="testH264Decode30fps1280x720Tv" />
+      <Test result="pass" name="testH264Decode30fps1920x1080" />
+      <Test result="pass" name="testH264Decode30fps1920x1080Tv" />
+      <Test result="pass" name="testH264Decode320x240" />
+      <Test result="pass" name="testH264Decode60fps1280x720" />
+      <Test result="pass" name="testH264Decode60fps1280x720Tv" />
+      <Test result="pass" name="testH264Decode60fps1920x1080" />
+      <Test result="pass" name="testH264Decode60fps1920x1080Tv" />
+      <Test result="pass" name="testH264Decode720x480" />
+      <Test result="pass" name="testH264SecureDecode30fps1280x720Tv" />
+      <Test result="pass" name="testH264SecureDecode30fps1920x1080Tv" />
+      <Test result="pass" name="testH264SecureDecode60fps1280x720Tv" />
+      <Test result="pass" name="testH264SecureDecode60fps1920x1080Tv" />
+      <Test result="pass" name="testH265ColorAspects">
+        <Summary>
+          <Metric source="android.media.cts.DecoderTest#testColorAspects:516" message="result" score_type="higher_better" score_unit="count">
+            <Value>1.0</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testH265HDR10StaticMetadata" />
+      <Test result="pass" name="testHEVCDecode30fps1280x720" />
+      <Test result="pass" name="testHEVCDecode30fps1280x720Tv" />
+      <Test result="pass" name="testHEVCDecode30fps1920x1080Tv" />
+      <Test result="pass" name="testHEVCDecode30fps3840x2160" />
+      <Test result="pass" name="testHEVCDecode352x288" />
+      <Test result="pass" name="testHEVCDecode60fps1920x1080" />
+      <Test result="pass" name="testHEVCDecode60fps3840x2160" />
+      <Test result="pass" name="testHEVCDecode720x480" />
+      <Test result="pass" name="testMPEG2ColorAspectsTV" />
+      <Test result="pass" name="testTrackSelection" />
+      <Test result="pass" name="testTunneledVideoFlush" />
+      <Test result="pass" name="testTunneledVideoPlayback" />
+      <Test result="pass" name="testVP8Decode30fps1280x720" />
+      <Test result="pass" name="testVP8Decode30fps1280x720Tv" />
+      <Test result="pass" name="testVP8Decode30fps1920x1080" />
+      <Test result="pass" name="testVP8Decode30fps1920x1080Tv" />
+      <Test result="pass" name="testVP8Decode320x180" />
+      <Test result="pass" name="testVP8Decode60fps1280x720" />
+      <Test result="pass" name="testVP8Decode60fps1280x720Tv" />
+      <Test result="pass" name="testVP8Decode60fps1920x1080" />
+      <Test result="pass" name="testVP8Decode60fps1920x1080Tv" />
+      <Test result="pass" name="testVP8Decode640x360" />
+      <Test result="pass" name="testVP9Decode30fps1280x720" />
+      <Test result="pass" name="testVP9Decode30fps1280x720Tv" />
+      <Test result="pass" name="testVP9Decode30fps3840x2160" />
+      <Test result="pass" name="testVP9Decode320x180" />
+      <Test result="pass" name="testVP9Decode60fps1920x1080" />
+      <Test result="pass" name="testVP9Decode60fps3840x2160" />
+      <Test result="pass" name="testVP9Decode640x360" />
+      <Test result="pass" name="testVp9HdrStaticMetadata" />
+      <Test result="pass" name="testVrHighPerformanceH264" />
+      <Test result="pass" name="testVrHighPerformanceHEVC" />
+      <Test result="pass" name="testVrHighPerformanceVP9" />
+    </TestCase>
+    <TestCase name="android.media.cts.DecoderTestAacDrc">
+      <Test result="pass" name="testDecodeAacDrcClipM4a" />
+      <Test result="pass" name="testDecodeAacDrcFullM4a" />
+      <Test result="pass" name="testDecodeAacDrcHalfM4a" />
+      <Test result="pass" name="testDecodeAacDrcHeavyM4a" />
+      <Test result="pass" name="testDecodeAacDrcLevelM4a" />
+      <Test result="pass" name="testDecodeAacDrcOffM4a" />
+      <Test result="pass" name="testDecodeUsacLoudnessM4a" />
+    </TestCase>
+    <TestCase name="android.media.cts.DecoderTestXheAac">
+      <Test result="pass" name="testDecodeUsacDrcEffectTypeM4a" />
+      <Test result="pass" name="testDecodeUsacSamplingRatesM4a" />
+      <Test result="pass" name="testDecodeUsacStreamSwitchingM4a" />
+    </TestCase>
+    <TestCase name="android.media.cts.DynamicsProcessingTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test0_1ConstructorWithConfigAndRelease" />
+      <Test result="pass" name="test1_0ParametersEngine" />
+      <Test result="pass" name="test1_1ParametersChannel" />
+      <Test result="pass" name="test1_2ParametersPreEq" />
+      <Test result="pass" name="test1_3ParametersMbc" />
+      <Test result="pass" name="test1_4ParametersPostEq" />
+      <Test result="pass" name="test1_5ParametersLimiter" />
+      <Test result="pass" name="test1_6Channel_perStage" />
+      <Test result="pass" name="test1_7Channel_perBand" />
+      <Test result="pass" name="test1_8Channel_setAllChannelsTo" />
+      <Test result="pass" name="test1_9Channel_setChannelTo" />
+      <Test result="pass" name="test2_0ConfigBasic" />
+      <Test result="pass" name="test2_10Stage" />
+      <Test result="pass" name="test2_11BandBase" />
+      <Test result="pass" name="test2_12Channel" />
+      <Test result="pass" name="test2_1ConfigChannel" />
+      <Test result="pass" name="test2_2ConfigChannel_perStage" />
+      <Test result="pass" name="test2_3ConfigChannel_perBand" />
+      <Test result="pass" name="test2_4Channel_perStage" />
+      <Test result="pass" name="test2_5Channel_perBand" />
+      <Test result="pass" name="test2_6Eq" />
+      <Test result="pass" name="test2_7Mbc" />
+      <Test result="pass" name="test2_8Limiter" />
+      <Test result="pass" name="test2_9BandStage" />
+      <Test result="pass" name="test3_0Builder_stagesAllChannels" />
+      <Test result="pass" name="test3_1Builder_stagesByChannelIndex" />
+      <Test result="pass" name="test3_2Builder_setAllChannelsTo" />
+      <Test result="pass" name="test3_3Builder_setChannelTo" />
+    </TestCase>
+    <TestCase name="android.media.cts.EncodeDecodeTest">
+      <Test result="pass" name="testEncodeDecodeVideoFromBufferToBuffer720p" />
+      <Test result="pass" name="testEncodeDecodeVideoFromBufferToBufferQCIF" />
+      <Test result="pass" name="testEncodeDecodeVideoFromBufferToBufferQVGA" />
+      <Test result="pass" name="testEncodeDecodeVideoFromBufferToSurface720p" />
+      <Test result="pass" name="testEncodeDecodeVideoFromBufferToSurfaceQCIF" />
+      <Test result="pass" name="testEncodeDecodeVideoFromBufferToSurfaceQVGA" />
+      <Test result="pass" name="testEncodeDecodeVideoFromPersistentSurfaceToSurface720p" />
+      <Test result="pass" name="testEncodeDecodeVideoFromPersistentSurfaceToSurface720pNdk" />
+      <Test result="pass" name="testEncodeDecodeVideoFromPersistentSurfaceToSurfaceQCIF" />
+      <Test result="pass" name="testEncodeDecodeVideoFromPersistentSurfaceToSurfaceQVGA" />
+      <Test result="pass" name="testEncodeDecodeVideoFromSurfaceToSurface720p" />
+      <Test result="pass" name="testEncodeDecodeVideoFromSurfaceToSurface720pNdk" />
+      <Test result="pass" name="testEncodeDecodeVideoFromSurfaceToSurfaceQCIF" />
+      <Test result="pass" name="testEncodeDecodeVideoFromSurfaceToSurfaceQVGA" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromBufferToBuffer720p" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromBufferToBufferQCIF" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromBufferToBufferQVGA" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromBufferToSurface720p" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromBufferToSurfaceQCIF" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromBufferToSurfaceQVGA" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromPersistentSurfaceToSurface720p" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromPersistentSurfaceToSurface720pNdk" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromPersistentSurfaceToSurfaceQCIF" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromPersistentSurfaceToSurfaceQVGA" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromSurfaceToSurface720p" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromSurfaceToSurface720pNdk" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromSurfaceToSurfaceQCIF" />
+      <Test result="pass" name="testVP8EncodeDecodeVideoFromSurfaceToSurfaceQVGA" />
+    </TestCase>
+    <TestCase name="android.media.cts.EncodeVirtualDisplayTest">
+      <Test result="pass" name="testEncodeVirtualDisplay" />
+    </TestCase>
+    <TestCase name="android.media.cts.EncodeVirtualDisplayWithCompositionTest">
+      <Test result="pass" name="testRendering800x480Locally" />
+      <Test result="pass" name="testRendering800x480LocallyWith3Windows" />
+      <Test result="pass" name="testRendering800x480Remotely" />
+      <Test result="pass" name="testRendering800x480RemotelyWith3Windows" />
+      <Test result="pass" name="testRendering800x480Rotated180" />
+      <Test result="pass" name="testRendering800x480Rotated270" />
+      <Test result="pass" name="testRendering800x480Rotated360" />
+      <Test result="pass" name="testRendering800x480Rotated90" />
+      <Test result="pass" name="testRenderingMaxResolutionLocally" />
+      <Test result="pass" name="testRenderingMaxResolutionRemotely" />
+      <Test result="pass" name="testVirtualDisplayRecycles" />
+    </TestCase>
+    <TestCase name="android.media.cts.EncoderTest">
+      <Test result="pass" name="testAACEncoders" />
+      <Test result="pass" name="testAMRNBEncoders" />
+      <Test result="pass" name="testAMRWBEncoders" />
+    </TestCase>
+    <TestCase name="android.media.cts.EnumDevicesTest">
+      <Test result="pass" name="test_deviceCallback" />
+      <Test result="pass" name="test_devicesInfoFields" />
+      <Test result="pass" name="test_getDevices" />
+    </TestCase>
+    <TestCase name="android.media.cts.EnvReverbTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0Room" />
+      <Test result="pass" name="test1_1Decay" />
+      <Test result="pass" name="test1_2Reverb" />
+      <Test result="pass" name="test1_3Reflections" />
+      <Test result="pass" name="test1_4DiffusionAndDensity" />
+      <Test result="pass" name="test1_5Properties" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0ControlStatusListener" />
+      <Test result="pass" name="test3_1EnableStatusListener" />
+      <Test result="pass" name="test3_2ParameterChangedListener" />
+    </TestCase>
+    <TestCase name="android.media.cts.EqualizerTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0BandLevel" />
+      <Test result="pass" name="test1_1BandFrequency" />
+      <Test result="pass" name="test1_2Presets" />
+      <Test result="pass" name="test1_3Properties" />
+      <Test result="pass" name="test1_4SetBandLevelAfterRelease" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0ControlStatusListener" />
+      <Test result="pass" name="test3_1EnableStatusListener" />
+      <Test result="pass" name="test3_2ParameterChangedListener" />
+    </TestCase>
+    <TestCase name="android.media.cts.ExifInterfaceTest">
+      <Test result="pass" name="testDoNotFailOnCorruptedImage" />
+      <Test result="pass" name="testReadExifDataFromCanonG7XCr2" />
+      <Test result="pass" name="testReadExifDataFromExifByteOrderIIJpeg" />
+      <Test result="pass" name="testReadExifDataFromExifByteOrderMMJpeg" />
+      <Test result="pass" name="testReadExifDataFromFujiX20Raf" />
+      <Test result="pass" name="testReadExifDataFromLgG4Iso800Dng" />
+      <Test result="pass" name="testReadExifDataFromNikon1AW1Nef" />
+      <Test result="pass" name="testReadExifDataFromNikonP330Nrw" />
+      <Test result="pass" name="testReadExifDataFromOlympusEPL3Orf" />
+      <Test result="pass" name="testReadExifDataFromPanasonicGM5Rw2" />
+      <Test result="pass" name="testReadExifDataFromPentaxK5Pef" />
+      <Test result="pass" name="testReadExifDataFromSamsungNX3000Srw" />
+      <Test result="pass" name="testReadExifDataFromSonyRX100Arw" />
+      <Test result="pass" name="testReadExifDataFromVolantisJpg" />
+      <Test result="pass" name="testSetDateTime" />
+    </TestCase>
+    <TestCase name="android.media.cts.ExtractDecodeEditEncodeMuxTest">
+      <Test result="pass" name="testExtractDecodeEditEncodeMux2160pHevc" />
+      <Test result="pass" name="testExtractDecodeEditEncodeMux720p" />
+      <Test result="pass" name="testExtractDecodeEditEncodeMuxAudio" />
+      <Test result="pass" name="testExtractDecodeEditEncodeMuxAudioVideo" />
+      <Test result="pass" name="testExtractDecodeEditEncodeMuxQCIF" />
+      <Test result="pass" name="testExtractDecodeEditEncodeMuxQVGA" />
+    </TestCase>
+    <TestCase name="android.media.cts.FaceDetectorTest">
+      <Test result="pass" name="testFindFaces" />
+    </TestCase>
+    <TestCase name="android.media.cts.FaceDetector_FaceTest">
+      <Test result="pass" name="testFaceProperties" />
+    </TestCase>
+    <TestCase name="android.media.cts.HeifWriterTest">
+      <Test result="pass" name="testInputBitmap_Grid_Handler" />
+      <Test result="pass" name="testInputBitmap_Grid_NoHandler" />
+      <Test result="pass" name="testInputBitmap_NoGrid_Handler" />
+      <Test result="pass" name="testInputBitmap_NoGrid_NoHandler" />
+      <Test result="pass" name="testInputBuffer_Grid_Handler" />
+      <Test result="pass" name="testInputBuffer_Grid_NoHandler" />
+      <Test result="pass" name="testInputBuffer_NoGrid_Handler" />
+      <Test result="pass" name="testInputBuffer_NoGrid_NoHandler" />
+      <Test result="pass" name="testInputSurface_Grid_Handler" />
+      <Test result="pass" name="testInputSurface_Grid_NoHandler" />
+      <Test result="pass" name="testInputSurface_NoGrid_Handler" />
+      <Test result="pass" name="testInputSurface_NoGrid_NoHandler" />
+    </TestCase>
+    <TestCase name="android.media.cts.ImageReaderDecoderTest">
+      <Test result="pass" name="testGoogH263Image" />
+      <Test result="pass" name="testGoogH263ImageReader" />
+      <Test result="pass" name="testGoogH264Image" />
+      <Test result="pass" name="testGoogH264ImageReader" />
+      <Test result="pass" name="testGoogH265Image" />
+      <Test result="pass" name="testGoogH265ImageReader" />
+      <Test result="pass" name="testGoogMpeg4Image" />
+      <Test result="pass" name="testGoogMpeg4ImageReader" />
+      <Test result="pass" name="testGoogVP8Image" />
+      <Test result="pass" name="testGoogVP8ImageReader" />
+      <Test result="pass" name="testGoogVP9Image" />
+      <Test result="pass" name="testGoogVP9ImageReader" />
+      <Test result="pass" name="testHwAVCDecode360pForFlexibleYuv" />
+      <Test result="pass" name="testOtherH263Image" />
+      <Test result="pass" name="testOtherH263ImageReader" />
+      <Test result="pass" name="testOtherH264Image" />
+      <Test result="pass" name="testOtherH264ImageReader" />
+      <Test result="pass" name="testOtherH265Image" />
+      <Test result="pass" name="testOtherH265ImageReader" />
+      <Test result="pass" name="testOtherMpeg4Image" />
+      <Test result="pass" name="testOtherMpeg4ImageReader" />
+      <Test result="pass" name="testOtherVP8Image" />
+      <Test result="pass" name="testOtherVP8ImageReader" />
+      <Test result="pass" name="testOtherVP9Image" />
+      <Test result="pass" name="testOtherVP9ImageReader" />
+      <Test result="pass" name="testSwAVCDecode360pForFlexibleYuv" />
+    </TestCase>
+    <TestCase name="android.media.cts.JetPlayerTest">
+      <Test result="pass" name="testClone" />
+      <Test result="pass" name="testLoadJetFromFd" />
+      <Test result="pass" name="testLoadJetFromPath" />
+      <Test result="pass" name="testQueueJetSegmentMuteArray" />
+    </TestCase>
+    <TestCase name="android.media.cts.LoudnessEnhancerTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0TargetGain" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0MeasureGainChange" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaBrowserServiceTest">
+      <Test result="pass" name="testBrowserRoot" />
+      <Test result="pass" name="testDelayedItem" />
+      <Test result="pass" name="testDelayedNotifyChildrenChanged" />
+      <Test result="pass" name="testGetBrowserInfo" />
+      <Test result="pass" name="testGetSessionToken" />
+      <Test result="pass" name="testNotifyChildrenChanged" />
+      <Test result="pass" name="testNotifyChildrenChangedWithPagination" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaBrowserTest">
+      <Test result="pass" name="testConnectTwice" />
+      <Test result="pass" name="testConnectionCallbackNotCalledAfterDisconnect" />
+      <Test result="pass" name="testConnectionFailed" />
+      <Test result="pass" name="testGetItem" />
+      <Test result="pass" name="testGetItemFailure" />
+      <Test result="pass" name="testGetServiceComponentBeforeConnection" />
+      <Test result="pass" name="testItemCallbackNotCalledAfterDisconnect" />
+      <Test result="pass" name="testMediaBrowser" />
+      <Test result="pass" name="testReconnection" />
+      <Test result="pass" name="testSubscribe" />
+      <Test result="pass" name="testSubscribeInvalidItem" />
+      <Test result="pass" name="testSubscribeInvalidItemWithOptions" />
+      <Test result="pass" name="testSubscribeWithOptions" />
+      <Test result="pass" name="testSubscriptionCallbackNotCalledAfterDisconnect" />
+      <Test result="pass" name="testUnsubscribeForMultipleSubscriptions" />
+      <Test result="pass" name="testUnsubscribeWithSubscriptionCallbackForMultipleSubscriptions" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaCasTest">
+      <Test result="pass" name="testClearKeyApis" />
+      <Test result="pass" name="testClearKeyExceptions" />
+      <Test result="pass" name="testClearKeyPluginInstalled" />
+      <Test result="pass" name="testClearKeySessionClosedAfterRelease" />
+      <Test result="pass" name="testEnumeratePlugins" />
+      <Test result="pass" name="testInvalidSystemIdFails" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaCodecCapabilitiesTest">
+      <Test result="pass" name="testAllAdvertisedVideoEncoderBitrateModes" />
+      <Test result="pass" name="testAllNonTunneledVideoCodecsSupportFlexibleYUV" />
+      <Test result="pass" name="testAllVideoDecodersAreAdaptive" />
+      <Test result="pass" name="testAvcBaseline1" />
+      <Test result="pass" name="testAvcBaseline12" />
+      <Test result="pass" name="testAvcBaseline30" />
+      <Test result="pass" name="testAvcHigh31" />
+      <Test result="pass" name="testAvcHigh40" />
+      <Test result="pass" name="testGetMaxSupportedInstances" />
+      <Test result="pass" name="testH263DecoderProfileAndLevel" />
+      <Test result="pass" name="testH263EncoderProfileAndLevel" />
+      <Test result="pass" name="testH264DecoderProfileAndLevel" />
+      <Test result="pass" name="testH264EncoderProfileAndLevel" />
+      <Test result="pass" name="testH265DecoderProfileAndLevel" />
+      <Test result="pass" name="testHaveAdaptiveVideoDecoderForAllSupportedFormats" />
+      <Test result="pass" name="testHevcMain1" />
+      <Test result="pass" name="testHevcMain2" />
+      <Test result="pass" name="testHevcMain21" />
+      <Test result="pass" name="testHevcMain3" />
+      <Test result="pass" name="testHevcMain31" />
+      <Test result="pass" name="testHevcMain4" />
+      <Test result="pass" name="testHevcMain41" />
+      <Test result="pass" name="testHevcMain5" />
+      <Test result="pass" name="testHevcMain51" />
+      <Test result="pass" name="testMpeg4DecoderProfileAndLevel" />
+      <Test result="pass" name="testSecureCodecsAdvertiseSecurePlayback" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaCodecListTest">
+      <Test result="pass" name="testAllComponentInstantiation" />
+      <Test result="pass" name="testAudioCodecChannels" />
+      <Test result="pass" name="testFindDecoderWithAacProfile" />
+      <Test result="pass" name="testFindEncoderWithAacProfile" />
+      <Test result="pass" name="testGetAllCapabilities" />
+      <Test result="pass" name="testGetLegacyCapabilities" />
+      <Test result="pass" name="testGetRegularCapabilities" />
+      <Test result="pass" name="testLegacyComponentInstantiation" />
+      <Test result="pass" name="testLegacyMediaCodecListIsSameAsRegular" />
+      <Test result="pass" name="testMediaCodecXmlFileExist" />
+      <Test result="pass" name="testRegularComponentInstantiation" />
+      <Test result="pass" name="testRegularMediaCodecListIsASubsetOfAll" />
+      <Test result="pass" name="testRequiredMediaCodecList" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaCodecTest">
+      <Test result="pass" name="testAbruptStop" />
+      <Test result="pass" name="testAsyncFlushAndReset" />
+      <Test result="pass" name="testAsyncStopAndReset" />
+      <Test result="pass" name="testConcurrentAudioVideoEncodings" />
+      <Test result="pass" name="testCreateAudioDecoderAndEncoder" />
+      <Test result="pass" name="testCreateInputSurfaceErrors" />
+      <Test result="pass" name="testCreateTwoAudioDecoders" />
+      <Test result="pass" name="testCryptoError" />
+      <Test result="pass" name="testCryptoInfoPattern" />
+      <Test result="pass" name="testDecodeAfterFlush" />
+      <Test result="pass" name="testDecodeShortInput" />
+      <Test result="pass" name="testDequeueSurface" />
+      <Test result="pass" name="testException" />
+      <Test result="pass" name="testFlacIdentity" />
+      <Test result="pass" name="testReconfigureWithoutSurface" />
+      <Test result="pass" name="testReleaseAfterFlush" />
+      <Test result="pass" name="testSignalSurfaceEOS" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaControllerTest">
+      <Test result="pass" name="testAdjustVolumeWithIllegalDirection" />
+      <Test result="pass" name="testGetPackageName" />
+      <Test result="pass" name="testGetRatingType" />
+      <Test result="pass" name="testGetSessionToken" />
+      <Test result="pass" name="testSendCommand" />
+      <Test result="pass" name="testTransportControlsAndMediaSessionCallback" />
+      <Test result="pass" name="testVolumeControl" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaDrmClearkeyTest">
+      <Test result="pass" name="testClearKeyPlaybackCenc" />
+      <Test result="pass" name="testClearKeyPlaybackCenc2" />
+      <Test result="pass" name="testClearKeyPlaybackMpeg2ts" />
+      <Test result="pass" name="testClearKeyPlaybackWebm" />
+      <Test result="pass" name="testGetNumberOfSessions" />
+      <Test result="pass" name="testGetProperties" />
+      <Test result="pass" name="testHdcpLevels" />
+      <Test result="pass" name="testPlaybackMpeg2ts" />
+      <Test result="pass" name="testQueryKeyStatus" />
+      <Test result="pass" name="testSecureStop" />
+      <Test result="pass" name="testSecurityLevels" />
+      <Test result="pass" name="testSetProperties" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaDrmMetricsTest">
+      <Test result="pass" name="testGetMetricsEmpty" />
+      <Test result="pass" name="testGetMetricsGetKeyRequest" />
+      <Test result="pass" name="testGetMetricsSession" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaDrmMockTest">
+      <Test result="pass" name="testBadCryptoSession" />
+      <Test result="pass" name="testBadSession" />
+      <Test result="pass" name="testByteArrayProperties" />
+      <Test result="pass" name="testCryptoSession" />
+      <Test result="pass" name="testCryptoSessionDecrypt" />
+      <Test result="pass" name="testCryptoSessionEncrypt" />
+      <Test result="pass" name="testCryptoSessionSign" />
+      <Test result="pass" name="testCryptoSessionVerify" />
+      <Test result="pass" name="testEventNoSessionNoData" />
+      <Test result="pass" name="testEventWithSessionAndData" />
+      <Test result="pass" name="testExpirationUpdate" />
+      <Test result="pass" name="testGetKeyRequest" />
+      <Test result="pass" name="testGetKeyRequestNoOptionalParameters" />
+      <Test result="pass" name="testGetKeyRequestOffline" />
+      <Test result="pass" name="testGetKeyRequestRelease" />
+      <Test result="pass" name="testGetProvisionRequest" />
+      <Test result="pass" name="testGetSecureStops" />
+      <Test result="pass" name="testIsCryptoSchemeNotSupported" />
+      <Test result="pass" name="testIsMimeTypeNotSupported" />
+      <Test result="pass" name="testIsMimeTypeSupported" />
+      <Test result="pass" name="testKeyStatusChange" />
+      <Test result="pass" name="testMediaDrmConstructor" />
+      <Test result="pass" name="testMediaDrmConstructorFails" />
+      <Test result="pass" name="testMissingPropertyByteArray" />
+      <Test result="pass" name="testMissingPropertyString" />
+      <Test result="pass" name="testMultipleSessions" />
+      <Test result="pass" name="testNullPropertyByteArray" />
+      <Test result="pass" name="testNullPropertyString" />
+      <Test result="pass" name="testNullSession" />
+      <Test result="pass" name="testOpenCloseSession" />
+      <Test result="pass" name="testProvideKeyResponse" />
+      <Test result="pass" name="testProvideProvisionResponse" />
+      <Test result="pass" name="testQueryKeyStatus" />
+      <Test result="pass" name="testReleaseSecureStops" />
+      <Test result="pass" name="testRemoveKeys" />
+      <Test result="pass" name="testRestoreKeys" />
+      <Test result="pass" name="testStringProperties" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaExtractorTest">
+      <Test result="pass" name="testExtractFromAMediaDataSource" />
+      <Test result="pass" name="testExtractorFailsIfMediaDataSourceReturnsAnError" />
+      <Test result="pass" name="testExtractorFailsIfMediaDataSourceThrows" />
+      <Test result="pass" name="testGetAudioPresentations" />
+      <Test result="pass" name="testMediaDataSourceIsClosedOnRelease" />
+      <Test result="pass" name="testNullMediaDataSourceIsRejected" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaItemTest">
+      <Test result="pass" name="testBrowsableMediaItem" />
+      <Test result="pass" name="testPlayableMediaItem" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaMetadataRetrieverTest">
+      <Test result="pass" name="test3gppMetadata" />
+      <Test result="pass" name="testGetFrameAtIndex" />
+      <Test result="pass" name="testGetFrameAtTimeClosest" />
+      <Test result="pass" name="testGetFrameAtTimeClosestSync" />
+      <Test result="pass" name="testGetFrameAtTimeNextSync" />
+      <Test result="pass" name="testGetFrameAtTimePreviousSync" />
+      <Test result="pass" name="testGetFramesAtIndex" />
+      <Test result="pass" name="testGetImageAtIndex" />
+      <Test result="pass" name="testGetScaledFrameAtTime" />
+      <Test result="pass" name="testID3v2Metadata" />
+      <Test result="pass" name="testLargeAlbumArt" />
+      <Test result="pass" name="testMediaDataSourceIsClosedOnRelease" />
+      <Test result="pass" name="testNullMediaDataSourceIsRejected" />
+      <Test result="pass" name="testRetrieveFailsIfMediaDataSourceReturnsAnError" />
+      <Test result="pass" name="testRetrieveFailsIfMediaDataSourceThrows" />
+      <Test result="pass" name="testSetDataSourceNullPath" />
+      <Test result="pass" name="testThumbnailH263" />
+      <Test result="pass" name="testThumbnailH264" />
+      <Test result="pass" name="testThumbnailHEVC" />
+      <Test result="pass" name="testThumbnailMPEG4" />
+      <Test result="pass" name="testThumbnailVP8" />
+      <Test result="pass" name="testThumbnailVP9" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaMuxerTest">
+      <Test result="pass" name="testAudioOnly" />
+      <Test result="pass" name="testDualAudioTrack" />
+      <Test result="pass" name="testDualVideoAndAudioTrack" />
+      <Test result="pass" name="testDualVideoTrack" />
+      <Test result="pass" name="testIllegalStateExceptions" />
+      <Test result="pass" name="testThreegppOutput" />
+      <Test result="pass" name="testVideoAudio" />
+      <Test result="pass" name="testVideoAudioMedatadata" />
+      <Test result="pass" name="testVideoOnly" />
+      <Test result="pass" name="testWebmOutput" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaPlayer2DrmTest">
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V0_SYNC" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V1_ASYNC" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V2_SYNC_CONFIG" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V3_ASYNC_DRMPREPARED" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaPlayer2Test">
+      <Test result="pass" name="testCallback" />
+      <Test result="pass" name="testChangeSubtitleTrack" />
+      <Test result="pass" name="testConcurentPlayAudio" />
+      <Test result="pass" name="testDeselectTrackForSubtitleTracks" />
+      <Test result="pass" name="testGetTimestamp" />
+      <Test result="pass" name="testGetTrackInfoForVideoWithSubtitleTracks" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_MKV_H265_1280x720_500kbps_25fps_AAC_Stereo_128kbps_44100Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1000kbps_25fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1000kbps_30fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_25fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_30fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_30fps_AAC_Stereo_128kbps_44110Hz_frag" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_30fps_AAC_Stereo_192kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_500kbps_25fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_500kbps_30fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testMedia2DataSourceIsClosedOnReset" />
+      <Test result="pass" name="testNullMedia2DataSourceIsRejected" />
+      <Test result="pass" name="testPlayAudio" />
+      <Test result="pass" name="testPlayAudioFromDataURI" />
+      <Test result="pass" name="testPlayAudioLooping" />
+      <Test result="pass" name="testPlayAudioTwice" />
+      <Test result="pass" name="testPlayMidi" />
+      <Test result="pass" name="testPlayNullSourcePath" />
+      <Test result="pass" name="testPlayVideo" />
+      <Test result="pass" name="testPlaybackFailsIfMedia2DataSourceReturnsAnError" />
+      <Test result="pass" name="testPlaybackFailsIfMedia2DataSourceThrows" />
+      <Test result="pass" name="testPlaybackFromAMedia2DataSource" />
+      <Test result="pass" name="testPlaybackRate" />
+      <Test result="pass" name="testPlaylist" />
+      <Test result="pass" name="testPositionAtEnd" />
+      <Test result="pass" name="testRecordAndPlay" />
+      <Test result="pass" name="testRecordedVideoPlayback0" />
+      <Test result="pass" name="testRecordedVideoPlayback180" />
+      <Test result="pass" name="testRecordedVideoPlayback270" />
+      <Test result="pass" name="testRecordedVideoPlayback90" />
+      <Test result="pass" name="testResumeAtEnd" />
+      <Test result="pass" name="testSeekModes" />
+      <Test result="pass" name="testVideoSurfaceResetting" />
+      <Test result="pass" name="testVorbisCrash" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaPlayerDrmTest">
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V0_SYNC" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V1_ASYNC" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V2_SYNC_CONFIG" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V3_ASYNC_DRMPREPARED" />
+      <Test result="pass" name="testCAR_CLEARKEY_AUDIO_DOWNLOADED_V5_ASYNC_WITH_HANDLER" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaPlayerFlakyNetworkTest">
+      <Test result="pass" name="test_S0P0" />
+      <Test result="pass" name="test_S1P000005" />
+      <Test result="pass" name="test_S2P00001" />
+      <Test result="pass" name="test_S3P00001" />
+      <Test result="pass" name="test_S4P00001" />
+      <Test result="pass" name="test_S5P00001" />
+      <Test result="pass" name="test_S6P00002" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaPlayerSurfaceTest">
+      <Test result="pass" name="testSetSurface" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaPlayerTest">
+      <Test result="pass" name="testCallback" />
+      <Test result="pass" name="testChangeSubtitleTrack" />
+      <Test result="pass" name="testChangeTimedTextTrack" />
+      <Test result="pass" name="testChangeTimedTextTrackFast" />
+      <Test result="pass" name="testConcurentPlayAudio" />
+      <Test result="pass" name="testDeselectTrackForSubtitleTracks" />
+      <Test result="pass" name="testDeselectTrackForTimedTextTrack" />
+      <Test result="pass" name="testFlacHeapOverflow" />
+      <Test result="pass" name="testGapless1" />
+      <Test result="pass" name="testGapless2" />
+      <Test result="pass" name="testGapless3" />
+      <Test result="pass" name="testGetTimestamp" />
+      <Test result="pass" name="testGetTrackInfoForVideoWithSubtitleTracks" />
+      <Test result="pass" name="testGetTrackInfoForVideoWithTimedText" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_12fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_300kbps_25fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_12fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Mono_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Mono_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_128kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_128kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_24kbps_11025Hz" />
+      <Test result="pass" name="testLocalVideo_3gp_H263_176x144_56kbps_25fps_AAC_Stereo_24kbps_22050Hz" />
+      <Test result="pass" name="testLocalVideo_MKV_H265_1280x720_500kbps_25fps_AAC_Stereo_128kbps_44100Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1000kbps_25fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1000kbps_30fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_25fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_30fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_30fps_AAC_Stereo_128kbps_44110Hz_frag" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_1350kbps_30fps_AAC_Stereo_192kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_500kbps_25fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testLocalVideo_MP4_H264_480x360_500kbps_30fps_AAC_Stereo_128kbps_44110Hz" />
+      <Test result="pass" name="testMediaDataSourceIsClosedOnReset" />
+      <Test result="pass" name="testMediaTimeDiscontinuity" />
+      <Test result="pass" name="testNullMediaDataSourceIsRejected" />
+      <Test result="pass" name="testOnSubtitleDataListener" />
+      <Test result="pass" name="testPlayAudio" />
+      <Test result="pass" name="testPlayAudioFromDataURI" />
+      <Test result="pass" name="testPlayAudioLooping" />
+      <Test result="pass" name="testPlayAudioTwice" />
+      <Test result="pass" name="testPlayMidi" />
+      <Test result="pass" name="testPlayNullSourcePath" />
+      <Test result="pass" name="testPlayVideo" />
+      <Test result="pass" name="testPlaybackFailsIfMediaDataSourceReturnsAnError" />
+      <Test result="pass" name="testPlaybackFailsIfMediaDataSourceThrows" />
+      <Test result="pass" name="testPlaybackFromAMediaDataSource" />
+      <Test result="pass" name="testPlaybackRate" />
+      <Test result="pass" name="testPositionAtEnd" />
+      <Test result="pass" name="testRecordAndPlay" />
+      <Test result="pass" name="testRecordedVideoPlayback0" />
+      <Test result="pass" name="testRecordedVideoPlayback180" />
+      <Test result="pass" name="testRecordedVideoPlayback270" />
+      <Test result="pass" name="testRecordedVideoPlayback90" />
+      <Test result="pass" name="testResumeAtEnd" />
+      <Test result="pass" name="testSeekModes" />
+      <Test result="pass" name="testSeekWithTimedText" />
+      <Test result="pass" name="testSetNextMediaPlayer" />
+      <Test result="pass" name="testSetNextMediaPlayerWithRelease" />
+      <Test result="pass" name="testSetNextMediaPlayerWithReset" />
+      <Test result="pass" name="testSetPlaybackParamsPositiveSpeed" />
+      <Test result="pass" name="testSetPlaybackParamsZeroSpeed" />
+      <Test result="pass" name="testVideoSurfaceResetting" />
+      <Test result="pass" name="testVorbisCrash" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaRandomTest">
+      <Test result="pass" name="testPlayerRandomActionH264" />
+      <Test result="pass" name="testPlayerRandomActionHEVC" />
+      <Test result="pass" name="testRecorderRandomAction" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaRecorderTest">
+      <Test result="pass" name="testGetActiveMicrophones" />
+      <Test result="pass" name="testGetAudioSourceMax" />
+      <Test result="pass" name="testGetSurfaceApi" />
+      <Test result="pass" name="testOnErrorListener" />
+      <Test result="pass" name="testOnInfoListener" />
+      <Test result="pass" name="testPersistentSurfaceApi" />
+      <Test result="pass" name="testPersistentSurfaceRecording" />
+      <Test result="pass" name="testPersistentSurfaceRecordingTimeLapse" />
+      <Test result="pass" name="testProfileAvcBaselineLevel1" />
+      <Test result="pass" name="testRecordAudioFromAudioSourceUnprocessed" />
+      <Test result="pass" name="testRecordExceedFileSizeLimit" />
+      <Test result="pass" name="testRecorderAudio" />
+      <Test result="pass" name="testRecorderCamera" />
+      <Test result="pass" name="testRecorderMPEG2TS" />
+      <Test result="pass" name="testRecorderPauseResume" />
+      <Test result="pass" name="testRecorderPauseResumeOnTimeLapse" />
+      <Test result="pass" name="testRecorderTimelapsedVideo" />
+      <Test result="pass" name="testRecorderVideo" />
+      <Test result="pass" name="testRecordingAudioInRawFormats" />
+      <Test result="pass" name="testSetCamera" />
+      <Test result="pass" name="testSetCaptureRate" />
+      <Test result="pass" name="testSetMaxDuration" />
+      <Test result="pass" name="testSetMaxFileSize" />
+      <Test result="pass" name="testSetOutputFile" />
+      <Test result="pass" name="testSurfaceRecording" />
+      <Test result="pass" name="testSurfaceRecordingTimeLapse" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaRouterTest">
+      <Test result="pass" name="testAddCallbackWithFlags" />
+      <Test result="pass" name="testCallback" />
+      <Test result="pass" name="testDefaultRouteInfo" />
+      <Test result="pass" name="testGetRouteAt" />
+      <Test result="pass" name="testGetRouteCount" />
+      <Test result="pass" name="testRouteCategory" />
+      <Test result="pass" name="testRouteGroup" />
+      <Test result="pass" name="testSelectRoute" />
+      <Test result="pass" name="testUserRouteInfo" />
+      <Test result="pass" name="testVolumeCallback" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaScannerConnectionTest">
+      <Test result="pass" name="testMediaScannerConnection" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaScannerNotificationTest">
+      <Test result="pass" name="testMediaScannerNotification" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaScannerTest">
+      <Test result="pass" name="testCanonicalize" />
+      <Test result="pass" name="testEncodingDetection" />
+      <Test result="pass" name="testLocalizeRingtoneTitles" />
+      <Test result="pass" name="testMediaScanner" />
+      <Test result="pass" name="testWildcardPaths" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaSessionManagerTest">
+      <Test result="pass" name="testAddOnActiveSessionsListener" />
+      <Test result="pass" name="testGetActiveSessions" />
+      <Test result="pass" name="testRemoteUserInfo" />
+      <Test result="pass" name="testSetOnMediaKeyListener" />
+      <Test result="pass" name="testSetOnVolumeKeyLongPressListener" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaSessionTest">
+      <Test result="pass" name="testCallbackOnMediaButtonEvent" />
+      <Test result="pass" name="testConfigureSession" />
+      <Test result="pass" name="testCreateSession" />
+      <Test result="pass" name="testPlaybackToLocalAndRemote" />
+      <Test result="pass" name="testQueueItem" />
+      <Test result="pass" name="testReleaseNoCrashWithMultipleSessions" />
+      <Test result="pass" name="testSessionToken" />
+      <Test result="pass" name="testSetCallbackWithNull" />
+    </TestCase>
+    <TestCase name="android.media.cts.MediaSyncTest">
+      <Test result="pass" name="testAudioBufferReturn" />
+      <Test result="pass" name="testFlush" />
+      <Test result="pass" name="testPlayAudio" />
+      <Test result="pass" name="testPlayAudioAndVideo" />
+      <Test result="pass" name="testPlayVideo" />
+      <Test result="pass" name="testPlaybackRateDouble" />
+      <Test result="pass" name="testPlaybackRateHalf" />
+      <Test result="pass" name="testPlaybackRateQuarter" />
+      <Test result="pass" name="testSetPlaybackParamsFail" />
+      <Test result="pass" name="testSetPlaybackParamsSucceed" />
+    </TestCase>
+    <TestCase name="android.media.cts.MidiSoloTest">
+      <Test result="pass" name="testMidiManager" />
+      <Test result="pass" name="testMidiReceiver" />
+      <Test result="pass" name="testMidiReceiverException" />
+    </TestCase>
+    <TestCase name="android.media.cts.NativeDecoderTest">
+      <Test result="pass" name="testCryptoInfo" />
+      <Test result="pass" name="testDataSource" />
+      <Test result="pass" name="testDataSourceWithCallback" />
+      <Test result="pass" name="testDecoder" />
+      <Test result="pass" name="testExtractor" />
+      <Test result="pass" name="testExtractorCachedDurationNative" />
+      <Test result="pass" name="testExtractorFileDurationNative" />
+      <Test result="pass" name="testFormat" />
+      <Test result="pass" name="testMuxerAvc" />
+      <Test result="pass" name="testMuxerH263" />
+      <Test result="pass" name="testMuxerHevc" />
+      <Test result="pass" name="testMuxerMpeg4" />
+      <Test result="pass" name="testMuxerVp8" />
+      <Test result="pass" name="testMuxerVp9" />
+      <Test result="pass" name="testMuxerVp9Hdr" />
+      <Test result="pass" name="testMuxerVp9NoCsd" />
+      <Test result="pass" name="testPssh" />
+      <Test result="pass" name="testVideoPlayback" />
+    </TestCase>
+    <TestCase name="android.media.cts.NativeImageReaderTest">
+      <Test result="pass" name="testCreateSurface" />
+      <Test result="pass" name="testSucceedsWithSupportedUsageFormat" />
+      <Test result="pass" name="testTakePictures" />
+    </TestCase>
+    <TestCase name="android.media.cts.NativeMediaDrmClearkeyTest">
+      <Test result="pass" name="testClearKeyPlaybackCenc" />
+      <Test result="pass" name="testClearKeyPlaybackCenc2" />
+      <Test result="pass" name="testFindSessionId" />
+      <Test result="pass" name="testGetPropertyString" />
+      <Test result="pass" name="testIsCryptoSchemeNotSupported" />
+      <Test result="pass" name="testIsCryptoSchemeSupported" />
+      <Test result="pass" name="testPssh" />
+      <Test result="pass" name="testQueryKeyStatus" />
+      <Test result="pass" name="testUnknownPropertyString" />
+    </TestCase>
+    <TestCase name="android.media.cts.ParamsTest">
+      <Test result="pass" name="testBufferingParamsBuilderAndGet" />
+      <Test result="pass" name="testBufferingParamsDescribeContents" />
+      <Test result="pass" name="testBufferingParamsWriteToParcel" />
+      <Test result="pass" name="testPlaybackParamsAudioFallbackMode" />
+      <Test result="pass" name="testPlaybackParamsAudioStretchMode" />
+      <Test result="pass" name="testPlaybackParamsConstants" />
+      <Test result="pass" name="testPlaybackParamsDefaults" />
+      <Test result="pass" name="testPlaybackParamsDescribeContents" />
+      <Test result="pass" name="testPlaybackParamsMultipleSettings" />
+      <Test result="pass" name="testPlaybackParamsPitch" />
+      <Test result="pass" name="testPlaybackParamsSpeed" />
+      <Test result="pass" name="testPlaybackParamsWriteToParcel" />
+      <Test result="pass" name="testSyncParamsAudioAdjustMode" />
+      <Test result="pass" name="testSyncParamsConstants" />
+      <Test result="pass" name="testSyncParamsDefaults" />
+      <Test result="pass" name="testSyncParamsFrameRate" />
+      <Test result="pass" name="testSyncParamsMultipleSettings" />
+      <Test result="pass" name="testSyncParamsSyncSource" />
+      <Test result="pass" name="testSyncParamsTolerance" />
+    </TestCase>
+    <TestCase name="android.media.cts.PlaybackStateTest">
+      <Test result="pass" name="testBuilder" />
+      <Test result="pass" name="testBuilder_addCustomAction" />
+      <Test result="pass" name="testBuilder_addCustomActionWithCustomActionObject" />
+      <Test result="pass" name="testBuilder_setStateWithUpdateTime" />
+      <Test result="pass" name="testBuilder_setterMethods" />
+      <Test result="pass" name="testCustomAction" />
+      <Test result="pass" name="testDescribeContents" />
+      <Test result="pass" name="testWriteToParcel" />
+    </TestCase>
+    <TestCase name="android.media.cts.PresentationSyncTest">
+      <Test result="pass" name="testThroughput" />
+    </TestCase>
+    <TestCase name="android.media.cts.PresetReverbTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0Presets" />
+      <Test result="pass" name="test1_1Properties" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0ControlStatusListener" />
+      <Test result="pass" name="test3_1EnableStatusListener" />
+      <Test result="pass" name="test3_2ParameterChangedListener" />
+    </TestCase>
+    <TestCase name="android.media.cts.RemoteControllerTest">
+      <Test result="pass" name="testClearArtworkConfiguration" />
+      <Test result="pass" name="testEditMetadata" />
+      <Test result="pass" name="testGetEstimatedMediaPosition" />
+      <Test result="pass" name="testOnClientUpdateListenerUnchanged" />
+      <Test result="pass" name="testSeekTo" />
+      <Test result="pass" name="testSeekTo_negativeValues" />
+      <Test result="pass" name="testSendMediaKeyEvent" />
+      <Test result="pass" name="testSetArtworkConfiguration" />
+      <Test result="pass" name="testSetSynchronizationMode_unregisteredRemoteController" />
+    </TestCase>
+    <TestCase name="android.media.cts.ResourceManagerTest">
+      <Test result="pass" name="testReclaimResourceMixVsNonsecure" />
+      <Test result="pass" name="testReclaimResourceMixVsSecure" />
+      <Test result="pass" name="testReclaimResourceNonsecureVsNonsecure" />
+      <Test result="pass" name="testReclaimResourceNonsecureVsSecure" />
+      <Test result="pass" name="testReclaimResourceSecureVsNonsecure" />
+      <Test result="pass" name="testReclaimResourceSecureVsSecure" />
+    </TestCase>
+    <TestCase name="android.media.cts.RingtoneManagerTest">
+      <Test result="pass" name="testAccessMethods" />
+      <Test result="pass" name="testConstructors" />
+      <Test result="pass" name="testSetType" />
+      <Test result="pass" name="testStopPreviousRingtone" />
+    </TestCase>
+    <TestCase name="android.media.cts.RingtoneTest">
+      <Test result="pass" name="testLoopingVolume" />
+      <Test result="pass" name="testRingtone" />
+    </TestCase>
+    <TestCase name="android.media.cts.RoutingTest">
+      <Test result="pass" name="test_MediaPlayer_RoutingChangedCallback" />
+      <Test result="pass" name="test_MediaPlayer_RoutingListener" />
+      <Test result="pass" name="test_audioRecord_RoutingListener" />
+      <Test result="pass" name="test_audioRecord_audioRouting_RoutingListener" />
+      <Test result="pass" name="test_audioRecord_getRoutedDevice" />
+      <Test result="pass" name="test_audioRecord_preferredDevice" />
+      <Test result="pass" name="test_audioTrack_RoutingListener" />
+      <Test result="pass" name="test_audioTrack_audioRouting_RoutingListener" />
+      <Test result="pass" name="test_audioTrack_getRoutedDevice" />
+      <Test result="pass" name="test_audioTrack_incallMusicRoutingPermissions" />
+      <Test result="pass" name="test_audioTrack_preferredDevice" />
+      <Test result="pass" name="test_mediaPlayer_getRoutedDevice" />
+      <Test result="pass" name="test_mediaPlayer_incallMusicRoutingPermissions" />
+      <Test result="pass" name="test_mediaPlayer_preferredDevice" />
+      <Test result="pass" name="test_mediaRecorder_RoutingListener" />
+      <Test result="pass" name="test_mediaRecorder_getRoutedDeviceId" />
+      <Test result="pass" name="test_mediaRecorder_preferredDevice" />
+    </TestCase>
+    <TestCase name="android.media.cts.SoundPoolAacTest">
+      <Test result="pass" name="testAutoPauseResume" />
+      <Test result="pass" name="testLoad" />
+      <Test result="pass" name="testLoadMore" />
+      <Test result="pass" name="testMultiSound" />
+      <Test result="pass" name="testSoundPoolOp" />
+    </TestCase>
+    <TestCase name="android.media.cts.SoundPoolMidiTest">
+      <Test result="pass" name="testAutoPauseResume" />
+      <Test result="pass" name="testLoad" />
+      <Test result="pass" name="testLoadMore" />
+      <Test result="pass" name="testMultiSound" />
+      <Test result="pass" name="testSoundPoolOp" />
+    </TestCase>
+    <TestCase name="android.media.cts.SoundPoolOggTest">
+      <Test result="pass" name="testAutoPauseResume" />
+      <Test result="pass" name="testLoad" />
+      <Test result="pass" name="testLoadMore" />
+      <Test result="pass" name="testMultiSound" />
+      <Test result="pass" name="testSoundPoolOp" />
+    </TestCase>
+    <TestCase name="android.media.cts.StreamingMediaPlayer2Test">
+      <Test result="pass" name="testBlockingReadRelease" />
+      <Test result="pass" name="testHLS" />
+      <Test result="pass" name="testHTTP_H263_AMR_Video1" />
+      <Test result="pass" name="testHTTP_H263_AMR_Video2" />
+      <Test result="pass" name="testHTTP_H264Base_AAC_Video1" />
+      <Test result="pass" name="testHTTP_H264Base_AAC_Video2" />
+      <Test result="pass" name="testHTTP_MPEG4SP_AAC_Video1" />
+      <Test result="pass" name="testHTTP_MPEG4SP_AAC_Video2" />
+      <Test result="pass" name="testHlsSampleAes_bbb_audio_only_overridable" />
+      <Test result="pass" name="testHlsSampleAes_bbb_unmuxed_1500k" />
+      <Test result="pass" name="testHlsWithHeadersCookies" />
+      <Test result="pass" name="testPlayHlsStream" />
+      <Test result="pass" name="testPlayHlsStreamWithQueryString" />
+      <Test result="pass" name="testPlayHlsStreamWithRedirect" />
+      <Test result="pass" name="testPlayHlsStreamWithTimedId3" />
+      <Test result="pass" name="testPlayMp3Stream1" />
+      <Test result="pass" name="testPlayMp3Stream1Ssl" />
+      <Test result="pass" name="testPlayMp3Stream2" />
+      <Test result="pass" name="testPlayMp3StreamNoLength" />
+      <Test result="pass" name="testPlayMp3StreamRedirect" />
+      <Test result="pass" name="testPlayOggStream" />
+      <Test result="pass" name="testPlayOggStreamNoLength" />
+      <Test result="pass" name="testPlayOggStreamRedirect" />
+    </TestCase>
+    <TestCase name="android.media.cts.StreamingMediaPlayerTest">
+      <Test result="pass" name="testBlockingReadRelease" />
+      <Test result="pass" name="testHLS" />
+      <Test result="pass" name="testHTTP_H263_AMR_Video1" />
+      <Test result="pass" name="testHTTP_H263_AMR_Video2" />
+      <Test result="pass" name="testHTTP_H264Base_AAC_Video1" />
+      <Test result="pass" name="testHTTP_H264Base_AAC_Video2" />
+      <Test result="pass" name="testHTTP_MPEG4SP_AAC_Video1" />
+      <Test result="pass" name="testHTTP_MPEG4SP_AAC_Video2" />
+      <Test result="pass" name="testHlsSampleAes_bbb_audio_only_overridable" />
+      <Test result="pass" name="testHlsSampleAes_bbb_unmuxed_1500k" />
+      <Test result="pass" name="testHlsWithHeadersCookies" />
+      <Test result="pass" name="testPlayHlsStream" />
+      <Test result="pass" name="testPlayHlsStreamWithQueryString" />
+      <Test result="pass" name="testPlayHlsStreamWithRedirect" />
+      <Test result="pass" name="testPlayHlsStreamWithTimedId3" />
+      <Test result="pass" name="testPlayMp3Stream1" />
+      <Test result="pass" name="testPlayMp3Stream1Ssl" />
+      <Test result="pass" name="testPlayMp3Stream2" />
+      <Test result="pass" name="testPlayMp3StreamNoLength" />
+      <Test result="pass" name="testPlayMp3StreamRedirect" />
+      <Test result="pass" name="testPlayOggStream" />
+      <Test result="pass" name="testPlayOggStreamNoLength" />
+      <Test result="pass" name="testPlayOggStreamRedirect" />
+    </TestCase>
+    <TestCase name="android.media.cts.ToneGeneratorTest">
+      <Test result="pass" name="testSyncGenerate" />
+    </TestCase>
+    <TestCase name="android.media.cts.VideoDecoderPerfTest">
+      <Test result="pass" name="testAvcCount0320x0240" />
+      <Test result="pass" name="testAvcCount0720x0480" />
+      <Test result="pass" name="testAvcCount1280x0720" />
+      <Test result="pass" name="testAvcCount1920x1080" />
+      <Test result="pass" name="testAvcGoog0Perf0320x0240">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>580.1607045151507</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcGoog0Perf0720x0480">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>244.18184010611358</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcGoog0Perf1280x0720">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>70.96290491279275</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcGoog0Perf1920x1080">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>31.299613935451564</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcGoog1Perf0320x0240" />
+      <Test result="pass" name="testAvcGoog1Perf0720x0480" />
+      <Test result="pass" name="testAvcGoog1Perf1280x0720" />
+      <Test result="pass" name="testAvcGoog1Perf1920x1080" />
+      <Test result="pass" name="testAvcOther0Perf0320x0240">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>1079.6843075197307</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcOther0Perf0720x0480">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>873.7785366761784</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcOther0Perf1280x0720">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>664.6463289568261</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcOther0Perf1920x1080">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>382.10811352923474</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testAvcOther1Perf0320x0240" />
+      <Test result="pass" name="testAvcOther1Perf0720x0480" />
+      <Test result="pass" name="testAvcOther1Perf1280x0720" />
+      <Test result="pass" name="testAvcOther1Perf1920x1080" />
+      <Test result="pass" name="testAvcOther2Perf0320x0240" />
+      <Test result="pass" name="testAvcOther2Perf0720x0480" />
+      <Test result="pass" name="testAvcOther2Perf1280x0720" />
+      <Test result="pass" name="testAvcOther2Perf1920x1080" />
+      <Test result="pass" name="testAvcOther3Perf0320x0240" />
+      <Test result="pass" name="testAvcOther3Perf0720x0480" />
+      <Test result="pass" name="testAvcOther3Perf1280x0720" />
+      <Test result="pass" name="testAvcOther3Perf1920x1080" />
+      <Test result="pass" name="testH263Count0176x0144" />
+      <Test result="pass" name="testH263Count0352x0288" />
+      <Test result="pass" name="testH263Goog0Perf0176x0144">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>1511.3027429644353</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testH263Goog0Perf0352x0288" />
+      <Test result="pass" name="testH263Goog1Perf0176x0144" />
+      <Test result="pass" name="testH263Goog1Perf0352x0288" />
+      <Test result="pass" name="testH263Other0Perf0176x0144" />
+      <Test result="pass" name="testH263Other0Perf0352x0288" />
+      <Test result="pass" name="testH263Other1Perf0176x0144" />
+      <Test result="pass" name="testH263Other1Perf0352x0288" />
+      <Test result="pass" name="testHevcCount0352x0288" />
+      <Test result="pass" name="testHevcCount0640x0360" />
+      <Test result="pass" name="testHevcCount0720x0480" />
+      <Test result="pass" name="testHevcCount1280x0720" />
+      <Test result="pass" name="testHevcCount1920x1080" />
+      <Test result="pass" name="testHevcCount3840x2160" />
+      <Test result="pass" name="testHevcGoog0Perf0352x0288">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>768.8737453173384</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testHevcGoog0Perf0640x0360">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>353.7226028743237</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testHevcGoog0Perf0720x0480">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>319.3122874170939</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testHevcGoog0Perf1280x0720">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>120.89218432028369</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testHevcGoog0Perf1920x1080" />
+      <Test result="pass" name="testHevcGoog0Perf3840x2160" />
+      <Test result="pass" name="testHevcGoog1Perf0352x0288" />
+      <Test result="pass" name="testHevcGoog1Perf0640x0360" />
+      <Test result="pass" name="testHevcGoog1Perf0720x0480" />
+      <Test result="pass" name="testHevcGoog1Perf1280x0720" />
+      <Test result="pass" name="testHevcGoog1Perf1920x1080" />
+      <Test result="pass" name="testHevcGoog1Perf3840x2160" />
+      <Test result="pass" name="testHevcOther0Perf0352x0288" />
+      <Test result="pass" name="testHevcOther0Perf0640x0360" />
+      <Test result="pass" name="testHevcOther0Perf0720x0480" />
+      <Test result="pass" name="testHevcOther0Perf1280x0720" />
+      <Test result="pass" name="testHevcOther0Perf1920x1080" />
+      <Test result="pass" name="testHevcOther0Perf3840x2160" />
+      <Test result="pass" name="testHevcOther1Perf0352x0288" />
+      <Test result="pass" name="testHevcOther1Perf0640x0360" />
+      <Test result="pass" name="testHevcOther1Perf0720x0480" />
+      <Test result="pass" name="testHevcOther1Perf1280x0720" />
+      <Test result="pass" name="testHevcOther1Perf1920x1080" />
+      <Test result="pass" name="testHevcOther1Perf3840x2160" />
+      <Test result="pass" name="testHevcOther2Perf0352x0288" />
+      <Test result="pass" name="testHevcOther2Perf0640x0360" />
+      <Test result="pass" name="testHevcOther2Perf0720x0480" />
+      <Test result="pass" name="testHevcOther2Perf1280x0720" />
+      <Test result="pass" name="testHevcOther2Perf1920x1080" />
+      <Test result="pass" name="testHevcOther2Perf3840x2160" />
+      <Test result="pass" name="testHevcOther3Perf0352x0288" />
+      <Test result="pass" name="testHevcOther3Perf0640x0360" />
+      <Test result="pass" name="testHevcOther3Perf0720x0480" />
+      <Test result="pass" name="testHevcOther3Perf1280x0720" />
+      <Test result="pass" name="testHevcOther3Perf1920x1080" />
+      <Test result="pass" name="testHevcOther3Perf3840x2160" />
+      <Test result="pass" name="testMpeg4Count0176x0144" />
+      <Test result="pass" name="testMpeg4Count0480x0360" />
+      <Test result="pass" name="testMpeg4Count1280x0720" />
+      <Test result="pass" name="testMpeg4Goog0Perf0176x0144">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>1851.890822618321</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testMpeg4Goog0Perf0480x0360" />
+      <Test result="pass" name="testMpeg4Goog0Perf1280x0720" />
+      <Test result="pass" name="testMpeg4Goog1Perf0176x0144" />
+      <Test result="pass" name="testMpeg4Goog1Perf0480x0360" />
+      <Test result="pass" name="testMpeg4Goog1Perf1280x0720" />
+      <Test result="pass" name="testMpeg4Other0Perf0176x0144" />
+      <Test result="pass" name="testMpeg4Other0Perf0480x0360" />
+      <Test result="pass" name="testMpeg4Other0Perf1280x0720" />
+      <Test result="pass" name="testMpeg4Other1Perf0176x0144" />
+      <Test result="pass" name="testMpeg4Other1Perf0480x0360" />
+      <Test result="pass" name="testMpeg4Other1Perf1280x0720" />
+      <Test result="pass" name="testMpeg4Other2Perf0176x0144" />
+      <Test result="pass" name="testMpeg4Other2Perf0480x0360" />
+      <Test result="pass" name="testMpeg4Other2Perf1280x0720" />
+      <Test result="pass" name="testMpeg4Other3Perf0176x0144" />
+      <Test result="pass" name="testMpeg4Other3Perf0480x0360" />
+      <Test result="pass" name="testMpeg4Other3Perf1280x0720" />
+      <Test result="pass" name="testVp8Count0320x0180" />
+      <Test result="pass" name="testVp8Count0640x0360" />
+      <Test result="pass" name="testVp8Count1280x0720" />
+      <Test result="pass" name="testVp8Count1920x1080" />
+      <Test result="pass" name="testVp8Goog0Perf0320x0180">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>1087.946513466716</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Goog0Perf0640x0360">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>410.18461316281423</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Goog0Perf1920x1080">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>36.26433070651982</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Goog1Perf0320x0180" />
+      <Test result="pass" name="testVp8Goog1Perf0640x0360" />
+      <Test result="pass" name="testVp8Goog1Perf1280x0720" />
+      <Test result="pass" name="testVp8Goog1Perf1920x1080" />
+      <Test result="pass" name="testVp8Other0Perf0320x0180">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>1066.7819511702078</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Other0Perf0640x0360">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>930.261434505189</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Other0Perf1280x0720">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>720.4170603577236</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Other0Perf1920x1080">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>377.55742437554915</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp8Other1Perf0320x0180" />
+      <Test result="pass" name="testVp8Other1Perf0640x0360" />
+      <Test result="pass" name="testVp8Other1Perf1280x0720" />
+      <Test result="pass" name="testVp8Other1Perf1920x1080" />
+      <Test result="pass" name="testVp9Count0320x0180" />
+      <Test result="pass" name="testVp9Count0640x0360" />
+      <Test result="pass" name="testVp9Count1280x0720" />
+      <Test result="pass" name="testVp9Count1920x1080" />
+      <Test result="pass" name="testVp9Count3840x2160" />
+      <Test result="pass" name="testVp9Goog0Perf0320x0180">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>988.6158776121617</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp9Goog0Perf0640x0360">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>409.8162085338674</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp9Goog0Perf1280x0720">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>147.75847359424512</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp9Goog0Perf1920x1080">
+        <Summary>
+          <Metric source="android.media.cts.VideoDecoderPerfTest#doDecode:283" message="fps" score_type="higher_better" score_unit="fps">
+            <Value>83.95677136649255</Value>
+          </Metric>
+        </Summary>
+      </Test>
+      <Test result="pass" name="testVp9Goog0Perf3840x2160" />
+      <Test result="pass" name="testVp9Goog1Perf0320x0180" />
+      <Test result="pass" name="testVp9Goog1Perf0640x0360" />
+      <Test result="pass" name="testVp9Goog1Perf1280x0720" />
+      <Test result="pass" name="testVp9Goog1Perf1920x1080" />
+      <Test result="pass" name="testVp9Goog1Perf3840x2160" />
+      <Test result="pass" name="testVp9Other0Perf0320x0180" />
+      <Test result="pass" name="testVp9Other0Perf0640x0360" />
+      <Test result="pass" name="testVp9Other0Perf1280x0720" />
+      <Test result="pass" name="testVp9Other0Perf1920x1080" />
+      <Test result="pass" name="testVp9Other0Perf3840x2160" />
+      <Test result="pass" name="testVp9Other1Perf0320x0180" />
+      <Test result="pass" name="testVp9Other1Perf0640x0360" />
+      <Test result="pass" name="testVp9Other1Perf1280x0720" />
+      <Test result="pass" name="testVp9Other1Perf1920x1080" />
+      <Test result="pass" name="testVp9Other1Perf3840x2160" />
+      <Test result="pass" name="testVp9Other2Perf0320x0180" />
+      <Test result="pass" name="testVp9Other2Perf0640x0360" />
+      <Test result="pass" name="testVp9Other2Perf1280x0720" />
+      <Test result="pass" name="testVp9Other2Perf1920x1080" />
+      <Test result="pass" name="testVp9Other2Perf3840x2160" />
+      <Test result="pass" name="testVp9Other3Perf0320x0180" />
+      <Test result="pass" name="testVp9Other3Perf0640x0360" />
+      <Test result="pass" name="testVp9Other3Perf1280x0720" />
+      <Test result="pass" name="testVp9Other3Perf1920x1080" />
+      <Test result="pass" name="testVp9Other3Perf3840x2160" />
+    </TestCase>
+    <TestCase name="android.media.cts.VideoEncoderTest">
+      <Test result="pass" name="testGoogH263Flex1080p" />
+      <Test result="pass" name="testGoogH263Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testGoogH263Flex480p" />
+      <Test result="pass" name="testGoogH263Flex720p" />
+      <Test result="pass" name="testGoogH263FlexArbitraryH" />
+      <Test result="pass" name="testGoogH263FlexArbitraryW" />
+      <Test result="pass" name="testGoogH263FlexMaxMax" />
+      <Test result="pass" name="testGoogH263FlexMaxMin" />
+      <Test result="pass" name="testGoogH263FlexMinMax" />
+      <Test result="pass" name="testGoogH263FlexMinMin" />
+      <Test result="pass" name="testGoogH263FlexNearMaxMax" />
+      <Test result="pass" name="testGoogH263FlexNearMaxMin" />
+      <Test result="pass" name="testGoogH263FlexNearMinMax" />
+      <Test result="pass" name="testGoogH263FlexNearMinMin" />
+      <Test result="pass" name="testGoogH263FlexQCIF" />
+      <Test result="pass" name="testGoogH263Surf1080p" />
+      <Test result="pass" name="testGoogH263Surf480p" />
+      <Test result="pass" name="testGoogH263Surf720p" />
+      <Test result="pass" name="testGoogH263SurfArbitraryH" />
+      <Test result="pass" name="testGoogH263SurfArbitraryW" />
+      <Test result="pass" name="testGoogH263SurfMaxMax" />
+      <Test result="pass" name="testGoogH263SurfMaxMin" />
+      <Test result="pass" name="testGoogH263SurfMinMax" />
+      <Test result="pass" name="testGoogH263SurfMinMin" />
+      <Test result="pass" name="testGoogH263SurfNearMaxMax" />
+      <Test result="pass" name="testGoogH263SurfNearMaxMin" />
+      <Test result="pass" name="testGoogH263SurfNearMinMax" />
+      <Test result="pass" name="testGoogH263SurfNearMinMin" />
+      <Test result="pass" name="testGoogH263SurfQCIF" />
+      <Test result="pass" name="testGoogH264Flex1080p" />
+      <Test result="pass" name="testGoogH264Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testGoogH264Flex480p" />
+      <Test result="pass" name="testGoogH264Flex720p" />
+      <Test result="pass" name="testGoogH264FlexArbitraryH" />
+      <Test result="pass" name="testGoogH264FlexArbitraryW" />
+      <Test result="pass" name="testGoogH264FlexMaxMax" />
+      <Test result="pass" name="testGoogH264FlexMaxMin" />
+      <Test result="pass" name="testGoogH264FlexMinMax" />
+      <Test result="pass" name="testGoogH264FlexMinMin" />
+      <Test result="pass" name="testGoogH264FlexNearMaxMax" />
+      <Test result="pass" name="testGoogH264FlexNearMaxMin" />
+      <Test result="pass" name="testGoogH264FlexNearMinMax" />
+      <Test result="pass" name="testGoogH264FlexNearMinMin" />
+      <Test result="pass" name="testGoogH264FlexQCIF" />
+      <Test result="pass" name="testGoogH264Surf1080p" />
+      <Test result="pass" name="testGoogH264Surf480p" />
+      <Test result="pass" name="testGoogH264Surf720p" />
+      <Test result="pass" name="testGoogH264SurfArbitraryH" />
+      <Test result="pass" name="testGoogH264SurfArbitraryW" />
+      <Test result="pass" name="testGoogH264SurfMaxMax" />
+      <Test result="pass" name="testGoogH264SurfMaxMin" />
+      <Test result="pass" name="testGoogH264SurfMinMax" />
+      <Test result="pass" name="testGoogH264SurfMinMin" />
+      <Test result="pass" name="testGoogH264SurfNearMaxMax" />
+      <Test result="pass" name="testGoogH264SurfNearMaxMin" />
+      <Test result="pass" name="testGoogH264SurfNearMinMax" />
+      <Test result="pass" name="testGoogH264SurfNearMinMin" />
+      <Test result="pass" name="testGoogH264SurfQCIF" />
+      <Test result="pass" name="testGoogH265Flex1080p" />
+      <Test result="pass" name="testGoogH265Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testGoogH265Flex480p" />
+      <Test result="pass" name="testGoogH265Flex720p" />
+      <Test result="pass" name="testGoogH265FlexArbitraryH" />
+      <Test result="pass" name="testGoogH265FlexArbitraryW" />
+      <Test result="pass" name="testGoogH265FlexMaxMax" />
+      <Test result="pass" name="testGoogH265FlexMaxMin" />
+      <Test result="pass" name="testGoogH265FlexMinMax" />
+      <Test result="pass" name="testGoogH265FlexMinMin" />
+      <Test result="pass" name="testGoogH265FlexNearMaxMax" />
+      <Test result="pass" name="testGoogH265FlexNearMaxMin" />
+      <Test result="pass" name="testGoogH265FlexNearMinMax" />
+      <Test result="pass" name="testGoogH265FlexNearMinMin" />
+      <Test result="pass" name="testGoogH265FlexQCIF" />
+      <Test result="pass" name="testGoogH265Surf1080p" />
+      <Test result="pass" name="testGoogH265Surf480p" />
+      <Test result="pass" name="testGoogH265Surf720p" />
+      <Test result="pass" name="testGoogH265SurfArbitraryH" />
+      <Test result="pass" name="testGoogH265SurfArbitraryW" />
+      <Test result="pass" name="testGoogH265SurfMaxMax" />
+      <Test result="pass" name="testGoogH265SurfMaxMin" />
+      <Test result="pass" name="testGoogH265SurfMinMax" />
+      <Test result="pass" name="testGoogH265SurfMinMin" />
+      <Test result="pass" name="testGoogH265SurfNearMaxMax" />
+      <Test result="pass" name="testGoogH265SurfNearMaxMin" />
+      <Test result="pass" name="testGoogH265SurfNearMinMax" />
+      <Test result="pass" name="testGoogH265SurfNearMinMin" />
+      <Test result="pass" name="testGoogH265SurfQCIF" />
+      <Test result="pass" name="testGoogMpeg4Flex1080p" />
+      <Test result="pass" name="testGoogMpeg4Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testGoogMpeg4Flex480p" />
+      <Test result="pass" name="testGoogMpeg4Flex720p" />
+      <Test result="pass" name="testGoogMpeg4FlexArbitraryH" />
+      <Test result="pass" name="testGoogMpeg4FlexArbitraryW" />
+      <Test result="pass" name="testGoogMpeg4FlexMaxMax" />
+      <Test result="pass" name="testGoogMpeg4FlexMaxMin" />
+      <Test result="pass" name="testGoogMpeg4FlexMinMax" />
+      <Test result="pass" name="testGoogMpeg4FlexMinMin" />
+      <Test result="pass" name="testGoogMpeg4FlexNearMaxMax" />
+      <Test result="pass" name="testGoogMpeg4FlexNearMaxMin" />
+      <Test result="pass" name="testGoogMpeg4FlexNearMinMax" />
+      <Test result="pass" name="testGoogMpeg4FlexNearMinMin" />
+      <Test result="pass" name="testGoogMpeg4FlexQCIF" />
+      <Test result="pass" name="testGoogMpeg4Surf1080p" />
+      <Test result="pass" name="testGoogMpeg4Surf480p" />
+      <Test result="pass" name="testGoogMpeg4Surf720p" />
+      <Test result="pass" name="testGoogMpeg4SurfArbitraryH" />
+      <Test result="pass" name="testGoogMpeg4SurfArbitraryW" />
+      <Test result="pass" name="testGoogMpeg4SurfMaxMax" />
+      <Test result="pass" name="testGoogMpeg4SurfMaxMin" />
+      <Test result="pass" name="testGoogMpeg4SurfMinMax" />
+      <Test result="pass" name="testGoogMpeg4SurfMinMin" />
+      <Test result="pass" name="testGoogMpeg4SurfNearMaxMax" />
+      <Test result="pass" name="testGoogMpeg4SurfNearMaxMin" />
+      <Test result="pass" name="testGoogMpeg4SurfNearMinMax" />
+      <Test result="pass" name="testGoogMpeg4SurfNearMinMin" />
+      <Test result="pass" name="testGoogMpeg4SurfQCIF" />
+      <Test result="pass" name="testGoogVP8Flex1080p" />
+      <Test result="pass" name="testGoogVP8Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testGoogVP8Flex480p" />
+      <Test result="pass" name="testGoogVP8Flex720p" />
+      <Test result="pass" name="testGoogVP8FlexArbitraryH" />
+      <Test result="pass" name="testGoogVP8FlexArbitraryW" />
+      <Test result="pass" name="testGoogVP8FlexMaxMax" />
+      <Test result="pass" name="testGoogVP8FlexMaxMin" />
+      <Test result="pass" name="testGoogVP8FlexMinMax" />
+      <Test result="pass" name="testGoogVP8FlexMinMin" />
+      <Test result="pass" name="testGoogVP8FlexNearMaxMax" />
+      <Test result="pass" name="testGoogVP8FlexNearMaxMin" />
+      <Test result="pass" name="testGoogVP8FlexNearMinMax" />
+      <Test result="pass" name="testGoogVP8FlexNearMinMin" />
+      <Test result="pass" name="testGoogVP8FlexQCIF" />
+      <Test result="pass" name="testGoogVP8Surf1080p" />
+      <Test result="pass" name="testGoogVP8Surf480p" />
+      <Test result="pass" name="testGoogVP8Surf720p" />
+      <Test result="pass" name="testGoogVP8SurfArbitraryH" />
+      <Test result="pass" name="testGoogVP8SurfArbitraryW" />
+      <Test result="pass" name="testGoogVP8SurfMaxMax" />
+      <Test result="pass" name="testGoogVP8SurfMaxMin" />
+      <Test result="pass" name="testGoogVP8SurfMinMax" />
+      <Test result="pass" name="testGoogVP8SurfMinMin" />
+      <Test result="pass" name="testGoogVP8SurfNearMaxMax" />
+      <Test result="pass" name="testGoogVP8SurfNearMaxMin" />
+      <Test result="pass" name="testGoogVP8SurfNearMinMax" />
+      <Test result="pass" name="testGoogVP8SurfNearMinMin" />
+      <Test result="pass" name="testGoogVP8SurfQCIF" />
+      <Test result="pass" name="testGoogVP9Flex1080p" />
+      <Test result="pass" name="testGoogVP9Flex480p" />
+      <Test result="pass" name="testGoogVP9Flex720p" />
+      <Test result="pass" name="testGoogVP9FlexArbitraryH" />
+      <Test result="pass" name="testGoogVP9FlexArbitraryW" />
+      <Test result="pass" name="testGoogVP9FlexMaxMax" />
+      <Test result="pass" name="testGoogVP9FlexMaxMin" />
+      <Test result="pass" name="testGoogVP9FlexMinMax" />
+      <Test result="pass" name="testGoogVP9FlexMinMin" />
+      <Test result="pass" name="testGoogVP9FlexNearMaxMax" />
+      <Test result="pass" name="testGoogVP9FlexNearMaxMin" />
+      <Test result="pass" name="testGoogVP9FlexNearMinMax" />
+      <Test result="pass" name="testGoogVP9FlexNearMinMin" />
+      <Test result="pass" name="testGoogVP9FlexQCIF" />
+      <Test result="pass" name="testGoogVP9Surf1080p" />
+      <Test result="pass" name="testGoogVP9Surf480p" />
+      <Test result="pass" name="testGoogVP9Surf720p" />
+      <Test result="pass" name="testGoogVP9SurfArbitraryH" />
+      <Test result="pass" name="testGoogVP9SurfArbitraryW" />
+      <Test result="pass" name="testGoogVP9SurfMaxMax" />
+      <Test result="pass" name="testGoogVP9SurfMaxMin" />
+      <Test result="pass" name="testGoogVP9SurfMinMax" />
+      <Test result="pass" name="testGoogVP9SurfMinMin" />
+      <Test result="pass" name="testGoogVP9SurfNearMaxMax" />
+      <Test result="pass" name="testGoogVP9SurfNearMaxMin" />
+      <Test result="pass" name="testGoogVP9SurfNearMinMax" />
+      <Test result="pass" name="testGoogVP9SurfNearMinMin" />
+      <Test result="pass" name="testGoogVP9SurfQCIF" />
+      <Test result="pass" name="testH264Flex1080p30fps10Mbps" />
+      <Test result="pass" name="testH264Flex480p30fps2Mbps" />
+      <Test result="pass" name="testH264Flex720p30fps4Mbps" />
+      <Test result="pass" name="testH264FlexQVGA20fps384kbps" />
+      <Test result="pass" name="testH264HighQualitySDSupport" />
+      <Test result="pass" name="testH264LowQualitySDSupport" />
+      <Test result="pass" name="testH264Surf1080p30fps10Mbps" />
+      <Test result="pass" name="testH264Surf480p30fps2Mbps" />
+      <Test result="pass" name="testH264Surf720p30fps4Mbps" />
+      <Test result="pass" name="testH264SurfQVGA20fps384kbps" />
+      <Test result="pass" name="testOtherH263Flex1080p" />
+      <Test result="pass" name="testOtherH263Flex480p" />
+      <Test result="pass" name="testOtherH263Flex720p" />
+      <Test result="pass" name="testOtherH263FlexArbitraryH" />
+      <Test result="pass" name="testOtherH263FlexArbitraryW" />
+      <Test result="pass" name="testOtherH263FlexMaxMax" />
+      <Test result="pass" name="testOtherH263FlexMaxMin" />
+      <Test result="pass" name="testOtherH263FlexMinMax" />
+      <Test result="pass" name="testOtherH263FlexMinMin" />
+      <Test result="pass" name="testOtherH263FlexNearMaxMax" />
+      <Test result="pass" name="testOtherH263FlexNearMaxMin" />
+      <Test result="pass" name="testOtherH263FlexNearMinMax" />
+      <Test result="pass" name="testOtherH263FlexNearMinMin" />
+      <Test result="pass" name="testOtherH263FlexQCIF" />
+      <Test result="pass" name="testOtherH263FlexQCIFWithIntraRefresh" />
+      <Test result="pass" name="testOtherH263Surf1080p" />
+      <Test result="pass" name="testOtherH263Surf480p" />
+      <Test result="pass" name="testOtherH263Surf720p" />
+      <Test result="pass" name="testOtherH263SurfArbitraryH" />
+      <Test result="pass" name="testOtherH263SurfArbitraryW" />
+      <Test result="pass" name="testOtherH263SurfMaxMax" />
+      <Test result="pass" name="testOtherH263SurfMaxMin" />
+      <Test result="pass" name="testOtherH263SurfMinMax" />
+      <Test result="pass" name="testOtherH263SurfMinMin" />
+      <Test result="pass" name="testOtherH263SurfNearMaxMax" />
+      <Test result="pass" name="testOtherH263SurfNearMaxMin" />
+      <Test result="pass" name="testOtherH263SurfNearMinMax" />
+      <Test result="pass" name="testOtherH263SurfNearMinMin" />
+      <Test result="pass" name="testOtherH263SurfQCIF" />
+      <Test result="pass" name="testOtherH264Flex1080p" />
+      <Test result="pass" name="testOtherH264Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testOtherH264Flex480p" />
+      <Test result="pass" name="testOtherH264Flex720p" />
+      <Test result="pass" name="testOtherH264FlexArbitraryH" />
+      <Test result="pass" name="testOtherH264FlexArbitraryW" />
+      <Test result="pass" name="testOtherH264FlexMaxMax" />
+      <Test result="pass" name="testOtherH264FlexMaxMin" />
+      <Test result="pass" name="testOtherH264FlexMinMax" />
+      <Test result="pass" name="testOtherH264FlexMinMin" />
+      <Test result="pass" name="testOtherH264FlexNearMaxMax" />
+      <Test result="pass" name="testOtherH264FlexNearMaxMin" />
+      <Test result="pass" name="testOtherH264FlexNearMinMax" />
+      <Test result="pass" name="testOtherH264FlexNearMinMin" />
+      <Test result="pass" name="testOtherH264FlexQCIF" />
+      <Test result="pass" name="testOtherH264Surf1080p" />
+      <Test result="pass" name="testOtherH264Surf480p" />
+      <Test result="pass" name="testOtherH264Surf720p" />
+      <Test result="pass" name="testOtherH264SurfArbitraryH" />
+      <Test result="pass" name="testOtherH264SurfArbitraryW" />
+      <Test result="pass" name="testOtherH264SurfMaxMax" />
+      <Test result="pass" name="testOtherH264SurfMaxMin" />
+      <Test result="pass" name="testOtherH264SurfMinMax" />
+      <Test result="pass" name="testOtherH264SurfMinMin" />
+      <Test result="pass" name="testOtherH264SurfNearMaxMax" />
+      <Test result="pass" name="testOtherH264SurfNearMaxMin" />
+      <Test result="pass" name="testOtherH264SurfNearMinMax" />
+      <Test result="pass" name="testOtherH264SurfNearMinMin" />
+      <Test result="pass" name="testOtherH264SurfQCIF" />
+      <Test result="pass" name="testOtherH265Flex1080p" />
+      <Test result="pass" name="testOtherH265Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testOtherH265Flex480p" />
+      <Test result="pass" name="testOtherH265Flex720p" />
+      <Test result="pass" name="testOtherH265FlexArbitraryH" />
+      <Test result="pass" name="testOtherH265FlexArbitraryW" />
+      <Test result="pass" name="testOtherH265FlexMaxMax" />
+      <Test result="pass" name="testOtherH265FlexMaxMin" />
+      <Test result="pass" name="testOtherH265FlexMinMax" />
+      <Test result="pass" name="testOtherH265FlexMinMin" />
+      <Test result="pass" name="testOtherH265FlexNearMaxMax" />
+      <Test result="pass" name="testOtherH265FlexNearMaxMin" />
+      <Test result="pass" name="testOtherH265FlexNearMinMax" />
+      <Test result="pass" name="testOtherH265FlexNearMinMin" />
+      <Test result="pass" name="testOtherH265FlexQCIF" />
+      <Test result="pass" name="testOtherH265Surf1080p" />
+      <Test result="pass" name="testOtherH265Surf480p" />
+      <Test result="pass" name="testOtherH265Surf720p" />
+      <Test result="pass" name="testOtherH265SurfArbitraryH" />
+      <Test result="pass" name="testOtherH265SurfArbitraryW" />
+      <Test result="pass" name="testOtherH265SurfMaxMax" />
+      <Test result="pass" name="testOtherH265SurfMaxMin" />
+      <Test result="pass" name="testOtherH265SurfMinMax" />
+      <Test result="pass" name="testOtherH265SurfMinMin" />
+      <Test result="pass" name="testOtherH265SurfNearMaxMax" />
+      <Test result="pass" name="testOtherH265SurfNearMaxMin" />
+      <Test result="pass" name="testOtherH265SurfNearMinMax" />
+      <Test result="pass" name="testOtherH265SurfNearMinMin" />
+      <Test result="pass" name="testOtherH265SurfQCIF" />
+      <Test result="pass" name="testOtherMpeg4Flex1080p" />
+      <Test result="pass" name="testOtherMpeg4Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testOtherMpeg4Flex480p" />
+      <Test result="pass" name="testOtherMpeg4Flex720p" />
+      <Test result="pass" name="testOtherMpeg4FlexArbitraryH" />
+      <Test result="pass" name="testOtherMpeg4FlexArbitraryW" />
+      <Test result="pass" name="testOtherMpeg4FlexMaxMax" />
+      <Test result="pass" name="testOtherMpeg4FlexMaxMin" />
+      <Test result="pass" name="testOtherMpeg4FlexMinMax" />
+      <Test result="pass" name="testOtherMpeg4FlexMinMin" />
+      <Test result="pass" name="testOtherMpeg4FlexNearMaxMax" />
+      <Test result="pass" name="testOtherMpeg4FlexNearMaxMin" />
+      <Test result="pass" name="testOtherMpeg4FlexNearMinMax" />
+      <Test result="pass" name="testOtherMpeg4FlexNearMinMin" />
+      <Test result="pass" name="testOtherMpeg4FlexQCIF" />
+      <Test result="pass" name="testOtherMpeg4Surf1080p" />
+      <Test result="pass" name="testOtherMpeg4Surf480p" />
+      <Test result="pass" name="testOtherMpeg4Surf720p" />
+      <Test result="pass" name="testOtherMpeg4SurfArbitraryH" />
+      <Test result="pass" name="testOtherMpeg4SurfArbitraryW" />
+      <Test result="pass" name="testOtherMpeg4SurfMaxMax" />
+      <Test result="pass" name="testOtherMpeg4SurfMaxMin" />
+      <Test result="pass" name="testOtherMpeg4SurfMinMax" />
+      <Test result="pass" name="testOtherMpeg4SurfMinMin" />
+      <Test result="pass" name="testOtherMpeg4SurfNearMaxMax" />
+      <Test result="pass" name="testOtherMpeg4SurfNearMaxMin" />
+      <Test result="pass" name="testOtherMpeg4SurfNearMinMax" />
+      <Test result="pass" name="testOtherMpeg4SurfNearMinMin" />
+      <Test result="pass" name="testOtherMpeg4SurfQCIF" />
+      <Test result="pass" name="testOtherVP8Flex1080p" />
+      <Test result="pass" name="testOtherVP8Flex360pWithIntraRefresh" />
+      <Test result="pass" name="testOtherVP8Flex480p" />
+      <Test result="pass" name="testOtherVP8Flex720p" />
+      <Test result="pass" name="testOtherVP8FlexArbitraryH" />
+      <Test result="pass" name="testOtherVP8FlexArbitraryW" />
+      <Test result="pass" name="testOtherVP8FlexMaxMax" />
+      <Test result="pass" name="testOtherVP8FlexMaxMin" />
+      <Test result="pass" name="testOtherVP8FlexMinMax" />
+      <Test result="pass" name="testOtherVP8FlexMinMin" />
+      <Test result="pass" name="testOtherVP8FlexNearMaxMax" />
+      <Test result="pass" name="testOtherVP8FlexNearMaxMin" />
+      <Test result="pass" name="testOtherVP8FlexNearMinMax" />
+      <Test result="pass" name="testOtherVP8FlexNearMinMin" />
+      <Test result="pass" name="testOtherVP8FlexQCIF" />
+      <Test result="pass" name="testOtherVP8Surf1080p" />
+      <Test result="pass" name="testOtherVP8Surf480p" />
+      <Test result="pass" name="testOtherVP8Surf720p" />
+      <Test result="pass" name="testOtherVP8SurfArbitraryH" />
+      <Test result="pass" name="testOtherVP8SurfArbitraryW" />
+      <Test result="pass" name="testOtherVP8SurfMaxMax" />
+      <Test result="pass" name="testOtherVP8SurfMaxMin" />
+      <Test result="pass" name="testOtherVP8SurfMinMax" />
+      <Test result="pass" name="testOtherVP8SurfMinMin" />
+      <Test result="pass" name="testOtherVP8SurfNearMaxMax" />
+      <Test result="pass" name="testOtherVP8SurfNearMaxMin" />
+      <Test result="pass" name="testOtherVP8SurfNearMinMax" />
+      <Test result="pass" name="testOtherVP8SurfNearMinMin" />
+      <Test result="pass" name="testOtherVP8SurfQCIF" />
+      <Test result="pass" name="testOtherVP9Flex1080p" />
+      <Test result="pass" name="testOtherVP9Flex480p" />
+      <Test result="pass" name="testOtherVP9Flex720p" />
+      <Test result="pass" name="testOtherVP9FlexArbitraryH" />
+      <Test result="pass" name="testOtherVP9FlexArbitraryW" />
+      <Test result="pass" name="testOtherVP9FlexMaxMax" />
+      <Test result="pass" name="testOtherVP9FlexMaxMin" />
+      <Test result="pass" name="testOtherVP9FlexMinMax" />
+      <Test result="pass" name="testOtherVP9FlexMinMin" />
+      <Test result="pass" name="testOtherVP9FlexNearMaxMax" />
+      <Test result="pass" name="testOtherVP9FlexNearMaxMin" />
+      <Test result="pass" name="testOtherVP9FlexNearMinMax" />
+      <Test result="pass" name="testOtherVP9FlexNearMinMin" />
+      <Test result="pass" name="testOtherVP9FlexQCIF" />
+      <Test result="pass" name="testOtherVP9Surf1080p" />
+      <Test result="pass" name="testOtherVP9Surf480p" />
+      <Test result="pass" name="testOtherVP9Surf720p" />
+      <Test result="pass" name="testOtherVP9SurfArbitraryH" />
+      <Test result="pass" name="testOtherVP9SurfArbitraryW" />
+      <Test result="pass" name="testOtherVP9SurfMaxMax" />
+      <Test result="pass" name="testOtherVP9SurfMaxMin" />
+      <Test result="pass" name="testOtherVP9SurfMinMax" />
+      <Test result="pass" name="testOtherVP9SurfMinMin" />
+      <Test result="pass" name="testOtherVP9SurfNearMaxMax" />
+      <Test result="pass" name="testOtherVP9SurfNearMaxMin" />
+      <Test result="pass" name="testOtherVP9SurfNearMinMax" />
+      <Test result="pass" name="testOtherVP9SurfNearMinMin" />
+      <Test result="pass" name="testOtherVP9SurfQCIF" />
+      <Test result="pass" name="testVP8Flex1080p30fps10Mbps" />
+      <Test result="pass" name="testVP8Flex180p30fps800kbps" />
+      <Test result="pass" name="testVP8Flex360p30fps2Mbps" />
+      <Test result="pass" name="testVP8Flex720p30fps4Mbps" />
+      <Test result="pass" name="testVP8HighQualitySDSupport" />
+      <Test result="pass" name="testVP8LowQualitySDSupport" />
+      <Test result="pass" name="testVP8Surf1080p30fps10Mbps" />
+      <Test result="pass" name="testVP8Surf180p30fps800kbps" />
+      <Test result="pass" name="testVP8Surf360p30fps2Mbps" />
+      <Test result="pass" name="testVP8Surf720p30fps4Mbps" />
+    </TestCase>
+    <TestCase name="android.media.cts.VirtualizerTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0Strength" />
+      <Test result="pass" name="test1_1Properties" />
+      <Test result="pass" name="test1_2SetStrengthAfterRelease" />
+      <Test result="pass" name="test2_0SetEnabledGetEnabled" />
+      <Test result="pass" name="test2_1SetEnabledAfterRelease" />
+      <Test result="pass" name="test3_0ControlStatusListener" />
+      <Test result="pass" name="test3_1EnableStatusListener" />
+      <Test result="pass" name="test3_2ParameterChangedListener" />
+      <Test result="pass" name="test4_0FormatModeQuery" />
+      <Test result="pass" name="test4_1SpeakerAnglesCapaMatchesFormatModeCapa" />
+      <Test result="pass" name="test4_2VirtualizationMode" />
+      <Test result="pass" name="test4_3DisablingVirtualizationOff" />
+      <Test result="pass" name="test4_4VirtualizationModeAuto" />
+      <Test result="pass" name="test4_5ConsistentCapabilitiesWithEnabledDisabled" />
+    </TestCase>
+    <TestCase name="android.media.cts.VisualizerTest">
+      <Test result="pass" name="test0_0ConstructorAndRelease" />
+      <Test result="pass" name="test1_0CaptureRates" />
+      <Test result="pass" name="test1_1CaptureSize" />
+      <Test result="pass" name="test2_0PollingCapture" />
+      <Test result="pass" name="test2_1ListenerCapture" />
+      <Test result="pass" name="test3_0MeasurementModeNone" />
+      <Test result="pass" name="test4_0MeasurementModePeakRms" />
+      <Test result="pass" name="test4_1MeasurePeakRms" />
+      <Test result="pass" name="test4_2MeasurePeakRmsLongMP3" />
+    </TestCase>
+    <TestCase name="android.media.cts.VolumeShaperTest">
+      <Test result="pass" name="testMaximumShapers" />
+      <Test result="pass" name="testPlayerCornerCase" />
+      <Test result="pass" name="testPlayerCornerCase2" />
+      <Test result="pass" name="testPlayerCubicMonotonic" />
+      <Test result="pass" name="testPlayerDuck" />
+      <Test result="pass" name="testPlayerJoin" />
+      <Test result="pass" name="testPlayerRamp" />
+      <Test result="pass" name="testPlayerRunDuringPauseStop" />
+      <Test result="pass" name="testPlayerStepRamp" />
+      <Test result="pass" name="testPlayerTwoShapers" />
+      <Test result="pass" name="testVolumeShaperConfigurationBuilder" />
+      <Test result="pass" name="testVolumeShaperConfigurationParcelable" />
+      <Test result="pass" name="testVolumeShaperOperationParcelable" />
+    </TestCase>
+    <TestCase name="android.media.cts.VpxEncoderTest">
+      <Test result="pass" name="testAsyncEncodingVP8" />
+      <Test result="pass" name="testAsyncEncodingVP9" />
+      <Test result="pass" name="testBasicVP8" />
+      <Test result="pass" name="testBasicVP9" />
+      <Test result="pass" name="testDynamicBitrateChangeVP8" />
+      <Test result="pass" name="testDynamicBitrateChangeVP8Ndk" />
+      <Test result="pass" name="testDynamicBitrateChangeVP9" />
+      <Test result="pass" name="testDynamicBitrateChangeVP9Ndk" />
+      <Test result="pass" name="testEncoderQualityVP8" />
+      <Test result="pass" name="testEncoderQualityVP9" />
+      <Test result="pass" name="testParallelEncodingAndDecodingVP8" />
+      <Test result="pass" name="testParallelEncodingAndDecodingVP9" />
+      <Test result="pass" name="testSyncFrameVP8" />
+      <Test result="pass" name="testSyncFrameVP8Ndk" />
+      <Test result="pass" name="testSyncFrameVP9" />
+      <Test result="pass" name="testSyncFrameVP9Ndk" />
+    </TestCase>
+  </Module>
+</Result>

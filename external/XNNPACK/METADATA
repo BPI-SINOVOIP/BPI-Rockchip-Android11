@@ -1,0 +1,19 @@
+name: "XNNPACK"
+description: "XNNPACK is a highly optimized library of floating-point neural network inference operators for ARM, WebAssembly, and x86 (SSE2 level) platforms. XNNPACK is not intended for direct use by deep learning practitioners and researchers; instead it provides low-level performance primitives for accelerating high-level machine learning frameworks, such as MediaPipe, TensorFlow Lite, and TensorFlow.js."
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://github.com/google/XNNPACK"
+  }
+  url {
+    type: GIT
+    value: "https://github.com/google/XNNPACK"
+  }
+  version: "1498d1d4d0430480dfe5c4538049b4f789d29134"
+  license_type: NOTICE
+  last_upgrade_date {
+    year: 2020
+    month: 2
+    day: 11
+  }
+}

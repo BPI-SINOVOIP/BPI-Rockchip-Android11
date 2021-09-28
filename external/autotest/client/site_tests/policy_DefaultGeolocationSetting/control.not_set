@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_DefaultGeolocationSetting.not_set'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify the default setting of 'DefaultGeolocationSetting' is 'prompt' for the
+HTML5 geolocation API within the Chrome browser.
+
+'''
+
+job.run_test('policy_DefaultGeolocationSetting',
+             case='not_set')

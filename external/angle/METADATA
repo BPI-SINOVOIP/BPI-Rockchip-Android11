@@ -1,0 +1,28 @@
+name: "ANGLE"
+description:
+    "The goal of ANGLE is to allow users of multiple operating systems to "
+    "seamlessly run WebGL and other OpenGL ES content by translating OpenGL "
+    "ES API calls to one of the hardware-supported APIs available for that "
+    "platform. ANGLE currently provides translation from OpenGL ES 2.0, 3.0 "
+    "and 3.1 to Vulkan, desktop OpenGL, OpenGL ES, Direct3D 9, and Direct3D "
+    "11. Future plans include ES 3.2, translation to Metal and MacOS, Chrome "
+    "OS, and Fuchsia support."
+
+third_party: {
+  type: PACKAGE
+  url {
+    type: HOMEPAGE
+    value: "http://angleproject.org"
+  }
+  url {
+    type: GIT
+    value: "https://chromium.googlesource.com/angle/angle"
+  }
+  version: "1.0"
+  license_type: RESTRICTED
+  last_upgrade_date {
+    year: 2020
+    month: 2
+    day: 21
+  }
+}

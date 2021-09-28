@@ -1,0 +1,26 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+TIME = 'SHORT'
+NAME = 'policy_GlobalNetworkSettingsServer.DisableNetworkTypes_WiFi'
+TEST_TYPE = 'Server'
+ATTRIBUTES = 'suite:ent-wificell'
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test sets the 'DisableNetworkTypes' policy for 'WiFi'. The DUT then
+attempts to connect to a WiFi network but should be blocked.
+
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_GlobalNetworkSettingsServer',
+                 raw_cmdline_args=args,
+                 host=host,
+                 gnc_settings={'DisableNetworkTypes': ['WiFi']})
+
+
+parallel_simple(run, machines)

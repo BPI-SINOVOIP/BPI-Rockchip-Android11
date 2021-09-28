@@ -1,0 +1,54 @@
+// Copyright (C) 2020 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_library_static {
+    name: "libpthreadpool",
+    export_include_dirs: ["include"],
+    vendor_available: true,
+    sdk_version: "current",
+    srcs: [
+        "src/threadpool-pthreads.c",
+        "src/threadpool-legacy.c",
+    ],
+    cflags: [
+        "-std=gnu11",
+        "-O2",
+        "-Wno-deprecated-declarations",
+        "-Wno-missing-field-initializers",
+    ],
+    header_libs: [
+        "fxdiv_headers",
+    ],
+}
+
+cc_test {
+    name: "PthreadPoolTests",
+    sdk_version: "current",
+    srcs: [
+        "test/pthreadpool.cc",
+    ],
+    cflags: [
+        "-Wno-unused-parameter",
+        "-Wno-missing-field-initializers",
+    ],
+    stl: "libc++_static",
+    static_libs: [
+        "libgmock_ndk",
+        "libpthreadpool",
+    ],
+    test_suites: [
+        "general-tests",
+    ],
+}
+

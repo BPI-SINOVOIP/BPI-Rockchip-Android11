@@ -1,0 +1,26 @@
+// Copyright 2005 The Android Open Source Project
+
+cc_library_shared {
+    name: "libtinyxml",
+
+    srcs: [
+        "tinyxml.cpp",
+        "tinyxmlparser.cpp",
+        "tinyxmlerror.cpp",
+        "tinystr.cpp",
+    ],
+
+    vendor: true,
+
+    // DO NOT USE!
+    // Use tinyxml2 (or expat or libxml2 or...) instead.
+    visibility: ["//vendor:__subpackages__"],
+
+    cflags: [
+        "-Wno-implicit-fallthrough",
+        "-Wno-logical-op-parentheses",
+        "-Wno-missing-braces",
+        "-Wno-undefined-bool-conversion",
+        "-Werror",
+    ],
+}

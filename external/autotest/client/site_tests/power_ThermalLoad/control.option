@@ -1,0 +1,29 @@
+AUTHOR = "puthik"
+NAME = "power_ThermalLoad.option"
+PURPOSE = "Run thermal workload and log temperature."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test is power_ThermalLoad that can use custom args.
+
+- duration: time in seconds to display url and measure power, default 2.5 hours.
+- numfish: number of fish to pass to WebGL Aquarium, default 3000 fishes.
+"""
+HOURS=60 * 60
+
+args_dict = utils.args_to_dict(args)
+
+duration = int(args_dict.get('duration', 2.5 * HOURS))
+# utils.args_to_dict convert arg to lower case.
+numFish = int(args_dict.get('numfish', 3000))
+seconds_period = int(args_dict.get('seconds_period', 20))
+pdash_note = args_dict.get('pdash_note', '')
+
+logging.info(str(args_dict))
+job.run_test('power_ThermalLoad', tag=NAME.split('.')[1], duration=duration,
+             numFish=numFish, seconds_period=seconds_period,
+             pdash_note=pdash_note)

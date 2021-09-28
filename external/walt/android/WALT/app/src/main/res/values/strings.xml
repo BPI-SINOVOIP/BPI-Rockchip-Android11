@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">WALT</string>
+
+    <string name="title_activity_crash_log">Crash Log</string>
+    <string name="protocol_version_mismatch">WALT reports protocol version %1$s, which is not
+        supported. Please program WALT to a firmware with protocol version %2$s. To do this
+        from the app, choose "Update WALT Firmware" from the "Diagnostics" menu.</string>
+    <string name="audio_mode">Audio Testing Mode</string>
+    <string name="screen_response_mode">Screen Testing Mode</string>
+    <string name="about_description">WALT is designed to measure the latency of physical sensors
+        and outputs on phones and computers. It can currently perform the following measurements:
+        tap latency, drag latency (scroll), screen draw latency, audio output/microphone
+        latencies, and MIDI input/output latencies.
+    </string>
+    <string name="disclaimer">DISCLAIMER: This is not an official Google product.</string>
+    <string name="more_info">A WALT device is required to run the latency tests. For more information, visit github.com/google/walt</string>
+    <string name="privacy_policy">Privacy policy:\ngithub.com/google/walt/blob/master/docs/PrivacyPolicy.md</string>
+    <string name="hint_url">Enter URL</string>
+    <string name="preference_screen_blinks" translatable="false">pref_screen_blinks</string>
+    <string name="preference_audio_in_reps" translatable="false">pref_audio_in_reps</string>
+    <string name="preference_audio_in_threshold" translatable="false">pref_audio_in_threshold</string>
+    <string name="preference_audio_out_reps" translatable="false">pref_audio_out_reps</string>
+    <string name="preference_midi_in_reps" translatable="false">pref_midi_in_reps</string>
+    <string name="preference_midi_out_reps" translatable="false">pref_midi_out_reps</string>
+    <string name="preference_auto_increase_brightness">auto_increase_brightness</string>
+    <string name="preference_show_tap_histogram">pref_show_tap_histogram</string>
+    <string name="preference_show_blink_histogram">pref_show_blink_histogram</string>
+    <string name="preference_systrace">pref_systrace</string>
+    <string name="preference_screen_fullscreen">pref_screen_fullscreen</string>
+    <string name="preference_log_url">pref_log_url</string>
+    <string name="preference_auto_upload_log">pref_auto_upload_log</string>
+    <string name="start">Start</string>
+    <string name="close">Close</string>
+    <string name="reconnect">Reconnect</string>
+    <string name="tbd_conn_status">TBD: Conn status</string>
+    <string name="tap_latency">Tap latency</string>
+    <string name="drag_latency">Drag latency</string>
+    <string name="screen_response">Screen response</string>
+    <string name="audio_latency">Audio latency</string>
+    <string name="midi_latency">MIDI latency</string>
+    <string name="view_log">View log</string>
+    <string name="accelerometer_latency">Accelerometer latency</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="diagnostics">Diagnostics</string>
+    <string name="tbd_connection_sync_status">TBD: Connection/sync status</string>
+    <string name="ping">Ping</string>
+    <string name="ping_over_usb_with_1_byte">Ping over USB with 1 byte</string>
+    <string name="re_sync_clocks">Re-sync clocks</string>
+    <string name="check_clock_drift">Check clock drift</string>
+    <string name="check_how_much_clocks_diverged">Check how much clocks diverged</string>
+    <string name="update_walt_firmware">Update WALT Firmware</string>
+    <string name="please_press_the_button_on_the_teensy_first">Please press the button on the Teensy first</string>
+    <string name="finish">Finish</string>
+    <string name="restart">Restart</string>
+    <string name="stop">Stop</string>
+    <string name="start_midi_in">Start MIDI in</string>
+    <string name="start_midi_out">Start MIDI out</string>
+    <string name="upload">Upload</string>
+    <string name="share">Share</string>
+    <string name="help">Help</string>
+    <string-array name="audio_mode_array">
+        <item>Continuous Playback Latency</item>
+        <item>Continuous Recording Latency</item>
+        <item>Cold Playback Latency</item>
+        <item>Cold Recording Latency</item>
+        <item>Display Recorded Waveform</item>
+    </string-array>
+    <string-array name="screen_response_mode_array">
+        <item>Blink Latency</item>
+        <item>Brightness Curve</item>
+        <item>Fast Path Graphics</item>
+    </string-array>
+
+</resources>

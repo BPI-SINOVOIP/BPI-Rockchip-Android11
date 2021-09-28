@@ -1,0 +1,40 @@
+// Signature format: 2.0
+package com.android.org.conscrypt {
+
+  public class OpenSSLMessageDigestJDK extends java.security.MessageDigestSpi implements java.lang.Cloneable {
+  }
+
+  public static final class OpenSSLMessageDigestJDK.MD5 extends com.android.org.conscrypt.OpenSSLMessageDigestJDK {
+    ctor public OpenSSLMessageDigestJDK.MD5() throws java.security.NoSuchAlgorithmException;
+  }
+
+  public static final class OpenSSLMessageDigestJDK.SHA1 extends com.android.org.conscrypt.OpenSSLMessageDigestJDK {
+    ctor public OpenSSLMessageDigestJDK.SHA1() throws java.security.NoSuchAlgorithmException;
+  }
+
+  public static final class OpenSSLMessageDigestJDK.SHA224 extends com.android.org.conscrypt.OpenSSLMessageDigestJDK {
+    ctor public OpenSSLMessageDigestJDK.SHA224() throws java.security.NoSuchAlgorithmException;
+  }
+
+  public static final class OpenSSLMessageDigestJDK.SHA256 extends com.android.org.conscrypt.OpenSSLMessageDigestJDK {
+    ctor public OpenSSLMessageDigestJDK.SHA256() throws java.security.NoSuchAlgorithmException;
+  }
+
+  public static final class OpenSSLMessageDigestJDK.SHA384 extends com.android.org.conscrypt.OpenSSLMessageDigestJDK {
+    ctor public OpenSSLMessageDigestJDK.SHA384() throws java.security.NoSuchAlgorithmException;
+  }
+
+  public static final class OpenSSLMessageDigestJDK.SHA512 extends com.android.org.conscrypt.OpenSSLMessageDigestJDK {
+    ctor public OpenSSLMessageDigestJDK.SHA512() throws java.security.NoSuchAlgorithmException;
+  }
+
+  public final class OpenSSLProvider extends java.security.Provider {
+    ctor public OpenSSLProvider();
+  }
+
+  public final class OpenSSLRandom extends java.security.SecureRandomSpi implements java.io.Serializable {
+    ctor public OpenSSLRandom();
+  }
+
+}
+

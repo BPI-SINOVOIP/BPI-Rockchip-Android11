@@ -1,0 +1,25 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'stress_EnrollmentRetainment.EnrollmentRetainment'
+TIME = 'LONG'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:enroll_retainment'
+
+DOC = """
+Sets up and runs the client test for the policy_EnrollmentRetainment.
+
+"""
+
+client_test = 'policy_EnrollmentRetainment'
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('stress_EnrollmentRetainment', host=host,
+                  client_test=client_test, loops=100)
+
+parallel_simple(run, machines)

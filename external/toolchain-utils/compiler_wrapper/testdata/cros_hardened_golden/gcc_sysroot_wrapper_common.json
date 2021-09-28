@@ -1,0 +1,256 @@
+[
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-noccache",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "./x86_64-cros-linux-gnu-gcc.real",
+          "args": [
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "GOMACC_PATH=someNonExistingPath"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "env": [
+      "GOMACC_PATH=/tmp/stable/gomacc"
+    ],
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/tmp/stable/gomacc",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-nopie",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "-D__KERNEL__",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "--sysroot=/usr/x86_64-cros-linux-gnu",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "-fno-stack-protector",
+            "-D__KERNEL__",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./armv7a-cros-linux-gnueabihf-gcc",
+        "args": [
+          "-D__KERNEL__",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./armv7a-cros-linux-gnueabihf-gcc.real",
+            "--sysroot=/usr/armv7a-cros-linux-gnueabihf",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-D_FORTIFY_SOURCE=2",
+            "-mthumb",
+            "-fno-stack-protector",
+            "-D__KERNEL__",
+            "main.cc"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/armv7a-cros-linux-gnueabihf",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "wd": "/tmp/stable",
+    "wrapper": {
+      "cmd": {
+        "path": "./x86_64-cros-linux-gnu-gcc",
+        "args": [
+          "--sysroot=xyz",
+          "main.cc"
+        ]
+      }
+    },
+    "cmds": [
+      {
+        "cmd": {
+          "path": "/usr/bin/ccache",
+          "args": [
+            "./x86_64-cros-linux-gnu-gcc.real",
+            "-fno-reorder-blocks-and-partition",
+            "-Wno-unused-local-typedefs",
+            "-Wno-maybe-uninitialized",
+            "-fstack-protector-strong",
+            "-fPIE",
+            "-pie",
+            "-D_FORTIFY_SOURCE=2",
+            "-fno-omit-frame-pointer",
+            "--sysroot=xyz",
+            "main.cc",
+            "-mno-movbe"
+          ],
+          "env_updates": [
+            "CCACHE_BASEDIR=/usr/x86_64-cros-linux-gnu",
+            "CCACHE_DIR=/var/cache/distfiles/ccache",
+            "CCACHE_UMASK=002"
+          ]
+        }
+      }
+    ]
+  }
+]

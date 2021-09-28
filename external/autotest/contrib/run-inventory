@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Balance out the pools for the deputies before running any checks
+ARGS=( --production --all-models --force-rebalance all_critical_pools )
+BALANCE_POOL_LOG=balance_pool.log.$(date +%Y-%m-%d.%H)
+site_utils/balance_pools.py "${ARGS[@]}" &> logs/dut-data/$BALANCE_POOL_LOG
+
+site_utils/lab_inventory.py "$@"

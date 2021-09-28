@@ -1,0 +1,24 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "security_CpuVulnerabilities"
+PURPOSE = "Ensure Chrome OS contains mitigations against CPU vulnerabilities."
+CRITERIA = """
+Passes when the kernel reports the appropriate mitigations against CPU
+vulnerabilities.
+"""
+TIME = "SHORT"
+ATTRIBUTES = "suite:bvt-perbuild"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "security"
+TEST_TYPE = "client"
+
+DOC = """
+This test ensures that the kernel contains appropriate mitigations against CPU
+vulnerabilities by checking what the kernel reports in
+'/sys/devices/system/cpu/vulnerabilities'.
+"""
+
+job.run_test('security_CpuVulnerabilities')

@@ -1,0 +1,84 @@
+--- android_icu4j/src/main/java/android/icu/text/MessageFormat.java	2019-12-18 23:17:58.070206945 +0000
++++ android_icu4j/src/main/java/android/icu/text/MessageFormat.java	2019-12-18 23:18:19.478279221 +0000
+@@ -124,7 +124,7 @@
+  * argNumber = '0' | ('1'..'9' ('0'..'9')*)
+  *
+  * argType = "number" | "date" | "time" | "spellout" | "ordinal" | "duration"
+- * argStyle = "short" | "medium" | "long" | "full" | "integer" | "currency" | "percent" | argStyleText | "::" argSkeletonText
++ * argStyle = "short" | "medium" | "long" | "full" | "integer" | "currency" | "percent" | argStyleText
+  * </pre></blockquote>
+  *
+  * <ul>
+@@ -165,7 +165,7 @@
+  *       <td colspan=2><i>(none)</i>
+  *       <td><code>null</code>
+  *    <tr>
+- *       <td rowspan=6><code>number</code>
++ *       <td rowspan=5><code>number</code>
+  *       <td><i>(none)</i>
+  *       <td><code>NumberFormat.getInstance(getLocale())</code>
+  *    <tr>
+@@ -181,10 +181,7 @@
+  *       <td><i>argStyleText</i>
+  *       <td><code>new DecimalFormat(argStyleText, new DecimalFormatSymbols(getLocale()))</code>
+  *    <tr>
+- *       <td><i>argSkeletonText</i>
+- *       <td><code>NumberFormatter.forSkeleton(argSkeletonText).locale(getLocale()).toFormat()</code>
+- *    <tr>
+- *       <td rowspan=7><code>date</code>
++ *       <td rowspan=6><code>date</code>
+  *       <td><i>(none)</i>
+  *       <td><code>DateFormat.getDateInstance(DateFormat.DEFAULT, getLocale())</code>
+  *    <tr>
+@@ -203,9 +200,6 @@
+  *       <td><i>argStyleText</i>
+  *       <td><code>new SimpleDateFormat(argStyleText, getLocale())</code>
+  *    <tr>
+- *       <td><i>argSkeletonText</i>
+- *       <td><code>DateFormat.getInstanceForSkeleton(argSkeletonText, getLocale())</code>
+- *    <tr>
+  *       <td rowspan=6><code>time</code>
+  *       <td><i>(none)</i>
+  *       <td><code>DateFormat.getTimeInstance(DateFormat.DEFAULT, getLocale())</code>
+@@ -260,28 +254,6 @@
+  * The JDK MessageFormat does create and use a ChoiceFormat object
+  * (<code>new ChoiceFormat(argStyleText)</code>).
+  * The JDK does not support plural and select arguments at all.
+-
+- * <p>Both the ICU and the JDK <code>MessageFormat</code> can control the argument
+- * formats by using <code>argStyle</code>. But the JDK <code>MessageFormat</code> only
+- * supports predefined formats and number / date / time pattern strings (which would need
+- * to be localized).<br>
+- * ICU supports everything the JDK does, and also number / date / time <b>skeletons</b> using the
+- * <code>::</code> prefix (which automatically yield output appropriate for the
+- * <code>MessageFormat</code> locale).</p>
+- *
+- * <h4>Argument formatting</h4>
+- *
+- * <p>Arguments are formatted according to their type, using the default
+- * ICU formatters for those types, unless otherwise specified.
+- * For unknown types, <code>MessageFormat</code> will call <code>toString()</code>.</p>
+- *
+- * <p>There are also several ways to control the formatting.</p>
+- *
+- * <p>We recommend you use default styles, predefined style values, skeletons,
+- * or preformatted values, but not pattern strings or custom format objects.</p>
+- *
+- * <p>For more details, see the
+- * <a href="http://userguide.icu-project.org/formatparse/messages">ICU User Guide</a>.</p>
+  *
+  * <h4>Usage Information</h4>
+  *
+@@ -295,10 +267,10 @@
+  * };
+  *
+  * String result = MessageFormat.format(
+- *     "At {1,time,::jmm} on {1,date,::dMMMM}, there was {2} on planet {0,number,integer}.",
++ *     "At {1,time} on {1,date}, there was {2} on planet {0,number,integer}.",
+  *     arguments);
+  *
+- * <em>output</em>: At 4:34 PM on March 23, there was a disturbance
++ * <em>output</em>: At 12:30 PM on Jul 3, 2053, there was a disturbance
+  *           in the Force on planet 7.
+  *
+  * </pre>

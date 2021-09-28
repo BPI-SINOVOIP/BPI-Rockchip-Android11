@@ -1,0 +1,50 @@
+# Copyright 2017 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+
+AUTHOR = "chromeos-lab-infrastructure"
+NAME = "provision_Cr50Update"
+PURPOSE = "Provision a system to the correct firmware version."
+TIME = "MEDIUM"
+TEST_CATEGORY = "System"
+TEST_CLASS = "provision"
+TEST_TYPE = "Server"
+DEPENDENCIES = "servo,cr50-ro-keyid:prod"
+
+DOC = """
+This is a test used by the provision control segment in autoserv to set the
+cr50-version label of a host to the desired setting. This test attempts to
+reprogram the cr50 firmware and set the cr50 chip board id using the given
+params in value. value should a string with the 'image_rw_ver/image_bid'.
+value is completely ignored if a valid release_path is given.
+
+@param value: the release image information. Ignored if release_path is given
+@param release_path: local path to release image
+@param cr50_dbg_image_path: local path to DBG image
+"""
+
+from autotest_lib.client.common_lib import error, utils
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+release_path = ''
+chip_bid = ''
+if not locals().get('value'):
+    value = args_dict.get('value', '')
+    release_path = args_dict.get('release_path', '')
+
+
+force = args_dict.get("force", "").lower() == "true"
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+    job.run_test('provision_Cr50Update', host=host, cmdline_args=args,
+                 full_args=args_dict, value=value, release_path=release_path,
+                 force=force)
+
+job.parallel_simple(run, machines)

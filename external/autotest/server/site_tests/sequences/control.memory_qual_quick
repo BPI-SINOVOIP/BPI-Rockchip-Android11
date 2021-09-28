@@ -1,0 +1,71 @@
+# Copyright (c) 2014 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+
+AUTHOR = "puthik"
+NAME = "MemoryQual.quick"
+ATTRIBUTES = "suite:memory_qual_quick"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "suite"
+TEST_TYPE = "server"
+
+DOC = """
+Sequence for testing the Memory Qual running from the fixed devices.
+"""
+
+CLIENT_TESTS= [
+    ('platform_MemCheck', {}),
+    ('hardware_RamFio', {
+        'requirements': [('ram_suite', [])]}),
+    ('hardware_MemoryThroughput', {
+        'tag': 'quick', 'test': 'bcopy', 'warmup': 10, 'num_iterations': 5,
+        'parallel': 1, 'sizes' : [ 16 * 1024 * 1024]}),
+    ('hardware_MemoryLatency', {
+        'sample_size_kb': [ int(2), int(192), int(1024)]}),
+    ('hardware_Memtester', {
+        'tag' : 'quick', 'size' : 10 * 1024, 'loop' : 1}),
+    ('hardware_SAT', {
+        'tag' : 'quick', 'seconds' : 10}),
+    ('power_MemorySuspend', {
+        'tag' : 'quick', 'num_suspends' : 2}),
+]
+
+CLIENT_X86_TESTS= [
+    ('hardware_UnsafeMemory', {
+        'tag' : 'quick', 'sec' : 30}),
+]
+
+SERVER_TESTS= [
+    ('hardware_MemoryIntegrity', {
+        'tag' : 'quick', 'seconds' : 30, 'suspend': False}),
+]
+
+def run_client_test(machine):
+    client = hosts.create_host(machine)
+    client_at = autotest.Autotest(client)
+    client_tests = (CLIENT_TESTS + CLIENT_X86_TESTS if client.get_arch() in
+        ('i386', 'i686', 'x86_64') else CLIENT_TESTS)
+    for test, argv in client_tests:
+        client.reboot()
+        client_at.run_test(test, **argv)
+
+def run_server_test(machine):
+    client = hosts.create_host(machine)
+    for test, argv in SERVER_TESTS:
+        client.reboot()
+        job.run_test(test, client_ip=machine, **argv)
+
+keyval = dict()
+try:
+    keyval['bug_id'] = bug_id
+    keyval['part_id'] = part_id
+except NameError:
+    # bug_id and/or part_id variables not defined
+    pass
+utils.write_keyval(job.resultdir, keyval)
+
+job.parallel_on_machines(run_client_test, machines)
+parallel_simple(run_server_test, machines)

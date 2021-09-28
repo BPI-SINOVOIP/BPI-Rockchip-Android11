@@ -1,0 +1,22 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+
+AUTHOR = "kirtika"
+NAME = "stress_ClientTestReboot.graphics"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "Stress"
+TEST_TYPE = "server"
+ATTRIBUTES = 'suite:graphics_per-week, suite:reboot_stress'
+
+DOC = """
+This test reboots the machine and checks whether GL/GLES works on each boot.
+"""
+
+def run_reboot_stress(machine):
+    job.run_test('stress_ClientTestReboot', client_ip=machine,
+                 testname='graphics_Sanity', loops=100)
+
+parallel_simple(run_reboot_stress, machines)

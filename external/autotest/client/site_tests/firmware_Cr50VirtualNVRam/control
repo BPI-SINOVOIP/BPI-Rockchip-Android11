@@ -1,0 +1,16 @@
+# Copyright (c) 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "louiscollard,apronin"
+NAME = "firmware_Cr50VirtualNVRam"
+PURPOSE = "Test vNVRAM functionality in cr50"
+TIME = "SHORT"
+TEST_TYPE = "Client"
+
+DOC = """
+Verifies basic read functionality for vNVRAM indices, and checks
+the correct permissions are enforced.
+"""
+
+job.run_test('firmware_Cr50VirtualNVRam')

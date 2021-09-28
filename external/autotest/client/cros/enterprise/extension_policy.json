@@ -1,0 +1,20 @@
+{
+    "VisibleStringPolicy": {
+        "Value": "notsecret"
+    },
+    "SensitiveStringPolicy": {
+        "Value": "secret"
+    },
+    "VisibleDictPolicy": {
+      "Value": {
+        "some_bool": true,
+        "some_string": "notsecret"
+      }
+    },
+    "SensitiveDictPolicy": {
+        "Value": {
+            "some_bool": true,
+            "some_string": "secret"
+        }
+    }
+}

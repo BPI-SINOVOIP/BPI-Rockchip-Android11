@@ -1,0 +1,64 @@
+//
+//  Copyright (C) 2016 Google, Inc.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at:
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
+android_test_helper_app {
+    name: "sl4a",
+
+    test_suites: [
+        "pts",
+        "device-tests",
+    ],
+
+    platform_apis: true,
+    owner: "google",
+    dex_preopt: {
+        enabled: false,
+    },
+
+    certificate: "platform",
+
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+
+    aaptflags: ["--auto-add-overlay"],
+
+    compile_multilib: "both",
+
+    static_libs: [
+        "guava",
+        "android-common",
+        "sl4a.locale_platform",
+        "androidx.legacy_legacy-support-v4",
+
+        "sl4a.Utils",
+        "sl4a.Common",
+
+        "sl4a.InterpreterForAndroid",
+        "sl4a.ScriptingLayer",
+    ],
+
+    privileged: true,
+    optimize: {
+        enabled: false,
+    },
+
+    jni_libs: ["libcom_googlecode_android_scripting_Exec"],
+}
+
+java_import {
+    name: "sl4a.locale_platform",
+    jars: ["libs/locale_platform.jar"],
+}

@@ -1,0 +1,24 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "emaxx, apronin"
+NAME = "platform_CryptohomeTpmLiveTestServer"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:bvt-perbuild"
+JOB_RETRIES = 1
+
+DOC = """
+This test clears the TPM if necessary, kicks off a client side test that runs
+cryptohome's TPM live tests and clears the TPM again. Every time the TPM is
+cleared, the system is rebooted.
+"""
+
+def run_test(machine):
+    host = hosts.create_host(machine)
+    job.run_test('platform_CryptohomeTpmLiveTestServer', host=host)
+
+parallel_simple(run_test, machines)

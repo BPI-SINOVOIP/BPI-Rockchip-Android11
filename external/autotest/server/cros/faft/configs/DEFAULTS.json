@@ -1,0 +1,136 @@
+{
+    "platform": null,
+    "platform.DOC": "Name of the board or model being tested",
+
+    "parent": null,
+    "parent.DOC": "Name of the platform whose overrides to inherit",
+
+    "models": {},
+    "models.DOC": "Model-specific attribute overrides for this platform",
+
+    "mode_switcher_type": "keyboard_dev_switcher",
+    "mode_switcher_type.DOC": "Version of mode-switcher used for mode-aware reboot",
+
+    "chrome_ec": false,
+    "chrome_ec.DOC": "Whether the platform has an EC",
+
+    "chrome_usbpd": false,
+    "chrome_usbpd.DOC": "Whether the platform supports USB power delivery",
+
+    "dark_resume_capable": false,
+    "dark_resume_capable.DOC": "Whether the platform supports dark-resume",
+
+    "has_lid": true,
+    "has_lid.DOC": "Whether the platform has a physical lid",
+
+    "has_keyboard": true,
+    "has_keyboard.DOC": "Whether the platform has a physical keyboard",
+
+    "has_powerbutton": true,
+    "has_powerbutton.DOC": "Whether the platform has a physical power button",
+
+    "power_button_dev_switch": false,
+    "power_button_dev_switch.DOC": "Whether the power button switches to dev mode",
+
+    "rec_button_dev_switch": false,
+    "rec_button_dev_switch.DOC": "Whether the recovery button switches to dev mode",
+
+    "ec_capability": [],
+    "ec_capability.DOC": "List of capabilities of the Chrome EC",
+
+    "cr50_capability": [],
+    "cr50_capability.DOC": "List of capabilities of the CR50",
+
+    "spi_voltage": "pp1800",
+    "spi_voltage.DOC": "The voltage level to set on the servo's spi2_vref",
+
+    "usbc_input_voltage_limit": 20,
+    "usbc_input_voltage_limit.DOC": "The max input voltage for USB Type-C port",
+
+    "charger_profile_override": false,
+    "charger_profile_override.DOC": "Whether the platform has a custom charger profile, which takes over the control of voltage/current limit",
+
+    "has_eventlog": true,
+    "has_eventlog.DOC": "Whether the platform has eventlog support including proper timestamps. (Only for old boards! Never disable this 'temporarily, until we get around to implementing it'!)",
+
+    "firmware_screen": 10,
+    "firmware_screen.DOC": "Delay between power-on and firmware screen",
+
+    "delay_reboot_to_ping": 30,
+    "delay_reboot_to_ping.DOC": "Delay between reboot and first ping response from the DUT. When this times out, it indicates we're stuck at a firmware screen. Hence, bypass action has to be taken if we want to proceed.",
+
+    "confirm_screen": 3,
+    "confirm_screen.DOC": "Delay between keypresses in firmware screen",
+
+    "dev_screen_timeout": 30,
+    "dev_screen_timeout.DOC": "The developer screen timeout fits our spec",
+
+    "usb_plug": 10,
+    "usb_plug.DOC": "Delay between power-on and plug USB",
+
+    "shutdown": 30,
+    "shutdown.DOC": "Delay for waiting for client to shutdown",
+
+    "shutdown_timeout": 60,
+    "shutdown_timeout.DOC": "Timeout of confirming DUT shutdown",
+
+    "ec_boot_to_console": 1.2,
+    "ec_boot_to_console.DOC": "Delay between EC boot and ChromeEC console functional",
+
+    "ec_boot_to_pwr_button": 0.5,
+    "ec_boot_to_pwr_button.DOC": "Delay between EC boot and pressing power button",
+
+    "ec_has_powerbtn_cmd": true,
+    "ec_has_powerbtn_cmd.DOC": "EC, if present, supports 'powerbtn' console command",
+
+    "ec_reboot_to_g3_delay": 0,
+    "ec_reboot_to_g3_delay.DOC": "Delay for waiting EC turning off the AP",
+
+    "software_sync": 6,
+    "software_sync.DOC": "Delay of EC software sync hash calculating time",
+
+    "software_sync_update": 2,
+    "software_sync_update.DOC": "Delay of EC software sync updating EC",
+
+    "hold_pwr_button_poweroff": 5,
+    "hold_pwr_button_poweroff.DOC": "Duration of holding power button to power off DUT normally",
+
+    "hold_pwr_button_poweron": 0.2,
+    "hold_pwr_button_poweron.DOC": "Duration of holding power button to power on DUT normally (also known as SHORT_DELAY in hdctools)",
+
+    "powerup_ready": 10,
+    "powerup_ready.DOC": "Delay after /sbin/shutdown before pressing power button",
+
+    "servo_prog_state_delay": 0,
+    "servo_prog_state_delay.DOC": "Time in seconds to wait after changingt servo state for programming",
+
+    "usb_image_boot_timeout": 180,
+    "usb_image_boot_timeout.DOC": "Timeout of confirming DUT doesn't boot on USB image in Recovery screen",
+
+    "smm_store": true,
+            "smm_store.DOC": "Check SMMSTORE exists in FMap for x86 boards",
+
+    "lid_wake_from_power_off": true,
+            "lid_wake_from_power_off.DOC": "True if the lid can wake the system from a powered off state",
+
+    "ap_access_ec_flash": true,
+            "ap_access_ec_flash.DOC": "True if AP can access the EC flash while Chrome OS is running",
+
+    "rec_force_mrc": true,
+    "rec_force_mrc.DOC": "True if the device supports power_state:rec_force_mrc, which forced memroy retraining in recovery mode",
+
+    "gsc_can_wake_ec_with_reset": true,
+    "gsc_can_wake_ec_with_reset.DOC": "True if the GSC can wake the EC with its reset GPIO",
+
+    "ap_up_after_cr50_reboot": true,
+    "ap_up_after_cr50_reboot.DOC": "True if AP is normally expected to be powered on after the Cr50 reboots (when AC power is connected)",
+
+    "ec_forwards_short_pp_press": false,
+    "ec_forwards_short_pp_press.DOC": "True if the EC will send short power button presses, such as those expected during CCD open, to the AP",
+
+    "serial_number_length": 0,
+    "serial_number_length.DOC": "Length of serial number that can be set in firmware; if serial number cannot be set then 0",
+
+    "has_diagnostics_image": false,
+    "has_diagnostics_image.DOC": "True if altfw/diag is build into RW_LEGACY"
+}

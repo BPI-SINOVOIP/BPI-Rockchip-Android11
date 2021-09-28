@@ -1,0 +1,24 @@
+// Copyright 2019 Google LLC.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+android_test {
+    name: "CtsSkQPTestCases",
+    defaults: ["cts_defaults"],
+
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+    libs: ["android.test.runner.stubs"],
+    jni_libs: ["libskqp_app"],
+    compile_multilib: "both",
+
+    static_libs: [
+        "android-support-design",
+        "ctstestrunner-axt",
+    ],
+    srcs: ["java/**/*.java"],
+    sdk_version: "test_current",
+}

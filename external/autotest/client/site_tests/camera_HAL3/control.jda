@@ -1,0 +1,40 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+
+AUTHOR = "Chrome OS Team, chromeos-video@google.com"
+NAME = "camera_HAL3.jda"
+PURPOSE = "Verify Jpeg decode accelerator works in USB HALv3."
+CRITERIA = """
+This test will fail if there is a JDA decode error.
+"""
+ATTRIBUTES = "suite:bvt-perbuild"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "video"
+TEST_TYPE = "client"
+BUG_TEMPLATE = {
+    'labels': ['OS-Chrome', 'VideoTestFailure'],
+    'cc': ['chromeos-video-test-failures@google.com'],
+}
+
+DOC = """
+This test runs camera3 test to verify JDA function.
+"""
+
+facing_options = [
+    '--%s=%s' % kv
+    for kv in utils.args_to_dict(args).items()
+    if kv[0] == 'camera_facing'
+]
+
+job.run_test(
+    'camera_HAL3',
+    cmd_timeout=5,
+    camera_hals=['usb.so'],
+    options=['--gtest_filter=*/Camera3SingleFrameTest.GetFrame/0'] +
+    facing_options,
+    capability='hw_dec_jpeg',
+    test_config={'force_jpeg_hw_dec': True})

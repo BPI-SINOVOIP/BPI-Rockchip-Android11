@@ -1,0 +1,13 @@
+[
+  {
+    "description": "ext4 filesystem",
+    "filesystem_type": "ext4",
+    "volume_name": "EXT4",
+    "expected_rename_status": 5,
+
+    "mkfs_options": [ "-L", "EMPTY4" ],
+    "mount_options": ["rw", "nodev", "noexec", "nosuid", "sync" ],
+    "expected_mount_status": 0,
+    "expected_mount_path": "/media/removable/EMPTY4"
+  }
+]

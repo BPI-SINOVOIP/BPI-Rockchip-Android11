@@ -1,0 +1,39 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "mruthven"
+NAME = "firmware_Cr50Unlock.faft_cr50_tot"
+PURPOSE = "Verify cr50 unlock"
+ATTRIBUTES = "suite:faft_cr50_tot"
+TIME = "SHORT"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """
+Verify cr50 can be unlocked with a password
+
+This test is applicable when using ToT cr50 module.
+TODO(crbug.com/1014572) Drop this control file once suites can inject test args.
+"""
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+# crbug.com/1014572: Inject test args.
+args_dict['tot_test_run'] = 'true'
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+
+    iterations = int(args_dict.get("iterations", 1))
+
+    job.run_test("firmware_Cr50Unlock", host=host, cmdline_args=args,
+                 full_args=args_dict, iterations=iterations)
+
+parallel_simple(run, machines)

@@ -1,0 +1,67 @@
+test: enable some tests on android/arm64.
+
+--- test/chanlinear.go
++++ test/chanlinear.go
+@@ -1,9 +1,9 @@
+-// +build darwin linux
++// +build darwin linux android
+ // run
+ 
+ // Copyright 2014 The Go Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style
+ // license that can be found in the LICENSE file.
+ 
+ // Test that dequeueing from a pending channel doesn't
+ // take linear time.
+--- test/fixedbugs/bug385_64.go
++++ test/fixedbugs/bug385_64.go
+@@ -1,9 +1,9 @@
+-// +build amd64
++// +build amd64 arm64
+ // errorcheck
+ 
+ // Copyright 2011 The Go Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style
+ // license that can be found in the LICENSE file.
+ 
+ // Issue 2444
+ // Issue 4666: issue with arrays of exactly 4GB.
+--- test/fixedbugs/issue10607.go
++++ test/fixedbugs/issue10607.go
+@@ -1,9 +1,9 @@
+-// +build linux,!ppc64
++// +build linux,!ppc64 android
+ // run
+ 
+ // Copyright 2015 The Go Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style
+ // license that can be found in the LICENSE file.
+ 
+ // Test that a -B option is passed through when using both internal
+ // and external linking mode.
+--- test/maplinear.go
++++ test/maplinear.go
+@@ -1,9 +1,9 @@
+-// +build darwin linux
++// +build darwin linux android
+ // run
+ 
+ // Copyright 2013 The Go Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style
+ // license that can be found in the LICENSE file.
+ 
+ // Test that maps don't go quadratic for NaNs and other values.
+ 
+--- test/recover4.go
++++ test/recover4.go
+@@ -1,9 +1,9 @@
+-// +build linux darwin
++// +build linux android darwin
+ // run
+ 
+ // Copyright 2015 The Go Authors. All rights reserved.
+ // Use of this source code is governed by a BSD-style
+ // license that can be found in the LICENSE file.
+ 
+ // Test that if a slice access causes a fault, a deferred func
+ // sees the most recent value of the variables it accesses.

@@ -1,0 +1,32 @@
+This repo contains Android's copy of ICU4C and ICU4J and associated tools and code.
+
+Directories
+===========
+
+ICU4J
+-----
+
+icu4j/             - ICU4J with Google and Android-specific patches applied.
+                     After patching this make sure to run the following to update
+                     the repackaged version used in Android and CTS tests.
+                       tools/srcgen/generate_android_icu4j.sh
+
+android_icu4j/     - This is the copy of ICU4J used in the Android platform.
+                     IMPORTANT NOTE: Do not make changes to this code directly,
+                     except where noted in android_icu4j/README.android. See
+                     tools/README.android for how to generate it.
+
+ICU4C
+-----
+
+icu4c/             - ICU4C with Google and Android-specific patches applied.
+
+android_icu4c/     - Configuration code used when building ICU4C on Android.
+
+libandroidicu/     - The subset of ICU4C exposed to framework code and other
+                     components outside of the mainline module that contains ICU.
+
+libandroidicuinit/ - A static library for ICU4C initialization. Used by
+                     libandroidicu and libjavacore to initialize ICU4C.
+
+tools/             - Code / data maintenance tools. See tools/README.android.

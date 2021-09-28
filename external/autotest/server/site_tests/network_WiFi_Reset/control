@@ -1,0 +1,27 @@
+# Copyright 2017 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'briannorris'
+NAME = 'network_WiFi_Reset'
+TIME = 'SHORT'
+MAX_RESULT_SIZE_KB = 512000
+TEST_TYPE = 'Server'
+DEPENDENCIES = 'wificell'
+ATTRIBUTES = ('suite:wifi_matfunc')
+
+DOC = """
+This test verifies that if a network device can be reset from user space, that
+it will connect to the network correctly after being reset a few times. We also
+run through a few system suspend/resume cycles in between, for completeness.
+Only supports select drivers at the moment, but will report TestNA for
+unsupported devices.
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_Reset',
+                 host=host,
+                 raw_cmdline_args=args)
+
+parallel_simple(run, machines)

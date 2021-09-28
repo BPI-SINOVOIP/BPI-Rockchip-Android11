@@ -1,0 +1,24 @@
+# Copyright (c) 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "puthik"
+NAME = "power_Idle.default"
+PURPOSE = "Measure power usage when system is idle."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = "suite:crosbolt_perf_perbuild"
+
+DOC = """
+This test records power related statistics while the system is idling.
+
+This version tests only the default state of the DUT for 2 minutes.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Idle', pdash_note=pdash_note, tag=NAME.split('.')[1],
+             default_only=True, force_discharge=True)

@@ -1,0 +1,189 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//common-mk/pkg_config.gni")
+import("//common-mk/proto_library.gni")
+
+group("all") {
+  deps = [
+    ":libpuffin-proto",
+    ":libpuffdiff",
+    ":libpuffpatch",
+    ":puffin",
+  ]
+  if (use.test) {
+    deps += [ ":puffin_test" ]
+  }
+  if (use.fuzzer) {
+    deps += [
+      ":puffin_huff_fuzzer",
+      ":puffin_puff_fuzzer",
+      ":puffin_puffpatch_fuzzer",
+    ]
+  }
+}
+
+pkg_config("target_defaults") {
+  pkg_deps = [
+    "libchrome-${libbase_ver}",
+  ]
+  if (use.fuzzer) {
+    # Link against protobuf for fuzzers so we can use libprotobuf-mutator.
+    pkg_deps += [ "protobuf" ]
+  } else {
+    pkg_deps += [ "protobuf-lite" ]
+  }
+  cflags = [ "-Wextra" ]
+  cflags_cc = [ "-Wnon-virtual-dtor" ]
+  include_dirs = [ "src/include" ]
+  defines = [
+    "USE_BRILLO",
+    "_FILE_OFFSET_BITS=64",
+  ]
+}
+
+proto_library("libpuffin-proto") {
+  proto_in_dir = "src"
+  proto_out_dir = "include/puffin/src"
+  sources = [
+    "src/puffin.proto",
+  ]
+}
+
+pkg_config("libpuffpatch_config") {
+  pkg_deps = [
+    "libbspatch",
+  ]
+}
+
+static_library("libpuffpatch") {
+  configs += [
+    "//common-mk:nouse_thin_archive",
+    ":target_defaults",
+    ":libpuffpatch_config",
+  ]
+  configs -= [ "//common-mk:use_thin_archive" ]
+  complete_static_lib = true
+  deps = [ ":libpuffin-proto" ]
+  sources = [
+    "src/bit_reader.cc",
+    "src/bit_writer.cc",
+    "src/huffer.cc",
+    "src/huffman_table.cc",
+    "src/puff_reader.cc",
+    "src/puff_writer.cc",
+    "src/puffer.cc",
+    "src/puffin_stream.cc",
+    "src/puffpatch.cc",
+  ]
+}
+
+pkg_config("libpuffdiff_config") {
+  pkg_deps = [
+    "libbsdiff",
+  ]
+}
+static_library("libpuffdiff") {
+  configs += [
+    "//common-mk:nouse_thin_archive",
+    ":target_defaults",
+    ":libpuffdiff_config",
+  ]
+  configs -= [ "//common-mk:use_thin_archive" ]
+  deps = [
+    ":libpuffpatch",
+  ]
+  sources = [
+    "src/file_stream.cc",
+    "src/memory_stream.cc",
+    "src/puffdiff.cc",
+    "src/utils.cc",
+  ]
+}
+
+pkg_config("libbrillo") {
+  pkg_deps = [
+    "libbrillo-${libbase_ver}",
+  ]
+}
+
+executable("puffin") {
+  configs += [
+    ":libbrillo",
+    ":target_defaults",
+  ]
+  deps = [
+    ":libpuffdiff",
+  ]
+  sources = [
+    "src/extent_stream.cc",
+    "src/main.cc",
+  ]
+}
+
+if (use.test) {
+  executable("puffin_test") {
+    configs += [
+      "//common-mk:test",
+      ":libbrillo",
+      ":target_defaults",
+    ]
+    sources = [
+      "src/bit_io_unittest.cc",
+      "src/extent_stream.cc",
+      "src/patching_unittest.cc",
+      "src/puff_io_unittest.cc",
+      "src/puffin_unittest.cc",
+      "src/stream_unittest.cc",
+      "src/unittest_common.cc",
+      "src/utils_unittest.cc",
+    ]
+    deps = [
+      "//common-mk/testrunner",
+      ":libpuffdiff",
+    ]
+  }
+}
+
+if (use.fuzzer) {
+  executable("puffin_huff_fuzzer") {
+    configs += [
+      "//common-mk/common_fuzzer",
+      ":libbrillo",
+      ":target_defaults",
+    ]
+    deps = [
+      ":libpuffpatch",
+    ]
+    sources = [
+      "src/fuzzer_huff.cc",
+    ]
+  }
+  executable("puffin_puff_fuzzer") {
+    configs += [
+      "//common-mk/common_fuzzer",
+      ":libbrillo",
+      ":target_defaults",
+    ]
+    deps = [
+      ":libpuffpatch",
+    ]
+    sources = [
+      "src/fuzzer_puff.cc",
+    ]
+  }
+  executable("puffin_puffpatch_fuzzer") {
+    configs += [
+      "//common-mk/common_fuzzer",
+      ":libbrillo",
+      ":target_defaults",
+    ]
+    deps = [
+      ":libpuffdiff",
+    ]
+    sources = [
+      "src/fuzzer_puffpatch.cc",
+    ]
+  }
+}

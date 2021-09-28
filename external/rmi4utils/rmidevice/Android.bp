@@ -1,0 +1,14 @@
+cc_library_static {
+    name: "rmidevice",
+    srcs: [
+        "rmifunction.cpp",
+        "rmidevice.cpp",
+        "hiddevice.cpp",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+    export_include_dirs: ["."],
+}

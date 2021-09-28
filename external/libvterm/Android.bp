@@ -1,0 +1,27 @@
+cc_library_static {
+    name: "libvterm",
+
+    export_include_dirs: ["include"],
+
+    srcs: [
+        "src/encoding.c",
+        "src/input.c",
+        "src/keyboard.c",
+        "src/parser.c",
+        "src/pen.c",
+        "src/screen.c",
+        "src/state.c",
+        "src/unicode.c",
+        "src/vterm.c",
+    ],
+
+    cflags: [
+        "-std=c99",
+        "-Wall",
+        "-Werror",
+        "-Wno-missing-field-initializers",
+        "-Wno-sign-compare",
+        "-Wno-unused-function",
+        "-Wno-unused-parameter",
+    ],
+}

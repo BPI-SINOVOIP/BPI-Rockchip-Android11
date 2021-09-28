@@ -1,0 +1,370 @@
+syntax = "proto3";
+
+package nugget.app.protoapi;
+
+enum KeySize {
+  KS_RESERVED = 0;
+  s128b = 16;
+  s192b = 24;
+  s256b = 32;
+}
+
+enum DcryptError {
+  DE_RESERVED = 0;
+  DE_NO_ERROR = 1;
+  INVALID_PLAINTEXT = 2;
+  MISSING_PARAMETER = 3;
+  KEYSIZE_MISMATCH = 4;
+  INVALID_TEST = 5;
+  KEYGEN_ERROR = 6;
+}
+
+// TODO remove this when oneof support is added to nanopb
+enum OneofTestParametersCase {
+  TPC_RESERVED = 0;
+  kTrngTest = 1;
+  kAesCbcEncryptTest = 2;
+  kAesGcmEncryptTest = 3;
+  kAesCmacTest = 4;
+  kFullStressTest = 5;
+  kAesCavpCbcTest = 6;
+  kAesCavpEcbTest = 7;
+  kAesCavpCtrTest = 8;
+  kAesCavpMctCbcTest = 9;
+  kAesCavpMctEcbTest = 10;
+  kAesCavpMctCtrTest = 11;
+  kCavpAesGcmTest = 12;
+  kCavpHmacTest = 13;
+  kCavpShaMsgTest = 14;
+  kCavpShaMctTest = 15;
+  kCavpRsaKeyGenTest = 16;
+  kCavpRsaSigGenTest = 17;
+  kCavpRsaSigVerTest = 18;
+  kCavpDrbgTest = 19;
+  kCavpCkdfTest = 20;
+  kCavpEcdsaKeyPairTest = 21;
+  kCavpEcdsaPkvTest = 22;
+  kCavpEcdsaSigGenTest = 23;
+  kCavpEcdsaSigVerTest = 24;
+  kCavpCmacGenTest = 25;
+}
+
+// TODO remove this when oneof support is added to nanopb
+enum OneofTestResultsCase {
+  ONEOF_NAME_NOT_SET = 0;
+  kTrngTestResult = 1;
+  kAesCbcEncryptTestResult = 2;
+  kAesGcmEncryptTestResult = 3;
+  kAesCmacTestResult = 4;
+  kFullStressResult = 5;
+  kAesCavpTestResult = 6;
+  kCavpAesGcmTestResult = 7;
+  kCavpHmacTestResult = 8;
+  kCavpShaTestResult = 9;
+  kCavpRsaKeyGenTestResult = 10;
+  kCavpRsaSigGenTestResult = 11;
+  kCavpRsaSigVerTestResult = 12;
+  kCavpDrbgTestResult = 13;
+  kCavpCkdfTestResult = 14;
+  kCavpEcdsaKeyPairTestResult = 15;
+  kCavpEcdsaPkvTestResult = 16;
+  kCavpEcdsaSigGenTestResult = 17;
+  kCavpEcdsaSigVerTestResult = 18;
+  kCavpCmacGenTestResult = 19;
+}
+
+message AesCbcEncryptTest {
+  KeySize key_size = 1;
+  uint32 number_of_blocks = 2;
+  bytes key = 3;
+  bytes initialization_vector = 4;
+  // TODO plain_text and number_of_blocks should be mutually exclusive.
+  // a oneof would be good for this but nanopb doesn't support dynamic lengths
+  // inside of a oneof.
+  bytes plain_text = 5;
+}
+
+message AesCbcEncryptTestResult {
+  DcryptError result_code = 1;
+  bytes initialization_vector = 2;
+  bytes cipher_text = 3;
+}
+
+message AesGcmEncryptTest {
+  bytes key = 1;
+  bytes iv = 2;
+  bytes plain_text = 3;
+  bytes aad = 4;
+  uint32 tag_len = 5;
+}
+
+message AesGcmEncryptTestResult {
+  DcryptError result_code = 1;
+  bytes cipher_text = 2;
+  bytes tag = 3;
+}
+
+enum CavpEncryptMode {
+  ENCRYPT = 0;
+  DECRYPT = 1;
+}
+
+message AesCavpTest {
+  uint32 count = 1;
+  uint32 key_size = 3;
+  CavpEncryptMode encrypt_mode = 4;
+  bytes key = 5;
+  bytes iv = 6;
+  bytes text = 7;
+}
+
+message AesCavpTestResult {
+  DcryptError result_code = 1;
+  bytes text = 2;
+}
+
+message CavpAesGcmTest {
+  uint32 count = 1;
+  uint32 key_len = 2;
+  uint32 tag_len = 3;
+  CavpEncryptMode encrypt_mode = 4;
+  bytes key = 5;
+  bytes iv = 6;
+  bytes text = 7;
+  bytes aad = 8;
+  bytes tag = 9;
+}
+
+message CavpAesGcmTestResult {
+  DcryptError result_code = 1;
+  bytes text = 2;
+  bytes tag = 3;
+  uint32 success = 4;
+}
+
+enum CavpShaAlgorithm {
+  INVALID = 0;
+  SHA1 = 1;
+  SHA256 = 2;
+}
+
+message CavpHmacTest {
+  uint32 key_len = 1;
+  uint32 text_len = 2;
+  CavpShaAlgorithm algo = 3;
+  bytes key = 4;
+  bytes msg = 5;
+}
+
+message CavpHmacTestResult {
+  DcryptError result_code = 1;
+  bytes mac = 2;
+}
+
+message CavpShaMsgTest {
+  CavpShaAlgorithm algo = 1;
+  uint32 total_len = 2;
+  uint32 offset = 3;
+  bytes msg = 4;
+}
+
+message CavpShaMctTest {
+  CavpShaAlgorithm algo = 1;
+  bytes seed = 2;
+}
+
+message CavpShaTestResult {
+  DcryptError result_code = 1;
+  bytes md = 2;
+}
+
+enum CavpRsaMRTable {
+  C_2 = 0;
+  C_3 = 1;
+}
+
+enum CavpRsaPaddingType {
+  INVALID_PADDING = 0;
+  PKCS1 = 1;
+  PSS = 2;
+  OAEP = 3;
+}
+
+message CavpRsaKeyGenTest {
+  uint32 count = 1;
+  uint32 mod = 2;
+  CavpRsaMRTable table = 3;
+}
+
+message CavpRsaSigGenTest {
+  bool gen_n = 1;
+  CavpShaAlgorithm sha_alg = 2;
+  CavpRsaPaddingType padding = 3;
+  bytes msg = 4;
+}
+
+message CavpRsaSigVerTest {
+  uint32 mod = 1;
+  CavpShaAlgorithm sha_alg = 2;
+  CavpRsaPaddingType padding = 3;
+  uint32 e = 4;
+  bytes n = 5;
+  bytes msg = 6;
+  bytes sig = 7;
+}
+
+enum CavpRsaSigVerResult {
+  Pass = 0;
+  Fail_MessageChanged = 1;
+  Fail_General = 2;
+  Fail_SigChanged = 3;
+  Fail_EMHashMovedLeft = 4;
+  Fail_EMModPayload = 5;
+}
+
+message CavpRsaSigVerTestResult {
+  DcryptError result_code = 1;
+  CavpRsaSigVerResult verif_result = 2;
+}
+
+message CavpRsaSigGenTestResult {
+  DcryptError result_code = 1;
+  uint32 e = 2;
+  bytes n = 3;
+  bytes sig = 4;
+}
+
+message CavpRsaKeyGenTestResult {
+  DcryptError result_code = 1;
+  uint32 e = 2;
+  bytes p = 3;
+  bytes q = 4;
+  bytes n = 5;
+  bytes d = 6;
+}
+
+message CavpDrbgTest {
+  bool prediction_resistance = 2;
+  uint32 ret_len = 3;
+  bytes entropy_init = 4;
+  bytes nonce = 5;
+  bytes perso_str = 6;
+  bytes add_input_1 = 7;
+  bytes add_input_2 = 8;
+  bytes entropy_pr_1 = 10;
+  bytes entropy_pr_2 = 11;
+}
+
+message CavpDrbgTestResult {
+  DcryptError result_code = 1;
+  bytes bits = 2;
+}
+
+message CavpCkdfTest {
+  uint32 key_len = 1;
+  bytes key = 2;
+}
+
+message CavpCkdfTestResult {
+  DcryptError result_code = 1;
+  bytes key = 2;
+  bytes fixed_input_data = 3;
+}
+
+enum CavpEcdsaKeyGenTable {
+  B_4_1 = 0;
+  B_4_2 = 1;
+}
+
+message CavpEcdsaKeyPairTest {
+  CavpEcdsaKeyGenTable table = 1;
+}
+
+message CavpEcdsaKeyPairTestResult {
+  DcryptError result_code = 1;
+  bytes d = 2;
+  bytes qx = 3;
+  bytes qy = 4;
+}
+
+message CavpEcdsaPkvTest {
+  bytes qx = 1;
+  bytes qy = 2;
+}
+
+message CavpEcdsaPkvTestResult {
+  DcryptError result_code = 1;
+  bool result = 2;
+}
+
+message CavpEcdsaSigGenTest {
+  bytes msg = 1;
+}
+
+message CavpEcdsaSigGenTestResult {
+  DcryptError result_code = 1;
+  bytes qx = 2;
+  bytes qy = 3;
+  bytes r = 4;
+  bytes sig = 5;
+}
+
+message CavpEcdsaSigVerTest {
+  bytes msg = 1;
+  bytes qx = 2;
+  bytes qy = 3;
+  bytes r = 4;
+  bytes sig = 5;
+}
+
+message CavpEcdsaSigVerTestResult {
+  DcryptError result_code = 1;
+  bool result = 2;
+}
+
+message CavpCmacGenTest {
+  uint32 offset = 1;
+  uint32 key_size = 2;
+  uint32 mac_len = 3;
+  uint32 total_len = 4;
+  bytes key = 5;
+  bytes msg = 6;
+}
+
+message CavpCmacGenTestResult {
+  DcryptError result_code = 1;
+  bytes mac = 2;
+}
+
+message TrngTest {
+  uint32 number_of_bytes = 1;
+}
+
+message AesCmacTest {
+  bytes key = 1;
+  bytes plain_text = 2;
+};
+
+message AesCmacTestResult {
+  DcryptError result_code = 1;
+  bytes cmac = 2;
+};
+
+message TrngTestResult {
+  bytes random_bytes = 1;
+}
+
+/*
+TODO look into adding callback support to oneof fields in nanopb
+message TestingAPICall {
+  oneof test_parameters {
+      AesCbcEncryptTest aes_cbc_encrypt_test = 1;
+  }
+}
+
+message TestingAPIResponse {
+  oneof test_results {
+    AesCbcEncryptTestResult aes_cbc_encrypt_result = 1;
+  }
+}
+*/

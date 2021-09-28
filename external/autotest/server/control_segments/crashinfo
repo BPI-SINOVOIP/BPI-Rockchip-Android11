@@ -1,0 +1,14 @@
+from autotest_lib.server import crashcollect
+from autotest_lib.server import utils
+
+
+def crashinfo(machine):
+    host = hosts.create_host(machine)
+    if has_failed_tests:
+        crashcollect.get_crashinfo(host, test_start_time)
+    else:
+        crashcollect.report_crashdumps(host)
+        crashcollect.fetch_orphaned_crashdumps(
+                host, crashcollect.get_host_infodir(host))
+
+job.parallel_simple(crashinfo, machines, log=False)

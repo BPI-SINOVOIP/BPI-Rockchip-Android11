@@ -1,0 +1,20 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'dbeckett'
+NAME = 'policy_SearchSuggestEnabled.not_set'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify when the 'SearchSuggestEnabled' policy is not set, the search suggestions
+drop down when using the omnibox bar is enabled.
+
+'''
+
+job.run_test('policy_SearchSuggestEnabled',
+             case=None)

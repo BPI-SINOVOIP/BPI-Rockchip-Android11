@@ -1,0 +1,22 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "chromeos-gfx"
+NAME = "graphics_HwOverlays.canvas3D"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "graphics"
+TEST_TYPE = "client"
+
+ATTRIBUTES = "suite:bvt-perbuild"
+
+HTML_TEST_FILE = 'canvas_3d.html'
+
+DOC = """
+Runs a very simple HTML canvas 3D test (creating the WebGL context and drawing
+a glClear passes), then inspects the amount of hardware overlays reported by the
+system.
+"""
+
+job.run_test('graphics_HwOverlays', html_file=HTML_TEST_FILE)

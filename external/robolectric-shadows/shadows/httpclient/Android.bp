@@ -1,0 +1,58 @@
+//#############################################
+// Compile Robolectric shadows httpclient
+//#############################################
+
+java_library_host {
+    name: "Robolectric_shadows_httpclient",
+    libs: [
+        "Robolectric_shadows_framework",
+        "Robolectric_annotations",
+        "Robolectric_shadowapi",
+        "Robolectric_utils",
+        "robolectric-httpclient-4.0.3",
+        "robolectric-httpcore-4.0.1",
+        "robolectric-javax.annotation-api-1.2",
+        "robolectric-host-android_all",
+        "robolectric-host-org_apache_http_legacy",
+    ],
+    plugins: ["Robolectric_processor"],
+    javacflags: ["-Aorg.robolectric.annotation.processing.shadowPackage=org.robolectric.shadows.httpclient"],
+    srcs: ["src/main/java/**/*.java"],
+}
+
+//#############################################
+// Compile Robolectric shadows httpclient tests
+//#############################################
+
+java_test_host {
+    name: "Robolectric_shadows_httpclient_tests",
+    srcs: ["src/test/java/**/*.java"],
+    java_resource_dirs: ["src/test/resources"],
+    static_libs: [
+        "Robolectric_shadows_httpclient",
+        "Robolectric_shadows_framework",
+        "Robolectric_annotations",
+        "Robolectric_robolectric",
+        "Robolectric_resources",
+        "Robolectric_shadowapi",
+        "Robolectric_sandbox",
+        "Robolectric_junit",
+        "Robolectric_utils",
+        "robolectric-maven-ant-tasks-2.1.3",
+        "bouncycastle-unbundled",
+        "hamcrest",
+        "robolectric-httpclient-4.0.3",
+        "asm-commons-6.0",
+        "robolectric-httpcore-4.0.1",
+        "guava",
+        "asm-tree-6.0",
+        "junit",
+        "truth-prebuilt",
+        "robolectric-ant-1.8.0",
+        "asm-6.0",
+        "jsr305",
+        "robolectric-host-android_all",
+        "robolectric-host-org_apache_http_legacy",
+    ],
+    test_suites: ["general-tests"],
+}

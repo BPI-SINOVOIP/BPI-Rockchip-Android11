@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'timkovich'
+NAME = 'policy_ExtensionPolicy'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+policy_ExtensionPolicy verifies that changes to extension policies can be set
+and are reflected correctly in chrome://policy. Fields marked sensitive should
+have their value obfuscated.
+
+This test will only work when using the fake DM server.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_ExtensionPolicy', **args_dict)
+

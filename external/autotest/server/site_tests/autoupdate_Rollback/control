@@ -1,0 +1,43 @@
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.client.common_lib import utils
+
+AUTHOR = "Chromium OS"
+NAME = "autoupdate_Rollback"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "platform"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:bvt-installer"
+
+DOC = """
+This is a rollback test for Chrome OS releases. It first updates a machine and
+then invokes rollback to boot from its previously booted partition. It tests
+rollback using the update_engine_client rather than manipulating the UI.
+
+To run locally:
+  1) Lease a DUT in the lab
+  2) Edit your shadow_config.ini to point to a devserver that the leased DUT can reach.
+  3) Run with test_that passing job_repo_url
+
+For example:
+
+test_that <dut_ip> autoupdate_Rollback --args="job_repo_url='http://<IP>:<port>/static/<board>-release/RXX-XXXX.X.X/autotest/packages'"
+
+"""
+
+args_dict = utils.args_to_dict(args)
+job_repo_url = args_dict.get('job_repo_url')
+
+
+def run_test(machine):
+    """Execute a test configuration on a given machine."""
+    host = hosts.create_host(machine)
+    job.run_test("autoupdate_Rollback", host=host,
+                 job_repo_url=job_repo_url)
+
+
+# Invoke parallel tests.
+parallel_simple(run_test, machines)

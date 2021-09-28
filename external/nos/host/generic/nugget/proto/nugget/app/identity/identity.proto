@@ -1,0 +1,305 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package nugget.app.identity;
+
+import "nugget/app/identity/identity_defs.proto";
+import "nugget/app/identity/identity_types.proto";
+import "nugget/protobuf/options.proto";
+
+// Identity is the app used to implement Android's Identity HAL.
+//
+// The documentation for the HAL applies to this implementation.
+service Identity {
+  option (nugget.protobuf.app_id) = "IDENTITY";
+  option (nugget.protobuf.app_name) = "Identity";
+  option (nugget.protobuf.app_version) = 1;
+  option (nugget.protobuf.request_buffer_size) = 1024;
+  option (nugget.protobuf.response_buffer_size) = 1024;
+
+  // RPCs for the Identity HAL
+  rpc WICinitialize (WICinitializeRequest) returns (WICinitializeResponse);
+  rpc WICcreateCredentialKey (WICcreateCredentialKeyRequest) returns (WICcreateCredentialKeyResponse);
+  rpc WICstartPersonalization (WICstartPersonalizationRequest) returns (WICstartPersonalizationResponse);
+  rpc WICaddAccessControlProfile (WICaddAccessControlProfileRequest) returns (WICaddAccessControlProfileResponse);
+  rpc WICbeginAddEntry (WICbeginAddEntryRequest) returns (WICbeginAddEntryResponse);
+  rpc WICaddEntryValue (WICaddEntryValueRequest) returns (WICaddEntryValueResponse);
+  rpc WICfinishAddingEntries (WICfinishAddingEntriesRequest) returns (WICfinishAddingEntriesResponse);
+  rpc ICinitialize (ICinitializeRequest) returns (ICinitializeResponse);
+  rpc ICcreateEphemeralKeyPair (ICcreateEphemeralKeyPairRequest) returns (ICcreateEphemeralKeyPairResponse);
+  rpc ICgenerateSigningKeyPair (ICgenerateSigningKeyPairRequest) returns (ICgenerateSigningKeyPairResponse);
+  rpc ICcreateAuthChallenge (ICcreateAuthChallengeRequest) returns (ICcreateAuthChallengeResponse);
+  rpc ICstartRetrieveEntries (ICstartRetrieveEntriesRequest) returns (ICstartRetrieveEntriesResponse);
+  rpc ICsetAuthToken (ICsetAuthTokenRequest) returns (ICsetAuthTokenResponse);
+  rpc ICpushReaderCert (ICpushReaderCertRequest) returns (ICpushReaderCertResponse);
+  rpc ICvalidateAccessControlProfile (ICvalidateAccessControlProfileRequest) returns (ICvalidateAccessControlProfileResponse);
+  rpc ICvalidateRequestMessage (ICvalidateRequestMessageRequest) returns (ICvalidateRequestMessageResponse);
+  rpc ICcalcMacKey (ICcalcMacKeyRequest) returns (ICcalcMacKeyResponse);
+  rpc ICstartRetrieveEntryValue (ICstartRetrieveEntryValueRequest) returns (ICstartRetrieveEntryValueResponse);
+  rpc ICretrieveEntryValue (ICretrieveEntryValueRequest) returns (ICretrieveEntryValueResponse);
+  rpc ICfinishRetrieval (ICfinishRetrievalRequest) returns (ICfinishRetrievalResponse);
+  rpc ICdeleteCredential (ICdeleteCredentialRequest) returns (ICdeleteCredentialResponse);
+}
+
+// WICinitialize
+message WICinitializeRequest{
+  bool testCredential = 1;
+}
+message WICinitializeResponse{
+  Result result = 1;
+}
+
+// WICcreateCredentialKey
+message WICcreateCredentialKeyRequest{
+}
+
+message WICcreateCredentialKeyResponse{
+  Result result = 1;
+  bytes publickey = 2;
+}
+
+// WICstartPersonalization
+message WICstartPersonalizationRequest{
+  uint32 accessControlProfileCount = 1;
+  bytes entryCounts = 2;
+  bytes docType = 3;
+  uint32 expectedProofOfProvisioningSize = 4;
+}
+message WICstartPersonalizationResponse{
+  Result result = 1;
+}
+
+// WICaddAccessControlProfile
+message WICaddAccessControlProfileRequest{
+  uint32 id = 1;
+  bytes readerCertificate = 2;
+  bool userAuthenticationRequired = 3;
+  uint64 timeoutMillis = 4;
+  uint64 secureUserId = 5;
+}
+message WICaddAccessControlProfileResponse{
+  Result result = 1;
+  bytes mac = 2;
+}
+
+// WICbeginAddEntry
+message WICbeginAddEntryRequest{
+  bytes accessControlProfileIds = 1;
+  string nameSpace = 2;
+  string name = 3;
+  uint64 entrySize = 4;
+}
+message WICbeginAddEntryResponse{
+  Result result = 1;
+}
+
+// WICaddEntryValue
+message WICaddEntryValueRequest{
+  bytes accessControlProfileIds = 1;
+  string nameSpace = 2;
+  string name = 3;
+  bytes content = 4;
+}
+message WICaddEntryValueResponse{
+  Result result = 1;
+  bytes encrypted_content = 2;
+}
+
+// WICfinishAddingEntries
+message WICfinishAddingEntriesRequest{
+  bytes docType = 1;
+  bool testCredential = 2;
+}
+
+message WICfinishAddingEntriesResponse{
+  Result result = 1;
+  bytes signatureOfToBeSigned = 2;
+  bytes credentialData = 3;
+}
+
+// ICinitialize
+message ICinitializeRequest{
+  bool testCredential = 1;
+  bytes docType = 2;
+  bytes encryptedCredentialKeys = 3;
+}
+
+message ICinitializeResponse{
+  Result result = 1;
+}
+
+// ICcreateEphemeralKeyPair
+message ICcreateEphemeralKeyPairRequest{
+}
+
+message ICcreateEphemeralKeyPairResponse{
+  Result result = 1;
+  bytes ephemeralPriv = 2;
+}
+
+// ICgenerateSigningKeyPair
+message ICgenerateSigningKeyPairRequest{
+  bytes docType = 1;
+}
+
+message ICgenerateSigningKeyPairResponse{
+  Result result = 1;
+  bytes SigningKeyBlob =2;
+  bytes signingPubKey =3;
+}
+
+// ICcreateAuthChallenge
+message ICcreateAuthChallengeRequest{
+}
+
+message ICcreateAuthChallengeResponse{
+  Result result = 1;
+  uint64 challenge = 2;
+}
+
+// ICstartRetrieveEntries
+message ICstartRetrieveEntriesRequest{
+}
+
+message ICstartRetrieveEntriesResponse{
+  Result result = 1;
+}
+
+// ICsetAuthToken
+message ICsetAuthTokenRequest{
+  uint64 challenge = 1;
+  uint64 secureUserId = 2;
+  uint64 authenticatorId = 3;
+  uint32 hardwareAuthenticatorType = 4;
+  uint64 timeStamp = 5;
+  bytes mac = 6;
+  uint64 verificationTokenChallenge = 7;
+  uint64 verificationTokenTimestamp =8;
+  uint32 verificationTokenSecurityLevel =9;
+  bytes verificationTokenMac = 10;
+}
+
+message ICsetAuthTokenResponse{
+  Result result = 1;
+}
+
+// ICpushReaderCert
+message ICpushReaderCertRequest{
+  bytes x509Cert = 1;
+  uint32 tbsCertificateOffset = 2;
+  uint32 tbsCertificateSize = 3;
+  uint32 signatureOffset = 4;
+  uint32 signatureSize = 5;
+  uint32 publicKeyOffset = 6;
+  uint32 publicKeySize = 7;
+  uint32 signAlg = 8;
+}
+
+message ICpushReaderCertResponse{
+  Result result = 1;
+}
+
+// ICvalidateAccessControlProfile
+message ICvalidateAccessControlProfileRequest{
+  uint32 id = 1;
+  bytes readerCertificate = 2;
+  bool userAuthenticationRequired = 3;
+  uint32 timeoutMillis = 4;
+  uint64 secureUserId = 5;
+  bytes mac = 6;
+  uint32 publicKeyOffset = 7;
+  uint32 publicKeysize = 8;
+}
+
+message ICvalidateAccessControlProfileResponse{
+  Result result = 1;
+  bool accessGranted = 2;
+}
+
+// ICvalidateRequestMessage
+message ICvalidateRequestMessageRequest{
+  bytes sessionTranscript = 1;
+  bytes requestMessage = 2;
+  uint32 coseSignAlg = 3;
+  bytes readerSignatureOfToBeSigned = 4;
+}
+
+message ICvalidateRequestMessageResponse{
+  Result result = 1;
+}
+
+// ICcalcMacKey
+message ICcalcMacKeyRequest{
+  bytes sessionTranscript = 1;
+  bytes readerEphemeralPublicKey = 2;
+  bytes signingKeyBlob = 3;
+  bytes docType = 4;
+  uint32 numNamespacesWithValues = 5;
+  uint32 expectedProofOfProvisioningSize = 6;
+}
+
+message ICcalcMacKeyResponse{
+  Result result = 1;
+}
+
+// ICstartRetrieveEntryValue
+message ICstartRetrieveEntryValueRequest{
+  string nameSpace = 1;
+  string name = 2;
+  uint32 newNamespaceNumEntries = 3;
+  uint32 entrySize = 4;
+  bytes accessControlProfileIds = 5;
+}
+
+message ICstartRetrieveEntryValueResponse{
+  AccessResult accessCheckResult = 1;
+}
+
+// ICretrieveEntryValue
+message ICretrieveEntryValueRequest{
+  bytes encryptedContent = 1;
+  string nameSpace = 2;
+  string name = 3;
+  bytes accessControlProfileIds = 4;
+}
+
+message ICretrieveEntryValueResponse{
+  Result result = 1;
+  bytes content = 2;
+}
+
+// ICfinishRetrieval
+message ICfinishRetrievalRequest{
+}
+
+message ICfinishRetrievalResponse{
+  Result result = 1;
+  bytes mac = 2;
+}
+
+// ICdeleteCredential
+message ICdeleteCredentialRequest{
+  bytes docType = 1;
+  bool testCredential = 2;
+  uint32 proofOfDeletionCborSize =3;
+}
+
+message ICdeleteCredentialResponse{
+  Result result = 1;
+  bytes signatureOfToBeSigned = 2;
+}

@@ -1,0 +1,22 @@
+# Copyright (c) 2010 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_BatteryCharge"
+PURPOSE = "Measure the time required to charge the battery."
+CRITERIA = "This test is a benchmark."
+TIME = "LONG"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+Device should be plugged into an AC outlet.
+
+This test depends on power_status.py, which is included in
+autotest/files/client/cros/power/. power_status.py has many status
+initialization and parsing routines for battery status.
+"""
+
+job.run_test('power_BatteryCharge')

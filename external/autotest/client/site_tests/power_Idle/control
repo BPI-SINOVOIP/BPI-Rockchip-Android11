@@ -1,0 +1,31 @@
+# Copyright (c) 2010 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_Idle"
+PURPOSE = "Measure power usage when system is idle."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = ("suite:bvt-perbuild, suite:power_idle, suite:power_sanity, "
+              "suite:power_monitoring")
+
+DOC = """
+This test records power related statistics while the system is idling.
+
+    Current tests,
+
+      | test# | seconds | display   | bluetooth |
+      -------------------------------------------
+      | 1     | 120     | off       | off       |
+      | 2     | 120     | default   | off       |
+      | 3     | 120     | default   | on - idle |
+      | 4     | 120     | off       | on - idle |
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Idle', pdash_note=pdash_note)

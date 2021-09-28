@@ -1,0 +1,36 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "mruthven"
+NAME = "firmware_Cr50RddG3"
+PURPOSE = "Verify Rdd in G3."
+ATTRIBUTES = "suite:faft_cr50_prepvt, suite:faft_cr50_pvt"
+TIME = "SHORT"
+TEST_TYPE = "server"
+DEPENDENCIES = "servo"
+
+DOC = """Verify Rdd connect and disconnect in G3.
+
+Rdd may break when entering G3. This test verifies the behavior of the DUT.
+Add the information to the faft config so other tests can act appropriately or
+fix the hardware, so Rdd isn't broken.
+"""
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+servo_args = hosts.CrosHost.get_servo_arguments(args_dict)
+
+def run(machine):
+    host = hosts.create_host(machine, servo_args=servo_args)
+
+    iterations = int(args_dict.get("iterations", 1))
+
+    job.run_test("firmware_Cr50RddG3", host=host, cmdline_args=args,
+                 full_args=args_dict, iterations=iterations)
+
+parallel_simple(run, machines)

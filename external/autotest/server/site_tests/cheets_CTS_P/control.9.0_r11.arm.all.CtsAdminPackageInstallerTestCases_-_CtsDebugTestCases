@@ -1,0 +1,37 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file has been automatically generated. Do not edit!
+
+AUTHOR = 'ARC++ Team'
+NAME = 'cheets_CTS_P.9.0_r11.arm.all.CtsAdminPackageInstallerTestCases_-_CtsDebugTestCases'
+ATTRIBUTES = 'suite:arc-cts-qual'
+DEPENDENCIES = 'arc'
+JOB_RETRIES = 1
+TEST_TYPE = 'server'
+TIME = 'LONG'
+MAX_RESULT_SIZE_KB = 512000
+DOC = 'Run module CtsAdminPackageInstallerTestCases, CtsAdminTestCases, CtsAlarmClockTestCases, CtsAlarmManagerTestCases, CtsAndroidAppTestCases, CtsAndroidTestBase27ApiSignatureTestCases, CtsAndroidTestMockCurrentApiSignatureTestCases, CtsAndroidTestRunnerCurrentApiSignatureTestCases, CtsAnimationTestCases, CtsApacheHttpLegacy27ApiSignatureTestCases, CtsApacheHttpLegacyCurrentApiSignatureTestCases, CtsApacheHttpLegacyUsesLibraryApiSignatureTestCases, CtsAppComponentFactoryTestCases, CtsAppSecurityHostTestCases, CtsAppTestCases, CtsAppUsageHostTestCases, CtsAppWidgetTestCases, CtsAslrMallocTestCases, CtsAssistTestCases, CtsAtraceHostTestCases, CtsAutoFillServiceTestCases, CtsBackgroundRestrictionsTestCases, CtsBackupHostTestCases, CtsBackupTestCases, CtsBatterySavingTestCases, CtsBionicTestCases, CtsBluetoothTestCases, CtsBootStatsTestCases, CtsCalendarcommon2TestCases, CtsCameraApi25TestCases, CtsCameraTestCases, CtsCarTestCases, CtsCarrierApiTestCases, CtsColorModeTestCases, CtsCompilationTestCases, CtsContactsProviderWipe, CtsContentTestCases, CtsCppToolsTestCases, CtsCurrentApiSignatureTestCases, CtsDatabaseTestCases, CtsDebugTestCases of the Android Compatibility Test Suite (CTS) using arm ABI in the ARC++ container.'
+
+def run_TS(machine):
+    host_list = [hosts.create_host(machine)]
+    job.run_test(
+        'cheets_CTS_P',
+        hosts=host_list,
+        iterations=1,
+        max_retry=9,
+        enable_default_apps=True,
+        tag='9.0_r11.arm.all.CtsAdminPackageInstallerTestCases_-_CtsDebugTestCases',
+        test_name='cheets_CTS_P.9.0_r11.arm.all.CtsAdminPackageInstallerTestCases_-_CtsDebugTestCases',
+        run_template=['run', 'commandAndExit', 'cts', '--include-filter', 'CtsAdminPackageInstallerTestCases', '--include-filter', 'CtsAdminTestCases', '--include-filter', 'CtsAlarmClockTestCases', '--include-filter', 'CtsAlarmManagerTestCases', '--include-filter', 'CtsAndroidAppTestCases', '--include-filter', 'CtsAndroidTestBase27ApiSignatureTestCases', '--include-filter', 'CtsAndroidTestMockCurrentApiSignatureTestCases', '--include-filter', 'CtsAndroidTestRunnerCurrentApiSignatureTestCases', '--include-filter', 'CtsAnimationTestCases', '--include-filter', 'CtsApacheHttpLegacy27ApiSignatureTestCases', '--include-filter', 'CtsApacheHttpLegacyCurrentApiSignatureTestCases', '--include-filter', 'CtsApacheHttpLegacyUsesLibraryApiSignatureTestCases', '--include-filter', 'CtsAppComponentFactoryTestCases', '--include-filter', 'CtsAppSecurityHostTestCases', '--include-filter', 'CtsAppTestCases', '--include-filter', 'CtsAppUsageHostTestCases', '--include-filter', 'CtsAppWidgetTestCases', '--include-filter', 'CtsAslrMallocTestCases', '--include-filter', 'CtsAssistTestCases', '--include-filter', 'CtsAtraceHostTestCases', '--include-filter', 'CtsAutoFillServiceTestCases', '--include-filter', 'CtsBackgroundRestrictionsTestCases', '--include-filter', 'CtsBackupHostTestCases', '--include-filter', 'CtsBackupTestCases', '--include-filter', 'CtsBatterySavingTestCases', '--include-filter', 'CtsBionicTestCases', '--include-filter', 'CtsBluetoothTestCases', '--include-filter', 'CtsBootStatsTestCases', '--include-filter', 'CtsCalendarcommon2TestCases', '--include-filter', 'CtsCameraApi25TestCases', '--include-filter', 'CtsCameraTestCases', '--include-filter', 'CtsCarTestCases', '--include-filter', 'CtsCarrierApiTestCases', '--include-filter', 'CtsColorModeTestCases', '--include-filter', 'CtsCompilationTestCases', '--include-filter', 'CtsContactsProviderWipe', '--include-filter', 'CtsContentTestCases', '--include-filter', 'CtsCppToolsTestCases', '--include-filter', 'CtsCurrentApiSignatureTestCases', '--include-filter', 'CtsDatabaseTestCases', '--include-filter', 'CtsDebugTestCases', '--logcat-on-failure'],
+        retry_template=['run', 'commandAndExit', 'retry', '--retry', '{session_id}'],
+        target_module='all.CtsAdminPackageInstallerTestCases_-_CtsDebugTestCases',
+        target_plan=None,
+        bundle='arm',
+        uri='gs://chromeos-arc-images/cts/bundle/P/android-cts-9.0_r11-linux_x86-arm.zip',
+        login_precondition_commands=['lsblk -do NAME,RM | sed -n s/1$//p | xargs -n1 eject'],
+        prerequisites=['region_us', 'bluetooth'],
+        timeout=88200)
+
+parallel_simple(run_TS, machines)

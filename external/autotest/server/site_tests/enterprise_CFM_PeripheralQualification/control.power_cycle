@@ -1,0 +1,60 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+from autotest_lib.client.common_lib.cros.cfm.usb import usb_device_spec
+from autotest_lib.server.cros.cfm.configurable_test.dsl import *
+from autotest_lib.server import utils
+
+AUTHOR = "kerl@google.com, chromeos-meetings@google.com"
+NAME = "enterprise_CFM_PeripheralQualification.power_cycle"
+PURPOSE = "Stresses a peripheral device by repeatedly power cycling its USB port."
+CRITERIA = ("The device detectable as a USB device after each cycle "
+            "and no crash files appear")
+TIME = "MEDIUM"
+TEST_CATEGORY = "Stress"
+TEST_TYPE = "server"
+
+DOC = """
+Repeatedly power cycle the connected device and verify it appears
+as a USB device after each cycle. Verifies that no new crash files
+appear.
+
+The test requires a vid_pid argument (e.g. 18d1:8001) that determines which
+device to power cycle. This enables testing custom devices from Moblab or from
+a local workstation.
+
+In Moblab, add vid_pid=<vid:pid> under Advanced Options -> Args.
+
+Locally, add arguments with --args when running test_that. Example:
+test_that --autotest_dir ~/trunk/src/third_party/autotest/files/ \
+    --board=guado --args 'servo_host= vid_pid=18d1:8001' \
+    chromeos6-row22-rack13-host7 enterprise_CFM_PeripheralQualification.power_cycle
+"""
+
+args_dict = utils.args_to_dict(args)
+vid,pid = args_dict['vid_pid'].split(':')
+# The product is only informational, set it to whatever.
+product = args_dict.get('product', 'customProduct')
+# Interfaces are only needed when verifying them, set them to empty in this case.
+interfaces = []
+device = usb_device_spec.UsbDeviceSpec(vid, pid, product, interfaces)
+repeat = int(args_dict.get('repeat', 10))
+
+cfm_test = CfmTest(
+    configuration=Configuration(skip_enrollment=True),
+    scenario=Scenario(
+        AssertUsbDevices([device]),
+        RepeatTimes(repeat, Scenario(
+            PowerCycleUsbPort([device]),
+            AssertNoNewCrashes()
+        ))
+    ),
+)
+
+def run_test(machine):
+    job.run_test("enterprise_CFM_PeripheralQualification",
+                 cfm_test = cfm_test,
+                 tag = 'power_cycle',
+                 host = hosts.create_host(machine))
+
+parallel_simple(run_test, machines)

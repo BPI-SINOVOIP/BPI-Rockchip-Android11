@@ -1,0 +1,372 @@
+              Apache Commons BCEL
+                  Version 6.2
+                RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.2!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Experimental Java 9 Support
+
+FIXED BUGS:
+===========
+
+o BCEL-294: Incorrect comment in StackMap.java Thanks to Mark Roberts.
+o BCEL-296: Incorrect comment in several classes. Thanks to Mark Roberts.
+o BCEL-295: Fix local variable live range length; add test case. Thanks to Mark Roberts.
+o BCEL-300: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19.
+o BCEL-301: org.apache.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 20.
+
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    http://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team
+
+-----------------------------------------------------------------------------
+
+              Apache Commons BCEL
+                  Version 6.1
+                RELEASE NOTES
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.1!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Apache Commons BCEL 6.1 is a bugfix and feature release supporting bringing
+experimental support for Java 9.
+
+It requires Java 7 or higher to run.
+
+
+COMPATIBILITY with 6.1
+======================
+
+Binary compatible - Yes
+
+Source compatible - Yes, sort of;
+ - The org.apache.bcel.classfile.Visitor interface has been enhanced with
+ additional methods. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
+ - The org.apache.bcel.generic.Visitor interface has been enhanced with an
+ additional method. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
+
+Semantic compatible - Yes
+
+For full information about API changes please see the extended Clirr report:
+
+
+http://commons.apache.org/bcel/clirr-report.html
+
+
+COMPATIBILITY with Java 9
+=========================
+
+The MANIFEST.MF now contains an additional entry:
+
+  Automatic-Module-Name: org.apache.bcel
+
+This should make it possible to use Commons BCEL 6.1 as a module in the Java 9
+module system. For more information see the corresponding issue and the
+referenced mailing list discussions:
+
+https://issues.apache.org/jira/browse/BCEL-293
+
+The build currently on Java 9 fails with test failures related to Locales. We
+are still working on this. For more information see:
+
+https://issues.apache.org/jira/browse/BCEL-275
+
+
+NEW FEATURES:
+=============
+
+o BCEL-293: Add Automatic-Module-Name MANIFEST entry for Java 9 compatibility.
+o BCEL-292: Add minimal Java 9 support.
+
+FIXED BUGS:
+===========
+
+o BCEL-286: Utility.signatureToString fails if a method has multiple type
+            arguments. Thanks to Mark Roberts.
+o BCEL-287: IINC does not handle -128 properly. Thanks to Mark Roberts.
+o BCEL-283: Support for StackMap should be different from StackMapTable.
+            Thanks to Mark Roberts.
+o BCEL-289: Crash when parsing constructor of inner classes with parameters
+            annotated.
+o BCEL-276: LocalVariableTypeTable is not updated.
+            Thanks to Sam Yoon, Mark Roberts.
+o BCEL-277: Resolving the String representation of a constant throws
+            NoSuchElementException in case of CONSTANT_NameAndType constant.
+            Thanks to Sam Yoon.
+
+
+Have fun!
+-Apache Commons BCEL team
+
+-----------------------------------------------------------------------------
+
+              Release Notes for 6.0
+
+
+INTRODUCTION:
+
+The Apache Commons BCEL team is pleased to announce the release of
+Apache Commons BCEL 6.0!
+
+The Byte Code Engineering Library (BCEL) is intended to give users a convenient
+way to analyze, create, and manipulate compiled .class files. Classes are
+represented by objects containing all the symbolic information of the given
+class: methods, fields and byte code instructions.
+
+Apache Commons BCEL 6.0 is a major release supporting the new features
+introduced in Java 6, 7 and 8.
+
+It requires Java 7 or higher to run.
+
+
+COMPATIBILITY with 5.2
+======================
+
+Binary compatible - not strictly compatible
+- The constant interface org.apache.bcel.Constants has been deprecated. Classes
+ which implemented this interface in 5.2 now use the constants defined in the
+ org.apache.bcel.Const class.
+- The constant interface org.apache.bcel.generic.InstructionConstants has been
+ deprecated. Classes which implemented this interface in 5.2 now use the
+ constants defined in the org.apache.bcel.generic.InstructionConsts class.
+- Return type of method 'public java.lang.Object getElementAt(int)' in
+ org.apache.bcel.verifier.VerifierFactoryListModel has been changed to
+ java.lang.String.
+- The BCEL classes do no longer implement java.io.Serializable.
+
+Source compatible - Yes, sort of;
+ - The org.apache.bcel.classfile.Visitor interface has been enhanced with
+ additional methods. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
+ - The org.apache.bcel.generic.Visitor interface has been enhanced with an
+ additional method. If you implemented it directly instead of extending
+ the EmptyVisitor class you'll have to implement the new methods.
+
+Semantic compatible - Yes, except:
+ - BCEL 6.0 handles new attributes such as code annotations that could only
+ be processed by implementing a custom AttributeReader in the previous
+ versions. Code relying on this behavior will have to be adjusted since
+ the AttributeReader will no longer be called in these cases.
+
+For full information about API changes please see the extended Clirr report:
+
+
+http://commons.apache.org/bcel/clirr-report.html
+
+NEW FEATURES:
+=============
+
+o BCEL-272: Add constants for Java 9 class file version 53.
+
+FIXED BUGS:
+===========
+
+o BCEL-237: non-empty final arrays should be private as they are mutable.
+o BCEL-243: Type.getType() needs to understand TypeVariableSignature(s).
+o BCEL-271: FCONST pattern does not include FCONST_2.
+o BCEL-264: Add missing Node.accept() implementations (ConstantMethodHandle,
+            ConstantMethodType, ParameterAnnotationEntry).
+o BCEL-221: BCELifier is not working for Java8Example (incomplete).
+o BCEL-195: Addition of hashCode() to generic/Instruction.java breaks Targeters.
+            Never make distinct BranchInstructions compare equal.
+o BCEL-261: Select constructor allows partially constructed instance to escape.
+            Re-ordered code to delay the escape.
+o BCEL-259: Minor doc error in BranchInstruction.java.
+o BCEL-260: ClassDumper example duplicates field attribute types.
+o BCEL-258: No tests to check the output of dump methods.
+o BCEL-257: INVOKESPECIAL, INVOKESTATIC, INVOKEVIRTUAL need to define dump()
+            methods.
+o BCEL-254: Two more methods that would be nice to be public.
+o BCEL-245: Type class includes constants that reference subclasses.
+o BCEL-253: Pass 3b verifier is too strict.
+o BCEL-248: StackMapTable[Entry] should be removed and improvements merged into
+            StackMap[Entry].
+o BCEL-202: StackMap[Table]Entry.copy() needs to be deep; Improved support for
+            StackMaps.
+o BCEL-251: Pass3aVerifier visitANEWARRAY() does not allow 255 array dimensions.
+o BCEL-249: Check for max Short seems wrong.
+o BCEL-208: Need to check for an empty InstructionList.
+o BCEL-217: long type instructions are not searched by InstructionFinder using
+            regular expression.
+o BCEL-239: Interfaces should not be used to define constants.
+o BCEL-234: Code must not swallow Throwable.
+o BCEL-209: Bug fixes and improvements to InvokeDynamic and BootStrapMethods
+            implementation. Thanks to Mark Roberts.
+o BCEL-187: Verification error when an invoke references a method defined in
+            superclass. Thanks to Jérôme Leroux.
+o BCEL-218: Remove ObjectType cache. Thanks to chas.
+o BCEL-184: The verifier now checks if methods with a void return type attempt
+            to return an object. Thanks to Jérôme Leroux.
+o BCEL-207: MethodGen.removeLocalVariable now properly unreference the removed
+            variable from the targetters of the instruction handlers delimiting
+            the scope of the variable. Thanks to Mark Roberts.
+o BCEL-197: Utility.signatureToString() no longer throws a ClassFormatException
+            on TypeVariables found in generic signatures. Thanks to Mark Roberts.
+o BCEL-194: Removed the 'index' variable from the LocalVariableGen's hash code. Thanks to Mark Roberts.
+o BCEL-193: The verifier should not check for run time compatibility of objects
+            assigned to arrays. Thanks to Jérôme Leroux.
+o BCEL-188: Correct verification of the return value of a method. Thanks to Jérôme Leroux.
+o BCEL-186: Performance degradation with the UTF8 cache. getInstance no longer
+            uses cache.
+o BCEL-181: org.apache.bcel.util.ClassLoaderRepository.loadClass(String) leaks
+            input streams.
+o BCEL-28:  Mistake in "Peephole optimizer" example
+            at http://commons.apache.org/bcel/manual.html
+o BCEL-74:  BCEL cannot be used as java.system.class.loader.
+o BCEL-77:  XSLT transforms broken in Turkish Locale.
+o BCEL-79:  java.lang.ClassFormatError: LVTT entry for 'local' in class file
+            org/shiftone/jrat/test/dummy/CrashTestDummy does not match any LVT
+            entry
+o BCEL-81:  ClassParser.parse() throws NullPointerException if class does not
+            exist and ClassParser(String) constructor is used.
+o BCEL-85:  ArrayOutOfBoundsException in InstructionFinder.
+o BCEL-87:  Website: Incorrect URL for source; version 5.2 is not in the bug
+            page
+o BCEL-88:  bcelified method doesn't pass verification.
+o BCEL-89:  return type not verified by JustIce.
+o BCEL-94:  @since tag incorrect for Annotation classes in BCEL trunk.
+o BCEL-95:  InstructionFactory missing % operator for Float, Double.
+o BCEL-96:  Fields in Annotations and AnnotationEntry are inaccessible to
+            subclasses
+o BCEL-97:  Add support for getResources to ClassPath.
+o BCEL-98:  Two source files in repository are empty.
+o BCEL-99:  Maven POM file calls in apache regex but code does not use it.
+o BCEL-100: ClassParser throws unintelligible Exception.
+o BCEL-101: verifier raises an AssertionViolatedException when done against
+            Java 5 files with generics/annotations.
+o BCEL-102: Verifier fails in pass 2 with "Number of LocalVariableTable
+            attributes of Code attribute" on static methods.
+o BCEL-107: ParameterAnnotationEntries are read not dumped.
+o BCEL-108: RuntimeVisible Annotations duplicated.
+o BCEL-112: ARRAYLENGTH incorrectly not StackConsumer.
+o BCEL-114: Error in method search() defined in
+            org.apache.bcel.util.InstructionFinder
+o BCEL-115: Deleting all instructions of a list shows wrong behaviour.
+o BCEL-120: Make BCEL JAR OSGi compatible.
+o BCEL-122: ArrayIndexOutOfBoundsException thrown from TABLESWITCH.initFromFile.
+o BCEL-124: tableswitch/lookupswitch invalid alignment of 4-byte operands.
+o BCEL-125: Incorrect size calculation in InstructionFinder.
+o BCEL-130: Class files containing "ParameterAnnotations" are dumped
+            incorrectly.
+o BCEL-131: Class files containing "StackMapTable" attributes (on method code)
+            are dumped incorrectly.
+o BCEL-132: org.apache.bcel.classfile.ClassParser: NullPointerException caused
+            by fileopen failed.
+o BCEL-133: org.apache.bcel.classfile.ClassParser: NullPointerException caused
+            by invalid filename.
+o BCEL-134: ExecutionVisitor doesn't support Class constant type for LDC and
+            LDC_W.
+o BCEL-135: BCELifier issue: BCELFactory fails to handle float and long
+            constants.
+o BCEL-137: "Invalid method signature: TT;" when using MethodGen for a method
+            having a generic parameter.
+o BCEL-138: FieldInstruction.getFieldSize() doesn't decode Type.getTypeSize()
+            output.
+o BCEL-140: org.apache.bcel.generic.Instruction.equals(Object) does not follow
+            Object.equals(Object) rules.
+o BCEL-141: Select instructions should implement StackConsumer instead of
+            StackProducer.
+o BCEL-143: Fix CPL License issues with EnclosingMethod.java and
+            LocalVariableTypeTable.java.
+o BCEL-145: Type.getReturnTypeSize() doesn't decode Type.getTypeSize() output.
+o BCEL-146: SyntheticRepository.loadClass() fails to close the inputStream.
+o BCEL-148: BCELifier produces incorrect code for methods containing loads of
+            class literals from constant pool.
+o BCEL-151: Code attribute size not updated.
+o BCEL-152: Incorrect link for Jasmin assembler language.
+o BCEL-153: Examples not present in source or binary downloads.
+o BCEL-154: ClassParser.parse() generates NPE if it cannot open the file.
+o BCEL-155: InstConstraintVisitor does not handle class constants.
+o BCEL-156: Pass3bVerifier crashes on empty methods.
+o BCEL-159: LocalVariableGen.getLocalVariable() computes incorrect length.
+o BCEL-164: Method does not have a method to access parameter annotations.
+o BCEL-167: ClassPath.getResource does not correctly perform URL escaping.
+o BCEL-173: ClassParser fails to parse JDK classes in Java 8:
+            ClassFormatException: Invalid byte tag in constant pool.
+o BCEL-174: Verification of interfaces with default methods fails with Java 8.
+o BCEL-177: When reading the number of parameters in a MethodParameters
+            structure only read a single byte as per the JVM specification.
+
+CHANGES:
+========
+
+o BCEL-262: InvokeInstruction.getClassName(ConstantPoolGen) should not throw 
+            an exception when it detects an array. Thanks to Mark Roberts.
+o BCEL-230: Document the Java platform requirement clearly and early.
+o BCEL-211: Some additional clone methods should be public.
+o BCEL-127: Document that Instruction Factory returns singleton instances.
+o BCEL-198: better support for clone/copy methods.
+o BCEL-201: modify several toString methods to make output similar to "javap".
+o BCEL-205: add javadoc comments to LineNumber.java and LineNumberTable.java.
+o BCEL-212: Inconsistent toString() results.
+o BCEL-244: Update Java requirement from 5 to 7.
+o BCEL-219: Make org.apache.bcel.classfile.ConstantPool.ConstantPool(DataInput)
+            public. Thanks to Maxim Degtyarev.
+o BCEL-76:  Add parent type processing for ClassPath class.
+o BCEL-83:  Add support for getResource and getResourceAsStream to ClassPath.
+o BCEL-92:  Properly parse StackMapTable attributes in Java 6 classfiles.
+o BCEL-104: Javadoc overhaul.
+o BCEL-119: BCEL is unnecessarily slow.
+o BCEL-157: Add support for INVOKEDYNAMIC and MethodHandles.
+o BCEL-160: Why using unstable sort at MethodGen.getLocalVariables() ?
+o BCEL-163: Incorporate patch file from Findbugs.
+o BCEL-175: Implement the MethodParameters attribute.
+
+REMOVED:
+========
+o BCEL-242: Remove Serializable.
+o BCEL-110: Problem with JAXB if the bcel classloader is used; remove the broken
+            ClassLoader class.
+
+
+Have fun!
+-Apache Commons BCEL team
+
+Feedback
+--------
+
+Open source works best when you give feedback:
+
+    http://commons.apache.org/bcel
+
+Please direct all bug reports to JIRA:
+
+    https://issues.apache.org/jira/browse/BCEL
+
+Or subscribe to the commons-user mailing list
+
+The Apache Commons Team

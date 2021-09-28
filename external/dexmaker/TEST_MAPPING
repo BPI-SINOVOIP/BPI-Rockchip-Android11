@@ -1,0 +1,36 @@
+{
+    "presubmit": [
+        {
+            "name": "CtsMockingTestCases",
+            "options": [
+                {
+                    "exclude-annotation": "androidx.test.filters.LargeTest"
+                }
+            ]
+        },
+        {
+            "name": "CtsInlineMockingTestCases",
+            "options": [
+                {
+                    "exclude-annotation": "androidx.test.filters.LargeTest"
+                }
+            ]
+        },
+        {
+            "name": "CtsMockingDebuggableTestCases",
+            "options": [
+                {
+                    "exclude-annotation": "androidx.test.filters.LargeTest"
+                }
+            ]
+        },
+        {
+            "name": "CtsExtendedMockingTestCases",
+            "options": [
+                {
+                    "exclude-annotation": "androidx.test.filters.LargeTest"
+                }
+            ]
+        }
+    ]
+}

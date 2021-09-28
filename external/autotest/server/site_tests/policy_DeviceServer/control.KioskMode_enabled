@@ -1,0 +1,26 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_DeviceServer.KioskMode_enabled'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'server'
+ATTRIBUTES = 'suite:ent-nightly, suite:policy'
+
+DOC = """
+Sets up and runs the client test for the KioskModeEnabled
+policy.
+
+"""
+
+client_test = 'policy_KioskModeEnabled'
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test('policy_DeviceServer', host=host,
+                  client_test=client_test)
+
+parallel_simple(run, machines)

@@ -1,0 +1,6 @@
+// Test that register types are accepted in upper or lower case, with and
+// without the : prefix.
+.default_register_type :ub
+.default_register_type :UB
+.default_register_type ub
+.default_register_type UB

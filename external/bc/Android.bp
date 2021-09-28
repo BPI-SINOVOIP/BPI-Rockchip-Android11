@@ -1,0 +1,77 @@
+cc_defaults {
+  name: "bc-defaults",
+
+  cflags: [
+    "-include bc-version.h",
+    "-DBC_ENABLED=1",
+    "-DDC_ENABLED=0",
+    "-DBC_ENABLE_EXTRA_MATH=0",
+    "-DBC_ENABLE_HISTORY=0",
+    "-DBC_ENABLE_NLS=0",
+    "-DBC_ENABLE_SIGNALS=1",
+    "-Os",
+  ],
+  generated_headers: ["bc-version.h"],
+  local_include_dirs: ["include"],
+  srcs: [
+    "src/bc/*.c",
+    "src/*.c",
+    ":bc-bc_help.c",
+    ":bc-lib.c",
+  ],
+  stl: "none",
+}
+
+genrule {
+  name: "bc-lib.c",
+  srcs: ["gen/lib.bc"],
+  out: ["gen/lib.c"],
+  tool_files: ["gen/strgen.sh"],
+  cmd: "$(location gen/strgen.sh) $(in) $(out) bc_lib bc.h bc_lib_name BC_ENABLED",
+}
+
+genrule {
+  name: "bc-bc_help.c",
+  srcs: ["gen/bc_help.txt"],
+  out: ["gen/bc_help.c"],
+  tool_files: ["gen/strgen.sh"],
+  cmd: "$(location gen/strgen.sh) $(in) $(out) bc_help bc.h '' BC_ENABLED",
+}
+
+genrule {
+  name: "bc-version.h",
+  srcs: ["Makefile.in"],
+  out: ["bc-version.h"],
+  cmd: "sed -n 's/VERSION = /#define VERSION /p' $(in) > $(out)",
+}
+
+cc_binary {
+  name: "bc",
+  defaults: ["bc-defaults"],
+}
+
+cc_binary {
+  name: "bc_vendor",
+  defaults: ["bc-defaults"],
+  stem: "bc",
+  vendor: true,
+}
+
+cc_binary_host {
+  name: "gavinhoward-bc",
+  defaults: ["bc-defaults"],
+}
+
+sh_test {
+  name: "bc-tests",
+  src: "run-bc-tests-on-android.sh",
+  filename: "run-bc-tests-on-android.sh",
+  test_suites: ["general-tests"],
+  host_supported: true,
+  device_supported: false,
+  test_config: "bc-tests.xml",
+  data: [
+    "functions.sh",
+    "tests/**/*",
+  ],
+}

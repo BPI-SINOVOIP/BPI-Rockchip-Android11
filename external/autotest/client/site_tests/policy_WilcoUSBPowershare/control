@@ -1,0 +1,24 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_WilcoUSBPowershare'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Verify effects of DeviceUsbPowerShareEnabled policy.
+
+This test is kicked off via policy_WilcoUSBPowershare server test.
+
+Note: This test only checks the behavior of the device when it is off,
+it doesn't do the part of the policy when the device is asleep.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_WilcoUSBPowershare', **args_dict)

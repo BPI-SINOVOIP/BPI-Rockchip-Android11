@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Invoke the Go cross compiler for marlin.
+# Uses ../go_target to add PIE flags.
+#
+# This is just an example for an arm64 device.
+
+GOOS="android" GOARCH="arm64" CGO_ENABLED="1" \
+	CC="aarch64-linux-android-clang" \
+	CXX="aarch64-linux-android-clang++" \
+	exec go_target "$@"

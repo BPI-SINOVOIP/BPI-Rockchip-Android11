@@ -1,0 +1,18 @@
+AUTHOR = "Chrome OS Team"
+NAME = "power_WifiIdle"
+PURPOSE = "Measure power usage with wifi on or off."
+CRITERIA = "This test is a benchmark."
+TIME = "SHORT"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+ATTRIBUTES = "suite:power_daily"
+
+DOC = """
+This test records power related statistics while staying idle, and
+compares between wifi on and off.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_WifiIdle', pdash_note=pdash_note)

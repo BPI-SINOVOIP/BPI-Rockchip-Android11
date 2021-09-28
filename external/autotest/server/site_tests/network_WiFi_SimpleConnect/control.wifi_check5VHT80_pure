@@ -1,0 +1,45 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'kirtika'
+NAME = 'network_WiFi_SimpleConnect.wifi_check5VHT80_pure'
+TIME = 'SHORT'
+TEST_TYPE = 'Server'
+ATTRIBUTES = ('suite:wifi_matfunc, suite:wifi_release, subsystem:wifi')
+DEPENDENCIES = 'wificell'
+
+DOC = """
+This test verifies that DUT can connect to an open 802.11ac network
+on channel 157 with center channel of 155 and channel width of 80MHz.
+The router is forced to use 80 MHz wide rates only. If the DUT does not talk
+VHT80 rates, this test raises TestNAError.
+"""
+
+
+from autotest_lib.client.common_lib.cros.network import xmlrpc_datatypes
+from autotest_lib.server.cros.network import hostap_config
+
+
+def run(machine):
+    n_caps = [hostap_config.HostapConfig.N_CAPABILITY_HT40_PLUS]
+    ac_caps = [hostap_config.HostapConfig.AC_CAPABILITY_SHORT_GI_80]
+    ac_mode = hostap_config.HostapConfig.MODE_11AC_PURE
+    channel_width_80_mhz = hostap_config.HostapConfig.VHT_CHANNEL_WIDTH_80
+    configurations = [(hostap_config.HostapConfig(
+                                  channel=157,
+                                  mode=ac_mode,
+                                  n_capabilities=n_caps,
+                                  vht_channel_width=channel_width_80_mhz,
+                                  vht_center_channel=155,
+                                  ac_capabilities=ac_caps),
+                       xmlrpc_datatypes.AssociationParameters())]
+    host = hosts.create_host(machine)
+    job.run_test('network_WiFi_SimpleConnect',
+                 tag=NAME.split('.')[1],
+                 host=host,
+                 raw_cmdline_args=args,
+                 additional_params=configurations)
+
+
+parallel_simple(run, machines)

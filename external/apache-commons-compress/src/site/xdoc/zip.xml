@@ -1,0 +1,568 @@
+<?xml version="1.0"?>
+<!--
+
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+-->
+<document>
+  <properties>
+    <title>Commons Compress ZIP package</title>
+    <author email="dev@commons.apache.org">Commons Documentation Team</author>
+  </properties>
+  <body>
+    <section name="The ZIP package">
+
+      <p>The ZIP package provides features not found
+        in <code>java.util.zip</code>:</p>
+
+      <ul>
+        <li>Support for encodings other than UTF-8 for filenames and
+          comments.  Starting with Java7 this is supported
+          by <code>java.util.zip</code> as well.</li>
+        <li>Access to internal and external attributes (which are used
+          to store Unix permission by some zip implementations).</li>
+        <li>Structured support for extra fields.</li>
+      </ul>
+
+      <p>In addition to the information stored
+        in <code>ArchiveEntry</code> a <code>ZipArchiveEntry</code>
+        stores internal and external attributes as well as extra
+        fields which may contain information like Unix permissions,
+        information about the platform they've been created on, their
+        last modification time and an optional comment.</p>
+
+      <subsection name="ZipArchiveInputStream vs ZipFile">
+
+        <p>ZIP archives store a archive entries in sequence and
+          contain a registry of all entries at the very end of the
+          archive.  It is acceptable for an archive to contain several
+          entries of the same name and have the registry (called the
+          central directory) decide which entry is actually to be used
+          (if any).</p>
+
+        <p>In addition the ZIP format stores certain information only
+          inside the central directory but not together with the entry
+          itself, this is:</p>
+
+        <ul>
+          <li>internal and external attributes</li>
+          <li>different or additional extra fields</li>
+        </ul>
+
+        <p>This means the ZIP format cannot really be parsed
+          correctly while reading a non-seekable stream, which is what
+          <code>ZipArchiveInputStream</code> is forced to do.  As a
+          result <code>ZipArchiveInputStream</code></p>
+        <ul>
+          <li>may return entries that are not part of the central
+            directory at all and shouldn't be considered part of the
+            archive.</li>
+          <li>may return several entries with the same name.</li>
+          <li>will not return internal or external attributes.</li>
+          <li>may return incomplete extra field data.</li>
+          <li>may return unknown sizes and CRC values for entries
+          until the next entry has been reached if the archive uses
+          the data descriptor feature (see below).</li>
+        </ul>
+
+        <p><code>ZipArchiveInputStream</code> shares these limitations
+          with <code>java.util.zip.ZipInputStream</code>.</p>
+
+        <p><code>ZipFile</code> is able to read the central directory
+          first and provide correct and complete information on any
+          ZIP archive.</p>
+
+        <p>ZIP archives know a feature called the data descriptor
+          which is a way to store an entry's length after the entry's
+          data.  This can only work reliably if the size information
+          can be taken from the central directory or the data itself
+          can signal it is complete, which is true for data that is
+          compressed using the DEFLATED compression algorithm.</p>
+
+        <p><code>ZipFile</code> has access to the central directory
+          and can extract entries using the data descriptor reliably.
+          The same is true for <code>ZipArchiveInputStream</code> as
+          long as the entry is DEFLATED.  For STORED
+          entries <code>ZipArchiveInputStream</code> can try to read
+          ahead until it finds the next entry, but this approach is
+          not safe and has to be enabled by a constructor argument
+          explicitly.</p>
+
+        <p>If possible, you should always prefer <code>ZipFile</code>
+          over <code>ZipArchiveInputStream</code>.</p>
+
+        <p><code>ZipFile</code> requires a
+        <code>SeekableByteChannel</code> that will be obtained
+        transparently when reading from a file. The class
+        <code>org.apache.commons.compress.utils.SeekableInMemoryByteChannel</code>
+        allows you to read from an in-memory archive.</p>
+
+      </subsection>
+
+      <subsection name="ZipArchiveOutputStream" id="ZipArchiveOutputStream">
+        <p><code>ZipArchiveOutputStream</code> has three constructors,
+        one of them uses a <code>File</code> argument, one a
+        <code>SeekableByteChannel</code> and the last uses an
+        <code>OutputStream</code>.  The <code>File</code> version will
+        try to use <code>SeekableByteChannel</code> and fall back to
+        using a <code>FileOutputStream</code> internally if that
+        fails.</p>
+
+        <p>If <code>ZipArchiveOutputStream</code> can
+          use <code>SeekableByteChannel</code> it can employ some
+          optimizations that lead to smaller archives.  It also makes
+          it possible to add uncompressed (<code>setMethod</code> used
+          with <code>STORED</code>) entries of unknown size when
+          calling <code>putArchiveEntry</code> - this is not allowed
+          if <code>ZipArchiveOutputStream</code> has to use
+          an <code>OutputStream</code>.</p>
+
+        <p>If you know you are writing to a file, you should always
+        prefer the <code>File</code>- or
+        <code>SeekableByteChannel</code>-arg constructors.  The class
+        <code>org.apache.commons.compress.utils.SeekableInMemoryByteChannel</code>
+        allows you to write to an in-memory archive.</p>
+
+      </subsection>
+
+      <subsection name="Extra Fields">
+
+        <p>Inside a ZIP archive, additional data can be attached to
+          each entry.  The <code>java.util.zip.ZipEntry</code> class
+          provides access to this via the <code>get/setExtra</code>
+          methods as arrays of <code>byte</code>s.</p>
+
+        <p>Actually the extra data is supposed to be more structured
+          than that and Compress' ZIP package provides access to the
+          structured data as <code>ExtraField</code> instances.  Only
+          a subset of all defined extra field formats is supported by
+          the package, any other extra field will be stored
+          as <code>UnrecognizedExtraField</code>.</p>
+
+        <p>Prior to version 1.1 of this library trying to read an
+          archive with extra fields that didn't follow the recommended
+          structure for those fields would cause Compress to throw an
+          exception.  Starting with version 1.1 these extra fields
+          will now be read
+          as <code>UnparseableExtraFieldData</code>.</p>
+
+      </subsection>
+
+      <subsection name="Encoding" id="encoding">
+
+        <p>Traditionally the ZIP archive format uses CodePage 437 as
+          encoding for file name, which is not sufficient for many
+          international character sets.</p>
+
+        <p>Over time different archivers have chosen different ways to
+          work around the limitation - the <code>java.util.zip</code>
+          packages simply uses UTF-8 as its encoding for example.</p>
+
+        <p>Ant has been offering the encoding attribute of the zip and
+          unzip task as a way to explicitly specify the encoding to
+          use (or expect) since Ant 1.4.  It defaults to the
+          platform's default encoding for zip and UTF-8 for jar and
+          other jar-like tasks (war, ear, ...) as well as the unzip
+          family of tasks.</p>
+
+        <p>More recent versions of the ZIP specification introduce
+          something called the &quot;language encoding flag&quot;
+          which can be used to signal that a file name has been
+          encoded using UTF-8.  All ZIP-archives written by Compress
+          will set this flag, if the encoding has been set to UTF-8.
+          Our interoperability tests with existing archivers didn't
+          show any ill effects (in fact, most archivers ignore the
+          flag to date), but you can turn off the "language encoding
+          flag" by setting the attribute
+          <code>useLanguageEncodingFlag</code> to <code>false</code> on the
+          <code>ZipArchiveOutputStream</code> if you should encounter
+          problems.</p>
+
+        <p>The <code>ZipFile</code>
+          and <code>ZipArchiveInputStream</code> classes will
+          recognize the language encoding flag and ignore the encoding
+          set in the constructor if it has been found.</p>
+
+        <p>The InfoZIP developers have introduced new ZIP extra fields
+          that can be used to add an additional UTF-8 encoded file
+          name to the entry's metadata.  Most archivers ignore these
+          extra fields.  <code>ZipArchiveOutputStream</code> supports
+          an option <code>createUnicodeExtraFields</code> which makes
+          it write these extra fields either for all entries
+          ("always") or only those whose name cannot be encoded using
+          the specified encoding (not-encodeable), it defaults to
+          "never" since the extra fields create bigger archives.</p>
+
+        <p>The fallbackToUTF8 attribute
+          of <code>ZipArchiveOutputStream</code> can be used to create
+          archives that use the specified encoding in the majority of
+          cases but UTF-8 and the language encoding flag for filenames
+          that cannot be encoded using the specified encoding.</p>
+
+        <p>The <code>ZipFile</code>
+          and <code>ZipArchiveInputStream</code> classes recognize the
+          Unicode extra fields by default and read the file name
+          information from them, unless you set the constructor parameter
+          <code>scanForUnicodeExtraFields</code> to false.</p>
+
+        <h4>Recommendations for Interoperability</h4>
+
+        <p>The optimal setting of flags depends on the archivers you
+          expect as consumers/producers of the ZIP archives.  Below
+          are some test results which may be superseded with later
+          versions of each tool.</p>
+
+        <ul>
+          <li>The java.util.zip package used by the jar executable or
+            to read jars from your CLASSPATH reads and writes UTF-8
+            names, it doesn't set or recognize any flags or Unicode
+            extra fields.</li>
+
+          <li>Starting with Java7 <code>java.util.zip</code> writes
+            UTF-8 by default and uses the language encoding flag.  It
+            is possible to specify a different encoding when
+            reading/writing ZIPs via new constructors.  The package
+            now recognizes the language encoding flag when reading and
+            ignores the Unicode extra fields.</li>
+
+          <li>7Zip writes CodePage 437 by default but uses UTF-8 and
+            the language encoding flag when writing entries that
+            cannot be encoded as CodePage 437 (similar to the zip task
+            with fallbacktoUTF8 set to true).  It recognizes the
+            language encoding flag when reading and ignores the
+            Unicode extra fields.</li>
+
+          <li>WinZIP writes CodePage 437 and uses Unicode extra fields
+            by default.  It recognizes the Unicode extra field and the
+            language encoding flag when reading.</li>
+
+          <li>Windows' "compressed folder" feature doesn't recognize
+            any flag or extra field and creates archives using the
+            platforms default encoding - and expects archives to be in
+            that encoding when reading them.</li>
+
+          <li>InfoZIP based tools can recognize and write both, it is
+            a compile time option and depends on the platform so your
+            mileage may vary.</li>
+
+          <li>PKWARE zip tools recognize both and prefer the language
+            encoding flag.  They create archives using CodePage 437 if
+            possible and UTF-8 plus the language encoding flag for
+            file names that cannot be encoded as CodePage 437.</li>
+        </ul>
+        
+        <p>So, what to do?</p>
+
+        <p>If you are creating jars, then java.util.zip is your main
+          consumer.  We recommend you set the encoding to UTF-8 and
+          keep the language encoding flag enabled.  The flag won't
+          help or hurt java.util.zip prior to Java7 but archivers that
+          support it will show the correct file names.</p>
+
+        <p>For maximum interop it is probably best to set the encoding
+          to UTF-8, enable the language encoding flag and create
+          Unicode extra fields when writing ZIPs.  Such archives
+          should be extracted correctly by java.util.zip, 7Zip,
+          WinZIP, PKWARE tools and most likely InfoZIP tools.  They
+          will be unusable with Windows' "compressed folders" feature
+          and bigger than archives without the Unicode extra fields,
+          though.</p>
+
+        <p>If Windows' "compressed folders" is your primary consumer,
+          then your best option is to explicitly set the encoding to
+          the target platform.  You may want to enable creation of
+          Unicode extra fields so the tools that support them will
+          extract the file names correctly.</p>
+      </subsection>
+
+      <subsection name="Encryption and Alternative Compression Algorithms"
+                  id="encryption">
+        
+        <p>In most cases entries of an archive are not encrypted and
+        are either not compressed at all or use the DEFLATE
+        algorithm, Commons Compress' ZIP archiver will handle them
+        just fine.   As of version 1.7, Commons Compress can also
+        decompress entries compressed with the legacy SHRINK and
+        IMPLODE algorithms of PKZIP 1.x.  Version 1.11 of Commons
+        Compress adds read-only support for BZIP2.  Version 1.16 adds
+        read-only support for DEFLATE64 - also known as "enhanced DEFLATE".</p>
+
+        <p>The ZIP specification allows for various other compression
+        algorithms and also supports several different ways of
+        encrypting archive contents.  Neither of those methods is
+        currently supported by Commons Compress and any such entry can
+        not be extracted by the archiving code.</p>
+
+        <p><code>ZipFile</code>'s and
+        <code>ZipArchiveInputStream</code>'s
+        <code>canReadEntryData</code> methods will return false for
+        encrypted entries or entries using an unsupported encryption
+        mechanism.  Using this method it is possible to at least
+        detect and skip the entries that can not be extracted.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Version of Apache Commons Compress</th>
+              <th>Supported Compression Methods</th>
+              <th>Supported Encryption Methods</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.0 to 1.6</td>
+              <td>STORED, DEFLATE</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>1.7 to 1.10</td>
+              <td>STORED, DEFLATE, SHRINK, IMPLODE</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>1.11 to 1.15</td>
+              <td>STORED, DEFLATE, SHRINK, IMPLODE, BZIP2</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>1.16 and later</td>
+              <td>STORED, DEFLATE, SHRINK, IMPLODE, BZIP2, DEFLATE64
+              (enhanced deflate)</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </subsection>
+
+      <subsection name="Zip64 Support" id="zip64">
+        <p>The traditional ZIP format is limited to archive sizes of
+          four gibibyte (actually 2<sup>32</sup> - 1 bytes &#x2248;
+          4.3 GB) and 65635 entries, where each individual entry is
+          limited to four gibibyte as well.  These limits seemed
+          excessive in the 1980s.</p>
+
+        <p>Version 4.5 of the ZIP specification introduced the so
+          called "Zip64 extensions" to push those limitations for
+          compressed or uncompressed sizes of up to 16 exbibyte
+          (actually 2<sup>64</sup> - 1 bytes &#x2248; 18.5 EB, i.e
+          18.5 x 10<sup>18</sup> bytes) in archives that themselves
+          can take up to 16 exbibyte containing more than
+          18 x 10<sup>18</sup> entries.</p>
+
+        <p>Apache Commons Compress 1.2 and earlier do not support
+          Zip64 extensions at all.</p>
+
+        <p>Starting with Apache Commons Compress
+          1.3 <code>ZipArchiveInputStream</code>
+          and <code>ZipFile</code> transparently support Zip64
+          extensions.  By default <code>ZipArchiveOutputStream</code>
+          supports them transparently as well (i.e. it adds Zip64
+          extensions if needed and doesn't use them for
+          entries/archives that don't need them) if the compressed and
+          uncompressed sizes of the entry are known
+          when <code>putArchiveEntry</code> is called
+          or <code>ZipArchiveOutputStream</code>
+          uses <code>SeekableByteChannel</code>
+          (see <a href="#ZipArchiveOutputStream">above</a>).  If only
+          the uncompressed size is
+          known <code>ZipArchiveOutputStream</code> will assume the
+          compressed size will not be bigger than the uncompressed
+          size.</p>
+
+        <p><code>ZipArchiveOutputStream</code>'s
+          <code>setUseZip64</code> can be used to control the behavior.
+          <code>Zip64Mode.AsNeeded</code> is the default behavior
+          described in the previous paragraph.</p>
+
+        <p>If <code>ZipArchiveOutputStream</code> is writing to a
+          non-seekable stream it has to decide whether to use Zip64
+          extensions or not before it starts wrtiting the entry data.
+          This means that if the size of the entry is unknown
+          when <code>putArchiveEntry</code> is called it doesn't have
+          anything to base the decision on.  By default it will not
+          use Zip64 extensions in order to create archives that can be
+          extracted by older archivers (it will later throw an
+          exception in <code>closeEntry</code> if it detects Zip64
+          extensions had been needed).  It is possible to
+          instruct <code>ZipArchiveOutputStream</code> to always
+          create Zip64 extensions by using
+          the <code>setUseZip64</code> with an argument
+          of <code>Zip64Mode.Always</code>; use this if you are
+          writing entries of unknown size to a stream and expect some
+          of them to be too big to fit into the traditional
+          limits.</p>
+
+        <p><code>Zip64Mode.Always</code> creates archives that use
+          Zip64 extensions for all entries, even those that don't
+          require them.  Such archives will be slightly bigger than
+          archives created with one of the other modes and not be
+          readable by unarchivers that don't support Zip64
+          extensions.</p>
+
+        <p><code>Zip64Mode.Never</code> will not use any Zip64
+          extensions at all and may lead to
+          a <code>Zip64RequiredException</code> to be thrown
+          if <code>ZipArchiveOutputStream</code> detects that one of
+          the format's limits is exceeded.  Archives created in this
+          mode will be readable by all unarchivers; they may be
+          slightly smaller than archives created
+          with <code>SeekableByteChannel</code>
+          in <code>Zip64Mode.AsNeeded</code> mode if some of the
+          entries had unknown sizes.</p>
+
+        <p>The <code>java.util.zip</code> package and the
+          <code>jar</code> command of Java5 and earlier can not read
+          Zip64 extensions and will fail if the archive contains any.
+          So if you intend to create archives that Java5 can consume
+          you must set the mode to <code>Zip64Mode.Never</code></p>
+
+        <h4>Known Limitations</h4>
+
+        <p>Some of the theoretical limits of the format are not
+          reached because Apache Commons Compress' own API
+          (<code>ArchiveEntry</code>'s size information uses
+          a <code>long</code>) or its usage of Java collections
+          or <code>SeekableByteChannel</code> internally.  The table
+          below shows the theoretical limits supported by Apache
+          Commons Compress.  In practice it is very likely that you'd
+          run out of memory or your file system won't allow files that
+          big long before you reach either limit.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th/>
+              <th>Max. Size of Archive</th>
+              <th>Max. Compressed/Uncompressed Size of Entry</th>
+              <th>Max. Number of Entries</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ZIP Format Without Zip 64 Extensions</td>
+              <td>2<sup>32</sup> - 1 bytes &#x2248; 4.3 GB</td>
+              <td>2<sup>32</sup> - 1 bytes &#x2248; 4.3 GB</td>
+              <td>65535</td>
+            </tr>
+            <tr>
+              <td>ZIP Format using Zip 64 Extensions</td>
+              <td>2<sup>64</sup> - 1 bytes &#x2248; 18.5 EB</td>
+              <td>2<sup>64</sup> - 1 bytes &#x2248; 18.5 EB</td>
+              <td>2<sup>64</sup> - 1 &#x2248; 18.5 x 10<sup>18</sup></td>
+            </tr>
+            <tr>
+              <td>Commons Compress 1.2 and earlier</td>
+              <td>unlimited in <code>ZipArchiveInputStream</code>
+                and <code>ZipArchiveOutputStream</code> and
+                2<sup>32</sup> - 1 bytes &#x2248; 4.3 GB
+                in <code>ZipFile</code>.</td>
+              <td>2<sup>32</sup> - 1 bytes &#x2248; 4.3 GB</td>
+              <td>unlimited in <code>ZipArchiveInputStream</code>,
+                65535 in <code>ZipArchiveOutputStream</code>
+                and <code>ZipFile</code>.</td>
+            </tr>
+            <tr>
+              <td>Commons Compress 1.3 and later</td>
+              <td>unlimited in <code>ZipArchiveInputStream</code>
+                and <code>ZipArchiveOutputStream</code> and
+                2<sup>63</sup> - 1 bytes &#x2248; 9.2 EB
+                in <code>ZipFile</code>.</td>
+              <td>2<sup>63</sup> - 1 bytes &#x2248; 9.2 EB</td>
+              <td>unlimited in <code>ZipArchiveInputStream</code>,
+                2<sup>31</sup> - 1 &#x2248; 2.1 billion
+                in <code>ZipArchiveOutputStream</code>
+                and <code>ZipFile</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Known Interoperability Problems</h4>
+
+        <p>The <code>java.util.zip</code> package of OpenJDK7 supports
+        Zip 64 extensions but its <code>ZipInputStream</code> and
+        <code>ZipFile</code> classes will be unable to extract
+        archives created with Commons Compress 1.3's
+        <code>ZipArchiveOutputStream</code> if the archive contains
+        entries that use the data descriptor, are smaller than 4 GiB
+        and have Zip 64 extensions enabled.  I.e. the classes in
+        OpenJDK currently only support archives that use Zip 64
+        extensions only when they are actually needed.  These classes
+        are used to load JAR files and are the base for the
+        <code>jar</code> command line utility as well.</p>
+      </subsection>
+
+      <subsection name="Consuming Archives Completely">
+
+        <p>Prior to version 1.5 <code>ZipArchiveInputStream</code>
+        would return null from <code>getNextEntry</code> or
+        <code>getNextZipEntry</code> as soon as the first central
+        directory header of the archive was found, leaving the whole
+        central directory itself unread inside the stream.  Starting
+        with version 1.5 <code>ZipArchiveInputStream</code> will try
+        to read the archive up to and including the "end of central
+        directory" record effectively consuming the archive
+        completely.</p>
+
+      </subsection>
+
+      <subsection name="Symbolic Links" id="symlinks">
+
+        <p>Starting with Compress 1.5 <code>ZipArchiveEntry</code>
+        recognizes Unix Symbolic Link entries written by InfoZIP's
+        zip.</p>
+
+        <p>The <code>ZipFile</code> class contains a convenience
+        method to read the link name of an entry.  Basically all it
+        does is read the contents of the entry and convert it to
+        a string using the given file name encoding of the
+        archive.</p>
+
+      </subsection>
+
+      <subsection name="Parallel zip creation" id="parallel">
+
+        <p>Starting with Compress 1.10 there is now built-in support for
+          parallel creation of zip archives</p>
+
+          <p>Multiple threads can write
+          to their own <code>ScatterZipOutputStream</code>
+          instance that is backed to file or to some user-implemented form of
+          storage (implementing <code>ScatterGatherBackingStore</code>).</p>
+
+          <p>When the threads finish, they can join these streams together
+          to a complete zip file using the <code>writeTo</code> method
+          that will write a single <code>ScatterOutputStream</code> to a target
+          <code>ZipArchiveOutputStream</code>.</p>
+
+          <p>To assist this process, clients can use
+          <code>ParallelScatterZipCreator</code> that will handle threads
+          pools and correct memory model consistency so the client
+          can avoid these issues. Please note that when writing well-formed
+          Zip files this way, it is usually necessary to keep a
+          separate <code>ScatterZipOutputStream</code> that receives all directories
+          and writes this to the target <code>ZipArchiveOutputStream</code> before
+          the ones created through <code>ParallelScatterZipCreator</code>. This is the responsibility of the client.</p>
+
+          <p>There is no guarantee of order of the entries when writing a Zip
+          file with <code>ParallelScatterZipCreator</code>.</p>
+
+          See the examples section for a code sample demonstrating how to make a zip file.
+      </subsection>
+
+    </section>
+  </body>
+</document>

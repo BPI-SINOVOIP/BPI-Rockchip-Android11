@@ -1,0 +1,46 @@
+This directory contains test lists that are used by Intel's CI. The
+files are passed to piglit with the --test-list parameter directly.
+
+The test lists are contained in the IGT repository for several
+reasons:
+
+- The lists stay synchronized with the IGT codebase.
+- Public availability. Kernel developers can see what tests are run,
+  and can see what changes are done to the set, when, and why.
+- Explicit test lists in general make it possible to implement a new
+  test without having it run in CI (accidentally or on purpose) before
+  CI is ready for it, and for CI to stop running a test without
+  removing the test or changing its name. The previous method of test
+  selection was based on name patterns.
+
+Changing the test lists should only happen with approval from the CI
+people. If you make a new test that should be tested by CI regularly,
+ask a maintainer (see MAINTAINERS).
+
+======================
+fast-feedback.testlist
+======================
+
+Fast-feedback contains tests that roughly tests a wide coverage of
+features in a short time. If the tests in fast-feedback report no
+regressions, the (almost) full suite of IGT tests is executed for
+proper testing. Results of a fast-feedback test round should only be
+considered to mean that the kernel is not obviously broken.
+
+The results of CI runs on drm-tip and various other kernel trees can
+be found in https://intel-gfx-ci.01.org/CI/
+
+=============
+blacklist.txt
+=============
+
+This file contains regular expressions (one per line) for tests that
+are not to be executed in full suite test rounds.
+
+=============
+meta.testlist
+=============
+
+Meta-testlist contains tests that are hardcoded to generate various
+different test results. It is used to test CI systems for proper
+result reporting, notification systems, etc.

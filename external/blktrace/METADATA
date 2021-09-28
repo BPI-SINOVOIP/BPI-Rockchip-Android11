@@ -1,0 +1,13 @@
+name: "blktrace"
+description:
+    "blktrace is a block layer IO tracing mechanism which provides detailed "
+    "information about request queue operations up to user space."
+
+third_party {
+  url {
+    type: GIT
+    value: "http://git.kernel.dk/?p=blktrace.git;a=summary"
+  }
+  version: "1.0.1"
+  last_upgrade_date { year: 2018 month: 12 day: 8 }
+}

@@ -1,0 +1,28 @@
+// GENERATED, do not edit
+// for changes, see genmakefiles.py
+cc_library_static {
+    name: "v8_libplatform",
+    defaults: ["v8_defaults"],
+    srcs: [
+        "src/libplatform/default-foreground-task-runner.cc",
+        "src/libplatform/default-job.cc",
+        "src/libplatform/default-platform.cc",
+        "src/libplatform/default-worker-threads-task-runner.cc",
+        "src/libplatform/delayed-task-queue.cc",
+        "src/libplatform/task-queue.cc",
+        "src/libplatform/tracing/trace-buffer.cc",
+        "src/libplatform/tracing/trace-config.cc",
+        "src/libplatform/tracing/trace-object.cc",
+        "src/libplatform/tracing/trace-writer.cc",
+        "src/libplatform/tracing/tracing-controller.cc",
+        "src/libplatform/worker-thread.cc",
+    ],
+    local_include_dirs: [
+        "src",
+        "include",
+    ],
+    apex_available: [
+        "com.android.art.debug",
+        "com.android.art.release",
+    ],
+}

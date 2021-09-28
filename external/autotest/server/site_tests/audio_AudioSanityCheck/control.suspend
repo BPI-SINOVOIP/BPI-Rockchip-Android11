@@ -1,0 +1,33 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "chromeos-chameleon"
+NAME = "audio_AudioSanityCheck.suspend"
+PURPOSE = "Sanity check for suspend."
+CRITERIA = """
+This test will fail if target fail to suspend or wake up after a suspension.
+"""
+ATTRIBUTES = "suite:audio_advanced"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "audio"
+TEST_TYPE = "server"
+DEPENDENCIES = 'chameleon, audio_board'
+JOB_RETRIES = 1
+
+DOC = """
+This test remotely tests if suspend, audio tests rely on, work correctly.
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    # The suspend_only flag is for crbug:978593, which causes sanity check to
+    # always fail. however, we still want to check the suspend operation as it
+    # also potentially fails the audio tests. This should be removed once the
+    # blocker is fixed
+    job.run_test("audio_AudioSanityCheck", host=host, suspend_only=True)
+
+parallel_simple(run, machines)

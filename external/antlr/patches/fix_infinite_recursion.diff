@@ -1,0 +1,24 @@
+From 12f69f5bb0e10f608b1899bab67b1813e0fdaf14 Mon Sep 17 00:00:00 2001
+From: Andreas Gampe <agampe@google.com>
+Date: Tue, 20 Feb 2018 09:51:42 -0800
+Subject: [PATCH] Antlr: Fix infinite recursion
+
+Bug: 73645371
+Test: m javac-check RUN_ERROR_PRONE=true
+Change-Id: Ie8702ad59aab1af7e23038fbffd5bd34902f1f7c
+---
+
+Index: antlr/runtime/Java/src/main/java/org/antlr/runtime/debug/DebugTreeAdaptor.java
+===================================================================
+--- antlr.orig/runtime/Java/src/main/java/org/antlr/runtime/debug/DebugTreeAdaptor.java
++++ antlr/runtime/Java/src/main/java/org/antlr/runtime/debug/DebugTreeAdaptor.java
+@@ -227,7 +227,7 @@ public class DebugTreeAdaptor implements
+ 
+ 	@Override
+ 	public Object deleteChild(Object t, int i) {
+-		return deleteChild(t, i);
++		return adaptor.deleteChild(t, i);
+ 	}
+ 
+ 	@Override
+

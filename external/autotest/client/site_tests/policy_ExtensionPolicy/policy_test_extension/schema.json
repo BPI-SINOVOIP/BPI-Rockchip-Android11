@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "VisibleStringPolicy": {
+      "type": "string"
+    },
+    "SensitiveStringPolicy": {
+      "type": "string",
+      "sensitiveValue": true
+    },
+    "VisibleDictPolicy": {
+      "type": "object",
+      "properties": {
+        "some_bool": { "type": "boolean" },
+        "some_string": { "type": "string" }
+      }
+    },
+    "SensitiveDictPolicy": {
+      "type": "object",
+      "properties": {
+        "some_bool": { "type": "boolean" },
+        "some_string": { "type": "string" }
+      },
+      "sensitiveValue": true
+    }
+  }
+}

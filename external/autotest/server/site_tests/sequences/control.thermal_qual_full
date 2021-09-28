@@ -1,0 +1,70 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "puthik"
+NAME = "ThermalQual.full"
+TIME = "LENGTHY"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "suite"
+TEST_TYPE = "server"
+DOC = """
+Sequence for qualification for thermal.
+"""
+
+from autotest_lib.client.common_lib import utils
+
+HOURS=60*60
+
+# Need separate list for client and server test due to how these test work.
+CLIENT_TESTS = [
+    ('power_WaitForCoolDown', {}),
+    ('power_Speedometer2', {'tag' : 'thermal_qual_full_before'}),
+
+    ('power_BatteryCharge', {
+        'percent_target_charge' : 70, 'max_run_time': 5 * HOURS}),
+    ('power_WaitForCoolDown', {}),
+    ('power_ThermalLoad', {
+        'tag' : 'thermal_qual_full_discharge', 'force_discharge' : True}),
+    ('power_Speedometer2', {'tag' : 'thermal_qual_full_ThermalLoad_discharge'}),
+
+    ('power_BatteryCharge', {
+        'percent_target_charge' : 70, 'max_run_time': 5 * HOURS}),
+    ('power_WaitForCoolDown', {}),
+    ('power_VideoCall', {
+        'tag' : 'thermal_qual_full_discharge', 'force_discharge' : True}),
+    ('power_Speedometer2', {'tag' : 'thermal_qual_full_VideoCall_discharge'}),
+
+    ('power_BatteryDrain', {
+        'force_discharge' : True, 'drain_to_percent' : 30,
+        'drain_timeout': 5 * HOURS}),
+    ('power_WaitForCoolDown', {}),
+    ('power_ThermalLoad', {'tag' : 'thermal_qual_full_charge'}),
+    ('power_Speedometer2', {'tag' : 'thermal_qual_full_ThermalLoad_charge'}),
+
+    ('power_BatteryDrain', {
+        'force_discharge' : True, 'drain_to_percent' : 30,
+        'drain_timeout': 5 * HOURS}),
+    ('power_WaitForCoolDown', {}),
+    ('power_VideoCall', {'tag' : 'thermal_qual_full_charge'}),
+    ('power_Speedometer2', {'tag' : 'thermal_qual_full_VideoCall_charge'})
+]
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+pdash_note = args_dict.get('pdash_note', '')
+
+def run_client_test(machine):
+    client = hosts.create_host(machine)
+    client_at = autotest.Autotest(client)
+
+    for test, argv in CLIENT_TESTS:
+        argv['pdash_note'] = pdash_note
+        client_at.run_test(test, **argv)
+
+job.parallel_on_machines(run_client_test, machines)

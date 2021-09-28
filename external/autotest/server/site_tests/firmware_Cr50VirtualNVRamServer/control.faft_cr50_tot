@@ -1,0 +1,37 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "louiscollard, apronin"
+NAME = "firmware_Cr50VirtualNVRamServer.faft_cr50_tot"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "firmware"
+TEST_TYPE = "server"
+ATTRIBUTES = "suite:faft_cr50_tot"
+JOB_RETRIES = 1
+
+DOC = """
+This test clears the TPM if necessary, the runs a client side test that checks
+Virtual NVRAM functionality in cr50. Finally, it clears the TPM again.
+Every time the TPM is cleared, the system is rebooted.
+
+This test is applicable when using ToT cr50 module.
+TODO(crbug.com/1014572) Drop this control file once suites can inject test args.
+"""
+
+if 'args_dict' not in locals():
+    args_dict = {}
+
+args_dict.update(utils.args_to_dict(args))
+
+# crbug.com/1014572: Inject test args.
+args_dict['tot_test_run'] = 'true'
+
+def run_test(machine):
+    host = hosts.create_host(machine)
+    job.run_test('firmware_Cr50VirtualNVRamServer', host=host)
+
+parallel_simple(run_test, machines)

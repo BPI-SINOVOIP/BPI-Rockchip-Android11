@@ -1,0 +1,121 @@
+import com.gradle.publish.DependenciesBuilder
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "com.gradle.plugin-publish"
+
+sourceCompatibility = 1.8
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        languageVersion = "1.2"
+        apiVersion = "1.1"
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    shadow group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_for_gradle_runtime_version
+    shadow group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_for_gradle_runtime_version
+
+    compile project(":integration")
+
+    compileOnly gradleApi()
+    compileOnly localGroovy()
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+}
+
+processResources {
+    inputs.property("dokka_version", dokka_version)
+    eachFile {
+        if (it.name == "org.jetbrains.dokka.properties") {
+            it.filter { line ->
+                line.replace("<version>", dokka_version)
+            }
+        }
+    }
+}
+
+shadowJar {
+    baseName = 'dokka-gradle-plugin'
+    classifier = ''
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        dokkaGradlePlugin(MavenPublication) { publication ->
+
+            artifactId = 'dokka-gradle-plugin'
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+
+            project.shadow.component(publication)
+            publication.pom { pom ->
+                // Add dokka-fatjar as a runtime dependency.
+                // This is a workaround until the Shadow jar can put project dependencies into the .pom: https://github.com/johnrengelman/shadow/commit/da82b37522b349aff414f571d2037682acd84f27
+                pom.withXml { xml ->
+                    def node = xml.asNode()
+                    def deps = null
+                    node.children().each { child ->
+                        if (child.name().toString() == "dependencies") {
+                            deps = child
+                        }
+                    }
+                    if (deps == null) {
+                        deps = node.appendNode("dependencies")
+                    }
+                    def dep = deps.appendNode("dependency")
+                    dep.appendNode("groupId", "org.jetbrains.dokka")
+                    dep.appendNode("artifactId", "dokka-fatjar")
+                    dep.appendNode("version", dokka_version)
+                    dep.appendNode("scope", "runtime")
+                }
+            }
+        }
+    }
+}
+
+bintrayPublication(project, ['dokkaGradlePlugin'])
+
+configurations.archives.artifacts.clear()
+artifacts {
+    archives shadowJar
+}
+
+pluginBundle {
+    website = 'http://www.kotlinlang.org/'
+    vcsUrl = 'https://github.com/kotlin/dokka.git'
+    description = 'Dokka, the Kotlin documentation tool'
+    tags = ['dokka', 'kotlin', 'kdoc']
+
+    plugins {
+        dokkaGradlePlugin {
+            id = 'org.jetbrains.dokka'
+            displayName = 'Dokka plugin'
+        }
+    }
+
+    withDependencies { List<Dependency> list ->
+        list.clear()
+        def builder = new DependenciesBuilder()
+        builder.addUniqueScopedDependencies(list, configurations.shadow, "compile")
+    }
+
+    mavenCoordinates {
+        groupId = "org.jetbrains.dokka"
+        artifactId = "dokka-gradle-plugin"
+    }
+}

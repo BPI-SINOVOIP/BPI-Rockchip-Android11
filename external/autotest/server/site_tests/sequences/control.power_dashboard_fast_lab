@@ -1,0 +1,92 @@
+# Copyright (c) 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "puthik"
+NAME = "power_Dashboard.fast_lab"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Stress"
+TEST_CLASS = "suite"
+TEST_TYPE = "server"
+
+DOC = """
+Sequence to make sure that power_Dashboard.full_lab tests work fine.
+"""
+
+from autotest_lib.client.common_lib import error
+from autotest_lib.client.common_lib import utils
+
+# Need separate list for client and server test due to how these test work.
+CLIENT_TESTS = [
+    ('power_Standby', {
+        'tag' : '36sec', 'sample_hours' : 0.01, 'test_hours' : 0.01,
+        'bypass_check' : True}),
+    ('power_LoadTest', {
+        'tag' : 'fast', 'loop_time' : 180, 'loop_count' : 1,
+        'test_low_batt_p' : 6, 'check_network': False, 'ac_ok' : True,
+        'gaia_login' : False}),
+    ('power_Idle', {
+        'tag' : 'fast', 'warmup_secs' : 2, 'idle_secs' : 10}),
+    ('power_VideoPlayback', {
+        'tag' : 'fast', 'secs_per_video' : 10, 'fast' : True }),
+    ('power_VideoPlayback', {
+        'tag' : 'sw_decoder_fast', 'use_hw_decode' : False,
+        'secs_per_video' : 10, 'fast' : True }),
+    ('power_Display', {
+        'tag' : 'fast', 'secs_per_page' : 2}),
+    ('power_WebGL', {
+        'tag' : 'fast', 'duration' : 10}),
+]
+
+SERVO_V4_ETH_VENDOR = '0bda'
+SERVO_V4_ETH_PRODUCT = '8153'
+WIFI_SSID = 'powertest_ap'
+
+# Workaround to make it compatible with moblab autotest UI.
+global args_dict
+try:
+    args_dict
+except NameError:
+    args_dict = utils.args_to_dict(args)
+
+pdash_note = args_dict.get('pdash_note', '')
+
+def run_client_test(machine):
+    client = hosts.create_host(machine)
+
+    wlan_ip = client.get_wlan_ip()
+    if not wlan_ip:
+        autotest.Autotest(client).run_test('dummy_Pass')
+        if not client.connect_to_wifi(WIFI_SSID):
+            raise error.TestFail('Can not connect to wifi.')
+        wlan_ip = client.get_wlan_ip()
+        if not wlan_ip:
+            raise error.TestFail('Can not find wlan ip.')
+
+    # Check if we have servo v4 ethernet and can switch to wlan.
+    eth_usb = client.find_usb_devices(SERVO_V4_ETH_VENDOR, SERVO_V4_ETH_PRODUCT)
+    can_switch_to_wlan = len(eth_usb) == 1 and eth_usb[0] and wlan_ip
+    if can_switch_to_wlan:
+        wlan_machine = machine
+        if utils.host_is_in_power_lab(machine['hostname']):
+            wlan_machine['hostname'] = \
+                utils.get_power_lab_wlan_hostname(machine['hostname'])
+        else:
+            wlan_machine['hostname'] = wlan_ip
+        client = hosts.create_host(wlan_machine)
+        eth_node = eth_usb[0]
+
+    client_at = autotest.Autotest(client)
+
+    for test, argv in CLIENT_TESTS:
+        client.reboot()
+        if can_switch_to_wlan:
+            client.unbind_usb_device(eth_node)
+        argv['pdash_note'] = pdash_note
+        argv['force_discharge'] = True
+        client_at.run_test(test, **argv)
+
+    client.reboot()
+
+
+parallel_simple(run_client_test, machines)

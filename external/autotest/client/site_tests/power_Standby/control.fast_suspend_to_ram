@@ -1,0 +1,27 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "Chrome OS Team"
+NAME = "power_Standby.fast_suspend_to_ram"
+TIME = "MEDIUM"
+TEST_CATEGORY = "Benchmark"
+TEST_CLASS = "power"
+TEST_TYPE = "client"
+
+DOC = """
+This test measures the power draw during suspend.
+
+Test uses RTC wake to transition from suspend to S0 every sample_hours for a
+total standby time of test_hours.  The suspend to S0 transitions are added to
+  1. Validate battery use
+  2. Guarantee that suspend was maintained (no external/false wake)
+  3. Create transitions which more closely model user's interaction.
+
+This test also force suspend to ram regardless of platform setting.
+"""
+
+args_dict = utils.args_to_dict(args)
+pdash_note = args_dict.get('pdash_note', '')
+job.run_test('power_Standby', sample_hours=0.334, test_hours=0.334,
+             tag=NAME.split('.')[1], suspend_state='mem', pdash_note=pdash_note)

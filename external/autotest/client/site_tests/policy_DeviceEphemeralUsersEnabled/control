@@ -1,0 +1,20 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = 'rzakarian'
+NAME = 'policy_DeviceEphemeralUsersEnabled'
+TIME = 'SHORT'
+TEST_CATEGORY = 'General'
+TEST_CLASS = 'enterprise'
+TEST_TYPE = 'client'
+
+DOC = '''
+Called through the policy_DeviceEphemeralUsersEnabled test only. Verifies
+whether the ephemeral_users_enabled policy is set on the device or not.
+
+'''
+
+args_dict = utils.args_to_dict(args)
+
+job.run_test('policy_DeviceEphemeralUsersEnabled', **args_dict)

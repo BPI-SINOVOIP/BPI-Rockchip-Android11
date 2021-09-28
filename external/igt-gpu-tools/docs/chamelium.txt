@@ -1,0 +1,232 @@
+Chamelium Support in IGT
+========================
+
+This document provides information, instructions and a tasks list for Chamelium
+support in IGT.
+
+Introduction
+------------
+
+The Chamelium is a platform that acts as a display monitor emulator. It provides
+advanced access and control over the various signals a display receives.
+
+As such, it allows testing display features that can otherwise not be tested in
+IGT without external hardware.
+
+The platform was developed by Google in order to test display and audio-related
+features of ChromeOS devices. It was initially developed internally by Google as
+part of the ChromeOS effort under the name Chameleon and was later made external
+as part of the ChromiumOS effort, under the name Chamelium.
+
+It consists of a custom-made display emulator board connected to an Arrow SoCKit
+via a flexible cable, with two DisplayPort connectors, one HDMI and one VGA.
+
+The SoCKit uses a Cyclone V SoC, with both a FPGA and an ARM CPU. While the FPGA
+is used for logic control, the CPU runs daemons that allow the board to be
+controlled over the network via a XMLRPC interface.
+
+Documentation
+-------------
+
+Documentation about the Chamelium is made available by Google through the
+ChromiumOS projet wiki: https://www.chromium.org/chromium-os/testing/chamelium
+
+Deploying the Chamelium With IGT
+--------------------------------
+
+Instructions from the ChromiumOS wiki detail how to setup the Chamelium:
+https://www.chromium.org/chromium-os/testing/chamelium#TOC-Setting-up-Chamelium
+
+The should be followed up until the "Setup your Linux host, DUT and the FPGA"
+section. At this point, IGT has to be configured to connect to the Chamelium.
+
+It may be necessary to give the Chamelium a static IP address, depending on
+the network setup. This can be configured (via the serial console) by editing
+the Debian-styled /etc/network/interfaces configuration file. Example setup:
+
+    sudo screen /dev/ttyUSB0 115200
+    sudo vi /etc/network/interfaces
+
+and then configure eth0 like so:
+
+    iface eth0 inet static
+        address 192.168.1.2
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+
+This document supposes that target PC's network IP has "192.168.1.1/24" and
+the Chamelium's network IP has "192.168.1.2/24".
+
+Chamelium support requires setting up dedicated IGT configuration, as explained
+in the Core and Chamelium parts of the IGT API Reference in the documentation.
+
+Note that running the chamelium tests with the Chamelium configuration deployed
+and the Chamelium disconnected or unreachable will result in network timeouts
+that take seconds. It is thus preferable (especially in the case of an automated
+CI system with a shared testlist) to remove the Chamelium configuration from the
+hosts that shouldn't connect to the Chamelium so that they can be skipped, which
+is faster than a network timeout.
+
+It should also be noted that each Chamelium platform should only be used for
+testing a single target device at a time. This is because the reset call issued
+by the IGT tests is common to all connectors and thus one machine running a test
+on a given connector may reset the Chamelium while another machine is running
+a test on another connector.
+
+IGT's behavior can be configured through a configuration file.
+By default, this file is expected to exist in ~/.igtrc
+In order to run tests using the Chamelium, a valid configuration file must be
+present. It must contain Chamelium-specific keys as shown with the following
+example (only Chamelium.URL is mandatory):
+
+    # The common configuration section follows.
+    [Common]
+    # The path to dump frames that fail comparison checks
+    FrameDumpPath=/root/
+
+    # The following section is used for configuring the Device Under Test.
+    # It is not mandatory and allows overriding default values.
+    [DUT]
+    SuspendResumeDelay=15
+
+    [Chamelium]
+    # The URL used for connecting to the Chamelium's RPC server
+    URL=http://192.168.1.2:9992
+
+    # The rest of the sections are used for defining connector mappings. This
+    # is optional, the mappings will be discovered automatically.
+
+    # The name of the DRM connector
+    # The DP-1 of [Chamelium:DP-1] and the HDMI-A-1 of [Chamelium:HDMI-A-1] indicate
+    # "connector info type" of /sys/kernel/debug/dri/0/i915_display_info.
+    [Chamelium:DP-1]
+    # The ChameliumPortID indicates physical port (device) id of a Chamelium Board.
+    # A Chamelium daemon program defines these port ids as
+    # DP1 (located next to the HDMI port) = 1
+    # DP2 (located next to the VGA connector) = 2
+    # HDMI = 3 and VGA = 4
+    # The port ids are defined at:
+    # https://chromium.googlesource.com/chromiumos/platform/chameleon/+/master/chameleond/utils/ids.py
+    ChameliumPortID=1
+
+    [Chamelium:HDMI-A-2]
+    ChameliumPortID=3
+
+    [Chamelium:VGA-1]
+    ChameliumPortID=4
+
+Running the Chamelium With IGT
+------------------------------
+
+$ ./scripts/run-tests.sh -t chamelium
+
+Debugging the Chamelium
+-----------------------
+
+It is possible to manually send Chamelium RPC calls with the xmlrpc utility
+(from xmlrpc-c). For instance, to plug the DisplayPort port:
+$ xmlrpc http://192.168.1.2:9992 Plug i/1
+
+The xmlrpc utility documentation is available at:
+http://xmlrpc-c.sourceforge.net/doc/xmlrpc.html
+
+The XML-RPC Chamelium interface is described here:
+https://chromium.googlesource.com/chromiumos/platform/chameleon/+/refs/heads/master/chameleond/interface.py
+
+Logs that may be useful for debugging can be obtained either by connecting to
+the board via SSH or serial console and looking at the daemon logs from
+/var/log, such as:
+$ tail -f /var/log/chameleon*
+
+Daemon Source, Build and Deploy
+-------------------------------
+
+Source code for the daemon running on the Chamelium is available at:
+https://chromium.googlesource.com/chromiumos/platform/chameleon/
+
+Building the daemon requires a GNU EABI ARMv7 GCC toolchain, that must be
+specified via the CC variable, such as:
+$ make CC=arm-linux-gnueabihf-gcc
+
+The result can be deployed to the chamelium with the remote-install target and
+specifying the network address for the chamelium via the CHAMELEON_HOST
+variable, such as:
+$ make remote-install CHAMELEON_HOST=192.168.72.1
+
+The process requires the Chamelium to be connected to the Internet to succeed.
+
+Audio Capture
+-------------
+
+The Chamelium supports audio capture. IGT tests take advantage of the
+Chamelium streaming server to download audio samples from the Chamelium.
+
+IGT needs direct access to audio devices through ALSA, so PulseAudio needs to
+be stopped (otherwise audio tests will automatically get skipped). To make sure
+PulseAudio isn't running:
+
+- Edit /etc/pulse/client.conf and add autospawn=no
+- Run `pulseaudio --kill` (if it succeeds, it means PulseAudio was running)
+- Make sure a DE that automatically spawns PulseAudio isn't running
+
+In case a test fails, the raw captured audio files will be dumped in a WAV
+file.
+
+Contributing Changes to the Daemon
+----------------------------------
+
+Contributions to the Chamelium daemon, just like any contribution to ChromiumOS,
+are submitted and reviewed at: https://chromium-review.googlesource.com/
+
+The ChromiumOS project provides an extensive developer guide:
+https://chromium.googlesource.com/chromiumos/docs/+/master/developer_guide.md
+It assumes running within the ChromiumOS build system. Since this is likely not
+the case for contributing to the Chamelium daemon, only the part about
+uploading changes is relevant:
+https://chromium.googlesource.com/chromiumos/docs/+/master/developer_guide.md#Upload-your-changes-and-get-a-code-review
+
+Most of the process is about using the Gerrit web interface for submitting and
+having the change reviewed and not forgetting the Change-Id, TEST= and BUG=
+fields in the commit.
+
+Current Support in IGT
+----------------------
+
+Support for the Chamelium platform in IGT is found in the following places:
+* lib/igt_chamelium.c: library with Chamelium-related helpers
+* tests/kms_chamelium.c: sub-tests using the Chamelium
+
+As of early April 2019, the following features are tested by IGT:
+* Pixel-by-pixel frame integrity tests for DP and HDMI
+* Error-trend-based frame integrity tests for VGA
+* CRC-based frame integrity tests for DP and HDMI
+* Hotplug event simple tests for all interfaces
+* Hotplug event stressing tests, emulating a flaky cable for DisplayPort and
+  HDMI
+* Hotplug event during suspend test for all interfaces, either separately for
+  each interface or combined
+* EDID display identifier integrity check for all interfaces
+* EDID display identifier change during suspend for all interfaces
+* Audio Fourier-based tests for DP at 48KHz
+
+Future Developments
+-------------------
+
+With the current generation of the hardware platform, support for testing a
+number of additional display features could be included as future developments,
+including:
+* Audio capture from HDMI
+* Check all channels are independent from each other
+* Playback using more than 2 channels, different sampling rates and different
+  sample sizes
+* High-bandwidth Digital Content Protection (HDCP) streaming to the display
+* Remote control forwarding (CEC) sent from the display
+* YUV colorspace for HDMI, instead of RGB
+* Partial testing of DP Multi-Stream Transport (MST) using an external MST hub
+  and the two available DP connectors of the platform
+
+While HDCP is already supported by the Chamelium daemon, features such as CEC
+and YUV are not and must be implemented there before any support for them can
+be added to IGT. Audio is supported by the Chamelium daemon for HDMI only and
+a way to retrieve the captured data via the XMLRPC interface needs to be added
+to the daemon.

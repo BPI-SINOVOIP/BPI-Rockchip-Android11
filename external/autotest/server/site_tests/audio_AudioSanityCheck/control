@@ -1,0 +1,31 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+from autotest_lib.server import utils
+
+AUTHOR = "chromeos-chameleon"
+NAME = "audio_AudioSanityCheck"
+PURPOSE = "Sanity check for behavior after a suspension."
+CRITERIA = """
+This test will fail if functions that audio tests rely on are broken
+after a suspension.
+"""
+ATTRIBUTES = "suite:chameleon_audio_unstable"
+TIME = "SHORT"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "audio"
+TEST_TYPE = "server"
+DEPENDENCIES = 'chameleon, audio_board'
+JOB_RETRIES = 2
+
+DOC = """
+This test remotely tests if some functions, audio tests rely on, work correctly
+after a suspension.
+"""
+
+def run(machine):
+    host = hosts.create_host(machine)
+    job.run_test("audio_AudioSanityCheck", host=host)
+
+parallel_simple(run, machines)

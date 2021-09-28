@@ -1,0 +1,9 @@
+To generate the v8 snapshot file, first build v8_mksnapshot_32 (32-bit) and v8_mksnapshot_64 (64-bit),
+Push binary to device (or cuttlefish for x86/x64 arch), and run the appropriate command:
+
+On ARM/ARM64 devices:
+ v8_mksnapshot_32 -target-arch=arm --embedded_variant=Default -startup_src snapshot-arm.cc --embedded_src embedded-arm.S
+ v8_mksnapshot_64 -target-arch=arm64 --embedded_variant=Default -startup_src snapshot-arm64.cc --embedded_src embedded-arm64.S
+On x86/x64 devices:
+ v8_mksnapshot_32 -target-arch=x86 --embedded_variant=Default -startup_src snapshot-x86.cc --embedded_src embedded-x86.S
+ v8_mksnapshot_64 -target-arch=x64 --embedded_variant=Default -startup_src snapshot-x86_64.cc --embedded_src embedded-x86_64.S

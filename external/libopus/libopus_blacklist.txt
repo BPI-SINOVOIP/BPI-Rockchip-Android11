@@ -1,0 +1,49 @@
+[integer]
+# celt/celt_decoder.c:1055:61: 0 - 1 cannot be represented in type 'unsigned int'
+fun:celt_decode_with_ec
+# celt/celt_encoder.c:2171:75: 0 - 1 cannot be represented in type 'unsigned int'
+fun:celt_encode_with_ec
+fun:celt_lcg_rand
+# celt/entcode.h:131: negation of 100 cannot be represented in type 'opus_uint32'
+fun:celt_udiv
+# celt/mdct.c:273
+# celt/mdct.c:274
+# celt/mdct.c:304
+# celt/mdct.c:305
+# celt/mdct.c:315
+# celt/mdct.c:316
+# celt/mdct.c:336
+# celt/mdct.c:337
+fun:clt_mdct_backward_c
+fun:ec_dec_init
+# celt/entdec.c:143
+fun:ec_decode
+# celt/entdec.c:150
+fun:ec_decode_bin
+
+src:*/celt/kiss_fft.c
+
+# assembly optimizations that know what they are doing
+fun:silk_SMULWB_armv4
+fun:silk_SMULWT_armv4
+fun:silk_SMULWW_armv4
+fun:silk_SMLAWW_armv4
+#
+fun:silk_SMULWB_armv5e
+fun:silk_SMLAWB_armv5e
+fun:silk_SMULWT_armv5e
+fun:silk_SMLAWT_armv5e
+fun:silk_SMULBB_armv5e
+fun:silk_SMLABB_armv5e
+fun:silk_SMULBT_armv5e
+fun:silk_SMLABT_armv5e
+fun:silk_ADD_SAT32_armv5e
+fun:silk_SUB_SAT32_armv5e
+fun:silk_CLZ16_armv5
+fun:silk_CLZ32_armv5
+
+
+# Performance related
+fun:exp_rotation1
+fun:haar1
+fun:celt_preemphasis

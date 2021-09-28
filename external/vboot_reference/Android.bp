@@ -1,0 +1,188 @@
+// Copyright 2015 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Minimal makefile capable of compiling futility to sign images
+
+cc_defaults {
+    name: "vboot_defaults",
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-address-of-packed-member",
+        "-Wno-ignored-qualifiers",
+        "-Wno-macro-redefined",
+        "-Wno-pointer-arith",
+        "-Wno-sign-compare",
+        "-Wno-typedef-redefinition",
+        "-Wno-unused-parameter",
+    ],
+}
+
+cc_library_host_static {
+    name: "libvboot_util",
+    defaults: ["vboot_defaults"],
+
+    cflags: [
+        // These are required to access large disks and files on 32-bit systems.
+        "-D_GNU_SOURCE",
+        "-D_FILE_OFFSET_BITS=64",
+    ],
+
+    export_include_dirs: [
+        "firmware/include",
+        "firmware/lib/include",
+        "firmware/lib/cgptlib/include",
+        "firmware/lib/cryptolib/include",
+        "firmware/lib/tpm_lite/include",
+        "firmware/2lib/include",
+        "host/include",
+        "host/lib/include",
+    ],
+
+    srcs: [
+        // Firmware library sources needed by VbInit() call
+        "firmware/lib/crc8.c",
+        "firmware/lib/utility.c",
+        "firmware/lib/vboot_api_init.c",
+        "firmware/lib/vboot_common_init.c",
+        "firmware/lib/vboot_nvstorage.c",
+        "firmware/lib/vboot_nvstorage_rollback.c",
+        "firmware/lib/region-init.c",
+
+        // Additional firmware library sources needed by VbSelectFirmware() call
+        "firmware/lib/cryptolib/padding.c",
+        "firmware/lib/cryptolib/rsa.c",
+        "firmware/lib/cryptolib/rsa_utility.c",
+        "firmware/lib/cryptolib/sha1.c",
+        "firmware/lib/cryptolib/sha256.c",
+        "firmware/lib/cryptolib/sha512.c",
+        "firmware/lib/cryptolib/sha_utility.c",
+        "firmware/lib/stateful_util.c",
+        "firmware/lib/vboot_api_firmware.c",
+        "firmware/lib/vboot_common.c",
+        "firmware/lib/vboot_firmware.c",
+        "firmware/lib/region-fw.c",
+
+        // Additional firmware library sources needed by VbSelectAndLoadKernel() call
+        "firmware/lib/cgptlib/cgptlib.c",
+        "firmware/lib/cgptlib/cgptlib_internal.c",
+        "firmware/lib/cgptlib/crc32.c",
+        "firmware/lib/gpt_misc.c",
+        "firmware/lib/utility_string.c",
+        "firmware/lib/vboot_api_kernel.c",
+        "firmware/lib/vboot_audio.c",
+        "firmware/lib/vboot_display.c",
+        "firmware/lib/vboot_kernel.c",
+        "firmware/lib/region-kernel.c",
+
+        "firmware/stub/tpm_lite_stub.c",
+        "firmware/stub/utility_stub.c",
+        "firmware/stub/vboot_api_stub_init.c",
+        "firmware/stub/vboot_api_stub_region.c",
+
+        "firmware/stub/vboot_api_stub_sf.c",
+
+        "firmware/stub/vboot_api_stub.c",
+        "firmware/stub/vboot_api_stub_disk.c",
+        "firmware/stub/vboot_api_stub_stream.c",
+
+        "cgpt/cgpt_create.c",
+        "cgpt/cgpt_add.c",
+        "cgpt/cgpt_boot.c",
+        "cgpt/cgpt_show.c",
+        "cgpt/cgpt_repair.c",
+        "cgpt/cgpt_prioritize.c",
+        "cgpt/cgpt_common.c",
+        "futility/dump_kernel_config_lib.c",
+        "host/lib/crossystem.c",
+        "host/lib/file_keys.c",
+        "host/lib/fmap.c",
+        "host/lib/host_common.c",
+        "host/lib/host_key.c",
+        "host/lib/host_keyblock.c",
+        "host/lib/host_misc.c",
+        "host/lib/util_misc.c",
+        "host/lib/host_signature.c",
+        "host/lib/signature_digest.c",
+
+        // host/arch/${HOST_ARCH}/lib/crossystem_arch.c
+    ],
+
+    static_libs: ["libcrypto"],
+
+    target: {
+        darwin: {
+            cflags: [
+                "-DHAVE_MACOS",
+                "-DO_LARGEFILE=0",
+            ],
+        },
+    },
+}
+
+filegroup {
+    name: "futility_srcs",
+    srcs: [
+        "futility/futility.c",
+        "futility/cmd_dump_fmap.c",
+        "futility/cmd_gbb_utility.c",
+        "futility/misc.c",
+
+        "futility/cmd_dump_kernel_config.c",
+        "futility/cmd_load_fmap.c",
+        "futility/cmd_pcr.c",
+        "futility/cmd_show.c",
+        "futility/cmd_sign.c",
+        "futility/cmd_vbutil_firmware.c",
+        "futility/cmd_vbutil_kernel.c",
+        "futility/cmd_vbutil_key.c",
+        "futility/cmd_vbutil_keyblock.c",
+        "futility/file_type.c",
+        "futility/traversal.c",
+        "futility/vb1_helper.c",
+    ],
+}
+
+genrule {
+    name: "futility_cmds",
+    cmd: "grep -hoRE '^DECLARE_FUTIL_COMMAND\\([^,]+' $(locations :futility_srcs) | sed 's/DECLARE_FUTIL_COMMAND(\\(.*\\)/_CMD(\\1)/' | sort >>$(genDir)/commands" +
+        " && $(location scripts/getversion.sh) >> $(out)" +
+        " && echo '#define _CMD(NAME) extern const struct futil_cmd_t __cmd_##NAME;' >> $(out)" +
+        " && cat $(genDir)/commands >> $(out)" +
+        " && echo '#undef _CMD' >> $(out)" +
+        " && echo '#define _CMD(NAME) &__cmd_##NAME,' >> $(out)" +
+        " && echo 'const struct futil_cmd_t *const futil_cmds[] = {' >> $(out)" +
+        " && cat $(genDir)/commands >> $(out)" +
+        " && echo '0};  /* null-terminated */' >> $(out)" +
+        " && echo '#undef _CMD' >> $(out)",
+    srcs: [
+        ":futility_srcs",
+        "scripts/getversion.sh",
+    ],
+    out: ["futility_cmds.c"],
+}
+
+cc_binary_host {
+    name: "futility-host",
+    defaults: ["vboot_defaults"],
+
+    srcs: [":futility_srcs"],
+    generated_sources: ["futility_cmds"],
+
+    cflags: [
+        // These are required to access large disks and files on 32-bit systems.
+        "-D_GNU_SOURCE",
+        "-D_FILE_OFFSET_BITS=64",
+    ],
+
+    static_libs: ["libvboot_util"],
+    shared_libs: ["libcrypto"],
+
+    target: {
+        darwin: {
+            cflags: ["-DHAVE_MACOS"],
+        },
+    },
+}

@@ -1,0 +1,25 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "chromeos-gfx"
+NAME = "graphics_HwOverlays.video"
+TIME = "FAST"
+TEST_CATEGORY = "Functional"
+TEST_CLASS = "graphics"
+TEST_TYPE = "client"
+
+ATTRIBUTES = "suite:bvt-perbuild"
+
+HTML_TEST_FILE = 'video.html'
+DATA_FILE_URL = r'http://commondatastorage.googleapis.com/chromiumos-test-assets-public/traffic/traffic-1920x1080-83a1e5f8b7944577425f039034e64c76.vp9.webm'
+
+DOC = """
+Runs a very simple video playback (just navigating to the file) and inspects the
+amount of hardware overlays reported by the system. The test passes when the
+video turns into an overlay.
+"""
+
+job.run_test('graphics_HwOverlays',
+             html_file=HTML_TEST_FILE,
+             data_file_url=DATA_FILE_URL)

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+set -x
+
+if [ ! -d "$NDK" ]; then
+  echo 'Please set $NDK to the path to NDK'
+  exit 1
+fi
+
+cd $(dirname "$0")
+
+function RunConfigure() {
+  HOST=$1
+  TARGET=$2
+  ARCH=$3
+
+  TOOLCHAIN=${NDK}/toolchains/llvm/prebuilt/linux-x86_64/bin/
+
+  export AR=${TOOLCHAIN}${HOST}-ar
+  export AS=${TOOLCHAIN}${TARGET}-clang
+  export CC=${TOOLCHAIN}${TARGET}-clang
+  export CXX=${TOOLCHAIN}${TARGET}-clang++
+  export LD=${TOOLCHAIN}${HOST}-ld
+  export STRIP=${TOOLCHAIN}${HOST}-strip
+
+  # Tell configure what flags Android requires.
+  export CFLAGS="-fPIE -fPIC"
+  export LDFLAGS="-pie"
+
+  ./configure --host=${HOST} --without-zlib
+
+  mkdir -p configs/${ARCH}/MagickCore
+  mv MagickCore/version.h configs/${ARCH}/MagickCore/
+  mv MagickCore/magick-baseconfig.h configs/${ARCH}/MagickCore/
+}
+
+RunConfigure "aarch64-linux-android" "aarch64-linux-android28" "arm64"
+RunConfigure "arm-linux-androideabi" "armv7a-linux-androideabi28" "arm"
+RunConfigure "i686-linux-android" "i686-linux-android28" "x86"
+RunConfigure "x86_64-linux-android" "x86_64-linux-android28" "x86-64"

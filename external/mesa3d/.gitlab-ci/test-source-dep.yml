@@ -1,0 +1,217 @@
+# This file list source dependencies to avoid creating/running jobs
+# those outcome cannot be changed by the modifications from a branch.
+
+# Mesa core source file dependencies
+# ----------------------------------
+.mesa-rules:
+  rules:
+    - changes: &mesa_core_file_list
+      - .gitlab-ci.yml
+      - .gitlab-ci/**/*
+      - include/**/*
+      - meson.build
+      - SConstruct
+      - src/*
+      - src/compiler/**/*
+      - src/drm-shim/**/*
+      - src/egl/**/*
+      - src/gbm/**/*
+      - src/glx/**/*
+      - src/gtest/**/*
+      - src/hgl/**/*
+      - src/include/**/*
+      - src/loader/**/*
+      - src/mapi/**/*
+      - src/mesa/**/*
+      - src/util/**/*
+
+# Gallium core source file dependencies
+# -------------------------------------
+.gallium-rules:
+  rules:
+    - changes: &gallium_core_file_list
+      - src/gallium/*
+      - src/gallium/auxiliary/**/*
+      - src/gallium/drivers/*
+      - src/gallium/include/**/*
+      - src/gallium/state_trackers/**/*
+      - src/gallium/targets/**/*
+      - src/gallium/tests/**/*
+      - src/gallium/winsys/*
+
+# Generic rule to not run the job during scheduled pipelines
+# ----------------------------------------------------------
+.scheduled_pipelines-rules:
+  rules: &ignore_scheduled_pipelines
+    if: '$CI_PIPELINE_SOURCE == "schedule"'
+    when: never
+
+.softpipe-rules:
+  stage: softpipe
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+      - src/gallium/drivers/softpipe/**/*
+      - src/gallium/winsys/sw/**/*
+      when: on_success
+    - when: never
+
+.llvmpipe-rules:
+  stage: llvmpipe
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes: &llvmpipe_file_list
+      - src/gallium/drivers/llvmpipe/**/*
+      - src/gallium/winsys/sw/**/*
+      when: on_success
+    - when: never
+
+.llvmpipe-cl-rules:
+  stage: llvmpipe
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+      - .gitlab-ci.yml
+      - .gitlab-ci/**/*
+      - meson.build
+      - include/**/*
+      - src/compiler/**/*
+      - src/include/**/*
+      - src/util/**/*
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+        *llvmpipe_file_list
+      when: on_success
+    - changes: &clover_file_list
+      - src/gallium/frontends/clover/**/*
+      when: on_success
+    - when: never
+
+.freedreno-rules:
+  stage: freedreno
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+      # Note: when https://gitlab.com/gitlab-org/gitlab/-/issues/198688
+      # is supported, we can change the src/freedreno/ rule to explicitly
+      # exclude tools, rather than having to explicitly list everything
+      # else
+      - src/freedreno/common/**/*
+      - src/freedreno/drm/**/*
+      - src/freedreno/fdl/**/*
+      - src/freedreno/ir2/**/*
+      - src/freedreno/ir3/**/*
+      - src/freedreno/perfcntrs/**/*
+      - src/freedreno/registers/**/*
+      - src/freedreno/vulkan/**/*
+      - src/gallium/drivers/freedreno/**/*
+      - src/gallium/winsys/freedreno/**/*
+      when: on_success
+    - when: never
+
+.panfrost-rules:
+  stage: panfrost
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+      - src/gallium/drivers/panfrost/**/*
+      - src/gallium/winsys/panfrost/**/*
+      - src/panfrost/**/*
+      when: on_success
+    - when: never
+
+.lima-rules:
+  stage: lima
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+      - src/gallium/drivers/lima/**/*
+      - src/gallium/winsys/lima/**/*
+      - src/lima/**/*
+      when: on_success
+    - when: never
+
+.radv-rules:
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+      - src/amd/**/*
+      - src/vulkan/**/*
+      when: on_success
+    - when: never
+
+.virgl-rules:
+  stage: virgl
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+        *llvmpipe_file_list
+      when: on_success
+    - changes:
+      - src/gallium/drivers/virgl/**/*
+      - src/gallium/winsys/virgl/**/*
+      when: on_success
+    - when: never
+
+.radeonsi-rules:
+  stage: radeonsi
+  rules:
+    - *ignore_scheduled_pipelines
+    - changes:
+        *mesa_core_file_list
+      when: on_success
+    - changes:
+        *gallium_core_file_list
+      when: on_success
+    - changes:
+      - src/gallium/drivers/radeonsi/**/*
+      - src/gallium/winsys/amdgpu/**/*
+      - src/amd/*
+      - src/amd/addrlib/**/*
+      - src/amd/common/**/*
+      - src/amd/llvm/**/*
+      - src/amd/registers/**/*
+      when: on_success
+    - when: never

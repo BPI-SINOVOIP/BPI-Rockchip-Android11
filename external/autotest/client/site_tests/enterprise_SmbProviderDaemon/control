@@ -1,0 +1,21 @@
+# Copyright 2018 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+AUTHOR = "allenvic"
+NAME = "enterprise_SmbProviderDaemon"
+TIME = "SHORT"
+TEST_CATEGORY = "Enterprise"
+TEST_CLASS = "enterprise"
+TEST_TYPE = "client"
+
+DOC = """
+Runs commands on the smbprovider daemon. Connects to an actual SMB server.
+"""
+
+from autotest_lib.client.common_lib import base_utils
+
+args_dict = base_utils.args_to_dict(args)
+mount_path = args_dict.get('mount_path')
+
+job.run_test('enterprise_SmbProviderDaemon', mount_path=mount_path)

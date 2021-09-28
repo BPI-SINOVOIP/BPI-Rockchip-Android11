@@ -1,0 +1,22 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+NAME = 'hardware_StorageSuspendStress.test_other'
+AUTHOR = 'The Chromium OS Authors'
+PURPOSE = 'Test StorageSuspendStress code on non root device'
+TIME = 'MEDIUM'
+TEST_CLASS = 'hardware'
+TEST_TYPE = 'server'
+
+DOC = """
+Test hardware_StorageSuspendStress section.
+Run Fio while suspending aggressively.
+"""
+
+def run_hardware_storage_stress(machine):
+    job.run_test('hardware_StorageQualSuspendStress', client_ip=machine, duration=3600,
+    						      other_dev=True)
+
+job.parallel_simple(run_hardware_storage_stress, machines)
+
