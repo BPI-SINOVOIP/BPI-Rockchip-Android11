@@ -1,0 +1,34 @@
+{
+  "deps": [
+    "fit", 
+    "fidl", 
+    "fidl-async", 
+    "zx"
+  ], 
+  "fidl_deps": [], 
+  "headers": [
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/array.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/clone.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/coding_traits.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/comparison.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/decoder.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/encoder.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/internal/logging.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/object_coding.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/string.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/traits.h", 
+    "pkg/fidl_cpp_base/include/lib/fidl/cpp/vector.h"
+  ], 
+  "include_dir": "pkg/fidl_cpp_base/include", 
+  "name": "fidl_cpp_base", 
+  "root": "pkg/fidl_cpp_base", 
+  "sources": [
+    "pkg/fidl_cpp_base/clone.cc", 
+    "pkg/fidl_cpp_base/coding_traits.cc", 
+    "pkg/fidl_cpp_base/decoder.cc", 
+    "pkg/fidl_cpp_base/encoder.cc", 
+    "pkg/fidl_cpp_base/internal/logging.cc", 
+    "pkg/fidl_cpp_base/string.cc"
+  ], 
+  "type": "cc_source_library"
+}

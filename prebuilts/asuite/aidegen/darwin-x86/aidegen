@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Copyright 2019, The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Check python3 availability.
+desired_pyver=3.6.0
+function helper() {
+    cat << END
+To install Python $desired_pyver, you may want to follow either approach:
+* homebrew: https://hackercodex.com/guide/python-development-environment-on-mac-osx/
+* macports: https://www.macports.org/install.php
+            and run "port -N install python36"
+* from package: https://www.python.org/downloads/release/python-360/
+            download and install the appropriate one.
+END
+}
+
+# Exit gracefully if there's no python3 detected.
+[ $(which python3) ] || { echo "Unable to find python3."; helper; exit 1; }
+
+# compare 2 version numbers.
+#    args: num1 num2
+#    return: -1: num1 < num2
+#             0: num1 == num2
+#             1: num1 > num2
+function _version_comp() {
+    if [ "$1" == "$2" ]; then
+        echo 0
+    elif [ "$(printf "%s\n%s" "$1" "$2" | sort -V| head -n1)" == "$1" ]; then
+        echo -1
+    else
+        echo 1
+    fi
+}
+
+# Ensure AIDEgen runs properly by validating if it fulfils the desired version.
+PYVER=$(python3 -V 2>&1| awk '{print $2}')
+[ $(_version_comp $PYVER $desired_pyver) -eq -1 ] && { helper; exit 1; }
+exec "$(dirname $0)/../linux-x86/$(basename $0)" "$@"

@@ -1,0 +1,15 @@
+java_import_host {
+    name: "lint_api",
+    jars: [
+        "tools/lib/lint/lint-api.jar",
+        "tools/lib/lint/lint-checks.jar",
+
+        // A subset of the jars listed in MANIFEST.MF in
+        // tools/lib/lint-classpath.jar needed to provide dependencies
+        // of lint-api.jar and lint-checks.jar.
+        "tools/lib/external/com/google/guava/guava/28.1-jre/guava-28.1-jre.jar",
+        "tools/lib/external/lint-psi/intellij-core/intellij-core-all.jar",
+        "tools/lib/external/lint-psi/kotlin-compiler/kotlin-compiler-all.jar",
+        "tools/lib/external/lint-psi/uast/uast-all.jar",
+    ],
+}

@@ -1,0 +1,17 @@
+name: "Android SDK Command-line Tools"
+description:
+    "Android SDK Command-line Tools"
+
+third_party {
+  url {
+    type: HOMEPAGE
+    value: "https://developer.android.com/studio#command-tools"
+  }
+  url {
+    type: ARCHIVE
+    value: "https://dl.google.com/android/repository/commandlinetools-linux-6514223_latest.zip"
+  }
+  version: "2.0"
+  last_upgrade_date { year: 2020 month: 6 day: 1 }
+  license_type: RESTRICTED
+}

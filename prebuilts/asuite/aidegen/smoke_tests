@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+#
+# Copyright 2019, The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Variables that will be used inside of containers.
+SRCTOP="/home/$USER/aosp"
+TARGET="aosp_cf_x86_phone-userdebug"
+# Variables that will be used when creating docker image.
+IMAGE="aosp/asuite"
+DOCKERFILE_DIR=$(realpath $(dirname $0)/..)
+# Whenever amending Dockerfile, update the md5 checksum accordingly.
+DOCKERFILE_MD5SUM="40ffbf07477406a7cd6c709cb7ee6c3a"
+SLIENCE_FLAG='>/dev/null 2>&1'
+
+# The core functional tests for AIDEGen.
+function run_functiontests() {
+    local target="aidegen_functional_test"
+    if ! m $target; then
+        echo -e "\n[Error] Fail to build $target.\n"
+        exit 1
+    fi
+    if ! ${target}-dev -b; then
+        echo -e "\n[Error] Fail to run ${target}-dev.\n"
+        exit 1
+    fi
+}
+
+# Initialize $ANDROID_BUILD_TOP in container and install m().
+function check_env() {
+    if [[ -z "$ANDROID_BUILD_TOP" ]]; then
+        if [[ "$IS_CONTAINER" = "true" ]]; then
+            pushd "$SRCTOP"
+            source build/envsetup.sh && lunch $TARGET
+            popd
+        else
+            echo -ne "\n[Error] Missing \$ANDROID_BUILD_TOP variable. "
+            echo -e "Please run 'lunch' first.\n"
+            exit 1
+        fi
+    fi
+    function m() {
+        echo "[Info] m $@"
+        ${ANDROID_BUILD_TOP}/build/soong/soong_ui.bash --make-mode "$@"
+    }
+    [[ $(uname -s) = "Darwin" ]] && export IS_CONTAINER=true
+}
+
+# TODO: Move this method to asuite.sh.
+function build_docker_image() {
+    echo "[Info] Start building Docker image $IMAGE..."
+    build_cmd="docker build --rm --force-rm --no-cache \
+        --build-arg USER=$USER \
+        --build-arg UID=$UID \
+        --build-arg SRCTOP=$SRCTOP \
+        -t $IMAGE $DOCKERFILE_DIR"
+    if ! eval $build_cmd; then
+        echo -e "\n[Error] Failed to build docker image."
+        exit 1
+    fi
+}
+
+# TODO: Move this method to asuite.sh.
+function run_docker_instance() {
+    echo "[Info] Start a Docker container..."
+    docker run --rm -v $ANDROID_BUILD_TOP:$SRCTOP $IMAGE
+}
+
+# TODO: Move this method to asuite.sh.
+function has_docker() {
+    [[ "$IS_CONTAINER" = "true" ]] && return 1
+    if ! systemctl is-active docker -q; then
+        echo "[Error] Docker daemon not running."
+        exit 1
+    elif ! docker ps $SILENCE_FLAG; then
+        echo "[Error] $USER not in docker group."
+        exit 1
+    fi
+}
+
+# TODO: Move this method to asuite.sh.
+function has_docker_image() {
+    image_id=$(docker images --filter=reference=$IMAGE --format "{{.ID}}")
+    if [[ -z $image_id ]]; then
+        echo "[Info] Docker image $IMAGE not found."
+        return 1
+    fi
+    checksum=$(md5sum $DOCKERFILE_DIR/Dockerfile | awk '{print $1}')
+    if [[ $checksum != $DOCKERFILE_MD5SUM ]]; then
+        echo "[Info] Docker image $IMAGE is outdated."
+        return 1
+    fi
+}
+
+# Run functional tests directly when in MacOS or in a container.
+# Pass IS_CONTAINER=true to run functional tests when Docker is installed on Linux.
+function main() {
+    check_env
+    if ! has_docker; then
+        m clean
+        run_functiontests
+    else
+        if ! has_docker_image; then
+            build_docker_image
+        fi
+        run_docker_instance
+    fi
+}
+
+main

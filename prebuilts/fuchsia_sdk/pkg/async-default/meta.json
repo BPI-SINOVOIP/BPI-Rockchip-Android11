@@ -1,0 +1,23 @@
+{
+  "binaries": {
+    "arm64": {
+      "debug": ".build-id/48/624ebaefd10ab212943f16760a00f469ec307e.debug", 
+      "dist": "arch/arm64/dist/libasync-default.so", 
+      "link": "arch/arm64/lib/libasync-default.so"
+    }, 
+    "x64": {
+      "debug": ".build-id/5e/3c55aea09e8943ae76d3603cc8c0b1ba27bfb7.debug", 
+      "dist": "arch/x64/dist/libasync-default.so", 
+      "link": "arch/x64/lib/libasync-default.so"
+    }
+  }, 
+  "deps": [], 
+  "format": "shared", 
+  "headers": [
+    "pkg/async-default/include/lib/async/default.h"
+  ], 
+  "include_dir": "pkg/async-default/include", 
+  "name": "async-default", 
+  "root": "pkg/async-default", 
+  "type": "cc_prebuilt_library"
+}

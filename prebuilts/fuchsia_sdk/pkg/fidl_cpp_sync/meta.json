@@ -1,0 +1,23 @@
+{
+  "deps": [
+    "fidl_cpp_base", 
+    "fidl", 
+    "fidl-async", 
+    "fit", 
+    "zx"
+  ], 
+  "fidl_deps": [], 
+  "headers": [
+    "pkg/fidl_cpp_sync/include/lib/fidl/cpp/interface_handle.h", 
+    "pkg/fidl_cpp_sync/include/lib/fidl/cpp/interface_request.h", 
+    "pkg/fidl_cpp_sync/include/lib/fidl/cpp/internal/synchronous_proxy.h", 
+    "pkg/fidl_cpp_sync/include/lib/fidl/cpp/synchronous_interface_ptr.h"
+  ], 
+  "include_dir": "pkg/fidl_cpp_sync/include", 
+  "name": "fidl_cpp_sync", 
+  "root": "pkg/fidl_cpp_sync", 
+  "sources": [
+    "pkg/fidl_cpp_sync/internal/synchronous_proxy.cc"
+  ], 
+  "type": "cc_source_library"
+}

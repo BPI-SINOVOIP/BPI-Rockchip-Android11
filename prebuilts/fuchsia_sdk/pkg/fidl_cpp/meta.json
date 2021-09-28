@@ -1,0 +1,45 @@
+{
+  "deps": [
+    "fidl_cpp_sync", 
+    "async", 
+    "async-default", 
+    "fidl", 
+    "fidl-async", 
+    "fit", 
+    "zx"
+  ], 
+  "fidl_deps": [], 
+  "headers": [
+    "pkg/fidl_cpp/include/lib/fidl/cpp/binding.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/binding_set.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/enum.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/interface_ptr.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/interface_ptr_set.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/header.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/implementation.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/message_handler.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/message_reader.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/pending_response.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/proxy.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/proxy_controller.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/stub.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/stub_controller.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/internal/weak_stub_controller.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/optional.h", 
+    "pkg/fidl_cpp/include/lib/fidl/cpp/thread_safe_binding_set.h"
+  ], 
+  "include_dir": "pkg/fidl_cpp/include", 
+  "name": "fidl_cpp", 
+  "root": "pkg/fidl_cpp", 
+  "sources": [
+    "pkg/fidl_cpp/internal/message_handler.cc", 
+    "pkg/fidl_cpp/internal/message_reader.cc", 
+    "pkg/fidl_cpp/internal/pending_response.cc", 
+    "pkg/fidl_cpp/internal/proxy.cc", 
+    "pkg/fidl_cpp/internal/proxy_controller.cc", 
+    "pkg/fidl_cpp/internal/stub.cc", 
+    "pkg/fidl_cpp/internal/stub_controller.cc", 
+    "pkg/fidl_cpp/internal/weak_stub_controller.cc"
+  ], 
+  "type": "cc_source_library"
+}

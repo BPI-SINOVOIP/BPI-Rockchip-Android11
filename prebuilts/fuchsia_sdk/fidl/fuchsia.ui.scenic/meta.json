@@ -1,0 +1,25 @@
+{
+  "deps": [
+    "fuchsia.images", 
+    "fuchsia.ui.gfx", 
+    "fuchsia.ui.input", 
+    "fuchsia.ui.vectorial", 
+    "fuchsia.ui.views", 
+    "fuchsia.mem"
+  ], 
+  "files": [
+    "fidl/fuchsia.ui.scenic/commands.fidl", 
+    "fidl/fuchsia.ui.scenic/events.fidl", 
+    "fidl/fuchsia.ui.scenic/scenic.fidl", 
+    "fidl/fuchsia.ui.scenic/session.fidl"
+  ], 
+  "name": "fuchsia.ui.scenic", 
+  "root": "fidl/fuchsia.ui.scenic", 
+  "sources": [
+    "fidl/fuchsia.ui.scenic/commands.fidl", 
+    "fidl/fuchsia.ui.scenic/events.fidl", 
+    "fidl/fuchsia.ui.scenic/scenic.fidl", 
+    "fidl/fuchsia.ui.scenic/session.fidl"
+  ], 
+  "type": "fidl_library"
+}

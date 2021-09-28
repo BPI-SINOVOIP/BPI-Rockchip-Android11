@@ -1,0 +1,24 @@
+{
+  "banjo_deps": [], 
+  "deps": [
+    "async", 
+    "async-default", 
+    "async-loop", 
+    "zx"
+  ], 
+  "fidl_deps": [], 
+  "files": [
+    "pkg/async-loop-cpp/loop_wrapper.cpp", 
+    "pkg/async-loop-cpp/include/lib/async-loop/cpp/loop.h"
+  ], 
+  "headers": [
+    "pkg/async-loop-cpp/include/lib/async-loop/cpp/loop.h"
+  ], 
+  "include_dir": "pkg/async-loop-cpp/include", 
+  "name": "async-loop-cpp", 
+  "root": "pkg/async-loop-cpp", 
+  "sources": [
+    "pkg/async-loop-cpp/loop_wrapper.cpp"
+  ], 
+  "type": "cc_source_library"
+}

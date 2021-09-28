@@ -1,0 +1,31 @@
+{
+  "deps": [
+    "fidl_cpp", 
+    "images_cpp", 
+    "fit", 
+    "zx"
+  ], 
+  "fidl_deps": [
+    "fuchsia.ui.gfx", 
+    "fuchsia.ui.scenic"
+  ], 
+  "headers": [
+    "pkg/scenic_cpp/include/lib/ui/scenic/cpp/commands.h", 
+    "pkg/scenic_cpp/include/lib/ui/scenic/cpp/host_image_cycler.h", 
+    "pkg/scenic_cpp/include/lib/ui/scenic/cpp/host_memory.h", 
+    "pkg/scenic_cpp/include/lib/ui/scenic/cpp/id.h", 
+    "pkg/scenic_cpp/include/lib/ui/scenic/cpp/resources.h", 
+    "pkg/scenic_cpp/include/lib/ui/scenic/cpp/session.h"
+  ], 
+  "include_dir": "pkg/scenic_cpp/include", 
+  "name": "scenic_cpp", 
+  "root": "pkg/scenic_cpp", 
+  "sources": [
+    "pkg/scenic_cpp/commands.cc", 
+    "pkg/scenic_cpp/host_image_cycler.cc", 
+    "pkg/scenic_cpp/host_memory.cc", 
+    "pkg/scenic_cpp/resources.cc", 
+    "pkg/scenic_cpp/session.cc"
+  ], 
+  "type": "cc_source_library"
+}
