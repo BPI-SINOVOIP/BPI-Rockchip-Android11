@@ -1,0 +1,24 @@
+id: 8835981461554930288
+count_metric {
+  id: 543749824321007836
+  what: 3909523419673092535
+  bucket: ONE_DAY
+}
+atom_matcher {
+  id: 3909523419673092535
+  simple_atom_matcher {
+    atom_id: 98
+  }
+}
+allowed_log_source: "AID_GRAPHICS"
+allowed_log_source: "AID_INCIDENTD"
+allowed_log_source: "AID_STATSD"
+allowed_log_source: "AID_RADIO"
+allowed_log_source: "com.android.systemui"
+allowed_log_source: "com.android.vending"
+allowed_log_source: "AID_SYSTEM"
+allowed_log_source: "AID_ROOT"
+allowed_log_source: "AID_BLUETOOTH"
+default_pull_packages: "AID_SYSTEM"
+
+hash_strings_in_metric_report: false

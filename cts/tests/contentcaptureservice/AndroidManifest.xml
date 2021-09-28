@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="android.contentcaptureservice.cts"
+    android:targetSandboxVersion="2">
+
+    <application>
+
+        <uses-library android:name="android.test.runner" />
+
+        <activity android:name=".BlankActivity"
+                  android:label="Blank"
+                  android:taskAffinity=".BlankActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".BlankWithTitleActivity"
+                  android:label="Blanka"
+                  android:taskAffinity=".BlankWithTitleActivity">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity"
+                  android:label="Login"
+                  android:taskAffinity=".LoginActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ResizingEditActivity"
+                  android:label="ReizingEdit"
+                  android:taskAffinity=".ResizingEditActivity"
+                  android:windowSoftInputMode="adjustResize"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ChildlessActivity"
+                  android:label="Childless"
+                  android:taskAffinity=".ChildlessActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CustomViewActivity"
+                  android:label="CustomView"
+                  android:taskAffinity=".CustomViewActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".OutOfProcessActivity"
+                  android:label="Oop"
+                  android:taskAffinity=".OutOfProcessActivity"
+                  android:theme="@android:style/Theme.NoTitleBar"
+                  android:process="android.contentcapture.cts.outside">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".DataSharingActivity"
+                  android:label="DataSharing"
+                  android:taskAffinity=".DataSharingActivity"
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <!-- This intent filter is not really needed by CTS, but it makes easier to launch
+                     this app during CTS development... -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".SelfDestructReceiver"
+            android:exported="true"
+            android:process="android.contentcapture.cts.outside"/>
+
+        <service
+            android:name=".CtsContentCaptureService"
+            android:label="CtsContentCaptureService"
+            android:permission="android.permission.BIND_CONTENT_CAPTURE_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.contentcapture.ContentCaptureService" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".DataSharingService"
+            android:label="DataSharingService" />
+        <service
+            android:name=".OutOfProcessDataSharingService"
+            android:label="OutOfProcessDataSharingService"
+            android:process=":android.contentcapture.cts.outside" />
+
+    </application>
+
+    <instrumentation
+        android:name="androidx.test.runner.AndroidJUnitRunner"
+        android:label="CTS tests for the AutoFill Framework APIs."
+        android:targetPackage="android.contentcaptureservice.cts" >
+    </instrumentation>
+
+</manifest>

@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<WifiBackupData>
+<float name="Version" value="1.2" />
+<NetworkList>
+<Network>
+<WifiConfiguration>
+<string name="ConfigKey">&quot;TestSsid1&quot;WEP</string>
+<string name="SSID">&quot;TestSsid1&quot;</string>
+<null name="PreSharedKey" />
+<string-array name="WEPKeys" num="4">
+<item value="&quot;WepAscii1&quot;" />
+<item value="&quot;WepAscii2&quot;" />
+<item value="45342312ab" />
+<item value="45342312ab45342312ab34ac12" />
+</string-array>
+<int name="WEPTxKeyIndex" value="1" />
+<boolean name="HiddenSSID" value="false" />
+<boolean name="RequirePMF" value="false" />
+<byte-array name="AllowedKeyMgmt" num="1">01</byte-array>
+<byte-array name="AllowedProtocols" num="0"></byte-array>
+<byte-array name="AllowedAuthAlgos" num="0"></byte-array>
+<byte-array name="AllowedGroupCiphers" num="0"></byte-array>
+<byte-array name="AllowedPairwiseCiphers" num="0"></byte-array>
+<byte-array name="AllowedGroupMgmtCiphers" num="0"></byte-array>
+<byte-array name="AllowedSuiteBCiphers" num="0"></byte-array>
+<boolean name="Shared" value="true" />
+<int name="MeteredOverride" value="1" />
+</WifiConfiguration>
+<IpConfiguration>
+<string name="IpAssignment">DHCP</string>
+<string name="ProxySettings">PAC</string>
+<string name="ProxyPac">http://</string>
+</IpConfiguration>
+</Network>
+<Network>
+<WifiConfiguration>
+<string name="ConfigKey">&quot;TestSsid2&quot;WPA_PSK</string>
+<string name="SSID">&quot;TestSsid2&quot;</string>
+<string name="PreSharedKey">&quot;TestPsk123&quot;</string>
+<null name="WEPKeys" />
+<int name="WEPTxKeyIndex" value="0" />
+<boolean name="HiddenSSID" value="false" />
+<boolean name="RequirePMF" value="false" />
+<byte-array name="AllowedKeyMgmt" num="1">02</byte-array>
+<byte-array name="AllowedProtocols" num="0"></byte-array>
+<byte-array name="AllowedAuthAlgos" num="0"></byte-array>
+<byte-array name="AllowedGroupCiphers" num="0"></byte-array>
+<byte-array name="AllowedPairwiseCiphers" num="0"></byte-array>
+<byte-array name="AllowedGroupMgmtCiphers" num="0"></byte-array>
+<byte-array name="AllowedSuiteBCiphers" num="0"></byte-array>
+<boolean name="Shared" value="true" />
+<int name="MeteredOverride" value="0" />
+</WifiConfiguration>
+<IpConfiguration>
+<string name="IpAssignment">STATIC</string>
+<string name="LinkAddress">192.168.48.2</string>
+<int name="LinkPrefixLength" value="8" />
+<string name="GatewayAddress">192.168.48.1</string>
+<string-array name="DNSServers" num="2">
+<item value="192.168.48.1" />
+<item value="192.168.48.10" />
+</string-array>
+<string name="ProxySettings">PAC</string>
+<string name="ProxyPac">http://</string>
+</IpConfiguration>
+</Network>
+<Network>
+<WifiConfiguration>
+<string name="ConfigKey">&quot;TestSsid3&quot;NONE</string>
+<string name="SSID">&quot;TestSsid3&quot;</string>
+<null name="PreSharedKey" />
+<null name="WEPKeys" />
+<int name="WEPTxKeyIndex" value="0" />
+<boolean name="HiddenSSID" value="false" />
+<boolean name="RequirePMF" value="false" />
+<byte-array name="AllowedKeyMgmt" num="1">01</byte-array>
+<byte-array name="AllowedProtocols" num="0"></byte-array>
+<byte-array name="AllowedAuthAlgos" num="0"></byte-array>
+<byte-array name="AllowedGroupCiphers" num="0"></byte-array>
+<byte-array name="AllowedPairwiseCiphers" num="0"></byte-array>
+<byte-array name="AllowedGroupMgmtCiphers" num="0"></byte-array>
+<byte-array name="AllowedSuiteBCiphers" num="0"></byte-array>
+<boolean name="Shared" value="true" />
+<int name="MeteredOverride" value="2" />
+</WifiConfiguration>
+<IpConfiguration>
+<string name="IpAssignment">STATIC</string>
+<string name="LinkAddress">192.168.48.2</string>
+<int name="LinkPrefixLength" value="8" />
+<string name="GatewayAddress">192.168.48.1</string>
+<string-array name="DNSServers" num="2">
+<item value="192.168.48.1" />
+<item value="192.168.48.10" />
+</string-array>
+<string name="ProxySettings">STATIC</string>
+<string name="ProxyHost">192.168.48.1</string>
+<int name="ProxyPort" value="8000" />
+<string name="ProxyExclusionList"></string>
+</IpConfiguration>
+</Network>
+</NetworkList>
+</WifiBackupData>

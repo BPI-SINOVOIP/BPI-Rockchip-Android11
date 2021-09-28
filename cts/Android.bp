@@ -1,0 +1,78 @@
+java_defaults {
+    name: "cts_error_prone_rules",
+    errorprone: {
+        javacflags: [
+            // Set of error prone rules to ensure code quality
+            // When updating this list, also update error_prone_rules.mk
+            "-Xep:ArrayToString:ERROR",
+            "-Xep:BoxedPrimitiveConstructor:ERROR",
+            "-Xep:ConstantField:ERROR",
+            "-Xep:EqualsIncompatibleType:ERROR",
+            "-Xep:FormatString:ERROR",
+            "-Xep:GetClassOnClass:ERROR",
+            "-Xep:IdentityBinaryExpression:ERROR",
+            "-Xep:JUnit3TestNotRun:ERROR",
+            "-Xep:JUnit4ClassUsedInJUnit3:ERROR",
+            "-Xep:JUnitAmbiguousTestClass:ERROR",
+            "-Xep:MissingFail:ERROR",
+            "-Xep:MissingOverride:ERROR",
+            "-Xep:Overrides:ERROR",
+            "-Xep:ReferenceEquality:ERROR",
+            "-Xep:RemoveUnusedImports:ERROR",
+            "-Xep:ReturnValueIgnored:ERROR",
+            "-Xep:SelfEquals:ERROR",
+            "-Xep:SizeGreaterThanOrEqualsZero:ERROR",
+            "-Xep:TryFailThrowable:ERROR",
+        ],
+    },
+}
+
+java_defaults {
+    name: "cts_error_prone_rules_tests",
+    errorprone: {
+        javacflags: [
+            // Set of error prone rules to ensure code quality of tests
+            // Goal is to eventually merge with cts_error_prone_rules
+            // When updating this list, also update error_prone_rules_tests.mk
+            "-Xep:ArrayToString:ERROR",
+            "-Xep:CollectionIncompatibleType:ERROR",
+            "-Xep:EqualsIncompatibleType:ERROR",
+            "-Xep:EqualsNaN:ERROR",
+            "-Xep:FormatString:ERROR",
+            "-Xep:IdentityBinaryExpression:ERROR",
+            "-Xep:JUnit3TestNotRun:ERROR",
+            "-Xep:JUnit4ClassUsedInJUnit3:ERROR",
+            "-Xep:JUnitAmbiguousTestClass:ERROR",
+            "-Xep:MissingFail:ERROR",
+            "-Xep:SizeGreaterThanOrEqualsZero:ERROR",
+            "-Xep:TryFailThrowable:ERROR",
+        ],
+    },
+}
+
+// Used with an android_test / android_test_helper_app, this is equivalent to
+// BUILD_CTS_SUPPORT_PACKAGE
+java_defaults {
+    name: "cts_support_defaults",
+    defaults: ["cts_error_prone_rules_tests"],
+    dex_preopt: {
+        enabled: false,
+    },
+    optimize: {
+        enabled: false,
+    },
+}
+
+// Used with different module types, this is equivalent to:
+//   android_test: BUILD_CTS_PACKAGE
+//   java_library: BUILD_CTS_TARGET_JAVA_LIBRARY
+//   java_library_host: BUILD_CTS_HOST_JAVA_LIBRARY
+java_defaults {
+    name: "cts_defaults",
+    defaults: ["cts_support_defaults"],
+    target: {
+        android: {
+            static_libs: ["platform-test-annotations"],
+        },
+    },
+}

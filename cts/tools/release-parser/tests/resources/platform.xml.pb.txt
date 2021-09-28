@@ -1,0 +1,428 @@
+name: "platform.xml"
+type: XML
+size: 10323
+content_id: "XX3tGVfCUz80Ws9at+dFNjir72S/cJUcb4y/g9QBnOM="
+device_permissions {
+  key: "allow-in-power-save"
+  value {
+    name: "allow-in-power-save"
+    permissions {
+      name: "com.android.providers.downloads"
+    }
+    permissions {
+      name: "com.android.cellbroadcastreceiver"
+    }
+    permissions {
+      name: "com.android.shell"
+    }
+  }
+}
+device_permissions {
+  key: "library"
+  value {
+    name: "library"
+    permissions {
+      name: "android.test.base"
+      elements {
+        name: "file"
+        value: "/system/framework/android.test.base.jar"
+      }
+    }
+    permissions {
+      name: "android.test.mock"
+      elements {
+        name: "file"
+        value: "/system/framework/android.test.mock.jar"
+      }
+    }
+    permissions {
+      name: "android.test.runner"
+      elements {
+        name: "file"
+        value: "/system/framework/android.test.runner.jar"
+      }
+    }
+    permissions {
+      name: "javax.obex"
+      elements {
+        name: "file"
+        value: "/system/framework/javax.obex.jar"
+      }
+    }
+    permissions {
+      name: "org.apache.http.legacy"
+      elements {
+        name: "file"
+        value: "/system/framework/org.apache.http.legacy.boot.jar"
+      }
+    }
+  }
+}
+device_permissions {
+  key: "system-user-whitelisted-app"
+  value {
+    name: "system-user-whitelisted-app"
+    permissions {
+      name: "com.android.settings"
+    }
+  }
+}
+device_permissions {
+  key: "permission"
+  value {
+    name: "permission"
+    permissions {
+      name: "android.permission.BLUETOOTH_ADMIN"
+      elements {
+        name: "gid"
+        value: "net_bt_admin"
+      }
+    }
+    permissions {
+      name: "android.permission.BLUETOOTH"
+      elements {
+        name: "gid"
+        value: "net_bt"
+      }
+    }
+    permissions {
+      name: "android.permission.BLUETOOTH_STACK"
+      elements {
+        name: "gid"
+        value: "bluetooth"
+      }
+      elements {
+        name: "gid"
+        value: "wakelock"
+      }
+      elements {
+        name: "gid"
+        value: "uhid"
+      }
+    }
+    permissions {
+      name: "android.permission.NET_TUNNELING"
+      elements {
+        name: "gid"
+        value: "vpn"
+      }
+    }
+    permissions {
+      name: "android.permission.INTERNET"
+      elements {
+        name: "gid"
+        value: "inet"
+      }
+    }
+    permissions {
+      name: "android.permission.READ_LOGS"
+      elements {
+        name: "gid"
+        value: "log"
+      }
+    }
+    permissions {
+      name: "android.permission.WRITE_MEDIA_STORAGE"
+      elements {
+        name: "gid"
+        value: "media_rw"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_MTP"
+      elements {
+        name: "gid"
+        value: "mtp"
+      }
+    }
+    permissions {
+      name: "android.permission.NET_ADMIN"
+      elements {
+        name: "gid"
+        value: "net_admin"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_CACHE_FILESYSTEM"
+      elements {
+        name: "gid"
+        value: "cache"
+      }
+    }
+    permissions {
+      name: "android.permission.DIAGNOSTIC"
+      elements {
+        name: "gid"
+        value: "input"
+      }
+      elements {
+        name: "gid"
+        value: "diag"
+      }
+    }
+    permissions {
+      name: "android.permission.READ_NETWORK_USAGE_HISTORY"
+      elements {
+        name: "gid"
+        value: "net_bw_stats"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_DEVICE_STATS"
+      elements {
+        name: "gid"
+        value: "net_bw_acct"
+      }
+    }
+    permissions {
+      name: "android.permission.LOOP_RADIO"
+      elements {
+        name: "gid"
+        value: "loop_radio"
+      }
+    }
+    permissions {
+      name: "android.permission.MANAGE_VOICE_KEYPHRASES"
+      elements {
+        name: "gid"
+        value: "audio"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_BROADCAST_RADIO"
+      elements {
+        name: "gid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.USE_RESERVED_DISK"
+      elements {
+        name: "gid"
+        value: "reserved_disk"
+      }
+    }
+    permissions {
+      name: "android.permission.READ_EXTERNAL_STORAGE"
+    }
+    permissions {
+      name: "android.permission.WRITE_EXTERNAL_STORAGE"
+    }
+  }
+}
+device_permissions {
+  key: "assign-permission"
+  value {
+    name: "assign-permission"
+    permissions {
+      name: "android.permission.MODIFY_AUDIO_SETTINGS"
+      elements {
+        name: "uid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_SURFACE_FLINGER"
+      elements {
+        name: "uid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.WAKE_LOCK"
+      elements {
+        name: "uid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_DEVICE_STATS"
+      elements {
+        name: "uid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_APP_OPS_STATS"
+      elements {
+        name: "uid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.GET_PROCESS_STATE_AND_OOM_SCORE"
+      elements {
+        name: "uid"
+        value: "media"
+      }
+    }
+    permissions {
+      name: "android.permission.MODIFY_AUDIO_SETTINGS"
+      elements {
+        name: "uid"
+        value: "audioserver"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_SURFACE_FLINGER"
+      elements {
+        name: "uid"
+        value: "audioserver"
+      }
+    }
+    permissions {
+      name: "android.permission.WAKE_LOCK"
+      elements {
+        name: "uid"
+        value: "audioserver"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_DEVICE_STATS"
+      elements {
+        name: "uid"
+        value: "audioserver"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_APP_OPS_STATS"
+      elements {
+        name: "uid"
+        value: "audioserver"
+      }
+    }
+    permissions {
+      name: "android.permission.PACKAGE_USAGE_STATS"
+      elements {
+        name: "uid"
+        value: "audioserver"
+      }
+    }
+    permissions {
+      name: "android.permission.MODIFY_AUDIO_SETTINGS"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_SURFACE_FLINGER"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.WAKE_LOCK"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_DEVICE_STATS"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_APP_OPS_STATS"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.GET_PROCESS_STATE_AND_OOM_SCORE"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.PACKAGE_USAGE_STATS"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.WATCH_APPOPS"
+      elements {
+        name: "uid"
+        value: "cameraserver"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_SURFACE_FLINGER"
+      elements {
+        name: "uid"
+        value: "graphics"
+      }
+    }
+    permissions {
+      name: "android.permission.DUMP"
+      elements {
+        name: "uid"
+        value: "incidentd"
+      }
+    }
+    permissions {
+      name: "android.permission.PACKAGE_USAGE_STATS"
+      elements {
+        name: "uid"
+        value: "incidentd"
+      }
+    }
+    permissions {
+      name: "android.permission.INTERACT_ACROSS_USERS"
+      elements {
+        name: "uid"
+        value: "incidentd"
+      }
+    }
+    permissions {
+      name: "android.permission.ACCESS_LOWPAN_STATE"
+      elements {
+        name: "uid"
+        value: "lowpan"
+      }
+    }
+    permissions {
+      name: "android.permission.MANAGE_LOWPAN_INTERFACES"
+      elements {
+        name: "uid"
+        value: "lowpan"
+      }
+    }
+    permissions {
+      name: "android.permission.DUMP"
+      elements {
+        name: "uid"
+        value: "statsd"
+      }
+    }
+    permissions {
+      name: "android.permission.PACKAGE_USAGE_STATS"
+      elements {
+        name: "uid"
+        value: "statsd"
+      }
+    }
+    permissions {
+      name: "android.permission.STATSCOMPANION"
+      elements {
+        name: "uid"
+        value: "statsd"
+      }
+    }
+    permissions {
+      name: "android.permission.UPDATE_APP_OPS_STATS"
+      elements {
+        name: "uid"
+        value: "statsd"
+      }
+    }
+  }
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<resources>
+    <style name="customFont">
+        <item name="android:fontFamily">@font/samplefont</item>
+    </style>
+    <style name="customFontWithStyle">
+        <item name="android:fontFamily">@font/samplefont</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="textAppearanceWithFontWeight">
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="textAppearanceWithTextLocales">
+        <item name="android:textLocale">ja-JP,zh-CN</item>
+    </style>
+
+    <style name="textAppearanceWithShadow">
+        <item name="android:shadowColor">#00FFFF</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">3.0</item>
+    </style>
+
+    <style name="textAppearanceWithElegantTextHeight">
+        <item name="android:elegantTextHeight">true</item>
+    </style>
+
+    <style name="textAppearanceWithLetterSpacing">
+        <item name="android:letterSpacing">1.0</item>
+    </style>
+
+    <style name="textAppearanceWithFontFeatureSettings">
+        <item name="android:fontFeatureSettings">\"smcp\"</item>
+    </style>
+
+    <style name="textAppearanceWithFontVariationSettings">
+        <item name="android:fontVariationSettings">\'wdth\' 150</item>
+    </style>
+
+    <style name="TextAppearanceWithTextColor">
+        <item name="android:textColor">#0F0E0D</item>
+    </style>
+
+    <style name="TextAppearanceWithTextColorLink">
+        <item name="android:textColorLink">#0A0B0C</item>
+    </style>
+
+    <style name="TextAppearanceWithTextSize">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="TextAppearanceWithTypeface">
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="TextAppearanceWithTypefaceAndBold">
+        <item name="android:typeface">serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearanceWithTypefaceAndWeight">
+      <item name="android:typeface">monospace</item>
+      <item name="android:textFontWeight">200</item>
+    </style>
+
+    <style name="TextAppearanceWithBoldAndWeight">
+      <item name="android:textStyle">bold</item>
+      <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="TextAppearanceWithFontFamily">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearanceWithFontFamilyAndTypeface">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="textAppearanceWithAllAttributes">
+        <item name="android:fontFamily">@font/samplefont</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">160px</item>
+        <item name="android:textColor">#FF00FF</item>
+        <item name="android:textColorLink">#00FFFF</item>
+        <item name="android:textLocale">ja-JP,zh-CN</item>
+        <item name="android:shadowColor">#00FFFF</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">3.0</item>
+        <item name="android:elegantTextHeight">true</item>
+        <item name="android:letterSpacing">1.0</item>
+        <item name="android:fontFeatureSettings">\"smcp\"</item>
+        <item name="android:fontVariationSettings">\'wdth\' 150</item>
+    </style>
+
+    <style name="textAppearanceWithNoAttributes"/>
+</resources>

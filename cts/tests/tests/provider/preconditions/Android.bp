@@ -1,0 +1,18 @@
+java_test_helper_library {
+    name: "compatibility-host-provider-preconditions",
+    srcs: ["src/**/*.java"],
+    libs: [
+        "compatibility-host-util",
+        "cts-tradefed",
+        "tradefed",
+    ],
+    // Tag this module as a cts test artifact
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+        "sts"
+    ],
+    host_supported: true,
+    device_supported: false,
+}

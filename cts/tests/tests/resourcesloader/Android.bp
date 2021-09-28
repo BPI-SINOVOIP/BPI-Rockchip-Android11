@@ -1,0 +1,72 @@
+//
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+android_test {
+    name: "CtsResourcesLoaderTests",
+    defaults: ["cts_defaults"],
+    platform_apis: true,
+    test_suites: [
+        "cts",
+        "vts",
+        "vts10",
+        "general-tests",
+    ],
+    srcs: [
+        "src/**/*.kt"
+    ],
+    libs: [
+        "android.test.runner.stubs",
+        "android.test.base.stubs"
+    ],
+    static_libs: [
+        "CtsResourcesLoaderTests_Providers",
+        "androidx.test.espresso.core",
+        "androidx.test.ext.junit",
+        "androidx.test.runner",
+        "androidx.test.rules",
+        "compatibility-device-util-axt",
+        "ctstestrunner-axt",
+        "mockito-target-minus-junit4",
+        "truth-prebuilt"
+    ],
+    resource_dirs: ["res", "resources/provider_stable/res"],
+    aaptflags: ["-0 .txt"],
+    data: [
+        ":CtsResourcesLoaderTests_ProviderOne_Split",
+        ":CtsResourcesLoaderTests_ProviderTwo_Split",
+        ":CtsResourcesLoaderTests_ProviderThree_Split",
+        ":CtsResourcesLoaderTests_ProviderFour_Split"
+    ]
+}
+
+java_genrule {
+    name: "CtsResourcesLoaderTests_Providers",
+    tools: ["soong_zip"],
+    srcs : [
+        ":CtsResourcesLoaderTests_ProviderOne",
+        ":CtsResourcesLoaderTests_ProviderOne_ARSC",
+        ":CtsResourcesLoaderTests_ProviderTwo",
+        ":CtsResourcesLoaderTests_ProviderTwo_ARSC",
+        ":CtsResourcesLoaderTests_ProviderThree",
+        ":CtsResourcesLoaderTests_ProviderThree_ARSC",
+        ":CtsResourcesLoaderTests_ProviderFour",
+        ":CtsResourcesLoaderTests_ProviderFour_ARSC"
+    ],
+    out: ["CtsResourcesLoaderTests_Providers.jar"],
+    cmd: "mkdir -p $(genDir)/assets/ && cp $(in) $(genDir)/assets/ && " +
+         "$(location soong_zip) -o $(out) " +
+         "-L 0 -C $(genDir) -D $(genDir)/assets/"
+}

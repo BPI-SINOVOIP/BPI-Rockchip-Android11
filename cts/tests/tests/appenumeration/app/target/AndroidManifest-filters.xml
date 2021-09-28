@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2019 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="android.appenumeration.filters">
+    <application>
+        <uses-library android:name="android.test.runner" />
+        <activity android:name="android.appenumeration.testapp.DummyActivity"
+                  android:visibleToInstantApps="true">
+            <!-- Marked visible to instant apps to ensure this logic doesn't conflict with non
+                 instant filtering -->
+            <intent-filter>
+                <action android:name="android.appenumeration.action.ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <service android:name="android.appenumeration.testapp.DummyService">
+            <intent-filter>
+                <action android:name="android.appenumeration.action.SERVICE" />
+            </intent-filter>
+        </service>
+        <provider android:name="android.appenumeration.testapp.DummyProvider"
+                  android:authorities="android.appenumeration.testapp"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.appenumeration.action.PROVIDER" />
+            </intent-filter>
+        </provider>
+        <receiver android:name="android.appenumeration.testapp.DummyReceiver">
+            <intent-filter>
+                <action android:name="android.appenumeration.action.BROADCAST" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="android.appenumeration.testapp.DummyActivityNotExported"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="android.appenumeration.action.ACTIVITY_UNEXPORTED" />
+            </intent-filter>
+        </activity>
+        <service android:name="android.appenumeration.testapp.DummyServiceNotExported"
+                 android:exported="false">
+            <intent-filter>
+                <action android:name="android.appenumeration.action.SERVICE_UNEXPORTED" />
+            </intent-filter>
+        </service>
+        <provider android:name="android.appenumeration.testapp.DummyProviderNotExported"
+                  android:authorities="android.appenumeration.testapp.unexported"
+                  android:exported="false" >
+            <intent-filter>
+                <action android:name="android.appenumeration.action.PROVIDER_UNEXPORTED" />
+            </intent-filter>
+        </provider>
+        <receiver android:name="android.appenumeration.testapp.DummyReceiverNotExported"
+                  android:exported="false">
+            <intent-filter>
+                <action android:name="android.appenumeration.action.BROADCAST_UNEXPORTED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

@@ -1,0 +1,21 @@
+android_test_helper_app {
+    name: "TestExternalImsServiceApp",
+    defaults: ["cts_defaults"],
+    srcs: [
+        "src/**/*.java",
+        "aidl/**/I*.aidl",
+        ":telephony-cts-ims-common-srcs"
+    ],
+    static_libs: [
+            "compatibility-device-util-axt",
+        ],
+    aidl: {
+        local_include_dirs: ["aidl/"],
+    },
+    sdk_version: "test_current",
+    test_suites: [
+        "cts",
+        "vts10",
+        "mts",
+    ]
+}

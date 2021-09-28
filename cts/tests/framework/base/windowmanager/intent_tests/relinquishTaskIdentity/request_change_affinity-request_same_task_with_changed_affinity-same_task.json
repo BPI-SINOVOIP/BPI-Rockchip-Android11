@@ -1,0 +1,63 @@
+{
+  "comment": "relinquishTaskIdentity does not allow changing the root affinity of the task - ag/548224",
+  "setup": {
+    "initialIntents": [
+      {
+        "flags": "FLAG_ACTIVITY_NEW_TASK",
+        "class": "android.server.wm.intent.Activities$RelinquishTaskIdentityActivity",
+        "package": "android.server.wm.cts",
+        "startForResult": false
+      },
+      {
+        "flags": "",
+        "class": "android.server.wm.intent.Activities$TaskAffinity1Activity",
+        "package": "android.server.wm.cts",
+        "startForResult": false
+      }
+    ],
+    "act": [
+      {
+        "flags": "",
+        "class": "android.server.wm.intent.Activities$TaskAffinity1Activity2",
+        "package": "android.server.wm.cts",
+        "startForResult": false
+      }
+    ]
+  },
+  "initialState": {
+    "tasks": [
+      {
+        "activities": [
+          {
+            "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity1Activity",
+            "state": "RESUMED"
+          },
+          {
+            "name": "android.server.wm.cts/android.server.wm.intent.Activities$RelinquishTaskIdentityActivity",
+            "state": "STOPPED"
+          }
+        ]
+      }
+    ]
+  },
+  "endState": {
+    "tasks": [
+      {
+        "activities": [
+          {
+            "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity1Activity2",
+            "state": "RESUMED"
+          },
+          {
+            "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity1Activity",
+            "state": "STOPPED"
+          },
+          {
+            "name": "android.server.wm.cts/android.server.wm.intent.Activities$RelinquishTaskIdentityActivity",
+            "state": "STOPPED"
+          }
+        ]
+      }
+    ]
+  }
+}

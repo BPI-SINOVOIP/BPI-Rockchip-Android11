@@ -1,0 +1,81 @@
+{
+    "comment": "A new activity should be created on a new task, without interfering the activity order of caller's task.",
+    "setup": {
+        "initialIntents": [
+            {
+                "flags": "FLAG_ACTIVITY_NEW_TASK",
+                "class": "android.server.wm.intent.Activities$RegularActivity",
+                "package": "android.server.wm.cts",
+                "startForResult": false
+            },
+            {
+                "flags": "",
+                "class": "android.server.wm.intent.Activities$TaskAffinity1Activity",
+                "package": "android.server.wm.cts",
+                "startForResult": false
+            },
+            {
+                "flags": "",
+                "class": "android.server.wm.intent.Activities$TaskAffinity2Activity",
+                "package": "android.server.wm.cts",
+                "startForResult": false
+            }
+        ],
+        "act": [
+            {
+                "flags": "FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_REORDER_TO_FRONT",
+                "class": "android.server.wm.intent.Activities$TaskAffinity1Activity",
+                "package": "android.server.wm.cts",
+                "startForResult": false
+            }
+        ]
+    },
+    "initialState": {
+        "tasks": [
+            {
+                "activities": [
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity2Activity",
+                        "state": "RESUMED"
+                    },
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity1Activity",
+                        "state": "STOPPED"
+                    },
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$RegularActivity",
+                        "state": "STOPPED"
+                    }
+                ]
+            }
+        ]
+    },
+    "endState": {
+        "tasks": [
+            {
+                "activities": [
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity1Activity",
+                        "state": "RESUMED"
+                    }
+                ]
+            },
+            {
+                "activities": [
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity2Activity",
+                        "state": "STOPPED"
+                    },
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$TaskAffinity1Activity",
+                        "state": "STOPPED"
+                    },
+                    {
+                        "name": "android.server.wm.cts/android.server.wm.intent.Activities$RegularActivity",
+                        "state": "STOPPED"
+                    }
+                ]
+            }
+        ]
+    }
+}

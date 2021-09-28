@@ -1,0 +1,70 @@
+# DURATION_PROCESS_STATE_IN_CACHED_EMPTY_PER_PROC_NAME_PACKAGE_NAME_VERSION
+id: -6109199674574072698
+duration_metric {
+  id: -7871805656933174442
+  what: -4194528603977557137
+  aggregation_type: SUM
+  dimensions_in_what {
+    field: 3
+    child {
+      field: 2
+    }
+    child {
+      field: 3
+    }
+    child {
+      field: 5
+    }
+  }
+  bucket: ONE_MINUTE
+}
+# PROC_STATE NOT IN CACHED_EMPTY
+atom_matcher {
+  id: -2354884036751182872
+  combination {
+    operation: NOT
+    matcher: -7794766650955623092
+  }
+}
+# PROC_STATE IN CACHED_EMPTY
+atom_matcher {
+  id: -7794766650955623092
+  simple_atom_matcher {
+    atom_id: 3
+    field_value_matcher {
+      field: 4
+      eq_int: 1018
+    }
+  }
+}
+predicate {
+  id: -4194528603977557137
+  simple_predicate {
+    start: -7794766650955623092
+    stop: -2354884036751182872
+    count_nesting: false
+    dimensions {
+      field: 3
+      child {
+        field: 2
+      }
+      child {
+        field: 3
+      }
+      child {
+        field: 5
+      }
+    }
+  }
+}
+allowed_log_source: "AID_GRAPHICS"
+allowed_log_source: "AID_INCIDENTD"
+allowed_log_source: "AID_STATSD"
+allowed_log_source: "AID_RADIO"
+allowed_log_source: "com.android.systemui"
+allowed_log_source: "com.android.vending"
+allowed_log_source: "AID_SYSTEM"
+allowed_log_source: "AID_ROOT"
+allowed_log_source: "AID_BLUETOOTH"
+default_pull_packages: "AID_SYSTEM"
+hash_strings_in_metric_report: false

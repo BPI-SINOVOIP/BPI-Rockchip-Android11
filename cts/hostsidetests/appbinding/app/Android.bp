@@ -1,0 +1,159 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+java_defaults {
+    name: "cts_hostside_appbinding_defaults",
+    libs: ["android.test.base.stubs"],
+    sdk_version: "test_current",
+    static_libs: [
+        "ctstestrunner-axt",
+        "compatibility-device-util-axt",
+        "androidx.legacy_legacy-support-v4",
+        "androidx.test.rules",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingService1",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app1/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingService2",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app2/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingService3",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app3/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingService4",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app4/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+android_test_helper_app {
+    name: "CtsAppBindingService5",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app5/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingService6",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app6/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingService7",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "app7/AndroidManifest.xml",
+    test_suites: [
+        "cts",
+        "vts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsAppBindingServiceB",
+    defaults: [
+        "cts_hostside_appbinding_defaults",
+        "cts_defaults",
+    ],
+    srcs: ["src/**/*.java"],
+    manifest: "appb/AndroidManifest.xml",
+    // tag this module as a cts test artifact
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}

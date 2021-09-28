@@ -1,0 +1,17 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsStagedInstallHostTestCases",
+      "options": [
+        {
+          "exclude-annotation": "android.platform.test.annotations.LargeTest"
+        }
+      ]
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "CtsStagedInstallHostTestCases"
+    }
+  ]
+}

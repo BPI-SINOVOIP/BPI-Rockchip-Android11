@@ -1,0 +1,101 @@
+name: "boot-framework.oat"
+type: OAT
+size: 15599048
+content_id: "3x7nAT8P+6fzuagnGVB6QqYJ4caUcMG3uF+jkaXh52M="
+code_id: "f0acaa05 2d59fc59 34ad167d "
+dependencies: "system/framework/arm64/boot.art"
+dependencies: "system/framework/arm64/boot-core-libart.art"
+dependencies: "system/framework/arm64/boot-conscrypt.art"
+dependencies: "system/framework/arm64/boot-okhttp.art"
+dependencies: "system/framework/arm64/boot-bouncycastle.art"
+dependencies: "system/framework/arm64/boot-apache-xml.art"
+dependencies: "system/framework/arm64/boot-ext.art"
+dependencies: "system/framework/arm64/boot-framework.art"
+dependencies: "system/framework/arm64/boot-telephony-common.art"
+dependencies: "system/framework/arm64/boot-voip-common.art"
+dependencies: "system/framework/arm64/boot-ims-common.art"
+dependencies: "system/framework/arm64/boot-android.hidl.base-V1.0-java.art"
+dependencies: "system/framework/arm64/boot-android.hidl.manager-V1.0-java.art"
+dependencies: "system/framework/arm64/boot-framework-oahl-backward-compatibility.art"
+dependencies: "system/framework/arm64/boot-android.test.base.art"
+dependencies: "system/framework/arm64/boot-com.google.vr.platform.art"
+oat_info {
+  version: "138\000"
+  adler32_checksum: 1396327066
+  instruction_set: 2
+  dex_file_count: 3
+  oat_dex_files_offset: 3978029
+  executable_offset: 3981312
+  jni_dlsym_lookup_offset: 3981312
+  quick_generic_jni_trampoline_offset: 3981328
+  quick_imt_conflict_trampoline_offset: 3981344
+  quick_resolution_trampoline_offset: 3981360
+  quick_to_interpreter_bridge_offset: 3981376
+  image_file_location_oat_checksum: 3553912596
+  key_value_store_size: 4999
+  key_value_store {
+    key: "compiler-filter"
+    value: "speed-profile"
+  }
+  key_value_store {
+    key: "bootclasspath"
+    value: "/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-core-libart.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-conscrypt.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-okhttp.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-bouncycastle.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-apache-xml.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-ext.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-framework.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-telephony-common.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-voip-common.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-ims-common.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-android.hidl.base-V1.0-java.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-android.hidl.manager-V1.0-java.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-framework-oahl-backward-compatibility.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-android.test.base.art:/system/framework/out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot-com.google.vr.platform.art"
+  }
+  key_value_store {
+    key: "debuggable"
+    value: "false"
+  }
+  key_value_store {
+    key: "concurrent-copying"
+    value: "true"
+  }
+  key_value_store {
+    key: "native-debuggable"
+    value: "false"
+  }
+  key_value_store {
+    key: "dex2oat-host"
+    value: "X86_64"
+  }
+  key_value_store {
+    key: "pic"
+    value: "true"
+  }
+  key_value_store {
+    key: "dex2oat-cmdline"
+    value: "out/host/linux-x86/bin/dex2oatd --runtime-arg -Xms64m --runtime-arg -Xmx64m --compiler-filter=speed-profile --profile-file=out/target/product/sailfish/dex_bootjars/system/framework/boot.prof --dex-file=out/target/common/obj/JAVA_LIBRARIES/core-oj_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/core-libart_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/conscrypt_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/okhttp_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/bouncycastle_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/apache-xml_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/ext_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/telephony-common_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/voip-common_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/ims-common_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/android.hidl.base-V1.0-java_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/android.hidl.manager-V1.0-java_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/framework-oahl-backward-compatibility_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/android.test.base_intermediates/javalib.jar --dex-file=out/target/common/obj/JAVA_LIBRARIES/com.google.vr.platform_intermediates/javalib.jar --dex-location=/system/framework/core-oj.jar --dex-location=/system/framework/core-libart.jar --dex-location=/system/framework/conscrypt.jar --dex-location=/system/framework/okhttp.jar --dex-location=/system/framework/bouncycastle.jar --dex-location=/system/framework/apache-xml.jar --dex-location=/system/framework/ext.jar --dex-location=/system/framework/framework.jar --dex-location=/system/framework/telephony-common.jar --dex-location=/system/framework/voip-common.jar --dex-location=/system/framework/ims-common.jar --dex-location=/system/framework/android.hidl.base-V1.0-java.jar --dex-location=/system/framework/android.hidl.manager-V1.0-java.jar --dex-location=/system/framework/framework-oahl-backward-compatibility.jar --dex-location=/system/framework/android.test.base.jar --dex-location=/system/framework/com.google.vr.platform.jar --oat-symbols=out/target/product/sailfish/symbols/system/framework/arm64/boot.oat --oat-file=out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot.oat --oat-location=/system/framework/arm64/boot.oat --image=out/target/product/sailfish/dex_bootjars/system/framework/arm64/boot.art --base=0x70000000 --instruction-set=arm64 --instruction-set-variant=kryo --instruction-set-features=default --android-root=out/target/product/sailfish/system --runtime-arg -Xnorelocate --compile-pic --no-generate-debug-info --generate-build-id --multi-image --no-inline-from=core-oj.jar --abort-on-hard-verifier-error --abort-on-soft-verifier-error --generate-mini-debug-info"
+  }
+  oat_dex_info {
+    dex_file_location_data: "/system/framework/framework.jar"
+    dex_file_location_checksum: 4037847557
+    dex_file_offset: 48
+    lookup_table_offset: 152772
+    class_offsets_offset: 5076
+    method_bss_mapping_offset: 152532
+    type_bss_mapping_offset: 429000
+    string_bss_mapping_offset: 429396
+  }
+  oat_dex_info {
+    dex_file_location_data: "/system/framework/framework.jar!classes2.dex"
+    dex_file_location_checksum: 760872025
+    dex_file_offset: 1679460
+    lookup_table_offset: 177812
+    class_offsets_offset: 70612
+    method_bss_mapping_offset: 152612
+    type_bss_mapping_offset: 430680
+    string_bss_mapping_offset: 431060
+  }
+  oat_dex_info {
+    dex_file_location_data: "/system/framework/framework.jar!classes3.dex"
+    dex_file_location_checksum: 883758717
+    dex_file_offset: 3269632
+    lookup_table_offset: 202544
+    class_offsets_offset: 136148
+    method_bss_mapping_offset: 152692
+    type_bss_mapping_offset: 432416
+    string_bss_mapping_offset: 432444
+  }
+  valid: true
+  bits: 64
+  architecture: "arm"
+}

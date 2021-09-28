@@ -1,0 +1,11 @@
+<offhost-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/UiccTransactionEventService"
+    android:requireDeviceUnlock="false" android:secureElementName="SIM">
+    <aid-group
+        android:category="other"
+        android:description="@string/UiccTransactionEventService" >
+
+        <aid-filter android:name="A000000476416E64726F696443545341"/>
+    </aid-group>
+
+</offhost-apdu-service>

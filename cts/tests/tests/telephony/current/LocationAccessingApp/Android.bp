@@ -1,0 +1,24 @@
+android_test {
+    name: "LocationAccessingApp",
+    defaults: ["cts_defaults"],
+    srcs: [
+        ":location_accessing_app_srcs",
+    ],
+    aidl: {
+        local_include_dirs: ["aidl/"],
+    },
+    sdk_version: "test_current",
+    test_suites: [
+        "cts",
+        "vts10",
+        "mts",
+    ],
+}
+
+filegroup {
+    name: "location_accessing_app_srcs",
+    srcs: [
+        "src/**/*.java",
+        "aidl/**/I*.aidl",
+    ],
+}

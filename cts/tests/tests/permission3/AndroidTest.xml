@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<configuration description="Config for CTS Permission3 test cases">
+
+    <option name="test-suite-tag" value="cts" />
+
+    <option name="config-descriptor:metadata" key="component" value="framework" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+    <option name="config-descriptor:metadata" key="parameter" value="secondary_user" />
+
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.Sdk30ModuleController" />
+
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <option name="test-file-name" value="CtsPermission3TestCases.apk" />
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
+        <option name="push" value="CtsPermissionPolicyApp25.apk->/data/local/tmp/cts/permission3/CtsPermissionPolicyApp25.apk" />
+        <option name="push" value="CtsUsePermissionApp22.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp22.apk" />
+        <option name="push" value="CtsUsePermissionApp22CalendarOnly.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp22CalendarOnly.apk" />
+        <option name="push" value="CtsUsePermissionApp23.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp23.apk" />
+        <option name="push" value="CtsUsePermissionApp25.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp25.apk" />
+        <option name="push" value="CtsUsePermissionApp26.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp26.apk" />
+        <option name="push" value="CtsUsePermissionApp28.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp28.apk" />
+        <option name="push" value="CtsUsePermissionApp29.apk->/data/local/tmp/cts/permission3/CtsUsePermissionApp29.apk" />
+        <option name="push" value="CtsUsePermissionAppLatest.apk->/data/local/tmp/cts/permission3/CtsUsePermissionAppLatest.apk" />
+        <option name="push" value="CtsUsePermissionAppLatestWithBackground.apk->/data/local/tmp/cts/permission3/CtsUsePermissionAppLatestWithBackground.apk" />
+        <option name="push" value="CtsUsePermissionAppWithOverlay.apk->/data/local/tmp/cts/permission3/CtsUsePermissionAppWithOverlay.apk" />
+    </target_preparer>
+
+    <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
+        <option name="package" value="android.permission3.cts" />
+        <option name="runtime-hint" value="5m" />
+    </test>
+</configuration>

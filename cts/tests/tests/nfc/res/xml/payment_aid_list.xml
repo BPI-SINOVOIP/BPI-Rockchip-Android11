@@ -1,0 +1,8 @@
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/CtsPaymentService">
+    <aid-group android:description="@string/CtsPaymentService" android:category="payment">
+        <aid-filter android:name="A000000004101011"/>
+        <aid-filter android:name="A000000004101012"/>
+        <aid-filter android:name="A000000004101013"/>
+    </aid-group>
+</host-apdu-service>

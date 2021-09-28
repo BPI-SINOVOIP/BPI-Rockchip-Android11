@@ -1,0 +1,77 @@
+// Copyright (C) 2020 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_test {
+    name: "ctsgraphicsgpucountersinit",
+    srcs: [
+        "android_graphics_cts_GpuCounters.cpp",
+    ],
+    test_suites: ["cts", "general-tests"],
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    shared_libs: [
+        "libdl",
+        "libandroid",
+        "liblog",
+    ],
+    stl: "c++_static",
+    sdk_version: "current",
+}
+
+cc_test_library {
+    name: "libctsgraphicsgpuprofiling_jni",
+    gtest: false,
+    srcs: [
+        "jni/CtsGraphicsProfilingDataJniOnLoad.cpp",
+        "jni/android_graphics_cts_GpuRenderStages.cpp",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    header_libs: ["jni_headers"],
+    shared_libs: [
+        "libandroid",
+        "libvulkan",
+        "liblog",
+    ],
+    stl: "c++_shared",
+    sdk_version: "current",
+}
+
+android_test_helper_app {
+    name: "CtsGraphicsProfilingDataApp",
+    defaults: ["cts_support_defaults"],
+    srcs: ["src/**/*.java"],
+    sdk_version: "current",
+    // tag this module as a cts test artifact
+    test_suites: ["cts", "general-tests"],
+    compile_multilib: "both",
+    jni_libs: [
+        "libctsgraphicsgpuprofiling_jni",
+    ],
+    use_embedded_native_libs: false,
+    stl: "c++_shared",
+}

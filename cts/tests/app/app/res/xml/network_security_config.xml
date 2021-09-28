@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+  <base-config cleartextTrafficPermitted="true">
+  </base-config>
+  <!-- Cleartext traffic is explicitly permitted to example.com and all subdomains -->
+  <domain-config cleartextTrafficPermitted="true">
+      <domain includeSubdomains="true">example.com</domain>
+  </domain-config>
+  <domain-config cleartextTrafficPermitted="true">
+      <domain includeSubdomains="true">localhost</domain>
+  </domain-config>
+</network-security-config>

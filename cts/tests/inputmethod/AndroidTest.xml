@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<configuration description="Config for CTS InputMethod test cases">
+    <option name="test-suite-tag" value="cts" />
+    <option name="config-descriptor:metadata" key="component" value="inputmethod" />
+    <option name="config-descriptor:metadata" key="parameter" value="instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+    <option name="config-descriptor:metadata" key="parameter" value="secondary_user" />
+    <!--
+        TODO(yukawa): come up with a proper way to take care of devices that do not support
+        installable IMEs.  Ideally target_preparer should have an option to annotate required
+        features, e.g. android.software.input_methods so that we can conditionally install APKs
+        based on the feature supported in the target device.
+    -->
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <!--
+            MockIME always needs to be instaleld as a full package, even when CTS is running
+            for instant apps.
+        -->
+        <option name="force-install-mode" value="FULL"/>
+        <option name="test-file-name" value="CtsMockInputMethod.apk" />
+    </target_preparer>
+    <!--
+        TODO(yukawa): come up with a proper way to take care of devices that do not support
+        installable IMEs.  Ideally target_preparer should have an option to annotate required
+        features, e.g. android.software.input_methods so that we can conditionally install APKs
+        based on the feature supported in the target device.
+    -->
+
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="input keyevent KEYCODE_WAKEUP" />
+        <option name="run-command" value="wm dismiss-keyguard" />
+    </target_preparer>
+
+    <!--
+        A (separate) standalone test app APK is needed to test implicit app-visibility from the IME
+        process to the IME target process, because if the IME target process is directly interacting
+        with MockIme process via MockImeSession, then the system would already give the MockIme an
+        implicit app-visibility back to the test app.  To fully test app-visibility scenario,
+        MockImeSession cannot be used in the process where the focused Activity is hosted.
+    -->
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <!--
+            In order to simulate the scenario where the IME client process is normally
+            installed, explicitly set false here.  Otherwise, the test APP will be installed under
+            force-queryable mode, which makes the test useless.
+        -->
+        <option name="force-queryable" value="false" />
+        <option name="test-file-name" value="CtsInputMethodStandaloneTestApp.apk" />
+    </target_preparer>
+
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <option name="test-file-name" value="CtsInputMethodTestCases.apk" />
+    </target_preparer>
+    <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
+        <option name="package" value="android.view.inputmethod.cts" />
+        <option name="runtime-hint" value="1m0s" />
+    </test>
+</configuration>

@@ -1,0 +1,99 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+java_library {
+    name: "cts-vmtests-dot",
+    libs: [ "junit" ],
+    srcs: [ "src/dot/**/*.java" ],
+    installable: false,
+    include_srcs: true,
+    host_supported: true,
+}
+
+java_binary_host {
+    name: "vmtests-buildutil",
+    static_libs: [ "cts-vmtests-dot", "junit" ],
+    srcs: [
+        "build/src/util/build/BuildCTSHostSources.java",
+        "build/src/util/build/BuildCTSMainsSources.java",
+        "build/src/util/build/BuildUtilBase.java",
+        "build/src/util/build/FileUtil.java",
+        "build/src/util/build/JUnitTestCollector.java",
+    ],
+    wrapper: "etc/vmtests-buildutil.sh",
+}
+
+java_genrule_host {
+    name: "vmtests_generated_host_test_sources",
+    tools: [
+        "vmtests-buildutil",
+        "soong_zip",
+    ],
+    cmd: "$(location vmtests-buildutil) util.build.BuildCTSHostSources $(genDir) " +
+         " && $(location soong_zip) -jar -o $(out) -C $(genDir) -D $(genDir)/dot",
+    out: ["vmtests.host.generated.srcjar"],
+}
+
+java_library_host {
+    name: "host-cts-vmtests",
+    libs: [
+        "junit",
+        "tradefed",
+    ],
+    srcs : [ ":vmtests_generated_host_test_sources" ],
+    installable: false,
+}
+
+java_genrule_host {
+    name: "vmtests-dfh-dex-generated",
+    tools: [
+        "cfassembler",
+        "soong_zip",
+    ],
+    tool_files: ["etc/vmtests-cfassembler.sh"],
+    srcs: ["src/dot/**/*.dfh"],
+    cmd: "$(location etc/vmtests-cfassembler.sh) $(location cfassembler) $(location soong_zip) $(genDir) $(out) $(in)",
+    out: ["vmtests_dfh_dex_generated.jar"],
+}
+
+java_genrule {
+    name: "vmtests_generated_mains_test_sources",
+    tools: [
+        "vmtests-buildutil",
+        "soong_zip",
+    ],
+    cmd: "mkdir $(genDir)/src"
+       + " && $(location vmtests-buildutil) util.build.BuildCTSMainsSources $(genDir)/src "
+       + " && $(location soong_zip) -jar -o $(out) -C $(genDir)/src -D $(genDir)/src",
+    out: ["vmtests.mains.generated.srcjar"],
+}
+
+java_library {
+    name: "vmtests-mains",
+    installable: true,
+    libs: [ "cts-vmtests-dot" ],
+    srcs: [":vmtests_generated_mains_test_sources"],
+}
+
+// TODO: Add vmtests-mains' dex jar to vmtests-generated-resources when
+//       it can be addressed.
+
+java_library_host {
+    name: "vmtests-generated-resources",
+    static_libs: [
+        "host-cts-vmtests",
+        "vmtests-dfh-dex-generated",
+    ],
+    installable: false,
+}

@@ -1,0 +1,58 @@
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# ensure we keep public sensor test methods, these are needed at runtime
+-keepclassmembers class * extends com.android.cts.verifier.sensors.base.BaseSensorTestActivity {
+    public <methods>;
+}
+-keepclassmembers class * extends android.hardware.cts.SensorTestCase {
+    public <methods>;
+}
+
+# ensure we keep public Gnss Measurement test methods, these are needed at runtime
+-keepclassmembers class * extends com.android.cts.verifier.location.BaseGnssTestActivity {
+    public <methods>;
+}
+-keepclassmembers class * extends android.location.cts.common.GnssTestCase {
+    public <methods>;
+}
+
+# ensure we keep public camera test methods, these are needed at runtime
+-keepclassmembers class android.hardware.camera2.cts.PerformanceTest {
+    public <methods>;
+}
+
+-keepclassmembers class android.hardware.cts.LegacyCameraPerformanceTest {
+    public <methods>;
+}
+
+-keepclassmembers class org.junit.runners.JUnit4 {
+    public <methods>;
+}
+
+-keepclasseswithmembers class * extends com.android.cts.verifier.location.LocationModeTestActivity
+
+-keepclasseswithmembers class * extends com.android.cts.verifier.audio.HifiUltrasoundSpeakerTestActivity
+-keepclasseswithmembers class * extends com.android.cts.verifier.audio.HifiUltrasoundTestActivity
+
+# keep mockito methods
+-keep class org.mockito.** { *; }
+-keep interface org.mockito.** { *; }
+-keep class com.google.dexmaker.** { *; }
+-keep class com.android.dx.mockito.** { *; }
+-keep interface com.google.dexmaker.** { *; }
+
+-dontwarn android.hardware.Sensor
+-dontwarn android.test.AndroidTestRunner
+-dontwarn java.util.concurrent.ConcurrentLinkedDeque
+-dontwarn com.android.compatibility.common.util.**
+-dontwarn junit.**
+
+# Jack seems less rigorous than proguard when it comes to warning about
+# transitive dependencies.
+-dontwarn com.android.okhttp.**
+-dontwarn org.opencv.**
+-dontwarn androidx.test.internal.runner.hidden.ExposedInstrumentationApi
+
+-dontwarn java.lang.management.**

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="android.sharesheet.cts">
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
+    <!-- Allows test to query for all installed apps, needed to test excluding components -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+
+    <!-- Needed permission and android:requestLegacyExternalStorage to dump screenshots in case of
+         failure -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application 
+        android:requestLegacyExternalStorage="true"
+        android:label="@string/test_app_label">
+
+        <uses-library android:name="android.test.runner" />
+    
+        <activity android:name=".CtsSharesheetDeviceActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="test/cts" />
+            </intent-filter>
+
+            <!-- Used to provide Sharing Shortcuts -->
+            <meta-data android:name="android.app.shortcuts"
+                    android:resource="@xml/shortcuts"/>
+
+            <meta-data android:name="android.service.chooser.chooser_target_service"
+                    android:value=".CtsSharesheetChooserTargetService"/>
+
+        </activity>
+
+        <service android:name=".CtsSharesheetChooserTargetService"
+            android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.chooser.ChooserTargetService" />
+            </intent-filter>
+        </service>
+
+        <activity-alias android:name=".ExtraInitialIntentTestActivity"
+                        android:label="@string/test_extra_initial_intents_label"
+                        android:targetActivity=".CtsSharesheetDeviceActivity"/>
+
+    </application>
+
+    <instrumentation android:name="androidx.test.runner.AndroidJUnitRunner"
+                     android:targetPackage="android.sharesheet.cts"
+                     android:label="CTS tests of android.sharesheet">
+        <meta-data android:name="listener"
+            android:value="com.android.cts.runner.CtsTestRunListener" />
+    </instrumentation>
+
+</manifest>
+

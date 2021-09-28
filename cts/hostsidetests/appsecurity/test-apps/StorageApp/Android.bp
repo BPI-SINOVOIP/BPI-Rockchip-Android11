@@ -1,0 +1,46 @@
+java_library {
+    name: "CtsStorageAppLib",
+    srcs: ["src/**/*.java"],
+    defaults: ["cts_support_defaults"],
+    sdk_version: "test_current",
+    libs: [
+        "android.test.base.stubs",
+        "ub-uiautomator",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsStorageAppA",
+    defaults: ["cts_support_defaults"],
+    sdk_version: "test_current",
+    static_libs: [
+        "androidx.test.rules",
+        "ub-uiautomator",
+    ],
+    libs: ["android.test.base.stubs"],
+    srcs: ["src/**/*.java"],
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+    manifest: "AndroidManifestA.xml",
+}
+
+android_test_helper_app {
+    name: "CtsStorageAppB",
+    defaults: ["cts_support_defaults"],
+    sdk_version: "test_current",
+    static_libs: [
+        "androidx.test.rules",
+        "ub-uiautomator",
+    ],
+    libs: ["android.test.base.stubs"],
+    srcs: ["src/**/*.java"],
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+    manifest: "AndroidManifestB.xml",
+}

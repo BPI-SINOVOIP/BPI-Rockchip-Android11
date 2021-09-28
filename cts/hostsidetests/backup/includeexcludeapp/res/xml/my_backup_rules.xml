@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <include domain="file" path="file_to_include"/>
+    <exclude domain="file" path="file_to_exclude"/>
+    <include domain="file" path="include_folder"/>
+    <exclude domain="file" path="include_folder/file_to_exclude"/>
+    <exclude domain="file" path="exclude_folder"/>
+    <include domain="file" path="exclude_folder/file_to_include"/>
+
+
+    <include domain="sharedpref" path="include_shared_pref1.xml"/>
+    <include domain="sharedpref" path="include_shared_pref2.xml"/>
+    <exclude domain="sharedpref" path="exclude_shared_pref1.xml"/>
+    <exclude domain="sharedpref" path="exclude_shared_pref2.xml"/>
+
+    <include domain="database" path="db_name/file_to_include"/>
+    <exclude domain="database" path="db_name/file_to_exclude"/>
+    <include domain="database" path="db_name/include_folder"/>
+    <exclude domain="database" path="db_name/include_folder/file_to_exclude"/>
+    <exclude domain="database" path="db_name/exclude_folder"/>
+    <include domain="database" path="db_name/exclude_folder/file_to_include"/>
+
+    <include domain="external" path="file_to_include"/>
+    <exclude domain="external" path="file_to_exclude"/>
+    <include domain="external" path="include_folder"/>
+    <exclude domain="external" path="include_folder/file_to_exclude"/>
+    <exclude domain="external" path="exclude_folder"/>
+    <include domain="external" path="exclude_folder/file_to_include"/>
+
+    <include domain="root" path="file_to_include"/>
+    <exclude domain="root" path="file_to_exclude"/>
+    <include domain="root" path="include_folder"/>
+    <exclude domain="root" path="include_folder/file_to_exclude"/>
+    <exclude domain="root" path="exclude_folder"/>
+    <include domain="root" path="exclude_folder/file_to_include"/>
+    <include domain="root" requireFlags="fakeClientSideEncryption" path="fake_encryption_file" />
+</full-backup-content>

@@ -1,0 +1,63 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_test_library  {
+    name: "libAppThatUsesAppOps_jni",
+    sdk_version: "current",
+    stl: "c++_static",
+
+    srcs: [
+        "jni/**/*.cpp"
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter"
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libbinder_ndk"
+    ],
+
+    static_libs: [
+        "AppOpsUserServiceAidlNative-ndk"
+    ]
+}
+
+android_test_helper_app {
+    name: "CtsAppThatUsesAppOps",
+
+    compile_multilib: "both",
+
+    srcs: ["src/**/*.kt"],
+
+    static_libs: [
+        "appops-test-util-lib",
+        "AppOpsUserServiceAidl",
+        "truth-prebuilt",
+        "junit",
+    ],
+
+    jni_libs: [
+        "libAppThatUsesAppOps_jni"
+    ],
+
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ]
+}

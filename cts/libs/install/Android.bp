@@ -1,0 +1,120 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+
+android_test_helper_app {
+    name: "TestAppAv1",
+    manifest: "testapp/Av1.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v1"],
+    apex_available: [ "com.android.apex.apkrollback.test_v1" ],
+}
+
+android_test_helper_app {
+    name: "TestAppAv2",
+    manifest: "testapp/Av2.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v2"],
+    apex_available: [ "com.android.apex.apkrollback.test_v2" ],
+}
+
+android_test_helper_app {
+    name: "TestAppAv3",
+    manifest: "testapp/Av3.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v3"],
+}
+
+android_test_helper_app {
+    name: "TestAppACrashingV2",
+    manifest: "testapp/ACrashingV2.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v2"],
+    apex_available: [ "com.android.apex.apkrollback.test_v2Crashing" ],
+}
+
+android_test_helper_app {
+    name: "TestAppBv1",
+    manifest: "testapp/Bv1.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v1"],
+}
+
+android_test_helper_app {
+    name: "TestAppBv2",
+    manifest: "testapp/Bv2.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v2"],
+}
+
+android_test_helper_app {
+    name: "TestAppCv1",
+    manifest: "testapp/Cv1.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v1"],
+}
+
+android_test_helper_app {
+    name: "TestAppASplitV1",
+    manifest: "testapp/Av1.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v1"],
+    package_splits: ["anydpi"],
+}
+
+android_test_helper_app {
+    name: "TestAppASplitV2",
+    manifest: "testapp/Av2.xml",
+    sdk_version: "current",
+    srcs: ["testapp/src/**/*.java"],
+    resource_dirs: ["testapp/res_v2"],
+    package_splits: ["anydpi"],
+}
+
+java_library {
+    name: "cts-install-lib-java",
+    srcs: ["src/**/*.java"],
+    static_libs: ["androidx.test.rules", "compatibility-device-util-axt", "truth-prebuilt"],
+    sdk_version: "test_current",
+    java_resources: [
+        ":TestAppAv1",
+        ":TestAppAv2",
+        ":TestAppAv3",
+        ":TestAppBv1",
+        ":TestAppBv2",
+        ":TestAppCv1",
+        ":TestAppACrashingV2",
+        ":TestAppASplitV1",
+        ":TestAppASplitV2",
+        ":StagedInstallTestApexV1",
+        ":StagedInstallTestApexV2",
+        ":StagedInstallTestApexV3",
+    ],
+}
+
+android_library {
+    name: "cts-install-lib",
+    manifest: "AndroidManifest.xml",
+    static_libs: [
+        "cts-install-lib-java",
+    ],
+}

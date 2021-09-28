@@ -1,0 +1,107 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+filegroup {
+    name: "car-mode-app-srcs",
+    srcs: [
+        "src/android/telecom/cts/carmodetestapp/CtsCarModeInCallService.java",
+        "src/android/telecom/cts/carmodetestapp/CtsCarModeInCallServiceControl.java",
+    ],
+    path: "src/",
+}
+
+filegroup {
+    name: "car-mode-app-aidl",
+    srcs: [
+        "aidl/android/telecom/cts/carmodetestapp/ICtsCarModeInCallServiceControl.aidl",
+    ],
+    path: "aidl/",
+}
+
+android_test {
+    name: "CtsTelecomTestCases",
+    defaults: ["cts_defaults"],
+    static_libs: [
+        "compatibility-device-util-axt",
+        "ctstestrunner-axt",
+        "androidx.test.core",
+        "androidx.test.rules",
+        "CtsTelecomUtilLib",
+    ],
+    libs: [
+        "android.test.base.stubs",
+        "android.test.runner.stubs",
+    ],
+    srcs: [
+        "src/**/*.java",
+        "aidl/**/I*.aidl",
+        "CallScreeningServiceTestApp/**/*.java",
+        "CallScreeningServiceTestApp/**/I*.aidl",
+        "ThirdPtyInCallServiceTestApp/**/*.java",
+        "ThirdPtyInCallServiceTestApp/**/I*.aidl",
+        "CallRedirectionServiceTestApp/**/*.java",
+        "CallRedirectionServiceTestApp/**/I*.aidl",
+        "Api29InCallServiceTestApp/**/*.java",
+        "Api29InCallServiceTestApp/**/I*.aidl",
+    ],
+    exclude_srcs: [
+        "src/android/telecom/cts/SelfManagedConnection.java",
+        "src/android/telecom/cts/CtsSelfManagedConnectionService.java",
+        "src/android/telecom/cts/TestUtils.java",
+    ],
+    aidl: {
+        local_include_dirs: [
+            "ThirdPtyInCallServiceTestApp/aidl/",
+            "CallRedirectionServiceTestApp/aidl/",
+            "CallScreeningServiceTestApp/aidl/",
+            "aidl/",
+        ],
+    },
+    sdk_version: "test_current",
+    min_sdk_version: "21",
+    // Tag this module as a cts test artifact
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+java_library {
+    name: "CtsTelecomMockLib",
+    srcs: [
+        "src/android/telecom/cts/MockInCallService.java",
+        "src/android/telecom/cts/MockVideoCallCallback.java",
+        "src/android/telecom/cts/MockVideoProvider.java",
+        "src/android/telecom/cts/MockConnection.java",
+    ],
+    static_libs: ["CtsTelecomUtilLib"],
+    libs: [
+        "androidx.test.core",
+        "androidx.test.rules",
+    ],
+}
+
+java_library {
+    name: "CtsTelecomUtilLib",
+    srcs: [
+        "src/android/telecom/cts/SelfManagedConnection.java",
+        "src/android/telecom/cts/CtsSelfManagedConnectionService.java",
+        "src/android/telecom/cts/TestUtils.java",
+    ],
+    libs: [
+        "androidx.test.core",
+        "androidx.test.rules",
+    ],
+}

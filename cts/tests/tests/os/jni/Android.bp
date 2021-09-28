@@ -1,0 +1,81 @@
+// Copyright (C) 2010 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_defaults {
+    name: "libctsos_jni_defaults",
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-inline-asm",
+        "-Wno-unused-const-variable",
+    ],
+
+    shared_libs: [
+        "libnativehelper_compat_libc++",
+        "liblog",
+        "libdl",
+        "libandroid",
+    ],
+    stl: "libc++_static",
+}
+
+cc_library_shared {
+    name: "libctsos_jni",
+    defaults: ["libctsos_jni_defaults"],
+
+    srcs: [
+        "CtsOsJniOnLoad.cpp",
+        "android_os_cts_TaggedPointer.cpp",
+        "android_os_cts_HardwareName.cpp",
+        "android_os_cts_OSFeatures.cpp",
+        "android_os_cts_NoExecutePermissionTest.cpp",
+        "android_os_cts_SeccompTest.cpp",
+        "android_os_cts_SharedMemory.cpp",
+        "android_os_cts_SPMITest.cpp",
+    ],
+
+    whole_static_libs: ["libctsos_jni_arm"],
+    static_libs: [
+        "libminijail",
+        "external_seccomp_tests",
+    ],
+
+    // This define controls the behavior of OSFeatures.needsSeccompSupport().
+    cflags: ["-DARCH_SUPPORTS_SECCOMP"],
+}
+
+cc_library_static {
+    name: "libctsos_jni_arm",
+    defaults: ["libctsos_jni_defaults"],
+
+    srcs: ["android_os_cts_CpuInstructions.cpp"],
+
+    arch: {
+        arm: {
+            cppflags: [
+                // Let's overwrite -mcpu in case it's set to some ARMv8 core by
+                // TARGET_2ND_CPU_VARIANT and causes clang to ignore the -march below.
+                "-mcpu=generic",
+
+                // The ARM version of this library must be built using ARMv7 ISA (even if it
+                // can be run on armv8 cores) since one of the tested instruction, swp, is
+                // only supported in ARMv7 (and older) cores, and obsolete in ARMv8.
+                "-march=armv7-a",
+            ],
+            instruction_set: "arm",
+        },
+    },
+}

@@ -1,0 +1,9 @@
+java_defaults {
+    name: "hostsidetests-shortcuts-deviceside-defaults",
+    static_libs: [
+        "hostsidetests-shortcuts-deviceside-common",
+        "ShortcutManagerTestUtils",
+    ],
+    libs: ["android.test.base.stubs"],
+    sdk_version: "test_current",
+}

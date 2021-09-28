@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Config for CTS Permission2 test cases">
+
+    <option name="test-suite-tag" value="cts" />
+    <option name="not-shardable" value="true" />
+
+    <option name="config-descriptor:metadata" key="component" value="framework" />
+    <option name="config-descriptor:metadata" key="parameter" value="instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+    <option name="config-descriptor:metadata" key="token" value="SIM_CARD" />
+
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <option name="test-file-name" value="CtsPermission2TestCases.apk" />
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
+        <option name="push" value="CtsLocationPermissionsUserSdk22.apk->/data/local/tmp/cts/permissions2/CtsLocationPermissionsUserSdk22.apk" />
+        <option name="push" value="CtsLocationPermissionsUserSdk29.apk->/data/local/tmp/cts/permissions2/CtsLocationPermissionsUserSdk29.apk" />
+        <option name="push" value="CtsSMSCallLogPermissionsUserSdk22.apk->/data/local/tmp/cts/permissions2/CtsSMSCallLogPermissionsUserSdk22.apk" />
+        <option name="push" value="CtsSMSCallLogPermissionsUserSdk29.apk->/data/local/tmp/cts/permissions2/CtsSMSCallLogPermissionsUserSdk29.apk" />
+        <option name="push" value="CtsStoragePermissionsUserDefaultSdk22.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserDefaultSdk22.apk" />
+        <option name="push" value="CtsStoragePermissionsUserDefaultSdk28.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserDefaultSdk28.apk" />
+        <option name="push" value="CtsStoragePermissionsUserDefaultSdk29.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserDefaultSdk29.apk" />
+        <option name="push" value="CtsStoragePermissionsUserOptInSdk22.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserOptInSdk22.apk" />
+        <option name="push" value="CtsStoragePermissionsUserOptInSdk28.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserOptInSdk28.apk" />
+        <option name="push" value="CtsStoragePermissionsUserOptOutSdk29.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserOptOutSdk29.apk" />
+        <option name="push" value="CtsLegacyStorageNotIsolatedWithSharedUid.apk->/data/local/tmp/cts/permissions2/CtsLegacyStorageNotIsolatedWithSharedUid.apk" />
+        <option name="push" value="CtsLegacyStorageIsolatedWithSharedUid.apk->/data/local/tmp/cts/permissions2/CtsLegacyStorageIsolatedWithSharedUid.apk" />
+        <option name="push" value="CtsLegacyStorageRestrictedWithSharedUid.apk->/data/local/tmp/cts/permissions2/CtsLegacyStorageRestrictedWithSharedUid.apk" />
+        <option name="push" value="CtsLegacyStorageRestrictedSdk28WithSharedUid.apk->/data/local/tmp/cts/permissions2/CtsLegacyStorageRestrictedSdk28WithSharedUid.apk" />
+        <option name="push" value="CtsStoragePermissionsUserOptOutSdk30.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsUserOptOutSdk30.apk" />
+        <option name="push" value="CtsStoragePermissionsPreservedUserOptOutSdk30.apk->/data/local/tmp/cts/permissions2/CtsStoragePermissionsPreservedUserOptOutSdk30.apk" />
+        <option name="push" value="CtsSMSRestrictedWithSharedUid.apk->/data/local/tmp/cts/permissions2/CtsSMSRestrictedWithSharedUid.apk" />
+        <option name="push" value="CtsSMSNotRestrictedWithSharedUid.apk->/data/local/tmp/cts/permissions2/CtsSMSNotRestrictedWithSharedUid.apk" />
+    </target_preparer>
+
+    <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
+        <option name="package" value="android.permission2.cts" />
+        <option name="runtime-hint" value="2m" />
+    </test>
+
+</configuration>

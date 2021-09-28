@@ -1,0 +1,104 @@
+//
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+android_test_helper_app {
+    name: "CtsUseEmbeddedDexApp_Canonical",
+    defaults: ["cts_support_defaults"],
+    use_embedded_dex: true,
+    srcs: ["src/**/*.java"],
+    sdk_version: "current",
+    min_sdk_version: "27",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsUseEmbeddedDexApp_DexCompressed",
+    defaults: ["cts_support_defaults"],
+    // Not specifying use_embedded_dex keeps dex compressed
+    srcs: ["src/**/*.java"],
+    sdk_version: "current",
+    min_sdk_version: "28",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsUseEmbeddedDexApp_NotPreferred",
+    defaults: ["cts_support_defaults"],
+    manifest: "AndroidManifest_use_extracted_dex.xml",
+    srcs: ["src/**/*.java"],
+    sdk_version: "current",
+    min_sdk_version: "28",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsUseEmbeddedDexAppSplit_Canonical",
+    defaults: ["cts_support_defaults"],
+    manifest: "feature_split/AndroidManifest.xml",
+    // We want the dex to be uncompressed, but there is a side effect of extra
+    // android:useEmbeddedDex in the manifest (which the framework will ignore
+    // for split).
+    use_embedded_dex: true,
+    srcs: ["feature_split/src/**/*.java"],
+    sdk_version: "current",
+    min_sdk_version: "27",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+android_test_helper_app {
+    name: "CtsUseEmbeddedDexAppSplit_CompressedDex",
+    defaults: ["cts_support_defaults"],
+    manifest: "feature_split/AndroidManifest.xml",
+    srcs: ["feature_split/src/**/*.java"],
+    sdk_version: "current",
+    min_sdk_version: "27",
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+}
+
+//android_test_helper_app {
+//    name: "CtsUseEmbeddedDexAppSplit_CompressedSo",
+//    defaults: ["cts_support_defaults"],
+//    manifest: "feature_split/AndroidManifest.xml",
+//    srcs: ["feature_split/src/**/*.java"],
+//    // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_PREBUILT_JNI_LIBS
+//    // LOCAL_PREBUILT_JNI_LIBS := dummy.so
+//    sdk_version: "current",
+//    min_sdk_version: "27",
+//    test_suites: [
+//        "cts",
+//        "general-tests",
+//    ],
+//}

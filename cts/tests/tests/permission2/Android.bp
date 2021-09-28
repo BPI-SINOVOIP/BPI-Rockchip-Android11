@@ -1,0 +1,61 @@
+//
+// Copyright (C) 2009 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+android_test {
+    name: "CtsPermission2TestCases",
+    defaults: ["cts_defaults"],
+    // Tag this module as a cts test artifact
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+    libs: ["android.test.base.stubs"],
+    static_libs: [
+        "androidx.test.core",
+        "compatibility-device-util-axt",
+        "ctstestrunner-axt",
+        "guava",
+        "androidx.test.ext.junit-nodeps",
+        "truth-prebuilt",
+        "permission-test-util-lib"
+    ],
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.kt"
+    ],
+    sdk_version: "test_current",
+    data: [
+        ":CtsLocationPermissionsUserSdk22",
+        ":CtsLocationPermissionsUserSdk29",
+        ":CtsSMSCallLogPermissionsUserSdk22",
+        ":CtsSMSCallLogPermissionsUserSdk29",
+        ":CtsStoragePermissionsUserDefaultSdk22",
+        ":CtsStoragePermissionsUserDefaultSdk28",
+        ":CtsStoragePermissionsUserDefaultSdk29",
+        ":CtsStoragePermissionsUserOptInSdk22",
+        ":CtsStoragePermissionsUserOptInSdk28",
+        ":CtsStoragePermissionsUserOptOutSdk29",
+        ":CtsStoragePermissionsPreservedUserOptOutSdk30",
+        ":CtsLegacyStorageNotIsolatedWithSharedUid",
+        ":CtsLegacyStorageIsolatedWithSharedUid",
+        ":CtsLegacyStorageRestrictedWithSharedUid",
+        ":CtsLegacyStorageRestrictedSdk28WithSharedUid",
+        ":CtsStoragePermissionsUserOptOutSdk30",
+        ":CtsSMSRestrictedWithSharedUid",
+        ":CtsSMSNotRestrictedWithSharedUid",
+    ],
+}

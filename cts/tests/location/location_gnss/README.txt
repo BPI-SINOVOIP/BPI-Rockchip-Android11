@@ -1,0 +1,1 @@
+These tests require a GNSS signal.

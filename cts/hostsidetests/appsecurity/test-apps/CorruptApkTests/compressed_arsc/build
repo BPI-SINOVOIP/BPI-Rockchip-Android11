@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# Copyright (C) 2020 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+set -e
+
+PATH_TO_FRAMEWORK_RES=${ANDROID_BUILD_TOP}/prebuilts/sdk/current/public/android.jar
+TEST_CERT_PK8=${ANDROID_BUILD_TOP}/cts/hostsidetests/appsecurity/certs/cts-testkey1.pk8
+TEST_CERT_PEM=${ANDROID_BUILD_TOP}/cts/hostsidetests/appsecurity/certs/cts-testkey1.x509.pem
+
+aapt2 compile --dir res -o compiled.flata
+
+# Basic Q apk
+aapt2 link \
+    -I $PATH_TO_FRAMEWORK_RES \
+    --manifest AndroidManifest.xml \
+    --target-sdk-version 29 \
+    -o basic_q.apk \
+    compiled.flata
+
+# Basic R apk
+aapt2 link \
+    -I $PATH_TO_FRAMEWORK_RES \
+    --manifest AndroidManifest.xml \
+    --target-sdk-version 30 \
+    -o basic_r.apk \
+    compiled.flata
+
+# The resources.arc is the same for both versions of the basic apk
+unzip basic_q.apk resources.arsc
+
+# Generate an apk with a compressed resources.arsc targeting Q apk
+rm -f compressed_Q.apk
+cp basic_q.apk compressed_Q.apk
+zip -j compressed_Q.apk resources.arsc
+
+# Generate an apk with a compressed resources.arsc targeting R apk
+rm -f compressed_R.apk
+cp basic_r.apk compressed_R.apk
+zip -j compressed_R.apk resources.arsc
+
+# Create a 3 byte file that is used to ensure the resources.arsc will not be aligned on a 4-byte
+# boundary. The length of the file name (2) + the length of the file (3) should be odd and the file
+# should be stored in tha APK without any extra filed data to ensure the resources.arsc will be on
+# an odd byte boundary.
+dd if=/dev/zero of=aa bs=3 count=1
+
+# Generate an apk with an unaligned resources.arsc targeting Q
+rm -f unaligned_Q.apk
+cp basic_q.apk unaligned_Q.apk
+zip unaligned_Q.apk -d resources.arsc
+zip unaligned_Q.apk -0 -X aa
+zip unaligned_Q.apk -0 -X resources.arsc
+
+# Generate an apk with an unaligned resources.arsc targeting R
+rm -f unaligned_R.apk
+cp basic_r.apk unaligned_R.apk
+zip unaligned_R.apk -d resources.arsc
+zip unaligned_R.apk -0 -X aa
+zip unaligned_R.apk -0 -X resources.arsc
+
+# Sign all of the APKs
+apksigner sign --key $TEST_CERT_PK8 --cert $TEST_CERT_PEM  compressed_Q.apk
+apksigner sign --key $TEST_CERT_PK8 --cert $TEST_CERT_PEM  compressed_R.apk
+apksigner sign --key $TEST_CERT_PK8 --cert $TEST_CERT_PEM  unaligned_Q.apk
+apksigner sign --key $TEST_CERT_PK8 --cert $TEST_CERT_PEM  unaligned_R.apk
+
+# Make sure everything is tidy
+rm aa
+rm resources.arsc
+rm basic_q.apk
+rm basic_r.apk
+rm compiled.flata

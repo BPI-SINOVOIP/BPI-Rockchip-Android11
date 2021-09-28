@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2015 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Config for CTS Permission test cases">
+    <option name="test-suite-tag" value="cts" />
+    <option name="config-descriptor:metadata" key="component" value="framework" />
+    <option name="config-descriptor:metadata" key="parameter" value="instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.Sdk30ModuleController" />
+
+    <!-- Install main test suite apk -->
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <option name="test-file-name" value="CtsPermissionTestCases.apk" />
+    </target_preparer>
+
+    <!-- Create place to store apks -->
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="mkdir -p /data/local/tmp/cts/permissions" />
+        <option name="teardown-command" value="rm -rf /data/local/tmp/cts"/>
+    </target_preparer>
+
+    <!-- Load additional APKs onto device -->
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
+        <option name="push" value="CtsAppThatRequestsPermissionAandB.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsPermissionAandB.apk" />
+        <option name="push" value="CtsAppThatRequestsPermissionAandC.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsPermissionAandC.apk" />
+        <option name="push" value="CtsAppThatRequestsContactsPermission16.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsContactsPermission16.apk" />
+        <option name="push" value="CtsAppThatRequestsContactsPermission15.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsContactsPermission15.apk" />
+        <option name="push" value="CtsAppThatRequestsContactsAndCallLogPermission16.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsContactsAndCallLogPermission16.apk" />
+        <option name="push" value="CtsAppThatRequestsLocationPermission29.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsLocationPermission29.apk" />
+        <option name="push" value="CtsAppThatRequestsLocationPermission29v4.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsLocationPermission29v4.apk" />
+        <option name="push" value="CtsAppThatRequestsLocationPermission28.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsLocationPermission28.apk" />
+        <option name="push" value="CtsAppThatRequestsLocationPermission22.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsLocationPermission22.apk" />
+        <option name="push" value="CtsAppThatRequestsStoragePermission29.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsStoragePermission29.apk" />
+        <option name="push" value="CtsAppThatRequestsStoragePermission28.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsStoragePermission28.apk" />
+        <option name="push" value="CtsAppThatRequestsLocationAndBackgroundPermission29.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsLocationAndBackgroundPermission29.apk" />
+        <option name="push" value="CtsAppThatAccessesLocationOnCommand.apk->/data/local/tmp/cts/permissions/CtsAppThatAccessesLocationOnCommand.apk" />
+        <option name="push" value="AppThatDoesNotHaveBgLocationAccess.apk->/data/local/tmp/cts/permissions/AppThatDoesNotHaveBgLocationAccess.apk" />
+        <option name="push" value="CtsAppWithSharedUidThatRequestsPermissions.apk->/data/local/tmp/cts/permissions/CtsAppWithSharedUidThatRequestsPermissions.apk" />
+        <option name="push" value="CtsAppWithSharedUidThatRequestsNoPermissions.apk->/data/local/tmp/cts/permissions/CtsAppWithSharedUidThatRequestsNoPermissions.apk" />
+        <option name="push" value="CtsAppWithSharedUidThatRequestsLocationPermission28.apk->/data/local/tmp/cts/permissions/CtsAppWithSharedUidThatRequestsLocationPermission28.apk" />
+        <option name="push" value="CtsAppWithSharedUidThatRequestsLocationPermission29.apk->/data/local/tmp/cts/permissions/CtsAppWithSharedUidThatRequestsLocationPermission29.apk" />
+        <option name="push" value="CtsAppThatRequestsCalendarContactsBodySensorCustomPermission.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsCalendarContactsBodySensorCustomPermission.apk" />
+        <option name="push" value="CtsAppThatRunsRationaleTests.apk->/data/local/tmp/cts/permissions/CtsAppThatRunsRationaleTests.apk" />
+        <option name="push" value="CtsAdversarialPermissionUserApp.apk->/data/local/tmp/cts/permissions/CtsAdversarialPermissionUserApp.apk" />
+        <option name="push" value="CtsAdversarialPermissionDefinerApp.apk->/data/local/tmp/cts/permissions/CtsAdversarialPermissionDefinerApp.apk" />
+        <option name="push" value="CtsVictimPermissionDefinerApp.apk->/data/local/tmp/cts/permissions/CtsVictimPermissionDefinerApp.apk" />
+        <option name="push" value="CtsRuntimePermissionDefinerApp.apk->/data/local/tmp/cts/permissions/CtsRuntimePermissionDefinerApp.apk" />
+        <option name="push" value="CtsRuntimePermissionUserApp.apk->/data/local/tmp/cts/permissions/CtsRuntimePermissionUserApp.apk" />
+        <option name="push" value="CtsInstallPermissionDefinerApp.apk->/data/local/tmp/cts/permissions/CtsInstallPermissionDefinerApp.apk" />
+        <option name="push" value="CtsInstallPermissionUserApp.apk->/data/local/tmp/cts/permissions/CtsInstallPermissionUserApp.apk" />
+        <option name="push" value="CtsInstallPermissionEscalatorApp.apk->/data/local/tmp/cts/permissions/CtsInstallPermissionEscalatorApp.apk" />
+        <option name="push" value="CtsAppThatRequestsOneTimePermission.apk->/data/local/tmp/cts/permissions/CtsAppThatRequestsOneTimePermission.apk" />
+        <option name="push" value="AppThatDefinesUndefinedPermissionGroupElement.apk->/data/local/tmp/cts/permissions/AppThatDefinesUndefinedPermissionGroupElement.apk" />
+        <option name="push" value="CtsStorageEscalationApp28.apk->/data/local/tmp/cts/permissions/CtsStorageEscalationApp28.apk" />
+        <option name="push" value="CtsStorageEscalationApp29Full.apk->/data/local/tmp/cts/permissions/CtsStorageEscalationApp29Full.apk" />
+        <option name="push" value="CtsStorageEscalationApp29Scoped.apk->/data/local/tmp/cts/permissions/CtsStorageEscalationApp29Scoped.apk" />
+    </target_preparer>
+
+    <!-- Remove additional apps if installed -->
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="teardown-command" value="pm uninstall android.permission.cts.appthatrequestpermission" />
+        <option name="teardown-command" value="pm uninstall android.permission.cts.appthatrequestnopermission" />
+        <option name="teardown-command" value="pm uninstall android.permission.cts.revokepermissionwhenremoved.AdversarialPermissionDefinerApp" />
+        <option name="teardown-command" value="pm uninstall android.permission.cts.revokepermissionwhenremoved.VictimPermissionDefinerApp" />
+        <option name="teardown-command" value="pm uninstall android.permission.cts.revokepermissionwhenremoved.userapp" />
+        <option name="teardown-command" value="pm uninstall android.permission.cts.revokepermissionwhenremoved.runtimepermissiondefinerapp" />
+        <option name="teardown-command" value="pm uninstall android.permission.cts.revokepermissionwhenremoved.runtimepermissionuserapp" />
+    </target_preparer>
+
+    <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
+        <option name="package" value="android.permission.cts" />
+        <option name="runtime-hint" value="13m" />
+    </test>
+</configuration>

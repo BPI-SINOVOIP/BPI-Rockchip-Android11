@@ -1,0 +1,123 @@
+[
+  {
+    "name": "Left click",
+    "reports": [
+      [0x1a, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+    ],
+    "source": "MOUSE_RELATIVE",
+    "events": [
+      {
+        "action": "DOWN",
+        "buttonState": ["PRIMARY"],
+        "axes": {"AXIS_PRESSURE": 1}
+      },
+      {
+        "action": "BUTTON_PRESS",
+        "buttonState": ["PRIMARY"],
+        "axes": {"AXIS_PRESSURE": 1}
+      },
+      {"action": "BUTTON_RELEASE",
+        "axes": {"AXIS_PRESSURE": 0}
+      },
+      {"action": "UP",
+        "axes": {"AXIS_PRESSURE": 0}
+      }
+    ]
+  },
+  {
+    "name": "Right click",
+    "reports": [
+      [0x1a, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+    ],
+    "source": "MOUSE_RELATIVE",
+    "events": [
+      {
+        "action": "DOWN",
+        "buttonState": ["SECONDARY"],
+        "axes": {"AXIS_PRESSURE": 1}
+      },
+      {
+        "action": "BUTTON_PRESS",
+        "buttonState": ["SECONDARY"],
+        "axes": {"AXIS_PRESSURE": 1}
+      },
+      {"action": "BUTTON_RELEASE",
+        "axes": {"AXIS_PRESSURE": 0}
+      },
+      {"action": "UP",
+        "axes": {"AXIS_PRESSURE": 0}
+      }
+    ]
+  },
+  {
+    "name": "Middle click",
+    "reports": [
+      [0x1a, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+    ],
+    "source": "MOUSE_RELATIVE",
+    "events": [
+      {
+        "action": "DOWN",
+        "buttonState": ["TERTIARY"],
+        "axes": {"AXIS_PRESSURE": 1}
+      },
+      {
+        "action": "BUTTON_PRESS",
+        "buttonState": ["TERTIARY"],
+        "axes": {"AXIS_PRESSURE": 1}
+      },
+      {"action": "BUTTON_RELEASE",
+        "axes": {"AXIS_PRESSURE": 0}
+      },
+      {"action": "UP",
+        "axes": {"AXIS_PRESSURE": 0}
+      }
+    ]
+  },
+  {
+    "name": "Move",
+    "reports": [
+      [0x1a, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00],
+      [0x1a, 0x00, 0x00, 0xff, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00]
+    ],
+    "source": "MOUSE_RELATIVE",
+    "events": [
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_X": 1}
+      },
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_X": 768}
+      },
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_X": -768}
+      },
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_Y": 768}
+      },
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_Y": -768}
+      },
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_X": 768, "AXIS_Y": 768}
+      },
+      {
+        "action": "MOVE",
+        "axes": {"AXIS_X": -768, "AXIS_Y": -768}
+      }
+    ]
+  }
+]

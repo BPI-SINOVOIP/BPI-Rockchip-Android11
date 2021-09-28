@@ -1,0 +1,106 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package android.theme.cts;
+
+import static org.junit.Assert.assertEquals;
+
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.util.DisplayMetrics;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.SmallTest;
+import androidx.test.runner.AndroidJUnit4;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+@SmallTest
+public class WatchPercentageScreenDimenTest {
+
+    private Context mContext;
+    private Configuration mConfig;
+    private float mScreenWidth;
+    private DisplayMetrics mDisplayMetrics;
+
+    private boolean isRoundWatch() {
+        return mConfig.isScreenRound() && (mConfig.uiMode & Configuration.UI_MODE_TYPE_WATCH)
+                == Configuration.UI_MODE_TYPE_WATCH;
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        mContext = InstrumentationRegistry.getTargetContext();
+        mConfig = mContext.getResources().getConfiguration();
+        mDisplayMetrics = mContext.getResources().getDisplayMetrics();
+        mScreenWidth = mDisplayMetrics.widthPixels;
+    }
+
+    @Test
+    public void test_10() {
+        if (!isRoundWatch()) {
+            return; // skip if not round watch
+        }
+
+        float expected = mScreenWidth * 0.1f;
+        float expectedDelta = getMaxErrorRatio() * expected;
+
+        TypedArray attrs = mContext.obtainStyledAttributes(new int[] {
+                android.R.attr.listPreferredItemPaddingEnd
+        });
+        assertEquals("invalid number of attributes", 1, attrs.length());
+
+        for (int i = 0; i < attrs.length(); ++i) {
+            float actual = attrs.getDimension(i, -1);
+            assertEquals("screen_percentage_10 is not 10% of screen width",
+                    expected, actual, expectedDelta + 0.01f);
+        }
+    }
+
+    @Test
+    public void test_15() {
+        if (!isRoundWatch()) {
+            return; // skip if not round watch
+        }
+
+        float expected = mScreenWidth * 0.15f;
+        float expectedDelta = getMaxErrorRatio() * expected;
+
+        TypedArray attrs = mContext.obtainStyledAttributes(new int[] {
+                android.R.attr.dialogPreferredPadding,
+                android.R.attr.listPreferredItemPaddingLeft,
+                android.R.attr.listPreferredItemPaddingRight,
+                android.R.attr.listPreferredItemPaddingStart
+        });
+        assertEquals("invalid number of attributes", 4, attrs.length());
+
+        for (int i = 0; i < attrs.length(); ++i) {
+            float actual = attrs.getDimension(i, -1);
+            assertEquals("screen_percentage_15 is not 15% of screen width",
+                    expected, actual, expectedDelta + 0.01f);
+        }
+    }
+
+    private float getMaxErrorRatio() {
+        // The size used will be the closest qualifier with width <= device width, so there may be
+        // small rounding errors.
+        float widthDp = mDisplayMetrics.widthPixels / mDisplayMetrics.density;
+        return (widthDp - (float) Math.floor(widthDp)) / widthDp;
+    }
+}

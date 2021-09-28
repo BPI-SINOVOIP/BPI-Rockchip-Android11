@@ -1,0 +1,26 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/scrollView"
+style="@style/RootLayoutPadding">
+
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:text="@string/usb_restrictrecord_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/usb_restrictrecord_instructions"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:id="@+id/test_button"/>
+
+    <include layout="@layout/pass_fail_buttons"/>
+
+</LinearLayout>
+</ScrollView>

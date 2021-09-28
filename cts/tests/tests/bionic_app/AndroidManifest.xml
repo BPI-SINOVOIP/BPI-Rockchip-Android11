@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.bionic_app"
+    android:targetSandboxVersion="2">
+
+    <application android:extractNativeLibs="false">
+        <uses-library android:name="android.test.runner" />
+    </application>
+    <instrumentation
+        android:targetPackage="com.android.bionic_app"
+        android:name="androidx.test.runner.AndroidJUnitRunner" />
+</manifest>

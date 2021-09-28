@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration description="Config for the CTS adb host tests">
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.MinApiLevelModuleController">
+        <option name="min-api-level" value="30" />
+        <option name="api-level-prop" value="ro.product.first_api_level" />
+    </object>
+
+    <option name="test-suite-tag" value="cts" />
+    <option name="config-descriptor:metadata" key="component" value="bionic" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+    <option name="config-descriptor:metadata" key="parameter" value="secondary_user" />
+
+    <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
+        <option name="jar" value="CtsAdbHostTestCases.jar" />
+    </test>
+</configuration>

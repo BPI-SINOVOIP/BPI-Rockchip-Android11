@@ -1,0 +1,7 @@
+# Generated with:
+development/tools/make_key cts-blob-helper-cert '/CN=cts-blob-helper-cert'
+development/tools/make_key cts-blob-helper-cert2 '/CN=cts-blob-helper-cert2'
+
+# Convert to DER format
+openssl x509 -outform der -in cts-blob-helper-cert.x509.pem -out cts-blob-helper-cert.der
+openssl x509 -outform der -in cts-blob-helper-cert2.x509.pem -out cts-blob-helper-cert2.der

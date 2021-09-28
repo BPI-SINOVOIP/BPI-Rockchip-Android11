@@ -1,0 +1,76 @@
+// Copyright (C) 2008 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+android_test {
+    name: "CtsContentTestCases",
+    defaults: ["cts_defaults"],
+
+    // Don't run manifestmerger on dependencies, it is unhappy with the duplicate
+    // REQUIRED_MULTI_DENY permissions in AndroidManifest.xml
+    dont_merge_manifests: true,
+    // Include both the 32 and 64 bit versions
+    compile_multilib: "both",
+    jni_libs: [
+        "libnativecursorwindow_jni",
+        "libnativehelper_compat_libc++",
+    ],
+    libs: [
+        "android.test.runner.stubs",
+        "android.test.base.stubs",
+        "android.test.mock",
+    ],
+    static_libs: [
+        "compatibility-device-util-axt",
+        "ctstestrunner-axt",
+        "services.core",
+        "junit",
+        "truth-prebuilt",
+        "accountaccesslib",
+        "ub-uiautomator",
+        // TODO: remove once Android migrates to JUnit 4.12, which provides assertThrows:
+        "testng",
+        "androidx.legacy_legacy-support-v4",
+        "androidx.test.core",
+    ],
+    // Use multi-dex as the compatibility-common-util-devicesidelib dependency
+    // on compatibility-device-util-axt pushes us beyond 64k methods.
+    dxflags: ["--multi-dex"],
+    // Resource unit tests use a private locale and some densities
+    aapt_include_all_resources: true,
+    aaptflags: [
+        "-c cs",
+        "-c fil,fil-rPH,fil-rSA",
+        "-c fr,fr-rFR",
+        "-c iw,iw-rIL",
+        "-c kok,b+kok+419,b+kok+419+variant,b+kok+IN,b+kok+Knda,b+kok+Knda+419,b+kok+Knda+419+variant",
+        "-c b+kok+variant",
+        "-c mk,mk-rMK",
+        "-c tl,tl-rPH",
+        "-c tgl,tgl-rPH",
+        "-c tlh",
+        "-c xx,xx-rYY",
+    ],
+    srcs: [
+        "src/**/*.java",
+        "BinderPermissionTestService/**/I*.aidl",
+    ],
+    platform_apis: true,
+    // Tag this module as a cts test artifact
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+    min_sdk_version: "29",
+}

@@ -1,0 +1,58 @@
+// Copyright (C) 2013 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+cc_library_shared {
+    name: "libctsopengl_jni",
+
+    cflags: [
+        // Needed in order to use fences for synchronization
+        "-DEGL_EGLEXT_PROTOTYPES",
+        "-funsigned-char",
+
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+
+    // Get all cpp files but not hidden files
+    srcs: ["**/*.cpp"],
+
+    shared_libs: [
+        "libEGL",
+        "libGLESv2",
+        "libandroid",
+        "liblog",
+    ],
+
+    sdk_version: "current",
+    stl: "c++_static",
+}
+
+cc_library_host_static {
+    name: "libctsopengl_test",
+
+    srcs: ["graphics/Matrix.cpp"],
+    export_include_dirs: ["graphics"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+}

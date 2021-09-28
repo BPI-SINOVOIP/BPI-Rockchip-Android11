@@ -1,0 +1,7 @@
+# Bug component: 24950
+michaelwr@google.com
+
+# Trust that people only touch their own resources.
+per-file *.xml=*
+# Only input tests use JSON so far
+per-file *.json=svv@google.com

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Config for CTS Backup host test cases">
+    <option name="test-suite-tag" value="cts" />
+    <option name="config-descriptor:metadata" key="component" value="backup" />
+    <!-- Backup of instant apps is not supported. -->
+    <option name="config-descriptor:metadata" key="parameter" value="not_instant_app" />
+    <option name="config-descriptor:metadata" key="parameter" value="not_multi_abi" />
+    <!-- Run module in system user because backup tests are not fully supported in secondary user.
+         For devices running on secondary user, such as automotive devices, these tests will fail.
+         When backup tests are fully functional for secondary users:
+           -change not_secondary_user to secondary_user.
+           -remove SwitchUserTargetPreparer
+    -->
+    <option name="config-descriptor:metadata" key="parameter" value="not_secondary_user" />
+    <target_preparer class="com.android.tradefed.targetprep.SwitchUserTargetPreparer">
+        <option name="user-type" value="system" />
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="cleanup-apks" value="true" />
+        <option name="test-file-name" value="CtsHostsideTestsFullBackupApp.apk" />
+        <option name="test-file-name" value="CtsIncludeExcludeApp.apk" />
+    </target_preparer>
+    <target_preparer class="android.cts.backup.BackupPreparer">
+        <option name="enable-backup-if-needed" value="true" />
+        <option name="select-local-transport" value="true" />
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="cmd thermalservice override-status 0" />
+        <option name="teardown-command" value="cmd thermalservice reset" />
+    </target_preparer>
+    <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
+        <option name="jar" value="CtsBackupHostTestCases.jar" />
+    </test>
+</configuration>

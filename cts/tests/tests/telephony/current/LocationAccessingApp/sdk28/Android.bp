@@ -1,0 +1,13 @@
+android_test {
+    name: "LocationAccessingAppSdk28",
+    defaults: ["cts_defaults"],
+    srcs: [
+        ":location_accessing_app_srcs",
+    ],
+    sdk_version: "test_current",
+    test_suites: [
+        "cts",
+        "vts10",
+        "mts",
+    ],
+}

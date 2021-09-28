@@ -1,0 +1,35 @@
+/*
+ * This file contains the known failures for JDWP.
+ */
+[
+{
+  description: "CTS JDWP known failures",
+  names: [
+    "org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand_OnthrowDebuggerLaunchTest#testDebuggerLaunch001",
+    "org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand_OnthrowDebuggerLaunchTest#testDebuggerLaunch002",
+    "org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand_OnthrowDebuggerLaunchTest#testDebuggerLaunch003",
+    "org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand_OnthrowDebuggerLaunchTest#testDebuggerLaunch004",
+    "org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand_OnthrowLaunchDebugger001#testDebugger002",
+    "org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand_OnthrowLaunchDebugger002#testDebugger",
+    "org.apache.harmony.jpda.tests.jdwp.Events_ClassUnloadTest#testClassUnloadEvent",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorContendedEnterTest#testMonitorContendedEnterForClassMatch",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorContendedEnteredTest#testMonitorContendedEnteredForClassMatch",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitTest#testMonitorWaitForClassExclude",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitTest#testMonitorWaitForClassMatchExact",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitTest#testMonitorWaitForClassMatchFirst",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitTest#testMonitorWaitForClassMatchSecond",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitTest#testMonitorWaitForClassOnly",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitedTest#testMonitorWaitedForClassExclude",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitedTest#testMonitorWaitedForClassMatchExact",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitedTest#testMonitorWaitedForClassMatchFirst",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitedTest#testMonitorWaitedForClassMatchSecond",
+    "org.apache.harmony.jpda.tests.jdwp.Events_MonitorWaitedTest#testMonitorWaitedForClassOnly",
+    "org.apache.harmony.jpda.tests.jdwp.ReferenceType_ClassFileVersionTest#testClassFileVersion001",
+    "org.apache.harmony.jpda.tests.jdwp.ReferenceType_NestedTypesTest#testNestedTypes001",
+    "org.apache.harmony.jpda.tests.jdwp.ThreadReference_StopTest#testStop001",
+    "org.apache.harmony.jpda.tests.jdwp.VirtualMachine_HoldEventsTest#testHoldEvents001",
+    "org.apache.harmony.jpda.tests.jdwp.VirtualMachine_ReleaseEventsTest#testReleaseEvents001"
+  ],
+  bug: "16720689"
+}
+]

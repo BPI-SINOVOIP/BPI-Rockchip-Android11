@@ -1,0 +1,16 @@
+java_test_host {
+    name: "CtsTaggingHostTestCases",
+    defaults: ["cts_defaults"],
+    srcs: ["src/**/*.java"],
+    libs: [
+        "cts-tradefed",
+        "tradefed",
+    ],
+    static_libs:["CompatChangeGatingTestBase"],
+    // tag this module as a cts test artifact
+    test_suites: [
+        "cts",
+        "general-tests",
+        "vts10",
+    ],
+}

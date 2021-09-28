@@ -1,0 +1,15 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsWidgetTestCases",
+      "options": [
+        {
+          "instrumentation-arg": "size:=small"
+        },
+        {
+          "instrumentation-arg": "notAnnotation:=androidx.test.filters.FlakyTest"
+        }
+      ]
+    }
+  ]
+}

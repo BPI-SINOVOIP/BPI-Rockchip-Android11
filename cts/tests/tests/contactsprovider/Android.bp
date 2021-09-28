@@ -1,0 +1,35 @@
+android_test {
+    name: "CtsContactsProviderTestCases",
+    defaults: ["cts_defaults"],
+
+    compile_multilib: "both",
+
+    test_suites: [
+        "cts",
+        "vts10",
+        "general-tests",
+    ],
+
+    libs: [
+        "android.test.mock",
+        "android.test.base.stubs",
+        "android.test.runner.stubs",
+    ],
+
+    static_libs: [
+        "compatibility-device-util-axt",
+        "ctstestrunner-axt",
+        "junit",
+        "truth-prebuilt",
+    ],
+
+    srcs: [
+        "src/**/*.java",
+
+        // Include the GAL provider source code to pull in the constants.
+        "gal/src/**/*.java",
+    ],
+
+    sdk_version: "test_current",
+    min_sdk_version: "30",
+}
