@@ -1,0 +1,53 @@
+{
+  "presubmit": [
+    {
+      "name": "test1",
+      "host": true
+    },
+    {
+      "name": "suite/stub1",
+      "options": [
+        {
+          "include-filter": "some-filter"
+        }
+      ]
+    },
+    {
+      "name": "suite/stub2",
+      "keywords": ["key_1"]
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "test2",
+      "options": [
+        {
+          "instrumentation-arg": "annotation=android.platform.test.annotations.Presubmit"
+        }
+      ]
+    },
+    {
+      "name": "instrument",
+      "options": [
+        {
+          "run-name": "some-name"
+        }
+      ]
+    }
+  ],
+  "othertype": [
+    {
+      "name": "test3",
+      "options": [
+        {
+          "just-an-option": ""
+        }
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "path": "folder1"
+    }
+  ]
+}

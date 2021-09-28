@@ -1,0 +1,8 @@
+cc_prebuilt_library_shared {
+    name: "librtmem",
+    compile_multilib: "32",
+
+    srcs: ["librtmem.so"],
+
+    check_elf_files: false,
+}

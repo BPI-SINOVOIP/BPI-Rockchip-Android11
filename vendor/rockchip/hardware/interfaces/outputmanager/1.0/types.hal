@@ -1,0 +1,59 @@
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package rockchip.hardware.outputmanager@1.0;
+enum Result : int32_t {
+    OK,
+    UNKNOWN,
+    NO_RESOURCE,
+    INVALID_ARGUMENTS,
+    INVALID_STATE,
+};
+
+struct RkComposerEvent {
+    int32_t result;
+};
+
+struct RkDrmMode {
+    uint32_t width;
+    uint32_t height;
+    float refreshRate;
+    uint32_t clock;
+    uint32_t flags;
+    uint32_t interlaceFlag;
+    uint32_t yuvFlag;
+    uint32_t connectorId;
+    uint32_t mode_type;
+    uint32_t idx;
+    uint32_t hsync_start;
+    uint32_t hsync_end;
+    uint32_t htotal;
+    uint32_t hskew;
+    uint32_t vsync_start;
+    uint32_t vsync_end;
+    uint32_t vtotal;
+    uint32_t vscan;
+
+};
+
+struct RkConnectorInfo {
+    uint32_t type;
+    uint32_t id;
+    uint32_t state;
+};
+
+typedef uint32_t Config;
+typedef uint64_t Display;

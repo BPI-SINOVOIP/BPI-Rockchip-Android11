@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+//package audiowear;
+package apollo.lib.apollo_dev_util_lib.proto;
+
+option java_package = "com.google.android.bisto.nano";
+option java_outer_classname = "Protocol";
+
+enum MessageGroup {
+    UNKNOWN_MESSAGE_GROUP = 0;
+    DEVICE_INPUT = 1;
+    OTA = 2;
+    DEVICE_CAPABILITY = 3;
+    DEVICE_STATUS = 4;
+    LOGGING = 5;
+    SENSORS = 6;
+    COMPANION_STATUS = 7;
+    DEVICE_COMMAND = 8;
+    BISTO_SETTINGS = 9;
+    WELLNESS = 10;
+    TEST = 11;
+    BLE_SERVICE = 12;
+    APOLLO_QA = 126;
+    TRANSLATE = 127;
+}

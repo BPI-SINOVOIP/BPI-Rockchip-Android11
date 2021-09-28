@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.game.qualification.tests">
+    <uses-sdk android:minSdkVersion="14" />
+
+    <instrumentation
+      android:name="androidx.test.runner.AndroidJUnitRunner"
+      android:targetPackage="com.android.game.qualification.tests" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+        <activity android:name="com.android.game.qualification.tests.SurfaceFlingerTestActivity"
+            android:label="SurfaceFlingerTestActivity">
+        </activity>
+        <activity android:name="com.android.game.qualification.tests.ChoreoTestActivity">
+        </activity>
+    </application>
+</manifest>

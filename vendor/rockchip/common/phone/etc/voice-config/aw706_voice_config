@@ -1,0 +1,48 @@
+##########################################ËµÃ÷###############################################
+#This document 2G/3G voice calls using the audio parameter settings, 
+#set the content for each call mode uplink and downlink volume of MIC gain maximum gain.
+#mode including£ºHandset Mode¡¢Handsfree mode, headsets with mic, Bluetooth, headsets no mic¡£
+#Parameter setting sequence must be configured according to what order£º
+#Handset Mode¡¢Handsfree mode, headsets with mic, Bluetooth, headsets no mic.
+#Comments Please start with #.
+
+
+#MIC_gain:MIC Gain
+#Digital_gain:Maximum Digital gain for the downstream volume flag
+#nalog_gain:Maximum Analog gain for the downstream volume flag
+#Sidetone: 1:open sidetone,0:close sidetone
+#Flag must be used directly with the numerical "=" separated
+#You have questions send an email to wlq@rock-chips.com.
+##############################################################################################
+
+#Handset Mode value range:0-255
+#Sidetone: 1:open sidetone,0:close sidetone 
+MIC_gain=200
+Digital_gain=255
+Analog_gain=255
+Sidetone=0
+#Handsfree Mode value range:0-255
+#Sidetone: 1:open sidetone,0:close sidetone 
+MIC_gain=100
+Digital_gain=130
+Analog_gain=130
+Sidetone=0
+#headsets with mic Mode value range:0-255
+#Sidetone: 1:open sidetone,0:close sidetone 
+MIC_gain=200
+Digital_gain=100
+Analog_gain=100
+Sidetone=0
+#bluetooth Mode value range:0-255
+#Sidetone: 1:open sidetone,0:close sidetone 
+MIC_gain=0
+Digital_gain=255
+Analog_gain=255
+Sidetone=0
+#Headsets no mic Mode value range:0-255
+#Sidetone: 1:open sidetone,0:close sidetone 
+MIC_gain=100
+Digital_gain=70
+Analog_gain=70
+Sidetone=0
+

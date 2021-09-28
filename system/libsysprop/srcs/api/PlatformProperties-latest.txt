@@ -1,0 +1,166 @@
+props {
+  module: "android.sysprop.AdbProperties"
+  prop {
+    api_name: "secure"
+    access: Writeonce
+    scope: Internal
+    prop_name: "ro.adb.secure"
+  }
+}
+props {
+  module: "android.sysprop.CarProperties"
+  prop {
+    api_name: "boot_user_override_id"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "android.car.systemuser.bootuseroverrideid"
+  }
+  prop {
+    api_name: "trusted_device_device_name_prefix"
+    type: String
+    scope: Internal
+    prop_name: "ro.android.car.trusteddevice.device_name_prefix"
+  }
+}
+props {
+  module: "android.sysprop.ContactsProperties"
+  prop {
+    api_name: "aggregate_contacts"
+    scope: Internal
+    prop_name: "sync.contacts.aggregate"
+  }
+  prop {
+    api_name: "debug_scan_all_packages"
+    scope: Internal
+    prop_name: "debug.cp2.scan_all_packages"
+  }
+  prop {
+    api_name: "display_photo_size"
+    type: Integer
+    scope: Internal
+    prop_name: "contacts.display_photo_size"
+  }
+  prop {
+    api_name: "keep_stale_account_data"
+    scope: Internal
+    prop_name: "debug.contacts.ksad"
+  }
+  prop {
+    api_name: "thumbnail_size"
+    type: Integer
+    scope: Internal
+    prop_name: "contacts.thumbnail_size"
+  }
+}
+props {
+  module: "android.sysprop.CryptoProperties"
+  prop {
+    api_name: "state"
+    type: Enum
+    scope: Internal
+    prop_name: "ro.crypto.state"
+    enum_values: "encrypted|unencrypted|unsupported"
+  }
+  prop {
+    api_name: "type"
+    type: Enum
+    access: Writeonce
+    scope: Internal
+    prop_name: "ro.crypto.type"
+    enum_values: "block|file|none"
+  }
+}
+props {
+  module: "android.sysprop.DisplayProperties"
+  prop {
+    api_name: "debug_force_msaa"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.egl.force_msaa"
+  }
+  prop {
+    api_name: "debug_force_rtl"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.force_rtl"
+  }
+  prop {
+    api_name: "debug_layout"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.layout"
+  }
+  prop {
+    api_name: "debug_opengl_trace"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.egl.trace"
+  }
+}
+props {
+  module: "android.sysprop.ProductProperties"
+  prop {
+    api_name: "unbundled_apps"
+    scope: Internal
+    prop_name: "ro.product.apps.unbundled"
+  }
+}
+props {
+  module: "android.sysprop.SetupWizardProperties"
+  prop {
+    api_name: "esim_cid_ignore"
+    type: StringList
+    scope: Internal
+    prop_name: "ro.setupwizard.esim_cid_ignore"
+  }
+  prop {
+    api_name: "theme"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "setupwizard.theme"
+  }
+}
+props {
+  module: "android.sysprop.TraceProperties"
+  prop {
+    api_name: "enable"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "persist.traced.enable"
+    integer_as_bool: true
+  }
+  prop {
+    api_name: "user_initiated"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.atrace.user_initiated"
+    integer_as_bool: true
+  }
+}
+props {
+  module: "android.sysprop.VoldProperties"
+  prop {
+    api_name: "decrypt"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "vold.decrypt"
+  }
+  prop {
+    api_name: "encrypt_progress"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "vold.encrypt_progress"
+  }
+  prop {
+    api_name: "encrypt_time_remaining"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "vold.encrypt_time_remaining"
+  }
+}

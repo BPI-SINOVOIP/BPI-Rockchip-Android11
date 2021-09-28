@@ -1,0 +1,5 @@
+package rockchip.hardware.neuralnetworks@1.0;
+
+interface ILoadModelCallback {
+    oneway notify(ErrorStatus status, RKNNDeviceID pdevs);
+};

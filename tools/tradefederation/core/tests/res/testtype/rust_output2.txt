@@ -1,0 +1,43 @@
+running 23 tests
+test default_tokenstream_is_empty ... ok
+test fail ... ok
+test ident_empty ... ok
+test ident_invalid ... ok
+test ident_number ... ok
+test idents ... FAILED
+test lifetime_empty ... ok
+test lifetime_invalid ... ok
+test lifetime_number ... ok
+test literal_character ... ok
+test literal_float ... ok
+test literal_string ... FAILED
+test no_panic ... ok
+test op_before_comment ... ok
+test raw_ident_empty ... ok
+test literal_suffix ... ok
+test raw_ident_invalid ... ok
+test raw_ident_number ... ok
+test raw_identifier ... ok
+test test_debug_ident ... ok
+test tricky_doc_comment ... ok
+test test_debug_tokenstream ... ok
+test roundtrip ... ok
+
+failures:
+
+---- idents stdout ----
+thread 'idents' panicked at 'assertion failed: `(left == right)`
+  left: `"_"`,
+ right: `"_abc"`', external/rust/crates/proc-macro2/tests/test.rs:13:5
+
+---- literal_string stdout ----
+thread 'literal_string' panicked at 'assertion failed: `(left == right)`
+  left: `"\"didn\'t\""`,
+ right: `"fake"`', external/rust/crates/proc-macro2/tests/test.rs:86:5
+
+
+failures:
+    idents
+    literal_string
+
+test result: FAILED. 21 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out

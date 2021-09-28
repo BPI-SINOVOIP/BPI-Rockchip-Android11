@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <!-- Needed for repo tool -->
+    <add_project name="platform/tools/repohooks" />
+    <!-- Needed for early build of Soong -->
+    <add_project name="platform/external/golang-protobuf" />
+    <!-- system/iorap: iorap.inode2filename depends on librxcpp -->
+    <add_project name="platform/external/Reactive-Extensions/RxCpp" />
+    <!-- system/bt/gd: bluetooth_packets_python3 depends on pybind11_headers -->
+    <add_project name="platform/external/python/pybind11" />
+    <!-- test/vts/tools/build/tasks/vts_package.mk runs 'cd' on these dirs -->
+    <add_project name="platform/test/vts-testcase/fuzz" />
+    <add_project name="platform/test/vts-testcase/hal" />
+    <add_project name="platform/test/vts-testcase/hal-trace" />
+    <add_project name="platform/test/vts-testcase/kernel" />
+    <add_project name="platform/test/vts-testcase/nbu" />
+    <add_project name="platform/test/vts-testcase/performance" />
+    <add_project name="platform/test/vts-testcase/security" />
+    <add_project name="platform/test/vts-testcase/vndk" />
+    <!-- bionic/libc:libc_ndk depends on libscudo -->
+    <add_project name="platform/external/scudo" />
+    <!-- external/crosvm/gpu_display uses module type wayland_protocol_codegen -->
+    <add_project name="platform/external/wayland-protocols" />
+</config>
+

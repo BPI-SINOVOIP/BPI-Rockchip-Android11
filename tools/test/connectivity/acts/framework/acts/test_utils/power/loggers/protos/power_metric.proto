@@ -1,0 +1,30 @@
+/* Note: If making any changes to this file be sure to generate a new
+   compiled *_pb2.py file by running the following command from the same dir:
+   $ protoc -I=. --python_out=. power_metric.proto
+
+   Be sure that you are compiling with protoc 3.4.0
+
+   More info can be found at:
+   https://developers.google.com/protocol-buffers/docs/pythontutorial
+*/
+
+syntax = "proto2";
+
+package wireless.android.platform.testing.power.metrics;
+
+/*
+  Power metrics to be uploaded to Spanner
+*/
+message PowerMetric {
+  optional float avg_power = 1; // Required
+  optional string testbed = 2; // Required
+  optional PowerCellularMetric cellular_metric = 3;
+  optional string branch = 4;
+  optional string build_id = 5;
+  optional string target = 6;
+}
+
+message PowerCellularMetric {
+  optional float avg_dl_tput = 1;
+  optional float avg_ul_tput = 2;
+}

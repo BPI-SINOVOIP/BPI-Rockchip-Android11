@@ -1,0 +1,7 @@
+service vendor.rockit-hal-1-0 /vendor/bin/hw/rockchip.hardware.rockit.hw@1.0-service
+    class hal
+    user media
+    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm media_rw sdcard_rw
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+

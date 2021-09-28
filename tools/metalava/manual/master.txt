@@ -1,0 +1,69 @@
+// Signature format: 2.0
+// APIs annotated in master that haven't been annotated in pi-dev
+package android.content.pm {
+  public abstract class PackageManager {
+    method @RequiresPermission(value=android.Manifest.permission.CHANGE_COMPONENT_ENABLED_STATE, conditional=true) public abstract void setApplicationEnabledSetting(String, int, int);
+    method @RequiresPermission(value=android.Manifest.permission.CHANGE_COMPONENT_ENABLED_STATE, conditional=true) public abstract void setComponentEnabledSetting(android.content.ComponentName, int, int);
+  }
+}
+package android.graphics {
+  public class Path {
+    method @NonNull public android.graphics.Path.FillType getFillType();
+  }
+  public final class Rect implements android.os.Parcelable {
+    method @NonNull public String flattenToString();
+    method @NonNull public String toShortString();
+    method @Nullable public static android.graphics.Rect unflattenFromString(@Nullable String);
+  }
+  public class RectF implements android.os.Parcelable {
+    method @NonNull public String toShortString();
+  }
+}
+package android.os {
+  public class DropBoxManager {
+    method @RequiresPermission(allOf={android.Manifest.permission.READ_LOGS, android.Manifest.permission.PACKAGE_USAGE_STATS}) @Nullable public android.os.DropBoxManager.Entry getNextEntry(String, long);
+  }
+  public final class Parcel {
+    method @Nullable public android.os.IBinder[] createBinderArray();
+    method @Nullable public java.util.ArrayList<android.os.IBinder> createBinderArrayList();
+    method @Nullable public boolean[] createBooleanArray();
+    method @Nullable public byte[] createByteArray();
+    method @Nullable public char[] createCharArray();
+    method @Nullable public double[] createDoubleArray();
+    method @Nullable public float[] createFloatArray();
+    method @Nullable public int[] createIntArray();
+    method @Nullable public long[] createLongArray();
+    method @Nullable public String[] createStringArray();
+    method @Nullable public java.util.ArrayList<java.lang.String> createStringArrayList();
+    method @Nullable public <T> T[] createTypedArray(@NonNull android.os.Parcelable.Creator<T>);
+    method @Nullable public <T> java.util.ArrayList<T> createTypedArrayList(@NonNull android.os.Parcelable.Creator<T>);
+    method @NonNull public static android.os.Parcel obtain();
+    method @Nullable public Object[] readArray(@Nullable ClassLoader);
+    method @Nullable public java.util.ArrayList readArrayList(@Nullable ClassLoader);
+    method @Nullable public android.os.Bundle readBundle();
+    method @Nullable public android.os.Bundle readBundle(@Nullable ClassLoader);
+    method @Nullable public java.util.HashMap readHashMap(@Nullable ClassLoader);
+    method @Nullable public <T extends android.os.Parcelable> T readParcelable(@Nullable ClassLoader);
+    method @Nullable public android.os.Parcelable[] readParcelableArray(@Nullable ClassLoader);
+    method @Nullable public android.os.PersistableBundle readPersistableBundle();
+    method @Nullable public android.os.PersistableBundle readPersistableBundle(@Nullable ClassLoader);
+    method @Nullable public java.io.Serializable readSerializable();
+    method @NonNull public android.util.Size readSize();
+    method @NonNull public android.util.SizeF readSizeF();
+    method @Nullable public android.util.SparseArray readSparseArray(@Nullable ClassLoader);
+    method @Nullable public android.util.SparseBooleanArray readSparseBooleanArray();
+    method @Nullable public String readString();
+    method @Nullable public <T> T readTypedObject(@NonNull android.os.Parcelable.Creator<T>);
+    method @Nullable public Object readValue(@Nullable ClassLoader);
+  }
+}
+package android.util {
+  public final class Log {
+    method @NonNull public static String getStackTraceString(@Nullable Throwable);
+  }
+}
+package android.view {
+  public abstract class Window {
+    method @NonNull public abstract android.view.View getDecorView();
+  }
+}

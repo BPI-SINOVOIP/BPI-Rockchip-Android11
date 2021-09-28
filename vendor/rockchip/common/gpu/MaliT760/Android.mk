@@ -1,0 +1,17 @@
+LOCAL_PATH := $(call my-dir)
+ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali-t760)
+
+include $(CLEAR_VARS)
+LOCAL_PREBUILT_LIBS := lib/$(TARGET_ARCH)/libGLES_mali.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/egl
+LOCAL_CHECK_ELF_FILES := false
+include $(BUILD_MULTI_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_PREBUILT_LIBS := modules/$(TARGET_ARCH)/mali_kbase.ko
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/modules
+include $(BUILD_MULTI_PREBUILT)
+
+endif

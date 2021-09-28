@@ -1,0 +1,59 @@
+{
+"hello_world_test": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter hello_world_test --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"packages/apps/Car/Messenger/tests/robotests/src/com/android/car/messenger/MessengerDelegateTest.java": [
+"./build/soong/soong_ui.bash --make-mode RunCarMessengerRoboTests"
+], 
+"CtsAnimationTestCases:AnimatorTest": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsAnimationTestCases --atest-include-filter CtsAnimationTestCases:android.animation.cts.AnimatorTest --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"CtsSampleDeviceTestCases:android.sample.cts.SampleDeviceReportLogTest": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsSampleDeviceTestCases --atest-include-filter CtsSampleDeviceTestCases:android.sample.cts.SampleDeviceReportLogTest --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"CtsAnimationTestCases CtsSampleDeviceTestCases": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsAnimationTestCases --include-filter CtsSampleDeviceTestCases --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"AnimatorTest": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsAnimationTestCases --atest-include-filter CtsAnimationTestCases:android.animation.cts.AnimatorTest --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"PacketFragmenterTest": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter net_test_hci --atest-include-filter net_test_hci:PacketFragmenterTest.* --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"android.animation.cts": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsAnimationTestCases --atest-include-filter CtsAnimationTestCases:android.animation.cts --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"platform_testing/tests/example/native/Android.bp": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter hello_world_test --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"tools/tradefederation/core/res/config/native-benchmark.xml": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter native-benchmark --log-level WARN --logcat-on-failure --no-enable-granular-attempts"
+], 
+"native-benchmark": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter native-benchmark --log-level WARN --logcat-on-failure --no-enable-granular-attempts"
+], 
+"platform_testing/tests/example/native": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter hello_world_test --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"VtsCodelabHelloWorldTest": [
+"vts10-tradefed run commandAndExit vts-staging-default -m VtsCodelabHelloWorldTest --skip-all-system-status-check --skip-preconditions --primary-abi-only"
+], 
+"aidegen_unittests": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --atest-log-file-path=/tmp/atest_run_1568627341_v33kdA/log --include-filter aidegen_unittests --log-level WARN"
+], 
+"HelloWorldTests": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter HelloWorldTests --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"CtsSampleDeviceTestCases:SampleDeviceTest#testSharedPreferences": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsSampleDeviceTestCases --atest-include-filter CtsSampleDeviceTestCases:android.sample.cts.SampleDeviceTest#testSharedPreferences --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"CtsSampleDeviceTestCases:android.sample.cts": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter CtsSampleDeviceTestCases --atest-include-filter CtsSampleDeviceTestCases:android.sample.cts --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"PacketFragmenterTest#test_no_fragment_necessary,test_ble_fragment_necessary": [
+"atest_tradefed.sh template/atest_local_min --template:map test=atest --include-filter net_test_hci --atest-include-filter net_test_hci:PacketFragmenterTest.test_ble_fragment_necessary:PacketFragmenterTest.test_no_fragment_necessary --log-level WARN --skip-loading-config-jar --logcat-on-failure --no-enable-granular-attempts"
+], 
+"CarMessengerRoboTests": [
+"./build/soong/soong_ui.bash --make-mode RunCarMessengerRoboTests"
+]
+}

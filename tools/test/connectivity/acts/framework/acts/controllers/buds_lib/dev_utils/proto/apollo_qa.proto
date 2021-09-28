@@ -1,0 +1,175 @@
+/* Forward & backward compatibility practices must be followed.  This means:
+   a) Never re-use an enum if the semantics are different.
+   b) Never alter the semantic meaning.  If needed, simply deprecate
+      old message/field/enum & start using new one.  If deprecated message
+      is no longer used in code make sure to communicate this to QA.
+   c) Prefer 3-stage migrations if possible: add new message/enum/field & start
+      sending it, make sure QA has switched to new message/enum/field, remove old
+      message/enum/field.
+   Fields should start out required unless they are optional in the code.  They should
+   become optional when deprecated (make sure to update QA automation first to expect the
+   field to be optional) or removed.  Make sure to never re-use field ids unless
+   the field is being resurrected.
+ */
+syntax = "proto2";
+//package audiowear;
+package apollo.lib.apollo_dev_util_lib.proto;
+import "nanopb.proto";
+//import "third_party/nanopb/nanopb.proto";
+
+
+option java_package = "com.google.android.bisto.nano";
+option java_outer_classname = "ApolloQA";
+
+enum ApolloQAMessageType {
+  TRACE = 1;
+  GET_VER_RESPONSE = 2;
+  GET_CODEC_RESPONSE = 3;
+  GET_DSP_STATUS_RESPONSE = 4;
+  FACTORY_PLAY_SOUND = 5;
+  FACTORY_INFO_REQUEST = 6;
+  FACTORY_INFO_RESPONSE = 7;
+}
+enum TraceId {
+  // data[0] = partition# erased.
+  OTA_ERASE_PARTITION = 1;
+  // data[0] = partition# we will write to.
+  // data[1] = expected length we will write to partition
+  OTA_START_PARTITION_WRITE = 2;
+  // data[0] = partition# written
+  // data[1] = actual written length
+  OTA_FINISHED_PARTITION_WRITE = 3;
+  // our custom signature validation has begun
+  OTA_SIGNATURE_START = 4;
+  // our custom signature validation rejected the image
+  OTA_SIGNATURE_FAILURE = 5;
+  // triggering CSR to reboot & apply DFU
+  OTA_TRIGGERING_LOADER = 6;
+  // the CSR loader rejected the image
+  OTA_LOADER_VERIFY_FAILED = 7;
+  // progress update.
+  // data[0] = num bytes received
+  // data[1] = num bytes expected
+  OTA_PROGRESS = 8;
+  OTA_ABORTED = 9;
+  // up to 10: reserved for OTA
+  // data[0] = AvrcpPlayStatus as integer
+  AVRCP_PLAY_STATUS_CHANGE = 10;
+  /* data[0] = new volume level (int16 stored in uint32)
+     data[1] = new volume level in dB (int16 stored in uint32)
+     data[2] = previous volume level (int16 stored in uint32)
+     easy conversion in python:
+       new_volume = ctpyes.c_short(ctypes.c_uint(data[0]).value).value
+       new_volume_db = ctpyes.c_short(ctypes.c_uint(data[1]).value).value
+  */
+  VOLUME_CHANGE = 11;
+  /* data[0] = entry number of command */
+  COMMANDER_RECV_COMMAND = 12;
+  COMMANDER_FINISH_COMMAND = 13;
+  /* currently no information about the rejected command */
+  COMMANDER_REJECT_COMMAND = 14;
+}
+/* Note: FWD_SEEK & REV_SEEK are bit-wise or'ed into the status.
+   Use SEEK_MASK first to read the seek or mask it out to get the other
+   states).  Do not & with individual states for comparison as aside from
+   seek the other states are not a bitwise-mask.
+*/
+enum AvrcpPlayStatus {
+  STOPPED = 0;
+  PLAYING = 1;
+  PAUSED = 2;
+  FWD_SEEK = 8;
+  REV_SEEK = 16;
+  ERROR = 5;
+  /* & this with the status to compare against FWD_SEEK/REV_SEEK.
+     & with the complement of this value to get the other states */
+  SEEK_MASK = 24;
+}
+/* These messages are internal trace-points for QA to do whitebox validation.
+   However, developers should feel free to remove trace-points if they
+   no longer make sense (but communicate to QA to prep this ahead-of-time). */
+message ApolloQATrace {
+  // all messages should have a timestamp field and it will get auto-populated
+  // (no need to set it at the call-site).
+  required uint32 timestamp = 1;
+  // this is the event that occured internally
+  required TraceId id = 2;
+  // this is some optional data that depends on the traceid.
+  // if not documented then no fields will be written.
+  repeated uint32 data = 3 [packed = true, (nanopb).max_count = 5];
+}
+enum PreviousBootStatus {
+  OTA_SUCCESS = 1; /* previous boot OK */
+  OTA_ERROR = 2; /* previous OTA failed */
+}
+//Next ID: 10
+message ApolloQAGetVerResponse {
+  required uint32 timestamp = 1;
+  required uint32 csr_fw_version = 2; // not implemented for now
+  required bool csr_fw_debug_build = 3; // not implemented for now
+  required uint32 vm_build_number = 4;
+  required bool vm_debug_build = 5;
+  required uint32 psoc_version = 6;
+  // the build label sent to AGSA. This should just be an amalgum of the broken-down
+  // info above. Aside from X.Y.Z prefix, do not parse this for anything as it is
+  // free-form text.
+  required string build_label = 7 [(nanopb).max_size = 32];
+  // if not set then info wasn't available.
+  optional PreviousBootStatus last_ota_status = 8;
+  required uint32 charger_version = 9;
+  optional uint32 expected_psoc_version = 10;
+}
+enum ApolloQAA2dpCodec {
+  AAC = 1;
+  SBC = 2;
+}
+message ApolloQAGetCodecResponse {
+  required uint32 timestamp = 1;
+  // if not set then unknown codec (error).
+  optional ApolloQAA2dpCodec codec = 2;
+}
+enum SinkState {
+  LIMBO = 0;
+  CONNECTABLE = 1;
+  DISCOVERABLE = 2;
+  CONNECTED = 3;
+  OUTGOING_CALLS_ESTABLISH = 4;
+  INCOMING_CALLS_ESTABLISH = 5;
+  ACTIVE_CALL_SCO = 6;
+  TEST_MODE = 7;
+  THREE_WAY_CALL_WAITING = 8;
+  THREE_WAY_CALL_ON_HOLD = 9;
+  THREE_WAY_MULTICALL = 10;
+  INCOMING_CALL_ON_HOLD = 11;
+  ACTIVE_CALL_NO_SCO = 12;
+  A2DP_STREAMING = 13;
+  DEVICE_LOW_BATTERY = 14;
+}
+message ApolloQAGetDspStatusResponse {
+  required uint32 timestamp = 1;
+  required bool is_dsp_loaded = 2;
+  required SinkState sink_state = 3;
+  /**
+   * This is a bit-wise mask.
+   * see AudioWearFeatureBits audiowear_plugin_state.h
+   * for the definition.
+   */
+  required uint32 features_active = 4;
+}
+message ApolloQAFactoryPlaySound {
+  enum PromptType {
+    PROMPT_TYPE_BT_CONNECTED = 1;
+    PROMPT_TYPE_IN_EAR = 2;
+  }
+  required PromptType prompt = 1;
+}
+message ApolloQAFactoryInfoRequest {
+}
+message ApolloQAFactoryInfoResponse {
+  required uint32 timestamp = 1;
+  optional int32 crystal_trim = 2 [(nanopb).int_size = IS_16];
+  optional bool crash_dump_exists = 3;
+  optional bool is_developer_mode_enabled = 4;
+  optional bool is_always_connected = 5;
+  optional uint32 hwid = 6;
+}

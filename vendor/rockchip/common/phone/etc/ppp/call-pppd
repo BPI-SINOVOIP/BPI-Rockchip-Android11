@@ -1,0 +1,34 @@
+#!/system/bin/sh
+# An unforunate wrapper script 
+# so that the exit code of pppd may be retrieved
+
+
+#PPPD_PID=""
+PPPD_EXIT=""
+
+/system/bin/setprop "net.gprs.ppp-exit" ""
+
+/system/bin/log -t pppd "Starting pppd"
+
+/system/bin/log -t pppd "PARAM1: $1"
+/system/bin/log -t pppd "PARAM2: $2"
+/system/bin/log -t pppd "PARAM3: $3"
+/system/bin/log -t pppd "PARAM4: $4"
+/system/bin/log -t pppd "PARAM5: $5"
+
+if [ $# -lt 6 ] ; then
+
+/system/bin/pppd $1 debug defaultroute noauth nodetach nocrtscts novj noipdefault usepeerdns user "$2" password "$3" connect "$4" disconnect "$5"
+
+else
+
+/system/bin/log -t pppd "PARAM6: $6"
+/system/bin/pppd $1 debug defaultroute noauth nodetach nocrtscts $2 noipdefault usepeerdns user "$3" password "$4" connect "$5" disconnect "$6"
+fi
+PPPD_EXIT=$?
+#PPPD_PID=$!
+
+#/system/bin/log -t pppd "pppd pid: $PPPD_PID"
+/system/bin/log -t pppd "pppd exited with $PPPD_EXIT"
+
+/system/bin/setprop "net.gprs.ppp-exit" "$PPPD_EXIT"

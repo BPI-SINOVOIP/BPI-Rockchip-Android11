@@ -1,0 +1,33 @@
+package rockchip.hardware.neuralnetworks@1.0;
+
+import ILoadModelCallback;
+import IGetResultCallback;
+
+interface IRKNeuralnetworks {
+    @entry
+    @exit
+    @callflow(next={"*"})
+    rknnInit(RKNNModel model, uint32_t size, uint32_t flag) generates (ErrorStatus status, RKNNContext context);
+
+    @callflow(next={"*"})
+    rknnDestory(RKNNContext context) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnQuery(RKNNContext context, RKNNQueryCmd cmd, memory info, uint32_t size) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnInputsSet(RKNNContext context, Request request) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnRun(RKNNContext context, RKNNRunExtend extend) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnOutputsGet(RKNNContext context, Response response, RKNNOutputExtend extend) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnOutputsRelease(RKNNContext context, Response response) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnDestoryMemory(RKNNContext context, RKNNTensorMemory mem) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnSetIOMem(RKNNContext context, RKNNTensorMemory mem, RKNNTensorAttr attr) generates (ErrorStatus status);
+    @callflow(next={"*"})
+    rknnCreateMem(RKNNContext context, uint32_t size) generates (ErrorStatus status, RKNNTensorMemory mem);
+
+    // set callback for clients.
+    registerCallback(ILoadModelCallback loadCallback, IGetResultCallback getCallback);
+};

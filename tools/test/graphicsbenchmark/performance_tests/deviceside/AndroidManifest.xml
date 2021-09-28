@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.game.qualification.device">
+    <uses-sdk android:minSdkVersion="14" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <instrumentation
+      android:name="androidx.test.runner.AndroidJUnitRunner"
+      android:targetPackage="com.android.game.qualification.device" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+    </application>
+</manifest>

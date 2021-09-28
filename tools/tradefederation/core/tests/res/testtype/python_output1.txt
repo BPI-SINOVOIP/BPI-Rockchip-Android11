@@ -1,0 +1,59 @@
+test_help (__main__.CommandlineTest)
+Make sure we get _something_ out of help. ... ok
+test_tcpip_error_messages (__main__.CommandlineTest)
+Make sure 'adb tcpip' parsing is sane. ... ok
+test_version (__main__.CommandlineTest)
+Get a version number out of the output of adb. ... ok
+test_already_connected (__main__.ConnectionTest)
+Ensure that an already-connected device stays connected. ... ok
+test_connect_ipv4_ipv6 (__main__.ConnectionTest)
+Ensure that `adb connect localhost:1234` will try both IPv4 and IPv6. ... ok
+test_reconnect (__main__.ConnectionTest)
+Ensure that a disconnected device reconnects. ... ok
+test_disconnect (__main__.DisconnectionTest)
+Ensure that `adb disconnect` takes effect immediately. ... FAIL
+test_emu_kill (__main__.EmulatorTest)
+Ensure that adb emu kill works. ... ok
+test_emulator_connect (__main__.EmulatorTest)
+Ensure that the emulator can connect. ... ERROR
+test_resume_usb_kick (__main__.PowerTest)
+Resuming from sleep/hibernate should kick USB devices. ... skipped 'requires Windows'
+test_handle_inheritance (__main__.ServerTest)
+Test that launch_server() does not inherit handles. ... /usr/lib/python3.4/unittest/case.py:577: ResourceWarning: unclosed file <_io.BufferedReader name=8>
+  testMethod()
+/usr/lib/python3.4/unittest/case.py:577: ResourceWarning: unclosed file <_io.BufferedReader name=10>
+  testMethod()
+/usr/lib/python3.4/unittest/case.py:577: ResourceWarning: unclosed file <_io.BufferedWriter name=7>
+  testMethod()
+ok
+
+======================================================================
+ERROR: test_emulator_connect (__main__.EmulatorTest)
+Ensure that the emulator can connect.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/Soong.python_jxrjVK/test_adb.py", line 374, in test_emulator_connect
+    sock.sendall(b"%04x%s" % (len(command), command))
+TypeError: unsupported operand type(s) for %: 'bytes' and 'tuple'
+
+======================================================================
+FAIL: test_disconnect (__main__.DisconnectionTest)
+Ensure that `adb disconnect` takes effect immediately.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/Soong.python_jxrjVK/test_adb.py", line 481, in test_disconnect
+    self.assertEqual(_devices(server_port), [[device_name, "offline"]])
+AssertionError: Lists differ: [] != [['localhost:35640', 'offline']]
+
+Second list contains 1 additional elements.
+First extra element 0:
+['localhost:35640', 'offline']
+
+- []
++ [['localhost:35640', 'offline']]
+
+----------------------------------------------------------------------
+Ran 11 tests in 10.314s
+
+FAILED (failures=1, errors=1, skipped=1)
+

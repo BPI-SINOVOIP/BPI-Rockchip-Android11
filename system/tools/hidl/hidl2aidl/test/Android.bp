@@ -1,0 +1,75 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+genrule {
+    name: "hidl2aidl_test_gen_aidl",
+    tools: ["hidl2aidl"],
+    cmd: "$(location hidl2aidl) -o $(genDir)/ " +
+        "-rhidl2aidl:system/tools/hidl/hidl2aidl/test " +
+        "hidl2aidl@1.0 hidl2aidl@2.0",
+    required: ["android.hidl.base@1.0"],
+    srcs: [
+        "1.0/IBar.hal",
+        "1.0/IFoo.hal",
+        "1.0/types.hal",
+        "1.1/IFoo.hal",
+        "1.1/types.hal",
+        "2.0/IFoo.hal",
+    ],
+    out: [
+        "hidl2aidl/IBar.aidl",
+        "hidl2aidl/IBarInner.aidl",
+        "hidl2aidl/IFoo.aidl",
+        "hidl2aidl/IFooBigStruct.aidl",
+        "hidl2aidl/OnlyIn10.aidl",
+        "hidl2aidl/OnlyIn11.aidl",
+        "hidl2aidl/Outer.aidl",
+        "hidl2aidl/OuterInner.aidl",
+        "hidl2aidl/OverrideMe.aidl",
+        "hidl2aidl/Value.aidl",
+        "hidl2aidl2/IFoo.aidl",
+    ],
+}
+
+aidl_interface {
+    name: "hidl2aidl_test_gen",
+    unstable: true,
+    srcs: [":hidl2aidl_test_gen_aidl"],
+}
+
+cc_test_library {
+    name: "hidl2aidl_test_comp_cc",
+    srcs: [
+        "cpp_test_compile.cpp",
+        "ndk_test_compile.cpp",
+    ],
+    shared_libs: [
+        "hidl2aidl_test_gen-cpp",
+        "hidl2aidl_test_gen-ndk_platform",
+        "libbinder",
+        "libbinder_ndk",
+        "libutils",
+    ],
+    gtest: false,
+}
+
+phony {
+    name: "hidl2aidl_test",
+    required: [
+        "hidl2aidl_test_comp_cc",
+        "hidl2aidl_test_gen",
+    ],
+}

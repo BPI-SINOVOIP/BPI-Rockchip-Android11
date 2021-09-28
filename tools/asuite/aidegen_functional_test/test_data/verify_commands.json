@@ -1,0 +1,80 @@
+{
+    "aidegen tradefed": [
+        "aidegen_main.main(['tradefed', '-n', '-v'])"
+    ],
+    "aidegen tools/tradefederation/core": [
+        "aidegen_main.main(['tools/tradefederation/core', '-n', '-v'])"
+    ],
+    "cd tools/tradefederation/core;aidegen": [
+        "os.chdir('tools/tradefederation/core')",
+        "aidegen_main.main(['-n', '-v'])",
+        "os.chdir('../../..')"
+    ],
+    "cd tools/tradefederation;aidegen": [
+        "os.chdir('tools/tradefederation')",
+        "aidegen_main.main(['-n', '-v'])",
+        "os.chdir('../..')"
+    ],
+    "aidegen tradefed cts-tradefed": [
+        "aidegen_main.main(['tradefed', 'cts-tradefed', '-n', '-v'])"
+    ],
+    "aidegen tradefed test/suite_harness/tools/cts-tradefed": [
+        "aidegen_main.main(['tradefed', 'test/suite_harness/tools/cts-tradefed', '-n', '-v'])"
+    ],
+    "aidegen tools/tradefederation/core test/suite_harness/tools/cts-tradefed": [
+        "aidegen_main.main(['tools/tradefederation/core', 'test/suite_harness/tools/cts-tradefed', '-n', '-v'])"
+    ],
+    "aidegen cts frameworks/base frameworks/native": [
+        "aidegen_main.main(['cts', 'frameworks/base', 'frameworks/native', '-n', '-v'])"
+    ],
+    "aidegen nonexist/lib/path": [
+        "aidegen_main.main(['nonexist/lib/path', '-n', '-v'])"
+    ],
+    "aidegen no_module_defined": [
+        "aidegen_main.main(['no_module_defined', '-n', '-v'])"
+    ],
+    "aidegen tradefed -p /opt/": [
+        "aidegen_main.main(['tradefed', '-p', '/opt/', '-n', '-v'])"
+    ],
+    "aidegen tradefed -p /home/": [
+        "aidegen_main.main(['tradefed', '-p', '/home/', '-n', '-v'])"
+    ],
+    "aidegen tradefed -i s": [
+        "aidegen_main.main(['tradefed', '-i', 's', '-n', '-v'])"
+    ],
+    "aidegen tradefed -i e": [
+        "aidegen_main.main(['tradefed', '-i', 'e', '-n', '-v'])"
+    ],
+    "aidegen tradefed -s": [
+        "aidegen_main.main(['tradefed', '-s', '-n', '-v'])"
+    ],
+    "aidegen(whole aosp)": [
+        "aidegen_main.main(['-n', '-v'])"
+    ],
+    "aidegen(whole aosp) with -a": [
+        "aidegen_main.main(['-n', '-v', '-a'])"
+    ],
+    "aidegen(whole aosp) with tools/tradefederation and -a": [
+        "aidegen_main.main(['tools/tradefederation/core', '-n', '-v', '-a'])"
+    ],
+    "aidegen(whole aosp) in local with -a": [
+        "os.chdir('tools/tradefederation')",
+        "aidegen_main.main(['-n', '-v', '-a'])",
+        "os.chdir('../..')"
+    ],
+    "aidegen frameworks/native -i c": [
+        "aidegen_main.main(['frameworks/native', '-i', 'c', '-n'])"
+    ],
+    "aidegen framework -i v": [
+        "aidegen_main.main(['framework', '-i', 'v', '-n'])"
+    ],
+    "aidegen Settings framework -i v": [
+        "aidegen_main.main(['Settings', 'framework', '-i', 'v', '-n'])"
+    ],
+    "aidegen framework exclude paths": [
+        "aidegen_main.main(['framework', '-e', 'frameworks/base/test-mock', 'frameworks/base/test-runner', '-n'])"
+    ],
+    "aidegen -h": [
+        "aidegen_main.main(['-h'])"
+    ]
+}

@@ -1,0 +1,24 @@
+[MESSAGES CONTROL]
+
+disable=
+    relative-import,
+    too-few-public-methods,
+    fixme,
+    too-many-instance-attributes,
+    too-many-arguments
+
+[BASIC]
+
+# Acloud uses PascalCase for functions/methods except for test methods which use
+# camelCase.
+method-rgx=[A-Z_][a-zA-Z0-9]{2,30}$|(__[a-z][a-zA-Z0-9_]+__)$|test[A-Z_][a-zA-Z0-9]{2,30}$
+function-rgx=[A-Z_][a-zA-Z0-9]{2,30}$|(__[a-z][a-zA-Z0-9_]+__)$
+
+# Good variable names which should always be accepted, separated by a comma
+good-names=e, f, logger, ip, main
+
+[SIMILARITIES]
+ignore-imports=yes
+
+[Master]
+init-hook='import sys; sys.path.append(os.path.join(os.path.expandvars("$ANDROID_BUILD_TOP"), "external", "python", "mock"))'

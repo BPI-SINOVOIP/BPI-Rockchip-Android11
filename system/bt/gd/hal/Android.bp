@@ -1,0 +1,41 @@
+filegroup {
+    name: "BluetoothHalSources",
+    srcs: [
+        "snoop_logger.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothHalSources_hci_rootcanal",
+    srcs: [
+        "hci_hal_host_rootcanal.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothHalSources_hci_android_hidl",
+    srcs: [
+        "hci_hal_android_hidl.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothHalTestSources_hci_rootcanal",
+    srcs: [
+        "hci_hal_host_rootcanal_test.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothHalTestSources_hci_android_hidl",
+    srcs: [
+        "hci_hal_android_hidl_test.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothFacade_hci_hal",
+    srcs: [
+        "facade.cc",
+    ],
+}

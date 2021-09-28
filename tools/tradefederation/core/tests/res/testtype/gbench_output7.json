@@ -1,0 +1,47 @@
+{
+  "context": {
+    "date": "2016-03-07 10:59:01",
+    "num_cpus": 48,
+    "mhz_per_cpu": 2601,
+    "cpu_scaling_enabled": true,
+    "library_build_type": "debug"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_one",
+      "iterations": 109451958,
+      "real_time": 5,
+      "cpu_time": 5
+    },
+    {
+      "name": "BM_two",
+      "iterations": 50906784,
+      "real_time": 1,
+      "cpu_time": 11
+    },
+    {
+      "name": "BM_string_strlen/64",
+      "iterations": 10499948,
+      "real_time": 60,
+      "cpu_time": 60,
+      "bytes_per_second": 1061047935
+    },
+    {
+      "repetition_index": 0,
+      "cpu_time": 0.0,
+      "repetitions": 0,
+      "name": "BpfBenchMark/WaitForRcu/1",
+      "error_message": "synchronizeKernelRCU() failed with errno=13",
+      "run_type": "iteration",
+      "testName": "BpfBenchMark/WaitForRcu/1",
+      "className": "bpf_benchmark",
+      "error_occurred": true,
+      "threads": 1,
+      "end_time": 1568663657132,
+      "iterations": 1,
+      "run_name": "BpfBenchMark/WaitForRcu/1",
+      "real_time": 0.0,
+      "time_unit": "ns"
+    }
+  ]
+}

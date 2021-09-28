@@ -1,0 +1,49 @@
+// APCT build target for metrics tests
+
+cc_benchmark {
+    name: "netd_benchmark",
+    defaults: ["netd_defaults"],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "liblog",
+        "libnetd_client",
+        "libnetdutils",
+        "libutils",
+    ],
+    static_libs: [
+        "libnetd_test_dnsresponder_ndk",
+        "dnsresolver_aidl_interface-unstable-ndk_platform",
+        "netd_aidl_interface-cpp", //  system/netd/server/UidRanges.h
+        "netd_aidl_interface-ndk_platform",
+        "netd_event_listener_interface-ndk_platform",
+    ],
+    aidl: {
+        include_dirs: ["system/netd/server/binder"],
+    },
+    include_dirs: [
+        "system/netd/include",
+        "system/netd/client",
+        "system/netd/server",
+        "system/netd/server/binder",
+    ],
+    srcs: [
+        "main.cpp",
+        "connect_benchmark.cpp",
+        "dns_benchmark.cpp",
+    ],
+}
+
+cc_benchmark {
+    name: "bpf_benchmark",
+    defaults: ["netd_defaults"],
+    require_root: true,
+    shared_libs: [
+        "libbase",
+        "libbpf_android",
+        "libnetdutils",
+    ],
+    srcs: [
+        "bpf_benchmark.cpp",
+    ],
+}

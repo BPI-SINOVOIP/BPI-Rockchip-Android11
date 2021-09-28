@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Google Inc. All Rights Reserved -->
+<configuration description="Configuration to setup and then test apps." >
+    <test class="com.android.scenario.AppSetup" />
+    <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
+        <option name="runner" value="androidx.test.runner.AndroidJUnitRunner" />
+        <option name="package" value="android.platform.test.scenario" />
+    </test>
+</configuration>

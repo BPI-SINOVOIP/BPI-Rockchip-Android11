@@ -1,0 +1,9 @@
+cc_prebuilt_library_shared {
+    name: "librtopus",
+    compile_multilib: "32",
+    strip: {
+        none: true,
+    },
+    srcs: ["librtopus.so"],
+    check_elf_files: false,
+}

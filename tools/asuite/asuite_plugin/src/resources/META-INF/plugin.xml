@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>com.google.asuite_plugin</id>
+    <name>Asuite</name>
+    <vendor>Google</vendor>
+    <description>Asuite plugin for developing Android project.</description>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType implementation="com.android.atest.run.AtestConfigurationType"/>
+        <toolWindow id="Atest ToolWindow" secondary="false" anchor="right" icon="/atest.png"
+                    factoryClass="com.android.atest.toolWindow.AtestToolWindowFactory"/>
+    </extensions>
+
+    <actions>
+        <action id="LaunchAtestTW"
+                class="com.android.atest.AtestToolWindowAction"
+                text="Atest tool window"
+                icon="/atest.png">
+            <add-to-group group-id="ToolbarRunGroup" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

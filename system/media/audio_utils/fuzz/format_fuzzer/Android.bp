@@ -1,0 +1,11 @@
+cc_fuzz {
+    name: "format_fuzzer",
+    srcs: [
+        "format_fuzzer.cpp",
+    ],
+    static_libs: [
+        "libaudioutils",
+        "liblog",
+    ],
+}
+

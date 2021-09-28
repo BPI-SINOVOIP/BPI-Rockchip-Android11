@@ -1,0 +1,286 @@
+cc_defaults {
+    name: "vold_default_flags",
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-Wno-missing-field-initializers",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+
+    clang: true,
+
+    tidy: true,
+    tidy_checks: [
+        "-*",
+        "cert-*",
+        "clang-analyzer-security*",
+        "android-*",
+    ],
+    tidy_flags: [
+        "-warnings-as-errors=clang-analyzer-security*,cert-*",
+    ],
+}
+
+cc_defaults {
+    name: "vold_default_libs",
+
+    static_libs: [
+        "libasync_safe",
+        "libavb",
+        "libbootloader_message",
+        "libdm",
+        "libext2_uuid",
+        "libfec",
+        "libfec_rs",
+        "libfs_avb",
+        "libfs_mgr",
+        "libscrypt_static",
+        "libsquashfs_utils",
+        "libvold_binder",
+    ],
+    shared_libs: [
+        "android.hardware.keymaster@3.0",
+        "android.hardware.keymaster@4.0",
+        "android.hardware.keymaster@4.1",
+        "android.hardware.boot@1.0",
+        "libbase",
+        "libbinder",
+        "libcrypto",
+        "libcrypto_utils",
+        "libcutils",
+        "libdiskconfig",
+        "libext4_utils",
+        "libf2fs_sparseblock",
+        "libhardware",
+        "libhardware_legacy",
+        "libincfs",
+        "libhidlbase",
+        "libkeymaster4support",
+        "libkeymaster4_1support",
+        "libkeyutils",
+        "liblog",
+        "liblogwrap",
+        "libselinux",
+        "libsysutils",
+        "libutils",
+    ],
+}
+
+cc_library_static {
+    name: "libvold_binder",
+    defaults: ["vold_default_flags"],
+
+    srcs: [
+        ":vold_aidl",
+    ],
+    shared_libs: [
+        "libbinder",
+        "libutils",
+    ],
+    aidl: {
+        local_include_dirs: ["binder"],
+        include_dirs: [
+            "frameworks/native/aidl/binder",
+            "frameworks/base/core/java",
+        ],
+        export_aidl_headers: true,
+    },
+    whole_static_libs: [
+        "libincremental_aidl-cpp",
+    ],
+}
+
+cc_library_headers {
+    name: "libvold_headers",
+    recovery_available: true,
+    export_include_dirs: ["."],
+}
+
+// Static library factored out to support testing
+cc_library_static {
+    name: "libvold",
+    defaults: [
+        "vold_default_flags",
+        "vold_default_libs",
+    ],
+
+    srcs: [
+        "AppFuseUtil.cpp",
+        "Benchmark.cpp",
+        "CheckEncryption.cpp",
+        "Checkpoint.cpp",
+        "CryptoType.cpp",
+        "Devmapper.cpp",
+        "EncryptInplace.cpp",
+        "FileDeviceUtils.cpp",
+        "FsCrypt.cpp",
+        "IdleMaint.cpp",
+        "KeyBuffer.cpp",
+        "KeyStorage.cpp",
+        "KeyUtil.cpp",
+        "Keymaster.cpp",
+        "Loop.cpp",
+        "MetadataCrypt.cpp",
+        "MoveStorage.cpp",
+        "NetlinkHandler.cpp",
+        "NetlinkManager.cpp",
+        "Process.cpp",
+        "ScryptParameters.cpp",
+        "Utils.cpp",
+        "VoldNativeService.cpp",
+        "VoldNativeServiceValidation.cpp",
+        "VoldUtil.cpp",
+        "VolumeManager.cpp",
+        "cryptfs.cpp",
+        "fs/Exfat.cpp",
+        "fs/Ext4.cpp",
+        "fs/F2fs.cpp",
+        "fs/Vfat.cpp",
+        "fs/Ntfs.cpp",
+        "model/Disk.cpp",
+        "model/EmulatedVolume.cpp",
+        "model/ObbVolume.cpp",
+        "model/PrivateVolume.cpp",
+        "model/PublicVolume.cpp",
+        "model/StubVolume.cpp",
+        "model/VolumeBase.cpp",
+        "model/VolumeEncryption.cpp",
+    ],
+    product_variables: {
+        arc: {
+            exclude_srcs: [
+                "model/ObbVolume.cpp",
+            ],
+            static_libs: [
+                "arc_services_aidl",
+                "libarcobbvolume",
+            ],
+        },
+        debuggable: {
+            cppflags: ["-D__ANDROID_DEBUGGABLE__"],
+        },
+    },
+    shared_libs: [
+        "android.hardware.health.storage@1.0",
+    ],
+    whole_static_libs: [
+        "com.android.sysprop.apex",
+        "libc++fs"
+    ],
+}
+
+cc_binary {
+    name: "vold",
+    defaults: [
+        "vold_default_flags",
+        "vold_default_libs",
+    ],
+
+    srcs: ["main.cpp"],
+    static_libs: ["libvold"],
+    product_variables: {
+        arc: {
+            static_libs: [
+                "arc_services_aidl",
+                "libarcobbvolume",
+            ],
+        },
+    },
+    init_rc: [
+        "vold.rc",
+        "wait_for_keymaster.rc",
+    ],
+
+    required: [
+        "mke2fs",
+        "vold_prepare_subdirs",
+        "wait_for_keymaster",
+    ],
+
+    shared_libs: [
+        "android.hardware.health.storage@1.0",
+    ],
+}
+
+cc_binary {
+    name: "vdc",
+    defaults: ["vold_default_flags"],
+
+    srcs: ["vdc.cpp"],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "libutils",
+    ],
+    static_libs: [
+        "libvold_binder",
+    ],
+    init_rc: ["vdc.rc"],
+}
+
+cc_binary {
+    name: "wait_for_keymaster",
+    defaults: ["vold_default_flags"],
+
+    srcs: [
+        "wait_for_keymaster.cpp",
+        "Keymaster.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+
+        "android.hardware.keymaster@3.0",
+        "android.hardware.keymaster@4.0",
+        "android.hardware.keymaster@4.1",
+        "libhardware",
+        "libhardware_legacy",
+        "libhidlbase",
+        "libkeymaster4support",
+        "libkeymaster4_1support",
+        "libutils",
+    ],
+}
+
+cc_binary {
+    name: "secdiscard",
+    defaults: ["vold_default_flags"],
+
+    srcs: [
+        "FileDeviceUtils.cpp",
+        "secdiscard.cpp",
+    ],
+    shared_libs: ["libbase"],
+}
+
+cc_binary {
+    name: "vold_prepare_subdirs",
+    defaults: ["vold_default_flags"],
+
+    srcs: ["vold_prepare_subdirs.cpp", "Utils.cpp"],
+    shared_libs: [
+        "libbase",
+        "libcutils",
+        "liblogwrap",
+        "libselinux",
+        "libutils",
+    ],
+    static_libs: [
+        "libvold_binder",
+    ],
+}
+
+filegroup {
+    name: "vold_aidl",
+    srcs: [
+        "binder/android/os/IVold.aidl",
+        "binder/android/os/IVoldListener.aidl",
+        "binder/android/os/IVoldMountCallback.aidl",
+        "binder/android/os/IVoldTaskListener.aidl",
+    ],
+    path: "binder",
+}

@@ -1,0 +1,41 @@
+test_help (__main__.CommandlineTest)
+Make sure we get _something_ out of help. ... ok
+test_tcpip_error_messages (__main__.CommandlineTest)
+Make sure 'adb tcpip' parsing is sane. ... ok
+test_version (__main__.CommandlineTest)
+Get a version number out of the output of adb. ... ok
+test_already_connected (__main__.ConnectionTest)
+Ensure that an already-connected device stays connected. ... ok
+test_connect_ipv4_ipv6 (__main__.ConnectionTest)
+Ensure that `adb connect localhost:1234` will try both IPv4 and IPv6. ... ok
+test_reconnect (__main__.ConnectionTest)
+Ensure that a disconnected device reconnects. ... error: device offline
+ERROR
+test_disconnect (__main__.DisconnectionTest)
+Ensure that `adb disconnect` takes effect immediately. ... ok
+test_emu_kill (__main__.EmulatorTest)
+Ensure that adb emu kill works. ... ok
+test_emulator_connect (__main__.EmulatorTest)
+Ensure that the emulator can connect. ... ok
+test_resume_usb_kick (__main__.PowerTest)
+Resuming from sleep/hibernate should kick USB devices. ... skipped 'requires Windows'
+test_handle_inheritance (__main__.ServerTest)
+Test that launch_server() does not inherit handles. ... ok
+
+======================================================================
+ERROR: test_reconnect (__main__.ConnectionTest)
+Ensure that a disconnected device reconnects.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/Soong.python_9InCfP/test_adb.py", line 439, in test_reconnect
+    "get-state"])
+  File "/usr/lib/python3.5/subprocess.py", line 316, in check_output
+    **kwargs).stdout
+  File "/usr/lib/python3.5/subprocess.py", line 398, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['adb', '-s', 'localhost:36551', 'get-state']' returned non-zero exit status 1
+
+----------------------------------------------------------------------
+Ran 11 tests in 27.353s
+
+FAILED (errors=1, skipped=1)

@@ -1,0 +1,18 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="attr_group_simple" elementFormDefault="qualified">
+    <xs:attributeGroup name="address">
+        <xs:attribute name="State" type="xs:string"/>
+        <xs:attribute name="city" type="xs:string"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="homeAddress">
+        <xs:attributeGroup ref="address"/>
+        <xs:attribute name="road" type="xs:string"/>
+    </xs:attributeGroup>
+    <xs:element name="Student">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Name" type="xs:string"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="homeAddress"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package bluetooth.hci.facade;
+
+import "google/protobuf/empty.proto";
+
+service LeScanningManagerFacade {
+  rpc StartScan(google.protobuf.Empty) returns (stream LeReportMsg) {}
+  rpc StopScan(google.protobuf.Empty) returns (ScanStoppedMsg) {}
+}
+
+message LeReportMsg {
+  bytes event = 1;
+}
+
+message ScanStoppedMsg {}

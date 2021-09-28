@@ -1,0 +1,19 @@
+{
+  "AmSlam": { "class": ["APPS"],  "path": ["foo/bar/AmSlam"],  "tags": ["tests"],  "installed": ["out/target/product/generic/data/app/AmSlam/AmSlam.apk"], "module_name": "AmSlam" },
+  "CtsJankDeviceTestCases": { "class": ["APPS"],  "path": ["foo/bar/jank"],  "tags": ["optional"],  "installed": ["out/target/product/generic/data/app/CtsJankDeviceTestCases/CtsJankDeviceTestCases.apk"], "module_name": "CtsJankDeviceTestCases" },
+  "CtsUiDeviceTestCases": { "class": ["APPS"],  "path": ["tf/core/CtsUiDeviceTestCases"],  "tags": ["optional"],  "installed": ["out/target/product/generic/data/app/CtsUiDeviceTestCases/CtsUiDeviceTestCases.apk"], "module_name": "CtsJankDeviceTestCases" },
+  "VtsTarget": { "class": ["FAKE"],  "path": ["foo/bar/jank"],  "tags": ["optional"],  "installed": ["out/target/product/generic/VtsTarget"], "module_name": "VtsTarget" },
+  "google-tradefed": { "class": ["JAVA_LIBRARIES"],  "path": ["gtf/core"],  "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/google-tradefed.jar"], "module_name": "google-tradefed" },
+  "google-tradefed-contrib": { "class": ["JAVA_LIBRARIES"],  "path": ["gtf/contrib"],  "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/google-tradefed-contrib.jar"], "module_name": "google-tradefed-contrib" },
+  "tradefed": { "class": ["EXECUTABLES",  "JAVA_LIBRARIES"],  "path": ["tf/core"],  "tags": ["optional"],  "installed": ["out/host/linux-x86/bin/tradefed.sh",  "out/host/linux-x86/framework/tradefed.jar"], "module_name": "tradefed" },
+  "tradefed-contrib": { "class": ["JAVA_LIBRARIES"],  "path": ["tf/contrib"],  "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "tradefed-contrib" },
+  "module-no-path": { "class": ["JAVA_LIBRARIES"],  "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": ["module-no-path"] },
+  "module1": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "module1" },
+  "module2": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "module2" },
+  "multiarch1": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used2"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "multiarch1" },
+  "multiarch1_32": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used2"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "multiarch1" },
+  "multiarch2": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used2"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "multiarch2" },
+  "multiarch2_32": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used2"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "multiarch2" },
+  "multiarch3": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used2"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "multiarch3" },
+  "multiarch3_32": { "class": ["JAVA_LIBRARIES"],  "path": ["shared/path/to/be/used2"], "tags": ["optional"],  "installed": ["out/host/linux-x86/framework/tradefed-contrib.jar"], "module_name": "multiarch3_32" }
+}

@@ -1,0 +1,15 @@
+{
+    "_description": "This is a test configuration file for Wi-Fi P2p tests.",
+    "testbed":
+    [
+        {
+            "_description": "Wi-Fi P2P testbed: auto-detect all attached devices",
+            "name": "WifiP2pAllAttached",
+            "AndroidDevice": "*"
+        }
+    ],
+    "skip_read_factory_mac": 1,
+    "logpath": "~/logs",
+    "testpaths": ["./tools/test/connectivity/acts/tests/google/wifi/p2p"],
+    "adb_logcat_param": "-b all"
+}

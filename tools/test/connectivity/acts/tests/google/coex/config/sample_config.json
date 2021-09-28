@@ -1,0 +1,70 @@
+{ "_description": "This is test configuration file for Coex KPI Test.",
+"testbed":
+[
+{
+"_description": "A testbed with single android devices.",
+"name": "Coexkpi",
+"AndroidDevice": "<Android device serail number> ex: [HT76N1A00106]",
+//Access point info
+"AccessPoint": [{"ssh_config" : {"user":"root","host" : "<IP address of AP"}}],
+// Iperf client controller, this specifies where you want to run the iperf client
+// If local, specify it as "type":"local".
+"IPerfClient":[{"ssh_config":{"user":"<user name>","host":"<IP address of the client", "port":"<int>"}}],
+"RelayDevice":"<Path to relay.json file to fetch the information of relay device"
+}
+],
+
+"logpath": "logs/",
+"testpaths": "<Path of the test suite>",
+
+// Iperf related parameters
+"iperf":{
+	"port_1":"",
+	//port_2 should be specified for bidirectional cases.
+    "port_2":"",
+	//iperf duration
+	"duration": "<int>",
+	"tcp_window_size":"",
+	"udp_bandwidth":""},
+
+//Attenuation related parameters
+"test_params":{
+	"attenuation_start": "<int>",
+	"attenuation_stop": "<int>",
+	"attenuation_step": "<int>",
+	//fixed attenuation values for respective channels.
+	"fixed_attenuation": {"Channel": "<int Fixed attenuation>"},
+	"performance_result_path":"<Path to baseline values (.json file)>",
+	"failure_count_tolerance":1,
+    "pct_tolerance": "<int>",
+    "abs_tolerance": "<int>"
+},
+
+//Audio related paramters
+"audio_params":{
+	"channel": "<Int denoting mono/streo>",
+	"sample_rate":"<Int denoting smaple rate of audio>",
+	"chunk": "<Int>",
+	//Music record duration in seconds,
+	//this should be +5 seconds 'music play time'.
+	"record_duration": "<Int>",
+	//Duration for how many seconds music should be played,
+	//this should be +5 seconds of iperf_duration.
+	"music_play_time": "<Int>",
+	"input_device":"<input device name>"
+},
+
+//Access point related parameters
+"network":{
+	"SSID":"",
+	"password":"",
+	"security":"",
+	"channel":"<Int Channel>"},
+
+//Number of times a test case should run.
+"iterations":1,
+"required_devices":{"Relay_device":"<path for relay.json file>", "Android_device":["<list of Android device serial numbers>"]},
+"music_file":"<list of music file names>",
+"headset_mac_address" : "",
+"sim_conf_file":"simcard_list.json"
+}

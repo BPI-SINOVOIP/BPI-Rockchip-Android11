@@ -1,0 +1,70 @@
+syntax = "proto2";
+
+package chre_cross_validation_wifi;
+
+option java_package = "com.google.android.chre.nanoapp.proto";
+option java_outer_classname = "ChreCrossValidationWifi";
+
+enum MessageType {
+  // Reserved for corrupted messages
+  UNDEFINED = 0;
+
+  // H2C: Host informing nanoapp to start a new step
+  // Payload must be StepStartCommand Message
+  STEP_START = 1;
+
+  // C2H: Nanoapp informing host on the result of a step
+  // Payload must be chre_test_common::TestResult message.
+  // This will also include the final validation result if this is the step
+  // result for the VALIDATE step.
+  STEP_RESULT = 2;
+
+  // H2C: Host passing down wifi scan result data to CHRE to validate.
+  // There may be multiple messages with this type sent.
+  SCAN_RESULT = 3;
+
+  // C2H: Nanoapp informing host about the wifi capabilities it has.
+  // The payload must be a WifiCapabilities message.
+  WIFI_CAPABILITIES = 4;
+}
+
+enum Step {
+  // The initial step where no action is performed.
+  INIT = 0;
+  // The step where the nanoapp is configured to monitor for wifi scans.
+  SETUP = 1;
+  // The validate step where the data is gathered and compared.
+  VALIDATE = 2;
+  // The step where the wifi capabilities are gathered from the nanoapp.
+  CAPABILITIES = 3;
+}
+
+message StepStartCommand {
+  optional Step step = 1;
+}
+
+/*
+ * The fields that are common between the AP framework ScanResult object @
+ * //frameworks/base/wifi/java/android/net/wifi/ScanResult.java
+ * and the chreWifiScanResult in the WiFi CHRE API @
+ * //system/chre/chre_api/include/chre_api/chre/wifi.h
+ */
+message WifiScanResult {
+  // The name of the access point
+  optional string ssid = 1;
+  // The mac address of the access point
+  optional bytes bssid = 2;
+  // The total number of results that will be sent from AP.
+  optional uint32 totalNumResults = 3;
+  // The index of this result in relation to the entire set of results.
+  // [0 - totalNumResults)
+  optional uint32 resultIndex = 4;
+}
+
+/*
+ * The wifi capabilities listed in
+ * //system/chre/chre_api/include/chre_api/chre/wifi.h
+ */
+message WifiCapabilities {
+  optional uint32 wifiCapabilities = 1;
+}

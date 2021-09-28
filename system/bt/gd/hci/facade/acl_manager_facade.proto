@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package bluetooth.hci;
+
+import "google/protobuf/empty.proto";
+
+service AclManagerFacade {
+  rpc CreateConnection(ConnectionMsg) returns (stream ConnectionEvent) {}
+  rpc CancelConnection(ConnectionMsg) returns (google.protobuf.Empty) {}
+  rpc Disconnect(HandleMsg) returns (google.protobuf.Empty) {}
+  rpc AuthenticationRequested(HandleMsg) returns (google.protobuf.Empty) {}
+  rpc SendAclData(AclData) returns (google.protobuf.Empty) {}
+  rpc FetchAclData(google.protobuf.Empty) returns (stream AclData) {}
+  rpc FetchIncomingConnection(google.protobuf.Empty) returns (stream ConnectionEvent) {}
+}
+
+message HandleMsg {
+  uint32 handle = 1;
+}
+
+message ConnectionMsg {
+  uint32 address_type = 1;
+  bytes address = 2;
+}
+
+message ConnectionEvent {
+  bytes event = 1;
+}
+
+message AclData {
+  uint32 handle = 1;
+  bytes payload = 2;
+}

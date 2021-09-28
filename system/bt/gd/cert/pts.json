@@ -1,0 +1,34 @@
+
+{   "_description": "Bluetooth cert testing",
+    "testbed":
+    [
+        {
+            "_description": "PTS l2cap layer test",
+            "name": "PTSL2CAP",
+            "GdDevice":
+            [
+                {
+                    "grpc_port": "8899",
+                    "grpc_root_server_port": "8897",
+                    "signal_port": "8895",
+                    "label": "stack_under_test",
+                    "serial_number": "DUT",
+                    "cmd":
+                    [
+                        "adb",
+                        "-s",
+                        "$(serial_number)",
+                        "shell",
+                        "/system/bin/bluetooth_stack_with_facade",
+                        "--grpc-port=$(grpc_port)",
+                        "--root-server-port=$(grpc_root_server_port)",
+                        "--btsnoop=data/misc/bluetooth/logs/btsnoop_hci.log",
+                        "--signal-port=$(signal_port)"
+                    ]
+                }
+            ],
+            "pts_address": "PTS"
+        }
+    ],
+    "logpath": "/tmp/logs"
+}

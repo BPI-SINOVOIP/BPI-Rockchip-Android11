@@ -1,0 +1,8 @@
+cc_prebuilt_library_shared {
+    name: "libiconv",
+    compile_multilib: "32",
+
+    srcs: ["libiconv.so"],
+
+    check_elf_files: false,
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Google Inc. All Rights Reserved -->
+<!-- Runs commands in fastboot. -->
+<configuration description="Common template for running fastboot commands." >
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer" />
+</configuration>

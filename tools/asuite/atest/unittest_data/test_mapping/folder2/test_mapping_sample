@@ -1,0 +1,23 @@
+{
+  "presubmit": [
+    {
+      "name": "test5"
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "test6"
+    }
+  ],
+  "imports": [
+    {
+      "path": "../folder1"
+    },
+    {
+      "path": "../folder3/folder4"
+    },
+    {
+      "path": "../folder3/non-existing"
+    }
+  ]
+}

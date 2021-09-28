@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package chre_test_common;
+
+option java_package = "com.google.android.chre.nanoapp.proto";
+option java_outer_classname = "ChreTestCommon";
+
+// A message used to provide the test result.
+message TestResult {
+  enum Code {
+    PASSED = 0;
+    FAILED = 1;
+  }
+
+  optional Code code = 1 [default = FAILED];
+  optional bytes errorMessage = 2;
+}

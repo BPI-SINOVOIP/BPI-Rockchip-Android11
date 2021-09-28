@@ -1,0 +1,16 @@
+This tool converts carrier config and APNs from XML format to protobuf format.
+
+AOSP default carrier configs can be found in packages/apps/CarrierConfig,
+and APNs in device/sample/etc/apns-full-conf.xml.
+
+Usage:
+
+$ source build/envsetup.sh
+$ lunch foo_bar
+$ croot
+$ source <path>/main.sh
+
+The commands above build the tool from source code and run them.
+
+This tool is best supported on Android 11 code base. See additional steps
+in bin/README.md run it on Android 10.

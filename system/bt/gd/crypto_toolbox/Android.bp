@@ -1,0 +1,15 @@
+filegroup {
+    name: "BluetoothCryptoToolboxSources",
+    srcs: [
+        "aes.cc",
+        "aes_cmac.cc",
+        "crypto_toolbox.cc",
+    ]
+}
+
+filegroup {
+    name: "BluetoothCryptoToolboxTestSources",
+    srcs: [
+        "crypto_toolbox_test.cc",
+    ]
+}

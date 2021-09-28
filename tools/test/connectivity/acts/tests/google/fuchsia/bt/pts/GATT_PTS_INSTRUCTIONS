@@ -1,0 +1,198 @@
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+
+GATT
+=================================================================
+Note: Bug in PTS forces GATT operations to be over BR/EDR. To run tests over LE disable BR/EDR in ICS when running tests (ICS Name TSCP_GATT_2_1). To Run over BR/EDR re-enable the same ICS value.
+
+Note: While using ACTS cmd line tools, if there is ever an issue with connecting to PTS make sure the
+unique ID is properly set by running these commands:
+     tool_set_target_device_name PTS
+     tool_refresh_unique_id
+
+Cmd Line Tools in use:
+    ACTS:
+        FuchsiaCmdLineTest
+    Fuchsia CLI:
+        ...
+
+GATT/CL/GAC/BV-01-C
+    TBD
+
+GATT/CL/GAD/BV-01-C
+    gattc_connect
+    gattc_list_services
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_list_services
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_list_services
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_list_services
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_list_services
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_list_services
+    [PTS Interaction] Verify values
+    gattc_disconnect
+
+GATT/CL/GAD/BV-02-C
+    Bug: BT-764
+
+GATT/CL/GAD/BV-03-C
+    Note: Bug BT-764 would simplify this testcase.
+    Note: If device is already paired, pairing tool instructions are not needed.
+    Fuchsia cmd-line-tool: bt-pairing-tool
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify confirmation
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    [Fuchsia interaction] Type 'y' on the bt-pairing-tool
+    [PTS Interaction] Enter pin from bt-pairing-tool to PTS
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+
+GATT/CL/GAD/BV-04-C
+    Note: Bug BT-764 would simplify this testcase.
+    Note: If device is already paired, pairing tool instructions are not needed.
+    Fuchsia cmd-line-tool: bt-pairing-tool
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify confirmation
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    [Fuchsia interaction] Type 'y' on the bt-pairing-tool
+    [PTS Interaction] Enter pin from bt-pairing-tool to PTS
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+
+GATT/CL/GAD/BV-05-C
+    Note: Bug BT-764 would simplify this testcase.
+    Note: If device is already paired, pairing tool instructions are not needed.
+    Fuchsia cmd-line-tool: bt-pairing-tool
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify confirmation
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    [Fuchsia interaction] Type 'y' on the bt-pairing-tool
+    [PTS Interaction] Enter pin from bt-pairing-tool to PTS
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_chars
+    [PTS Interaction] Verify values
+    gattc_disconnect
+
+GATT/CL/GAD/BV-06-C
+    Note: Bug BT-764 would simplify this testcase.
+    Note: If device is already paired, pairing tool instructions are not needed.
+    Fuchsia cmd-line-tool: bt-pairing-tool
+    gattc_connect
+    gattc_real_all_desc
+    [PTS Interaction] Verify confirmation
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_desc
+    [PTS Interaction] Verify values
+    [Fuchsia interaction] Type 'y' on the bt-pairing-tool
+    [PTS Interaction] Enter pin from bt-pairing-tool to PTS
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_desc
+    [PTS Interaction] Verify values
+    gattc_disconnect
+    gattc_connect
+    gattc_real_all_desc
+    [PTS Interaction] Verify values
+    gattc_disconnect
+
+GATT/CL/GAD/BV-07-C
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+
+GATT/CL/GAD/BV-08-C
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+    [PTS Interaction] Verify values
+
+GATTT/CL/GAR/BV-01-C
+    Note: Bug BT-451 would simplify this testcase.
+    Note: If device is already paired, pairing tool instructions are not needed.
+    Fuchsia cmd-line-tool: bt-pairing-tool
+    gattc_connect
+    gattc_read_all_chars
+    Fuchsia interaction] Type 'y' on the bt-pairing-tool
+    [PTS Interaction] Enter pin from bt-pairing-tool to PTS
+    [PTS Interaction] Verify values
+    gattc_disconnect
+

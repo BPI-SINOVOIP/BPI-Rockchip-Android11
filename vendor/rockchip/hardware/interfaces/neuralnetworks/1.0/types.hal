@@ -1,0 +1,266 @@
+package rockchip.hardware.neuralnetworks@1.0;
+
+/*
+* Error code returned by the RKNN API.
+* --> rknn_api.h: Error code
+*/
+enum ErrorStatus : int32_t {
+    RKNN_SUCC,
+    RKNN_ERR_FAIL,
+    RKNN_ERR_TIMEOUT,
+    RKNN_ERR_DEVICE_UNAVAILABLE,
+    RKNN_ERR_MALLOC_FAIL,
+    RKNN_ERR_PARAM_INVALID,
+    RKNN_ERR_MODEL_INVALID,
+    RKNN_ERR_CTX_INVALID,
+    RKNN_ERR_INPUT_INVALID,
+    RKNN_ERR_OUTPUT_INVALID,
+    RKNN_ERR_DEVICE_UNMATCH,
+    RKNN_ERR_INCOMPATILE_PRE_COMPILE_MODEL,
+};
+
+/*
+* The query command for rknn_query,
+* --> rknn_api.h: rknn_query_cmd
+*/
+enum RKNNQueryCmd : int32_t {
+    RKNN_QUERY_IN_OUT_NUM = 0,                          /* query the number of input & output tensor. */
+    RKNN_QUERY_INPUT_ATTR,                              /* query the attribute of input tensor. */
+    RKNN_QUERY_OUTPUT_ATTR,                             /* query the attribute of output tensor. */
+    RKNN_QUERY_PERF_DETAIL,                             /* query the detail performance, need set
+                                                           RKNN_FLAG_COLLECT_PERF_MASK when call rknn_init,
+                                                           this query needs to be valid after rknn_outputs_get. */
+    RKNN_QUERY_PERF_RUN,                                /* query the time of run,
+                                                           this query needs to be valid after rknn_outputs_get. */
+    RKNN_QUERY_SDK_VERSION,                             /* query the sdk & driver version */
+
+    RKNN_QUERY_MEM_SIZE,                                /* query the weight & internal memory size */
+    RKNN_QUERY_CUSTOM_STRING,                           /* query the custom string */
+
+    RKNN_QUERY_CMD_MAX,
+};
+
+enum RKNNTensorType : int32_t {
+    RKNN_TENSOR_FLOAT32 = 0,                            /* data type is float32. */
+    RKNN_TENSOR_FLOAT16,                                /* data type is float16. */
+    RKNN_TENSOR_INT8,                                   /* data type is int8. */
+    RKNN_TENSOR_UINT8,                                  /* data type is uint8. */
+    RKNN_TENSOR_INT16,                                  /* data type is int16. */
+
+    RKNNTensorType_MAX,
+};
+
+enum RKNNTensorQntType : int32_t {
+    RKNN_TENSOR_QNT_NONE = 0,                           /* none. */
+    RKNN_TENSOR_QNT_DFP,                                /* dynamic fixed point. */
+    RKNN_TENSOR_QNT_AFFINE_ASYMMETRIC,                  /* asymmetric affine. */
+
+    RKNN_TENSOR_QNT_MAX,
+};
+
+/*
+*the tensor data format.
+*/
+enum RKNNTensorFormat : int32_t {
+    RKNN_TENSOR_NCHW = 0,                               /* data format is NCHW. */
+    RKNN_TENSOR_NHWC,                                   /* data format is NHWC. */
+    RKNNTensorFormat_MAX,
+};
+
+/*
+* the information for RKNN_QUERY_IN_OUT_NUM.
+*/
+struct RKNNInputOutNum {
+    uint32_t n_input;                                   /* the number of input. */
+    uint32_t n_output;                                  /* the number of output. */
+};
+/*
+* the information for RKNN_QUERY_INPUT_ATTR / RKNN_QUERY_OUTPUT_ATTR.
+*/
+struct RKNNTensorAttr {
+    uint32_t index;                                     /* input parameter, the index of input/output tensor,
+                                                           need set before call rknn_query. */
+
+    uint32_t n_dims;                                    /* the number of dimensions. */
+    uint32_t[16] dims;                                  /* the dimensions array. */
+    int8_t[256] name;                                        /* the name of tensor. */
+
+    uint32_t n_elems;                                   /* the number of elements. */
+    uint32_t size;                                      /* the bytes size of tensor. */
+    RKNNTensorFormat fmt;                               /* the data format of tensor. */
+    RKNNTensorType type;                                /* the data type of tensor. */
+    RKNNTensorQntType qnt_type;                         /* the quantitative type of tensor. */
+    int8_t fl;                                          /* fractional length for RKNN_TENSOR_QNT_DFP. */
+    uint32_t zp;                                        /* zero point for RKNN_TENSOR_QNT_AFFINE_ASYMMETRIC. */
+    float scale;                                        /* scale for RKNN_TENSOR_QNT_AFFINE_ASYMMETRIC. */
+
+    uint32_t stride;                                    /* the stride of tensor, 0 means equal to width. */
+    uint32_t size_with_stride;                          /* the bytes size of tensor with stride. */
+
+    uint8_t pass_through;                               /* pass through mode, for rknn_set_io_mem interface.
+                                                           if TRUE, the buf data is passed directly to the input node of the rknn model
+                                                                    without any conversion. the following variables do not need to be set.
+                                                           if FALSE, the buf data is converted into an input consistent with the model
+                                                                     according to the following type and fmt. so the following variables
+                                                                     need to be set.*/
+};
+
+/*
+*the information for RKNN_QUERY_PERF_DETAIL.
+*/
+struct RKNNPerfDetail {
+    string perf_data;                                   /* the string pointer of perf detail. don't need free it by user. */
+    uint64_t data_len;                                  /* the string length. */
+};
+
+/*
+ * the information for RKNN_QUERY_PERF_RUN.
+ */
+struct RKNNPerfRun {
+    int64_t run_duration;                               /* real inference time (us) */
+};
+
+/*
+ * the information for RKNN_QUERY_SDK_VERSION.
+ */
+struct RKNNSDKVersion {
+    string api_version;                                 /* the version of rknn api. */
+    string drv_version;                                 /* the version of rknn driver. */
+};
+
+/*
+ * the information for rknn_find_devices.
+ */
+struct RKNNDeviceID {
+    uint32_t n_devices;                                 /* the number of devices. */
+    string[256] types;                                  /* the array of device type. */
+    string[256] ids;                                    /* the array of device ID. */
+};
+
+/*
+ * the input information for rknn_input_set.
+ */
+struct RKNNInput {
+    uint32_t index;                                     /* the input index. */
+    DataLocation buf;                                   /* the offset of input buf for index. */
+    uint8_t pass_through;                               /* pass through mode.
+                                                           if TRUE, the buf data is passed directly to the input node of the rknn model
+                                                           without any conversion. the following variables do not need to be set.
+                                                           if FALSE, the buf data is converted into an input consistent with the model
+                                                           according to the following type and fmt. so the following variables
+                                                           need to be set.*/
+    RKNNTensorType type;                                /* the data type of input buf. */
+    RKNNTensorFormat fmt;                               /* the data format of input buf.
+                                                           currently the internal input format of NPU is NCHW by default.
+                                                           so entering NCHW data can avoid the format conversion in the driver. */
+};
+
+/*
+ * the output information for rknn_outputs_get.
+ */
+struct RKNNOutput {
+    uint8_t want_float;                                 /* want transfer output data to float */
+    uint8_t is_prealloc;                                /* whether buf is pre-allocated.
+                                                           if TRUE, the following variables need to be set.
+                                                           if FALSE, the following variables do not need to be set. */
+    DataLocation index;                                 /* the offset of output index. */
+    DataLocation buf;                                   /* the offset of output buf for index.
+                                                           when is_prealloc = FALSE and rknn_outputs_release called,
+                                                           this buf pointer will be free and don't use it anymore. */
+};
+
+/*
+ * the extend information for rknn_init.
+ */
+struct RKNNInitExtend {
+    string device_id;                                   /* input parameter, indicate which device selected. if only one
+                                                           device connected, can set nullptr. */
+};
+
+/*
+ * the extend information for rknn_run.
+ */
+struct RKNNRunExtend {
+    uint64_t frame_id;                                  /* output parameter, indicate current frame id of run. */
+};
+
+/*
+ * the extend information for rknn_outputs_get.
+ */
+struct RKNNOutputExtend {
+    uint64_t frame_id;                                  /* output parameter, indicate the frame id of outputs, corresponds to
+                                                           struct rknn_run_extend.frame_id.*/
+};
+
+typedef uint64_t RKNNContext;
+
+enum RKNN_HWBufferType : uint32_t {
+    HW_BUFFER_DRM,
+    HW_BUFFER_ION,
+    HW_BUFFER_ASHMEM,
+};
+
+struct RKNNHWBuffer {
+    RKNN_HWBufferType type;
+    uint32_t counter;
+    uint32_t bufferID;
+    uint32_t size;
+    vec<uint64_t > data;
+};
+
+struct RKNNModel {
+    string name;
+    string path;
+    //uint8_t is_preload;                                 /* load model data from client(true) or server(client). */
+    memory modelData;
+};
+
+struct RKNNTensorMemory {
+    uint64_t         virt_addr;                         /* the virtual address of tensor buffer. */
+    uint64_t         phys_addr;                         /* the physical address of tensor buffer. */
+    handle           bufferHdl;                                /* the fd of tensor buffer. */
+    int32_t          offset;                            /* indicates the offset of the memory. */
+    uint32_t         size;                              /* the size of tensor buffer. */
+    uint32_t         flags;                             /* the flags of tensor buffer, reserved */
+    uint64_t         priv_data;                         /* the private data of tensor buffer. */
+
+    uint64_t         bridge_uuid;                         /* This is for android hidl only*/
+};
+
+/**
+ * Describes the location of a data object.
+ */
+struct DataLocation {
+    /**
+     * The index of the memory pool where this location is found.
+     */
+    uint32_t poolIndex;
+
+    /**
+     * Offset in bytes from the start of the pool.
+     */
+    uint32_t offset;
+
+    /**
+     * The length of the data in bytes.
+     */
+    uint32_t length;
+};
+
+/**
+ * Describes the request of all inputs.
+ */
+struct Request {
+    uint32_t n_inputs;
+    vec<RKNNInput> inputs;
+    memory pool;
+};
+
+/**
+ * Describes the request of all outputs.
+ */
+struct Response {
+    uint32_t n_outputs;
+    vec<RKNNOutput> outputs;
+    memory pool;
+};

@@ -1,0 +1,134 @@
+       1: mi=0 s=0 e=0
+       2: mi=0 s=3 e=3
+       3: mi=1 s=0 e=1
+       4: mi=3 s=0 e=0
+       5: mi=3 s=3 e=3
+       6: mi=3 s=5 e=5
+       7: mi=3 s=7 e=7
+       8: mi=4 s=0 e=0
+       9: mi=4 s=2 e=2
+      10: mi=4 s=5 e=6
+      11: mi=4 s=8 e=8
+      12: mi=4 s=11 e=11
+      13: mi=5 s=0 e=0
+      14: mi=5 s=2 e=2
+      15: mi=5 s=4 e=4
+      16: mi=5 s=7 e=7
+      17: mi=5 s=9 e=9
+      18: mi=5 s=11 e=11
+      19: mi=5 s=14 e=15
+
+method Base.<init>():void
+{
+	.src "Target.java"
+	.line 1
+	.prologue_end
+	.line 1
+	    0| const v0, #+1 (0x00000001 | 1.40130e-45)
+	    3| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	    6| invoke-direct {v1}, java.lang.Object.<init>():void
+	    9| const v0, #+2 (0x00000002 | 2.80260e-45)
+	   12| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   15| return-void
+}
+
+method Base.foo(int, java.lang.String):int
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 3
+	.prologue_end
+	.line 3
+	    0| const v0, #+3 (0x00000003 | 4.20390e-45)
+	    3| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	    6| const/4 v1, #+0 (0x00000000 | 0.00000)
+	    7| return v1
+}
+
+method IBase.bar(java.lang.String):void
+{
+}
+
+method Target.<init>(Base, IBase):void
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 15
+	.prologue_end
+	.line 15
+	    0| const v0, #+4 (0x00000004 | 5.60519e-45)
+	    3| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	    6| invoke-direct {v1}, java.lang.Object.<init>():void
+	.line 16
+	    9| const v0, #+5 (0x00000005 | 7.00649e-45)
+	   12| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   15| iput-object v2, v1, Target.base
+	.line 17
+	   17| const v0, #+6 (0x00000006 | 8.40779e-45)
+	   20| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   23| iput-object v3, v1, Target.iBase
+	.line 18
+	   25| const v0, #+7 (0x00000007 | 9.80909e-45)
+	   28| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   31| return-void
+}
+
+method Target.foo(int, java.lang.String):int
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 21
+	.prologue_end
+	.line 21
+	    0| const v0, #+8 (0x00000008 | 1.12104e-44)
+	    3| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	    6| iget-object v1, v3, Target.base
+	    8| const v0, #+9 (0x00000009 | 1.26117e-44)
+	   11| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   14| invoke-virtual {v1,v4,v5}, Base.foo(int, java.lang.String):int
+	   17| move-result v1
+	   18| const v0, #+10 (0x0000000a | 1.40130e-44)
+	   21| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	.line 22
+	   24| iget-object v2, v3, Target.iBase
+	   26| const v0, #+11 (0x0000000b | 1.54143e-44)
+	   29| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   32| invoke-interface {v2,v5}, IBase.bar(java.lang.String):void
+	.line 23
+	   35| const v0, #+12 (0x0000000c | 1.68156e-44)
+	   38| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   41| return v1
+}
+
+method Target.foo(int, java.lang.String[][]):java.lang.Integer
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 27
+	.prologue_end
+	.line 27
+	    0| const v0, #+13 (0x0000000d | 1.82169e-44)
+	    3| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	    6| iget-object v1, v3, Target.base
+	    8| const v0, #+14 (0x0000000e | 1.96182e-44)
+	   11| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   14| const-string v2, "foo"
+	   16| const v0, #+15 (0x0000000f | 2.10195e-44)
+	   19| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   22| invoke-virtual {v1,v4,v2}, Base.foo(int, java.lang.String):int
+	.line 28
+	   25| const v0, #+16 (0x00000010 | 2.24208e-44)
+	   28| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   31| iget-object v1, v3, Target.iBase
+	   33| const v0, #+17 (0x00000011 | 2.38221e-44)
+	   36| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   39| const-string v2, "bar"
+	   41| const v0, #+18 (0x00000012 | 2.52234e-44)
+	   44| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   47| invoke-interface {v1,v2}, IBase.bar(java.lang.String):void
+	.line 29
+	   50| const v0, #+19 (0x00000013 | 2.66247e-44)
+	   53| invoke-static/range {v0..v0}, CodeCoverage.TraceBasicBlock(int):void
+	   56| const/4 v1, #+0 (0x00000000 | 0.00000)
+	   57| return-object v1
+}

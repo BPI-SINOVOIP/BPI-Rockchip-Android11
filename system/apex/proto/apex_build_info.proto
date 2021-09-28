@@ -1,0 +1,51 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package apex.proto;
+
+option java_package = "com.android.apex";
+option java_outer_classname = "Protos";
+
+message ApexBuildInfo {
+  // Apexer command line.
+  string apexer_command_line = 1;
+
+  // Content of the selinux file contexts file.
+  bytes file_contexts = 2;
+
+  // Content of the canned_fs_config specifying uid/gid/mode of files.
+  bytes canned_fs_config = 3;
+
+  // Content of the original AndroidManifest.xml, before being compiled by aapt.
+  bytes android_manifest = 4;
+
+  // Value of --min_sdk_version parameter passed at build time.
+  string min_sdk_version = 5;
+
+  // Value of --target_sdk_version parameter passed at build time.
+  string target_sdk_version = 6;
+
+  // Whether the --no_hashtree option was set at build time.
+  bool no_hashtree = 7;
+
+  // Value of --override_apk_package_name passed at build itme.
+  string override_apk_package_name = 8;
+
+  // Value of --logging_parent passed at build time.
+  string logging_parent = 9;
+}

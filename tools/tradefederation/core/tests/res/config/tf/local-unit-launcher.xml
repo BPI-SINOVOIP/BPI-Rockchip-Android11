@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="A local build variant of unit-launcher, that runs tests for a TF build on local filesystem" >
+    <option name="loop" value="false" />
+    <option name="null-device" value="true" />
+    <option name="test-tag" value="local-tf-launcher" />
+    <build_provider class="com.android.tradefed.build.LocalFolderBuildProvider">
+        <option name="branch" value="tradefed" />
+        <option name="build-flavor" value="tradefed" />
+    </build_provider>
+    <test class="com.android.tradefed.testtype.TfTestLauncher" >
+        <option name="config-name" value="tf/unit-runner" />
+        <option name="max-run-time" value="5m" />
+    </test>
+    <logger class="com.android.tradefed.log.FileLogger" />
+    <log_saver class="com.android.tradefed.result.FileSystemLogSaver" />
+    <result_reporter class="com.android.tradefed.result.ConsoleResultReporter">
+        <option name="suppress-passed-tests" value="true" />
+    </result_reporter>
+</configuration>

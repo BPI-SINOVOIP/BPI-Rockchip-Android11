@@ -1,0 +1,86 @@
+# TODO (b/121362882): Add deviceless tests when dry-run is ready.
+###[Test Finder: MODULE, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: MODULE and runner: AtestTradefedTestRunner###
+HelloWorldTests
+hello_world_test
+
+
+###[Test Finder: MODULE_FILE_PATH, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: MODULE_FILE_PATH and runner: AtestTradefedTestRunner###
+# frameworks/base/services/tests/servicestests/src/com/android/server/wm/ScreenDecorWindowTests.java#testFlagChange
+# packages/apps/Bluetooth/tests/unit/Android.mk
+platform_testing/tests/example/native
+# platform_testing/tests/example/native/
+platform_testing/tests/example/native/Android.bp
+
+
+###[Test Finder: INTEGRATION_FILE_PATH, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: INTEGRATION_FILE_PATH and runner: AtestTradefedTestRunner###
+tools/tradefederation/core/res/config/native-benchmark.xml
+
+
+###[Test Finder: MODULE_CLASS, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: MODULE_CLASS and runner: AtestTradefedTestRunner###
+CtsAnimationTestCases:AnimatorTest
+CtsSampleDeviceTestCases:SampleDeviceTest#testSharedPreferences
+CtsSampleDeviceTestCases:android.sample.cts.SampleDeviceReportLogTest
+
+
+###[Test Finder: QUALIFIED_CLASS, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: QUALIFIED_CLASS and runner: AtestTradefedTestRunner###
+# com.android.server.display.DisplayManagerServiceTest
+# com.android.server.wm.ScreenDecorWindowTests#testMultipleDecors
+
+
+###[Test Finder: MODULE_PACKAGE, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: MODULE_PACKAGE and runner: AtestTradefedTestRunner###
+CtsSampleDeviceTestCases:android.sample.cts
+
+
+###[Test Finder: PACKAGE, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: PACKAGE and runner: AtestTradefedTestRunner###
+android.animation.cts
+
+
+###[Test Finder: CLASS, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: CLASS and runner: AtestTradefedTestRunner###
+AnimatorTest
+
+
+###[Test Finder: CC_CLASS, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: CC_CLASS and runner: AtestTradefedTestRunner###
+PacketFragmenterTest
+# PacketFragmenterTest#test_no_fragment_necessary
+PacketFragmenterTest#test_no_fragment_necessary,test_ble_fragment_necessary
+
+
+###[Test Finder: INTEGRATION, Test Runner:AtestTradefedTestRunner]###
+###Purpose: Test with finder: INTEGRATION and runner: AtestTradefedTestRunner###
+native-benchmark
+
+
+###[Test Finder: MODULE, Test Runner: VtsTradefedTestRunner]####
+###Purpose: Test with finder: MODULE and runner: VtsTradefedTestRunner###
+VtsCodelabHelloWorldTest
+
+
+###[Test Finder: MODULE, Test Runner: RobolectricTestRunner]#####
+###Purpose: Test with finder: MODULE and runner: RobolectricTestRunner###
+CarMessengerRoboTests
+###Purpose: Test with input path for RobolectricTest###
+packages/apps/Car/Messenger/tests/robotests/src/com/android/car/messenger/MessengerDelegateTest.java
+
+
+###[Test Finder: SUITE_PLAN, Test Runner: SuitePlanTestRunner]###
+###Purpose: Test with finder: SUITE_PLAN and runner: SuitePlanTestRunner###
+# cts-common
+
+
+###[Test Finder: SUITE_PLAN_FILE_PATH, Test Runner: SuitePlanTestRunner]###
+###Purpose: Test with finder: SUITE_PLAN_FILE_PATH and runner: SuitePlanTestRunner###
+# test/suite_harness/tools/cts-tradefed/res/config/cts.xml
+
+
+###[MULTIPLE-TESTS + AtestTradefedTestRunner]###
+###Purpose: Test with mixed testcases###
+CtsSampleDeviceTestCases CtsAnimationTestCases

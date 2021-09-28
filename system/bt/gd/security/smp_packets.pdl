@@ -1,0 +1,142 @@
+little_endian_packets
+
+custom_field Address : 48 "hci/"
+
+enum Code : 8 {
+  PAIRING_REQUEST = 0x01,
+  PAIRING_RESPONSE = 0x02,
+  PAIRING_CONFIRM = 0x03,
+  PAIRING_RANDOM = 0x04,
+  PAIRING_FAILED = 0x05,
+  ENCRYPTION_INFORMATION = 0x06,
+  MASTER_IDENTIFICATION = 0x07,
+  IDENTITY_INFORMATION = 0x08,
+  IDENTITY_ADDRESS_INFORMATION = 0x09,
+  SIGNING_INFORMATION = 0x0A,
+  SECURITY_REQUEST = 0x0B,
+  PAIRING_PUBLIC_KEY = 0x0C,
+  PAIRING_DH_KEY_CHECK = 0x0D,
+  PAIRING_KEYPRESS_NOTIFICATION = 0x0E,
+}
+
+packet Command {
+  code : Code,
+  _payload_,
+}
+
+enum IoCapability : 8 {
+  DISPLAY_ONLY = 0x00,
+  DISPLAY_YES_NO = 0x01,
+  KEYBOARD_ONLY = 0x02,
+  NO_INPUT_NO_OUTPUT = 0x03,
+  KEYBOARD_DISPLAY = 0x04,
+}
+
+enum OobDataFlag : 8 {
+  NOT_PRESENT = 0x00,
+  PRESENT = 0x01,
+}
+
+enum BondingFlags : 2 {
+  NO_BONDING = 0,
+  BONDING = 1,
+}
+
+group PairingInfo {
+  io_capability : IoCapability,
+  oob_data_flag : OobDataFlag,
+  auth_req: 8,
+  maximum_encryption_key_size : 5, // 7 - 16
+  _reserved_ : 3,
+  initiator_key_distribution : 8,
+  responder_key_distribution : 8,
+}
+
+packet PairingRequest : Command (code = PAIRING_REQUEST) {
+  PairingInfo,
+}
+
+packet PairingResponse : Command (code = PAIRING_RESPONSE) {
+  PairingInfo,
+}
+
+packet PairingConfirm : Command (code = PAIRING_CONFIRM) {
+  confirm_value : 8[16],  // Initiating device sends Mconfirm, responding device sends Sconfirm
+}
+
+packet PairingRandom : Command (code = PAIRING_RANDOM) {
+  random_value : 8[16],  // Initiating device sends Mrand, responding device sends Srand
+}
+
+enum PairingFailedReason : 8 {
+  PASSKEY_ENTRY_FAILED = 0x01,
+  OOB_NOT_AVAILABLE = 0x02,
+  AUTHENTICATION_REQUIREMENTS = 0x03,
+  CONFIRM_VALUE_FAILED = 0x04,
+  PAIRING_NOT_SUPPORTED = 0x05,
+  ENCRYPTION_KEY_SIZE = 0x06,
+  COMMAND_NOT_SUPPORTED = 0x07,
+  UNSPECIFIED_REASON = 0x08,
+  REPEATED_ATTEMPTS = 0x09,
+  INVALID_PARAMETERS = 0x0A,
+  DHKEY_CHECK_FAILED = 0x0B,
+  NUMERIC_COMPARISON_FAILED = 0x0C,
+  BR_EDR_PAIRING_IN_PROGRESS = 0x0D,
+  CROSS_TRANSPORT_KEY_DERIVATION_NOT_ALLOWED = 0x0E,
+}
+
+packet PairingFailed : Command (code = PAIRING_FAILED) {
+  reason : PairingFailedReason,
+}
+
+packet EncryptionInformation : Command (code = ENCRYPTION_INFORMATION) {
+ long_term_key : 8[16],
+}
+
+packet MasterIdentification : Command (code = MASTER_IDENTIFICATION) {
+  ediv : 16,
+  rand : 8[8],
+}
+
+packet IdentityInformation : Command (code = IDENTITY_INFORMATION) {
+  identity_resolving_key : 8[16],
+}
+
+enum AddrType : 8 {
+  PUBLIC = 0x00,
+  STATIC_RANDOM = 0x01,
+}
+
+packet IdentityAddressInformation : Command (code = IDENTITY_ADDRESS_INFORMATION) {
+  addr_type : AddrType,
+  bd_addr : Address,
+}
+
+packet SigningInformation : Command (code = SIGNING_INFORMATION) {
+  signature_key : 8[16],
+}
+
+packet SecurityRequest : Command (code = SECURITY_REQUEST) {
+  auth_req: 8,
+}
+
+packet PairingPublicKey : Command (code = PAIRING_PUBLIC_KEY) {
+  public_key_x : 8[32],
+  public_key_y : 8[32],
+}
+
+packet PairingDhKeyCheck : Command (code = PAIRING_DH_KEY_CHECK) {
+  dh_key_check : 8[16],
+}
+
+enum KeypressNotificationType : 8 {
+  ENTRY_STARTED = 0,
+  DIGIT_ENTERED = 1,
+  DIGIT_ERASED = 2,
+  CLEARED = 3,
+  ENTRY_COMPLETED = 4,
+}
+
+packet PairingKeypressNotification : Command (code = PAIRING_KEYPRESS_NOTIFICATION) {
+  notification_type : KeypressNotificationType,
+}

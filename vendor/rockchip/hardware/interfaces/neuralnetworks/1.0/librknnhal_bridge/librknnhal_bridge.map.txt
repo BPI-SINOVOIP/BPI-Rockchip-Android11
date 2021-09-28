@@ -1,0 +1,16 @@
+LIBRKNNHAL_BRIDGE {
+  global:
+    ARKNN_client_create;
+    ARKNN_init;
+    ARKNN_destory;
+    ARKNN_query;
+    ARKNN_inputs_set;
+    ARKNN_run;
+    ARKNN_outputs_get;
+    ARKNN_outputs_release;
+    ARKNN_destory_mem;
+    ARKNN_create_mem;
+    ARKNN_set_io_mem;
+  local:
+    *;
+};

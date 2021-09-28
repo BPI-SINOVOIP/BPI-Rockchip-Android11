@@ -1,0 +1,93 @@
+#!/system/bin/sh
+#***********************************************************************
+#
+# pppoe-status
+#
+# Shell script to report on status of PPPoE connection
+#
+# Copyright (C) 2000-2001 Roaring Penguin Software Inc.
+#
+# $Id$
+#
+# This file may be distributed under the terms of the GNU General
+# Public License.
+#
+# LIC: GPL
+#
+# Usage: pppoe-status [config_file]
+# If config_file is omitted, defaults to /etc/ppp/pppoe.conf
+#
+#***********************************************************************
+
+# Defaults
+ECHO="/system/bin/log -t pppoe_status"
+#ECHO=echo
+SETPROP=/system/bin/setprop
+PPP_DIR=/data/misc/ppp
+CONFIG=$PPP_DIR/pppoe.conf
+#LOG=$PPP_DIR/log
+LOG=/dev/console
+BUSYBOX=busybox
+
+case "$#" in
+    1)
+	CONFIG="$1"
+	;;
+esac
+
+if [ ! -f "$CONFIG" -o ! -r "$CONFIG" ] ; then
+    $ECHO "$0: Cannot read configuration file '$CONFIG'"
+    exit 1
+fi
+
+. $CONFIG
+
+PPPOE_PIDFILE="$PIDFILE.pppoe"
+PPPD_PIDFILE="$PIDFILE.pppd"
+
+if [ "$DEMAND" != "no" ] ; then
+    $ECHO "Note: You have enabled demand-connection; pppoe-status may be inaccurate."
+fi
+
+# If no PPPOE_PIDFILE, connection is down, unless we're using the Linux plugin
+if [ "$LINUX_PLUGIN" = "" ] ; then
+    if [ ! -r "$PPPOE_PIDFILE" ] ; then
+	$ECHO "pppoe-status: Link is down (can't read pppoe PID file $PPPOE_PIDFILE)"
+	exit 1
+    fi
+fi
+
+# If no PPPD_PIDFILE, something fishy!
+if [ ! -r "$PPPD_PIDFILE" ] ; then
+    $ECHO "pppoe-status: Link is down (can't read pppd PID file $PPPD_PIDFILE)"
+    exit 1
+fi
+
+PPPD_PID=`cat "$PPPD_PIDFILE"`
+
+# Sigh.  Some versions of pppd put PID files in /var/run; others put them
+# in /etc/ppp.  Since it's too messy to figure out what pppd does, we
+# try both locations.
+for i in $PPP_DIR/ppp*.pid /var/run/ppp*.pid ; do
+    if [ -r $i ] ; then
+	PID=`cat $i`
+	$ECHO "$i:$PID  $PPPD_PIDFILE:$PPPD_PID"
+	if [ "$PID" = "$PPPD_PID" ] ; then
+	    IF=`$BUSYBOX basename $i .pid`
+	    $BUSYBOX netstat -rn | $BUSYBOX grep " ${IF}\$" > /dev/null
+	    #$BUSYBOX ifconfig $IF | $BUSYBOX grep "UP. *POINTOPOINT" > /dev/null
+	    if [ "$?" != "0" ] ; then
+		$ECHO "pppoe-status: Link is attached to $IF, but $IF is down"
+		exit 1
+	    fi
+	    $ECHO "pppoe-status: Link is up and running on interface $IF"
+	    $SETPROP "pppoe.interface" $IF
+	    $BUSYBOX ifconfig $IF
+	    exit 0
+	fi
+    fi
+done
+
+$ECHO "pppoe-status: Link is down -- could not find interface corresponding to"
+$ECHO "pppd pid $PPPD_PID"
+exit 1

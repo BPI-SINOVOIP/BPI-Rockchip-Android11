@@ -1,0 +1,151 @@
+cc_defaults {
+    name: "libbt-hci_defaults",
+    defaults: ["fluoride_defaults"],
+    shared_libs: [
+        "android.hardware.bluetooth@1.0",
+        "android.hardware.bluetooth@1.1",
+        "libhidlbase",
+    ],
+}
+
+// HCI static library for target
+// ========================================================
+cc_library_static {
+    name: "libbt-hci",
+    defaults: ["libbt-hci_defaults"],
+    srcs: [
+        "src/btsnoop.cc",
+        "src/btsnoop_mem.cc",
+        "src/btsnoop_net.cc",
+        "src/buffer_allocator.cc",
+        "src/hci_inject.cc",
+        "src/hci_layer.cc",
+        "src/hci_layer_android.cc",
+        "src/hci_packet_factory.cc",
+        "src/hci_packet_parser.cc",
+        "src/packet_fragmenter.cc",
+    ],
+    local_include_dirs: [
+        "include",
+    ],
+    include_dirs: [
+        "system/bt",
+        "system/bt/internal_include",
+        "system/bt/btcore/include",
+        "system/bt/stack/include",
+        "system/bt/utils/include",
+        "system/bt/bta/include",
+        "system/bt/btif/include",
+        "system/libhwbinder/include",
+    ],
+}
+
+// HCI unit tests for target
+// ========================================================
+cc_test {
+    name: "net_test_hci",
+    test_suites: ["device-tests"],
+    defaults: ["libbt-hci_defaults"],
+    local_include_dirs: [
+        "include",
+    ],
+    include_dirs: [
+        "system/bt",
+        "system/bt/internal_include",
+        "system/bt/btcore/include",
+        "system/bt/osi/test",
+        "system/bt/stack/include",
+        "system/bt/utils/include",
+        "system/libhwbinder/include",
+    ],
+    srcs: [
+        "test/packet_fragmenter_test.cc",
+    ],
+    shared_libs: [
+        "liblog",
+        "libdl",
+        "libprotobuf-cpp-lite",
+    ],
+    static_libs: [
+        "libbt-hci",
+        "libosi",
+        "libosi-AlarmTestHarness",
+        "libosi-AllocationTestHarness",
+        "libcutils",
+        "libbtcore",
+        "libbt-protos-lite",
+    ],
+}
+
+// HCI native unit tests for target
+// ========================================================
+cc_test {
+    name: "net_test_hci_native",
+    test_suites: ["device-tests"],
+    defaults: ["libbt-hci_defaults"],
+    host_supported: true,
+    local_include_dirs: [
+        "include",
+    ],
+    include_dirs: [
+        "system/bt",
+        "system/bt/stack/include",
+    ],
+    srcs: [
+        "test/hci_layer_test.cc",
+        "test/other_stack_stub.cc",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "liblog",
+        "libprotobuf-cpp-lite",
+    ],
+    static_libs: [
+        "libbt-common",
+        "libbt-protos-lite",
+        "libosi",
+        "libosi-AllocationTestHarness",
+    ],
+    sanitize: {
+        address: true,
+        cfi: true,
+        misc_undefined: ["bounds"],
+    },
+}
+
+cc_test {
+    name: "net_test_hci_fragmenter_native",
+    test_suites: ["device-tests"],
+    defaults: ["fluoride_defaults"],
+    host_supported: true,
+    local_include_dirs: [
+        "include",
+    ],
+    include_dirs: [
+        "system/bt",
+        "system/bt/stack/include",
+        "system/bt/btcore/include",
+        "system/bt/osi/test",
+    ],
+    srcs: [
+        "src/buffer_allocator.cc",
+        "test/packet_fragmenter_host_test.cc",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "liblog",
+        "libprotobuf-cpp-lite",
+    ],
+    static_libs: [
+        "libbt-common",
+        "libbt-protos-lite",
+        "libosi",
+        "libosi-AllocationTestHarness",
+    ],
+    sanitize: {
+        address: true,
+        cfi: true,
+        misc_undefined: ["bounds"],
+    },
+}
+

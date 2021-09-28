@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Google Inc. All Rights Reserved -->
+<configuration description="Configuration to create an Android Enterprise managed profile." >
+    <target_preparer class="com.android.aetest.tradefed.targetprep.AeTestManagedProfileCreator">
+        <!-- Disabled by default; can be enabled on a test-by-test basis. -->
+        <option name="disable" value="true" />
+    </target_preparer>
+</configuration>

@@ -1,0 +1,73 @@
+syntax = "proto2";
+
+package chre_settings_test;
+
+option java_package = "com.google.android.chre.nanoapp.proto";
+option java_outer_classname = "ChreSettingsTest";
+
+// Nanoappp message type can be either host to chre (H2C) or chre to host (C2H)
+enum MessageType {
+  // Reserved for corrupted messages
+  UNDEFINED = 0;
+
+  // H2C: A message to start the test.
+  // Payload must be TestCommand.
+  TEST_COMMAND = 1;
+
+  // C2H: A message indicating the test result.
+  TEST_RESULT = 2;
+
+  // C2H: A message indicating a previously received SETUP step from a
+  // TEST_COMMAND message has completed. No payload.
+  TEST_SETUP_COMPLETE = 3;
+}
+
+// A message to start the test.
+message TestCommand {
+  enum Feature {
+    FEATURE_UNDEFINED = 0;
+    WIFI_SCANNING = 1;
+    WIFI_RTT = 2;
+    GNSS_LOCATION = 3;
+    GNSS_MEASUREMENT = 4;
+    WWAN_CELL_INFO = 5;
+  }
+
+  // The state of this feature at the system level.
+  enum State {
+    STATE_UNDEFINED = 0;
+    DISABLED = 1;
+    ENABLED = 2;
+  }
+
+  // The test step for the nanoapp to take.
+  enum Step {
+    STEP_UNDEFINED = 0;
+    // Sets up the nanoapp for an upcoming START test step (e.g. perform a WiFi
+    // scan for a WiFi RTT test).
+    SETUP = 1;
+    // Begin the test (after optionally receiving a SETUP test step).
+    START = 2;
+  }
+
+  // The feature to test.
+  optional Feature feature = 1;
+
+  // The feature state (e.g. enabled or disabled), only used if the test step is
+  // START.
+  optional State state = 2 [default = ENABLED];
+
+  // The test step.
+  optional Step step = 3 [default = START];
+}
+
+// A message used to provide the test result.
+message TestResult {
+  enum Code {
+    PASSED = 0;
+    FAILED = 1;
+  }
+
+  optional Code code = 1 [default = FAILED];
+  optional bytes errorMessage = 2;
+}

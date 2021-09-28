@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.android.atest.toolWindow.AtestToolWindow">
+  <grid id="27dc6" binding="mAtestToolWindowPanel" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="941" height="172"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="ac503" class="javax.swing.JLabel" binding="mAtestlabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Atest"/>
+        </properties>
+      </component>
+      <component id="87175" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Lunch target"/>
+        </properties>
+      </component>
+      <component id="fa70f" class="javax.swing.JTextField" binding="mLunchTarget">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="aosp_cf_x86_phone-userdebug"/>
+        </properties>
+      </component>
+      <component id="8ffd1" class="javax.swing.JCheckBox" binding="mRunOnHost">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Run on host"/>
+        </properties>
+      </component>
+      <component id="5f4fc" class="javax.swing.JCheckBox" binding="mTestMapping">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="292" height="29"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Run presubmit tests in TEST_MAPPING files"/>
+        </properties>
+      </component>
+      <component id="fc80a" class="javax.swing.JCheckBox" binding="mSkipBuild">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Skip build"/>
+        </properties>
+      </component>
+      <component id="9e21" class="javax.swing.JComboBox" binding="mTestTarget">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="e708" class="javax.swing.JButton" binding="mRunButton">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="run"/>
+        </properties>
+      </component>
+      <component id="3d23" class="javax.swing.JButton" binding="mStopButton">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="stop"/>
+        </properties>
+      </component>
+      <vspacer id="11c6e">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

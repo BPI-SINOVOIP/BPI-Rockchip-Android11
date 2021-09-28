@@ -1,0 +1,104 @@
+syntax = "proto2";
+
+package wireless.android.platform.testing.bluetooth.metrics;
+
+message BluetoothTestDevice {
+  optional string device_class = 1;
+  optional string device_model = 2;
+  optional string hardware_version = 3;
+  optional string software_version = 4;
+  optional string android_build_type = 5;
+  optional string android_branch_name = 6;
+  optional string android_build_number = 7;
+  optional string android_release_id = 8;
+}
+
+message BluetoothContinuousTestResultHeader {
+  optional int64 test_date_time = 1;
+  optional BluetoothTestDevice primary_device = 2;
+  optional BluetoothTestDevice connected_device = 3;
+}
+
+message BluetoothReconnectTestResult {
+  optional BluetoothContinuousTestResultHeader configuration_data = 1;
+  optional int32 connection_attempt_count = 2;
+  optional int32 connection_successful_count = 3;
+  optional int32 connection_failed_count = 4;
+  optional int32 connection_max_time_millis = 5;
+  optional int32 connection_min_time_millis = 6;
+  optional int32 connection_avg_time_millis = 7;
+  optional int32 acl_connection_max_time_millis = 8;
+  optional int32 acl_connection_min_time_millis = 9;
+  optional int32 acl_connection_avg_time_millis = 10;
+}
+
+message BluetoothPairAndConnectTestResult {
+  optional BluetoothContinuousTestResultHeader configuration_data = 1;
+  optional int32 pair_attempt_count = 2;
+  optional int32 pair_successful_count = 3;
+  optional int32 pair_failed_count = 4;
+  optional int32 pair_max_time_millis = 5;
+  optional int32 pair_min_time_millis = 6;
+  optional int32 pair_avg_time_millis = 7;
+  optional int32 first_connection_max_time_millis = 8;
+  optional int32 first_connection_min_time_millis = 9;
+  optional int32 first_connection_avg_time_millis = 10;
+}
+
+message BluetoothA2dpCodecConfig {
+  enum BluetoothA2dpCodec {
+    SBC = 0;
+    AAC = 1;
+    APTX = 2;
+    APTX_HD = 3;
+    LDAC = 4;
+  }
+  optional BluetoothA2dpCodec codec_type = 1;
+  optional int32 sample_rate = 2;
+  optional int32 bits_per_sample = 3;
+  optional int32 channel_mode = 4;
+}
+
+message AudioTestDataPoint {
+  optional int64 timestamp_since_beginning_of_test_millis = 1;
+  optional int64 audio_streaming_duration_millis = 2;
+  optional int32 attenuation_db = 3;
+  optional float total_harmonic_distortion_plus_noise_percent = 4;
+  optional int32 audio_glitches_count = 5;
+}
+
+message BluetoothAudioTestResult {
+  optional BluetoothContinuousTestResultHeader configuration_data = 1;
+  enum AudioProfile {
+    A2DP = 0;
+    HFP = 1;
+    HAP = 2;
+  }
+  optional AudioProfile audio_profile = 2;
+  optional int32 audio_latency_min_millis = 3;
+  optional int32 audio_latency_max_millis = 4;
+  optional int32 audio_latency_avg_millis = 5;
+  optional int32 audio_glitches_count = 6;
+  optional int32 audio_missed_packets_count = 7;
+  optional float total_harmonic_distortion_plus_noise = 8;
+  optional int64 audio_streaming_duration_millis = 9;
+  optional BluetoothA2dpCodecConfig a2dp_codec_config = 10;
+  repeated AudioTestDataPoint data_points = 11;
+}
+
+message BluetoothDataTestResult {
+  optional BluetoothContinuousTestResultHeader configuration_data = 1;
+  enum DataTransferProtocol {
+    RFCOMM = 0;
+    L2CAP = 1;
+    LE_COC = 2;
+  }
+  optional DataTransferProtocol data_transfer_protocol = 2;
+  optional int32 data_latency_min_millis = 3;
+  optional int32 data_latency_max_millis = 4;
+  optional int32 data_latency_avg_millis = 5;
+  optional int32 data_throughput_min_bytes_per_second = 6;
+  optional int32 data_throughput_max_bytes_per_second = 7;
+  optional int32 data_throughput_avg_bytes_per_second = 8;
+  optional int32 data_packet_size = 9;
+}

@@ -1,0 +1,17 @@
+cc_prebuilt_library {
+    name: "libmpp",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64/mpp_dev/libmpp.so"],
+        },
+        lib32: {
+            srcs: ["arm/mpp_dev/libmpp.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

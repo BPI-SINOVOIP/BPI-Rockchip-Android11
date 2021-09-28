@@ -1,0 +1,13 @@
+filegroup {
+    name: "BluetoothSecurityPairingSources",
+    srcs: [
+        "classic_pairing_handler.cc",
+    ]
+}
+
+filegroup {
+    name: "BluetoothSecurityPairingTestSources",
+    srcs: [
+        "classic_pairing_handler_unittest.cc",
+    ]
+}

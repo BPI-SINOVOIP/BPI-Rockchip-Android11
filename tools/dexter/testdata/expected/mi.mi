@@ -1,0 +1,85 @@
+
+method Base.<init>():void
+{
+	.src "Target.java"
+	.line 1
+	.prologue_end
+	.line 1
+	    0| invoke-direct {v0}, java.lang.Object.<init>():void
+	    3| return-void
+}
+
+method Base.foo(int, java.lang.String):int
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 3
+	.prologue_end
+	.line 3
+	    0| const/4 v0, #+0 (0x00000000 | 0.00000)
+	    1| return v0
+}
+
+method IBase.bar(java.lang.String):void
+{
+}
+
+method Target.<init>(Base, IBase):void
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 15
+	.prologue_end
+	.line 15
+	    0| invoke-direct {v0}, java.lang.Object.<init>():void
+	.line 16
+	    3| iput-object v1, v0, Target.base
+	.line 17
+	    5| iput-object v2, v0, Target.iBase
+	.line 18
+	    7| return-void
+}
+
+method Target.foo(int, java.lang.String):int
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 21
+	.prologue_end
+	.line 21
+	    0| invoke-static/range {v2..v4}, Tracer.onFooEntry(Target, int, java.lang.String):void
+	    3| invoke-static/range {v2..v4}, Tracer.onFooEntry(java.lang.Object, int, java.lang.String):void
+	    6| iget-object v0, v2, Target.base
+	    8| invoke-static {v0,v3,v4}, Tracer.wrapFoo(Base, int, java.lang.String):int
+	   11| move-result v0
+	.line 22
+	   12| iget-object v1, v2, Target.iBase
+	   14| invoke-static {v1,v4}, Tracer.wrapBar(IBase, java.lang.String):void
+	.line 23
+	   17| invoke-static/range {v0..v0}, Tracer.onFooExit(int):int
+	   20| move-result v0
+	   21| return v0
+}
+
+method Target.foo(int, java.lang.String[][]):java.lang.Integer
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 27
+	.prologue_end
+	.line 27
+	    0| invoke-static/range {v2..v4}, Tracer.onFooEntry(Target, int, java.lang.String[][]):void
+	    3| invoke-static/range {v2..v4}, Tracer.onFooEntry(java.lang.Object, int, java.lang.String[][]):void
+	    6| iget-object v0, v2, Target.base
+	    8| const-string v1, "foo"
+	   10| invoke-static {v0,v3,v1}, Tracer.wrapFoo(Base, int, java.lang.String):int
+	.line 28
+	   13| iget-object v0, v2, Target.iBase
+	   15| const-string v1, "bar"
+	   17| invoke-static {v0,v1}, Tracer.wrapBar(IBase, java.lang.String):void
+	.line 29
+	   20| const/4 v0, #+0 (0x00000000 | 0.00000)
+	   21| invoke-static/range {v0..v0}, Tracer.onFooExit(java.lang.Integer):java.lang.Integer
+	   24| move-result-object v0
+	   25| return-object v0
+}

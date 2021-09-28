@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package pts_chre;
+
+option java_package = "com.google.android.chre.pts.app";
+option java_outer_classname = "PtsChreMessages";
+
+// The message types used in PTS test nanoapps. Some of them are H2C
+// (Host-To-CHRE) and others are C2H (CHRE-To-Host). One message type must be
+// either H2C or C2H. Each message type can choose to have payload or not.
+// Payload can be added to a message type with no payload initially. But once
+// one message type has payload, the payload message should not be changed.
+enum MessageType {
+  // 0 is reserved to avoid misinterpret corrupted data.
+  UNDEFINED = 0;
+
+  // H2C: Tells the nanoapp to begin the test. No payload.
+  PTS_TEST_START = 1;
+
+  // C2H: TestResult message payload.
+  PTS_TEST_RESULT = 2;
+}
+
+// A message sent by the nanoapp to indicate the result of a test, optionally
+// containing an error message.
+message TestResult {
+  enum Code {
+    TEST_PASSED = 0;
+
+    TEST_FAILED = 1;
+  }
+
+  optional Code code = 1 [default = TEST_FAILED];
+  optional bytes errorMessage = 2;
+}

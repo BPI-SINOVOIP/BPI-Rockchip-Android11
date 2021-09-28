@@ -1,0 +1,82 @@
+cc_prebuilt_binary {
+    name: "android.hardware.drm@1.3-service.widevine",
+    relative_install_path: "hw",
+    compile_multilib: "32",
+    shared_libs: [
+        "libwvhidl",
+        "libwvdrmengine",
+    ],
+    srcs: ["bin/hw/android.hardware.drm@1.3-service.widevine"],
+    vintf_fragments: ["etc/vintf/android.hardware.drm@1.3-service.widevine.xml"],
+    init_rc: ["etc/init/android.hardware.drm@1.3-service.widevine.rc"],
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_binary {
+    name: "android.hardware.drm@1.3-service-lazy.widevine",
+    relative_install_path: "hw",
+    compile_multilib: "32",
+    shared_libs: [
+        "libwvhidl",
+        "libwvdrmengine",
+    ],
+    srcs: ["bin/hw/android.hardware.drm@1.3-service-lazy.widevine"],
+    vintf_fragments: ["etc/vintf/android.hardware.drm@1.3-service.widevine.xml"],
+    init_rc: ["etc/init/android.hardware.drm@1.3-service-lazy.widevine.rc"],
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_binary {
+    name: "move_widevine_data.sh",
+    srcs: ["bin/move_widevine_data.sh"],
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_library {
+    name: "libwvhidl",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["lib64/libwvhidl.so"],
+        },
+        lib32: {
+            srcs: ["lib/libwvhidl.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}
+
+cc_prebuilt_library {
+    name: "libwvdrmengine",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["lib64/mediadrm/libwvdrmengine.so"],
+        },
+        lib32: {
+            srcs: ["lib/mediadrm/libwvdrmengine.so"],
+        },
+    },
+    relative_install_path: "mediadrm",
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

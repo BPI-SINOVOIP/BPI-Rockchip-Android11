@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package bluetooth.l2cap.classic;
+
+import "google/protobuf/empty.proto";
+import "facade/common.proto";
+
+service L2capClassicModuleFacade {
+  rpc RegisterChannel(RegisterChannelRequest) returns (google.protobuf.Empty) {
+    // Testing Android Bluetooth stack only. Optional for other stack.
+  }
+  rpc FetchConnectionComplete(google.protobuf.Empty) returns (stream ConnectionCompleteEvent) {
+    // Testing Android Bluetooth stack only. Optional for other stack.
+  }
+  rpc FetchConnectionClose(google.protobuf.Empty) returns (stream ConnectionCloseEvent) {
+    // Testing Android Bluetooth stack only. Optional for other stack.
+  }
+  rpc Connect(facade.BluetoothAddress) returns (google.protobuf.Empty) {}
+  rpc OpenChannel(OpenChannelRequest) returns (google.protobuf.Empty) {}
+  rpc CloseChannel(CloseChannelRequest) returns (google.protobuf.Empty) {}
+  rpc ConfigureChannel(ConfigureChannelRequest) returns (google.protobuf.Empty) {}
+  rpc SendL2capPacket(L2capPacket) returns (SendL2capPacketResult) {}
+  rpc FetchL2capData(google.protobuf.Empty) returns (stream L2capPacket) {}
+  rpc SetDynamicChannel(SetEnableDynamicChannelRequest) returns (google.protobuf.Empty) {}
+  rpc SendDynamicChannelPacket(DynamicChannelPacket) returns (google.protobuf.Empty) {}
+}
+
+message RegisterChannelRequest {
+  uint32 channel = 1;
+}
+
+message ConnectionCompleteEvent {
+  facade.BluetoothAddress remote = 1;
+}
+
+message ConnectionCloseEvent {
+  facade.BluetoothAddress remote = 1;
+  uint32 reason = 2;
+}
+
+enum RetransmissionFlowControlMode {
+  BASIC = 0;
+  ERTM = 3;
+}
+
+message OpenChannelRequest {
+  facade.BluetoothAddress remote = 1;
+  uint32 psm = 2;
+  RetransmissionFlowControlMode mode = 3;
+}
+
+message ConfigureChannelRequest {
+  facade.BluetoothAddress remote = 1;
+  // Config
+}
+
+message CloseChannelRequest {
+  uint32 psm = 1;
+}
+
+enum ChannelSignalEventType {
+  OPEN = 0;
+  CLOSE = 1;
+  CONFIGURE = 2;
+}
+
+message ChannelSignalEvent {
+  uint32 cid = 1;
+  ChannelSignalEventType type = 2;
+}
+
+enum SendL2capPacketResultType {
+  OK = 0;
+  BAD_CID = 1;
+}
+
+message SendL2capPacketResult {
+  SendL2capPacketResultType result_type = 1;
+}
+
+message L2capPacket {
+  facade.BluetoothAddress remote = 1;
+  uint32 channel = 2;
+  bytes payload = 3;
+}
+
+message SetEnableDynamicChannelRequest {
+  uint32 psm = 1;
+  bool enable = 2;
+  RetransmissionFlowControlMode retransmission_mode = 3;
+}
+
+message DynamicChannelPacket {
+  facade.BluetoothAddress remote = 1;
+  uint32 psm = 2;
+  bytes payload = 3;
+}

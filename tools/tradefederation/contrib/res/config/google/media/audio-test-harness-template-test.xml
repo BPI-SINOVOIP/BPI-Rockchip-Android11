@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Google Inc. All Rights Reserved -->
+<configuration description="Template for Audio Test Harness">
+    <option name="test-tag" value="AudioTestHarnessTemplate" />
+
+    <target_preparer class="com.android.tradefed.targetprep.DeviceSetup">
+        <option name="disable-audio" value="false"/>
+        <option name="screen-saver" value="off"/>
+        <option name="set-system-setting" key="volume_music_speaker" value="16" />
+        <option name="set-system-setting" key="volume_music_headset" value="16" />
+        <option name="set-system-setting" key="volume_music_headphone" value="16" />
+        <option name="set-property" key="audio.safemedia.bypass" value="1"/>
+    </target_preparer>
+
+    <target_preparer class="com.android.tradefed.targetprep.InstallApkSetup">
+       <option name="apk-path" value="out/target/product/generic/testcases/mediaframeworktest/arm/mediaframeworktest.apk" />
+     </target_preparer>
+
+    <test class="com.android.media.template.AudioTestHarnessTemplateTest">
+        <option name="audio-play-duration" value="3500" />
+    </test>
+</configuration>

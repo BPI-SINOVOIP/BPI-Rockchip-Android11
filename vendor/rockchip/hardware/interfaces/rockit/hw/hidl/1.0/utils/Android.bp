@@ -1,0 +1,39 @@
+cc_library {
+    name: "librockit_hw_hidl@1.0",
+    vendor: true,
+    defaults: ["hidl_defaults"],
+
+    srcs: [
+        "RTUtils.cpp",
+        "rt_drm.cpp",
+        "RockitHwManager.cpp",
+        "RockitHwService.cpp",
+        "RockitHwInterface.cpp",
+        "hw/mpi/RockitHwMpi.cpp"
+    ],
+
+    header_libs: [
+        "libsystem_headers",
+    ],
+
+    shared_libs: [
+        "rockchip.hardware.rockit.hw@1.0",
+        "libbase",
+        "libcutils",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "libbinder",
+        "libmpp",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    export_shared_lib_headers: [
+        "rockchip.hardware.rockit.hw@1.0",
+        "libhidlbase",
+    ],
+}
+

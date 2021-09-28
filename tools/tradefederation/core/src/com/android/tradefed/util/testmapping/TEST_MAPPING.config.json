@@ -1,0 +1,122 @@
+{
+  "definitions": {
+    "name": {
+      "type": "string",
+      "title": "Test Name",
+      "default": "",
+      "examples": [
+        "CtsAppTestCases"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "host": {
+      "type": "boolean",
+      "title": "Whether this is a deviceless test and should run on a host"
+    },
+    "file_patterns": {
+      "type": "array",
+      "title": "A list of regex path strings that should trigger this test"
+    },
+    "options": {
+      "type": "array",
+      "title": "Custom options to pass to Tradefed",
+      "items": {
+        "type": "object",
+        "title": "The Items Schema",
+        "properties": {
+          "include-filter": {
+            "type": "string",
+            "title": "RegEx of the class name that should be included in running",
+            "examples": [
+              "android.app.cts.TaskDescriptionTest"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "exclude-filter": {
+            "type": "string",
+            "title": "RegEx of the class name that should be excluded from running",
+            "examples": [
+              "android.app.cts.TaskDescriptionTest"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "include-annotation": {
+            "type": "string",
+            "title": "Include tests annotated with the following annotation",
+            "examples": [
+              "android.platform.test.annotations.Presubmit"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "exclude-annotation": {
+            "type": "string",
+            "title": "Exclude tests annotated with the following annotation",
+            "examples": [
+              "androidx.test.filters.FlakyTest"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "The Root Schema",
+  "minItems": 1,
+
+  "properties": {
+    "presubmit": {
+      "type": "array",
+      "title": "Presubmit test configuration",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "options": { "$ref": "#/definitions/options" },
+          "host": { "$ref": "#/definitions/host" },
+          "file_patterns": { "$ref": "#/definitions/file_patterns" }
+        }
+      }
+    },
+    "postsubmit": {
+      "type": "array",
+      "title": "Postsubmit test configuration",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": { "$ref": "#/definitions/name" },
+          "options": { "$ref": "#/definitions/options" },
+          "host": { "$ref": "#/definitions/host" }
+        }
+      }
+    },
+    "import": {
+      "type": "array",
+      "title": "Allows you to include tests in other TEST_MAPPING files without copying the content",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "title": "Path from which TEST_MAPPING files should be used. TEST_MAPPING files in the parent directories of the imported path will be included when running tests.",
+            "examples": [
+              "frameworks/base/services/core/java/com/android/server/am"
+            ],
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    }
+  }
+}

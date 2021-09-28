@@ -1,0 +1,94 @@
+
+∆"¡
+6
+class-com.google.android.powertests.PartialWakelock
+
+current
+
+idAndroidJUnitRunner
+
+numtests
+9
+stream/
+com.google.android.powertests.PartialWakelock:
+
+testpartialWakelock
+¿#"é
+6
+class-com.google.android.powertests.PartialWakelock
+
+start-timestamp
+
+testpartialWakelock
+
+	timestamp0‘·ó§õ[
+
+timestamps-message*¨"--------- beginning of main
+08-28 15:05:16.598 10178  7664  7664 I MonitoringInstr: Activities that are still in CREATED to STOPPED: 0
+08-28 15:05:16.601 10178  7664  7696 D com.google.android.powertests.PartialWakelock: fixture setup
+08-28 15:05:16.601 10178  7664  7696 I com.android.test.power.utils.Screen: Setting Screen Off
+08-28 15:05:16.684 10117  2426  7573 I ChromeSync: [Persistence,AffiliationManager] Fetching affiliations from the server.
+08-28 15:05:16.721 10117  2426  7573 E ChromeSync: [Sync,SyncIntentOperation] Error handling the intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:com.google.android.powertests flg=0x4000010 cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }.
+08-28 15:05:16.736 10117  2426 31227 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=AppsCorpus serviceId=32
+08-28 15:05:16.737 10117  2426 16984 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=AppsCorpus serviceId=36
+--------- beginning of system
+08-28 15:05:16.774  1000   940  2043 W ProcessStats: Tracking association SourceState{7e3b0a1 com.google.android.gms.persistent/10117 ImpFg #71619} whose proc state 2 is better than process ProcessState{55175ae com.google.android.gms/10117 pkg=com.google.android.gms} proc state 3 (73 skipped)
+08-28 15:05:16.808 10117  2426  6018 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+08-28 15:05:16.840  1000   940  2512 I ActivityManager: Force stopping com.googlecode.android_scripting appid=1000 user=0: from pid 7728
+08-28 15:05:16.841  1000   940  2512 I ActivityManager: Killing 6654:com.googlecode.android_scripting/1000 (adj 965): stop com.googlecode.android_scripting
+08-28 15:05:16.824 10117  2426  6018 I chatty  : uid=10117(com.google.android.gms) lowpool[42] identical 1 line
+08-28 15:05:16.846 10117  2426  6018 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+08-28 15:05:16.852 radio  1559  1559 E PhoneInterfaceManager: [PhoneIntfMgr] getCarrierPackageNamesForIntent: No UICC
+08-28 15:05:16.852 radio  1559  1559 D CarrierSvcBindHelper: No carrier app for: 0
+08-28 15:05:16.859   nfc  2452  2452 D RegisteredNfcFServicesCache: Service unchanged, not updating
+08-28 15:05:16.863 media   796   905 D NuPlayerDriver: reset(0xe199b100) at state 4
+08-28 15:05:16.865  root   629   629 I Zygote  : Process 6654 exited due to signal 9 (Killed)
+08-28 15:05:16.865 media   796  6689 D NuPlayerDriver: notifyResetComplete(0xe199b100)
+08-28 15:05:16.873 10117  2426  6018 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+08-28 15:05:16.887  1000   940  1069 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 6654 in 44ms
+08-28 15:05:17.172  1000   647   647 I /vendor/bin/hw/android.hardware.health@2.0-service.marlin: SRAM data: 2812000
+08-28 15:05:17.668  1000   647   647 I chatty  : uid=1000(system) health@2.0-serv identical 20 lines
+08-28 15:05:17.672  1000   647   647 I /vendor/bin/hw/android.hardware.health@2.0-service.marlin: SRAM data: 2812000
+08-28 15:05:17.697 10117  2426 28502 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+08-28 15:05:17.717  1000   647   647 I /vendor/bin/hw/android.hardware.health@2.0-service.marlin: SRAM data: 2812000
+08-28 15:05:17.769  1000   647   647 I chatty  : uid=1000(system) health@2.0-serv identical 2 lines
+08-28 15:05:17.773  1000   647   647 I /vendor/bin/hw/android.hardware.health@2.0-service.marlin: SRAM data: 2812000
+08-28 15:05:17.775 10117  2426 28502 I Icing   : Indexing done com.google.android.gms-apps
+08-28 15:05:17.778  1000   647   647 I /vendor/bin/hw/android.hardware.health@2.0-service.marlin: SRAM data: 2812000
+08-28 15:05:17.786  1000   940  2043 I WindowManager: sleepRelease() calling goToSleep(GO_TO_SLEEP_REASON_SLEEP_BUTTON)
+08-28 15:05:17.787  1000   940  2043 I PowerManagerService: Going to sleep due to sleep_button (uid 1000)...
+08-28 15:05:17.788  1000   940   940 W UsageStatsService: Event reported without a package name, eventType:16
+08-28 15:05:17.802 10178  7664  7696 D com.google.android.powertests.PartialWakelock: before
+08-28 15:05:17.839  1000   940  1115 V DisplayPowerController: Brightness [131] reason changing to: 'manual', previous reason: 'manual [ dim ]'.
+
+è"å
+6
+class-com.google.android.powertests.PartialWakelock
+
+end-timestamp
+
+testpartialWakelock
+
+	timestamp0ûÕô§õ[
+
+timestamps-message
+ñ"ì
+6
+class-com.google.android.powertests.PartialWakelock
+
+current
+
+idAndroidJUnitRunner
+
+numtests
+
+stream.
+
+testpartialWakelock-")
+'
+stream
+
+Time: 16.333
+
+OK (1 test)
+

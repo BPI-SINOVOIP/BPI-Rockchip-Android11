@@ -1,0 +1,11 @@
+This directory contains tooling to help when debugging time zone issues on
+Android.
+
+dump-tzdata.py
+ - A tool that takes a tzdata file and splits it into component tzfiles,
+   zone.tab, etc. Run it with --help for usage. The individual tzfiles can
+   be inspected with tools like zdump, for example with "zdump -V <tzfile>"
+
+   It also dumps human-readable CSV files of the (v1) content currently used by
+   Android's ZoneInfo class. These can be inspected and compared with dumps from
+   other tzdata files easily using your favourite text diffing tool.

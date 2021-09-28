@@ -1,0 +1,124 @@
+// Copyright 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Set of error prone rules to ensure code quality
+// PackageLocation check requires the androidCompatible=false otherwise it does not do anything.
+java_library_host {
+    name: "atest-tradefed-shell",
+}
+
+tradefed_binary_host {
+    name: "atest-tradefed",
+    short_name: "ATEST",
+    full_name: "ATest Test Suite",
+    static_libs: ["atest-tradefed-shell"],
+}
+
+python_defaults {
+    name: "atest_py3_default",
+    pkg_path: "atest",
+    version: {
+        py2: {
+            enabled: false,
+            embedded_launcher: false,
+        },
+        py3: {
+            enabled: true,
+            embedded_launcher: false,
+        },
+    },
+}
+
+python_binary_host {
+    name: "atest",
+    main: "atest.py",
+    srcs: [
+        "**/*.py",
+    ],
+    exclude_srcs: [
+        "*_unittest.py",
+        "*/*_unittest.py",
+        "asuite_lib_test/*.py",
+        "proto/*_pb2.py",
+        "proto/__init__.py",
+    ],
+    libs: [
+        "atest_py3_proto",
+    ],
+    data: [
+        "tools/updatedb_darwin.sh",
+        ":asuite_version",
+    ],
+    // Make atest's built name to atest-dev
+    stem: "atest-dev",
+    defaults: ["atest_py3_default"],
+    dist: {
+        targets: ["droidcore"],
+    },
+}
+
+python_library_host {
+    name: "atest_py3_proto",
+    defaults: ["atest_py3_default"],
+    srcs: [
+        "proto/*.proto",
+    ],
+    proto: {
+        canonical_path_from_root: false,
+    },
+}
+
+// Exclude atest_updatedb_unittest due to it's a test for ATest's wrapper
+// of updatedb, but there's no updatedb binary on test server.
+python_test_host {
+    name: "atest_unittests",
+    main: "atest_run_unittests.py",
+    pkg_path: "atest",
+    srcs: [
+        "**/*.py",
+    ],
+    data: [
+        "tools/updatedb_darwin.sh",
+        "unittest_data/**/*",
+        "unittest_data/**/.*",
+    ],
+    exclude_srcs: [
+        "asuite_lib_test/*.py",
+        "proto/*_pb2.py",
+        "proto/__init__.py",
+        "tools/atest_updatedb_unittest.py",
+    ],
+    libs: [
+        "atest_py3_proto",
+    ],
+    test_config: "atest_unittests.xml",
+    test_suites: ["general-tests"],
+    defaults: ["atest_py3_default"],
+}
+
+python_test_host {
+    name: "atest_integration_tests",
+    main: "atest_integration_tests.py",
+    pkg_path: "atest",
+    srcs: [
+        "atest_integration_tests.py",
+    ],
+    data: [
+        "INTEGRATION_TESTS",
+    ],
+    test_config: "atest_integration_tests.xml",
+    test_suites: ["general-tests"],
+    defaults: ["atest_py3_default"],
+}
+

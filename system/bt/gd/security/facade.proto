@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package bluetooth.security;
+
+import "google/protobuf/empty.proto";
+import "facade/common.proto";
+
+service SecurityModuleFacade {
+  rpc CreateBond(facade.BluetoothAddressWithType) returns (google.protobuf.Empty) {}
+  rpc CancelBond(facade.BluetoothAddressWithType) returns (google.protobuf.Empty) {}
+  rpc RemoveBond(facade.BluetoothAddressWithType) returns (google.protobuf.Empty) {}
+  rpc SendUiCallback(UiCallbackMsg) returns (google.protobuf.Empty) {}
+  rpc FetchUiEvents(google.protobuf.Empty) returns (stream UiMsg) {}
+  rpc FetchBondEvents(google.protobuf.Empty) returns (stream BondMsg) {}
+}
+
+enum UiMsgType {
+  DISPLAY_YES_NO_WITH_VALUE = 0;
+  DISPLAY_YES_NO = 1;
+  DISPLAY_PASSKEY = 2;
+  DISPLAY_PASSKEY_ENTRY = 3;
+  DISPLAY_CANCEL = 4;
+}
+
+message UiMsg {
+  UiMsgType message_type = 1;
+  facade.BluetoothAddressWithType peer = 2;
+  uint32 numeric_value = 3;
+  uint32 unique_id = 4;
+}
+
+enum UiCallbackType {
+  YES_NO = 0;
+  PASSKEY = 1;
+}
+
+message UiCallbackMsg {
+  UiCallbackType message_type = 1;
+  bool boolean = 2;
+  uint32 numeric_value = 3;
+  uint32 unique_id = 4;
+}
+
+enum BondMsgType {
+  DEVICE_BONDED = 0;
+  DEVICE_UNBONDED = 1;
+  DEVICE_BOND_FAILED = 2;
+}
+
+message BondMsg {
+  BondMsgType message_type = 1;
+  facade.BluetoothAddressWithType peer = 2;
+}

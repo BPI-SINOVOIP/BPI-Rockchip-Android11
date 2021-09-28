@@ -1,0 +1,40 @@
+# Only trigger if persist.debug.trigger_watchdog.apex is non-empty.
+on boot && property:persist.debug.trigger_watchdog.apex=*
+    setprop debug.trigger_watchdog.status start
+    exec -- /system/bin/log -t TriggerWatchdog "Starting trigger_watchdog"
+    exec_background u:r:su:s0 -- /system/bin/sh /system/bin/trigger_watchdog.sh
+
+# Only trigger if persist.debug.trigger_reboot_after_activation is non-empty.
+on boot && property:debug.trigger_reboot_once_after_activation=1 && property:persist.debug.trigger_reboot_after_activation=*
+    setprop debug.trigger_watchdog.status start
+    exec -- /system/bin/log -t TriggerWatchdog "Rebooting once after activation"
+    exec_background u:r:su:s0 -- /system/bin/sh /system/bin/trigger_reboot.sh
+
+on boot && property:persist.debug.trigger_reboot_twice_after_activation=1 && property:persist.debug.trigger_reboot_after_activation=*
+    setprop debug.trigger_watchdog.status start
+    exec -- /system/bin/log -t TriggerWatchdog "Checking checkpointing revert"
+    exec_background u:r:su:s0 -- /system/bin/sh /system/bin/trigger_reboot.sh
+
+on boot && property:persist.debug.trigger_updatable_crashing_for_testing=1
+    # Mock the fact that a service was crashing.
+    setprop sys.init.updatable_crashing_process_name test_process
+    setprop sys.init.updatable_crashing 1
+
+on boot && property:test.apex_revert_test_force_reboot=1
+    exec_start rebooting_service
+
+# Simulate a situation when userspace reboot fails to remount userdata. Since triggers in
+# rootdir/init.rc are guaranteed to be executed before ones in other .rc files, by the time this is
+# executed init already executed `on userspace-reboot-fs-remount` trigger in rootdir/init.rc,
+# meaning that /system/bin/vdc checkpoint markBootAttempt was already called.
+on userspace-reboot-fs-remount && property:test.apex_userspace_reboot_simulate_remount_failed=1
+    exec_start rebooting_service
+
+# Simulate a situation when userspace reboot fails during a shutdown sequence. This is a very crude
+# simulation, better one would be to actually start a service that ignores SIGKILL.
+on userspace-reboot-requested && property:test.apex_userspace_reboot_simulate_shutdown_failed=1
+    exec_start rebooting_service
+
+service rebooting_service /system/bin/false
+    reboot_on_failure reboot,apex-revert-test
+    disabled

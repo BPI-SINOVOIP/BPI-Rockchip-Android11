@@ -1,0 +1,53 @@
+//
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+// libartpalette-system is the implementation of the platform
+// abstraction layer for ART. It is intended to be dynamically loaded by
+// ART which now ships as an APEX and not part of the system.
+cc_library {
+    name: "libartpalette-system",
+    compile_multilib: "both",
+    header_libs: ["libartpalette-headers"],
+    host_supported: true,
+    target: {
+        android: {
+            srcs: ["palette_android.cc"],
+            header_libs: ["libbase_headers"],
+            shared_libs: [
+                "libbase",
+                "libcutils",
+                "liblog",
+                "libprocessgroup",
+                "libtombstoned_client",
+            ],
+        },
+        host: {
+            header_libs: ["libbase_headers"],
+            srcs: ["palette_fake.cc"],
+            shared_libs: ["libbase"],
+        },
+        darwin: {
+            enabled: false,
+        },
+        windows: {
+            enabled: false,
+        },
+    },
+    static: {
+        enabled: false,
+    },
+    version_script: "libartpalette.map.txt",
+}

@@ -1,0 +1,12 @@
+Ensure that `adb` and `aapt` are available on your path and run:
+$ ./run_gamecore.sh <options>
+
+Usage: ./run_gamecore.sh [--all] [--apk-info=file] [--apk-dir=dir]
+
+Options:
+  -a, --all 		run all tests
+  -h, --help 		print this help
+  --apk-info=file 	An XML file describing the list of APKs for qualifications.
+  --apk-dir=dir 	Directory containing the APKs for qualifications.  If --apk-info is
+                	not specified and a file named 'apk-info.xml' exists in --apk-dir,
+                	that file will be used as the apk-info.

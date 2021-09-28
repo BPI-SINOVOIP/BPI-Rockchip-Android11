@@ -1,0 +1,236 @@
+little_endian_packets
+
+custom_field Address : 48 "hci/"
+custom_field ClassOfDevice : 24 "hci/"
+
+enum PacketType : 8 {
+    UNKNOWN = 0x00,
+    ACL = 0x01,
+    DISCONNECT = 0x02,
+    ENCRYPT_CONNECTION = 0x03,
+    ENCRYPT_CONNECTION_RESPONSE = 0x04,
+    EVENT = 0x05,
+    INQUIRY = 0x06,
+    INQUIRY_RESPONSE = 0x07,
+    IO_CAPABILITY_REQUEST = 0x08,
+    IO_CAPABILITY_RESPONSE = 0x09,
+    IO_CAPABILITY_NEGATIVE_RESPONSE = 0x0A,
+    LE_ADVERTISEMENT = 0x0B,
+    LE_CONNECT = 0x0C,
+    LE_CONNECT_COMPLETE = 0x0D,
+    LE_SCAN = 0x0E,
+    LE_SCAN_RESPONSE = 0x0F,
+    PAGE = 0x10,
+    PAGE_RESPONSE = 0x11,
+    PAGE_REJECT = 0x12,
+    READ_CLOCK_OFFSET = 0x13,
+    READ_CLOCK_OFFSET_RESPONSE = 0x14,
+    READ_REMOTE_SUPPORTED_FEATURES = 0x15,
+    READ_REMOTE_SUPPORTED_FEATURES_RESPONSE = 0x16,
+    READ_REMOTE_LMP_FEATURES = 0x17,
+    READ_REMOTE_LMP_FEATURES_RESPONSE = 0x18,
+    READ_REMOTE_EXTENDED_FEATURES = 0x19,
+    READ_REMOTE_EXTENDED_FEATURES_RESPONSE = 0x1A,
+    READ_REMOTE_VERSION_INFORMATION = 0x1B,
+    READ_REMOTE_VERSION_INFORMATION_RESPONSE = 0x1C,
+    REMOTE_NAME_REQUEST = 0x1D,
+    REMOTE_NAME_REQUEST_RESPONSE = 0x1E,
+    SCO = 0x1F,
+    COMMAND = 0x23, // Remove
+    RESPONSE = 0x24, // Remove
+}
+
+packet LinkLayerPacket {
+  type : PacketType,
+  source_address : Address,
+  destination_address : Address,
+  _body_,
+}
+
+packet Command : LinkLayerPacket (type = COMMAND) {
+  _payload_,
+}
+
+packet Response : LinkLayerPacket (type = RESPONSE) {
+  opcode : 16,
+  _payload_,
+}
+
+packet AclPacket : LinkLayerPacket (type = ACL) {
+  _payload_,
+}
+
+packet Disconnect : LinkLayerPacket (type = DISCONNECT) {
+  reason : 8,
+}
+
+packet EncryptConnection : LinkLayerPacket (type = ENCRYPT_CONNECTION) {
+  key : 8[],
+}
+
+packet EncryptConnectionResponse : LinkLayerPacket (type = ENCRYPT_CONNECTION_RESPONSE) {
+  key : 8[],
+}
+
+enum InquiryState : 8 {
+  STANDBY = 0x00,
+  INQUIRY = 0x01,
+}
+
+enum InquiryType : 8 {
+  STANDARD = 0x00,
+  RSSI = 0x01,
+  EXTENDED = 0x02,
+}
+
+packet Inquiry : LinkLayerPacket (type = INQUIRY) {
+  inquiry_type : InquiryType,
+}
+
+packet BasicInquiryResponse : LinkLayerPacket(type = INQUIRY_RESPONSE) {
+  inquiry_type : InquiryType,
+  page_scan_repetition_mode : 8,
+  class_of_device : ClassOfDevice,
+  clock_offset : 15,
+  _reserved_ : 1,
+  _body_,
+}
+
+packet InquiryResponse : BasicInquiryResponse (inquiry_type = STANDARD) {
+}
+
+packet InquiryResponseWithRssi : BasicInquiryResponse (inquiry_type = RSSI)  {
+  rssi: 8,
+}
+
+packet ExtendedInquiryResponse : BasicInquiryResponse (inquiry_type = EXTENDED)  {
+  rssi: 8,
+  extended_data : 8[],
+}
+
+packet IoCapabilityRequest : LinkLayerPacket (type = IO_CAPABILITY_REQUEST) {
+  io_capability : 8,
+  oob_data_present : 8,
+  authentication_requirements : 8,
+}
+
+packet IoCapabilityResponse : LinkLayerPacket (type = IO_CAPABILITY_RESPONSE) {
+  io_capability : 8,
+  oob_data_present : 8,
+  authentication_requirements : 8,
+}
+
+packet IoCapabilityNegativeResponse : LinkLayerPacket (type = IO_CAPABILITY_NEGATIVE_RESPONSE) {
+  reason : 8,
+}
+
+enum AddressType : 8 {
+  PUBLIC = 0,
+  RANDOM = 1,
+  PUBLIC_IDENTITY = 2,
+  RANDOM_IDENTITY = 3,
+}
+
+enum AdvertisementType : 8 {
+    ADV_IND = 0,          // Connectable and scannable
+    ADV_DIRECT_IND = 1,   // Connectable directed
+    ADV_SCAN_IND = 2,     // Scannable undirected
+    ADV_NONCONN_IND = 3,  // Non connectable undirected
+    SCAN_RESPONSE = 4,
+}
+
+packet LeAdvertisement : LinkLayerPacket (type = LE_ADVERTISEMENT) {
+  address_type : AddressType,
+  advertisement_type : AdvertisementType,
+  data : 8[],
+}
+
+packet LeConnect : LinkLayerPacket (type = LE_CONNECT) {
+  le_connection_interval_min : 16,
+  le_connection_interval_max : 16,
+  le_connection_latency : 16,
+  le_connection_supervision_timeout : 16,
+  address_type : 8,
+}
+
+packet LeConnectComplete : LinkLayerPacket (type = LE_CONNECT_COMPLETE) {
+  le_connection_interval : 16,
+  le_connection_latency : 16,
+  le_connection_supervision_timeout : 16,
+  address_type : 8,
+}
+
+packet LeScan : LinkLayerPacket (type = LE_SCAN) {
+}
+
+packet LeScanResponse : LinkLayerPacket (type = LE_SCAN_RESPONSE) {
+  address_type : AddressType,
+  advertisement_type : AdvertisementType,
+  data : 8[],
+}
+
+packet Page : LinkLayerPacket (type = PAGE) {
+  class_of_device : ClassOfDevice,
+  allow_role_switch : 8,
+}
+
+packet PageResponse : LinkLayerPacket (type = PAGE_RESPONSE) {
+  try_role_switch : 8,
+}
+
+packet PageReject : LinkLayerPacket (type = PAGE_REJECT) {
+  reason : 8,
+}
+
+packet ReadClockOffset : LinkLayerPacket (type = READ_CLOCK_OFFSET) {
+}
+
+packet ReadClockOffsetResponse : LinkLayerPacket (type = READ_CLOCK_OFFSET_RESPONSE) {
+  offset : 16,
+}
+
+packet ReadRemoteSupportedFeatures : LinkLayerPacket (type = READ_REMOTE_SUPPORTED_FEATURES) {
+}
+
+packet ReadRemoteSupportedFeaturesResponse : LinkLayerPacket (type = READ_REMOTE_SUPPORTED_FEATURES_RESPONSE) {
+  features : 64,
+}
+
+packet ReadRemoteLmpFeatures : LinkLayerPacket (type = READ_REMOTE_LMP_FEATURES) {
+}
+
+packet ReadRemoteLmpFeaturesResponse : LinkLayerPacket (type = READ_REMOTE_LMP_FEATURES_RESPONSE) {
+  features : 64,
+}
+
+packet ReadRemoteExtendedFeatures : LinkLayerPacket (type = READ_REMOTE_EXTENDED_FEATURES) {
+  page_number : 8,
+}
+
+packet ReadRemoteExtendedFeaturesResponse : LinkLayerPacket (type = READ_REMOTE_EXTENDED_FEATURES_RESPONSE) {
+  status : 8,
+  page_number : 8,
+  max_page_number : 8,
+  features : 64,
+}
+
+packet ReadRemoteVersionInformation : LinkLayerPacket (type = READ_REMOTE_VERSION_INFORMATION) {
+}
+
+packet ReadRemoteVersionInformationResponse : LinkLayerPacket (type = READ_REMOTE_VERSION_INFORMATION_RESPONSE) {
+  lmp_version : 8,
+  lmp_subversion : 8,
+  manufacturer_name : 16,
+}
+
+packet RemoteNameRequest : LinkLayerPacket (type = REMOTE_NAME_REQUEST) {
+}
+
+packet RemoteNameRequestResponse : LinkLayerPacket (type = REMOTE_NAME_REQUEST_RESPONSE) {
+  name : 8[248],
+}
+
+packet ScoPacket : LinkLayerPacket (type = SCO) {
+  _payload_,
+}
+

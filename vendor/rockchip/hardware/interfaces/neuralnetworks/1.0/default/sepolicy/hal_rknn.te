@@ -1,0 +1,29 @@
+type vendor-rknn-hal, domain;
+type vendor-rknn-hal_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor-rknn-hal)
+
+add_hwservice(vendor-rknn-hal, vendor-rknn_hal_hwservice)
+hal_server_domain(vendor-rknn-hal, hal_neuralnetworks)
+typeattribute untrusted_app hal_rknn_client;
+typeattribute untrusted_app_25 hal_rknn_client;
+typeattribute untrusted_app_27 hal_rknn_client;
+typeattribute untrusted_app_29 hal_rknn_client;
+typeattribute system_app hal_rknn_client;
+typeattribute priv_app hal_rknn_client;
+typeattribute platform_app hal_rknn_client;
+typeattribute su hal_rknn_client;
+typeattribute shell hal_rknn_client;
+typeattribute ephemeral_app hal_rknn_client;
+
+
+# ashmem
+allow vendor-rknn-hal hal_allocator_server:fd use;
+allow hal_rknn_client vendor-rknn_hal_hwservice:hwservice_manager find;
+
+#
+allow vendor-rknn-hal gpu_device:dir r_dir_perms;
+allow vendor-rknn-hal gpu_device:chr_file rw_file_perms;
+
+hwbinder_use(vendor-rknn-hal)
+vndbinder_use(vendor-rknn-hal)

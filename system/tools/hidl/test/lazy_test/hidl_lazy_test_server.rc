@@ -1,0 +1,7 @@
+service hidl_lazy_test_server /system_ext/bin/hidl_lazy_test_server
+    interface android.hardware.tests.lazy@1.0::ILazy default
+    user nobody
+    group nobody
+    oneshot
+    disabled
+

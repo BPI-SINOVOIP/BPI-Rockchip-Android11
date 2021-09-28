@@ -1,0 +1,51 @@
+// FIXME: your file license if you have one
+
+cc_library_shared {
+    // FIXME: this should only be -impl for a passthrough hal.
+    // In most cases, to convert this to a binderized implementation, you should:
+    // - change '-impl' to '-service' here and make it a cc_binary instead of a
+    //   cc_library_shared.
+    // - add a *.rc file for this module.
+    // - delete HIDL_FETCH_I* functions.
+    // - call configureRpcThreadpool and registerAsService on the instance.
+    // You may also want to append '-impl/-service' with a specific identifier like
+    // '-vendor' or '-<hardware identifier>' etc to distinguish it.
+    name: "rockchip.hardware.neuralnetworks@1.0-impl",
+    relative_install_path: "hw",
+    vendor: true,
+    srcs: [
+        "GetResultCallback.cpp",
+        "LoadModelCallback.cpp",
+        "RKNeuralnetworks.cpp",
+    ],
+    shared_libs: [
+        "libhidlbase",
+        "libhidlmemory",
+        "libcutils",
+        "libutils",
+        "liblog",
+        "rockchip.hardware.neuralnetworks@1.0",
+        "android.hidl.memory@1.0",
+        "librknnrt",
+        "rockchip.hardware.neuralnetworks@1.0-adapter-helper",
+    ],
+    cflags: ["-DIMPL_RKNN"],
+}
+
+cc_prebuilt_library_shared {
+    name: "librknnrt",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["prebuilts/librknnrt/lib64/librknnrt.so"],
+        },
+        lib32: {
+            srcs: ["prebuilts/librknnrt/lib/librknnrt.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

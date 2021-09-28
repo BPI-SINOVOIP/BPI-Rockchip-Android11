@@ -1,0 +1,111 @@
+// Copyright (C) 2020 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+python_binary_host {
+    name: "update_apn",
+    main: "python/update_apn.py",
+    srcs: [
+        "python/update_apn.py",
+        "proto/*.proto",
+    ],
+    proto: {
+        canonical_path_from_root: false
+    },
+    libs: [
+        "libprotobuf-python",
+        "py-six",
+    ],
+}
+
+python_binary_host {
+    name: "update_carrier_data",
+    main: "python/update_carrier_data.py",
+    srcs: [
+        "python/compare.py",
+        "python/update_carrier_data.py",
+        "proto/*.proto",
+    ],
+    proto: {
+        canonical_path_from_root: false
+    },
+    libs: [
+        "libprotobuf-python",
+        "py-six",
+    ],
+}
+
+java_binary_host {
+    name: "CarrierConfigConverterV2",
+    srcs: [
+        "java/CarrierConfigConverterV2.java",
+        "java/CarrierProtoUtils.java",
+        "proto/*.proto",
+        ":telephonyprovider-proto-sources",
+    ],
+    java_resources: [
+      ":telephonyprovider-assets-carrierlist",
+    ],
+    main_class: "com.google.carrier.CarrierConfigConverterV2",
+    proto: {
+        type: "full",
+        canonical_path_from_root: false,
+    },
+    plugins: [
+        "dagger2-auto-value",
+    ],
+    static_libs: [
+        "dagger2-auto-value",
+        "guava-21.0",
+        "jcommander",
+        "libprotobuf-java-full",
+    ],
+}
+
+java_binary_host {
+    name: "GenCarrierList",
+    srcs: [
+        "java/CarrierProtoUtils.java",
+        "java/GenCarrierList.java",
+        "proto/*.proto",
+    ],
+    main_class: "com.google.carrier.GenCarrierList",
+    proto: {
+        type: "full",
+        canonical_path_from_root: false,
+    },
+    static_libs: [
+        "guava-21.0",
+        "jcommander",
+        "libprotobuf-java-full",
+    ],
+}
+
+java_binary_host {
+    name: "GenDeviceSettings",
+    srcs: [
+        "java/CarrierProtoUtils.java",
+        "java/GenDeviceSettings.java",
+        "proto/*.proto",
+    ],
+    main_class: "com.google.carrier.GenDeviceSettings",
+    proto: {
+        type: "full",
+        canonical_path_from_root: false,
+    },
+    static_libs: [
+        "guava-21.0",
+        "jcommander",
+        "libprotobuf-java-full",
+    ],
+}

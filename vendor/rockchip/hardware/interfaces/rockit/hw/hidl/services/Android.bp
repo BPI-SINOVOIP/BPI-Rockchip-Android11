@@ -1,0 +1,43 @@
+cc_binary {
+    name: "rockchip.hardware.rockit.hw@1.0-service",
+    defaults: ["hidl_defaults"],
+    soc_specific: true,
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: [
+        "vendor.cpp",
+    ],
+
+    init_rc: ["rockchip.hardware.rockit.hw@1.0-service.rc"],
+    vintf_fragments: ["rockchip.hardware.rockit.hw@1.0-service.xml"],
+    shared_libs: [
+        "rockchip.hardware.rockit.hw@1.0",
+        "libavservices_minijail_vendor",
+        "libbinder",
+        "librockit_hw_hidl@1.0",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+    ],
+    required: ["rockit.vendor.base.policy"],
+    compile_multilib: "32",
+}
+
+prebuilt_etc {
+    name: "rockit.vendor.base.policy",
+    sub_dir: "seccomp_policy",
+    vendor: true,
+    compile_multilib: "32",
+    arch: {
+        arm: {
+            src: "seccomp_policy/rockit.vendor.base-arm.policy",
+        },
+        x86: {
+            src: "seccomp_policy/rockit.vendor.base-x86.policy",
+        },
+    },
+    required: [
+        "crash_dump.policy",
+    ],
+}
+

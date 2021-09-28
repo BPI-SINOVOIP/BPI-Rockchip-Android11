@@ -1,0 +1,57 @@
+// Below lists the TEST_MAPPING tests to do ASuite unittests to make sure
+// the expectation of ASuite are still good.
+{
+  "mainline-presubmit": [
+    {
+      "name": "HelloWorldTests"
+    },
+    {
+      "name": "hello_world_test",
+      "host": true
+    },
+    {
+      "name": "CtsApacheHttpLegacy27ApiSignatureTestCases"
+    },
+    {
+      "name": "ziparchive-tests"
+    },
+    {
+      "name": "CtsDpiTestCases",
+      "options": [
+        {
+          "include-filter": "android.dpi.cts.ConfigurationScreenLayoutTest"
+        }
+      ]
+    },
+    {
+      "name": "CtsSampleHostTestCases"
+    }
+  ],
+  "presubmit": [
+    {
+      // Host side ATest unittests.
+      "name": "atest_unittests",
+      "host": true
+    },
+    {
+      // Host side metrics tests.
+      "name": "asuite_metrics_lib_tests",
+      "host": true
+    },
+    {
+      // Host side metrics tests with Python3.
+      "name": "asuite_metrics_lib_py3_tests",
+      "host": true
+    },
+    {
+      // Host side clearcut tests.
+      "name": "asuite_cc_lib_tests",
+      "host": true
+    },
+    {
+      // Host side clearcut tests with Python3.
+      "name": "asuite_cc_lib_py3_tests",
+      "host": true
+    }
+  ]
+}

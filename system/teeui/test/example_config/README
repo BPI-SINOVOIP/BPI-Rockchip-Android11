@@ -1,0 +1,113 @@
+# Device Configuration for localization_rendering_tests #
+
+## Setup ##
+Include the following three files in a new directory that you would want to run
+your test from. These files would be referred to as the configuration files.
+* Android.bp
+* TEST_MAPPING
+* test_main.cpp
+
+
+## Android.bp file ##
+Define a new module in the Android.bp file.
+
+The following is a template for the Android.bp file, only the <device name> needs to be replaced.
+
+cc_test_host {
+    name: "system.teeui_localization_rendering_test.<device name>",
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-O0",
+    ],
+    srcs: [
+        "test_main.cpp",
+    ],
+    test_suites: ["device-tests"],
+    shared_libs: [
+        "libbase",
+        "libteeui_localization_rendering_test",
+    ],
+    static_libs: [
+        "libgtest",
+    ]
+}
+
+
+## TEST_MAPPING ##
+The TEST_MAPPING file is going to run the test as a postsubmit test with the
+configuration parameters set within this file.
+
+The following is a template for the TEST_MAPPING file. All the flags should be
+configured with the values specific to the device. If no configuration is
+provided, the values will default to the values for Blueline.
+
+{
+  "postsubmit": [
+    {
+      "name": "system.teeui_localization_rendering_test.<device name>",
+      "host" : true,
+      "options": [
+          {
+            "native-test-flag": "--width=<device width in pixels>"
+          },
+          {
+            "native-test-flag": "--height=<device height in pixels>"
+          },
+          {
+            "native-test-flag": "--dp2px=<pixel per density independent pixel (px/dp) ratio of the device. Typically <width in pixels>/412 >"
+          },
+          {
+            "native-test-flag": "--mm2px=<pixel per millimeter (px/mm) ratio>"
+          },
+          {
+            "native-test-flag": "--powerButtonTop=<distance from the top of the power button to the top of the screen in mm>"
+          },
+          {
+            "native-test-flag": "--powerButtonBottom=<distance from the bottom of the power button to the top of the screen in mm>"
+          },
+          {
+            "native-test-flag": "--volUpButtonTop=<distance from the top of the UP volume button to the top of the screen in mm>"
+          },
+          {
+            "native-test-flag": "--volUpButtonBottom=<distance from the bottom of the UP power button to the top of the screen in mm>"
+          }
+        ]
+    }
+  ]
+}
+
+## test_main.cpp ##
+The current directory contains a test_main.cpp that initiates the localization
+rendering test.
+Make a copy of the cpp file (found in this directory) and place it in the
+test configuration directory you will run the test from.
+
+## Run test ##
+To run the tests against the TEST_MAPPING configurations use the following
+command:
+	atest --test-mapping [src_path]:all
+more info on how to run atest can be found here: https://source.android.com/compatibility/tests/development/test-mapping
+
+It is possible to run the test as a binary and pass in configuration
+values as commandline parameters.
+The following command is how to run the test
+in the commandline.
+	atest system.teeui_localization_rendering_test.<device name> -- \
+	--test-arg
+	com.android.tradefed.testtype.HostGTest:native-test-flag:"--width=100"\
+	--test-arg
+	com.android.tradefed.testtype.HostGTest:native-test-flag:"--height=100"\
+	--test-arg
+        com.android.tradefed.testtype.HostGTest:native-test-flag:"--dp2px=100"\
+	 --test-arg
+        com.android.tradefed.testtype.HostGTest:native-test-flag:"--mm2px=100"
+	--test-arg
+        com.android.tradefed.testtype.HostGTest:native-test-flag:"--powerButtonTop=100"\
+	--test-arg
+        com.android.tradefed.testtype.HostGTest:native-test-flag:"--powerButtonBottom=100"\
+	--test-arg
+        com.android.tradefed.testtype.HostGTest:native-test-flag:"--volUpButtonTop=100"\
+	 --test-arg
+        com.android.tradefed.testtype.HostGTest:native-test-flag:"--volUpButtonBottom=100"\

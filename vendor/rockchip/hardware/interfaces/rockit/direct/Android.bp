@@ -1,0 +1,67 @@
+cc_library_shared {
+
+    srcs: [
+        "RockitPlayer.cpp",
+        "RockitPlayerInterface.cpp",
+        "RockitPlayerManager.cpp",
+        "RTSurfaceCallback.cpp",
+        "RTMsgCallback.cpp",
+        "RTAudioSinkCallback.cpp",
+        "RTGraphicWindowApi.cpp",
+        "RTSubtitleSink.cpp",
+        "RTChips.cpp",
+        "sideband/RTSidebandWindow.cpp",
+        "sideband/DrmVopRender.cpp",
+        "sideband/MessageThread.cpp",
+        "RTMetadataRetrieverCallback.cpp",
+        "RockitMetadataRetriever.cpp",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "libutils",
+        "libcutils",
+        "libEGL",
+        "libGLESv1_CM",
+        "libui",
+        "libgui",
+        "liblog",
+        "libmedia",
+        "libgralloc_priv",
+        "libaudioclient",
+        "libdrm",
+        "libbinder",
+        "libhardware"
+    ],
+
+    header_libs: [
+        "libmediametrics_headers",
+    ],
+
+    static_libs: [
+        "libyuv_static",
+        "libstagefright_color_conversion",
+    ],
+
+    include_dirs: [
+        "frameworks/av/include",
+        "system/media/audio/include",
+        "hardware/rockchip/librkvpu/omx_get_gralloc_private",
+        "vendor/rockchip/hardware/interfaces/rockit/include",
+        "vendor/rockchip/hardware/interfaces/rockit/include/rt_base",
+        "vendor/rockchip/hardware/interfaces/rockit/include/rt_media",
+        "vendor/rockchip/hardware/interfaces/rockit/include/rt_player",
+    ],
+
+    local_include_dirs: ["include"],
+
+    cflags: [
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+        "-Wall",
+    ],
+
+    name: "librockit_interface",
+
+}
+

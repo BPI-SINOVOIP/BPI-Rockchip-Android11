@@ -1,0 +1,15 @@
+cc_prebuilt_library_shared {
+    name: "librttinyxml",
+    compile_multilib: "both",
+
+    multilib: {
+      lib32: {
+         srcs: ["arm/librttinyxml.so"],
+      },
+      lib64: {
+         srcs: ["arm64/librttinyxml.so"],
+      },
+    },
+
+    check_elf_files: false,
+}

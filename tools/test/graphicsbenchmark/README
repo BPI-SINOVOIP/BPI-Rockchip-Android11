@@ -1,0 +1,33 @@
+Build
+-----
+Note: env setup requires slightly more than a normal Android build,
+so that the path gets adjusted for tradefed.sh:
+
+From the root of your Android tree:
+
+$ . build/envsetup.sh
+$ lunch 2				# generic aosp arm64 eng build
+$ mmma tools/tradefederation/core tools/test/graphicsbenchmark
+
+To run, ensure that `adb` and `aapt` are available on your path, and run from tools/test/graphicsbenchmark dir:
+
+$ tradefed.sh run commandAndExit AndroidTest.xml
+
+Available options include:
+--apk-info  An XML file describing the list of APKs for qualifications.
+--apk-dir   Directory contains the APKs for qualifications.  If --apk-info is not specified and a
+file named 'apk-info.xml' exists in --apk-dir, that file will be used as the apk-info.
+
+Contact a member of the team for alternative test apks.
+
+gamecore.zip
+------------
+To create a gamecore.zip for distribution, run:
+$ tapas gamecore && make dist DIST_DIR=dist
+
+This will create a gamecore.zip in the 'dist' directory.
+
+Testing
+-------
+To run unit tests:
+$ atest --include-subdirs --test-mapping tools/test/graphicsbenchmark:presubmit

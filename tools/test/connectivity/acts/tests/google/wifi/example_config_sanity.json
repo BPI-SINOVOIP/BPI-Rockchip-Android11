@@ -1,0 +1,207 @@
+{
+    "testbed": [
+        {
+            "name": "test_station_name",
+            "AndroidDevice": [
+                "<serial number 1>",
+                "<serial number 2 if necessary and 3 etc>"
+            ],
+            "AccessPoint": [
+                    { "ssh_config" :
+                                    {
+                                            "user" : "root",
+                                            "host" : "<ip 1, e.g. 192.168.1.2>"
+                                    }
+                    },
+                    { "ssh_config" :
+                                    {
+                                            "user" : "root",
+                                            "host" : "<ip 2 (if necessary) and ip 3 ...>"
+                                    }
+                    }
+            ],
+            "Attenuator": [
+                {
+                    "Address": "<attenuator ip address>",
+                    "InstrumentCount": 4,
+                    "Model": "<model, e.g. minicircuits>",
+                    "Paths": [
+                        "AP1-2G",
+                        "AP1-5G",
+                        "AP2-2G",
+                        "AP2-5G"
+                    ],
+                    "Port": 22
+                }
+            ],
+            "IPerfServer": [
+                5004
+            ],
+            "bssid_2g": {
+                "BSSID": "<bssid, e.g. 00:01:02:03:04:05>",
+                "high": "-10",
+                "low": "-85"
+            },
+            "bssid_5g": {
+                "BSSID": "<bssid>",
+                "high": "-10",
+                "low": "-85"
+            },
+            "bssid_dfs": {
+                "BSSID": "<bssid>",
+                "high": "-10",
+                "low": "-85"
+            },
+            "iperf_server_address": "100.107.126.31"
+        }
+    ],
+    "atten_val": {
+        "Ap1_2g": [
+            10,
+            95,
+            95,
+            95
+        ],
+        "Ap1_2gto5g": [
+            45,
+            10,
+            95,
+            95
+        ],
+        "Ap1_5gto2g": [
+            10,
+            80,
+            95,
+            95
+        ],
+        "Ap2_2g": [
+            75,
+            75,
+            10,
+            75
+        ],
+        "Ap2_2gto5g": [
+            75,
+            75,
+            75,
+            10
+        ],
+        "Ap2_5gto2g": [
+            75,
+            75,
+            10,
+            75
+        ],
+        "Back_from_blacklist": [
+            40,
+            95,
+            95
+        ],
+        "In_AP1_5gto2g": [
+            10,
+            75,
+            95,
+            95
+        ],
+        "In_Ap2_5gto2g": [
+            75,
+            75,
+            10,
+            75
+        ],
+        "In_blacklist": [
+            95,
+            95,
+            0
+        ],
+        "Swtich_AP1toAp2": [
+            70,
+            70,
+            2,
+            70
+        ],
+        "Swtich_AP2toAp1": [
+            10,
+            70,
+            75,
+            75
+        ],
+        "Swtich_to_blacklist": [
+            60,
+            90,
+            40
+        ]
+    },
+    "attenuator_id": 0,
+    "roaming_attn": {
+        "AP1_on_AP2_off": [
+            0,
+            0,
+            95,
+            95
+        ],
+        "AP1_off_AP2_on": [
+            95,
+            95,
+            0,
+            0
+        ],
+        "default": [
+            0,
+            0,
+            0,
+            0
+        ]
+    },
+    "attn_vals": {
+        "a_b_on": [
+            0,
+            0
+        ],
+        "a_on_b_off": [
+            0,
+            95
+        ],
+        "b_on_a_off": [
+            95,
+            0
+        ],
+        "default": [
+            0,
+            0
+        ]
+    },
+    "device_password": "hahahaha",
+    "eap_password": "password",
+    "fqdn": "red.com",
+    "max_bugreports": 5,
+    "other_network": {
+        "SSID": "wh_ap3_2g",
+        "password": "hahahaha"
+    },
+    "ping_addr": "https://www.google.com/robots.txt",
+    "pno_interval": 120,
+    "provider_friendly_name": "red",
+    "realm": "red.com",
+    "roam_interval": 60,
+    "run_extended_test": false,
+    "two_ap_testbed": true,
+    "aware_default_power_mode": "INTERACTIVE",
+    "stress_count": 100,
+    "stress_hours": 5,
+    "dbs_supported_models": ["<product name 1>", "<product name 2>"],
+    "lci_reference": [],
+    "lcr_reference": [],
+    "rtt_reference_distance_mm": 4600,
+    "stress_test_min_iteration_count": 100,
+    "stress_test_target_run_time_sec" : 30,
+    "energy_info_models": [
+        "<product name 1 (adb shell getprop ro.build.product)>",
+        "<product name 2>"
+    ],
+    "tdls_models": [
+        "<product name 1>",
+        "<product name 2>"
+    ]
+}
+

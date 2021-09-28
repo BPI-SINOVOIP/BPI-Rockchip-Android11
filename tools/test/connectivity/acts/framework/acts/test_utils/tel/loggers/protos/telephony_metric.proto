@@ -1,0 +1,41 @@
+/* Note: If making any changes to this file be sure to generate a new
+   compiled *_pb2.py file by running the following command from this
+   directory:
+   $ protoc -I=. --python_out=. telephony_metric.proto
+
+   Be sure that you are compiling with protoc 3.4.0
+
+   More info can be found at:
+   https://developers.google.com/protocol-buffers/docs/pythontutorial
+*/
+
+syntax = "proto2";
+
+package wireless.android.platform.testing.telephony.metrics;
+
+message TelephonyVoiceTestResult {
+
+  enum CallResult {
+    UNAVAILABLE_NETWORK_TYPE = -2;
+    CALL_SETUP_FAILURE = -1;
+    SUCCESS = 0;
+    INITIATE_FAILED = 1;
+    NO_RING_EVENT_OR_ANSWER_FAILED = 2;
+    NO_CALL_ID_FOUND = 3;
+    CALL_STATE_NOT_ACTIVE_DURING_ESTABLISHMENT = 4;
+    AUDIO_STATE_NOT_INCALL_DURING_ESTABLISHMENT = 5;
+    AUDIO_STATE_NOT_INCALL_AFTER_CONNECTED = 6;
+    CALL_DROP_OR_WRONG_STATE_DURING_ESTABLISHMENT = 7;
+    CALL_DROP_OR_WRONG_STATE_AFTER_CONNECTED = 8;
+    CALL_HANGUP_FAIL = 9;
+    CALL_ID_CLEANUP_FAIL = 10;
+}
+
+  optional CallResult result = 1;
+  optional float call_setup_time_latency = 2;
+}
+
+message TelephonyVoiceStressResult {
+  repeated TelephonyVoiceTestResult results = 1;
+}
+

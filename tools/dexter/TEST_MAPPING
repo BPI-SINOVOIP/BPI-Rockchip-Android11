@@ -1,0 +1,25 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsInlineMockingTestCases",
+      "options": [
+        {
+          "exclude-annotation": "androidx.test.filters.LargeTest"
+        }
+      ]
+    },
+    {
+      "name": "CtsExtendedMockingTestCases",
+      "options": [
+        {
+          "exclude-annotation": "androidx.test.filters.LargeTest"
+        }
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "path": "cts/hostsidetests/jvmti"
+    }
+  ]
+}

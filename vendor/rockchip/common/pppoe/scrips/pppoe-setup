@@ -1,0 +1,194 @@
+#!/system/bin/sh
+
+# Paths to programs
+#IFCONFIG=/system/bin/ifconfig
+PPPD=/system/bin/pppd
+PPPOE=/system/bin/pppoe
+ECHO="/system/bin/log -t pppoe_setup"
+#ECHO=echo
+
+# Set to "C" locale so we can parse messages from commands
+LANG=C
+export LANG
+
+CONFIG=/data/misc/ppp/pppoe.conf
+RESOLV=/data/misc/ppp/resolv.conf
+VARRUN=/data/misc/ppp
+PPP_DIR=/data/misc/ppp
+#LOG=/data/misc/ppp/log
+#LOG=/dev/console
+SETPROP=/system/bin/setprop
+GETPROP=/system/bin/getprop
+BUSYBOX=busybox
+
+if [ -n "$1" ] ; then
+_account=$1
+_iface=$2
+_demand=$3
+_dns1=$4
+_dns2=$5
+_password=$6
+_firewall=$7
+else
+_account=`$GETPROP net.pppoe.account`
+_iface=`$GETPROP net.pppoe.iface`
+_demand=no
+_dns1=server
+_dns2=
+_password=`$GETPROP net.pppoe.password`
+_firewall=NONE
+fi
+
+$ECHO "-------------------PPPOE--------------------"     
+
+$ECHO "setprop net.pppoe.status setuping"
+$SETPROP "net.pppoe.status" "setuping"  
+
+# Protect created files
+umask 077
+
+copy() {
+    $BUSYBOX cp $1 $2
+    if [ "$?" != 0 ] ; then
+        $ECHO "*** Error copying $1 to $2"     
+        $ECHO "*** Quitting."    
+        exit 1
+    fi
+}
+
+# Prototype config file must exist
+if [ ! -r "$CONFIG" ] ; then
+    $ECHO "Oh, dear, I don't see the file '$CONFIG' anywhere."     
+    exit 1
+fi
+
+# Must have pppd
+if [ ! -x $PPPD ] ; then
+    $ECHO "Oops, I can't execute the program '$PPPD'.  You"     
+    $ECHO "must install the PPP software suite, version 2.3.10 or later."     
+    exit 1
+fi
+export CONFIG
+. $CONFIG
+
+if [ "$DEMAND" = "" ] ; then
+    DEMAND=no
+fi
+
+# pppoe must exist
+#if [ ! -x "$PPPOE" ] ; then
+#    $ECHO "Oh, dear, I can't execute the program '$PPPOE'."
+#    exit 1
+#fi
+    USER=$_account
+    $ECHO "USER NAME: $USER"     
+
+    ETH=$_iface
+    $ECHO "INTERFACE: $ETH"     
+
+#    $ECHO "Do you want the link to come up on demand, or stay up continuously?"
+#    $ECHO "If you want it to come up on demand, enter the idle time in seconds"
+#    $ECHO "after which the link should be dropped.  If you want the link to"
+#    $ECHO "stay up permanently, enter 'no' (two letters, lower-case.)"
+#    $ECHO "NOTE: Demand-activated links do not interact well with dynamic IP"
+#    $ECHO "addresses.  You may have some problems with demand-activated links."
+    DEMAND=$_demand
+    $ECHO "DEMAND: $DEMAND"     
+
+    DNS1=$_dns1
+    DNS2=$_dns2
+    $ECHO "DNS1: $DNS1"     
+    $ECHO "DNS2: $DNS2"     
+
+    PWD=$_password
+#    $ECHO "PASSWORD: $PWD"     
+    $ECHO "PASSWORD:"     
+
+
+    # Firewalling
+#    $ECHO "The firewall choices are:"
+#    $ECHO "NONE: This script will not set any firewall rules.  You are responsible"
+#    $ECHO "          for ensuring the security of your machine.  You are STRONGLY"
+#    $ECHO "          recommended to use some kind of firewall rules."
+#    $ECHO "STANDALONE: Appropriate for a basic stand-alone web-surfing workstation"
+#    $ECHO "MASQUERADE: Appropriate for a machine acting as an Internet gateway"
+#    $ECHO "                for a LAN"
+    FIREWALL=$_firewall
+    $ECHO "FIREWALL: $FIREWALL"     
+
+
+# Adjust configuration files.  First to $CONFIG
+
+$ECHO "Adjusting $CONFIG"     
+
+copy $CONFIG $CONFIG-bak
+if [ "$DNS1" = "server" ] ; then
+    DNSTYPE=SERVER
+    DNS1=""
+    PEERDNS=yes
+else
+    PEERDNS=no
+    if [ "$DNS1" = "" ] ; then
+	DNSTYPE=NOCHANGE
+    else
+	DNSTYPE=SPECIFY
+    fi
+fi
+
+# Some #$(*& ISP's use a slash in the user name...
+$BUSYBOX sed -e "s&^USER=.*&USER='$USER'&" \
+    -e "s&^ETH=.*&ETH='$ETH'&" \
+    -e "s&^PIDFILE=.*&PIDFILE=\"$VARRUN/\$CF_BASE-pppoe.pid\"&" \
+    -e "s/^FIREWALL=.*/FIREWALL=$FIREWALL/" \
+    -e "s/^DEMAND=.*/DEMAND=$DEMAND/" \
+    -e "s/^DNSTYPE=.*/DNSTYPE=$DNSTYPE/" \
+    -e "s/^DNS1=.*/DNS1=$DNS1/" \
+    -e "s/^DNS2=.*/DNS2=$DNS2/" \
+    -e "s/^PEERDNS=.*/PEERDNS=$PEERDNS/" \
+    < $CONFIG-bak > $CONFIG
+
+if [ $? != 0 ] ; then
+    $ECHO "** Error modifying $CONFIG"     
+    $ECHO "** Quitting"     
+    exit 1
+fi
+
+
+if [ "$DNS1" != "" ] ; then
+    if [ "$DNS1" != "server" ] ; then
+	$ECHO "Adjusting $RESOLV"     
+	if [ -r $RESOLV ] ; then
+	    $ECHO "  (First backing it up to $RESOLV-bak)"     
+	    $BUSYBOX cp $RESOLV $RESOLV-bak
+	    rm $RESOLV
+	fi
+	echo "nameserver $DNS1" >> $RESOLV
+	if [ "$DNS2" != "" ] ; then
+	    echo "nameserver $DNS2" >> $RESOLV
+	fi
+	chmod 644 $RESOLV
+    fi
+fi
+
+$ECHO "Adjusting $PPP_DIR/pap-secrets and $PPP_DIR/chap-secrets"     
+if [ -r $PPP_DIR/pap-secrets ] ; then
+    $ECHO "  (But first backing it up to $PPP_DIR/pap-secrets-bak)"     
+    copy $PPP_DIR/pap-secrets $PPP_DIR/pap-secrets-bak
+else
+    $BUSYBOX cp /dev/null $PPP_DIR/pap-secrets-bak
+fi
+if [ -r $PPP_DIR/chap-secrets ] ; then
+    $ECHO "  (But first backing it up to $PPP_DIR/chap-secrets-bak)"     
+    copy $PPP_DIR/chap-secrets $PPP_DIR/chap-secrets-bak
+else
+    $BUSYBOX cp /dev/null $PPP_DIR/chap-secrets-bak
+fi
+
+$BUSYBOX egrep -v "^$USER|^\"$USER\"" $PPP_DIR/pap-secrets-bak > $PPP_DIR/pap-secrets
+echo "\"$USER\"	*	\"$PWD\"" >> $PPP_DIR/pap-secrets
+$BUSYBOX egrep -v "^$U|^\"$U\"" $PPP_DIR/chap-secrets-bak > $PPP_DIR/chap-secrets
+echo "\"$USER\"	*	\"$PWD\"" >> $PPP_DIR/chap-secrets
+
+$ECHO "setprop net.pppoe.status setuped"     
+$SETPROP "net.pppoe.status" "setuped"
+exit 0

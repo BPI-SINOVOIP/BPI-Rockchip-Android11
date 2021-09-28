@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<root>
+    <event id="1" name="Button Down" />
+    <event id="3" name="Play/Pause Button Event" />
+    <event id="4" name="A2DP Start Ind" />
+    <event id="6" name="A2DP Start Streaming" />
+    <event id="9" name="AVRCP Play Notification" />
+    <event id="10" name="AVRCP Pause Notification" />
+    <event id="12" name="Voice Cmd Btn Held" />
+    <event id="13" name="Voice Cmd Btn Released" />
+
+    <!-- Event pairs that we are interested in measuring the latency of -->
+    <event-pair start-event="1" end-event="3" />
+    <event-pair start-event="1" end-event="12" />
+    <event-pair start-event="3" end-event="9" />
+    <event-pair start-event="9" end-event="6" />
+    <event-pair start-event="1" end-event="6" />
+    <event-pair start-event="3" end-event="10" />
+    <event-pair start-event="1" end-event="10" />
+    <event-pair start-event="12" end-event="13" />
+    <event-pair start-event="13" end-event="6" />
+</root>

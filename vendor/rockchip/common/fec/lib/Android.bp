@@ -1,0 +1,21 @@
+cc_prebuilt_library {
+    name: "libdistortion_gl",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: [
+                "arm64/libdistortion_gl.so",
+            ],
+        },
+        lib32: {
+            srcs: [
+                "arm/libdistortion_gl.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

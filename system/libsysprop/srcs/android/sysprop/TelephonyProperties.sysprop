@@ -1,0 +1,470 @@
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+module: "android.sysprop.TelephonyProperties"
+owner: Platform
+prop {
+    api_name: "airplane_mode_on"
+    type: Boolean
+    scope: Internal
+    access: ReadWrite
+    prop_name: "persist.radio.airplane_mode_on"
+    integer_as_bool : true
+}
+
+######## Baseband and Radio Interface version
+
+# TODO T: property strings do not have to be gsm specific
+#         change gsm.*operator.*" properties to "operator.*" properties
+
+#
+# Baseband version. Indexed by phone ID
+#
+# Availability: property is available any time radio is on
+#
+prop {
+    api_name: "baseband_version"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.version.baseband"
+}
+
+# Radio Interface Layer (RIL) library implementation.
+prop {
+    api_name: "ril_impl"
+    type: String
+    scope: Internal
+    access: Readonly
+    prop_name: "gsm.version.ril-impl"
+}
+
+######## Current Network
+
+#
+# Alpha name of current registered operator. Indexed by phone ID
+#
+# Availability: when registered to a network. Result may be unreliable on
+# CDMA networks.
+#
+prop {
+    api_name: "operator_alpha"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.operator.alpha"
+}
+
+#
+# true if the device is on a manually selected network. Indexed by phone ID
+#
+# Availability: when registered to a network
+#
+prop {
+    api_name: "operator_numeric"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.operator.numeric"
+}
+
+#
+# true if the device is on a manually selected network
+#
+# Availability: when registered to a network
+#
+prop {
+    api_name: "operator_is_manual"
+    type: Boolean
+    scope: Internal
+    access: Readonly
+    prop_name: "operator.ismanual"
+}
+
+#
+# true if the device is considered roaming on this network for GSM purposes.
+# Indexed by phone ID
+#
+# Availability: when registered to a network
+#
+prop {
+    api_name: "operator_is_roaming"
+    type: BooleanList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.operator.isroaming"
+}
+
+#
+# The ISO country code equivalent of the current registered operator's MCC
+# (Mobile Country Code). Indexed by phone ID
+#
+# Availability: when registered to a network. Result may be unreliable on
+# CDMA networks.
+#
+prop {
+    api_name: "operator_iso_country"
+    type: StringList
+    scope: Public
+    access: ReadWrite
+    prop_name: "gsm.operator.iso-country"
+}
+
+#
+# The contents of this property is the value of the kernel command line
+# product_type variable that corresponds to a product that supports LTE on
+# CDMA.
+#
+prop {
+    api_name: "lte_on_cdma_product_type"
+    type: String
+    scope: Internal
+    access: Readonly
+    prop_name: "telephony.lteOnCdmaProductType"
+}
+
+#
+# The contents of this property is the one of LTE_ON_CDMA_TRUE or
+# LTE_ON_CDMA_FALSE. If absent the value will assumed to be false and the
+# PROPERTY_LTE_ON_CDMA_PRODUCT_TYPE will be used to determine its final
+# value which could also be LTE_ON_CDMA_FALSE.
+#
+prop {
+    api_name: "lte_on_cdma_device"
+    type: Integer
+    scope: Internal
+    access: Readonly
+    prop_name: "telephony.lteOnCdmaDevice"
+}
+
+prop {
+    api_name: "current_active_phone"
+    type: IntegerList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.current.phone-type"
+}
+
+######## SIM Card. Indexed by phone ID
+# "UNKNOWN|ABSENT|PIN_REQUIRED|PUK_REQUIRED|NETWORK_LOCKED|READY"
+
+prop {
+    api_name: "sim_state"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.sim.state"
+}
+
+#
+# The MCC+MNC (mobile country code+mobile network code) of the provider
+# of the SIM. 5 or 6 decimal digits. Indexed by phone ID
+#
+# Availability: SIM state must be READY
+#
+prop {
+    api_name: "icc_operator_numeric"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.sim.operator.numeric"
+}
+
+#
+# also known as the SPN, or Service Provider Name. Indexed by phone ID
+#
+# Availability: SIM state must be "READY"
+#
+prop {
+    api_name: "icc_operator_alpha"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.sim.operator.alpha"
+}
+
+# ISO country code equivalent for the SIM provider's country code.
+# Indexed by phone ID
+prop {
+    api_name: "icc_operator_iso_country"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.sim.operator.iso-country"
+}
+
+# Indicates the available radio technology. Indexed by phone ID
+prop {
+    api_name: "data_network_type"
+    type: StringList
+    scope: Internal
+    access: ReadWrite
+    prop_name: "gsm.network.type"
+}
+
+# Indicate if phone is in emergency callback mode
+prop {
+    api_name: "in_ecm_mode"
+    type: Boolean
+    scope: Public
+    access: ReadWrite
+    prop_name: "ril.cdma.inecmmode"
+}
+
+# Indicate the timer value for exiting emergency callback mode
+prop {
+    api_name: "ecm_exit_timer"
+    type: Long
+    scope: Public
+    access: Readonly
+    prop_name: "ro.cdma.ecmexittimer"
+}
+
+# the international dialing prefix of current operator network
+prop {
+    api_name: "operator_idp_string"
+    type: String
+    scope: Public
+    access: ReadWrite
+    prop_name: "gsm.operator.idpstring"
+}
+
+# Defines the schema for the carrier specified OTASP number.
+# Indexed by phone ID
+prop {
+    api_name: "otasp_num_schema"
+    type: StringList
+    scope: Internal
+    access: Readonly
+    prop_name: "ro.cdma.otaspnumschema"
+}
+
+# Disable all calls including Emergency call when it set to true.
+prop {
+    api_name: "disable_call"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "ro.telephony.disable-call"
+}
+
+# Set to true for vendor RIL's that send multiple UNSOL_CALL_RING notifications.
+prop {
+    api_name: "ril_sends_multiple_call_ring"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "ro.telephony.call_ring.multiple"
+}
+
+# The number of milliseconds between CALL_RING notifications.
+prop {
+    api_name: "call_ring_delay"
+    type: Integer
+    scope: Public
+    access: Readonly
+    prop_name: "ro.telephony.call_ring.delay"
+}
+
+#
+# Track CDMA SMS message id numbers to ensure they increment
+# monotonically, regardless of reboots.
+#
+prop {
+    api_name: "cdma_msg_id"
+    type: Integer
+    scope: Internal
+    access: ReadWrite
+    prop_name: "persist.radio.cdma.msgid"
+}
+
+# Property to override DEFAULT_WAKE_LOCK_TIMEOUT
+prop {
+    api_name: "wake_lock_timeout"
+    type: Integer
+    scope: Public
+    access: Readonly
+    prop_name: "ro.ril.wake_lock_timeout"
+}
+
+#
+# Set to true to indicate that the modem needs to be reset
+# when there is a radio technology change.
+#
+prop {
+    api_name: "reset_on_radio_tech_change"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "persist.radio.reset_on_switch"
+}
+
+#
+# Set to false to disable SMS receiving, default is
+# the value of config_sms_capable
+# Indexed by phone ID
+#
+prop {
+    api_name: "sms_receive"
+    type: BooleanList
+    scope: Internal
+    access: Readonly
+    prop_name: "telephony.sms.receive"
+}
+
+#
+# Set to false to disable SMS sending, default is
+# the value of config_sms_capable
+# Indexed by phone ID
+#
+prop {
+    api_name: "sms_send"
+    type: BooleanList
+    scope: Internal
+    access: Readonly
+    prop_name: "telephony.sms.send"
+}
+
+#
+# Set to true to indicate a test CSIM card is used in the device.
+# This property is for testing purpose only. This should not be defined
+# in commercial configuration.
+#
+prop {
+    api_name: "test_csim"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "persist.radio.test-csim"
+}
+
+#
+# Ignore RIL_UNSOL_NITZ_TIME_RECEIVED completely, used for debugging/testing.
+#
+prop {
+    api_name: "ignore_nitz"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "telephony.test.ignore.nitz"
+}
+
+#
+# Property to set multi sim feature.
+#
+prop {
+    api_name: "multi_sim_config"
+    type: String
+    scope: Public
+    access: ReadWrite
+    prop_name: "persist.radio.multisim.config"
+}
+
+#
+# Property to indicate if reboot is required when changing modems configurations
+# Default is false; most devices don't need reboot
+#
+prop {
+    api_name: "reboot_on_modem_change"
+    type: Boolean
+    scope: Internal
+    access: Readonly
+    prop_name: "persist.radio.reboot_on_modem_change"
+}
+
+#
+# Controls audio route for video calls.
+# false - Use the default audio routing strategy.
+# true  - Disable the speaker. Route the audio to Headset or Bluetooth
+#         or Earpiece, based on the default audio routing strategy.
+#
+prop {
+    api_name: "videocall_audio_output"
+    type: Integer
+    scope: Internal
+    access: Readonly
+    prop_name: "persist.radio.call.audio.output"
+}
+
+#
+# System Property which is used to decide whether the default eSIM UI will be shown,
+# the default value is false.
+#
+prop {
+    api_name: "enable_esim_ui_by_default"
+    type: Boolean
+    scope: Internal
+    access: Readonly
+    prop_name: "esim.enable_esim_system_ui_by_default"
+}
+
+prop {
+    api_name: "default_network"
+    type: IntegerList
+    scope: Internal
+    access: Readonly
+    prop_name: "ro.telephony.default_network"
+}
+
+prop {
+    api_name: "data_roaming"
+    type: Boolean
+    scope: Internal
+    access: Readonly
+    prop_name: "ro.com.android.dataroaming"
+}
+
+prop {
+    api_name: "mobile_data"
+    type: Boolean
+    scope: Public
+    access: Readonly
+    prop_name: "ro.com.android.mobiledata"
+}
+
+prop {
+    api_name: "wps_info"
+    type: Integer
+    scope: Internal
+    access: Readonly
+    prop_name: "wifidirect.wps"
+}
+
+#
+# How many logical modems can be active simultaneously. For example, if a device is dual-SIM
+# capable but currently only one SIM slot and one logical modem is active, this value is still
+# two.
+#
+prop {
+    api_name: "max_active_modems"
+    type: Integer
+    scope: Public
+    access: Readonly
+    prop_name: "telephony.active_modems.max_count"
+}
+
+#
+# Number of physical SIM slots on the device. This includes both eSIM and pSIM slots, and is
+# not necessarily the same as the number of phones/logical modems supported by the device.
+# For example, a multi-sim device can have 2 phones/logical modems, but 3 physical slots, or
+# a single SIM device can have 1 phones/logical modems, but 2 physical slots (one eSIM and
+# one pSIM)
+#
+prop {
+    api_name: "sim_slots_count"
+    type: Integer
+    scope: Public
+    access: Readonly
+    prop_name: "ro.telephony.sim_slots.count"
+}

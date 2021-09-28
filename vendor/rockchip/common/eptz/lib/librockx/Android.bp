@@ -1,0 +1,21 @@
+cc_prebuilt_library {
+    name: "librockx",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: [
+                "arm64/librockx.so",
+            ],
+        },
+        lib32: {
+            srcs: [
+                "arm/librockx.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

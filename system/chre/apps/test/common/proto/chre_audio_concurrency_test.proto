@@ -1,0 +1,42 @@
+syntax = "proto2";
+
+package chre_audio_concurrency_test;
+
+option java_package = "com.google.android.chre.nanoapp.proto";
+option java_outer_classname = "ChreAudioConcurrencyTest";
+
+import "chre_test_common.proto";
+
+// Nanoappp message type can be either host to chre (H2C) or chre to host (C2H)
+enum MessageType {
+  // Reserved for corrupted messages
+  UNDEFINED = 0;
+
+  // H2C: A message to start a test step.
+  // Payload must be TestCommand.
+  TEST_COMMAND = 1;
+
+  // C2H: A message indicating the test result.
+  // Payload must be chre_test_common.TestResult.
+  TEST_RESULT = 2;
+
+  // C2H: A message indicating that CHRE audio has been enabled and
+  // data has been received, after a previously received ENABLE_AUDIO
+  // step from a TEST_COMMAND message. No payload.
+  TEST_AUDIO_ENABLED = 3;
+}
+
+// A message to start a test step.
+message TestCommand {
+  enum Step {
+    UNDEFINED = 0;
+    // Sets up the test by enabling CHRE audio and verifying data reception.
+    ENABLE_AUDIO = 1;
+    // The host will send this step when the AP has held and released access
+    // to the mic. The nanoapp should verify that audio data reception resumes.
+    VERIFY_AUDIO_RESUME = 2;
+  }
+
+  // The test step.
+  optional Step step = 1;
+}

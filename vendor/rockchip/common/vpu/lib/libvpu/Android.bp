@@ -1,0 +1,17 @@
+cc_prebuilt_library {
+    name: "libvpu",
+    compile_multilib: "both",
+    multilib: {
+        lib64: {
+            srcs: ["arm64/mpp_dev/libvpu.so"],
+        },
+        lib32: {
+            srcs: ["arm/mpp_dev/libvpu.so"],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+    vendor: true,
+}

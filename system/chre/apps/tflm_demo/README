@@ -1,0 +1,19 @@
+README
+------
+
+1. Pulling the latest TFLM code base:  ../../external/tflm/tflm_sync_srcs.sh
+
+2. Make modifications to the nanoapp accordingly. If you have new source files,
+please add them to `COMMON_SRCS` in the Makefile.
+
+Also TFLM uses its own flatbuffer version not the default one in CHRE. Please be
+aware of this when developping nanoapps using flatbuffer.
+
+3. Build nanoapp for your platform, e.g. make google_hexagonv66_slpi-see-uimg
+
+SUPPORT
+-------
+
+Documentation: https://www.tensorflow.org/lite/microcontrollers
+GitHub repo: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro
+Forum: micro@tensorflow.org

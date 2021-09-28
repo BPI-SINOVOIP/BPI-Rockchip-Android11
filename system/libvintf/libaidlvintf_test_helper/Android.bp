@@ -1,0 +1,34 @@
+cc_defaults {
+    name: "use_libaidlvintf_gtest_helper_static",
+    static_libs: [
+        "libaidlvintf_gtest_helper",
+        "libbase",
+        "libz",
+        "libselinux",
+        "libtinyxml2",
+        "libvintf",
+        "libutils",
+    ],
+}
+
+cc_test_library {
+    name: "test_compile_use_libaidlvintf_gtest_helper_static",
+    defaults: ["use_libaidlvintf_gtest_helper_static"],
+    visibility: [":__subpackages__"],
+}
+
+cc_library_static {
+    name: "libaidlvintf_gtest_helper",
+    export_include_dirs: ["include"],
+    srcs: [
+        "Vintf.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libz",
+        "libselinux",
+        "libtinyxml2",
+        "libvintf",
+        "libutils",
+    ],
+}

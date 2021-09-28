@@ -1,0 +1,18 @@
+{
+    "_description": "This is a test configuration file for Wi-Fi P2p group tests.",
+    "testbed":
+    [
+        {
+            "_description": "Wi-Fi P2P testbed: auto-detect all attached devices",
+            "name": "WifiP2pAllAttached",
+            "AndroidDevice": "*"
+        }
+    ],
+    "skip_read_factory_mac": 1,
+    "network_name": "DIRECT-xy-Hello",
+    "passphrase": "P2pWorld1234",
+    "group_band": "2",
+    "logpath": "~/logs",
+    "testpaths": ["./tools/test/connectivity/acts/tests/google/wifi/p2p"],
+    "adb_logcat_param": "-b all"
+}

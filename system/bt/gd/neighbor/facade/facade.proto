@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package bluetooth.neighbor;
+
+import "google/protobuf/empty.proto";
+
+service NeighborFacade {
+  rpc SetConnectability(EnableMsg) returns (google.protobuf.Empty) {}
+  rpc SetDiscoverability(DiscoverabilitiyMsg) returns (google.protobuf.Empty) {}
+  rpc SetInquiryMode(InquiryMsg) returns (stream InquiryResultMsg) {}
+  rpc ReadRemoteName(RemoteNameRequestMsg) returns (google.protobuf.Empty) {}
+  rpc GetRemoteNameEvents(google.protobuf.Empty) returns (stream RemoteNameResponseMsg) {}
+  rpc EnableInquiryScan(EnableMsg) returns (google.protobuf.Empty) {}
+  rpc EnablePageScan(EnableMsg) returns (google.protobuf.Empty) {}
+}
+
+message EnableMsg {
+  bool enabled = 1;
+}
+
+enum DiscoverabilityMode {
+  OFF = 0;
+  LIMITED = 1;
+  GENERAL = 2;
+}
+
+message DiscoverabilitiyMsg {
+  DiscoverabilityMode mode = 1;
+}
+
+enum ResultMode {
+  STANDARD = 0;
+  RSSI = 1;
+  EXTENDED = 2;
+}
+
+message InquiryMsg {
+  DiscoverabilityMode inquiry_mode = 1;
+  ResultMode result_mode = 2;
+  uint32 length_1_28s = 3;
+  uint32 max_results = 4;  // 0 is unlimited
+}
+
+message InquiryResultMsg {
+  bytes packet = 1;
+}
+
+message RemoteNameRequestMsg {
+  bytes address = 1;
+  uint32 page_scan_repetition_mode = 2;  // r0, r1, r2
+  uint32 clock_offset = 3;
+}
+
+message RemoteNameResponseMsg {
+  uint32 status = 1;
+  bytes address = 2;
+  bytes name = 3;
+}

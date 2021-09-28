@@ -1,0 +1,442 @@
+little_endian_packets
+
+custom_field SixBytes : 48 "packet/parser/test/"
+custom_field Variable "packet/parser/test/"
+
+packet Parent {
+  _fixed_ = 0x12 : 8,
+  _size_(_payload_) : 8,
+  _payload_,
+  footer : 8,
+}
+
+packet Child : Parent {
+  field_name : 16,
+}
+
+enum FourBits : 4 {
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
+  FIVE = 5,
+  TEN = 10,
+  LAZY_ME = 15,
+}
+
+packet ParentTwo {
+  _reserved_ : 4,
+  four_bits : FourBits,
+  _payload_,
+}
+
+packet ChildTwoThree : ParentTwo (four_bits = THREE) {
+  more_bits : FourBits,
+  _reserved_ : 4,
+  sixteen_bits : 16
+}
+
+packet ChildTwoTwo : ParentTwo (four_bits = TWO) {
+  more_bits : FourBits,
+  _reserved_ : 4,
+}
+
+packet ChildTwoTwoThree :ChildTwoTwo (more_bits = THREE) {
+}
+
+enum TwoBits : 2 {
+  ZERO = 0,
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
+}
+
+packet MiddleFourBits {
+  low_two : TwoBits,
+  next_four : FourBits,
+  straddle : FourBits,
+  four_more : FourBits,
+  high_two : TwoBits,
+}
+
+packet ParentWithSixBytes {
+  two_bytes : 16,
+  six_bytes : SixBytes,
+  _payload_,
+}
+
+packet ChildWithSixBytes : ParentWithSixBytes (two_bytes = 0x1234) {
+  child_six_bytes : SixBytes,
+}
+
+checksum SimpleSum : 16 "packet/parser/test/"
+
+packet ParentWithSum {
+  two_bytes : 16,
+  _checksum_start_(example_checksum),
+  sum_bytes : 16,
+  _payload_,
+  example_checksum : SimpleSum,
+}
+
+packet ChildWithSum : ParentWithSum {
+  more_bytes : 32,
+  another_byte : 8,
+}
+
+packet ChildWithNestedSum : ParentWithSum {
+  _checksum_start_(nested_checksum),
+  more_bytes : 32,
+  nested_checksum : SimpleSum,
+}
+
+packet ParentSizeModifier {
+  _size_(_payload_) : 8,
+  _payload_ : [+2*8], // Include two_bytes in the size
+  two_bytes : 16,
+}
+
+packet ChildSizeModifier : ParentSizeModifier (two_bytes = 0x1211) {
+  more_bytes : 32,
+}
+
+packet FieldsEndWithNumbers {
+  field_1 : 16,
+  field_2 : 16,
+  field_10 : 16,
+  field_11 : 16,
+}
+
+enum ForArrays : 16 {
+  ONE = 0x0001,
+  TWO = 0x0002,
+  ONE_TWO = 0x0201,
+  TWO_THREE = 0x0302,
+  FFFF = 0xffff,
+}
+
+packet FixedArrayEnum {
+  enum_array : ForArrays[5],
+}
+
+packet SizedArrayEnum {
+  _size_(enum_array) : 16,
+  enum_array : ForArrays[],
+}
+
+packet CountArrayEnum {
+  _count_(enum_array) : 8,
+  enum_array : ForArrays[],
+}
+
+packet SizedArrayCustom {
+  _size_(six_bytes_array) : 8,
+  an_extra_byte : 8,
+  six_bytes_array : SixBytes[+1*8],
+}
+
+packet FixedArrayCustom {
+  six_bytes_array : SixBytes[5],
+}
+
+packet CountArrayCustom {
+  _count_(six_bytes_array) : 8,
+  six_bytes_array : SixBytes[],
+}
+
+packet PacketWithFixedArraysOfBytes {
+  fixed_256bit_in_bytes : 8[32],
+  fixed_256bit_in_words : 32[8],
+}
+
+packet OneVariable {
+  one : Variable,
+}
+
+packet SizedArrayVariable {
+  _size_(variable_array) : 8,
+  variable_array : Variable[],
+}
+
+packet FixedArrayVariable {
+  variable_array : Variable[5],
+}
+
+packet CountArrayVariable {
+  _count_(variable_array) : 8,
+  variable_array : Variable[],
+}
+
+struct TwoRelatedNumbers {
+  id : 8,
+  count : 16,
+}
+
+packet OneStruct {
+  one : TwoRelatedNumbers,
+}
+
+packet TwoStructs {
+  one : TwoRelatedNumbers,
+  two : TwoRelatedNumbers,
+}
+
+packet VectorOfStruct {
+  _count_(array) : 8,
+  array : TwoRelatedNumbers[],
+}
+
+packet ArrayOfStruct {
+  the_count : 8,
+  array : TwoRelatedNumbers[4],
+}
+
+struct StructWithFixedTypes {
+  four_bits : FourBits,
+  _reserved_ : 4,
+  _checksum_start_(example_checksum),
+  _fixed_ = 0xf3 : 8,
+  id : 8,
+  array : 8[3],
+  example_checksum : SimpleSum,
+  six_bytes : SixBytes,
+}
+
+packet OneFixedTypesStruct {
+  one : StructWithFixedTypes,
+}
+
+packet ArrayOfStructAndAnother {
+  _count_(array) : 8,
+  array : TwoRelatedNumbers[],
+  another : TwoRelatedNumbers,
+}
+
+packet SizedArrayOfStructAndAnother {
+  _size_(array) : 8,
+  array : TwoRelatedNumbers[],
+  another : TwoRelatedNumbers,
+}
+
+struct ArrayOfStructAndAnotherStruct {
+  _count_(array) : 8,
+  array : TwoRelatedNumbers[],
+  another : TwoRelatedNumbers,
+}
+
+struct SizedArrayOfStructAndAnotherStruct {
+  _size_(array) : 8,
+  array : TwoRelatedNumbers[],
+  another : TwoRelatedNumbers,
+}
+
+packet OneArrayOfStructAndAnotherStruct {
+  one : ArrayOfStructAndAnotherStruct,
+}
+
+packet OneSizedArrayOfStructAndAnotherStruct {
+  one : SizedArrayOfStructAndAnotherStruct,
+}
+
+group BitFieldGroup {
+  seven_bits : 7,
+  straddle : 4,
+  five_bits : 5,
+}
+
+packet BitFieldGroupPacket {
+  BitFieldGroup,
+}
+
+packet BitFieldGroupAfterPayloadPacket {
+  _payload_,
+  BitFieldGroup,
+}
+
+packet BitFieldGroupAfterUnsizedArrayPacket : BitFieldGroupAfterPayloadPacket {
+  array : 8[],
+}
+
+struct BitField {
+  seven_bits : 7,
+  straddle : 4,
+  five_bits : 5,
+}
+
+packet BitFieldPacket {
+  bit_field : BitField,
+}
+
+packet BitFieldAfterPayloadPacket {
+  _payload_,
+  bit_field : BitField,
+}
+
+packet BitFieldAfterUnsizedArrayPacket : BitFieldAfterPayloadPacket {
+  array : 8[],
+}
+
+packet BitFieldArrayPacket {
+  _size_(array): 8,
+  array : BitField[],
+}
+
+struct VersionlessStruct {
+  one_number : 8,
+}
+
+packet OneVersionlessStructPacket {
+  versionless : VersionlessStruct,
+  _payload_,
+}
+
+packet OneVersionedStructPacket : OneVersionlessStructPacket {
+  version : 8,
+  _payload_,
+}
+
+packet OneVersionOneStructPacket : OneVersionedStructPacket(version = 0x01) {
+  just_one_number : 8,
+}
+
+packet OneVersionTwoStructPacket : OneVersionedStructPacket(version = 0x02) {
+  one_number : 8,
+  another_number : 8,
+}
+
+enum StructType : 8 {
+  ZERO_BYTE = 0x00,
+  TWO_BYTE = 0x02,
+  FOUR_BYTE = 0x04,
+  AT_LEAST_FOUR_BYTE = 0x05,
+  VARIABLE = 0x06,
+}
+
+struct UnusedParentStruct {
+  struct_type : StructType,
+  _body_,
+}
+
+struct TwoByteStruct : UnusedParentStruct (struct_type = TWO_BYTE) {
+  two_bytes : 16,
+}
+
+struct FourByteStruct : UnusedParentStruct (struct_type = FOUR_BYTE) {
+  four_bytes : 32,
+}
+
+struct AtLeastFourByteStruct : UnusedParentStruct (struct_type = AT_LEAST_FOUR_BYTE) {
+  four_bytes : 32,
+  struct_type : StructType,
+  _body_,
+}
+
+struct OnlyFourByteStruct : AtLeastFourByteStruct (struct_type = ZERO_BYTE) {
+}
+
+struct SixByteStruct : AtLeastFourByteStruct (struct_type = TWO_BYTE) {
+  two_bytes : 16,
+}
+
+struct EightByteStruct : AtLeastFourByteStruct (struct_type = FOUR_BYTE) {
+  four_bytes : 32,
+}
+
+packet OneFourByteStruct {
+  one_struct : FourByteStruct,
+}
+
+packet OneGenericStruct {
+  base_struct : UnusedParentStruct,
+}
+
+packet OneGenericStructArray {
+  an_array : UnusedParentStruct[],
+}
+
+packet OneGenericStructFourArray {
+  an_array : UnusedParentStruct[4],
+}
+
+packet ParentWithOnlyFixed {
+  two_bytes : 16,
+  _body_,
+}
+
+packet OneGenericStructArrayAfterFixed : ParentWithOnlyFixed {
+  an_array : UnusedParentStruct[],
+}
+
+enum DataType : 8 {
+  ONE = 0x01,
+  TWO = 0x02,
+  THREE = 0x03,
+  FOUR = 0x04,
+  FIVE = 0x05,
+  UNUSED = 0x06,
+}
+
+struct LengthTypeValueStruct {
+  _size_(value) : 16,
+  type : DataType,
+  value : 8[+1*8],
+}
+
+packet OneLengthTypeValueStruct {
+  one_array : LengthTypeValueStruct[],
+}
+
+packet SizedParent {
+  _size_(payload) : 8,
+  _payload_,
+}
+
+packet OneLengthTypeValueStructPadded : SizedParent {
+  one_array : LengthTypeValueStruct[],
+  _padding_[40],
+}
+
+packet ByteSizedFields {
+  one : 8,
+  two : 16,
+  three : 24,
+  four : 32,
+  five : 40,
+  six : 48,
+  seven : 56,
+  eight : 64,
+}
+
+enum StructTypeNoZero : 4 {
+  TWO_BYTE = 0x02,
+  FOUR_BYTE = 0x04,
+  AT_LEAST_FOUR_BYTE = 0x05,
+}
+
+struct UnusedParentStructNoZero {
+  struct_type : StructTypeNoZero,
+  _reserved_ : 4,
+  length : 8,
+  _body_,
+}
+
+struct TwoByteStructNoZero : UnusedParentStructNoZero (struct_type = TWO_BYTE, length = 2) {
+  two_bytes : 16,
+}
+
+struct FourByteStructNoZero : UnusedParentStructNoZero (struct_type = FOUR_BYTE, length = 4) {
+  four_bytes : 32,
+}
+
+struct AtLeastFourByteStructNoZero : UnusedParentStructNoZero (struct_type = AT_LEAST_FOUR_BYTE) {
+  four_bytes : 32,
+  struct_type : StructTypeNoZero,
+  _body_,
+}
+
+struct EightByteStructNoZero : AtLeastFourByteStructNoZero (struct_type = FOUR_BYTE, length = 9) {
+  four_bytes : 32,
+}
+
+packet OneGenericStructArrayNoZero {
+  an_array : UnusedParentStructNoZero[],
+}

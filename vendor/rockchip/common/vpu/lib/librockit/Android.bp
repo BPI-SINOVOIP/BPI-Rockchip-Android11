@@ -1,0 +1,25 @@
+bootstrap_go_package {
+    name: "soong-librockit",
+    pkgPath: "android/soong/librockit",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+          "Android.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_librockit_prebuilt_library_shared {
+    name: "librockit",
+    compile_multilib: "32",
+    strip: {
+      none: true,
+    },
+    check_elf_files: false,
+}

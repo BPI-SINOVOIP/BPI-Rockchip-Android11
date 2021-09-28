@@ -1,0 +1,89 @@
+{
+ "testbed": [{
+        "name": "<your testbed name>",
+        "AndroidDevice": ["<your device serial number>"],
+        "bug_report": 1,
+	"RetailAccessPoints": ["<your ap configuration. see class definition in wifi_retail_ap.py>"],
+        "Attenuator": ["<your attenuator configuration. see attenuator class definition>"],
+        "main_network": {
+            "<your network name>": {
+                "SSID": "<your SSID>",
+                "password": "<your key>",
+                "BSSID": "<your BSSID>"
+            },
+            "<your other network names>": {
+                "SSID": "<your SSID>",
+                "password": "<your key>",
+                "BSSID": "<your BSSID>"
+            }
+        },
+        "IPerfServer": ["<your iperf server configuation. see class definition in iperf_server>"],
+	"testbed_params": {
+			 "default_region": "<default access point region to run tests in. This will be used for all non DFS channels>",
+			 "DFS_region": "<access point region to run DFS tests in>",
+                         "iperf_server_address": "<ip address of iperf server generating or accepting test traffic>",
+                         "fixed_attenuation": {"<your channel number 1>": "<your testbed attenuation on this channel>", "<your channel number 2>": "<your testbed attenuation on this channel>"},
+                 	 "dut_front_end_loss": {"<your channel number 1>": "<your DUT front end loss on this channel>", "<your channel number 2>": "<your DUT front end loss on this channel>"},
+			 "ap_tx_power": {"<your channel number 1>": "<your access point transmit power on this channel>", "<your channel number 2>": "<your access point transmit power on this channel>"},
+			 "golden_results_path": "<your full path to golden results used for pass fail check>"
+	}
+    }
+    ],
+    "rvr_test_params":{
+                         "country_code": "<device country code to set during rvr tests>",
+			 "iperf_duration": 30,
+			 "iperf_ignored_interval": 2,
+			 "UDP_rates": {"VHT20": "<throughput to transmit in this mode>", "VHT40": "<throughput to transmit in this mode>", "VHT80": "<throughput to transmit in this mode>"},
+                         "rvr_atten_start": 20,
+                         "rvr_atten_stop": 30,
+                         "rvr_atten_step": 5,
+			 "pct_tolerance": 5,
+			 "abs_tolerance": 5,
+			 "failure_count_tolerance": 1
+    },
+    "rssi_test_params":{
+			 "country_code": "<device country code to set during rvr tests>",
+                         "rssi_vs_atten_start": 20,
+                         "rssi_vs_atten_stop": 80,
+                         "rssi_vs_atten_step": 1,
+			 "rssi_vs_atten_connected_measurements": 10,
+			 "rssi_vs_atten_scan_measurements": 0,
+			 "rssi_vs_atten_metrics": ["signal_poll_rssi", "scan_rssi", "chain_0_rssi", "chain_1_rssi"],
+			 "rssi_stability_atten": [20, 55],
+			 "rssi_stability_duration": 10,
+			 "rssi_tracking_waveforms": [{"atten_levels": [40, 61, 40], "step_size": 1, "step_duration": 1, "repetitions":1}],
+			 "polling_frequency": 0.25,
+			 "abs_tolerance": 2.5,
+			 "stdev_tolerance": 1
+    },
+    "throughput_stability_test_params":{
+			 "country_code": "<device country code to set during rvr tests>",
+                         "iperf_duration": 30,
+			 "iperf_ignored_interval": 5,
+			 "UDP_rates": {"VHT20": "200M", "VHT40": "400M", "VHT80": "700M"},
+			 "low_rssi_backoff_from_range": 10,
+			 "min_throughput_threshold": 75,
+			 "std_deviation_threshold": 5
+
+    },
+    "ping_test_params":{
+			 "country_code": "<device country code to set during rvr tests>",
+			 "ping_size": 64,
+			 "range_ping_duration": 1,
+			 "range_ping_interval": 0.002,
+			 "range_atten_start": 60,
+			 "range_atten_step": 1,
+			 "range_atten_stop": 70,
+			 "range_ping_loss_threshold": 25,
+			 "range_gap_threshold": 2,
+			 "rtt_ping_duration": 30,
+			 "rtt_ping_interval": {"fast": 0.002, "slow": 0.5},
+			 "rtt_ignored_interval": 0.15,
+			 "rtt_test_attenuation": [20, 50],
+			 "rtt_test_percentile": 5,
+			 "rtt_threshold": 0.2,
+			 "rtt_std_deviation_threshold": 5
+    },
+    "logpath": "<path to logs>",
+    "testpaths": ["<path to ACTS root folder>/tools/test/connectivity/acts/tests/google/wifi"]
+}

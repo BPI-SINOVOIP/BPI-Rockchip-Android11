@@ -1,0 +1,33 @@
+cc_library {
+    name: "librockit_hw_client@1.0",
+    defaults: ["hidl_defaults"],
+
+    srcs: [
+        "RockitHwClient.cpp",
+        "RockitHwClientInterface.cpp",
+    ],
+
+    header_libs: [
+        "libsystem_headers",
+        "libhardware_headers",
+        "libmedia_headers",
+    ],
+
+    shared_libs: [
+        "rockchip.hardware.rockit.hw@1.0",
+        "libbase",
+        "libgui",
+        "libui",
+        "libcutils",
+        "libhidlbase",
+        "liblog",
+        "libutils",
+        "libbinder",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+        "-Wall",
+    ],
+}

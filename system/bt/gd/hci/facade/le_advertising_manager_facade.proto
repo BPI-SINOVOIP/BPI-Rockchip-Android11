@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package bluetooth.hci.facade;
+
+import "google/protobuf/empty.proto";
+import "facade/common.proto";
+
+service LeAdvertisingManagerFacade {
+  rpc CreateAdvertiser(CreateAdvertiserRequest) returns (CreateAdvertiserResponse) {}
+  rpc ExtendedCreateAdvertiser(ExtendedCreateAdvertiserRequest) returns (ExtendedCreateAdvertiserResponse) {}
+  rpc GetNumberOfAdvertisingInstances(google.protobuf.Empty) returns (GetNumberOfAdvertisingInstancesResponse) {}
+  rpc RemoveAdvertiser(RemoveAdvertiserRequest) returns (google.protobuf.Empty) {}
+}
+
+message GapDataMsg {
+  bytes data = 1;
+}
+
+enum AdvertisingEventType {
+  ADV_IND = 0x0;
+  ADV_DIRECT_IND = 0x1;
+  ADV_SCAN_IND = 0x2;
+  ADV_NONCONN_IND = 0x3;
+  ADV_DIRECT_IND_LOW = 0x4;
+}
+
+enum AdvertisingFilterPolicy {
+  ALL_DEVICES = 0x0;
+  WHITELISTED_SCAN = 0x1;
+  WHITELISTED_CONNECT = 0x2;
+  WHITELISTED_SCAN_AND_CONNECT = 0x3;
+};
+
+message AdvertisingConfig {
+  repeated GapDataMsg advertisement = 1;
+  repeated GapDataMsg scan_response = 2;
+  bluetooth.facade.BluetoothAddress random_address = 3;
+  // Unit: number of Bluetooth slots in 0.125 ms increment
+  int32 interval_min = 4;
+  // Unit: number of Bluetooth slots in 0.125 ms increment
+  int32 interval_max = 5;
+  AdvertisingEventType event_type = 6;
+  bluetooth.facade.BluetoothAddressTypeEnum address_type = 7;
+  bluetooth.facade.BluetoothPeerAddressTypeEnum peer_address_type = 8;
+  bluetooth.facade.BluetoothAddress peer_address = 9;
+  int32 channel_map = 10;
+  AdvertisingFilterPolicy filter_policy = 11;
+  int32 tx_power = 12;
+}
+
+message ExtendedAdvertisingConfig {
+  AdvertisingConfig advertising_config = 1;
+  bool connectable = 2;
+  bool scannable = 3;
+  bool directed = 4;
+  bool high_duty_directed_connectable = 5;
+  bool legacy_pdus = 6;
+  bool anonymous = 7;
+  bool include_tx_power = 8;
+  bool use_le_coded_phy = 9;
+  int32 secondary_map_skip = 10;
+  int32 secondary_advertising_phy = 11;
+  int32 sid = 12;
+  bool enable_scan_request_notification = 13;
+}
+
+message CreateAdvertiserRequest {
+  AdvertisingConfig config = 1;
+}
+
+message CreateAdvertiserResponse {
+  // -1 on error
+  int32 advertiser_id = 1;
+}
+
+message ExtendedCreateAdvertiserRequest {
+  ExtendedAdvertisingConfig config = 1;
+}
+
+message ExtendedCreateAdvertiserResponse {
+  int32 advertiser_id = 1;
+}
+
+message GetNumberOfAdvertisingInstancesResponse {
+  int32 num_advertising_instances = 1;
+}
+
+message RemoveAdvertiserRequest {
+  int32 advertiser_id = 1;
+}

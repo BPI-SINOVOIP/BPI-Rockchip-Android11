@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package gamequalification_proto;
+
+option java_package = "com.android.game.qualification.proto";
+option java_outer_classname = "ResultDataProto";
+
+message Event {
+  enum Type {
+    START_LOOP = 1;
+    APP_LAUNCH = 2;
+  }
+
+  optional Type type = 1;
+  optional int64 timestamp = 2;
+}
+
+message Result {
+  repeated Event events = 1;
+}

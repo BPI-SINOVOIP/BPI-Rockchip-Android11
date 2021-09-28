@@ -1,0 +1,31 @@
+// build time C++ available list of all AIDL interfaces in the tree
+cc_library {
+    name: "libaidlmetadata",
+    host_supported: true,
+    srcs: [":aidl_metadata_in_cpp"],
+    export_include_dirs: ["include"],
+
+    cflags: ["-O0"],
+}
+
+// private impl below
+
+cc_binary {
+    name: "aidl_metadata_parser",
+    host_supported: true,
+    srcs: ["parser.cpp"],
+    shared_libs: ["libjsoncpp"],
+    visibility: [":__subpackages__"],
+}
+
+cc_genrule {
+    name: "aidl_metadata_in_cpp",
+    host_supported: true,
+    cmd: "$(location aidl_metadata_parser) $(in) > $(genDir)/metadata.cpp",
+    srcs: [
+        ":aidl_metadata_json",
+    ],
+    tools: ["aidl_metadata_parser"],
+    visibility: [":__subpackages__"],
+    out: ["metadata.cpp"],
+}

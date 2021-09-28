@@ -1,0 +1,13 @@
+cc_fuzz {
+    name: "fdtostring_fuzzer",
+    srcs: [
+        "fdtostring_fuzzer.cpp",
+    ],
+    static_libs: [
+        "libaudioutils",
+        "libcutils",
+        "liblog",
+        "libutils",
+    ],
+}
+

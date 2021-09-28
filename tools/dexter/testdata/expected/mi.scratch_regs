@@ -1,0 +1,116 @@
+
+method Base.<init>():void
+{
+	.src "Target.java"
+	.line 1
+	    0| move-object/16 v15, v23
+	    3| move-object/16 v14, v15
+	    6| move-object/16 v13, v14
+	.prologue_end
+	.line 1
+	    9| invoke-direct {v13}, java.lang.Object.<init>():void
+	   12| return-void
+}
+
+method Base.foo(int, java.lang.String):int
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 3
+	    0| move-object/16 v13, v24
+	    3| move/16 v14, v25
+	    6| move-object/16 v15, v26
+	    9| move-object/16 v12, v13
+	   12| move/16 v13, v14
+	   15| move-object/16 v14, v15
+	   18| move-object/16 v11, v12
+	   21| move/16 v12, v13
+	   24| move-object/16 v13, v14
+	.prologue_end
+	.line 3
+	   27| const/4 v10, #+0 (0x00000000 | 0.00000)
+	   28| return v10
+}
+
+method IBase.bar(java.lang.String):void
+{
+}
+
+method Target.<init>(Base, IBase):void
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 15
+	    0| move-object/16 v13, v23
+	    3| move-object/16 v14, v24
+	    6| move-object/16 v15, v25
+	    9| move-object/16 v12, v13
+	   12| move-object/16 v13, v14
+	   15| move-object/16 v14, v15
+	   18| move-object/16 v11, v12
+	   21| move-object/16 v12, v13
+	   24| move-object/16 v13, v14
+	.prologue_end
+	.line 15
+	   27| invoke-direct {v11}, java.lang.Object.<init>():void
+	.line 16
+	   30| iput-object v12, v11, Target.base
+	.line 17
+	   32| iput-object v13, v11, Target.iBase
+	.line 18
+	   34| return-void
+}
+
+method Target.foo(int, java.lang.String):int
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 21
+	    0| move-object/16 v13, v25
+	    3| move/16 v14, v26
+	    6| move-object/16 v15, v27
+	    9| move-object/16 v12, v13
+	   12| move/16 v13, v14
+	   15| move-object/16 v14, v15
+	   18| move-object/16 v11, v12
+	   21| move/16 v12, v13
+	   24| move-object/16 v13, v14
+	.prologue_end
+	.line 21
+	   27| iget-object v9, v11, Target.base
+	   29| invoke-virtual {v9,v12,v13}, Base.foo(int, java.lang.String):int
+	   32| move-result v9
+	.line 22
+	   33| iget-object v10, v11, Target.iBase
+	   35| invoke-interface {v10,v13}, IBase.bar(java.lang.String):void
+	.line 23
+	   38| return v9
+}
+
+method Target.foo(int, java.lang.String[][]):java.lang.Integer
+{
+	.params "?", "?"
+	.src "Target.java"
+	.line 27
+	    0| move-object/16 v13, v25
+	    3| move/16 v14, v26
+	    6| move-object/16 v15, v27
+	    9| move-object/16 v12, v13
+	   12| move/16 v13, v14
+	   15| move-object/16 v14, v15
+	   18| move-object/16 v11, v12
+	   21| move/16 v12, v13
+	   24| move-object/16 v13, v14
+	.prologue_end
+	.line 27
+	   27| iget-object v9, v11, Target.base
+	   29| const-string v10, "foo"
+	   31| invoke-virtual {v9,v12,v10}, Base.foo(int, java.lang.String):int
+	.line 28
+	   34| iget-object v9, v11, Target.iBase
+	   36| const-string v10, "bar"
+	   38| invoke-interface {v9,v10}, IBase.bar(java.lang.String):void
+	.line 29
+	   41| const/4 v9, #+0 (0x00000000 | 0.00000)
+	   42| return-object v9
+}

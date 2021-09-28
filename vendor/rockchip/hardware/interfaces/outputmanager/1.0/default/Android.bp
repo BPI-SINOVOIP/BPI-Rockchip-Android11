@@ -1,0 +1,56 @@
+cc_library_shared {
+    name: "rockchip.hardware.outputmanager@1.0-impl",
+    defaults: ["hidl_defaults"],
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: ["RkOutputManager.cpp"],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wunused-parameter",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libhardware",
+        "libhidlbase",
+        "libutils",
+        "libbinder",
+        "rockchip.hardware.outputmanager@1.0",
+    ],
+
+    include_dirs: [
+        "hardware/libhardware/modules/hw_output",
+    ],
+}
+
+cc_binary {
+    name: "rockchip.hardware.outputmanager@1.0-service",
+    defaults: ["hidl_defaults"],
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["rockchip.hardware.outputmanager@1.0-service.rc"],
+    vintf_fragments: ["rockchip.hardware.outputmanager@1.0-service.xml"],
+    srcs: ["service.cpp"],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libdl",
+        "libbase",
+        "libutils",
+        "libhardware_legacy",
+        "libhardware",
+        "libhidlbase",
+        "libbinder",
+        "rockchip.hardware.outputmanager@1.0",
+    ],
+
+    include_dirs: [
+        "hardware/libhardware/modules/hw_output",
+        "frameworks/native/libs/binder/include",
+    ],
+
+}

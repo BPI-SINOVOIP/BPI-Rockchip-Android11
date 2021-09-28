@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Included>
+    <Decoders>
+        <MediaCodec name="OMX.ffmpeg.raw.decoder" type="audio/raw">
+            <Limit name="channel-count" max="8" />
+            <Limit name="sample-rate" ranges="8000-96000" />
+            <Limit name="bitrate" range="1-10000000" />
+        </MediaCodec>
+        <MediaCodec name="OMX.ffmpeg.wma.decoder" type="audio/x-ms-wma">
+            <Limit name="channel-count" max="8" />
+            <Limit name="sample-rate" ranges="7350,8000,11025,12000,16000,22050,24000,32000,44100,48000" />
+            <Limit name="bitrate" range="8000-960000" />
+        </MediaCodec>
+        <MediaCodec name="OMX.ffmpeg.mp2.decoder" type="audio/mpeg-L2">
+            <Limit name="channel-count" max="2" />
+            <Limit name="sample-rate" ranges="8000,11025,12000,16000,22050,24000,32000,44100,48000" />
+            <Limit name="bitrate" range="8000-320000" />
+        </MediaCodec>
+    </Decoders>
+</Included>

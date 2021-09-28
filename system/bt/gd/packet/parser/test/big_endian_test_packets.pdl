@@ -1,0 +1,266 @@
+big_endian_packets
+
+custom_field SixBytes : 48 "packet/parser/test/"
+custom_field Variable "packet/parser/test/"
+
+packet ParentBe {
+  _fixed_ = 0x12 : 8,
+  _size_(_payload_) : 8,
+  _payload_,
+  footer : 8,
+}
+
+packet ChildBe  : ParentBe {
+  field_name : 16,
+}
+
+enum FourBitsBe : 4 {
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
+  FIVE = 5,
+  TEN = 10,
+  LAZY_ME = 15,
+}
+
+packet ParentTwoBe {
+  _reserved_ : 4,
+  four_bits : FourBitsBe,
+  _payload_,
+}
+
+packet ChildTwoThreeBe  : ParentTwoBe (four_bits = THREE) {
+  more_bits : FourBitsBe,
+  _reserved_ : 4,
+  sixteen_bits : 16
+}
+
+packet ChildTwoTwoBe  : ParentTwoBe (four_bits = TWO) {
+  more_bits : FourBitsBe,
+  _reserved_ : 4,
+}
+
+packet ChildTwoTwoThreeBe  :ChildTwoTwoBe (more_bits = THREE) {
+}
+
+enum TwoBitsBe : 2 {
+  ZERO = 0,
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
+}
+
+packet MiddleFourBitsBe {
+  low_two : TwoBitsBe,
+  next_four : FourBitsBe,
+  straddle : FourBitsBe,
+  four_more : FourBitsBe,
+  high_two : TwoBitsBe,
+}
+
+packet ParentWithSixBytesBe {
+  two_bytes : 16,
+  six_bytes : SixBytes,
+  _payload_,
+}
+
+packet ChildWithSixBytesBe  : ParentWithSixBytesBe (two_bytes = 0x1234) {
+  child_six_bytes : SixBytes,
+}
+
+checksum SimpleSum : 16 "packet/parser/test/"
+
+packet ParentWithSumBe {
+  two_bytes : 16,
+  _checksum_start_(example_checksum),
+  sum_bytes : 16,
+  _payload_,
+  example_checksum : SimpleSum,
+}
+
+packet ChildWithSumBe  : ParentWithSumBe {
+  more_bytes : 32,
+  another_byte : 8,
+}
+
+packet ChildWithNestedSumBe  : ParentWithSumBe {
+  _checksum_start_(nested_checksum),
+  more_bytes : 32,
+  nested_checksum : SimpleSum,
+}
+
+packet ParentSizeModifierBe {
+  _size_(_payload_) : 8,
+  _payload_ : [+2*8], // Include two_bytes in the size
+  two_bytes : 16,
+}
+
+packet ChildSizeModifierBe  : ParentSizeModifierBe (two_bytes = 0x1211) {
+  more_bytes : 32,
+}
+
+enum ForArraysBe : 16 {
+  ONE = 0x0001,
+  TWO = 0x0002,
+  ONE_TWO = 0x0201,
+  TWO_THREE = 0x0302,
+  FFFF = 0xffff,
+}
+
+packet FixedArrayEnumBe {
+  enum_array : ForArraysBe[5],
+}
+
+packet SizedArrayEnumBe {
+  _size_(enum_array) : 16,
+  enum_array : ForArraysBe[],
+}
+
+packet CountArrayEnumBe {
+  _count_(enum_array) : 8,
+  enum_array : ForArraysBe[],
+}
+
+packet SizedArrayCustomBe {
+  _size_(six_bytes_array) : 8,
+  an_extra_byte : 8,
+  six_bytes_array : SixBytes[+1*8],
+}
+
+packet FixedArrayCustomBe {
+  six_bytes_array : SixBytes[5],
+}
+
+packet CountArrayCustomBe {
+  _count_(six_bytes_array) : 8,
+  six_bytes_array : SixBytes[],
+}
+
+packet PacketWithFixedArraysOfBytesBe {
+  fixed_256bit_in_bytes : 8[32],
+  fixed_256bit_in_words : 32[8],
+}
+
+packet OneVariableBe {
+  one : Variable,
+}
+
+packet SizedArrayVariableBe {
+  _size_(variable_array) : 8,
+  variable_array : Variable[],
+}
+
+packet FixedArrayVariableBe {
+  variable_array : Variable[5],
+}
+
+packet CountArrayVariableBe {
+  _count_(variable_array) : 8,
+  variable_array : Variable[],
+}
+
+struct TwoRelatedNumbersBe {
+  id : 8,
+  count : 16,
+}
+
+packet OneStructBe {
+  one : TwoRelatedNumbersBe,
+}
+
+packet TwoStructsBe {
+  one : TwoRelatedNumbersBe,
+  two : TwoRelatedNumbersBe,
+}
+
+packet ArrayOfStructBe {
+  _count_(array) : 8,
+  array : TwoRelatedNumbersBe[],
+}
+
+struct StructWithFixedTypesBe {
+  four_bits : FourBitsBe,
+  _reserved_ : 4,
+  _checksum_start_(example_checksum),
+  _fixed_ = 0xf3 : 8,
+  id : 8,
+  array : 8[3],
+  example_checksum : SimpleSum,
+  six_bytes : SixBytes,
+}
+
+packet OneFixedTypesStructBe {
+  one : StructWithFixedTypesBe,
+}
+
+packet ArrayOfStructAndAnotherBe {
+  _count_(array) : 8,
+  array : TwoRelatedNumbersBe[],
+  another : TwoRelatedNumbersBe,
+}
+
+group BitFieldGroupBe {
+  seven_bits : 7,
+  straddle : 4,
+  five_bits : 5,
+}
+
+packet BitFieldGroupPacketBe {
+  BitFieldGroupBe,
+}
+
+packet BitFieldGroupAfterPayloadPacketBe {
+  _payload_,
+  BitFieldGroupBe,
+}
+
+packet BitFieldGroupAfterUnsizedArrayPacketBe  : BitFieldGroupAfterPayloadPacketBe {
+  array : 8[],
+}
+
+struct BitFieldBe {
+  seven_bits : 7,
+  straddle : 4,
+  five_bits : 5,
+}
+
+packet BitFieldPacketBe {
+  bit_field : BitFieldBe,
+}
+
+packet BitFieldAfterPayloadPacketBe {
+  _payload_,
+  bit_field : BitFieldBe,
+}
+
+packet BitFieldAfterUnsizedArrayPacketBe  : BitFieldAfterPayloadPacketBe {
+  array : 8[],
+}
+
+packet BitFieldArrayPacketBe {
+  _size_(array): 8,
+  array : BitFieldBe[],
+}
+
+struct VersionlessStructBe {
+  one_number : 8,
+}
+
+packet OneVersionlessStructPacketBe {
+  versionless : VersionlessStructBe,
+  _payload_,
+}
+
+packet OneVersionedStructPacketBe  : OneVersionlessStructPacketBe {
+  version : 8,
+  _payload_,
+}
+
+packet OneVersionOneStructPacketBe  : OneVersionedStructPacketBe (version = 0x01) {
+  just_one_number : 8,
+}
+
+packet OneVersionTwoStructPacketBe  : OneVersionedStructPacketBe (version = 0x02) {
+  one_number : 8,
+  another_number : 8,
+}

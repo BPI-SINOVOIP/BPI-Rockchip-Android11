@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.10'
+}
+
+group 'com.android'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java.srcDirs = ['src/java']
+        resources.srcDirs = ['src/resources']
+    }
+    test {
+        java.srcDirs = ['src/test']
+        resources.srcDirs = ['src/test/resources']
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.+'
+}
+
+intellij {
+    version '2019.2.4'
+}
+
+patchPluginXml {
+    changeNotes """Initial version"""
+}

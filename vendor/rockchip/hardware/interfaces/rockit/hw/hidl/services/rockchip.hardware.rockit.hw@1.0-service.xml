@@ -1,0 +1,11 @@
+<manifest version="1.0" type="device">
+    <hal format="hidl">
+        <name>rockchip.hardware.rockit.hw</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IRockitHwService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</manifest>

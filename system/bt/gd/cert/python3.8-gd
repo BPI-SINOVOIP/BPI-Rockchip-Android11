@@ -1,0 +1,2 @@
+#! /bin/bash
+PYTHONPATH=$PYTHONPATH:$ANDROID_BUILD_TOP/out/host/linux-x86/lib64:$ANDROID_BUILD_TOP/system/bt/gd:$ANDROID_BUILD_TOP/out/dist/bluetooth_cert_generated_py python3.8 "$@"

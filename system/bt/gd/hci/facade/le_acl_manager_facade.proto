@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package bluetooth.hci;
+
+import "google/protobuf/empty.proto";
+
+service LeAclManagerFacade {
+  rpc CreateConnection(LeConnectionMsg) returns (stream LeConnectionEvent) {}
+  rpc CancelConnection(LeConnectionMsg) returns (google.protobuf.Empty) {}
+  rpc Disconnect(LeHandleMsg) returns (google.protobuf.Empty) {}
+  rpc AuthenticationRequested(LeHandleMsg) returns (google.protobuf.Empty) {}
+  rpc SendAclData(LeAclData) returns (google.protobuf.Empty) {}
+  rpc FetchAclData(google.protobuf.Empty) returns (stream LeAclData) {}
+  rpc FetchIncomingConnection(google.protobuf.Empty) returns (stream LeConnectionEvent) {}
+}
+
+message LeHandleMsg {
+  uint32 handle = 1;
+}
+
+message LeConnectionMsg {
+  uint32 address_type = 1;
+  bytes address = 2;
+}
+
+message LeConnectionEvent {
+  bytes event = 1;
+}
+
+message LeAclData {
+  uint32 handle = 1;
+  bytes payload = 2;
+}

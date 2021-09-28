@@ -1,0 +1,17 @@
+filegroup {
+    name: "BluetoothShimSources",
+    srcs: [
+            "dumpsys.cc",
+            "l2cap.cc",
+            "stack.cc",
+    ]
+}
+
+filegroup {
+    name: "BluetoothShimTestSources",
+    srcs: [
+            "l2cap_test.cc",
+    ],
+}
+
+

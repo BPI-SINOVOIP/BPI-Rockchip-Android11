@@ -1,0 +1,5 @@
+package rockchip.hardware.neuralnetworks@1.0;
+
+interface IGetResultCallback {
+    oneway notify(ErrorStatus status, Response response);
+};

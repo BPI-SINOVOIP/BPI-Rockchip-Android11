@@ -1,0 +1,39 @@
+test_with_more_failing_subtests (__main__.ExampleTest) ... test_with_no_failing_subtests (__main__.ExampleTest) ... ok
+test_with_no_subtests (__main__.ExampleTest) ... ok
+test_with_some_failing_subtests (__main__.ExampleTest) ... 
+======================================================================
+FAIL: test_with_more_failing_subtests (__main__.ExampleTest) (<subtest>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/example_test.py", line 39, in test_with_more_failing_subtests
+    self.assertTrue(False)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_with_more_failing_subtests (__main__.ExampleTest) (<subtest>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/example_test.py", line 41, in test_with_more_failing_subtests
+    self.assertTrue(False)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_with_some_failing_subtests (__main__.ExampleTest) (<subtest>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/example_test.py", line 27, in test_with_some_failing_subtests
+    self.assertTrue(False)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_with_some_failing_subtests (__main__.ExampleTest) (<subtest>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/example_test.py", line 31, in test_with_some_failing_subtests
+    self.assertTrue(False)
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (failures=4)

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package bluetooth.hci.cert;
+
+import "google/protobuf/empty.proto";
+import "facade/common.proto";
+
+service AclManagerCert {
+  rpc SetPageScanMode(PageScanMode) returns (google.protobuf.Empty) {}
+  rpc SetIncomingConnectionPolicy(IncomingConnectionPolicy) returns (google.protobuf.Empty) {}
+  rpc Connect(facade.BluetoothAddress) returns (google.protobuf.Empty) {}
+  rpc Disconnect(facade.BluetoothAddress) returns (google.protobuf.Empty) {}
+  rpc FetchConnectionComplete(google.protobuf.Empty) returns (stream ConnectionEvent) {}
+  rpc FetchDisconnection(google.protobuf.Empty) returns (stream DisconnectionEvent) {}
+  rpc FetchConnectionFailed(google.protobuf.Empty) returns (stream ConnectionFailedEvent) {}
+  rpc SendAclData(AclData) returns (google.protobuf.Empty) {}
+  rpc FetchAclData(google.protobuf.Empty) returns (stream AclData) {}
+}
+
+message PageScanMode {
+  bool enabled = 1;
+}
+
+message IncomingConnectionPolicy {
+  facade.BluetoothAddress remote = 1;
+  bool accepted = 2;
+}
+
+message ConnectionEvent {
+  facade.BluetoothAddress remote = 1;
+}
+
+message DisconnectionEvent {
+  facade.BluetoothAddress remote = 1;
+  uint32 reason = 2;
+}
+
+message ConnectionFailedEvent {
+  facade.BluetoothAddress remote = 1;
+  uint32 reason = 2;
+}
+
+message AclData {
+  facade.BluetoothAddress remote = 1;
+  bytes payload = 2;
+}

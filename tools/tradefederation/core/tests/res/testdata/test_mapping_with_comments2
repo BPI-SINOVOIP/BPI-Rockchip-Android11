@@ -1,0 +1,49 @@
+{//comment..// another comment # another comment
+  "presubmit": [ #comment //another comment #// another comment
+    { # comment
+      "name": "test1",//comment
+      "host": true#comment
+    },#comment
+    {
+      "name": "suite/stub1" // comment # comment
+    },
+    {
+      "name": "suite/stub2",
+      "keywords": ["key_1"] # comment
+    } # comment
+  ], // comment
+  "postsubmit": [
+    {
+      "name": "test2",
+      "options": [
+        {
+          "instrumentation-arg": "annotation=android.platform.test.annotations.Presubmit" //comment
+        }
+      ]
+    },
+    {
+      "name": "instrument",
+      "options": [
+        {
+          "run-name": "some-name"
+        }
+      ]
+    }
+  ],
+  "othertype": [ // another comment
+    {
+      "name": "test3",
+      "options": [
+        {
+          "just-an-option": ""##comment
+        }////another comment
+      //// another comment...
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "path": "folder1//folder2//folder3"//comment... # another comment // another comment
+    }
+  ]
+}

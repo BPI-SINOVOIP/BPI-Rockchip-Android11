@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Google Inc. All Rights Reserved -->
+<configuration description="Preparers for app-exercising tests" >
+    <!-- Used in order to enable RAM dump collection. -->
+    <include name="template/preparers/fastboot-command" />
+    <include name="template/preparers/push-file" />
+    <include name="template/preparers/perfetto" />
+    <include name="template/preparers/app-install" />
+    <include name="template/preparers/run-command" />
+</configuration>

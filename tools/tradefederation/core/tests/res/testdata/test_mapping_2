@@ -1,0 +1,45 @@
+{
+  "presubmit": [
+    {
+      "name": "test1",
+      "host": true,
+      "options": [
+        {
+          "include-filter": "some-filter"
+        }
+      ]
+    },
+    {
+      "name": "suite/stub1",
+      "options": [
+        {
+          "include-filter": "some-filter2"
+        }
+      ]
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "suite/stub1",
+      "options": [
+        {
+          "exclude-filter": "filter.com"
+        }
+      ]
+    },
+    {
+      "name": "suite/stub2",
+      "options": [
+        {
+          "test-suite-tag": "just_a_name"
+        },
+        {
+          "include-filter": "filter.com"
+        },
+        {
+          "run-a-test": "true"
+        }
+      ]
+    }
+  ]
+}

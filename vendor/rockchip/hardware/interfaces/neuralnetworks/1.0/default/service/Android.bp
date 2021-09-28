@@ -1,0 +1,18 @@
+cc_binary {
+    name: "rockchip.hardware.neuralnetworks@1.0-service",
+    defaults: ["hidl_defaults"],
+    vendor: true,
+    relative_install_path: "hw",
+    init_rc: ["rockchip.hardware.neuralnetworks@1.0-service.rc"],
+    vintf_fragments: ["rockchip.hardware.neuralnetworks@1.0-service.xml"],
+    srcs: ["service.cpp"],
+    shared_libs: [
+        "liblog",
+        "libbinder",
+        "libhidlbase",
+        "libhardware",
+        "libhardware_legacy",
+        "libutils",
+        "rockchip.hardware.neuralnetworks@1.0",
+    ],
+}

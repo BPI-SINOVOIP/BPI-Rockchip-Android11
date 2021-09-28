@@ -1,0 +1,502 @@
+props {
+  module: "android.sysprop.AdbProperties"
+  prop {
+    api_name: "secure"
+    access: Writeonce
+    scope: Internal
+    prop_name: "ro.adb.secure"
+  }
+}
+props {
+  module: "android.sysprop.ApkVerityProperties"
+  prop {
+    api_name: "apk_verity_mode"
+    type: Integer
+    access: Writeonce
+    prop_name: "ro.apk_verity.mode"
+  }
+}
+props {
+  module: "android.sysprop.CarProperties"
+  prop {
+    api_name: "boot_user_override_id"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "android.car.systemuser.bootuseroverrideid"
+  }
+  prop {
+    api_name: "number_pre_created_guests"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "android.car.number_pre_created_guests"
+  }
+  prop {
+    api_name: "number_pre_created_users"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "android.car.number_pre_created_users"
+  }
+  prop {
+    api_name: "trusted_device_device_name_prefix"
+    type: String
+    scope: Internal
+    prop_name: "ro.android.car.trusteddevice.device_name_prefix"
+  }
+  prop {
+    api_name: "user_hal_enabled"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "android.car.user_hal_enabled"
+  }
+  prop {
+    api_name: "user_hal_timeout"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "android.car.user_hal_timeout"
+  }
+}
+props {
+  module: "android.sysprop.ContactsProperties"
+  prop {
+    api_name: "aggregate_contacts"
+    scope: Internal
+    prop_name: "sync.contacts.aggregate"
+  }
+  prop {
+    api_name: "debug_scan_all_packages"
+    scope: Internal
+    prop_name: "debug.cp2.scan_all_packages"
+  }
+  prop {
+    api_name: "display_photo_size"
+    type: Integer
+    scope: Internal
+    prop_name: "contacts.display_photo_size"
+  }
+  prop {
+    api_name: "keep_stale_account_data"
+    scope: Internal
+    prop_name: "debug.contacts.ksad"
+  }
+  prop {
+    api_name: "thumbnail_size"
+    type: Integer
+    scope: Internal
+    prop_name: "contacts.thumbnail_size"
+  }
+}
+props {
+  module: "android.sysprop.CryptoProperties"
+  prop {
+    api_name: "state"
+    type: Enum
+    scope: Internal
+    prop_name: "ro.crypto.state"
+    enum_values: "encrypted|unencrypted|unsupported"
+  }
+  prop {
+    api_name: "type"
+    type: Enum
+    access: Writeonce
+    scope: Internal
+    prop_name: "ro.crypto.type"
+    enum_values: "block|file|none"
+  }
+}
+props {
+  module: "android.sysprop.DisplayProperties"
+  prop {
+    api_name: "debug_force_msaa"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.egl.force_msaa"
+  }
+  prop {
+    api_name: "debug_force_rtl"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.force_rtl"
+  }
+  prop {
+    api_name: "debug_layout"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.layout"
+  }
+  prop {
+    api_name: "debug_opengl_trace"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.egl.trace"
+  }
+}
+props {
+  module: "android.sysprop.HdmiProperties"
+  prop {
+    api_name: "device_type"
+    type: IntegerList
+    scope: Internal
+    prop_name: "ro.hdmi.device_type"
+  }
+  prop {
+    api_name: "set_menu_language"
+    scope: Internal
+    prop_name: "ro.hdmi.set_menu_language"
+  }
+}
+props {
+  module: "android.sysprop.MediaProperties"
+  prop {
+    api_name: "swcodec_ion_align"
+    type: Integer
+    prop_name: "ro.com.android.media.swcodec.ion.align"
+  }
+  prop {
+    api_name: "swcodec_ion_flags"
+    type: Integer
+    prop_name: "ro.com.android.media.swcodec.ion.flags"
+  }
+  prop {
+    api_name: "swcodec_ion_heapmask"
+    type: Integer
+    prop_name: "ro.com.android.media.swcodec.ion.heapmask"
+  }
+}
+props {
+  module: "android.sysprop.OtaProperties"
+  prop {
+    api_name: "warm_reset"
+    access: ReadWrite
+    prop_name: "ota.warm_reset"
+    integer_as_bool: true
+  }
+}
+props {
+  module: "android.sysprop.PowerProperties"
+  prop {
+    api_name: "fixed_performance_scale_factor"
+    type: Integer
+    prop_name: "ro.power.fixed_performance_scale_factor"
+  }
+}
+props {
+  module: "android.sysprop.SetupWizardProperties"
+  prop {
+    api_name: "esim_cid_ignore"
+    type: StringList
+    scope: Internal
+    prop_name: "ro.setupwizard.esim_cid_ignore"
+  }
+  prop {
+    api_name: "theme"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "setupwizard.theme"
+  }
+}
+props {
+  module: "android.sysprop.TelephonyProperties"
+  prop {
+    api_name: "airplane_mode_on"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "persist.radio.airplane_mode_on"
+    integer_as_bool: true
+  }
+  prop {
+    api_name: "baseband_version"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.version.baseband"
+  }
+  prop {
+    api_name: "call_ring_delay"
+    type: Integer
+    prop_name: "ro.telephony.call_ring.delay"
+  }
+  prop {
+    api_name: "cdma_msg_id"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "persist.radio.cdma.msgid"
+  }
+  prop {
+    api_name: "current_active_phone"
+    type: IntegerList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.current.phone-type"
+  }
+  prop {
+    api_name: "data_network_type"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.network.type"
+  }
+  prop {
+    api_name: "data_roaming"
+    scope: Internal
+    prop_name: "ro.com.android.dataroaming"
+  }
+  prop {
+    api_name: "default_network"
+    type: IntegerList
+    scope: Internal
+    prop_name: "ro.telephony.default_network"
+  }
+  prop {
+    api_name: "disable_call"
+    prop_name: "ro.telephony.disable-call"
+  }
+  prop {
+    api_name: "ecm_exit_timer"
+    type: Long
+    prop_name: "ro.cdma.ecmexittimer"
+  }
+  prop {
+    api_name: "enable_esim_ui_by_default"
+    scope: Internal
+    prop_name: "esim.enable_esim_system_ui_by_default"
+  }
+  prop {
+    api_name: "icc_operator_alpha"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.sim.operator.alpha"
+  }
+  prop {
+    api_name: "icc_operator_iso_country"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.sim.operator.iso-country"
+  }
+  prop {
+    api_name: "icc_operator_numeric"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.sim.operator.numeric"
+  }
+  prop {
+    api_name: "ignore_nitz"
+    prop_name: "telephony.test.ignore.nitz"
+  }
+  prop {
+    api_name: "in_ecm_mode"
+    access: ReadWrite
+    prop_name: "ril.cdma.inecmmode"
+  }
+  prop {
+    api_name: "lte_on_cdma_device"
+    type: Integer
+    scope: Internal
+    prop_name: "telephony.lteOnCdmaDevice"
+  }
+  prop {
+    api_name: "lte_on_cdma_product_type"
+    type: String
+    scope: Internal
+    prop_name: "telephony.lteOnCdmaProductType"
+  }
+  prop {
+    api_name: "max_active_modems"
+    type: Integer
+    prop_name: "telephony.active_modems.max_count"
+  }
+  prop {
+    api_name: "mobile_data"
+    prop_name: "ro.com.android.mobiledata"
+  }
+  prop {
+    api_name: "multi_sim_config"
+    type: String
+    access: ReadWrite
+    prop_name: "persist.radio.multisim.config"
+  }
+  prop {
+    api_name: "operator_alpha"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.operator.alpha"
+  }
+  prop {
+    api_name: "operator_idp_string"
+    type: String
+    access: ReadWrite
+    prop_name: "gsm.operator.idpstring"
+  }
+  prop {
+    api_name: "operator_is_manual"
+    scope: Internal
+    prop_name: "operator.ismanual"
+  }
+  prop {
+    api_name: "operator_is_roaming"
+    type: BooleanList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.operator.isroaming"
+  }
+  prop {
+    api_name: "operator_iso_country"
+    type: StringList
+    access: ReadWrite
+    prop_name: "gsm.operator.iso-country"
+  }
+  prop {
+    api_name: "operator_numeric"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.operator.numeric"
+  }
+  prop {
+    api_name: "otasp_num_schema"
+    type: StringList
+    scope: Internal
+    prop_name: "ro.cdma.otaspnumschema"
+  }
+  prop {
+    api_name: "reboot_on_modem_change"
+    scope: Internal
+    prop_name: "persist.radio.reboot_on_modem_change"
+  }
+  prop {
+    api_name: "reset_on_radio_tech_change"
+    prop_name: "persist.radio.reset_on_switch"
+  }
+  prop {
+    api_name: "ril_impl"
+    type: String
+    scope: Internal
+    prop_name: "gsm.version.ril-impl"
+  }
+  prop {
+    api_name: "ril_sends_multiple_call_ring"
+    prop_name: "ro.telephony.call_ring.multiple"
+  }
+  prop {
+    api_name: "sim_slots_count"
+    type: Integer
+    prop_name: "ro.telephony.sim_slots.count"
+  }
+  prop {
+    api_name: "sim_state"
+    type: StringList
+    access: ReadWrite
+    scope: Internal
+    prop_name: "gsm.sim.state"
+  }
+  prop {
+    api_name: "sms_receive"
+    type: BooleanList
+    scope: Internal
+    prop_name: "telephony.sms.receive"
+  }
+  prop {
+    api_name: "sms_send"
+    type: BooleanList
+    scope: Internal
+    prop_name: "telephony.sms.send"
+  }
+  prop {
+    api_name: "test_csim"
+    prop_name: "persist.radio.test-csim"
+  }
+  prop {
+    api_name: "videocall_audio_output"
+    type: Integer
+    scope: Internal
+    prop_name: "persist.radio.call.audio.output"
+  }
+  prop {
+    api_name: "wake_lock_timeout"
+    type: Integer
+    prop_name: "ro.ril.wake_lock_timeout"
+  }
+  prop {
+    api_name: "wps_info"
+    type: Integer
+    scope: Internal
+    prop_name: "wifidirect.wps"
+  }
+}
+props {
+  module: "android.sysprop.TraceProperties"
+  prop {
+    api_name: "enable"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "persist.traced.enable"
+    integer_as_bool: true
+  }
+  prop {
+    api_name: "user_initiated"
+    access: ReadWrite
+    scope: Internal
+    prop_name: "debug.atrace.user_initiated"
+    integer_as_bool: true
+  }
+}
+props {
+  module: "android.sysprop.VndkProperties"
+  prop {
+    api_name: "product_vndk_version"
+    type: String
+    prop_name: "ro.product.vndk.version"
+  }
+  prop {
+    api_name: "vendor_vndk_version"
+    type: String
+    prop_name: "ro.vndk.version"
+  }
+}
+props {
+  module: "android.sysprop.VoldProperties"
+  prop {
+    api_name: "decrypt"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "vold.decrypt"
+  }
+  prop {
+    api_name: "encrypt_progress"
+    type: String
+    access: ReadWrite
+    scope: Internal
+    prop_name: "vold.encrypt_progress"
+  }
+  prop {
+    api_name: "encrypt_time_remaining"
+    type: Integer
+    access: ReadWrite
+    scope: Internal
+    prop_name: "vold.encrypt_time_remaining"
+  }
+}
+props {
+  module: "android.sysprop.WifiProperties"
+  prop {
+    api_name: "start_supplicant"
+    access: Writeonce
+    prop_name: "ctl.start$supplicant"
+  }
+  prop {
+    api_name: "stop_supplicant"
+    access: Writeonce
+    prop_name: "ctl.stop$supplicant"
+  }
+}

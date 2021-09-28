@@ -1,0 +1,334 @@
+// List of clang-tidy checks that are reported as errors.
+// Please keep this list ordered lexicographically.
+tidy_errors = [
+  "cert-err34-c",
+  "google-default-arguments",
+  "google-explicit-constructor",
+  "google-runtime-int",
+  "google-runtime-member-string-references",
+  "misc-move-const-arg",
+  "misc-move-forwarding-reference",
+  "misc-unused-parameters",
+  "misc-unused-using-decls",
+  "misc-use-after-move",
+  "modernize-pass-by-value",
+  "performance-faster-string-find",
+  "performance-for-range-copy",
+  "performance-implicit-conversion-in-loop",
+  "performance-inefficient-vector-operation",
+  "performance-move-const-arg",
+  "performance-move-constructor-init",
+  "performance-noexcept-move-constructor",
+  "performance-unnecessary-value-param",
+]
+
+cc_defaults {
+  name: "apex_flags_defaults",
+  cflags: [
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wno-unused-parameter",
+
+    // Some extra flags.
+    "-fstrict-aliasing",
+    "-Wredundant-decls",
+    "-Wshadow",
+    "-Wstrict-aliasing",
+    "-Wthread-safety",
+    "-Wthread-safety-negative",
+    "-Wunreachable-code",
+    "-Wunreachable-code-break",
+    "-Wunreachable-code-return",
+    "-Wunused",
+    "-Wused-but-marked-unused",
+  ],
+  tidy: true,
+  tidy_checks: tidy_errors,
+  tidy_checks_as_errors: tidy_errors,
+  tidy_flags: [
+    "-format-style='file'",
+    "--header-filter='system/apex/'",
+  ],
+}
+
+
+cc_defaults {
+  name: "libapexd-deps",
+  defaults: ["libapex-deps"],
+  shared_libs: [
+    "libbinder",
+    "libselinux",
+    "liblog",
+    "liblogwrap",
+  ],
+  static_libs: [
+    "libapex",
+    "libavb",
+    "libdm",
+    "libext2_uuid",
+    "libverity_tree",
+    "libvold_binder",
+  ],
+  whole_static_libs: ["com.android.sysprop.apex"],
+}
+
+aidl_interface {
+  name: "apex_aidl_interface",
+  unstable: true,
+  srcs: [
+    "aidl/android/apex/ApexInfo.aidl",
+    "aidl/android/apex/ApexInfoList.aidl",
+    "aidl/android/apex/ApexSessionInfo.aidl",
+    "aidl/android/apex/ApexSessionParams.aidl",
+    "aidl/android/apex/IApexService.aidl",
+  ],
+  local_include_dir: "aidl",
+  backend: {
+      java: {
+          sdk_version: "28",
+      },
+      ndk: {
+          enabled: false,
+      },
+  },
+}
+
+cc_binary {
+  name: "apexd",
+  defaults: [
+    "apex_flags_defaults",
+    "libapex-deps",
+    "libapexd-deps",
+    "libapexservice-deps",
+  ],
+  srcs: [
+    "apexd_main.cpp",
+  ],
+  static_libs: [
+    "libapex",
+    "libapexd",
+    "libapexd_checkpoint_vold",
+    "libapexservice",
+  ],
+  init_rc: ["apexd.rc"],
+  // Just like the init, apexd should be able to run without
+  // any APEX activated. To do so, it uses the bootstrap linker
+  // and the bootstrap bionic libraries.
+  bootstrap: true,
+}
+
+cc_library_static {
+  name: "libapexd",
+  defaults: [
+    "apex_flags_defaults",
+    "libapexd-deps",
+  ],
+  srcs: [
+    "apex_database.cpp",
+    "apexd.cpp",
+    "apexd_loop.cpp",
+    "apexd_prepostinstall.cpp",
+    "apexd_private.cpp",
+    "apexd_prop.cpp",
+    "apexd_session.cpp",
+    "apexd_verity.cpp",
+  ],
+  export_include_dirs: ["."],
+  // Don't add shared/static libs here; add to libapexd_defaults instead.
+}
+
+cc_library_static {
+  name: "libapexd_checkpoint_vold",
+  defaults: ["apex_flags_defaults"],
+  srcs: [ "apexd_checkpoint_vold.cpp" ],
+  static_libs: [
+    "libbase",
+    "libutils",
+    "libvold_binder",
+  ],
+  export_include_dirs: ["."],
+}
+
+cc_defaults {
+  name: "libapexservice-deps",
+  shared_libs: [
+    "apex_aidl_interface-cpp",
+    "libbinder",
+    "libutils",
+  ],
+}
+
+cc_library_static {
+  name: "libapexservice",
+  defaults: [
+    "apex_flags_defaults",
+    "libapexd-deps",
+    "libapexservice-deps",
+  ],
+  srcs: ["apexservice.cpp"],
+  static_libs: [
+    "libapexd",
+  ],
+}
+
+cc_defaults {
+  name: "libapex-deps",
+  shared_libs: [
+    "libbase",
+    "libcrypto",
+    "libcutils",
+    "libprotobuf-cpp-full",
+    "libziparchive",
+  ],
+  static_libs: [
+    "lib_apex_session_state_proto",
+    "lib_apex_manifest_proto",
+    "libavb",
+  ],
+  static: {
+    whole_static_libs: ["libc++fs"],
+  },
+  shared: {
+    static_libs: ["libc++fs"],
+  },
+}
+
+cc_library_static {
+  name: "libapex",
+  defaults: [
+    "apex_flags_defaults",
+    "libapex-deps"
+  ],
+  srcs: [
+    "apex_file.cpp",
+    "apex_manifest.cpp",
+    "apex_preinstalled_data.cpp",
+    "apex_shim.cpp",
+  ],
+  host_supported: true,
+  target: {
+    darwin: {
+      enabled: false,
+    },
+  },
+  header_libs: [
+    "libutils_headers",
+  ],
+  export_header_lib_headers: [
+    "libutils_headers",
+  ],
+}
+
+genrule {
+  // Generates an apex which has a different manifest outside the filesystem
+  // image.
+  name: "gen_bad_apexes",
+  out: ["apex.apexd_test_manifest_mismatch.apex"],
+  srcs: [":apex.apexd_test"],
+  tools: ["soong_zip", "zipalign", "conv_apex_manifest"],
+  cmd: "unzip -q $(in) -d $(genDir) && " +
+       "$(location conv_apex_manifest) setprop version 137 $(genDir)/apex_manifest.pb && " +
+       "$(location soong_zip) -d -C $(genDir) -D $(genDir) " +
+       "-s apex_manifest.pb -s apex_payload.img -s apex_pubkey " +
+       "-o $(genDir)/unaligned.apex && " +
+       "$(location zipalign) -f 4096 $(genDir)/unaligned.apex " +
+       "$(genDir)/apex.apexd_test_manifest_mismatch.apex"
+}
+
+genrule {
+  // Generates an apex with a corrupted filesystem image, which should cause
+  // dm-verity verification to fail
+  name: "gen_corrupt_apex",
+  out: ["apex.apexd_test_corrupt_apex.apex"],
+  srcs: [":apex.apexd_test"],
+  tools: ["soong_zip", "zipalign"],
+  cmd: "unzip -q $(in) -d $(genDir) && " +
+       "dd if=/dev/zero of=$(genDir)/apex_payload.img conv=notrunc bs=1024 seek=16 count=1 && " +
+       "$(location soong_zip) -d -C $(genDir) -D $(genDir) " +
+       "-s apex_manifest.pb -s apex_payload.img -s apex_pubkey " +
+       "-o $(genDir)/unaligned.apex && " +
+       "$(location zipalign) -f 4096 $(genDir)/unaligned.apex " +
+       "$(genDir)/apex.apexd_test_corrupt_apex.apex"
+}
+
+cc_test {
+  name: "ApexTestCases",
+  defaults: [
+    "apex_flags_defaults",
+    "libapex-deps",
+    "libapexd-deps"
+  ],
+  require_root: true,
+  cflags: [
+    // Otherwise libgmock won't compile.
+    "-Wno-used-but-marked-unused",
+  ],
+  data: [
+    ":apex.apexd_test",
+    ":apex.apexd_test_different_app",
+    ":apex.apexd_test_no_hashtree",
+    ":apex.apexd_test_no_hashtree_2",
+    ":apex.apexd_test_no_inst_key",
+    ":apex.apexd_test_nocode",
+    ":apex.apexd_test_postinstall",
+    ":apex.apexd_test_preinstall",
+    ":apex.apexd_test_prepostinstall.fail",
+    ":apex.apexd_test_v2",
+    ":apex.corrupted_b146895998",
+    ":gen_bad_apexes",
+    ":gen_corrupt_apex",
+    ":com.android.apex.cts.shim.v1_prebuilt",
+    ":com.android.apex.cts.shim.v2_prebuilt",
+    ":com.android.apex.cts.shim.v2_wrong_sha_prebuilt",
+    ":com.android.apex.cts.shim.v2_additional_file_prebuilt",
+    ":com.android.apex.cts.shim.v2_additional_folder_prebuilt",
+    ":com.android.apex.cts.shim.v2_with_pre_install_hook_prebuilt",
+    ":com.android.apex.cts.shim.v2_with_post_install_hook_prebuilt",
+    "apexd_testdata/com.android.apex.test_package.avbpubkey",
+  ],
+  srcs: [
+    "apex_database_test.cpp",
+    "apex_file_test.cpp",
+    "apex_manifest_test.cpp",
+    "apexd_session_test.cpp",
+    "apexd_verity_test.cpp",
+    "apexd_utils_test.cpp",
+    "apexservice_test.cpp",
+  ],
+  host_supported: false,
+  compile_multilib: "first",
+  static_libs: [
+    "apex_aidl_interface-cpp",
+    "libapex",
+    "libapexd",
+    "libfstab",
+    "libgmock",
+  ],
+  shared_libs: [
+    "libbinder",
+    "libfs_mgr",
+    "libutils",
+  ],
+  test_suites: ["device-tests"],
+  test_config: "AndroidTest.xml",
+}
+
+cc_test {
+  name: "flattened_apex_test",
+  defaults: [
+    "apex_flags_defaults",
+    "libapex-deps",
+    "libapexd-deps"
+  ],
+  srcs: ["flattened_apex_test.cpp"],
+  host_supported: false,
+  compile_multilib: "first",
+  static_libs: [
+    "libapex",
+    "libapexd",
+  ],
+  test_suites: ["device-tests"],
+  test_config: "flattened_apex_test_config.xml",
+}
+

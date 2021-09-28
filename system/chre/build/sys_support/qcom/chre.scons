@@ -1,0 +1,380 @@
+# Copyright (C) 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#===============================================================================
+#
+# CHRE builder scons
+#
+# GENERAL DESCRIPTION
+#    Build script used to build the CHRE library for use on SLPI
+#
+#-------------------------------------------------------------------------------
+
+Import('env')
+import os
+
+#-------------------------------------------------------------------------------
+# Configure optional features
+#-------------------------------------------------------------------------------
+
+# There are two options to configure the optional features that CHRE bundles in:
+#  1. Set the flags below to True/False depending on which features are desired
+#  2. Set the command-line flag -f USES_CHRE_BUILD_FLAGS to ignore the defaults
+#     and control the features by presence of -f USES_CHRE_WIFI, etc. in the
+#     command line flags
+USE_CHRE_AUDIO = False  # not currently supported
+if 'USES_CHRE_BUILD_FLAGS' not in env:
+    # Option 1
+    USE_CHRE_GNSS = True
+    USE_CHRE_WIFI = True
+    USE_CHRE_WWAN = True
+else:
+    # Option 2
+    USE_CHRE_GNSS = 'USES_CHRE_GNSS' in env
+    USE_CHRE_WIFI = 'USES_CHRE_WIFI' in env
+    USE_CHRE_WWAN = 'USES_CHRE_WWAN' in env
+
+#-------------------------------------------------------------------------------
+# Configure testing nanoapps
+#-------------------------------------------------------------------------------
+
+# CHRE provides several nanoapps that can be used to verify that APIs are
+# working as expected. To use these nanoapps, set 1 or more of the following
+# flags to True and recompile CHRE. Once restarted, CHRE will load the enabled
+# nanoapps
+LOAD_GNSS_WORLD = False
+LOAD_SENSOR_WORLD = False
+LOAD_WIFI_WORLD = False
+LOAD_WWAN_WORLD = False
+
+TESTING_NANOAPPS_ENABLED = False
+if LOAD_GNSS_WORLD or LOAD_SENSOR_WORLD or LOAD_WIFI_WORLD or LOAD_WWAN_WORLD:
+    TESTING_NANOAPPS_ENABLED = True
+
+#-------------------------------------------------------------------------------
+# Setup source and tooling paths
+#-------------------------------------------------------------------------------
+SRCPATH = "${BUILD_ROOT}/chre/chre/src"
+LIBNAME = 'libchre_slpi_skel'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+LIB_ROOT = "${BUILD_ROOT}/chre/chre"
+
+target_so = '${BUILDPATH}/'+LIBNAME+'.so'
+hexagon_root = env.get('HEXAGON_ROOT')
+hexgaon_rtos_release = env.get('HEXAGON_RTOS_RELEASE')
+hexagon_version = env.get('Q6VERSION')
+HEXAGON_LIB_PATH = "{0}/{1}/Tools/target/hexagon/lib/{2}/G0/pic".format(hexagon_root,
+    hexgaon_rtos_release,hexagon_version)
+
+#-------------------------------------------------------------------------------
+# Setup various env flags
+#-------------------------------------------------------------------------------
+env.Replace(ASM_DFLAGS = '-D__V_DYNAMIC__')
+env.Replace(CC_DFLAGS = '-D__V_DYNAMIC__')
+env.Replace(HEXAGONCC_OPT = ' -Os ')
+env.Replace(CFLAGS = ' -G0')
+
+env.Replace(HEXAGONCC_WARN = '-Wall  -Wno-cast-align -Wpointer-arith -Wno-missing-braces' \
+                             ' -Wno-strict-aliasing -Wstrict-prototypes -Wnested-externs -Werror')
+env.Replace(HEXAGON_UNDEF = ' ')
+env.Replace(HEXAGON_LANIND = '-fno-exceptions -fno-strict-aliasing -fno-zero-initialized-in-bss' \
+                             ' -fdata-sections -fno-signed-char -fdiagnostics-show-option ')
+env.Append(SHCXXFLAGS = ' -std=c++11 ')
+env.Append(SHLINKFLAGS = '-G0 --wrap=malloc --wrap=calloc --wrap=free --wrap=realloc --wrap=memalign' \
+                         ' --wrap=__stack_chk_fail -call_shared ')
+
+env['SKEL_DEP'] = ''
+if USE_CHRE_GNSS:
+    env['SKEL_DEP'] += ' ${BUILD_ROOT}/chre/chre_drv_loc/build/${BUILDPATH}/chre_drv_loc.so '
+    env.Depends(target_so,'${BUILD_ROOT}/chre/chre_drv_loc/build/${BUILDPATH}/chre_drv_loc.so')
+
+if USE_CHRE_WIFI:
+    env['SKEL_DEP'] += ' ${BUILD_ROOT}/chre/chre_drv_wifi/build/${BUILDPATH}/chre_drv_wifi.so ' \
+                       ' ${BUILD_ROOT}/chre/lowi_client/build/${BUILDPATH}/lowi_client.so '
+    env.Depends(target_so,'${BUILD_ROOT}/chre/chre_drv_wifi/build/${BUILDPATH}/chre_drv_wifi.so')
+    env.Depends(target_so,'${BUILD_ROOT}/chre/lowi_client/build/${BUILDPATH}/lowi_client.so')
+
+if USE_CHRE_WWAN:
+    env['SKEL_DEP'] += ' ${BUILD_ROOT}/chre/chre_drv_modem/build/${BUILDPATH}/chre_drv_modem.so '
+    env.Depends(target_so,'${BUILD_ROOT}/chre/chre_drv_modem/build/${BUILDPATH}/chre_drv_modem.so')
+
+env.Replace(QDSP6OBJS1= '${QDSP6_RELEASE_DIR}/Tools/target/hexagon/lib/${Q6VERSION}/G0/pic/initS.o')
+env.Replace(QDSP6OBJS3= ['${QDSP6_RELEASE_DIR}/Tools/target/hexagon/lib/${Q6VERSION}/G0/pic/libgcc.a',
+                         '${QDSP6_RELEASE_DIR}/Tools/target/hexagon/lib/${Q6VERSION}/G0/pic/libstdc++.a',
+                         '${QDSP6_RELEASE_DIR}/Tools/target/hexagon/lib/${Q6VERSION}/G0/pic/libc++.a'])
+env.Replace(QDSP6OBJS4= '${QDSP6_RELEASE_DIR}/Tools/target/hexagon/lib/${Q6VERSION}/G0/pic/finiS.o')
+
+env['SHLINKGRP'] = ' -shared -fPIC -Bsymbolic --start-group $QDSP6OBJS1 $QDSP6OBJS3 $SOURCES.posix' \
+                   ' $QDSP6OBJS4 $SKEL_DEP --end-group ${HEXAGONLD_MAP_CMD} ${TARGET.posix}.map'
+
+# Tells SCons to link various shared libraries against the CHRE library (drivers, various Hexagon libraries).
+env.Replace(SHLINKCOM="${TEMPFILE('$SHLINK $SHLINKFLAGS $HEXAGON_OUTPUT_CMD $TARGET.posix $SHLINKGRP')}")
+
+#-------------------------------------------------------------------------------
+# Ensure required libraries are available to the CHRE source code
+#-------------------------------------------------------------------------------
+core_public_apis = [
+    'KERNEL',
+    'SERVICES',
+    'DEBUGTOOLS',
+    'ADSPPM',
+    'POWER',
+    'MPROC',
+    'SYSTEMDRIVERS',
+    'DEBUGTRACE',
+    'DAL',
+    'DIAG',
+    'BUSES',
+]
+
+platform_public_apis = [
+    'PLATFORM_LIBS',
+    'MOD_TABLE',
+    'QAIC',
+    'STDDEF',
+    'REMOTE',
+    'HAPSDK',
+    'DLW',
+    'PLS',
+    'UTILS',
+    'ADSP_MMAP',
+    'A1STD',
+    'RTLD',
+]
+
+qmimsgs_public_apis = [
+    'COMMON',
+    'SNS_CLIENT_API',
+]
+
+chre_priv_api = [
+    "${BUILD_ROOT}/chre/chre/src/system/chre/chre_api/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/chre_api/include/chre_api",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/core/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/external/flatbuffers/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/pal/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/platform/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/platform/shared/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/platform/slpi",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/platform/slpi/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/platform/slpi/see/include",
+    "${BUILD_ROOT}/chre/chre/src/system/chre/util/include",
+    "${BUILD_ROOT}/core/api/kernel/libstd/stringl",
+    "${BUILD_ROOT}/qmimsgs/common/api",
+    "${BUILD_ROOT}/ssc_api/pb",
+    "${BUILD_ROOT}/ssc/framework/cm/inc",
+    "${BUILD_ROOT}/ssc/inc",
+    "${BUILD_ROOT}/ssc/inc/internal",
+    "${BUILD_ROOT}/ssc/inc/utils/nanopb",
+]
+
+if TESTING_NANOAPPS_ENABLED:
+    chre_priv_api.append("${BUILD_ROOT}/chre/chre/src/system/chre/apps/include")
+
+env.PublishPrivateApi('CHRE', chre_priv_api)
+
+env.RequirePublicApi(core_public_apis, area='core')
+env.RequirePublicApi(platform_public_apis, area='platform')
+env.RequirePublicApi(qmimsgs_public_apis, area='qmimsgs')
+env.RequirePublicApi(['SNS_API_INCLUDES'], area='ssc_api')
+env.RequirePrivateApi('CHRE')
+
+#-------------------------------------------------------------------------------
+# Define various preprocessor definitions needed to compile CHRE
+#-------------------------------------------------------------------------------
+
+oem_ver = os.environ.get('SCONS_OEM_BUILD_VER')
+if oem_ver is not None:
+    oem_ver = str(oem_ver).strip().strip('"')
+else:
+    oem_ver = 'undefined'
+
+CHRE_DEFINES = [
+    'CHRE_SLPI_DEFAULT_BUILD',
+    'CHRE_MINIMUM_LOG_LEVEL=CHRE_LOG_LEVEL_DEBUG',
+    'NANOAPP_MINIMUM_LOG_LEVEL=CHRE_LOG_LEVEL_DEBUG',
+    'CHRE_ASSERTIONS_DISABLED',
+    'CHRE_NANOAPP_INTERNAL',
+    'CHRE_VERSION_STRING=\\\"' + oem_ver + '\\\"',
+    'CHRE_PATCH_VERSION=1',
+    'CHRE_FILENAME=__FILE__',
+    'CHRE_PLATFORM_ID=0x476f6f676c000005',
+    'CHRE_SEE_NUM_TEMP_SENSORS=1',
+    'FLATBUFFERS_CHRE',
+    'SSC_TARGET_HEXAGON',
+    'CHRE_SLPI_SEE',
+    'PB_FIELD_16BIT',
+    'CHRE_MESSAGE_TO_HOST_MAX_SIZE=4000',
+    'QDSP6',
+    'CHRE_USE_FARF_LOGGING',
+]
+
+if USE_CHRE_GNSS:
+    CHRE_DEFINES.append('CHRE_GNSS_SUPPORT_ENABLED')
+if USE_CHRE_WIFI:
+    CHRE_DEFINES.append('CHRE_WIFI_SUPPORT_ENABLED')
+if USE_CHRE_WWAN:
+    CHRE_DEFINES.append('CHRE_WWAN_SUPPORT_ENABLED')
+
+if TESTING_NANOAPPS_ENABLED:
+    CHRE_DEFINES.append('CHRE_INCLUDE_DEFAULT_STATIC_NANOAPPS')
+if LOAD_GNSS_WORLD:
+    CHRE_DEFINES.append('CHRE_LOAD_GNSS_WORLD')
+if LOAD_SENSOR_WORLD:
+    CHRE_DEFINES.append('CHRE_LOAD_SENSOR_WORLD')
+if LOAD_WIFI_WORLD:
+    CHRE_DEFINES.append('CHRE_LOAD_WIFI_WORLD')
+if LOAD_WWAN_WORLD:
+    CHRE_DEFINES.append('CHRE_LOAD_WWAN_WORLD')
+
+env.Append(CPPDEFINES = CHRE_DEFINES)
+
+#-------------------------------------------------------------------------------
+# Setup source files to be built
+#-------------------------------------------------------------------------------
+
+# Define path to the IDL file used to communicate with the host via FastRPC
+libchre_slpi_skel_idl = "${BUILDPATH}/system/chre/host/msm/daemon/idl/chre_slpi.idl"
+
+# Compile chre_slpi.h from chre_slpi.idl, This is a prereq for the libchre_slpi_skel.so
+prereq = env.HeaderBuilder("${BUILDPATH}/chre_slpi.h", libchre_slpi_skel_idl)
+
+chre_cc_src = [
+    # QMI interfaces
+    "${BUILD_ROOT}/qmimsgs/common/src/common_v01.c",
+    "${BUILD_ROOT}/qmimsgs/sns_client_api/src/sns_client_api_v01.c",
+
+    # Qualcomm protobufs needed by CHRE code
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_amd.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_client.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_suid.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_cal.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_physical_sensor_test.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_proximity.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_remote_proc_state.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_resampler.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_std.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_std_sensor.pb.c",
+    "${BUILD_ROOT}/ssc_api/build/${BUILDPATH}/pb/sns_std_type.pb.c",
+
+    # Core CHRE framework code
+    "${BUILDPATH}/system/chre/core/debug_dump_manager.cc",
+    "${BUILDPATH}/system/chre/core/event.cc",
+    "${BUILDPATH}/system/chre/core/event_loop.cc",
+    "${BUILDPATH}/system/chre/core/event_loop_manager.cc",
+    "${BUILDPATH}/system/chre/core/event_ref_queue.cc",
+    "${BUILDPATH}/system/chre/core/host_comms_manager.cc",
+    "${BUILDPATH}/system/chre/core/init.cc",
+    "${BUILDPATH}/system/chre/core/nanoapp.cc",
+    "${BUILDPATH}/system/chre/core/sensor_request.cc",
+    "${BUILDPATH}/system/chre/core/sensor_request_manager.cc",
+    "${BUILDPATH}/system/chre/core/sensor_request_multiplexer.cc",
+    "${BUILDPATH}/system/chre/core/sensor.cc",
+    "${BUILDPATH}/system/chre/core/sensor_type.cc",
+    "${BUILDPATH}/system/chre/core/sensor_type_helpers.cc",
+    "${BUILDPATH}/system/chre/core/static_nanoapps.cc",
+    "${BUILDPATH}/system/chre/core/timer_pool.cc",
+
+    # CHRE platform-specific implementation
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_audio.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_core.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_gnss.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_re.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_sensor.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_version.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_wifi.cc",
+    "${BUILDPATH}/system/chre/platform/shared/chre_api_wwan.cc",
+    "${BUILDPATH}/system/chre/platform/shared/host_protocol_chre.cc",
+    "${BUILDPATH}/system/chre/platform/shared/host_protocol_common.cc",
+    "${BUILDPATH}/system/chre/platform/shared/memory_manager.cc",
+    "${BUILDPATH}/system/chre/platform/shared/nanoapp/nanoapp_dso_util.cc",
+    "${BUILDPATH}/system/chre/platform/shared/pal_system_api.cc",
+    "${BUILDPATH}/system/chre/platform/shared/system_time.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/chre_api_re.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/host_link.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/init.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/memory.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/memory_manager.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/nanoapp_load_manager.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/platform_debug_dump_manager.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/platform_nanoapp.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/platform_pal.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/platform_sensor_type_helpers.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/system_time.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/system_time_util.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/system_timer.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/island_vote_client.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/platform_sensor.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/platform_sensor_manager.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/power_control_manager.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/see_helper.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/see_cal_helper.cc",
+    "${BUILDPATH}/system/chre/platform/slpi/see/sns_qmi_client.c",
+
+    # Common utilities
+    "${BUILDPATH}/system/chre/util/system/debug_dump.cc",
+    "${BUILDPATH}/system/chre/util/buffer_base.cc",
+    "${BUILDPATH}/system/chre/util/dynamic_vector_base.cc",
+    "${BUILDPATH}/system/chre/util/nanoapp/audio.cc",
+    "${BUILDPATH}/system/chre/util/nanoapp/callbacks.cc",
+    "${BUILDPATH}/system/chre/util/nanoapp/debug.cc",
+    "${BUILDPATH}/system/chre/util/nanoapp/wifi.cc",
+]
+
+if USE_CHRE_AUDIO:
+    chre_cc_src.extend([
+        "${BUILDPATH}/system/chre/core/audio_request_manager.cc",
+        "${BUILDPATH}/system/chre/platform/slpi/platform_audio.cc",
+    ])
+
+if USE_CHRE_GNSS:
+    chre_cc_src.extend([
+        "${BUILDPATH}/system/chre/core/gnss_manager.cc",
+        "${BUILDPATH}/system/chre/platform/shared/platform_gnss.cc",
+    ])
+
+if USE_CHRE_WIFI:
+    chre_cc_src.extend([
+        "${BUILDPATH}/system/chre/core/wifi_request_manager.cc",
+        "${BUILDPATH}/system/chre/core/wifi_scan_request.cc",
+        "${BUILDPATH}/system/chre/platform/shared/platform_wifi.cc",
+    ])
+
+if USE_CHRE_WWAN:
+    chre_cc_src.extend([
+        "${BUILDPATH}/system/chre/core/wwan_request_manager.cc",
+        "${BUILDPATH}/system/chre/platform/shared/platform_wwan.cc",
+    ])
+
+if LOAD_GNSS_WORLD:
+    chre_cc_src.append("${BUILDPATH}/system/chre/apps/gnss_world/gnss_world.cc")
+if LOAD_SENSOR_WORLD:
+    chre_cc_src.append("${BUILDPATH}/system/chre/apps/sensor_world/sensor_world.cc")
+if LOAD_WIFI_WORLD:
+    chre_cc_src.append("${BUILDPATH}/system/chre/apps/wifi_world/wifi_world.cc")
+if LOAD_WWAN_WORLD:
+    chre_cc_src.append("${BUILDPATH}/system/chre/apps/wwan_world/wwan_world.cc")
+
+#-------------------------------------------------------------------------------
+# Add CHRE as a shared library that should be built
+#-------------------------------------------------------------------------------
+
+target = env.AddMySharedLibrary(['ADSP_SHARED_LIBS'], '${BUILDPATH}/'+LIBNAME, chre_cc_src, libchre_slpi_skel_idl)
+env.Requires(target, prereq)
+
+# Clean / pack rules
+CLEAN_LIST=[]
+CLEAN_LIST.extend(env.FindFiles(['*'], LIB_ROOT + '/inc'))
+CLEAN_LIST.extend(env.FindFiles(['*'], LIB_ROOT + '/src'))
+env.CleanPack(['ADSP_SHARED_LIBS'], CLEAN_LIST)

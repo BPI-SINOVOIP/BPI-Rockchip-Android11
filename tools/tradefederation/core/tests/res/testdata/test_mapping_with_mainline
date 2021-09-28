@@ -1,0 +1,28 @@
+{
+  "mainline-presubmit": [
+    {
+      "name": "test[mod1.apk]",
+      "options": [
+        {
+          "include-filter": "test-filter"
+        }
+      ]
+    },
+    {
+      "name": "test[mod2.apk]",
+      "options": [
+        {
+          "include-filter": "test-filter2"
+        }
+      ]
+    },
+    {
+      "name": "test[mod1.apk+mod2.apk]",
+      "options": [
+        {
+          "exclude-annotation": "test-annotation"
+        }
+      ]
+    }
+  ]
+}

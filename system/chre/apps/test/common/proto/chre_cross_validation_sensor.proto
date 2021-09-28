@@ -1,0 +1,88 @@
+syntax = "proto2";
+
+package chre_cross_validation_sensor;
+
+option java_package = "com.google.android.chre.nanoapp.proto";
+option java_outer_classname = "ChreCrossValidationSensor";
+
+// Nanoappp message type can be either host to chre (H2C) or chre to host (C2H)
+enum MessageType {
+  // Reserved for corrupted messages
+  UNDEFINED = 0;
+
+  // H2C: Host telling nanoapp to start collecting sensor data
+  // Payload must be StartCommand message
+  CHRE_CROSS_VALIDATION_START = 1;
+
+  // C2H: Data payload to be validated. This is a batch of data exactly as it
+  // was received from a CHRE API.
+  // Payload must be Data message
+  CHRE_CROSS_VALIDATION_DATA = 2;
+
+  // H2C: Host asking nanoapp for information about a given sensor.
+  // Payload must be SensorInfoCommand message.
+  CHRE_CROSS_VALIDATION_INFO = 3;
+
+  // C2H: Response to a information request for a sensor.
+  // Payload must be a SensorInfoResponse message.
+  CHRE_CROSS_VALIDATION_INFO_RESPONSE = 4;
+}
+
+message StartCommand {
+  oneof command {
+    StartSensorCommand startSensorCommand = 1;
+  }
+}
+
+/*
+ * apSensorType values defined in Sensor class of
+ * android/frameworks/base/core/java/android/hardware/Sensor.java
+ */
+message StartSensorCommand {
+  optional uint32 chreSensorType = 1;
+  optional uint64 intervalInMs = 2;
+  optional uint64 latencyInMs = 3;
+  optional bool isContinuous = 4;
+}
+
+/*
+ * Asks for the nanoapp to provide stats about the provided CHRE sensor type.
+ */
+message SensorInfoCommand {
+  optional uint32 chreSensorType = 1;
+}
+
+/*
+ * Response to a SensorInfoCommand containing data about the requested sensor.
+ */
+message SensorInfoResponse {
+  optional uint32 chreSensorType = 1;
+  optional bool isAvailable = 2;
+}
+
+message Data {
+  oneof data {
+    SensorData sensorData = 1;
+  }
+}
+
+/*
+ * Similar data to structs with naming scheme chreSensor*Data found in
+ * android/system/chre/chre_api/include/chre_api/chre/sensor_types.h
+ */
+message SensorData {
+  optional uint32 chreSensorType = 1;
+  optional uint32 accuracy = 2;
+  repeated SensorDatapoint datapoints = 3;
+}
+
+/*
+ * Similar data to structs with naming scheme chreSensor*SampleData found in
+ * android/system/chre/chre_api/include/chre_api/chre/sensor_types.h except
+ * that timestampDelta has been replaced with timestampInNs which is an
+ * absolute timestamp instead of the delta relative to the last sample.
+ */
+message SensorDatapoint {
+  optional uint64 timestampInNs = 1;
+  repeated float values = 2;
+}

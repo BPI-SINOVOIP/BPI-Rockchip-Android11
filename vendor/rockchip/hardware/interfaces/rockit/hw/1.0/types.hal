@@ -1,0 +1,168 @@
+/*
+ * Copyright (C) 2019 Rockchip Electronics Co. LTD
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package rockchip.hardware.rockit.hw@1.0;
+
+import android.hidl.safe_union@1.0::Monostate;
+
+enum Status : int32_t {
+    /** Operation completed successfully. */
+    OK        = 0,
+
+    // bad input
+
+    /** Argument has invalid value (user error). */
+    BAD_VALUE = -22,
+    /** Argument uses invalid index (user error). */
+    BAD_INDEX = -75,
+    /** Argument/Index is valid but not possible. */
+    CANNOT_DO = -2147483646,
+
+    // bad sequencing of events
+
+    /** Object already exists. */
+    DUPLICATE = -17,
+    /** Object not found. */
+    NOT_FOUND = -2,
+    /** Operation is not permitted in the current state. */
+    BAD_STATE = -38,
+    /** Operation would block but blocking is not permitted. */
+    BLOCKING  = -9930,
+
+    // bad environment
+
+    /** Not enough memory to complete operation. */
+    NO_MEMORY = -12,
+    /** Missing permission to complete operation. */
+    REFUSED   = -1,
+
+    /** Operation did not complete within timeout. */
+    TIMED_OUT = -110,
+
+    // missing functionality
+
+    /** Operation is not implemented/supported (optional only). */
+    OMITTED   = -74,
+
+    // unknown fatal
+
+    /** Some unexpected error prevented the operation. */
+    CORRUPTED = -2147483648,
+
+    // uninitialized
+
+    /** Status has not been initialized. */
+    NO_INIT   = -19,
+};
+
+enum RockitHWType : uint32_t {
+    HW_DECODER_MPI = 1,
+    HW_DECODER_VPUAPI = 2,
+    HW_ENCODER_MPI = 3,
+    HW_ENCODER_VPUAPI = 4,
+    HW_IEP = 5,
+    HW_RGA = 6,
+    HW_ISP = 7,
+    /* add more here if need */
+};
+
+enum RockitHWParamKey : uint32_t {
+    HW_KEY_CODECID = 1,
+    HW_KEY_WIDTH,
+    HW_KEY_WIDTH_STRIDE,
+    HW_KEY_HEIGHT,
+    HW_KEY_HEIGHT_STRIDE,
+    HW_KEY_FORMAT,
+    HW_KEY_FASTMODE,
+    HW_KEY_PRESENT_TIME_ORDER,
+    HW_KEY_PTS,
+    HW_KEY_DTS,
+    HW_KEY_FLAGS,
+    HW_KEY_TOKEN,
+    HW_KEY_DATA_BUFFER,
+    HW_KEY_FBC_OUTPUT,
+    HW_KEY_DEBUG = 0x88888888,
+};
+
+enum RockitHWBufferFlags : uint32_t {
+    HW_FLAGS_EOS = 1<<0,
+    HW_FLAGS_ERROR_INFOR = 1<<1,
+    HW_FLAGS_INFOR_CHANGE = 1<<2,
+    HW_FLAGS_I4O2 = 1<<3,
+    HW_FLAGS_EXTRA_DATAS = 1<<4,
+};
+
+enum RockitHWCtrCmd : uint32_t {
+    HW_CMD_BUFFER_GROUP_CLEAR = 1,
+    HW_CMD_BUFFER_READY,
+    HW_CMD_BUFFER_DATA_CLEAR,
+    /* add more here if need */
+};
+
+enum RockitHWEvent : uint32_t {
+    HW_SUCCESS = 0,
+    HW_ERROR_INFOR = 1,
+    HW_FAIL = 2,
+    /* add more here if need */
+};
+
+enum RockitHWBufferType : uint32_t {
+    HW_BUFFER_DRM = 0,
+    HW_BUFFER_ION = 1,
+    /* add more here if need */
+};
+
+enum RockitHWDataType : uint32_t {
+    HW_BUFFER_EXTRA_DATAS = 0,
+    HW_BUFFER_DATAS = 1,
+    /* add more here if need */
+};
+
+struct RockitHWParamPair {
+    uint32_t     key;
+    uint64_t     value;
+    /* add more here if need */
+};
+
+struct RockitHWParamPairs {
+    uint32_t     counter;
+    vec<RockitHWParamPair> pairs;
+};
+
+struct RockitHWBuffer {
+    uint32_t     bufferType;
+    uint32_t     bufferId;
+    uint32_t     size;
+    uint32_t     length;
+    RockitHWParamPairs  pair;
+
+    /* add more here if need */
+};
+
+enum RockitHWQueryCmd : uint32_t  {
+    KEY_HW_QUERY_UNKNOWN = 0,
+    KEY_HW_QUERY_WIDTH_STRIDE,
+    KEY_HW_QUERY_HEIGHT_STRIDE,
+	KEY_HW_QUERY_UNUSED_BUFFER_COUNTER,
+
+    KEY_HW_QUERY_MAX,
+};
+
+struct RockitHWBufferList {
+    uint32_t            size;
+    vec<RockitHWBuffer> bufferList;
+    /* add more here if need */
+};

@@ -1,0 +1,62 @@
+# zygote-start is what officially starts netd (see //system/core/rootdir/init.rc)
+# However, on some hardware it's started from post-fs-data as well, which is just
+# a tad earlier.  There's no benefit to that though, since on 4.9+ P+ devices netd
+# will just block until bpfloader finishes and sets the bpf.progs_loaded property.
+#
+# It is important that we start bpfloader after:
+#   - /sys/fs/bpf is already mounted,
+#   - apex (incl. rollback) is initialized (so that in the future we can load bpf
+#     programs shipped as part of apex mainline modules)
+#   - system properties have been set, this is because isBpfSupported() calls
+#     getUncachedBpfSupportLevel() which depends on
+#     ro.kernel.ebpf.supported, ro.product.first_api_level & ro.build.version.sdk
+#   - logd is ready for us to log stuff
+#
+# At the same time we want to be as early as possible to reduce races and thus
+# failures (before memory is fragmented, and cpu is busy running tons of other
+# stuff) and we absolutely want to be before netd and the system boot slot is
+# considered to have booted successfully.
+#
+on load_bpf_programs
+    # Enable the eBPF JIT -- but do note that on 64-bit kernels it is likely
+    # already force enabled by the kernel config option BPF_JIT_ALWAYS_ON
+    write /proc/sys/net/core/bpf_jit_enable 1
+    # Enable JIT kallsyms export for privileged users only
+    write /proc/sys/net/core/bpf_jit_kallsyms 1
+    start bpfloader
+
+service bpfloader /system/bin/bpfloader
+    capabilities CHOWN SYS_ADMIN
+    #
+    # Set RLIMIT_MEMLOCK to 1GiB for bpfloader
+    #
+    # Actually only 8MiB would be needed if bpfloader ran as its own uid.
+    #
+    # However, while the rlimit is per-thread, the accounting is system wide.
+    # So, for example, if the graphics stack has already allocated 10MiB of
+    # memlock data before bpfloader even gets a chance to run, it would fail
+    # if its memlock rlimit is only 8MiB - since there would be none left for it.
+    #
+    # bpfloader succeeding is critical to system health, since a failure will
+    # cause netd crashloop and thus system server crashloop... and the only
+    # recovery is a full kernel reboot.
+    #
+    # We've had issues where devices would sometimes (rarely) boot into
+    # a crashloop because bpfloader would occasionally lose a boot time
+    # race against the graphics stack's boot time locked memory allocation.
+    #
+    # Thus bpfloader's memlock has to be 8MB higher then the locked memory
+    # consumption of the root uid anywhere else in the system...
+    # But we don't know what that is for all possible devices...
+    #
+    # Ideally, we'd simply grant bpfloader the IPC_LOCK capability and it
+    # would simply ignore it's memlock rlimit... but it turns that this
+    # capability is not even checked by the kernel's bpf system call.
+    #
+    # As such we simply use 1GiB as a reasonable approximation of infinity.
+    #
+    rlimit memlock 1073741824 1073741824
+    oneshot
+    reboot_on_failure reboot,bpfloader-failed
+    # we're not really updatable, but want to be able to load bpf programs shipped in apexes
+    updatable

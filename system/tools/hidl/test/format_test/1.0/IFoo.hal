@@ -1,0 +1,90 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package hidl_format_test_pkg@1.0;
+
+/**
+ * This is a doc comment.
+ */
+interface IFoo {
+    struct BigStruct {
+        uint8_t type;
+
+        /**
+         * This should also be emitted
+         */
+        struct Bar {
+            int32_t c;
+        } c;
+
+        /**
+         * This doc comment should show up
+         */
+        struct Foo {};
+
+        Foo b;
+    };
+
+    struct Everything {
+        int8_t number;
+
+        int32_t anotherNumber;
+
+        string s;
+
+        vec<string> vs;
+
+        /**
+         * Some doc comment which will be emitted
+         */
+        string[2][2] multidimArray;
+
+        string[3] sArray;
+
+        BigStruct anotherStruct;
+
+        bitfield<SomeEnum> bf;
+    };
+
+    safe_union SafeUnion {
+        string a;
+
+        uint8_t num;
+    };
+
+    union Union {
+        uint32_t a;
+
+        uint8_t num;
+    };
+
+    /**
+     * This is a doc comment.
+     */
+    oneway someFoo(int8_t a);
+
+    retVec(int8_t a) generates (vec<string> b);
+
+    someBar(string a, int8_t b) generates (string foo);
+
+    useStruct() generates (BigStruct type);
+
+    thisIsAVeryLongMethodNameThatWouldPushTheGeneratesOntoANewLineLoremIpsumDolorSitAmet(string a)
+        generates (string b);
+
+    thisMethodHasALotOfArguments(string a, BigStruct bigStruct, SafeUnion safeUnion,
+        Everything everything, Union unionType) generates (string b);
+};

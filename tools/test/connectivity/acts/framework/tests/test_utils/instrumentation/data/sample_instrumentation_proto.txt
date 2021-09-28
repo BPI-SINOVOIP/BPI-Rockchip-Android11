@@ -1,0 +1,17 @@
+test_status {
+  result_code: -1
+  results {
+    entries {
+      key: "Error"
+      value_string: "Unable to find instrumentation info for: ComponentInfo{com.google.android.powertests/androidx.test.runner.AndroidJUnitRunner}"
+    }
+    entries {
+      key: "id"
+      value_string: "ActivityManagerService"
+    }
+  }
+}
+session_status {
+  status_code: SESSION_ABORTED
+  error_text: "INSTRUMENTATION_FAILED: com.google.android.powertests/androidx.test.runner.AndroidJUnitRunner"
+}

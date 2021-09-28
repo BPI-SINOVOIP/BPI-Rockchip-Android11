@@ -1,0 +1,20 @@
+**/*.pyc
+**/*.class
+**/*.uml~
+**/yapfrc
+**/build
+**/.gradle
+**/.coverage
+**/htmlcov
+
+# Intellij generated files
+**/.idea
+**/*.iml
+
+# Exceptions
+!aidegen/test_data/*.iml
+!aidegen/test_data/.idea
+
+# Because atest plugin needs to use the directory, which contains "build"
+# folder, as fake date for testing. Add the path to gitignore exception.
+!asuite_plugin/src/test/resources/root/build

@@ -1,0 +1,120 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+namespace chre.power_test;
+
+/// Indicates which of the following messages is being sent to / from the
+/// nanoapp. Use uint as the base type to match the message type in
+/// chreMessageFromHostData.
+enum MessageType : uint {
+  UNSPECIFIED = 0,
+  /// Should be used with TimerMessage
+  TIMER_TEST,
+  /// Should be used with WifiScanMessage
+  WIFI_SCAN_TEST,
+  /// Should be used with GnssLocationMessage
+  GNSS_LOCATION_TEST,
+  /// Should be used with CellQueryMessage
+  CELL_QUERY_TEST,
+  /// Should be used with AudioRequestMessage
+  AUDIO_REQUEST_TEST,
+  /// Should be used with SensorRequestMessage
+  SENSOR_REQUEST_TEST,
+  /// Should be used with BreakItMessage
+  BREAK_IT_TEST,
+  /// Should be used with NanoappResponseMessage
+  NANOAPP_RESPONSE,
+}
+
+/// Represents a message to ask the nanoapp to create a timer that wakes up at
+/// the given interval
+table TimerMessage {
+  enable:bool;
+  wakeup_interval_ns:ulong;
+}
+
+/// Represents a message to ask the nanoapp to start or stop WiFi scanning and
+/// the scan interval to use if scanning is being started
+table WifiScanMessage {
+  enable:bool;
+  scan_interval_ns:ulong;
+}
+
+/// Represents a message to ask the nanoapp to start or stop Gnss location
+/// sampling at the requested interval
+table GnssLocationMessage {
+  enable:bool;
+  scan_interval_millis:uint;
+  min_time_to_next_fix_millis:uint;
+}
+
+/// Represents a message to ask the nanoapp to start or stop querying the cell
+/// modem for the latest cell scan results on the given interval
+table CellQueryMessage {
+  enable:bool;
+  query_interval_ns:ulong;
+}
+
+/// Represents a message to ask the nanoapp to start / stop requesting Audio
+/// data buffered at given interval. Note: If there is more than one audio
+/// source, the nanoapp will only request audio from the first source.
+table AudioRequestMessage {
+  enable:bool;
+  /// The buffer duration is also used as the interval for how often
+  /// the buffer should be delivered to the nanoapp.
+  buffer_duration_ns:ulong;
+}
+
+/// All the various sensors that can be interacted with inside the nanoapp.
+/// The values used here map directly to values from the CHRE API
+enum SensorType : ubyte {
+  UNKNOWN = 0,
+  ACCELEROMETER = 1,
+  INSTANT_MOTION_DETECT = 2,
+  STATIONARY_DETECT = 3,
+  GYROSCOPE = 6,
+  UNCALIBRATED_GYROSCOPE = 7,
+  GEOMAGNETIC_FIELD = 8,
+  UNCALIBRATED_GEOMAGNETIC_FIELD = 9,
+  PRESSURE = 10,
+  LIGHT = 12,
+  PROXIMITY = 13,
+  STEP_DETECT = 23,
+  UNCALIBRATED_ACCELEROMETER = 55,
+  ACCELEROMETER_TEMPERATURE = 56,
+  GYROSCOPE_TEMPERATURE = 57,
+  GEOMAGNETIC_FIELD_TEMPERATURE = 58,
+}
+
+/// Represents a message to ask the nanoapp to start / stop sampling / batching
+/// a given sensor
+table SensorRequestMessage {
+  enable:bool;
+  sensor:SensorType;
+  sampling_interval_ns:ulong;
+  latency_ns:ulong;
+}
+
+/// Represents a message to enable / disable break-it mode inside the nanoapp.
+/// Break-it mode enables WiFi / GNSS / Cell to be queried every second and
+/// enables all sensors at their fastest sampling rate.
+table BreakItMessage {
+  enable:bool;
+}
+
+/// Indicates whether the nanoapp successfully performed the requested action.
+/// Any failures will be printed to the logs.
+table NanoappResponseMessage {
+  success:bool;
+}

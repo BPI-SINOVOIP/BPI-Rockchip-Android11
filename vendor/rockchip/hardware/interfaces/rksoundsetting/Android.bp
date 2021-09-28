@@ -1,0 +1,29 @@
+cc_library_shared {
+
+    srcs: [
+        "RkAudioSettingManager.cpp",
+        "audio_hw_hdmi.cpp",
+        "RkAudioSetting.cpp",
+    ],
+
+    include_dirs: [
+        "external/tinyxml",
+        "system/media/audio/include",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libcutils",
+        "libutils",
+        "librttinyxml",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-undefined-bool-conversion",
+    ],
+
+    name: "librksoundsetting",
+}

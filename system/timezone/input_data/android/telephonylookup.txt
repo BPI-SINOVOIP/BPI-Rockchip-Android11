@@ -1,0 +1,52 @@
+#
+# Copyright 2019, The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Telephony information related to time zone detection.
+#
+# This is a proto file in text format.
+#
+# The file is used to generate the on-device file used when picking
+# a time zone for an Android device.
+
+# networks:
+#
+# A set of networks which use an MCC+MNC combination but *do not* actually
+# operate in the country the MCC would suggest and therefore cause problems when
+# MCC is used for country detection. There is no need to enter networks that
+# operate in the country linked to the MCC. MCC+MNC combinations that operate
+# in multiple countries where the MCC country is one of them must also not be
+# entered here.
+#
+# The ordering of network elements is not important but is kept in ASCII
+# order by MCC and MNC, then country ISO code for easier maintenance.
+# There must only be one network element per MCC+MNC combination.
+
+# Network:
+#
+# mcc:
+# The Mobile Country Code.
+#
+# mnc:
+# The Mobile Network Code.
+#
+# countryIsoCode:
+# The (lower cased) ISO 3166 2-character country code. Must be a known valid code.
+
+networks:<
+  # DOCOMO PACIFIC http://b/117863016
+  mcc: "310"
+  mnc: "370"
+  countryIsoCode: "gu"
+>

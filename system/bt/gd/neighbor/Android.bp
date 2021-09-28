@@ -1,0 +1,26 @@
+filegroup {
+    name: "BluetoothNeighborSources",
+    srcs: [
+            "connectability.cc",
+            "discoverability.cc",
+            "inquiry.cc",
+            "name.cc",
+            "name_db.cc",
+            "page.cc",
+            "scan.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothNeighborTestSources",
+    srcs: [
+            "inquiry_test.cc",
+    ],
+}
+
+filegroup {
+    name: "BluetoothFacade_neighbor",
+    srcs: [
+        "facade/facade.cc",
+    ],
+}

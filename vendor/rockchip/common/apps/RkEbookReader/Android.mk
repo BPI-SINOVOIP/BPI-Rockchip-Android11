@@ -1,0 +1,152 @@
+LOCAL_PATH := $(call my-dir)
+ifeq ($(strip TARGET_ARCH), arm)
+
+###############################################################################
+# RkEbookReader
+include $(CLEAR_VARS)
+LOCAL_MODULE := RKEBookReader
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_TAGS := optional
+LOCAL_BUILT_MODULE_STEM := package.apk
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+#LOCAL_PRIVILEGED_MODULE :=
+LOCAL_CERTIFICATE := PRESIGNED
+#LOCAL_OVERRIDES_PACKAGES := 
+LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
+LOCAL_REQUIRED_MODULES := 
+    BooksProvider \
+
+include $(BUILD_PREBUILT)
+
+###############################################################################
+# BooksProvider
+include $(CLEAR_VARS)
+LOCAL_MODULE := BooksProvider
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_TAGS := optional
+LOCAL_BUILT_MODULE_STEM := package.apk
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_CERTIFICATE := PRESIGNED
+LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
+LOCAL_REQUIRED_MODULES :=
+    rmsdk.ver \
+    adobedevchk \
+    libadobe_rmsdk.so \
+    libRkDeflatingDecompressor.so \
+    librm_ssl.so \
+    libflip.so \
+    librm_crypto.so \
+    fonts/adobefonts/AdobeMyungjoStd.bin \
+    fonts/adobefonts/RyoGothicPlusN.bin \
+    fonts/adobefonts/CRengine.ttf \
+    fonts/adobefonts/AdobeHeitiStd.bin \
+    fonts/adobefonts/AdobeMingStd.bin
+
+include $(BUILD_PREBUILT)
+
+###############################################################################
+# All required modules
+include $(CLEAR_VARS)
+LOCAL_MODULE := rmsdk.ver
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
+LOCAL_SRC_FILES := lib/$(TARGET_ARCH)/$(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := adobedevchk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_SRC_FILES := bin/$(TARGET_ARCH)/$(LOCAL_MODULE)
+LOCAL_MODULE_SUFFIX := 
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libadobe_rmsdk.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_SRC_FILES := lib/$(TARGET_ARCH)/$(LOCAL_MODULE)
+LOCAL_MODULE_SUFFIX := 
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libRkDeflatingDecompressor.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_SRC_FILES := lib/$(TARGET_ARCH)/$(LOCAL_MODULE)
+LOCAL_MODULE_SUFFIX :=
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := librm_ssl.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_SRC_FILES := lib/$(TARGET_ARCH)/$(LOCAL_MODULE)
+LOCAL_MODULE_SUFFIX :=
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libflip.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_SRC_FILES := lib/$(TARGET_ARCH)/$(LOCAL_MODULE)
+LOCAL_MODULE_SUFFIX :=
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := librm_crypto.so
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_SRC_FILES := lib/$(TARGET_ARCH)/$(LOCAL_MODULE)
+LOCAL_MODULE_SUFFIX :=
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := fonts/adobefonts/AdobeMyungjoStd.bin
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH := $(TARGET_OUT)/$(LOCAL_MODULE)
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+LOCAL_MODULE := fonts/adobefonts/RyoGothicPlusN.bin
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH := $(TARGET_OUT)/$(LOCAL_MODULE)
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+LOCAL_MODULE := fonts/adobefonts/CRengine.ttf
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH := $(TARGET_OUT)/$(LOCAL_MODULE)
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+LOCAL_MODULE := fonts/adobefonts/AdobeHeitiStd.bin
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH := $(TARGET_OUT)/$(LOCAL_MODULE)
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+LOCAL_MODULE := fonts/adobefonts/AdobeMingStd.bin
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_STEM := $(LOCAL_MODULE)
+LOCAL_MODULE_PATH := $(TARGET_OUT)/$(LOCAL_MODULE)
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
+
+endif
