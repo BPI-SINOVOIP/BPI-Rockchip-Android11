@@ -1,0 +1,35 @@
+cc_library_shared {
+    name: "libandroidemu",
+    vendor: true,
+    srcs: [
+        "android/base/AlignedBuf.cpp",
+        "android/base/files/MemStream.cpp",
+        "android/base/files/Stream.cpp",
+        "android/base/files/StreamSerializing.cpp",
+        "android/base/Pool.cpp",
+        "android/base/ring_buffer.c",
+        "android/base/StringFormat.cpp",
+        "android/base/AndroidSubAllocator.cpp",
+        "android/base/synchronization/AndroidMessageChannel.cpp",
+        "android/base/threads/AndroidFunctorThread.cpp",
+        "android/base/threads/AndroidThreadStore.cpp",
+        "android/base/threads/AndroidThread_pthread.cpp",
+        "android/base/threads/AndroidWorkPool.cpp",
+        "android/base/Tracing.cpp",
+        "android/utils/debug.c",
+    ],
+    shared_libs: [
+        "libcutils",
+        "libutils",
+        "liblog",
+    ],
+    export_include_dirs: [
+        ".",
+    ],
+    cflags: [
+        "-DLOG_TAG=\"androidemu\"",
+        "-Wno-missing-field-initializers",
+        "-fvisibility=default",
+        "-fstrict-aliasing",
+    ],
+}

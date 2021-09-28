@@ -1,0 +1,35 @@
+!gles1_extensions
+
+%#include <GLES/glext.h>
+
+void glBlendEquationSeparateOES(GLenum modeRGB, GLenum modeAlpha);
+void glBlendFuncSeparateOES(GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+void glBlendEquationOES(GLenum mode);
+
+void glDrawTexsOES(GLshort x, GLshort y, GLshort z, GLshort width, GLshort height);
+void glDrawTexiOES(GLint x, GLint y, GLint z, GLint width, GLint height);
+void glDrawTexxOES(GLfixed x, GLfixed y, GLfixed z, GLfixed width, GLfixed height);
+void glDrawTexsvOES(const GLshort *coords);
+void glDrawTexivOES(const GLint *coords);
+void glDrawTexxvOES(const GLfixed *coords);
+void glDrawTexfOES(GLfloat x, GLfloat y, GLfloat z, GLfloat width, GLfloat height);
+void glDrawTexfvOES(const GLfloat *coords);
+
+void glEGLImageTargetTexture2DOES(GLenum target, GLeglImageOES image);
+void glEGLImageTargetRenderbufferStorageOES(GLenum target, GLeglImageOES image);
+
+GLboolean glIsRenderbufferOES(GLuint renderbuffer);
+void glBindRenderbufferOES(GLenum target, GLuint renderbuffer);
+void glDeleteRenderbuffersOES(GLsizei n, const GLuint* renderbuffers);
+void glGenRenderbuffersOES(GLsizei n, GLuint* renderbuffers);
+void glRenderbufferStorageOES(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+void glGetRenderbufferParameterivOES(GLenum target, GLenum pname, GLint* params);
+GLboolean glIsFramebufferOES(GLuint framebuffer);
+void glBindFramebufferOES(GLenum target, GLuint framebuffer);
+void glDeleteFramebuffersOES(GLsizei n, const GLuint* framebuffers);
+void glGenFramebuffersOES(GLsizei n, GLuint* framebuffers);
+GLenum glCheckFramebufferStatusOES(GLenum target);
+void glFramebufferRenderbufferOES(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+void glFramebufferTexture2DOES(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+void glGetFramebufferAttachmentParameterivOES(GLenum target, GLenum attachment, GLenum pname, GLint* params);
+void glGenerateMipmapOES(GLenum target);

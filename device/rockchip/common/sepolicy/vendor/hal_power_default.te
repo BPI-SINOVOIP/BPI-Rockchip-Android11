@@ -1,0 +1,13 @@
+allow hal_power_default sysfs:file rw_file_perms;
+allow hal_power_default sysfs:dir r_dir_perms;
+allow hal_power_default sysfs_devices_system_cpu:file write;
+allow hal_power_default video_device:chr_file rw_file_perms;
+allow hal_power_default sysfs_dev:file r_file_perms;
+allow hal_power_default sysfs_dev:lnk_file rw_file_perms;
+allow hal_power_default sysfs_dmc:dir r_dir_perms;
+allow hal_power_default sysfs_dmc:file rw_file_perms;
+allow hal_power_default sysfs_dmc:lnk_file rw_file_perms;
+
+get_prop(hal_power_default, vendor_boot_complete_prop)
+
+dontaudit hal_power_default self:capability dac_override;

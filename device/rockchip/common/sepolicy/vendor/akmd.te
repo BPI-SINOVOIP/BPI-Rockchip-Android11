@@ -1,0 +1,8 @@
+type akmd, domain;
+type akmd_exec, exec_type, vendor_file_type, file_type;
+type akmd_vendor_data_file, file_type, data_file_type;
+
+init_daemon_domain(akmd)
+allow akmd akmd_device:chr_file { open read write ioctl };
+allow akmd akmd_vendor_data_file:dir { add_name create write getattr search };
+allow akmd akmd_vendor_data_file:file { create read open write lock};

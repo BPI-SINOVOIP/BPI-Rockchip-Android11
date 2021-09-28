@@ -1,0 +1,12 @@
+allow untrusted_app  block_device:dir { getattr search };
+allow untrusted_app  ota_data_file:dir rw_dir_perms;
+allow untrusted_app  ota_data_file:file rw_file_perms;
+allow untrusted_app  userdata_block_device:blk_file { getattr };
+allow untrusted_app  oemfs:file {execmod};
+
+dontaudit untrusted_app mnt_vendor_file:dir { search };
+
+rw_rockchip_graphic_device(untrusted_app)
+get_prop(untrusted_app,vendor_system_public_prop)
+get_prop(untrusted_app,vendor_default_prop)
+get_prop(untrusted_app,vendor_security_patch_level_prop)

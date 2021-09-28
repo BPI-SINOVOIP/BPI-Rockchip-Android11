@@ -1,0 +1,16 @@
+python_binary_host {
+    name: "fstab_tools",
+    version: {
+        py2: {
+            enabled: false,
+        },
+        py3: {
+            enabled: true,
+        },
+    },
+
+    main: "fstab_generator.py",
+    srcs: [
+        "fstab_generator.py",
+    ],
+}

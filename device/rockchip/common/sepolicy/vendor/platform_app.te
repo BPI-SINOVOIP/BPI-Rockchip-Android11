@@ -1,0 +1,7 @@
+#for gpu
+allow platform_app gpu_data_file:file rw_file_perms;
+allow platform_app vendor_metadata:dir { search };
+#TODO removed for Q
+#allow platform_app vendor_file:file { getattr open read };
+rw_rockchip_graphic_device(platform_app)
+get_prop(platform_app,vendor_default_prop)

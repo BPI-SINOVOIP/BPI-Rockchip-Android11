@@ -1,0 +1,55 @@
+# /dev
+type camdata_file, file_type, data_file_type;
+type gpu_data_file, file_type, data_file_type, core_data_file_type, mlstrustedobject;
+type ru_file, file_type;
+type ext4_exec, exec_type, file_type;
+
+# /vendor
+type video_file, file_type,vendor_file_type,mlstrustedobject;
+
+type vendor_metadata, file_type,vendor_file_type,mlstrustedobject;
+
+# /data
+type akmd_file, file_type, data_file_type;
+type location_data_file, file_type, data_file_type;
+type time_data_file, file_type, data_file_type;
+type display_data_file, file_type, data_file_type;
+type netmgr_data_file, file_type, data_file_type;
+type sensors_cal_file, file_type;
+type radio_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+type sensor_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+# vendor data file
+type mediadrm_vendor_data_file, file_type, data_file_type;
+type abc_data_file, file_type, data_file_type;
+type rk_audio_setting_vendor_data_file, file_type, data_file_type;
+
+# /sys
+type sysfs_hctosys, sysfs_type, fs_type;
+type sysfs_camera, sysfs_type, fs_type;
+type sysfs_enable_ps_sensor, sysfs_type, fs_type;
+type sysfs_fingerprint, sysfs_type, fs_type;
+type sysfs_mdss_mdp_caps, sysfs_type, fs_type;
+type sysfs_perf, sysfs_type, fs_type;
+type sysfs_pcie, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_power_management, sysfs_type, fs_type;
+type sysfs_rmtfs, sysfs_type, fs_type;
+type sysfs_soc, sysfs_type, fs_type, mlstrustedobject;
+type sysfs_timestamp_switch, sysfs_type, fs_type;
+type sysfs_video, sysfs_type, fs_type;
+type sysfs_fb, fs_type, sysfs_type;
+type sysfs_hdmi, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_dev, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_lut, fs_type, sysfs_type, mlstrustedobject;
+type sysfs_lcdc, fs_type, sysfs_type, mlstrustedobject;
+type aplog_data_file, file_type, data_file_type;
+type fuseblk, sdcard_type, fs_type, mlstrustedobject;
+type proc_ostype, fs_type, mlstrustedobject;
+type sys_mali, fs_type, debugfs_type, mlstrustedobject;
+type debugfs_sw_sync, fs_type, debugfs_type;
+type sysfs_dmc, fs_type, sysfs_type;
+type sysfs_mmc, fs_type, sysfs_type;
+
+# input files
+type idc_file, file_type, vendor_file_type;
+type keylayout_file, file_type, vendor_file_type;

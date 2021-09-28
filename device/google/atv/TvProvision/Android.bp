@@ -1,0 +1,21 @@
+prebuilt_etc {
+    name: "privapp_whitelist_com.android.tv.provision",
+    product_specific: true,
+    sub_dir: "permissions",
+    src: "com.android.tv.provision.xml",
+    filename_from_src: true,
+}
+
+android_app {
+    name: "TvProvision",
+    srcs: ["**/*.java"],
+    product_specific: true,
+    sdk_version: "system_current",
+    certificate: "platform",
+    privileged: true,
+    overrides: ["SdkSetup"],
+    required: ["privapp_whitelist_com.android.tv.provision"],
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}

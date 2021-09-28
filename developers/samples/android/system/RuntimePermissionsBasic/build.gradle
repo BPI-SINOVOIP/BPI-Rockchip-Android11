@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.0'
+    }
+}
+
+// BEGIN_EXCLUDE
+import com.example.android.samples.build.SampleGenPlugin
+apply plugin: SampleGenPlugin
+
+samplegen {
+  pathToBuild "../../../../build"
+  pathToSamplesCommon "../../common"
+}
+apply from: "../../../../build/build.gradle"
+// END_EXCLUDE

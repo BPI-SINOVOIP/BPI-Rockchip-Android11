@@ -1,0 +1,23 @@
+allow hal_camera_default vndbinder_device:chr_file rw_file_perms;
+allow hal_camera_default property_socket:sock_file { write } ;
+allow hal_camera_default init:unix_stream_socket { connectto } ;
+allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager { find };
+
+allow hal_camera_default hal_graphics_composer_default:fd { use };
+allow hal_camera_default mediaserver:fd { use };
+
+allow hal_camera_default sysfs_dev:file r_file_perms;
+allow hal_camera_default debugfs_sw_sync:dir r_dir_perms;
+allow hal_camera_default debugfs_sw_sync:file rw_file_perms;
+allowxperm hal_camera_default debugfs_sw_sync:file ioctl { SYNC_IOC_MERGE SW_SYNC_IOC_INC SW_SYNC_IOC_CREATE_FENCE };
+
+hal_client_domain(hal_camera_default, hal_graphics_allocator)
+
+binder_call(hal_camera_default,hal_graphics_allocator_default)
+
+rw_rockchip_graphic_device(hal_camera_default)
+get_prop(hal_camera_default,vendor_default_prop)
+get_prop(hal_camera_default,vendor_omx_prop)
+get_prop(hal_camera_default,public_vendor_default_prop)
+get_prop(hal_camera_default,vendor_camera_prop)
+set_prop(hal_camera_default,vendor_camera_prop)

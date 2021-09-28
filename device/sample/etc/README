@@ -1,0 +1,19 @@
+===== apns-full-conf.xml =====
+
+This file contains apn configurations and serves as a sample file.
+A typical APN config looks like this:
+<apn carrier="CarrierXYZ"
+      carrier_id="1"
+      mcc="123"
+      mnc="123"
+      apn="carrierxyz"
+      type="default,supl,mms,ims,cbs"
+      mmsc="http://mms.carrierxyz.com"
+      mmsproxy="0.0.0.0"
+      mmsport="80"
+      bearer_bitmask="4|5|6|7|8|12"
+/>
+
+For APNs with a matching carrier ID please assign a carrier ID
+AOSP carrier ID assignments can be found at
+https://android.googlesource.com/platform/packages/providers/TelephonyProvider/+/master/assets/latest_carrier_id/carrier_list.textpb

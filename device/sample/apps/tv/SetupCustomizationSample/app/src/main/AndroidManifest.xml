@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.google.android.tv.setup.customizationsample">
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
+    <uses-permission android:name="com.android.setupwizard.permission.SETUP" />
+    <uses-permission android:name="android.permission.REBOOT" />
+
+    <application
+        android:label="TV Setup Customization Sample"
+        android:theme="@style/AppTheme">
+
+
+        <!-- This Receiver marks this app as being eligible to provide resources which influence
+        the behavior and look of TV Setup. -->
+        <receiver android:name=".PartnerReceiver">
+            <intent-filter>
+                <action android:name="com.google.android.tvsetup.action.PARTNER_CUSTOMIZATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- HOOK Activity examples -->
+
+        <activity
+            android:name=".HookBeginActivity"
+            android:label="Partner Hook: Begin (Priority 5)"
+            android:screenOrientation="landscape">
+            <intent-filter android:priority="5">
+                <action android:name="com.android.setupwizard.action.HOOK_BEGIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookBegin2Activity"
+            android:label="Partner Hook: Begin (Priority 4)"
+            android:screenOrientation="landscape">
+            <intent-filter android:priority="4">
+                <action android:name="com.android.setupwizard.action.HOOK_BEGIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookPostNetworkActivity"
+            android:screenOrientation="landscape"
+            android:label="Partner Hook: Post-Network"
+            >
+            <intent-filter>
+                <action android:name="com.android.setupwizard.action.HOOK_POST_NETWORK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookPostNetworkFollowupActivity"
+            android:screenOrientation="landscape"
+            android:label="Partner Hook: Post-Network Follow-up"
+            android:exported="true"
+            >
+        </activity>
+
+
+        <activity
+            android:name=".HookEndActivity"
+            android:screenOrientation="landscape"
+            android:label="Partner Hook: End"
+            >
+            <intent-filter>
+                <action android:name="com.android.setupwizard.action.HOOK_END" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Implements the delegate-network-to-partner action. -->
+        <activity
+            android:name=".NetworkDelegationActivity"
+            android:screenOrientation="landscape"
+            android:label="Network Delegation"
+            >
+            <intent-filter>
+                <action android:name="com.android.net.GET_CONNECTED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+    </application>
+
+</manifest>

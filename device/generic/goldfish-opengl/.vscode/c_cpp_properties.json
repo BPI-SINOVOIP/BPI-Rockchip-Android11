@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/external/qemu/android/android-emugl/guest",
+                "${workspaceFolder}/device/generic/goldfish-opengl/system/OpenglSystemCommon",
+                "${workspaceFolder}/device/generic/goldfish-opengl/shared/OpenglCodecCommon"
+            ],
+            "defines": [
+                "HOST_BUILD",
+                "GOLDFISH_VULKAN"
+            ],
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64",
+            "configurationProvider": "vector-of-bool.cmake-tools"
+        }
+    ],
+    "version": 4
+}

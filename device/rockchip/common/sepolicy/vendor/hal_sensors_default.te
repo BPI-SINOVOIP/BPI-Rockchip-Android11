@@ -1,0 +1,13 @@
+type sensor_dev, dev_type;
+allow hal_sensors_default input_device:dir { search open read };
+allow hal_sensors_default input_device:chr_file { ioctl open read };
+allow hal_sensors_default sensor_device:chr_file { ioctl open read };
+allow hal_sensors_default proc:file { open read getattr };
+allow hal_sensors_default sysfs:dir { open read };
+allow hal_sensors_default sysfs:file { read open getattr };
+allow hal_sensors_default iio_device:chr_file { open read };
+allow hal_sensors_default sysfs:file write;
+allow hal_sensors_default device:chr_file ioctl;
+allow hal_sensors_default sensor_dev:chr_file { open read ioctl};
+
+get_prop(hal_sensors_default,vendor_default_prop)

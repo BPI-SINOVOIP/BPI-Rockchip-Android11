@@ -1,0 +1,15 @@
+cc_binary {
+    name: "mac80211_create_radios",
+    vendor: true,
+    cppflags: [
+             "-Wall",
+             "-Werror",
+             "--std=c++17",
+            ],
+    srcs: ["main.cpp",],
+    shared_libs: [
+        "libcutils",
+        "liblog",
+        "libnl",
+    ],
+}

@@ -1,0 +1,9 @@
+type pvrsrvctl, domain, mlstrustedsubject;
+type pvrsrvctl_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(pvrsrvctl)
+
+allow pvrsrvctl pvrsrvctl:capability { sys_module sys_admin };
+allow pvrsrvctl gpu_device:chr_file rw_file_perms;
+allow pvrsrvctl rootfs:lnk_file { getattr };
+allow pvrsrvctl proc:file { read open getattr };
+

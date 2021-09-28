@@ -1,0 +1,88 @@
+# On the emulator, device tree dir is configured to be
+# /sys/bus/platform/devices/ANDR0001:00/properties/android/ which is a symlink to
+# /sys/devices/platform/ANDR0001:00/properties/android/
+genfscon sysfs /devices/platform/ANDR0001:00/properties/android u:object_r:sysfs_dt_firmware_android:s0
+
+# We expect /sys/class/power_supply/* and everything it links to to be labeled
+# as sysfs_batteryinfo.
+genfscon sysfs /devices/platform/GFSH0001:00/power_supply u:object_r:sysfs_batteryinfo:s0
+
+# /sys/class/rtc
+genfscon sysfs /devices/pnp0/00:00/rtc u:object_r:sysfs_rtc:s0
+genfscon sysfs /devices/platform/GFSH0007:00/rtc u:object_r:sysfs_rtc:s0
+genfscon sysfs /devices/platform/rtc-test.0/rtc/rtc1/hctosys u:object_r:sysfs_rtc:s0
+genfscon sysfs /devices/platform/rtc-test.1/rtc/rtc2/hctosys u:object_r:sysfs_rtc:s0
+genfscon sysfs /devices/platform/rtc-test.2/rtc/rtc3/hctosys u:object_r:sysfs_rtc:s0
+
+# /sys/class/net
+genfscon sysfs /devices/pci0000:00/0000:00:08.0/virtio5/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/mac80211_hwsim/hwsim0/net u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/mac80211_hwsim/hwsim1/net u:object_r:sysfs_net:s0
+
+# block devices
+genfscon sysfs /devices/virtual/block/ram u:object_r:sysfs_devices_block:s0
+genfscon sysfs /devices/virtual/block/md u:object_r:sysfs_devices_block:s0
+
+genfscon sysfs /devices/pci0000:00/0000:00:03.0/virtio0/block/vda u:object_r:sysfs_virtio_block:s0
+genfscon sysfs /devices/pci0000:00/0000:00:04.0/virtio1/block/vdb u:object_r:sysfs_virtio_block:s0
+genfscon sysfs /devices/pci0000:00/0000:00:05.0/virtio2/block/vdc u:object_r:sysfs_virtio_block:s0
+genfscon sysfs /devices/pci0000:00/0000:00:06.0/virtio3/block/vdd u:object_r:sysfs_virtio_block:s0
+genfscon sysfs /devices/pci0000:00/0000:00:07.0/virtio4/block/vde u:object_r:sysfs_virtio_block:s0
+genfscon sysfs /devices/pci0000:00/0000:00:08.0/virtio5/block/vdf u:object_r:sysfs_virtio_block:s0
+
+# /sys/class/power_supply
+genfscon sysfs /devices/platform/9020000.goldfish_battery/power_supply u:object_r:sysfs_batteryinfo:s0
+
+# symlinks from /sys/class/wakeup
+genfscon sysfs /devices/LNXSYSTM:00/LNXPWRBN:00/wakeup/wakeup                      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/GFSH0001:00/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/GFSH0003:00/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/GFSH0004:00/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/GFSH0006:00/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/GFSH0008:00/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:00/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:01/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:02/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:03/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:04/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:05/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:06/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:07/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:08/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:09/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:0a/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:0b/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:0c/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:0d/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:0e/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:0f/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:10/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:11/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:12/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:13/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:14/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:15/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:16/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:17/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:18/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:19/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:1a/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:1b/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:1c/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:1d/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:1e/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:1f/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/device:20/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A03:00/wakeup/wakeup           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/GFSH0001:00/power_supply/ac/wakeup                u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/GFSH0001:00/power_supply/battery/wakeup           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/pnp0/00:00/rtc/rtc0/wakeup                                 u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/pnp0/00:00/wakeup/wakeup                                   u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup                                      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/rtc-test.1/wakeup/wakeup33                        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/rtc-test.2/wakeup/wakeup34                        u:object_r:sysfs_wakeup:s0
+
+genfscon sysfs /bus/iio/devices                                                    u:object_r:sysfs_iio_devices:s0
+
+# /proc/<pid>/ns
+genfscon nsfs / u:object_r:nsfs:s0

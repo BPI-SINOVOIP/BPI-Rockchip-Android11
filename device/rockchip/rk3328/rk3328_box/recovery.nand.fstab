@@ -1,0 +1,25 @@
+# Android fstab file.
+#<src>                                       <mnt_point>         <type>    <mnt_flags and options>       <fs_mgr_flags>
+/dev/block/rknand_user                  /mnt/internal_sd     vfat            defaults                  defaults            
+/dev/block/mmcblk0p1                         /mnt/external_sd     vfat       /dev/block/mmcblk0        defaults
+/dev/block/rknand_system                /system              ext4            defaults                  defaults
+/dev/block/rknand_vendor                /vendor              ext4            defaults			defaults
+/dev/block/rknand_oem                   /oem                 ext4             defaults			defaults
+
+/dev/block/rknand_cache                 /cache               ext4            defaults                  defaults
+/dev/block/rknand_metadata              /metadata            ext4            defaults                  defaults
+/dev/block/rknand_userdata              /data                f2fs            defaults                  defaults
+/dev/block/rknand_cust                  /cust                ext4            defaults                  defaults
+/dev/block/rknand_custom                /custom              ext4            defaults                  defaults
+/dev/block/rknand_radical_update        /radical_update      ext4            defaults                  defaults
+/dev/block/rknand_frp                   /frp                 emmc            defaults                  defaults
+/dev/block/rknand_misc                  /misc                mtd             defaults                  defaults
+/dev/block/rknand_uboot                 /uboot               mtd             defaults                  defaults
+/dev/block/rknand_charge                /charge              mtd             defaults                  defaults
+/dev/block/rknand_resource				/resource			 mtd			  defaults					defaults
+/dev/block/rknand_parameter             /parameter           mtd             defaults                  defaults
+/dev/block/rknand_boot                  /boot                mtd             defaults                  defaults
+/dev/block/rknand_recovery              /recovery            mtd             defaults                  defaults
+/dev/block/rknand_backup                /backup              mtd             defaults                  defaults
+/dev/block/rknand_trust                 /trust               mtd             defaults                  defaults
+/dev/block/rknand_baseparameter         /baseparameter       mtd             defaults                  defaults

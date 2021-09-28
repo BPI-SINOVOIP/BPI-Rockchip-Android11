@@ -1,0 +1,189 @@
+on fs
+    mount_all /vendor/etc/fstab.ranchu
+
+on early-init
+    mount proc proc /proc remount hidepid=2,gid=3009
+    setprop ro.hardware.egl emulation
+    setprop ro.hardware.vulkan ranchu
+
+on init
+    # set RLIMIT_MEMLOCK to 8MB for BPF network statistics
+    setrlimit memlock 8388608 8388608
+
+    symlink /dev/goldfish_pipe /dev/android_pipe
+    symlink /dev/goldfish_pipe /dev/qemu_pipe
+
+    write /sys/block/zram0/comp_algorithm lz4
+    write /proc/sys/vm/page-cluster 0
+
+    #
+    # EAS uclamp interfaces
+    #
+    mkdir /dev/cpuctl/foreground
+    mkdir /dev/cpuctl/background
+    mkdir /dev/cpuctl/top-app
+    mkdir /dev/cpuctl/rt
+    chown system system /dev/cpuctl
+    chown system system /dev/cpuctl/foreground
+    chown system system /dev/cpuctl/background
+    chown system system /dev/cpuctl/top-app
+    chown system system /dev/cpuctl/rt
+    chown system system /dev/cpuctl/tasks
+    chown system system /dev/cpuctl/foreground/tasks
+    chown system system /dev/cpuctl/background/tasks
+    chown system system /dev/cpuctl/top-app/tasks
+    chown system system /dev/cpuctl/rt/tasks
+    chmod 0664 /dev/cpuctl/tasks
+    chmod 0664 /dev/cpuctl/foreground/tasks
+    chmod 0664 /dev/cpuctl/background/tasks
+    chmod 0664 /dev/cpuctl/top-app/tasks
+    chmod 0664 /dev/cpuctl/rt/tasks
+
+    start qemu-props
+
+on post-fs-data
+    setprop vold.post_fs_data_done 1
+    mkdir /data/vendor/var 0755 root root
+    mkdir /data/vendor/var/run 0755 root root
+    mkdir /data/vendor/var/run/netns 0755 root root
+    start ranchu-net
+
+on zygote-start
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/vendor/wifi 0771 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+
+on boot
+    setprop ro.hardware.egl emulation
+    setprop debug.sf.vsync_reactor 0
+    setprop debug.hwui.renderer opengl
+    setprop debug.hwui.renderer ${ro.kernel.qemu.uirenderer}
+    setprop ro.opengles.version ${ro.kernel.qemu.opengles.version}
+    setprop ro.zygote.disable_gl_preload 1
+
+    setprop debug.stagefright.ccodec 0
+    setprop debug.stagefright.ccodec ${ro.kernel.qemu.media.ccodec}
+
+    setprop dalvik.vm.heapsize 192m
+    setprop dalvik.vm.heapsize ${ro.kernel.qemu.dalvik.vm.heapsize}
+    chown root system /sys/power/wake_lock
+    chown root system /sys/power/wake_unlock
+    setprop ro.hardware.audio.primary goldfish
+
+    setprop wifi.interface wlan0
+    setprop wifi.direct.interface p2p-dev-wlan0
+
+    start goldfish-logcat
+
+    # Create a dummy USB gadget to allow sysfs testing
+    mkdir /config/usb_gadget/g1 0770 root root
+
+service ranchu-setup /vendor/bin/init.ranchu-core.sh
+    class core
+    user root
+    group root
+    oneshot
+
+on property:vendor.qemu.timezone=*
+    setprop persist.sys.timezone ${vendor.qemu.timezone}
+
+on property:vendor.qemu.android.bootanim=0
+    setprop debug.sf.nobootanimation 1
+
+on property:dev.bootcomplete=1
+    setprop vendor.qemu.dev.bootcomplete 1
+    start ranchu-setup
+
+service ranchu-net /vendor/bin/init.ranchu-net.sh
+    class late_start
+    user root
+    group root wakelock wifi
+    oneshot
+    disabled    # Started on post-fs-data
+
+service emu_hostapd /vendor/bin/execns router /vendor/bin/hostapd_nohidl /data/vendor/wifi/hostapd/hostapd.conf
+    user root
+    group root wifi net_raw net_admin
+    disabled
+
+service netmgr /vendor/bin/execns router /vendor/bin/netmgr --if-prefix wlan1 --bridge eth0,radio0-peer
+    user root
+    group root wifi
+    disabled
+
+service wifi_forwarder /vendor/bin/wifi_forwarder
+    user root
+    group root wifi
+    disabled
+
+service dhcpclient_rtr /vendor/bin/dhcpclient -i radio0 --no-gateway
+    user root
+    group root
+    disabled
+
+service dhcpclient_wifi /vendor/bin/dhcpclient -i wlan0 --no-gateway
+    user root
+    group root
+    disabled
+
+on property:vendor.network.bridged=1
+    start dhcpclient_rtr
+
+service dhcpclient_def /vendor/bin/dhcpclient -i eth0 --no-gateway
+    user root
+    group root
+    disabled
+
+# The qemu-props program is used to set various system
+# properties on boot. It must be run early during the boot
+# process to avoid race conditions with other daemons that
+# might read them (e.g. surface flinger), so define it in
+# class 'core'
+#
+service qemu-props /vendor/bin/qemu-props
+    class core
+    user root
+    group root
+    oneshot
+
+# -Q is a special logcat option that forces the
+# program to check wether it runs on the emulator
+# if it does, it redirects its output to the device
+# named by the androidboot.console kernel option
+# if not, is simply exits immediately
+# logd user added to prevent logcat from logging content.
+# log group added to support access to read logs socket.
+service goldfish-logcat /system/bin/logcat -Q
+    user logd
+    group log
+    oneshot
+
+service bugreport /system/bin/dumpstate -d -p -z
+    class main
+    disabled
+    oneshot
+    keycodes 114 115 116
+
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant -Dnl80211 -iwlan0 -c/vendor/etc/wifi/wpa_supplicant.conf -g@android:wpa_wlan0
+    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.2::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.3::ISupplicant default
+    socket wpa_wlan0 dgram 660 wifi wifi
+    group system wifi inet
+    oneshot
+    disabled
+
+# Enable zram only once per boot. From:
+
+# We want one opportunity per boot to enable zram, so we
+# use a trigger we fire from the above stanza. If
+# persist.sys.zram_enabled becomes true after boot,
+# we don't want to run swapon_all at that time.
+
+on property:sys.boot_completed=1
+    trigger sys-boot-completed-set
+
+on sys-boot-completed-set && property:persist.sys.zram_enabled=1
+    swapon_all /vendor/etc/fstab.${ro.hardware}

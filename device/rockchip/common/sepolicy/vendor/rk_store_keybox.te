@@ -1,0 +1,21 @@
+type rk_store_keybox, domain, mlstrustedsubject;
+type rk_store_keybox_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(rk_store_keybox)
+allow rk_store_keybox tee_device:chr_file { read write ioctl open };
+allow rk_store_keybox rootfs:lnk_file getattr;
+allow rk_store_keybox rk_store_keybox_exec:file { read open getattr execute execute_no_trans };
+
+#TODO removed for Q
+#allow rk_store_keybox system_file:file { execute_no_trans };
+dontaudit rk_store_keybox self:capability { dac_override };
+
+allow rk_store_keybox property_socket:sock_file { write };
+allow rk_store_keybox uboot_block_device:blk_file { ioctl open read write };
+allow rk_store_keybox storage_device:chr_file { ioctl open read write setattr };
+allow rk_store_keybox rpmb_block_device:blk_file { ioctl open read write };
+#TODO removed for Q
+#allow rk_store_keybox shell_exec:file { getattr read open };
+allow rk_store_keybox vendor_shell_exec:file { execute execute_no_trans };
+allow rk_store_keybox init:unix_stream_socket { connectto };
+

@@ -1,0 +1,105 @@
+GLOBAL
+    base_opcode 10000
+
+rcGetEGLVersion
+    flag custom_decoder
+    dir major out
+    len major sizeof(EGLint)
+    dir minor out
+    len minor sizeof(EGLint)
+
+rcQueryEGLString
+    flag custom_decoder
+    dir buffer out
+    len buffer bufferSize
+
+rcGetGLString
+    flag custom_decoder
+    dir buffer out
+    len buffer bufferSize
+
+rcGetNumConfigs
+    dir numAttribs out
+    len numAttribs sizeof(uint32_t)
+
+rcGetConfigs
+    dir buffer out
+    len buffer bufSize
+
+rcChooseConfig
+    flag custom_decoder
+    dir attribs in
+    len attribs attribs_size
+    dir configs out
+    var_flag configs nullAllowed
+    len configs configs_size*sizeof(uint32_t)
+
+rcCreateContext
+    flag custom_decoder
+
+rcDestroyContext
+    flag custom_decoder
+
+rcCreateWindowSurface
+    flag custom_decoder
+
+rcDestroyWindowSurface
+    flag custom_decoder
+
+rcCloseColorBuffer
+    flag flushOnEncode
+
+rcSetWindowColorBuffer
+    flag custom_decoder
+
+rcMakeCurrent
+    flag custom_decoder
+
+rcFBSetSwapInterval
+    flag custom_decoder
+
+rcBindTexture
+    flag custom_decoder
+
+rcBindRenderbuffer
+    flag custom_decoder
+
+rcReadColorBuffer
+    dir pixels out
+
+rcUpdateColorBuffer
+    dir pixels in
+    var_flag pixels isLarge
+
+rcCreateClientImage
+    flag custom_decoder
+
+rcSelectChecksumHelper
+    flag custom_decoder
+
+rcCreateSyncKHR
+    flag custom_decoder
+    dir attribs in
+    len attribs num_attribs
+    dir glsync_out out
+    len glsync_out sizeof(uint64_t)
+    dir syncthread_out out
+    len syncthread_out sizeof(uint64_t)
+
+rcClientWaitSyncKHR
+    flag custom_decoder
+
+rcDestroySyncKHR
+    flag custom_decoder
+
+rcSetPuid
+    flag custom_decoder
+
+rcUpdateColorBufferDMA
+    dir pixels in
+    len pixels pixels_size
+    var_flag pixels DMA
+    flag flushOnEncode
+
+rcWaitSyncKHR
+    flag custom_decoder

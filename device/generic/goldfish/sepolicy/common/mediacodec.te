@@ -1,0 +1,4 @@
+allow mediacodec system_file:dir { open read };
+allow mediacodec vendor_data_file:dir search;
+allow mediacodec vendor_data_file:file { open read getattr };
+allow mediacodec vendor_data_file:lnk_file read;

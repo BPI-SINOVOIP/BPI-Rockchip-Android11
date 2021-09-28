@@ -1,0 +1,11 @@
+allow dumpstate sysfs_virtio_block:file r_file_perms;
+allow dumpstate mnt_media_rw_file:dir { getattr open read };
+#allow dumpstate varrun_file:dir { search getattr open read };
+
+dontaudit dumpstate kernel:system module_request;
+
+dontaudit dumpstate device:file { open write };
+allow dumpstate nsfs:file getattr;
+dontaudit dumpstate varrun_file:dir search;
+allow dumpstate vold:binder call;
+dontaudit dumpstate apexd:binder call;

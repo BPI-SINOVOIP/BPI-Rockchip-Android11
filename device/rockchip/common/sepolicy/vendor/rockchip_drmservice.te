@@ -1,0 +1,19 @@
+type np_rockchip_drmservice, domain;
+type np_rockchip_drmservice_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(np_rockchip_drmservice)
+allow np_rockchip_drmservice property_socket:sock_file { write };
+dontaudit np_rockchip_drmservice self:capability {dac_override};
+allow np_rockchip_drmservice init:unix_stream_socket { connectto };
+dontaudit np_rockchip_drmservice self:capability { dac_read_search };
+allow np_rockchip_drmservice sysfs_android_usb:dir { search };
+allow np_rockchip_drmservice vendor_metadata:dir { search };
+allow np_rockchip_drmservice vendor_metadata:file { read open getattr };
+allow np_rockchip_drmservice configfs:dir { search };
+allow np_rockchip_drmservice configfs:file { open write };
+allow np_rockchip_drmservice proc_cmdline:file { read open };
+allow np_rockchip_drmservice storage_device:chr_file rw_file_perms;
+allow np_rockchip_drmservice vendor_data_file:file { rw_file_perms create setattr };
+allow np_rockchip_drmservice vendor_data_file:dir { search write add_name };
+set_prop(np_rockchip_drmservice,vendor_drm_prop)
+get_prop(np_rockchip_drmservice,vendor_drm_prop)

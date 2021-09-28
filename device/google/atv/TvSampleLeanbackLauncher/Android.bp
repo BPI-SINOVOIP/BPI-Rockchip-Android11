@@ -1,0 +1,19 @@
+prebuilt_etc {
+    name: "privapp_whitelist_com.example.sampleleanbacklauncher",
+    product_specific: true,
+    sub_dir: "permissions",
+    src: "com.example.sampleleanbacklauncher.xml",
+    filename_from_src: true,
+}
+
+android_app_import {
+  name: "TvSampleLeanbackLauncher",
+  apk: "TvSampleLeanbackLauncher.apk",
+  presigned: true,
+  privileged: true,
+  product_specific: true,
+  required: ["privapp_whitelist_com.example.sampleleanbacklauncher"],
+  dex_preopt: {
+    enabled: false,
+  },
+}

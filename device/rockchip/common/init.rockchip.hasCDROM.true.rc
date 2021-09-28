@@ -1,0 +1,9 @@
+on init
+    export EXTERNAL_STORAGE /sdcard
+
+on property:sys.usb.config=mass_storage
+    write /sys/class/android_usb/f_mass_storage/lun/file ${ro.factory.cdrom}
+
+on property:sys.usb.config=mass_storage,adb
+    write /sys/class/android_usb/f_mass_storage/lun/file ${ro.factory.cdrom}
+

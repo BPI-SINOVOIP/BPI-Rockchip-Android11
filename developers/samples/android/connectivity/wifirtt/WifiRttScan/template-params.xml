@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2018 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<sample>
+    <name>WifiRttScan</name>
+    <group>Connectivity</group>
+    <package>com.example.android.wifirttscan</package>
+
+    <!-- change minSdk if needed-->
+    <minSdk>28</minSdk>
+    <compileSdkVersion>28</compileSdkVersion>
+    <targetSdkVersion>28</targetSdkVersion>
+
+    <multiDexEnabled>true</multiDexEnabled>
+
+    <androidX>true</androidX>
+
+    <!-- Include additional dependencies here.-->
+    <!-- dependency>com.google.android.gms:play-services:5.0.+</dependency -->
+
+    <dependency>androidx.appcompat:appcompat:1.0.0-beta01</dependency>
+    <dependency>androidx.constraintlayout:constraintlayout:2.0.0-alpha1</dependency>
+    <dependency>com.google.android.material:material:1.0.0-beta01</dependency>
+
+    <strings>
+        <intro>
+<![CDATA[
+Sample demonstrates best practices for using WifiRTT APIs in Android. Also, this is a a useful
+application for testing Wifi-RTT enabled phones and access points and validating the estimated
+distance is close to the actual distance between them.
+]]>
+        </intro>
+    </strings>
+
+    <template src="base" />
+
+    <metadata>
+    <status>PUBLISHED</status>
+    <categories>Connectivity</categories>
+    <technologies>Android</technologies>
+    <languages>Java</languages>
+    <solutions>Mobile</solutions>
+    <level>ADVANCED</level>
+    <icon>screenshots/big_icon.png</icon>
+    <screenshots>
+        <img>screenshots/main1.png</img>
+        <img>screenshots/main2.png</img>
+        <img>screenshots/main3.png</img>
+    </screenshots>
+    <api_refs>
+        <android>android.net.wifi.ScanResult</android>
+        <android>android.net.wifi.WifiManager</android>
+        <android>android.net.wifi.rtt.RangingRequest</android>
+        <android>android.net.wifi.rtt.RangingResult</android>
+        <android>android.net.wifi.rtt.RangingResultCallback</android>
+        <android>android.net.wifi.rtt.WifiRttManager</android>
+    </api_refs>
+    <description>
+<![CDATA[
+Sample demonstrates best practices for using WifiRTT APIs in Android. Also, this is a a useful
+application for testing Wifi-RTT enabled phones and access points and validating the estimated
+distance is close to the actual distance between them.
+]]>
+    </description>
+    <intro>
+<![CDATA[
+Steps for trying out the sample:
+* Compile and install the mobile app onto your mobile device (for mobile scenario).
+
+This sample demonstrates best practices for using the WifiRtt APIs in Android. The main activity
+lists all access points that are WifiRtt enabled using the [WifiManager][1]. By clicking on one of
+the access points, another activity will launch and initiate [RangingRequest][2] via the
+[WifiRttManager][3]. The activity will display many of the details returned from the access point
+including the distance between the access point and the phone.
+
+[1]: https://developer.android.com/reference/android/net/wifi/WifiManager
+[2]: https://developer.android.com/reference/android/net/wifi/rtt/RangingRequest
+[3]: https://developer.android.com/reference/android/net/wifi/rtt/WifiRttManager
+]]>
+    </intro>
+</metadata>
+</sample>

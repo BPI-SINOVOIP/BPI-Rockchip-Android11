@@ -1,0 +1,59 @@
+dontaudit system_app mnt_vendor_file:dir search;
+#for gpu
+allow system_app sysfs_lcdc:file rw_file_perms;
+allow system_app sysfs_usb:file rw_file_perms;
+allow system_app gpu_data_file:file rw_file_perms;
+allow system_app vendor_metadata:dir { search };
+#for ota
+allow system_app selinuxfs:file { read open };
+allow system_app mnt_media_rw_file:dir { getattr };
+#for hdmi
+allow system_app sysfs_hdmi:file rw_file_perms;
+allow system_app sysfs_fb:file rw_file_perms;
+allow system_app sysfs_zram:dir r_dir_perms;
+allow system_app sysfs_zram:file rw_file_perms;
+allow system_app proc_stat:file { read open getattr };
+#for samba
+allow system_app metadata_file:dir {getattr};
+allow system_app block_device:dir {search};
+#for devicetest
+#allow system_app system_app_data_file:file { execute execute_no_trans };
+allow system_app system_data_file:file { read open };
+allow system_app system_data_root_file:file { read open };
+allow system_app { sysfs_leds metadata_file }:dir { search };
+
+#TODO removed for Q
+#allow system_app vendor_file:file { read open };
+allow system_app unlabeled:filesystem { getattr };
+allow system_app unlabeled:file { getattr open read write unlink rename };
+allow system_app unlabeled:dir { open search read getattr write remove_name add_name };
+allow system_app cache_file:lnk_file { read };
+allow system_app cache_recovery_file:dir {search create read write open add_name getattr remove_name};
+allow system_app cache_recovery_file:file {rw_file_perms create unlink setattr};
+
+#TODO removed for Q
+#allow system_app vendor_file:file { getattr };
+allow system_app cache_file:dir search;
+get_prop(system_app,vendor_default_prop)
+#set_prop(system_app,exported_system_prop)
+set_prop(system_app,powerctl_prop)
+
+allow system_app abc_data_file:file { read getattr };
+allow system_app abc_data_file:dir { open getattr read search };
+
+set_prop(system_app,debug_prop)
+
+rw_rockchip_graphic_device(system_app)
+
+allow system_app block_device:dir { search read open getattr };
+allow system_app mnt_media_rw_file:dir { search read open getattr };
+allow system_app asec_apk_file:dir { search read open getattr };
+
+hal_client_domain(system_app, hal_light)
+hal_client_domain(system_app, hal_power)
+binder_call(system_app, update_engine)
+
+allow system_app proc_pagetypeinfo:file r_file_perms;
+
+allow system_app mnt_sdcard_file:lnk_file r_file_perms;
+allow system_app mnt_pass_through_file:dir r_file_perms;

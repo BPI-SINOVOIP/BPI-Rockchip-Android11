@@ -1,0 +1,6 @@
+type ntfsfix, domain, coredomain;
+type ntfsfix_exec, exec_type, system_file_type, file_type;
+allow vold ntfsfix_exec:file { execute read open };
+#allow fsck_untrusted ntfsfix_exec:file { entrypoint };
+
+init_daemon_domain(ntfsfix);

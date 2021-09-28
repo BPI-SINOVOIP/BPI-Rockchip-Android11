@@ -1,0 +1,7 @@
+allow hal_bluetooth_default storage_device:chr_file { read write open ioctl };
+#dontaudit hal_bluetooth_default self:udp_socket { create };
+allow hal_bluetooth_default serial_device:chr_file rw_file_perms;
+allow hal_bluetooth_default sysfs:file write;
+allow hal_bluetooth_default rk_bluetooth_file:file rw_file_perms;
+allow hal_bluetooth_default proc:file { open write };
+binder_call(hal_bluetooth_default, zygote)

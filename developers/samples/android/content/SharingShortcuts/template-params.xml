@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ Copyright 2013 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<sample>
+    <name>SharingShortcuts</name>
+    <group>Content</group>
+    <package>com.example.android.sharingshortcuts</package>
+
+    <minSdk>21</minSdk>
+
+    <!-- Include additional dependencies here.-->
+    <dependency>androidx.appcompat:appcompat:1.1.0-alpha03</dependency>
+    <dependency>androidx.sharetarget:sharetarget:1.0.0-alpha01</dependency>
+    <dependency>androidx.recyclerview:recyclerview:1.0.0</dependency>
+
+    <strings>
+        <intro>
+            <![CDATA[
+This sample demonstrates how to provide the Sharing Shortcuts - Direct Share feature. The app shows
+some options directly in the list of share intent candidates and launcher shortcuts.
+            ]]>
+        </intro>
+    </strings>
+
+    <template src="base" />
+    <androidX>true</androidX>
+
+    <metadata>
+        <!-- Values: {DRAFT | PUBLISHED | INTERNAL | DEPRECATED | SUPERCEDED} -->
+        <status>PUBLISHED</status>
+        <categories>Content</categories>
+        <technologies>Android</technologies>
+        <languages>Java</languages>
+        <solutions>Mobile</solutions>
+        <level>INTERMEDIATE</level>
+        <icon>screenshots/icon-web.png</icon>
+        <screenshots>
+            <img>screenshots/1-main.png</img>
+            <img>screenshots/2-intent.png</img>
+            <img>screenshots/3-message.png</img>
+            <img>screenshots/4-static_shortcuts.png</img>
+        </screenshots>
+
+        <api_refs>
+            <androidx>androidx.core.content.pm.ShortcutManagerCompat</androidx>
+            <androidx>androidx.core.content.pm.ShortcutInfoCompat</androidx>
+        </api_refs>
+        <description>
+            <![CDATA[
+Sample demonstrating how to show some options directly in the list of share intent candidates.
+            ]]>
+        </description>
+
+        <intro>
+            <![CDATA[
+Direct Share is a feature that allows apps to show their internal options directly in the
+system Intent chooser dialog. This sample is a dummy messaging app, and just like any other
+messaging apps, it receives intents for sharing a plain text. When a user shares some text from some
+other app, this sample app will be listed as an option. Using the Direct Share feature, this app
+also shows some of contacts directly in the chooser dialog.
+
+Direct Share was [first introduced][1] in Android M where you had to implement a service to provide
+direct share targets on demand. The way to do that changed in Android Q, you need to provide your
+direct share targets in advance. First, you have to declare share-target elements in the same
+application's resource file than [static shortcuts][2]. Then, you need to publish dynamic
+shortcuts with the same category you declared in the share-target with the [ShortcutManager API][3].
+You will need to manually update the list of shortcuts every time you consider it appropriate.
+The API offers methods to update, remove or add shortcuts. You can use the
+[ShortcutInfoCompat.Builder][4] to customize your shortcut. If you don't want to block the UI thread
+doing these operations, interactions with the ShortcutManager can also happen on a background thread.
+
+There are three ways the app is sending/receiving intents:
+- Dynamic Share: The user selected the app in the sharesheet to receive the text. After this,
+the user will have to select the contact to share the text with. In our case, the app receives an
+intent of type Intent.ACTION_SEND.
+- Direct Share: The user selected a person of your app in the sharesheet to share the text with.
+The received intent of type Intent.ACTION_SEND will contain a String EXTRA_SHORTCUT_ID that will
+have the id of the shortcut that was selected. After this, the app is ready to send the text.
+- Launcher shortcut: When the user taps on a launcher shortcut, the intent that was
+added to the shortcut will get fired. In our case, it triggers an intent of type Intent.ACTION_DEFAULT.
+
+To make Direct Share backwards compatible with older Android versions, you need to add the AndroidX
+sharetarget library and in your AndroidManifest.xml, add a meta-data tag in your Activity that
+receives the Intent. Specify android:name as android.service.chooser.chooser_target_service and
+android:value as androidx.sharetarget.ChooserTargetServiceCompat.
+
+The way to share text has also changed. Before, you could specify a title in the
+[Intent.createChooser()][5] method itself. That is deprecated and unused in Android Q. You can achieve
+the same behavior by adding an Intent.EXTRA_TITLE extra to the intent. Similarly, if you want a
+preview thumbnail to appear, you can create a content URI and set a ClipData object in the intent.
+You can see how to do that in our example, open the MainActivity.java file for more details.
+
+[1]: https://developer.android.com/about/versions/marshmallow/android-6.0#direct-share
+[2]: https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts
+[3]: https://developer.android.com/reference/androidx/core/content/pm/ShortcutManagerCompat.html
+[4]: https://developer.android.com/reference/androidx/core/content/pm/ShortcutInfoCompat.Builder.html
+[5]: https://developer.android.com/reference/android/content/Intent.html#createChooser(android.content.Intent,%20java.lang.CharSequence)
+            ]]>
+        </intro>
+    </metadata>
+</sample>

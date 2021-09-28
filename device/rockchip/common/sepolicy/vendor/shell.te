@@ -1,0 +1,48 @@
+allow shell serial_device:chr_file rw_file_perms;
+allow shell surfaceflinger:fifo_file rw_file_perms;
+allow shell bootanim_exec:file getattr;
+allow shell proc_cpuinfo:file mounton;
+allow shell proc_kmsg:file getattr;
+allow shell proc_iomem:file getattr;
+allow shell proc_misc:file getattr;
+allow shell proc:file getattr;
+allow shell vendor_toolbox_exec:file getattr;
+allow shell init_exec:file getattr;
+allow shell vendor_metadata:dir getattr;
+allow shell debugfs:dir { read open } ;
+
+allow shell sysfs:file { getattr };
+allow shell vendor_file:file { read open getattr execute };
+
+allow shell boottime_prop:file { getattr open };
+allow shell dumpstate_options_prop:file { getattr open };
+allow shell net_dns_prop:file { getattr open };
+allow shell overlay_prop:file { getattr open };
+allow shell persistent_properties_ready_prop:file { getattr open };
+allow shell wifi_prop:file { getattr open };
+allow shell ctl_console_prop:file { getattr open };
+allow shell ctl_default_prop:file { getattr open };
+allow shell ctl_bootanim_prop:file { getattr open };
+allow shell ctl_fuse_prop:file { getattr open };
+allow shell ctl_interface_restart_prop:file { getattr open };
+allow shell ctl_interface_start_prop:file { getattr open };
+allow shell ctl_interface_stop_prop:file { getattr open };
+allow shell ctl_restart_prop:file { getattr open };
+allow shell ctl_mdnsd_prop:file { getattr open };
+
+allow shell gatekeeper_service:service_manager find;
+allow shell sysfs_batteryinfo:file { open read getattr };
+
+binder_call(shell, wificond)
+
+get_prop(shell, graphic_prop)
+get_prop(shell, safemode_prop)
+get_prop(shell, mmc_prop)
+get_prop(shell, device_logging_prop)
+get_prop(shell, vendor_default_prop)
+
+allow shell metadata_file:dir { search getattr rw_dir_perms };
+allow shell gpu_data_file:file rw_file_perms;
+allow shell metadata_file:file r_file_perms;
+
+rw_rockchip_graphic_device(shell)

@@ -1,0 +1,8 @@
+type abc, domain;
+type abc_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(abc)
+
+allow abc abc_data_file:dir { rw_dir_perms rmdir create };
+allow abc abc_data_file:file { rw_file_perms unlink create };
+allow abc vendor_shell_exec:file { execute_no_trans };

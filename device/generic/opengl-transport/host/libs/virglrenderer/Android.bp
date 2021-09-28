@@ -1,0 +1,208 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+genrule {
+  name: "glesv1_dec_cuttlefish_gensrc",
+  srcs: ["GLESv1_dec/*"],
+  tools: ["emugen_cuttlefish"],
+  cmd: "$(location emugen_cuttlefish) " +
+       "-i device/generic/opengl-transport/host/libs/virglrenderer/GLESv1_dec " +
+       "-D $(genDir) gles1",
+  out: ["gles1_dec.cpp"],
+}
+
+genrule {
+  name: "glesv1_dec_cuttlefish_genhdr",
+  srcs: ["GLESv1_dec/*"],
+  tools: ["emugen_cuttlefish"],
+  cmd: "$(location emugen_cuttlefish) " +
+       "-i device/generic/opengl-transport/host/libs/virglrenderer/GLESv1_dec " +
+       "-D $(genDir) gles1",
+  out: [
+    "gles1_dec.h",
+    "gles1_opcodes.h",
+    "gles1_server_context.h",
+    "gles1_server_proc.h",
+  ],
+}
+
+genrule {
+  name: "glesv3_dec_cuttlefish_gensrc",
+  srcs: ["GLESv3_dec/*"],
+  tools: ["emugen_cuttlefish"],
+  cmd: "$(location emugen_cuttlefish) " +
+       "-i device/generic/opengl-transport/host/libs/virglrenderer/GLESv3_dec " +
+       "-D $(genDir) gles3",
+  out: ["gles3_dec.cpp"],
+}
+
+genrule {
+  name: "glesv3_dec_cuttlefish_genhdr",
+  srcs: ["GLESv3_dec/*"],
+  tools: ["emugen_cuttlefish"],
+  cmd: "$(location emugen_cuttlefish) " +
+       "-i device/generic/opengl-transport/host/libs/virglrenderer/GLESv3_dec " +
+       "-D $(genDir) gles3",
+  out: [
+    "gles3_dec.h",
+    "gles3_opcodes.h",
+    "gles3_server_context.h",
+    "gles3_server_proc.h",
+  ],
+}
+
+genrule {
+  name: "rendercontrol_dec_cuttlefish_gensrc",
+  srcs: ["renderControl_dec/*"],
+  tools: ["emugen_cuttlefish"],
+  cmd: "$(location emugen_cuttlefish) " +
+       "-i device/generic/opengl-transport/host/libs/virglrenderer/renderControl_dec " +
+       "-D $(genDir) renderControl",
+  out: ["renderControl_dec.cpp"],
+}
+
+genrule {
+  name: "rendercontrol_dec_cuttlefish_genhdr",
+  srcs: ["renderControl_dec/*"],
+  tools: ["emugen_cuttlefish"],
+  cmd: "$(location emugen_cuttlefish) " +
+       "-i device/generic/opengl-transport/host/libs/virglrenderer/renderControl_dec " +
+       "-D $(genDir) renderControl",
+  out: [
+    "renderControl_dec.h",
+    "renderControl_opcodes.h",
+    "renderControl_server_context.h",
+    "renderControl_server_proc.h",
+  ],
+}
+
+genrule {
+  name: "gles1_core_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/gles1_core.entries"],
+  out: ["gles1_core_functions.h"],
+}
+
+genrule {
+  name: "gles1_extensions_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/gles1_extensions.entries"],
+  out: ["gles1_extensions_functions.h"],
+}
+
+genrule {
+  name: "egl_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/egl.entries"],
+  out: ["egl_functions.h"],
+}
+
+genrule {
+  name: "gles3_only_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/gles3_only.entries"],
+  out: ["gles3_only_functions.h"],
+}
+
+genrule {
+  name: "gles31_only_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/gles31_only.entries"],
+  out: ["gles31_only_functions.h"],
+}
+
+genrule {
+  name: "gles2_extensions_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/gles2_extensions.entries"],
+  out: ["gles2_extensions_functions.h"],
+}
+
+genrule {
+  name: "egl_extensions_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/egl_extensions.entries"],
+  out: ["egl_extensions_functions.h"],
+}
+
+genrule {
+  name: "gles2_core_functions_hdr",
+  tool_files: ["gen_entries.py"],
+  cmd: "python device/generic/opengl-transport/host/libs/virglrenderer/gen_entries.py --mode=funcargs $(in) --output $(out)",
+  srcs: ["OpenGLESDispatch/gles2_core.entries"],
+  out: ["gles2_core_functions.h"],
+}
+
+cc_library_host_shared {
+    name: "libvirglrenderer_cuttlefish",
+    include_dirs: [
+        "external/libdrm",
+        "external/libdrm/include",
+        "device/generic/goldfish-opengl/system",
+    ],
+    local_include_dirs: [
+      "GLESv1_dec",
+      "GLESv3_dec",
+      "include",
+      "renderControl_dec",
+    ],
+    srcs: [
+        "AVDVirglRenderer.cpp",
+        "ChecksumCalculator.cpp",
+        "GLESv1.cpp",
+        "GLESv3.cpp",
+        "Gralloc1.cpp",
+        "OpenGLESDispatch/EGLDispatch.cpp",
+        "OpenGLESDispatch/GLESv1Dispatch.cpp",
+        "OpenGLESDispatch/GLESv3Dispatch.cpp",
+        "RenderControl.cpp",
+    ],
+    cflags: ["-Wno-unused-parameter", "-DOPENGL_DEBUG_PRINTOUT"],
+    host_ldlibs: [ "-ldl" ],
+    generated_sources: [
+      "glesv1_dec_cuttlefish_gensrc",
+      "glesv3_dec_cuttlefish_gensrc",
+      "rendercontrol_dec_cuttlefish_gensrc",
+    ],
+    generated_headers: [
+      "glesv1_dec_cuttlefish_genhdr",
+      "glesv3_dec_cuttlefish_genhdr",
+      "rendercontrol_dec_cuttlefish_genhdr",
+      "gles1_core_functions_hdr",
+      "gles1_extensions_functions_hdr",
+      "egl_functions_hdr",
+      "gles3_only_functions_hdr",
+      "gles31_only_functions_hdr",
+      "gles2_extensions_functions_hdr",
+      "egl_extensions_functions_hdr",
+      "gles2_core_functions_hdr",
+    ],
+    header_libs: [
+      "virtio_gpu_uapi_headers",
+      "virgl_headers"
+    ],
+
+    // TODO(b/118466250): Make this work on the Mac
+    version_script : "libvirglrenderer.lds",
+    defaults: [ "cuttlefish_host_only" ],
+}

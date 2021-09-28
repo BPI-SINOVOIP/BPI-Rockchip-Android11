@@ -1,0 +1,15 @@
+allow bootanim hwservicemanager:binder call;
+
+dontaudit bootanim system_data_file:dir read;
+dontaudit bootanim mnt_vendor_file:dir search;
+allow bootanim gpu_data_file:file {read open getattr};
+# TODO(b/37205419): Remove upon resolution
+dontaudit bootanim kernel:system module_request;
+allow bootanim vendor_metadata:dir { search };
+get_prop(bootanim, vendor_default_prop)
+allow bootanim init:unix_stream_socket connectto;
+allow bootanim property_socket:sock_file write;
+allow bootanim audio_service:service_manager find;
+allow bootanim mediametrics_service:service_manager find;
+allow bootanim system_prop:property_service set;
+rw_rockchip_graphic_device(bootanim)

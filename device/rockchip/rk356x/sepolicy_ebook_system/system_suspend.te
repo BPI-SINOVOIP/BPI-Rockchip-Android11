@@ -1,0 +1,4 @@
+allow system_suspend sysfs_vendor_sleep:file rw_file_perms;
+allow system_suspend rk_bluetooth_file:file r_file_perms;
+allow system_suspend rk_bluetooth_file:lnk_file r_file_perms;
+allow system_suspend sysfs_net:file r_file_perms;

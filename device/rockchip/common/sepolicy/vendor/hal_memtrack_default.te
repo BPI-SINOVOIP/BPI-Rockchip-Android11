@@ -1,0 +1,4 @@
+allow hal_memtrack_default sys_mali:file r_file_perms;
+allow hal_memtrack_default debugfs:dir r_dir_perms;
+allow hal_memtrack_default system_app:file r_file_perms;
+allow hal_memtrack_default system_app:dir { search r_file_perms };

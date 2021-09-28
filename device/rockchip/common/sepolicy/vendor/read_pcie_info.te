@@ -1,0 +1,6 @@
+type read_pcie_info, domain;
+type read_pcie_info_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(read_pcie_info)
+
+dontaudit read_pcie_info sysfs:file rw_file_perms;

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2015 Google Inc. All rights reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<sample>
+    <name>XYZTouristAttractions</name>
+    <group>Wearable</group>
+    <package>com.example.android.xyztouristattractions</package>
+    <minSdk>18</minSdk>
+    <targetSdkVersion>28</targetSdkVersion>
+    <targetSdkVersionWear>28</targetSdkVersionWear>
+    <minSdkVersionWear>23</minSdkVersionWear>
+
+
+    <wearable>
+        <has_handheld_app>true</has_handheld_app>
+    </wearable>
+
+    <androidX>true</androidX>
+
+    <dependency>com.google.maps.android:android-maps-utils:0.5</dependency>
+    <dependency>com.github.bumptech.glide:glide:3.7.0</dependency>
+    <dependency>androidx.appcompat:appcompat:1.0.2</dependency>
+    <dependency>androidx.legacy:legacy-support-v13:1.0.0</dependency>
+    <dependency>androidx.recyclerview:recyclerview:1.0.0</dependency>
+    <dependency>com.google.android.material:material:1.0.0</dependency>
+
+    <dependency>com.google.android.gms:play-services-maps:16.1.0</dependency>
+    <dependency>com.google.android.gms:play-services-location:16.0.0</dependency>
+
+
+    <dependency_shared>androidx.legacy:legacy-support-v13:1.0.0</dependency_shared>
+    <dependency_shared>com.google.android.gms:play-services-wearable:16.0.1</dependency_shared>
+    <dependency_shared>com.google.android.gms:play-services-maps:16.1.0</dependency_shared>
+    <dependency_shared>com.google.maps.android:android-maps-utils:0.5</dependency_shared>
+
+
+    <dependency_wearable>androidx.wear:wear:1.0.0</dependency_wearable>
+    <dependency_wearable>androidx.legacy:legacy-support-v13:1.0.0</dependency_wearable>
+    <dependency_wearable>com.google.android.gms:play-services-maps:16.1.0</dependency_wearable>
+
+
+    <strings>
+        <intro>
+<![CDATA[
+This sample aims to be as close to a real world example of a mobile
+and Wear app combination as possible. It has a more refined design
+and also provides a practical example of how a mobile app would
+interact and communicate with its wear counterpart.
+
+The app itself is modeled after a hypothetical tourist attractions
+app that notifies the user when they are in close proximity to
+notable points of interest.
+
+The Wear component loads a full wearable app that shows images,
+summary information and provides quick actions for nearby tourist
+attractions in a GridViewPager UI component.
+]]>
+        </intro>
+    </strings>
+
+    <template src="base" />
+    <template src="WearPlusShared"/>
+
+    <metadata>
+        <!-- Values: {DRAFT | PUBLISHED | INTERNAL | DEPRECATED | SUPERCEDED} -->
+        <status>DEPRECATED</status>
+        <!-- See http://go/sample-categories for details on the next 4 fields. -->
+        <categories>Wearable, Location, Notification</categories>
+        <technologies>Android</technologies>
+        <languages>Java</languages>
+        <solutions>Mobile</solutions>
+        <!-- Values: {BEGINNER | INTERMEDIATE | ADVANCED | EXPERT} -->
+        <level>INTERMEDIATE</level>
+        <!-- Dimensions: 512x512, PNG fomrat -->
+        <icon>screenshots/icon-web.png</icon>
+        <!-- Path to screenshots. Use <img> tags for each. -->
+        <screenshots>
+            <img>screenshots/composite-1.png</img>
+        </screenshots>
+        <!-- List of APIs that this sample should be cross-referenced under. Use <android>
+        for fully-qualified Framework class names ("android:" namespace).
+
+        Use <ext> for custom namespaces, if needed. See "Samples Index API" documentation
+        for more details. -->
+        <api_refs>
+            <android>android.support.v7.appcompat</android>
+            <android>android.support.v7.widget.RecyclerView</android>
+            <android>android.support.v7.widget.GridLayoutManager</android>
+            <android>android.support.v4.content.ContextCompat</android>
+            <android>android.support.v4.app.ActivityCompat</android>
+            <android>android.support.design.widget.FloatingActionButton</android>
+            <android>android.support.design.widget.CoordinatorLayout</android>
+            <android>com.google.android.gms.common.api.GoogleApiClient</android>
+            <android>com.google.android.gms.wearable.Wearable</android>
+            <android>com.google.android.gms.wearable.DataApi</android>
+            <android>com.google.android.gms.wearable.NodeApi</android>
+            <android>com.google.android.gms.wearable.WearableListenerService</android>
+            <android>com.google.android.gms.location.LocationServices.GeofencingApi</android>
+            <android>com.google.android.gms.location.LocationServices.FusedLocationApi</android>
+            <android>android.support.wearable.view.DismissOverlayView</android>
+            <android>android.support.wearable.view.DotsPageIndicator</android>
+            <android>android.support.wearable.view.GridViewPager</android>
+            <android>android.support.wearable.activity.ConfirmationActivity</android>
+            <android>android.support.wearable.view.CardFrame</android>
+            <android>android.support.wearable.view.CardScrollView</android>
+            <android>android.support.wearable.view.GridPagerAdapter</android>
+            <android>android.support.wearable.view.WatchViewStub</android>
+            <android>android.support.wearable.view.ActionPage</android>
+        </api_refs>
+
+        <description>
+            <![CDATA[
+Sample moved to [github.com/android/wear-os][1].
+
+[1]: https://github.com/android/wear-os
+]]>
+        </description>
+
+        <intro>
+            <![CDATA[
+This repo and all Wear OS samples have been moved to [github.com/android/wear-os][1]. Please check out the code there. Thank you!
+
+[1]: https://github.com/android/wear-os
+]]>
+        </intro>
+    </metadata>
+</sample>

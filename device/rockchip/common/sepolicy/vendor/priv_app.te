@@ -1,0 +1,21 @@
+allow priv_app proc_modules:file { open getattr };
+allow priv_app proc_uptime:file { open getattr read };
+allow priv_app proc_interrupts:file { open };
+allow priv_app sysfs:dir { open };
+dontaudit priv_app mnt_vendor_file:dir { search };
+
+#for gpu
+allow priv_app sysfs_usb:file rw_file_perms;
+#TODO removed for Q
+#allow priv_app vendor_file:file { read open getattr };
+allow priv_app gpu_data_file:file rw_file_perms;
+allow priv_app vendor_metadata:dir { search };
+allow priv_app ota_data_file:dir { search rw_dir_perms };
+
+#allow priv_app init:unix_stream_socket connectto;
+#allow priv_app property_socket:sock_file write;
+allow priv_app vr_manager_service:service_manager find;
+
+binder_call(priv_app, zygote)
+rw_rockchip_graphic_device(priv_app)
+get_prop(priv_app,vendor_default_prop)

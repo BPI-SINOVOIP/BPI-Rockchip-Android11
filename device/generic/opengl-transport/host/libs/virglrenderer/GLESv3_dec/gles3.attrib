@@ -1,0 +1,967 @@
+GLOBAL
+    base_opcode 2048
+
+glBindAttribLocation
+    len name (strlen(name) + 1)
+
+glBufferData
+    len data size
+    var_flag data nullAllowed isLarge
+
+glBufferSubData
+    len data size
+    var_flag data nullAllowed isLarge
+
+glCompressedTexImage2D
+    len data imageSize
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag data nullAllowed isLarge
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glCompressedTexSubImage2D
+    len data imageSize
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag data nullAllowed isLarge
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteBuffers
+    len buffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteFramebuffers
+    len framebuffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteRenderbuffers
+    len renderbuffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteTextures
+    len textures (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDrawElements
+    flag unsupported
+
+glGenBuffers
+    len buffers (n * sizeof(GLuint))
+    dir buffers out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenFramebuffers
+    len framebuffers (n * sizeof(GLuint))
+    dir framebuffers out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenRenderbuffers
+    len renderbuffers (n * sizeof(GLuint))
+    dir renderbuffers out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenTextures
+    len textures (n * sizeof(GLuint))
+    dir textures out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetActiveAttrib
+    param_check bufsize if(bufsize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    len name bufsize
+    dir name out
+    var_flag name nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+    dir size out
+    len size (sizeof(GLint))
+    var_flag size nullAllowed
+    dir type out
+    len type (sizeof(GLenum))
+    var_flag type nullAllowed
+
+glGetActiveUniform
+    param_check bufsize if(bufsize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    len name bufsize
+    dir name out
+    var_flag name nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+    dir size out
+    len size (sizeof(GLint))
+    var_flag size nullAllowed
+    dir type out
+    len type (sizeof(GLenum))
+    var_flag type nullAllowed
+
+glGetAttachedShaders
+    len shaders (maxcount*sizeof(GLuint))
+    dir shaders out
+    dir count out
+    var_flag count nullAllowed
+    len count (sizeof(GLsizei))
+
+glGetAttribLocation
+    len name (strlen(name) + 1)
+
+glGetBooleanv
+    dir params out
+
+glGetBufferParameteriv
+    len params (sizeof(GLint))
+    dir params out
+
+glGetFloatv
+    dir params out
+
+glGetFramebufferAttachmentParameteriv
+    dir params out
+    len params (sizeof(GLint))
+
+glGetIntegerv
+    dir params out
+
+glGetProgramiv
+    dir params out
+
+glGetProgramInfoLog
+    dir infolog out
+    len infolog bufsize
+    param_check bufsize if(bufsize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    dir length out
+    len length sizeof(GLsizei)
+    var_flag length nullAllowed
+
+glGetRenderbufferParameteriv
+    dir params out
+    len params sizeof(GLint)
+
+glGetShaderiv
+    dir params out
+    len params sizeof(GLint)
+
+glGetShaderInfoLog
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+    dir infolog out
+    len infolog bufsize
+    param_check bufsize if(bufsize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetShaderPrecisionFormat
+    dir range out
+    len range (2 * sizeof(GLint))
+    dir precision out
+    len precision (sizeof(GLint))
+
+glGetShaderSource
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+    dir source out
+    len source bufsize
+    param_check bufsize if(bufsize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetString
+    flag unsupported
+
+glGetTexParameterfv
+    dir params out
+
+glGetTexParameteriv
+    dir params out
+
+glGetUniformfv
+    dir params out
+    len params glSizeof(glesv2_enc::uniformType(self, program, location))
+
+glGetUniformiv
+    dir params out
+    len params glSizeof(glesv2_enc::uniformType(self, program, location))
+
+glGetUniformLocation
+    len name (strlen(name) + 1)
+
+glGetVertexAttribfv
+    dir params out
+
+glGetVertexAttribiv
+    dir params out
+
+glReadPixels
+    dir pixels out
+    len pixels glesv2_enc::pixelDataSize(self, width, height, format, type, 1)
+
+glReadPixelsOffsetAEMU
+    flag not_api
+
+glShaderBinary
+    flag unsupported
+
+glTexImage2D
+    dir pixels in
+    len pixels glesv2_enc::pixelDataSize(self, width, height, format, type, 0)
+    var_flag pixels nullAllowed isLarge
+
+glTexSubImage2D
+    len pixels glesv2_enc::pixelDataSize(self, width, height, format, type, 0)
+    var_flag pixels nullAllowed isLarge
+
+glUniform1fv
+    len v (count * sizeof(GLfloat))
+
+glUniform1iv
+    len v (count * sizeof(GLint))
+
+glUniform2fv
+    len v (count * 2 * sizeof(GLfloat))
+
+glUniform2iv
+    len v (count * 2 * sizeof(GLint))
+
+glUniform3fv
+    len v (count * 3 * sizeof(GLfloat))
+
+glUniform3iv
+    len v (3 * count * sizeof(GLint))
+
+glUniform4fv
+    len v (4 * count * sizeof(GLfloat))
+
+glUniform4iv
+    len v (4 * count * sizeof(GLint))
+
+glUniformMatrix2fv
+    len value (count * 4 * sizeof(GLfloat))
+
+glUniformMatrix3fv
+    len value (count * 9 * sizeof(GLfloat))
+
+glUniformMatrix4fv
+    len value (count * 16 * sizeof(GLfloat))
+
+glVertexAttrib1fv
+    len values (sizeof(GLfloat))
+glVertexAttrib2fv
+    len values (2 * sizeof(GLfloat))
+
+glVertexAttrib3fv
+    len values (3 * sizeof(GLfloat))
+
+glVertexAttrib4fv
+    len values (4 * sizeof(GLfloat))
+
+glVertexAttribPointer
+    flag unsupported
+
+glGetProgramBinaryOES
+    flag unsupported
+
+glProgramBinaryOES
+    flag unsupported
+
+glMapBufferOES
+    flag unsupported
+
+glTexImage3DOES
+    len pixels glesv2_enc::pixelDataSize3D(self, width, height, depth, format, type, 0)
+    var_flag pixels nullAllowed isLarge
+
+glTexSubImage3DOES
+    len pixels glesv2_enc::pixelDataSize3D(self, width, height, depth, format, type, 0)
+    var_flag pixels nullAllowed isLarge
+
+glCompressedTexImage3DOES
+    len data imageSize
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag data nullAllowed isLarge
+
+glCompressedTexSubImage3DOES
+    len data imageSize
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag data nullAllowed isLarge
+
+glDeleteVertexArraysOES
+    len arrays (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenVertexArraysOES
+    len arrays (n * sizeof(GLuint))
+    dir arrays out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDiscardFramebufferEXT
+    len attachments (numAttachments * sizeof(GLenum))
+
+glMultiDrawArraysEXT
+    flag unsupported
+
+glMultiDrawElementsEXT
+    flag unsupported
+
+glShaderSource
+    flag unsupported
+
+glGetPerfMonitorGroupsAMD
+    flag unsupported
+
+glGetPerfMonitorCountersAMD
+    flag unsupported
+
+glGetPerfMonitorGroupStringAMD
+    flag unsupported
+
+glGetPerfMonitorCounterStringAMD
+    flag unsupported
+
+glGetPerfMonitorCounterInfoAMD
+    flag unsupported
+
+glGenPerfMonitorsAMD
+    flag unsupported
+
+glDeletePerfMonitorsAMD
+    flag unsupported
+
+glSelectPerfMonitorCountersAMD
+    flag unsupported
+
+glBeginPerfMonitorAMD
+    flag unsupported
+
+glEndPerfMonitorAMD
+    flag unsupported
+
+glGetPerfMonitorCounterDataAMD
+    flag unsupported
+
+glRenderbufferStorageMultisampleIMG
+    flag unsupported
+
+glFramebufferTexture2DMultisampleIMG
+    flag unsupported
+
+glDeleteFencesNV
+    flag unsupported
+
+glGenFencesNV
+    flag unsupported
+
+glIsFenceNV
+    flag unsupported
+
+glTestFenceNV
+    flag unsupported
+
+glGetFenceivNV
+    flag unsupported
+
+glFinishFenceNV
+    flag unsupported
+
+glSetFenceNV
+    flag unsupported
+
+glCoverageMaskNV
+    flag unsupported
+
+glCoverageOperationNV
+    flag unsupported
+
+glGetDriverControlsQCOM
+    flag unsupported
+
+glGetDriverControlStringQCOM
+    flag unsupported
+
+glEnableDriverControlQCOM
+    flag unsupported
+
+glDisableDriverControlQCOM
+    flag unsupported
+
+glExtGetTexturesQCOM
+    flag unsupported
+
+glExtGetBuffersQCOM
+    flag unsupported
+
+glExtGetRenderbuffersQCOM
+    flag unsupported
+
+glExtGetFramebuffersQCOM
+    flag unsupported
+
+glExtGetTexLevelParameterivQCOM
+    flag unsupported
+
+glExtTexObjectStateOverrideiQCOM
+    flag unsupported
+
+glExtGetTexSubImageQCOM
+    flag unsupported
+
+glExtGetBufferPointervQCOM
+    flag unsupported
+
+glExtGetShadersQCOM
+    flag unsupported
+
+glExtGetProgramsQCOM
+    flag unsupported
+
+glExtIsProgramBinaryQCOM
+    flag unsupported
+
+glExtGetProgramBinarySourceQCOM
+    flag unsupported
+
+glStartTilingQCOM
+    flag unsupported
+
+glEndTilingQCOM
+    flag unsupported
+
+glVertexAttribPointerData
+    len data datalen
+    flag not_api
+
+glVertexAttribPointerOffset
+    flag not_api
+
+glGetVertexAttribPointerv
+    flag unsupported
+
+glDrawElementsData
+    len data datalen
+    flag not_api
+
+glDrawElementsOffset
+    flag not_api
+
+glGetCompressedTextureFormats
+    dir formats out
+    len formats (count * sizeof(GLint))
+    flag not_api
+
+glShaderString
+    len string len
+    flag not_api
+
+glFinishRoundTrip
+    flag not_api
+
+glGenVertexArrays
+    len arrays (n * sizeof(GLuint))
+    dir arrays out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteVertexArrays
+    len arrays (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glMapBufferRange
+    flag unsupported
+
+glUnmapBuffer
+    flag unsupported
+
+glFlushMappedBufferRange
+    flag unsupported
+
+glMapBufferRangeAEMU
+    dir mapped out
+    len mapped length
+    var_flag mapped nullAllowed
+    flag not_api
+
+glUnmapBufferAEMU
+    dir guest_buffer in
+    len guest_buffer length
+    var_flag guest_buffer nullAllowed
+    dir out_res out
+    len out_res (sizeof(GLboolean))
+    flag not_api
+
+glFlushMappedBufferRangeAEMU
+    dir guest_buffer in
+    len guest_buffer length
+    var_flag guest_buffer nullAllowed
+    flag not_api
+
+glReadPixelsOffsetAEMU
+    flag not_api
+
+glCompressedTexImage2DOffsetAEMU
+    flag not_api
+
+glCompressedTexSubImage2DOffsetAEMU
+    flag not_api
+
+glTexImage2DOffsetAEMU
+    flag not_api
+
+glTexSubImage2DOffsetAEMU
+    flag not_api
+
+glCopyBufferSubData
+    flag flushOnEncode
+
+glClearBufferiv
+    dir value in
+    len value (sizeof(GLint) * glesv2_enc::clearBufferNumElts(self, buffer))
+
+glClearBufferuiv
+    dir value in
+    len value (sizeof(GLuint) * glesv2_enc::clearBufferNumElts(self, buffer))
+
+glClearBufferfv
+    dir value in
+    len value (sizeof(GLfloat) * glesv2_enc::clearBufferNumElts(self, buffer))
+
+glGetBufferParameteri64v
+    flag unsupported
+
+glGetBufferPointerv
+    flag unsupported
+
+glGetUniformBlockIndex
+    len uniformBlockName (strlen(uniformBlockName) + 1)
+
+glGetUniformIndices
+    flag unsupported
+
+glGetUniformIndicesAEMU
+    dir packedUniformNames in
+    len packedUniformNames packedLen
+    dir uniformIndices out
+    len uniformIndices (uniformCount * sizeof(GLuint))
+    flag not_api
+
+glGetActiveUniformBlockiv
+    dir params out
+    len params (glesv2_enc::glActiveUniformBlockivParamSize(self, program, uniformBlockIndex, pname) * sizeof(GLint))
+
+glGetActiveUniformBlockName
+    dir uniformBlockName out
+    len uniformBlockName bufSize
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag uniformBlockName nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+
+glUniform1uiv
+    len value (count * sizeof(GLuint))
+
+glUniform2uiv
+    len value (count * 2 * sizeof(GLuint))
+
+glUniform3uiv
+    len value (count * 3 * sizeof(GLuint))
+
+glUniform4uiv
+    len value (count * 4 * sizeof(GLuint))
+
+glUniformMatrix2x3fv
+    len value (count * 6 * sizeof(GLfloat))
+
+glUniformMatrix3x2fv
+    len value (count * 6 * sizeof(GLfloat))
+
+glUniformMatrix2x4fv
+    len value (count * 8 * sizeof(GLfloat))
+
+glUniformMatrix4x2fv
+    len value (count * 8 * sizeof(GLfloat))
+
+glUniformMatrix3x4fv
+    len value (count * 12 * sizeof(GLfloat))
+
+glUniformMatrix4x3fv
+    len value (count * 12 * sizeof(GLfloat))
+
+glGetUniformuiv
+    dir params out
+    len params glSizeof(glesv2_enc::uniformType(self, program, location))
+
+glGetActiveUniformsiv
+    len uniformIndices (uniformCount * sizeof(GLuint))
+    dir params out
+    len params (uniformCount * sizeof(GLint))
+
+glVertexAttribI4iv
+    len v (4 * sizeof(GLint))
+
+glVertexAttribI4uiv
+    len v (4 * sizeof(GLuint))
+
+glVertexAttribIPointer
+    flag unsupported
+
+glVertexAttribIPointerOffsetAEMU
+    flag not_api
+
+glVertexAttribIPointerDataAEMU
+    len data datalen
+    flag not_api
+
+glGetVertexAttribIiv
+    dir params out
+
+glGetVertexAttribIuiv
+    dir params out
+
+glDrawElementsInstanced
+    flag unsupported
+
+glDrawElementsInstancedDataAEMU
+    len indices datalen
+    flag not_api
+
+glDrawElementsInstancedOffsetAEMU
+    flag not_api
+
+glDrawRangeElements
+    flag unsupported
+
+glDrawRangeElementsDataAEMU
+    len indices datalen
+    flag not_api
+
+glDrawRangeElementsOffsetAEMU
+    flag not_api
+
+glFenceSync
+    flag unsupported
+
+glClientWaitSync
+    flag unsupported
+
+glWaitSync
+    flag unsupported
+
+glDeleteSync
+    flag unsupported
+
+glIsSync
+    flag unsupported
+
+glGetSynciv
+    flag unsupported
+
+glFenceSyncAEMU
+    flag custom_decoder
+    flag not_api
+
+glClientWaitSyncAEMU
+    flag custom_decoder
+    flag not_api
+
+glWaitSyncAEMU
+    flag custom_decoder
+    flag not_api
+
+glDeleteSyncAEMU
+    flag custom_decoder
+    flag not_api
+
+glIsSyncAEMU
+    flag custom_decoder
+    flag not_api
+
+glGetSyncivAEMU
+    flag custom_decoder
+    flag not_api
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+    dir values out
+    len values (bufSize * sizeof(GLint))
+
+glGetInternalformativ
+    dir params out
+    len params (sizeof(GLint) * bufSize)
+
+glDrawBuffers
+    len bufs (n * sizeof(GLenum))
+
+glInvalidateFramebuffer
+    len attachments (numAttachments * sizeof(GLenum))
+
+glInvalidateSubFramebuffer
+    len attachments (numAttachments * sizeof(GLenum))
+
+glGenTransformFeedbacks
+    dir ids out
+    len ids (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteTransformFeedbacks
+    len ids (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glTransformFeedbackVaryings
+    flag unsupported
+
+glTransformFeedbackVaryingsAEMU
+    dir packedVaryings in
+    len packedVaryings packedVaryingsLen
+    flag not_api
+
+glGetTransformFeedbackVarying
+    dir name out
+    len name bufSize
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag name nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+    var_flag length nullAllowed
+    dir size out
+    len size (sizeof(GLsizei))
+    var_flag type nullAllowed
+    dir type out
+    len type (sizeof(GLenum))
+    var_flag type nullAllowed
+
+glGenSamplers
+    dir samplers out
+    len samplers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteSamplers
+    len samplers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetSamplerParameterfv
+    dir params out
+
+glGetSamplerParameteriv
+    dir params out
+
+glGenQueries
+    dir queries out
+    len queries (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteQueries
+    len queries (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetQueryiv
+    dir params out
+
+glGetQueryObjectuiv
+    dir params out
+
+glProgramBinary
+    len binary length
+
+glGetProgramBinary
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    dir binary out
+    len binary bufSize
+    dir binaryFormat out
+    len binaryFormat (sizeof(GLenum))
+    var_flag length nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+
+glGetFragDataLocation
+    len name (strlen(name) + 1)
+
+glGetInteger64v
+    dir data out
+
+glGetIntegeri_v
+    dir data out
+    len data (sizeof(GLint))
+
+glGetInteger64i_v
+    dir data out
+    len data (sizeof(GLint64))
+
+glTexImage3D
+    dir data in
+    len data glesv2_enc::pixelDataSize3D(self, width, height, depth, format, type, 0)
+    var_flag data nullAllowed isLarge
+
+glTexImage3DOffsetAEMU
+    flag not_api
+
+glTexSubImage3D
+    len data glesv2_enc::pixelDataSize3D(self, width, height, depth, format, type, 0)
+    var_flag data nullAllowed isLarge
+
+glTexSubImage3DOffsetAEMU
+    flag not_api
+
+glCompressedTexImage3D
+    len data imageSize
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag data nullAllowed isLarge
+
+glCompressedTexImage3DOffsetAEMU
+    flag not_api
+
+glCompressedTexSubImage3D
+    param_check imageSize if(imageSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    len data imageSize
+    var_flag data nullAllowed isLarge
+
+glCompressedTexSubImage3DOffsetAEMU
+    flag not_api
+
+glGetStringi
+    flag unsupported
+
+glGetBooleani_v
+    dir data out
+    len data (sizeof(GLboolean))
+
+glGenProgramPipelines
+    dir pipelines out
+    len pipelines (n * sizeof(GLuint))
+
+glDeleteProgramPipelines
+    len pipelines (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetProgramPipelineiv
+    dir params out
+
+glGetProgramPipelineInfoLog
+    dir infoLog out
+    len infoLog bufSize
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    dir length out
+    len length sizeof(GLsizei)
+    var_flag length nullAllowed
+
+glCreateShaderProgramv
+    flag unsupported
+
+glCreateShaderProgramvAEMU
+    len packedStrings packedLen
+    flag not_api
+
+glProgramUniform1fv
+    len value (count * sizeof(GLfloat))
+
+glProgramUniform2fv
+    len value (count * 2 * sizeof(GLfloat))
+
+glProgramUniform3fv
+    len value (count * 3 * sizeof(GLfloat))
+
+glProgramUniform4fv
+    len value (count * 4 * sizeof(GLfloat))
+
+glProgramUniform1iv
+    len value (count * sizeof(GLint))
+
+glProgramUniform2iv
+    len value (count * 2 * sizeof(GLint))
+
+glProgramUniform3iv
+    len value (count * 3 * sizeof(GLint))
+
+glProgramUniform4iv
+    len value (count * 4 * sizeof(GLint))
+
+glProgramUniform1uiv
+    len value (count * sizeof(GLuint))
+
+glProgramUniform2uiv
+    len value (count * 2 * sizeof(GLuint))
+
+glProgramUniform3uiv
+    len value (count * 3 * sizeof(GLuint))
+
+glProgramUniform4uiv
+    len value (count * 4 * sizeof(GLuint))
+
+glProgramUniformMatrix2fv
+    len value (count * 4 * sizeof(GLfloat))
+
+glProgramUniformMatrix3fv
+    len value (count * 9 * sizeof(GLfloat))
+
+glProgramUniformMatrix4fv
+    len value (count * 16 * sizeof(GLfloat))
+
+glProgramUniformMatrix2x3fv
+    len value (count * 6 * sizeof(GLfloat))
+
+glProgramUniformMatrix3x2fv
+    len value (count * 6 * sizeof(GLfloat))
+
+glProgramUniformMatrix2x4fv
+    len value (count * 8 * sizeof(GLfloat))
+
+glProgramUniformMatrix4x2fv
+    len value (count * 8 * sizeof(GLfloat))
+
+glProgramUniformMatrix3x4fv
+    len value (count * 12 * sizeof(GLfloat))
+
+glProgramUniformMatrix4x3fv
+    len value (count * 12 * sizeof(GLfloat))
+
+glGetProgramInterfaceiv
+    dir params out
+
+glGetProgramResourceiv
+    dir params out
+    len params (bufSize * sizeof(GLint))
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag length nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+    len props (propCount * sizeof(GLenum))
+
+glGetProgramResourceIndex
+    len name (strlen(name) + 1)
+
+glGetProgramResourceLocation
+    len name (strlen(name) + 1)
+
+glGetProgramResourceName
+    dir name out
+    len name bufSize
+    param_check bufSize if(bufSize<0){ ctx->setError(GL_INVALID_VALUE); return; }
+    var_flag length nullAllowed
+    dir length out
+    len length (sizeof(GLsizei))
+
+glDrawArraysIndirect
+    flag unsupported
+
+glDrawArraysIndirectDataAEMU
+    len indirect datalen
+    flag not_api
+
+glDrawArraysIndirectOffsetAEMU
+    flag not_api
+
+glDrawElementsIndirect
+    flag unsupported
+
+glDrawElementsIndirectDataAEMU
+    len indirect datalen
+    flag not_api
+
+glDrawElementsIndirectOffsetAEMU
+    flag not_api
+
+glGetMultisamplefv
+    dir val out
+
+glGetFramebufferParameteriv
+    dir params out
+
+glGetTexLevelParameterfv
+    dir params out
+
+glGetTexLevelParameteriv
+    dir params out

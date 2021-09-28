@@ -1,0 +1,14 @@
+type hal_audio_proxy_default, domain;
+type hal_audio_proxy_default_exec, exec_type, vendor_file_type, file_type;
+
+# allows transition from init to the daemon _exec domain
+init_daemon_domain(hal_audio_proxy_default);
+
+# AudioProxy HAL incluces Audio as well as AudioProxy HAL interfaces.
+hal_server_domain(hal_audio_proxy_default, hal_audio);
+hal_server_domain(hal_audio_proxy_default, hal_audio_proxy);
+
+# allows audio proxy service access audio HAL interfaces.
+hal_client_domain(hal_audio_proxy_default, hal_audio);
+
+

@@ -1,0 +1,25 @@
+type iso, domain, coredomain;
+type iso_exec, exec_type, file_type;
+init_daemon_domain(iso)
+
+dontaudit iso self:capability {dac_override dac_read_search};
+allow iso media_rw_data_file:file r_file_perms;
+allow iso system_data_file:file { read open};
+allow iso self:capability { sys_resource sys_admin};
+allow iso shell_exec:file {read getattr open execute execute_no_trans};
+allow iso toolbox_exec:file {execute getattr read open execute_no_trans};
+allow iso iso_exec:file { read open getattr execute execute_no_trans };
+allow iso system_file:file {execute_no_trans};
+allow iso unlabeled:dir {search getattr mounton};
+allow iso unlabeled:file {open read write getattr};
+allow iso properties_device:dir {open read};
+allow iso property_socket:sock_file {write};
+allow iso proc_stat:file {open read getattr};
+allow iso loop_device:blk_file {open read write ioctl getattr};
+allow iso tmpfs:dir {mounton};
+allow iso unlabeled:filesystem {mount unmount};
+allow iso init:unix_stream_socket {connectto};
+allow iso media_rw_data_file:dir r_dir_perms;
+allow iso mnt_media_rw_file:dir {search read};
+allow iso block_device:dir {search};
+allow iso system_prop:property_service {set};

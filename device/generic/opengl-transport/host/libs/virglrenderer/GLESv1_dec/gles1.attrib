@@ -1,0 +1,444 @@
+GLOBAL
+    base_opcode 1024
+
+glClipPlanef
+    dir equation in
+    len equation (4 * sizeof(float))
+
+glGetFloatv
+    dir params out
+
+glGetLightfv
+    dir params out
+
+glGetMaterialfv
+    dir params out
+
+glGetTexEnvfv
+    dir params out
+
+glGetTexParameterfv
+    dir params out
+
+glLoadMatrixf
+    len m (16 * sizeof(GLfloat))
+
+glMultMatrixf
+    len m (16 * sizeof(GLfloat))
+
+glBufferData
+    len data size
+    var_flag data nullAllowed
+
+glBufferSubData
+    dir data in
+    len data size
+    var_flag data nullAllowed
+
+glClipPlanex
+    dir eqn in
+    len eqn (4 * sizeof(GLfixed))
+
+glColorPointer
+    len pointer (sizeof(unsigned int))
+    flag unsupported
+
+glCompressedTexImage2D
+    len data imageSize
+    var_flag data nullAllowed
+
+glCompressedTexSubImage2D
+    len data imageSize
+        var_flag data nullAllowed
+
+glDeleteBuffers
+    len buffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDeleteTextures
+    len textures (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDrawElements
+    flag unsupported
+
+glGetBooleanv
+    dir params out
+
+glGetBufferParameteriv
+    len params (sizeof(GLint))
+    dir params out
+
+glGenBuffers
+    len buffers (n * sizeof(GLuint))
+    dir buffers out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenTextures
+    len textures (n * sizeof(GLuint))
+    dir textures out
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetFixedv
+    dir params out
+
+glGetIntegerv
+    dir params out
+
+glGetLightxv
+    dir params out
+
+glGetMaterialxv
+    dir params out
+
+glGetPointerv
+    flag unsupported
+
+glGetString
+    flag unsupported
+
+glGetTexEnviv
+    dir params out
+
+glGetTexEnvxv
+    dir params out
+
+glGetTexParameteriv
+    dir params out
+    len params (sizeof(GLint))
+
+glGetTexParameterxv
+    dir params out
+    len params (sizeof(GLfixed))
+
+glLoadMatrixx
+    len m (16 * sizeof(GLfixed))
+
+glMultMatrixx
+    len m (16 * sizeof(GLfixed))
+
+glNormalPointer
+    len pointer (sizeof(unsigned int))
+    flag unsupported
+
+glReadPixels
+    dir pixels out
+    len pixels glesv1_enc::pixelDataSize(self, width, height, format, type, 1)
+
+glTexCoordPointer
+    len pointer (sizeof(unsigned int))
+    flag unsupported
+
+glTexImage2D
+    dir pixels in
+    len pixels glesv1_enc::pixelDataSize(self, width, height, format, type, 0)
+    var_flag pixels nullAllowed isLarge
+
+glTexSubImage2D
+    len pixels glesv1_enc::pixelDataSize(self, width, height, format, type, 0)
+    var_flag pixels nullAllowed isLarge
+
+glVertexPointer
+    flag unsupported
+
+glPointSizePointerOES
+    len pointer (sizeof(unsigned int))
+    flag unsupported
+
+glGetClipPlanef
+    dir eqn out
+    len eqn (4 * sizeof(GLfloat))
+
+glVertexPointerData
+    len data datalen
+    flag not_api
+
+glColorPointerData
+    len data datalen
+    flag not_api
+
+glNormalPointerData
+    len data datalen
+    flag not_api
+
+glPointSizePointerData
+    len data datalen
+    flag not_api
+
+glTexCoordPointerData
+    len data datalen
+    flag not_api
+
+glWeightPointerData
+    len data datalen
+    flag not_api
+
+glMatrixIndexPointerData
+    len data datalen
+    flag not_api
+
+glVertexPointerOffset
+    flag not_api
+
+glNormalPointerOffset
+    flag not_api
+
+glTexCoordPointerOffset
+    flag not_api
+
+glPointSizePointerOffset
+    flag not_api
+
+glColorPointerOffset
+    flag not_api
+
+glWeightPointerOffset
+    flag not_api
+
+glMatrixIndexPointerOffset
+    flag not_api
+
+glDrawElementsData
+    len data datalen
+    flag not_api
+
+glDrawElementsOffset
+    flag not_api
+
+glGetCompressedTextureFormats
+    dir formats out
+    len formats (count * sizeof(GLint))
+    flag not_api
+
+glFinishRoundTrip
+    flag not_api
+
+glDrawTexsvOES
+    len coords (5 * sizeof(GLshort))
+
+glDrawTexivOES
+    len coords (5 * sizeof(GLint))
+
+glDrawTexxvOES
+    len coords (5 * sizeof(GLfixed))
+
+glDrawTexfvOES
+    len coords (5 * sizeof(GLfloat))
+
+glClipPlanexOES
+    dir equation in
+    len equation (4 * sizeof(GLfixed))
+
+glClipPlanexIMG
+    dir equation in
+    len equation (4 * sizeof(GLfixed))
+
+glFogxvOES
+    dir params in
+
+glGetClipPlanexOES
+    dir eqn out
+    len eqn (4 * sizeof(GLfixed))
+
+glGetClipPlanex
+    dir eqn out
+    len eqn (4 * sizeof(GLfixed))
+
+glGetFixedvOES
+    dir params out
+
+glGetLightxvOES
+    dir params out
+
+glGetMaterialxvOES
+    dir params out
+
+glGetTexEnvxvOES
+    dir params out
+
+glGetTexParameterxvOES
+    dir params out
+
+glLightModelxvOES
+    dir params in
+
+glLightxvOES
+    dir params in
+
+glLoadMatrixxOES
+    dir m in
+    len m (16 * sizeof(GLfixed))
+
+glMaterialxvOES
+    dir params in
+
+glMultMatrixxOES
+    dir m in
+    len m (16 * sizeof(GLfixed))
+
+glPointParameterxvOES
+    dir params in
+
+glTexEnvxvOES
+    dir params in
+
+glTexParameterxvOES
+    dir params in
+
+glDeleteRenderbuffersOES
+    dir renderbuffers in
+    len renderbuffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenRenderbuffersOES
+    dir renderbuffers out
+    len renderbuffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetRenderbufferParameterivOES
+    dir params out
+
+glDeleteFramebuffersOES
+    dir framebuffers in
+    len framebuffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenFramebuffersOES
+    dir framebuffers out
+    len framebuffers (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetFramebufferAttachmentParameterivOES
+    dir params out
+
+glMapBufferOES
+    flag unsupported
+
+glGetBufferPointervOES
+    flag unsupported
+
+glMatrixIndexPointerOES
+    len pointer (sizeof(unsigned int))
+    flag unsupported
+
+glWeightPointerOES
+    len pointer (sizeof(unsigned int))
+    flag unsupported
+
+glQueryMatrixxOES
+    dir mantissa out
+    len mantissa (16 * sizeof(GLfixed))
+    dir exponent out
+    len exponent (16 * sizeof(GLfixed))
+
+glClipPlanefOES
+    dir equation in
+    len equation (4 * sizeof(GLfloat))
+
+glClipPlanefIMG
+    dir equation in
+    len equation (4 * sizeof(GLfloat))
+
+glGetClipPlanefOES
+    dir eqn out
+    len eqn (4 * sizeof(GLfloat))
+
+glDeleteVertexArraysOES
+    dir arrays in
+    len arrays (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenVertexArraysOES
+    dir arrays out
+    len arrays (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glDiscardFramebufferEXT
+    dir attachments in
+    len attachments (numAttachments * sizeof(const GLenum))
+
+glMultiDrawArraysEXT
+    flag unsupported
+
+glMultiDrawElementsEXT
+    flag unsupported
+
+glMultiDrawArraysSUN
+    flag unsupported
+
+glMultiDrawElementsSUN
+    flag unsupported
+
+glDeleteFencesNV
+    dir fences in
+    len fences (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGenFencesNV
+    dir fences in
+    len fences (n * sizeof(GLuint))
+    param_check n if(n<0){ ctx->setError(GL_INVALID_VALUE); return; }
+
+glGetFenceivNV
+    dir params out
+
+glGetDriverControlsQCOM
+    dir num out
+    len num (1 * sizeof(GLint))
+    dir driverControls out
+    len driverControls (size * sizeof(GLuint))
+
+glGetDriverControlStringQCOM
+    dir length out
+    len length (1 * sizeof(GLsizei))
+    dir driverControlString out
+    len driverControlString (1 * sizeof(GLchar))
+
+glExtGetTexturesQCOM
+    dir textures out
+    len textures (maxTextures * sizeof(GLuint))
+    dir numTextures out
+    len numTextures (1 * sizeof(GLint))
+
+glExtGetBuffersQCOM
+    dir buffers out
+    len buffers (maxBuffers * sizeof(GLuint))
+    dir numBuffers out
+    len numBuffers (1 * sizeof(GLint))
+
+glExtGetRenderbuffersQCOM
+    dir renderbuffers out
+    len renderbuffers (maxRenderbuffers * sizeof(GLuint))
+    dir numRenderbuffers out
+    len numRenderbuffers (1 * sizeof(GLint))
+
+glExtGetFramebuffersQCOM
+    dir framebuffers out
+    len framebuffers (maxFramebuffers * sizeof(GLuint))
+    dir numFramebuffers out
+    len numFramebuffers (1 * sizeof(GLint))
+
+glExtGetTexLevelParameterivQCOM
+    dir params out
+
+glExtGetTexSubImageQCOM
+    dir texels out
+    len texels (depth * glesv1_enc::pixelDataSize(self, width, height, format, type, 0))
+
+glExtGetBufferPointervQCOM
+    flag unsupported
+
+glExtGetShadersQCOM
+    dir shaders out
+    len shaders (maxShaders * sizeof(GLuint))
+    dir numShaders out
+    len numShaders (1 * sizeof(GLint))
+
+glExtGetProgramsQCOM
+    dir programs out
+    len programs (maxPrograms * sizeof(GLuint))
+    dir numPrograms out
+    len numPrograms (1 * sizeof(GLint))
+
+glExtGetProgramBinarySourceQCOM
+    flag unsupported

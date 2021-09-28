@@ -1,0 +1,21 @@
+type hal_drm_widevine, domain;
+hal_server_domain(hal_drm_widevine, hal_drm)
+type hal_drm_widevine_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_drm_widevine)
+
+allow hal_drm mediacodec:fd use;
+allow hal_drm { appdomain -isolated_app }:fd use;
+
+vndbinder_use(hal_drm_widevine)
+
+allow hal_drm_widevine hal_drm_hwservice:hwservice_manager { add };
+allow hal_drm_widevine hwservicemanager:binder { call transfer };
+allow hal_drm_widevine self:process execmem;
+allow hal_drm_widevine system_file:dir { open read };
+allow hal_drm_widevine vndbinder_device:chr_file { ioctl open read write };
+allow hal_drm_widevine mediadrm_vendor_data_file:dir create_dir_perms;
+allow hal_drm_widevine mediadrm_vendor_data_file:file create_file_perms;
+allow hal_drm_widevine hal_allocator_server:fd { use };
+
+rw_rockchip_graphic_device(hal_drm_widevine)
+get_prop(hal_drm_widevine, hwservicemanager_prop)

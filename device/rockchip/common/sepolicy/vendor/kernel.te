@@ -1,0 +1,24 @@
+
+# Additional rules for kernel
+allow kernel dm_device:blk_file setattr;
+allow kernel block_device:blk_file { read write open };
+
+# mr1
+allow kernel self:capability { mknod mknod };
+allow kernel self:netlink_route_socket create;
+allow kernel block_device:blk_file rw_file_perms;
+
+allow kernel device:chr_file { create setattr getattr unlink };
+#allow kernel device:blk_file rw_file_perms;
+allow kernel device:dir { remove_name write add_name create rmdir };
+allow kernel debugfs_mmc:dir { search };
+
+allow kernel kernel:system { module_request };
+allow kernel vendor_file:file { open read };
+
+# for diag over socket
+userdebug_or_eng(`
+  allow kernel self:socket create;
+  #allow kernel device:blk_file { create setattr getattr unlink };
+')
+dontaudit kernel self:socket create;

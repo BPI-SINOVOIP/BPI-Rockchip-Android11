@@ -1,0 +1,4 @@
+# Allow the radio to read these properties, they only have an SELinux label in
+# the emulator.
+get_prop(radio, net_eth0_prop);
+allow radio net_radio0_prop:file { getattr read open map };

@@ -1,0 +1,63 @@
+allow init serial_device:chr_file rw_file_perms;
+# Additional rules for init
+allow init kernel:system { module_request };
+
+allow init tmpfs:lnk_file { create };
+allow init devpts:chr_file { ioctl };
+allow init userdata_block_device:blk_file { write };
+allow init video_device:chr_file { write };
+
+allow init init:capability { sys_module };
+allow init nvm_block_device:blk_file { write };
+allow init property_socket:sock_file { write };
+allow init zram_device:blk_file { write open read };
+
+#allow init ext4_exec:file { execute_no_trans };
+
+allow init socket_device:sock_file { create setattr };
+allow init sysfs_hdmi:file rw_file_perms;
+#allow init kernel:security { setcheckreqprot };
+allow init cache_file:dir { mounton };
+allow init storage_file:dir mounton;
+allow init baseparameter_block_device:blk_file { write setattr };
+allow init configfs:dir { write remove_name add_name  create };
+allow init configfs:file { write };
+allow init configfs:lnk_file { unlink create };
+allow init frp_block_device:blk_file { write };
+dontaudit init rootfs:file { create };
+allow init rootfs:lnk_file { setattr };
+allow init devpts:chr_file { getattr };
+allow init debugfs:dir mounton;
+allow init debugfs_tracing_debug:dir mounton;
+allow init debugfs:file { write };
+allow init debugfs_tracing:file { write };
+
+allow init block_device:lnk_file { relabelfrom };
+allow init vbmeta_block_device:lnk_file relabelto;
+allow init userdata_block_device:lnk_file { relabelto };
+allow init frp_block_device:lnk_file { relabelto };
+allow init metadata_block_device:lnk_file { relabelto };
+allow init e2fsck_cache_block_device:lnk_file { relabelto };
+allow init system_file:system { module_load };
+allow init debugfs:dir mounton;
+allow init configfs:file rw_file_perms;
+allow init configfs:lnk_file create_file_perms;
+allow init rootfs:system { module_load };
+allow init sysfs_devices_system_cpu:file write;
+dontaudit init sysfs:file { setattr open write };
+allow init rootfs:dir { relabelto };
+allow rootfs labeledfs:filesystem associate;
+allow init debugfs_tracing:dir mounton;
+allow init { e2fsck_oem_block_device security_block_device boot_block_device misc_block_device recovery_block_device }:lnk_file { relabelto };
+allow init vendor_file:system module_load;
+allow init baseparameter_block_device:lnk_file { relabelto setattr };
+allow init vendor_file:file { execute open};
+allow init oemfs:dir { mounton };
+allow init mnt_vendor_file:dir { mounton };
+allow init sysfs_usb:file rw_file_perms;
+
+dontaudit init proc:file { write setattr };
+set_prop(init, vendor_system_public_prop)
+r_dir_file(init, nativetest_data_file)
+rw_rockchip_graphic_device(init)
+set_prop(init, debug_prop)

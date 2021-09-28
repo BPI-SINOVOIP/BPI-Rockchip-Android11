@@ -1,0 +1,49 @@
+#!/bin/sh -eu
+#
+# Copyright 2019 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+tmp="$(mktemp -d)"
+trap "rm -rf $tmp" EXIT
+mkfifo $tmp/port
+
+"$MODEL_BIN" \
+  -C bp.secureflashloader.fname="$ANDROID_PRODUCT_OUT/boot/bl1.bin" \
+  -C bp.flashloader0.fname="$ANDROID_PRODUCT_OUT/boot/fip.bin" \
+  -C cluster0.cpu0.semihosting-cwd="$ANDROID_PRODUCT_OUT/boot" \
+  -C bp.virtioblockdevice.image_path="$ANDROID_PRODUCT_OUT/system-qemu.img" \
+  -C bp.mmc.p_mmc_file="$ANDROID_PRODUCT_OUT/userdata.img" \
+  -C bp.secure_memory=0 \
+  -C cache_state_modelled=0 \
+  -C bp.pl011_uart0.unbuffered_output=1 \
+  -C bp.pl011_uart0.out_file="$ANDROID_PRODUCT_OUT/uart0.log" \
+  -C bp.pl011_uart1.out_file="$ANDROID_PRODUCT_OUT/uart1.log" \
+  -C bp.terminal_0.terminal_command="echo %port > $tmp/port" \
+  -C bp.terminal_1.start_telnet=0 \
+  -C bp.ve_sysregs.mmbSiteDefault=0 \
+  -C bp.ve_sysregs.exit_on_shutdown=1 \
+  -C bp.virtio_net.hostbridge.userNetworking=1 \
+  -C bp.virtio_net.hostbridge.userNetPorts=5555=5555 \
+  -C bp.virtio_net.enabled=1 \
+  -C cluster0.NUM_CORES=1 \
+  -C cluster0.cpu0.clock_multiplier=20 \
+  -C cluster0.cpu0.enable_crc32=1 \
+  -C cluster1.NUM_CORES=0 \
+  "$@" &
+
+read port < $tmp/port
+telnet localhost $port
+kill -INT %%
+wait

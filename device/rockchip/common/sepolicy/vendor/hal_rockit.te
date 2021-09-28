@@ -1,0 +1,33 @@
+type vendor-rockit-hal-1-0, domain;
+type vendor-rockit-hal-1-0_exec, exec_type, vendor_file_type, file_type;
+
+# Server
+init_daemon_domain(vendor-rockit-hal-1-0)
+
+# Client
+add_hwservice(vendor-rockit-hal-1-0, vendor-rockit-hal_hwservice)
+
+allow vendor-rockit-hal-1-0 { ion_device video_device }:chr_file rw_file_perms;
+allow vendor-rockit-hal-1-0 sysfs_dev:file r_file_perms;
+allow vendor-rockit-hal-1-0 sysfs_dmc:file rw_file_perms;
+allow vendor-rockit-hal-1-0 hal_graphics_allocator_default:fd use;
+
+r_dir_file(vendor-rockit-hal-1-0, sdcardfs)
+r_dir_file(vendor-rockit-hal-1-0, storage_file)
+r_dir_file(vendor-rockit-hal-1-0, mnt_media_rw_file)
+r_dir_file(vendor-rockit-hal-1-0, vfat)
+
+hwbinder_use(vendor-rockit-hal-1-0)
+vndbinder_use(vendor-rockit-hal-1-0)
+rw_rockchip_graphic_device(vendor-rockit-hal-1-0)
+
+get_prop(vendor-rockit-hal-1-0, hwservicemanager_prop)
+binder_call(mediaserver, vendor-rockit-hal-1-0)
+binder_call(vendor-rockit-hal-1-0, mediaserver)
+binder_call(vendor-rockit-hal-1-0, hwservicemanager)
+binder_call(vendor-rockit-hal-1-0, vendor-rockit-hal_hwservice)
+binder_call(vendor-rockit-hal_hwservice, vendor-rockit-hal-1-0)
+allow vendor-rockit-hal-1-0 video_device:chr_file { read write open ioctl };
+allow vendor-rockit-hal-1-0 mnt_media_rw_file:dir { search };
+allow vendor-rockit-hal-1-0 vfat:file { open read };
+allow vendor-rockit-hal-1-0 vfat:dir { search };

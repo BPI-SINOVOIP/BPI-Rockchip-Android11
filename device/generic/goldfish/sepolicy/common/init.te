@@ -1,0 +1,6 @@
+allow init tmpfs:lnk_file create_file_perms;
+allow init proc:dir { mounton };
+dontaudit init kernel:system module_request;
+allow init serial_device:chr_file { ioctl open read write };
+allow init proc:dir mounton;
+allow init binfmt_miscfs:file write;

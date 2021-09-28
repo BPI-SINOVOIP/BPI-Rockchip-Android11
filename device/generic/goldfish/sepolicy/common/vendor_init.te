@@ -1,0 +1,5 @@
+set_prop(vendor_init, qemu_prop)
+allow vendor_init kernel:system module_request;
+allow vendor_init ram_device:blk_file setattr;
+set_prop(vendor_init, hal_bluetooth_sim_prop);
+set_prop(vendor_init, vendor_build_prop);

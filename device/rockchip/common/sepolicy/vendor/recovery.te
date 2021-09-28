@@ -1,0 +1,53 @@
+
+recovery_only(`
+    allow recovery rootfs:dir { rw_dir_perms create };
+    allow recovery sysfs_devices_system_cpu:file rw_file_perms;
+    allow recovery sysfs_dev:file rw_file_perms;
+    allow recovery usbfs:dir rw_dir_perms;
+    allow recovery kernel:system module_request;
+    allow recovery serial_device:chr_file rw_file_perms;
+    allow recovery vfat:file r_file_perms;
+    allow recovery device:file rw_file_perms;
+    allow recovery device:dir rw_dir_perms;
+    allow recovery cache_file:dir { mounton };
+    allow recovery proc_sysrq:file rw_file_perms;
+    allow recovery media_rw_data_file:dir { search open read };
+    allow recovery vfat:dir rw_dir_perms;
+    allow recovery media_rw_data_file:file { open read };
+    allow recovery ru_file:file execute_no_trans;
+    allow recovery ru_file:{ file lnk_file } { create_file_perms relabelfrom relabelto };
+    allow recovery ru_file:dir { create_dir_perms relabelfrom relabelto };
+
+    allow recovery vfat:file {create append};
+    allow recovery storage_device:chr_file {read write open ioctl};
+    allow recovery video_device:chr_file {read write open ioctl};
+    allow recovery metadata_file:dir { mounton };
+    allow recovery tmpfs:dir { mounton };
+    allow recovery kmsg_device:chr_file rw_file_perms;
+
+    allow recovery sysfs:dir {read open};
+    allow recovery sysfs:file {read open write};
+    allow recovery sysfs_batteryinfo:dir { search };
+
+    allow recovery ctl_bootanim_prop:file {open getattr};
+    allow recovery ctl_bugreport_prop:file {open getattr};
+    allow recovery self:capability { fsetid };
+
+    allow recovery e2fsck_cache_block_device:blk_file ioctl;
+    allowxperm recovery e2fsck_cache_block_device:blk_file ioctl { BLKPBSZGET };
+
+    allow shell rootfs:file { entrypoint read};
+    allow recovery sysfs_power:dir {search};
+    allow recovery sysfs_power:file {read open};
+    allow recovery sysfs_mmc:dir {search};
+    allow recovery sysfs_mmc:file {open read getattr};
+    allow recovery rk_bluetooth_file:dir {search};
+    allow recovery rk_bluetooth_file:lnk_file {read};
+    allow recovery sensor_device:chr_file {open read ioctl};
+    allow recovery rtc_device:chr_file {open read write ioctl};
+
+    allow recovery proc_meminfo:file {open read};
+    allow recovery self:capability { fsetid };
+    set_prop(recovery,boottime_prop)
+    rw_rockchip_graphic_device(recovery)
+')

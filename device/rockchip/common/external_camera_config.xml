@@ -1,0 +1,72 @@
+<ExternalCamera>
+    <Provider>
+        <ignore> <!-- Internal video devices to be ignored by external camera HAL -->
+        <!-- <id>0</id> -->  <!-- No leading/trailing spaces -->
+        </ignore>
+    </Provider>
+    <!-- See ExternalCameraUtils.cpp for default values of Device configurations below-->
+    <Device>
+        <!-- Max JPEG buffer size in bytes-->
+        <MaxJpegBufferSize  bytes="3145728"/>  <!-- 3MB (~= 1080p YUV420) -->
+        <!-- Size of v4l2 buffer queue when streaming >= 30fps -->
+        <!-- Larger value: more request can be cached pipeline (less janky) -->
+        <!-- Smaller value: use less memory -->
+        <NumVideoBuffers  count="4"/>
+        <!-- Size of v4l2 buffer queue when streaming < 30fps -->
+        <NumStillBuffers  count="2"/>
+        <!-- List of maximum fps for various output sizes -->
+        <!-- Any image size smaller than the size listed in Limit row will report
+        fps (as minimum frame duration) up to the fpsBound value. -->
+        <FpsList>
+            <!-- width/height must be increasing, fpsBound must be decreasing-->
+            <Limit  width="176" height="144" fpsBound="60.0" />
+            <Limit  width="176" height="144" fpsBound="30.0" />
+            <Limit  width="176" height="144" fpsBound="20.0" />
+            <Limit  width="176" height="144" fpsBound="15.0" />
+            <Limit  width="320" height="240" fpsBound="60.0" />
+            <Limit  width="320" height="240" fpsBound="30.0" />
+            <Limit  width="320" height="240" fpsBound="20.0" />
+            <Limit  width="320" height="240" fpsBound="15.0" />
+            <Limit  width="352" height="288" fpsBound="30.0" />
+            <Limit  width="352" height="288" fpsBound="20.0" />
+            <Limit  width="352" height="288" fpsBound="15.0" />
+            <Limit  width="640" height="480" fpsBound="60.0" />
+            <Limit  width="640" height="480" fpsBound="30.0" />
+            <Limit  width="640" height="480" fpsBound="20.0" />
+            <Limit  width="640" height="480" fpsBound="15.0" />
+            <Limit  width="640" height="480" fpsBound="10.0" />
+            <Limit  width="800" height="600" fpsBound="30.0" />
+            <Limit  width="800" height="600" fpsBound="20.0" />
+            <Limit  width="800" height="600" fpsBound="15.0" />
+            <Limit  width="1024" height="768" fpsBound="30.0" />
+            <Limit  width="1024" height="768" fpsBound="20.0" />
+            <Limit  width="1024" height="768" fpsBound="15.0" />
+            <Limit  width="1024" height="768" fpsBound="10.0" />
+            <Limit  width="1280" height="720" fpsBound="60.0" />
+            <Limit  width="1280" height="720" fpsBound="30.0" />
+            <Limit  width="1280" height="720" fpsBound="20.0" />
+            <Limit  width="1280" height="720" fpsBound="15.0" />
+            <Limit  width="1280" height="720" fpsBound="10.0" />
+            <Limit  width="1280" height="800" fpsBound="30.0" />
+            <Limit  width="1280" height="800" fpsBound="20.0" />
+            <Limit  width="1280" height="800" fpsBound="15.0" />
+            <Limit  width="1280" height="960" fpsBound="30.0" />
+            <Limit  width="1280" height="960" fpsBound="20.0" />
+            <Limit  width="1280" height="960" fpsBound="15.0" />
+            <Limit  width="1280" height="1024" fpsBound="30.0" />
+            <Limit  width="1280" height="1024" fpsBound="20.0" />
+            <Limit  width="1280" height="1024" fpsBound="15.0" />
+            <Limit  width="1600" height="1200" fpsBound="30.0" />
+            <Limit  width="1600" height="1200" fpsBound="15.0" />
+            <Limit  width="1920" height="1080" fpsBound="30.0" />
+            <Limit  width="1920" height="1080" fpsBound="15.0" />
+            <Limit  width="2592" height="1944" fpsBound="30.0" />
+            <Limit  width="2592" height="1944" fpsBound="15.0" />
+            <Limit  width="2592" height="1944" fpsBound="10.0" />
+            <Limit  width="2592" height="1944" fpsBound="5.0" />
+            <!-- image size larger than the last entry will not be supported-->
+        </FpsList>
+        <!-- orientation -->
+        <Orientation  degree="90"/>
+    </Device>
+</ExternalCamera>

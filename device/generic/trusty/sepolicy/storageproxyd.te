@@ -1,0 +1,4 @@
+type rpmb_virt_device, dev_type;
+
+allow tee rpmb_virt_device:chr_file { open read write };
+allow tee self:capability { setgid setuid };

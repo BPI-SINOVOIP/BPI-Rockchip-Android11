@@ -1,0 +1,10 @@
+# These settings are specific to running under the Android emulator
+/dev/qemu_trace           0666   system     system
+/dev/ion                  0664   system     system
+/dev/goldfish_pipe        0666   system     system
+/dev/ttyS*                0666   system     system
+/dev/goldfish_sync        0666   system     system
+/dev/goldfish_address_space 0666 system     system
+/dev/dri/card0 0660 system graphics
+/dev/dri/controlD64 0660 system graphics
+/dev/dri/renderD128 0666 system graphics

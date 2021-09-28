@@ -1,0 +1,64 @@
+//
+// Copyright (C) 2011 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_binary {
+    name: "android.hardware.audio.service.ranchu",
+    vendor: true,
+    init_rc: ["android.hardware.audio.service.ranchu.rc"],
+    vintf_fragments: ["android.hardware.audio@6.0-impl.ranchu.xml"],
+    relative_install_path: "hw",
+    defaults: ["hidl_defaults"],
+    srcs: [
+        "entry.cpp",
+        "device_factory.cpp",
+        "primary_device.cpp",
+        "stream_common.cpp",
+        "stream_in.cpp",
+        "stream_out.cpp",
+        "io_thread.cpp",
+        "device_port_source.cpp",
+        "device_port_sink.cpp",
+        "talsa.cpp",
+        "util.cpp",
+    ],
+    shared_libs: [
+        "android.hardware.audio@6.0",
+        "android.hardware.audio.common@6.0",
+        "android.hardware.audio.common@6.0-util",
+        "libaudioutils",
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "libhidlbase",
+        "liblog",
+        "libtinyalsa",
+        "libutils",
+        "libfmq",
+        "libprocessgroup",
+    ],
+    header_libs: [
+        "libaudio_system_headers",
+    ],
+    cflags: [
+        "-DLOG_TAG=\"android.hardware.audio.service.ranchu\"",
+    ],
+    // android.hardware.audio.service.ranchu loads android.hardware.audio@6.0-impl
+    // which loads audio.r_submix.default which provides the r_submix device,
+    // see b/161485545. Should be retired once a better r_submix is available.
+    required: [
+        "android.hardware.audio@6.0-impl",
+        "audio.r_submix.default",
+    ],
+}

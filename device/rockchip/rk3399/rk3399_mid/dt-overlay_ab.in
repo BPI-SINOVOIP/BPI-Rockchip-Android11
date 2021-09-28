@@ -1,0 +1,34 @@
+/dts-v1/;
+/plugin/;
+
+&firmware_android {
+    compatible = "android,firmware";
+    boot_devices = "${_boot_device}";
+    ${_vbmeta}
+    fstab {
+        compatible = "android,fstab";
+        vendor {
+            compatible = "android,vendor";
+            dev = "/dev/block/by-name/vendor";
+            type = "ext4";
+            mnt_flags = "ro,barrier=1,inode_readahead_blks=8";
+            fsmgr_flags = "${_flags}";
+        };
+        odm {
+            compatible = "android,odm";
+            dev = "/dev/block/by-name/odm";
+            type = "ext4";
+            mnt_flags = "ro,barrier=1,inode_readahead_blks=8";
+            fsmgr_flags = "${_flags}";
+        };
+    };
+};
+
+&reboot_mode {
+    mode-bootloader = <0x5242C309>;
+    mode-charge = <0x5242C30B>;
+    mode-fastboot = <0x5242C303>;
+    mode-loader = <0x5242C301>;
+    mode-normal = <0x5242C300>;
+    mode-recovery = <0x5242C303>;
+};

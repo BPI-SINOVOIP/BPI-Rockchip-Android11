@@ -1,0 +1,105 @@
+# For virtual thermal
+genfscon sysfs /devices/virtual/thermal                                                              u:object_r:sysfs_thermal:s0
+
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-charger/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/20072000.i2c/i2c-0/0-001a/rk816-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-0062/power_supply                              u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff3d0000.i2c/i2c-4/4-006b/power_supply                              u:object_r:sysfs_batteryinfo:s0
+
+# rk3368 xikp RTC hctosys
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-battery/power_supply                u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001c/rk818-charger/power_supply                u:object_r:sysfs_batteryinfo:s0
+
+# rk3126c RTC
+genfscon sysfs /devices/platform/20072000.i2c/i2c-0/0-001a/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+# rk3288 RTC
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+
+# rk3326 I2C-0 RTC
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+
+# rk3399 RTC
+genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+genfscon sysfs /devices/platform/ff3c0000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                u:object_r:sysfs_hctosys:s0
+
+# for kernel 4.19
+genfscon debugfs /sync                                                                               u:object_r:debugfs_sw_sync:s0
+
+# for usb grf
+genfscon sysfs /class/extcon/extcon0                                                                 u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk-headset/extcon/extcon1/state                                     u:object_r:sysfs_extcon:s0
+# for RK3288/rk3368 hdmi audio
+genfscon sysfs /devices/platform/ff980000.hdmi/extcon/extcon0                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff980000.hdmi/extcon/extcon1                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff980000.hdmi/extcon/extcon2                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff980000.hdmi/extcon/extcon3                                        u:object_r:sysfs_extcon:s0
+#for rk3399 hdmi audio
+genfscon sysfs /devices/platform/ff940000.hdmi/extcon/extcon0                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff940000.hdmi/extcon/extcon1                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff940000.hdmi/extcon/extcon2                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff940000.hdmi/extcon/extcon3                                        u:object_r:sysfs_extcon:s0
+#for rk3399 dp audio
+genfscon sysfs /devices/platform/fec00000.dp/extcon/extcon0                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fec00000.dp/extcon/extcon1                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fec00000.dp/extcon/extcon2                                        u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fec00000.dp/extcon/extcon3                                        u:object_r:sysfs_extcon:s0
+
+genfscon sysfs /devices/platform/rk_headset/extcon/extcon0                                          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk_headset/extcon/extcon1                                          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk_headset/extcon/extcon2                                          u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk_headset/extcon/extcon3                                          u:object_r:sysfs_extcon:s0
+
+genfscon sysfs /devices/platform/10218000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:1/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/10218000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff380000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:1/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff380000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff380000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:1/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/fe310000.dwmmc/mmc_host/mmc2/mmc2:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
+
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc0:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc1:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc0/mmc0:0001/mmc2:0001:2/net             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff290000.ethernet/net                                              u:object_r:sysfs_net:s0
+
+# rk3328
+genfscon sysfs /devices/platform/ff550000.ethernet/net/eth0                                         u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff510000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1/net             u:object_r:sysfs_net:s0
+
+#rk356x
+genfscon sysfs /devices/platform/fe010000.ethernet/net                                             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/fe2a0000.ethernet/net                                             u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.6.auto/usb7/7-1/7-1:1.0/net          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.2.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.3.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.4.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.5.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.7.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.8.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.9.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/xhci-hcd.10.auto/usb1/1-1/1-1:1.0/net	    u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/11040000.efuse/rockchip-efuse0/nvmem                               u:object_r:sysfs_hdmi:s0
+genfscon sysfs /devices/platform/ffb00000.efuse/rockchip-efuse0/nvmem                               u:object_r:sysfs_hdmi:s0
+
+# rk3368
+genfscon sysfs /devices/platform/ff0f0000.dwmmc                                                     u:object_r:sysfs_mmc:s0
+genfscon sysfs /devices/platform/ff400000.nandc                                                     u:object_r:sysfs_mmc:s0
+# rk3326
+genfscon sysfs /devices/platform/ff390000.dwmmc                                                     u:object_r:sysfs_mmc:s0
+genfscon sysfs /devices/platform/ff3b0000.nandc                                                     u:object_r:sysfs_mmc:s0
+# rk3126c
+genfscon sysfs /devices/platform/10500000.nandc                                                     u:object_r:sysfs_mmc:s0
+genfscon sysfs /devices/platform/1021c000.dwmmc                                                     u:object_r:sysfs_mmc:s0
+# rk3399
+genfscon sysfs /devices/platform/fe330000.sdhci                                                     u:object_r:sysfs_mmc:s0
+
+genfscon sysfs_wakeup / u:object_r:sysfs_wakeup:s0
+
+genfscon fuseblk / u:object_r:fuseblk:s0

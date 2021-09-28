@@ -1,0 +1,4 @@
+allow hwservicemanager rk_output_hal:binder call;
+allow hwservicemanager rk_output_hal:dir search;
+allow hwservicemanager rk_output_hal:file { open read };
+allow hwservicemanager rk_output_hal:process getattr;

@@ -1,0 +1,16 @@
+dontaudit untrusted_app_27 mnt_vendor_file:dir { search read open getattr };
+allow untrusted_app_27 rootfs:dir { search read open getattr };
+allow untrusted_app_27 sysfs_net:dir { search };
+#TODO removed for Q
+#allow untrusted_app_27 vendor_file:file { read open getattr };
+allow untrusted_app_27 unlabeled:dir { search read open getattr };
+allow untrusted_app_27 unlabeled:file { open read getattr };
+allow untrusted_app_27 rootfs:dir { search read open getattr };
+allow untrusted_app_27 block_device:dir { getattr search };
+allow untrusted_app_27 ota_data_file:dir rw_dir_perms;
+allow untrusted_app_27 ota_data_file:file rw_file_perms;
+allow untrusted_app_27 oemfs:file {execmod};
+
+rw_rockchip_graphic_device(untrusted_app_27)
+binder_call(untrusted_app_27, zygote)
+get_prop(untrusted_app_27,vendor_default_prop)

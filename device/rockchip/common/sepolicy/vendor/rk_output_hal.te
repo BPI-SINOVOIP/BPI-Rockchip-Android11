@@ -1,0 +1,21 @@
+type rk_output_hal, domain;
+type rk_output_hal_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(rk_output_hal)
+allow rk_output_hal vendor_file:system module_load;
+allow rk_output_hal proc_net:file { getattr open read };
+allow rk_output_hal proc_version:file { open read };
+allow rk_output_hal block_device:dir { search };
+allow rk_output_hal init:unix_stream_socket { connectto };
+allow rk_output_hal property_socket:sock_file { write };
+allow rk_output_hal baseparameter_block_device:blk_file rw_file_perms;
+allow rk_output_hal baseparameter_block_device:blk_file { getattr };
+allow rk_output_hal rk_output_hal_service:hwservice_manager { add find };
+allow rk_output_hal hidl_base_hwservice:hwservice_manager add;
+binder_call(rk_output_hal,hwservicemanager)
+binder_call(rk_output_hal,system_server)
+get_prop(rk_output_hal,hwservicemanager_prop)
+set_prop(rk_output_hal,vendor_system_public_prop)
+
+rw_rockchip_graphic_device(rk_output_hal)
+vndbinder_use(rk_output_hal)

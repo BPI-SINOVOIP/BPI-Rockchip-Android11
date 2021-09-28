@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.google.android.tv.setup.customizationsample">
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
+    <uses-permission android:name="com.android.setupwizard.permission.SETUP" />
+    <uses-permission android:name="android.permission.REBOOT" />
+
+    <application
+        android:label="TV Setup Customization Sample"
+        android:theme="@style/AppTheme">
+
+
+        <!-- This Receiver marks this app as being eligible to provide resources which influence
+        the behavior and look of TV Setup. -->
+        <receiver android:name=".PartnerReceiver">
+            <intent-filter>
+                <action android:name="com.google.android.tvsetup.action.PARTNER_CUSTOMIZATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- HOOK Activity examples -->
+
+        <activity
+            android:name=".HookBeginActivity"
+            android:label="Partner Hook: Begin (Priority 5)"
+            android:screenOrientation="landscape">
+            <intent-filter android:priority="5">
+                <action android:name="com.android.setupwizard.action.HOOK_BEGIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookBegin2Activity"
+            android:label="Partner Hook: Begin (Priority 4)"
+            android:screenOrientation="landscape">
+            <intent-filter android:priority="4">
+                <action android:name="com.android.setupwizard.action.HOOK_BEGIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookPostNetworkActivity"
+            android:screenOrientation="landscape"
+            android:label="Partner Hook: Post-Network"
+            >
+            <intent-filter>
+                <action android:name="com.android.setupwizard.action.HOOK_POST_NETWORK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookPostNetworkFollowupActivity"
+            android:screenOrientation="landscape"
+            android:label="Partner Hook: Post-Network Follow-up"
+            android:exported="true"
+            >
+        </activity>
+
+
+        <activity
+            android:name=".HookEndActivity"
+            android:screenOrientation="landscape"
+            android:label="Partner Hook: End"
+            >
+            <intent-filter>
+                <action android:name="com.android.setupwizard.action.HOOK_END" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Implements the delegate-network-to-partner action. -->
+        <activity
+            android:name=".NetworkDelegationActivity"
+            android:screenOrientation="landscape"
+            android:label="Network Delegation"
+            >
+            <intent-filter>
+                <action android:name="com.android.net.GET_CONNECTED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".HookPostWelcomeActivity"
+            android:label="Partner Hook: Post-Welcome"
+            android:screenOrientation="landscape">
+            <intent-filter android:priority="4">
+                <action android:name="com.android.setupwizard.action.HOOK_POST_WELCOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- A simple opaque Activity -->
+        <activity
+            android:name=".OpaqueActivity"
+            android:screenOrientation="landscape"
+            android:label="Opaque Activity"
+            android:exported="true"
+            android:theme="@style/AppThemeOpaque"
+            >
+        </activity>
+
+
+        <!-- A simple transparent Activity -->
+        <activity
+            android:name=".TransparentActivity"
+            android:screenOrientation="landscape"
+            android:label="Transparent Activity"
+            android:exported="true"
+            >
+        </activity>
+
+
+        <!-- Implements a pre-Enrollment action (which is normally handled by Katniss). We say
+        'pre-Enrollment' because the actual enrollment Activity is a device-specific Activity; the
+        design calls for the Katniss implementation of this action to redirect to that device-
+        specific Activity (which we do not attempt here with MockHotwordEnrollmentActivity)-->
+        <activity
+            android:name=".MockHotwordEnrollmentActivity"
+            android:screenOrientation="landscape"
+            android:label="Mock Hotword Enrollment"
+            >
+            <intent-filter>
+                <action android:name="com.google.android.katniss.action.ATV_SETUP_ENROLL_HOTWORD" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Implements a delegate-to-Katniss action. -->
+        <activity
+            android:name=".MockKatnissActivity"
+            android:screenOrientation="landscape"
+            android:label="Mock Katniss"
+            >
+            <intent-filter>
+                <action android:name="com.google.android.katniss.action.ATV_SETUP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

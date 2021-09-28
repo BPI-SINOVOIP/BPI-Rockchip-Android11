@@ -1,0 +1,71 @@
+allow zygote cgroup:file { rw_file_perms };
+allow zygote self:capability { sys_resource };
+allow zygote surfaceflinger_service:service_manager { find };
+allow zygote autofill_service:service_manager { find };
+allow zygote audio_service:service_manager { find };
+allow zygote media_session_service:service_manager { find };
+allow zygote surfaceflinger:unix_stream_socket { read };
+allow zygote hal_graphics_composer_default:fd use;
+allow zygote surfaceflinger:fd use;
+allow zygote adbd:unix_stream_socket { connectto };
+
+allow zygote self:netlink_route_socket { create bind getopt connect };
+
+binder_call(zygote, servicemanager)
+binder_call(zygote, system_server)
+binder_call(zygote, hwservicemanager)
+binder_call(zygote, audioserver)
+binder_call(zygote, surfaceflinger)
+binder_call(zygote, netd)
+get_prop(zygote, vendor_default_prop)
+get_prop(zygote, test_harness_prop)
+
+
+allow zygote activity_task_service:service_manager find;
+allow zygote audio_service:service_manager find;
+allow zygote autofill_service:service_manager find;
+allow zygote batteryproperties_service:service_manager find;
+allow zygote companion_device_service:service_manager find;
+allow zygote deviceidle_service:service_manager find;
+#allow zygote dynamic_system_service:service_manager find;
+#allow zygote emergency_data_file:dir search;
+allow zygote gpu_service:service_manager find;
+allow zygote gpuservice:binder call;
+#allow zygote hal_bluetooth_hwservice:hwservice_manager find;
+allow zygote hal_graphics_allocator_default:fd use;
+allow zygote hwservicemanager_prop:file { getattr map open read };
+allow zygote init:unix_stream_socket connectto;
+allow zygote location_service:service_manager find;
+allow zygote media_session_service:service_manager find;
+allow zygote misc_user_data_file:dir search;
+allow zygote netd:binder call;
+allow zygote netpolicy_service:service_manager find;
+allow zygote platform_compat_service:service_manager find;
+allow zygote priv_app:binder call;
+allow zygote property_socket:sock_file write;
+allow zygote radio_data_file:dir search;
+allow zygote radio_service:service_manager { find };
+allow zygote registry_service:service_manager find;
+allow zygote role_service:service_manager find;
+allow zygote self:binder { call transfer };
+allow zygote self:netlink_route_socket { bind connect create getopt };
+#allow zygote statsmanager_service:service_manager find;
+allow zygote surfaceflinger:binder call;
+allow zygote surfaceflinger:unix_stream_socket write;
+allow zygote system_config_service:service_manager find;
+allow zygote system_data_file:dir { add_name write };
+#allow zygote system_data_file:file { setattr write };
+allow zygote system_server:unix_stream_socket { read write };
+allow zygote telecom_service:service_manager find;
+allow zygote test_harness_prop:file { getattr map open read };
+allow zygote timedetector_service:service_manager find;
+allow zygote timezonedetector_service:service_manager find;
+allow zygote trust_service:service_manager find;
+allow zygote uimode_service:service_manager find;
+allow zygote untrusted_app_27:binder call;
+allow zygote user_profile_data_file:file getattr;
+allow zygote wallpaper_service:service_manager find;
+allow zygote wifi_service:service_manager find;
+allow zygote activity_service:service_manager find;
+
+rw_rockchip_graphic_device(zygote)

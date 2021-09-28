@@ -1,0 +1,396 @@
+// Copyright (C) 2019 The Android Open Source Project
+// Copyright (C) 2019 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#include "android/emulation/hostdevices/HostAddressSpace.h"
+
+#include <memory>
+
+#if PLATFORM_SDK_VERSION < 26
+#include <cutils/log.h>
+#else
+#include <log/log.h>
+#endif
+
+#include <errno.h>
+#include "goldfish_address_space.h"
+
+namespace {
+
+const int HOST_MEMORY_ALLOCATOR_COMMAND_ALLOCATE_ID = 1;
+const int HOST_MEMORY_ALLOCATOR_COMMAND_UNALLOCATE_ID = 2;
+
+}  // namsepace
+
+using android::HostAddressSpaceDevice;
+using android::emulation::AddressSpaceDevicePingInfo;
+
+GoldfishAddressSpaceBlockProvider::GoldfishAddressSpaceBlockProvider(GoldfishAddressSpaceSubdeviceType subdevice)
+    : m_handle(HostAddressSpaceDevice::get()->open())
+{
+    if ((subdevice != GoldfishAddressSpaceSubdeviceType::NoSubdevice) && is_opened()) {
+        AddressSpaceDevicePingInfo request;
+        ::memset(&request, 0, sizeof(request));
+        request.metadata = subdevice;
+
+        HostAddressSpaceDevice::get()->ping(m_handle, &request);
+    }
+}
+
+GoldfishAddressSpaceBlockProvider::~GoldfishAddressSpaceBlockProvider()
+{
+    if (is_opened()) {
+        HostAddressSpaceDevice::get()->close(m_handle);
+    }
+}
+
+bool GoldfishAddressSpaceBlockProvider::is_opened() const
+{
+    return m_handle > 0;
+}
+
+void GoldfishAddressSpaceBlockProvider::close()
+{
+    if (is_opened()) {
+        HostAddressSpaceDevice::get()->close(m_handle);
+        m_handle = 0;
+    }
+}
+
+address_space_handle_t GoldfishAddressSpaceBlockProvider::release()
+{
+    address_space_handle_t handle = m_handle;
+    m_handle = 0;
+    return handle;
+}
+
+void GoldfishAddressSpaceBlockProvider::closeHandle(address_space_handle_t handle)
+{
+    HostAddressSpaceDevice::get()->close(handle);
+}
+
+GoldfishAddressSpaceBlock::GoldfishAddressSpaceBlock()
+    : m_handle(0)
+    , m_mmaped_ptr(NULL)
+    , m_phys_addr(0)
+    , m_host_addr(0)
+    , m_offset(0)
+    , m_size(0)
+    , m_is_shared_mapping(false) {}
+
+GoldfishAddressSpaceBlock::~GoldfishAddressSpaceBlock()
+{
+    destroy();
+}
+
+GoldfishAddressSpaceBlock &GoldfishAddressSpaceBlock::operator=(const GoldfishAddressSpaceBlock &rhs)
+{
+    m_mmaped_ptr = rhs.m_mmaped_ptr;
+    m_phys_addr = rhs.m_phys_addr;
+    m_host_addr = rhs.m_host_addr;
+    m_offset = rhs.m_offset;
+    m_size = rhs.m_size;
+    m_is_shared_mapping = rhs.m_is_shared_mapping;
+    m_handle = rhs.m_handle;
+    return *this;
+}
+
+bool GoldfishAddressSpaceBlock::allocate(GoldfishAddressSpaceBlockProvider *provider, size_t size)
+{
+    ALOGD("%s: Ask for block of size 0x%llx\n", __func__,
+         (unsigned long long)size);
+
+    destroy();
+
+    if (!provider->is_opened()) {
+        return false;
+    }
+
+    m_size = size;
+    m_offset =
+        HostAddressSpaceDevice::get()->allocBlock(
+            provider->m_handle, size, &m_phys_addr);
+    m_handle = provider->m_handle;
+    m_is_shared_mapping = false;
+
+    return true;
+}
+
+bool GoldfishAddressSpaceBlock::claimShared(GoldfishAddressSpaceBlockProvider *provider, uint64_t offset, uint64_t size)
+{
+    ALOGD("%s: Ask to claim region [0x%llx 0x%llx]\n", __func__,
+         (unsigned long long)offset,
+         (unsigned long long)offset + size);
+
+    destroy();
+
+    if (!provider->is_opened()) {
+        return false;
+    }
+
+    int claimRes = HostAddressSpaceDevice::get()->claimShared(
+            provider->m_handle, offset, size);
+
+    if (claimRes) {
+        ALOGE("%s: failed to claim shared region. Error: %d\n", __func__, claimRes);
+        return false;
+    }
+
+    m_size = size;
+    m_offset = offset;
+    m_handle = provider->m_handle;
+    m_is_shared_mapping = true;
+    m_phys_addr = HostAddressSpaceDevice::get()->offsetToPhysAddr(m_offset);
+
+    return true;
+}
+
+uint64_t GoldfishAddressSpaceBlock::physAddr() const
+{
+    return m_phys_addr;
+}
+
+uint64_t GoldfishAddressSpaceBlock::hostAddr() const
+{
+    return m_host_addr;
+}
+
+// In the host implementation:
+// mmap: is done by interpreting |host_addr| as the actual host address.
+void *GoldfishAddressSpaceBlock::mmap(uint64_t host_addr)
+{
+    if (m_size == 0) {
+        ALOGE("%s: called with zero size\n", __func__);
+        return NULL;
+    }
+
+    if (m_mmaped_ptr != nullptr) {
+        ALOGE("'mmap' called for an already mmaped address block 0x%llx %d", (unsigned long long)m_mmaped_ptr, nullptr == m_mmaped_ptr);
+        ::abort();
+    }
+
+    m_mmaped_ptr = (void*)(uintptr_t)(host_addr & (~(PAGE_SIZE - 1)));
+    m_host_addr = host_addr;
+
+    return guestPtr();
+}
+
+void *GoldfishAddressSpaceBlock::guestPtr() const
+{
+    return reinterpret_cast<char *>(m_mmaped_ptr) + (m_host_addr & (PAGE_SIZE - 1));
+}
+
+void GoldfishAddressSpaceBlock::destroy()
+{
+    if (m_mmaped_ptr && m_size) {
+        m_mmaped_ptr = NULL;
+    }
+
+    if (m_size) {
+        if (m_is_shared_mapping) {
+            HostAddressSpaceDevice::get()->unclaimShared(m_handle, m_offset);
+        } else {
+            HostAddressSpaceDevice::get()->freeBlock(m_handle, m_offset);
+        }
+        m_phys_addr = 0;
+        m_host_addr = 0;
+        m_offset = 0;
+        m_size = 0;
+    }
+}
+
+void GoldfishAddressSpaceBlock::release()
+{
+    m_handle = 0;
+    m_mmaped_ptr = NULL;
+    m_phys_addr = 0;
+    m_host_addr = 0;
+    m_offset = 0;
+    m_size = 0;
+}
+
+int GoldfishAddressSpaceBlock::memoryMap(void *addr,
+                                         size_t,
+                                         address_space_handle_t,
+                                         uint64_t,
+                                         void** dst) {
+    *dst = addr;
+    return 0;
+}
+
+void GoldfishAddressSpaceBlock::memoryUnmap(void *ptr, size_t size) {}
+
+GoldfishAddressSpaceHostMemoryAllocator::GoldfishAddressSpaceHostMemoryAllocator(bool useSharedSlots)
+  : m_provider(useSharedSlots
+        ? GoldfishAddressSpaceSubdeviceType::SharedSlotsHostMemoryAllocator
+        : GoldfishAddressSpaceSubdeviceType::HostMemoryAllocator),
+    m_useSharedSlots(useSharedSlots)
+{}
+
+bool GoldfishAddressSpaceHostMemoryAllocator::is_opened() const { return m_provider.is_opened(); }
+
+long GoldfishAddressSpaceHostMemoryAllocator::hostMalloc(GoldfishAddressSpaceBlock *block, size_t size)
+{
+    if (size == 0) {
+        return -EINVAL;
+    }
+    if (block->size() > 0) {
+        return -EINVAL;
+    }
+    if (!m_provider.is_opened()) {
+        return -ENODEV;
+    }
+
+    AddressSpaceDevicePingInfo request;
+    if (m_useSharedSlots) {
+        ::memset(&request, 0, sizeof(request));
+        request.size = block->size();
+        request.metadata = HOST_MEMORY_ALLOCATOR_COMMAND_ALLOCATE_ID;
+
+        HostAddressSpaceDevice::get()->ping(m_provider.m_handle, &request);
+
+        block->claimShared(&m_provider, request.phys_addr, request.size);
+
+        void *hostPtr = HostAddressSpaceDevice::get()->getHostAddr(block->physAddr());
+        block->mmap(static_cast<uint64_t>(reinterpret_cast<uintptr_t>(hostPtr)));
+    } else {
+        if (!block->allocate(&m_provider, size)) {
+            return -ENOMEM;
+        }
+
+        ::memset(&request, 0, sizeof(request));
+        request.phys_addr = block->physAddr();
+        request.size = block->size();
+        request.metadata = HOST_MEMORY_ALLOCATOR_COMMAND_ALLOCATE_ID;
+
+        HostAddressSpaceDevice::get()->ping(m_provider.m_handle, &request);
+
+        void *hostPtr = HostAddressSpaceDevice::get()->getHostAddr(block->physAddr());
+        block->mmap(static_cast<uint64_t>(reinterpret_cast<uintptr_t>(hostPtr)));
+    }
+
+    return 0;
+}
+
+void GoldfishAddressSpaceHostMemoryAllocator::hostFree(GoldfishAddressSpaceBlock *block)
+{
+    if (block->size() == 0) {
+        return;
+    }
+
+    if (!m_provider.is_opened()) {
+        ALOGE("%s: device is not available", __func__);
+        ::abort();
+    }
+
+    if (block->guestPtr()) {
+        AddressSpaceDevicePingInfo request;
+        ::memset(&request, 0, sizeof(request));
+        request.phys_addr = block->physAddr();
+        request.metadata = HOST_MEMORY_ALLOCATOR_COMMAND_UNALLOCATE_ID;
+
+        HostAddressSpaceDevice::get()->ping(m_provider.m_handle, &request);
+    }
+
+    block->replace(NULL);
+}
+
+address_space_handle_t goldfish_address_space_open() {
+    return HostAddressSpaceDevice::get()->open();
+}
+
+void goldfish_address_space_close(address_space_handle_t handle) {
+    HostAddressSpaceDevice::get()->close(handle);
+}
+
+bool goldfish_address_space_allocate(
+    address_space_handle_t handle,
+    size_t size, uint64_t* phys_addr, uint64_t* offset) {
+
+    *offset =
+        HostAddressSpaceDevice::get()->allocBlock(
+            handle, size, phys_addr);
+
+    return true;
+}
+
+bool goldfish_address_space_free(
+    address_space_handle_t handle, uint64_t offset) {
+    HostAddressSpaceDevice::get()->freeBlock(handle, offset);
+    return true;
+}
+
+bool goldfish_address_space_claim_shared(
+    address_space_handle_t handle, uint64_t offset, uint64_t size) {
+
+    int claimRes = HostAddressSpaceDevice::get()->claimShared(
+        handle, offset, size);
+
+    if (claimRes) {
+        ALOGE("%s: failed to claim shared region. Error: %d\n", __func__, claimRes);
+        return false;
+    }
+
+    return true;
+}
+
+bool goldfish_address_space_unclaim_shared(
+        address_space_handle_t handle, uint64_t offset) {
+    HostAddressSpaceDevice::get()->unclaimShared(handle, offset);
+    return true;
+}
+
+// pgoff is the offset into the page to return in the result
+void* goldfish_address_space_map(
+    address_space_handle_t handle,
+    uint64_t offset, uint64_t size,
+    uint64_t pgoff) {
+
+    (void)size;
+
+    void* res = HostAddressSpaceDevice::get()->
+        getHostAddr(
+            HostAddressSpaceDevice::get()->offsetToPhysAddr(offset));
+
+    if (!res) {
+        ALOGE("%s: failed to map. errno: %d\n", __func__, errno);
+        return nullptr;
+    }
+
+    return (void*)(((char*)res) + (uintptr_t)(pgoff & (PAGE_SIZE - 1)));
+}
+
+// same address space
+void goldfish_address_space_unmap(void*, uint64_t) { }
+
+bool goldfish_address_space_set_subdevice_type(
+    address_space_handle_t handle, GoldfishAddressSpaceSubdeviceType type,
+    address_space_handle_t* handle_out) {
+    struct goldfish_address_space_ping request;
+    request.metadata = (uint64_t)type;
+    *handle_out = handle;
+    return goldfish_address_space_ping(handle, &request);
+}
+
+bool goldfish_address_space_ping(
+    address_space_handle_t handle,
+    struct goldfish_address_space_ping* ping) {
+
+    AddressSpaceDevicePingInfo* asHostPingInfo =
+        reinterpret_cast<AddressSpaceDevicePingInfo*>(ping);
+
+    HostAddressSpaceDevice::get()->ping(handle, asHostPingInfo);
+
+    return true;
+}

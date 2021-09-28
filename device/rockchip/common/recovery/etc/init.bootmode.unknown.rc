@@ -1,0 +1,4 @@
+on fs
+    #insmod /rk30xxnand_ko.ko
+	mount ext4 mtd@cache /cache wait noatime nodiratime nosuid nodev noauto_da_alloc discard
+	insmod /rk29-ipp.ko

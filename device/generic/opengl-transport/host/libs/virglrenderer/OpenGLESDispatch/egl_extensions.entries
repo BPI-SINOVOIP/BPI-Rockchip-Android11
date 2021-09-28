@@ -1,0 +1,11 @@
+!egl_extensions
+
+%#include <EGL/eglext.h>
+
+EGLSyncKHR eglCreateSyncKHR(EGLDisplay dpy, EGLenum type, const EGLint *attrib_list);
+EGLBoolean eglDestroySyncKHR(EGLDisplay dpy, EGLSyncKHR sync);
+EGLint eglClientWaitSyncKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLint flags, EGLTimeKHR timeout);
+EGLBoolean eglGetSyncAttribKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLint attribute, EGLint *value);
+
+EGLImageKHR eglCreateImageKHR(EGLDisplay dpy, EGLContext ctx, EGLenum target, EGLClientBuffer buffer, const EGLint *attrib_list);
+EGLBoolean eglDestroyImageKHR(EGLDisplay dpy, EGLImageKHR image);

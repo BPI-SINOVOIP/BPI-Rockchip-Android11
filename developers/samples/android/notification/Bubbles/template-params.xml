@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2019 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<sample>
+    <name>Bubbles</name>
+    <group>Notification</group>
+    <package>com.example.android.bubbles</package>
+
+    <minSdk>Q</minSdk>
+
+    <strings>
+        <intro>
+            <![CDATA[
+This sample demonstrates how to use Bubbles API to show notifications as bubbles.
+]]>
+        </intro>
+    </strings>
+
+    <tempate src="base-build" />
+
+    <metadata>
+        <status>PUBLISHED</status>
+        <categories>Notification</categories>
+        <technologies>Android</technologies>
+        <languages>Kotlin</languages>
+        <solutions>Mobile</solutions>
+        <level>INTERMEDIATE</level>
+        <icon>screenshots/icon-web.png</icon>
+        <screenshots>
+            <img>screenshots/main.png</img>
+            <img>screenshots/chat.png</img>
+        </screenshots>
+        <api_refs>
+            <android>android.app.Notification.BubbleMetadata</android>
+        </api_refs>
+        <description>
+            This sample demonstrates how to use Bubbles API to show notifications as bubbles.
+        </description>
+        <intro>
+<![CDATA[
+### API Usage
+
+In order to show a notification as a bubble, call [setBubbleMetadata][1] and set metadata to the
+Notification.Builder. [Notification.BubbleMetadata.Builder] can be used to create the metadata. You
+can set the icon and the desired height of the bubble. The notification has to be in a notification
+channel with [IMPORTANCE_HIGH][2] in order to prompt the user to allow bubbles.
+
+When the bubble is clicked, it expands to a small window. This is called an expanded bubble. An
+expanded bubble is an Activity. Use [setIntent][3] to specify an Activity to be lauched as the
+expanded bubble.  The Activity must be [resizeable][4] and [embedded][5]. It also has to be able to
+launch as multiple instances, so set [documentLaunchMode][6] to "always".
+
+You might want to provide a feature to let users explicitly show an expanded bubble when they
+perform some actions, e.g. tapping on a button to show content in a bubble. For this, call
+[setAutoExpandBubble][7] on BubbleMetadata.Builder. It may also make sense to suppress the initial
+notification using [setSuppressInitialNotification][8] in this situation. These flags work only when
+your app is in the foreground. *This feature does not yet work in Android Q Beta 2.*
+
+Bubbles can also be shown explicitly when the app is in the foreground.
+
+[1]: https://developer.android.com/reference/android/app/Notification.Builder.html#setBubbleMetadata
+[2]: https://developer.android.com/reference/android/app/NotificationManager.html#IMPORTANCE_HIGH
+[3]: https://developer.android.com/reference/android/app/Notification.BubbleMetadata.Builder.html#setIntent
+[4]: https://developer.android.com/guide/topics/manifest/activity-element.html#resizeableActivity
+[5]: https://developer.android.com/guide/topics/manifest/activity-element.html#embedded
+[6]: https://developer.android.com/guide/topics/manifest/activity-element.html#dlmode
+[7]: https://developer.android.com/reference/android/app/Notification.BubbleMetadata.Builder.html#setAutoExpandBubble
+[8]: https://developer.android.com/reference/android/app/Notification.BubbleMetadata.Builder.html#setSuppressInitialNotification
+
+### When to use Bubbles instead of normal notifications
+
+Bubbles take up screen real estate and cover other app content. You should only send a notification
+as a bubble if it is important enough such as ongoing communications, or if the user has explicitly
+requested a bubble for some content.
+
+### When Bubble is disabled
+
+Note that the bubble can be disabled by the user. In that case, a bubble notification is shown as a
+normal notification. You should always make sure your bubble notification works as a normal
+notification as well.
+
+### Expanded Bubbles
+
+System UI allows the user to horizontally swipe through expanded bubbles. You should avoid
+horizontal scrolling content in your Activity for expanded bubbles.
+
+### About the sample
+
+The sample is a dummy chat app. Talk to one of the chat bots, and it will reply back to you in
+several seconds. The notification is not shown when the app is in the foreground, so just press back
+or home before you get a reply.
+
+- cat.jpg: Photo by [Erik-Jan Leusink](https://unsplash.com/photos/IbPxGLgJiMI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/search/photos/cat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+- dog.jpg: Photo by [Lui Peng](https://unsplash.com/photos/ybHtKz5He9Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash
+- parrot.jpg: Photo by [Nikolay Tchaouchev](https://unsplash.com/photos/jJuq6oNfgRo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash
+- sheep.jpg, sheep-full.jpg: Photo by [Luke Stackpoole](https://unsplash.com/photos/sfB_Nw9sggw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash
+]]>
+        </intro>
+    </metadata>
+
+</sample>

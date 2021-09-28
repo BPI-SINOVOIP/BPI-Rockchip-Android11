@@ -1,0 +1,12 @@
+cc_binary_host {
+    name: "emugen_cuttlefish",
+    srcs: [
+        "ApiGen.cpp",
+        "EntryPoint.cpp",
+        "main.cpp",
+        "Parser.cpp",
+        "strUtils.cpp",
+        "TypeFactory.cpp",
+    ],
+    cflags: ["-Wno-unused-parameter"],
+}

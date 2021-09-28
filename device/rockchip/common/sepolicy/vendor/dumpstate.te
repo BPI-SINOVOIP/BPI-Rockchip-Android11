@@ -1,0 +1,8 @@
+allow dumpstate debugfs_sw_sync:dir r_dir_perms;
+allow dumpstate debugfs_sw_sync:file r_file_perms;
+
+allow dumpstate sysfs_mmc:file r_file_perms;
+allow dumpstate debugfs_mmc:dir r_dir_perms;
+binder_call(dumpstate, vold)
+binder_call(dumpstate, hal_light_default)
+binder_call(dumpstate, hal_power_default)

@@ -1,0 +1,11 @@
+# Triggers a sys_module denial, but kernel has CONFIG_MODULES=n.
+dontaudit netd self:capability sys_module;
+allow netd kernel:system module_request;
+
+# map with latest kernel security/selinux/include/classmap.h
+allow netd netd:netlink_netfilter_socket { create setopt bind write read getopt };
+allow netd netd:netlink_generic_socket { create setopt bind write read getopt getattr };
+allow netd netd:netlink_scsitransport_socket { create setopt bind write read getopt getattr };
+allow netd netd:netlink_rdma_socket { create setopt bind write read getopt getattr };
+allow netd netd:netlink_crypto_socket { create setopt bind write read getopt getattr };
+

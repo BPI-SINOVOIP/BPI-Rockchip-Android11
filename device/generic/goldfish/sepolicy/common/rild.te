@@ -1,0 +1,10 @@
+# Allow rild to read these properties, they only have an SELinux label in the
+# emulator.
+get_prop(rild, net_eth0_prop);
+get_prop(rild, net_radio0_prop);
+
+# IPv6 router advertisement detection
+allow rild self:packet_socket { bind create ioctl read setopt };
+allowxperm rild self:packet_socket ioctl { SIOCGIFFLAGS
+                                           SIOCSIFFLAGS
+                                           SIOCGIFHWADDR };

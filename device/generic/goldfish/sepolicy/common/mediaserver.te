@@ -1,0 +1,3 @@
+allow mediaserver vendor_data_file:file { read getattr };
+allow mediaserver vendor_data_file:lnk_file read;
+dontaudit mediaserver vendor_data_file:file { open };

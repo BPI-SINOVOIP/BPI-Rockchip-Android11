@@ -1,0 +1,6 @@
+allow adbd oemfs:dir { search };
+
+allow adbd socket_device:sock_file { write };
+
+rw_rockchip_graphic_device(adbd)
+set_prop(adbd,ctl_start_prop)

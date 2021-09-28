@@ -1,0 +1,28 @@
+/* Copyright 2020 Google Inc. All Rights Reserved. */
+
+package device.google.atv.audio_proxy@5.0;
+
+import IBusDevice;
+
+/**
+ * Main entrance for audio proxy service. Client should use this interface to
+ * register IBusDevice. Service also implements audio HAL IDevicesFactory. When
+ * needed, service will use registered IBusDevice to open output stream. This
+ * allows the client to behave like an audio HAL and read audio from audio
+ * server, if permitted.
+ *
+ * Note, the implementation only supports one version of audio HAL. To avoid
+ * confusion, this interface shares the same version as the supported audio HAL
+ * version.
+ */
+interface IAudioProxyDevicesManager {
+    /**
+     * Registers IBusDevice at `address`. IBusService impl should live as long
+     * as its process, after registered.
+     *
+     * @param address The address associated with the device.
+     * @param device The audio bus device.
+     * @return success True if the device is registered successfully.
+     */
+    registerDevice(string address, IBusDevice device) generates (bool success);
+};

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2013 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<sample>
+    <name>AlwaysOn</name>
+    <group>Wearable</group>
+    <package>com.example.android.wearable.wear.alwayson</package>
+
+    <multiDexEnabled>true</multiDexEnabled>
+
+    <androidX>true</androidX>
+
+    <dependency_wearable>androidx.wear:wear:1.0.0</dependency_wearable>
+
+    <dependency_wearable>androidx.legacy:legacy-support-v13:1.0.0</dependency_wearable>
+
+    <strings>
+        <intro>
+            <![CDATA[
+            Demonstrates a native Wear app using ambient screen support.
+            ]]>>
+        </intro>
+    </strings>
+
+    <template src="base-build" />
+    <template src="Wear" />
+
+    <!-- Include common code modules by uncommenting them below. -->
+    <!-- common src="logger"/ -->
+
+    <metadata>
+        <status>DEPRECATED</status>
+        <categories>Wearable</categories>
+        <technologies>Android</technologies>
+        <languages>Java</languages>
+        <solutions>Mobile</solutions>
+        <level>INTERMEDIATE</level>
+        <screenshots>
+            <img>screenshots/1-main-active.png</img>
+            <img>screenshots/2-main-ambient.png</img>
+            <img>screenshots/3-main-active-round.png</img>
+            <img>screenshots/4-main-ambient-round.png</img>
+        </screenshots>
+        <api_refs>
+            <android>android.support.wearable.activity.WearableActivity</android>
+        </api_refs>
+        <description>
+            <![CDATA[
+Sample moved to [github.com/android/wear-os][1].
+
+[1]: https://github.com/android/wear-os
+]]>
+        </description>
+
+        <intro>
+            <![CDATA[
+This repo and all Wear OS samples have been moved to [github.com/android/wear-os][1]. Please check out the code there. Thank you!
+
+[1]: https://github.com/android/wear-os
+]]>
+        </intro>
+    </metadata>
+</sample>

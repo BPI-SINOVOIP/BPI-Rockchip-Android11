@@ -1,0 +1,26 @@
+genfscon sysfs /devices/platform/fdf40000.rkvenc/wakeup                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdf80200.rkvdec/wakeup                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdee0000.vepu/wakeup                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdea0400.vdpu/wakeup                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fded0000.jpegd/wakeup                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/usbdrd/fcc00000.dwc3/wakeup                    u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk817-battery/power_supply                   u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk808-rtc/wakeup     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/wakeup               u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk805-pwrkey/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk817-battery/power_supply/battery/wakeup6   u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/wakeup11                  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk817-charger/power_supply/usb/wakeup7       u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk817-charger/power_supply/ac/wakeup8        u:object_r:sysfs_wakeup:s0
+
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                   u:object_r:sysfs_hctosys:s0
+
+genfscon sysfs /devices/platform/fde60000.gpu/devfreq                           u:object_r:sysfs_dmc:s0
+
+genfscon sysfs /devices/platform/fe8a0000.usb2-phy/extcon                       u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/fe0a0000.hdmi/extcon                           u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk-headset/extcon                              u:object_r:sysfs_extcon:s0
+
+genfscon sysfs /devices/platform/fe2c0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1/net                 u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/fe2c0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net                 u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/fe310000.sdhci/mmc_host/mmc2/mmc2:0001/block/mmcblk2                   u:object_r:sysfs_mmc:s0

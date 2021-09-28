@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2013 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<sample>
+    <name>DataLayer</name>
+    <group>Wearable</group>
+    <package>com.example.android.wearable.datalayer</package>
+
+    <minSdk>18</minSdk>
+
+    <minSdkVersionWear>23</minSdkVersionWear>
+
+    <multiDexEnabled>true</multiDexEnabled>
+
+    <androidX>true</androidX>
+
+    <dependency>androidx.legacy:legacy-support-v4:1.0.0</dependency>
+    <dependency>androidx.legacy:legacy-support-v13:1.0.0</dependency>
+
+    <dependency>androidx.cardview:cardview:1.0.0</dependency>
+    <dependency>androidx.appcompat:appcompat:1.0.2</dependency>
+    <dependency>androidx.recyclerview:recyclerview:1.0.0</dependency>
+    <dependency>androidx.percentlayout:percentlayout:1.0.0</dependency>
+
+    <dependency_wearable>androidx.wear:wear:1.0.0</dependency_wearable>
+    <dependency_wearable>androidx.recyclerview:recyclerview:1.0.0</dependency_wearable>
+    <dependency_wearable>androidx.percentlayout:percentlayout:1.0.0</dependency_wearable>
+    <dependency_wearable>androidx.legacy:legacy-support-v13:1.0.0</dependency_wearable>
+
+
+    <wearable>
+        <has_handheld_app>true</has_handheld_app>
+    </wearable>
+
+    <strings>
+        <intro>
+            <![CDATA[
+            Sample demonstrating the usage of the GoogleApiClient in order to send data
+            from a handheld device to a wearable. The data transmitted is a picture taken by
+            the user of the sample.
+            ]]>
+        </intro>
+    </strings>
+    <template src="base"/>
+    <template src="Wear"/>
+    <metadata>
+        <status>DEPRECATED</status>
+        <categories>UI, Wearable</categories>
+        <technologies>Android</technologies>
+        <languages>Java</languages>
+        <solutions>Mobile</solutions>
+        <level>ADVANCED</level>
+        <icon>Application/src/main/res/drawable-xxhdpi/ic_launcher.png</icon>
+        <screenshots>
+            <img>screenshots/phone_image.png</img>
+            <img>screenshots/wearable_background_image.png</img>
+        </screenshots>
+        <api_refs>
+            <ext>gms:com.google.android.gms.wearable.DataApi</ext>
+            <ext>gms:com.google.android.gms.wearable.DataEvent</ext>
+            <ext>gms:com.google.android.gms.wearable.WearableListenerService</ext>
+        </api_refs>
+        <description>
+            <![CDATA[
+Sample moved to [github.com/android/wear-os][1].
+
+[1]: https://github.com/android/wear-os
+]]>
+        </description>
+
+        <intro>
+            <![CDATA[
+This repo and all Wear OS samples have been moved to [github.com/android/wear-os][1]. Please check out the code there. Thank you!
+
+[1]: https://github.com/android/wear-os
+]]>
+        </intro>
+    </metadata>
+</sample>

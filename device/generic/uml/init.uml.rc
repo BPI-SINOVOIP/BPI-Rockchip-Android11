@@ -1,0 +1,5 @@
+on fs
+    mount_all ./fstab.uml
+
+on boot
+    exec -- /system/bin/init.eth0.sh

@@ -1,0 +1,15 @@
+typeattribute abc vendor_executes_system_violators;
+
+init_daemon_domain(abc)
+
+allow abc abc_data_file:dir { rw_dir_perms rmdir create };
+allow abc abc_data_file:file { rw_file_perms unlink create };
+allow abc vendor_shell_exec:file { execute_no_trans };
+allow abc logcat_exec:file { getattr open read execute execute_no_trans map };
+allow abc system_file:dir { read search getattr };
+allow abc system_file:file { read open map getattr execute execute_no_trans };
+allow abc logdr_socket:sock_file { write };
+allow abc abc:capability { sys_nice };
+allow abc logd:unix_stream_socket { connectto };
+allow abc properties_device:dir { r_dir_perms map };
+allow abc proc_stat:file r_file_perms;

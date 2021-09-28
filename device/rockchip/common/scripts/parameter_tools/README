@@ -1,0 +1,40 @@
+## Parameter.txt Generator
+This is a tool that automatically generates a new parameter.txt based on the parameters.
+When "_a" is at the end of the partition name, it will attach another slot.
+
+```android tool
+parameter_tools
+  [-s(--start-offset) start_offset, 0x4000 is default]
+  --firmware-version 10.0
+  --machine-model RK3326
+  --machine-id 007
+  --manufacturer RK3326
+  --magic 0x5041524B
+  --atag 0x00200800
+  --machine 3326
+  --check-mask 0x80
+  --pwr-hld 0,0,A,0,1
+// --type gpt
+  -p(--partition-list) uboot_a:4M,trust_a:4M,misc:4M,dtbo_a:4M,vbmeta_a:4M,boot_a:64M,backup:300M,security:4M,cache:300M,metadata:4M,frp:4K,super:2G
+  [-o(--output) output file, parameter.txt is default]
+```
+
+# e.g.
+```shell
+parameter_tools --firmware-version 11.0 --machine-model RK3326 --manufacturer ROCKCHIP --machine XTF863 --partition-list uboot_a:4096K,trust_a:4M,misc:4M,dtbo_a:4M,vbmeta_a:4M,boot_a:33554432,backup:300M,security:4M,cache:300M,metadata:4096,frp:512K,super:2G --output parameter.txt
+```
+
+The result is:
+```parameter.txt
+FIRMWARE_VER: 10.0
+MACHINE_MODEL: RK3326
+MACHINE_ID: 007
+MANUFACTURER: ROCKCHIP
+MAGIC: 0x5041524B
+ATAG: 0x00200800
+MACHINE: XTF863
+CHECK_MASK: 0x80
+PWR_HLD: 0,0,A,0,1
+TYPE: GPT
+CMDLINE:mtdparts=rk29xxnand:0x00002000@0x00004000(uboot_a),0x00002000@0x00006000(uboot_b),0x00002000@0x00008000(trust_a),0x00002000@0x0000a000(trust_b),0x00002000@0x0000c000(misc),0x00002000@0x0000e000(dtbo_a),0x00002000@0x00010000(dtbo_b),0x00002000@0x00012000(vbmeta_a),0x00002000@0x00014000(vbmeta_b),0x00010000@0x00016000(boot_a),0x00010000@0x00026000(boot_b),0x00096000@0x00036000(backup),0x00002000@0x000cc000(security),0x00096000@0x000ce000(cache),0x00000008@0x00164000(metadata),0x00000400@0x00164008(frp),0x00400000@0x00164408(super),-@0x00564408(userdata:grow)
+```

@@ -1,0 +1,23 @@
+allow vendor_install_recovery storage_file:dir { read search open getattr};
+allow vendor_install_recovery sdcardfs:dir { read search open getattr};
+allow vendor_install_recovery sdcardfs:file { read open getattr};
+allow vendor_install_recovery property_socket:sock_file { write read };
+allow vendor_install_recovery init:unix_stream_socket { connectto };
+allow vendor_install_recovery mnt_sdcard_file:lnk_file r_file_perms;
+#allow vendor_install_recovery exported3_system_prop:property_service { set };
+allow vendor_install_recovery media_rw_data_file:file { read getattr };
+allow vendor_install_recovery boot_block_device:blk_file { write read open getattr };
+allow vendor_install_recovery block_device:dir { search read open getattr };
+allow vendor_install_recovery baseparameter_block_device:blk_file { read write };
+allow vendor_install_recovery e2fsck_cache_block_device:blk_file { read write };
+allow vendor_install_recovery mnt_media_rw_file:dir { read search open getattr };
+allow vendor_install_recovery fuseblk:dir { read search open getattr };
+allow vendor_install_recovery fuseblk:file { read open getattr };
+allow vendor_install_recovery tmpfs:lnk_file r_file_perms;
+allow vendor_install_recovery storage_file:lnk_file r_file_perms;
+allow vendor_install_recovery mnt_user_file:dir { search read open getattr };
+allow vendor_install_recovery mnt_user_file:lnk_file r_file_perms;
+#allow vendor_install_recovery vendor_install_recovery:capability { dac_read_search };
+allow vendor_install_recovery fuse:dir { r_file_perms search };
+allow vendor_install_recovery fuse:file r_file_perms;
+set_prop(vendor_install_recovery, vendor_system_public_prop)

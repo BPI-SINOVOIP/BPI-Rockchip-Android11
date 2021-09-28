@@ -1,0 +1,17 @@
+bootstrap_go_package {
+    name: "soong-rockchip_prebuilt",
+    pkgPath: "android/soong/rockchip_prebuilts",
+    deps: [
+        "blueprint",
+        "blueprint-bootstrap",
+        "soong",
+        "soong-android",
+        "soong-env",
+        "soong-cc",
+    ],
+    srcs: [
+        "android.go",
+        "prebuilt_obj.go",
+    ],
+    pluginFor: ["soong_build"],
+}

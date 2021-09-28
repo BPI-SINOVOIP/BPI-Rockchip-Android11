@@ -1,0 +1,27 @@
+/* Copyright 2020 Google Inc. All Rights Reserved. */
+
+package device.google.atv.audio_proxy@5.0;
+
+import android.hardware.audio.common@5.0;
+import android.hardware.audio@5.0::IStreamOut;
+import android.hardware.audio@5.0::Result;
+
+/**
+ * Represents a bus device in audio HAL. Check Java AudioDeviceInfo.TYPE_BUS for
+ * more details.
+ */
+interface IBusDevice {
+    /**
+     * Opens an audio stream for output. This function has the same requirement
+     * as audio HAL IDevice.openOutputStream.
+     */
+    openOutputStream(
+            AudioIoHandle ioHandle,
+            DeviceAddress device,
+            AudioConfig config,
+            bitfield<AudioOutputFlag> flags,
+            SourceMetadata sourceMetadata) generates (
+                    Result retval,
+                    IStreamOut outStream,
+                    AudioConfig suggestedConfig);
+};

@@ -1,0 +1,17 @@
+# Signal java processes to dump hal_vehicle_default, hal_audiocontrol_default
+allow dumpstate {
+  hal_vehicle_default
+  hal_audiocontrol_default
+}:process signal;
+
+
+# Allow dumpstate to make binder calls to hal_identity, hal_light, hal_power
+binder_call(dumpstate, hal_identity_default)
+binder_call(dumpstate, hal_light_default)
+binder_call(dumpstate, hal_power_default)
+
+dump_hal(hal_vehicle)
+dump_hal(hal_audiocontrol)
+dump_hal(hal_identity)
+dump_hal(hal_light)
+dump_hal(hal_power)

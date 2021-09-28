@@ -1,0 +1,14 @@
+type usb_dongle, domain;
+type usb_dongle_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(usb_dongle)
+allow usb_dongle vendor_file:file { execute execute_no_trans getattr open read };
+allow usb_dongle self:capability net_admin;
+allow usb_dongle self:netlink_kobject_uevent_socket { create read setopt };
+allow usb_dongle usb_device:dir { open read };
+allow usb_dongle vendor_shell_exec:file execute_no_trans;
+allow usb_dongle self:netlink_kobject_uevent_socket { bind getopt };
+allow usb_dongle sysfs:dir { open read };
+allow usb_dongle sysfs:file { getattr open read };
+allow usb_dongle usb_device:chr_file { ioctl open read write };
+allow usb_dongle usb_device:dir search;

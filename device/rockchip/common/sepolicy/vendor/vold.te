@@ -1,0 +1,13 @@
+allow vold shell_exec:file { map read execute getattr };
+allow vold proc_stat:file { read open getattr };
+allow vold metadata_file:dir { getattr };
+
+allow vold system_app_data_file:dir { search mounton };
+allow vold unlabeled:filesystem { mount };
+allow vold kernel:system { module_request };
+allow vold e2fsck_cache_block_device:blk_file getattr;
+allow vold self:capability { setgid setuid };
+allow vold vold_device:blk_file ioctl;
+allow vold vold_exec:file execute_no_trans;
+allow vold self:capability { dac_override dac_read_search };
+allow vold sysfs_mmc:file rw_file_perms;

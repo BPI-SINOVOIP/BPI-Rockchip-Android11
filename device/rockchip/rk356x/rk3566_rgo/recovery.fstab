@@ -1,0 +1,29 @@
+# Android fstab file.
+#<src>                                       <mnt_point>         <type>    <mnt_flags and options>       <fs_mgr_flags>
+/dev/block/platform/ff0f0000.dwmmc/by-name/user                  /mnt/internal_sd     vfat             defaults                  defaults
+/dev/block/mmcblk0p1                                               /mnt/external_sd     vfat             /dev/block/mmcblk0                  defaults
+/dev/block/by-name/system                /system              ext4             defaults                  defaults
+/dev/block/by-name/vendor                /vendor              ext4             defaults                  defaults
+/dev/block/by-name/odm                   /odm                 ext4             defaults                  defaults
+/dev/block/by-name/product               /product             ext4             defaults                  defaults
+/dev/block/by-name/system_ext            /system_ext          ext4             defaults                  defaults
+/dev/block/by-name/cache                 /cache               ext4             defaults                  defaults
+/dev/block/by-name/metadata              /metadata            ext4             defaults                  defaults
+/dev/block/by-name/userdata              /data                f2fs             defaults                  defaults
+/dev/block/by-name/cust                  /cust                ext4             defaults                  defaults
+/dev/block/by-name/custom                /custom              ext4             defaults                  defaults
+/dev/block/by-name/radical_update        /radical_update      ext4             defaults                  defaults
+/dev/block/by-name/misc                  /misc                emmc             defaults                  defaults
+/dev/block/by-name/uboot                 /uboot               emmc             defaults                  defaults
+/dev/block/by-name/charge                /charge              emmc             defaults                  defaults
+/dev/block/by-name/resource			   /resource		    emmc			 defaults				   defaults
+/dev/block/by-name/parameter             /parameter           emmc             defaults                  defaults
+/dev/block/by-name/boot                  /boot                emmc             defaults                  defaults
+/dev/block/by-name/recovery              /recovery            emmc             defaults                  defaults
+/dev/block/by-name/backup                /backup              emmc             defaults                  defaults
+/dev/block/by-name/frp                   /frp                 emmc             defaults                  defaults
+/dev/block/by-name/trust                 /trust               emmc             defaults                  defaults
+/dev/block/by-name/baseparamer           /baseparamer         emmc             defaults                  defaults
+/dev/block/by-name/vbmeta                /vbmeta              emmc             defaults                  defaults
+/dev/block/by-name/dtbo                /dtbo              emmc             defaults                  defaults
+/dev/block/by-name/vendor_boot           /vendor_boot                emmc             defaults                  defaults

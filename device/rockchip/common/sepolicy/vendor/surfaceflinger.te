@@ -1,0 +1,20 @@
+dontaudit surfaceflinger kernel:system module_request;
+#TODO removed for Q
+#for hdmi
+allow surfaceflinger sysfs_hdmi:file rw_file_perms;
+allow surfaceflinger surfaceflinger:unix_stream_socket { ioctl };
+allow surfaceflinger system_data_file:dir create_dir_perms;
+allow surfaceflinger gpu_data_file:file {read open getattr};
+allow surfaceflinger self:capability { sys_nice };
+allow surfaceflinger vendor_metadata:dir { search };
+
+allow surfaceflinger hal_camera_default:fd use;
+
+#allow surfaceflinger hal_graphics_allocator_default_tmpfs:file rw_file_perms;
+
+get_prop(surfaceflinger,vendor_system_public_prop)
+get_prop(surfaceflinger,vendor_default_prop)
+
+# for video formate 10bit to 8bit by rga
+rw_rockchip_graphic_device(surfaceflinger)
+binder_call(surfaceflinger, zygote)

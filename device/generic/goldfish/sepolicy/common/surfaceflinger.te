@@ -1,0 +1,6 @@
+allow surfaceflinger self:process execmem;
+allow surfaceflinger ashmem_device:chr_file execute;
+allow surfaceflinger gpu_device:chr_file { ioctl open read write map };
+
+typeattribute surfaceflinger system_writes_vendor_properties_violators;
+set_prop(surfaceflinger, qemu_prop)

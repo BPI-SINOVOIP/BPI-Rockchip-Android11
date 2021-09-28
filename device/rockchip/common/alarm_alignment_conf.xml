@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+
+<!--
+/*
+ * Copyright (C) 2016-2017 Intel Mobile Communications GmbH
+ *
+ * Sec Class: Intel Confidential (IC)
+ *
+ * All rights reserved.
+*/
+
+alarm-align:
+    strategy: the alarm alignment strategy.
+        "fixed2": force align alarm in a fixed interval, the alignment base is boot elapsed time.
+        "none": no optimization, android default.
+        default value: "none"
+    fixed_alignment: fixed alignment unit.
+            for strategy: "fixed2"
+            default value: 0
+    strict: if this is true:
+            1, the repeat_alignment below will be invalid,
+            and the value of repeat_alignment will be set to a value
+            according to what current strategy is.
+                fixed2: set repeat_alignment to the same as fixed_alignment
+            2, the repeat alarm will also be aligned.
+            for strategy: "fixed2"
+            default value: true
+    skip_non_wakeup: defer triggering of the non-wakeup App alarm, until screen on.
+                     for strategy: all strategy
+                     default value: true
+    align_non_wakeup: determine if the non-wakeup App alarm should be aligned.
+                  for strategy: all strategy
+                  default value: false
+    align_system: set to "true" to also align system alarms, otherwise "false".
+                  for strategy: all strategy
+                  default value: false
+    skip_short_len: some App alarm has very short trigger time, and it could be very
+                    critical to the App, we can't modify it. This configuration item
+                    is to set the length of the short interval at most we need to
+                    check before modify the alarm (based on second).
+                    for strategy: all strategy
+                    default value: 0
+    repeat_alignment: force extend the interval for repeat alarm (based on second).
+                    for strategy: all strategy
+                    default value: 0
+
+white-list: skip the alarms in this list.
+    for strategy: all strategy
+
+    ignore_top_app: skip the alarms set by the App with top activity (on top screen). Options: true or false. NOTE: NOT implemented currently.
+    app:
+        package: the package name of the App.
+        action: the intent action of the alarm. NOTE: the string should be regex pattern.
+
+black-list: always align the alarm in this list.
+    for strategy: all strategy
+    app:
+        package: the package name of the App.
+        action: the intent action of the alarm. NOTE: the string should be regex pattern.
+
+NOTE:
+1, the implementation will check if an alarm needs to be aligned in following priority.
+   balcklist > whitelist > system flag check
+-->
+
+<alarm-align strategy="fixed2" strict="true" skip_non_wakeup="false"
+    fixed_alignment="300" skip_short_len="10" repeat_alignment="300">
+    <white-list>
+        <!-- SAMPLE
+        <app package="com.tencent.mobileqq" action="com\.tencent\.mobileqq:MSF_.*" />
+        -->
+        <app package="com.google.android.deskclock" />
+        <app package="com.alarmclock.xtreme" />
+        <app package="com.alarmclock.xtreme.free" />
+        <app package="com.zdworks.android.zdclock" />
+        <app package="com.tiantian.ttclock" />
+        <app package="com.macropinch.axe" />
+        <app package="com.maize.digitalClock" />
+        <app package="nl.jsource.retroclock.android" />
+        <app package="com.asus.deskclock" />
+
+    </white-list>
+    <black-list>
+        <!-- SAMPLE
+        <app package="com.tencent.mobileqq" action="com\.tencent\.mobileqq:MSF_.*" />
+        -->
+        <app package="com.android.phone" action="com.android.internal.telephony.data-stall" />
+    </black-list>
+</alarm-align>

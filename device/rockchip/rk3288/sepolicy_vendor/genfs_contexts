@@ -1,0 +1,48 @@
+# /sys/class/wakeup/
+genfscon sysfs /devices/platform/ff9c0000.hevc_service/wakeup/wakeup0                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff9a0400.vdpu/wakeup/wakeup1                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup10                  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup11              u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup12                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup13                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup14                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup15                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup16                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup17                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup18                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup19                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff9a0000.vepu/wakeup                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup20                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup21                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup22                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/wakeup/wakeup23                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001b/wakeup/wakeup3                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001b/rk808-rtc/wakeup/wakeup4                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0/wakeup5                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/power_supply/test_ac/wakeup6                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/power_supply/test_battery/wakeup7                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/virtual/power_supply/test_usb/wakeup8                          u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/gpio-keys/wakeup/wakeup9                          u:object_r:sysfs_wakeup:s0
+
+# /sys/class/rtc
+genfscon sysfs /devices/platform/ff650000.i2c/i2c-0/0-001b/rk808-rtc/rtc/rtc0       u:object_r:sysfs_hctosys:s0
+
+# /sys/class/devfreq
+genfscon sysfs /devices/platform/ffa30000.gpu/devfreq                           u:object_r:sysfs_dmc:s0
+
+# /sys/class/extcon/
+genfscon sysfs //devices/platform/ff770000.syscon/ff770000.syscon:usbphy/extcon      u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/ff980000.hdmi/extcon       u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/rk_headset/extcon                           u:object_r:sysfs_extcon:s0
+
+# /sys/class/net
+genfscon sysfs /devices/virtual/net/dummy0                          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/net/ip6_vti0                          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/net/ip6tnl0                          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/net/ip_vti0                          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/net/lo                          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/virtual/net/sit0                          u:object_r:sysfs_net:s0
+genfscon sysfs /devices/platform/ff0d0000.dwmmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/wlan0                          u:object_r:sysfs_net:s0
+
+# /sys/class/block/
+genfscon sysfs /devices/platform/ff0f0000.dwmmc/mmc_host/mmc2/mmc2:0001/block/mmcblk2       u:object_r:sysfs_mmc:s0

@@ -1,0 +1,20 @@
+on late-fs
+    # boot time fs tune
+    write /sys/block/mmcblk2/queue/iostats 0
+    write /sys/block/mmcblk2/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk2/queue/nr_requests 256
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
+    write /sys/block/dm-2/queue/read_ahead_kb 2048
+    write /sys/block/dm-3/queue/read_ahead_kb 2048
+
+
+on property:sys.boot_completed=1
+    # end boot time fs tune
+    write /sys/block/mmcblk2/queue/read_ahead_kb 128
+    write /sys/block/mmcblk2/queue/nr_requests 128
+    write /sys/block/dm-0/queue/read_ahead_kb 128
+    write /sys/block/dm-1/queue/read_ahead_kb 128
+    write /sys/block/dm-2/queue/read_ahead_kb 128
+    write /sys/block/dm-3/queue/read_ahead_kb 128
+    write /sys/block/mmcblk2/queue/iostats 1

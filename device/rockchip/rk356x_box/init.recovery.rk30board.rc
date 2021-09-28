@@ -1,0 +1,20 @@
+on early-fs
+    setprop sys.usb.controller "fcc00000.dwc3"
+    setprop sys.usb.configfs 1
+
+on fs && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/bcdDevice 0x0310
+    write /config/usb_gadget/g1/bcdUSB 0x0200
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x1
+    write /config/usb_gadget/g1/os_desc/qw_sign "MSFT100"
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
+
+# Always start console on userdebug and eng builds
+on fs && property:ro.debuggable=1
+    start console
+
+service console /system/bin/sh
+    console
+    disabled
+    seclabel u:r:shell:s0

@@ -1,0 +1,30 @@
+allow hal_graphics_composer_default vndbinder_device:chr_file { read write open ioctl };
+allow hal_graphics_composer_default debugfs_sw_sync:file { read write open ioctl };
+allow hal_graphics_composer_default debugfs_sw_sync:dir { search };
+allowxperm hal_graphics_composer_default debugfs_sw_sync:file ioctl { SYNC_IOC_MERGE SW_SYNC_IOC_INC SW_SYNC_IOC_CREATE_FENCE };
+
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;;
+
+allow hal_graphics_composer_default sysfs_hdmi:file rw_file_perms;
+allow hal_graphics_composer_default sysfs_dmc:dir r_dir_perms;
+allow hal_graphics_composer_default sysfs_dmc:file rw_file_perms;
+allow hal_graphics_composer_default block_device:dir { search };
+allow hal_graphics_composer_default sysfs_devices_system_cpu:file rw_file_perms;
+allow hal_graphics_composer_default property_socket:sock_file { write };
+allow hal_graphics_composer_default init:unix_stream_socket { connectto };
+# HWC_UeventThread
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+
+allow hal_graphics_composer_default baseparameter_block_device:blk_file rw_file_perms;
+dontaudit hal_graphics_composer_default baseparameter_block_device:chr_file rw_file_perms;
+
+allow hal_graphics_composer_default mediaserver:fd {use};
+allow hal_graphics_composer_default zygote:fd use;
+allow hal_graphics_composer_default hal_camera_default:fd use;
+
+rw_rockchip_graphic_device(hal_graphics_composer_default)
+hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator)
+vndbinder_use(hal_graphics_composer_default)
+get_prop(hal_graphics_composer_default, vendor_system_public_prop)
+get_prop(hal_graphics_composer_default, graphic_prop)
+set_prop(hal_graphics_composer_default, vendor_system_public_prop)

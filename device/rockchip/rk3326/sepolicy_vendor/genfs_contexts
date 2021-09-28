@@ -1,0 +1,17 @@
+genfscon sysfs /devices/platform/ff440000.hevc/wakeup                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff442400.vdpu/wakeup                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff442000.vepu/wakeup                           u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/wakeup               u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk805-pwrkey/wakeup  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk808-rtc/wakeup     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/wakeup9     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-battery/power_supply/battery/wakeup4   u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-charger/power_supply/ac/wakeup6        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/ff180000.i2c/i2c-0/0-0020/rk817-charger/power_supply/usb/wakeup5       u:object_r:sysfs_wakeup:s0
+
+genfscon sysfs /devices/platform/fdd40000.i2c/i2c-0/0-0020/rk808-rtc/rtc/rtc0/hctosys                   u:object_r:sysfs_hctosys:s0
+# for dmc
+genfscon sysfs /devices/platform/ff400000.gpu/devfreq                           u:object_r:sysfs_dmc:s0
+
+genfscon sysfs /devices/platform/ff2c0000.syscon/ff2c0000.syscon:usb2-phy@100/extcon                    u:object_r:sysfs_extcon:s0
+#genfscon sysfs /           u:object_r:sysfs_wakeup:s0

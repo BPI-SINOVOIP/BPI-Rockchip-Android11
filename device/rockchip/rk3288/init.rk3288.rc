@@ -1,0 +1,46 @@
+on property:sys.boot_completed=1
+    chown system system /sys/class/devfreq/ffa30000.gpu/governor
+    chown system system /sys/class/devfreq/ffa30000.gpu/min_freq
+    chown system system /sys/class/devfreq/ffa30000.gpu/max_freq
+
+on early-boot
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+
+on init
+    # Increased power consumption and CPU in exchange for memory
+    write /proc/sys/vm/swappiness 100
+    write /sys/block/zram0/comp_algorithm lz4
+
+    write /sys/kernel/mm/ksm/pages_to_scan 100
+    write /sys/kernel/mm/ksm/sleep_millisecs 500
+    write /sys/kernel/mm/ksm/run 1
+
+on property:sys.boot_completed=1
+    # recover cpu&ddr fre.
+    chmod  0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+    write /dev/video_state n
+
+on boot
+
+    # update foreground cpuset now that processors are up
+    # reserve CPU 3 for the top app
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0-2
+    write /dev/cpuset/system-background/cpus 0-2
+    write /dev/cpuset/top-app/cpus 0-3
+
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+    chmod 0440 /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system system  /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chmod 0666 /sys/class/devfreq/dmc/system_status
+  

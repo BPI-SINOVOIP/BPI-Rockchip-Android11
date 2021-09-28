@@ -1,0 +1,8 @@
+/dev/trusty-ipc-dev0                 u:object_r:tee_device:s0
+/dev/vport3p1                        u:object_r:rpmb_virt_device:s0
+/vendor/bin/dhcpclient               u:object_r:dhcpclient_exec:s0
+/vendor/bin/storageproxyd            u:object_r:tee_exec:s0
+/data/vendor/var/run(/.*)?           u:object_r:varrun_file:s0
+/data/vendor/ss(/.*)?                u:object_r:tee_data_file:s0
+/vendor/bin/hw/android.hardware.gatekeeper@1.0-service.trusty           u:object_r:hal_gatekeeper_default_exec:s0
+/vendor/bin/hw/android.hardware.keymaster@4.0-service.trusty            u:object_r:hal_keymaster_default_exec:s0

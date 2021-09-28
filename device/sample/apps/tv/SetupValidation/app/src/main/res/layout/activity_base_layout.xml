@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/image0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="60dp"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="left|bottom"
+        >
+
+        <TextView
+            android:id="@+id/tv2"
+            style="@style/MyTextViewStyle"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            tools:text="some more test text"
+            />
+
+        <TextView
+            android:id="@+id/tv1"
+            style="@style/MyTextViewStyle"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            tools:text="some more test text"
+            />
+
+        <!-- Key Handlers -->
+        <TextView
+            style="@style/MyTextViewStyle"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Key Handlers"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_keyHandler1"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_keyHandler2"
+                android:orientation="vertical"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Incoming Extras -->
+        <TextView
+            style="@style/MyTextViewStyle"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Incoming Extras"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            >
+            <LinearLayout
+                android:id="@+id/ll_incomingExtra1"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_incomingExtra2"
+                android:orientation="vertical"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                >
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv0"
+            style="@style/MyTextViewStyleLarge"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            tools:text="Some test title text"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

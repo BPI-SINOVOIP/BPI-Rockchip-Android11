@@ -1,0 +1,92 @@
+on early-init
+    # boost cpu freq
+    chmod  0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor performance
+
+    # boost ddr freq
+    write /sys/devices/platform/dmc/devfreq/dmc/system_status p
+
+    # gpu devfreq
+    chown root system /sys/class/devfreq/ff300000.gpu/governor
+    chmod 0664 /sys/class/devfreq/ff300000.gpu/governor
+    chown root system /sys/class/devfreq/ff300000.gpu/available_frequencies
+    chmod 0664 /sys/class/devfreq/ff300000.gpu/available_frequencies
+    chown root system /sys/class/devfreq/ff300000.gpu/min_freq
+    chmod 0664 /sys/class/devfreq/ff300000.gpu/min_freq
+    chown root system /sys/class/devfreq/ff300000.gpu/max_freq
+    chmod 0664 /sys/class/devfreq/ff300000.gpu/max_freq
+
+on property:ro.boot.storagemedia=emmc
+   setprop ro.vendor.storagemedia emmc
+on property:ro.boot.storagemedia=nand
+   setprop ro.vendor.storagemedia nand
+on property:sys.boot_completed=1
+    # recover cpu freq
+    chmod  0644 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+
+    # recover ddr freq
+    write /sys/devices/platform/dmc/devfreq/dmc/system_status n
+
+    chown system system /sys/devices/platform/ff450000.syscon/ff450000.syscon:usb2-phy@100/otg_mode
+
+on init
+    write /proc/sys/vm/swappiness 100
+    write /sys/block/zram0/comp_algorithm lz4
+
+
+    chown system system /sys/class/devfreq/dmc/system_status
+    chmod 0660 /sys/class/devfreq/dmc/system_status
+
+    # update cpusets now that processors are up
+    write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0-3
+    write /dev/cpuset/system-background/cpus 0-3
+    # set default schedTune value for foreground/top-app (only affects EAS)
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost 10
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+
+on early-boot
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+
+on boot
+    #TODO chown system system /sys/class/thermal/thermal_zone0/policy
+    #TODO chown system system /sys/class/thermal/thermal_zone1/policy
+    #TODO chown system system /sys/class/thermal/thermal_zone2/policy
+
+    # update cpusets feature nodes for rk3328 box
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/top-app/cpus 0-3
+    chown root system /dev/cec0
+    chmod 0664 /dev/cec0
+    #TODO chown root system /sys/class/display/HDMI/color
+    #TODO chmod 0666 /sys/class/display/HDMI/color
+    #TODO chmod 0666 /sys/class/display/HDMI/mode
+    #TODO chown root system /sys/class/graphics/fb0/hdr_bt1886eotf
+    #TODO chmod 0664 /sys/class/graphics/fb0/hdr_bt1886eotf
+    #TODO chown root system /sys/class/graphics/fb0/hdr_st2084oetf
+    #TODO chmod 0664 /sys/class/graphics/fb0/hdr_st2084oetf
+    #TODO chown root system /sys/class/graphics/fb0/hdr2sdr_eetf_yn
+    #TODO chmod 0664 /sys/class/graphics/fb0/hdr2sdr_eetf_yn
+
+
+    # reduce schedul time to improve io performance
+    write /sys/kernel/debug/sched_features NO_ENERGY_AWARE
+
+    # baseparameter
+    chown system system /dev/block/mmcblk2p4
+    chmod 0660 /dev/block/mmcblk2p4
+    chown system system /dev/block/rknand_baseparameter
+    chmod 0660 /dev/block/rknand_baseparameter
+
+on init
+
+    chown mediacodec system /sys/class/devfreq/dmc/system_status
+    chmod 0660 /sys/class/devfreq/dmc/system_status

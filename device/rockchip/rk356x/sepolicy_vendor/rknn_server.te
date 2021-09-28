@@ -1,0 +1,19 @@
+type rknn_server, domain;
+type rknn_server_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(rknn_server)
+
+#allow rknn_server rknn_data_file:dir {write read create add_name };
+allow rknn_server rknn_data_file:file { write read };
+allow rknn_server socket_device:dir { write add_name remove_name create read };
+allow rknn_server socket_device:sock_file { write create read unlink setattr};
+allow rknn_server property_socket:sock_file { write read };
+allow rknn_server init:unix_stream_socket { connectto};
+allow rknn_server gpu_device:dir { getattr search write };
+allow rknn_server gpu_device:chr_file { open getattr read write ioctl map};
+dontaudit rknn_server self:capability { sys_admin dac_override };
+set_prop(rknn_server, vendor_rknn_prop);
+get_prop(rknn_server, vendor_rknn_prop);
+get_prop(vendor-rknn-hal vendor_rknn_prop)
+
+dontaudit rknn_server sysfs:file rw_file_perms;

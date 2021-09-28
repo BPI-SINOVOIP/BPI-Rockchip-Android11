@@ -1,0 +1,8 @@
+allow hal_tv_cec_default property_socket:sock_file { write };
+allow hal_tv_cec_default init:unix_stream_socket { connectto };
+allow hal_tv_cec_default sysfs:file rw_file_perms;
+allow hal_tv_cec_default sysfs_hdmi:file rw_file_perms;
+allow hal_tv_cec_default cec_device:chr_file rw_file_perms;
+get_prop(hal_tv_cec_default,vendor_default_prop)
+get_prop(hal_tv_cec_default,vendor_cec_prop)
+set_prop(hal_tv_cec_default,vendor_cec_prop)

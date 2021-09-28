@@ -1,0 +1,9 @@
+type weaver-hal-1-0, domain;
+hal_server_domain(weaver-hal-1-0, hal_weaver)
+
+type weaver-hal-1-0_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(weaver-hal-1-0)
+
+allow weaver-hal-1-0 tee_device:chr_file {read write ioctl open};
+
+get_prop(weaver-hal-1-0, test_harness_prop)

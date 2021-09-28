@@ -1,0 +1,14 @@
+allow update_engine metadata_file:dir search;
+allow update_engine uboot_block_device:blk_file rw_file_perms;
+allow update_engine vbmeta_block_device:blk_file rw_file_perms;
+
+allow update_engine proc_filesystems:file r_file_perms;
+# Add for update_engine call by system_app
+
+allow update_engine system_app:binder { call transfer };
+
+# Add for update_engine with postinstall
+allow update_engine postinstall_mnt_dir:dir { search getattr open read write search unlink};
+
+# Add for AVB20
+allow update_engine tmpfs:lnk_file read;

@@ -1,0 +1,26 @@
+allow mediaserver unlabeled:file { getattr read open };
+allow mediaserver sysfs_hdmi:file { open read getattr };
+allow mediaserver surfaceflinger:unix_stream_socket { read write };
+allow mediaserver storage_file:lnk_file { read };
+allow mediaserver tmpfs:lnk_file { read };
+allow mediaserver sysfs_dev:file { open read getattr write };
+allow mediaserver system_data_file:dir { read open write add_name create setattr remove_name rmdir };
+allow mediaserver system_data_file:file { read open };
+allow mediaserver mnt_media_rw_file:dir { search read open write add_name create setattr remove_name };
+allow mediaserver unlabeled:dir { read search open };
+allow mediaserver storage_file:dir { read search open };
+allow mediaserver mnt_user_file:dir { read search open };
+allow mediaserver mnt_user_file:lnk_file { read };
+allow mediaserver hal_configstore_default:binder { call };
+allow mediaserver vendor-rockit-hal_hwservice:hwservice_manager { find };
+allow mediaserver sysfs_dmc:dir r_dir_perms;
+allow mediaserver sysfs_dmc:file rw_file_perms;
+allow mediaserver system_app_data_file:file { read write getattr };
+
+rw_rockchip_graphic_device(mediaserver)
+get_prop(mediaserver,vendor_omx_prop)
+get_prop(mediaserver,vendor_default_prop)
+get_prop(mediaserver,public_vendor_default_prop)
+get_prop(mediaserver,vendor_system_public_prop)
+get_prop(mediaserver,ctl_start_prop)
+set_prop(mediaserver,ctl_start_prop)

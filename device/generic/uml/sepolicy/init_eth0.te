@@ -1,0 +1,10 @@
+type init_eth0, domain;
+type init_eth0_exec, system_file_type, exec_type, file_type;
+
+init_daemon_domain(init_eth0)
+
+allow init_eth0 self:capability { net_admin net_raw };
+allow init_eth0 self:udp_socket { create ioctl };
+allowxperm init_eth0 self:udp_socket ioctl priv_sock_ioctls;
+allow init_eth0 shell_exec:file { execute getattr read };
+allow init_eth0 toolbox_exec:file { execute execute_no_trans getattr open read };

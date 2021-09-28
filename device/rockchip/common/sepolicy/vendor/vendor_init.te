@@ -1,0 +1,37 @@
+allow vendor_init rootfs:dir r_dir_perms;
+allow vendor_init proc_uid_cpupower:file write;
+allow vendor_init debugfs:file write;
+allow vendor_init tmpfs:dir create;
+allow vendor_init vendor_file:system { module_load };
+# Allow vendor_init to write to /proc/sysrq-trigger on userdebug and eng builds
+userdebug_or_eng(`
+  allow vendor_init proc_sysrq:file w_file_perms;
+')
+allow vendor_init proc:file rw_file_perms;
+allow vendor_init self:capability { sys_module };
+allow vendor_init system_file:system { module_load };
+allow vendor_init block_device:lnk_file { relabelfrom relabelto };
+allow vendor_init boot_block_device:lnk_file { relabelfrom relabelto };
+allow vendor_init uboot_block_device:lnk_file { relabelfrom relabelto };
+allow vendor_init vbmeta_block_device:lnk_file { relabelfrom relabelto };
+allow vendor_init userdata_block_device:lnk_file { relabelto };
+allow vendor_init baseparameter_block_device:lnk_file { relabelto setattr };
+allow vendor_init baseparameter_block_device:blk_file { setattr write };
+allow vendor_init gpu_data_file:file { getattr };
+allow vendor_init e2fsck_oem_block_device:lnk_file { relabelto };
+allow vendor_init frp_block_device:lnk_file { relabelto };
+allow vendor_init metadata_block_device:lnk_file { relabelto };
+allow vendor_init recovery_block_device:lnk_file { relabelto };
+allow vendor_init misc_block_device:lnk_file { relabelto };
+allow vendor_init e2fsck_cache_block_device:lnk_file { relabelto };
+allow vendor_init security_block_device:lnk_file { relabelto };
+allow vendor_init device:lnk_file { create write};
+allow vendor_init tmpfs:dir { write add_name create };
+allow vendor_init debugfs_trace_marker:file { getattr };
+allow vendor_init sysfs_dmc:lnk_file { setattr };
+
+set_prop(vendor_init, vendor_system_public_prop)
+set_prop(vendor_init, vendor_boot_complete_prop)
+get_prop(vendor_init, public_vendor_default_prop)
+get_prop(vendor_init, vendor_system_public_prop)
+get_prop(vendor_init, vendor_drm_prop)
