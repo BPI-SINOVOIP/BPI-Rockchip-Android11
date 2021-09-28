@@ -1,0 +1,224 @@
+cc_test_library {
+    name: "libnetd_test_resolv_utils",
+    defaults: ["netd_defaults", "resolv_test_defaults"],
+    srcs: [
+        "resolv_test_utils.cpp",
+    ],
+    header_libs: [
+        "libnetd_resolv_headers",
+    ],
+    shared_libs: [
+        "libutils",
+    ],
+    static_libs: [
+        "netd_aidl_interface-ndk_platform",
+        "libnetd_test_dnsresponder_ndk",
+        "libnetdutils",
+        "libgmock",
+    ],
+}
+
+cc_library_host_static {
+    name: "golddata_proto_host",
+    proto: {
+        export_proto_headers: true,
+        type: "full",
+    },
+    srcs: [
+        "golddata.proto",
+    ],
+}
+
+cc_binary_host {
+    name: "resolv_gold_test_pbtxt2pb_host",
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    srcs: ["pbtxt2pb_converter_host.cpp"],
+    static_libs: [
+        "golddata_proto_host",
+        "libc++fs",
+        "libprotobuf-cpp-full",
+    ],
+}
+
+genrule {
+    name: "resolv_gold_test_pbtxt2pb",
+    tools: [
+        "resolv_gold_test_pbtxt2pb_host",
+        "soong_zip",
+    ],
+    srcs: ["testdata/*.pbtxt"],
+    // convert .pbtxt to .pb files; zip them as a single pb.zip.
+    cmd: "mkdir $(genDir)/pb && for fname in $(in); " +
+         "do $(location resolv_gold_test_pbtxt2pb_host) --in_file=$$fname " +
+         "--out_dir=$(genDir)/pb; done && " +
+         "$(location soong_zip) -o $(out) -C $(genDir)/pb -D $(genDir)/pb",
+    out: ["testdata/pb.zip"],
+}
+
+cc_library_static {
+    name: "golddata_proto",
+    defaults: ["netd_defaults"],
+    proto: {
+        export_proto_headers: true,
+        type: "lite",
+    },
+    srcs: [
+        "golddata.proto",
+    ],
+    tidy: false,
+}
+
+cc_test {
+    name: "resolv_gold_test",
+    test_suites: ["general-tests", "mts"],
+    require_root: true,
+    // b/151392634, this is a workaround because MTS
+    // can not handle the test with testdata correctly.
+    // TODO: Remove the xml after MTS fixing the problem.
+    test_config: "resolv_gold_test_config.xml",
+    defaults: ["netd_defaults", "resolv_test_defaults"],
+    data: [":resolv_gold_test_pbtxt2pb"],
+    srcs: [
+        "resolv_gold_test.cpp",
+    ],
+    header_libs: [
+        "libnetd_client_headers",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "libbinder_ndk",
+        "libssl",
+    ],
+    static_libs: [
+        "dnsresolver_aidl_interface-unstable-ndk_platform",
+        "golddata_proto",
+        "libgmock",
+        "libnetd_resolv",
+        "libnetd_test_dnsresponder_ndk",
+        "libnetd_test_resolv_utils",
+        "libnetdutils",
+        "libprotobuf-cpp-lite",
+        "netd_aidl_interface-ndk_platform",
+        "netd_event_listener_interface-ndk_platform",
+        "server_configurable_flags",
+        "stats_proto",
+    ],
+    // MTS test binary can't be built under compile_multilib = "both" and having test data.
+    // However, MTS coverage requires 32 bit test binary to run.
+    compile_multilib: "32",
+}
+
+cc_test {
+    name: "resolv_stress_test",
+    test_suites: ["general-tests", "mts"],
+    // This won't work with test_config
+    // require_root: true,
+    // TODO: Remove resolv_test_mts_coverage_defaults after mts coverage switched to 64-bit device.
+    defaults: ["netd_defaults", "resolv_test_defaults", "resolv_test_mts_coverage_defaults"],
+    srcs: [
+        "resolv_stress_test.cpp",
+    ],
+    header_libs: [
+        "libnetd_resolv_headers",
+    ],
+    shared_libs: [
+        "libbinder_ndk",
+        "libnetd_client",
+    ],
+    static_libs: [
+        "dnsresolver_aidl_interface-ndk_platform",
+        "libgmock",
+        "libnetd_test_dnsresponder_ndk",
+        "libnetd_test_resolv_utils",
+        "libnetdutils",
+        "libutils",
+        "netd_event_listener_interface-ndk_platform",
+        "netd_aidl_interface-ndk_platform",
+    ],
+}
+
+cc_test {
+    name: "resolv_integration_test",
+    test_suites: ["general-tests", "mts"],
+    require_root: true,
+    test_config_template: ":resolv_test_config_template",
+    defaults: ["netd_defaults", "resolv_test_defaults"],
+    tidy: false, // cuts test build time by > 1m30s
+    srcs: [
+        "dns_responder/dns_responder.cpp",
+        "dnsresolver_binder_test.cpp",
+        "resolv_integration_test.cpp",
+    ],
+    header_libs: [
+        "dnsproxyd_protocol_headers",
+        "libnetd_resolv_headers",
+    ],
+    // TODO: make static link libc++ work.
+    //stl: "libc++_static",
+    shared_libs: [
+        "libbinder_ndk",
+        "libnetd_client",
+    ],
+    static_libs: [
+        "dnsresolver_aidl_interface-unstable-ndk_platform",
+        "libbpf_android",
+        "libcrypto_static",
+        "libgmock",
+        "libnetd_test_dnsresponder_ndk",
+        "libnetd_test_metrics_listener",
+        "libnetd_test_resolv_utils",
+        "libnetd_test_tun_interface",
+        "libnetd_test_utils",
+        "libnetdutils",
+        "libssl",
+        "libutils",
+        "netd_aidl_interface-ndk_platform",
+        "netd_event_listener_interface-ndk_platform",
+    ],
+    // This test talks to the DnsResolver module over a binary protocol on a socket, so keep it as
+    // multilib setting is worth because we might be able to get some coverage for the case where
+    // 32bit apps talk to 64bit resolvers.
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+}
+
+cc_test_library {
+    name: "resolv_stats_test_utils",
+    srcs: [
+        "resolv_stats_test_utils.cpp"
+    ],
+    defaults: ["netd_defaults", "resolv_test_defaults"],
+    export_include_dirs: ["."],
+    static_libs: [
+        "libgmock",
+        "libnetdutils",
+        "libprotobuf-cpp-lite",
+        "stats_proto",
+    ],
+}
+
+cc_test {
+    name: "resolv_stats_test_utils_test",
+    srcs: [
+        "resolv_stats_test_utils_test.cpp",
+    ],
+    defaults: ["netd_defaults", "resolv_test_defaults"],
+    test_suites: ["general-tests"],
+    test_mainline_modules: ["CaptivePortalLoginGoogle.apk+NetworkStackGoogle.apk+com.google.android.resolv.apex+com.google.android.tethering.apex"],
+    static_libs: [
+        "libgmock",
+        "libprotobuf-cpp-lite",
+        "resolv_stats_test_utils",
+        "stats_proto",
+    ],
+}

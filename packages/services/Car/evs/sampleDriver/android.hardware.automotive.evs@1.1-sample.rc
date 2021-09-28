@@ -1,0 +1,7 @@
+service evs_sample_driver /vendor/bin/android.hardware.automotive.evs@1.1-sample
+    class hal
+    priority -20
+    user graphics
+    group automotive_evs camera
+    onrestart restart evs_manager
+    disabled # will not automatically start with its class; must be explictly started.

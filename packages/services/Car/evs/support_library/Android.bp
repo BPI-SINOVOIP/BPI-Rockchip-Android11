@@ -1,0 +1,76 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//
+
+//#################################
+cc_library_shared {
+    name: "libevssupport",
+
+    srcs: [
+        "RenderBase.cpp",
+        "RenderDirectView.cpp",
+        "ConfigManager.cpp",
+        "glError.cpp",
+        "shader.cpp",
+        "TexWrapper.cpp",
+        "VideoTex.cpp",
+        "StreamHandler.cpp",
+        "ResourceManager.cpp",
+        "FormatConvert.cpp",
+        "DisplayUseCase.cpp",
+        "AnalyzeUseCase.cpp",
+        "Utils.cpp",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "liblog",
+        "libutils",
+        "libui",
+        "libhidlbase",
+        "libEGL",
+        "libGLESv2",
+        "libhardware",
+        "libpng",
+        "android.hardware.automotive.evs@1.0",
+    ],
+
+    static_libs: [
+        "libmath",
+        "libjsoncpp",
+    ],
+
+    required: [
+        "camera_config.json",
+    ],
+
+    cflags: ["-DLOG_TAG=\"libevssupport\""] + [
+        "-DGL_GLEXT_PROTOTYPES",
+        "-DEGL_EGLEXT_PROTOTYPES",
+    ] + [
+        "-Wall",
+        "-Werror",
+        "-Wunused",
+        "-Wunreachable-code",
+    ],
+}
+
+prebuilt_etc {
+    name: "camera_config.json",
+
+    src: "config.json",
+    sub_dir: "automotive/evs_support_lib",
+}
+

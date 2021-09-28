@@ -1,0 +1,40 @@
+# This library should only export C linkage definitions.
+#
+# VERSION string that follows is derived from <library_name>_<version>.
+LIBNATIVEHELPER_1 {
+  global:
+    JNI_GetDefaultJavaVMInitArgs;
+    JNI_CreateJavaVM;
+    JNI_GetCreatedJavaVMs;
+
+    jniRegisterNativeMethods;
+    jniThrowException;
+    jniThrowExceptionFmt;
+    jniThrowNullPointerException;
+    jniThrowRuntimeException;
+    jniThrowIOException;
+    jniStrError;
+    jniCreateFileDescriptor;
+    jniGetFDFromFileDescriptor;
+    jniSetFileDescriptorOfFD;
+    jniGetOwnerIdFromFileDescriptor;
+    jniGetNioBufferBaseArray;
+    jniGetNioBufferBaseArrayOffset;
+    jniGetNioBufferPointer;
+    jniGetNioBufferFields;
+    jniGetReferent;
+    jniCreateString;
+    jniLogException;
+    jniUninitializeConstants;
+
+    JniInvocationCreate;
+    JniInvocationDestroy;
+    JniInvocationInit;
+    JniInvocationGetLibrary;
+
+    newStringArray;
+    toStringArray;
+
+  local:
+    *;
+};

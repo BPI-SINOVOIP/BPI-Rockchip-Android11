@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:elevation="0dp"
+        android:duplicateParentState="true"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="?android:strokeColor">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:animateLayoutChanges="true"
+                android:id="@+id/message_container"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:minHeight="60dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:contentDescription="@null"
+                    android:id="@+id/message_icon"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"/>
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:minHeight="48dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/message_title"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textSize="16sp"
+                        android:textAppearance="@style/DrawerMenuPrimary"/>
+
+                    <TextView
+                        android:id="@+id/message_subtitle"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:selectAllOnFocus="true"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/message_textview"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:selectAllOnFocus="true"/>
+
+                    <Button
+                        android:id="@+id/dismiss_button"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@android:string/ok"
+                        style="@style/DialogTextButton"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/action_view"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?android:strokeColor"/>
+
+                <Button
+                    android:id="@+id/action_button"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_gravity="start"
+                    style="@style/DialogTextButton"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

@@ -1,0 +1,14 @@
+# evs manager
+hal_server_domain(evs_manager, hal_evs)
+hal_client_domain(evs_manager, hal_evs)
+
+# allow init to launch processes in this context
+type evs_manager_exec, exec_type, file_type, system_file_type;
+init_daemon_domain(evs_manager)
+
+# allow write messages to the shell
+allow evs_manager shell:fd use;
+allow evs_manager shell:fifo_file write;
+
+# allow evs_manager to send information to statsd socket
+unix_socket_send(evs_manager, statsdw, statsd)

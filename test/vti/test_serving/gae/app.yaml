@@ -1,0 +1,57 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+# [START env_vars]
+env_variables:
+  ENDPOINTS_SERVICE_NAME: vtslab-schedule-prod.appspot.com
+  ENDPOINTS_SERVICE_VERSION: 2018-09-03r0
+  SESSION_SECRET_KEY: ''
+# [END env_vars]
+
+# [START builtins]
+builtins:
+# [END builtins]
+
+# [START handlers]
+handlers:
+# The endpoints handler must be mapped to /_ah/api.
+- url: /_ah/api/.*
+  script: webapp.src.endpoint_main.api
+
+- url: /(.*\.(html|js|css|txt|ico))
+  static_files: webapp/static/\1
+  upload: webapp/static/(.*\.(html|js|css|txt|ico))
+
+- url: /((build|device|job|lab|schedule)([?&/].*)?)?
+  static_files: webapp/static/index.html
+  upload: webapp/static/index.html
+
+- url: /.*
+  script: webapp.src.webapp_main.app
+# [END handlers]
+
+# [START libraries]
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+- name: pycrypto
+  version: 2.6
+- name: ssl
+  version: 2.7.11
+# [END libraries]
+
+# [START exclude]
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+- ^script/*$
+- testrunner.py
+- .*_test.py$
+- ^(.*/)?frontend/(.*)
+# [END exclude]

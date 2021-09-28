@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (C) 2021 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.car.activityresolver">
+
+    <!-- Required to rank activities. -->
+    <uses-permission android:name="android.permission.BIND_RESOLVER_RANKER_SERVICE" />
+
+    <!-- Required for ActivityManager.getCurrentUser(). -->
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+
+    <!-- Required for UserManager.getProfiles() and getUserInfo(). -->
+    <uses-permission android:name="android.permission.MANAGE_USERS" />
+
+    <!-- To delete last chosen activity when another activity is chosen. -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <!-- To change the preferred activity. -->
+    <uses-permission android:name="android.permission.SET_PREFERRED_APPLICATIONS" />
+
+    <application android:label="@string/app_name">
+
+        <activity
+            android:name=".CarResolverActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:noHistory="true">
+        </activity>
+
+    </application>
+</manifest>

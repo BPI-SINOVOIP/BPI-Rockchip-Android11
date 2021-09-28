@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.server.networkstack.integrationtests"
+          android:sharedUserId="android.uid.networkstack">
+    <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="29" />
+
+    <!-- Note: do not add any privileged or signature permissions that are granted
+         to the network stack app. Otherwise, the test APK will install, but when the device is
+         rebooted, it will bootloop with something like:
+
+         05-14 00:41:02.723 18330 18330 E AndroidRuntime: java.lang.IllegalStateException: Signature|privileged permissions not in privapp-permissions whitelist: {com.android.server.networkstack.integrationtests: android.permission.CONNECTIVITY_INTERNAL}
+    -->
+
+    <application android:debuggable="true">
+        <uses-library android:name="android.test.runner" />
+    </application>
+    <instrumentation android:name="androidx.test.runner.AndroidJUnitRunner"
+        android:targetPackage="com.android.server.networkstack.integrationtests"
+        android:label="Networking stack integration tests">
+    </instrumentation>
+</manifest>

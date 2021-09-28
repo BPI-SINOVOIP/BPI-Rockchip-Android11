@@ -1,0 +1,7 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            "application.version": project.property("application.version")
+    ]
+}

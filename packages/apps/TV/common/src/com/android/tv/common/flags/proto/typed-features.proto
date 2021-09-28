@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package android.tv.common.flags;
+
+option java_outer_classname = "TypedFeatures";
+option java_package = "com.android.tv.common.flags.proto";
+
+// These messages are to specify feature params that are a list of integers.
+message Int32ListParam {
+  repeated int32 element = 1;
+}
+
+message Int64ListParam {
+  repeated int64 element = 1;
+}
+
+// This message is to specify feature params that are a list of strings.
+message StringListParam {
+  repeated string element = 1;
+}

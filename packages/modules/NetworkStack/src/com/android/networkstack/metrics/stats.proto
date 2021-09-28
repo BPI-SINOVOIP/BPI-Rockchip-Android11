@@ -1,0 +1,174 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto2";
+option java_multiple_files = true;
+
+package com.android.networkstack.metrics;
+
+import "frameworks/base/core/proto/android/stats/connectivity/network_stack.proto";
+
+message CapportApiData {
+    // The TTL of the network connection provided by captive portal
+    optional int32 remaining_ttl_secs = 1;
+
+    // The limit traffic data of the network connection provided by captive portal
+    optional int32 remaining_bytes = 2;
+
+    // Is portal url option included in the DHCP packet (Yes, No)
+    optional bool has_portal_url = 3;
+
+    // Is venue info (e.g. store info, maps, flight status) included (Yes, No)
+    optional bool has_venue_info = 4;
+}
+
+message ProbeEvent {
+    // The probe type (http or https, or captive portal API...)
+    optional .android.stats.connectivity.ProbeType probe_type = 1;
+
+    // The latency in microseconds of the probe event
+    optional int32 latency_micros = 2;
+
+    // The result of the probe event
+    optional .android.stats.connectivity.ProbeResult probe_result = 3;
+
+    // The CaptivePortal API info
+    optional CapportApiData capport_api_data = 4;
+}
+
+message ProbeEvents {
+    // Record probe event during the validation
+    repeated ProbeEvent probe_event = 1;
+}
+
+/**
+ * The DHCP (Dynamic Host Configuration Protocol) session info
+ * Logged from:
+ * src/android/net/dhcp/DhcpClient.java
+ */
+message DhcpSession {
+    // The DHCP Feature(s) enabled in this session
+    repeated .android.stats.connectivity.DhcpFeature used_features = 1;
+
+    // The discover packet (re)transmit count
+    optional int32 discover_count = 2;
+
+    // The request packet (re)transmit count
+    optional int32 request_count = 3;
+
+    // The IPv4 address conflict count
+    // (only be meaningful when duplicate address detection is enabled)
+    optional int32 conflict_count = 4;
+
+    // The DHCP packet parsing error code in this session
+    // (defined in android.net.metrics.DhcpErrorEvent)
+    repeated .android.stats.connectivity.DhcpErrorCode error_code = 5;
+
+    // The result of DHCP hostname transliteration
+    optional .android.stats.connectivity.HostnameTransResult ht_result = 6;
+}
+
+/**
+ * Logs Network IP provisioning event
+ * Logged from:
+ * src/com/android/networkstack/metrics/NetworkIpProvisioningMetrics.java
+ */
+message NetworkIpProvisioningReported {
+    // Transport type (WIFI, CELLULAR, BLUETOOTH, ..)
+    optional .android.stats.connectivity.TransportType transport_type = 1;
+
+    // The latency in microseconds of IP Provisioning over IPV4
+    optional int32 ipv4_latency_micros = 2;
+
+    // The latency in microseconds of IP Provisioning over IPV6
+    optional int32 ipv6_latency_micros = 3;
+
+    // The time duration between provisioning start and end (success or failure)
+    optional int64 provisioning_duration_micros = 4;
+
+    // The specific disconnect reason for this IP provisioning
+    optional .android.stats.connectivity.DisconnectCode disconnect_code = 5;
+
+    // Log DHCP session info (Only valid for IPv4)
+    optional DhcpSession dhcp_session = 6;
+
+    // The random number between 0 ~ 999 for sampling
+    optional int32 random_number = 7;
+}
+
+/**
+ * Logs Network DHCP Renew event
+ * Logged from:
+ * src/android/net/dhcp/DhcpClient.java
+ */
+message NetworkDhcpRenewReported {
+    // Transport type (WIFI, CELLULAR, BLUETOOTH, ..)
+    optional .android.stats.connectivity.TransportType transport_type = 1;
+
+    // The request packet (re)transmit count
+    optional int32 request_count = 2;
+
+    // The latency in microseconds of DHCP Renew
+    optional int32 latency_micros = 3;
+
+    // The DHCP error code is defined in android.net.metrics.DhcpErrorEvent
+    optional .android.stats.connectivity.DhcpErrorCode error_code = 4;
+
+    // The result of DHCP renew
+    optional .android.stats.connectivity.DhcpRenewResult renew_result = 5;
+
+    // The random number between 0 ~ 999 for sampling
+    optional int32 random_number = 6;
+}
+
+/**
+ * Logs Network Validation event
+ * Logged from:
+ * src/com/android/server/connectivity/NetworkMonitor.java
+ */
+message NetworkValidationReported {
+    // Transport type (WIFI, CELLULAR, BLUETOOTH, ..)
+    optional .android.stats.connectivity.TransportType transport_type = 1;
+
+    // Record each probe event
+    optional ProbeEvents probe_events = 2;
+
+    // The result of the network validation
+    optional .android.stats.connectivity.ValidationResult validation_result = 3;
+
+    // The latency in microseconds of network validation
+    optional int32 latency_micros = 4;
+
+    // The validation index (the first validation attempt or second, third...)
+    optional int32 validation_index = 5;
+
+    // The random number between 0 ~ 999 for sampling
+    optional int32 random_number = 6;
+}
+
+/**
+ * Logs NetworkStack Quirk event
+ * Logged from:
+ * src/com/android/networkstack/
+ * This will be defined as count metrics on server side
+ */
+message NetworkStackQuirkReported {
+    // Transport type (WIFI, CELLULAR, BLUETOOTH, ..)
+    optional .android.stats.connectivity.TransportType transport_type = 1;
+
+    // Record each Quirk event
+    optional .android.stats.connectivity.NetworkQuirkEvent event = 2;
+}

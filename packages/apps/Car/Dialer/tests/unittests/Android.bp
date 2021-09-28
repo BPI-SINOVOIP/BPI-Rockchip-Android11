@@ -1,0 +1,16 @@
+//############################################################
+// Car Dialer unit test target.                              #
+//############################################################
+android_test {
+    name: "CarDialerUnitTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    static_libs: [
+        "androidx.test.ext.junit",
+    ],
+
+    instrumentation_for: "CarDialerAppForTesting",
+}

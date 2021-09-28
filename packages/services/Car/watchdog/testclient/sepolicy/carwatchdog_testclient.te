@@ -1,0 +1,8 @@
+# Car watchdog client
+type carwatchdog_testclient, domain;
+type carwatchdog_testclient_exec, exec_type, file_type, vendor_file_type;
+
+carwatchdog_client_domain(carwatchdog_testclient)
+
+init_daemon_domain(carwatchdog_testclient)
+binder_use(carwatchdog_testclient)

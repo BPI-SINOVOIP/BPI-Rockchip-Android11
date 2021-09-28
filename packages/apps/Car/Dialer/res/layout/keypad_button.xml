@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_width="@dimen/keypad_minimum_size"
+    android:layout_height="@dimen/keypad_minimum_size"
+    android:stateListAnimator="@xml/keypad_button_state_animation"
+    android:duplicateParentState="true">
+
+    <TextView
+        android:id="@+id/keypad_number"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        style="@style/KeypadNumber"/>
+
+    <TextView
+        android:id="@+id/keypad_letters"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:visibility="gone"
+        style="@style/KeypadLetter"/>
+
+    <ImageView
+        android:id="@+id/keypad_image"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        style="@style/KeypadImage"/>
+</LinearLayout>

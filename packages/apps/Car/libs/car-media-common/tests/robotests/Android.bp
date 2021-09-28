@@ -1,0 +1,37 @@
+
+
+//###########################################################
+// CarMediaCommon app just for Robolectric test target.     #
+//###########################################################
+android_app {
+    name: "CarMediaCommon",
+
+    platform_apis: true,
+
+    privileged: true,
+
+    static_libs: [
+        "car-arch-common",
+        "car-media-common",
+    ],
+}
+
+//###############################################
+// Car Media Common Robolectric test target. #
+//###############################################
+android_robolectric_test {
+    name: "CarMediaCommonRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    // Include the testing libraries
+    libs: [
+        "android.car",
+        "androidx.arch.core_core-runtime",
+        "androidx.arch.core_core-common",
+    ],
+
+    instrumentation_for: "CarMediaCommon",
+}

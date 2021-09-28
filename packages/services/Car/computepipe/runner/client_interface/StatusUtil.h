@@ -1,0 +1,36 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef COMPUTEPIPE_RUNNER_CLIENT_INTERFACE_STATUSUTIL_H_
+#define COMPUTEPIPE_RUNNER_CLIENT_INTERFACE_STATUSUTIL_H_
+#include <android/binder_auto_utils.h>
+
+#include "types/Status.h"
+
+namespace android {
+namespace automotive {
+namespace computepipe {
+namespace runner {
+namespace client_interface {
+namespace aidl_client {
+
+ndk::ScopedAStatus ToNdkStatus(Status status);
+
+}  // namespace aidl_client
+}  // namespace client_interface
+}  // namespace runner
+}  // namespace computepipe
+}  // namespace automotive
+}  // namespace android
+#endif  // COMPUTEPIPE_RUNNER_CLIENT_INTERFACE_STATUSUTIL_H_

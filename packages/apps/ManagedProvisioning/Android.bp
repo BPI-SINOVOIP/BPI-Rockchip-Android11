@@ -1,0 +1,41 @@
+java_library {
+    name: "managedprovisioning_protoslite",
+    srcs: ["proto/**/*.proto"],
+    proto: {
+        type: "lite",
+    },
+}
+
+android_app {
+    name: "ManagedProvisioning",
+
+    libs: ["android.car"],
+
+    static_libs: [
+        "androidx.legacy_legacy-support-v4",
+        "car-ui-lib",
+        "setupcompat",
+        "setupdesign",
+        "devicepolicyprotosnano",
+        "managedprovisioning_protoslite",
+    ],
+
+    srcs: [
+        "src/**/*.java",
+        "src/**/I*.aidl",
+    ],
+
+    resource_dirs: ["res"],
+
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+
+    // Packages to be included in code coverage runs. This does not affect production builds.
+    jacoco: {
+        include_filter: ["com.android.managedprovisioning.*"],
+    },
+}

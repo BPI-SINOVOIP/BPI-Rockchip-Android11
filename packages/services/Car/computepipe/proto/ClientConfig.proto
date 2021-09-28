@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+import "packages/services/Car/computepipe/proto/ProfilingType.proto";
+
+message ClientConfig {
+  optional int32 input_config_id = 1;
+  optional int32 offload_id = 2;
+  map<int32, int32> output_options = 3;
+  optional int32 termination_id = 4;
+  optional ProfilingType profiling_type = 5;
+}

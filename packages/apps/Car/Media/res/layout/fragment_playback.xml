@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2018, The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/playback_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/ui_guides"/>
+
+    <Space
+        android:id="@+id/control_bar_first_row_guideline"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/control_bar_height"
+        android:layout_marginBottom="@dimen/control_bar_margin_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.android.car.apps.common.BackgroundImageView
+        android:id="@+id/playback_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <include
+        layout="@layout/scrim_overlay"
+        android:id="@+id/background_scrim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <include
+        style="@style/MetadataContainerStyle"
+        android:id="@+id/metadata_container"
+        layout="@layout/metadata_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ui_content_top_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/control_bar_first_row_guideline"/>
+
+    <!-- @id/seek_bar should be hidden when @id/control_bar_scrim is expanded, and shown when the
+    scrim is collapsed. Since its visibility is also controlled by MetadataController, it could
+    become visible again even if the scrim is still expanded. To solve that we add a wrapper around
+    it and hide/show the wrapper when the scrim is expanded/collapsed.-->
+    <com.android.car.ui.FocusArea
+        style="@style/SeekBarStyle"
+        android:id="@+id/seek_bar_container"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/playback_seekbar_margin_x"
+        android:layout_marginEnd="@dimen/playback_seekbar_margin_x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/metadata_container"
+        app:layout_constraintBottom_toTopOf="@+id/control_bar_first_row_guideline">
+        <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:paddingEnd="@dimen/playback_seekbar_padding_x"
+            android:paddingStart="@dimen/playback_seekbar_padding_x"
+            android:progressDrawable="@drawable/seekbar_progress"
+            android:thumb="@drawable/seekbar_thumb"
+            android:thumbOffset="@dimen/playback_seekbar_thumb_offset"
+            android:splitTrack="false"
+            android:progressTint="@color/progress_bar_highlight"
+            android:progressBackgroundTint="@color/progress_bar_background"
+            android:foreground="@drawable/seekbar_foreground"/>
+    </com.android.car.ui.FocusArea>
+
+    <Space
+        android:id="@+id/queue_list_top_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_playback_queue_overlap_top"
+        app:layout_constraintBottom_toBottomOf="@+id/ui_content_top_guideline"/>
+
+    <Space
+        android:id="@+id/queue_list_bottom_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fragment_playback_queue_overlap_bottom"
+        app:layout_constraintTop_toTopOf="@+id/control_bar_first_row_guideline"/>
+
+    <com.android.car.ui.FocusArea
+        android:id="@+id/queue_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/queue_list_top_constraint"
+        app:layout_constraintBottom_toBottomOf="@+id/queue_list_bottom_constraint">
+        <com.android.car.ui.recyclerview.CarUiRecyclerView
+            android:id="@+id/queue_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:fadeScrollbars="true"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="@dimen/queue_fading_edge_length"/>
+    </com.android.car.ui.FocusArea>
+
+    <include
+        layout="@layout/scrim_overlay"
+        android:id="@+id/control_bar_scrim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.android.car.ui.FocusArea
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/control_bar_margin_x"
+        android:layout_marginBottom="@dimen/control_bar_margin_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.android.car.media.common.PlaybackControlsActionBar
+            android:id="@+id/playback_controls"
+            style="@style/ControlBar"
+            app:columns="5"
+            app:enableOverflow="true"/>
+    </com.android.car.ui.FocusArea>
+</androidx.constraintlayout.widget.ConstraintLayout>

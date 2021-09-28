@@ -1,0 +1,144 @@
+// Copyright 2020 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+cc_library_static {
+    name: "libcomputepipeprotosfuzz",
+    proto: {
+        export_proto_headers: true,
+    },
+    shared_libs: ["libprotobuf-cpp-full"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+    srcs: [
+        "Fuzz.proto",
+    ],
+}
+
+cc_defaults {
+    name: "libcomputepipefuzz-defaults",
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+    static_libs: [
+        "computepipe_runner_component",
+        "computepipe_stream_manager",
+        "libcomputepipeprotos",
+        "libgtest",
+        "libgmock",
+        "mock_stream_engine_interface",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libnativewindow",
+        "libprotobuf-cpp-lite",
+    ],
+    header_libs: [
+        "computepipe_runner_includes",
+        "graph_test_headers",
+    ],
+    include_dirs: [
+        "packages/services/Car/computepipe",
+        "packages/services/Car/computepipe/runner/stream_manager",
+    ],
+}
+
+cc_fuzz {
+    name: "computepipe_semantic_manager_fuzzer",
+    defaults: ["libcomputepipefuzz-defaults"],
+    srcs: [
+        "SemanticManagerFuzzer.cpp",
+    ],
+}
+
+cc_fuzz {
+    name: "computepipe_pixel_mem_handle_fuzzer",
+    defaults: ["libcomputepipefuzz-defaults"],
+    srcs: [
+        "PixelMemHandleFuzzer.cpp",
+    ],
+    shared_libs: [
+         "libprotobuf-cpp-full",
+    ],
+    static_libs: [
+        "libcomputepipeprotosfuzz",
+        "libprotobuf-mutator",
+    ],
+}
+
+cc_fuzz {
+    name: "computepipe_pixel_stream_manager_fuzzer",
+    defaults: ["libcomputepipefuzz-defaults"],
+    srcs: [
+        "PixelStreamManagerFuzzer.cpp",
+    ],
+    shared_libs: [
+         "libprotobuf-cpp-full",
+    ],
+    static_libs: [
+        "libcomputepipeprotosfuzz",
+        "libprotobuf-mutator",
+    ],
+}
+
+cc_fuzz {
+    name: "local_prebuild_graph_fuzzer",
+    defaults: ["libcomputepipefuzz-defaults"],
+    cppflags:[
+        "-fexceptions",
+    ],
+    static_libs: [
+        "computepipe_prebuilt_graph",
+    ],
+    shared_libs: [
+        "libstubgraphimpl",
+    ],
+    include_dirs: [
+        "packages/services/Car/computepipe",
+        "packages/services/Car/computepipe/runner/graph",
+    ],
+    srcs: [
+        "LocalPrebuildGraphFuzzer.cpp",
+    ],
+}
+
+cc_fuzz {
+    name: "grpc_graph_fuzzer",
+    defaults: ["libcomputepipefuzz-defaults"],
+    cppflags:[
+        "-fexceptions",
+    ],
+    static_libs: [
+        "computepipe_grpc_graph_proto",
+    ],
+    shared_libs: [
+        "computepipe_grpc_graph",
+        "libcomputepipeprotos",
+        "libgrpc++",
+        "libprotobuf-cpp-full",
+    ],
+    include_dirs: [
+        "packages/services/Car/computepipe",
+        "packages/services/Car/computepipe/runner/graph",
+    ],
+    srcs: [
+        "GrpcGraphFuzzer.cpp",
+    ],
+}

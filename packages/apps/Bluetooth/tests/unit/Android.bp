@@ -1,0 +1,37 @@
+android_test {
+    name: "BluetoothInstrumentationTests",
+
+    // We only want this apk build for tests.
+    certificate: "platform",
+
+    libs: [
+        "javax.obex",
+        "android.test.runner",
+        "telephony-common",
+        "libprotobuf-java-micro",
+        "android.test.base",
+        "android.test.mock",
+    ],
+
+    static_libs: [
+        "androidx.test.rules",
+        "mockito-target",
+        "androidx.test.espresso.intents",
+        "gson-prebuilt-jar",
+        "androidx.room_room-migration",
+        "androidx.room_room-runtime",
+        "androidx.room_room-testing",
+    ],
+
+    asset_dirs: ["src/com/android/bluetooth/btservice/storage/schemas"],
+
+    // Include all test java files.
+    srcs: ["src/**/*.java"],
+
+    platform_apis: true,
+
+    test_suites: ["device-tests"],
+
+    instrumentation_for: "Bluetooth",
+
+}

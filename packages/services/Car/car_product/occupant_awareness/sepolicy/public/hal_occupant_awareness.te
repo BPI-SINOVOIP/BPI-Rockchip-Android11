@@ -1,0 +1,8 @@
+# HwBinder IPC from client to server, and callbacks
+binder_call(hal_occupant_awareness_client, hal_occupant_awareness_server)
+binder_call(hal_occupant_awareness_server, hal_occupant_awareness_client)
+add_service(hal_occupant_awareness_server, hal_occupant_awareness_service)
+
+binder_use(hal_occupant_awareness_server)
+
+allow hal_occupant_awareness_client hal_occupant_awareness_service:service_manager find;

@@ -1,0 +1,102 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+enum RemoteGraphStatusCode {
+    SUCCESS = 0;
+    INTERNAL_ERROR = 1;
+    INVALID_ARGUMENT = 2;
+    ILLEGAL_STATE = 3;
+    NO_MEMORY = 4;
+    FATAL_ERROR = 5;
+}
+
+message StatusResponse {
+    optional RemoteGraphStatusCode code = 1;
+    optional string message = 2;
+}
+
+message GraphOptionsRequest {}
+
+message GraphOptionsResponse {
+    optional string serialized_options = 1;
+}
+
+message SetGraphConfigRequest {
+    optional string serialized_config = 1;
+}
+
+message OutputStreamMetadata {
+    optional int32 stream_id = 1;
+}
+
+message ObserveOutputStreamRequest {
+    optional int32 stream_id = 1;
+}
+
+enum PixelFormat {
+    RGB = 0;
+    RGBA = 1;
+    GRAY = 2;
+}
+
+message PixelData {
+    optional int32 width = 1;
+    optional int32 height = 2;
+    optional int32 step = 3;
+    optional PixelFormat format = 4;
+    optional bytes data = 5;
+}
+
+message OutputStreamResponse {
+    oneof data {
+        string semantic_data = 1;
+        PixelData pixel_data = 2;
+    }
+    optional int32 stream_id = 3;
+    optional int64 timestamp_us = 4;
+}
+
+message SetDebugRequest {
+    optional bool enabled = 1;
+}
+
+message ProfilingDataRequest {}
+
+message ProfilingDataResponse {
+    optional string data = 1;
+}
+
+message StartGraphExecutionRequest {}
+
+message StopGraphExecutionRequest {
+    optional bool stop_immediate = 1;
+}
+
+message StartGraphProfilingRequest {}
+
+message StopGraphProfilingRequest {}
+
+message ResetGraphRequest {}
+
+service GrpcGraphService {
+    rpc GetGraphOptions(GraphOptionsRequest) returns (GraphOptionsResponse) {}
+
+    rpc SetGraphConfig(SetGraphConfigRequest) returns (StatusResponse) {}
+
+    rpc SetDebugOption(SetDebugRequest) returns (StatusResponse) {}
+
+    rpc StartGraphExecution(StartGraphExecutionRequest) returns (StatusResponse) {}
+
+    rpc ObserveOutputStream(ObserveOutputStreamRequest) returns (stream OutputStreamResponse) {}
+
+    rpc StopGraphExecution(StopGraphExecutionRequest) returns (StatusResponse) {}
+
+    rpc ResetGraph(ResetGraphRequest) returns (StatusResponse) {}
+
+    rpc StartGraphProfiling(StartGraphProfilingRequest) returns (StatusResponse) {}
+
+    rpc StopGraphProfiling(StopGraphProfilingRequest) returns (StatusResponse) {}
+
+    rpc GetProfilingData(ProfilingDataRequest) returns (ProfilingDataResponse) {}
+}

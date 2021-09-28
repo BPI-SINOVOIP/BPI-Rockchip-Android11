@@ -1,0 +1,202 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+package android.net;
+
+// Used to indicate which call is invoked to send DNS lookups.
+enum CallType {
+    CALL_GETADDRINFO = 0;
+    CALL_GETHOSTBYNAME = 1;
+    CALL_GETHOSTBYADDR = 2;
+    CALL_GETNAMEINFO = 3;
+    CALL_RES_NSEND = 4;
+}
+
+// Values from bionic/libc/include/sys/socket.h
+enum AddressFamily {
+    option allow_alias = true;  // for AF_ROUTE = AF_NETLINK
+
+    GT_AF_UNSPEC = 0;
+    GT_AF_UNIX = 1;
+    GT_AF_LOCAL = 1;
+    GT_AF_INET = 2;
+    GT_AF_AX25 = 3;
+    GT_AF_IPX = 4;
+    GT_AF_APPLETALK = 5;
+    GT_AF_NETROM = 6;
+    GT_AF_BRIDGE = 7;
+    GT_AF_ATMPVC= 8;
+    GT_AF_X25 = 9;
+    GT_AF_INET6 = 10;
+    GT_AF_ROSE = 11;
+    GT_AF_DECnet = 12;
+    GT_AF_NETBEUI = 13;
+    GT_AF_SECURITY = 14;
+    GT_AF_KEY = 15;
+    GT_AF_NETLINK = 16;
+    GT_AF_ROUTE = 16;  // AF_NETLINK
+    GT_AF_PACKET = 17;
+    GT_AF_ASH = 18;
+    GT_AF_ECONET = 19;
+    GT_AF_ATMSVC = 20;
+    GT_AF_RDS = 21;
+    GT_AF_SNA = 22;
+    GT_AF_IRDA = 23;
+    GT_AF_PPPOX = 24;
+    GT_AF_WANPIPE = 25;
+    GT_AF_LLC = 26;
+    GT_AF_CAN = 29;
+    GT_AF_TIPC = 30;
+    GT_AF_BLUETOOTH = 31;
+    GT_AF_IUCV = 32;
+    GT_AF_RXRPC = 33;
+    GT_AF_ISDN = 34;
+    GT_AF_PHONET = 35;
+    GT_AF_IEEE802154 = 36;
+    GT_AF_CAIF = 37;
+    GT_AF_ALG = 38;
+    GT_AF_NFC = 39;
+    GT_AF_VSOCK = 40;
+    GT_AF_KCM = 41;
+    GT_AF_QIPCRTR = 42;
+    GT_AF_MAX = 43;
+}
+
+// Values from bionic/libc/include/sys/socket.h
+enum SocketType {
+    GT_SOCK_ANY = 0;  // See man getaddrinfo for more detail
+    GT_SOCK_STREAM = 1;
+    GT_SOCK_DGRAM = 2;
+    GT_SOCK_RAW = 3;
+    GT_SOCK_RDM = 4;
+    GT_SOCK_SEQPACKET = 5;
+    GT_SOCK_DCCP = 6;
+    GT_SOCK_PACKET = 10;
+}
+
+// Values from bionic/libc/kernel/uapi/linux/in.h
+enum ProtocolType {
+    GT_IPPROTO_IP = 0;
+    GT_IPPROTO_ICMP = 1;
+    GT_IPPROTO_IGMP = 2;
+    GT_IPPROTO_IPIP = 4;
+    GT_IPPROTO_TCP = 6;
+    GT_IPPROTO_EGP = 8;
+    GT_IPPROTO_PUP = 12;
+    GT_IPPROTO_UDP = 17;
+    GT_IPPROTO_IDP = 22;
+    GT_IPPROTO_TP = 29;
+    GT_IPPROTO_DCCP = 33;
+    GT_IPPROTO_IPV6 = 41;
+    GT_IPPROTO_RSVP = 46;
+    GT_IPPROTO_GRE = 47;
+    GT_IPPROTO_ESP = 50;
+    GT_IPPROTO_AH = 51;
+    GT_IPPROTO_MTP = 92;
+    GT_IPPROTO_BEETPH = 94;
+    GT_IPPROTO_ENCAP = 98;
+    GT_IPPROTO_PIM = 103;
+    GT_IPPROTO_COMP = 108;
+    GT_IPPROTO_SCTP = 132;
+    GT_IPPROTO_UDPLITE = 136;
+    GT_IPPROTO_MPLS = 137;
+    GT_IPPROTO_RAW = 255;
+    GT_IPPROTO_MAX = 256;
+}
+
+// The return value of the DNS resolver for each DNS lookups.
+// Values from bionic/libc/include/netdb.h
+// Values from system/netd/resolv/include/netd_resolv/resolv.h
+enum ReturnCodeType {
+    GT_EAI_NO_ERROR = 0;
+    GT_EAI_ADDRFAMILY = 1;
+    GT_EAI_AGAIN = 2;
+    GT_EAI_BADFLAGS = 3;
+    GT_EAI_FAIL = 4;
+    GT_EAI_FAMILY = 5;
+    GT_EAI_MEMORY = 6;
+    GT_EAI_NODATA = 7;
+    GT_EAI_NONAME = 8;
+    GT_EAI_SERVICE = 9;
+    GT_EAI_SOCKTYPE = 10;
+    GT_EAI_SYSTEM = 11;
+    GT_EAI_BADHINTS = 12;
+    GT_EAI_PROTOCOL = 13;
+    GT_EAI_OVERFLOW = 14;
+    GT_RESOLV_TIMEOUT = 255;
+    GT_EAI_MAX = 256;
+}
+
+// Describes the test configuration and expected result for gold test.
+// The unit test files a DNS query by the predefined |config|. Expect that the resolver sends the
+// query packet as the predefined packet in |packet_mapping.query|. When the DNS responser receives
+// the query packet, it returns the corresponding response packet from |packet_mapping.response|.
+// Finally, the unit test checks the return values if they are the same as |result|. Currently,
+// support getaddrinfo only.
+// TODO: Support gethostbyname, gethostbyaddr, and getnameinfo.
+message GoldTest {
+    // The configuration of various DNS query calls.
+    message Config {
+        // The arguments used to send a DNS query by call type CALL_GETADDRINFO.
+        message AddrInfo {
+            string host = 1;
+            AddressFamily family = 2;
+            SocketType socktype = 3;
+            ProtocolType protocol = 4;
+            int32 ai_flags = 5;
+        }
+
+        // The arguments used to send a DNS query by call type CALL_GETHOSTBYNAME.
+        message HostByName {
+            string host = 1;
+            AddressFamily family = 2;
+        }
+
+        // The call is used to send DNS lookups.
+        CallType call = 1;
+
+        // The arguments are used by the call.
+        oneof Arg {
+            // The arguments of call type CALL_GETADDRINFO.
+            AddrInfo addrinfo = 2;
+            HostByName hostbyname = 3;
+        }
+    };
+
+    // The result is expected in DNS lookups.
+    message Result {
+        ReturnCodeType return_code = 1;
+        repeated string addresses = 2;
+    };
+
+    // Describes how the DNS responser handles and responses the DNS lookup packets.
+    message PacketMapping {
+      bytes query = 1;
+      bytes response = 2;
+    }
+
+    // Configs used to send a DNS query via a DNS query API.
+    Config config = 1;
+
+    // Expected return values from DNS query API.
+    Result result = 2;
+
+    // Used to build the packet mapping (query, response) in DNS responser. See also
+    // addMappingBinaryPacket() in
+    // packages/modules/DnsResolver/tests/dns_responder/dns_responder.cpp.
+    repeated PacketMapping packet_mapping = 3;
+}

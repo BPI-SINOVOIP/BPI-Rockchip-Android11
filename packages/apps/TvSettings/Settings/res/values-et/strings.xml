@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="settings_app_name" msgid="7931201304065140909">"Seaded"</string>
+    <string name="launcher_settings_app_name" msgid="1459269619779675736">"Seaded"</string>
+    <string name="launcher_network_app_name" msgid="8311763462169735002">"Võrk"</string>
+    <string name="launcher_restricted_profile_app_name" msgid="3324091425480935205">"Piiratud profiil"</string>
+    <string name="header_category_suggestions" msgid="106077820663753645">"Soovitused"</string>
+    <string name="header_category_quick_settings" msgid="3785334008768367890">"Kiirseaded"</string>
+    <string name="header_category_general_settings" msgid="3897615781153506434">"Üldseaded"</string>
+    <string name="dismiss_suggestion" msgid="6200814545590126814">"Loobu soovitusest"</string>
+    <string name="hotwording_title" msgid="2606899304616599026">"Otsetee sõna „Ok Google” tuvastamine"</string>
+    <string name="hotwording_summary" msgid="2170375928302175449">"Rääkige mis tahes ajal Google\'i assistendiga"</string>
+    <string name="header_category_device" msgid="3023893663454705969">"Seade"</string>
+    <string name="header_category_preferences" msgid="3738388885555798797">"Eelistused"</string>
+    <string name="header_category_accessories" msgid="8310540329290988415">"Kaugjuhtimine ja tarvikud"</string>
+    <string name="header_category_personal" msgid="7880053929985150368">"Isiklik"</string>
+    <string name="connect_to_network" msgid="4133686359319492392">"Võrguga ühendamine"</string>
+    <string name="add_an_account" msgid="2601275122685226096">"Konto lisamine"</string>
+    <string name="accounts_category_title" msgid="7286858931427579845">"Kontod ja sisselogimine"</string>
+    <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Kontod puuduvad"</string>
+    <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
+      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> kontot</item>
+      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> konto</item>
+    </plurals>
+    <string name="accounts_slice_summary" msgid="1571012157154521119">"Meediateenused, assistent, maksed"</string>
+    <string name="connectivity_network_category_title" msgid="8226264889892008114">"Võrk ja internet"</string>
+    <string name="sound_category_title" msgid="7899816751041939518">"Heli"</string>
+    <string name="applications_category_title" msgid="7112019490898586223">"Rakendused"</string>
+    <string name="device_pref_category_title" msgid="8292572846154873762">"Seadme eelistused"</string>
+    <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Kaugjuhtimisseadmed ja tarvikud"</string>
+    <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Ühendatud Bluetoothi seadmed puuduvad"</string>
+    <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
+      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> lisaseadet</item>
+      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> lisaseade</item>
+    </plurals>
+    <string name="display_and_sound_category_title" msgid="9203309625380755860">"Ekraan ja heli"</string>
+    <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Abi ja tagasiside"</string>
+    <string name="privacy_category_title" msgid="8552430590908463601">"Privaatsus"</string>
+    <string name="privacy_device_settings_category" msgid="5018334603278648524">"Seadme seaded"</string>
+    <string name="privacy_app_settings_category" msgid="858250971978879266">"Rakenduse seaded"</string>
+    <string name="privacy_category_summary" msgid="3534434883380511043">"Asukoht, kasutus ja diagnostika, reklaamid"</string>
+    <string name="add_account" msgid="7386223854837017129">"Lisa konto"</string>
+    <string name="account_header_remove_account" msgid="8573697553061331373">"Eemalda konto"</string>
+    <string name="account_sync" msgid="4315295293211313989">"Valige sünkroonitavad rakendused"</string>
+    <string name="sync_now" msgid="4335217984374620551">"Sünkrooni kohe"</string>
+    <string name="sync_in_progress" msgid="8081367667406185785">"Sünkroonimine ..."</string>
+    <string name="last_synced" msgid="8371967816955123864">"Viimati sünkroonitud <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="sync_disabled" msgid="6652778349371079140">"Keelatud"</string>
+    <string name="account_remove" msgid="8456848988853890155">"Eemalda konto"</string>
+    <string name="account_remove_failed" msgid="5654411101098531690">"Kontot ei õnnestunud eemaldada"</string>
+    <!-- no translation found for sync_item_title (5884138264243772176) -->
+    <skip />
+    <string name="sync_one_time_sync" msgid="1665961083810584134">"Sünkrooni kohe<xliff:g id="LAST_SYNC_TIME">
+%1$s</xliff:g>"</string>
+    <string name="sync_failed" msgid="2998289556481804047">"Sünkroonimine ebaõnnestus"</string>
+    <string name="sync_active" msgid="1621239982176888680">"Sünkroonimine on aktiivne"</string>
+    <string name="connectivity_wifi" msgid="1138689464484009184">"WiFi"</string>
+    <string name="connectivity_ethernet" msgid="4270588618633681766">"Ethernet"</string>
+    <string name="connectivity_summary_ethernet_connected" msgid="2612843587731520061">"Etherneti-ühendus on loodud"</string>
+    <string name="connectivity_summary_no_network_connected" msgid="6111160695454212460">"Võrguühendus puudub"</string>
+    <string name="connectivity_summary_wifi_disabled" msgid="7819225159680467324">"WiFi on välja lülitatud"</string>
+    <string name="wifi_setting_always_scan" msgid="431846292711998602">"Otsimine on alati saadaval"</string>
+    <string name="wifi_setting_always_scan_context" msgid="1092998659666221222">"Lubage Google\'i asukohateenusel ja muudel rakendustel võrke skannida ka juhul, kui WiFi on välja lülitatud"</string>
+    <string name="wifi_setting_enable_wifi" msgid="5276730445393952969">"WiFi"</string>
+    <string name="connectivity_hint_message" msgid="5638304246522516583">"Ühendage võrguga"</string>
+    <string name="apps_recently_used_category_title" msgid="7877660412428813933">"Hiljuti avatud rakendused"</string>
+    <string name="apps_see_all_apps" msgid="2002886135933443688">"Kuva kõik rakendused"</string>
+    <string name="apps_permissions_category_title" msgid="8099660060701465267">"Load"</string>
+    <string name="all_apps_title" msgid="3717294436135280133">"Kõik rakendused"</string>
+    <string name="all_apps_show_system_apps" msgid="1260688031005374302">"Kuva süsteemirakendused"</string>
+    <string name="all_apps_installed" msgid="8217778476185598971">"Installitud rakendused"</string>
+    <string name="all_apps_other" msgid="4420174882983813158">"Süsteemirakendused"</string>
+    <string name="all_apps_disabled" msgid="2776041242863791053">"Keelatud rakendused"</string>
+    <string name="device_daydream" msgid="2631191946958113220">"Ekraanisäästja"</string>
+    <string name="device_display" msgid="244634591698925025">"Ekraan"</string>
+    <string name="device_display_sound" msgid="7399153506435649193">"Ekraanikuva ja heli"</string>
+    <string name="device_sound" msgid="8616320533559404963">"Heli"</string>
+    <string name="device_surround_sound" msgid="1889436002598316470">"Ruumiline heli"</string>
+    <string name="device_sound_effects" msgid="2000295001122684957">"Süsteemihelid"</string>
+    <string name="device_apps" msgid="2134756632245008919">"Rakendused"</string>
+    <string name="device_storage" msgid="8540243547121791073">"Mäluruum"</string>
+    <string name="device_reset" msgid="6115282675800077867">"Tehaseseadete lähtestamine"</string>
+    <string name="device_backup_restore" msgid="4552158624969018687">"Varundamine ja taastamine"</string>
+    <string name="device_factory_reset" msgid="1110189450013225971">"Tehase andmetele lähtestamine"</string>
+    <string name="device_calibration" msgid="2907914144048739705">"Kalibreerimine"</string>
+    <string name="device_energy_saver" msgid="1105023232841036991">"Energiasäästja"</string>
+    <string name="surround_sound_select_formats" msgid="6070283650131226239">"Vormingute valimine"</string>
+    <string name="surround_sound_category_title" msgid="5688539514178173911">"Ruumiline heli"</string>
+    <string name="surround_sound_format_ac3" msgid="4759143098751306492">"Dolby Digital"</string>
+    <string name="surround_sound_format_e_ac3" msgid="6923129088903887242">"Dolby Digital Plus"</string>
+    <string name="surround_sound_format_dts" msgid="8331816247117135587">"DTS"</string>
+    <string name="surround_sound_format_dts_hd" msgid="4268947520371740146">"DTS-HD"</string>
+    <string name="surround_sound_format_iec61937" msgid="9035476171988404170">"IEC61937"</string>
+    <string name="surround_sound_auto_info" msgid="852202989256054406">"Märkus. Valik Automaatne ei pruugi töötada, kui teie seade ei teavita toetatud vormingutest õigesti."</string>
+    <string name="surround_sound_auto_summary" msgid="5559552398163510156">"Automaatne: kasutatakse teie seadme toetatavaid vorminguid (soovitatav)"</string>
+    <string name="surround_sound_none_summary" msgid="2791597033750908940">"Puudub: ruumilist heli ei kasutata kunagi"</string>
+    <string name="surround_sound_manual_summary" msgid="8945926149168263067">"Käsitsi: valige, milliseid vorminguid kasutada"</string>
+    <string name="display_category_title" msgid="247804007525046312">"Ekraanikuva"</string>
+    <string name="advanced_display_settings_title" msgid="6293280819870140631">"Täpsemad kuvaseaded"</string>
+    <string name="advanced_sound_settings_title" msgid="319921303039469139">"Täpsemad heliseaded"</string>
+    <string name="game_mode_title" msgid="7280816243531315755">"Luba mängurežiim"</string>
+    <string name="device_storage_clear_cache_title" msgid="14370154552302965">"Kas soovite vahemälus olevad andmed kustutada?"</string>
+    <string name="device_storage_clear_cache_message" msgid="4352802738505831032">"Kustutab rakenduste vahemälus olevad andmed."</string>
+    <string name="accessories_add" msgid="413764175035531452">"Tarviku lisamine"</string>
+    <string name="accessory_state_pairing" msgid="15908899628218319">"Sidumine ..."</string>
+    <string name="accessory_state_connecting" msgid="6560241025917621212">"Ühendamine ..."</string>
+    <string name="accessory_state_error" msgid="8353621828816824428">"Sidumine ei õnnestunud"</string>
+    <string name="accessory_state_canceled" msgid="4794837663402063770">"Tühistatud"</string>
+    <string name="accessory_state_paired" msgid="3296695242499532000">"Seotud"</string>
+    <string name="accessory_options" msgid="774592782382321681">"Tarvik"</string>
+    <string name="accessory_unpair" msgid="2473411128146068804">"Katkesta ühendus"</string>
+    <string name="accessory_battery" msgid="2283700366184703548">"Aku: <xliff:g id="PERCENTAGE">%1$d</xliff:g>%%"</string>
+    <string name="accessory_unpairing" msgid="2529195578082286563">"Seadme ühenduse katkestamine …"</string>
+    <string name="accessory_connected" msgid="5229574480869175180">"Ühendatud"</string>
+    <string name="accessory_change_name" msgid="6493717176878500683">"Nime muutmine"</string>
+    <string name="accessory_change_name_title" msgid="451188562035392238">"Sisestage selle tarviku uus nimi"</string>
+    <string name="accessories_add_title" msgid="7704824893011194433">"Tarvikute otsimine …"</string>
+    <string name="accessories_add_bluetooth_inst" msgid="5109947637581187896">"Enne Bluetoothi seadmete sidumist veenduge, et need oleks sidumisrežiimis"</string>
+    <string name="accessories_autopair_msg" msgid="2501824457418285019">"Seade on leitud ja seotakse automaatselt <xliff:g id="COUNTDOWN">%1$s</xliff:g> sekundi jooksul"</string>
+    <string name="error_action_not_supported" msgid="5377532621386080296">"See toiming ei ole toetatud"</string>
+    <string name="bluetooth_pairing_request" msgid="6120176967230348092">"Bluetoothi sidumistaotlus"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="7397401633869153520">"Seadmega &lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt; sidumiseks veenduge, et see kuvaks parooli &lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="8587851808387685613">"Seadmelt: &lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;Kas siduda seadmega?"</string>
+    <string name="bluetooth_display_passkey_pin_msg" msgid="6934651048757228432">"Sidumine seadmega: &lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;Sisestage parool &lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;, ja vajutage seejärel sisestusklahvi."</string>
+    <string name="bluetooth_enter_pin_msg" msgid="8905524093007140634">"Sidumine seadmega: &lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;, &lt;br&gt;Sisestage seadme nõutud PIN-kood:"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="889584097447402492">"Sidumine seadmega: &lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;, &lt;br&gt;Sisestage seadme nõutud parool:"</string>
+    <string name="bluetooth_pin_values_hint" msgid="6237371515577342950">"Tavaliselt 0000 või 1234"</string>
+    <string name="bluetooth_pair" msgid="2410285813728786067">"Seo"</string>
+    <string name="bluetooth_cancel" msgid="4415185529332987034">"Tühista"</string>
+    <string name="send_feedback" msgid="936698637869795473">"Tagasiside saatmine"</string>
+    <string name="launch_help" msgid="2607478763131952469">"Abikeskus"</string>
+    <string name="system_cast" msgid="6081391679828510058">"Google Cast"</string>
+    <string name="system_date_time" msgid="6938588387002473344">"Kuupäev ja kellaaeg"</string>
+    <string name="system_language" msgid="5516099388471974346">"Keel"</string>
+    <string name="system_keyboard" msgid="1514460705385401872">"Klaviatuur"</string>
+    <string name="system_keyboard_autofill" msgid="8530944165814838255">"Klaviatuur ja automaattäide"</string>
+    <string name="system_autofill" msgid="6983989261108020046">"Automaatne täitmine"</string>
+    <string name="system_home" msgid="2149349845791104094">"Avaekraan"</string>
+    <string name="system_search" msgid="3170169128257586925">"Otsing"</string>
+    <string name="system_google" msgid="945985164023885276">"Google"</string>
+    <string name="system_security" msgid="5053021134921182612">"Turvalisus ja piirangud"</string>
+    <string name="system_speech" msgid="8779582280374089518">"Kõne"</string>
+    <string name="system_inputs" msgid="5552840337357572096">"Sisendid"</string>
+    <string name="system_inputs_devices" msgid="8423782334271632810">"Sisendid ja seadmed"</string>
+    <string name="system_home_theater_control" msgid="6228949628173590310">"Kodukino juhtimine"</string>
+    <string name="system_accessibility" msgid="3081009195560501010">"Juurdepääsu seaded"</string>
+    <string name="system_developer_options" msgid="8480844257066475479">"Arendaja valikud"</string>
+    <string name="accessibility_none" msgid="6355646833528306702">"Puudub"</string>
+    <string name="system_diagnostic" msgid="1654842813331919958">"Kasutus ja diagnostika"</string>
+    <string name="tutorials" msgid="7880770425872110455">"Õpetused"</string>
+    <string name="about_system_update" msgid="7421264399111367755">"Süsteemivärskendus"</string>
+    <string name="about_preference" msgid="9112690446998150670">"Teave"</string>
+    <string name="device_name" msgid="566626587332817733">"Seadme nimi"</string>
+    <string name="restart_button_label" msgid="2124590135040611899">"Taaskäivita"</string>
+    <string name="about_legal_info" msgid="2148797328415559733">"Juriidiline teave"</string>
+    <string name="about_legal_license" msgid="4801707286720681261">"Avatud lähtekoodi litsentsid"</string>
+    <string name="about_terms_of_service" msgid="8514826341101557623">"Google\'i juriidiline teave"</string>
+    <string name="about_license_activity_unavailable" msgid="4559187037375581674">"Litsentsiandmed pole saadaval"</string>
+    <string name="about_model" msgid="9164284529291439296">"Mudel"</string>
+    <string name="about_version" msgid="7800676128792880991">"Versioon"</string>
+    <string name="about_serial" msgid="3432319328808745459">"Seerianumber"</string>
+    <string name="about_build" msgid="1139171613038225768">"Järk"</string>
+    <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
+      <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> toimingut veel ja olete arendaja</item>
+      <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g> toiming veel ja olete arendaja</item>
+    </plurals>
+    <string name="about_ads" msgid="7662896442040086522">"Reklaamid"</string>
+    <string name="show_dev_on" msgid="612741433124106067">"Olete nüüd arendaja."</string>
+    <string name="show_dev_already" msgid="1522591284776449818">"Pole vajadust, olete juba arendaja"</string>
+    <string name="device_info_default" msgid="2374506935205518448">"Teadmata"</string>
+    <string name="selinux_status" msgid="1146662734953021410">"SELinuxi olek"</string>
+    <string name="selinux_status_disabled" msgid="4027105362332795142">"Keelatud"</string>
+    <string name="selinux_status_permissive" msgid="8694617578567517527">"Lubav"</string>
+    <string name="selinux_status_enforcing" msgid="4140979635669643342">"Jõustamine"</string>
+    <string name="additional_system_update_settings_list_item_title" msgid="1839534735929143986">"Süsteemi lisavärskendused"</string>
+    <string name="device_status" msgid="8266002761193692207">"Olek"</string>
+    <string name="device_status_summary" msgid="3270932829412434985">"Võrk, seerianumbrid ja muu teave"</string>
+    <string name="manual" msgid="5683935624321864999">"Juhend"</string>
+    <string name="regulatory_information" msgid="9107675969694713391">"Regulatiivteave"</string>
+    <string name="device_feedback" msgid="4871903271442960465">"Seadme kohta tagasiside saatmine"</string>
+    <string name="fcc_equipment_id" msgid="6731077083927000108">"Seadme ID"</string>
+    <string name="baseband_version" msgid="5618116741093274294">"Põhiribaversioon"</string>
+    <string name="kernel_version" msgid="7265509054070001542">"Tuuma versioon"</string>
+    <string name="status_unavailable" msgid="2033933928980193334">"Pole saadaval"</string>
+    <string name="device_status_title" msgid="9051569510258883673">"Olek"</string>
+    <string name="battery_status_title" msgid="8850166742025222210">"Aku olek"</string>
+    <string name="battery_level_title" msgid="2672804570916248736">"Aku tase"</string>
+    <string name="sim_status_title" msgid="1704273079796640946">"SIM-kaardi olek"</string>
+    <string name="imei_information_title" msgid="3790368306353698724">"IMEI teave"</string>
+    <string name="status_bt_address" msgid="7190052214963950844">"Bluetoothi aadress"</string>
+    <string name="status_up_time" msgid="1758102680983108313">"Talitlusaeg"</string>
+    <string name="legal_information" msgid="1087445528481370874">"Juriidiline teave"</string>
+    <string name="copyright_title" msgid="5879660711078649518">"Autoriõigus"</string>
+    <string name="license_title" msgid="4032466200355435641">"Litsents"</string>
+    <string name="terms_title" msgid="192888187310800678">"Nõuded ja tingimused"</string>
+    <string name="webview_license_title" msgid="5370270485188947540">"Süsteemi WebView\' litsents"</string>
+  <string-array name="wifi_signal_strength">
+    <item msgid="4475363344103354364">"Kehv"</item>
+    <item msgid="2098818614362343532">"Rahuldav"</item>
+    <item msgid="2713050260700175954">"Hea"</item>
+    <item msgid="6005053494500517261">"Suurepärane"</item>
+  </string-array>
+    <string name="title_mac_address" msgid="7511588678922209883">"Seadme MAC-aadress"</string>
+    <string name="title_randomized_mac_address" msgid="3359532498635833471">"Juhuslik MAC-aadress"</string>
+    <string name="title_signal_strength" msgid="5047116893338315998">"Signaali tugevus"</string>
+    <string name="title_random_mac_settings" msgid="6685812569356353378">"Privaatsus"</string>
+  <string-array name="random_mac_settings_entries">
+    <item msgid="3457228452595715533">"Kasuta juhuslikku MAC-aadressi (vaikeseade)"</item>
+    <item msgid="2490415280467390067">"Kasuta seadme MAC-aadressi"</item>
+  </string-array>
+    <string name="mac_address_not_available" msgid="2992935344891853369">"Pole saadaval"</string>
+    <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Juhuslik MAC-aadress"</string>
+    <string name="title_ip_address" msgid="705842159484772807">"IP-aadress"</string>
+    <string name="title_ssid" msgid="255328048344188682">"Sisestage WiFi-võrgu nimi"</string>
+    <string name="title_internet_connection" msgid="7502414094881828069">"Interneti-ühendus"</string>
+    <string name="connected" msgid="4981532275162345997">"Ühendatud"</string>
+    <string name="not_connected" msgid="475810896484271663">"Ühendus puudub"</string>
+    <string name="wifi_setting_header_other_options" msgid="217382325707026836">"Muud valikud"</string>
+    <string name="wifi_setting_see_all" msgid="5048103047976316675">"Kuva kõik"</string>
+    <string name="wifi_setting_see_fewer" msgid="8585364493300703467">"Kuva vähem"</string>
+    <string name="wifi_setting_available_networks" msgid="2096957819727319750">"Saadaolevad võrgud"</string>
+    <string name="wifi_setting_other_options_add_network" msgid="6490215784178866978">"Lisa uus võrk"</string>
+    <string name="security_type" msgid="2297615092250075696">"Kaitsetüüp"</string>
+    <string name="other_network" msgid="5299289104661858596">"Muu võrk ..."</string>
+    <string name="skip_network" msgid="3095529090560000692">"Jäta vahele"</string>
+    <string name="wifi_security_type_none" msgid="7001835819813531253">"Puudub"</string>
+    <string name="wifi_security_type_wep" msgid="6407712450924151962">"WEP"</string>
+    <string name="wifi_security_type_wpa" msgid="9205358644485448199">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_type_eap" msgid="3948280751219829163">"802.1x EAP"</string>
+    <string name="title_wifi_no_networks_available" msgid="3696700321170616981">"Skannimine ..."</string>
+    <string name="title_wifi_could_not_save" msgid="7549912968719395764">"<xliff:g id="SSID">%1$s</xliff:g> seadistust ei õnnestunud salvestada"</string>
+    <string name="title_wifi_could_not_connect" msgid="6654031057635481872">"Võrguga <xliff:g id="SSID">%1$s</xliff:g> ei õnnestu ühendust saada"</string>
+    <string name="title_wifi_could_not_connect_timeout" msgid="7825788623604214601">"Võrku <xliff:g id="SSID">%1$s</xliff:g> ei õnnestunud leida"</string>
+    <string name="title_wifi_could_not_connect_authentication_failure" msgid="6626386897327862432">"WiFi-parool pole õige"</string>
+    <string name="title_wifi_could_not_connect_ap_reject" msgid="5182833781690447828">"WiFi-võrk ei nõustunud ühenduse loomisega"</string>
+    <string name="title_wifi_advanced_options" msgid="371185991282743258">"Kas seadistada võrgu <xliff:g id="SSID">%1$s</xliff:g> puhverserveri ja IP-seaded?"</string>
+    <string name="title_wifi_proxy_settings" msgid="1933444342984660569">"Puhverserveri seaded"</string>
+    <string name="title_wifi_proxy_hostname" msgid="1242297002220870385">"Puhverserveri hosti nimi:"</string>
+    <string name="title_wifi_proxy_port" msgid="566244407030390328">"Puhverserveri port:"</string>
+    <string name="title_wifi_proxy_bypass" msgid="8752756240663231435">"Puhverserverist mööduvad:"</string>
+    <string name="title_wifi_ip_settings" msgid="296029383749112888">"IP-seaded"</string>
+    <string name="title_wifi_ip_address" msgid="5505806431042689276">"IP-aadress"</string>
+    <string name="title_wifi_gateway" msgid="4496416267930824360">"Lüüs:"</string>
+    <string name="title_wifi_network_prefix_length" msgid="3200370297772096824">"Võrgu eesliite pikkus:"</string>
+    <string name="title_wifi_dns1" msgid="1585965227665007553">"DNS 1:"</string>
+    <string name="title_wifi_dns2" msgid="4563319371301555072">"DNS 2:"</string>
+    <string name="title_wifi_proxy_settings_invalid" msgid="7698883245005941665">"Puhverserveri seaded pole õiged"</string>
+    <string name="title_wifi_ip_settings_invalid" msgid="7283801973512992014">"IP-seaded pole õiged"</string>
+    <string name="title_wifi_known_network" msgid="6162483884727898697">"<xliff:g id="SSID">%1$s</xliff:g> on salvestatud võrk"</string>
+    <string name="wifi_action_try_again" msgid="8920677153891141148">"Proovi uuesti"</string>
+    <string name="wifi_action_view_available_networks" msgid="609561604257828342">"Kuva saadaolevad võrgud"</string>
+    <string name="wifi_connecting" msgid="4234341255109283018">"Ühendamine võrguga <xliff:g id="SSID">%1$s</xliff:g>"</string>
+    <string name="wifi_saving" msgid="320653339670641708">"Võrgu <xliff:g id="SSID">%1$s</xliff:g> seadistuse salvestamine"</string>
+    <string name="wifi_connect" msgid="2206086690065242121">"Ühenda"</string>
+    <string name="wifi_forget_network" msgid="4634016112624305571">"Unusta võrk"</string>
+    <string name="wifi_forget_network_description" msgid="4146715475962713899">"See kustutab teabe, mida kasutatakse võrguga ühenduse loomiseks, sh salvestatud parooli"</string>
+    <string name="wifi_action_ok" msgid="6257483288047397880">"OK"</string>
+    <string name="wifi_setup_action_dont_change_network" msgid="2999582059217623090">"Jätka"</string>
+    <string name="wifi_setup_action_change_network" msgid="1603908238711710943">"Vaheta võrku"</string>
+    <string name="wifi_action_change_network" msgid="3943123581726966199">"Muuda"</string>
+    <string name="wifi_action_dont_change_network" msgid="2685585142299769847">"Ära muuda"</string>
+    <string name="wifi_action_advanced_yes" msgid="6192652088198093438">"OK"</string>
+    <string name="wifi_action_advanced_no" msgid="6152107256122343959">"Ei (soovitatav)"</string>
+    <string name="wifi_action_proxy_none" msgid="4009573120495700922">"Puudub"</string>
+    <string name="wifi_action_proxy_manual" msgid="7667686394955896293">"Käsitsi"</string>
+    <string name="wifi_action_dhcp" msgid="6172127495589802964">"DHCP"</string>
+    <string name="wifi_action_static" msgid="8139559358727790887">"Staatiline"</string>
+    <string name="wifi_action_status_info" msgid="3947061894001350963">"Olekuteave"</string>
+    <string name="wifi_action_advanced_options_title" msgid="2863126553877147921">"Täpsemad valikud"</string>
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="4051342269154914595">"Sisestage kehtiv IP-aadress"</string>
+    <string name="wifi_ip_settings_invalid_gateway" msgid="4511579679784872130">"Sisestage kehtiv lüüsi aadress"</string>
+    <string name="wifi_ip_settings_invalid_dns" msgid="5111100342560120360">"Sisestage kehtiv DNS-i aadress"</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="2726889303835927777">"Sisestage võrgu eesliide pikkusega 0–32 märki"</string>
+    <string name="wifi_ip_address_description" msgid="7109677764979198618">"Sisestage kehtiv IP-aadress.\nNäide: <xliff:g id="ID_1">192.168.1.128</xliff:g>"</string>
+    <string name="wifi_dns1_description" msgid="2287252520192279195">"Sisestage kehtiv IP-aadress või jätke tühjaks.\nNäide: <xliff:g id="ID_1">8.8.8.8</xliff:g>"</string>
+    <string name="wifi_dns2_description" msgid="6495565714252833784">"Sisestage kehtiv IP-aadress või jätke tühjaks.\nNäide: <xliff:g id="ID_1">8.8.4.4</xliff:g>"</string>
+    <string name="wifi_gateway_description" msgid="8902481147103929271">"Sisestage kehtiv IP-aadress või jätke tühjaks.\nNäide: <xliff:g id="ID_1">192.168.1.1</xliff:g>"</string>
+    <string name="wifi_network_prefix_length_description" msgid="2670994968279018896">"Sisestage sobiva pikkusega võrgu eesliide.\nNäide: <xliff:g id="ID_1">24</xliff:g>"</string>
+    <string name="proxy_error_invalid_host" msgid="5629893736174170157">"Hosti nimi ei ole sobiv"</string>
+    <string name="proxy_error_invalid_exclusion_list" msgid="1762079966901078116">"See välistamiste loend pole sobiv. Sisestage komadega eraldatud välistatud domeenide loend."</string>
+    <string name="proxy_error_empty_port" msgid="692020249267351015">"Pordi väli ei tohi olla tühi"</string>
+    <string name="proxy_error_empty_host_set_port" msgid="5347712018244852847">"Kui hosti väli on tühi, jätke pordi väli tühjaks"</string>
+    <string name="proxy_error_invalid_port" msgid="5307010810664745294">"Port ei ole sobiv"</string>
+    <string name="proxy_warning_limited_support" msgid="4220553563487968684">"HTTP-puhverserverit kasutab brauser, kuid seda ei tohi kasutada teised rakendused"</string>
+    <string name="proxy_port_description" msgid="6486205863098427787">"Sisestage kehtiv port.\nNäide: <xliff:g id="ID_1">8080</xliff:g>"</string>
+    <string name="proxy_exclusionlist_description" msgid="5105504899364188296">"Sisestage komadega eraldatud välistatud domeenide loend või jätke tühjaks.\nNäide: <xliff:g id="ID_1">example.com,mycomp.test.com,localhost</xliff:g>"</string>
+    <string name="proxy_hostname_description" msgid="5520200112290557199">"Sisestage kehtiv hosti nimi.\nNäide: <xliff:g id="ID_1">proxy.example.com</xliff:g>"</string>
+    <string name="title_wifi_eap_method" msgid="4351752615786996226">"Valige võrgu <xliff:g id="SSID">%1$s</xliff:g> EAP meetod"</string>
+    <string name="title_wifi_phase2_authentication" msgid="1167205033305931574">"Valige võrgu <xliff:g id="SSID">%1$s</xliff:g> 2. etapi autentimine"</string>
+    <string name="title_wifi_identity" msgid="6273917200971028259">"Sisestage võrgu <xliff:g id="SSID">%1$s</xliff:g> ID"</string>
+    <string name="title_wifi_anonymous_identity" msgid="5965175781722004334">"Sisestage võrgu <xliff:g id="SSID">%1$s</xliff:g> anonüümne ID"</string>
+    <string name="wifi_setup_summary_title_connected" msgid="2725439590655448489">"Teil on ühendus võrguga <xliff:g id="SSID">%1$s</xliff:g>"</string>
+    <string name="wifi_summary_title_connected" msgid="201105022065577659">"Võrk on ühendatud"</string>
+    <string name="wifi_summary_title_not_connected" msgid="7991004795297065201">"Võrk ei ole ühendatud"</string>
+    <string name="wifi_summary_description_connected_to_wifi_network" msgid="8796747274977762311">"Juba ühendatud võrguga <xliff:g id="SSID">%1$s</xliff:g>. Kas ühendada teise võrguga?"</string>
+    <string name="wifi_summary_unknown_network" msgid="8044143986439139664">"tundmatu võrk"</string>
+    <string name="title_ok" msgid="6500452958848127145">"OK"</string>
+    <string name="title_cancel" msgid="2337143367016419016">"Tühista"</string>
+    <string name="storage_title" msgid="6637715914885228193">"Salvestusruum"</string>
+    <string name="storage_available" msgid="8860901789290434209">"Saadaval"</string>
+    <string name="storage_size" msgid="5517261387579171381">"Ruumi kokku: <xliff:g id="TOTAL_SPACE">%1$s</xliff:g>"</string>
+    <string name="storage_calculating_size" msgid="5716281278843281044">"Arvutamine ..."</string>
+    <string name="storage_apps_usage" msgid="8659915575274468924">"Rakendused"</string>
+    <string name="storage_downloads_usage" msgid="8429196848359517158">"Allalaadimised"</string>
+    <string name="storage_dcim_usage" msgid="337290403400541958">"Fotod ja videod"</string>
+    <string name="storage_music_usage" msgid="5362871290115089474">"Heli"</string>
+    <string name="storage_media_misc_usage" msgid="3404230292054880339">"Muu"</string>
+    <string name="storage_media_cache_usage" msgid="6397941751551207630">"Vahemälus olevad andmed"</string>
+    <string name="storage_eject" msgid="3268870873944951902">"Eemalda"</string>
+    <string name="storage_format" msgid="1068977713279648756">"Kustuta ja vorminda"</string>
+    <string name="storage_format_as_private" msgid="77945551149326052">"Kustuta ja vorminda seadme salvestusruumina"</string>
+    <string name="storage_format_as_public" msgid="6745112917895223463">"Kustuta ja vorminda irdmäluna"</string>
+    <string name="storage_format_for_private" msgid="5380138334184923252">"Vorminda seadme salvestusruumina"</string>
+    <string name="storage_not_connected" msgid="4327902652748552794">"Ühendus puudub"</string>
+    <string name="storage_migrate" msgid="9137556600192167701">"Andmete üleviimine sellesse salvestusruumi"</string>
+    <string name="storage_migrate_away" msgid="7880100961434638430">"Vii andmed üle teise salvestusruumi"</string>
+    <string name="storage_no_apps" msgid="95566375753627272">"Varundatavaid rakendusi pole"</string>
+    <string name="storage_forget" msgid="4671975563260507003">"Unusta selle seadme salvestusruum"</string>
+    <string name="storage_forget_wall_of_text" msgid="230454348256179142">"Draivisolevate rakenduste või andmete kasutamiseks ühendage see uuesti. Kui draiv ei ole saadaval, võite ka lasta salvestusruumi unustada.\n\nKui valite käsu Unusta, lähevad kõik draivisolevad andmed jäädavalt kaotsi.\n\nVõite rakendused hiljem uuesti installida, kuid draivisolevad andmed lähevad kaotsi."</string>
+    <string name="storage_device_storage_section" msgid="22958375769694027">"Seadme salvestusruum"</string>
+    <string name="storage_removable_storage_section" msgid="280332107650735088">"Irdmälu"</string>
+    <string name="storage_reset_section" msgid="3896575204828589494">"Lähtestamine"</string>
+    <string name="storage_mount_success" msgid="4459298609971461753">"Üksus <xliff:g id="NAME">%1$s</xliff:g> ühendati"</string>
+    <string name="storage_mount_failure" msgid="8521666906216755903">"Üksust <xliff:g id="NAME">%1$s</xliff:g> ei saanud ühendada"</string>
+    <string name="storage_mount_adopted" msgid="8880688040694403520">"USB-salvestusruum on uuesti ühendatud"</string>
+    <string name="storage_unmount_success" msgid="8024867595129715661">"Üksus <xliff:g id="NAME">%1$s</xliff:g> eemaldati ohutult"</string>
+    <string name="storage_unmount_failure" msgid="2228448194484319930">"Üksust <xliff:g id="NAME">%1$s</xliff:g> ei saanud ohutult eemaldada"</string>
+    <string name="storage_unmount_failure_cant_find" msgid="2890335341404932068">"Väljutatavat draivi ei leitud"</string>
+    <string name="storage_format_success" msgid="5599914756144012286">"Üksus <xliff:g id="NAME">%1$s</xliff:g> vormindati"</string>
+    <string name="storage_format_failure" msgid="5619442934314277332">"Üksust <xliff:g id="NAME">%1$s</xliff:g> ei saanud vormindada"</string>
+    <string name="storage_wizard_format_as_private_title" msgid="7985715762649933211">"Vorminda seadme salvestusruumina"</string>
+    <string name="storage_wizard_format_as_private_description" msgid="6143406934742456154">"USB-mäluseadme turvaliseks muutmiseks tuleb see vormindada. Pärast turvalist vormindamist töötab mäluseade ainult selles seadmes. Vormindamisel kustutatakse kõik praegu mäluseadmele salvestatud andmed. Andmete kaotsimineku vältimiseks soovitame need varundada."</string>
+    <string name="storage_wizard_format_as_public_title" msgid="3546915348149438389">"Kustutamine ja vormindamine"</string>
+    <string name="storage_wizard_format_as_public_description" msgid="5849129772499352597">"Pärast vormindamist saate seda USB-mäluseadet kasutada teistes seadmetes. Kõik andmed kustutatakse. Kaaluge esmalt nende varundamist, teisaldades rakendused teise seadme salvestusruumi."</string>
+    <string name="storage_wizard_format_progress_title" msgid="3875906251546380271">"USB-mäluseadme vormindamine …"</string>
+    <string name="storage_wizard_format_progress_description" msgid="292229747129805538">"Selleks võib kuluda pisut aega. Ärge eemaldage mäluseadet."</string>
+    <string name="storage_wizard_migrate_choose_title" msgid="8743036821605231654">"Valige salvestusruum, kuhu andmed üle viia"</string>
+    <string name="storage_wizard_migrate_confirm_title" msgid="5086390005970210697">"Andmete teisaldamine seadmesse <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_wizard_migrate_confirm_description" msgid="918834441157741482">"Teisaldage fotod, failid ja rakenduste andmed seadmesse <xliff:g id="NAME">%1$s</xliff:g>. Selleks kulub mõni minut. Teatud rakendused ei tööta teisaldamise ajal õigesti."</string>
+    <string name="storage_wizard_migrate_confirm_action_move_now" msgid="7512917600174814567">"Teisalda kohe"</string>
+    <string name="storage_wizard_migrate_confirm_action_move_later" msgid="6379986754827551474">"Teisalda hiljem"</string>
+    <string name="storage_wizard_migrate_toast_success" msgid="6153579567666607584">"Andmed viidi üle seadmesse <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_wizard_migrate_toast_failure" msgid="8580347235983040966">"Andmeid ei saanud teisaldada seadmesse <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_wizard_migrate_progress_title" msgid="2623480667090826800">"Andmete teisaldamine seadmesse <xliff:g id="NAME">%1$s</xliff:g> …"</string>
+    <string name="storage_wizard_migrate_progress_description" msgid="4023358325977284145">"Selleks võib kuluda pisut aega. Ärge eemaldage draivi.\nTeatud rakendused ei tööta teisaldamise ajal õigesti."</string>
+    <string name="storage_wizard_format_slow_title" msgid="7640229918512394316">"Mäluseade näib olevat aeglane."</string>
+    <string name="storage_wizard_format_slow_summary" msgid="3674023258060474037">"Võite jätkata, kuid sellesse asukohta teisaldatud rakendused võivad töötada katkendlikult ja andmete teisaldamiseks võib kuluda palju aega. Parema toimivuse huvides on soovitatav kasutada kiiremat mäluseadet."</string>
+    <string name="storage_wizard_format_action" msgid="3275676687226857170">"Vorminda"</string>
+    <string name="storage_wizard_backup_apps_action" msgid="1402199004931596519">"Rakenduste varundamine"</string>
+    <string name="storage_wizard_back_up_apps_title" msgid="6225663573896846937">"Rakendused on salvestatud üksuses <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_wizard_back_up_apps_and_data_title" msgid="7763611380573099978">"Rakendused ja andmed on salvestatud üksuses <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_wizard_back_up_apps_space_available" msgid="5741521038349239359">"Saadaval on <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="storage_wizard_eject_private_title" msgid="1336088625197134497">"Eemalda seadme salvestusruum"</string>
+    <string name="storage_wizard_eject_private_description" msgid="4341905730016007385">"Seadme eemaldamisel lõpetavad selles salvestusruumis olevad rakendused töö. See USB-mäluseade on vormindatud ainult selles seadmes töötamiseks. See ei tööta teistes seadmetes."</string>
+    <string name="storage_wizard_eject_progress_title" msgid="6025569356827683446">"Üksuse <xliff:g id="NAME">%1$s</xliff:g> väljutamine …"</string>
+    <string name="storage_wizard_move_app_title" msgid="6504922588346440942">"Kasutatud salvestusruum"</string>
+    <string name="storage_wizard_move_app_progress_title" msgid="7058465372227392453">"Rakenduse <xliff:g id="NAME">%1$s</xliff:g> teisaldamine …"</string>
+    <string name="storage_wizard_move_app_progress_description" msgid="7673347796805764888">"Ärge eemaldage ketast teisaldamise ajal.\nRakendus <xliff:g id="APPNAME">%1$s</xliff:g> pole seadmes saadaval enne, kui teisaldamine on lõpetatud."</string>
+    <string name="storage_wizard_forget_confirm_title" msgid="3709482471888830896">"Kas unustada seadme salvestusruum?"</string>
+    <string name="storage_wizard_forget_confirm_description" msgid="5896860042525566767">"Käsu „Unusta” valimisel lähevad kõik draivisolevad andmed jäädavalt kaotsi. Kas soovite jätkata?"</string>
+    <string name="storage_wizard_forget_action" msgid="5609631662522950596">"Unusta"</string>
+    <string name="storage_new_title" msgid="4768955281180255038">"USB-ketas on ühendatud"</string>
+    <string name="storage_new_action_browse" msgid="3355241742574072658">"Sirvi"</string>
+    <string name="storage_new_action_adopt" msgid="6809707961170895964">"Seadista seadme salvestusruumina"</string>
+    <string name="storage_new_action_format_public" msgid="1964662216574764811">"Seadistamine irdmäluna"</string>
+    <string name="storage_new_action_eject" msgid="919249291814300000">"Eemalda"</string>
+    <string name="storage_missing_title" msgid="9068915586235805818">"<xliff:g id="NAME">%1$s</xliff:g> on eemaldatud"</string>
+    <string name="storage_missing_description" msgid="6835620703133204249">"Mõni rakendus ei pruugi olla saadaval või õigesti töötada, kuni ketas uuesti ühendatakse."</string>
+    <string name="insufficient_storage" msgid="4175940286022466535">"Salvestusruumi pole piisavalt."</string>
+    <string name="does_not_exist" msgid="4071082040759146781">"Rakendust pole olemas."</string>
+    <string name="invalid_location" msgid="5571789982293787489">"Installimise asukoht pole kehtiv."</string>
+    <string name="system_package" msgid="8276098460517049146">"Süsteemivärskendusi ei saa installida välisele kandjale."</string>
+    <string name="move_error_device_admin" msgid="4144472536756635173">"Seadme administraatorit ei saa installida välisele meediakandjale."</string>
+    <string name="learn_more_action" msgid="7972102006620925604">"Lisateave"</string>
+    <string name="system_date" msgid="2503462662633178207">"Kuupäev"</string>
+    <string name="system_time" msgid="8434726081412227535">"Kellaaeg"</string>
+    <string name="system_set_date" msgid="5815123588301469720">"Kuupäeva määramine"</string>
+    <string name="system_set_time" msgid="7179243042276057341">"Kellaaja määramine"</string>
+    <string name="system_set_time_zone" msgid="6471564469883225195">"Ajavööndi määramine"</string>
+    <string name="desc_set_time_zone" msgid="4926392006501180047">"<xliff:g id="OFFSET">%1$s</xliff:g>, <xliff:g id="NAME">%2$s</xliff:g>"</string>
+    <string name="system_set_time_format" msgid="902518158066450918">"24-tunnise vormingu kasutamine"</string>
+    <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
+    <string name="system_auto_date_time" msgid="8458199433555868708">"Automaatne kuupäev ja kellaaeg"</string>
+  <string-array name="auto_date_time_entries">
+    <item msgid="8119837829162871025">"Kasuta võrgu pakutud kellaaega"</item>
+    <item msgid="369146066143710034">"Väljas"</item>
+  </string-array>
+  <string-array name="auto_date_time_ts_entries">
+    <item msgid="1010003447137304123">"Kasuta võrgu pakutud kellaaega"</item>
+    <item msgid="5645263357181875427">"Kasuta ülekandevoo pakutud kellaaega"</item>
+    <item msgid="5501503537181350884">"Väljas"</item>
+  </string-array>
+    <string name="system_location" msgid="4057295363709016511">"Asukoht"</string>
+    <string name="system_desc_location" msgid="1680134126100535031">"Laske rakendustel, mis on palunud teie luba, kasutada teie asukohateavet"</string>
+    <string name="system_network_location_confirm" msgid="7128162421781085332">"Asukohaga nõustumine"</string>
+    <string name="location_mode_title" msgid="728244518174115443">"Režiim"</string>
+    <string name="location_category_recent_location_requests" msgid="4541924383164183490">"Hiljutised asukohapäringud"</string>
+    <string name="location_no_recent_apps" msgid="7033474075806435793">"Ükski rakendus pole hiljuti asukohateavet küsinud"</string>
+    <string name="location_high_battery_use" msgid="5325556609027887602">"Suur akukasutus"</string>
+    <string name="location_low_battery_use" msgid="728585923412018253">"Madala tarbimisega akukasutus"</string>
+    <string name="location_mode_wifi_description" msgid="84697248707903061">"Kasuta asukoha tuvastamiseks WiFi-t"</string>
+    <string name="location_status" msgid="3037321737386011224">"Asukoha olek"</string>
+    <string name="location_services" msgid="551503779736382878">"Asukohateenused"</string>
+    <string name="on" msgid="4899322147062342542">"Sees"</string>
+    <string name="off" msgid="3127416478888499352">"Väljas"</string>
+    <string name="google_location_services_title" msgid="6304196603522909239">"Google\'i asukohateenused"</string>
+    <string name="third_party_location_services_title" msgid="2826218400381676508">"Kolmanda osapoole asukohateenused"</string>
+    <string name="location_reporting" msgid="3552501333650895634">"Asukohateavitus"</string>
+    <string name="location_history" msgid="4055660203090513120">"Asukohaajalugu"</string>
+    <string name="location_reporting_desc" msgid="1580018652781674608">"Google kasutab seda funktsiooni sellistes teenustes nagu Google Now ja Google Maps. Kui lülitate asukohateavituse sisse, siis saavad funktsiooni kasutavad Google\'i teenused salvestada ja kasutada Google\'i kontoga seotult teie seadme uusimaid asukohaandmeid."</string>
+    <string name="location_history_desc" msgid="926674012916014270">"Kui asukohaajalugu on kontol sisse lülitatud, võib Google salvestada seadme asukohaandmeid, et rakendused saaksid neid kasutada.\n\nNäiteks Google Maps saab anda sõidujuhiseid ja Google Now teavitada liiklusoludest.\n\nVõite asukohaajaloo igal ajal välja lülitada, kuid see ei kustuta ajalugu. Asukohaajaloo vaatamiseks ja haldamiseks minge aadressile maps.google.com/locationhistory."</string>
+    <string name="delete_location_history_title" msgid="707559064715633152">"Kustuta asukohaajalugu"</string>
+    <string name="delete_location_history_desc" msgid="4035229731487113147">"See kustutab seadmest kogu selle Google\'i konto asukohaajaloo. Seda kustutamist ei saa tagasi võtta. Mõned rakendused, sh Google Now, lakkavad töötamast."</string>
+    <string name="system_services" msgid="5754310941186053151">"Teenused"</string>
+    <string name="accessibility_service_settings" msgid="3251334786870932423">"Teenuse seaded"</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="9200419191468995574">"Suure kontrastsusega tekst"</string>
+    <string name="accessibility_shortcut" msgid="5856158637840030531">"Juurdepääsetavuse otsetee"</string>
+    <string name="accessibility_shortcut_enable" msgid="6603542432267329986">"Luba juurdepääsetavuse otsetee"</string>
+    <string name="accessibility_shortcut_service" msgid="2053250146891420311">"Otsetee teenus"</string>
+    <string name="accessibility_shortcut_description" msgid="2050424178481510046">"Kui otsetee on sisse lülitatud, saab juurdepääsufunktsiooni käivitada nuppe Tagasi ja Alla kolm sekundit vajutades."</string>
+    <string name="accessibility_captions" msgid="3411554568812306549">"Subtiitrid"</string>
+    <string name="accessibility_captions_description" msgid="3827820027578548160">"Video subtiitrite teksti ülekatte seaded"</string>
+    <string name="captions_display" msgid="2598662495450633375">"Kuvamine"</string>
+    <string name="captions_display_on" msgid="480438033345455728">"Sees"</string>
+    <string name="captions_display_off" msgid="87881163874948539">"Väljas"</string>
+    <string name="display_options" msgid="2645282080948371603">"Kuvamise valikud"</string>
+    <string name="captions_configure" msgid="711991018642931958">"Seadistus"</string>
+    <string name="captions_language" msgid="5905918439449912646">"Keel"</string>
+    <string name="captions_language_default" msgid="3894192926725192528">"Vaikeseade"</string>
+    <string name="captions_textsize" msgid="7161136610669343510">"Teksti suurus"</string>
+    <string name="captions_captionstyle" msgid="6650139717545516071">"Subtiitri stiil"</string>
+    <string name="captions_customoptions" msgid="7691004663572161126">"Kohandatud valikud"</string>
+    <string name="captions_fontfamily" msgid="1026632786438880997">"Fondipere"</string>
+    <string name="captions_textcolor" msgid="1566679779609140317">"Teksti värv"</string>
+    <string name="captions_edgetype" msgid="4875636291904824401">"Serva tüüp"</string>
+    <string name="captions_edgecolor" msgid="2779925179084237336">"Serva värv"</string>
+    <string name="captions_backgroundshow" msgid="1080183686470477645">"Kuva taust"</string>
+    <string name="captions_backgroundcolor" msgid="2056944109914399253">"Tausta värv"</string>
+    <string name="captions_backgroundopacity" msgid="1850126438162000027">"Tausta läbipaistvus"</string>
+    <string name="captioning_preview_text" msgid="3034147586392743237">"Subtiitrid näevad välja sellised"</string>
+    <string name="captions_textopacity" msgid="6055602491649526307">"Teksti läbipaistvus"</string>
+    <string name="captions_windowshow" msgid="6002072054703167886">"Kuva aken"</string>
+    <string name="captions_windowcolor" msgid="7460430328878876648">"Akna värv"</string>
+    <string name="captions_windowopacity" msgid="8645082670322789314">"Akna läbipaistvus"</string>
+    <string name="captions_style_0" msgid="169414884289770256">"Valge mustal"</string>
+    <string name="captions_style_1" msgid="8236052739817535538">"Must valgel"</string>
+    <string name="captions_style_2" msgid="456353889540431910">"Kollane mustal"</string>
+    <string name="captions_style_3" msgid="3860050153620761166">"Kollane sinisel"</string>
+    <string name="captions_style_custom" msgid="9062905566459387931">"Kohandatud"</string>
+    <string name="color_white" msgid="4188877187457167678">"Valge"</string>
+    <string name="color_black" msgid="2631818627391955149">"Must"</string>
+    <string name="color_red" msgid="1899020130465926495">"Punane"</string>
+    <string name="color_green" msgid="7546929005626106667">"Roheline"</string>
+    <string name="color_blue" msgid="7681690245150985958">"Sinine"</string>
+    <string name="color_cyan" msgid="3172130225116530998">"Tsüaan"</string>
+    <string name="color_yellow" msgid="3519470952904560404">"Kollane"</string>
+    <string name="color_magenta" msgid="2377854703399624607">"Fuksia"</string>
+    <string name="system_accessibility_status" msgid="8504842254080682515">"Luba"</string>
+    <string name="system_accessibility_config" msgid="4820879735377962851">"Konfiguratsioon"</string>
+    <string name="system_accessibility_service_on_confirm_title" msgid="4547924421106540376">"Kas kasutada teenust <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="system_accessibility_service_on_confirm_desc" msgid="1291445700158602622">"<xliff:g id="SERVICE">%1$s</xliff:g> võib koguda kogu sisestatud teksti, v.a paroolid. Kogutud tekst sisaldab isiklikke andmeid, nt krediitkaardinumbreid."</string>
+    <string name="system_accessibility_service_off_confirm_title" msgid="1110904358228641834">"Kas peatada teenus <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="system_accessibility_service_off_confirm_desc" msgid="3486513644923267157">"Kui valite OK, siis teenus <xliff:g id="SERVICE">%1$s</xliff:g> peatatakse."</string>
+    <string name="system_accessibility_tts_output" msgid="3186078508203212288">"Kõnesüntees"</string>
+    <string name="system_accessibility_tts_engine_config" msgid="4757760652785865532">"Mootori seadistamine"</string>
+    <string name="system_speak_passwords" msgid="8556036524146404052">"Loe paroolid ette"</string>
+    <string name="system_preferred_engine" msgid="3545505072652708443">"Eelistatud mootor"</string>
+    <string name="system_speech_rate" msgid="6553204071403872669">"Kõne kiirus"</string>
+    <string name="system_play_sample" msgid="3934369914309865584">"Esita näidis"</string>
+    <string name="system_install_voice_data" msgid="8016395777968958673">"Häälandmete installimine"</string>
+    <string name="system_general" msgid="687760148454147771">"Üldine"</string>
+    <string name="system_debugging" msgid="1576324426385458481">"Silumine"</string>
+    <string name="system_input" msgid="4457152980514604873">"Sisend"</string>
+    <string name="system_drawing" msgid="5802739024643871942">"Joonis"</string>
+    <string name="system_monitoring" msgid="7997260748312620855">"Jälgimine"</string>
+    <string name="system_apps" msgid="8481888654606868074">"Rakendused"</string>
+    <string name="system_stay_awake" msgid="5935117574414511413">"Ära lukusta"</string>
+    <string name="system_hdcp_checking" msgid="3757586362130048838">"HDCP kontrollimine"</string>
+    <string name="system_hdmi_optimization" msgid="4122753440620724144">"HDMI optimeerimine"</string>
+    <string name="system_reboot_confirm" msgid="8346913287126400728">"Kas taaskäivitada nüüd?"</string>
+    <string name="system_desc_reboot_confirm" msgid="1567738857421128179">"Seade värskendamiseks tuleb seade taaskäivitada"</string>
+    <string name="system_never_check" msgid="2860070727606369055">"Ära kontrolli kunagi"</string>
+    <string name="system_check_for_drm_content_only" msgid="6667617772587997533">"Kontrolli ainult DRM-sisu"</string>
+    <string name="system_always_check" msgid="384870282800221580">"Kontrolli alati"</string>
+    <string name="system_bt_hci_log" msgid="1891838112637932603">"Bluetoothi HCI logimine"</string>
+    <string name="system_email_address" msgid="3725494874473757217">"E-posti aadress"</string>
+    <string name="system_usb_debugging" msgid="2158285492172755923">"USB silumine"</string>
+    <string name="system_allow_mock_locations" msgid="2483106887711851466">"Võltsasukohtade lubamine"</string>
+    <string name="system_select_debug_app" msgid="6200987902307533721">"Valige silumisrakendus"</string>
+    <string name="system_wait_for_debugger" msgid="5715878008542589060">"Oota silurit"</string>
+    <string name="system_verify_apps_over_usb" msgid="7289212844195483932">"Kinnita rakendusi USB kaudu"</string>
+    <string name="system_desc_verify_apps_over_usb" msgid="7737988681480237094">"Kontrollimine, kas ADB/ADT-ga installitud rakendused on ohtlikud"</string>
+    <string name="system_wifi_verbose_logging" msgid="3097788974146704831">"WiFi paljusõnaline logimine"</string>
+    <string name="system_desc_wifi_verbose_logging" msgid="3537578245428327314">"WiFi paljusõnalise logimise lubamine"</string>
+    <string name="system_show_touches" msgid="8244331695139748286">"Kuva puudutused"</string>
+    <string name="system_pointer_location" msgid="8724050865245555084">"Kursori asukoht"</string>
+    <string name="system_show_layout_bounds" msgid="8803080672553699649">"Kuva paigutuse piirid"</string>
+    <string name="system_show_gpu_view_updates" msgid="1625918928089365222">"Näita graafikaprotsessori kuva värskendusi"</string>
+    <string name="system_show_hardware_layer" msgid="5833664339844452290">"Kuva riistvarakiht"</string>
+    <string name="system_show_gpu_overdraw" msgid="5073007513540516704">"Kuva graafikaprotsessori ülekoormus"</string>
+    <string name="system_show_surface_updates" msgid="7680759813613585278">"Kuva pinna värskendused"</string>
+    <string name="system_window_animation_scale" msgid="685477540250939659">"Akna animatsiooni skaala"</string>
+    <string name="system_transition_animation_scale" msgid="7266380208347453619">"Üleminekuanimatsiooni skaala"</string>
+    <string name="system_animator_duration_scale" msgid="3829445237130423625">"Animaatori kestuse skaala"</string>
+    <string name="system_strict_mode_enabled" msgid="7392183793064579588">"Range režiim on lubatud"</string>
+    <string name="system_profile_gpu_rendering" msgid="1113416260742329348">"Profiili renderdamine graafikaprotsessoriga"</string>
+    <string name="system_enable_traces" msgid="108745519968154528">"Luba jäljed"</string>
+    <string name="system_dont_keep_activities" msgid="4641165963339846161">"Ära hoia tegevusi alles"</string>
+    <string name="system_background_process_limit" msgid="1985373407150771045">"Taustaprotsesside piirang"</string>
+    <string name="system_show_all_anrs" msgid="5353216640638263217">"Kuva kõik ANR-id"</string>
+    <string name="system_desc_stay_awake" msgid="8485868071929937500">"Unerežiimi keelamine"</string>
+    <string name="system_desc_hdcp_checking" msgid="1664068008848077241">"Kasutatakse ainult DRM-sisu puhul"</string>
+    <string name="system_desc_hdmi_optimization" msgid="5695603795556335912">"Optimeerige ekraani maksimaalse eraldusvõime või maksimaalse kaadrikiiruse saavutamiseks. See mõjutab ainult ultra-HD-ekraane. Seade muutmisel taaskäivitatakse teie seade."</string>
+    <string name="system_desc_bt_hci_log" msgid="2592649923221658103">"Bluetoothi HCI jälgimise logimise lubamine"</string>
+    <string name="system_desc_usb_debugging" msgid="5672275208185222785">"Silumisrežiim, kui USB on ühendatud"</string>
+    <string name="system_desc_wait_for_debugger" msgid="7213496668606417691">"Silutud rakendus ootab toimimiseks siluri lisamist"</string>
+    <string name="system_desc_show_layout_bounds" msgid="5275008598296135852">"Kuva klipi piirid, veerised jms"</string>
+    <string name="system_desc_show_gpu_view_updates" msgid="9088343415389734854">"Värskenda akende kuvasid GPU-graafika puhul"</string>
+    <string name="system_desc_show_hardware_layer" msgid="3483713991865249527">"Riistvarakihid vilguvad värskendamisel roheliselt"</string>
+    <string name="system_desc_show_gpu_overdraw" msgid="74019834911598588">"Parimast halvimani: sin., roh., helepunane, punane"</string>
+    <string name="system_desc_show_surface_updates" msgid="4018685547515133353">"Akna pinna värskendam. kirjuta kogu akna pind üle"</string>
+    <string name="system_desc_strict_mode_enabled" msgid="1974896408481676324">"Ekraan vilgub rakenduste pealõime toimingute ajal"</string>
+    <string name="system_desc_profile_gpu_rendering" msgid="1594070211030991">"Mõõda renderdusaega adb-kestas dumpsys gfxinfo"</string>
+    <string name="action_on_title" msgid="1074972820237738324">"Sees"</string>
+    <string name="action_off_title" msgid="3598665702863436597">"Väljas"</string>
+    <string name="action_on_description" msgid="9146557891514835767">"Sees"</string>
+    <string name="action_off_description" msgid="1368039592272701910">"Väljas"</string>
+    <string name="agree" msgid="8155497436593889753">"Nõustun"</string>
+    <string name="disagree" msgid="7402998517682194430">"Ei nõustu"</string>
+    <string name="security_unknown_sources_title" msgid="2012801664240314305">"Tundmatud allikad"</string>
+    <string name="security_unknown_sources_desc" msgid="7196715598352173267">"Rakenduste installimise lubamine muudest allikatest peale Play poe"</string>
+    <string name="security_unknown_sources_confirm_title" msgid="4600896691987804985">"Tundmatute allikate lubamine"</string>
+    <string name="security_unknown_sources_confirm_desc" msgid="7883820068140189584">"Teie seade ja isiklikud andmed on haavatavamad tundmatutest allikatest pärinevate rakenduste rünnakute suhtes. Nõustute, et olete ainuisikuliselt vastutav seadme kahjustuste või andmekao eest, mis võivad tuleneda nende rakenduste kasutusest."</string>
+    <string name="system_hdcp_checking_never" msgid="3251512398865365135">"Mitte kunagi"</string>
+    <string name="system_hdcp_checking_drm" msgid="2159124883496899278">"DRM-i sisu puhul"</string>
+    <string name="system_hdcp_checking_always" msgid="5868177105455148262">"Alati"</string>
+    <string name="system_hdmi_optimization_best_resolution" msgid="4916028940107998097">"Parim eraldusvõime"</string>
+    <string name="system_hdmi_optimization_best_framerate" msgid="3778579148517609370">"Parim kaadrisagedus"</string>
+    <string name="system_hw_overdraw_off" msgid="6637679040053936280">"Väljas"</string>
+    <string name="system_hw_overdraw_areas" msgid="6442009722913530348">"Ülejoonistuse alade kuvamine"</string>
+    <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Ülejoonistuse loenduri kuvamine"</string>
+    <string name="no_application" msgid="1904437693440706534">"Mitte ükski"</string>
+    <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Puudub"</string>
+  <string-array name="animation_scale_entries">
+    <item msgid="5408992662476056082">"Animatsioon on väljas"</item>
+    <item msgid="6818290063799857019">"0,5-kordne animatsiooni skaala"</item>
+    <item msgid="8257959452691080724">"1-kordne animatsiooni skaala"</item>
+    <item msgid="4781052272686018414">"1,5-kordne animatsiooni skaala"</item>
+    <item msgid="2272016945160227610">"2-kordne animatsiooni skaala"</item>
+    <item msgid="5015441793276576312">"5-kordne animatsiooni skaala"</item>
+    <item msgid="1290233583371556415">"10-kordne animatsiooni skaala"</item>
+  </string-array>
+    <string name="track_frame_time_off" msgid="8845064783618702239">"Väljas"</string>
+    <string name="track_frame_time_bars" msgid="5841531515222229632">"Ekraanil ribadena"</string>
+    <string name="app_process_limit_standard" msgid="6069948528843313888">"Standardpiir"</string>
+    <string name="app_process_limit_zero" msgid="4094665021909774994">"Taustatoiminguteta"</string>
+    <string name="app_process_limit_one" msgid="4509089015775863726">"Maksimaalselt 1 toiming"</string>
+    <string name="app_process_limit_two" msgid="368216781690488529">"Maksimaalselt 2 toimingut"</string>
+    <string name="app_process_limit_three" msgid="2191860654645796987">"Maksimaalselt 3 toimingut"</string>
+    <string name="app_process_limit_four" msgid="9186705437061005461">"Maksimaalselt 4 toimingut"</string>
+    <string name="tts_rate_very_slow" msgid="1927454053669655117">"Väga aeglane"</string>
+    <string name="tts_rate_slow" msgid="7668484707347561166">"Aeglane"</string>
+    <string name="tts_rate_normal" msgid="3631458247079252628">"Tavaline"</string>
+    <string name="tts_rate_fast" msgid="5723868816257531421">"Kiire"</string>
+    <string name="tts_rate_very_fast" msgid="7756663146626103952">"Väga kiire"</string>
+    <string name="title_settings" msgid="780933693363320088">"Rakenduse <xliff:g id="NAME">%1$s</xliff:g> seaded"</string>
+    <string name="title_current_keyboard" msgid="891238509164879851">"Praegune klaviatuur"</string>
+    <string name="title_configure" msgid="846802387014612210">"Seadistamine"</string>
+    <string name="desc_configure_keyboard" msgid="3474279140150468141">"Klaviatuuri valikud"</string>
+    <string name="title_current_autofill_service" msgid="9029001041887283153">"Praegune automaattäite teenus"</string>
+    <string name="title_select_autofill_service" msgid="696559582725756848">"Automaattäite teenuse valimine"</string>
+    <string name="autofill_none" msgid="1615056985649424207">"Puudub"</string>
+    <string name="autofill_confirmation_message" msgid="3840267789160192558">"&lt;b&gt;Veenduge, et rakendus oleks usaldusväärne&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Password service&gt;%1$s&lt;/xliff:g&gt; kasutab automaatse täitmise sisestuse määramiseks ekraanil kuvatut."</string>
+    <string name="computing_size" msgid="8623916230485437579">"Arvutamine ..."</string>
+    <string name="title_select_wifi_network" msgid="935820896444071617">"Valige WiFi-võrk"</string>
+    <string name="accessories_wifi_display_rename_device" msgid="8803397194143132061">"Nimeta ümber"</string>
+    <string name="accessories_wifi_display_enable" msgid="2385467074170316302">"WiFi-kuva"</string>
+    <string name="accessories_wifi_display_pin_required" msgid="5434960694140426664">"PIN-kood on kohustuslik"</string>
+    <string name="whichApplication" msgid="4510042089342879264">"Lõpetage toiming rakendusega"</string>
+    <string name="alwaysUseQuestion" msgid="2643084054296937138">"Kas kasutada toimingu puhul alati seda valikut?"</string>
+    <string name="alwaysUseOption" msgid="8799609235198714441">"Kasuta alati"</string>
+    <string name="justOnceOption" msgid="6714005843102804865">"Ainult seekord"</string>
+    <string name="noApplications" msgid="7511175717026318399">"Ükski rakendus ei saa seda toimingut teha."</string>
+    <string name="noAppsGoBack" msgid="2538480554615467065">"Tagasi"</string>
+    <string name="inputs_inputs" msgid="8639408473661259307">"Sisendid"</string>
+    <string name="inputs_header_cec" msgid="4139015942980115323">"Olmeelektroonika juhtimine (CEC)"</string>
+    <string name="inputs_cec_settings" msgid="5948357769198260080">"Seadme juhtimise seaded"</string>
+    <string name="inputs_blu_ray" msgid="6561004081102615775">"Blu-ray"</string>
+    <string name="inputs_cable" msgid="8274665772422377063">"Kaabel"</string>
+    <string name="inputs_dvd" msgid="1452146927899250552">"DVD"</string>
+    <string name="inputs_game" msgid="4762255172943107070">"Mängukonsool"</string>
+    <string name="inputs_aux" msgid="5331442342029867329">"Aux"</string>
+    <string name="inputs_custom_name" msgid="2649826613531559538">"Kohandatud nimi"</string>
+    <string name="inputs_custom_name_description_fmt" msgid="2879134265596928298">"Sisestage sisendi <xliff:g id="INPUT">%1$s</xliff:g> nimi."</string>
+    <string name="inputs_hide" msgid="9223355763198742416">"Peidetud"</string>
+    <string name="inputs_show" msgid="2937435050499142756">"Kuva see sisend"</string>
+    <string name="input_header_names" msgid="5903234218909970550">"Nimi"</string>
+    <string name="inputs_hdmi_control" msgid="650355636965841054">"HDMI-i juhtimine"</string>
+    <string name="inputs_hdmi_control_desc" msgid="306769914209526682">"Lubage teleril juhtida HDMI-seadmeid"</string>
+    <string name="inputs_device_auto_off" msgid="2659766884754402352">"Seadme automaatne väljalülitus"</string>
+    <string name="inputs_device_auto_off_desc" msgid="1164897242719608201">"HDMI-seadmete väljalülitamine koos teleriga"</string>
+    <string name="inputs_tv_auto_on" msgid="544848340484583318">"Teleri automaatne sisselülitus"</string>
+    <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Teleri sisselülitamine HDMI-seadmega"</string>
+    <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
+      <item quantity="other">Ühendatud sisendid</item>
+      <item quantity="one">Ühendatud sisend</item>
+    </plurals>
+    <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
+      <item quantity="other">Ooterežiimis sisendid</item>
+      <item quantity="one">Ooterežiimis sisend</item>
+    </plurals>
+    <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
+      <item quantity="other">Ühendamata sisendid</item>
+      <item quantity="one">Ühendamata sisend</item>
+    </plurals>
+    <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Juurdepääsu piiramine rakendustele ja muule konto sisule"</string>
+    <string name="user_new_profile_name" msgid="6637593067318708353">"Piiratud profiil"</string>
+    <string name="user_restrictions_controlled_by" msgid="8124926446168030445">"Juhib: <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="app_not_supported_in_limited" msgid="4046604594925826955">"Seda rakendust ei toetata piiratud profiilides"</string>
+    <string name="app_sees_restricted_accounts" msgid="174038126799649152">"Sellel rakendusel on juurdepääs teie kontodele"</string>
+    <string name="restriction_location_enable_title" msgid="2552780806199464266">"Asukoht"</string>
+    <string name="restriction_location_enable_summary" msgid="3719330231217994482">"Rakendustel asukohateabe kasutamise lubamine"</string>
+    <string name="restricted_profile_switch_to" msgid="6193201935877168764">"Piiratud profiilile sisenemine"</string>
+    <string name="restricted_profile_switch_out" msgid="3589381233390753413">"Piiratud profiililt väljumine"</string>
+    <string name="restricted_profile_delete_title" msgid="7153982195273379506">"Piiratud profiili kustutamine"</string>
+    <string name="restricted_profile_create_title" msgid="700322590579894058">"Piiratud profiili loomine"</string>
+    <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Seaded"</string>
+    <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Lubatud rakendused"</string>
+    <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
+      <item quantity="other">%d rakendust on lubatud</item>
+      <item quantity="one">1 rakendus on lubatud</item>
+    </plurals>
+    <string name="restricted_profile_allowed" msgid="970921490464867884">"Lubatud"</string>
+    <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Ei ole lubatud"</string>
+    <string name="restricted_profile_customize_restrictions" msgid="4723577877385636704">"Piirangute kohandamine"</string>
+    <string name="restricted_profile_configure_apps_description_loading" msgid="3293508876131962699">"Üks hetk ..."</string>
+    <string name="restricted_profile_change_password_title" msgid="6961384850606763601">"PIN-koodi muutmine"</string>
+    <string name="restriction_description" msgid="2053112392083722259">"<xliff:g id="DESCRIPTION">%1$s</xliff:g>\n<xliff:g id="VALUE">%2$s</xliff:g>"</string>
+    <string name="app_sees_restricted_accounts_and_controlled_by" msgid="1261056180558324892">"Sellel rakendusel on juurdepääs teie kontodele. Seda juhib rakendus <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="pin_enter_unlock_channel" msgid="243855138978654080">"Kanali vaatamiseks sisestage PIN-kood"</string>
+    <string name="pin_enter_unlock_program" msgid="275489015420025531">"Saate vaatamiseks sisestage PIN-kood"</string>
+    <string name="pin_enter_pin" msgid="5020029261153234751">"Sisestage PIN-kood"</string>
+    <string name="pin_enter_new_pin" msgid="1930944619313642621">"Uue PIN-koodi määramine"</string>
+    <string name="pin_enter_again" msgid="7615050143778858658">"Sisestage uus PIN-kood uuesti"</string>
+    <string name="pin_enter_old_pin" msgid="5665265735227617942">"Sisestage vana PIN-kood"</string>
+    <string name="pin_enter_wrong_seconds" msgid="3014013615537066237">"Olete 5 korda sisestanud vale PIN-koodi.\nProovige uuesti <xliff:g id="RELATIVE_TIME_SPAN">%1$d</xliff:g> sekundi pärast."</string>
+    <string name="pin_toast_wrong" msgid="4297542365877164402">"Vale PIN-kood, proovige uuesti"</string>
+    <string name="pin_toast_not_match" msgid="2439298696342975155">"Proovige uuesti, PIN-kood pole õige"</string>
+    <string name="wifi_setup_input_password" msgid="8510003548463241234">"Sisestage võrgu <xliff:g id="SSID">%1$s</xliff:g> parool"</string>
+    <string name="wifi_setup_connection_success" msgid="3301901673876973474">"Ühendamine õnnestus"</string>
+    <string name="wifi_setup_save_success" msgid="6862510218032734919">"Salvestamine õnnestus"</string>
+    <string name="device_apps_app_management_version" msgid="2119174719194899740">"Versioon <xliff:g id="APP_VERSION">%1$s</xliff:g>"</string>
+    <string name="device_apps_app_management_open" msgid="4249743535677261897">"Avamine"</string>
+    <string name="device_apps_app_management_force_stop" msgid="4454221309989640309">"Sundpeata"</string>
+    <string name="device_apps_app_management_force_stop_desc" msgid="1980972142863114899">"Kui sundpeatate rakenduse, võib see toimida valesti."</string>
+    <string name="device_apps_app_management_uninstall" msgid="4171103696233332967">"Desinstalli"</string>
+    <string name="device_apps_app_management_uninstall_updates" msgid="5647988075828648951">"Värskenduste desinstallimine"</string>
+    <string name="device_apps_app_management_uninstall_updates_desc" msgid="4508586498292236706">"Kõik selle Androidi süsteemirakenduse värskendused desinstallitakse."</string>
+    <string name="device_apps_app_management_disable" msgid="819003297535493633">"Keela"</string>
+    <string name="device_apps_app_management_disable_desc" msgid="9143166267511427607">"Kas soovite selle rakenduse keelata?"</string>
+    <string name="device_apps_app_management_enable" msgid="9173340340253029114">"Luba"</string>
+    <string name="device_apps_app_management_enable_desc" msgid="8686291003061136476">"Kas soovite selle rakenduse lubada?"</string>
+    <string name="device_apps_app_management_storage_used" msgid="6725789557993296433">"Kasutatud salvestusruum"</string>
+    <string name="device_apps_app_management_storage_used_desc" msgid="8928632612101487179">"Üksuses <xliff:g id="VOLUME">%2$s</xliff:g> on kasutatud <xliff:g id="SIZE">%1$s</xliff:g>"</string>
+    <string name="device_apps_app_management_clear_data" msgid="7305471678286735600">"Kustuta andmed"</string>
+    <string name="device_apps_app_management_clear_data_desc" msgid="170972356946852847">"Rakenduse kõik andmed kustutatakse jäädavalt.\nSee hõlmab kõiki faile, seadeid, kontosid, andmebaase jne."</string>
+    <string name="device_apps_app_management_clear_default" msgid="4566187319647111484">"Kustuta vaiketoimingud"</string>
+    <string name="device_apps_app_management_clear_default_set" msgid="1649974109123107390">"Rakenduse käivit. määram. toimingu puhul"</string>
+    <string name="device_apps_app_management_clear_default_none" msgid="5935252537185381597">"Ühtegi vaiketoimingut pole määratud"</string>
+    <string name="device_apps_app_management_clear_cache" msgid="2678301483598915479">"Tühjenda vahemälu"</string>
+    <string name="device_apps_app_management_notifications" msgid="1687529279264810317">"Märguanded"</string>
+    <string name="device_apps_app_management_licenses" msgid="5554510375160907076">"Avatud lähtekoodi litsentsid"</string>
+    <string name="device_apps_app_management_permissions" msgid="4951820230491375037">"Load"</string>
+    <string name="device_apps_app_management_not_available" msgid="4198634078194500518">"Rakendus ei ole saadaval"</string>
+    <string name="settings_ok" msgid="5950888975075541964">"OK"</string>
+    <string name="settings_cancel" msgid="576094334743686152">"Tühista"</string>
+    <string name="settings_on" msgid="7734010120323404333">"Sees"</string>
+    <string name="settings_off" msgid="4060451657850476369">"Väljas"</string>
+    <string name="device_daydreams_none" msgid="3405655350757277348">"Lülita ekraan välja"</string>
+    <string name="device_daydreams_select" msgid="7203264446482623438">"Ekraanisäästja"</string>
+    <string name="device_daydreams_test" msgid="7828275397550076567">"Alusta kohe"</string>
+    <string name="device_daydreams_sleep" msgid="6847770718407377357">"Alustamise aeg"</string>
+    <string name="device_daydreams_sleep_description" msgid="6237610484915504587">"Ekraanisäästja käivitatakse pärast seda tegevusetusperioodi. Kui ekraanisäästjat pole valitud, lülitub ekraanikuva välja."</string>
+    <string name="device_daydreams_sleep_summary" msgid="3081688734381995693">"<xliff:g id="SLEEP_DESCRIPTION">%1$s</xliff:g> pärast tegevusetust"</string>
+    <string name="device_energy_saver_screen_off" msgid="6908468996426629480">"Lülita ekraan välja"</string>
+    <string name="device_energy_saver_screen_off_description" msgid="4469679706899396071">"Pärast <xliff:g id="SLEEP_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="device_energy_saver_screen_off_dialog_title" msgid="4092476553760123309">"Lülita ekraan välja pärast"</string>
+    <string name="device_energy_saver_allow_turning_screen_off" msgid="3832490233158066073">"Luba ekraani väljalülitamine"</string>
+    <string name="device_energy_saver_allow_turning_screen_off_description" msgid="6369746832941270786">"Meedia taasesituse ajal"</string>
+    <string name="backup_configure_account_default_summary" msgid="2170733614341544296">"Ühelegi kontole ei ole praegu salvestatud varundatud andmeid"</string>
+    <string name="backup_erase_dialog_title" msgid="6008454053276987100"></string>
+    <string name="backup_erase_dialog_message" msgid="222169533402624861">"Kas soovite WiFi-paroolide, järjehoidjate, muude seadete ja rakendusandmete varundamise lõpetada ning kõik Google\'i serverites olevad koopiad kustutada?"</string>
+    <string name="privacy_backup_data" msgid="3604057980102997914">"Varunda minu andmed"</string>
+    <string name="privacy_backup_account" msgid="4527813051841860610">"Varunda konto"</string>
+    <string name="privacy_automatic_restore" msgid="7117805818589418118">"Automaatne taastamine"</string>
+    <string name="factory_reset_device" msgid="6509900821515094361">"Lähtesta seade"</string>
+    <string name="factory_reset_description" msgid="4448783644897046471">"See kustutab kõik andmed seadme sisemisest salvestusruumist, sealhulgas teie Google\'i konto, süsteemi- ja rakenduseandmed ning seaded ja allalaaditud rakendused"</string>
+    <string name="confirm_factory_reset_description" msgid="1337483463207721713">"Kas soovite kõik seadmes olevad isiklikud andmed ja allalaaditud rakendused kustutada? Te ei saa seda toimingut tagasi võtta."</string>
+    <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Kustuta kõik"</string>
+    <string name="select_device_name_title" msgid="3045019448327493634">"Valige seadme <xliff:g id="DEVICEMODEL">%1$s</xliff:g> nimi"</string>
+    <string name="select_device_name_description" msgid="8528185095614986580">"Andke seadmele nimi, et seda oleks lihtsam tuvastada, kui sellesse üle kannate või teiste seadmete kaudu sellega ühenduse loote."</string>
+  <string-array name="rooms">
+    <item msgid="6590829789532602097">"Android TV"</item>
+    <item msgid="1140506340411482365">"Elutoa teler"</item>
+    <item msgid="6448060889026244632">"Peretoa teler"</item>
+    <item msgid="3336274213215419228">"Magamistoa teler"</item>
+  </string-array>
+    <string name="custom_room" msgid="6798144004583173563">"Sisestage kohandatud nimi …"</string>
+    <string name="device_rename_title" msgid="9070021379000499270">"Seadme <xliff:g id="DEVICEMODEL">%1$s</xliff:g> ümbernimetamine"</string>
+    <string name="device_rename_description" msgid="1973894029492915135">"Selle seadme <xliff:g id="DEVICEMODEL">%1$s</xliff:g> nimi on praegu „<xliff:g id="DEVICENAME">%2$s</xliff:g>”"</string>
+    <string name="device_name_suggestion_title" msgid="3986220212759193742">"Määrake oma seadme nimi"</string>
+    <string name="device_name_suggestion_summary" msgid="4582691399302362938">"Kasutage seda nime telefonist fotode, videote ja muu ülekandmisel"</string>
+    <string name="change_setting" msgid="7211706374208138343">"Muuda"</string>
+    <string name="keep_settings" msgid="703474489210093961">"Ära muuda"</string>
+    <string name="apps_permissions" msgid="7876407267050498394">"Load"</string>
+    <string name="device_apps_permissions" msgid="8421323706003063878">"Rakenduste load"</string>
+    <string name="app_permissions_group_summary" msgid="6818210080117761117">"<xliff:g id="COUNT_0">%1$d</xliff:g> <xliff:g id="COUNT_1">%2$d</xliff:g>-st rakendusest on lubatud"</string>
+    <string name="bluetooth_permission_request" msgid="7788089036741496993">"Bluetoothi loa taotlus"</string>
+    <string name="security_patch" msgid="5468261708915367254">"Androidi turvapaiga tase"</string>
+    <string name="choose_application" msgid="2375936782103669988">"Rakenduse valimine"</string>
+    <string name="experimental_preference" msgid="3982593252210557436">"(Katseline)"</string>
+    <string name="reboot_safemode_action" msgid="2862127510492131128">"Taaskäivita ohutusrežiimis"</string>
+    <string name="reboot_safemode_confirm" msgid="5745977150299953603">"Kas soovite taaskäivitada ohutusrežiimis?"</string>
+    <string name="reboot_safemode_desc" msgid="2919933461408942799">"See keelab kõik installitud kolmandate osapoolte rakendused. Need taastatakse pärast uuesti taaskäivitamist."</string>
+    <string name="capturing_bugreport" msgid="832512801903486821">"Veaaruande jäädvustamine"</string>
+    <string name="available_virtual_keyboard_category" msgid="7445262027711560629">"Saadaolevad virtuaalsed klaviatuurid"</string>
+    <string name="manage_keyboards" msgid="7983890675377321912">"Klaviatuuride haldamine"</string>
+    <string name="app_permission_summary_allowed" msgid="5359622119044147500">"Lubatud"</string>
+    <string name="app_permission_summary_not_allowed" msgid="5131611341738385303">"Ei ole lubatud"</string>
+    <string name="usage_access" msgid="8402350645248312782">"Juurdepääs kasutusele"</string>
+    <string name="usage_access_description" msgid="3276026988575551587">"Juurdepääs kasutusele võimaldab rakendusel jälgida, milliseid teisi rakendusi (ja kui sageli), operaatorit ja keeleseadeid te kasutate, ning vaadata teisi üksikasju."</string>
+    <string name="high_power_apps" msgid="5841073958519976562">"Energia optimeerimine"</string>
+    <string name="high_power_apps_description" msgid="8651692364795060525">"Rakenduste energiakasutuse optimeerimine"</string>
+    <string name="high_power_apps_empty" msgid="3084512758421482051">"Ühtegi rakendust pole vaja optimeerida"</string>
+    <string name="high_power_on" msgid="3120162683093360951">"Pole optimeeritud"</string>
+    <string name="high_power_off" msgid="3588854600942236231">"Energiakasutuse optimeerimine"</string>
+    <string name="high_power_system" msgid="6263052626979462255">"Energia optimeerimine pole saadaval"</string>
+    <string name="manage_notification_access_title" msgid="8659254371564990084">"Juurdepääs märguannetele"</string>
+    <string name="no_notification_listeners" msgid="5119406452675724448">"Ükski installitud rakendus pole taotlenud juurdepääsu märguannetele."</string>
+    <string name="notification_listener_security_warning_summary" msgid="8602907284276088658">"Need rakendused saavad lugeda kõiki märguandeid, sh isiklikke andmeid, näiteks kontaktide nimed ja teile saadetud tekstsõnumid. Need saavad ka loobuda märguannetest või aktiveerida märguannetes olevaid toimingunuppe."</string>
+    <string name="directory_access" msgid="7338555825237012006">"Juurdepääs kataloogile"</string>
+    <string name="directory_access_description" msgid="3630855858552422012">"Nendel rakendustel on teatud kataloogidele juurdepääsemise luba."</string>
+    <string name="directory_on_volume" msgid="5628089584970521703">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
+    <string name="system_alert_window_settings" msgid="5790572489650085051">"Kuva muude rakenduste peal"</string>
+    <string name="permit_draw_overlay" msgid="5312730681030266735">"Luba muude rakenduste peal kuvamine"</string>
+    <string name="allow_overlay_description" msgid="5152329837278240259">"Lubage rakendus kuvada muude kasutatavate rakenduste peal. See võib häirida nende rakenduste kasutamist või muuta nende käitumist või kuvamisviisi."</string>
+    <string name="write_system_settings" msgid="4284654265954461890">"Süsteemiseadete muutmine"</string>
+    <string name="write_settings_title" msgid="2361816483383105754">"Saab muuta süsteemiseadeid"</string>
+    <string name="write_settings_description" msgid="7382397926674265937">"Luba võimaldab rakendusel muuta süsteemiseadeid."</string>
+    <string name="write_settings_on" msgid="71675710746513956">"Jah"</string>
+    <string name="write_settings_off" msgid="6730113471695092167">"Ei"</string>
+    <string name="picture_in_picture_title" msgid="2636935591386702348">"Pilt pildis"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="3688997906817583854">"Luba funktsioon pilt pildis"</string>
+    <string name="picture_in_picture_empty_text" msgid="4370198922852736600">"Ükski installitud rakendus ei toeta funktsiooni Pilt pildis"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="3296649114939705896">"Lubage rakendustel luua pilt pildis aken ajal, mil rakendus on avatud, või pärast sellest väljumist (näiteks video vaatamise jätkamiseks). See aken kuvatakse muude kasutatavate rakenduste peal."</string>
+    <string name="special_access" msgid="21806055758289916">"Rakenduse erijuurdepääs"</string>
+    <string name="string_concat" msgid="5213870180216051497">"<xliff:g id="PART1">%1$s</xliff:g>, <xliff:g id="PART2">%2$s</xliff:g>"</string>
+    <string name="audio_category" msgid="6143623109624947993">"Heli"</string>
+    <string name="record_audio" msgid="5035689290259575229">"Heli salvestamine"</string>
+    <string name="record_audio_summary_on" msgid="8724494646461335090">"Heli salvestamise peatamiseks keelake"</string>
+    <string name="record_audio_summary_off" msgid="1392440365091422816">"Lubage kohe heli salvestamise alustamiseks"</string>
+    <string name="play_recorded_audio_title" msgid="4627717067151602729">"Salvestatud heli esitamine"</string>
+    <string name="save_recorded_audio_title" msgid="378003351782124651">"Salvestatud heli salvestamine"</string>
+    <string name="time_to_start_read_title" msgid="6565449163802837806">"Aeg alustada lugemist"</string>
+    <string name="time_to_valid_audio_title" msgid="7246101824813414348">"Aega heli salvestamiseni"</string>
+    <string name="empty_audio_duration_title" msgid="9024377320171450683">"Tühja heliklipi kestus"</string>
+    <string name="show_audio_recording_start_failed" msgid="9131762831381326605">"Heli salvestamise alustamine ebaõnnestus."</string>
+    <string name="show_audio_recording_failed" msgid="8128216664039868681">"Heli salvestamine ebaõnnestus."</string>
+    <string name="title_data_saver" msgid="7500278996154002792">"Andmemahu säästja"</string>
+    <string name="summary_data_saver" msgid="6793558728898207405">"Videokvaliteedi automaatne kohandamine, et kasutada vähem mobiilset andmesidet"</string>
+    <string name="title_data_alert" msgid="8262081890052682475">"Andmekasutus ja hoiatused"</string>
+    <string name="disabled_by_policy_title" msgid="2220484346213756472">"Keelatud toiming"</string>
+    <string name="disabled_by_policy_title_adjust_volume" msgid="4229779946666263271">"Helitugevust ei saa muuta"</string>
+    <string name="disabled_by_policy_title_outgoing_calls" msgid="8642280178608881544">"Helistamine ei ole lubatud"</string>
+    <string name="disabled_by_policy_title_sms" msgid="5721045390560951358">"SMS-id ei ole lubatud"</string>
+    <string name="disabled_by_policy_title_camera" msgid="6576557964422257426">"Kaamera ei ole lubatud"</string>
+    <string name="disabled_by_policy_title_screen_capture" msgid="5774035841010091253">"Ekraanipildi tegemine ei ole lubatud"</string>
+    <string name="disabled_by_policy_title_suspend_packages" msgid="6500185610058872758">"Seda rakendust ei saa avada"</string>
+    <string name="default_admin_support_msg" msgid="7913455019068370350">"Küsimuste korral võtke ühendust IT-administraatoriga"</string>
+    <string name="network_connection_request_dialog_title" msgid="4103963119407212989">"Seade, mida rakendusega <xliff:g id="APPNAME">%1$s</xliff:g> kasutada"</string>
+    <string name="network_connection_timeout_dialog_message" msgid="8408857135950230472">"Seadmeid ei leitud. Veenduge, et seadmed oleksid sisse lülitatud ja ühendamiseks saadaval."</string>
+    <string name="network_connection_timeout_dialog_ok" msgid="5374522862360880609">"Proovi uuesti"</string>
+    <string name="network_connection_errorstate_dialog_message" msgid="3346121178275518630">"Midagi tuli vahele. Rakendus tühistas seadme valimise taotluse."</string>
+    <string name="network_connection_connect_successful" msgid="2981223044343511313">"Ühendamine õnnestus"</string>
+    <string name="network_connection_request_dialog_showall" msgid="2653775399674126208">"Kuva kõik"</string>
+    <string name="progress_scanning" msgid="3323638586482686516">"Otsimine"</string>
+</resources>

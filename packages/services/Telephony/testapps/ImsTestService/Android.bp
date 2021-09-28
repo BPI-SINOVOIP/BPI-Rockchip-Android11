@@ -1,0 +1,13 @@
+android_app {
+    name: "ImsTestApp",
+    static_libs: [
+        "androidx.legacy_legacy-support-v4",
+        "androidx.appcompat_appcompat",
+        "androidx.recyclerview_recyclerview",
+        "androidx.cardview_cardview",
+    ],
+    srcs: ["src/**/*.java"],
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+}

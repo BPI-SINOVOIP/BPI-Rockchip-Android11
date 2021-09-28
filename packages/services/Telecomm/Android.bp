@@ -1,0 +1,95 @@
+genrule {
+    name: "statslog-telecom-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module telecom"
+        + " --javaPackage com.android.server.telecom --javaClass TelecomStatsLog",
+    out: ["com/android/server/telecom/TelecomStatsLog.java"],
+}
+
+filegroup {
+    name: "Telecom-srcs",
+    srcs: [
+        "src/**/*.java",
+        ":statslog-telecom-java-gen",
+    ],
+}
+
+// Build the Telecom service.
+android_app {
+    name: "Telecom",
+    srcs: [
+        ":Telecom-srcs",
+        "proto/**/*.proto",
+    ],
+    resource_dirs: ["res"],
+    proto: {
+        type: "nano",
+        local_include_dirs: ["proto/"],
+        output_params: ["optional_field_style=accessors"],
+    },
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+    defaults: ["SettingsLibDefaults"],
+}
+
+android_test {
+    name: "TelecomUnitTests",
+    static_libs: [
+        "android-ex-camera2",
+        "guava",
+        "mockito-target-extended",
+        "androidx.test.rules",
+        "platform-test-annotations",
+        "androidx.legacy_legacy-support-core-ui",
+        "androidx.legacy_legacy-support-core-utils",
+        "androidx.core_core",
+        "androidx.fragment_fragment",
+        "androidx.test.ext.junit"
+    ],
+    srcs: [
+        "tests/src/**/*.java",
+        ":Telecom-srcs",
+        "proto/**/*.proto",
+    ],
+    proto: {
+        type: "nano",
+        local_include_dirs: ["proto/"],
+        output_params: ["optional_field_style=accessors"],
+    },
+    resource_dirs: [
+        "tests/res",
+        "res",
+    ],
+    libs: [
+        "android.test.mock",
+        "android.test.base",
+        "android.test.runner",
+    ],
+
+    jni_libs: [
+        "libdexmakerjvmtiagent",
+        "libstaticjvmtiagent",
+    ],
+
+    aaptflags: [
+        "--auto-add-overlay",
+        "--extra-packages",
+        "com.android.server.telecom",
+    ],
+    manifest: "tests/AndroidManifest.xml",
+    optimize: {
+        enabled: false,
+    },
+    platform_apis: true,
+    certificate: "platform",
+    jacoco: {
+        include_filter: ["com.android.server.telecom.*"],
+        exclude_filter: ["com.android.server.telecom.tests.*"],
+    },
+    test_suites: ["device-tests"],
+    defaults: ["SettingsLibDefaults"],
+}

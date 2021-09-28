@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2018 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<resources>
+    <!-- Whether quick settings should be the root settings activity or not. -->
+    <bool name="config_is_quick_settings_root">false</bool>
+    <!-- Whether to show the launcher icon for settings home or not. -->
+    <bool name="config_enable_home_settings_icon">true</bool>
+    <!-- Whether to show the launcher icon for quick settings or not. -->
+    <bool name="config_enable_quick_settings_icon">false</bool>
+    <!-- Whether system_update_settings should be shown or not. -->
+    <bool name="config_show_system_update_settings">true</bool>
+    <!-- Whether Wi-Fi Mac address should be shown or not. -->
+    <bool name="config_show_wifi_mac_address">true</bool>
+    <!-- Whether to show regulatory info or not. -->
+    <bool name="config_show_regulatory_info">false</bool>
+    <!-- Whether premium SMS should be shown or not. -->
+    <bool name="config_show_premium_sms">true</bool>
+    <!-- Whether exit button in settings' root action bar should be shown or not -->
+    <bool name="config_show_settings_root_exit_icon">true</bool>
+    <!--
+        Array of bluetooth device major classes that should be used for unbonded
+        device filter.
+
+        The values of the device major classes can be found in
+        android.bluetooth.BluetoothClass. If the array is empty, the device
+        filter will return all unbonded devices.
+
+        Example usage:
+        <integer-array name="config_unbonded_device_filter_whitelist">
+            <item>0x0200</item>
+        </integer-array>
+
+        This filter would only return unbonded devices which correspond to the
+        major class for PHONE.
+    -->
+    <integer-array name="config_unbonded_device_filter_whitelist"/>
+    <!--
+        Array of keys that should be used for determining how audio attribute
+        usage should be mapped to ringtone uris.
+
+        The values of the keys can be found in android.media.AudioAttributes.
+        The number of items in this array must equal the number of items in
+        config_ringtone_uri_map_value, and the usages are mapped to the ringtone
+        uri based on positions in the array. The lowest rank usage (based on the
+        order in car_volume_items.xml) in each audio group (in Car service's
+        car_volume_groups.xml) will be used to sound for a given volume group's
+        slider.
+
+        If empty, all ringtones will default to the default ringtone uri.
+
+        TODO(b/144382611): Instead of mapping by usage, we should map by audio
+        group so as to make it clearer to define the sound to be played with a
+        given slider.
+    -->
+    <integer-array name="config_ringtone_audio_attribute_usages_map_key">
+        <item>5</item>
+        <item>4</item>
+    </integer-array>
+    <!--
+        Array of values that should be used to determine how audio attribute
+        usage should be mapped to ringtone uris.
+
+        The values should be uri strings that can be parsed into Uri. The number
+        of items in this array must equal the number of items in
+        config_ringtone_audio_attributes_map_key, and the ringtone uris are
+        mapped to the audio attributes based on positions in the array.
+
+        If empty, all ringtones will default to the default ringtone uri.
+    -->
+    <string-array name="config_ringtone_uri_map_value">
+        <item>content://settings/system/notification_sound</item>
+        <item>content://settings/system/alarm_alert</item>
+    </string-array>
+    <!-- Whether all preferences should always ignore UX Restrictions -->
+    <bool name="config_always_ignore_ux_restrictions">false</bool>
+    <!-- Array of Preference Keys that ignore UX Restrictions -->
+    <string-array name="config_ignore_ux_restrictions">
+        <item>@string/pk_display_settings_entry</item>
+        <item>@string/pk_brightness_level</item>
+        <item>@string/pk_sound_settings_entry</item>
+        <item>@string/pk_volume_settings</item>
+        <item>@string/pk_network_and_internet_entry</item>
+        <item>@string/pk_wifi_settings_entry</item>
+        <item>@string/pk_bluetooth_settings_entry</item>
+        <item>@string/pk_bluetooth_paired_devices</item>
+    </string-array>
+
+    <!-- The component which listens for the enabling of developer options. -->
+    <string name="config_dev_options_module" translatable="false">com.android.car.developeroptions/.Settings$DevelopmentSettingsDashboardActivity</string>
+
+    <!-- Settings intelligence package name -->
+    <string name="config_settingsintelligence_package_name" translatable="false">
+        com.android.settings.intelligence
+    </string>
+</resources>

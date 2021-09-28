@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.example;
+
+message BoundingBox {
+  optional int32 top_x = 1;
+  optional int32 top_y = 2;
+  optional int32 width = 3;
+  optional int32 height = 4;
+};
+
+message Pose {
+  optional float pan  = 1;
+  optional float tilt = 2;
+}
+
+message FaceOutput {
+  optional BoundingBox box = 1;
+
+  optional Pose pose = 2;
+};

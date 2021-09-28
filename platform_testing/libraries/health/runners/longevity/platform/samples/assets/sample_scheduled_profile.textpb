@@ -1,0 +1,21 @@
+schedule: TIMESTAMPED
+scenarios [{
+    at: "00:00:10"
+    journey: "android.platform.test.longevity.samples.SimpleSuite$PassingTest"
+    after_test: STAY_IN_APP
+}, {
+    at: "00:00:20"
+    journey: "android.platform.test.longevity.samples.SimpleSuite$FailingTest"
+}, {
+    at: "00:00:30"
+    journey: "android.platform.test.longevity.samples.SimpleSuite$PassingTest"
+    after_test: EXIT
+}, {
+    at: "00:00:50"
+    journey: "android.platform.test.longevity.samples.SimpleSuite$PassingTest"
+    after_test: STAY_IN_APP
+}, {
+    at: "00:01:00"
+    journey: "android.platform.test.longevity.samples.SimpleSuite$FailingTest"
+    after_test: STAY_IN_APP
+}]

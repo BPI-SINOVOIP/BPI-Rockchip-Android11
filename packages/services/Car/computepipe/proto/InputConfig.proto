@@ -1,0 +1,101 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+message ImageFileConfig {
+  enum ImageFileType {
+    JPEG = 0;
+    PNG = 1;
+  }
+
+  optional ImageFileType file_type = 1;
+
+  optional string image_dir = 2;
+}
+
+message VideoFileConfig {
+  enum VideoFileType {
+    MPEG = 0;
+  }
+
+  optional VideoFileType file_type = 1;
+
+  optional string file_path = 2;
+}
+
+message CameraConfig {
+  enum CameraType {
+    DRIVER_VIEW_CAMERA = 0;
+    OCCUPANT_VIEW_CAMERA = 1;
+    EXTERNAL_CAMERA = 2;
+    SURROUND_VIEW_CAMERA = 3;
+  };
+
+  optional CameraType camera_type = 1;
+
+  optional string cam_id = 2;
+}
+
+message InputStreamConfig {
+  enum InputType {
+    CAMERA = 1;
+    IMAGE_FILES = 2;
+    VIDEO_FILE = 3;
+  }
+
+  optional InputType type = 1;
+
+  enum FormatType {
+    RGB = 0;
+    NIR = 1;
+    NIR_DEPTH = 2;
+  }
+
+  optional FormatType format = 2;
+
+  optional int32 width = 3;
+
+  optional int32 height = 4;
+
+  optional int32 stride = 5;
+
+  // The camera id string essential to start the camera.
+  optional CameraConfig cam_config = 6;
+
+  // for image file input type the following attributes apply
+  optional ImageFileConfig image_config = 7;
+
+  // Must be present when InputType is ImageFile
+  optional VideoFileConfig video_config = 8;
+
+  optional int32 stream_id = 9;
+
+  enum PixelLayout {
+    UNKNOWN = 0;
+
+    // one byte for R, then one byte for G, then one byte for B for each pixel.
+    RGB24 = 1;
+
+    // one byte for R, one byte for G, one byte for B, one byte for alpha or
+    // unused.
+    RGBA32 = 2;
+
+    // Grayscale, one byte per pixel.
+    GRAY8 = 3;
+
+    // Grayscale, one uint16 per pixel.
+    GRAY16 = 4;
+  }
+
+  // Represent pixel layout of image expected by graph.
+  optional PixelLayout pixel_layout = 10 [default = RGB24];
+}
+
+// A graph could require streams from multiple cameras simultaneously, so each possible input
+// config could specify multiple camera configs.
+message InputConfig {
+    repeated InputStreamConfig input_stream = 1;
+
+    // config id which would be used to set the config rather than passing the entire config proto
+    optional int32 config_id = 2;
+}

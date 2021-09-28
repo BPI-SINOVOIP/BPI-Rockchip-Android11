@@ -1,0 +1,280 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+import com.google.cloud.tools.gradle.appengine.core.DeployTask
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.13.RELEASE'
+        objectifyVersion = '6.0'
+        jacksonVersion = '2.9.7'
+        googleCloudVersion = '0.47.0-alpha'
+        googleJavaFormatVersion = '0.7.1'
+        googleHttpClientVersion = '1.25.0'
+        lombokVersion = '1.18.4'
+        appGradlePluginVersion = '2.0.0-rc3'
+        protobufGradlePlugin = '0.8.7'
+        googleSheetsAPI = 'v4-rev548-1.25.0'
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+    dependencies {
+        classpath "com.google.cloud.tools:appengine-gradle-plugin:${appGradlePluginVersion}"    // latest App Engine Gradle tasks
+        classpath "com.google.protobuf:protobuf-gradle-plugin:${protobufGradlePlugin}"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+plugins {
+    id 'war'        // standard Web Archive plugin
+    id "com.github.sherter.google-java-format" version "0.7.1"
+}
+
+apply plugin: 'com.google.protobuf'
+apply plugin: 'com.google.cloud.tools.appengine-standard'  // App Engine tasks
+
+apply from: rootProject.file('gradle/profiles.gradle')
+
+group = 'com.android.vts'
+version = '4'
+description = "Google Android VTS dashboard"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots' // SNAPSHOT repository (if needed)
+    }
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'com.google.appengine:appengine-api-1.0-sdk:+'  // Latest App Engine Api's
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    compile 'jstl:jstl:1.2'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.7'
+    compile group: 'org.apache.commons', name: 'commons-math3', version:'3.6.1'
+    compile group: 'commons-codec', name: 'commons-codec', version:'1.9'
+    compile group: 'com.google.cloud', name: 'google-cloud', version: "${googleCloudVersion}"
+    compile group: 'com.google.code.gson', name: 'gson', version:'2.7'
+    compile group: 'com.googlecode.objectify', name: 'objectify', version: "${objectifyVersion}"
+    compile group: 'org.json', name: 'json', version:'20180130'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "${jacksonVersion}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "${jacksonVersion}"
+
+    compile group: 'com.google.apis', name: 'google-api-services-oauth2', version:'v1-rev136-1.23.0'
+    compile group: 'com.google.http-client', name: 'google-http-client', version: "${googleHttpClientVersion}"
+    compile group: 'com.google.http-client', name: 'google-http-client-protobuf', version: "${googleHttpClientVersion}"
+    compile group: 'com.google.visualization', name: 'visualization-datasource', version:'1.1.1'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.11.1'
+
+    compile(group: 'com.google.api-client', name: 'google-api-client', version: "${googleHttpClientVersion}") {
+        exclude(module: 'guava-jdk5')
+    }
+    compile group: 'com.google.oauth-client', name: 'google-oauth-client-jetty', version: "${googleHttpClientVersion}"
+    compile group: 'com.google.apis', name: 'google-api-services-sheets', version: "${googleSheetsAPI}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.21.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version:'5.0.3'
+
+    testCompile 'com.google.appengine:appengine-testing:+'
+    testCompile 'com.google.appengine:appengine-api-stubs:+'
+    testCompile 'com.google.appengine:appengine-tools-sdk:+'
+
+    compile group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+}
+
+// Always run unit tests
+appengineDeploy.dependsOn test
+appengineStage.dependsOn test
+
+googleJavaFormat {
+    toolVersion = '1.6'
+    options style: 'AOSP'
+    source = sourceSets*.allJava
+    include '**/*.java'
+    exclude '**/*Template.java'
+    exclude 'src/test/template_*'
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir '../test_serving/proto'
+            include 'TestScheduleConfigMessage.proto'
+        }
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+}
+
+protobuf {
+    generateProtoTasks {
+        ofSourceSet('main').each { task ->
+            task.builtins {
+                python {
+                    outputSubDir = 'python'
+                }
+                java {
+                    outputSubDir = 'java'
+                }
+            }
+        }
+    }
+}
+
+appengine {  // App Engine tasks configuration
+    tools {
+        // configure the Cloud Sdk tooling
+    }
+
+    run {
+        environment = [
+                GOOGLE_CLOUD_PROJECT: "android-vts-staging",
+                // DATASTORE_USE_PROJECT_ID_AS_APP_ID: "true",
+        ]
+        port = 8080
+        jvmFlags = [
+                "-Xdebug",
+                "-Dappengine.fullscan.seconds=5"
+        ]
+    }
+    stage {
+        // configure staging for deployment
+    }
+    deploy {   // deploy configuration
+        version = project.property("appEngineVersion")
+        projectId = project.property("projectIdList")
+
+    }
+}
+
+test {
+    useJUnit()
+    testLogging.showStandardStreams = true
+    beforeTest { descriptor ->
+        logger.lifecycle("test: " + descriptor + "  Running")
+    }
+
+    onOutput { descriptor, event ->
+        logger.lifecycle("test: " + descriptor + ": " + event.message )
+    }
+    afterTest { descriptor, result ->
+        logger.lifecycle("test: " + descriptor + ": " + result )
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name =~ /generate.*Proto/) {
+        task.finalizedBy(copyGeneratedProtoFiles)
+    }
+}
+
+task copyGeneratedProtoFiles(type: Copy) {
+    into(projectDir)
+
+    from("build/generated/source/proto/main/java") {
+        into "src/main/java"
+    }
+    from("build/generated/source/proto/main/python") {
+        into "python"
+    }
+}
+
+
+tasks.addRule("Pattern: vtsGaeDeploy<ID>") { String taskName ->
+    if (taskName.startsWith("vtsGaeDeploy-")) {
+
+        def projectId = taskName.replace("vtsGaeDeploy-", "")
+        def version = project.property("appEngineVersion")
+
+        def appengineWebCopy = tasks.create(name: "appengineWebCopy-${projectId}", type: Copy) {
+            from "${webAppDirName}/WEB-INF/appengine-web.xml"
+            into "${appengine.stage.sourceDirectory}/WEB-INF"
+            filter(ReplaceTokens, tokens: [PROJECT_ID: projectId])
+        }
+        appengineWebCopy.dependsOn appengineStage
+        appengineWebCopy.mustRunAfter appengineStage
+
+        def gcsConfigCopy = task("gcsConfigCopy-${projectId}") {
+            doFirst {
+                println "============ resource folder processing ============"
+
+                if (project.loadConfigFromGcs.toBoolean()) {
+                    exec {
+                        println "The resources folder will be copied from GCS!"
+                        commandLine "gsutil",
+                                    "cp",
+                                    "-R",
+                                    "${project.gcsConfigPath}${project.mode}/dashboard/${projectId}/resources/*",
+                                    "$appengine.stage.stagingDirectory/WEB-INF/classes"
+                    }
+                } else {
+                    println "The local resource folder will be used!"
+                }
+            }
+
+            doLast {
+
+            }
+        }
+        gcsConfigCopy.dependsOn appengineWebCopy
+        gcsConfigCopy.mustRunAfter appengineWebCopy
+
+        def deployTaskList = [appengineDeploy]
+
+        def vtsGaeDeployTask = task(taskName) {
+
+            doFirst {
+                println "--------------> setup deploying tasks <-------------"
+            }
+
+            doLast {
+                def commandKeyList = [
+                        'enableAppengineDeployCron': appengineDeployCron,
+                        'enableAppengineDeployDispatch': appengineDeployDispatch,
+                        'enableAppengineDeployDos': appengineDeployDos,
+                        'enableAppengineDeployIndex': appengineDeployIndex,
+                        'enableAppengineDeployQueue': appengineDeployQueue
+                ]
+
+                commandKeyList.each { key, value ->
+                    if (project.hasProperty(key) && project.getProperty(key).toBoolean()) {
+                        deployTaskList.push(value)
+                    }
+                }
+            }
+        }
+
+        vtsGaeDeployTask.dependsOn gcsConfigCopy
+        vtsGaeDeployTask.mustRunAfter gcsConfigCopy
+        vtsGaeDeployTask.finalizedBy deployTaskList
+    }
+}
+
+task vtsGaeMultiDeploy {
+    dependsOn {
+        def taskList = []
+        def projectIdList = project.property("projectIdList")
+        projectIdList.split(",").each { projectId ->
+            taskList.push(tasks.findByName("vtsGaeDeploy-${projectId.trim()}".toString()))
+        }
+        return taskList
+    }
+}

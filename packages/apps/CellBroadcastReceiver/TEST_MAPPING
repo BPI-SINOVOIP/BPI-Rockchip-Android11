@@ -1,0 +1,13 @@
+{
+  // Change back to presubmit test while b/145651029 is resolved.
+  "postsubmit": [
+    {
+      "name": "CellBroadcastReceiverUnitTests",
+      "options": [
+        {
+          "exclude-annotation": "androidx.test.filters.FlakyTest"
+        }
+      ]
+    }
+  ]
+}

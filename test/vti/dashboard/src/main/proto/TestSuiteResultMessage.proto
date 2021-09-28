@@ -1,0 +1,70 @@
+// Copyright 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto2";
+
+package android.vts;
+import "TestScheduleConfigMessage.proto";
+option java_package = "com.android.vts.proto";
+option java_outer_classname = "TestSuiteResultMessageProto";
+option java_multiple_files = false;
+
+// To specify the test results which are uploaded to vts dashboard.
+message TestSuiteResultMessage {
+  // oauth2.0 access token
+  optional string access_token = 1;
+
+  // GCS path to the corresponding result directory
+  optional string result_path = 2;
+
+  // whether the device(s) booted-up successfully
+  optional bool boot_success = 3  [default = true];
+
+  // test suite build info
+  required string branch = 11;
+  required string target = 12;
+  required string build_id = 13;
+
+  // attributes of Result tag
+  optional string suite_plan = 21;
+  optional string suite_version = 22;
+  optional string suite_build_number = 23;
+  optional int64 start_time = 24;
+  optional int64 end_time = 25;
+  optional string host_name = 26;
+  optional string suite_name = 27;
+
+  // attributes of Build tag
+  optional string build_system_fingerprint = 31;
+  optional string build_vendor_fingerprint = 32;
+  optional int32 test_type = 33  [default = 0];
+
+  // attributes of Summary tag
+  optional int32 passed_test_case_count = 41;
+  optional int32 failed_test_case_count = 42;
+  optional int32 modules_done = 43;
+  optional int32 modules_total = 44;
+
+  // GCS path to the corresponding infra log file.
+  optional string infra_log_path = 51;
+
+  // GCS path to the repacked device[+GSI] image set.
+  repeated string repacked_image_path = 52;
+
+  // Fetch info used to fetch and flash certain builds for retry_prompt command.
+  optional string vendor_build_id = 61;
+  optional string gsi_build_id = 62;
+
+  optional android.test.lab.ScheduleConfigMessage schedule_config = 63 [ deprecated = true ];
+}

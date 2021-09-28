@@ -1,0 +1,23 @@
+{
+  "auto-postsubmit": [
+    {
+      "name": "CarServiceTest",
+      "options" : [
+        {
+          "include-filter": "com.android.car.CarStorageMonitoringTest"
+        }
+      ]
+    },
+    {
+      "name": "CarServiceUnitTest",
+      "options" : [
+        {
+          "include-filter": "com.android.car.storagemonitoring.CarStorageMonitoringTest"
+        },
+        {
+          "include-filter": "com.android.car.storagemonitoring.IoStatsTrackerTest"
+        }
+      ]
+    }
+  ]
+}

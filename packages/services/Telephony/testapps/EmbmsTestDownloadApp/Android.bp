@@ -1,0 +1,12 @@
+src_dirs = ["src"]
+res_dirs = ["res"]
+android_test {
+    name: "EmbmsTestDownloadApp",
+    static_libs: [
+        "androidx.recyclerview_recyclerview",
+        "androidx.legacy_legacy-support-v4",
+    ],
+    srcs: ["src/**/*.java"],
+    platform_apis: true,
+    certificate: "platform",
+}

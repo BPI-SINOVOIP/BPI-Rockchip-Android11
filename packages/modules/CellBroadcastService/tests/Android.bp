@@ -1,0 +1,22 @@
+android_test {
+    name: "CellBroadcastServiceTests",
+    static_libs: [
+        "mockito-target",
+        "compatibility-device-util-axt",
+        "androidx.test.rules",
+        "truth-prebuilt",
+        "testables",
+    ],
+    libs: [
+        "android.test.runner",
+        "telephony-common",
+        "android.test.base",
+        "android.test.mock",
+        "unsupportedappusage",
+    ],
+    srcs: ["src/**/*.java", ":cellbroadcast-shared-srcs"],
+    platform_apis: true,
+    test_suites: ["device-tests", "mts"],
+    certificate: "platform",
+    instrumentation_for: "CellBroadcastServiceModule",
+}

@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+import "packages/services/Car/computepipe/proto/InputConfig.proto";
+import "packages/services/Car/computepipe/proto/OffloadConfig.proto";
+import "packages/services/Car/computepipe/proto/OutputConfig.proto";
+import "packages/services/Car/computepipe/proto/TerminationConfig.proto";
+
+message Options {
+  /**
+   * input configurations supported by the graph
+   */
+  repeated InputConfig input_configs = 1;
+
+  /**
+   * Offload options supported by the graph
+   */
+  repeated OffloadConfig offload_configs = 2;
+  /**
+   * Termination options supported by the graph
+   */
+  repeated TerminationConfig termination_configs = 3;
+  /**
+   * Output streams supported by the graph.
+   */
+  repeated OutputConfig output_configs = 4;
+
+  /**
+   * Name of the computer vision graph.
+   */
+  optional string graph_name = 5;
+}

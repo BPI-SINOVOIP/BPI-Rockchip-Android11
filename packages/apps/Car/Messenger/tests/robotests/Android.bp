@@ -1,0 +1,18 @@
+//############################################################
+// Car Messenger Robolectric test target.                    #
+//############################################################
+
+android_robolectric_test {
+    name: "CarMessengerRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    // Include the testing libraries
+    libs: [
+        "testng",
+    ],
+
+    instrumentation_for: "CarMessengerApp",
+}

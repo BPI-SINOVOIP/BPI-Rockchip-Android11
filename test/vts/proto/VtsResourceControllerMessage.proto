@@ -1,0 +1,206 @@
+// Copyright 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto2";
+
+package android.vts;
+option java_package = "com.android.vts.proto";
+option java_outer_classname = "VtsResourceControllerMessage";
+
+import "test/vts/proto/ComponentSpecificationMessage.proto";
+
+// Possible operations on Fast Message Queue.
+enum FmqOp {
+    // Unknown operation.
+    FMQ_UNKNOWN = 0;
+    // Create a new FMQ object.
+    FMQ_CREATE = 1;
+    // Read from a FMQ (no blocking).
+    FMQ_READ = 2;
+    // Read from a FMQ (with short-form blocking).
+    FMQ_READ_BLOCKING = 3;
+    // Read from a FMQ (with long-form blocking).
+    // TODO: support this from host side in the future
+    FMQ_READ_BLOCKING_LONG = 4;
+    // Write to a FMQ (no blocking).
+    FMQ_WRITE = 5;
+    // Write to a FMQ (with short-form blocking).
+    FMQ_WRITE_BLOCKING = 6;
+    // Write to a FMQ (with long-form blocking).
+    // TODO: support this from host side in the future
+    FMQ_WRITE_BLOCKING_LONG = 7;
+    // Get space available to write in FMQ.
+    FMQ_AVAILABLE_WRITE = 8;
+    // Get number of items available to read.
+    FMQ_AVAILABLE_READ = 9;
+    // Get size of item in FMQ.
+    FMQ_GET_QUANTUM_SIZE = 10;
+    // Get number of items that fit in FMQ.
+    FMQ_GET_QUANTUM_COUNT = 11;
+    // Check if FMQ is valid.
+    FMQ_IS_VALID = 12;
+    // Get address of queue descriptor.
+    // This is an operation that is used in the target-side
+    // drivers to pass queue descriptor address to identify
+    // the FMQ. It is not for communication between host and
+    // target.
+    FMQ_GET_DESC_ADDR = 13;
+}
+
+// Possible operations on hidl_memory.
+enum HidlMemoryOp {
+    // Unknown operation.
+    MEM_PROTO_UNKNOWN = 0;
+    // Allcate a new memory region.
+    MEM_PROTO_ALLOCATE = 1;
+    // Signal starting to read memory.
+    MEM_PROTO_START_READ = 2;
+    // Signal starting to read a particular region of memory.
+    MEM_PROTO_START_READ_RANGE = 3;
+    // Perform actual read operation.
+    MEM_PROTO_READ_BYTES = 4;
+    // Signal starting to write to memory.
+    MEM_PROTO_START_UPDATE = 5;
+    // Signal starting to write to a particular region of memory.
+    MEM_PROTO_START_UPDATE_RANGE = 6;
+    // Perform actual write operation.
+    MEM_PROTO_UPDATE_BYTES = 7;
+    // Commit to a read/write operation.
+    MEM_PROTO_COMMIT = 8;
+    // Get the size of memory region.
+    MEM_PROTO_GET_SIZE = 9;
+}
+
+// Possible operations on hidl_handle.
+enum HidlHandleOp {
+    // Unknown operation.
+    HANDLE_PROTO_UNKNOWN = 0;
+    // Create a handle object for a single file.
+    HANDLE_PROTO_CREATE_FILE = 1;
+    // Read from a handle object with one file.
+    HANDLE_PROTO_READ_FILE = 2;
+    // Write to a handle object with one file.
+    HANDLE_PROTO_WRITE_FILE = 3;
+    // Delete a handle object.
+    HANDLE_PROTO_DELETE = 4;
+}
+
+// The arguments for a FMQ operation.
+message FmqRequestMessage {
+    // operation to be performed
+    optional FmqOp operation = 1;
+
+    // string to represent type of data in the queue
+    // TODO: support user-defined types
+    optional bytes data_type = 2;
+    // queue flavor
+    optional bool sync = 3;
+
+    // queue id
+    optional int32 queue_id = 4 [default = -1];
+
+    // queue size
+    optional uint64 queue_size = 5;
+    // whether to enable blocking
+    optional bool blocking = 6;
+    // whether to reset read/write pointers
+    optional bool reset_pointers = 7;
+
+    // data to be written
+    repeated VariableSpecificationMessage write_data = 8;
+    // length of data to be read
+    optional uint64 read_data_size = 9;
+    // wait time when blocking
+    optional int64 time_out_nanos = 10;
+
+    // store address of queue descriptor
+    // This is a field that is used by internal drivers
+    // to identify a FMQ.
+    // It is not used for communication between host and target.
+    optional uint64 queue_desc_addr = 11;
+}
+
+// The response for a FMQ operation,
+// including scalar values and data read back from the queue.
+message FmqResponseMessage {
+    // data read from the queue
+    repeated VariableSpecificationMessage read_data = 1;
+
+    // three possible return types from FMQ
+    // basic util function return values
+    optional uint64 sizet_return_val = 2;
+    // function that returns a queue id
+    optional int32 queue_id = 3;
+    // signal if the operation succeeds on target side
+    optional bool success = 4;
+}
+
+// The arguments for a hidl_memory operation.
+message HidlMemoryRequestMessage {
+    // operation to be performed
+    optional HidlMemoryOp operation = 1;
+    // id to identify memory region
+    optional int32 mem_id = 2 [default = -1];
+    // requested memory size
+    optional uint64 mem_size = 3;
+    // offset from the start of memory region
+    optional uint64 start = 4;
+    // length of memory to be modified
+    optional uint64 length = 5;
+    // data to be written into memory
+    optional bytes write_data = 6;
+}
+
+// The response for a hidl_memory operation.
+message HidlMemoryResponseMessage {
+    // indicate if the memory region is found
+    optional bool success = 1;
+    // new id assigned to the new memory region
+    optional int32 new_mem_id = 2;
+    // result returned by GetSize() method on the memory region
+    optional uint64 mem_size = 3;
+    // data read from memory
+    optional bytes read_data = 4;
+}
+
+// The arguments for a hidl_handle operation.
+message HidlHandleRequestMessage {
+    // operation to be performed
+    optional HidlHandleOp operation = 1;
+    // identifies the handle object
+    optional int32 handle_id = 2 [default = -1];
+    // to specify what files to open, and additional integers
+    // in a handle object
+    optional HandleDataValueMessage handle_info = 3;
+    // number of bytes to read from the file
+    // read() function in C I/O takes in a size_t,
+    // so use unsigned integer here.
+    optional uint64 read_data_size = 4;
+    // data to be written into file
+    optional bytes write_data = 5;
+}
+
+// The response for a hidl_handle operation.
+message HidlHandleResponseMessage {
+    // indicate if the operation succeeds
+    optional bool success = 1;
+    // new id assigned to the new handle object
+    optional int32 new_handle_id = 2;
+    // data read from the file
+    optional bytes read_data = 3;
+    // number of bytes written into the file if the request is a write operation
+    // write() function in C I/O returns a ssize_t,
+    // so use signed integer here.
+    optional int64 write_data_size = 4;
+}

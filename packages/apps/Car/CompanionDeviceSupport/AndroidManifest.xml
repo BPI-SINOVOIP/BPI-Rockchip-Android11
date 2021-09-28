@@ -1,0 +1,123 @@
+<!--
+  ~ Copyright (C) 2019 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.car.companiondevicesupport"
+          android:sharedUserId="android.uid.system">
+
+    <!--  Needed for BLE scanning/advertising -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <!--  Needed for detecting foreground user -->
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
+
+    <!-- Needed for the calendar sync feature -->
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+
+    <!-- Needed to post messaging notifications on behalf of other apps -->
+    <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME"/>
+
+    <application
+        android:label="@string/app_name"
+        android:theme="@style/CompanionDeviceSupportTheme"
+        android:directBootAware="true">
+        <service
+            android:name=".service.CompanionDeviceSupportService"
+            android:singleUser="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.car.companiondevicesupport.BIND_ASSOCIATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.car.companiondevicesupport.BIND_CONNECTED_DEVICE_MANAGER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <activity android:name=".activity.AssociationActivity"
+                  android:exported="true"
+                  android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="com.android.car.companiondevicesupport.ASSOCIATION_ACTIVITY" />
+                <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_smartphone" android:value="true"/>
+            <meta-data android:name="com.android.settings.title"
+                       android:value="@string/app_name" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.personal" />
+        </activity>
+
+        <!-- Feature specific elements below here -->
+
+        <!-- calendarsync -->
+        <service
+            android:name=".feature.calendarsync.CalendarSyncService"
+            android:exported="false" />
+
+        <!-- notificationmsg -->
+        <service
+            android:name=".feature.notificationmsg.NotificationMsgService"
+            android:exported="true">
+        </service>
+
+        <!-- trust -->
+        <service
+            android:name=".feature.trust.TrustedDeviceManagerService"
+            android:singleUser="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.car.companiondevicesupport.trust.BIND_ENROLLMENT_MANAGER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.car.companiondevicesupport.trust.BIND_TRUST_MANAGER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".feature.trust.TrustedDeviceAgentService"
+            android:permission="android.permission.BIND_TRUST_AGENT"
+            android:singleUser="true">
+            <intent-filter>
+                <action android:name="android.service.trust.TrustAgentService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.service.trust.trustagent"
+                       android:resource="@xml/car_trust_agent"/>
+        </service>
+        <activity
+            android:name=".feature.trust.ui.TrustedDeviceActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="com.android.car.companiondevicesupport.feature.trust.TRUSTED_DEVICE_ACTIVITY" />
+                <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_lock" android:value="true"/>
+            <meta-data android:name="com.android.settings.title"
+                       android:value="@string/trusted_device_feature_title" />
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.security" />
+        </activity>
+    </application>
+</manifest>

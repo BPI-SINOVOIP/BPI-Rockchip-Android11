@@ -1,0 +1,62 @@
+#!/bin/sh
+
+strToLong() {
+    itip=$1
+    a=$(($itip/256/256/256))
+    b=$(($itip/256/256-$a*256))
+    c=$(($itip/256-$a*256*256-$b*256));
+    d=$(($itip-a*256*256*256-$b*256*256-$c*256))
+    echo $d"."$c"."$b"."$a
+}
+
+TEXT=`ifconfig | grep 'inet addr:' | grep -v '127.0.0.1'`
+#echo $TEXT
+SERVER_IP=`echo $TEXT | cut -d: -f2 | awk '{ print $1}'`
+TARGET_IP=`echo $SERVER_IP | awk -F"." '{print $1"."$2"."$3"."$4+1}'`
+NETMASK=`echo $TEXT | cut -d: -f4 | awk '{ print $1}'`
+echo "Server IP: $SERVER_IP"
+echo "Target IP: $TARGET_IP"
+echo "Netmask:   $NETMASK"
+
+GATEWAY=`cat /proc/net/route | awk -F" " '$4==3{print $3}'`
+GATEWAY=`echo $GATEWAY | tr a-z A-Z`
+GATEWAY=`echo "obase=10;ibase=16;$GATEWAY" | bc`
+GATEWAY=`strToLong $GATEWAY`
+echo "Gateway:   $GATEWAY"
+#NFS_DIR=`pwd`/android_nfs
+
+TMP_FILE=parameter.tmp
+
+rm -f $TMP_FILE
+
+#awk -F" " '$1!="CMDLINE:"{print "echo $0 >> asdf"}' $1
+awk -F" " -v SIP=$SERVER_IP -v TIP=$TARGET_IP -v NMASK=$NETMASK -v GW=$GATEWAY -v NFS=$2 '
+{
+	if ($1=="CMDLINE:")
+	{
+		for(i=1;i<=NF;i++)
+		{
+			if(index($i,"nfsroot=") > 0)
+			{
+				printf "nfsroot=%s:%s ",SIP,NFS;
+			}
+			else if(index($i,"ip=") > 0)
+			{
+				printf "ip=%s:%s:%s:%s:rk28:eth0:off ",TIP,SIP,GW,NMASK;
+			}
+			else
+			{
+				printf "%s ",$i;
+			}
+		}
+	}
+	else
+	{
+		print $0;
+	}
+}' $1 > $TMP_FILE
+
+rm -f $1
+mv $TMP_FILE $1
+chmod 777 $1
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/help_and_feedback_category_title">
+    <Preference
+        android:key="feedback"
+        android:title="@string/send_feedback" />
+    <Preference
+        android:key="help_center"
+        android:title="@string/launch_help"
+        android:visible="false">
+        <intent
+            android:action="com.android.settings.action.LAUNCH_HELP" />
+    </Preference>
+</PreferenceScreen>

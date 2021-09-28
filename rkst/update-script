@@ -1,0 +1,8 @@
+write_image PACKAGE:kernel KERNEL:
+write_image PACKAGE:boot BOOT:
+write_image PACKAGE:system SYSTEM:
+write_image PACKAGE:backup BACKUP:
+write_image PACKAGE:parameter PARAMETER:
+write_blcmd recover-recovery
+format DATA:
+format CACHE:

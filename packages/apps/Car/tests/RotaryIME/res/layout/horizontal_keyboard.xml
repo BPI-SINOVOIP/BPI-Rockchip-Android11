@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/keyboard_background">
+  <com.android.car.ui.FocusParkingView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+  <com.android.car.ui.FocusArea
+      android:id="@+id/letters"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <TextView
+        android:id="@+id/a"
+        android:text="@string/key_label_a"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_b"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_c"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_d"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_e"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_f"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_g"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_h"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_i"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_j"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_k"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_l"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_m"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_n"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_o"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_p"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_q"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_r"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_s"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_t"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_u"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_v"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_w"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_x"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_y"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_z"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/delete"
+        android:text="@string/key_label_delete"
+        style="@style/Key" />
+  </com.android.car.ui.FocusArea>
+  <com.android.car.ui.FocusArea
+      android:id="@+id/other_keys"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+    <TextView
+        android:id="@+id/close"
+        android:text="@string/key_close_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/dash"
+        android:text="@string/key_dash_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/quote"
+        android:text="@string/key_quote_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/apostrophe"
+        android:text="@string/key_apostropohe_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/exclamation_mark"
+        android:text="@string/key_exclamation_mark_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/question_mark"
+        android:text="@string/key_question_mark_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/semicolon"
+        android:text="@string/key_semicolon_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/colon"
+        android:text="@string/key_colon_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/comma"
+        android:text="@string/key_comma_label"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/period"
+        android:text="@string/key_period_label"
+        style="@style/Key" />
+    <TextView
+        android:layout_width="120dp"
+        android:id="@+id/space"
+        style="@style/Key" />
+    <TextView
+        android:id="@+id/zero"
+        android:text="@string/key_label_0"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_1"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_2"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_3"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_4"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_5"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_6"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_7"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_8"
+        style="@style/Key" />
+    <TextView
+        android:text="@string/key_label_9"
+        style="@style/Key" />
+  </com.android.car.ui.FocusArea>
+</LinearLayout>

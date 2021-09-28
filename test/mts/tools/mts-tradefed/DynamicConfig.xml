@@ -1,0 +1,55 @@
+<!-- Copyright (C) 2020 Google Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<dynamicConfig>
+    <entry key="business_logic_device_features">
+        <value>android.hardware.type.automotive</value>
+        <value>android.hardware.type.television</value>
+        <value>android.hardware.type.watch</value>
+        <value>android.hardware.type.embedded</value>
+        <value>android.hardware.type.pc</value>
+        <value>android.software.leanback</value>
+        <value>com.google.android.feature.PIXEL_EXPERIENCE</value>
+        <value>android.hardware.telephony</value>
+        <value>android.hardware.vr.high_performance</value>
+        <value>cn.google.services</value>
+        <value>com.google.android.feature.RU</value>
+        <value>android.hardware.ram.low</value>
+        <value>com.google.android.feature.EEA_DEVICE</value>
+        <value>com.google.android.paid.chrome</value>
+        <value>com.google.android.paid.search</value>
+    </entry>
+    <entry key="business_logic_device_properties">
+        <value>ro.build.fingerprint</value>
+        <value>ro.build.version.sdk</value>
+        <value>ro.product.brand</value>
+        <value>ro.product.first_api_level</value>
+        <value>ro.product.manufacturer</value>
+        <value>ro.product.model</value>
+        <value>ro.product.name</value>
+    </entry>
+    <entry key="business_logic_device_packages">
+        <value>com.google.android.gms</value>
+        <value>com.android.vending</value>
+    </entry>
+    <entry key="business_logic_extended_device_info">
+        <!-- Name of extended device info file and a key stored in there.
+             The name must be subclass name of DeviceInfo under compatibility/common/deviceinfo
+             and key of the value stored in the subclass. See each class what keys are used.
+        -->
+        <value>MemoryDeviceInfo:total_memory</value>
+    </entry>
+</dynamicConfig>
+

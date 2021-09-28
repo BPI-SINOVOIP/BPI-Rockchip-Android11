@@ -1,0 +1,2 @@
+hal_client_domain(system_app, hal_vehicle)
+allow system_app { proc_vmallocinfo proc_pagetypeinfo }:file r_file_perms;

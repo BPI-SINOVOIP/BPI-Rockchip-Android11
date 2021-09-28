@@ -1,0 +1,10 @@
+-keepparameternames
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,
+                SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+
+# Rules required by TextClassifierServiceLibNoManifest
+# Jni classes
+-keep class com.google.android.textclassifier.** { *; }
+# compileOnly dependency, optional in runtime.
+-dontwarn androidx.paging.PositionalDataSource
+-dontwarn androidx.lifecycle.LiveData

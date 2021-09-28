@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.keychain"
+          android:sharedUserId="android.uid.system"
+          >
+    <!-- Needed so KeyChainService on non-system user can write 
+         security logging events -->
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+
+    <application android:label="@string/app_name"
+            android:allowBackup="false"
+            android:usesCleartextTraffic="false"
+            android:theme="@android:style/Theme.DeviceDefault.DayNight">
+        <service android:name="com.android.keychain.KeyChainService">
+            <intent-filter>
+                <action android:name="android.security.IKeyChainService"/>
+            </intent-filter>
+        </service>
+        <activity android:name="com.android.keychain.KeyChainActivity"
+                  android:theme="@style/KeyChainTransparent"
+		  android:excludeFromRecents="true">
+	    <intent-filter>
+	        <action android:name="com.android.keychain.CHOOSER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

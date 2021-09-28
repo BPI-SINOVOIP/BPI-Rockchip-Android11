@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Network validation URL configuration for devices using a Chinese SIM (MCC 460).
+         The below URLs are often whitelisted by captive portals, so they should not be used in the
+         general case as this could degrade the user experience (portals not detected properly).
+         However in China the default URLs are not accessible in general. The below alternatives
+         should allow users to connect to local networks normally. -->
+    <!-- default_captive_portal_https_url is not configured as overlayable so
+         OEMs that wish to change captive_portal_https_url configuration must
+         do so via configuring runtime resource overlay to
+         config_captive_portal_https_url and *NOT* by changing or overlaying
+         this resource. It will break if the enforcement of overlayable starts.
+         -->
+    <string name="default_captive_portal_https_url" translatable="false">https://connectivitycheck.gstatic.com/generate_204</string>
+    <!-- default_captive_portal_fallback_urls is not configured as overlayable
+         so OEMs that wish to change captive_portal_fallback_urls configuration
+         must do so via configuring runtime resource overlay to
+         config_captive_portal_fallback_urls and *NOT* by changing or overlaying
+         this resource. It will break if the enforcement of overlayable starts.
+         -->
+    <string-array name="default_captive_portal_fallback_urls" translatable="false">
+        <item>http://www.googleapis.cn/generate_204</item>
+    </string-array>
+</resources>

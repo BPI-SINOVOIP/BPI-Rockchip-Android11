@@ -1,0 +1,27 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+import "packages/services/Car/computepipe/proto/OutputConfig.proto";
+
+message TerminationOption {
+  enum TerminationType {
+    CLIENT_STOP = 0;
+    MIN_PACKET_COUNT = 1;
+    MAX_RUN_TIME = 2;
+    EVENT = 3;
+  }
+
+  optional TerminationType type = 1;
+  /**
+    * type based qualifier, could be run time, packet count, or usecase
+    * specific event identifier.
+    */
+  optional int32 qualifier = 2;
+}
+
+message TerminationConfig {
+  optional TerminationOption options = 1;
+  optional int32 config_id = 2;
+  optional OutputConfig output_config = 3;
+}

@@ -1,0 +1,109 @@
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<mat-tab-group>
+  <mat-tab label="Lab">
+    <div class="mat-elevation-z2 entity-table">
+      <mat-table #table [dataSource]="labDataSource">
+        <!-- Index Column -->
+        <ng-container matColumnDef="_index">
+          <mat-header-cell *matHeaderCellDef class="index-column">No.</mat-header-cell>
+          <mat-cell *matCellDef="let i = index" class="index-column"> {{i+1+pageSize*labPageIndex}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let lab"> {{lab.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Owner Column -->
+        <ng-container matColumnDef="owner">
+          <mat-header-cell *matHeaderCellDef>Owner</mat-header-cell>
+          <mat-cell *matCellDef="let lab"> {{lab.owner}} </mat-cell>
+        </ng-container>
+
+        <!-- Admin Column -->
+        <ng-container matColumnDef="admin">
+          <mat-header-cell *matHeaderCellDef>Admin</mat-header-cell>
+          <mat-cell *matCellDef="let lab"> {{lab.admin ? lab.admin.join(", ") : "None"}} </mat-cell>
+        </ng-container>
+
+        <!-- Host Count Column -->
+        <ng-container matColumnDef="hostCount">
+          <mat-header-cell *matHeaderCellDef># of Host</mat-header-cell>
+          <mat-cell *matCellDef="let lab"> {{ lab.hosts.length }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="labColumnTitles"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: labColumnTitles;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="labCount"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [pageIndex]="labPageIndex">
+      </mat-paginator>
+    </div>
+  </mat-tab>
+  <mat-tab label="Host">
+    <div class="mat-elevation-z2 entity-table">
+      <mat-table #table [dataSource]="hostDataSource">
+        <!-- Index Column -->
+        <ng-container matColumnDef="_index">
+          <mat-header-cell *matHeaderCellDef class="index-column">No.</mat-header-cell>
+          <mat-cell *matCellDef="let i = index" class="index-column"> {{i+1+pageSize*pageIndex}} </mat-cell>
+        </ng-container>
+
+        <!-- Lab Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Lab</mat-header-cell>
+          <mat-cell *matCellDef="let host"> {{host.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Hostname Column -->
+        <ng-container matColumnDef="hostname">
+          <mat-header-cell *matHeaderCellDef>Hostname</mat-header-cell>
+          <mat-cell *matCellDef="let host"> {{host.hostname}} </mat-cell>
+        </ng-container>
+
+        <!-- IP Column -->
+        <ng-container matColumnDef="ip">
+          <mat-header-cell *matHeaderCellDef>IP</mat-header-cell>
+          <mat-cell *matCellDef="let host"> {{host.ip}} </mat-cell>
+        </ng-container>
+
+        <!-- Host Equipment Column -->
+        <ng-container matColumnDef="host_equipment">
+          <mat-header-cell *matHeaderCellDef>Equipment</mat-header-cell>
+          <mat-cell *matCellDef="let host"> {{host.host_equipment}} </mat-cell>
+        </ng-container>
+
+        <!-- Version Column -->
+        <ng-container matColumnDef="vtslab_version">
+          <mat-header-cell *matHeaderCellDef>Version</mat-header-cell>
+          <mat-cell *matCellDef="let host"> {{host.vtslab_version}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="hostColumnTitles"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: hostColumnTitles;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="count"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [pageIndex]="labPageIndex">
+      </mat-paginator>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<div class="loading-spinner" *ngIf="loading">
+  <mat-spinner color="primary"></mat-spinner>
+</div>

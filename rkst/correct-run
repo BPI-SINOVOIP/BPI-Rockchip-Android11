@@ -1,0 +1,40 @@
+#!/bin/sh
+# change run file
+TMP_FILE=run.tmp
+
+rm -f $TMP_FILE
+
+exportline()
+{
+#	echo $LINE
+        file=$(echo $LINE|awk -F" " 'NF==3&&$1=="wl"{print $1" "$2" "$3}''NF==3&&$1=="#wl"{print "wl "$2" "$3}''NF==4&&$1=="#"&&$2=="wl"{print $2" "$3" "$4}')
+        if [ "$file"x != ""x ]; then
+                LINE="$file"
+        fi
+
+        file=$(echo $LINE|awk -F" " '$1=="wl"{print $3}')
+        if [ "$file"x = ""x ]; then
+                echo $LINE >> $TMP_FILE
+        else
+                file=$(echo $file|awk 'gsub("\r", "") {print $0}')
+                if [ -f "$file" ] ;then
+                        echo $LINE >> $TMP_FILE
+                else
+                        echo "#$LINE" >> $TMP_FILE
+                fi
+        fi
+}
+
+while read LINE
+do
+	exportline $LINE
+done < $1
+
+if [ "$LINE"x != ""x ]; then
+	exportline $LINE
+fi
+
+rm -f $1
+mv $TMP_FILE $1
+chmod 777 $1
+

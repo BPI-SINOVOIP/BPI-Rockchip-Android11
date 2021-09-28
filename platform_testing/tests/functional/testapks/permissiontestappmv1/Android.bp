@@ -1,0 +1,13 @@
+android_test {
+    name: "PermissionTestAppMV1",
+
+    // omit gradle 'build' dir
+    srcs: ["src/**/*.java"],
+
+    static_libs: ["androidx.legacy_legacy-support-v4"],
+    resource_dirs: ["res"],
+    sdk_version: "current",
+    certificate: "platform",
+
+    test_suites: ["device-tests"],
+}

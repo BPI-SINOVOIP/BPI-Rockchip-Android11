@@ -1,0 +1,66 @@
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<div fxLayout="column" id="filter-wrapper">
+  <mat-expansion-panel id="expansion-panel" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [ngStyle]="{'padding-bottom': (panelOpenState) ? '20px' : '0' }">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filter
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ panelOpenState ? "" : appliedFilters.length + " filters are applied." }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <mat-select placeholder="Key" [(value)]="currentFilter.key">
+        <mat-option *ngFor="let key of selectorList" [value]="key">
+          {{ key }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(value)]="currentFilter.method">
+        <mat-option *ngFor="let method of filterMethods" [value]="method.value">
+          {{ method.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="currentFilter.value">
+    </mat-form-field>
+    <button mat-icon-button (click)="addFilter()" [disabled]="!currentFilter.key || !currentFilter.method || !currentFilter.value">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button mat-icon-button (click)="clearCurrentFilter()">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-chip-list>
+      <mat-chip *ngFor="let filter of applyingFilters" [removable]="true" (removed)="removed(filter)">
+        {{ filter.key }} {{ getSign(filter) }} {{ filter.value }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    <div fxLayout="row" id="row_buttons">
+      <button mat-stroked-button (click)="onApplyClicked()" [disabled]="!applyingFilterChanged">
+        <span>Apply</span>
+      </button>
+      <button mat-stroked-button (click)="onCancelChangesClicked()" [disabled]="!applyingFilterChanged">
+        <span>Cancel Changes</span>
+      </button>
+      <button mat-stroked-button (click)="onClearAllClicked()" [disabled]="appliedFilters.length == 0">
+        <span>Clear All</span>
+      </button>
+    </div>
+  </mat-expansion-panel>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="VTS Presubmit Kernel Test Plan">
+  <include name="vts-base-presubmit" />
+
+  <option name="vts-plan-result:plan-name" value="vts-presubmit-kernel" />
+
+  <option name="compatibility:test-arg" value="com.android.tradefed.testtype.VtsMultiDeviceTest:max-retry-count:2" />
+  <option name="compatibility:test-arg" value="com.android.tradefed.testtype.VtsMultiDeviceTest:ltp-number-of-threads:1" />
+
+  <include name="vts-presubmit-exclude" />
+
+  <option name="compatibility:include-filter" value="VtsKernelBinderTest" />
+  <option name="compatibility:include-filter" value="VtsKernelLibcutilsTest" />
+  <option name="compatibility:include-filter" value="VtsKernelLtp" />
+  <option name="compatibility:include-filter" value="VtsKernelProcFileApi" />
+
+</configuration>

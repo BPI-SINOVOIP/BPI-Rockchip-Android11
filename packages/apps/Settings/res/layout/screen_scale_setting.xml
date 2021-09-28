@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/ic_screen_scale_tv">
+
+    <ImageView
+        android:id="@+id/screen_touch_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/screen_vertical_reduce" />
+
+    <ImageView
+        android:id="@+id/button_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/screen_touch_up"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_screen_scale_up" />
+
+    <ImageView
+        android:id="@+id/button_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_up"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_screen_scale_ok" />
+
+    <ImageView
+        android:id="@+id/button_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_ok"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_screen_scale_down" />
+
+    <ImageView
+        android:id="@+id/button_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="205dp"
+        android:layout_toLeftOf="@id/button_ok"
+        android:src="@drawable/ic_screen_scale_left" />
+
+    <ImageView
+        android:id="@+id/button_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="205dp"
+        android:layout_toRightOf="@id/button_ok"
+        android:src="@drawable/ic_screen_scale_right" />
+
+    <ImageView
+        android:id="@+id/screen_touch_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_down"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/screen_vertical_add" />
+
+    <ImageView
+        android:id="@+id/screen_button_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="230dp"
+        android:layout_toLeftOf="@id/button_left"
+        android:src="@drawable/screen_horizontal_reduce" />
+
+    <ImageView
+        android:id="@+id/screen_button_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="230dp"
+        android:layout_toRightOf="@id/button_right"
+        android:src="@drawable/screen_horizontal_add" />
+</RelativeLayout>

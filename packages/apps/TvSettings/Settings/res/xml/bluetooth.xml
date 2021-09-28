@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2016 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/bluetooth" >
+
+    <SwitchPreference
+        android:key="bluetooth_enable"
+        android:persistent="false"
+        android:title="@string/bluetooth" />
+
+    <PreferenceCategory
+        android:key="bluetooth_paried"
+        android:title="@string/bluetooth_paired" 
+        android:order="1"/>
+    <com.android.tv.settings.bluetooth.BluetoothProgressCategory
+        android:key="bluetooth_avaliable"
+        android:title="@string/avaliable_bluetooth" 
+        android:order="2"/>
+    <PreferenceCategory
+        android:key="bluetooth_other"
+        android:title="@string/wifi_setting_header_other_options" 
+        android:order="3">
+        <Preference
+            android:key="bluetooth_rename"
+            android:title="@string/bluetooth_rename" >
+        </Preference>
+        <Preference
+            android:key="bluetooth_refresh"
+            android:title="@string/bluetooth_refresh" >
+        </Preference>
+        <Preference
+            android:key="bluetooth_received"
+            android:title="@string/bluetooth_received" >
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

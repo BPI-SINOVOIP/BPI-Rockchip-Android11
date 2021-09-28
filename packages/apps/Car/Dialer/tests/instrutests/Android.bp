@@ -1,0 +1,16 @@
+//############################################################
+// Car Dialer Instrumented test target.                       #
+//############################################################
+android_test {
+    name: "CarDialerInstruTests",
+
+    srcs: ["src/**/*.java"],
+
+    test_suites:["device-tests"],
+
+    static_libs: [
+        "androidx.test.ext.junit",
+    ],
+
+    instrumentation_for: "CarDialerAppForTesting",
+}

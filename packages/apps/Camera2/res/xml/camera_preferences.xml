@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="prefscreen_top">
+
+  <!-- Resolutions and Quality -->
+  <PreferenceScreen
+      android:key="pref_category_resolution"
+      android:title="@string/pref_category_resolution_quality" >
+    <PreferenceCategory android:title="@string/mode_camera" >
+
+      <!-- BACK camera PHOTO resolution -->
+      <ListPreference
+          android:defaultValue="@string/pref_camera_picturesize_default"
+          android:entryValues="@array/pref_camera_picturesize_entryvalues"
+          android:key="pref_camera_picturesize_back_key"
+          android:title="@string/setting_back_camera_photo" />
+      <!-- FRONT camera PHOTO resolution -->
+      <ListPreference
+          android:defaultValue="@string/pref_camera_picturesize_default"
+          android:entryValues="@array/pref_camera_picturesize_entryvalues"
+          android:key="pref_camera_picturesize_front_key"
+          android:title="@string/setting_front_camera_photo" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/mode_video" >
+
+      <!-- BACK camera VIDEO resolution -->
+      <ListPreference
+          android:defaultValue="@string/pref_video_quality_large"
+          android:entryValues="@array/pref_video_quality_entryvalues"
+          android:key="pref_video_quality_back_key"
+          android:title="@string/setting_back_camera_video" />
+      <!-- FRONT camera VIDEO resolution -->
+      <ListPreference
+          android:defaultValue="@string/pref_video_quality_large"
+          android:entryValues="@array/pref_video_quality_entryvalues"
+          android:key="pref_video_quality_front_key"
+          android:title="@string/setting_front_camera_video" />
+    </PreferenceCategory>
+  </PreferenceScreen>
+
+  <!-- Camera Sound -->
+  <com.android.camera.settings.ManagedSwitchPreference
+      android:defaultValue="true"
+      android:key="pref_camera_sound_enable_key"
+      android:title="@string/pref_camera_sound_title" />
+
+  <!-- Location -->
+  <com.android.camera.settings.ManagedSwitchPreference
+      android:defaultValue="false"
+      android:key="pref_camera_recordlocation_key"
+      android:title="@string/pref_camera_save_location_title" />
+
+  <!-- Face Detection enable -->
+  <com.android.camera.settings.ManagedSwitchPreference
+      android:defaultValue="true"
+      android:key="pref_face_detection_enabled_key"
+      android:title="@string/pref_face_detection_enabled_title" />
+
+  <!-- media save path -->
+  <!--<ListPreference
+      android:defaultValue="@string/pref_media_save_path_flash"
+      android:entries="@array/pref_media_save_path_entries"
+      android:entryValues="@array/pref_media_save_path_entryvalues"
+      android:key="pref_media_save_path_key"
+      android:title="@string/setting_media_save_path" /> -->
+
+  <!-- Advanced -->
+  <PreferenceScreen
+      android:key="pref_category_advanced"
+      android:title="@string/pref_category_advanced" >
+    <!-- Exposure Compensation -->
+    <com.android.camera.settings.ManagedSwitchPreference
+        android:defaultValue="false"
+        android:key="pref_camera_exposure_compensation_key"
+        android:title="@string/pref_camera_screen_effects" />
+    <com.android.camera.settings.ManagedSwitchPreference
+        android:defaultValue="false"
+        android:key="pref_camera_whitebalance_enable_key"
+        android:title="@string/pref_camera_whitebalance_title" />
+    <!-- Anti banding
+    <ListPreference
+        android:defaultValue="@string/pref_antibanding_auto"
+        android:entryValues="@array/pref_antibanding_entryvalues"
+        android:key="pref_camera_antibanding_key"
+        android:title="@string/setting_camera_antibanding" /> -->
+  </PreferenceScreen>
+
+  <com.android.camera.settings.MyDialogPreference
+      android:key="pref_restore_settings"
+      android:title="@string/pref_restore_default_settings_title"
+      android:dialogMessage="@string/pref_restore_default_settings_msg"
+      android:dialogTitle="@string/pref_restore_default_settings_title"
+      android:positiveButtonText="@android:string/ok"
+      android:negativeButtonText="@android:string/cancel"
+      />
+
+  <!-- Google Help and feedback launcher -->
+  <!-- <Preference
+      android:key="pref_launch_help"
+      android:title="@string/setting_google_help_and_feedback" /> -->
+
+</PreferenceScreen>

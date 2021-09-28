@@ -1,0 +1,14 @@
+# Classes from net-utils-framework-common
+rule com.android.net.module.util.** com.android.networkstack.util.@1
+
+rule com.android.internal.util.** android.net.networkstack.util.@1
+rule com.google.protobuf.** com.android.networkstack.protobuf.@1
+
+# Classes from net-utils-framework-common
+rule com.android.net.module.util.** com.android.networkstack.util.@1
+
+# Ignore DhcpResultsParcelable, but jarjar DhcpResults
+# TODO: move DhcpResults into services.net and delete from here
+rule android.net.DhcpResultsParcelable* @0
+rule android.net.DhcpResults* android.net.networkstack.DhcpResults@1
+rule android.util.LocalLog* android.net.networkstack.util.LocalLog@1

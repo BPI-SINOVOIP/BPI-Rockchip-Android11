@@ -1,0 +1,83 @@
+//
+// Copyright (C) 2017 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+java_library {
+    name: "app-helpers-common-interfaces",
+    libs: ["ub-uiautomator"],
+    static_libs: ["app-helpers-core"],
+    srcs: ["common/**/*.java"],
+    sdk_version: "test_current",
+}
+
+//#####################################
+
+java_library {
+    name: "app-helpers-auto-interfaces",
+    libs: [
+        "ub-uiautomator",
+        "app-helpers-core",
+        "androidx.test.runner",
+    ],
+    static_libs: ["app-helpers-common-interfaces"],
+    srcs: ["auto/**/*.java", "handheld/**/INotificationHelper.java"],
+    sdk_version: "test_current",
+}
+
+//#####################################
+
+java_library {
+    name: "app-helpers-clockwork-interfaces",
+    libs: [
+        "ub-uiautomator",
+        "app-helpers-core",
+    ],
+    static_libs: ["app-helpers-common-interfaces"],
+    srcs: ["clockwork/**/*.java"],
+    sdk_version: "test_current",
+}
+
+//#####################################
+
+java_library {
+    name: "app-helpers-handheld-interfaces",
+    libs: [
+        "ub-uiautomator",
+        "app-helpers-core",
+    ],
+    static_libs: [
+        "app-helpers-common-interfaces",
+        "androidx.annotation_annotation"
+    ],
+    srcs: ["handheld/**/*.java"],
+    sdk_version: "test_current",
+}
+
+//#####################################
+
+java_library {
+    name: "app-helpers-tv-interfaces",
+    libs: [
+        "ub-uiautomator",
+        "app-helpers-core",
+        "launcher-helper-lib",
+    ],
+    static_libs: [
+        "app-helpers-common-interfaces",
+        "dpad-util",
+    ],
+    srcs: ["tv/**/*.java"],
+    sdk_version: "test_current",
+}

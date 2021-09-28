@@ -1,0 +1,13 @@
+cron:
+- description: "test scheduler job"
+  url: /tasks/schedule
+  schedule: every 5 minutes
+- description: "device_heartbeat"
+  url: /tasks/device_heartbeat
+  schedule: every 1 minutes
+- description: "job_heartbeat"
+  url: /tasks/job_heartbeat
+  schedule: every 1 minutes
+- description: "remove_outdated_devices"
+  url: /tasks/remove_outdated_devices
+  schedule: every 1 hours

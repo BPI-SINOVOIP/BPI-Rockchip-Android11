@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Letöltéskezelő"</string>
+    <string name="storage_description" msgid="169690279447532621">"Letöltések"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Hozzáférés a letöltéskezelőhöz."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Lehetővé teszi az alkalmazás számára a letöltéskezelő elérését fájlok letöltéséhez. A rosszindulatú alkalmazások kihasználhatják ezt a letöltések megzavarására és személyes adatok elérésére."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Speciális letöltéskezelő-funkciók."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Lehetővé teszi az alkalmazás számára a letöltéskezelő speciális funkcióinak elérését. A rosszindulatú alkalmazások kihasználhatják ezt a letöltések megzavarására és személyes adatok elérésére."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Letöltési értesítések küldése."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Lehetővé teszi az alkalmazás számára, hogy értesítést küldjön a befejezett letöltésekről. A rosszindulatú alkalmazások kihasználhatják ezt más, fájlokat letöltő alkalmazások megzavarására."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Hely lefoglalása a letöltési gyorsítótárban"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Az alkalmazás letölthet fájlokat a letöltési gyorsítótárba, amelyeket a letöltéskezelő nem törölhet automatikusan, ha helyre van szüksége."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"fájlok letöltése értesítés nélkül"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Az alkalmazások letölthetnek fájlokat a letöltéskezelő segítségével anélkül, hogy értesítenék róla a felhasználót."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Hozzáférés a rendszer összes letöltéséhez"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Az alkalmazás megnézheti és módosíthatja a rendszer bármelyik alkalmazása által kezdeményezett letöltést."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Névtelen&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"A letöltés befejeződött."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"A letöltés nem sikerült."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"A letöltéshez Wi-Fi kell"</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Szünetel a háttérben."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"A letöltés túl nagy a szolgáltató hálózatához"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"Wi-Fi szükséges a letöltés (<xliff:g id="SIZE">%1$s </xliff:g>) befejezéséhez. \n\nÉrintse meg a(z) <xliff:g id="QUEUE_TEXT">%2$s </xliff:g> lehetőséget a letöltés elindításához, ha majd Wi-Fi hálózathoz csatlakozik."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"Várólistára teszi későbbi letöltés céljából?"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"A fájl (<xliff:g id="SIZE">%1$s </xliff:g>) letöltése miatt hamarabb lemerülhet az akku, megnőhet az adathasználat, így előfizetésétől függően egyéb költségei lehetnek.\n\n Érintse meg a(z) <xliff:g id="QUEUE_TEXT">%2$s</xliff:g> lehetőséget, ha Wi-Fihez csatlakozik."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Várólista"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Mégse"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"Indítás most"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> fájl letöltése folyamatban van</item>
+      <item quantity="one">1 fájl letöltése folyamatban van</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> fájl várakozik</item>
+      <item quantity="one">1 fájl várakozik</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"<xliff:g id="DURATION">%s</xliff:g> van hátra"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"A fájlt nem lehet megnyitni."</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Letöltések"</string>
+    <string name="download_queued" msgid="3383844741769045371">"Várólistán"</string>
+    <string name="download_running" msgid="774654178925442490">"Folyamatban"</string>
+    <string name="download_error" msgid="1857737890005386798">"Sikertelen"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Folyamatban, <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

@@ -1,0 +1,773 @@
+// Baseline format: 1.0
+AllUpper: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#EGR:
+    Constant EGR must be marked static final
+
+
+ArrayReturn: android.car.content.pm.AppBlockingPackageInfo#AppBlockingPackageInfo(String, int, int, int, android.content.pm.Signature[], String[]) parameter #4:
+    Method parameter should be Collection<Signature> (or subclass) instead of raw array; was `android.content.pm.Signature[]`
+ArrayReturn: android.car.content.pm.AppBlockingPackageInfo#signatures:
+    Field should be Collection<Signature> (or subclass) instead of raw array; was `android.content.pm.Signature[]`
+ArrayReturn: android.car.content.pm.CarAppBlockingPolicy#CarAppBlockingPolicy(android.car.content.pm.AppBlockingPackageInfo[], android.car.content.pm.AppBlockingPackageInfo[]) parameter #0:
+    Method parameter should be Collection<AppBlockingPackageInfo> (or subclass) instead of raw array; was `android.car.content.pm.AppBlockingPackageInfo[]`
+ArrayReturn: android.car.content.pm.CarAppBlockingPolicy#CarAppBlockingPolicy(android.car.content.pm.AppBlockingPackageInfo[], android.car.content.pm.AppBlockingPackageInfo[]) parameter #1:
+    Method parameter should be Collection<AppBlockingPackageInfo> (or subclass) instead of raw array; was `android.car.content.pm.AppBlockingPackageInfo[]`
+ArrayReturn: android.car.content.pm.CarAppBlockingPolicy#blacklists:
+    Field should be Collection<AppBlockingPackageInfo> (or subclass) instead of raw array; was `android.car.content.pm.AppBlockingPackageInfo[]`
+ArrayReturn: android.car.content.pm.CarAppBlockingPolicy#whitelists:
+    Field should be Collection<AppBlockingPackageInfo> (or subclass) instead of raw array; was `android.car.content.pm.AppBlockingPackageInfo[]`
+ArrayReturn: android.car.input.CarInputHandlingService#CarInputHandlingService(android.car.input.CarInputHandlingService.InputFilter[]) parameter #0:
+    Method parameter should be Collection<InputFilter> (or subclass) instead of raw array; was `android.car.input.CarInputHandlingService.InputFilter[]`
+
+
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getFuelSystemStatus():
+    Must avoid boxed primitives (`java.lang.Integer`)
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getFuelType():
+    Must avoid boxed primitives (`java.lang.Integer`)
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getSecondaryAirStatus():
+    Must avoid boxed primitives (`java.lang.Integer`)
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getSystemFloatSensor(int):
+    Must avoid boxed primitives (`java.lang.Float`)
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getSystemIntegerSensor(int):
+    Must avoid boxed primitives (`java.lang.Integer`)
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getVendorFloatSensor(int):
+    Must avoid boxed primitives (`java.lang.Float`)
+AutoBoxing: android.car.diagnostic.CarDiagnosticEvent#getVendorIntegerSensor(int):
+    Must avoid boxed primitives (`java.lang.Integer`)
+
+
+CallbackInterface: android.car.hardware.CarVendorExtensionManager.CarVendorExtensionCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: CarVendorExtensionCallback
+CallbackInterface: android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: CarCabinEventCallback
+CallbackInterface: android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: CarHvacEventCallback
+CallbackInterface: android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentBleCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: CarTrustAgentBleCallback
+CallbackInterface: android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentEnrollmentCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: CarTrustAgentEnrollmentCallback
+CallbackInterface: android.car.vms.VmsClientManager.VmsClientCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: VmsClientCallback
+CallbackInterface: android.car.vms.VmsSubscriberManager.VmsSubscriberClientCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: VmsSubscriberClientCallback
+
+
+ConcreteCollection: android.car.hardware.CarPropertyConfig.Builder#setConfigArray(java.util.ArrayList<java.lang.Integer>) parameter #0:
+    Parameter type is concrete collection (`java.util.ArrayList`); must be higher-level interface
+
+
+EqualsAndHashCode: android.car.storagemonitoring.LifetimeWriteInfo#equals(Object):
+    Must override both equals and hashCode; missing one in android.car.storagemonitoring.LifetimeWriteInfo
+EqualsAndHashCode: android.car.vms.VmsAvailableLayers#equals(Object):
+    Must override both equals and hashCode; missing one in android.car.vms.VmsAvailableLayers
+
+
+ExecutorRegistration: android.car.CarProjectionManager#registerProjectionListener(android.car.CarProjectionManager.CarProjectionListener, int):
+    Registration methods should have overload that accepts delivery Executor: `registerProjectionListener`
+ExecutorRegistration: android.car.CarProjectionManager#registerProjectionStatusListener(android.car.CarProjectionManager.ProjectionStatusListener):
+    Registration methods should have overload that accepts delivery Executor: `registerProjectionStatusListener`
+ExecutorRegistration: android.car.CarProjectionManager#startProjectionAccessPoint(android.car.CarProjectionManager.ProjectionAccessPointCallback):
+    Registration methods should have overload that accepts delivery Executor: `startProjectionAccessPoint`
+ExecutorRegistration: android.car.diagnostic.CarDiagnosticManager#registerListener(android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener, int, int):
+    Registration methods should have overload that accepts delivery Executor: `registerListener`
+ExecutorRegistration: android.car.drivingstate.CarDrivingStateManager#registerListener(android.car.drivingstate.CarDrivingStateManager.CarDrivingStateEventListener):
+    Registration methods should have overload that accepts delivery Executor: `registerListener`
+ExecutorRegistration: android.car.hardware.CarVendorExtensionManager#registerCallback(android.car.hardware.CarVendorExtensionManager.CarVendorExtensionCallback):
+    Registration methods should have overload that accepts delivery Executor: `registerCallback`
+ExecutorRegistration: android.car.hardware.cabin.CarCabinManager#registerCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback):
+    Registration methods should have overload that accepts delivery Executor: `registerCallback`
+ExecutorRegistration: android.car.hardware.hvac.CarHvacManager#registerCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback):
+    Registration methods should have overload that accepts delivery Executor: `registerCallback`
+ExecutorRegistration: android.car.storagemonitoring.CarStorageMonitoringManager#registerListener(android.car.storagemonitoring.CarStorageMonitoringManager.IoStatsListener):
+    Registration methods should have overload that accepts delivery Executor: `registerListener`
+ExecutorRegistration: android.car.trust.CarTrustAgentEnrollmentManager#setBleCallback(android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentBleCallback):
+    Registration methods should have overload that accepts delivery Executor: `setBleCallback`
+ExecutorRegistration: android.car.trust.CarTrustAgentEnrollmentManager#setEnrollmentCallback(android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentEnrollmentCallback):
+    Registration methods should have overload that accepts delivery Executor: `setEnrollmentCallback`
+
+
+HiddenSuperclass: android.car.CarAppFocusManager:
+    Public class android.car.CarAppFocusManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.CarInfoManager:
+    Public class android.car.CarInfoManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.CarOccupantZoneManager:
+    Public class android.car.CarOccupantZoneManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.CarProjectionManager:
+    Public class android.car.CarProjectionManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.cluster.CarInstrumentClusterManager:
+    Public class android.car.cluster.CarInstrumentClusterManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.content.pm.CarPackageManager:
+    Public class android.car.content.pm.CarPackageManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.diagnostic.CarDiagnosticManager:
+    Public class android.car.diagnostic.CarDiagnosticManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.drivingstate.CarDrivingStateManager:
+    Public class android.car.drivingstate.CarDrivingStateManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.drivingstate.CarUxRestrictionsManager:
+    Public class android.car.drivingstate.CarUxRestrictionsManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.CarSensorManager:
+    Public class android.car.hardware.CarSensorManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.CarVendorExtensionManager:
+    Public class android.car.hardware.CarVendorExtensionManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.cabin.CarCabinManager:
+    Public class android.car.hardware.cabin.CarCabinManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.hvac.CarHvacManager:
+    Public class android.car.hardware.hvac.CarHvacManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.power.CarPowerManager:
+    Public class android.car.hardware.power.CarPowerManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.property.CarPropertyManager:
+    Public class android.car.hardware.property.CarPropertyManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.media.CarAudioManager:
+    Public class android.car.media.CarAudioManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.navigation.CarNavigationStatusManager:
+    Public class android.car.navigation.CarNavigationStatusManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.settings.CarConfigurationManager:
+    Public class android.car.settings.CarConfigurationManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.storagemonitoring.CarStorageMonitoringManager:
+    Public class android.car.storagemonitoring.CarStorageMonitoringManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.trust.CarTrustAgentEnrollmentManager:
+    Public class android.car.trust.CarTrustAgentEnrollmentManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.user.CarUserManager:
+    Public class android.car.user.CarUserManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.vms.VmsClientManager:
+    Public class android.car.vms.VmsClientManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.vms.VmsSubscriberManager:
+    Public class android.car.vms.VmsSubscriberManager stripped of unavailable superclass android.car.CarManagerBase
+
+
+IntentName: android.car.Car#CAR_EXTRA_CLUSTER_ACTIVITY_STATE:
+    Intent extra constant name must be EXTRA_FOO: CAR_EXTRA_CLUSTER_ACTIVITY_STATE
+IntentName: android.car.media.CarAudioManager#AUDIOFOCUS_EXTRA_RECEIVE_DUCKING_EVENTS:
+    Intent extra constant name must be EXTRA_FOO: AUDIOFOCUS_EXTRA_RECEIVE_DUCKING_EVENTS
+
+
+InternalField: android.car.input.CarInputHandlingService.InputFilter#mKeyCode:
+    Internal field mKeyCode must not be exposed
+InternalField: android.car.input.CarInputHandlingService.InputFilter#mTargetDisplay:
+    Internal field mTargetDisplay must not be exposed
+
+
+MinMaxConstant: android.car.diagnostic.IntegerSensorIndex#MAX_AIR_FLOW_RATE_FROM_MASS_AIR_FLOW_SENSOR:
+    If min/max could change in future, make them dynamic methods: android.car.diagnostic.IntegerSensorIndex#MAX_AIR_FLOW_RATE_FROM_MASS_AIR_FLOW_SENSOR
+MinMaxConstant: android.car.diagnostic.IntegerSensorIndex#MAX_FUEL_AIR_EQUIVALENCE_RATIO:
+    If min/max could change in future, make them dynamic methods: android.car.diagnostic.IntegerSensorIndex#MAX_FUEL_AIR_EQUIVALENCE_RATIO
+MinMaxConstant: android.car.diagnostic.IntegerSensorIndex#MAX_INTAKE_MANIFOLD_ABSOLUTE_PRESSURE:
+    If min/max could change in future, make them dynamic methods: android.car.diagnostic.IntegerSensorIndex#MAX_INTAKE_MANIFOLD_ABSOLUTE_PRESSURE
+MinMaxConstant: android.car.diagnostic.IntegerSensorIndex#MAX_OXYGEN_SENSOR_CURRENT:
+    If min/max could change in future, make them dynamic methods: android.car.diagnostic.IntegerSensorIndex#MAX_OXYGEN_SENSOR_CURRENT
+MinMaxConstant: android.car.diagnostic.IntegerSensorIndex#MAX_OXYGEN_SENSOR_VOLTAGE:
+    If min/max could change in future, make them dynamic methods: android.car.diagnostic.IntegerSensorIndex#MAX_OXYGEN_SENSOR_VOLTAGE
+
+
+MissingNullability: android.car.AoapService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #0:
+    Missing nullability on parameter `fd` in method `dump`
+MissingNullability: android.car.AoapService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #1:
+    Missing nullability on parameter `writer` in method `dump`
+MissingNullability: android.car.AoapService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #2:
+    Missing nullability on parameter `args` in method `dump`
+MissingNullability: android.car.AoapService#onBind(android.content.Intent):
+    Missing nullability on method `onBind` return
+MissingNullability: android.car.AoapService#onBind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onBind`
+MissingNullability: android.car.AoapService#onUnbind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onUnbind`
+MissingNullability: android.car.CarProjectionManager.ProjectionAccessPointCallback#onStarted(android.net.wifi.WifiConfiguration) parameter #0:
+    Missing nullability on parameter `wifiConfiguration` in method `onStarted`
+MissingNullability: android.car.cluster.CarInstrumentClusterManager#registerCallback(String, android.car.cluster.CarInstrumentClusterManager.Callback) parameter #0:
+    Missing nullability on parameter `category` in method `registerCallback`
+MissingNullability: android.car.cluster.CarInstrumentClusterManager#registerCallback(String, android.car.cluster.CarInstrumentClusterManager.Callback) parameter #1:
+    Missing nullability on parameter `callback` in method `registerCallback`
+MissingNullability: android.car.cluster.CarInstrumentClusterManager#startActivity(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `startActivity`
+MissingNullability: android.car.cluster.CarInstrumentClusterManager#unregisterCallback(android.car.cluster.CarInstrumentClusterManager.Callback) parameter #0:
+    Missing nullability on parameter `callback` in method `unregisterCallback`
+MissingNullability: android.car.cluster.CarInstrumentClusterManager.Callback#onClusterActivityStateChanged(String, android.os.Bundle) parameter #0:
+    Missing nullability on parameter `category` in method `onClusterActivityStateChanged`
+MissingNullability: android.car.cluster.CarInstrumentClusterManager.Callback#onClusterActivityStateChanged(String, android.os.Bundle) parameter #1:
+    Missing nullability on parameter `clusterActivityState` in method `onClusterActivityStateChanged`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderer#createNavigationRenderer():
+    Missing nullability on method `createNavigationRenderer` return
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderer#onCreate(android.content.Context) parameter #0:
+    Missing nullability on parameter `context` in method `onCreate`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #0:
+    Missing nullability on parameter `fd` in method `dump`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #1:
+    Missing nullability on parameter `writer` in method `dump`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #2:
+    Missing nullability on parameter `args` in method `dump`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#getBitmap(android.net.Uri) parameter #0:
+    Missing nullability on parameter `uri` in method `getBitmap`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#getBitmap(android.net.Uri, int, int) parameter #0:
+    Missing nullability on parameter `uri` in method `getBitmap`
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#onBind(android.content.Intent):
+    Missing nullability on method `onBind` return
+MissingNullability: android.car.cluster.renderer.InstrumentClusterRenderingService#onBind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onBind`
+MissingNullability: android.car.cluster.renderer.NavigationRenderer#getNavigationProperties():
+    Missing nullability on method `getNavigationProperties` return
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#AppBlockingPackageInfo(String, int, int, int, android.content.pm.Signature[], String[]) parameter #0:
+    Missing nullability on parameter `packageName` in method `AppBlockingPackageInfo`
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#AppBlockingPackageInfo(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `AppBlockingPackageInfo`
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.content.pm.AppBlockingPackageInfo`
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#activities:
+    Missing nullability on field `activities` in class `class android.car.content.pm.AppBlockingPackageInfo`
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#packageName:
+    Missing nullability on field `packageName` in class `class android.car.content.pm.AppBlockingPackageInfo`
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#signatures:
+    Missing nullability on field `signatures` in class `class android.car.content.pm.AppBlockingPackageInfo`
+MissingNullability: android.car.content.pm.AppBlockingPackageInfo#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.content.pm.CarAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#CarAppBlockingPolicy(android.car.content.pm.AppBlockingPackageInfo[], android.car.content.pm.AppBlockingPackageInfo[]) parameter #0:
+    Missing nullability on parameter `whitelists` in method `CarAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#CarAppBlockingPolicy(android.car.content.pm.AppBlockingPackageInfo[], android.car.content.pm.AppBlockingPackageInfo[]) parameter #1:
+    Missing nullability on parameter `blacklists` in method `CarAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#CarAppBlockingPolicy(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `CarAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#blacklists:
+    Missing nullability on field `blacklists` in class `class android.car.content.pm.CarAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#whitelists:
+    Missing nullability on field `whitelists` in class `class android.car.content.pm.CarAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicy#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicyService#getAppBlockingPolicy():
+    Missing nullability on method `getAppBlockingPolicy` return
+MissingNullability: android.car.content.pm.CarAppBlockingPolicyService#onBind(android.content.Intent):
+    Missing nullability on method `onBind` return
+MissingNullability: android.car.content.pm.CarAppBlockingPolicyService#onBind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onBind`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicyService#onStartCommand(android.content.Intent, int, int) parameter #0:
+    Missing nullability on parameter `intent` in method `onStartCommand`
+MissingNullability: android.car.content.pm.CarAppBlockingPolicyService#onUnbind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onUnbind`
+MissingNullability: android.car.content.pm.CarPackageManager#isActivityBackedBySafeActivity(android.content.ComponentName) parameter #0:
+    Missing nullability on parameter `activityName` in method `isActivityBackedBySafeActivity`
+MissingNullability: android.car.content.pm.CarPackageManager#setAppBlockingPolicy(String, android.car.content.pm.CarAppBlockingPolicy, int) parameter #0:
+    Missing nullability on parameter `packageName` in method `setAppBlockingPolicy`
+MissingNullability: android.car.content.pm.CarPackageManager#setAppBlockingPolicy(String, android.car.content.pm.CarAppBlockingPolicy, int) parameter #1:
+    Missing nullability on parameter `policy` in method `setAppBlockingPolicy`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.diagnostic.CarDiagnosticEvent`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent#CarDiagnosticEvent(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `CarDiagnosticEvent`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent#dtc:
+    Missing nullability on field `dtc` in class `class android.car.diagnostic.CarDiagnosticEvent`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent#writeToJson(android.util.JsonWriter) parameter #0:
+    Missing nullability on parameter `jsonWriter` in method `writeToJson`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#build():
+    Missing nullability on method `build` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#newFreezeFrameBuilder():
+    Missing nullability on method `newFreezeFrameBuilder` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#newLiveFrameBuilder():
+    Missing nullability on method `newLiveFrameBuilder` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#setDtc(String):
+    Missing nullability on method `setDtc` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#setDtc(String) parameter #0:
+    Missing nullability on parameter `dtc` in method `setDtc`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#setFloatValue(int, float):
+    Missing nullability on method `setFloatValue` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#setIntValue(int, int):
+    Missing nullability on method `setIntValue` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#setTimeStamp(long):
+    Missing nullability on method `setTimeStamp` return
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.Builder#withDtc(String) parameter #0:
+    Missing nullability on parameter `dtc` in method `withDtc`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CommonIgnitionMonitors#components:
+    Missing nullability on field `components` in class `class android.car.diagnostic.CarDiagnosticEvent.CommonIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CommonIgnitionMonitors#fuelSystem:
+    Missing nullability on field `fuelSystem` in class `class android.car.diagnostic.CarDiagnosticEvent.CommonIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CommonIgnitionMonitors#misfire:
+    Missing nullability on field `misfire` in class `class android.car.diagnostic.CarDiagnosticEvent.CommonIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#EGROrVVT:
+    Missing nullability on field `EGROrVVT` in class `class android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#NMHCCatalyst:
+    Missing nullability on field `NMHCCatalyst` in class `class android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#NOxSCR:
+    Missing nullability on field `NOxSCR` in class `class android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#PMFilter:
+    Missing nullability on field `PMFilter` in class `class android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#boostPressure:
+    Missing nullability on field `boostPressure` in class `class android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#exhaustGasSensor:
+    Missing nullability on field `exhaustGasSensor` in class `class android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#ACRefrigerant:
+    Missing nullability on field `ACRefrigerant` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#EGR:
+    Missing nullability on field `EGR` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#catalyst:
+    Missing nullability on field `catalyst` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#evaporativeSystem:
+    Missing nullability on field `evaporativeSystem` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#heatedCatalyst:
+    Missing nullability on field `heatedCatalyst` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#oxygenSensor:
+    Missing nullability on field `oxygenSensor` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#oxygenSensorHeater:
+    Missing nullability on field `oxygenSensorHeater` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#secondaryAirSystem:
+    Missing nullability on field `secondaryAirSystem` in class `class android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors`
+MissingNullability: android.car.diagnostic.CarDiagnosticManager#clearFreezeFrames(long...) parameter #0:
+    Missing nullability on parameter `timestamps` in method `clearFreezeFrames`
+MissingNullability: android.car.diagnostic.CarDiagnosticManager#getFreezeFrameTimestamps():
+    Missing nullability on method `getFreezeFrameTimestamps` return
+MissingNullability: android.car.diagnostic.CarDiagnosticManager#registerListener(android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener, int, int) parameter #0:
+    Missing nullability on parameter `listener` in method `registerListener`
+MissingNullability: android.car.diagnostic.CarDiagnosticManager#unregisterListener(android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener) parameter #0:
+    Missing nullability on parameter `listener` in method `unregisterListener`
+MissingNullability: android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener#onDiagnosticEvent(android.car.diagnostic.CarDiagnosticEvent) parameter #0:
+    Missing nullability on parameter `carDiagnosticEvent` in method `onDiagnosticEvent`
+MissingNullability: android.car.drivingstate.CarDrivingStateEvent#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.drivingstate.CarDrivingStateEvent`
+MissingNullability: android.car.drivingstate.CarDrivingStateEvent#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.drivingstate.CarDrivingStateManager.CarDrivingStateEventListener#onDrivingStateChanged(android.car.drivingstate.CarDrivingStateEvent) parameter #0:
+    Missing nullability on parameter `event` in method `onDrivingStateChanged`
+MissingNullability: android.car.hardware.CarPropertyConfig#newBuilder(Class<T>, int, int, int):
+    Missing nullability on method `newBuilder` return
+MissingNullability: android.car.hardware.CarPropertyConfig#newBuilder(Class<T>, int, int, int) parameter #0:
+    Missing nullability on parameter `type` in method `newBuilder`
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#addArea(int):
+    Missing nullability on method `addArea` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#addAreaConfig(int, T, T):
+    Missing nullability on method `addAreaConfig` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#addAreas(int[]):
+    Missing nullability on method `addAreas` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#addAreas(int[]) parameter #0:
+    Missing nullability on parameter `areaIds` in method `addAreas`
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#build():
+    Missing nullability on method `build` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setAccess(int):
+    Missing nullability on method `setAccess` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setChangeMode(int):
+    Missing nullability on method `setChangeMode` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setConfigArray(java.util.ArrayList<java.lang.Integer>):
+    Missing nullability on method `setConfigArray` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setConfigArray(java.util.ArrayList<java.lang.Integer>) parameter #0:
+    Missing nullability on parameter `configArray` in method `setConfigArray`
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setConfigString(String):
+    Missing nullability on method `setConfigString` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setConfigString(String) parameter #0:
+    Missing nullability on parameter `configString` in method `setConfigString`
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setMaxSampleRate(float):
+    Missing nullability on method `setMaxSampleRate` return
+MissingNullability: android.car.hardware.CarPropertyConfig.Builder#setMinSampleRate(float):
+    Missing nullability on method `setMinSampleRate` return
+MissingNullability: android.car.hardware.CarVendorExtensionManager#getGlobalProperty(Class<E>, int) parameter #0:
+    Missing nullability on parameter `propertyClass` in method `getGlobalProperty`
+MissingNullability: android.car.hardware.CarVendorExtensionManager#getProperties():
+    Missing nullability on method `getProperties` return
+MissingNullability: android.car.hardware.CarVendorExtensionManager#getProperty(Class<E>, int, int) parameter #0:
+    Missing nullability on parameter `propertyClass` in method `getProperty`
+MissingNullability: android.car.hardware.CarVendorExtensionManager#registerCallback(android.car.hardware.CarVendorExtensionManager.CarVendorExtensionCallback) parameter #0:
+    Missing nullability on parameter `callback` in method `registerCallback`
+MissingNullability: android.car.hardware.CarVendorExtensionManager#setGlobalProperty(Class<E>, int, E) parameter #0:
+    Missing nullability on parameter `propertyClass` in method `setGlobalProperty`
+MissingNullability: android.car.hardware.CarVendorExtensionManager#setProperty(Class<E>, int, int, E) parameter #0:
+    Missing nullability on parameter `propertyClass` in method `setProperty`
+MissingNullability: android.car.hardware.CarVendorExtensionManager#unregisterCallback(android.car.hardware.CarVendorExtensionManager.CarVendorExtensionCallback) parameter #0:
+    Missing nullability on parameter `callback` in method `unregisterCallback`
+MissingNullability: android.car.hardware.CarVendorExtensionManager.CarVendorExtensionCallback#onChangeEvent(android.car.hardware.CarPropertyValue) parameter #0:
+    Missing nullability on parameter `value` in method `onChangeEvent`
+MissingNullability: android.car.hardware.cabin.CarCabinManager#getPropertyList():
+    Missing nullability on method `getPropertyList` return
+MissingNullability: android.car.hardware.cabin.CarCabinManager#registerCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback) parameter #0:
+    Missing nullability on parameter `callback` in method `registerCallback`
+MissingNullability: android.car.hardware.cabin.CarCabinManager#unregisterCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback) parameter #0:
+    Missing nullability on parameter `callback` in method `unregisterCallback`
+MissingNullability: android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback#onChangeEvent(android.car.hardware.CarPropertyValue) parameter #0:
+    Missing nullability on parameter `value` in method `onChangeEvent`
+MissingNullability: android.car.hardware.hvac.CarHvacManager#getPropertyList():
+    Missing nullability on method `getPropertyList` return
+MissingNullability: android.car.hardware.hvac.CarHvacManager#registerCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback) parameter #0:
+    Missing nullability on parameter `callback` in method `registerCallback`
+MissingNullability: android.car.hardware.hvac.CarHvacManager#unregisterCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback) parameter #0:
+    Missing nullability on parameter `callback` in method `unregisterCallback`
+MissingNullability: android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback#onChangeEvent(android.car.hardware.CarPropertyValue) parameter #0:
+    Missing nullability on parameter `value` in method `onChangeEvent`
+MissingNullability: android.car.input.CarInputHandlingService#CarInputHandlingService(android.car.input.CarInputHandlingService.InputFilter[]) parameter #0:
+    Missing nullability on parameter `handledKeys` in method `CarInputHandlingService`
+MissingNullability: android.car.input.CarInputHandlingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #0:
+    Missing nullability on parameter `fd` in method `dump`
+MissingNullability: android.car.input.CarInputHandlingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #1:
+    Missing nullability on parameter `writer` in method `dump`
+MissingNullability: android.car.input.CarInputHandlingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]) parameter #2:
+    Missing nullability on parameter `args` in method `dump`
+MissingNullability: android.car.input.CarInputHandlingService#onBind(android.content.Intent):
+    Missing nullability on method `onBind` return
+MissingNullability: android.car.input.CarInputHandlingService#onBind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onBind`
+MissingNullability: android.car.input.CarInputHandlingService#onKeyEvent(android.view.KeyEvent, int) parameter #0:
+    Missing nullability on parameter `keyEvent` in method `onKeyEvent`
+MissingNullability: android.car.input.CarInputHandlingService.InputFilter#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.input.CarInputHandlingService.InputFilter`
+MissingNullability: android.car.input.CarInputHandlingService.InputFilter#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.media.CarAudioManager#createAudioPatch(String, int, int):
+    Missing nullability on method `createAudioPatch` return
+MissingNullability: android.car.media.CarAudioManager#createAudioPatch(String, int, int) parameter #0:
+    Missing nullability on parameter `sourceAddress` in method `createAudioPatch`
+MissingNullability: android.car.media.CarAudioManager#releaseAudioPatch(android.car.media.CarAudioPatchHandle) parameter #0:
+    Missing nullability on parameter `patch` in method `releaseAudioPatch`
+MissingNullability: android.car.media.CarAudioPatchHandle#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.media.CarAudioPatchHandle`
+MissingNullability: android.car.media.CarAudioPatchHandle#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+MissingNullability: android.car.navigation.CarNavigationInstrumentCluster#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.navigation.CarNavigationInstrumentCluster`
+MissingNullability: android.car.navigation.CarNavigationInstrumentCluster#CarNavigationInstrumentCluster(android.car.navigation.CarNavigationInstrumentCluster) parameter #0:
+    Missing nullability on parameter `that` in method `CarNavigationInstrumentCluster`
+MissingNullability: android.car.navigation.CarNavigationInstrumentCluster#createCluster(int):
+    Missing nullability on method `createCluster` return
+MissingNullability: android.car.navigation.CarNavigationInstrumentCluster#createCustomImageCluster(int, int, int, int):
+    Missing nullability on method `createCustomImageCluster` return
+MissingNullability: android.car.navigation.CarNavigationInstrumentCluster#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.navigation.CarNavigationStatusManager#getInstrumentClusterInfo():
+    Missing nullability on method `getInstrumentClusterInfo` return
+MissingNullability: android.car.navigation.CarNavigationStatusManager#sendEvent(int, android.os.Bundle) parameter #1:
+    Missing nullability on parameter `bundle` in method `sendEvent`
+MissingNullability: android.car.navigation.CarNavigationStatusManager#sendNavigationStateChange(android.os.Bundle) parameter #0:
+    Missing nullability on parameter `bundle` in method `sendNavigationStateChange`
+MissingNullability: android.car.projection.ProjectionOptions#ProjectionOptions(android.os.Bundle) parameter #0:
+    Missing nullability on parameter `bundle` in method `ProjectionOptions`
+MissingNullability: android.car.projection.ProjectionStatus#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.projection.ProjectionStatus`
+MissingNullability: android.car.projection.ProjectionStatus#builder(String, int) parameter #0:
+    Missing nullability on parameter `packageName` in method `builder`
+MissingNullability: android.car.projection.ProjectionStatus#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.projection.ProjectionStatus.Builder#addMobileDevice(android.car.projection.ProjectionStatus.MobileDevice) parameter #0:
+    Missing nullability on parameter `mobileDevice` in method `addMobileDevice`
+MissingNullability: android.car.projection.ProjectionStatus.Builder#build():
+    Missing nullability on method `build` return
+MissingNullability: android.car.projection.ProjectionStatus.Builder#setExtras(android.os.Bundle) parameter #0:
+    Missing nullability on parameter `extras` in method `setExtras`
+MissingNullability: android.car.projection.ProjectionStatus.MobileDevice#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.projection.ProjectionStatus.MobileDevice`
+MissingNullability: android.car.projection.ProjectionStatus.MobileDevice#builder(int, String) parameter #1:
+    Missing nullability on parameter `name` in method `builder`
+MissingNullability: android.car.projection.ProjectionStatus.MobileDevice#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.projection.ProjectionStatus.MobileDevice.Builder#setExtras(android.os.Bundle) parameter #0:
+    Missing nullability on parameter `extras` in method `setExtras`
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#getAggregateIoStats():
+    Missing nullability on method `getAggregateIoStats` return
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#getBootIoStats():
+    Missing nullability on method `getBootIoStats` return
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#getIoStatsDeltas():
+    Missing nullability on method `getIoStatsDeltas` return
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#getWearEstimate():
+    Missing nullability on method `getWearEstimate` return
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#getWearEstimateHistory():
+    Missing nullability on method `getWearEstimateHistory` return
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#registerListener(android.car.storagemonitoring.CarStorageMonitoringManager.IoStatsListener) parameter #0:
+    Missing nullability on parameter `listener` in method `registerListener`
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager#unregisterListener(android.car.storagemonitoring.CarStorageMonitoringManager.IoStatsListener) parameter #0:
+    Missing nullability on parameter `listener` in method `unregisterListener`
+MissingNullability: android.car.storagemonitoring.CarStorageMonitoringManager.IoStatsListener#onSnapshot(android.car.storagemonitoring.IoStats) parameter #0:
+    Missing nullability on parameter `snapshot` in method `onSnapshot`
+MissingNullability: android.car.storagemonitoring.IoStats#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.storagemonitoring.IoStats`
+MissingNullability: android.car.storagemonitoring.IoStats#IoStats(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `IoStats`
+MissingNullability: android.car.storagemonitoring.IoStats#IoStats(java.util.List<android.car.storagemonitoring.IoStatsEntry>, long) parameter #0:
+    Missing nullability on parameter `stats` in method `IoStats`
+MissingNullability: android.car.storagemonitoring.IoStats#getBackgroundTotals():
+    Missing nullability on method `getBackgroundTotals` return
+MissingNullability: android.car.storagemonitoring.IoStats#getForegroundTotals():
+    Missing nullability on method `getForegroundTotals` return
+MissingNullability: android.car.storagemonitoring.IoStats#getStats():
+    Missing nullability on method `getStats` return
+MissingNullability: android.car.storagemonitoring.IoStats#getTotals():
+    Missing nullability on method `getTotals` return
+MissingNullability: android.car.storagemonitoring.IoStats#getUserIdStats(int):
+    Missing nullability on method `getUserIdStats` return
+MissingNullability: android.car.storagemonitoring.IoStats#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.storagemonitoring.IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#IoStatsEntry(android.car.storagemonitoring.UidIoRecord, long) parameter #0:
+    Missing nullability on parameter `record` in method `IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#IoStatsEntry(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#IoStatsEntry(int, long, android.car.storagemonitoring.IoStatsEntry.Metrics, android.car.storagemonitoring.IoStatsEntry.Metrics) parameter #2:
+    Missing nullability on parameter `foreground` in method `IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#IoStatsEntry(int, long, android.car.storagemonitoring.IoStatsEntry.Metrics, android.car.storagemonitoring.IoStatsEntry.Metrics) parameter #3:
+    Missing nullability on parameter `background` in method `IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#background:
+    Missing nullability on field `background` in class `class android.car.storagemonitoring.IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#foreground:
+    Missing nullability on field `foreground` in class `class android.car.storagemonitoring.IoStatsEntry`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry.Metrics#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.storagemonitoring.IoStatsEntry.Metrics`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry.Metrics#Metrics(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `Metrics`
+MissingNullability: android.car.storagemonitoring.IoStatsEntry.Metrics#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.storagemonitoring.LifetimeWriteInfo`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#LifetimeWriteInfo(String, String, long) parameter #0:
+    Missing nullability on parameter `partition` in method `LifetimeWriteInfo`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#LifetimeWriteInfo(String, String, long) parameter #1:
+    Missing nullability on parameter `fstype` in method `LifetimeWriteInfo`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#LifetimeWriteInfo(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `LifetimeWriteInfo`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#fstype:
+    Missing nullability on field `fstype` in class `class android.car.storagemonitoring.LifetimeWriteInfo`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#partition:
+    Missing nullability on field `partition` in class `class android.car.storagemonitoring.LifetimeWriteInfo`
+MissingNullability: android.car.storagemonitoring.LifetimeWriteInfo#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.storagemonitoring.WearEstimate#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.storagemonitoring.WearEstimate`
+MissingNullability: android.car.storagemonitoring.WearEstimate#WearEstimate(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `WearEstimate`
+MissingNullability: android.car.storagemonitoring.WearEstimate#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.storagemonitoring.WearEstimateChange#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.storagemonitoring.WearEstimateChange`
+MissingNullability: android.car.storagemonitoring.WearEstimateChange#WearEstimateChange(android.car.storagemonitoring.WearEstimate, android.car.storagemonitoring.WearEstimate, long, java.time.Instant, boolean) parameter #0:
+    Missing nullability on parameter `oldEstimate` in method `WearEstimateChange`
+MissingNullability: android.car.storagemonitoring.WearEstimateChange#WearEstimateChange(android.car.storagemonitoring.WearEstimate, android.car.storagemonitoring.WearEstimate, long, java.time.Instant, boolean) parameter #1:
+    Missing nullability on parameter `newEstimate` in method `WearEstimateChange`
+MissingNullability: android.car.storagemonitoring.WearEstimateChange#WearEstimateChange(android.car.storagemonitoring.WearEstimate, android.car.storagemonitoring.WearEstimate, long, java.time.Instant, boolean) parameter #3:
+    Missing nullability on parameter `dateAtChange` in method `WearEstimateChange`
+MissingNullability: android.car.storagemonitoring.WearEstimateChange#WearEstimateChange(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `WearEstimateChange`
+MissingNullability: android.car.storagemonitoring.WearEstimateChange#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.trust.CarTrustAgentEnrollmentManager#enrollmentHandshakeAccepted(android.bluetooth.BluetoothDevice) parameter #0:
+    Missing nullability on parameter `device` in method `enrollmentHandshakeAccepted`
+MissingNullability: android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentBleCallback#onBleEnrollmentDeviceConnected(android.bluetooth.BluetoothDevice) parameter #0:
+    Missing nullability on parameter `device` in method `onBleEnrollmentDeviceConnected`
+MissingNullability: android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentBleCallback#onBleEnrollmentDeviceDisconnected(android.bluetooth.BluetoothDevice) parameter #0:
+    Missing nullability on parameter `device` in method `onBleEnrollmentDeviceDisconnected`
+MissingNullability: android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentEnrollmentCallback#onAuthStringAvailable(android.bluetooth.BluetoothDevice, String) parameter #0:
+    Missing nullability on parameter `device` in method `onAuthStringAvailable`
+MissingNullability: android.car.trust.CarTrustAgentEnrollmentManager.CarTrustAgentEnrollmentCallback#onAuthStringAvailable(android.bluetooth.BluetoothDevice, String) parameter #1:
+    Missing nullability on parameter `authString` in method `onAuthStringAvailable`
+MissingNullability: android.car.trust.TrustedDeviceInfo#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.trust.TrustedDeviceInfo`
+MissingNullability: android.car.trust.TrustedDeviceInfo#TrustedDeviceInfo(android.os.Parcel) parameter #0:
+    Missing nullability on parameter `in` in method `TrustedDeviceInfo`
+MissingNullability: android.car.trust.TrustedDeviceInfo#deserialize(String):
+    Missing nullability on method `deserialize` return
+MissingNullability: android.car.trust.TrustedDeviceInfo#deserialize(String) parameter #0:
+    Missing nullability on parameter `deviceInfo` in method `deserialize`
+MissingNullability: android.car.trust.TrustedDeviceInfo#serialize():
+    Missing nullability on method `serialize` return
+MissingNullability: android.car.trust.TrustedDeviceInfo#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.vms.VmsAssociatedLayer#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.vms.VmsAssociatedLayer`
+MissingNullability: android.car.vms.VmsAssociatedLayer#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+MissingNullability: android.car.vms.VmsAvailableLayers#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.vms.VmsAvailableLayers`
+MissingNullability: android.car.vms.VmsAvailableLayers#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+MissingNullability: android.car.vms.VmsLayer#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.vms.VmsLayer`
+MissingNullability: android.car.vms.VmsLayer#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+MissingNullability: android.car.vms.VmsLayerDependency#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.vms.VmsLayerDependency`
+MissingNullability: android.car.vms.VmsLayerDependency#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+MissingNullability: android.car.vms.VmsLayersOffering#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.vms.VmsLayersOffering`
+MissingNullability: android.car.vms.VmsLayersOffering#getDependencies():
+    Missing nullability on method `getDependencies` return
+MissingNullability: android.car.vms.VmsLayersOffering#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+MissingNullability: android.car.vms.VmsOperationRecorder#addHalSubscription(int, android.car.vms.VmsLayer) parameter #1:
+    Missing nullability on parameter `layer` in method `addHalSubscription`
+MissingNullability: android.car.vms.VmsOperationRecorder#addSubscription(int, android.car.vms.VmsLayer) parameter #1:
+    Missing nullability on parameter `layer` in method `addSubscription`
+MissingNullability: android.car.vms.VmsOperationRecorder#get():
+    Missing nullability on method `get` return
+MissingNullability: android.car.vms.VmsOperationRecorder#removeHalSubscription(int, android.car.vms.VmsLayer) parameter #1:
+    Missing nullability on parameter `layer` in method `removeHalSubscription`
+MissingNullability: android.car.vms.VmsOperationRecorder#removeSubscription(int, android.car.vms.VmsLayer) parameter #1:
+    Missing nullability on parameter `layer` in method `removeSubscription`
+MissingNullability: android.car.vms.VmsOperationRecorder#setHalPublisherLayersOffering(android.car.vms.VmsLayersOffering) parameter #0:
+    Missing nullability on parameter `layersOffering` in method `setHalPublisherLayersOffering`
+MissingNullability: android.car.vms.VmsOperationRecorder#setLayersOffering(android.car.vms.VmsLayersOffering) parameter #0:
+    Missing nullability on parameter `layersOffering` in method `setLayersOffering`
+MissingNullability: android.car.vms.VmsOperationRecorder#setPublisherLayersOffering(android.car.vms.VmsLayersOffering) parameter #0:
+    Missing nullability on parameter `layersOffering` in method `setPublisherLayersOffering`
+MissingNullability: android.car.vms.VmsOperationRecorder#subscribe(android.car.vms.VmsLayer) parameter #0:
+    Missing nullability on parameter `layer` in method `subscribe`
+MissingNullability: android.car.vms.VmsOperationRecorder#subscribe(android.car.vms.VmsLayer, int) parameter #0:
+    Missing nullability on parameter `layer` in method `subscribe`
+MissingNullability: android.car.vms.VmsOperationRecorder#unsubscribe(android.car.vms.VmsLayer) parameter #0:
+    Missing nullability on parameter `layer` in method `unsubscribe`
+MissingNullability: android.car.vms.VmsOperationRecorder#unsubscribe(android.car.vms.VmsLayer, int) parameter #0:
+    Missing nullability on parameter `layer` in method `unsubscribe`
+MissingNullability: android.car.vms.VmsPublisherClientService#getPublisherId(byte[]) parameter #0:
+    Missing nullability on parameter `publisherInfo` in method `getPublisherId`
+MissingNullability: android.car.vms.VmsPublisherClientService#getSubscriptions():
+    Missing nullability on method `getSubscriptions` return
+MissingNullability: android.car.vms.VmsPublisherClientService#onBind(android.content.Intent):
+    Missing nullability on method `onBind` return
+MissingNullability: android.car.vms.VmsPublisherClientService#onBind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onBind`
+MissingNullability: android.car.vms.VmsPublisherClientService#onUnbind(android.content.Intent) parameter #0:
+    Missing nullability on parameter `intent` in method `onUnbind`
+MissingNullability: android.car.vms.VmsPublisherClientService#publish(android.car.vms.VmsLayer, int, byte[]) parameter #2:
+    Missing nullability on parameter `payload` in method `publish`
+MissingNullability: android.car.vms.VmsSubscriberManager.VmsSubscriberClientCallback#onVmsMessageReceived(android.car.vms.VmsLayer, byte[]) parameter #1:
+    Missing nullability on parameter `payload` in method `onVmsMessageReceived`
+MissingNullability: android.car.vms.VmsSubscriptionState#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.vms.VmsSubscriptionState`
+MissingNullability: android.car.vms.VmsSubscriptionState#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `out` in method `writeToParcel`
+
+
+OnNameExpected: android.car.AoapService#canSwitchToAoap(android.hardware.usb.UsbDevice):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
+OnNameExpected: android.car.AoapService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
+OnNameExpected: android.car.AoapService#isDeviceSupported(android.hardware.usb.UsbDevice):
+    Methods implemented by developers should follow the on<Something> style, was `isDeviceSupported`
+OnNameExpected: android.car.cluster.renderer.InstrumentClusterRenderingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
+OnNameExpected: android.car.cluster.renderer.InstrumentClusterRenderingService#getBitmap(android.net.Uri, int, int):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
+OnNameExpected: android.car.cluster.renderer.InstrumentClusterRenderingService#getNavigationRenderer():
+    Methods implemented by developers should follow the on<Something> style, was `getNavigationRenderer`
+OnNameExpected: android.car.cluster.renderer.InstrumentClusterRenderingService#startNavigationActivity(android.content.ComponentName):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
+OnNameExpected: android.car.content.pm.CarAppBlockingPolicyService#getAppBlockingPolicy():
+    Methods implemented by developers should follow the on<Something> style, was `getAppBlockingPolicy`
+OnNameExpected: android.car.input.CarInputHandlingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
+
+
+ParcelConstructor: android.car.content.pm.AppBlockingPackageInfo#AppBlockingPackageInfo(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.content.pm.AppBlockingPackageInfo
+ParcelConstructor: android.car.content.pm.CarAppBlockingPolicy#CarAppBlockingPolicy(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.content.pm.CarAppBlockingPolicy
+ParcelConstructor: android.car.diagnostic.CarDiagnosticEvent#CarDiagnosticEvent(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.diagnostic.CarDiagnosticEvent
+ParcelConstructor: android.car.storagemonitoring.IoStats#IoStats(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.storagemonitoring.IoStats
+ParcelConstructor: android.car.storagemonitoring.IoStatsEntry#IoStatsEntry(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.storagemonitoring.IoStatsEntry
+ParcelConstructor: android.car.storagemonitoring.IoStatsEntry.Metrics#Metrics(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.storagemonitoring.IoStatsEntry.Metrics
+ParcelConstructor: android.car.storagemonitoring.LifetimeWriteInfo#LifetimeWriteInfo(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.storagemonitoring.LifetimeWriteInfo
+ParcelConstructor: android.car.storagemonitoring.WearEstimate#WearEstimate(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.storagemonitoring.WearEstimate
+ParcelConstructor: android.car.storagemonitoring.WearEstimateChange#WearEstimateChange(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.storagemonitoring.WearEstimateChange
+ParcelConstructor: android.car.trust.TrustedDeviceInfo#TrustedDeviceInfo(android.os.Parcel):
+    Parcelable inflation is exposed through CREATOR, not raw constructors, in android.car.trust.TrustedDeviceInfo
+
+
+ProtectedMember: android.car.AoapService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]):
+    Protected methods not allowed; must be public: method android.car.AoapService.dump(java.io.FileDescriptor,java.io.PrintWriter,String[])}
+ProtectedMember: android.car.cluster.renderer.InstrumentClusterRenderer#createNavigationRenderer():
+    Protected methods not allowed; must be public: method android.car.cluster.renderer.InstrumentClusterRenderer.createNavigationRenderer()}
+ProtectedMember: android.car.cluster.renderer.InstrumentClusterRenderingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]):
+    Protected methods not allowed; must be public: method android.car.cluster.renderer.InstrumentClusterRenderingService.dump(java.io.FileDescriptor,java.io.PrintWriter,String[])}
+ProtectedMember: android.car.cluster.renderer.InstrumentClusterRenderingService#startNavigationActivity(android.content.ComponentName):
+    Protected methods not allowed; must be public: method android.car.cluster.renderer.InstrumentClusterRenderingService.startNavigationActivity(android.content.ComponentName)}
+ProtectedMember: android.car.content.pm.CarAppBlockingPolicyService#getAppBlockingPolicy():
+    Protected methods not allowed; must be public: method android.car.content.pm.CarAppBlockingPolicyService.getAppBlockingPolicy()}
+ProtectedMember: android.car.input.CarInputHandlingService#dump(java.io.FileDescriptor, java.io.PrintWriter, String[]):
+    Protected methods not allowed; must be public: method android.car.input.CarInputHandlingService.dump(java.io.FileDescriptor,java.io.PrintWriter,String[])}
+ProtectedMember: android.car.input.CarInputHandlingService#onKeyEvent(android.view.KeyEvent, int):
+    Protected methods not allowed; must be public: method android.car.input.CarInputHandlingService.onKeyEvent(android.view.KeyEvent,int)}
+ProtectedMember: android.car.vms.VmsPublisherClientService#onVmsPublisherServiceReady():
+    Protected methods not allowed; must be public: method android.car.vms.VmsPublisherClientService.onVmsPublisherServiceReady()}
+
+
+PublicTypedef: android.car.diagnostic.CarDiagnosticEvent.FuelSystemStatus.Status:
+    Don't expose @IntDef: Status must be hidden.
+PublicTypedef: android.car.diagnostic.CarDiagnosticEvent.FuelType.Type:
+    Don't expose @IntDef: Type must be hidden.
+PublicTypedef: android.car.diagnostic.CarDiagnosticEvent.SecondaryAirStatus.Status:
+    Don't expose @IntDef: Status must be hidden.
+PublicTypedef: android.car.diagnostic.CarDiagnosticManager.FrameType:
+    Don't expose @IntDef: FrameType must be hidden.
+
+
+RegistrationName: android.car.CarProjectionManager#registerProjectionListener(android.car.CarProjectionManager.CarProjectionListener, int):
+    Listener methods should be named add/remove; was registerProjectionListener
+RegistrationName: android.car.CarProjectionManager#registerProjectionStatusListener(android.car.CarProjectionManager.ProjectionStatusListener):
+    Listener methods should be named add/remove; was registerProjectionStatusListener
+RegistrationName: android.car.CarProjectionManager#unregisterProjectionListener():
+    Listener methods should be named add/remove; was unregisterProjectionListener
+RegistrationName: android.car.CarProjectionManager#unregisterProjectionStatusListener(android.car.CarProjectionManager.ProjectionStatusListener):
+    Listener methods should be named add/remove; was unregisterProjectionStatusListener
+RegistrationName: android.car.diagnostic.CarDiagnosticManager#registerListener(android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener, int, int):
+    Listener methods should be named add/remove; was registerListener
+RegistrationName: android.car.diagnostic.CarDiagnosticManager#unregisterListener(android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener):
+    Listener methods should be named add/remove; was unregisterListener
+RegistrationName: android.car.drivingstate.CarDrivingStateManager#registerListener(android.car.drivingstate.CarDrivingStateManager.CarDrivingStateEventListener):
+    Listener methods should be named add/remove; was registerListener
+RegistrationName: android.car.drivingstate.CarDrivingStateManager#unregisterListener():
+    Listener methods should be named add/remove; was unregisterListener
+RegistrationName: android.car.storagemonitoring.CarStorageMonitoringManager#registerListener(android.car.storagemonitoring.CarStorageMonitoringManager.IoStatsListener):
+    Listener methods should be named add/remove; was registerListener
+RegistrationName: android.car.storagemonitoring.CarStorageMonitoringManager#unregisterListener(android.car.storagemonitoring.CarStorageMonitoringManager.IoStatsListener):
+    Listener methods should be named add/remove; was unregisterListener
+
+
+SamShouldBeLast: android.car.CarProjectionManager#registerProjectionListener(android.car.CarProjectionManager.CarProjectionListener, int):
+    SAM-compatible parameters (such as parameter 1, "listener", in android.car.CarProjectionManager.registerProjectionListener) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+SamShouldBeLast: android.car.diagnostic.CarDiagnosticManager#registerListener(android.car.diagnostic.CarDiagnosticManager.OnDiagnosticEventListener, int, int):
+    SAM-compatible parameters (such as parameter 1, "listener", in android.car.diagnostic.CarDiagnosticManager.registerListener) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+
+
+ServiceName: android.car.Car#CAR_DRIVING_STATE_SERVICE:
+    Inconsistent service value; expected `CAR_DRIVING_STATE`, was `drivingstate`
+ServiceName: android.car.Car#CAR_TRUST_AGENT_ENROLLMENT_SERVICE:
+    Inconsistent service value; expected `CAR_TRUST_AGENT_ENROLLMENT`, was `trust_enroll`
+ServiceName: android.car.Car#CAR_USER_SERVICE:
+    Inconsistent service value; expected `CAR_USER`, was `car_user_service`
+ServiceName: android.car.Car#PERMISSION_CAR_TEST_SERVICE:
+    Inconsistent service value; expected `PERMISSION_CAR_TEST`, was `android.car.permission.CAR_TEST_SERVICE`
+ServiceName: android.car.Car#TEST_SERVICE:
+    Inconsistent service value; expected `TEST`, was `car-service-test`
+ServiceName: android.car.Car#VMS_SUBSCRIBER_SERVICE:
+    Inconsistent service value; expected `VMS_SUBSCRIBER`, was `vehicle_map_subscriber_service`
+
+
+StartWithLower: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#EGROrVVT:
+    Non-static field EGROrVVT must be named using fooBar style
+StartWithLower: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#NMHCCatalyst:
+    Non-static field NMHCCatalyst must be named using fooBar style
+StartWithLower: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#NOxSCR:
+    Non-static field NOxSCR must be named using fooBar style
+StartWithLower: android.car.diagnostic.CarDiagnosticEvent.CompressionIgnitionMonitors#PMFilter:
+    Non-static field PMFilter must be named using fooBar style
+StartWithLower: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#ACRefrigerant:
+    Non-static field ACRefrigerant must be named using fooBar style
+StartWithLower: android.car.diagnostic.CarDiagnosticEvent.SparkIgnitionMonitors#EGR:
+    Non-static field EGR must be named using fooBar style
+
+
+UserHandleName: android.car.projection.ProjectionOptions:
+    Classes holding a set of parameters should be called `FooParams`, was `ProjectionOptions`
+
+
+VisiblySynchronized: android.car.drivingstate.CarDrivingStateManager#registerListener(android.car.drivingstate.CarDrivingStateManager.CarDrivingStateEventListener):
+    Internal locks must not be exposed: method android.car.drivingstate.CarDrivingStateManager.registerListener(android.car.drivingstate.CarDrivingStateManager.CarDrivingStateEventListener)
+VisiblySynchronized: android.car.drivingstate.CarDrivingStateManager#unregisterListener():
+    Internal locks must not be exposed: method android.car.drivingstate.CarDrivingStateManager.unregisterListener()
+VisiblySynchronized: android.car.hardware.cabin.CarCabinManager#registerCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback):
+    Internal locks must not be exposed: method android.car.hardware.cabin.CarCabinManager.registerCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback)
+VisiblySynchronized: android.car.hardware.cabin.CarCabinManager#unregisterCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback):
+    Internal locks must not be exposed: method android.car.hardware.cabin.CarCabinManager.unregisterCallback(android.car.hardware.cabin.CarCabinManager.CarCabinEventCallback)
+VisiblySynchronized: android.car.hardware.hvac.CarHvacManager#registerCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback):
+    Internal locks must not be exposed: method android.car.hardware.hvac.CarHvacManager.registerCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback)
+VisiblySynchronized: android.car.hardware.hvac.CarHvacManager#unregisterCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback):
+    Internal locks must not be exposed: method android.car.hardware.hvac.CarHvacManager.unregisterCallback(android.car.hardware.hvac.CarHvacManager.CarHvacEventCallback)

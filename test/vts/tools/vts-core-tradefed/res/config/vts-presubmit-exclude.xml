@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Excluded tests from vts-presubmit-* plan runs">
+
+    <!-- vts_ltp_test_arm_* test cases taking longer than 15 seconds -->
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 cve.cve-2011-0999_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 cve.cve-2015-7550_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 cve.cve-2016-7117_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 cve.cve-2017-2671_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 fs.fs_inod01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 fs.linker01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 nptl.nptl01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 mm.mmapstress06_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 fs.fs_di_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio23_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm cve.cve-2011-0999_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm cve.cve-2015-7550_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm cve.cve-2016-7117_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm cve.cve-2017-2671_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm fs.fs_inod01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm fs.linker01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm nptl.nptl01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm mm.mmapstress06_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm fs.fs_di_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio23_32bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan cve.cve-2011-0999_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan cve.cve-2015-7550_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan cve.cve-2016-7117_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan cve.cve-2017-2671_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan fs.fs_inod01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan fs.linker01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan nptl.nptl01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan mm.mmapstress06_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan fs.fs_di_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio23_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem cve.cve-2011-0999_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem cve.cve-2015-7550_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem cve.cve-2016-7117_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem cve.cve-2017-2671_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem fs.fs_inod01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem fs.linker01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem nptl.nptl01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem mm.mmapstress06_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem fs.fs_di_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio23_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem cve.cve-2011-0999_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem cve.cve-2015-7550_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem cve.cve-2016-7117_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem cve.cve-2017-2671_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem fs.fs_inod01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem fs.linker01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem nptl.nptl01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem mm.mmapstress06_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem fs.fs_di_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio23_32bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan cve.cve-2011-0999_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan cve.cve-2015-7550_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan cve.cve-2016-7117_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan cve.cve-2017-2671_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan fs.fs_inod01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan fs.linker01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan nptl.nptl01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan mm.mmapstress06_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan fs.fs_di_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio23_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 cve.cve-2011-0999_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 cve.cve-2015-7550_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 cve.cve-2016-7117_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 cve.cve-2017-2671_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 fs.fs_inod01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 fs.linker01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 nptl.nptl01_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 mm.mmapstress06_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 fs.fs_di_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio23_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 cve.cve-2011-0999_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 cve.cve-2015-7550_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 cve.cve-2016-7117_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 cve.cve-2017-2671_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 fs.fs_inod01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 fs.linker01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 nptl.nptl01_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 mm.mmapstress06_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 fs.fs_di_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio23_32bit" />
+
+    <!-- b/118340949: temporally disable kernel test cases that takes 2+ minutes to finish -->
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio16_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio17_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio20_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio21_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio24_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio25_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio27_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 dio.dio28_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64 mm.mtest06_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio16_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio17_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio20_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio21_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio24_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio25_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio27_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm dio.dio28_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm mm.mtest06_32bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio16_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio17_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio20_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio21_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio24_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio25_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio27_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan dio.dio28_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_hwasan mm.mtest06_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio16_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio17_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio20_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio21_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio24_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio25_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio27_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem dio.dio28_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem mm.mtest06_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio16_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio17_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio20_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio21_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio24_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio25_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio27_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan dio.dio28_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_64_lowmem_hwasan mm.mtest06_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio17_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio20_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio21_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio24_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio25_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio27_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem dio.dio28_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_arm_lowmem mm.mtest06_32bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio16_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio17_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio20_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio21_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio24_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio25_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio27_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 dio.dio28_64bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86_64 mm.mtest06_64bit" />
+
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio16_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio17_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio20_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio21_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio24_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio25_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio27_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 dio.dio28_32bit" />
+    <option name="compatibility:exclude-filter" value="vts_ltp_test_x86 mm.mtest06_32bit" />
+
+</configuration>

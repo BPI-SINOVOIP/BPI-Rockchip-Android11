@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2016, The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Music -->
+    <!-- Displayed while a folder selected by the user is being retrieved. [CHAR LIMIT=57] -->
+    <string name="browser_loading">Loading content…</string>
+    <!-- Displayed when a folder selected by the user doesn't have any content. [CHAR LIMIT=57] -->
+    <string name="nothing_to_play">No media available for browsing here</string>
+    <!-- Prompt text to display when we failed to connect to a media app. [CHAR LIMIT=50]-->
+    <string name="cannot_connect_to_app"><xliff:g name="app">%s</xliff:g> isn’t working right now.</string>
+    <!-- Prompt text to display when connecting to a media app. [CHAR LIMIT=50] -->
+    <string name="unknown_media_provider_name">Unknown</string>
+    <!-- The text for unknown playback error. [CHAR LIMIT=50] -->
+    <string name="unknown_error">Something went wrong</string>
+    <!-- Text of the button displayed at the bottom of a media browse section to provide access to additional items. [CHAR LIMIT=100] -->
+    <string name="media_browse_more">More…</string>
+    <!-- Media template title -->
+    <string name="media_app_title">Media</string>
+    <!-- Search input hint text. [CHAR LIMIT=20] -->
+    <string name="search_hint">Search songs, artists, and more...</string>
+    <!-- Title to display when in playback view. [CHAR LIMIT=50] -->
+    <string name="fragment_playback_title">Now Playing</string>
+
+
+    <!-- Title string for the service used to bind to the current media source -->
+    <string name="service_notification_title">Connecting to media</string>
+    <!-- Title of the sound settings menu item. Will be displayed if the button is in the overflow menu. [CHAR_LIMIT=50] -->
+    <string name="menu_item_sound_settings_title">Sound Settings</string>
+    <!-- Title of the app selector menu item. Will be displayed if the button is in the overflow menu, and used as a content description. [CHAR_LIMIT=50] -->
+    <string name="menu_item_app_selector_title">Switch apps</string>
+</resources>

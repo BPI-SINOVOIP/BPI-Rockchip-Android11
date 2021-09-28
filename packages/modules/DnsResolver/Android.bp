@@ -1,0 +1,287 @@
+cc_library_headers {
+    name: "libnetd_resolv_headers",
+    export_include_dirs: ["include"],
+}
+
+// Used only by dns_responder_client_ndk.cpp for ResolverStats.h
+// TODO: refactor stats to use a Parcel and eliminate this dependency
+cc_library_headers {
+    name: "libnetd_resolv_internal_headers",
+    export_include_dirs: ["."],
+}
+
+cc_library_headers {
+    name: "dnsproxyd_protocol_headers",
+    export_include_dirs: ["include/dnsproxyd_protocol"],
+}
+
+aidl_interface {
+    name: "dnsresolver_aidl_interface",
+    local_include_dir: "binder",
+    srcs: [
+        "binder/android/net/IDnsResolver.aidl",
+        "binder/android/net/ResolverHostsParcel.aidl",
+        "binder/android/net/ResolverOptionsParcel.aidl",
+        "binder/android/net/ResolverParamsParcel.aidl",
+    ],
+    imports: [
+        "netd_event_listener_interface",
+    ],
+    backend: {
+        java: {
+            apex_available: [
+                "//apex_available:platform",
+                "com.android.bluetooth.updatable",
+                "com.android.wifi",
+            ],
+        },
+        ndk: {
+            gen_log: true,
+            apex_available: [
+                "com.android.resolv",
+            ],
+            min_sdk_version: "29",
+        },
+    },
+    versions: [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+    ],
+}
+
+cc_defaults {
+    name: "resolv_test_defaults",
+    // Note that, static link liblog and libbase is a hard requirement for resolv related tests
+    // because libbase is not compatible between Q and R for general platform build due
+    // to its log revelant functions changing. And most of resolv related tests must be able to run
+    // in Q.
+    static_libs: [
+        "libbase",
+        "liblog",
+    ],
+}
+
+cc_defaults {
+    // This is necessary to have the coverage tests run on cf_x86_phone.
+    // Because the test_suite target is 64 bit and the test infra is running the 64 bit test
+    // suite on cf_x86_phone (32-bit) for coverage.
+    // See b/147785146 for details.
+    // TODO: Remove this target after coverage test switched to 64-bit device.
+    name: "resolv_test_mts_coverage_defaults",
+    test_config_template: ":resolv_test_config_template",
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+}
+
+cc_library {
+    name: "libnetd_resolv",
+    version_script: "libnetd_resolv.map.txt",
+    stubs: {
+        versions: [
+            "1",
+        ],
+        symbol_file: "libnetd_resolv.map.txt",
+    },
+    defaults: ["netd_defaults"],
+    srcs: [
+        "getaddrinfo.cpp",
+        "gethnamaddr.cpp",
+        "sethostent.cpp",
+        "res_cache.cpp",
+        "res_comp.cpp",
+        "res_debug.cpp",
+        "res_init.cpp",
+        "res_mkquery.cpp",
+        "res_query.cpp",
+        "res_send.cpp",
+        "res_stats.cpp",
+        "util.cpp",
+        "Dns64Configuration.cpp",
+        "DnsProxyListener.cpp",
+        "DnsQueryLog.cpp",
+        "DnsResolver.cpp",
+        "DnsResolverService.cpp",
+        "DnsStats.cpp",
+        "DnsTlsDispatcher.cpp",
+        "DnsTlsQueryMap.cpp",
+        "DnsTlsTransport.cpp",
+        "DnsTlsServer.cpp",
+        "DnsTlsSessionCache.cpp",
+        "DnsTlsSocket.cpp",
+        "Experiments.cpp",
+        "PrivateDnsConfiguration.cpp",
+        "ResolverController.cpp",
+        "ResolverEventReporter.cpp",
+    ],
+    // Link most things statically to minimize our dependence on system ABIs.
+    stl: "libc++_static",
+    static_libs: [
+        "dnsresolver_aidl_interface-ndk_platform",
+        "libbase",
+        "libcutils",
+        "libnetdutils",
+        "libprotobuf-cpp-lite",
+        "libstatslog_resolv",
+        "libstatspush_compat",
+        "libsysutils",
+        "netd_event_listener_interface-ndk_platform",
+        "server_configurable_flags",
+        "stats_proto",
+    ],
+    // libcrypto needs to be used as a shared library because it performs an
+    // integrity check (against a checksum) that is not supported for static
+    // libs. See http://b/141248879
+    // We're also adding libssl here to treat it consistently.
+    // liblog is added as a shared library because it provides stable C API
+    // from the platform; we don't need to include it in this module by
+    // statically linking to it. Doing so is even dangerous because the socket
+    // protocol to logd implemented in the library isn't guaranteed to be
+    // stable. See b/151051671
+    shared_libs: [
+        "libbinder_ndk",
+        "libcrypto",
+        "liblog", //Used by libstatslog_resolv
+        "libssl",
+    ],
+    header_libs: [
+        "libnetdbinder_utils_headers",
+    ],
+    runtime_libs: [
+        // Causes the linkerconfig to create a namespace link from resolv to the
+        // libstatssocket library within the statsd apex
+        "libstatssocket",
+    ],
+    export_include_dirs: ["include"],
+
+    product_variables: {
+        debuggable: {
+            cppflags: [
+                "-DRESOLV_ALLOW_VERBOSE_LOGGING=1",
+            ],
+        },
+    },
+    header_abi_checker: {
+        enabled: true,
+        symbol_file: "libnetd_resolv.map.txt",
+    },
+    sanitize: {
+        cfi: true,
+    },
+    apex_available: ["com.android.resolv"],
+    min_sdk_version: "29",
+}
+
+cc_library_static {
+    name: "stats_proto",
+    defaults: ["netd_defaults"],
+    proto: {
+        export_proto_headers: true,
+        type: "lite",
+    },
+    srcs: [
+        "stats.proto",
+    ],
+    apex_available: ["com.android.resolv"],
+    min_sdk_version: "29",
+}
+
+genrule {
+    name: "statslog_resolv.h",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --header $(genDir)/statslog_resolv.h --module resolv --namespace android,net,stats",
+    out: [
+        "statslog_resolv.h",
+    ],
+}
+
+genrule {
+    name: "statslog_resolv.cpp",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --cpp $(genDir)/statslog_resolv.cpp --module resolv --namespace android,net,stats --importHeader statslog_resolv.h --supportQ",
+    out: [
+        "statslog_resolv.cpp",
+    ],
+}
+
+cc_library_static {
+    name: "libstatslog_resolv",
+    generated_sources: ["statslog_resolv.cpp"],
+    generated_headers: ["statslog_resolv.h"],
+    defaults: ["netd_defaults"],
+    export_generated_headers: ["statslog_resolv.h"],
+    static_libs: [
+        "libcutils",
+        "libgtest_prod", // Used by libstatspush_compat
+        "libstatspush_compat",
+    ],
+    apex_available: ["com.android.resolv"],
+    min_sdk_version: "29",
+}
+
+filegroup {
+    name: "resolv_test_config_template",
+    srcs: [
+        "resolv_test_config_template.xml",
+    ],
+}
+
+// TODO: Move this test to tests/
+cc_test {
+    name: "resolv_unit_test",
+    test_suites: [
+        "general-tests",
+        "mts",
+    ],
+    require_root: true,
+    // TODO: Drop root privileges and make it be an real unit test.
+    // TODO: Remove resolv_test_mts_coverage_defaults after mts coverage switched to 64-bit device.
+    defaults: [
+        "netd_defaults",
+        "resolv_test_defaults",
+        "resolv_test_mts_coverage_defaults",
+    ],
+    srcs: [
+        "resolv_cache_unit_test.cpp",
+        "resolv_callback_unit_test.cpp",
+        "resolv_tls_unit_test.cpp",
+        "resolv_unit_test.cpp",
+        "DnsQueryLogTest.cpp",
+        "DnsStatsTest.cpp",
+        "ExperimentsTest.cpp",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "libbinder_ndk",
+        "libssl",
+    ],
+    static_libs: [
+        "dnsresolver_aidl_interface-unstable-ndk_platform",
+        "netd_aidl_interface-ndk_platform",
+        "netd_event_listener_interface-ndk_platform",
+        "libcutils",
+        "libgmock",
+        "libnetd_resolv",
+        "libnetd_test_dnsresponder_ndk",
+        "libnetd_test_resolv_utils",
+        "libnetdutils",
+        "libprotobuf-cpp-lite",
+        "libstatslog_resolv",
+        "libstatspush_compat",
+        "libsysutils",
+        "libutils",
+        "resolv_stats_test_utils",
+        "server_configurable_flags",
+        "stats_proto",
+    ],
+}

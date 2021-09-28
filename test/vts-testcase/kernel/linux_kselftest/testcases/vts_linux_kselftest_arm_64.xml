@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!DOCTYPE configuration [
+    <!ENTITY ktest_dir "/data/local/tmp/vts_kernel_tests/DATA/nativetest64/linux-kselftest">
+]>
+<configuration description="Runs vts_linux_kselftest.">
+    <target_preparer class="com.android.tradefed.targetprep.RootTargetPreparer">
+    </target_preparer>
+
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.KernelTestModuleController" >
+        <option name="arch" value="arm64"/>
+    </object>
+
+    <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
+        <option name="cleanup" value="true" />
+        <option name="push" value="vts_kernel_tests->/data/local/tmp/vts_kernel_tests" />
+    </target_preparer>
+
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value='find &ktest_dir; -type f | xargs grep -l -e "bin/sh" -e "bin/bash" | xargs sed -i -e "s?/bin/echo?echo?" -i -e "s?#!/bin/sh?#!/system/bin/sh?" -i -e "s?#!/bin/bash?#!/system/bin/sh?"' />
+    </target_preparer>
+
+    <test class="com.android.tradefed.testtype.binary.ExecutableTargetTest" >
+        <option name="test-command-line" key="breakpoints_breakpoint_test_arm64_arm_64" value="chmod 755 &ktest_dir;/breakpoints/breakpoint_test_arm64; cd &ktest_dir;/breakpoints; ./breakpoint_test_arm64" />
+        <option name="test-command-line" key="capabilities_test_execve_arm_64" value="chmod 755 &ktest_dir;/capabilities/test_execve; cd &ktest_dir;/capabilities; ./test_execve" />
+        <option name="test-command-line" key="futex_functional_run.sh_arm_64" value="chmod 755 &ktest_dir;/futex/functional/run.sh; cd &ktest_dir;/futex/functional; ./run.sh" />
+        <option name="test-command-line" key="kcmp_kcmp_test_arm_64" value="chmod 755 &ktest_dir;/kcmp/kcmp_test; cd &ktest_dir;/kcmp; ./kcmp_test" />
+        <option name="test-command-line" key="net_psock_tpacket_arm_64" value="chmod 755 &ktest_dir;/net/psock_tpacket; cd &ktest_dir;/net; ./psock_tpacket" />
+        <option name="test-command-line" key="net_reuseaddr_conflict_arm_64" value="chmod 755 &ktest_dir;/net/reuseaddr_conflict; cd &ktest_dir;/net; ./reuseaddr_conflict" />
+        <option name="test-command-line" key="net_socket_arm_64" value="chmod 755 &ktest_dir;/net/socket; cd &ktest_dir;/net; ./socket" />
+        <option name="test-command-line" key="ptrace_peeksiginfo_arm_64" value="chmod 755 &ktest_dir;/ptrace/peeksiginfo; cd &ktest_dir;/ptrace; ./peeksiginfo" />
+        <option name="test-command-line" key="rtc_rtctest_arm_64" value="chmod 755 &ktest_dir;/rtc/rtctest; cd &ktest_dir;/rtc; ./rtctest" />
+        <option name="test-command-line" key="seccomp_seccomp_bpf_arm_64" value="chmod 755 &ktest_dir;/seccomp/seccomp_bpf; cd &ktest_dir;/seccomp; ./seccomp_bpf" />
+        <option name="test-command-line" key="size_get_size_arm_64" value="chmod 755 &ktest_dir;/size/get_size; cd &ktest_dir;/size; ./get_size" />
+        <option name="test-command-line" key="splice_default_file_splice_read.sh_arm_64" value="chmod 755 &ktest_dir;/splice/default_file_splice_read.sh; cd &ktest_dir;/splice; ./default_file_splice_read.sh" />
+        <option name="test-command-line" key="timers_inconsistency-check_arm_64" value="chmod 755 &ktest_dir;/timers/inconsistency-check; cd &ktest_dir;/timers; ./inconsistency-check" />
+        <option name="test-command-line" key="timers_nanosleep_arm_64" value="chmod 755 &ktest_dir;/timers/nanosleep; cd &ktest_dir;/timers; ./nanosleep" />
+        <option name="test-command-line" key="timers_nsleep-lat_arm_64" value="chmod 755 &ktest_dir;/timers/nsleep-lat; cd &ktest_dir;/timers; ./nsleep-lat" />
+        <option name="test-command-line" key="timers_posix_timers_arm_64" value="chmod 755 &ktest_dir;/timers/posix_timers; cd &ktest_dir;/timers; ./posix_timers" />
+        <option name="test-command-line" key="timers_raw_skew_arm_64" value="chmod 755 &ktest_dir;/timers/raw_skew; cd &ktest_dir;/timers; ./raw_skew" />
+        <option name="test-command-line" key="timers_set-tai_arm_64" value="chmod 755 &ktest_dir;/timers/set-tai; cd &ktest_dir;/timers; ./set-tai" />
+        <option name="test-command-line" key="timers_set-timer-lat_arm_64" value="chmod 755 &ktest_dir;/timers/set-timer-lat; cd &ktest_dir;/timers; ./set-timer-lat" />
+        <option name="test-command-line" key="timers_threadtest_arm_64" value="chmod 755 &ktest_dir;/timers/threadtest; cd &ktest_dir;/timers; ./threadtest" />
+        <option name="test-command-line" key="timers_valid-adjtimex_arm_64" value="chmod 755 &ktest_dir;/timers/valid-adjtimex; cd &ktest_dir;/timers; ./valid-adjtimex" />
+        <option name="test-command-line" key="vDSO_kselftest_vdso_test_arm_64" value="chmod 755 &ktest_dir;/vDSO/kselftest_vdso_test; cd &ktest_dir;/vDSO; ./kselftest_vdso_test" />
+    </test>
+</configuration>
+

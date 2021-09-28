@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2012 Google Inc. All Rights Reserved. -->
+<!-- Inline keyboard layout chrome, which includes the backspace and mode switcher buttons -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:recognizer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:gravity="center"
+    android:keepScreenOn="true"
+    android:orientation="vertical" >
+
+    <com.android.inputmethod.leanback.voice.BitmapSoundLevelView
+        android:id="@+id/microphone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        recognizer:disabledBackgroundColor="@android:color/transparent"
+        recognizer:enabledBackgroundColor="@android:color/transparent"
+        recognizer:minLevelRadius="28dip"
+        recognizer:primaryLevels="?soundPrimaryLevel"
+        recognizer:trailLevels="?soundTrailLevel" />
+
+    <ImageView
+        android:id="@+id/recognizer_mic_button"
+        android:layout_width="@dimen/action_button_size"
+        android:layout_height="@dimen/action_button_size"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_voice_available" >
+
+        <requestFocus />
+    </ImageView>
+
+</merge>

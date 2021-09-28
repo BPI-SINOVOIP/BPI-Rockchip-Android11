@@ -1,0 +1,87 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+java_defaults {
+    name: "NetworkStackTestsDefaults",
+    platform_apis: true,
+    srcs: ["src/**/*.java", "src/**/*.kt"],
+    resource_dirs: ["res"],
+    static_libs: [
+        "androidx.test.ext.junit",
+        "androidx.test.rules",
+        "kotlin-reflect",
+        "mockito-target-extended-minus-junit4",
+        "net-tests-utils",
+        "testables",
+    ],
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+        "android.test.mock",
+    ],
+    defaults: ["libnetworkstackutilsjni_deps"],
+    jni_libs: [
+        // For mockito extended
+        "libdexmakerjvmtiagent",
+        "libstaticjvmtiagent",
+        "libnetworkstackutilsjni",
+    ],
+    jni_uses_sdk_apis: true,
+    jarjar_rules: ":NetworkStackJarJarRules",
+}
+
+// Tests for NetworkStackNext.
+android_test {
+    name: "NetworkStackNextTests",
+    srcs: [], // TODO: tests that only apply to the current, non-stable API can be added here
+    test_suites: ["device-tests"],
+    defaults: ["NetworkStackTestsDefaults"],
+    static_libs: ["NetworkStackApiCurrentLib"],
+}
+
+// Library containing the unit tests. This is used by the coverage test target to pull in the
+// unit test code. It is not currently used by the tests themselves because all the build
+// configuration needed by the tests is in the NetworkStackTestsDefaults rule.
+android_library {
+    name: "NetworkStackTestsLib",
+    min_sdk_version: "29",
+    defaults: ["NetworkStackTestsDefaults"],
+    static_libs: ["NetworkStackApiStableLib"],
+    visibility: [
+        "//packages/modules/NetworkStack/tests/integration",
+        "//frameworks/base/packages/Tethering/tests/integration",
+    ]
+}
+
+android_test {
+    name: "NetworkStackTests",
+    min_sdk_version: "29",
+    test_suites: ["device-tests", "mts"],
+    defaults: ["NetworkStackTestsDefaults"],
+    static_libs: ["NetworkStackApiStableLib"],
+    compile_multilib: "both",
+}
+
+// Additional dependencies of libnetworkstackutilsjni that are not provided by the system when
+// running as a test application.
+// Using java_defaults as jni_libs does not support filegroups.
+java_defaults {
+    name: "libnetworkstackutilsjni_deps",
+    jni_libs: [
+        "libnativehelper_compat_libc++",
+        "libnetworkstacktestsjni",
+    ],
+}

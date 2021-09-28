@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<com.android.customization.widget.ThemeInfoView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/wallpaper_info_pane_horizontal_padding"
+    android:paddingTop="@dimen/wallpaper_info_pane_top_padding"
+    android:paddingBottom="@dimen/wallpaper_info_pane_bottom_padding"
+    android:theme="@style/WallpaperPicker.BottomPaneStyle">
+
+    <TextView
+        android:id="@+id/style_info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/theme_info_margin"
+        android:gravity="center"
+        android:lineHeight="24dp"
+        android:textAppearance="@style/SubtitleTextAppearance"
+        android:textColor="@color/action_bar_bottom_sheet_text_color"
+        android:textSize="16sp"
+        android:text="@string/style_info_description"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/font_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/theme_info_margin"
+            android:importantForAccessibility="no"
+            android:textSize="@dimen/theme_info_text_size"
+            android:textColor="?android:attr/colorForeground"
+            android:text="@string/font_component_option_thumbnail"/>
+
+        <ImageView
+            android:id="@+id/qs_preview_icon"
+            android:layout_width="@dimen/theme_info_icon_size"
+            android:layout_height="@dimen/theme_info_icon_size"
+            android:layout_marginHorizontal="@dimen/theme_info_margin"
+            android:tint="@color/theme_preview_icon_color"/>
+
+        <ImageView
+            android:id="@+id/app_preview_icon"
+            android:layout_width="@dimen/theme_info_icon_size"
+            android:layout_height="@dimen/theme_info_icon_size"
+            android:layout_marginHorizontal="@dimen/theme_info_margin"
+            android:layout_marginVertical="@dimen/theme_info_app_preview_icon_margin"
+            android:elevation="@dimen/theme_info_app_preview_icon_elevation"/>
+
+        <ImageView
+            android:id="@+id/shape_preview_icon"
+            android:layout_width="@dimen/theme_info_icon_size"
+            android:layout_height="@dimen/theme_info_icon_size"
+            android:layout_marginHorizontal="@dimen/theme_info_margin"/>
+    </LinearLayout>
+</com.android.customization.widget.ThemeInfoView>

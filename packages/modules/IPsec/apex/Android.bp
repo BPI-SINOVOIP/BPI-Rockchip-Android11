@@ -1,0 +1,43 @@
+// Copyright 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Defaults shared between production and test versions of the APEX.
+apex_defaults {
+    name: "com.android.ipsec-defaults",
+    updatable: true,
+    min_sdk_version: "R",
+    java_libs: ["android.net.ipsec.ike"],
+    key: "com.android.ipsec.key",
+    certificate: ":com.android.ipsec.certificate",
+}
+
+// Production APEX
+apex {
+    name: "com.android.ipsec",
+    defaults: ["com.android.ipsec-defaults"],
+    manifest: "apex_manifest.json",
+}
+
+apex_key {
+    name: "com.android.ipsec.key",
+    public_key: "com.android.ipsec.avbpubkey",
+    private_key: "com.android.ipsec.pem"
+}
+
+android_app_certificate {
+     name: "com.android.ipsec.certificate",
+
+     // Will use com.android.ipsec.pk8 and com.android.ipsec.x509.pem
+     certificate: "com.android.ipsec",
+}

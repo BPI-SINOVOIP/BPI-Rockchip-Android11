@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<resources>
+    <string name="app_name" translatable="false">Rotary Playground</string>
+
+    <!-- Texts for card examples -->
+    <string name="card_normal_text" translatable="false">
+      The focus should land on the first button upon entering this card. Rotating the rotary controller will move the focus up and down. The disabled button should not be focusable.
+    </string>
+    <string name="card_disabled_text" translatable="false">
+      Nothing in this card should be focusable because all the buttons are disabled.
+    </string>
+    <string name="card_with_default_focus_text" translatable="false">
+      The focus should land on the second button upon entering this card.
+    </string>
+    <string name="card_that_wraps_around_text" translatable="false">
+      The focus should move clockwise when rotating clockwise and similarly for counterclockwise. Focus also wraps around the elements (H -> A clockwise and A -> H counterclockwise).
+    </string>
+    <string name="lorem" translatable="false">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et velit finibus, tempor ipsum vel, pellentesque lorem. Suspendisse congue urna pulvinar, congue dolor in, eleifend orci. Nam egestas sodales sapien. Integer sit amet ligula in ex commodo semper. Phasellus ac facilisis ligula. Ut mollis risus eu nunc consequat, eu molestie dolor maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec commodo lectus non est lacinia accumsan. Nulla tristique cursus iaculis. Sed in hendrerit nulla, vel faucibus mi. Aenean placerat turpis eros, non sagittis enim viverra id. Vestibulum vel rutrum est, eu consequat felis. Maecenas ac suscipit ante. Fusce dapibus ut libero blandit vehicula. Vivamus vel ipsum condimentum, maximus tellus nec, rutrum lorem.
+    </string>
+    <string name="sys_ui_supports_dm" translatable="true">
+      Supports Direct Manipulation Mode
+    </string>
+    <string name="sys_ui_does_not_support_dm" translatable="true">
+        Doesn\'t support Direct Manipulation Mode
+    </string>
+</resources>

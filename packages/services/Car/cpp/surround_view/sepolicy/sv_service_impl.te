@@ -1,0 +1,7 @@
+# surround view default service implementation
+type sv_service_impl, domain;
+
+# allow init to launch processes in this context
+type sv_service_impl_exec, exec_type, file_type, vendor_file_type;
+init_daemon_domain(sv_service_impl)
+binder_use(sv_service_impl)

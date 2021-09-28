@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/performance_view">
+    <TextView
+        android:id="@+id/cpu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cpu_title"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/cpu_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cpu_model"
+        android:textColor="@android:color/white"/>
+
+
+    <TextView
+        android:id="@+id/cpu_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cpu_usage"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/cpu_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cpu_temp"
+        android:textColor="@android:color/white"/>
+   <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+
+    <TextView
+        android:id="@+id/ram_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ram_title"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/ram_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ram_total"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/ram_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ram_usage"
+        android:textColor="@android:color/white"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+    <TextView
+        android:id="@+id/network_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/network_title"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/network_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/network_speed"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/network_mac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/network_mac"
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/network_mac2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/network_mac2"
+        android:textColor="@android:color/white"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white" />
+</LinearLayout>

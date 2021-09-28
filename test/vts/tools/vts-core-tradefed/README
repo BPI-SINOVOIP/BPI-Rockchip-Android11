@@ -1,0 +1,81 @@
+VTS Trade Federation
+---------------------
+
+VTS Trade Federation, vts-tradefed for short, is the next generation test
+harness for VTS.
+
+vts-tradefed is built on top of the Android Trade Federation test harness.
+
+It works in a similar manner to the prior VTS harness, but with much
+simplicity.
+
+  - tests all run through Trade Federation without python wrapper, thus no
+virtualenv is needed.
+  - supports sharding a VTS test run across multiple devices in parallel
+  - supports Trade Federation suite features including auto-retry.
+
+Configuring vts-tradefed
+------------------------
+
+1. Ensure 'adb' is in your current PATH. adb can be found in the
+Android SDK available from http://developer.android.com
+
+Example:
+  PATH=$PATH:/home/myuser/android-sdk-linux_x86/platform-tools
+
+2. Follow the 'Setting up your device' steps documented in the VTS User Manual.
+# TODO: add link for documentation.
+
+3. Connect the device to the host machine.
+
+4. Ensure device is visible via 'adb devices'
+
+Using vts-tradefed
+-------------------
+
+To run a test plan on a single device:
+
+1. Make sure you have at least one device connected
+2. Launch the vts-tradefed console by running the 'vts-tradefed'. If you've
+downloaded and extracted the VTS zip, the script can be found at
+android-vts/tools/vts-tradefed
+Or else if you are working from the Android source tree and have run `make
+vts`, the script can be found at
+  out/host/linux-x86/vts/android-vts/tools/vts-tradefed
+3. Type:
+'run vts' to run the default VTS plan
+
+Some other useful commands are
+
+To run a test module:
+'run vts --module <module_name>'
+
+To run a specific test:
+'run vts --module <module_name> --test <test_name>'
+
+To shard a plan test run on multiple devices
+'run vts --shard-count <number of shards>
+note: all connected devices must be running the same build
+
+For more options:
+'run vts --help'
+
+VTS Tradefed Development
+------------------------
+See http://source.android.com for instructions on obtaining the Android
+platform source code and setting up a build environment.
+
+The source for the VTS extensions for tradefed can be found at
+<android source root>/test/vts/tools/vts-tradefed
+
+The source for the tradefed framework can be found on the 'tradefed' branch.
+
+Perform these steps to build and run vts-tradefed from the development
+environment:
+cd <path to android source root>
+make vts
+vts-tradefed
+
+More documentation and details on using and extending trade federation will
+be forthcoming in the near future.
+

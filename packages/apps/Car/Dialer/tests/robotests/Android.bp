@@ -1,0 +1,17 @@
+//############################################################
+// Car Dialer Robolectric test target.                       #
+//############################################################
+android_robolectric_test {
+    name: "CarDialerRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    // Include the testing libraries
+    libs: [
+        "android.car",
+    ],
+
+    instrumentation_for: "CarDialerAppForTesting",
+}

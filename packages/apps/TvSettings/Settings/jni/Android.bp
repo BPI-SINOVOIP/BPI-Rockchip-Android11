@@ -1,0 +1,23 @@
+cc_library_shared {
+    name: "libtvsettings-jni",
+    compile_multilib: "both",
+    system_ext_specific: true,
+    multilib: {
+        lib64: {
+    	    srcs: [
+        	"native.cpp",
+	        "TVInfo.cpp",
+	    ],
+        },
+        lib32: {
+	    srcs: [
+        	"native.cpp",
+	        "TVInfo.cpp",
+	    ],
+        },
+    },
+    shared_libs: [
+        "libutils",
+        "liblog",
+    ]
+}

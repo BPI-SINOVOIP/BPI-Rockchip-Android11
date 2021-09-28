@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Download Manager"</string>
+    <string name="storage_description" msgid="169690279447532621">"بارگیری‌ها"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"‏دسترسی به Download Manager."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"‏به برنامه اجازه می‌دهد تا به download manager دسترسی داشته باشد و از آن برای بارگیری فایل‌ها استفاده کند. برنامه‌های مضر می‌توانند از این امکان استفاده کرده و برای بارگیریها مشکل ایجاد کنند و به اطلاعات خصوصی دسترسی داشته باشند."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"‏عملکرد پیشرفته Download Manager."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"‏به برنامه اجازه می‌دهد تا به عملکردهای پیشرفته download manager دسترسی داشته باشد. برنامه‌های مضر می‌توانند از این امکان استفاده کرده و برای بارگیری‌ها مشکل ایجاد کنند و به اطلاعات خصوصی دسترسی داشته باشند."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"اعلان‌های بارگیری ارسال شود."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"به برنامه اجازه می‌دهد اعلان‌های مربوط به بارگیریهای کامل شده را ارسال کند. برنامه‌های مضر می‌توانند از این امکان استفاده کرده و برای سایر برنامه‌هایی که فایل‌ها را بارگیری می‌کنند، مشکلاتی را ایجاد کنند."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"رزرو فضا در حافظه موقت بارگیری"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"‏به برنامه اجازه می‌دهد فایل‌ها را در حافظهٔ پنهان بارگیری کند، تا هنگامی که Download Manager به فضای بیشتری احتیاج دارد، به‌طور خودکار حذف نشوند.+"</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"بارگیری فایل‌ها بدون اطلاع"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"‏به برنامه اجازه می‌دهد فایل‌ها را از طریق Download Manager، بدون نمایش اعلان به کاربر بارگیری کند."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"دسترسی به همه بارگیری‌های سیستم"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"به برنامه اجازه می‌دهد تمام بارگیری‌های شروع شده توسط هر برنامه‌ای را در سیستم مشاهده کرده و تغییر دهد."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"‏&lt;بدون عنوان&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"بارگیری کامل شد."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"بارگیری ناموفق بود."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"‏برای این حجم از بارگیری به Wi-Fi نیاز است."</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"در پس‌زمینه موقتاً متوقف شد."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"بارگیری برای شبکه اپراتور بسیار بزرگ است"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"‏برای تکمیل این بارگیری <xliff:g id="SIZE">%1$s </xliff:g> باید از Wi-Fi استفاده کنید. در اتصال بعدی به شبکه Wi-Fi و برای شروع بارگیری، \n\nلمس<xliff:g id="QUEUE_TEXT">%2$s </xliff:g> کنید."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"برای بارگیری در فرصتی دیگر در صف گذاشته شود؟"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"‏شروع بارگیری <xliff:g id="SIZE">%1$s </xliff:g> سبب کم شدن طول عمر باتری و/یا استفاده بیش از حد از اتصال داده تلفن همراه می‌شود که بسته به قرارداد ارائه داده شما ممکن است از طرف اپراتور تلفن هزینه‌هایی برای شما در نظر گرفته شود. \n\n<xliff:g id="QUEUE_TEXT">%2$s</xliff:g> را لمس کنید تا در اتصال بعدی به شبکه Wi-Fi، این بارگیری شروع شود."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"صف"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"لغو"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"اکنون شروع شود"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="one"><xliff:g id="NUMBER">%d</xliff:g> فایل در حال بارگیری</item>
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> فایل در حال بارگیری</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="one"><xliff:g id="NUMBER">%d</xliff:g> فایل در انتظار</item>
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> فایل در انتظار</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"<xliff:g id="DURATION">%s</xliff:g> باقیمانده"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"فایل باز نمی‌شود"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"بارگیری‌ها"</string>
+    <string name="download_queued" msgid="3383844741769045371">"در صف"</string>
+    <string name="download_running" msgid="774654178925442490">"در حال انجام"</string>
+    <string name="download_error" msgid="1857737890005386798">"ناموفق"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"در حال انجام، <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

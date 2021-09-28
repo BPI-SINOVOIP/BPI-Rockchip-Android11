@@ -1,0 +1,122 @@
+#!/bin/bash
+
+# Copyright (C) 2019 The Android Open Source Project.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# The launcher script for running C-Suite.
+# This can be run from an Android build environment or a standalone C-Suite zip.
+
+checkFile() {
+    if [ ! -f "$1" ]; then
+        echo "Unable to locate $1"
+        exit
+    fi;
+}
+
+checkPath() {
+    if ! type -P $1 &> /dev/null; then
+        echo "Unable to find $1 in path."
+        exit
+    fi;
+}
+
+checkPath adb
+checkPath java
+
+# Check the Java version.
+JAVA_VERSION=$(java -version 2>&1 | head -n 1 | grep 'version [ "]\(1\.8\|9\|11\).*[ "]')
+if [ "${JAVA_VERSION}" == "" ]; then
+    echo "Wrong java version. 1.8, 9, or 11 is required."
+    exit
+fi
+
+# Check for the debug flag and set up remote debugging.
+if [ -n "${TF_DEBUG}" ]; then
+  if [ -z "${TF_DEBUG_PORT}" ]; then
+    TF_DEBUG_PORT=10088
+  fi
+  RDBG_FLAG=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${TF_DEBUG_PORT}
+fi
+
+# Get OS.
+HOST=`uname`
+if [ "$HOST" == "Linux" ]; then
+    OS="linux-x86"
+elif [ "$HOST" == "Darwin" ]; then
+    OS="darwin-x86"
+else
+    echo "Unrecognized OS"
+    exit
+fi
+
+# Check if in Android build environment.
+if [ ! -z "${ANDROID_BUILD_TOP}" ]; then
+    if [ ! -z "${ANDROID_HOST_OUT}" ]; then
+      CSUITE_ROOT=${ANDROID_HOST_OUT}/csuite
+    else
+      CSUITE_ROOT=${ANDROID_BUILD_TOP}/${OUT_DIR:-out}/host/${OS}/csuite
+    fi
+    if [ ! -d ${CSUITE_ROOT} ]; then
+        echo "Could not find $CSUITE_ROOT in Android build environment. Try 'make csuite'"
+        exit
+    fi;
+fi;
+
+if [ -z ${CSUITE_ROOT} ]; then
+    # Assume we're in an extracted csuite install.
+    CSUITE_ROOT="$(dirname $0)/../.."
+fi;
+
+JAR_DIR=${CSUITE_ROOT}/android-csuite/tools
+
+TRADEFED_JAR="tradefed"
+
+JARS="tradefed
+  hosttestlib
+  compatibility-host-util
+  csuite-tradefed
+  csuite-tradefed-tests"
+
+for JAR in $JARS; do
+    checkFile ${JAR_DIR}/${JAR}.jar
+    JAR_PATH=${JAR_PATH}:${JAR_DIR}/${JAR}.jar
+done
+
+OPTIONAL_JARS="
+  google-tradefed
+  google-tradefed-tests
+  google-tf-prod-tests"
+
+for JAR in $OPTIONAL_JARS; do
+    if [ -f "$JAR.jar" ]; then
+        JAR_PATH=${JAR_PATH}:${JAR_DIR}/${JAR}.jar
+    fi;
+done
+
+# Load any shared libraries for host-side executables.
+LIB_DIR=${CSUITE_ROOT}/android-csuite/lib
+if [ "$HOST" == "Linux" ]; then
+    LD_LIBRARY_PATH=${LIB_DIR}:${LIB_DIR}64:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH
+elif [ "$HOST" == "Darwin" ]; then
+    DYLD_LIBRARY_PATH=${LIB_DIR}:${LIB_DIR}64:${DYLD_LIBRARY_PATH}
+    export DYLD_LIBRARY_PATH
+fi
+
+# Include any host-side test jars.
+for j in ${CSUITE_ROOT}/android-csuite/testcases/*.jar; do
+    JAR_PATH=${JAR_PATH}:$j
+done
+
+java $RDBG_FLAG -cp ${JAR_PATH} -DMTS_ROOT=${CSUITE_ROOT} com.android.compatibility.common.tradefed.command.CompatibilityConsole "$@"

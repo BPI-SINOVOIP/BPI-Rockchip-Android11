@@ -1,0 +1,181 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+android_app {
+    name: "CarSettings",
+    overrides: ["Settings"],
+    platform_apis: true,
+    defaults: [
+        "SettingsLibDefaults",
+        "SettingsLib-search-defaults",
+    ],
+
+    srcs: ["src/**/*.java"],
+
+    libs: [
+        "android.car",
+    ],
+
+    static_libs: [
+        "androidx.lifecycle_lifecycle-common-java8",
+        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.preference_preference",
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.test.core",
+        "car-apps-common",
+        "car-setup-wizard-lib-utils",
+        "SettingsLib",
+        "SettingsLib-search",
+        "android.car.userlib",
+        "androidx-constraintlayout_constraintlayout-solver",
+        "jsr305",
+        "car-ui-lib",
+    ],
+
+    certificate: "platform",
+
+    optimize: {
+        enabled: false,
+    },
+
+    privileged: true,
+
+    dex_preopt: {
+        enabled: false,
+    },
+
+    required: ["privapp_whitelist_com.android.car.settings"],
+
+    dxflags: ["--multi-dex"],
+
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+}
+
+// Duplicate of CarSettings which includes testing only resources for Robolectric
+android_app {
+    name: "CarSettingsForTesting",
+    platform_apis: true,
+    defaults: [
+        "SettingsLibDefaults",
+        "SettingsLib-search-defaults",
+    ],
+
+    srcs: ["src/**/*.java"],
+
+    libs: [
+        "android.car",
+    ],
+
+    static_libs: [
+        "androidx.lifecycle_lifecycle-common-java8",
+        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.preference_preference",
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.test.core",
+        "car-apps-common",
+        "car-setup-wizard-lib-utils",
+        "SettingsLib",
+        "SettingsLib-search",
+        "android.car.userlib",
+        "androidx-constraintlayout_constraintlayout-solver",
+        "jsr305",
+        "car-ui-lib-testing-support",
+    ],
+
+    // Testing only resources must be applied last so they take precedence.
+    resource_dirs: [
+        "res",
+        "tests/robotests/res",
+    ],
+
+    certificate: "platform",
+
+    optimize: {
+        enabled: false,
+    },
+
+    privileged: true,
+
+    dex_preopt: {
+        enabled: false,
+    },
+
+    dxflags: ["--multi-dex"],
+
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+}
+
+android_library {
+    name: "CarSettingsForUnitTesting",
+    platform_apis: true,
+    defaults: [
+        "SettingsLibDefaults",
+        "SettingsLib-search-defaults",
+    ],
+
+    manifest: "tests/unit/AndroidManifest.xml",
+
+    srcs: ["src/**/*.java"],
+
+    libs: [
+        "android.car",
+    ],
+
+    static_libs: [
+        "androidx.lifecycle_lifecycle-common-java8",
+        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.preference_preference",
+        "androidx-constraintlayout_constraintlayout",
+        "car-apps-common",
+        "car-setup-wizard-lib-utils",
+        "SettingsLib",
+        "SettingsLib-search",
+        "android.car.userlib",
+        "androidx-constraintlayout_constraintlayout-solver",
+        "jsr305",
+        "car-ui-lib-testing-support",
+    ],
+
+    // Testing only resources must be applied last so they take precedence.
+    resource_dirs: [
+        "res",
+        "tests/unit/res",
+    ],
+
+    optimize: {
+        enabled: false,
+    },
+
+    dex_preopt: {
+        enabled: false,
+    },
+
+    dxflags: ["--multi-dex"],
+
+    aaptflags: ["--extra-packages com.android.car.settings"],
+
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+}

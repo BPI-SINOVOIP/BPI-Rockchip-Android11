@@ -1,0 +1,93 @@
+// MAP API module
+
+java_library {
+    name: "bluetooth.mapsapi",
+
+    srcs: ["lib/mapapi/**/*.java"],
+}
+
+// Bluetooth JNI
+
+cc_library_shared {
+    name: "libbluetooth_jni",
+    srcs: ["jni/**/*.cpp"],
+    header_libs: ["libbluetooth_headers"],
+    include_dirs: [
+        "system/bt/types",
+    ],
+    shared_libs: [
+        "libbase",
+        "libchrome",
+        "liblog",
+    ],
+    static_libs: [
+        "libbluetooth-types",
+        // TODO(b/148645937) move this back to shared_libs
+        "libnativehelper",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-Wno-unused-parameter",
+    ],
+    sanitize: {
+        scs: true,
+    },
+}
+
+// Bluetooth APK
+
+android_app {
+    name: "Bluetooth",
+
+    srcs: [
+        "src/**/*.java",
+        ":statslog-bluetooth-java-gen",
+    ],
+    platform_apis: true,
+    certificate: "platform",
+
+    jni_libs: ["libbluetooth_jni"],
+    libs: [
+        "javax.obex",
+        "services.net",
+    ],
+    static_libs: [
+        "com.android.vcard",
+        "bluetooth.mapsapi",
+        "sap-api-java-static",
+        "services.net",
+        "libprotobuf-java-lite",
+        "bluetooth-protos-lite",
+        "androidx.core_core",
+        "androidx.legacy_legacy-support-v4",
+        "androidx.lifecycle_lifecycle-livedata",
+        "androidx.room_room-runtime",
+        "guava",
+    ],
+
+    plugins: [
+        "androidx.room_room-compiler-plugin",
+    ],
+
+    // Add in path to Bluetooth directory because local path does not exist
+    javacflags: ["-Aroom.schemaLocation=packages/apps/Bluetooth/tests/unit/src/com/android/bluetooth/btservice/storage/schemas"],
+
+    optimize: {
+        enabled: false,
+    },
+    required: ["libbluetooth"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.bluetooth.updatable",
+    ],
+}
+
+genrule {
+    name: "statslog-bluetooth-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module bluetooth"
+        + " --javaPackage com.android.bluetooth --javaClass BluetoothStatsLog --worksource",
+    out: ["com/android/bluetooth/BluetoothStatsLog.java"],
+}

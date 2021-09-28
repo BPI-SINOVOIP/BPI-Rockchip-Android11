@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/app_row_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/app_row_1">
+
+        <LinearLayout
+            android:id="@+id/app_item_0"
+            android:layout_width="@dimen/preview_theme_app_icon_size"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/app_item_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/shape_preview_icon_0"
+                android:layout_width="@dimen/preview_theme_app_icon_size"
+                android:layout_height="@dimen/preview_theme_app_icon_size"
+                android:elevation="4dp"/>
+            <TextView
+                android:id="@+id/shape_preview_icon_app_name_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/preview_theme_app_icon_shape_text_margin_top"
+                android:textSize="@dimen/preview_theme_app_icon_shape_text_size"
+                android:lineHeight="20dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/app_item_1"
+            android:layout_width="@dimen/preview_theme_app_icon_size"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            app:layout_constraintStart_toEndOf="@id/app_item_0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/shape_preview_icon_1"
+                android:layout_width="@dimen/preview_theme_app_icon_size"
+                android:layout_height="@dimen/preview_theme_app_icon_size"
+                android:elevation="4dp"/>
+            <TextView
+                android:id="@+id/shape_preview_icon_app_name_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/preview_theme_app_icon_shape_text_margin_top"
+                android:textSize="@dimen/preview_theme_app_icon_shape_text_size"
+                android:lineHeight="20dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/app_row_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_row_0"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
+            android:id="@+id/app_item_2"
+            android:layout_width="@dimen/preview_theme_app_icon_size"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/app_item_3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/shape_preview_icon_2"
+                android:layout_width="@dimen/preview_theme_app_icon_size"
+                android:layout_height="@dimen/preview_theme_app_icon_size"
+                android:elevation="4dp"/>
+            <TextView
+                android:id="@+id/shape_preview_icon_app_name_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/preview_theme_app_icon_shape_text_margin_top"
+                android:textSize="@dimen/preview_theme_app_icon_shape_text_size"
+                android:lineHeight="20dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/app_item_3"
+            android:layout_width="@dimen/preview_theme_app_icon_size"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:clipChildren="false"
+            app:layout_constraintStart_toEndOf="@id/app_item_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:id="@+id/shape_preview_icon_3"
+                android:layout_width="@dimen/preview_theme_app_icon_size"
+                android:layout_height="@dimen/preview_theme_app_icon_size"
+                android:elevation="4dp"/>
+            <TextView
+                android:id="@+id/shape_preview_icon_app_name_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/preview_theme_app_icon_shape_text_margin_top"
+                android:textSize="@dimen/preview_theme_app_icon_shape_text_size"
+                android:lineHeight="20dp"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

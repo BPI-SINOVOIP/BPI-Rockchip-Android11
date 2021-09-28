@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+     Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false">
+
+    <!--  Bottom Sheet  -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/action_tabs"
+        android:elevation="@dimen/bottom_action_bar_elevation">
+        <!-- Bottom sheet view should be a child view of CoordinatorLayout -->
+        <FrameLayout
+            android:id="@+id/action_bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_sheet_background"
+            android:theme="@style/WallpaperPicker.BottomPaneStyle"
+            android:clickable="true"
+            android:elevation="@dimen/bottom_action_bar_elevation"
+            app:behavior_peekHeight="@dimen/preview_attribution_pane_collapsed_height"
+            app:layout_behavior="com.android.wallpaper.widget.BottomActionBar$QueueStateBottomSheetBehavior" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!--  Bottom Tabs  -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_navbar_height"
+        android:paddingTop="@dimen/bottom_action_bar_padding_top"
+        android:paddingHorizontal="@dimen/bottom_action_bar_padding_horizontal"
+        android:clickable="true"
+        android:elevation="@dimen/bottom_action_bar_elevation"
+        android:background="@color/bottom_bar_background_color"
+        android:theme="@style/BottomActionItemStyle"
+        android:layout_alignParentBottom="true"
+        android:layoutDirection="locale">
+
+        <ImageView
+            android:id="@+id/action_back"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_close_gm2_24px"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/bottom_action_bar_back"
+            android:tint="@color/bottom_action_button_color_tint"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_rotation"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/action_rotation"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_slideshow_24dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/bottom_action_bar_slideshow_wallpaper"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_delete"
+            app:layout_constraintStart_toEndOf="@id/action_back" />
+
+        <ImageView
+            android:id="@+id/action_delete"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_delete_24px"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/delete_live_wallpaper"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_information"
+            app:layout_constraintStart_toEndOf="@id/action_rotation" />
+
+        <ImageView
+            android:id="@+id/action_information"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_info_gm2_24px"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/tab_info"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_edit"
+            app:layout_constraintStart_toEndOf="@id/action_delete" />
+
+        <ImageView
+            android:id="@+id/action_edit"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_pan_zoom_24dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/bottom_action_bar_edit"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_customize"
+            app:layout_constraintStart_toEndOf="@id/action_information" />
+
+        <ImageView
+            android:id="@+id/action_customize"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_tune_black_24dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/tab_customize"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_download"
+            app:layout_constraintStart_toEndOf="@id/action_edit" />
+
+        <ImageView
+            android:id="@+id/action_download"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_file_download_gm2_24px"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/bottom_action_bar_download"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_progress"
+            app:layout_constraintStart_toEndOf="@id/action_customize" />
+
+        <ProgressBar
+            android:id="@+id/action_progress"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/action_apply"
+            app:layout_constraintStart_toEndOf="@id/action_download" />
+
+        <ImageView
+            android:id="@+id/action_apply"
+            android:layout_width="@dimen/bottom_action_button_size"
+            android:layout_height="@dimen/bottom_action_button_size"
+            android:padding="@dimen/bottom_action_button_padding"
+            android:src="@drawable/ic_done_gm2_24px"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/bottom_action_bar_apply"
+            android:tint="@color/bottom_action_button_color_tint"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/action_progress" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

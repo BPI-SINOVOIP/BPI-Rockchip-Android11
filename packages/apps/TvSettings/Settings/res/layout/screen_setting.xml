@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/tv">
+	<ImageView android:id="@+id/screen_touch_up"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/vertical_reduce"
+	    android:layout_marginTop="80dp"
+	    android:layout_centerHorizontal="true"/>
+
+	<ImageView android:id="@+id/button_up"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/button_up"
+	    android:layout_below="@id/screen_touch_up"
+    	android:layout_centerHorizontal="true"
+    	android:layout_marginTop="20dp"/>
+
+    <ImageView android:id="@+id/button_ok"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/ok"
+	    android:layout_below="@id/button_up"
+    	android:layout_centerHorizontal="true"
+    	android:layout_marginTop="10dp"/>
+
+    <ImageView android:id="@+id/button_down"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/button_down"
+	    android:layout_below="@id/button_ok"
+    	android:layout_centerHorizontal="true"
+    	android:layout_marginTop="10dp"/>
+
+    <ImageView android:id="@+id/button_left"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/button_vertical_left"
+	    android:layout_toLeftOf ="@id/button_ok"
+	    android:layout_marginRight="10dp"
+    	android:layout_marginTop="205dp"/>
+
+    <ImageView android:id="@+id/button_right"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/button_vertical_right"
+	    android:layout_toRightOf ="@id/button_ok"
+	    android:layout_marginLeft="10dp"
+    	android:layout_marginTop="205dp"/>
+
+    <ImageView android:id="@+id/screen_touch_down"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/vertical_add"
+    	android:layout_below="@id/button_down"
+	    android:layout_marginTop="20dp"
+	    android:layout_centerHorizontal="true"/>
+
+	<ImageView android:id="@+id/screen_button_left"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/horizontal_reduce"
+    	android:layout_marginTop="230dp"
+    	android:layout_marginRight="20dp"
+    	android:layout_toLeftOf ="@id/button_left"/>
+
+	  <ImageView android:id="@+id/screen_button_right"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/horizontal_add"
+    	android:layout_marginTop="230dp"
+    	android:layout_marginLeft="20dp"
+    	android:layout_toRightOf ="@id/button_right"/>
+</RelativeLayout>

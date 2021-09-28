@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SurroundViewCarModelConfig>
+    <Version>1.0</Version>
+
+    <!-- Rotation animation for door -->
+    <Animation>
+        <PartId>door</PartId>
+        <ChildParts>
+            <PartId>window</PartId>
+        </ChildParts>
+        <ParentPartId>car_frame</ParentPartId>
+        <RotationOp>
+            <VhalProperty>
+                <!-- Uses VHAL Property DOOR_POS -->
+                <PropertyId>0x16000B00</PropertyId>
+                <!-- AreadId = VehicleAreaDoor::ROW_1_LEFT -->
+                <AreaId>0x00000001</AreaId>
+            </VhalProperty>
+            <AnimationType>RotationAngle</AnimationType>
+            <AnimationTimeMs>2000</AnimationTimeMs>
+            <RotationAxis>
+                <X>0.0</X>
+                <Y>0.0</Y>
+                <Z>1.0</Z>
+            </RotationAxis>
+            <RotationPoint>
+                <X>0.0</X>
+                <Y>0.0</Y>
+                <Z>0.0</Z>
+            </RotationPoint>
+            <DefaultRotationValue>0.0</DefaultRotationValue>
+            <RotationRange>
+                <Start>0.0</Start>
+                <End>90</End>
+            </RotationRange>
+            <VhalRange>
+                <!-- 0 => door closed -->
+                <Start>0x00000000</Start>
+                <!-- INT32_MAX => door fully open -->
+                <End>0x7FFFFFFF</End>
+            </VhalRange>
+        </RotationOp>
+    </Animation>
+
+    <!-- Translation animation for window -->
+    <Animation>
+        <PartId>window</PartId>
+        <ParentPartId>window</ParentPartId>
+        <ChildParts>
+        </ChildParts>
+        <TranslationOp>
+            <VhalProperty>
+                <!-- Uses VHAL Property WINDOW_POS -->
+                <PropertyId>0x13000BC0</PropertyId>
+                <!-- AreaId = VehicleAreaWindow::ROW_1_LEFT -->
+                <AreaId>0x00000010</AreaId>
+            </VhalProperty>
+            <AnimationType>Translation</AnimationType>
+            <AnimationTimeMs>2000</AnimationTimeMs>
+            <Direction>
+                <X>0.0</X>
+                <Y>0.0</Y>
+                <Z>-1.0</Z>
+            </Direction>
+            <DefaultTranslationValue>0.0</DefaultTranslationValue>
+            <TranslationRange>
+                <Start>0.0</Start>
+                <End>1.0</End>
+            </TranslationRange>
+            <VhalRange>
+                <!-- 0 => window up/closed -->
+                <Start>0x00000000</Start>
+                <!-- INT32_MAX => window down/open -->
+                <End>0x7FFFFFFF</End>
+            </VhalRange>
+        </TranslationOp>
+    </Animation>
+
+</SurroundViewCarModelConfig>

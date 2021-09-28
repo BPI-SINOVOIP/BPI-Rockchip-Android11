@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.camera.widget.ModeOptionsScreenEffects 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:camera="http://schemas.android.com/apk/res/com.android.camera2"
+    android:id="@+id/mode_options_screen"
+    android:layout_width="@dimen/mode_options_screen_effects_width"
+    android:layout_height="wrap_content"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:background="@color/mode_options_background" >
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mode_option_height"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:text="@string/exposure_options_lable"/>
+
+        <com.android.camera.ui.HorizontalRadioOptions
+            android:id="@+id/mode_options_exposure_of_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@null"
+            camera:selected_drawable="@drawable/button_background_selected_photo" >
+            <ImageButton
+                android:id="@+id/exposure_n2_of_screen"
+                style="@style/ColorProcessModeOption"
+                android:tag="-2"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n2"
+                android:contentDescription="@string/exposure_compensation_desc_n2" />
+            <ImageButton
+                android:id="@+id/exposure_n1_of_screen"
+                style="@style/ColorProcessModeOption"
+                android:tag="-1"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n1"
+                android:contentDescription="@string/exposure_compensation_desc_n1" />
+            <ImageButton
+                android:id="@+id/exposure_0_of_screen"
+                style="@style/ColorProcessModeOption"
+                android:tag="0"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_0"
+                android:contentDescription="@string/exposure_compensation_desc_0" />
+            <ImageButton
+                android:id="@+id/exposure_p1_of_screen"
+                style="@style/ColorProcessModeOption"
+                android:tag="1"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p1"
+                android:contentDescription="@string/exposure_compensation_desc_p1" />
+            <ImageButton
+                android:id="@+id/exposure_p2_of_screen"
+                style="@style/ColorProcessModeOption"
+                android:tag="2"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p2"
+                android:contentDescription="@string/exposure_compensation_desc_p2" />
+        </com.android.camera.ui.HorizontalRadioOptions>
+
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mode_option_height"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:text="@string/saturation_options_lable"/>
+
+        <com.android.camera.ui.HorizontalRadioOptions
+            android:id="@+id/mode_options_saturation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@null"
+            camera:selected_drawable="@drawable/button_background_selected_photo" >
+            <ImageButton
+                android:id="@+id/saturation_n1"
+                style="@style/ColorProcessModeOption"
+                android:tag="low"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n1"
+                android:contentDescription="@string/exposure_compensation_desc_n1" />
+            <ImageButton
+                android:id="@+id/saturation_0"
+                style="@style/ColorProcessModeOption"
+                android:tag="normal"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_0"
+                android:contentDescription="@string/exposure_compensation_desc_0" />
+            <ImageButton
+                android:id="@+id/saturation_p1"
+                style="@style/ColorProcessModeOption"
+                android:tag="high"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p1"
+                android:contentDescription="@string/exposure_compensation_desc_p1" />
+        </com.android.camera.ui.HorizontalRadioOptions>
+
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mode_option_height"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:text="@string/contrast_options_lable"/>
+
+        <com.android.camera.ui.HorizontalRadioOptions
+            android:id="@+id/mode_options_contrast"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@null"
+            camera:selected_drawable="@drawable/button_background_selected_photo" >
+            <ImageButton
+                android:id="@+id/contrast_n1"
+                style="@style/ColorProcessModeOption"
+                android:tag="soft"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n1"
+                android:contentDescription="@string/exposure_compensation_desc_n1" />
+            <ImageButton
+                android:id="@+id/contrast_0"
+                style="@style/ColorProcessModeOption"
+                android:tag="normal"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_0"
+                android:contentDescription="@string/exposure_compensation_desc_0" />
+            <ImageButton
+                android:id="@+id/contrast_p1"
+                style="@style/ColorProcessModeOption"
+                android:tag="hard"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p1"
+                android:contentDescription="@string/exposure_compensation_desc_p1" />
+        </com.android.camera.ui.HorizontalRadioOptions>
+
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mode_option_height"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:text="@string/brightness_options_lable"/>
+
+        <com.android.camera.ui.HorizontalRadioOptions
+            android:id="@+id/mode_options_brightness"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@null"
+            camera:selected_drawable="@drawable/button_background_selected_photo" >
+            <ImageButton
+                android:id="@+id/brightness_n1"
+                style="@style/ColorProcessModeOption"
+                android:tag="low"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n1"
+                android:contentDescription="@string/exposure_compensation_desc_n1" />
+            <ImageButton
+                android:id="@+id/brightness_0"
+                style="@style/ColorProcessModeOption"
+                android:tag="normal"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_0"
+                android:contentDescription="@string/exposure_compensation_desc_0" />
+            <ImageButton
+                android:id="@+id/brightness_p1"
+                style="@style/ColorProcessModeOption"
+                android:tag="high"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p1"
+                android:contentDescription="@string/exposure_compensation_desc_p1" />
+        </com.android.camera.ui.HorizontalRadioOptions>
+
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mode_option_height"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:text="@string/sharpness_options_lable"/>
+
+        <com.android.camera.ui.HorizontalRadioOptions
+            android:id="@+id/mode_options_sharpness"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@null"
+            camera:selected_drawable="@drawable/button_background_selected_photo" >
+            <ImageButton
+                android:id="@+id/sharpness_n1"
+                style="@style/ColorProcessModeOption"
+                android:tag="low"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n1"
+                android:contentDescription="@string/exposure_compensation_desc_n1" />
+            <ImageButton
+                android:id="@+id/sharpness_0"
+                style="@style/ColorProcessModeOption"
+                android:tag="normal"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_0"
+                android:contentDescription="@string/exposure_compensation_desc_0" />
+            <ImageButton
+                android:id="@+id/sharpness_p1"
+                style="@style/ColorProcessModeOption"
+                android:tag="high"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p1"
+                android:contentDescription="@string/exposure_compensation_desc_p1" />
+        </com.android.camera.ui.HorizontalRadioOptions>
+
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mode_option_height"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:text="@string/hue_options_lable"/>
+
+        <com.android.camera.ui.HorizontalRadioOptions
+            android:id="@+id/mode_options_hue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@null"
+            camera:selected_drawable="@drawable/button_background_selected_photo" >
+            <ImageButton
+                android:id="@+id/hue_n1"
+                style="@style/ColorProcessModeOption"
+                android:tag="low"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_n1"
+                android:contentDescription="@string/exposure_compensation_desc_n1" />
+            <ImageButton
+                android:id="@+id/hue_0"
+                style="@style/ColorProcessModeOption"
+                android:tag="normal"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_0"
+                android:contentDescription="@string/exposure_compensation_desc_0" />
+            <ImageButton
+                android:id="@+id/hue_p1"
+                style="@style/ColorProcessModeOption"
+                android:tag="high"
+                android:background="@null"
+                android:src="@drawable/ic_exposure_p1"
+                android:contentDescription="@string/exposure_compensation_desc_p1" />
+        </com.android.camera.ui.HorizontalRadioOptions>
+
+    </LinearLayout>
+
+</com.android.camera.widget.ModeOptionsScreenEffects >

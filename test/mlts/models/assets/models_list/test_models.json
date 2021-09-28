@@ -1,0 +1,683 @@
+{
+  "models": [
+    {
+      "name": "mobilenet_v1_1.0_224",
+      "baselineSec": 0.060,
+      "inputSize": [1, 224, 224, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_224.input",
+          "output": "mobilenet_float/cup_1.0_224.output"
+        },
+		{
+          "input": "mobilenet_float/banana_224.input",
+          "output": "mobilenet_float/banana_1.0_224.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v1_1.0_224_quant",
+      "baselineSec": 0.060,
+      "inputSize": [1, 224, 224, 3],
+      "dataSize": 1,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_quantized/cup_224.input",
+          "output": "mobilenet_quantized/cup_1.0_224.output"
+        },
+        {
+          "input": "mobilenet_quantized/banana_224.input",
+          "output": "mobilenet_quantized/banana_1.0_224.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v1_0.75_192",
+      "baselineSec": 0.026,
+      "inputSize": [1, 192, 192, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_192.input",
+          "output": "mobilenet_float/cup_0.75_192.output"
+        },
+		{
+          "input": "mobilenet_float/banana_192.input",
+          "output": "mobilenet_float/banana_0.75_192.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v1_0.75_192_quant",
+      "baselineSec": 0.025,
+      "inputSize": [1, 192, 192, 3],
+      "dataSize": 1,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_quantized/cup_192.input",
+          "output": "mobilenet_quantized/cup_0.75_192.output"
+        },
+        {
+          "input": "mobilenet_quantized/banana_192.input",
+          "output": "mobilenet_quantized/banana_0.75_192.output"
+        }
+      ]
+    },
+
+    {
+      "name": "mobilenet_v1_0.5_160",
+      "baselineSec": 0.011,
+      "inputSize": [1, 160, 160, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_160.input",
+          "output": "mobilenet_float/cup_0.5_160.output"
+        },
+		{
+          "input": "mobilenet_float/banana_160.input",
+          "output": "mobilenet_float/banana_0.5_160.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v1_0.5_160_quant",
+      "baselineSec": 0.0010,
+      "inputSize": [1, 160, 160, 3],
+      "dataSize": 1,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_quantized/cup_160.input",
+          "output": "mobilenet_quantized/cup_0.5_160.output"
+        },
+        {
+          "input": "mobilenet_quantized/banana_160.input",
+          "output": "mobilenet_quantized/banana_0.5_160.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v1_0.25_128",
+      "baselineSec": 0.004,
+      "inputSize": [1, 128, 128, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_128.input",
+          "output": "mobilenet_float/cup_0.25_128.output"
+        },
+		{
+          "input": "mobilenet_float/banana_128.input",
+          "output": "mobilenet_float/banana_0.25_128.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v1_0.25_128_quant",
+      "baselineSec": 0.003,
+      "inputSize": [1, 128, 128, 3],
+      "dataSize": 1,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_quantized/cup_128.input",
+          "output": "mobilenet_quantized/cup_0.25_128.output"
+        },
+        {
+          "input": "mobilenet_quantized/banana_128.input",
+          "output": "mobilenet_quantized/banana_0.25_128.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v2_0.35_128",
+      "baselineSec": 0.060,
+      "inputSize": [1, 128, 128, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_128.input",
+          "output": "mobilenet_float/cup_v2_0.35_128.output"
+        },
+		{
+          "input": "mobilenet_float/banana_128.input",
+          "output": "mobilenet_float/banana_v2_0.35_128.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v2_0.5_160",
+      "baselineSec": 0.060,
+      "inputSize": [1, 160, 160, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_160.input",
+          "output": "mobilenet_float/cup_v2_0.5_160.output"
+        },
+		{
+          "input": "mobilenet_float/banana_160.input",
+          "output": "mobilenet_float/banana_v2_0.5_160.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v2_0.75_192",
+      "baselineSec": 0.060,
+      "inputSize": [1, 192, 192, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_192.input",
+          "output": "mobilenet_float/cup_v2_0.75_192.output"
+        },
+		{
+          "input": "mobilenet_float/banana_192.input",
+          "output": "mobilenet_float/banana_v2_0.75_192.output"
+        }
+      ]
+    },
+
+    {
+      "name": "mobilenet_v2_1.0_224",
+      "baselineSec": 0.060,
+      "inputSize": [1, 224, 224, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_float/cup_224.input",
+          "output": "mobilenet_float/cup_v2_1.0_224.output"
+        },
+		{
+          "input": "mobilenet_float/banana_224.input",
+          "output": "mobilenet_float/banana_v2_1.0_224.output"
+        }
+      ]
+    },
+    {
+      "name": "ssd_mobilenet_v1_coco_float",
+      "testName": "SSD_MOBILENET_V1_COCO_FLOAT",
+      "baselineSec": 0.182,
+      "inputSize": [1, 300, 300, 3],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "ssd_mobilenet_v1_coco_float/tarmac_float.input",
+          "outputs": [
+            "ssd_mobilenet_v1_coco_float/tarmac_float.output0",
+            "ssd_mobilenet_v1_coco_float/tarmac_float.output1",
+            "ssd_mobilenet_v1_coco_float/tarmac_float.output2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ssd_mobilenet_v1_coco_quantized",
+      "testName": "SSD_MOBILENET_V1_COCO_QUANT8",
+      "baselineSec": 0.097,
+      "inputSize": [1, 300, 300, 3],
+      "dataSize": 1,
+      "inputOutputs": [
+        {
+          "input": "ssd_mobilenet_v1_coco_quantized/tarmac.input",
+          "outputs": [
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output0",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output1",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output2",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output3",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output4",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output5",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output6",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output7",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output8",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output9",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output10",
+            "ssd_mobilenet_v1_coco_quantized/tarmac.output11"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tts_float",
+      "testName": "TTS_FLOAT",
+      "minSdkVersion": 29,
+      "baselineSec": 0.004,
+      "evaluator": {
+          "className": "MelCepLogF0",
+          "outputMeanStdDev": "tts_float/tts_float.output_mean_std_dev"
+      },
+      "inputSize": [1, 334],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "tts_float/arctic_a0001.input",
+          "output": "tts_float/arctic_a0001.output"
+        },
+        {
+          "input": "tts_float/arctic_a0002.input",
+          "output": "tts_float/arctic_a0002.output"
+        },
+        {
+          "input": "tts_float/arctic_a0003.input",
+          "output": "tts_float/arctic_a0003.output"
+        },
+        {
+          "input": "tts_float/arctic_a0004.input",
+          "output": "tts_float/arctic_a0004.output"
+        },
+        {
+          "input": "tts_float/arctic_a0005.input",
+          "output": "tts_float/arctic_a0005.output"
+        },
+        {
+          "input": "tts_float/arctic_a0006.input",
+          "output": "tts_float/arctic_a0006.output"
+        },
+        {
+          "input": "tts_float/arctic_a0007.input",
+          "output": "tts_float/arctic_a0007.output"
+        },
+        {
+          "input": "tts_float/arctic_a0008.input",
+          "output": "tts_float/arctic_a0008.output"
+        },
+        {
+          "input": "tts_float/arctic_a0009.input",
+          "output": "tts_float/arctic_a0009.output"
+        },
+        {
+          "input": "tts_float/arctic_a0010.input",
+          "output": "tts_float/arctic_a0010.output"
+        },
+        {
+          "input": "tts_float/arctic_a0011.input",
+          "output": "tts_float/arctic_a0011.output"
+        },
+        {
+          "input": "tts_float/arctic_a0012.input",
+          "output": "tts_float/arctic_a0012.output"
+        },
+        {
+          "input": "tts_float/arctic_a0013.input",
+          "output": "tts_float/arctic_a0013.output"
+        },
+        {
+          "input": "tts_float/arctic_a0014.input",
+          "output": "tts_float/arctic_a0014.output"
+        },
+        {
+          "input": "tts_float/arctic_a0015.input",
+          "output": "tts_float/arctic_a0015.output"
+        },
+        {
+          "input": "tts_float/arctic_a0016.input",
+          "output": "tts_float/arctic_a0016.output"
+        },
+        {
+          "input": "tts_float/arctic_a0017.input",
+          "output": "tts_float/arctic_a0017.output"
+        },
+        {
+          "input": "tts_float/arctic_a0018.input",
+          "output": "tts_float/arctic_a0018.output"
+        },
+        {
+          "input": "tts_float/arctic_a0019.input",
+          "output": "tts_float/arctic_a0019.output"
+        },
+        {
+          "input": "tts_float/arctic_a0020.input",
+          "output": "tts_float/arctic_a0020.output"
+        },
+        {
+          "input": "tts_float/arctic_a0021.input",
+          "output": "tts_float/arctic_a0021.output"
+        },
+        {
+          "input": "tts_float/arctic_a0022.input",
+          "output": "tts_float/arctic_a0022.output"
+        },
+        {
+          "input": "tts_float/arctic_a0023.input",
+          "output": "tts_float/arctic_a0023.output"
+        },
+        {
+          "input": "tts_float/arctic_a0024.input",
+          "output": "tts_float/arctic_a0024.output"
+        },
+        {
+          "input": "tts_float/arctic_a0025.input",
+          "output": "tts_float/arctic_a0025.output"
+        },
+        {
+          "input": "tts_float/arctic_a0026.input",
+          "output": "tts_float/arctic_a0026.output"
+        },
+        {
+          "input": "tts_float/arctic_a0027.input",
+          "output": "tts_float/arctic_a0027.output"
+        },
+        {
+          "input": "tts_float/arctic_a0028.input",
+          "output": "tts_float/arctic_a0028.output"
+        },
+        {
+          "input": "tts_float/arctic_a0029.input",
+          "output": "tts_float/arctic_a0029.output"
+        },
+        {
+          "input": "tts_float/arctic_a0030.input",
+          "output": "tts_float/arctic_a0030.output"
+        },
+        {
+          "input": "tts_float/arctic_a0031.input",
+          "output": "tts_float/arctic_a0031.output"
+        },
+        {
+          "input": "tts_float/arctic_a0032.input",
+          "output": "tts_float/arctic_a0032.output"
+        },
+        {
+          "input": "tts_float/arctic_a0033.input",
+          "output": "tts_float/arctic_a0033.output"
+        },
+        {
+          "input": "tts_float/arctic_a0034.input",
+          "output": "tts_float/arctic_a0034.output"
+        },
+        {
+          "input": "tts_float/arctic_a0035.input",
+          "output": "tts_float/arctic_a0035.output"
+        },
+        {
+          "input": "tts_float/arctic_a0036.input",
+          "output": "tts_float/arctic_a0036.output"
+        },
+        {
+          "input": "tts_float/arctic_a0037.input",
+          "output": "tts_float/arctic_a0037.output"
+        },
+        {
+          "input": "tts_float/arctic_a0038.input",
+          "output": "tts_float/arctic_a0038.output"
+        },
+        {
+          "input": "tts_float/arctic_a0039.input",
+          "output": "tts_float/arctic_a0039.output"
+        },
+        {
+          "input": "tts_float/arctic_a0040.input",
+          "output": "tts_float/arctic_a0040.output"
+        },
+        {
+          "input": "tts_float/arctic_a0041.input",
+          "output": "tts_float/arctic_a0041.output"
+        },
+        {
+          "input": "tts_float/arctic_a0042.input",
+          "output": "tts_float/arctic_a0042.output"
+        },
+        {
+          "input": "tts_float/arctic_a0043.input",
+          "output": "tts_float/arctic_a0043.output"
+        },
+        {
+          "input": "tts_float/arctic_a0044.input",
+          "output": "tts_float/arctic_a0044.output"
+        },
+        {
+          "input": "tts_float/arctic_a0045.input",
+          "output": "tts_float/arctic_a0045.output"
+        },
+        {
+          "input": "tts_float/arctic_a0046.input",
+          "output": "tts_float/arctic_a0046.output"
+        },
+        {
+          "input": "tts_float/arctic_a0047.input",
+          "output": "tts_float/arctic_a0047.output"
+        },
+        {
+          "input": "tts_float/arctic_a0048.input",
+          "output": "tts_float/arctic_a0048.output"
+        },
+        {
+          "input": "tts_float/arctic_a0049.input",
+          "output": "tts_float/arctic_a0049.output"
+        },
+        {
+          "input": "tts_float/arctic_a0050.input",
+          "output": "tts_float/arctic_a0050.output"
+        }
+      ]
+    },
+    {
+      "name": "asr_float",
+      "testName": "ASR_FLOAT",
+      "baselineSec": 0.016,
+      "evaluator": {
+          "className": "PhoneErrorRate"
+      },
+      "inputSize": [1, 320],
+      "dataSize": 4,
+      "inputOutputs": [
+        {
+          "input": "asr_float/61-70968-0000.input",
+          "output": "asr_float/61-70968-0000.output"
+        },
+        {
+          "input": "asr_float/61-70968-0001.input",
+          "output": "asr_float/61-70968-0001.output"
+        },
+        {
+          "input": "asr_float/61-70968-0002.input",
+          "output": "asr_float/61-70968-0002.output"
+        },
+        {
+          "input": "asr_float/61-70968-0003.input",
+          "output": "asr_float/61-70968-0003.output"
+        },
+        {
+          "input": "asr_float/61-70968-0004.input",
+          "output": "asr_float/61-70968-0004.output"
+        },
+        {
+          "input": "asr_float/61-70968-0005.input",
+          "output": "asr_float/61-70968-0005.output"
+        },
+        {
+          "input": "asr_float/61-70968-0006.input",
+          "output": "asr_float/61-70968-0006.output"
+        },
+        {
+          "input": "asr_float/61-70968-0007.input",
+          "output": "asr_float/61-70968-0007.output"
+        },
+        {
+          "input": "asr_float/61-70968-0008.input",
+          "output": "asr_float/61-70968-0008.output"
+        },
+        {
+          "input": "asr_float/61-70968-0009.input",
+          "output": "asr_float/61-70968-0009.output"
+        },
+        {
+          "input": "asr_float/61-70968-0010.input",
+          "output": "asr_float/61-70968-0010.output"
+        },
+        {
+          "input": "asr_float/61-70968-0011.input",
+          "output": "asr_float/61-70968-0011.output"
+        },
+        {
+          "input": "asr_float/61-70968-0012.input",
+          "output": "asr_float/61-70968-0012.output"
+        },
+        {
+          "input": "asr_float/61-70968-0013.input",
+          "output": "asr_float/61-70968-0013.output"
+        },
+        {
+          "input": "asr_float/61-70968-0014.input",
+          "output": "asr_float/61-70968-0014.output"
+        },
+        {
+          "input": "asr_float/61-70968-0015.input",
+          "output": "asr_float/61-70968-0015.output"
+        },
+        {
+          "input": "asr_float/61-70968-0016.input",
+          "output": "asr_float/61-70968-0016.output"
+        },
+        {
+          "input": "asr_float/61-70968-0017.input",
+          "output": "asr_float/61-70968-0017.output"
+        },
+        {
+          "input": "asr_float/61-70968-0018.input",
+          "output": "asr_float/61-70968-0018.output"
+        },
+        {
+          "input": "asr_float/61-70968-0019.input",
+          "output": "asr_float/61-70968-0019.output"
+        },
+        {
+          "input": "asr_float/61-70968-0020.input",
+          "output": "asr_float/61-70968-0020.output"
+        },
+        {
+          "input": "asr_float/61-70968-0021.input",
+          "output": "asr_float/61-70968-0021.output"
+        },
+        {
+          "input": "asr_float/61-70968-0022.input",
+          "output": "asr_float/61-70968-0022.output"
+        },
+        {
+          "input": "asr_float/61-70968-0023.input",
+          "output": "asr_float/61-70968-0023.output"
+        },
+        {
+          "input": "asr_float/61-70968-0024.input",
+          "output": "asr_float/61-70968-0024.output"
+        },
+        {
+          "input": "asr_float/61-70968-0025.input",
+          "output": "asr_float/61-70968-0025.output"
+        },
+        {
+          "input": "asr_float/61-70968-0026.input",
+          "output": "asr_float/61-70968-0026.output"
+        },
+        {
+          "input": "asr_float/61-70968-0027.input",
+          "output": "asr_float/61-70968-0027.output"
+        },
+        {
+          "input": "asr_float/61-70968-0028.input",
+          "output": "asr_float/61-70968-0028.output"
+        },
+        {
+          "input": "asr_float/61-70968-0029.input",
+          "output": "asr_float/61-70968-0029.output"
+        },
+        {
+          "input": "asr_float/61-70968-0030.input",
+          "output": "asr_float/61-70968-0030.output"
+        },
+        {
+          "input": "asr_float/61-70968-0031.input",
+          "output": "asr_float/61-70968-0031.output"
+        },
+        {
+          "input": "asr_float/61-70968-0032.input",
+          "output": "asr_float/61-70968-0032.output"
+        },
+        {
+          "input": "asr_float/61-70968-0033.input",
+          "output": "asr_float/61-70968-0033.output"
+        },
+        {
+          "input": "asr_float/61-70968-0034.input",
+          "output": "asr_float/61-70968-0034.output"
+        },
+        {
+          "input": "asr_float/61-70968-0035.input",
+          "output": "asr_float/61-70968-0035.output"
+        },
+        {
+          "input": "asr_float/61-70968-0036.input",
+          "output": "asr_float/61-70968-0036.output"
+        },
+        {
+          "input": "asr_float/61-70968-0037.input",
+          "output": "asr_float/61-70968-0037.output"
+        },
+        {
+          "input": "asr_float/61-70968-0038.input",
+          "output": "asr_float/61-70968-0038.output"
+        },
+        {
+          "input": "asr_float/61-70968-0039.input",
+          "output": "asr_float/61-70968-0039.output"
+        },
+        {
+          "input": "asr_float/61-70968-0040.input",
+          "output": "asr_float/61-70968-0040.output"
+        },
+        {
+          "input": "asr_float/61-70968-0041.input",
+          "output": "asr_float/61-70968-0041.output"
+        },
+        {
+          "input": "asr_float/61-70968-0042.input",
+          "output": "asr_float/61-70968-0042.output"
+        },
+        {
+          "input": "asr_float/61-70968-0043.input",
+          "output": "asr_float/61-70968-0043.output"
+        },
+        {
+          "input": "asr_float/61-70968-0044.input",
+          "output": "asr_float/61-70968-0044.output"
+        },
+        {
+          "input": "asr_float/61-70968-0045.input",
+          "output": "asr_float/61-70968-0045.output"
+        },
+        {
+          "input": "asr_float/61-70968-0046.input",
+          "output": "asr_float/61-70968-0046.output"
+        },
+        {
+          "input": "asr_float/61-70968-0047.input",
+          "output": "asr_float/61-70968-0047.output"
+        },
+        {
+          "input": "asr_float/61-70968-0048.input",
+          "output": "asr_float/61-70968-0048.output"
+        },
+        {
+          "input": "asr_float/61-70968-0049.input",
+          "output": "asr_float/61-70968-0049.output"
+        }
+      ]
+    },
+    {
+      "name": "mobilenet_v2_1.0_224_quant",
+      "baselineSec": 0.060,
+      "inputSize": [1, 224, 224, 3],
+      "dataSize": 1,
+      "inputOutputs": [
+        {
+          "input": "mobilenet_quantized/cup_224.input",
+          "output": "mobilenet_quantized/cup_1.0_224.output"
+        },
+        {
+          "input": "mobilenet_quantized/banana_224.input",
+          "output": "mobilenet_quantized/banana_1.0_224.output"
+        }
+      ]
+    }
+  ]
+}

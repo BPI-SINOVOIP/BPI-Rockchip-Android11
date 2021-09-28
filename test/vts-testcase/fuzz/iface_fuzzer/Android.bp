@@ -1,0 +1,74 @@
+// Copyright (C) 2016 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+filegroup {
+    name: "vts_proto_fuzzer_srcs",
+    srcs: [
+        "ProtoFuzzerMain.cpp",
+        "ProtoFuzzerMutateFns.cpp",
+        "ProtoFuzzerMutator.cpp",
+        "ProtoFuzzerRunner.cpp",
+        "ProtoFuzzerStaticParams.cpp",
+        "ProtoFuzzerStats.cpp",
+        "ProtoFuzzerUtils.cpp",
+    ],
+}
+
+cc_defaults {
+    name: "vts_proto_fuzzer_default",
+    srcs: [
+        ":vts_proto_fuzzer_srcs",
+    ],
+    include_dirs: [
+        "external/llvm/lib/Fuzzer",
+        "test/vts/drivers/hal/common/include",
+        "test/vts-testcase/fuzz/iface_fuzzer/include",
+    ],
+    shared_libs: [
+        "libbase",
+        "libprotobuf-cpp-full",
+        "libvintf",
+        "libvts_common",
+        "libvts_multidevice_proto",
+        "libvts_proto_fuzzer_proto",
+    ],
+    static_libs: [
+        "libhidl-gen-utils",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-macro-redefined",
+        "-Wno-extra-tokens",
+        "-Wno-c99-extensions",
+        "-fno-omit-frame-pointer",
+    ],
+    fuzz_config: {
+        // This fuzz target must be run against HAL implementation, which are
+        // only present on the device. These are disabled for until Haiku has 
+        // improved support for fuzzing HAL services.
+        fuzz_on_haiku_device: false,
+        fuzz_on_haiku_host: false,
+        cc: [
+            "smoreland@google.com",
+            "trong@google.com",
+        ],
+    },
+}
+
+cc_fuzz {
+    name: "vts_proto_fuzzer",
+    defaults: ["vts_proto_fuzzer_default"],
+}

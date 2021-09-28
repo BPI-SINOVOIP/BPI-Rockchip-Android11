@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.car.rotary">
+
+    <!-- Allows input events to be monitored by us. -->
+    <uses-permission android:name="android.permission.MONITOR_INPUT"
+                     android:protectionLevel="signature"/>
+
+    <!-- Allows us to inject input events (such as KeyEvent and MotionEvent) into the event stream
+         and deliver them. -->
+    <uses-permission android:name="android.permission.INJECT_EVENTS"
+                     android:protectionLevel="signature"/>
+
+    <!-- Allows us to toggle between touch and rotary IME. -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+
+    <!-- Allows us to have an overlay to capture touch events. -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <!-- Allows us to get the username of the current user. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS_PRIVILEGED"/>
+
+    <!-- Allows us to read the current activity's metadata for custom nudge actions. -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+
+    <!-- Ensures the host app is visible to RotaryService. -->
+    <queries>
+        <intent>
+            <action android:name="android.car.template.host.RendererService" />
+        </intent>
+    </queries>
+
+    <!-- RotaryService needs to be directBootAware so that it can start before the user is unlocked. -->
+    <application>
+        <service
+            android:name=".RotaryService"
+            android:directBootAware="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+    </application>
+
+</manifest>

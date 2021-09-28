@@ -1,0 +1,335 @@
+--------- beginning of system
+09-03 17:47:59.490  7039  7054 D AtCkpdCmdHandler: De-queing command
+--------- beginning of crash
+09-03 17:48:05.627 11071 11189 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0xe9380000 in tid 11189 (AudioOut_D)
+09-03 17:48:05.707   359   359 W         : debuggerd: handling request: pid=11071 uid=1041 gid=1005 tid=11189
+09-03 17:48:05.796  7072  7072 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-03 17:48:05.796  7072  7072 F DEBUG   : Build fingerprint: 'google/angler/angler:7.1.1/N4F26T/3687331:userdebug/dev-keys'
+09-03 17:48:05.796  7072  7072 F DEBUG   : Revision: '0'
+09-03 17:48:05.796  7072  7072 F DEBUG   : ABI: 'arm'
+09-03 17:48:05.796  7072  7072 F DEBUG   : pid: 11071, tid: 11189, name: AudioOut_D  >>> /system/bin/audioserver <<<
+09-03 17:48:05.797  7072  7072 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0xe9380000
+09-03 17:48:05.797  7072  7072 F DEBUG   :     r0 e9e7a240  r1 e9380000  r2 00000170  r3 00000000
+09-03 17:48:05.797  7072  7072 F DEBUG   :     r4 00000002  r5 00000000  r6 ec1e1f25  r7 eb6f8000
+09-03 17:48:05.797  7072  7072 F DEBUG   :     r8 00000000  r9 eb105204  sl 00000000  fp 000003c0
+09-03 17:48:05.797  7072  7072 F DEBUG   :     ip ebd3df18  sp eaf80688  lr ec1e1f41  pc ebd38dd6  cpsr 20000030
+09-03 17:48:05.805  7072  7072 F DEBUG   :
+09-03 17:48:05.805  7072  7072 F DEBUG   : backtrace:
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #00 pc 00002dd6  /system/lib/libaudioutils.so (memcpy_to_float_from_i16+5)
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #01 pc 00040f3d  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #02 pc 00040799  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #03 pc 00011178  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #04 pc 0003180b  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #05 pc 0002fe57  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #06 pc 0000e345  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+140)
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #07 pc 000470b3  /system/lib/libc.so (_ZL15__pthread_startPv+22)
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #08 pc 00019e3d  /system/lib/libc.so (__start_thread+6)
+09-03 17:48:05.967 11272 11568 W NativeCrashListener: Couldn't find ProcessRecord for pid 11071
+09-03 17:48:05.969   359   359 W         : debuggerd: resuming target 11071
+09-03 17:48:05.981 11272 11307 I BootReceiver: Copying /data/tombstones/tombstone_01 to DropBox (SYSTEM_TOMBSTONE)
+09-03 17:48:06.067   394   394 I ServiceManager: service 'media.sound_trigger_hw' died
+06-15 19:57:33.607 12736 12761 D PermissionCache: checking android.permission.MODIFY_AUDIO_SETTINGS for uid=10197 => granted (698 us)
+--------- beginning of crash
+06-15 19:57:33.607 12736 12761 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0x0 in tid 12761 (Binder:12736_2)
+06-15 19:57:33.608   379   379 W         : debuggerd: handling request: pid=12736 uid=1041 gid=1005 tid=12761
+06-15 19:57:33.670 26192 26192 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+06-15 19:57:33.670 26192 26192 F DEBUG   : Build fingerprint: 'google/bullhead/bullhead:7.1.2/N2G48C/4104010:userdebug/dev-keys'
+06-15 19:57:33.670 26192 26192 F DEBUG   : Revision: 'rev_1.0'
+06-15 19:57:33.670 26192 26192 F DEBUG   : ABI: 'arm'
+06-15 19:57:33.670 26192 26192 F DEBUG   : pid: 12736, tid: 12761, name: Binder:12736_2  >>> /system/bin/audioserver <<<
+06-15 19:57:33.670 26192 26192 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0
+06-15 19:57:33.670 26192 26192 F DEBUG   :     r0 00000000  r1 00000000  r2 0000005f  r3 00000000
+06-15 19:57:33.670 26192 26192 F DEBUG   :     r4 ffffffff  r5 00000000  r6 f14f9000  r7 00000001
+06-15 19:57:33.670 26192 26192 F DEBUG   :     r8 00000004  r9 f3353114  sl f3313900  fp 00000000
+06-15 19:57:33.670 26192 26192 F DEBUG   :     ip f3bd4d88  sp f127d9c8  lr f3b9cbc5  pc f3b65af4  cpsr 60000030
+06-15 19:57:33.676 26192 26192 F DEBUG   :
+06-15 19:57:33.676 26192 26192 F DEBUG   : backtrace:
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #00 pc 00018af4  /system/lib/libc.so (strlen+71)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #01 pc 0004fbc1  /system/lib/libc.so (__strlen_chk+4)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #02 pc 0000c599  /system/lib/libutils.so (_ZN7android7String8C2EPKc+12)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #03 pc 0002fdbf  /system/lib/libaudiopolicymanagerdefault.so (_ZNK7android18HwModuleCollection19getDeviceDescriptorEjPKcS2_b+458)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #04 pc 0001de47  /system/lib/libaudiopolicymanagerdefault.so (_ZN7android18AudioPolicyManager27setDeviceConnectionStateIntEj24audio_policy_dev_state_tPKcS3_+178)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #05 pc 0000a009  /system/lib/libaudiopolicyservice.so
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #06 pc 000a01a5  /system/lib/libmedia.so (_ZN7android20BnAudioPolicyService10onTransactEjRKNS_6ParcelEPS1_j+1256)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #07 pc 000359c3  /system/lib/libbinder.so (_ZN7android7BBinder8transactEjRKNS_6ParcelEPS1_j+70)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #08 pc 0003d1bb  /system/lib/libbinder.so (_ZN7android14IPCThreadState14executeCommandEi+702)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #09 pc 0003ce07  /system/lib/libbinder.so (_ZN7android14IPCThreadState20getAndExecuteCommandEv+114)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #10 pc 0003d31b  /system/lib/libbinder.so (_ZN7android14IPCThreadState14joinThreadPoolEb+46)
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #11 pc 0004f8c5  /system/lib/libbinder.so
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #12 pc 0000e345  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+140)
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #13 pc 000470b3  /system/lib/libc.so (_ZL15__pthread_startPv+22)
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #14 pc 00019e3d  /system/lib/libc.so (__start_thread+6)
+06-15 19:57:33.839   934  2991 W NativeCrashListener: Couldn't find ProcessRecord for pid 12736
+06-15 19:57:33.846   934   952 I BootReceiver: Copying /data/tombstones/tombstone_01 to DropBox (SYSTEM_TOMBSTONE)
+06-15 19:57:35.130 26201 26227 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0x0 in tid 26227 (Binder:26201_3)
+06-15 19:57:35.130 26201 26228 D PermissionCache: checking android.permission.MODIFY_AUDIO_SETTINGS for uid=1000 => granted (318 us)
+06-15 19:57:35.130   379   379 W         : debuggerd: handling request: pid=26201 uid=1041 gid=1005 tid=26227
+06-15 19:57:35.131 26201 26212 D audio_hw_primary: select_devices: changing use case low-latency-playback output device from(0: none, acdb -1) to (2: speaker, acdb 14)
+06-15 19:57:35.191 26230 26230 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+06-15 19:57:35.191 26230 26230 F DEBUG   : Build fingerprint: 'google/bullhead/bullhead:7.1.2/N2G48C/4104010:userdebug/dev-keys'
+06-15 19:57:35.191 26230 26230 F DEBUG   : Revision: 'rev_1.0'
+06-15 19:57:35.191 26230 26230 F DEBUG   : ABI: 'arm'
+06-15 19:57:35.191 26230 26230 F DEBUG   : pid: 26201, tid: 26227, name: Binder:26201_3  >>> /system/bin/audioserver <<<
+06-15 19:57:35.191 26230 26230 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0
+06-15 19:57:35.191 26230 26230 F DEBUG   :     r0 00000000  r1 00000000  r2 0000005f  r3 00000000
+06-15 19:57:35.191 26230 26230 F DEBUG   :     r4 ffffffff  r5 00000000  r6 e49bb000  r7 00000001
+06-15 19:57:35.191 26230 26230 F DEBUG   :     r8 00000004  r9 e6b53114  sl e6b13900  fp 00000000
+06-15 19:57:35.191 26230 26230 F DEBUG   :     ip e746bd88  sp e4c009c8  lr e7433bc5  pc e73fcaf4  cpsr 60000030
+06-15 19:57:35.195 26230 26230 F DEBUG   :
+06-15 19:57:35.195 26230 26230 F DEBUG   : backtrace:
+06-15 19:57:35.195 26230 26230 F DEBUG   :     #00 pc 00018af4  /system/lib/libc.so (strlen+71)
+06-15 19:57:35.195 26230 26230 F DEBUG   :     #01 pc 0004fbc1  /system/lib/libc.so (__strlen_chk+4)
+06-15 19:57:35.195 26230 26230 F DEBUG   :     #02 pc 0000c599  /system/lib/libutils.so (_ZN7android7String8C2EPKc+12)
+06-15 19:57:35.195 26230 26230 F DEBUG   :     #03 pc 0002fdbf  /system/lib/libaudiopolicymanagerdefault.so (_ZNK7android18HwModuleCollection19getDeviceDescriptorEjPKcS2_b+458)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #04 pc 0001de47  /system/lib/libaudiopolicymanagerdefault.so (_ZN7android18AudioPolicyManager27setDeviceConnectionStateIntEj24audio_policy_dev_state_tPKcS3_+178)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #05 pc 0000a009  /system/lib/libaudiopolicyservice.so
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #06 pc 000a01a5  /system/lib/libmedia.so (_ZN7android20BnAudioPolicyService10onTransactEjRKNS_6ParcelEPS1_j+1256)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #07 pc 000359c3  /system/lib/libbinder.so (_ZN7android7BBinder8transactEjRKNS_6ParcelEPS1_j+70)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #08 pc 0003d1bb  /system/lib/libbinder.so (_ZN7android14IPCThreadState14executeCommandEi+702)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #09 pc 0003ce07  /system/lib/libbinder.so (_ZN7android14IPCThreadState20getAndExecuteCommandEv+114)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #10 pc 0003d31b  /system/lib/libbinder.so (_ZN7android14IPCThreadState14joinThreadPoolEb+46)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #11 pc 0004f8c5  /system/lib/libbinder.so
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #12 pc 0000e345  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+140)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #13 pc 000470b3  /system/lib/libc.so (_ZL15__pthread_startPv+22)
+06-15 19:57:35.196 26230 26230 F DEBUG   :     #14 pc 00019e3d  /system/lib/libc.so (__start_thread+6)
+06-15 19:57:35.346   934  2991 W NativeCrashListener: Couldn't find ProcessRecord for pid 26201
+06-15 19:57:35.346 26230 26230 E         : AM data write failed: Broken pipe
+06-15 19:57:40.605 26246 26261 D audio_hw_primary: enable_snd_device: snd_device(78: vi-feedback)
+06-15 19:57:40.606 26246 26261 D audio_hw_primary: enable_audio_route: usecase(21) apply and update mixer path: spkr-vi-record
+06-15 19:57:40.673 26283 26283 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+06-15 19:57:40.674 26283 26283 F DEBUG   : Build fingerprint: 'google/bullhead/bullhead:7.1.2/N2G48C/4104010:userdebug/dev-keys'
+06-15 19:57:40.674 26283 26283 F DEBUG   : Revision: 'rev_1.0'
+06-15 19:57:40.674 26283 26283 F DEBUG   : ABI: 'arm'
+06-15 19:57:40.674 26283 26283 F DEBUG   : pid: 26246, tid: 26282, name: Binder:26246_5  >>> /system/bin/audioserver <<<
+06-15 19:57:40.674 26283 26283 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0
+06-15 19:57:40.674 26283 26283 F DEBUG   :     r0 00000000  r1 00000000  r2 0000005f  r3 00000000
+06-15 19:57:40.674 26283 26283 F DEBUG   :     r4 ffffffff  r5 00000000  r6 eb750000  r7 00000001
+06-15 19:57:40.674 26283 26283 F DEBUG   :     r8 00000004  r9 ed953114  sl ed913900  fp 00000000
+06-15 19:57:40.674 26283 26283 F DEBUG   :     ip eda8bd88  sp eb4fd9c8  lr eda53bc5  pc eda1caf4  cpsr 60000030
+06-15 19:57:40.679 26283 26283 F DEBUG   :
+06-15 19:57:40.679 26283 26283 F DEBUG   : backtrace:
+06-15 19:57:40.679 26283 26283 F DEBUG   :     #00 pc 00018af4  /system/lib/libc.so (strlen+71)
+06-15 19:57:40.679 26283 26283 F DEBUG   :     #01 pc 0004fbc1  /system/lib/libc.so (__strlen_chk+4)
+06-15 19:57:40.679 26283 26283 F DEBUG   :     #02 pc 0000c599  /system/lib/libutils.so (_ZN7android7String8C2EPKc+12)
+06-15 19:57:40.679 26283 26283 F DEBUG   :     #03 pc 0002fdbf  /system/lib/libaudiopolicymanagerdefault.so (_ZNK7android18HwModuleCollection19getDeviceDescriptorEjPKcS2_b+458)
+06-15 19:57:40.679 26283 26283 F DEBUG   :     #04 pc 0001de47  /system/lib/libaudiopolicymanagerdefault.so (_ZN7android18AudioPolicyManager27setDeviceConnectionStateIntEj24audio_policy_dev_state_tPKcS3_+178)
+06-15 19:57:40.679 26283 26283 F DEBUG   :     #05 pc 0000a009  /system/lib/libaudiopolicyservice.so
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #06 pc 000a01a5  /system/lib/libmedia.so (_ZN7android20BnAudioPolicyService10onTransactEjRKNS_6ParcelEPS1_j+1256)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #07 pc 000359c3  /system/lib/libbinder.so (_ZN7android7BBinder8transactEjRKNS_6ParcelEPS1_j+70)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #08 pc 0003d1bb  /system/lib/libbinder.so (_ZN7android14IPCThreadState14executeCommandEi+702)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #09 pc 0003ce07  /system/lib/libbinder.so (_ZN7android14IPCThreadState20getAndExecuteCommandEv+114)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #10 pc 0003d31b  /system/lib/libbinder.so (_ZN7android14IPCThreadState14joinThreadPoolEb+46)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #11 pc 0004f8c5  /system/lib/libbinder.so
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #12 pc 0000e345  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+140)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #13 pc 000470b3  /system/lib/libc.so (_ZL15__pthread_startPv+22)
+06-15 19:57:40.680 26283 26283 F DEBUG   :     #14 pc 00019e3d  /system/lib/libc.so (__start_thread+6)
+06-15 19:57:40.882   934  2991 W NativeCrashListener: Couldn't find ProcessRecord for pid 26246
+06-15 19:57:40.889   934   952 I BootReceiver: Copying /data/tombstones/tombstone_03 to DropBox (SYSTEM_TOMBSTONE)
+09-23 01:55:43.022   245   245 F installd: utils.cpp:67] Check failed: is_valid_package_name(package_name) == 0
+--------- beginning of crash
+09-23 01:55:43.022   245   245 F libc    : Fatal signal 6 (SIGABRT), code -6 in tid 245 (installd)
+09-23 01:55:43.022   166   166 W         : debuggerd: handling request: pid=245 uid=0 gid=0 tid=245
+09-23 01:55:43.026   546   546 E         : debuggerd: Unable to connect to activity manager (connect failed: Connection refused)
+09-23 01:55:43.076   546   546 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-23 01:55:43.076   546   546 F DEBUG   : Build fingerprint: 'google/ryu/dragon:7.1.2/N2G48C/4104010:userdebug/dev-keys'
+09-23 01:55:43.076   546   546 F DEBUG   : Revision: '0'
+09-23 01:55:43.076   546   546 F DEBUG   : ABI: 'arm64'
+09-23 01:55:43.077   546   546 F DEBUG   : pid: 245, tid: 245, name: installd  >>> /system/bin/installd <<<
+09-23 01:55:43.077   546   546 F DEBUG   : signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+09-23 01:55:43.077   546   546 F DEBUG   : Abort message: 'utils.cpp:67] Check failed: is_valid_package_name(package_name) == 0 '
+09-23 01:55:43.077   546   546 F DEBUG   :     x0   0000000000000000  x1   00000000000000f5  x2   0000000000000006  x3   0000000000000008
+09-23 01:55:43.078   546   546 F DEBUG   :     x4   0000000000000000  x5   0000000000000000  x6   00000076a4172000  x7   0000000000000000
+09-23 01:55:43.078   546   546 F DEBUG   :     x8   0000000000000083  x9   ffffffffffffffdf  x10  0000000000000000  x11  0000000000000001
+09-23 01:55:43.078   546   546 F DEBUG   :     x12  0000000000000018  x13  0000000000000000  x14  0000000000000000  x15  000157de95b365f0
+09-23 01:55:43.078   546   546 F DEBUG   :     x16  00000076a4099ee0  x17  00000076a4043b24  x18  0000000000000000  x19  00000076a4227b40
+09-23 01:55:43.078   546   546 F DEBUG   :     x20  0000000000000006  x21  00000076a4227a98  x22  0000000000000014  x23  0000000000000005
+09-23 01:55:43.078   546   546 F DEBUG   :     x24  00000076a3834040  x25  0000000000000000  x26  0000000000000005  x27  0000000000000006
+09-23 01:55:43.078   546   546 F DEBUG   :     x28  0000007ff8a77879  x29  0000007ff8a777f0  x30  00000076a4040f50
+09-23 01:55:43.078   546   546 F DEBUG   :     sp   0000007ff8a777d0  pc   00000076a4043b2c  pstate 0000000060000000
+09-23 01:55:43.081   546   546 F DEBUG   :
+09-23 01:55:43.081   546   546 F DEBUG   : backtrace:
+09-23 01:55:43.081   546   546 F DEBUG   :     #00 pc 000000000006bb2c  /system/lib64/libc.so (tgkill+8)
+09-23 01:55:43.081   546   546 F DEBUG   :     #01 pc 0000000000068f4c  /system/lib64/libc.so (pthread_kill+64)
+09-23 01:55:43.081   546   546 F DEBUG   :     #02 pc 0000000000023f58  /system/lib64/libc.so (raise+24)
+09-23 01:55:43.081   546   546 F DEBUG   :     #03 pc 000000000001c810  /system/lib64/libc.so (abort+52)
+09-23 01:55:43.081   546   546 F DEBUG   :     #04 pc 000000000000609c  /system/lib64/libbase.so (_ZN7android4base10LogMessageD1Ev+1084)
+09-23 01:55:43.082   546   546 F DEBUG   :     #05 pc 000000000001bbd4  /system/bin/installd
+09-23 01:55:43.082   546   546 F DEBUG   :     #06 pc 000000000001be38  /system/bin/installd
+09-23 01:55:43.082   546   546 F DEBUG   :     #07 pc 0000000000007f08  /system/bin/installd
+09-23 01:55:43.082   546   546 F DEBUG   :     #08 pc 0000000000005bd4  /system/bin/installd
+09-23 01:55:43.082   546   546 F DEBUG   :     #09 pc 000000000001a594  /system/lib64/libc.so (__libc_init+88)
+09-23 01:55:43.082   546   546 F DEBUG   :     #10 pc 0000000000004818  /system/bin/installd
+09-23 01:55:43.093   166   166 W         : debuggerd: resuming target 245
+09-23 01:55:43.132   516   516 E InstallerConnection: read exception
+09-23 01:55:43.132   516   516 I InstallerConnection: disconnecting...
+09-23 01:55:48.494   516   537 W WindowManager: App freeze timeout expired.
+09-23 01:55:52.058   163   163 W auditd  : type=1404 audit(0.0:4): enforcing=0 old_enforcing=1 auid=4294967295 ses=4294967295
+--------- beginning of main
+11-03 02:59:48.505  8049  8049 I stagefright: type=1400 audit(0.0:130): avc: denied { read } for path="/data/data/test1.mp4" dev="sda35" ino=868967 scontext=u:r:drmserver:s0 tcontext=u:object_r:system_data_file:s0 tclass=file permissive=1
+11-03 02:59:48.505  3939  3939 I chatty  : uid=10040(u0_a40) com.google.android.setupwizard expire 52528 lines
+11-03 02:59:48.559  8049  8054 I OMXClient: Treble IOmx obtained
+--------- beginning of crash
+11-03 02:59:48.892  6371  8072 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-03 02:59:48.892  6371  8072 F DEBUG   : Build fingerprint: 'google/marlin/marlin:8.0.0/OC/mspect11021711:userdebug/dev-keys'
+11-03 02:59:48.892  6371  8072 F DEBUG   : Revision: '0'
+11-03 02:59:48.892  6371  8072 F DEBUG   : ABI: 'arm'
+11-03 02:59:48.892  6371  8072 F DEBUG   : pid: 6371, tid: 8072, name: media.codec  >>> omx@1.0-service <<<
+11-03 02:59:48.892  6371  8072 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0xed000000
+11-03 02:59:48.900  6371  8072 F DEBUG   :     r0 ecffdba0  r1 ed000000  r2 d44854c0  r3 00000070
+11-03 02:59:48.900  6371  8072 F DEBUG   :     r4 00000070  r5 000021a0  r6 00000070  r7 00000070
+11-03 02:59:48.900  6371  8072 F DEBUG   :     r8 00000040  r9 ffc2b278  sl ffffde70  fp 00000060
+11-03 02:59:48.900  6371  8072 F DEBUG   :     ip ffffffa0  sp d2fff620  lr 00004308  pc ed1c0e7c  cpsr a00f0010
+11-03 02:59:48.901  6371  8072 F DEBUG   :
+11-03 02:59:48.901  6371  8072 F DEBUG   : backtrace:
+11-03 02:59:48.901  6371  8072 F DEBUG   :     #00 pc 00034e7c  /system/lib/libstagefright_soft_hevcdec.so
+--------- beginning of system
+11-03 02:59:48.905  1135  1155 I BootReceiver: Copying /data/tombstones/tombstone_03 to DropBox (SYSTEM_TOMBSTONE)
+05-04 21:59:23.695  9363  9363 I crash_dump64: performing dump of process 8373 (target tid = 8414)
+05-04 21:59:23.695  9363  9363 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+05-04 21:59:23.696  9363  9363 F DEBUG   : Build fingerprint: 'google/taimen/taimen:8.1.0/OPM2.171026.006.A1/4756228:userdebug/dev-keys'
+05-04 21:59:23.696  9363  9363 F DEBUG   : Revision: 'rev_10'
+05-04 21:59:23.696  9363  9363 F DEBUG   : ABI: 'arm64'
+05-04 21:59:23.696  9363  9363 F DEBUG   : pid: 8373, tid: 8414, name: btu message loo  >>> com.android.bluetooth <<<
+05-04 21:59:23.696  9363  9363 F DEBUG   : signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+05-04 21:59:23.700  9363  9363 F DEBUG   : Abort message: '[FATAL:allocation_tracker.cc(143)] Check failed: map_entry != allocations.end().
+05-04 21:59:23.700  9363  9363 F DEBUG   : '
+05-04 21:59:23.700  9363  9363 F DEBUG   :     x0   0000000000000000  x1   00000000000020de  x2   0000000000000006  x3   0000000000000008
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x4   613a4c415441465b  x5   613a4c415441465b  x6   613a4c415441465b  x7   6f697461636f6c6c
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x8   0000000000000083  x9   0000000010000000  x10  000000703a7a7c80  x11  0000000000000001
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x12  746e655f70616d20  x13  6c61203d21207972  x14  ff00000000000000  x15  ffffffffffffffff
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x16  0000006380f4afa8  x17  00000070d20af52c  x18  0000000000000000  x19  00000000000020b5
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x20  00000000000020de  x21  0000000000000083  x22  000000703a7a9588  x23  000000703b8ee000
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x24  000000703a7a7d01  x25  000000703a7a9588  x26  000000703bc7d948  x27  00000070484c92d8
+05-04 21:59:23.701  9363  9363 F DEBUG   :     x28  0000000000000006  x29  000000703a7a7cc0  x30  00000070d2064760
+05-04 21:59:23.701  9363  9363 F DEBUG   :     sp   000000703a7a7c80  pc   00000070d2064788  pstate 0000000060000000
+05-04 21:59:23.742  9363  9363 F DEBUG   :
+05-04 21:59:23.742  9363  9363 F DEBUG   : backtrace:
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #00 pc 000000000001d788  /system/lib64/libc.so (abort+120)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #01 pc 0000000000083470  /system/lib64/libchrome.so (base::debug::BreakDebugger()+20)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #02 pc 000000000009affc  /system/lib64/libchrome.so (logging::LogMessage::~LogMessage()+1068)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #03 pc 0000000000199130  /system/lib64/hw/bluetooth.default.so (allocation_tracker_notify_free(unsigned char, void*)+720)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #04 pc 000000000019984c  /system/lib64/hw/bluetooth.default.so (osi_free(void*)+20)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #05 pc 0000000000163f1c  /system/lib64/hw/bluetooth.default.so (l2c_fcr_cleanup(t_l2c_ccb*)+92)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #06 pc 000000000016adc8  /system/lib64/hw/bluetooth.default.so (l2cu_release_ccb(t_l2c_ccb*)+176)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #07 pc 0000000000162ea0  /system/lib64/hw/bluetooth.default.so (l2c_csm_execute(t_l2c_ccb*, unsigned short, void*)+1852)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #08 pc 000000000015e4f4  /system/lib64/hw/bluetooth.default.so (L2CA_DisconnectRsp(unsigned short)+92)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #09 pc 00000000001838b0  /system/lib64/hw/bluetooth.default.so (sdp_disconnect_ind(unsigned short, bool)+52)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #10 pc 0000000000163574  /system/lib64/hw/bluetooth.default.so (l2c_csm_execute(t_l2c_ccb*, unsigned short, void*)+3600)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #11 pc 0000000000169f94  /system/lib64/hw/bluetooth.default.so (l2c_rcv_acl_data(BT_HDR*)+3980)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #12 pc 00000000000849cc  /system/lib64/libchrome.so (base::debug::TaskAnnotator::RunTask(char const*, base::PendingTask const&)+188)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #13 pc 000000000009efa4  /system/lib64/libchrome.so (base::MessageLoop::RunTask(base::PendingTask const&)+444)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #14 pc 000000000009f26c  /system/lib64/libchrome.so (base::MessageLoop::DeferOrRunPendingTask(base::PendingTask)+52)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #15 pc 000000000009f698  /system/lib64/libchrome.so (base::MessageLoop::DoWork()+356)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #16 pc 00000000000a08a8  /system/lib64/libchrome.so (base::MessagePumpDefault::Run(base::MessagePump::Delegate*)+220)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #17 pc 00000000000ba124  /system/lib64/libchrome.so (base::RunLoop::Run()+136)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #18 pc 0000000000138660  /system/lib64/hw/bluetooth.default.so (btu_message_loop_run(void*)+248)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #19 pc 00000000001a24fc  /system/lib64/hw/bluetooth.default.so (work_queue_read_cb(void*)+92)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #20 pc 00000000001a0758  /system/lib64/hw/bluetooth.default.so (run_reactor(reactor_t*, int)+320)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #21 pc 00000000001a05ec  /system/lib64/hw/bluetooth.default.so (reactor_start(reactor_t*)+84)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #22 pc 00000000001a1f94  /system/lib64/hw/bluetooth.default.so (run_thread(void*)+184)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #23 pc 0000000000067d80  /system/lib64/libc.so (__pthread_start(void*)+36)
+05-04 21:59:23.743  9363  9363 F DEBUG   :     #24 pc 000000000001ec18  /system/lib64/libc.so (__start_thread+68)
+11-25 19:47:35.417  8080 11665 F libc    : Fatal signal 6 (SIGABRT), code -6 in tid 11665 (generic)
+11-25 19:47:35.487   940   940 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-25 19:47:35.487   940   940 F DEBUG   : Build fingerprint: 'samsung/hero2qltezc/hero2qltechn:6.0.1/MMB29M/G9350ZCU2APJ6:user/release-keys'
+11-25 19:47:35.487   940   940 F DEBUG   : Revision: '15'
+11-25 19:47:35.487   940   940 F DEBUG   : ABI: 'arm'
+11-25 19:47:35.487   940   940 F DEBUG   : pid: 8080, tid: 11665, name: generic  >>> /system/bin/mediaserver <<<
+11-25 19:47:35.487   940   940 F DEBUG   : signal 6 (SIGABRT), code -6 (SI_TKILL), fault addr --------
+11-25 19:47:35.577   940   940 F DEBUG   : Abort message: 'frameworks/av/media/libstagefright/MPEG4Extractor.cpp:6853 CHECK_EQ( (unsigned)ptr[0],1u) failed: 129 vs. 1'
+11-25 19:47:35.577   940   940 F DEBUG   :     r0 00000000  r1 00002d91  r2 00000006  r3 eb23f978
+11-25 19:47:35.577   940   940 F DEBUG   :     r4 eb23f980  r5 eb23f930  r6 00000009  r7 0000010c
+11-25 19:47:35.577   940   940 F DEBUG   :     r8 e9e91140  r9 00000000  sl 00000000  fp 000003d3
+11-25 19:47:35.577   940   940 F DEBUG   :     ip 00000006  sp eb23db70  lr f701313d  pc f7015538  cpsr 40010010
+11-25 19:47:35.597   940   940 F DEBUG   :
+11-25 19:47:35.597   940   940 F DEBUG   : backtrace:
+11-25 19:47:35.597   940   940 F DEBUG   :     #00 pc 00042538  /system/lib/libc.so (tgkill+12)
+11-25 19:47:35.597   940   940 F DEBUG   :     #01 pc 00040139  /system/lib/libc.so (pthread_kill+32)
+11-25 19:47:35.597   940   940 F DEBUG   :     #02 pc 0001c783  /system/lib/libc.so (raise+10)
+11-25 19:47:35.597   940   940 F DEBUG   :     #03 pc 000199f1  /system/lib/libc.so (__libc_android_abort+34)
+11-25 19:47:35.597   940   940 F DEBUG   :     #04 pc 000175ac  /system/lib/libc.so (abort+4)
+11-25 19:47:35.597   940   940 F DEBUG   :     #05 pc 000085e7  /system/lib/libcutils.so (__android_log_assert+86)
+11-25 19:47:35.597   940   940 F DEBUG   :     #06 pc 000c1f49  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor25avcc_getCodecSpecificInfoERNS_2spINS_7ABufferEEEPKcj+392)
+11-25 19:47:35.597   940   940 F DEBUG   :     #07 pc 000c213f  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor15checkConfigDataEjRKNS_2spINS_8MetaDataEEE+218)
+11-25 19:47:35.597   940   940 F DEBUG   :     #08 pc 000bbd25  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor12checkSupportEjRKNS_2spINS_8MetaDataEEE+136)
+11-25 19:47:35.597   940   940 F DEBUG   :     #09 pc 000ba555  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+13060)
+11-25 19:47:35.597   940   940 F DEBUG   :     #10 pc 000ba32d  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+12508)
+11-25 19:47:35.597   940   940 F DEBUG   :     #11 pc 000b8a6f  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+6174)
+11-25 19:47:35.597   940   940 F DEBUG   :     #12 pc 000b8a6f  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+6174)
+11-25 19:47:35.597   940   940 F DEBUG   :     #13 pc 000b8a6f  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+6174)
+11-25 19:47:35.597   940   940 F DEBUG   :     #14 pc 000b8a6f  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+6174)
+11-25 19:47:35.597   940   940 F DEBUG   :     #15 pc 000b8a6f  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor10parseChunkEPxi+6174)
+11-25 19:47:35.597   940   940 F DEBUG   :     #16 pc 000b6e3b  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor12readMetaDataEv+94)
+11-25 19:47:35.597   940   940 F DEBUG   :     #17 pc 000b6daf  /system/lib/libstagefright.so (_ZN7android14MPEG4Extractor11getMetaDataEv+10)
+11-25 19:47:35.597   940   940 F DEBUG   :     #18 pc 00088c53  /system/lib/libmediaplayerservice.so (_ZN7android8NuPlayer13GenericSource18initFromDataSourceEv+386)
+11-25 19:47:35.597   940   940 F DEBUG   :     #19 pc 00089b43  /system/lib/libmediaplayerservice.so (_ZN7android8NuPlayer13GenericSource14onPrepareAsyncEv+238)
+11-25 19:47:35.597   940   940 F DEBUG   :     #20 pc 0000b405  /system/lib/libstagefright_foundation.so (_ZN7android8AHandler14deliverMessageERKNS_2spINS_8AMessageEEE+16)
+11-25 19:47:35.597   940   940 F DEBUG   :     #21 pc 0000d423  /system/lib/libstagefright_foundation.so (_ZN7android8AMessage7deliverEv+54)
+11-25 19:47:35.597   940   940 F DEBUG   :     #22 pc 0000be29  /system/lib/libstagefright_foundation.so (_ZN7android7ALooper4loopEv+224)
+11-25 19:47:35.597   940   940 F DEBUG   :     #23 pc 0001011d  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+112)
+11-25 19:47:35.597   940   940 F DEBUG   :     #24 pc 0003fa3b  /system/lib/libc.so (_ZL15__pthread_startPv+30)
+11-25 19:47:35.597   940   940 F DEBUG   :     #25 pc 0001a085  /system/lib/libc.so (__start_thread+6)
+11-25 19:47:35.837   940   940 F DEBUG   :
+11-25 19:47:35.837   940   940 F DEBUG   : Tombstone written to: /data/tombstones/tombstone_01
+--------- beginning of crash
+09-03 17:48:05.627 11071 11189 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0xe9380000 in tid 11189 (synthetic_thread)
+09-03 17:48:05.707   359   359 W         : debuggerd: handling request: pid=11071 uid=1041 gid=1005 tid=11189
+09-03 17:48:05.796  7072  7072 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+09-03 17:48:05.796  7072  7072 F DEBUG   : Build fingerprint: 'google/angler/angler:7.1.1/N4F26T/3687331:userdebug/dev-keys'
+09-03 17:48:05.796  7072  7072 F DEBUG   : Revision: '0'
+09-03 17:48:05.796  7072  7072 F DEBUG   : ABI: 'arm'
+09-03 17:48:05.796  7072  7072 F DEBUG   : pid: 11071, tid: 11189, name: synthetic_thread  >>> synthetic_process_0 <<<
+09-03 17:48:05.797  7072  7072 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0xe9380000
+09-03 17:48:05.797  7072  7072 F DEBUG   :     r0 e9e7a240  r1 e9380000  r2 00000170  r3 00000000
+09-03 17:48:05.797  7072  7072 F DEBUG   :     r4 00000002  r5 00000000  r6 ec1e1f25  r7 eb6f8000
+09-03 17:48:05.797  7072  7072 F DEBUG   :     r8 00000000  r9 eb105204  sl 00000000  fp 000003c0
+09-03 17:48:05.797  7072  7072 F DEBUG   :     ip ebd3df18  sp eaf80688  lr ec1e1f41  pc ebd38dd6  cpsr 20000030
+09-03 17:48:05.805  7072  7072 F DEBUG   :
+09-03 17:48:05.805  7072  7072 F DEBUG   : backtrace:
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #00 pc 00002dd6  /system/lib/libaudioutils.so (memcpy_to_float_from_i16+5)
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #01 pc 00040f3d  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #02 pc 00040799  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #03 pc 00011178  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #04 pc 0003180b  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #05 pc 0002fe57  /system/lib/libaudioflinger.so
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #06 pc 0000e345  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+140)
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #07 pc 000470b3  /system/lib/libc.so (_ZL15__pthread_startPv+22)
+09-03 17:48:05.806  7072  7072 F DEBUG   :     #08 pc 00019e3d  /system/lib/libc.so (__start_thread+6)
+09-03 17:48:05.967 11272 11568 W NativeCrashListener: Couldn't find ProcessRecord for pid 11071
+09-03 17:48:05.969   359   359 W         : debuggerd: resuming target 11071
+09-03 17:48:05.981 11272 11307 I BootReceiver: Copying /data/tombstones/tombstone_01 to DropBox (SYSTEM_TOMBSTONE)
+09-03 17:48:06.067   394   394 I ServiceManager: service 'media.sound_trigger_hw' died
+06-15 19:57:33.607 12736 12761 D PermissionCache: checking android.permission.MODIFY_AUDIO_SETTINGS for uid=10197 => granted (698 us)
+--------- beginning of crash
+06-15 19:57:33.607 12736 12761 F libc    : Fatal signal 11 (SIGSEGV), code 1, fault addr 0x0 in tid 12761 (synthetic_thread)
+06-15 19:57:33.608   379   379 W         : debuggerd: handling request: pid=12736 uid=1041 gid=1005 tid=12761
+06-15 19:57:33.670 26192 26192 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+06-15 19:57:33.670 26192 26192 F DEBUG   : Build fingerprint: 'google/bullhead/bullhead:7.1.2/N2G48C/4104010:userdebug/dev-keys'
+06-15 19:57:33.670 26192 26192 F DEBUG   : Revision: 'rev_1.0'
+06-15 19:57:33.670 26192 26192 F DEBUG   : ABI: 'arm'
+06-15 19:57:33.670 26192 26192 F DEBUG   : pid: 12736, tid: 12761, name: synthetic_thread  >>> synthetic_process_1 <<<
+06-15 19:57:33.670 26192 26192 F DEBUG   : signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0
+06-15 19:57:33.670 26192 26192 F DEBUG   :     r0 00000000  r1 00000000  r2 0000005f  r3 00000000
+06-15 19:57:33.670 26192 26192 F DEBUG   :     r4 ffffffff  r5 00000000  r6 f14f9000  r7 00000001
+06-15 19:57:33.670 26192 26192 F DEBUG   :     r8 00000004  r9 f3353114  sl f3313900  fp 00000000
+06-15 19:57:33.670 26192 26192 F DEBUG   :     ip f3bd4d88  sp f127d9c8  lr f3b9cbc5  pc f3b65af4  cpsr 60000030
+06-15 19:57:33.676 26192 26192 F DEBUG   :
+06-15 19:57:33.676 26192 26192 F DEBUG   : backtrace:
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #00 pc 00018af4  /system/lib/libc.so (strlen+71)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #01 pc 0004fbc1  /system/lib/libc.so (__strlen_chk+4)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #02 pc 0000c599  /system/lib/libutils.so (_ZN7android7String8C2EPKc+12)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #03 pc 0002fdbf  /system/lib/libaudiopolicymanagerdefault.so (_ZNK7android18HwModuleCollection19getDeviceDescriptorEjPKcS2_b+458)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #04 pc 0001de47  /system/lib/libaudiopolicymanagerdefault.so (_ZN7android18AudioPolicyManager27setDeviceConnectionStateIntEj24audio_policy_dev_state_tPKcS3_+178)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #05 pc 0000a009  /system/lib/libaudiopolicyservice.so
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #06 pc 000a01a5  /system/lib/libmedia.so (_ZN7android20BnAudioPolicyService10onTransactEjRKNS_6ParcelEPS1_j+1256)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #07 pc 000359c3  /system/lib/libbinder.so (_ZN7android7BBinder8transactEjRKNS_6ParcelEPS1_j+70)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #08 pc 0003d1bb  /system/lib/libbinder.so (_ZN7android14IPCThreadState14executeCommandEi+702)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #09 pc 0003ce07  /system/lib/libbinder.so (_ZN7android14IPCThreadState20getAndExecuteCommandEv+114)
+06-15 19:57:33.677 26192 26192 F DEBUG   :     #10 pc 0003d31b  /system/lib/libbinder.so (_ZN7android14IPCThreadState14joinThreadPoolEb+46)
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #11 pc 0004f8c5  /system/lib/libbinder.so
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #12 pc 0000e345  /system/lib/libutils.so (_ZN7android6Thread11_threadLoopEPv+140)
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #13 pc 000470b3  /system/lib/libc.so (_ZL15__pthread_startPv+22)
+06-15 19:57:33.678 26192 26192 F DEBUG   :     #14 pc 00019e3d  /system/lib/libc.so (__start_thread+6)
+06-15 19:57:33.839   934  2991 W NativeCrashListener: Couldn't find ProcessRecord for pid 12736
+06-15 19:57:33.846   934   952 I BootReceiver: Copying /data/tombstones/tombstone_01 to DropBox (SYSTEM_TOMBSTONE)
+

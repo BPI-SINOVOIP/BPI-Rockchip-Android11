@@ -1,0 +1,29 @@
+cc_test_library {
+    name: "libnetd_test_dnsresponder_ndk",
+    defaults: ["netd_defaults", "resolv_test_defaults"],
+    shared_libs: [
+        "libbinder_ndk",
+        "libnetd_client",
+    ],
+    header_libs: [
+        "libnetd_resolv_headers",
+        "libnetd_resolv_internal_headers",
+    ],
+    export_header_lib_headers: [
+        "libnetd_resolv_internal_headers",
+    ],
+    static_libs: [
+        "dnsresolver_aidl_interface-unstable-ndk_platform",
+        "libcrypto_static",
+        "libnetdutils",
+        "libssl",
+        "netd_aidl_interface-ndk_platform",
+        "netd_event_listener_interface-ndk_platform",
+    ],
+    srcs: [
+        "dns_responder.cpp",
+        "dns_responder_client_ndk.cpp",
+        "dns_tls_frontend.cpp",
+    ],
+    export_include_dirs: ["."],
+}

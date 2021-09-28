@@ -1,0 +1,61 @@
+<resources>
+    <!-- ConstraintLayout attributes. For a more complete list, see: -->
+    <!-- https://android.googlesource.com/platform/frameworks/opt/sherpa/+/studio-3.0/constraintlayout/src/main/res/values/attrs.xml -->
+
+    <attr name="layout_constraintGuide_begin" format="dimension"/>
+    <attr name="layout_constraintGuide_end" format="dimension"/>
+    <attr name="layout_constraintGuide_percent" format="float"/>
+
+    <attr name="layout_constraintLeft_toLeftOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintLeft_toRightOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintRight_toLeftOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintRight_toRightOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintTop_toTopOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintTop_toBottomOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintBottom_toTopOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintBottom_toBottomOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintBaseline_toBaselineOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintStart_toEndOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintStart_toStartOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintEnd_toStartOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+    <attr name="layout_constraintEnd_toEndOf" format="reference|enum">
+        <enum name="parent" value="0"/>
+    </attr>
+
+    <attr name="layout_constraintHorizontal_bias" format="float"/>
+    <attr name="layout_constraintVertical_bias" format="float"/>
+
+    <attr name="layout_goneMarginLeft" format="dimension"/>
+    <attr name="layout_goneMarginTop" format="dimension"/>
+    <attr name="layout_goneMarginRight" format="dimension"/>
+    <attr name="layout_goneMarginBottom" format="dimension"/>
+    <attr name="layout_goneMarginStart" format="dimension"/>
+    <attr name="layout_goneMarginEnd" format="dimension"/>
+
+    <attr name="state_ux_restricted"/>
+
+</resources>

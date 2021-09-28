@@ -1,0 +1,227 @@
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/device_icon"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_marginTop="@dimen/device_detail_margin_top"
+        android:src="@drawable/ic_smartphone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/device_name"
+        style="@style/AssociationTopIcon"/>
+
+    <TextView
+        android:id="@+id/device_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/device_detail_margin"
+        android:text="@string/unknown"
+        android:textAppearance="@style/AssociationTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/device_icon"
+        app:layout_constraintBottom_toTopOf="@+id/connection_status"/>
+
+    <LinearLayout
+        android:id="@+id/connection_status"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/device_detail_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/device_name"
+        app:layout_constraintBottom_toTopOf="@+id/connection_button">
+        <ImageView
+            android:id="@+id/connection_status_indicator"
+            android:layout_height="@dimen/connection_indicator_size"
+            android:layout_width="@dimen/connection_indicator_size"
+            android:layout_marginEnd="@dimen/connection_indicator_margin_end"
+            android:src="@drawable/ic_connection_indicator"/>
+        <TextView
+            android:id="@+id/connection_status_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/AssociationMessage"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/car_ui_margin" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/connection_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/device_detail_button_margin_top"
+        android:background="@drawable/car_ui_list_item_background"
+        android:clickable="true"
+        android:minHeight="@dimen/list_item_height"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/connection_status"
+        app:layout_constraintBottom_toTopOf="@+id/remove_button">
+        <ImageView
+            android:id="@+id/connection_icon"
+            android:layout_width="@dimen/list_item_icon_size"
+            android:layout_height="@dimen/list_item_icon_size"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_phonelink_erase"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/connection_icon_end_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/connection_icon_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/car_ui_list_item_icon_container_width" />
+        <TextView
+            android:id="@+id/connection_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_text_margin_start"
+            android:layout_marginEnd="@dimen/list_item_text_margin_end"
+            android:layout_marginBottom="@dimen/list_item_content_margin_bottom"
+            android:layout_marginTop="@dimen/list_item_content_margin_top"
+            android:text="@string/connection"
+            android:textAppearance="@style/AssociationTitle"
+            app:layout_constraintStart_toEndOf="@+id/connection_icon_end_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/remove_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/car_ui_list_item_background"
+        android:clickable="true"
+        android:minHeight="@dimen/list_item_height"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/connection_button"
+        app:layout_constraintBottom_toTopOf="@+id/divider">
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="@dimen/list_item_icon_size"
+            android:layout_height="@dimen/list_item_icon_size"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/delete_icon_end_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/delete_icon_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/car_ui_list_item_icon_container_width" />
+        <TextView
+            android:id="@+id/remove_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_text_margin_start"
+            android:layout_marginEnd="@dimen/list_item_text_margin_end"
+            android:layout_marginBottom="@dimen/list_item_content_margin_bottom"
+            android:layout_marginTop="@dimen/list_item_content_margin_top"
+            android:text="@string/forget_title"
+            android:textAppearance="@style/AssociationTitle"
+            app:layout_constraintStart_toEndOf="@+id/delete_icon_end_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/list_item_divider_width"
+        android:layout_marginTop="@dimen/device_detail_divider_margin"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/remove_button"
+        app:layout_constraintBottom_toTopOf="@+id/trusted_device_feature_button"
+        style="@style/DeviceDetailDivider"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trusted_device_feature_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/device_detail_divider_margin"
+        android:background="@drawable/car_ui_list_item_background"
+        android:clickable="true"
+        android:minHeight="@dimen/list_item_height"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintStart_toEndOf="@+id/start_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/end_guideline">
+        <ImageView
+            android:id="@+id/trusted_device_icon"
+            android:layout_width="@dimen/list_item_icon_size"
+            android:layout_height="@dimen/list_item_icon_size"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_lock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/trusted_device_icon_end_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/trusted_device_icon_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/car_ui_list_item_icon_container_width" />
+        <TextView
+            android:id="@+id/trusted_device_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_text_margin_start"
+            android:layout_marginEnd="@dimen/list_item_text_margin_end"
+            android:layout_marginBottom="@dimen/list_item_content_margin_bottom"
+            android:layout_marginTop="@dimen/list_item_content_margin_top"
+            android:text="@string/trusted_device_feature_title"
+            android:textAppearance="@style/AssociationTitle"
+            app:layout_constraintStart_toEndOf="@+id/trusted_device_icon_end_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/end_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/car_ui_margin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

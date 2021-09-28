@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Base test filters for CTS based tests">
+    <!-- Specialization to be able to run CTS inside android-vts10.zip -->
+    <option name="compatibility-build-provider:url-suite-name-override" value="CTS" />
+    <option name="dynamic-config-pusher:dynamic-resource-name" value="vts10-tradefed" />
+    <option name="compatibility:primary-abi-only" value="true" />
+    <option name="compatibility:config-patterns" value="Cts.*\.config" />
+
+    <!-- Explicitly include CTS components listed in CtsConfigLoadingTest.java -->
+    <option name="compatibility:module-metadata-include-filter" key="component" value="abuse" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="art" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="auth" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="auto" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="backup" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="bionic" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="bluetooth" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="camera" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="deqp" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="devtools" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="framework" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="graphics" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="inputmethod" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="libcore" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="location" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="media" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="metrics" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="misc" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="networking" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="neuralnetworks" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="renderscript" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="security" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="statsd" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="systems" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="sysui" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="telecom" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="tv" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="uitoolkit" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="vr" />
+    <option name="compatibility:module-metadata-include-filter" key="component" value="webview" />
+
+    <!-- Exclude vts-hal-adapter tests -->
+    <option name="compatibility:module-metadata-exclude-filter" key="plan" value="vts-hal-adapter" />
+</configuration>

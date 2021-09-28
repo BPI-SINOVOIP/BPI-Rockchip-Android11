@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="List all tests that do not need root access in active test plans.">
+    <include name="mts-cellbroadcast-oem-tests-list" />
+    <include name="mts-conscrypt-tests-list" />
+    <include name="mts-documentsUI-oem-tests-list" />
+    <include name="mts-dnsresolver-tests-list-user" />
+    <include name="mts-ipsec-tests-list" />
+    <include name="mts-media-tests-list" />
+    <include name="mts-network-tests-list" />
+    <include name="mts-neuralnetworks-tests-list" />
+    <include name="mts-permission-tests-list" />
+    <include name="mts-preload-verify-tests-list" />
+    <include name="mts-sdkextensions-tests-list" />
+    <include name="mts-statsd-tests-list-user" />
+    <include name="mts-tethering-tests-list" />
+    <include name="mts-tzdata-tests-list" />
+    <include name="mts-wifi-tests-list" />
+
+    <!-- Exclude Wifi GTS tests that cannot run on user build due to signature mismatch with GMSCore
+         TODO(b/158818152): remove once GTS tests can run on user build  -->
+    <option name="compatibility:exclude-filter" value="GtsGmscoreHostTestCases" />
+    <option name="compatibility:exclude-filter" value="GtsBackupHostTestCases" />
+
+    <!-- Exclude Statsd GTS tests that cannot run on user build due to signature mismatch with
+         GMSCore
+         TODO(b/158818152): remove once GTS tests can run on user build  -->
+    <option name="compatibility:exclude-filter" value="GtsStatsdHostTestCases" />
+</configuration>
+

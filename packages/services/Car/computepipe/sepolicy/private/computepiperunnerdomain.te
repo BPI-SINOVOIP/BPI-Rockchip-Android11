@@ -1,0 +1,9 @@
+###
+### Rules for all domains which are computepipe clients
+###
+
+# Allow binder use
+binder_use(computepipe_runner_domain)
+
+# Allow look up using service manager
+allow computepipe_runner_domain computepipe_router_registration_service:service_manager find;

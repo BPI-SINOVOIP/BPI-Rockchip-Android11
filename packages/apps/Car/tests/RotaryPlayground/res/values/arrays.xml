@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<resources>
+    <!-- List of greetings to display on button clicks -->
+    <string-array name="greetings" translatable="false">
+        <item>Hello!</item>
+        <item>Bonjour!</item>
+        <item>Hola!</item>
+        <item>Zdravstvuyte!</item>
+        <item>Ni Hao!</item>
+        <item>Salve!</item>
+        <item>Konnichiwa!</item>
+        <item>Guten Tag!</item>
+        <item>Ola!</item>
+        <item>Anyoung haseyo!</item>
+        <item>Asalaam alaikum!</item>
+        <item>Goddag!</item>
+        <item>Shikamoo!</item>
+        <item>Goedendag!</item>
+        <item>Yassas!</item>
+        <item>Dzien dobry!</item>
+        <item>Selamat siang!</item>
+        <item>Namaste, Namaskar!</item>
+        <item>Merhaba!</item>
+        <item>Shalom!</item>
+    </string-array>
+
+    <!-- Array used for creating items in the scroll demo. The scroll demos creates 2 types of
+         items: (1) A view with two buttons (fixed height) and (2) a textview with varying
+         height. Items here with '0' indicates the buttons item and items with value > 0 indicates
+         the text item where the integer value is the height of the textview. -->
+    <integer-array name="scroll_item_heights">
+        <item>240</item>
+        <item>0</item>
+        <item>60</item>
+        <item>0</item>
+        <item>60</item>
+        <item>60</item>
+        <item>0</item>
+        <item>120</item>
+        <item>0</item>
+        <item>120</item>
+        <item>120</item>
+        <item>0</item>
+        <item>180</item>
+        <item>0</item>
+        <item>180</item>
+        <item>180</item>
+        <item>0</item>
+        <item>240</item>
+        <item>0</item>
+        <item>240</item>
+        <item>240</item>
+        <item>240</item>
+        <item>0</item>
+        <item>240</item>
+        <item>240</item>
+        <item>240</item>
+    </integer-array>
+</resources>

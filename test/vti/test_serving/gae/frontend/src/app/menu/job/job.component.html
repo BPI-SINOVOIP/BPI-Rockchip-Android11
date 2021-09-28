@@ -1,0 +1,192 @@
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<div class="statistics-table" [ngStyle]="{'opacity': (loading) ? 0.2 : 1 }">
+  <mat-table [dataSource]="statDataSource">
+    <ng-container matColumnDef="hours">
+      <mat-header-cell *matHeaderCellDef>Stats</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.hours}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+      <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.created}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="completed">
+      <mat-header-cell *matHeaderCellDef>Completed</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.completed}} ({{stat.created > 0 ? (stat.completed/stat.created*100 | number:'1.0-2') : 0}})% </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="running">
+      <mat-header-cell *matHeaderCellDef>Running/Ready</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.running}} ({{stat.created > 0 ? (stat.running/stat.created*100 | number:'1.0-2') : 0}})% </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bootup_err">
+      <mat-header-cell *matHeaderCellDef>Boot-up Error</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.bootup_err}} ({{stat.created > 0 ? (stat.bootup_err/stat.created*100 | number:'1.0-2') : 0}})% </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="infra_err">
+      <mat-header-cell *matHeaderCellDef>Infra Error</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.infra_err}} ({{stat.created > 0 ? (stat.infra_err/stat.created*100 | number:'1.0-2') : 0}})% </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expired">
+      <mat-header-cell *matHeaderCellDef>Expired</mat-header-cell>
+      <mat-cell *matCellDef="let stat"> {{stat.expired}} ({{stat.created > 0 ? (stat.expired/stat.created*100 | number:'1.0-2') : 0}})% </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="statColumnTitles"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: statColumnTitles;"></mat-row>
+  </mat-table>
+</div>
+<div class="entity-filter">
+  <app-filter (applyFilters)="applyFilters($event)" [disabled]="loading"></app-filter>
+</div>
+<div class="mat-elevation-z2 entity-table" [ngStyle]="{'opacity': (loading) ? 0.2 : 1 }">
+  <mat-table [dataSource]="dataSource" matSort matSortActive="timestamp" matSortDirection="desc">
+  <!-- Index Column -->
+    <ng-container matColumnDef="_index">
+      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1+pageSize*pageIndex}} </mat-cell>
+    </ng-container>
+
+    <!-- Test Type Column -->
+    <ng-container matColumnDef="test_type">
+      <mat-header-cell *matHeaderCellDef>Test Type</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{getTestTypeText(job.test_type)}} </mat-cell>
+    </ng-container>
+
+    <!-- Test Name Column -->
+    <ng-container matColumnDef="test_name">
+      <mat-header-cell *matHeaderCellDef>Test Name</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.test_name}} </mat-cell>
+    </ng-container>
+
+    <!-- Host Name Column -->
+    <ng-container matColumnDef="hostname">
+      <mat-header-cell *matHeaderCellDef>Hostname</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.hostname}} </mat-cell>
+    </ng-container>
+
+    <!-- Device Column -->
+    <ng-container matColumnDef="device">
+      <mat-header-cell *matHeaderCellDef>Device</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.device}} </mat-cell>
+    </ng-container>
+
+    <!-- Serial Column -->
+    <ng-container matColumnDef="serial">
+      <mat-header-cell *matHeaderCellDef>Serial</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.serial ? job.serial.join('\n') : ""}} </mat-cell>
+    </ng-container>
+
+    <!-- Device Branch Column -->
+    <ng-container matColumnDef="manifest_branch">
+      <mat-header-cell *matHeaderCellDef>Device Branch</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.manifest_branch}} </mat-cell>
+    </ng-container>
+
+    <!-- Device Build Target Column -->
+    <ng-container matColumnDef="build_target">
+      <mat-header-cell *matHeaderCellDef>Device Build Target</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.build_target}} </mat-cell>
+    </ng-container>
+
+    <!-- Device Build ID Column -->
+    <ng-container matColumnDef="build_id">
+      <mat-header-cell *matHeaderCellDef>Device Build ID</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.build_id}} </mat-cell>
+    </ng-container>
+
+    <!-- GSI Branch Column -->
+    <ng-container matColumnDef="gsi_branch">
+      <mat-header-cell *matHeaderCellDef>GSI Branch</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.gsi_branch}} </mat-cell>
+    </ng-container>
+
+    <!-- GSI Build Target Column -->
+    <ng-container matColumnDef="gsi_build_target">
+      <mat-header-cell *matHeaderCellDef>GSI Build Target</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.gsi_build_target}} </mat-cell>
+    </ng-container>
+
+    <!-- Device Build ID Column -->
+    <ng-container matColumnDef="gsi_build_id">
+      <mat-header-cell *matHeaderCellDef>GSI Build ID</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.gsi_build_id}} </mat-cell>
+    </ng-container>
+
+    <!-- Test Branch Column -->
+    <ng-container matColumnDef="test_branch">
+      <mat-header-cell *matHeaderCellDef>Test Branch</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.test_branch}} </mat-cell>
+    </ng-container>
+
+    <!-- Test Build Target Column -->
+    <ng-container matColumnDef="test_build_target">
+      <mat-header-cell *matHeaderCellDef>Test Build Target</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.test_build_target}} </mat-cell>
+    </ng-container>
+
+    <!-- Test Build ID Column -->
+    <ng-container matColumnDef="test_build_id">
+      <mat-header-cell *matHeaderCellDef>Test Build ID</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{job.test_build_id}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{jobStatusEnum[job.status]}} </mat-cell>
+    </ng-container>
+
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header disabled>Timestamp</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{getRelativeTime(job.timestamp)}} </mat-cell>
+    </ng-container>
+
+    <!-- Heartbeat stamp Column -->
+    <ng-container matColumnDef="heartbeat_stamp">
+      <mat-header-cell *matHeaderCellDef>Heartbeat</mat-header-cell>
+      <mat-cell *matCellDef="let job"> {{getRelativeTime(job.heartbeat_stamp)}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnTitles"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnTitles;"
+             matRipple
+             class="element-row"
+             [appCdkDetailRow]="row" [appCdkDetailRowTpl]="job_detail"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="count"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [pageIndex]="pageIndex"
+                 (page)="pageEvent = onPageEvent($event)">
+  </mat-paginator>
+</div>
+<ng-template #job_detail let-job>
+  <div class="mat-row div-expandable" [@detailExpand] style="overflow: hidden">
+    <a href="{{job.infra_log_url}}" download><button mat-raised-button [disabled]="(!job.infra_log_url)">Download Infra Log</button></a>
+    <button mat-raised-button (click)="onShowDetailsClicked(job)">
+      Show Details
+    </button>
+  </div>
+</ng-template>
+<div class="loading-spinner" *ngIf="loading">
+  <mat-spinner color="primary"></mat-spinner>
+</div>

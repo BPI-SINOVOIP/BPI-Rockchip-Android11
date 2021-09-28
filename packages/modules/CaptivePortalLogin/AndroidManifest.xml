@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright (C) 2014 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.captiveportallogin"
+    android:versionCode="300000000"
+    android:versionName="2019-09">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_DEVICE_CONFIG" />
+    <uses-permission android:name="android.permission.MAINLINE_NETWORK_STACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- The login activity can start downloads, and in cases where the download is an APK,
+    tapping on the notification to open the downloaded file will cause the package installer to
+    start and verify this permission.
+    If this permission is requested, the package installer will prompt the user to grant the
+    permission in Settings. If the user has granted the permission, they will be able to install the
+    package.
+    Not requesting this permission would cause the package manager to silently ignore the
+    notification tap.
+    Applications may be offered on portals such as airline wifi, in which case installing the app
+    from the portal can be useful. -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application android:label="@string/app_name"
+                 android:icon="@drawable/app_icon"
+                 android:usesCleartextTraffic="true"
+                 android:supportsRtl="true" >
+        <activity
+            android:name="com.android.captiveportallogin.CaptivePortalLoginActivity"
+            android:label="@string/action_bar_label"
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+            <intent-filter>
+                <action android:name="android.net.conn.CAPTIVE_PORTAL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <service android:name=".DownloadService" android:exported="false" />
+    </application>
+</manifest>

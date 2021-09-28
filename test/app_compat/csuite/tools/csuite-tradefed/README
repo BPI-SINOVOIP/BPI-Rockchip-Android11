@@ -1,0 +1,45 @@
+C-Suite Trade Federation
+---------------------------
+
+App Compatibility Test Suite Trade Federation, csuite-tradefed for short, is built on
+top of the Android Trade Federation test harness to test app compatibility.
+
+Configuring csuite-tradefed
+---------------------------
+
+Ensure 'adb' is in your current PATH. adb can be found in the
+Android SDK available from http://developer.android.com
+
+Example:
+  PATH=$PATH:/home/myuser/android-sdk-linux_x86/platform-tools
+
+And ensure that the device is visible via 'adb devices'
+
+Using csuite-tradefed
+---------------------------
+
+To run a test plan on a single device:
+
+1. Make sure you have at least one device connected
+2. Launch the csuite-tradefed console by running the 'csuite-tradefed'. If you
+are working from the Android source tree and have run 'm csuite',
+the script can be found at
+  out/host/linux-x86/csuite/android-csuite/tools/csuite-tradefed
+
+C-Suite Tradefed Development
+---------------------------
+
+See http://source.android.com for instructions on obtaining the Android
+platform source code and setting up a build environment.
+
+The source for the tradefed framework can be found on the 'tradefed' branch.
+
+Perform these steps to build and run csuite from the development environment:
+
+cd <path to android source root>
+make csuite
+csuite-tradefed
+run <plan-name>
+
+More documentation and details on using and extending trade federation will
+be forthcoming in the near future.

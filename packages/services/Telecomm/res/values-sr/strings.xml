@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2013 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="telecommAppLabel" product="default" msgid="3077225713817780583">"Управљање позивима"</string>
+    <string name="userCallActivityLabel" product="default" msgid="3605391260292846248">"Телефон"</string>
+    <string name="unknown" msgid="6993977514360123431">"Непознато"</string>
+    <string name="notification_missedCallTitle" msgid="5060387047205532974">"Пропуштен позив"</string>
+    <string name="notification_missedWorkCallTitle" msgid="6965463282259034953">"Пропуштен пословни позив"</string>
+    <string name="notification_missedCallsTitle" msgid="3910479625507893809">"Пропуштени позиви"</string>
+    <string name="notification_missedCallsMsg" msgid="5055782736170916682">"Број пропуштених позива: <xliff:g id="NUM_MISSED_CALLS">%s</xliff:g>"</string>
+    <string name="notification_missedCallTicker" msgid="6731461957487087769">"Пропуштен позив од: <xliff:g id="MISSED_CALL_FROM">%s</xliff:g>"</string>
+    <string name="notification_missedCall_call_back" msgid="7900333283939789732">"Узврати позив"</string>
+    <string name="notification_missedCall_message" msgid="4054698824390076431">"Порука"</string>
+    <string name="notification_disconnectedCall_title" msgid="1790131923692416928">"Позив је прекинут"</string>
+    <string name="notification_disconnectedCall_body" msgid="600491714584417536">"Позив са <xliff:g id="CALLER">%s</xliff:g> је прекинут јер се упућује хитни позив."</string>
+    <string name="notification_disconnectedCall_generic_body" msgid="5282765206349184853">"Позив је прекинут јер се упућује хитни позив."</string>
+    <string name="notification_audioProcessing_title" msgid="1619035039880584575">"Позив у позадини"</string>
+    <string name="notification_audioProcessing_body" msgid="6397005913770420388">"Апликација <xliff:g id="AUDIO_PROCESSING_APP_NAME">%s</xliff:g> је упутила позив у позадини. Она може да приступа звуку и пушта га током позива."</string>
+    <string name="notification_incallservice_not_responding_title" msgid="5347557574288598548">"<xliff:g id="IN_CALL_SERVICE_APP_NAME">%s</xliff:g> више не реагује"</string>
+    <string name="notification_incallservice_not_responding_body" msgid="9209308270131968623">"Позив је користио апликацију за телефонирање коју сте добили уз уређај"</string>
+    <string name="accessibility_call_muted" msgid="2968461092554300779">"Звук позива је искључен."</string>
+    <string name="accessibility_speakerphone_enabled" msgid="555386652061614267">"Спикерфон је омогућен."</string>
+    <string name="respond_via_sms_canned_response_1" msgid="6332561460870382561">"У гужви сам. О чему се ради?"</string>
+    <string name="respond_via_sms_canned_response_2" msgid="2052951316129952406">"Позваћу те ускоро."</string>
+    <string name="respond_via_sms_canned_response_3" msgid="6656147963478092035">"Позваћу те касније."</string>
+    <string name="respond_via_sms_canned_response_4" msgid="9141132488345561047">"У гужви сам. Зовеш ме касније?"</string>
+    <string name="respond_via_sms_setting_title" msgid="4762275482898830160">"Брзи одговори"</string>
+    <string name="respond_via_sms_setting_title_2" msgid="4914853536609553457">"Измена брзих одговора"</string>
+    <string name="respond_via_sms_setting_summary" msgid="8054571501085436868"></string>
+    <string name="respond_via_sms_edittext_dialog_title" msgid="6579353156073272157">"Брзи одговор"</string>
+    <string name="respond_via_sms_confirmation_format" msgid="2932395476561267842">"Порука је послата на број <xliff:g id="PHONE_NUMBER">%s</xliff:g>."</string>
+    <string name="respond_via_sms_failure_format" msgid="5198680980054596391">"Слање поруке на <xliff:g id="PHONE_NUMBER">%s</xliff:g> није успело."</string>
+    <string name="enable_account_preference_title" msgid="6949224486748457976">"Налози за позивање"</string>
+    <string name="outgoing_call_not_allowed_user_restriction" msgid="3424338207838851646">"Дозвољени су само хитни позиви."</string>
+    <string name="outgoing_call_not_allowed_no_permission" msgid="8590468836581488679">"Ова апликација не може да позива без дозволе за телефонирање."</string>
+    <string name="outgoing_call_error_no_phone_number_supplied" msgid="7665135102566099778">"Да бисте упутили позив, унесите важећи број."</string>
+    <string name="duplicate_video_call_not_allowed" msgid="5754746140185781159">"Тренутно није могуће додати позив."</string>
+    <string name="no_vm_number" msgid="2179959110602180844">"Недостаје број за говорну пошту"</string>
+    <string name="no_vm_number_msg" msgid="1339245731058529388">"Није ускладиштен ниједан број говорне поште на SIM картици."</string>
+    <string name="add_vm_number_str" msgid="5179510133063168998">"Додај број"</string>
+    <string name="change_default_dialer_dialog_title" msgid="5861469279421508060">"Желите ли да <xliff:g id="NEW_APP">%s</xliff:g> постане подразумевана апликација Телефон?"</string>
+    <string name="change_default_dialer_dialog_affirmative" msgid="8604665314757739550">"Постави као подразумевано"</string>
+    <string name="change_default_dialer_dialog_negative" msgid="8648669840052697821">"Откажи"</string>
+    <string name="change_default_dialer_warning_message" msgid="8461963987376916114">"<xliff:g id="NEW_APP">%s</xliff:g> ће моћи да упућује позиве и контролише све њихове аспекте. Апликацију подесите као подразумевану за телефонирање само ако је сматрате поузданом."</string>
+    <string name="change_default_call_screening_dialog_title" msgid="5365787219927262408">"Подесити <xliff:g id="NEW_APP">%s</xliff:g> као подраз. апликацију за управљање позивима?"</string>
+    <string name="change_default_call_screening_warning_message_for_disable_old_app" msgid="2039830033533243164">"<xliff:g id="OLD_APP">%s</xliff:g> више неће моћи да управља долазним позивима."</string>
+    <string name="change_default_call_screening_warning_message" msgid="9020537562292754269">"<xliff:g id="NEW_APP">%s</xliff:g> ће моћи да види информације о позиваоцима који вам нису у контактима и да блокира њихове позиве. Апликацију подесите као подразумевану за управљање долазним позивима само ако је сматрате поузданом."</string>
+    <string name="change_default_call_screening_dialog_affirmative" msgid="7162433828280058647">"Подеси као подразумевану"</string>
+    <string name="change_default_call_screening_dialog_negative" msgid="1839266125623106342">"Откажи"</string>
+    <string name="blocked_numbers" msgid="8322134197039865180">"Блокирани бројеви"</string>
+    <string name="blocked_numbers_msg" msgid="2797422132329662697">"Нећете примати позиве ни SMS-ове са блокираних бројева."</string>
+    <string name="block_number" msgid="3784343046852802722">"Додајте број"</string>
+    <string name="unblock_dialog_body" msgid="2723393535797217261">"Желите ли да одблокирате <xliff:g id="NUMBER_TO_BLOCK">%1$s</xliff:g>?"</string>
+    <string name="unblock_button" msgid="8732021675729981781">"Одблокирај"</string>
+    <string name="add_blocked_dialog_body" msgid="8599974422407139255">"Блокирајте позиве и SMS-ове од"</string>
+    <string name="add_blocked_number_hint" msgid="8769422085658041097">"Број телефона"</string>
+    <string name="block_button" msgid="485080149164258770">"Блокирај"</string>
+    <string name="non_primary_user" msgid="315564589279622098">"Само власник уређаја може да прегледа блокиране бројеве и управља њима."</string>
+    <string name="delete_icon_description" msgid="5335959254954774373">"Одблокирајте"</string>
+    <string name="blocked_numbers_butter_bar_title" msgid="582982373755950791">"Блокирање је привремено искључено"</string>
+    <string name="blocked_numbers_butter_bar_body" msgid="1261213114919301485">"Кад позовете број хитне службе или на тај број пошаљете SMS, блокирање се искључује да би хитне службе могле да вас контактирају."</string>
+    <string name="blocked_numbers_butter_bar_button" msgid="2704456308072489793">"Поново омогући"</string>
+    <string name="blocked_numbers_number_blocked_message" msgid="4314736791180919167">"<xliff:g id="BLOCKED_NUMBER">%1$s</xliff:g> је блокиран"</string>
+    <string name="blocked_numbers_number_unblocked_message" msgid="2933071624674945601">"<xliff:g id="UNBLOCKED_NUMBER">%1$s</xliff:g> је одблокиран"</string>
+    <string name="blocked_numbers_block_emergency_number_message" msgid="4198550501500893890">"Није могуће блокирати број хитне службе."</string>
+    <string name="blocked_numbers_number_already_blocked_message" msgid="2301270825735665458">"<xliff:g id="BLOCKED_NUMBER">%1$s</xliff:g> је већ блокиран."</string>
+    <string name="toast_personal_call_msg" msgid="5817631570381795610">"Коришћење бројчаника из личног профила за упућивање позива"</string>
+    <string name="notification_incoming_call" msgid="1233481138362230894">"<xliff:g id="CALL_VIA">%1$s</xliff:g> позив од <xliff:g id="CALL_FROM">%2$s</xliff:g>"</string>
+    <string name="notification_incoming_video_call" msgid="5795968314037063900">"<xliff:g id="CALL_VIA">%1$s</xliff:g> видео позив од <xliff:g id="CALL_FROM">%2$s</xliff:g>"</string>
+    <string name="answering_ends_other_call" msgid="8653544281903986641">"Ако одговорите, завршићете <xliff:g id="CALL_VIA">%1$s</xliff:g> позив"</string>
+    <string name="answering_ends_other_calls" msgid="3702302838456922535">"Ако одговорите, завршићете <xliff:g id="CALL_VIA">%1$s</xliff:g> позиве"</string>
+    <string name="answering_ends_other_video_call" msgid="8572022039304239958">"Ако одговорите, завршићете <xliff:g id="CALL_VIA">%1$s</xliff:g> видео позив"</string>
+    <string name="answering_ends_other_managed_call" msgid="4031778317409881805">"Ако одговорите, завршићете позив који је у току"</string>
+    <string name="answering_ends_other_managed_calls" msgid="3974069768615307659">"Ако одговорите, завршићете позиве који су у току"</string>
+    <string name="answering_ends_other_managed_video_call" msgid="1988508241432031327">"Ако одговорите, завршићете видео позив који је у току"</string>
+    <string name="answer_incoming_call" msgid="2045888814782215326">"Одговори"</string>
+    <string name="decline_incoming_call" msgid="922147089348451310">"Одбиј"</string>
+    <string name="cant_call_due_to_no_supported_service" msgid="1635626384149947077">"Упућивање позива није могуће јер немате ниједан налог за позивање који подржава позиве овог типа."</string>
+    <string name="cant_call_due_to_ongoing_call" msgid="8004235328451385493">"Не можете да упутите позив због <xliff:g id="OTHER_CALL">%1$s</xliff:g> позива."</string>
+    <string name="cant_call_due_to_ongoing_calls" msgid="6379163795277824868">"Не можете да упутите позив због <xliff:g id="OTHER_CALL">%1$s</xliff:g> позива."</string>
+    <string name="cant_call_due_to_ongoing_unknown_call" msgid="8243532328969433172">"Не можете да упутите позив због позива у другој апликацији."</string>
+    <string name="notification_channel_incoming_call" msgid="5245550964701715662">"Долазни позиви"</string>
+    <string name="notification_channel_missed_call" msgid="7168893015283909012">"Пропуштени позиви"</string>
+    <string name="notification_channel_call_blocking" msgid="2028807677868598710">"Блокирање позива"</string>
+    <string name="notification_channel_background_calls" msgid="7785659903711350506">"Позиви у позадини"</string>
+    <string name="notification_channel_disconnected_calls" msgid="8228636543997645757">"Прекинути позиви"</string>
+    <string name="notification_channel_in_call_service_crash" msgid="7313237519166984267">"Апликације за телефонирање које су отказале"</string>
+    <string name="alert_outgoing_call" msgid="5319895109298927431">"Ако упутите овај позив, завршићете <xliff:g id="OTHER_APP">%1$s</xliff:g> позив."</string>
+    <string name="alert_redirect_outgoing_call_or_not" msgid="665409645789521636">"Изаберите како желите да упутите овај позив"</string>
+    <string name="alert_place_outgoing_call_with_redirection" msgid="5221065030959024121">"Преусмери позив помоћу: <xliff:g id="OTHER_APP">%1$s</xliff:g>"</string>
+    <string name="alert_place_unredirect_outgoing_call" msgid="2467608535225764006">"Позови помоћу мог броја телефона"</string>
+    <string name="alert_redirect_outgoing_call_timeout" msgid="5568101425637373060">"<xliff:g id="OTHER_APP">%1$s</xliff:g> не може да упути позив. Пробајте помоћу друге апликације за преусмеравање позива или затражите помоћ од програмера."</string>
+    <string name="phone_settings_call_blocking_txt" msgid="7311523114822507178">"Блокирање позива"</string>
+    <string name="phone_settings_number_not_in_contact_txt" msgid="2602249106007265757">"Бројеви који нису у контактима"</string>
+    <string name="phone_settings_number_not_in_contact_summary_txt" msgid="963327038085718969">"Блокирајте бројеве који вам нису у контактима"</string>
+    <string name="phone_settings_private_num_txt" msgid="6339272760338475619">"Скривени бројеви"</string>
+    <string name="phone_settings_private_num_summary_txt" msgid="6755758240544021037">"Блокирајте позиваоце који скривају број"</string>
+    <string name="phone_settings_payphone_txt" msgid="5003987966052543965">"Телефонска говорница"</string>
+    <string name="phone_settings_payphone_summary_txt" msgid="3936631076065563665">"Блокирајте позиве са телефонских говорница"</string>
+    <string name="phone_settings_unknown_txt" msgid="3577926178354772728">"Непознати бројеви"</string>
+    <string name="phone_settings_unknown_summary_txt" msgid="5446657192535779645">"Блокирајте позиве неидентификованих позивалаца"</string>
+    <string name="phone_strings_call_blocking_turned_off_notification_title_txt" msgid="2895809176537908791">"Блокирање позива"</string>
+    <string name="phone_strings_call_blocking_turned_off_notification_text_txt" msgid="1713632946174016619">"Блокирање позива је онемогућено"</string>
+    <string name="phone_strings_emergency_call_made_dialog_title_txt" msgid="6629412508584507377">"Упућен је хитни позив"</string>
+    <string name="phone_strings_emergency_call_made_dialog_call_blocking_text_txt" msgid="3140411733995271126">"Блокирање позива је онемогућено да би хитне службе могле да вас контактирају."</string>
+    <string name="developer_title" msgid="9146088855661672353">"Мени за програмере Telecom-а"</string>
+    <string name="toast_emergency_can_not_pull_call" msgid="9074229465338410869">"За време хитног позива није могуће преузимати друге позиве."</string>
+</resources>

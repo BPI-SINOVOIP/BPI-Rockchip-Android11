@@ -1,0 +1,9 @@
+# Car watchdog server
+type carwatchdogd, domain;
+
+binder_call(carwatchdogd, carwatchdogclient_domain)
+binder_call(carwatchdogclient_domain, carwatchdogd)
+
+# Configuration for system_server
+allow system_server carwatchdogd_service:service_manager find;
+binder_call(carwatchdogd, system_server)

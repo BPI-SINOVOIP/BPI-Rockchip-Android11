@@ -1,0 +1,55 @@
+<!--
+ Copyright 2019 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight="@dimen/key_height"
+    android:keyWidth="@dimen/key_width"
+    android:verticalGap="@dimen/keyboard_vertical_gap"
+    android:horizontalGap="@dimen/keyboard_horizontal_gap" >
+
+    <Row>
+        <Key
+            android:codes="111"
+            android:keyLabel="o" />
+        <Key
+            android:codes="242"
+            android:keyLabel="ò" />
+        <Key
+            android:codes="243"
+            android:keyLabel="ó" />
+        <Key
+            android:codes="244"
+            android:keyLabel="ô" />
+        <Key
+            android:codes="245"
+            android:keyLabel="õ" />
+        <Key
+            android:codes="246"
+            android:keyLabel="ö" />
+        <Key
+            android:codes="248"
+            android:keyLabel="ø" />
+        <Key
+            android:codes="333"
+            android:keyLabel="ō" />
+        <Key
+            android:codes="339"
+            android:keyLabel="œ" />
+        <Key
+            android:codes="417"
+            android:keyLabel="ơ" />
+    </Row>
+</Keyboard>

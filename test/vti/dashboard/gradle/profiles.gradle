@@ -1,0 +1,29 @@
+// ----
+// How to use Profiles with -P arguments
+// ----
+//
+// Run gradle tasks with the -P argument to utilize a profile.
+//
+
+def prodProfiles = 'prod'
+def stagingProfiles = 'staging'
+def defaultProfiles = 'default'
+def propertyDrivenProfiles
+
+if (project.hasProperty('prod')) {
+    // Used for production environment
+    propertyDrivenProfiles = prodProfiles
+    apply from: rootProject.file('gradle/profile_prod.gradle');
+
+} else if (project.hasProperty('staging')) {
+    // Used for local development
+    propertyDrivenProfiles = stagingProfiles
+    apply from: rootProject.file('gradle/profile_staging.gradle');
+
+} else {
+    // Default when no profile property is specified, used for testing
+    propertyDrivenProfiles = defaultProfiles
+    apply from: rootProject.file('gradle/profile_default.gradle');
+}
+println 'Using profile: "' + propertyDrivenProfiles + '" for ' + project.getName()
+

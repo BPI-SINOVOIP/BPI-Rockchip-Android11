@@ -1,0 +1,66 @@
+// Copyright 2011 The Android Open Source Project
+java_defaults {
+    name: "CellBroadcastCommon",
+    min_sdk_version: "29",
+    sdk_version: "system_current",
+    privileged: true,
+    srcs: [
+      "src/**/*.java",
+      ":framework-annotations",
+      ":cellbroadcast-constants-shared-srcs",
+      ":statslog-cellbroadcast-java-gen",
+   ],
+    static_libs: [
+        "androidx.legacy_legacy-support-v4",
+        "androidx.legacy_legacy-support-v13",
+        "androidx.recyclerview_recyclerview",
+        "androidx.preference_preference",
+        "androidx.appcompat_appcompat",
+        "androidx.legacy_legacy-preference-v14",
+    ],
+    optimize: {
+       proguard_flags_files: ["proguard.flags"],
+    },
+    resource_dirs: ["res"],
+    plugins: ["java_api_finder"],
+}
+
+android_app {
+    name: "CellBroadcastApp",
+    defaults: ["CellBroadcastCommon"],
+    certificate: "networkstack",
+    aaptflags: ["--custom-package com.android.cellbroadcastreceiver"],
+    manifest: "AndroidManifest.xml",
+    apex_available: ["com.android.cellbroadcast"],
+}
+
+// filegroup used to include source into unit tests
+filegroup {
+    name: "cellbroadcastreceiver-sources",
+    srcs: [
+      "src/**/*.java",
+      ":framework-annotations",
+      ":cellbroadcast-constants-shared-srcs",
+    ],
+}
+
+android_app {
+     name: "CellBroadcastAppPlatform",
+     defaults: ["CellBroadcastCommon"],
+     certificate: "platform",
+     // CellBroadcastAppPlatform is a replacement for com.android.cellbroadcast apex which consists
+     // of CellBroadcastApp
+     overrides: ["com.android.cellbroadcast", "CellBroadcastLegacyApp"],
+     manifest: "AndroidManifest_Platform.xml",
+     system_ext_specific: true,
+     privileged: true,
+     required: ["privapp_whitelist_com.android.cellbroadcastreceiver"],
+}
+
+// source file shared with legacy cellbroadcast app
+filegroup {
+    name: "cellbroadcast-database-sources",
+    srcs: [
+        "src/com/android/cellbroadcastreceiver/CellBroadcastDatabaseHelper.java",
+    ],
+}

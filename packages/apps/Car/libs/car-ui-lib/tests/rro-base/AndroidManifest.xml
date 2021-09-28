@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2019 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<!--
+    Example to use Runtime Resource Overlay(RRO).
+
+    Step 1: Create a new project with AndroidManifest.xml file as shown below.
+        "{{TARGET_PACKAGE_NAME}}" will point to the package which will be overridden by new values.
+        "{{RRO_PACKAGE_NAME}}" will be the current package name of this apk.
+    Step 2: Create new values in the current package that will override the values in the target
+        apk. Path and resource name should be same as the target apk in order to override.
+        Look at car-ui-lib/res to see a list of resources available for customization.
+    Step 3: Update Android.mk variables as needed (see details at generate-rros.mk):
+        CAR_UI_RRO_SET_NAME: general name of this overlay, e.g: base.
+        CAR_UI_RESOURCE_DIR: location of the resources folder, e.g.: $(LOCAL_PATH)/res
+        CAR_UI_RRO_TARGETS: list of package names to overlay
+    Step 4: Build and generate the apk package for this project. Resulting RROs will be located at
+        $OUT/vendor/overlay. A full flashing of a device will install all of them, but they can be
+        installed individually (see below).
+    Step 5: Push the package to "/vendor/overlay/" and reboot. Follow the commands below.
+        # adb root;
+        # adb remount;
+        # adb push <path-to-apk> /vendor/overlay/;
+        Alternatively, to side-load a change, just install the APK as normal (note: the apk
+        will end up at /data/app instead of /vendor/overlay).
+        # adb install -r <path-to-apk>
+    Step 6: Apply by overlay command
+        # "adb shell cmd overlay list;" Output of the same will be as shown below.
+           com.android.car.ui.paintbooth
+           [ ] com.android.car.ui.paintbooth.base.rro
+        # adb shell cmd overlay enable (double-hyphen)user 0 com.android.car.ui.paintbooth.rro
+           to enable the RRO
+        # adb shell cmd overlay disable (double-hyphen)user 0 com.android.car.ui.paintbooth.rro
+           to disable RRO
+        (Be careful to use the right user id, depending on the targeted app)
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="{{RRO_PACKAGE_NAME}}">
+    <application android:hasCode="false"/>
+    <overlay android:priority="10"
+             android:targetPackage="{{TARGET_PACKAGE_NAME}}"/>
+</manifest>

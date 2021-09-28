@@ -1,0 +1,17 @@
+//############################################
+// TvSettings Robolectric test target. #
+//############################################
+
+android_robolectric_test {
+    name: "TvSettingsRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    instrumentation_for: "TvSettings",
+
+    test_options: {
+        timeout: 36000,
+    },
+}

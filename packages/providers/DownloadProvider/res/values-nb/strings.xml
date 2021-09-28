@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Nedlaster"</string>
+    <string name="storage_description" msgid="169690279447532621">"Nedlastinger"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Bruke nedlasting."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Gir appen adgang til nedlastingsbehandlingen og bruke den til å laste ned filer. Skadelig programvare kan bruke dette til å forstyrre nedlastinger og få tilgang til privat informasjon."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Avansert nedlastingsfunksjonalitet."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Gir appen adgang til avanserte funksjoner i nedlastingsbehandlingen. Skadelig programvare kan bruke dette til å forstyrre nedlastinger og få tilgang til privat informasjon."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Sende nedlastingsvarslinger"</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Gir appen tillatelse til å sende varslinger om fullførte nedlastinger. Skadelig programvare kan bruke dette til å forstyrre andre apper som laster ned filer."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Reservere lagringsplass i nedlastingsbufferen"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Gir appen tillatelse til å laste ned filer til nedlastingsbufferen, slik at de ikke slettes automatisk når nedlastingsbehandlingen trenger mer lagringsplass."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"laste ned filer uten varsling"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Gir appen tillatelse til å laste ned filer via nedlastingsbehandlingen uten at brukeren varsles."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Se alle systemnedlastinger"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Gir appen tillatelse til å se og endre alle nedlastinger uansett hvilken systemapp som har startet nedlastingene."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Uten navn&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"Nedlasting fullført."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"Nedlasting mislyktes."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Krever Wi-Fi pga. størr."</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Satt på pause i bakgr."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"Nedlastingen er for stor for operatørnettverket"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"Du må bruke Wi-Fi for å fullføre denne nedlastingen på <xliff:g id="SIZE">%1$s </xliff:g>. \n\nTrykk <xliff:g id="QUEUE_TEXT">%2$s </xliff:g> for å starte denne nedlastingen neste gang du er koblet til et Wi-Fi-nettverk."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"Vil du sette nedlastingen i kø til senere?"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"Starter du denne nedlastingen på <xliff:g id="SIZE">%1$s </xliff:g> nå, kan det redusere batteriets levetid eller gi for høy bruk av datatilkoblingen. Abonnementet ditt avgjør kostnadene.\n\nTrykk<xliff:g id="QUEUE_TEXT">%2$s</xliff:g> for å starte nedlastingen neste gang du er koblet til Wi-Fi."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Kø"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Avbryt"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"Start nå"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> filer lastes ned</item>
+      <item quantity="one">1 fil lastes ned</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> filer venter</item>
+      <item quantity="one">1 fil venter</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"<xliff:g id="DURATION">%s</xliff:g> gjenstår"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"Kan ikke åpne filen"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Nedlastinger"</string>
+    <string name="download_queued" msgid="3383844741769045371">"I kø"</string>
+    <string name="download_running" msgid="774654178925442490">"Pågår"</string>
+    <string name="download_error" msgid="1857737890005386798">"Mislyktes"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Pågår – <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

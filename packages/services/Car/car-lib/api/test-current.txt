@@ -1,0 +1,77 @@
+// Signature format: 2.0
+package android.car {
+
+  public final class Car {
+    field public static final String CAR_USER_SERVICE = "car_user_service";
+  }
+
+  public final class CarAppFocusManager {
+    method public int[] getActiveAppTypes();
+  }
+
+  public class VehiclePropertyType {
+    field public static final int BOOLEAN = 2097152; // 0x200000
+    field public static final int BYTES = 7340032; // 0x700000
+    field public static final int FLOAT = 6291456; // 0x600000
+    field public static final int FLOAT_VEC = 6356992; // 0x610000
+    field public static final int INT32 = 4194304; // 0x400000
+    field public static final int INT32_VEC = 4259840; // 0x410000
+    field public static final int INT64 = 5242880; // 0x500000
+    field public static final int INT64_VEC = 5308416; // 0x510000
+    field public static final int MASK = 16711680; // 0xff0000
+    field public static final int MIXED = 14680064; // 0xe00000
+    field public static final int STRING = 1048576; // 0x100000
+  }
+
+}
+
+package android.car.content.pm {
+
+  public final class CarPackageManager {
+    method public void setEnableActivityBlocking(boolean);
+  }
+
+}
+
+package android.car.drivingstate {
+
+  public final class CarDrivingStateManager {
+    method public void injectDrivingState(int);
+  }
+
+}
+
+package android.car.media {
+
+  public final class CarAudioManager {
+    method public boolean isDynamicRoutingEnabled();
+  }
+
+}
+
+package android.car.user {
+
+  public final class CarUserManager {
+    method @RequiresPermission(anyOf={android.Manifest.permission.INTERACT_ACROSS_USERS, android.Manifest.permission.INTERACT_ACROSS_USERS_FULL}) public void addListener(@NonNull java.util.concurrent.Executor, @NonNull android.car.user.CarUserManager.UserLifecycleListener);
+    method public static String lifecycleEventTypeToString(int);
+    method @RequiresPermission(anyOf={android.Manifest.permission.INTERACT_ACROSS_USERS, android.Manifest.permission.INTERACT_ACROSS_USERS_FULL}) public void removeListener(@NonNull android.car.user.CarUserManager.UserLifecycleListener);
+    field public static final int USER_LIFECYCLE_EVENT_TYPE_STARTING = 1; // 0x1
+    field public static final int USER_LIFECYCLE_EVENT_TYPE_STOPPED = 6; // 0x6
+    field public static final int USER_LIFECYCLE_EVENT_TYPE_STOPPING = 5; // 0x5
+    field public static final int USER_LIFECYCLE_EVENT_TYPE_SWITCHING = 2; // 0x2
+    field public static final int USER_LIFECYCLE_EVENT_TYPE_UNLOCKED = 4; // 0x4
+    field public static final int USER_LIFECYCLE_EVENT_TYPE_UNLOCKING = 3; // 0x3
+  }
+
+  public static final class CarUserManager.UserLifecycleEvent {
+    method public int getEventType();
+    method @Nullable public android.os.UserHandle getPreviousUserHandle();
+    method @NonNull public android.os.UserHandle getUserHandle();
+  }
+
+  public static interface CarUserManager.UserLifecycleListener {
+    method public void onEvent(@NonNull android.car.user.CarUserManager.UserLifecycleEvent);
+  }
+
+}
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- Notifications are shown after the user logs in to a captive portal network, to indicate
+         that the network should now have internet connectivity. This is the channel name of
+         the notification. [CHAR LIMIT=40] -->
+    <string name="notification_channel_name_connected">Captive portal authentication</string>
+    <!-- Notifications are shown after the user logs in to a captive portal network, to indicate
+         that the network should now have internet connectivity. This is the description of the
+         channel for these notifications. [CHAR LIMIT=300] -->
+    <string name="notification_channel_description_connected">Notifications shown when the device has successfully authenticated to a captive portal network</string>
+
+    <!-- Notifications are shown when a user connects to a network that advertises a venue
+         information page, so that the user can access that page. This is the channel name of
+         the notification. [CHAR LIMIT=40] -->
+    <string name="notification_channel_name_network_venue_info">Network venue information</string>
+    <!-- Notifications are shown when a user connects to a network that advertises a venue
+         information page, so that the user can access that page. [CHAR LIMIT=300] -->
+    <string name="notification_channel_description_network_venue_info">Notifications shown to indicate the network has a venue information page</string>
+
+    <!-- A notification is shown after the user logs in to a captive portal network, to indicate
+         that the network should now have internet connectivity. This is the description of the
+         notification, indicating that the device is connected to the network. [CHAR LIMIT=50] -->
+    <string name="connected">Connected</string>
+
+    <!-- Notifications are shown when a user connects to a network that advertises a venue
+         information page, so that the user can access that page. This is the description of
+         the notification. [CHAR LIMIT=50] -->
+    <string name="tap_for_info">Connected / Tap to view website</string>
+
+    <!-- The label of application. It's also a sender name of notification. [CHAR LIMIT=50]-->
+    <string name="application_label">Network manager</string>
+</resources>

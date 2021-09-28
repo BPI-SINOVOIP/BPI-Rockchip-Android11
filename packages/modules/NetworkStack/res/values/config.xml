@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    OEMs that wish to change the below settings must do so via a runtime resource overlay package
+    and *NOT* by changing this file. This file is part of the NetworkStack mainline module.
+    The overlays must apply to the config_* values, not the default_* values. The default_*
+    values are meant to be the default when no other configuration is specified.
+    -->
+    <!-- HTTP URL for network validation, to use for detecting captive portals. -->
+    <!-- default_captive_portal_http_url is not configured as overlayable so
+         OEMs that wish to change captive_portal_http_url configuration must
+         do so via configuring runtime resource overlay to
+         config_captive_portal_http_url and *NOT* by changing or overlaying
+         this resource. It will break if the enforcement of overlayable starts.
+         -->
+    <string name="default_captive_portal_http_url" translatable="false">http://connectivitycheck.gstatic.com/generate_204</string>
+    <!-- HTTPS URL for network validation, to use for confirming internet connectivity. -->
+    <!-- default_captive_portal_https_url is not configured as overlayable so
+         OEMs that wish to change captive_portal_https_url configuration must
+         do so via configuring runtime resource overlay to
+         config_captive_portal_https_url and *NOT* by changing or overlaying
+         this resource. It will break if the enforcement of overlayable starts.
+         -->
+    <string name="default_captive_portal_https_url" translatable="false">https://www.google.com/generate_204</string>
+
+    <!-- List of fallback URLs to use for detecting captive portals. -->
+    <!-- default_captive_portal_fallback_urls is not configured as overlayable
+         so OEMs that wish to change captive_portal_fallback_urls configuration
+         must do so via configuring runtime resource overlay to
+         config_captive_portal_fallback_urls and *NOT* by changing or overlaying
+         this resource. It will break if the enforcement of overlayable starts.
+         -->
+    <string-array name="default_captive_portal_fallback_urls" translatable="false">
+        <item>http://www.google.com/gen_204</item>
+        <item>http://play.googleapis.com/generate_204</item>
+    </string-array>
+    <!-- Configuration hooks for the above settings.
+         Empty by default but may be overridden by RROs. -->
+    <integer name="config_captive_portal_dns_probe_timeout"></integer>
+    <!--suppress CheckTagEmptyBody: overlayable resource to use as configuration hook -->
+    <string name="config_captive_portal_http_url" translatable="false"></string>
+    <!--suppress CheckTagEmptyBody: overlayable resource to use as configuration hook -->
+    <string name="config_captive_portal_https_url" translatable="false"></string>
+    <!-- Literal commas are not allowed in the url configuration because they
+         are used as a separator internally. -->
+    <string-array name="config_captive_portal_fallback_urls" translatable="false">
+    </string-array>
+    <string-array name="config_captive_portal_fallback_probe_specs" translatable="false">
+    </string-array>
+    <string-array name="config_captive_portal_http_urls" translatable="false">
+    </string-array>
+    <string-array name="config_captive_portal_https_urls" translatable="false">
+    </string-array>
+
+    <!-- Customized default DNS Servers address. -->
+    <string-array name="config_default_dns_servers" translatable="false">
+    </string-array>
+    <!-- Set to true if NetworkMonitor needs to load the resource by neighbor mcc when device
+         doesn't have a SIM card inserted. -->
+    <bool name="config_no_sim_card_uses_neighbor_mcc">false</bool>
+
+    <!-- Configuration for including DHCP client hostname option -->
+    <bool name="config_dhcp_client_hostname">false</bool>
+
+    <!-- Customized neighbor unreachable probe parameters. -->
+    <integer name="config_nud_steadystate_solicit_num">10</integer>
+    <integer name="config_nud_steadystate_solicit_interval">750</integer>
+    <integer name="config_nud_postroaming_solicit_num">5</integer>
+    <integer name="config_nud_postroaming_solicit_interval">750</integer>
+
+    <!-- Whether to force considering DNS probes returning private IP addresses as failed
+         when attempting to detect captive portals.
+         The impact of this feature will be evaluated separately through experiments.
+         Force-enabling the feature regardless of the experiment results is not advised, as it
+         could result in valid captive portals being incorrectly classified as having no
+         connectivity.-->
+    <bool name="config_force_dns_probe_private_ip_no_internet">false</bool>
+
+    <!-- Define the min and max range of the content-length that should be in the HTTP response
+         header of probe responses for the validation success/failed regexp to be used. The RegExp
+         will be used to match the probe response content when the content-length is inside this
+         interval(Strictly greater than the config_min_matches_http_content_length and strictly
+         smaller than the config_max_matches_http_content_length). When the content-length is out of
+         this interval, the RegExp will not be used. -->
+    <integer name="config_min_matches_http_content_length">0</integer>
+    <integer name="config_max_matches_http_content_length">0</integer>
+    <!-- A regular expression to match the content of a network validation probe.
+         Treat the network validation as failed when the content matches the
+         config_network_validation_failed_content_regexp and treat the network validation as success
+         when the content matches the config_network_validation_success_content_regexp. If the
+         content matches both of the config_network_validation_failed_content_regexp and
+         the config_network_validation_success_content_regexp, the result will be considered as
+         failed. -->
+    <string name="config_network_validation_failed_content_regexp" translatable="false"></string>
+    <string name="config_network_validation_success_content_regexp" translatable="false"></string>
+
+    <!-- URL for evaluating bandwidth. If the download cannot be finished before the timeout, then
+         it means the bandwidth check is failed. If the download can be finished before the timeout,
+         then it means the bandwidth check is passed. So the OEMs should set this URL appropriately.
+         -->
+    <string name="config_evaluating_bandwidth_url" translatable="false"></string>
+    <!-- A timeout for evaluating bandwidth. -->
+    <integer name="config_evaluating_bandwidth_timeout_ms"></integer>
+    <!-- The retry timer will start from config_min_retry_timer, and the timer will be exponential
+         increased until reaching the config_max_retry_timer. -->
+    <integer name="config_evaluating_bandwidth_min_retry_timer_ms"></integer>
+    <integer name="config_evaluating_bandwidth_max_retry_timer_ms"></integer>
+</resources>

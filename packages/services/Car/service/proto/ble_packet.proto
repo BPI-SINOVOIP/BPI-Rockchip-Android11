@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package aae.blemessagestream;
+
+option java_package = "com.android.car.BleStreamProtos";
+option java_outer_classname = "BlePacketProto";
+
+// A packet across a BLE channel.
+message BlePacket {
+  // A 1-based packet number. The first message will have a value of "1" rather
+  // than "0".
+  fixed32 packet_number = 1;
+
+  // The total number of packets in the message stream.
+  int32 total_packets = 2;
+
+  // Id of message for reassembly on other side
+  int32 message_id = 3;
+
+  // The bytes that represent the message content for this packet.
+  bytes payload = 4;
+}

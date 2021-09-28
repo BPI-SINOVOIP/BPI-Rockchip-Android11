@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Name of the application [CHAR LIMIT=30] -->
+    <string name="app_name">Calendar</string>
+
+    <!-- Toast error message when no dialer app found to make a call [CHAR LIMIT=30] -->
+    <string name="no_dialler">No dialer available</string>
+
+    <!-- Shown when there are no events to show. [CHAR LIMIT=200] -->
+    <string name="no_events">No scheduled events. You\'re free!</string>
+
+    <!-- Shown when there are no calendars to show. [CHAR LIMIT=200] -->
+    <string name="no_calendars">Calendar may be starting up, or you may need to check your settings in the Companion App</string>
+
+    <!-- The text shown instead of a start / end time for all-day events [CHAR LIMIT=30] -->
+    <string name="all_day_event">All day</string>
+
+    <!-- The conference call description [CHAR LIMIT=50] -->
+    <string name="phone_number">
+        <xliff:g id="number" example="+49 (0) 555 1234567">%1$s</xliff:g>
+    </string>
+
+    <!-- The conference call description [CHAR LIMIT=50] -->
+    <string name="phone_number_with_pin">
+        <xliff:g id="number" example="+49 (0) 555 1234567">%1$s</xliff:g>
+        PIN:
+        <xliff:g id="pin" example="4567">%2$s</xliff:g>
+    </string>
+
+    <!-- The title for the all-day events section. Only shown for more than one item. [CHAR LIMIT=120] -->
+    <plurals name="all_day_title">
+        <item quantity="other">%d all day events</item>
+    </plurals>
+</resources>

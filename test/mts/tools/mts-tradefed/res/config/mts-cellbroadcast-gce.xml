@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Runs MTS-cellbroadcast from a pre-existing MTS installation">
+    <option name="plan" value="mts-cellbroadcast-gce" />
+
+    <include name="everything" />
+
+    <include name="mts-preconditions" />
+
+    <option name="enable-root" value="false" />
+
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="settings put global package_verifier_enable 0" />
+        <option name="teardown-command" value="settings put global package_verifier_enable 1"/>
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+        <option name="property-name" value="ro.build.type" />
+        <option name="expected-value" value="eng"/> <!-- Device should have userdebug/eng build -->
+        <option name="throw-error" value="false"/> <!-- Only print warning if not user build -->
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+        <option name="property-name" value="ro.product.locale" />
+        <option name="expected-value" value="en-US"/> <!-- Device locale should be US English -->
+        <option name="throw-error" value="false"/> <!-- Only print warning if not en-US -->
+    </target_preparer>
+
+    <option name="compatibility:include-filter" value="CellBroadcastReceiverMTS" />
+    <option name="compatibility:include-filter" value="CellBroadcastServiceTests" />
+    <template-include name="reporters" default="basic-reporters" />
+</configuration>

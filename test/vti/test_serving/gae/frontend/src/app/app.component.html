@@ -1,0 +1,35 @@
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<header>
+  <div>
+    <app-nav-bar id="nav-bar"></app-nav-bar>
+  </div>
+</header>
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <router-outlet id="router-outlet"></router-outlet>
+  </mat-sidenav-content>
+  <mat-sidenav #sidenav mode="over" position="end" [(opened)]="sideNavOpened">
+    <button mat-button (click)="sidenav.toggle()">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <mat-list>
+      <mat-list-item *ngFor="let property of selectedEntity">
+        <h4 id="property-name" mat-line>{{property.name}}</h4>
+        <p id="property-value" mat-line *ngFor="let each of property.value">{{each}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+</mat-sidenav-container>

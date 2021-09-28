@@ -1,0 +1,61 @@
+MTS Trade Federation
+---------------------
+
+Mainline Test Suite Trade Federation, mts-tradefed for short, is built on
+top of the Android Trade Federation test harness to test mainline modules.
+
+Configuring mts-tradefed
+------------------------
+
+Ensure 'adb' is in your current PATH. adb can be found in the
+Android SDK available from http://developer.android.com
+
+Example:
+  PATH=$PATH:/home/myuser/android-sdk-linux_x86/platform-tools
+
+And ensure device is visible via 'adb devices'
+
+Using mts-tradefed
+-------------------
+
+To run a test plan on a single device:
+
+1. Make sure you have at least one device connected
+2. Launch the mts-tradefed console by running the 'mts-tradefed'. If you
+are working from the Android source tree and have run 'm mts',
+the script can be found at
+  out/host/linux-x86/ats/android-mts/tools/mts-tradefed
+3. Type:
+'run mts' to run the default MTS plan
+
+Some other useful commands are
+
+To run a test module:
+'run mts --module <module_name>'
+
+To run a specific test:
+'run mts --test <test_name>'
+
+To shard a plan test run on multiple devices
+'run mts --shards <number of shards>
+note: all connected devices must be running the same build
+
+For more options:
+'run mts --help'
+
+MTS Tradefed Development
+------------------------
+See http://source.android.com for instructions on obtaining the Android
+platform source code and setting up a build environment.
+
+The source for the tradefed framework can be found on the 'tradefed' branch.
+
+Perform these steps to build and run mts-tradefed from the development
+environment:
+cd <path to android source root>
+m mts
+mts-tradefed
+
+More documentation and details on using and extending trade federation will
+be forthcoming in the near future.
+

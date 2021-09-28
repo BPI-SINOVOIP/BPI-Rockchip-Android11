@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package aae.blemessagestream;
+
+import "packages/services/Car/service/proto/operation_type.proto";
+
+option java_package = "com.android.car.BleStreamProtos";
+option java_outer_classname = "BleDeviceMessageProto";
+
+// A message between devices.
+message BleDeviceMessage {
+  // The operation that this message represents.
+  OperationType operation = 1;
+
+  // Whether the payload field is encrypted.
+  bool is_payload_encrypted = 2;
+
+  // Identifier of the intended recipient.
+  bytes recipient = 3;
+
+  // The bytes that represent the content for this message.
+  bytes payload = 4;
+}

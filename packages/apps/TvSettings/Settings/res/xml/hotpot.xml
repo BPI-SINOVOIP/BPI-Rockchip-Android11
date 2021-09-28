@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
+	android:title="@string/hotpot_name"
+		>
+
+    <SwitchPreference
+        android:key="usb_tether_settings"
+        android:title="@string/usb_tethering_button_text" />
+
+    <SwitchPreference
+        android:key="enable_wifi_ap"
+        android:title="@string/wifi_tether_checkbox_text" />
+
+    <Preference
+        android:key="wifi_ap_ssid_and_security"
+        android:title="@string/wifi_tether_configure_ap_text"
+        android:persistent="false" >
+		<intent
+        android:targetClass="com.android.tv.settings.connectivity.HotpotDialogActivity"  
+        android:targetPackage="com.android.tv.settings"/>
+	</Preference>
+
+    <SwitchPreference
+        android:key="enable_bluetooth_tethering"
+        android:title="@string/bluetooth_tether_checkbox_text" />
+
+</PreferenceScreen>

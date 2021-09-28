@@ -1,0 +1,271 @@
+ELF Header:
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF32
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              DYN (Shared object file)
+  Machine:                           ARM
+  Version:                           0x1
+  Entry point address:               0x0
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          9304 (bytes into file)
+  Flags:                             0x5000200, Version5 EABI, soft-float ABI
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         8
+  Size of section headers:           40 (bytes)
+  Number of section headers:         19
+  Section header string table index: 18
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .note.gnu.build-i NOTE            00000134 000134 000020 00   A  0   0  4
+  [ 2] .dynsym           DYNSYM          00000154 000154 0002e0 10   A  3   1  4
+  [ 3] .dynstr           STRTAB          00000434 000434 00041e 00   A  0   0  1
+  [ 4] .gnu.hash         GNU_HASH        00000854 000854 0000dc 04   A  2   0  4
+  [ 5] .hash             HASH            00000930 000930 000154 04   A  2   0  4
+  [ 6] .gnu.version      VERSYM          00000a84 000a84 00005c 02   A  2   0  2
+  [ 7] .gnu.version_d    VERDEF          00000ae0 000ae0 0000a4 00   A  3   5  4
+  [ 8] .rel.plt          REL             00000b84 000b84 000098 08  AI  2  13  4
+  [ 9] .plt              PROGBITS        00000c1c 000c1c 0000f8 00  AX  0   0  4
+  [10] .text             PROGBITS        00000d14 000d14 0002bc 00  AX  0   0  4
+  [11] .ARM.exidx        ARM_EXIDX       00000fd0 000fd0 000030 08  AL 10   0  4
+  [12] .dynamic          DYNAMIC         00001ef0 001ef0 0000b8 08  WA  3   0  4
+  [13] .got              PROGBITS        00001fa8 001fa8 000058 00  WA  0   0  4
+  [14] .bss              NOBITS          00002000 002000 001000 00  WA  0   0 4096
+  [15] .note.gnu.gold-ve NOTE            00000000 002000 00001c 00      0   0  4
+  [16] .ARM.attributes   ARM_ATTRIBUTES  00000000 00201c 00004a 00      0   0  1
+  [17] .gnu_debugdata    PROGBITS        00000000 002066 000338 00      0   0  1
+  [18] .shstrtab         STRTAB          00000000 00239e 0000b7 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  y (purecode), p (processor specific)
+
+There are no section groups in this file.
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  PHDR           0x000034 0x00000034 0x00000034 0x00100 0x00100 R   0x4
+  LOAD           0x000000 0x00000000 0x00000000 0x01000 0x01000 R E 0x1000
+  LOAD           0x001ef0 0x00001ef0 0x00001ef0 0x00110 0x01110 RW  0x1000
+  DYNAMIC        0x001ef0 0x00001ef0 0x00001ef0 0x000b8 0x000b8 RW  0x4
+  NOTE           0x000134 0x00000134 0x00000134 0x00020 0x00020 R   0x4
+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+  EXIDX          0x000fd0 0x00000fd0 0x00000fd0 0x00030 0x00030 R   0x4
+  GNU_RELRO      0x001ef0 0x00001ef0 0x00001ef0 0x00110 0x00110 RW  0x4
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .note.gnu.build-id .dynsym .dynstr .gnu.hash .hash .gnu.version .gnu.version_d .rel.plt .plt .text .ARM.exidx 
+   02     .dynamic .got .bss 
+   03     .dynamic 
+   04     .note.gnu.build-id 
+   05     
+   06     .ARM.exidx 
+   07     .dynamic .got 
+
+Dynamic section at offset 0x1ef0 contains 18 entries:
+  Tag        Type                         Name/Value
+ 0x00000003 (PLTGOT)                     0x1fa8
+ 0x00000002 (PLTRELSZ)                   152 (bytes)
+ 0x00000017 (JMPREL)                     0xb84
+ 0x00000014 (PLTREL)                     REL
+ 0x00000006 (SYMTAB)                     0x154
+ 0x0000000b (SYMENT)                     16 (bytes)
+ 0x00000005 (STRTAB)                     0x434
+ 0x0000000a (STRSZ)                      1054 (bytes)
+ 0x6ffffef5 (GNU_HASH)                   0x854
+ 0x00000004 (HASH)                       0x930
+ 0x00000001 (NEEDED)                     Shared library: [ld-android.so]
+ 0x0000000e (SONAME)                     Library soname: [libdl.so]
+ 0x0000001e (FLAGS)                      BIND_NOW
+ 0x6ffffffb (FLAGS_1)                    Flags: NOW
+ 0x6ffffff0 (VERSYM)                     0xa84
+ 0x6ffffffc (VERDEF)                     0xae0
+ 0x6ffffffd (VERDEFNUM)                  5
+ 0x00000000 (NULL)                       0x0
+
+Relocation section '.rel.plt' at offset 0xb84 contains 19 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name
+00001fb4  00001016 R_ARM_JUMP_SLOT   00000000   __loader_dlopen
+00001fb8  00000f16 R_ARM_JUMP_SLOT   00000000   __loader_dlerror
+00001fbc  00001116 R_ARM_JUMP_SLOT   00000000   __loader_dlsym
+00001fc0  00001216 R_ARM_JUMP_SLOT   00000000   __loader_dlvsym
+00001fc4  00000d16 R_ARM_JUMP_SLOT   00000000   __loader_dladdr
+00001fc8  00000e16 R_ARM_JUMP_SLOT   00000000   __loader_dlclose
+00001fcc  00000c16 R_ARM_JUMP_SLOT   00000000   __loader_dl_unwind_fin
+00001fd0  00000b16 R_ARM_JUMP_SLOT   00000000   __loader_dl_iterate_ph
+00001fd4  00000416 R_ARM_JUMP_SLOT   00000000   __loader_android_get_L
+00001fd8  00000a16 R_ARM_JUMP_SLOT   00000000   __loader_android_updat
+00001fdc  00000216 R_ARM_JUMP_SLOT   00000000   __loader_android_dlope
+00001fe0  00000916 R_ARM_JUMP_SLOT   00000000   __loader_android_set_a
+00001fe4  00000516 R_ARM_JUMP_SLOT   00000000   __loader_android_get_a
+00001fe8  00000716 R_ARM_JUMP_SLOT   00000000   __loader_android_init_
+00001fec  00000116 R_ARM_JUMP_SLOT   00000000   __loader_android_creat
+00001ff0  00000816 R_ARM_JUMP_SLOT   00000000   __loader_android_link_
+00001ff4  00000316 R_ARM_JUMP_SLOT   00000000   __loader_android_dlwar
+00001ff8  00000616 R_ARM_JUMP_SLOT   00000000   __loader_android_get_e
+00001ffc  00001316 R_ARM_JUMP_SLOT   00000000   __loader_cfi_fail
+
+Unwind section '.ARM.exidx' at offset 0xfd0 contains 6 entries:
+
+0xd14: 0x808408b0
+  Compact model index: 0
+  0x84 0x08 pop {r7, r14}
+  0xb0      finish
+
+0xd8c: 0x80058408
+  Compact model index: 0
+  0x05      vsp = vsp + 24
+  0x84 0x08 pop {r7, r14}
+
+0xdac: 0x808408b0
+  Compact model index: 0
+  0x84 0x08 pop {r7, r14}
+  0xb0      finish
+
+0xdc4: 0x80b0b0b0
+  Compact model index: 0
+  0xb0      finish
+  0xb0      finish
+  0xb0      finish
+
+0xdec: 0x8001a8b0
+  Compact model index: 0
+  0x01      vsp = vsp + 8
+  0xa8      pop {r4, r14}
+  0xb0      finish
+
+0xfd0: 0x1 [cantunwind]
+
+
+Symbol table '.dynsym' contains 46 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_create_n
+     2: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_dlopen_e
+     3: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_dlwarnin
+     4: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_get_LD_L
+     5: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_get_appl
+     6: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_get_expo
+     7: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_init_ano
+     8: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_link_nam
+     9: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_set_appl
+    10: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_android_update_L
+    11: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dl_iterate_phdr
+    12: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dl_unwind_find_e
+    13: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dladdr
+    14: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dlclose
+    15: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dlerror
+    16: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dlopen
+    17: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dlsym
+    18: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_dlvsym
+    19: 00000000     0 FUNC    WEAK   DEFAULT  UND __loader_cfi_fail
+    20: 00000d6b    10 FUNC    WEAK   DEFAULT   10 android_dlopen_ext@@LIBC
+    21: 00000e45    92 FUNC    GLOBAL DEFAULT   10 __cfi_slowpath_diag@@LIBC_OMR1
+    22: 00000d85     8 FUNC    WEAK   DEFAULT   10 android_init_anonymous_na@@LIBC_PLATFORM
+    23: 00000d63     8 FUNC    WEAK   DEFAULT   10 android_update_LD_LIBRARY@@LIBC_PLATFORM
+    24: 00000dbd     8 FUNC    WEAK   DEFAULT   10 android_get_exported_name@@LIBC_PLATFORM
+    25: 00000d75     8 FUNC    WEAK   DEFAULT   10 android_set_application_t@@LIBC_PLATFORM
+    26: 00000d27    10 FUNC    WEAK   DEFAULT   10 dlsym@@LIBC
+    27: 00000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBC_N
+    28: 00000dad     8 FUNC    WEAK   DEFAULT   10 android_link_namespaces@@LIBC_PLATFORM
+    29: 00000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBC
+    30: 00000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBC_PLATFORM
+    31: 00000d1f     8 FUNC    WEAK   DEFAULT   10 dlerror@@LIBC
+    32: 00000d15    10 FUNC    WEAK   DEFAULT   10 dlopen@@LIBC
+    33: 00000dd9    20 FUNC    GLOBAL DEFAULT   10 __cfi_shadow_size@@LIBC_OMR1
+    34: 00000d43     8 FUNC    WEAK   DEFAULT   10 dlclose@@LIBC
+    35: 00000db5     8 FUNC    WEAK   DEFAULT   10 android_dlwarning@@LIBC_PLATFORM
+    36: 00000000     0 OBJECT  GLOBAL DEFAULT  ABS LIBC_OMR1
+    37: 00000d7d     8 FUNC    WEAK   DEFAULT   10 android_get_application_t@@LIBC_PLATFORM
+    38: 00000ded    88 FUNC    GLOBAL DEFAULT   10 __cfi_slowpath@@LIBC_OMR1
+    39: 00000d4b     8 FUNC    WEAK   DEFAULT   10 dl_unwind_find_exidx@@LIBC
+    40: 00000d8d    32 FUNC    WEAK   DEFAULT   10 android_create_namespace@@LIBC_PLATFORM
+    41: 00000d53     8 FUNC    WEAK   DEFAULT   10 dl_iterate_phdr@@LIBC
+    42: 00000d3b     8 FUNC    WEAK   DEFAULT   10 dladdr@@LIBC
+    43: 00000d5b     8 FUNC    WEAK   DEFAULT   10 android_get_LD_LIBRARY_PA@@LIBC_PLATFORM
+    44: 00000d31    10 FUNC    WEAK   DEFAULT   10 dlvsym@@LIBC_N
+    45: 00000dc9    16 FUNC    GLOBAL DEFAULT   10 __cfi_init@@LIBC_PLATFORM
+
+Histogram for bucket list length (total of 37 buckets):
+ Length  Number     % of total  Coverage
+      0  10         ( 27.0%)
+      1  14         ( 37.8%)     31.1%
+      2  10         ( 27.0%)     75.6%
+      3  2          (  5.4%)     88.9%
+      4  0          (  0.0%)     88.9%
+      5  1          (  2.7%)    100.0%
+
+Histogram for `.gnu.hash' bucket list length (total of 17 buckets):
+ Length  Number     % of total  Coverage
+      0  0          (  0.0%)
+      1  9          ( 52.9%)     34.6%
+      2  7          ( 41.2%)     88.5%
+      3  1          (  5.9%)    100.0%
+
+Version symbols section '.gnu.version' contains 46 entries:
+ Addr: 0000000000000a84  Offset: 0x000a84  Link: 2 (.dynsym)
+  000:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  004:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  008:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  00c:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  010:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  014:   2 (LIBC)          4 (LIBC_OMR1)     5 (LIBC_PLATFORM)   5 (LIBC_PLATFORM)
+  018:   5 (LIBC_PLATFORM)   5 (LIBC_PLATFORM)   2 (LIBC)          3 (LIBC_N)     
+  01c:   5 (LIBC_PLATFORM)   2 (LIBC)          5 (LIBC_PLATFORM)   2 (LIBC)       
+  020:   2 (LIBC)          4 (LIBC_OMR1)     2 (LIBC)          5 (LIBC_PLATFORM)
+  024:   4 (LIBC_OMR1)     5 (LIBC_PLATFORM)   4 (LIBC_OMR1)     2 (LIBC)       
+  028:   5 (LIBC_PLATFORM)   2 (LIBC)          2 (LIBC)          5 (LIBC_PLATFORM)
+  02c:   3 (LIBC_N)        5 (LIBC_PLATFORM)
+
+Version definition section '.gnu.version_d' contains 5 entries:
+  Addr: 0x0000000000000ae0  Offset: 0x000ae0  Link: 3 (.dynstr)
+  000000: Rev: 1  Flags: BASE  Index: 1  Cnt: 1  Name: libdl.so
+  0x001c: Rev: 1  Flags: none  Index: 2  Cnt: 1  Name: LIBC
+  0x0038: Rev: 1  Flags: none  Index: 3  Cnt: 2  Name: LIBC_N
+  0x0054: Parent 1: LIBC
+  0x005c: Rev: 1  Flags: none  Index: 4  Cnt: 2  Name: LIBC_OMR1
+  0x0078: Parent 1: LIBC_N
+  0x0080: Rev: 1  Flags: none  Index: 5  Cnt: 2  Name: LIBC_PLATFORM
+  0x009c: Parent 1: LIBC_OMR1
+
+Displaying notes found in: .note.gnu.build-id
+  Owner                 Data size	Description
+  GNU                  0x00000010	NT_GNU_BUILD_ID (unique build ID bitstring)
+    Build ID: 676a0450f6cc27cf2554a3d1634fc4fe
+
+Displaying notes found in: .note.gnu.gold-version
+  Owner                 Data size	Description
+  GNU                  0x00000009	NT_GNU_GOLD_VERSION (gold version)
+    Version: gold 1.12
+Attribute Section: aeabi
+File Attributes
+  Tag_conformance: "2.09"
+  Tag_CPU_name: "cortex-a53"
+  Tag_CPU_arch: v8
+  Tag_CPU_arch_profile: Application
+  Tag_ARM_ISA_use: Yes
+  Tag_THUMB_ISA_use: Thumb-2
+  Tag_Advanced_SIMD_arch: NEON for ARMv8
+  Tag_ABI_PCS_RW_data: PC-relative
+  Tag_ABI_PCS_RO_data: PC-relative
+  Tag_ABI_PCS_GOT_use: GOT-indirect
+  Tag_ABI_PCS_wchar_t: 4
+  Tag_ABI_FP_denormal: Needed
+  Tag_ABI_FP_exceptions: Needed
+  Tag_ABI_FP_number_model: IEEE 754
+  Tag_ABI_align_needed: 8-byte
+  Tag_ABI_align_preserved: 8-byte, except leaf SP
+  Tag_ABI_enum_size: int
+  Tag_CPU_unaligned_access: v6
+  Tag_FP_HP_extension: Allowed
+  Tag_ABI_FP_16bit_format: IEEE 754
+  Tag_MPextension_use: Allowed
+  Tag_Virtualization_use: TrustZone and Virtualization Extensions

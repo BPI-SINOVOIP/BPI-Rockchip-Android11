@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/header_margin"
+        android:orientation="horizontal">
+        <Spinner
+            android:id = "@+id/spinner"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:paddingLeft="@dimen/header_padding"
+            android:prompt = "@string/select_user"
+            android:textSize = "@dimen/spinner_text_size"
+            />
+        <CheckBox
+            android:id = "@+id/checkbox_activities"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:paddingLeft="@dimen/header_padding"
+            android:text = "@string/checkbox_activities"
+            android:textSize = "@dimen/checkbox_text_size"
+            />
+        <CheckBox
+            android:id = "@+id/checkbox_services"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:text = "@string/checkbox_services"
+            android:textSize = "@dimen/checkbox_text_size"
+            />
+        <CheckBox
+            android:id = "@+id/checkbox_permissions"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:text = "@string/checkbox_permissions"
+            android:textSize = "@dimen/checkbox_text_size"
+            />
+        <CheckBox
+            android:id = "@+id/checkbox_shareduid"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:text = "@string/checkbox_shareduid"
+            android:textSize = "@dimen/checkbox_text_size"
+            />
+        <Button
+            android:id = "@+id/button_show"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_weight = "1"
+            android:text = "@string/button_show"
+            android:textSize = "@dimen/checkbox_text_size"
+            />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/packages"/>
+     </ScrollView>
+</LinearLayout>

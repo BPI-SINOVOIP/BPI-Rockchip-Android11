@@ -1,0 +1,13 @@
+# computepipe router
+type computepipe_router_exec, exec_type, file_type, system_file_type;
+
+# allow init to launch processes in this context
+init_daemon_domain(computepipe_router)
+
+# allow this domain to instantiate query and registration interface
+add_service(computepipe_router, computepipe_router_query_service)
+add_service(computepipe_router, computepipe_router_registration_service)
+
+binder_use(computepipe_router)
+
+binder_service(computepipe_router)

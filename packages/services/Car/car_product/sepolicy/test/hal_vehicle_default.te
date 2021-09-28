@@ -1,0 +1,4 @@
+typeattribute hal_vehicle_default hal_automotive_socket_exemption;
+
+unix_socket_connect(hal_vehicle_default, fwmarkd, netd)
+net_domain(hal_vehicle_default)

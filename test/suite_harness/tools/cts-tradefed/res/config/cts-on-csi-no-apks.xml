@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Excluded tests for APKs not in CSI">
+
+    <!-- No Browser2 -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testViewNormalUrl" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testViewSecureUrl" />
+    <option name="compatibility:exclude-filter" value="CtsMatchFlagTestCases android.matchflags.cts.MatchFlagTests#startNoBrowserRequireDefault" />
+    <option name="compatibility:exclude-filter" value="CtsMatchFlagTestCases android.matchflags.cts.MatchFlagTests#startNoBrowserIntentWithNoMatchingApps" />
+
+    <!-- No Calendar -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testCalendarAddAppointment" />
+
+    <!-- No Camera2 -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testCamera" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testImageCaptureIntentsHandledBySystem" />
+
+    <!-- No Contacts -->
+    <option name="compatibility:exclude-filter" value="CtsContactsProviderTestCases android.provider.cts.contacts.ContactsContractIntentsTest#testPickContactDir" />
+    <option name="compatibility:exclude-filter" value="CtsContactsProviderTestCases android.provider.cts.contacts.ContactsContractIntentsTest#testViewContactDir" />
+    <option name="compatibility:exclude-filter" value="CtsContactsProviderTestCases android.provider.cts.contacts.ContactsContract_ContactsTest#testContentUri" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testContactsCallLogs" />
+
+    <!-- No DeskClock -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAlarmClockDismissAlarm" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAlarmClockSetAlarm" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAlarmClockSetTimer" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAlarmClockShowAlarms" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAlarmClockShowTimers" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAlarmClockSnoozeAlarm" />
+
+    <!-- No Dialer -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testDialPhoneNumber" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testDialVoicemail" />
+
+    <!-- No Launcher and Home -->
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityEmbeddedDisplayTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityEmbeddedHierarchyTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityEndToEndTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityFocusAndInputFocusSyncTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityGestureDispatchTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityGlobalActionsTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityMagnificationTest#testA11yNodeInfoVisibility_whenOutOfMagnifiedArea_shouldVisible" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityPaneTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityTakeScreenshotTest#testTakeScreenshotWithSecureWindow_GetScreenshotAndVerifyBitmap" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityTextActionTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityTextTraversalTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityViewTreeReportingTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityWindowQueryTest" />
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityWindowReportingTest" />
+    <option name="compatibility:exclude-filter" value="CtsAdminPackageInstallerTestCases android.packageinstaller.admin.cts.SessionCommitBroadcastTest#testBroadcastNotReceivedForDifferentLauncher" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerProcessStateTest#testBgRestrictedForegroundService" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerProcessStateTest#testCantSaveStateLaunchAndBackground" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerProcessStateTest#testCantSaveStateLaunchAndSwitch" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerTest#testKillingPidsOnImperceptible" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerTest#testTimeTrackingAPI_ChainedActivityExit" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerTest#testTimeTrackingAPI_SimpleStartExit" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityManagerTest#testTimeTrackingAPI_SwitchAwayTriggers" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.BooleanTileServiceTest" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.TileServiceTest" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerLauncher1" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerLauncher2" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerLauncher3" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerLauncher4" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerPackage1" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerPackage2" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerPackage3" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerPackage4" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerTestCases" />
+    <option name="compatibility:exclude-filter" value="CtsShortcutManagerThrottlingTest" />
+
+    <!-- No Music -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testMusicPlayback" />
+
+    <!-- No QuickSearchBox -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testWebSearchNormalUrl" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testWebSearchPlainText" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testWebSearchSecureUrl" />
+
+    <!-- No Settings -->
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilitySettingsTest" />
+    <option name="compatibility:exclude-filter" value="CtsAdminTestCases android.admin.cts.DeviceAdminActivationTest" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SettingsIntentTest" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testAddNetworksIntent" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testInteractAcrossProfilesSettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testLocationScanningSettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testNotificationPolicyDetailIntent" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testPictureInPictureSettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testPowerUsageSummarySettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testRequestSetAutofillServiceIntent" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testSettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testTapAnPaySettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testUsageAccessSettings" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testVoiceInputSettingsIntent" />
+    <option name="compatibility:exclude-filter" value="CtsSettingsHostTestCases" />
+
+    <!-- No SettingsIntelligence -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testSettingsSearchIntent" />
+
+    <!-- No StorageManager -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testManageStorage" />
+
+    <!-- No SystemUI -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.AudioPlaybackCaptureTest" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaProjectionTest" />
+    <option name="compatibility:exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionTest22#testCompatRevoked" />
+    <option name="compatibility:exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionTest23#testGranted" />
+    <option name="compatibility:exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionTest23#testRevokeAffectsWholeGroup" />
+    <option name="compatibility:exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionTest23#testGrantPreviouslyRevokedWithPrejudiceShowsPrompt" />
+    <option name="compatibility:exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionTest23#testNoResidualPermissionsOnUninstall" />
+    <option name="compatibility:exclude-filter" value="CtsPermission3TestCases android.permission3.cts.PermissionUpgradeTest#testRevokePropagatedOnUpgradeOldToNewModel" />
+
+    <option name="compatibility:exclude-filter" value="CtsViewTestCases android.view.cts.SurfaceViewSyncTest" />
+    <option name="compatibility:exclude-filter" value="CtsViewTestCases android.view.cts.ASurfaceControlTest" />
+
+    <!-- No WebView -->
+    <option name="compatibility:exclude-filter" value="CtsAssistTestCases android.assist.cts.WebViewTest#testWebView" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.WebViewActivityTest" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.WebViewMultiScreenLoginActivityTest" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.inline.InlineWebViewActivityTest" />
+    <option name="compatibility:exclude-filter" value="CtsHostsideWebViewTests" />
+    <option name="compatibility:exclude-filter" value="CtsTextTestCases android.text.cts.EmojiTest" />
+    <option name="compatibility:exclude-filter" value="CtsUiRenderingTestCases android.uirendering.cts.testclasses.LayerTests#testWebViewWithParentLayer" />
+    <option name="compatibility:exclude-filter" value="CtsUiRenderingTestCases android.uirendering.cts.testclasses.LayerTests#testWebViewWithAlphaLayer" />
+    <option name="compatibility:exclude-filter" value="CtsUiRenderingTestCases android.uirendering.cts.testclasses.LayerTests#testWebViewWithOffsetLayer" />
+    <option name="compatibility:exclude-filter" value="CtsUiRenderingTestCases android.uirendering.cts.testclasses.PathClippingTests#testWebViewClipWithCircle" />
+
+</configuration>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Διαχείριση λήψεων"</string>
+    <string name="storage_description" msgid="169690279447532621">"Λήψεις"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Πρόσβαση στη διαχείριση λήψεων."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Επιτρέπει στην εφαρμογή την πρόσβαση στη διαχείριση λήψεων και τη χρήση του για τη λήψη αρχείων. Οι κακόβουλες εφαρμογές μπορούν να χρησιμοποιήσουν αυτήν τη δυνατότητα για να διακόψουν λήψεις και να αποκτήσουν πρόσβαση σε απόρρητες πληροφορίες."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Σύνθετες λειτουργίες προγράμματος διαχείρισης λήψεων."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Επιτρέπει στην εφαρμογή την πρόσβαση στις σύνθετες λειτουργίες του προγράμματος διαχείρισης λήψεων. Οι κακόβουλες εφαρμογές μπορούν να χρησιμοποιήσουν αυτήν τη δυνατότητα για να διακόψουν λήψεις και να αποκτήσουν πρόσβαση σε απόρρητες πληροφορίες."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Αποστολή ειδοποιήσεων λήψης."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Επιτρέπει στην εφαρμογή την αποστολή ειδοποιήσεων σχετικά με τις λήψεις που έχουν ολοκληρωθεί. Οι κακόβουλες εφαρμογές μπορούν να χρησιμοποιήσουν αυτή τη λειτουργία για να μπερδέψουν άλλες εφαρμογές που πραγματοποιούν λήψη αρχείων."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Διατηρήστε χώρο στην προσωρινή μνήμη λήψης"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Επιτρέπει στην εφαρμογή τη λήψη αρχείων στην προσωρινή μνήμη λήψης, η οποία δεν είναι δυνατό να διαγραφεί αυτόματα όταν παρουσιαστεί έλλειψη χώρου στη  διαχείριση λήψεων."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"λήψη αρχείων χωρίς ειδοποίηση"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Επιτρέπει στην εφαρμογή τη λήψη αρχείων μέσω του προγράμματος διαχείρισης λήψεων χωρίς την εμφάνιση κάποιας ειδοποίησης στο χρήστη."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Πρόσβαση σε όλα τα στοιχεία λήψης"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Επιτρέπει στην εφαρμογή την προβολή και τροποποίηση όλων των λήψεων που ξεκίνησαν από οποιαδήποτε εφαρμογή του συστήματος."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Χωρίς τίτλο&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"Η λήψη ολοκληρώθηκε."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"Ανεπιτυχής λήψη."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Η λήψη απαιτεί Wi-Fi"</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Σε παύση στο παρασκήνιο"</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"Πολύ μεγάλο αρχείο λήψης για δίκτυο παρόχου."</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"Θα πρέπει να χρησιμοποιήσετε Wi-Fi για την ολοκλήρωση αυτής της λήψης μεγέθους <xliff:g id="SIZE">%1$s </xliff:g>. \n\nΑγγίξτε το στοιχείο <xliff:g id="QUEUE_TEXT">%2$s </xliff:g> για να ξεκινήσετε αυτήν τη λήψη την επόμενη φορά που θα συνδεθείτε σε δίκτυο Wi-Fi."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"Προσθήκη στην ουρά για να κάνετε λήψη αργότερα;"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"Αυτή η λήψη μεγ. <xliff:g id="SIZE">%1$s </xliff:g> ίσως μειώσει τη διάρκ.ζωής της μπατ. ή/και να κάνει υπερβ.χρήση της σύνδ. δεδ. κιν. Ίσως υπάρξουν χρεώσ.από την εταιρ. βάσει του προγρ.δεδομ.\n\n Αγγίξτε <xliff:g id="QUEUE_TEXT">%2$s</xliff:g> για λήψη όταν συνδ. μέσω Wi-Fi."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Ουρά"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Ακύρωση"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"Έναρξη τώρα"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> αρχεία σε διαδικασία λήψης</item>
+      <item quantity="one">1 αρχείο σε διαδικασία λήψης</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> αρχεία σε αναμονή</item>
+      <item quantity="one">1 αρχείο σε αναμονή</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"Απομένουν <xliff:g id="DURATION">%s</xliff:g>"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"Δεν είναι δυνατό το άνοιγμα του αρχείου"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Λήψεις"</string>
+    <string name="download_queued" msgid="3383844741769045371">"Σε ουρά"</string>
+    <string name="download_running" msgid="774654178925442490">"Σε εξέλιξη"</string>
+    <string name="download_error" msgid="1857737890005386798">"Ανεπιτυχής"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Σε εξέλιξη, <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

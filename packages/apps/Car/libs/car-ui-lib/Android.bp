@@ -1,0 +1,154 @@
+
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+android_library {
+    name: "car-ui-lib",
+    sdk_version: "system_current",
+    min_sdk_version: "28",
+    srcs: ["car-ui-lib/src/main/java/**/*.java"],
+    manifest: "car-ui-lib/AndroidManifest.xml",
+    resource_dirs: ["car-ui-lib/src/main/res"],
+    optimize: {
+        enabled: false,
+    },
+    libs: ["android.car-stubs"],
+    static_libs: [
+        "androidx.annotation_annotation",
+        "androidx.appcompat_appcompat",
+        "androidx-constraintlayout_constraintlayout",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "androidx-constraintlayout_constraintlayout-solver",
+        "androidx.asynclayoutinflater_asynclayoutinflater",
+    ],
+}
+
+// User this if your project includes overlayable.xml
+android_library {
+    name: "car-ui-lib-overlayable",
+    sdk_version: "system_current",
+    min_sdk_version: "28",
+    manifest: "car-ui-lib/AndroidManifest.xml",
+    resource_dirs: [
+        "car-ui-lib/src/main/res-overlayable"
+    ],
+    static_libs: [
+        "car-ui-lib",
+    ],
+    // This is also needed for `car-ui-lib` build target.
+    // But it's not in explicitly added to the build rule,
+    // Because it's hardcoded in apex.go file under Soong.
+    apex_available: [
+        "com.android.permission"
+    ],
+}
+
+android_app {
+    name: "car-ui-lib-sharedlibrary",
+    srcs: ["sharedlibrary/src/main/java/**/*.java"],
+    manifest: "sharedlibrary/AndroidManifest.xml",
+    resource_dirs: ["sharedlibrary/src/main/res"],
+    visibility: [
+        "//visibility:private",
+    ],
+    platform_apis: true,
+    aaptflags: ["--shared-lib"],
+    optimize: {
+        enabled: false,
+    },
+}
+
+android_library {
+    name: "car-ui-lib-testing-support",
+    sdk_version: "system_current",
+    min_sdk_version: "28",
+    manifest: "car-ui-lib/AndroidManifest.xml",
+    srcs: [
+        "tests/baselayouttests/src/**/*.java",
+    ],
+    optimize: {
+        enabled: false,
+    },
+    libs: ["android.car-stubs"],
+    static_libs: [
+        "car-ui-lib",
+        "Robolectric_all-target",
+    ],
+}
+
+android_test {
+    name: "CarUILibUnitTests",
+    certificate: "platform",
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+        "android.test.mock.stubs",
+        "android.car"
+    ],
+    manifest: "car-ui-lib/src/androidTest/AndroidManifest.xml",
+    resource_dirs: ["car-ui-lib/src/androidTest/res"],
+    // Include all test java files.
+    srcs: ["car-ui-lib/src/androidTest/java/**/*.java"],
+    static_libs: [
+        "androidx.test.rules",
+        "androidx.test.espresso.core",
+        "androidx.test.espresso.contrib",
+        "androidx.test.ext.junit",
+        "car-ui-lib",
+        "platform-test-annotations",
+        "mockito-target-inline-minus-junit4",
+        "truth-prebuilt",
+    ],
+    jni_libs: [
+        // For mockito extended
+        "libdexmakerjvmtiagent",
+        "libstaticjvmtiagent",
+    ],
+
+    platform_apis: true,
+    test_suites: ["device-tests"],
+}
+
+android_app {
+    name: "PaintBooth",
+    srcs: [
+    	"paintbooth/src/**/*.java",
+    	"paintbooth/src/**/*.kt",
+    ],
+    required: ["privapp_whitelist_com.android.car.ui.paintbooth"],
+    manifest: "paintbooth/AndroidManifest.xml",
+    resource_dirs: ["paintbooth/src/main/res", "paintbooth/src/main/res-public"],
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+    libs: ["android.car-stubs"],
+    static_libs: [
+        "car-ui-lib",
+        "guava",
+        "gson-prebuilt-jar",
+    ],
+    optimize: {
+        enabled: false,
+    },
+    dex_preopt: {
+        enabled: false,
+    },
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+    export_package_resources: true,
+}

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Excluded tests from cts-on-gsi">
+    <!-- Tell all AndroidJUnitTests to exclude certain annotations -->
+    <option name="compatibility:test-arg" value="com.android.tradefed.testtype.AndroidJUnitTest:exclude-annotation:android.platform.test.annotations.RestrictedBuildTest" />
+
+    <!-- Tell all HostTests to exclude certain annotations -->
+    <option name="compatibility:test-arg" value="com.android.tradefed.testtype.HostTest:exclude-annotation:android.platform.test.annotations.RestrictedBuildTest" />
+    <option name="compatibility:test-arg" value="com.android.compatibility.common.tradefed.testtype.JarHostTest:exclude-annotation:android.platform.test.annotations.RestrictedBuildTest" />
+
+    <!-- Radio system of a general system image is not checked -->
+    <option name="compatibility:exclude-filter" value="CtsTelephonyTestCases" />
+    <option name="compatibility:exclude-filter" value="CtsTelephony2TestCases" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.SystemFeaturesTest#testLocationFeatures" />
+    <option name="compatibility:exclude-filter" value="CtsIncidentHostTestCases com.android.server.cts.PackageIncidentTest#testPackageServiceDump" />
+
+    <!-- Exclude telephony related testcases -->
+    <option name="compatibility:exclude-filter" value="CtsCarrierApiTestCases android.carrierapi.cts.CarrierApiTest#testSimCardPresent" />
+    <option name="compatibility:exclude-filter" value="CtsCarrierApiTestCases android.carrierapi.cts.CarrierApiTest#testGetIccAuthentication" />
+    <option name="compatibility:exclude-filter" value="CtsCarrierApiTestCases android.carrierapi.cts.CarrierApiTest#testHasCarrierPrivileges" />
+    <option name="compatibility:exclude-filter" value="CtsCarrierApiTestCases android.carrierapi.cts.CarrierApiTest#testSendDialerSpecialCode" />
+    <option name="compatibility:exclude-filter" value="CtsJobSchedulerTestCases android.jobscheduler.cts.ConnectivityConstraintTest#testConnectivityConstraintExecutes_metered" />
+    <option name="compatibility:exclude-filter" value="CtsNetTestCasesLegacyApi22 android.net.cts.legacy.api22.ConnectivityManagerLegacyTest#testStartUsingNetworkFeature_enableHipri" />
+    <option name="compatibility:exclude-filter" value="CtsPermission2TestCases android.permission2.cts.NoReceiveSmsPermissionTest#testAppSpecificSmsToken" />
+    <option name="compatibility:exclude-filter" value="CtsPermission2TestCases android.permission2.cts.NoReceiveSmsPermissionTest#testReceiveTextMessage" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.NoSystemFunctionPermissionTest#testSendSms" />
+    <option name="compatibility:exclude-filter" value="CtsSecurityHostTestCases android.security.cts.SELinuxHostTest#testNoExemptionsForBinderInVendorBan" />
+    <option name="compatibility:exclude-filter" value="CtsSecurityHostTestCases android.security.cts.SELinuxHostTest#testNoExemptionsForSocketsBetweenCoreAndVendorBan" />
+    <option name="compatibility:exclude-filter" value="CtsSecurityHostTestCases android.security.cts.SELinuxHostTest#testNoExemptionsForVendorExecutingCore" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testAppDetails" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testAppSummary" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testCallback" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testDeviceSummary" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testTagDetails" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testUidDetails" />
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testUserSummary" />
+
+    <!-- Exclude not applicable testcases-->
+    <option name="compatibility:exclude-filter" value="CtsSignatureTestCases" />
+    <option name="compatibility:exclude-filter" value="CtsOsTestCases android.os.cts.UsbDebuggingTest#testUsbDebugging" />
+
+    <!--
+        Exclude testcases failing on Pixel devices
+        TODO(jaeshin@): b/68300743
+    -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testVoiceCommand" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.AvailableIntentsTest#testVoiceSearchHandsFree" />
+
+    <!-- Excluded tese case - TODO(jiyong): b/67739526 to reenable that -->
+    <option name="compatibility:exclude-filter" value="CtsJniTestCases android.jni.cts.JniStaticTest#test_linker_namespaces" />
+
+    <!-- b/68190722: Remove testcases that require RRO which is planned for Pi -->
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActionBarTest#testOpenOptionsMenu" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActionBarTest#testOptionsMenuKey" />
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.ActivityKeyboardShortcutsTest#testRequestShowKeyboardShortcuts" />
+
+    <!-- b/66924299: Remove testcase that logd reads kernel log -->
+    <option name="compatibility:exclude-filter" value="CtsLiblogTestCases liblog#android_logger_get_" />
+
+    <!-- b/71958344: Exclude until CTS releases it -->
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.OverlayHostTest#testInstallingOverlayHasNoEffect" />
+
+    <!-- b/65561379: Exclude android.media.cts.MediaPlayerFlakyNetworkTest -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaPlayerFlakyNetworkTest" />
+
+    <!-- b/161837932: Fix MediaPlayerTests that use "too small" resolution -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaPlayerTest#testOnSubtitleDataListener" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaPlayerTest#testChangeSubtitleTrack" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaPlayerTest#testDeselectTrackForSubtitleTracks" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaPlayerTest#testGetTrackInfoForVideoWithSubtitleTracks" />
+
+    <!-- b/69329663: DirectBootHostTest#testDirectBootNative flaky -->
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DirectBootHostTest#testDirectBootNative" />
+
+    <!-- b/74375238: CtsAppSecurityHostTestCases imcomplete test failure -->
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testCreateDocumentAtInitialLocation" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testCreateExisting" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.android.appsecurity.cts.DocumentsTest#testCreateNew" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testCreateWebLink" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testEject" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testFindDocumentPathInScopedAccess" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testGetContent" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testOpenDocumentAtInitialLocation" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testOpenDocumentTreeAtInitialLocation" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testOpenSimple" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testOpenVirtual" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testTransferDocument" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.DocumentsTest#testTree" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.ScopedDirectoryAccessTest#testDeniesOnceButAllowsAskingAgain" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.ScopedDirectoryAccessTest#testDeniesOnceForAll" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.android.appsecurity.cts.ScopedDirectoryAccessTest#testDeniesOnceForAllClearedWhenPackageRemoved" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.android.appsecurity.cts.ScopedDirectoryAccessTest#testNotAskedAgain" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.ScopedDirectoryAccessTest#testUserAccepts" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.ScopedDirectoryAccessTest#testUserAcceptsNewDirectory" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.android.appsecurity.cts.ScopedDirectoryAccessTest#testUserRejects" />
+
+    <!-- b/74583365: CtsAppSecurityHostTestCases flaky -->
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.AdoptableHostTest#testApps " />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.AdoptableHostTest#testEjected" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.AdoptableHostTest#testPackageInstaller" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.AdoptableHostTest#testPrimaryStorage" />
+
+    <!-- b/152359655: ResumeOnReboot can't work on GSI -->
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.ResumeOnRebootHostTest" />
+
+    <!-- b/77175538: CtsViewTestCases failure flaky -->
+    <option name="compatibility:exclude-filter" value="CtsViewTestCases android.view.cts.PixelCopyTest#testWindowProducerCopyToRGBA16F" />
+
+    <!-- b/73727333: CtsSystemUiTestCases failure flaky -->
+    <option name="compatibility:exclude-filter" value="CtsSystemUiTestCases android.systemui.cts.LightBarTests#testLightNavigationBar" />
+    <option name="compatibility:exclude-filter" value="CtsSystemUiTestCases android.systemui.cts.LightBarThemeTest#testNavigationBarDivider" />
+
+    <!-- b/73727934: CtsAutoFillServiceTestCases flaky -->
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutoFinishSessionTest#hideParentToFinishSession" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutoFinishSessionTest#removeBothViewsToFinishSession" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutoFinishSessionTest#removeParentInBackground" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillCompoundButtonWithTextValue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillDatePickerWithTextValue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillEmptyTextValue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillInvalidListValueToRadioGroup" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillInvalidListValueToSpinner" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillSpinnerWithTextValue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillTextWithListValue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillTimePickerWithTextValue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillToggleValueWithFalse" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillToggleValueWithTrue" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.AutofillValueTest#autofillZeroListValueToSpinner" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#checkFillSelectionAfterSelectingTwoDatasets" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#checkFillSelectionIsResetAfterReturningError" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#checkFillSelectionIsResetAfterReturningNull" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.android.autofillservice.cts.LoginActivityTest#checkFillSelectionIsResetAfterTimeout" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillMultipleDatasetsPickFirst" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillMultipleDatasetsPickSecond" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillMultipleDatasetsPickThird" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillOneDatasetAndMoveFocusAround" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillOneDatasetAndSave" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillOneDatasetAndSaveHidingOverlays" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillOneDatasetAndSaveWhenFlagSecure" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillOneDatasetWhenFlagSecure" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillTwoDatasetsUnevenNumberOfFieldsFillsAll" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutoFillWhenViewHasChildAccessibilityNodes" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillCallbacks" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyAfterServiceReturnedNoDatasets" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyAgainAfterAutomaticallyAutofilledBefore" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyAndSaveAfterServiceReturnedNoDatasets" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyOneDataset" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyPartialField" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyTwoDatasetsPickFirst" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillManuallyTwoDatasetsPickSecond" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillMultipleDatasetsCustomPresentationFirstDatasetMissingSecondField" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillMultipleDatasetsCustomPresentationSameFields" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillMultipleDatasetsCustomPresentationSecondDatasetMissingFirstField" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testAutofillOneDatasetCustomPresentation" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testCancelMultipleTimes" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testCommitMultipleTimes" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthFiltering" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthMixedFilteringSelectAuth" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthMixedSelectAuth" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthMixedSelectNonAuth" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthTwoDatasets" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthTwoFieldsNoValues" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthTwoFieldsReplaceResponse" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testDatasetAuthTwoFieldsUserCancelsFirstAttempt" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testFillResponseAuthBothFieldsUserCancelsFirstAttempt" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testFillResponseAuthJustOneField" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testFillResponseAuthServiceHasNoData" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testFillResponseAuthServiceHasNoDataButCanSave" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testFillResponseAuthWhenAppCallsCancel" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testFillResponseFiltering" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.LoginActivityTest#testUiNotShownAfterAutofilled" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.OptionalSaveActivityTest#testAutofillAllChangedIgnored" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.OptionalSaveActivityTest#testAutofillAllChangedSecondRequiredSaveAll" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.OptionalSaveActivityTest#testAutofillAllFirstRequiredChangedBackToInitialState" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofill4PartitionsAutomatically" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofill4PartitionsManually" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofill4PartitionsMixManualAndAuto" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillMultipleAuthDatasetsInSequence" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillMultipleAuthDatasetsNoOverlap" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillMultipleAuthDatasetsOverlapPickSecond" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillMultipleDatasetsMixedAuthNoAuthNoOverlap" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillMultipleDatasetsNoOverlap" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillMultipleDatasetsOverlappingPicksSecond" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillTwoPartitionsInSequence" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.PartitionedActivityTest#testAutofillTwoPartitionsSkipFirst" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SimpleSaveActivityTest#testAutoFillOneDatasetAndSave_usingUiAutomatorOnly" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SimpleSaveActivityTest#testDismissSave_byTappingBack" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SimpleSaveActivityTest#testTapHomeWhileDatasetPickerUiIsShowing" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SimpleSaveActivityTest#testTapHomeWhileSaveUiIsShowing" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SimpleSaveActivityTest#testTapLink_tapBack_thenStartOverBySayingNoAndFocus" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.SimpleSaveActivityTest#testTapLink_tapBack_thenStartOverBySayingYesAndFocus" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.VirtualContainerActivityTest#testAutofillManuallyOneDataset" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.VirtualContainerActivityTest#testAutofillManuallyTwoDatasetsPickSecond" />
+    <option name="compatibility:exclude-filter" value="CtsAutoFillServiceTestCases android.autofillservice.cts.VirtualContainerActivityTest#testAutofillTwoDatasets" />
+
+    <!-- b/80390042: CtsContentTestCases failure flaky -->
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.cts.ContentProviderCursorWindowTest#testQuery" />
+    <option name="compatibility:exclude-filter" value="CtsContentTestCases android.content.res.cts.PrivateAttributeTest#testNoAttributesAfterLastPublicAttribute" />
+
+    <!-- b/80388296: CtsDevicePolicyManagerTestCases failure flaky -->
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testDisallowAutofill_allowed" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testPackageInstallUserRestrictions" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testPermissionAppUpdate" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testPermissionGrant" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testPermissionMixedPolicies" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testPermissionPolicy" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testSuspendPackage" />
+
+    <!-- b/80407835: CtsServicesHostTestCases failure flaky -->
+    <option name="compatibility:exclude-filter" value="CtsServicesHostTestCases android.server.cts.KeyguardTests#testDialogShowWhenLockedActivity" />
+    <option name="compatibility:exclude-filter" value="CtsServicesHostTestCases android.server.cts.KeyguardTests#testTranslucentShowWhenLockedActivity" />
+
+    <!-- b/80388295: CtsAccessibilityServiceTestCases failure flaky -->
+    <option name="compatibility:exclude-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityGestureDispatchTest#testClickWhenMagnified_matchesActualTouch" />
+
+    <!-- b/80284482: Flaky tests -->
+    <option name="compatibility:exclude-filter" value="CtsAlarmManagerTestCases android.alarmmanager.cts.AppStandbyTests#testAllowWhileIdleAlarms" />
+    <option name="compatibility:exclude-filter" value="CtsAlarmManagerTestCases android.alarmmanager.cts.AppStandbyTests#testBucketUpgradeToNoDelay" />
+    <option name="compatibility:exclude-filter" value="CtsAlarmManagerTestCases android.alarmmanager.cts.AppStandbyTests#testBucketUpgradeToSmallerDelay" />
+    <option name="compatibility:exclude-filter" value="CtsAlarmManagerTestCases android.alarmmanager.cts.AppStandbyTests#testFrequentDelay" />
+    <option name="compatibility:exclude-filter" value="CtsAlarmManagerTestCases android.alarmmanager.cts.AppStandbyTests#testRareDelay" />
+    <option name="compatibility:exclude-filter" value="CtsAlarmManagerTestCases android.alarmmanager.cts.AppStandbyTests#testWorkingSetDelay" />
+
+    <!-- b/110260628: A confirmed GSI incompatibility (waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.DeviceOwnerTest#testCreateAndManageUser_DontSkipSetupWizard" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.DeviceOwnerTest#testSecurityLoggingWithSingleUser" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedDeviceOwnerTest#testKeyManagement" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedProfileOwnerTest#testKeyManagement" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedManagedProfileOwnerTest#testKeyManagement" />
+
+    <!-- b/110405497: Flaky tests (waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsKeystoreTestCases android.keystore.cts.KeyAttestationTest#testDeviceIdAttestation" />
+
+    <!-- b/141113818: Allows unlock for CTS-on-GSI -->
+    <option name="compatibility:exclude-filter" value="CtsKeystoreTestCases android.keystore.cts.KeyAttestationTest#testEcAttestation_DeviceLocked" />
+    <option name="compatibility:exclude-filter" value="CtsKeystoreTestCases android.keystore.cts.KeyAttestationTest#testRsaAttestation_DeviceLocked" />
+
+    <!-- b/110385515: Flaky due to a particular SIM card requirement (excluded) -->
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.ConnectivityManagerTest#testOpenConnection" />
+    <option name="compatibility:exclude-filter" value="CtsWifiTestCases android.net.wifi.rtt.cts.WifiRttTest#testRangingToTestAp" />
+
+    <!-- b/110261912: Flaky tests -->
+    <option name="compatibility:exclude-filter" value="CtsProviderTestCases android.provider.cts.BlockedNumberContractTest#testProviderInteractionsAsRegularApp_fails" />
+
+    <!-- b/80077839: Incompatibility with GSI (waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsStatsdHostTestCases android.cts.statsd.atom.HostAtomTests#testBluetoothActivityInfo" />
+    <option name="compatibility:exclude-filter" value="CtsStatsdHostTestCases android.cts.statsd.atom.HostAtomTests#testScreenStateChangedAtom" />
+    <option name="compatibility:exclude-filter" value="CtsStatsdHostTestCases android.cts.statsd.validation.ValidationTests#testPartialWakelock" />
+
+    <!-- b/110417203: Flaky tests -->
+    <option name="compatibility:exclude-filter" value="CtsUsageStatsTestCases android.app.usage.cts.NetworkUsageStatsTest#testUidTagStateDetails" />
+
+    <!-- b/80077786: MyVerizonServices fail -->
+    <option name="compatibility:exclude-filter" value="CtsPermission2TestCases android.permission2.cts.PrivappPermissionsTest#testPrivappPermissionsEnforcement" />
+
+    <!-- b/111101428: CtsOsTestCases irrelevant test cases -->
+    <option name="compatibility:exclude-filter" value="CtsOsTestCases android.os.cts.BuildTest#testIsSecureUserBuild" />
+    <option name="compatibility:exclude-filter" value="CtsOsTestCases android.os.cts.BuildVersionTest#testBuildFingerprint" />
+
+    <!-- b/111147583: CtsSecurityTestCases irrelevant test cases -->
+    <option name="compatibility:exclude-filter" value="CtsSecurityTestCases android.security.cts.VerifiedBootTest#testVerifiedBootSupport" />
+
+    <!-- b/110405126: CtsPermissionTestCases flaky (due to SIM card setting) -->
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testGetDeviceId" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testGetImei" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testGetLine1Number" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testGetSimSerialNumber" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testGetSubscriberId" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testSetDataEnabled" />
+    <option name="compatibility:exclude-filter" value="CtsPermissionTestCases android.permission.cts.TelephonyManagerPermissionTest#testVoiceMailNumber" />
+
+    <!-- b/111967702: CtsSecurityTestCases irrelevant test cases -->
+    <option name="compatibility:exclude-filter" value="CtsSecurityTestCases android.security.cts.BannedFilesTest#testNoSu" />
+    <option name="compatibility:exclude-filter" value="CtsSecurityTestCases android.security.cts.BannedFilesTest#testNoSuInPath" />
+
+    <!-- b/116170534: CtsMediaTestCases regression (9.0 R4 waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.DecoderTest#testH265HDR10StaticMetadata" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerCornerCase" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerCornerCase2" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerCubicMonotonic" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerDuck" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerJoin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerRamp" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerRunDuringPauseStop" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerStepRamp" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VolumeShaperTest#testPlayerTwoShapers" />
+
+    <!-- b/157286547 CtsIncidentHostTestCases ErrorsTest failure -->
+    <option name="compatibility:exclude-filter" value="CtsIncidentHostTestCases com.android.server.cts.ErrorsTest#testThrowException" />
+    <option name="compatibility:exclude-filter" value="CtsIncidentHostTestCases com.android.server.cts.ErrorsTest#testNativeCrash" />
+
+    <!-- b/112450846: CtsAppSecurityHostTestCases multi-user, fixing on Q -->
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.StorageHostTest#testCache" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.StorageHostTest#testVerifyAppStats" />
+    <option name="compatibility:exclude-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.StorageHostTest#testVerifyStats" />
+
+    <!-- b/111167329: CtsCameraTestCases failure -->
+    <option name="compatibility:exclude-filter" value="CtsCameraTestCases android.hardware.camera2.cts.SurfaceViewPreviewTest#testSurfaceSet"/>
+
+    <!-- b/135588722: CtsUsesLibraryHostTestCases (10_r1 waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsUsesLibraryHostTestCases android.classloaders.cts.UsesLibraryHostTest#testMissingLibrary_full"/>
+    <option name="compatibility:exclude-filter" value="CtsUsesLibraryHostTestCases android.classloaders.cts.UsesLibraryHostTest#testUsesLibrary_full"/>
+    <option name="compatibility:exclude-filter" value="CtsCompilationTestCases android.compilation.cts.AdbRootDependentCompilationTest"/>
+
+    <!-- b/145371681: CtsContentSuggestionsTestCases and CtsAppPredictionServiceTestCases (10_r2 waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsAppPredictionServiceTestCases" />
+    <option name="compatibility:exclude-filter" value="CtsContentSuggestionsTestCases" />
+
+    <!-- b/143513519: CtsCameraTestCases (10_r3 waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsCameraTestCases android.camera.cts.HeifWriterTest#testHeif"/>
+
+    <!-- b/155107044: CtsNetTestCases -->
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testInterfaceCountersUdp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm64Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testInterfaceCountersUdp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacMd5Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha512Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacMd5Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha512Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha1Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha1Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha1Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha1Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm128Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm128Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm96Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha1Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm96Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testCryptTcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm128Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testCryptUdp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAuthUdp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testCryptUdp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAuthUdp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testCryptTcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha1Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testCryptTcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAuthUdp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testIkeOverUdpEncapSocket"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm128Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm128Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha256Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha256Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacMd5Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm96Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testInterfaceCountersUdp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha512Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha512Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha256Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha384Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha384Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha256Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm64Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm64Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha512Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm96Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha384Tcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm96Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha384Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha256Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacMd5Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAuthTcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacMd5Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAuthTcp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha384Tcp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm128Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testCryptUdp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAuthTcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacMd5Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm64Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha256Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm64Udp4"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha384Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm64Udp6"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesGcm96Udp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.IpSecManagerTest#testAesCbcHmacSha512Tcp4UdpEncap"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.TrafficStatsTest#testTrafficStatsForLocalhost"/>
+    <option name="compatibility:exclude-filter" value="CtsNetTestCases android.net.cts.TrafficStatsTest#testValidTotalStats"/>
+
+    <!-- b/150807956: Temporarily disabled due to bad experiment channel -->
+    <option name="compatibility:exclude-filter" value="CtsUiRenderingTestCases android.uirendering.cts.testclasses.LayerTests#testWebViewWithLayerAndComplexClip" />
+    <option name="compatibility:exclude-filter" value="CtsUiRenderingTestCases android.uirendering.cts.testclasses.PathClippingTests#testWebViewClipWithCircle" />
+
+    <!-- b/159295445, b/159294948: CtsDevicePolicyManagerTestCases -->
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.MixedDeviceOwnerTest#testDelegatedCertInstallerDeviceIdAttestation" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.OrgOwnedProfileOwnerTest#testDelegatedCertInstallerDeviceIdAttestation" />
+    <option name="compatibility:exclude-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.OrgOwnedProfileOwnerTest#testDeviceIdAttestationForProfileOwner" />
+
+    <!-- b/153032202: CtsSystemUiTestCases (10_r3 waiver) -->
+    <option name="compatibility:exclude-filter" value="CtsSystemUiTestCases android.systemui.cts.WindowInsetsBehaviorTests#swipeOutsideLimit_systemUiVisible_allEventsCanceled"/>
+</configuration>

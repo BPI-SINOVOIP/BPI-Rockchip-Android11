@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2021 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--
+    The following layout represents this structure.
+
+    The HUN window:
+
+    HUN FocusParkingView
+    ==========HUN focus area==========
+    =                                =
+    =  .............  .............  =
+    =  .           .  .           .  =
+    =  .hun button1.  .hun button2.  =
+    =  .           .  .           .  =
+    =  .............  .............  =
+    =                                =
+    ==================================
+
+    The app window:
+
+    app FocusParkingView
+    ===========focus area 1===========    ============focus area 2===========
+    =                                =    =                                 =
+    =  .............  .............  =    =  .............                  =
+    =  .           .  .           .  =    =  .           .                  =
+    =  .app button1.  .   nudge   .  =    =  .app button2.                  =
+    =  .           .  .  shortcut .  =    =  .           .                  =
+    =  .............  .............  =    =  .............                  =
+    =                                =    =                                 =
+    ==================================    ===================================
+
+    ===========focus area 3===========
+    =                                =
+    =  .............  .............  =
+    =  .           .  .           .  =
+    =  .app button3.  .  default  .  =
+    =  .           .  .   focus   .  =
+    =  .............  .............  =
+    =                                =
+    ==================================
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/hun_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.android.car.ui.FocusParkingView
+            android:id="@+id/hun_fpv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <com.android.car.ui.FocusArea
+            android:id="@+id/hun_focus_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/hun_button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/hun_button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </com.android.car.ui.FocusArea>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/app_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.android.car.ui.FocusParkingView
+            android:id="@+id/app_fpv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.android.car.ui.FocusArea
+                android:id="@+id/app_focus_area1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:nudgeShortcut="@+id/nudge_shortcut"
+                app:nudgeShortcutDirection="right">
+                <Button
+                    android:id="@+id/app_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/nudge_shortcut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </com.android.car.ui.FocusArea>
+            <com.android.car.ui.FocusArea
+                android:id="@+id/app_focus_area2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:nudgeLeft="@+id/app_focus_area3">
+                <Button
+                    android:id="@+id/app_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </com.android.car.ui.FocusArea>
+        </LinearLayout>
+        <com.android.car.ui.FocusArea
+            android:id="@+id/app_focus_area3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultFocus="@+id/app_default_focus">
+            <Button
+                android:id="@+id/app_button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/app_default_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </com.android.car.ui.FocusArea>
+    </LinearLayout>
+</FrameLayout>

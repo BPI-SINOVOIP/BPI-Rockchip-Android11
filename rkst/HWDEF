@@ -1,0 +1,33 @@
+BEGIN MACHINE_INFO
+	magic=0x5041524B
+	manufacturer=rock-chips
+	machine_model=rk28xx
+	machine_id=1616
+END
+
+BEGIN RAM
+	base_addr=0x60000000
+	size=128
+	atag_addr=0x60000800
+	krnl_addr=0x60008000
+END
+
+BEGIN PARTITIONS
+# Flash partitions info must be order of offset
+# Don't change the partitions name, but you can change the partition offset and size.
+# You can Insert new partitions.
+
+	mtd_id=rk28xxnand
+
+#Format: part_name offset:size
+	parameter	0x00000000:0x00001000:fh
+	misc		0x00001000:0x00001000:f
+	kernel		0x00002000:0x00003000:f
+	boot		0x00005000:0x00002000:f
+	recovery	0x00007000:0x00003000:f
+	system		0x0000A000:0x0001E000:f
+	backup		0x00028000:0x00026000:
+	cache		0x0004E000:0x0001E000:
+	userdata	0x0006C000:0x0001E000:
+	user		0x0008A000:0xFFFFFFFF:
+END

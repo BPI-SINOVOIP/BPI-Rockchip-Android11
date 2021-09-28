@@ -1,0 +1,18 @@
+//############################################################
+// MmsService Robolectric test target.                       #
+//############################################################
+
+android_robolectric_test {
+    name: "MmsServiceRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    static_libs: [
+        "androidx.test.core",
+        "testng",
+    ],
+
+    instrumentation_for: "MmsService",
+}

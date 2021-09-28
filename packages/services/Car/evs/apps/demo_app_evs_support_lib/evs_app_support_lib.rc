@@ -1,0 +1,6 @@
+service evs_app_support_lib /system/bin/evs_app_support_lib
+    class hal
+    priority -20
+    user automotive_evs
+    group automotive_evs
+    disabled # will not automatically start with its class; must be explictly started.

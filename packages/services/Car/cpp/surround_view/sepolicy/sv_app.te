@@ -1,0 +1,9 @@
+# surround view sample app
+type sv_app, domain, coredomain;
+
+# allow init to launch processes in this context
+type sv_app_exec, exec_type, file_type, system_file_type;
+init_daemon_domain(sv_app)
+
+# Allow use of binder
+binder_use(sv_app);

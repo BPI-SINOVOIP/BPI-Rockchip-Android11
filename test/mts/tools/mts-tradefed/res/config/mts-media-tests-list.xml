@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="List MTS media tests">
+    <option name="compatibility:include-filter" value="CtsMediaTestCases" />
+    <option name="compatibility:include-filter" value="CtsMediaStressTestCases" />
+    <option name="compatibility:include-filter" value="CtsMediaParserTestCases" />
+
+    <!--b/138964734-->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.MediaCodecCapabilitiesTest#testGetMaxSupportedInstances" />
+
+    <!--Tests from CTS known faliures-->
+
+    <!-- b/38224690 -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.NativeEncoderTest" />
+
+    <!-- b/38280830 -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testVp8Goog0Perf1280x0720" />
+
+    <!-- Exclude tests that are not related to media mainlines -->
+    <option name="compatibility:module-arg" value="CtsMediaTestCases:exclude-annotation:android.media.cts.NonMediaMainlineTest" />
+    <option name="compatibility:module-arg" value="CtsMediaStressTestCases:exclude-annotation:android.mediastress.cts.NonMediaMainlineTest" />
+
+    <!-- Advertise the test suite to media cts. -->
+    <option name="compatibility:module-arg" value="CtsMediaTestCases:instrumentation-arg:mts-media:=true" />
+</configuration>

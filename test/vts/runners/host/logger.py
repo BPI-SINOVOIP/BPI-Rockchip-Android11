@@ -1,0 +1,307 @@
+#
+# Copyright (C) 2016 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+from __future__ import print_function
+
+import datetime
+import logging
+import os
+import re
+import sys
+
+from vts.runners.host import utils
+
+log_line_format = "%(asctime)s.%(msecs).03d %(levelname)s %(message)s"
+# The micro seconds are added by the format string above,
+# so the time format does not include ms.
+log_line_time_format = "%m-%d %H:%M:%S"
+log_line_timestamp_len = 18
+
+logline_timestamp_re = re.compile("\d\d-\d\d \d\d:\d\d:\d\d.\d\d\d")
+
+log_severity_map = {
+    "ERROR": logging.ERROR,
+    "WARNING": logging.WARNING,
+    "INFO": logging.INFO,
+    "DEBUG": logging.DEBUG,
+}
+
+# Directory name in the log path in which files will be included in TradeFed output
+PYTHON_CUSTOM_OUTPUT = 'custom_output_files'
+
+def _parse_logline_timestamp(t):
+    """Parses a logline timestamp into a tuple.
+
+    Args:
+        t: Timestamp in logline format.
+
+    Returns:
+        An iterable of date and time elements in the order of month, day, hour,
+        minute, second, microsecond.
+    """
+    date, time = t.split(' ')
+    month, day = date.split('-')
+    h, m, s = time.split(':')
+    s, ms = s.split('.')
+    return (month, day, h, m, s, ms)
+
+
+def isValidLogLineTimestamp(timestamp):
+    if len(timestamp) == log_line_timestamp_len:
+        if logline_timestamp_re.match(timestamp):
+            return True
+    return False
+
+
+def logLineTimestampComparator(t1, t2):
+    """Comparator for timestamps in logline format.
+
+    Args:
+        t1: Timestamp in logline format.
+        t2: Timestamp in logline format.
+
+    Returns:
+        -1 if t1 < t2; 1 if t1 > t2; 0 if t1 == t2.
+    """
+    dt1 = _parse_logline_timestamp(t1)
+    dt2 = _parse_logline_timestamp(t2)
+    for u1, u2 in zip(dt1, dt2):
+        if u1 < u2:
+            return -1
+        elif u1 > u2:
+            return 1
+    return 0
+
+
+def _get_timestamp(time_format, delta=None):
+    t = datetime.datetime.now()
+    if delta:
+        t = t + datetime.timedelta(seconds=delta)
+    return t.strftime(time_format)[:-3]
+
+
+def epochToLogLineTimestamp(epoch_time):
+    d = datetime.datetime.fromtimestamp(epoch_time / 1000)
+    return d.strftime("%m-%d %H:%M:%S.%f")[:-3]
+
+
+def getLogLineTimestamp(delta=None):
+    """Returns a timestamp in the format used by log lines.
+
+    Default is current time. If a delta is set, the return value will be
+    the current time offset by delta seconds.
+
+    Args:
+        delta: Number of seconds to offset from current time; can be negative.
+
+    Returns:
+        A timestamp in log line format with an offset.
+    """
+    return _get_timestamp("%m-%d %H:%M:%S.%f", delta)
+
+
+def getLogFileTimestamp(delta=None):
+    """Returns a timestamp in the format used for log file names.
+
+    Default is current time. If a delta is set, the return value will be
+    the current time offset by delta seconds.
+
+    Args:
+        delta: Number of seconds to offset from current time; can be negative.
+
+    Returns:
+        A timestamp in log filen name format with an offset.
+    """
+    return _get_timestamp("%m-%d-%Y_%H-%M-%S-%f", delta)
+
+
+def _initiateTestLogger(log_path, prefix=None, filename=None, log_severity="INFO"):
+    """Customizes the root logger for a test run.
+
+    The logger object has a stream handler and a file handler. Both handler logs data
+    according to the log severty level.
+
+    Args:
+        log_path: Location of the log file.
+        prefix: A prefix for each log line in terminal.
+        filename: Name of the log file. The default is the time the logger
+                  is requested.
+        log_severity: string, set the log severity level, default is INFO.
+                      This value affects console stream log handler and the python runner
+                      part of TradeFed host_log.
+    """
+    log = logging.getLogger()
+    # Clean up any remaining handlers.
+    killTestLogger(log)
+    log.propagate = False
+
+    log.setLevel(logging.DEBUG)
+
+    # Log into stream
+    terminal_format = log_line_format
+    if prefix:
+        terminal_format = "[{}] {}".format(prefix, log_line_format)
+    c_formatter = logging.Formatter(terminal_format, log_line_time_format)
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setFormatter(c_formatter)
+    ch.setLevel(log_severity_map.get(log_severity, logging.INFO))
+    log.addHandler(ch)
+
+    # Log everything to file
+    f_formatter = logging.Formatter(log_line_format, log_line_time_format)
+
+    # All the logs of this test class go into one directory
+    if filename is None:
+        filename = getLogFileTimestamp()
+        utils.create_dir(log_path)
+
+    default_log_levels = ('ERROR', 'INFO', 'DEBUG')
+    for level in default_log_levels:
+        idx = filename.rfind('.')
+        if idx < 0:
+            idx = len(filename)
+        addLogFile(log_path=log_path,
+                   filename=filename[:idx] + '_' + level + filename[idx:],
+                   log_severity=level)
+
+    log.log_path = log_path
+    logging.log_path = log_path
+
+
+def killTestLogger(logger):
+    """Cleans up the handlers attached to a test logger object.
+
+    Args:
+        logger: The logging object to clean up.
+    """
+    for h in list(logger.handlers):
+        if isinstance(h, logging.FileHandler):
+            h.close()
+        logger.removeHandler(h)
+
+
+def isSymlinkSupported():
+    """Checks whether the OS supports symbolic link.
+
+    Returns:
+        A boolean representing whether the OS supports symbolic link.
+    """
+    return hasattr(os, "symlink")
+
+
+def createLatestLogAlias(actual_path):
+    """Creates a symlink to the latest test run logs.
+
+    Args:
+        actual_path: The source directory where the latest test run's logs are.
+    """
+    link_path = os.path.join(os.path.dirname(actual_path), "latest")
+    if os.path.islink(link_path):
+        os.remove(link_path)
+    os.symlink(actual_path, link_path)
+
+
+def setupTestLogger(log_path,
+                    prefix=None,
+                    filename=None,
+                    log_severity="INFO",
+                    create_symlink=True):
+    """Customizes the root logger for a test run.
+
+    Args:
+        log_path: Location of the report file.
+        prefix: A prefix for each log line in terminal.
+        filename: Name of the files. The default is the time the objects
+                  are requested.
+        create_symlink: bool. determines whether to create the symlink or not.
+                        set to True as default.
+
+    Returns:
+        A string, abs path to the created log file.
+    """
+    if filename is None:
+        filename = getLogFileTimestamp()
+    utils.create_dir(log_path)
+    logger = _initiateTestLogger(log_path, prefix, filename, log_severity)
+    if create_symlink and isSymlinkSupported():
+        createLatestLogAlias(log_path)
+    return os.path.join(log_path, filename)
+
+
+def addLogFile(log_path, filename=None, log_severity="INFO"):
+    """Creates a log file and adds the handler to the root logger.
+
+    Args:
+        log_path: Location of the report file.
+        filename: Name of the log file. The default is the time the logger
+                  is requested.
+
+    Returns:
+        A string, abs path to the created log file.
+        logging.FileHandler instance which is added to the logger.
+    """
+    if filename is None:
+        filename = getLogFileTimestamp()
+    f_formatter = logging.Formatter(log_line_format, log_line_time_format)
+    fh = logging.FileHandler(os.path.join(log_path, filename))
+    fh.setFormatter(f_formatter)
+    fh.setLevel(log_severity_map.get(log_severity, logging.INFO))
+    logging.getLogger().addHandler(fh)
+    return os.path.join(log_path, filename), fh
+
+
+def normalizeLogLineTimestamp(log_line_timestamp):
+    """Replace special characters in log line timestamp with normal characters.
+
+    Args:
+        log_line_timestamp: A string in the log line timestamp format. Obtained
+            with getLogLineTimestamp.
+
+    Returns:
+        A string representing the same time as input timestamp, but without
+        special characters.
+    """
+    norm_tp = log_line_timestamp.replace(' ', '_')
+    norm_tp = norm_tp.replace(':', '-')
+    return norm_tp
+
+
+class LoggerProxy(object):
+    """This class is for situations where a logger may or may not exist.
+
+    e.g. In controller classes, sometimes we don't have a logger to pass in,
+    like during a quick try in python console. In these cases, we don't want to
+    crash on the log lines because logger is None, so we should set self.log to
+    an object of this class in the controller classes, instead of the actual
+    logger object.
+    """
+
+    def __init__(self, logger=None):
+        self.log = logger
+
+    @property
+    def log_path(self):
+        if self.log:
+            return self.log.log_path
+        return "/tmp/logs"
+
+    def __getattr__(self, name):
+        def log_call(*args):
+            if self.log:
+                return getattr(self.log, name)(*args)
+            print(*args)
+
+        return log_call

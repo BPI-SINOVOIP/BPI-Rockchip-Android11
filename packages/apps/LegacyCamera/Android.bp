@@ -1,0 +1,16 @@
+android_app {
+    name: "LegacyCamera",
+
+    srcs: ["src/**/*.java"],
+
+    //sdk_version: "current",
+
+    platform_apis: true,
+
+    jni_libs: ["libjni_legacymosaic"],
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+
+}

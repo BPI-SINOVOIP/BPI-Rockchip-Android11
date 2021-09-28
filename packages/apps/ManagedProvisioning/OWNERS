@@ -1,0 +1,10 @@
+sandness@google.com
+arangelov@google.com
+alexkershaw@google.com
+scottjonathan@google.com
+kholoudm@google.com
+
+# Only UX writers can approve strings.xml
+per-file res/values/strings.xml = set noparent
+# Only add cotter@ as a reviewer if lestill@ is OOO.
+per-file res/values/strings.xml = lestill@google.com, cotter@google.com

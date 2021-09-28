@@ -1,0 +1,126 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.android.providers.media.module">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <uses-permission android:name="android.permission.MANAGE_USERS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
+
+    <uses-permission android:name="android.permission.WATCH_APPOPS" />
+    <uses-permission android:name="android.permission.UPDATE_APP_OPS_STATS" />
+    <uses-permission android:name="android.permission.UPDATE_DEVICE_STATS" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_RESERVED_DISK" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS" />
+
+    <!-- Permissions required for reading and logging compat changes -->
+    <uses-permission android:name="android.permission.LOG_COMPAT_CHANGE"/>
+    <uses-permission android:name="android.permission.READ_COMPAT_CHANGE_CONFIG"/>
+
+    <application
+            android:name="com.android.providers.media.MediaApplication"
+            android:label="@string/app_label"
+            android:allowBackup="false"
+            android:supportsRtl="true"
+            android:forceQueryable="true"
+            android:usesCleartextTraffic="true">
+        <provider
+                android:name="com.android.providers.media.MediaProvider"
+                android:authorities="media"
+                android:grantUriPermissions="true"
+                android:forceUriPermissions="true"
+                android:exported="true" />
+
+        <provider
+                android:name="com.android.providers.media.MediaDocumentsProvider"
+                android:label="@string/storage_description"
+                android:authorities="com.android.providers.media.documents"
+                android:grantUriPermissions="true"
+                android:exported="true"
+                android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
+
+        <!-- Handles database upgrades after OTAs, then disables itself -->
+        <receiver android:name="com.android.providers.media.MediaUpgradeReceiver">
+            <!-- This broadcast is sent after the core system has finished
+                 booting, before the home app is launched or BOOT_COMPLETED
+                 is sent. -->
+            <intent-filter>
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.android.providers.media.MediaReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <data android:scheme="file" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_SCANNER_SCAN_FILE" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.android.providers.media.IdleService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service
+            android:name="com.android.providers.media.MediaService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service android:name="com.android.providers.media.fuse.ExternalStorageServiceImpl"
+                 android:permission="android.permission.BIND_EXTERNAL_STORAGE_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.storage.ExternalStorageService" />
+            </intent-filter>
+        </service>
+
+        <activity
+                android:name="com.android.providers.media.PermissionActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:theme="@style/PickerDialogTheme"
+                android:exported="false"
+                android:excludeFromRecents="true" />
+
+        <activity
+                android:name="com.android.providers.media.CacheClearingActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:exported="true"
+                android:theme="@style/CacheClearingAlertDialogTheme"
+                android:finishOnCloseSystemDialogs="true"
+                android:launchMode="singleTop"
+                android:excludeFromRecents="true"
+                android:visibleToInstantApps="true"
+                android:priority="100" >
+            <intent-filter>
+                <action android:name="android.os.storage.action.CLEAR_APP_CACHE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

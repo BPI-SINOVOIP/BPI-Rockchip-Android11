@@ -1,0 +1,79 @@
+// Copyright 2019 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Build the Phone app which includes the emergency dialer. See Contacts
+// for the 'other' dialer.
+
+android_app {
+    name: "TeleService",
+
+    libs: [
+        "telephony-common",
+        "voip-common",
+        "ims-common",
+        "libprotobuf-java-lite",
+        "unsupportedappusage",
+    ],
+
+    static_libs: [
+        "androidx.appcompat_appcompat",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "androidx.legacy_legacy-preference-v14",
+        "android-support-annotations",
+        "com.android.phone.common-lib",
+        "guava",
+        "PlatformProperties",
+    ],
+
+    srcs: [
+        ":framework-telephony-common-shared-srcs",
+        "src/**/*.java",
+        "sip/src/**/*.java",
+        "ecc/proto/**/*.proto",
+        "src/com/android/phone/EventLogTags.logtags",
+    ],
+
+    jarjar_rules: ":jarjar-rules-shared",
+
+    resource_dirs: [
+        "res",
+        "sip/res",
+    ],
+
+    asset_dirs: [
+        "assets",
+        "ecc/output",
+    ],
+
+    aaptflags: [
+        "--extra-packages com.android.services.telephony.sip",
+    ],
+
+    platform_apis: true,
+
+    certificate: "platform",
+    privileged: true,
+
+    optimize: {
+        proguard_flags_files: [
+            "proguard.flags",
+            "sip/proguard.flags",
+        ],
+    },
+
+    proto: {
+        type: "lite",
+    },
+}

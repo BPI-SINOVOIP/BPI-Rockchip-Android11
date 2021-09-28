@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Tests monitored by Meerkat Platform team (anti-abuse related).">
+
+    <include name="cts" />
+
+    <option name="plan" value="cts-meerkat" />
+
+    <!-- Disable instant tests -->
+    <option name="compatibility:enable-parameterized-modules" value="false" />
+
+    <!-- System Alert Window (SAW) -->
+    <option name="compatibility:include-filter" value="CtsSystemIntentTestCases"/>
+    <option name="compatibility:include-filter" value="CtsMediaTestCases android.media.cts.MediaProjectionTest"/>
+
+    <!-- Toasts -->
+    <option name="compatibility:include-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.ToastWindowTest"/>
+    <option name="compatibility:include-filter" value="CtsWidgetTestCases android.widget.cts.ToastTest"/>
+    <option name="compatibility:include-filter" value="CtsWidgetTestCases29 android.widget.cts29.ToastTest"/>
+    <option name="compatibility:include-filter" value="CtsToastTestCases android.widget.toast.cts.LegacyToastTest"/>
+
+    <!-- Background activity launch -->
+    <option name="compatibility:include-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.lifecycle.ActivityStarterTests"/>
+    <option name="compatibility:include-filter" value="CtsActivityManagerBackgroundActivityTestCases android.server.wm.BackgroundActivityLaunchTest"/>
+
+    <!-- Icon hiding -->
+    <option name="compatibility:include-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.LimitAppIconHidingTest"/>
+    <option name="compatibility:include-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.DeviceOwnerTest"/>
+    <option name="compatibility:include-filter" value="CtsDevicePolicyManagerTestCases com.android.cts.devicepolicy.LauncherAppsProfileTest"/>
+
+    <!-- App ops -->
+    <option name="compatibility:include-filter" value="CtsAppOpsTestCases android.app.appops.cts.AppOpsTest"/>
+    <option name="compatibility:include-filter" value="CtsWindowManagerDeviceTestCases android.server.wm.AlertWindowsTests"/>
+    <option name="compatibility:include-filter" value="CtsAccessibilityServiceTestCases android.accessibilityservice.cts.AccessibilityLoggingTest"/>
+    <option name="compatibility:include-filter" value="CtsPackageInstallTestCases android.packageinstaller.install.cts.SessionTest"/>
+    <option name="compatibility:include-filter" value="CtsPackageInstallTestCases android.packageinstaller.install.cts.ExternalSourcesTestAppOpAllowed"/>
+    <option name="compatibility:include-filter" value="CtsPackageUninstallTestCases"/>
+
+    <!-- Tests that we've added for b/72485440 and in ag/3789406 -->
+    <option name="compatibility:include-filter" value="CtsContentTestCases android.content.cts.ContextTest"/>
+    <option name="compatibility:include-filter" value="CtsContentTestCases android.content.cts.ContextMoreTest"/>
+    <option name="compatibility:include-filter" value="CtsContentTestCases android.content.cts.ContextWrapperTest"/>
+
+    <!-- Tests that we've added for b/73451844 -->
+    <option name="compatibility:include-filter" value="CtsContentTestCases android.content.pm.cts.PackageManagerTest"/>
+
+    <!-- Network watchlist tests -->
+    <option name="compatibility:include-filter" value="CtsNetTestCases android.net.cts.NetworkWatchlistTest"/>
+
+    <!-- App data isolation -->
+    <option name="compatibility:include-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.AppDataIsolationTests"/>
+
+    <!-- Install attribution -->
+    <option name="compatibility:include-filter" value="CtsAppSecurityHostTestCases android.appsecurity.cts.AppSecurityTests"/>
+    <option name="compatibility:include-filter" value="CtsPackageInstallTestCases android.packageinstaller.install.cts.InstallSourceInfoTest"/>
+</configuration>

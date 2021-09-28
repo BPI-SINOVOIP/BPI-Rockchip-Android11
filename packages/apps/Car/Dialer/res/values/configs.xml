@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2019 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<resources>
+    <bool name="config_enable_dial_motion">true</bool>
+    <item name="config_dial_motion_scale_start" format="float" type="integer">1.5</item>
+    <integer name="config_dial_motion_duration">200</integer>
+    <!-- 21 stands for Gravity.RIGHT | Gravity.CENTER_VERTICAL-->
+    <integer name="config_dialed_number_gravity">21</integer>
+    <item name="config_background_image_alpha" format="float" type="dimen">1.0</item>
+    <item name="config_background_image_error_alpha" format="float" type="dimen">1.0</item>
+
+    <!-- A config determines whether to show divider and callog_action_button for callog items
+    that are not stored as contacts. "true" will show divider and button as disable state and
+    "false" will make divider and button invisible for non contacts. -->
+    <bool name="config_show_calllog_action_button_for_non_contact">false</bool>
+
+    <!-- A config determines whether to show divider and the button on the right side for contacts
+    without any contact details. "true" will show divider and button as disable state and "false"
+    will make divider and button invisible for empty contacts. -->
+    <bool name="config_show_contact_detail_button_for_empty_contact">false</bool>
+
+    <!-- A config determines whether to show the header with an avatar and contact name in the contact details page. -->
+    <bool name="config_show_contact_details_header">true</bool>
+    <!-- A config determines whether to show postal address in contact details page. -->
+    <bool name="config_show_postal_address">true</bool>
+    <!-- A config determines whether to show the action bar view in the contact details page.-->
+    <bool name="config_show_contact_details_action_bar_view">false</bool>
+    <!-- A config determines if to show the action bar avatar in the contact details page.-->
+    <bool name="config_show_contact_details_action_bar_avatar">true</bool>
+
+    <!-- Use app name as toolbar title. Supported value see @attr/toolbarTitleMode -->
+    <integer name="config_toolbar_title_mode">0</integer>
+
+    <!-- A config determines whether to show the full screen ui when call is answered-->
+    <bool name="config_show_fullscreen_incall_ui">true</bool>
+    <!-- A config determines whether to show an entry in setting to config showing full screen UI
+    when call is answered-->
+    <bool name="config_should_show_active_call_setting">false</bool>
+
+    <!-- Config for enabling incoming call HUN fullscreen intent -->
+    <bool name="config_show_hun_fullscreen_incall_ui">true</bool>
+
+    <!-- A config determines whether to show a heads up notification when there's a incoming call-->
+    <bool name="config_should_suppress_incoming_call_hun">false</bool>
+    <!-- A config determines whether to show an entry in setting to config showing a heads up
+    notification when there's a incoming call-->
+    <bool name="config_should_show_incoming_call_hun_setting">false</bool>
+
+    <!-- A config determines whether to show type down list on Dialpad -->
+    <bool name="config_show_type_down_list_on_dialpad">true</bool>
+    <!-- A config determines whether to show user profile for input number only when type down is
+    not showing. This config works only when config_show_type_down_list_on_dialpad is false. -->
+    <bool name="config_show_detailed_user_profile_on_dialpad">false</bool>
+
+    <!-- Maximum allowed digits to dial, when "no dialpad" UXR restriction is enforced. If
+     the parameter is set to "0", the dialing is restricted entirely, when the restriction is
+     in effect. "-1" or any other negative value means "ignore no dialpad" restriction. -->
+    <integer name="config_no_dialpad_uxr_max_allow_digits">-1</integer>
+
+    <!-- Maximum number of unrestricted items in Dialpad typedown list when UXR is not enforced.
+     Any negative value is unlimited. -->
+    <integer name="config_type_down_list_limit">-1</integer>
+</resources>

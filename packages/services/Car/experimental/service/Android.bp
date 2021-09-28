@@ -1,0 +1,83 @@
+// Copyright (C) 2019 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//
+
+// Build the Experimental Car service.
+
+experimentalcar_service_sources = ["src/**/*.java"]
+
+android_app {
+    name: "ExperimentalCarService",
+
+    srcs: experimentalcar_service_sources,
+
+    resource_dirs: ["res"],
+
+    platform_apis: true,
+
+    // Each update should be signed by OEMs
+    certificate: "platform",
+    privileged: true,
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+        enabled: false,
+    },
+
+    libs: ["android.car"],
+
+    static_libs: [
+      "car-service-common-util-static-lib",
+      "car-experimental-api-static-lib",
+    ],
+
+    required: ["privapp_whitelist_com.android.experimentalcar"],
+
+    // Disable build in PDK, missing aidl import breaks build
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+}
+
+//####################################################################################
+// Build a static library to help mocking various car services in testing. This is meant to be used
+// for internal unit tests around the car service.
+//####################################################################################
+android_library {
+    name: "experimentalcar-service-test-static-lib",
+
+    srcs: experimentalcar_service_sources,
+
+    resource_dirs: ["res"],
+
+    libs: [
+        "android.car",
+    ],
+
+    static_libs: [
+      "car-service-common-util-static-lib",
+      "car-experimental-api-static-lib",
+    ],
+
+    min_sdk_version: "25",
+
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+}

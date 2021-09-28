@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Name of this ime [CHAR LIMIT=20] -->
+    <string name="ime_name"><xliff:g id="app_name">Leanback</xliff:g> Keyboard</string>
+    <!-- Name of this ime's input service [CHAR LIMIT=20] -->
+    <string name="ime_service_name"><xliff:g id="app_name">Leanback</xliff:g> Keyboard</string>
+
+    <!-- Symbols that are commonly considered word separators in this language [DO NOT TRANSLATE] -->
+    <string name="word_separators">\u0020.,;:!?\n()[]*&amp;@{}/&lt;&gt;_+=|&quot;</string>
+
+    <!-- Labels for the action key in different mode-->
+    <!-- Label go for IME action key [CHAR LIMIT=20] -->
+    <string name="label_go_key">Go</string>
+    <!-- Label next for IME action key [CHAR LIMIT=20] -->
+    <string name="label_next_key">Next</string>
+    <!-- Label send for IME action key [CHAR LIMIT=20] -->
+    <string name="label_send_key">Send</string>
+    <!-- Label search for IME action key [CHAR LIMIT=20] -->
+    <string name="label_search_key">Search</string>
+    <!-- Label done for IME action key [CHAR LIMIT=20] -->
+    <string name="label_done_key">Done</string>
+
+    <!-- DO NOT TRANSLATE autocomplete email address of commong domains -->
+    <string-array name="common_domains" translatable="false">
+        <item>"@gmail.com"</item>
+        <item>"@yahoo.com"</item>
+        <item>"@hotmail.com"</item>
+    </string-array>
+
+    <!-- Label for LeanbackIme Settings [CHAR LIMIT=50] -->
+    <string name="settings_title">Keyboard Options</string>
+    <!-- Name of a setting that controls LeanbackIme's movement sensitivity [CHAR LIMIT=50] -->
+    <string name="title_movement_sensitivity">Movement sensitivity</string>
+    <!-- Values for movement sensitivity settings [DO NOT TRANSLATE] -->
+    <string-array name="movement_sensitivity_values" translatable="false" >
+        <item>0.6</item>
+        <item>0.8</item>
+        <item>1.0</item>
+        <item>1.2</item>
+        <item>1.4</item>
+    </string-array>
+    <!-- Description / label for a button that turns a setting on [CHAR LIMIT=50]-->
+    <string name="btn_on">On</string>
+    <!-- Description / label for a button that turns a setting off [CHAR LIMIT=50]-->
+    <string name="btn_off">Off</string>
+    <!-- Description for English (United States) keyboard subtype [DO NOT TRANSLATE] -->
+    <string name="subtype_generic" translatable="false">%s</string>
+
+    <!-- KeyboardView - accessibility support -->
+    <!-- Description of the Space button in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_space">Space</string>
+    <!-- Description of the Delete button in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_delete">Delete</string>
+    <!-- Description of the Mode change button in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_mode_change">Mode change</string>
+    <!-- Description of the Shift button in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_shift">Shift</string>
+    <!-- Description of the Caps lock in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_caps">Caps Lock</string>
+    <!-- Description of the left cursor button in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_left">Left</string>
+    <!-- Description of the right cursor button in a KeyboardView. [CHAR LIMIT=NONE] -->
+    <string name="keyboardview_keycode_right">Right</string>
+
+    <!-- Announce that a headset is required to hear keyboard keys while typing a password. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_headset_required_to_hear_password">Plug in a headset to hear password keys spoken.</string>
+    <!-- The value of a keyboard key announced when accessibility is enabled and no headsed is used. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_password_character_no_headset">Dot.</string>
+</resources>

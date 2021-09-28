@@ -1,0 +1,47 @@
+# Domain to run ExperimentalCarService (com.android.experimentalcar)
+type experimentalcarservice_app, domain, coredomain;
+app_domain(experimentalcarservice_app);
+
+allow experimentalcarservice_app wifi_service:service_manager find;
+
+# Allow access certain to system services.
+# Keep alphabetically sorted.
+allow experimentalcarservice_app {
+    accessibility_service
+    activity_service
+    activity_task_service
+    audio_service
+    audioserver_service
+    autofill_service
+    bluetooth_manager_service
+    carservice_service
+    connectivity_service
+    content_service
+    deviceidle_service
+    display_service
+    graphicsstats_service
+    input_method_service
+    input_service
+    location_service
+    lock_settings_service
+    media_session_service
+    network_management_service
+    power_service
+    procfsinspector_service
+    sensorservice_service
+    surfaceflinger_service
+    telecom_service
+    uimode_service
+    voiceinteraction_service
+}:service_manager find;
+
+# Read and write /data/data subdirectory.
+allow experimentalcarservice_app system_app_data_file:dir create_dir_perms;
+allow experimentalcarservice_app system_app_data_file:{ file lnk_file } create_file_perms;
+# R/W /data/system/car
+allow experimentalcarservice_app system_car_data_file:dir create_dir_perms;
+allow experimentalcarservice_app system_car_data_file:{ file lnk_file } create_file_perms;
+
+net_domain(experimentalcarservice_app)
+
+allow experimentalcarservice_app cgroup:file rw_file_perms;

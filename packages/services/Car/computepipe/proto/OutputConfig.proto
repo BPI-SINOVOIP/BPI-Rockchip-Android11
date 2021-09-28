@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+enum PacketType {
+  SEMANTIC_DATA = 0;
+  PIXEL_DATA = 1;
+  PIXEL_ZERO_COPY_DATA = 2;
+}
+
+message OutputConfig {
+  optional string stream_name = 1;
+
+  optional PacketType type = 2;
+
+  optional int32 stream_id = 3;
+}

@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2019 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<manifest android:sharedUserId="android.uid.system"
+     android:versionCode="1"
+     android:versionName="1.0"
+     package="com.android.tv.settings"
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-sdk android:minSdkVersion="23"/>
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BACKUP"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA"/>
+    <uses-permission android:name="android.permission.DELETE_CACHE_FILES"/>
+    <uses-permission android:name="android.permission.DUMP"/>
+    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS_PRIVILEGED"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.INJECT_EVENTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_DEBUGGING"/>
+    <uses-permission android:name="android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS"/>
+    <uses-permission android:name="android.permission.MANAGE_USERS"/>
+    <uses-permission android:name="android.permission.MANAGE_PROFILE_AND_DEVICE_OWNERS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.NETWORK_SETTINGS"/>
+    <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG"/>
+    <uses-permission android:name="android.permission.PEERS_MAC_ADDRESS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.REBOOT"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SET_PREFERRED_APPLICATIONS"/>
+    <uses-permission android:name="android.permission.SET_TIME"/>
+    <uses-permission android:name="android.permission.SET_TIME_ZONE"/>
+    <uses-permission android:name="android.permission.USE_RESERVED_DISK"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="com.google.android.assistant.READ_HOTWORD_STATE"/>
+    <uses-permission android:name="com.google.android.assistant.WRITE_HOTWORD_STATE"/>
+    <uses-permission android:name="android.permission.MANAGE_SLICE_PERMISSIONS"/>
+
+    <application android:banner="@drawable/ic_launcher_banner_settings"
+         android:defaultToDeviceProtectedStorage="true"
+         android:directBootAware="true"
+         android:forceQueryable="true"
+         android:icon="@drawable/logo_settings_color_48dp"
+         android:label="@string/settings_app_name"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.Settings"
+         android:usesCleartextTraffic="true">
+
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:label="@string/settings_app_name"
+             android:name=".MainSettings"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <!-- Intent filter used to display this activity as a settings
+                                 entry point in the LeanbackLauncher -->
+            <intent-filter android:icon="@drawable/ic_settings_launcher_icon"
+                 android:label="@string/launcher_settings_app_name"
+                 android:priority="3">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LEANBACK_SETTINGS"/>
+            </intent-filter>
+        </activity>
+
+        <!-- WifiSetupActivity may be (usually is) started from setup so theme is
+                         determined at runtime -->
+        <activity android:clearTaskOnLaunch="true"
+             android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".connectivity.setup.WifiSetupActivity"
+             android:theme="@style/Theme.Setup">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="com.android.net.wifi.SETUP_WIFI_NETWORK"/>
+                <!-- TODO remove custom action when stop including /packages/apps/Settings -->
+                <action android:name="com.android.net.wifi.CANVAS_SETUP_WIFI_NETWORK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <!--
+                            Enabling this <intent-filter> will signal to Setup that WifiSetupActivity will handle
+                            network connectivity (in that case Setup will launch us to handle network duty).
+            <intent-filter>
+                <action android:name="com.android.net.GET_CONNECTED"
+                     />
+                <category android:name="android.intent.category.DEFAULT"
+                     />
+            </intent-filter>
+                            -->
+        </activity>
+        <activity android:clearTaskOnLaunch="true"
+             android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".connectivity.WifiConnectionActivity"
+             android:theme="@style/Theme.SettingsConnectivity"/>
+        <activity android:clearTaskOnLaunch="true"
+             android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:name=".connectivity.EditProxySettingsActivity"
+             android:theme="@style/Theme.SettingsConnectivity"/>
+        <activity android:clearTaskOnLaunch="true"
+             android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:name=".connectivity.EditIpSettingsActivity"
+             android:theme="@style/Theme.SettingsConnectivity"/>
+        <activity android:clearTaskOnLaunch="true"
+             android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".connectivity.AddWifiNetworkActivity"
+             android:theme="@style/Theme.SettingsConnectivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".accounts.AccountSyncActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.ACCOUNT_SYNC_SETTINGS"/>
+                <action android:name="android.settings.SYNC_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:name=".accounts.RemoveAccountDialog"/>
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".accounts.AddAccountWithTypeActivity">
+            <intent-filter>
+                <action android:name="android.settings.ADD_ACCOUNT_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.apps.AppsActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.APPLICATION_SETTINGS"/>
+                <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="com.android.settings.SHORTCUT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.apps.AllAppsActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.APPLICATION_SETTINGS"/>
+                <action android:name="android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="com.android.settings.SHORTCUT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.apps.specialaccess.AppUsageAccessActivity"
+             android:taskAffinity=""
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.apps.specialaccess.PictureInPictureActivity"
+             android:taskAffinity=""
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.settings.PICTURE_IN_PICTURE_SETTINGS"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.apps.specialaccess.SystemAlertActivity"
+             android:taskAffinity=""
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.apps.AppManagementActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.StorageResetActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS"/>
+                <action android:name="android.settings.MEMORY_CARD_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE"/>
+                <action android:name="android.os.storage.action.MANAGE_STORAGE"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:name=".device.storage.ResetActivity"
+             android:theme="@style/Theme.Settings.TwoPanel"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".connectivity.NetworkActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+
+            <!-- Intent filter used to display this activity as a settings
+                                 entry point in the LeanbackLauncher -->
+            <intent-filter android:icon="@drawable/ic_settings_wifi_active_0_launcher"
+                 android:label="@string/launcher_network_app_name"
+                 android:priority="2">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LEANBACK_SETTINGS"/>
+            </intent-filter>
+
+            <intent-filter android:priority="100">
+                <action android:name="android.settings.WIFI_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LEANBACK_SETTINGS"/>
+            </intent-filter>
+
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.LOCATION_SCANNING_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.settings.DATA_SAVER_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.settings.DATA_ALERT_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.settings.WIFI_ADD_NETWORKS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LEANBACK_SETTINGS"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.SecurityActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.settings.SECURITY_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity-alias android:enabled="false"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".users.RestrictedProfileActivityLauncherEntry"
+             android:targetActivity=".system.SecurityActivity">
+
+            <!--
+                                 Intent filter used to display this activity as a settings
+                                 entry point in the LeanbackLauncher
+                            -->
+            <intent-filter android:icon="@drawable/ic_settings_restricted_profile_launcher"
+                 android:label="@string/launcher_restricted_profile_app_name"
+                 android:priority="0">
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LEANBACK_SETTINGS"/>
+            </intent-filter>
+        </activity-alias>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.displaysound.SoundActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="com.android.settings.SOUND_SETTINGS"/>
+                <action android:name="android.settings.SOUND_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="com.android.settings.SHORTCUT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.display.daydream.DaydreamActivity"
+             android:theme="@style/Theme.Settings.TwoPanel"/>
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".device.display.daydream.DaydreamVoiceAction"
+             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+
+                <!-- This intent is launched by the SLEEP voice action from Pano Search -->
+                <action android:name="com.google.android.pano.action.SLEEP"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.CaptionSetupActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.settings.CAPTIONING_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.DateTimeActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.settings.DATE_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.LocationActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.LOCATION_SOURCE_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="com.android.settings.SHORTCUT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.development.DevelopmentActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS"/>
+                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="false"
+             android:name=".system.development.AppPicker"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".inputmethod.KeyboardActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.INPUT_METHOD_SETTINGS"/>
+
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="false"
+             android:launchMode="singleInstance"
+             android:name=".autofill.AutofillPickerActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+        </activity>
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:label="@string/title_select_autofill_service"
+             android:launchMode="singleInstance"
+             android:name=".autofill.AutofillPickerTrampolineActivity"
+             android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_SET_AUTOFILL_SERVICE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|locale"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.LanguageActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.settings.LOCALE_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.InputsActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".accessories.BluetoothAccessoryActivity"
+             android:theme="@style/Theme.Settings.TwoPanel"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:launchMode="singleTask"
+             android:name=".accessories.AddAccessoryActivity"
+             android:persistableMode="persistNever"
+             android:showWhenLocked="true"
+             android:taskAffinity=""
+             android:turnScreenOn="true">
+            <intent-filter>
+                <action android:name="com.google.android.intent.action.CONNECT_INPUT"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:exported="true"
+             android:name=".accessories.BluetoothPairingRequest">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".accessories.BluetoothPairingDialog"
+             android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".accessories.BluetoothDevicePickerActivity">
+            <intent-filter>
+                <action android:name="android.bluetooth.devicepicker.action.LAUNCH"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".about.AboutActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.settings.DEVICE_INFO_SETTINGS"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+            </intent-filter>
+        </activity>
+        <!-- Runs in the phone process since it needs access to the Phone object -->
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".about.StatusActivity"
+             android:process="com.android.phone"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:label="@string/about_legal_license"
+             android:name=".about.LicenseActivity">
+            <intent-filter>
+                <action android:name="android.settings.LICENSE"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".name.DeviceNameSettingsActivity">
+            <intent-filter>
+                <action android:name="android.settings.DEVICE_NAME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".name.DeviceNameSuggestionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION"/>
+            </intent-filter>
+            <!--Default title for suggested setting-->
+            <meta-data android:name="com.android.settings.title"
+                 android:resource="@string/device_name_suggestion_title"/>
+            <!--Default summary for suggested setting-->
+            <meta-data android:name="com.android.settings.summary"
+                 android:resource="@string/device_name_suggestion_summary"/>
+            <!--Default icon for our suggested setting-->
+            <meta-data android:name="com.android.settings.icon"
+                 android:resource="@drawable/ic_device_name_suggestion"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|navigation"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:label="@string/device_name"
+             android:name=".name.setup.DeviceNameFlowStartActivity"
+             android:theme="@style/SetupFlowGuidedStepTheme">
+            <intent-filter>
+                <action android:name="android.settings.START_DEVICE_NAME_FLOW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <service android:name=".users.UserSwitchListenerService"/>
+        <receiver android:exported="true"
+             android:name=".users.UserSwitchListenerService$BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:exported="true"
+             android:name=".device.storage.DiskReceiver">
+            <intent-filter>
+                <action android:name="android.os.storage.action.VOLUME_STATE_CHANGED"/>
+                <action android:name="com.google.android.tungsten.setupwraith.TV_SETTINGS_POST_SETUP"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:exported="false"
+             android:name=".device.storage.SettingsStorageService$Impl"/>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="false"
+             android:name=".device.storage.NewStorageActivity"
+             android:taskAffinity="">
+            <intent-filter>
+                <action android:name="com.android.tv.settings.action.NEW_STORAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="false"
+             android:name=".device.storage.UnmountActivity">
+            <intent-filter>
+                <action android:name="com.android.tv.settings.action.UNMOUNT_STORAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="false"
+             android:name=".device.storage.FormatActivity"/>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="false"
+             android:name=".device.storage.MigrateStorageActivity">
+            <intent-filter>
+                <action android:name="com.android.tv.settings.action.MIGRATE_STORAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="false"
+             android:name=".device.apps.MoveAppActivity">
+            <intent-filter>
+                <action android:name="com.android.tv.settings.action.MOVE_APP"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:label="@string/bluetooth_permission_request"
+             android:name=".accessories.BluetoothRequestPermissionActivity"
+             android:permission="android.permission.BLUETOOTH"
+             android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="1">
+                <action android:name="android.bluetooth.adapter.action.REQUEST_DISCOVERABLE"/>
+                <action android:name="android.bluetooth.adapter.action.REQUEST_ENABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!-- Triggered when user-selected home app isn't encryption aware -->
+        <activity android:configChanges="locale|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".system.FallbackHome"
+             android:theme="@style/FallbackHome">
+            <intent-filter android:priority="-1000">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:clearTaskOnLaunch="true"
+             android:exported="true"
+             android:label=""
+             android:name=".inputmethod.InputMethodAndSubtypeEnablerActivity"
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.INPUT_METHOD_SUBTYPE_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:exported="true"
+             android:label="@string/install_other_apps"
+             android:name=".device.apps.specialaccess.ExternalSourcesActivity"
+             android:taskAffinity=""
+             android:theme="@style/Theme.Settings.TwoPanel">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_UNKNOWN_APP_SOURCES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </activity>
+
+        <!-- Dummy intent filters for CTS TODO: implement something useful -->
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".EmptyStubActivity"
+             android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.settings.WEBVIEW_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
+                <action android:name="android.settings.HOME_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!-- FileProvider to share a generated license html file.
+                         Note that "com.android.settings.files"
+             is set here as its authorities because a Uri
+                         permission grant should be allowed to share a file with an external browser but it is
+                         allowed only for Settings' authorities in ActivityManagerService.  -->
+        <provider android:authorities="com.android.settings.files"
+             android:exported="false"
+             android:grantUriPermissions="true"
+             android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                 android:resource="@xml/file_paths"/>
+        </provider>
+        <provider android:authorities="com.android.tv.settings.name"
+             android:exported="true"
+             android:name=".name.SuggestionContentProvider">
+            <intent-filter>
+                <action android:name="com.android.settings.action.SUGGESTION_STATE_PROVIDER"/>
+            </intent-filter>
+        </provider>
+        <!-- Workaround to fix b/139637267 in Q. -->
+        <provider android:authorities="${applicationId}.lifecycle-tests"
+             android:exported="false"
+             android:multiprocess="true"
+             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+             tools:replace="android:authorities"/>
+
+        <activity android:clearTaskOnLaunch="true"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".deviceadmin.ProfileOwnerAdd"
+             android:theme="@style/Theme.Settings.Transparent">
+            <intent-filter android:priority="1000">
+                <action android:name="android.app.action.SET_PROFILE_OWNER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:excludeFromRecents="true"
+             android:exported="true"
+             android:launchMode="singleTop"
+             android:name=".ActionDisabledByAdminDialog"
+             android:taskAffinity="com.android.tv.settings"
+             android:theme="@style/Theme.Settings.Transparent">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SHOW_ADMIN_SUPPORT_DETAILS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:clearTaskOnLaunch="true"
+             android:excludeFromRecents="true"
+             android:exported="true"
+             android:name=".deviceadmin.DeviceAdminAdd">
+            <intent-filter>
+                <action android:name="android.app.action.ADD_DEVICE_ADMIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

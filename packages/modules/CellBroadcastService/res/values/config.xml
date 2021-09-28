@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <!-- Package names of additional cell broadcast receivers -->
+    <string-array name="additional_cell_broadcast_receiver_packages" translatable="false">
+    </string-array>
+
+    <!-- Package names of the test cell broadcast receivers, only used on debug builds -->
+    <string-array name="test_cell_broadcast_receiver_packages" translatable="false">
+    </string-array>
+
+    <!-- If this value is true, SMS encoded as octet is decoded by utf8 decoder.
+      If false, decoded by Latin decoder. -->
+    <bool name="config_sms_utf8_support">false</bool>
+
+    <!-- The message expiration time in milliseconds for duplicate detection -->
+    <integer name="message_expiration_time">86400000</integer>
+
+    <!-- Whether to compare message body when deduping messages -->
+    <bool name="duplicate_compare_body">false</bool>
+
+    <!-- Whether to reset alert message duplicate detection and geo-fencing check after
+    reboot or toggling airplane mode -->
+    <bool name="reset_on_power_cycle_or_airplane_mode">false</bool>
+
+    <!-- Cell broadcast channels for area info update. Note the channel configuration for area info
+         is needed in CellBroadcastReceiver as well.  -->
+    <integer-array name="area_info_channels">
+    </integer-array>
+
+    <!-- Package names of the area info receivers -->
+    <string-array name="config_area_info_receiver_packages" translatable="false">
+        <item>com.android.settings</item>
+    </string-array>
+
+    <!-- The maximum waiting time in seconds for location to perform
+         device based geo-fencing -->
+    <integer name="max_location_waiting_time">30</integer>
+
+    <!-- A toggle that controls whether or not to use the new geo fence calculation. -->
+    <bool name="use_new_geo_fence_calculation">false</bool>
+
+    <!-- The threshold in which a UE can be outside of the geofence and still
+      receive a Cell Broadcast message. The value given is in meters.
+      Default is according to FCC spec of .1 miles which is ~160 meters.
+       -->
+    <integer name="geo_fence_threshold">160</integer>
+</resources>

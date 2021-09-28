@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Runs all kernel tests in vts suite">
+    <include name="vts" />
+
+    <option name="plan" value="vts-kernel" />
+    <option name="test-tag" value="vts-kernel" />
+
+    <option name="compatibility:include-filter" value="binderDriverInterfaceTest" />
+    <option name="compatibility:include-filter" value="binderLibTest" />
+    <option name="compatibility:include-filter" value="binderSafeInterfaceTest  " />
+    <option name="compatibility:include-filter" value="bpf_module_test" />
+    <option name="compatibility:include-filter" value="ion-unit-tests" />
+    <option name="compatibility:include-filter" value="KernelApiSysfsTest" />
+    <option name="compatibility:include-filter" value="KernelDynamicPartitionsTest  " />
+    <option name="compatibility:include-filter" value="KernelLibcutilsTest" />
+    <option name="compatibility:include-filter" value="KernelSelinuxFileApiTest" />
+    <option name="compatibility:include-filter" value="memunreachable_binder_test" />
+    <option name="compatibility:include-filter" value="vts_core_liblp_test  " />
+    <option name="compatibility:include-filter" value="vts_core_test_binary_qtaguid_module" />
+    <option name="compatibility:include-filter" value="vts_kernel_encryption_test" />
+    <option name="compatibility:include-filter" value="vts_kernel_net_tests" />
+    <option name="compatibility:include-filter" value="vts_kernel_proc_file_api_test" />
+    <option name="compatibility:include-filter" value="vts_kernel_tun_test" />
+    <option name="compatibility:include-filter" value="vts_libdm_test" />
+    <option name="compatibility:include-filter" value="vts_libsnapshot_test" />
+    <option name="compatibility:include-filter" value="vts_linux_kselftest_arm_32" />
+    <option name="compatibility:include-filter" value="vts_linux_kselftest_arm_64" />
+    <option name="compatibility:include-filter" value="vts_linux_kselftest_x86_32" />
+    <option name="compatibility:include-filter" value="vts_linux_kselftest_x86_64" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_arm" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_arm_lowmem" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_arm_64" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_arm_64_hwasan" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_arm_64_lowmem" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_arm_64_lowmem_hwasan" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_x86" />
+    <option name="compatibility:include-filter" value="vts_ltp_test_x86_64" />
+
+</configuration>

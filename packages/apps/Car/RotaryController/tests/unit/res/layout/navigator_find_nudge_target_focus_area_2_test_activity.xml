@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2021 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!--
+    The following layout represents this structure.
+
+    ========topLeft focus area========    ========topRight focus area========
+    =                                =    =                                 =
+    =  .............  .............  =    =  .............                  =
+    =  .           .  .           .  =    =  .           .                  =
+    =  . topLeft1  .  .  topLeft2 .  =    =  . topRight1 .                  =
+    =  .           .  .           .  =    =  .           .                  =
+    =  .............  .............  =    =  .............                  =
+    =                                =    =                                 =
+    ==================================    ===================================
+
+    =======middleLeft focus area======
+    =                                =
+    =  .............  .............  =
+    =  .           .  .           .  =
+    =  .middleLeft1.  .middleLeft2.  =
+    =  . disabled  .  . disabled  .  =
+    =  .............  .............  =
+    =                                =
+    ==================================
+
+    =======bottomLeft focus area======
+    =                                =
+    =  .............  .............  =
+    =  .           .  .           .  =
+    =  .bottomLeft1.  .bottomLeft2.  =
+    =  .           .  .           .  =
+    =  .............  .............  =
+    =                                =
+    ==================================
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.android.car.ui.FocusArea
+            android:id="@+id/top_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/top_left1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/top_left2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </com.android.car.ui.FocusArea>
+        <com.android.car.ui.FocusArea
+            android:id="@+id/middle_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/middle_left1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"/>
+            <Button
+                android:id="@+id/middle_left2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"/>
+        </com.android.car.ui.FocusArea>
+        <com.android.car.ui.FocusArea
+            android:id="@+id/bottom_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/bottom_left1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/bottom_left2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </com.android.car.ui.FocusArea>
+    </LinearLayout>
+    <com.android.car.ui.FocusArea
+        android:id="@+id/top_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/top_right1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.android.car.ui.FocusArea>
+</LinearLayout>

@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.fuzz.proto;
+
+enum PixelFormat {
+    RGB = 0;
+    RGBA = 1;
+    GRAY = 2;
+}
+
+message Frame {
+    required uint32 height = 1;
+    required uint32 width = 2;
+    required PixelFormat format  = 3;
+    required uint32 stride = 4;
+    required string buffer = 5;
+}
+
+message PixelMemHandleFuzzerInput {
+    repeated Frame frames = 1;
+}

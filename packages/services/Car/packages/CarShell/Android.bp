@@ -1,0 +1,11 @@
+android_app {
+    name: "CarShell",
+    srcs: ["src/**/*.java"],
+    // Although it has carshell name, it add permission to shell package
+    required: ["allowed_privapp_com.android.carshell"],
+    platform_apis: true,
+    certificate: "platform",
+    overrides: ["Shell"],
+    privileged: true,
+    static_libs: ["Shell-package-library"]
+}

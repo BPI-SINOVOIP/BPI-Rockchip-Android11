@@ -1,0 +1,6 @@
+service sv_app /system/bin/sv_app
+    class hal
+    priority -20
+    user automotive_evs
+    group automotive_evs
+    disabled # will not automatically start with its class; must be explicitly started.

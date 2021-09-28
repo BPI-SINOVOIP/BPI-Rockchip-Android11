@@ -1,0 +1,30 @@
+android_test {
+    name: "CarRotaryControllerUnitTests",
+
+    certificate: "platform",
+
+    srcs: ["src/**/*.java"],
+
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+        "android.test.mock",
+    ],
+
+    static_libs: [
+        "CarRotaryControllerForUnitTesting",
+        "android.car",
+        "androidx.test.core",
+        "androidx.test.rules",
+        "androidx.test.ext.junit",
+        "androidx.test.ext.truth",
+        "mockito-target-extended-minus-junit4",
+        "platform-test-annotations",
+        "truth-prebuilt",
+        "testng",
+    ],
+
+    jni_libs: ["libdexmakerjvmtiagent", "libstaticjvmtiagent"],
+
+    aaptflags: ["--extra-packages com.android.car.rotary"],
+}

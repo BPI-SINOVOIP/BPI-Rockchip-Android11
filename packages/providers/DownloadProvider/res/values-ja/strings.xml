@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"ダウンロード マネージャー"</string>
+    <string name="storage_description" msgid="169690279447532621">"ダウンロード"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"ダウンロード マネージャーにアクセスします。"</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"ダウンロード マネージャーにアクセスし、ダウンロード マネージャーを使用してファイルをダウンロードすることをアプリに許可します。この許可を悪意のあるアプリに利用されると、ダウンロードに深刻な影響が生じたり個人情報にアクセスされたりする恐れがあります。"</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"ダウンロード マネージャーの高度な機能です。"</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"ダウンロード マネージャーの高度な機能にアクセスすることをアプリに許可します。この許可を悪意のあるアプリに利用されると、ダウンロードに深刻な影響が生じたり個人情報にアクセスされたりする恐れがあります。"</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"ダウンロード通知を送信します。"</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"ダウンロード完了通知の送信をアプリに許可します。この許可を悪意のあるアプリに利用されると、ファイルをダウンロードする他のアプリの処理が妨害される恐れがあります。"</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"ダウンロードキャッシュの領域を予約"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"ダウンロード マネージャーで領域が不足しているときに、自動的に削除できないダウンロードキャッシュへのファイルのダウンロードをアプリに許可します。"</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"通知なしでファイルをダウンロードする"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"ユーザーへの通知なしでダウンロード マネージャーを使用してファイルをダウンロードすることをアプリに許可します。"</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"すべてのシステムダウンロードにアクセス"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"システム上の任意のアプリにより開始されたすべてのダウンロードの表示と変更をアプリに許可します。"</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;無題&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"ダウンロードが完了しました。"</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"ダウンロードできませんでした。"</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Wi-Fi必須のサイズです。"</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"バックグラウンド一時停止"</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"ダウンロードするサイズが大きすぎます"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"この<xliff:g id="SIZE">%1$s </xliff:g>のダウンロードを完了するにはWi-Fiを使用する必要があります。\n\n[<xliff:g id="QUEUE_TEXT">%2$s </xliff:g>]をタップすると、次回Wi-Fiネットワークに接続したときにこのダウンロードを開始します。"</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"キューに登録して後でダウンロードしますか？"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"この<xliff:g id="SIZE">%1$s </xliff:g>のダウンロードを今すぐ行うと、電池消費量やデータ通信量が増え、通信プランによっては携帯通信会社の料金が発生します。\n\n[<xliff:g id="QUEUE_TEXT">%2$s</xliff:g>]をタップすると、次回Wi-Fiネットワーク接続時にダウンロードを行います。"</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"キューに登録"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"キャンセル"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"今すぐ開始"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> ファイルのダウンロード中</item>
+      <item quantity="one">1 ファイルのダウンロード中</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> ファイルのダウンロード待ち</item>
+      <item quantity="one">1 ファイルのダウンロード待ち</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"残り<xliff:g id="DURATION">%s</xliff:g>"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"ファイルを開くことができません"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"ダウンロード"</string>
+    <string name="download_queued" msgid="3383844741769045371">"キューに追加済み"</string>
+    <string name="download_running" msgid="774654178925442490">"処理中"</string>
+    <string name="download_error" msgid="1857737890005386798">"失敗しました"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"処理中（<xliff:g id="PERCENTAGE">%s</xliff:g>）"</string>
+</resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/ethernet_settings" >
+
+    <!-- $_rbox_$_modify_$_lijiehong: change to support bluetooth checkbox -->
+<!--
+    <SwitchPreference
+        android:key="ethernet"
+        android:title="@string/ethernet_quick_toggle_title"
+        android:summaryOff="@string/ethernet_quick_toggle_summary_off"
+        android:summaryOn="@string/ethernet_quick_toggle_summary_on"
+        android:persistent="false"
+        android:disableDependentsState="true" />
+  -->
+  <!--
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_hw_addr"
+        android:summary="@string/device_info_default"
+        android:title="@string/ethernet_hw_addr" />
+  -->
+    <!-- ethernet ip address -->
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_ip_addr"
+        android:summary="@string/device_info_default"
+        android:title="@string/ethernet_ip_addr" />
+
+    <!-- ethernet netmask -->
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_netmask"
+        android:summary="@string/device_info_default"
+        android:title="@string/ethernet_netmask" />
+
+    <!-- ethernet gateway -->
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_gateway"
+        android:summary="@string/device_info_default"
+        android:title="@string/ethernet_gateway" />
+
+    <!-- ethernet dns1 -->
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_dns1"
+        android:summary="@string/device_info_default"
+        android:title="@string/ethernet_dns1" />
+
+    <!-- ethernet dns2 -->
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="ethernet_dns2"
+        android:summary="@string/device_info_default"
+        android:title="@string/ethernet_dns2" />
+
+    <ListPreference
+            android:entries="@array/ethernet_mode_location"
+            android:entryValues="@array/ethernet_mode_values"
+            android:key="ethernet_mode_select"
+            android:persistent="true"
+            android:title="@string/ethernet_mode_title" />
+
+ <!--
+    <CheckBoxPreference
+        android:key="static_ethernet"
+        android:title="@string/usestatic" />
+    <CheckBoxPreference
+        android:key="dhcp_ethernet"
+        android:title="@string/usedhcp" />
+ -->
+</PreferenceScreen>
+

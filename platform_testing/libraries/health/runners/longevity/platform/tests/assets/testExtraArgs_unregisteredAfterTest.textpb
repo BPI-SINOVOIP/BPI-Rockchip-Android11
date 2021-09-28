@@ -1,0 +1,44 @@
+schedule: INDEXED
+scenarios [{
+    index: 1
+    journey: "android.platform.test.longevity.samples.testing.SampleExtraArgsSuite$ClassLevelExtraArgsScenario"
+    extras [{
+        key: "class-level-option"
+        value: "class-level-override"
+    }]
+}, {
+    index: 2
+    journey: "android.platform.test.longevity.samples.testing.SampleExtraArgsSuite$NotInInstrumentationArgsTest"
+    extras [{
+        key: "arg-to-check"
+        value: "class-level-option"
+    }]
+}, {
+    index: 3
+    journey: "android.platform.test.longevity.samples.testing.SampleExtraArgsSuite$TestLevelExtraArgsScenario"
+    extras [{
+        key: "test-level-option"
+        value: "test-level-override"
+    }]
+}, {
+    index: 4
+    journey: "android.platform.test.longevity.samples.testing.SampleExtraArgsSuite$NotInInstrumentationArgsTest"
+    extras [{
+        key: "arg-to-check"
+        value: "test-level-option"
+    }]
+}, {
+    index: 5
+    journey: "android.platform.test.longevity.samples.testing.SampleExtraArgsSuite$InTestExtraArgsScenario"
+    extras [{
+        key: "in-test-option"
+        value: "in-test-override"
+    }]
+}, {
+    index: 6
+    journey: "android.platform.test.longevity.samples.testing.SampleExtraArgsSuite$NotInInstrumentationArgsTest"
+    extras [{
+        key: "arg-to-check"
+        value: "in-test-option"
+    }]
+}]

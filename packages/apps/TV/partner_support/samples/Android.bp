@@ -1,0 +1,25 @@
+android_app {
+    name: "PartnerSupportSampleTvInput",
+
+    // Include all java files.
+    srcs: ["src/**/*.java"],
+
+    static_libs: [
+        "androidx.leanback_leanback",
+        "androidx.tvprovider_tvprovider",
+        "live-channels-partner-support",
+    ],
+
+    optimize: {
+        enabled: false,
+    },
+    // Overlay view related functionality requires system APIs.
+    sdk_version: "system_current",
+    min_sdk_version: "23", // M
+
+    // Required for com.android.tv.permission.RECEIVE_INPUT_EVENT
+    privileged: true,
+
+    resource_dirs: ["res"],
+
+}

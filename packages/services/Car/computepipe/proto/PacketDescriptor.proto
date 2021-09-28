@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+import "packages/services/Car/computepipe/proto/OutputConfig.proto";
+
+message NativeHandles {
+  // File descriptors
+  repeated int32 fds = 1;
+
+  // Corresponding indexes.
+  repeated int32 ix = 2;
+}
+
+message PacketDescriptor {
+  optional int32 buffer_id = 1;
+
+  optional NativeHandles native_handles = 2;
+
+  //  Timestamp value is milliseconds since epoch.
+  optional int64 timestamp_ms = 3;
+
+  optional PacketType packet_type = 4;
+}

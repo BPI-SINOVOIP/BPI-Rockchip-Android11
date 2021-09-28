@@ -1,0 +1,27 @@
+---
+Language: Java
+DisableFormat: true
+SortIncludes: false
+---
+Language: Cpp
+BasedOnStyle: Google
+AlignOperands: false
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AlwaysBreakBeforeMultilineStrings: false
+CommentPragmas: NOLINT:.*
+ColumnLimit: 100
+AccessModifierOffset: -4
+IndentWidth: 4
+TabWidth: 4
+ContinuationIndentWidth: 8
+ConstructorInitializerIndentWidth: 6
+SpacesBeforeTrailingComments: 2
+IncludeBlocks: Preserve
+DerivePointerAlignment: false
+PointerAlignment: Left
+UseTab: Never
+BreakInheritanceList: AfterColon
+BreakConstructorInitializers: AfterColon
+PenaltyBreakBeforeFirstCallParameter: 100000
+---

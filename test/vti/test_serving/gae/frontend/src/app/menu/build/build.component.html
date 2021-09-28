@@ -1,0 +1,75 @@
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<div class="entity-filter">
+  <app-filter (applyFilters)="applyFilters($event)" [disabled]="loading"></app-filter>
+</div>
+<div class="mat-elevation-z2 entity-table" [ngStyle]="{'opacity': (loading) ? 0.2 : 1 }">
+  <mat-table #table [dataSource]="dataSource">
+    <!-- Index Column -->
+    <ng-container matColumnDef="_index">
+      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1+pageSize*pageIndex}} </mat-cell>
+    </ng-container>
+
+    <!-- Manifest Branch Column -->
+    <ng-container matColumnDef="artifact_type">
+      <mat-header-cell *matHeaderCellDef>Artifact Type</mat-header-cell>
+      <mat-cell *matCellDef="let build"> {{build.artifact_type}} </mat-cell>
+    </ng-container>
+
+    <!-- Manifest Branch Column -->
+    <ng-container matColumnDef="manifest_branch">
+      <mat-header-cell *matHeaderCellDef>Manifest Branch</mat-header-cell>
+      <mat-cell *matCellDef="let build"> {{build.manifest_branch}} </mat-cell>
+    </ng-container>
+
+    <!-- Build ID Column -->
+    <ng-container matColumnDef="build_id">
+      <mat-header-cell *matHeaderCellDef>Build ID</mat-header-cell>
+      <mat-cell *matCellDef="let build"> {{build.build_id}} </mat-cell>
+    </ng-container>
+
+    <!-- Build Target Column -->
+    <ng-container matColumnDef="build_target">
+      <mat-header-cell *matHeaderCellDef>Build Target</mat-header-cell>
+      <mat-cell *matCellDef="let build"> {{build.build_target}} </mat-cell>
+    </ng-container>
+
+    <!-- Build Type Column -->
+    <ng-container matColumnDef="build_type">
+      <mat-header-cell *matHeaderCellDef>Build Type</mat-header-cell>
+      <mat-cell *matCellDef="let build"> {{build.build_type}} </mat-cell>
+    </ng-container>
+
+    <!-- Signed Column -->
+    <ng-container matColumnDef="signed">
+      <mat-header-cell *matHeaderCellDef>Signed</mat-header-cell>
+      <mat-cell *matCellDef="let build"> {{build.signed}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnTitles"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnTitles;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [length]="count"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [pageIndex]="pageIndex"
+                 (page)="pageEvent = onPageEvent($event)">
+  </mat-paginator>
+</div>
+<div class="loading-spinner" *ngIf="loading">
+  <mat-spinner color="primary"></mat-spinner>
+</div>

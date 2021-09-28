@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!--
+    This component-overrides.xml is used to enable the service by default
+    on car devices. Since Runtime Resource Overlays (RROs) can no longer change
+    the value of resources in manifest when read during PackagerParser.
+-->
+<config>
+<!--
+    The components mentioned under bluetooth are based on
+    packages/services/Car/car_product/overlay/packages/apps/Bluetooth/res/values/config.xml
+    and packages/apps/Bluetooth/AndroidManifest.xml
+-->
+    <component-override package="com.android.bluetooth" >
+        <!-- Disable source profiles (typically used in phone) -->
+        <!-- Controlled by profile_supported_a2dp -->
+        <component class=".a2dp.A2dpService" enabled="false" />
+
+        <!-- Controlled by profile_supported_avrcp_target -->
+        <component class=".avrcp.AvrcpTargetService" enabled="false" />
+
+        <!-- Controlled by profile_supported_hs_hfp -->
+        <component class=".hfp.HeadsetService" enabled="false" />
+
+        <!-- Controlled by profile_supported_hid_device -->
+        <component class=".hid.HidDeviceService" enabled="false" />
+
+        <!-- Controlled by profile_supported_hid_host -->
+        <component class=".hid.HidHostService" enabled="false" />
+
+        <!-- Controlled by profile_supported_pbap -->
+        <component class=".pbap.BluetoothPbapActivity" enabled="false" />
+        <component class=".pbap.BluetoothPbapService" enabled="false" />
+
+        <!-- Controlled by profile_supported_map -->
+        <component class=".map.BluetoothMapService" enabled="false" />
+        <component class=".map.BluetoothMapSettings" enabled="false" />
+
+        <!-- Controlled by profile_supported_opp -->
+        <component class=".opp.BluetoothOppService" enabled="false" />
+        <component class=".opp.BluetoothOppReceiver" enabled="false" />
+        <component class=".opp.BluetoothOppLauncherActivity" enabled="false" />
+        <component class=".opp.BluetoothOppBtEnableActivity" enabled="false" />
+        <component class=".opp.BluetoothOppBtEnablingActivity" enabled="false" />
+        <component class=".opp.BluetoothOppIncomingFileConfirmActivity" enabled="false" />
+        <component class=".opp.BluetoothOppTransferActivity" enabled="false" />
+        <component class=".opp.BluetoothOppTransferHistory" enabled="false" />
+
+        <!-- Controlled by profile_supported_sap -->
+        <component class=".sap.SapService" enabled="false" />
+        <!-- End for disabling-->
+
+        <!-- Enable sink profiles (typically used on a CarKitt) -->
+        <!-- Controlled by profile_supported_hfpclient -->
+        <component class=".hfpclient.HeadsetClientService" enabled="true" />
+
+        <!-- Controlled by hfp_client_connection_service_enabled -->
+        <component class=".hfpclient.connserv.HfpClientConnectionService" enabled="true" />
+
+        <!-- Controlled by profile_supported_avrcp_controller -->
+        <component class=".avrcpcontroller.AvrcpControllerService" enabled="true" />
+
+        <!-- Controlled by avrcp_controller_enable_cover_art -->
+        <component class=".avrcpcontroller.AvrcpCoverArtProvider" enabled="true" />
+
+        <!-- Controlled by profile_supported_a2dp_sink -->
+        <component class=".a2dpsink.A2dpSinkService" enabled="true" />
+        <component class=".avrcpcontroller.BluetoothMediaBrowserService" enabled="true" />
+        <component class=".BluetoothPrefs" enabled="true" />
+
+        <!-- Controlled by profile_supported_pbapclient -->
+        <component class=".pbapclient.PbapClientService" enabled="true" />
+        <component class=".pbapclient.AuthenticationService" enabled="true" />
+
+        <!-- Controlled by profile_supported_pan -->
+        <component class=".pan.PanService" enabled="true" />
+
+        <!-- Controlled by profile_supported_mapmce -->
+        <component class=".mapclient.MapClientService" enabled="true" />
+        <!-- End for enabling-->
+    </component-override>
+</config>

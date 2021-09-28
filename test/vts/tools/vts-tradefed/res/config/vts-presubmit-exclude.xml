@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Excluded tests from vts-presubmit plan runs">
+
+    <!-- Excludes known flaky test cases. -->
+    <include name="vts-flaky" />
+
+    <!-- b/116450442: known incompatibility with cuttlefish -->
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target AudioPrimaryHidlTest.GetMicrophonesTest" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target FloatAccessorPrimaryHidlTest.MasterVolumeTest" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RequiredOutputStreamConfigSupport/OutputStreamTest.SupportedFormat/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RequiredOutputStreamConfigSupport/OutputStreamTest.GetNextWriteTimestamp/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RecommendedOutputStreamConfigSupport/OutputStreamTest.SupportedFormat/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RecommendedOutputStreamConfigSupport/OutputStreamTest.GetNextWriteTimestamp/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RequiredInputStreamConfigSupport/InputStreamTest.SupportedFormat/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RequiredInputStreamConfigSupport/InputStreamTest.getNonExistingParameter/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RequiredInputStreamConfigSupport/InputStreamTest.GetAudioSource/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RecommendedInputStreamConfigSupport/InputStreamTest.SupportedFormat/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RecommendedInputStreamConfigSupport/InputStreamTest.getNonExistingParameter/.*)" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target r(RecommendedInputStreamConfigSupport/InputStreamTest.GetAudioSource/.*)" />
+
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.DumpDebugInfo" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.CreateClientSingleton" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.CreateVirtualDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.DestroyVirtualDisplayBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.CreateLayer" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.CreateLayerBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.DestroyLayerBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.DestroyLayerBadLayerError" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetActiveConfigBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetDisplayConfig" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetDisplayConfigBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetDisplayName" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetDisplayType" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetClientTargetSupport" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetClientTargetSupportBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetDisplayAttribute" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetHdrCapabilities" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetClientTargetSlotCount" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetActiveConfig" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetActiveConfigPowerCycle" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetColorModes" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetColorMode" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetColorModeBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetColorModeBadParameter" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.GetDozeSupportBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetPowerMode" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetPowerModeVariations" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetPowerModeBadDisplay" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetPowerModeUnsupported" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetPowerModeBadParameter" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlTest.SetVsyncEnabled" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_COLOR_TRANSFORM" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_CLIENT_TARGET" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_OUTPUT_BUFFER" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.VALIDATE_DISPLAY" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.ACCEPT_DISPLAY_CHANGES" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.PRESENT_DISPLAY" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.PRESENT_DISPLAY_NO_LAYER_STATE_CHANGES" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_CURSOR_POSITION" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_BUFFER" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_SURFACE_DAMAGE" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_BLEND_MODE" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_COLOR" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_COMPOSITION_TYPE" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_DATASPACE" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_DISPLAY_FRAME" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_PLANE_ALPHA" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_SIDEBAND_STREAM" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_SOURCE_CROP" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_TRANSFORM" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_VISIBLE_REGION" />
+    <option name="compatibility:exclude-filter" value="VtsHalGraphicsComposerV2_1Target GraphicsComposerHidlCommandTest.SET_LAYER_Z_ORDER" />
+
+    <option name="compatibility:exclude-filter" value="VtsHalMediaOmxV1_0Host AudioDecHidlTest.FlushTest_OMX.google.vorbis.decoder_audio_decoder.vorbis" />
+
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.getDataRegistrationState" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.supplyIccPinForApp" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.supplyIccPukForApp" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.supplyIccPin2ForApp" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.supplyIccPuk2ForApp" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.changeIccPinForApp" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.changeIccPin2ForApp" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.iccCloseLogicalChannel" />
+
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_0Target WifiChipHidlTest.CreateRttController" />
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_0Target WifiStaIfaceHidlTest.LinkLayerStatsCollection" />
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_0Target WifiChipHidlTest.GetDebugRingBuffersStatus" />
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_0Target WifiChipHidlTest.StartLoggingToDebugRingBuffer" />
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_0Target WifiChipHidlTest.ForceDumpToDebugRingBuffer" />
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_0Target WifiChipHidlTest.GetDebugHostWakeReasonStats" />
+
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_1Target WifiChipHidlTest.SelectTxPowerScenario" />
+    <option name="compatibility:exclude-filter" value="VtsHalWifiV1_1Target WifiChipHidlTest.ResetTxPowerScenario" />
+
+    <!-- b/117936821: known incompatibility with Pixel 1 -->
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.mm.mmapstress07" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.syscalls.ptrace05" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.syscalls.sighold02" />
+    <option name="compatibility:exclude-filter" value="VtsKernelProcFileApi VtsKernelProcFileApi.testProcSysrqTrigger" />
+    <option name="compatibility:exclude-filter" value="VtsKernelProcFileApi VtsKernelProcFileApi.testProcUidProcstatSet" />
+
+    <!-- VtsKernelLtp test cases taking longer than 15 seconds -->
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.cve.cve-2011-0999" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.fs.linker01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.nptl.nptl01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.mm.mmapstress06" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.fs.fs_di" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp VtsKernelLtp.dio.dio23" />
+
+    <!-- b/118683028: tests recently become flaky -->
+    <option name="compatibility:exclude-filter" value="VtsHalMediaOmxV1_0Host VideoDecHidlTest.AdaptivePlaybackTest_OMX.google.hevc.decoder_video_decoder.hevc" />
+    <option name="compatibility:exclude-filter" value="VtsHalMediaOmxV1_0Host ComponentHidlTest.PortEnableDisable_Idle_OMX.google.opus.decoder_audio_decoder.opus" />
+    <option name="compatibility:exclude-filter" value="VtsHalAudioV4_0Target RequiredOutputStreamConfigSupport/OutputStreamTest.GetRenderPosition/11__44100_MONO" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.deactivateDataCall" />
+    <option name="compatibility:exclude-filter" value="VtsHalRadioV1_0Target RadioHidlTest.setRadioCapability" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.mtest06_2" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.mtest06_3" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.mem01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.mem03" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.page01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.page02" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.umount02" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp fs.fs_fill" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.linkat02" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.mount01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.ioctl05" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.umount2_02" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.umount2_03" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.mknod07" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.utime06" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.umount2_01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.fallocate04" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.mknodat02" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp fs.fs_inod01" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.ftruncate04_64" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp syscalls.poll02" />
+
+    <!-- b/122260771: temporally disable kernel test cases that seems to cause device reboot -->
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp fs.inode02" />
+
+    <!-- b/118340949: temporally disable kernel test cases that takes 2+ minutes to finish -->
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio16" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio17" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio20" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio21" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio24" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio25" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio27" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp dio.dio28" />
+    <option name="compatibility:exclude-filter" value="VtsKernelLtp mm.mtest06" />
+</configuration>

@@ -1,0 +1,26 @@
+android_test {
+    name: "ManagedProvisioningTests",
+
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+        "android.test.mock",
+    ],
+
+    srcs: ["src/**/*.java"],
+
+    platform_apis: true,
+    certificate: "platform",
+
+    static_libs: [
+        "androidx.test.rules",
+        "mockito-target-minus-junit4",
+        "androidx.test.espresso.core",
+        "androidx.test.espresso.intents",
+        "truth-prebuilt",
+    ],
+
+    instrumentation_for: "ManagedProvisioning",
+    test_suites: ["device-tests"],
+
+}

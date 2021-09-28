@@ -1,0 +1,7 @@
+android_test {
+    name: "TelephonyManagerTestApp",
+    srcs: ["src/**/*.java"],
+    javacflags: ["-parameters"],
+    platform_apis: true,
+    certificate: "platform",
+}

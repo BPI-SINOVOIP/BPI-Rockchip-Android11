@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Config for VTS Audio Policy configuration  V1.0 validation test cases">
+    <option name="config-descriptor:metadata" key="plan" value="vts-hal" />
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.VtsFilePusher">
+        <option name="abort-on-push-failure" value="false"/>
+        <option name="push-group" value="HalHidlTargetTest.push"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/audio_policy_engine_configuration.xsd->/data/local/tmp/audio_policy_engine_configuration_V1_0.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/AllSchemas.xsd->/data/local/tmp/audio_policy_engine_configurable_configuration_V1_0.xsd"/>
+
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ParameterFrameworkConfiguration.xsd->/data/local/tmp/Schemas/ParameterFrameworkConfiguration.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ComponentLibrary.xsd->/data/local/tmp/Schemas/ComponentLibrary.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ComponentTypeSet.xsd->/data/local/tmp/Schemas/ComponentTypeSet.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ConfigurableDomain.xsd->/data/local/tmp/Schemas/ConfigurableDomain.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ConfigurableDomains.xsd->/data/local/tmp/Schemas/ConfigurableDomains.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/FileIncluder.xsd->/data/local/tmp/Schemas/FileIncluder.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/Parameter.xsd->/data/local/tmp/Schemas/Parameter.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ParameterFrameworkConfiguration.xsd->/data/local/tmp/Schemas/ParameterFrameworkConfiguration.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/ParameterSettings.xsd->/data/local/tmp/Schemas/ParameterSettings.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/Subsystem.xsd->/data/local/tmp/Schemas/Subsystem.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/SystemClass.xsd->/data/local/tmp/Schemas/SystemClass.xsd"/>
+        <option name="push" value="DATA/hardware/interfaces/audio/policy/1.0/xml/pfw_schemas/W3cXmlAttributes.xsd->/data/local/tmp/Schemas/W3cXmlAttributes.xsd"/>
+    </target_preparer>
+    <multi_target_preparer class="com.android.tradefed.targetprep.VtsPythonVirtualenvPreparer" />
+    <test class="com.android.tradefed.testtype.VtsMultiDeviceTest">
+        <option name="test-module-name" value="VtsHalAudioPolicyV1_0Target"/>
+        <option name="binary-test-source" value="_32bit::DATA/nativetest/VtsHalAudioPolicyV1_0TargetTest/VtsHalAudioPolicyV1_0TargetTest"/>
+        <option name="binary-test-source" value="_64bit::DATA/nativetest64/VtsHalAudioPolicyV1_0TargetTest/VtsHalAudioPolicyV1_0TargetTest"/>
+        <option name="binary-test-type" value="gtest"/>
+        <option name="binary-test-disable-framework" value="false"/>
+        <option name="binary-test-stop-native-servers" value="false"/>
+        <option name="test-timeout" value="30m"/>
+        <option name="gtest-batch-mode" value="true"/>
+    </test>
+</configuration>

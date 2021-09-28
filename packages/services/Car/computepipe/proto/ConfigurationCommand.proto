@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+import "packages/services/Car/computepipe/proto/ProfilingType.proto";
+
+message SetInputSource {
+  optional int32 source_id = 1;
+}
+
+message SetOffloadOptions {
+  optional int32 offload_option_id = 1;
+}
+
+message SetTerminationOptions {
+  optional int32 termination_option_id = 1;
+}
+
+message SetOutputStream {
+  optional int32 stream_id  = 1;
+  optional int32 max_inflight_packets_count = 2;
+}
+
+message SetProfileOptions {
+  optional ProfilingType profile_type = 1;
+}
+
+message ConfigurationCommand {
+  optional SetInputSource set_input_source = 1;
+  optional SetOffloadOptions set_offload_offload = 2;
+  optional SetTerminationOptions set_termination_option = 3;
+  optional SetOutputStream set_output_stream = 4;
+  optional SetProfileOptions set_profile_options = 5;
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2019 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_ime"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center_horizontal"
+    android:background="@color/keyboard_background"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:focusable="true"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/keyboard_bottom_spacing" >
+
+    <View
+        android:id="@+id/candidate_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/suggestions_container"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/candidate_background" />
+
+    <HorizontalScrollView
+        android:id="@+id/suggestions_container"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/key_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/candidate_scroll_view_horz_spacing"
+        android:layout_marginRight="@dimen/candidate_scroll_view_horz_spacing"
+        android:clipChildren="false"
+        android:fillViewport="false"
+        android:gravity="center"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/suggestions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:divider="@null"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:showDividers="middle" />
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/suggestions_container"
+        android:layout_centerHorizontal="true"
+        android:clipChildren="false"
+        android:gravity="center"
+        android:paddingTop="@dimen/keyboard_top_spacing" >
+
+        <include layout="@layout/input_leanback" />
+    </LinearLayout>
+
+    <include layout="@layout/selector"/>
+</RelativeLayout>

@@ -1,0 +1,52 @@
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto2";
+
+package longevity.profile;
+
+option java_package = "android.platform.test.longevity.proto";
+option java_multiple_files = true;
+
+message Configuration {
+    // Schedule used to run the profile.
+    enum Schedule {
+        TIMESTAMPED = 1;
+        INDEXED = 2;
+    }
+    optional Schedule schedule = 1 [default = TIMESTAMPED];
+
+    // Information for each scenario.
+    message Scenario {
+        oneof schedule {
+            string at = 1; // A timestamp (HH:MM:SS) for when to run the scenario.
+            int32 index = 2; // An index for the relative order of the scenario.
+        }
+        // Reference to the CUJ (<package>.<class>).
+        optional string journey = 3;
+        // Extra arguments to pass to the CUJ.
+        message ExtraArg {
+            optional string key = 1;
+            optional string value = 2;
+        }
+        repeated ExtraArg extras = 4;
+        // For app-based scenarios, whether to stay in the app after the tested action is performed.
+        enum AfterTest {
+            STAY_IN_APP = 1;
+            EXIT = 2;
+        }
+        optional AfterTest after_test = 5 [default = EXIT];
+    }
+    repeated Scenario scenarios = 2;
+}

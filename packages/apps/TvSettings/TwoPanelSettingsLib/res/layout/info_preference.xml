@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2019 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/info_separator_bg"></View>
+    <LinearLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:orientation="horizontal">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/lb_preference_item_icon_margin_end"
+            android:layout_gravity="center_horizontal|top">
+            <ImageView
+                android:id="@android:id/icon"
+                android:layout_width="@dimen/lb_preference_item_icon_size"
+                android:layout_height="@dimen/lb_preference_item_icon_size"
+                android:layout_marginTop="@dimen/settings_info_item_icon_margin_top"
+                android:layout_marginEnd="@dimen/settings_info_item_icon_margin"
+                android:layout_marginStart="@dimen/settings_info_item_icon_margin"/>
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/item_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:orientation="vertical">
+            <Space android:layout_width="0dp"
+                   android:layout_height="@dimen/lb_preference_item_text_space_top"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

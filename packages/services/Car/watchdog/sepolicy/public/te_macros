@@ -1,0 +1,11 @@
+#####################################
+# carwatchdog_client_domain(domain)
+# Allow a base set of permissions required for a domain to be a
+# client of a carwatchdog.
+#
+# For example, make some_domain a car watchd client:
+#   carwatchdog_client_domain(some_domain)
+#
+define(`carwatchdog_client_domain', `
+typeattribute $1 carwatchdogclient_domain;
+')

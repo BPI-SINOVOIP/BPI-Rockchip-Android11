@@ -1,0 +1,408 @@
+{
+  "basePath": "/_ah/api",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "WebappSrcProtoModelBuildInfoMessage": {
+      "properties": {
+        "artifact_type": {
+          "type": "string"
+        },
+        "artifacts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "build_id": {
+          "type": "string"
+        },
+        "build_target": {
+          "type": "string"
+        },
+        "build_type": {
+          "type": "string"
+        },
+        "manifest_branch": {
+          "type": "string"
+        },
+        "signed": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelBuildResponseMessage": {
+      "properties": {
+        "builds": {
+          "description": "A message for representing an individual build entry.",
+          "items": {
+            "$ref": "#/definitions/#/definitions/#/definitions/WebappSrcProtoModelBuildInfoMessage"
+          },
+          "type": "array"
+        },
+        "has_next": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelCountRequestMessage": {
+      "properties": {
+        "filter": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelCountResponseMessage": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelDefaultResponse": {
+      "properties": {
+        "return_code": {
+          "enum": [
+            "SUCCESS",
+            "FAIL"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelDeviceInfoMessage": {
+      "properties": {
+        "product": {
+          "type": "string"
+        },
+        "scheduling_status": {
+          "format": "int64",
+          "type": "string"
+        },
+        "serial": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelDeviceResponseMessage": {
+      "properties": {
+        "devices": {
+          "description": "A message for representing an individual host's device entry.",
+          "items": {
+            "$ref": "#/definitions/#/definitions/WebappSrcProtoModelDeviceInfoMessage"
+          },
+          "type": "array"
+        },
+        "has_next": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelGetRequestMessage": {
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        },
+        "offset": {
+          "format": "int64",
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelHostInfoMessage": {
+      "properties": {
+        "devices": {
+          "description": "A message for representing an individual host's device entry.",
+          "items": {
+            "$ref": "#/definitions/#/definitions/WebappSrcProtoModelDeviceInfoMessage"
+          },
+          "type": "array"
+        },
+        "hostname": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelLabDeviceInfoMessage": {
+      "properties": {
+        "device_equipment": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "product": {
+          "type": "string"
+        },
+        "serial": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelLabHostInfoMessage": {
+      "properties": {
+        "device": {
+          "description": "A message for representing an individual lab host's device entry.",
+          "items": {
+            "$ref": "#/definitions/WebappSrcProtoModelLabDeviceInfoMessage"
+          },
+          "type": "array"
+        },
+        "host_equipment": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        },
+        "vtslab_version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelLabInfoMessage": {
+      "properties": {
+        "admin": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "host": {
+          "description": "A message for representing an individual lab's host entry.",
+          "items": {
+            "$ref": "#/definitions/WebappSrcProtoModelLabHostInfoMessage"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelLabMessage": {
+      "properties": {
+        "admin": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "devices": {
+          "type": "string"
+        },
+        "host_equipment": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "vtslab_version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebappSrcProtoModelLabResponseMessage": {
+      "properties": {
+        "has_next": {
+          "type": "boolean"
+        },
+        "labs": {
+          "description": "A model for representing a LabModel entity.",
+          "items": {
+            "$ref": "#/definitions/WebappSrcProtoModelLabMessage"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "vtslab-schedule-prod.appspot.com",
+  "info": {
+    "description": "Endpoint API for lab_info.",
+    "title": "lab",
+    "version": "v1"
+  },
+  "paths": {
+    "/lab/v1/clear": {
+      "post": {
+        "operationId": "LabInfoApi_clear",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelLabInfoMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelDefaultResponse"
+            }
+          }
+        }
+      }
+    },
+    "/lab/v1/count": {
+      "post": {
+        "operationId": "LabInfoApi_count",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelCountRequestMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelCountResponseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/lab/v1/get": {
+      "post": {
+        "operationId": "LabInfoApi_get",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelGetRequestMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelLabResponseMessage"
+            }
+          }
+        }
+      }
+    },
+    "/lab/v1/set": {
+      "post": {
+        "operationId": "LabInfoApi_set",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelLabInfoMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelDefaultResponse"
+            }
+          }
+        }
+      }
+    },
+    "/lab/v1/set_version": {
+      "post": {
+        "operationId": "LabInfoApi_setVersion",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelLabHostInfoMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/WebappSrcProtoModelDefaultResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "google_id_token": {
+      "authorizationUrl": "",
+      "flow": "implicit",
+      "type": "oauth2",
+      "x-google-issuer": "https://accounts.google.com",
+      "x-google-jwks_uri": "https://www.googleapis.com/oauth2/v3/certs"
+    }
+  },
+  "swagger": "2.0",
+  "x-google-api-name": "lab"
+}

@@ -1,0 +1,78 @@
+// Copyright 2019 The Android Open Source Project
+java_defaults {
+    name: "CellBroadcastServiceCommon",
+    min_sdk_version: "29",
+    srcs: [
+      "src/**/*.java",
+      ":framework-annotations",
+      ":framework-cellbroadcast-shared-srcs",
+      ":statslog-cellbroadcast-java-gen",
+    ],
+    libs: [
+        "unsupportedappusage",
+    ],
+    sdk_version: "system_current",
+    certificate: "platform",
+    privileged: true,
+    resource_dirs: ["res"],
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+    jarjar_rules: "cellbroadcast-jarjar-rules.txt",
+    plugins: ["java_api_finder"],
+}
+
+android_app {
+    name: "CellBroadcastServiceModule",
+    defaults: ["CellBroadcastServiceCommon"],
+    certificate: "networkstack",
+    manifest: "AndroidManifest.xml",
+    apex_available: ["com.android.cellbroadcast"],
+}
+
+android_app {
+     name: "CellBroadcastServiceModulePlatform",
+     defaults: ["CellBroadcastServiceCommon"],
+     certificate: "platform",
+     // CellBroadcastServicePlatformModule is a replacement for com.android.cellbroadcast apex
+     // which consists of CellBroadcastServiceModule
+     overrides: ["com.android.cellbroadcast"],
+     manifest: "AndroidManifest_Platform.xml",
+}
+
+genrule {
+  name: "statslog-cellbroadcast-java-gen",
+  tools: ["stats-log-api-gen"],
+  cmd: "$(location stats-log-api-gen) --java $(out) --module cellbroadcast --javaPackage com.android.cellbroadcastservice --javaClass CellBroadcastStatsLog",
+  out: ["com/android/cellbroadcastservice/CellBroadcastStatsLog.java"],
+}
+
+
+// used to share common constants between cellbroadcastservice and cellbroadcastreceier
+filegroup {
+    name: "cellbroadcast-constants-shared-srcs",
+    srcs: [
+        "src/com/android/cellbroadcastservice/SmsCbConstants.java",
+        ":statslog-cellbroadcast-java-gen",
+    ],
+}
+
+// used to share src with cellbroadcastreceiver test app
+filegroup {
+    name: "cellbroadcast-util-shared-srcs",
+    srcs: [
+        "src/com/android/cellbroadcastservice/GsmAlphabet.java",
+        "src/com/android/cellbroadcastservice/CbGeoUtils.java",
+        "src/com/android/cellbroadcastservice/SmsCbHeader.java",
+    ],
+}
+
+// used to share src with unit test app
+filegroup {
+    name: "cellbroadcast-shared-srcs",
+    srcs: [
+        "src/**/*.java",
+        ":framework-cellbroadcast-shared-srcs",
+        ":statslog-cellbroadcast-java-gen",
+    ],
+}

@@ -1,0 +1,80 @@
+<!-- Copyright (C) 2018 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<div class="entity-filter">
+  <app-filter (applyFilters)="applyFilters($event)" [disabled]="loading"></app-filter>
+</div>
+<div class="mat-elevation-z2 entity-table" [ngStyle]="{'opacity': (loading) ? 0.2 : 1 }">
+  <mat-table [dataSource]="dataSource" matSort matSortActive="hostname" matSortDirection="asc">
+    <!-- Index Column -->
+    <ng-container matColumnDef="_index">
+      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1+pageSize*pageIndex}} </mat-cell>
+    </ng-container>
+
+    <!-- Host Name Column -->
+    <ng-container matColumnDef="hostname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header disabled>Host Name</mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.hostname}} </mat-cell>
+    </ng-container>
+
+    <!-- Product Column -->
+    <ng-container matColumnDef="product">
+      <mat-header-cell *matHeaderCellDef>Product</mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.product}} </mat-cell>
+    </ng-container>
+
+    <!-- Serial Column -->
+    <ng-container matColumnDef="serial">
+      <mat-header-cell *matHeaderCellDef>Serial</mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.serial}} </mat-cell>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{deviceStatusEnum[device.status]}} </mat-cell>
+    </ng-container>
+
+    <!-- Scheduling Status Column -->
+    <ng-container matColumnDef="scheduling_status">
+      <mat-header-cell *matHeaderCellDef>Scheduling Status</mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{schedulingStatusEnum[device.scheduling_status]}} </mat-cell>
+    </ng-container>
+
+    <!-- Equipment Column -->
+    <ng-container matColumnDef="device_equipment">
+      <mat-header-cell *matHeaderCellDef>Equipment</mat-header-cell>
+      <mat-cell *matCellDef="let device"> {{device.device_equipment ? device.device_equipment.join(", ") : "None"}} </mat-cell>
+    </ng-container>
+
+    <!-- Timestamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <mat-header-cell *matHeaderCellDef>Timestamp</mat-header-cell>
+      <mat-cell *matCellDef="let device">{{getRelativeTime(device.timestamp)}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnTitles"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnTitles;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="count"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [pageIndex]="pageIndex"
+                 (page)="pageEvent = onPageEvent($event)">
+  </mat-paginator>
+</div>
+<div class="loading-spinner" *ngIf="loading">
+  <mat-spinner color="primary"></mat-spinner>
+</div>

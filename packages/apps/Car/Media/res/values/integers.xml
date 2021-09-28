@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2017, The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+    <!-- The maximum number of lines for the title of a currently playing media item. -->
+    <integer name="media_title_max_lines">2</integer>
+
+    <!-- The maximum number of lines for the artist of a currently playing media item. -->
+    <integer name="media_artist_max_lines">1</integer>
+
+    <!-- Number of columns in the browse view -->
+    <integer name="num_browse_columns">3</integer>
+
+    <!-- The amount of time it takes for the fragment playback queue to fade in and out -->
+    <integer name="fragment_playback_queue_fade_duration_ms">500</integer>
+
+    <!-- Time allowed for a process to complete before we show a progress indicator -->
+    <integer name="progress_indicator_delay">1000</integer>
+
+    <!-- Maximum number of tabs to show on the app bar -->
+    <integer name="max_tabs">4</integer>
+
+    <!-- Number of rows in the app bar view -->
+    <integer name="num_app_bar_view_rows">1</integer>
+
+    <!-- Views to hide when opening the custom actions when the queue isn't visible. -->
+    <integer-array name="playback_views_to_hide_when_showing_custom_actions">
+        <item>@id/seek_bar_container</item>
+    </integer-array>
+
+    <!-- Views to hide when the queue is visible (to show when the queue becomes invisible). -->
+    <integer-array name="playback_views_to_hide_when_queue_is_visible">
+        <item>@id/metadata_container</item>
+        <item>@id/seek_bar_container</item>
+    </integer-array>
+
+    <!-- Views to show when the queue is visible (to hide when the queue becomes invisible). -->
+    <integer-array name="playback_views_to_show_when_queue_is_visible">
+        <item>@id/queue_list</item>
+        <item>@id/background_scrim</item>
+    </integer-array>
+
+    <!-- Views to hide "immediately" when the queue is visible (to show "immediately" when the queue
+    becomes invisible). The visibility of these views will be changed without any delay to avoid
+    visual glitch. -->
+    <integer-array name="playback_views_to_hide_immediately_when_queue_is_visible"/>
+
+    <!-- Views to show "immediately" when the queue is visible (to hide "immediately" when the queue
+    becomes invisible). The visibility of these views will be changed without any delay to avoid
+    visual glitch. -->
+    <integer-array name="playback_views_to_show_immediately_when_queue_is_visible"/>
+
+</resources>

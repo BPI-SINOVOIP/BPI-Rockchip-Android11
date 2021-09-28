@@ -1,0 +1,8 @@
+-keepattributes *Annotation*
+-keep class com.android.systemui.plugins.annotations.* { *; }
+-keep class com.android.systemui.plugins.GlobalActionsPanelPlugin { *; }
+-keep class com.android.systemui.plugins.GlobalActionsPanelPlugin.* { *; }
+-keep class com.android.systemui.plugin.globalactions.wallet.WalletPluginService { *; }
+-keep class com.android.systemui.plugin.globalactions.wallet.WalletPanelViewController {
+    public <methods>;
+}

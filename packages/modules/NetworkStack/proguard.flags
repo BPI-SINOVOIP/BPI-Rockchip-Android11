@@ -1,0 +1,16 @@
+-keepclassmembers class android.net.ip.IpClient {
+    static final int CMD_*;
+    static final int EVENT_*;
+}
+
+-keepclassmembers class android.net.dhcp.DhcpClient {
+    static final int CMD_*;
+    static final int EVENT_*;
+}
+
+# The lite proto runtime uses reflection to access fields based on the names in
+# the schema, keep all the fields.
+# This replicates the base proguard rule used by the build by default
+# (proguard_basic_keeps.flags), but needs to be specified here because the
+# com.google.protobuf package is jarjared to the below package.
+-keepclassmembers class * extends com.android.networkstack.protobuf.MessageLite { <fields>; }

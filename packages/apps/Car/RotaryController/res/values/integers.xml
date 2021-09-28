@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2020, The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+    <!-- Time interval (in milliseconds) used to decide whether we should accelerate the controller
+    rotation for a rotate event. If the interval between the current rotate event and the previous
+    rotate event is smaller than this value, we'll treat the rotation event as 3 rotations. -->
+    <integer name="rotation_acceleration_3x_ms">20</integer>
+
+    <!-- Time interval (in milliseconds) used to decide whether we should accelerate the controller
+    rotation for a rotate event. If the interval between the current rotate event and the previous
+    rotate event is smaller than this value, we'll treat the rotation event as 2 rotations. -->
+    <integer name="rotation_acceleration_2x_ms">40</integer>
+
+    <!-- How many milliseconds to ignore TYPE_VIEW_CLICKED events after performing ACTION_CLICK or
+    injecting KEYCODE_DPAD_CENTER. -->
+    <integer name="ignore_view_clicked_ms">200</integer>
+    <!-- How many milliseconds to wait for TYPE_VIEW_SCROLLED events after scrolling. -->
+    <integer name="after_scroll_timeout_ms">200</integer>
+
+    <!-- How many milliseconds to wait for TYPE_VIEW_FOCUSED events after performing ACTION_FOCUS or
+    another actions which changes the focus. When rotating quickly, Android may take a while to send
+    these events so this needs to be fairly long.
+    -->
+    <integer name="after_focus_timeout_ms">60000</integer>
+
+    <!-- How many milliseconds the center button must be held down to trigger a long-press. Zero
+    indicates the system default long-press timeout should be used. -->
+    <integer name="long_press_ms">0</integer>
+
+    <!-- Global actions to perform when the user nudges up, down, left, or right off the edge of the
+         screen. No global action is performed if the relevant element of this array is -1
+         (INVALID_GLOBAL_ACTION). -->
+    <integer-array name="off_screen_nudge_global_actions">
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+    </integer-array>
+
+    <!-- Key codes of click events to inject when the user nudges up, down, left, or right off the
+         edge of the screen. No event is injected if the relevant element of this array is 0
+         (KEYCODE_UNKNOWN). -->
+    <integer-array name="off_screen_nudge_key_codes">
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+</resources>

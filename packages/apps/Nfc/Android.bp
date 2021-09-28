@@ -1,0 +1,24 @@
+genrule {
+    name: "statslog-Nfc-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module nfc --javaPackage com.android.nfc"
+        + " --javaClass NfcStatsLog",
+    out: ["com/android/nfc/NfcStatsLog.java"],
+}
+
+// NCI Configuration
+android_app {
+    name: "NfcNci",
+    srcs: [
+        "src/**/*.java",
+        "nci/**/*.java",
+        ":statslog-Nfc-java-gen",
+    ],
+    platform_apis: true,
+    certificate: "platform",
+    jni_libs: ["libnfc_nci_jni"],
+    static_libs: ["androidx.appcompat_appcompat"],
+    optimize: {
+        enabled: false,
+    },
+}

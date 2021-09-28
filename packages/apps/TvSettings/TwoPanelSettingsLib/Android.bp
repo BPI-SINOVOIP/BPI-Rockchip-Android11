@@ -1,0 +1,50 @@
+genrule {
+    name: "statslog-tvsettings-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module tv_settings"
+        + " --javaPackage com.android.tv.twopanelsettings.slices --javaClass TvSettingsStatsLog",
+    out: ["com/android/tv/twopanelsettings/slices/TvSettingsStatsLog.java"],
+}
+
+// This is needed to provide TvSettingsStatsLog as a library for TwoPanelSettingsOverlay makefile.
+java_library {
+    name: "statslog-tvsettings",
+    srcs: [
+        ":statslog-tvsettings-java-gen",
+    ],
+}
+
+android_library {
+
+    name: "TwoPanelSettingsLib",
+    defaults: ["SettingsLibDefaults"],
+
+    srcs: [
+        "src/**/*.java",
+        "src/**/*.java",
+    ],
+
+    resource_dirs: ["res"],
+
+    static_libs: [
+        "androidx.recyclerview_recyclerview",
+        "androidx.preference_preference",
+        "androidx.appcompat_appcompat",
+        "androidx.legacy_legacy-preference-v14",
+        "androidx.leanback_leanback-preference",
+        "androidx.leanback_leanback",
+        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.slice_slice-builders",
+        "androidx.slice_slice-core",
+        "androidx.slice_slice-view",
+        "androidx.lifecycle_lifecycle-runtime",
+        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.lifecycle_lifecycle-common-java8",
+        "androidx.cardview_cardview",
+        "statslog-tvsettings",
+    ],
+
+    min_sdk_version: "21",
+}
+
+// For the test package.

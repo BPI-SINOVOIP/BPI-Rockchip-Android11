@@ -1,0 +1,22 @@
+# Car watchdog server
+typeattribute carwatchdogd coredomain;
+typeattribute carwatchdogd mlstrustedsubject;
+
+type carwatchdogd_exec, exec_type, file_type, system_file_type;
+
+init_daemon_domain(carwatchdogd)
+add_service(carwatchdogd, carwatchdogd_service)
+binder_use(carwatchdogd)
+binder_service(carwatchdogd)
+
+# Scan through /proc/pid for all processes
+r_dir_file(carwatchdogd, domain)
+
+# Read /proc/uid_io/stats
+allow carwatchdogd proc_uid_io_stats:file r_file_perms;
+
+# Read /proc/stat file
+allow carwatchdogd proc_stat:file r_file_perms;
+
+# Find package_native to get uid to package name mapping.
+allow carwatchdogd package_native_service:service_manager find;

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<!-- The collection of resources for theming the appearance of a device -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <overlayable name="CellBroadcastCustomization">
+
+        <!-- START VENDOR CUSTOMIZATION -->
+        <policy type="product|system|vendor">
+            <!-- START THEME / STYLE -->
+            <item type="style" name="CellBroadcastAlertTheme"/>
+            <item type="style" name="CellBroadcastListActivityTheme"/>
+            <item type="style" name="CellBroadcastSettingsTheme"/>
+            <!-- END THEME / STYLE -->
+
+            <!-- START DIMEN -->
+            <item type="dimen" name="alert_dialog_title_height"/>
+            <item type="dimen" name="alert_dialog_button_bar_height"/>
+            <!-- END DIMEN -->
+
+            <!-- START COLOR -->
+            <item type="color" name="notification_color"/>
+            <item type="color" name="cell_broadcast_color_primary"/>
+            <item type="color" name="cell_broadcast_color_primary_dark"/>
+            <!-- END COLOR -->
+
+            <!-- Customize launcher icon for cellbroadcast history -->
+            <item type="mipmap" name="ic_launcher_cell_broadcast" />
+
+            <!-- START CHANNEL related configurations which allows customization -->
+            <!-- Presidential alert is default on and cannot be turned off.
+            AOSP CBR app does not show presidential alert in settings, however OEM can choose to
+            display a greyout presidential alert settings by overriding below config -->
+            <item type="bool" name="show_presidential_alerts_settings" />
+            <item type="bool" name="show_message_history_in_launcher" />
+
+            <!-- Some JP carriers requires to enable 0xA807 in additional_cbs_channels_strings
+            but only for certain products. OEMs can customize below config by including 0xA807
+            or not per product configuration-->
+            <item type="array" name="additional_cbs_channels_strings" />
+            <!-- END CHANNEL related configurations -->
+
+            <!-- Some countries like KR requires to display CB messages inside SMS inbox.
+            allow customization for sms sender name -->
+            <item type="string" name="sms_cb_sender_name" />
+            <item type="bool" name="enable_write_alerts_to_sms_inbox" />
+        </policy>
+        <!-- END VENDOR CUSTOMIZATION -->
+
+    </overlayable>
+
+</resources>

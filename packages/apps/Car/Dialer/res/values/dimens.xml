@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Copyright (C) 2015 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- Dialer -->
+    <dimen name="dialer_card_elevation">2dp</dimen>
+
+    <!-- Call list dimensions -->
+    <dimen name="call_history_item_height">@dimen/list_item_height</dimen>
+    <dimen name="call_history_item_padding">@dimen/list_item_padding</dimen>
+    <dimen name="call_history_guideline_begin">@dimen/list_item_guideline_begin</dimen>
+    <dimen name="call_history_guideline_end">@dimen/list_item_guideline_end</dimen>
+    <dimen name="call_history_text_margin_end">@dimen/list_item_text_margin_end</dimen>
+    <dimen name="call_history_icons_margin">@dimen/car_ui_padding_1</dimen>
+    <dimen name="call_log_icon_margin">4dp</dimen>
+
+    <!-- Contact details dimensions -->
+    <dimen name="contact_details_avatar_margin_top">@dimen/car_ui_padding_4</dimen>
+    <dimen name="contact_details_title_margin_top">@dimen/car_ui_padding_4</dimen>
+    <dimen name="contact_details_title_margin_bottom">@dimen/car_ui_padding_5</dimen>
+    <dimen name="contact_details_avatar_size">126dp</dimen>
+    <dimen name="contact_details_item_height">@dimen/list_item_height</dimen>
+    <dimen name="contact_details_number_padding_start">@dimen/car_keyline_1</dimen>
+    <dimen name="contact_details_number_padding_end">@dimen/car_ui_padding_2</dimen>
+    <dimen name="contact_details_text_button_guideline">@dimen/car_keyline_3</dimen>
+    <dimen name="contact_details_action_bar_avatar_size">@dimen/primary_icon_size</dimen>
+
+    <!-- Contact list dimensions -->
+    <dimen name="contact_list_item_height">@dimen/list_item_height</dimen>
+    <dimen name="contact_list_item_padding">@dimen/list_item_padding</dimen>
+    <dimen name="contact_list_guideline_begin">@dimen/list_item_guideline_begin</dimen>
+    <dimen name="contact_list_guideline_end">@dimen/list_item_guideline_end</dimen>
+    <dimen name="contact_list_text_margin_end">@dimen/list_item_text_margin_end</dimen>
+
+    <!-- Contact result dimensions -->
+    <dimen name="contact_result_height">@dimen/list_item_height</dimen>
+    <dimen name="contact_result_avatar_margin">@dimen/list_item_padding</dimen>
+    <dimen name="contact_result_name_margin">@dimen/list_item_guideline_begin</dimen>
+
+    <!-- In-call dimensions -->
+    <dimen name="in_call_controller_bar_height">@dimen/control_bar_height</dimen>
+    <dimen name="in_call_controller_bar_margin">@dimen/car_ui_padding_5</dimen>
+    <dimen name="in_call_controller_bar_margin_bottom">0dp</dimen>
+    <dimen name="in_call_avatar_icon_size">196dp</dimen>
+    <dimen name="in_call_avatar_icon_size_small">98dp</dimen>
+    <dimen name="in_call_phone_number_margin_top">@dimen/car_ui_padding_2</dimen>
+    <dimen name="in_call_state_margin_top">@dimen/car_ui_padding_2</dimen>
+    <dimen name="in_call_margin_between_avatar_and_text">48dp</dimen>
+    <dimen name="in_call_user_profile_margin">@dimen/car_ui_margin</dimen>
+    <dimen name="in_call_user_profile_list_margin">60dp</dimen>
+    <dimen name="onhold_user_info_height">90dp</dimen>
+    <dimen name="onhold_profile_margin_x">@dimen/list_item_padding</dimen>
+    <dimen name="onhold_profile_margin_y">@dimen/car_ui_padding_3</dimen>
+    <dimen name="onhold_profile_corner_radius">8dp</dimen>
+    <dimen name="onhold_profile_avatar_margin">@dimen/car_keyline_1</dimen>
+    <dimen name="onhold_profile_guideline">@dimen/list_item_guideline</dimen>
+    <dimen name="onhold_profile_status_margin">12dp</dimen>
+    <dimen name="user_profile_list_item_height">150dp</dimen>
+
+    <!-- Ringing call dimensions -->
+    <dimen name="ringing_call_button_touch_target_size">@dimen/touch_target_size</dimen>
+    <dimen name="ringing_call_text_margin">@dimen/car_ui_padding_4</dimen>
+
+    <!-- Dialpad dimensions -->
+    <dimen name="dialpad_info_title_padding_size">@dimen/car_ui_padding_4</dimen>
+    <dimen name="dialpad_info_edge_padding_size">@dimen/car_ui_padding_2</dimen>
+    <dimen name="dialpad_info_guideline">@dimen/touch_target_size</dimen>
+    <dimen name="dialpad_user_profile_padding">@dimen/car_ui_padding_3</dimen>
+    <dimen name="call_state_padding">@dimen/car_ui_padding_3</dimen>
+    <dimen name="dialpad_info_title_container_size">@dimen/touch_target_size</dimen>
+    <dimen name="dialpad_info_title_text_size_max">28sp</dimen>
+    <dimen name="dialpad_info_title_text_size_min">24sp</dimen>
+    <dimen name="dialpad_contact_avatar_size">64dp</dimen>
+    <dimen name="dialpad_contact_label_margin">12dp</dimen>
+    <dimen name="dialpad_info_margin_end">112dp</dimen>
+    <dimen name="type_down_list_item_height">@dimen/control_bar_height</dimen>
+
+    <!-- Keypad dimensions -->
+    <dimen name="keypad_minimum_size">@dimen/touch_target_size</dimen>
+    <dimen name="keypad_margin_x">@dimen/car_ui_padding_2</dimen>
+    <dimen name="keypad_margin_y">0dp</dimen>
+
+    <!-- Favorites dimensions -->
+    <dimen name="favorite_card_space_horizontal">@dimen/car_ui_padding_3</dimen>
+    <dimen name="favorite_card_space_vertical">@dimen/car_ui_padding_2</dimen>
+    <dimen name="favorites_avatar_margin_bottom">@dimen/car_ui_padding_3</dimen>
+    <dimen name="favorite_item_padding">@dimen/car_ui_padding_2</dimen>
+
+    <dimen name="call_fab_elevation">8dp</dimen>
+    <dimen name="bksp_button_width">@dimen/touch_target_size</dimen>
+
+    <dimen name="fab_button_size">@dimen/fab_outline_size</dimen>
+    <dimen name="fab_outline_size">84dp</dimen>
+    <dimen name="fab_outline_thickness">4dp</dimen>
+    <dimen name="fab_ripple_radius">42dp</dimen>
+
+    <dimen name="in_call_button_size">@dimen/touch_target_size</dimen>
+
+    <dimen name="car_key1_size">32sp</dimen>
+    <dimen name="car_key2_size">18sp</dimen>
+
+    <!-- NoHfp error message page -->
+    <dimen name="no_hfp_icon_size">56dp</dimen>
+    <dimen name="emergency_button_min_height">@dimen/touch_target_size</dimen>
+    <dimen name="emergency_button_min_width">@dimen/touch_target_width</dimen>
+    <dimen name="emergency_button_bottom_margin">@dimen/car_ui_padding_4</dimen>
+    <dimen name="no_hfp_icon_margin_bottom">@dimen/car_ui_padding_3</dimen>
+    <dimen name="connect_bluetooth_button_margin_top">@dimen/car_ui_padding_5</dimen>
+
+    <dimen name="list_top_padding">@dimen/car_ui_padding_2</dimen>
+    <!-- Components -->
+    <dimen name="list_item_height">116dp</dimen>
+    <dimen name="list_item_guideline">@dimen/car_keyline_3</dimen>
+    <dimen name="list_item_guideline_begin">@dimen/car_keyline_4</dimen>
+    <dimen name="list_item_guideline_end">@dimen/car_keyline_3</dimen>
+    <dimen name="list_item_text_margin_end">@dimen/car_ui_padding_2</dimen>
+    <dimen name="list_item_padding">@dimen/car_keyline_1</dimen>
+    <dimen name="list_divider_inset">@dimen/car_keyline_1</dimen>
+    <dimen name="list_divider_height">@dimen/car_ui_list_item_action_divider_height</dimen>
+    <dimen name="vertical_divider_inset">@dimen/car_ui_padding_2</dimen>
+    <dimen name="vertical_divider_width">2dp</dimen>
+    <dimen name="primary_icon_size">@dimen/car_ui_primary_icon_size</dimen>
+    <dimen name="small_avatar_icon_size">56dp</dimen>
+    <dimen name="avatar_icon_size">76dp</dimen>
+    <dimen name="large_avatar_icon_size">96dp</dimen>
+    <dimen name="primary_icon_enclosing_circle_size">64dp</dimen>
+    <dimen name="inline_icon_size">24dp</dimen>
+    <dimen name="contact_avatar_corner_radius_percent" format="float">0.5</dimen>
+    <dimen name="touch_target_width">156dp</dimen>
+    <dimen name="subheader_list_height">76dp</dimen>
+    <dimen name="control_bar_height">96dp</dimen>
+    <dimen name="car_keyline_1">32dp</dimen>
+    <dimen name="car_keyline_3">128dp</dimen>
+    <dimen name="car_keyline_4">168dp</dimen>
+
+    <!-- Loading status view dimensions -->
+    <dimen name="loading_info_icon_size">56dp</dimen>
+    <dimen name="loading_info_icon_margin_bottom">@dimen/car_ui_padding_3</dimen>
+    <dimen name="loading_info_button_margin_top">@dimen/car_ui_padding_2</dimen>
+
+</resources>

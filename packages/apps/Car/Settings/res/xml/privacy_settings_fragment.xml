@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2020 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/privacy_settings_title"
+    android:key="@string/psk_privacy_settings">
+
+    <Preference
+        android:key="@string/pk_location_settings_entry"
+        android:title="@string/location_settings_title"
+        settings:controller="com.android.car.settings.common.DefaultRestrictionsPreferenceController">
+        <intent android:targetPackage="com.android.car.settings"
+                android:targetClass="com.android.car.settings.common.CarSettingActivities$LocationSettingsActivity"/>
+    </Preference>
+
+    <Preference
+        android:key="@string/pk_privacy_manage_perms"
+        android:title="@string/app_permissions"
+        android:summary="@string/app_permissions_summary"
+        settings:controller="com.android.car.settings.applications.AppPermissionsEntryPreferenceController">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+    </Preference>
+
+    <com.android.car.settings.common.LogicalPreferenceGroup
+        android:key="@string/pk_privacy_extra_settings"
+        settings:controller="com.android.car.settings.privacy.PrivacyExtraPreferenceController">
+        <intent android:action="com.android.settings.action.IA_SETTINGS">
+            <extra android:name="com.android.settings.category"
+                   android:value="com.android.settings.category.ia.privacy"/>
+        </intent>
+    </com.android.car.settings.common.LogicalPreferenceGroup>
+
+    <Preference
+        android:key="terms"
+        android:title="@string/terms_title"
+        settings:controller="com.android.car.settings.system.legal.TermsPreferenceController"/>
+
+</PreferenceScreen>

@@ -1,0 +1,66 @@
+{
+  "FLAGS": "browsable",
+
+  "METADATA": {
+    "MEDIA_ID": "toggles",
+    "DISPLAY_TITLE": "Toggles"
+  },
+
+  "CHILDREN": [
+    {
+      "FLAGS": "playable",
+      "METADATA": {
+        "MEDIA_ID": "toggles Toggle Empty tab",
+        "DISPLAY_TITLE": "Toggle Empty tab on play",
+        "DURATION": 3000000
+      },
+      "EVENTS": [
+        { "STATE": "PLAYING", "TOGGLE_ITEM": "only_nodes empty node 1" }
+      ]
+    },
+    {
+      "FLAGS": "playable",
+      "METADATA": {
+        "MEDIA_ID": "toggles Toggle node toggles",
+        "DISPLAY_TITLE": "Toggle Node toggles node on play",
+        "DURATION": 3000000
+      },
+      "EVENTS": [
+        { "STATE": "PLAYING", "TOGGLE_ITEM": "advanced toggles" }
+      ]
+    },
+    {
+      "FLAGS": "playable",
+      "METADATA": {
+        "MEDIA_ID": "toggles Toggle Album Art",
+        "DISPLAY_TITLE": "Toggle Album Art on play",
+        "DURATION": 3000000
+      },
+      "EVENTS": [
+        { "STATE": "PLAYING", "TOGGLE_ITEM": "advanced art nodes" }
+      ]
+    },
+    {
+      "FLAGS": "playable",
+      "METADATA": {
+        "MEDIA_ID": "toggles Toggle Nature 64",
+        "DISPLAY_TITLE": "Toggle Nature 64 on play",
+        "DURATION": 3000000
+      },
+      "EVENTS": [
+        { "STATE": "PLAYING", "TOGGLE_ITEM": "album_art/art_nodes nature 64" }
+      ]
+    },
+    {
+      "FLAGS": "playable",
+      "METADATA": {
+        "MEDIA_ID": "toggles Toggle Advanced tab",
+        "DISPLAY_TITLE": "Toggle Advanced tab on play",
+        "DURATION": 3000000
+      },
+      "EVENTS": [
+        { "STATE": "PLAYING", "TOGGLE_ITEM": "only_nodes advanced" }
+      ]
+    }
+  ]
+}

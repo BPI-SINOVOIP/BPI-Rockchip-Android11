@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Správce stahování"</string>
+    <string name="storage_description" msgid="169690279447532621">"Stažené soubory"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Získat přístup ke správci stahování."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Umožňuje aplikaci získat přístup do správce stahování a použít jej ke stahování souborů. Škodlivé aplikace mohou toto oprávnění použít k přerušení stahování a získání přístupu k soukromým údajům."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Pokročilé funkce správce stahování."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Umožňuje aplikaci získat přístup k pokročilým funkcím správce stahování. Škodlivé aplikace mohou toto oprávnění použít k přerušení stahování a získání přístupu k soukromým údajům."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Odeslat oznámení o stahování."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Umožňuje aplikaci odesílat oznámení o dokončení stahování. Škodlivé aplikace mohou pomocí těchto oprávnění zmást jiné aplikace, které stahují soubory."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Rezervovat místo v mezipaměti stahování"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Umožňuje aplikaci stahovat soubory do mezipaměti stahování, kterou nelze automaticky vymazat, pokud správce stahování potřebuje více místa."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"stahování souborů bez oznámení"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Umožňuje aplikaci stahovat soubory prostřednictvím správce stahování bez oznámení uživateli."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Přístup ke všem systémovým stahováním"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Umožňuje aplikaci zobrazit a upravovat všechna stahování zahájená libovolnou aplikací v systému."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Bez názvu&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"Stahování dokončeno."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"Stahování bylo neúspěšné."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Vzhledem k velikosti stahovaného souboru je vyžadováno připojení Wi-Fi."</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Pozastaveno na pozadí."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"Stahovaný soubor je pro síť operátora příliš velký"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"K dokončení tohoto stahování o velikosti <xliff:g id="SIZE">%1$s </xliff:g> je třeba připojení Wi-Fi. \n\nChcete-li stahování spustit při příštím připojení k síti Wi-Fi, dotkněte se možnosti <xliff:g id="QUEUE_TEXT">%2$s </xliff:g>."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"Zařadit do fronty pro pozdější stažení?"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"Stahování (<xliff:g id="SIZE">%1$s </xliff:g>) může zkrátit výdrž baterie nebo příliš zatížit mobilní připojení a přivodit poplatky dle datového tarifu.\n\n Chcete-li stahování spustit při dalším připojení k Wi-Fi, dotkněte se možnosti <xliff:g id="QUEUE_TEXT">%2$s</xliff:g>."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Fronta"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Zrušit"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"Spustit"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="few">Stahují se <xliff:g id="NUMBER">%d</xliff:g> soubory</item>
+      <item quantity="many">Stahuje se <xliff:g id="NUMBER">%d</xliff:g> souboru</item>
+      <item quantity="other">Stahuje se <xliff:g id="NUMBER">%d</xliff:g> souborů</item>
+      <item quantity="one">Stahuje se 1 soubor</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="few"><xliff:g id="NUMBER">%d</xliff:g> čekající soubory</item>
+      <item quantity="many"><xliff:g id="NUMBER">%d</xliff:g> čekajícího souboru</item>
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> čekajících souborů</item>
+      <item quantity="one">1 čekající soubor</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"<xliff:g id="DURATION">%s</xliff:g> do stažení"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"Soubor nelze otevřít"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Stahování"</string>
+    <string name="download_queued" msgid="3383844741769045371">"Ve frontě"</string>
+    <string name="download_running" msgid="774654178925442490">"Probíhá"</string>
+    <string name="download_error" msgid="1857737890005386798">"Neúspěšné"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Probíhá, <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

@@ -1,0 +1,112 @@
+indexes:
+- kind: DeviceModel
+  ancestor: no
+  properties:
+  - name: hostname
+    direction: asc
+  - name: product
+  - name: serial
+  - name: status
+  - name: scheduling_status
+  - name: timestamp
+
+- kind: BuildModel
+  ancestor: no
+  properties:
+  - name: manifest_branch
+  - name: build_id
+    direction: desc
+  - name: build_target
+  - name: build_type
+  - name: artifact_type
+  - name: artifacts
+  - name: timestamp
+
+- kind: ScheduleModel
+  ancestor: no
+  properties:
+  - name: manifest_branch
+  - name: build_target
+  - name: test_name
+  - name: require_signed_device_build
+  - name: has_bootloader_img
+  - name: has_radio_img
+  - name: period
+  - name: priority
+  - name: priority_value
+  - name: device
+  - name: shards
+  - name: param
+  - name: retry_count
+  - name: gsi_branch
+  - name: gsi_build_target
+  - name: gsi_pab_account_id
+  - name: test_branch
+  - name: test_build_target
+  - name: test_pab_account_id
+  - name: timestamp
+  - name: children_jobs
+  - name: suspended
+  - name: error_count
+  - name: image_package_repo_base
+  - name: required_host_equipment
+  - name: required_device_equipment
+  - name: report_bucket
+  - name: report_spreadsheet_id
+  - name: report_persistent_url
+  - name: report_reference_url
+
+- kind: LabModel
+  ancestor: no
+  properties:
+  - name: name
+  - name: owner
+  - name: admin
+  - name: hostname
+  - name: ip
+  - name: script
+  - name: devices
+  - name: timestamp
+  - name: vtslab_version
+
+- kind: JobModel
+  ancestor: no
+  properties:
+  - name: hostname
+  - name: priority
+  - name: period
+  - name: retry_count
+  - name: test_name
+  - name: device
+  - name: serial
+  - name: manifest_branch
+  - name: build_target
+  - name: shards
+  - name: param
+  - name: build_id
+  - name: status
+  - name: gsi_branch
+  - name: gsi_build_target
+  - name: gsi_pab_account_id
+  - name: test_branch
+  - name: test_build_target
+  - name: test_pab_account_id
+  - name: infra_log_url
+  - name: timestamp
+    direction: desc
+  - name: parent_schedule
+  - name: test_type
+  - name: require_signed_device_build
+  - name: has_bootloader_img
+  - name: has_radio_img
+  - name: image_package_repo_base
+  - name: report_bucket
+  - name: report_spreadsheet_id
+  - name: report_persistent_url
+  - name: report_reference_url
+
+- kind: JobModel
+  properties:
+  - name: hostname
+  - name: timestamp
+    direction: desc

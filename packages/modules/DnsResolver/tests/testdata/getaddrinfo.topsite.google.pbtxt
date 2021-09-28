@@ -1,0 +1,86 @@
+# Location: Tokyo, Japan
+# Network: IIJ Mobile
+# Date: 16 AUG 2019
+
+config {
+    call: CALL_GETADDRINFO
+    addrinfo {
+        host: "www.google.com."
+        family: GT_AF_UNSPEC
+        socktype: GT_SOCK_DGRAM
+        protocol: GT_IPPROTO_IP
+        ai_flags: 1024
+    };
+}
+result {
+    return_code: GT_EAI_NO_ERROR
+    addresses: "2404:6800:4004:80f::2004"
+    addresses: "172.217.26.4"
+}
+packet_mapping {
+    query:    # Header
+              "\x00\x00"         # Transaction ID: 0x0000
+              "\x01\x00"         # Flags: rd
+              "\x00\x01"         # Questions: 1
+              "\x00\x00"         # Answer RRs: 0
+              "\x00\x00"         # Authority RRs: 0
+              "\x00\x00"         # Additional RRs: 0
+              # Queries
+              "\x03\x77\x77\x77\x06\x67\x6f\x6f\x67\x6c\x65\x03\x63\x6f\x6d\x00"
+                                 # Name: www.google.com
+              "\x00\x1c"         # Type: AAAA
+              "\x00\x01"         # Class: IN
+    response: # Header
+              "\x00\x00"         # Transaction ID: 0x0000
+              "\x81\x80"         # Flags: qr rd ra
+              "\x00\x01"         # Questions: 1
+              "\x00\x01"         # Answer RRs: 1
+              "\x00\x00"         # Authority RRs: 0
+              "\x00\x00"         # Additional RRs: 0
+              # Queries
+              "\x03\x77\x77\x77\x06\x67\x6f\x6f\x67\x6c\x65\x03\x63\x6f\x6d\x00"
+                                 # Name: www.google.com
+              "\x00\x1c"         # Type: AAAA
+              "\x00\x01"         # Class: IN
+              # Answers
+              "\xc0\x0c"         # Name: www.google.com
+              "\x00\x1c"         # Type: AAAA
+              "\x00\x01"         # Class: IN
+              "\x00\x00\x00\xee" # Time to live: 238
+              "\x00\x10"         # Data length: 16
+              "\x24\x04\x68\x00\x40\x04\x08\x0f\x00\x00\x00\x00\x00\x00\x20\x04"
+                                 # Address: 2404:6800:4004:80f::2004
+}
+packet_mapping {
+    query:    # Header
+              "\x00\x00"         # Transaction ID: 0x0000
+              "\x01\x00"         # Flags: rd
+              "\x00\x01"         # Questions: 1
+              "\x00\x00"         # Answer RRs: 0
+              "\x00\x00"         # Authority RRs: 0
+              "\x00\x00"         # Additional RRs: 0
+              # Queries
+              "\x03\x77\x77\x77\x06\x67\x6f\x6f\x67\x6c\x65\x03\x63\x6f\x6d\x00"
+                                 # Name: www.google.com
+              "\x00\x01"         # Type: A
+              "\x00\x01"         # Class: IN
+    response: # Header
+              "\x00\x00"         # Transaction ID: 0x0000
+              "\x81\x80"         # Flags: qr rd ra
+              "\x00\x01"         # Questions: 1
+              "\x00\x01"         # Answer RRs: 1
+              "\x00\x00"         # Authority RRs: 0
+              "\x00\x00"         # Additional RRs: 0
+              # Queries
+              "\x03\x77\x77\x77\x06\x67\x6f\x6f\x67\x6c\x65\x03\x63\x6f\x6d\x00"
+                                 # Name: www.google.com
+              "\x00\x01"         # Type: A
+              "\x00\x01"         # Class: IN
+              # Answers
+              "\xc0\x0c"         # Name: www.google.com
+              "\x00\x01"         # Type: A
+              "\x00\x01"         # Class: IN
+              "\x00\x00\x00\x03" # Time to live: 3
+              "\x00\x04"         # Data length: 4
+              "\xac\xd9\x1a\x04" # Address: 172.217.26.4
+}

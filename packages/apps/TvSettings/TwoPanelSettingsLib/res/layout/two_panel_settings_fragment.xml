@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2018 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<!--
+    NOTE: All panes have the same width. The preference pane and preview pane are merely visual
+    effects achieved by utilizing the overlay. In order to have different paddings for preference
+    pane and preview pane without compromising the smooth scroll animation, we must refrain from
+    flipping visibility between VISIBLE and GONE of extra View elements to use them as paddings.
+
+    Since the preference pane is designed to have larger paddingStart than the preview pane, we
+    achieved the desired visual effect by:
+    (1) Setting paddingStart for all panes (frame1, frame2, ...) to be the desired value of preview
+    pane paddingStart, denoted by Y.
+    (2) Adding two View elements (extra_padding and extra_padding_rtl) both with width denoted by X
+    at the very beginning and end within the TwoPanelScrollView, such that the sum of X and Y equals
+    to the desired value of preference pane visual paddingStart.
+    (3) Always slides the visible window of TwoPanelScrollView from 0 on X-axis by integer increment
+    of preference pane width.
+
+    Here are concrete examples to help us understand:
+    (1) When frame1 is the preference pane, the screen shows extra_padding, frame1 and part of
+    frame2 as preview pane. The combination of extra_padding and frame1's paddingStart consists the
+    visual paddingStart of preference pane.
+    (2) When we navigate to the next pane and frame2 becomes the preference pane, the screen shows a
+    small fraction of frame1's paddingEnd, frame2 and part of frame3 as preview pane. Because we
+    slide the visible window by an increment of preference pane width on X-axis, there will always
+    be exactly X amount of previous pane's blank paddingEnd blending into the real paddingStart of
+    current preference pane to consist the larger visual paddingStart.
+-->
+<com.android.tv.twopanelsettings.TwoPanelSettingsRootView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/two_panel_fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/tp_fragment_container_background_color">
+
+    <com.android.tv.twopanelsettings.TwoPanelScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="@dimen/tp_settings_panes_width"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:importantForAccessibility="no">
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:orientation="horizontal"
+            android:layout_width="@dimen/tp_settings_panes_width"
+            android:layout_height="match_parent">
+
+            <!-- extra_padding, the extra paddingStart of preference pane -->
+            <FrameLayout
+                 android:background="@color/tp_preference_panel_background_color"
+                 android:layout_width="@dimen/preference_pane_extra_padding_start"
+                 android:layout_height="match_parent" />
+
+            <FrameLayout
+                android:id="@+id/frame1_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@+id/frame1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame1_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame2_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@+id/frame2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame2_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame3_container"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent" >
+                <FrameLayout
+                    android:id="@+id/frame3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame3_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame4_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@+id/frame4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame4_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame5_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@+id/frame5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame5_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame6_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent" >
+                <FrameLayout
+                    android:id="@+id/frame6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame6_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame7_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent" >
+                <FrameLayout
+                    android:id="@+id/frame7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame7_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame8_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent" >
+                <FrameLayout
+                    android:id="@+id/frame8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame8_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame9_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent" >
+                <FrameLayout
+                    android:id="@+id/frame9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame9_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:alpha="0"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame10_container"
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/tp_settings_preference_pane_width"
+                android:layout_height="match_parent" >
+                <FrameLayout
+                    android:id="@+id/frame10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/pane_basic_padding_start"
+                    android:paddingEnd="@dimen/preference_pane_padding_end" />
+                <FrameLayout
+                    android:id="@+id/frame10_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/tp_preview_panel_overlay_color"
+                    android:focusable="false"/>
+            </FrameLayout>
+
+            <!-- extra_padding_rtl, the extra paddingStart of preference pane in RTL -->
+            <FrameLayout
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/preference_pane_extra_padding_start"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </com.android.tv.twopanelsettings.TwoPanelScrollView>
+
+</com.android.tv.twopanelsettings.TwoPanelSettingsRootView>

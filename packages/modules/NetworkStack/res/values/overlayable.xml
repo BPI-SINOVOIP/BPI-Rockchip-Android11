@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <overlayable name="NetworkStackConfig">
+        <policy type="product|system|vendor">
+            <!-- Configuration values for NetworkMonitor -->
+            <item type="integer" name="config_captive_portal_dns_probe_timeout"/>
+            <!-- Define the min and max range of the content-length that should be in the HTTP
+                 response header of probe responses for the validation success/failed regexp to be
+                 used. The RegExp will be used to match the probe response content when the
+                 content-length is inside this interval(Strictly greater than the
+                 config_min_matches_http_content_length and strictly smaller than the
+                 config_max_matches_http_content_length). When the content-length is out of this
+                 interval, the RegExp will not be used. -->
+            <item type="integer" name="config_min_matches_http_content_length"/>
+            <item type="integer" name="config_max_matches_http_content_length"/>
+            <item type="string" name="config_captive_portal_http_url"/>
+            <item type="string" name="config_captive_portal_https_url"/>
+            <!-- A regular expression to match the content of a network validation probe.
+                 Treat the network validation as failed when the content matches the
+                 config_network_validation_failed_content_regexp and treat the network validation
+                 as success when the content matches the
+                 config_network_validation_success_content_regexp. If the content matches both of
+                 the config_network_validation_failed_content_regexp and the
+                 config_network_validation_success_content_regexp, the result will be considered as
+                 failed. -->
+            <item type="string" name="config_network_validation_failed_content_regexp"/>
+            <item type="string" name="config_network_validation_success_content_regexp"/>
+            <item type="array" name="config_captive_portal_http_urls"/>
+            <item type="array" name="config_captive_portal_https_urls"/>
+            <item type="array" name="config_captive_portal_fallback_urls"/>
+            <item type="bool" name="config_no_sim_card_uses_neighbor_mcc"/>
+            <!-- Configuration value for DhcpResults -->
+            <item type="array" name="config_default_dns_servers"/>
+            <!-- Configuration for including DHCP client hostname option.
+            If this option is true, client hostname set in Settings.Global.DEVICE_NAME will be
+            included in DHCPDISCOVER/DHCPREQUEST, otherwise, the DHCP hostname option will not
+            be sent. RFC952 and RFC1123 stipulates an valid hostname should be only comprised of
+            'a-z', 'A-Z' and '-', and the length should be up to 63 octets or less (RFC1035#2.3.4),
+            platform will perform best-effort transliteration for other characters. Anything that
+            could be used to identify the device uniquely is not recommended, e.g. user's name,
+            random number and etc.
+            -->
+            <item type="bool" name="config_dhcp_client_hostname"/>
+            <!-- Customized neighbor unreachable probe parameters.
+            Legal config_*_num value should be in the range of 5-15; and config_*_interval value
+            should be in the range of 750-1000ms.
+            -->
+            <item type="integer" name="config_nud_steadystate_solicit_num"/>
+            <item type="integer" name="config_nud_steadystate_solicit_interval"/>
+            <item type="integer" name="config_nud_postroaming_solicit_num"/>
+            <item type="integer" name="config_nud_postroaming_solicit_interval"/>
+
+            <!-- Whether to force considering DNS probes returning private IP addresses as failed
+            when attempting to detect captive portals.
+            The impact of this feature will be evaluated separately through experiments.
+            Force-enabling the feature regardless of the experiment results is not advised, as it
+            could result in valid captive portals being incorrectly classified as having no
+            connectivity.-->
+            <item type="bool" name="config_force_dns_probe_private_ip_no_internet"/>
+
+            <!-- Configurations for bandwidth check. -->
+            <item type="string" name="config_evaluating_bandwidth_url"/>
+            <item type="integer" name="config_evaluating_bandwidth_timeout_ms"/>
+            <item type="integer" name="config_evaluating_bandwidth_min_retry_timer_ms"/>
+            <item type="integer" name="config_evaluating_bandwidth_max_retry_timer_ms"/>
+        </policy>
+    </overlayable>
+</resources>

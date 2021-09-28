@@ -1,0 +1,65 @@
+cc_library_shared {
+    name: "libjni_legacymosaic",
+
+    local_include_dirs: [
+        "feature_stab/db_vlvm",
+        "feature_stab/src",
+        "feature_stab/src/dbreg",
+        "feature_mos/src",
+        "feature_mos/src/mosaic",
+    ],
+
+    cflags: [
+        "-O3",
+        "-DNDEBUG",
+
+        "-Wall",
+        "-Werror",
+
+        // suppress existing non-critical warnings
+        "-Wno-gnu-static-float-init",
+        "-Wno-non-literal-null-conversion",
+        "-Wno-self-assign",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+        "-Wno-unused-function",
+    ],
+    cppflags: ["-std=gnu++98"],
+
+    srcs: [
+        "feature_mos_jni.cpp",
+        "mosaic_renderer_jni.cpp",
+        "feature_mos/src/mosaic/trsMatrix.cpp",
+        "feature_mos/src/mosaic/AlignFeatures.cpp",
+        "feature_mos/src/mosaic/Blend.cpp",
+        "feature_mos/src/mosaic/Delaunay.cpp",
+        "feature_mos/src/mosaic/ImageUtils.cpp",
+        "feature_mos/src/mosaic/Mosaic.cpp",
+        "feature_mos/src/mosaic/Pyramid.cpp",
+        "feature_mos/src/mosaic_renderer/Renderer.cpp",
+        "feature_mos/src/mosaic_renderer/WarpRenderer.cpp",
+        "feature_mos/src/mosaic_renderer/SurfaceTextureRenderer.cpp",
+        "feature_mos/src/mosaic_renderer/YVURenderer.cpp",
+        "feature_mos/src/mosaic_renderer/FrameBuffer.cpp",
+        "feature_stab/db_vlvm/db_feature_detection.cpp",
+        "feature_stab/db_vlvm/db_feature_matching.cpp",
+        "feature_stab/db_vlvm/db_framestitching.cpp",
+        "feature_stab/db_vlvm/db_image_homography.cpp",
+        "feature_stab/db_vlvm/db_rob_image_homography.cpp",
+        "feature_stab/db_vlvm/db_utilities.cpp",
+        "feature_stab/db_vlvm/db_utilities_camera.cpp",
+        "feature_stab/db_vlvm/db_utilities_indexing.cpp",
+        "feature_stab/db_vlvm/db_utilities_linalg.cpp",
+        "feature_stab/db_vlvm/db_utilities_poly.cpp",
+        "feature_stab/src/dbreg/dbreg.cpp",
+        "feature_stab/src/dbreg/dbstabsmooth.cpp",
+        "feature_stab/src/dbreg/vp_motionmodel.c",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libnativehelper",
+        "libGLESv2",
+    ],
+
+}

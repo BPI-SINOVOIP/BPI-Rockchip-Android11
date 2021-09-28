@@ -1,0 +1,29 @@
+version_name = "1.00-aosp"
+version_code = "100"
+
+android_app {
+    name: "LeanbackIME",
+
+    sdk_version: "system_current",
+
+    srcs: [
+        "src/**/*.java",
+    ],
+
+    optimize: {
+        proguard_flags_files: ["proguard.cfg"],
+        enabled: false,
+    },
+
+    resource_dirs: ["res"],
+
+    aaptflags: [
+        "--auto-add-overlay",
+
+        "--version-name",
+	version_name,
+
+	"--version-code",
+	version_code,
+    ]
+}

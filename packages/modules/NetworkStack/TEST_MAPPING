@@ -1,0 +1,18 @@
+{
+  "presubmit": [
+    {
+      "name": "NetworkStackTests"
+    },
+    {
+      "name": "NetworkStackNextTests"
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "NetworkStackHostTests"
+    },
+    {
+      "name": "NetworkStackIntegrationTests"
+    }
+  ]
+}

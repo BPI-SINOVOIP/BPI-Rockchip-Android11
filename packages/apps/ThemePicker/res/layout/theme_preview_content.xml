@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/preview_theme_content_padding_top"
+    android:paddingBottom="@dimen/preview_theme_content_padding_bottom"
+    android:clipToPadding="false"
+    android:clipChildren="false">
+
+    <FrameLayout
+        android:id="@+id/topbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/preview_theme_topbar_container_margin_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/smart_space_date"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="spread_inside">
+        <include layout="@layout/theme_preview_topbar" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/smart_space_date"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="@dimen/preview_theme_smart_space_date_size"
+        android:singleLine="true"
+        android:gravity="center|bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar_container"
+        app:layout_constraintBottom_toTopOf="@id/app_icon_shape_container"
+        app:layout_constraintHeight_percent="0.1" />
+
+    <FrameLayout
+        android:id="@+id/app_icon_shape_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smart_space_date"
+        app:layout_constraintBottom_toTopOf="@id/color_icons_container"
+        app:layout_constraintHeight_percent="0.49">
+        <include layout="@layout/theme_preview_app_icon_shape" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/color_icons_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/preview_theme_color_icons_container_margin_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_icon_shape_container"
+        app:layout_constraintBottom_toTopOf="@id/theme_qsb_container"
+        app:layout_constraintHeight_percent="0.275">
+        <include layout="@layout/theme_preview_color_icons" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/theme_qsb_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/preview_theme_qsb_container_margin_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_icons_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1">
+        <include layout="@layout/theme_cover_qsb" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

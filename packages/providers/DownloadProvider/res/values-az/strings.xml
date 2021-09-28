@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Endirmə İdarəçisi"</string>
+    <string name="storage_description" msgid="169690279447532621">"Endirmələr"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Endirmə idarəçisinə daxil ol."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Tətbiqə faylları endirmək üçün endirmə idarçisinə daxil olmağa imkan verir. Zərərli tətbiqlər bundan endirmələri pozmaq və özəl məlumatlara daxil olmaq üçün istifadə edə bilər."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Ətraflı endirmə idarəçisi funksiyaları."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Tətbiqə endirmə idarəçisinin inkişaf etmiş funksiyalarına daxil olmaq üçün imkan verir. Zərərli tətbiqlər bunu endirmələri pozmaq və özəl məlumatlara daxil olmaq üçün istifadə edə bilər."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Endirmə məlumatı göndər."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Tətbiqə tamamlanmış endirmələr haqqında məlumat göndərməyə imkan verir. Zərərli tətbiqlər bunu faylları endirən tətbiqləri çaşdırmaq üçün istifadə edə bilər."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Endirmə keşində ehtiyat yer mühafizə et"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Tətbiqə endirmə idarəçisinə daha çox yer lazım olanda başqa faylları endirmə vasitəsi ilə avtomatik olarak silinməyən keşlər endirməsinə imkan verir."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"xəbərdarlıq etmədən faylları endir"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Bu tətbiq istifadəçiyə hər hansı bir məlumat göstərmədən faylları endirmə idarəçisi vasitəsi ilə endirmək imkanı verir."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Sistemdəki bütün endirilənlərə gir"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Tətbiqə başqa bir tətbiq vasitəsi ilə başladılan endirmələri göstərmək və dəyişdirmək imkanı verir."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Başlıqsız&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"Endirmə tamamlandı."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"Endirmə uğursuz oldu."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Endirmə həcmi Wi-Fi tələb edir."</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Arxa fonda dayandırıldı."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"Endirmə operator şəbəkə üçün çox böyükdür"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"Bu <xliff:g id="SIZE">%1$s </xliff:g> endirməni başa çatdırmaq üçün Wi-Fi istifadə etməlisiniz. \n \n Növbəti dəfə WiFi şəbəkəsinə qoşulanda bu endirməni başlatmaq üçün <xliff:g id="QUEUE_TEXT">%2$s </xliff:g> toxunun."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"Daha sonra endirmək üçün növbəyə salmaq istəyirsiniz?"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"Bu <xliff:g id="SIZE">%1$s </xliff:g> böyüklükdəki faylı endirməyə başlamaq batareyanızı azalda bilər/və ya mobil data əlaqənizin böyük bir hissəsinin işlədilməsinə gətirib çixara bilər, bu da sizin data planınınızdan asılı olaraq mobil operatorunuz tərəfindən xərcə səbəb ola bilər. \n \n Növbəti dəfə WiFi şəbəkəsinə qoşulanda bu endirməyə başlamaq üçün <xliff:g id="QUEUE_TEXT">%2$s</xliff:g> toxunun."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Növbəyə sal"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Ləğv et"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"İndi başlat"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> fayl endirilir</item>
+      <item quantity="one">1 fayl endirilir</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> fayl gözləyir</item>
+      <item quantity="one">1 fayl gözləyir</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"<xliff:g id="DURATION">%s</xliff:g> qalır"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"Fayl açılmır"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Endirmələr"</string>
+    <string name="download_queued" msgid="3383844741769045371">"Növbəyə salınıb"</string>
+    <string name="download_running" msgid="774654178925442490">"Davam edir"</string>
+    <string name="download_error" msgid="1857737890005386798">"Uğursuz"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Davam edir, <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

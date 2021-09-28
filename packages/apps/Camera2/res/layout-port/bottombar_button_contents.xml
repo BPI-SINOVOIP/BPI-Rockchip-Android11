@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:camera="http://schemas.android.com/apk/res/com.android.camera2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.android.camera.ui.AverageRadioOptions 
+        android:id="@+id/color_options"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        camera:selected_drawable="@android:color/white"
+        android:visibility="invisible">
+
+        <FrameLayout android:id="@+id/color_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="none"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_none"
+                android:scaleType="fitXY" />
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|right"
+                android:padding="15dp"
+                android:text="@string/color_none" />
+
+        </FrameLayout>
+
+        <FrameLayout android:id="@+id/color_mono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="mono"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_mono"
+                android:scaleType="fitXY" />
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|right"
+                android:padding="15dp"
+                android:text="@string/color_mono" />
+
+        </FrameLayout>
+
+        <FrameLayout android:id="@+id/color_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="negative"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_negative"
+                android:scaleType="fitXY" />
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|right"
+                android:padding="15dp"
+                android:text="@string/color_negative" />
+
+        </FrameLayout>
+
+        <FrameLayout android:id="@+id/color_sepia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="sepia"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_sepia"
+                android:scaleType="fitXY" />
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|right"
+                android:padding="15dp"
+                android:text="@string/color_sepia" />
+
+        </FrameLayout>
+    </com.android.camera.ui.AverageRadioOptions>
+
+    <com.android.camera.ui.AverageRadioOptions 
+        android:id="@+id/scene_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        camera:selected_drawable="@drawable/scene_button_background_selected"
+        camera:option_height="@dimen/scene_options_height"
+        android:background="@color/mode_options_background"
+        android:visibility="invisible">
+
+        <LinearLayout android:id="@+id/scene_auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="auto"
+            android:gravity="center"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_scene_auto" />
+
+            <com.android.camera.ui.AutoMarqueeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:text="@string/scene_mode_auto"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/scene_portrait"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="portrait"
+            android:gravity="center"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_scene_portrait" />
+
+            <com.android.camera.ui.AutoMarqueeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:text="@string/scene_mode_portrait"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/scene_landscape"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="landscape"
+            android:gravity="center"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_scene_scenery" />
+
+            <com.android.camera.ui.AutoMarqueeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:text="@string/scene_mode_landscape"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/scene_night"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="night"
+            android:gravity="center"
+            android:clickable="true" >
+
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_scene_night" />
+
+            <com.android.camera.ui.AutoMarqueeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:text="@string/scene_mode_night"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/scene_sports"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="sports"
+            android:gravity="center"
+            android:clickable="true" > 
+
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_scene_sport" />
+
+            <com.android.camera.ui.AutoMarqueeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:text="@string/scene_mode_sports"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/scene_barcode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:tag="barcode"
+            android:gravity="center"
+            android:clickable="true" >
+
+           <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_scene_micro" />
+
+           <com.android.camera.ui.AutoMarqueeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                android:textColor="@android:color/white"
+                android:text="@string/scene_mode_barcode"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee" />
+
+        </LinearLayout>
+
+    </com.android.camera.ui.AverageRadioOptions>
+</merge>

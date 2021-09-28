@@ -1,0 +1,33 @@
+props {
+  module: "android.automotive.watchdog.sysprop"
+  prop {
+    api_name: "boottimeCollectionInterval"
+    type: Integer
+    scope: Internal
+    prop_name: "ro.carwatchdog.boottime_collection_interval"
+  }
+  prop {
+    api_name: "periodicCollectionBufferSize"
+    type: Integer
+    scope: Internal
+    prop_name: "ro.carwatchdog.periodic_collection_buffer_size"
+  }
+  prop {
+    api_name: "periodicCollectionInterval"
+    type: Integer
+    scope: Internal
+    prop_name: "ro.carwatchdog.periodic_collection_interval"
+  }
+  prop {
+    api_name: "topNStatsPerCategory"
+    type: Integer
+    scope: Internal
+    prop_name: "ro.carwatchdog.top_n_stats_per_category"
+  }
+  prop {
+    api_name: "topNStatsPerSubcategory"
+    type: Integer
+    scope: Internal
+    prop_name: "ro.carwatchdog.top_n_stats_per_subcategory"
+  }
+}

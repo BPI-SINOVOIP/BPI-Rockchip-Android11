@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2016, The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<resources>
+    <!-- Music -->
+    <item name="media_scrim_alpha" format="float" type="dimen">0.6</item>
+    <item name="media_scrim_darkened_alpha" format="float" type="dimen">0.9</item>
+    <item name="media_background_alpha" format="float" type="dimen">0.78</item>
+    <dimen name="apps_max_content_width">748dp</dimen>
+
+    <!-- Music now playing screen -->
+    <dimen name="music_action_icon_inset">0dp</dimen>
+    <dimen name="music_action_ripple_inset">32dp</dimen>
+
+    <dimen name="missing_permission_icon_size">128dp</dimen>
+
+    <dimen name="controls_tap_target_width">64dp</dimen>
+    <dimen name="controls_tap_target_height">64dp</dimen>
+    <dimen name="controls_margin">46dp</dimen>
+    <dimen name="controls_spacing_inner">16dp</dimen>
+    <dimen name="controls_spacing_outer">81dp</dimen>
+
+    <!-- Playback seekbar height -->
+    <dimen name="playback_seekbar_height">76dp</dimen>
+    <!-- Playback seekbar track height -->
+    <dimen name="playback_seekbar_track_height">4dp</dimen>
+    <!-- Size of the thumb in the playback seekbar -->
+    <dimen name="playback_seekbar_thumb_height">16dp</dimen>
+    <dimen name="playback_seekbar_thumb_width">16dp</dimen>
+    <dimen name="playback_seekbar_thumb_inner_ring_inner_radius">8dp</dimen>
+    <dimen name="playback_seekbar_thumb_inner_ring_thickness">8dp</dimen>
+    <dimen name="playback_seekbar_thumb_outer_ring_inner_radius">16dp</dimen>
+    <dimen name="playback_seekbar_thumb_outer_ring_thickness">8dp</dimen>
+    <dimen name="playback_seekbar_thumb_offset">0px</dimen>
+    <!-- Paddings of playback seekbar -->
+    <dimen name="playback_seekbar_padding_x">0dp</dimen>
+    <!-- x-axis margin of playback seekbar -->
+    <dimen name="playback_seekbar_margin_x">@dimen/car_ui_margin</dimen>
+    <!-- Image size used to generate the background -->
+    <dimen name="playback_background_raw_image_size">300px</dimen>
+
+
+    <!-- Blurring radius used to blur background images -->
+    <item name="playback_background_blur_radius" format="float" type="dimen">25</item>
+    <!-- Scale to apply to images before blurring them to create the playback background -->
+    <item name="playback_background_blur_scale" format="float" type="dimen">.5</item>
+    <!-- Size of the album art thumbnail -->
+    <dimen name="playback_album_art_size">226dp</dimen>
+    <!-- End margin of playback queue button -->
+    <dimen name="playback_queue_button_margin_end">@dimen/car_ui_padding_2</dimen>
+
+    <!-- Tab max width -->
+    <dimen name="browse_tab_width">134dp</dimen>
+    <!-- Tab Padding -->
+    <dimen name="browse_tab_padding">@dimen/car_ui_padding_4</dimen>
+    <!-- Browse playback controls size -->
+    <dimen name="browse_playback_controls_height">192dp</dimen>
+    <!-- Selected tab alpha -->
+    <item name="browse_tab_alpha_selected" format="float" type="dimen">1</item>
+    <!-- Unselected tab alpha -->
+    <item name="browse_tab_alpha_unselected" format="float" type="dimen">0.5</item>
+
+    <!-- appbar_view.xml -->
+    <dimen name="appbar_view_nav_button_width">@dimen/car_ui_margin</dimen>
+    <dimen name="appbar_view_tabs_margin_start">@dimen/car_ui_padding_4</dimen>
+    <dimen name="appbar_view_tabs_margin_end">@dimen/car_ui_padding_3</dimen>
+    <dimen name="appbar_view_control_buttons_spacing">@dimen/car_ui_padding_3</dimen>
+    <dimen name="appbar_view_control_buttons_margin_end">@dimen/car_ui_padding_2</dimen>
+    <dimen name="appbar_view_title_margin_start">@dimen/appbar_view_nav_button_width</dimen>
+
+    <!-- media_activity.xml -->
+    <dimen name="media_activity_controls_container_padding">@dimen/car_ui_padding_4</dimen>
+    <dimen name="media_activity_controls_margin_start">@dimen/car_ui_padding_4</dimen>
+
+    <!--
+        The direction of the gesture needed to close the playback screen of the media activity.
+        One coordinate of the vector must be null as diagonal closure isn't supported.
+        If both coordinates are zero, then no gesture triggers the closure, and the icon triggers
+        a fadeout.
+    -->
+    <item name="media_activity_close_vector_x" format="float" type="dimen">0.0</item>
+    <item name="media_activity_close_vector_y" format="float" type="dimen">1.0</item>
+
+    <!-- BrowseFragment.java -->
+    <!-- Spacer used between the app bar and the top of the browse list/grid -->
+    <dimen name="browse_spacer_height">@dimen/car_ui_padding_2</dimen>
+    <dimen name="grid_item_spacing">@dimen/car_ui_padding_3</dimen>
+
+    <!--  Space between title and subtitle on media browse list/grid  -->
+    <dimen name="media_browse_subtitle_margin_top">@dimen/car_ui_padding_0</dimen>
+
+    <!-- media_browse_grid_[icons_]item.xml -->
+    <dimen name="media_browse_grid_item_padding">0dp</dimen>
+    <dimen name="media_browse_grid_item_margin_bottom">@dimen/car_ui_padding_4</dimen>
+    <dimen name="media_browse_grid_item_text_margin_top">@dimen/car_ui_padding_3</dimen>
+
+    <dimen name="media_browse_grid_icons_item_art_size">76dp</dimen>
+
+    <!-- media_browse_header_item.xml -->
+    <dimen name="media_browse_header_item_height">76dp</dimen>
+    <dimen name="media_browse_header_item_margin_x">0dp</dimen>
+
+    <!-- media_browse_list_[icons_]item.xml -->
+    <dimen name="media_browse_list_item_height">116dp</dimen>
+    <dimen name="media_browse_list_item_thumbnail_size">76dp</dimen>
+    <dimen name="media_browse_list_item_text_margin_x">148dp</dimen>
+    <dimen name="media_browse_list_item_icon_margin_start">0dp</dimen>
+    <dimen name="media_browse_list_item_arrow_size">@dimen/car_ui_primary_icon_size</dimen>
+    <dimen name="media_browse_list_item_thumbnail_margin_bottom">4dp</dimen>
+
+    <dimen name="media_browse_list_icons_item_art_margin_start">@dimen/car_ui_padding_3</dimen>
+    <dimen name="media_browse_list_icons_item_text_margin_x">112dp</dimen>
+    <dimen name="media_browse_list_icons_item_art_size">@dimen/car_ui_primary_icon_size</dimen>
+
+    <!-- media_browse_icon.xml-->
+    <dimen name="media_browse_indicator_size">25dp</dimen>
+
+    <!-- metadata_normal.xml -->
+    <dimen name="metadata_title_subtitle_margin">@dimen/car_ui_padding_2</dimen>
+    <dimen name="metadata_subtitles_margin">@dimen/car_ui_padding_2</dimen>
+    <dimen name="art_metadata_margin">48dp</dimen>
+
+    <!-- tab_view.xml -->
+    <dimen name="tab_view_icon_size">@dimen/car_ui_primary_icon_size</dimen>
+    <dimen name="tab_view_icon_margin_bottom">@dimen/car_ui_padding_1</dimen>
+
+    <!-- fragment_error.xml -->
+    <dimen name="fragment_error_button_margin_top">@dimen/car_ui_padding_5</dimen>
+    <dimen name="fragment_error_button_margin_bottom">@dimen/car_ui_padding_4</dimen>
+    <dimen name="fragment_error_message_margin_x">@dimen/car_ui_margin</dimen>
+
+    <!-- fragment_playback.xml -->
+    <!-- The length of playback queue fading edge, equals 0.1 * window_height. -->
+    <dimen name="queue_fading_edge_length">81dp</dimen>
+    <dimen name="fragment_playback_queue_overlap_top">@dimen/car_ui_padding_4</dimen>
+    <dimen name="fragment_playback_queue_overlap_bottom">@dimen/car_ui_padding_4</dimen>
+    <dimen name="fragment_metadata_margin_x">@dimen/car_ui_margin</dimen>
+    <dimen name="playback_title_margin_end">@dimen/car_ui_padding_3</dimen>
+
+    <!-- PlaybackFragment.java -->
+    <dimen name="playback_queue_list_padding_top">@dimen/car_ui_padding_4</dimen>
+
+    <!-- queue_list_item.xml -->
+    <dimen name="queue_list_item_height">116dp</dimen>
+    <dimen name="queue_list_item_padding_x">@dimen/car_ui_padding_3</dimen>
+    <dimen name="queue_list_item_thumbnail_container_width">148dp</dimen>
+    <dimen name="queue_list_item_title_time_margin">@dimen/car_ui_padding_4</dimen>
+    <dimen name="queue_list_item_thumbnail_size">76dp</dimen>
+    <dimen name="queue_list_item_spacer_width">@dimen/queue_list_item_padding_x</dimen>
+
+    <!-- fragment_browse.xml -->
+    <dimen name="browse_fragment_bottom_padding">@dimen/minimized_control_bar_height</dimen>
+    <item name="playback_queue_background_alpha" format="float" type="dimen">0.6</item>
+    <dimen name="browse_state_error_margin_top">@dimen/car_ui_padding_4</dimen>
+
+    <!-- ic_queue_button.xml -->
+    <dimen name="queue_button_background_size">54dp</dimen>
+
+</resources>

@@ -1,0 +1,393 @@
+ELF Header:
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF32
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              DYN (Shared object file)
+  Machine:                           Intel 80386
+  Version:                           0x1
+  Entry point address:               0x1530
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          22140 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         9
+  Size of section headers:           40 (bytes)
+  Number of section headers:         27
+  Section header string table index: 26
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .interp           PROGBITS        00000154 000154 000013 00   A  0   0  1
+  [ 2] .note.android.ide NOTE            00000168 000168 000018 00   A  0   0  4
+  [ 3] .note.gnu.build-i NOTE            00000180 000180 000020 00   A  0   0  4
+  [ 4] .dynsym           DYNSYM          000001a0 0001a0 0004c0 10   A  5   1  4
+  [ 5] .dynstr           STRTAB          00000660 000660 000718 00   A  0   0  1
+  [ 6] .gnu.hash         GNU_HASH        00000d78 000d78 000048 04   A  4   0  4
+  [ 7] .gnu.version      VERSYM          00000dc0 000dc0 000098 02   A  4   0  2
+  [ 8] .gnu.version_r    VERNEED         00000e58 000e58 000050 00   A  5   2  4
+  [ 9] .rel.dyn          REL             00000ea8 000ea8 000088 08   A  4   0  4
+  [10] .rel.plt          REL             00000f30 000f30 0001f8 08  AI  4  22  4
+  [11] .plt              PROGBITS        00001130 001130 000400 04  AX  0   0 16
+  [12] .text             PROGBITS        00001530 001530 002125 00  AX  0   0 16
+  [13] .rodata           PROGBITS        00003655 003655 000484 00   A  0   0  1
+  [14] .eh_frame         PROGBITS        00003adc 003adc 000488 00   A  0   0  4
+  [15] .eh_frame_hdr     PROGBITS        00003f64 003f64 00012c 00   A  0   0  4
+  [16] .preinit_array    PREINIT_ARRAY   00005d34 004d34 000008 04  WA  0   0  4
+  [17] .init_array       INIT_ARRAY      00005d3c 004d3c 00000c 04  WA  0   0  4
+  [18] .fini_array       FINI_ARRAY      00005d48 004d48 000008 04  WA  0   0  4
+  [19] .data.rel.ro      PROGBITS        00005d50 004d50 000048 00  WA  0   0  4
+  [20] .dynamic          DYNAMIC         00005d98 004d98 000158 08  WA  5   0  4
+  [21] .got              PROGBITS        00005ef0 004ef0 000008 00  WA  0   0  4
+  [22] .got.plt          PROGBITS        00005ef8 004ef8 000108 00  WA  0   0  4
+  [23] .bss              NOBITS          00006000 005000 000e90 00  WA  0   0  4
+  [24] .note.gnu.gold-ve NOTE            00000000 005000 00001c 00      0   0  4
+  [25] .gnu_debugdata    PROGBITS        00000000 00501c 000540 00      0   0  1
+  [26] .shstrtab         STRTAB          00000000 00555c 00011e 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  p (processor specific)
+
+There are no section groups in this file.
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  PHDR           0x000034 0x00000034 0x00000034 0x00120 0x00120 R   0x4
+  INTERP         0x000154 0x00000154 0x00000154 0x00013 0x00013 R   0x1
+      [Requesting program interpreter: /system/bin/linker]
+  LOAD           0x000000 0x00000000 0x00000000 0x04090 0x04090 R E 0x1000
+  LOAD           0x004d34 0x00005d34 0x00005d34 0x002cc 0x0115c RW  0x1000
+  DYNAMIC        0x004d98 0x00005d98 0x00005d98 0x00158 0x00158 RW  0x4
+  NOTE           0x000168 0x00000168 0x00000168 0x00038 0x00038 R   0x4
+  GNU_EH_FRAME   0x003f64 0x00003f64 0x00003f64 0x0012c 0x0012c R   0x4
+  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+  GNU_RELRO      0x004d34 0x00005d34 0x00005d34 0x002cc 0x002cc RW  0x4
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.android.ident .note.gnu.build-id .dynsym .dynstr .gnu.hash .gnu.version .gnu.version_r .rel.dyn .rel.plt .plt .text .rodata .eh_frame .eh_frame_hdr 
+   03     .preinit_array .init_array .fini_array .data.rel.ro .dynamic .got .got.plt .bss 
+   04     .dynamic 
+   05     .note.android.ident .note.gnu.build-id 
+   06     .eh_frame_hdr 
+   07     
+   08     .preinit_array .init_array .fini_array .data.rel.ro .dynamic .got .got.plt 
+
+Dynamic section at offset 0x4d98 contains 38 entries:
+  Tag        Type                         Name/Value
+ 0x00000003 (PLTGOT)                     0x5ef8
+ 0x00000002 (PLTRELSZ)                   504 (bytes)
+ 0x00000017 (JMPREL)                     0xf30
+ 0x00000014 (PLTREL)                     REL
+ 0x00000011 (REL)                        0xea8
+ 0x00000012 (RELSZ)                      136 (bytes)
+ 0x00000013 (RELENT)                     8 (bytes)
+ 0x6ffffffa (RELCOUNT)                   15
+ 0x00000015 (DEBUG)                      0x0
+ 0x00000006 (SYMTAB)                     0x1a0
+ 0x0000000b (SYMENT)                     16 (bytes)
+ 0x00000005 (STRTAB)                     0x660
+ 0x0000000a (STRSZ)                      1816 (bytes)
+ 0x6ffffef5 (GNU_HASH)                   0xd78
+ 0x00000001 (NEEDED)                     Shared library: [libandroid_runtime.so]
+ 0x00000001 (NEEDED)                     Shared library: [libbinder.so]
+ 0x00000001 (NEEDED)                     Shared library: [libcutils.so]
+ 0x00000001 (NEEDED)                     Shared library: [libhwbinder.so]
+ 0x00000001 (NEEDED)                     Shared library: [liblog.so]
+ 0x00000001 (NEEDED)                     Shared library: [libnativeloader.so]
+ 0x00000001 (NEEDED)                     Shared library: [libutils.so]
+ 0x00000001 (NEEDED)                     Shared library: [libwilhelm.so]
+ 0x00000001 (NEEDED)                     Shared library: [libc++.so]
+ 0x00000001 (NEEDED)                     Shared library: [libc.so]
+ 0x00000001 (NEEDED)                     Shared library: [libm.so]
+ 0x00000001 (NEEDED)                     Shared library: [libdl.so]
+ 0x00000020 (PREINIT_ARRAY)              0x5d34
+ 0x00000021 (PREINIT_ARRAYSZ)            0x8
+ 0x00000019 (INIT_ARRAY)                 0x5d3c
+ 0x0000001b (INIT_ARRAYSZ)               12 (bytes)
+ 0x0000001a (FINI_ARRAY)                 0x5d48
+ 0x0000001c (FINI_ARRAYSZ)               8 (bytes)
+ 0x0000001e (FLAGS)                      BIND_NOW
+ 0x6ffffffb (FLAGS_1)                    Flags: NOW
+ 0x6ffffff0 (VERSYM)                     0xdc0
+ 0x6ffffffe (VERNEED)                    0xe58
+ 0x6fffffff (VERNEEDNUM)                 2
+ 0x00000000 (NULL)                       0x0
+
+Relocation section '.rel.dyn' at offset 0xea8 contains 17 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name
+00005d40  00000008 R_386_RELATIVE   
+00005d58  00000008 R_386_RELATIVE   
+00005d5c  00000008 R_386_RELATIVE   
+00005d60  00000008 R_386_RELATIVE   
+00005d64  00000008 R_386_RELATIVE   
+00005d68  00000008 R_386_RELATIVE   
+00005d6c  00000008 R_386_RELATIVE   
+00005d78  00000008 R_386_RELATIVE   
+00005d7c  00000008 R_386_RELATIVE   
+00005d80  00000008 R_386_RELATIVE   
+00005d84  00000008 R_386_RELATIVE   
+00005d88  00000008 R_386_RELATIVE   
+00005d8c  00000008 R_386_RELATIVE   
+00005d90  00000008 R_386_RELATIVE   
+00005d94  00000008 R_386_RELATIVE   
+00005ef4  00001706 R_386_GLOB_DAT    00000000   stderr@LIBC
+00005ef0  00003a06 R_386_GLOB_DAT    00000000   __stack_chk_guard@LIBC
+
+Relocation section '.rel.plt' at offset 0xf30 contains 63 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name
+00005f04  00000307 R_386_JUMP_SLOT   00000000   __libc_init@LIBC
+00005f08  00000407 R_386_JUMP_SLOT   00000000   __register_atfork@LIBC
+00005f0c  00001d07 R_386_JUMP_SLOT   00000000   strlen@LIBC
+00005f10  00001607 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005f14  00002907 R_386_JUMP_SLOT   00000000   _ZN7android7String8C1E
+00005f18  00000a07 R_386_JUMP_SLOT   00000000   _ZN7android10VectorImp
+00005f1c  00001207 R_386_JUMP_SLOT   00000000   strcmp@LIBC
+00005f20  00001407 R_386_JUMP_SLOT   00000000   strdup@LIBC
+00005f24  00001507 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005f28  00001907 R_386_JUMP_SLOT   00000000   strncmp@LIBC
+00005f2c  00001f07 R_386_JUMP_SLOT   00000000   _ZN7android7String85se
+00005f30  00003407 R_386_JUMP_SLOT   00000000   _ZNK7android7String86l
+00005f34  00002c07 R_386_JUMP_SLOT   00000000   getenv@LIBC
+00005f38  00002807 R_386_JUMP_SLOT   00000000   mkdir@LIBC
+00005f3c  00003907 R_386_JUMP_SLOT   00000000   __errno@LIBC
+00005f40  00001e07 R_386_JUMP_SLOT   00000000   chown@LIBC
+00005f44  00002407 R_386_JUMP_SLOT   00000000   chmod@LIBC
+00005f48  00002507 R_386_JUMP_SLOT   00000000   _ZN7android7String8C1E
+00005f4c  00000907 R_386_JUMP_SLOT   00000000   _ZN7android10VectorImp
+00005f50  00002b07 R_386_JUMP_SLOT   00000000   _ZN7android7String8D1E
+00005f54  00003b07 R_386_JUMP_SLOT   00000000   property_get
+00005f58  00002307 R_386_JUMP_SLOT   00000000   _ZN7android7String86ap
+00005f5c  00002107 R_386_JUMP_SLOT   00000000   _ZN7android7String85se
+00005f60  00001307 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005f64  00001007 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005f68  00000807 R_386_JUMP_SLOT   00000000   _ZN7android10VectorImp
+00005f6c  00000b07 R_386_JUMP_SLOT   00000000   _ZN7android10VectorImp
+00005f70  00001807 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005f74  00000607 R_386_JUMP_SLOT   00000000   __stack_chk_fail@LIBC
+00005f78  00002a07 R_386_JUMP_SLOT   00000000   fwrite@LIBC
+00005f7c  00003607 R_386_JUMP_SLOT   00000000   __android_log_assert
+00005f80  00001c07 R_386_JUMP_SLOT   00000000   strerror@LIBC
+00005f84  00003507 R_386_JUMP_SLOT   00000000   _ZdlPv
+00005f88  00000f07 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005f8c  00003807 R_386_JUMP_SLOT   00000000   __android_log_print
+00005f90  00002007 R_386_JUMP_SLOT   00000000   free@LIBC
+00005f94  00000d07 R_386_JUMP_SLOT   00000000   _ZN7android12ProcessSt
+00005f98  00000c07 R_386_JUMP_SLOT   00000000   _ZN7android12ProcessSt
+00005f9c  00000e07 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005fa0  00001107 R_386_JUMP_SLOT   00000000   _ZN7android14AndroidRu
+00005fa4  00001b07 R_386_JUMP_SLOT   00000000   _ZN7android14IPCThread
+00005fa8  00001a07 R_386_JUMP_SLOT   00000000   _ZN7android14IPCThread
+00005fac  00002f07 R_386_JUMP_SLOT   00000000   _ZN7android8hardware14
+00005fb0  00002d07 R_386_JUMP_SLOT   00000000   _ZN7android8hardware14
+00005fb4  00003307 R_386_JUMP_SLOT   00000000   _ZNK7android7RefBase9d
+00005fb8  00002207 R_386_JUMP_SLOT   00000000   __vsnprintf_chk@LIBC
+00005fbc  00002707 R_386_JUMP_SLOT   00000000   _ZN7android7String8C1E
+00005fc0  00002607 R_386_JUMP_SLOT   00000000   memmove@LIBC
+00005fc4  00003c07 R_386_JUMP_SLOT   00000000   _ZNSt3__111__call_once
+00005fc8  00002e07 R_386_JUMP_SLOT   00000000   pthread_getspecific@LIBC
+00005fcc  00004007 R_386_JUMP_SLOT   00000000   sigemptyset64@LIBC_P
+00005fd0  00004207 R_386_JUMP_SLOT   00000000   sigismember64@LIBC_P
+00005fd4  00003e07 R_386_JUMP_SLOT   00000000   sigaddset64@LIBC_P
+00005fd8  00003207 R_386_JUMP_SLOT   00000000   pthread_setspecific@LIBC
+00005fdc  00003707 R_386_JUMP_SLOT   00000000   abort@LIBC
+00005fe0  00003d07 R_386_JUMP_SLOT   00000000   __android_log_write
+00005fe4  00000207 R_386_JUMP_SLOT   00000000   sigemptyset@LIBC
+00005fe8  00000707 R_386_JUMP_SLOT   00000000   sigismember@LIBC
+00005fec  00000507 R_386_JUMP_SLOT   00000000   sigdelset@LIBC
+00005ff0  00003f07 R_386_JUMP_SLOT   00000000   sigdelset64@LIBC_P
+00005ff4  00004107 R_386_JUMP_SLOT   00000000   sigfillset64@LIBC_P
+00005ff8  00003007 R_386_JUMP_SLOT   00000000   pthread_key_create@LIBC
+00005ffc  00003107 R_386_JUMP_SLOT   00000000   dlsym@LIBC
+
+The decoding of unwind sections for machine type Intel 80386 is not currently supported.
+
+Symbol table '.dynsym' contains 76 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 FUNC    GLOBAL DEFAULT  UND __cxa_atexit@LIBC (2)
+     2: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigemptyset@LIBC (2)
+     3: 00000000     0 FUNC    GLOBAL DEFAULT  UND __libc_init@LIBC (2)
+     4: 00000000     0 FUNC    GLOBAL DEFAULT  UND __register_atfork@LIBC (2)
+     5: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigdelset@LIBC (2)
+     6: 00000000     0 FUNC    GLOBAL DEFAULT  UND __stack_chk_fail@LIBC (2)
+     7: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigismember@LIBC (2)
+     8: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android10VectorImpl13
+     9: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android10VectorImpl3a
+    10: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android10VectorImplC2
+    11: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android10VectorImplD2
+    12: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android12ProcessState
+    13: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android12ProcessState
+    14: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    15: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    16: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    17: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    18: 00000000     0 FUNC    GLOBAL DEFAULT  UND strcmp@LIBC (2)
+    19: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    20: 00000000     0 FUNC    GLOBAL DEFAULT  UND strdup@LIBC (2)
+    21: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    22: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    23: 00000000     0 OBJECT  GLOBAL DEFAULT  UND stderr@LIBC (2)
+    24: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14AndroidRunti
+    25: 00000000     0 FUNC    GLOBAL DEFAULT  UND strncmp@LIBC (2)
+    26: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14IPCThreadSta
+    27: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android14IPCThreadSta
+    28: 00000000     0 FUNC    GLOBAL DEFAULT  UND strerror@LIBC (2)
+    29: 00000000     0 FUNC    GLOBAL DEFAULT  UND strlen@LIBC (2)
+    30: 00000000     0 FUNC    GLOBAL DEFAULT  UND chown@LIBC (2)
+    31: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String85setTo
+    32: 00000000     0 FUNC    GLOBAL DEFAULT  UND free@LIBC (2)
+    33: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String85setTo
+    34: 00000000     0 FUNC    GLOBAL DEFAULT  UND __vsnprintf_chk@LIBC (2)
+    35: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String86appen
+    36: 00000000     0 FUNC    GLOBAL DEFAULT  UND chmod@LIBC (2)
+    37: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String8C1EPKc
+    38: 00000000     0 FUNC    GLOBAL DEFAULT  UND memmove@LIBC (2)
+    39: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String8C1ERKS
+    40: 00000000     0 FUNC    GLOBAL DEFAULT  UND mkdir@LIBC (2)
+    41: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String8C1Ev
+    42: 00000000     0 FUNC    GLOBAL DEFAULT  UND fwrite@LIBC (2)
+    43: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android7String8D1Ev
+    44: 00000000     0 FUNC    GLOBAL DEFAULT  UND getenv@LIBC (2)
+    45: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android8hardware14IPC
+    46: 00000000     0 FUNC    GLOBAL DEFAULT  UND pthread_getspecific@LIBC (2)
+    47: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZN7android8hardware14IPC
+    48: 00000000     0 FUNC    GLOBAL DEFAULT  UND pthread_key_create@LIBC (2)
+    49: 00000000     0 FUNC    GLOBAL DEFAULT  UND dlsym@LIBC (4)
+    50: 00000000     0 FUNC    GLOBAL DEFAULT  UND pthread_setspecific@LIBC (2)
+    51: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZNK7android7RefBase9decS
+    52: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZNK7android7String86leng
+    53: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZdlPv
+    54: 00000000     0 FUNC    GLOBAL DEFAULT  UND __android_log_assert
+    55: 00000000     0 FUNC    GLOBAL DEFAULT  UND abort@LIBC (2)
+    56: 00000000     0 FUNC    GLOBAL DEFAULT  UND __android_log_print
+    57: 00000000     0 FUNC    GLOBAL DEFAULT  UND __errno@LIBC (2)
+    58: 00000000     0 OBJECT  GLOBAL DEFAULT  UND __stack_chk_guard@LIBC (2)
+    59: 00000000     0 FUNC    GLOBAL DEFAULT  UND property_get
+    60: 00000000     0 FUNC    GLOBAL DEFAULT  UND _ZNSt3__111__call_onceERV
+    61: 00000000     0 FUNC    GLOBAL DEFAULT  UND __android_log_write
+    62: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigaddset64@LIBC_P (3)
+    63: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigdelset64@LIBC_P (3)
+    64: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigemptyset64@LIBC_P (3)
+    65: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigfillset64@LIBC_P (3)
+    66: 00000000     0 FUNC    GLOBAL DEFAULT  UND sigismember64@LIBC_P (3)
+    67: 00003150   334 FUNC    GLOBAL PROTECTED   12 AddSpecialSignalHandlerFn
+    68: 00002d20   134 FUNC    GLOBAL PROTECTED   12 bsd_signal
+    69: 00002940   359 FUNC    GLOBAL PROTECTED   12 sigaction
+    70: 00002ab0   265 FUNC    GLOBAL PROTECTED   12 sigaction64
+    71: 00002db0   144 FUNC    GLOBAL PROTECTED   12 sigprocmask
+    72: 00002f80   144 FUNC    GLOBAL PROTECTED   12 sigprocmask64
+    73: 00002bc0   351 FUNC    GLOBAL PROTECTED   12 signal
+    74: 000032a0   244 FUNC    GLOBAL PROTECTED   12 RemoveSpecialSignalHandle
+    75: 000033a0   282 FUNC    GLOBAL PROTECTED   12 EnsureFrontOfChain
+
+Histogram for `.gnu.hash' bucket list length (total of 3 buckets):
+ Length  Number     % of total  Coverage
+      0  0          (  0.0%)
+      1  1          ( 33.3%)     11.1%
+      2  1          ( 33.3%)     33.3%
+      3  0          (  0.0%)     33.3%
+      4  0          (  0.0%)     33.3%
+      5  0          (  0.0%)     33.3%
+      6  1          ( 33.3%)    100.0%
+
+Version symbols section '.gnu.version' contains 76 entries:
+ Addr: 0000000000000dc0  Offset: 0x000dc0  Link: 4 (.dynsym)
+  000:   0 (*local*)       2 (LIBC)          2 (LIBC)          2 (LIBC)       
+  004:   2 (LIBC)          2 (LIBC)          2 (LIBC)          2 (LIBC)       
+  008:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  00c:   0 (*local*)       0 (*local*)       0 (*local*)       0 (*local*)    
+  010:   0 (*local*)       0 (*local*)       2 (LIBC)          0 (*local*)    
+  014:   2 (LIBC)          0 (*local*)       0 (*local*)       2 (LIBC)       
+  018:   0 (*local*)       2 (LIBC)          0 (*local*)       0 (*local*)    
+  01c:   2 (LIBC)          2 (LIBC)          2 (LIBC)          0 (*local*)    
+  020:   2 (LIBC)          0 (*local*)       2 (LIBC)          0 (*local*)    
+  024:   2 (LIBC)          0 (*local*)       2 (LIBC)          0 (*local*)    
+  028:   2 (LIBC)          0 (*local*)       2 (LIBC)          0 (*local*)    
+  02c:   2 (LIBC)          0 (*local*)       2 (LIBC)          0 (*local*)    
+  030:   2 (LIBC)          4 (LIBC)          2 (LIBC)          0 (*local*)    
+  034:   0 (*local*)       0 (*local*)       0 (*local*)       2 (LIBC)       
+  038:   0 (*local*)       2 (LIBC)          2 (LIBC)          0 (*local*)    
+  03c:   0 (*local*)       0 (*local*)       3 (LIBC_P)        3 (LIBC_P)     
+  040:   3 (LIBC_P)        3 (LIBC_P)        3 (LIBC_P)        1 (*global*)   
+  044:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  048:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+
+Version needs section '.gnu.version_r' contains 2 entries:
+ Addr: 0x0000000000000e58  Offset: 0x000e58  Link: 5 (.dynstr)
+  000000: Version: 1  File: libc.so  Cnt: 2
+  0x0010:   Name: LIBC  Flags: none  Version: 2
+  0x0020:   Name: LIBC_P  Flags: none  Version: 3
+  0x0030: Version: 1  File: libdl.so  Cnt: 1
+  0x0040:   Name: LIBC  Flags: none  Version: 4
+
+String dump of section '.rodata':
+  [     0]  -cp
+  [     4]  -classpath
+  [     f]  --zygote
+  [    18]  --start-system-server
+  [    2e]  --application
+  [    3c]  --nice-name=
+  [    49]  --
+  [    4c]  application
+  [    58]  tool
+  [    5d]  start-system-server
+  [    71]  appproc
+  [    79]  app_process: Unable to determine ABI list from property %s.
+  [    b5]  --abi-list=
+  [    c1]  com.android.internal.os.ZygoteInit
+  [    e4]  com.android.internal.os.RuntimeInit
+  [   108]  Error: no class name or --zygote supplied.^J
+  [   134]  app_process: no class name or --zygote supplied.
+  [   165]  ERROR: could not find class '%s'^J
+  [   187]  ANDROID_DATA
+  [   194]  androidRoot == NULL
+  [   1a8]  ANDROID_DATA environment variable unset
+  [   1d0]  %s/dalvik-cache/%s
+  [   1e3]  (numChars >= PATH_MAX || numChars < 0)
+  [   20a]  Error constructing dalvik cache : %s
+  [   22f]  (result < 0 && errno != EEXIST)
+  [   24f]  Error creating cache dir %s : %s
+  [   270]  (result < 0)
+  [   27d]  Error changing dalvik-cache ownership : %s
+  [   2a8]  Error changing dalvik-cache permissions : %s
+  [   2d5]  Usage: app_process [java-options] cmd-dir start-class-name [options]^J
+  [   31b]  exiting due to SIG_DFL handler for signal %d
+  [   348]  Invalid signal %d
+  [   35a]  Warning: Unexpected sigaction action found %p^J
+  [   389]  failed to create sigchain pthread key: %s
+  [   3b3]  libsigchain
+  [   3bf]  too many special signal handlers
+  [   3e0]  failed to find special handler to remove
+  [   409]  sigaction
+  [   413]  sigprocmask
+  [   41f]  sigaction64
+  [   42b]  sigprocmask64
+  [   439]  Unable to find next %s in signal chain
+  [   460]  zygote
+  [   467]  ro.product.cpu.abilist32
+  [   480]  x86
+
+
+Displaying notes found in: .note.android.ident
+  Owner                 Data size	Description
+  Android              0x00000004	NT_VERSION (version)
+   description data: 1c 00 00 00 
+
+Displaying notes found in: .note.gnu.build-id
+  Owner                 Data size	Description
+  GNU                  0x00000010	NT_GNU_BUILD_ID (unique build ID bitstring)
+    Build ID: 2bb7d95d208fcf19b7cca6e41929753b
+
+Displaying notes found in: .note.gnu.gold-version
+  Owner                 Data size	Description
+  GNU                  0x00000009	NT_GNU_GOLD_VERSION (gold version)
+    Version: gold 1.12

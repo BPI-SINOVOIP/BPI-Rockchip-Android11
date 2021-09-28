@@ -1,0 +1,92 @@
+// Copyright 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+java_sdk_library {
+    name: "android.net.ipsec.ike",
+    installable: true,
+    defaults: ["framework-module-defaults"],
+    sdk_version: "module_current",
+
+    // ike is used as a shared library.
+    shared_library: true,
+
+    aidl: {
+        local_include_dirs: ["src/java"],
+    },
+    srcs: [":ike-srcs"],
+
+    static_libs: [
+        "ike-internals",
+    ],
+
+    libs: [
+        "unsupportedappusage",
+        "framework-annotations-lib",
+    ],
+
+    api_packages: [
+        "android.net.eap",
+        "android.net.ipsec.ike",
+        "android.net.ipsec.ike.exceptions",
+    ],
+
+    // Shared filegroups of BouncyCastle and frameworks are jar-jar'ed to avoid
+    // being overwritten by the frameworks class copies.
+    jarjar_rules: "jarjar-rules-shared.txt",
+
+    hostdex: true, // for hiddenapi check
+    apex_available: [
+        "com.android.ipsec",
+        "test_com.android.ipsec",
+    ],
+
+    stubs_library_visibility: ["//visibility:public"],
+}
+
+filegroup {
+    name: "ike-srcs",
+    srcs: [
+        "src/java/**/*.java",
+        ":framework-ike-shared-srcs",
+    ],
+}
+
+filegroup {
+    name: "ike-api-srcs",
+    srcs: ["src/java/android/**/*.java"],
+    path: "src/java/",
+}
+
+// Provides internal classes needed to build the ike sources.
+java_library {
+    name: "ike-internals",
+    apex_available: [
+        "com.android.ipsec",
+        "test_com.android.ipsec",
+    ],
+    static_libs: ["bouncycastle_ike_digests"],
+    sdk_version: "core_current",
+}
+
+java_library {
+    name: "ike_test",
+    installable: false, // Used only for testing; never installed alone.
+    srcs: [":ike-srcs"],
+    libs: ["unsupportedappusage"],
+    static_libs: ["ike-internals"],
+
+    // Shared filegroups of BouncyCastle and frameworks are jar-jar'ed to avoid
+    // being overwritten by the frameworks class copies.
+    jarjar_rules: "jarjar-rules-shared.txt",
+}

@@ -1,0 +1,84 @@
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<!--
+The purpose of this screen is to demonstrate the direct manipulation capabilities in a
+system window. Not all widgets in a system window may support direct manipulation. Some
+of the widgets in this page support direct manipulation and some are left as unsupported for
+demonstrating the relevant behavior.
+
+Note that nudges are not supported in direct manipulation mode for system windows.
+
+The behavior of the UI on this page is intended to be tested while setting the value of
+RotaryController#TREAT_APP_WINDOW_AS_SYSTEM_WINDOW constant to true.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!-- Widgets in the first half of the screen support Direct Manipulation and
+     those in the second half don't. This is set programmatically. -->
+    <com.android.car.ui.FocusArea
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/sys_ui_supports_dm">
+        </TextView>
+        <SeekBar
+            android:id="@+id/direct_manipulation_supported_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </SeekBar>
+        <RadialTimePickerView
+            android:id="@+id/direct_manipulation_supported_radial_time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:focusable="true">
+        </RadialTimePickerView>
+    </com.android.car.ui.FocusArea>
+
+    <com.android.car.ui.FocusArea
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/sys_ui_does_not_support_dm">
+        </TextView>
+        <SeekBar
+            android:id="@+id/direct_manipulation_unsupported_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </SeekBar>
+        <RadialTimePickerView
+            android:id="@+id/direct_manipulation_unsupported_radial_time_picker"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:focusable="true">
+        </RadialTimePickerView>
+    </com.android.car.ui.FocusArea>
+</LinearLayout>

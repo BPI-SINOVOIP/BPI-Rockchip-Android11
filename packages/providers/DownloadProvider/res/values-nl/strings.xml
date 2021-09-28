@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Downloadbeheer"</string>
+    <string name="storage_description" msgid="169690279447532621">"Downloads"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Downloadbeheer weergeven."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Hiermee heeft de app toegang tot downloadbeheer en kan de app via downloadbeheer bestanden downloaden. Schadelijke apps kunnen dit gebruiken om downloads te verstoren en toegang te krijgen tot persoonlijke informatie."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Geavanceerde functies van de downloadbeheerder."</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Hiermee heeft de app toegang tot de geavanceerde functies van downloadbeheer. Schadelijke apps kunnen dit gebruiken om downloads te verstoren en toegang te krijgen tot persoonlijke informatie."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Downloadmeldingen verzenden."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Hiermee kan de app meldingen verzenden over voltooide downloads. Schadelijke apps kunnen dit gebruiken om andere apps die bestanden downloaden in verwarring te brengen."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Ruimte in de downloadcache reserveren"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Hiermee kan de app bestanden downloaden naar de downloadcache die niet automatisch kunnen worden verwijderd wanneer downloadbeheer meer ruimte nodig heeft."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"bestanden downloaden zonder melding"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Hiermee kan de app bestanden downloaden via downloadbeheer zonder dat de gebruiker een melding krijgt."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Toegang geven tot alle systeemdownloads"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Hiermee kan de app alle downloads bekijken en wijzigen die door een systeemapp zijn gestart."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Zonder titel&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"Downloaden is voltooid."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"Downloaden is mislukt."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Wifi nodig voor download"</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Onderbr. op achtergrond."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"Download te groot voor providernetwerk"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"Je moet wifi gebruiken om deze download van <xliff:g id="SIZE">%1$s </xliff:g> te voltooien. \n\nTik <xliff:g id="QUEUE_TEXT">%2$s </xliff:g> om deze download te starten wanneer je verbinding hebt met een wifi-netwerk."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"In wachtrij plaatsen voor later downloaden?"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"Als je deze download van <xliff:g id="SIZE">%1$s </xliff:g> nu start, kan dit de levensduur van de batterij verkorten en/of leiden tot bovenmatig gebruik van je mobiele-dataverbinding. Je provider kan hiervoor kosten rekenen.\n\n Raak \'<xliff:g id="QUEUE_TEXT">%2$s</xliff:g>\' aan om deze download te starten wanneer je verbinding hebt met een wifi-netwerk."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Wachtrij"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Annuleren"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"Nu starten"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other">Er worden <xliff:g id="NUMBER">%d</xliff:g> bestanden gedownload</item>
+      <item quantity="one">Er wordt 1 bestand gedownload</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> bestanden in de wachtrij</item>
+      <item quantity="one">1 bestand in de wachtrij</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"Nog <xliff:g id="DURATION">%s</xliff:g>"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"Kan bestand niet openen"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Downloads"</string>
+    <string name="download_queued" msgid="3383844741769045371">"In wachtrij"</string>
+    <string name="download_running" msgid="774654178925442490">"In uitvoering"</string>
+    <string name="download_error" msgid="1857737890005386798">"Mislukt"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Wordt uitgevoerd, <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

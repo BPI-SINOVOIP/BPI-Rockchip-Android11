@@ -1,0 +1,29 @@
+android_test {
+    name: "ExtServicesUnitTests",
+
+    // Include all test java files.
+    srcs: ["src/**/*.java"],
+
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+    ],
+
+    static_libs: [
+        "ExtServices-core",
+        "androidx.test.rules",
+        "compatibility-device-util-axt",
+        "mockito-target-extended-minus-junit4",
+        "androidx.test.espresso.core",
+        "truth-prebuilt",
+        "testables",
+        "testng",
+    ],
+    jni_libs: [
+        "libdexmakerjvmtiagent",
+        "libstaticjvmtiagent",
+    ],
+    test_suites: ["device-tests", "mts"],
+    platform_apis: true,
+    compile_multilib: "both",
+}

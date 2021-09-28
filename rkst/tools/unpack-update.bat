@@ -1,0 +1,1 @@
+afptool.exe -unpack Image/update.img rockdev_ext

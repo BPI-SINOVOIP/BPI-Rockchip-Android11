@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_label" msgid="5264040740662487684">"Pengelola Download"</string>
+    <string name="storage_description" msgid="169690279447532621">"Download"</string>
+    <string name="permlab_downloadManager" msgid="4241473724446132797">"Akses pengelola download."</string>
+    <string name="permdesc_downloadManager" msgid="5562734314998369030">"Mengizinkan aplikasi mengakses pengelola download dan menggunakannya untuk mendownload file. Aplikasi berbahaya dapat menggunakan ini untuk mengganggu download dan mengakses informasi pribadi."</string>
+    <string name="permlab_downloadManagerAdvanced" msgid="2225663947531460795">"Fungsi pengelola download lanjutan"</string>
+    <string name="permdesc_downloadManagerAdvanced" msgid="3902478062563030716">"Mengizinkan aplikasi mengakses fungsi lanjutan pengelola download. Aplikasi berbahaya dapat menggunakan ini untuk mengganggu download dan mengakses informasi pribadi."</string>
+    <string name="permlab_downloadCompletedIntent" msgid="2674407390116052956">"Kirim pemberitahuan download."</string>
+    <string name="permdesc_downloadCompletedIntent" msgid="3384693829639860032">"Mengizinkan aplikasi mengirim pemberitahuan tentang download yang telah diselesaikan. Aplikasi berbahaya dapat menggunakan ini untuk mengacaukan aplikasi lain yang mendownload file."</string>
+    <string name="permlab_downloadCacheNonPurgeable" msgid="4538031250425141333">"Ruang penyimpanan dalam cache download"</string>
+    <string name="permdesc_downloadCacheNonPurgeable" msgid="3071381088686444674">"Mengizinkan apl mendownload file ke cache download yang tidak dapat dihapus secara otomatis saat pengelola download memerlukan lebih banyak ruang."</string>
+    <string name="permlab_downloadWithoutNotification" msgid="4877101864770265405">"download file tanpa pemberitahuan"</string>
+    <string name="permdesc_downloadWithoutNotification" msgid="7699189763226483523">"Mengizinkan apl mendownload file melalui pengelola download tanpa menampilkan pemberitahuan apa pun kepada pengguna."</string>
+    <string name="permlab_accessAllDownloads" msgid="8227356876527248611">"Akses semua download sistem"</string>
+    <string name="permdesc_accessAllDownloads" msgid="7541731738152145079">"Mengizinkan apl melihat dan memodifikasi semua download yang dimulai oleh apl apa pun pada sistem."</string>
+    <string name="download_unknown_title" msgid="1017800350818840396">"&lt;Tanpa judul&gt;"</string>
+    <string name="notification_download_complete" msgid="466652037490092787">"Download selesai."</string>
+    <string name="notification_download_failed" msgid="3932167763860605874">"Download gagal."</string>
+    <string name="notification_need_wifi_for_size" msgid="4743443900432303646">"Ukuran download memerlukan Wi-Fi."</string>
+    <string name="notification_paused_in_background" msgid="6393408819031041778">"Dijeda di latar belakang."</string>
+    <string name="wifi_required_title" msgid="7266700488421122218">"Download terlalu besar untuk jaringan operator"</string>
+    <string name="wifi_required_body" msgid="4005023496578941958">"Anda harus menggunakan Wi-Fi untuk menyelesaikan download <xliff:g id="SIZE">%1$s </xliff:g> ini. \n\nSentuh <xliff:g id="QUEUE_TEXT">%2$s </xliff:g> untuk memulai download ini saat Anda tersambung lagi ke jaringan Wi-Fi."</string>
+    <string name="wifi_recommended_title" msgid="6488158053932133804">"Antrekan untuk didownload nanti?"</string>
+    <string name="wifi_recommended_body" msgid="8710820743211704403">"Memulai download <xliff:g id="SIZE">%1$s </xliff:g> ini sekarang dapat mempersingkat masa pakai baterai Anda dan/atau menyebabkan penggunaan berlebih dari sambungan data seluler, yang dapat berakibat dikenai tagihan oleh operator ponsel, tergantung paket data Anda.\n\n Sentuh <xliff:g id="QUEUE_TEXT">%2$s</xliff:g> untuk memulai download ini saat Anda tersambung lagi ke jaringan Wi-Fi."</string>
+    <string name="button_queue_for_wifi" msgid="6650185573566994738">"Antrean"</string>
+    <string name="button_cancel_download" msgid="4135046775536601831">"Batal"</string>
+    <string name="button_start_now" msgid="3817100969365441730">"Mulai sekarang"</string>
+    <plurals name="notif_summary_active" formatted="false" msgid="8652501374845637331">
+      <item quantity="other">Mendownload <xliff:g id="NUMBER">%d</xliff:g> file</item>
+      <item quantity="one">Mendownload 1 file</item>
+    </plurals>
+    <plurals name="notif_summary_waiting" formatted="false" msgid="1782251721955177526">
+      <item quantity="other"><xliff:g id="NUMBER">%d</xliff:g> file menunggu</item>
+      <item quantity="one">1 file menunggu</item>
+    </plurals>
+    <string name="download_remaining" msgid="2313089371178695625">"<xliff:g id="DURATION">%s</xliff:g> lagi"</string>
+    <string name="download_no_application_title" msgid="5780812573953335721">"Tidak dapat membuka file"</string>
+    <string name="root_downloads" msgid="8380500940211778491">"Download"</string>
+    <string name="download_queued" msgid="3383844741769045371">"Diantrekan"</string>
+    <string name="download_running" msgid="774654178925442490">"Dalam proses"</string>
+    <string name="download_error" msgid="1857737890005386798">"Gagal"</string>
+    <string name="download_running_percent" msgid="3492753569359254730">"Dalam proses, <xliff:g id="PERCENTAGE">%s</xliff:g>"</string>
+</resources>

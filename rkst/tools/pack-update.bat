@@ -1,0 +1,1 @@
+afptool.exe -pack ./ Image/update.img

@@ -1,0 +1,27 @@
+//###########################################################
+// car-telephony-common just for Robolectric test target.   #
+//###########################################################
+android_app {
+    name: "CarTelephonyCommonForTesting",
+
+    platform_apis: true,
+
+    libs: ["android.car"],
+
+    privileged: true,
+
+    static_libs: ["car-telephony-common"],
+}
+
+//############################################################
+// car-telephony-common Robolectric test target.             #
+//############################################################
+android_robolectric_test {
+    name: "CarTelephonyCommonRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    instrumentation_for: "CarTelephonyCommonForTesting",
+}

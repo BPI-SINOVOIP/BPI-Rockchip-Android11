@@ -1,0 +1,7 @@
+# Define a macro to allow extra HAL dump
+define(`dump_extra_hal', `
+  hal_client_domain(dumpstate, $1);
+  allow $1_server dumpstate:fifo_file write;
+  allow $1_server dumpstate:fd use;
+  allow dumpstate $1:process signal;
+')

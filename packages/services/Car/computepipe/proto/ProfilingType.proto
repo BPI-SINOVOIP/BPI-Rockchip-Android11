@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+enum ProfilingType {
+  DISABLED = 0;
+  LATENCY = 1;
+  TRACE_EVENTS = 2;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.android.experimentalcar"
+          coreApp="true"
+          android:sharedUserId="android.uid.system">
+
+    <original-package android:name="com.android.experimentalcar"/>
+
+    <!-- Allows an application to get the driver's current distraction level.
+         <p>Protection level: signature|privileged
+    -->
+    <permission
+        android:name="android.car.permission.CAR_DRIVER_DISTRACTION"
+        android:protectionLevel="signature|privileged"
+        android:label="@string/car_permission_label_driver_distraction"
+        android:description="@string/car_permission_desc_driver_distraction"/>
+
+    <application android:label="@string/app_title"
+                 android:directBootAware="true"
+                 android:allowBackup="false"
+                 android:persistent="false">
+        <service android:name=".ExperimentalCarService"
+                 android:singleUser="true">
+        </service>
+        <service android:name=".TouchDriverAwarenessSupplier" android:exported="false"/>
+        <service android:name=".GazeDriverAwarenessSupplier" android:exported="false"/>
+        <service android:name=".SampleExternalDriverAwarenessSupplier" android:exported="false"/>
+    </application>
+</manifest>

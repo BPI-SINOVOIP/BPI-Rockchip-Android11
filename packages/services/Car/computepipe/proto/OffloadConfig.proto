@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+package android.automotive.computepipe.proto;
+
+message OffloadOption {
+  enum OffloadType {
+    CPU = 0;
+    GPU = 1;
+    NEURAL_ENGINE = 2;
+    CV_ENGINE = 3;
+  }
+  repeated OffloadType offload_types = 1;
+
+  /**
+     * 1:1 correspondence for each type above.
+     * Every offload engine has a flag describing if its virtual device
+     */
+  repeated bool is_virtual = 2;
+}
+
+message OffloadConfig {
+
+    optional OffloadOption options = 1;
+
+    optional string config_id = 2;
+}

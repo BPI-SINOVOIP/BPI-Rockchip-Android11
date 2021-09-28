@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/mode_options_height"
+    android:paddingLeft="@dimen/manual_focus_seek_padding"
+    android:paddingRight="@dimen/manual_focus_seek_padding"
+    android:orientation="horizontal"
+    android:layout_gravity="bottom"
+    android:background="@drawable/ic_manual_focus_tip_horizontal"
+    android:gravity="center"
+    android:visibility="gone" >
+
+    <com.android.camera.widget.VerticalSeekBar 
+        android:id="@+id/manual_focus" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minHeight="36dip"
+        android:maxHeight="36dip"
+        android:max="100"
+        android:thumb="@drawable/manual_focus_slider"
+        android:progressDrawable="@android:color/transparent"
+        android:background="@drawable/ic_manual_focus_progress_horizontal" />
+
+</LinearLayout>

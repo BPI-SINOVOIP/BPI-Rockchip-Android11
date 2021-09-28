@@ -1,0 +1,26 @@
+//############################################################
+// ManagedProvisioning Robolectric test target.              #
+//############################################################
+android_robolectric_test {
+
+    name: "ManagedProvisioningRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    // Include the testing libraries
+    libs: [
+        "robolectric_android-all-stub",
+        "Robolectric_all-target",
+        "mockito-robolectric-prebuilt",
+        "truth-prebuilt",
+        "androidx.test.core",
+        "androidx.test.rules",
+        "androidx.core_core",
+    ],
+
+    static_libs: ["managedprovisioning_protoslite"],
+
+    instrumentation_for: "ManagedProvisioning",
+}

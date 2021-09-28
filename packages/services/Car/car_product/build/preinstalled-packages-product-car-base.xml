@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2019 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+<!-- System packages to preinstall on all automotive devices, per user type.
+     OEMs must provide they own as well, listing their specific apps (like launcher, settings, etc...)
+     Documentation at frameworks/base/data/etc/preinstalled-packages-platform.xml
+-->
+<config>
+<!--
+  Here the apps will have SYSTEM only.
+-->
+    <install-in-user-type package="com.android.experimentalcar">
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Failed to complete CtsShortcutHostTestCases if LocalTransport is not
+    installed for system user  -->
+    <install-in-user-type package="com.android.localtransport">
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+<!--
+  Apps that need to run on SYSTEM and evaluated by package owner.
+  Here the apps will have FULL and SYSTEM.
+-->
+    <install-in-user-type package="android">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+    <install-in-user-type package="android.car.cluster">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.car">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+        <install-in-user-type package="com.android.car.shell">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.car.frameworkpackagestubs">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Needed for Projected on Embedded so it receives LOCKED_BOOT_COMPLETED immediately,
+      otherwise projection wouldn't launch on startup -->
+    <install-in-user-type package="android.car.usb.handler">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Need to upload collected bugreports even if full user was deleted or changed -->
+    <install-in-user-type package="com.android.car.bugreport">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Not sure, leave for security purpose -->
+    <install-in-user-type package="com.android.keychain">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Provides Settings. Secure for SYSTEM, which are used in places such as SUW -->
+    <install-in-user-type package="com.android.providers.settings">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!--
+      CompanionDeviceSupport app needs to run on SYSTEM for the Trusted Device feature to work.
+      It needs to run in the foreground user for other companion app features like calendar sync
+      and notifications bridging
+    -->
+    <install-in-user-type package="com.android.car.companiondevicesupport">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Not sure, leave for security purpose -->
+    <install-in-user-type package="com.android.se">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Needed by the Location service during system bootup -->
+    <install-in-user-type package="com.android.location.fused">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Resides on a device's /system partition to verify certain upgrade scenarios -->
+    <install-in-user-type package="com.android.cts.ctsshim">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Resides on a device's /system partition to verify certain upgrade scenarios -->
+    <install-in-user-type package="com.android.cts.priv.ctsshim">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Contains exported and single user service -->
+    <install-in-user-type package="com.android.ons">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Needs this packages during bootup, otherwise system won't boot -->
+    <install-in-user-type package="com.android.wifi.resources">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Required StorageManagerService to bind to the ExternalStorageService -->
+    <install-in-user-type package="com.android.providers.media.module">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Needs to run on system user otherwise cannot find available device -->
+    <install-in-user-type package="com.android.bluetooth">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Required to create application com.android.phone.PhoneApp -->
+    <install-in-user-type package="com.android.telephony.resources">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Required to find provider info for telephony for com.android.phone.PhoneApp -->
+    <install-in-user-type package="com.android.providers.telephony">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Required to use adb -->
+    <install-in-user-type package="com.android.shell">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Required to get current location; check map -->
+    <install-in-user-type package="com.android.server.telecom">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Required for compatibility -->
+    <install-in-user-type package="com.android.statementservice">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Failed to find provider info for downloads error if not installed for system user -->
+    <install-in-user-type package="com.android.providers.downloads">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Failed to find provider info for calendar error if not installed for system user -->
+    <install-in-user-type package="com.android.providers.calendar">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+    <!-- Failed to pass CTS if not installed for system user -->
+    <install-in-user-type package="com.android.car.ui.sharedlibrary">
+        <install-in user-type="FULL" />
+        <install-in user-type="SYSTEM" />
+    </install-in-user-type>
+
+<!--
+  Apps that do need to run on SYSTEM and evaluated by package owner.
+  Here the apps will have FULL only.
+-->
+    <install-in-user-type package="com.android.htmlviewer">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.inputdevices">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.soundpicker">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.captiveportallogin">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.google.android.car.hideapps">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.stk">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.dreams.phototable">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.carrierdefaultapp">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.soundrecorder">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.bips">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.settings.intelligence">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.egg">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.simappdialog">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.dreams.basic">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.companiondevicemanager">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.bluetoothmidiservice">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.statementservice">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.backupconfirm">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+   <install-in-user-type package="com.android.calllogbackup">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.providers.blockednumber">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.providers.contacts">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.providers.downloads.ui">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.providers.media">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.providers.userdictionary">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.voicetrigger">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.internal.display.cutout.emulation.hole">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.internal.display.cutout.emulation.waterfall">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="android.auto_generated_rro_product__">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="android.auto_generated_rro_vendor__">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.car.calendar">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.car.activityresolver">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.wifi.inprocess.overlay.car">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.cellbroadcastreceiver">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.networkstack.permissionconfig">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.storagemanager">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.carrierconfig">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.certinstaller">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.pacprocessor">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.proxyhandler">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.vpndialogs">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.sharedstoragebackup">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.externalstorage">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+    <install-in-user-type package="com.android.hotspot2.osulogin">
+        <install-in user-type="FULL" />
+    </install-in-user-type>
+</config>

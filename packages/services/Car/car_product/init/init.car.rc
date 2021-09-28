@@ -1,0 +1,16 @@
+# Insert car-specific startup services here
+on post-fs-data
+    mkdir /data/system/car 0700 system system
+
+# A property to enable EVS services conditionally
+on property:persist.automotive.evs.mode=0
+    # stop EVS and automotive display services
+    stop automotive_display
+    stop evs_sample_driver
+    stop evs_manager
+
+on property:persist.automotive.evs.mode=1
+    # start EVS and automotive display services
+    start automotive_display
+    start evs_sample_driver
+    start evs_manager

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Runs MTS">
+
+    <include name="everything" />
+    <option name="plan" value="mts" />
+    <option name="test-tag" value="mts" />
+
+    <include name="mts-preconditions" />
+    <include name="mts-exclude" />
+
+    <option name="enable-root" value="true" />
+
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="settings put global package_verifier_enable 0" />
+        <option name="teardown-command" value="settings put global package_verifier_enable 1"/>
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.BusinessLogicPreparer">
+        <option name="business-logic-url" value="https://androidpartner.googleapis.com/v1/xtsBusinessLogic/suites/gts:select" />
+        <option name="business-logic-api-key" value="AIzaSyCZNccVFX50XFhVUbh_vEUxG0C8z8As6wk" />
+        <option name="business-logic-api-scope" value="https://www.googleapis.com/auth/androidPartner" />
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+        <option name="property-name" value="ro.build.type" />
+        <option name="expected-value" value="user"/> <!-- Device should have user build -->
+        <option name="throw-error" value="false"/> <!-- Only print warning if not user build -->
+    </target_preparer>
+
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.PropertyCheck">
+        <option name="property-name" value="ro.product.locale" />
+        <option name="expected-value" value="en-US"/> <!-- Device locale should be US English -->
+        <option name="throw-error" value="false"/> <!-- Only print warning if not en-US -->
+    </target_preparer>
+
+    <template-include name="reporters" default="basic-reporters" />
+
+    <!-- Advertise the test suite to media cts. -->
+    <!-- TODO:delete after mts-all.xml is ready. -->
+    <option name="compatibility:module-arg" value="CtsMediaTestCases:instrumentation-arg:mts-media:=true" />
+</configuration>
+

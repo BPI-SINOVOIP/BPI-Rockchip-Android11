@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Bug Report</string>
+
+    <string name="bugreport_info_quit">Close</string>
+    <string name="bugreport_info_start">Start Bug Report</string>
+    <string name="bugreport_info_status">Status:</string>
+
+    <string name="bugreport_dialog_submit">Submit</string>
+    <string name="bugreport_dialog_cancel">Cancel</string>
+    <!-- A button: uploads bugreport with recorded audio message. -->
+    <string name="bugreport_dialog_upload">Upload</string>
+    <!-- A button: saves recorded audio message. -->
+    <string name="bugreport_dialog_save">Save</string>
+    <string name="bugreport_dialog_show_bugreports">Show Bug Reports</string>
+    <string name="bugreport_dialog_close">Close</string>
+    <string name="bugreport_dialog_title">Speak &amp; Describe The Issue</string>
+    <!-- %s is the timestamp of a bugreport. -->
+    <string name="bugreport_dialog_add_audio_to_existing">Audio message for bug report at %s</string>
+    <string name="bugreport_dialog_recording_finished">Recording finished</string>
+    <string name="bugreport_dialog_in_progress_title">A bug report is already being collected</string>
+    <string name="bugreport_dialog_in_progress_title_finished">A bug report has been collected</string>
+    <!-- A button to add audio message to the bugreport. It will show Save button on the dialog. -->
+    <string name="bugreport_add_audio_button_text">Add Audio</string>
+    <!-- A button to add audio message to the bugreport; it will show Upload button on the dialog. -->
+    <string name="bugreport_add_audio_upload_button_text">Add Audio &amp; Upload</string>
+    <string name="bugreport_move_button_text">Move to USB</string>
+    <string name="bugreport_upload_button_text">Upload</string>
+    <string name="bugreport_upload_gcs_button_text">Upload to GCS</string>
+
+    <string name="toast_permissions_denied">Please grant permissions</string>
+    <string name="toast_bug_report_in_progress">Bug report already being collected</string>
+    <string name="toast_bug_report_started">Bug reporting is started</string>
+    <string name="toast_status_failed">Bug report failed</string>
+    <string name="toast_status_screencap_failed">Screen capture failed</string>
+    <string name="toast_status_dump_state_failed">Dump state failed</string>
+
+    <!-- Notification strings -->
+    <string name="notification_bugreport_in_progress">Bug report is in progress</string>
+    <string name="notification_bugreport_finished_title">Bug report is collected</string>
+    <string name="notification_bugreport_channel_name">Bug report status channel</string>
+</resources>

@@ -1,0 +1,233 @@
+<!--
+ Copyright 2019 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight="@dimen/key_height"
+    android:keyWidth="@dimen/key_width"
+    android:verticalGap="@dimen/keyboard_vertical_gap"
+    android:horizontalGap="@dimen/keyboard_horizontal_gap" >
+
+    <Row android:rowEdgeFlags="top">
+        <Key
+            android:codes="49"
+            android:keyEdgeFlags="left"
+            android:keyLabel="1"
+            android:popupKeyboard="@xml/shift_1" />
+        <Key
+            android:codes="50"
+            android:keyLabel="2"
+            android:popupKeyboard="@xml/shift_2" />
+        <Key
+            android:codes="51"
+            android:keyLabel="3"
+            android:popupKeyboard="@xml/shift_3" />
+        <Key
+            android:codes="52"
+            android:keyLabel="4"
+            android:popupKeyboard="@xml/shift_4" />
+        <Key
+            android:codes="53"
+            android:keyLabel="5"
+            android:popupKeyboard="@xml/shift_5" />
+        <Key
+            android:codes="54"
+            android:keyLabel="6"
+            android:popupKeyboard="@xml/shift_6" />
+        <Key
+            android:codes="55"
+            android:keyLabel="7"
+            android:popupKeyboard="@xml/shift_7" />
+        <Key
+            android:codes="56"
+            android:keyLabel="8"
+            android:popupKeyboard="@xml/shift_8" />
+        <Key
+            android:codes="57"
+            android:keyLabel="9"
+            android:popupKeyboard="@xml/shift_9" />
+        <Key
+            android:codes="48"
+            android:keyLabel="0"
+            android:popupKeyboard="@xml/shift_0" />
+        <Key
+            android:codes="-5"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/ic_ime_delete"
+            android:keyLabel="@string/keyboardview_keycode_delete" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="113"
+            android:keyEdgeFlags="left"
+            android:keyLabel="q"
+            android:popupKeyboard="@xml/shift_q" />
+        <Key
+            android:codes="119"
+            android:keyLabel="w"
+            android:popupKeyboard="@xml/shift_w" />
+        <Key
+            android:codes="101"
+            android:keyLabel="e"
+            android:popupKeyboard="@xml/accent_e" />
+        <Key
+            android:codes="114"
+            android:keyLabel="r"
+            android:popupKeyboard="@xml/shift_r" />
+        <Key
+            android:codes="116"
+            android:keyLabel="t"
+            android:popupKeyboard="@xml/accent_t" />
+        <Key
+            android:codes="121"
+            android:keyLabel="y"
+            android:popupKeyboard="@xml/accent_y" />
+        <Key
+            android:codes="117"
+            android:keyLabel="u"
+            android:popupKeyboard="@xml/accent_u" />
+        <Key
+            android:codes="105"
+            android:keyLabel="i"
+            android:popupKeyboard="@xml/accent_i" />
+        <Key
+            android:codes="111"
+            android:keyLabel="o"
+            android:popupKeyboard="@xml/accent_o" />
+        <Key
+            android:codes="112"
+            android:keyLabel="p"
+            android:popupKeyboard="@xml/shift_p" />
+        <Key
+            android:codes="64"
+            android:keyEdgeFlags="right"
+            android:keyLabel="\@" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="97"
+            android:keyEdgeFlags="left"
+            android:keyLabel="a"
+            android:popupKeyboard="@xml/accent_a" />
+        <Key
+            android:codes="115"
+            android:keyLabel="s"
+            android:popupKeyboard="@xml/accent_s" />
+        <Key
+            android:codes="100"
+            android:keyLabel="d"
+            android:popupKeyboard="@xml/accent_d" />
+        <Key
+            android:codes="102"
+            android:keyLabel="f"
+            android:popupKeyboard="@xml/shift_f" />
+        <Key
+            android:codes="103"
+            android:keyLabel="g"
+            android:popupKeyboard="@xml/accent_g" />
+        <Key
+            android:codes="104"
+            android:keyLabel="h"
+            android:popupKeyboard="@xml/shift_h" />
+        <Key
+            android:codes="106"
+            android:keyLabel="j"
+            android:popupKeyboard="@xml/shift_j" />
+        <Key
+            android:codes="107"
+            android:keyLabel="k"
+            android:popupKeyboard="@xml/accent_k" />
+        <Key
+            android:codes="108"
+            android:keyLabel="l"
+            android:popupKeyboard="@xml/accent_l" />
+        <Key
+            android:codes="95"
+            android:keyLabel="_" />
+        <Key
+            android:codes="38"
+            android:keyEdgeFlags="right"
+            android:keyLabel="&amp;" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="122"
+            android:keyEdgeFlags="left"
+            android:keyLabel="z"
+            android:popupKeyboard="@xml/accent_z" />
+        <Key
+            android:codes="120"
+            android:keyLabel="x"
+            android:popupKeyboard="@xml/shift_x" />
+        <Key
+            android:codes="99"
+            android:keyLabel="c"
+            android:popupKeyboard="@xml/accent_c" />
+        <Key
+            android:codes="118"
+            android:keyLabel="v"
+            android:popupKeyboard="@xml/shift_v" />
+        <Key
+            android:codes="98"
+            android:keyLabel="b"
+            android:popupKeyboard="@xml/shift_b" />
+        <Key
+            android:codes="110"
+            android:keyLabel="n"
+            android:popupKeyboard="@xml/accent_n" />
+        <Key
+            android:codes="109"
+            android:keyLabel="m"
+            android:popupKeyboard="@xml/shift_m" />
+        <Key
+            android:codes="44"
+            android:keyLabel="," />
+        <Key
+            android:codes="46"
+            android:keyLabel="." />
+        <Key
+            android:codes="45"
+            android:keyLabel="-" />
+        <Key
+            android:codes="63"
+            android:keyEdgeFlags="right"
+            android:keyLabel="\?" />
+    </Row>
+    <Row android:rowEdgeFlags="bottom" >
+        <Key
+            android:codes="-2"
+            android:keyEdgeFlags="left"
+            android:keyLabel="@string/keyboardview_keycode_mode_change"
+            android:keyIcon="@drawable/ic_ime_symbols" />
+        <Key
+            android:codes="-1"
+            android:keyLabel="@string/keyboardview_keycode_shift"
+            android:keyIcon="@drawable/ic_ime_shift_off" />
+        <Key
+            android:codes="32"
+            android:keyIcon="@drawable/ic_ime_space"
+            android:keyLabel="@string/keyboardview_keycode_space"
+            android:keyWidth="@dimen/space_key_width" />
+        <Key
+            android:codes="-3"
+            android:keyLabel="@string/keyboardview_keycode_left"
+            android:keyIcon="@drawable/ic_ime_left_arrow" />
+        <Key
+            android:codes="-4"
+            android:keyEdgeFlags="right"
+            android:keyLabel="@string/keyboardview_keycode_right"
+            android:keyIcon="@drawable/ic_ime_right_arrow" />
+    </Row>
+</Keyboard>

@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="phoneAppLabel" product="tablet" msgid="1916019789885839910">"ទិន្នន័យ​ទូរសព្ទចល័ត"</string>
+    <string name="phoneAppLabel" product="default" msgid="130465039375347763">"សេវាកម្មទូរស័ព្ទ"</string>
+    <string name="emergencyDialerIconLabel" msgid="8668005772339436680">"អ្នក​ហៅ​នៅ​ពេល​មាន​អាសន្ន"</string>
+    <string name="phoneIconLabel" msgid="3015941229249651419">"ទូរសព្ទ"</string>
+    <string name="fdnListLabel" msgid="4119121875004244097">"បញ្ជី FDN"</string>
+    <string name="unknown" msgid="8279698889921830815">"មិន​ស្គាល់"</string>
+    <string name="private_num" msgid="4487990167889159992">"លេខ​ឯកជន"</string>
+    <string name="payphone" msgid="7936735771836716941">"ទូរស័ព្ទសាធារណៈ"</string>
+    <string name="onHold" msgid="6132725550015899006">"កំពុងរង់ចាំ"</string>
+    <string name="carrier_mmi_msg_title" msgid="6050165242447507034">"សារ <xliff:g id="MMICARRIER">%s</xliff:g>"</string>
+    <string name="default_carrier_mmi_msg_title" msgid="7754317179938537213">"សារ​ក្រុមហ៊ុន​សេវា​ទូរសព្ទ"</string>
+    <string name="mmiStarted" msgid="9212975136944568623">"បាន​ចាប់ផ្ដើម​កូដ MMI"</string>
+    <string name="ussdRunning" msgid="1163586813106772717">"កូដ USSD កំពុង​ដំណើរការ…"</string>
+    <string name="mmiCancelled" msgid="5339191899200678272">"បាន​បោះបង់​កូដ MMI"</string>
+    <string name="cancel" msgid="8984206397635155197">"បោះ​បង់​"</string>
+    <string name="enter_input" msgid="6193628663039958990">"សារ USSD ត្រូវ​តែ​មាន​តួអក្សរ​ចន្លោះ <xliff:g id="MIN_LEN">%1$d</xliff:g> និង <xliff:g id="MAX_LEN">%2$d</xliff:g> ។ សូម​ព្យាយាម​ម្ដងទៀត​។"</string>
+    <string name="manageConferenceLabel" msgid="8415044818156353233">"គ្រប់គ្រង​ការ​ហៅ​​ជា​សន្និសីទ"</string>
+    <string name="ok" msgid="7818974223666140165">"យល់​ព្រម​"</string>
+    <string name="audio_mode_speaker" msgid="243689733219312360">"អូប៉ាល័រ"</string>
+    <string name="audio_mode_earpiece" msgid="2823700267171134282">"កាស"</string>
+    <string name="audio_mode_wired_headset" msgid="5028010823105817443">"កាស​មាន​ខ្សែ"</string>
+    <string name="audio_mode_bluetooth" msgid="25732183428018809">"ប៊្លូធូស"</string>
+    <string name="wait_prompt_str" msgid="5136209532150094910">"ផ្ញើ​សំឡេង​ដូច​ខាងក្រោម?\n"</string>
+    <string name="pause_prompt_str" msgid="2308897950360272213">"ផ្ញើ​សំឡេង \n"</string>
+    <string name="send_button" msgid="5070379600779031932">"ផ្ញើ"</string>
+    <string name="pause_prompt_yes" msgid="8184132073048369575">"បាទ/ចាស"</string>
+    <string name="pause_prompt_no" msgid="2145264674774138579">"គ្មាន"</string>
+    <string name="wild_prompt_str" msgid="5858910969703305375">"ជំនួស​តួ​អក្សរ​ជំនួស​ដោយ"</string>
+    <string name="no_vm_number" msgid="6623853880546176930">"បាត់​​ចំនួន​​សារ​ជា​សំឡេង"</string>
+    <string name="no_vm_number_msg" msgid="5165161462411372504">"គ្មាន​ចំនួន​សារ​ជា​សំឡេង​​ត្រូវ​បាន​រក្សា​ទុក​នៅ​លើ​ស៊ី​ម​កាត​ទេ​។"</string>
+    <string name="add_vm_number_str" msgid="7368168964435881637">"បន្ថែម​លេខ"</string>
+    <string name="voice_number_setting_primary_user_only" msgid="3394706575741912843">"មាន​តែ​អ្នក​ប្រើប្រាស់​ចម្បង​ទើប​អាច​កែប្រែ​ការ​កំណត់​សារ​ជា​សំឡេង​បាន។"</string>
+    <string name="puk_unlocked" msgid="4627340655215746511">"បាន​ដោះ​សោ​ស៊ីមកាត​របស់​អ្នក។ ទូរស័ព្ទ​របស់​អ្នក​កំពុង​ដោះ​សោ…"</string>
+    <string name="label_ndp" msgid="7617392683877410341">"ដោះ​សោ​​កូដ PIN បណ្ដាញ​ស៊ីមកាត"</string>
+    <string name="sim_ndp_unlock_text" msgid="7737338355451978338">"ដោះ​សោ"</string>
+    <string name="sim_ndp_dismiss_text" msgid="89667342248929777">"បោះបង់"</string>
+    <string name="requesting_unlock" msgid="930512210309437741">"កំពុង​ស្នើ​​ដោះ​សោ​បណ្ដាញ…"</string>
+    <string name="unlock_failed" msgid="7103543844840661366">"បាន​បរាជ័យ​ក្នុង​ការ​ស្នើ​ដោះ​សោ​បណ្ដាញ។"</string>
+    <string name="unlock_success" msgid="32681089371067565">"ដោះ​សោ​បណ្ដាញ​បាន​ជោគជ័យ។"</string>
+    <string name="mobile_network_settings_not_available" msgid="8678168497517090039">"ការ​កំណត់​បណ្ដាញ​ចល័ត​មិន​អាច​ប្រើ​បាន​​សម្រាប់​អ្នក​ប្រើ​នេះ"</string>
+    <string name="labelGSMMore" msgid="7354182269461281543">"កំណត់​ការ​ហៅ GSM"</string>
+    <string name="labelGsmMore_with_label" msgid="3206015314393246224">"ការកំណត់ការហៅ GSM (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="labelCDMAMore" msgid="7937441382611224632">"កំណត់​ការ​ហៅ CDMA"</string>
+    <string name="labelCdmaMore_with_label" msgid="7759692829160238152">"ការកំណត់ការហៅ CDMA (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="apn_settings" msgid="1978652203074756623">"ឈ្មោះ​ចំណុច​ចូលដំណើរការ"</string>
+    <string name="settings_label" msgid="9101778088412567956">"ការកំណត់​បណ្ដាញ"</string>
+    <string name="phone_accounts" msgid="1216879437523774604">"គណនីហៅទូរសព្ទ"</string>
+    <string name="phone_accounts_make_calls_with" msgid="16747814788918145">"ធ្វើការហៅជាមួយ"</string>
+    <string name="phone_accounts_make_sip_calls_with" msgid="4691221006731847255">"ធ្វើការហៅ SIP ជាមួយ"</string>
+    <string name="phone_accounts_ask_every_time" msgid="6192347582666047168">"សួរជាមុនសិន"</string>
+    <string name="phone_accounts_default_account_label" msgid="5107598881335931101">"មិន​មាន​បណ្ដាញ​អាច​ប្រើបាន"</string>
+    <string name="phone_accounts_settings_header" msgid="6296501692964706536">"ការកំណត់"</string>
+    <string name="phone_accounts_choose_accounts" msgid="4748805293314824974">"ជ្រើសរើសគណនី"</string>
+    <string name="phone_accounts_selection_header" msgid="2945830843104108440">"គណនីទូរស័ព្ទ"</string>
+    <string name="phone_accounts_add_sip_account" msgid="1437634802033309305">"បន្ថែមគណនី SIP"</string>
+    <string name="phone_accounts_configure_account_settings" msgid="6622119715253196586">"កំណត់ការកំណត់គណនី"</string>
+    <string name="phone_accounts_all_calling_accounts" msgid="1609600743500618823">"គណនីហៅទូរស័ព្ទទាំងអស់"</string>
+    <string name="phone_accounts_all_calling_accounts_summary" msgid="2214134955430107240">"ជ្រើសគណនីណាមួយដែលអាចធ្វើការហៅទូរស័ព្ទ"</string>
+    <string name="wifi_calling" msgid="3650509202851355742">"ការហៅតាម Wi-Fi"</string>
+    <string name="connection_service_default_label" msgid="7332739049855715584">"សេវាកម្ម​ភ្ជាប់​ដែល​ជាប់​ជា​មួយ"</string>
+    <string name="voicemail" msgid="7697769412804195032">"សារ​ជា​សំឡេង"</string>
+    <string name="voicemail_settings_with_label" msgid="4228431668214894138">"សារជាសម្លេង (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="voicemail_abbreviated" msgid="7746778673131551185">"VM:"</string>
+    <string name="make_and_receive_calls" msgid="4868913166494621109">"ហៅ និង​ទទួល​ទូរសព្ទ"</string>
+    <string name="smart_forwarding_settings_menu" msgid="8850429887958938540">"ការបញ្ជូន​បន្ត​ឆ្លាតវៃ"</string>
+    <string name="smart_forwarding_settings_menu_summary" msgid="5096947726032885325">"នៅ​ពេល​លេខ​ទូរសព្ទ​មួយ​មិន​អាច​ឱ្យ​ទាក់ទង​បាន បញ្ជូន​ការហៅ​ទូរសព្ទ​ទៅ​លេខ​ផ្សេង​របស់​អ្នក​ជានិច្ច"</string>
+    <string name="voicemail_notifications_preference_title" msgid="7829238858063382977">"ការ​ជូនដំណឹង"</string>
+    <string name="cell_broadcast_settings" msgid="8135324242541809924">"ការ​ផ្សាយ​ពេល​មាន​អាសន្ន"</string>
+    <string name="call_settings" msgid="3677282690157603818">"កំណត់​ការ​ហៅ"</string>
+    <string name="additional_gsm_call_settings" msgid="1561980168685658846">"ការ​កំណត់​បន្ថែម"</string>
+    <string name="additional_gsm_call_settings_with_label" msgid="7973920539979524908">"ការកំណត់បន្ថែម (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="sum_gsm_call_settings" msgid="7964692601608878138">"កំណត់​ការ​ហៅ​តែ GSM បន្ថែម​ប៉ុណ្ណោះ"</string>
+    <string name="additional_cdma_call_settings" msgid="2178016561980611304">"កំណត់​ការ​ហៅ CDMA បន្ថែម"</string>
+    <string name="sum_cdma_call_settings" msgid="3185825305136993636">"កំណត់​ការ​ហៅ​តែ CDMA បន្ថែម​ប៉ុណ្ណោះ"</string>
+    <string name="labelNwService" msgid="6015891883487125120">"ការ​កំណត់​​សេវា​បណ្ដាញ"</string>
+    <string name="labelCallerId" msgid="2090540744550903172">"អត្តសញ្ញាណអ្នកហៅទូរសព្ទ"</string>
+    <string name="sum_loading_settings" msgid="434063780286688775">"កំពុង​ផ្ទុក​ការ​កំណត់…"</string>
+    <string name="sum_hide_caller_id" msgid="131100328602371933">"បាន​លាក់​លេខ​​ក្នុង​ការ​​ហៅ​ចេញ"</string>
+    <string name="sum_show_caller_id" msgid="3571854755324664591">"បាន​បង្ហាញ​​​លេខ​ក្នុង​ការ​ហៅ​ចេញ"</string>
+    <string name="sum_default_caller_id" msgid="1767070797135682959">"ប្រើ​ការ​កំណត់​​ប្រតិបត្តិ​ករ​លំនាំដើម ដើម្បី​បង្ហាញ​លេខ​របស់​ខ្ញុំ​នៅ​ក្នុង​ការ​ហៅ​ចេញ"</string>
+    <string name="labelCW" msgid="8449327023861428622">"រង់ចាំ​ការ​ហៅ"</string>
+    <string name="sum_cw_enabled" msgid="3977308526187139996">"ក្នុង​អំឡុង​ពេល​ហៅ ជូនដំណឹងដល់​ខ្ញុំ​អំពី​ការ​ហៅ​ចូល"</string>
+    <string name="sum_cw_disabled" msgid="3658094589461768637">"ក្នុង​អំឡុង​ពេល​ហៅ ជូនដំណឹងដល់​ខ្ញុំ​អំពី​ការ​ហៅ​ចូល"</string>
+    <string name="call_forwarding_settings" msgid="8937130467468257671">"ការកំណត់ការបញ្ជូនបន្តការហៅទូរសព្ទ"</string>
+    <string name="call_forwarding_settings_with_label" msgid="2345432813399564272">"ការកំណត់ការបញ្ជូនបន្តការហៅទូរសព្ទ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="labelCF" msgid="3578719437928476078">"បញ្ជូន​ការ​ហៅ​បន្ត"</string>
+    <string name="labelCFU" msgid="8870170873036279706">"បញ្ជូន​បន្ត​ជានិច្ច"</string>
+    <string name="messageCFU" msgid="1361806450979589744">"ប្រើ​លេខ​នេះ​ជានិច្ច"</string>
+    <string name="sum_cfu_enabled_indicator" msgid="9030139213402432776">"បញ្ជូន​បន្ត​ការ​ហៅ​ទូរស័ព្ទ​ទាំងអស់"</string>
+    <string name="sum_cfu_enabled" msgid="5806923046528144526">"បញ្ជូន​បន្ត​ការ​ហៅ​​ទាំង​អស់​ទៅ <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
+    <string name="sum_cfu_enabled_no_number" msgid="7287752761743377930">"លេខ​គឺ​មិន​អាច​ប្រើ​បាន"</string>
+    <string name="sum_cfu_disabled" msgid="5010617134210809853">"បិទ"</string>
+    <string name="labelCFB" msgid="615265213360512768">"នៅពេលជាប់រវល់"</string>
+    <string name="messageCFB" msgid="1958017270393563388">"លេខ​នៅ​ពេល​ជាប់​រវល់"</string>
+    <string name="sum_cfb_enabled" msgid="332037613072049492">"បញ្ជូន​បន្ត​ទៅ​ <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
+    <string name="sum_cfb_disabled" msgid="3589913334164866035">"បិទ"</string>
+    <string name="disable_cfb_forbidden" msgid="4831494744351633961">"ប្រតិបត្តិ​ករ​របស់​អ្នក​មិន​គាំទ្រ​ការ​បិទ​ការ​ហៅ​បញ្ជូន​​បន្ត នៅ​ពេល​ទូរស័ព្ទ​របស់​អ្នក​ជាប់​រវល់។"</string>
+    <string name="labelCFNRy" msgid="3403533792248457946">"នៅពេលមិនមានការឆ្លើយតប"</string>
+    <string name="messageCFNRy" msgid="7644434155765359009">"លេខ​នៅ​​ពេល​ដែល​មិន​បាន​ឆ្លើយ​តប"</string>
+    <string name="sum_cfnry_enabled" msgid="3000500837493854799">"បញ្ជូន​បន្ត​ទៅ​ <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
+    <string name="sum_cfnry_disabled" msgid="1990563512406017880">"បិទ"</string>
+    <string name="disable_cfnry_forbidden" msgid="3174731413216550689">"ប្រតិបត្តិការ​របស់​អ្នក​មិន​គាំទ្រ​ការ​បិទ​ការ​បញ្ជូន​បន្ត​ហៅ​នៅ​ពេល​ដែល​ទូរស័ព្ទ​របស់​អ្នក​មិន​ឆ្លើយតប​។"</string>
+    <string name="labelCFNRc" msgid="4163399350778066013">"នៅពេលមិនអាចទាក់ទងបាន"</string>
+    <string name="messageCFNRc" msgid="6980340731313007250">"លេខ​នៅ​ពេល​ដែល​មិន​អាច​ហៅ​ចូល"</string>
+    <string name="sum_cfnrc_enabled" msgid="1799069234006073477">"បញ្ជូន​បន្ត​ទៅ​ <xliff:g id="PHONENUMBER">{0}</xliff:g>"</string>
+    <string name="sum_cfnrc_disabled" msgid="739289696796917683">"បិទ"</string>
+    <string name="disable_cfnrc_forbidden" msgid="775348748084726890">"ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក​​មិន​គាំទ្រ​ការ​បិទ​ការ​ហៅ​​បញ្ជូន​បន្ត នៅ​ពេល​ទូរស័ព្ទ​របស់​អ្នក​មិន​អាច​ហៅ​ចូល។"</string>
+    <string name="updating_title" msgid="6130548922615719689">"កំណត់​ការ​ហៅ"</string>
+    <string name="call_settings_admin_user_only" msgid="7238947387649986286">"ការកំណត់ការហៅអាចផ្លាស់ប្តូរបានដោយអ្នកប្រើដែលមានសិទ្ធិគ្រប់គ្រងតែប៉ុណ្ណោះ។"</string>
+    <string name="call_settings_with_label" msgid="8460230435361579511">"ការកំណត់ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="error_updating_title" msgid="2024290892676808965">"បញ្ហា​ការ​កំណត់​ការ​ហៅ"</string>
+    <string name="reading_settings" msgid="1605904432450871183">"កំពុង​អាន​ការ​កំណត់…"</string>
+    <string name="updating_settings" msgid="3650396734816028808">"កំពុងធ្វើ​បច្ចុប្បន្ន​ភាព​ការកំណត់…"</string>
+    <string name="reverting_settings" msgid="7378668837291012205">"ត្រឡប់​ការ​កំណត់…"</string>
+    <string name="response_error" msgid="3904481964024543330">"ការ​ឆ្លើយ​តប​ដែល​មិន​រំពឹង​ទុក​ពី​​បណ្ដាញ​។"</string>
+    <string name="exception_error" msgid="330994460090467">"បញ្ហា​ស៊ីមកាត ឬ​បណ្ដាញ។"</string>
+    <string name="stk_cc_ss_to_dial_error" msgid="5147693491690618704">"សំណើ SS បាន​ប្ដូរ​ទៅ​ការហៅ​ជា​ប្រចាំ"</string>
+    <string name="stk_cc_ss_to_ussd_error" msgid="8330749347425752192">"សំណើ SS បាន​ប្ដូរ​ទៅ​សំណើ USSD"</string>
+    <string name="stk_cc_ss_to_ss_error" msgid="8297155544652134278">"បាន​ប្ដូរ​ទៅ​សំណើ SS ថ្មី"</string>
+    <string name="stk_cc_ss_to_dial_video_error" msgid="4255261231466032505">"សំណើ SS បាន​ប្ដូរ​ទៅ​ការហៅ​ជា​វីដេអូ"</string>
+    <string name="fdn_check_failure" msgid="1833769746374185247">"បាន​បើក​ការ​កំណត់​លេខ​ហៅ​​ថេរ​​​នៃ​កម្មវិធី​ទូរស័ព្ទ​របស់​អ្នក។ ជា​លទ្ធផល លក្ខណៈ​មួយ​ចំនួន​ដែល​ទាក់ទង​នឹង​ការ​ហៅ​មិន​ដំណើរការ។"</string>
+    <string name="radio_off_error" msgid="8321564164914232181">"បើក​​វិទ្យុ​មុន​ពេល​មើល​ការ​កំណត់​ទាំង​នេះ​។"</string>
+    <string name="close_dialog" msgid="1074977476136119408">"យល់​ព្រម​"</string>
+    <string name="enable" msgid="2636552299455477603">"បើក"</string>
+    <string name="disable" msgid="1122698860799462116">"បិទ"</string>
+    <string name="change_num" msgid="6982164494063109334">"ធ្វើ​បច្ចុប្បន្នភាព"</string>
+  <string-array name="clir_display_values">
+    <item msgid="8477364191403806960">"លំនាំដើម​បណ្ដាញ"</item>
+    <item msgid="6813323051965618926">"លាក់​​លេខ"</item>
+    <item msgid="9150034130629852635">"បង្ហាញ​លេខ"</item>
+  </string-array>
+    <string name="vm_changed" msgid="4739599044379692505">"បាន​ប្ដូរ​លេខ​សារ​ជា​សំឡេង។"</string>
+    <string name="vm_change_failed" msgid="7877733929455763566">"មិន​អាច​ប្ដូរ​លេខ​សារ​ជា​សំឡេង​បាន​ទេ។\n ទាក់ទង​​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក បើ​​នៅ​តែ​មាន​បញ្ហា​។"</string>
+    <string name="fw_change_failed" msgid="9179241823460192148">"មិន​អាច​ប្ដូរ​លេខ​បញ្ជូន​បន្ត​បាន​ទេ។ \n ទំនាក់ទំនង​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក​ ប្រសិនបើ​បញ្ហា​នេះ​នៅ​តែ​កើត​មាន​ឡើយ។"</string>
+    <string name="fw_get_in_vm_failed" msgid="2432678237218183844">"មិន​អាច​យក និង​រក្សាទុក​ការ​កំណត់​លេខ​បញ្ជូន​បន្ត​បច្ចុប្បន្ន​បាន​ទេ។\n ប្ដូរ​ទៅ​ក្រុមហ៊ុន​ផ្ដល់​សេវាកម្ម​ថ្មី​ឬ?"</string>
+    <string name="no_change" msgid="3737264882821031892">"មិន​បាន​ប្ដូរ។"</string>
+    <string name="sum_voicemail_choose_provider" msgid="6750824719081403773">"ជ្រើស​សេវា​សារ​ជា​សំឡេង"</string>
+    <string name="voicemail_default" msgid="6427575113775462077">"ក្រុមហ៊ុនបម្រើសេវាទូរសព្ទរបស់អ្នក"</string>
+    <string name="vm_change_pin_old_pin" msgid="7154951790929009241">"លេខ​កូដ PIN ថ្មី"</string>
+    <string name="vm_change_pin_new_pin" msgid="2656200418481288069">"លេខ​កូដ PIN ថ្មី"</string>
+    <string name="vm_change_pin_progress_message" msgid="626015184502739044">"សូម​រង់ចាំ។"</string>
+    <string name="vm_change_pin_error_too_short" msgid="1789139338449945483">"លេខ​កូដ PIN ថ្មី​ខ្លី​ពេក។"</string>
+    <string name="vm_change_pin_error_too_long" msgid="3634907034310018954">"លេខ​កូដ PIN ថ្មី​វែង​ពេក។"</string>
+    <string name="vm_change_pin_error_too_weak" msgid="8581892952627885719">"លេខ​កូដ PIN ថ្មី​ខ្សោយ​ពេក។ ពាក្យ​សម្ងាត់​ដែល​ខ្លាំង​មិន​គួរ​មាន​​លេខ​រៀង​​តគ្នា ឬ​​ស្ទួន​គ្នា​ទេ។"</string>
+    <string name="vm_change_pin_error_mismatch" msgid="5364847280026257331">"លេខ​កូដ PIN ចាស់​មិន​ត្រូវ​គ្នា។"</string>
+    <string name="vm_change_pin_error_invalid" msgid="5230002671175580674">"លេខ​កូដ PIN ថ្មី​​មាន​តួអក្សរ​មិន​ត្រឹមត្រូវ។"</string>
+    <string name="vm_change_pin_error_system_error" msgid="9116483527909681791">"មិន​អាច​ប្ដូរ​លេខ​កូដ PIN"</string>
+    <string name="vvm_unsupported_message_format" msgid="4206402558577739713">"មិន​ស្គាល់​ប្រភេទ​សារ សូម​ហៅ​ទូរស័ព្ទ​ទៅ <xliff:g id="NUMBER">%s</xliff:g> ដើម្បី​ស្ដាប់។"</string>
+    <string name="network_settings_title" msgid="7560807107123171541">"បណ្ដាញទូរសព្ទចល័ត"</string>
+    <string name="label_available" msgid="1316084116670821258">"បណ្ដាញ​ដែល​មាន"</string>
+    <string name="load_networks_progress" msgid="4051433047717401683">"កំពុង​ស្វែងរក..."</string>
+    <string name="empty_networks_list" msgid="9216418268008582342">"រក​មិន​ឃើញ​បណ្ដាញ។"</string>
+    <string name="network_query_error" msgid="3862515805115145124">"មិន​អាច​រក​ឃើញ​បណ្ដាញ​ទេ។ ព្យាយាម​ម្ដង​ទៀត។"</string>
+    <string name="register_on_network" msgid="4194770527833960423">"ចុះឈ្មោះ​នៅ​លើ <xliff:g id="NETWORK">%s</xliff:g>…"</string>
+    <string name="not_allowed" msgid="8541221928746104798">"មិន​អនុញ្ញាត​ឲ្យ​ស៊ីមកាត​របស់​អ្នក​តភ្ជាប់​ទៅ​បណ្ដាញ​នេះ​ទេ។"</string>
+    <string name="connect_later" msgid="1950138106010005425">"មិន​អាច​តភ្ជាប់​ទៅ​បណ្ដាញ​ឥឡូវ​នេះ​បាន​ទេ។ ព្យាយាម​ម្ដងទៀត​ពេលក្រោយ។"</string>
+    <string name="registration_done" msgid="5337407023566953292">"បាន​ចុះឈ្មោះ​នៅ​លើ​បណ្ដាញ។"</string>
+    <string name="already_auto" msgid="8607068290733079336">"នៅ​ក្នុង​ការ​ជ្រើសរើស​ស្វ័យប្រវត្តិ​រួចហើយ។"</string>
+    <string name="select_automatically" msgid="779750291257872651">"ជ្រើសរើស​បណ្ដាញ​ដោយស្វ័យប្រវត្តិ"</string>
+    <string name="manual_mode_disallowed_summary" msgid="3970048592179890197">"មិន​អាច​ប្រើបាន​នៅ​ពេល​បាន​​​ភ្ជាប់​ជា​មួយ %1$s"</string>
+    <string name="network_select_title" msgid="4117305053881611988">"បណ្ដាញ"</string>
+    <string name="register_automatically" msgid="3907580547590554834">"ការ​ចុះ​ឈ្មោះ​ដោយ​ស្វ័យ​ប្រវត្តិ ..."</string>
+    <string name="preferred_network_mode_title" msgid="5253395265169539830">"ប្រភេទ​បណ្ដាញ​​ដែល​​ពេញចិត្ត"</string>
+    <string name="preferred_network_mode_summary" msgid="3787989000044330064">"ប្ដូរ​របៀប​ប្រតិបត្តិការ​បណ្ដាញ"</string>
+    <string name="preferred_network_mode_dialogtitle" msgid="2781447433514459696">"ប្រភេទ​បណ្ដាញ​​ដែល​​ពេញចិត្ត"</string>
+    <string name="forbidden_network" msgid="5081729819561333023">"(ហាម)"</string>
+    <string name="choose_network_title" msgid="5335832663422653082">"ជ្រើសរើសបណ្តាញ"</string>
+    <string name="network_disconnected" msgid="8844141106841160825">"បាន​ផ្ដាច់"</string>
+    <string name="network_connected" msgid="2760235679963580224">"បានភ្ជាប់"</string>
+    <string name="network_connecting" msgid="160901383582774987">"កំពុង​ភ្ជាប់..."</string>
+    <string name="network_could_not_connect" msgid="6547460848093727998">"មិន​អាចភ្ជាប់​បានទេ"</string>
+  <string-array name="preferred_network_mode_choices">
+    <item msgid="4531933377509551889">"ប្រើ GSM/WCDMA ជា​អាទិភាព"</item>
+    <item msgid="5120532750027435355">"GSM ប៉ុណ្ណោះ"</item>
+    <item msgid="8973311380798000102">"WCDMA ប៉ុណ្ណោះ"</item>
+    <item msgid="4139961027147085705">"GSM/WCDMA ស្វ័យ​ប្រវត្តិ"</item>
+    <item msgid="4024581977690585814">"CDMA/EvDo ស្វ័យ​ប្រវត្តិ"</item>
+    <item msgid="7199560024080522581">"CDMA w/o EvDo"</item>
+    <item msgid="3160291725308400608">"តែ EvDo ​ប៉ុណ្ណោះ"</item>
+    <item msgid="2319217472852426965">"CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="7342827148550261533">"CDMA + LTE/EvDo"</item>
+    <item msgid="1694517610683571748">"GSM/WCDMA/LTE"</item>
+    <item msgid="2431844716050955858">"ជា​សកល"</item>
+    <item msgid="8522859526931346931">"LTE"</item>
+    <item msgid="7852977970279215000">"LTE / WCDMA"</item>
+    <item msgid="5779210256161024981">"TDSCDMA ប៉ុណ្ណោះ"</item>
+    <item msgid="611913646308951205">"TDSCDMA/WCDMA"</item>
+    <item msgid="1738977207573340604">"LTE/TDSCDMA"</item>
+    <item msgid="8506090627128783948">"TDSCDMA/GSM"</item>
+    <item msgid="8818474033583337353">"LTE/TDSCDMA/GSM"</item>
+    <item msgid="3102297933672336483">"TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="3802189736321382954">"LTE/TDSCDMA/WCDMA"</item>
+    <item msgid="6147699530135006312">"LTE/TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="8826479449402151312">"TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+    <item msgid="6284311629324843506">"LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA"</item>
+    <item msgid="4738087170533378966">"NR តែ​ប៉ុណ្ណោះ"</item>
+    <item msgid="2935877729588775187">"NR/LTE"</item>
+    <item msgid="8967513231424970529">"NR/LTE/CDMA/EvDo"</item>
+    <item msgid="1542643426479755015">"NR/LTE/GSM/WCDMA"</item>
+    <item msgid="5778162260258129841">"NR/LTE/CDMA/EvDo/GSM/WCDMA"</item>
+    <item msgid="8088614845214545367">"NR/LTE/WCDMA"</item>
+    <item msgid="6517428040626326776">"NR/LTE/TDSCDMA"</item>
+    <item msgid="5294150161567170165">"NR/LTE/TDSCDMA/GSM"</item>
+    <item msgid="4130965694947056705">"NR/LTE/TDSCDMA/WCDMA"</item>
+    <item msgid="3869566732842046032">"NR/LTE/TDSCDMA/GSM/WCDMA"</item>
+    <item msgid="3942770927563146543">"NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</item>
+  </string-array>
+    <string name="preferred_network_mode_wcdma_perf_summary" msgid="7851493369130750126">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ WCDMA ដែល​ចូលចិត្ត"</string>
+    <string name="preferred_network_mode_gsm_only_summary" msgid="4323367929994392830">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ តែ GSM ប៉ុណ្ណោះ"</string>
+    <string name="preferred_network_mode_wcdma_only_summary" msgid="3585482191951442207">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ តែ  WCDMA ប៉ុណ្ណោះ"</string>
+    <string name="preferred_network_mode_gsm_wcdma_summary" msgid="2988950751948316810">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ GSM / WCDMA"</string>
+    <string name="preferred_network_mode_cdma_summary" msgid="9127141320343936911">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ CDMA"</string>
+    <string name="preferred_network_mode_cdma_evdo_summary" msgid="3629440709757307077">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ CDMA / EvDo"</string>
+    <string name="preferred_network_mode_cdma_only_summary" msgid="211164451887102568">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ តែ​ CDMA ប៉ុណ្ណោះ"</string>
+    <string name="preferred_network_mode_evdo_only_summary" msgid="939116631952132878">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ តែ EvDo ប៉ុណ្ណោះ"</string>
+    <string name="preferred_network_mode_cdma_evdo_gsm_wcdma_summary" msgid="7891131456022601976">"របៀប​​​បណ្ដាញ​ដែល​ចូល​​ចិត្ត​៖ CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_summary" msgid="8050539466545797149">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ LTE"</string>
+    <string name="preferred_network_mode_lte_gsm_wcdma_summary" msgid="2217794334331254936">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ GSM/WCDMA/LTE"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_summary" msgid="5559198623419981805">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ CDMA+LTE/EVDO"</string>
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary" msgid="6707224437925495615">"មុខងារ​បណ្ដាញ​អាទិភាព៖ LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_global_summary" msgid="3847086258439582411">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ សកល"</string>
+    <string name="preferred_network_mode_lte_wcdma_summary" msgid="7001804022020813865">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ LTE / WCDMA"</string>
+    <string name="preferred_network_mode_lte_gsm_umts_summary" msgid="6484203890156282179">"ប្រភេទបណ្តាញដែលពេញចិត្ត៖ LTE / GSM / UMTS"</string>
+    <string name="preferred_network_mode_lte_cdma_summary" msgid="8187929456614068518">"របៀប​បណ្ដាញ​ដែល​ចូលចិត្ត៖ LTE / CDMA"</string>
+    <string name="preferred_network_mode_tdscdma_summary" msgid="3602127224234207206">"របៀបបណ្តាញដែលចូលចិត្ត៖ TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_wcdma_summary" msgid="7076968749402201123">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ TDSCDMA / WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_summary" msgid="3001058390866953624">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ LTE / TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_summary" msgid="1716983444872465309">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ TDSCDMA / GSM"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_summary" msgid="1349057007230669585">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ LTE/GSM/TDSCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_gsm_wcdma_summary" msgid="2092262901885164194">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_wcdma_summary" msgid="56422129430744466">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_gsm_wcdma_summary" msgid="2993923113350341106">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="2779089629254220257">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="9065672185435798587">"មុខងារ​បណ្ដាញ​ដែល​ប្រើ​ជា​អាទិភាព៖ LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_only_summary" msgid="1467452233297987391">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR តែប៉ុណ្ណោះ"</string>
+    <string name="preferred_network_mode_nr_lte_summary" msgid="5890170406507535976">"មុខងារ​បណ្ដាញអាទិភាព៖ NR / LTE"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary" msgid="5507940227264296616">"មុខងារបណ្ដាញ​អាទិភាព៖ NR/LTE/CDMA/EvDo"</string>
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary" msgid="2811179121638665248">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary" msgid="7631365223836621902">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_wcdma_summary" msgid="8696016062943591864">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary" msgid="1236182344680726751">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/TDSCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary" msgid="8384454155773415993">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/TDSCDMA/GSM"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary" msgid="5912457779733343522">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/TDSCDMA/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary" msgid="6769797110309412576">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/TDSCDMA/GSM/WCDMA"</string>
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary" msgid="4260661428277578573">"មុខងារ​បណ្ដាញ​អាទិភាព៖ NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA"</string>
+    <string name="call_category" msgid="4394703838833058138">"កំពុង​ហៅ"</string>
+    <string name="network_operator_category" msgid="4992217193732304680">"បណ្ដាញ"</string>
+    <string name="enhanced_4g_lte_mode_title" msgid="4213420368777080540">"​របៀប 4G LTE ធ្វើឲ្យ​ប្រសើរ​ឡើង"</string>
+    <!-- no translation found for enhanced_4g_lte_mode_title_variant:0 (7240155150166394308) -->
+    <string name="enhanced_4g_lte_mode_summary" msgid="7725708511804143638">"ប្រើសេវាកម្ម LTE ដើម្បីធ្វើឲ្យសម្លេង និងការទំនាក់ទំនងផ្សេងទៀតប្រសើរឡើង (បានណែនាំ)"</string>
+    <string name="enhanced_4g_lte_mode_summary_o2" msgid="2521108446409016542">"ប្រើប្រាស់​សេវាកម្ម 4G ដើម្បីកែលម្អ​សំឡេង និង​ការ​ប្រាស្រ័យ​ទាក់ទង​ផ្សេងៗ (បានណែនាំ)"</string>
+    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:0 (2943982616649705147) -->
+    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:1 (5262249464504131443) -->
+    <!-- no translation found for enhanced_4g_lte_mode_sumary_variant:2 (6356974241850241718) -->
+    <string name="data_enabled" msgid="22525832097434368">"បាន​បើក​ទិន្នន័យ"</string>
+    <string name="data_enable_summary" msgid="696860063456536557">"អនុញ្ញាត​​ឲ្យ​​ប្រើ​ប្រាស់​ទិន្នន័យ"</string>
+    <string name="dialog_alert_title" msgid="5260471806940268478">"ប្រយ័ត្ន"</string>
+    <string name="roaming" msgid="1576180772877858949">"រ៉ូ​មីង"</string>
+    <string name="roaming_enable" msgid="6853685214521494819">"តភ្ជាប់​ទៅ​កាន់​សេវា​កម្ម​ទិន្នន័យ​នៅ​ពេល​ដែល​រ៉ូ​មីង"</string>
+    <string name="roaming_disable" msgid="8856224638624592681">"តភ្ជាប់​ទៅ​កាន់​សេវា​កម្ម​ទិន្នន័យ​នៅ​ពេល​ដែល​រ៉ូ​មីង"</string>
+    <string name="roaming_reenable_message" msgid="1951802463885727915">"ការរ៉ូមីង​ទិន្នន័យ​ត្រូវ​បាន​បិទ។ ចុច ដើម្បី​បើក។"</string>
+    <string name="roaming_enabled_message" msgid="9022249120750897">"អាច​មាន​ការគិត​ថ្លៃ​រ៉ូមីង។ ចុច​ដើម្បី​កែប្រែ។"</string>
+    <string name="roaming_notification_title" msgid="3590348480688047320">"ដាច់​ការតភ្ជាប់​ទិន្នន័យ​ចល័ត"</string>
+    <string name="roaming_on_notification_title" msgid="7451473196411559173">"ការរ៉ូមីង​ទិន្នន័យ​ត្រូវ​បាន​បើក"</string>
+    <string name="roaming_warning" msgid="7855681468067171971">"អាចនាំឲ្យមានការគិតប្រាក់ច្រើនពីអ្នក។"</string>
+    <string name="roaming_check_price_warning" msgid="8212484083990570215">"ពិនិត្យមើល​តម្លៃ​ជាមួយ​ក្រុមហ៊ុន​ផ្ដល់​សេវា​​បណ្ដាញ​​របស់​អ្នក។"</string>
+    <string name="roaming_alert_title" msgid="5689615818220960940">"អនុញ្ញាតឲ្យរ៉ូមីងទិន្នន័យ?"</string>
+    <string name="limited_sim_function_notification_title" msgid="612715399099846281">"មុខងារ​ស៊ីម​មាន​កម្រិត"</string>
+    <string name="limited_sim_function_with_phone_num_notification_message" msgid="5928988883403677610">"សេវាកម្ម​ទិន្នន័យ និង​ការហៅ​ទូរសព្ទ​តាម <xliff:g id="CARRIER_NAME">%1$s</xliff:g> អាច​ត្រូវ​បាន​ទប់ស្កាត់ ពេល​ប្រើប្រាស់ <xliff:g id="PHONE_NUMBER">%2$s</xliff:g>។"</string>
+    <string name="limited_sim_function_notification_message" msgid="5338638075496721160">"សេវាកម្មទិន្នន័យ និងការហៅទូរសព្ទតាម <xliff:g id="CARRIER_NAME">%1$s</xliff:g> អាចត្រូវបានទប់ស្កាត់ ពេលប្រើស៊ីម​ផ្សេង។"</string>
+    <string name="data_usage_title" msgid="8438592133893837464">"ការប្រើប្រាស់​ទិន្នន័យកម្មវិធី"</string>
+    <string name="data_usage_template" msgid="6287906680674061783">"បានប្រើទិន្នន័យទូរសព្ទអស់ <xliff:g id="ID_1">%1$s</xliff:g> នៅថ្ងៃទី <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="advanced_options_title" msgid="9208195294513520934">"កម្រិតខ្ពស់"</string>
+    <string name="carrier_settings_euicc" msgid="1190237227261337749">"ក្រុមហ៊ុន​បម្រើ​សេវា​ទូរសព្ទ"</string>
+    <string name="keywords_carrier_settings_euicc" msgid="8540160967922063745">"carrier, esim, sim, euicc, switch carriers, add carrier"</string>
+    <string name="carrier_settings_euicc_summary" msgid="2027941166597330117">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> — <xliff:g id="PHONE_NUMBER">%2$s</xliff:g>"</string>
+    <string name="mobile_data_settings_title" msgid="7228249980933944101">"ទិន្នន័យ​ទូរសព្ទចល័ត"</string>
+    <string name="mobile_data_settings_summary" msgid="5012570152029118471">"ចូល​ប្រើប្រាស់​ទិន្នន័យ​តាម​បណ្ដាញ​​ទូរសព្ទ​ចល័ត"</string>
+    <string name="data_usage_disable_mobile" msgid="5669109209055988308">"បិទទិន្នន័យ​​ទូរសព្ទ​ចល័ត?"</string>
+    <string name="sim_selection_required_pref" msgid="6985901872978341314">"ជម្រើស​ដែល​ត្រូវមាន"</string>
+    <string name="sim_change_data_title" msgid="9142726786345906606">"ប្ដូរ​ស៊ីមទិន្នន័យ?"</string>
+    <string name="sim_change_data_message" msgid="3567358694255933280">"ប្រើប្រាស់ <xliff:g id="NEW_SIM">%1$s</xliff:g> ជំនួសឲ្យ <xliff:g id="OLD_SIM">%2$s</xliff:g> សម្រាប់​ទិន្នន័យ​ទូរសព្ទ​ចល័ត​ដែរ​ឬ​ទេ?"</string>
+    <string name="wifi_calling_settings_title" msgid="5800018845662016507">"ការហៅ​តាម Wi-Fi"</string>
+    <string name="video_calling_settings_title" msgid="342829454913266078">"ការហៅវីដេអូ​តាម​ក្រុមផ្ដល់​សេវា​ទូរសព្ទ"</string>
+    <string name="gsm_umts_options" msgid="4968446771519376808">"ជម្រើស GSM/UMTS"</string>
+    <string name="cdma_options" msgid="3669592472226145665">"ជម្រើស CDMA"</string>
+    <string name="throttle_data_usage" msgid="1944145350660420711">"ការ​ប្រើ​ប្រាស់​ទិន្នន័យ"</string>
+    <string name="throttle_current_usage" msgid="7483859109708658613">"បច្ចុប្បន្ន​បាន​ប្រើ​ទិន្នន័យ​​"</string>
+    <string name="throttle_time_frame" msgid="1813452485948918791">"ទិន្នន័យ​ប្រើ​រយៈ​ពេល"</string>
+    <string name="throttle_rate" msgid="7641913901133634905">"គោល​ន​យោ​បាយ​អត្រា​ទិន្នន័យ"</string>
+    <string name="throttle_help" msgid="2624535757028809735">"ស្វែងយល់​បន្ថែម"</string>
+    <string name="throttle_status_subtext" msgid="1110276415078236687">"<xliff:g id="USED_0">%1$s</xliff:g> (<xliff:g id="USED_1">%2$d</xliff:g>٪) នៃ <xliff:g id="USED_2">%3$s</xliff:g> រយៈ​ពេល​អតិបរមា \n រយៈ​ពេល​ចាប់ផ្ដើម​បន្ទាប់​នៅ​ក្នុង <xliff:g id="USED_3">%4$d</xliff:g> ថ្ងៃ (<xliff:g id="USED_4">%5$s</xliff:g>)"</string>
+    <string name="throttle_data_usage_subtext" msgid="3185429653996709840">"<xliff:g id="USED_0">%1$s</xliff:g> (<xliff:g id="USED_1">%2$d</xliff:g>٪) នៃ <xliff:g id="USED_2">%3$s</xliff:g> រយៈ​ពេល​អតិបរមា"</string>
+    <string name="throttle_data_rate_reduced_subtext" msgid="8369839346277847725">"<xliff:g id="USED_0">%1$s</xliff:g> ​លើស​អតិបរមា \n បាន​កាត់​បន្ថយ​អត្រា​ទិន្នន័យ <xliff:g id="USED_1">%2$d</xliff:g> Kb/s"</string>
+    <string name="throttle_time_frame_subtext" msgid="6462089615392402127">"<xliff:g id="USED_0">%1$d</xliff:g>٪ ខួប​កន្លង​ទៅ\n រយៈ​ពេល​ចាប់ផ្ដើម​បន្ទាប់​​នៅ​ក្នុង <xliff:g id="USED_1">%2$d</xliff:g> ថ្ងៃ (<xliff:g id="USED_2">%3$s</xliff:g>)"</string>
+    <string name="throttle_rate_subtext" msgid="7221971817325779535">"បាន​កាត់​បន្ថយ​អត្រា​ទិន្នន័យ <xliff:g id="USED">%1$d</xliff:g> Kb/s ប្រសិនបើ​ទិន្នន័យ​ប្រើ​លើស​ដែន​កំណត់"</string>
+    <string name="throttle_help_subtext" msgid="2817114897095534807">"ព័ត៌មាន​បន្ថែម​អំពី​​គោលនយោបាយ​ក្នុង​ការ​ប្រើប្រាស់​ទិន្នន័យ​បណ្ដាញ​ឧបករណ៍​ចល័ត​ក្រុមហ៊ុន​បញ្ជូន​របស់​អ្នក"</string>
+    <string name="cell_broadcast_sms" msgid="4053449797289031063">"សារ SMS ​ផ្សព្វផ្សាយ​ចល័ត"</string>
+    <string name="enable_disable_cell_bc_sms" msgid="4759958924031721350">"សារ SMS ផ្សព្វផ្សាយ​ចល័ត"</string>
+    <string name="cell_bc_sms_enable" msgid="2019708772024632073">"បាន​បើក​សារ SMS ​ផ្សព្វផ្សាយ​ចល័ត"</string>
+    <string name="cell_bc_sms_disable" msgid="1214238639910875347">"បាន​បិទ​សារ SMS ​ផ្សព្វផ្សាយ​ចល័ត"</string>
+    <string name="cb_sms_settings" msgid="6858093721831312036">"កំណត់​សារ​ SMS សម្រាប់​ការ​ផ្សព្វផ្សាយ​ចល័ត"</string>
+    <string name="enable_disable_emergency_broadcast" msgid="6325655044472196496">"ការ​ផ្សព្វផ្សាយ​នៅ​ពេល​មាន​អាសន្ន"</string>
+    <string name="emergency_broadcast_enable" msgid="5759610647771102442">"បាន​បើក​ការ​ផ្សព្វផ្សាយ​ពេល​មាន​អាសន្ន"</string>
+    <string name="emergency_broadcast_disable" msgid="2844904734469323266">"បាន​បិទ​ការ​ផ្សព្វផ្សាយ​ពេល​មាន​អាសន្ន"</string>
+    <string name="enable_disable_administrative" msgid="7825925366822117961">"រដ្ឋបាល"</string>
+    <string name="administrative_enable" msgid="5717963431079532028">"បាន​បើក​រដ្ឋបាល"</string>
+    <string name="administrative_disable" msgid="156796633660118691">"បាន​បិទ​​រដ្ឋបាល"</string>
+    <string name="enable_disable_maintenance" msgid="3824817751053035017">"ថែទាំ"</string>
+    <string name="maintenance_enable" msgid="2646784483222342290">"បាន​បើក​ការថែទាំ"</string>
+    <string name="maintenance_disable" msgid="2121032601497725602">"បាន​បិទ​ការ​ថែទាំ"</string>
+    <string name="general_news_settings" msgid="2670499575962080411">"ព័ត៌មាន​ទូទៅ"</string>
+    <string name="bf_news_settings" msgid="8571709425370794221">"ព័ត៌មាន​ហិរញ្ញវត្ថុ និង​ធុរកិច្ច"</string>
+    <string name="sports_news_settings" msgid="2684364556989168438">"ព័ត៌មាន​កីឡា"</string>
+    <string name="entertainment_news_settings" msgid="4228527702346305543">"ព័ត៌មាន​កម្សាន្ត"</string>
+    <string name="enable_disable_local" msgid="7654175079979415572">"ក្នុងស្រុក"</string>
+    <string name="local_enable" msgid="790606890868710629">"បាន​បើក​ព័ត៌មាន​ក្នុង​ស្រុក"</string>
+    <string name="local_disable" msgid="7649945293198602877">"បាន​បិទ​ព័ត៌មាន​ក្នុង​ស្រុក"</string>
+    <string name="enable_disable_regional" msgid="5783403191376564638">"នៃ​តំបន់"</string>
+    <string name="regional_enable" msgid="7730109417536296079">"បាន​បើក​ព័ត៌មាន​ក្នុង​តំបន់​"</string>
+    <string name="regional_disable" msgid="3781951818157772545">"បាន​បិទ​ព័ត៌មាន​ក្នុង​តំបន់"</string>
+    <string name="enable_disable_national" msgid="6198481711934897632">"ជាតិ"</string>
+    <string name="national_enable" msgid="5159683504138239304">"បាន​បើក​ព័ត៌មាន​ជាតិ"</string>
+    <string name="national_disable" msgid="8484356368757118987">"បាន​បិទ​ព័ត៌មាន​ជាតិ"</string>
+    <string name="enable_disable_international" msgid="4204334217211198792">"អន្តរជាតិ"</string>
+    <string name="international_enable" msgid="8943466745792690340">"បាន​បើក​ព័ត៌មាន​អន្តរជាតិ"</string>
+    <string name="international_disable" msgid="4803498658100318265">"បាន​បិទ​ព័ត៌មាន​អន្តរជាតិ"</string>
+    <string name="list_language_title" msgid="1850167908665485738">"ភាសា"</string>
+    <string name="list_language_summary" msgid="7921756070782277559">"ជ្រើស​​ភាសា​ព័ត៌មាន"</string>
+  <string-array name="list_language_entries">
+    <item msgid="2347238508726934281">"អង់គ្លេស"</item>
+    <item msgid="5172468397620875174">"​បារាំង"</item>
+    <item msgid="3978110664146015398">"​អេស្ប៉ាញ"</item>
+    <item msgid="2637764545851526369">"ជប៉ុន"</item>
+    <item msgid="6103816221834932751">"កូរ៉េ"</item>
+    <item msgid="3127367370005168399">"ចិន"</item>
+    <item msgid="9130651361816196355">"Hebrew"</item>
+  </string-array>
+  <string-array name="list_language_values">
+    <item msgid="798673247233934667">"១"</item>
+    <item msgid="8094157729915031372">"២"</item>
+    <item msgid="8800963137163545850">"៣"</item>
+    <item msgid="2720764514329880993">"៤"</item>
+    <item msgid="6180039611613399029">"៥"</item>
+    <item msgid="3611885482576618687">"៦"</item>
+    <item msgid="6685082338652847671">"៧"</item>
+  </string-array>
+    <string name="list_language_dtitle" msgid="7457017255633587047">"ភាសា"</string>
+    <string name="enable_disable_local_weather" msgid="7734933941872511543">"អាកាសធាតុ​ក្នុងស្រុក"</string>
+    <string name="local_weather_enable" msgid="2143929735295254729">"បាន​បើក​អាកាសធាតុ​ក្នុង​ស្រុក"</string>
+    <string name="local_weather_disable" msgid="4209936355998349647">"បាន​បិទ​អាកាសធាតុ​ក្នុង​ស្រុក"</string>
+    <string name="enable_disable_atr" msgid="821714821057385390">"របាយការណ៍​​ចរាចរ​តំបន់"</string>
+    <string name="atr_enable" msgid="1799097759998768186">"បាន​បើក​របាយ​ការណ៍​​​ចរាចរណ៍​តំបន់"</string>
+    <string name="atr_disable" msgid="6456758173289065766">"បាន​បិទ​របាយការណ៍​ចរាចរណ៍​តំបន់"</string>
+    <string name="enable_disable_lafs" msgid="7448060358300805661">"កាលវិភាគ​ហោះហើរ​អាកាសយានដ្ឋាន​ក្នុងស្រុក"</string>
+    <string name="lafs_enable" msgid="3125783406052655690">"បាន​បើក​កាលវិភាគ​ហោះហើរ​អាកាសយានដ្ឋាន​ក្នុង​ស្រុក​"</string>
+    <string name="lafs_disable" msgid="7326815066813851447">"បាន​បិទ​​​កាលវិភាគ​ហោះហើរ​អាកាសយានដ្ឋាន​ក្នុង​ស្រុក​"</string>
+    <string name="enable_disable_restaurants" msgid="3873247081569423019">"ភោជនីយដ្ឋាន"</string>
+    <string name="restaurants_enable" msgid="5810452674239139572">"បាន​បើក​ភោជនីយដ្ឋាន"</string>
+    <string name="restaurants_disable" msgid="2733507854548413505">"បាន​បិទ​ភោជនីយដ្ឋាន​"</string>
+    <string name="enable_disable_lodgings" msgid="7849168585821435109">"បណ្ដោះ​អាសន្ន"</string>
+    <string name="lodgings_enable" msgid="2020598411398609514">"បាន​បើក​ជា​បណ្ដោះ​អាសន្ន"</string>
+    <string name="lodgings_disable" msgid="5145649659459722661">"បាន​បិទ​ជា​បណ្ដោះ​អាសន្ន"</string>
+    <string name="enable_disable_retail_directory" msgid="9095153426757081972">"ទីកន្លែង​លក់​រាយ"</string>
+    <string name="retail_directory_enable" msgid="2532176568755452171">"បាន​បើក​កន្លែង​លក់​រាយ"</string>
+    <string name="retail_directory_disable" msgid="7242451210736299193">"បាន​បិទ​កន្លែង​លក់រាយ"</string>
+    <string name="enable_disable_advertisements" msgid="8704125663718797151">"ការ​ផ្សព្វផ្សាយ​ពាណិជ្ជកម្ម"</string>
+    <string name="advertisements_enable" msgid="8651409664217899145">"បាន​បើក​ការផ្សាយពាណិជ្ជកម្ម"</string>
+    <string name="advertisements_disable" msgid="2999957360508271492">"បាន​បិទ​​ការផ្សាយពាណិជ្ជកម្ម"</string>
+    <string name="enable_disable_stock_quotes" msgid="631498357725951825">"សម្រង់​ស្ដុក"</string>
+    <string name="stock_quotes_enable" msgid="5104318195579771947">"បាន​បើក​សម្រង់​ស្ដុក"</string>
+    <string name="stock_quotes_disable" msgid="3126423481704498278">"បាន​បិទ​សម្រង់​ស្ដុក"</string>
+    <string name="enable_disable_eo" msgid="5730223317238970819">"ឱកាស​ការងារ"</string>
+    <string name="eo_enable" msgid="107713355461019817">"បាន​បើក​ឱកាស​ការងារ​"</string>
+    <string name="eo_disable" msgid="3955421278929647485">"បាន​បិទ​ឱកាស​​ការងារ"</string>
+    <string name="enable_disable_mhh" msgid="715930476289202466">"វេជ្ជសាស្ត្រ  សុខភាព ​និង​មន្ទីរពេទ្យ"</string>
+    <string name="mhh_enable" msgid="7224396815285147008">"បាន​​បើក វេជ្ជសាស្ត្រ  សុខភាព ​និង​មន្ទីរពេទ្យ"</string>
+    <string name="mhh_disable" msgid="5503643028885686265">"បាន​បិទ វេជ្ជសាស្ត្រ  សុខភាព ​និង​មន្ទីរពេទ្យ"</string>
+    <string name="enable_disable_technology_news" msgid="2794845609698078400">"​ព័ត៌មាន​បច្ចេកវិទ្យា"</string>
+    <string name="technology_news_enable" msgid="1908991199492598311">"បាន​បើក​ព័ត៌មាន​បច្ចេកវិទ្យា"</string>
+    <string name="technology_news_disable" msgid="8388582607149800889">"បាន​បើក​ព័ត៌មាន​បច្ចេកវិទ្យា"</string>
+    <string name="enable_disable_multi_category" msgid="5958248155437940625">"ប្រភេទ​ច្រើន"</string>
+    <string name="multi_category_enable" msgid="4531915767817483960">"បាន​បើក​ប្រភេទ​ច្រើន"</string>
+    <string name="multi_category_disable" msgid="6325934413701238104">"បាន​បិទ​ប្រភេទ​ច្រើន"</string>
+    <string name="network_recommended" msgid="3444321100580250926">" (បានណែនាំ)"</string>
+    <string name="network_lte" msgid="7206879277095094280">"LTE (បានណែនាំ)"</string>
+    <string name="network_4G" msgid="6800527815504223913">"4G (បាន​ផ្ដល់​អនុសាសន៍)"</string>
+    <string name="network_global" msgid="3289646154407617631">"សកល"</string>
+    <string name="cdma_system_select_title" msgid="614165233552656431">"ជ្រើស​ប្រព័ន្ធ"</string>
+    <string name="cdma_system_select_summary" msgid="3840420390242060407">"ប្ដូរ​របៀប​រ៉ូមីង CDMA"</string>
+    <string name="cdma_system_select_dialogtitle" msgid="5524639510676501802">"ជ្រើស​ប្រព័ន្ធ"</string>
+  <string-array name="cdma_system_select_choices">
+    <item msgid="462340042928284921">"តែ​ដើម​ប៉ុណ្ណោះ"</item>
+    <item msgid="6058010046783562674">"ដោយ​ស្វ័យ​ប្រវត្តិ"</item>
+  </string-array>
+    <string name="cdma_subscription_title" msgid="3449527179325589434">"ការ​ជាវ CDMA"</string>
+    <string name="cdma_subscription_summary" msgid="5681152534466169001">"ប្ដូរ​វាង RUIM / ស៊ី​មកាត ​និង NV"</string>
+    <string name="cdma_subscription_dialogtitle" msgid="8872086335839723980">"ការ​ជាវ"</string>
+  <string-array name="cdma_subscription_choices">
+    <item msgid="7989486897370727698">"RUIM / ស៊ីមកាត"</item>
+    <item msgid="5445342771222849381">"NV"</item>
+  </string-array>
+  <string-array name="cdma_subscription_values">
+    <item msgid="2953825013895327785">"០"</item>
+    <item msgid="7970797749269738435">"១"</item>
+  </string-array>
+    <string name="cdma_activate_device" msgid="5914720276140097632">"ធ្វើ​ឲ្យ​​​ឧបករណ៍​​​សកម្ម"</string>
+    <string name="cdma_lte_data_service" msgid="359786441782404562">"រៀបចំ​សេវា​​កម្ម​ទិន្នន័យ"</string>
+    <string name="carrier_settings_title" msgid="6292869148169850220">"ការ​កំណត់​ក្រុមហ៊ុន​បញ្ជូន"</string>
+    <string name="fdn" msgid="2545904344666098749">"លេខ​ហៅ​មានកំណត់"</string>
+    <string name="fdn_with_label" msgid="6412087553365709494">"លេខចុចហៅមានកំណត់ (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="manage_fdn_list" msgid="3341716430375195441">"បញ្ជី FDN"</string>
+    <string name="fdn_list_with_label" msgid="1409655283510382556">"បញ្ជី FDN (<xliff:g id="SUBSCRIPTIONLABEL">%s</xliff:g>)"</string>
+    <string name="fdn_activation" msgid="2178637004710435895">"ការ​ធ្វើ​ឲ្យ​សកម្ម FDN"</string>
+    <string name="fdn_enabled" msgid="7017355494808056447">"បាន​បើក​លេខ​ហៅ​មានកំណត់"</string>
+    <string name="fdn_disabled" msgid="6696468878037736600">"បាន​បិទ​លេខ​ហៅ​មានកំណត់"</string>
+    <string name="enable_fdn" msgid="4830555730418033723">"បើក FDN"</string>
+    <string name="disable_fdn" msgid="3918794950264647541">"បិទ FDN"</string>
+    <string name="change_pin2" msgid="3110844547237754871">"ប្ដូរ​កូដ PIN2"</string>
+    <string name="enable_fdn_ok" msgid="5080925177369329827">"បិទ FDN"</string>
+    <string name="disable_fdn_ok" msgid="3745475926874838676">"បើក FDN"</string>
+    <string name="sum_fdn" msgid="6152246141642323582">"គ្រប់គ្រង​លេខ​ហៅ​មានកំណត់"</string>
+    <string name="sum_fdn_change_pin" msgid="3510994280557335727">"ប្ដូរ​កូដ PIN សម្រាប់​ចូល​ដំណើរការ FDN"</string>
+    <string name="sum_fdn_manage_list" msgid="3311397063233992907">"គ្រប់គ្រង​បញ្ជី​លេខ​ទូរសព្ទ"</string>
+    <string name="voice_privacy" msgid="7346935172372181951">"ភាព​ឯកជន​សារ​ជា​សំឡេង"</string>
+    <string name="voice_privacy_summary" msgid="3556460926168473346">"បើក​របៀប​បង្កើន​ភាព​ឯកជន"</string>
+    <string name="tty_mode_option_title" msgid="3843817710032641703">"ម៉ូត TTY"</string>
+    <string name="tty_mode_option_summary" msgid="4770510287236494371">"កំណត់​ម៉ូត TTY"</string>
+    <string name="auto_retry_mode_title" msgid="2985801935424422340">"ព្យាយាម​ម្ដងទៀត​ស្វ័យប្រវត្តិ"</string>
+    <string name="auto_retry_mode_summary" msgid="2863919925349511402">"បើក​របៀប​ព្យាយាម​ម្ដងទៀត​ស្វ័យប្រវត្តិ"</string>
+    <string name="tty_mode_not_allowed_video_call" msgid="6551976083652752815">"ការផ្លាស់ប្តូរម៉ូត TTY មិនត្រូវបានអនុញ្ញាតទេ អំឡុងពេលធ្វើការហៅជាវីដេអូ។"</string>
+    <string name="menu_add" msgid="5616487894975773141">"បញ្ចូល​ទំនាក់ទំនង"</string>
+    <string name="menu_edit" msgid="3593856941552460706">"កែ​ទំនាក់ទំនង"</string>
+    <string name="menu_delete" msgid="6326861853830546488">"លុប​ទំនាក់ទំនង"</string>
+    <string name="menu_dial" msgid="4178537318419450012">"ចុច​ហៅទៅ​ទំនាក់ទំនង"</string>
+    <string name="get_pin2" msgid="4221654606863196332">"វាយ​បញ្ចូល​កូដ PIN2"</string>
+    <string name="name" msgid="1347432469852527784">"ឈ្មោះ"</string>
+    <string name="number" msgid="1564053487748491000">"លេខ"</string>
+    <string name="save" msgid="983805790346099749">"រក្សាទុក"</string>
+    <string name="add_fdn_contact" msgid="1169713422306640887">"បន្ថែម​លេខ​​ហៅ​​​ថេរ"</string>
+    <string name="adding_fdn_contact" msgid="3112531600824361259">"បន្ថែម​លេខ​​ហៅ​ថេរ…"</string>
+    <string name="fdn_contact_added" msgid="2840016151693394596">"បាន​បន្ថែម​លេខ​​ហៅ​ថេរ"</string>
+    <string name="edit_fdn_contact" msgid="6030829994819587408">"កែ​​លេខ​ហៅ​ថេរ"</string>
+    <string name="updating_fdn_contact" msgid="6989341376868227150">"កំពុង​ធ្វើ​បច្ចុប្បន្នភាព​លេខ​ហៅ​ថេរ…"</string>
+    <string name="fdn_contact_updated" msgid="6876330243323118937">"បាន​ធ្វើ​បច្ចុប្បន្នភាព​លេខ​ហៅ​ថេរ។"</string>
+    <string name="delete_fdn_contact" msgid="7027405651994507077">"លុប​លេខ​ហៅ​ថេរ"</string>
+    <string name="deleting_fdn_contact" msgid="6872320570844460428">"កំពុង​លុប​លេខ​​ហៅ​ថេរ…"</string>
+    <string name="fdn_contact_deleted" msgid="1680714996763848838">"បាន​លុប​លេខ​ហៅ​ថេរ។"</string>
+    <string name="pin2_invalid" msgid="2313954262684494442">"មិន​បាន​ធ្វើ​បច្ចុប្បន្នភាព FDN ពី​ព្រោះ​អ្នក​បាន​វាយ​បញ្ចូល​កូដ PIN មិន​ត្រឹមត្រូវ។"</string>
+    <string name="fdn_invalid_number" msgid="9067189814657840439">"FDN មិន​ត្រូវ​បាន​ធ្វើ​បច្ចុប្បន្នភាព​ទេ ដោយ​សារ​លេខ​លើស​ពី <xliff:g id="FDN_NUMBER_LIMIT_LENGTH">%d</xliff:g> ខ្ទង់។"</string>
+    <string name="pin2_or_fdn_invalid" msgid="7542639487955868181">"មិន​បាន​ធ្វើ​បច្ចុប្បន្នភាព។ កូដ PIN2 មិន​ត្រឹមត្រូវ ឬ​លេខ​ទូរស័ព្ទ​ត្រូវ​បាន​ច្រានចោល។"</string>
+    <string name="fdn_failed" msgid="216592346853420250">"បាន​បរាជ័យ​ក្នុង​ការ​ប្រតិបត្តិការ FDN ។"</string>
+    <string name="simContacts_emptyLoading" msgid="4989040293858675483">"កំពុង​អាន​ពី​ស៊ីមកាត…"</string>
+    <string name="simContacts_empty" msgid="1135632055473689521">"គ្មាន​ទំនាក់ទំនង​នៅ​ក្នុង​​ស៊ីមកាត​របស់​អ្នក​ទេ។"</string>
+    <string name="simContacts_title" msgid="2714029230160136647">"ជ្រើស​ទំនាក់​ទំនង​ដើម្បី​នាំចូល"</string>
+    <string name="simContacts_airplaneMode" msgid="4654884030631503808">"បិទរបៀបយន្តហោះដើម្បីនាំចូលទំនាក់ទំនងចេញពីស៊ីមកាត។"</string>
+    <string name="enable_pin" msgid="967674051730845376">"បិទ/បើក​កូដ PIN ស៊ីមកាត"</string>
+    <string name="change_pin" msgid="3657869530942905790">"ប្ដូរ​កូដ​ PIN ស៊ីមកាត"</string>
+    <string name="enter_pin_text" msgid="3182311451978663356">"កូដ PIN ស៊ីមកាត៖"</string>
+    <string name="oldPinLabel" msgid="8618515202411987721">"កូដ PIN ថ្មី"</string>
+    <string name="newPinLabel" msgid="3585899083055354732">"កូដ PIN ថ្មី"</string>
+    <string name="confirmPinLabel" msgid="7783531218662473778">"បញ្ជាក់​កូដ PIN ថ្មី"</string>
+    <string name="badPin" msgid="4549286285015892321">"អ្នក​បាន​វាយ​បញ្ចូល​កូដ PIN ចាស់​មិន​ត្រឹមត្រូវ។ សូម​ព្យាយាម​ម្ដងទៀត។"</string>
+    <string name="mismatchPin" msgid="1467254768290323845">"អ្នក​បាន​វាយ​បញ្ចូល​កូដ PINs មិន​ផ្គូផ្គង។ ព្យាយាម​ម្ដងទៀត។"</string>
+    <string name="invalidPin" msgid="7363723429414001979">"វាយ​បញ្ចូល​កូដ PIN ដែល​មាន​​ពី​​​លេខ ៤ ដល់​លេខ ៨ ។"</string>
+    <string name="disable_sim_pin" msgid="3112303905548613752">"ជម្រះលេខសម្ងាត់ស៊ីម"</string>
+    <string name="enable_sim_pin" msgid="445461050748318980">"កំណត់លេខសម្ងាត់ស៊ីម"</string>
+    <string name="enable_in_progress" msgid="4135305985717272592">"កំពុងកំណត់លេខសម្ងាត់…"</string>
+    <string name="enable_pin_ok" msgid="2877428038280804256">"លេខសម្ងាត់ត្រូវបានកំណត់"</string>
+    <string name="disable_pin_ok" msgid="888505244389647754">"លេខសម្ងាត់ត្រូវបានជម្រះ"</string>
+    <string name="pin_failed" msgid="4527347792881939652">"លេខសម្ងាត់មិនត្រឹមត្រូវ"</string>
+    <string name="pin_changed" msgid="7291153750090452808">"លេខសម្ងាត់ត្រូវបានធ្វើបច្ចុប្បន្នភាព"</string>
+    <string name="puk_requested" msgid="2061337960609806851">"ពាក្យសម្ងាត់មិនត្រឹមត្រូវ។ ឥឡូវនេះពាក្យសម្ងាត់ត្រូវបានរារាំង។ PUK ត្រូវបានស្នើ។"</string>
+    <string name="enter_pin2_text" msgid="7266379426804295979">"PIN2"</string>
+    <string name="oldPin2Label" msgid="4648543187859997203">"កូដ PIN2 ចាស់"</string>
+    <string name="newPin2Label" msgid="1840905981784453939">"កូដ PIN2 ថ្មី"</string>
+    <string name="confirmPin2Label" msgid="4336025914667593762">"បញ្ជាក់​កូដ PIN2 ថ្មី"</string>
+    <string name="badPuk2" msgid="6438182906645832235">"PUK2 មិនត្រឹមត្រូវទេ។ ព្យាយាមម្តងទៀត។"</string>
+    <string name="badPin2" msgid="2760917538643074635">"លេខសម្ងាត់ PIN2 ចាស់មិនត្រឹមត្រូវទេ។ ព្យាយាមម្តងទៀត។"</string>
+    <string name="mismatchPin2" msgid="4952718725266700631">"លេខសម្ងាត់ PIN2s មិនត្រូវគ្នាទេ។ ព្យាយាមម្តងទៀត។"</string>
+    <string name="invalidPin2" msgid="6467957903056379343">"បញ្ចូលលេខសម្ងាត់ PIN2 ដែលមានពី 4 ទៅ 8 លេខ។"</string>
+    <string name="invalidPuk2" msgid="713729511903849544">"បញ្ចូល PUK2 ដែលមាន 8 លេខ។"</string>
+    <string name="pin2_changed" msgid="5710551850481287821">"លេខសម្ងាត់ PIN2 ត្រូវបានធ្វើបច្ចុប្បន្នភាព"</string>
+    <string name="label_puk2_code" msgid="2852217004288085562">"បញ្ចូលលេខកូដ PUK2"</string>
+    <string name="fdn_enable_puk2_requested" msgid="5793652792131588041">"ពាក្យសម្ងាត់មិនត្រឹមត្រូវទេ។ ឥឡូវនេះលេខសម្ងាត់ PIN2 របស់អ្នកត្រូវបានរារាំង។ ប្តូរលេខសម្ងាត់ PIN2។"</string>
+    <string name="puk2_requested" msgid="6992374450720307514">"ពាក្យសម្ងាត់មិនត្រឹមត្រូវ។ ឥឡូវនេះស៊ីមកាតត្រូវបានចាក់សោ។ បញ្ចូល PUK2។"</string>
+    <string name="puk2_blocked" msgid="3131139031779319911">"លេខ​កូដ PUK2 ត្រូវ​បាន​​ទប់ស្កាត់​ជា​អចិន្ត្រៃយ៍។"</string>
+    <string name="pin2_attempts" msgid="5625178102026453023">\n"អ្នកនៅសល់ការព្យាយាមបញ្ចូល <xliff:g id="NUMBER">%d</xliff:g> ដងទៀត។"</string>
+    <string name="pin2_unblocked" msgid="4481107908727789303">"លេខសម្ងាត់ PIN2 មិនត្រូវបានរារាំងទៀតទេ"</string>
+    <string name="pin2_error_exception" msgid="8116103864600823641">"បញ្ហាស៊ីមកាត ឬបណ្ដាញ។"</string>
+    <string name="doneButton" msgid="7371209609238460207">"រួចរាល់"</string>
+    <string name="voicemail_settings_number_label" msgid="1265118640154688162">"លេខ​សារ​ជា​សំឡេង"</string>
+    <string name="card_title_dialing" msgid="8742182654254431781">"កំពុង​ហៅ"</string>
+    <string name="card_title_redialing" msgid="18130232613559964">"ការចុចហៅឡើងវិញ"</string>
+    <string name="card_title_conf_call" msgid="901197309274457427">"ការ​ហៅ​ជា​​ក្រុម"</string>
+    <string name="card_title_incoming_call" msgid="881424648458792430">"ការ​ហៅ​ចូល"</string>
+    <string name="card_title_call_ended" msgid="650223980095026340">"បាន​បញ្ចប់​ការ​ហៅ"</string>
+    <string name="card_title_on_hold" msgid="9028319436626975207">"កំពុងរង់ចាំ"</string>
+    <string name="card_title_hanging_up" msgid="814874106866647871">"បញ្ចប់​ការ​សន្ទនា"</string>
+    <string name="card_title_in_call" msgid="8231896539567594265">"ការ​ហៅ​ចូល"</string>
+    <string name="notification_voicemail_title" msgid="3932876181831601351">"សារ​ជា​សំឡេង​ថ្មី"</string>
+    <string name="notification_voicemail_title_count" msgid="2806950319222327082">"សារ​ជា​សំឡេង​ថ្មី (<xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="notification_voicemail_text_format" msgid="5720947141702312537">"ចុច <xliff:g id="VOICEMAIL_NUMBER">%s</xliff:g>"</string>
+    <string name="notification_voicemail_no_vm_number" msgid="3423686009815186750">"មិន​ស្គាល់​ចំនួន​សារ​ជា​សំឡេង"</string>
+    <string name="notification_network_selection_title" msgid="255595526707809121">"គ្មាន​សេវា"</string>
+    <string name="notification_network_selection_text" msgid="553288408722427659">"បណ្ដាញ​ដែល​បាន​ជ្រើសរើស <xliff:g id="OPERATOR_NAME">%s</xliff:g> មិន​អាច​ប្រើប្រាស់​បាន​ទេ"</string>
+    <string name="incall_error_power_off" product="watch" msgid="7191184639454113633">"បើក​បណ្ដាញ​ទូរសព្ទ​ចល័ត បិទ​មុខងារ​ពេល​ជិះ​យន្តហោះ ឬ​បិទ​មុខងារ​កម្មវិធី​សន្សំថ្ម ដើម្បី​ហៅ​ទូរសព្ទ។"</string>
+    <string name="incall_error_power_off" product="default" msgid="8131672264311208673">"បិទរបៀបយន្តហោះដើម្បីធ្វើការហៅ។"</string>
+    <string name="incall_error_power_off_wfc" msgid="9125661184694727052">"បិទរបៀបយន្តហោះ ឬភ្ជាប់ទៅបណ្តាញឥតខ្សែដើម្បីធ្វើការហៅ។"</string>
+    <string name="incall_error_ecm_emergency_only" msgid="5622379058883722080">"ចាកចេញពីរបៀបហៅទៅវិញពេលមានអាសន្នដើម្បីធ្វើការហៅធម្មតា។"</string>
+    <string name="incall_error_emergency_only" msgid="8786127461027964653">"មិន​បាន​ចុះ​ឈ្មោះ​នៅ​លើ​បណ្ដាញ។"</string>
+    <string name="incall_error_out_of_service" msgid="1927265196942672791">"បណ្ដាញ​​ឧបករណ៍​​ចល័ត​មិន​អាច​ប្រើ​បាន​។"</string>
+    <string name="incall_error_out_of_service_wfc" msgid="4497663185857190885">"មិនមានបណ្តាញទូរសព្ទទេ។ ភ្ជាប់ទៅបណ្តាញឥតខ្សែ ដើម្បី​អាច​ហៅ​ទូរសព្ទ​បាន។"</string>
+    <string name="incall_error_no_phone_number_supplied" msgid="8680831089508851894">"ដើម្បីធ្វើការហៅ បញ្ចូលលេខដែលមានសុពលភាព។"</string>
+    <string name="incall_error_call_failed" msgid="393508653582682539">"បាន​បរាជ័យ​ការ​ហៅ។"</string>
+    <string name="incall_error_cannot_add_call" msgid="5425764862628655443">"មិន​អាច​បញ្ចូល​ការហៅបាន​ទេ​នៅពេល​នេះ។ អ្នក​អាច​ព្យាយាម​ទាក់ទង​​តាមរយៈ​ការផ្ញើសារ។"</string>
+    <string name="incall_error_supp_service_unknown" msgid="8751177117194592623">"សេវាកម្មមិនត្រូវបានគាំទ្រទេ។"</string>
+    <string name="incall_error_supp_service_switch" msgid="5272822448189448479">"មិនអាចឆ្លាស់ការហៅបានទេ។"</string>
+    <string name="incall_error_supp_service_resume" msgid="1276861499306817035">"មិន​អាច​បន្ត​ការហៅ​ទូរសព្ទ​បាន​ទេ។"</string>
+    <string name="incall_error_supp_service_separate" msgid="8932660028965274353">"មិនអាចបំបែកការហៅបានទេ។"</string>
+    <string name="incall_error_supp_service_transfer" msgid="8211925891867334323">"មិនអាចផ្ទេរបានទេ។"</string>
+    <string name="incall_error_supp_service_conference" msgid="27578082433544702">"មិន​អាច​ដាក់​ការហៅ​ទូរសព្ទ​បញ្ចូល​គ្នា​បាន​ទេ។"</string>
+    <string name="incall_error_supp_service_reject" msgid="3044363092441655912">"មិនអាចបដិសេធការហៅបានទេ។"</string>
+    <string name="incall_error_supp_service_hangup" msgid="836524952243836735">"មិនអាចបញ្ចេញការហៅបានទេ។"</string>
+    <string name="incall_error_supp_service_hold" msgid="8535056414643540997">"មិនអាចរង់ចាំការហៅទេ"</string>
+    <string name="incall_error_wfc_only_no_wireless_network" msgid="5860742792811400109">"ភ្ជាប់ទៅបណ្តាញឥតខ្សែដើម្បីធ្វើការហៅ។"</string>
+    <string name="incall_error_promote_wfc" msgid="9164896813931363415">"បើក​ការ​ហៅ​តាម​​វ៉ាយហ្វាយ​ដើម្បី​ធ្វើ​ការ​ហៅ។"</string>
+    <string name="emergency_information_hint" msgid="9208897544917793012">"ព័ត៌មានសង្គ្រោះបន្ទាន់"</string>
+    <string name="emergency_information_owner_hint" msgid="6256909888049185316">"ម្ចាស់"</string>
+    <string name="emergency_information_confirm_hint" msgid="5109017615894918914">"ចុច​ម្ដង​ទៀត ដើម្បីមើល​ព័ត៌មាន"</string>
+    <string name="emergency_enable_radio_dialog_title" msgid="2667568200755388829">"ការហៅ​ទូរសព្ទសង្គ្រោះ​បន្ទាន់"</string>
+    <string name="single_emergency_number_title" msgid="8413371079579067196">"លេខសង្គ្រោះបន្ទាន់"</string>
+    <string name="numerous_emergency_numbers_title" msgid="8972398932506755510">"លេខសង្គ្រោះបន្ទាន់"</string>
+    <string name="emergency_call_shortcut_hint" msgid="1290485125107779500">"ចុច​ម្ដង​ទៀត ដើម្បី​ហៅ​ <xliff:g id="EMERGENCY_NUMBER">%s</xliff:g>"</string>
+    <string name="emergency_enable_radio_dialog_message" msgid="1695305158151408629">"កំពុង​បើក​វិទ្យុ…"</string>
+    <string name="emergency_enable_radio_dialog_retry" msgid="4329131876852608587">"គ្មានសេវាទេ។ ព្យាយាមម្តង…"</string>
+    <string name="radio_off_during_emergency_call" msgid="8011154134040481609">"មិន​អាច​ចូល​ជា​របៀប​លើ​យន្តហោះ​​នៅ​អំឡុង​ការ​ហៅ​បន្ទាន់​បាន​ទេ។"</string>
+    <string name="dial_emergency_error" msgid="825822413209026039">"មិនអាចហៅបានទេ។ <xliff:g id="NON_EMERGENCY_NUMBER">%s</xliff:g> មិនមានជាលេខអាសន្នទេ។"</string>
+    <string name="dial_emergency_empty_error" msgid="2785803395047793634">"មិនអាចហៅបានទេ។ ចុចហៅលេខអាសន្ន។"</string>
+    <string name="dial_emergency_calling_not_available" msgid="6485846193794727823">"មិន​អាច​ហៅ​បន្ទាន់​បាន​ទេ"</string>
+    <string name="pin_puk_system_user_only" msgid="1045147220686867922">"មាន​តែ​ម្ចាស់​ឧបករណ៍​ប៉ុណ្ណោះ ដែល​អាច​បញ្ចូល​កូដ PIN/PUK បាន។"</string>
+    <string name="police_type_description" msgid="2819533883972081757">"ប៉ូលិស"</string>
+    <string name="ambulance_type_description" msgid="6798237503553180461">"រថយន្ត​សង្គ្រោះ​បន្ទាន់"</string>
+    <string name="fire_type_description" msgid="6565200468934914930">"អគ្គិភ័យ"</string>
+    <string name="description_concat_format" msgid="2014471565101724088">"%1$s, %2$s"</string>
+    <string name="dialerKeyboardHintText" msgid="1115266533703764049">"ប្រើ​​ក្ដារចុច​ដើម្បី​ចុច​លេខ"</string>
+    <string name="onscreenHoldText" msgid="4025348842151665191">"ដាក់ឱ្យរង់ចាំ"</string>
+    <string name="onscreenEndCallText" msgid="6138725377654842757">"បញ្ចប់"</string>
+    <string name="onscreenShowDialpadText" msgid="658465753816164079">"ផ្ទាំងចុចលេខ"</string>
+    <string name="onscreenMuteText" msgid="5470306116733843621">"ស្ងាត់"</string>
+    <string name="onscreenAddCallText" msgid="9075675082903611677">"បន្ថែម​ការ​ហៅ"</string>
+    <string name="onscreenMergeCallsText" msgid="3692389519611225407">"បញ្ចូល​ការ​ហៅ​រួម​​គ្នា"</string>
+    <string name="onscreenSwapCallsText" msgid="2682542150803377991">"ប្ដូរ"</string>
+    <string name="onscreenManageCallsText" msgid="1162047856081836469">"គ្រប់គ្រង​ការ​ហៅ"</string>
+    <string name="onscreenManageConferenceText" msgid="4700574060601755137">"គ្រប់គ្រង​សន្និសីទ"</string>
+    <string name="onscreenAudioText" msgid="7224226735052019986">"សំឡេង"</string>
+    <string name="onscreenVideoCallText" msgid="1743992456126258698">"ហៅ​ជា​វីដេអូ"</string>
+    <string name="importSimEntry" msgid="3892354284082689894">"នាំចូល"</string>
+    <string name="importAllSimEntries" msgid="2628391505643564007">"នាំចូល​ទាំងអស់"</string>
+    <string name="importingSimContacts" msgid="4995457122107888932">"នាំចូល​ទំនាក់ទំនង​ស៊ីមកាត"</string>
+    <string name="importToFDNfromContacts" msgid="5068664870738407341">"នាំចូល​ពី​ទំនាក់ទំនង"</string>
+    <string name="singleContactImportedMsg" msgid="3619804066300998934">"បាននាំចូលទំនាក់ទំនង"</string>
+    <string name="failedToImportSingleContactMsg" msgid="228095510489830266">"បានបរាជ័យក្នុងការនាំចូលទំនាក់ទំនង"</string>
+    <string name="hac_mode_title" msgid="4127986689621125468">"ឧបករណ៍​ជំនួយការ​ស្ដាប់"</string>
+    <string name="hac_mode_summary" msgid="7774989500136009881">"បើក​មុខងារដែលត្រូវគ្នានឹងឧបករណ៍​ជំនួយ​ការ​ស្ដាប់"</string>
+    <string name="rtt_mode_title" msgid="3075948111362818043">"ការហៅ​តាម​សារ​ជា​អក្សរ​ក្នុង​ពេល​ជាក់ស្ដែង"</string>
+    <string name="rtt_mode_summary" msgid="8631541375609989562">"អនុញ្ញាត​ការផ្ញើសារ​នៅ​ក្នុង​ការហៅ​ជា​សំឡេង"</string>
+    <string name="rtt_mode_more_information" msgid="587500128658756318">"RTT ជួយ​អ្នក​ហៅ​ទូរសព្ទ​ដែល​​ថ្លង់ ពិបាក​ក្នុង​ការស្ដាប់ មិន​អាច​និយាយ​បាន ឬ​​មាន​តម្រូវការ​ក្រៅ​ពី​សំឡេង។&lt;br&gt; &lt;a href=<xliff:g id="URL">http://support.google.com/mobile?p=telephony_rtt</xliff:g>&gt;ស្វែងយល់​បន្ថែម&lt;/a&gt;\n       &lt;br&gt;&lt;br&gt; - ការហៅ​ទូរសព្ទតាម RTT ត្រូវ​បាន​រក្សាទុក​ជា​ប្រតិចារឹក​សារ\n       &lt;br&gt; - RTT មិន​មានសម្រាប់ការហៅ​ជា​វីដេអូ​​ទេ"</string>
+    <string name="no_rtt_when_roaming" msgid="5268008247378355389">"ចំណាំ៖ RTT មិន​អាច​ប្រើ​បាន​ទេ ពេល​រ៉ូមីង"</string>
+  <string-array name="tty_mode_entries">
+    <item msgid="3238070884803849303">"បិទ TTY"</item>
+    <item msgid="1449091874731375214">"TTY ពេញ"</item>
+    <item msgid="1044179293199519425">"TTY HCO"</item>
+    <item msgid="2131559553795606483">"TTY VCO"</item>
+  </string-array>
+    <string name="dtmf_tones_title" msgid="7874845461117175236">"សំឡេង DTMF"</string>
+    <string name="dtmf_tones_summary" msgid="2294822239899471201">"កំណត់​រយៈ​​ពេល​រោទ៍ DTMF"</string>
+  <string-array name="dtmf_tone_entries">
+    <item msgid="2271798469250155310">"ធម្មតា"</item>
+    <item msgid="6044210222666533564">"វែង"</item>
+  </string-array>
+    <string name="network_info_message" msgid="7599413947016532355">"សារ​បណ្ដាញ"</string>
+    <string name="network_error_message" msgid="4271579424089326618">"សារកំហុស"</string>
+    <string name="ota_title_activate" msgid="4049645324841263423">"បាន​ធ្វើ​ឲ្យ​ទូរស័ព្ទ​របស់​អ្នក​សកម្ម"</string>
+    <string name="ota_touch_activate" msgid="838764494319694754">"ការ​ហៅ​ពិសេស​ចាំបាច់​ធ្វើ​ឲ្យ​សេវា​ទូរស័ព្ទ​របស់​អ្នក​សកម្ម។ \n\n បន្ទាប់​ពី​ចុច​ “ធ្វើ​ឲ្យ​សកម្ម”  ស្ដាប់​សេចក្ដី​ណែនាំ​ដែល​បាន​ផ្ដល់​​ដើម្បី​ធ្វើ​ឲ្យ​ទូរស័ព្ទ​របស់​អ្នក​សកម្ម។"</string>
+    <string name="ota_hfa_activation_title" msgid="3300556778212729671">"កំពុង​ធ្វើ​ឲ្យ​សកម្ម..."</string>
+    <string name="ota_hfa_activation_dialog_message" msgid="7921718445773342996">"ទូរស័ព្ទ​នេះ​កំពុង​ធ្វើឲ្យ​សេវាកម្ម​ទិន្នន័យ​ចល័ត​របស់​អ្នក​សកម្ម​។ \n \n វា​អាច​ប្រើ​ពេល​ប្រហែល ៥នាទី​។"</string>
+    <string name="ota_skip_activation_dialog_title" msgid="7666611236789203797">"រំលង​ការ​ធ្វើ​ឲ្យ​សកម្ម​?"</string>
+    <string name="ota_skip_activation_dialog_message" msgid="6691722887019708713">"ប្រសិនបើ​អ្នក​រំលង​ការ​ធ្វើ​ឲ្យ​សកម្ម អ្នក​មិន​អាច​កំណត់​ការ​ហៅ ឬ​តភ្ជាប់​បណ្ដាញ​​ទិន្នន័យ​ឧបករណ៍​​ចល័ត​បាន​ទេ (អ្នក​អាច​តភ្ជាប់​តាម​បណ្ដាញ​​វ៉ាយហ្វាយ )។ លុះត្រាតែ​​​អ្នកធ្វើ​ឲ្យ​ទូរស័ព្ទ​របស់​អ្នក​សកម្ម អ្នក​ត្រូវ​បាន​ស្នើ​ធ្វើ​ឲ្យ​វា​សកម្ម​នៅ​ពេល​ដែល​អ្នក​បិទ​វា។"</string>
+    <string name="ota_skip_activation_dialog_skip_label" msgid="5908029466817825633">"រំលង"</string>
+    <string name="ota_activate" msgid="7939695753665438357">"ធ្វើ​ឲ្យ​សកម្ម​"</string>
+    <string name="ota_title_activate_success" msgid="1272135024761004889">"បាន​ធ្វើ​ឲ្យ​ទូរស័ព្ទ​សកម្ម។"</string>
+    <string name="ota_title_problem_with_activation" msgid="7019745985413368726">"មាន​បញ្ហា​ជាមួយ​នឹង​ការ​ធ្វើ​ឲ្យ​​សកម្ម"</string>
+    <string name="ota_listen" msgid="2772252405488894280">"​អនុវត្ត​តាម​សេចក្ដី​ណែនាំ​ដែល​បាន​​និយាយ​រហូត​ដល់​លោកអ្នក​ស្ដាប់​​ឮ​ហើយ​ធ្វើ​ឲ្យ​សកម្ម​​ពេញលេញ​។"</string>
+    <string name="ota_speaker" msgid="1086766980329820528">"អូប៉ាល័រ"</string>
+    <string name="ota_progress" msgid="8837259285255700132">"កំពុងសរសេរកម្មវិធីទូរស័ព្ទររបស់អ្នក…"</string>
+    <string name="ota_failure" msgid="5674217489921481576">"មិនអាចសរសេរកម្មវិធីទូរស័ព្ទរបស់អ្នកទេ"</string>
+    <string name="ota_successful" msgid="1106825981548107774">"បាន​ធ្វើ​ឲ្យ​​​​ទូរស័ព្ទ​របស់​អ្នក​សកម្ម​​ឥឡូវ​នេះ វា​អាច​ចំណាយ​ពេល​ ១៥ នាទី ដើម្បី​ចាប់ផ្ដើម​សេវា។"</string>
+    <string name="ota_unsuccessful" msgid="8531037653803955754">"មិន​បាន​ធ្វើ​ឲ្យ​ទូរស័ព្ទ​របស់​អ្នក​​សកម្ម។ \n អ្នក​ត្រូវ​ស្វែងរក​តំបន់​សេវា​​ដែល​ល្អ​ជាង​នេះ (ជិត​បង្អួច ឬ​ខាងក្រៅ)។ \n\n ព្យាយាម​ម្ដងទៀត ឬ​ហៅ​ទៅ​កាន់​សេវា​បម្រើ​អតិថិជន​សម្រាប់​ជម្រើស​ជា​ច្រើន​ទៀត។"</string>
+    <string name="ota_spc_failure" msgid="904092035241370080">"ការ​បរាជ័យ SPC លើស"</string>
+    <string name="ota_call_end" msgid="8657746378290737034">"ថយក្រោយ"</string>
+    <string name="ota_try_again" msgid="6914781945599998550">"ព្យាយាម​ម្ដង​ទៀត"</string>
+    <string name="ota_next" msgid="2041016619313475914">"បន្ទាប់​"</string>
+    <string name="ecm_exit_dialog" msgid="4200691880721429078">"EcmExitDialog"</string>
+    <string name="phone_entered_ecm_text" msgid="8431238297843035842">"បាន​បញ្ចូល​របៀប​ការ​ហៅ​ទៅ​វិញ​ពេល​មាន​អាសន្ន"</string>
+    <string name="phone_in_ecm_notification_title" msgid="6825016389926367946">"របៀប​ហៅ​ទៅ​វិញ​ពេល​មាន​អាសន្ន"</string>
+    <string name="phone_in_ecm_call_notification_text" msgid="653972232922670335">"បាន​បិទ​ការ​តភ្ជាប់​ទិន្នន័យ"</string>
+    <string name="phone_in_ecm_notification_complete_time" msgid="7341624337163082759">"មិន​មាន​ការតភ្ជាប់​ទិន្នន័យ រហូតដល់ម៉ោង <xliff:g id="COMPLETETIME">%s</xliff:g>"</string>
+    <plurals name="alert_dialog_exit_ecm" formatted="false" msgid="5425906903766466743">
+      <item quantity="other">ទូរស័ព្ទនេះនឹងស្ថិតក្នុងរបៀប ហៅត្រលប់ពេលអាសន្ន រយៈពេល <xliff:g id="COUNT_1">%s</xliff:g> នាទី។ ខណៈពេលស្ថិតក្នុងរបៀបនេះ មិនមានកម្មវិធីដែលប្រើការភ្ជាប់ទិន្នន័យណា អាចប្រើបានបានឡើយ។ តើអ្នកចង់ចាកចេញឥឡូវនេះទេ?</item>
+      <item quantity="one">ទូរស័ព្ទនេះនឹងស្ថិតក្នុងរបៀប ហៅត្រលប់ពេលអាសន្ន រយៈពេល <xliff:g id="COUNT_0">%s</xliff:g> នាទី។ ខណៈពេលស្ថិតក្នុងរបៀបនេះ មិនមានកម្មវិធីដែលប្រើការភ្ជាប់ទិន្នន័យណា អាចប្រើបានបានឡើយ។ តើអ្នកចង់ចាកចេញឥឡូវនេះទេ?</item>
+    </plurals>
+    <plurals name="alert_dialog_not_avaialble_in_ecm" formatted="false" msgid="1152682528741457004">
+      <item quantity="other">សកម្មភាពដែលបានជ្រើសមិនមានទេ ខណៈពេលដែលស្ថិតក្នុងរបៀប ហៅត្រលប់ពេលអាសន្ន។ ទូរស័ព្ទនេះនឹងស្ថិតក្នុងរបៀបនេះរយៈពេល <xliff:g id="COUNT_1">%s</xliff:g> នាទី។ តើអ្នកចង់ចាកចេញឥឡូវនេះទេ?</item>
+      <item quantity="one">សកម្មភាពដែលបានជ្រើសមិនមានទេ ខណៈពេលដែលស្ថិតក្នុងរបៀប ហៅត្រលប់ពេលអាសន្ន។ ទូរស័ព្ទនេះនឹងស្ថិតក្នុងរបៀបនេះរយៈពេល <xliff:g id="COUNT_0">%s</xliff:g> នាទី។ តើអ្នកចង់ចាកចេញឥឡូវនេះទេ?</item>
+    </plurals>
+    <string name="alert_dialog_in_ecm_call" msgid="1207545603149771978">"សកម្មភាព​ដែល​បាន​ជ្រើស​គឺ​មិន​អាច​រក​បាន​នៅ​ក្នុង​ខណៈ​ពេល​ដែល​ការ​ហៅ​អាសន្ន​មួយ​។"</string>
+    <string name="progress_dialog_exiting_ecm" msgid="9159080081676927217">"ចេញ​ពី​របៀប​ហៅ​ទៅ​វិញ​​​ពេល​មាន​អាសន្ន"</string>
+    <string name="alert_dialog_yes" msgid="3532525979632841417">"បាទ/ចាស"</string>
+    <string name="alert_dialog_no" msgid="1075632654085988420">"ទេ"</string>
+    <string name="alert_dialog_dismiss" msgid="1336356286354517054">"បោះបង់"</string>
+    <string name="phone_in_ecm_call_notification_text_without_data_restriction_hint" msgid="3747860785153531225">"ទូរសព្ទ​ស្ថិត​ក្នុង​មុខងារ​ហៅ​ទៅ​វិញ​ពេល​មាន​អាសន្ន"</string>
+    <string name="phone_in_ecm_notification_complete_time_without_data_restriction_hint" msgid="3690292264812050858">"រហូត​ដល់​ម៉ោង <xliff:g id="COMPLETETIME">%s</xliff:g>"</string>
+    <plurals name="alert_dialog_exit_ecm_without_data_restriction_hint" formatted="false" msgid="6477733043040328640">
+      <item quantity="other">ទូរសព្ទ​នឹង​ស្ថិត​ក្នុង​មុខងារ​ហៅ​ទៅ​វិញ​ពេល​មាន​អាសន្ន​រយៈ​ពេល <xliff:g id="COUNT_1">%s</xliff:g> នាទី។\nតើ​អ្នក​ចង់​ចេញ​ឥឡូវ​នេះ​ដែរ​ឬ​ទេ?</item>
+      <item quantity="one">ទូរសព្ទ​នឹង​ស្ថិត​ក្នុង​មុខងារ​ហៅ​ទៅ​វិញ​ពេល​មាន​អាសន្ន​រយៈ​ពេល <xliff:g id="COUNT_0">%s</xliff:g> នាទី។\nតើ​អ្នក​ចង់​ចេញ​ឥឡូវ​នេះ​ដែរ​ឬ​ទេ?</item>
+    </plurals>
+    <string name="voicemail_provider" msgid="4158806657253745294">"សេវា"</string>
+    <string name="voicemail_settings" msgid="4451045613238972776">"រៀបចំ"</string>
+    <string name="voicemail_number_not_set" msgid="8831561283386938155">"&lt; មិន​កំណត់ &gt;"</string>
+    <string name="other_settings" msgid="8895088007393598447">"​កំណត់​ការ​​ហៅ​ផ្សេងទៀត"</string>
+    <string name="calling_via_template" msgid="1791323450703751750">"ការ​ហៅ​តាម​រយៈ <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="contactPhoto" msgid="7885089213135154834">"រូបថត​​ទំនាក់ទំនង"</string>
+    <string name="goPrivate" msgid="4645108311382209551">"ទៅ​កាន់​ឯកជន"</string>
+    <string name="selectContact" msgid="1527612842599767382">"ជ្រើស​ទំនាក់ទំនង"</string>
+    <string name="not_voice_capable" msgid="2819996734252084253">"មិន​គាំទ្រ​ការ​ហៅ​ជា​សំឡេង"</string>
+    <string name="description_dial_button" msgid="8614631902795087259">"ចុច"</string>
+    <string name="description_dialpad_button" msgid="7395114120463883623">"បង្ហាញ​បន្ទះ​លេខ"</string>
+    <string name="pane_title_emergency_dialpad" msgid="3627372514638694401">"បន្ទះ​លេខ​​សង្គ្រោះបន្ទាន់"</string>
+    <string name="voicemail_visual_voicemail_switch_title" msgid="6610414098912832120">"សារជាសំឡេងអាចមើលឃើញ"</string>
+    <string name="voicemail_set_pin_dialog_title" msgid="7005128605986960003">"កំណត់លេខកូដ PIN"</string>
+    <string name="voicemail_change_pin_dialog_title" msgid="4633077715231764435">"ប្ដូរ​​លេខ​កូដ PIN"</string>
+    <string name="preference_category_ringtone" msgid="8787281191375434976">"សំឡេង​រោទ៍ &amp; ញ័រ"</string>
+    <string name="pstn_connection_service_label" msgid="9200102709997537069">"ស៊ីមកាត​ជាប់​ជា​មួយ"</string>
+    <string name="enable_video_calling_title" msgid="7246600931634161830">"បើក​ការ​ហៅ​ជា​វីដេអូ"</string>
+    <string name="enable_video_calling_dialog_msg" msgid="7141478720386203540">"ដើម្បីបើកការហៅវីដេអូ អ្នកត្រូវបើកដំណើរការរបៀប 4G LTE នៅក្នុងការកំណត់បណ្តាញ។"</string>
+    <string name="enable_video_calling_dialog_settings" msgid="8697890611305307110">"ការកំណត់​បណ្ដាញ"</string>
+    <string name="enable_video_calling_dialog_close" msgid="4298929725917045270">"បិទ"</string>
+    <string name="sim_label_emergency_calls" msgid="9078241989421522310">"ការហៅពេលអាសន្ន"</string>
+    <string name="sim_description_emergency_calls" msgid="5146872803938897296">"សម្រាប់ការហៅពេលអាសន្នប៉ុណ្ណោះ"</string>
+    <string name="sim_description_default" msgid="7474671114363724971">"ស៊ីមកាត រន្ធ៖ <xliff:g id="SLOT_ID">%s</xliff:g>"</string>
+    <string name="accessibility_settings_activity_title" msgid="7883415189273700298">"ភាពងាយស្រួល"</string>
+    <string name="status_hint_label_incoming_wifi_call" msgid="2606052595898044071">"ការហៅតាម Wi-Fi ពី"</string>
+    <string name="status_hint_label_wifi_call" msgid="942993035689809853">"ហៅតាម Wi-Fi"</string>
+    <string name="emergency_action_launch_hint" msgid="2762016865340891314">"ប៉ះម្ដងទៀតដើម្បីបើក"</string>
+    <string name="message_decode_error" msgid="1061856591500290887">"មានកំហុសខណៈពេលឌិកូដសារ។"</string>
+    <string name="callFailed_cdma_activation" msgid="5392057031552253550">"ស៊ីមកាតបានធ្វើឲ្យសេវាកម្មរបស់អ្នកសកម្ម និងបានធ្វើបច្ចុប្បន្នភាពសមត្ថភាពរ៉ូមីងសម្រាប់ទូរស័ព្ទរបស់អ្នក។"</string>
+    <string name="callFailed_cdma_call_limit" msgid="1074219746093031412">"មាន​ការ​ហៅ​ដែល​សកម្ម​ច្រើន​ពេក។ សូម​បញ្ចប់ ឬ​​ដាក់​​បញ្ចូល​គ្នា​ការ​ហៅ​ដែល​មាន​ស្រាប់​​មុន​ពេល​ដាក់​ការ​ហៅ​ថ្មី។"</string>
+    <string name="callFailed_imei_not_accepted" msgid="7257903653685147251">"មិន​អាច​តភ្ជាប់​បាន​ទេ សូម​បញ្ចូល​ស៊ីម​កាត​​ដែល​ប្រើ​បាន។"</string>
+    <string name="callFailed_wifi_lost" msgid="1788036730589163141">"បាត់ការភ្ជាប់ Wi-Fi។ បានបញ្ចប់ការហៅទូរស័ព្ទ។"</string>
+    <string name="dialFailed_low_battery" msgid="6857904237423407056">"ការហៅ​ជា​វីដេអូ​របស់​អ្នក​មិន​អាច​ធ្វើ​បាន​ទេ ដោយ​សារ​ខ្សោយ​ថ្ម។"</string>
+    <string name="callFailed_low_battery" msgid="4056828320214416182">"ការហៅ​ជា​វីដេអូ​ត្រូវ​បាន​បញ្ចប់​ ដោយ​សារ​ខ្សោយ​ថ្ម។"</string>
+    <string name="callFailed_emergency_call_over_wfc_not_available" msgid="5944309590693432042">"មិន​អាច​ធ្វើ​ការហៅ​ទៅ​លេខ​សង្គ្រោះ​បន្ទាន់​ដោយ​ប្រើ​ការហៅ​តាម Wi-Fi នៅ​ទីតាំង​នេះ​បាន​ទេ។"</string>
+    <string name="callFailed_wfc_service_not_available_in_this_location" msgid="3624536608369524988">"មិន​អាច​ប្រើ​ការហៅ​តាម Wi-Fi នៅ​ទីតាំង​នេះ​បាន​ទេ។"</string>
+    <string name="change_pin_title" msgid="3564254326626797321">"ប្ដូរ​លេខ​កូដ PIN ជា​​សារ​សំឡេង"</string>
+    <string name="change_pin_continue_label" msgid="5177011752453506371">"បន្ត"</string>
+    <string name="change_pin_cancel_label" msgid="2301711566758827936">"បោះបង់"</string>
+    <string name="change_pin_ok_label" msgid="6861082678817785330">"យល់ព្រម"</string>
+    <string name="change_pin_enter_old_pin_header" msgid="853151335217594829">"បញ្ជាក់​លេខ​កូដ PIN ចាស់​របស់​អ្នក"</string>
+    <string name="change_pin_enter_old_pin_hint" msgid="8801292976275169367">"បញ្ចូល​លេខ​កូដ PIN ជា​សារ​សំឡេង​របស់​អ្នក​​ដើម្បី​បន្ត។"</string>
+    <string name="change_pin_enter_new_pin_header" msgid="4739465616733486118">"កំណត់​លេខ​កូដ PIN ថ្មី"</string>
+    <string name="change_pin_enter_new_pin_hint" msgid="2326038476516364210">"PIN ត្រូវតែ​មាន​ <xliff:g id="MIN">%1$d</xliff:g>-<xliff:g id="MAX">%2$d</xliff:g> ខ្ទង់។"</string>
+    <string name="change_pin_confirm_pin_header" msgid="2606303906320705726">"បញ្ជាក់លេខ​កូដ PIN របស់​អ្នក"</string>
+    <string name="change_pin_confirm_pins_dont_match" msgid="305164501222587215">"លេខ​កូដ PIN មិន​ត្រូវគ្នា"</string>
+    <string name="change_pin_succeeded" msgid="2504705600693014403">"បាន​ធ្វើ​បច្ចុប្បន្នភាព​​លេខ​កូដ PIN ជា​សារ​សំលេង"</string>
+    <string name="change_pin_system_error" msgid="7772788809875146873">"មិន​អាច​កំណត់​លេខ​កូដ PIN"</string>
+    <string name="mobile_data_status_roaming_turned_off_subtext" msgid="6840673347416227054">"ការប្រើប្រាស់​​រ៉ូមីង​ទិន្នន័យ​ត្រូវបាន​បិទ"</string>
+    <string name="mobile_data_status_roaming_turned_on_subtext" msgid="5615757897768777865">"ការ​ប្រើប្រាស់​រ៉ូមីង​ទិន្នន័យ​ត្រូវបាន​បើក"</string>
+    <string name="mobile_data_status_roaming_without_plan_subtext" msgid="6536671968072284677">"កំពុងប្រើប្រាស់​​រ៉ូមីង​បច្ចុប្បន្ន ត្រូវការ​គម្រោង​ទិន្នន័យ"</string>
+    <string name="mobile_data_status_roaming_with_plan_subtext" msgid="2576177169108123095">"កំពុងប្រើប្រាស់​​រ៉ូមីង​បច្ចុប្បន្ន គម្រោង​ទិន្នន័យ​កំពុង​ដំណើរការ"</string>
+    <string name="mobile_data_status_no_plan_subtext" msgid="170331026419263657">"មិន​មាន​ទិន្នន័យ​ទូរសព្ទ​នៅ​សល់​ទេ"</string>
+    <string name="mobile_data_activate_prepaid" msgid="4276738964416795596">"មិន​មាន​ទិន្នន័យ​ទូរសព្ទ​នៅ​សល់​ទេ"</string>
+    <string name="mobile_data_activate_prepaid_summary" msgid="6846085278531605925">"បញ្ចូល​ទិន្នន័យ​ទូរសព្ទ​តាមរយៈ <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="mobile_data_activate_roaming_plan" msgid="922290995866269366">"មិន​មាន​គម្រោង​រ៉ូមីង​ទេ"</string>
+    <string name="mobile_data_activate_roaming_plan_summary" msgid="5379228493306235969">"បញ្ចូល​គម្រោង​រ៉ូមីង​តាមរយៈ <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="mobile_data_activate_footer" msgid="7895874069807204548">"អ្នក​អាច​បញ្ចូល​ទិន្នន័យ​ទូរសព្ទ ឬ​គម្រោង​រ៉ូមីង​តាមរយៈ​​ក្រុមហ៊ុន​បម្រើ​សេវា​ទូរសព្ទ​របស់​អ្នក <xliff:g id="PROVIDER_NAME">%s</xliff:g> ។"</string>
+    <string name="mobile_data_activate_diag_title" msgid="5401741936224757312">"បញ្ចូល​ទិន្នន័យ​?"</string>
+    <string name="mobile_data_activate_diag_message" msgid="3527260988020415441">"អ្នក​ប្រហែល​ត្រូវ​បញ្ចូល​ទិន្នន័យ​តាម <xliff:g id="PROVIDER_NAME">%s</xliff:g>"</string>
+    <string name="mobile_data_activate_button" msgid="1139792516354374612">"បញ្ចូល​ទិន្នន័យ"</string>
+    <string name="mobile_data_activate_cancel_button" msgid="3530174817572005860">"បោះបង់"</string>
+    <string name="clh_card_title_call_ended_txt" msgid="5977978317527299698">"បាន​បញ្ចប់​ការ​ហៅ"</string>
+    <string name="clh_callFailed_powerOff_txt" msgid="8279934912560765361">"មុខងារ​ពេល​ជិះ​យន្តហោះ​បើក"</string>
+    <string name="clh_callFailed_simError_txt" msgid="5128538525762326413">"មិន​អាច​ចូល​ប្រើប្រាស់​ស៊ីម​កាត​បាន​ទេ"</string>
+    <string name="clh_incall_error_out_of_service_txt" msgid="2736010617446749869">"មិនមានបណ្ដាញ​ទូរសព្ទចល័ត​"</string>
+    <string name="clh_callFailed_unassigned_number_txt" msgid="141967660286695682">"មាន​បញ្ហា​ជាមួយ​លេខ​ទូរសព្ទ​ដែល​អ្នក​កំពុង​ព្យាយាម​ចុច​ហៅ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 1។"</string>
+    <string name="clh_callFailed_no_route_to_destination_txt" msgid="4805015149822352308">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 3។"</string>
+    <string name="clh_callFailed_channel_unacceptable_txt" msgid="4062754579408613021">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 6។"</string>
+    <string name="clh_callFailed_operator_determined_barring_txt" msgid="4202077821465974286">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 8។"</string>
+    <string name="clh_callFailed_normal_call_clearing_txt" msgid="5677987959062976462">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 16។"</string>
+    <string name="clh_callFailed_user_busy_txt" msgid="8886432858568086854">"អ្នក​ប្រើប្រាស់​រវល់"</string>
+    <string name="clh_callFailed_no_user_responding_txt" msgid="341100226919865128">"អ្នក​ប្រើប្រាស់​មិន​ឆ្លើយតប"</string>
+    <string name="clh_callFailed_user_alerting_txt" msgid="896082976264427969">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 19។"</string>
+    <string name="clh_callFailed_call_rejected_txt" msgid="3439435671153341709">"បាន​ច្រាន​ចោល​ការហៅ"</string>
+    <string name="clh_callFailed_number_changed_txt" msgid="2868476949771441667">"បាន​ប្ដូរ​លេខ"</string>
+    <string name="clh_callFailed_pre_emption_txt" msgid="8887998866342162724">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 25។"</string>
+    <string name="clh_callFailed_non_selected_user_clearing_txt" msgid="4804529874810197550">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 26។"</string>
+    <string name="clh_callFailed_destination_out_of_order_txt" msgid="1130697076352728824">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 27។"</string>
+    <string name="clh_callFailed_invalid_number_format_txt" msgid="3171016382987224989">"ទ្រង់ទ្រាយ​លេខ​មិន​ត្រឹមត្រូវ (លេខ​មិន​ពេញលេញ)"</string>
+    <string name="clh_callFailed_facility_rejected_txt" msgid="1054386430010898993">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 29។"</string>
+    <string name="clh_callFailed_response_to_STATUS_ENQUIRY_txt" msgid="2763172551412307536">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 30។"</string>
+    <string name="clh_callFailed_normal_unspecified_txt" msgid="978119938935737419">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 31។"</string>
+    <string name="clh_callFailed_no_circuit_available_txt" msgid="1519684050419134605">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 34។"</string>
+    <string name="clh_callFailed_network_out_of_order_txt" msgid="8689826504394592289">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 38។"</string>
+    <string name="clh_callFailed_temporary_failure_txt" msgid="5065091554509067874">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 41។"</string>
+    <string name="clh_callFailed_switching_equipment_congestion_txt" msgid="8681599376741988769">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 42។"</string>
+    <string name="clh_callFailed_access_information_discarded_txt" msgid="2476199425130545428">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 43។"</string>
+    <string name="clh_callFailed_requested_circuit_txt" msgid="7497497808928490219">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 44។"</string>
+    <string name="clh_callFailed_resources_unavailable_unspecified_txt" msgid="144010529672928445">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 47។"</string>
+    <string name="clh_callFailed_quality_of_service_unavailable_txt" msgid="4650329342288289290">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 49។"</string>
+    <string name="clh_callFailed_requested_facility_not_subscribed_txt" msgid="9107977008516882170">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 50។"</string>
+    <string name="clh_callFailed_incoming_calls_barred_within_the_CUG_txt" msgid="501037491908315591">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 55។"</string>
+    <string name="clh_callFailed_bearer_capability_not_authorized_txt" msgid="4344366517528362620">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 57។"</string>
+    <string name="clh_callFailed_bearer_capability_not_presently_available_txt" msgid="1436957294571545381">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 58។"</string>
+    <string name="clh_callFailed_service_or_option_not_available_unspecified_txt" msgid="2149878874722675428">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 63។"</string>
+    <string name="clh_callFailed_bearer_service_not_implemented_txt" msgid="1074983013965612410">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 65។"</string>
+    <string name="clh_callFailed_ACM_equal_to_or_greater_than_ACMmax_txt" msgid="7889034195264205333">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 68។"</string>
+    <string name="clh_callFailed_requested_facility_not_implemented_txt" msgid="7996646684699167978">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 69។"</string>
+    <string name="clh_callFailed_only_restricted_digital_information_bearer_capability_is_available_txt" msgid="2358958110447385682">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 70។"</string>
+    <string name="clh_callFailed_service_or_option_not_implemented_unspecified_txt" msgid="3046428509531159481">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 79។"</string>
+    <string name="clh_callFailed_invalid_transaction_identifier_value_txt" msgid="1727401871777396619">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 81។"</string>
+    <string name="clh_callFailed_user_not_member_of_CUG_txt" msgid="442282135105229307">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 87។"</string>
+    <string name="clh_callFailed_incompatible_destination_txt" msgid="5900394706344969020">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 88។"</string>
+    <string name="clh_callFailed_invalid_transit_network_selection_txt" msgid="6274621838349037741">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 91។"</string>
+    <string name="clh_callFailed_semantically_incorrect_message_txt" msgid="7000705190197981937">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 95។"</string>
+    <string name="clh_callFailed_invalid_mandatory_information_txt" msgid="3609204152671052123">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 96។"</string>
+    <string name="clh_callFailed_message_type_non_existent_or_not_implemented_txt" msgid="1552110431052032814">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 97។"</string>
+    <string name="clh_callFailed_message_type_not_compatible_with_protocol_state_txt" msgid="7717048934226300032">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 98។"</string>
+    <string name="clh_callFailed_information_element_non_existent_or_not_implemented_txt" msgid="8931396541061612169">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​គឺ 99។"</string>
+    <string name="clh_callFailed_conditional_IE_error_txt" msgid="4630685477888727741">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​ 100។"</string>
+    <string name="clh_callFailed_message_not_compatible_with_protocol_state_txt" msgid="3014075977395922947">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា 101។"</string>
+    <string name="clh_callFailed_recovery_on_timer_expiry_txt" msgid="5637581978978731672">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា 102។"</string>
+    <string name="clh_callFailed_protocol_Error_unspecified_txt" msgid="9203320572562697755">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា 111។"</string>
+    <string name="clh_callFailed_interworking_unspecified_txt" msgid="7969686413930847182">"មិន​អាចហៅទូរសព្ទបានទេ។ លេខ​កូដ​មាន​បញ្ហា​ 127។"</string>
+    <string name="labelCallBarring" msgid="4180377113052853173">"ការរារាំង​ការហៅ​ទូរសព្ទ"</string>
+    <string name="sum_call_barring_enabled" msgid="5184331188926370824">"បើក"</string>
+    <string name="sum_call_barring_disabled" msgid="5699448000600153096">"បិទ"</string>
+    <string name="call_barring_baoc" msgid="7400892586336429326">"ការហៅ​ចេញ​ទាំងអស់"</string>
+    <string name="call_barring_baoc_enabled" msgid="3131509193386668182">"បិទ​ការទប់ស្កាត់​ចំពោះ​ការហៅ​ចេញ​ទាំងអស់​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baoc_disabled" msgid="8534224684091141509">"ទប់ស្កាត់​ការហៅ​ចេញ​ទាំងអស់​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baoic" msgid="8668125428666851665">"ការហៅ​ចេញ​ក្រៅ​ប្រទេស"</string>
+    <string name="call_barring_baoic_enabled" msgid="1203758092657630123">"បិទ​ការទប់ស្កាត់​ការហៅ​ចេញ​ក្រៅ​ប្រទេស​ដែរ​ឬទេ?"</string>
+    <string name="call_barring_baoic_disabled" msgid="5656889339002997449">"ទប់ស្កាត់​ការហៅ​ចេញ​ក្រៅ​ប្រទេស​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baoicr" msgid="8566167764432343487">"រ៉ូមីង​ការហៅ​ចេញ​ក្រៅ​ប្រទេស"</string>
+    <string name="call_barring_baoicr_enabled" msgid="1615324165512798478">"បិទ​ការទប់ស្កាត់​​រ៉ូមីង​ការហៅ​ចេញ​ក្រៅ​ប្រទេស​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baoicr_disabled" msgid="172010175248142831">"ទប់ស្កាត់​រ៉ូមីង​ការហៅ​ចេញ​ក្រៅ​ប្រទេស​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baic" msgid="7941393541678658566">"ការហៅចូល​ទាំងអស់"</string>
+    <string name="call_barring_baic_enabled" msgid="4357332358020337470">"បិទ​ការទប់ស្កាត់​ការហៅ​ចូល​ទាំងអស់​​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baic_disabled" msgid="2355945245938240958">"ទប់​ស្កាត់​ការហៅ​ចូល​ទាំងអស់​ដែរ​ឬ​ទេ?"</string>
+    <string name="call_barring_baicr" msgid="8712249337313034226">"រ៉ូមីងការហៅ​ចូលក្រៅប្រទេស"</string>
+    <string name="call_barring_baicr_enabled" msgid="64774270234828175">"បិទ​ការទប់ស្កាត់​​រ៉ូមីង​ការហៅ​ចូល​ក្រៅប្រទេសទាំងអស់​ដែរ​​ទេ?"</string>
+    <string name="call_barring_baicr_disabled" msgid="3488129262744027262">"ទប់ស្កាត់​រ៉ូមីង​ការហៅចូលក្រៅប្រទេសដែរ​ទេ?"</string>
+    <string name="call_barring_deactivate_all" msgid="7837931580047157328">"បិទ​ដំណើរការ​ទាំងអស់"</string>
+    <string name="call_barring_deactivate_all_description" msgid="4474119585042121604">"បិទ​ដំណើរការនៃ​ការកំណត់​ការរារាំង​ការហៅ​ទូរសព្ទទាំងអស់"</string>
+    <string name="call_barring_deactivate_success" msgid="3545644320298275337">"បាន​បិទ​ដំណើរការ​នៃការរារាំង​​ការហៅ​ទូរសព្ទ"</string>
+    <string name="call_barring_change_pwd" msgid="1730691950940338387">"ប្ដូរ​ពាក្យ​សម្ងាត់"</string>
+    <string name="call_barring_change_pwd_description" msgid="1274245130382054227">"ប្ដូរ​ពាក្យ​សម្ងាត់​រារាំង​ការហៅ"</string>
+    <string name="call_barring_change_pwd_description_disabled" msgid="2911647051915343920">"មិន​អាច​ប្ដូរ​ពាក្យ​សម្ងាត់​ដែល​រារាំង​ការហៅ​ទូរសព្ទ​បាន​ទេ"</string>
+    <string name="call_barring_pwd_not_match" msgid="7638198747579019826">"ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា"</string>
+    <string name="call_barring_right_pwd_number" msgid="3860630926460851330">"បញ្ចូល​ពាក្យ​សម្ងាត់​​​មាន 4 លេខ"</string>
+    <string name="call_barring_change_pwd_success" msgid="1837437691277936903">"បានប្តូរពាក្យសម្ងាត់"</string>
+    <string name="call_barring_old_pwd" msgid="5500085633281388281">"ពាក្យ​សម្ងាត់​ចាស់"</string>
+    <string name="call_barring_new_pwd" msgid="2515524903813227732">"ពាក្យសម្ងាត់ថ្មី"</string>
+    <string name="call_barring_confirm_pwd" msgid="7552526161616461858">"បញ្ជាក់ពាក្យសម្ងាត់"</string>
+    <string name="messageCallBarring" msgid="5537730400652466912">"បញ្ចូល​ពាក្យសម្ងាត់"</string>
+    <string name="call_barring_settings" msgid="4616607285790258919">"ការកំណត់​​ការរារាំង​ការហៅ​ទូរសព្ទ"</string>
+    <string name="callFailed_NetworkBusy" msgid="5437103975842913681">"បណ្ដាញ​កំពុង​រវល់។ សូម​ព្យាយាម​​ការ​ហៅ​ទូរសព្ទ​របស់​អ្នក​ម្ដង​ទៀត​នៅ​ពេល​ក្រោយ។"</string>
+    <string name="callFailed_NetworkCongested" msgid="6801283142342775380">"បណ្ដាញ​មាន​ការកក​ស្ទះ។ ទាក់ទង​ទៅ​ប្រតិបត្តិករ​ឧបករណ៍​ចល័ត​របស់​អ្នក​សម្រាប់​ជំនួយ។"</string>
+    <string name="supp_service_notification_call_deflected" msgid="4980942818105909813">"បាន​ហៅ​ទៅ​លេខ​ផ្សេង។"</string>
+    <string name="supp_service_notification_call_forwarded" msgid="7102930311735433088">"បាន​បញ្ជូនបន្តការហៅទូរសព្ទ។"</string>
+    <string name="supp_service_notification_call_waiting" msgid="4577403881609445324">"ការហៅ​កំពុង​រង់ចាំ។"</string>
+    <string name="supp_service_clir_suppression_rejected" msgid="6105737020194776121">"ការទប់ស្កាត់​លេខ​ត្រូវបាន​បដិសេធ។"</string>
+    <string name="supp_service_closed_user_group_call" msgid="2811636666505250689">"បាន​បិទ​ការហៅ​ជា​ក្រុម​របស់​អ្នក​ប្រើប្រាស់។"</string>
+    <string name="supp_service_incoming_calls_barred" msgid="2034627421274447674">"បាន​ទប់ស្កាត់​ការហៅ​ចូល។"</string>
+    <string name="supp_service_outgoing_calls_barred" msgid="5205725332394087112">"បាន​ទប់ស្កាត់​ការហៅ​ចេញ។"</string>
+    <string name="supp_service_call_forwarding_active" msgid="7910162960395132464">"កំពុង​ដំណើរការ​បញ្ជូន​បន្ត​ការហៅ។"</string>
+    <string name="supp_service_additional_call_forwarded" msgid="8772753260008398632">"បាន​បញ្ជូន​បន្ត​ការហៅ​បន្ថែម។"</string>
+    <string name="supp_service_additional_ect_connected" msgid="8525934162945220237">"ការ​ផ្ទេរ​ការហៅ​ដែល​ច្បាស់​ត្រូវបាន​បញ្ចប់។"</string>
+    <string name="supp_service_additional_ect_connecting" msgid="7046240728781222753">"ការផ្ទេរ​ការហៅ​ដែល​ច្បាស់​កំពុង​ដំណើរការ។"</string>
+    <string name="supp_service_call_on_hold" msgid="2836811319594503059">"ការ​ហៅ​កំពុង​រង់ចាំ។"</string>
+    <string name="supp_service_call_resumed" msgid="3786864005920743546">"បាន​បន្ត​ការ​ហៅ​ទូរសព្ទ។"</string>
+    <string name="supp_service_deflected_call" msgid="7565979024562921707">"ការហៅ​ត្រូវបាន​បញ្ជូន​ទៅ​លេខ​ផ្សេង។"</string>
+    <string name="supp_service_forwarded_call" msgid="6475776013771821457">"បាន​បញ្ជូនបន្តការហៅទូរសព្ទ។"</string>
+    <string name="supp_service_conference_call" msgid="4004193534408317148">"កំពុង​ចូលរួម​ការហៅ​ជា​ក្រុម។"</string>
+    <string name="supp_service_held_call_released" msgid="2847835124639112410">"ការហៅ​ដែល​បាន​រង់ចាំត្រូវបាន​ផ្ដាច់។"</string>
+    <string name="callFailed_otasp_provisioning_in_process" msgid="3345666183602879326">"មិន​អាច​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​បាន​ទេ ដោយសារ​​ឧបករណ៍​កំពុង​​ទទួល​សេវាកម្មនៅពេល​នេះ។"</string>
+    <string name="callFailed_already_dialing" msgid="7250591188960691086">"មិន​អាច​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​បាន​ទេ ដោយ​សារ​​មាន​គេ​​កំពុង​ហៅ​ទូរសព្ទ​ចេញ​រួច​ហើយ​។"</string>
+    <string name="callFailed_already_ringing" msgid="2376603543544289303">"មិន​អាច​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​បាន​ទេ ដោយសារ​​​មាន​ការ​ហៅ​ទូរសព្ទ​ចូល​​មួយ​មិន​បាន​ឆ្លើយ។ ឆ្លើយតប ឬ​បដិសេធ​ការ​ហៅ​ទូរសព្ទចូល​ មុន​ពេល​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​ថ្មី​មួយ​ទៀត។"</string>
+    <string name="callFailed_calling_disabled" msgid="5010992739401206283">"មិន​អាច​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​បាន​ទេ ដោយសារ​មាន​​ការ​ហៅ​ទូរសព្ទ​​មួយ​ត្រូវ​បាន​បិទ​​តាមរយៈ​ការប្រើ​ប្រាស់​លក្ខណៈ​ប្រព័ន្ធ ro.telephony.disable-call ។"</string>
+    <string name="callFailed_too_many_calls" msgid="5379426826618582180">"មិន​អាច​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​បាន​​ទេ ដោយសារ​​មាន​ការ​ហៅ​ទូរសព្ទ​ពីរ​កំពុង​​ដំណើរការ​​រួច​ហើយ។ ផ្ដាច់​ការ​ហៅ​ទូរសព្ទ​មួយ ឬ​បញ្ចូល​ការ​ហៅ​ទូរសព្ទ​ទាំងពីរ​​ចូលគ្នា​​ជា​​ការ​ប្រជុំ​មួយ ​មុន​នឹង​ធ្វើ​ការ​ហៅ​ទូរសព្ទ​ថ្មី​មួយ។"</string>
+    <string name="supp_service_over_ut_precautions" msgid="2145018231396701311">"ដើម្បីប្រើប្រាស់ <xliff:g id="SUPP_SERVICE">%s</xliff:g> សូម​ប្រាកដថា​ទិន្នន័យ​ទូរសព្ទ​​ចល័ត​ត្រូវ​បាន​បើក។ អ្នក​អាចផ្លាស់​ប្ដូរ​​ជម្រើស​នេះ​នៅ​ក្នុង​ការ​កំណត់​បណ្ដាញ​​ទូរសព្ទ​ចល័ត។"</string>
+    <string name="supp_service_over_ut_precautions_roaming" msgid="670342104569972327">"ដើម្បី​ប្រើប្រាស់ <xliff:g id="SUPP_SERVICE">%s</xliff:g> សូម​ប្រាកដថា​ទិន្នន័យ​ទូរសព្ទ​​ចល័ត និង​ការ​រ៉ូមីង​ទិន្នន័យ​ត្រូវ​បាន​បើក។ អ្នក​អាច​ផ្លាស់ប្ដូរ​ជម្រើស​ទាំង​នេះ​នៅ​ក្នុង​ការ​កំណត់​បណ្ដាញ​​ទូរសព្ទ​ចល័ត។"</string>
+    <string name="supp_service_over_ut_precautions_dual_sim" msgid="5166866975550910474">"ដើម្បី​ប្រើប្រាស់ <xliff:g id="SUPP_SERVICE">%1$s</xliff:g> សូម​ប្រាកដថា​ទិន្នន័យទូរសព្ទ​​ចល័ត​ត្រូវ​បាន​បើក​សម្រាប់​ស៊ីម <xliff:g id="SIM_NUMBER">%2$d</xliff:g> ។ អ្នក​អាចផ្លាស់​ប្ដូរ​​ជម្រើស​នេះ​​នៅ​ក្នុង​ការ​កំណត់​បណ្ដាញ​​ទូរសព្ទ​ចល័ត។"</string>
+    <string name="supp_service_over_ut_precautions_roaming_dual_sim" msgid="6627654855191817965">"ដើម្បី​ប្រើប្រាស់ <xliff:g id="SUPP_SERVICE">%1$s</xliff:g> សូម​ប្រាកដថា​ទិន្នន័យ​ទូរសព្ទ​ចល័ត និង​ការ​រ៉ូមីង​ទិន្នន័យ​ត្រូវ​បាន​បើក​សម្រាប់​ស៊ីម <xliff:g id="SIM_NUMBER">%2$d</xliff:g> ។ អ្នក​អាចផ្លាស់​ប្ដូរ​​ជម្រើស​ទាំង​នេះ​នៅ​ក្នុង​ការ​កំណត់​បណ្ដាញ​​ទូរសព្ទ​ចល័ត។"</string>
+    <string name="supp_service_over_ut_precautions_dialog_dismiss" msgid="5934541487903081652">"បដិសេធ"</string>
+    <string name="radio_info_data_connection_enable" msgid="6183729739783252840">"បើក​ការតភ្ជាប់ទិន្នន័យ"</string>
+    <string name="radio_info_data_connection_disable" msgid="6404751291511368706">"បិទការតភ្ជាប់ទិន្នន័យ"</string>
+    <string name="volte_provisioned_switch_string" msgid="4812874990480336178">"បានផ្តល់ VoLTE"</string>
+    <string name="vt_provisioned_switch_string" msgid="8295542122512195979">"បានផ្តល់​ការហៅជាវីដេអូ"</string>
+    <string name="wfc_provisioned_switch_string" msgid="3835004640321078988">"បាន​ផ្តល់​ការហៅ​ទូរសព្ទ​តាម Wifi"</string>
+    <string name="eab_provisioned_switch_string" msgid="4449676720736033035">"បាន​ផ្តល់ជូន EAB/Presence"</string>
+    <string name="cbrs_data_switch_string" msgid="6060356430838077653">"ទិន្នន័យ Cbrs"</string>
+    <string name="dsds_switch_string" msgid="7564769822086764796">"បើក DSDS"</string>
+    <string name="dsds_dialog_title" msgid="8494569893941847575">"ចាប់ផ្តើមឧបករណ៍ឡើងវិញ​ឬ?"</string>
+    <string name="dsds_dialog_message" msgid="4047480385678538850">"អ្នក​ត្រូវ​ចាប់ផ្ដើម​ឧបករណ៍​របស់អ្នកឡើងវិញ ដើម្បី​ផ្លាស់ប្ដូរ​ការកំណត់​នេះ។"</string>
+    <string name="dsds_dialog_confirm" msgid="9032004888134129885">"ចាប់ផ្ដើមឡើងវិញ"</string>
+    <string name="dsds_dialog_cancel" msgid="3245958947099586655">"បោះបង់"</string>
+    <string name="radio_info_radio_power" msgid="8805595022160471587">"ថាមពល​វិទ្យុ​ទូរសព្ទ​ចល័ត"</string>
+    <string name="radioInfo_menu_viewADN" msgid="4533179730908559846">"មើលសៀវភៅអាសយដ្ឋានក្នុងស៊ីមកាត"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="1847236480527032061">"មើល​លេខ​ហៅ​ថេរ"</string>
+    <string name="radioInfo_menu_viewSDN" msgid="2613431584522392842">"មើល​លេខ​ហៅ​សេវាកម្ម"</string>
+    <string name="radioInfo_menu_getIMS" msgid="1950869267853198232">"សា្ថនភាពសេវាកម្ម IMS"</string>
+    <string name="radio_info_ims_reg_status_title" msgid="6875885401313992007">"ស្ថានភាព IMS"</string>
+    <string name="radio_info_ims_reg_status_registered" msgid="7095182114078864326">"បានចុះឈ្មោះ"</string>
+    <string name="radio_info_ims_reg_status_not_registered" msgid="8045821447288876085">"មិន​បាន​ចុះឈ្មោះ"</string>
+    <string name="radio_info_ims_feature_status_available" msgid="6493200914756969292">"ទំនេរ"</string>
+    <string name="radio_info_ims_feature_status_unavailable" msgid="8930391136839759778">"មិន​ទំនេរ"</string>
+    <string name="radio_info_ims_reg_status" msgid="25582845222446390">"ការចុះឈ្មោះ IMS៖ <xliff:g id="STATUS">%1$s</xliff:g>\nការហៅ​ជា​សំឡេង​តាម LTE៖ <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nការហៅ​ជា​សំឡេង​តាម WiFi៖ <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nការហៅជាវីដេអូ៖ <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nផ្ទៃ UT ៖ <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
+    <string name="radioInfo_service_in" msgid="45753418231446400">"កំពុង​ដំណើរការ"</string>
+    <string name="radioInfo_service_out" msgid="287972405416142312">"មិនដំណើរការ"</string>
+    <string name="radioInfo_service_emergency" msgid="4763879891415016848">"ការហៅទៅលេខសង្គ្រោះបន្ទាន់​តែប៉ុណ្ណោះ"</string>
+    <string name="radioInfo_service_off" msgid="3456583511226783064">"វិទ្យុ​បាន​បិទ"</string>
+    <string name="radioInfo_roaming_in" msgid="3156335577793145965">"រ៉ូមីង"</string>
+    <string name="radioInfo_roaming_not" msgid="1904547918725478110">"មិនរ៉ូមីងទេ"</string>
+    <string name="radioInfo_phone_idle" msgid="2191653783170757819">"អសកម្ម"</string>
+    <string name="radioInfo_phone_ringing" msgid="8100354169567413370">"កំពុងរោទ៍"</string>
+    <string name="radioInfo_phone_offhook" msgid="7564601639749936170">"ការហៅ​ទូរសព្ទ​កំពុងដំណើរការ"</string>
+    <string name="radioInfo_data_disconnected" msgid="8085447971880814541">"បាន​ផ្ដាច់"</string>
+    <string name="radioInfo_data_connecting" msgid="925092271092152472">"កំពុងភ្ជាប់"</string>
+    <string name="radioInfo_data_connected" msgid="7637335645634239508">"បានភ្ជាប់"</string>
+    <string name="radioInfo_data_suspended" msgid="8695262782642002785">"បាន​ផ្អាក"</string>
+    <string name="radioInfo_unknown" msgid="5401423738500672850">"មិន​ស្គាល់"</string>
+    <string name="radioInfo_display_packets" msgid="6794302192441084157">"pkts"</string>
+    <string name="radioInfo_display_bytes" msgid="7701006329222413797">"បៃ"</string>
+    <string name="radioInfo_display_dbm" msgid="7491944975710865703">"dBm"</string>
+    <string name="radioInfo_display_asu" msgid="2247752203249646956">"asu"</string>
+    <string name="radioInfo_lac" msgid="3892986460272607013">"LAC"</string>
+    <string name="radioInfo_cid" msgid="1423185536264406705">"CID"</string>
+    <string name="radio_info_subid" msgid="6839966868621703203">"លេខសម្គាល់រង​បច្ចុប្បន្ន៖"</string>
+    <string name="radio_info_dds" msgid="1122593144425697126">"លេខសម្គាល់រង​របស់​ស៊ីម​ទិន្នន័យ​លំនាំដើម៖"</string>
+    <string name="radio_info_dl_kbps" msgid="2382922659525318726">"កម្រិត​បញ្ជូន DL (kbps) ៖"</string>
+    <string name="radio_info_ul_kbps" msgid="2102225400904799036">"កម្រិត​បញ្ជូន UL (kbps) ៖"</string>
+    <string name="radio_info_signal_location_label" msgid="6188435197086550049">"ព័ត៌មាន​ទីតាំង​ទូរសព្ទ​ចល័ត (បានបញ្ឈប់)៖"</string>
+    <string name="radio_info_phy_chan_config" msgid="1277949603275436081">"ការកំណត់​រចនាសម្ព័ន្ធបណ្ដាញរូបវ័ន្ត LTE ៖"</string>
+    <string name="radio_info_cell_info_refresh_rate" msgid="670511448975997340">"អត្រា​ផ្ទុក​ឡើង​វិញ​នៃ​ព័ត៌មាន​ទូរសព្ទ​ចល័ត៖"</string>
+    <string name="radio_info_cellinfo_label" msgid="8199062974670377659">"ព័ត៌មាន​វាស់​ទូរសព្ទ​ចល័ត​ទាំងអស់៖"</string>
+    <string name="radio_info_gprs_service_label" msgid="6819204246355412952">"សេវាកម្មទិន្នន័យ៖"</string>
+    <string name="radio_info_roaming_label" msgid="6636932886446857120">"រ៉ូមីង៖"</string>
+    <string name="radio_info_imei_label" msgid="8947899706930120368">"IMEI ៖"</string>
+    <string name="radio_info_call_redirect_label" msgid="4526480903023362276">"បញ្ជូនការហៅ​ទូរសព្ទ​បន្ត៖"</string>
+    <string name="radio_info_ppp_resets_label" msgid="9131901102339077661">"ចំនួននៃការកំណត់ PPP ឡើងវិញតាំងពីពេលចាប់ផ្ដើម៖"</string>
+    <string name="radio_info_current_network_label" msgid="3052098695239642450">"បណ្ដាញបច្ចុប្បន្ន៖"</string>
+    <string name="radio_info_ppp_received_label" msgid="5753592451640644889">"បានទទួលទិន្នន័យ៖"</string>
+    <string name="radio_info_gsm_service_label" msgid="6443348321714241328">"សេវាកម្មសំឡេង៖"</string>
+    <string name="radio_info_signal_strength_label" msgid="5545444702102543260">"កម្លាំងរលកសញ្ញា៖"</string>
+    <string name="radio_info_call_status_label" msgid="7693575431923095487">"ស្ថានភាព​ការហៅ​ជា​សំឡេង៖"</string>
+    <string name="radio_info_ppp_sent_label" msgid="6542208429356199695">"បានផ្ញើទិន្នន័យ៖"</string>
+    <string name="radio_info_message_waiting_label" msgid="1886549432566952078">"រង់ចាំសារ៖"</string>
+    <string name="radio_info_phone_number_label" msgid="2533852539562512203">"លេខទូរសព្ទ៖"</string>
+    <string name="radio_info_band_mode_label" msgid="23480556225515290">"ជ្រើសរើស​កម្រិត​បញ្ជូន​វិទ្យុ"</string>
+    <string name="radio_info_voice_network_type_label" msgid="2395347336419593265">"ប្រភេទបណ្តាញសំឡេង៖"</string>
+    <string name="radio_info_data_network_type_label" msgid="8886597029237501929">"ប្រភេទបណ្តាញទិន្នន័យ៖"</string>
+    <string name="phone_index_label" msgid="6222406512768964268">"ជ្រើសរើស​សន្ទស្សន៍​ទូរសព្ទ"</string>
+    <string name="radio_info_set_perferred_label" msgid="7408131389363136210">"កំណត់ប្រភេទបណ្ដាញដែលពេញចិត្ត៖"</string>
+    <string name="radio_info_ping_hostname_v4" msgid="6951237885381284790">"ភីង​ឈ្មោះ​ម៉ាស៊ីន (www.google.com) IPv4 ៖"</string>
+    <string name="radio_info_ping_hostname_v6" msgid="2748637889486554603">"ភីង​ឈ្មោះ​ម៉ាស៊ីន (www.google.com) IPv6 ៖"</string>
+    <string name="radio_info_http_client_test" msgid="1329583721088428238">"តេស្ត​កម្មវិធី​ភ្ញៀវ HTTP ៖"</string>
+    <string name="ping_test_label" msgid="448617502935719694">"ដំណើរការ​តេស្ត​ភីង"</string>
+    <string name="radio_info_smsc_label" msgid="3749927072726033763">"SMSC ៖"</string>
+    <string name="radio_info_smsc_update_label" msgid="5141996256097115753">"ធ្វើ​បច្ចុប្បន្នភាព"</string>
+    <string name="radio_info_smsc_refresh_label" msgid="8409923721451604560">"ផ្ទុកឡើងវិញ"</string>
+    <string name="radio_info_toggle_dns_check_label" msgid="1394078554927787350">"បិទ/បើកការពិនិត្យ DNS"</string>
+    <string name="oem_radio_info_label" msgid="2914167475119997456">"ការ​កំណត់/ព័ត៌មាន​ជាក់លាក់ OEM"</string>
+    <string name="radio_info_endc_available" msgid="4410653375290113436">"មាន EN-DC៖"</string>
+    <string name="radio_info_dcnr_restricted" msgid="2469125498066960807">"DCNR ត្រូវ​បាន​រឹតត្បិត៖"</string>
+    <string name="radio_info_nr_available" msgid="1321318331361249997">"មាន NR៖"</string>
+    <string name="radio_info_nr_state" msgid="1337571996788535356">"ស្ថានភាព NR៖"</string>
+    <string name="radio_info_nr_frequency" msgid="1201156032796584128">"កម្រិត​ញឹកញាប់​នៃ NR៖"</string>
+    <string name="band_mode_title" msgid="7988822920724576842">"កំណត់​មុខងារ​កម្រិត​បញ្ជូន​វិទ្យុ"</string>
+    <string name="band_mode_loading" msgid="795923726636735967">"កំពុងដំណើរការបញ្ជីក្រុម…"</string>
+    <string name="band_mode_set" msgid="6657819412803771421">"កំណត់"</string>
+    <string name="band_mode_failed" msgid="1707488541847192924">"មិនបាន​សម្រេច"</string>
+    <string name="band_mode_succeeded" msgid="2230018000534761063">"ជោគជ័យ"</string>
+    <string name="phone_info_label" product="tablet" msgid="7477478709388477397">"ព័ត៌មាន​ថេប្លេត"</string>
+    <string name="phone_info_label" product="default" msgid="1784175881556791433">"ព័ត៌មាន​ទូរសព្ទ"</string>
+    <string name="carrier_provisioning" msgid="2668065041869578376">"ព័ត៌មាន​អំពី​ការផ្តល់​ទិន្នន័យ​របស់​ក្រុមហ៊ុន​សេវា​ទូរសព្ទ"</string>
+    <string name="trigger_carrier_provisioning" msgid="1301829588620638234">"នាំ​ឱ្យ​មាន​ការផ្តល់​ទិន្នន័យ​ពី​ក្រុមហ៊ុន​សេវា​ទូរសព្ទ"</string>
+</resources>

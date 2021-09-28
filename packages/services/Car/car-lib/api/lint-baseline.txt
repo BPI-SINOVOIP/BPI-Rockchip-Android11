@@ -1,0 +1,253 @@
+// Baseline format: 1.0
+CallbackInterface: android.car.CarAppFocusManager.OnAppFocusOwnershipCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: OnAppFocusOwnershipCallback
+CallbackInterface: android.car.hardware.property.CarPropertyManager.CarPropertyEventCallback:
+    Callbacks must be abstract class instead of interface to enable extension in future API levels: CarPropertyEventCallback
+
+
+ConcreteCollection: android.car.hardware.property.CarPropertyManager#getPropertyList(android.util.ArraySet<java.lang.Integer>) parameter #0:
+    Parameter type is concrete collection (`android.util.ArraySet`); must be higher-level interface
+
+
+ExecutorRegistration: android.car.Car#createCar(android.content.Context, android.os.Handler, long, android.car.Car.CarServiceLifecycleListener):
+    Registration methods should have overload that accepts delivery Executor: `createCar`
+ExecutorRegistration: android.car.CarAppFocusManager#abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback):
+    Registration methods should have overload that accepts delivery Executor: `abandonAppFocus`
+ExecutorRegistration: android.car.CarAppFocusManager#addFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int):
+    Registration methods should have overload that accepts delivery Executor: `addFocusListener`
+ExecutorRegistration: android.car.CarAppFocusManager#isOwningFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int):
+    Registration methods should have overload that accepts delivery Executor: `isOwningFocus`
+ExecutorRegistration: android.car.CarAppFocusManager#requestAppFocus(int, android.car.CarAppFocusManager.OnAppFocusOwnershipCallback):
+    Registration methods should have overload that accepts delivery Executor: `requestAppFocus`
+ExecutorRegistration: android.car.CarOccupantZoneManager#registerOccupantZoneConfigChangeListener(android.car.CarOccupantZoneManager.OccupantZoneConfigChangeListener):
+    Registration methods should have overload that accepts delivery Executor: `registerOccupantZoneConfigChangeListener`
+ExecutorRegistration: android.car.drivingstate.CarUxRestrictionsManager#registerListener(android.car.drivingstate.CarUxRestrictionsManager.OnUxRestrictionsChangedListener):
+    Registration methods should have overload that accepts delivery Executor: `registerListener`
+ExecutorRegistration: android.car.hardware.CarSensorManager#registerListener(android.car.hardware.CarSensorManager.OnSensorChangedListener, int, int):
+    Registration methods should have overload that accepts delivery Executor: `registerListener`
+ExecutorRegistration: android.car.hardware.property.CarPropertyManager#registerCallback(android.car.hardware.property.CarPropertyManager.CarPropertyEventCallback, int, float):
+    Registration methods should have overload that accepts delivery Executor: `registerCallback`
+ExecutorRegistration: android.car.media.CarAudioManager#registerCarVolumeCallback(android.car.media.CarAudioManager.CarVolumeCallback):
+    Registration methods should have overload that accepts delivery Executor: `registerCarVolumeCallback`
+
+
+HiddenSuperclass: android.car.CarAppFocusManager:
+    Public class android.car.CarAppFocusManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.CarInfoManager:
+    Public class android.car.CarInfoManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.CarOccupantZoneManager:
+    Public class android.car.CarOccupantZoneManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.content.pm.CarPackageManager:
+    Public class android.car.content.pm.CarPackageManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.drivingstate.CarUxRestrictionsManager:
+    Public class android.car.drivingstate.CarUxRestrictionsManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.CarSensorManager:
+    Public class android.car.hardware.CarSensorManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.hardware.property.CarPropertyManager:
+    Public class android.car.hardware.property.CarPropertyManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.media.CarAudioManager:
+    Public class android.car.media.CarAudioManager stripped of unavailable superclass android.car.CarManagerBase
+HiddenSuperclass: android.car.settings.CarConfigurationManager:
+    Public class android.car.settings.CarConfigurationManager stripped of unavailable superclass android.car.CarManagerBase
+
+
+IntentName: android.car.Car#CAR_EXTRA_BROWSE_SERVICE_FOR_SESSION:
+    Intent extra constant name must be EXTRA_FOO: CAR_EXTRA_BROWSE_SERVICE_FOR_SESSION
+IntentName: android.car.Car#CAR_EXTRA_MEDIA_COMPONENT:
+    Intent extra constant name must be EXTRA_FOO: CAR_EXTRA_MEDIA_COMPONENT
+IntentName: android.car.Car#CAR_INTENT_ACTION_MEDIA_TEMPLATE:
+    Intent action constant name must be ACTION_FOO: CAR_INTENT_ACTION_MEDIA_TEMPLATE
+
+
+ListenerLast: android.car.CarAppFocusManager#abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int) parameter #1:
+    Listeners should always be at end of argument list (method `abandonAppFocus`)
+ListenerLast: android.car.CarAppFocusManager#isOwningFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int) parameter #1:
+    Listeners should always be at end of argument list (method `isOwningFocus`)
+
+
+MissingNullability: android.car.Car#createCar(android.content.Context) parameter #0:
+    Missing nullability on parameter `context` in method `createCar`
+MissingNullability: android.car.Car#createCar(android.content.Context, android.content.ServiceConnection) parameter #0:
+    Missing nullability on parameter `context` in method `createCar`
+MissingNullability: android.car.Car#createCar(android.content.Context, android.content.ServiceConnection) parameter #1:
+    Missing nullability on parameter `serviceConnectionListener` in method `createCar`
+MissingNullability: android.car.Car#createCar(android.content.Context, android.content.ServiceConnection, android.os.Handler) parameter #0:
+    Missing nullability on parameter `context` in method `createCar`
+MissingNullability: android.car.Car#createCar(android.content.Context, android.content.ServiceConnection, android.os.Handler) parameter #1:
+    Missing nullability on parameter `serviceConnectionListener` in method `createCar`
+MissingNullability: android.car.Car#createCar(android.content.Context, android.os.Handler) parameter #0:
+    Missing nullability on parameter `context` in method `createCar`
+MissingNullability: android.car.Car#getCarManager(String) parameter #0:
+    Missing nullability on parameter `serviceName` in method `getCarManager`
+MissingNullability: android.car.CarAppFocusManager#abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback) parameter #0:
+    Missing nullability on parameter `ownershipCallback` in method `abandonAppFocus`
+MissingNullability: android.car.CarAppFocusManager#abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int) parameter #0:
+    Missing nullability on parameter `ownershipCallback` in method `abandonAppFocus`
+MissingNullability: android.car.CarAppFocusManager#addFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int) parameter #0:
+    Missing nullability on parameter `listener` in method `addFocusListener`
+MissingNullability: android.car.CarAppFocusManager#isOwningFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int) parameter #0:
+    Missing nullability on parameter `callback` in method `isOwningFocus`
+MissingNullability: android.car.CarAppFocusManager#removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener) parameter #0:
+    Missing nullability on parameter `listener` in method `removeFocusListener`
+MissingNullability: android.car.CarAppFocusManager#removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int) parameter #0:
+    Missing nullability on parameter `listener` in method `removeFocusListener`
+MissingNullability: android.car.CarAppFocusManager#requestAppFocus(int, android.car.CarAppFocusManager.OnAppFocusOwnershipCallback) parameter #1:
+    Missing nullability on parameter `ownershipCallback` in method `requestAppFocus`
+MissingNullability: android.car.CarInfoManager#getEvConnectorTypes():
+    Missing nullability on method `getEvConnectorTypes` return
+MissingNullability: android.car.CarInfoManager#getFuelTypes():
+    Missing nullability on method `getFuelTypes` return
+MissingNullability: android.car.CarNotConnectedException#CarNotConnectedException(Exception) parameter #0:
+    Missing nullability on parameter `cause` in method `CarNotConnectedException`
+MissingNullability: android.car.CarNotConnectedException#CarNotConnectedException(String) parameter #0:
+    Missing nullability on parameter `name` in method `CarNotConnectedException`
+MissingNullability: android.car.CarNotConnectedException#CarNotConnectedException(String, Throwable) parameter #0:
+    Missing nullability on parameter `name` in method `CarNotConnectedException`
+MissingNullability: android.car.CarNotConnectedException#CarNotConnectedException(String, Throwable) parameter #1:
+    Missing nullability on parameter `cause` in method `CarNotConnectedException`
+MissingNullability: android.car.CarOccupantZoneManager.OccupantZoneInfo#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.CarOccupantZoneManager.OccupantZoneInfo`
+MissingNullability: android.car.CarOccupantZoneManager.OccupantZoneInfo#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.VehicleGear#toString(int):
+    Missing nullability on method `toString` return
+MissingNullability: android.car.VehiclePropertyIds#toString(int):
+    Missing nullability on method `toString` return
+MissingNullability: android.car.content.pm.CarPackageManager#isActivityDistractionOptimized(String, String) parameter #0:
+    Missing nullability on parameter `packageName` in method `isActivityDistractionOptimized`
+MissingNullability: android.car.content.pm.CarPackageManager#isActivityDistractionOptimized(String, String) parameter #1:
+    Missing nullability on parameter `className` in method `isActivityDistractionOptimized`
+MissingNullability: android.car.content.pm.CarPackageManager#isServiceDistractionOptimized(String, String) parameter #0:
+    Missing nullability on parameter `packageName` in method `isServiceDistractionOptimized`
+MissingNullability: android.car.content.pm.CarPackageManager#isServiceDistractionOptimized(String, String) parameter #1:
+    Missing nullability on parameter `className` in method `isServiceDistractionOptimized`
+MissingNullability: android.car.drivingstate.CarUxRestrictions#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.drivingstate.CarUxRestrictions`
+MissingNullability: android.car.drivingstate.CarUxRestrictions#CarUxRestrictions(android.car.drivingstate.CarUxRestrictions) parameter #0:
+    Missing nullability on parameter `uxRestrictions` in method `CarUxRestrictions`
+MissingNullability: android.car.drivingstate.CarUxRestrictions#isSameRestrictions(android.car.drivingstate.CarUxRestrictions) parameter #0:
+    Missing nullability on parameter `other` in method `isSameRestrictions`
+MissingNullability: android.car.drivingstate.CarUxRestrictions#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.drivingstate.CarUxRestrictions.Builder#build():
+    Missing nullability on method `build` return
+MissingNullability: android.car.drivingstate.CarUxRestrictions.Builder#setMaxContentDepth(int):
+    Missing nullability on method `setMaxContentDepth` return
+MissingNullability: android.car.drivingstate.CarUxRestrictions.Builder#setMaxCumulativeContentItems(int):
+    Missing nullability on method `setMaxCumulativeContentItems` return
+MissingNullability: android.car.drivingstate.CarUxRestrictions.Builder#setMaxStringLength(int):
+    Missing nullability on method `setMaxStringLength` return
+MissingNullability: android.car.drivingstate.CarUxRestrictionsManager.OnUxRestrictionsChangedListener#onUxRestrictionsChanged(android.car.drivingstate.CarUxRestrictions) parameter #0:
+    Missing nullability on parameter `restrictionInfo` in method `onUxRestrictionsChanged`
+MissingNullability: android.car.hardware.CarPropertyConfig#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.hardware.CarPropertyConfig`
+MissingNullability: android.car.hardware.CarPropertyConfig#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.hardware.CarPropertyValue#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.hardware.CarPropertyValue`
+MissingNullability: android.car.hardware.CarPropertyValue#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.hardware.CarSensorEvent#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.hardware.CarSensorEvent`
+MissingNullability: android.car.hardware.CarSensorEvent#floatValues:
+    Missing nullability on field `floatValues` in class `class android.car.hardware.CarSensorEvent`
+MissingNullability: android.car.hardware.CarSensorEvent#intValues:
+    Missing nullability on field `intValues` in class `class android.car.hardware.CarSensorEvent`
+MissingNullability: android.car.hardware.CarSensorEvent#longValues:
+    Missing nullability on field `longValues` in class `class android.car.hardware.CarSensorEvent`
+MissingNullability: android.car.hardware.CarSensorEvent#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `dest` in method `writeToParcel`
+MissingNullability: android.car.hardware.CarSensorManager.OnSensorChangedListener#onSensorChanged(android.car.hardware.CarSensorEvent) parameter #0:
+    Missing nullability on parameter `event` in method `onSensorChanged`
+MissingNullability: android.car.hardware.property.CarPropertyManager.CarPropertyEventCallback#onChangeEvent(android.car.hardware.CarPropertyValue) parameter #0:
+    Missing nullability on parameter `value` in method `onChangeEvent`
+MissingNullability: android.car.settings.CarConfigurationManager#getSpeedBumpConfiguration():
+    Missing nullability on method `getSpeedBumpConfiguration` return
+MissingNullability: android.car.settings.SpeedBumpConfiguration#CREATOR:
+    Missing nullability on field `CREATOR` in class `class android.car.settings.SpeedBumpConfiguration`
+MissingNullability: android.car.settings.SpeedBumpConfiguration#writeToParcel(android.os.Parcel, int) parameter #0:
+    Missing nullability on parameter `desk` in method `writeToParcel`
+
+
+MutableBareField: android.car.CarOccupantZoneManager.OccupantZoneInfo#zoneId:
+    Bare field zoneId must be marked final, or moved behind accessors if mutable
+MutableBareField: android.car.hardware.CarSensorEvent#sensorType:
+    Bare field sensorType must be marked final, or moved behind accessors if mutable
+MutableBareField: android.car.hardware.CarSensorEvent#timestamp:
+    Bare field timestamp must be marked final, or moved behind accessors if mutable
+MutableBareField: android.car.hardware.CarSensorEvent.EnvironmentData#temperature:
+    Bare field temperature must be marked final, or moved behind accessors if mutable
+MutableBareField: android.car.hardware.CarSensorEvent.EnvironmentData#timestamp:
+    Bare field timestamp must be marked final, or moved behind accessors if mutable
+
+
+NotCloseable: android.car.Car:
+    Classes that release resources (disconnect()) should implement AutoClosable and CloseGuard: class android.car.Car
+
+
+PublicTypedef: android.car.drivingstate.CarUxRestrictions.CarUxRestrictionsInfo:
+    Don't expose @IntDef: CarUxRestrictionsInfo must be hidden.
+PublicTypedef: android.car.hardware.CarPropertyValue.PropertyStatus:
+    Don't expose @IntDef: PropertyStatus must be hidden.
+
+
+RegistrationName: android.car.CarOccupantZoneManager#registerOccupantZoneConfigChangeListener(android.car.CarOccupantZoneManager.OccupantZoneConfigChangeListener):
+    Listener methods should be named add/remove; was registerOccupantZoneConfigChangeListener
+RegistrationName: android.car.CarOccupantZoneManager#unregisterOccupantZoneConfigChangeListener(android.car.CarOccupantZoneManager.OccupantZoneConfigChangeListener):
+    Listener methods should be named add/remove; was unregisterOccupantZoneConfigChangeListener
+RegistrationName: android.car.drivingstate.CarUxRestrictionsManager#registerListener(android.car.drivingstate.CarUxRestrictionsManager.OnUxRestrictionsChangedListener):
+    Listener methods should be named add/remove; was registerListener
+RegistrationName: android.car.drivingstate.CarUxRestrictionsManager#unregisterListener():
+    Listener methods should be named add/remove; was unregisterListener
+RegistrationName: android.car.hardware.CarSensorManager#registerListener(android.car.hardware.CarSensorManager.OnSensorChangedListener, int, int):
+    Listener methods should be named add/remove; was registerListener
+RegistrationName: android.car.hardware.CarSensorManager#unregisterListener(android.car.hardware.CarSensorManager.OnSensorChangedListener):
+    Listener methods should be named add/remove; was unregisterListener
+RegistrationName: android.car.hardware.CarSensorManager#unregisterListener(android.car.hardware.CarSensorManager.OnSensorChangedListener, int):
+    Listener methods should be named add/remove; was unregisterListener
+
+
+SamShouldBeLast: android.car.CarAppFocusManager#addFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int):
+    SAM-compatible parameters (such as parameter 1, "listener", in android.car.CarAppFocusManager.addFocusListener) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+SamShouldBeLast: android.car.CarAppFocusManager#removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int):
+    SAM-compatible parameters (such as parameter 1, "listener", in android.car.CarAppFocusManager.removeFocusListener) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+SamShouldBeLast: android.car.hardware.CarSensorManager#registerListener(android.car.hardware.CarSensorManager.OnSensorChangedListener, int, int):
+    SAM-compatible parameters (such as parameter 1, "listener", in android.car.hardware.CarSensorManager.registerListener) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+SamShouldBeLast: android.car.hardware.CarSensorManager#unregisterListener(android.car.hardware.CarSensorManager.OnSensorChangedListener, int):
+    SAM-compatible parameters (such as parameter 1, "listener", in android.car.hardware.CarSensorManager.unregisterListener) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+
+
+ServiceName: android.car.Car#CAR_CONFIGURATION_SERVICE:
+    Inconsistent service value; expected `CAR_CONFIGURATION`, was `configuration`
+ServiceName: android.car.Car#CAR_NAVIGATION_SERVICE:
+    Inconsistent service value; expected `CAR_NAVIGATION`, was `car_navigation_service`
+ServiceName: android.car.Car#CAR_OCCUPANT_ZONE_SERVICE:
+    Inconsistent service value; expected `CAR_OCCUPANT_ZONE`, was `car_occupant_zone_service`
+ServiceName: android.car.Car#CAR_UX_RESTRICTION_SERVICE:
+    Inconsistent service value; expected `CAR_UX_RESTRICTION`, was `uxrestriction`
+
+
+StaticUtils: android.car.VehiclePropertyIds:
+    Fully-static utility classes must not have constructor
+StaticUtils: android.car.settings.CarSettings.Global:
+    Fully-static utility classes must not have constructor
+
+
+VisiblySynchronized: PsiThisExpression:this:
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.addFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener,int)
+VisiblySynchronized: android.car.CarAppFocusManager#abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback)
+VisiblySynchronized: android.car.CarAppFocusManager#abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.abandonAppFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback,int)
+VisiblySynchronized: android.car.CarAppFocusManager#addFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.addFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener,int)
+VisiblySynchronized: android.car.CarAppFocusManager#isOwningFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback, int):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.isOwningFocus(android.car.CarAppFocusManager.OnAppFocusOwnershipCallback,int)
+VisiblySynchronized: android.car.CarAppFocusManager#removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener)
+VisiblySynchronized: android.car.CarAppFocusManager#removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener, int):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.removeFocusListener(android.car.CarAppFocusManager.OnAppFocusChangedListener,int)
+VisiblySynchronized: android.car.CarAppFocusManager#requestAppFocus(int, android.car.CarAppFocusManager.OnAppFocusOwnershipCallback):
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.CarAppFocusManager.requestAppFocus(int,android.car.CarAppFocusManager.OnAppFocusOwnershipCallback)
+VisiblySynchronized: android.car.drivingstate.CarUxRestrictionsManager#unregisterListener():
+    Internal locks must not be exposed (synchronizing on this or class is still externally observable): method android.car.drivingstate.CarUxRestrictionsManager.unregisterListener()

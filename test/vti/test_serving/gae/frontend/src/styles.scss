@@ -1,0 +1,54 @@
+@import '~@angular/material/theming';
+@import 'styles/app-theme';
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+.entity-filter {
+  margin: 20px 20px 0 20px;
+
+  filter {
+    width: 100%;
+  }
+}
+
+.statistics-table {
+  margin: 10px 20px 20px 20px;
+
+  table {
+    width: 100%;
+  }
+}
+
+.mat-card {
+  margin: 20px;
+}
+
+.entity-table {
+  margin: 10px 20px 20px 20px;
+
+  table {
+    width: 100%;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+}
+
+.div-expandable {
+  padding: 10px 20px 30px 20px;
+
+  button {
+    margin-right: 20px;
+  }
+}

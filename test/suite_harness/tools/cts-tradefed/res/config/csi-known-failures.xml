@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="Known fialures on CSI">
+    <!-- Exclude the known failure of CtsAppCases affect other tests in NotificationManagerTest -->
+    <option name="compatibility:exclude-filter" value="CtsAppTestCases android.app.cts.NotificationManagerTest#testNotificationManagerBubble_checkActivityFlagsDocumentLaunchMode" />
+
+    <!-- Exclude known failure of CtsMediaTestCases -->
+    <!-- CSI doesn't seem to include ringtones. -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.RingtoneManagerTest" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.RingtoneTest" />
+
+    <!-- Following failures take about 10 min each, so exclude them to reduce test time. -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.StreamingMediaPlayerTest#testHTTP_H263_AMR_Video2" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.StreamingMediaPlayerTest#testHTTP_H264Base_AAC_Video2" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.StreamingMediaPlayerTest#testHTTP_MPEG4SP_AAC_Video2" />
+
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoCodecTest#testParallelEncodingAndDecodingAVC" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoCodecTest#testParallelEncodingAndDecodingHEVC" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoCodecTest#testParallelEncodingAndDecodingVP8" />
+
+    <!-- Failures will crash the test harness, so exclude it here (even though only failed with VP9 decoder). -->
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderRotationTest" />
+
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther0Perf0320x0240" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther0Perf0720x0480" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther0Perf1280x0720" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther1Perf0320x0240" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther1Perf0720x0480" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther1Perf1280x0720" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testAvcOther1Perf1920x1080" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther0Perf0352x0288" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther0Perf0640x0360" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther0Perf0720x0480" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther0Perf1280x0720" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther0Perf1920x1080" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther1Perf0352x0288" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther1Perf0640x0360" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther1Perf0720x0480" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther1Perf1280x0720" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther1Perf1920x1080" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoDecoderPerfTest#testHevcOther1Perf3840x2160" />
+
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH263SurfMinMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfArbitraryH" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfArbitraryW" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfNearMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfNearMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfNearMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogH265SurfQCIF" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfArbitraryH" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfArbitraryW" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfNearMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfNearMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfNearMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogMpeg4SurfNearMinMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8Surf480p" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfArbitraryH" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfArbitraryW" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfNearMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfNearMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfNearMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP8SurfQCIF" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9Surf480p" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfArbitraryH" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfArbitraryW" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfNearMaxMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfNearMaxMin" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfNearMinMax" />
+    <option name="compatibility:exclude-filter" value="CtsMediaTestCases android.media.cts.VideoEncoderTest#testGoogVP9SurfQCIF" />
+
+</configuration>
