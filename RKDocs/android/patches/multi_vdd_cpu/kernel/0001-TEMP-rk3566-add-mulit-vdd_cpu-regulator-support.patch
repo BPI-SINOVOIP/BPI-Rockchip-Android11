@@ -1,0 +1,244 @@
+From d73484b38c12e316e091ae73f24387796c1f9e5c Mon Sep 17 00:00:00 2001
+From: Weixin Zhou <zwx@rock-chips.com>
+Date: Thu, 22 Apr 2021 11:49:58 +0800
+Subject: [PATCH] TEMP: rk3566: add mulit vdd_cpu regulator support
+
+tablet: rk3566-rk817-tablet-v10.dts
+ebook: rk3566-rk817-eink-w103.dts
+
+Signed-off-by: Weixin Zhou <zwx@rock-chips.com>
+Change-Id: Ifef88888d4b98a0df19fb99176be9703372f1118
+---
+ .../dts/rockchip/rk3566-rk817-eink-w103.dts   | 80 +++++++++++++++++--
+ .../dts/rockchip/rk3566-rk817-tablet-v10.dts  | 47 ++++++++++-
+ drivers/cpufreq/cpufreq-dt.c                  |  3 +
+ drivers/cpufreq/rockchip-cpufreq.c            |  2 +-
+ 4 files changed, 124 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/rockchip/rk3566-rk817-eink-w103.dts b/arch/arm64/boot/dts/rockchip/rk3566-rk817-eink-w103.dts
+index 76835f90c6e4..2f161860f409 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3566-rk817-eink-w103.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3566-rk817-eink-w103.dts
+@@ -304,7 +304,7 @@
+ };
+ 
+ &cpu0 {
+-	cpu-supply = <&vdd_cpu>;
++	reg-name = "vdd_cpu";
+ };
+ 
+ &csi2_dphy_hw {
+@@ -365,7 +365,7 @@
+ &i2c0 {
+ 	status = "okay";
+ 
+-	vdd_cpu: tcs4525@1c {
++	tcs4525: tcs4525@1c {
+ 		compatible = "tcs,tcs452x";
+ 		reg = <0x1c>;
+ 		vin-supply = <&vccsys>;
+@@ -386,6 +386,76 @@
+ 		};
+ 	};
+ 
++	tcs4526: tcs4526@10 {
++		compatible = "tcs,tcs452x";
++		reg = <0x10>;
++		vin-supply = <&vccsys>;
++		regulator-compatible = "fan53555-reg";
++		regulator-name = "vdd_cpu";
++		regulator-min-microvolt = <712500>;
++		regulator-max-microvolt = <1390000>;
++		regulator-init-microvolt = <900000>;
++		regulator-ramp-delay = <2300>;
++		fcs,suspend-voltage-selector = <0>;
++		regulator-initial-mode = <0x2>;
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-state-mem {
++			regulator-on-in-suspend;
++			regulator-suspend-microvolt = <1100000>;
++			regulator-changeable-in-suspend;
++		};
++	};
++
++	xz3215: xz3215@60 {
++		compatible = "xz3216";
++		reg = <0x60>;
++		regulators {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			vdd_cpu_1: regulator@0 {
++				reg = <0>;
++				vin-supply = <&vccsys>;
++				regulator-compatible = "xz_dcdc1";
++				regulator-name = "vdd_cpu";
++				regulator-min-microvolt = <603000>;
++				regulator-max-microvolt = <1400000>;
++				regulator-ramp-delay = <1000>;
++				regulator-always-on;
++				regulator-boot-on;
++				fcs,suspend-voltage-selector = <0>;
++				//regulator-initial-mode = <0x1>;
++				regulator-initial-state = <3>;
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-suspend-microvolt = <1100000>;
++					regulator-changeable-in-suspend;
++				};
++			};
++		};
++	};
++
++	syr837: syr837@40 {
++		compatible = "silergy,syr827";
++		reg = <0x40>;
++		vin-supply = <&vccsys>;
++		regulator-compatible = "fan53555-reg";
++		regulator-name = "vdd_cpu";
++		regulator-min-microvolt = <712500>;
++		regulator-max-microvolt = <1500000>;
++		regulator-init-microvolt = <900000>;
++		regulator-ramp-delay = <1000>;
++		fcs,suspend-voltage-selector = <0>;
++		regulator-initial-state = <3>;
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-state-mem {
++			regulator-on-in-suspend;
++			regulator-suspend-microvolt = <1100000>;
++			regulator-changeable-in-suspend;
++		};
++	};
++
+ 	rk817: pmic@20 {
+ 		compatible = "rockchip,rk817";
+ 		reg = <0x20>;
+@@ -1011,14 +1081,14 @@
+ 	status = "okay";
+ 
+ 	rockchip,regulator-off-in-mem-lite =
+-		<&vdd_cpu>, <&vdd_logic>, <&vdd_gpu>, <&vcc_3v3>, <&vdda_0v9>, <&vcc_1v8>,
++		<&vdd_cpu_1>, <&tcs4526>, <&tcs4525>, <&syr837>, <&vdd_logic>, <&vdd_gpu>, <&vcc_3v3>, <&vdda_0v9>, <&vcc_1v8>,
+ 		<&vccio_acodec>, <&vccio_sd>, <&vcc1v8_dvp>, <&dcdc_boost>, <&otg_switch>,
+ 		<&sleep_sta_ctl>;
+ 	rockchip,regulator-on-in-mem-lite =
+ 		<&vcc_ddr>, <&vdda0v9_pmu>, <&vcca1v8_pmu>, <&vcc3v3_pmu>;
+ 
+ 	rockchip,regulator-off-in-mem =
+-		<&vdd_cpu>, <&vdd_logic>, <&vdd_gpu>, <&vcc_3v3>, <&vdda_0v9>, <&vcc_1v8>,
++		<&vdd_cpu_1>, <&tcs4526>, <&tcs4525>, <&syr837>, <&vdd_logic>, <&vdd_gpu>, <&vcc_3v3>, <&vdda_0v9>, <&vcc_1v8>,
+ 		<&vccio_acodec>, <&vccio_sd>, <&vcc1v8_dvp>, <&dcdc_boost>, <&otg_switch>,
+ 		<&sleep_sta_ctl>;
+ 	rockchip,regulator-on-in-mem =
+@@ -1028,7 +1098,7 @@
+ 		<&vdd_logic>, <&vdd_gpu>, <&vcc_ddr>, <&vcc_3v3>, <&vdda_0v9>, <&vcc_1v8>,
+ 		<&vdda0v9_pmu>, <&vcca1v8_pmu>, <&vcc3v3_pmu>, <&vccio_acodec>, <&vccio_sd>,
+ 		<&vcc1v8_dvp>, <&dcdc_boost>, <&otg_switch>;
+-	rockchip,regulator-on-in-mem-ultra = <&vdd_cpu>, <&sleep_sta_ctl>;
++	rockchip,regulator-on-in-mem-ultra = <&vdd_cpu_1>, <&tcs4526>, <&tcs4525>, <&syr837>, <&sleep_sta_ctl>;
+ };
+ 
+ &saradc {
+diff --git a/arch/arm64/boot/dts/rockchip/rk3566-rk817-tablet-v10.dts b/arch/arm64/boot/dts/rockchip/rk3566-rk817-tablet-v10.dts
+index 700d610d4f69..b279a83cdef7 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3566-rk817-tablet-v10.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3566-rk817-tablet-v10.dts
+@@ -215,7 +215,7 @@
+ };
+ 
+ &cpu0 {
+-	cpu-supply = <&vdd_cpu>;
++	reg-name = "vdd_cpu";
+ };
+ 
+ &csi2_dphy_hw {
+@@ -481,7 +481,7 @@
+ &i2c0 {
+ 	status = "okay";
+ 
+-	vdd_cpu: tcs4525@1c {
++	tcs4525: tcs4525@1c {
+ 		compatible = "tcs,tcs452x";
+ 		reg = <0x1c>;
+ 		vin-supply = <&vccsys>;
+@@ -499,6 +499,49 @@
+ 		};
+ 	};
+ 
++	tcs4526: tcs4526@10 {
++		compatible = "tcs,tcs452x";
++		reg = <0x10>;
++		vin-supply = <&vccsys>;
++		regulator-compatible = "fan53555-reg";
++		regulator-name = "vdd_cpu";
++		regulator-min-microvolt = <712500>;
++		regulator-max-microvolt = <1390000>;
++		regulator-ramp-delay = <2300>;
++		fcs,suspend-voltage-selector = <1>;
++		regulator-boot-on;
++		regulator-always-on;
++		regulator-state-mem {
++			regulator-off-in-suspend;
++		};
++	};
++
++	xz3215: xz3215@60 {
++		compatible = "xz3216";
++		reg = <0x60>;
++		regulators {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			vdd_cpu_1: regulator@0 {
++				reg = <0>;
++				vin-supply = <&vccsys>;
++				regulator-compatible = "xz_dcdc1";
++				regulator-name = "vdd_cpu";
++				regulator-min-microvolt = <603000>;
++				regulator-max-microvolt = <1400000>;
++				regulator-ramp-delay = <1000>;
++				regulator-always-on;
++				regulator-boot-on;
++				fcs,suspend-voltage-selector = <1>;
++				//regulator-initial-mode = <0x1>;
++				regulator-initial-state = <3>;
++				regulator-state-mem {
++					regulator-off-in-suspend;
++				};
++			};
++		};
++	};
++
+ 	rk817: pmic@20 {
+ 		compatible = "rockchip,rk817";
+ 		reg = <0x20>;
+diff --git a/drivers/cpufreq/cpufreq-dt.c b/drivers/cpufreq/cpufreq-dt.c
+index d7e9331a7c8c..b1e5c0f86ec2 100644
+--- a/drivers/cpufreq/cpufreq-dt.c
++++ b/drivers/cpufreq/cpufreq-dt.c
+@@ -105,6 +105,9 @@ static const char *find_supply_name(struct device *dev)
+ 		goto node_put;
+ 	}
+ 
++	if (!(of_property_read_string(dev->of_node, "reg-name", (const char **)&name)))
++		goto node_put;
++
+ 	dev_dbg(dev, "no regulator for cpu%d\n", cpu);
+ node_put:
+ 	of_node_put(np);
+diff --git a/drivers/cpufreq/rockchip-cpufreq.c b/drivers/cpufreq/rockchip-cpufreq.c
+index 206f47335503..381d1ad5bbb9 100644
+--- a/drivers/cpufreq/rockchip-cpufreq.c
++++ b/drivers/cpufreq/rockchip-cpufreq.c
+@@ -293,7 +293,7 @@ static int rockchip_cpufreq_cluster_init(int cpu, struct cluster_info *cluster)
+ 		pp = of_find_property(dev->of_node, "cpu0-supply", NULL);
+ 		if (pp)
+ 			reg_name = "cpu0";
+-		else
++		else if ((of_property_read_string(dev->of_node, "reg-name", (const char **)&reg_name)))
+ 			return -ENOENT;
+ 	}
+ 
+-- 
+2.17.1
+

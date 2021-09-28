@@ -1,0 +1,29 @@
+From 1dc83e824b329ddea7cb74897476b68734ef99dc Mon Sep 17 00:00:00 2001
+From: Dayao Ji <jdy@rock-chips.com>
+Date: Mon, 9 Aug 2021 12:28:17 +0800
+Subject: [PATCH 2/2] Optimize error handling
+
+Signed-off-by: Dayao Ji <jdy@rock-chips.com>
+Change-Id: Ib39b9babad4def12bf82360cf3ea4b36398d7712
+---
+ install/install.cpp | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/install/install.cpp b/install/install.cpp
+index 92c10164..0063f714 100644
+--- a/install/install.cpp
++++ b/install/install.cpp
+@@ -540,7 +540,9 @@ static InstallResult VerifyAndInstallPackage(Package* package, bool* wipe_cache,
+   }
+   ui->SetEnableReboot(false);
+   auto result = TryUpdateBinary(package, wipe_cache, log_buffer, retry_count, max_temperature, ui);
+-  result = (InstallResult)try_install_rkloader_from_package(package, ui);
++  if(INSTALL_SUCCESS == result){
++    result = (InstallResult)try_install_rkloader_from_package(package, ui);
++  }
+   ui->SetEnableReboot(true);
+   ui->Print("\n");
+ 
+-- 
+2.17.1
+

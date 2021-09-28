@@ -1,0 +1,75 @@
+From e16df4b78f875c6956fa4a4faf0b7940cd845f18 Mon Sep 17 00:00:00 2001
+From: wh <wanghang@rock-chips.com>
+Date: Fri, 13 Aug 2021 17:51:28 +0800
+Subject: [PATCH 3/3] Eink: replace some methods name to avoid same name from
+ app
+
+Signed-off-by: wh <wanghang@rock-chips.com>
+Change-Id: I3c0753cf8570b6bb575796cf8bbc0e889e6baf79
+---
+ core/java/android/app/Activity.java           | 6 +++---
+ core/java/android/content/ContextWrapper.java | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/core/java/android/app/Activity.java b/core/java/android/app/Activity.java
+index a034df782c70..3e19c30ef057 100644
+--- a/core/java/android/app/Activity.java
++++ b/core/java/android/app/Activity.java
+@@ -1262,7 +1262,7 @@ public class Activity extends ContextThemeWrapper
+ 
+     @Override
+     protected void attachBaseContext(Context newBase) {
+-        super.attachBaseContext(updateResources(newBase));
++        super.attachBaseContext(updateEinkAppCustomeResources(newBase));
+         if (newBase != null) {
+             newBase.setAutofillClient(this);
+             newBase.setContentCaptureOptions(getContentCaptureOptions());
+@@ -1628,7 +1628,7 @@ public class Activity extends ContextThemeWrapper
+         mCalled = true;
+ 
+         try {
+-            mLastStoreDpi = getCurrentStoreDpi(this, getPackageName());
++            mLastStoreDpi = getCurrentEinkAppCustomeStoreDpi(this, getPackageName());
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+@@ -1971,7 +1971,7 @@ public class Activity extends ContextThemeWrapper
+         try {
+             if (mCanRecreateWithDpi) {
+                 String packageName = getPackageName();
+-                int storeDpi = getCurrentStoreDpi(this, packageName);
++                int storeDpi = getCurrentEinkAppCustomeStoreDpi(this, packageName);
+                 if (mLastStoreDpi != storeDpi) {
+                     Slog.v(TAG, "recreate " + this + " with onresume storeDpi="
+                         + storeDpi + ", mLastStoreDpi=" + mLastStoreDpi);
+diff --git a/core/java/android/content/ContextWrapper.java b/core/java/android/content/ContextWrapper.java
+index b08fb2b369ad..756b44ab6b8b 100644
+--- a/core/java/android/content/ContextWrapper.java
++++ b/core/java/android/content/ContextWrapper.java
+@@ -85,7 +85,7 @@ public class ContextWrapper extends Context {
+     }
+ 
+     /** @hide */
+-    public int getCurrentStoreDpi(Context context, String packageName) {
++    public int getCurrentEinkAppCustomeStoreDpi(Context context, String packageName) {
+         if (null == packageName
+             || "com.android.systemui".equals(packageName)
+             || "com.rockchip.notedemo".equals(packageName)
+@@ -121,12 +121,12 @@ public class ContextWrapper extends Context {
+     }
+ 
+     /** @hide */
+-    public Context updateResources(Context context) {
++    public Context updateEinkAppCustomeResources(Context context) {
+         if (null == context) {
+             return context;
+         }
+         String packageName = context.getPackageName();
+-        int densityDpi = getCurrentStoreDpi(context, packageName);
++        int densityDpi = getCurrentEinkAppCustomeStoreDpi(context, packageName);
+         if (-1 == densityDpi) {
+             return context;
+         }
+-- 
+2.17.1
+

@@ -1,0 +1,230 @@
+From cc0fdee5d40c4d306232348bf69fdbeaf32ba211 Mon Sep 17 00:00:00 2001
+From: "president.chao" <president.chao@rock-chips.com>
+Date: Wed, 11 Aug 2021 16:09:06 +0800
+Subject: [PATCH 2/3] Eink:Filter RockVideoPlayer apk from its packagename.
+
+Signed-off-by: president.chao <president.chao@rock-chips.com>
+Change-Id: I49ffce9830a0bcb6135a1c5ee12999519b436fed
+---
+ .../statusbar/phone/EinkSettingsProvider.java | 174 +++++++++---------
+ .../phone/NavigationBarFragment.java          |   3 +-
+ 2 files changed, 93 insertions(+), 84 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/EinkSettingsProvider.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/EinkSettingsProvider.java
+index 40b5f8ec2239..ad01741c8e87 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/EinkSettingsProvider.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/EinkSettingsProvider.java
+@@ -18,6 +18,9 @@ import android.view.IWindowManager;
+ import android.view.WindowManagerGlobal;
+ import android.os.EinkManager;
+ import java.lang.reflect.Method;
++import java.util.Arrays;
++import java.util.HashSet;
++import java.util.Set;
+ 
+ public class EinkSettingsProvider extends ContentProvider {
+     private static final String TAG = "EinkSettingsProvider";
+@@ -94,94 +97,99 @@ public class EinkSettingsProvider extends ContentProvider {
+             case EINKSETTINGS_UPDATE:
+                 packageName = selectionArgs[0];
+                 Log.d(TAG, "packageName: " + packageName);
+-                cursor = mDB.query(EINKSETTINGS_TABLE, projection, selection,
+-                        selectionArgs, null, null, sortOrder);
+-                if(cursor.getCount() > 0) {
+-                    Log.d(TAG, "cursor.getCount() > 0 DPI: " + DPI);
+-                    if(cursor.moveToFirst()) {
+-                        //DPI设置
+-                        int dpiFromDB = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_DPI));
+-                        DPI = dpiFromDB == -1 ? INIT_PROGRASS_DPI : dpiFromDB;
+-                        isDpiSetting = 1 == cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.IS_DPI_SETTING));
+-                        //刷新设置
+-                        isRefreshSetting = 1 == cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.IS_REFRESH_SETTING));
+-                        int refreshModeFromDB =cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.REFRESH_MODE));
+-                        refreshMode = refreshModeFromDB == -1 ?
+-                                Integer.valueOf(EinkManager.EinkMode.EPD_PART_GC16) : refreshModeFromDB;
+-                        int refreshFrequencyFromDB = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.REFRESH_FREQUENCY));
+-                        refreshFrequency =  refreshFrequencyFromDB == -1 ?
+-                                EinkSettingsDataBaseHelper.INIT_REFRESH_FREQUENCY : refreshFrequencyFromDB;
+-                        //对比度设置
+-                        contrast = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_CONTRAST));
+-                        isContrastSetting = 1 == cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.IS_CONTRAST_SETTING));
+-                        //动画过滤
+-                        mAppAnimFilter = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_ANIM_FILTER));
+-                        //应用漂白
+-                        mIsAppBleach = 1 == cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_BLEACH_MODE));
+-                        mIsAppBleachTextPlus = 1 == cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_BLEACH_TEXT_PLUS));
+-                        mAppBleachIconColor = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_BLEACH_ICON_COLOR));
+-                        mAppBleachCoverColor = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_BLEACH_COVER_COLOR));
+-                        mAppBleachBgColor = cursor.getInt(cursor.getColumnIndex(
+-                                EinkSettingsDataBaseHelper.APP_BLEACH_BG_COLOR));
++                Set<String> set = new HashSet<>(Arrays.asList(NavigationBarFragment.BLACK_EINK_CONFIG_APP));
++                if (!set.contains(packageName)) {
++                    cursor = mDB.query(EINKSETTINGS_TABLE, projection, selection,
++                            selectionArgs, null, null, sortOrder);
++                    if(cursor.getCount() > 0) {
++                        Log.d(TAG, "cursor.getCount() > 0 DPI: " + DPI);
++                        if(cursor.moveToFirst()) {
++                            //DPI设置
++                            int dpiFromDB = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_DPI));
++                            DPI = dpiFromDB == -1 ? INIT_PROGRASS_DPI : dpiFromDB;
++                            isDpiSetting = 1 == cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.IS_DPI_SETTING));
++                            //刷新设置
++                            isRefreshSetting = 1 == cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.IS_REFRESH_SETTING));
++                            int refreshModeFromDB =cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.REFRESH_MODE));
++                            refreshMode = refreshModeFromDB == -1 ?
++                                    Integer.valueOf(EinkManager.EinkMode.EPD_PART_GC16) : refreshModeFromDB;
++                            int refreshFrequencyFromDB = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.REFRESH_FREQUENCY));
++                            refreshFrequency =  refreshFrequencyFromDB == -1 ?
++                                    EinkSettingsDataBaseHelper.INIT_REFRESH_FREQUENCY : refreshFrequencyFromDB;
++                            //对比度设置
++                            contrast = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_CONTRAST));
++                            isContrastSetting = 1 == cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.IS_CONTRAST_SETTING));
++                            //动画过滤
++                            mAppAnimFilter = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_ANIM_FILTER));
++                            //应用漂白
++                            mIsAppBleach = 1 == cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_BLEACH_MODE));
++                            mIsAppBleachTextPlus = 1 == cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_BLEACH_TEXT_PLUS));
++                            mAppBleachIconColor = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_BLEACH_ICON_COLOR));
++                            mAppBleachCoverColor = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_BLEACH_COVER_COLOR));
++                            mAppBleachBgColor = cursor.getInt(cursor.getColumnIndex(
++                                    EinkSettingsDataBaseHelper.APP_BLEACH_BG_COLOR));
++                        }
++                    } else {
++                        DPI = INIT_PROGRASS_DPI;
++                        isDpiSetting = false;
++                        isContrastSetting = false;
++                        contrast = 0;
++                        isRefreshSetting = false;
++                        refreshMode = Integer.valueOf(EinkManager.EinkMode.EPD_PART_GC16);
++                        refreshFrequency = EinkSettingsDataBaseHelper.INIT_REFRESH_FREQUENCY;
++                        mAppAnimFilter = 0;
++                        mIsAppBleach = false;
++                        mIsAppBleachTextPlus = false;
++                        mAppBleachIconColor = 0;
++                        mAppBleachCoverColor = 0;
++                        mAppBleachBgColor = 0;
+                     }
+-                } else {
+-                    DPI = INIT_PROGRASS_DPI;
+-                    isDpiSetting = false;
+-                    isContrastSetting = false;
+-                    contrast = 0;
+-                    isRefreshSetting = false;
+-                    refreshMode = Integer.valueOf(EinkManager.EinkMode.EPD_PART_GC16);
+-                    refreshFrequency = EinkSettingsDataBaseHelper.INIT_REFRESH_FREQUENCY;
+-                    mAppAnimFilter = 0;
+-                    mIsAppBleach = false;
+-                    mIsAppBleachTextPlus = false;
+-                    mAppBleachIconColor = 0;
+-                    mAppBleachCoverColor = 0;
+-                    mAppBleachBgColor = 0;
+-                }
+-                if(isContrastSetting) {
+-                    //对比度数值为0时，使用0xfedcba9876543210
+-                    if(contrast == 0) {
+-                        mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_CONTRAST, INIT_PROGRASS_CONTRAST);
++                    if(isContrastSetting) {
++                        //对比度数值为0时，使用0xfedcba9876543210
++                        if(contrast == 0) {
++                            mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_CONTRAST, INIT_PROGRASS_CONTRAST);
++                        } else {
++                            strContrast = mEinkSettingsManager.convertArrayToString(mEinkSettingsManager.convertLevelToArray(contrast));
++                            mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_CONTRAST, strContrast);
++                        }
+                     } else {
+-                        strContrast = mEinkSettingsManager.convertArrayToString(mEinkSettingsManager.convertLevelToArray(contrast));
+-                        mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_CONTRAST, strContrast);
++                        //未开启对比度开关时，使用系统对比度0xffccba9876543000
++                        mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_CONTRAST, SYS_CONTRAST);
+                     }
++                    //刷新设置开启下才设置
++                    if(isRefreshSetting) {
++                        mEinkSettingsManager.setEinkMode(String.valueOf(refreshMode));
++                        mEinkSettingsManager.setProperty(EINK_REFRESH_FREQUENCY, String.valueOf(refreshFrequency));
++                    } else {
++                        mEinkSettingsManager.setEinkMode(String.valueOf(EinkManager.EinkMode.EPD_PART_GC16));
++                        mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_REFRESH_FREQUENCY,
++                                String.valueOf(EinkSettingsDataBaseHelper.INIT_REFRESH_FREQUENCY));
++                    }
++                    ContentResolver contentResolver = getContext().getContentResolver();
++                    if (mIsAppBleach && mIsAppBleachTextPlus) {
++                        Settings.Secure.putInt(contentResolver,
++                                Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 1);
++                    } else {
++                        Settings.Secure.putInt(contentResolver,
++                                Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0);
++                    }
++                    EinkSettingsManager.updateAppBleach(getContext());
++                    break;
+                 } else {
+-                    //未开启对比度开关时，使用系统对比度0xffccba9876543000
+-                    mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_CONTRAST, SYS_CONTRAST);
+-                }
+-                //刷新设置开启下才设置
+-                if(isRefreshSetting) {
+-                    mEinkSettingsManager.setEinkMode(String.valueOf(refreshMode));
+-                    mEinkSettingsManager.setProperty(EINK_REFRESH_FREQUENCY, String.valueOf(refreshFrequency));
+-                } else {
+-                    mEinkSettingsManager.setEinkMode(String.valueOf(EinkManager.EinkMode.EPD_PART_GC16));
+-                    mEinkSettingsManager.setProperty(EinkSettingsProvider.EINK_REFRESH_FREQUENCY,
+-                            String.valueOf(EinkSettingsDataBaseHelper.INIT_REFRESH_FREQUENCY));
+-                }
+-                ContentResolver contentResolver = getContext().getContentResolver();
+-                if (mIsAppBleach && mIsAppBleachTextPlus) {
+-                    Settings.Secure.putInt(contentResolver,
+-                            Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 1);
+-                } else {
+-                    Settings.Secure.putInt(contentResolver,
+-                            Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, 0);
++                    Log.d(TAG, "It's in the blacklist.");
+                 }
+-                EinkSettingsManager.updateAppBleach(getContext());
+-                break;
+         }
+         return cursor;
+     }
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarFragment.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarFragment.java
+index d70273815a32..1c518443c7a4 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarFragment.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarFragment.java
+@@ -225,11 +225,12 @@ public class NavigationBarFragment extends LifecycleFragment implements Callback
+     private Context mContext;
+     private ActivityManager mActivityManager;
+ 
+-    private final String[] BLACK_EINK_CONFIG_APP = new String[] {
++    public static final String[] BLACK_EINK_CONFIG_APP = new String[] {
+             "com.android.systemui",
+             "com.android.permissioncontroller",
+             "com.android.launcher3",
+             "com.rockchip.notedemo",
++            "android.rk.RockVideoPlayer",
+     };
+ 
+     private Handler popupHandler = new Handler(){
+-- 
+2.17.1
+
