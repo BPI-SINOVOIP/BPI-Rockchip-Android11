@@ -1,0 +1,838 @@
+{
+ "array_types" :
+ [
+  {
+   "linker_set_key" : "_ZTIA_PKc",
+   "name" : "const char *[]",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIA_PKc",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_encoder_breaker"
+  },
+  {
+   "name" : "_encoder_visitor"
+  },
+  {
+   "name" : "cn_cbor_array_append"
+  },
+  {
+   "name" : "cn_cbor_array_create"
+  },
+  {
+   "name" : "cn_cbor_data_create"
+  },
+  {
+   "name" : "cn_cbor_decode"
+  },
+  {
+   "name" : "cn_cbor_double_create"
+  },
+  {
+   "name" : "cn_cbor_encoder_write"
+  },
+  {
+   "name" : "cn_cbor_float_create"
+  },
+  {
+   "name" : "cn_cbor_free"
+  },
+  {
+   "name" : "cn_cbor_index"
+  },
+  {
+   "name" : "cn_cbor_int_create"
+  },
+  {
+   "name" : "cn_cbor_map_create"
+  },
+  {
+   "name" : "cn_cbor_map_put"
+  },
+  {
+   "name" : "cn_cbor_mapget_int"
+  },
+  {
+   "name" : "cn_cbor_mapget_string"
+  },
+  {
+   "name" : "cn_cbor_mapput_int"
+  },
+  {
+   "name" : "cn_cbor_mapput_string"
+  },
+  {
+   "name" : "cn_cbor_string_create"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "cn_cbor_error_str"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CN_CBOR_FALSE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CN_CBOR_TRUE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CN_CBOR_NULL"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CN_CBOR_UNDEF"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CN_CBOR_UINT"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CN_CBOR_INT"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CN_CBOR_BYTES"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CN_CBOR_TEXT"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CN_CBOR_BYTES_CHUNKED"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CN_CBOR_TEXT_CHUNKED"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CN_CBOR_ARRAY"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "CN_CBOR_MAP"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "CN_CBOR_TAG"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "CN_CBOR_SIMPLE"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "CN_CBOR_DOUBLE"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "CN_CBOR_FLOAT"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "CN_CBOR_INVALID"
+    }
+   ],
+   "linker_set_key" : "_ZTI12cn_cbor_type",
+   "name" : "cn_cbor_type",
+   "referenced_type" : "_ZTI12cn_cbor_type",
+   "self_type" : "_ZTI12cn_cbor_type",
+   "size" : 4,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CN_CBOR_NO_ERROR"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CN_CBOR_ERR_OUT_OF_DATA"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CN_CBOR_ERR_NOT_ALL_DATA_CONSUMED"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CN_CBOR_ERR_ODD_SIZE_INDEF_MAP"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CN_CBOR_ERR_BREAK_OUTSIDE_INDEF"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CN_CBOR_ERR_MT_UNDEF_FOR_INDEF"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CN_CBOR_ERR_RESERVED_AI"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CN_CBOR_ERR_WRONG_NESTING_IN_INDEF_STRING"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CN_CBOR_ERR_INVALID_PARAMETER"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CN_CBOR_ERR_OUT_OF_MEMORY"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CN_CBOR_ERR_FLOAT_NOT_SUPPORTED"
+    }
+   ],
+   "linker_set_key" : "_ZTI13cn_cbor_error",
+   "name" : "cn_cbor_error",
+   "referenced_type" : "_ZTI13cn_cbor_error",
+   "self_type" : "_ZTI13cn_cbor_error",
+   "size" : 4,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "CN_CBOR_FL_COUNT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CN_CBOR_FL_INDEF"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "CN_CBOR_FL_OWNER"
+    }
+   ],
+   "linker_set_key" : "_ZTI13cn_cbor_flags",
+   "name" : "cn_cbor_flags",
+   "referenced_type" : "_ZTI13cn_cbor_flags",
+   "self_type" : "_ZTI13cn_cbor_flags",
+   "size" : 4,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "cn_cbor_array_append",
+   "linker_set_key" : "cn_cbor_array_append",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_array_create",
+   "linker_set_key" : "cn_cbor_array_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_data_create",
+   "linker_set_key" : "cn_cbor_data_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_decode",
+   "linker_set_key" : "cn_cbor_decode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_double_create",
+   "linker_set_key" : "cn_cbor_double_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTId"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_encoder_write",
+   "linker_set_key" : "cn_cbor_encoder_write",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPK7cn_cbor"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_float_create",
+   "linker_set_key" : "cn_cbor_float_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIf"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_free",
+   "linker_set_key" : "cn_cbor_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_index",
+   "linker_set_key" : "cn_cbor_index",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_int_create",
+   "linker_set_key" : "cn_cbor_int_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_map_create",
+   "linker_set_key" : "cn_cbor_map_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_map_put",
+   "linker_set_key" : "cn_cbor_map_put",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_mapget_int",
+   "linker_set_key" : "cn_cbor_mapget_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_mapget_string",
+   "linker_set_key" : "cn_cbor_mapget_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_mapput_int",
+   "linker_set_key" : "cn_cbor_mapput_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_mapput_string",
+   "linker_set_key" : "cn_cbor_mapput_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "function_name" : "cn_cbor_string_create",
+   "linker_set_key" : "cn_cbor_string_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP15cn_cbor_errback"
+    }
+   ],
+   "return_type" : "_ZTIP7cn_cbor",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "cn_cbor_error_str",
+   "name" : "cn_cbor_error_str",
+   "referenced_type" : "_ZTIA_PKc",
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  }
+ ],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP15cn_cbor_errback",
+   "name" : "cn_cbor_errback *",
+   "referenced_type" : "_ZTI15cn_cbor_errback",
+   "self_type" : "_ZTIP15cn_cbor_errback",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7cn_cbor",
+   "name" : "cn_cbor *",
+   "referenced_type" : "_ZTI7cn_cbor",
+   "self_type" : "_ZTIP7cn_cbor",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK7cn_cbor",
+   "name" : "const cn_cbor *",
+   "referenced_type" : "_ZTIK7cn_cbor",
+   "self_type" : "_ZTIPK7cn_cbor",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK7cn_cbor",
+   "name" : "const cn_cbor",
+   "referenced_type" : "_ZTI7cn_cbor",
+   "self_type" : "_ZTIK7cn_cbor",
+   "size" : 56,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "pos",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "err",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTI13cn_cbor_error"
+    }
+   ],
+   "linker_set_key" : "_ZTI15cn_cbor_errback",
+   "name" : "cn_cbor_errback",
+   "referenced_type" : "_ZTI15cn_cbor_errback",
+   "self_type" : "_ZTI15cn_cbor_errback",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTI12cn_cbor_type"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTI13cn_cbor_flags"
+    },
+    {
+     "field_name" : "v",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN7cn_cborUt_E"
+    },
+    {
+     "field_name" : "length",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "first_child",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "field_name" : "last_child",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "field_name" : "next",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIP7cn_cbor"
+    },
+    {
+     "field_name" : "parent",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIP7cn_cbor"
+    }
+   ],
+   "linker_set_key" : "_ZTI7cn_cbor",
+   "name" : "cn_cbor",
+   "referenced_type" : "_ZTI7cn_cbor",
+   "self_type" : "_ZTI7cn_cbor",
+   "size" : 56,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "bytes",
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "field_name" : "str",
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "sint",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "uint",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "dbl",
+     "referenced_type" : "_ZTId"
+    },
+    {
+     "field_name" : "f",
+     "referenced_type" : "_ZTIf"
+    },
+    {
+     "field_name" : "count",
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN7cn_cborUt_E",
+   "name" : "cn_cbor::(anonymous union at external/cn-cbor/include/cn-cbor/cn-cbor.h:86:3)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN7cn_cborUt_E",
+   "self_type" : "_ZTIN7cn_cborUt_E",
+   "size" : 8,
+   "source_file" : "/external/cn-cbor/include/cn-cbor/cn-cbor.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

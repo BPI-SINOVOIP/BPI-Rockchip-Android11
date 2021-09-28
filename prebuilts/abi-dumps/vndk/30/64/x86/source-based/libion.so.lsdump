@@ -1,0 +1,716 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA32_c",
+   "name" : "char [32]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA32_c",
+   "size" : 32,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion_4.19.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ion_alloc"
+  },
+  {
+   "name" : "ion_alloc_fd"
+  },
+  {
+   "name" : "ion_close"
+  },
+  {
+   "name" : "ion_free"
+  },
+  {
+   "name" : "ion_import"
+  },
+  {
+   "name" : "ion_is_legacy"
+  },
+  {
+   "name" : "ion_is_using_modular_heaps"
+  },
+  {
+   "name" : "ion_map"
+  },
+  {
+   "name" : "ion_open"
+  },
+  {
+   "name" : "ion_query_get_heaps"
+  },
+  {
+   "name" : "ion_query_heap_cnt"
+  },
+  {
+   "name" : "ion_share"
+  },
+  {
+   "name" : "ion_sync_fd"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "ION_HEAP_SYSTEM"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ION_HEAP_DMA_START"
+    },
+    {
+     "enum_field_value" : 256,
+     "name" : "ION_HEAP_DMA_END"
+    },
+    {
+     "enum_field_value" : 512,
+     "name" : "ION_HEAP_CUSTOM_START"
+    },
+    {
+     "enum_field_value" : -2147483648,
+     "name" : "ION_HEAP_CUSTOM_END"
+    }
+   ],
+   "linker_set_key" : "_ZTI11ion_heap_id",
+   "name" : "ion_heap_id",
+   "referenced_type" : "_ZTI11ion_heap_id",
+   "self_type" : "_ZTI11ion_heap_id",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion_4.19.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ION_HEAP_TYPE_SYSTEM"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ION_HEAP_TYPE_SYSTEM_CONTIG"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ION_HEAP_TYPE_CARVEOUT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ION_HEAP_TYPE_CHUNK"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ION_HEAP_TYPE_DMA"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ION_HEAP_TYPE_CUSTOM"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "ION_NUM_HEAPS"
+    }
+   ],
+   "linker_set_key" : "_ZTI13ion_heap_type",
+   "name" : "ion_heap_type",
+   "referenced_type" : "_ZTI13ion_heap_type",
+   "self_type" : "_ZTI13ion_heap_type",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 16,
+     "name" : "ION_HEAP_TYPE_CUSTOM_EXT"
+    },
+    {
+     "enum_field_value" : 31,
+     "name" : "ION_HEAP_TYPE_MAX"
+    }
+   ],
+   "linker_set_key" : "_ZTI17ion_heap_type_ext",
+   "name" : "ion_heap_type_ext",
+   "referenced_type" : "_ZTI17ion_heap_type_ext",
+   "self_type" : "_ZTI17ion_heap_type_ext",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion_4.19.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ion_alloc",
+   "linker_set_key" : "ion_alloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_alloc_fd",
+   "linker_set_key" : "ion_alloc_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_close",
+   "linker_set_key" : "ion_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_free",
+   "linker_set_key" : "ion_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_import",
+   "linker_set_key" : "ion_import",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_is_legacy",
+   "linker_set_key" : "ion_is_legacy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_is_using_modular_heaps",
+   "linker_set_key" : "ion_is_using_modular_heaps",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_map",
+   "linker_set_key" : "ion_map",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIPPh"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_open",
+   "linker_set_key" : "ion_open",
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_query_get_heaps",
+   "linker_set_key" : "ion_query_get_heaps",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_query_heap_cnt",
+   "linker_set_key" : "ion_query_heap_cnt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_share",
+   "linker_set_key" : "ion_share",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_sync_fd",
+   "linker_set_key" : "ion_sync_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPh",
+   "name" : "unsigned char **",
+   "referenced_type" : "_ZTIPh",
+   "self_type" : "_ZTIPPh",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/include/ion/ion.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "handle",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI11ion_fd_data",
+   "name" : "ion_fd_data",
+   "referenced_type" : "_ZTI11ion_fd_data",
+   "self_type" : "_ZTI11ion_fd_data",
+   "size" : 8,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "_ZTIA32_c"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "heap_id",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "reserved0",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "reserved1",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "reserved2",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI13ion_heap_data",
+   "name" : "ion_heap_data",
+   "referenced_type" : "_ZTI13ion_heap_data",
+   "self_type" : "_ZTI13ion_heap_data",
+   "size" : 52,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion_4.19.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "cnt",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "reserved0",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "heaps",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "reserved1",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "reserved2",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI14ion_heap_query",
+   "name" : "ion_heap_query",
+   "referenced_type" : "_ZTI14ion_heap_query",
+   "self_type" : "_ZTI14ion_heap_query",
+   "size" : 24,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion_4.19.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "cmd",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "arg",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI15ion_custom_data",
+   "name" : "ion_custom_data",
+   "referenced_type" : "_ZTI15ion_custom_data",
+   "self_type" : "_ZTI15ion_custom_data",
+   "size" : 8,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "handle",
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI15ion_handle_data",
+   "name" : "ion_handle_data",
+   "referenced_type" : "_ZTI15ion_handle_data",
+   "self_type" : "_ZTI15ion_handle_data",
+   "size" : 4,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "len",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "align",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "heap_id_mask",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "handle",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI19ion_allocation_data",
+   "name" : "ion_allocation_data",
+   "referenced_type" : "_ZTI19ion_allocation_data",
+   "self_type" : "_ZTI19ion_allocation_data",
+   "size" : 20,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "len",
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "heap_id_mask",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "unused",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI23ion_new_allocation_data",
+   "name" : "ion_new_allocation_data",
+   "referenced_type" : "_ZTI23ion_new_allocation_data",
+   "self_type" : "_ZTI23ion_new_allocation_data",
+   "size" : 24,
+   "source_file" : "/system/memory/libion/kernel-headers/linux/ion_4.19.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

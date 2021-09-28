@@ -1,0 +1,907 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-21",
+   "self_type" : "type-21",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memcpy"
+  },
+  {
+   "name" : "__aeabi_memcpy4"
+  },
+  {
+   "name" : "__aeabi_memcpy8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  },
+  {
+   "name" : "__aeabi_uidiv"
+  },
+  {
+   "name" : "__aeabi_uidivmod"
+  },
+  {
+   "name" : "__aeabi_uldivmod"
+  },
+  {
+   "name" : "__udivmoddi4"
+  },
+  {
+   "name" : "__udivmodsi4"
+  },
+  {
+   "name" : "__udivsi3"
+  },
+  {
+   "name" : "decode_dhcp_msg"
+  },
+  {
+   "name" : "dhcp_init_ifc"
+  },
+  {
+   "name" : "dhcp_lasterror"
+  },
+  {
+   "name" : "do_dhcp"
+  },
+  {
+   "name" : "dump_dhcp_info"
+  },
+  {
+   "name" : "dump_dhcp_msg"
+  },
+  {
+   "name" : "fatal"
+  },
+  {
+   "name" : "get_dhcp_info"
+  },
+  {
+   "name" : "get_msecs"
+  },
+  {
+   "name" : "ifc_act_on_address"
+  },
+  {
+   "name" : "ifc_act_on_ipv4_route"
+  },
+  {
+   "name" : "ifc_add_address"
+  },
+  {
+   "name" : "ifc_clear_addresses"
+  },
+  {
+   "name" : "ifc_clear_ipv4_addresses"
+  },
+  {
+   "name" : "ifc_clear_ipv6_addresses"
+  },
+  {
+   "name" : "ifc_close"
+  },
+  {
+   "name" : "ifc_close6"
+  },
+  {
+   "name" : "ifc_configure"
+  },
+  {
+   "name" : "ifc_create_default_route"
+  },
+  {
+   "name" : "ifc_del_address"
+  },
+  {
+   "name" : "ifc_disable"
+  },
+  {
+   "name" : "ifc_down"
+  },
+  {
+   "name" : "ifc_enable"
+  },
+  {
+   "name" : "ifc_get_addr"
+  },
+  {
+   "name" : "ifc_get_hwaddr"
+  },
+  {
+   "name" : "ifc_get_ifindex"
+  },
+  {
+   "name" : "ifc_get_info"
+  },
+  {
+   "name" : "ifc_init"
+  },
+  {
+   "name" : "ifc_init6"
+  },
+  {
+   "name" : "ifc_remove_default_route"
+  },
+  {
+   "name" : "ifc_reset_connections"
+  },
+  {
+   "name" : "ifc_set_addr"
+  },
+  {
+   "name" : "ifc_set_hwaddr"
+  },
+  {
+   "name" : "ifc_set_mask"
+  },
+  {
+   "name" : "ifc_set_prefixLength"
+  },
+  {
+   "name" : "ifc_up"
+  },
+  {
+   "name" : "init_dhcp_discover_msg"
+  },
+  {
+   "name" : "init_dhcp_request_msg"
+  },
+  {
+   "name" : "ip_checksum"
+  },
+  {
+   "name" : "ip_checksum_add"
+  },
+  {
+   "name" : "ip_checksum_adjust"
+  },
+  {
+   "name" : "ip_checksum_finish"
+  },
+  {
+   "name" : "ip_checksum_fold"
+  },
+  {
+   "name" : "ipaddr"
+  },
+  {
+   "name" : "ipv4NetmaskToPrefixLength"
+  },
+  {
+   "name" : "ipv4_pseudo_header_checksum"
+  },
+  {
+   "name" : "ipv6_pseudo_header_checksum"
+  },
+  {
+   "name" : "open_raw_socket"
+  },
+  {
+   "name" : "prefixLengthToIpv4Netmask"
+  },
+  {
+   "name" : "printerr"
+  },
+  {
+   "name" : "receive_packet"
+  },
+  {
+   "name" : "send_packet"
+  },
+  {
+   "name" : "string_to_ip"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "last_good_info"
+  }
+ ],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ifc_add_address",
+   "linker_set_key" : "ifc_add_address",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_clear_addresses",
+   "linker_set_key" : "ifc_clear_addresses",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_close",
+   "linker_set_key" : "ifc_close",
+   "return_type" : "type-14",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_configure",
+   "linker_set_key" : "ifc_configure",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_create_default_route",
+   "linker_set_key" : "ifc_create_default_route",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_del_address",
+   "linker_set_key" : "ifc_del_address",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_disable",
+   "linker_set_key" : "ifc_disable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_down",
+   "linker_set_key" : "ifc_down",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_enable",
+   "linker_set_key" : "ifc_enable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_addr",
+   "linker_set_key" : "ifc_get_addr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_hwaddr",
+   "linker_set_key" : "ifc_get_hwaddr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_ifindex",
+   "linker_set_key" : "ifc_get_ifindex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_info",
+   "linker_set_key" : "ifc_get_info",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_init",
+   "linker_set_key" : "ifc_init",
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_remove_default_route",
+   "linker_set_key" : "ifc_remove_default_route",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_reset_connections",
+   "linker_set_key" : "ifc_reset_connections",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_set_addr",
+   "linker_set_key" : "ifc_set_addr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_set_hwaddr",
+   "linker_set_key" : "ifc_set_hwaddr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_set_prefixLength",
+   "linker_set_key" : "ifc_set_prefixLength",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_up",
+   "linker_set_key" : "ifc_up",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ip_checksum",
+   "linker_set_key" : "ip_checksum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ip_checksum_add",
+   "linker_set_key" : "ip_checksum_add",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ip_checksum_adjust",
+   "linker_set_key" : "ip_checksum_adjust",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ip_checksum_finish",
+   "linker_set_key" : "ip_checksum_finish",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ipv4_pseudo_header_checksum",
+   "linker_set_key" : "ipv4_pseudo_header_checksum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ipv6_pseudo_header_checksum",
+   "linker_set_key" : "ipv6_pseudo_header_checksum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "prefixLengthToIpv4Netmask",
+   "linker_set_key" : "prefixLengthToIpv4Netmask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-9",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ip6_hdr *",
+   "name" : "const ip6_hdr *",
+   "referenced_type" : "type-29",
+   "self_type" : "type-31",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ip6_hdr *",
+   "name" : "const ip6_hdr *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const iphdr *",
+   "name" : "const iphdr *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-32",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const iphdr *",
+   "name" : "const iphdr *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-28",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-33",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-6",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 1,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const int",
+   "name" : "const int",
+   "referenced_type" : "type-12",
+   "self_type" : "type-15",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const ip6_hdr",
+   "name" : "const ip6_hdr",
+   "referenced_type" : "type-30",
+   "self_type" : "type-29",
+   "size" : 40,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const ip6_hdr",
+   "name" : "const ip6_hdr",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 40,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const iphdr",
+   "name" : "const iphdr",
+   "referenced_type" : "type-24",
+   "self_type" : "type-23",
+   "size" : 20,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const iphdr",
+   "name" : "const iphdr",
+   "referenced_type" : "type-27",
+   "self_type" : "type-26",
+   "size" : 20,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-14",
+   "self_type" : "type-33",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,1039 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDs",
+   "name" : "char16_t",
+   "referenced_type" : "_ZTIDs",
+   "self_type" : "_ZTIDs",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "JNI_CreateJavaVM"
+  },
+  {
+   "name" : "JNI_GetCreatedJavaVMs"
+  },
+  {
+   "name" : "JNI_GetDefaultJavaVMInitArgs"
+  },
+  {
+   "name" : "JniInvocationCreate"
+  },
+  {
+   "name" : "JniInvocationDestroy"
+  },
+  {
+   "name" : "JniInvocationGetLibrary"
+  },
+  {
+   "name" : "JniInvocationInit"
+  },
+  {
+   "name" : "jniCreateFileDescriptor"
+  },
+  {
+   "name" : "jniCreateString"
+  },
+  {
+   "name" : "jniGetFDFromFileDescriptor"
+  },
+  {
+   "name" : "jniGetNioBufferBaseArray"
+  },
+  {
+   "name" : "jniGetNioBufferBaseArrayOffset"
+  },
+  {
+   "name" : "jniGetNioBufferFields"
+  },
+  {
+   "name" : "jniGetNioBufferPointer"
+  },
+  {
+   "name" : "jniGetOwnerIdFromFileDescriptor"
+  },
+  {
+   "name" : "jniGetReferent"
+  },
+  {
+   "name" : "jniLogException"
+  },
+  {
+   "name" : "jniRegisterNativeMethods"
+  },
+  {
+   "name" : "jniSetFileDescriptorOfFD"
+  },
+  {
+   "name" : "jniStrError"
+  },
+  {
+   "name" : "jniThrowException"
+  },
+  {
+   "name" : "jniThrowExceptionFmt"
+  },
+  {
+   "name" : "jniThrowIOException"
+  },
+  {
+   "name" : "jniThrowNullPointerException"
+  },
+  {
+   "name" : "jniThrowRuntimeException"
+  },
+  {
+   "name" : "jniUninitializeConstants"
+  },
+  {
+   "name" : "newStringArray"
+  },
+  {
+   "name" : "toStringArray"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFbvE",
+   "name" : "bool ()",
+   "referenced_type" : "_ZTIFbvE",
+   "return_type" : "_ZTIb",
+   "self_type" : "_ZTIFbvE",
+   "source_file" : "/libnativehelper/include/nativehelper/JniInvocation.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFiPcE",
+   "name" : "int (char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "referenced_type" : "_ZTIFiPcE",
+   "return_type" : "_ZTIi",
+   "self_type" : "_ZTIFiPcE",
+   "source_file" : "/libnativehelper/include/nativehelper/JniInvocation.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "JniInvocationCreate",
+   "linker_set_key" : "JniInvocationCreate",
+   "return_type" : "_ZTIP17JniInvocationImpl",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "JniInvocationDestroy",
+   "linker_set_key" : "JniInvocationDestroy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17JniInvocationImpl"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "JniInvocationGetLibrary",
+   "linker_set_key" : "JniInvocationGetLibrary",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "JniInvocationInit",
+   "linker_set_key" : "JniInvocationInit",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17JniInvocationImpl"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniCreateFileDescriptor",
+   "linker_set_key" : "jniCreateFileDescriptor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIP8_jobject",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniCreateString",
+   "linker_set_key" : "jniCreateString",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIPKt"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIP8_jstring",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetFDFromFileDescriptor",
+   "linker_set_key" : "jniGetFDFromFileDescriptor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetNioBufferBaseArray",
+   "linker_set_key" : "jniGetNioBufferBaseArray",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIP7_jarray",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetNioBufferBaseArrayOffset",
+   "linker_set_key" : "jniGetNioBufferBaseArrayOffset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetNioBufferFields",
+   "linker_set_key" : "jniGetNioBufferFields",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetNioBufferPointer",
+   "linker_set_key" : "jniGetNioBufferPointer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetOwnerIdFromFileDescriptor",
+   "linker_set_key" : "jniGetOwnerIdFromFileDescriptor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniGetReferent",
+   "linker_set_key" : "jniGetReferent",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIP8_jobject",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniLogException",
+   "linker_set_key" : "jniLogException",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP11_jthrowable"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniRegisterNativeMethods",
+   "linker_set_key" : "jniRegisterNativeMethods",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPK15JNINativeMethod"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniSetFileDescriptorOfFD",
+   "linker_set_key" : "jniSetFileDescriptorOfFD",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniStrError",
+   "linker_set_key" : "jniStrError",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniThrowException",
+   "linker_set_key" : "jniThrowException",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniThrowExceptionFmt",
+   "linker_set_key" : "jniThrowExceptionFmt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTISt9__va_list"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniThrowIOException",
+   "linker_set_key" : "jniThrowIOException",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniThrowNullPointerException",
+   "linker_set_key" : "jniThrowNullPointerException",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniThrowRuntimeException",
+   "linker_set_key" : "jniThrowRuntimeException",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPK18JNINativeInterface"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "jniUninitializeConstants",
+   "linker_set_key" : "jniUninitializeConstants",
+   "return_type" : "_ZTIv",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "newStringArray",
+   "linker_set_key" : "newStringArray",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIP13_jobjectArray",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "function_name" : "toStringArray",
+   "linker_set_key" : "toStringArray",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIPKPKc"
+    }
+   ],
+   "return_type" : "_ZTIP13_jobjectArray",
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "name" : "const std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char> > > > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/toStringArray.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP11_jthrowable",
+   "name" : "_jthrowable *",
+   "referenced_type" : "_ZTI11_jthrowable",
+   "self_type" : "_ZTIP11_jthrowable",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP12VectorGetter",
+   "name" : "VectorGetter *",
+   "referenced_type" : "_ZTI12VectorGetter",
+   "self_type" : "_ZTIP12VectorGetter",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/toStringArray.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13JniInvocation",
+   "name" : "JniInvocation *",
+   "referenced_type" : "_ZTI13JniInvocation",
+   "self_type" : "_ZTIP13JniInvocation",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/JniInvocation.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13VectorCounter",
+   "name" : "VectorCounter *",
+   "referenced_type" : "_ZTI13VectorCounter",
+   "self_type" : "_ZTIP13VectorCounter",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/toStringArray.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13_jobjectArray",
+   "name" : "_jobjectArray *",
+   "referenced_type" : "_ZTI13_jobjectArray",
+   "self_type" : "_ZTIP13_jobjectArray",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP14ScopedLocalRefIP7_jclassE",
+   "name" : "ScopedLocalRef<_jclass *> *",
+   "referenced_type" : "_ZTI14ScopedLocalRefIP7_jclassE",
+   "self_type" : "_ZTIP14ScopedLocalRefIP7_jclassE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP14ScopedLocalRefIP8_jstringE",
+   "name" : "ScopedLocalRef<_jstring *> *",
+   "referenced_type" : "_ZTI14ScopedLocalRefIP8_jstringE",
+   "self_type" : "_ZTIP14ScopedLocalRefIP8_jstringE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP17JniInvocationImpl",
+   "name" : "JniInvocationImpl *",
+   "referenced_type" : "_ZTI17JniInvocationImpl",
+   "self_type" : "_ZTIP17JniInvocationImpl",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7_JNIEnv",
+   "name" : "_JNIEnv *",
+   "referenced_type" : "_ZTI7_JNIEnv",
+   "self_type" : "_ZTIP7_JNIEnv",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/JNIHelp.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7_jarray",
+   "name" : "_jarray *",
+   "referenced_type" : "_ZTI7_jarray",
+   "self_type" : "_ZTIP7_jarray",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7_jclass",
+   "name" : "_jclass *",
+   "referenced_type" : "_ZTI7_jclass",
+   "self_type" : "_ZTIP7_jclass",
+   "size" : 8,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8_jobject",
+   "name" : "_jobject *",
+   "referenced_type" : "_ZTI8_jobject",
+   "self_type" : "_ZTIP8_jobject",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8_jstring",
+   "name" : "_jstring *",
+   "referenced_type" : "_ZTI8_jstring",
+   "self_type" : "_ZTIP8_jstring",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFbvE",
+   "name" : "bool (*)()",
+   "referenced_type" : "_ZTIFbvE",
+   "self_type" : "_ZTIPFbvE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/JniInvocation.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFiPcE",
+   "name" : "int (*)(char *)",
+   "referenced_type" : "_ZTIFiPcE",
+   "self_type" : "_ZTIPFiPcE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/JniInvocation.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK14ScopedLocalRefIP7_jclassE",
+   "name" : "const ScopedLocalRef<_jclass *> *",
+   "referenced_type" : "_ZTIK14ScopedLocalRefIP7_jclassE",
+   "self_type" : "_ZTIPK14ScopedLocalRefIP7_jclassE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK14ScopedLocalRefIP8_jstringE",
+   "name" : "const ScopedLocalRef<_jstring *> *",
+   "referenced_type" : "_ZTIK14ScopedLocalRefIP8_jstringE",
+   "self_type" : "_ZTIPK14ScopedLocalRefIP8_jstringE",
+   "size" : 8,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK15JNINativeMethod",
+   "name" : "const JNINativeMethod *",
+   "referenced_type" : "_ZTIK15JNINativeMethod",
+   "self_type" : "_ZTIPK15JNINativeMethod",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK18JNINativeInterface",
+   "name" : "const JNINativeInterface *",
+   "referenced_type" : "_ZTIK18JNINativeInterface",
+   "self_type" : "_ZTIPK18JNINativeInterface",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKDs",
+   "name" : "const char16_t *",
+   "referenced_type" : "_ZTIKDs",
+   "self_type" : "_ZTIPKDs",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/JNIHelp.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKPKc",
+   "name" : "const char *const *",
+   "referenced_type" : "_ZTIKPKc",
+   "self_type" : "_ZTIPKPKc",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKt",
+   "name" : "const unsigned short *",
+   "referenced_type" : "_ZTIKt",
+   "self_type" : "_ZTIPKt",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPK18JNINativeInterface",
+   "name" : "const JNINativeInterface **",
+   "referenced_type" : "_ZTIPK18JNINativeInterface",
+   "self_type" : "_ZTIPPK18JNINativeInterface",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK14ScopedLocalRefIP7_jclassE",
+   "name" : "const ScopedLocalRef<_jclass *>",
+   "referenced_type" : "_ZTI14ScopedLocalRefIP7_jclassE",
+   "self_type" : "_ZTIK14ScopedLocalRefIP7_jclassE",
+   "size" : 16,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK14ScopedLocalRefIP8_jstringE",
+   "name" : "const ScopedLocalRef<_jstring *>",
+   "referenced_type" : "_ZTI14ScopedLocalRefIP8_jstringE",
+   "self_type" : "_ZTIK14ScopedLocalRefIP8_jstringE",
+   "size" : 16,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK15JNINativeMethod",
+   "name" : "const JNINativeMethod",
+   "referenced_type" : "_ZTI15JNINativeMethod",
+   "self_type" : "_ZTIK15JNINativeMethod",
+   "size" : 24,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK18JNINativeInterface",
+   "name" : "const JNINativeInterface",
+   "referenced_type" : "_ZTI18JNINativeInterface",
+   "self_type" : "_ZTIK18JNINativeInterface",
+   "size" : 1864,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKDs",
+   "name" : "const char16_t",
+   "referenced_type" : "_ZTIDs",
+   "self_type" : "_ZTIKDs",
+   "size" : 2,
+   "source_file" : "/libnativehelper/include/nativehelper/JNIHelp.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "name" : "const std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char> > > >",
+   "referenced_type" : "_ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "self_type" : "_ZTIKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "size" : 24,
+   "source_file" : "/libnativehelper/include/nativehelper/toStringArray.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKPKc",
+   "name" : "const char *const",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIKPKc",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKt",
+   "name" : "const unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIKt",
+   "size" : 2,
+   "source_file" : "/libnativehelper/include/nativehelper/libnativehelper_api.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "strings",
+     "referenced_type" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTI12VectorGetter",
+   "name" : "VectorGetter",
+   "referenced_type" : "_ZTI12VectorGetter",
+   "self_type" : "_ZTI12VectorGetter",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/toStringArray.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "impl_",
+     "referenced_type" : "_ZTIP17JniInvocationImpl"
+    }
+   ],
+   "linker_set_key" : "_ZTI13JniInvocation",
+   "name" : "JniInvocation",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI13JniInvocation",
+   "self_type" : "_ZTI13JniInvocation",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/JniInvocation.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "strings",
+     "referenced_type" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTI13VectorCounter",
+   "name" : "VectorCounter",
+   "referenced_type" : "_ZTI13VectorCounter",
+   "self_type" : "_ZTI13VectorCounter",
+   "size" : 8,
+   "source_file" : "/libnativehelper/include/nativehelper/toStringArray.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mEnv",
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mLocalRef",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP7_jclass"
+    }
+   ],
+   "linker_set_key" : "_ZTI14ScopedLocalRefIP7_jclassE",
+   "name" : "ScopedLocalRef<_jclass *>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI14ScopedLocalRefIP7_jclassE",
+   "self_type" : "_ZTI14ScopedLocalRefIP7_jclassE",
+   "size" : 16,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h",
+   "template_args" : [ "_ZTIP7_jclass" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mEnv",
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mLocalRef",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP8_jstring"
+    }
+   ],
+   "linker_set_key" : "_ZTI14ScopedLocalRefIP8_jstringE",
+   "name" : "ScopedLocalRef<_jstring *>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI14ScopedLocalRefIP8_jstringE",
+   "self_type" : "_ZTI14ScopedLocalRefIP8_jstringE",
+   "size" : 16,
+   "source_file" : "/libnativehelper/header_only_include/nativehelper/scoped_local_ref.h",
+   "template_args" : [ "_ZTIP8_jstring" ]
+  }
+ ],
+ "rvalue_reference_types" : []
+}

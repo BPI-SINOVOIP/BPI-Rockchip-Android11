@@ -1,0 +1,2153 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [32]",
+   "name" : "unsigned char [32]",
+   "referenced_type" : "type-3",
+   "self_type" : "type-48",
+   "size" : 32,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/password_handle.h"
+  },
+  {
+   "linker_set_key" : "unsigned char []",
+   "name" : "unsigned char []",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-24",
+   "self_type" : "type-24",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-61",
+   "self_type" : "type-61"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper13MintAuthTokenEPNS_9UniquePtrIhNS_13DefaultDeleteIhEEEEPjmmmm"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper15ThrottleRequestEjmPNS_16failure_record_tEbPNS_17GateKeeperMessageE"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper19ComputeRetryTimeoutEPKNS_16failure_record_tE"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper20CreatePasswordHandleEPNS_11SizedBufferEmmmhPKhj"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper22IncrementFailureRecordEjmmPNS_16failure_record_tEb"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper6EnrollERKNS_13EnrollRequestEPNS_14EnrollResponseE"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper6VerifyERKNS_13VerifyRequestEPNS_14VerifyResponseE"
+  },
+  {
+   "name" : "_ZN10gatekeeper10GateKeeper8DoVerifyEPKNS_17password_handle_tERKNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequest19nonErrorDeserializeEPKhS2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestC1EjPNS_11SizedBufferES2_S2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestC1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestC2EjPNS_11SizedBufferES2_S2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestC2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestD0Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestD1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13EnrollRequestD2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequest19nonErrorDeserializeEPKhS2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestC1EjmPNS_11SizedBufferES2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestC1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestC2EjmPNS_11SizedBufferES2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestC2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestD0Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestD1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper13VerifyRequestD2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponse19nonErrorDeserializeEPKhS2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponse25SetEnrolledPasswordHandleEPNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseC1EjPNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseC1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseC2EjPNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseC2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseD0Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseD1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14EnrollResponseD2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponse19nonErrorDeserializeEPKhS2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponse20SetVerificationTokenEPNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseC1EjPNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseC1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseC2EjPNS_11SizedBufferE"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseC2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseD0Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseD1Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper14VerifyResponseD2Ev"
+  },
+  {
+   "name" : "_ZN10gatekeeper17GateKeeperMessage11DeserializeEPKhS2_"
+  },
+  {
+   "name" : "_ZN10gatekeeper17GateKeeperMessage15SetRetryTimeoutEj"
+  },
+  {
+   "name" : "_ZNK10gatekeeper13EnrollRequest17nonErrorSerializeEPh"
+  },
+  {
+   "name" : "_ZNK10gatekeeper13EnrollRequest22nonErrorSerializedSizeEv"
+  },
+  {
+   "name" : "_ZNK10gatekeeper13VerifyRequest17nonErrorSerializeEPh"
+  },
+  {
+   "name" : "_ZNK10gatekeeper13VerifyRequest22nonErrorSerializedSizeEv"
+  },
+  {
+   "name" : "_ZNK10gatekeeper14EnrollResponse17nonErrorSerializeEPh"
+  },
+  {
+   "name" : "_ZNK10gatekeeper14EnrollResponse22nonErrorSerializedSizeEv"
+  },
+  {
+   "name" : "_ZNK10gatekeeper14VerifyResponse17nonErrorSerializeEPh"
+  },
+  {
+   "name" : "_ZNK10gatekeeper14VerifyResponse22nonErrorSerializedSizeEv"
+  },
+  {
+   "name" : "_ZNK10gatekeeper17GateKeeperMessage17GetSerializedSizeEv"
+  },
+  {
+   "name" : "_ZNK10gatekeeper17GateKeeperMessage9SerializeEPhPKh"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZTVN10gatekeeper10GateKeeperE"
+  },
+  {
+   "name" : "_ZTVN10gatekeeper13EnrollRequestE"
+  },
+  {
+   "name" : "_ZTVN10gatekeeper13VerifyRequestE"
+  },
+  {
+   "name" : "_ZTVN10gatekeeper14EnrollResponseE"
+  },
+  {
+   "name" : "_ZTVN10gatekeeper14VerifyResponseE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "gatekeeper::ERROR_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "gatekeeper::ERROR_INVALID"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "gatekeeper::ERROR_RETRY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "gatekeeper::ERROR_UNKNOWN"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::gatekeeper_error_t",
+   "name" : "gatekeeper::gatekeeper_error_t",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 4,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "underlying_type" : "type-6",
+   "unique_id" : "_ZTSN10gatekeeper18gatekeeper_error_tE"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "access" : "private",
+   "function_name" : "gatekeeper::GateKeeper::MintAuthToken",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper13MintAuthTokenEPNS_9UniquePtrIhNS_13DefaultDeleteIhEEEEPjmmmm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-63"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "gatekeeper::GateKeeper::ThrottleRequest",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper15ThrottleRequestEjmPNS_16failure_record_tEbPNS_17GateKeeperMessageE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-64"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-24",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "gatekeeper::GateKeeper::ComputeRetryTimeout",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper19ComputeRetryTimeoutEPKNS_16failure_record_tE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-56"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "gatekeeper::GateKeeper::CreatePasswordHandle",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper20CreatePasswordHandleEPNS_11SizedBufferEmmmhPKhj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-24",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "gatekeeper::GateKeeper::IncrementFailureRecord",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper22IncrementFailureRecordEjmmPNS_16failure_record_tEb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-64"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-24",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "function_name" : "gatekeeper::GateKeeper::Enroll",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper6EnrollERKNS_13EnrollRequestEPNS_14EnrollResponseE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "function_name" : "gatekeeper::GateKeeper::Verify",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper6VerifyERKNS_13VerifyRequestEPNS_14VerifyResponseE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-54"
+    },
+    {
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "gatekeeper::GateKeeper::DoVerify",
+   "linker_set_key" : "_ZN10gatekeeper10GateKeeper8DoVerifyEPKNS_17password_handle_tERKNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-58"
+    },
+    {
+     "referenced_type" : "type-62"
+    }
+   ],
+   "return_type" : "type-24",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::nonErrorDeserialize",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequest19nonErrorDeserializeEPKhS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestC1EjPNS_11SizedBufferES2_S2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestC2EjPNS_11SizedBufferES2_S2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::~EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::~EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::~EnrollRequest",
+   "linker_set_key" : "_ZN10gatekeeper13EnrollRequestD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::nonErrorDeserialize",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequest19nonErrorDeserializeEPKhS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestC1EjmPNS_11SizedBufferES2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestC2EjmPNS_11SizedBufferES2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::~VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::~VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::~VerifyRequest",
+   "linker_set_key" : "_ZN10gatekeeper13VerifyRequestD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::nonErrorDeserialize",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponse19nonErrorDeserializeEPKhS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::SetEnrolledPasswordHandle",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponse25SetEnrolledPasswordHandleEPNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseC1EjPNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseC2EjPNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::~EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::~EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::~EnrollResponse",
+   "linker_set_key" : "_ZN10gatekeeper14EnrollResponseD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::nonErrorDeserialize",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponse19nonErrorDeserializeEPKhS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::SetVerificationToken",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponse20SetVerificationTokenEPNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseC1EjPNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseC2EjPNS_11SizedBufferE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::~VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::~VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::~VerifyResponse",
+   "linker_set_key" : "_ZN10gatekeeper14VerifyResponseD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::GateKeeperMessage::Deserialize",
+   "linker_set_key" : "_ZN10gatekeeper17GateKeeperMessage11DeserializeEPKhS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-14"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::GateKeeperMessage::SetRetryTimeout",
+   "linker_set_key" : "_ZN10gatekeeper17GateKeeperMessage15SetRetryTimeoutEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-14"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::nonErrorSerialize",
+   "linker_set_key" : "_ZNK10gatekeeper13EnrollRequest17nonErrorSerializeEPh",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-31"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollRequest::nonErrorSerializedSize",
+   "linker_set_key" : "_ZNK10gatekeeper13EnrollRequest22nonErrorSerializedSizeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-31"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::nonErrorSerialize",
+   "linker_set_key" : "_ZNK10gatekeeper13VerifyRequest17nonErrorSerializeEPh",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyRequest::nonErrorSerializedSize",
+   "linker_set_key" : "_ZNK10gatekeeper13VerifyRequest22nonErrorSerializedSizeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::nonErrorSerialize",
+   "linker_set_key" : "_ZNK10gatekeeper14EnrollResponse17nonErrorSerializeEPh",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::EnrollResponse::nonErrorSerializedSize",
+   "linker_set_key" : "_ZNK10gatekeeper14EnrollResponse22nonErrorSerializedSizeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::nonErrorSerialize",
+   "linker_set_key" : "_ZNK10gatekeeper14VerifyResponse17nonErrorSerializeEPh",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-27"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-61",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::VerifyResponse::nonErrorSerializedSize",
+   "linker_set_key" : "_ZNK10gatekeeper14VerifyResponse22nonErrorSerializedSizeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-27"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::GateKeeperMessage::GetSerializedSize",
+   "linker_set_key" : "_ZNK10gatekeeper17GateKeeperMessage17GetSerializedSizeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-16"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "function_name" : "gatekeeper::GateKeeperMessage::Serialize",
+   "linker_set_key" : "_ZNK10gatekeeper17GateKeeperMessage9SerializeEPhPKh",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::EnrollRequest &",
+   "name" : "const gatekeeper::EnrollRequest &",
+   "referenced_type" : "type-30",
+   "self_type" : "type-52",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::SizedBuffer &",
+   "name" : "const gatekeeper::SizedBuffer &",
+   "referenced_type" : "type-59",
+   "self_type" : "type-62",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::VerifyRequest &",
+   "name" : "const gatekeeper::VerifyRequest &",
+   "referenced_type" : "type-21",
+   "self_type" : "type-54",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::DefaultDelete<unsigned char []> *",
+   "name" : "const gatekeeper::DefaultDelete<unsigned char []> *",
+   "referenced_type" : "type-37",
+   "self_type" : "type-38",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::DefaultDelete<unsigned char> *",
+   "name" : "const gatekeeper::DefaultDelete<unsigned char> *",
+   "referenced_type" : "type-40",
+   "self_type" : "type-42",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::EnrollRequest *",
+   "name" : "const gatekeeper::EnrollRequest *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-31",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::EnrollResponse *",
+   "name" : "const gatekeeper::EnrollResponse *",
+   "referenced_type" : "type-34",
+   "self_type" : "type-35",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::GateKeeperMessage *",
+   "name" : "const gatekeeper::GateKeeperMessage *",
+   "referenced_type" : "type-15",
+   "self_type" : "type-16",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> > *",
+   "name" : "const gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> > *",
+   "referenced_type" : "type-36",
+   "self_type" : "type-53",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> > *",
+   "name" : "const gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> > *",
+   "referenced_type" : "type-45",
+   "self_type" : "type-46",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::VerifyRequest *",
+   "name" : "const gatekeeper::VerifyRequest *",
+   "referenced_type" : "type-21",
+   "self_type" : "type-22",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::VerifyResponse *",
+   "name" : "const gatekeeper::VerifyResponse *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-27",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::failure_record_t *",
+   "name" : "const gatekeeper::failure_record_t *",
+   "referenced_type" : "type-55",
+   "self_type" : "type-56",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const gatekeeper::password_handle_t *",
+   "name" : "const gatekeeper::password_handle_t *",
+   "referenced_type" : "type-57",
+   "self_type" : "type-58",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-17",
+   "self_type" : "type-18",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::DefaultDelete<unsigned char> *",
+   "name" : "gatekeeper::DefaultDelete<unsigned char> *",
+   "referenced_type" : "type-41",
+   "self_type" : "type-65",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::EnrollRequest *",
+   "name" : "gatekeeper::EnrollRequest *",
+   "referenced_type" : "type-28",
+   "self_type" : "type-29",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::EnrollResponse *",
+   "name" : "gatekeeper::EnrollResponse *",
+   "referenced_type" : "type-32",
+   "self_type" : "type-33",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::GateKeeper *",
+   "name" : "gatekeeper::GateKeeper *",
+   "referenced_type" : "type-50",
+   "self_type" : "type-51",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::GateKeeperMessage *",
+   "name" : "gatekeeper::GateKeeperMessage *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-14",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::SizedBuffer *",
+   "name" : "gatekeeper::SizedBuffer *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-12",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> > *",
+   "name" : "gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> > *",
+   "referenced_type" : "type-10",
+   "self_type" : "type-39",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> > *",
+   "name" : "gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> > *",
+   "referenced_type" : "type-43",
+   "self_type" : "type-44",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::VerifyRequest *",
+   "name" : "gatekeeper::VerifyRequest *",
+   "referenced_type" : "type-19",
+   "self_type" : "type-20",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::VerifyResponse *",
+   "name" : "gatekeeper::VerifyResponse *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-25",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::failure_record_t *",
+   "name" : "gatekeeper::failure_record_t *",
+   "referenced_type" : "type-49",
+   "self_type" : "type-64",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-11",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-63",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-61",
+   "self_type" : "type-60",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_utils.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::DefaultDelete<unsigned char []>",
+   "name" : "const gatekeeper::DefaultDelete<unsigned char []>",
+   "referenced_type" : "type-1",
+   "self_type" : "type-37",
+   "size" : 1,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::DefaultDelete<unsigned char>",
+   "name" : "const gatekeeper::DefaultDelete<unsigned char>",
+   "referenced_type" : "type-41",
+   "self_type" : "type-40",
+   "size" : 1,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::EnrollRequest",
+   "name" : "const gatekeeper::EnrollRequest",
+   "referenced_type" : "type-28",
+   "self_type" : "type-30",
+   "size" : 72,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::EnrollResponse",
+   "name" : "const gatekeeper::EnrollResponse",
+   "referenced_type" : "type-32",
+   "self_type" : "type-34",
+   "size" : 40,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::GateKeeperMessage",
+   "name" : "const gatekeeper::GateKeeperMessage",
+   "referenced_type" : "type-13",
+   "self_type" : "type-15",
+   "size" : 24,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::SizedBuffer",
+   "name" : "const gatekeeper::SizedBuffer",
+   "referenced_type" : "type-9",
+   "self_type" : "type-59",
+   "size" : 16,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> >",
+   "name" : "const gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> >",
+   "referenced_type" : "type-10",
+   "self_type" : "type-36",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> >",
+   "name" : "const gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> >",
+   "referenced_type" : "type-43",
+   "self_type" : "type-45",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::VerifyRequest",
+   "name" : "const gatekeeper::VerifyRequest",
+   "referenced_type" : "type-19",
+   "self_type" : "type-21",
+   "size" : 64,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::VerifyResponse",
+   "name" : "const gatekeeper::VerifyResponse",
+   "referenced_type" : "type-23",
+   "self_type" : "type-26",
+   "size" : 48,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::failure_record_t",
+   "name" : "const gatekeeper::failure_record_t",
+   "referenced_type" : "type-49",
+   "self_type" : "type-55",
+   "size" : 20,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const gatekeeper::password_handle_t",
+   "name" : "const gatekeeper::password_handle_t",
+   "referenced_type" : "type-47",
+   "self_type" : "type-57",
+   "size" : 58,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-3",
+   "self_type" : "type-17",
+   "size" : 1,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-6",
+   "self_type" : "type-7",
+   "size" : 4,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "gatekeeper::DefaultDelete<unsigned char []>",
+   "name" : "gatekeeper::DefaultDelete<unsigned char []>",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 1,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h",
+   "template_args" : [ "type-2" ],
+   "unique_id" : "_ZTSN10gatekeeper13DefaultDeleteIA_hEE"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "gatekeeper::DefaultDelete<unsigned char>",
+   "name" : "gatekeeper::DefaultDelete<unsigned char>",
+   "referenced_type" : "type-41",
+   "self_type" : "type-41",
+   "size" : 1,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h",
+   "template_args" : [ "type-3" ],
+   "unique_id" : "_ZTSN10gatekeeper13DefaultDeleteIhEE"
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "password_handle",
+     "field_offset" : 192,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "enrolled_password",
+     "field_offset" : 320,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "provided_password",
+     "field_offset" : 448,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::EnrollRequest",
+   "name" : "gatekeeper::EnrollRequest",
+   "referenced_type" : "type-28",
+   "self_type" : "type-28",
+   "size" : 72,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "unique_id" : "_ZTSN10gatekeeper13EnrollRequestE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN10gatekeeper13EnrollRequestE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper13EnrollRequestD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper13EnrollRequestD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper13EnrollRequest22nonErrorSerializedSizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper13EnrollRequest17nonErrorSerializeEPh"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper13EnrollRequest19nonErrorDeserializeEPKhS2_"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "enrolled_password_handle",
+     "field_offset" : 192,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::EnrollResponse",
+   "name" : "gatekeeper::EnrollResponse",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 40,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "unique_id" : "_ZTSN10gatekeeper14EnrollResponseE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN10gatekeeper14EnrollResponseE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper14EnrollResponseD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper14EnrollResponseD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper14EnrollResponse22nonErrorSerializedSizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper14EnrollResponse17nonErrorSerializeEPh"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper14EnrollResponse19nonErrorDeserializeEPKhS2_"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "gatekeeper::GateKeeper",
+   "name" : "gatekeeper::GateKeeper",
+   "record_kind" : "class",
+   "referenced_type" : "type-50",
+   "self_type" : "type-50",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h",
+   "unique_id" : "_ZTSN10gatekeeper10GateKeeperE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN10gatekeeper10GateKeeperE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeperD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeperD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK10gatekeeper10GateKeeper15GetAuthTokenKeyEPPKhPj"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeper14GetPasswordKeyEPPKhPj"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK10gatekeeper10GateKeeper24ComputePasswordSignatureEPhjPKhjS3_jm"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK10gatekeeper10GateKeeper9GetRandomEPvj"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK10gatekeeper10GateKeeper16ComputeSignatureEPhjPKhjS3_j"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK10gatekeeper10GateKeeper24GetMillisecondsSinceBootEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeper16GetFailureRecordEjmPNS_16failure_record_tEb"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeper18ClearFailureRecordEjmb"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeper18WriteFailureRecordEjPNS_16failure_record_tEb"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeper19ComputeRetryTimeoutEPKNS_16failure_record_tE"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK10gatekeeper10GateKeeper16IsHardwareBackedEv"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper10GateKeeper8DoVerifyEPKNS_17password_handle_tERKNS_11SizedBufferE"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "error",
+     "field_offset" : 64,
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "user_id",
+     "field_offset" : 96,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "retry_timeout",
+     "field_offset" : 128,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::GateKeeperMessage",
+   "name" : "gatekeeper::GateKeeperMessage",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 24,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "unique_id" : "_ZTSN10gatekeeper17GateKeeperMessageE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN10gatekeeper17GateKeeperMessageE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper17GateKeeperMessageD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper17GateKeeperMessageD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper17GateKeeperMessage22nonErrorSerializedSizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper17GateKeeperMessage17nonErrorSerializeEPh"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper17GateKeeperMessage19nonErrorDeserializeEPKhS2_"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "buffer",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "length",
+     "field_offset" : 64,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::SizedBuffer",
+   "name" : "gatekeeper::SizedBuffer",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 16,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "unique_id" : "_ZTSN10gatekeeper11SizedBufferE"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mPtr",
+     "referenced_type" : "type-11"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> >",
+   "name" : "gatekeeper::UniquePtr<unsigned char [], gatekeeper::DefaultDelete<unsigned char []> >",
+   "record_kind" : "class",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h",
+   "template_args" : [ "type-2", "type-1" ],
+   "unique_id" : "_ZTSN10gatekeeper9UniquePtrIA_hNS_13DefaultDeleteIS1_EEEE"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mPtr",
+     "referenced_type" : "type-11"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> >",
+   "name" : "gatekeeper::UniquePtr<unsigned char, gatekeeper::DefaultDelete<unsigned char> >",
+   "record_kind" : "class",
+   "referenced_type" : "type-43",
+   "self_type" : "type-43",
+   "size" : 8,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/UniquePtr.h",
+   "template_args" : [ "type-3", "type-41" ],
+   "unique_id" : "_ZTSN10gatekeeper9UniquePtrIhNS_13DefaultDeleteIhEEEE"
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "challenge",
+     "field_offset" : 192,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "password_handle",
+     "field_offset" : 256,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "provided_password",
+     "field_offset" : 384,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::VerifyRequest",
+   "name" : "gatekeeper::VerifyRequest",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 64,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "unique_id" : "_ZTSN10gatekeeper13VerifyRequestE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN10gatekeeper13VerifyRequestE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper13VerifyRequestD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper13VerifyRequestD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper13VerifyRequest22nonErrorSerializedSizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper13VerifyRequest17nonErrorSerializeEPh"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper13VerifyRequest19nonErrorDeserializeEPKhS2_"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "auth_token",
+     "field_offset" : 192,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "request_reenroll",
+     "field_offset" : 320,
+     "referenced_type" : "type-24"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::VerifyResponse",
+   "name" : "gatekeeper::VerifyResponse",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 48,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper_messages.h",
+   "unique_id" : "_ZTSN10gatekeeper14VerifyResponseE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN10gatekeeper14VerifyResponseE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper14VerifyResponseD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN10gatekeeper14VerifyResponseD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper14VerifyResponse22nonErrorSerializedSizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK10gatekeeper14VerifyResponse17nonErrorSerializeEPh"
+    },
+    {
+     "mangled_component_name" : "_ZN10gatekeeper14VerifyResponse19nonErrorDeserializeEPKhS2_"
+    }
+   ]
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "secure_user_id",
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "last_checked_timestamp",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "failure_counter",
+     "field_offset" : 128,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::failure_record_t",
+   "name" : "gatekeeper::failure_record_t",
+   "referenced_type" : "type-49",
+   "self_type" : "type-49",
+   "size" : 20,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/gatekeeper.h",
+   "unique_id" : "_ZTSN10gatekeeper16failure_record_tE"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "version",
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "user_id",
+     "field_offset" : 8,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 72,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "salt",
+     "field_offset" : 136,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "signature",
+     "field_offset" : 200,
+     "referenced_type" : "type-48"
+    },
+    {
+     "field_name" : "hardware_backed",
+     "field_offset" : 456,
+     "referenced_type" : "type-24"
+    }
+   ],
+   "linker_set_key" : "gatekeeper::password_handle_t",
+   "name" : "gatekeeper::password_handle_t",
+   "referenced_type" : "type-47",
+   "self_type" : "type-47",
+   "size" : 58,
+   "source_file" : "/system/gatekeeper/include/gatekeeper/password_handle.h",
+   "unique_id" : "_ZTSN10gatekeeper17password_handle_tE"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

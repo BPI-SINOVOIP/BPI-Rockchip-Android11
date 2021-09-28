@@ -1,0 +1,2657 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA10_i",
+   "name" : "int [10]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA10_i",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA120_c",
+   "name" : "char [120]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA120_c",
+   "size" : 120,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA12_i",
+   "name" : "int [12]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA12_i",
+   "size" : 48,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA14_i",
+   "name" : "int [14]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA14_i",
+   "size" : 56,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA16_c",
+   "name" : "char [16]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA16_c",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA16_m",
+   "name" : "unsigned long [16]",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIA16_m",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/posix_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA1_m",
+   "name" : "unsigned long [1]",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIA1_m",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA2_i",
+   "name" : "int [2]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA2_i",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/posix_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA31_m",
+   "name" : "unsigned long [31]",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIA31_m",
+   "size" : 248,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA31_y",
+   "name" : "unsigned long long [31]",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIA31_y",
+   "size" : 248,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA32_i",
+   "name" : "int [32]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA32_i",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 16,
+   "linker_set_key" : "_ZTIA32_o",
+   "name" : "unsigned __int128 [32]",
+   "referenced_type" : "_ZTIo",
+   "self_type" : "_ZTIA32_o",
+   "size" : 512,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA3_j",
+   "name" : "unsigned int [3]",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIA3_j",
+   "size" : 12,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 2,
+   "linker_set_key" : "_ZTIA3_t",
+   "name" : "unsigned short [3]",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIA3_t",
+   "size" : 6,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA4096_h",
+   "name" : "unsigned char [4096]",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIA4096_h",
+   "size" : 4096,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA4_h",
+   "name" : "unsigned char [4]",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIA4_h",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/bits/mbstate_t.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA4_l",
+   "name" : "long [4]",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIA4_l",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA65_PKc",
+   "name" : "const char *[65]",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIA65_PKc",
+   "size" : 520,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA8_c",
+   "name" : "char [8]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA8_c",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 16,
+   "linker_set_key" : "_ZTIe",
+   "name" : "long double",
+   "referenced_type" : "_ZTIe",
+   "self_type" : "_ZTIe",
+   "size" : 16
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 16,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIo",
+   "name" : "unsigned __int128",
+   "referenced_type" : "_ZTIo",
+   "self_type" : "_ZTIo",
+   "size" : 16
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZdaPv"
+  },
+  {
+   "name" : "_ZdaPvRKSt9nothrow_t"
+  },
+  {
+   "name" : "_ZdlPv"
+  },
+  {
+   "name" : "_ZdlPvRKSt9nothrow_t"
+  },
+  {
+   "name" : "_Znam"
+  },
+  {
+   "name" : "_ZnamRKSt9nothrow_t"
+  },
+  {
+   "name" : "_Znwm"
+  },
+  {
+   "name" : "_ZnwmRKSt9nothrow_t"
+  },
+  {
+   "name" : "__cxa_guard_abort"
+  },
+  {
+   "name" : "__cxa_guard_acquire"
+  },
+  {
+   "name" : "__cxa_guard_release"
+  },
+  {
+   "name" : "__cxa_pure_virtual"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZSt7nothrow"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "memory_order_relaxed"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "memory_order_consume"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "memory_order_acquire"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "memory_order_release"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "memory_order_acq_rel"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "memory_order_seq_cst"
+    }
+   ],
+   "linker_set_key" : "_ZTI12memory_order",
+   "name" : "memory_order",
+   "referenced_type" : "_ZTI12memory_order",
+   "self_type" : "_ZTI12memory_order",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/bits/stdatomic.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANDROID_LOG_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANDROID_LOG_DEFAULT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANDROID_LOG_VERBOSE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANDROID_LOG_DEBUG"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANDROID_LOG_INFO"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ANDROID_LOG_WARN"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ANDROID_LOG_ERROR"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANDROID_LOG_FATAL"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "ANDROID_LOG_SILENT"
+    }
+   ],
+   "linker_set_key" : "_ZTI19android_LogPriority",
+   "name" : "android_LogPriority",
+   "referenced_type" : "_ZTI19android_LogPriority",
+   "self_type" : "_ZTI19android_LogPriority",
+   "size" : 4,
+   "source_file" : "/system/core/liblog/include/android/log.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "LOG_ID_MIN"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "LOG_ID_MAIN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "LOG_ID_RADIO"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "LOG_ID_EVENTS"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "LOG_ID_SYSTEM"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "LOG_ID_CRASH"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "LOG_ID_STATS"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "LOG_ID_SECURITY"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "LOG_ID_KERNEL"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "LOG_ID_MAX"
+    },
+    {
+     "enum_field_value" : 2147483647,
+     "name" : "LOG_ID_DEFAULT"
+    }
+   ],
+   "linker_set_key" : "_ZTI6log_id",
+   "name" : "log_id",
+   "referenced_type" : "_ZTI6log_id",
+   "self_type" : "_ZTI6log_id",
+   "size" : 4,
+   "source_file" : "/system/core/liblog/include/android/log.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPvS_mPKvE",
+   "name" : "void *(void *, unsigned long, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "referenced_type" : "_ZTIFPvS_mPKvE",
+   "return_type" : "_ZTIPv",
+   "self_type" : "_ZTIFPvS_mPKvE",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPvmPKvE",
+   "name" : "void *(unsigned long, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "referenced_type" : "_ZTIFPvmPKvE",
+   "return_type" : "_ZTIPv",
+   "self_type" : "_ZTIFPvmPKvE",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPvmmPKvE",
+   "name" : "void *(unsigned long, unsigned long, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "referenced_type" : "_ZTIFPvmmPKvE",
+   "return_type" : "_ZTIPv",
+   "self_type" : "_ZTIFPvmmPKvE",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFv6sigvalE",
+   "name" : "void (sigval)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI6sigval"
+    }
+   ],
+   "referenced_type" : "_ZTIFv6sigvalE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFv6sigvalE",
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPvPKvE",
+   "name" : "void (void *, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPvPKvE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPvPKvE",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFviE",
+   "name" : "void (int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFviE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFviE",
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFviP7siginfoPvE",
+   "name" : "void (int, siginfo *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP7siginfo"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "referenced_type" : "_ZTIFviP7siginfoPvE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFviP7siginfoPvE",
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvvE",
+   "name" : "void ()",
+   "referenced_type" : "_ZTIFvvE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvvE",
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "operator delete[]",
+   "linker_set_key" : "_ZdaPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator delete[]",
+   "linker_set_key" : "_ZdaPvRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIRKSt9nothrow_t"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator delete",
+   "linker_set_key" : "_ZdlPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator delete",
+   "linker_set_key" : "_ZdlPvRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIRKSt9nothrow_t"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new[]",
+   "linker_set_key" : "_Znam",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new[]",
+   "linker_set_key" : "_ZnamRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIRKSt9nothrow_t"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new",
+   "linker_set_key" : "_Znwm",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new",
+   "linker_set_key" : "_ZnwmRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIRKSt9nothrow_t"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "__cxa_guard_abort",
+   "linker_set_key" : "__cxa_guard_abort",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8_guard_t"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "function_name" : "__cxa_guard_acquire",
+   "linker_set_key" : "__cxa_guard_acquire",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8_guard_t"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "function_name" : "__cxa_guard_release",
+   "linker_set_key" : "__cxa_guard_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8_guard_t"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "function_name" : "__cxa_pure_virtual",
+   "linker_set_key" : "__cxa_pure_virtual",
+   "return_type" : "_ZTIv",
+   "source_file" : "/bionic/libc/bionic/__cxa_pure_virtual.cpp"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "_ZSt7nothrow",
+   "name" : "std::nothrow",
+   "referenced_type" : "_ZTIKSt9nothrow_t",
+   "source_file" : "/bionic/libstdc++/include/new"
+  }
+ ],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKSt9nothrow_t",
+   "name" : "const std::nothrow_t &",
+   "referenced_type" : "_ZTIKSt9nothrow_t",
+   "self_type" : "_ZTIRKSt9nothrow_t",
+   "size" : 8,
+   "source_file" : "/bionic/libstdc++/include/new"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP11robust_list",
+   "name" : "robust_list *",
+   "referenced_type" : "_ZTI11robust_list",
+   "self_type" : "_ZTIP11robust_list",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/futex.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7__sFILE",
+   "name" : "__sFILE *",
+   "referenced_type" : "_ZTI7__sFILE",
+   "self_type" : "_ZTIP7__sFILE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7siginfo",
+   "name" : "siginfo *",
+   "referenced_type" : "_ZTI7siginfo",
+   "self_type" : "_ZTIP7siginfo",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8_guard_t",
+   "name" : "_guard_t *",
+   "referenced_type" : "_ZTI8_guard_t",
+   "self_type" : "_ZTIP8_guard_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8ucontext",
+   "name" : "ucontext *",
+   "referenced_type" : "_ZTI8ucontext",
+   "self_type" : "_ZTIP8ucontext",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPvS_mPKvE",
+   "name" : "void *(*)(void *, unsigned long, const void *)",
+   "referenced_type" : "_ZTIFPvS_mPKvE",
+   "self_type" : "_ZTIPFPvS_mPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPvmPKvE",
+   "name" : "void *(*)(unsigned long, const void *)",
+   "referenced_type" : "_ZTIFPvmPKvE",
+   "self_type" : "_ZTIPFPvmPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPvmmPKvE",
+   "name" : "void *(*)(unsigned long, unsigned long, const void *)",
+   "referenced_type" : "_ZTIFPvmmPKvE",
+   "self_type" : "_ZTIPFPvmmPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFv6sigvalE",
+   "name" : "void (*)(sigval)",
+   "referenced_type" : "_ZTIFv6sigvalE",
+   "self_type" : "_ZTIPFv6sigvalE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFvPvPKvE",
+   "name" : "void (*)(void *, const void *)",
+   "referenced_type" : "_ZTIFvPvPKvE",
+   "self_type" : "_ZTIPFvPvPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFviE",
+   "name" : "void (*)(int)",
+   "referenced_type" : "_ZTIFviE",
+   "self_type" : "_ZTIPFviE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFviP7siginfoPvE",
+   "name" : "void (*)(int, siginfo *, void *)",
+   "referenced_type" : "_ZTIFviP7siginfoPvE",
+   "self_type" : "_ZTIPFviP7siginfoPvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFvvE",
+   "name" : "void (*)()",
+   "referenced_type" : "_ZTIFvvE",
+   "self_type" : "_ZTIPFvvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPc",
+   "name" : "char **",
+   "referenced_type" : "_ZTIPc",
+   "self_type" : "_ZTIPPc",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/unistd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/getopt.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIA65_KPKc",
+   "name" : "const char *const[65]",
+   "referenced_type" : "_ZTIA65_PKc",
+   "self_type" : "_ZTIA65_KPKc",
+   "size" : 520,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKSt9nothrow_t",
+   "name" : "const std::nothrow_t",
+   "referenced_type" : "_ZTISt9nothrow_t",
+   "self_type" : "_ZTIKSt9nothrow_t",
+   "size" : 1,
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "_ZTIVPFPvS_mPKvE",
+   "name" : "void *(*volatile)(void *, unsigned long, const void *)",
+   "referenced_type" : "_ZTIPFPvS_mPKvE",
+   "self_type" : "_ZTIVPFPvS_mPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "_ZTIVPFPvmPKvE",
+   "name" : "void *(*volatile)(unsigned long, const void *)",
+   "referenced_type" : "_ZTIPFPvmPKvE",
+   "self_type" : "_ZTIVPFPvmPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "_ZTIVPFPvmmPKvE",
+   "name" : "void *(*volatile)(unsigned long, unsigned long, const void *)",
+   "referenced_type" : "_ZTIPFPvmmPKvE",
+   "self_type" : "_ZTIVPFPvmmPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "_ZTIVPFvPvPKvE",
+   "name" : "void (*volatile)(void *, const void *)",
+   "referenced_type" : "_ZTIPFvPvPKvE",
+   "self_type" : "_ZTIVPFvPvPKvE",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_kill",
+     "referenced_type" : "_ZTIN10__sifieldsUt_E"
+    },
+    {
+     "field_name" : "_timer",
+     "referenced_type" : "_ZTIN10__sifieldsUt0_E"
+    },
+    {
+     "field_name" : "_rt",
+     "referenced_type" : "_ZTIN10__sifieldsUt1_E"
+    },
+    {
+     "field_name" : "_sigchld",
+     "referenced_type" : "_ZTIN10__sifieldsUt2_E"
+    },
+    {
+     "field_name" : "_sigfault",
+     "referenced_type" : "_ZTIN10__sifieldsUt3_E"
+    },
+    {
+     "field_name" : "_sigpoll",
+     "referenced_type" : "_ZTIN10__sifieldsUt4_E"
+    },
+    {
+     "field_name" : "_sigsys",
+     "referenced_type" : "_ZTIN10__sifieldsUt5_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI10__sifields",
+   "name" : "__sifields",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTI10__sifields",
+   "self_type" : "_ZTI10__sifields",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "it_interval",
+     "referenced_type" : "_ZTI8timespec"
+    },
+    {
+     "field_name" : "it_value",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI8timespec"
+    }
+   ],
+   "linker_set_key" : "_ZTI10itimerspec",
+   "name" : "itimerspec",
+   "referenced_type" : "_ZTI10itimerspec",
+   "self_type" : "_ZTI10itimerspec",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h"
+  },
+  {
+   "alignment" : 16,
+   "fields" :
+   [
+    {
+     "field_name" : "fault_address",
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "regs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIA31_y"
+    },
+    {
+     "field_name" : "sp",
+     "field_offset" : 2048,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "pc",
+     "field_offset" : 2112,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "pstate",
+     "field_offset" : 2176,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 2304,
+     "referenced_type" : "_ZTIA4096_h"
+    }
+   ],
+   "linker_set_key" : "_ZTI10sigcontext",
+   "name" : "sigcontext",
+   "referenced_type" : "_ZTI10sigcontext",
+   "self_type" : "_ZTI10sigcontext",
+   "size" : 4384,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "__flag",
+     "referenced_type" : "_ZTIU7_Atomicb"
+    }
+   ],
+   "linker_set_key" : "_ZTI11atomic_flag",
+   "name" : "atomic_flag",
+   "referenced_type" : "_ZTI11atomic_flag",
+   "self_type" : "_ZTI11atomic_flag",
+   "size" : 1,
+   "source_file" : "/bionic/libc/include/bits/stdatomic.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "head",
+     "referenced_type" : "_ZTI12_aarch64_ctx"
+    },
+    {
+     "field_name" : "esr",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "linker_set_key" : "_ZTI11esr_context",
+   "name" : "esr_context",
+   "referenced_type" : "_ZTI11esr_context",
+   "self_type" : "_ZTI11esr_context",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 16,
+   "fields" :
+   [
+    {
+     "field_name" : "__clang_max_align_nonce1",
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "field_name" : "__clang_max_align_nonce2",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIe"
+    }
+   ],
+   "linker_set_key" : "_ZTI11max_align_t",
+   "name" : "max_align_t",
+   "referenced_type" : "_ZTI11max_align_t",
+   "self_type" : "_ZTI11max_align_t",
+   "size" : 32,
+   "source_file" : "/prebuilts/clang-tools/linux-x86/lib64/clang/10.0.5/include/__stddef_max_align_t.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "next",
+     "referenced_type" : "_ZTIP11robust_list"
+    }
+   ],
+   "linker_set_key" : "_ZTI11robust_list",
+   "name" : "robust_list",
+   "referenced_type" : "_ZTI11robust_list",
+   "self_type" : "_ZTI11robust_list",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/futex.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_flags",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN11sigaction64Ut_E"
+    },
+    {
+     "field_name" : "sa_mask",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI8sigset_t"
+    },
+    {
+     "field_name" : "sa_restorer",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPFvvE"
+    }
+   ],
+   "linker_set_key" : "_ZTI11sigaction64",
+   "name" : "sigaction64",
+   "referenced_type" : "_ZTI11sigaction64",
+   "self_type" : "_ZTI11sigaction64",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "ss_sp",
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "ss_flags",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "ss_size",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI11sigaltstack",
+   "name" : "sigaltstack",
+   "referenced_type" : "_ZTI11sigaltstack",
+   "self_type" : "_ZTI11sigaltstack",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "head",
+     "referenced_type" : "_ZTI12_aarch64_ctx"
+    },
+    {
+     "field_name" : "vl",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 80,
+     "referenced_type" : "_ZTIA3_t"
+    }
+   ],
+   "linker_set_key" : "_ZTI11sve_context",
+   "name" : "sve_context",
+   "referenced_type" : "_ZTI11sve_context",
+   "self_type" : "_ZTI11sve_context",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "magic",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI12_aarch64_ctx",
+   "name" : "_aarch64_ctx",
+   "referenced_type" : "_ZTI12_aarch64_ctx",
+   "self_type" : "_ZTI12_aarch64_ctx",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "head",
+     "referenced_type" : "_ZTI12_aarch64_ctx"
+    },
+    {
+     "field_name" : "datap",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIA3_j"
+    }
+   ],
+   "linker_set_key" : "_ZTI13extra_context",
+   "name" : "extra_context",
+   "referenced_type" : "_ZTI13extra_context",
+   "self_type" : "_ZTI13extra_context",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 16,
+   "fields" :
+   [
+    {
+     "field_name" : "head",
+     "referenced_type" : "_ZTI12_aarch64_ctx"
+    },
+    {
+     "field_name" : "fpsr",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "fpcr",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "vregs",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIA32_o"
+    }
+   ],
+   "linker_set_key" : "_ZTI14fpsimd_context",
+   "name" : "fpsimd_context",
+   "referenced_type" : "_ZTI14fpsimd_context",
+   "self_type" : "_ZTI14fpsimd_context",
+   "size" : 528,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-arm64/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "flags",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "stack_base",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "stack_size",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "guard_size",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "sched_policy",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "sched_priority",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIA16_c"
+    }
+   ],
+   "linker_set_key" : "_ZTI14pthread_attr_t",
+   "name" : "pthread_attr_t",
+   "referenced_type" : "_ZTI14pthread_attr_t",
+   "self_type" : "_ZTI14pthread_attr_t",
+   "size" : 56,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "_ZTIA12_i"
+    }
+   ],
+   "linker_set_key" : "_ZTI14pthread_cond_t",
+   "name" : "pthread_cond_t",
+   "referenced_type" : "_ZTI14pthread_cond_t",
+   "self_type" : "_ZTI14pthread_cond_t",
+   "size" : 48,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "fds_bits",
+     "referenced_type" : "_ZTIA16_m"
+    }
+   ],
+   "linker_set_key" : "_ZTI15__kernel_fd_set",
+   "name" : "__kernel_fd_set",
+   "referenced_type" : "_ZTI15__kernel_fd_set",
+   "self_type" : "_ZTI15__kernel_fd_set",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/posix_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "val",
+     "referenced_type" : "_ZTIA2_i"
+    }
+   ],
+   "linker_set_key" : "_ZTI15__kernel_fsid_t",
+   "name" : "__kernel_fsid_t",
+   "referenced_type" : "_ZTI15__kernel_fsid_t",
+   "self_type" : "_ZTI15__kernel_fsid_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/posix_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "_ZTIA10_i"
+    }
+   ],
+   "linker_set_key" : "_ZTI15pthread_mutex_t",
+   "name" : "pthread_mutex_t",
+   "referenced_type" : "_ZTI15pthread_mutex_t",
+   "self_type" : "_ZTI15pthread_mutex_t",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "_ZTIA14_i"
+    }
+   ],
+   "linker_set_key" : "_ZTI16pthread_rwlock_t",
+   "name" : "pthread_rwlock_t",
+   "referenced_type" : "_ZTI16pthread_rwlock_t",
+   "self_type" : "_ZTI16pthread_rwlock_t",
+   "size" : 56,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "list",
+     "referenced_type" : "_ZTI11robust_list"
+    },
+    {
+     "field_name" : "futex_offset",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "list_op_pending",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIP11robust_list"
+    }
+   ],
+   "linker_set_key" : "_ZTI16robust_list_head",
+   "name" : "robust_list_head",
+   "referenced_type" : "_ZTI16robust_list_head",
+   "self_type" : "_ZTI16robust_list_head",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/futex.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "regs",
+     "referenced_type" : "_ZTIA31_m"
+    },
+    {
+     "field_name" : "sp",
+     "field_offset" : 1984,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "pc",
+     "field_offset" : 2048,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "pstate",
+     "field_offset" : 2112,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI16user_regs_struct",
+   "name" : "user_regs_struct",
+   "referenced_type" : "_ZTI16user_regs_struct",
+   "self_type" : "_ZTI16user_regs_struct",
+   "size" : 272,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "field_name" : "tv_nsec",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "linker_set_key" : "_ZTI17__kernel_timespec",
+   "name" : "__kernel_timespec",
+   "referenced_type" : "_ZTI17__kernel_timespec",
+   "self_type" : "_ZTI17__kernel_timespec",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "_ZTIA4_l"
+    }
+   ],
+   "linker_set_key" : "_ZTI17pthread_barrier_t",
+   "name" : "pthread_barrier_t",
+   "referenced_type" : "_ZTI17pthread_barrier_t",
+   "self_type" : "_ZTI17pthread_barrier_t",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_handler",
+     "referenced_type" : "_ZTIPFviE"
+    },
+    {
+     "field_name" : "sa_flags",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "sa_restorer",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPFvvE"
+    },
+    {
+     "field_name" : "sa_mask",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTI8sigset_t"
+    }
+   ],
+   "linker_set_key" : "_ZTI18__kernel_sigaction",
+   "name" : "__kernel_sigaction",
+   "referenced_type" : "_ZTI18__kernel_sigaction",
+   "self_type" : "_ZTI18__kernel_sigaction",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI18pthread_spinlock_t",
+   "name" : "pthread_spinlock_t",
+   "referenced_type" : "_ZTI18pthread_spinlock_t",
+   "self_type" : "_ZTI18pthread_spinlock_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 16,
+   "fields" :
+   [
+    {
+     "field_name" : "vregs",
+     "referenced_type" : "_ZTIA32_o"
+    },
+    {
+     "field_name" : "fpsr",
+     "field_offset" : 4096,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "fpcr",
+     "field_offset" : 4128,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI18user_fpsimd_struct",
+   "name" : "user_fpsimd_struct",
+   "referenced_type" : "_ZTI18user_fpsimd_struct",
+   "self_type" : "_ZTI18user_fpsimd_struct",
+   "size" : 528,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "it_interval",
+     "referenced_type" : "_ZTI17__kernel_timespec"
+    },
+    {
+     "field_name" : "it_value",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI17__kernel_timespec"
+    }
+   ],
+   "linker_set_key" : "_ZTI19__kernel_itimerspec",
+   "name" : "__kernel_itimerspec",
+   "referenced_type" : "_ZTI19__kernel_itimerspec",
+   "self_type" : "_ZTI19__kernel_itimerspec",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "struct_size",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "buffer_id",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "priority",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "tag",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "file",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "line",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "message",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTI21__android_log_message",
+   "name" : "__android_log_message",
+   "referenced_type" : "_ZTI21__android_log_message",
+   "self_type" : "_ZTI21__android_log_message",
+   "size" : 48,
+   "source_file" : "/system/core/liblog/include/android/log.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "tv_nsec",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI21__kernel_old_timespec",
+   "name" : "__kernel_old_timespec",
+   "referenced_type" : "_ZTI21__kernel_old_timespec",
+   "self_type" : "_ZTI21__kernel_old_timespec",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "field_name" : "tv_usec",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "linker_set_key" : "_ZTI21__kernel_sock_timeval",
+   "name" : "__kernel_sock_timeval",
+   "referenced_type" : "_ZTI21__kernel_sock_timeval",
+   "self_type" : "_ZTI21__kernel_sock_timeval",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI5div_t",
+   "name" : "div_t",
+   "referenced_type" : "_ZTI5div_t",
+   "self_type" : "_ZTI5div_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdlib.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "fds_bits",
+     "referenced_type" : "_ZTIA16_m"
+    }
+   ],
+   "linker_set_key" : "_ZTI6fd_set",
+   "name" : "fd_set",
+   "referenced_type" : "_ZTI6fd_set",
+   "self_type" : "_ZTI6fd_set",
+   "size" : 128,
+   "source_file" : "/bionic/libc/include/sys/select.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI6ldiv_t",
+   "name" : "ldiv_t",
+   "referenced_type" : "_ZTI6ldiv_t",
+   "self_type" : "_ZTI6ldiv_t",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/stdlib.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sival_int",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "sival_ptr",
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "linker_set_key" : "_ZTI6sigval",
+   "name" : "sigval",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTI6sigval",
+   "self_type" : "_ZTI6sigval",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "linker_set_key" : "_ZTI7lldiv_t",
+   "name" : "lldiv_t",
+   "referenced_type" : "_ZTI7lldiv_t",
+   "self_type" : "_ZTI7lldiv_t",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/stdlib.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "referenced_type" : "_ZTIN7siginfoUt_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI7siginfo",
+   "name" : "siginfo",
+   "referenced_type" : "_ZTI7siginfo",
+   "self_type" : "_ZTI7siginfo",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "tv_usec",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI7timeval",
+   "name" : "timeval",
+   "referenced_type" : "_ZTI7timeval",
+   "self_type" : "_ZTI7timeval",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "state",
+     "referenced_type" : "_ZTIU7_Atomici"
+    },
+    {
+     "field_name" : "aligner",
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI8_guard_t",
+   "name" : "_guard_t",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTI8_guard_t",
+   "self_type" : "_ZTI8_guard_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "arena",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "ordblks",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "smblks",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "hblks",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "hblkhd",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "usmblks",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "fsmblks",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "uordblks",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "fordblks",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "keepcost",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI8mallinfo",
+   "name" : "mallinfo",
+   "referenced_type" : "_ZTI8mallinfo",
+   "self_type" : "_ZTI8mallinfo",
+   "size" : 80,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sigev_value",
+     "referenced_type" : "_ZTI6sigval"
+    },
+    {
+     "field_name" : "sigev_signo",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "sigev_notify",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_sigev_un",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIN8sigeventUt_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI8sigevent",
+   "name" : "sigevent",
+   "referenced_type" : "_ZTI8sigevent",
+   "self_type" : "_ZTI8sigevent",
+   "size" : 64,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sig",
+     "referenced_type" : "_ZTIA1_m"
+    }
+   ],
+   "linker_set_key" : "_ZTI8sigset_t",
+   "name" : "sigset_t",
+   "referenced_type" : "_ZTI8sigset_t",
+   "self_type" : "_ZTI8sigset_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "tv_nsec",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI8timespec",
+   "name" : "timespec",
+   "referenced_type" : "_ZTI8timespec",
+   "self_type" : "_ZTI8timespec",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "tz_minuteswest",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "tz_dsttime",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI8timezone",
+   "name" : "timezone",
+   "referenced_type" : "_ZTI8timezone",
+   "self_type" : "_ZTI8timezone",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h"
+  },
+  {
+   "alignment" : 16,
+   "fields" :
+   [
+    {
+     "field_name" : "uc_flags",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "uc_link",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP8ucontext"
+    },
+    {
+     "field_name" : "uc_stack",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI11sigaltstack"
+    },
+    {
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIN8ucontextUt_E"
+    },
+    {
+     "field_name" : "__padding",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIA120_c"
+    },
+    {
+     "field_name" : "uc_mcontext",
+     "field_offset" : 1408,
+     "referenced_type" : "_ZTI10sigcontext"
+    }
+   ],
+   "linker_set_key" : "_ZTI8ucontext",
+   "name" : "ucontext",
+   "referenced_type" : "_ZTI8ucontext",
+   "self_type" : "_ZTI8ucontext",
+   "size" : 4560,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "it_interval",
+     "referenced_type" : "_ZTI7timeval"
+    },
+    {
+     "field_name" : "it_value",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI7timeval"
+    }
+   ],
+   "linker_set_key" : "_ZTI9itimerval",
+   "name" : "itimerval",
+   "referenced_type" : "_ZTI9itimerval",
+   "self_type" : "_ZTI9itimerval",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "__seq",
+     "referenced_type" : "_ZTIA4_h"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIA4_h"
+    }
+   ],
+   "linker_set_key" : "_ZTI9mbstate_t",
+   "name" : "mbstate_t",
+   "referenced_type" : "_ZTI9mbstate_t",
+   "self_type" : "_ZTI9mbstate_t",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/mbstate_t.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_flags",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN9sigactionUt_E"
+    },
+    {
+     "field_name" : "sa_mask",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI8sigset_t"
+    },
+    {
+     "field_name" : "sa_restorer",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPFvvE"
+    }
+   ],
+   "linker_set_key" : "_ZTI9sigaction",
+   "name" : "sigaction",
+   "referenced_type" : "_ZTI9sigaction",
+   "self_type" : "_ZTI9sigaction",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_tid",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_overrun",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_sigval",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTI6sigval"
+    },
+    {
+     "field_name" : "_sys_private",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt0_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:42:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt0_E",
+   "self_type" : "_ZTIN10__sifieldsUt0_E",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_pid",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_uid",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "_sigval",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTI6sigval"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt1_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:48:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt1_E",
+   "self_type" : "_ZTIN10__sifieldsUt1_E",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_pid",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_uid",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "_status",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_utime",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "_stime",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt2_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:53:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt2_E",
+   "self_type" : "_ZTIN10__sifieldsUt2_E",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_addr",
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN10__sifieldsUt3_Ut_E"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt3_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt3_E",
+   "self_type" : "_ZTIN10__sifieldsUt3_E",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_addr_lsb",
+     "referenced_type" : "_ZTIs"
+    },
+    {
+     "field_name" : "_addr_bnd",
+     "referenced_type" : "_ZTIN10__sifieldsUt3_Ut_Ut_E"
+    },
+    {
+     "field_name" : "_addr_pkey",
+     "referenced_type" : "_ZTIN10__sifieldsUt3_Ut_Ut0_E"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt3_Ut_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN10__sifieldsUt3_Ut_E",
+   "self_type" : "_ZTIN10__sifieldsUt3_Ut_E",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "_dummy_pkey",
+     "referenced_type" : "_ZTIA8_c"
+    },
+    {
+     "field_name" : "_pkey",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt3_Ut_Ut0_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:78:7)",
+   "referenced_type" : "_ZTIN10__sifieldsUt3_Ut_Ut0_E",
+   "self_type" : "_ZTIN10__sifieldsUt3_Ut_Ut0_E",
+   "size" : 12,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_dummy_bnd",
+     "referenced_type" : "_ZTIA8_c"
+    },
+    {
+     "field_name" : "_lower",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "_upper",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt3_Ut_Ut_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:73:7)",
+   "referenced_type" : "_ZTIN10__sifieldsUt3_Ut_Ut_E",
+   "self_type" : "_ZTIN10__sifieldsUt3_Ut_Ut_E",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_band",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "_fd",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt4_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:84:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt4_E",
+   "self_type" : "_ZTIN10__sifieldsUt4_E",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_call_addr",
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "_syscall",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_arch",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt5_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:88:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt5_E",
+   "self_type" : "_ZTIN10__sifieldsUt5_E",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "_pid",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_uid",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN10__sifieldsUt_E",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:38:3)",
+   "referenced_type" : "_ZTIN10__sifieldsUt_E",
+   "self_type" : "_ZTIN10__sifieldsUt_E",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_handler",
+     "referenced_type" : "_ZTIPFviE"
+    },
+    {
+     "field_name" : "sa_sigaction",
+     "referenced_type" : "_ZTIPFviP7siginfoPvE"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN11sigaction64Ut_E",
+   "name" : "sigaction64::(anonymous union at bionic/libc/include/bits/signal_types.h:79:22)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN11sigaction64Ut_E",
+   "self_type" : "_ZTIN11sigaction64Ut_E",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "referenced_type" : "_ZTIN7siginfoUt_Ut_E"
+    },
+    {
+     "field_name" : "_si_pad",
+     "referenced_type" : "_ZTIA32_i"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN7siginfoUt_E",
+   "name" : "siginfo::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN7siginfoUt_E",
+   "self_type" : "_ZTIN7siginfoUt_E",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "si_signo",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "si_errno",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "si_code",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_sifields",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI10__sifields"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN7siginfoUt_Ut_E",
+   "name" : "siginfo::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:103:5)",
+   "referenced_type" : "_ZTIN7siginfoUt_Ut_E",
+   "self_type" : "_ZTIN7siginfoUt_Ut_E",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_pad",
+     "referenced_type" : "_ZTIA12_i"
+    },
+    {
+     "field_name" : "_tid",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "_sigev_thread",
+     "referenced_type" : "_ZTIN8sigeventUt_Ut_E"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN8sigeventUt_E",
+   "name" : "sigevent::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN8sigeventUt_E",
+   "self_type" : "_ZTIN8sigeventUt_E",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_function",
+     "referenced_type" : "_ZTIPFv6sigvalE"
+    },
+    {
+     "field_name" : "_attribute",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN8sigeventUt_Ut_E",
+   "name" : "sigevent::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:229:5)",
+   "referenced_type" : "_ZTIN8sigeventUt_Ut_E",
+   "self_type" : "_ZTIN8sigeventUt_Ut_E",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "uc_sigmask",
+     "referenced_type" : "_ZTI8sigset_t"
+    },
+    {
+     "field_name" : "uc_sigmask64",
+     "referenced_type" : "_ZTI8sigset_t"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN8ucontextUt_E",
+   "name" : "ucontext::(anonymous union at bionic/libc/include/sys/ucontext.h:117:3)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN8ucontextUt_E",
+   "self_type" : "_ZTIN8ucontextUt_E",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_handler",
+     "referenced_type" : "_ZTIPFviE"
+    },
+    {
+     "field_name" : "sa_sigaction",
+     "referenced_type" : "_ZTIPFviP7siginfoPvE"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN9sigactionUt_E",
+   "name" : "sigaction::(anonymous union at bionic/libc/include/bits/signal_types.h:78:20)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN9sigactionUt_E",
+   "self_type" : "_ZTIN9sigactionUt_E",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTISt9nothrow_t",
+   "name" : "std::nothrow_t",
+   "referenced_type" : "_ZTISt9nothrow_t",
+   "self_type" : "_ZTISt9nothrow_t",
+   "size" : 1,
+   "source_file" : "/bionic/libstdc++/include/new"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

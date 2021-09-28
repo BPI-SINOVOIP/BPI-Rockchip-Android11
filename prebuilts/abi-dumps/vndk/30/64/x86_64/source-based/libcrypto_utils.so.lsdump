@@ -1,0 +1,162 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "android_pubkey_decode"
+  },
+  {
+   "name" : "android_pubkey_encode"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android_pubkey_decode",
+   "linker_set_key" : "android_pubkey_decode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPP6rsa_st"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "function_name" : "android_pubkey_encode",
+   "linker_set_key" : "android_pubkey_encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK6rsa_st"
+    },
+    {
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP6rsa_st",
+   "name" : "rsa_st *",
+   "referenced_type" : "_ZTI6rsa_st",
+   "self_type" : "_ZTIP6rsa_st",
+   "size" : 8,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK6rsa_st",
+   "name" : "const rsa_st *",
+   "referenced_type" : "_ZTIK6rsa_st",
+   "self_type" : "_ZTIPK6rsa_st",
+   "size" : 8,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP6rsa_st",
+   "name" : "rsa_st **",
+   "referenced_type" : "_ZTIP6rsa_st",
+   "self_type" : "_ZTIPP6rsa_st",
+   "size" : 8,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 8,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK6rsa_st",
+   "name" : "const rsa_st",
+   "referenced_type" : "_ZTI6rsa_st",
+   "self_type" : "_ZTIK6rsa_st",
+   "size" : 232,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

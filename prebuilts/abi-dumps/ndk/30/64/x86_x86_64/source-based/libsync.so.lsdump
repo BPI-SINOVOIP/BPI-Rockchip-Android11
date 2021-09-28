@@ -1,0 +1,164 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "sw_sync_fence_create"
+  },
+  {
+   "name" : "sw_sync_timeline_create"
+  },
+  {
+   "name" : "sw_sync_timeline_inc"
+  },
+  {
+   "name" : "sync_fence_info"
+  },
+  {
+   "name" : "sync_fence_info_free"
+  },
+  {
+   "name" : "sync_file_info"
+  },
+  {
+   "name" : "sync_file_info_free"
+  },
+  {
+   "name" : "sync_merge"
+  },
+  {
+   "name" : "sync_pt_info"
+  },
+  {
+   "name" : "sync_wait"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "sync_file_info",
+   "linker_set_key" : "sync_file_info",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIP14sync_file_info",
+   "source_file" : "/system/core/libsync/include/ndk/sync.h"
+  },
+  {
+   "function_name" : "sync_file_info_free",
+   "linker_set_key" : "sync_file_info_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP14sync_file_info"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsync/include/ndk/sync.h"
+  },
+  {
+   "function_name" : "sync_merge",
+   "linker_set_key" : "sync_merge",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsync/include/ndk/sync.h"
+  },
+  {
+   "function_name" : "sync_wait",
+   "linker_set_key" : "sync_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsync/include/android/sync.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP14sync_file_info",
+   "name" : "sync_file_info *",
+   "referenced_type" : "_ZTI14sync_file_info",
+   "self_type" : "_ZTIP14sync_file_info",
+   "size" : 4,
+   "source_file" : "/system/core/libsync/include/ndk/sync.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/system/core/libsync/include/ndk/sync.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libsync/include/ndk/sync.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

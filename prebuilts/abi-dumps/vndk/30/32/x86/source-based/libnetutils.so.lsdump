@@ -1,0 +1,784 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "decode_dhcp_msg"
+  },
+  {
+   "name" : "dhcp_init_ifc"
+  },
+  {
+   "name" : "dhcp_lasterror"
+  },
+  {
+   "name" : "do_dhcp"
+  },
+  {
+   "name" : "dump_dhcp_info"
+  },
+  {
+   "name" : "dump_dhcp_msg"
+  },
+  {
+   "name" : "fatal"
+  },
+  {
+   "name" : "get_dhcp_info"
+  },
+  {
+   "name" : "get_msecs"
+  },
+  {
+   "name" : "ifc_act_on_address"
+  },
+  {
+   "name" : "ifc_act_on_ipv4_route"
+  },
+  {
+   "name" : "ifc_add_address"
+  },
+  {
+   "name" : "ifc_clear_addresses"
+  },
+  {
+   "name" : "ifc_clear_ipv4_addresses"
+  },
+  {
+   "name" : "ifc_clear_ipv6_addresses"
+  },
+  {
+   "name" : "ifc_close"
+  },
+  {
+   "name" : "ifc_close6"
+  },
+  {
+   "name" : "ifc_configure"
+  },
+  {
+   "name" : "ifc_create_default_route"
+  },
+  {
+   "name" : "ifc_del_address"
+  },
+  {
+   "name" : "ifc_disable"
+  },
+  {
+   "name" : "ifc_down"
+  },
+  {
+   "name" : "ifc_enable"
+  },
+  {
+   "name" : "ifc_get_addr"
+  },
+  {
+   "name" : "ifc_get_hwaddr"
+  },
+  {
+   "name" : "ifc_get_ifindex"
+  },
+  {
+   "name" : "ifc_get_info"
+  },
+  {
+   "name" : "ifc_init"
+  },
+  {
+   "name" : "ifc_init6"
+  },
+  {
+   "name" : "ifc_remove_default_route"
+  },
+  {
+   "name" : "ifc_reset_connections"
+  },
+  {
+   "name" : "ifc_set_addr"
+  },
+  {
+   "name" : "ifc_set_hwaddr"
+  },
+  {
+   "name" : "ifc_set_mask"
+  },
+  {
+   "name" : "ifc_set_prefixLength"
+  },
+  {
+   "name" : "ifc_up"
+  },
+  {
+   "name" : "init_dhcp_discover_msg"
+  },
+  {
+   "name" : "init_dhcp_request_msg"
+  },
+  {
+   "name" : "ip_checksum"
+  },
+  {
+   "name" : "ip_checksum_add"
+  },
+  {
+   "name" : "ip_checksum_adjust"
+  },
+  {
+   "name" : "ip_checksum_finish"
+  },
+  {
+   "name" : "ip_checksum_fold"
+  },
+  {
+   "name" : "ipaddr"
+  },
+  {
+   "name" : "ipv4NetmaskToPrefixLength"
+  },
+  {
+   "name" : "ipv4_pseudo_header_checksum"
+  },
+  {
+   "name" : "ipv6_pseudo_header_checksum"
+  },
+  {
+   "name" : "open_raw_socket"
+  },
+  {
+   "name" : "prefixLengthToIpv4Netmask"
+  },
+  {
+   "name" : "printerr"
+  },
+  {
+   "name" : "receive_packet"
+  },
+  {
+   "name" : "send_packet"
+  },
+  {
+   "name" : "string_to_ip"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "last_good_info"
+  }
+ ],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ifc_act_on_address",
+   "linker_set_key" : "ifc_act_on_address",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_add_address",
+   "linker_set_key" : "ifc_add_address",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_clear_addresses",
+   "linker_set_key" : "ifc_clear_addresses",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_close",
+   "linker_set_key" : "ifc_close",
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_configure",
+   "linker_set_key" : "ifc_configure",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_create_default_route",
+   "linker_set_key" : "ifc_create_default_route",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_del_address",
+   "linker_set_key" : "ifc_del_address",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_disable",
+   "linker_set_key" : "ifc_disable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_down",
+   "linker_set_key" : "ifc_down",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_enable",
+   "linker_set_key" : "ifc_enable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_addr",
+   "linker_set_key" : "ifc_get_addr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_hwaddr",
+   "linker_set_key" : "ifc_get_hwaddr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_ifindex",
+   "linker_set_key" : "ifc_get_ifindex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_get_info",
+   "linker_set_key" : "ifc_get_info",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_init",
+   "linker_set_key" : "ifc_init",
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_remove_default_route",
+   "linker_set_key" : "ifc_remove_default_route",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_reset_connections",
+   "linker_set_key" : "ifc_reset_connections",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_set_addr",
+   "linker_set_key" : "ifc_set_addr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_set_hwaddr",
+   "linker_set_key" : "ifc_set_hwaddr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_set_prefixLength",
+   "linker_set_key" : "ifc_set_prefixLength",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ifc_up",
+   "linker_set_key" : "ifc_up",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "function_name" : "ip_checksum",
+   "linker_set_key" : "ip_checksum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIt",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ip_checksum_add",
+   "linker_set_key" : "ip_checksum_add",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ip_checksum_adjust",
+   "linker_set_key" : "ip_checksum_adjust",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIt",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ip_checksum_finish",
+   "linker_set_key" : "ip_checksum_finish",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIt",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ipv4_pseudo_header_checksum",
+   "linker_set_key" : "ipv4_pseudo_header_checksum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK5iphdr"
+    },
+    {
+     "referenced_type" : "_ZTIt"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "ipv6_pseudo_header_checksum",
+   "linker_set_key" : "ipv6_pseudo_header_checksum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK7ip6_hdr"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "function_name" : "prefixLengthToIpv4Netmask",
+   "linker_set_key" : "prefixLengthToIpv4Netmask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK5iphdr",
+   "name" : "const iphdr *",
+   "referenced_type" : "_ZTIK5iphdr",
+   "self_type" : "_ZTIPK5iphdr",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK7ip6_hdr",
+   "name" : "const ip6_hdr *",
+   "referenced_type" : "_ZTIK7ip6_hdr",
+   "self_type" : "_ZTIPK7ip6_hdr",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK5iphdr",
+   "name" : "const iphdr",
+   "referenced_type" : "_ZTI5iphdr",
+   "self_type" : "_ZTIK5iphdr",
+   "size" : 20,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK7ip6_hdr",
+   "name" : "const ip6_hdr",
+   "referenced_type" : "_ZTI7ip6_hdr",
+   "self_type" : "_ZTIK7ip6_hdr",
+   "size" : 40,
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/system/core/libnetutils/include/netutils/ifc.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/system/core/libnetutils/include/netutils/checksum.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

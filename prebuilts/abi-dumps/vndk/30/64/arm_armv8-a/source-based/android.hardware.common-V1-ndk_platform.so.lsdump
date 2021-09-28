@@ -1,0 +1,1682 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIDn",
+   "name" : "nullptr_t",
+   "referenced_type" : "_ZTIDn",
+   "self_type" : "_ZTIDn",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN4aidl7android8hardware6common12NativeHandle14readFromParcelEPK7AParcel"
+  },
+  {
+   "name" : "_ZNK4aidl7android8hardware6common12NativeHandle13writeToParcelEP7AParcel"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN3ndk20ScopedFileDescriptorENS_9allocatorIS2_EEE8__appendEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIiNS_9allocatorIiEEE8__appendEj"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZN4aidl7android8hardware6common12NativeHandle10descriptorE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "FLAG_ONEWAY"
+    }
+   ],
+   "linker_set_key" : "_ZTI12$FLAG_ONEWAY",
+   "name" : "(anonymous enum at frameworks/native/libs/binder/ndk/include_ndk/android/binder_ibinder.h:47:1)",
+   "referenced_type" : "_ZTI12$FLAG_ONEWAY",
+   "self_type" : "_ZTI12$FLAG_ONEWAY",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "EX_NONE"
+    },
+    {
+     "enum_field_value" : -1,
+     "name" : "EX_SECURITY"
+    },
+    {
+     "enum_field_value" : -2,
+     "name" : "EX_BAD_PARCELABLE"
+    },
+    {
+     "enum_field_value" : -3,
+     "name" : "EX_ILLEGAL_ARGUMENT"
+    },
+    {
+     "enum_field_value" : -4,
+     "name" : "EX_NULL_POINTER"
+    },
+    {
+     "enum_field_value" : -5,
+     "name" : "EX_ILLEGAL_STATE"
+    },
+    {
+     "enum_field_value" : -6,
+     "name" : "EX_NETWORK_MAIN_THREAD"
+    },
+    {
+     "enum_field_value" : -7,
+     "name" : "EX_UNSUPPORTED_OPERATION"
+    },
+    {
+     "enum_field_value" : -8,
+     "name" : "EX_SERVICE_SPECIFIC"
+    },
+    {
+     "enum_field_value" : -9,
+     "name" : "EX_PARCELABLE"
+    },
+    {
+     "enum_field_value" : -129,
+     "name" : "EX_TRANSACTION_FAILED"
+    }
+   ],
+   "linker_set_key" : "_ZTI18$EX_BAD_PARCELABLE",
+   "name" : "(anonymous enum at frameworks/native/libs/binder/ndk/include_ndk/android/binder_status.h:65:1)",
+   "referenced_type" : "_ZTI18$EX_BAD_PARCELABLE",
+   "self_type" : "_ZTI18$EX_BAD_PARCELABLE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_status.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 268435456,
+     "name" : "FLAG_PRIVATE_LOCAL"
+    }
+   ],
+   "linker_set_key" : "_ZTI19$FLAG_PRIVATE_LOCAL",
+   "name" : "(anonymous enum at frameworks/native/libs/binder/ndk/include_platform/android/binder_stability.h:35:1)",
+   "referenced_type" : "_ZTI19$FLAG_PRIVATE_LOCAL",
+   "self_type" : "_ZTI19$FLAG_PRIVATE_LOCAL",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_platform/android/binder_stability.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 268435456,
+     "name" : "FLAG_PRIVATE_VENDOR"
+    }
+   ],
+   "linker_set_key" : "_ZTI20$FLAG_PRIVATE_VENDOR",
+   "name" : "(anonymous enum at frameworks/native/libs/binder/ndk/include_platform/android/binder_stability.h:26:1)",
+   "referenced_type" : "_ZTI20$FLAG_PRIVATE_VENDOR",
+   "self_type" : "_ZTI20$FLAG_PRIVATE_VENDOR",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_platform/android/binder_stability.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "STATUS_OK"
+    },
+    {
+     "enum_field_value" : -2147483648,
+     "name" : "STATUS_UNKNOWN_ERROR"
+    },
+    {
+     "enum_field_value" : -12,
+     "name" : "STATUS_NO_MEMORY"
+    },
+    {
+     "enum_field_value" : -38,
+     "name" : "STATUS_INVALID_OPERATION"
+    },
+    {
+     "enum_field_value" : -22,
+     "name" : "STATUS_BAD_VALUE"
+    },
+    {
+     "enum_field_value" : -2147483647,
+     "name" : "STATUS_BAD_TYPE"
+    },
+    {
+     "enum_field_value" : -2,
+     "name" : "STATUS_NAME_NOT_FOUND"
+    },
+    {
+     "enum_field_value" : -1,
+     "name" : "STATUS_PERMISSION_DENIED"
+    },
+    {
+     "enum_field_value" : -19,
+     "name" : "STATUS_NO_INIT"
+    },
+    {
+     "enum_field_value" : -17,
+     "name" : "STATUS_ALREADY_EXISTS"
+    },
+    {
+     "enum_field_value" : -32,
+     "name" : "STATUS_DEAD_OBJECT"
+    },
+    {
+     "enum_field_value" : -2147483646,
+     "name" : "STATUS_FAILED_TRANSACTION"
+    },
+    {
+     "enum_field_value" : -75,
+     "name" : "STATUS_BAD_INDEX"
+    },
+    {
+     "enum_field_value" : -61,
+     "name" : "STATUS_NOT_ENOUGH_DATA"
+    },
+    {
+     "enum_field_value" : -11,
+     "name" : "STATUS_WOULD_BLOCK"
+    },
+    {
+     "enum_field_value" : -110,
+     "name" : "STATUS_TIMED_OUT"
+    },
+    {
+     "enum_field_value" : -74,
+     "name" : "STATUS_UNKNOWN_TRANSACTION"
+    },
+    {
+     "enum_field_value" : -2147483641,
+     "name" : "STATUS_FDS_NOT_ALLOWED"
+    },
+    {
+     "enum_field_value" : -2147483640,
+     "name" : "STATUS_UNEXPECTED_NULL"
+    }
+   ],
+   "linker_set_key" : "_ZTI22$STATUS_ALREADY_EXISTS",
+   "name" : "(anonymous enum at frameworks/native/libs/binder/ndk/include_ndk/android/binder_status.h:35:1)",
+   "referenced_type" : "_ZTI22$STATUS_ALREADY_EXISTS",
+   "self_type" : "_ZTI22$STATUS_ALREADY_EXISTS",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_status.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "FIRST_CALL_TRANSACTION"
+    },
+    {
+     "enum_field_value" : 16777215,
+     "name" : "LAST_CALL_TRANSACTION"
+    }
+   ],
+   "linker_set_key" : "_ZTI23$FIRST_CALL_TRANSACTION",
+   "name" : "(anonymous enum at frameworks/native/libs/binder/ndk/include_ndk/android/binder_ibinder.h:59:1)",
+   "referenced_type" : "_ZTI23$FIRST_CALL_TRANSACTION",
+   "self_type" : "_ZTI23$FIRST_CALL_TRANSACTION",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_ibinder.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFiP8AIBinderjPK7AParcelPS1_E",
+   "name" : "int (AIBinder *, unsigned int, const AParcel *, AParcel *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8AIBinder"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPK7AParcel"
+    },
+    {
+     "referenced_type" : "_ZTIP7AParcel"
+    }
+   ],
+   "referenced_type" : "_ZTIFiP8AIBinderjPK7AParcelPS1_E",
+   "return_type" : "_ZTIi",
+   "self_type" : "_ZTIFiP8AIBinderjPK7AParcelPS1_E",
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "aidl::android::hardware::common::NativeHandle::readFromParcel",
+   "linker_set_key" : "_ZN4aidl7android8hardware6common12NativeHandle14readFromParcelEPK7AParcel",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4aidl7android8hardware6common12NativeHandleE"
+    },
+    {
+     "referenced_type" : "_ZTIPK7AParcel"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  },
+  {
+   "function_name" : "aidl::android::hardware::common::NativeHandle::writeToParcel",
+   "linker_set_key" : "_ZNK4aidl7android8hardware6common12NativeHandle13writeToParcelEP7AParcel",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4aidl7android8hardware6common12NativeHandleE"
+    },
+    {
+     "referenced_type" : "_ZTIP7AParcel"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "_ZN4aidl7android8hardware6common12NativeHandle10descriptorE",
+   "name" : "aidl::android::hardware::common::NativeHandle::descriptor",
+   "referenced_type" : "_ZTIPKc",
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  }
+ ],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN3ndk10SpAIBinderE",
+   "name" : "const ndk::SpAIBinder &",
+   "referenced_type" : "_ZTIKN3ndk10SpAIBinderE",
+   "self_type" : "_ZTIRKN3ndk10SpAIBinderE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "name" : "const std::vector<char16_t, std::allocator<char16_t> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "name" : "const std::vector<signed char, std::allocator<signed char> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "name" : "const std::vector<bool, std::allocator<bool> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "name" : "const std::vector<double, std::allocator<double> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "name" : "const std::vector<float, std::allocator<float> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "name" : "const std::vector<int, std::allocator<int> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "name" : "const std::vector<unsigned int, std::allocator<unsigned int> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "name" : "const std::vector<long long, std::allocator<long long> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "name" : "const std::vector<unsigned long long, std::allocator<unsigned long long> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "name" : "const std::optional<std::vector<char16_t, std::allocator<char16_t> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "name" : "const std::optional<std::vector<signed char, std::allocator<signed char> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "name" : "const std::optional<std::vector<bool, std::allocator<bool> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "name" : "const std::optional<std::vector<double, std::allocator<double> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "name" : "const std::optional<std::vector<float, std::allocator<float> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "name" : "const std::optional<std::vector<int, std::allocator<int> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "name" : "const std::optional<std::vector<unsigned int, std::allocator<unsigned int> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "name" : "const std::optional<std::vector<long long, std::allocator<long long> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "name" : "const std::optional<std::vector<unsigned long long, std::allocator<unsigned long long> > > &",
+   "referenced_type" : "_ZTIKNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "self_type" : "_ZTIRKNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN3ndk10SpAIBinderE",
+   "name" : "ndk::SpAIBinder &",
+   "referenced_type" : "_ZTIN3ndk10SpAIBinderE",
+   "self_type" : "_ZTIRN3ndk10SpAIBinderE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN3ndk13ScopedAStatusE",
+   "name" : "ndk::ScopedAStatus &",
+   "referenced_type" : "_ZTIN3ndk13ScopedAStatusE",
+   "self_type" : "_ZTIRN3ndk13ScopedAStatusE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP13AIBinder_Weak",
+   "name" : "AIBinder_Weak *",
+   "referenced_type" : "_ZTI13AIBinder_Weak",
+   "self_type" : "_ZTIP13AIBinder_Weak",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP14AIBinder_Class",
+   "name" : "AIBinder_Class *",
+   "referenced_type" : "_ZTI14AIBinder_Class",
+   "self_type" : "_ZTIP14AIBinder_Class",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP23AIBinder_DeathRecipient",
+   "name" : "AIBinder_DeathRecipient *",
+   "referenced_type" : "_ZTI23AIBinder_DeathRecipient",
+   "self_type" : "_ZTIP23AIBinder_DeathRecipient",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP7AParcel",
+   "name" : "AParcel *",
+   "referenced_type" : "_ZTI7AParcel",
+   "self_type" : "_ZTIP7AParcel",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP7AStatus",
+   "name" : "AStatus *",
+   "referenced_type" : "_ZTI7AStatus",
+   "self_type" : "_ZTIP7AStatus",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP8AIBinder",
+   "name" : "AIBinder *",
+   "referenced_type" : "_ZTI8AIBinder",
+   "self_type" : "_ZTIP8AIBinder",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFiP8AIBinderjPK7AParcelPS1_E",
+   "name" : "int (*)(AIBinder *, unsigned int, const AParcel *, AParcel *)",
+   "referenced_type" : "_ZTIFiP8AIBinderjPK7AParcelPS1_E",
+   "self_type" : "_ZTIPFiP8AIBinderjPK7AParcelPS1_E",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK7AParcel",
+   "name" : "const AParcel *",
+   "referenced_type" : "_ZTIK7AParcel",
+   "self_type" : "_ZTIPK7AParcel",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN3ndk10SpAIBinderE",
+   "name" : "const ndk::SpAIBinder *",
+   "referenced_type" : "_ZTIKN3ndk10SpAIBinderE",
+   "self_type" : "_ZTIPKN3ndk10SpAIBinderE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN3ndk13ScopedAStatusE",
+   "name" : "const ndk::ScopedAStatus *",
+   "referenced_type" : "_ZTIKN3ndk13ScopedAStatusE",
+   "self_type" : "_ZTIPKN3ndk13ScopedAStatusE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "name" : "const ndk::impl::ScopedAResource<AStatus *, void, &AStatus_delete, nullptr> *",
+   "referenced_type" : "_ZTIKN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "self_type" : "_ZTIPKN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "name" : "const ndk::impl::ScopedAResource<int, int, &close, -1> *",
+   "referenced_type" : "_ZTIKN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "self_type" : "_ZTIPKN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4aidl7android8hardware6common12NativeHandleE",
+   "name" : "const aidl::android::hardware::common::NativeHandle *",
+   "referenced_type" : "_ZTIKN4aidl7android8hardware6common12NativeHandleE",
+   "self_type" : "_ZTIPKN4aidl7android8hardware6common12NativeHandleE",
+   "size" : 4,
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk10SpAIBinderE",
+   "name" : "ndk::SpAIBinder *",
+   "referenced_type" : "_ZTIN3ndk10SpAIBinderE",
+   "self_type" : "_ZTIPN3ndk10SpAIBinderE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk11ICInterfaceE",
+   "name" : "ndk::ICInterface *",
+   "referenced_type" : "_ZTIN3ndk11ICInterfaceE",
+   "self_type" : "_ZTIPN3ndk11ICInterfaceE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk13ScopedAParcelE",
+   "name" : "ndk::ScopedAParcel *",
+   "referenced_type" : "_ZTIN3ndk13ScopedAParcelE",
+   "self_type" : "_ZTIPN3ndk13ScopedAParcelE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk13ScopedAStatusE",
+   "name" : "ndk::ScopedAStatus *",
+   "referenced_type" : "_ZTIN3ndk13ScopedAStatusE",
+   "self_type" : "_ZTIPN3ndk13ScopedAStatusE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk13SharedRefBaseE",
+   "name" : "ndk::SharedRefBase *",
+   "referenced_type" : "_ZTIN3ndk13SharedRefBaseE",
+   "self_type" : "_ZTIPN3ndk13SharedRefBaseE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk19ScopedAIBinder_WeakE",
+   "name" : "ndk::ScopedAIBinder_Weak *",
+   "referenced_type" : "_ZTIN3ndk19ScopedAIBinder_WeakE",
+   "self_type" : "_ZTIPN3ndk19ScopedAIBinder_WeakE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk20ScopedFileDescriptorE",
+   "name" : "ndk::ScopedFileDescriptor *",
+   "referenced_type" : "_ZTIN3ndk20ScopedFileDescriptorE",
+   "self_type" : "_ZTIPN3ndk20ScopedFileDescriptorE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk29ScopedAIBinder_DeathRecipientE",
+   "name" : "ndk::ScopedAIBinder_DeathRecipient *",
+   "referenced_type" : "_ZTIN3ndk29ScopedAIBinder_DeathRecipientE",
+   "self_type" : "_ZTIPN3ndk29ScopedAIBinder_DeathRecipientE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AIBinder_Weak *, void, &AIBinder_Weak_delete, nullptr> *",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE",
+   "self_type" : "_ZTIPN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AIBinder_DeathRecipient *, void, &AIBinder_DeathRecipient_delete, nullptr> *",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE",
+   "self_type" : "_ZTIPN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AParcel *, void, &AParcel_delete, nullptr> *",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE",
+   "self_type" : "_ZTIPN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AStatus *, void, &AStatus_delete, nullptr> *",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "self_type" : "_ZTIPN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "name" : "ndk::impl::ScopedAResource<int, int, &close, -1> *",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "self_type" : "_ZTIPN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4aidl7android8hardware6common12NativeHandleE",
+   "name" : "aidl::android::hardware::common::NativeHandle *",
+   "referenced_type" : "_ZTIN4aidl7android8hardware6common12NativeHandleE",
+   "self_type" : "_ZTIPN4aidl7android8hardware6common12NativeHandleE",
+   "size" : 4,
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "name" : "std::vector<char16_t, std::allocator<char16_t> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "name" : "std::vector<signed char, std::allocator<signed char> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIaNS_9allocatorIaEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "name" : "std::vector<bool, std::allocator<bool> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIbNS_9allocatorIbEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "name" : "std::vector<double, std::allocator<double> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIdNS_9allocatorIdEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "name" : "std::vector<float, std::allocator<float> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIfNS_9allocatorIfEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "name" : "std::vector<int, std::allocator<int> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIiNS_9allocatorIiEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "name" : "std::vector<unsigned int, std::allocator<unsigned int> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIjNS_9allocatorIjEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "name" : "std::vector<long long, std::allocator<long long> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIxNS_9allocatorIxEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "name" : "std::vector<unsigned long long, std::allocator<unsigned long long> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIyNS_9allocatorIyEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "name" : "std::optional<std::vector<char16_t, std::allocator<char16_t> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "name" : "std::optional<std::vector<signed char, std::allocator<signed char> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "name" : "std::optional<std::vector<bool, std::allocator<bool> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "name" : "std::optional<std::vector<double, std::allocator<double> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "name" : "std::optional<std::vector<float, std::allocator<float> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "name" : "std::optional<std::vector<int, std::allocator<int> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "name" : "std::optional<std::vector<unsigned int, std::allocator<unsigned int> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "name" : "std::optional<std::vector<long long, std::allocator<long long> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "name" : "std::optional<std::vector<unsigned long long, std::allocator<unsigned long long> > > *",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "self_type" : "_ZTIPNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPP8AIBinder",
+   "name" : "AIBinder **",
+   "referenced_type" : "_ZTIP8AIBinder",
+   "self_type" : "_ZTIPP8AIBinder",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPKc",
+   "name" : "const char **",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIPPKc",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK7AParcel",
+   "name" : "const AParcel",
+   "referenced_type" : "_ZTI7AParcel",
+   "self_type" : "_ZTIK7AParcel",
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN3ndk10SpAIBinderE",
+   "name" : "const ndk::SpAIBinder",
+   "referenced_type" : "_ZTIN3ndk10SpAIBinderE",
+   "self_type" : "_ZTIKN3ndk10SpAIBinderE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN3ndk13ScopedAStatusE",
+   "name" : "const ndk::ScopedAStatus",
+   "referenced_type" : "_ZTIN3ndk13ScopedAStatusE",
+   "self_type" : "_ZTIKN3ndk13ScopedAStatusE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "name" : "const ndk::impl::ScopedAResource<AStatus *, void, &AStatus_delete, nullptr>",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "self_type" : "_ZTIKN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "name" : "const ndk::impl::ScopedAResource<int, int, &close, -1>",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "self_type" : "_ZTIKN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4aidl7android8hardware6common12NativeHandleE",
+   "name" : "const aidl::android::hardware::common::NativeHandle",
+   "referenced_type" : "_ZTIN4aidl7android8hardware6common12NativeHandleE",
+   "self_type" : "_ZTIKN4aidl7android8hardware6common12NativeHandleE",
+   "size" : 24,
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "name" : "const std::vector<char16_t, std::allocator<char16_t> >",
+   "referenced_type" : "_ZTINSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIDsNS_9allocatorIDsEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "name" : "const std::vector<signed char, std::allocator<signed char> >",
+   "referenced_type" : "_ZTINSt3__16vectorIaNS_9allocatorIaEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIaNS_9allocatorIaEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "name" : "const std::vector<bool, std::allocator<bool> >",
+   "referenced_type" : "_ZTINSt3__16vectorIbNS_9allocatorIbEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIbNS_9allocatorIbEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "name" : "const std::vector<double, std::allocator<double> >",
+   "referenced_type" : "_ZTINSt3__16vectorIdNS_9allocatorIdEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIdNS_9allocatorIdEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "name" : "const std::vector<float, std::allocator<float> >",
+   "referenced_type" : "_ZTINSt3__16vectorIfNS_9allocatorIfEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIfNS_9allocatorIfEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "name" : "const std::vector<int, std::allocator<int> >",
+   "referenced_type" : "_ZTINSt3__16vectorIiNS_9allocatorIiEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIiNS_9allocatorIiEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "name" : "const std::vector<unsigned int, std::allocator<unsigned int> >",
+   "referenced_type" : "_ZTINSt3__16vectorIjNS_9allocatorIjEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "name" : "const std::vector<long long, std::allocator<long long> >",
+   "referenced_type" : "_ZTINSt3__16vectorIxNS_9allocatorIxEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIxNS_9allocatorIxEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "name" : "const std::vector<unsigned long long, std::allocator<unsigned long long> >",
+   "referenced_type" : "_ZTINSt3__16vectorIyNS_9allocatorIyEEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIyNS_9allocatorIyEEEE",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "name" : "const std::optional<std::vector<char16_t, std::allocator<char16_t> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIDsNS_9allocatorIDsEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "name" : "const std::optional<std::vector<signed char, std::allocator<signed char> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIaNS_9allocatorIaEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "name" : "const std::optional<std::vector<bool, std::allocator<bool> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIbNS_9allocatorIbEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "name" : "const std::optional<std::vector<double, std::allocator<double> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIdNS_9allocatorIdEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "name" : "const std::optional<std::vector<float, std::allocator<float> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIfNS_9allocatorIfEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "name" : "const std::optional<std::vector<int, std::allocator<int> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIiNS_9allocatorIiEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "name" : "const std::optional<std::vector<unsigned int, std::allocator<unsigned int> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIjNS_9allocatorIjEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "name" : "const std::optional<std::vector<long long, std::allocator<long long> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIxNS_9allocatorIxEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "name" : "const std::optional<std::vector<unsigned long long, std::allocator<unsigned long long> > >",
+   "referenced_type" : "_ZTINSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "self_type" : "_ZTIKNSt3__18optionalINS_6vectorIyNS_9allocatorIyEEEEEE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKP7AStatus",
+   "name" : "AStatus *const",
+   "referenced_type" : "_ZTIP7AStatus",
+   "self_type" : "_ZTIKP7AStatus",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_parcel_utils.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mBinder",
+     "referenced_type" : "_ZTIP8AIBinder"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk10SpAIBinderE",
+   "name" : "ndk::SpAIBinder",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk10SpAIBinderE",
+   "self_type" : "_ZTIN3ndk10SpAIBinderE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "interface",
+     "referenced_type" : "_ZTINSt3__110shared_ptrIN3ndk11ICInterfaceEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk11ICInterface15ICInterfaceDataE",
+   "name" : "ndk::ICInterface::ICInterfaceData",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk11ICInterface15ICInterfaceDataE",
+   "self_type" : "_ZTIN3ndk11ICInterface15ICInterfaceDataE",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN3ndk13SharedRefBaseE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk11ICInterfaceE",
+   "name" : "ndk::ICInterface",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk11ICInterfaceE",
+   "self_type" : "_ZTIN3ndk11ICInterfaceE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN3ndk11ICInterfaceE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN3ndk11ICInterfaceD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN3ndk11ICInterfaceD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN3ndk11ICInterface8asBinderEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN3ndk11ICInterface8isRemoteEv"
+    },
+    {
+     "mangled_component_name" : "_ZN3ndk11ICInterface4dumpEiPPKcj"
+    },
+    {
+     "mangled_component_name" : "_ZN3ndk11ICInterface18handleShellCommandEiiiPPKcj"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk13ScopedAParcelE",
+   "name" : "ndk::ScopedAParcel",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk13ScopedAParcelE",
+   "self_type" : "_ZTIN3ndk13ScopedAParcelE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk13ScopedAStatusE",
+   "name" : "ndk::ScopedAStatus",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk13ScopedAStatusE",
+   "self_type" : "_ZTIN3ndk13ScopedAStatusE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mFlagThis",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTINSt3__19once_flagE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mThis",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTINSt3__18weak_ptrIN3ndk13SharedRefBaseEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk13SharedRefBaseE",
+   "name" : "ndk::SharedRefBase",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk13SharedRefBaseE",
+   "self_type" : "_ZTIN3ndk13SharedRefBaseE",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_interface_utils.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN3ndk13SharedRefBaseE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN3ndk13SharedRefBaseD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN3ndk13SharedRefBaseD0Ev"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk19ScopedAIBinder_WeakE",
+   "name" : "ndk::ScopedAIBinder_Weak",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk19ScopedAIBinder_WeakE",
+   "self_type" : "_ZTIN3ndk19ScopedAIBinder_WeakE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk20ScopedFileDescriptorE",
+   "name" : "ndk::ScopedFileDescriptor",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk20ScopedFileDescriptorE",
+   "self_type" : "_ZTIN3ndk20ScopedFileDescriptorE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk29ScopedAIBinder_DeathRecipientE",
+   "name" : "ndk::ScopedAIBinder_DeathRecipient",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk29ScopedAIBinder_DeathRecipientE",
+   "self_type" : "_ZTIN3ndk29ScopedAIBinder_DeathRecipientE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mT",
+     "referenced_type" : "_ZTIP13AIBinder_Weak"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AIBinder_Weak *, void, &AIBinder_Weak_delete, nullptr>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE",
+   "self_type" : "_ZTIN3ndk4impl15ScopedAResourceIP13AIBinder_WeakvXadL_Z20AIBinder_Weak_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h",
+   "template_args" : [ "_ZTIP13AIBinder_Weak", "_ZTIv" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mT",
+     "referenced_type" : "_ZTIP23AIBinder_DeathRecipient"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AIBinder_DeathRecipient *, void, &AIBinder_DeathRecipient_delete, nullptr>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE",
+   "self_type" : "_ZTIN3ndk4impl15ScopedAResourceIP23AIBinder_DeathRecipientvXadL_Z30AIBinder_DeathRecipient_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h",
+   "template_args" : [ "_ZTIP23AIBinder_DeathRecipient", "_ZTIv" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mT",
+     "referenced_type" : "_ZTIP7AParcel"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AParcel *, void, &AParcel_delete, nullptr>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE",
+   "self_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AParcelvXadL_Z14AParcel_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h",
+   "template_args" : [ "_ZTIP7AParcel", "_ZTIv" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mT",
+     "referenced_type" : "_ZTIP7AStatus"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "name" : "ndk::impl::ScopedAResource<AStatus *, void, &AStatus_delete, nullptr>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "self_type" : "_ZTIN3ndk4impl15ScopedAResourceIP7AStatusvXadL_Z14AStatus_deleteEELS3_0EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h",
+   "template_args" : [ "_ZTIP7AStatus", "_ZTIv" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mT",
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "name" : "ndk::impl::ScopedAResource<int, int, &close, -1>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "self_type" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h",
+   "template_args" : [ "_ZTIi", "_ZTIi" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fds",
+     "referenced_type" : "_ZTINSt3__16vectorIN3ndk20ScopedFileDescriptorENS_9allocatorIS2_EEEE"
+    },
+    {
+     "field_name" : "ints",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTINSt3__16vectorIiNS_9allocatorIiEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4aidl7android8hardware6common12NativeHandleE",
+   "name" : "aidl::android::hardware::common::NativeHandle",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4aidl7android8hardware6common12NativeHandleE",
+   "self_type" : "_ZTIN4aidl7android8hardware6common12NativeHandleE",
+   "size" : 24,
+   "source_file" : "/out/soong/.intermediates/hardware/interfaces/common/aidl/android.hardware.common-ndk_platform-source/gen/include/aidl/android/hardware/common/NativeHandle.h"
+  }
+ ],
+ "rvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTION3ndk13ScopedAParcelE",
+   "name" : "ndk::ScopedAParcel &&",
+   "referenced_type" : "_ZTIN3ndk13ScopedAParcelE",
+   "self_type" : "_ZTION3ndk13ScopedAParcelE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTION3ndk13ScopedAStatusE",
+   "name" : "ndk::ScopedAStatus &&",
+   "referenced_type" : "_ZTIN3ndk13ScopedAStatusE",
+   "self_type" : "_ZTION3ndk13ScopedAStatusE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTION3ndk19ScopedAIBinder_WeakE",
+   "name" : "ndk::ScopedAIBinder_Weak &&",
+   "referenced_type" : "_ZTIN3ndk19ScopedAIBinder_WeakE",
+   "self_type" : "_ZTION3ndk19ScopedAIBinder_WeakE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTION3ndk20ScopedFileDescriptorE",
+   "name" : "ndk::ScopedFileDescriptor &&",
+   "referenced_type" : "_ZTIN3ndk20ScopedFileDescriptorE",
+   "self_type" : "_ZTION3ndk20ScopedFileDescriptorE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTION3ndk29ScopedAIBinder_DeathRecipientE",
+   "name" : "ndk::ScopedAIBinder_DeathRecipient &&",
+   "referenced_type" : "_ZTIN3ndk29ScopedAIBinder_DeathRecipientE",
+   "self_type" : "_ZTION3ndk29ScopedAIBinder_DeathRecipientE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTION3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "name" : "ndk::impl::ScopedAResource<int, int, &close, -1> &&",
+   "referenced_type" : "_ZTIN3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "self_type" : "_ZTION3ndk4impl15ScopedAResourceIiiXadL_Z5closeEELin1EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/binder/ndk/include_ndk/android/binder_auto_utils.h"
+  }
+ ]
+}

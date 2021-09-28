@@ -1,0 +1,333 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "AIncidentReportArgs_addHeader"
+  },
+  {
+   "name" : "AIncidentReportArgs_addSection"
+  },
+  {
+   "name" : "AIncidentReportArgs_clone"
+  },
+  {
+   "name" : "AIncidentReportArgs_delete"
+  },
+  {
+   "name" : "AIncidentReportArgs_init"
+  },
+  {
+   "name" : "AIncidentReportArgs_setAll"
+  },
+  {
+   "name" : "AIncidentReportArgs_setPrivacyPolicy"
+  },
+  {
+   "name" : "AIncidentReportArgs_setReceiverClass"
+  },
+  {
+   "name" : "AIncidentReportArgs_setReceiverPackage"
+  },
+  {
+   "name" : "AIncidentReportArgs_takeReport"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "INCIDENT_REPORT_PRIVACY_POLICY_LOCAL"
+    },
+    {
+     "enum_field_value" : 100,
+     "name" : "INCIDENT_REPORT_PRIVACY_POLICY_EXPLICIT"
+    },
+    {
+     "enum_field_value" : 200,
+     "name" : "INCIDENT_REPORT_PRIVACY_POLICY_AUTOMATIC"
+    },
+    {
+     "enum_field_value" : 255,
+     "name" : "INCIDENT_REPORT_PRIVACY_POLICY_UNSET"
+    }
+   ],
+   "linker_set_key" : "_ZTI41$INCIDENT_REPORT_PRIVACY_POLICY_AUTOMATIC",
+   "name" : "(anonymous enum at frameworks/base/libs/incident/include/incident/incident_report.h:40:1)",
+   "referenced_type" : "_ZTI41$INCIDENT_REPORT_PRIVACY_POLICY_AUTOMATIC",
+   "self_type" : "_ZTI41$INCIDENT_REPORT_PRIVACY_POLICY_AUTOMATIC",
+   "size" : 4,
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "AIncidentReportArgs_addHeader",
+   "linker_set_key" : "AIncidentReportArgs_addHeader",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_addSection",
+   "linker_set_key" : "AIncidentReportArgs_addSection",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_clone",
+   "linker_set_key" : "AIncidentReportArgs_clone",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    }
+   ],
+   "return_type" : "_ZTIP19AIncidentReportArgs",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_delete",
+   "linker_set_key" : "AIncidentReportArgs_delete",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_init",
+   "linker_set_key" : "AIncidentReportArgs_init",
+   "return_type" : "_ZTIP19AIncidentReportArgs",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_setAll",
+   "linker_set_key" : "AIncidentReportArgs_setAll",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_setPrivacyPolicy",
+   "linker_set_key" : "AIncidentReportArgs_setPrivacyPolicy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_setReceiverClass",
+   "linker_set_key" : "AIncidentReportArgs_setReceiverClass",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_setReceiverPackage",
+   "linker_set_key" : "AIncidentReportArgs_setReceiverPackage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "function_name" : "AIncidentReportArgs_takeReport",
+   "linker_set_key" : "AIncidentReportArgs_takeReport",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19AIncidentReportArgs"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP19AIncidentReportArgs",
+   "name" : "AIncidentReportArgs *",
+   "referenced_type" : "_ZTI19AIncidentReportArgs",
+   "self_type" : "_ZTIP19AIncidentReportArgs",
+   "size" : 8,
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/frameworks/base/libs/incident/include/incident/incident_report.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

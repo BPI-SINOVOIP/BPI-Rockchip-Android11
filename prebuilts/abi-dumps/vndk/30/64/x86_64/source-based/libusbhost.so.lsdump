@@ -1,0 +1,1132 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "usb_descriptor_iter_init"
+  },
+  {
+   "name" : "usb_descriptor_iter_next"
+  },
+  {
+   "name" : "usb_device_bulk_transfer"
+  },
+  {
+   "name" : "usb_device_claim_interface"
+  },
+  {
+   "name" : "usb_device_close"
+  },
+  {
+   "name" : "usb_device_connect_kernel_driver"
+  },
+  {
+   "name" : "usb_device_control_transfer"
+  },
+  {
+   "name" : "usb_device_get_descriptors_length"
+  },
+  {
+   "name" : "usb_device_get_device_descriptor"
+  },
+  {
+   "name" : "usb_device_get_fd"
+  },
+  {
+   "name" : "usb_device_get_manufacturer_name"
+  },
+  {
+   "name" : "usb_device_get_name"
+  },
+  {
+   "name" : "usb_device_get_name_from_unique_id"
+  },
+  {
+   "name" : "usb_device_get_product_id"
+  },
+  {
+   "name" : "usb_device_get_product_name"
+  },
+  {
+   "name" : "usb_device_get_raw_descriptors"
+  },
+  {
+   "name" : "usb_device_get_serial"
+  },
+  {
+   "name" : "usb_device_get_string"
+  },
+  {
+   "name" : "usb_device_get_string_ucs2"
+  },
+  {
+   "name" : "usb_device_get_unique_id"
+  },
+  {
+   "name" : "usb_device_get_unique_id_from_name"
+  },
+  {
+   "name" : "usb_device_get_vendor_id"
+  },
+  {
+   "name" : "usb_device_get_version"
+  },
+  {
+   "name" : "usb_device_is_writeable"
+  },
+  {
+   "name" : "usb_device_new"
+  },
+  {
+   "name" : "usb_device_open"
+  },
+  {
+   "name" : "usb_device_release_interface"
+  },
+  {
+   "name" : "usb_device_reset"
+  },
+  {
+   "name" : "usb_device_set_configuration"
+  },
+  {
+   "name" : "usb_device_set_interface"
+  },
+  {
+   "name" : "usb_host_cleanup"
+  },
+  {
+   "name" : "usb_host_get_fd"
+  },
+  {
+   "name" : "usb_host_init"
+  },
+  {
+   "name" : "usb_host_load"
+  },
+  {
+   "name" : "usb_host_read_event"
+  },
+  {
+   "name" : "usb_host_run"
+  },
+  {
+   "name" : "usb_request_cancel"
+  },
+  {
+   "name" : "usb_request_free"
+  },
+  {
+   "name" : "usb_request_new"
+  },
+  {
+   "name" : "usb_request_queue"
+  },
+  {
+   "name" : "usb_request_wait"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFiPKcPvE",
+   "name" : "int (const char *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "referenced_type" : "_ZTIFiPKcPvE",
+   "return_type" : "_ZTIi",
+   "self_type" : "_ZTIFiPKcPvE",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFiPvE",
+   "name" : "int (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "referenced_type" : "_ZTIFiPvE",
+   "return_type" : "_ZTIi",
+   "self_type" : "_ZTIFiPvE",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "usb_descriptor_iter_init",
+   "linker_set_key" : "usb_descriptor_iter_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIP19usb_descriptor_iter"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_descriptor_iter_next",
+   "linker_set_key" : "usb_descriptor_iter_next",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP19usb_descriptor_iter"
+    }
+   ],
+   "return_type" : "_ZTIP21usb_descriptor_header",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_bulk_transfer",
+   "linker_set_key" : "usb_device_bulk_transfer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_claim_interface",
+   "linker_set_key" : "usb_device_claim_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_close",
+   "linker_set_key" : "usb_device_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_connect_kernel_driver",
+   "linker_set_key" : "usb_device_connect_kernel_driver",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_control_transfer",
+   "linker_set_key" : "usb_device_control_transfer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_descriptors_length",
+   "linker_set_key" : "usb_device_get_descriptors_length",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIm",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_device_descriptor",
+   "linker_set_key" : "usb_device_get_device_descriptor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIPK21usb_device_descriptor",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_fd",
+   "linker_set_key" : "usb_device_get_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_manufacturer_name",
+   "linker_set_key" : "usb_device_get_manufacturer_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_name",
+   "linker_set_key" : "usb_device_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_name_from_unique_id",
+   "linker_set_key" : "usb_device_get_name_from_unique_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_product_id",
+   "linker_set_key" : "usb_device_get_product_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIt",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_product_name",
+   "linker_set_key" : "usb_device_get_product_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_raw_descriptors",
+   "linker_set_key" : "usb_device_get_raw_descriptors",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIPKh",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_serial",
+   "linker_set_key" : "usb_device_get_serial",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_string",
+   "linker_set_key" : "usb_device_get_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_string_ucs2",
+   "linker_set_key" : "usb_device_get_string_ucs2",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPPv"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_unique_id",
+   "linker_set_key" : "usb_device_get_unique_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_unique_id_from_name",
+   "linker_set_key" : "usb_device_get_unique_id_from_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_vendor_id",
+   "linker_set_key" : "usb_device_get_vendor_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIt",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_version",
+   "linker_set_key" : "usb_device_get_version",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_is_writeable",
+   "linker_set_key" : "usb_device_is_writeable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_new",
+   "linker_set_key" : "usb_device_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIP10usb_device",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_open",
+   "linker_set_key" : "usb_device_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIP10usb_device",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_release_interface",
+   "linker_set_key" : "usb_device_release_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_reset",
+   "linker_set_key" : "usb_device_reset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_set_configuration",
+   "linker_set_key" : "usb_device_set_configuration",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_set_interface",
+   "linker_set_key" : "usb_device_set_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_cleanup",
+   "linker_set_key" : "usb_host_cleanup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16usb_host_context"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_get_fd",
+   "linker_set_key" : "usb_host_get_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16usb_host_context"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_init",
+   "linker_set_key" : "usb_host_init",
+   "return_type" : "_ZTIP16usb_host_context",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_load",
+   "linker_set_key" : "usb_host_load",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16usb_host_context"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPKcPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPKcPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_read_event",
+   "linker_set_key" : "usb_host_read_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16usb_host_context"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_run",
+   "linker_set_key" : "usb_host_run",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16usb_host_context"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPKcPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPKcPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_cancel",
+   "linker_set_key" : "usb_request_cancel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP11usb_request"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_free",
+   "linker_set_key" : "usb_request_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP11usb_request"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_new",
+   "linker_set_key" : "usb_request_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIPK23usb_endpoint_descriptor"
+    }
+   ],
+   "return_type" : "_ZTIP11usb_request",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_queue",
+   "linker_set_key" : "usb_request_queue",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP11usb_request"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_wait",
+   "linker_set_key" : "usb_request_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIP11usb_request",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP10usb_device",
+   "name" : "usb_device *",
+   "referenced_type" : "_ZTI10usb_device",
+   "self_type" : "_ZTIP10usb_device",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP11usb_request",
+   "name" : "usb_request *",
+   "referenced_type" : "_ZTI11usb_request",
+   "self_type" : "_ZTIP11usb_request",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP16usb_host_context",
+   "name" : "usb_host_context *",
+   "referenced_type" : "_ZTI16usb_host_context",
+   "self_type" : "_ZTIP16usb_host_context",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP19usb_descriptor_iter",
+   "name" : "usb_descriptor_iter *",
+   "referenced_type" : "_ZTI19usb_descriptor_iter",
+   "self_type" : "_ZTIP19usb_descriptor_iter",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP21usb_descriptor_header",
+   "name" : "usb_descriptor_header *",
+   "referenced_type" : "_ZTI21usb_descriptor_header",
+   "self_type" : "_ZTIP21usb_descriptor_header",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFiPKcPvE",
+   "name" : "int (*)(const char *, void *)",
+   "referenced_type" : "_ZTIFiPKcPvE",
+   "self_type" : "_ZTIPFiPKcPvE",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFiPvE",
+   "name" : "int (*)(void *)",
+   "referenced_type" : "_ZTIFiPvE",
+   "self_type" : "_ZTIPFiPvE",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK10usb_device",
+   "name" : "const usb_device *",
+   "referenced_type" : "_ZTIK10usb_device",
+   "self_type" : "_ZTIPK10usb_device",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK21usb_device_descriptor",
+   "name" : "const usb_device_descriptor *",
+   "referenced_type" : "_ZTIK21usb_device_descriptor",
+   "self_type" : "_ZTIPK21usb_device_descriptor",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK23usb_endpoint_descriptor",
+   "name" : "const usb_endpoint_descriptor *",
+   "referenced_type" : "_ZTIK23usb_endpoint_descriptor",
+   "self_type" : "_ZTIPK23usb_endpoint_descriptor",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPv",
+   "name" : "void **",
+   "referenced_type" : "_ZTIPv",
+   "self_type" : "_ZTIPPv",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPm",
+   "name" : "unsigned long *",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIPm",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK10usb_device",
+   "name" : "const usb_device",
+   "referenced_type" : "_ZTI10usb_device",
+   "self_type" : "_ZTIK10usb_device",
+   "size" : 4172,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK21usb_device_descriptor",
+   "name" : "const usb_device_descriptor",
+   "referenced_type" : "_ZTI21usb_device_descriptor",
+   "self_type" : "_ZTIK21usb_device_descriptor",
+   "size" : 18,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK23usb_endpoint_descriptor",
+   "name" : "const usb_endpoint_descriptor",
+   "referenced_type" : "_ZTI23usb_endpoint_descriptor",
+   "self_type" : "_ZTIK23usb_endpoint_descriptor",
+   "size" : 9,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "dev",
+     "referenced_type" : "_ZTIP10usb_device"
+    },
+    {
+     "field_name" : "buffer",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "buffer_length",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "actual_length",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "max_packet_size",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "private_data",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "endpoint",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "client_data",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "linker_set_key" : "_ZTI11usb_request",
+   "name" : "usb_request",
+   "referenced_type" : "_ZTI11usb_request",
+   "self_type" : "_ZTI11usb_request",
+   "size" : 56,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "config",
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "field_name" : "config_end",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "field_name" : "curr_desc",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPh"
+    }
+   ],
+   "linker_set_key" : "_ZTI19usb_descriptor_iter",
+   "name" : "usb_descriptor_iter",
+   "referenced_type" : "_ZTI19usb_descriptor_iter",
+   "self_type" : "_ZTI19usb_descriptor_iter",
+   "size" : 24,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

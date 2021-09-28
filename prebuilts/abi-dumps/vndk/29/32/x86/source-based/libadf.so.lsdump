@@ -1,0 +1,1647 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "char [32]",
+   "name" : "char [32]",
+   "referenced_type" : "type-22",
+   "self_type" : "type-21",
+   "size" : 32,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [4]",
+   "name" : "int [4]",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 16,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [4]",
+   "name" : "unsigned int [4]",
+   "referenced_type" : "type-2",
+   "self_type" : "type-9",
+   "size" : 16,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-42",
+   "self_type" : "type-42",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIjNS_9allocatorIjEEE21__push_back_slow_pathIRKjEEvOT_"
+  },
+  {
+   "name" : "adf_device_attach"
+  },
+  {
+   "name" : "adf_device_close"
+  },
+  {
+   "name" : "adf_device_detach"
+  },
+  {
+   "name" : "adf_device_open"
+  },
+  {
+   "name" : "adf_device_post"
+  },
+  {
+   "name" : "adf_device_post_v2"
+  },
+  {
+   "name" : "adf_devices"
+  },
+  {
+   "name" : "adf_find_simple_post_configuration"
+  },
+  {
+   "name" : "adf_format_str"
+  },
+  {
+   "name" : "adf_free_device_data"
+  },
+  {
+   "name" : "adf_free_interface_data"
+  },
+  {
+   "name" : "adf_free_overlay_engine_data"
+  },
+  {
+   "name" : "adf_get_device_data"
+  },
+  {
+   "name" : "adf_get_interface_data"
+  },
+  {
+   "name" : "adf_get_overlay_engine_data"
+  },
+  {
+   "name" : "adf_interface_blank"
+  },
+  {
+   "name" : "adf_interface_open"
+  },
+  {
+   "name" : "adf_interface_set_mode"
+  },
+  {
+   "name" : "adf_interface_simple_buffer_alloc"
+  },
+  {
+   "name" : "adf_interface_simple_post"
+  },
+  {
+   "name" : "adf_interface_simple_post_v2"
+  },
+  {
+   "name" : "adf_interfaces"
+  },
+  {
+   "name" : "adf_interfaces_filter_by_flag"
+  },
+  {
+   "name" : "adf_interfaces_filter_by_type"
+  },
+  {
+   "name" : "adf_interfaces_for_overlay_engine"
+  },
+  {
+   "name" : "adf_overlay_engine_open"
+  },
+  {
+   "name" : "adf_overlay_engine_supports_format"
+  },
+  {
+   "name" : "adf_overlay_engines"
+  },
+  {
+   "name" : "adf_overlay_engines_filter_by_format"
+  },
+  {
+   "name" : "adf_overlay_engines_for_interface"
+  },
+  {
+   "name" : "adf_read_event"
+  },
+  {
+   "name" : "adf_set_event"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADF_COMPLETE_FENCE_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ADF_COMPLETE_FENCE_PRESENT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ADF_COMPLETE_FENCE_RELEASE"
+    }
+   ],
+   "linker_set_key" : "adf_complete_fence_type",
+   "name" : "adf_complete_fence_type",
+   "referenced_type" : "type-38",
+   "self_type" : "type-38",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_ZTS23adf_complete_fence_type"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADF_EVENT_VSYNC"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ADF_EVENT_HOTPLUG"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "ADF_EVENT_DEVICE_CUSTOM"
+    },
+    {
+     "enum_field_value" : 255,
+     "name" : "ADF_EVENT_TYPE_MAX"
+    }
+   ],
+   "linker_set_key" : "adf_event_type",
+   "name" : "adf_event_type",
+   "referenced_type" : "type-24",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_ZTS14adf_event_type"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADF_INTF_DSI"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ADF_INTF_eDP"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ADF_INTF_DPI"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ADF_INTF_VGA"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ADF_INTF_DVI"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ADF_INTF_HDMI"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ADF_INTF_MEMORY"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "ADF_INTF_TYPE_DEVICE_CUSTOM"
+    },
+    {
+     "enum_field_value" : -1,
+     "name" : "ADF_INTF_TYPE_MAX"
+    }
+   ],
+   "linker_set_key" : "adf_interface_type",
+   "name" : "adf_interface_type",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_ZTS18adf_interface_type"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "adf_device_attach",
+   "linker_set_key" : "adf_device_attach",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_close",
+   "linker_set_key" : "adf_device_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_detach",
+   "linker_set_key" : "adf_device_detach",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_open",
+   "linker_set_key" : "adf_device_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_post",
+   "linker_set_key" : "adf_device_post",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_post_v2",
+   "linker_set_key" : "adf_device_post_v2",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-14"
+    },
+    {
+     "referenced_type" : "type-38"
+    },
+    {
+     "referenced_type" : "type-36"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_devices",
+   "linker_set_key" : "adf_devices",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_find_simple_post_configuration",
+   "linker_set_key" : "adf_find_simple_post_configuration",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-40"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_format_str",
+   "linker_set_key" : "adf_format_str",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-45"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_free_device_data",
+   "linker_set_key" : "adf_free_device_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_free_interface_data",
+   "linker_set_key" : "adf_free_interface_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_free_overlay_engine_data",
+   "linker_set_key" : "adf_free_overlay_engine_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-41"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_get_device_data",
+   "linker_set_key" : "adf_get_device_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_get_interface_data",
+   "linker_set_key" : "adf_get_interface_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_get_overlay_engine_data",
+   "linker_set_key" : "adf_get_overlay_engine_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-41"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_blank",
+   "linker_set_key" : "adf_interface_blank",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_open",
+   "linker_set_key" : "adf_interface_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_set_mode",
+   "linker_set_key" : "adf_interface_set_mode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-27"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_simple_buffer_alloc",
+   "linker_set_key" : "adf_interface_simple_buffer_alloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_simple_post",
+   "linker_set_key" : "adf_interface_simple_post",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_simple_post_v2",
+   "linker_set_key" : "adf_interface_simple_post_v2",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-38"
+    },
+    {
+     "referenced_type" : "type-36"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces",
+   "linker_set_key" : "adf_interfaces",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces_filter_by_flag",
+   "linker_set_key" : "adf_interfaces_filter_by_flag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces_filter_by_type",
+   "linker_set_key" : "adf_interfaces_filter_by_type",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces_for_overlay_engine",
+   "linker_set_key" : "adf_interfaces_for_overlay_engine",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engine_open",
+   "linker_set_key" : "adf_overlay_engine_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engine_supports_format",
+   "linker_set_key" : "adf_overlay_engine_supports_format",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-42",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engines",
+   "linker_set_key" : "adf_overlay_engines",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engines_filter_by_format",
+   "linker_set_key" : "adf_overlay_engines_filter_by_format",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-40"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engines_for_interface",
+   "linker_set_key" : "adf_overlay_engines_for_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_read_event",
+   "linker_set_key" : "adf_read_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-44"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_set_event",
+   "linker_set_key" : "adf_set_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-42"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_attachment_config *",
+   "name" : "adf_attachment_config *",
+   "referenced_type" : "type-19",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_buffer_config *",
+   "name" : "adf_buffer_config *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_device *",
+   "name" : "adf_device *",
+   "referenced_type" : "type-32",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_device_data *",
+   "name" : "adf_device_data *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-35",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_event *",
+   "name" : "adf_event *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-43",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_event **",
+   "name" : "adf_event **",
+   "referenced_type" : "type-43",
+   "self_type" : "type-44",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_interface_data *",
+   "name" : "adf_interface_data *",
+   "referenced_type" : "type-25",
+   "self_type" : "type-37",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "adf_overlay_engine_data *",
+   "name" : "adf_overlay_engine_data *",
+   "referenced_type" : "type-31",
+   "self_type" : "type-41",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-45",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const unsigned int *",
+   "name" : "const unsigned int *",
+   "referenced_type" : "type-39",
+   "self_type" : "type-40",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "drm_mode_modeinfo *",
+   "name" : "drm_mode_modeinfo *",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-36",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-4",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int **",
+   "name" : "unsigned int **",
+   "referenced_type" : "type-4",
+   "self_type" : "type-33",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-39",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "overlay_engine",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "interface",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "adf_attachment_config",
+   "name" : "adf_attachment_config",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 8,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS21adf_attachment_config"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "overlay_engine",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "w",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "h",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 128,
+     "referenced_type" : "type-7"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 256,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "pitch",
+     "field_offset" : 384,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "n_planes",
+     "field_offset" : 512,
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "acquire_fence",
+     "field_offset" : 544,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "adf_buffer_config",
+   "name" : "adf_buffer_config",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 72,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS17adf_buffer_config"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "id",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 32,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "adf_device",
+   "name" : "adf_device",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 8,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h",
+   "unique_id" : "_ZTS10adf_device"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-21"
+    },
+    {
+     "field_name" : "n_attachments",
+     "field_offset" : 256,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "attachments",
+     "field_offset" : 288,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "n_allowed_attachments",
+     "field_offset" : 320,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "allowed_attachments",
+     "field_offset" : 352,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 384,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 416,
+     "referenced_type" : "type-11"
+    }
+   ],
+   "linker_set_key" : "adf_device_data",
+   "name" : "adf_device_data",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 56,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS15adf_device_data"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "length",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "adf_event",
+   "name" : "adf_event",
+   "referenced_type" : "type-30",
+   "self_type" : "type-30",
+   "size" : 8,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS9adf_event"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "base",
+     "referenced_type" : "type-30"
+    },
+    {
+     "field_name" : "connected",
+     "field_offset" : 64,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "adf_hotplug_event",
+   "name" : "adf_hotplug_event",
+   "referenced_type" : "type-29",
+   "self_type" : "type-29",
+   "size" : 12,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS17adf_hotplug_event"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-21"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 256,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "id",
+     "field_offset" : 288,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 320,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "dpms_state",
+     "field_offset" : 352,
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "hotplug_detect",
+     "field_offset" : 360,
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "width_mm",
+     "field_offset" : 368,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "height_mm",
+     "field_offset" : 384,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "current_mode",
+     "field_offset" : 416,
+     "referenced_type" : "type-26"
+    },
+    {
+     "field_name" : "n_available_modes",
+     "field_offset" : 960,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "available_modes",
+     "field_offset" : 992,
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 1024,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 1056,
+     "referenced_type" : "type-11"
+    }
+   ],
+   "linker_set_key" : "adf_interface_data",
+   "name" : "adf_interface_data",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 136,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS18adf_interface_data"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-21"
+    },
+    {
+     "field_name" : "n_supported_formats",
+     "field_offset" : 256,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "supported_formats",
+     "field_offset" : 288,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 320,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 352,
+     "referenced_type" : "type-11"
+    }
+   ],
+   "linker_set_key" : "adf_overlay_engine_data",
+   "name" : "adf_overlay_engine_data",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 48,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS23adf_overlay_engine_data"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "n_interfaces",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "interfaces",
+     "field_offset" : 32,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "n_bufs",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "bufs",
+     "field_offset" : 96,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 160,
+     "referenced_type" : "type-11"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 192,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "adf_post_config",
+   "name" : "adf_post_config",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 28,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS15adf_post_config"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "n_interfaces",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "interfaces",
+     "field_offset" : 32,
+     "referenced_type" : "type-14"
+    },
+    {
+     "field_name" : "n_bufs",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "bufs",
+     "field_offset" : 128,
+     "referenced_type" : "type-14"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 192,
+     "referenced_type" : "type-14"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 256,
+     "referenced_type" : "type-14"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 320,
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "complete_fence_type",
+     "field_offset" : 352,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "adf_post_config_v2",
+   "name" : "adf_post_config_v2",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 48,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS18adf_post_config_v2"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "enabled",
+     "field_offset" : 8,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "adf_set_event",
+   "name" : "adf_set_event",
+   "referenced_type" : "type-46",
+   "self_type" : "type-46",
+   "size" : 2,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS13adf_set_event"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "w",
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "h",
+     "field_offset" : 16,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 64,
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "pitch",
+     "field_offset" : 128,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "adf_simple_buffer_alloc",
+   "name" : "adf_simple_buffer_alloc",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 20,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS23adf_simple_buffer_alloc"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "buf",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 576,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "adf_simple_post_config",
+   "name" : "adf_simple_post_config",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 76,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS22adf_simple_post_config"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "buf",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 576,
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "complete_fence_type",
+     "field_offset" : 608,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "adf_simple_post_config_v2",
+   "name" : "adf_simple_post_config_v2",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 80,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS25adf_simple_post_config_v2"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "base",
+     "referenced_type" : "type-30"
+    },
+    {
+     "field_name" : "timestamp",
+     "field_offset" : 64,
+     "referenced_type" : "type-14"
+    }
+   ],
+   "linker_set_key" : "adf_vsync_event",
+   "name" : "adf_vsync_event",
+   "referenced_type" : "type-47",
+   "self_type" : "type-47",
+   "size" : 16,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "unique_id" : "_ZTS15adf_vsync_event"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

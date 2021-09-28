@@ -1,0 +1,424 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android8procinfo14GetProcessInfoEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZN7android8procinfo18ReadMapFileContentINSt3__18functionIFvmmtmmPKcEEEEEbPcRKT_"
+  },
+  {
+   "name" : "_ZN7android8procinfo20ReadMapFileAsyncSafeEPKcPvmRKNSt3__18functionIFvmmtmmS2_EEE"
+  },
+  {
+   "name" : "_ZN7android8procinfo27GetProcessInfoFromProcPidFdEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::procinfo::kProcessStateUnknown"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::procinfo::kProcessStateRunning"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::procinfo::kProcessStateSleeping"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::procinfo::kProcessStateUninterruptibleWait"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "android::procinfo::kProcessStateStopped"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "android::procinfo::kProcessStateZombie"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8procinfo12ProcessStateE",
+   "name" : "android::procinfo::ProcessState",
+   "referenced_type" : "_ZTIN7android8procinfo12ProcessStateE",
+   "self_type" : "_ZTIN7android8procinfo12ProcessStateE",
+   "size" : 4,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::procinfo::GetProcessInfo",
+   "linker_set_key" : "_ZN7android8procinfo14GetProcessInfoEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPN7android8procinfo11ProcessInfoE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  },
+  {
+   "function_name" : "android::procinfo::ReadMapFileContent",
+   "linker_set_key" : "_ZN7android8procinfo18ReadMapFileContentINSt3__18functionIFvmmtmmPKcEEEEEbPcRKT_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__18functionIFvmmtmmPKcEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h",
+   "template_args" : [ "_ZTINSt3__18functionIFvmmtmmPKcEEE" ]
+  },
+  {
+   "function_name" : "android::procinfo::ReadMapFileAsyncSafe",
+   "linker_set_key" : "_ZN7android8procinfo20ReadMapFileAsyncSafeEPKcPvmRKNSt3__18functionIFvmmtmmS2_EEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__18functionIFvmmtmmPKcEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "function_name" : "android::procinfo::GetProcessInfoFromProcPidFd",
+   "linker_set_key" : "_ZN7android8procinfo27GetProcessInfoFromProcPidFdEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPN7android8procinfo11ProcessInfoE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> > &",
+   "referenced_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKNSt3__18functionIFvmmtmmPKcEEE",
+   "name" : "const std::function<void (unsigned long, unsigned long, unsigned short, unsigned long, unsigned long, const char *)> &",
+   "referenced_type" : "_ZTIKNSt3__18functionIFvmmtmmPKcEEE",
+   "self_type" : "_ZTIRKNSt3__18functionIFvmmtmmPKcEEE",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android8procinfo11ProcessInfoE",
+   "name" : "android::procinfo::ProcessInfo *",
+   "referenced_type" : "_ZTIN7android8procinfo11ProcessInfoE",
+   "self_type" : "_ZTIPN7android8procinfo11ProcessInfoE",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android8procinfo7MapInfoE",
+   "name" : "android::procinfo::MapInfo *",
+   "referenced_type" : "_ZTIN7android8procinfo7MapInfoE",
+   "self_type" : "_ZTIPN7android8procinfo7MapInfoE",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "std::basic_string<char, std::char_traits<char>, std::allocator<char> > *",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIN7android8procinfo7MapInfoENS_9allocatorIS3_EEEE",
+   "name" : "std::vector<android::procinfo::MapInfo, std::allocator<android::procinfo::MapInfo> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIN7android8procinfo7MapInfoENS_9allocatorIS3_EEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIN7android8procinfo7MapInfoENS_9allocatorIS3_EEEE",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> >",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 24,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 16,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__18functionIFvmmtmmPKcEEE",
+   "name" : "const std::function<void (unsigned long, unsigned long, unsigned short, unsigned long, unsigned long, const char *)>",
+   "referenced_type" : "_ZTINSt3__18functionIFvmmtmmPKcEEE",
+   "self_type" : "_ZTIKNSt3__18functionIFvmmtmmPKcEEE",
+   "size" : 48,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "field_name" : "state",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIN7android8procinfo12ProcessStateE"
+    },
+    {
+     "field_name" : "tid",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "pid",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "ppid",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "tracer",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "uid",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "gid",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8procinfo11ProcessInfoE",
+   "name" : "android::procinfo::ProcessInfo",
+   "referenced_type" : "_ZTIN7android8procinfo11ProcessInfoE",
+   "self_type" : "_ZTIN7android8procinfo11ProcessInfoE",
+   "size" : 56,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "start",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "end",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "pgoff",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "inode",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "name",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8procinfo7MapInfoE",
+   "name" : "android::procinfo::MapInfo",
+   "referenced_type" : "_ZTIN7android8procinfo7MapInfoE",
+   "self_type" : "_ZTIN7android8procinfo7MapInfoE",
+   "size" : 64,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process_map.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

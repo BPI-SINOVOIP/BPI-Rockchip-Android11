@@ -1,0 +1,446 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ldacBT_alter_eqmid_priority"
+  },
+  {
+   "name" : "ldacBT_close_handle"
+  },
+  {
+   "name" : "ldacBT_encode"
+  },
+  {
+   "name" : "ldacBT_free_handle"
+  },
+  {
+   "name" : "ldacBT_get_bitrate"
+  },
+  {
+   "name" : "ldacBT_get_eqmid"
+  },
+  {
+   "name" : "ldacBT_get_error_code"
+  },
+  {
+   "name" : "ldacBT_get_handle"
+  },
+  {
+   "name" : "ldacBT_get_sampling_freq"
+  },
+  {
+   "name" : "ldacBT_get_version"
+  },
+  {
+   "name" : "ldacBT_init_handle_encode"
+  },
+  {
+   "name" : "ldacBT_set_eqmid"
+  },
+  {
+   "name" : "ldaclib_check_nlnn_shift"
+  },
+  {
+   "name" : "ldaclib_clear_error_code"
+  },
+  {
+   "name" : "ldaclib_clear_internal_error_code"
+  },
+  {
+   "name" : "ldaclib_encode"
+  },
+  {
+   "name" : "ldaclib_flush_encode"
+  },
+  {
+   "name" : "ldaclib_free_encode"
+  },
+  {
+   "name" : "ldaclib_free_handle"
+  },
+  {
+   "name" : "ldaclib_get_branch_version"
+  },
+  {
+   "name" : "ldaclib_get_channel"
+  },
+  {
+   "name" : "ldaclib_get_channel_config_index"
+  },
+  {
+   "name" : "ldaclib_get_config_info"
+  },
+  {
+   "name" : "ldaclib_get_encode_frame_length"
+  },
+  {
+   "name" : "ldaclib_get_encode_setting"
+  },
+  {
+   "name" : "ldaclib_get_error_code"
+  },
+  {
+   "name" : "ldaclib_get_frame_samples"
+  },
+  {
+   "name" : "ldaclib_get_handle"
+  },
+  {
+   "name" : "ldaclib_get_internal_error_code"
+  },
+  {
+   "name" : "ldaclib_get_major_version"
+  },
+  {
+   "name" : "ldaclib_get_minor_version"
+  },
+  {
+   "name" : "ldaclib_get_nlnn"
+  },
+  {
+   "name" : "ldaclib_get_sampling_rate"
+  },
+  {
+   "name" : "ldaclib_get_sampling_rate_index"
+  },
+  {
+   "name" : "ldaclib_get_version"
+  },
+  {
+   "name" : "ldaclib_init_encode"
+  },
+  {
+   "name" : "ldaclib_set_config_info"
+  },
+  {
+   "name" : "ldaclib_set_encode_frame_length"
+  },
+  {
+   "name" : "ldaclib_set_encode_info"
+  },
+  {
+   "name" : "ldaclib_set_frame_header"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "LDACBT_EQMID_HQ"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "LDACBT_EQMID_SQ"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "LDACBT_EQMID_MQ"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "LDACBT_EQMID_NUM"
+    },
+    {
+     "enum_field_value" : 127,
+     "name" : "LDACBT_EQMID_ABR"
+    }
+   ],
+   "linker_set_key" : "_ZTI17$LDACBT_EQMID_ABR",
+   "name" : "(anonymous enum at external/libldac/inc/ldacBT.h:128:1)",
+   "referenced_type" : "_ZTI17$LDACBT_EQMID_ABR",
+   "self_type" : "_ZTI17$LDACBT_EQMID_ABR",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 2,
+     "name" : "LDACBT_SMPL_FMT_S16"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "LDACBT_SMPL_FMT_S24"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "LDACBT_SMPL_FMT_S32"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "LDACBT_SMPL_FMT_F32"
+    }
+   ],
+   "linker_set_key" : "_ZTI17LDACBT_SMPL_FMT_T",
+   "name" : "LDACBT_SMPL_FMT_T",
+   "referenced_type" : "_ZTI17LDACBT_SMPL_FMT_T",
+   "self_type" : "_ZTI17LDACBT_SMPL_FMT_T",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ldacBT_alter_eqmid_priority",
+   "linker_set_key" : "ldacBT_alter_eqmid_priority",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_close_handle",
+   "linker_set_key" : "ldacBT_close_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_encode",
+   "linker_set_key" : "ldacBT_encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_free_handle",
+   "linker_set_key" : "ldacBT_free_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_bitrate",
+   "linker_set_key" : "ldacBT_get_bitrate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_eqmid",
+   "linker_set_key" : "ldacBT_get_eqmid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_error_code",
+   "linker_set_key" : "ldacBT_get_error_code",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_handle",
+   "linker_set_key" : "ldacBT_get_handle",
+   "return_type" : "_ZTIP17_st_ldacbt_handle",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_sampling_freq",
+   "linker_set_key" : "ldacBT_get_sampling_freq",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_version",
+   "linker_set_key" : "ldacBT_get_version",
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_init_handle_encode",
+   "linker_set_key" : "ldacBT_init_handle_encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTI17LDACBT_SMPL_FMT_T"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_set_eqmid",
+   "linker_set_key" : "ldacBT_set_eqmid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP17_st_ldacbt_handle",
+   "name" : "_st_ldacbt_handle *",
+   "referenced_type" : "_ZTI17_st_ldacbt_handle",
+   "self_type" : "_ZTIP17_st_ldacbt_handle",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

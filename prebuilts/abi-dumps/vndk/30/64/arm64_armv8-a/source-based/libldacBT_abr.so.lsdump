@@ -1,0 +1,156 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ldac_ABR_Init"
+  },
+  {
+   "name" : "ldac_ABR_Proc"
+  },
+  {
+   "name" : "ldac_ABR_free_handle"
+  },
+  {
+   "name" : "ldac_ABR_get_handle"
+  },
+  {
+   "name" : "ldac_ABR_set_thresholds"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ldac_ABR_Init",
+   "linker_set_key" : "ldac_ABR_Init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_ldacbt_abr_param"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  },
+  {
+   "function_name" : "ldac_ABR_Proc",
+   "linker_set_key" : "ldac_ABR_Proc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_st_ldacbt_handle"
+    },
+    {
+     "referenced_type" : "_ZTIP17_ldacbt_abr_param"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  },
+  {
+   "function_name" : "ldac_ABR_free_handle",
+   "linker_set_key" : "ldac_ABR_free_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_ldacbt_abr_param"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  },
+  {
+   "function_name" : "ldac_ABR_get_handle",
+   "linker_set_key" : "ldac_ABR_get_handle",
+   "return_type" : "_ZTIP17_ldacbt_abr_param",
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  },
+  {
+   "function_name" : "ldac_ABR_set_thresholds",
+   "linker_set_key" : "ldac_ABR_set_thresholds",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17_ldacbt_abr_param"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP17_ldacbt_abr_param",
+   "name" : "_ldacbt_abr_param *",
+   "referenced_type" : "_ZTI17_ldacbt_abr_param",
+   "self_type" : "_ZTIP17_ldacbt_abr_param",
+   "size" : 8,
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP17_st_ldacbt_handle",
+   "name" : "_st_ldacbt_handle *",
+   "referenced_type" : "_ZTI17_st_ldacbt_handle",
+   "self_type" : "_ZTIP17_st_ldacbt_handle",
+   "size" : 8,
+   "source_file" : "/external/libldac/abr/inc/ldacBT_abr.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

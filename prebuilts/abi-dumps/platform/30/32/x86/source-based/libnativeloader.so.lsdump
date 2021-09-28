@@ -1,0 +1,401 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "CloseNativeLibrary"
+  },
+  {
+   "name" : "CreateClassLoaderNamespace"
+  },
+  {
+   "name" : "FindNamespaceByClassLoader"
+  },
+  {
+   "name" : "FindNativeLoaderNamespaceByClassLoader"
+  },
+  {
+   "name" : "InitializeNativeLoader"
+  },
+  {
+   "name" : "NativeLoaderFreeErrorMessage"
+  },
+  {
+   "name" : "OpenNativeLibrary"
+  },
+  {
+   "name" : "OpenNativeLibraryInNamespace"
+  },
+  {
+   "name" : "ResetNativeLoader"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANDROID_NAMESPACE_TYPE_REGULAR"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANDROID_NAMESPACE_TYPE_ISOLATED"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANDROID_NAMESPACE_TYPE_SHARED"
+    },
+    {
+     "enum_field_value" : 134217728,
+     "name" : "ANDROID_NAMESPACE_TYPE_GREYLIST_ENABLED"
+    },
+    {
+     "enum_field_value" : 268435456,
+     "name" : "ANDROID_NAMESPACE_TYPE_ALSO_USED_AS_ANONYMOUS"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANDROID_NAMESPACE_TYPE_SHARED_ISOLATED"
+    }
+   ],
+   "linker_set_key" : "_ZTI46$ANDROID_NAMESPACE_TYPE_ALSO_USED_AS_ANONYMOUS",
+   "name" : "(anonymous enum at art/libnativeloader/include/nativeloader/dlext_namespaces.h:25:1)",
+   "referenced_type" : "_ZTI46$ANDROID_NAMESPACE_TYPE_ALSO_USED_AS_ANONYMOUS",
+   "self_type" : "_ZTI46$ANDROID_NAMESPACE_TYPE_ALSO_USED_AS_ANONYMOUS",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/dlext_namespaces.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::CloseNativeLibrary",
+   "linker_set_key" : "CloseNativeLibrary",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIKb"
+    },
+    {
+     "referenced_type" : "_ZTIPPc"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::CreateClassLoaderNamespace",
+   "linker_set_key" : "CreateClassLoaderNamespace",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jstring"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jstring"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jstring"
+    }
+   ],
+   "return_type" : "_ZTIP8_jstring",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::FindNamespaceByClassLoader",
+   "linker_set_key" : "FindNamespaceByClassLoader",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIP19android_namespace_t",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::FindNativeLoaderNamespaceByClassLoader",
+   "linker_set_key" : "FindNativeLoaderNamespaceByClassLoader",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    }
+   ],
+   "return_type" : "_ZTIPN7android21NativeLoaderNamespaceE",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::InitializeNativeLoader",
+   "linker_set_key" : "InitializeNativeLoader",
+   "return_type" : "_ZTIv",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::NativeLoaderFreeErrorMessage",
+   "linker_set_key" : "NativeLoaderFreeErrorMessage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::OpenNativeLibrary",
+   "linker_set_key" : "OpenNativeLibrary",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jstring"
+    },
+    {
+     "referenced_type" : "_ZTIPb"
+    },
+    {
+     "referenced_type" : "_ZTIPPc"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::OpenNativeLibraryInNamespace",
+   "linker_set_key" : "OpenNativeLibraryInNamespace",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN7android21NativeLoaderNamespaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPb"
+    },
+    {
+     "referenced_type" : "_ZTIPPc"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "function_name" : "android::ResetNativeLoader",
+   "linker_set_key" : "ResetNativeLoader",
+   "return_type" : "_ZTIv",
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP19android_namespace_t",
+   "name" : "android_namespace_t *",
+   "referenced_type" : "_ZTI19android_namespace_t",
+   "self_type" : "_ZTIP19android_namespace_t",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP7_JNIEnv",
+   "name" : "_JNIEnv *",
+   "referenced_type" : "_ZTI7_JNIEnv",
+   "self_type" : "_ZTIP7_JNIEnv",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP8_jobject",
+   "name" : "_jobject *",
+   "referenced_type" : "_ZTI8_jobject",
+   "self_type" : "_ZTIP8_jobject",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP8_jstring",
+   "name" : "_jstring *",
+   "referenced_type" : "_ZTI8_jstring",
+   "self_type" : "_ZTIP8_jstring",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN7android21NativeLoaderNamespaceE",
+   "name" : "android::NativeLoaderNamespace *",
+   "referenced_type" : "_ZTIN7android21NativeLoaderNamespaceE",
+   "self_type" : "_ZTIPN7android21NativeLoaderNamespaceE",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPc",
+   "name" : "char **",
+   "referenced_type" : "_ZTIPc",
+   "self_type" : "_ZTIPPc",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPb",
+   "name" : "bool *",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIPb",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKb",
+   "name" : "const bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIKb",
+   "size" : 1,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/art/libnativeloader/include/nativeloader/native_loader.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

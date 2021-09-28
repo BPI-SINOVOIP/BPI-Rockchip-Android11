@@ -1,0 +1,3274 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__bpf_label [512]",
+   "name" : "__bpf_label [512]",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 8192,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "linker_set_key" : "const char *[]",
+   "name" : "const char *[]",
+   "referenced_type" : "type-10",
+   "self_type" : "type-37",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "linker_set_key" : "constant_entry []",
+   "name" : "constant_entry []",
+   "referenced_type" : "type-76",
+   "self_type" : "type-77",
+   "source_file" : "/external/minijail/libconstants.h"
+  },
+  {
+   "linker_set_key" : "syscall_entry []",
+   "name" : "syscall_entry []",
+   "referenced_type" : "type-79",
+   "self_type" : "type-80",
+   "source_file" : "/external/minijail/libsyscalls.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long long [6]",
+   "name" : "unsigned long long [6]",
+   "referenced_type" : "type-4",
+   "self_type" : "type-5",
+   "size" : 48,
+   "source_file" : "/external/minijail/bpf.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-72",
+   "self_type" : "type-72",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-74",
+   "self_type" : "type-74",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-33",
+   "self_type" : "type-33",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-35",
+   "self_type" : "type-35",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-34",
+   "self_type" : "type-34",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "allow_logging_syscalls"
+  },
+  {
+   "name" : "append_allow_syscall"
+  },
+  {
+   "name" : "append_filter_block"
+  },
+  {
+   "name" : "append_ret_errno"
+  },
+  {
+   "name" : "append_ret_kill"
+  },
+  {
+   "name" : "append_ret_trap"
+  },
+  {
+   "name" : "bpf_allow_syscall"
+  },
+  {
+   "name" : "bpf_allow_syscall_args"
+  },
+  {
+   "name" : "bpf_arg_comp"
+  },
+  {
+   "name" : "bpf_comp_jeq32"
+  },
+  {
+   "name" : "bpf_comp_jeq64"
+  },
+  {
+   "name" : "bpf_comp_jge32"
+  },
+  {
+   "name" : "bpf_comp_jge64"
+  },
+  {
+   "name" : "bpf_comp_jgt32"
+  },
+  {
+   "name" : "bpf_comp_jgt64"
+  },
+  {
+   "name" : "bpf_comp_jin"
+  },
+  {
+   "name" : "bpf_comp_jset32"
+  },
+  {
+   "name" : "bpf_comp_jset64"
+  },
+  {
+   "name" : "bpf_label_id"
+  },
+  {
+   "name" : "bpf_load_arg"
+  },
+  {
+   "name" : "bpf_resolve_jumps"
+  },
+  {
+   "name" : "bpf_validate_arch"
+  },
+  {
+   "name" : "cap_ambient_supported"
+  },
+  {
+   "name" : "compile_atom"
+  },
+  {
+   "name" : "compile_errno"
+  },
+  {
+   "name" : "compile_file"
+  },
+  {
+   "name" : "compile_filter"
+  },
+  {
+   "name" : "compile_policy_line"
+  },
+  {
+   "name" : "config_net_loopback"
+  },
+  {
+   "name" : "consumebytes"
+  },
+  {
+   "name" : "consumestr"
+  },
+  {
+   "name" : "do_fatal_log"
+  },
+  {
+   "name" : "do_log"
+  },
+  {
+   "name" : "extend_filter_block_list"
+  },
+  {
+   "name" : "flatten_block_list"
+  },
+  {
+   "name" : "free_block_list"
+  },
+  {
+   "name" : "free_label_strings"
+  },
+  {
+   "name" : "get_label_id"
+  },
+  {
+   "name" : "get_last_valid_cap"
+  },
+  {
+   "name" : "group_end_lbl"
+  },
+  {
+   "name" : "init"
+  },
+  {
+   "name" : "init_logging"
+  },
+  {
+   "name" : "init_term"
+  },
+  {
+   "name" : "install_sigsys_handler"
+  },
+  {
+   "name" : "is_implicit_relative_path"
+  },
+  {
+   "name" : "lock_securebits"
+  },
+  {
+   "name" : "log_sigsys_handler"
+  },
+  {
+   "name" : "lookup_group"
+  },
+  {
+   "name" : "lookup_syscall"
+  },
+  {
+   "name" : "lookup_syscall_name"
+  },
+  {
+   "name" : "lookup_user"
+  },
+  {
+   "name" : "marshal_append"
+  },
+  {
+   "name" : "marshal_mount"
+  },
+  {
+   "name" : "marshal_state_init"
+  },
+  {
+   "name" : "minijail_add_hook"
+  },
+  {
+   "name" : "minijail_add_to_cgroup"
+  },
+  {
+   "name" : "minijail_bind"
+  },
+  {
+   "name" : "minijail_capbset_drop"
+  },
+  {
+   "name" : "minijail_change_gid"
+  },
+  {
+   "name" : "minijail_change_group"
+  },
+  {
+   "name" : "minijail_change_uid"
+  },
+  {
+   "name" : "minijail_change_user"
+  },
+  {
+   "name" : "minijail_close_open_fds"
+  },
+  {
+   "name" : "minijail_destroy"
+  },
+  {
+   "name" : "minijail_enter"
+  },
+  {
+   "name" : "minijail_enter_chroot"
+  },
+  {
+   "name" : "minijail_enter_pivot_root"
+  },
+  {
+   "name" : "minijail_fork"
+  },
+  {
+   "name" : "minijail_forward_signals"
+  },
+  {
+   "name" : "minijail_from_fd"
+  },
+  {
+   "name" : "minijail_get_original_path"
+  },
+  {
+   "name" : "minijail_get_tmpfs_size"
+  },
+  {
+   "name" : "minijail_gidmap"
+  },
+  {
+   "name" : "minijail_inherit_usergroups"
+  },
+  {
+   "name" : "minijail_keep_supplementary_gids"
+  },
+  {
+   "name" : "minijail_kill"
+  },
+  {
+   "name" : "minijail_log_seccomp_filter_failures"
+  },
+  {
+   "name" : "minijail_log_to_fd"
+  },
+  {
+   "name" : "minijail_marshal"
+  },
+  {
+   "name" : "minijail_marshal_helper"
+  },
+  {
+   "name" : "minijail_mount"
+  },
+  {
+   "name" : "minijail_mount_dev"
+  },
+  {
+   "name" : "minijail_mount_tmp"
+  },
+  {
+   "name" : "minijail_mount_tmp_size"
+  },
+  {
+   "name" : "minijail_mount_with_data"
+  },
+  {
+   "name" : "minijail_namespace_cgroups"
+  },
+  {
+   "name" : "minijail_namespace_enter_net"
+  },
+  {
+   "name" : "minijail_namespace_enter_vfs"
+  },
+  {
+   "name" : "minijail_namespace_ipc"
+  },
+  {
+   "name" : "minijail_namespace_net"
+  },
+  {
+   "name" : "minijail_namespace_pids"
+  },
+  {
+   "name" : "minijail_namespace_pids_rw_proc"
+  },
+  {
+   "name" : "minijail_namespace_set_hostname"
+  },
+  {
+   "name" : "minijail_namespace_user"
+  },
+  {
+   "name" : "minijail_namespace_user_disable_setgroups"
+  },
+  {
+   "name" : "minijail_namespace_uts"
+  },
+  {
+   "name" : "minijail_namespace_vfs"
+  },
+  {
+   "name" : "minijail_new"
+  },
+  {
+   "name" : "minijail_new_session_keyring"
+  },
+  {
+   "name" : "minijail_no_new_privs"
+  },
+  {
+   "name" : "minijail_parse_seccomp_filters"
+  },
+  {
+   "name" : "minijail_parse_seccomp_filters_from_fd"
+  },
+  {
+   "name" : "minijail_preenter"
+  },
+  {
+   "name" : "minijail_preexec"
+  },
+  {
+   "name" : "minijail_preserve_fd"
+  },
+  {
+   "name" : "minijail_remount_mode"
+  },
+  {
+   "name" : "minijail_remount_proc_readonly"
+  },
+  {
+   "name" : "minijail_reset_signal_handlers"
+  },
+  {
+   "name" : "minijail_reset_signal_mask"
+  },
+  {
+   "name" : "minijail_rlimit"
+  },
+  {
+   "name" : "minijail_run"
+  },
+  {
+   "name" : "minijail_run_as_init"
+  },
+  {
+   "name" : "minijail_run_env_pid_pipes_no_preload"
+  },
+  {
+   "name" : "minijail_run_no_preload"
+  },
+  {
+   "name" : "minijail_run_pid"
+  },
+  {
+   "name" : "minijail_run_pid_pipes"
+  },
+  {
+   "name" : "minijail_run_pid_pipes_no_preload"
+  },
+  {
+   "name" : "minijail_run_pipe"
+  },
+  {
+   "name" : "minijail_set_ambient_caps"
+  },
+  {
+   "name" : "minijail_set_preload_path"
+  },
+  {
+   "name" : "minijail_set_seccomp_filter_tsync"
+  },
+  {
+   "name" : "minijail_set_seccomp_filters"
+  },
+  {
+   "name" : "minijail_set_supplementary_gids"
+  },
+  {
+   "name" : "minijail_size"
+  },
+  {
+   "name" : "minijail_skip_remount_private"
+  },
+  {
+   "name" : "minijail_skip_setting_securebits"
+  },
+  {
+   "name" : "minijail_to_fd"
+  },
+  {
+   "name" : "minijail_uidmap"
+  },
+  {
+   "name" : "minijail_unmarshal"
+  },
+  {
+   "name" : "minijail_use_alt_syscall"
+  },
+  {
+   "name" : "minijail_use_caps"
+  },
+  {
+   "name" : "minijail_use_seccomp"
+  },
+  {
+   "name" : "minijail_use_seccomp_filter"
+  },
+  {
+   "name" : "minijail_wait"
+  },
+  {
+   "name" : "minijail_write_pid_file"
+  },
+  {
+   "name" : "mkdir_p"
+  },
+  {
+   "name" : "new_filter_block"
+  },
+  {
+   "name" : "new_instr_buf"
+  },
+  {
+   "name" : "parse_constant"
+  },
+  {
+   "name" : "parse_include_statement"
+  },
+  {
+   "name" : "parse_single_constant"
+  },
+  {
+   "name" : "parse_size"
+  },
+  {
+   "name" : "path_join"
+  },
+  {
+   "name" : "seccomp_can_softfail"
+  },
+  {
+   "name" : "secure_noroot_set_and_locked"
+  },
+  {
+   "name" : "setup_and_dupe_pipe_end"
+  },
+  {
+   "name" : "setup_mount_destination"
+  },
+  {
+   "name" : "setup_pipe_end"
+  },
+  {
+   "name" : "str_to_op"
+  },
+  {
+   "name" : "strip"
+  },
+  {
+   "name" : "success_lbl"
+  },
+  {
+   "name" : "sys_seccomp"
+  },
+  {
+   "name" : "tokenize"
+  },
+  {
+   "name" : "write_pid_to_path"
+  },
+  {
+   "name" : "write_proc_file"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "constant_table"
+  },
+  {
+   "name" : "log_syscalls"
+  },
+  {
+   "name" : "log_syscalls_len"
+  },
+  {
+   "name" : "syscall_table"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "LOG_TO_SYSLOG"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "LOG_TO_FD"
+    }
+   ],
+   "linker_set_key" : "logging_system_t",
+   "name" : "logging_system_t",
+   "referenced_type" : "type-39",
+   "self_type" : "type-39",
+   "size" : 4,
+   "source_file" : "/external/minijail/util.h",
+   "underlying_type" : "type-3",
+   "unique_id" : "logging_system_t"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "MINIJAIL_HOOK_EVENT_PRE_DROP_CAPS"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "MINIJAIL_HOOK_EVENT_PRE_EXECVE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "MINIJAIL_HOOK_EVENT_PRE_CHROOT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "MINIJAIL_HOOK_EVENT_MAX"
+    }
+   ],
+   "linker_set_key" : "minijail_hook_event_t",
+   "name" : "minijail_hook_event_t",
+   "referenced_type" : "type-40",
+   "self_type" : "type-40",
+   "size" : 4,
+   "source_file" : "/external/minijail/libminijail.h",
+   "underlying_type" : "type-3",
+   "unique_id" : "minijail_hook_event_t"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (void *)",
+   "name" : "int (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "referenced_type" : "type-45",
+   "return_type" : "type-2",
+   "self_type" : "type-45",
+   "source_file" : "/external/minijail/libminijail.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "bpf_allow_syscall",
+   "linker_set_key" : "bpf_allow_syscall",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_allow_syscall_args",
+   "linker_set_key" : "bpf_allow_syscall_args",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_arg_comp",
+   "linker_set_key" : "bpf_arg_comp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-36"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_comp_jeq64",
+   "linker_set_key" : "bpf_comp_jeq64",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_comp_jge64",
+   "linker_set_key" : "bpf_comp_jge64",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_comp_jgt64",
+   "linker_set_key" : "bpf_comp_jgt64",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_comp_jin",
+   "linker_set_key" : "bpf_comp_jin",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_comp_jset64",
+   "linker_set_key" : "bpf_comp_jset64",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_label_id",
+   "linker_set_key" : "bpf_label_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-82"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_load_arg",
+   "linker_set_key" : "bpf_load_arg",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_resolve_jumps",
+   "linker_set_key" : "bpf_resolve_jumps",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-82"
+    },
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "bpf_validate_arch",
+   "linker_set_key" : "bpf_validate_arch",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "cap_ambient_supported",
+   "linker_set_key" : "cap_ambient_supported",
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "compile_file",
+   "linker_set_key" : "compile_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-66"
+    },
+    {
+     "referenced_type" : "type-57"
+    },
+    {
+     "referenced_type" : "type-68"
+    },
+    {
+     "referenced_type" : "type-82"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "compile_filter",
+   "linker_set_key" : "compile_filter",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-66"
+    },
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "compile_policy_line",
+   "linker_set_key" : "compile_policy_line",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-65"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-82"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-57",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "config_net_loopback",
+   "linker_set_key" : "config_net_loopback",
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "consumebytes",
+   "linker_set_key" : "consumebytes",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-75"
+    },
+    {
+     "referenced_type" : "type-73"
+    }
+   ],
+   "return_type" : "type-46",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "consumestr",
+   "linker_set_key" : "consumestr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-75"
+    },
+    {
+     "referenced_type" : "type-73"
+    }
+   ],
+   "return_type" : "type-44",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "do_fatal_log",
+   "linker_set_key" : "do_fatal_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "do_log",
+   "linker_set_key" : "do_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "flatten_block_list",
+   "linker_set_key" : "flatten_block_list",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-57"
+    },
+    {
+     "referenced_type" : "type-63"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "free_block_list",
+   "linker_set_key" : "free_block_list",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-57"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "free_label_strings",
+   "linker_set_key" : "free_label_strings",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-82"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "function_name" : "get_last_valid_cap",
+   "linker_set_key" : "get_last_valid_cap",
+   "return_type" : "type-3",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "init_logging",
+   "linker_set_key" : "init_logging",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "install_sigsys_handler",
+   "linker_set_key" : "install_sigsys_handler",
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/signal_handler.h"
+  },
+  {
+   "function_name" : "lock_securebits",
+   "linker_set_key" : "lock_securebits",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "lookup_group",
+   "linker_set_key" : "lookup_group",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-71"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "lookup_syscall",
+   "linker_set_key" : "lookup_syscall",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "lookup_syscall_name",
+   "linker_set_key" : "lookup_syscall_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "lookup_user",
+   "linker_set_key" : "lookup_user",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-71"
+    },
+    {
+     "referenced_type" : "type-71"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "minijail_add_hook",
+   "linker_set_key" : "minijail_add_hook",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-47"
+    },
+    {
+     "referenced_type" : "type-46"
+    },
+    {
+     "referenced_type" : "type-40"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_add_to_cgroup",
+   "linker_set_key" : "minijail_add_to_cgroup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_bind",
+   "linker_set_key" : "minijail_bind",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_capbset_drop",
+   "linker_set_key" : "minijail_capbset_drop",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_change_gid",
+   "linker_set_key" : "minijail_change_gid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_change_group",
+   "linker_set_key" : "minijail_change_group",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_change_uid",
+   "linker_set_key" : "minijail_change_uid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_change_user",
+   "linker_set_key" : "minijail_change_user",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_close_open_fds",
+   "linker_set_key" : "minijail_close_open_fds",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_destroy",
+   "linker_set_key" : "minijail_destroy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_enter",
+   "linker_set_key" : "minijail_enter",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_enter_chroot",
+   "linker_set_key" : "minijail_enter_chroot",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_enter_pivot_root",
+   "linker_set_key" : "minijail_enter_pivot_root",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_fork",
+   "linker_set_key" : "minijail_fork",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_forward_signals",
+   "linker_set_key" : "minijail_forward_signals",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_from_fd",
+   "linker_set_key" : "minijail_from_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_get_original_path",
+   "linker_set_key" : "minijail_get_original_path",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-44",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_gidmap",
+   "linker_set_key" : "minijail_gidmap",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_inherit_usergroups",
+   "linker_set_key" : "minijail_inherit_usergroups",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_keep_supplementary_gids",
+   "linker_set_key" : "minijail_keep_supplementary_gids",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_kill",
+   "linker_set_key" : "minijail_kill",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_log_seccomp_filter_failures",
+   "linker_set_key" : "minijail_log_seccomp_filter_failures",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_log_to_fd",
+   "linker_set_key" : "minijail_log_to_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_marshal",
+   "linker_set_key" : "minijail_marshal",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-50"
+    },
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_mount",
+   "linker_set_key" : "minijail_mount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_mount_dev",
+   "linker_set_key" : "minijail_mount_dev",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_mount_tmp",
+   "linker_set_key" : "minijail_mount_tmp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_mount_tmp_size",
+   "linker_set_key" : "minijail_mount_tmp_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_mount_with_data",
+   "linker_set_key" : "minijail_mount_with_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_cgroups",
+   "linker_set_key" : "minijail_namespace_cgroups",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_enter_net",
+   "linker_set_key" : "minijail_namespace_enter_net",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_enter_vfs",
+   "linker_set_key" : "minijail_namespace_enter_vfs",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_ipc",
+   "linker_set_key" : "minijail_namespace_ipc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_net",
+   "linker_set_key" : "minijail_namespace_net",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_pids",
+   "linker_set_key" : "minijail_namespace_pids",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_pids_rw_proc",
+   "linker_set_key" : "minijail_namespace_pids_rw_proc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_set_hostname",
+   "linker_set_key" : "minijail_namespace_set_hostname",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_user",
+   "linker_set_key" : "minijail_namespace_user",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_user_disable_setgroups",
+   "linker_set_key" : "minijail_namespace_user_disable_setgroups",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_uts",
+   "linker_set_key" : "minijail_namespace_uts",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_namespace_vfs",
+   "linker_set_key" : "minijail_namespace_vfs",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_new",
+   "linker_set_key" : "minijail_new",
+   "return_type" : "type-59",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_new_session_keyring",
+   "linker_set_key" : "minijail_new_session_keyring",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_no_new_privs",
+   "linker_set_key" : "minijail_no_new_privs",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_parse_seccomp_filters",
+   "linker_set_key" : "minijail_parse_seccomp_filters",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_parse_seccomp_filters_from_fd",
+   "linker_set_key" : "minijail_parse_seccomp_filters_from_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_preenter",
+   "linker_set_key" : "minijail_preenter",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_preexec",
+   "linker_set_key" : "minijail_preexec",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_preserve_fd",
+   "linker_set_key" : "minijail_preserve_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_remount_mode",
+   "linker_set_key" : "minijail_remount_mode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_remount_proc_readonly",
+   "linker_set_key" : "minijail_remount_proc_readonly",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_reset_signal_handlers",
+   "linker_set_key" : "minijail_reset_signal_handlers",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_reset_signal_mask",
+   "linker_set_key" : "minijail_reset_signal_mask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_rlimit",
+   "linker_set_key" : "minijail_rlimit",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run",
+   "linker_set_key" : "minijail_run",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_as_init",
+   "linker_set_key" : "minijail_run_as_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_env_pid_pipes_no_preload",
+   "linker_set_key" : "minijail_run_env_pid_pipes_no_preload",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_no_preload",
+   "linker_set_key" : "minijail_run_no_preload",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_pid",
+   "linker_set_key" : "minijail_run_pid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-53"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_pid_pipes",
+   "linker_set_key" : "minijail_run_pid_pipes",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_pid_pipes_no_preload",
+   "linker_set_key" : "minijail_run_pid_pipes_no_preload",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-53"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_run_pipe",
+   "linker_set_key" : "minijail_run_pipe",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-53"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_set_ambient_caps",
+   "linker_set_key" : "minijail_set_ambient_caps",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_set_preload_path",
+   "linker_set_key" : "minijail_set_preload_path",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_set_seccomp_filter_tsync",
+   "linker_set_key" : "minijail_set_seccomp_filter_tsync",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_set_seccomp_filters",
+   "linker_set_key" : "minijail_set_seccomp_filters",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-43"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_set_supplementary_gids",
+   "linker_set_key" : "minijail_set_supplementary_gids",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-62"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_size",
+   "linker_set_key" : "minijail_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_skip_remount_private",
+   "linker_set_key" : "minijail_skip_remount_private",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_skip_setting_securebits",
+   "linker_set_key" : "minijail_skip_setting_securebits",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_to_fd",
+   "linker_set_key" : "minijail_to_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_uidmap",
+   "linker_set_key" : "minijail_uidmap",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_unmarshal",
+   "linker_set_key" : "minijail_unmarshal",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail-private.h"
+  },
+  {
+   "function_name" : "minijail_use_alt_syscall",
+   "linker_set_key" : "minijail_use_alt_syscall",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_use_caps",
+   "linker_set_key" : "minijail_use_caps",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_use_seccomp",
+   "linker_set_key" : "minijail_use_seccomp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_use_seccomp_filter",
+   "linker_set_key" : "minijail_use_seccomp_filter",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_wait",
+   "linker_set_key" : "minijail_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "minijail_write_pid_file",
+   "linker_set_key" : "minijail_write_pid_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "function_name" : "mkdir_p",
+   "linker_set_key" : "mkdir_p",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "new_filter_block",
+   "linker_set_key" : "new_filter_block",
+   "return_type" : "type-57",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "parse_constant",
+   "linker_set_key" : "parse_constant",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-75"
+    }
+   ],
+   "return_type" : "type-74",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "parse_single_constant",
+   "linker_set_key" : "parse_single_constant",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-75"
+    }
+   ],
+   "return_type" : "type-74",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "parse_size",
+   "linker_set_key" : "parse_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-73"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "path_join",
+   "linker_set_key" : "path_join",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-44",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "seccomp_can_softfail",
+   "linker_set_key" : "seccomp_can_softfail",
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "function_name" : "secure_noroot_set_and_locked",
+   "linker_set_key" : "secure_noroot_set_and_locked",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "setup_and_dupe_pipe_end",
+   "linker_set_key" : "setup_and_dupe_pipe_end",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "setup_mount_destination",
+   "linker_set_key" : "setup_mount_destination",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-73"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "setup_pipe_end",
+   "linker_set_key" : "setup_pipe_end",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "strip",
+   "linker_set_key" : "strip",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-44"
+    }
+   ],
+   "return_type" : "type-44",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "sys_seccomp",
+   "linker_set_key" : "sys_seccomp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/syscall_wrapper.h"
+  },
+  {
+   "function_name" : "tokenize",
+   "linker_set_key" : "tokenize",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-75"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-44",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "function_name" : "write_pid_to_path",
+   "linker_set_key" : "write_pid_to_path",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "function_name" : "write_proc_file",
+   "linker_set_key" : "write_proc_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/minijail/system.h"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "constant_table",
+   "name" : "constant_table",
+   "referenced_type" : "type-78",
+   "source_file" : "/external/minijail/libconstants.h"
+  },
+  {
+   "linker_set_key" : "log_syscalls",
+   "name" : "log_syscalls",
+   "referenced_type" : "type-37",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "linker_set_key" : "log_syscalls_len",
+   "name" : "log_syscalls_len",
+   "referenced_type" : "type-38",
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "linker_set_key" : "syscall_table",
+   "name" : "syscall_table",
+   "referenced_type" : "type-81",
+   "source_file" : "/external/minijail/libsyscalls.h"
+  }
+ ],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__sFILE *",
+   "name" : "__sFILE *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-25",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__sFILE *",
+   "name" : "__sFILE *",
+   "referenced_type" : "type-67",
+   "self_type" : "type-66",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "bpf_labels *",
+   "name" : "bpf_labels *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-82",
+   "size" : 8,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-44",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char **",
+   "name" : "char **",
+   "referenced_type" : "type-44",
+   "self_type" : "type-75",
+   "size" : 8,
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *const *",
+   "name" : "char *const *",
+   "referenced_type" : "type-51",
+   "self_type" : "type-52",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const minijail *",
+   "name" : "const minijail *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-18",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const minijail *",
+   "name" : "const minijail *",
+   "referenced_type" : "type-48",
+   "self_type" : "type-50",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const sock_fprog *",
+   "name" : "const sock_fprog *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-15",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const sock_fprog *",
+   "name" : "const sock_fprog *",
+   "referenced_type" : "type-41",
+   "self_type" : "type-43",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned int *",
+   "name" : "const unsigned int *",
+   "referenced_type" : "type-61",
+   "self_type" : "type-62",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "filter_block *",
+   "name" : "filter_block *",
+   "referenced_type" : "type-54",
+   "self_type" : "type-57",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "filter_block **",
+   "name" : "filter_block **",
+   "referenced_type" : "type-57",
+   "self_type" : "type-68",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "int (*)(void *)",
+   "name" : "int (*)(void *)",
+   "referenced_type" : "type-45",
+   "self_type" : "type-47",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-53",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "minijail *",
+   "name" : "minijail *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-21",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "minijail *",
+   "name" : "minijail *",
+   "referenced_type" : "type-60",
+   "self_type" : "type-59",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "parser_state *",
+   "name" : "parser_state *",
+   "referenced_type" : "type-58",
+   "self_type" : "type-65",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter *",
+   "name" : "sock_filter *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter *",
+   "name" : "sock_filter *",
+   "referenced_type" : "type-24",
+   "self_type" : "type-23",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter *",
+   "name" : "sock_filter *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-29",
+   "size" : 8,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter *",
+   "name" : "sock_filter *",
+   "referenced_type" : "type-56",
+   "self_type" : "type-55",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter *",
+   "name" : "sock_filter *",
+   "referenced_type" : "type-64",
+   "self_type" : "type-63",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter *",
+   "name" : "sock_filter *",
+   "referenced_type" : "type-84",
+   "self_type" : "type-83",
+   "size" : 8,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter **",
+   "name" : "sock_filter **",
+   "referenced_type" : "type-29",
+   "self_type" : "type-36",
+   "size" : 8,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_filter **",
+   "name" : "sock_filter **",
+   "referenced_type" : "type-83",
+   "self_type" : "type-85",
+   "size" : 8,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_fprog *",
+   "name" : "sock_fprog *",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sock_fprog *",
+   "name" : "sock_fprog *",
+   "referenced_type" : "type-70",
+   "self_type" : "type-69",
+   "size" : 8,
+   "source_file" : "/external/minijail/syscall_filter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-71",
+   "size" : 8,
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long *",
+   "name" : "unsigned long *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-73",
+   "size" : 8,
+   "source_file" : "/external/minijail/system.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-31",
+   "self_type" : "type-46",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "char *const",
+   "name" : "char *const",
+   "referenced_type" : "type-44",
+   "self_type" : "type-51",
+   "size" : 8,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 1,
+   "source_file" : "/external/minijail/bpf.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const minijail",
+   "name" : "const minijail",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 1344,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const minijail",
+   "name" : "const minijail",
+   "referenced_type" : "type-49",
+   "self_type" : "type-48",
+   "size" : 1344,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const sock_fprog",
+   "name" : "const sock_fprog",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 16,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const sock_fprog",
+   "name" : "const sock_fprog",
+   "referenced_type" : "type-42",
+   "self_type" : "type-41",
+   "size" : 16,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-3",
+   "self_type" : "type-61",
+   "size" : 4,
+   "source_file" : "/external/minijail/libminijail.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned long",
+   "name" : "const unsigned long",
+   "referenced_type" : "type-7",
+   "self_type" : "type-38",
+   "size" : 8,
+   "source_file" : "/external/minijail/util.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "constant_entry const[]",
+   "name" : "constant_entry const[]",
+   "referenced_type" : "type-77",
+   "self_type" : "type-78",
+   "source_file" : "/external/minijail/libconstants.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "syscall_entry const[]",
+   "name" : "syscall_entry const[]",
+   "referenced_type" : "type-80",
+   "self_type" : "type-81",
+   "source_file" : "/external/minijail/libsyscalls.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "label",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "location",
+     "field_offset" : 64,
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "__bpf_label",
+   "name" : "__bpf_label",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 16,
+   "source_file" : "/external/minijail/bpf.h",
+   "unique_id" : "__bpf_label"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "count",
+     "referenced_type" : "type-7"
+    },
+    {
+     "field_name" : "labels",
+     "field_offset" : 64,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "bpf_labels",
+   "name" : "bpf_labels",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 8200,
+   "source_file" : "/external/minijail/bpf.h",
+   "unique_id" : "bpf_labels"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "value",
+     "field_offset" : 64,
+     "referenced_type" : "type-7"
+    }
+   ],
+   "linker_set_key" : "constant_entry",
+   "name" : "constant_entry",
+   "referenced_type" : "type-76",
+   "self_type" : "type-76",
+   "size" : 16,
+   "source_file" : "/external/minijail/libconstants.h",
+   "unique_id" : "constant_entry"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "instrs",
+     "referenced_type" : "type-55"
+    },
+    {
+     "field_name" : "len",
+     "field_offset" : 64,
+     "referenced_type" : "type-7"
+    },
+    {
+     "field_name" : "next",
+     "field_offset" : 128,
+     "referenced_type" : "type-57"
+    },
+    {
+     "field_name" : "last",
+     "field_offset" : 192,
+     "referenced_type" : "type-57"
+    },
+    {
+     "field_name" : "total_len",
+     "field_offset" : 256,
+     "referenced_type" : "type-7"
+    }
+   ],
+   "linker_set_key" : "filter_block",
+   "name" : "filter_block",
+   "referenced_type" : "type-54",
+   "self_type" : "type-54",
+   "size" : 40,
+   "source_file" : "/external/minijail/syscall_filter.h",
+   "unique_id" : "filter_block"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "filename",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "line_number",
+     "field_offset" : 64,
+     "referenced_type" : "type-7"
+    }
+   ],
+   "linker_set_key" : "parser_state",
+   "name" : "parser_state",
+   "referenced_type" : "type-58",
+   "self_type" : "type-58",
+   "size" : 16,
+   "source_file" : "/external/minijail/syscall_filter.h",
+   "unique_id" : "parser_state"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "nr",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "arch",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "instruction_pointer",
+     "field_offset" : 64,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "args",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "seccomp_data",
+   "name" : "seccomp_data",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 64,
+   "source_file" : "/external/minijail/bpf.h",
+   "unique_id" : "seccomp_data"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "nr",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "syscall_entry",
+   "name" : "syscall_entry",
+   "referenced_type" : "type-79",
+   "self_type" : "type-79",
+   "size" : 16,
+   "source_file" : "/external/minijail/libsyscalls.h",
+   "unique_id" : "syscall_entry"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,1528 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [8]",
+   "name" : "unsigned int [8]",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 32,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "mixer_close"
+  },
+  {
+   "name" : "mixer_consume_event"
+  },
+  {
+   "name" : "mixer_ctl_get_array"
+  },
+  {
+   "name" : "mixer_ctl_get_enum_string"
+  },
+  {
+   "name" : "mixer_ctl_get_name"
+  },
+  {
+   "name" : "mixer_ctl_get_num_enums"
+  },
+  {
+   "name" : "mixer_ctl_get_num_values"
+  },
+  {
+   "name" : "mixer_ctl_get_percent"
+  },
+  {
+   "name" : "mixer_ctl_get_range_max"
+  },
+  {
+   "name" : "mixer_ctl_get_range_min"
+  },
+  {
+   "name" : "mixer_ctl_get_type"
+  },
+  {
+   "name" : "mixer_ctl_get_type_string"
+  },
+  {
+   "name" : "mixer_ctl_get_value"
+  },
+  {
+   "name" : "mixer_ctl_is_access_tlv_rw"
+  },
+  {
+   "name" : "mixer_ctl_set_array"
+  },
+  {
+   "name" : "mixer_ctl_set_enum_by_string"
+  },
+  {
+   "name" : "mixer_ctl_set_percent"
+  },
+  {
+   "name" : "mixer_ctl_set_value"
+  },
+  {
+   "name" : "mixer_ctl_update"
+  },
+  {
+   "name" : "mixer_get_ctl"
+  },
+  {
+   "name" : "mixer_get_ctl_by_name"
+  },
+  {
+   "name" : "mixer_get_name"
+  },
+  {
+   "name" : "mixer_get_num_ctls"
+  },
+  {
+   "name" : "mixer_open"
+  },
+  {
+   "name" : "mixer_subscribe_events"
+  },
+  {
+   "name" : "mixer_wait_event"
+  },
+  {
+   "name" : "pcm_avail_update"
+  },
+  {
+   "name" : "pcm_bytes_to_frames"
+  },
+  {
+   "name" : "pcm_close"
+  },
+  {
+   "name" : "pcm_format_to_bits"
+  },
+  {
+   "name" : "pcm_frames_to_bytes"
+  },
+  {
+   "name" : "pcm_get_buffer_size"
+  },
+  {
+   "name" : "pcm_get_error"
+  },
+  {
+   "name" : "pcm_get_htimestamp"
+  },
+  {
+   "name" : "pcm_get_poll_fd"
+  },
+  {
+   "name" : "pcm_get_subdevice"
+  },
+  {
+   "name" : "pcm_ioctl"
+  },
+  {
+   "name" : "pcm_is_ready"
+  },
+  {
+   "name" : "pcm_mmap_avail"
+  },
+  {
+   "name" : "pcm_mmap_begin"
+  },
+  {
+   "name" : "pcm_mmap_commit"
+  },
+  {
+   "name" : "pcm_mmap_get_hw_ptr"
+  },
+  {
+   "name" : "pcm_mmap_read"
+  },
+  {
+   "name" : "pcm_mmap_transfer"
+  },
+  {
+   "name" : "pcm_mmap_write"
+  },
+  {
+   "name" : "pcm_open"
+  },
+  {
+   "name" : "pcm_params_format_test"
+  },
+  {
+   "name" : "pcm_params_free"
+  },
+  {
+   "name" : "pcm_params_get"
+  },
+  {
+   "name" : "pcm_params_get_mask"
+  },
+  {
+   "name" : "pcm_params_get_max"
+  },
+  {
+   "name" : "pcm_params_get_min"
+  },
+  {
+   "name" : "pcm_params_set_max"
+  },
+  {
+   "name" : "pcm_params_set_min"
+  },
+  {
+   "name" : "pcm_params_to_string"
+  },
+  {
+   "name" : "pcm_prepare"
+  },
+  {
+   "name" : "pcm_read"
+  },
+  {
+   "name" : "pcm_set_avail_min"
+  },
+  {
+   "name" : "pcm_start"
+  },
+  {
+   "name" : "pcm_state"
+  },
+  {
+   "name" : "pcm_stop"
+  },
+  {
+   "name" : "pcm_wait"
+  },
+  {
+   "name" : "pcm_write"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "MIXER_CTL_TYPE_BOOL"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "MIXER_CTL_TYPE_INT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "MIXER_CTL_TYPE_ENUM"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "MIXER_CTL_TYPE_BYTE"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "MIXER_CTL_TYPE_IEC958"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "MIXER_CTL_TYPE_INT64"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "MIXER_CTL_TYPE_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "MIXER_CTL_TYPE_MAX"
+    }
+   ],
+   "linker_set_key" : "mixer_ctl_type",
+   "name" : "mixer_ctl_type",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h",
+   "underlying_type" : "type-9",
+   "unique_id" : "mixer_ctl_type"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "PCM_FORMAT_INVALID"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "PCM_FORMAT_S16_LE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "PCM_FORMAT_S32_LE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "PCM_FORMAT_S8"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "PCM_FORMAT_S24_LE"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "PCM_FORMAT_S24_3LE"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "PCM_FORMAT_MAX"
+    }
+   ],
+   "linker_set_key" : "pcm_format",
+   "name" : "pcm_format",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "pcm_format"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "PCM_PARAM_ACCESS"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "PCM_PARAM_FORMAT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "PCM_PARAM_SUBFORMAT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "PCM_PARAM_SAMPLE_BITS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "PCM_PARAM_FRAME_BITS"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "PCM_PARAM_CHANNELS"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "PCM_PARAM_RATE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "PCM_PARAM_PERIOD_TIME"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "PCM_PARAM_PERIOD_SIZE"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "PCM_PARAM_PERIOD_BYTES"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "PCM_PARAM_PERIODS"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "PCM_PARAM_BUFFER_TIME"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "PCM_PARAM_BUFFER_SIZE"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "PCM_PARAM_BUFFER_BYTES"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "PCM_PARAM_TICK_TIME"
+    }
+   ],
+   "linker_set_key" : "pcm_param",
+   "name" : "pcm_param",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h",
+   "underlying_type" : "type-9",
+   "unique_id" : "pcm_param"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "mixer_close",
+   "linker_set_key" : "mixer_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_consume_event",
+   "linker_set_key" : "mixer_consume_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_array",
+   "linker_set_key" : "mixer_ctl_get_array",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_enum_string",
+   "linker_set_key" : "mixer_ctl_get_enum_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_name",
+   "linker_set_key" : "mixer_ctl_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_num_enums",
+   "linker_set_key" : "mixer_ctl_get_num_enums",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_num_values",
+   "linker_set_key" : "mixer_ctl_get_num_values",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_percent",
+   "linker_set_key" : "mixer_ctl_get_percent",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_range_max",
+   "linker_set_key" : "mixer_ctl_get_range_max",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_range_min",
+   "linker_set_key" : "mixer_ctl_get_range_min",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_type",
+   "linker_set_key" : "mixer_ctl_get_type",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_type_string",
+   "linker_set_key" : "mixer_ctl_get_type_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_get_value",
+   "linker_set_key" : "mixer_ctl_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_is_access_tlv_rw",
+   "linker_set_key" : "mixer_ctl_is_access_tlv_rw",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_set_array",
+   "linker_set_key" : "mixer_ctl_set_array",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_set_enum_by_string",
+   "linker_set_key" : "mixer_ctl_set_enum_by_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-28"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_set_percent",
+   "linker_set_key" : "mixer_ctl_set_percent",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_set_value",
+   "linker_set_key" : "mixer_ctl_set_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_ctl_update",
+   "linker_set_key" : "mixer_ctl_update",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_get_ctl",
+   "linker_set_key" : "mixer_get_ctl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-30",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_get_ctl_by_name",
+   "linker_set_key" : "mixer_get_ctl_by_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-28"
+    }
+   ],
+   "return_type" : "type-30",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_get_name",
+   "linker_set_key" : "mixer_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_get_num_ctls",
+   "linker_set_key" : "mixer_get_num_ctls",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_open",
+   "linker_set_key" : "mixer_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_subscribe_events",
+   "linker_set_key" : "mixer_subscribe_events",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "mixer_wait_event",
+   "linker_set_key" : "mixer_wait_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_bytes_to_frames",
+   "linker_set_key" : "pcm_bytes_to_frames",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_close",
+   "linker_set_key" : "pcm_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_format_to_bits",
+   "linker_set_key" : "pcm_format_to_bits",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_frames_to_bytes",
+   "linker_set_key" : "pcm_frames_to_bytes",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_get_buffer_size",
+   "linker_set_key" : "pcm_get_buffer_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_get_error",
+   "linker_set_key" : "pcm_get_error",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_get_htimestamp",
+   "linker_set_key" : "pcm_get_htimestamp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-21"
+    },
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_get_poll_fd",
+   "linker_set_key" : "pcm_get_poll_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_get_subdevice",
+   "linker_set_key" : "pcm_get_subdevice",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_ioctl",
+   "linker_set_key" : "pcm_ioctl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_is_ready",
+   "linker_set_key" : "pcm_is_ready",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_mmap_avail",
+   "linker_set_key" : "pcm_mmap_avail",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_mmap_begin",
+   "linker_set_key" : "pcm_mmap_begin",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-21"
+    },
+    {
+     "referenced_type" : "type-21"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_mmap_commit",
+   "linker_set_key" : "pcm_mmap_commit",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_mmap_get_hw_ptr",
+   "linker_set_key" : "pcm_mmap_get_hw_ptr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-21"
+    },
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_mmap_read",
+   "linker_set_key" : "pcm_mmap_read",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_mmap_write",
+   "linker_set_key" : "pcm_mmap_write",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_open",
+   "linker_set_key" : "pcm_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-26",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_format_test",
+   "linker_set_key" : "pcm_params_format_test",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_free",
+   "linker_set_key" : "pcm_params_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_get",
+   "linker_set_key" : "pcm_params_get",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-16",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_get_mask",
+   "linker_set_key" : "pcm_params_get_mask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-18",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_get_max",
+   "linker_set_key" : "pcm_params_get_max",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_get_min",
+   "linker_set_key" : "pcm_params_get_min",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_set_max",
+   "linker_set_key" : "pcm_params_set_max",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_set_min",
+   "linker_set_key" : "pcm_params_set_min",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_params_to_string",
+   "linker_set_key" : "pcm_params_to_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_prepare",
+   "linker_set_key" : "pcm_prepare",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_read",
+   "linker_set_key" : "pcm_read",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_set_avail_min",
+   "linker_set_key" : "pcm_set_avail_min",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_start",
+   "linker_set_key" : "pcm_start",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_stop",
+   "linker_set_key" : "pcm_stop",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_wait",
+   "linker_set_key" : "pcm_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "function_name" : "pcm_write",
+   "linker_set_key" : "pcm_write",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-29",
+   "self_type" : "type-28",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-6",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "mixer *",
+   "name" : "mixer *",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "mixer_ctl *",
+   "name" : "mixer_ctl *",
+   "referenced_type" : "type-31",
+   "self_type" : "type-30",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "pcm *",
+   "name" : "pcm *",
+   "referenced_type" : "type-27",
+   "self_type" : "type-26",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "pcm_config *",
+   "name" : "pcm_config *",
+   "referenced_type" : "type-10",
+   "self_type" : "type-15",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "pcm_mask *",
+   "name" : "pcm_mask *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-18",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "pcm_params *",
+   "name" : "pcm_params *",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "timespec *",
+   "name" : "timespec *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-22",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-21",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-5",
+   "self_type" : "type-25",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void **",
+   "name" : "void **",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 8,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-20",
+   "self_type" : "type-29",
+   "size" : 1,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-5",
+   "self_type" : "type-4",
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "channels",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "rate",
+     "field_offset" : 32,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "period_size",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "period_count",
+     "field_offset" : 96,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 128,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "start_threshold",
+     "field_offset" : 160,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "stop_threshold",
+     "field_offset" : 192,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "silence_threshold",
+     "field_offset" : 224,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "silence_size",
+     "field_offset" : 256,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "avail_min",
+     "field_offset" : 288,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "pcm_config",
+   "name" : "pcm_config",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 40,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h",
+   "unique_id" : "pcm_config"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "bits",
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "pcm_mask",
+   "name" : "pcm_mask",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 32,
+   "source_file" : "/external/tinyalsa/include/tinyalsa/asoundlib.h",
+   "unique_id" : "pcm_mask"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

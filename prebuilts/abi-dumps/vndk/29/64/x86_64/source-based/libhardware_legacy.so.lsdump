@@ -1,0 +1,298 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [0]",
+   "name" : "int [0]",
+   "referenced_type" : "type-2",
+   "self_type" : "type-3",
+   "source_file" : "/system/core/libcutils/include/cutils/native_handle.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN7android2spINS8_6system7suspend4V1_09IWakeLockEEEEENS_22__unordered_map_hasherIS7_SF_NS_4hashIS7_EELb1EEENS_21__unordered_map_equalIS7_SF_NS_8equal_toIS7_EELb1EEENS5_ISF_EEE25__emplace_unique_key_argsIS7_JRKNS_21piecewise_construct_tENS_5tupleIJOS7_EEENSU_IJEEEEEENS_4pairINS_15__hash_iteratorIPNS_11__hash_nodeISF_PvEEEEbEERKT_DpOT0_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN7android2spINS8_6system7suspend4V1_09IWakeLockEEEEENS_22__unordered_map_hasherIS7_SF_NS_4hashIS7_EELb1EEENS_21__unordered_map_equalIS7_SF_NS_8equal_toIS7_EELb1EEENS5_ISF_EEE6rehashEm"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN7android2spINS8_6system7suspend4V1_09IWakeLockEEEEENS_22__unordered_map_hasherIS7_SF_NS_4hashIS7_EELb1EEENS_21__unordered_map_equalIS7_SF_NS_8equal_toIS7_EELb1EEENS5_ISF_EEE8__rehashEm"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_m"
+  },
+  {
+   "name" : "acquire_wake_lock"
+  },
+  {
+   "name" : "release_wake_lock"
+  },
+  {
+   "name" : "uevent_add_native_handler"
+  },
+  {
+   "name" : "uevent_get_fd"
+  },
+  {
+   "name" : "uevent_init"
+  },
+  {
+   "name" : "uevent_next_event"
+  },
+  {
+   "name" : "uevent_remove_native_handler"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "uevent_handler_list"
+  },
+  {
+   "name" : "uevent_handler_list_lock"
+  }
+ ],
+ "enum_types" : [],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, int)",
+   "name" : "void (void *, const char *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-4",
+   "return_type" : "type-5",
+   "self_type" : "type-4",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "acquire_wake_lock",
+   "linker_set_key" : "acquire_wake_lock",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/power.h"
+  },
+  {
+   "function_name" : "release_wake_lock",
+   "linker_set_key" : "release_wake_lock",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/power.h"
+  },
+  {
+   "function_name" : "uevent_add_native_handler",
+   "linker_set_key" : "uevent_add_native_handler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  },
+  {
+   "function_name" : "uevent_get_fd",
+   "linker_set_key" : "uevent_get_fd",
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  },
+  {
+   "function_name" : "uevent_init",
+   "linker_set_key" : "uevent_init",
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  },
+  {
+   "function_name" : "uevent_next_event",
+   "linker_set_key" : "uevent_next_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  },
+  {
+   "function_name" : "uevent_remove_native_handler",
+   "linker_set_key" : "uevent_remove_native_handler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-12",
+   "size" : 8,
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 8,
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/power.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(void *, const char *, int)",
+   "name" : "void (*)(void *, const char *, int)",
+   "referenced_type" : "type-4",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-5",
+   "self_type" : "type-6",
+   "size" : 8,
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/uevent.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 1,
+   "source_file" : "/hardware/libhardware_legacy/include/hardware_legacy/power.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "version",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "numFds",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "numInts",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 96,
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "native_handle",
+   "name" : "native_handle",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 12,
+   "source_file" : "/system/core/libcutils/include/cutils/native_handle.h",
+   "unique_id" : "native_handle"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

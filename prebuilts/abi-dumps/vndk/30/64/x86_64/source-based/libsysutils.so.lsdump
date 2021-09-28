@@ -1,0 +1,2380 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA2_i",
+   "name" : "int [2]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA2_i",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIA32_Pc",
+   "name" : "char *[32]",
+   "referenced_type" : "_ZTIPc",
+   "self_type" : "_ZTIA32_Pc",
+   "size" : 256,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA65536_c",
+   "name" : "char [65536]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA65536_c",
+   "size" : 65536,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkListener.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN12NetlinkEvent10findNlAttrEPK8nlmsghdrmt"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent14parseRtMessageEPK8nlmsghdr"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent18parseIfAddrMessageEPK8nlmsghdr"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent18parseIfInfoMessageEPK8nlmsghdr"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent20parseNfPacketMessageEP8nlmsghdr"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent21parseNdUserOptMessageEPK8nlmsghdr"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent22parseUlogPacketMessageEPK8nlmsghdr"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent24parseAsciiNetlinkMessageEPci"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent25parseBinaryNetlinkMessageEPci"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent4dumpEv"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent6decodeEPcii"
+  },
+  {
+   "name" : "_ZN12NetlinkEvent9findParamEPKc"
+  },
+  {
+   "name" : "_ZN12NetlinkEventC1Ev"
+  },
+  {
+   "name" : "_ZN12NetlinkEventC2Ev"
+  },
+  {
+   "name" : "_ZN12NetlinkEventD0Ev"
+  },
+  {
+   "name" : "_ZN12NetlinkEventD1Ev"
+  },
+  {
+   "name" : "_ZN12NetlinkEventD2Ev"
+  },
+  {
+   "name" : "_ZN12SocketClient13sendBinaryMsgEiPKvi"
+  },
+  {
+   "name" : "_ZN12SocketClient15sendDataLockedvEP5ioveci"
+  },
+  {
+   "name" : "_ZN12SocketClient4initEibb"
+  },
+  {
+   "name" : "_ZN12SocketClient6decRefEv"
+  },
+  {
+   "name" : "_ZN12SocketClient6incRefEv"
+  },
+  {
+   "name" : "_ZN12SocketClient7sendMsgEPKc"
+  },
+  {
+   "name" : "_ZN12SocketClient7sendMsgEiPKcb"
+  },
+  {
+   "name" : "_ZN12SocketClient7sendMsgEiPKcbb"
+  },
+  {
+   "name" : "_ZN12SocketClient8quoteArgEPKc"
+  },
+  {
+   "name" : "_ZN12SocketClient8sendCodeEi"
+  },
+  {
+   "name" : "_ZN12SocketClient8sendDataEPKvi"
+  },
+  {
+   "name" : "_ZN12SocketClient9sendDatavEP5ioveci"
+  },
+  {
+   "name" : "_ZN12SocketClientC1Eib"
+  },
+  {
+   "name" : "_ZN12SocketClientC1Eibb"
+  },
+  {
+   "name" : "_ZN12SocketClientC2Eib"
+  },
+  {
+   "name" : "_ZN12SocketClientC2Eibb"
+  },
+  {
+   "name" : "_ZN12SocketClientD0Ev"
+  },
+  {
+   "name" : "_ZN12SocketClientD1Ev"
+  },
+  {
+   "name" : "_ZN12SocketClientD2Ev"
+  },
+  {
+   "name" : "_ZN14ServiceManager4stopEPKc"
+  },
+  {
+   "name" : "_ZN14ServiceManager5startEPKc"
+  },
+  {
+   "name" : "_ZN14ServiceManager9isRunningEPKc"
+  },
+  {
+   "name" : "_ZN14ServiceManagerC1Ev"
+  },
+  {
+   "name" : "_ZN14ServiceManagerC2Ev"
+  },
+  {
+   "name" : "_ZN14SocketListener11runListenerEv"
+  },
+  {
+   "name" : "_ZN14SocketListener11threadStartEPv"
+  },
+  {
+   "name" : "_ZN14SocketListener12stopListenerEv"
+  },
+  {
+   "name" : "_ZN14SocketListener13sendBroadcastEiPKcb"
+  },
+  {
+   "name" : "_ZN14SocketListener13startListenerEi"
+  },
+  {
+   "name" : "_ZN14SocketListener13startListenerEv"
+  },
+  {
+   "name" : "_ZN14SocketListener15runOnEachSocketEP19SocketClientCommand"
+  },
+  {
+   "name" : "_ZN14SocketListener15snapshotClientsEv"
+  },
+  {
+   "name" : "_ZN14SocketListener4initEPKcibb"
+  },
+  {
+   "name" : "_ZN14SocketListener7releaseEP12SocketClientb"
+  },
+  {
+   "name" : "_ZN14SocketListenerC2EPKcb"
+  },
+  {
+   "name" : "_ZN14SocketListenerC2EPKcbb"
+  },
+  {
+   "name" : "_ZN14SocketListenerC2Eib"
+  },
+  {
+   "name" : "_ZN14SocketListenerD0Ev"
+  },
+  {
+   "name" : "_ZN14SocketListenerD1Ev"
+  },
+  {
+   "name" : "_ZN14SocketListenerD2Ev"
+  },
+  {
+   "name" : "_ZN15NetlinkListener15onDataAvailableEP12SocketClient"
+  },
+  {
+   "name" : "_ZN15NetlinkListenerC2Ei"
+  },
+  {
+   "name" : "_ZN15NetlinkListenerC2Eii"
+  },
+  {
+   "name" : "_ZN16FrameworkCommand10runCommandEP12SocketClientiPPc"
+  },
+  {
+   "name" : "_ZN16FrameworkCommandC2EPKc"
+  },
+  {
+   "name" : "_ZN17FrameworkListener11registerCmdEP16FrameworkCommand"
+  },
+  {
+   "name" : "_ZN17FrameworkListener15dispatchCommandEP12SocketClientPc"
+  },
+  {
+   "name" : "_ZN17FrameworkListener15onDataAvailableEP12SocketClient"
+  },
+  {
+   "name" : "_ZN17FrameworkListener4initEPKcb"
+  },
+  {
+   "name" : "_ZN17FrameworkListenerC1EPKc"
+  },
+  {
+   "name" : "_ZN17FrameworkListenerC1EPKcb"
+  },
+  {
+   "name" : "_ZN17FrameworkListenerC1Ei"
+  },
+  {
+   "name" : "_ZN17FrameworkListenerC2EPKc"
+  },
+  {
+   "name" : "_ZN17FrameworkListenerC2EPKcb"
+  },
+  {
+   "name" : "_ZN17FrameworkListenerC2Ei"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeIiP12SocketClientEENS_22__unordered_map_hasherIiS4_NS_4hashIiEELb1EEENS_21__unordered_map_equalIiS4_NS_8equal_toIiEELb1EEENS_9allocatorIS4_EEE14__erase_uniqueIiEEmRKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeIiP12SocketClientEENS_22__unordered_map_hasherIiS4_NS_4hashIiEELb1EEENS_21__unordered_map_equalIiS4_NS_8equal_toIiEELb1EEENS_9allocatorIS4_EEE25__emplace_unique_key_argsIiJRKNS_21piecewise_construct_tENS_5tupleIJRKiEEENSK_IJEEEEEENS_4pairINS_15__hash_iteratorIPNS_11__hash_nodeIS4_PvEEEEbEERKT_DpOT0_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeIiP12SocketClientEENS_22__unordered_map_hasherIiS4_NS_4hashIiEELb1EEENS_21__unordered_map_equalIiS4_NS_8equal_toIiEELb1EEENS_9allocatorIS4_EEE6rehashEm"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeIiP12SocketClientEENS_22__unordered_map_hasherIiS4_NS_4hashIiEELb1EEENS_21__unordered_map_equalIiS4_NS_8equal_toIiEELb1EEENS_9allocatorIS4_EEE6removeENS_21__hash_const_iteratorIPNS_11__hash_nodeIS4_PvEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__hash_tableINS_17__hash_value_typeIiP12SocketClientEENS_22__unordered_map_hasherIiS4_NS_4hashIiEELb1EEENS_21__unordered_map_equalIiS4_NS_8equal_toIiEELb1EEENS_9allocatorIS4_EEE8__rehashEm"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorI6pollfdNS_9allocatorIS1_EEE21__push_back_slow_pathIS1_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIP12SocketClientNS_9allocatorIS2_EEE21__push_back_slow_pathIRKS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIP16FrameworkCommandNS_9allocatorIS2_EEE21__push_back_slow_pathIRKS2_EEvOT_"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZTV12NetlinkEvent"
+  },
+  {
+   "name" : "_ZTV12SocketClient"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTV14ServiceManager"
+  },
+  {
+   "name" : "_ZTV14SocketListener"
+  },
+  {
+   "name" : "_ZTV15NetlinkListener"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTV16FrameworkCommand"
+  },
+  {
+   "name" : "_ZTV17FrameworkListener"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "NetlinkEvent::Action::kUnknown"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "NetlinkEvent::Action::kAdd"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "NetlinkEvent::Action::kRemove"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "NetlinkEvent::Action::kChange"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "NetlinkEvent::Action::kLinkUp"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "NetlinkEvent::Action::kLinkDown"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "NetlinkEvent::Action::kAddressUpdated"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "NetlinkEvent::Action::kAddressRemoved"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "NetlinkEvent::Action::kRdnss"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "NetlinkEvent::Action::kRouteUpdated"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "NetlinkEvent::Action::kRouteRemoved"
+    }
+   ],
+   "linker_set_key" : "_ZTIN12NetlinkEvent6ActionE",
+   "name" : "NetlinkEvent::Action",
+   "referenced_type" : "_ZTIN12NetlinkEvent6ActionE",
+   "self_type" : "_ZTIN12NetlinkEvent6ActionE",
+   "size" : 4,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h",
+   "underlying_type" : "_ZTIi"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::findNlAttr",
+   "linker_set_key" : "_ZN12NetlinkEvent10findNlAttrEPK8nlmsghdrmt",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPK8nlmsghdr"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIt"
+    }
+   ],
+   "return_type" : "_ZTIP6nlattr",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseRtMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent14parseRtMessageEPK8nlmsghdr",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPK8nlmsghdr"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseIfAddrMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent18parseIfAddrMessageEPK8nlmsghdr",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPK8nlmsghdr"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseIfInfoMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent18parseIfInfoMessageEPK8nlmsghdr",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPK8nlmsghdr"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseNfPacketMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent20parseNfPacketMessageEP8nlmsghdr",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIP8nlmsghdr"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseNdUserOptMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent21parseNdUserOptMessageEPK8nlmsghdr",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPK8nlmsghdr"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseUlogPacketMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent22parseUlogPacketMessageEPK8nlmsghdr",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPK8nlmsghdr"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseAsciiNetlinkMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent24parseAsciiNetlinkMessageEPci",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkEvent::parseBinaryNetlinkMessage",
+   "linker_set_key" : "_ZN12NetlinkEvent25parseBinaryNetlinkMessageEPci",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::dump",
+   "linker_set_key" : "_ZN12NetlinkEvent4dumpEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::decode",
+   "linker_set_key" : "_ZN12NetlinkEvent6decodeEPcii",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::findParam",
+   "linker_set_key" : "_ZN12NetlinkEvent9findParamEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::NetlinkEvent",
+   "linker_set_key" : "_ZN12NetlinkEventC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::NetlinkEvent",
+   "linker_set_key" : "_ZN12NetlinkEventC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::~NetlinkEvent",
+   "linker_set_key" : "_ZN12NetlinkEventD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::~NetlinkEvent",
+   "linker_set_key" : "_ZN12NetlinkEventD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "NetlinkEvent::~NetlinkEvent",
+   "linker_set_key" : "_ZN12NetlinkEventD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12NetlinkEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "function_name" : "SocketClient::sendBinaryMsg",
+   "linker_set_key" : "_ZN12SocketClient13sendBinaryMsgEiPKvi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketClient::sendDataLockedv",
+   "linker_set_key" : "_ZN12SocketClient15sendDataLockedvEP5ioveci",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIP5iovec"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketClient::init",
+   "linker_set_key" : "_ZN12SocketClient4initEibb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::decRef",
+   "linker_set_key" : "_ZN12SocketClient6decRefEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::incRef",
+   "linker_set_key" : "_ZN12SocketClient6incRefEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::sendMsg",
+   "linker_set_key" : "_ZN12SocketClient7sendMsgEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::sendMsg",
+   "linker_set_key" : "_ZN12SocketClient7sendMsgEiPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::sendMsg",
+   "linker_set_key" : "_ZN12SocketClient7sendMsgEiPKcbb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::quoteArg",
+   "linker_set_key" : "_ZN12SocketClient8quoteArgEPKc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::sendCode",
+   "linker_set_key" : "_ZN12SocketClient8sendCodeEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::sendData",
+   "linker_set_key" : "_ZN12SocketClient8sendDataEPKvi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::sendDatav",
+   "linker_set_key" : "_ZN12SocketClient9sendDatavEP5ioveci",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIP5iovec"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::SocketClient",
+   "linker_set_key" : "_ZN12SocketClientC1Eib",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::SocketClient",
+   "linker_set_key" : "_ZN12SocketClientC1Eibb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::SocketClient",
+   "linker_set_key" : "_ZN12SocketClientC2Eib",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::SocketClient",
+   "linker_set_key" : "_ZN12SocketClientC2Eibb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::~SocketClient",
+   "linker_set_key" : "_ZN12SocketClientD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::~SocketClient",
+   "linker_set_key" : "_ZN12SocketClientD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "SocketClient::~SocketClient",
+   "linker_set_key" : "_ZN12SocketClientD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "function_name" : "ServiceManager::stop",
+   "linker_set_key" : "_ZN14ServiceManager4stopEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14ServiceManager"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h"
+  },
+  {
+   "function_name" : "ServiceManager::start",
+   "linker_set_key" : "_ZN14ServiceManager5startEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14ServiceManager"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h"
+  },
+  {
+   "function_name" : "ServiceManager::isRunning",
+   "linker_set_key" : "_ZN14ServiceManager9isRunningEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14ServiceManager"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h"
+  },
+  {
+   "function_name" : "ServiceManager::ServiceManager",
+   "linker_set_key" : "_ZN14ServiceManagerC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14ServiceManager"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h"
+  },
+  {
+   "function_name" : "ServiceManager::ServiceManager",
+   "linker_set_key" : "_ZN14ServiceManagerC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14ServiceManager"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketListener::runListener",
+   "linker_set_key" : "_ZN14SocketListener11runListenerEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketListener::threadStart",
+   "linker_set_key" : "_ZN14SocketListener11threadStartEPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::stopListener",
+   "linker_set_key" : "_ZN14SocketListener12stopListenerEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::sendBroadcast",
+   "linker_set_key" : "_ZN14SocketListener13sendBroadcastEiPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::startListener",
+   "linker_set_key" : "_ZN14SocketListener13startListenerEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::startListener",
+   "linker_set_key" : "_ZN14SocketListener13startListenerEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::runOnEachSocket",
+   "linker_set_key" : "_ZN14SocketListener15runOnEachSocketEP19SocketClientCommand",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIP19SocketClientCommand"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketListener::snapshotClients",
+   "linker_set_key" : "_ZN14SocketListener15snapshotClientsEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTINSt3__16vectorIP12SocketClientNS_9allocatorIS2_EEEE",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketListener::init",
+   "linker_set_key" : "_ZN14SocketListener4initEPKcibb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "SocketListener::release",
+   "linker_set_key" : "_ZN14SocketListener7releaseEP12SocketClientb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::SocketListener",
+   "linker_set_key" : "_ZN14SocketListenerC2EPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::SocketListener",
+   "linker_set_key" : "_ZN14SocketListenerC2EPKcbb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::SocketListener",
+   "linker_set_key" : "_ZN14SocketListenerC2Eib",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::~SocketListener",
+   "linker_set_key" : "_ZN14SocketListenerD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::~SocketListener",
+   "linker_set_key" : "_ZN14SocketListenerD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "function_name" : "SocketListener::~SocketListener",
+   "linker_set_key" : "_ZN14SocketListenerD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP14SocketListener"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "NetlinkListener::onDataAvailable",
+   "linker_set_key" : "_ZN15NetlinkListener15onDataAvailableEP12SocketClient",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP15NetlinkListener"
+    },
+    {
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkListener.h"
+  },
+  {
+   "function_name" : "NetlinkListener::NetlinkListener",
+   "linker_set_key" : "_ZN15NetlinkListenerC2Ei",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP15NetlinkListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkListener.h"
+  },
+  {
+   "function_name" : "NetlinkListener::NetlinkListener",
+   "linker_set_key" : "_ZN15NetlinkListenerC2Eii",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP15NetlinkListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkListener.h"
+  },
+  {
+   "function_name" : "FrameworkCommand::runCommand",
+   "linker_set_key" : "_ZN16FrameworkCommand10runCommandEP12SocketClientiPPc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP16FrameworkCommand"
+    },
+    {
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPPc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h"
+  },
+  {
+   "function_name" : "FrameworkCommand::FrameworkCommand",
+   "linker_set_key" : "_ZN16FrameworkCommandC2EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP16FrameworkCommand"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "FrameworkListener::registerCmd",
+   "linker_set_key" : "_ZN17FrameworkListener11registerCmdEP16FrameworkCommand",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIP16FrameworkCommand"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "FrameworkListener::dispatchCommand",
+   "linker_set_key" : "_ZN17FrameworkListener15dispatchCommandEP12SocketClientPc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIP12SocketClient"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "FrameworkListener::onDataAvailable",
+   "linker_set_key" : "_ZN17FrameworkListener15onDataAvailableEP12SocketClient",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIP12SocketClient"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "FrameworkListener::init",
+   "linker_set_key" : "_ZN17FrameworkListener4initEPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "function_name" : "FrameworkListener::FrameworkListener",
+   "linker_set_key" : "_ZN17FrameworkListenerC1EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "function_name" : "FrameworkListener::FrameworkListener",
+   "linker_set_key" : "_ZN17FrameworkListenerC1EPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "function_name" : "FrameworkListener::FrameworkListener",
+   "linker_set_key" : "_ZN17FrameworkListenerC1Ei",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "function_name" : "FrameworkListener::FrameworkListener",
+   "linker_set_key" : "_ZN17FrameworkListenerC2EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "function_name" : "FrameworkListener::FrameworkListener",
+   "linker_set_key" : "_ZN17FrameworkListenerC2EPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "function_name" : "FrameworkListener::FrameworkListener",
+   "linker_set_key" : "_ZN17FrameworkListenerC2Ei",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP17FrameworkListener"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP12NetlinkEvent",
+   "name" : "NetlinkEvent *",
+   "referenced_type" : "_ZTI12NetlinkEvent",
+   "self_type" : "_ZTIP12NetlinkEvent",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP12SocketClient",
+   "name" : "SocketClient *",
+   "referenced_type" : "_ZTI12SocketClient",
+   "self_type" : "_ZTIP12SocketClient",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP14ServiceManager",
+   "name" : "ServiceManager *",
+   "referenced_type" : "_ZTI14ServiceManager",
+   "self_type" : "_ZTIP14ServiceManager",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP14SocketListener",
+   "name" : "SocketListener *",
+   "referenced_type" : "_ZTI14SocketListener",
+   "self_type" : "_ZTIP14SocketListener",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP15NetlinkListener",
+   "name" : "NetlinkListener *",
+   "referenced_type" : "_ZTI15NetlinkListener",
+   "self_type" : "_ZTIP15NetlinkListener",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkListener.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP16FrameworkCommand",
+   "name" : "FrameworkCommand *",
+   "referenced_type" : "_ZTI16FrameworkCommand",
+   "self_type" : "_ZTIP16FrameworkCommand",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP17FrameworkListener",
+   "name" : "FrameworkListener *",
+   "referenced_type" : "_ZTI17FrameworkListener",
+   "self_type" : "_ZTIP17FrameworkListener",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP19SocketClientCommand",
+   "name" : "SocketClientCommand *",
+   "referenced_type" : "_ZTI19SocketClientCommand",
+   "self_type" : "_ZTIP19SocketClientCommand",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClientCommand.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP5iovec",
+   "name" : "iovec *",
+   "referenced_type" : "_ZTI5iovec",
+   "self_type" : "_ZTIP5iovec",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP6nlattr",
+   "name" : "nlattr *",
+   "referenced_type" : "_ZTI6nlattr",
+   "self_type" : "_ZTIP6nlattr",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8nlmsghdr",
+   "name" : "nlmsghdr *",
+   "referenced_type" : "_ZTI8nlmsghdr",
+   "self_type" : "_ZTIP8nlmsghdr",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK12SocketClient",
+   "name" : "const SocketClient *",
+   "referenced_type" : "_ZTIK12SocketClient",
+   "self_type" : "_ZTIPK12SocketClient",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK16FrameworkCommand",
+   "name" : "const FrameworkCommand *",
+   "referenced_type" : "_ZTIK16FrameworkCommand",
+   "self_type" : "_ZTIPK16FrameworkCommand",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK8nlmsghdr",
+   "name" : "const nlmsghdr *",
+   "referenced_type" : "_ZTIK8nlmsghdr",
+   "self_type" : "_ZTIPK8nlmsghdr",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPc",
+   "name" : "char **",
+   "referenced_type" : "_ZTIPc",
+   "self_type" : "_ZTIPPc",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK12SocketClient",
+   "name" : "const SocketClient",
+   "referenced_type" : "_ZTI12SocketClient",
+   "self_type" : "_ZTIK12SocketClient",
+   "size" : 120,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK16FrameworkCommand",
+   "name" : "const FrameworkCommand",
+   "referenced_type" : "_ZTI16FrameworkCommand",
+   "self_type" : "_ZTIK16FrameworkCommand",
+   "size" : 16,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK8nlmsghdr",
+   "name" : "const nlmsghdr",
+   "referenced_type" : "_ZTI8nlmsghdr",
+   "self_type" : "_ZTIK8nlmsghdr",
+   "size" : 16,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mSeq",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPath",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mAction",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIN12NetlinkEvent6ActionE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mSubsystem",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mParams",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIA32_Pc"
+    }
+   ],
+   "linker_set_key" : "_ZTI12NetlinkEvent",
+   "name" : "NetlinkEvent",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI12NetlinkEvent",
+   "self_type" : "_ZTI12NetlinkEvent",
+   "size" : 296,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkEvent.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI12NetlinkEvent"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN12NetlinkEventD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN12NetlinkEventD0Ev"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mSocket",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mSocketOwned",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mWriteMutex",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI15pthread_mutex_t"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPid",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mUid",
+     "field_offset" : 480,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mGid",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mRefCountMutex",
+     "field_offset" : 544,
+     "referenced_type" : "_ZTI15pthread_mutex_t"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mRefCount",
+     "field_offset" : 864,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCmdNum",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mUseCmdNum",
+     "field_offset" : 928,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI12SocketClient",
+   "name" : "SocketClient",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI12SocketClient",
+   "self_type" : "_ZTI12SocketClient",
+   "size" : 120,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClient.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI12SocketClient"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN12SocketClientD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN12SocketClientD0Ev"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTI14ServiceManager",
+   "name" : "ServiceManager",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI14ServiceManager",
+   "self_type" : "_ZTI14ServiceManager",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/ServiceManager.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI14ServiceManager"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN14ServiceManagerD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN14ServiceManagerD0Ev"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mListen",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mSocketName",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mSock",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mClients",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTINSt3__113unordered_mapIiP12SocketClientNS_4hashIiEENS_8equal_toIiEENS_9allocatorINS_4pairIKiS2_EEEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mClientsLock",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTI15pthread_mutex_t"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCtrlPipe",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTIA2_i"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mThread",
+     "field_offset" : 960,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mUseCmdNum",
+     "field_offset" : 1024,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI14SocketListener",
+   "name" : "SocketListener",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI14SocketListener",
+   "self_type" : "_ZTI14SocketListener",
+   "size" : 136,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketListener.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI14SocketListener"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN14SocketListenerD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN14SocketListenerD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN14SocketListener15onDataAvailableEP12SocketClient"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTI14SocketListener"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mBuffer",
+     "field_offset" : 1056,
+     "referenced_type" : "_ZTIA65536_c"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mFormat",
+     "field_offset" : 525344,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI15NetlinkListener",
+   "name" : "NetlinkListener",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI15NetlinkListener",
+   "self_type" : "_ZTI15NetlinkListener",
+   "size" : 65672,
+   "source_file" : "/system/core/libsysutils/include/sysutils/NetlinkListener.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI15NetlinkListener"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN15NetlinkListenerD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN15NetlinkListenerD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN15NetlinkListener15onDataAvailableEP12SocketClient"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN15NetlinkListener7onEventEP12NetlinkEvent"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mCommand",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTI16FrameworkCommand",
+   "name" : "FrameworkCommand",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI16FrameworkCommand",
+   "self_type" : "_ZTI16FrameworkCommand",
+   "size" : 16,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkCommand.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI16FrameworkCommand"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN16FrameworkCommandD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN16FrameworkCommandD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN16FrameworkCommand10runCommandEP12SocketClientiPPc"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTI14SocketListener"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "errorRate",
+     "field_offset" : 1056,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCommandCount",
+     "field_offset" : 1088,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mWithSeq",
+     "field_offset" : 1120,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCommands",
+     "field_offset" : 1152,
+     "referenced_type" : "_ZTINSt3__16vectorIP16FrameworkCommandNS_9allocatorIS2_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mSkipToNextNullByte",
+     "field_offset" : 1344,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI17FrameworkListener",
+   "name" : "FrameworkListener",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI17FrameworkListener",
+   "self_type" : "_ZTI17FrameworkListener",
+   "size" : 176,
+   "source_file" : "/system/core/libsysutils/include/sysutils/FrameworkListener.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI17FrameworkListener"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN17FrameworkListenerD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN17FrameworkListenerD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN17FrameworkListener15onDataAvailableEP12SocketClient"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTI19SocketClientCommand",
+   "name" : "SocketClientCommand",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI19SocketClientCommand",
+   "self_type" : "_ZTI19SocketClientCommand",
+   "size" : 8,
+   "source_file" : "/system/core/libsysutils/include/sysutils/SocketClientCommand.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI19SocketClientCommand"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN19SocketClientCommandD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN19SocketClientCommandD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN19SocketClientCommand16runSocketCommandEP12SocketClient"
+    }
+   ]
+  }
+ ],
+ "rvalue_reference_types" : []
+}

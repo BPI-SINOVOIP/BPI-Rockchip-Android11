@@ -1,0 +1,3300 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA3_N4piex16PreviewImageData8RationalE",
+   "name" : "piex::PreviewImageData::Rational [3]",
+   "referenced_type" : "_ZTIN4piex16PreviewImageData8RationalE",
+   "self_type" : "_ZTIA3_N4piex16PreviewImageData8RationalE",
+   "size" : 24,
+   "source_file" : "/external/piex/src/piex_types.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDi",
+   "name" : "char32_t",
+   "referenced_type" : "_ZTIDi",
+   "self_type" : "_ZTIDi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIDn",
+   "name" : "nullptr_t",
+   "referenced_type" : "_ZTIDn",
+   "self_type" : "_ZTIDn",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDs",
+   "name" : "char16_t",
+   "referenced_type" : "_ZTIDs",
+   "self_type" : "_ZTIDs",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIa",
+   "name" : "signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIa",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIe",
+   "name" : "long double",
+   "referenced_type" : "_ZTIe",
+   "self_type" : "_ZTIe",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIw",
+   "name" : "wchar_t",
+   "referenced_type" : "_ZTIw",
+   "self_type" : "_ZTIw",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN4piex10TiffParser12ParseGpsDataEPKNS_14tiff_directory13TiffDirectoryEPNS_11TiffContentE"
+  },
+  {
+   "name" : "_ZN4piex10TiffParser19GetPreviewImageDataERKNS_11TiffContentEPNS_16PreviewImageDataE"
+  },
+  {
+   "name" : "_ZN4piex10TiffParser5ParseERKNSt3__13setIjNS1_4lessIjEENS1_9allocatorIjEEEEtPNS_11TiffContentE"
+  },
+  {
+   "name" : "_ZN4piex10TiffParser8ParseIfdEjRKNSt3__13setIjNS1_4lessIjEENS1_9allocatorIjEEEEtPNS1_6vectorINS_14tiff_directory13TiffDirectoryENS5_ISC_EEEE"
+  },
+  {
+   "name" : "_ZN4piex10TiffParserC1EPNS_15StreamInterfaceE"
+  },
+  {
+   "name" : "_ZN4piex10TiffParserC1EPNS_15StreamInterfaceEj"
+  },
+  {
+   "name" : "_ZN4piex10TiffParserC2EPNS_15StreamInterfaceE"
+  },
+  {
+   "name" : "_ZN4piex10TiffParserC2EPNS_15StreamInterfaceEj"
+  },
+  {
+   "name" : "_ZN4piex11IsThumbnailERKNS_5ImageEi"
+  },
+  {
+   "name" : "_ZN4piex12GetImageDataERKNS_14tiff_directory13TiffDirectoryEPNS_15StreamInterfaceEPNS_5ImageE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse14PagedByteArrayD0Ev"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse14PagedByteArrayD1Ev"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse14PagedByteArrayD2Ev"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtr14invalidPointerEv"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC1EPKhj"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC1EPNS0_14PagedByteArrayE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC1Ev"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC2EPKhj"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC2EPNS0_14PagedByteArrayE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC2Ev"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6Get16sERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6Get16uERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6Get32sERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6Get32uERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6memcmpERKNS0_19RangeCheckedBytePtrES3_j"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6strcmpERKNS0_19RangeCheckedBytePtrERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parse6strlenERKNS0_19RangeCheckedBytePtrE"
+  },
+  {
+   "name" : "_ZN4piex12binary_parseeqERKNS0_19RangeCheckedBytePtrES3_"
+  },
+  {
+   "name" : "_ZN4piex12binary_parseneERKNS0_19RangeCheckedBytePtrES3_"
+  },
+  {
+   "name" : "_ZN4piex13GetEndiannessEjPNS_15StreamInterfaceEPNS_14tiff_directory6EndianE"
+  },
+  {
+   "name" : "_ZN4piex14GetOrientationEPNS_15StreamInterfaceEPj"
+  },
+  {
+   "name" : "_ZN4piex14ParseDirectoryEjjNS_14tiff_directory6EndianERKNSt3__13setIjNS2_4lessIjEENS2_9allocatorIjEEEEPNS_15StreamInterfaceEPNS0_13TiffDirectoryEPj"
+  },
+  {
+   "name" : "_ZN4piex14tiff_directory10SizeOfTypeEjPb"
+  },
+  {
+   "name" : "_ZN4piex14tiff_directory13TiffDirectory15AddSubDirectoryERKS1_"
+  },
+  {
+   "name" : "_ZN4piex14tiff_directory13TiffDirectory8AddEntryEjjjjRKNSt3__16vectorIhNS2_9allocatorIhEEEE"
+  },
+  {
+   "name" : "_ZN4piex14tiff_directory13TiffDirectoryC1ENS0_6EndianE"
+  },
+  {
+   "name" : "_ZN4piex14tiff_directory13TiffDirectoryC2ENS0_6EndianE"
+  },
+  {
+   "name" : "_ZN4piex17GetDngInformationEPNS_15StreamInterfaceEPjS2_PNSt3__16vectorIjNS3_9allocatorIjEEEE"
+  },
+  {
+   "name" : "_ZN4piex17GetJpegDimensionsEjPNS_15StreamInterfaceEPtS2_"
+  },
+  {
+   "name" : "_ZN4piex18GetExifOrientationEPNS_15StreamInterfaceEjPj"
+  },
+  {
+   "name" : "_ZN4piex18GetFullDimension32ERKNS_14tiff_directory13TiffDirectoryEPjS4_"
+  },
+  {
+   "name" : "_ZN4piex19GetPreviewImageDataEPNS_15StreamInterfaceEPNS_16PreviewImageDataE"
+  },
+  {
+   "name" : "_ZN4piex19SupportedExtensionsEv"
+  },
+  {
+   "name" : "_ZN4piex20GetFullCropDimensionERKNS_14tiff_directory13TiffDirectoryEPjS4_"
+  },
+  {
+   "name" : "_ZN4piex21BytesRequiredForIsRawEv"
+  },
+  {
+   "name" : "_ZN4piex22image_type_recognition25RecognizeRawImageTypeLiteERKNS_12binary_parse19RangeCheckedBytePtrE"
+  },
+  {
+   "name" : "_ZN4piex22image_type_recognition27GetNumberOfBytesForIsOfTypeENS0_13RawImageTypesE"
+  },
+  {
+   "name" : "_ZN4piex22image_type_recognition28GetNumberOfBytesForIsRawLiteEv"
+  },
+  {
+   "name" : "_ZN4piex22image_type_recognition5IsRawENS0_13RawImageTypesE"
+  },
+  {
+   "name" : "_ZN4piex22image_type_recognition8IsOfTypeERKNS_12binary_parse19RangeCheckedBytePtrENS0_13RawImageTypesE"
+  },
+  {
+   "name" : "_ZN4piex22image_type_recognition9IsRawLiteERKNS_12binary_parse19RangeCheckedBytePtrE"
+  },
+  {
+   "name" : "_ZN4piex5IsRawEPNS_15StreamInterfaceE"
+  },
+  {
+   "name" : "_ZN4piex6Get16uEPNS_15StreamInterfaceEjRKNS_14tiff_directory6EndianEPt"
+  },
+  {
+   "name" : "_ZN4piex6Get32uEPNS_15StreamInterfaceEjRKNS_14tiff_directory6EndianEPj"
+  },
+  {
+   "name" : "_ZN4piex7GetDataEjjPNS_15StreamInterfaceEPNS_5ErrorE"
+  },
+  {
+   "name" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr12extractBytesEjj"
+  },
+  {
+   "name" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr13offsetInArrayEv"
+  },
+  {
+   "name" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr17loadPageForOffsetEj"
+  },
+  {
+   "name" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr17pointerToSubArrayEjj"
+  },
+  {
+   "name" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr22restrictPageToSubArrayEv"
+  },
+  {
+   "name" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr6substrEjj"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory17GetSubDirectoriesEv"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory18GetOffsetAndLengthEjjPjS2_"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNS0_8RationalE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNS0_9SRationalE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorINS0_8RationalENS2_9allocatorIS4_EEEE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorINS0_9SRationalENS2_9allocatorIS4_EEEE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorIhNS2_9allocatorIhEEEE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorIjNS2_9allocatorIjEEEE"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPj"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory3HasEj"
+  },
+  {
+   "name" : "_ZNK4piex14tiff_directory13TiffDirectory4FindEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__127__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIjN4piex14tiff_directory13TiffDirectory14DirectoryEntryEEENS_19__map_value_compareIjS6_NS_4lessIjEELb1EEENS_9allocatorIS6_EEE12__find_equalIjEERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS6_PNS_11__tree_nodeIS6_SG_EEiEERPNS_15__tree_end_nodeISI_EESJ_RKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIjN4piex14tiff_directory13TiffDirectory14DirectoryEntryEEENS_19__map_value_compareIjS6_NS_4lessIjEELb1EEENS_9allocatorIS6_EEE30__emplace_hint_unique_key_argsIjJRKNS_4pairIKjS5_EEEEENS_15__tree_iteratorIS6_PNS_11__tree_nodeIS6_PvEEiEENS_21__tree_const_iteratorIS6_SO_iEERKT_DpOT0_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIjN4piex14tiff_directory13TiffDirectory14DirectoryEntryEEENS_19__map_value_compareIjS6_NS_4lessIjEELb1EEENS_9allocatorIS6_EEE7destroyEPNS_11__tree_nodeIS6_PvEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeIjNS_4lessIjEENS_9allocatorIjEEE12__find_equalIjEERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIjPNS_11__tree_nodeIjS8_EEiEERPNS_15__tree_end_nodeISA_EESB_RKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeIjNS_4lessIjEENS_9allocatorIjEEE7destroyEPNS_11__tree_nodeIjPvEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEE21__push_back_slow_pathIRKS3_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS3_RS5_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4piex14tiff_directory8RationalENS_9allocatorIS3_EEE6assignIPS3_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS3_NS_15iterator_traitsISA_E9referenceEEE5valueEvE4typeESA_SA_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4piex14tiff_directory9SRationalENS_9allocatorIS3_EEE6assignIPS3_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS3_NS_15iterator_traitsISA_E9referenceEEE5valueEvE4typeESA_SA_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIhNS_9allocatorIhEEE21__push_back_slow_pathIhEEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIhNS_9allocatorIhEEE6assignIPhEENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIhNS_15iterator_traitsIS7_E9referenceEEE5valueEvE4typeES7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIhNS_9allocatorIhEEE8__appendEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIjNS_9allocatorIjEEE21__push_back_slow_pathIRKjEEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIjNS_9allocatorIjEEE6assignIPjEENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIjNS_15iterator_traitsIS7_E9referenceEEE5valueEvE4typeES7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__1plIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_12basic_stringIT_T0_T1_EERKS9_SB_"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZTVN4piex12binary_parse14PagedByteArrayE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::binary_parse::RANGE_CHECKED_BYTE_SUCCESS"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::binary_parse::RANGE_CHECKED_BYTE_ERROR"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "piex::binary_parse::RANGE_CHECKED_BYTE_ERROR_OVERFLOW"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "piex::binary_parse::RANGE_CHECKED_BYTE_ERROR_UNDERFLOW"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex12binary_parse12MemoryStatusE",
+   "name" : "piex::binary_parse::MemoryStatus",
+   "referenced_type" : "_ZTIN4piex12binary_parse12MemoryStatusE",
+   "self_type" : "_ZTIN4piex12binary_parse12MemoryStatusE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::tiff_directory::kLittleEndian"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::tiff_directory::kBigEndian"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex14tiff_directory6EndianE",
+   "name" : "piex::tiff_directory::Endian",
+   "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE",
+   "self_type" : "_ZTIN4piex14tiff_directory6EndianE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::tiff_directory::TIFF_TYPE_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::tiff_directory::TIFF_TYPE_BYTE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "piex::tiff_directory::TIFF_TYPE_ASCII"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "piex::tiff_directory::TIFF_TYPE_SHORT"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "piex::tiff_directory::TIFF_TYPE_LONG"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "piex::tiff_directory::TIFF_TYPE_RATIONAL"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "piex::tiff_directory::TIFF_TYPE_SBYTE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "piex::tiff_directory::TIFF_TYPE_UNDEFINED"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "piex::tiff_directory::TIFF_TYPE_SSHORT"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "piex::tiff_directory::TIFF_TYPE_SLONG"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "piex::tiff_directory::TIFF_TYPE_SRATIONAL"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "piex::tiff_directory::TIFF_TYPE_FLOAT"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "piex::tiff_directory::TIFF_TYPE_DOUBLE"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "piex::tiff_directory::TIFF_IFD"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex14tiff_directory9TiffTypesE",
+   "name" : "piex::tiff_directory::TiffTypes",
+   "referenced_type" : "_ZTIN4piex14tiff_directory9TiffTypesE",
+   "self_type" : "_ZTIN4piex14tiff_directory9TiffTypesE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::PreviewImageData::kSrgb"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::PreviewImageData::kAdobeRgb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex16PreviewImageData10ColorSpaceE",
+   "name" : "piex::PreviewImageData::ColorSpace",
+   "referenced_type" : "_ZTIN4piex16PreviewImageData10ColorSpaceE",
+   "self_type" : "_ZTIN4piex16PreviewImageData10ColorSpaceE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::image_type_recognition::kNonRawImage"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::image_type_recognition::kArwImage"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "piex::image_type_recognition::kCr2Image"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "piex::image_type_recognition::kCrwImage"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "piex::image_type_recognition::kDcrImage"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "piex::image_type_recognition::kDngImage"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "piex::image_type_recognition::kKdcImage"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "piex::image_type_recognition::kMosImage"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "piex::image_type_recognition::kMrwImage"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "piex::image_type_recognition::kNefImage"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "piex::image_type_recognition::kNrwImage"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "piex::image_type_recognition::kOrfImage"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "piex::image_type_recognition::kPefImage"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "piex::image_type_recognition::kQtkImage"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "piex::image_type_recognition::kRafImage"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "piex::image_type_recognition::kRawContaxNImage"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "piex::image_type_recognition::kRw2Image"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "piex::image_type_recognition::kSrwImage"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "piex::image_type_recognition::kX3fImage"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex22image_type_recognition13RawImageTypesE",
+   "name" : "piex::image_type_recognition::RawImageTypes",
+   "referenced_type" : "_ZTIN4piex22image_type_recognition13RawImageTypesE",
+   "self_type" : "_ZTIN4piex22image_type_recognition13RawImageTypesE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::kOk"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::kFail"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "piex::kUnsupported"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex5ErrorE",
+   "name" : "piex::Error",
+   "referenced_type" : "_ZTIN4piex5ErrorE",
+   "self_type" : "_ZTIN4piex5ErrorE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "piex::Image::kJpegCompressed"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::Image::kUncompressedRgb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex5Image6FormatE",
+   "name" : "piex::Image::Format",
+   "referenced_type" : "_ZTIN4piex5Image6FormatE",
+   "self_type" : "_ZTIN4piex5Image6FormatE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "piex::kGpsTagLatitudeRef"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "piex::kGpsTagLatitude"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "piex::kGpsTagLongitudeRef"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "piex::kGpsTagLongitude"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "piex::kGpsTagAltitudeRef"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "piex::kGpsTagAltitude"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "piex::kGpsTagTimeStamp"
+    },
+    {
+     "enum_field_value" : 29,
+     "name" : "piex::kGpsTagDateStamp"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex7GpsTagsE",
+   "name" : "piex::GpsTags",
+   "referenced_type" : "_ZTIN4piex7GpsTagsE",
+   "self_type" : "_ZTIN4piex7GpsTagsE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 40961,
+     "name" : "piex::kExifTagColorSpace"
+    },
+    {
+     "enum_field_value" : 36867,
+     "name" : "piex::kExifTagDateTimeOriginal"
+    },
+    {
+     "enum_field_value" : 50720,
+     "name" : "piex::kExifTagDefaultCropSize"
+    },
+    {
+     "enum_field_value" : 33434,
+     "name" : "piex::kExifTagExposureTime"
+    },
+    {
+     "enum_field_value" : 33437,
+     "name" : "piex::kExifTagFnumber"
+    },
+    {
+     "enum_field_value" : 37386,
+     "name" : "piex::kExifTagFocalLength"
+    },
+    {
+     "enum_field_value" : 34853,
+     "name" : "piex::kExifTagGps"
+    },
+    {
+     "enum_field_value" : 40963,
+     "name" : "piex::kExifTagHeight"
+    },
+    {
+     "enum_field_value" : 34855,
+     "name" : "piex::kExifTagIsoSpeed"
+    },
+    {
+     "enum_field_value" : 37500,
+     "name" : "piex::kExifTagMakernotes"
+    },
+    {
+     "enum_field_value" : 40962,
+     "name" : "piex::kExifTagWidth"
+    },
+    {
+     "enum_field_value" : 4371,
+     "name" : "piex::kOlymTagAspectFrame"
+    },
+    {
+     "enum_field_value" : 8224,
+     "name" : "piex::kOlymTagCameraSettings"
+    },
+    {
+     "enum_field_value" : 8256,
+     "name" : "piex::kOlymTagRawProcessing"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "piex::kPanaTagBottomBorder"
+    },
+    {
+     "enum_field_value" : 23,
+     "name" : "piex::kPanaTagIso"
+    },
+    {
+     "enum_field_value" : 46,
+     "name" : "piex::kPanaTagJpegImage"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "piex::kPanaTagLeftBorder"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "piex::kPanaTagRightBorder"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "piex::kPanaTagTopBorder"
+    },
+    {
+     "enum_field_value" : 55,
+     "name" : "piex::kPentaxTagColorSpace"
+    },
+    {
+     "enum_field_value" : 315,
+     "name" : "piex::kTiffTagArtist"
+    },
+    {
+     "enum_field_value" : 258,
+     "name" : "piex::kTiffTagBitsPerSample"
+    },
+    {
+     "enum_field_value" : 33421,
+     "name" : "piex::kTiffTagCfaPatternDim"
+    },
+    {
+     "enum_field_value" : 259,
+     "name" : "piex::kTiffTagCompression"
+    },
+    {
+     "enum_field_value" : 306,
+     "name" : "piex::kTiffTagDateTime"
+    },
+    {
+     "enum_field_value" : 34665,
+     "name" : "piex::kTiffTagExifIfd"
+    },
+    {
+     "enum_field_value" : 270,
+     "name" : "piex::kTiffTagImageDescription"
+    },
+    {
+     "enum_field_value" : 257,
+     "name" : "piex::kTiffTagImageLength"
+    },
+    {
+     "enum_field_value" : 256,
+     "name" : "piex::kTiffTagImageWidth"
+    },
+    {
+     "enum_field_value" : 514,
+     "name" : "piex::kTiffTagJpegByteCount"
+    },
+    {
+     "enum_field_value" : 513,
+     "name" : "piex::kTiffTagJpegOffset"
+    },
+    {
+     "enum_field_value" : 271,
+     "name" : "piex::kTiffTagMake"
+    },
+    {
+     "enum_field_value" : 272,
+     "name" : "piex::kTiffTagModel"
+    },
+    {
+     "enum_field_value" : 274,
+     "name" : "piex::kTiffTagOrientation"
+    },
+    {
+     "enum_field_value" : 262,
+     "name" : "piex::kTiffTagPhotometric"
+    },
+    {
+     "enum_field_value" : 284,
+     "name" : "piex::kTiffTagPlanarConfig"
+    },
+    {
+     "enum_field_value" : 296,
+     "name" : "piex::kTiffTagResolutionUnit"
+    },
+    {
+     "enum_field_value" : 278,
+     "name" : "piex::kTiffTagRowsPerStrip"
+    },
+    {
+     "enum_field_value" : 277,
+     "name" : "piex::kTiffTagSamplesPerPixel"
+    },
+    {
+     "enum_field_value" : 305,
+     "name" : "piex::kTiffTagSoftware"
+    },
+    {
+     "enum_field_value" : 279,
+     "name" : "piex::kTiffTagStripByteCounts"
+    },
+    {
+     "enum_field_value" : 273,
+     "name" : "piex::kTiffTagStripOffsets"
+    },
+    {
+     "enum_field_value" : 254,
+     "name" : "piex::kTiffTagSubFileType"
+    },
+    {
+     "enum_field_value" : 330,
+     "name" : "piex::kTiffTagSubIfd"
+    },
+    {
+     "enum_field_value" : 325,
+     "name" : "piex::kTiffTagTileByteCounts"
+    },
+    {
+     "enum_field_value" : 323,
+     "name" : "piex::kTiffTagTileLength"
+    },
+    {
+     "enum_field_value" : 324,
+     "name" : "piex::kTiffTagTileOffsets"
+    },
+    {
+     "enum_field_value" : 322,
+     "name" : "piex::kTiffTagTileWidth"
+    },
+    {
+     "enum_field_value" : 282,
+     "name" : "piex::kTiffTagXresolution"
+    },
+    {
+     "enum_field_value" : 283,
+     "name" : "piex::kTiffTagYresolution"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex8TiffTagsE",
+   "name" : "piex::TiffTags",
+   "referenced_type" : "_ZTIN4piex8TiffTagsE",
+   "self_type" : "_ZTIN4piex8TiffTagsE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "access" : "private",
+   "function_name" : "piex::TiffParser::ParseGpsData",
+   "linker_set_key" : "_ZN4piex10TiffParser12ParseGpsDataEPKNS_14tiff_directory13TiffDirectoryEPNS_11TiffContentE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex11TiffContentE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::TiffParser::GetPreviewImageData",
+   "linker_set_key" : "_ZN4piex10TiffParser19GetPreviewImageDataERKNS_11TiffContentEPNS_16PreviewImageDataE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex11TiffContentE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex16PreviewImageDataE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::TiffParser::Parse",
+   "linker_set_key" : "_ZN4piex10TiffParser5ParseERKNSt3__13setIjNS1_4lessIjEENS1_9allocatorIjEEEEtPNS_11TiffContentE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIKt"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex11TiffContentE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "piex::TiffParser::ParseIfd",
+   "linker_set_key" : "_ZN4piex10TiffParser8ParseIfdEjRKNSt3__13setIjNS1_4lessIjEENS1_9allocatorIjEEEEtPNS1_6vectorINS_14tiff_directory13TiffDirectoryENS5_ISC_EEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIKt"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::TiffParser::TiffParser",
+   "linker_set_key" : "_ZN4piex10TiffParserC1EPNS_15StreamInterfaceE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::TiffParser::TiffParser",
+   "linker_set_key" : "_ZN4piex10TiffParserC1EPNS_15StreamInterfaceEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::TiffParser::TiffParser",
+   "linker_set_key" : "_ZN4piex10TiffParserC2EPNS_15StreamInterfaceE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::TiffParser::TiffParser",
+   "linker_set_key" : "_ZN4piex10TiffParserC2EPNS_15StreamInterfaceEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex10TiffParserE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::IsThumbnail",
+   "linker_set_key" : "_ZN4piex11IsThumbnailERKNS_5ImageEi",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex5ImageE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIKi"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::GetImageData",
+   "linker_set_key" : "_ZN4piex12GetImageDataERKNS_14tiff_directory13TiffDirectoryEPNS_15StreamInterfaceEPNS_5ImageE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex5ImageE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::PagedByteArray::~PagedByteArray",
+   "linker_set_key" : "_ZN4piex12binary_parse14PagedByteArrayD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse14PagedByteArrayE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::PagedByteArray::~PagedByteArray",
+   "linker_set_key" : "_ZN4piex12binary_parse14PagedByteArrayD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse14PagedByteArrayE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::PagedByteArray::~PagedByteArray",
+   "linker_set_key" : "_ZN4piex12binary_parse14PagedByteArrayD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse14PagedByteArrayE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::invalidPointer",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtr14invalidPointerEv",
+   "return_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::RangeCheckedBytePtr",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC1EPKhj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::RangeCheckedBytePtr",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC1EPNS0_14PagedByteArrayE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex12binary_parse14PagedByteArrayE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::RangeCheckedBytePtr",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::RangeCheckedBytePtr",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC2EPKhj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::RangeCheckedBytePtr",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC2EPNS0_14PagedByteArrayE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex12binary_parse14PagedByteArrayE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::RangeCheckedBytePtr",
+   "linker_set_key" : "_ZN4piex12binary_parse19RangeCheckedBytePtrC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::Get16s",
+   "linker_set_key" : "_ZN4piex12binary_parse6Get16sERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIKb"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex12binary_parse12MemoryStatusE"
+    }
+   ],
+   "return_type" : "_ZTIs",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::Get16u",
+   "linker_set_key" : "_ZN4piex12binary_parse6Get16uERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIKb"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex12binary_parse12MemoryStatusE"
+    }
+   ],
+   "return_type" : "_ZTIt",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::Get32s",
+   "linker_set_key" : "_ZN4piex12binary_parse6Get32sERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIKb"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex12binary_parse12MemoryStatusE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::Get32u",
+   "linker_set_key" : "_ZN4piex12binary_parse6Get32uERKNS0_19RangeCheckedBytePtrEbPNS0_12MemoryStatusE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIKb"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex12binary_parse12MemoryStatusE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::memcmp",
+   "linker_set_key" : "_ZN4piex12binary_parse6memcmpERKNS0_19RangeCheckedBytePtrES3_j",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::strcmp",
+   "linker_set_key" : "_ZN4piex12binary_parse6strcmpERKNS0_19RangeCheckedBytePtrERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::strlen",
+   "linker_set_key" : "_ZN4piex12binary_parse6strlenERKNS0_19RangeCheckedBytePtrE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::operator==",
+   "linker_set_key" : "_ZN4piex12binary_parseeqERKNS0_19RangeCheckedBytePtrES3_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::operator!=",
+   "linker_set_key" : "_ZN4piex12binary_parseneERKNS0_19RangeCheckedBytePtrES3_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::GetEndianness",
+   "linker_set_key" : "_ZN4piex13GetEndiannessEjPNS_15StreamInterfaceEPNS_14tiff_directory6EndianE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex14tiff_directory6EndianE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::GetOrientation",
+   "linker_set_key" : "_ZN4piex14GetOrientationEPNS_15StreamInterfaceEPj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "function_name" : "piex::ParseDirectory",
+   "linker_set_key" : "_ZN4piex14ParseDirectoryEjjNS_14tiff_directory6EndianERKNSt3__13setIjNS2_4lessIjEENS2_9allocatorIjEEEEPNS_15StreamInterfaceEPNS0_13TiffDirectoryEPj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKN4piex14tiff_directory6EndianE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::SizeOfType",
+   "linker_set_key" : "_ZN4piex14tiff_directory10SizeOfTypeEjPb",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPb"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::AddSubDirectory",
+   "linker_set_key" : "_ZN4piex14tiff_directory13TiffDirectory15AddSubDirectoryERKS1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex14tiff_directory13TiffDirectoryE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::AddEntry",
+   "linker_set_key" : "_ZN4piex14tiff_directory13TiffDirectory8AddEntryEjjjjRKNSt3__16vectorIhNS2_9allocatorIhEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__16vectorIhNS_9allocatorIhEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::TiffDirectory",
+   "linker_set_key" : "_ZN4piex14tiff_directory13TiffDirectoryC1ENS0_6EndianE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::TiffDirectory",
+   "linker_set_key" : "_ZN4piex14tiff_directory13TiffDirectoryC2ENS0_6EndianE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::GetDngInformation",
+   "linker_set_key" : "_ZN4piex17GetDngInformationEPNS_15StreamInterfaceEPjS2_PNSt3__16vectorIjNS3_9allocatorIjEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__16vectorIjNS_9allocatorIjEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "function_name" : "piex::GetJpegDimensions",
+   "linker_set_key" : "_ZN4piex17GetJpegDimensionsEjPNS_15StreamInterfaceEPtS2_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPt"
+    },
+    {
+     "referenced_type" : "_ZTIPt"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::GetExifOrientation",
+   "linker_set_key" : "_ZN4piex18GetExifOrientationEPNS_15StreamInterfaceEjPj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::GetFullDimension32",
+   "linker_set_key" : "_ZN4piex18GetFullDimension32ERKNS_14tiff_directory13TiffDirectoryEPjS4_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::GetPreviewImageData",
+   "linker_set_key" : "_ZN4piex19GetPreviewImageDataEPNS_15StreamInterfaceEPNS_16PreviewImageDataE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex16PreviewImageDataE"
+    }
+   ],
+   "return_type" : "_ZTIN4piex5ErrorE",
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "function_name" : "piex::SupportedExtensions",
+   "linker_set_key" : "_ZN4piex19SupportedExtensionsEv",
+   "return_type" : "_ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "function_name" : "piex::GetFullCropDimension",
+   "linker_set_key" : "_ZN4piex20GetFullCropDimensionERKNS_14tiff_directory13TiffDirectoryEPjS4_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::BytesRequiredForIsRaw",
+   "linker_set_key" : "_ZN4piex21BytesRequiredForIsRawEv",
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "function_name" : "piex::image_type_recognition::RecognizeRawImageTypeLite",
+   "linker_set_key" : "_ZN4piex22image_type_recognition25RecognizeRawImageTypeLiteERKNS_12binary_parse19RangeCheckedBytePtrE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIN4piex22image_type_recognition13RawImageTypesE",
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "function_name" : "piex::image_type_recognition::GetNumberOfBytesForIsOfType",
+   "linker_set_key" : "_ZN4piex22image_type_recognition27GetNumberOfBytesForIsOfTypeENS0_13RawImageTypesE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKN4piex22image_type_recognition13RawImageTypesE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "function_name" : "piex::image_type_recognition::GetNumberOfBytesForIsRawLite",
+   "linker_set_key" : "_ZN4piex22image_type_recognition28GetNumberOfBytesForIsRawLiteEv",
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "function_name" : "piex::image_type_recognition::IsRaw",
+   "linker_set_key" : "_ZN4piex22image_type_recognition5IsRawENS0_13RawImageTypesE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKN4piex22image_type_recognition13RawImageTypesE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "function_name" : "piex::image_type_recognition::IsOfType",
+   "linker_set_key" : "_ZN4piex22image_type_recognition8IsOfTypeERKNS_12binary_parse19RangeCheckedBytePtrENS0_13RawImageTypesE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIKN4piex22image_type_recognition13RawImageTypesE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "function_name" : "piex::image_type_recognition::IsRawLite",
+   "linker_set_key" : "_ZN4piex22image_type_recognition9IsRawLiteERKNS_12binary_parse19RangeCheckedBytePtrE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "function_name" : "piex::IsRaw",
+   "linker_set_key" : "_ZN4piex5IsRawEPNS_15StreamInterfaceE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "function_name" : "piex::Get16u",
+   "linker_set_key" : "_ZN4piex6Get16uEPNS_15StreamInterfaceEjRKNS_14tiff_directory6EndianEPt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex14tiff_directory6EndianE"
+    },
+    {
+     "referenced_type" : "_ZTIPt"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::Get32u",
+   "linker_set_key" : "_ZN4piex6Get32uEPNS_15StreamInterfaceEjRKNS_14tiff_directory6EndianEPj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4piex14tiff_directory6EndianE"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::GetData",
+   "linker_set_key" : "_ZN4piex7GetDataEjjPNS_15StreamInterfaceEPNS_5ErrorE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex5ErrorE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__16vectorIhNS_9allocatorIhEEEE",
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::extractBytes",
+   "linker_set_key" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr12extractBytesEjj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTINSt3__16vectorIhNS_9allocatorIhEEEE",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::offsetInArray",
+   "linker_set_key" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr13offsetInArrayEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::loadPageForOffset",
+   "linker_set_key" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr17loadPageForOffsetEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::pointerToSubArray",
+   "linker_set_key" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr17pointerToSubArrayEjj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::restrictPageToSubArray",
+   "linker_set_key" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr22restrictPageToSubArrayEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::binary_parse::RangeCheckedBytePtr::substr",
+   "linker_set_key" : "_ZNK4piex12binary_parse19RangeCheckedBytePtr6substrEjj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::GetSubDirectories",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory17GetSubDirectoriesEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    }
+   ],
+   "return_type" : "_ZTIRKNSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::GetOffsetAndLength",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory18GetOffsetAndLengthEjjPjS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNS0_8RationalE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex14tiff_directory8RationalE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNS0_9SRationalE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPN4piex14tiff_directory9SRationalE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorINS0_8RationalENS2_9allocatorIS4_EEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__16vectorIN4piex14tiff_directory8RationalENS_9allocatorIS3_EEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorINS0_9SRationalENS2_9allocatorIS4_EEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__16vectorIN4piex14tiff_directory9SRationalENS_9allocatorIS3_EEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorIhNS2_9allocatorIhEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__16vectorIhNS_9allocatorIhEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPNSt3__16vectorIjNS2_9allocatorIjEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__16vectorIjNS_9allocatorIjEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Get",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3GetEjPj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "function_name" : "piex::tiff_directory::TiffDirectory::Has",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory3HasEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "piex::tiff_directory::TiffDirectory::Find",
+   "linker_set_key" : "_ZNK4piex14tiff_directory13TiffDirectory4FindEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4piex11TiffContentE",
+   "name" : "const piex::TiffContent &",
+   "referenced_type" : "_ZTIKN4piex11TiffContentE",
+   "self_type" : "_ZTIRKN4piex11TiffContentE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "name" : "const piex::binary_parse::RangeCheckedBytePtr &",
+   "referenced_type" : "_ZTIKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "self_type" : "_ZTIRKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4piex14tiff_directory13TiffDirectoryE",
+   "name" : "const piex::tiff_directory::TiffDirectory &",
+   "referenced_type" : "_ZTIKN4piex14tiff_directory13TiffDirectoryE",
+   "self_type" : "_ZTIRKN4piex14tiff_directory13TiffDirectoryE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4piex14tiff_directory6EndianE",
+   "name" : "const piex::tiff_directory::Endian &",
+   "referenced_type" : "_ZTIKN4piex14tiff_directory6EndianE",
+   "self_type" : "_ZTIRKN4piex14tiff_directory6EndianE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4piex5ImageE",
+   "name" : "const piex::Image &",
+   "referenced_type" : "_ZTIKN4piex5ImageE",
+   "self_type" : "_ZTIRKN4piex5ImageE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE",
+   "name" : "const std::set<unsigned int, std::less<unsigned int>, std::allocator<unsigned int> > &",
+   "referenced_type" : "_ZTIKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE",
+   "self_type" : "_ZTIRKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN4piex12binary_parse19RangeCheckedBytePtrE",
+   "name" : "piex::binary_parse::RangeCheckedBytePtr &",
+   "referenced_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "self_type" : "_ZTIRN4piex12binary_parse19RangeCheckedBytePtrE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4piex12binary_parse14PagedByteArrayE",
+   "name" : "const piex::binary_parse::PagedByteArray *",
+   "referenced_type" : "_ZTIKN4piex12binary_parse14PagedByteArrayE",
+   "self_type" : "_ZTIPKN4piex12binary_parse14PagedByteArrayE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "name" : "const piex::binary_parse::RangeCheckedBytePtr *",
+   "referenced_type" : "_ZTIKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "self_type" : "_ZTIPKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4piex12binary_parse20CachedPagedByteArrayE",
+   "name" : "const piex::binary_parse::CachedPagedByteArray *",
+   "referenced_type" : "_ZTIKN4piex12binary_parse20CachedPagedByteArrayE",
+   "self_type" : "_ZTIPKN4piex12binary_parse20CachedPagedByteArrayE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "name" : "const piex::tiff_directory::TiffDirectory::DirectoryEntry *",
+   "referenced_type" : "_ZTIKN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "self_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE",
+   "name" : "const piex::tiff_directory::TiffDirectory *",
+   "referenced_type" : "_ZTIKN4piex14tiff_directory13TiffDirectoryE",
+   "self_type" : "_ZTIPKN4piex14tiff_directory13TiffDirectoryE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4piex5ImageE",
+   "name" : "const piex::Image *",
+   "referenced_type" : "_ZTIKN4piex5ImageE",
+   "self_type" : "_ZTIPKN4piex5ImageE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex10TiffParserE",
+   "name" : "piex::TiffParser *",
+   "referenced_type" : "_ZTIN4piex10TiffParserE",
+   "self_type" : "_ZTIPN4piex10TiffParserE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex11TiffContentE",
+   "name" : "piex::TiffContent *",
+   "referenced_type" : "_ZTIN4piex11TiffContentE",
+   "self_type" : "_ZTIPN4piex11TiffContentE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex12binary_parse12MemoryStatusE",
+   "name" : "piex::binary_parse::MemoryStatus *",
+   "referenced_type" : "_ZTIN4piex12binary_parse12MemoryStatusE",
+   "self_type" : "_ZTIPN4piex12binary_parse12MemoryStatusE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE",
+   "name" : "piex::binary_parse::RangeCheckedBytePtr *",
+   "referenced_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "self_type" : "_ZTIPN4piex12binary_parse19RangeCheckedBytePtrE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex12binary_parse20CachedPagedByteArrayE",
+   "name" : "piex::binary_parse::CachedPagedByteArray *",
+   "referenced_type" : "_ZTIN4piex12binary_parse20CachedPagedByteArrayE",
+   "self_type" : "_ZTIPN4piex12binary_parse20CachedPagedByteArrayE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE",
+   "name" : "piex::tiff_directory::TiffDirectory *",
+   "referenced_type" : "_ZTIN4piex14tiff_directory13TiffDirectoryE",
+   "self_type" : "_ZTIPN4piex14tiff_directory13TiffDirectoryE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex14tiff_directory6EndianE",
+   "name" : "piex::tiff_directory::Endian *",
+   "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE",
+   "self_type" : "_ZTIPN4piex14tiff_directory6EndianE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex15StreamInterfaceE",
+   "name" : "piex::StreamInterface *",
+   "referenced_type" : "_ZTIN4piex15StreamInterfaceE",
+   "self_type" : "_ZTIPN4piex15StreamInterfaceE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex16PreviewImageDataE",
+   "name" : "piex::PreviewImageData *",
+   "referenced_type" : "_ZTIN4piex16PreviewImageDataE",
+   "self_type" : "_ZTIPN4piex16PreviewImageDataE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex5ErrorE",
+   "name" : "piex::Error *",
+   "referenced_type" : "_ZTIN4piex5ErrorE",
+   "self_type" : "_ZTIPN4piex5ErrorE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4piex5ImageE",
+   "name" : "piex::Image *",
+   "referenced_type" : "_ZTIN4piex5ImageE",
+   "self_type" : "_ZTIPN4piex5ImageE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE",
+   "name" : "std::vector<piex::tiff_directory::TiffDirectory, std::allocator<piex::tiff_directory::TiffDirectory> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "name" : "std::vector<unsigned int, std::allocator<unsigned int> > *",
+   "referenced_type" : "_ZTINSt3__16vectorIjNS_9allocatorIjEEEE",
+   "self_type" : "_ZTIPNSt3__16vectorIjNS_9allocatorIjEEEE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPKh",
+   "name" : "const unsigned char **",
+   "referenced_type" : "_ZTIPKh",
+   "self_type" : "_ZTIPPKh",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPb",
+   "name" : "bool *",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIPb",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPt",
+   "name" : "unsigned short *",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIPt",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex11TiffContentE",
+   "name" : "const piex::TiffContent",
+   "referenced_type" : "_ZTIN4piex11TiffContentE",
+   "self_type" : "_ZTIKN4piex11TiffContentE",
+   "size" : 20,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex12binary_parse14PagedByteArrayE",
+   "name" : "const piex::binary_parse::PagedByteArray",
+   "referenced_type" : "_ZTIN4piex12binary_parse14PagedByteArrayE",
+   "self_type" : "_ZTIKN4piex12binary_parse14PagedByteArrayE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "name" : "const piex::binary_parse::RangeCheckedBytePtr",
+   "referenced_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "self_type" : "_ZTIKN4piex12binary_parse19RangeCheckedBytePtrE",
+   "size" : 44,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex12binary_parse20CachedPagedByteArrayE",
+   "name" : "const piex::binary_parse::CachedPagedByteArray",
+   "referenced_type" : "_ZTIN4piex12binary_parse20CachedPagedByteArrayE",
+   "self_type" : "_ZTIKN4piex12binary_parse20CachedPagedByteArrayE",
+   "size" : 28,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex14tiff_directory13TiffDirectoryE",
+   "name" : "const piex::tiff_directory::TiffDirectory",
+   "referenced_type" : "_ZTIN4piex14tiff_directory13TiffDirectoryE",
+   "self_type" : "_ZTIKN4piex14tiff_directory13TiffDirectoryE",
+   "size" : 40,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex14tiff_directory6EndianE",
+   "name" : "const piex::tiff_directory::Endian",
+   "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE",
+   "self_type" : "_ZTIKN4piex14tiff_directory6EndianE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex22image_type_recognition13RawImageTypesE",
+   "name" : "const piex::image_type_recognition::RawImageTypes",
+   "referenced_type" : "_ZTIN4piex22image_type_recognition13RawImageTypesE",
+   "self_type" : "_ZTIKN4piex22image_type_recognition13RawImageTypesE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/image_type_recognition/image_type_recognition_lite.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4piex5ImageE",
+   "name" : "const piex::Image",
+   "referenced_type" : "_ZTIN4piex5ImageE",
+   "self_type" : "_ZTIKN4piex5ImageE",
+   "size" : 16,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE",
+   "name" : "const std::set<unsigned int, std::less<unsigned int>, std::allocator<unsigned int> >",
+   "referenced_type" : "_ZTINSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE",
+   "self_type" : "_ZTIKNSt3__13setIjNS_4lessIjEENS_9allocatorIjEEEE",
+   "size" : 12,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKt",
+   "name" : "const unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIKt",
+   "size" : 2,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "stream_",
+     "referenced_type" : "_ZTIPN4piex15StreamInterfaceE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "tiff_offset_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "endian_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex10TiffParserE",
+   "name" : "piex::TiffParser",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex10TiffParserE",
+   "self_type" : "_ZTIN4piex10TiffParserE",
+   "size" : 12,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "tiff_directory",
+     "referenced_type" : "_ZTINSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE"
+    },
+    {
+     "field_name" : "exif_directory",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTINSt3__110unique_ptrIN4piex14tiff_directory13TiffDirectoryENS_14default_deleteIS3_EEEE"
+    },
+    {
+     "field_name" : "gps_directory",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTINSt3__110unique_ptrIN4piex14tiff_directory13TiffDirectoryENS_14default_deleteIS3_EEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex11TiffContentE",
+   "name" : "piex::TiffContent",
+   "referenced_type" : "_ZTIN4piex11TiffContentE",
+   "self_type" : "_ZTIN4piex11TiffContentE",
+   "size" : 20,
+   "source_file" : "/external/piex/src/tiff_parser.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN4piex12binary_parse14PagedByteArray4PageE",
+   "name" : "piex::binary_parse::PagedByteArray::Page",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex12binary_parse14PagedByteArray4PageE",
+   "self_type" : "_ZTIN4piex12binary_parse14PagedByteArray4PageE",
+   "size" : 1,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIN4piex12binary_parse14PagedByteArrayE",
+   "name" : "piex::binary_parse::PagedByteArray",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex12binary_parse14PagedByteArrayE",
+   "self_type" : "_ZTIN4piex12binary_parse14PagedByteArrayE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN4piex12binary_parse14PagedByteArrayE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN4piex12binary_parse14PagedByteArrayD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN4piex12binary_parse14PagedByteArrayD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK4piex12binary_parse14PagedByteArray6lengthEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK4piex12binary_parse14PagedByteArray8pageSizeEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK4piex12binary_parse14PagedByteArray7getPageEjPPKhS4_PNSt3__110shared_ptrINS1_4PageEEE"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "array_",
+     "referenced_type" : "_ZTINSt3__110shared_ptrIN4piex12binary_parse14PagedByteArrayEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "page_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTINSt3__110shared_ptrIN4piex12binary_parse14PagedByteArray4PageEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "page_data_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "access" : "private",
+     "field_name" : "current_pos_",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "sub_array_begin_",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "sub_array_end_",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "page_begin_offset_",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "current_page_len_",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "error_flag_",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIN4piex12binary_parse12MemoryStatusE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "name" : "piex::binary_parse::RangeCheckedBytePtr",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "self_type" : "_ZTIN4piex12binary_parse19RangeCheckedBytePtrE",
+   "size" : 44,
+   "source_file" : "/external/piex/src/binary_parse/range_checked_byte_ptr.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "index",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "page",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTINSt3__110shared_ptrIN4piex12binary_parse14PagedByteArray4PageEEE"
+    },
+    {
+     "field_name" : "begin",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "field_name" : "end",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPKh"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex12binary_parse20CachedPagedByteArray10CachedPageE",
+   "name" : "piex::binary_parse::CachedPagedByteArray::CachedPage",
+   "referenced_type" : "_ZTIN4piex12binary_parse20CachedPagedByteArray10CachedPageE",
+   "self_type" : "_ZTIN4piex12binary_parse20CachedPagedByteArray10CachedPageE",
+   "size" : 20,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN4piex12binary_parse14PagedByteArrayE"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mutex_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTINSt3__15mutexE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "paged_byte_array_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKN4piex12binary_parse14PagedByteArrayE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "cache_size_",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "cached_pages_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTINSt3__16vectorIN4piex12binary_parse20CachedPagedByteArray10CachedPageENS_9allocatorIS4_EEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex12binary_parse20CachedPagedByteArrayE",
+   "name" : "piex::binary_parse::CachedPagedByteArray",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex12binary_parse20CachedPagedByteArrayE",
+   "self_type" : "_ZTIN4piex12binary_parse20CachedPagedByteArrayE",
+   "size" : 28,
+   "source_file" : "/external/piex/src/binary_parse/cached_paged_byte_array.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN4piex12binary_parse20CachedPagedByteArrayE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN4piex12binary_parse20CachedPagedByteArrayD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN4piex12binary_parse20CachedPagedByteArrayD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZNK4piex12binary_parse20CachedPagedByteArray6lengthEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK4piex12binary_parse20CachedPagedByteArray8pageSizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZNK4piex12binary_parse20CachedPagedByteArray7getPageEjPPKhS4_PNSt3__110shared_ptrINS0_14PagedByteArray4PageEEE"
+    }
+   ]
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "value",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTINSt3__16vectorIhNS_9allocatorIhEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "name" : "piex::tiff_directory::TiffDirectory::DirectoryEntry",
+   "referenced_type" : "_ZTIN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "self_type" : "_ZTIN4piex14tiff_directory13TiffDirectory14DirectoryEntryE",
+   "size" : 24,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "directory_entries_",
+     "referenced_type" : "_ZTINSt3__13mapIjN4piex14tiff_directory13TiffDirectory14DirectoryEntryENS_4lessIjEENS_9allocatorINS_4pairIKjS4_EEEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "tag_order_",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTINSt3__16vectorIjNS_9allocatorIjEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "sub_directories_",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTINSt3__16vectorIN4piex14tiff_directory13TiffDirectoryENS_9allocatorIS3_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "endian_",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIN4piex14tiff_directory6EndianE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex14tiff_directory13TiffDirectoryE",
+   "name" : "piex::tiff_directory::TiffDirectory",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex14tiff_directory13TiffDirectoryE",
+   "self_type" : "_ZTIN4piex14tiff_directory13TiffDirectoryE",
+   "size" : 40,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "numerator",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "denominator",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex14tiff_directory8RationalE",
+   "name" : "piex::tiff_directory::Rational",
+   "referenced_type" : "_ZTIN4piex14tiff_directory8RationalE",
+   "self_type" : "_ZTIN4piex14tiff_directory8RationalE",
+   "size" : 8,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "numerator",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "denominator",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex14tiff_directory9SRationalE",
+   "name" : "piex::tiff_directory::SRational",
+   "referenced_type" : "_ZTIN4piex14tiff_directory9SRationalE",
+   "self_type" : "_ZTIN4piex14tiff_directory9SRationalE",
+   "size" : 8,
+   "source_file" : "/external/piex/src/tiff_directory/tiff_directory.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIN4piex15StreamInterfaceE",
+   "name" : "piex::StreamInterface",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4piex15StreamInterfaceE",
+   "self_type" : "_ZTIN4piex15StreamInterfaceE",
+   "size" : 4,
+   "source_file" : "/external/piex/src/piex_types.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN4piex15StreamInterfaceE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN4piex15StreamInterfaceD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN4piex15StreamInterfaceD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN4piex15StreamInterface7GetDataEjjPh"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "is_valid",
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "latitude_ref",
+     "field_offset" : 8,
+     "referenced_type" : "_ZTIc"
+    },
+    {
+     "field_name" : "latitude",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIA3_N4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "longitude_ref",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIc"
+    },
+    {
+     "field_name" : "longitude",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIA3_N4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "altitude_ref",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "altitude",
+     "field_offset" : 480,
+     "referenced_type" : "_ZTIN4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "time_stamp",
+     "field_offset" : 544,
+     "referenced_type" : "_ZTIA3_N4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "date_stamp",
+     "field_offset" : 736,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex16PreviewImageData3GpsE",
+   "name" : "piex::PreviewImageData::Gps",
+   "referenced_type" : "_ZTIN4piex16PreviewImageData3GpsE",
+   "self_type" : "_ZTIN4piex16PreviewImageData3GpsE",
+   "size" : 104,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "numerator",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "denominator",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex16PreviewImageData8RationalE",
+   "name" : "piex::PreviewImageData::Rational",
+   "referenced_type" : "_ZTIN4piex16PreviewImageData8RationalE",
+   "self_type" : "_ZTIN4piex16PreviewImageData8RationalE",
+   "size" : 8,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "preview",
+     "referenced_type" : "_ZTIN4piex5ImageE"
+    },
+    {
+     "field_name" : "thumbnail",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIN4piex5ImageE"
+    },
+    {
+     "field_name" : "exif_orientation",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "color_space",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIN4piex16PreviewImageData10ColorSpaceE"
+    },
+    {
+     "field_name" : "full_width",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "full_height",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "maker",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "field_name" : "model",
+     "field_offset" : 480,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "field_name" : "date_time",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "field_name" : "iso",
+     "field_offset" : 672,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "exposure_time",
+     "field_offset" : 704,
+     "referenced_type" : "_ZTIN4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "fnumber",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTIN4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "focal_length",
+     "field_offset" : 832,
+     "referenced_type" : "_ZTIN4piex16PreviewImageData8RationalE"
+    },
+    {
+     "field_name" : "gps",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTIN4piex16PreviewImageData3GpsE"
+    },
+    {
+     "field_name" : "cfa_pattern_dim",
+     "field_offset" : 1728,
+     "referenced_type" : "_ZTINSt3__16vectorIjNS_9allocatorIjEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex16PreviewImageDataE",
+   "name" : "piex::PreviewImageData",
+   "referenced_type" : "_ZTIN4piex16PreviewImageDataE",
+   "self_type" : "_ZTIN4piex16PreviewImageDataE",
+   "size" : 228,
+   "source_file" : "/external/piex/src/piex_types.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "width",
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "height",
+     "field_offset" : 16,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "length",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIN4piex5Image6FormatE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4piex5ImageE",
+   "name" : "piex::Image",
+   "referenced_type" : "_ZTIN4piex5ImageE",
+   "self_type" : "_ZTIN4piex5ImageE",
+   "size" : 16,
+   "source_file" : "/external/piex/src/piex_types.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

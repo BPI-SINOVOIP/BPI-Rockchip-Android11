@@ -1,0 +1,392 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [1024]",
+   "name" : "unsigned char [1024]",
+   "referenced_type" : "type-3",
+   "self_type" : "type-8",
+   "size" : 1024,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [16]",
+   "name" : "unsigned char [16]",
+   "referenced_type" : "type-3",
+   "self_type" : "type-5",
+   "size" : 16,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [512]",
+   "name" : "unsigned char [512]",
+   "referenced_type" : "type-3",
+   "self_type" : "type-6",
+   "size" : 512,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [8]",
+   "name" : "unsigned char [8]",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 8,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [8]",
+   "name" : "unsigned int [8]",
+   "referenced_type" : "type-4",
+   "self_type" : "type-7",
+   "size" : 32,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-21",
+   "self_type" : "type-21",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_Z15mkbootimg_dummyP15boot_img_hdr_v0"
+  },
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "mkbootimg_dummy",
+   "linker_set_key" : "_Z15mkbootimg_dummyP15boot_img_hdr_v0",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/mkbootimg/include/abi_check/mkbootimg_abi_check.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "boot_img_hdr_v0 *",
+   "name" : "boot_img_hdr_v0 *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" :
+ [
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "magic",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "kernel_size",
+     "field_offset" : 64,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "kernel_addr",
+     "field_offset" : 96,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "ramdisk_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "ramdisk_addr",
+     "field_offset" : 160,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "second_size",
+     "field_offset" : 192,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "second_addr",
+     "field_offset" : 224,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "tags_addr",
+     "field_offset" : 256,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "page_size",
+     "field_offset" : 288,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "header_version",
+     "field_offset" : 320,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "os_version",
+     "field_offset" : 352,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "name",
+     "field_offset" : 384,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "cmdline",
+     "field_offset" : 512,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "id",
+     "field_offset" : 4608,
+     "referenced_type" : "type-7"
+    },
+    {
+     "field_name" : "extra_cmdline",
+     "field_offset" : 4864,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "boot_img_hdr_v0",
+   "name" : "boot_img_hdr_v0",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 1632,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h",
+   "unique_id" : "_ZTS15boot_img_hdr_v0"
+  },
+  {
+   "alignment" : 1,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "recovery_dtbo_size",
+     "field_offset" : 13056,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "recovery_dtbo_offset",
+     "field_offset" : 13088,
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "header_size",
+     "field_offset" : 13152,
+     "referenced_type" : "type-4"
+    }
+   ],
+   "linker_set_key" : "boot_img_hdr_v1",
+   "name" : "boot_img_hdr_v1",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 1648,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h",
+   "unique_id" : "_ZTS15boot_img_hdr_v1"
+  },
+  {
+   "alignment" : 1,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "dtb_size",
+     "field_offset" : 13184,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "dtb_addr",
+     "field_offset" : 13216,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "boot_img_hdr_v2",
+   "name" : "boot_img_hdr_v2",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 1660,
+   "source_file" : "/system/core/mkbootimg/include/bootimg/bootimg.h",
+   "unique_id" : "_ZTS15boot_img_hdr_v2"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

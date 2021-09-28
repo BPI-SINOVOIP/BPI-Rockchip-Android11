@@ -1,0 +1,7104 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "Curl_HMAC_final"
+  },
+  {
+   "name" : "Curl_HMAC_init"
+  },
+  {
+   "name" : "Curl_HMAC_update"
+  },
+  {
+   "name" : "Curl_MD5_final"
+  },
+  {
+   "name" : "Curl_MD5_init"
+  },
+  {
+   "name" : "Curl_MD5_update"
+  },
+  {
+   "name" : "Curl_SOCKS4"
+  },
+  {
+   "name" : "Curl_SOCKS5"
+  },
+  {
+   "name" : "Curl_add_buffer"
+  },
+  {
+   "name" : "Curl_add_buffer_free"
+  },
+  {
+   "name" : "Curl_add_buffer_init"
+  },
+  {
+   "name" : "Curl_add_buffer_send"
+  },
+  {
+   "name" : "Curl_add_bufferf"
+  },
+  {
+   "name" : "Curl_add_custom_headers"
+  },
+  {
+   "name" : "Curl_add_timecondition"
+  },
+  {
+   "name" : "Curl_addr2string"
+  },
+  {
+   "name" : "Curl_addrinfo_callback"
+  },
+  {
+   "name" : "Curl_all_content_encodings"
+  },
+  {
+   "name" : "Curl_attach_connnection"
+  },
+  {
+   "name" : "Curl_auth_build_spn"
+  },
+  {
+   "name" : "Curl_auth_cleanup_ntlm"
+  },
+  {
+   "name" : "Curl_auth_create_cram_md5_message"
+  },
+  {
+   "name" : "Curl_auth_create_digest_http_message"
+  },
+  {
+   "name" : "Curl_auth_create_digest_md5_message"
+  },
+  {
+   "name" : "Curl_auth_create_ntlm_type1_message"
+  },
+  {
+   "name" : "Curl_auth_create_ntlm_type3_message"
+  },
+  {
+   "name" : "Curl_auth_decode_cram_md5_message"
+  },
+  {
+   "name" : "Curl_auth_decode_digest_http_message"
+  },
+  {
+   "name" : "Curl_auth_decode_ntlm_type2_message"
+  },
+  {
+   "name" : "Curl_auth_digest_cleanup"
+  },
+  {
+   "name" : "Curl_auth_digest_get_pair"
+  },
+  {
+   "name" : "Curl_auth_is_digest_supported"
+  },
+  {
+   "name" : "Curl_auth_is_ntlm_supported"
+  },
+  {
+   "name" : "Curl_auth_user_contains_domain"
+  },
+  {
+   "name" : "Curl_base64_decode"
+  },
+  {
+   "name" : "Curl_base64_encode"
+  },
+  {
+   "name" : "Curl_base64url_encode"
+  },
+  {
+   "name" : "Curl_blockread_all"
+  },
+  {
+   "name" : "Curl_build_unencoding_stack"
+  },
+  {
+   "name" : "Curl_builtin_scheme"
+  },
+  {
+   "name" : "Curl_cache_addr"
+  },
+  {
+   "name" : "Curl_cert_hostcheck"
+  },
+  {
+   "name" : "Curl_checkProxyheaders"
+  },
+  {
+   "name" : "Curl_checkheaders"
+  },
+  {
+   "name" : "Curl_chunked_strerror"
+  },
+  {
+   "name" : "Curl_client_write"
+  },
+  {
+   "name" : "Curl_clone_primary_ssl_config"
+  },
+  {
+   "name" : "Curl_close"
+  },
+  {
+   "name" : "Curl_closesocket"
+  },
+  {
+   "name" : "Curl_compareheader"
+  },
+  {
+   "name" : "Curl_conn_data_pending"
+  },
+  {
+   "name" : "Curl_connalive"
+  },
+  {
+   "name" : "Curl_conncache_add_conn"
+  },
+  {
+   "name" : "Curl_conncache_bundle_size"
+  },
+  {
+   "name" : "Curl_conncache_close_all_connections"
+  },
+  {
+   "name" : "Curl_conncache_destroy"
+  },
+  {
+   "name" : "Curl_conncache_extract_bundle"
+  },
+  {
+   "name" : "Curl_conncache_extract_oldest"
+  },
+  {
+   "name" : "Curl_conncache_find_bundle"
+  },
+  {
+   "name" : "Curl_conncache_foreach"
+  },
+  {
+   "name" : "Curl_conncache_init"
+  },
+  {
+   "name" : "Curl_conncache_remove_conn"
+  },
+  {
+   "name" : "Curl_conncache_return_conn"
+  },
+  {
+   "name" : "Curl_conncache_size"
+  },
+  {
+   "name" : "Curl_conncache_unlock"
+  },
+  {
+   "name" : "Curl_conncontrol"
+  },
+  {
+   "name" : "Curl_connect"
+  },
+  {
+   "name" : "Curl_connect_complete"
+  },
+  {
+   "name" : "Curl_connect_free"
+  },
+  {
+   "name" : "Curl_connect_ongoing"
+  },
+  {
+   "name" : "Curl_connecthost"
+  },
+  {
+   "name" : "Curl_cookie_add"
+  },
+  {
+   "name" : "Curl_cookie_cleanup"
+  },
+  {
+   "name" : "Curl_cookie_clearall"
+  },
+  {
+   "name" : "Curl_cookie_clearsess"
+  },
+  {
+   "name" : "Curl_cookie_freelist"
+  },
+  {
+   "name" : "Curl_cookie_getlist"
+  },
+  {
+   "name" : "Curl_cookie_init"
+  },
+  {
+   "name" : "Curl_cookie_list"
+  },
+  {
+   "name" : "Curl_cookie_loadfiles"
+  },
+  {
+   "name" : "Curl_copy_header_value"
+  },
+  {
+   "name" : "Curl_debug"
+  },
+  {
+   "name" : "Curl_dedotdotify"
+  },
+  {
+   "name" : "Curl_disconnect"
+  },
+  {
+   "name" : "Curl_doh"
+  },
+  {
+   "name" : "Curl_doh_is_resolved"
+  },
+  {
+   "name" : "Curl_done_sending"
+  },
+  {
+   "name" : "Curl_expire"
+  },
+  {
+   "name" : "Curl_expire_clear"
+  },
+  {
+   "name" : "Curl_expire_done"
+  },
+  {
+   "name" : "Curl_failf"
+  },
+  {
+   "name" : "Curl_fetch_addr"
+  },
+  {
+   "name" : "Curl_fillreadbuffer"
+  },
+  {
+   "name" : "Curl_flush_cookies"
+  },
+  {
+   "name" : "Curl_follow"
+  },
+  {
+   "name" : "Curl_free_primary_ssl_config"
+  },
+  {
+   "name" : "Curl_free_request_state"
+  },
+  {
+   "name" : "Curl_freeaddrinfo"
+  },
+  {
+   "name" : "Curl_freeset"
+  },
+  {
+   "name" : "Curl_get_line"
+  },
+  {
+   "name" : "Curl_get_upload_buffer"
+  },
+  {
+   "name" : "Curl_getaddrinfo"
+  },
+  {
+   "name" : "Curl_getaddrinfo_ex"
+  },
+  {
+   "name" : "Curl_getconnectinfo"
+  },
+  {
+   "name" : "Curl_getformdata"
+  },
+  {
+   "name" : "Curl_gethostname"
+  },
+  {
+   "name" : "Curl_getinfo"
+  },
+  {
+   "name" : "Curl_gmtime"
+  },
+  {
+   "name" : "Curl_hash_add"
+  },
+  {
+   "name" : "Curl_hash_clean"
+  },
+  {
+   "name" : "Curl_hash_clean_with_criterium"
+  },
+  {
+   "name" : "Curl_hash_delete"
+  },
+  {
+   "name" : "Curl_hash_destroy"
+  },
+  {
+   "name" : "Curl_hash_init"
+  },
+  {
+   "name" : "Curl_hash_next_element"
+  },
+  {
+   "name" : "Curl_hash_pick"
+  },
+  {
+   "name" : "Curl_hash_start_iterate"
+  },
+  {
+   "name" : "Curl_hash_str"
+  },
+  {
+   "name" : "Curl_he2ai"
+  },
+  {
+   "name" : "Curl_hostcache_clean"
+  },
+  {
+   "name" : "Curl_hostcache_prune"
+  },
+  {
+   "name" : "Curl_http"
+  },
+  {
+   "name" : "Curl_http_auth_act"
+  },
+  {
+   "name" : "Curl_http_auth_cleanup_digest"
+  },
+  {
+   "name" : "Curl_http_auth_cleanup_ntlm"
+  },
+  {
+   "name" : "Curl_http_compile_trailers"
+  },
+  {
+   "name" : "Curl_http_connect"
+  },
+  {
+   "name" : "Curl_http_done"
+  },
+  {
+   "name" : "Curl_http_input_auth"
+  },
+  {
+   "name" : "Curl_http_output_auth"
+  },
+  {
+   "name" : "Curl_http_readwrite_headers"
+  },
+  {
+   "name" : "Curl_httpchunk_init"
+  },
+  {
+   "name" : "Curl_httpchunk_read"
+  },
+  {
+   "name" : "Curl_if2ip"
+  },
+  {
+   "name" : "Curl_infof"
+  },
+  {
+   "name" : "Curl_init_CONNECT"
+  },
+  {
+   "name" : "Curl_init_do"
+  },
+  {
+   "name" : "Curl_init_userdefined"
+  },
+  {
+   "name" : "Curl_initinfo"
+  },
+  {
+   "name" : "Curl_input_digest"
+  },
+  {
+   "name" : "Curl_input_ntlm"
+  },
+  {
+   "name" : "Curl_ip2addr"
+  },
+  {
+   "name" : "Curl_ipv6_scope"
+  },
+  {
+   "name" : "Curl_ipv6works"
+  },
+  {
+   "name" : "Curl_ipvalid"
+  },
+  {
+   "name" : "Curl_is_absolute_url"
+  },
+  {
+   "name" : "Curl_is_connected"
+  },
+  {
+   "name" : "Curl_is_in_callback"
+  },
+  {
+   "name" : "Curl_isalnum"
+  },
+  {
+   "name" : "Curl_isalpha"
+  },
+  {
+   "name" : "Curl_iscntrl"
+  },
+  {
+   "name" : "Curl_isdigit"
+  },
+  {
+   "name" : "Curl_isgraph"
+  },
+  {
+   "name" : "Curl_islower"
+  },
+  {
+   "name" : "Curl_isprint"
+  },
+  {
+   "name" : "Curl_isspace"
+  },
+  {
+   "name" : "Curl_isunreserved"
+  },
+  {
+   "name" : "Curl_isupper"
+  },
+  {
+   "name" : "Curl_isxdigit"
+  },
+  {
+   "name" : "Curl_llist_count"
+  },
+  {
+   "name" : "Curl_llist_destroy"
+  },
+  {
+   "name" : "Curl_llist_init"
+  },
+  {
+   "name" : "Curl_llist_insert_next"
+  },
+  {
+   "name" : "Curl_llist_move"
+  },
+  {
+   "name" : "Curl_llist_remove"
+  },
+  {
+   "name" : "Curl_loadhostpairs"
+  },
+  {
+   "name" : "Curl_md4it"
+  },
+  {
+   "name" : "Curl_md5it"
+  },
+  {
+   "name" : "Curl_meets_timecondition"
+  },
+  {
+   "name" : "Curl_memdup"
+  },
+  {
+   "name" : "Curl_mime_add_header"
+  },
+  {
+   "name" : "Curl_mime_cleanpart"
+  },
+  {
+   "name" : "Curl_mime_contenttype"
+  },
+  {
+   "name" : "Curl_mime_duppart"
+  },
+  {
+   "name" : "Curl_mime_initpart"
+  },
+  {
+   "name" : "Curl_mime_prepare_headers"
+  },
+  {
+   "name" : "Curl_mime_read"
+  },
+  {
+   "name" : "Curl_mime_rewind"
+  },
+  {
+   "name" : "Curl_mime_set_subparts"
+  },
+  {
+   "name" : "Curl_mime_size"
+  },
+  {
+   "name" : "Curl_mk_dnscache"
+  },
+  {
+   "name" : "Curl_multi_add_perform"
+  },
+  {
+   "name" : "Curl_multi_closed"
+  },
+  {
+   "name" : "Curl_multi_handle"
+  },
+  {
+   "name" : "Curl_multi_max_concurrent_streams"
+  },
+  {
+   "name" : "Curl_multi_max_host_connections"
+  },
+  {
+   "name" : "Curl_multi_max_total_connections"
+  },
+  {
+   "name" : "Curl_multiplex_wanted"
+  },
+  {
+   "name" : "Curl_multiuse_state"
+  },
+  {
+   "name" : "Curl_none_cert_status_request"
+  },
+  {
+   "name" : "Curl_none_check_cxn"
+  },
+  {
+   "name" : "Curl_none_cleanup"
+  },
+  {
+   "name" : "Curl_none_close_all"
+  },
+  {
+   "name" : "Curl_none_data_pending"
+  },
+  {
+   "name" : "Curl_none_engines_list"
+  },
+  {
+   "name" : "Curl_none_false_start"
+  },
+  {
+   "name" : "Curl_none_init"
+  },
+  {
+   "name" : "Curl_none_md5sum"
+  },
+  {
+   "name" : "Curl_none_random"
+  },
+  {
+   "name" : "Curl_none_session_free"
+  },
+  {
+   "name" : "Curl_none_set_engine"
+  },
+  {
+   "name" : "Curl_none_set_engine_default"
+  },
+  {
+   "name" : "Curl_none_shutdown"
+  },
+  {
+   "name" : "Curl_now"
+  },
+  {
+   "name" : "Curl_ntlm_core_lm_resp"
+  },
+  {
+   "name" : "Curl_ntlm_core_mk_lm_hash"
+  },
+  {
+   "name" : "Curl_ntlm_core_mk_lmv2_resp"
+  },
+  {
+   "name" : "Curl_ntlm_core_mk_nt_hash"
+  },
+  {
+   "name" : "Curl_ntlm_core_mk_ntlmv2_hash"
+  },
+  {
+   "name" : "Curl_ntlm_core_mk_ntlmv2_resp"
+  },
+  {
+   "name" : "Curl_num_addresses"
+  },
+  {
+   "name" : "Curl_once_resolved"
+  },
+  {
+   "name" : "Curl_open"
+  },
+  {
+   "name" : "Curl_output_digest"
+  },
+  {
+   "name" : "Curl_output_ntlm"
+  },
+  {
+   "name" : "Curl_parse_login_details"
+  },
+  {
+   "name" : "Curl_parsenetrc"
+  },
+  {
+   "name" : "Curl_persistconninfo"
+  },
+  {
+   "name" : "Curl_pgrsDone"
+  },
+  {
+   "name" : "Curl_pgrsLimitWaitTime"
+  },
+  {
+   "name" : "Curl_pgrsResetTransferSizes"
+  },
+  {
+   "name" : "Curl_pgrsSetDownloadCounter"
+  },
+  {
+   "name" : "Curl_pgrsSetDownloadSize"
+  },
+  {
+   "name" : "Curl_pgrsSetUploadCounter"
+  },
+  {
+   "name" : "Curl_pgrsSetUploadSize"
+  },
+  {
+   "name" : "Curl_pgrsStartNow"
+  },
+  {
+   "name" : "Curl_pgrsTime"
+  },
+  {
+   "name" : "Curl_pgrsUpdate"
+  },
+  {
+   "name" : "Curl_pin_peer_pubkey"
+  },
+  {
+   "name" : "Curl_poll"
+  },
+  {
+   "name" : "Curl_posttransfer"
+  },
+  {
+   "name" : "Curl_pretransfer"
+  },
+  {
+   "name" : "Curl_printable_address"
+  },
+  {
+   "name" : "Curl_proxyCONNECT"
+  },
+  {
+   "name" : "Curl_proxy_connect"
+  },
+  {
+   "name" : "Curl_rand"
+  },
+  {
+   "name" : "Curl_rand_hex"
+  },
+  {
+   "name" : "Curl_range"
+  },
+  {
+   "name" : "Curl_ratelimit"
+  },
+  {
+   "name" : "Curl_raw_tolower"
+  },
+  {
+   "name" : "Curl_raw_toupper"
+  },
+  {
+   "name" : "Curl_read"
+  },
+  {
+   "name" : "Curl_read16_be"
+  },
+  {
+   "name" : "Curl_read16_le"
+  },
+  {
+   "name" : "Curl_read32_le"
+  },
+  {
+   "name" : "Curl_read_plain"
+  },
+  {
+   "name" : "Curl_readrewind"
+  },
+  {
+   "name" : "Curl_readwrite"
+  },
+  {
+   "name" : "Curl_recv_has_postponed_data"
+  },
+  {
+   "name" : "Curl_recv_plain"
+  },
+  {
+   "name" : "Curl_resolv"
+  },
+  {
+   "name" : "Curl_resolv_check"
+  },
+  {
+   "name" : "Curl_resolv_getsock"
+  },
+  {
+   "name" : "Curl_resolv_timeout"
+  },
+  {
+   "name" : "Curl_resolv_unlock"
+  },
+  {
+   "name" : "Curl_resolver_cancel"
+  },
+  {
+   "name" : "Curl_resolver_cleanup"
+  },
+  {
+   "name" : "Curl_resolver_duphandle"
+  },
+  {
+   "name" : "Curl_resolver_getaddrinfo"
+  },
+  {
+   "name" : "Curl_resolver_getsock"
+  },
+  {
+   "name" : "Curl_resolver_global_cleanup"
+  },
+  {
+   "name" : "Curl_resolver_global_init"
+  },
+  {
+   "name" : "Curl_resolver_init"
+  },
+  {
+   "name" : "Curl_resolver_is_resolved"
+  },
+  {
+   "name" : "Curl_resolver_kill"
+  },
+  {
+   "name" : "Curl_resolver_wait_resolv"
+  },
+  {
+   "name" : "Curl_retry_request"
+  },
+  {
+   "name" : "Curl_safe_strcasecompare"
+  },
+  {
+   "name" : "Curl_saferealloc"
+  },
+  {
+   "name" : "Curl_send_plain"
+  },
+  {
+   "name" : "Curl_sendf"
+  },
+  {
+   "name" : "Curl_set_dns_interface"
+  },
+  {
+   "name" : "Curl_set_dns_local_ip4"
+  },
+  {
+   "name" : "Curl_set_dns_local_ip6"
+  },
+  {
+   "name" : "Curl_set_dns_servers"
+  },
+  {
+   "name" : "Curl_set_in_callback"
+  },
+  {
+   "name" : "Curl_setstropt"
+  },
+  {
+   "name" : "Curl_setup_conn"
+  },
+  {
+   "name" : "Curl_setup_transfer"
+  },
+  {
+   "name" : "Curl_sha256it"
+  },
+  {
+   "name" : "Curl_share_lock"
+  },
+  {
+   "name" : "Curl_share_unlock"
+  },
+  {
+   "name" : "Curl_single_getsock"
+  },
+  {
+   "name" : "Curl_slist_append_nodup"
+  },
+  {
+   "name" : "Curl_slist_duplicate"
+  },
+  {
+   "name" : "Curl_socket"
+  },
+  {
+   "name" : "Curl_socket_check"
+  },
+  {
+   "name" : "Curl_speedcheck"
+  },
+  {
+   "name" : "Curl_speedinit"
+  },
+  {
+   "name" : "Curl_splay"
+  },
+  {
+   "name" : "Curl_splaygetbest"
+  },
+  {
+   "name" : "Curl_splayinsert"
+  },
+  {
+   "name" : "Curl_splayremovebyaddr"
+  },
+  {
+   "name" : "Curl_ssl_addsessionid"
+  },
+  {
+   "name" : "Curl_ssl_backend"
+  },
+  {
+   "name" : "Curl_ssl_cert_status_request"
+  },
+  {
+   "name" : "Curl_ssl_check_cxn"
+  },
+  {
+   "name" : "Curl_ssl_cleanup"
+  },
+  {
+   "name" : "Curl_ssl_close"
+  },
+  {
+   "name" : "Curl_ssl_close_all"
+  },
+  {
+   "name" : "Curl_ssl_config_matches"
+  },
+  {
+   "name" : "Curl_ssl_connect"
+  },
+  {
+   "name" : "Curl_ssl_connect_nonblocking"
+  },
+  {
+   "name" : "Curl_ssl_data_pending"
+  },
+  {
+   "name" : "Curl_ssl_delsessionid"
+  },
+  {
+   "name" : "Curl_ssl_engines_list"
+  },
+  {
+   "name" : "Curl_ssl_false_start"
+  },
+  {
+   "name" : "Curl_ssl_free_certinfo"
+  },
+  {
+   "name" : "Curl_ssl_getsessionid"
+  },
+  {
+   "name" : "Curl_ssl_getsock"
+  },
+  {
+   "name" : "Curl_ssl_init"
+  },
+  {
+   "name" : "Curl_ssl_init_certinfo"
+  },
+  {
+   "name" : "Curl_ssl_initsessions"
+  },
+  {
+   "name" : "Curl_ssl_kill_session"
+  },
+  {
+   "name" : "Curl_ssl_md5sum"
+  },
+  {
+   "name" : "Curl_ssl_push_certinfo"
+  },
+  {
+   "name" : "Curl_ssl_push_certinfo_len"
+  },
+  {
+   "name" : "Curl_ssl_random"
+  },
+  {
+   "name" : "Curl_ssl_sessionid_lock"
+  },
+  {
+   "name" : "Curl_ssl_sessionid_unlock"
+  },
+  {
+   "name" : "Curl_ssl_set_engine"
+  },
+  {
+   "name" : "Curl_ssl_set_engine_default"
+  },
+  {
+   "name" : "Curl_ssl_shutdown"
+  },
+  {
+   "name" : "Curl_ssl_tls13_ciphersuites"
+  },
+  {
+   "name" : "Curl_ssl_version"
+  },
+  {
+   "name" : "Curl_str2addr"
+  },
+  {
+   "name" : "Curl_str_key_compare"
+  },
+  {
+   "name" : "Curl_strcasecompare"
+  },
+  {
+   "name" : "Curl_strerror"
+  },
+  {
+   "name" : "Curl_strncasecompare"
+  },
+  {
+   "name" : "Curl_strntolower"
+  },
+  {
+   "name" : "Curl_strntoupper"
+  },
+  {
+   "name" : "Curl_thread_create"
+  },
+  {
+   "name" : "Curl_thread_destroy"
+  },
+  {
+   "name" : "Curl_thread_join"
+  },
+  {
+   "name" : "Curl_timediff"
+  },
+  {
+   "name" : "Curl_timediff_us"
+  },
+  {
+   "name" : "Curl_timeleft"
+  },
+  {
+   "name" : "Curl_uc_to_curlcode"
+  },
+  {
+   "name" : "Curl_unencode_cleanup"
+  },
+  {
+   "name" : "Curl_unencode_write"
+  },
+  {
+   "name" : "Curl_unix2addr"
+  },
+  {
+   "name" : "Curl_update_timer"
+  },
+  {
+   "name" : "Curl_updateconninfo"
+  },
+  {
+   "name" : "Curl_updatesocket"
+  },
+  {
+   "name" : "Curl_urldecode"
+  },
+  {
+   "name" : "Curl_verboseconnect"
+  },
+  {
+   "name" : "Curl_version_init"
+  },
+  {
+   "name" : "Curl_vsetopt"
+  },
+  {
+   "name" : "Curl_wait_ms"
+  },
+  {
+   "name" : "Curl_write"
+  },
+  {
+   "name" : "Curl_write64_le"
+  },
+  {
+   "name" : "Curl_write_plain"
+  },
+  {
+   "name" : "curl_easy_cleanup"
+  },
+  {
+   "name" : "curl_easy_duphandle"
+  },
+  {
+   "name" : "curl_easy_escape"
+  },
+  {
+   "name" : "curl_easy_getinfo"
+  },
+  {
+   "name" : "curl_easy_init"
+  },
+  {
+   "name" : "curl_easy_pause"
+  },
+  {
+   "name" : "curl_easy_perform"
+  },
+  {
+   "name" : "curl_easy_recv"
+  },
+  {
+   "name" : "curl_easy_reset"
+  },
+  {
+   "name" : "curl_easy_send"
+  },
+  {
+   "name" : "curl_easy_setopt"
+  },
+  {
+   "name" : "curl_easy_strerror"
+  },
+  {
+   "name" : "curl_easy_unescape"
+  },
+  {
+   "name" : "curl_easy_upkeep"
+  },
+  {
+   "name" : "curl_escape"
+  },
+  {
+   "name" : "curl_formadd"
+  },
+  {
+   "name" : "curl_formfree"
+  },
+  {
+   "name" : "curl_formget"
+  },
+  {
+   "name" : "curl_free"
+  },
+  {
+   "name" : "curl_getdate"
+  },
+  {
+   "name" : "curl_getenv"
+  },
+  {
+   "name" : "curl_global_cleanup"
+  },
+  {
+   "name" : "curl_global_init"
+  },
+  {
+   "name" : "curl_global_init_mem"
+  },
+  {
+   "name" : "curl_global_sslset"
+  },
+  {
+   "name" : "curl_maprintf"
+  },
+  {
+   "name" : "curl_mfprintf"
+  },
+  {
+   "name" : "curl_mime_addpart"
+  },
+  {
+   "name" : "curl_mime_data"
+  },
+  {
+   "name" : "curl_mime_data_cb"
+  },
+  {
+   "name" : "curl_mime_encoder"
+  },
+  {
+   "name" : "curl_mime_filedata"
+  },
+  {
+   "name" : "curl_mime_filename"
+  },
+  {
+   "name" : "curl_mime_free"
+  },
+  {
+   "name" : "curl_mime_headers"
+  },
+  {
+   "name" : "curl_mime_init"
+  },
+  {
+   "name" : "curl_mime_name"
+  },
+  {
+   "name" : "curl_mime_subparts"
+  },
+  {
+   "name" : "curl_mime_type"
+  },
+  {
+   "name" : "curl_mprintf"
+  },
+  {
+   "name" : "curl_msnprintf"
+  },
+  {
+   "name" : "curl_msprintf"
+  },
+  {
+   "name" : "curl_multi_add_handle"
+  },
+  {
+   "name" : "curl_multi_assign"
+  },
+  {
+   "name" : "curl_multi_cleanup"
+  },
+  {
+   "name" : "curl_multi_fdset"
+  },
+  {
+   "name" : "curl_multi_info_read"
+  },
+  {
+   "name" : "curl_multi_init"
+  },
+  {
+   "name" : "curl_multi_perform"
+  },
+  {
+   "name" : "curl_multi_poll"
+  },
+  {
+   "name" : "curl_multi_remove_handle"
+  },
+  {
+   "name" : "curl_multi_setopt"
+  },
+  {
+   "name" : "curl_multi_socket"
+  },
+  {
+   "name" : "curl_multi_socket_action"
+  },
+  {
+   "name" : "curl_multi_socket_all"
+  },
+  {
+   "name" : "curl_multi_strerror"
+  },
+  {
+   "name" : "curl_multi_timeout"
+  },
+  {
+   "name" : "curl_multi_wait"
+  },
+  {
+   "name" : "curl_mvaprintf"
+  },
+  {
+   "name" : "curl_mvfprintf"
+  },
+  {
+   "name" : "curl_mvprintf"
+  },
+  {
+   "name" : "curl_mvsnprintf"
+  },
+  {
+   "name" : "curl_mvsprintf"
+  },
+  {
+   "name" : "curl_pushheader_byname"
+  },
+  {
+   "name" : "curl_pushheader_bynum"
+  },
+  {
+   "name" : "curl_share_cleanup"
+  },
+  {
+   "name" : "curl_share_init"
+  },
+  {
+   "name" : "curl_share_setopt"
+  },
+  {
+   "name" : "curl_share_strerror"
+  },
+  {
+   "name" : "curl_slist_append"
+  },
+  {
+   "name" : "curl_slist_free_all"
+  },
+  {
+   "name" : "curl_strequal"
+  },
+  {
+   "name" : "curl_strnequal"
+  },
+  {
+   "name" : "curl_unescape"
+  },
+  {
+   "name" : "curl_url"
+  },
+  {
+   "name" : "curl_url_cleanup"
+  },
+  {
+   "name" : "curl_url_dup"
+  },
+  {
+   "name" : "curl_url_get"
+  },
+  {
+   "name" : "curl_url_set"
+  },
+  {
+   "name" : "curl_version"
+  },
+  {
+   "name" : "curl_version_info"
+  },
+  {
+   "name" : "curlx_nonblock"
+  },
+  {
+   "name" : "curlx_sitouz"
+  },
+  {
+   "name" : "curlx_sltosi"
+  },
+  {
+   "name" : "curlx_sltoui"
+  },
+  {
+   "name" : "curlx_sltous"
+  },
+  {
+   "name" : "curlx_sotouz"
+  },
+  {
+   "name" : "curlx_strtoofft"
+  },
+  {
+   "name" : "curlx_sztosi"
+  },
+  {
+   "name" : "curlx_uitous"
+  },
+  {
+   "name" : "curlx_ultosi"
+  },
+  {
+   "name" : "curlx_ultouc"
+  },
+  {
+   "name" : "curlx_ultous"
+  },
+  {
+   "name" : "curlx_uztosi"
+  },
+  {
+   "name" : "curlx_uztoso"
+  },
+  {
+   "name" : "curlx_uztosz"
+  },
+  {
+   "name" : "curlx_uztoui"
+  },
+  {
+   "name" : "curlx_uztoul"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "Curl_DIGEST_MD5"
+  },
+  {
+   "name" : "Curl_HMAC_MD5"
+  },
+  {
+   "name" : "Curl_ack_eintr"
+  },
+  {
+   "name" : "Curl_ccalloc"
+  },
+  {
+   "name" : "Curl_cfree"
+  },
+  {
+   "name" : "Curl_cmalloc"
+  },
+  {
+   "name" : "Curl_crealloc"
+  },
+  {
+   "name" : "Curl_cstrdup"
+  },
+  {
+   "name" : "Curl_handler_file"
+  },
+  {
+   "name" : "Curl_handler_http"
+  },
+  {
+   "name" : "Curl_handler_https"
+  },
+  {
+   "name" : "Curl_month"
+  },
+  {
+   "name" : "Curl_ssl"
+  },
+  {
+   "name" : "Curl_ssl_openssl"
+  },
+  {
+   "name" : "Curl_wkday"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLSHE_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLSHE_BAD_OPTION"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLSHE_IN_USE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLSHE_INVALID"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLSHE_NOMEM"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLSHE_NOT_BUILT_IN"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLSHE_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI10CURLSHcode",
+   "name" : "CURLSHcode",
+   "referenced_type" : "_ZTI10CURLSHcode",
+   "self_type" : "_ZTI10CURLSHcode",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 10001,
+     "name" : "CURLOPT_WRITEDATA"
+    },
+    {
+     "enum_field_value" : 10002,
+     "name" : "CURLOPT_URL"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLOPT_PORT"
+    },
+    {
+     "enum_field_value" : 10004,
+     "name" : "CURLOPT_PROXY"
+    },
+    {
+     "enum_field_value" : 10005,
+     "name" : "CURLOPT_USERPWD"
+    },
+    {
+     "enum_field_value" : 10006,
+     "name" : "CURLOPT_PROXYUSERPWD"
+    },
+    {
+     "enum_field_value" : 10007,
+     "name" : "CURLOPT_RANGE"
+    },
+    {
+     "enum_field_value" : 10009,
+     "name" : "CURLOPT_READDATA"
+    },
+    {
+     "enum_field_value" : 10010,
+     "name" : "CURLOPT_ERRORBUFFER"
+    },
+    {
+     "enum_field_value" : 20011,
+     "name" : "CURLOPT_WRITEFUNCTION"
+    },
+    {
+     "enum_field_value" : 20012,
+     "name" : "CURLOPT_READFUNCTION"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "CURLOPT_TIMEOUT"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "CURLOPT_INFILESIZE"
+    },
+    {
+     "enum_field_value" : 10015,
+     "name" : "CURLOPT_POSTFIELDS"
+    },
+    {
+     "enum_field_value" : 10016,
+     "name" : "CURLOPT_REFERER"
+    },
+    {
+     "enum_field_value" : 10017,
+     "name" : "CURLOPT_FTPPORT"
+    },
+    {
+     "enum_field_value" : 10018,
+     "name" : "CURLOPT_USERAGENT"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "CURLOPT_LOW_SPEED_LIMIT"
+    },
+    {
+     "enum_field_value" : 20,
+     "name" : "CURLOPT_LOW_SPEED_TIME"
+    },
+    {
+     "enum_field_value" : 21,
+     "name" : "CURLOPT_RESUME_FROM"
+    },
+    {
+     "enum_field_value" : 10022,
+     "name" : "CURLOPT_COOKIE"
+    },
+    {
+     "enum_field_value" : 10023,
+     "name" : "CURLOPT_HTTPHEADER"
+    },
+    {
+     "enum_field_value" : 10024,
+     "name" : "CURLOPT_HTTPPOST"
+    },
+    {
+     "enum_field_value" : 10025,
+     "name" : "CURLOPT_SSLCERT"
+    },
+    {
+     "enum_field_value" : 10026,
+     "name" : "CURLOPT_KEYPASSWD"
+    },
+    {
+     "enum_field_value" : 27,
+     "name" : "CURLOPT_CRLF"
+    },
+    {
+     "enum_field_value" : 10028,
+     "name" : "CURLOPT_QUOTE"
+    },
+    {
+     "enum_field_value" : 10029,
+     "name" : "CURLOPT_HEADERDATA"
+    },
+    {
+     "enum_field_value" : 10031,
+     "name" : "CURLOPT_COOKIEFILE"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "CURLOPT_SSLVERSION"
+    },
+    {
+     "enum_field_value" : 33,
+     "name" : "CURLOPT_TIMECONDITION"
+    },
+    {
+     "enum_field_value" : 34,
+     "name" : "CURLOPT_TIMEVALUE"
+    },
+    {
+     "enum_field_value" : 10036,
+     "name" : "CURLOPT_CUSTOMREQUEST"
+    },
+    {
+     "enum_field_value" : 10037,
+     "name" : "CURLOPT_STDERR"
+    },
+    {
+     "enum_field_value" : 10039,
+     "name" : "CURLOPT_POSTQUOTE"
+    },
+    {
+     "enum_field_value" : 10040,
+     "name" : "CURLOPT_OBSOLETE40"
+    },
+    {
+     "enum_field_value" : 41,
+     "name" : "CURLOPT_VERBOSE"
+    },
+    {
+     "enum_field_value" : 42,
+     "name" : "CURLOPT_HEADER"
+    },
+    {
+     "enum_field_value" : 43,
+     "name" : "CURLOPT_NOPROGRESS"
+    },
+    {
+     "enum_field_value" : 44,
+     "name" : "CURLOPT_NOBODY"
+    },
+    {
+     "enum_field_value" : 45,
+     "name" : "CURLOPT_FAILONERROR"
+    },
+    {
+     "enum_field_value" : 46,
+     "name" : "CURLOPT_UPLOAD"
+    },
+    {
+     "enum_field_value" : 47,
+     "name" : "CURLOPT_POST"
+    },
+    {
+     "enum_field_value" : 48,
+     "name" : "CURLOPT_DIRLISTONLY"
+    },
+    {
+     "enum_field_value" : 50,
+     "name" : "CURLOPT_APPEND"
+    },
+    {
+     "enum_field_value" : 51,
+     "name" : "CURLOPT_NETRC"
+    },
+    {
+     "enum_field_value" : 52,
+     "name" : "CURLOPT_FOLLOWLOCATION"
+    },
+    {
+     "enum_field_value" : 53,
+     "name" : "CURLOPT_TRANSFERTEXT"
+    },
+    {
+     "enum_field_value" : 54,
+     "name" : "CURLOPT_PUT"
+    },
+    {
+     "enum_field_value" : 20056,
+     "name" : "CURLOPT_PROGRESSFUNCTION"
+    },
+    {
+     "enum_field_value" : 10057,
+     "name" : "CURLOPT_PROGRESSDATA"
+    },
+    {
+     "enum_field_value" : 58,
+     "name" : "CURLOPT_AUTOREFERER"
+    },
+    {
+     "enum_field_value" : 59,
+     "name" : "CURLOPT_PROXYPORT"
+    },
+    {
+     "enum_field_value" : 60,
+     "name" : "CURLOPT_POSTFIELDSIZE"
+    },
+    {
+     "enum_field_value" : 61,
+     "name" : "CURLOPT_HTTPPROXYTUNNEL"
+    },
+    {
+     "enum_field_value" : 10062,
+     "name" : "CURLOPT_INTERFACE"
+    },
+    {
+     "enum_field_value" : 10063,
+     "name" : "CURLOPT_KRBLEVEL"
+    },
+    {
+     "enum_field_value" : 64,
+     "name" : "CURLOPT_SSL_VERIFYPEER"
+    },
+    {
+     "enum_field_value" : 10065,
+     "name" : "CURLOPT_CAINFO"
+    },
+    {
+     "enum_field_value" : 68,
+     "name" : "CURLOPT_MAXREDIRS"
+    },
+    {
+     "enum_field_value" : 69,
+     "name" : "CURLOPT_FILETIME"
+    },
+    {
+     "enum_field_value" : 10070,
+     "name" : "CURLOPT_TELNETOPTIONS"
+    },
+    {
+     "enum_field_value" : 71,
+     "name" : "CURLOPT_MAXCONNECTS"
+    },
+    {
+     "enum_field_value" : 72,
+     "name" : "CURLOPT_OBSOLETE72"
+    },
+    {
+     "enum_field_value" : 74,
+     "name" : "CURLOPT_FRESH_CONNECT"
+    },
+    {
+     "enum_field_value" : 75,
+     "name" : "CURLOPT_FORBID_REUSE"
+    },
+    {
+     "enum_field_value" : 10076,
+     "name" : "CURLOPT_RANDOM_FILE"
+    },
+    {
+     "enum_field_value" : 10077,
+     "name" : "CURLOPT_EGDSOCKET"
+    },
+    {
+     "enum_field_value" : 78,
+     "name" : "CURLOPT_CONNECTTIMEOUT"
+    },
+    {
+     "enum_field_value" : 20079,
+     "name" : "CURLOPT_HEADERFUNCTION"
+    },
+    {
+     "enum_field_value" : 80,
+     "name" : "CURLOPT_HTTPGET"
+    },
+    {
+     "enum_field_value" : 81,
+     "name" : "CURLOPT_SSL_VERIFYHOST"
+    },
+    {
+     "enum_field_value" : 10082,
+     "name" : "CURLOPT_COOKIEJAR"
+    },
+    {
+     "enum_field_value" : 10083,
+     "name" : "CURLOPT_SSL_CIPHER_LIST"
+    },
+    {
+     "enum_field_value" : 84,
+     "name" : "CURLOPT_HTTP_VERSION"
+    },
+    {
+     "enum_field_value" : 85,
+     "name" : "CURLOPT_FTP_USE_EPSV"
+    },
+    {
+     "enum_field_value" : 10086,
+     "name" : "CURLOPT_SSLCERTTYPE"
+    },
+    {
+     "enum_field_value" : 10087,
+     "name" : "CURLOPT_SSLKEY"
+    },
+    {
+     "enum_field_value" : 10088,
+     "name" : "CURLOPT_SSLKEYTYPE"
+    },
+    {
+     "enum_field_value" : 10089,
+     "name" : "CURLOPT_SSLENGINE"
+    },
+    {
+     "enum_field_value" : 90,
+     "name" : "CURLOPT_SSLENGINE_DEFAULT"
+    },
+    {
+     "enum_field_value" : 91,
+     "name" : "CURLOPT_DNS_USE_GLOBAL_CACHE"
+    },
+    {
+     "enum_field_value" : 92,
+     "name" : "CURLOPT_DNS_CACHE_TIMEOUT"
+    },
+    {
+     "enum_field_value" : 10093,
+     "name" : "CURLOPT_PREQUOTE"
+    },
+    {
+     "enum_field_value" : 20094,
+     "name" : "CURLOPT_DEBUGFUNCTION"
+    },
+    {
+     "enum_field_value" : 10095,
+     "name" : "CURLOPT_DEBUGDATA"
+    },
+    {
+     "enum_field_value" : 96,
+     "name" : "CURLOPT_COOKIESESSION"
+    },
+    {
+     "enum_field_value" : 10097,
+     "name" : "CURLOPT_CAPATH"
+    },
+    {
+     "enum_field_value" : 98,
+     "name" : "CURLOPT_BUFFERSIZE"
+    },
+    {
+     "enum_field_value" : 99,
+     "name" : "CURLOPT_NOSIGNAL"
+    },
+    {
+     "enum_field_value" : 10100,
+     "name" : "CURLOPT_SHARE"
+    },
+    {
+     "enum_field_value" : 101,
+     "name" : "CURLOPT_PROXYTYPE"
+    },
+    {
+     "enum_field_value" : 10102,
+     "name" : "CURLOPT_ACCEPT_ENCODING"
+    },
+    {
+     "enum_field_value" : 10103,
+     "name" : "CURLOPT_PRIVATE"
+    },
+    {
+     "enum_field_value" : 10104,
+     "name" : "CURLOPT_HTTP200ALIASES"
+    },
+    {
+     "enum_field_value" : 105,
+     "name" : "CURLOPT_UNRESTRICTED_AUTH"
+    },
+    {
+     "enum_field_value" : 106,
+     "name" : "CURLOPT_FTP_USE_EPRT"
+    },
+    {
+     "enum_field_value" : 107,
+     "name" : "CURLOPT_HTTPAUTH"
+    },
+    {
+     "enum_field_value" : 20108,
+     "name" : "CURLOPT_SSL_CTX_FUNCTION"
+    },
+    {
+     "enum_field_value" : 10109,
+     "name" : "CURLOPT_SSL_CTX_DATA"
+    },
+    {
+     "enum_field_value" : 110,
+     "name" : "CURLOPT_FTP_CREATE_MISSING_DIRS"
+    },
+    {
+     "enum_field_value" : 111,
+     "name" : "CURLOPT_PROXYAUTH"
+    },
+    {
+     "enum_field_value" : 112,
+     "name" : "CURLOPT_FTP_RESPONSE_TIMEOUT"
+    },
+    {
+     "enum_field_value" : 113,
+     "name" : "CURLOPT_IPRESOLVE"
+    },
+    {
+     "enum_field_value" : 114,
+     "name" : "CURLOPT_MAXFILESIZE"
+    },
+    {
+     "enum_field_value" : 30115,
+     "name" : "CURLOPT_INFILESIZE_LARGE"
+    },
+    {
+     "enum_field_value" : 30116,
+     "name" : "CURLOPT_RESUME_FROM_LARGE"
+    },
+    {
+     "enum_field_value" : 30117,
+     "name" : "CURLOPT_MAXFILESIZE_LARGE"
+    },
+    {
+     "enum_field_value" : 10118,
+     "name" : "CURLOPT_NETRC_FILE"
+    },
+    {
+     "enum_field_value" : 119,
+     "name" : "CURLOPT_USE_SSL"
+    },
+    {
+     "enum_field_value" : 30120,
+     "name" : "CURLOPT_POSTFIELDSIZE_LARGE"
+    },
+    {
+     "enum_field_value" : 121,
+     "name" : "CURLOPT_TCP_NODELAY"
+    },
+    {
+     "enum_field_value" : 129,
+     "name" : "CURLOPT_FTPSSLAUTH"
+    },
+    {
+     "enum_field_value" : 20130,
+     "name" : "CURLOPT_IOCTLFUNCTION"
+    },
+    {
+     "enum_field_value" : 10131,
+     "name" : "CURLOPT_IOCTLDATA"
+    },
+    {
+     "enum_field_value" : 10134,
+     "name" : "CURLOPT_FTP_ACCOUNT"
+    },
+    {
+     "enum_field_value" : 10135,
+     "name" : "CURLOPT_COOKIELIST"
+    },
+    {
+     "enum_field_value" : 136,
+     "name" : "CURLOPT_IGNORE_CONTENT_LENGTH"
+    },
+    {
+     "enum_field_value" : 137,
+     "name" : "CURLOPT_FTP_SKIP_PASV_IP"
+    },
+    {
+     "enum_field_value" : 138,
+     "name" : "CURLOPT_FTP_FILEMETHOD"
+    },
+    {
+     "enum_field_value" : 139,
+     "name" : "CURLOPT_LOCALPORT"
+    },
+    {
+     "enum_field_value" : 140,
+     "name" : "CURLOPT_LOCALPORTRANGE"
+    },
+    {
+     "enum_field_value" : 141,
+     "name" : "CURLOPT_CONNECT_ONLY"
+    },
+    {
+     "enum_field_value" : 20142,
+     "name" : "CURLOPT_CONV_FROM_NETWORK_FUNCTION"
+    },
+    {
+     "enum_field_value" : 20143,
+     "name" : "CURLOPT_CONV_TO_NETWORK_FUNCTION"
+    },
+    {
+     "enum_field_value" : 20144,
+     "name" : "CURLOPT_CONV_FROM_UTF8_FUNCTION"
+    },
+    {
+     "enum_field_value" : 30145,
+     "name" : "CURLOPT_MAX_SEND_SPEED_LARGE"
+    },
+    {
+     "enum_field_value" : 30146,
+     "name" : "CURLOPT_MAX_RECV_SPEED_LARGE"
+    },
+    {
+     "enum_field_value" : 10147,
+     "name" : "CURLOPT_FTP_ALTERNATIVE_TO_USER"
+    },
+    {
+     "enum_field_value" : 20148,
+     "name" : "CURLOPT_SOCKOPTFUNCTION"
+    },
+    {
+     "enum_field_value" : 10149,
+     "name" : "CURLOPT_SOCKOPTDATA"
+    },
+    {
+     "enum_field_value" : 150,
+     "name" : "CURLOPT_SSL_SESSIONID_CACHE"
+    },
+    {
+     "enum_field_value" : 151,
+     "name" : "CURLOPT_SSH_AUTH_TYPES"
+    },
+    {
+     "enum_field_value" : 10152,
+     "name" : "CURLOPT_SSH_PUBLIC_KEYFILE"
+    },
+    {
+     "enum_field_value" : 10153,
+     "name" : "CURLOPT_SSH_PRIVATE_KEYFILE"
+    },
+    {
+     "enum_field_value" : 154,
+     "name" : "CURLOPT_FTP_SSL_CCC"
+    },
+    {
+     "enum_field_value" : 155,
+     "name" : "CURLOPT_TIMEOUT_MS"
+    },
+    {
+     "enum_field_value" : 156,
+     "name" : "CURLOPT_CONNECTTIMEOUT_MS"
+    },
+    {
+     "enum_field_value" : 157,
+     "name" : "CURLOPT_HTTP_TRANSFER_DECODING"
+    },
+    {
+     "enum_field_value" : 158,
+     "name" : "CURLOPT_HTTP_CONTENT_DECODING"
+    },
+    {
+     "enum_field_value" : 159,
+     "name" : "CURLOPT_NEW_FILE_PERMS"
+    },
+    {
+     "enum_field_value" : 160,
+     "name" : "CURLOPT_NEW_DIRECTORY_PERMS"
+    },
+    {
+     "enum_field_value" : 161,
+     "name" : "CURLOPT_POSTREDIR"
+    },
+    {
+     "enum_field_value" : 10162,
+     "name" : "CURLOPT_SSH_HOST_PUBLIC_KEY_MD5"
+    },
+    {
+     "enum_field_value" : 20163,
+     "name" : "CURLOPT_OPENSOCKETFUNCTION"
+    },
+    {
+     "enum_field_value" : 10164,
+     "name" : "CURLOPT_OPENSOCKETDATA"
+    },
+    {
+     "enum_field_value" : 10165,
+     "name" : "CURLOPT_COPYPOSTFIELDS"
+    },
+    {
+     "enum_field_value" : 166,
+     "name" : "CURLOPT_PROXY_TRANSFER_MODE"
+    },
+    {
+     "enum_field_value" : 20167,
+     "name" : "CURLOPT_SEEKFUNCTION"
+    },
+    {
+     "enum_field_value" : 10168,
+     "name" : "CURLOPT_SEEKDATA"
+    },
+    {
+     "enum_field_value" : 10169,
+     "name" : "CURLOPT_CRLFILE"
+    },
+    {
+     "enum_field_value" : 10170,
+     "name" : "CURLOPT_ISSUERCERT"
+    },
+    {
+     "enum_field_value" : 171,
+     "name" : "CURLOPT_ADDRESS_SCOPE"
+    },
+    {
+     "enum_field_value" : 172,
+     "name" : "CURLOPT_CERTINFO"
+    },
+    {
+     "enum_field_value" : 10173,
+     "name" : "CURLOPT_USERNAME"
+    },
+    {
+     "enum_field_value" : 10174,
+     "name" : "CURLOPT_PASSWORD"
+    },
+    {
+     "enum_field_value" : 10175,
+     "name" : "CURLOPT_PROXYUSERNAME"
+    },
+    {
+     "enum_field_value" : 10176,
+     "name" : "CURLOPT_PROXYPASSWORD"
+    },
+    {
+     "enum_field_value" : 10177,
+     "name" : "CURLOPT_NOPROXY"
+    },
+    {
+     "enum_field_value" : 178,
+     "name" : "CURLOPT_TFTP_BLKSIZE"
+    },
+    {
+     "enum_field_value" : 10179,
+     "name" : "CURLOPT_SOCKS5_GSSAPI_SERVICE"
+    },
+    {
+     "enum_field_value" : 180,
+     "name" : "CURLOPT_SOCKS5_GSSAPI_NEC"
+    },
+    {
+     "enum_field_value" : 181,
+     "name" : "CURLOPT_PROTOCOLS"
+    },
+    {
+     "enum_field_value" : 182,
+     "name" : "CURLOPT_REDIR_PROTOCOLS"
+    },
+    {
+     "enum_field_value" : 10183,
+     "name" : "CURLOPT_SSH_KNOWNHOSTS"
+    },
+    {
+     "enum_field_value" : 20184,
+     "name" : "CURLOPT_SSH_KEYFUNCTION"
+    },
+    {
+     "enum_field_value" : 10185,
+     "name" : "CURLOPT_SSH_KEYDATA"
+    },
+    {
+     "enum_field_value" : 10186,
+     "name" : "CURLOPT_MAIL_FROM"
+    },
+    {
+     "enum_field_value" : 10187,
+     "name" : "CURLOPT_MAIL_RCPT"
+    },
+    {
+     "enum_field_value" : 188,
+     "name" : "CURLOPT_FTP_USE_PRET"
+    },
+    {
+     "enum_field_value" : 189,
+     "name" : "CURLOPT_RTSP_REQUEST"
+    },
+    {
+     "enum_field_value" : 10190,
+     "name" : "CURLOPT_RTSP_SESSION_ID"
+    },
+    {
+     "enum_field_value" : 10191,
+     "name" : "CURLOPT_RTSP_STREAM_URI"
+    },
+    {
+     "enum_field_value" : 10192,
+     "name" : "CURLOPT_RTSP_TRANSPORT"
+    },
+    {
+     "enum_field_value" : 193,
+     "name" : "CURLOPT_RTSP_CLIENT_CSEQ"
+    },
+    {
+     "enum_field_value" : 194,
+     "name" : "CURLOPT_RTSP_SERVER_CSEQ"
+    },
+    {
+     "enum_field_value" : 10195,
+     "name" : "CURLOPT_INTERLEAVEDATA"
+    },
+    {
+     "enum_field_value" : 20196,
+     "name" : "CURLOPT_INTERLEAVEFUNCTION"
+    },
+    {
+     "enum_field_value" : 197,
+     "name" : "CURLOPT_WILDCARDMATCH"
+    },
+    {
+     "enum_field_value" : 20198,
+     "name" : "CURLOPT_CHUNK_BGN_FUNCTION"
+    },
+    {
+     "enum_field_value" : 20199,
+     "name" : "CURLOPT_CHUNK_END_FUNCTION"
+    },
+    {
+     "enum_field_value" : 20200,
+     "name" : "CURLOPT_FNMATCH_FUNCTION"
+    },
+    {
+     "enum_field_value" : 10201,
+     "name" : "CURLOPT_CHUNK_DATA"
+    },
+    {
+     "enum_field_value" : 10202,
+     "name" : "CURLOPT_FNMATCH_DATA"
+    },
+    {
+     "enum_field_value" : 10203,
+     "name" : "CURLOPT_RESOLVE"
+    },
+    {
+     "enum_field_value" : 10204,
+     "name" : "CURLOPT_TLSAUTH_USERNAME"
+    },
+    {
+     "enum_field_value" : 10205,
+     "name" : "CURLOPT_TLSAUTH_PASSWORD"
+    },
+    {
+     "enum_field_value" : 10206,
+     "name" : "CURLOPT_TLSAUTH_TYPE"
+    },
+    {
+     "enum_field_value" : 207,
+     "name" : "CURLOPT_TRANSFER_ENCODING"
+    },
+    {
+     "enum_field_value" : 20208,
+     "name" : "CURLOPT_CLOSESOCKETFUNCTION"
+    },
+    {
+     "enum_field_value" : 10209,
+     "name" : "CURLOPT_CLOSESOCKETDATA"
+    },
+    {
+     "enum_field_value" : 210,
+     "name" : "CURLOPT_GSSAPI_DELEGATION"
+    },
+    {
+     "enum_field_value" : 10211,
+     "name" : "CURLOPT_DNS_SERVERS"
+    },
+    {
+     "enum_field_value" : 212,
+     "name" : "CURLOPT_ACCEPTTIMEOUT_MS"
+    },
+    {
+     "enum_field_value" : 213,
+     "name" : "CURLOPT_TCP_KEEPALIVE"
+    },
+    {
+     "enum_field_value" : 214,
+     "name" : "CURLOPT_TCP_KEEPIDLE"
+    },
+    {
+     "enum_field_value" : 215,
+     "name" : "CURLOPT_TCP_KEEPINTVL"
+    },
+    {
+     "enum_field_value" : 216,
+     "name" : "CURLOPT_SSL_OPTIONS"
+    },
+    {
+     "enum_field_value" : 10217,
+     "name" : "CURLOPT_MAIL_AUTH"
+    },
+    {
+     "enum_field_value" : 218,
+     "name" : "CURLOPT_SASL_IR"
+    },
+    {
+     "enum_field_value" : 20219,
+     "name" : "CURLOPT_XFERINFOFUNCTION"
+    },
+    {
+     "enum_field_value" : 10220,
+     "name" : "CURLOPT_XOAUTH2_BEARER"
+    },
+    {
+     "enum_field_value" : 10221,
+     "name" : "CURLOPT_DNS_INTERFACE"
+    },
+    {
+     "enum_field_value" : 10222,
+     "name" : "CURLOPT_DNS_LOCAL_IP4"
+    },
+    {
+     "enum_field_value" : 10223,
+     "name" : "CURLOPT_DNS_LOCAL_IP6"
+    },
+    {
+     "enum_field_value" : 10224,
+     "name" : "CURLOPT_LOGIN_OPTIONS"
+    },
+    {
+     "enum_field_value" : 225,
+     "name" : "CURLOPT_SSL_ENABLE_NPN"
+    },
+    {
+     "enum_field_value" : 226,
+     "name" : "CURLOPT_SSL_ENABLE_ALPN"
+    },
+    {
+     "enum_field_value" : 227,
+     "name" : "CURLOPT_EXPECT_100_TIMEOUT_MS"
+    },
+    {
+     "enum_field_value" : 10228,
+     "name" : "CURLOPT_PROXYHEADER"
+    },
+    {
+     "enum_field_value" : 229,
+     "name" : "CURLOPT_HEADEROPT"
+    },
+    {
+     "enum_field_value" : 10230,
+     "name" : "CURLOPT_PINNEDPUBLICKEY"
+    },
+    {
+     "enum_field_value" : 10231,
+     "name" : "CURLOPT_UNIX_SOCKET_PATH"
+    },
+    {
+     "enum_field_value" : 232,
+     "name" : "CURLOPT_SSL_VERIFYSTATUS"
+    },
+    {
+     "enum_field_value" : 233,
+     "name" : "CURLOPT_SSL_FALSESTART"
+    },
+    {
+     "enum_field_value" : 234,
+     "name" : "CURLOPT_PATH_AS_IS"
+    },
+    {
+     "enum_field_value" : 10235,
+     "name" : "CURLOPT_PROXY_SERVICE_NAME"
+    },
+    {
+     "enum_field_value" : 10236,
+     "name" : "CURLOPT_SERVICE_NAME"
+    },
+    {
+     "enum_field_value" : 237,
+     "name" : "CURLOPT_PIPEWAIT"
+    },
+    {
+     "enum_field_value" : 10238,
+     "name" : "CURLOPT_DEFAULT_PROTOCOL"
+    },
+    {
+     "enum_field_value" : 239,
+     "name" : "CURLOPT_STREAM_WEIGHT"
+    },
+    {
+     "enum_field_value" : 10240,
+     "name" : "CURLOPT_STREAM_DEPENDS"
+    },
+    {
+     "enum_field_value" : 10241,
+     "name" : "CURLOPT_STREAM_DEPENDS_E"
+    },
+    {
+     "enum_field_value" : 242,
+     "name" : "CURLOPT_TFTP_NO_OPTIONS"
+    },
+    {
+     "enum_field_value" : 10243,
+     "name" : "CURLOPT_CONNECT_TO"
+    },
+    {
+     "enum_field_value" : 244,
+     "name" : "CURLOPT_TCP_FASTOPEN"
+    },
+    {
+     "enum_field_value" : 245,
+     "name" : "CURLOPT_KEEP_SENDING_ON_ERROR"
+    },
+    {
+     "enum_field_value" : 10246,
+     "name" : "CURLOPT_PROXY_CAINFO"
+    },
+    {
+     "enum_field_value" : 10247,
+     "name" : "CURLOPT_PROXY_CAPATH"
+    },
+    {
+     "enum_field_value" : 248,
+     "name" : "CURLOPT_PROXY_SSL_VERIFYPEER"
+    },
+    {
+     "enum_field_value" : 249,
+     "name" : "CURLOPT_PROXY_SSL_VERIFYHOST"
+    },
+    {
+     "enum_field_value" : 250,
+     "name" : "CURLOPT_PROXY_SSLVERSION"
+    },
+    {
+     "enum_field_value" : 10251,
+     "name" : "CURLOPT_PROXY_TLSAUTH_USERNAME"
+    },
+    {
+     "enum_field_value" : 10252,
+     "name" : "CURLOPT_PROXY_TLSAUTH_PASSWORD"
+    },
+    {
+     "enum_field_value" : 10253,
+     "name" : "CURLOPT_PROXY_TLSAUTH_TYPE"
+    },
+    {
+     "enum_field_value" : 10254,
+     "name" : "CURLOPT_PROXY_SSLCERT"
+    },
+    {
+     "enum_field_value" : 10255,
+     "name" : "CURLOPT_PROXY_SSLCERTTYPE"
+    },
+    {
+     "enum_field_value" : 10256,
+     "name" : "CURLOPT_PROXY_SSLKEY"
+    },
+    {
+     "enum_field_value" : 10257,
+     "name" : "CURLOPT_PROXY_SSLKEYTYPE"
+    },
+    {
+     "enum_field_value" : 10258,
+     "name" : "CURLOPT_PROXY_KEYPASSWD"
+    },
+    {
+     "enum_field_value" : 10259,
+     "name" : "CURLOPT_PROXY_SSL_CIPHER_LIST"
+    },
+    {
+     "enum_field_value" : 10260,
+     "name" : "CURLOPT_PROXY_CRLFILE"
+    },
+    {
+     "enum_field_value" : 261,
+     "name" : "CURLOPT_PROXY_SSL_OPTIONS"
+    },
+    {
+     "enum_field_value" : 10262,
+     "name" : "CURLOPT_PRE_PROXY"
+    },
+    {
+     "enum_field_value" : 10263,
+     "name" : "CURLOPT_PROXY_PINNEDPUBLICKEY"
+    },
+    {
+     "enum_field_value" : 10264,
+     "name" : "CURLOPT_ABSTRACT_UNIX_SOCKET"
+    },
+    {
+     "enum_field_value" : 265,
+     "name" : "CURLOPT_SUPPRESS_CONNECT_HEADERS"
+    },
+    {
+     "enum_field_value" : 10266,
+     "name" : "CURLOPT_REQUEST_TARGET"
+    },
+    {
+     "enum_field_value" : 267,
+     "name" : "CURLOPT_SOCKS5_AUTH"
+    },
+    {
+     "enum_field_value" : 268,
+     "name" : "CURLOPT_SSH_COMPRESSION"
+    },
+    {
+     "enum_field_value" : 10269,
+     "name" : "CURLOPT_MIMEPOST"
+    },
+    {
+     "enum_field_value" : 30270,
+     "name" : "CURLOPT_TIMEVALUE_LARGE"
+    },
+    {
+     "enum_field_value" : 271,
+     "name" : "CURLOPT_HAPPY_EYEBALLS_TIMEOUT_MS"
+    },
+    {
+     "enum_field_value" : 20272,
+     "name" : "CURLOPT_RESOLVER_START_FUNCTION"
+    },
+    {
+     "enum_field_value" : 10273,
+     "name" : "CURLOPT_RESOLVER_START_DATA"
+    },
+    {
+     "enum_field_value" : 274,
+     "name" : "CURLOPT_HAPROXYPROTOCOL"
+    },
+    {
+     "enum_field_value" : 275,
+     "name" : "CURLOPT_DNS_SHUFFLE_ADDRESSES"
+    },
+    {
+     "enum_field_value" : 10276,
+     "name" : "CURLOPT_TLS13_CIPHERS"
+    },
+    {
+     "enum_field_value" : 10277,
+     "name" : "CURLOPT_PROXY_TLS13_CIPHERS"
+    },
+    {
+     "enum_field_value" : 278,
+     "name" : "CURLOPT_DISALLOW_USERNAME_IN_URL"
+    },
+    {
+     "enum_field_value" : 10279,
+     "name" : "CURLOPT_DOH_URL"
+    },
+    {
+     "enum_field_value" : 280,
+     "name" : "CURLOPT_UPLOAD_BUFFERSIZE"
+    },
+    {
+     "enum_field_value" : 281,
+     "name" : "CURLOPT_UPKEEP_INTERVAL_MS"
+    },
+    {
+     "enum_field_value" : 10282,
+     "name" : "CURLOPT_CURLU"
+    },
+    {
+     "enum_field_value" : 20283,
+     "name" : "CURLOPT_TRAILERFUNCTION"
+    },
+    {
+     "enum_field_value" : 10284,
+     "name" : "CURLOPT_TRAILERDATA"
+    },
+    {
+     "enum_field_value" : 285,
+     "name" : "CURLOPT_HTTP09_ALLOWED"
+    },
+    {
+     "enum_field_value" : 286,
+     "name" : "CURLOPT_ALTSVC_CTRL"
+    },
+    {
+     "enum_field_value" : 10287,
+     "name" : "CURLOPT_ALTSVC"
+    },
+    {
+     "enum_field_value" : 288,
+     "name" : "CURLOPT_MAXAGE_CONN"
+    },
+    {
+     "enum_field_value" : 10289,
+     "name" : "CURLOPT_SASL_AUTHZID"
+    },
+    {
+     "enum_field_value" : 10290,
+     "name" : "CURLOPT_LASTENTRY"
+    }
+   ],
+   "linker_set_key" : "_ZTI10CURLoption",
+   "name" : "CURLoption",
+   "referenced_type" : "_ZTI10CURLoption",
+   "self_type" : "_ZTI10CURLoption",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLSSLSET_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLSSLSET_UNKNOWN_BACKEND"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLSSLSET_TOO_LATE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLSSLSET_NO_BACKENDS"
+    }
+   ],
+   "linker_set_key" : "_ZTI10CURLsslset",
+   "name" : "CURLsslset",
+   "referenced_type" : "_ZTI10CURLsslset",
+   "self_type" : "_ZTI10CURLsslset",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 20001,
+     "name" : "CURLMOPT_SOCKETFUNCTION"
+    },
+    {
+     "enum_field_value" : 10002,
+     "name" : "CURLMOPT_SOCKETDATA"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLMOPT_PIPELINING"
+    },
+    {
+     "enum_field_value" : 20004,
+     "name" : "CURLMOPT_TIMERFUNCTION"
+    },
+    {
+     "enum_field_value" : 10005,
+     "name" : "CURLMOPT_TIMERDATA"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLMOPT_MAXCONNECTS"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLMOPT_MAX_HOST_CONNECTIONS"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLMOPT_MAX_PIPELINE_LENGTH"
+    },
+    {
+     "enum_field_value" : 30009,
+     "name" : "CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE"
+    },
+    {
+     "enum_field_value" : 30010,
+     "name" : "CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE"
+    },
+    {
+     "enum_field_value" : 10011,
+     "name" : "CURLMOPT_PIPELINING_SITE_BL"
+    },
+    {
+     "enum_field_value" : 10012,
+     "name" : "CURLMOPT_PIPELINING_SERVER_BL"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "CURLMOPT_MAX_TOTAL_CONNECTIONS"
+    },
+    {
+     "enum_field_value" : 20014,
+     "name" : "CURLMOPT_PUSHFUNCTION"
+    },
+    {
+     "enum_field_value" : 10015,
+     "name" : "CURLMOPT_PUSHDATA"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "CURLMOPT_MAX_CONCURRENT_STREAMS"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "CURLMOPT_LASTENTRY"
+    }
+   ],
+   "linker_set_key" : "_ZTI11CURLMoption",
+   "name" : "CURLMoption",
+   "referenced_type" : "_ZTI11CURLMoption",
+   "self_type" : "_ZTI11CURLMoption",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/multi.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLVERSION_FIRST"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLVERSION_SECOND"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLVERSION_THIRD"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLVERSION_FOURTH"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLVERSION_FIFTH"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLVERSION_SIXTH"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLVERSION_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI11CURLversion",
+   "name" : "CURLversion",
+   "referenced_type" : "_ZTI11CURLversion",
+   "self_type" : "_ZTI11CURLversion",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLFTPSSL_CCC_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLFTPSSL_CCC_PASSIVE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLFTPSSL_CCC_ACTIVE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLFTPSSL_CCC_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI11curl_ftpccc",
+   "name" : "curl_ftpccc",
+   "referenced_type" : "_ZTI11curl_ftpccc",
+   "self_type" : "_ZTI11curl_ftpccc",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLKHSTAT_FINE_ADD_TO_FILE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLKHSTAT_FINE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLKHSTAT_REJECT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLKHSTAT_DEFER"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLKHSTAT_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI11curl_khstat",
+   "name" : "curl_khstat",
+   "referenced_type" : "_ZTI11curl_khstat",
+   "self_type" : "_ZTI11curl_khstat",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLKHTYPE_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLKHTYPE_RSA1"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLKHTYPE_RSA"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLKHTYPE_DSS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLKHTYPE_ECDSA"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLKHTYPE_ED25519"
+    }
+   ],
+   "linker_set_key" : "_ZTI11curl_khtype",
+   "name" : "curl_khtype",
+   "referenced_type" : "_ZTI11curl_khtype",
+   "self_type" : "_ZTI11curl_khtype",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLUSESSL_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLUSESSL_TRY"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLUSESSL_CONTROL"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLUSESSL_ALL"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLUSESSL_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI11curl_usessl",
+   "name" : "curl_usessl",
+   "referenced_type" : "_ZTI11curl_usessl",
+   "self_type" : "_ZTI11curl_usessl",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_FORMADD_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_FORMADD_MEMORY"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_FORMADD_OPTION_TWICE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_FORMADD_NULL"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURL_FORMADD_UNKNOWN_OPTION"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURL_FORMADD_INCOMPLETE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURL_FORMADD_ILLEGAL_ARRAY"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURL_FORMADD_DISABLED"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURL_FORMADD_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI12CURLFORMcode",
+   "name" : "CURLFORMcode",
+   "referenced_type" : "_ZTI12CURLFORMcode",
+   "self_type" : "_ZTI12CURLFORMcode",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLSHOPT_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLSHOPT_SHARE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLSHOPT_UNSHARE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLSHOPT_LOCKFUNC"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLSHOPT_UNLOCKFUNC"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLSHOPT_USERDATA"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLSHOPT_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI12CURLSHoption",
+   "name" : "CURLSHoption",
+   "referenced_type" : "_ZTI12CURLSHoption",
+   "self_type" : "_ZTI12CURLSHoption",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_TLSAUTH_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_TLSAUTH_SRP"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_TLSAUTH_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI12CURL_TLSAUTH",
+   "name" : "CURL_TLSAUTH",
+   "referenced_type" : "_ZTI12CURL_TLSAUTH",
+   "self_type" : "_ZTI12CURL_TLSAUTH",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLFTPAUTH_DEFAULT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLFTPAUTH_SSL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLFTPAUTH_TLS"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLFTPAUTH_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI12curl_ftpauth",
+   "name" : "curl_ftpauth",
+   "referenced_type" : "_ZTI12curl_ftpauth",
+   "self_type" : "_ZTI12curl_ftpauth",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLKHMATCH_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLKHMATCH_MISMATCH"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLKHMATCH_MISSING"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLKHMATCH_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI12curl_khmatch",
+   "name" : "curl_khmatch",
+   "referenced_type" : "_ZTI12curl_khmatch",
+   "self_type" : "_ZTI12curl_khmatch",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLFILETYPE_FILE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLFILETYPE_DIRECTORY"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLFILETYPE_SYMLINK"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLFILETYPE_DEVICE_BLOCK"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLFILETYPE_DEVICE_CHAR"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLFILETYPE_NAMEDPIPE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLFILETYPE_SOCKET"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLFILETYPE_DOOR"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLFILETYPE_UNKNOWN"
+    }
+   ],
+   "linker_set_key" : "_ZTI12curlfiletype",
+   "name" : "curlfiletype",
+   "referenced_type" : "_ZTI12curlfiletype",
+   "self_type" : "_ZTI12curlfiletype",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLSOCKTYPE_IPCXN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLSOCKTYPE_ACCEPT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLSOCKTYPE_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI12curlsocktype",
+   "name" : "curlsocktype",
+   "referenced_type" : "_ZTI12curlsocktype",
+   "self_type" : "_ZTI12curlsocktype",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_TIMECOND_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_TIMECOND_IFMODSINCE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_TIMECOND_IFUNMODSINCE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_TIMECOND_LASTMOD"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURL_TIMECOND_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI13curl_TimeCond",
+   "name" : "curl_TimeCond",
+   "referenced_type" : "_ZTI13curl_TimeCond",
+   "self_type" : "_ZTI13curl_TimeCond",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLINFO_TEXT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLINFO_HEADER_IN"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLINFO_HEADER_OUT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLINFO_DATA_IN"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLINFO_DATA_OUT"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLINFO_SSL_DATA_IN"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLINFO_SSL_DATA_OUT"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLINFO_END"
+    }
+   ],
+   "linker_set_key" : "_ZTI13curl_infotype",
+   "name" : "curl_infotype",
+   "referenced_type" : "_ZTI13curl_infotype",
+   "self_type" : "_ZTI13curl_infotype",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLFORM_NOTHING"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLFORM_COPYNAME"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLFORM_PTRNAME"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLFORM_NAMELENGTH"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLFORM_COPYCONTENTS"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLFORM_PTRCONTENTS"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLFORM_CONTENTSLENGTH"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLFORM_FILECONTENT"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLFORM_ARRAY"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURLFORM_OBSOLETE"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CURLFORM_FILE"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "CURLFORM_BUFFER"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "CURLFORM_BUFFERPTR"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "CURLFORM_BUFFERLENGTH"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "CURLFORM_CONTENTTYPE"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "CURLFORM_CONTENTHEADER"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "CURLFORM_FILENAME"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "CURLFORM_END"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "CURLFORM_OBSOLETE2"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "CURLFORM_STREAM"
+    },
+    {
+     "enum_field_value" : 20,
+     "name" : "CURLFORM_CONTENTLEN"
+    },
+    {
+     "enum_field_value" : 21,
+     "name" : "CURLFORM_LASTENTRY"
+    }
+   ],
+   "linker_set_key" : "_ZTI14CURLformoption",
+   "name" : "CURLformoption",
+   "referenced_type" : "_ZTI14CURLformoption",
+   "self_type" : "_ZTI14CURLformoption",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLFTPMETHOD_DEFAULT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLFTPMETHOD_MULTICWD"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLFTPMETHOD_NOCWD"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLFTPMETHOD_SINGLECWD"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLFTPMETHOD_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI14curl_ftpmethod",
+   "name" : "curl_ftpmethod",
+   "referenced_type" : "_ZTI14curl_ftpmethod",
+   "self_type" : "_ZTI14curl_ftpmethod",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_LOCK_DATA_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_LOCK_DATA_SHARE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_LOCK_DATA_COOKIE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_LOCK_DATA_DNS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURL_LOCK_DATA_SSL_SESSION"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURL_LOCK_DATA_CONNECT"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURL_LOCK_DATA_PSL"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURL_LOCK_DATA_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI14curl_lock_data",
+   "name" : "curl_lock_data",
+   "referenced_type" : "_ZTI14curl_lock_data",
+   "self_type" : "_ZTI14curl_lock_data",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLPROXY_HTTP"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLPROXY_HTTP_1_0"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLPROXY_HTTPS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLPROXY_SOCKS4"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLPROXY_SOCKS5"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLPROXY_SOCKS4A"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLPROXY_SOCKS5_HOSTNAME"
+    }
+   ],
+   "linker_set_key" : "_ZTI14curl_proxytype",
+   "name" : "curl_proxytype",
+   "referenced_type" : "_ZTI14curl_proxytype",
+   "self_type" : "_ZTI14curl_proxytype",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLSSLBACKEND_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLSSLBACKEND_OPENSSL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLSSLBACKEND_GNUTLS"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLSSLBACKEND_NSS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLSSLBACKEND_OBSOLETE4"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLSSLBACKEND_GSKIT"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLSSLBACKEND_POLARSSL"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLSSLBACKEND_WOLFSSL"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLSSLBACKEND_SCHANNEL"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURLSSLBACKEND_SECURETRANSPORT"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CURLSSLBACKEND_AXTLS"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "CURLSSLBACKEND_MBEDTLS"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "CURLSSLBACKEND_MESALINK"
+    }
+   ],
+   "linker_set_key" : "_ZTI15curl_sslbackend",
+   "name" : "curl_sslbackend",
+   "referenced_type" : "_ZTI15curl_sslbackend",
+   "self_type" : "_ZTI15curl_sslbackend",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLCLOSEPOLICY_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLCLOSEPOLICY_OLDEST"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLCLOSEPOLICY_LEAST_RECENTLY_USED"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLCLOSEPOLICY_LEAST_TRAFFIC"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLCLOSEPOLICY_SLOWEST"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLCLOSEPOLICY_CALLBACK"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLCLOSEPOLICY_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI16curl_closepolicy",
+   "name" : "curl_closepolicy",
+   "referenced_type" : "_ZTI16curl_closepolicy",
+   "self_type" : "_ZTI16curl_closepolicy",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_LOCK_ACCESS_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_LOCK_ACCESS_SHARED"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_LOCK_ACCESS_SINGLE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_LOCK_ACCESS_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI16curl_lock_access",
+   "name" : "curl_lock_access",
+   "referenced_type" : "_ZTI16curl_lock_access",
+   "self_type" : "_ZTI16curl_lock_access",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_NETRC_IGNORED"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_NETRC_OPTIONAL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_NETRC_REQUIRED"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_NETRC_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI17CURL_NETRC_OPTION",
+   "name" : "CURL_NETRC_OPTION",
+   "referenced_type" : "_ZTI17CURL_NETRC_OPTION",
+   "self_type" : "_ZTI17CURL_NETRC_OPTION",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLFTP_CREATE_DIR_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLFTP_CREATE_DIR"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLFTP_CREATE_DIR_RETRY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLFTP_CREATE_DIR_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI17curl_ftpcreatedir",
+   "name" : "curl_ftpcreatedir",
+   "referenced_type" : "_ZTI17curl_ftpcreatedir",
+   "self_type" : "_ZTI17curl_ftpcreatedir",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_HTTP_VERSION_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_HTTP_VERSION_1_0"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_HTTP_VERSION_1_1"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_HTTP_VERSION_2_0"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURL_HTTP_VERSION_2TLS"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE"
+    },
+    {
+     "enum_field_value" : 30,
+     "name" : "CURL_HTTP_VERSION_3"
+    },
+    {
+     "enum_field_value" : 31,
+     "name" : "CURL_HTTP_VERSION_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI22$CURL_HTTP_VERSION_1_0",
+   "name" : "(anonymous enum at external/curl/include/curl/curl.h:1973:1)",
+   "referenced_type" : "_ZTI22$CURL_HTTP_VERSION_1_0",
+   "self_type" : "_ZTI22$CURL_HTTP_VERSION_1_0",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_RTSPREQ_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_RTSPREQ_OPTIONS"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_RTSPREQ_DESCRIBE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_RTSPREQ_ANNOUNCE"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURL_RTSPREQ_SETUP"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURL_RTSPREQ_PLAY"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURL_RTSPREQ_PAUSE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURL_RTSPREQ_TEARDOWN"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURL_RTSPREQ_GET_PARAMETER"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURL_RTSPREQ_SET_PARAMETER"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CURL_RTSPREQ_RECORD"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "CURL_RTSPREQ_RECEIVE"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "CURL_RTSPREQ_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI22$CURL_RTSPREQ_ANNOUNCE",
+   "name" : "(anonymous enum at external/curl/include/curl/curl.h:1996:1)",
+   "referenced_type" : "_ZTI22$CURL_RTSPREQ_ANNOUNCE",
+   "self_type" : "_ZTI22$CURL_RTSPREQ_ANNOUNCE",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_SSLVERSION_DEFAULT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURL_SSLVERSION_TLSv1"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURL_SSLVERSION_SSLv2"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURL_SSLVERSION_SSLv3"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURL_SSLVERSION_TLSv1_0"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURL_SSLVERSION_TLSv1_1"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURL_SSLVERSION_TLSv1_2"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURL_SSLVERSION_TLSv1_3"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURL_SSLVERSION_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI24$CURL_SSLVERSION_DEFAULT",
+   "name" : "(anonymous enum at external/curl/include/curl/curl.h:2024:1)",
+   "referenced_type" : "_ZTI24$CURL_SSLVERSION_DEFAULT",
+   "self_type" : "_ZTI24$CURL_SSLVERSION_DEFAULT",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURL_SSLVERSION_MAX_NONE"
+    },
+    {
+     "enum_field_value" : 65536,
+     "name" : "CURL_SSLVERSION_MAX_DEFAULT"
+    },
+    {
+     "enum_field_value" : 262144,
+     "name" : "CURL_SSLVERSION_MAX_TLSv1_0"
+    },
+    {
+     "enum_field_value" : 327680,
+     "name" : "CURL_SSLVERSION_MAX_TLSv1_1"
+    },
+    {
+     "enum_field_value" : 393216,
+     "name" : "CURL_SSLVERSION_MAX_TLSv1_2"
+    },
+    {
+     "enum_field_value" : 458752,
+     "name" : "CURL_SSLVERSION_MAX_TLSv1_3"
+    },
+    {
+     "enum_field_value" : 524288,
+     "name" : "CURL_SSLVERSION_MAX_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI28$CURL_SSLVERSION_MAX_DEFAULT",
+   "name" : "(anonymous enum at external/curl/include/curl/curl.h:2037:1)",
+   "referenced_type" : "_ZTI28$CURL_SSLVERSION_MAX_DEFAULT",
+   "self_type" : "_ZTI28$CURL_SSLVERSION_MAX_DEFAULT",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLMSG_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLMSG_DONE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLMSG_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI7CURLMSG",
+   "name" : "CURLMSG",
+   "referenced_type" : "_ZTI7CURLMSG",
+   "self_type" : "_ZTI7CURLMSG",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/multi.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLINFO_NONE"
+    },
+    {
+     "enum_field_value" : 1048577,
+     "name" : "CURLINFO_EFFECTIVE_URL"
+    },
+    {
+     "enum_field_value" : 2097154,
+     "name" : "CURLINFO_RESPONSE_CODE"
+    },
+    {
+     "enum_field_value" : 3145731,
+     "name" : "CURLINFO_TOTAL_TIME"
+    },
+    {
+     "enum_field_value" : 3145732,
+     "name" : "CURLINFO_NAMELOOKUP_TIME"
+    },
+    {
+     "enum_field_value" : 3145733,
+     "name" : "CURLINFO_CONNECT_TIME"
+    },
+    {
+     "enum_field_value" : 3145734,
+     "name" : "CURLINFO_PRETRANSFER_TIME"
+    },
+    {
+     "enum_field_value" : 3145735,
+     "name" : "CURLINFO_SIZE_UPLOAD"
+    },
+    {
+     "enum_field_value" : 6291463,
+     "name" : "CURLINFO_SIZE_UPLOAD_T"
+    },
+    {
+     "enum_field_value" : 3145736,
+     "name" : "CURLINFO_SIZE_DOWNLOAD"
+    },
+    {
+     "enum_field_value" : 6291464,
+     "name" : "CURLINFO_SIZE_DOWNLOAD_T"
+    },
+    {
+     "enum_field_value" : 3145737,
+     "name" : "CURLINFO_SPEED_DOWNLOAD"
+    },
+    {
+     "enum_field_value" : 6291465,
+     "name" : "CURLINFO_SPEED_DOWNLOAD_T"
+    },
+    {
+     "enum_field_value" : 3145738,
+     "name" : "CURLINFO_SPEED_UPLOAD"
+    },
+    {
+     "enum_field_value" : 6291466,
+     "name" : "CURLINFO_SPEED_UPLOAD_T"
+    },
+    {
+     "enum_field_value" : 2097163,
+     "name" : "CURLINFO_HEADER_SIZE"
+    },
+    {
+     "enum_field_value" : 2097164,
+     "name" : "CURLINFO_REQUEST_SIZE"
+    },
+    {
+     "enum_field_value" : 2097165,
+     "name" : "CURLINFO_SSL_VERIFYRESULT"
+    },
+    {
+     "enum_field_value" : 2097166,
+     "name" : "CURLINFO_FILETIME"
+    },
+    {
+     "enum_field_value" : 6291470,
+     "name" : "CURLINFO_FILETIME_T"
+    },
+    {
+     "enum_field_value" : 3145743,
+     "name" : "CURLINFO_CONTENT_LENGTH_DOWNLOAD"
+    },
+    {
+     "enum_field_value" : 6291471,
+     "name" : "CURLINFO_CONTENT_LENGTH_DOWNLOAD_T"
+    },
+    {
+     "enum_field_value" : 3145744,
+     "name" : "CURLINFO_CONTENT_LENGTH_UPLOAD"
+    },
+    {
+     "enum_field_value" : 6291472,
+     "name" : "CURLINFO_CONTENT_LENGTH_UPLOAD_T"
+    },
+    {
+     "enum_field_value" : 3145745,
+     "name" : "CURLINFO_STARTTRANSFER_TIME"
+    },
+    {
+     "enum_field_value" : 1048594,
+     "name" : "CURLINFO_CONTENT_TYPE"
+    },
+    {
+     "enum_field_value" : 3145747,
+     "name" : "CURLINFO_REDIRECT_TIME"
+    },
+    {
+     "enum_field_value" : 2097172,
+     "name" : "CURLINFO_REDIRECT_COUNT"
+    },
+    {
+     "enum_field_value" : 1048597,
+     "name" : "CURLINFO_PRIVATE"
+    },
+    {
+     "enum_field_value" : 2097174,
+     "name" : "CURLINFO_HTTP_CONNECTCODE"
+    },
+    {
+     "enum_field_value" : 2097175,
+     "name" : "CURLINFO_HTTPAUTH_AVAIL"
+    },
+    {
+     "enum_field_value" : 2097176,
+     "name" : "CURLINFO_PROXYAUTH_AVAIL"
+    },
+    {
+     "enum_field_value" : 2097177,
+     "name" : "CURLINFO_OS_ERRNO"
+    },
+    {
+     "enum_field_value" : 2097178,
+     "name" : "CURLINFO_NUM_CONNECTS"
+    },
+    {
+     "enum_field_value" : 4194331,
+     "name" : "CURLINFO_SSL_ENGINES"
+    },
+    {
+     "enum_field_value" : 4194332,
+     "name" : "CURLINFO_COOKIELIST"
+    },
+    {
+     "enum_field_value" : 2097181,
+     "name" : "CURLINFO_LASTSOCKET"
+    },
+    {
+     "enum_field_value" : 1048606,
+     "name" : "CURLINFO_FTP_ENTRY_PATH"
+    },
+    {
+     "enum_field_value" : 1048607,
+     "name" : "CURLINFO_REDIRECT_URL"
+    },
+    {
+     "enum_field_value" : 1048608,
+     "name" : "CURLINFO_PRIMARY_IP"
+    },
+    {
+     "enum_field_value" : 3145761,
+     "name" : "CURLINFO_APPCONNECT_TIME"
+    },
+    {
+     "enum_field_value" : 4194338,
+     "name" : "CURLINFO_CERTINFO"
+    },
+    {
+     "enum_field_value" : 2097187,
+     "name" : "CURLINFO_CONDITION_UNMET"
+    },
+    {
+     "enum_field_value" : 1048612,
+     "name" : "CURLINFO_RTSP_SESSION_ID"
+    },
+    {
+     "enum_field_value" : 2097189,
+     "name" : "CURLINFO_RTSP_CLIENT_CSEQ"
+    },
+    {
+     "enum_field_value" : 2097190,
+     "name" : "CURLINFO_RTSP_SERVER_CSEQ"
+    },
+    {
+     "enum_field_value" : 2097191,
+     "name" : "CURLINFO_RTSP_CSEQ_RECV"
+    },
+    {
+     "enum_field_value" : 2097192,
+     "name" : "CURLINFO_PRIMARY_PORT"
+    },
+    {
+     "enum_field_value" : 1048617,
+     "name" : "CURLINFO_LOCAL_IP"
+    },
+    {
+     "enum_field_value" : 2097194,
+     "name" : "CURLINFO_LOCAL_PORT"
+    },
+    {
+     "enum_field_value" : 4194347,
+     "name" : "CURLINFO_TLS_SESSION"
+    },
+    {
+     "enum_field_value" : 5242924,
+     "name" : "CURLINFO_ACTIVESOCKET"
+    },
+    {
+     "enum_field_value" : 4194349,
+     "name" : "CURLINFO_TLS_SSL_PTR"
+    },
+    {
+     "enum_field_value" : 2097198,
+     "name" : "CURLINFO_HTTP_VERSION"
+    },
+    {
+     "enum_field_value" : 2097199,
+     "name" : "CURLINFO_PROXY_SSL_VERIFYRESULT"
+    },
+    {
+     "enum_field_value" : 2097200,
+     "name" : "CURLINFO_PROTOCOL"
+    },
+    {
+     "enum_field_value" : 1048625,
+     "name" : "CURLINFO_SCHEME"
+    },
+    {
+     "enum_field_value" : 6291506,
+     "name" : "CURLINFO_TOTAL_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291507,
+     "name" : "CURLINFO_NAMELOOKUP_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291508,
+     "name" : "CURLINFO_CONNECT_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291509,
+     "name" : "CURLINFO_PRETRANSFER_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291510,
+     "name" : "CURLINFO_STARTTRANSFER_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291511,
+     "name" : "CURLINFO_REDIRECT_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291512,
+     "name" : "CURLINFO_APPCONNECT_TIME_T"
+    },
+    {
+     "enum_field_value" : 6291513,
+     "name" : "CURLINFO_RETRY_AFTER"
+    },
+    {
+     "enum_field_value" : 57,
+     "name" : "CURLINFO_LASTONE"
+    }
+   ],
+   "linker_set_key" : "_ZTI8CURLINFO",
+   "name" : "CURLINFO",
+   "referenced_type" : "_ZTI8CURLINFO",
+   "self_type" : "_ZTI8CURLINFO",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLE_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLE_UNSUPPORTED_PROTOCOL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLE_FAILED_INIT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLE_URL_MALFORMAT"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLE_NOT_BUILT_IN"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLE_COULDNT_RESOLVE_PROXY"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLE_COULDNT_RESOLVE_HOST"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLE_COULDNT_CONNECT"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLE_WEIRD_SERVER_REPLY"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURLE_REMOTE_ACCESS_DENIED"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CURLE_FTP_ACCEPT_FAILED"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "CURLE_FTP_WEIRD_PASS_REPLY"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "CURLE_FTP_ACCEPT_TIMEOUT"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "CURLE_FTP_WEIRD_PASV_REPLY"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "CURLE_FTP_WEIRD_227_FORMAT"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "CURLE_FTP_CANT_GET_HOST"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "CURLE_HTTP2"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "CURLE_FTP_COULDNT_SET_TYPE"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "CURLE_PARTIAL_FILE"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "CURLE_FTP_COULDNT_RETR_FILE"
+    },
+    {
+     "enum_field_value" : 20,
+     "name" : "CURLE_OBSOLETE20"
+    },
+    {
+     "enum_field_value" : 21,
+     "name" : "CURLE_QUOTE_ERROR"
+    },
+    {
+     "enum_field_value" : 22,
+     "name" : "CURLE_HTTP_RETURNED_ERROR"
+    },
+    {
+     "enum_field_value" : 23,
+     "name" : "CURLE_WRITE_ERROR"
+    },
+    {
+     "enum_field_value" : 24,
+     "name" : "CURLE_OBSOLETE24"
+    },
+    {
+     "enum_field_value" : 25,
+     "name" : "CURLE_UPLOAD_FAILED"
+    },
+    {
+     "enum_field_value" : 26,
+     "name" : "CURLE_READ_ERROR"
+    },
+    {
+     "enum_field_value" : 27,
+     "name" : "CURLE_OUT_OF_MEMORY"
+    },
+    {
+     "enum_field_value" : 28,
+     "name" : "CURLE_OPERATION_TIMEDOUT"
+    },
+    {
+     "enum_field_value" : 29,
+     "name" : "CURLE_OBSOLETE29"
+    },
+    {
+     "enum_field_value" : 30,
+     "name" : "CURLE_FTP_PORT_FAILED"
+    },
+    {
+     "enum_field_value" : 31,
+     "name" : "CURLE_FTP_COULDNT_USE_REST"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "CURLE_OBSOLETE32"
+    },
+    {
+     "enum_field_value" : 33,
+     "name" : "CURLE_RANGE_ERROR"
+    },
+    {
+     "enum_field_value" : 34,
+     "name" : "CURLE_HTTP_POST_ERROR"
+    },
+    {
+     "enum_field_value" : 35,
+     "name" : "CURLE_SSL_CONNECT_ERROR"
+    },
+    {
+     "enum_field_value" : 36,
+     "name" : "CURLE_BAD_DOWNLOAD_RESUME"
+    },
+    {
+     "enum_field_value" : 37,
+     "name" : "CURLE_FILE_COULDNT_READ_FILE"
+    },
+    {
+     "enum_field_value" : 38,
+     "name" : "CURLE_LDAP_CANNOT_BIND"
+    },
+    {
+     "enum_field_value" : 39,
+     "name" : "CURLE_LDAP_SEARCH_FAILED"
+    },
+    {
+     "enum_field_value" : 40,
+     "name" : "CURLE_OBSOLETE40"
+    },
+    {
+     "enum_field_value" : 41,
+     "name" : "CURLE_FUNCTION_NOT_FOUND"
+    },
+    {
+     "enum_field_value" : 42,
+     "name" : "CURLE_ABORTED_BY_CALLBACK"
+    },
+    {
+     "enum_field_value" : 43,
+     "name" : "CURLE_BAD_FUNCTION_ARGUMENT"
+    },
+    {
+     "enum_field_value" : 44,
+     "name" : "CURLE_OBSOLETE44"
+    },
+    {
+     "enum_field_value" : 45,
+     "name" : "CURLE_INTERFACE_FAILED"
+    },
+    {
+     "enum_field_value" : 46,
+     "name" : "CURLE_OBSOLETE46"
+    },
+    {
+     "enum_field_value" : 47,
+     "name" : "CURLE_TOO_MANY_REDIRECTS"
+    },
+    {
+     "enum_field_value" : 48,
+     "name" : "CURLE_UNKNOWN_OPTION"
+    },
+    {
+     "enum_field_value" : 49,
+     "name" : "CURLE_TELNET_OPTION_SYNTAX"
+    },
+    {
+     "enum_field_value" : 50,
+     "name" : "CURLE_OBSOLETE50"
+    },
+    {
+     "enum_field_value" : 51,
+     "name" : "CURLE_OBSOLETE51"
+    },
+    {
+     "enum_field_value" : 52,
+     "name" : "CURLE_GOT_NOTHING"
+    },
+    {
+     "enum_field_value" : 53,
+     "name" : "CURLE_SSL_ENGINE_NOTFOUND"
+    },
+    {
+     "enum_field_value" : 54,
+     "name" : "CURLE_SSL_ENGINE_SETFAILED"
+    },
+    {
+     "enum_field_value" : 55,
+     "name" : "CURLE_SEND_ERROR"
+    },
+    {
+     "enum_field_value" : 56,
+     "name" : "CURLE_RECV_ERROR"
+    },
+    {
+     "enum_field_value" : 57,
+     "name" : "CURLE_OBSOLETE57"
+    },
+    {
+     "enum_field_value" : 58,
+     "name" : "CURLE_SSL_CERTPROBLEM"
+    },
+    {
+     "enum_field_value" : 59,
+     "name" : "CURLE_SSL_CIPHER"
+    },
+    {
+     "enum_field_value" : 60,
+     "name" : "CURLE_PEER_FAILED_VERIFICATION"
+    },
+    {
+     "enum_field_value" : 61,
+     "name" : "CURLE_BAD_CONTENT_ENCODING"
+    },
+    {
+     "enum_field_value" : 62,
+     "name" : "CURLE_LDAP_INVALID_URL"
+    },
+    {
+     "enum_field_value" : 63,
+     "name" : "CURLE_FILESIZE_EXCEEDED"
+    },
+    {
+     "enum_field_value" : 64,
+     "name" : "CURLE_USE_SSL_FAILED"
+    },
+    {
+     "enum_field_value" : 65,
+     "name" : "CURLE_SEND_FAIL_REWIND"
+    },
+    {
+     "enum_field_value" : 66,
+     "name" : "CURLE_SSL_ENGINE_INITFAILED"
+    },
+    {
+     "enum_field_value" : 67,
+     "name" : "CURLE_LOGIN_DENIED"
+    },
+    {
+     "enum_field_value" : 68,
+     "name" : "CURLE_TFTP_NOTFOUND"
+    },
+    {
+     "enum_field_value" : 69,
+     "name" : "CURLE_TFTP_PERM"
+    },
+    {
+     "enum_field_value" : 70,
+     "name" : "CURLE_REMOTE_DISK_FULL"
+    },
+    {
+     "enum_field_value" : 71,
+     "name" : "CURLE_TFTP_ILLEGAL"
+    },
+    {
+     "enum_field_value" : 72,
+     "name" : "CURLE_TFTP_UNKNOWNID"
+    },
+    {
+     "enum_field_value" : 73,
+     "name" : "CURLE_REMOTE_FILE_EXISTS"
+    },
+    {
+     "enum_field_value" : 74,
+     "name" : "CURLE_TFTP_NOSUCHUSER"
+    },
+    {
+     "enum_field_value" : 75,
+     "name" : "CURLE_CONV_FAILED"
+    },
+    {
+     "enum_field_value" : 76,
+     "name" : "CURLE_CONV_REQD"
+    },
+    {
+     "enum_field_value" : 77,
+     "name" : "CURLE_SSL_CACERT_BADFILE"
+    },
+    {
+     "enum_field_value" : 78,
+     "name" : "CURLE_REMOTE_FILE_NOT_FOUND"
+    },
+    {
+     "enum_field_value" : 79,
+     "name" : "CURLE_SSH"
+    },
+    {
+     "enum_field_value" : 80,
+     "name" : "CURLE_SSL_SHUTDOWN_FAILED"
+    },
+    {
+     "enum_field_value" : 81,
+     "name" : "CURLE_AGAIN"
+    },
+    {
+     "enum_field_value" : 82,
+     "name" : "CURLE_SSL_CRL_BADFILE"
+    },
+    {
+     "enum_field_value" : 83,
+     "name" : "CURLE_SSL_ISSUER_ERROR"
+    },
+    {
+     "enum_field_value" : 84,
+     "name" : "CURLE_FTP_PRET_FAILED"
+    },
+    {
+     "enum_field_value" : 85,
+     "name" : "CURLE_RTSP_CSEQ_ERROR"
+    },
+    {
+     "enum_field_value" : 86,
+     "name" : "CURLE_RTSP_SESSION_ERROR"
+    },
+    {
+     "enum_field_value" : 87,
+     "name" : "CURLE_FTP_BAD_FILE_LIST"
+    },
+    {
+     "enum_field_value" : 88,
+     "name" : "CURLE_CHUNK_FAILED"
+    },
+    {
+     "enum_field_value" : 89,
+     "name" : "CURLE_NO_CONNECTION_AVAILABLE"
+    },
+    {
+     "enum_field_value" : 90,
+     "name" : "CURLE_SSL_PINNEDPUBKEYNOTMATCH"
+    },
+    {
+     "enum_field_value" : 91,
+     "name" : "CURLE_SSL_INVALIDCERTSTATUS"
+    },
+    {
+     "enum_field_value" : 92,
+     "name" : "CURLE_HTTP2_STREAM"
+    },
+    {
+     "enum_field_value" : 93,
+     "name" : "CURLE_RECURSIVE_API_CALL"
+    },
+    {
+     "enum_field_value" : 94,
+     "name" : "CURLE_AUTH_ERROR"
+    },
+    {
+     "enum_field_value" : 95,
+     "name" : "CURL_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI8CURLcode",
+   "name" : "CURLcode",
+   "referenced_type" : "_ZTI8CURLcode",
+   "self_type" : "_ZTI8CURLcode",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "CURLM_CALL_MULTI_PERFORM"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLM_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLM_BAD_HANDLE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLM_BAD_EASY_HANDLE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLM_OUT_OF_MEMORY"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLM_INTERNAL_ERROR"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLM_BAD_SOCKET"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLM_UNKNOWN_OPTION"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLM_ADDED_ALREADY"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLM_RECURSIVE_API_CALL"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURLM_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI9CURLMcode",
+   "name" : "CURLMcode",
+   "referenced_type" : "_ZTI9CURLMcode",
+   "self_type" : "_ZTI9CURLMcode",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/multi.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLUPART_URL"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLUPART_SCHEME"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLUPART_USER"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLUPART_PASSWORD"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLUPART_OPTIONS"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLUPART_HOST"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLUPART_PORT"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLUPART_PATH"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLUPART_QUERY"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURLUPART_FRAGMENT"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CURLUPART_ZONEID"
+    }
+   ],
+   "linker_set_key" : "_ZTI9CURLUPart",
+   "name" : "CURLUPart",
+   "referenced_type" : "_ZTI9CURLUPart",
+   "self_type" : "_ZTI9CURLUPart",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/urlapi.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLUE_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLUE_BAD_HANDLE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLUE_BAD_PARTPOINTER"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLUE_MALFORMED_INPUT"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "CURLUE_BAD_PORT_NUMBER"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "CURLUE_UNSUPPORTED_SCHEME"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "CURLUE_URLDECODE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "CURLUE_OUT_OF_MEMORY"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "CURLUE_USER_NOT_ALLOWED"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "CURLUE_UNKNOWN_PART"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "CURLUE_NO_SCHEME"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "CURLUE_NO_USER"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "CURLUE_NO_PASSWORD"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "CURLUE_NO_OPTIONS"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "CURLUE_NO_HOST"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "CURLUE_NO_PORT"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "CURLUE_NO_QUERY"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "CURLUE_NO_FRAGMENT"
+    }
+   ],
+   "linker_set_key" : "_ZTI9CURLUcode",
+   "name" : "CURLUcode",
+   "referenced_type" : "_ZTI9CURLUcode",
+   "self_type" : "_ZTI9CURLUcode",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/urlapi.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLIOCMD_NOP"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLIOCMD_RESTARTREAD"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLIOCMD_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI9curliocmd",
+   "name" : "curliocmd",
+   "referenced_type" : "_ZTI9curliocmd",
+   "self_type" : "_ZTI9curliocmd",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CURLIOE_OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CURLIOE_UNKNOWNCMD"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CURLIOE_FAILRESTART"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "CURLIOE_LAST"
+    }
+   ],
+   "linker_set_key" : "_ZTI9curlioerr",
+   "name" : "curlioerr",
+   "referenced_type" : "_ZTI9curlioerr",
+   "self_type" : "_ZTI9curlioerr",
+   "size" : 4,
+   "source_file" : "/external/curl/include/curl/curl.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPcPKcE",
+   "name" : "char *(const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "referenced_type" : "_ZTIFPcPKcE",
+   "return_type" : "_ZTIPc",
+   "self_type" : "_ZTIFPcPKcE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPvS_mE",
+   "name" : "void *(void *, unsigned long)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "referenced_type" : "_ZTIFPvS_mE",
+   "return_type" : "_ZTIPv",
+   "self_type" : "_ZTIFPvS_mE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPvmE",
+   "name" : "void *(unsigned long)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "referenced_type" : "_ZTIFPvmE",
+   "return_type" : "_ZTIPv",
+   "self_type" : "_ZTIFPvmE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPvmmE",
+   "name" : "void *(unsigned long, unsigned long)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "referenced_type" : "_ZTIFPvmmE",
+   "return_type" : "_ZTIPv",
+   "self_type" : "_ZTIFPvmmE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFiPvliE",
+   "name" : "int (void *, long, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFiPvliE",
+   "return_type" : "_ZTIi",
+   "self_type" : "_ZTIFiPvliE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFmPcmmPvE",
+   "name" : "unsigned long (char *, unsigned long, unsigned long, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "referenced_type" : "_ZTIFmPcmmPvE",
+   "return_type" : "_ZTIm",
+   "self_type" : "_ZTIFmPcmmPvE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFmPvPKcmE",
+   "name" : "unsigned long (void *, const char *, unsigned long)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "referenced_type" : "_ZTIFmPvPKcmE",
+   "return_type" : "_ZTIm",
+   "self_type" : "_ZTIFmPvPKcmE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPvE",
+   "name" : "void (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPvE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPvE",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "curl_easy_cleanup",
+   "linker_set_key" : "curl_easy_cleanup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_duphandle",
+   "linker_set_key" : "curl_easy_duphandle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTIP9Curl_easy",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_escape",
+   "linker_set_key" : "curl_easy_escape",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_easy_getinfo",
+   "linker_set_key" : "curl_easy_getinfo",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTI8CURLINFO"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_init",
+   "linker_set_key" : "curl_easy_init",
+   "return_type" : "_ZTIP9Curl_easy",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_pause",
+   "linker_set_key" : "curl_easy_pause",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_easy_perform",
+   "linker_set_key" : "curl_easy_perform",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_recv",
+   "linker_set_key" : "curl_easy_recv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_reset",
+   "linker_set_key" : "curl_easy_reset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_send",
+   "linker_set_key" : "curl_easy_send",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_setopt",
+   "linker_set_key" : "curl_easy_setopt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTI10CURLoption"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_easy_strerror",
+   "linker_set_key" : "curl_easy_strerror",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI8CURLcode"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_easy_unescape",
+   "linker_set_key" : "curl_easy_unescape",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_easy_upkeep",
+   "linker_set_key" : "curl_easy_upkeep",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "function_name" : "curl_escape",
+   "linker_set_key" : "curl_escape",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_formadd",
+   "linker_set_key" : "curl_formadd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP13curl_httppost"
+    },
+    {
+     "referenced_type" : "_ZTIPP13curl_httppost"
+    }
+   ],
+   "return_type" : "_ZTI12CURLFORMcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_formfree",
+   "linker_set_key" : "curl_formfree",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13curl_httppost"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_formget",
+   "linker_set_key" : "curl_formget",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13curl_httppost"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPFmPvPKcmE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_free",
+   "linker_set_key" : "curl_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_getdate",
+   "linker_set_key" : "curl_getdate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKl"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_getenv",
+   "linker_set_key" : "curl_getenv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_global_cleanup",
+   "linker_set_key" : "curl_global_cleanup",
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_global_init",
+   "linker_set_key" : "curl_global_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_global_init_mem",
+   "linker_set_key" : "curl_global_init_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIPFPvmE"
+    },
+    {
+     "referenced_type" : "_ZTIPFvPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPFPvS_mE"
+    },
+    {
+     "referenced_type" : "_ZTIPFPcPKcE"
+    },
+    {
+     "referenced_type" : "_ZTIPFPvmmE"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_global_sslset",
+   "linker_set_key" : "curl_global_sslset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI15curl_sslbackend"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPPPK16curl_ssl_backend"
+    }
+   ],
+   "return_type" : "_ZTI10CURLsslset",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_maprintf",
+   "linker_set_key" : "curl_maprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_mfprintf",
+   "linker_set_key" : "curl_mfprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7__sFILE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_mime_addpart",
+   "linker_set_key" : "curl_mime_addpart",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP11curl_mime_s"
+    }
+   ],
+   "return_type" : "_ZTIP15curl_mimepart_s",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_data",
+   "linker_set_key" : "curl_mime_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_data_cb",
+   "linker_set_key" : "curl_mime_data_cb",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIPFmPcmmPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPFiPvliE"
+    },
+    {
+     "referenced_type" : "_ZTIPFvPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_encoder",
+   "linker_set_key" : "curl_mime_encoder",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_filedata",
+   "linker_set_key" : "curl_mime_filedata",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_filename",
+   "linker_set_key" : "curl_mime_filename",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_free",
+   "linker_set_key" : "curl_mime_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP11curl_mime_s"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_headers",
+   "linker_set_key" : "curl_mime_headers",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIP10curl_slist"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_init",
+   "linker_set_key" : "curl_mime_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTIP11curl_mime_s",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_name",
+   "linker_set_key" : "curl_mime_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_subparts",
+   "linker_set_key" : "curl_mime_subparts",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIP11curl_mime_s"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mime_type",
+   "linker_set_key" : "curl_mime_type",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15curl_mimepart_s"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTI8CURLcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_mprintf",
+   "linker_set_key" : "curl_mprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_msnprintf",
+   "linker_set_key" : "curl_msnprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_msprintf",
+   "linker_set_key" : "curl_msprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_multi_add_handle",
+   "linker_set_key" : "curl_multi_add_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_assign",
+   "linker_set_key" : "curl_multi_assign",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_cleanup",
+   "linker_set_key" : "curl_multi_cleanup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_fdset",
+   "linker_set_key" : "curl_multi_fdset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIP6fd_set"
+    },
+    {
+     "referenced_type" : "_ZTIP6fd_set"
+    },
+    {
+     "referenced_type" : "_ZTIP6fd_set"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_info_read",
+   "linker_set_key" : "curl_multi_info_read",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIP7CURLMsg",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_init",
+   "linker_set_key" : "curl_multi_init",
+   "return_type" : "_ZTIP10Curl_multi",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_perform",
+   "linker_set_key" : "curl_multi_perform",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_poll",
+   "linker_set_key" : "curl_multi_poll",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIP11curl_waitfd"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_remove_handle",
+   "linker_set_key" : "curl_multi_remove_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIP9Curl_easy"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_setopt",
+   "linker_set_key" : "curl_multi_setopt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTI11CURLMoption"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_socket",
+   "linker_set_key" : "curl_multi_socket",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_socket_action",
+   "linker_set_key" : "curl_multi_socket_action",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_socket_all",
+   "linker_set_key" : "curl_multi_socket_all",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_strerror",
+   "linker_set_key" : "curl_multi_strerror",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI9CURLMcode"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_timeout",
+   "linker_set_key" : "curl_multi_timeout",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIPl"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_multi_wait",
+   "linker_set_key" : "curl_multi_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_multi"
+    },
+    {
+     "referenced_type" : "_ZTIP11curl_waitfd"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTI9CURLMcode",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_mvaprintf",
+   "linker_set_key" : "curl_mvaprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP13__va_list_tag"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_mvfprintf",
+   "linker_set_key" : "curl_mvfprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7__sFILE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP13__va_list_tag"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_mvprintf",
+   "linker_set_key" : "curl_mvprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP13__va_list_tag"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_mvsnprintf",
+   "linker_set_key" : "curl_mvsnprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP13__va_list_tag"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_mvsprintf",
+   "linker_set_key" : "curl_mvsprintf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIP13__va_list_tag"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "function_name" : "curl_pushheader_byname",
+   "linker_set_key" : "curl_pushheader_byname",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16curl_pushheaders"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_pushheader_bynum",
+   "linker_set_key" : "curl_pushheader_bynum",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP16curl_pushheaders"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "function_name" : "curl_share_cleanup",
+   "linker_set_key" : "curl_share_cleanup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_share"
+    }
+   ],
+   "return_type" : "_ZTI10CURLSHcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_share_init",
+   "linker_set_key" : "curl_share_init",
+   "return_type" : "_ZTIP10Curl_share",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_share_setopt",
+   "linker_set_key" : "curl_share_setopt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10Curl_share"
+    },
+    {
+     "referenced_type" : "_ZTI12CURLSHoption"
+    }
+   ],
+   "return_type" : "_ZTI10CURLSHcode",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_share_strerror",
+   "linker_set_key" : "curl_share_strerror",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI10CURLSHcode"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_slist_append",
+   "linker_set_key" : "curl_slist_append",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10curl_slist"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIP10curl_slist",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_slist_free_all",
+   "linker_set_key" : "curl_slist_free_all",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10curl_slist"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_strequal",
+   "linker_set_key" : "curl_strequal",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_strnequal",
+   "linker_set_key" : "curl_strnequal",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_unescape",
+   "linker_set_key" : "curl_unescape",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_url",
+   "linker_set_key" : "curl_url",
+   "return_type" : "_ZTIP8Curl_URL",
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "function_name" : "curl_url_cleanup",
+   "linker_set_key" : "curl_url_cleanup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8Curl_URL"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "function_name" : "curl_url_dup",
+   "linker_set_key" : "curl_url_dup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8Curl_URL"
+    }
+   ],
+   "return_type" : "_ZTIP8Curl_URL",
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "function_name" : "curl_url_get",
+   "linker_set_key" : "curl_url_get",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8Curl_URL"
+    },
+    {
+     "referenced_type" : "_ZTI9CURLUPart"
+    },
+    {
+     "referenced_type" : "_ZTIPPc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTI9CURLUcode",
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "function_name" : "curl_url_set",
+   "linker_set_key" : "curl_url_set",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP8Curl_URL"
+    },
+    {
+     "referenced_type" : "_ZTI9CURLUPart"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTI9CURLUcode",
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "function_name" : "curl_version",
+   "linker_set_key" : "curl_version",
+   "return_type" : "_ZTIPc",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "function_name" : "curl_version_info",
+   "linker_set_key" : "curl_version_info",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI11CURLversion"
+    }
+   ],
+   "return_type" : "_ZTIP22curl_version_info_data",
+   "source_file" : "/external/curl/include/curl/curl.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP10Curl_multi",
+   "name" : "Curl_multi *",
+   "referenced_type" : "_ZTI10Curl_multi",
+   "self_type" : "_ZTIP10Curl_multi",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP10Curl_share",
+   "name" : "Curl_share *",
+   "referenced_type" : "_ZTI10Curl_share",
+   "self_type" : "_ZTIP10Curl_share",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP10curl_slist",
+   "name" : "curl_slist *",
+   "referenced_type" : "_ZTI10curl_slist",
+   "self_type" : "_ZTIP10curl_slist",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP11curl_mime_s",
+   "name" : "curl_mime_s *",
+   "referenced_type" : "_ZTI11curl_mime_s",
+   "self_type" : "_ZTIP11curl_mime_s",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP11curl_waitfd",
+   "name" : "curl_waitfd *",
+   "referenced_type" : "_ZTI11curl_waitfd",
+   "self_type" : "_ZTIP11curl_waitfd",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13__va_list_tag",
+   "name" : "__va_list_tag *",
+   "referenced_type" : "_ZTI13__va_list_tag",
+   "self_type" : "_ZTIP13__va_list_tag",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13curl_httppost",
+   "name" : "curl_httppost *",
+   "referenced_type" : "_ZTI13curl_httppost",
+   "self_type" : "_ZTIP13curl_httppost",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP15curl_mimepart_s",
+   "name" : "curl_mimepart_s *",
+   "referenced_type" : "_ZTI15curl_mimepart_s",
+   "self_type" : "_ZTIP15curl_mimepart_s",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP16curl_pushheaders",
+   "name" : "curl_pushheaders *",
+   "referenced_type" : "_ZTI16curl_pushheaders",
+   "self_type" : "_ZTIP16curl_pushheaders",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP22curl_version_info_data",
+   "name" : "curl_version_info_data *",
+   "referenced_type" : "_ZTI22curl_version_info_data",
+   "self_type" : "_ZTIP22curl_version_info_data",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP6fd_set",
+   "name" : "fd_set *",
+   "referenced_type" : "_ZTI6fd_set",
+   "self_type" : "_ZTIP6fd_set",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7CURLMsg",
+   "name" : "CURLMsg *",
+   "referenced_type" : "_ZTI7CURLMsg",
+   "self_type" : "_ZTIP7CURLMsg",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7__sFILE",
+   "name" : "__sFILE *",
+   "referenced_type" : "_ZTI7__sFILE",
+   "self_type" : "_ZTIP7__sFILE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/mprintf.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8Curl_URL",
+   "name" : "Curl_URL *",
+   "referenced_type" : "_ZTI8Curl_URL",
+   "self_type" : "_ZTIP8Curl_URL",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP9Curl_easy",
+   "name" : "Curl_easy *",
+   "referenced_type" : "_ZTI9Curl_easy",
+   "self_type" : "_ZTIP9Curl_easy",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPcPKcE",
+   "name" : "char *(*)(const char *)",
+   "referenced_type" : "_ZTIFPcPKcE",
+   "self_type" : "_ZTIPFPcPKcE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPvS_mE",
+   "name" : "void *(*)(void *, unsigned long)",
+   "referenced_type" : "_ZTIFPvS_mE",
+   "self_type" : "_ZTIPFPvS_mE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPvmE",
+   "name" : "void *(*)(unsigned long)",
+   "referenced_type" : "_ZTIFPvmE",
+   "self_type" : "_ZTIPFPvmE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFPvmmE",
+   "name" : "void *(*)(unsigned long, unsigned long)",
+   "referenced_type" : "_ZTIFPvmmE",
+   "self_type" : "_ZTIPFPvmmE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFiPvliE",
+   "name" : "int (*)(void *, long, int)",
+   "referenced_type" : "_ZTIFiPvliE",
+   "self_type" : "_ZTIPFiPvliE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFmPcmmPvE",
+   "name" : "unsigned long (*)(char *, unsigned long, unsigned long, void *)",
+   "referenced_type" : "_ZTIFmPcmmPvE",
+   "self_type" : "_ZTIPFmPcmmPvE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFmPvPKcmE",
+   "name" : "unsigned long (*)(void *, const char *, unsigned long)",
+   "referenced_type" : "_ZTIFmPvPKcmE",
+   "self_type" : "_ZTIPFmPvPKcmE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFvPvE",
+   "name" : "void (*)(void *)",
+   "referenced_type" : "_ZTIFvPvE",
+   "self_type" : "_ZTIPFvPvE",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK16curl_ssl_backend",
+   "name" : "const curl_ssl_backend *",
+   "referenced_type" : "_ZTIK16curl_ssl_backend",
+   "self_type" : "_ZTIPK16curl_ssl_backend",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKPKc",
+   "name" : "const char *const *",
+   "referenced_type" : "_ZTIKPKc",
+   "self_type" : "_ZTIPKPKc",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKl",
+   "name" : "const long *",
+   "referenced_type" : "_ZTIKl",
+   "self_type" : "_ZTIPKl",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP10curl_slist",
+   "name" : "curl_slist **",
+   "referenced_type" : "_ZTIP10curl_slist",
+   "self_type" : "_ZTIPP10curl_slist",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP13curl_httppost",
+   "name" : "curl_httppost **",
+   "referenced_type" : "_ZTIP13curl_httppost",
+   "self_type" : "_ZTIPP13curl_httppost",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPK16curl_ssl_backend",
+   "name" : "const curl_ssl_backend **",
+   "referenced_type" : "_ZTIPK16curl_ssl_backend",
+   "self_type" : "_ZTIPPK16curl_ssl_backend",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPPK16curl_ssl_backend",
+   "name" : "const curl_ssl_backend ***",
+   "referenced_type" : "_ZTIPPK16curl_ssl_backend",
+   "self_type" : "_ZTIPPPK16curl_ssl_backend",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPc",
+   "name" : "char **",
+   "referenced_type" : "_ZTIPc",
+   "self_type" : "_ZTIPPc",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/urlapi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPl",
+   "name" : "long *",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIPl",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPm",
+   "name" : "unsigned long *",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIPm",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/easy.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK16curl_ssl_backend",
+   "name" : "const curl_ssl_backend",
+   "referenced_type" : "_ZTI16curl_ssl_backend",
+   "self_type" : "_ZTIK16curl_ssl_backend",
+   "size" : 16,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKPKc",
+   "name" : "const char *const",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIKPKc",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKl",
+   "name" : "const long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIKl",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/external/curl/include/curl/easy.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "option",
+     "referenced_type" : "_ZTI14CURLformoption"
+    },
+    {
+     "field_name" : "value",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTI10curl_forms",
+   "name" : "curl_forms",
+   "referenced_type" : "_ZTI10curl_forms",
+   "self_type" : "_ZTI10curl_forms",
+   "size" : 16,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "key",
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "len",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "keytype",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI11curl_khtype"
+    }
+   ],
+   "linker_set_key" : "_ZTI10curl_khkey",
+   "name" : "curl_khkey",
+   "referenced_type" : "_ZTI10curl_khkey",
+   "self_type" : "_ZTI10curl_khkey",
+   "size" : 24,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "data",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "next",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP10curl_slist"
+    }
+   ],
+   "linker_set_key" : "_ZTI10curl_slist",
+   "name" : "curl_slist",
+   "referenced_type" : "_ZTI10curl_slist",
+   "self_type" : "_ZTI10curl_slist",
+   "size" : 16,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fd",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "events",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIs"
+    },
+    {
+     "field_name" : "revents",
+     "field_offset" : 48,
+     "referenced_type" : "_ZTIs"
+    }
+   ],
+   "linker_set_key" : "_ZTI11curl_waitfd",
+   "name" : "curl_waitfd",
+   "referenced_type" : "_ZTI11curl_waitfd",
+   "self_type" : "_ZTI11curl_waitfd",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "num_of_certs",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "certinfo",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPP10curl_slist"
+    }
+   ],
+   "linker_set_key" : "_ZTI13curl_certinfo",
+   "name" : "curl_certinfo",
+   "referenced_type" : "_ZTI13curl_certinfo",
+   "self_type" : "_ZTI13curl_certinfo",
+   "size" : 16,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "filename",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "filetype",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTI12curlfiletype"
+    },
+    {
+     "field_name" : "time",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "perm",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "uid",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "gid",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "hardlinks",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "strings",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIN13curl_fileinfoUt_E"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "b_data",
+     "field_offset" : 832,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "b_size",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "b_used",
+     "field_offset" : 960,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI13curl_fileinfo",
+   "name" : "curl_fileinfo",
+   "referenced_type" : "_ZTI13curl_fileinfo",
+   "self_type" : "_ZTI13curl_fileinfo",
+   "size" : 128,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "next",
+     "referenced_type" : "_ZTIP13curl_httppost"
+    },
+    {
+     "field_name" : "name",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "namelength",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "contents",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "contentslength",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "buffer",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "bufferlength",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "contenttype",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "contentheader",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIP10curl_slist"
+    },
+    {
+     "field_name" : "more",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIP13curl_httppost"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 640,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "showfilename",
+     "field_offset" : 704,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "userp",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "contentlen",
+     "field_offset" : 832,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTI13curl_httppost",
+   "name" : "curl_httppost",
+   "referenced_type" : "_ZTI13curl_httppost",
+   "self_type" : "_ZTI13curl_httppost",
+   "size" : 112,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "family",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "socktype",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "protocol",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "addrlen",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "addr",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTI8sockaddr"
+    }
+   ],
+   "linker_set_key" : "_ZTI13curl_sockaddr",
+   "name" : "curl_sockaddr",
+   "referenced_type" : "_ZTI13curl_sockaddr",
+   "self_type" : "_ZTI13curl_sockaddr",
+   "size" : 32,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "id",
+     "referenced_type" : "_ZTI15curl_sslbackend"
+    },
+    {
+     "field_name" : "name",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTI16curl_ssl_backend",
+   "name" : "curl_ssl_backend",
+   "referenced_type" : "_ZTI16curl_ssl_backend",
+   "self_type" : "_ZTI16curl_ssl_backend",
+   "size" : 16,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "backend",
+     "referenced_type" : "_ZTI15curl_sslbackend"
+    },
+    {
+     "field_name" : "internals",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "linker_set_key" : "_ZTI19curl_tlssessioninfo",
+   "name" : "curl_tlssessioninfo",
+   "referenced_type" : "_ZTI19curl_tlssessioninfo",
+   "self_type" : "_ZTI19curl_tlssessioninfo",
+   "size" : 16,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "age",
+     "referenced_type" : "_ZTI11CURLversion"
+    },
+    {
+     "field_name" : "version",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "version_num",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "host",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "features",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "ssl_version",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "ssl_version_num",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "libz_version",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "protocols",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIPKPKc"
+    },
+    {
+     "field_name" : "ares",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "ares_num",
+     "field_offset" : 640,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "libidn",
+     "field_offset" : 704,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "iconv_ver_num",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "libssh_version",
+     "field_offset" : 832,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "brotli_ver_num",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "brotli_version",
+     "field_offset" : 960,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "nghttp2_ver_num",
+     "field_offset" : 1024,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "nghttp2_version",
+     "field_offset" : 1088,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "quic_version",
+     "field_offset" : 1152,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTI22curl_version_info_data",
+   "name" : "curl_version_info_data",
+   "referenced_type" : "_ZTI22curl_version_info_data",
+   "self_type" : "_ZTI22curl_version_info_data",
+   "size" : 152,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "msg",
+     "referenced_type" : "_ZTI7CURLMSG"
+    },
+    {
+     "field_name" : "easy_handle",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP9Curl_easy"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIN7CURLMsgUt_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI7CURLMsg",
+   "name" : "CURLMsg",
+   "referenced_type" : "_ZTI7CURLMsg",
+   "self_type" : "_ZTI7CURLMsg",
+   "size" : 24,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "time",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "perm",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "user",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "group",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "target",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN13curl_fileinfoUt_E",
+   "name" : "curl_fileinfo::(anonymous struct at external/curl/include/curl/curl.h:298:3)",
+   "referenced_type" : "_ZTIN13curl_fileinfoUt_E",
+   "self_type" : "_ZTIN13curl_fileinfoUt_E",
+   "size" : 40,
+   "source_file" : "/external/curl/include/curl/curl.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "whatever",
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "result",
+     "referenced_type" : "_ZTI8CURLcode"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN7CURLMsgUt_E",
+   "name" : "CURLMsg::(anonymous union at external/curl/include/curl/multi.h:98:3)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN7CURLMsgUt_E",
+   "self_type" : "_ZTIN7CURLMsgUt_E",
+   "size" : 8,
+   "source_file" : "/external/curl/include/curl/multi.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

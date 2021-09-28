@@ -1,0 +1,6669 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN4Json10FastWriter10writeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter18omitEndingLineFeedEv"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter20dropNullPlaceholdersEv"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter23enableYAMLCompatibilityEv"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter5writeERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json10FastWriterC1Ev"
+  },
+  {
+   "name" : "_ZN4Json10FastWriterC2Ev"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1EPKc"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1Ej"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1Ev"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2EPKc"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2Ej"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2Ev"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter10writeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter11writeIndentEv"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter12normalizeEOLERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter14isMultineArrayERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter15writeArrayValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter15writeWithIndentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter18hasCommentForValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter23writeCommentBeforeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter32writeCommentAfterValueOnSameLineERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter5writeERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter6indentEv"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter8unindentEv"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter9pushValueERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriterC1Ev"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriterC2Ev"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1ERKNS_18ValueConstIteratorE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1Ev"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2ERKNS_18ValueConstIteratorE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2Ev"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratoraSERKS0_"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEb"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEd"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEi"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEj"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEx"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEy"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBase4copyERKS0_"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBase9decrementEv"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBase9incrementEv"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC1Ev"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC2Ev"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter10writeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter11writeIndentEv"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter12normalizeEOLERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter14isMultineArrayERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter15writeArrayValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter15writeWithIndentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter18hasCommentForValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter23writeCommentBeforeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter32writeCommentAfterValueOnSameLineERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter5writeERNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter6indentEv"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter8unindentEv"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter9pushValueERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriterC1ENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriterC2ENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC1Ev"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC2Ev"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratoraSERKNS_17ValueIteratorBaseE"
+  },
+  {
+   "name" : "_ZN4Json19valueToQuotedStringEPKc"
+  },
+  {
+   "name" : "_ZN4Json4Path11invalidPathERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEi"
+  },
+  {
+   "name" : "_ZN4Json4Path12addPathInArgERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_6vectorIPKNS_12PathArgumentENS5_ISD_EEEERNS1_11__wrap_iterIPKSD_EENSB_4KindE"
+  },
+  {
+   "name" : "_ZN4Json4Path8makePathERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_6vectorIPKNS_12PathArgumentENS5_ISD_EEEE"
+  },
+  {
+   "name" : "_ZN4Json4PathC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS_12PathArgumentESC_SC_SC_SC_"
+  },
+  {
+   "name" : "_ZN4Json4PathC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS_12PathArgumentESC_SC_SC_SC_"
+  },
+  {
+   "name" : "_ZN4Json5Value10setCommentEPKcNS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZN4Json5Value10setCommentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfo10setCommentEPKc"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoC1Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoC2Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoD1Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoD2Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value12removeMemberEPKc"
+  },
+  {
+   "name" : "_ZN4Json5Value12removeMemberERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5Value14setOffsetLimitEj"
+  },
+  {
+   "name" : "_ZN4Json5Value14setOffsetStartEj"
+  },
+  {
+   "name" : "_ZN4Json5Value16resolveReferenceEPKcb"
+  },
+  {
+   "name" : "_ZN4Json5Value3endEv"
+  },
+  {
+   "name" : "_ZN4Json5Value4swapERS0_"
+  },
+  {
+   "name" : "_ZN4Json5Value5beginEv"
+  },
+  {
+   "name" : "_ZN4Json5Value5clearEv"
+  },
+  {
+   "name" : "_ZN4Json5Value6appendERKS0_"
+  },
+  {
+   "name" : "_ZN4Json5Value6resizeEj"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZString4swapERS1_"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC1EPKcNS1_17DuplicationPolicyE"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC1ERKS1_"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC1Ej"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC2EPKcNS1_17DuplicationPolicyE"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC2ERKS1_"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC2Ej"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringD1Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringD2Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringaSES1_"
+  },
+  {
+   "name" : "_ZN4Json5Value9initBasicENS_9ValueTypeEb"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ENS_9ValueTypeE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1EPKc"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1EPKcS2_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ERKNS_12StaticStringE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Eb"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ed"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ei"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ej"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ex"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ey"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ENS_9ValueTypeE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2EPKc"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2EPKcS2_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ERKNS_12StaticStringE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Eb"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ed"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ei"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ej"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ex"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ey"
+  },
+  {
+   "name" : "_ZN4Json5ValueD1Ev"
+  },
+  {
+   "name" : "_ZN4Json5ValueD2Ev"
+  },
+  {
+   "name" : "_ZN4Json5ValueaSES0_"
+  },
+  {
+   "name" : "_ZN4Json5ValueixEPKc"
+  },
+  {
+   "name" : "_ZN4Json5ValueixERKNS_12StaticStringE"
+  },
+  {
+   "name" : "_ZN4Json5ValueixERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5ValueixEi"
+  },
+  {
+   "name" : "_ZN4Json5ValueixEj"
+  },
+  {
+   "name" : "_ZN4Json6Reader10addCommentEPKcS2_NS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZN4Json6Reader10readNumberEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader10readObjectERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader10readStringEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader10skipSpacesEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader11expectTokenENS0_9TokenTypeERNS0_5TokenEPKc"
+  },
+  {
+   "name" : "_ZN4Json6Reader11getNextCharEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader11readCommentEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader12currentValueEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeDoubleERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeDoubleERNS0_5TokenERNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeNumberERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeNumberERNS0_5TokenERNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeStringERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeStringERNS0_5TokenERNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json6Reader16recoverFromErrorENS0_9TokenTypeE"
+  },
+  {
+   "name" : "_ZN4Json6Reader17readCStyleCommentEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader17skipCommentTokensERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader18addErrorAndRecoverERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS0_5TokenENS0_9TokenTypeE"
+  },
+  {
+   "name" : "_ZN4Json6Reader19readCppStyleCommentEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader22decodeUnicodeCodePointERNS0_5TokenERPKcS4_Rj"
+  },
+  {
+   "name" : "_ZN4Json6Reader27decodeUnicodeEscapeSequenceERNS0_5TokenERPKcS4_Rj"
+  },
+  {
+   "name" : "_ZN4Json6Reader5matchEPKci"
+  },
+  {
+   "name" : "_ZN4Json6Reader5parseEPKcS2_RNS_5ValueEb"
+  },
+  {
+   "name" : "_ZN4Json6Reader5parseERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS_5ValueEb"
+  },
+  {
+   "name" : "_ZN4Json6Reader5parseERNSt3__113basic_istreamIcNS1_11char_traitsIcEEEERNS_5ValueEb"
+  },
+  {
+   "name" : "_ZN4Json6Reader8addErrorERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS0_5TokenEPKc"
+  },
+  {
+   "name" : "_ZN4Json6Reader9pushErrorERKNS_5ValueERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json6Reader9pushErrorERKNS_5ValueERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEES3_"
+  },
+  {
+   "name" : "_ZN4Json6Reader9readArrayERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader9readTokenERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader9readValueEv"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC1ERKNS_8FeaturesE"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC1Ev"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC2ERKNS_8FeaturesE"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC2Ev"
+  },
+  {
+   "name" : "_ZN4Json6WriterD0Ev"
+  },
+  {
+   "name" : "_ZN4Json6WriterD1Ev"
+  },
+  {
+   "name" : "_ZN4Json6WriterD2Ev"
+  },
+  {
+   "name" : "_ZN4Json8Features10strictModeEv"
+  },
+  {
+   "name" : "_ZN4Json8Features3allEv"
+  },
+  {
+   "name" : "_ZN4Json8FeaturesC1Ev"
+  },
+  {
+   "name" : "_ZN4Json8FeaturesC2Ev"
+  },
+  {
+   "name" : "_ZN4JsonlsERNSt3__113basic_ostreamIcNS0_11char_traitsIcEEEERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4JsonrsERNSt3__113basic_istreamIcNS0_11char_traitsIcEEEERNS_5ValueE"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase10memberNameEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase15computeDistanceERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase3keyEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase5derefEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase5indexEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase7isEqualERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json4Path4makeERNS_5ValueE"
+  },
+  {
+   "name" : "_ZNK4Json4Path7resolveERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZNK4Json4Path7resolveERKNS_5ValueES3_"
+  },
+  {
+   "name" : "_ZNK4Json5Value10getCommentENS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZNK4Json5Value10hasCommentENS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZNK4Json5Value10isIntegralEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value12asLargestIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value12isValidIndexEj"
+  },
+  {
+   "name" : "_ZNK4Json5Value13asLargestUIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14getMemberNamesEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14getOffsetLimitEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14getOffsetStartEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14toStyledStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value15isConvertibleToENS_9ValueTypeE"
+  },
+  {
+   "name" : "_ZNK4Json5Value3endEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value3getEPKcRKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value3getERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value3getEjRKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value4sizeEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value4typeEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5asIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5beginEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5emptyEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5isIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6asBoolEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6asUIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6isBoolEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6isNullEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6isUIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value7asFloatEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value7asInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value7compareERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value7isArrayEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value7isInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZString14isStaticStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZString5c_strEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZString5indexEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZStringeqERKS1_"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZStringltERKS1_"
+  },
+  {
+   "name" : "_ZNK4Json5Value8asDoubleEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8asStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8asUInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isDoubleEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isMemberEPKc"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isMemberERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isObjectEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isUInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value9asCStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value9isNumericEv"
+  },
+  {
+   "name" : "_ZNK4Json5ValueeqERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValuegeERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValuegtERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixEPKc"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixEi"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixEj"
+  },
+  {
+   "name" : "_ZNK4Json5ValueleERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValueltERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValueneERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValuentEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader19getStructuredErrorsEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader24getFormatedErrorMessagesEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader24getLocationLineAndColumnEPKc"
+  },
+  {
+   "name" : "_ZNK4Json6Reader24getLocationLineAndColumnEPKcRiS3_"
+  },
+  {
+   "name" : "_ZNK4Json6Reader25getFormattedErrorMessagesEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader4goodEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE3strEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__deque_baseIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE5clearEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__113__tree_removeIPNS_16__tree_node_baseIPvEEEEvT_S5_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoENS_9allocatorIS4_EEE10push_frontEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoENS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoERNS_9allocatorIS4_EEE10push_frontERKS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoERNS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueENS_9allocatorIS4_EEE10push_frontEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueENS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueERNS_9allocatorIS4_EEE10push_frontERKS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueERNS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE7seekoffExNS_8ios_base7seekdirEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE8overflowEi"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE9pbackfailEi"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE9underflowEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_j"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__125__lexicographical_compareIRNS_6__lessINS_4pairIKN4Json5Value8CZStringES4_EES7_EENS_20__map_const_iteratorINS_21__tree_const_iteratorINS_12__value_typeIS5_S4_EEPNS_11__tree_nodeISD_PvEEiEEEESJ_EEbT0_SK_T1_SL_T_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__127__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE14__erase_to_endENS_16__deque_iteratorIS3_PKS3_RS8_PKS9_iLi146EEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE19__add_back_capacityEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE19__add_back_capacityEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE6resizeEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIPN4Json5ValueENS_9allocatorIS3_EEE19__add_back_capacityEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE12__find_equalIS4_EERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS5_PNS_11__tree_nodeIS5_SF_EEiEERPNS_15__tree_end_nodeISH_EESI_RKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE14__erase_uniqueIS4_EEjRKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE30__emplace_hint_unique_key_argsIS4_JRKNS_4pairIKS4_S3_EEEEENS_15__tree_iteratorIS5_PNS_11__tree_nodeIS5_PvEEiEENS_21__tree_const_iteratorIS5_SN_iEERKT_DpOT0_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE5eraseENS_21__tree_const_iteratorIS5_PNS_11__tree_nodeIS5_PvEEiEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE7destroyEPNS_11__tree_nodeIS5_PvEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4Json12PathArgumentENS_9allocatorIS2_EEE21__push_back_slow_pathIRKS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4Json12PathArgumentENS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4Json6Reader15StructuredErrorENS_9allocatorIS3_EEE21__push_back_slow_pathIRKS3_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE21__push_back_slow_pathIRKS6_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE21__push_back_slow_pathIS6_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE7reserveEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEE21__push_back_slow_pathIS4_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__17getlineIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_13basic_istreamIT_T0_EES9_RNS_12basic_stringIS6_S7_T1_EES6_"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZN4Json5Value13maxLargestIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value13minLargestIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value14maxLargestUIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value4nullE"
+  },
+  {
+   "name" : "_ZN4Json5Value6maxIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value6minIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value7maxUIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value8maxInt64E"
+  },
+  {
+   "name" : "_ZN4Json5Value8minInt64E"
+  },
+  {
+   "name" : "_ZN4Json5Value9maxUInt64E"
+  },
+  {
+   "name" : "_ZN4Json8kNullRefE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTCNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE0_NS_13basic_ostreamIcS2_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTTNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZTVN4Json10FastWriterE"
+  },
+  {
+   "name" : "_ZTVN4Json12StyledWriterE"
+  },
+  {
+   "name" : "_ZTVN4Json6WriterE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "Json::PathArgument::kindNone"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "Json::PathArgument::kindIndex"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "Json::PathArgument::kindKey"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json12PathArgument4KindE",
+   "name" : "Json::PathArgument::Kind",
+   "referenced_type" : "_ZTIN4Json12PathArgument4KindE",
+   "self_type" : "_ZTIN4Json12PathArgument4KindE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "Json::commentBefore"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "Json::commentAfterOnSameLine"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "Json::commentAfter"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "Json::numberOfCommentPlacement"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json16CommentPlacementE",
+   "name" : "Json::CommentPlacement",
+   "referenced_type" : "_ZTIN4Json16CommentPlacementE",
+   "self_type" : "_ZTIN4Json16CommentPlacementE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "Json::Value::CZString::noDuplication"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "Json::Value::CZString::duplicate"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "Json::Value::CZString::duplicateOnCopy"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json5Value8CZString17DuplicationPolicyE",
+   "name" : "Json::Value::CZString::DuplicationPolicy",
+   "referenced_type" : "_ZTIN4Json5Value8CZString17DuplicationPolicyE",
+   "self_type" : "_ZTIN4Json5Value8CZString17DuplicationPolicyE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "Json::Reader::tokenEndOfStream"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "Json::Reader::tokenObjectBegin"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "Json::Reader::tokenObjectEnd"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "Json::Reader::tokenArrayBegin"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "Json::Reader::tokenArrayEnd"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "Json::Reader::tokenString"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "Json::Reader::tokenNumber"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "Json::Reader::tokenTrue"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "Json::Reader::tokenFalse"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "Json::Reader::tokenNull"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "Json::Reader::tokenArraySeparator"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "Json::Reader::tokenMemberSeparator"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "Json::Reader::tokenComment"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "Json::Reader::tokenError"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json6Reader9TokenTypeE",
+   "name" : "Json::Reader::TokenType",
+   "referenced_type" : "_ZTIN4Json6Reader9TokenTypeE",
+   "self_type" : "_ZTIN4Json6Reader9TokenTypeE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "Json::nullValue"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "Json::intValue"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "Json::uintValue"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "Json::realValue"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "Json::stringValue"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "Json::booleanValue"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "Json::arrayValue"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "Json::objectValue"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json9ValueTypeE",
+   "name" : "Json::ValueType",
+   "referenced_type" : "_ZTIN4Json9ValueTypeE",
+   "self_type" : "_ZTIN4Json9ValueTypeE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "access" : "private",
+   "function_name" : "Json::FastWriter::writeValue",
+   "linker_set_key" : "_ZN4Json10FastWriter10writeValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::FastWriter::omitEndingLineFeed",
+   "linker_set_key" : "_ZN4Json10FastWriter18omitEndingLineFeedEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::FastWriter::dropNullPlaceholders",
+   "linker_set_key" : "_ZN4Json10FastWriter20dropNullPlaceholdersEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::FastWriter::enableYAMLCompatibility",
+   "linker_set_key" : "_ZN4Json10FastWriter23enableYAMLCompatibilityEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::FastWriter::write",
+   "linker_set_key" : "_ZN4Json10FastWriter5writeERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::FastWriter::FastWriter",
+   "linker_set_key" : "_ZN4Json10FastWriterC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::FastWriter::FastWriter",
+   "linker_set_key" : "_ZN4Json10FastWriterC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json10FastWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC1EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC1Ej",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC2EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC2Ej",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::PathArgument::PathArgument",
+   "linker_set_key" : "_ZN4Json12PathArgumentC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12PathArgumentE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::writeValue",
+   "linker_set_key" : "_ZN4Json12StyledWriter10writeValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::writeIndent",
+   "linker_set_key" : "_ZN4Json12StyledWriter11writeIndentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::normalizeEOL",
+   "linker_set_key" : "_ZN4Json12StyledWriter12normalizeEOLERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::isMultineArray",
+   "linker_set_key" : "_ZN4Json12StyledWriter14isMultineArrayERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::writeArrayValue",
+   "linker_set_key" : "_ZN4Json12StyledWriter15writeArrayValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::writeWithIndent",
+   "linker_set_key" : "_ZN4Json12StyledWriter15writeWithIndentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::hasCommentForValue",
+   "linker_set_key" : "_ZN4Json12StyledWriter18hasCommentForValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::writeCommentBeforeValue",
+   "linker_set_key" : "_ZN4Json12StyledWriter23writeCommentBeforeValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::writeCommentAfterValueOnSameLine",
+   "linker_set_key" : "_ZN4Json12StyledWriter32writeCommentAfterValueOnSameLineERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::StyledWriter::write",
+   "linker_set_key" : "_ZN4Json12StyledWriter5writeERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::indent",
+   "linker_set_key" : "_ZN4Json12StyledWriter6indentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::unindent",
+   "linker_set_key" : "_ZN4Json12StyledWriter8unindentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledWriter::pushValue",
+   "linker_set_key" : "_ZN4Json12StyledWriter9pushValueERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::StyledWriter::StyledWriter",
+   "linker_set_key" : "_ZN4Json12StyledWriterC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::StyledWriter::StyledWriter",
+   "linker_set_key" : "_ZN4Json12StyledWriterC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json12StyledWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC1ERKNS_18ValueConstIteratorE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json18ValueConstIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC1ERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json13ValueIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC2ERKNS_18ValueConstIteratorE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json18ValueConstIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC2ERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json13ValueIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::ValueIterator",
+   "linker_set_key" : "_ZN4Json13ValueIteratorC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIterator::operator=",
+   "linker_set_key" : "_ZN4Json13ValueIteratoraSERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json13ValueIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json13ValueIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json13ValueIteratorE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::valueToString",
+   "linker_set_key" : "_ZN4Json13valueToStringEb",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::valueToString",
+   "linker_set_key" : "_ZN4Json13valueToStringEd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTId"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::valueToString",
+   "linker_set_key" : "_ZN4Json13valueToStringEi",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::valueToString",
+   "linker_set_key" : "_ZN4Json13valueToStringEj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::valueToString",
+   "linker_set_key" : "_ZN4Json13valueToStringEx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::valueToString",
+   "linker_set_key" : "_ZN4Json13valueToStringEy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "Json::ValueIteratorBase::copy",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBase4copyERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "Json::ValueIteratorBase::decrement",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBase9decrementEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "Json::ValueIteratorBase::increment",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBase9incrementEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::ValueIteratorBase",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBaseC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::ValueIteratorBase",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBaseC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::ValueIteratorBase",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBaseC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::ValueIteratorBase",
+   "linker_set_key" : "_ZN4Json17ValueIteratorBaseC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::writeValue",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter10writeValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::writeIndent",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter11writeIndentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::normalizeEOL",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter12normalizeEOLERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::isMultineArray",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter14isMultineArrayERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::writeArrayValue",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter15writeArrayValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::writeWithIndent",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter15writeWithIndentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::hasCommentForValue",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter18hasCommentForValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::writeCommentBeforeValue",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter23writeCommentBeforeValueERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::writeCommentAfterValueOnSameLine",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter32writeCommentAfterValueOnSameLineERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::StyledStreamWriter::write",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter5writeERNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::indent",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter6indentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::unindent",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter8unindentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::StyledStreamWriter::pushValue",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriter9pushValueERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::StyledStreamWriter::StyledStreamWriter",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriterC1ENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::StyledStreamWriter::StyledStreamWriter",
+   "linker_set_key" : "_ZN4Json18StyledStreamWriterC2ENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18StyledStreamWriterE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::ValueConstIterator::ValueConstIterator",
+   "linker_set_key" : "_ZN4Json18ValueConstIteratorC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18ValueConstIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueConstIterator::ValueConstIterator",
+   "linker_set_key" : "_ZN4Json18ValueConstIteratorC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18ValueConstIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::ValueConstIterator::ValueConstIterator",
+   "linker_set_key" : "_ZN4Json18ValueConstIteratorC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18ValueConstIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueConstIterator::ValueConstIterator",
+   "linker_set_key" : "_ZN4Json18ValueConstIteratorC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18ValueConstIteratorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueConstIterator::operator=",
+   "linker_set_key" : "_ZN4Json18ValueConstIteratoraSERKNS_17ValueIteratorBaseE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json18ValueConstIteratorE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json18ValueConstIteratorE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::valueToQuotedString",
+   "linker_set_key" : "_ZN4Json19valueToQuotedStringEPKc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Path::invalidPath",
+   "linker_set_key" : "_ZN4Json4Path11invalidPathERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Path::addPathInArg",
+   "linker_set_key" : "_ZN4Json4Path12addPathInArgERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_6vectorIPKNS_12PathArgumentENS5_ISD_EEEERNS1_11__wrap_iterIPKSD_EENSB_4KindE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRNSt3__111__wrap_iterIPKPKN4Json12PathArgumentEEE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json12PathArgument4KindE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Path::makePath",
+   "linker_set_key" : "_ZN4Json4Path8makePathERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_6vectorIPKNS_12PathArgumentENS5_ISD_EEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Path::Path",
+   "linker_set_key" : "_ZN4Json4PathC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS_12PathArgumentESC_SC_SC_SC_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Path::Path",
+   "linker_set_key" : "_ZN4Json4PathC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS_12PathArgumentESC_SC_SC_SC_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIRKN4Json12PathArgumentE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::setComment",
+   "linker_set_key" : "_ZN4Json5Value10setCommentEPKcNS_16CommentPlacementE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json16CommentPlacementE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::setComment",
+   "linker_set_key" : "_ZN4Json5Value10setCommentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS_16CommentPlacementE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json16CommentPlacementE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CommentInfo::setComment",
+   "linker_set_key" : "_ZN4Json5Value11CommentInfo10setCommentEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value11CommentInfoE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CommentInfo::CommentInfo",
+   "linker_set_key" : "_ZN4Json5Value11CommentInfoC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value11CommentInfoE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CommentInfo::CommentInfo",
+   "linker_set_key" : "_ZN4Json5Value11CommentInfoC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value11CommentInfoE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CommentInfo::~CommentInfo",
+   "linker_set_key" : "_ZN4Json5Value11CommentInfoD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value11CommentInfoE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CommentInfo::~CommentInfo",
+   "linker_set_key" : "_ZN4Json5Value11CommentInfoD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value11CommentInfoE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::removeMember",
+   "linker_set_key" : "_ZN4Json5Value12removeMemberEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::removeMember",
+   "linker_set_key" : "_ZN4Json5Value12removeMemberERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::setOffsetLimit",
+   "linker_set_key" : "_ZN4Json5Value14setOffsetLimitEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::setOffsetStart",
+   "linker_set_key" : "_ZN4Json5Value14setOffsetStartEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Value::resolveReference",
+   "linker_set_key" : "_ZN4Json5Value16resolveReferenceEPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::end",
+   "linker_set_key" : "_ZN4Json5Value3endEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json13ValueIteratorE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::swap",
+   "linker_set_key" : "_ZN4Json5Value4swapERS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::begin",
+   "linker_set_key" : "_ZN4Json5Value5beginEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json13ValueIteratorE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::clear",
+   "linker_set_key" : "_ZN4Json5Value5clearEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::append",
+   "linker_set_key" : "_ZN4Json5Value6appendERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::resize",
+   "linker_set_key" : "_ZN4Json5Value6resizeEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Value::CZString::swap",
+   "linker_set_key" : "_ZN4Json5Value8CZString4swapERS1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringC1EPKcNS1_17DuplicationPolicyE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json5Value8CZString17DuplicationPolicyE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringC1ERKS1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringC1Ej",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringC2EPKcNS1_17DuplicationPolicyE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json5Value8CZString17DuplicationPolicyE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringC2ERKS1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringC2Ej",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::~CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::~CZString",
+   "linker_set_key" : "_ZN4Json5Value8CZStringD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::operator=",
+   "linker_set_key" : "_ZN4Json5Value8CZStringaSES1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5Value8CZStringE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Value::initBasic",
+   "linker_set_key" : "_ZN4Json5Value9initBasicENS_9ValueTypeEb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json9ValueTypeE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1ENS_9ValueTypeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIN4Json9ValueTypeE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1EPKcS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1ERKNS_12StaticStringE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json12StaticStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1ERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1Eb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1Ed",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTId"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1Ei",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1Ej",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1Ex",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC1Ey",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2ENS_9ValueTypeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIN4Json9ValueTypeE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2EPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2EPKcS2_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2ERKNS_12StaticStringE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json12StaticStringE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2ERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2Eb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2Ed",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTId"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2Ei",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2Ej",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2Ex",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::Value",
+   "linker_set_key" : "_ZN4Json5ValueC2Ey",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::~Value",
+   "linker_set_key" : "_ZN4Json5ValueD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::~Value",
+   "linker_set_key" : "_ZN4Json5ValueD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator=",
+   "linker_set_key" : "_ZN4Json5ValueaSES0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZN4Json5ValueixEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZN4Json5ValueixERKNS_12StaticStringE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json12StaticStringE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZN4Json5ValueixERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZN4Json5ValueixEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZN4Json5ValueixEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::addComment",
+   "linker_set_key" : "_ZN4Json6Reader10addCommentEPKcS2_NS_16CommentPlacementE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json16CommentPlacementE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readNumber",
+   "linker_set_key" : "_ZN4Json6Reader10readNumberEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readObject",
+   "linker_set_key" : "_ZN4Json6Reader10readObjectERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readString",
+   "linker_set_key" : "_ZN4Json6Reader10readStringEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::skipSpaces",
+   "linker_set_key" : "_ZN4Json6Reader10skipSpacesEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::expectToken",
+   "linker_set_key" : "_ZN4Json6Reader11expectTokenENS0_9TokenTypeERNS0_5TokenEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json6Reader9TokenTypeE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::getNextChar",
+   "linker_set_key" : "_ZN4Json6Reader11getNextCharEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIc",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readComment",
+   "linker_set_key" : "_ZN4Json6Reader11readCommentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::currentValue",
+   "linker_set_key" : "_ZN4Json6Reader12currentValueEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeDouble",
+   "linker_set_key" : "_ZN4Json6Reader12decodeDoubleERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeDouble",
+   "linker_set_key" : "_ZN4Json6Reader12decodeDoubleERNS0_5TokenERNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeNumber",
+   "linker_set_key" : "_ZN4Json6Reader12decodeNumberERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeNumber",
+   "linker_set_key" : "_ZN4Json6Reader12decodeNumberERNS0_5TokenERNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeString",
+   "linker_set_key" : "_ZN4Json6Reader12decodeStringERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeString",
+   "linker_set_key" : "_ZN4Json6Reader12decodeStringERNS0_5TokenERNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIRNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::recoverFromError",
+   "linker_set_key" : "_ZN4Json6Reader16recoverFromErrorENS0_9TokenTypeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json6Reader9TokenTypeE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readCStyleComment",
+   "linker_set_key" : "_ZN4Json6Reader17readCStyleCommentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::skipCommentTokens",
+   "linker_set_key" : "_ZN4Json6Reader17skipCommentTokensERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::addErrorAndRecover",
+   "linker_set_key" : "_ZN4Json6Reader18addErrorAndRecoverERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS0_5TokenENS0_9TokenTypeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json6Reader9TokenTypeE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readCppStyleComment",
+   "linker_set_key" : "_ZN4Json6Reader19readCppStyleCommentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeUnicodeCodePoint",
+   "linker_set_key" : "_ZN4Json6Reader22decodeUnicodeCodePointERNS0_5TokenERPKcS4_Rj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIRPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIRj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::decodeUnicodeEscapeSequence",
+   "linker_set_key" : "_ZN4Json6Reader27decodeUnicodeEscapeSequenceERNS0_5TokenERPKcS4_Rj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "referenced_type" : "_ZTIRPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIRj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::match",
+   "linker_set_key" : "_ZN4Json6Reader5matchEPKci",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::parse",
+   "linker_set_key" : "_ZN4Json6Reader5parseEPKcS2_RNS_5ValueEb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::parse",
+   "linker_set_key" : "_ZN4Json6Reader5parseERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS_5ValueEb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::parse",
+   "linker_set_key" : "_ZN4Json6Reader5parseERNSt3__113basic_istreamIcNS1_11char_traitsIcEEEERNS_5ValueEb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRNSt3__113basic_istreamIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::addError",
+   "linker_set_key" : "_ZN4Json6Reader8addErrorERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS0_5TokenEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::pushError",
+   "linker_set_key" : "_ZN4Json6Reader9pushErrorERKNS_5ValueERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::pushError",
+   "linker_set_key" : "_ZN4Json6Reader9pushErrorERKNS_5ValueERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEES3_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readArray",
+   "linker_set_key" : "_ZN4Json6Reader9readArrayERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readToken",
+   "linker_set_key" : "_ZN4Json6Reader9readTokenERNS0_5TokenE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json6Reader5TokenE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::readValue",
+   "linker_set_key" : "_ZN4Json6Reader9readValueEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::Reader",
+   "linker_set_key" : "_ZN4Json6ReaderC1ERKNS_8FeaturesE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json8FeaturesE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::Reader",
+   "linker_set_key" : "_ZN4Json6ReaderC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::Reader",
+   "linker_set_key" : "_ZN4Json6ReaderC2ERKNS_8FeaturesE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json8FeaturesE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::Reader",
+   "linker_set_key" : "_ZN4Json6ReaderC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Writer::~Writer",
+   "linker_set_key" : "_ZN4Json6WriterD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6WriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::Writer::~Writer",
+   "linker_set_key" : "_ZN4Json6WriterD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6WriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::Writer::~Writer",
+   "linker_set_key" : "_ZN4Json6WriterD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json6WriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::Features::strictMode",
+   "linker_set_key" : "_ZN4Json8Features10strictModeEv",
+   "return_type" : "_ZTIN4Json8FeaturesE",
+   "source_file" : "/external/jsoncpp/include/json/features.h"
+  },
+  {
+   "function_name" : "Json::Features::all",
+   "linker_set_key" : "_ZN4Json8Features3allEv",
+   "return_type" : "_ZTIN4Json8FeaturesE",
+   "source_file" : "/external/jsoncpp/include/json/features.h"
+  },
+  {
+   "function_name" : "Json::Features::Features",
+   "linker_set_key" : "_ZN4Json8FeaturesC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json8FeaturesE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/features.h"
+  },
+  {
+   "function_name" : "Json::Features::Features",
+   "linker_set_key" : "_ZN4Json8FeaturesC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN4Json8FeaturesE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/features.h"
+  },
+  {
+   "function_name" : "Json::operator<<",
+   "linker_set_key" : "_ZN4JsonlsERNSt3__113basic_ostreamIcNS0_11char_traitsIcEEEERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "function_name" : "Json::operator>>",
+   "linker_set_key" : "_ZN4JsonrsERNSt3__113basic_istreamIcNS0_11char_traitsIcEEEERNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRNSt3__113basic_istreamIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIRNSt3__113basic_istreamIcNS_11char_traitsIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::memberName",
+   "linker_set_key" : "_ZNK4Json17ValueIteratorBase10memberNameEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "Json::ValueIteratorBase::computeDistance",
+   "linker_set_key" : "_ZNK4Json17ValueIteratorBase15computeDistanceERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json17ValueIteratorBaseE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::key",
+   "linker_set_key" : "_ZNK4Json17ValueIteratorBase3keyEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "Json::ValueIteratorBase::deref",
+   "linker_set_key" : "_ZNK4Json17ValueIteratorBase5derefEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::ValueIteratorBase::index",
+   "linker_set_key" : "_ZNK4Json17ValueIteratorBase5indexEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "Json::ValueIteratorBase::isEqual",
+   "linker_set_key" : "_ZNK4Json17ValueIteratorBase7isEqualERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json17ValueIteratorBaseE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Path::make",
+   "linker_set_key" : "_ZNK4Json4Path4makeERNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIRN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Path::resolve",
+   "linker_set_key" : "_ZNK4Json4Path7resolveERKNS_5ValueE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIRKN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Path::resolve",
+   "linker_set_key" : "_ZNK4Json4Path7resolveERKNS_5ValueES3_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json4PathE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::getComment",
+   "linker_set_key" : "_ZNK4Json5Value10getCommentENS_16CommentPlacementE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json16CommentPlacementE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::hasComment",
+   "linker_set_key" : "_ZNK4Json5Value10hasCommentENS_16CommentPlacementE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json16CommentPlacementE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isIntegral",
+   "linker_set_key" : "_ZNK4Json5Value10isIntegralEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asLargestInt",
+   "linker_set_key" : "_ZNK4Json5Value12asLargestIntEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIx",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isValidIndex",
+   "linker_set_key" : "_ZNK4Json5Value12isValidIndexEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asLargestUInt",
+   "linker_set_key" : "_ZNK4Json5Value13asLargestUIntEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIy",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::getMemberNames",
+   "linker_set_key" : "_ZNK4Json5Value14getMemberNamesEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::getOffsetLimit",
+   "linker_set_key" : "_ZNK4Json5Value14getOffsetLimitEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::getOffsetStart",
+   "linker_set_key" : "_ZNK4Json5Value14getOffsetStartEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::toStyledString",
+   "linker_set_key" : "_ZNK4Json5Value14toStyledStringEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isConvertibleTo",
+   "linker_set_key" : "_ZNK4Json5Value15isConvertibleToENS_9ValueTypeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIN4Json9ValueTypeE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::end",
+   "linker_set_key" : "_ZNK4Json5Value3endEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::get",
+   "linker_set_key" : "_ZNK4Json5Value3getEPKcRKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::get",
+   "linker_set_key" : "_ZNK4Json5Value3getERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::get",
+   "linker_set_key" : "_ZNK4Json5Value3getEjRKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::size",
+   "linker_set_key" : "_ZNK4Json5Value4sizeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::type",
+   "linker_set_key" : "_ZNK4Json5Value4typeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json9ValueTypeE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asInt",
+   "linker_set_key" : "_ZNK4Json5Value5asIntEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::begin",
+   "linker_set_key" : "_ZNK4Json5Value5beginEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::empty",
+   "linker_set_key" : "_ZNK4Json5Value5emptyEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isInt",
+   "linker_set_key" : "_ZNK4Json5Value5isIntEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asBool",
+   "linker_set_key" : "_ZNK4Json5Value6asBoolEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asUInt",
+   "linker_set_key" : "_ZNK4Json5Value6asUIntEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isBool",
+   "linker_set_key" : "_ZNK4Json5Value6isBoolEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isNull",
+   "linker_set_key" : "_ZNK4Json5Value6isNullEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isUInt",
+   "linker_set_key" : "_ZNK4Json5Value6isUIntEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asFloat",
+   "linker_set_key" : "_ZNK4Json5Value7asFloatEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIf",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asInt64",
+   "linker_set_key" : "_ZNK4Json5Value7asInt64Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIx",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::compare",
+   "linker_set_key" : "_ZNK4Json5Value7compareERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isArray",
+   "linker_set_key" : "_ZNK4Json5Value7isArrayEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isInt64",
+   "linker_set_key" : "_ZNK4Json5Value7isInt64Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::isStaticString",
+   "linker_set_key" : "_ZNK4Json5Value8CZString14isStaticStringEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::c_str",
+   "linker_set_key" : "_ZNK4Json5Value8CZString5c_strEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::index",
+   "linker_set_key" : "_ZNK4Json5Value8CZString5indexEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::operator==",
+   "linker_set_key" : "_ZNK4Json5Value8CZStringeqERKS1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::CZString::operator<",
+   "linker_set_key" : "_ZNK4Json5Value8CZStringltERKS1_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5Value8CZStringE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5Value8CZStringE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asDouble",
+   "linker_set_key" : "_ZNK4Json5Value8asDoubleEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTId",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asString",
+   "linker_set_key" : "_ZNK4Json5Value8asStringEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asUInt64",
+   "linker_set_key" : "_ZNK4Json5Value8asUInt64Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIy",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isDouble",
+   "linker_set_key" : "_ZNK4Json5Value8isDoubleEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isMember",
+   "linker_set_key" : "_ZNK4Json5Value8isMemberEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isMember",
+   "linker_set_key" : "_ZNK4Json5Value8isMemberERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isObject",
+   "linker_set_key" : "_ZNK4Json5Value8isObjectEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isString",
+   "linker_set_key" : "_ZNK4Json5Value8isStringEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isUInt64",
+   "linker_set_key" : "_ZNK4Json5Value8isUInt64Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::asCString",
+   "linker_set_key" : "_ZNK4Json5Value9asCStringEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::isNumeric",
+   "linker_set_key" : "_ZNK4Json5Value9isNumericEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator==",
+   "linker_set_key" : "_ZNK4Json5ValueeqERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator>=",
+   "linker_set_key" : "_ZNK4Json5ValuegeERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator>",
+   "linker_set_key" : "_ZNK4Json5ValuegtERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZNK4Json5ValueixEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIRKN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZNK4Json5ValueixERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIRKN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZNK4Json5ValueixEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIRKN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator[]",
+   "linker_set_key" : "_ZNK4Json5ValueixEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIRKN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator<=",
+   "linker_set_key" : "_ZNK4Json5ValueleERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator<",
+   "linker_set_key" : "_ZNK4Json5ValueltERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator!=",
+   "linker_set_key" : "_ZNK4Json5ValueneERKS0_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Value::operator!",
+   "linker_set_key" : "_ZNK4Json5ValuentEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json5ValueE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "function_name" : "Json::Reader::getStructuredErrors",
+   "linker_set_key" : "_ZNK4Json6Reader19getStructuredErrorsEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__16vectorIN4Json6Reader15StructuredErrorENS_9allocatorIS3_EEEE",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::getFormatedErrorMessages",
+   "linker_set_key" : "_ZNK4Json6Reader24getFormatedErrorMessagesEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::getLocationLineAndColumn",
+   "linker_set_key" : "_ZNK4Json6Reader24getLocationLineAndColumnEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "Json::Reader::getLocationLineAndColumn",
+   "linker_set_key" : "_ZNK4Json6Reader24getLocationLineAndColumnEPKcRiS3_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIRi"
+    },
+    {
+     "referenced_type" : "_ZTIRi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::getFormattedErrorMessages",
+   "linker_set_key" : "_ZNK4Json6Reader25getFormattedErrorMessagesEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "function_name" : "Json::Reader::good",
+   "linker_set_key" : "_ZNK4Json6Reader4goodEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPKN4Json6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "_ZN4Json5Value13maxLargestIntE",
+   "name" : "Json::Value::maxLargestInt",
+   "referenced_type" : "_ZTIKx",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value13minLargestIntE",
+   "name" : "Json::Value::minLargestInt",
+   "referenced_type" : "_ZTIKx",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value14maxLargestUIntE",
+   "name" : "Json::Value::maxLargestUInt",
+   "referenced_type" : "_ZTIKy",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value4nullE",
+   "name" : "Json::Value::null",
+   "referenced_type" : "_ZTIRKN4Json5ValueE",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value6maxIntE",
+   "name" : "Json::Value::maxInt",
+   "referenced_type" : "_ZTIKi",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value6minIntE",
+   "name" : "Json::Value::minInt",
+   "referenced_type" : "_ZTIKi",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value7maxUIntE",
+   "name" : "Json::Value::maxUInt",
+   "referenced_type" : "_ZTIKj",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value8maxInt64E",
+   "name" : "Json::Value::maxInt64",
+   "referenced_type" : "_ZTIKx",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value8minInt64E",
+   "name" : "Json::Value::minInt64",
+   "referenced_type" : "_ZTIKx",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "linker_set_key" : "_ZN4Json5Value9maxUInt64E",
+   "name" : "Json::Value::maxUInt64",
+   "referenced_type" : "_ZTIKy",
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  }
+ ],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json12PathArgumentE",
+   "name" : "const Json::PathArgument &",
+   "referenced_type" : "_ZTIKN4Json12PathArgumentE",
+   "self_type" : "_ZTIRKN4Json12PathArgumentE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json12StaticStringE",
+   "name" : "const Json::StaticString &",
+   "referenced_type" : "_ZTIKN4Json12StaticStringE",
+   "self_type" : "_ZTIRKN4Json12StaticStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json13ValueIteratorE",
+   "name" : "const Json::ValueIterator &",
+   "referenced_type" : "_ZTIKN4Json13ValueIteratorE",
+   "self_type" : "_ZTIRKN4Json13ValueIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json17ValueIteratorBaseE",
+   "name" : "const Json::ValueIteratorBase &",
+   "referenced_type" : "_ZTIKN4Json17ValueIteratorBaseE",
+   "self_type" : "_ZTIRKN4Json17ValueIteratorBaseE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json18ValueConstIteratorE",
+   "name" : "const Json::ValueConstIterator &",
+   "referenced_type" : "_ZTIKN4Json18ValueConstIteratorE",
+   "self_type" : "_ZTIRKN4Json18ValueConstIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json5Value8CZStringE",
+   "name" : "const Json::Value::CZString &",
+   "referenced_type" : "_ZTIKN4Json5Value8CZStringE",
+   "self_type" : "_ZTIRKN4Json5Value8CZStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json5ValueE",
+   "name" : "const Json::Value &",
+   "referenced_type" : "_ZTIKN4Json5ValueE",
+   "self_type" : "_ZTIRKN4Json5ValueE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN4Json8FeaturesE",
+   "name" : "const Json::Features &",
+   "referenced_type" : "_ZTIKN4Json8FeaturesE",
+   "self_type" : "_ZTIRKN4Json8FeaturesE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> > &",
+   "referenced_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE",
+   "name" : "const std::__map_iterator<std::__tree_iterator<std::__value_type<Json::Value::CZString, Json::Value>, std::__tree_node<std::__value_type<Json::Value::CZString, Json::Value>, void *> *, int> > &",
+   "referenced_type" : "_ZTIKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE",
+   "self_type" : "_ZTIRKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE",
+   "name" : "const std::vector<const Json::PathArgument *, std::allocator<const Json::PathArgument *> > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN4Json13ValueIteratorE",
+   "name" : "Json::ValueIterator &",
+   "referenced_type" : "_ZTIN4Json13ValueIteratorE",
+   "self_type" : "_ZTIRN4Json13ValueIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN4Json18ValueConstIteratorE",
+   "name" : "Json::ValueConstIterator &",
+   "referenced_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "self_type" : "_ZTIRN4Json18ValueConstIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN4Json5Value8CZStringE",
+   "name" : "Json::Value::CZString &",
+   "referenced_type" : "_ZTIN4Json5Value8CZStringE",
+   "self_type" : "_ZTIRN4Json5Value8CZStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN4Json5ValueE",
+   "name" : "Json::Value &",
+   "referenced_type" : "_ZTIN4Json5ValueE",
+   "self_type" : "_ZTIRN4Json5ValueE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN4Json6Reader5TokenE",
+   "name" : "Json::Reader::Token &",
+   "referenced_type" : "_ZTIN4Json6Reader5TokenE",
+   "self_type" : "_ZTIRN4Json6Reader5TokenE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRNSt3__111__wrap_iterIPKPKN4Json12PathArgumentEEE",
+   "name" : "std::__wrap_iter<const Json::PathArgument *const *> &",
+   "referenced_type" : "_ZTINSt3__111__wrap_iterIPKPKN4Json12PathArgumentEEE",
+   "self_type" : "_ZTIRNSt3__111__wrap_iterIPKPKN4Json12PathArgumentEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "std::basic_string<char, std::char_traits<char>, std::allocator<char> > &",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIRNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRNSt3__113basic_istreamIcNS_11char_traitsIcEEEE",
+   "name" : "std::basic_istream<char, std::char_traits<char> > &",
+   "referenced_type" : "_ZTINSt3__113basic_istreamIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIRNSt3__113basic_istreamIcNS_11char_traitsIcEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "name" : "std::basic_ostream<char, std::char_traits<char> > &",
+   "referenced_type" : "_ZTINSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRPKc",
+   "name" : "const char *&",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIRPKc",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRi",
+   "name" : "int &",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIRi",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRj",
+   "name" : "unsigned int &",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIRj",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json12StaticStringE",
+   "name" : "const Json::StaticString *",
+   "referenced_type" : "_ZTIKN4Json12StaticStringE",
+   "self_type" : "_ZTIPKN4Json12StaticStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json13ValueIteratorE",
+   "name" : "const Json::ValueIterator *",
+   "referenced_type" : "_ZTIKN4Json13ValueIteratorE",
+   "self_type" : "_ZTIPKN4Json13ValueIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json17ValueIteratorBaseE",
+   "name" : "const Json::ValueIteratorBase *",
+   "referenced_type" : "_ZTIKN4Json17ValueIteratorBaseE",
+   "self_type" : "_ZTIPKN4Json17ValueIteratorBaseE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json18ValueConstIteratorE",
+   "name" : "const Json::ValueConstIterator *",
+   "referenced_type" : "_ZTIKN4Json18ValueConstIteratorE",
+   "self_type" : "_ZTIPKN4Json18ValueConstIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json4PathE",
+   "name" : "const Json::Path *",
+   "referenced_type" : "_ZTIKN4Json4PathE",
+   "self_type" : "_ZTIPKN4Json4PathE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json5Value8CZStringE",
+   "name" : "const Json::Value::CZString *",
+   "referenced_type" : "_ZTIKN4Json5Value8CZStringE",
+   "self_type" : "_ZTIPKN4Json5Value8CZStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json5ValueE",
+   "name" : "const Json::Value *",
+   "referenced_type" : "_ZTIKN4Json5ValueE",
+   "self_type" : "_ZTIPKN4Json5ValueE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN4Json6ReaderE",
+   "name" : "const Json::Reader *",
+   "referenced_type" : "_ZTIKN4Json6ReaderE",
+   "self_type" : "_ZTIPKN4Json6ReaderE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json10FastWriterE",
+   "name" : "Json::FastWriter *",
+   "referenced_type" : "_ZTIN4Json10FastWriterE",
+   "self_type" : "_ZTIPN4Json10FastWriterE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json12PathArgumentE",
+   "name" : "Json::PathArgument *",
+   "referenced_type" : "_ZTIN4Json12PathArgumentE",
+   "self_type" : "_ZTIPN4Json12PathArgumentE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json12StaticStringE",
+   "name" : "Json::StaticString *",
+   "referenced_type" : "_ZTIN4Json12StaticStringE",
+   "self_type" : "_ZTIPN4Json12StaticStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json12StyledWriterE",
+   "name" : "Json::StyledWriter *",
+   "referenced_type" : "_ZTIN4Json12StyledWriterE",
+   "self_type" : "_ZTIPN4Json12StyledWriterE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json13ValueIteratorE",
+   "name" : "Json::ValueIterator *",
+   "referenced_type" : "_ZTIN4Json13ValueIteratorE",
+   "self_type" : "_ZTIPN4Json13ValueIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json17ValueIteratorBaseE",
+   "name" : "Json::ValueIteratorBase *",
+   "referenced_type" : "_ZTIN4Json17ValueIteratorBaseE",
+   "self_type" : "_ZTIPN4Json17ValueIteratorBaseE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json18StyledStreamWriterE",
+   "name" : "Json::StyledStreamWriter *",
+   "referenced_type" : "_ZTIN4Json18StyledStreamWriterE",
+   "self_type" : "_ZTIPN4Json18StyledStreamWriterE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json18ValueConstIteratorE",
+   "name" : "Json::ValueConstIterator *",
+   "referenced_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "self_type" : "_ZTIPN4Json18ValueConstIteratorE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json4PathE",
+   "name" : "Json::Path *",
+   "referenced_type" : "_ZTIN4Json4PathE",
+   "self_type" : "_ZTIPN4Json4PathE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json5Value11CommentInfoE",
+   "name" : "Json::Value::CommentInfo *",
+   "referenced_type" : "_ZTIN4Json5Value11CommentInfoE",
+   "self_type" : "_ZTIPN4Json5Value11CommentInfoE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json5Value8CZStringE",
+   "name" : "Json::Value::CZString *",
+   "referenced_type" : "_ZTIN4Json5Value8CZStringE",
+   "self_type" : "_ZTIPN4Json5Value8CZStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json5ValueE",
+   "name" : "Json::Value *",
+   "referenced_type" : "_ZTIN4Json5ValueE",
+   "self_type" : "_ZTIPN4Json5ValueE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json6ReaderE",
+   "name" : "Json::Reader *",
+   "referenced_type" : "_ZTIN4Json6ReaderE",
+   "self_type" : "_ZTIPN4Json6ReaderE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json6WriterE",
+   "name" : "Json::Writer *",
+   "referenced_type" : "_ZTIN4Json6WriterE",
+   "self_type" : "_ZTIPN4Json6WriterE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN4Json8FeaturesE",
+   "name" : "Json::Features *",
+   "referenced_type" : "_ZTIN4Json8FeaturesE",
+   "self_type" : "_ZTIPN4Json8FeaturesE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/features.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "name" : "std::basic_ostream<char, std::char_traits<char> > *",
+   "referenced_type" : "_ZTINSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIPNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__13mapIN4Json5Value8CZStringES2_NS_4lessIS3_EENS_9allocatorINS_4pairIKS3_S2_EEEEEE",
+   "name" : "std::map<Json::Value::CZString, Json::Value, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > > *",
+   "referenced_type" : "_ZTINSt3__13mapIN4Json5Value8CZStringES2_NS_4lessIS3_EENS_9allocatorINS_4pairIKS3_S2_EEEEEE",
+   "self_type" : "_ZTIPNSt3__13mapIN4Json5Value8CZStringES2_NS_4lessIS3_EENS_9allocatorINS_4pairIKS3_S2_EEEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json12PathArgumentE",
+   "name" : "const Json::PathArgument",
+   "referenced_type" : "_ZTIN4Json12PathArgumentE",
+   "self_type" : "_ZTIKN4Json12PathArgumentE",
+   "size" : 20,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json12StaticStringE",
+   "name" : "const Json::StaticString",
+   "referenced_type" : "_ZTIN4Json12StaticStringE",
+   "self_type" : "_ZTIKN4Json12StaticStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json13ValueIteratorE",
+   "name" : "const Json::ValueIterator",
+   "referenced_type" : "_ZTIN4Json13ValueIteratorE",
+   "self_type" : "_ZTIKN4Json13ValueIteratorE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json17ValueIteratorBaseE",
+   "name" : "const Json::ValueIteratorBase",
+   "referenced_type" : "_ZTIN4Json17ValueIteratorBaseE",
+   "self_type" : "_ZTIKN4Json17ValueIteratorBaseE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json18ValueConstIteratorE",
+   "name" : "const Json::ValueConstIterator",
+   "referenced_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "self_type" : "_ZTIKN4Json18ValueConstIteratorE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json4PathE",
+   "name" : "const Json::Path",
+   "referenced_type" : "_ZTIN4Json4PathE",
+   "self_type" : "_ZTIKN4Json4PathE",
+   "size" : 12,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json5Value8CZStringE",
+   "name" : "const Json::Value::CZString",
+   "referenced_type" : "_ZTIN4Json5Value8CZStringE",
+   "self_type" : "_ZTIKN4Json5Value8CZStringE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json5ValueE",
+   "name" : "const Json::Value",
+   "referenced_type" : "_ZTIN4Json5ValueE",
+   "self_type" : "_ZTIKN4Json5ValueE",
+   "size" : 24,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json6ReaderE",
+   "name" : "const Json::Reader",
+   "referenced_type" : "_ZTIN4Json6ReaderE",
+   "self_type" : "_ZTIKN4Json6ReaderE",
+   "size" : 100,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4Json8FeaturesE",
+   "name" : "const Json::Features",
+   "referenced_type" : "_ZTIN4Json8FeaturesE",
+   "self_type" : "_ZTIKN4Json8FeaturesE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> >",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 12,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE",
+   "name" : "const std::__map_iterator<std::__tree_iterator<std::__value_type<Json::Value::CZString, Json::Value>, std::__tree_node<std::__value_type<Json::Value::CZString, Json::Value>, void *> *, int> >",
+   "referenced_type" : "_ZTINSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE",
+   "self_type" : "_ZTIKNSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE",
+   "name" : "const std::vector<const Json::PathArgument *, std::allocator<const Json::PathArgument *> >",
+   "referenced_type" : "_ZTINSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE",
+   "self_type" : "_ZTIKNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEEE",
+   "size" : 12,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKx",
+   "name" : "const long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIKx",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKy",
+   "name" : "const unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIKy",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN4Json6WriterE"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "document_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "yamlCompatiblityEnabled_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "dropNullPlaceholders_",
+     "field_offset" : 136,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "omitEndingLineFeed_",
+     "field_offset" : 144,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json10FastWriterE",
+   "name" : "Json::FastWriter",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json10FastWriterE",
+   "self_type" : "_ZTIN4Json10FastWriterE",
+   "size" : 20,
+   "source_file" : "/external/jsoncpp/include/json/writer.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN4Json10FastWriterE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN4Json10FastWriterD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN4Json10FastWriterD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN4Json10FastWriter5writeERKNS_5ValueE"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "key_",
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "index_",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "kind_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIN4Json12PathArgument4KindE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json12PathArgumentE",
+   "name" : "Json::PathArgument",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json12PathArgumentE",
+   "self_type" : "_ZTIN4Json12PathArgumentE",
+   "size" : 20,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "str_",
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json12StaticStringE",
+   "name" : "Json::StaticString",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json12StaticStringE",
+   "self_type" : "_ZTIN4Json12StaticStringE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN4Json6WriterE"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "childValues_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "document_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "indentString_",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "rightMargin_",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "indentSize_",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "addChildValues_",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json12StyledWriterE",
+   "name" : "Json::StyledWriter",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json12StyledWriterE",
+   "self_type" : "_ZTIN4Json12StyledWriterE",
+   "size" : 52,
+   "source_file" : "/external/jsoncpp/include/json/writer.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN4Json12StyledWriterE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN4Json12StyledWriterD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN4Json12StyledWriterD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN4Json12StyledWriter5writeERKNS_5ValueE"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json13ValueIteratorE",
+   "name" : "Json::ValueIterator",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json13ValueIteratorE",
+   "self_type" : "_ZTIN4Json13ValueIteratorE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "current_",
+     "referenced_type" : "_ZTINSt3__114__map_iteratorINS_15__tree_iteratorINS_12__value_typeIN4Json5Value8CZStringES4_EEPNS_11__tree_nodeIS6_PvEEiEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "isNull_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json17ValueIteratorBaseE",
+   "name" : "Json::ValueIteratorBase",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json17ValueIteratorBaseE",
+   "self_type" : "_ZTIN4Json17ValueIteratorBaseE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "childValues_",
+     "referenced_type" : "_ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "document_",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIPNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "indentString_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "rightMargin_",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "indentation_",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "addChildValues_",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json18StyledStreamWriterE",
+   "name" : "Json::StyledStreamWriter",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json18StyledStreamWriterE",
+   "self_type" : "_ZTIN4Json18StyledStreamWriterE",
+   "size" : 48,
+   "source_file" : "/external/jsoncpp/include/json/writer.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTIN4Json17ValueIteratorBaseE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json18ValueConstIteratorE",
+   "name" : "Json::ValueConstIterator",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "self_type" : "_ZTIN4Json18ValueConstIteratorE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "args_",
+     "referenced_type" : "_ZTINSt3__16vectorIN4Json12PathArgumentENS_9allocatorIS2_EEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json4PathE",
+   "name" : "Json::Path",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json4PathE",
+   "self_type" : "_ZTIN4Json4PathE",
+   "size" : 12,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "comment_",
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json5Value11CommentInfoE",
+   "name" : "Json::Value::CommentInfo",
+   "referenced_type" : "_ZTIN4Json5Value11CommentInfoE",
+   "self_type" : "_ZTIN4Json5Value11CommentInfoE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "int_",
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "field_name" : "uint_",
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "real_",
+     "referenced_type" : "_ZTId"
+    },
+    {
+     "field_name" : "bool_",
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "string_",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "map_",
+     "referenced_type" : "_ZTIPNSt3__13mapIN4Json5Value8CZStringES2_NS_4lessIS3_EENS_9allocatorINS_4pairIKS3_S2_EEEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json5Value11ValueHolderE",
+   "name" : "Json::Value::ValueHolder",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN4Json5Value11ValueHolderE",
+   "self_type" : "_ZTIN4Json5Value11ValueHolderE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "cstr_",
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "index_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json5Value8CZStringE",
+   "name" : "Json::Value::CZString",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json5Value8CZStringE",
+   "self_type" : "_ZTIN4Json5Value8CZStringE",
+   "size" : 8,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "value_",
+     "referenced_type" : "_ZTIN4Json5Value11ValueHolderE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "type_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN4Json9ValueTypeE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "allocated_",
+     "field_offset" : 72,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "access" : "private",
+     "field_name" : "comments_",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIPN4Json5Value11CommentInfoE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "start_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "limit_",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json5ValueE",
+   "name" : "Json::Value",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json5ValueE",
+   "self_type" : "_ZTIN4Json5ValueE",
+   "size" : 24,
+   "source_file" : "/external/jsoncpp/include/json/value.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "offset_start",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "offset_limit",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "message",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json6Reader15StructuredErrorE",
+   "name" : "Json::Reader::StructuredError",
+   "referenced_type" : "_ZTIN4Json6Reader15StructuredErrorE",
+   "self_type" : "_ZTIN4Json6Reader15StructuredErrorE",
+   "size" : 20,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type_",
+     "referenced_type" : "_ZTIN4Json6Reader9TokenTypeE"
+    },
+    {
+     "field_name" : "start_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "end_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json6Reader5TokenE",
+   "name" : "Json::Reader::Token",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json6Reader5TokenE",
+   "self_type" : "_ZTIN4Json6Reader5TokenE",
+   "size" : 12,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "token_",
+     "referenced_type" : "_ZTIN4Json6Reader5TokenE"
+    },
+    {
+     "field_name" : "message_",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "field_name" : "extra_",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json6Reader9ErrorInfoE",
+   "name" : "Json::Reader::ErrorInfo",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json6Reader9ErrorInfoE",
+   "self_type" : "_ZTIN4Json6Reader9ErrorInfoE",
+   "size" : 28,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "nodes_",
+     "referenced_type" : "_ZTINSt3__15stackIPN4Json5ValueENS_5dequeIS3_NS_9allocatorIS3_EEEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "errors_",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTINSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "document_",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "begin_",
+     "field_offset" : 480,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "end_",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "current_",
+     "field_offset" : 544,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "lastValueEnd_",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "lastValue_",
+     "field_offset" : 608,
+     "referenced_type" : "_ZTIPN4Json5ValueE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "commentsBefore_",
+     "field_offset" : 640,
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "features_",
+     "field_offset" : 736,
+     "referenced_type" : "_ZTIN4Json8FeaturesE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "collectComments_",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json6ReaderE",
+   "name" : "Json::Reader",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json6ReaderE",
+   "self_type" : "_ZTIN4Json6ReaderE",
+   "size" : 100,
+   "source_file" : "/external/jsoncpp/include/json/reader.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIN4Json6WriterE",
+   "name" : "Json::Writer",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json6WriterE",
+   "self_type" : "_ZTIN4Json6WriterE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/writer.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN4Json6WriterE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN4Json6WriterD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN4Json6WriterD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN4Json6Writer5writeERKNS_5ValueE"
+    }
+   ]
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "allowComments_",
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "strictRoot_",
+     "field_offset" : 8,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "allowDroppedNullPlaceholders_",
+     "field_offset" : 16,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "allowNumericKeys_",
+     "field_offset" : 24,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN4Json8FeaturesE",
+   "name" : "Json::Features",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN4Json8FeaturesE",
+   "self_type" : "_ZTIN4Json8FeaturesE",
+   "size" : 4,
+   "source_file" : "/external/jsoncpp/include/json/features.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

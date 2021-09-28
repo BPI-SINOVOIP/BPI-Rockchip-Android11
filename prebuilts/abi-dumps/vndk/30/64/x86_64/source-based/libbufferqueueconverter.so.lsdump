@@ -1,0 +1,95 @@
+{
+ "array_types" : [],
+ "builtin_types" : [],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android15getNativeWindowEPNS_13SurfaceHolderE"
+  },
+  {
+   "name" : "_ZN7android18getSurfaceFromHGBPERKNS_2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE"
+  },
+  {
+   "name" : "_ZN7android20destroySurfaceHolderEPNS_13SurfaceHolderE"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::getNativeWindow",
+   "linker_set_key" : "_ZN7android15getNativeWindowEPNS_13SurfaceHolderE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN7android13SurfaceHolderE"
+    }
+   ],
+   "return_type" : "_ZTIP13ANativeWindow",
+   "source_file" : "/frameworks/native/libs/bufferqueueconverter/include/bufferqueueconverter/BufferQueueConverter.h"
+  },
+  {
+   "function_name" : "android::getSurfaceFromHGBP",
+   "linker_set_key" : "_ZN7android18getSurfaceFromHGBPERKNS_2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE"
+    }
+   ],
+   "return_type" : "_ZTINSt3__110unique_ptrIN7android13SurfaceHolderEPFvPS2_EEE",
+   "source_file" : "/frameworks/native/libs/bufferqueueconverter/include/bufferqueueconverter/BufferQueueConverter.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "name" : "const android::sp<android::hardware::graphics::bufferqueue::V2_0::IGraphicBufferProducer> &",
+   "referenced_type" : "_ZTIKN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "self_type" : "_ZTIRKN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/bufferqueueconverter/include/bufferqueueconverter/BufferQueueConverter.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13ANativeWindow",
+   "name" : "ANativeWindow *",
+   "referenced_type" : "_ZTI13ANativeWindow",
+   "self_type" : "_ZTIP13ANativeWindow",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/bufferqueueconverter/include/bufferqueueconverter/BufferQueueConverter.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android13SurfaceHolderE",
+   "name" : "android::SurfaceHolder *",
+   "referenced_type" : "_ZTIN7android13SurfaceHolderE",
+   "self_type" : "_ZTIPN7android13SurfaceHolderE",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/bufferqueueconverter/include/bufferqueueconverter/BufferQueueConverter.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "name" : "const android::sp<android::hardware::graphics::bufferqueue::V2_0::IGraphicBufferProducer>",
+   "referenced_type" : "_ZTIN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "self_type" : "_ZTIKN7android2spINS_8hardware8graphics11bufferqueue4V2_022IGraphicBufferProducerEEE",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/bufferqueueconverter/include/bufferqueueconverter/BufferQueueConverter.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

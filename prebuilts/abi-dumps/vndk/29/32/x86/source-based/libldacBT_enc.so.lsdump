@@ -1,0 +1,414 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ldacBT_alter_eqmid_priority"
+  },
+  {
+   "name" : "ldacBT_close_handle"
+  },
+  {
+   "name" : "ldacBT_encode"
+  },
+  {
+   "name" : "ldacBT_free_handle"
+  },
+  {
+   "name" : "ldacBT_get_bitrate"
+  },
+  {
+   "name" : "ldacBT_get_eqmid"
+  },
+  {
+   "name" : "ldacBT_get_error_code"
+  },
+  {
+   "name" : "ldacBT_get_handle"
+  },
+  {
+   "name" : "ldacBT_get_sampling_freq"
+  },
+  {
+   "name" : "ldacBT_get_version"
+  },
+  {
+   "name" : "ldacBT_init_handle_encode"
+  },
+  {
+   "name" : "ldacBT_set_eqmid"
+  },
+  {
+   "name" : "ldaclib_check_nlnn_shift"
+  },
+  {
+   "name" : "ldaclib_clear_error_code"
+  },
+  {
+   "name" : "ldaclib_clear_internal_error_code"
+  },
+  {
+   "name" : "ldaclib_encode"
+  },
+  {
+   "name" : "ldaclib_flush_encode"
+  },
+  {
+   "name" : "ldaclib_free_encode"
+  },
+  {
+   "name" : "ldaclib_free_handle"
+  },
+  {
+   "name" : "ldaclib_get_branch_version"
+  },
+  {
+   "name" : "ldaclib_get_channel"
+  },
+  {
+   "name" : "ldaclib_get_channel_config_index"
+  },
+  {
+   "name" : "ldaclib_get_config_info"
+  },
+  {
+   "name" : "ldaclib_get_encode_frame_length"
+  },
+  {
+   "name" : "ldaclib_get_encode_setting"
+  },
+  {
+   "name" : "ldaclib_get_error_code"
+  },
+  {
+   "name" : "ldaclib_get_frame_samples"
+  },
+  {
+   "name" : "ldaclib_get_handle"
+  },
+  {
+   "name" : "ldaclib_get_internal_error_code"
+  },
+  {
+   "name" : "ldaclib_get_major_version"
+  },
+  {
+   "name" : "ldaclib_get_minor_version"
+  },
+  {
+   "name" : "ldaclib_get_nlnn"
+  },
+  {
+   "name" : "ldaclib_get_sampling_rate"
+  },
+  {
+   "name" : "ldaclib_get_sampling_rate_index"
+  },
+  {
+   "name" : "ldaclib_get_version"
+  },
+  {
+   "name" : "ldaclib_init_encode"
+  },
+  {
+   "name" : "ldaclib_set_config_info"
+  },
+  {
+   "name" : "ldaclib_set_encode_frame_length"
+  },
+  {
+   "name" : "ldaclib_set_encode_info"
+  },
+  {
+   "name" : "ldaclib_set_frame_header"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 2,
+     "name" : "LDACBT_SMPL_FMT_S16"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "LDACBT_SMPL_FMT_S24"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "LDACBT_SMPL_FMT_S32"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "LDACBT_SMPL_FMT_F32"
+    }
+   ],
+   "linker_set_key" : "LDACBT_SMPL_FMT_T",
+   "name" : "LDACBT_SMPL_FMT_T",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "LDACBT_SMPL_FMT_T"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ldacBT_alter_eqmid_priority",
+   "linker_set_key" : "ldacBT_alter_eqmid_priority",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_close_handle",
+   "linker_set_key" : "ldacBT_close_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_encode",
+   "linker_set_key" : "ldacBT_encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_free_handle",
+   "linker_set_key" : "ldacBT_free_handle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_bitrate",
+   "linker_set_key" : "ldacBT_get_bitrate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_eqmid",
+   "linker_set_key" : "ldacBT_get_eqmid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_error_code",
+   "linker_set_key" : "ldacBT_get_error_code",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_handle",
+   "linker_set_key" : "ldacBT_get_handle",
+   "return_type" : "type-7",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_sampling_freq",
+   "linker_set_key" : "ldacBT_get_sampling_freq",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_get_version",
+   "linker_set_key" : "ldacBT_get_version",
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_init_handle_encode",
+   "linker_set_key" : "ldacBT_init_handle_encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "function_name" : "ldacBT_set_eqmid",
+   "linker_set_key" : "ldacBT_set_eqmid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_st_ldacbt_handle *",
+   "name" : "_st_ldacbt_handle *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/external/libldac/inc/ldacBT.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

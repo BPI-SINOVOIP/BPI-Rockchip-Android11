@@ -1,0 +1,192 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "ACgroupController_getFlags"
+  },
+  {
+   "name" : "ACgroupController_getName"
+  },
+  {
+   "name" : "ACgroupController_getPath"
+  },
+  {
+   "name" : "ACgroupController_getVersion"
+  },
+  {
+   "name" : "ACgroupFile_getController"
+  },
+  {
+   "name" : "ACgroupFile_getControllerCount"
+  },
+  {
+   "name" : "ACgroupFile_getVersion"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ACgroupController_getFlags",
+   "linker_set_key" : "ACgroupController_getFlags",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK17ACgroupController"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupController_getName",
+   "linker_set_key" : "ACgroupController_getName",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK17ACgroupController"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupController_getPath",
+   "linker_set_key" : "ACgroupController_getPath",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK17ACgroupController"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupController_getVersion",
+   "linker_set_key" : "ACgroupController_getVersion",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK17ACgroupController"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupFile_getController",
+   "linker_set_key" : "ACgroupFile_getController",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIPK17ACgroupController",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupFile_getControllerCount",
+   "linker_set_key" : "ACgroupFile_getControllerCount",
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupFile_getVersion",
+   "linker_set_key" : "ACgroupFile_getVersion",
+   "return_type" : "_ZTIj",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK17ACgroupController",
+   "name" : "const ACgroupController *",
+   "referenced_type" : "_ZTIK17ACgroupController",
+   "self_type" : "_ZTIPK17ACgroupController",
+   "size" : 8,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK17ACgroupController",
+   "name" : "const ACgroupController",
+   "referenced_type" : "_ZTI17ACgroupController",
+   "self_type" : "_ZTIK17ACgroupController",
+   "size" : 56,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

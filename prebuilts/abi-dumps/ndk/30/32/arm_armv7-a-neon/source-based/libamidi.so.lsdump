@@ -1,0 +1,540 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "AMidiDevice_fromJava"
+  },
+  {
+   "name" : "AMidiDevice_getNumInputPorts"
+  },
+  {
+   "name" : "AMidiDevice_getNumOutputPorts"
+  },
+  {
+   "name" : "AMidiDevice_getType"
+  },
+  {
+   "name" : "AMidiDevice_release"
+  },
+  {
+   "name" : "AMidiInputPort_close"
+  },
+  {
+   "name" : "AMidiInputPort_open"
+  },
+  {
+   "name" : "AMidiInputPort_send"
+  },
+  {
+   "name" : "AMidiInputPort_sendFlush"
+  },
+  {
+   "name" : "AMidiInputPort_sendWithTimestamp"
+  },
+  {
+   "name" : "AMidiOutputPort_close"
+  },
+  {
+   "name" : "AMidiOutputPort_open"
+  },
+  {
+   "name" : "AMidiOutputPort_receive"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AMIDI_OPCODE_DATA"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AMIDI_OPCODE_FLUSH"
+    }
+   ],
+   "linker_set_key" : "_ZTI18$AMIDI_OPCODE_DATA",
+   "name" : "(anonymous enum at frameworks/base/media/native/midi/include/amidi/AMidi.h:49:1)",
+   "referenced_type" : "_ZTI18$AMIDI_OPCODE_DATA",
+   "self_type" : "_ZTI18$AMIDI_OPCODE_DATA",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AMIDI_DEVICE_TYPE_USB"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AMIDI_DEVICE_TYPE_VIRTUAL"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AMIDI_DEVICE_TYPE_BLUETOOTH"
+    }
+   ],
+   "linker_set_key" : "_ZTI28$AMIDI_DEVICE_TYPE_BLUETOOTH",
+   "name" : "(anonymous enum at frameworks/base/media/native/midi/include/amidi/AMidi.h:58:1)",
+   "referenced_type" : "_ZTI28$AMIDI_DEVICE_TYPE_BLUETOOTH",
+   "self_type" : "_ZTI28$AMIDI_DEVICE_TYPE_BLUETOOTH",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "AMidiDevice_fromJava",
+   "linker_set_key" : "AMidiDevice_fromJava",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP7_JNIEnv"
+    },
+    {
+     "referenced_type" : "_ZTIP8_jobject"
+    },
+    {
+     "referenced_type" : "_ZTIPP11AMidiDevice"
+    }
+   ],
+   "return_type" : "_ZTI14media_status_t",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_getNumInputPorts",
+   "linker_set_key" : "AMidiDevice_getNumInputPorts",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK11AMidiDevice"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_getNumOutputPorts",
+   "linker_set_key" : "AMidiDevice_getNumOutputPorts",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK11AMidiDevice"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_getType",
+   "linker_set_key" : "AMidiDevice_getType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK11AMidiDevice"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_release",
+   "linker_set_key" : "AMidiDevice_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK11AMidiDevice"
+    }
+   ],
+   "return_type" : "_ZTI14media_status_t",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_close",
+   "linker_set_key" : "AMidiInputPort_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14AMidiInputPort"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_open",
+   "linker_set_key" : "AMidiInputPort_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK11AMidiDevice"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPP14AMidiInputPort"
+    }
+   ],
+   "return_type" : "_ZTI14media_status_t",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_send",
+   "linker_set_key" : "AMidiInputPort_send",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14AMidiInputPort"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_sendFlush",
+   "linker_set_key" : "AMidiInputPort_sendFlush",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14AMidiInputPort"
+    }
+   ],
+   "return_type" : "_ZTI14media_status_t",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_sendWithTimestamp",
+   "linker_set_key" : "AMidiInputPort_sendWithTimestamp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14AMidiInputPort"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiOutputPort_close",
+   "linker_set_key" : "AMidiOutputPort_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK15AMidiOutputPort"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiOutputPort_open",
+   "linker_set_key" : "AMidiOutputPort_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK11AMidiDevice"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPP15AMidiOutputPort"
+    }
+   ],
+   "return_type" : "_ZTI14media_status_t",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiOutputPort_receive",
+   "linker_set_key" : "AMidiOutputPort_receive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK15AMidiOutputPort"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPx"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP11AMidiDevice",
+   "name" : "AMidiDevice *",
+   "referenced_type" : "_ZTI11AMidiDevice",
+   "self_type" : "_ZTIP11AMidiDevice",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP14AMidiInputPort",
+   "name" : "AMidiInputPort *",
+   "referenced_type" : "_ZTI14AMidiInputPort",
+   "self_type" : "_ZTIP14AMidiInputPort",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP15AMidiOutputPort",
+   "name" : "AMidiOutputPort *",
+   "referenced_type" : "_ZTI15AMidiOutputPort",
+   "self_type" : "_ZTIP15AMidiOutputPort",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP7_JNIEnv",
+   "name" : "_JNIEnv *",
+   "referenced_type" : "_ZTI7_JNIEnv",
+   "self_type" : "_ZTIP7_JNIEnv",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP8_jobject",
+   "name" : "_jobject *",
+   "referenced_type" : "_ZTI8_jobject",
+   "self_type" : "_ZTIP8_jobject",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK11AMidiDevice",
+   "name" : "const AMidiDevice *",
+   "referenced_type" : "_ZTIK11AMidiDevice",
+   "self_type" : "_ZTIPK11AMidiDevice",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK14AMidiInputPort",
+   "name" : "const AMidiInputPort *",
+   "referenced_type" : "_ZTIK14AMidiInputPort",
+   "self_type" : "_ZTIPK14AMidiInputPort",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK15AMidiOutputPort",
+   "name" : "const AMidiOutputPort *",
+   "referenced_type" : "_ZTIK15AMidiOutputPort",
+   "self_type" : "_ZTIPK15AMidiOutputPort",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPP11AMidiDevice",
+   "name" : "AMidiDevice **",
+   "referenced_type" : "_ZTIP11AMidiDevice",
+   "self_type" : "_ZTIPP11AMidiDevice",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPP14AMidiInputPort",
+   "name" : "AMidiInputPort **",
+   "referenced_type" : "_ZTIP14AMidiInputPort",
+   "self_type" : "_ZTIPP14AMidiInputPort",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPP15AMidiOutputPort",
+   "name" : "AMidiOutputPort **",
+   "referenced_type" : "_ZTIP15AMidiOutputPort",
+   "self_type" : "_ZTIPP15AMidiOutputPort",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPx",
+   "name" : "long long *",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIPx",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK11AMidiDevice",
+   "name" : "const AMidiDevice",
+   "referenced_type" : "_ZTI11AMidiDevice",
+   "self_type" : "_ZTIK11AMidiDevice",
+   "size" : 28,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK14AMidiInputPort",
+   "name" : "const AMidiInputPort",
+   "referenced_type" : "_ZTI14AMidiInputPort",
+   "self_type" : "_ZTIK14AMidiInputPort",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK15AMidiOutputPort",
+   "name" : "const AMidiOutputPort",
+   "referenced_type" : "_ZTI15AMidiOutputPort",
+   "self_type" : "_ZTIK15AMidiOutputPort",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,7643 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContent *[5]",
+   "name" : "_ExifContent *[5]",
+   "referenced_type" : "type-69",
+   "self_type" : "type-79",
+   "size" : 40,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-36",
+   "self_type" : "type-36",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-154",
+   "self_type" : "type-154",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-113",
+   "self_type" : "type-113",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-47",
+   "self_type" : "type-47",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-115",
+   "self_type" : "type-115",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "exif_array_set_byte_order"
+  },
+  {
+   "name" : "exif_byte_order_get_name"
+  },
+  {
+   "name" : "exif_content_add_entry"
+  },
+  {
+   "name" : "exif_content_dump"
+  },
+  {
+   "name" : "exif_content_fix"
+  },
+  {
+   "name" : "exif_content_foreach_entry"
+  },
+  {
+   "name" : "exif_content_free"
+  },
+  {
+   "name" : "exif_content_get_entry"
+  },
+  {
+   "name" : "exif_content_get_ifd"
+  },
+  {
+   "name" : "exif_content_log"
+  },
+  {
+   "name" : "exif_content_new"
+  },
+  {
+   "name" : "exif_content_new_mem"
+  },
+  {
+   "name" : "exif_content_ref"
+  },
+  {
+   "name" : "exif_content_remove_entry"
+  },
+  {
+   "name" : "exif_content_unref"
+  },
+  {
+   "name" : "exif_convert_utf16_to_utf8"
+  },
+  {
+   "name" : "exif_data_dump"
+  },
+  {
+   "name" : "exif_data_fix"
+  },
+  {
+   "name" : "exif_data_foreach_content"
+  },
+  {
+   "name" : "exif_data_free"
+  },
+  {
+   "name" : "exif_data_get_byte_order"
+  },
+  {
+   "name" : "exif_data_get_data_type"
+  },
+  {
+   "name" : "exif_data_get_log"
+  },
+  {
+   "name" : "exif_data_get_mnote_data"
+  },
+  {
+   "name" : "exif_data_load_data"
+  },
+  {
+   "name" : "exif_data_log"
+  },
+  {
+   "name" : "exif_data_new"
+  },
+  {
+   "name" : "exif_data_new_from_data"
+  },
+  {
+   "name" : "exif_data_new_from_file"
+  },
+  {
+   "name" : "exif_data_new_mem"
+  },
+  {
+   "name" : "exif_data_option_get_description"
+  },
+  {
+   "name" : "exif_data_option_get_name"
+  },
+  {
+   "name" : "exif_data_ref"
+  },
+  {
+   "name" : "exif_data_save_data"
+  },
+  {
+   "name" : "exif_data_set_byte_order"
+  },
+  {
+   "name" : "exif_data_set_data_type"
+  },
+  {
+   "name" : "exif_data_set_option"
+  },
+  {
+   "name" : "exif_data_unref"
+  },
+  {
+   "name" : "exif_data_unset_option"
+  },
+  {
+   "name" : "exif_entry_dump"
+  },
+  {
+   "name" : "exif_entry_fix"
+  },
+  {
+   "name" : "exif_entry_free"
+  },
+  {
+   "name" : "exif_entry_get_value"
+  },
+  {
+   "name" : "exif_entry_initialize"
+  },
+  {
+   "name" : "exif_entry_new"
+  },
+  {
+   "name" : "exif_entry_new_mem"
+  },
+  {
+   "name" : "exif_entry_ref"
+  },
+  {
+   "name" : "exif_entry_unref"
+  },
+  {
+   "name" : "exif_format_get_name"
+  },
+  {
+   "name" : "exif_format_get_size"
+  },
+  {
+   "name" : "exif_get_long"
+  },
+  {
+   "name" : "exif_get_rational"
+  },
+  {
+   "name" : "exif_get_short"
+  },
+  {
+   "name" : "exif_get_slong"
+  },
+  {
+   "name" : "exif_get_srational"
+  },
+  {
+   "name" : "exif_get_sshort"
+  },
+  {
+   "name" : "exif_ifd_get_name"
+  },
+  {
+   "name" : "exif_loader_get_buf"
+  },
+  {
+   "name" : "exif_loader_get_data"
+  },
+  {
+   "name" : "exif_loader_log"
+  },
+  {
+   "name" : "exif_loader_new"
+  },
+  {
+   "name" : "exif_loader_new_mem"
+  },
+  {
+   "name" : "exif_loader_ref"
+  },
+  {
+   "name" : "exif_loader_reset"
+  },
+  {
+   "name" : "exif_loader_unref"
+  },
+  {
+   "name" : "exif_loader_write"
+  },
+  {
+   "name" : "exif_loader_write_file"
+  },
+  {
+   "name" : "exif_log"
+  },
+  {
+   "name" : "exif_log_code_get_message"
+  },
+  {
+   "name" : "exif_log_code_get_title"
+  },
+  {
+   "name" : "exif_log_free"
+  },
+  {
+   "name" : "exif_log_new"
+  },
+  {
+   "name" : "exif_log_new_mem"
+  },
+  {
+   "name" : "exif_log_ref"
+  },
+  {
+   "name" : "exif_log_set_func"
+  },
+  {
+   "name" : "exif_log_unref"
+  },
+  {
+   "name" : "exif_logv"
+  },
+  {
+   "name" : "exif_mem_alloc"
+  },
+  {
+   "name" : "exif_mem_free"
+  },
+  {
+   "name" : "exif_mem_new"
+  },
+  {
+   "name" : "exif_mem_new_default"
+  },
+  {
+   "name" : "exif_mem_realloc"
+  },
+  {
+   "name" : "exif_mem_ref"
+  },
+  {
+   "name" : "exif_mem_unref"
+  },
+  {
+   "name" : "exif_mnote_data_canon_identify"
+  },
+  {
+   "name" : "exif_mnote_data_canon_new"
+  },
+  {
+   "name" : "exif_mnote_data_construct"
+  },
+  {
+   "name" : "exif_mnote_data_count"
+  },
+  {
+   "name" : "exif_mnote_data_fuji_identify"
+  },
+  {
+   "name" : "exif_mnote_data_fuji_new"
+  },
+  {
+   "name" : "exif_mnote_data_get_description"
+  },
+  {
+   "name" : "exif_mnote_data_get_id"
+  },
+  {
+   "name" : "exif_mnote_data_get_name"
+  },
+  {
+   "name" : "exif_mnote_data_get_title"
+  },
+  {
+   "name" : "exif_mnote_data_get_value"
+  },
+  {
+   "name" : "exif_mnote_data_load"
+  },
+  {
+   "name" : "exif_mnote_data_log"
+  },
+  {
+   "name" : "exif_mnote_data_olympus_identify"
+  },
+  {
+   "name" : "exif_mnote_data_olympus_new"
+  },
+  {
+   "name" : "exif_mnote_data_pentax_identify"
+  },
+  {
+   "name" : "exif_mnote_data_pentax_new"
+  },
+  {
+   "name" : "exif_mnote_data_ref"
+  },
+  {
+   "name" : "exif_mnote_data_save"
+  },
+  {
+   "name" : "exif_mnote_data_set_byte_order"
+  },
+  {
+   "name" : "exif_mnote_data_set_offset"
+  },
+  {
+   "name" : "exif_mnote_data_unref"
+  },
+  {
+   "name" : "exif_set_long"
+  },
+  {
+   "name" : "exif_set_rational"
+  },
+  {
+   "name" : "exif_set_short"
+  },
+  {
+   "name" : "exif_set_slong"
+  },
+  {
+   "name" : "exif_set_srational"
+  },
+  {
+   "name" : "exif_set_sshort"
+  },
+  {
+   "name" : "exif_tag_from_name"
+  },
+  {
+   "name" : "exif_tag_get_description"
+  },
+  {
+   "name" : "exif_tag_get_description_in_ifd"
+  },
+  {
+   "name" : "exif_tag_get_name"
+  },
+  {
+   "name" : "exif_tag_get_name_in_ifd"
+  },
+  {
+   "name" : "exif_tag_get_support_level_in_ifd"
+  },
+  {
+   "name" : "exif_tag_get_title"
+  },
+  {
+   "name" : "exif_tag_get_title_in_ifd"
+  },
+  {
+   "name" : "exif_tag_table_count"
+  },
+  {
+   "name" : "exif_tag_table_get_name"
+  },
+  {
+   "name" : "exif_tag_table_get_tag"
+  },
+  {
+   "name" : "mnote_canon_entry_count_values"
+  },
+  {
+   "name" : "mnote_canon_entry_get_value"
+  },
+  {
+   "name" : "mnote_canon_tag_get_description"
+  },
+  {
+   "name" : "mnote_canon_tag_get_name"
+  },
+  {
+   "name" : "mnote_canon_tag_get_name_sub"
+  },
+  {
+   "name" : "mnote_canon_tag_get_title"
+  },
+  {
+   "name" : "mnote_canon_tag_get_title_sub"
+  },
+  {
+   "name" : "mnote_fuji_entry_get_value"
+  },
+  {
+   "name" : "mnote_fuji_tag_get_description"
+  },
+  {
+   "name" : "mnote_fuji_tag_get_name"
+  },
+  {
+   "name" : "mnote_fuji_tag_get_title"
+  },
+  {
+   "name" : "mnote_olympus_entry_get_value"
+  },
+  {
+   "name" : "mnote_olympus_tag_get_description"
+  },
+  {
+   "name" : "mnote_olympus_tag_get_name"
+  },
+  {
+   "name" : "mnote_olympus_tag_get_title"
+  },
+  {
+   "name" : "mnote_pentax_entry_get_value"
+  },
+  {
+   "name" : "mnote_pentax_tag_get_description"
+  },
+  {
+   "name" : "mnote_pentax_tag_get_name"
+  },
+  {
+   "name" : "mnote_pentax_tag_get_title"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "EXIF_BYTE_ORDER_MOTOROLA"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_BYTE_ORDER_INTEL"
+    }
+   ],
+   "linker_set_key" : "ExifByteOrder",
+   "name" : "ExifByteOrder",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-byte-order.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifByteOrder"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_DATA_OPTION_IGNORE_UNKNOWN_TAGS"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_DATA_OPTION_FOLLOW_SPECIFICATION"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "EXIF_DATA_OPTION_DONT_CHANGE_MAKER_NOTE"
+    }
+   ],
+   "linker_set_key" : "ExifDataOption",
+   "name" : "ExifDataOption",
+   "referenced_type" : "type-143",
+   "self_type" : "type-143",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-data.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifDataOption"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "EXIF_DATA_TYPE_UNCOMPRESSED_CHUNKY"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_DATA_TYPE_UNCOMPRESSED_PLANAR"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_DATA_TYPE_UNCOMPRESSED_YCC"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "EXIF_DATA_TYPE_COMPRESSED"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "EXIF_DATA_TYPE_COUNT"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "EXIF_DATA_TYPE_UNKNOWN"
+    }
+   ],
+   "linker_set_key" : "ExifDataType",
+   "name" : "ExifDataType",
+   "referenced_type" : "type-144",
+   "self_type" : "type-144",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-data-type.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifDataType"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_FORMAT_BYTE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_FORMAT_ASCII"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "EXIF_FORMAT_SHORT"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "EXIF_FORMAT_LONG"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "EXIF_FORMAT_RATIONAL"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "EXIF_FORMAT_SBYTE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "EXIF_FORMAT_UNDEFINED"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "EXIF_FORMAT_SSHORT"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "EXIF_FORMAT_SLONG"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "EXIF_FORMAT_SRATIONAL"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "EXIF_FORMAT_FLOAT"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "EXIF_FORMAT_DOUBLE"
+    }
+   ],
+   "linker_set_key" : "ExifFormat",
+   "name" : "ExifFormat",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-format.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifFormat"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "EXIF_IFD_0"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_IFD_1"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_IFD_EXIF"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "EXIF_IFD_GPS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "EXIF_IFD_INTEROPERABILITY"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "EXIF_IFD_COUNT"
+    }
+   ],
+   "linker_set_key" : "ExifIfd",
+   "name" : "ExifIfd",
+   "referenced_type" : "type-161",
+   "self_type" : "type-161",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-ifd.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifIfd"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "EXIF_LOG_CODE_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_LOG_CODE_DEBUG"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_LOG_CODE_NO_MEMORY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "EXIF_LOG_CODE_CORRUPT_DATA"
+    }
+   ],
+   "linker_set_key" : "ExifLogCode",
+   "name" : "ExifLogCode",
+   "referenced_type" : "type-94",
+   "self_type" : "type-94",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-log.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifLogCode"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "EXIF_SUPPORT_LEVEL_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_SUPPORT_LEVEL_NOT_RECORDED"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_SUPPORT_LEVEL_MANDATORY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "EXIF_SUPPORT_LEVEL_OPTIONAL"
+    }
+   ],
+   "linker_set_key" : "ExifSupportLevel",
+   "name" : "ExifSupportLevel",
+   "referenced_type" : "type-151",
+   "self_type" : "type-151",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-tag.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifSupportLevel"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "EXIF_TAG_INTEROPERABILITY_INDEX"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "EXIF_TAG_INTEROPERABILITY_VERSION"
+    },
+    {
+     "enum_field_value" : 254,
+     "name" : "EXIF_TAG_NEW_SUBFILE_TYPE"
+    },
+    {
+     "enum_field_value" : 256,
+     "name" : "EXIF_TAG_IMAGE_WIDTH"
+    },
+    {
+     "enum_field_value" : 257,
+     "name" : "EXIF_TAG_IMAGE_LENGTH"
+    },
+    {
+     "enum_field_value" : 258,
+     "name" : "EXIF_TAG_BITS_PER_SAMPLE"
+    },
+    {
+     "enum_field_value" : 259,
+     "name" : "EXIF_TAG_COMPRESSION"
+    },
+    {
+     "enum_field_value" : 262,
+     "name" : "EXIF_TAG_PHOTOMETRIC_INTERPRETATION"
+    },
+    {
+     "enum_field_value" : 266,
+     "name" : "EXIF_TAG_FILL_ORDER"
+    },
+    {
+     "enum_field_value" : 269,
+     "name" : "EXIF_TAG_DOCUMENT_NAME"
+    },
+    {
+     "enum_field_value" : 270,
+     "name" : "EXIF_TAG_IMAGE_DESCRIPTION"
+    },
+    {
+     "enum_field_value" : 271,
+     "name" : "EXIF_TAG_MAKE"
+    },
+    {
+     "enum_field_value" : 272,
+     "name" : "EXIF_TAG_MODEL"
+    },
+    {
+     "enum_field_value" : 273,
+     "name" : "EXIF_TAG_STRIP_OFFSETS"
+    },
+    {
+     "enum_field_value" : 274,
+     "name" : "EXIF_TAG_ORIENTATION"
+    },
+    {
+     "enum_field_value" : 277,
+     "name" : "EXIF_TAG_SAMPLES_PER_PIXEL"
+    },
+    {
+     "enum_field_value" : 278,
+     "name" : "EXIF_TAG_ROWS_PER_STRIP"
+    },
+    {
+     "enum_field_value" : 279,
+     "name" : "EXIF_TAG_STRIP_BYTE_COUNTS"
+    },
+    {
+     "enum_field_value" : 282,
+     "name" : "EXIF_TAG_X_RESOLUTION"
+    },
+    {
+     "enum_field_value" : 283,
+     "name" : "EXIF_TAG_Y_RESOLUTION"
+    },
+    {
+     "enum_field_value" : 284,
+     "name" : "EXIF_TAG_PLANAR_CONFIGURATION"
+    },
+    {
+     "enum_field_value" : 296,
+     "name" : "EXIF_TAG_RESOLUTION_UNIT"
+    },
+    {
+     "enum_field_value" : 301,
+     "name" : "EXIF_TAG_TRANSFER_FUNCTION"
+    },
+    {
+     "enum_field_value" : 305,
+     "name" : "EXIF_TAG_SOFTWARE"
+    },
+    {
+     "enum_field_value" : 306,
+     "name" : "EXIF_TAG_DATE_TIME"
+    },
+    {
+     "enum_field_value" : 315,
+     "name" : "EXIF_TAG_ARTIST"
+    },
+    {
+     "enum_field_value" : 318,
+     "name" : "EXIF_TAG_WHITE_POINT"
+    },
+    {
+     "enum_field_value" : 319,
+     "name" : "EXIF_TAG_PRIMARY_CHROMATICITIES"
+    },
+    {
+     "enum_field_value" : 330,
+     "name" : "EXIF_TAG_SUB_IFDS"
+    },
+    {
+     "enum_field_value" : 342,
+     "name" : "EXIF_TAG_TRANSFER_RANGE"
+    },
+    {
+     "enum_field_value" : 512,
+     "name" : "EXIF_TAG_JPEG_PROC"
+    },
+    {
+     "enum_field_value" : 513,
+     "name" : "EXIF_TAG_JPEG_INTERCHANGE_FORMAT"
+    },
+    {
+     "enum_field_value" : 514,
+     "name" : "EXIF_TAG_JPEG_INTERCHANGE_FORMAT_LENGTH"
+    },
+    {
+     "enum_field_value" : 529,
+     "name" : "EXIF_TAG_YCBCR_COEFFICIENTS"
+    },
+    {
+     "enum_field_value" : 530,
+     "name" : "EXIF_TAG_YCBCR_SUB_SAMPLING"
+    },
+    {
+     "enum_field_value" : 531,
+     "name" : "EXIF_TAG_YCBCR_POSITIONING"
+    },
+    {
+     "enum_field_value" : 532,
+     "name" : "EXIF_TAG_REFERENCE_BLACK_WHITE"
+    },
+    {
+     "enum_field_value" : 700,
+     "name" : "EXIF_TAG_XML_PACKET"
+    },
+    {
+     "enum_field_value" : 4096,
+     "name" : "EXIF_TAG_RELATED_IMAGE_FILE_FORMAT"
+    },
+    {
+     "enum_field_value" : 4097,
+     "name" : "EXIF_TAG_RELATED_IMAGE_WIDTH"
+    },
+    {
+     "enum_field_value" : 4098,
+     "name" : "EXIF_TAG_RELATED_IMAGE_LENGTH"
+    },
+    {
+     "enum_field_value" : 33421,
+     "name" : "EXIF_TAG_CFA_REPEAT_PATTERN_DIM"
+    },
+    {
+     "enum_field_value" : 33422,
+     "name" : "EXIF_TAG_CFA_PATTERN"
+    },
+    {
+     "enum_field_value" : 33423,
+     "name" : "EXIF_TAG_BATTERY_LEVEL"
+    },
+    {
+     "enum_field_value" : 33432,
+     "name" : "EXIF_TAG_COPYRIGHT"
+    },
+    {
+     "enum_field_value" : 33434,
+     "name" : "EXIF_TAG_EXPOSURE_TIME"
+    },
+    {
+     "enum_field_value" : 33437,
+     "name" : "EXIF_TAG_FNUMBER"
+    },
+    {
+     "enum_field_value" : 33723,
+     "name" : "EXIF_TAG_IPTC_NAA"
+    },
+    {
+     "enum_field_value" : 34377,
+     "name" : "EXIF_TAG_IMAGE_RESOURCES"
+    },
+    {
+     "enum_field_value" : 34665,
+     "name" : "EXIF_TAG_EXIF_IFD_POINTER"
+    },
+    {
+     "enum_field_value" : 34675,
+     "name" : "EXIF_TAG_INTER_COLOR_PROFILE"
+    },
+    {
+     "enum_field_value" : 34850,
+     "name" : "EXIF_TAG_EXPOSURE_PROGRAM"
+    },
+    {
+     "enum_field_value" : 34852,
+     "name" : "EXIF_TAG_SPECTRAL_SENSITIVITY"
+    },
+    {
+     "enum_field_value" : 34853,
+     "name" : "EXIF_TAG_GPS_INFO_IFD_POINTER"
+    },
+    {
+     "enum_field_value" : 34855,
+     "name" : "EXIF_TAG_ISO_SPEED_RATINGS"
+    },
+    {
+     "enum_field_value" : 34856,
+     "name" : "EXIF_TAG_OECF"
+    },
+    {
+     "enum_field_value" : 34858,
+     "name" : "EXIF_TAG_TIME_ZONE_OFFSET"
+    },
+    {
+     "enum_field_value" : 36864,
+     "name" : "EXIF_TAG_EXIF_VERSION"
+    },
+    {
+     "enum_field_value" : 36867,
+     "name" : "EXIF_TAG_DATE_TIME_ORIGINAL"
+    },
+    {
+     "enum_field_value" : 36868,
+     "name" : "EXIF_TAG_DATE_TIME_DIGITIZED"
+    },
+    {
+     "enum_field_value" : 37121,
+     "name" : "EXIF_TAG_COMPONENTS_CONFIGURATION"
+    },
+    {
+     "enum_field_value" : 37122,
+     "name" : "EXIF_TAG_COMPRESSED_BITS_PER_PIXEL"
+    },
+    {
+     "enum_field_value" : 37377,
+     "name" : "EXIF_TAG_SHUTTER_SPEED_VALUE"
+    },
+    {
+     "enum_field_value" : 37378,
+     "name" : "EXIF_TAG_APERTURE_VALUE"
+    },
+    {
+     "enum_field_value" : 37379,
+     "name" : "EXIF_TAG_BRIGHTNESS_VALUE"
+    },
+    {
+     "enum_field_value" : 37380,
+     "name" : "EXIF_TAG_EXPOSURE_BIAS_VALUE"
+    },
+    {
+     "enum_field_value" : 37381,
+     "name" : "EXIF_TAG_MAX_APERTURE_VALUE"
+    },
+    {
+     "enum_field_value" : 37382,
+     "name" : "EXIF_TAG_SUBJECT_DISTANCE"
+    },
+    {
+     "enum_field_value" : 37383,
+     "name" : "EXIF_TAG_METERING_MODE"
+    },
+    {
+     "enum_field_value" : 37384,
+     "name" : "EXIF_TAG_LIGHT_SOURCE"
+    },
+    {
+     "enum_field_value" : 37385,
+     "name" : "EXIF_TAG_FLASH"
+    },
+    {
+     "enum_field_value" : 37386,
+     "name" : "EXIF_TAG_FOCAL_LENGTH"
+    },
+    {
+     "enum_field_value" : 37396,
+     "name" : "EXIF_TAG_SUBJECT_AREA"
+    },
+    {
+     "enum_field_value" : 37398,
+     "name" : "EXIF_TAG_TIFF_EP_STANDARD_ID"
+    },
+    {
+     "enum_field_value" : 37500,
+     "name" : "EXIF_TAG_MAKER_NOTE"
+    },
+    {
+     "enum_field_value" : 37510,
+     "name" : "EXIF_TAG_USER_COMMENT"
+    },
+    {
+     "enum_field_value" : 37520,
+     "name" : "EXIF_TAG_SUB_SEC_TIME"
+    },
+    {
+     "enum_field_value" : 37521,
+     "name" : "EXIF_TAG_SUB_SEC_TIME_ORIGINAL"
+    },
+    {
+     "enum_field_value" : 37522,
+     "name" : "EXIF_TAG_SUB_SEC_TIME_DIGITIZED"
+    },
+    {
+     "enum_field_value" : 40091,
+     "name" : "EXIF_TAG_XP_TITLE"
+    },
+    {
+     "enum_field_value" : 40092,
+     "name" : "EXIF_TAG_XP_COMMENT"
+    },
+    {
+     "enum_field_value" : 40093,
+     "name" : "EXIF_TAG_XP_AUTHOR"
+    },
+    {
+     "enum_field_value" : 40094,
+     "name" : "EXIF_TAG_XP_KEYWORDS"
+    },
+    {
+     "enum_field_value" : 40095,
+     "name" : "EXIF_TAG_XP_SUBJECT"
+    },
+    {
+     "enum_field_value" : 40960,
+     "name" : "EXIF_TAG_FLASH_PIX_VERSION"
+    },
+    {
+     "enum_field_value" : 40961,
+     "name" : "EXIF_TAG_COLOR_SPACE"
+    },
+    {
+     "enum_field_value" : 40962,
+     "name" : "EXIF_TAG_PIXEL_X_DIMENSION"
+    },
+    {
+     "enum_field_value" : 40963,
+     "name" : "EXIF_TAG_PIXEL_Y_DIMENSION"
+    },
+    {
+     "enum_field_value" : 40964,
+     "name" : "EXIF_TAG_RELATED_SOUND_FILE"
+    },
+    {
+     "enum_field_value" : 40965,
+     "name" : "EXIF_TAG_INTEROPERABILITY_IFD_POINTER"
+    },
+    {
+     "enum_field_value" : 41483,
+     "name" : "EXIF_TAG_FLASH_ENERGY"
+    },
+    {
+     "enum_field_value" : 41484,
+     "name" : "EXIF_TAG_SPATIAL_FREQUENCY_RESPONSE"
+    },
+    {
+     "enum_field_value" : 41486,
+     "name" : "EXIF_TAG_FOCAL_PLANE_X_RESOLUTION"
+    },
+    {
+     "enum_field_value" : 41487,
+     "name" : "EXIF_TAG_FOCAL_PLANE_Y_RESOLUTION"
+    },
+    {
+     "enum_field_value" : 41488,
+     "name" : "EXIF_TAG_FOCAL_PLANE_RESOLUTION_UNIT"
+    },
+    {
+     "enum_field_value" : 41492,
+     "name" : "EXIF_TAG_SUBJECT_LOCATION"
+    },
+    {
+     "enum_field_value" : 41493,
+     "name" : "EXIF_TAG_EXPOSURE_INDEX"
+    },
+    {
+     "enum_field_value" : 41495,
+     "name" : "EXIF_TAG_SENSING_METHOD"
+    },
+    {
+     "enum_field_value" : 41728,
+     "name" : "EXIF_TAG_FILE_SOURCE"
+    },
+    {
+     "enum_field_value" : 41729,
+     "name" : "EXIF_TAG_SCENE_TYPE"
+    },
+    {
+     "enum_field_value" : 41730,
+     "name" : "EXIF_TAG_NEW_CFA_PATTERN"
+    },
+    {
+     "enum_field_value" : 41985,
+     "name" : "EXIF_TAG_CUSTOM_RENDERED"
+    },
+    {
+     "enum_field_value" : 41986,
+     "name" : "EXIF_TAG_EXPOSURE_MODE"
+    },
+    {
+     "enum_field_value" : 41987,
+     "name" : "EXIF_TAG_WHITE_BALANCE"
+    },
+    {
+     "enum_field_value" : 41988,
+     "name" : "EXIF_TAG_DIGITAL_ZOOM_RATIO"
+    },
+    {
+     "enum_field_value" : 41989,
+     "name" : "EXIF_TAG_FOCAL_LENGTH_IN_35MM_FILM"
+    },
+    {
+     "enum_field_value" : 41990,
+     "name" : "EXIF_TAG_SCENE_CAPTURE_TYPE"
+    },
+    {
+     "enum_field_value" : 41991,
+     "name" : "EXIF_TAG_GAIN_CONTROL"
+    },
+    {
+     "enum_field_value" : 41992,
+     "name" : "EXIF_TAG_CONTRAST"
+    },
+    {
+     "enum_field_value" : 41993,
+     "name" : "EXIF_TAG_SATURATION"
+    },
+    {
+     "enum_field_value" : 41994,
+     "name" : "EXIF_TAG_SHARPNESS"
+    },
+    {
+     "enum_field_value" : 41995,
+     "name" : "EXIF_TAG_DEVICE_SETTING_DESCRIPTION"
+    },
+    {
+     "enum_field_value" : 41996,
+     "name" : "EXIF_TAG_SUBJECT_DISTANCE_RANGE"
+    },
+    {
+     "enum_field_value" : 42016,
+     "name" : "EXIF_TAG_IMAGE_UNIQUE_ID"
+    },
+    {
+     "enum_field_value" : 42240,
+     "name" : "EXIF_TAG_GAMMA"
+    },
+    {
+     "enum_field_value" : 50341,
+     "name" : "EXIF_TAG_PRINT_IMAGE_MATCHING"
+    },
+    {
+     "enum_field_value" : 59932,
+     "name" : "EXIF_TAG_PADDING"
+    }
+   ],
+   "linker_set_key" : "ExifTag",
+   "name" : "ExifTag",
+   "referenced_type" : "type-74",
+   "self_type" : "type-74",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/exif-tag.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ExifTag"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "unrecognized"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "nikonV1"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "nikonV2"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "olympusV1"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "olympusV2"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "sanyoV1"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "epsonV1"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "nikonV0"
+    }
+   ],
+   "linker_set_key" : "OlympusVersion",
+   "name" : "OlympusVersion",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/olympus/exif-mnote-data-olympus.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "OlympusVersion"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "pentaxV1"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "pentaxV2"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "pentaxV3"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "casioV2"
+    }
+   ],
+   "linker_set_key" : "PentaxVersion",
+   "name" : "PentaxVersion",
+   "referenced_type" : "type-50",
+   "self_type" : "type-50",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/pentax/exif-mnote-data-pentax.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "PentaxVersion"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "MNOTE_CANON_TAG_UNKNOWN_0"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "MNOTE_CANON_TAG_SETTINGS_1"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "MNOTE_CANON_TAG_FOCAL_LENGTH"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "MNOTE_CANON_TAG_UNKNOWN_3"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "MNOTE_CANON_TAG_SETTINGS_2"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "MNOTE_CANON_TAG_PANORAMA"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "MNOTE_CANON_TAG_IMAGE_TYPE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "MNOTE_CANON_TAG_FIRMWARE"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "MNOTE_CANON_TAG_IMAGE_NUMBER"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "MNOTE_CANON_TAG_OWNER"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "MNOTE_CANON_TAG_UNKNOWN_10"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "MNOTE_CANON_TAG_SERIAL_NUMBER"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "MNOTE_CANON_TAG_UNKNOWN_13"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "MNOTE_CANON_TAG_CUSTOM_FUNCS"
+    },
+    {
+     "enum_field_value" : 160,
+     "name" : "MNOTE_CANON_TAG_COLOR_INFORMATION"
+    }
+   ],
+   "linker_set_key" : "_MnoteCanonTag",
+   "name" : "_MnoteCanonTag",
+   "referenced_type" : "type-141",
+   "self_type" : "type-141",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-tag.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_MnoteCanonTag"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "MNOTE_FUJI_TAG_VERSION"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "MNOTE_FUJI_TAG_SERIAL_NUMBER"
+    },
+    {
+     "enum_field_value" : 4096,
+     "name" : "MNOTE_FUJI_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 4097,
+     "name" : "MNOTE_FUJI_TAG_SHARPNESS"
+    },
+    {
+     "enum_field_value" : 4098,
+     "name" : "MNOTE_FUJI_TAG_WHITE_BALANCE"
+    },
+    {
+     "enum_field_value" : 4099,
+     "name" : "MNOTE_FUJI_TAG_COLOR"
+    },
+    {
+     "enum_field_value" : 4100,
+     "name" : "MNOTE_FUJI_TAG_TONE"
+    },
+    {
+     "enum_field_value" : 4102,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1006"
+    },
+    {
+     "enum_field_value" : 4103,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1007"
+    },
+    {
+     "enum_field_value" : 4104,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1008"
+    },
+    {
+     "enum_field_value" : 4105,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1009"
+    },
+    {
+     "enum_field_value" : 4106,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_100A"
+    },
+    {
+     "enum_field_value" : 4107,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_100B"
+    },
+    {
+     "enum_field_value" : 4112,
+     "name" : "MNOTE_FUJI_TAG_FLASH_MODE"
+    },
+    {
+     "enum_field_value" : 4113,
+     "name" : "MNOTE_FUJI_TAG_FLASH_STRENGTH"
+    },
+    {
+     "enum_field_value" : 4128,
+     "name" : "MNOTE_FUJI_TAG_MACRO"
+    },
+    {
+     "enum_field_value" : 4129,
+     "name" : "MNOTE_FUJI_TAG_FOCUS_MODE"
+    },
+    {
+     "enum_field_value" : 4130,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1022"
+    },
+    {
+     "enum_field_value" : 4131,
+     "name" : "MNOTE_FUJI_TAG_FOCUS_POINT"
+    },
+    {
+     "enum_field_value" : 4132,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1024"
+    },
+    {
+     "enum_field_value" : 4133,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1025"
+    },
+    {
+     "enum_field_value" : 4144,
+     "name" : "MNOTE_FUJI_TAG_SLOW_SYNC"
+    },
+    {
+     "enum_field_value" : 4145,
+     "name" : "MNOTE_FUJI_TAG_PICTURE_MODE"
+    },
+    {
+     "enum_field_value" : 4146,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1032"
+    },
+    {
+     "enum_field_value" : 4352,
+     "name" : "MNOTE_FUJI_TAG_CONT_TAKING"
+    },
+    {
+     "enum_field_value" : 4353,
+     "name" : "MNOTE_FUJI_TAG_SEQUENCE_NUMBER"
+    },
+    {
+     "enum_field_value" : 4608,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1200"
+    },
+    {
+     "enum_field_value" : 4624,
+     "name" : "MNOTE_FUJI_TAG_FINEPIX_COLOR"
+    },
+    {
+     "enum_field_value" : 4864,
+     "name" : "MNOTE_FUJI_TAG_BLUR_CHECK"
+    },
+    {
+     "enum_field_value" : 4865,
+     "name" : "MNOTE_FUJI_TAG_FOCUS_CHECK"
+    },
+    {
+     "enum_field_value" : 4866,
+     "name" : "MNOTE_FUJI_TAG_AUTO_EXPOSURE_CHECK"
+    },
+    {
+     "enum_field_value" : 4867,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1303"
+    },
+    {
+     "enum_field_value" : 5120,
+     "name" : "MNOTE_FUJI_TAG_DYNAMIC_RANGE"
+    },
+    {
+     "enum_field_value" : 5121,
+     "name" : "MNOTE_FUJI_TAG_FILM_MODE"
+    },
+    {
+     "enum_field_value" : 5122,
+     "name" : "MNOTE_FUJI_TAG_DYNAMIC_RANGE_SETTING"
+    },
+    {
+     "enum_field_value" : 5123,
+     "name" : "MNOTE_FUJI_TAG_DEV_DYNAMIC_RANGE_SETTING"
+    },
+    {
+     "enum_field_value" : 5124,
+     "name" : "MNOTE_FUJI_TAG_MIN_FOCAL_LENGTH"
+    },
+    {
+     "enum_field_value" : 5125,
+     "name" : "MNOTE_FUJI_TAG_MAX_FOCAL_LENGTH"
+    },
+    {
+     "enum_field_value" : 5126,
+     "name" : "MNOTE_FUJI_TAG_MAX_APERT_AT_MIN_FOC"
+    },
+    {
+     "enum_field_value" : 5127,
+     "name" : "MNOTE_FUJI_TAG_MAX_APERT_AT_MAX_FOC"
+    },
+    {
+     "enum_field_value" : 5128,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1408"
+    },
+    {
+     "enum_field_value" : 5129,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1409"
+    },
+    {
+     "enum_field_value" : 5130,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_140A"
+    },
+    {
+     "enum_field_value" : 5136,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1410"
+    },
+    {
+     "enum_field_value" : 5153,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_1421"
+    },
+    {
+     "enum_field_value" : 16640,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_4100"
+    },
+    {
+     "enum_field_value" : 18432,
+     "name" : "MNOTE_FUJI_TAG_UNKNOWN_4800"
+    },
+    {
+     "enum_field_value" : 32768,
+     "name" : "MNOTE_FUJI_TAG_FILE_SOURCE"
+    },
+    {
+     "enum_field_value" : 32770,
+     "name" : "MNOTE_FUJI_TAG_ORDER_NUMBER"
+    },
+    {
+     "enum_field_value" : 32771,
+     "name" : "MNOTE_FUJI_TAG_FRAME_NUMBER"
+    }
+   ],
+   "linker_set_key" : "_MnoteFujiTag",
+   "name" : "_MnoteFujiTag",
+   "referenced_type" : "type-166",
+   "self_type" : "type-166",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/fuji/mnote-fuji-tag.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_MnoteFujiTag"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "MNOTE_NIKON_TAG_FIRMWARE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "MNOTE_NIKON_TAG_ISO"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "MNOTE_NIKON_TAG_COLORMODE1"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "MNOTE_NIKON_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "MNOTE_NIKON_TAG_WHITEBALANCE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "MNOTE_NIKON_TAG_SHARPENING"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "MNOTE_NIKON_TAG_FOCUSMODE"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "MNOTE_NIKON_TAG_FLASHSETTING"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "MNOTE_NIKON_TAG_FLASHMODE"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "MNOTE_NIKON_TAG_WHITEBALANCEFINE"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "MNOTE_NIKON_TAG_WHITEBALANCERB"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X000D"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "MNOTE_NIKON_TAG_EXPOSUREDIFF"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "MNOTE_NIKON_TAG_ISOSELECTION"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "MNOTE_NIKON_TAG_PREVIEWIMAGE_IFD_POINTER"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "MNOTE_NIKON_TAG_FLASHEXPCOMPENSATION"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "MNOTE_NIKON_TAG_ISO2"
+    },
+    {
+     "enum_field_value" : 22,
+     "name" : "MNOTE_NIKON_TAG_IMAGEBOUNDARY"
+    },
+    {
+     "enum_field_value" : 23,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X0017"
+    },
+    {
+     "enum_field_value" : 24,
+     "name" : "MNOTE_NIKON_TAG_FLASHEXPOSUREBRACKETVAL"
+    },
+    {
+     "enum_field_value" : 25,
+     "name" : "MNOTE_NIKON_TAG_EXPOSUREBRACKETVAL"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "MNOTE_NIKON_TAG_IMAGEADJUSTMENT"
+    },
+    {
+     "enum_field_value" : 129,
+     "name" : "MNOTE_NIKON_TAG_TONECOMPENSATION"
+    },
+    {
+     "enum_field_value" : 130,
+     "name" : "MNOTE_NIKON_TAG_ADAPTER"
+    },
+    {
+     "enum_field_value" : 131,
+     "name" : "MNOTE_NIKON_TAG_LENSTYPE"
+    },
+    {
+     "enum_field_value" : 132,
+     "name" : "MNOTE_NIKON_TAG_LENS"
+    },
+    {
+     "enum_field_value" : 133,
+     "name" : "MNOTE_NIKON_TAG_MANUALFOCUSDISTANCE"
+    },
+    {
+     "enum_field_value" : 134,
+     "name" : "MNOTE_NIKON_TAG_DIGITALZOOM"
+    },
+    {
+     "enum_field_value" : 135,
+     "name" : "MNOTE_NIKON_TAG_FLASHUSED"
+    },
+    {
+     "enum_field_value" : 136,
+     "name" : "MNOTE_NIKON_TAG_AFFOCUSPOSITION"
+    },
+    {
+     "enum_field_value" : 137,
+     "name" : "MNOTE_NIKON_TAG_BRACKETING"
+    },
+    {
+     "enum_field_value" : 138,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X008A"
+    },
+    {
+     "enum_field_value" : 139,
+     "name" : "MNOTE_NIKON_TAG_LENS_FSTOPS"
+    },
+    {
+     "enum_field_value" : 140,
+     "name" : "MNOTE_NIKON_TAG_CURVE"
+    },
+    {
+     "enum_field_value" : 141,
+     "name" : "MNOTE_NIKON_TAG_COLORMODE"
+    },
+    {
+     "enum_field_value" : 144,
+     "name" : "MNOTE_NIKON_TAG_LIGHTTYPE"
+    },
+    {
+     "enum_field_value" : 145,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X0091"
+    },
+    {
+     "enum_field_value" : 146,
+     "name" : "MNOTE_NIKON_TAG_HUE"
+    },
+    {
+     "enum_field_value" : 148,
+     "name" : "MNOTE_NIKON_TAG_SATURATION"
+    },
+    {
+     "enum_field_value" : 149,
+     "name" : "MNOTE_NIKON_TAG_NOISEREDUCTION"
+    },
+    {
+     "enum_field_value" : 151,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X0097"
+    },
+    {
+     "enum_field_value" : 152,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X0098"
+    },
+    {
+     "enum_field_value" : 154,
+     "name" : "MNOTE_NIKON_TAG_SENSORPIXELSIZE"
+    },
+    {
+     "enum_field_value" : 155,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X009B"
+    },
+    {
+     "enum_field_value" : 160,
+     "name" : "MNOTE_NIKON_TAG_SERIALNUMBER"
+    },
+    {
+     "enum_field_value" : 162,
+     "name" : "MNOTE_NIKON_TAG_IMAGE_DATASIZE"
+    },
+    {
+     "enum_field_value" : 163,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X00A3"
+    },
+    {
+     "enum_field_value" : 167,
+     "name" : "MNOTE_NIKON_TAG_TOTALPICTURES"
+    },
+    {
+     "enum_field_value" : 168,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X00A8"
+    },
+    {
+     "enum_field_value" : 169,
+     "name" : "MNOTE_NIKON_TAG_OPTIMIZATION"
+    },
+    {
+     "enum_field_value" : 170,
+     "name" : "MNOTE_NIKON_TAG_SATURATION2"
+    },
+    {
+     "enum_field_value" : 171,
+     "name" : "MNOTE_NIKON_TAG_VARIPROGRAM"
+    },
+    {
+     "enum_field_value" : 3585,
+     "name" : "MNOTE_NIKON_TAG_CAPTUREEDITORDATA"
+    },
+    {
+     "enum_field_value" : 3593,
+     "name" : "MNOTE_NIKON_TAG_CAPTUREEDITORVER"
+    },
+    {
+     "enum_field_value" : 3598,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X0E0E"
+    },
+    {
+     "enum_field_value" : 3600,
+     "name" : "MNOTE_NIKON_TAG_UNKNOWN_0X0E10"
+    },
+    {
+     "enum_field_value" : 32768,
+     "name" : "MNOTE_NIKON1_TAG_BASE"
+    },
+    {
+     "enum_field_value" : 32770,
+     "name" : "MNOTE_NIKON1_TAG_UNKNOWN_0X0002"
+    },
+    {
+     "enum_field_value" : 32771,
+     "name" : "MNOTE_NIKON1_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 32772,
+     "name" : "MNOTE_NIKON1_TAG_COLORMODE"
+    },
+    {
+     "enum_field_value" : 32773,
+     "name" : "MNOTE_NIKON1_TAG_IMAGEADJUSTMENT"
+    },
+    {
+     "enum_field_value" : 32774,
+     "name" : "MNOTE_NIKON1_TAG_CCDSENSITIVITY"
+    },
+    {
+     "enum_field_value" : 32775,
+     "name" : "MNOTE_NIKON1_TAG_WHITEBALANCE"
+    },
+    {
+     "enum_field_value" : 32776,
+     "name" : "MNOTE_NIKON1_TAG_FOCUS"
+    },
+    {
+     "enum_field_value" : 32777,
+     "name" : "MNOTE_NIKON1_TAG_UNKNOWN_0X0009"
+    },
+    {
+     "enum_field_value" : 32778,
+     "name" : "MNOTE_NIKON1_TAG_DIGITALZOOM"
+    },
+    {
+     "enum_field_value" : 32779,
+     "name" : "MNOTE_NIKON1_TAG_CONVERTER"
+    },
+    {
+     "enum_field_value" : 256,
+     "name" : "MNOTE_OLYMPUS_TAG_THUMBNAILIMAGE"
+    },
+    {
+     "enum_field_value" : 512,
+     "name" : "MNOTE_OLYMPUS_TAG_MODE"
+    },
+    {
+     "enum_field_value" : 513,
+     "name" : "MNOTE_OLYMPUS_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 514,
+     "name" : "MNOTE_OLYMPUS_TAG_MACRO"
+    },
+    {
+     "enum_field_value" : 515,
+     "name" : "MNOTE_OLYMPUS_TAG_BWMODE"
+    },
+    {
+     "enum_field_value" : 516,
+     "name" : "MNOTE_OLYMPUS_TAG_DIGIZOOM"
+    },
+    {
+     "enum_field_value" : 517,
+     "name" : "MNOTE_OLYMPUS_TAG_FOCALPLANEDIAGONAL"
+    },
+    {
+     "enum_field_value" : 518,
+     "name" : "MNOTE_OLYMPUS_TAG_LENSDISTORTION"
+    },
+    {
+     "enum_field_value" : 519,
+     "name" : "MNOTE_OLYMPUS_TAG_VERSION"
+    },
+    {
+     "enum_field_value" : 520,
+     "name" : "MNOTE_OLYMPUS_TAG_INFO"
+    },
+    {
+     "enum_field_value" : 521,
+     "name" : "MNOTE_OLYMPUS_TAG_ID"
+    },
+    {
+     "enum_field_value" : 768,
+     "name" : "MNOTE_OLYMPUS_TAG_PRECAPTUREFRAMES"
+    },
+    {
+     "enum_field_value" : 769,
+     "name" : "MNOTE_OLYMPUS_TAG_WHITEBOARD"
+    },
+    {
+     "enum_field_value" : 770,
+     "name" : "MNOTE_OLYMPUS_TAG_ONETOUCHWB"
+    },
+    {
+     "enum_field_value" : 771,
+     "name" : "MNOTE_OLYMPUS_TAG_WHITEBALANCEBRACKET"
+    },
+    {
+     "enum_field_value" : 772,
+     "name" : "MNOTE_OLYMPUS_TAG_WHITEBALANCEBIAS"
+    },
+    {
+     "enum_field_value" : 3840,
+     "name" : "MNOTE_OLYMPUS_TAG_DATADUMP"
+    },
+    {
+     "enum_field_value" : 3844,
+     "name" : "MNOTE_OLYMPUS_TAG_UNKNOWN_4"
+    },
+    {
+     "enum_field_value" : 4096,
+     "name" : "MNOTE_OLYMPUS_TAG_SHUTTERSPEED"
+    },
+    {
+     "enum_field_value" : 4097,
+     "name" : "MNOTE_OLYMPUS_TAG_ISOVALUE"
+    },
+    {
+     "enum_field_value" : 4098,
+     "name" : "MNOTE_OLYMPUS_TAG_APERTUREVALUE"
+    },
+    {
+     "enum_field_value" : 4099,
+     "name" : "MNOTE_OLYMPUS_TAG_BRIGHTNESSVALUE"
+    },
+    {
+     "enum_field_value" : 4100,
+     "name" : "MNOTE_OLYMPUS_TAG_FLASHMODE"
+    },
+    {
+     "enum_field_value" : 4101,
+     "name" : "MNOTE_OLYMPUS_TAG_FLASHDEVICE"
+    },
+    {
+     "enum_field_value" : 4102,
+     "name" : "MNOTE_OLYMPUS_TAG_EXPOSURECOMP"
+    },
+    {
+     "enum_field_value" : 4103,
+     "name" : "MNOTE_OLYMPUS_TAG_SENSORTEMPERATURE"
+    },
+    {
+     "enum_field_value" : 4104,
+     "name" : "MNOTE_OLYMPUS_TAG_LENSTEMPERATURE"
+    },
+    {
+     "enum_field_value" : 4105,
+     "name" : "MNOTE_OLYMPUS_TAG_LIGHTCONDITION"
+    },
+    {
+     "enum_field_value" : 4106,
+     "name" : "MNOTE_OLYMPUS_TAG_FOCUSRANGE"
+    },
+    {
+     "enum_field_value" : 4107,
+     "name" : "MNOTE_OLYMPUS_TAG_MANFOCUS"
+    },
+    {
+     "enum_field_value" : 4108,
+     "name" : "MNOTE_OLYMPUS_TAG_FOCUSDIST"
+    },
+    {
+     "enum_field_value" : 4109,
+     "name" : "MNOTE_OLYMPUS_TAG_ZOOMSTEPCOUNT"
+    },
+    {
+     "enum_field_value" : 4110,
+     "name" : "MNOTE_OLYMPUS_TAG_FOCUSSTEPCOUNT"
+    },
+    {
+     "enum_field_value" : 4111,
+     "name" : "MNOTE_OLYMPUS_TAG_SHARPNESS"
+    },
+    {
+     "enum_field_value" : 4112,
+     "name" : "MNOTE_OLYMPUS_TAG_FLASHCHARGELEVEL"
+    },
+    {
+     "enum_field_value" : 4113,
+     "name" : "MNOTE_OLYMPUS_TAG_COLORMATRIX"
+    },
+    {
+     "enum_field_value" : 4114,
+     "name" : "MNOTE_OLYMPUS_TAG_BLACKLEVEL"
+    },
+    {
+     "enum_field_value" : 4117,
+     "name" : "MNOTE_OLYMPUS_TAG_WBALANCE"
+    },
+    {
+     "enum_field_value" : 4119,
+     "name" : "MNOTE_OLYMPUS_TAG_REDBALANCE"
+    },
+    {
+     "enum_field_value" : 4120,
+     "name" : "MNOTE_OLYMPUS_TAG_BLUEBALANCE"
+    },
+    {
+     "enum_field_value" : 4121,
+     "name" : "MNOTE_OLYMPUS_TAG_COLORMATRIXNUMBER"
+    },
+    {
+     "enum_field_value" : 4122,
+     "name" : "MNOTE_OLYMPUS_TAG_SERIALNUMBER2"
+    },
+    {
+     "enum_field_value" : 4131,
+     "name" : "MNOTE_OLYMPUS_TAG_FLASHEXPOSURECOMP"
+    },
+    {
+     "enum_field_value" : 4132,
+     "name" : "MNOTE_OLYMPUS_TAG_INTERNALFLASHTABLE"
+    },
+    {
+     "enum_field_value" : 4133,
+     "name" : "MNOTE_OLYMPUS_TAG_EXTERNALFLASHGVALUE"
+    },
+    {
+     "enum_field_value" : 4134,
+     "name" : "MNOTE_OLYMPUS_TAG_EXTERNALFLASHBOUNCE"
+    },
+    {
+     "enum_field_value" : 4135,
+     "name" : "MNOTE_OLYMPUS_TAG_EXTERNALFLASHZOOM"
+    },
+    {
+     "enum_field_value" : 4136,
+     "name" : "MNOTE_OLYMPUS_TAG_EXTERNALFLASHMODE"
+    },
+    {
+     "enum_field_value" : 4137,
+     "name" : "MNOTE_OLYMPUS_TAG_CONTRAST"
+    },
+    {
+     "enum_field_value" : 4138,
+     "name" : "MNOTE_OLYMPUS_TAG_SHARPNESSFACTOR"
+    },
+    {
+     "enum_field_value" : 4139,
+     "name" : "MNOTE_OLYMPUS_TAG_COLORCONTROL"
+    },
+    {
+     "enum_field_value" : 4142,
+     "name" : "MNOTE_OLYMPUS_TAG_IMAGEWIDTH"
+    },
+    {
+     "enum_field_value" : 4143,
+     "name" : "MNOTE_OLYMPUS_TAG_IMAGEHEIGHT"
+    },
+    {
+     "enum_field_value" : 4144,
+     "name" : "MNOTE_OLYMPUS_TAG_SCENEDETECT"
+    },
+    {
+     "enum_field_value" : 4148,
+     "name" : "MNOTE_OLYMPUS_TAG_COMPRESSIONRATIO"
+    },
+    {
+     "enum_field_value" : 4149,
+     "name" : "MNOTE_OLYMPUS_TAG_PREVIEWIMAGEVALID"
+    },
+    {
+     "enum_field_value" : 4152,
+     "name" : "MNOTE_OLYMPUS_TAG_AFRESULT"
+    },
+    {
+     "enum_field_value" : 4153,
+     "name" : "MNOTE_OLYMPUS_TAG_CCDSCANMODE"
+    },
+    {
+     "enum_field_value" : 4154,
+     "name" : "MNOTE_OLYMPUS_TAG_NOISEREDUCTION"
+    },
+    {
+     "enum_field_value" : 4155,
+     "name" : "MNOTE_OLYMPUS_TAG_INFINITYLENSSTEP"
+    },
+    {
+     "enum_field_value" : 4156,
+     "name" : "MNOTE_OLYMPUS_TAG_NEARLENSSTEP"
+    },
+    {
+     "enum_field_value" : 4157,
+     "name" : "MNOTE_OLYMPUS_TAG_LIGHTVALUECENTER"
+    },
+    {
+     "enum_field_value" : 4158,
+     "name" : "MNOTE_OLYMPUS_TAG_LIGHTVALUEPERIPHERY"
+    },
+    {
+     "enum_field_value" : 523,
+     "name" : "MNOTE_EPSON_TAG_IMAGE_WIDTH"
+    },
+    {
+     "enum_field_value" : 524,
+     "name" : "MNOTE_EPSON_TAG_IMAGE_HEIGHT"
+    },
+    {
+     "enum_field_value" : 525,
+     "name" : "MNOTE_EPSON_TAG_SOFTWARE"
+    },
+    {
+     "enum_field_value" : 526,
+     "name" : "MNOTE_SANYO_TAG_SEQUENTIALSHOT"
+    },
+    {
+     "enum_field_value" : 527,
+     "name" : "MNOTE_SANYO_TAG_WIDERANGE"
+    },
+    {
+     "enum_field_value" : 528,
+     "name" : "MNOTE_SANYO_TAG_COLORADJUSTMENTMODE"
+    },
+    {
+     "enum_field_value" : 530,
+     "name" : "MNOTE_SANYO_TAG_FOCUSMODE"
+    },
+    {
+     "enum_field_value" : 531,
+     "name" : "MNOTE_SANYO_TAG_QUICKSHOT"
+    },
+    {
+     "enum_field_value" : 532,
+     "name" : "MNOTE_SANYO_TAG_SELFTIMER"
+    },
+    {
+     "enum_field_value" : 534,
+     "name" : "MNOTE_SANYO_TAG_VOICEMEMO"
+    },
+    {
+     "enum_field_value" : 535,
+     "name" : "MNOTE_SANYO_TAG_RECORDSHUTTERRELEASE"
+    },
+    {
+     "enum_field_value" : 536,
+     "name" : "MNOTE_SANYO_TAG_FLICKERREDUCE"
+    },
+    {
+     "enum_field_value" : 537,
+     "name" : "MNOTE_SANYO_TAG_OPTICALZOOM"
+    },
+    {
+     "enum_field_value" : 538,
+     "name" : "MNOTE_SANYO_TAG_CCDSENSITIVITY"
+    },
+    {
+     "enum_field_value" : 539,
+     "name" : "MNOTE_SANYO_TAG_DIGITALZOOM"
+    },
+    {
+     "enum_field_value" : 541,
+     "name" : "MNOTE_SANYO_TAG_LIGHTSOURCESPECIAL"
+    },
+    {
+     "enum_field_value" : 542,
+     "name" : "MNOTE_SANYO_TAG_RESAVED"
+    },
+    {
+     "enum_field_value" : 543,
+     "name" : "MNOTE_SANYO_TAG_SCENESELECT"
+    },
+    {
+     "enum_field_value" : 547,
+     "name" : "MNOTE_SANYO_TAG_MANUALFOCUSDISTANCE"
+    },
+    {
+     "enum_field_value" : 548,
+     "name" : "MNOTE_SANYO_TAG_SEQUENCESHOTINTERVAL"
+    }
+   ],
+   "linker_set_key" : "_MnoteOlympusTag",
+   "name" : "_MnoteOlympusTag",
+   "referenced_type" : "type-46",
+   "self_type" : "type-46",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/olympus/mnote-olympus-tag.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_MnoteOlympusTag"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "MNOTE_PENTAX_TAG_MODE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "MNOTE_PENTAX_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "MNOTE_PENTAX_TAG_FOCUS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "MNOTE_PENTAX_TAG_FLASH"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_05"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_06"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "MNOTE_PENTAX_TAG_WHITE_BALANCE"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_08"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_09"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "MNOTE_PENTAX_TAG_ZOOM"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "MNOTE_PENTAX_TAG_SHARPNESS"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "MNOTE_PENTAX_TAG_CONTRAST"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "MNOTE_PENTAX_TAG_SATURATION"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_14"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_15"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_16"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_17"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_18"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_19"
+    },
+    {
+     "enum_field_value" : 20,
+     "name" : "MNOTE_PENTAX_TAG_ISO_SPEED"
+    },
+    {
+     "enum_field_value" : 21,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_21"
+    },
+    {
+     "enum_field_value" : 23,
+     "name" : "MNOTE_PENTAX_TAG_COLOR"
+    },
+    {
+     "enum_field_value" : 24,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_24"
+    },
+    {
+     "enum_field_value" : 25,
+     "name" : "MNOTE_PENTAX_TAG_UNKNOWN_25"
+    },
+    {
+     "enum_field_value" : 3584,
+     "name" : "MNOTE_PENTAX_TAG_PRINTIM"
+    },
+    {
+     "enum_field_value" : 4096,
+     "name" : "MNOTE_PENTAX_TAG_TZ_CITY"
+    },
+    {
+     "enum_field_value" : 4097,
+     "name" : "MNOTE_PENTAX_TAG_TZ_DST"
+    },
+    {
+     "enum_field_value" : 16384,
+     "name" : "MNOTE_PENTAX2_TAG_BASE"
+    },
+    {
+     "enum_field_value" : 16385,
+     "name" : "MNOTE_PENTAX2_TAG_MODE"
+    },
+    {
+     "enum_field_value" : 16386,
+     "name" : "MNOTE_PENTAX2_TAG_PREVIEW_SIZE"
+    },
+    {
+     "enum_field_value" : 16387,
+     "name" : "MNOTE_PENTAX2_TAG_PREVIEW_LENGTH"
+    },
+    {
+     "enum_field_value" : 16388,
+     "name" : "MNOTE_PENTAX2_TAG_PREVIEW_START"
+    },
+    {
+     "enum_field_value" : 16389,
+     "name" : "MNOTE_PENTAX2_TAG_MODEL_ID"
+    },
+    {
+     "enum_field_value" : 16390,
+     "name" : "MNOTE_PENTAX2_TAG_DATE"
+    },
+    {
+     "enum_field_value" : 16391,
+     "name" : "MNOTE_PENTAX2_TAG_TIME"
+    },
+    {
+     "enum_field_value" : 16392,
+     "name" : "MNOTE_PENTAX2_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 16393,
+     "name" : "MNOTE_PENTAX2_TAG_IMAGE_SIZE"
+    },
+    {
+     "enum_field_value" : 16395,
+     "name" : "MNOTE_PENTAX2_TAG_PICTURE_MODE"
+    },
+    {
+     "enum_field_value" : 16396,
+     "name" : "MNOTE_PENTAX2_TAG_FLASH_MODE"
+    },
+    {
+     "enum_field_value" : 16397,
+     "name" : "MNOTE_PENTAX2_TAG_FOCUS_MODE"
+    },
+    {
+     "enum_field_value" : 16398,
+     "name" : "MNOTE_PENTAX2_TAG_AFPOINT_SELECTED"
+    },
+    {
+     "enum_field_value" : 16399,
+     "name" : "MNOTE_PENTAX2_TAG_AUTO_AFPOINT"
+    },
+    {
+     "enum_field_value" : 16400,
+     "name" : "MNOTE_PENTAX2_TAG_FOCUS_POSITION"
+    },
+    {
+     "enum_field_value" : 16402,
+     "name" : "MNOTE_PENTAX2_TAG_EXPOSURE_TIME"
+    },
+    {
+     "enum_field_value" : 16403,
+     "name" : "MNOTE_PENTAX2_TAG_FNUMBER"
+    },
+    {
+     "enum_field_value" : 16404,
+     "name" : "MNOTE_PENTAX2_TAG_ISO"
+    },
+    {
+     "enum_field_value" : 16406,
+     "name" : "MNOTE_PENTAX2_TAG_EXPOSURE_COMPENSATION"
+    },
+    {
+     "enum_field_value" : 16407,
+     "name" : "MNOTE_PENTAX2_TAG_METERING_MODE"
+    },
+    {
+     "enum_field_value" : 16408,
+     "name" : "MNOTE_PENTAX2_TAG_AUTO_BRACKETING"
+    },
+    {
+     "enum_field_value" : 16409,
+     "name" : "MNOTE_PENTAX2_TAG_WHITE_BALANCE"
+    },
+    {
+     "enum_field_value" : 16410,
+     "name" : "MNOTE_PENTAX2_TAG_WHITE_BALANCE_MODE"
+    },
+    {
+     "enum_field_value" : 16411,
+     "name" : "MNOTE_PENTAX2_TAG_BLUE_BALANCE"
+    },
+    {
+     "enum_field_value" : 16412,
+     "name" : "MNOTE_PENTAX2_TAG_RED_BALANCE"
+    },
+    {
+     "enum_field_value" : 16413,
+     "name" : "MNOTE_PENTAX2_TAG_FOCAL_LENGTH"
+    },
+    {
+     "enum_field_value" : 16414,
+     "name" : "MNOTE_PENTAX2_TAG_DIGITAL_ZOOM"
+    },
+    {
+     "enum_field_value" : 16415,
+     "name" : "MNOTE_PENTAX2_TAG_SATURATION"
+    },
+    {
+     "enum_field_value" : 16416,
+     "name" : "MNOTE_PENTAX2_TAG_CONTRAST"
+    },
+    {
+     "enum_field_value" : 16417,
+     "name" : "MNOTE_PENTAX2_TAG_SHARPNESS"
+    },
+    {
+     "enum_field_value" : 16418,
+     "name" : "MNOTE_PENTAX2_TAG_WORLDTIME_LOCATION"
+    },
+    {
+     "enum_field_value" : 16419,
+     "name" : "MNOTE_PENTAX2_TAG_HOMETOWN_CITY"
+    },
+    {
+     "enum_field_value" : 16420,
+     "name" : "MNOTE_PENTAX2_TAG_DESTINATION_CITY"
+    },
+    {
+     "enum_field_value" : 16421,
+     "name" : "MNOTE_PENTAX2_TAG_HOMETOWN_DST"
+    },
+    {
+     "enum_field_value" : 16422,
+     "name" : "MNOTE_PENTAX2_TAG_DESTINATION_DST"
+    },
+    {
+     "enum_field_value" : 16425,
+     "name" : "MNOTE_PENTAX2_TAG_FRAME_NUMBER"
+    },
+    {
+     "enum_field_value" : 16434,
+     "name" : "MNOTE_PENTAX2_TAG_IMAGE_PROCESSING"
+    },
+    {
+     "enum_field_value" : 16435,
+     "name" : "MNOTE_PENTAX2_TAG_PICTURE_MODE2"
+    },
+    {
+     "enum_field_value" : 16436,
+     "name" : "MNOTE_PENTAX2_TAG_DRIVE_MODE"
+    },
+    {
+     "enum_field_value" : 16439,
+     "name" : "MNOTE_PENTAX2_TAG_COLOR_SPACE"
+    },
+    {
+     "enum_field_value" : 16440,
+     "name" : "MNOTE_PENTAX2_TAG_IMAGE_AREA_OFFSET"
+    },
+    {
+     "enum_field_value" : 16441,
+     "name" : "MNOTE_PENTAX2_TAG_RAW_IMAGE_SIZE"
+    },
+    {
+     "enum_field_value" : 16444,
+     "name" : "MNOTE_PENTAX2_TAG_AFPOINTS_USED"
+    },
+    {
+     "enum_field_value" : 16447,
+     "name" : "MNOTE_PENTAX2_TAG_LENS_TYPE"
+    },
+    {
+     "enum_field_value" : 16455,
+     "name" : "MNOTE_PENTAX2_TAG_CAMERA_TEMPERATURE"
+    },
+    {
+     "enum_field_value" : 16457,
+     "name" : "MNOTE_PENTAX2_TAG_NOISE_REDUCTION"
+    },
+    {
+     "enum_field_value" : 16461,
+     "name" : "MNOTE_PENTAX2_TAG_FLASH_EXPOSURE_COMP"
+    },
+    {
+     "enum_field_value" : 16463,
+     "name" : "MNOTE_PENTAX2_TAG_IMAGE_TONE"
+    },
+    {
+     "enum_field_value" : 16476,
+     "name" : "MNOTE_PENTAX2_TAG_SHAKE_REDUCTION_INFO"
+    },
+    {
+     "enum_field_value" : 16896,
+     "name" : "MNOTE_PENTAX2_TAG_BLACK_POINT"
+    },
+    {
+     "enum_field_value" : 16897,
+     "name" : "MNOTE_PENTAX2_TAG_WHITE_POINT"
+    },
+    {
+     "enum_field_value" : 16902,
+     "name" : "MNOTE_PENTAX2_TAG_AE_INFO"
+    },
+    {
+     "enum_field_value" : 16903,
+     "name" : "MNOTE_PENTAX2_TAG_LENS_INFO"
+    },
+    {
+     "enum_field_value" : 16904,
+     "name" : "MNOTE_PENTAX2_TAG_FLASH_INFO"
+    },
+    {
+     "enum_field_value" : 16917,
+     "name" : "MNOTE_PENTAX2_TAG_CAMERA_INFO"
+    },
+    {
+     "enum_field_value" : 16918,
+     "name" : "MNOTE_PENTAX2_TAG_BATTERY_INFO"
+    },
+    {
+     "enum_field_value" : 20480,
+     "name" : "MNOTE_PENTAX2_TAG_HOMETOWN_CITY_CODE"
+    },
+    {
+     "enum_field_value" : 20481,
+     "name" : "MNOTE_PENTAX2_TAG_DESTINATION_CITY_CODE"
+    },
+    {
+     "enum_field_value" : 16384,
+     "name" : "MNOTE_CASIO2_TAG_BASE"
+    },
+    {
+     "enum_field_value" : 24576,
+     "name" : "MNOTE_CASIO2_TAG_PREVIEW_START"
+    },
+    {
+     "enum_field_value" : 24593,
+     "name" : "MNOTE_CASIO2_TAG_WHITE_BALANCE_BIAS"
+    },
+    {
+     "enum_field_value" : 24594,
+     "name" : "MNOTE_CASIO2_TAG_WHITE_BALANCE"
+    },
+    {
+     "enum_field_value" : 24610,
+     "name" : "MNOTE_CASIO2_TAG_OBJECT_DISTANCE"
+    },
+    {
+     "enum_field_value" : 24628,
+     "name" : "MNOTE_CASIO2_TAG_FLASH_DISTANCE"
+    },
+    {
+     "enum_field_value" : 28672,
+     "name" : "MNOTE_CASIO2_TAG_RECORD_MODE"
+    },
+    {
+     "enum_field_value" : 28673,
+     "name" : "MNOTE_CASIO2_TAG_SELF_TIMER"
+    },
+    {
+     "enum_field_value" : 28674,
+     "name" : "MNOTE_CASIO2_TAG_QUALITY"
+    },
+    {
+     "enum_field_value" : 28675,
+     "name" : "MNOTE_CASIO2_TAG_FOCUS_MODE"
+    },
+    {
+     "enum_field_value" : 28678,
+     "name" : "MNOTE_CASIO2_TAG_TIME_ZONE"
+    },
+    {
+     "enum_field_value" : 28679,
+     "name" : "MNOTE_CASIO2_TAG_BESTSHOT_MODE"
+    },
+    {
+     "enum_field_value" : 28692,
+     "name" : "MNOTE_CASIO2_TAG_CCS_ISO_SENSITIVITY"
+    },
+    {
+     "enum_field_value" : 28693,
+     "name" : "MNOTE_CASIO2_TAG_COLOR_MODE"
+    },
+    {
+     "enum_field_value" : 28694,
+     "name" : "MNOTE_CASIO2_TAG_ENHANCEMENT"
+    },
+    {
+     "enum_field_value" : 28695,
+     "name" : "MNOTE_CASIO2_TAG_FINER"
+    }
+   ],
+   "linker_set_key" : "_MnotePentaxTag",
+   "name" : "_MnotePentaxTag",
+   "referenced_type" : "type-48",
+   "self_type" : "type-48",
+   "size" : 4,
+   "source_file" : "/external/libexif/libexif/pentax/mnote-pentax-tag.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_MnotePentaxTag"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *(_ExifMnoteData *, unsigned int, char *, unsigned int)",
+   "name" : "char *(_ExifMnoteData *, unsigned int, char *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-38",
+   "return_type" : "type-39",
+   "self_type" : "type-38",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *(_ExifMnoteData *, unsigned int)",
+   "name" : "const char *(_ExifMnoteData *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-33",
+   "return_type" : "type-34",
+   "self_type" : "type-33",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int (_ExifMnoteData *)",
+   "name" : "unsigned int (_ExifMnoteData *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-29",
+   "return_type" : "type-2",
+   "self_type" : "type-29",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int (_ExifMnoteData *, unsigned int)",
+   "name" : "unsigned int (_ExifMnoteData *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-31",
+   "return_type" : "type-2",
+   "self_type" : "type-31",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifContent *, void *)",
+   "name" : "void (_ExifContent *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "referenced_type" : "type-162",
+   "return_type" : "type-12",
+   "self_type" : "type-162",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifEntry *, void *)",
+   "name" : "void (_ExifEntry *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "referenced_type" : "type-147",
+   "return_type" : "type-12",
+   "self_type" : "type-147",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifLog *, ExifLogCode, const char *, const char *, __va_list_tag *, void *)",
+   "name" : "void (_ExifLog *, ExifLogCode, const char *, const char *, __va_list_tag *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    },
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-95"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "referenced_type" : "type-91",
+   "return_type" : "type-12",
+   "self_type" : "type-91",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifMnoteData *)",
+   "name" : "void (_ExifMnoteData *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-11",
+   "return_type" : "type-12",
+   "self_type" : "type-11",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifMnoteData *, ExifByteOrder)",
+   "name" : "void (_ExifMnoteData *, ExifByteOrder)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "referenced_type" : "type-27",
+   "return_type" : "type-12",
+   "self_type" : "type-27",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifMnoteData *, const unsigned char *, unsigned int)",
+   "name" : "void (_ExifMnoteData *, const unsigned char *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-21",
+   "return_type" : "type-12",
+   "self_type" : "type-21",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifMnoteData *, unsigned char **, unsigned int *)",
+   "name" : "void (_ExifMnoteData *, unsigned char **, unsigned int *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "referenced_type" : "type-15",
+   "return_type" : "type-12",
+   "self_type" : "type-15",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (_ExifMnoteData *, unsigned int)",
+   "name" : "void (_ExifMnoteData *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-25",
+   "return_type" : "type-12",
+   "self_type" : "type-25",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *)",
+   "name" : "void (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "referenced_type" : "type-103",
+   "return_type" : "type-12",
+   "self_type" : "type-103",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned int)",
+   "name" : "void *(unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-100",
+   "return_type" : "type-97",
+   "self_type" : "type-100",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(void *, unsigned int)",
+   "name" : "void *(void *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-97"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-101",
+   "return_type" : "type-97",
+   "self_type" : "type-101",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "exif_array_set_byte_order",
+   "linker_set_key" : "exif_array_set_byte_order",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_byte_order_get_name",
+   "linker_set_key" : "exif_byte_order_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-byte-order.h"
+  },
+  {
+   "function_name" : "exif_content_add_entry",
+   "linker_set_key" : "exif_content_add_entry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_dump",
+   "linker_set_key" : "exif_content_dump",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_fix",
+   "linker_set_key" : "exif_content_fix",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_foreach_entry",
+   "linker_set_key" : "exif_content_foreach_entry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-148"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_free",
+   "linker_set_key" : "exif_content_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_get_entry",
+   "linker_set_key" : "exif_content_get_entry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-74"
+    }
+   ],
+   "return_type" : "type-72",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_get_ifd",
+   "linker_set_key" : "exif_content_get_ifd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-161",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_log",
+   "linker_set_key" : "exif_content_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-149"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_new",
+   "linker_set_key" : "exif_content_new",
+   "return_type" : "type-69",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_new_mem",
+   "linker_set_key" : "exif_content_new_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-145"
+    }
+   ],
+   "return_type" : "type-69",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_ref",
+   "linker_set_key" : "exif_content_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_remove_entry",
+   "linker_set_key" : "exif_content_remove_entry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_content_unref",
+   "linker_set_key" : "exif_content_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "function_name" : "exif_convert_utf16_to_utf8",
+   "linker_set_key" : "exif_convert_utf16_to_utf8",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-116"
+    },
+    {
+     "referenced_type" : "type-154"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_data_dump",
+   "linker_set_key" : "exif_data_dump",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_fix",
+   "linker_set_key" : "exif_data_fix",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_foreach_content",
+   "linker_set_key" : "exif_data_foreach_content",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-163"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_free",
+   "linker_set_key" : "exif_data_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_get_byte_order",
+   "linker_set_key" : "exif_data_get_byte_order",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_get_data_type",
+   "linker_set_key" : "exif_data_get_data_type",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-144",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_get_mnote_data",
+   "linker_set_key" : "exif_data_get_mnote_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_load_data",
+   "linker_set_key" : "exif_data_load_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_log",
+   "linker_set_key" : "exif_data_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-40"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_new",
+   "linker_set_key" : "exif_data_new",
+   "return_type" : "type-77",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_new_from_data",
+   "linker_set_key" : "exif_data_new_from_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-77",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_new_from_file",
+   "linker_set_key" : "exif_data_new_from_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-77",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_new_mem",
+   "linker_set_key" : "exif_data_new_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-42"
+    }
+   ],
+   "return_type" : "type-77",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_option_get_description",
+   "linker_set_key" : "exif_data_option_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_option_get_name",
+   "linker_set_key" : "exif_data_option_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_ref",
+   "linker_set_key" : "exif_data_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_save_data",
+   "linker_set_key" : "exif_data_save_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_set_byte_order",
+   "linker_set_key" : "exif_data_set_byte_order",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_set_data_type",
+   "linker_set_key" : "exif_data_set_data_type",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-144"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_set_option",
+   "linker_set_key" : "exif_data_set_option",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_unref",
+   "linker_set_key" : "exif_data_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_data_unset_option",
+   "linker_set_key" : "exif_data_unset_option",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "function_name" : "exif_entry_dump",
+   "linker_set_key" : "exif_entry_dump",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_fix",
+   "linker_set_key" : "exif_entry_fix",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_free",
+   "linker_set_key" : "exif_entry_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_get_value",
+   "linker_set_key" : "exif_entry_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_initialize",
+   "linker_set_key" : "exif_entry_initialize",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-74"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_new",
+   "linker_set_key" : "exif_entry_new",
+   "return_type" : "type-72",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_new_mem",
+   "linker_set_key" : "exif_entry_new_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-72",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_ref",
+   "linker_set_key" : "exif_entry_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_entry_unref",
+   "linker_set_key" : "exif_entry_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "function_name" : "exif_format_get_name",
+   "linker_set_key" : "exif_format_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-format.h"
+  },
+  {
+   "function_name" : "exif_format_get_size",
+   "linker_set_key" : "exif_format_get_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-18",
+   "source_file" : "/external/libexif/libexif/exif-format.h"
+  },
+  {
+   "function_name" : "exif_get_long",
+   "linker_set_key" : "exif_get_long",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_get_rational",
+   "linker_set_key" : "exif_get_rational",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-152",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_get_short",
+   "linker_set_key" : "exif_get_short",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-115",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_get_slong",
+   "linker_set_key" : "exif_get_slong",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-154",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_get_srational",
+   "linker_set_key" : "exif_get_srational",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-153",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_get_sshort",
+   "linker_set_key" : "exif_get_sshort",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-113",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_ifd_get_name",
+   "linker_set_key" : "exif_ifd_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-161"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-ifd.h"
+  },
+  {
+   "function_name" : "exif_loader_get_buf",
+   "linker_set_key" : "exif_loader_get_buf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    },
+    {
+     "referenced_type" : "type-86"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_get_data",
+   "linker_set_key" : "exif_loader_get_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    }
+   ],
+   "return_type" : "type-77",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_log",
+   "linker_set_key" : "exif_loader_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    },
+    {
+     "referenced_type" : "type-87"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_new",
+   "linker_set_key" : "exif_loader_new",
+   "return_type" : "type-67",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_new_mem",
+   "linker_set_key" : "exif_loader_new_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-84"
+    }
+   ],
+   "return_type" : "type-67",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_ref",
+   "linker_set_key" : "exif_loader_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_reset",
+   "linker_set_key" : "exif_loader_reset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_unref",
+   "linker_set_key" : "exif_loader_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_write",
+   "linker_set_key" : "exif_loader_write",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    },
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-18",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_loader_write_file",
+   "linker_set_key" : "exif_loader_write_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-67"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "function_name" : "exif_log",
+   "linker_set_key" : "exif_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    },
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_code_get_message",
+   "linker_set_key" : "exif_log_code_get_message",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_code_get_title",
+   "linker_set_key" : "exif_log_code_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_free",
+   "linker_set_key" : "exif_log_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_new",
+   "linker_set_key" : "exif_log_new",
+   "return_type" : "type-92",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_new_mem",
+   "linker_set_key" : "exif_log_new_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-89"
+    }
+   ],
+   "return_type" : "type-92",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_ref",
+   "linker_set_key" : "exif_log_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_set_func",
+   "linker_set_key" : "exif_log_set_func",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    },
+    {
+     "referenced_type" : "type-98"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_log_unref",
+   "linker_set_key" : "exif_log_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_logv",
+   "linker_set_key" : "exif_logv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-92"
+    },
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-95"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "function_name" : "exif_mem_alloc",
+   "linker_set_key" : "exif_mem_alloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-105"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-97",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mem_free",
+   "linker_set_key" : "exif_mem_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-105"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mem_new",
+   "linker_set_key" : "exif_mem_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-99"
+    },
+    {
+     "referenced_type" : "type-102"
+    },
+    {
+     "referenced_type" : "type-104"
+    }
+   ],
+   "return_type" : "type-105",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mem_new_default",
+   "linker_set_key" : "exif_mem_new_default",
+   "return_type" : "type-105",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mem_realloc",
+   "linker_set_key" : "exif_mem_realloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-105"
+    },
+    {
+     "referenced_type" : "type-97"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-97",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mem_ref",
+   "linker_set_key" : "exif_mem_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-105"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mem_unref",
+   "linker_set_key" : "exif_mem_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-105"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_canon_identify",
+   "linker_set_key" : "exif_mnote_data_canon_identify",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-130"
+    },
+    {
+     "referenced_type" : "type-132"
+    }
+   ],
+   "return_type" : "type-154",
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_canon_new",
+   "linker_set_key" : "exif_mnote_data_canon_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-121"
+    },
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_construct",
+   "linker_set_key" : "exif_mnote_data_construct",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-111"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_count",
+   "linker_set_key" : "exif_mnote_data_count",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_fuji_identify",
+   "linker_set_key" : "exif_mnote_data_fuji_identify",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-130"
+    },
+    {
+     "referenced_type" : "type-132"
+    }
+   ],
+   "return_type" : "type-154",
+   "source_file" : "/external/libexif/libexif/fuji/exif-mnote-data-fuji.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_fuji_new",
+   "linker_set_key" : "exif_mnote_data_fuji_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-280"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/libexif/libexif/fuji/exif-mnote-data-fuji.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_get_description",
+   "linker_set_key" : "exif_mnote_data_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_get_id",
+   "linker_set_key" : "exif_mnote_data_get_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_get_name",
+   "linker_set_key" : "exif_mnote_data_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_get_title",
+   "linker_set_key" : "exif_mnote_data_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_get_value",
+   "linker_set_key" : "exif_mnote_data_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-39",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_load",
+   "linker_set_key" : "exif_mnote_data_load",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_log",
+   "linker_set_key" : "exif_mnote_data_log",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-107"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_olympus_identify",
+   "linker_set_key" : "exif_mnote_data_olympus_identify",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-130"
+    },
+    {
+     "referenced_type" : "type-132"
+    }
+   ],
+   "return_type" : "type-154",
+   "source_file" : "/external/libexif/libexif/olympus/exif-mnote-data-olympus.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_olympus_new",
+   "linker_set_key" : "exif_mnote_data_olympus_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-258"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/libexif/libexif/olympus/exif-mnote-data-olympus.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_pentax_identify",
+   "linker_set_key" : "exif_mnote_data_pentax_identify",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-130"
+    },
+    {
+     "referenced_type" : "type-132"
+    }
+   ],
+   "return_type" : "type-154",
+   "source_file" : "/external/libexif/libexif/pentax/exif-mnote-data-pentax.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_pentax_new",
+   "linker_set_key" : "exif_mnote_data_pentax_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-528"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/libexif/libexif/pentax/exif-mnote-data-pentax.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_ref",
+   "linker_set_key" : "exif_mnote_data_ref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_save",
+   "linker_set_key" : "exif_mnote_data_save",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_set_byte_order",
+   "linker_set_key" : "exif_mnote_data_set_byte_order",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_set_offset",
+   "linker_set_key" : "exif_mnote_data_set_offset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "function_name" : "exif_mnote_data_unref",
+   "linker_set_key" : "exif_mnote_data_unref",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "function_name" : "exif_set_long",
+   "linker_set_key" : "exif_set_long",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_set_rational",
+   "linker_set_key" : "exif_set_rational",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-152"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_set_short",
+   "linker_set_key" : "exif_set_short",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-115"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_set_slong",
+   "linker_set_key" : "exif_set_slong",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-154"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_set_srational",
+   "linker_set_key" : "exif_set_srational",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-153"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_set_sshort",
+   "linker_set_key" : "exif_set_sshort",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-113"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "function_name" : "exif_tag_from_name",
+   "linker_set_key" : "exif_tag_from_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-74",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_description",
+   "linker_set_key" : "exif_tag_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_description_in_ifd",
+   "linker_set_key" : "exif_tag_get_description_in_ifd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    },
+    {
+     "referenced_type" : "type-161"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_name",
+   "linker_set_key" : "exif_tag_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_name_in_ifd",
+   "linker_set_key" : "exif_tag_get_name_in_ifd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    },
+    {
+     "referenced_type" : "type-161"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_support_level_in_ifd",
+   "linker_set_key" : "exif_tag_get_support_level_in_ifd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    },
+    {
+     "referenced_type" : "type-161"
+    },
+    {
+     "referenced_type" : "type-144"
+    }
+   ],
+   "return_type" : "type-151",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_title",
+   "linker_set_key" : "exif_tag_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_get_title_in_ifd",
+   "linker_set_key" : "exif_tag_get_title_in_ifd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-74"
+    },
+    {
+     "referenced_type" : "type-161"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_table_count",
+   "linker_set_key" : "exif_tag_table_count",
+   "return_type" : "type-2",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_table_get_name",
+   "linker_set_key" : "exif_tag_table_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "exif_tag_table_get_tag",
+   "linker_set_key" : "exif_tag_table_get_tag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-74",
+   "source_file" : "/external/libexif/libexif/exif-tag.h"
+  },
+  {
+   "function_name" : "mnote_canon_entry_count_values",
+   "linker_set_key" : "mnote_canon_entry_count_values",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-142"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-entry.h"
+  },
+  {
+   "function_name" : "mnote_canon_entry_get_value",
+   "linker_set_key" : "mnote_canon_entry_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-142"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-39",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-entry.h"
+  },
+  {
+   "function_name" : "mnote_canon_tag_get_description",
+   "linker_set_key" : "mnote_canon_tag_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-141"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-tag.h"
+  },
+  {
+   "function_name" : "mnote_canon_tag_get_name",
+   "linker_set_key" : "mnote_canon_tag_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-141"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-tag.h"
+  },
+  {
+   "function_name" : "mnote_canon_tag_get_name_sub",
+   "linker_set_key" : "mnote_canon_tag_get_name_sub",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-141"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-tag.h"
+  },
+  {
+   "function_name" : "mnote_canon_tag_get_title",
+   "linker_set_key" : "mnote_canon_tag_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-141"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-tag.h"
+  },
+  {
+   "function_name" : "mnote_canon_tag_get_title_sub",
+   "linker_set_key" : "mnote_canon_tag_get_title_sub",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-141"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-143"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-tag.h"
+  },
+  {
+   "function_name" : "mnote_fuji_entry_get_value",
+   "linker_set_key" : "mnote_fuji_entry_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-169"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-39",
+   "source_file" : "/external/libexif/libexif/fuji/mnote-fuji-entry.h"
+  },
+  {
+   "function_name" : "mnote_fuji_tag_get_description",
+   "linker_set_key" : "mnote_fuji_tag_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-166"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/fuji/mnote-fuji-tag.h"
+  },
+  {
+   "function_name" : "mnote_fuji_tag_get_name",
+   "linker_set_key" : "mnote_fuji_tag_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-166"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/fuji/mnote-fuji-tag.h"
+  },
+  {
+   "function_name" : "mnote_fuji_tag_get_title",
+   "linker_set_key" : "mnote_fuji_tag_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-166"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/fuji/mnote-fuji-tag.h"
+  },
+  {
+   "function_name" : "mnote_olympus_entry_get_value",
+   "linker_set_key" : "mnote_olympus_entry_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-39",
+   "source_file" : "/external/libexif/libexif/olympus/mnote-olympus-entry.h"
+  },
+  {
+   "function_name" : "mnote_olympus_tag_get_description",
+   "linker_set_key" : "mnote_olympus_tag_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/olympus/mnote-olympus-tag.h"
+  },
+  {
+   "function_name" : "mnote_olympus_tag_get_name",
+   "linker_set_key" : "mnote_olympus_tag_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/olympus/mnote-olympus-tag.h"
+  },
+  {
+   "function_name" : "mnote_olympus_tag_get_title",
+   "linker_set_key" : "mnote_olympus_tag_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/olympus/mnote-olympus-tag.h"
+  },
+  {
+   "function_name" : "mnote_pentax_entry_get_value",
+   "linker_set_key" : "mnote_pentax_entry_get_value",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-39"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-39",
+   "source_file" : "/external/libexif/libexif/pentax/mnote-pentax-entry.h"
+  },
+  {
+   "function_name" : "mnote_pentax_tag_get_description",
+   "linker_set_key" : "mnote_pentax_tag_get_description",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/pentax/mnote-pentax-tag.h"
+  },
+  {
+   "function_name" : "mnote_pentax_tag_get_name",
+   "linker_set_key" : "mnote_pentax_tag_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/pentax/mnote-pentax-tag.h"
+  },
+  {
+   "function_name" : "mnote_pentax_tag_get_title",
+   "linker_set_key" : "mnote_pentax_tag_get_title",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/external/libexif/libexif/pentax/mnote-pentax-tag.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContent *",
+   "name" : "_ExifContent *",
+   "referenced_type" : "type-70",
+   "self_type" : "type-69",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-126",
+   "self_type" : "type-125",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-136",
+   "self_type" : "type-135",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-158",
+   "self_type" : "type-157",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-175",
+   "self_type" : "type-174",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-184",
+   "self_type" : "type-183",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-229",
+   "self_type" : "type-228",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-231",
+   "self_type" : "type-230",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-241",
+   "self_type" : "type-240",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-251",
+   "self_type" : "type-250",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-263",
+   "self_type" : "type-262",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-272",
+   "self_type" : "type-271",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-285",
+   "self_type" : "type-284",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-294",
+   "self_type" : "type-293",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-306",
+   "self_type" : "type-305",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-312",
+   "self_type" : "type-311",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-342",
+   "self_type" : "type-341",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-351",
+   "self_type" : "type-350",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-368",
+   "self_type" : "type-367",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-376",
+   "self_type" : "type-375",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-392",
+   "self_type" : "type-391",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-400",
+   "self_type" : "type-399",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-402",
+   "self_type" : "type-401",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-445",
+   "self_type" : "type-444",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-456",
+   "self_type" : "type-455",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-467",
+   "self_type" : "type-466",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-479",
+   "self_type" : "type-478",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-485",
+   "self_type" : "type-484",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-499",
+   "self_type" : "type-498",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-505",
+   "self_type" : "type-504",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-509",
+   "self_type" : "type-508",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-519",
+   "self_type" : "type-518",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-535",
+   "self_type" : "type-534",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-541",
+   "self_type" : "type-540",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-56",
+   "self_type" : "type-55",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-64",
+   "self_type" : "type-63",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifContentPrivate *",
+   "name" : "_ExifContentPrivate *",
+   "referenced_type" : "type-83",
+   "self_type" : "type-82",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifData *",
+   "name" : "_ExifData *",
+   "referenced_type" : "type-78",
+   "self_type" : "type-77",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-128",
+   "self_type" : "type-127",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-138",
+   "self_type" : "type-137",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-160",
+   "self_type" : "type-159",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-173",
+   "self_type" : "type-172",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-186",
+   "self_type" : "type-185",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-219",
+   "self_type" : "type-218",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-233",
+   "self_type" : "type-232",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-243",
+   "self_type" : "type-242",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-253",
+   "self_type" : "type-252",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-265",
+   "self_type" : "type-264",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-270",
+   "self_type" : "type-269",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-288",
+   "self_type" : "type-287",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-296",
+   "self_type" : "type-295",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-308",
+   "self_type" : "type-307",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-314",
+   "self_type" : "type-313",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-340",
+   "self_type" : "type-339",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-353",
+   "self_type" : "type-352",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-365",
+   "self_type" : "type-364",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-378",
+   "self_type" : "type-377",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-388",
+   "self_type" : "type-387",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-390",
+   "self_type" : "type-389",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-404",
+   "self_type" : "type-403",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-447",
+   "self_type" : "type-446",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-459",
+   "self_type" : "type-458",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-469",
+   "self_type" : "type-468",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-481",
+   "self_type" : "type-480",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-483",
+   "self_type" : "type-482",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-501",
+   "self_type" : "type-500",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-507",
+   "self_type" : "type-506",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-521",
+   "self_type" : "type-520",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-523",
+   "self_type" : "type-522",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-537",
+   "self_type" : "type-536",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-539",
+   "self_type" : "type-538",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-54",
+   "self_type" : "type-53",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-66",
+   "self_type" : "type-65",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifDataPrivate *",
+   "name" : "_ExifDataPrivate *",
+   "referenced_type" : "type-81",
+   "self_type" : "type-80",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntry *",
+   "name" : "_ExifEntry *",
+   "referenced_type" : "type-73",
+   "self_type" : "type-72",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntry **",
+   "name" : "_ExifEntry **",
+   "referenced_type" : "type-72",
+   "self_type" : "type-71",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-124",
+   "self_type" : "type-123",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-134",
+   "self_type" : "type-133",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-156",
+   "self_type" : "type-155",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-177",
+   "self_type" : "type-176",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-182",
+   "self_type" : "type-181",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-227",
+   "self_type" : "type-226",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-239",
+   "self_type" : "type-238",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-245",
+   "self_type" : "type-244",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-249",
+   "self_type" : "type-248",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-261",
+   "self_type" : "type-260",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-274",
+   "self_type" : "type-273",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-283",
+   "self_type" : "type-282",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-292",
+   "self_type" : "type-291",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-304",
+   "self_type" : "type-303",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-310",
+   "self_type" : "type-309",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-344",
+   "self_type" : "type-343",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-349",
+   "self_type" : "type-348",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-363",
+   "self_type" : "type-362",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-374",
+   "self_type" : "type-373",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-394",
+   "self_type" : "type-393",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-398",
+   "self_type" : "type-397",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-412",
+   "self_type" : "type-411",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-443",
+   "self_type" : "type-442",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-454",
+   "self_type" : "type-453",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-463",
+   "self_type" : "type-462",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-477",
+   "self_type" : "type-476",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-487",
+   "self_type" : "type-486",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-489",
+   "self_type" : "type-488",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-497",
+   "self_type" : "type-496",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-503",
+   "self_type" : "type-502",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-517",
+   "self_type" : "type-516",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-531",
+   "self_type" : "type-530",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-543",
+   "self_type" : "type-542",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-58",
+   "self_type" : "type-57",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-62",
+   "self_type" : "type-61",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifEntryPrivate *",
+   "name" : "_ExifEntryPrivate *",
+   "referenced_type" : "type-76",
+   "self_type" : "type-75",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLoader *",
+   "name" : "_ExifLoader *",
+   "referenced_type" : "type-188",
+   "self_type" : "type-187",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLoader *",
+   "name" : "_ExifLoader *",
+   "referenced_type" : "type-355",
+   "self_type" : "type-354",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLoader *",
+   "name" : "_ExifLoader *",
+   "referenced_type" : "type-406",
+   "self_type" : "type-405",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLoader *",
+   "name" : "_ExifLoader *",
+   "referenced_type" : "type-68",
+   "self_type" : "type-67",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-108",
+   "self_type" : "type-107",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-120",
+   "self_type" : "type-119",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-150",
+   "self_type" : "type-149",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-194",
+   "self_type" : "type-193",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-198",
+   "self_type" : "type-197",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-209",
+   "self_type" : "type-208",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-223",
+   "self_type" : "type-222",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-257",
+   "self_type" : "type-256",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-278",
+   "self_type" : "type-277",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-290",
+   "self_type" : "type-289",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-300",
+   "self_type" : "type-299",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-333",
+   "self_type" : "type-332",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-361",
+   "self_type" : "type-360",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-372",
+   "self_type" : "type-371",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-383",
+   "self_type" : "type-382",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-41",
+   "self_type" : "type-40",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-410",
+   "self_type" : "type-409",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-416",
+   "self_type" : "type-415",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-426",
+   "self_type" : "type-425",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-439",
+   "self_type" : "type-438",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-465",
+   "self_type" : "type-464",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-473",
+   "self_type" : "type-472",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-493",
+   "self_type" : "type-492",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-513",
+   "self_type" : "type-512",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-527",
+   "self_type" : "type-526",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-560",
+   "self_type" : "type-559",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-88",
+   "self_type" : "type-87",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifLog *",
+   "name" : "_ExifLog *",
+   "referenced_type" : "type-93",
+   "self_type" : "type-92",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-106",
+   "self_type" : "type-105",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-112",
+   "self_type" : "type-111",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-122",
+   "self_type" : "type-121",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-146",
+   "self_type" : "type-145",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-180",
+   "self_type" : "type-179",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-191",
+   "self_type" : "type-190",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-196",
+   "self_type" : "type-195",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-207",
+   "self_type" : "type-206",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-214",
+   "self_type" : "type-213",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-225",
+   "self_type" : "type-224",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-259",
+   "self_type" : "type-258",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-268",
+   "self_type" : "type-267",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-281",
+   "self_type" : "type-280",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-302",
+   "self_type" : "type-301",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-316",
+   "self_type" : "type-315",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-347",
+   "self_type" : "type-346",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-358",
+   "self_type" : "type-357",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-370",
+   "self_type" : "type-369",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-381",
+   "self_type" : "type-380",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-396",
+   "self_type" : "type-395",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-408",
+   "self_type" : "type-407",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-414",
+   "self_type" : "type-413",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-424",
+   "self_type" : "type-423",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-43",
+   "self_type" : "type-42",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-430",
+   "self_type" : "type-429",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-435",
+   "self_type" : "type-434",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-441",
+   "self_type" : "type-440",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-475",
+   "self_type" : "type-474",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-495",
+   "self_type" : "type-494",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-515",
+   "self_type" : "type-514",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-529",
+   "self_type" : "type-528",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-533",
+   "self_type" : "type-532",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-60",
+   "self_type" : "type-59",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-85",
+   "self_type" : "type-84",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMem *",
+   "name" : "_ExifMem *",
+   "referenced_type" : "type-90",
+   "self_type" : "type-89",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteData *",
+   "name" : "_ExifMnoteData *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-13",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-110",
+   "self_type" : "type-109",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-118",
+   "self_type" : "type-117",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-212",
+   "self_type" : "type-211",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-221",
+   "self_type" : "type-220",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-255",
+   "self_type" : "type-254",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-276",
+   "self_type" : "type-275",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-298",
+   "self_type" : "type-297",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-321",
+   "self_type" : "type-320",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-386",
+   "self_type" : "type-385",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-428",
+   "self_type" : "type-427",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-437",
+   "self_type" : "type-436",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-471",
+   "self_type" : "type-470",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-491",
+   "self_type" : "type-490",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-511",
+   "self_type" : "type-510",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-525",
+   "self_type" : "type-524",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-548",
+   "self_type" : "type-547",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ExifMnoteDataPriv *",
+   "name" : "_ExifMnoteDataPriv *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_MnoteCanonEntry *",
+   "name" : "_MnoteCanonEntry *",
+   "referenced_type" : "type-140",
+   "self_type" : "type-165",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_MnoteFujiEntry *",
+   "name" : "_MnoteFujiEntry *",
+   "referenced_type" : "type-167",
+   "self_type" : "type-169",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/fuji/exif-mnote-data-fuji.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_MnoteOlympusEntry *",
+   "name" : "_MnoteOlympusEntry *",
+   "referenced_type" : "type-45",
+   "self_type" : "type-44",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/olympus/exif-mnote-data-olympus.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_MnotePentaxEntry *",
+   "name" : "_MnotePentaxEntry *",
+   "referenced_type" : "type-49",
+   "self_type" : "type-52",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/pentax/exif-mnote-data-pentax.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__va_list_tag *",
+   "name" : "__va_list_tag *",
+   "referenced_type" : "type-200",
+   "self_type" : "type-199",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__va_list_tag *",
+   "name" : "__va_list_tag *",
+   "referenced_type" : "type-418",
+   "self_type" : "type-417",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__va_list_tag *",
+   "name" : "__va_list_tag *",
+   "referenced_type" : "type-96",
+   "self_type" : "type-95",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-36",
+   "self_type" : "type-39",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *(*)(_ExifMnoteData *, unsigned int, char *, unsigned int)",
+   "name" : "char *(*)(_ExifMnoteData *, unsigned int, char *, unsigned int)",
+   "referenced_type" : "type-38",
+   "self_type" : "type-37",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const _ExifData *",
+   "name" : "const _ExifData *",
+   "referenced_type" : "type-129",
+   "self_type" : "type-130",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const _ExifEntry *",
+   "name" : "const _ExifEntry *",
+   "referenced_type" : "type-131",
+   "self_type" : "type-132",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const _MnoteCanonEntry *",
+   "name" : "const _MnoteCanonEntry *",
+   "referenced_type" : "type-139",
+   "self_type" : "type-142",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-35",
+   "self_type" : "type-34",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-byte-order.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *(*)(_ExifMnoteData *, unsigned int)",
+   "name" : "const char *(*)(_ExifMnoteData *, unsigned int)",
+   "referenced_type" : "type-33",
+   "self_type" : "type-32",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-22",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned char **",
+   "name" : "const unsigned char **",
+   "referenced_type" : "type-22",
+   "self_type" : "type-86",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-loader.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned short *",
+   "name" : "const unsigned short *",
+   "referenced_type" : "type-114",
+   "self_type" : "type-116",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-18",
+   "self_type" : "type-17",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned char **",
+   "name" : "unsigned char **",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int (*)(_ExifMnoteData *)",
+   "name" : "unsigned int (*)(_ExifMnoteData *)",
+   "referenced_type" : "type-29",
+   "self_type" : "type-28",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int (*)(_ExifMnoteData *, unsigned int)",
+   "name" : "unsigned int (*)(_ExifMnoteData *, unsigned int)",
+   "referenced_type" : "type-31",
+   "self_type" : "type-30",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-19",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifContent *, void *)",
+   "name" : "void (*)(_ExifContent *, void *)",
+   "referenced_type" : "type-162",
+   "self_type" : "type-163",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifEntry *, void *)",
+   "name" : "void (*)(_ExifEntry *, void *)",
+   "referenced_type" : "type-147",
+   "self_type" : "type-148",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifLog *, ExifLogCode, const char *, const char *, __va_list_tag *, void *)",
+   "name" : "void (*)(_ExifLog *, ExifLogCode, const char *, const char *, __va_list_tag *, void *)",
+   "referenced_type" : "type-91",
+   "self_type" : "type-98",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifMnoteData *)",
+   "name" : "void (*)(_ExifMnoteData *)",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifMnoteData *, ExifByteOrder)",
+   "name" : "void (*)(_ExifMnoteData *, ExifByteOrder)",
+   "referenced_type" : "type-27",
+   "self_type" : "type-26",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifMnoteData *, const unsigned char *, unsigned int)",
+   "name" : "void (*)(_ExifMnoteData *, const unsigned char *, unsigned int)",
+   "referenced_type" : "type-21",
+   "self_type" : "type-20",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifMnoteData *, unsigned char **, unsigned int *)",
+   "name" : "void (*)(_ExifMnoteData *, unsigned char **, unsigned int *)",
+   "referenced_type" : "type-15",
+   "self_type" : "type-14",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(_ExifMnoteData *, unsigned int)",
+   "name" : "void (*)(_ExifMnoteData *, unsigned int)",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(void *)",
+   "name" : "void (*)(void *)",
+   "referenced_type" : "type-103",
+   "self_type" : "type-104",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-97",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-content.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *(*)(unsigned int)",
+   "name" : "void *(*)(unsigned int)",
+   "referenced_type" : "type-100",
+   "self_type" : "type-99",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *(*)(void *, unsigned int)",
+   "name" : "void *(*)(void *, unsigned int)",
+   "referenced_type" : "type-101",
+   "self_type" : "type-102",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-mem.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const _ExifData",
+   "name" : "const _ExifData",
+   "referenced_type" : "type-78",
+   "self_type" : "type-129",
+   "size" : 64,
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const _ExifEntry",
+   "name" : "const _ExifEntry",
+   "referenced_type" : "type-73",
+   "self_type" : "type-131",
+   "size" : 48,
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const _MnoteCanonEntry",
+   "name" : "const _MnoteCanonEntry",
+   "referenced_type" : "type-140",
+   "self_type" : "type-139",
+   "size" : 32,
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-entry.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-36",
+   "self_type" : "type-35",
+   "size" : 1,
+   "source_file" : "/external/libexif/libexif/exif-byte-order.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-18",
+   "self_type" : "type-23",
+   "size" : 1,
+   "source_file" : "/external/libexif/libexif/exif-data.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned short",
+   "name" : "const unsigned short",
+   "referenced_type" : "type-115",
+   "self_type" : "type-114",
+   "size" : 2,
+   "source_file" : "/external/libexif/libexif/exif-utils.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "numerator",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "denominator",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "ExifRational",
+   "name" : "ExifRational",
+   "referenced_type" : "type-152",
+   "self_type" : "type-152",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-utils.h",
+   "unique_id" : "ExifRational"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "numerator",
+     "referenced_type" : "type-154"
+    },
+    {
+     "field_name" : "denominator",
+     "field_offset" : 32,
+     "referenced_type" : "type-154"
+    }
+   ],
+   "linker_set_key" : "ExifSRational",
+   "name" : "ExifSRational",
+   "referenced_type" : "type-153",
+   "self_type" : "type-153",
+   "size" : 8,
+   "source_file" : "/external/libexif/libexif/exif-utils.h",
+   "unique_id" : "ExifSRational"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "entries",
+     "referenced_type" : "type-71"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "parent",
+     "field_offset" : 128,
+     "referenced_type" : "type-77"
+    },
+    {
+     "field_name" : "priv",
+     "field_offset" : 192,
+     "referenced_type" : "type-82"
+    }
+   ],
+   "linker_set_key" : "_ExifContent",
+   "name" : "_ExifContent",
+   "referenced_type" : "type-70",
+   "self_type" : "type-70",
+   "size" : 32,
+   "source_file" : "/external/libexif/libexif/exif-content.h",
+   "unique_id" : "_ExifContent"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "ifd",
+     "referenced_type" : "type-79"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 320,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 384,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "priv",
+     "field_offset" : 448,
+     "referenced_type" : "type-80"
+    }
+   ],
+   "linker_set_key" : "_ExifData",
+   "name" : "_ExifData",
+   "referenced_type" : "type-78",
+   "self_type" : "type-78",
+   "size" : 64,
+   "source_file" : "/external/libexif/libexif/exif-data.h",
+   "unique_id" : "_ExifData"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tag",
+     "referenced_type" : "type-74"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "components",
+     "field_offset" : 64,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 192,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "parent",
+     "field_offset" : 256,
+     "referenced_type" : "type-69"
+    },
+    {
+     "field_name" : "priv",
+     "field_offset" : 320,
+     "referenced_type" : "type-75"
+    }
+   ],
+   "linker_set_key" : "_ExifEntry",
+   "name" : "_ExifEntry",
+   "referenced_type" : "type-73",
+   "self_type" : "type-73",
+   "size" : 48,
+   "source_file" : "/external/libexif/libexif/exif-entry.h",
+   "unique_id" : "_ExifEntry"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "priv",
+     "referenced_type" : "type-7"
+    },
+    {
+     "field_name" : "methods",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "log",
+     "field_offset" : 768,
+     "referenced_type" : "type-40"
+    },
+    {
+     "field_name" : "mem",
+     "field_offset" : 832,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "_ExifMnoteData",
+   "name" : "_ExifMnoteData",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 112,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h",
+   "unique_id" : "_ExifMnoteData"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "parent",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "entries",
+     "field_offset" : 896,
+     "referenced_type" : "type-165"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 960,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 992,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 1024,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "options",
+     "field_offset" : 1056,
+     "referenced_type" : "type-143"
+    }
+   ],
+   "linker_set_key" : "_ExifMnoteDataCanon",
+   "name" : "_ExifMnoteDataCanon",
+   "referenced_type" : "type-164",
+   "self_type" : "type-164",
+   "size" : 136,
+   "source_file" : "/external/libexif/libexif/canon/exif-mnote-data-canon.h",
+   "unique_id" : "_ExifMnoteDataCanon"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "parent",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "entries",
+     "field_offset" : 896,
+     "referenced_type" : "type-169"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 960,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 992,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 1024,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "_ExifMnoteDataFuji",
+   "name" : "_ExifMnoteDataFuji",
+   "referenced_type" : "type-168",
+   "self_type" : "type-168",
+   "size" : 136,
+   "source_file" : "/external/libexif/libexif/fuji/exif-mnote-data-fuji.h",
+   "unique_id" : "_ExifMnoteDataFuji"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "free",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "save",
+     "field_offset" : 64,
+     "referenced_type" : "type-14"
+    },
+    {
+     "field_name" : "load",
+     "field_offset" : 128,
+     "referenced_type" : "type-20"
+    },
+    {
+     "field_name" : "set_offset",
+     "field_offset" : 192,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "set_byte_order",
+     "field_offset" : 256,
+     "referenced_type" : "type-26"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 320,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "get_id",
+     "field_offset" : 384,
+     "referenced_type" : "type-30"
+    },
+    {
+     "field_name" : "get_name",
+     "field_offset" : 448,
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "get_title",
+     "field_offset" : 512,
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "get_description",
+     "field_offset" : 576,
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "get_value",
+     "field_offset" : 640,
+     "referenced_type" : "type-37"
+    }
+   ],
+   "linker_set_key" : "_ExifMnoteDataMethods",
+   "name" : "_ExifMnoteDataMethods",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 88,
+   "source_file" : "/external/libexif/libexif/exif-mnote-data-priv.h",
+   "unique_id" : "_ExifMnoteDataMethods"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "parent",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "entries",
+     "field_offset" : 896,
+     "referenced_type" : "type-44"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 960,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 992,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 1024,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "version",
+     "field_offset" : 1056,
+     "referenced_type" : "type-4"
+    }
+   ],
+   "linker_set_key" : "_ExifMnoteDataOlympus",
+   "name" : "_ExifMnoteDataOlympus",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 136,
+   "source_file" : "/external/libexif/libexif/olympus/exif-mnote-data-olympus.h",
+   "unique_id" : "_ExifMnoteDataOlympus"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "parent",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "entries",
+     "field_offset" : 896,
+     "referenced_type" : "type-52"
+    },
+    {
+     "field_name" : "count",
+     "field_offset" : 960,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 992,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 1024,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "version",
+     "field_offset" : 1056,
+     "referenced_type" : "type-50"
+    }
+   ],
+   "linker_set_key" : "_ExifMnoteDataPentax",
+   "name" : "_ExifMnoteDataPentax",
+   "referenced_type" : "type-51",
+   "self_type" : "type-51",
+   "size" : 136,
+   "source_file" : "/external/libexif/libexif/pentax/exif-mnote-data-pentax.h",
+   "unique_id" : "_ExifMnoteDataPentax"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tag",
+     "referenced_type" : "type-141"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "components",
+     "field_offset" : 64,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 192,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 224,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "_MnoteCanonEntry",
+   "name" : "_MnoteCanonEntry",
+   "referenced_type" : "type-140",
+   "self_type" : "type-140",
+   "size" : 32,
+   "source_file" : "/external/libexif/libexif/canon/mnote-canon-entry.h",
+   "unique_id" : "_MnoteCanonEntry"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tag",
+     "referenced_type" : "type-166"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "components",
+     "field_offset" : 64,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 192,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 224,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "_MnoteFujiEntry",
+   "name" : "_MnoteFujiEntry",
+   "referenced_type" : "type-167",
+   "self_type" : "type-167",
+   "size" : 32,
+   "source_file" : "/external/libexif/libexif/fuji/mnote-fuji-entry.h",
+   "unique_id" : "_MnoteFujiEntry"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tag",
+     "referenced_type" : "type-46"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "components",
+     "field_offset" : 64,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 192,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 224,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "_MnoteOlympusEntry",
+   "name" : "_MnoteOlympusEntry",
+   "referenced_type" : "type-45",
+   "self_type" : "type-45",
+   "size" : 32,
+   "source_file" : "/external/libexif/libexif/olympus/mnote-olympus-entry.h",
+   "unique_id" : "_MnoteOlympusEntry"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tag",
+     "referenced_type" : "type-48"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "components",
+     "field_offset" : 64,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "size",
+     "field_offset" : 192,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "order",
+     "field_offset" : 224,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "_MnotePentaxEntry",
+   "name" : "_MnotePentaxEntry",
+   "referenced_type" : "type-49",
+   "self_type" : "type-49",
+   "size" : 32,
+   "source_file" : "/external/libexif/libexif/pentax/mnote-pentax-entry.h",
+   "unique_id" : "_MnotePentaxEntry"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

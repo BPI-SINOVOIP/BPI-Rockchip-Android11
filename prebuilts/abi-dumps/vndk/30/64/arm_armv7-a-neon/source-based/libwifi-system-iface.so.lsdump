@@ -1,0 +1,255 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android11wifi_system13InterfaceTool10GetUpStateEPKc"
+  },
+  {
+   "name" : "_ZN7android11wifi_system13InterfaceTool10SetUpStateEPKcb"
+  },
+  {
+   "name" : "_ZN7android11wifi_system13InterfaceTool13SetMacAddressEPKcRKNSt3__15arrayIhLj6EEE"
+  },
+  {
+   "name" : "_ZN7android11wifi_system13InterfaceTool14SetWifiUpStateEb"
+  },
+  {
+   "name" : "_ZN7android11wifi_system13InterfaceTool20GetFactoryMacAddressEPKc"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_j"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZTVN7android11wifi_system13InterfaceToolE"
+  }
+ ],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::wifi_system::InterfaceTool::GetUpState",
+   "linker_set_key" : "_ZN7android11wifi_system13InterfaceTool10GetUpStateEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android11wifi_system13InterfaceToolE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  },
+  {
+   "function_name" : "android::wifi_system::InterfaceTool::SetUpState",
+   "linker_set_key" : "_ZN7android11wifi_system13InterfaceTool10SetUpStateEPKcb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android11wifi_system13InterfaceToolE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  },
+  {
+   "function_name" : "android::wifi_system::InterfaceTool::SetMacAddress",
+   "linker_set_key" : "_ZN7android11wifi_system13InterfaceTool13SetMacAddressEPKcRKNSt3__15arrayIhLj6EEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android11wifi_system13InterfaceToolE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__15arrayIhLj6EEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  },
+  {
+   "function_name" : "android::wifi_system::InterfaceTool::SetWifiUpState",
+   "linker_set_key" : "_ZN7android11wifi_system13InterfaceTool14SetWifiUpStateEb",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android11wifi_system13InterfaceToolE"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  },
+  {
+   "function_name" : "android::wifi_system::InterfaceTool::GetFactoryMacAddress",
+   "linker_set_key" : "_ZN7android11wifi_system13InterfaceTool20GetFactoryMacAddressEPKc",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android11wifi_system13InterfaceToolE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTINSt3__15arrayIhLj6EEE",
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__15arrayIhLj6EEE",
+   "name" : "const std::array<unsigned char, 6> &",
+   "referenced_type" : "_ZTIKNSt3__15arrayIhLj6EEE",
+   "self_type" : "_ZTIRKNSt3__15arrayIhLj6EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN7android11wifi_system13InterfaceToolE",
+   "name" : "android::wifi_system::InterfaceTool *",
+   "referenced_type" : "_ZTIN7android11wifi_system13InterfaceToolE",
+   "self_type" : "_ZTIPN7android11wifi_system13InterfaceToolE",
+   "size" : 4,
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__15arrayIhLj6EEE",
+   "name" : "const std::array<unsigned char, 6>",
+   "referenced_type" : "_ZTINSt3__15arrayIhLj6EEE",
+   "self_type" : "_ZTIKNSt3__15arrayIhLj6EEE",
+   "size" : 6,
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIN7android11wifi_system13InterfaceToolE",
+   "name" : "android::wifi_system::InterfaceTool",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android11wifi_system13InterfaceToolE",
+   "self_type" : "_ZTIN7android11wifi_system13InterfaceToolE",
+   "size" : 4,
+   "source_file" : "/frameworks/opt/net/wifi/libwifi_system_iface/include/wifi_system/interface_tool.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android11wifi_system13InterfaceToolE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceToolD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceToolD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceTool10GetUpStateEPKc"
+    },
+    {
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceTool10SetUpStateEPKcb"
+    },
+    {
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceTool14SetWifiUpStateEb"
+    },
+    {
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceTool13SetMacAddressEPKcRKNSt3__15arrayIhLj6EEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android11wifi_system13InterfaceTool20GetFactoryMacAddressEPKc"
+    }
+   ]
+  }
+ ],
+ "rvalue_reference_types" : []
+}

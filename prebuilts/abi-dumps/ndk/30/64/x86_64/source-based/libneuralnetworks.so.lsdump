@@ -1,0 +1,2963 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 2,
+   "linker_set_key" : "_ZTIDh",
+   "name" : "__fp16",
+   "referenced_type" : "_ZTIDh",
+   "self_type" : "_ZTIDh",
+   "size" : 2
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDi",
+   "name" : "char32_t",
+   "referenced_type" : "_ZTIDi",
+   "self_type" : "_ZTIDi",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIDn",
+   "name" : "nullptr_t",
+   "referenced_type" : "_ZTIDn",
+   "self_type" : "_ZTIDn",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDs",
+   "name" : "char16_t",
+   "referenced_type" : "_ZTIDs",
+   "self_type" : "_ZTIDs",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIa",
+   "name" : "signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIa",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 16,
+   "linker_set_key" : "_ZTIg",
+   "name" : "long double",
+   "referenced_type" : "_ZTIg",
+   "self_type" : "_ZTIg",
+   "size" : 16
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 16,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIn",
+   "name" : "__int128",
+   "referenced_type" : "_ZTIn",
+   "self_type" : "_ZTIn",
+   "size" : 16
+  },
+  {
+   "alignment" : 16,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIo",
+   "name" : "unsigned __int128",
+   "referenced_type" : "_ZTIo",
+   "self_type" : "_ZTIo",
+   "size" : 16
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIw",
+   "name" : "wchar_t",
+   "referenced_type" : "_ZTIw",
+   "self_type" : "_ZTIw",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ANeuralNetworksBurst_create"
+  },
+  {
+   "name" : "ANeuralNetworksBurst_free"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_create"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_createForDevices"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_finish"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_free"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_setCaching"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_setPreference"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_setPriority"
+  },
+  {
+   "name" : "ANeuralNetworksCompilation_setTimeout"
+  },
+  {
+   "name" : "ANeuralNetworksDevice_getExtensionSupport"
+  },
+  {
+   "name" : "ANeuralNetworksDevice_getFeatureLevel"
+  },
+  {
+   "name" : "ANeuralNetworksDevice_getName"
+  },
+  {
+   "name" : "ANeuralNetworksDevice_getType"
+  },
+  {
+   "name" : "ANeuralNetworksDevice_getVersion"
+  },
+  {
+   "name" : "ANeuralNetworksDevice_wait"
+  },
+  {
+   "name" : "ANeuralNetworksEvent_createFromSyncFenceFd"
+  },
+  {
+   "name" : "ANeuralNetworksEvent_free"
+  },
+  {
+   "name" : "ANeuralNetworksEvent_getSyncFenceFd"
+  },
+  {
+   "name" : "ANeuralNetworksEvent_wait"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_burstCompute"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_compute"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_create"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_free"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_getDuration"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_getOutputOperandDimensions"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_getOutputOperandRank"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setInput"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setInputFromMemory"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setLoopTimeout"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setMeasureTiming"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setOutput"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setOutputFromMemory"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_setTimeout"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_startCompute"
+  },
+  {
+   "name" : "ANeuralNetworksExecution_startComputeWithDependencies"
+  },
+  {
+   "name" : "ANeuralNetworksMemoryDesc_addInputRole"
+  },
+  {
+   "name" : "ANeuralNetworksMemoryDesc_addOutputRole"
+  },
+  {
+   "name" : "ANeuralNetworksMemoryDesc_create"
+  },
+  {
+   "name" : "ANeuralNetworksMemoryDesc_finish"
+  },
+  {
+   "name" : "ANeuralNetworksMemoryDesc_free"
+  },
+  {
+   "name" : "ANeuralNetworksMemoryDesc_setDimensions"
+  },
+  {
+   "name" : "ANeuralNetworksMemory_copy"
+  },
+  {
+   "name" : "ANeuralNetworksMemory_createFromAHardwareBuffer"
+  },
+  {
+   "name" : "ANeuralNetworksMemory_createFromDesc"
+  },
+  {
+   "name" : "ANeuralNetworksMemory_createFromFd"
+  },
+  {
+   "name" : "ANeuralNetworksMemory_free"
+  },
+  {
+   "name" : "ANeuralNetworksModel_addOperand"
+  },
+  {
+   "name" : "ANeuralNetworksModel_addOperation"
+  },
+  {
+   "name" : "ANeuralNetworksModel_create"
+  },
+  {
+   "name" : "ANeuralNetworksModel_finish"
+  },
+  {
+   "name" : "ANeuralNetworksModel_free"
+  },
+  {
+   "name" : "ANeuralNetworksModel_getExtensionOperandType"
+  },
+  {
+   "name" : "ANeuralNetworksModel_getExtensionOperationType"
+  },
+  {
+   "name" : "ANeuralNetworksModel_getSupportedOperationsForDevices"
+  },
+  {
+   "name" : "ANeuralNetworksModel_identifyInputsAndOutputs"
+  },
+  {
+   "name" : "ANeuralNetworksModel_relaxComputationFloat32toFloat16"
+  },
+  {
+   "name" : "ANeuralNetworksModel_setOperandExtensionData"
+  },
+  {
+   "name" : "ANeuralNetworksModel_setOperandSymmPerChannelQuantParams"
+  },
+  {
+   "name" : "ANeuralNetworksModel_setOperandValue"
+  },
+  {
+   "name" : "ANeuralNetworksModel_setOperandValueFromMemory"
+  },
+  {
+   "name" : "ANeuralNetworksModel_setOperandValueFromModel"
+  },
+  {
+   "name" : "ANeuralNetworks_getDefaultLoopTimeout"
+  },
+  {
+   "name" : "ANeuralNetworks_getDevice"
+  },
+  {
+   "name" : "ANeuralNetworks_getDeviceCount"
+  },
+  {
+   "name" : "ANeuralNetworks_getMaximumLoopTimeout"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_NO_ERROR"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_OUT_OF_MEMORY"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_INCOMPLETE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANEURALNETWORKS_UNEXPECTED_NULL"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANEURALNETWORKS_BAD_DATA"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ANEURALNETWORKS_OP_FAILED"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ANEURALNETWORKS_BAD_STATE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANEURALNETWORKS_UNMAPPABLE"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "ANEURALNETWORKS_OUTPUT_INSUFFICIENT_SIZE"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "ANEURALNETWORKS_UNAVAILABLE_DEVICE"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "ANEURALNETWORKS_MISSED_DEADLINE_TRANSIENT"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "ANEURALNETWORKS_MISSED_DEADLINE_PERSISTENT"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "ANEURALNETWORKS_RESOURCE_EXHAUSTED_TRANSIENT"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "ANEURALNETWORKS_RESOURCE_EXHAUSTED_PERSISTENT"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "ANEURALNETWORKS_DEAD_OBJECT"
+    }
+   ],
+   "linker_set_key" : "_ZTI10ResultCode",
+   "name" : "ResultCode",
+   "referenced_type" : "_ZTI10ResultCode",
+   "self_type" : "_ZTI10ResultCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_FLOAT32"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_INT32"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_UINT32"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANEURALNETWORKS_TENSOR_FLOAT32"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANEURALNETWORKS_TENSOR_INT32"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ANEURALNETWORKS_TENSOR_QUANT8_ASYMM"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ANEURALNETWORKS_BOOL"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANEURALNETWORKS_TENSOR_QUANT16_SYMM"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "ANEURALNETWORKS_TENSOR_FLOAT16"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "ANEURALNETWORKS_TENSOR_BOOL8"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "ANEURALNETWORKS_FLOAT16"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "ANEURALNETWORKS_TENSOR_QUANT8_SYMM_PER_CHANNEL"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "ANEURALNETWORKS_TENSOR_QUANT16_ASYMM"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "ANEURALNETWORKS_TENSOR_QUANT8_SYMM"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "ANEURALNETWORKS_TENSOR_QUANT8_ASYMM_SIGNED"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "ANEURALNETWORKS_MODEL"
+    }
+   ],
+   "linker_set_key" : "_ZTI11OperandCode",
+   "name" : "OperandCode",
+   "referenced_type" : "_ZTI11OperandCode",
+   "self_type" : "_ZTI11OperandCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_PADDING_SAME"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_PADDING_VALID"
+    }
+   ],
+   "linker_set_key" : "_ZTI11PaddingCode",
+   "name" : "PaddingCode",
+   "referenced_type" : "_ZTI11PaddingCode",
+   "self_type" : "_ZTI11PaddingCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_DURATION_ON_HARDWARE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_DURATION_IN_DRIVER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_FENCED_DURATION_ON_HARDWARE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANEURALNETWORKS_FENCED_DURATION_IN_DRIVER"
+    }
+   ],
+   "linker_set_key" : "_ZTI12DurationCode",
+   "name" : "DurationCode",
+   "referenced_type" : "_ZTI12DurationCode",
+   "self_type" : "_ZTI12DurationCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 90,
+     "name" : "ANEURALNETWORKS_PRIORITY_LOW"
+    },
+    {
+     "enum_field_value" : 100,
+     "name" : "ANEURALNETWORKS_PRIORITY_MEDIUM"
+    },
+    {
+     "enum_field_value" : 110,
+     "name" : "ANEURALNETWORKS_PRIORITY_HIGH"
+    },
+    {
+     "enum_field_value" : 100,
+     "name" : "ANEURALNETWORKS_PRIORITY_DEFAULT"
+    }
+   ],
+   "linker_set_key" : "_ZTI12PriorityCode",
+   "name" : "PriorityCode",
+   "referenced_type" : "_ZTI12PriorityCode",
+   "self_type" : "_ZTI12PriorityCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_ADD"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_AVERAGE_POOL_2D"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_CONCATENATION"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANEURALNETWORKS_CONV_2D"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANEURALNETWORKS_DEPTHWISE_CONV_2D"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ANEURALNETWORKS_DEPTH_TO_SPACE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ANEURALNETWORKS_DEQUANTIZE"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANEURALNETWORKS_EMBEDDING_LOOKUP"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "ANEURALNETWORKS_FLOOR"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "ANEURALNETWORKS_FULLY_CONNECTED"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "ANEURALNETWORKS_HASHTABLE_LOOKUP"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "ANEURALNETWORKS_L2_NORMALIZATION"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "ANEURALNETWORKS_L2_POOL_2D"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "ANEURALNETWORKS_LOCAL_RESPONSE_NORMALIZATION"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "ANEURALNETWORKS_LOGISTIC"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "ANEURALNETWORKS_LSH_PROJECTION"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "ANEURALNETWORKS_LSTM"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "ANEURALNETWORKS_MAX_POOL_2D"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "ANEURALNETWORKS_MUL"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "ANEURALNETWORKS_RELU"
+    },
+    {
+     "enum_field_value" : 20,
+     "name" : "ANEURALNETWORKS_RELU1"
+    },
+    {
+     "enum_field_value" : 21,
+     "name" : "ANEURALNETWORKS_RELU6"
+    },
+    {
+     "enum_field_value" : 22,
+     "name" : "ANEURALNETWORKS_RESHAPE"
+    },
+    {
+     "enum_field_value" : 23,
+     "name" : "ANEURALNETWORKS_RESIZE_BILINEAR"
+    },
+    {
+     "enum_field_value" : 24,
+     "name" : "ANEURALNETWORKS_RNN"
+    },
+    {
+     "enum_field_value" : 25,
+     "name" : "ANEURALNETWORKS_SOFTMAX"
+    },
+    {
+     "enum_field_value" : 26,
+     "name" : "ANEURALNETWORKS_SPACE_TO_DEPTH"
+    },
+    {
+     "enum_field_value" : 27,
+     "name" : "ANEURALNETWORKS_SVDF"
+    },
+    {
+     "enum_field_value" : 28,
+     "name" : "ANEURALNETWORKS_TANH"
+    },
+    {
+     "enum_field_value" : 29,
+     "name" : "ANEURALNETWORKS_BATCH_TO_SPACE_ND"
+    },
+    {
+     "enum_field_value" : 30,
+     "name" : "ANEURALNETWORKS_DIV"
+    },
+    {
+     "enum_field_value" : 31,
+     "name" : "ANEURALNETWORKS_MEAN"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "ANEURALNETWORKS_PAD"
+    },
+    {
+     "enum_field_value" : 33,
+     "name" : "ANEURALNETWORKS_SPACE_TO_BATCH_ND"
+    },
+    {
+     "enum_field_value" : 34,
+     "name" : "ANEURALNETWORKS_SQUEEZE"
+    },
+    {
+     "enum_field_value" : 35,
+     "name" : "ANEURALNETWORKS_STRIDED_SLICE"
+    },
+    {
+     "enum_field_value" : 36,
+     "name" : "ANEURALNETWORKS_SUB"
+    },
+    {
+     "enum_field_value" : 37,
+     "name" : "ANEURALNETWORKS_TRANSPOSE"
+    },
+    {
+     "enum_field_value" : 38,
+     "name" : "ANEURALNETWORKS_ABS"
+    },
+    {
+     "enum_field_value" : 39,
+     "name" : "ANEURALNETWORKS_ARGMAX"
+    },
+    {
+     "enum_field_value" : 40,
+     "name" : "ANEURALNETWORKS_ARGMIN"
+    },
+    {
+     "enum_field_value" : 41,
+     "name" : "ANEURALNETWORKS_AXIS_ALIGNED_BBOX_TRANSFORM"
+    },
+    {
+     "enum_field_value" : 42,
+     "name" : "ANEURALNETWORKS_BIDIRECTIONAL_SEQUENCE_LSTM"
+    },
+    {
+     "enum_field_value" : 43,
+     "name" : "ANEURALNETWORKS_BIDIRECTIONAL_SEQUENCE_RNN"
+    },
+    {
+     "enum_field_value" : 44,
+     "name" : "ANEURALNETWORKS_BOX_WITH_NMS_LIMIT"
+    },
+    {
+     "enum_field_value" : 45,
+     "name" : "ANEURALNETWORKS_CAST"
+    },
+    {
+     "enum_field_value" : 46,
+     "name" : "ANEURALNETWORKS_CHANNEL_SHUFFLE"
+    },
+    {
+     "enum_field_value" : 47,
+     "name" : "ANEURALNETWORKS_DETECTION_POSTPROCESSING"
+    },
+    {
+     "enum_field_value" : 48,
+     "name" : "ANEURALNETWORKS_EQUAL"
+    },
+    {
+     "enum_field_value" : 49,
+     "name" : "ANEURALNETWORKS_EXP"
+    },
+    {
+     "enum_field_value" : 50,
+     "name" : "ANEURALNETWORKS_EXPAND_DIMS"
+    },
+    {
+     "enum_field_value" : 51,
+     "name" : "ANEURALNETWORKS_GATHER"
+    },
+    {
+     "enum_field_value" : 52,
+     "name" : "ANEURALNETWORKS_GENERATE_PROPOSALS"
+    },
+    {
+     "enum_field_value" : 53,
+     "name" : "ANEURALNETWORKS_GREATER"
+    },
+    {
+     "enum_field_value" : 54,
+     "name" : "ANEURALNETWORKS_GREATER_EQUAL"
+    },
+    {
+     "enum_field_value" : 55,
+     "name" : "ANEURALNETWORKS_GROUPED_CONV_2D"
+    },
+    {
+     "enum_field_value" : 56,
+     "name" : "ANEURALNETWORKS_HEATMAP_MAX_KEYPOINT"
+    },
+    {
+     "enum_field_value" : 57,
+     "name" : "ANEURALNETWORKS_INSTANCE_NORMALIZATION"
+    },
+    {
+     "enum_field_value" : 58,
+     "name" : "ANEURALNETWORKS_LESS"
+    },
+    {
+     "enum_field_value" : 59,
+     "name" : "ANEURALNETWORKS_LESS_EQUAL"
+    },
+    {
+     "enum_field_value" : 60,
+     "name" : "ANEURALNETWORKS_LOG"
+    },
+    {
+     "enum_field_value" : 61,
+     "name" : "ANEURALNETWORKS_LOGICAL_AND"
+    },
+    {
+     "enum_field_value" : 62,
+     "name" : "ANEURALNETWORKS_LOGICAL_NOT"
+    },
+    {
+     "enum_field_value" : 63,
+     "name" : "ANEURALNETWORKS_LOGICAL_OR"
+    },
+    {
+     "enum_field_value" : 64,
+     "name" : "ANEURALNETWORKS_LOG_SOFTMAX"
+    },
+    {
+     "enum_field_value" : 65,
+     "name" : "ANEURALNETWORKS_MAXIMUM"
+    },
+    {
+     "enum_field_value" : 66,
+     "name" : "ANEURALNETWORKS_MINIMUM"
+    },
+    {
+     "enum_field_value" : 67,
+     "name" : "ANEURALNETWORKS_NEG"
+    },
+    {
+     "enum_field_value" : 68,
+     "name" : "ANEURALNETWORKS_NOT_EQUAL"
+    },
+    {
+     "enum_field_value" : 69,
+     "name" : "ANEURALNETWORKS_PAD_V2"
+    },
+    {
+     "enum_field_value" : 70,
+     "name" : "ANEURALNETWORKS_POW"
+    },
+    {
+     "enum_field_value" : 71,
+     "name" : "ANEURALNETWORKS_PRELU"
+    },
+    {
+     "enum_field_value" : 72,
+     "name" : "ANEURALNETWORKS_QUANTIZE"
+    },
+    {
+     "enum_field_value" : 73,
+     "name" : "ANEURALNETWORKS_QUANTIZED_16BIT_LSTM"
+    },
+    {
+     "enum_field_value" : 74,
+     "name" : "ANEURALNETWORKS_RANDOM_MULTINOMIAL"
+    },
+    {
+     "enum_field_value" : 75,
+     "name" : "ANEURALNETWORKS_REDUCE_ALL"
+    },
+    {
+     "enum_field_value" : 76,
+     "name" : "ANEURALNETWORKS_REDUCE_ANY"
+    },
+    {
+     "enum_field_value" : 77,
+     "name" : "ANEURALNETWORKS_REDUCE_MAX"
+    },
+    {
+     "enum_field_value" : 78,
+     "name" : "ANEURALNETWORKS_REDUCE_MIN"
+    },
+    {
+     "enum_field_value" : 79,
+     "name" : "ANEURALNETWORKS_REDUCE_PROD"
+    },
+    {
+     "enum_field_value" : 80,
+     "name" : "ANEURALNETWORKS_REDUCE_SUM"
+    },
+    {
+     "enum_field_value" : 81,
+     "name" : "ANEURALNETWORKS_ROI_ALIGN"
+    },
+    {
+     "enum_field_value" : 82,
+     "name" : "ANEURALNETWORKS_ROI_POOLING"
+    },
+    {
+     "enum_field_value" : 83,
+     "name" : "ANEURALNETWORKS_RSQRT"
+    },
+    {
+     "enum_field_value" : 84,
+     "name" : "ANEURALNETWORKS_SELECT"
+    },
+    {
+     "enum_field_value" : 85,
+     "name" : "ANEURALNETWORKS_SIN"
+    },
+    {
+     "enum_field_value" : 86,
+     "name" : "ANEURALNETWORKS_SLICE"
+    },
+    {
+     "enum_field_value" : 87,
+     "name" : "ANEURALNETWORKS_SPLIT"
+    },
+    {
+     "enum_field_value" : 88,
+     "name" : "ANEURALNETWORKS_SQRT"
+    },
+    {
+     "enum_field_value" : 89,
+     "name" : "ANEURALNETWORKS_TILE"
+    },
+    {
+     "enum_field_value" : 90,
+     "name" : "ANEURALNETWORKS_TOPK_V2"
+    },
+    {
+     "enum_field_value" : 91,
+     "name" : "ANEURALNETWORKS_TRANSPOSE_CONV_2D"
+    },
+    {
+     "enum_field_value" : 92,
+     "name" : "ANEURALNETWORKS_UNIDIRECTIONAL_SEQUENCE_LSTM"
+    },
+    {
+     "enum_field_value" : 93,
+     "name" : "ANEURALNETWORKS_UNIDIRECTIONAL_SEQUENCE_RNN"
+    },
+    {
+     "enum_field_value" : 94,
+     "name" : "ANEURALNETWORKS_RESIZE_NEAREST_NEIGHBOR"
+    },
+    {
+     "enum_field_value" : 95,
+     "name" : "ANEURALNETWORKS_QUANTIZED_LSTM"
+    },
+    {
+     "enum_field_value" : 96,
+     "name" : "ANEURALNETWORKS_IF"
+    },
+    {
+     "enum_field_value" : 97,
+     "name" : "ANEURALNETWORKS_WHILE"
+    },
+    {
+     "enum_field_value" : 98,
+     "name" : "ANEURALNETWORKS_ELU"
+    },
+    {
+     "enum_field_value" : 99,
+     "name" : "ANEURALNETWORKS_HARD_SWISH"
+    },
+    {
+     "enum_field_value" : 100,
+     "name" : "ANEURALNETWORKS_FILL"
+    },
+    {
+     "enum_field_value" : 101,
+     "name" : "ANEURALNETWORKS_RANK"
+    }
+   ],
+   "linker_set_key" : "_ZTI13OperationCode",
+   "name" : "OperationCode",
+   "referenced_type" : "_ZTI13OperationCode",
+   "self_type" : "_ZTI13OperationCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_DEVICE_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_DEVICE_OTHER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_DEVICE_CPU"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANEURALNETWORKS_DEVICE_GPU"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANEURALNETWORKS_DEVICE_ACCELERATOR"
+    }
+   ],
+   "linker_set_key" : "_ZTI14DeviceTypeCode",
+   "name" : "DeviceTypeCode",
+   "referenced_type" : "_ZTI14DeviceTypeCode",
+   "self_type" : "_ZTI14DeviceTypeCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_PREFER_LOW_POWER"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_PREFER_FAST_SINGLE_ANSWER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_PREFER_SUSTAINED_SPEED"
+    }
+   ],
+   "linker_set_key" : "_ZTI14PreferenceCode",
+   "name" : "PreferenceCode",
+   "referenced_type" : "_ZTI14PreferenceCode",
+   "self_type" : "_ZTI14PreferenceCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 10000,
+     "name" : "ANEURALNETWORKS_OEM_SCALAR"
+    },
+    {
+     "enum_field_value" : 10001,
+     "name" : "ANEURALNETWORKS_TENSOR_OEM_BYTE"
+    }
+   ],
+   "linker_set_key" : "_ZTI27$ANEURALNETWORKS_OEM_SCALAR",
+   "name" : "(anonymous enum at frameworks/ml/nn/runtime/include/NeuralNetworksOEM.h:41:1)",
+   "referenced_type" : "_ZTI27$ANEURALNETWORKS_OEM_SCALAR",
+   "self_type" : "_ZTI27$ANEURALNETWORKS_OEM_SCALAR",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworksOEM.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 10000,
+     "name" : "ANEURALNETWORKS_OEM_OPERATION"
+    }
+   ],
+   "linker_set_key" : "_ZTI30$ANEURALNETWORKS_OEM_OPERATION",
+   "name" : "(anonymous enum at frameworks/ml/nn/runtime/include/NeuralNetworksOEM.h:62:1)",
+   "referenced_type" : "_ZTI30$ANEURALNETWORKS_OEM_OPERATION",
+   "self_type" : "_ZTI30$ANEURALNETWORKS_OEM_OPERATION",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworksOEM.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 32,
+     "name" : "ANEURALNETWORKS_BYTE_SIZE_OF_CACHE_TOKEN"
+    }
+   ],
+   "linker_set_key" : "_ZTI41$ANEURALNETWORKS_BYTE_SIZE_OF_CACHE_TOKEN",
+   "name" : "(anonymous enum at frameworks/ml/nn/runtime/include/NeuralNetworks.h:5844:1)",
+   "referenced_type" : "_ZTI41$ANEURALNETWORKS_BYTE_SIZE_OF_CACHE_TOKEN",
+   "self_type" : "_ZTI41$ANEURALNETWORKS_BYTE_SIZE_OF_CACHE_TOKEN",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 128,
+     "name" : "ANEURALNETWORKS_MAX_SIZE_OF_IMMEDIATELY_COPIED_VALUES"
+    }
+   ],
+   "linker_set_key" : "_ZTI54$ANEURALNETWORKS_MAX_SIZE_OF_IMMEDIATELY_COPIED_VALUES",
+   "name" : "(anonymous enum at frameworks/ml/nn/runtime/include/NeuralNetworks.h:5836:1)",
+   "referenced_type" : "_ZTI54$ANEURALNETWORKS_MAX_SIZE_OF_IMMEDIATELY_COPIED_VALUES",
+   "self_type" : "_ZTI54$ANEURALNETWORKS_MAX_SIZE_OF_IMMEDIATELY_COPIED_VALUES",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANEURALNETWORKS_FUSED_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANEURALNETWORKS_FUSED_RELU"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANEURALNETWORKS_FUSED_RELU1"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANEURALNETWORKS_FUSED_RELU6"
+    }
+   ],
+   "linker_set_key" : "_ZTI8FuseCode",
+   "name" : "FuseCode",
+   "referenced_type" : "_ZTI8FuseCode",
+   "self_type" : "_ZTI8FuseCode",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::procpartition::Partition::UNKNOWN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::procpartition::Partition::SYSTEM"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::procpartition::Partition::VENDOR"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::procpartition::Partition::ODM"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android13procpartition9PartitionE",
+   "name" : "android::procpartition::Partition",
+   "referenced_type" : "_ZTIN7android13procpartition9PartitionE",
+   "self_type" : "_ZTIN7android13procpartition9PartitionE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/cmds/lshal/libprocpartition/include/procpartition/procpartition.h",
+   "underlying_type" : "_ZTIi"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ANeuralNetworksBurst_create",
+   "linker_set_key" : "ANeuralNetworksBurst_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIPP20ANeuralNetworksBurst"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksBurst_free",
+   "linker_set_key" : "ANeuralNetworksBurst_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksBurst"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_create",
+   "linker_set_key" : "ANeuralNetworksCompilation_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIPP26ANeuralNetworksCompilation"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_createForDevices",
+   "linker_set_key" : "ANeuralNetworksCompilation_createForDevices",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIPKPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPP26ANeuralNetworksCompilation"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_finish",
+   "linker_set_key" : "ANeuralNetworksCompilation_finish",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_free",
+   "linker_set_key" : "ANeuralNetworksCompilation_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_setCaching",
+   "linker_set_key" : "ANeuralNetworksCompilation_setCaching",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_setPreference",
+   "linker_set_key" : "ANeuralNetworksCompilation_setPreference",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_setPriority",
+   "linker_set_key" : "ANeuralNetworksCompilation_setPriority",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksCompilation_setTimeout",
+   "linker_set_key" : "ANeuralNetworksCompilation_setTimeout",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksDevice_getExtensionSupport",
+   "linker_set_key" : "ANeuralNetworksDevice_getExtensionSupport",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworksExtensions.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksDevice_getFeatureLevel",
+   "linker_set_key" : "ANeuralNetworksDevice_getFeatureLevel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIPl"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksDevice_getName",
+   "linker_set_key" : "ANeuralNetworksDevice_getName",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIPPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksDevice_getType",
+   "linker_set_key" : "ANeuralNetworksDevice_getType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksDevice_getVersion",
+   "linker_set_key" : "ANeuralNetworksDevice_getVersion",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIPPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksDevice_wait",
+   "linker_set_key" : "ANeuralNetworksDevice_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksDevice"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksEvent_createFromSyncFenceFd",
+   "linker_set_key" : "ANeuralNetworksEvent_createFromSyncFenceFd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPP20ANeuralNetworksEvent"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksEvent_free",
+   "linker_set_key" : "ANeuralNetworksEvent_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksEvent"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksEvent_getSyncFenceFd",
+   "linker_set_key" : "ANeuralNetworksEvent_getSyncFenceFd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK20ANeuralNetworksEvent"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksEvent_wait",
+   "linker_set_key" : "ANeuralNetworksEvent_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksEvent"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_burstCompute",
+   "linker_set_key" : "ANeuralNetworksExecution_burstCompute",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksBurst"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_compute",
+   "linker_set_key" : "ANeuralNetworksExecution_compute",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_create",
+   "linker_set_key" : "ANeuralNetworksExecution_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIPP24ANeuralNetworksExecution"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_free",
+   "linker_set_key" : "ANeuralNetworksExecution_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_getDuration",
+   "linker_set_key" : "ANeuralNetworksExecution_getDuration",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_getOutputOperandDimensions",
+   "linker_set_key" : "ANeuralNetworksExecution_getOutputOperandDimensions",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_getOutputOperandRank",
+   "linker_set_key" : "ANeuralNetworksExecution_getOutputOperandRank",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setInput",
+   "linker_set_key" : "ANeuralNetworksExecution_setInput",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksOperandType"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setInputFromMemory",
+   "linker_set_key" : "ANeuralNetworksExecution_setInputFromMemory",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksOperandType"
+    },
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksMemory"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setLoopTimeout",
+   "linker_set_key" : "ANeuralNetworksExecution_setLoopTimeout",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setMeasureTiming",
+   "linker_set_key" : "ANeuralNetworksExecution_setMeasureTiming",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setOutput",
+   "linker_set_key" : "ANeuralNetworksExecution_setOutput",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksOperandType"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setOutputFromMemory",
+   "linker_set_key" : "ANeuralNetworksExecution_setOutputFromMemory",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksOperandType"
+    },
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksMemory"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_setTimeout",
+   "linker_set_key" : "ANeuralNetworksExecution_setTimeout",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_startCompute",
+   "linker_set_key" : "ANeuralNetworksExecution_startCompute",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIPP20ANeuralNetworksEvent"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksExecution_startComputeWithDependencies",
+   "linker_set_key" : "ANeuralNetworksExecution_startComputeWithDependencies",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP24ANeuralNetworksExecution"
+    },
+    {
+     "referenced_type" : "_ZTIPKPK20ANeuralNetworksEvent"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPP20ANeuralNetworksEvent"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemoryDesc_addInputRole",
+   "linker_set_key" : "ANeuralNetworksMemoryDesc_addInputRole",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25ANeuralNetworksMemoryDesc"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIf"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemoryDesc_addOutputRole",
+   "linker_set_key" : "ANeuralNetworksMemoryDesc_addOutputRole",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25ANeuralNetworksMemoryDesc"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksCompilation"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIf"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemoryDesc_create",
+   "linker_set_key" : "ANeuralNetworksMemoryDesc_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP25ANeuralNetworksMemoryDesc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemoryDesc_finish",
+   "linker_set_key" : "ANeuralNetworksMemoryDesc_finish",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25ANeuralNetworksMemoryDesc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemoryDesc_free",
+   "linker_set_key" : "ANeuralNetworksMemoryDesc_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25ANeuralNetworksMemoryDesc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemoryDesc_setDimensions",
+   "linker_set_key" : "ANeuralNetworksMemoryDesc_setDimensions",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25ANeuralNetworksMemoryDesc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemory_copy",
+   "linker_set_key" : "ANeuralNetworksMemory_copy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksMemory"
+    },
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksMemory"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemory_createFromAHardwareBuffer",
+   "linker_set_key" : "ANeuralNetworksMemory_createFromAHardwareBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK15AHardwareBuffer"
+    },
+    {
+     "referenced_type" : "_ZTIPP21ANeuralNetworksMemory"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemory_createFromDesc",
+   "linker_set_key" : "ANeuralNetworksMemory_createFromDesc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK25ANeuralNetworksMemoryDesc"
+    },
+    {
+     "referenced_type" : "_ZTIPP21ANeuralNetworksMemory"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemory_createFromFd",
+   "linker_set_key" : "ANeuralNetworksMemory_createFromFd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPP21ANeuralNetworksMemory"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksMemory_free",
+   "linker_set_key" : "ANeuralNetworksMemory_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP21ANeuralNetworksMemory"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_addOperand",
+   "linker_set_key" : "ANeuralNetworksModel_addOperand",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIPK26ANeuralNetworksOperandType"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_addOperation",
+   "linker_set_key" : "ANeuralNetworksModel_addOperation",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_create",
+   "linker_set_key" : "ANeuralNetworksModel_create",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP20ANeuralNetworksModel"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_finish",
+   "linker_set_key" : "ANeuralNetworksModel_finish",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_free",
+   "linker_set_key" : "ANeuralNetworksModel_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_getExtensionOperandType",
+   "linker_set_key" : "ANeuralNetworksModel_getExtensionOperandType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworksExtensions.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_getExtensionOperationType",
+   "linker_set_key" : "ANeuralNetworksModel_getExtensionOperationType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworksExtensions.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_getSupportedOperationsForDevices",
+   "linker_set_key" : "ANeuralNetworksModel_getSupportedOperationsForDevices",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIPKPK21ANeuralNetworksDevice"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_identifyInputsAndOutputs",
+   "linker_set_key" : "ANeuralNetworksModel_identifyInputsAndOutputs",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_relaxComputationFloat32toFloat16",
+   "linker_set_key" : "ANeuralNetworksModel_relaxComputationFloat32toFloat16",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_setOperandExtensionData",
+   "linker_set_key" : "ANeuralNetworksModel_setOperandExtensionData",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworksExtensions.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_setOperandSymmPerChannelQuantParams",
+   "linker_set_key" : "ANeuralNetworksModel_setOperandSymmPerChannelQuantParams",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK40ANeuralNetworksSymmPerChannelQuantParams"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_setOperandValue",
+   "linker_set_key" : "ANeuralNetworksModel_setOperandValue",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_setOperandValueFromMemory",
+   "linker_set_key" : "ANeuralNetworksModel_setOperandValueFromMemory",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK21ANeuralNetworksMemory"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworksModel_setOperandValueFromModel",
+   "linker_set_key" : "ANeuralNetworksModel_setOperandValueFromModel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20ANeuralNetworksModel"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPK20ANeuralNetworksModel"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworks_getDefaultLoopTimeout",
+   "linker_set_key" : "ANeuralNetworks_getDefaultLoopTimeout",
+   "return_type" : "_ZTIm",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworks_getDevice",
+   "linker_set_key" : "ANeuralNetworks_getDevice",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPP21ANeuralNetworksDevice"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworks_getDeviceCount",
+   "linker_set_key" : "ANeuralNetworks_getDeviceCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "function_name" : "ANeuralNetworks_getMaximumLoopTimeout",
+   "linker_set_key" : "ANeuralNetworks_getMaximumLoopTimeout",
+   "return_type" : "_ZTIm",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> > &",
+   "referenced_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 8,
+   "source_file" : "/frameworks/native/cmds/lshal/libprocpartition/include/procpartition/procpartition.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "name" : "std::basic_ostream<char, std::char_traits<char> > &",
+   "referenced_type" : "_ZTINSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "size" : 8,
+   "source_file" : "/frameworks/native/cmds/lshal/libprocpartition/include/procpartition/procpartition.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP20ANeuralNetworksBurst",
+   "name" : "ANeuralNetworksBurst *",
+   "referenced_type" : "_ZTI20ANeuralNetworksBurst",
+   "self_type" : "_ZTIP20ANeuralNetworksBurst",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP20ANeuralNetworksEvent",
+   "name" : "ANeuralNetworksEvent *",
+   "referenced_type" : "_ZTI20ANeuralNetworksEvent",
+   "self_type" : "_ZTIP20ANeuralNetworksEvent",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP20ANeuralNetworksModel",
+   "name" : "ANeuralNetworksModel *",
+   "referenced_type" : "_ZTI20ANeuralNetworksModel",
+   "self_type" : "_ZTIP20ANeuralNetworksModel",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP21ANeuralNetworksDevice",
+   "name" : "ANeuralNetworksDevice *",
+   "referenced_type" : "_ZTI21ANeuralNetworksDevice",
+   "self_type" : "_ZTIP21ANeuralNetworksDevice",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP21ANeuralNetworksMemory",
+   "name" : "ANeuralNetworksMemory *",
+   "referenced_type" : "_ZTI21ANeuralNetworksMemory",
+   "self_type" : "_ZTIP21ANeuralNetworksMemory",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP24ANeuralNetworksExecution",
+   "name" : "ANeuralNetworksExecution *",
+   "referenced_type" : "_ZTI24ANeuralNetworksExecution",
+   "self_type" : "_ZTIP24ANeuralNetworksExecution",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP25ANeuralNetworksMemoryDesc",
+   "name" : "ANeuralNetworksMemoryDesc *",
+   "referenced_type" : "_ZTI25ANeuralNetworksMemoryDesc",
+   "self_type" : "_ZTIP25ANeuralNetworksMemoryDesc",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP26ANeuralNetworksCompilation",
+   "name" : "ANeuralNetworksCompilation *",
+   "referenced_type" : "_ZTI26ANeuralNetworksCompilation",
+   "self_type" : "_ZTIP26ANeuralNetworksCompilation",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK15AHardwareBuffer",
+   "name" : "const AHardwareBuffer *",
+   "referenced_type" : "_ZTIK15AHardwareBuffer",
+   "self_type" : "_ZTIPK15AHardwareBuffer",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK20ANeuralNetworksEvent",
+   "name" : "const ANeuralNetworksEvent *",
+   "referenced_type" : "_ZTIK20ANeuralNetworksEvent",
+   "self_type" : "_ZTIPK20ANeuralNetworksEvent",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK20ANeuralNetworksModel",
+   "name" : "const ANeuralNetworksModel *",
+   "referenced_type" : "_ZTIK20ANeuralNetworksModel",
+   "self_type" : "_ZTIPK20ANeuralNetworksModel",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK21ANeuralNetworksDevice",
+   "name" : "const ANeuralNetworksDevice *",
+   "referenced_type" : "_ZTIK21ANeuralNetworksDevice",
+   "self_type" : "_ZTIPK21ANeuralNetworksDevice",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK21ANeuralNetworksMemory",
+   "name" : "const ANeuralNetworksMemory *",
+   "referenced_type" : "_ZTIK21ANeuralNetworksMemory",
+   "self_type" : "_ZTIPK21ANeuralNetworksMemory",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK24ANeuralNetworksExecution",
+   "name" : "const ANeuralNetworksExecution *",
+   "referenced_type" : "_ZTIK24ANeuralNetworksExecution",
+   "self_type" : "_ZTIPK24ANeuralNetworksExecution",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK25ANeuralNetworksMemoryDesc",
+   "name" : "const ANeuralNetworksMemoryDesc *",
+   "referenced_type" : "_ZTIK25ANeuralNetworksMemoryDesc",
+   "self_type" : "_ZTIPK25ANeuralNetworksMemoryDesc",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK26ANeuralNetworksCompilation",
+   "name" : "const ANeuralNetworksCompilation *",
+   "referenced_type" : "_ZTIK26ANeuralNetworksCompilation",
+   "self_type" : "_ZTIPK26ANeuralNetworksCompilation",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK26ANeuralNetworksOperandType",
+   "name" : "const ANeuralNetworksOperandType *",
+   "referenced_type" : "_ZTIK26ANeuralNetworksOperandType",
+   "self_type" : "_ZTIPK26ANeuralNetworksOperandType",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK40ANeuralNetworksSymmPerChannelQuantParams",
+   "name" : "const ANeuralNetworksSymmPerChannelQuantParams *",
+   "referenced_type" : "_ZTIK40ANeuralNetworksSymmPerChannelQuantParams",
+   "self_type" : "_ZTIPK40ANeuralNetworksSymmPerChannelQuantParams",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKPK20ANeuralNetworksEvent",
+   "name" : "const ANeuralNetworksEvent *const *",
+   "referenced_type" : "_ZTIKPK20ANeuralNetworksEvent",
+   "self_type" : "_ZTIPKPK20ANeuralNetworksEvent",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKPK21ANeuralNetworksDevice",
+   "name" : "const ANeuralNetworksDevice *const *",
+   "referenced_type" : "_ZTIKPK21ANeuralNetworksDevice",
+   "self_type" : "_ZTIPKPK21ANeuralNetworksDevice",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKf",
+   "name" : "const float *",
+   "referenced_type" : "_ZTIKf",
+   "self_type" : "_ZTIPKf",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKj",
+   "name" : "const unsigned int *",
+   "referenced_type" : "_ZTIKj",
+   "self_type" : "_ZTIPKj",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP20ANeuralNetworksBurst",
+   "name" : "ANeuralNetworksBurst **",
+   "referenced_type" : "_ZTIP20ANeuralNetworksBurst",
+   "self_type" : "_ZTIPP20ANeuralNetworksBurst",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP20ANeuralNetworksEvent",
+   "name" : "ANeuralNetworksEvent **",
+   "referenced_type" : "_ZTIP20ANeuralNetworksEvent",
+   "self_type" : "_ZTIPP20ANeuralNetworksEvent",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP20ANeuralNetworksModel",
+   "name" : "ANeuralNetworksModel **",
+   "referenced_type" : "_ZTIP20ANeuralNetworksModel",
+   "self_type" : "_ZTIPP20ANeuralNetworksModel",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP21ANeuralNetworksDevice",
+   "name" : "ANeuralNetworksDevice **",
+   "referenced_type" : "_ZTIP21ANeuralNetworksDevice",
+   "self_type" : "_ZTIPP21ANeuralNetworksDevice",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP21ANeuralNetworksMemory",
+   "name" : "ANeuralNetworksMemory **",
+   "referenced_type" : "_ZTIP21ANeuralNetworksMemory",
+   "self_type" : "_ZTIPP21ANeuralNetworksMemory",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP24ANeuralNetworksExecution",
+   "name" : "ANeuralNetworksExecution **",
+   "referenced_type" : "_ZTIP24ANeuralNetworksExecution",
+   "self_type" : "_ZTIPP24ANeuralNetworksExecution",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP25ANeuralNetworksMemoryDesc",
+   "name" : "ANeuralNetworksMemoryDesc **",
+   "referenced_type" : "_ZTIP25ANeuralNetworksMemoryDesc",
+   "self_type" : "_ZTIPP25ANeuralNetworksMemoryDesc",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP26ANeuralNetworksCompilation",
+   "name" : "ANeuralNetworksCompilation **",
+   "referenced_type" : "_ZTIP26ANeuralNetworksCompilation",
+   "self_type" : "_ZTIPP26ANeuralNetworksCompilation",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPKc",
+   "name" : "const char **",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIPPKc",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPb",
+   "name" : "bool *",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIPb",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPl",
+   "name" : "long *",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIPl",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPm",
+   "name" : "unsigned long *",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIPm",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK15AHardwareBuffer",
+   "name" : "const AHardwareBuffer",
+   "referenced_type" : "_ZTI15AHardwareBuffer",
+   "self_type" : "_ZTIK15AHardwareBuffer",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK20ANeuralNetworksEvent",
+   "name" : "const ANeuralNetworksEvent",
+   "referenced_type" : "_ZTI20ANeuralNetworksEvent",
+   "self_type" : "_ZTIK20ANeuralNetworksEvent",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK20ANeuralNetworksModel",
+   "name" : "const ANeuralNetworksModel",
+   "referenced_type" : "_ZTI20ANeuralNetworksModel",
+   "self_type" : "_ZTIK20ANeuralNetworksModel",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK21ANeuralNetworksDevice",
+   "name" : "const ANeuralNetworksDevice",
+   "referenced_type" : "_ZTI21ANeuralNetworksDevice",
+   "self_type" : "_ZTIK21ANeuralNetworksDevice",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK21ANeuralNetworksMemory",
+   "name" : "const ANeuralNetworksMemory",
+   "referenced_type" : "_ZTI21ANeuralNetworksMemory",
+   "self_type" : "_ZTIK21ANeuralNetworksMemory",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK24ANeuralNetworksExecution",
+   "name" : "const ANeuralNetworksExecution",
+   "referenced_type" : "_ZTI24ANeuralNetworksExecution",
+   "self_type" : "_ZTIK24ANeuralNetworksExecution",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK25ANeuralNetworksMemoryDesc",
+   "name" : "const ANeuralNetworksMemoryDesc",
+   "referenced_type" : "_ZTI25ANeuralNetworksMemoryDesc",
+   "self_type" : "_ZTIK25ANeuralNetworksMemoryDesc",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK26ANeuralNetworksCompilation",
+   "name" : "const ANeuralNetworksCompilation",
+   "referenced_type" : "_ZTI26ANeuralNetworksCompilation",
+   "self_type" : "_ZTIK26ANeuralNetworksCompilation",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK26ANeuralNetworksOperandType",
+   "name" : "const ANeuralNetworksOperandType",
+   "referenced_type" : "_ZTI26ANeuralNetworksOperandType",
+   "self_type" : "_ZTIK26ANeuralNetworksOperandType",
+   "size" : 24,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK40ANeuralNetworksSymmPerChannelQuantParams",
+   "name" : "const ANeuralNetworksSymmPerChannelQuantParams",
+   "referenced_type" : "_ZTI40ANeuralNetworksSymmPerChannelQuantParams",
+   "self_type" : "_ZTIK40ANeuralNetworksSymmPerChannelQuantParams",
+   "size" : 16,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> >",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 24,
+   "source_file" : "/frameworks/native/cmds/lshal/libprocpartition/include/procpartition/procpartition.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKPK20ANeuralNetworksEvent",
+   "name" : "const ANeuralNetworksEvent *const",
+   "referenced_type" : "_ZTIPK20ANeuralNetworksEvent",
+   "self_type" : "_ZTIKPK20ANeuralNetworksEvent",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKPK21ANeuralNetworksDevice",
+   "name" : "const ANeuralNetworksDevice *const",
+   "referenced_type" : "_ZTIPK21ANeuralNetworksDevice",
+   "self_type" : "_ZTIKPK21ANeuralNetworksDevice",
+   "size" : 8,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKf",
+   "name" : "const float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIKf",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "dimensionCount",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "dimensions",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "field_name" : "scale",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIf"
+    },
+    {
+     "field_name" : "zeroPoint",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI26ANeuralNetworksOperandType",
+   "name" : "ANeuralNetworksOperandType",
+   "referenced_type" : "_ZTI26ANeuralNetworksOperandType",
+   "self_type" : "_ZTI26ANeuralNetworksOperandType",
+   "size" : 24,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "channelDim",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "scaleCount",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "scales",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKf"
+    }
+   ],
+   "linker_set_key" : "_ZTI40ANeuralNetworksSymmPerChannelQuantParams",
+   "name" : "ANeuralNetworksSymmPerChannelQuantParams",
+   "referenced_type" : "_ZTI40ANeuralNetworksSymmPerChannelQuantParams",
+   "self_type" : "_ZTI40ANeuralNetworksSymmPerChannelQuantParams",
+   "size" : 16,
+   "source_file" : "/frameworks/ml/nn/runtime/include/NeuralNetworks.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

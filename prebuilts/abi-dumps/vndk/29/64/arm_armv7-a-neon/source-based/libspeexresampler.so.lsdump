@@ -1,0 +1,755 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "float",
+   "name" : "float",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-21",
+   "self_type" : "type-21",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-24",
+   "self_type" : "type-24",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  },
+  {
+   "name" : "__aeabi_uidiv"
+  },
+  {
+   "name" : "__aeabi_uidivmod"
+  },
+  {
+   "name" : "__udivmodsi4"
+  },
+  {
+   "name" : "__udivsi3"
+  },
+  {
+   "name" : "speex_resampler_destroy"
+  },
+  {
+   "name" : "speex_resampler_get_input_latency"
+  },
+  {
+   "name" : "speex_resampler_get_input_stride"
+  },
+  {
+   "name" : "speex_resampler_get_output_latency"
+  },
+  {
+   "name" : "speex_resampler_get_output_stride"
+  },
+  {
+   "name" : "speex_resampler_get_quality"
+  },
+  {
+   "name" : "speex_resampler_get_rate"
+  },
+  {
+   "name" : "speex_resampler_get_ratio"
+  },
+  {
+   "name" : "speex_resampler_init"
+  },
+  {
+   "name" : "speex_resampler_init_frac"
+  },
+  {
+   "name" : "speex_resampler_process_float"
+  },
+  {
+   "name" : "speex_resampler_process_int"
+  },
+  {
+   "name" : "speex_resampler_process_interleaved_float"
+  },
+  {
+   "name" : "speex_resampler_process_interleaved_int"
+  },
+  {
+   "name" : "speex_resampler_reset_mem"
+  },
+  {
+   "name" : "speex_resampler_set_input_stride"
+  },
+  {
+   "name" : "speex_resampler_set_output_stride"
+  },
+  {
+   "name" : "speex_resampler_set_quality"
+  },
+  {
+   "name" : "speex_resampler_set_rate"
+  },
+  {
+   "name" : "speex_resampler_set_rate_frac"
+  },
+  {
+   "name" : "speex_resampler_skip_zeros"
+  },
+  {
+   "name" : "speex_resampler_strerror"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "speex_resampler_destroy",
+   "linker_set_key" : "speex_resampler_destroy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_input_latency",
+   "linker_set_key" : "speex_resampler_get_input_latency",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_input_stride",
+   "linker_set_key" : "speex_resampler_get_input_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_output_latency",
+   "linker_set_key" : "speex_resampler_get_output_latency",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_output_stride",
+   "linker_set_key" : "speex_resampler_get_output_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_quality",
+   "linker_set_key" : "speex_resampler_get_quality",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_rate",
+   "linker_set_key" : "speex_resampler_get_rate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_ratio",
+   "linker_set_key" : "speex_resampler_get_ratio",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_init",
+   "linker_set_key" : "speex_resampler_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_init_frac",
+   "linker_set_key" : "speex_resampler_init_frac",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_float",
+   "linker_set_key" : "speex_resampler_process_float",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_int",
+   "linker_set_key" : "speex_resampler_process_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-27"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_interleaved_float",
+   "linker_set_key" : "speex_resampler_process_interleaved_float",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_interleaved_int",
+   "linker_set_key" : "speex_resampler_process_interleaved_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-27"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_reset_mem",
+   "linker_set_key" : "speex_resampler_reset_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_input_stride",
+   "linker_set_key" : "speex_resampler_set_input_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_output_stride",
+   "linker_set_key" : "speex_resampler_set_output_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_quality",
+   "linker_set_key" : "speex_resampler_set_quality",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_rate",
+   "linker_set_key" : "speex_resampler_set_rate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_rate_frac",
+   "linker_set_key" : "speex_resampler_set_rate_frac",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_skip_zeros",
+   "linker_set_key" : "speex_resampler_skip_zeros",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_strerror",
+   "linker_set_key" : "speex_resampler_strerror",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "SpeexResamplerState_ *",
+   "name" : "SpeexResamplerState_ *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const float *",
+   "name" : "const float *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-13",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const short *",
+   "name" : "const short *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "float *",
+   "name" : "float *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-25",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-9",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "short *",
+   "name" : "short *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-24",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-7",
+   "self_type" : "type-6",
+   "size" : 1,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const float",
+   "name" : "const float",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "const short",
+   "name" : "const short",
+   "referenced_type" : "type-4",
+   "self_type" : "type-26",
+   "size" : 2,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

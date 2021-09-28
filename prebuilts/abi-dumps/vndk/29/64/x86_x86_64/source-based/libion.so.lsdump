@@ -1,0 +1,509 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ion_alloc"
+  },
+  {
+   "name" : "ion_alloc_fd"
+  },
+  {
+   "name" : "ion_close"
+  },
+  {
+   "name" : "ion_free"
+  },
+  {
+   "name" : "ion_import"
+  },
+  {
+   "name" : "ion_is_legacy"
+  },
+  {
+   "name" : "ion_map"
+  },
+  {
+   "name" : "ion_open"
+  },
+  {
+   "name" : "ion_query_get_heaps"
+  },
+  {
+   "name" : "ion_query_heap_cnt"
+  },
+  {
+   "name" : "ion_share"
+  },
+  {
+   "name" : "ion_sync_fd"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ION_HEAP_TYPE_SYSTEM"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ION_HEAP_TYPE_SYSTEM_CONTIG"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ION_HEAP_TYPE_CARVEOUT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ION_HEAP_TYPE_CHUNK"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ION_HEAP_TYPE_DMA"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ION_HEAP_TYPE_CUSTOM"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "ION_NUM_HEAPS"
+    }
+   ],
+   "linker_set_key" : "ion_heap_type",
+   "name" : "ion_heap_type",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/system/core/libion/kernel-headers/linux/ion.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "ion_heap_type"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ion_alloc",
+   "linker_set_key" : "ion_alloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_alloc_fd",
+   "linker_set_key" : "ion_alloc_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_close",
+   "linker_set_key" : "ion_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_free",
+   "linker_set_key" : "ion_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_import",
+   "linker_set_key" : "ion_import",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_is_legacy",
+   "linker_set_key" : "ion_is_legacy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_map",
+   "linker_set_key" : "ion_map",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_open",
+   "linker_set_key" : "ion_open",
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_query_get_heaps",
+   "linker_set_key" : "ion_query_get_heaps",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_query_heap_cnt",
+   "linker_set_key" : "ion_query_heap_cnt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_share",
+   "linker_set_key" : "ion_share",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "function_name" : "ion_sync_fd",
+   "linker_set_key" : "ion_sync_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-3",
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-8",
+   "size" : 4,
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char **",
+   "name" : "unsigned char **",
+   "referenced_type" : "type-10",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/system/core/libion/include/ion/ion.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "len",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "align",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "heap_id_mask",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "handle",
+     "field_offset" : 128,
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "ion_allocation_data",
+   "name" : "ion_allocation_data",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 20,
+   "source_file" : "/system/core/libion/kernel-headers/linux/ion.h",
+   "unique_id" : "ion_allocation_data"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "cmd",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "arg",
+     "field_offset" : 32,
+     "referenced_type" : "type-7"
+    }
+   ],
+   "linker_set_key" : "ion_custom_data",
+   "name" : "ion_custom_data",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 8,
+   "source_file" : "/system/core/libion/kernel-headers/linux/ion.h",
+   "unique_id" : "ion_custom_data"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "handle",
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 32,
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "ion_fd_data",
+   "name" : "ion_fd_data",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 8,
+   "source_file" : "/system/core/libion/kernel-headers/linux/ion.h",
+   "unique_id" : "ion_fd_data"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "handle",
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "ion_handle_data",
+   "name" : "ion_handle_data",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/system/core/libion/kernel-headers/linux/ion.h",
+   "unique_id" : "ion_handle_data"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

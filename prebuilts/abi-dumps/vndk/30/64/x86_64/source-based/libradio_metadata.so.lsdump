@@ -1,0 +1,1480 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA128_c",
+   "name" : "char [128]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA128_c",
+   "size" : 128,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA16_17radio_band_config",
+   "name" : "radio_band_config [16]",
+   "referenced_type" : "_ZTI17radio_band_config",
+   "self_type" : "_ZTIA16_17radio_band_config",
+   "size" : 1664,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA16_21radio_hal_band_config",
+   "name" : "radio_hal_band_config [16]",
+   "referenced_type" : "_ZTI21radio_hal_band_config",
+   "self_type" : "_ZTIA16_21radio_hal_band_config",
+   "size" : 1600,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA16_j",
+   "name" : "unsigned int [16]",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIA16_j",
+   "size" : 64,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android20RadioMetadataWrapperC1EPP14radio_metadata"
+  },
+  {
+   "name" : "_ZN7android20RadioMetadataWrapperC2EPP14radio_metadata"
+  },
+  {
+   "name" : "_ZN7android20RadioMetadataWrapperD0Ev"
+  },
+  {
+   "name" : "_ZN7android20RadioMetadataWrapperD1Ev"
+  },
+  {
+   "name" : "_ZN7android20RadioMetadataWrapperD2Ev"
+  },
+  {
+   "name" : "radio_metadata_add_clock"
+  },
+  {
+   "name" : "radio_metadata_add_int"
+  },
+  {
+   "name" : "radio_metadata_add_metadata"
+  },
+  {
+   "name" : "radio_metadata_add_raw"
+  },
+  {
+   "name" : "radio_metadata_add_text"
+  },
+  {
+   "name" : "radio_metadata_allocate"
+  },
+  {
+   "name" : "radio_metadata_check"
+  },
+  {
+   "name" : "radio_metadata_deallocate"
+  },
+  {
+   "name" : "radio_metadata_get_at_index"
+  },
+  {
+   "name" : "radio_metadata_get_channel"
+  },
+  {
+   "name" : "radio_metadata_get_count"
+  },
+  {
+   "name" : "radio_metadata_get_from_key"
+  },
+  {
+   "name" : "radio_metadata_get_size"
+  },
+  {
+   "name" : "radio_metadata_type_of_key"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZTVN7android20RadioMetadataWrapperE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_BAND_AM"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_BAND_FM"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_BAND_FM_HD"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "RADIO_BAND_AM_HD"
+    }
+   ],
+   "linker_set_key" : "_ZTI12radio_band_t",
+   "name" : "radio_band_t",
+   "referenced_type" : "_ZTI12radio_band_t",
+   "self_type" : "_ZTI12radio_band_t",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_CLASS_AM_FM"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_CLASS_SAT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_CLASS_DT"
+    }
+   ],
+   "linker_set_key" : "_ZTI13radio_class_t",
+   "name" : "radio_class_t",
+   "referenced_type" : "_ZTI13radio_class_t",
+   "self_type" : "_ZTI13radio_class_t",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "RADIO_REGION_NONE"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_REGION_ITU_1"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_REGION_ITU_2"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_REGION_OIRT"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "RADIO_REGION_JAPAN"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "RADIO_REGION_KOREA"
+    }
+   ],
+   "linker_set_key" : "_ZTI14radio_region_t",
+   "name" : "radio_region_t",
+   "referenced_type" : "_ZTI14radio_region_t",
+   "self_type" : "_ZTI14radio_region_t",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_RDS_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_RDS_WORLD"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_RDS_US"
+    }
+   ],
+   "linker_set_key" : "_ZTI15$RADIO_RDS_NONE",
+   "name" : "(anonymous enum at system/core/libsystem/include/system/radio.h:51:1)",
+   "referenced_type" : "_ZTI15$RADIO_RDS_NONE",
+   "self_type" : "_ZTI15$RADIO_RDS_NONE",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_DIRECTION_UP"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_DIRECTION_DOWN"
+    }
+   ],
+   "linker_set_key" : "_ZTI17radio_direction_t",
+   "name" : "radio_direction_t",
+   "referenced_type" : "_ZTI17radio_direction_t",
+   "self_type" : "_ZTI17radio_direction_t",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_DEEMPHASIS_50"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_DEEMPHASIS_75"
+    }
+   ],
+   "linker_set_key" : "_ZTI20$RADIO_DEEMPHASIS_50",
+   "name" : "(anonymous enum at system/core/libsystem/include/system/radio.h:59:1)",
+   "referenced_type" : "_ZTI20$RADIO_DEEMPHASIS_50",
+   "self_type" : "_ZTI20$RADIO_DEEMPHASIS_50",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_EVENT_HW_FAILURE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_EVENT_CONFIG"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_EVENT_ANTENNA"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "RADIO_EVENT_TUNED"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "RADIO_EVENT_METADATA"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "RADIO_EVENT_TA"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "RADIO_EVENT_AF_SWITCH"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "RADIO_EVENT_EA"
+    },
+    {
+     "enum_field_value" : 100,
+     "name" : "RADIO_EVENT_CONTROL"
+    },
+    {
+     "enum_field_value" : 101,
+     "name" : "RADIO_EVENT_SERVER_DIED"
+    }
+   ],
+   "linker_set_key" : "_ZTI22$RADIO_EVENT_AF_SWITCH",
+   "name" : "(anonymous enum at system/core/libsystem/include/system/radio.h:181:1)",
+   "referenced_type" : "_ZTI22$RADIO_EVENT_AF_SWITCH",
+   "self_type" : "_ZTI22$RADIO_EVENT_AF_SWITCH",
+   "size" : 4,
+   "source_file" : "/system/core/libsystem/include/system/radio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "RADIO_METADATA_KEY_INVALID"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_METADATA_KEY_RDS_PI"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_METADATA_KEY_RDS_PS"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_METADATA_KEY_RDS_PTY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "RADIO_METADATA_KEY_RBDS_PTY"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "RADIO_METADATA_KEY_RDS_RT"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "RADIO_METADATA_KEY_TITLE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "RADIO_METADATA_KEY_ARTIST"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "RADIO_METADATA_KEY_ALBUM"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "RADIO_METADATA_KEY_GENRE"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "RADIO_METADATA_KEY_ICON"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "RADIO_METADATA_KEY_ART"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "RADIO_METADATA_KEY_CLOCK"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_METADATA_KEY_MIN"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "RADIO_METADATA_KEY_MAX"
+    }
+   ],
+   "linker_set_key" : "_ZTI25$RADIO_METADATA_KEY_ALBUM",
+   "name" : "(anonymous enum at system/media/radio/include/system/radio_metadata.h:32:1)",
+   "referenced_type" : "_ZTI25$RADIO_METADATA_KEY_ALBUM",
+   "self_type" : "_ZTI25$RADIO_METADATA_KEY_ALBUM",
+   "size" : 4,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "RADIO_METADATA_TYPE_INVALID"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "RADIO_METADATA_TYPE_INT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RADIO_METADATA_TYPE_TEXT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RADIO_METADATA_TYPE_RAW"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "RADIO_METADATA_TYPE_CLOCK"
+    }
+   ],
+   "linker_set_key" : "_ZTI26$RADIO_METADATA_TYPE_CLOCK",
+   "name" : "(anonymous enum at system/media/radio/include/system/radio_metadata.h:51:1)",
+   "referenced_type" : "_ZTI26$RADIO_METADATA_TYPE_CLOCK",
+   "self_type" : "_ZTI26$RADIO_METADATA_TYPE_CLOCK",
+   "size" : 4,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h",
+   "underlying_type" : "_ZTIi"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::RadioMetadataWrapper::RadioMetadataWrapper",
+   "linker_set_key" : "_ZN7android20RadioMetadataWrapperC1EPP14radio_metadata",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android20RadioMetadataWrapperE"
+    },
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h"
+  },
+  {
+   "function_name" : "android::RadioMetadataWrapper::RadioMetadataWrapper",
+   "linker_set_key" : "_ZN7android20RadioMetadataWrapperC2EPP14radio_metadata",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android20RadioMetadataWrapperE"
+    },
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h"
+  },
+  {
+   "function_name" : "android::RadioMetadataWrapper::~RadioMetadataWrapper",
+   "linker_set_key" : "_ZN7android20RadioMetadataWrapperD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android20RadioMetadataWrapperE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h"
+  },
+  {
+   "function_name" : "android::RadioMetadataWrapper::~RadioMetadataWrapper",
+   "linker_set_key" : "_ZN7android20RadioMetadataWrapperD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android20RadioMetadataWrapperE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h"
+  },
+  {
+   "function_name" : "android::RadioMetadataWrapper::~RadioMetadataWrapper",
+   "linker_set_key" : "_ZN7android20RadioMetadataWrapperD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN7android20RadioMetadataWrapperE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h"
+  },
+  {
+   "function_name" : "radio_metadata_add_clock",
+   "linker_set_key" : "radio_metadata_add_clock",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIPK20radio_metadata_clock"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_add_int",
+   "linker_set_key" : "radio_metadata_add_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_add_metadata",
+   "linker_set_key" : "radio_metadata_add_metadata",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIP14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_add_raw",
+   "linker_set_key" : "radio_metadata_add_raw",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIKm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_add_text",
+   "linker_set_key" : "radio_metadata_add_text",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_allocate",
+   "linker_set_key" : "radio_metadata_allocate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_check",
+   "linker_set_key" : "radio_metadata_check",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_deallocate",
+   "linker_set_key" : "radio_metadata_deallocate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_get_at_index",
+   "linker_set_key" : "radio_metadata_get_at_index",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPPv"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_get_channel",
+   "linker_set_key" : "radio_metadata_get_channel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_get_count",
+   "linker_set_key" : "radio_metadata_get_count",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_get_from_key",
+   "linker_set_key" : "radio_metadata_get_from_key",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14radio_metadata"
+    },
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPPv"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_get_size",
+   "linker_set_key" : "radio_metadata_get_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK14radio_metadata"
+    }
+   ],
+   "return_type" : "_ZTIm",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "function_name" : "radio_metadata_type_of_key",
+   "linker_set_key" : "radio_metadata_type_of_key",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP14radio_metadata",
+   "name" : "radio_metadata *",
+   "referenced_type" : "_ZTI14radio_metadata",
+   "self_type" : "_ZTIP14radio_metadata",
+   "size" : 8,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK14radio_metadata",
+   "name" : "const radio_metadata *",
+   "referenced_type" : "_ZTIK14radio_metadata",
+   "self_type" : "_ZTIPK14radio_metadata",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK20radio_metadata_clock",
+   "name" : "const radio_metadata_clock *",
+   "referenced_type" : "_ZTIK20radio_metadata_clock",
+   "self_type" : "_ZTIPK20radio_metadata_clock",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android20RadioMetadataWrapperE",
+   "name" : "android::RadioMetadataWrapper *",
+   "referenced_type" : "_ZTIN7android20RadioMetadataWrapperE",
+   "self_type" : "_ZTIPN7android20RadioMetadataWrapperE",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP14radio_metadata",
+   "name" : "radio_metadata **",
+   "referenced_type" : "_ZTIP14radio_metadata",
+   "self_type" : "_ZTIPP14radio_metadata",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPv",
+   "name" : "void **",
+   "referenced_type" : "_ZTIPv",
+   "self_type" : "_ZTIPPv",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPm",
+   "name" : "unsigned long *",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIPm",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK14radio_metadata",
+   "name" : "const radio_metadata",
+   "referenced_type" : "_ZTI14radio_metadata",
+   "self_type" : "_ZTIK14radio_metadata",
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK20radio_metadata_clock",
+   "name" : "const radio_metadata_clock",
+   "referenced_type" : "_ZTI20radio_metadata_clock",
+   "self_type" : "_ZTIK20radio_metadata_clock",
+   "size" : 16,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKm",
+   "name" : "const unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIKm",
+   "size" : 8,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "status",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN11radio_eventUt_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI11radio_event",
+   "name" : "radio_event",
+   "referenced_type" : "_ZTI11radio_event",
+   "self_type" : "_ZTI11radio_event",
+   "size" : 112,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "status",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN15radio_hal_eventUt_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI15radio_hal_event",
+   "name" : "radio_hal_event",
+   "referenced_type" : "_ZTI15radio_hal_event",
+   "self_type" : "_ZTI15radio_hal_event",
+   "size" : 112,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "handle",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "class_id",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTI13radio_class_t"
+    },
+    {
+     "field_name" : "implementor",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "product",
+     "field_offset" : 1088,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "version",
+     "field_offset" : 2112,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "serial",
+     "field_offset" : 3136,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "num_tuners",
+     "field_offset" : 4160,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "num_audio_sources",
+     "field_offset" : 4192,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "supports_capture",
+     "field_offset" : 4224,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "num_bands",
+     "field_offset" : 4256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "bands",
+     "field_offset" : 4288,
+     "referenced_type" : "_ZTIA16_17radio_band_config"
+    }
+   ],
+   "linker_set_key" : "_ZTI16radio_properties",
+   "name" : "radio_properties",
+   "referenced_type" : "_ZTI16radio_properties",
+   "self_type" : "_ZTI16radio_properties",
+   "size" : 2200,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "region",
+     "referenced_type" : "_ZTI14radio_region_t"
+    },
+    {
+     "field_name" : "band",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTI21radio_hal_band_config"
+    }
+   ],
+   "linker_set_key" : "_ZTI17radio_band_config",
+   "name" : "radio_band_config",
+   "referenced_type" : "_ZTI17radio_band_config",
+   "self_type" : "_ZTI17radio_band_config",
+   "size" : 104,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "channel",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "sub_channel",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "tuned",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "stereo",
+     "field_offset" : 72,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "digital",
+     "field_offset" : 80,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "signal_strength",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "metadata",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIP14radio_metadata"
+    }
+   ],
+   "linker_set_key" : "_ZTI18radio_program_info",
+   "name" : "radio_program_info",
+   "referenced_type" : "_ZTI18radio_program_info",
+   "self_type" : "_ZTI18radio_program_info",
+   "size" : 24,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "class_id",
+     "referenced_type" : "_ZTI13radio_class_t"
+    },
+    {
+     "field_name" : "implementor",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "product",
+     "field_offset" : 1056,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "version",
+     "field_offset" : 2080,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "serial",
+     "field_offset" : 3104,
+     "referenced_type" : "_ZTIA128_c"
+    },
+    {
+     "field_name" : "num_tuners",
+     "field_offset" : 4128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "num_audio_sources",
+     "field_offset" : 4160,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "supports_capture",
+     "field_offset" : 4192,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "num_bands",
+     "field_offset" : 4224,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "bands",
+     "field_offset" : 4256,
+     "referenced_type" : "_ZTIA16_21radio_hal_band_config"
+    }
+   ],
+   "linker_set_key" : "_ZTI20radio_hal_properties",
+   "name" : "radio_hal_properties",
+   "referenced_type" : "_ZTI20radio_hal_properties",
+   "self_type" : "_ZTI20radio_hal_properties",
+   "size" : 2132,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "utc_seconds_since_epoch",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "timezone_offset_in_minutes",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI20radio_metadata_clock",
+   "name" : "radio_metadata_clock",
+   "referenced_type" : "_ZTI20radio_metadata_clock",
+   "self_type" : "_ZTI20radio_metadata_clock",
+   "size" : 16,
+   "source_file" : "/system/media/radio/include/system/radio_metadata.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTI12radio_band_t"
+    },
+    {
+     "field_name" : "antenna_connected",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "lower_limit",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "upper_limit",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "num_spacings",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "spacings",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIA16_j"
+    },
+    {
+     "field_offset" : 672,
+     "referenced_type" : "_ZTIN21radio_hal_band_configUt_E"
+    }
+   ],
+   "linker_set_key" : "_ZTI21radio_hal_band_config",
+   "name" : "radio_hal_band_config",
+   "referenced_type" : "_ZTI21radio_hal_band_config",
+   "self_type" : "_ZTI21radio_hal_band_config",
+   "size" : 100,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "stereo",
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI24radio_hal_am_band_config",
+   "name" : "radio_hal_am_band_config",
+   "referenced_type" : "_ZTI24radio_hal_am_band_config",
+   "self_type" : "_ZTI24radio_hal_am_band_config",
+   "size" : 1,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "deemphasis",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "stereo",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "rds",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "ta",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "af",
+     "field_offset" : 104,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "ea",
+     "field_offset" : 112,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI24radio_hal_fm_band_config",
+   "name" : "radio_hal_fm_band_config",
+   "referenced_type" : "_ZTI24radio_hal_fm_band_config",
+   "self_type" : "_ZTI24radio_hal_fm_band_config",
+   "size" : 16,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "on",
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "config",
+     "referenced_type" : "_ZTI17radio_band_config"
+    },
+    {
+     "field_name" : "info",
+     "referenced_type" : "_ZTI18radio_program_info"
+    },
+    {
+     "field_name" : "metadata",
+     "referenced_type" : "_ZTIP14radio_metadata"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN11radio_eventUt_E",
+   "name" : "radio_event::(anonymous union at system/core/libsystem/include/system/radio.h:213:5)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN11radio_eventUt_E",
+   "self_type" : "_ZTIN11radio_eventUt_E",
+   "size" : 104,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "on",
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "field_name" : "config",
+     "referenced_type" : "_ZTI21radio_hal_band_config"
+    },
+    {
+     "field_name" : "info",
+     "referenced_type" : "_ZTI18radio_program_info"
+    },
+    {
+     "field_name" : "metadata",
+     "referenced_type" : "_ZTIP14radio_metadata"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN15radio_hal_eventUt_E",
+   "name" : "radio_hal_event::(anonymous union at system/core/libsystem/include/system/radio.h:200:5)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN15radio_hal_eventUt_E",
+   "self_type" : "_ZTIN15radio_hal_eventUt_E",
+   "size" : 104,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fm",
+     "referenced_type" : "_ZTI24radio_hal_fm_band_config"
+    },
+    {
+     "field_name" : "am",
+     "referenced_type" : "_ZTI24radio_hal_am_band_config"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_ZTIN21radio_hal_band_configUt_E",
+   "name" : "radio_hal_band_config::(anonymous union at system/core/libsystem/include/system/radio.h:116:5)",
+   "record_kind" : "union",
+   "referenced_type" : "_ZTIN21radio_hal_band_configUt_E",
+   "self_type" : "_ZTIN21radio_hal_band_configUt_E",
+   "size" : 16,
+   "source_file" : "/system/core/libsystem/include/system/radio.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mMetadata",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPP14radio_metadata"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android20RadioMetadataWrapperE",
+   "name" : "android::RadioMetadataWrapper",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android20RadioMetadataWrapperE",
+   "self_type" : "_ZTIN7android20RadioMetadataWrapperE",
+   "size" : 16,
+   "source_file" : "/system/media/radio/include/system/RadioMetadataWrapper.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android20RadioMetadataWrapperE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN7android20RadioMetadataWrapperD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN7android20RadioMetadataWrapperD0Ev"
+    }
+   ]
+  }
+ ],
+ "rvalue_reference_types" : []
+}

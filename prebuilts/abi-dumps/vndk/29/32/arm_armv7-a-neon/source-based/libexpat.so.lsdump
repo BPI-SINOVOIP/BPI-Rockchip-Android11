@@ -1,0 +1,3774 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*[2])(const encoding *, const char *, const char *, const char **)",
+   "name" : "int (*[2])(const encoding *, const char *, const char *, const char **)",
+   "referenced_type" : "type-3",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*[4])(const encoding *, const char *, const char *, const char **)",
+   "name" : "int (*[4])(const encoding *, const char *, const char *, const char **)",
+   "referenced_type" : "type-3",
+   "self_type" : "type-9",
+   "size" : 16,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [256]",
+   "name" : "int [256]",
+   "referenced_type" : "type-5",
+   "self_type" : "type-47",
+   "size" : 1024,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [256]",
+   "name" : "unsigned char [256]",
+   "referenced_type" : "type-57",
+   "self_type" : "type-81",
+   "size" : 256,
+   "source_file" : "/external/expat/lib/nametab.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [64][8]",
+   "name" : "unsigned char [64][8]",
+   "referenced_type" : "type-69",
+   "self_type" : "type-73",
+   "size" : 512,
+   "source_file" : "/external/expat/lib/siphash.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [8]",
+   "name" : "unsigned char [8]",
+   "referenced_type" : "type-57",
+   "self_type" : "type-69",
+   "size" : 8,
+   "source_file" : "/external/expat/lib/siphash.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [320]",
+   "name" : "unsigned int [320]",
+   "referenced_type" : "type-2",
+   "self_type" : "type-79",
+   "size" : 1280,
+   "source_file" : "/external/expat/lib/nametab.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long long [2]",
+   "name" : "unsigned long long [2]",
+   "referenced_type" : "type-68",
+   "self_type" : "type-72",
+   "size" : 16,
+   "source_file" : "/external/expat/lib/siphash.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-87",
+   "self_type" : "type-87",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-83",
+   "self_type" : "type-83",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-60",
+   "self_type" : "type-60",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-86",
+   "self_type" : "type-86",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-84",
+   "self_type" : "type-84",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-85",
+   "self_type" : "type-85",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-57",
+   "self_type" : "type-57",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-68",
+   "self_type" : "type-68",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-42",
+   "self_type" : "type-42",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-28",
+   "self_type" : "type-28"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "XML_DefaultCurrent"
+  },
+  {
+   "name" : "XML_ErrorString"
+  },
+  {
+   "name" : "XML_ExpatVersion"
+  },
+  {
+   "name" : "XML_ExpatVersionInfo"
+  },
+  {
+   "name" : "XML_ExternalEntityParserCreate"
+  },
+  {
+   "name" : "XML_FreeContentModel"
+  },
+  {
+   "name" : "XML_GetBase"
+  },
+  {
+   "name" : "XML_GetBuffer"
+  },
+  {
+   "name" : "XML_GetCurrentByteCount"
+  },
+  {
+   "name" : "XML_GetCurrentByteIndex"
+  },
+  {
+   "name" : "XML_GetCurrentColumnNumber"
+  },
+  {
+   "name" : "XML_GetCurrentLineNumber"
+  },
+  {
+   "name" : "XML_GetErrorCode"
+  },
+  {
+   "name" : "XML_GetFeatureList"
+  },
+  {
+   "name" : "XML_GetIdAttributeIndex"
+  },
+  {
+   "name" : "XML_GetInputContext"
+  },
+  {
+   "name" : "XML_GetParsingStatus"
+  },
+  {
+   "name" : "XML_GetSpecifiedAttributeCount"
+  },
+  {
+   "name" : "XML_MemFree"
+  },
+  {
+   "name" : "XML_MemMalloc"
+  },
+  {
+   "name" : "XML_MemRealloc"
+  },
+  {
+   "name" : "XML_Parse"
+  },
+  {
+   "name" : "XML_ParseBuffer"
+  },
+  {
+   "name" : "XML_ParserCreate"
+  },
+  {
+   "name" : "XML_ParserCreateNS"
+  },
+  {
+   "name" : "XML_ParserCreate_MM"
+  },
+  {
+   "name" : "XML_ParserFree"
+  },
+  {
+   "name" : "XML_ParserReset"
+  },
+  {
+   "name" : "XML_ResumeParser"
+  },
+  {
+   "name" : "XML_SetAttlistDeclHandler"
+  },
+  {
+   "name" : "XML_SetBase"
+  },
+  {
+   "name" : "XML_SetCdataSectionHandler"
+  },
+  {
+   "name" : "XML_SetCharacterDataHandler"
+  },
+  {
+   "name" : "XML_SetCommentHandler"
+  },
+  {
+   "name" : "XML_SetDefaultHandler"
+  },
+  {
+   "name" : "XML_SetDefaultHandlerExpand"
+  },
+  {
+   "name" : "XML_SetDoctypeDeclHandler"
+  },
+  {
+   "name" : "XML_SetElementDeclHandler"
+  },
+  {
+   "name" : "XML_SetElementHandler"
+  },
+  {
+   "name" : "XML_SetEncoding"
+  },
+  {
+   "name" : "XML_SetEndCdataSectionHandler"
+  },
+  {
+   "name" : "XML_SetEndDoctypeDeclHandler"
+  },
+  {
+   "name" : "XML_SetEndElementHandler"
+  },
+  {
+   "name" : "XML_SetEndNamespaceDeclHandler"
+  },
+  {
+   "name" : "XML_SetEntityDeclHandler"
+  },
+  {
+   "name" : "XML_SetExternalEntityRefHandler"
+  },
+  {
+   "name" : "XML_SetExternalEntityRefHandlerArg"
+  },
+  {
+   "name" : "XML_SetHashSalt"
+  },
+  {
+   "name" : "XML_SetNamespaceDeclHandler"
+  },
+  {
+   "name" : "XML_SetNotStandaloneHandler"
+  },
+  {
+   "name" : "XML_SetNotationDeclHandler"
+  },
+  {
+   "name" : "XML_SetParamEntityParsing"
+  },
+  {
+   "name" : "XML_SetProcessingInstructionHandler"
+  },
+  {
+   "name" : "XML_SetReturnNSTriplet"
+  },
+  {
+   "name" : "XML_SetSkippedEntityHandler"
+  },
+  {
+   "name" : "XML_SetStartCdataSectionHandler"
+  },
+  {
+   "name" : "XML_SetStartDoctypeDeclHandler"
+  },
+  {
+   "name" : "XML_SetStartElementHandler"
+  },
+  {
+   "name" : "XML_SetStartNamespaceDeclHandler"
+  },
+  {
+   "name" : "XML_SetUnknownEncodingHandler"
+  },
+  {
+   "name" : "XML_SetUnparsedEntityDeclHandler"
+  },
+  {
+   "name" : "XML_SetUserData"
+  },
+  {
+   "name" : "XML_SetXmlDeclHandler"
+  },
+  {
+   "name" : "XML_StopParser"
+  },
+  {
+   "name" : "XML_UseForeignDTD"
+  },
+  {
+   "name" : "XML_UseParserAsHandlerArg"
+  },
+  {
+   "name" : "XmlGetUtf16InternalEncoding"
+  },
+  {
+   "name" : "XmlGetUtf16InternalEncodingNS"
+  },
+  {
+   "name" : "XmlGetUtf8InternalEncoding"
+  },
+  {
+   "name" : "XmlGetUtf8InternalEncodingNS"
+  },
+  {
+   "name" : "XmlInitEncoding"
+  },
+  {
+   "name" : "XmlInitEncodingNS"
+  },
+  {
+   "name" : "XmlInitUnknownEncoding"
+  },
+  {
+   "name" : "XmlInitUnknownEncodingNS"
+  },
+  {
+   "name" : "XmlParseXmlDecl"
+  },
+  {
+   "name" : "XmlParseXmlDeclNS"
+  },
+  {
+   "name" : "XmlPrologStateInit"
+  },
+  {
+   "name" : "XmlPrologStateInitExternalEntity"
+  },
+  {
+   "name" : "XmlSizeOfUnknownEncoding"
+  },
+  {
+   "name" : "XmlUtf16Encode"
+  },
+  {
+   "name" : "XmlUtf8Encode"
+  },
+  {
+   "name" : "_INTERNAL_trim_to_complete_utf8_characters"
+  },
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memcpy"
+  },
+  {
+   "name" : "__aeabi_memcpy4"
+  },
+  {
+   "name" : "__aeabi_memcpy8"
+  },
+  {
+   "name" : "__aeabi_memmove"
+  },
+  {
+   "name" : "__aeabi_memmove4"
+  },
+  {
+   "name" : "__aeabi_memmove8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_CQUANT_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_CQUANT_OPT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_CQUANT_REP"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "XML_CQUANT_PLUS"
+    }
+   ],
+   "linker_set_key" : "XML_Content_Quant",
+   "name" : "XML_Content_Quant",
+   "referenced_type" : "type-100",
+   "self_type" : "type-100",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_Content_Quant"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_CTYPE_EMPTY"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_CTYPE_ANY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "XML_CTYPE_MIXED"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "XML_CTYPE_NAME"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "XML_CTYPE_CHOICE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "XML_CTYPE_SEQ"
+    }
+   ],
+   "linker_set_key" : "XML_Content_Type",
+   "name" : "XML_Content_Type",
+   "referenced_type" : "type-99",
+   "self_type" : "type-99",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_Content_Type"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_CONVERT_COMPLETED"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_CONVERT_INPUT_INCOMPLETE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_CONVERT_OUTPUT_EXHAUSTED"
+    }
+   ],
+   "linker_set_key" : "XML_Convert_Result",
+   "name" : "XML_Convert_Result",
+   "referenced_type" : "type-34",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_Convert_Result"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_ERROR_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_ERROR_NO_MEMORY"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_ERROR_SYNTAX"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "XML_ERROR_NO_ELEMENTS"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "XML_ERROR_INVALID_TOKEN"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "XML_ERROR_UNCLOSED_TOKEN"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "XML_ERROR_PARTIAL_CHAR"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "XML_ERROR_TAG_MISMATCH"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "XML_ERROR_DUPLICATE_ATTRIBUTE"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "XML_ERROR_JUNK_AFTER_DOC_ELEMENT"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "XML_ERROR_PARAM_ENTITY_REF"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "XML_ERROR_UNDEFINED_ENTITY"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "XML_ERROR_RECURSIVE_ENTITY_REF"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "XML_ERROR_ASYNC_ENTITY"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "XML_ERROR_BAD_CHAR_REF"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "XML_ERROR_BINARY_ENTITY_REF"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "XML_ERROR_ATTRIBUTE_EXTERNAL_ENTITY_REF"
+    },
+    {
+     "enum_field_value" : 17,
+     "name" : "XML_ERROR_MISPLACED_XML_PI"
+    },
+    {
+     "enum_field_value" : 18,
+     "name" : "XML_ERROR_UNKNOWN_ENCODING"
+    },
+    {
+     "enum_field_value" : 19,
+     "name" : "XML_ERROR_INCORRECT_ENCODING"
+    },
+    {
+     "enum_field_value" : 20,
+     "name" : "XML_ERROR_UNCLOSED_CDATA_SECTION"
+    },
+    {
+     "enum_field_value" : 21,
+     "name" : "XML_ERROR_EXTERNAL_ENTITY_HANDLING"
+    },
+    {
+     "enum_field_value" : 22,
+     "name" : "XML_ERROR_NOT_STANDALONE"
+    },
+    {
+     "enum_field_value" : 23,
+     "name" : "XML_ERROR_UNEXPECTED_STATE"
+    },
+    {
+     "enum_field_value" : 24,
+     "name" : "XML_ERROR_ENTITY_DECLARED_IN_PE"
+    },
+    {
+     "enum_field_value" : 25,
+     "name" : "XML_ERROR_FEATURE_REQUIRES_XML_DTD"
+    },
+    {
+     "enum_field_value" : 26,
+     "name" : "XML_ERROR_CANT_CHANGE_FEATURE_ONCE_PARSING"
+    },
+    {
+     "enum_field_value" : 27,
+     "name" : "XML_ERROR_UNBOUND_PREFIX"
+    },
+    {
+     "enum_field_value" : 28,
+     "name" : "XML_ERROR_UNDECLARING_PREFIX"
+    },
+    {
+     "enum_field_value" : 29,
+     "name" : "XML_ERROR_INCOMPLETE_PE"
+    },
+    {
+     "enum_field_value" : 30,
+     "name" : "XML_ERROR_XML_DECL"
+    },
+    {
+     "enum_field_value" : 31,
+     "name" : "XML_ERROR_TEXT_DECL"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "XML_ERROR_PUBLICID"
+    },
+    {
+     "enum_field_value" : 33,
+     "name" : "XML_ERROR_SUSPENDED"
+    },
+    {
+     "enum_field_value" : 34,
+     "name" : "XML_ERROR_NOT_SUSPENDED"
+    },
+    {
+     "enum_field_value" : 35,
+     "name" : "XML_ERROR_ABORTED"
+    },
+    {
+     "enum_field_value" : 36,
+     "name" : "XML_ERROR_FINISHED"
+    },
+    {
+     "enum_field_value" : 37,
+     "name" : "XML_ERROR_SUSPEND_PE"
+    },
+    {
+     "enum_field_value" : 38,
+     "name" : "XML_ERROR_RESERVED_PREFIX_XML"
+    },
+    {
+     "enum_field_value" : 39,
+     "name" : "XML_ERROR_RESERVED_PREFIX_XMLNS"
+    },
+    {
+     "enum_field_value" : 40,
+     "name" : "XML_ERROR_RESERVED_NAMESPACE_URI"
+    },
+    {
+     "enum_field_value" : 41,
+     "name" : "XML_ERROR_INVALID_ARGUMENT"
+    }
+   ],
+   "linker_set_key" : "XML_Error",
+   "name" : "XML_Error",
+   "referenced_type" : "type-111",
+   "self_type" : "type-111",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_Error"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_FEATURE_END"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_FEATURE_UNICODE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_FEATURE_UNICODE_WCHAR_T"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "XML_FEATURE_DTD"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "XML_FEATURE_CONTEXT_BYTES"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "XML_FEATURE_MIN_SIZE"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "XML_FEATURE_SIZEOF_XML_CHAR"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "XML_FEATURE_SIZEOF_XML_LCHAR"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "XML_FEATURE_NS"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "XML_FEATURE_LARGE_SIZE"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "XML_FEATURE_ATTR_INFO"
+    }
+   ],
+   "linker_set_key" : "XML_FeatureEnum",
+   "name" : "XML_FeatureEnum",
+   "referenced_type" : "type-63",
+   "self_type" : "type-63",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_FeatureEnum"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_PARAM_ENTITY_PARSING_NEVER"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_PARAM_ENTITY_PARSING_UNLESS_STANDALONE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_PARAM_ENTITY_PARSING_ALWAYS"
+    }
+   ],
+   "linker_set_key" : "XML_ParamEntityParsing",
+   "name" : "XML_ParamEntityParsing",
+   "referenced_type" : "type-59",
+   "self_type" : "type-59",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_ParamEntityParsing"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_INITIALIZED"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_PARSING"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_FINISHED"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "XML_SUSPENDED"
+    }
+   ],
+   "linker_set_key" : "XML_Parsing",
+   "name" : "XML_Parsing",
+   "referenced_type" : "type-55",
+   "self_type" : "type-55",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_Parsing"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "XML_STATUS_ERROR"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "XML_STATUS_OK"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "XML_STATUS_SUSPENDED"
+    }
+   ],
+   "linker_set_key" : "XML_Status",
+   "name" : "XML_Status",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "XML_Status"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_Convert_Result (const encoding *, const char **, const char *, char **, const char *)",
+   "name" : "XML_Convert_Result (const encoding *, const char **, const char *, char **, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-36"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-33",
+   "return_type" : "type-34",
+   "self_type" : "type-33",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_Convert_Result (const encoding *, const char **, const char *, unsigned short **, const unsigned short *)",
+   "name" : "XML_Convert_Result (const encoding *, const char **, const char *, unsigned short **, const unsigned short *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-40"
+    },
+    {
+     "referenced_type" : "type-43"
+    }
+   ],
+   "referenced_type" : "type-39",
+   "return_type" : "type-34",
+   "self_type" : "type-39",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *(const encoding *, const char *)",
+   "name" : "const char *(const encoding *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-19",
+   "return_type" : "type-13",
+   "self_type" : "type-19",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (XML_ParserStruct *, const char *, const char *, const char *, const char *)",
+   "name" : "int (XML_ParserStruct *, const char *, const char *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-132",
+   "return_type" : "type-5",
+   "self_type" : "type-132",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const encoding *, const char *)",
+   "name" : "int (const encoding *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-17",
+   "return_type" : "type-5",
+   "self_type" : "type-17",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const encoding *, const char *, const char *)",
+   "name" : "int (const encoding *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-25",
+   "return_type" : "type-5",
+   "self_type" : "type-25",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const encoding *, const char *, const char *, const char *)",
+   "name" : "int (const encoding *, const char *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-12",
+   "return_type" : "type-5",
+   "self_type" : "type-12",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const encoding *, const char *, const char *, const char **)",
+   "name" : "int (const encoding *, const char *, const char *, const char **)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "referenced_type" : "type-4",
+   "return_type" : "type-5",
+   "self_type" : "type-4",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const encoding *, const char *, int, ATTRIBUTE *)",
+   "name" : "int (const encoding *, const char *, int, ATTRIBUTE *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "referenced_type" : "type-21",
+   "return_type" : "type-5",
+   "self_type" : "type-21",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (prolog_state *, int, const char *, const char *, const encoding *)",
+   "name" : "int (prolog_state *, int, const char *, const char *, const encoding *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-93"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "referenced_type" : "type-92",
+   "return_type" : "type-5",
+   "self_type" : "type-92",
+   "source_file" : "/external/expat/lib/xmlrole.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (void *)",
+   "name" : "int (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "referenced_type" : "type-130",
+   "return_type" : "type-5",
+   "self_type" : "type-130",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (void *, const char *)",
+   "name" : "int (void *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-50",
+   "return_type" : "type-5",
+   "self_type" : "type-50",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (void *, const char *, XML_Encoding *)",
+   "name" : "int (void *, const char *, XML_Encoding *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-45"
+    }
+   ],
+   "referenced_type" : "type-54",
+   "return_type" : "type-5",
+   "self_type" : "type-54",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (const encoding *, const char *, const char *, position *)",
+   "name" : "void (const encoding *, const char *, const char *, position *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-29"
+    }
+   ],
+   "referenced_type" : "type-27",
+   "return_type" : "type-28",
+   "self_type" : "type-27",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *)",
+   "name" : "void (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "referenced_type" : "type-52",
+   "return_type" : "type-28",
+   "self_type" : "type-52",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *)",
+   "name" : "void (void *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-118",
+   "return_type" : "type-28",
+   "self_type" : "type-118",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, XML_cp *)",
+   "name" : "void (void *, const char *, XML_cp *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "referenced_type" : "type-96",
+   "return_type" : "type-28",
+   "self_type" : "type-96",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char *)",
+   "name" : "void (void *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-122",
+   "return_type" : "type-28",
+   "self_type" : "type-122",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char **)",
+   "name" : "void (void *, const char *, const char **)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "referenced_type" : "type-116",
+   "return_type" : "type-28",
+   "self_type" : "type-116",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char *, const char *, const char *)",
+   "name" : "void (void *, const char *, const char *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-128",
+   "return_type" : "type-28",
+   "self_type" : "type-128",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char *, const char *, const char *, const char *)",
+   "name" : "void (void *, const char *, const char *, const char *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-126",
+   "return_type" : "type-28",
+   "self_type" : "type-126",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char *, const char *, const char *, int)",
+   "name" : "void (void *, const char *, const char *, const char *, const char *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "referenced_type" : "type-102",
+   "return_type" : "type-28",
+   "self_type" : "type-102",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char *, const char *, int)",
+   "name" : "void (void *, const char *, const char *, const char *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "referenced_type" : "type-124",
+   "return_type" : "type-28",
+   "self_type" : "type-124",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, const char *, int)",
+   "name" : "void (void *, const char *, const char *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "referenced_type" : "type-104",
+   "return_type" : "type-28",
+   "self_type" : "type-104",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, int)",
+   "name" : "void (void *, const char *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "referenced_type" : "type-120",
+   "return_type" : "type-28",
+   "self_type" : "type-120",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const char *, int, const char *, int, const char *, const char *, const char *, const char *)",
+   "name" : "void (void *, const char *, int, const char *, int, const char *, const char *, const char *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-114",
+   "return_type" : "type-28",
+   "self_type" : "type-114",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned int)",
+   "name" : "void *(unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-108",
+   "return_type" : "type-48",
+   "self_type" : "type-108",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(void *, unsigned int)",
+   "name" : "void *(void *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-110",
+   "return_type" : "type-48",
+   "self_type" : "type-110",
+   "source_file" : "/external/expat/lib/expat.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "XML_DefaultCurrent",
+   "linker_set_key" : "XML_DefaultCurrent",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ErrorString",
+   "linker_set_key" : "XML_ErrorString",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-111"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ExpatVersion",
+   "linker_set_key" : "XML_ExpatVersion",
+   "return_type" : "type-13",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ExpatVersionInfo",
+   "linker_set_key" : "XML_ExpatVersionInfo",
+   "return_type" : "type-62",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ExternalEntityParserCreate",
+   "linker_set_key" : "XML_ExternalEntityParserCreate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-94",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_FreeContentModel",
+   "linker_set_key" : "XML_FreeContentModel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetBase",
+   "linker_set_key" : "XML_GetBase",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetBuffer",
+   "linker_set_key" : "XML_GetBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-48",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetCurrentByteCount",
+   "linker_set_key" : "XML_GetCurrentByteCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetCurrentByteIndex",
+   "linker_set_key" : "XML_GetCurrentByteIndex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-60",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetCurrentColumnNumber",
+   "linker_set_key" : "XML_GetCurrentColumnNumber",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetCurrentLineNumber",
+   "linker_set_key" : "XML_GetCurrentLineNumber",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetErrorCode",
+   "linker_set_key" : "XML_GetErrorCode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-111",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetFeatureList",
+   "linker_set_key" : "XML_GetFeatureList",
+   "return_type" : "type-65",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetIdAttributeIndex",
+   "linker_set_key" : "XML_GetIdAttributeIndex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetInputContext",
+   "linker_set_key" : "XML_GetInputContext",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-61"
+    },
+    {
+     "referenced_type" : "type-61"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetParsingStatus",
+   "linker_set_key" : "XML_GetParsingStatus",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-58"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_GetSpecifiedAttributeCount",
+   "linker_set_key" : "XML_GetSpecifiedAttributeCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_MemFree",
+   "linker_set_key" : "XML_MemFree",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_MemMalloc",
+   "linker_set_key" : "XML_MemMalloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-48",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_MemRealloc",
+   "linker_set_key" : "XML_MemRealloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-48",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_Parse",
+   "linker_set_key" : "XML_Parse",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ParseBuffer",
+   "linker_set_key" : "XML_ParseBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ParserCreate",
+   "linker_set_key" : "XML_ParserCreate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-94",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ParserCreateNS",
+   "linker_set_key" : "XML_ParserCreateNS",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-94",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ParserCreate_MM",
+   "linker_set_key" : "XML_ParserCreate_MM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-113"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-94",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ParserFree",
+   "linker_set_key" : "XML_ParserFree",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ParserReset",
+   "linker_set_key" : "XML_ParserReset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-57",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_ResumeParser",
+   "linker_set_key" : "XML_ResumeParser",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetAttlistDeclHandler",
+   "linker_set_key" : "XML_SetAttlistDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-103"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetBase",
+   "linker_set_key" : "XML_SetBase",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetCdataSectionHandler",
+   "linker_set_key" : "XML_SetCdataSectionHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-51"
+    },
+    {
+     "referenced_type" : "type-51"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetCharacterDataHandler",
+   "linker_set_key" : "XML_SetCharacterDataHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-121"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetCommentHandler",
+   "linker_set_key" : "XML_SetCommentHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-119"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetDefaultHandler",
+   "linker_set_key" : "XML_SetDefaultHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-121"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetDefaultHandlerExpand",
+   "linker_set_key" : "XML_SetDefaultHandlerExpand",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-121"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetDoctypeDeclHandler",
+   "linker_set_key" : "XML_SetDoctypeDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-125"
+    },
+    {
+     "referenced_type" : "type-51"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetElementDeclHandler",
+   "linker_set_key" : "XML_SetElementDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-101"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetElementHandler",
+   "linker_set_key" : "XML_SetElementHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-117"
+    },
+    {
+     "referenced_type" : "type-119"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetEncoding",
+   "linker_set_key" : "XML_SetEncoding",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetEndCdataSectionHandler",
+   "linker_set_key" : "XML_SetEndCdataSectionHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-51"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetEndDoctypeDeclHandler",
+   "linker_set_key" : "XML_SetEndDoctypeDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-51"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetEndElementHandler",
+   "linker_set_key" : "XML_SetEndElementHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-119"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetEndNamespaceDeclHandler",
+   "linker_set_key" : "XML_SetEndNamespaceDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-119"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetEntityDeclHandler",
+   "linker_set_key" : "XML_SetEntityDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-115"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetExternalEntityRefHandler",
+   "linker_set_key" : "XML_SetExternalEntityRefHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-133"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetExternalEntityRefHandlerArg",
+   "linker_set_key" : "XML_SetExternalEntityRefHandlerArg",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetHashSalt",
+   "linker_set_key" : "XML_SetHashSalt",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-31"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetNamespaceDeclHandler",
+   "linker_set_key" : "XML_SetNamespaceDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-123"
+    },
+    {
+     "referenced_type" : "type-119"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetNotStandaloneHandler",
+   "linker_set_key" : "XML_SetNotStandaloneHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-131"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetNotationDeclHandler",
+   "linker_set_key" : "XML_SetNotationDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-129"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetParamEntityParsing",
+   "linker_set_key" : "XML_SetParamEntityParsing",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-59"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetProcessingInstructionHandler",
+   "linker_set_key" : "XML_SetProcessingInstructionHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-123"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetReturnNSTriplet",
+   "linker_set_key" : "XML_SetReturnNSTriplet",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetSkippedEntityHandler",
+   "linker_set_key" : "XML_SetSkippedEntityHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-121"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetStartCdataSectionHandler",
+   "linker_set_key" : "XML_SetStartCdataSectionHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-51"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetStartDoctypeDeclHandler",
+   "linker_set_key" : "XML_SetStartDoctypeDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-125"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetStartElementHandler",
+   "linker_set_key" : "XML_SetStartElementHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-117"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetStartNamespaceDeclHandler",
+   "linker_set_key" : "XML_SetStartNamespaceDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-123"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetUnknownEncodingHandler",
+   "linker_set_key" : "XML_SetUnknownEncodingHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-53"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetUnparsedEntityDeclHandler",
+   "linker_set_key" : "XML_SetUnparsedEntityDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-127"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetUserData",
+   "linker_set_key" : "XML_SetUserData",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_SetXmlDeclHandler",
+   "linker_set_key" : "XML_SetXmlDeclHandler",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-105"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_StopParser",
+   "linker_set_key" : "XML_StopParser",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-57"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_UseForeignDTD",
+   "linker_set_key" : "XML_UseForeignDTD",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    },
+    {
+     "referenced_type" : "type-57"
+    }
+   ],
+   "return_type" : "type-111",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XML_UseParserAsHandlerArg",
+   "linker_set_key" : "XML_UseParserAsHandlerArg",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-94"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "function_name" : "XmlGetUtf16InternalEncoding",
+   "linker_set_key" : "XmlGetUtf16InternalEncoding",
+   "return_type" : "type-6",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlGetUtf16InternalEncodingNS",
+   "linker_set_key" : "XmlGetUtf16InternalEncodingNS",
+   "return_type" : "type-6",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlGetUtf8InternalEncoding",
+   "linker_set_key" : "XmlGetUtf8InternalEncoding",
+   "return_type" : "type-6",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlGetUtf8InternalEncodingNS",
+   "linker_set_key" : "XmlGetUtf8InternalEncodingNS",
+   "return_type" : "type-6",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlInitEncoding",
+   "linker_set_key" : "XmlInitEncoding",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-75"
+    },
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlInitEncodingNS",
+   "linker_set_key" : "XmlInitEncodingNS",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-75"
+    },
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlInitUnknownEncoding",
+   "linker_set_key" : "XmlInitUnknownEncoding",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-61"
+    },
+    {
+     "referenced_type" : "type-49"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-78",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlInitUnknownEncodingNS",
+   "linker_set_key" : "XmlInitUnknownEncodingNS",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-61"
+    },
+    {
+     "referenced_type" : "type-49"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-78",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlParseXmlDecl",
+   "linker_set_key" : "XmlParseXmlDecl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-61"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlParseXmlDeclNS",
+   "linker_set_key" : "XmlParseXmlDeclNS",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-35"
+    },
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-61"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlPrologStateInit",
+   "linker_set_key" : "XmlPrologStateInit",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-93"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/xmlrole.h"
+  },
+  {
+   "function_name" : "XmlPrologStateInitExternalEntity",
+   "linker_set_key" : "XmlPrologStateInitExternalEntity",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-93"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/xmlrole.h"
+  },
+  {
+   "function_name" : "XmlSizeOfUnknownEncoding",
+   "linker_set_key" : "XmlSizeOfUnknownEncoding",
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlUtf16Encode",
+   "linker_set_key" : "XmlUtf16Encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-41"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "XmlUtf8Encode",
+   "linker_set_key" : "XmlUtf8Encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "function_name" : "_INTERNAL_trim_to_complete_utf8_characters",
+   "linker_set_key" : "_INTERNAL_trim_to_complete_utf8_characters",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/external/expat/lib/internal.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "ATTRIBUTE *",
+   "name" : "ATTRIBUTE *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-22",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "INIT_ENCODING *",
+   "name" : "INIT_ENCODING *",
+   "referenced_type" : "type-76",
+   "self_type" : "type-75",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_Convert_Result (*)(const encoding *, const char **, const char *, char **, const char *)",
+   "name" : "XML_Convert_Result (*)(const encoding *, const char **, const char *, char **, const char *)",
+   "referenced_type" : "type-33",
+   "self_type" : "type-32",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_Convert_Result (*)(const encoding *, const char **, const char *, unsigned short **, const unsigned short *)",
+   "name" : "XML_Convert_Result (*)(const encoding *, const char **, const char *, unsigned short **, const unsigned short *)",
+   "referenced_type" : "type-39",
+   "self_type" : "type-38",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_Encoding *",
+   "name" : "XML_Encoding *",
+   "referenced_type" : "type-46",
+   "self_type" : "type-45",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_ParserStruct *",
+   "name" : "XML_ParserStruct *",
+   "referenced_type" : "type-89",
+   "self_type" : "type-88",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_ParserStruct *",
+   "name" : "XML_ParserStruct *",
+   "referenced_type" : "type-95",
+   "self_type" : "type-94",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_ParsingStatus *",
+   "name" : "XML_ParsingStatus *",
+   "referenced_type" : "type-56",
+   "self_type" : "type-58",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "XML_cp *",
+   "name" : "XML_cp *",
+   "referenced_type" : "type-98",
+   "self_type" : "type-97",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-15",
+   "self_type" : "type-37",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char **",
+   "name" : "char **",
+   "referenced_type" : "type-37",
+   "self_type" : "type-36",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const XML_Feature *",
+   "name" : "const XML_Feature *",
+   "referenced_type" : "type-66",
+   "self_type" : "type-65",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const XML_Memory_Handling_Suite *",
+   "name" : "const XML_Memory_Handling_Suite *",
+   "referenced_type" : "type-112",
+   "self_type" : "type-113",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *(*)(const encoding *, const char *)",
+   "name" : "const char *(*)(const encoding *, const char *)",
+   "referenced_type" : "type-19",
+   "self_type" : "type-18",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char **",
+   "name" : "const char **",
+   "referenced_type" : "type-13",
+   "self_type" : "type-35",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const encoding *",
+   "name" : "const encoding *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-6",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const encoding **",
+   "name" : "const encoding **",
+   "referenced_type" : "type-6",
+   "self_type" : "type-77",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const unsigned short *",
+   "name" : "const unsigned short *",
+   "referenced_type" : "type-44",
+   "self_type" : "type-43",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "encoding *",
+   "name" : "encoding *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-78",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(XML_ParserStruct *, const char *, const char *, const char *, const char *)",
+   "name" : "int (*)(XML_ParserStruct *, const char *, const char *, const char *, const char *)",
+   "referenced_type" : "type-132",
+   "self_type" : "type-133",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const encoding *, const char *)",
+   "name" : "int (*)(const encoding *, const char *)",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const encoding *, const char *, const char *)",
+   "name" : "int (*)(const encoding *, const char *, const char *)",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const encoding *, const char *, const char *, const char *)",
+   "name" : "int (*)(const encoding *, const char *, const char *, const char *)",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const encoding *, const char *, const char *, const char **)",
+   "name" : "int (*)(const encoding *, const char *, const char *, const char **)",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const encoding *, const char *, int, ATTRIBUTE *)",
+   "name" : "int (*)(const encoding *, const char *, int, ATTRIBUTE *)",
+   "referenced_type" : "type-21",
+   "self_type" : "type-20",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(prolog_state *, int, const char *, const char *, const encoding *)",
+   "name" : "int (*)(prolog_state *, int, const char *, const char *, const encoding *)",
+   "referenced_type" : "type-92",
+   "self_type" : "type-91",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmlrole.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(void *)",
+   "name" : "int (*)(void *)",
+   "referenced_type" : "type-130",
+   "self_type" : "type-131",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(void *, const char *)",
+   "name" : "int (*)(void *, const char *)",
+   "referenced_type" : "type-50",
+   "self_type" : "type-49",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(void *, const char *, XML_Encoding *)",
+   "name" : "int (*)(void *, const char *, XML_Encoding *)",
+   "referenced_type" : "type-54",
+   "self_type" : "type-53",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-5",
+   "self_type" : "type-61",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "position *",
+   "name" : "position *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-29",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "prolog_state *",
+   "name" : "prolog_state *",
+   "referenced_type" : "type-90",
+   "self_type" : "type-93",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmlrole.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-57",
+   "self_type" : "type-70",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/siphash.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned short *",
+   "name" : "unsigned short *",
+   "referenced_type" : "type-42",
+   "self_type" : "type-41",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned short **",
+   "name" : "unsigned short **",
+   "referenced_type" : "type-41",
+   "self_type" : "type-40",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(const encoding *, const char *, const char *, position *)",
+   "name" : "void (*)(const encoding *, const char *, const char *, position *)",
+   "referenced_type" : "type-27",
+   "self_type" : "type-26",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *)",
+   "name" : "void (*)(void *)",
+   "referenced_type" : "type-52",
+   "self_type" : "type-51",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *)",
+   "name" : "void (*)(void *, const char *)",
+   "referenced_type" : "type-118",
+   "self_type" : "type-119",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, XML_cp *)",
+   "name" : "void (*)(void *, const char *, XML_cp *)",
+   "referenced_type" : "type-96",
+   "self_type" : "type-101",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char *)",
+   "name" : "void (*)(void *, const char *, const char *)",
+   "referenced_type" : "type-122",
+   "self_type" : "type-123",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char **)",
+   "name" : "void (*)(void *, const char *, const char **)",
+   "referenced_type" : "type-116",
+   "self_type" : "type-117",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char *, const char *, const char *)",
+   "name" : "void (*)(void *, const char *, const char *, const char *, const char *)",
+   "referenced_type" : "type-128",
+   "self_type" : "type-129",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char *, const char *, const char *, const char *)",
+   "name" : "void (*)(void *, const char *, const char *, const char *, const char *, const char *)",
+   "referenced_type" : "type-126",
+   "self_type" : "type-127",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char *, const char *, const char *, int)",
+   "name" : "void (*)(void *, const char *, const char *, const char *, const char *, int)",
+   "referenced_type" : "type-102",
+   "self_type" : "type-103",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char *, const char *, int)",
+   "name" : "void (*)(void *, const char *, const char *, const char *, int)",
+   "referenced_type" : "type-124",
+   "self_type" : "type-125",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, const char *, int)",
+   "name" : "void (*)(void *, const char *, const char *, int)",
+   "referenced_type" : "type-104",
+   "self_type" : "type-105",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, int)",
+   "name" : "void (*)(void *, const char *, int)",
+   "referenced_type" : "type-120",
+   "self_type" : "type-121",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const char *, int, const char *, int, const char *, const char *, const char *, const char *)",
+   "name" : "void (*)(void *, const char *, int, const char *, int, const char *, const char *, const char *, const char *)",
+   "referenced_type" : "type-114",
+   "self_type" : "type-115",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-28",
+   "self_type" : "type-48",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(unsigned int)",
+   "name" : "void *(*)(unsigned int)",
+   "referenced_type" : "type-108",
+   "self_type" : "type-107",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(void *, unsigned int)",
+   "name" : "void *(*)(void *, unsigned int)",
+   "referenced_type" : "type-110",
+   "self_type" : "type-109",
+   "size" : 4,
+   "source_file" : "/external/expat/lib/expat.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const XML_Feature",
+   "name" : "const XML_Feature",
+   "referenced_type" : "type-64",
+   "self_type" : "type-66",
+   "size" : 12,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const XML_Memory_Handling_Suite",
+   "name" : "const XML_Memory_Handling_Suite",
+   "referenced_type" : "type-106",
+   "self_type" : "type-112",
+   "size" : 12,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-15",
+   "self_type" : "type-14",
+   "size" : 1,
+   "source_file" : "/external/expat/lib/expat.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const encoding",
+   "name" : "const encoding",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 72,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned short",
+   "name" : "const unsigned short",
+   "referenced_type" : "type-42",
+   "self_type" : "type-44",
+   "size" : 2,
+   "source_file" : "/external/expat/lib/xmltok.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "unsigned char const[256]",
+   "name" : "unsigned char const[256]",
+   "referenced_type" : "type-81",
+   "self_type" : "type-82",
+   "size" : 256,
+   "source_file" : "/external/expat/lib/nametab.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "unsigned char const[64][8]",
+   "name" : "unsigned char const[64][8]",
+   "referenced_type" : "type-73",
+   "self_type" : "type-74",
+   "size" : 512,
+   "source_file" : "/external/expat/lib/siphash.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "unsigned int const[320]",
+   "name" : "unsigned int const[320]",
+   "referenced_type" : "type-79",
+   "self_type" : "type-80",
+   "size" : 1280,
+   "source_file" : "/external/expat/lib/nametab.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "valuePtr",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "valueEnd",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "normalized",
+     "field_offset" : 96,
+     "referenced_type" : "type-15"
+    }
+   ],
+   "linker_set_key" : "ATTRIBUTE",
+   "name" : "ATTRIBUTE",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 16,
+   "source_file" : "/external/expat/lib/xmltok.h",
+   "unique_id" : "ATTRIBUTE"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "initEnc",
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "encPtr",
+     "field_offset" : 576,
+     "referenced_type" : "type-77"
+    }
+   ],
+   "linker_set_key" : "INIT_ENCODING",
+   "name" : "INIT_ENCODING",
+   "referenced_type" : "type-76",
+   "self_type" : "type-76",
+   "size" : 76,
+   "source_file" : "/external/expat/lib/xmltok.h",
+   "unique_id" : "INIT_ENCODING"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "map",
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 8192,
+     "referenced_type" : "type-48"
+    },
+    {
+     "field_name" : "convert",
+     "field_offset" : 8224,
+     "referenced_type" : "type-49"
+    },
+    {
+     "field_name" : "release",
+     "field_offset" : 8256,
+     "referenced_type" : "type-51"
+    }
+   ],
+   "linker_set_key" : "XML_Encoding",
+   "name" : "XML_Encoding",
+   "referenced_type" : "type-46",
+   "self_type" : "type-46",
+   "size" : 1036,
+   "source_file" : "/external/expat/lib/expat.h",
+   "unique_id" : "XML_Encoding"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "major",
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "minor",
+     "field_offset" : 32,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "micro",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "XML_Expat_Version",
+   "name" : "XML_Expat_Version",
+   "referenced_type" : "type-62",
+   "self_type" : "type-62",
+   "size" : 12,
+   "source_file" : "/external/expat/lib/expat.h",
+   "unique_id" : "XML_Expat_Version"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "feature",
+     "referenced_type" : "type-63"
+    },
+    {
+     "field_name" : "name",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "value",
+     "field_offset" : 64,
+     "referenced_type" : "type-60"
+    }
+   ],
+   "linker_set_key" : "XML_Feature",
+   "name" : "XML_Feature",
+   "referenced_type" : "type-64",
+   "self_type" : "type-64",
+   "size" : 12,
+   "source_file" : "/external/expat/lib/expat.h",
+   "unique_id" : "XML_Feature"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "malloc_fcn",
+     "referenced_type" : "type-107"
+    },
+    {
+     "field_name" : "realloc_fcn",
+     "field_offset" : 32,
+     "referenced_type" : "type-109"
+    },
+    {
+     "field_name" : "free_fcn",
+     "field_offset" : 64,
+     "referenced_type" : "type-51"
+    }
+   ],
+   "linker_set_key" : "XML_Memory_Handling_Suite",
+   "name" : "XML_Memory_Handling_Suite",
+   "referenced_type" : "type-106",
+   "self_type" : "type-106",
+   "size" : 12,
+   "source_file" : "/external/expat/lib/expat.h",
+   "unique_id" : "XML_Memory_Handling_Suite"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "parsing",
+     "referenced_type" : "type-55"
+    },
+    {
+     "field_name" : "finalBuffer",
+     "field_offset" : 32,
+     "referenced_type" : "type-57"
+    }
+   ],
+   "linker_set_key" : "XML_ParsingStatus",
+   "name" : "XML_ParsingStatus",
+   "referenced_type" : "type-56",
+   "self_type" : "type-56",
+   "size" : 8,
+   "source_file" : "/external/expat/lib/expat.h",
+   "unique_id" : "XML_ParsingStatus"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "type-99"
+    },
+    {
+     "field_name" : "quant",
+     "field_offset" : 32,
+     "referenced_type" : "type-100"
+    },
+    {
+     "field_name" : "name",
+     "field_offset" : 64,
+     "referenced_type" : "type-37"
+    },
+    {
+     "field_name" : "numchildren",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "children",
+     "field_offset" : 128,
+     "referenced_type" : "type-97"
+    }
+   ],
+   "linker_set_key" : "XML_cp",
+   "name" : "XML_cp",
+   "referenced_type" : "type-98",
+   "self_type" : "type-98",
+   "size" : 20,
+   "source_file" : "/external/expat/lib/expat.h",
+   "unique_id" : "XML_cp"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "scanners",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "literalScanners",
+     "field_offset" : 128,
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "nameMatchesAscii",
+     "field_offset" : 192,
+     "referenced_type" : "type-11"
+    },
+    {
+     "field_name" : "nameLength",
+     "field_offset" : 224,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "skipS",
+     "field_offset" : 256,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "getAtts",
+     "field_offset" : 288,
+     "referenced_type" : "type-20"
+    },
+    {
+     "field_name" : "charRefNumber",
+     "field_offset" : 320,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "predefinedEntityName",
+     "field_offset" : 352,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "updatePosition",
+     "field_offset" : 384,
+     "referenced_type" : "type-26"
+    },
+    {
+     "field_name" : "isPublicId",
+     "field_offset" : 416,
+     "referenced_type" : "type-3"
+    },
+    {
+     "field_name" : "utf8Convert",
+     "field_offset" : 448,
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "utf16Convert",
+     "field_offset" : 480,
+     "referenced_type" : "type-38"
+    },
+    {
+     "field_name" : "minBytesPerChar",
+     "field_offset" : 512,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "isUtf8",
+     "field_offset" : 544,
+     "referenced_type" : "type-15"
+    },
+    {
+     "field_name" : "isUtf16",
+     "field_offset" : 552,
+     "referenced_type" : "type-15"
+    }
+   ],
+   "linker_set_key" : "encoding",
+   "name" : "encoding",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 72,
+   "source_file" : "/external/expat/lib/xmltok.h",
+   "unique_id" : "encoding"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "lineNumber",
+     "referenced_type" : "type-31"
+    },
+    {
+     "field_name" : "columnNumber",
+     "field_offset" : 32,
+     "referenced_type" : "type-31"
+    }
+   ],
+   "linker_set_key" : "position",
+   "name" : "position",
+   "referenced_type" : "type-30",
+   "self_type" : "type-30",
+   "size" : 8,
+   "source_file" : "/external/expat/lib/xmltok.h",
+   "unique_id" : "position"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "handler",
+     "referenced_type" : "type-91"
+    },
+    {
+     "field_name" : "level",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "role_none",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "includeLevel",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "documentEntity",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "inEntityValue",
+     "field_offset" : 160,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "prolog_state",
+   "name" : "prolog_state",
+   "referenced_type" : "type-90",
+   "self_type" : "type-90",
+   "size" : 24,
+   "source_file" : "/external/expat/lib/xmlrole.h",
+   "unique_id" : "prolog_state"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "v0",
+     "referenced_type" : "type-68"
+    },
+    {
+     "field_name" : "v1",
+     "field_offset" : 64,
+     "referenced_type" : "type-68"
+    },
+    {
+     "field_name" : "v2",
+     "field_offset" : 128,
+     "referenced_type" : "type-68"
+    },
+    {
+     "field_name" : "v3",
+     "field_offset" : 192,
+     "referenced_type" : "type-68"
+    },
+    {
+     "field_name" : "buf",
+     "field_offset" : 256,
+     "referenced_type" : "type-69"
+    },
+    {
+     "field_name" : "p",
+     "field_offset" : 320,
+     "referenced_type" : "type-70"
+    },
+    {
+     "field_name" : "c",
+     "field_offset" : 384,
+     "referenced_type" : "type-68"
+    }
+   ],
+   "linker_set_key" : "siphash",
+   "name" : "siphash",
+   "referenced_type" : "type-67",
+   "self_type" : "type-67",
+   "size" : 56,
+   "source_file" : "/external/expat/lib/siphash.h",
+   "unique_id" : "siphash"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "k",
+     "referenced_type" : "type-72"
+    }
+   ],
+   "linker_set_key" : "sipkey",
+   "name" : "sipkey",
+   "referenced_type" : "type-71",
+   "self_type" : "type-71",
+   "size" : 16,
+   "source_file" : "/external/expat/lib/siphash.h",
+   "unique_id" : "sipkey"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

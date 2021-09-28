@@ -1,0 +1,767 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA32_h",
+   "name" : "unsigned char [32]",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIA32_h",
+   "size" : 32,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIa",
+   "name" : "signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIa",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android8hardware14confirmationui7support11writeHeaderENS2_10WriteStateENS2_4TypeEy"
+  },
+  {
+   "name" : "_ZN7android8hardware14confirmationui7support13checkUTF8CopyEPKcS4_Ph"
+  },
+  {
+   "name" : "_ZN7android8hardware14confirmationui7supporteqERKNS2_15ByteBufferProxyES5_"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 1,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::hardware::confirmationui::support::Type::NUMBER"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::hardware::confirmationui::support::Type::NEGATIVE"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::hardware::confirmationui::support::Type::BYTE_STRING"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::hardware::confirmationui::support::Type::TEXT_STRING"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "android::hardware::confirmationui::support::Type::ARRAY"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "android::hardware::confirmationui::support::Type::MAP"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "android::hardware::confirmationui::support::Type::TAG"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "android::hardware::confirmationui::support::Type::FLOAT"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support4TypeE",
+   "name" : "android::hardware::confirmationui::support::Type",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support4TypeE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support4TypeE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h",
+   "underlying_type" : "_ZTIh"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::hardware::confirmationui::support::Error::OK"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::hardware::confirmationui::support::Error::OUT_OF_DATA"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::hardware::confirmationui::support::Error::MALFORMED"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::hardware::confirmationui::support::Error::MALFORMED_UTF8"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support5ErrorE",
+   "name" : "android::hardware::confirmationui::support::Error",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support5ErrorE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support5ErrorE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::hardware::confirmationui::support::writeHeader",
+   "linker_set_key" : "_ZN7android8hardware14confirmationui7support11writeHeaderENS2_10WriteStateENS2_4TypeEy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE"
+    },
+    {
+     "referenced_type" : "_ZTIN7android8hardware14confirmationui7support4TypeE"
+    },
+    {
+     "referenced_type" : "_ZTIKy"
+    }
+   ],
+   "return_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "function_name" : "android::hardware::confirmationui::support::checkUTF8Copy",
+   "linker_set_key" : "_ZN7android8hardware14confirmationui7support13checkUTF8CopyEPKcS4_Ph",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIKPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPh"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "function_name" : "android::hardware::confirmationui::support::operator==",
+   "linker_set_key" : "_ZN7android8hardware14confirmationui7supporteqERKNS2_15ByteBufferProxyES5_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN7android8hardware14confirmationui7support15ByteBufferProxyE"
+    },
+    {
+     "referenced_type" : "_ZTIRKN7android8hardware14confirmationui7support15ByteBufferProxyE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN7android8hardware14confirmationui7support10WriteStateE",
+   "name" : "const android::hardware::confirmationui::support::WriteState &",
+   "referenced_type" : "_ZTIKN7android8hardware14confirmationui7support10WriteStateE",
+   "self_type" : "_ZTIRKN7android8hardware14confirmationui7support10WriteStateE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "name" : "const android::hardware::confirmationui::support::ByteBufferProxy &",
+   "referenced_type" : "_ZTIKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "self_type" : "_ZTIRKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKa",
+   "name" : "const signed char &",
+   "referenced_type" : "_ZTIKa",
+   "self_type" : "_ZTIRKa",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKh",
+   "name" : "const unsigned char &",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIRKh",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKi",
+   "name" : "const int &",
+   "referenced_type" : "_ZTIKi",
+   "self_type" : "_ZTIRKi",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKj",
+   "name" : "const unsigned int &",
+   "referenced_type" : "_ZTIKj",
+   "self_type" : "_ZTIRKj",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKs",
+   "name" : "const short &",
+   "referenced_type" : "_ZTIKs",
+   "self_type" : "_ZTIRKs",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKt",
+   "name" : "const unsigned short &",
+   "referenced_type" : "_ZTIKt",
+   "self_type" : "_ZTIRKt",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKx",
+   "name" : "const long long &",
+   "referenced_type" : "_ZTIKx",
+   "self_type" : "_ZTIRKx",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKy",
+   "name" : "const unsigned long long &",
+   "referenced_type" : "_ZTIKy",
+   "self_type" : "_ZTIRKy",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRN7android8hardware14confirmationui7support10WriteStateE",
+   "name" : "android::hardware::confirmationui::support::WriteState &",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "self_type" : "_ZTIRN7android8hardware14confirmationui7support10WriteStateE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN7android8hardware14confirmationui7support10WriteStateE",
+   "name" : "const android::hardware::confirmationui::support::WriteState *",
+   "referenced_type" : "_ZTIKN7android8hardware14confirmationui7support10WriteStateE",
+   "self_type" : "_ZTIPKN7android8hardware14confirmationui7support10WriteStateE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "name" : "const android::hardware::confirmationui::support::ByteBufferProxy *",
+   "referenced_type" : "_ZTIKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "self_type" : "_ZTIPKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN7android8hardware14confirmationui7support10WriteStateE",
+   "name" : "android::hardware::confirmationui::support::WriteState *",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "self_type" : "_ZTIPN7android8hardware14confirmationui7support10WriteStateE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN7android8hardware14confirmationui7support12StringBufferIcNS2_7TextStrEEE",
+   "name" : "android::hardware::confirmationui::support::StringBuffer<char, android::hardware::confirmationui::support::TextStr> *",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support12StringBufferIcNS2_7TextStrEEE",
+   "self_type" : "_ZTIPN7android8hardware14confirmationui7support12StringBufferIcNS2_7TextStrEEE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "name" : "android::hardware::confirmationui::support::ByteBufferProxy *",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "self_type" : "_ZTIPN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN7android8hardware14confirmationui7support10WriteStateE",
+   "name" : "const android::hardware::confirmationui::support::WriteState",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "self_type" : "_ZTIKN7android8hardware14confirmationui7support10WriteStateE",
+   "size" : 12,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "name" : "const android::hardware::confirmationui::support::ByteBufferProxy",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "self_type" : "_ZTIKN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "size" : 8,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKPKc",
+   "name" : "const char *const",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIKPKc",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKa",
+   "name" : "const signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIKa",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKb",
+   "name" : "const bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIKb",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKs",
+   "name" : "const short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIKs",
+   "size" : 2,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKt",
+   "name" : "const unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIKt",
+   "size" : 2,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKx",
+   "name" : "const long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIKx",
+   "size" : 8,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKy",
+   "name" : "const unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIKy",
+   "size" : 8,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "data_",
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "field_name" : "size_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "error_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIN7android8hardware14confirmationui7support5ErrorE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "name" : "android::hardware::confirmationui::support::WriteState",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support10WriteStateE",
+   "size" : 12,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "data_",
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "size_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support12StringBufferIcNS2_7TextStrEEE",
+   "name" : "android::hardware::confirmationui::support::StringBuffer<char, android::hardware::confirmationui::support::TextStr>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support12StringBufferIcNS2_7TextStrEEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support12StringBufferIcNS2_7TextStrEEE",
+   "size" : 8,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h",
+   "template_args" : [ "_ZTIc", "_ZTIN7android8hardware14confirmationui7support7TextStrE" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "data_",
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "access" : "private",
+     "field_name" : "size_",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "name" : "android::hardware::confirmationui::support::ByteBufferProxy",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support15ByteBufferProxyE",
+   "size" : 8,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj1EEE",
+   "name" : "android::hardware::confirmationui::support::getUnsignedType<sizeof(uint8_t)>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj1EEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj1EEE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj2EEE",
+   "name" : "android::hardware::confirmationui::support::getUnsignedType<sizeof(uint16_t)>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj2EEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj2EEE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj4EEE",
+   "name" : "android::hardware::confirmationui::support::getUnsignedType<sizeof(uint32_t)>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj4EEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj4EEE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj8EEE",
+   "name" : "android::hardware::confirmationui::support::getUnsignedType<sizeof(uint64_t)>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj8EEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support15getUnsignedTypeILj8EEE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support3MapIJEEE",
+   "name" : "android::hardware::confirmationui::support::Map<>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support3MapIJEEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support3MapIJEEE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support5ArrayIJEEE",
+   "name" : "android::hardware::confirmationui::support::Array<>",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support5ArrayIJEEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support5ArrayIJEEE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "data_",
+     "referenced_type" : "_ZTIA32_h"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support5arrayIhLj32EEE",
+   "name" : "android::hardware::confirmationui::support::array<unsigned char, 32>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support5arrayIhLj32EEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support5arrayIhLj32EEE",
+   "size" : 32,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h",
+   "template_args" : [ "_ZTIh" ]
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "value_",
+     "referenced_type" : "_ZTIN7android8hardware14confirmationui7support5arrayIhLj32EEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "null_",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support6NullOrINS2_5arrayIhLj32EEEEE",
+   "name" : "android::hardware::confirmationui::support::NullOr<android::hardware::confirmationui::support::array<unsigned char, 32> >",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support6NullOrINS2_5arrayIhLj32EEEEE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support6NullOrINS2_5arrayIhLj32EEEEE",
+   "size" : 33,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/confirmationui_utils.h",
+   "template_args" : [ "_ZTIN7android8hardware14confirmationui7support5arrayIhLj32EEE" ]
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support7ByteStrE",
+   "name" : "android::hardware::confirmationui::support::ByteStr",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support7ByteStrE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support7ByteStrE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android8hardware14confirmationui7support7TextStrE",
+   "name" : "android::hardware::confirmationui::support::TextStr",
+   "referenced_type" : "_ZTIN7android8hardware14confirmationui7support7TextStrE",
+   "self_type" : "_ZTIN7android8hardware14confirmationui7support7TextStrE",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/confirmationui/support/include/android/hardware/confirmationui/support/cbor.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,2157 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "CgroupGetAttributePath"
+  },
+  {
+   "name" : "CgroupGetAttributePathForTask"
+  },
+  {
+   "name" : "CgroupGetControllerPath"
+  },
+  {
+   "name" : "SetProcessProfiles"
+  },
+  {
+   "name" : "SetTaskProfiles"
+  },
+  {
+   "name" : "_Z14UsePerAppMemcgv"
+  },
+  {
+   "name" : "_Z16killProcessGroupjiiPi"
+  },
+  {
+   "name" : "_Z18createProcessGroupjib"
+  },
+  {
+   "name" : "_Z20killProcessGroupOncejiiPi"
+  },
+  {
+   "name" : "_Z20setProcessGroupLimitjix"
+  },
+  {
+   "name" : "_Z22removeAllProcessGroupsv"
+  },
+  {
+   "name" : "_Z24setProcessGroupSoftLimitjix"
+  },
+  {
+   "name" : "_Z25setProcessGroupSwappinessjii"
+  },
+  {
+   "name" : "_Z31DropTaskProfilesResourceCachingv"
+  },
+  {
+   "name" : "_ZN11TaskProfile19DropResourceCachingEv"
+  },
+  {
+   "name" : "_ZN11TaskProfile21EnableResourceCachingEv"
+  },
+  {
+   "name" : "_ZN11TaskProfile6MoveToEPS_"
+  },
+  {
+   "name" : "_ZN12TaskProfiles11GetInstanceEv"
+  },
+  {
+   "name" : "_ZN12TaskProfiles15SetTaskProfilesEiRKNSt3__16vectorINS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS5_IS7_EEEEb"
+  },
+  {
+   "name" : "_ZN12TaskProfiles18SetProcessProfilesEjiRKNSt3__16vectorINS0_12basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEENS5_IS7_EEEE"
+  },
+  {
+   "name" : "_ZN12TaskProfiles4LoadERK9CgroupMapRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN12TaskProfilesC1Ev"
+  },
+  {
+   "name" : "_ZN12TaskProfilesC2Ev"
+  },
+  {
+   "name" : "_ZN15SetCgroupAction14AddTidToCgroupEii"
+  },
+  {
+   "name" : "_ZN15SetCgroupAction18IsAppDependentPathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN15SetCgroupAction19DropResourceCachingEv"
+  },
+  {
+   "name" : "_ZN15SetCgroupAction21EnableResourceCachingEv"
+  },
+  {
+   "name" : "_ZN15SetCgroupActionC1ERK16CgroupControllerRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN15SetCgroupActionC2ERK16CgroupControllerRKNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN16CgroupController8IsUsableEv"
+  },
+  {
+   "name" : "_ZN18ApplyProfileAction19DropResourceCachingEv"
+  },
+  {
+   "name" : "_ZN18ApplyProfileAction21EnableResourceCachingEv"
+  },
+  {
+   "name" : "_ZN19SetTimerSlackAction21IsTimerSlackSupportedEi"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter10writeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter18omitEndingLineFeedEv"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter20dropNullPlaceholdersEv"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter23enableYAMLCompatibilityEv"
+  },
+  {
+   "name" : "_ZN4Json10FastWriter5writeERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json10FastWriterC1Ev"
+  },
+  {
+   "name" : "_ZN4Json10FastWriterC2Ev"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1EPKc"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1Ej"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC1Ev"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2EPKc"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2Ej"
+  },
+  {
+   "name" : "_ZN4Json12PathArgumentC2Ev"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter10writeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter11writeIndentEv"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter12normalizeEOLERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter14isMultineArrayERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter15writeArrayValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter15writeWithIndentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter18hasCommentForValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter23writeCommentBeforeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter32writeCommentAfterValueOnSameLineERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter5writeERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter6indentEv"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter8unindentEv"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriter9pushValueERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriterC1Ev"
+  },
+  {
+   "name" : "_ZN4Json12StyledWriterC2Ev"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1ERKNS_18ValueConstIteratorE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC1Ev"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2ERKNS_18ValueConstIteratorE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratorC2Ev"
+  },
+  {
+   "name" : "_ZN4Json13ValueIteratoraSERKS0_"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEb"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEd"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEi"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEj"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEx"
+  },
+  {
+   "name" : "_ZN4Json13valueToStringEy"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBase4copyERKS0_"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBase9decrementEv"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBase9incrementEv"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC1Ev"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json17ValueIteratorBaseC2Ev"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter10writeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter11writeIndentEv"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter12normalizeEOLERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter14isMultineArrayERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter15writeArrayValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter15writeWithIndentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter18hasCommentForValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter23writeCommentBeforeValueERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter32writeCommentAfterValueOnSameLineERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter5writeERNSt3__113basic_ostreamIcNS1_11char_traitsIcEEEERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter6indentEv"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter8unindentEv"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriter9pushValueERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriterC1ENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18StyledStreamWriterC2ENSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC1ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC1Ev"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC2ERKNSt3__114__map_iteratorINS1_15__tree_iteratorINS1_12__value_typeINS_5Value8CZStringES5_EEPNS1_11__tree_nodeIS7_PvEEiEEEE"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratorC2Ev"
+  },
+  {
+   "name" : "_ZN4Json18ValueConstIteratoraSERKNS_17ValueIteratorBaseE"
+  },
+  {
+   "name" : "_ZN4Json19valueToQuotedStringEPKc"
+  },
+  {
+   "name" : "_ZN4Json4Path11invalidPathERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEEi"
+  },
+  {
+   "name" : "_ZN4Json4Path12addPathInArgERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_6vectorIPKNS_12PathArgumentENS5_ISD_EEEERNS1_11__wrap_iterIPKSD_EENSB_4KindE"
+  },
+  {
+   "name" : "_ZN4Json4Path8makePathERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS1_6vectorIPKNS_12PathArgumentENS5_ISD_EEEE"
+  },
+  {
+   "name" : "_ZN4Json4PathC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS_12PathArgumentESC_SC_SC_SC_"
+  },
+  {
+   "name" : "_ZN4Json4PathC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKNS_12PathArgumentESC_SC_SC_SC_"
+  },
+  {
+   "name" : "_ZN4Json5Value10setCommentEPKcNS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZN4Json5Value10setCommentERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEENS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfo10setCommentEPKc"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoC1Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoC2Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoD1Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value11CommentInfoD2Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value12removeMemberEPKc"
+  },
+  {
+   "name" : "_ZN4Json5Value12removeMemberERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5Value14setOffsetLimitEj"
+  },
+  {
+   "name" : "_ZN4Json5Value14setOffsetStartEj"
+  },
+  {
+   "name" : "_ZN4Json5Value16resolveReferenceEPKcb"
+  },
+  {
+   "name" : "_ZN4Json5Value3endEv"
+  },
+  {
+   "name" : "_ZN4Json5Value4swapERS0_"
+  },
+  {
+   "name" : "_ZN4Json5Value5beginEv"
+  },
+  {
+   "name" : "_ZN4Json5Value5clearEv"
+  },
+  {
+   "name" : "_ZN4Json5Value6appendERKS0_"
+  },
+  {
+   "name" : "_ZN4Json5Value6resizeEj"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZString4swapERS1_"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC1EPKcNS1_17DuplicationPolicyE"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC1ERKS1_"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC1Ej"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC2EPKcNS1_17DuplicationPolicyE"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC2ERKS1_"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringC2Ej"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringD1Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringD2Ev"
+  },
+  {
+   "name" : "_ZN4Json5Value8CZStringaSES1_"
+  },
+  {
+   "name" : "_ZN4Json5Value9initBasicENS_9ValueTypeEb"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ENS_9ValueTypeE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1EPKc"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1EPKcS2_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ERKNS_12StaticStringE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Eb"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ed"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ei"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ej"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ex"
+  },
+  {
+   "name" : "_ZN4Json5ValueC1Ey"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ENS_9ValueTypeE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2EPKc"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2EPKcS2_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ERKNS_12StaticStringE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2ERKS0_"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Eb"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ed"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ei"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ej"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ex"
+  },
+  {
+   "name" : "_ZN4Json5ValueC2Ey"
+  },
+  {
+   "name" : "_ZN4Json5ValueD1Ev"
+  },
+  {
+   "name" : "_ZN4Json5ValueD2Ev"
+  },
+  {
+   "name" : "_ZN4Json5ValueaSES0_"
+  },
+  {
+   "name" : "_ZN4Json5ValueixEPKc"
+  },
+  {
+   "name" : "_ZN4Json5ValueixERKNS_12StaticStringE"
+  },
+  {
+   "name" : "_ZN4Json5ValueixERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json5ValueixEi"
+  },
+  {
+   "name" : "_ZN4Json5ValueixEj"
+  },
+  {
+   "name" : "_ZN4Json6Reader10addCommentEPKcS2_NS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZN4Json6Reader10readNumberEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader10readObjectERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader10readStringEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader10skipSpacesEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader11expectTokenENS0_9TokenTypeERNS0_5TokenEPKc"
+  },
+  {
+   "name" : "_ZN4Json6Reader11getNextCharEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader11readCommentEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader12currentValueEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeDoubleERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeDoubleERNS0_5TokenERNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeNumberERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeNumberERNS0_5TokenERNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeStringERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader12decodeStringERNS0_5TokenERNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json6Reader16recoverFromErrorENS0_9TokenTypeE"
+  },
+  {
+   "name" : "_ZN4Json6Reader17readCStyleCommentEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader17skipCommentTokensERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader18addErrorAndRecoverERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS0_5TokenENS0_9TokenTypeE"
+  },
+  {
+   "name" : "_ZN4Json6Reader19readCppStyleCommentEv"
+  },
+  {
+   "name" : "_ZN4Json6Reader22decodeUnicodeCodePointERNS0_5TokenERPKcS4_Rj"
+  },
+  {
+   "name" : "_ZN4Json6Reader27decodeUnicodeEscapeSequenceERNS0_5TokenERPKcS4_Rj"
+  },
+  {
+   "name" : "_ZN4Json6Reader5matchEPKci"
+  },
+  {
+   "name" : "_ZN4Json6Reader5parseEPKcS2_RNS_5ValueEb"
+  },
+  {
+   "name" : "_ZN4Json6Reader5parseERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS_5ValueEb"
+  },
+  {
+   "name" : "_ZN4Json6Reader5parseERNSt3__113basic_istreamIcNS1_11char_traitsIcEEEERNS_5ValueEb"
+  },
+  {
+   "name" : "_ZN4Json6Reader8addErrorERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERNS0_5TokenEPKc"
+  },
+  {
+   "name" : "_ZN4Json6Reader9pushErrorERKNS_5ValueERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN4Json6Reader9pushErrorERKNS_5ValueERKNSt3__112basic_stringIcNS4_11char_traitsIcEENS4_9allocatorIcEEEES3_"
+  },
+  {
+   "name" : "_ZN4Json6Reader9readArrayERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader9readTokenERNS0_5TokenE"
+  },
+  {
+   "name" : "_ZN4Json6Reader9readValueEv"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC1ERKNS_8FeaturesE"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC1Ev"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC2ERKNS_8FeaturesE"
+  },
+  {
+   "name" : "_ZN4Json6ReaderC2Ev"
+  },
+  {
+   "name" : "_ZN4Json6WriterD0Ev"
+  },
+  {
+   "name" : "_ZN4Json6WriterD1Ev"
+  },
+  {
+   "name" : "_ZN4Json6WriterD2Ev"
+  },
+  {
+   "name" : "_ZN4Json8Features10strictModeEv"
+  },
+  {
+   "name" : "_ZN4Json8Features3allEv"
+  },
+  {
+   "name" : "_ZN4Json8FeaturesC1Ev"
+  },
+  {
+   "name" : "_ZN4Json8FeaturesC2Ev"
+  },
+  {
+   "name" : "_ZN4JsonlsERNSt3__113basic_ostreamIcNS0_11char_traitsIcEEEERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZN4JsonrsERNSt3__113basic_istreamIcNS0_11char_traitsIcEEEERNS_5ValueE"
+  },
+  {
+   "name" : "_ZN9CgroupMap10LoadRcFileEv"
+  },
+  {
+   "name" : "_ZN9CgroupMap11GetInstanceEv"
+  },
+  {
+   "name" : "_ZN9CgroupMapC1Ev"
+  },
+  {
+   "name" : "_ZN9CgroupMapC2Ev"
+  },
+  {
+   "name" : "_ZNK11TaskProfile14ExecuteForTaskEi"
+  },
+  {
+   "name" : "_ZNK11TaskProfile17ExecuteForProcessEji"
+  },
+  {
+   "name" : "_ZNK12TaskProfiles10GetProfileERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK12TaskProfiles12GetAttributeERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK12TaskProfiles19DropResourceCachingEv"
+  },
+  {
+   "name" : "_ZNK15SetCgroupAction14ExecuteForTaskEi"
+  },
+  {
+   "name" : "_ZNK15SetCgroupAction17ExecuteForProcessEji"
+  },
+  {
+   "name" : "_ZNK15SetClampsAction14ExecuteForTaskEi"
+  },
+  {
+   "name" : "_ZNK15SetClampsAction17ExecuteForProcessEji"
+  },
+  {
+   "name" : "_ZNK16CgroupController12GetTaskGroupEiPNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK16CgroupController16GetProcsFilePathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEji"
+  },
+  {
+   "name" : "_ZNK16CgroupController16GetTasksFilePathERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK16CgroupController4nameEv"
+  },
+  {
+   "name" : "_ZNK16CgroupController4pathEv"
+  },
+  {
+   "name" : "_ZNK16CgroupController7versionEv"
+  },
+  {
+   "name" : "_ZNK16CgroupController8HasValueEv"
+  },
+  {
+   "name" : "_ZNK16ProfileAttribute14GetPathForTaskEiPNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK18ApplyProfileAction14ExecuteForTaskEi"
+  },
+  {
+   "name" : "_ZNK18ApplyProfileAction17ExecuteForProcessEji"
+  },
+  {
+   "name" : "_ZNK18SetAttributeAction14ExecuteForTaskEi"
+  },
+  {
+   "name" : "_ZNK18SetAttributeAction17ExecuteForProcessEji"
+  },
+  {
+   "name" : "_ZNK19SetTimerSlackAction14ExecuteForTaskEi"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase10memberNameEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase15computeDistanceERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase3keyEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase5derefEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase5indexEv"
+  },
+  {
+   "name" : "_ZNK4Json17ValueIteratorBase7isEqualERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json4Path4makeERNS_5ValueE"
+  },
+  {
+   "name" : "_ZNK4Json4Path7resolveERKNS_5ValueE"
+  },
+  {
+   "name" : "_ZNK4Json4Path7resolveERKNS_5ValueES3_"
+  },
+  {
+   "name" : "_ZNK4Json5Value10getCommentENS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZNK4Json5Value10hasCommentENS_16CommentPlacementE"
+  },
+  {
+   "name" : "_ZNK4Json5Value10isIntegralEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value12asLargestIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value12isValidIndexEj"
+  },
+  {
+   "name" : "_ZNK4Json5Value13asLargestUIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14getMemberNamesEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14getOffsetLimitEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14getOffsetStartEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value14toStyledStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value15isConvertibleToENS_9ValueTypeE"
+  },
+  {
+   "name" : "_ZNK4Json5Value3endEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value3getEPKcRKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value3getERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value3getEjRKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value4sizeEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value4typeEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5asIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5beginEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5emptyEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value5isIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6asBoolEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6asUIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6isBoolEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6isNullEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value6isUIntEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value7asFloatEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value7asInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value7compareERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5Value7isArrayEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value7isInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZString14isStaticStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZString5c_strEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZString5indexEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZStringeqERKS1_"
+  },
+  {
+   "name" : "_ZNK4Json5Value8CZStringltERKS1_"
+  },
+  {
+   "name" : "_ZNK4Json5Value8asDoubleEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8asStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8asUInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isDoubleEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isMemberEPKc"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isMemberERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isObjectEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value8isUInt64Ev"
+  },
+  {
+   "name" : "_ZNK4Json5Value9asCStringEv"
+  },
+  {
+   "name" : "_ZNK4Json5Value9isNumericEv"
+  },
+  {
+   "name" : "_ZNK4Json5ValueeqERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValuegeERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValuegtERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixEPKc"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixERKNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixEi"
+  },
+  {
+   "name" : "_ZNK4Json5ValueixEj"
+  },
+  {
+   "name" : "_ZNK4Json5ValueleERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValueltERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValueneERKS0_"
+  },
+  {
+   "name" : "_ZNK4Json5ValuentEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader19getStructuredErrorsEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader24getFormatedErrorMessagesEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader24getLocationLineAndColumnEPKc"
+  },
+  {
+   "name" : "_ZNK4Json6Reader24getLocationLineAndColumnEPKcRiS3_"
+  },
+  {
+   "name" : "_ZNK4Json6Reader25getFormattedErrorMessagesEv"
+  },
+  {
+   "name" : "_ZNK4Json6Reader4goodEv"
+  },
+  {
+   "name" : "_ZNK9CgroupMap14FindControllerERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZNK9CgroupMap5PrintEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__110__back_refIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__110__l_anchorIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__110__r_anchorIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111__alternateIcE12__exec_splitEbRNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111__alternateIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111__end_stateIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111__lookaheadIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111__match_anyIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111basic_regexIcNS_12regex_traitsIcEEE21__match_at_start_ecmaINS_9allocatorINS_9sub_matchIPKcEEEEEEbS8_S8_RNS_13match_resultsIS8_T_EENS_15regex_constants15match_flag_typeEb"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111basic_regexIcNS_12regex_traitsIcEEE27__match_at_start_posix_subsINS_9allocatorINS_9sub_matchIPKcEEEEEEbS8_S8_RNS_13match_resultsIS8_T_EENS_15regex_constants15match_flag_typeEb"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111basic_regexIcNS_12regex_traitsIcEEE29__match_at_start_posix_nosubsINS_9allocatorINS_9sub_matchIPKcEEEEEEbS8_S8_RNS_13match_resultsIS8_T_EENS_15regex_constants15match_flag_typeEb"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__111basic_regexIcNS_12regex_traitsIcEEE8__searchINS_9allocatorINS_9sub_matchIPKcEEEEEEbS8_S8_RNS_13match_resultsIS8_T_EENS_15regex_constants15match_flag_typeE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112__match_charIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112regex_traitsIcE18__lookup_classnameIPKcEEtT_S5_bc"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112regex_traitsIcE19__transform_primaryINS_11__wrap_iterIPcEEEENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEET_SC_c"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112regex_traitsIcE19__transform_primaryIPcEENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEET_SA_c"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112regex_traitsIcE20__lookup_collatenameIPKcEENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEET_SB_c"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112regex_traitsIcE20__lookup_collatenameIPcEENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEET_SA_c"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__112regex_traitsIcE9transformINS_11__wrap_iterIPcEEEENS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEET_SC_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__113__empty_stateIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__113match_resultsINS_11__wrap_iterIPKcEENS_9allocatorINS_9sub_matchIS4_EEEEE6formatINS_20back_insert_iteratorINS_12basic_stringIcNS_11char_traitsIcEENS5_IcEEEEEEEET_SI_S3_S3_NS_15regex_constants15match_flag_typeE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__115__word_boundaryIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE3strEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__117__repeat_one_loopIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__118__back_ref_collateIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__118__match_char_icaseIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__120__bracket_expressionIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__120__match_char_collateIcNS_12regex_traitsIcEEE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__121__empty_non_own_stateIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__126__end_marked_subexpressionIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__128__begin_marked_subexpressionIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__16__loopIcE12__exec_splitEbRNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__16__loopIcE6__execERNS_7__stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrI11TaskProfileEEEENS_19__map_value_compareIS7_SB_NS_4lessIS7_EELb1EEENS5_ISB_EEE4findIS7_EENS_21__tree_const_iteratorISB_PNS_11__tree_nodeISB_PvEEiEERKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNKSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10unique_ptrI16ProfileAttributeNS_14default_deleteIS9_EEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE4findIS7_EENS_21__tree_const_iteratorISD_PNS_11__tree_nodeISD_PvEEiEERKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE11__push_charEc"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE11__push_loopEjjPNS_16__owns_one_stateIcEEjjb"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE12__parse_atomIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE12__parse_grepIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE13__parse_egrepIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE15__push_back_refEi"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE16__parse_ecma_expIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE16__push_lookaheadERKS3_bj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE17__parse_assertionIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE18__parse_awk_escapeIPKcEET_S7_S7_PNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE18__parse_nondupl_REIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE19__parse_QUOTED_CHARIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE20__parse_ORD_CHAR_EREIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE20__parse_class_escapeIPKcEET_S7_S7_RNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEPNS_20__bracket_expressionIcS2_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE21__parse_basic_reg_expIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE22__parse_ERE_expressionIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE22__parse_RE_dupl_symbolIPKcEET_S7_S7_PNS_16__owns_one_stateIcEEjj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE22__parse_decimal_escapeIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE23__parse_ERE_dupl_symbolIPKcEET_S7_S7_PNS_16__owns_one_stateIcEEjj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE23__parse_QUOTED_CHAR_EREIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE23__parse_character_classIPKcEET_S7_S7_PNS_20__bracket_expressionIcS2_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE23__parse_expression_termIPKcEET_S7_S7_PNS_20__bracket_expressionIcS2_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE24__parse_character_escapeIPKcEET_S7_S7_PNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE24__parse_collating_symbolIPKcEET_S7_S7_RNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE24__parse_extended_reg_expIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE25__parse_equivalence_classIPKcEET_S7_S7_PNS_20__bracket_expressionIcS2_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE25__parse_pattern_characterIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE26__parse_bracket_expressionIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE30__parse_character_class_escapeIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE32__parse_one_char_or_coll_elem_REIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__111basic_regexIcNS_12regex_traitsIcEEE7__parseIPKcEET_S7_S7_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__deque_baseIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE5clearEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__112__deque_baseINS_7__stateIcEENS_9allocatorIS2_EEE5clearEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__113__tree_removeIPNS_16__tree_node_baseIPvEEEEvT_S5_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__113regex_replaceINS_20back_insert_iteratorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEENS_11__wrap_iterIPKcEENS_12regex_traitsIcEEcEET_SF_T0_SG_RKNS_11basic_regexIT2_T1_EEPKSI_NS_15regex_constants15match_flag_typeE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoENS_9allocatorIS4_EEE10push_frontEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoENS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoERNS_9allocatorIS4_EEE10push_frontERKS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPN4Json6Reader9ErrorInfoERNS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPNS_7__stateIcEENS_9allocatorIS3_EEE10push_frontEOS3_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPNS_7__stateIcEENS_9allocatorIS3_EEE10push_frontERKS3_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPNS_7__stateIcEENS_9allocatorIS3_EEE9push_backEOS3_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPNS_7__stateIcEERNS_9allocatorIS3_EEE10push_frontERKS3_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPNS_7__stateIcEERNS_9allocatorIS3_EEE9push_backEOS3_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueENS_9allocatorIS4_EEE10push_frontEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueENS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueERNS_9allocatorIS4_EEE10push_frontERKS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114__split_bufferIPPN4Json5ValueERNS_9allocatorIS4_EEE9push_backEOS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114regex_iteratorINS_11__wrap_iterIPKcEEcNS_12regex_traitsIcEEEC2ES4_S4_RKNS_11basic_regexIcS6_EENS_15regex_constants15match_flag_typeE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__114regex_iteratorINS_11__wrap_iterIPKcEEcNS_12regex_traitsIcEEEppEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE7seekoffExNS_8ios_base7seekdirEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE8overflowEi"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE9pbackfailEi"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEE9underflowEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__116__owns_one_stateIcED0Ev"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__116__owns_one_stateIcED2Ev"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__117__owns_two_statesIcED0Ev"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__117__owns_two_statesIcED2Ev"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__120__shared_ptr_emplaceI11TaskProfileNS_9allocatorIS1_EEE16__on_zero_sharedEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__120__shared_ptr_emplaceI11TaskProfileNS_9allocatorIS1_EEE21__on_zero_shared_weakEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_14default_deleteIS2_EENS_9allocatorIS2_EEE16__on_zero_sharedEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_14default_deleteIS2_EENS_9allocatorIS2_EEE21__on_zero_shared_weakEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_j"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__125__lexicographical_compareIRNS_6__lessINS_4pairIKN4Json5Value8CZStringES4_EES7_EENS_20__map_const_iteratorINS_21__tree_const_iteratorINS_12__value_typeIS5_S4_EEPNS_11__tree_nodeISD_PvEEiEEEESJ_EEbT0_SK_T1_SL_T_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__127__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__13mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrI11TaskProfileEENS_4lessIS6_EENS4_INS_4pairIKS6_S9_EEEEEixERSD_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__13mapINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10unique_ptrI16ProfileAttributeNS_14default_deleteIS8_EEEENS_4lessIS6_EENS4_INS_4pairIKS6_SB_EEEEEixERSF_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE14__erase_to_endENS_16__deque_iteratorIS3_PKS3_RS8_PKS9_iLi146EEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE19__add_back_capacityEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE19__add_back_capacityEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIN4Json6Reader9ErrorInfoENS_9allocatorIS3_EEE6resizeEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeINS_7__stateIcEENS_9allocatorIS2_EEE10push_frontEOS2_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeINS_7__stateIcEENS_9allocatorIS2_EEE19__add_back_capacityEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeINS_7__stateIcEENS_9allocatorIS2_EEE20__add_front_capacityEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__15dequeIPN4Json5ValueENS_9allocatorIS3_EEE19__add_back_capacityEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE12__find_equalIS4_EERPNS_16__tree_node_baseIPvEENS_21__tree_const_iteratorIS5_PNS_11__tree_nodeIS5_SF_EEiEERPNS_15__tree_end_nodeISH_EESI_RKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE14__erase_uniqueIS4_EEjRKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE30__emplace_hint_unique_key_argsIS4_JRKNS_4pairIKS4_S3_EEEEENS_15__tree_iteratorIS5_PNS_11__tree_nodeIS5_PvEEiEENS_21__tree_const_iteratorIS5_SN_iEERKT_DpOT0_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE5eraseENS_21__tree_const_iteratorIS5_PNS_11__tree_nodeIS5_PvEEiEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeIN4Json5Value8CZStringES3_EENS_19__map_value_compareIS4_S5_NS_4lessIS4_EELb1EEENS_9allocatorIS5_EEE7destroyEPNS_11__tree_nodeIS5_PvEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrI11TaskProfileEEEENS_19__map_value_compareIS7_SB_NS_4lessIS7_EELb1EEENS5_ISB_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISM_EERKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10shared_ptrI11TaskProfileEEEENS_19__map_value_compareIS7_SB_NS_4lessIS7_EELb1EEENS5_ISB_EEE4findIS7_EENS_15__tree_iteratorISB_PNS_11__tree_nodeISB_PvEEiEERKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10unique_ptrI16ProfileAttributeNS_14default_deleteIS9_EEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE12__find_equalIS7_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISO_EERKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_10unique_ptrI16ProfileAttributeNS_14default_deleteIS9_EEEEEENS_19__map_value_compareIS7_SD_NS_4lessIS7_EELb1EEENS5_ISD_EEE4findIS7_EENS_15__tree_iteratorISD_PNS_11__tree_nodeISD_PvEEiEERKT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16__treeIiNS_4lessIiEENS_9allocatorIiEEE7destroyEPNS_11__tree_nodeIiPvEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4Json12PathArgumentENS_9allocatorIS2_EEE21__push_back_slow_pathIRKS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4Json12PathArgumentENS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN4Json6Reader15StructuredErrorENS_9allocatorIS3_EEE21__push_back_slow_pathIRKS3_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_10shared_ptrI11TaskProfileEENS_9allocatorIS3_EEE21__push_back_slow_pathIRKS3_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_10unique_ptrI13ProfileActionNS_14default_deleteIS2_EEEENS_9allocatorIS5_EEE21__push_back_slow_pathIS5_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE21__push_back_slow_pathIRKS6_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE21__push_back_slow_pathIS6_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEE7reserveEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_4pairINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS5_IS8_EEE21__push_back_slow_pathIS8_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_4pairIccEENS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_4pairIjPKcEENS_9allocatorIS4_EEE6assignIPS4_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS4_NS_15iterator_traitsISB_E9referenceEEE5valueEvE4typeESB_SB_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_4pairIjPKcEENS_9allocatorIS4_EEE8__appendEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_7__stateIcEENS_9allocatorIS2_EEE21__push_back_slow_pathIS2_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_9sub_matchINS_11__wrap_iterIPKcEEEENS_9allocatorIS6_EEE8__appendEj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_9sub_matchIPKcEENS_9allocatorIS4_EEE6assignEjRKS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_9sub_matchIPKcEENS_9allocatorIS4_EEE6assignIPS4_EENS_9enable_ifIXaasr21__is_forward_iteratorIT_EE5valuesr16is_constructibleIS4_NS_15iterator_traitsISB_E9referenceEEE5valueEvE4typeESB_SB_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorINS_9sub_matchIPKcEENS_9allocatorIS4_EEE8__appendEjRKS4_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIPKN4Json12PathArgumentENS_9allocatorIS4_EEE21__push_back_slow_pathIS4_EEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIcNS_9allocatorIcEEE21__push_back_slow_pathIRKcEEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIcNS_9allocatorIcEEE21__push_back_slow_pathIcEEvOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__17getlineIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_13basic_istreamIT_T0_EES9_RNS_12basic_stringIS6_S7_T1_EES6_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__1lsIcNS_11char_traitsIcEENS_9allocatorIcEEEERNS_13basic_ostreamIT_T0_EES9_RKNS_12basic_stringIS6_S7_T1_EE"
+  },
+  {
+   "name" : "cpusets_enabled"
+  },
+  {
+   "name" : "get_cpuset_policy_profile_name"
+  },
+  {
+   "name" : "get_sched_policy"
+  },
+  {
+   "name" : "get_sched_policy_name"
+  },
+  {
+   "name" : "get_sched_policy_profile_name"
+  },
+  {
+   "name" : "schedboost_enabled"
+  },
+  {
+   "name" : "set_cpuset_policy"
+  },
+  {
+   "name" : "set_sched_policy"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZN4Json5Value13maxLargestIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value13minLargestIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value14maxLargestUIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value4nullE"
+  },
+  {
+   "name" : "_ZN4Json5Value6maxIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value6minIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value7maxUIntE"
+  },
+  {
+   "name" : "_ZN4Json5Value8maxInt64E"
+  },
+  {
+   "name" : "_ZN4Json5Value8minInt64E"
+  },
+  {
+   "name" : "_ZN4Json5Value9maxUInt64E"
+  },
+  {
+   "name" : "_ZN4Json8kNullRefE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTCNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE0_NS_13basic_ostreamIcS2_EE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTTNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZTV15SetCgroupAction"
+  },
+  {
+   "name" : "_ZTV15SetClampsAction"
+  },
+  {
+   "name" : "_ZTV18ApplyProfileAction"
+  },
+  {
+   "name" : "_ZTV18SetAttributeAction"
+  },
+  {
+   "name" : "_ZTV19SetTimerSlackAction"
+  },
+  {
+   "name" : "_ZTVN4Json10FastWriterE"
+  },
+  {
+   "name" : "_ZTVN4Json12StyledWriterE"
+  },
+  {
+   "name" : "_ZTVN4Json6WriterE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__110__back_refIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__110__l_anchorIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__110__r_anchorIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__111__alternateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__111__end_stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__111__lookaheadIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__111__match_anyIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__112__match_charIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__113__empty_stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__115__word_boundaryIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__115basic_stringbufIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__116__back_ref_icaseIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__116__owns_one_stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__117__owns_two_statesIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__117__repeat_one_loopIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__118__back_ref_collateIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__118__match_char_icaseIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__119basic_ostringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__120__bracket_expressionIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__120__match_char_collateIcNS_12regex_traitsIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__120__shared_ptr_emplaceI11TaskProfileNS_9allocatorIS1_EEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__120__shared_ptr_pointerIPNS_13__empty_stateIcEENS_14default_deleteIS2_EENS_9allocatorIS2_EEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__121__empty_non_own_stateIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__123__match_any_but_newlineIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__126__end_marked_subexpressionIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__128__begin_marked_subexpressionIcEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTVNSt3__16__loopIcEE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "SP_DEFAULT"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "SP_BACKGROUND"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "SP_FOREGROUND"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "SP_SYSTEM"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "SP_AUDIO_APP"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "SP_AUDIO_SYS"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "SP_TOP_APP"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "SP_RT_APP"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "SP_RESTRICTED"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "SP_CNT"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "SP_MAX"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "SP_SYSTEM_DEFAULT"
+    }
+   ],
+   "linker_set_key" : "_ZTI11SchedPolicy",
+   "name" : "SchedPolicy",
+   "referenced_type" : "_ZTI11SchedPolicy",
+   "self_type" : "_ZTI11SchedPolicy",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h",
+   "underlying_type" : "_ZTIi"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "CgroupGetAttributePath",
+   "linker_set_key" : "CgroupGetAttributePath",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "function_name" : "CgroupGetAttributePathForTask",
+   "linker_set_key" : "CgroupGetAttributePathForTask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "function_name" : "CgroupGetControllerPath",
+   "linker_set_key" : "CgroupGetControllerPath",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "function_name" : "SetProcessProfiles",
+   "linker_set_key" : "SetProcessProfiles",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "function_name" : "SetTaskProfiles",
+   "linker_set_key" : "SetTaskProfiles",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "function_name" : "cpusets_enabled",
+   "linker_set_key" : "cpusets_enabled",
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "get_cpuset_policy_profile_name",
+   "linker_set_key" : "get_cpuset_policy_profile_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI11SchedPolicy"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "get_sched_policy",
+   "linker_set_key" : "get_sched_policy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP11SchedPolicy"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "get_sched_policy_name",
+   "linker_set_key" : "get_sched_policy_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI11SchedPolicy"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "get_sched_policy_profile_name",
+   "linker_set_key" : "get_sched_policy_profile_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI11SchedPolicy"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "schedboost_enabled",
+   "linker_set_key" : "schedboost_enabled",
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "set_cpuset_policy",
+   "linker_set_key" : "set_cpuset_policy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTI11SchedPolicy"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "function_name" : "set_sched_policy",
+   "linker_set_key" : "set_sched_policy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTI11SchedPolicy"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> > &",
+   "referenced_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "name" : "const std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char> > > > &",
+   "referenced_type" : "_ZTIKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "self_type" : "_ZTIRKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP11SchedPolicy",
+   "name" : "SchedPolicy *",
+   "referenced_type" : "_ZTI11SchedPolicy",
+   "self_type" : "_ZTIP11SchedPolicy",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/sched_policy.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "std::basic_string<char, std::char_traits<char>, std::allocator<char> > *",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> >",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 12,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "name" : "const std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char> > > >",
+   "referenced_type" : "_ZTINSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "self_type" : "_ZTIKNSt3__16vectorINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEENS4_IS6_EEEE",
+   "size" : 12,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKPKc",
+   "name" : "const char *const",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIKPKc",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libprocessgroup/include/processgroup/processgroup.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

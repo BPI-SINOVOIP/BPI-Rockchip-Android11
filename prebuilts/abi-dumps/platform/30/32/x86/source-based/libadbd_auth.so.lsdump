@@ -1,0 +1,640 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDi",
+   "name" : "char32_t",
+   "referenced_type" : "_ZTIDi",
+   "self_type" : "_ZTIDi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIDn",
+   "name" : "nullptr_t",
+   "referenced_type" : "_ZTIDn",
+   "self_type" : "_ZTIDn",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDs",
+   "name" : "char16_t",
+   "referenced_type" : "_ZTIDs",
+   "self_type" : "_ZTIDs",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIa",
+   "name" : "signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIa",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIe",
+   "name" : "long double",
+   "referenced_type" : "_ZTIe",
+   "self_type" : "_ZTIe",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIw",
+   "name" : "wchar_t",
+   "referenced_type" : "_ZTIw",
+   "self_type" : "_ZTIw",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "adbd_auth_delete"
+  },
+  {
+   "name" : "adbd_auth_get_max_version"
+  },
+  {
+   "name" : "adbd_auth_get_public_keys"
+  },
+  {
+   "name" : "adbd_auth_new"
+  },
+  {
+   "name" : "adbd_auth_notify_auth"
+  },
+  {
+   "name" : "adbd_auth_notify_disconnect"
+  },
+  {
+   "name" : "adbd_auth_prompt_user"
+  },
+  {
+   "binding" : "weak",
+   "name" : "adbd_auth_prompt_user_with_id"
+  },
+  {
+   "name" : "adbd_auth_run"
+  },
+  {
+   "name" : "adbd_auth_supports_feature"
+  },
+  {
+   "name" : "adbd_auth_tls_device_connected"
+  },
+  {
+   "name" : "adbd_auth_tls_device_disconnected"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTI15AdbdAuthFeature",
+   "name" : "AdbdAuthFeature",
+   "referenced_type" : "_ZTI15AdbdAuthFeature",
+   "self_type" : "_ZTI15AdbdAuthFeature",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "kAdbTransportTypeUsb"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "kAdbTransportTypeWifi"
+    }
+   ],
+   "linker_set_key" : "_ZTI16AdbTransportType",
+   "name" : "AdbTransportType",
+   "referenced_type" : "_ZTI16AdbTransportType",
+   "self_type" : "_ZTI16AdbTransportType",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h",
+   "underlying_type" : "_ZTIi"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFbPvPKcjE",
+   "name" : "bool (void *, const char *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "referenced_type" : "_ZTIFbPvPKcjE",
+   "return_type" : "_ZTIb",
+   "self_type" : "_ZTIFbPvPKcjE",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPKcjE",
+   "name" : "void (const char *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPKcjE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPKcjE",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPvyE",
+   "name" : "void (void *, unsigned long long)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPvyE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPvyE",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "adbd_auth_delete",
+   "linker_set_key" : "adbd_auth_delete",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_get_max_version",
+   "linker_set_key" : "adbd_auth_get_max_version",
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_get_public_keys",
+   "linker_set_key" : "adbd_auth_get_public_keys",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTIPFbPvPKcjE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_new",
+   "linker_set_key" : "adbd_auth_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP17AdbdAuthCallbacks"
+    }
+   ],
+   "return_type" : "_ZTIP15AdbdAuthContext",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_notify_auth",
+   "linker_set_key" : "adbd_auth_notify_auth",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIy",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_notify_disconnect",
+   "linker_set_key" : "adbd_auth_notify_disconnect",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_prompt_user",
+   "linker_set_key" : "adbd_auth_prompt_user",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_prompt_user_with_id",
+   "linker_set_key" : "adbd_auth_prompt_user_with_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIy",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_run",
+   "linker_set_key" : "adbd_auth_run",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_supports_feature",
+   "linker_set_key" : "adbd_auth_supports_feature",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTI15AdbdAuthFeature"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_tls_device_connected",
+   "linker_set_key" : "adbd_auth_tls_device_connected",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTI16AdbTransportType"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIy",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "function_name" : "adbd_auth_tls_device_disconnected",
+   "linker_set_key" : "adbd_auth_tls_device_disconnected",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15AdbdAuthContext"
+    },
+    {
+     "referenced_type" : "_ZTI16AdbTransportType"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP15AdbdAuthContext",
+   "name" : "AdbdAuthContext *",
+   "referenced_type" : "_ZTI15AdbdAuthContext",
+   "self_type" : "_ZTIP15AdbdAuthContext",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP17AdbdAuthCallbacks",
+   "name" : "AdbdAuthCallbacks *",
+   "referenced_type" : "_ZTI17AdbdAuthCallbacks",
+   "self_type" : "_ZTIP17AdbdAuthCallbacks",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFbPvPKcjE",
+   "name" : "bool (*)(void *, const char *, unsigned int)",
+   "referenced_type" : "_ZTIFbPvPKcjE",
+   "self_type" : "_ZTIPFbPvPKcjE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPKcjE",
+   "name" : "void (*)(const char *, unsigned int)",
+   "referenced_type" : "_ZTIFvPKcjE",
+   "self_type" : "_ZTIPFvPKcjE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPvyE",
+   "name" : "void (*)(void *, unsigned long long)",
+   "referenced_type" : "_ZTIFvPvyE",
+   "self_type" : "_ZTIPFvPvyE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "version",
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI17AdbdAuthCallbacks",
+   "name" : "AdbdAuthCallbacks",
+   "referenced_type" : "_ZTI17AdbdAuthCallbacks",
+   "self_type" : "_ZTI17AdbdAuthCallbacks",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTI17AdbdAuthCallbacks"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "field_name" : "key_authorized",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIPFvPvyE"
+    },
+    {
+     "field_name" : "key_removed",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPFvPKcjE"
+    }
+   ],
+   "linker_set_key" : "_ZTI19AdbdAuthCallbacksV1",
+   "name" : "AdbdAuthCallbacksV1",
+   "referenced_type" : "_ZTI19AdbdAuthCallbacksV1",
+   "self_type" : "_ZTI19AdbdAuthCallbacksV1",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/adbd_auth/include/adbd_auth.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

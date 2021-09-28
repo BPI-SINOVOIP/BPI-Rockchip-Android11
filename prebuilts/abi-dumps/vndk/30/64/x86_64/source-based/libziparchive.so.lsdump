@@ -1,0 +1,3034 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA1024_c",
+   "name" : "char [1024]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA1024_c",
+   "size" : 1024,
+   "source_file" : "/system/core/base/include/android-base/file.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIa",
+   "name" : "signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIa",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_Z11GetOwnerTagPK10ZipArchive"
+  },
+  {
+   "name" : "_Z11OpenArchivePKcPP10ZipArchive"
+  },
+  {
+   "name" : "_Z12CloseArchiveP10ZipArchive"
+  },
+  {
+   "name" : "_Z12EndIterationPv"
+  },
+  {
+   "name" : "_Z13OpenArchiveFdiPKcPP10ZipArchiveb"
+  },
+  {
+   "name" : "_Z14GetArchiveInfoP10ZipArchive"
+  },
+  {
+   "name" : "_Z14StartIterationP10ZipArchivePPvNSt3__117basic_string_viewIcNS3_11char_traitsIcEEEES7_"
+  },
+  {
+   "name" : "_Z15ErrorCodeStringi"
+  },
+  {
+   "name" : "_Z15ExtractToMemoryP10ZipArchiveP8ZipEntryPhj"
+  },
+  {
+   "name" : "_Z15ExtractToWriterP10ZipArchiveP8ZipEntryPN11zip_archive6WriterE"
+  },
+  {
+   "name" : "_Z17GetFileDescriptorP10ZipArchive"
+  },
+  {
+   "name" : "_Z18ExtractEntryToFileP10ZipArchiveP8ZipEntryi"
+  },
+  {
+   "name" : "_Z18OpenArchiveFdRangeiPKcPP10ZipArchivellb"
+  },
+  {
+   "name" : "_Z21OpenArchiveFromMemoryPKvmPKcPP10ZipArchive"
+  },
+  {
+   "name" : "_Z23GetFileDescriptorOffsetP10ZipArchive"
+  },
+  {
+   "name" : "_Z23ProcessZipEntryContentsP10ZipArchiveP8ZipEntryPFbPKhmPvES5_"
+  },
+  {
+   "name" : "_Z4NextPvP8ZipEntryPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_Z4NextPvP8ZipEntryPNSt3__117basic_string_viewIcNS2_11char_traitsIcEEEE"
+  },
+  {
+   "name" : "_Z9FindEntryP10ZipArchiveNSt3__117basic_string_viewIcNS1_11char_traitsIcEEEEP8ZipEntry"
+  },
+  {
+   "name" : "_ZN10ZipArchive26InitializeCentralDirectoryElm"
+  },
+  {
+   "name" : "_ZN10ZipArchiveC1EO13MappedZipFileb"
+  },
+  {
+   "name" : "_ZN10ZipArchiveC1EPKvm"
+  },
+  {
+   "name" : "_ZN10ZipArchiveC2EO13MappedZipFileb"
+  },
+  {
+   "name" : "_ZN10ZipArchiveC2EPKvm"
+  },
+  {
+   "name" : "_ZN10ZipArchiveD1Ev"
+  },
+  {
+   "name" : "_ZN10ZipArchiveD2Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive6ReaderD0Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive6ReaderD1Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive6ReaderD2Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive6WriterD0Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive6WriterD1Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive6WriterD2Ev"
+  },
+  {
+   "name" : "_ZN11zip_archive7InflateERKNS_6ReaderEjjPNS_6WriterEPm"
+  },
+  {
+   "name" : "_ZN16CentralDirectory10InitializeEPKvlm"
+  },
+  {
+   "name" : "_ZN21ZipArchiveStreamEntry4InitERK8ZipEntry"
+  },
+  {
+   "name" : "_ZN21ZipArchiveStreamEntry6CreateEP10ZipArchiveRK8ZipEntry"
+  },
+  {
+   "name" : "_ZN21ZipArchiveStreamEntry9CreateRawEP10ZipArchiveRK8ZipEntry"
+  },
+  {
+   "name" : "_ZN31ZipArchiveStreamEntryCompressed4InitERK8ZipEntry"
+  },
+  {
+   "name" : "_ZN31ZipArchiveStreamEntryCompressed4ReadEv"
+  },
+  {
+   "name" : "_ZN31ZipArchiveStreamEntryCompressed6VerifyEv"
+  },
+  {
+   "name" : "_ZN31ZipArchiveStreamEntryCompressedD0Ev"
+  },
+  {
+   "name" : "_ZN31ZipArchiveStreamEntryCompressedD1Ev"
+  },
+  {
+   "name" : "_ZN31ZipArchiveStreamEntryCompressedD2Ev"
+  },
+  {
+   "name" : "_ZN33ZipArchiveStreamEntryUncompressed4InitERK8ZipEntry"
+  },
+  {
+   "name" : "_ZN33ZipArchiveStreamEntryUncompressed4ReadEv"
+  },
+  {
+   "name" : "_ZN33ZipArchiveStreamEntryUncompressed6VerifyEv"
+  },
+  {
+   "name" : "_ZN34ZipArchiveStreamEntryRawCompressed4InitERK8ZipEntry"
+  },
+  {
+   "name" : "_ZN34ZipArchiveStreamEntryRawCompressed6VerifyEv"
+  },
+  {
+   "name" : "_ZN9ZipWriter10StartEntryENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEm"
+  },
+  {
+   "name" : "_ZN9ZipWriter10StoreBytesEPNS_9FileEntryEPKvj"
+  },
+  {
+   "name" : "_ZN9ZipWriter10WriteBytesEPKvm"
+  },
+  {
+   "name" : "_ZN9ZipWriter11FinishEntryEv"
+  },
+  {
+   "name" : "_ZN9ZipWriter11HandleErrorEi"
+  },
+  {
+   "name" : "_ZN9ZipWriter12GetLastEntryEPNS_9FileEntryE"
+  },
+  {
+   "name" : "_ZN9ZipWriter13CompressBytesEPNS_9FileEntryEPKvj"
+  },
+  {
+   "name" : "_ZN9ZipWriter14PrepareDeflateEv"
+  },
+  {
+   "name" : "_ZN9ZipWriter15ErrorCodeStringEi"
+  },
+  {
+   "name" : "_ZN9ZipWriter16DiscardLastEntryEv"
+  },
+  {
+   "name" : "_ZN9ZipWriter17StartAlignedEntryENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEmj"
+  },
+  {
+   "name" : "_ZN9ZipWriter18StartEntryWithTimeENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEml"
+  },
+  {
+   "name" : "_ZN9ZipWriter20FlushCompressedBytesEPNS_9FileEntryE"
+  },
+  {
+   "name" : "_ZN9ZipWriter25StartAlignedEntryWithTimeENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEmlj"
+  },
+  {
+   "name" : "_ZN9ZipWriter6FinishEv"
+  },
+  {
+   "name" : "_ZN9ZipWriterC1EOS_"
+  },
+  {
+   "name" : "_ZN9ZipWriterC1EP7__sFILE"
+  },
+  {
+   "name" : "_ZN9ZipWriterC2EOS_"
+  },
+  {
+   "name" : "_ZN9ZipWriterC2EP7__sFILE"
+  },
+  {
+   "name" : "_ZN9ZipWriteraSEOS_"
+  },
+  {
+   "name" : "_ZNK13MappedZipFile10GetBasePtrEv"
+  },
+  {
+   "name" : "_ZNK13MappedZipFile12ReadAtOffsetEPhml"
+  },
+  {
+   "name" : "_ZNK13MappedZipFile13GetFileLengthEv"
+  },
+  {
+   "name" : "_ZNK13MappedZipFile13GetFileOffsetEv"
+  },
+  {
+   "name" : "_ZNK13MappedZipFile17GetFileDescriptorEv"
+  },
+  {
+   "name" : "_ZNK8ZipEntry19GetModificationTimeEv"
+  },
+  {
+   "name" : "_ZNK9ZipWriter23ShouldUseDataDescriptorEv"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_m"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN9ZipWriter9FileEntryENS_9allocatorIS2_EEE24__emplace_back_slow_pathIJS2_EEEvDpOT_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIcNS_9allocatorIcEEE6resizeEmRKc"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIcNS_9allocatorIcEEE8__appendEmRKc"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIhNS_9allocatorIhEEE8__appendEm"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIhNS_9allocatorIhEEEC2Em"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "_ZTV10FileWriter"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTV11EntryReader"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTV12MemoryWriter"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZTV13ProcessWriter"
+  },
+  {
+   "name" : "_ZTV21ZipArchiveStreamEntry"
+  },
+  {
+   "name" : "_ZTV31ZipArchiveStreamEntryCompressed"
+  },
+  {
+   "name" : "_ZTV33ZipArchiveStreamEntryUncompressed"
+  },
+  {
+   "name" : "_ZTV34ZipArchiveStreamEntryRawCompressed"
+  },
+  {
+   "name" : "_ZTVN11zip_archive6ReaderE"
+  },
+  {
+   "name" : "_ZTVN11zip_archive6WriterE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "kCompressStored"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "kCompressDeflated"
+    }
+   ],
+   "linker_set_key" : "_ZTI18$kCompressDeflated",
+   "name" : "(anonymous enum at system/core/libziparchive/include/ziparchive/zip_archive.h:34:1)",
+   "referenced_type" : "_ZTI18$kCompressDeflated",
+   "self_type" : "_ZTI18$kCompressDeflated",
+   "size" : 4,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::base::VERBOSE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::base::DEBUG"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::base::INFO"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::base::WARNING"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "android::base::ERROR"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "android::base::FATAL_WITHOUT_ABORT"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "android::base::FATAL"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base11LogSeverityE",
+   "name" : "android::base::LogSeverity",
+   "referenced_type" : "_ZTIN7android4base11LogSeverityE",
+   "self_type" : "_ZTIN7android4base11LogSeverityE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::base::DEFAULT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::base::MAIN"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::base::SYSTEM"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::base::RADIO"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "android::base::CRASH"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base5LogIdE",
+   "name" : "android::base::LogId",
+   "referenced_type" : "_ZTIN7android4base5LogIdE",
+   "self_type" : "_ZTIN7android4base5LogIdE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ZipWriter::State::kWritingZip"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ZipWriter::State::kWritingEntry"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ZipWriter::State::kDone"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ZipWriter::State::kError"
+    }
+   ],
+   "linker_set_key" : "_ZTIN9ZipWriter5StateE",
+   "name" : "ZipWriter::State",
+   "referenced_type" : "_ZTIN9ZipWriter5StateE",
+   "self_type" : "_ZTIN9ZipWriter5StateE",
+   "size" : 4,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "ZipWriter::kCompress"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ZipWriter::kAlign32"
+    }
+   ],
+   "linker_set_key" : "_ZTIN9ZipWriter9$kAlign32E",
+   "name" : "ZipWriter::(anonymous enum at system/core/libziparchive/include/ziparchive/zip_writer.h:57:3)",
+   "referenced_type" : "_ZTIN9ZipWriter9$kAlign32E",
+   "self_type" : "_ZTIN9ZipWriter9$kAlign32E",
+   "size" : 4,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFbPKhmPvE",
+   "name" : "bool (const unsigned char *, unsigned long, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "referenced_type" : "_ZTIFbPKhmPvE",
+   "return_type" : "_ZTIb",
+   "self_type" : "_ZTIFbPKhmPvE",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "OpenArchive",
+   "linker_set_key" : "_Z11OpenArchivePKcPP10ZipArchive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPP10ZipArchive"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "CloseArchive",
+   "linker_set_key" : "_Z12CloseArchiveP10ZipArchive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "EndIteration",
+   "linker_set_key" : "_Z12EndIterationPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "OpenArchiveFd",
+   "linker_set_key" : "_Z13OpenArchiveFdiPKcPP10ZipArchiveb",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPP10ZipArchive"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "GetArchiveInfo",
+   "linker_set_key" : "_Z14GetArchiveInfoP10ZipArchive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    }
+   ],
+   "return_type" : "_ZTI14ZipArchiveInfo",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "StartIteration",
+   "linker_set_key" : "_Z14StartIterationP10ZipArchivePPvNSt3__117basic_string_viewIcNS3_11char_traitsIcEEEES7_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIPPv"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIKNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIKNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "ErrorCodeString",
+   "linker_set_key" : "_Z15ErrorCodeStringi",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "ExtractToMemory",
+   "linker_set_key" : "_Z15ExtractToMemoryP10ZipArchiveP8ZipEntryPhj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIP8ZipEntry"
+    },
+    {
+     "referenced_type" : "_ZTIPh"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "GetFileDescriptor",
+   "linker_set_key" : "_Z17GetFileDescriptorP10ZipArchive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKP10ZipArchive"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "ExtractEntryToFile",
+   "linker_set_key" : "_Z18ExtractEntryToFileP10ZipArchiveP8ZipEntryi",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIP8ZipEntry"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "OpenArchiveFdRange",
+   "linker_set_key" : "_Z18OpenArchiveFdRangeiPKcPP10ZipArchivellb",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKi"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "OpenArchiveFromMemory",
+   "linker_set_key" : "_Z21OpenArchiveFromMemoryPKvmPKcPP10ZipArchive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPP10ZipArchive"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "GetFileDescriptorOffset",
+   "linker_set_key" : "_Z23GetFileDescriptorOffsetP10ZipArchive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKP10ZipArchive"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "ProcessZipEntryContents",
+   "linker_set_key" : "_Z23ProcessZipEntryContentsP10ZipArchiveP8ZipEntryPFbPKhmPvES5_",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIP8ZipEntry"
+    },
+    {
+     "referenced_type" : "_ZTIPFbPKhmPvE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "Next",
+   "linker_set_key" : "_Z4NextPvP8ZipEntryPNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIP8ZipEntry"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "Next",
+   "linker_set_key" : "_Z4NextPvP8ZipEntryPNSt3__117basic_string_viewIcNS2_11char_traitsIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIP8ZipEntry"
+    },
+    {
+     "referenced_type" : "_ZTIPNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "FindEntry",
+   "linker_set_key" : "_Z9FindEntryP10ZipArchiveNSt3__117basic_string_viewIcNS1_11char_traitsIcEEEEP8ZipEntry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIKP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIKNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIP8ZipEntry"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Reader::~Reader",
+   "linker_set_key" : "_ZN11zip_archive6ReaderD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN11zip_archive6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Reader::~Reader",
+   "linker_set_key" : "_ZN11zip_archive6ReaderD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN11zip_archive6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Reader::~Reader",
+   "linker_set_key" : "_ZN11zip_archive6ReaderD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN11zip_archive6ReaderE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Writer::~Writer",
+   "linker_set_key" : "_ZN11zip_archive6WriterD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN11zip_archive6WriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Writer::~Writer",
+   "linker_set_key" : "_ZN11zip_archive6WriterD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN11zip_archive6WriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Writer::~Writer",
+   "linker_set_key" : "_ZN11zip_archive6WriterD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN11zip_archive6WriterE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "function_name" : "zip_archive::Inflate",
+   "linker_set_key" : "_ZN11zip_archive7InflateERKNS_6ReaderEjjPNS_6WriterEPm",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIRKN11zip_archive6ReaderE"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIKj"
+    },
+    {
+     "referenced_type" : "_ZTIPN11zip_archive6WriterE"
+    },
+    {
+     "referenced_type" : "_ZTIPm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "ZipArchiveStreamEntry::Init",
+   "linker_set_key" : "_ZN21ZipArchiveStreamEntry4InitERK8ZipEntry",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP21ZipArchiveStreamEntry"
+    },
+    {
+     "referenced_type" : "_ZTIRK8ZipEntry"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive_stream_entry.h"
+  },
+  {
+   "function_name" : "ZipArchiveStreamEntry::Create",
+   "linker_set_key" : "_ZN21ZipArchiveStreamEntry6CreateEP10ZipArchiveRK8ZipEntry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIRK8ZipEntry"
+    }
+   ],
+   "return_type" : "_ZTIP21ZipArchiveStreamEntry",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive_stream_entry.h"
+  },
+  {
+   "function_name" : "ZipArchiveStreamEntry::CreateRaw",
+   "linker_set_key" : "_ZN21ZipArchiveStreamEntry9CreateRawEP10ZipArchiveRK8ZipEntry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "referenced_type" : "_ZTIRK8ZipEntry"
+    }
+   ],
+   "return_type" : "_ZTIP21ZipArchiveStreamEntry",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive_stream_entry.h"
+  },
+  {
+   "function_name" : "ZipWriter::StartEntry",
+   "linker_set_key" : "_ZN9ZipWriter10StartEntryENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTINSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "ZipWriter::StoreBytes",
+   "linker_set_key" : "_ZN9ZipWriter10StoreBytesEPNS_9FileEntryEPKvj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIPN9ZipWriter9FileEntryE"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::WriteBytes",
+   "linker_set_key" : "_ZN9ZipWriter10WriteBytesEPKvm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::FinishEntry",
+   "linker_set_key" : "_ZN9ZipWriter11FinishEntryEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "ZipWriter::HandleError",
+   "linker_set_key" : "_ZN9ZipWriter11HandleErrorEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::GetLastEntry",
+   "linker_set_key" : "_ZN9ZipWriter12GetLastEntryEPNS_9FileEntryE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIPN9ZipWriter9FileEntryE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "ZipWriter::CompressBytes",
+   "linker_set_key" : "_ZN9ZipWriter13CompressBytesEPNS_9FileEntryEPKvj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIPN9ZipWriter9FileEntryE"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "ZipWriter::PrepareDeflate",
+   "linker_set_key" : "_ZN9ZipWriter14PrepareDeflateEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::ErrorCodeString",
+   "linker_set_key" : "_ZN9ZipWriter15ErrorCodeStringEi",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::DiscardLastEntry",
+   "linker_set_key" : "_ZN9ZipWriter16DiscardLastEntryEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::StartAlignedEntry",
+   "linker_set_key" : "_ZN9ZipWriter17StartAlignedEntryENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEmj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTINSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::StartEntryWithTime",
+   "linker_set_key" : "_ZN9ZipWriter18StartEntryWithTimeENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEml",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTINSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "ZipWriter::FlushCompressedBytes",
+   "linker_set_key" : "_ZN9ZipWriter20FlushCompressedBytesEPNS_9FileEntryE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIPN9ZipWriter9FileEntryE"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::StartAlignedEntryWithTime",
+   "linker_set_key" : "_ZN9ZipWriter25StartAlignedEntryWithTimeENSt3__117basic_string_viewIcNS0_11char_traitsIcEEEEmlj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTINSt3__117basic_string_viewIcNS_11char_traitsIcEEEE"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::Finish",
+   "linker_set_key" : "_ZN9ZipWriter6FinishEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::ZipWriter",
+   "linker_set_key" : "_ZN9ZipWriterC1EOS_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIO9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::ZipWriter",
+   "linker_set_key" : "_ZN9ZipWriterC1EP7__sFILE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIP7__sFILE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::ZipWriter",
+   "linker_set_key" : "_ZN9ZipWriterC2EOS_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIO9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::ZipWriter",
+   "linker_set_key" : "_ZN9ZipWriterC2EP7__sFILE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIP7__sFILE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipWriter::operator=",
+   "linker_set_key" : "_ZN9ZipWriteraSEOS_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIP9ZipWriter"
+    },
+    {
+     "referenced_type" : "_ZTIO9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIR9ZipWriter",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "function_name" : "ZipEntry::GetModificationTime",
+   "linker_set_key" : "_ZNK8ZipEntry19GetModificationTimeEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPK8ZipEntry"
+    }
+   ],
+   "return_type" : "_ZTI2tm",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "ZipWriter::ShouldUseDataDescriptor",
+   "linker_set_key" : "_ZNK9ZipWriter23ShouldUseDataDescriptorEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPK9ZipWriter"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIR9ZipWriter",
+   "name" : "ZipWriter &",
+   "referenced_type" : "_ZTI9ZipWriter",
+   "self_type" : "_ZTIR9ZipWriter",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRK8ZipEntry",
+   "name" : "const ZipEntry &",
+   "referenced_type" : "_ZTIK8ZipEntry",
+   "self_type" : "_ZTIRK8ZipEntry",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive_stream_entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRKN11zip_archive6ReaderE",
+   "name" : "const zip_archive::Reader &",
+   "referenced_type" : "_ZTIKN11zip_archive6ReaderE",
+   "self_type" : "_ZTIRKN11zip_archive6ReaderE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "name" : "std::basic_ostream<char, std::char_traits<char> > &",
+   "referenced_type" : "_ZTINSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIRNSt3__113basic_ostreamIcNS_11char_traitsIcEEEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP10ZipArchive",
+   "name" : "ZipArchive *",
+   "referenced_type" : "_ZTI10ZipArchive",
+   "self_type" : "_ZTIP10ZipArchive",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP12TemporaryDir",
+   "name" : "TemporaryDir *",
+   "referenced_type" : "_ZTI12TemporaryDir",
+   "self_type" : "_ZTIP12TemporaryDir",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/file.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13TemporaryFile",
+   "name" : "TemporaryFile *",
+   "referenced_type" : "_ZTI13TemporaryFile",
+   "self_type" : "_ZTIP13TemporaryFile",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/file.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP21ZipArchiveStreamEntry",
+   "name" : "ZipArchiveStreamEntry *",
+   "referenced_type" : "_ZTI21ZipArchiveStreamEntry",
+   "self_type" : "_ZTIP21ZipArchiveStreamEntry",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive_stream_entry.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP3DIR",
+   "name" : "DIR *",
+   "referenced_type" : "_ZTI3DIR",
+   "self_type" : "_ZTIP3DIR",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP7__sFILE",
+   "name" : "__sFILE *",
+   "referenced_type" : "_ZTI7__sFILE",
+   "self_type" : "_ZTIP7__sFILE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP8ZipEntry",
+   "name" : "ZipEntry *",
+   "referenced_type" : "_ZTI8ZipEntry",
+   "self_type" : "_ZTIP8ZipEntry",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP9ZipWriter",
+   "name" : "ZipWriter *",
+   "referenced_type" : "_ZTI9ZipWriter",
+   "self_type" : "_ZTIP9ZipWriter",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFbPKhmPvE",
+   "name" : "bool (*)(const unsigned char *, unsigned long, void *)",
+   "referenced_type" : "_ZTIFbPKhmPvE",
+   "self_type" : "_ZTIPFbPKhmPvE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK8ZipEntry",
+   "name" : "const ZipEntry *",
+   "referenced_type" : "_ZTIK8ZipEntry",
+   "self_type" : "_ZTIPK8ZipEntry",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK9ZipWriter",
+   "name" : "const ZipWriter *",
+   "referenced_type" : "_ZTIK9ZipWriter",
+   "self_type" : "_ZTIPK9ZipWriter",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN7android4base10MappedFileE",
+   "name" : "const android::base::MappedFile *",
+   "referenced_type" : "_ZTIKN7android4base10MappedFileE",
+   "self_type" : "_ZTIPKN7android4base10MappedFileE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/mapped_file.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN7android4base11borrowed_fdE",
+   "name" : "const android::base::borrowed_fd *",
+   "referenced_type" : "_ZTIKN7android4base11borrowed_fdE",
+   "self_type" : "_ZTIPKN7android4base11borrowed_fdE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN7android4base13ErrnoRestorerE",
+   "name" : "const android::base::ErrnoRestorer *",
+   "referenced_type" : "_ZTIKN7android4base13ErrnoRestorerE",
+   "self_type" : "_ZTIPKN7android4base13ErrnoRestorerE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/errno_restorer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> > *",
+   "referenced_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIPKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKa",
+   "name" : "const signed char *",
+   "referenced_type" : "_ZTIKa",
+   "self_type" : "_ZTIPKa",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN11zip_archive6ReaderE",
+   "name" : "zip_archive::Reader *",
+   "referenced_type" : "_ZTIN11zip_archive6ReaderE",
+   "self_type" : "_ZTIPN11zip_archive6ReaderE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN11zip_archive6WriterE",
+   "name" : "zip_archive::Writer *",
+   "referenced_type" : "_ZTIN11zip_archive6WriterE",
+   "self_type" : "_ZTIPN11zip_archive6WriterE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base10MappedFileE",
+   "name" : "android::base::MappedFile *",
+   "referenced_type" : "_ZTIN7android4base10MappedFileE",
+   "self_type" : "_ZTIPN7android4base10MappedFileE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/mapped_file.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base11borrowed_fdE",
+   "name" : "android::base::borrowed_fd *",
+   "referenced_type" : "_ZTIN7android4base11borrowed_fdE",
+   "self_type" : "_ZTIPN7android4base11borrowed_fdE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base13ErrnoRestorerE",
+   "name" : "android::base::ErrnoRestorer *",
+   "referenced_type" : "_ZTIN7android4base13ErrnoRestorerE",
+   "self_type" : "_ZTIPN7android4base13ErrnoRestorerE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/errno_restorer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPKaPaEE",
+   "name" : "android::base::EagerEvaluator<const signed char *, signed char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKaPaEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPKaPaEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPKaS3_EE",
+   "name" : "android::base::EagerEvaluator<const signed char *, const signed char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKaS3_EE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPKaS3_EE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPKcPcEE",
+   "name" : "android::base::EagerEvaluator<const char *, char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKcPcEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPKcPcEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPKcS3_EE",
+   "name" : "android::base::EagerEvaluator<const char *, const char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKcS3_EE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPKcS3_EE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPKhPhEE",
+   "name" : "android::base::EagerEvaluator<const unsigned char *, unsigned char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKhPhEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPKhPhEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPKhS3_EE",
+   "name" : "android::base::EagerEvaluator<const unsigned char *, const unsigned char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKhS3_EE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPKhS3_EE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPaPKaEE",
+   "name" : "android::base::EagerEvaluator<signed char *, const signed char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPaPKaEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPaPKaEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPaS2_EE",
+   "name" : "android::base::EagerEvaluator<signed char *, signed char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPaS2_EE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPaS2_EE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPcPKcEE",
+   "name" : "android::base::EagerEvaluator<char *, const char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPcPKcEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPcPKcEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPcS2_EE",
+   "name" : "android::base::EagerEvaluator<char *, char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPcS2_EE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPcS2_EE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPhPKhEE",
+   "name" : "android::base::EagerEvaluator<unsigned char *, const unsigned char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPhPKhEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPhPKhEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIPhS2_EE",
+   "name" : "android::base::EagerEvaluator<unsigned char *, unsigned char *> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPhS2_EE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIPhS2_EE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIiiEE",
+   "name" : "android::base::EagerEvaluator<int, int> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIiiEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIiiEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIjiEE",
+   "name" : "android::base::EagerEvaluator<unsigned int, int> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIjiEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIjiEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorIljEE",
+   "name" : "android::base::EagerEvaluator<long, unsigned int> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIljEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorIljEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorImjEE",
+   "name" : "android::base::EagerEvaluator<unsigned long, unsigned int> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorImjEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorImjEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorImmEE",
+   "name" : "android::base::EagerEvaluator<unsigned long, unsigned long> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorImmEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorImmEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14EagerEvaluatorImtEE",
+   "name" : "android::base::EagerEvaluator<unsigned long, unsigned short> *",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorImtEE",
+   "self_type" : "_ZTIPN7android4base14EagerEvaluatorImtEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "name" : "android::base::unique_fd_impl<android::base::DefaultCloser> *",
+   "referenced_type" : "_ZTIN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "self_type" : "_ZTIPN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN9ZipWriter9FileEntryE",
+   "name" : "ZipWriter::FileEntry *",
+   "referenced_type" : "_ZTIN9ZipWriter9FileEntryE",
+   "self_type" : "_ZTIPN9ZipWriter9FileEntryE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "std::basic_string<char, std::char_traits<char>, std::allocator<char> > *",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIPNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE",
+   "name" : "std::basic_string_view<char, std::char_traits<char> > *",
+   "referenced_type" : "_ZTINSt3__117basic_string_viewIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIPNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP10ZipArchive",
+   "name" : "ZipArchive **",
+   "referenced_type" : "_ZTIP10ZipArchive",
+   "self_type" : "_ZTIPP10ZipArchive",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPv",
+   "name" : "void **",
+   "referenced_type" : "_ZTIPv",
+   "self_type" : "_ZTIPPv",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPa",
+   "name" : "signed char *",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIPa",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPm",
+   "name" : "unsigned long *",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIPm",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK8ZipEntry",
+   "name" : "const ZipEntry",
+   "referenced_type" : "_ZTI8ZipEntry",
+   "self_type" : "_ZTIK8ZipEntry",
+   "size" : 56,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK9ZipWriter",
+   "name" : "const ZipWriter",
+   "referenced_type" : "_ZTI9ZipWriter",
+   "self_type" : "_ZTIK9ZipWriter",
+   "size" : 152,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN11zip_archive6ReaderE",
+   "name" : "const zip_archive::Reader",
+   "referenced_type" : "_ZTIN11zip_archive6ReaderE",
+   "self_type" : "_ZTIKN11zip_archive6ReaderE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN7android4base10MappedFileE",
+   "name" : "const android::base::MappedFile",
+   "referenced_type" : "_ZTIN7android4base10MappedFileE",
+   "self_type" : "_ZTIKN7android4base10MappedFileE",
+   "size" : 24,
+   "source_file" : "/system/core/base/include/android-base/mapped_file.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN7android4base11borrowed_fdE",
+   "name" : "const android::base::borrowed_fd",
+   "referenced_type" : "_ZTIN7android4base11borrowed_fdE",
+   "self_type" : "_ZTIKN7android4base11borrowed_fdE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN7android4base13ErrnoRestorerE",
+   "name" : "const android::base::ErrnoRestorer",
+   "referenced_type" : "_ZTIN7android4base13ErrnoRestorerE",
+   "self_type" : "_ZTIKN7android4base13ErrnoRestorerE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/errno_restorer.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__110unique_ptrIN7android4base14LogMessageDataENS_14default_deleteIS3_EEEE",
+   "name" : "const std::unique_ptr<android::base::LogMessageData, std::default_delete<android::base::LogMessageData> >",
+   "referenced_type" : "_ZTINSt3__110unique_ptrIN7android4base14LogMessageDataENS_14default_deleteIS3_EEEE",
+   "self_type" : "_ZTIKNSt3__110unique_ptrIN7android4base14LogMessageDataENS_14default_deleteIS3_EEEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "name" : "const std::basic_string<char, std::char_traits<char>, std::allocator<char> >",
+   "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "self_type" : "_ZTIKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE",
+   "size" : 24,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE",
+   "name" : "const std::basic_string_view<char, std::char_traits<char> >",
+   "referenced_type" : "_ZTINSt3__117basic_string_viewIcNS_11char_traitsIcEEEE",
+   "self_type" : "_ZTIKNSt3__117basic_string_viewIcNS_11char_traitsIcEEEE",
+   "size" : 16,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKP10ZipArchive",
+   "name" : "ZipArchive *const",
+   "referenced_type" : "_ZTIP10ZipArchive",
+   "self_type" : "_ZTIKP10ZipArchive",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKa",
+   "name" : "const signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIKa",
+   "size" : 1,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKb",
+   "name" : "const bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIKb",
+   "size" : 1,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "path",
+     "referenced_type" : "_ZTIA1024_c"
+    },
+    {
+     "access" : "private",
+     "field_name" : "remove_dir_and_contents_",
+     "field_offset" : 8192,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI12TemporaryDir",
+   "name" : "TemporaryDir",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI12TemporaryDir",
+   "self_type" : "_ZTI12TemporaryDir",
+   "size" : 1025,
+   "source_file" : "/system/core/base/include/android-base/file.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fd",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "path",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIA1024_c"
+    },
+    {
+     "access" : "private",
+     "field_name" : "remove_file_",
+     "field_offset" : 8224,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI13TemporaryFile",
+   "name" : "TemporaryFile",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI13TemporaryFile",
+   "self_type" : "_ZTI13TemporaryFile",
+   "size" : 1032,
+   "source_file" : "/system/core/base/include/android-base/file.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "archive_size",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "entry_count",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI14ZipArchiveInfo",
+   "name" : "ZipArchiveInfo",
+   "referenced_type" : "_ZTI14ZipArchiveInfo",
+   "self_type" : "_ZTI14ZipArchiveInfo",
+   "size" : 16,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "protected",
+     "field_name" : "handle_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP10ZipArchive"
+    },
+    {
+     "access" : "protected",
+     "field_name" : "offset_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "access" : "protected",
+     "field_name" : "crc32_",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI21ZipArchiveStreamEntry",
+   "name" : "ZipArchiveStreamEntry",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI21ZipArchiveStreamEntry",
+   "self_type" : "_ZTI21ZipArchiveStreamEntry",
+   "size" : 32,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive_stream_entry.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI21ZipArchiveStreamEntry"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN21ZipArchiveStreamEntryD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN21ZipArchiveStreamEntryD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN21ZipArchiveStreamEntry4ReadEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN21ZipArchiveStreamEntry6VerifyEv"
+    },
+    {
+     "mangled_component_name" : "_ZN21ZipArchiveStreamEntry4InitERK8ZipEntry"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "method",
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "mod_time",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "unix_mode",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "has_data_descriptor",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "crc32",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "compressed_length",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "uncompressed_length",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "version_made_by",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "external_file_attributes",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "gpbf",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "is_text",
+     "field_offset" : 400,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI8ZipEntry",
+   "name" : "ZipEntry",
+   "referenced_type" : "_ZTI8ZipEntry",
+   "self_type" : "_ZTI8ZipEntry",
+   "size" : 56,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "file_",
+     "referenced_type" : "_ZTIP7__sFILE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "seekable_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "current_offset_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "access" : "private",
+     "field_name" : "state_",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIN9ZipWriter5StateE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "files_",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTINSt3__16vectorIN9ZipWriter9FileEntryENS_9allocatorIS2_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "current_file_entry_",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIN9ZipWriter9FileEntryE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "z_stream_",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTINSt3__110unique_ptrI10z_stream_sPFvPS1_EEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "buffer_",
+     "field_offset" : 1024,
+     "referenced_type" : "_ZTINSt3__16vectorIhNS_9allocatorIhEEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTI9ZipWriter",
+   "name" : "ZipWriter",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI9ZipWriter",
+   "self_type" : "_ZTI9ZipWriter",
+   "size" : 152,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIN11zip_archive6ReaderE",
+   "name" : "zip_archive::Reader",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN11zip_archive6ReaderE",
+   "self_type" : "_ZTIN11zip_archive6ReaderE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN11zip_archive6ReaderE"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZNK11zip_archive6Reader12ReadAtOffsetEPhmj"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN11zip_archive6ReaderD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN11zip_archive6ReaderD0Ev"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIN11zip_archive6WriterE",
+   "name" : "zip_archive::Writer",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN11zip_archive6WriterE",
+   "self_type" : "_ZTIN11zip_archive6WriterE",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_archive.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN11zip_archive6WriterE"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN11zip_archive6Writer6AppendEPhm"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN11zip_archive6WriterD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN11zip_archive6WriterD0Ev"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "data_",
+     "referenced_type" : "_ZTIKNSt3__110unique_ptrIN7android4base14LogMessageDataENS_14default_deleteIS3_EEEE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base10LogMessageE",
+   "name" : "android::base::LogMessage",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android4base10LogMessageE",
+   "self_type" : "_ZTIN7android4base10LogMessageE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "default_log_id_",
+     "referenced_type" : "_ZTIN7android4base5LogIdE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base10LogdLoggerE",
+   "name" : "android::base::LogdLogger",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android4base10LogdLoggerE",
+   "self_type" : "_ZTIN7android4base10LogdLoggerE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "base_",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "size_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "offset_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base10MappedFileE",
+   "name" : "android::base::MappedFile",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android4base10MappedFileE",
+   "self_type" : "_ZTIN7android4base10MappedFileE",
+   "size" : 24,
+   "source_file" : "/system/core/base/include/android-base/mapped_file.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "fd_",
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base11borrowed_fdE",
+   "name" : "android::base::borrowed_fd",
+   "referenced_type" : "_ZTIN7android4base11borrowed_fdE",
+   "self_type" : "_ZTIN7android4base11borrowed_fdE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIN7android4base13DefaultCloserE",
+   "name" : "android::base::DefaultCloser",
+   "referenced_type" : "_ZTIN7android4base13DefaultCloserE",
+   "self_type" : "_ZTIN7android4base13DefaultCloserE",
+   "size" : 1,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "saved_errno_",
+     "referenced_type" : "_ZTIKi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base13ErrnoRestorerE",
+   "name" : "android::base::ErrnoRestorer",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android4base13ErrnoRestorerE",
+   "self_type" : "_ZTIN7android4base13ErrnoRestorerE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/errno_restorer.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPKaPaEE",
+   "name" : "android::base::EagerEvaluator<const signed char *, signed char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKaPaEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPKaPaEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPKa", "_ZTIPa" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPKaS3_EE",
+   "name" : "android::base::EagerEvaluator<const signed char *, const signed char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKaS3_EE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPKaS3_EE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPKa", "_ZTIPKa" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPKcPcEE",
+   "name" : "android::base::EagerEvaluator<const char *, char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKcPcEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPKcPcEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPKc", "_ZTIPc" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPKcS3_EE",
+   "name" : "android::base::EagerEvaluator<const char *, const char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKcS3_EE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPKcS3_EE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPKc", "_ZTIPKc" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPKhPhEE",
+   "name" : "android::base::EagerEvaluator<const unsigned char *, unsigned char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKhPhEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPKhPhEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPKh", "_ZTIPh" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPKhS3_EE",
+   "name" : "android::base::EagerEvaluator<const unsigned char *, const unsigned char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPKhS3_EE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPKhS3_EE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPKh", "_ZTIPKh" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPaPKaEE",
+   "name" : "android::base::EagerEvaluator<signed char *, const signed char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPaPKaEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPaPKaEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPa", "_ZTIPKa" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPaS2_EE",
+   "name" : "android::base::EagerEvaluator<signed char *, signed char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPaS2_EE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPaS2_EE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPa", "_ZTIPa" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPcPKcEE",
+   "name" : "android::base::EagerEvaluator<char *, const char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPcPKcEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPcPKcEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPc", "_ZTIPKc" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPcS2_EE",
+   "name" : "android::base::EagerEvaluator<char *, char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPcS2_EE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPcS2_EE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPc", "_ZTIPc" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPhPKhEE",
+   "name" : "android::base::EagerEvaluator<unsigned char *, const unsigned char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPhPKhEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPhPKhEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPh", "_ZTIPKh" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKv"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIPhS2_EE",
+   "name" : "android::base::EagerEvaluator<unsigned char *, unsigned char *>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIPhS2_EE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIPhS2_EE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIPh", "_ZTIPh" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIiiEE",
+   "name" : "android::base::EagerEvaluator<int, int>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIiiEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIiiEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIi", "_ZTIi" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIjiEE",
+   "name" : "android::base::EagerEvaluator<unsigned int, int>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIjiEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIjiEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIj", "_ZTIi" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorIljEE",
+   "name" : "android::base::EagerEvaluator<long, unsigned int>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorIljEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorIljEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIl", "_ZTIj" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorImjEE",
+   "name" : "android::base::EagerEvaluator<unsigned long, unsigned int>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorImjEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorImjEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIm", "_ZTIj" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorImmEE",
+   "name" : "android::base::EagerEvaluator<unsigned long, unsigned long>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorImmEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorImmEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIm", "_ZTIm" ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "lhs",
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "field_name" : "rhs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIt"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14EagerEvaluatorImtEE",
+   "name" : "android::base::EagerEvaluator<unsigned long, unsigned short>",
+   "referenced_type" : "_ZTIN7android4base14EagerEvaluatorImtEE",
+   "self_type" : "_ZTIN7android4base14EagerEvaluatorImtEE",
+   "size" : 16,
+   "source_file" : "/system/core/base/include/android-base/logging.h",
+   "template_args" : [ "_ZTIm", "_ZTIt" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "fd_",
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "name" : "android::base::unique_fd_impl<android::base::DefaultCloser>",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "self_type" : "_ZTIN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h",
+   "template_args" : [ "_ZTIN7android4base13DefaultCloserE" ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "old_",
+     "referenced_type" : "_ZTIN7android4base11LogSeverityE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN7android4base17ScopedLogSeverityE",
+   "name" : "android::base::ScopedLogSeverity",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN7android4base17ScopedLogSeverityE",
+   "self_type" : "_ZTIN7android4base17ScopedLogSeverityE",
+   "size" : 4,
+   "source_file" : "/system/core/base/include/android-base/logging.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "path",
+     "referenced_type" : "_ZTINSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+    },
+    {
+     "field_name" : "compression_method",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "crc32",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "compressed_size",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "uncompressed_size",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "last_mod_time",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "last_mod_date",
+     "field_offset" : 336,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "padding_length",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "local_file_header_offset",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "linker_set_key" : "_ZTIN9ZipWriter9FileEntryE",
+   "name" : "ZipWriter::FileEntry",
+   "referenced_type" : "_ZTIN9ZipWriter9FileEntryE",
+   "self_type" : "_ZTIN9ZipWriter9FileEntryE",
+   "size" : 56,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  }
+ ],
+ "rvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIO9ZipWriter",
+   "name" : "ZipWriter &&",
+   "referenced_type" : "_ZTI9ZipWriter",
+   "self_type" : "_ZTIO9ZipWriter",
+   "size" : 8,
+   "source_file" : "/system/core/libziparchive/include/ziparchive/zip_writer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTION7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "name" : "android::base::unique_fd_impl<android::base::DefaultCloser> &&",
+   "referenced_type" : "_ZTIN7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "self_type" : "_ZTION7android4base14unique_fd_implINS0_13DefaultCloserEEE",
+   "size" : 8,
+   "source_file" : "/system/core/base/include/android-base/unique_fd.h"
+  }
+ ]
+}

@@ -1,0 +1,679 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "speex_resampler_destroy"
+  },
+  {
+   "name" : "speex_resampler_get_input_latency"
+  },
+  {
+   "name" : "speex_resampler_get_input_stride"
+  },
+  {
+   "name" : "speex_resampler_get_output_latency"
+  },
+  {
+   "name" : "speex_resampler_get_output_stride"
+  },
+  {
+   "name" : "speex_resampler_get_quality"
+  },
+  {
+   "name" : "speex_resampler_get_rate"
+  },
+  {
+   "name" : "speex_resampler_get_ratio"
+  },
+  {
+   "name" : "speex_resampler_init"
+  },
+  {
+   "name" : "speex_resampler_init_frac"
+  },
+  {
+   "name" : "speex_resampler_process_float"
+  },
+  {
+   "name" : "speex_resampler_process_int"
+  },
+  {
+   "name" : "speex_resampler_process_interleaved_float"
+  },
+  {
+   "name" : "speex_resampler_process_interleaved_int"
+  },
+  {
+   "name" : "speex_resampler_reset_mem"
+  },
+  {
+   "name" : "speex_resampler_set_input_stride"
+  },
+  {
+   "name" : "speex_resampler_set_output_stride"
+  },
+  {
+   "name" : "speex_resampler_set_quality"
+  },
+  {
+   "name" : "speex_resampler_set_rate"
+  },
+  {
+   "name" : "speex_resampler_set_rate_frac"
+  },
+  {
+   "name" : "speex_resampler_skip_zeros"
+  },
+  {
+   "name" : "speex_resampler_strerror"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "RESAMPLER_ERR_SUCCESS"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "RESAMPLER_ERR_ALLOC_FAILED"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "RESAMPLER_ERR_BAD_STATE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "RESAMPLER_ERR_INVALID_ARG"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "RESAMPLER_ERR_PTR_OVERLAP"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "RESAMPLER_ERR_MAX_ERROR"
+    }
+   ],
+   "linker_set_key" : "_ZTI27$RESAMPLER_ERR_ALLOC_FAILED",
+   "name" : "(anonymous enum at external/speex/include/speex/speex_resampler.h:101:1)",
+   "referenced_type" : "_ZTI27$RESAMPLER_ERR_ALLOC_FAILED",
+   "self_type" : "_ZTI27$RESAMPLER_ERR_ALLOC_FAILED",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "speex_resampler_destroy",
+   "linker_set_key" : "speex_resampler_destroy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_input_latency",
+   "linker_set_key" : "speex_resampler_get_input_latency",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_input_stride",
+   "linker_set_key" : "speex_resampler_get_input_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_output_latency",
+   "linker_set_key" : "speex_resampler_get_output_latency",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_output_stride",
+   "linker_set_key" : "speex_resampler_get_output_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_quality",
+   "linker_set_key" : "speex_resampler_get_quality",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_rate",
+   "linker_set_key" : "speex_resampler_get_rate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_get_ratio",
+   "linker_set_key" : "speex_resampler_get_ratio",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_init",
+   "linker_set_key" : "speex_resampler_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIP20SpeexResamplerState_",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_init_frac",
+   "linker_set_key" : "speex_resampler_init_frac",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIP20SpeexResamplerState_",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_float",
+   "linker_set_key" : "speex_resampler_process_float",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKf"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPf"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_int",
+   "linker_set_key" : "speex_resampler_process_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKs"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPs"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_interleaved_float",
+   "linker_set_key" : "speex_resampler_process_interleaved_float",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPKf"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPf"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_process_interleaved_int",
+   "linker_set_key" : "speex_resampler_process_interleaved_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIPKs"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPs"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_reset_mem",
+   "linker_set_key" : "speex_resampler_reset_mem",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_input_stride",
+   "linker_set_key" : "speex_resampler_set_input_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_output_stride",
+   "linker_set_key" : "speex_resampler_set_output_stride",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_quality",
+   "linker_set_key" : "speex_resampler_set_quality",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_rate",
+   "linker_set_key" : "speex_resampler_set_rate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_set_rate_frac",
+   "linker_set_key" : "speex_resampler_set_rate_frac",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_skip_zeros",
+   "linker_set_key" : "speex_resampler_skip_zeros",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP20SpeexResamplerState_"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "function_name" : "speex_resampler_strerror",
+   "linker_set_key" : "speex_resampler_strerror",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP20SpeexResamplerState_",
+   "name" : "SpeexResamplerState_ *",
+   "referenced_type" : "_ZTI20SpeexResamplerState_",
+   "self_type" : "_ZTIP20SpeexResamplerState_",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKf",
+   "name" : "const float *",
+   "referenced_type" : "_ZTIKf",
+   "self_type" : "_ZTIPKf",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKs",
+   "name" : "const short *",
+   "referenced_type" : "_ZTIKs",
+   "self_type" : "_ZTIPKs",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPf",
+   "name" : "float *",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIPf",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPs",
+   "name" : "short *",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIPs",
+   "size" : 8,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKf",
+   "name" : "const float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIKf",
+   "size" : 4,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKs",
+   "name" : "const short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIKs",
+   "size" : 2,
+   "source_file" : "/external/speex/include/speex/speex_resampler.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

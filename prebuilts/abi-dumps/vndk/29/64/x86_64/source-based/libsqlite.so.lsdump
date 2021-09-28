@@ -1,0 +1,811 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android26phone_number_compare_looseEPKcS1_"
+  },
+  {
+   "name" : "_ZN7android27phone_number_compare_strictEPKcS1_"
+  },
+  {
+   "name" : "_ZN7android36phone_number_stripped_reversed_interEPKcPciPi"
+  },
+  {
+   "name" : "__addtf3"
+  },
+  {
+   "name" : "__divtf3"
+  },
+  {
+   "name" : "__fe_getround"
+  },
+  {
+   "name" : "__fe_raise_inexact"
+  },
+  {
+   "name" : "__multf3"
+  },
+  {
+   "name" : "__subtf3"
+  },
+  {
+   "name" : "register_android_functions"
+  },
+  {
+   "name" : "register_localized_collators"
+  },
+  {
+   "name" : "sqlite3_aggregate_context"
+  },
+  {
+   "name" : "sqlite3_aggregate_count"
+  },
+  {
+   "name" : "sqlite3_auto_extension"
+  },
+  {
+   "name" : "sqlite3_backup_finish"
+  },
+  {
+   "name" : "sqlite3_backup_init"
+  },
+  {
+   "name" : "sqlite3_backup_pagecount"
+  },
+  {
+   "name" : "sqlite3_backup_remaining"
+  },
+  {
+   "name" : "sqlite3_backup_step"
+  },
+  {
+   "name" : "sqlite3_bind_blob"
+  },
+  {
+   "name" : "sqlite3_bind_blob64"
+  },
+  {
+   "name" : "sqlite3_bind_double"
+  },
+  {
+   "name" : "sqlite3_bind_int"
+  },
+  {
+   "name" : "sqlite3_bind_int64"
+  },
+  {
+   "name" : "sqlite3_bind_null"
+  },
+  {
+   "name" : "sqlite3_bind_parameter_count"
+  },
+  {
+   "name" : "sqlite3_bind_parameter_index"
+  },
+  {
+   "name" : "sqlite3_bind_parameter_name"
+  },
+  {
+   "name" : "sqlite3_bind_pointer"
+  },
+  {
+   "name" : "sqlite3_bind_text"
+  },
+  {
+   "name" : "sqlite3_bind_text16"
+  },
+  {
+   "name" : "sqlite3_bind_text64"
+  },
+  {
+   "name" : "sqlite3_bind_value"
+  },
+  {
+   "name" : "sqlite3_bind_zeroblob"
+  },
+  {
+   "name" : "sqlite3_bind_zeroblob64"
+  },
+  {
+   "name" : "sqlite3_blob_bytes"
+  },
+  {
+   "name" : "sqlite3_blob_close"
+  },
+  {
+   "name" : "sqlite3_blob_open"
+  },
+  {
+   "name" : "sqlite3_blob_read"
+  },
+  {
+   "name" : "sqlite3_blob_reopen"
+  },
+  {
+   "name" : "sqlite3_blob_write"
+  },
+  {
+   "name" : "sqlite3_busy_handler"
+  },
+  {
+   "name" : "sqlite3_busy_timeout"
+  },
+  {
+   "name" : "sqlite3_cancel_auto_extension"
+  },
+  {
+   "name" : "sqlite3_changes"
+  },
+  {
+   "name" : "sqlite3_clear_bindings"
+  },
+  {
+   "name" : "sqlite3_close"
+  },
+  {
+   "name" : "sqlite3_close_v2"
+  },
+  {
+   "name" : "sqlite3_collation_needed"
+  },
+  {
+   "name" : "sqlite3_collation_needed16"
+  },
+  {
+   "name" : "sqlite3_column_blob"
+  },
+  {
+   "name" : "sqlite3_column_bytes"
+  },
+  {
+   "name" : "sqlite3_column_bytes16"
+  },
+  {
+   "name" : "sqlite3_column_count"
+  },
+  {
+   "name" : "sqlite3_column_decltype"
+  },
+  {
+   "name" : "sqlite3_column_decltype16"
+  },
+  {
+   "name" : "sqlite3_column_double"
+  },
+  {
+   "name" : "sqlite3_column_int"
+  },
+  {
+   "name" : "sqlite3_column_int64"
+  },
+  {
+   "name" : "sqlite3_column_name"
+  },
+  {
+   "name" : "sqlite3_column_name16"
+  },
+  {
+   "name" : "sqlite3_column_text"
+  },
+  {
+   "name" : "sqlite3_column_text16"
+  },
+  {
+   "name" : "sqlite3_column_type"
+  },
+  {
+   "name" : "sqlite3_column_value"
+  },
+  {
+   "name" : "sqlite3_commit_hook"
+  },
+  {
+   "name" : "sqlite3_complete"
+  },
+  {
+   "name" : "sqlite3_complete16"
+  },
+  {
+   "name" : "sqlite3_config"
+  },
+  {
+   "name" : "sqlite3_context_db_handle"
+  },
+  {
+   "name" : "sqlite3_create_collation"
+  },
+  {
+   "name" : "sqlite3_create_collation16"
+  },
+  {
+   "name" : "sqlite3_create_collation_v2"
+  },
+  {
+   "name" : "sqlite3_create_function"
+  },
+  {
+   "name" : "sqlite3_create_function16"
+  },
+  {
+   "name" : "sqlite3_create_function_v2"
+  },
+  {
+   "name" : "sqlite3_create_module"
+  },
+  {
+   "name" : "sqlite3_create_module_v2"
+  },
+  {
+   "name" : "sqlite3_data_count"
+  },
+  {
+   "name" : "sqlite3_db_cacheflush"
+  },
+  {
+   "name" : "sqlite3_db_config"
+  },
+  {
+   "name" : "sqlite3_db_filename"
+  },
+  {
+   "name" : "sqlite3_db_handle"
+  },
+  {
+   "name" : "sqlite3_db_mutex"
+  },
+  {
+   "name" : "sqlite3_db_readonly"
+  },
+  {
+   "name" : "sqlite3_db_release_memory"
+  },
+  {
+   "name" : "sqlite3_db_status"
+  },
+  {
+   "name" : "sqlite3_declare_vtab"
+  },
+  {
+   "name" : "sqlite3_enable_shared_cache"
+  },
+  {
+   "name" : "sqlite3_errcode"
+  },
+  {
+   "name" : "sqlite3_errmsg"
+  },
+  {
+   "name" : "sqlite3_errmsg16"
+  },
+  {
+   "name" : "sqlite3_errstr"
+  },
+  {
+   "name" : "sqlite3_exec"
+  },
+  {
+   "name" : "sqlite3_expanded_sql"
+  },
+  {
+   "name" : "sqlite3_expired"
+  },
+  {
+   "name" : "sqlite3_extended_errcode"
+  },
+  {
+   "name" : "sqlite3_extended_result_codes"
+  },
+  {
+   "name" : "sqlite3_file_control"
+  },
+  {
+   "name" : "sqlite3_finalize"
+  },
+  {
+   "name" : "sqlite3_free"
+  },
+  {
+   "name" : "sqlite3_free_table"
+  },
+  {
+   "name" : "sqlite3_get_autocommit"
+  },
+  {
+   "name" : "sqlite3_get_auxdata"
+  },
+  {
+   "name" : "sqlite3_get_table"
+  },
+  {
+   "name" : "sqlite3_global_recover"
+  },
+  {
+   "name" : "sqlite3_initialize"
+  },
+  {
+   "name" : "sqlite3_interrupt"
+  },
+  {
+   "name" : "sqlite3_last_insert_rowid"
+  },
+  {
+   "name" : "sqlite3_libversion"
+  },
+  {
+   "name" : "sqlite3_libversion_number"
+  },
+  {
+   "name" : "sqlite3_limit"
+  },
+  {
+   "name" : "sqlite3_log"
+  },
+  {
+   "name" : "sqlite3_malloc"
+  },
+  {
+   "name" : "sqlite3_malloc64"
+  },
+  {
+   "name" : "sqlite3_memory_alarm"
+  },
+  {
+   "name" : "sqlite3_memory_highwater"
+  },
+  {
+   "name" : "sqlite3_memory_used"
+  },
+  {
+   "name" : "sqlite3_mprintf"
+  },
+  {
+   "name" : "sqlite3_msize"
+  },
+  {
+   "name" : "sqlite3_mutex_alloc"
+  },
+  {
+   "name" : "sqlite3_mutex_enter"
+  },
+  {
+   "name" : "sqlite3_mutex_free"
+  },
+  {
+   "name" : "sqlite3_mutex_leave"
+  },
+  {
+   "name" : "sqlite3_mutex_try"
+  },
+  {
+   "name" : "sqlite3_next_stmt"
+  },
+  {
+   "name" : "sqlite3_open"
+  },
+  {
+   "name" : "sqlite3_open16"
+  },
+  {
+   "name" : "sqlite3_open_v2"
+  },
+  {
+   "name" : "sqlite3_os_end"
+  },
+  {
+   "name" : "sqlite3_os_init"
+  },
+  {
+   "name" : "sqlite3_overload_function"
+  },
+  {
+   "name" : "sqlite3_prepare"
+  },
+  {
+   "name" : "sqlite3_prepare16"
+  },
+  {
+   "name" : "sqlite3_prepare16_v2"
+  },
+  {
+   "name" : "sqlite3_prepare16_v3"
+  },
+  {
+   "name" : "sqlite3_prepare_v2"
+  },
+  {
+   "name" : "sqlite3_prepare_v3"
+  },
+  {
+   "name" : "sqlite3_profile"
+  },
+  {
+   "name" : "sqlite3_progress_handler"
+  },
+  {
+   "name" : "sqlite3_randomness"
+  },
+  {
+   "name" : "sqlite3_realloc"
+  },
+  {
+   "name" : "sqlite3_realloc64"
+  },
+  {
+   "name" : "sqlite3_release_memory"
+  },
+  {
+   "name" : "sqlite3_reset"
+  },
+  {
+   "name" : "sqlite3_reset_auto_extension"
+  },
+  {
+   "name" : "sqlite3_result_blob"
+  },
+  {
+   "name" : "sqlite3_result_blob64"
+  },
+  {
+   "name" : "sqlite3_result_double"
+  },
+  {
+   "name" : "sqlite3_result_error"
+  },
+  {
+   "name" : "sqlite3_result_error16"
+  },
+  {
+   "name" : "sqlite3_result_error_code"
+  },
+  {
+   "name" : "sqlite3_result_error_nomem"
+  },
+  {
+   "name" : "sqlite3_result_error_toobig"
+  },
+  {
+   "name" : "sqlite3_result_int"
+  },
+  {
+   "name" : "sqlite3_result_int64"
+  },
+  {
+   "name" : "sqlite3_result_null"
+  },
+  {
+   "name" : "sqlite3_result_pointer"
+  },
+  {
+   "name" : "sqlite3_result_subtype"
+  },
+  {
+   "name" : "sqlite3_result_text"
+  },
+  {
+   "name" : "sqlite3_result_text16"
+  },
+  {
+   "name" : "sqlite3_result_text16be"
+  },
+  {
+   "name" : "sqlite3_result_text16le"
+  },
+  {
+   "name" : "sqlite3_result_text64"
+  },
+  {
+   "name" : "sqlite3_result_value"
+  },
+  {
+   "name" : "sqlite3_result_zeroblob"
+  },
+  {
+   "name" : "sqlite3_result_zeroblob64"
+  },
+  {
+   "name" : "sqlite3_rollback_hook"
+  },
+  {
+   "name" : "sqlite3_set_authorizer"
+  },
+  {
+   "name" : "sqlite3_set_auxdata"
+  },
+  {
+   "name" : "sqlite3_set_last_insert_rowid"
+  },
+  {
+   "name" : "sqlite3_shutdown"
+  },
+  {
+   "name" : "sqlite3_sleep"
+  },
+  {
+   "name" : "sqlite3_snprintf"
+  },
+  {
+   "name" : "sqlite3_soft_heap_limit"
+  },
+  {
+   "name" : "sqlite3_soft_heap_limit64"
+  },
+  {
+   "name" : "sqlite3_sourceid"
+  },
+  {
+   "name" : "sqlite3_sql"
+  },
+  {
+   "name" : "sqlite3_status"
+  },
+  {
+   "name" : "sqlite3_status64"
+  },
+  {
+   "name" : "sqlite3_step"
+  },
+  {
+   "name" : "sqlite3_stmt_busy"
+  },
+  {
+   "name" : "sqlite3_stmt_readonly"
+  },
+  {
+   "name" : "sqlite3_stmt_status"
+  },
+  {
+   "name" : "sqlite3_strglob"
+  },
+  {
+   "name" : "sqlite3_stricmp"
+  },
+  {
+   "name" : "sqlite3_strlike"
+  },
+  {
+   "name" : "sqlite3_strnicmp"
+  },
+  {
+   "name" : "sqlite3_system_errno"
+  },
+  {
+   "name" : "sqlite3_table_column_metadata"
+  },
+  {
+   "name" : "sqlite3_test_control"
+  },
+  {
+   "name" : "sqlite3_thread_cleanup"
+  },
+  {
+   "name" : "sqlite3_threadsafe"
+  },
+  {
+   "name" : "sqlite3_total_changes"
+  },
+  {
+   "name" : "sqlite3_trace"
+  },
+  {
+   "name" : "sqlite3_trace_v2"
+  },
+  {
+   "name" : "sqlite3_transfer_bindings"
+  },
+  {
+   "name" : "sqlite3_update_hook"
+  },
+  {
+   "name" : "sqlite3_uri_boolean"
+  },
+  {
+   "name" : "sqlite3_uri_int64"
+  },
+  {
+   "name" : "sqlite3_uri_parameter"
+  },
+  {
+   "name" : "sqlite3_user_data"
+  },
+  {
+   "name" : "sqlite3_value_blob"
+  },
+  {
+   "name" : "sqlite3_value_bytes"
+  },
+  {
+   "name" : "sqlite3_value_bytes16"
+  },
+  {
+   "name" : "sqlite3_value_double"
+  },
+  {
+   "name" : "sqlite3_value_dup"
+  },
+  {
+   "name" : "sqlite3_value_free"
+  },
+  {
+   "name" : "sqlite3_value_int"
+  },
+  {
+   "name" : "sqlite3_value_int64"
+  },
+  {
+   "name" : "sqlite3_value_nochange"
+  },
+  {
+   "name" : "sqlite3_value_numeric_type"
+  },
+  {
+   "name" : "sqlite3_value_pointer"
+  },
+  {
+   "name" : "sqlite3_value_subtype"
+  },
+  {
+   "name" : "sqlite3_value_text"
+  },
+  {
+   "name" : "sqlite3_value_text16"
+  },
+  {
+   "name" : "sqlite3_value_text16be"
+  },
+  {
+   "name" : "sqlite3_value_text16le"
+  },
+  {
+   "name" : "sqlite3_value_type"
+  },
+  {
+   "name" : "sqlite3_vfs_find"
+  },
+  {
+   "name" : "sqlite3_vfs_register"
+  },
+  {
+   "name" : "sqlite3_vfs_unregister"
+  },
+  {
+   "name" : "sqlite3_vmprintf"
+  },
+  {
+   "name" : "sqlite3_vsnprintf"
+  },
+  {
+   "name" : "sqlite3_vtab_collation"
+  },
+  {
+   "name" : "sqlite3_vtab_config"
+  },
+  {
+   "name" : "sqlite3_vtab_nochange"
+  },
+  {
+   "name" : "sqlite3_vtab_on_conflict"
+  },
+  {
+   "name" : "sqlite3_wal_autocheckpoint"
+  },
+  {
+   "name" : "sqlite3_wal_checkpoint"
+  },
+  {
+   "name" : "sqlite3_wal_checkpoint_v2"
+  },
+  {
+   "name" : "sqlite3_wal_hook"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "sqlite3_data_directory"
+  },
+  {
+   "name" : "sqlite3_temp_directory"
+  },
+  {
+   "name" : "sqlite3_version"
+  }
+ ],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "register_android_functions",
+   "linker_set_key" : "register_android_functions",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/sqlite/android/sqlite3_android.h"
+  },
+  {
+   "function_name" : "register_localized_collators",
+   "linker_set_key" : "register_localized_collators",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/external/sqlite/android/sqlite3_android.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-6",
+   "size" : 8,
+   "source_file" : "/external/sqlite/android/sqlite3_android.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "sqlite3 *",
+   "name" : "sqlite3 *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 8,
+   "source_file" : "/external/sqlite/android/sqlite3_android.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-5",
+   "self_type" : "type-4",
+   "size" : 1,
+   "source_file" : "/external/sqlite/android/sqlite3_android.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

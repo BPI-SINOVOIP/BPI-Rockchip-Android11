@@ -1,0 +1,326 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "ACgroupController_getName"
+  },
+  {
+   "name" : "ACgroupController_getPath"
+  },
+  {
+   "name" : "ACgroupController_getVersion"
+  },
+  {
+   "name" : "ACgroupFile_getController"
+  },
+  {
+   "name" : "ACgroupFile_getControllerCount"
+  },
+  {
+   "name" : "ACgroupFile_getVersion"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "ACgroupController_getName",
+   "linker_set_key" : "ACgroupController_getName",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupController_getPath",
+   "linker_set_key" : "ACgroupController_getPath",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupController_getVersion",
+   "linker_set_key" : "ACgroupController_getVersion",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupFile_getController",
+   "linker_set_key" : "ACgroupFile_getController",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-26",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupFile_getControllerCount",
+   "linker_set_key" : "ACgroupFile_getControllerCount",
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "function_name" : "ACgroupFile_getVersion",
+   "linker_set_key" : "ACgroupFile_getVersion",
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ACgroupController *",
+   "name" : "const ACgroupController *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-22",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ACgroupController *",
+   "name" : "const ACgroupController *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-18",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ACgroupController *",
+   "name" : "const ACgroupController *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ACgroupController *",
+   "name" : "const ACgroupController *",
+   "referenced_type" : "type-27",
+   "self_type" : "type-26",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-24",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ACgroupController",
+   "name" : "const ACgroupController",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 56,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ACgroupController",
+   "name" : "const ACgroupController",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 56,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ACgroupController",
+   "name" : "const ACgroupController",
+   "referenced_type" : "type-21",
+   "self_type" : "type-20",
+   "size" : 56,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ACgroupController",
+   "name" : "const ACgroupController",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 56,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 1,
+   "source_file" : "/system/core/libprocessgroup/cgrouprc/include/android/cgrouprc.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,1630 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA32_c",
+   "name" : "char [32]",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA32_c",
+   "size" : 32,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA4_i",
+   "name" : "int [4]",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIA4_i",
+   "size" : 16,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA4_j",
+   "name" : "unsigned int [4]",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIA4_j",
+   "size" : 16,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIjNS_9allocatorIjEEE21__push_back_slow_pathIRKjEEvOT_"
+  },
+  {
+   "name" : "adf_device_attach"
+  },
+  {
+   "name" : "adf_device_close"
+  },
+  {
+   "name" : "adf_device_detach"
+  },
+  {
+   "name" : "adf_device_open"
+  },
+  {
+   "name" : "adf_device_post"
+  },
+  {
+   "name" : "adf_device_post_v2"
+  },
+  {
+   "name" : "adf_devices"
+  },
+  {
+   "name" : "adf_find_simple_post_configuration"
+  },
+  {
+   "name" : "adf_format_str"
+  },
+  {
+   "name" : "adf_free_device_data"
+  },
+  {
+   "name" : "adf_free_interface_data"
+  },
+  {
+   "name" : "adf_free_overlay_engine_data"
+  },
+  {
+   "name" : "adf_get_device_data"
+  },
+  {
+   "name" : "adf_get_interface_data"
+  },
+  {
+   "name" : "adf_get_overlay_engine_data"
+  },
+  {
+   "name" : "adf_interface_blank"
+  },
+  {
+   "name" : "adf_interface_open"
+  },
+  {
+   "name" : "adf_interface_set_mode"
+  },
+  {
+   "name" : "adf_interface_simple_buffer_alloc"
+  },
+  {
+   "name" : "adf_interface_simple_post"
+  },
+  {
+   "name" : "adf_interface_simple_post_v2"
+  },
+  {
+   "name" : "adf_interfaces"
+  },
+  {
+   "name" : "adf_interfaces_filter_by_flag"
+  },
+  {
+   "name" : "adf_interfaces_filter_by_type"
+  },
+  {
+   "name" : "adf_interfaces_for_overlay_engine"
+  },
+  {
+   "name" : "adf_overlay_engine_open"
+  },
+  {
+   "name" : "adf_overlay_engine_supports_format"
+  },
+  {
+   "name" : "adf_overlay_engines"
+  },
+  {
+   "name" : "adf_overlay_engines_filter_by_format"
+  },
+  {
+   "name" : "adf_overlay_engines_for_interface"
+  },
+  {
+   "name" : "adf_read_event"
+  },
+  {
+   "name" : "adf_set_event"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADF_EVENT_VSYNC"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ADF_EVENT_HOTPLUG"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "ADF_EVENT_DEVICE_CUSTOM"
+    },
+    {
+     "enum_field_value" : 255,
+     "name" : "ADF_EVENT_TYPE_MAX"
+    }
+   ],
+   "linker_set_key" : "_ZTI14adf_event_type",
+   "name" : "adf_event_type",
+   "referenced_type" : "_ZTI14adf_event_type",
+   "self_type" : "_ZTI14adf_event_type",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADF_INTF_DSI"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ADF_INTF_eDP"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ADF_INTF_DPI"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ADF_INTF_VGA"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ADF_INTF_DVI"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ADF_INTF_HDMI"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ADF_INTF_MEMORY"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "ADF_INTF_TYPE_DEVICE_CUSTOM"
+    },
+    {
+     "enum_field_value" : -1,
+     "name" : "ADF_INTF_TYPE_MAX"
+    }
+   ],
+   "linker_set_key" : "_ZTI18adf_interface_type",
+   "name" : "adf_interface_type",
+   "referenced_type" : "_ZTI18adf_interface_type",
+   "self_type" : "_ZTI18adf_interface_type",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADF_COMPLETE_FENCE_NONE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ADF_COMPLETE_FENCE_PRESENT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ADF_COMPLETE_FENCE_RELEASE"
+    }
+   ],
+   "linker_set_key" : "_ZTI23adf_complete_fence_type",
+   "name" : "adf_complete_fence_type",
+   "referenced_type" : "_ZTI23adf_complete_fence_type",
+   "self_type" : "_ZTI23adf_complete_fence_type",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "adf_device_attach",
+   "linker_set_key" : "adf_device_attach",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_close",
+   "linker_set_key" : "adf_device_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_detach",
+   "linker_set_key" : "adf_device_detach",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_open",
+   "linker_set_key" : "adf_device_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_post",
+   "linker_set_key" : "adf_device_post",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIP17adf_buffer_config"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_device_post_v2",
+   "linker_set_key" : "adf_device_post_v2",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIP17adf_buffer_config"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "referenced_type" : "_ZTI23adf_complete_fence_type"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_devices",
+   "linker_set_key" : "adf_devices",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_find_simple_post_configuration",
+   "linker_set_key" : "adf_find_simple_post_configuration",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_format_str",
+   "linker_set_key" : "adf_format_str",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_free_device_data",
+   "linker_set_key" : "adf_free_device_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP15adf_device_data"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_free_interface_data",
+   "linker_set_key" : "adf_free_interface_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18adf_interface_data"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_free_overlay_engine_data",
+   "linker_set_key" : "adf_free_overlay_engine_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP23adf_overlay_engine_data"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_get_device_data",
+   "linker_set_key" : "adf_get_device_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIP15adf_device_data"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_get_interface_data",
+   "linker_set_key" : "adf_get_interface_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP18adf_interface_data"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_get_overlay_engine_data",
+   "linker_set_key" : "adf_get_overlay_engine_data",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP23adf_overlay_engine_data"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_blank",
+   "linker_set_key" : "adf_interface_blank",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_open",
+   "linker_set_key" : "adf_interface_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_set_mode",
+   "linker_set_key" : "adf_interface_set_mode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP17drm_mode_modeinfo"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_simple_buffer_alloc",
+   "linker_set_key" : "adf_interface_simple_buffer_alloc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_simple_post",
+   "linker_set_key" : "adf_interface_simple_post",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interface_simple_post_v2",
+   "linker_set_key" : "adf_interface_simple_post_v2",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTI23adf_complete_fence_type"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces",
+   "linker_set_key" : "adf_interfaces",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces_filter_by_flag",
+   "linker_set_key" : "adf_interfaces_filter_by_flag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces_filter_by_type",
+   "linker_set_key" : "adf_interfaces_filter_by_type",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTI18adf_interface_type"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_interfaces_for_overlay_engine",
+   "linker_set_key" : "adf_interfaces_for_overlay_engine",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engine_open",
+   "linker_set_key" : "adf_overlay_engine_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engine_supports_format",
+   "linker_set_key" : "adf_overlay_engine_supports_format",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engines",
+   "linker_set_key" : "adf_overlay_engines",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engines_filter_by_format",
+   "linker_set_key" : "adf_overlay_engines_filter_by_format",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_overlay_engines_for_interface",
+   "linker_set_key" : "adf_overlay_engines_for_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10adf_device"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPPj"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_read_event",
+   "linker_set_key" : "adf_read_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPP9adf_event"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "function_name" : "adf_set_event",
+   "linker_set_key" : "adf_set_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTI14adf_event_type"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP10adf_device",
+   "name" : "adf_device *",
+   "referenced_type" : "_ZTI10adf_device",
+   "self_type" : "_ZTIP10adf_device",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP15adf_device_data",
+   "name" : "adf_device_data *",
+   "referenced_type" : "_ZTI15adf_device_data",
+   "self_type" : "_ZTIP15adf_device_data",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP17adf_buffer_config",
+   "name" : "adf_buffer_config *",
+   "referenced_type" : "_ZTI17adf_buffer_config",
+   "self_type" : "_ZTIP17adf_buffer_config",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP17drm_mode_modeinfo",
+   "name" : "drm_mode_modeinfo *",
+   "referenced_type" : "_ZTI17drm_mode_modeinfo",
+   "self_type" : "_ZTIP17drm_mode_modeinfo",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP18adf_interface_data",
+   "name" : "adf_interface_data *",
+   "referenced_type" : "_ZTI18adf_interface_data",
+   "self_type" : "_ZTIP18adf_interface_data",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP21adf_attachment_config",
+   "name" : "adf_attachment_config *",
+   "referenced_type" : "_ZTI21adf_attachment_config",
+   "self_type" : "_ZTIP21adf_attachment_config",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP23adf_overlay_engine_data",
+   "name" : "adf_overlay_engine_data *",
+   "referenced_type" : "_ZTI23adf_overlay_engine_data",
+   "self_type" : "_ZTIP23adf_overlay_engine_data",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP9adf_event",
+   "name" : "adf_event *",
+   "referenced_type" : "_ZTI9adf_event",
+   "self_type" : "_ZTIP9adf_event",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKj",
+   "name" : "const unsigned int *",
+   "referenced_type" : "_ZTIKj",
+   "self_type" : "_ZTIPKj",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPP9adf_event",
+   "name" : "adf_event **",
+   "referenced_type" : "_ZTIP9adf_event",
+   "self_type" : "_ZTIPP9adf_event",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPj",
+   "name" : "unsigned int **",
+   "referenced_type" : "_ZTIPj",
+   "self_type" : "_ZTIPPj",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPj",
+   "name" : "unsigned int *",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIPj",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "id",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI10adf_device",
+   "name" : "adf_device",
+   "referenced_type" : "_ZTI10adf_device",
+   "self_type" : "_ZTI10adf_device",
+   "size" : 8,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/adf/adf.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "enabled",
+     "field_offset" : 8,
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "linker_set_key" : "_ZTI13adf_set_event",
+   "name" : "adf_set_event",
+   "referenced_type" : "_ZTI13adf_set_event",
+   "self_type" : "_ZTI13adf_set_event",
+   "size" : 2,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "_ZTIA32_c"
+    },
+    {
+     "field_name" : "n_attachments",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "attachments",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIP21adf_attachment_config"
+    },
+    {
+     "field_name" : "n_allowed_attachments",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "allowed_attachments",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIP21adf_attachment_config"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 416,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "linker_set_key" : "_ZTI15adf_device_data",
+   "name" : "adf_device_data",
+   "referenced_type" : "_ZTI15adf_device_data",
+   "self_type" : "_ZTI15adf_device_data",
+   "size" : 56,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "n_interfaces",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "interfaces",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "field_name" : "n_bufs",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "bufs",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIP17adf_buffer_config"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI15adf_post_config",
+   "name" : "adf_post_config",
+   "referenced_type" : "_ZTI15adf_post_config",
+   "self_type" : "_ZTI15adf_post_config",
+   "size" : 28,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "base",
+     "referenced_type" : "_ZTI9adf_event"
+    },
+    {
+     "field_name" : "timestamp",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "linker_set_key" : "_ZTI15adf_vsync_event",
+   "name" : "adf_vsync_event",
+   "referenced_type" : "_ZTI15adf_vsync_event",
+   "self_type" : "_ZTI15adf_vsync_event",
+   "size" : 16,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "overlay_engine",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "w",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "h",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIA4_i"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIA4_j"
+    },
+    {
+     "field_name" : "pitch",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIA4_j"
+    },
+    {
+     "field_name" : "n_planes",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "acquire_fence",
+     "field_offset" : 544,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI17adf_buffer_config",
+   "name" : "adf_buffer_config",
+   "referenced_type" : "_ZTI17adf_buffer_config",
+   "self_type" : "_ZTI17adf_buffer_config",
+   "size" : 72,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "base",
+     "referenced_type" : "_ZTI9adf_event"
+    },
+    {
+     "field_name" : "connected",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "linker_set_key" : "_ZTI17adf_hotplug_event",
+   "name" : "adf_hotplug_event",
+   "referenced_type" : "_ZTI17adf_hotplug_event",
+   "self_type" : "_ZTI17adf_hotplug_event",
+   "size" : 12,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "_ZTIA32_c"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "id",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "dpms_state",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "hotplug_detect",
+     "field_offset" : 360,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "width_mm",
+     "field_offset" : 368,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "height_mm",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "current_mode",
+     "field_offset" : 416,
+     "referenced_type" : "_ZTI17drm_mode_modeinfo"
+    },
+    {
+     "field_name" : "n_available_modes",
+     "field_offset" : 960,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "available_modes",
+     "field_offset" : 992,
+     "referenced_type" : "_ZTIP17drm_mode_modeinfo"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 1024,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 1056,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "linker_set_key" : "_ZTI18adf_interface_data",
+   "name" : "adf_interface_data",
+   "referenced_type" : "_ZTI18adf_interface_data",
+   "self_type" : "_ZTI18adf_interface_data",
+   "size" : 136,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "n_interfaces",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "interfaces",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "n_bufs",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "bufs",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "complete_fence_type",
+     "field_offset" : 416,
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "linker_set_key" : "_ZTI18adf_post_config_v2",
+   "name" : "adf_post_config_v2",
+   "referenced_type" : "_ZTI18adf_post_config_v2",
+   "self_type" : "_ZTI18adf_post_config_v2",
+   "size" : 56,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "overlay_engine",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "interface",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI21adf_attachment_config",
+   "name" : "adf_attachment_config",
+   "referenced_type" : "_ZTI21adf_attachment_config",
+   "self_type" : "_ZTI21adf_attachment_config",
+   "size" : 8,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "buf",
+     "referenced_type" : "_ZTI17adf_buffer_config"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI22adf_simple_post_config",
+   "name" : "adf_simple_post_config",
+   "referenced_type" : "_ZTI22adf_simple_post_config",
+   "self_type" : "_ZTI22adf_simple_post_config",
+   "size" : 76,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "_ZTIA32_c"
+    },
+    {
+     "field_name" : "n_supported_formats",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "supported_formats",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIPj"
+    },
+    {
+     "field_name" : "custom_data_size",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "custom_data",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "linker_set_key" : "_ZTI23adf_overlay_engine_data",
+   "name" : "adf_overlay_engine_data",
+   "referenced_type" : "_ZTI23adf_overlay_engine_data",
+   "self_type" : "_ZTI23adf_overlay_engine_data",
+   "size" : 48,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "w",
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "h",
+     "field_offset" : 16,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "fd",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "pitch",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI23adf_simple_buffer_alloc",
+   "name" : "adf_simple_buffer_alloc",
+   "referenced_type" : "_ZTI23adf_simple_buffer_alloc",
+   "self_type" : "_ZTI23adf_simple_buffer_alloc",
+   "size" : 20,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "buf",
+     "referenced_type" : "_ZTI17adf_buffer_config"
+    },
+    {
+     "field_name" : "complete_fence",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "complete_fence_type",
+     "field_offset" : 608,
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "linker_set_key" : "_ZTI25adf_simple_post_config_v2",
+   "name" : "adf_simple_post_config_v2",
+   "referenced_type" : "_ZTI25adf_simple_post_config_v2",
+   "self_type" : "_ZTI25adf_simple_post_config_v2",
+   "size" : 80,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "length",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI9adf_event",
+   "name" : "adf_event",
+   "referenced_type" : "_ZTI9adf_event",
+   "self_type" : "_ZTI9adf_event",
+   "size" : 8,
+   "source_file" : "/system/core/deprecated-adf/libadf/include/video/adf.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,757 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "pc_partition [4]",
+   "name" : "pc_partition [4]",
+   "referenced_type" : "type-17",
+   "self_type" : "type-21",
+   "size" : 64,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [0]",
+   "name" : "unsigned char [0]",
+   "referenced_type" : "type-2",
+   "self_type" : "type-7",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [440]",
+   "name" : "unsigned char [440]",
+   "referenced_type" : "type-2",
+   "self_type" : "type-19",
+   "size" : 440,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-30",
+   "self_type" : "type-30",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-24",
+   "self_type" : "type-24",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-29",
+   "self_type" : "type-29",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-27",
+   "self_type" : "type-27",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-26",
+   "self_type" : "type-26",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-28",
+   "self_type" : "type-28",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "__aeabi_ldivmod"
+  },
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  },
+  {
+   "name" : "__aeabi_uidiv"
+  },
+  {
+   "name" : "__aeabi_uidivmod"
+  },
+  {
+   "name" : "__aeabi_uldivmod"
+  },
+  {
+   "name" : "__divdi3"
+  },
+  {
+   "name" : "__divmoddi4"
+  },
+  {
+   "name" : "__udivmoddi4"
+  },
+  {
+   "name" : "__udivmodsi4"
+  },
+  {
+   "name" : "__udivsi3"
+  },
+  {
+   "name" : "alloc_wl"
+  },
+  {
+   "name" : "apply_disk_config"
+  },
+  {
+   "name" : "config_mbr"
+  },
+  {
+   "name" : "dump_disk_config"
+  },
+  {
+   "name" : "find_mbr_part"
+  },
+  {
+   "name" : "find_part"
+  },
+  {
+   "name" : "find_part_device"
+  },
+  {
+   "name" : "free_wl"
+  },
+  {
+   "name" : "load_diskconfig"
+  },
+  {
+   "name" : "process_disk_config"
+  },
+  {
+   "name" : "wlist_add"
+  },
+  {
+   "name" : "wlist_commit"
+  },
+  {
+   "name" : "wlist_free"
+  },
+  {
+   "name" : "write_raw_image"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "alloc_wl",
+   "linker_set_key" : "alloc_wl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "apply_disk_config",
+   "linker_set_key" : "apply_disk_config",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "config_mbr",
+   "linker_set_key" : "config_mbr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "dump_disk_config",
+   "linker_set_key" : "dump_disk_config",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "find_mbr_part",
+   "linker_set_key" : "find_mbr_part",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-16"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "find_part",
+   "linker_set_key" : "find_part",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-16"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "find_part_device",
+   "linker_set_key" : "find_part_device",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-16"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "free_wl",
+   "linker_set_key" : "free_wl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-22",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "load_diskconfig",
+   "linker_set_key" : "load_diskconfig",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "process_disk_config",
+   "linker_set_key" : "process_disk_config",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "wlist_add",
+   "linker_set_key" : "wlist_add",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "wlist_commit",
+   "linker_set_key" : "wlist_commit",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "wlist_free",
+   "linker_set_key" : "wlist_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-22",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "write_raw_image",
+   "linker_set_key" : "write_raw_image",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-15",
+   "self_type" : "type-16",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "disk_info *",
+   "name" : "disk_info *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "part_info *",
+   "name" : "part_info *",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "write_list *",
+   "name" : "write_list *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-4",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "write_list **",
+   "name" : "write_list **",
+   "referenced_type" : "type-4",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-11",
+   "self_type" : "type-15",
+   "size" : 1,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "head",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "sector",
+     "field_offset" : 8,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "cylinder",
+     "field_offset" : 16,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "chs",
+   "name" : "chs",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 3,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h",
+   "unique_id" : "chs"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "device",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "scheme",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "sect_size",
+     "field_offset" : 64,
+     "referenced_type" : "type-12"
+    },
+    {
+     "field_name" : "skip_lba",
+     "field_offset" : 96,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "num_lba",
+     "field_offset" : 128,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "part_lst",
+     "field_offset" : 160,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "num_parts",
+     "field_offset" : 192,
+     "referenced_type" : "type-12"
+    }
+   ],
+   "linker_set_key" : "disk_info",
+   "name" : "disk_info",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 28,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h",
+   "unique_id" : "disk_info"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 40,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "len_kb",
+     "field_offset" : 64,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "start_lba",
+     "field_offset" : 96,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "part_info",
+   "name" : "part_info",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 16,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h",
+   "unique_id" : "part_info"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "code",
+     "referenced_type" : "type-19"
+    },
+    {
+     "field_name" : "disk_sig",
+     "field_offset" : 3520,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "pad",
+     "field_offset" : 3552,
+     "referenced_type" : "type-20"
+    },
+    {
+     "field_name" : "ptable",
+     "field_offset" : 3568,
+     "referenced_type" : "type-21"
+    },
+    {
+     "field_name" : "mbr_sig",
+     "field_offset" : 4080,
+     "referenced_type" : "type-20"
+    }
+   ],
+   "linker_set_key" : "pc_boot_record",
+   "name" : "pc_boot_record",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 512,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h",
+   "unique_id" : "pc_boot_record"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "status",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "start",
+     "field_offset" : 8,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "end",
+     "field_offset" : 40,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "start_lba",
+     "field_offset" : 64,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "len_lba",
+     "field_offset" : 96,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "pc_partition",
+   "name" : "pc_partition",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 16,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h",
+   "unique_id" : "pc_partition"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "next",
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "len",
+     "field_offset" : 128,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 160,
+     "referenced_type" : "type-7"
+    }
+   ],
+   "linker_set_key" : "write_list",
+   "name" : "write_list",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 24,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h",
+   "unique_id" : "write_list"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

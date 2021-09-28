@@ -1,0 +1,196 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "_ZN7android2spINS_8hardware8memtrack4V1_09IMemtrackEED2Ev"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__16vectorIN7android8hardware8memtrack4V1_014MemtrackRecordENS_9allocatorIS5_EEE8__appendEm"
+  },
+  {
+   "name" : "memtrack_proc_destroy"
+  },
+  {
+   "name" : "memtrack_proc_get"
+  },
+  {
+   "name" : "memtrack_proc_gl_pss"
+  },
+  {
+   "name" : "memtrack_proc_gl_total"
+  },
+  {
+   "name" : "memtrack_proc_graphics_pss"
+  },
+  {
+   "name" : "memtrack_proc_graphics_total"
+  },
+  {
+   "name" : "memtrack_proc_new"
+  },
+  {
+   "name" : "memtrack_proc_other_pss"
+  },
+  {
+   "name" : "memtrack_proc_other_total"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "memtrack_proc_destroy",
+   "linker_set_key" : "memtrack_proc_destroy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_get",
+   "linker_set_key" : "memtrack_proc_get",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_gl_pss",
+   "linker_set_key" : "memtrack_proc_gl_pss",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_gl_total",
+   "linker_set_key" : "memtrack_proc_gl_total",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_graphics_pss",
+   "linker_set_key" : "memtrack_proc_graphics_pss",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_graphics_total",
+   "linker_set_key" : "memtrack_proc_graphics_total",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_new",
+   "linker_set_key" : "memtrack_proc_new",
+   "return_type" : "_ZTIP13memtrack_proc",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_other_pss",
+   "linker_set_key" : "memtrack_proc_other_pss",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  },
+  {
+   "function_name" : "memtrack_proc_other_total",
+   "linker_set_key" : "memtrack_proc_other_total",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP13memtrack_proc"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13memtrack_proc",
+   "name" : "memtrack_proc *",
+   "referenced_type" : "_ZTI13memtrack_proc",
+   "self_type" : "_ZTIP13memtrack_proc",
+   "size" : 8,
+   "source_file" : "/system/memory/libmemtrack/include/memtrack/memtrack.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

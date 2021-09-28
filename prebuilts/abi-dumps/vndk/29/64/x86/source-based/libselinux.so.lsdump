@@ -1,0 +1,2063 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *[33]",
+   "name" : "const char *[33]",
+   "referenced_type" : "type-34",
+   "self_type" : "type-55",
+   "size" : 132,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_Bool",
+   "name" : "_Bool",
+   "referenced_type" : "type-82",
+   "self_type" : "type-82",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-83",
+   "self_type" : "type-83",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-91",
+   "self_type" : "type-91",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "fgetfilecon"
+  },
+  {
+   "name" : "freecon"
+  },
+  {
+   "name" : "fsetfilecon"
+  },
+  {
+   "name" : "getcon"
+  },
+  {
+   "name" : "getfilecon"
+  },
+  {
+   "name" : "getpeercon"
+  },
+  {
+   "name" : "getpidcon"
+  },
+  {
+   "name" : "is_selinux_enabled"
+  },
+  {
+   "name" : "lgetfilecon"
+  },
+  {
+   "name" : "lsetfilecon"
+  },
+  {
+   "name" : "security_getenforce"
+  },
+  {
+   "name" : "security_load_policy"
+  },
+  {
+   "name" : "security_policyvers"
+  },
+  {
+   "name" : "security_setenforce"
+  },
+  {
+   "name" : "selabel_close"
+  },
+  {
+   "name" : "selabel_lookup"
+  },
+  {
+   "name" : "selabel_open"
+  },
+  {
+   "name" : "selinux_android_hw_service_context_handle"
+  },
+  {
+   "name" : "selinux_android_prop_context_handle"
+  },
+  {
+   "name" : "selinux_android_restorecon"
+  },
+  {
+   "name" : "selinux_android_service_context_handle"
+  },
+  {
+   "name" : "selinux_android_vendor_service_context_handle"
+  },
+  {
+   "name" : "selinux_check_access"
+  },
+  {
+   "name" : "selinux_log_callback"
+  },
+  {
+   "name" : "selinux_set_callback"
+  },
+  {
+   "name" : "selinux_status_open"
+  },
+  {
+   "name" : "selinux_status_updated"
+  },
+  {
+   "name" : "selinux_vendor_log_callback"
+  },
+  {
+   "name" : "setcon"
+  },
+  {
+   "name" : "setexeccon"
+  },
+  {
+   "name" : "setfilecon"
+  },
+  {
+   "name" : "setfscreatecon"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "SELABEL_SUBSET"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "SELABEL_EQUAL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "SELABEL_SUPERSET"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "SELABEL_INCOMPARABLE"
+    }
+   ],
+   "linker_set_key" : "selabel_cmp_result",
+   "name" : "selabel_cmp_result",
+   "referenced_type" : "type-77",
+   "self_type" : "type-77",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "selabel_cmp_result"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (char **)",
+   "name" : "int (char **)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "referenced_type" : "type-13",
+   "return_type" : "type-12",
+   "self_type" : "type-13",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const char *, unsigned int, char *)",
+   "name" : "int (const char *, unsigned int, char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "referenced_type" : "type-87",
+   "return_type" : "type-12",
+   "self_type" : "type-87",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const char *, unsigned int, char **)",
+   "name" : "int (const char *, unsigned int, char **)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "referenced_type" : "type-89",
+   "return_type" : "type-12",
+   "self_type" : "type-89",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (int)",
+   "name" : "int (int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "referenced_type" : "type-16",
+   "return_type" : "type-12",
+   "self_type" : "type-16",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (int, const char *, ...)",
+   "name" : "int (int, const char *, ...)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "referenced_type" : "type-76",
+   "return_type" : "type-12",
+   "self_type" : "type-76",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (unsigned int, security_id *, security_id *, unsigned short, unsigned int, unsigned int *)",
+   "name" : "int (unsigned int, security_id *, security_id *, unsigned short, unsigned int, unsigned int *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-49"
+    },
+    {
+     "referenced_type" : "type-49"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "referenced_type" : "type-68",
+   "return_type" : "type-12",
+   "self_type" : "type-68",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (void *, unsigned short, char *, unsigned int)",
+   "name" : "int (void *, unsigned short, char *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-11",
+   "return_type" : "type-12",
+   "self_type" : "type-11",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (const char *, ...)",
+   "name" : "void (const char *, ...)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "referenced_type" : "type-33",
+   "return_type" : "type-4",
+   "self_type" : "type-33",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *)",
+   "name" : "void (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "referenced_type" : "type-30",
+   "return_type" : "type-4",
+   "self_type" : "type-30",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, unsigned short, char *, unsigned int)",
+   "name" : "void (void *, unsigned short, char *, unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-37",
+   "return_type" : "type-4",
+   "self_type" : "type-37",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void)",
+   "name" : "void (void)",
+   "referenced_type" : "type-43",
+   "return_type" : "type-4",
+   "self_type" : "type-43",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned int)",
+   "name" : "void *(unsigned int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-28",
+   "return_type" : "type-3",
+   "self_type" : "type-28",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(void (*)(void))",
+   "name" : "void *(void (*)(void))",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-42"
+    }
+   ],
+   "referenced_type" : "type-41",
+   "return_type" : "type-3",
+   "self_type" : "type-41",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(void)",
+   "name" : "void *(void)",
+   "referenced_type" : "type-46",
+   "return_type" : "type-3",
+   "self_type" : "type-46",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "fgetfilecon",
+   "linker_set_key" : "fgetfilecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "freecon",
+   "linker_set_key" : "freecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "fsetfilecon",
+   "linker_set_key" : "fsetfilecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "getcon",
+   "linker_set_key" : "getcon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "getfilecon",
+   "linker_set_key" : "getfilecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "getpeercon",
+   "linker_set_key" : "getpeercon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "getpidcon",
+   "linker_set_key" : "getpidcon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "is_selinux_enabled",
+   "linker_set_key" : "is_selinux_enabled",
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "lgetfilecon",
+   "linker_set_key" : "lgetfilecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "lsetfilecon",
+   "linker_set_key" : "lsetfilecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "security_getenforce",
+   "linker_set_key" : "security_getenforce",
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "security_load_policy",
+   "linker_set_key" : "security_load_policy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-3"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "security_policyvers",
+   "linker_set_key" : "security_policyvers",
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "security_setenforce",
+   "linker_set_key" : "security_setenforce",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "selabel_close",
+   "linker_set_key" : "selabel_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-78"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "function_name" : "selabel_lookup",
+   "linker_set_key" : "selabel_lookup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-78"
+    },
+    {
+     "referenced_type" : "type-14"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "function_name" : "selabel_open",
+   "linker_set_key" : "selabel_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-81"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-78",
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "function_name" : "selinux_android_hw_service_context_handle",
+   "linker_set_key" : "selinux_android_hw_service_context_handle",
+   "return_type" : "type-19",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "selinux_android_prop_context_handle",
+   "linker_set_key" : "selinux_android_prop_context_handle",
+   "return_type" : "type-253",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "selinux_android_restorecon",
+   "linker_set_key" : "selinux_android_restorecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "selinux_android_service_context_handle",
+   "linker_set_key" : "selinux_android_service_context_handle",
+   "return_type" : "type-19",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "selinux_android_vendor_service_context_handle",
+   "linker_set_key" : "selinux_android_vendor_service_context_handle",
+   "return_type" : "type-19",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "selinux_check_access",
+   "linker_set_key" : "selinux_check_access",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-3"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "selinux_log_callback",
+   "linker_set_key" : "selinux_log_callback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "selinux_set_callback",
+   "linker_set_key" : "selinux_set_callback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-74"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "selinux_status_open",
+   "linker_set_key" : "selinux_status_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "function_name" : "selinux_status_updated",
+   "linker_set_key" : "selinux_status_updated",
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "function_name" : "selinux_vendor_log_callback",
+   "linker_set_key" : "selinux_vendor_log_callback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "function_name" : "setcon",
+   "linker_set_key" : "setcon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "setexeccon",
+   "linker_set_key" : "setexeccon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "setfilecon",
+   "linker_set_key" : "setfilecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "function_name" : "setfscreatecon",
+   "linker_set_key" : "setfscreatecon",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "SELboolean *",
+   "name" : "SELboolean *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-38",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "av_decision *",
+   "name" : "av_decision *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-67",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_cache_stats *",
+   "name" : "avc_cache_stats *",
+   "referenced_type" : "type-48",
+   "self_type" : "type-71",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-109",
+   "self_type" : "type-108",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-126",
+   "self_type" : "type-125",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-129",
+   "self_type" : "type-128",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-133",
+   "self_type" : "type-132",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-152",
+   "self_type" : "type-151",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-164",
+   "self_type" : "type-163",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-181",
+   "self_type" : "type-180",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-184",
+   "self_type" : "type-183",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-188",
+   "self_type" : "type-187",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-208",
+   "self_type" : "type-207",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-220",
+   "self_type" : "type-219",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-237",
+   "self_type" : "type-236",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-240",
+   "self_type" : "type-239",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-244",
+   "self_type" : "type-243",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-250",
+   "self_type" : "type-249",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-252",
+   "self_type" : "type-251",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-256",
+   "self_type" : "type-255",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-273",
+   "self_type" : "type-272",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-285",
+   "self_type" : "type-284",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-302",
+   "self_type" : "type-301",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-305",
+   "self_type" : "type-304",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-309",
+   "self_type" : "type-308",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-329",
+   "self_type" : "type-328",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-341",
+   "self_type" : "type-340",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-358",
+   "self_type" : "type-357",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-361",
+   "self_type" : "type-360",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-365",
+   "self_type" : "type-364",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-371",
+   "self_type" : "type-370",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-373",
+   "self_type" : "type-372",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-53",
+   "self_type" : "type-52",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-73",
+   "self_type" : "type-72",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry *",
+   "name" : "avc_entry *",
+   "referenced_type" : "type-97",
+   "self_type" : "type-96",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "avc_entry_ref *",
+   "name" : "avc_entry_ref *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-66",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-6",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char **",
+   "name" : "char **",
+   "referenced_type" : "type-6",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char ***",
+   "name" : "char ***",
+   "referenced_type" : "type-14",
+   "self_type" : "type-47",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const avc_lock_callback *",
+   "name" : "const avc_lock_callback *",
+   "referenced_type" : "type-62",
+   "self_type" : "type-63",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const avc_log_callback *",
+   "name" : "const avc_log_callback *",
+   "referenced_type" : "type-58",
+   "self_type" : "type-59",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const avc_memory_callback *",
+   "name" : "const avc_memory_callback *",
+   "referenced_type" : "type-56",
+   "self_type" : "type-57",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const avc_thread_callback *",
+   "name" : "const avc_thread_callback *",
+   "referenced_type" : "type-60",
+   "self_type" : "type-61",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-35",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char **",
+   "name" : "const char **",
+   "referenced_type" : "type-34",
+   "self_type" : "type-85",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const selinux_opt *",
+   "name" : "const selinux_opt *",
+   "referenced_type" : "type-80",
+   "self_type" : "type-81",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "context_s_t *",
+   "name" : "context_s_t *",
+   "referenced_type" : "type-18",
+   "self_type" : "type-190",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/context.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(char **)",
+   "name" : "int (*)(char **)",
+   "referenced_type" : "type-13",
+   "self_type" : "type-15",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const char *, unsigned int, char *)",
+   "name" : "int (*)(const char *, unsigned int, char *)",
+   "referenced_type" : "type-87",
+   "self_type" : "type-88",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const char *, unsigned int, char **)",
+   "name" : "int (*)(const char *, unsigned int, char **)",
+   "referenced_type" : "type-89",
+   "self_type" : "type-90",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(int)",
+   "name" : "int (*)(int)",
+   "referenced_type" : "type-16",
+   "self_type" : "type-17",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(int, const char *, ...)",
+   "name" : "int (*)(int, const char *, ...)",
+   "referenced_type" : "type-76",
+   "self_type" : "type-75",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(unsigned int, security_id *, security_id *, unsigned short, unsigned int, unsigned int *)",
+   "name" : "int (*)(unsigned int, security_id *, security_id *, unsigned short, unsigned int, unsigned int *)",
+   "referenced_type" : "type-68",
+   "self_type" : "type-70",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(void *, unsigned short, char *, unsigned int)",
+   "name" : "int (*)(void *, unsigned short, char *, unsigned int)",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-50",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "security_class_mapping *",
+   "name" : "security_class_mapping *",
+   "referenced_type" : "type-54",
+   "self_type" : "type-248",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "security_id *",
+   "name" : "security_id *",
+   "referenced_type" : "type-21",
+   "self_type" : "type-49",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "security_id **",
+   "name" : "security_id **",
+   "referenced_type" : "type-49",
+   "self_type" : "type-51",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-137",
+   "self_type" : "type-136",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-149",
+   "self_type" : "type-148",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-193",
+   "self_type" : "type-192",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-205",
+   "self_type" : "type-204",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-254",
+   "self_type" : "type-253",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-258",
+   "self_type" : "type-257",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-270",
+   "self_type" : "type-269",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-314",
+   "self_type" : "type-313",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-326",
+   "self_type" : "type-325",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-375",
+   "self_type" : "type-374",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-79",
+   "self_type" : "type-78",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selabel_handle *",
+   "name" : "selabel_handle *",
+   "referenced_type" : "type-94",
+   "self_type" : "type-93",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/android.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "selinux_opt *",
+   "name" : "selinux_opt *",
+   "referenced_type" : "type-65",
+   "self_type" : "type-64",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-83",
+   "self_type" : "type-84",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char **",
+   "name" : "unsigned char **",
+   "referenced_type" : "type-84",
+   "self_type" : "type-86",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-69",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(const char *, ...)",
+   "name" : "void (*)(const char *, ...)",
+   "referenced_type" : "type-33",
+   "self_type" : "type-32",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *)",
+   "name" : "void (*)(void *)",
+   "referenced_type" : "type-30",
+   "self_type" : "type-29",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, unsigned short, char *, unsigned int)",
+   "name" : "void (*)(void *, unsigned short, char *, unsigned int)",
+   "referenced_type" : "type-37",
+   "self_type" : "type-36",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void)",
+   "name" : "void (*)(void)",
+   "referenced_type" : "type-43",
+   "self_type" : "type-42",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(unsigned int)",
+   "name" : "void *(*)(unsigned int)",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(void (*)(void))",
+   "name" : "void *(*)(void (*)(void))",
+   "referenced_type" : "type-41",
+   "self_type" : "type-40",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(void)",
+   "name" : "void *(*)(void)",
+   "referenced_type" : "type-46",
+   "self_type" : "type-45",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const avc_lock_callback",
+   "name" : "const avc_lock_callback",
+   "referenced_type" : "type-44",
+   "self_type" : "type-62",
+   "size" : 16,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const avc_log_callback",
+   "name" : "const avc_log_callback",
+   "referenced_type" : "type-31",
+   "self_type" : "type-58",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const avc_memory_callback",
+   "name" : "const avc_memory_callback",
+   "referenced_type" : "type-26",
+   "self_type" : "type-56",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const avc_thread_callback",
+   "name" : "const avc_thread_callback",
+   "referenced_type" : "type-39",
+   "self_type" : "type-60",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-7",
+   "self_type" : "type-35",
+   "size" : 1,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const selinux_opt",
+   "name" : "const selinux_opt",
+   "referenced_type" : "type-65",
+   "self_type" : "type-80",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/label.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "value",
+     "field_offset" : 32,
+     "referenced_type" : "type-12"
+    }
+   ],
+   "linker_set_key" : "SELboolean",
+   "name" : "SELboolean",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h",
+   "unique_id" : "SELboolean"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "allowed",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "decided",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "auditallow",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "auditdeny",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "seqno",
+     "field_offset" : 128,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 160,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "av_decision",
+   "name" : "av_decision",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 24,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h",
+   "unique_id" : "av_decision"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "entry_lookups",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "entry_hits",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "entry_misses",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "entry_discards",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "cav_lookups",
+     "field_offset" : 128,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "cav_hits",
+     "field_offset" : 160,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "cav_probes",
+     "field_offset" : 192,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "cav_misses",
+     "field_offset" : 224,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "avc_cache_stats",
+   "name" : "avc_cache_stats",
+   "referenced_type" : "type-48",
+   "self_type" : "type-48",
+   "size" : 32,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "avc_cache_stats"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "ae",
+     "referenced_type" : "type-24"
+    }
+   ],
+   "linker_set_key" : "avc_entry_ref",
+   "name" : "avc_entry_ref",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "avc_entry_ref"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "func_alloc_lock",
+     "referenced_type" : "type-45"
+    },
+    {
+     "field_name" : "func_get_lock",
+     "field_offset" : 32,
+     "referenced_type" : "type-29"
+    },
+    {
+     "field_name" : "func_release_lock",
+     "field_offset" : 64,
+     "referenced_type" : "type-29"
+    },
+    {
+     "field_name" : "func_free_lock",
+     "field_offset" : 96,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "linker_set_key" : "avc_lock_callback",
+   "name" : "avc_lock_callback",
+   "referenced_type" : "type-44",
+   "self_type" : "type-44",
+   "size" : 16,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "avc_lock_callback"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "func_log",
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "func_audit",
+     "field_offset" : 32,
+     "referenced_type" : "type-36"
+    }
+   ],
+   "linker_set_key" : "avc_log_callback",
+   "name" : "avc_log_callback",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "avc_log_callback"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "func_malloc",
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "func_free",
+     "field_offset" : 32,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "linker_set_key" : "avc_memory_callback",
+   "name" : "avc_memory_callback",
+   "referenced_type" : "type-26",
+   "self_type" : "type-26",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "avc_memory_callback"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "func_create_thread",
+     "referenced_type" : "type-40"
+    },
+    {
+     "field_name" : "func_stop_thread",
+     "field_offset" : 32,
+     "referenced_type" : "type-29"
+    }
+   ],
+   "linker_set_key" : "avc_thread_callback",
+   "name" : "avc_thread_callback",
+   "referenced_type" : "type-39",
+   "self_type" : "type-39",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "avc_thread_callback"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "ptr",
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "context_s_t",
+   "name" : "context_s_t",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/context.h",
+   "unique_id" : "context_s_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-34"
+    },
+    {
+     "field_name" : "perms",
+     "field_offset" : 32,
+     "referenced_type" : "type-55"
+    }
+   ],
+   "linker_set_key" : "security_class_mapping",
+   "name" : "security_class_mapping",
+   "referenced_type" : "type-54",
+   "self_type" : "type-54",
+   "size" : 136,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h",
+   "unique_id" : "security_class_mapping"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "ctx",
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "refcnt",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "security_id",
+   "name" : "security_id",
+   "referenced_type" : "type-21",
+   "self_type" : "type-21",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/avc.h",
+   "unique_id" : "security_id"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "func_log",
+     "referenced_type" : "type-75"
+    },
+    {
+     "field_name" : "func_audit",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "func_validate",
+     "referenced_type" : "type-15"
+    },
+    {
+     "field_name" : "func_setenforce",
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "func_policyload",
+     "referenced_type" : "type-17"
+    }
+   ],
+   "linker_set_key" : "selinux_callback",
+   "name" : "selinux_callback",
+   "record_kind" : "union",
+   "referenced_type" : "type-74",
+   "self_type" : "type-74",
+   "size" : 4,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h",
+   "unique_id" : "selinux_callback"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "type",
+     "referenced_type" : "type-12"
+    },
+    {
+     "field_name" : "value",
+     "field_offset" : 32,
+     "referenced_type" : "type-34"
+    }
+   ],
+   "linker_set_key" : "selinux_opt",
+   "name" : "selinux_opt",
+   "referenced_type" : "type-65",
+   "self_type" : "type-65",
+   "size" : 8,
+   "source_file" : "/external/selinux/libselinux/include/selinux/selinux.h",
+   "unique_id" : "selinux_opt"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

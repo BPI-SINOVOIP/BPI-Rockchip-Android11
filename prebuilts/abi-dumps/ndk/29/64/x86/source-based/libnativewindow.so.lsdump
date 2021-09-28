@@ -1,0 +1,2446 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AHardwareBuffer_Plane [4]",
+   "name" : "AHardwareBuffer_Plane [4]",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 48,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [4]",
+   "name" : "int [4]",
+   "referenced_type" : "type-2",
+   "self_type" : "type-66",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [6]",
+   "name" : "unsigned int [6]",
+   "referenced_type" : "type-4",
+   "self_type" : "type-60",
+   "size" : 24,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *[1]",
+   "name" : "void *[1]",
+   "referenced_type" : "type-20",
+   "self_type" : "type-39",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *[4]",
+   "name" : "void *[4]",
+   "referenced_type" : "type-20",
+   "self_type" : "type-33",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *[6]",
+   "name" : "void *[6]",
+   "referenced_type" : "type-20",
+   "self_type" : "type-40",
+   "size" : 24,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-46",
+   "self_type" : "type-46",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "float",
+   "name" : "float",
+   "referenced_type" : "type-65",
+   "self_type" : "type-65",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-21",
+   "self_type" : "type-21"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "AHardwareBuffer_acquire"
+  },
+  {
+   "name" : "AHardwareBuffer_allocate"
+  },
+  {
+   "name" : "AHardwareBuffer_createFromHandle"
+  },
+  {
+   "name" : "AHardwareBuffer_describe"
+  },
+  {
+   "name" : "AHardwareBuffer_getNativeHandle"
+  },
+  {
+   "name" : "AHardwareBuffer_isSupported"
+  },
+  {
+   "name" : "AHardwareBuffer_lock"
+  },
+  {
+   "name" : "AHardwareBuffer_lockAndGetInfo"
+  },
+  {
+   "name" : "AHardwareBuffer_lockPlanes"
+  },
+  {
+   "name" : "AHardwareBuffer_recvHandleFromUnixSocket"
+  },
+  {
+   "name" : "AHardwareBuffer_release"
+  },
+  {
+   "name" : "AHardwareBuffer_sendHandleToUnixSocket"
+  },
+  {
+   "name" : "AHardwareBuffer_unlock"
+  },
+  {
+   "name" : "ANativeWindowBuffer_getHardwareBuffer"
+  },
+  {
+   "name" : "ANativeWindow_OemStorageGet"
+  },
+  {
+   "name" : "ANativeWindow_OemStorageSet"
+  },
+  {
+   "name" : "ANativeWindow_acquire"
+  },
+  {
+   "name" : "ANativeWindow_cancelBuffer"
+  },
+  {
+   "name" : "ANativeWindow_dequeueBuffer"
+  },
+  {
+   "name" : "ANativeWindow_getBuffersDataSpace"
+  },
+  {
+   "name" : "ANativeWindow_getFormat"
+  },
+  {
+   "name" : "ANativeWindow_getHeight"
+  },
+  {
+   "name" : "ANativeWindow_getWidth"
+  },
+  {
+   "name" : "ANativeWindow_lock"
+  },
+  {
+   "name" : "ANativeWindow_query"
+  },
+  {
+   "name" : "ANativeWindow_queryf"
+  },
+  {
+   "name" : "ANativeWindow_queueBuffer"
+  },
+  {
+   "name" : "ANativeWindow_release"
+  },
+  {
+   "name" : "ANativeWindow_setAutoRefresh"
+  },
+  {
+   "name" : "ANativeWindow_setBufferCount"
+  },
+  {
+   "name" : "ANativeWindow_setBuffersDataSpace"
+  },
+  {
+   "name" : "ANativeWindow_setBuffersDimensions"
+  },
+  {
+   "name" : "ANativeWindow_setBuffersFormat"
+  },
+  {
+   "name" : "ANativeWindow_setBuffersGeometry"
+  },
+  {
+   "name" : "ANativeWindow_setBuffersTimestamp"
+  },
+  {
+   "name" : "ANativeWindow_setBuffersTransform"
+  },
+  {
+   "name" : "ANativeWindow_setSharedBufferMode"
+  },
+  {
+   "name" : "ANativeWindow_setSwapInterval"
+  },
+  {
+   "name" : "ANativeWindow_setUsage"
+  },
+  {
+   "name" : "ANativeWindow_unlockAndPost"
+  },
+  {
+   "name" : "_ZN7android32AHardwareBuffer_to_GraphicBufferEP15AHardwareBuffer"
+  },
+  {
+   "name" : "_ZN7android32AHardwareBuffer_to_GraphicBufferEPK15AHardwareBuffer"
+  },
+  {
+   "name" : "_ZN7android34AHardwareBuffer_from_GraphicBufferEPNS_13GraphicBufferE"
+  },
+  {
+   "name" : "_ZN7android34AHardwareBuffer_isValidPixelFormatEj"
+  },
+  {
+   "name" : "_ZN7android36AHardwareBuffer_convertToPixelFormatEj"
+  },
+  {
+   "name" : "_ZN7android38AHardwareBuffer_convertFromPixelFormatEj"
+  },
+  {
+   "name" : "_ZN7android38AHardwareBuffer_to_ANativeWindowBufferEP15AHardwareBuffer"
+  },
+  {
+   "name" : "_ZN7android38AHardwareBuffer_to_ANativeWindowBufferEPK15AHardwareBuffer"
+  },
+  {
+   "name" : "_ZN7android41AHardwareBuffer_convertToGrallocUsageBitsEy"
+  },
+  {
+   "name" : "_ZN7android43AHardwareBuffer_convertFromGrallocUsageBitsEy"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ADATASPACE_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 406913024,
+     "name" : "ADATASPACE_SCRGB_LINEAR"
+    },
+    {
+     "enum_field_value" : 142671872,
+     "name" : "ADATASPACE_SRGB"
+    },
+    {
+     "enum_field_value" : 411107328,
+     "name" : "ADATASPACE_SCRGB"
+    },
+    {
+     "enum_field_value" : 143261696,
+     "name" : "ADATASPACE_DISPLAY_P3"
+    },
+    {
+     "enum_field_value" : 163971072,
+     "name" : "ADATASPACE_BT2020_PQ"
+    }
+   ],
+   "linker_set_key" : "ADataSpace",
+   "name" : "ADataSpace",
+   "referenced_type" : "type-56",
+   "self_type" : "type-56",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/data_space.h",
+   "underlying_type" : "type-4",
+   "unique_id" : "ADataSpace"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AHARDWAREBUFFER_FORMAT_R8G8B8_UNORM"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "AHARDWAREBUFFER_FORMAT_R5G6B5_UNORM"
+    },
+    {
+     "enum_field_value" : 22,
+     "name" : "AHARDWAREBUFFER_FORMAT_R16G16B16A16_FLOAT"
+    },
+    {
+     "enum_field_value" : 43,
+     "name" : "AHARDWAREBUFFER_FORMAT_R10G10B10A2_UNORM"
+    },
+    {
+     "enum_field_value" : 33,
+     "name" : "AHARDWAREBUFFER_FORMAT_BLOB"
+    },
+    {
+     "enum_field_value" : 48,
+     "name" : "AHARDWAREBUFFER_FORMAT_D16_UNORM"
+    },
+    {
+     "enum_field_value" : 49,
+     "name" : "AHARDWAREBUFFER_FORMAT_D24_UNORM"
+    },
+    {
+     "enum_field_value" : 50,
+     "name" : "AHARDWAREBUFFER_FORMAT_D24_UNORM_S8_UINT"
+    },
+    {
+     "enum_field_value" : 51,
+     "name" : "AHARDWAREBUFFER_FORMAT_D32_FLOAT"
+    },
+    {
+     "enum_field_value" : 52,
+     "name" : "AHARDWAREBUFFER_FORMAT_D32_FLOAT_S8_UINT"
+    },
+    {
+     "enum_field_value" : 53,
+     "name" : "AHARDWAREBUFFER_FORMAT_S8_UINT"
+    },
+    {
+     "enum_field_value" : 35,
+     "name" : "AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420"
+    }
+   ],
+   "linker_set_key" : "AHardwareBuffer_Format",
+   "name" : "AHardwareBuffer_Format",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h",
+   "underlying_type" : "type-4",
+   "unique_id" : "AHardwareBuffer_Format"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_READ_NEVER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_READ_RARELY"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_READ_OFTEN"
+    },
+    {
+     "enum_field_value" : 15,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_READ_MASK"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_WRITE_NEVER"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_WRITE_RARELY"
+    },
+    {
+     "enum_field_value" : 48,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN"
+    },
+    {
+     "enum_field_value" : 240,
+     "name" : "AHARDWAREBUFFER_USAGE_CPU_WRITE_MASK"
+    },
+    {
+     "enum_field_value" : 256,
+     "name" : "AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE"
+    },
+    {
+     "enum_field_value" : 512,
+     "name" : "AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER"
+    },
+    {
+     "enum_field_value" : 512,
+     "name" : "AHARDWAREBUFFER_USAGE_GPU_COLOR_OUTPUT"
+    },
+    {
+     "enum_field_value" : 2048,
+     "name" : "AHARDWAREBUFFER_USAGE_COMPOSER_OVERLAY"
+    },
+    {
+     "enum_field_value" : 16384,
+     "name" : "AHARDWAREBUFFER_USAGE_PROTECTED_CONTENT"
+    },
+    {
+     "enum_field_value" : 65536,
+     "name" : "AHARDWAREBUFFER_USAGE_VIDEO_ENCODE"
+    },
+    {
+     "enum_field_value" : 8388608,
+     "name" : "AHARDWAREBUFFER_USAGE_SENSOR_DIRECT_DATA"
+    },
+    {
+     "enum_field_value" : 16777216,
+     "name" : "AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER"
+    },
+    {
+     "enum_field_value" : 33554432,
+     "name" : "AHARDWAREBUFFER_USAGE_GPU_CUBE_MAP"
+    },
+    {
+     "enum_field_value" : 67108864,
+     "name" : "AHARDWAREBUFFER_USAGE_GPU_MIPMAP_COMPLETE"
+    },
+    {
+     "enum_field_value" : 268435456,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_0"
+    },
+    {
+     "enum_field_value" : 536870912,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_1"
+    },
+    {
+     "enum_field_value" : 1073741824,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_2"
+    },
+    {
+     "enum_field_value" : -2147483648,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_3"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_4"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_5"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_6"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_7"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_8"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_9"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_10"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_11"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_12"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_13"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_14"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_15"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_16"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_17"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_18"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AHARDWAREBUFFER_USAGE_VENDOR_19"
+    }
+   ],
+   "linker_set_key" : "AHardwareBuffer_UsageFlags",
+   "name" : "AHardwareBuffer_UsageFlags",
+   "referenced_type" : "type-52",
+   "self_type" : "type-52",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h",
+   "underlying_type" : "type-5",
+   "unique_id" : "AHardwareBuffer_UsageFlags"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 3,
+     "name" : "ANATIVEWINDOW_QUERY_MIN_UNDEQUEUED_BUFFERS"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ANATIVEWINDOW_QUERY_DEFAULT_WIDTH"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANATIVEWINDOW_QUERY_DEFAULT_HEIGHT"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "ANATIVEWINDOW_QUERY_TRANSFORM_HINT"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "ANATIVEWINDOW_QUERY_BUFFER_AGE"
+    },
+    {
+     "enum_field_value" : 65536,
+     "name" : "ANATIVEWINDOW_QUERY_MIN_SWAP_INTERVAL"
+    },
+    {
+     "enum_field_value" : 65537,
+     "name" : "ANATIVEWINDOW_QUERY_MAX_SWAP_INTERVAL"
+    },
+    {
+     "enum_field_value" : 65538,
+     "name" : "ANATIVEWINDOW_QUERY_XDPI"
+    },
+    {
+     "enum_field_value" : 65539,
+     "name" : "ANATIVEWINDOW_QUERY_YDPI"
+    }
+   ],
+   "linker_set_key" : "ANativeWindowQuery",
+   "name" : "ANativeWindowQuery",
+   "referenced_type" : "type-89",
+   "self_type" : "type-89",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h",
+   "underlying_type" : "type-4",
+   "unique_id" : "ANativeWindowQuery"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANATIVEWINDOW_TRANSFORM_IDENTITY"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANATIVEWINDOW_TRANSFORM_MIRROR_HORIZONTAL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANATIVEWINDOW_TRANSFORM_MIRROR_VERTICAL"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANATIVEWINDOW_TRANSFORM_ROTATE_90"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANATIVEWINDOW_TRANSFORM_ROTATE_180"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANATIVEWINDOW_TRANSFORM_ROTATE_270"
+    }
+   ],
+   "linker_set_key" : "ANativeWindowTransform",
+   "name" : "ANativeWindowTransform",
+   "referenced_type" : "type-58",
+   "self_type" : "type-58",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h",
+   "underlying_type" : "type-4",
+   "unique_id" : "ANativeWindowTransform"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "WINDOW_FORMAT_RGBA_8888"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "WINDOW_FORMAT_RGBX_8888"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "WINDOW_FORMAT_RGB_565"
+    }
+   ],
+   "linker_set_key" : "ANativeWindow_LegacyFormat",
+   "name" : "ANativeWindow_LegacyFormat",
+   "referenced_type" : "type-57",
+   "self_type" : "type-57",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h",
+   "underlying_type" : "type-4",
+   "unique_id" : "ANativeWindow_LegacyFormat"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 2,
+     "name" : "AHARDWAREBUFFER_CREATE_FROM_HANDLE_METHOD_REGISTER"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AHARDWAREBUFFER_CREATE_FROM_HANDLE_METHOD_CLONE"
+    }
+   ],
+   "linker_set_key" : "CreateFromHandleMethod",
+   "name" : "CreateFromHandleMethod",
+   "referenced_type" : "type-30",
+   "self_type" : "type-30",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/hardware_buffer.h",
+   "underlying_type" : "type-4",
+   "unique_id" : "CreateFromHandleMethod"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (ANativeWindow *, ANativeWindowBuffer *)",
+   "name" : "int (ANativeWindow *, ANativeWindowBuffer *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-41"
+    }
+   ],
+   "referenced_type" : "type-74",
+   "return_type" : "type-2",
+   "self_type" : "type-74",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (ANativeWindow *, ANativeWindowBuffer **)",
+   "name" : "int (ANativeWindow *, ANativeWindowBuffer **)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-72"
+    }
+   ],
+   "referenced_type" : "type-71",
+   "return_type" : "type-2",
+   "self_type" : "type-71",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (ANativeWindow *, ANativeWindowBuffer **, int *)",
+   "name" : "int (ANativeWindow *, ANativeWindowBuffer **, int *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "referenced_type" : "type-82",
+   "return_type" : "type-2",
+   "self_type" : "type-82",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (ANativeWindow *, ANativeWindowBuffer *, int)",
+   "name" : "int (ANativeWindow *, ANativeWindowBuffer *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-41"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-84",
+   "return_type" : "type-2",
+   "self_type" : "type-84",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (ANativeWindow *, int)",
+   "name" : "int (ANativeWindow *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-68",
+   "return_type" : "type-2",
+   "self_type" : "type-68",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (ANativeWindow *, int, ...)",
+   "name" : "int (ANativeWindow *, int, ...)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "referenced_type" : "type-80",
+   "return_type" : "type-2",
+   "self_type" : "type-80",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const ANativeWindow *, int, int *)",
+   "name" : "int (const ANativeWindow *, int, int *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "referenced_type" : "type-76",
+   "return_type" : "type-2",
+   "self_type" : "type-76",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (android_native_base_t *)",
+   "name" : "void (android_native_base_t *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-36"
+    }
+   ],
+   "referenced_type" : "type-35",
+   "return_type" : "type-21",
+   "self_type" : "type-35",
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "AHardwareBuffer_acquire",
+   "linker_set_key" : "AHardwareBuffer_acquire",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-21",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_allocate",
+   "linker_set_key" : "AHardwareBuffer_allocate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_createFromHandle",
+   "linker_set_key" : "AHardwareBuffer_createFromHandle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-27"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_describe",
+   "linker_set_key" : "AHardwareBuffer_describe",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-15"
+    },
+    {
+     "referenced_type" : "type-16"
+    }
+   ],
+   "return_type" : "type-21",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_getNativeHandle",
+   "linker_set_key" : "AHardwareBuffer_getNativeHandle",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-27",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_isSupported",
+   "linker_set_key" : "AHardwareBuffer_isSupported",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_lock",
+   "linker_set_key" : "AHardwareBuffer_lock",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_lockAndGetInfo",
+   "linker_set_key" : "AHardwareBuffer_lockAndGetInfo",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_lockPlanes",
+   "linker_set_key" : "AHardwareBuffer_lockPlanes",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-22"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_recvHandleFromUnixSocket",
+   "linker_set_key" : "AHardwareBuffer_recvHandleFromUnixSocket",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_release",
+   "linker_set_key" : "AHardwareBuffer_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-21",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_sendHandleToUnixSocket",
+   "linker_set_key" : "AHardwareBuffer_sendHandleToUnixSocket",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-15"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "AHardwareBuffer_unlock",
+   "linker_set_key" : "AHardwareBuffer_unlock",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "function_name" : "ANativeWindowBuffer_getHardwareBuffer",
+   "linker_set_key" : "ANativeWindowBuffer_getHardwareBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-41"
+    }
+   ],
+   "return_type" : "type-87",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_OemStorageGet",
+   "linker_set_key" : "ANativeWindow_OemStorageGet",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_OemStorageSet",
+   "linker_set_key" : "ANativeWindow_OemStorageSet",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_acquire",
+   "linker_set_key" : "ANativeWindow_acquire",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-21",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_cancelBuffer",
+   "linker_set_key" : "ANativeWindow_cancelBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-41"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_dequeueBuffer",
+   "linker_set_key" : "ANativeWindow_dequeueBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_getBuffersDataSpace",
+   "linker_set_key" : "ANativeWindow_getBuffersDataSpace",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_getFormat",
+   "linker_set_key" : "ANativeWindow_getFormat",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_getHeight",
+   "linker_set_key" : "ANativeWindow_getHeight",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_getWidth",
+   "linker_set_key" : "ANativeWindow_getWidth",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_lock",
+   "linker_set_key" : "ANativeWindow_lock",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-85"
+    },
+    {
+     "referenced_type" : "type-86"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_query",
+   "linker_set_key" : "ANativeWindow_query",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-89"
+    },
+    {
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_queryf",
+   "linker_set_key" : "ANativeWindow_queryf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-89"
+    },
+    {
+     "referenced_type" : "type-90"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_queueBuffer",
+   "linker_set_key" : "ANativeWindow_queueBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-41"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_release",
+   "linker_set_key" : "ANativeWindow_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-21",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setAutoRefresh",
+   "linker_set_key" : "ANativeWindow_setAutoRefresh",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBufferCount",
+   "linker_set_key" : "ANativeWindow_setBufferCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBuffersDataSpace",
+   "linker_set_key" : "ANativeWindow_setBuffersDataSpace",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBuffersDimensions",
+   "linker_set_key" : "ANativeWindow_setBuffersDimensions",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBuffersFormat",
+   "linker_set_key" : "ANativeWindow_setBuffersFormat",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBuffersGeometry",
+   "linker_set_key" : "ANativeWindow_setBuffersGeometry",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBuffersTimestamp",
+   "linker_set_key" : "ANativeWindow_setBuffersTimestamp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setBuffersTransform",
+   "linker_set_key" : "ANativeWindow_setBuffersTransform",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setSharedBufferMode",
+   "linker_set_key" : "ANativeWindow_setSharedBufferMode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setSwapInterval",
+   "linker_set_key" : "ANativeWindow_setSwapInterval",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_setUsage",
+   "linker_set_key" : "ANativeWindow_setUsage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "function_name" : "ANativeWindow_unlockAndPost",
+   "linker_set_key" : "ANativeWindow_unlockAndPost",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-69"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_to_GraphicBuffer",
+   "linker_set_key" : "_ZN7android32AHardwareBuffer_to_GraphicBufferEP15AHardwareBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-50",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_to_GraphicBuffer",
+   "linker_set_key" : "_ZN7android32AHardwareBuffer_to_GraphicBufferEPK15AHardwareBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-47",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_from_GraphicBuffer",
+   "linker_set_key" : "_ZN7android34AHardwareBuffer_from_GraphicBufferEPNS_13GraphicBufferE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_isValidPixelFormat",
+   "linker_set_key" : "_ZN7android34AHardwareBuffer_isValidPixelFormatEj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-46",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_convertToPixelFormat",
+   "linker_set_key" : "_ZN7android36AHardwareBuffer_convertToPixelFormatEj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_convertFromPixelFormat",
+   "linker_set_key" : "_ZN7android38AHardwareBuffer_convertFromPixelFormatEj",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-4",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_to_ANativeWindowBuffer",
+   "linker_set_key" : "_ZN7android38AHardwareBuffer_to_ANativeWindowBufferEP15AHardwareBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-41",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_to_ANativeWindowBuffer",
+   "linker_set_key" : "_ZN7android38AHardwareBuffer_to_ANativeWindowBufferEPK15AHardwareBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-43",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_convertToGrallocUsageBits",
+   "linker_set_key" : "_ZN7android41AHardwareBuffer_convertToGrallocUsageBitsEy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "function_name" : "android::AHardwareBuffer_convertFromGrallocUsageBits",
+   "linker_set_key" : "_ZN7android43AHardwareBuffer_convertFromGrallocUsageBitsEy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AHardwareBuffer *",
+   "name" : "AHardwareBuffer *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AHardwareBuffer *",
+   "name" : "AHardwareBuffer *",
+   "referenced_type" : "type-88",
+   "self_type" : "type-87",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AHardwareBuffer **",
+   "name" : "AHardwareBuffer **",
+   "referenced_type" : "type-10",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AHardwareBuffer_Desc *",
+   "name" : "AHardwareBuffer_Desc *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-16",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AHardwareBuffer_Planes *",
+   "name" : "AHardwareBuffer_Planes *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-22",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "ANativeWindow *",
+   "name" : "ANativeWindow *",
+   "referenced_type" : "type-61",
+   "self_type" : "type-69",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "ANativeWindowBuffer *",
+   "name" : "ANativeWindowBuffer *",
+   "referenced_type" : "type-38",
+   "self_type" : "type-41",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "ANativeWindowBuffer **",
+   "name" : "ANativeWindowBuffer **",
+   "referenced_type" : "type-41",
+   "self_type" : "type-72",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "ANativeWindow_Buffer *",
+   "name" : "ANativeWindow_Buffer *",
+   "referenced_type" : "type-59",
+   "self_type" : "type-85",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "ARect *",
+   "name" : "ARect *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-86",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::GraphicBuffer *",
+   "name" : "android::GraphicBuffer *",
+   "referenced_type" : "type-51",
+   "self_type" : "type-50",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android_native_base_t *",
+   "name" : "android_native_base_t *",
+   "referenced_type" : "type-32",
+   "self_type" : "type-36",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const AHardwareBuffer *",
+   "name" : "const AHardwareBuffer *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-15",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const AHardwareBuffer_Desc *",
+   "name" : "const AHardwareBuffer_Desc *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ANativeWindow *",
+   "name" : "const ANativeWindow *",
+   "referenced_type" : "type-78",
+   "self_type" : "type-77",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ANativeWindowBuffer *",
+   "name" : "const ANativeWindowBuffer *",
+   "referenced_type" : "type-42",
+   "self_type" : "type-43",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const ARect *",
+   "name" : "const ARect *",
+   "referenced_type" : "type-17",
+   "self_type" : "type-18",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::GraphicBuffer *",
+   "name" : "const android::GraphicBuffer *",
+   "referenced_type" : "type-48",
+   "self_type" : "type-47",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const native_handle *",
+   "name" : "const native_handle *",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const native_handle *",
+   "name" : "const native_handle *",
+   "referenced_type" : "type-53",
+   "self_type" : "type-55",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-44",
+   "self_type" : "type-45",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "float *",
+   "name" : "float *",
+   "referenced_type" : "type-65",
+   "self_type" : "type-90",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(ANativeWindow *, ANativeWindowBuffer *)",
+   "name" : "int (*)(ANativeWindow *, ANativeWindowBuffer *)",
+   "referenced_type" : "type-74",
+   "self_type" : "type-73",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(ANativeWindow *, ANativeWindowBuffer **)",
+   "name" : "int (*)(ANativeWindow *, ANativeWindowBuffer **)",
+   "referenced_type" : "type-71",
+   "self_type" : "type-70",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(ANativeWindow *, ANativeWindowBuffer **, int *)",
+   "name" : "int (*)(ANativeWindow *, ANativeWindowBuffer **, int *)",
+   "referenced_type" : "type-82",
+   "self_type" : "type-81",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(ANativeWindow *, ANativeWindowBuffer *, int)",
+   "name" : "int (*)(ANativeWindow *, ANativeWindowBuffer *, int)",
+   "referenced_type" : "type-84",
+   "self_type" : "type-83",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(ANativeWindow *, int)",
+   "name" : "int (*)(ANativeWindow *, int)",
+   "referenced_type" : "type-68",
+   "self_type" : "type-67",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(ANativeWindow *, int, ...)",
+   "name" : "int (*)(ANativeWindow *, int, ...)",
+   "referenced_type" : "type-80",
+   "self_type" : "type-79",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(const ANativeWindow *, int, int *)",
+   "name" : "int (*)(const ANativeWindow *, int, int *)",
+   "referenced_type" : "type-76",
+   "self_type" : "type-75",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-26",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(android_native_base_t *)",
+   "name" : "void (*)(android_native_base_t *)",
+   "referenced_type" : "type-35",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-21",
+   "self_type" : "type-20",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void **",
+   "name" : "void **",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "is_const" : true,
+   "linker_set_key" : "const AHardwareBuffer",
+   "name" : "const AHardwareBuffer",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const AHardwareBuffer_Desc",
+   "name" : "const AHardwareBuffer_Desc",
+   "referenced_type" : "type-3",
+   "self_type" : "type-9",
+   "size" : 40,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ANativeWindow",
+   "name" : "const ANativeWindow",
+   "referenced_type" : "type-61",
+   "self_type" : "type-78",
+   "size" : 108,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/window.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ANativeWindowBuffer",
+   "name" : "const ANativeWindowBuffer",
+   "referenced_type" : "type-38",
+   "self_type" : "type-42",
+   "size" : 96,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const ARect",
+   "name" : "const ARect",
+   "referenced_type" : "type-1",
+   "self_type" : "type-17",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const android::GraphicBuffer",
+   "name" : "const android::GraphicBuffer",
+   "referenced_type" : "type-49",
+   "self_type" : "type-48",
+   "size" : 156,
+   "source_file" : "/frameworks/native/libs/nativewindow/include-private/private/android/AHardwareBufferHelpers.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const float",
+   "name" : "const float",
+   "referenced_type" : "type-65",
+   "self_type" : "type-64",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const int",
+   "name" : "const int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-63",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const long long",
+   "name" : "const long long",
+   "referenced_type" : "type-7",
+   "self_type" : "type-6",
+   "size" : 8,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const native_handle",
+   "name" : "const native_handle",
+   "referenced_type" : "type-29",
+   "self_type" : "type-28",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/vndk/hardware_buffer.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const native_handle",
+   "name" : "const native_handle",
+   "referenced_type" : "type-54",
+   "self_type" : "type-53",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-4",
+   "self_type" : "type-62",
+   "size" : 4,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-21",
+   "self_type" : "type-44",
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "width",
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "height",
+     "field_offset" : 32,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "layers",
+     "field_offset" : 64,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 96,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "usage",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "stride",
+     "field_offset" : 192,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "rfu0",
+     "field_offset" : 224,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "rfu1",
+     "field_offset" : 256,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "AHardwareBuffer_Desc",
+   "name" : "AHardwareBuffer_Desc",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 40,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h",
+   "unique_id" : "AHardwareBuffer_Desc"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "data",
+     "referenced_type" : "type-20"
+    },
+    {
+     "field_name" : "pixelStride",
+     "field_offset" : 32,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "rowStride",
+     "field_offset" : 64,
+     "referenced_type" : "type-4"
+    }
+   ],
+   "linker_set_key" : "AHardwareBuffer_Plane",
+   "name" : "AHardwareBuffer_Plane",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 12,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h",
+   "unique_id" : "AHardwareBuffer_Plane"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "planeCount",
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "planes",
+     "field_offset" : 32,
+     "referenced_type" : "type-24"
+    }
+   ],
+   "linker_set_key" : "AHardwareBuffer_Planes",
+   "name" : "AHardwareBuffer_Planes",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 52,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/hardware_buffer.h",
+   "unique_id" : "AHardwareBuffer_Planes"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "common",
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 256,
+     "referenced_type" : "type-62"
+    },
+    {
+     "field_name" : "minSwapInterval",
+     "field_offset" : 288,
+     "referenced_type" : "type-63"
+    },
+    {
+     "field_name" : "maxSwapInterval",
+     "field_offset" : 320,
+     "referenced_type" : "type-63"
+    },
+    {
+     "field_name" : "xdpi",
+     "field_offset" : 352,
+     "referenced_type" : "type-64"
+    },
+    {
+     "field_name" : "ydpi",
+     "field_offset" : 384,
+     "referenced_type" : "type-64"
+    },
+    {
+     "field_name" : "oem",
+     "field_offset" : 416,
+     "referenced_type" : "type-66"
+    },
+    {
+     "field_name" : "setSwapInterval",
+     "field_offset" : 544,
+     "referenced_type" : "type-67"
+    },
+    {
+     "field_name" : "dequeueBuffer_DEPRECATED",
+     "field_offset" : 576,
+     "referenced_type" : "type-70"
+    },
+    {
+     "field_name" : "lockBuffer_DEPRECATED",
+     "field_offset" : 608,
+     "referenced_type" : "type-73"
+    },
+    {
+     "field_name" : "queueBuffer_DEPRECATED",
+     "field_offset" : 640,
+     "referenced_type" : "type-73"
+    },
+    {
+     "field_name" : "query",
+     "field_offset" : 672,
+     "referenced_type" : "type-75"
+    },
+    {
+     "field_name" : "perform",
+     "field_offset" : 704,
+     "referenced_type" : "type-79"
+    },
+    {
+     "field_name" : "cancelBuffer_DEPRECATED",
+     "field_offset" : 736,
+     "referenced_type" : "type-73"
+    },
+    {
+     "field_name" : "dequeueBuffer",
+     "field_offset" : 768,
+     "referenced_type" : "type-81"
+    },
+    {
+     "field_name" : "queueBuffer",
+     "field_offset" : 800,
+     "referenced_type" : "type-83"
+    },
+    {
+     "field_name" : "cancelBuffer",
+     "field_offset" : 832,
+     "referenced_type" : "type-83"
+    }
+   ],
+   "linker_set_key" : "ANativeWindow",
+   "name" : "ANativeWindow",
+   "referenced_type" : "type-61",
+   "self_type" : "type-61",
+   "size" : 108,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/system/window.h",
+   "unique_id" : "ANativeWindow"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "common",
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "width",
+     "field_offset" : 256,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "height",
+     "field_offset" : 288,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "stride",
+     "field_offset" : 320,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 352,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "usage_deprecated",
+     "field_offset" : 384,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "layerCount",
+     "field_offset" : 416,
+     "referenced_type" : "type-4"
+    },
+    {
+     "field_name" : "reserved",
+     "field_offset" : 448,
+     "referenced_type" : "type-39"
+    },
+    {
+     "field_name" : "handle",
+     "field_offset" : 480,
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "usage",
+     "field_offset" : 512,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "reserved_proc",
+     "field_offset" : 576,
+     "referenced_type" : "type-40"
+    }
+   ],
+   "linker_set_key" : "ANativeWindowBuffer",
+   "name" : "ANativeWindowBuffer",
+   "referenced_type" : "type-38",
+   "self_type" : "type-38",
+   "size" : 96,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h",
+   "unique_id" : "ANativeWindowBuffer"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "width",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "height",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "stride",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "format",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "bits",
+     "field_offset" : 128,
+     "referenced_type" : "type-20"
+    },
+    {
+     "field_name" : "reserved",
+     "field_offset" : 160,
+     "referenced_type" : "type-60"
+    }
+   ],
+   "linker_set_key" : "ANativeWindow_Buffer",
+   "name" : "ANativeWindow_Buffer",
+   "referenced_type" : "type-59",
+   "self_type" : "type-59",
+   "size" : 44,
+   "source_file" : "/frameworks/native/libs/nativewindow/include/android/native_window.h",
+   "unique_id" : "ANativeWindow_Buffer"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "left",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "top",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "right",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "bottom",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "ARect",
+   "name" : "ARect",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/arect/include/android/rect.h",
+   "unique_id" : "ARect"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "magic",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "version",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "reserved",
+     "field_offset" : 64,
+     "referenced_type" : "type-33"
+    },
+    {
+     "field_name" : "incRef",
+     "field_offset" : 192,
+     "referenced_type" : "type-34"
+    },
+    {
+     "field_name" : "decRef",
+     "field_offset" : 224,
+     "referenced_type" : "type-34"
+    }
+   ],
+   "linker_set_key" : "android_native_base_t",
+   "name" : "android_native_base_t",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 32,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h",
+   "unique_id" : "android_native_base_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "left",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "top",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "right",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "bottom",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "android_native_rect_t",
+   "name" : "android_native_rect_t",
+   "referenced_type" : "type-37",
+   "self_type" : "type-37",
+   "size" : 16,
+   "source_file" : "/frameworks/native/libs/nativebase/include/nativebase/nativebase.h",
+   "unique_id" : "android_native_rect_t"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

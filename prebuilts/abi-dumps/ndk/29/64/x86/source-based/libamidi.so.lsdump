@@ -1,0 +1,492 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 8
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-33",
+   "self_type" : "type-33"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "AMidiDevice_fromJava"
+  },
+  {
+   "name" : "AMidiDevice_getNumInputPorts"
+  },
+  {
+   "name" : "AMidiDevice_getNumOutputPorts"
+  },
+  {
+   "name" : "AMidiDevice_getType"
+  },
+  {
+   "name" : "AMidiDevice_release"
+  },
+  {
+   "name" : "AMidiInputPort_close"
+  },
+  {
+   "name" : "AMidiInputPort_open"
+  },
+  {
+   "name" : "AMidiInputPort_send"
+  },
+  {
+   "name" : "AMidiInputPort_sendFlush"
+  },
+  {
+   "name" : "AMidiInputPort_sendWithTimestamp"
+  },
+  {
+   "name" : "AMidiOutputPort_close"
+  },
+  {
+   "name" : "AMidiOutputPort_open"
+  },
+  {
+   "name" : "AMidiOutputPort_receive"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "AMidiDevice_fromJava",
+   "linker_set_key" : "AMidiDevice_fromJava",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-21"
+    },
+    {
+     "referenced_type" : "type-25"
+    },
+    {
+     "referenced_type" : "type-29"
+    }
+   ],
+   "return_type" : "type-34",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_getNumInputPorts",
+   "linker_set_key" : "AMidiDevice_getNumInputPorts",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_getNumOutputPorts",
+   "linker_set_key" : "AMidiDevice_getNumOutputPorts",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_getType",
+   "linker_set_key" : "AMidiDevice_getType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiDevice_release",
+   "linker_set_key" : "AMidiDevice_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-35",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_close",
+   "linker_set_key" : "AMidiInputPort_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-33",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_open",
+   "linker_set_key" : "AMidiInputPort_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-36",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_send",
+   "linker_set_key" : "AMidiInputPort_send",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-20"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_sendFlush",
+   "linker_set_key" : "AMidiInputPort_sendFlush",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-20"
+    }
+   ],
+   "return_type" : "type-37",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiInputPort_sendWithTimestamp",
+   "linker_set_key" : "AMidiInputPort_sendWithTimestamp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-20"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiOutputPort_close",
+   "linker_set_key" : "AMidiOutputPort_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-33",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiOutputPort_open",
+   "linker_set_key" : "AMidiOutputPort_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-38",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "function_name" : "AMidiOutputPort_receive",
+   "linker_set_key" : "AMidiOutputPort_receive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-4"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-8",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AMidiDevice *",
+   "name" : "AMidiDevice *",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AMidiDevice **",
+   "name" : "AMidiDevice **",
+   "referenced_type" : "type-27",
+   "self_type" : "type-29",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AMidiInputPort *",
+   "name" : "AMidiInputPort *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-15",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AMidiInputPort **",
+   "name" : "AMidiInputPort **",
+   "referenced_type" : "type-15",
+   "self_type" : "type-17",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AMidiOutputPort *",
+   "name" : "AMidiOutputPort *",
+   "referenced_type" : "type-31",
+   "self_type" : "type-30",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "AMidiOutputPort **",
+   "name" : "AMidiOutputPort **",
+   "referenced_type" : "type-30",
+   "self_type" : "type-32",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_JNIEnv *",
+   "name" : "_JNIEnv *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-21",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_jobject *",
+   "name" : "_jobject *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-25",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const AMidiDevice *",
+   "name" : "const AMidiDevice *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const AMidiInputPort *",
+   "name" : "const AMidiInputPort *",
+   "referenced_type" : "type-18",
+   "self_type" : "type-20",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const AMidiOutputPort *",
+   "name" : "const AMidiOutputPort *",
+   "referenced_type" : "type-5",
+   "self_type" : "type-4",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "long long *",
+   "name" : "long long *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const AMidiDevice",
+   "name" : "const AMidiDevice",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 28,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const AMidiInputPort",
+   "name" : "const AMidiInputPort",
+   "referenced_type" : "type-19",
+   "self_type" : "type-18",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const AMidiOutputPort",
+   "name" : "const AMidiOutputPort",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-9",
+   "self_type" : "type-23",
+   "size" : 1,
+   "source_file" : "/frameworks/base/media/native/midi/include/amidi/AMidi.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

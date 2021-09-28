@@ -1,0 +1,2345 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIA15_PKc",
+   "name" : "const char *[15]",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIA15_PKc",
+   "size" : 60,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "eglBindAPI"
+  },
+  {
+   "name" : "eglBindTexImage"
+  },
+  {
+   "name" : "eglChooseConfig"
+  },
+  {
+   "name" : "eglClientWaitSync"
+  },
+  {
+   "name" : "eglClientWaitSyncKHR"
+  },
+  {
+   "name" : "eglCopyBuffers"
+  },
+  {
+   "name" : "eglCreateContext"
+  },
+  {
+   "name" : "eglCreateImage"
+  },
+  {
+   "name" : "eglCreateImageKHR"
+  },
+  {
+   "name" : "eglCreatePbufferFromClientBuffer"
+  },
+  {
+   "name" : "eglCreatePbufferSurface"
+  },
+  {
+   "name" : "eglCreatePixmapSurface"
+  },
+  {
+   "name" : "eglCreatePlatformPixmapSurface"
+  },
+  {
+   "name" : "eglCreatePlatformWindowSurface"
+  },
+  {
+   "name" : "eglCreateStreamFromFileDescriptorKHR"
+  },
+  {
+   "name" : "eglCreateStreamKHR"
+  },
+  {
+   "name" : "eglCreateStreamProducerSurfaceKHR"
+  },
+  {
+   "name" : "eglCreateSync"
+  },
+  {
+   "name" : "eglCreateSyncKHR"
+  },
+  {
+   "name" : "eglCreateWindowSurface"
+  },
+  {
+   "name" : "eglDestroyContext"
+  },
+  {
+   "name" : "eglDestroyImage"
+  },
+  {
+   "name" : "eglDestroyImageKHR"
+  },
+  {
+   "name" : "eglDestroyStreamKHR"
+  },
+  {
+   "name" : "eglDestroySurface"
+  },
+  {
+   "name" : "eglDestroySync"
+  },
+  {
+   "name" : "eglDestroySyncKHR"
+  },
+  {
+   "name" : "eglDupNativeFenceFDANDROID"
+  },
+  {
+   "name" : "eglGetConfigAttrib"
+  },
+  {
+   "name" : "eglGetConfigs"
+  },
+  {
+   "name" : "eglGetCurrentContext"
+  },
+  {
+   "name" : "eglGetCurrentDisplay"
+  },
+  {
+   "name" : "eglGetCurrentSurface"
+  },
+  {
+   "name" : "eglGetDisplay"
+  },
+  {
+   "name" : "eglGetError"
+  },
+  {
+   "name" : "eglGetNativeClientBufferANDROID"
+  },
+  {
+   "name" : "eglGetPlatformDisplay"
+  },
+  {
+   "name" : "eglGetProcAddress"
+  },
+  {
+   "name" : "eglGetStreamFileDescriptorKHR"
+  },
+  {
+   "name" : "eglGetSyncAttrib"
+  },
+  {
+   "name" : "eglGetSyncAttribKHR"
+  },
+  {
+   "name" : "eglGetSystemTimeFrequencyNV"
+  },
+  {
+   "name" : "eglGetSystemTimeNV"
+  },
+  {
+   "name" : "eglInitialize"
+  },
+  {
+   "name" : "eglLockSurfaceKHR"
+  },
+  {
+   "name" : "eglMakeCurrent"
+  },
+  {
+   "name" : "eglPresentationTimeANDROID"
+  },
+  {
+   "name" : "eglQueryAPI"
+  },
+  {
+   "name" : "eglQueryContext"
+  },
+  {
+   "name" : "eglQueryStreamKHR"
+  },
+  {
+   "name" : "eglQueryStreamTimeKHR"
+  },
+  {
+   "name" : "eglQueryStreamu64KHR"
+  },
+  {
+   "name" : "eglQueryString"
+  },
+  {
+   "name" : "eglQueryStringImplementationANDROID"
+  },
+  {
+   "name" : "eglQuerySurface"
+  },
+  {
+   "name" : "eglReleaseTexImage"
+  },
+  {
+   "name" : "eglReleaseThread"
+  },
+  {
+   "name" : "eglSetDamageRegionKHR"
+  },
+  {
+   "name" : "eglSignalSyncKHR"
+  },
+  {
+   "name" : "eglStreamAttribKHR"
+  },
+  {
+   "name" : "eglStreamConsumerAcquireKHR"
+  },
+  {
+   "name" : "eglStreamConsumerGLTextureExternalKHR"
+  },
+  {
+   "name" : "eglStreamConsumerReleaseKHR"
+  },
+  {
+   "name" : "eglSurfaceAttrib"
+  },
+  {
+   "name" : "eglSwapBuffers"
+  },
+  {
+   "name" : "eglSwapBuffersWithDamageKHR"
+  },
+  {
+   "name" : "eglSwapInterval"
+  },
+  {
+   "name" : "eglTerminate"
+  },
+  {
+   "name" : "eglUnlockSurfaceKHR"
+  },
+  {
+   "name" : "eglWaitClient"
+  },
+  {
+   "name" : "eglWaitGL"
+  },
+  {
+   "name" : "eglWaitNative"
+  },
+  {
+   "name" : "eglWaitSync"
+  },
+  {
+   "name" : "eglWaitSyncKHR"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "KHRONOS_FALSE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "KHRONOS_TRUE"
+    },
+    {
+     "enum_field_value" : 2147483647,
+     "name" : "KHRONOS_BOOLEAN_ENUM_FORCE_SIZE"
+    }
+   ],
+   "linker_set_key" : "_ZTI22khronos_boolean_enum_t",
+   "name" : "khronos_boolean_enum_t",
+   "referenced_type" : "_ZTI22khronos_boolean_enum_t",
+   "self_type" : "_ZTI22khronos_boolean_enum_t",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/KHR/khrplatform.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFPKhPN5angle15PlatformMethodsEPKcE",
+   "name" : "const unsigned char *(angle::PlatformMethods *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "referenced_type" : "_ZTIFPKhPN5angle15PlatformMethodsEPKcE",
+   "return_type" : "_ZTIPKh",
+   "self_type" : "_ZTIFPKhPN5angle15PlatformMethodsEPKcE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFdPN5angle15PlatformMethodsEE",
+   "name" : "double (angle::PlatformMethods *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    }
+   ],
+   "referenced_type" : "_ZTIFdPN5angle15PlatformMethodsEE",
+   "return_type" : "_ZTId",
+   "self_type" : "_ZTIFdPN5angle15PlatformMethodsEE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPKcE",
+   "name" : "void (angle::PlatformMethods *, const char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKcE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPKcE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPKcbE",
+   "name" : "void (angle::PlatformMethods *, const char *, bool)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKcbE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPKcbE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPKciE",
+   "name" : "void (angle::PlatformMethods *, const char *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPKciiE",
+   "name" : "void (angle::PlatformMethods *, const char *, int, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciiE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciiE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPKciiiiE",
+   "name" : "void (angle::PlatformMethods *, const char *, int, int, int, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciiiiE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciiiiE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPKhPKcyE",
+   "name" : "void (angle::PlatformMethods *, const unsigned char *, const char *, unsigned long long)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKhPKcyE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPKhPKcyE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE",
+   "name" : "void (angle::PlatformMethods *, angle::FeaturesVk *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPN5angle10FeaturesVkE"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE",
+   "name" : "void (angle::PlatformMethods *, angle::WorkaroundsD3D *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIPN5angle14WorkaroundsD3DE"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE",
+   "name" : "void (angle::PlatformMethods *, const std::__1::array<unsigned char, 20> &, unsigned int, const unsigned char *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIRKNSt3__15arrayIhLj20EEE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    }
+   ],
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvvE",
+   "name" : "void ()",
+   "referenced_type" : "_ZTIFvvE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvvE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE",
+   "name" : "unsigned long long (angle::PlatformMethods *, char, const unsigned char *, const char *, unsigned long long, double, int, const char **, const unsigned char *, const unsigned long long *, unsigned char)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPN5angle15PlatformMethodsE"
+    },
+    {
+     "referenced_type" : "_ZTIc"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    },
+    {
+     "referenced_type" : "_ZTId"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKh"
+    },
+    {
+     "referenced_type" : "_ZTIPKy"
+    },
+    {
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "referenced_type" : "_ZTIFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE",
+   "return_type" : "_ZTIy",
+   "self_type" : "_ZTIFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "eglBindAPI",
+   "linker_set_key" : "eglBindAPI",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglBindTexImage",
+   "linker_set_key" : "eglBindTexImage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglChooseConfig",
+   "linker_set_key" : "eglChooseConfig",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    },
+    {
+     "referenced_type" : "_ZTIPPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglClientWaitSync",
+   "linker_set_key" : "eglClientWaitSync",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglClientWaitSyncKHR",
+   "linker_set_key" : "eglClientWaitSyncKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIy"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglCopyBuffers",
+   "linker_set_key" : "eglCopyBuffers",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIP19egl_native_pixmap_t"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreateContext",
+   "linker_set_key" : "eglCreateContext",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreateImage",
+   "linker_set_key" : "eglCreateImage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreateImageKHR",
+   "linker_set_key" : "eglCreateImageKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglCreatePbufferFromClientBuffer",
+   "linker_set_key" : "eglCreatePbufferFromClientBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreatePbufferSurface",
+   "linker_set_key" : "eglCreatePbufferSurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreatePixmapSurface",
+   "linker_set_key" : "eglCreatePixmapSurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIP19egl_native_pixmap_t"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreatePlatformPixmapSurface",
+   "linker_set_key" : "eglCreatePlatformPixmapSurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreatePlatformWindowSurface",
+   "linker_set_key" : "eglCreatePlatformWindowSurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreateStreamFromFileDescriptorKHR",
+   "linker_set_key" : "eglCreateStreamFromFileDescriptorKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglCreateStreamKHR",
+   "linker_set_key" : "eglCreateStreamKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglCreateStreamProducerSurfaceKHR",
+   "linker_set_key" : "eglCreateStreamProducerSurfaceKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglCreateSync",
+   "linker_set_key" : "eglCreateSync",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglCreateSyncKHR",
+   "linker_set_key" : "eglCreateSyncKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglCreateWindowSurface",
+   "linker_set_key" : "eglCreateWindowSurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIP13ANativeWindow"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglDestroyContext",
+   "linker_set_key" : "eglDestroyContext",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglDestroyImage",
+   "linker_set_key" : "eglDestroyImage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglDestroyImageKHR",
+   "linker_set_key" : "eglDestroyImageKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglDestroyStreamKHR",
+   "linker_set_key" : "eglDestroyStreamKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglDestroySurface",
+   "linker_set_key" : "eglDestroySurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglDestroySync",
+   "linker_set_key" : "eglDestroySync",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglDestroySyncKHR",
+   "linker_set_key" : "eglDestroySyncKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglDupNativeFenceFDANDROID",
+   "linker_set_key" : "eglDupNativeFenceFDANDROID",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglGetConfigAttrib",
+   "linker_set_key" : "eglGetConfigAttrib",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetConfigs",
+   "linker_set_key" : "eglGetConfigs",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetCurrentContext",
+   "linker_set_key" : "eglGetCurrentContext",
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetCurrentDisplay",
+   "linker_set_key" : "eglGetCurrentDisplay",
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetCurrentSurface",
+   "linker_set_key" : "eglGetCurrentSurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetDisplay",
+   "linker_set_key" : "eglGetDisplay",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetError",
+   "linker_set_key" : "eglGetError",
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetNativeClientBufferANDROID",
+   "linker_set_key" : "eglGetNativeClientBufferANDROID",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPK15AHardwareBuffer"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglGetPlatformDisplay",
+   "linker_set_key" : "eglGetPlatformDisplay",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIPv",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetProcAddress",
+   "linker_set_key" : "eglGetProcAddress",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPFvvE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetStreamFileDescriptorKHR",
+   "linker_set_key" : "eglGetStreamFileDescriptorKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglGetSyncAttrib",
+   "linker_set_key" : "eglGetSyncAttrib",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglGetSyncAttribKHR",
+   "linker_set_key" : "eglGetSyncAttribKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglGetSystemTimeFrequencyNV",
+   "linker_set_key" : "eglGetSystemTimeFrequencyNV",
+   "return_type" : "_ZTIy",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglGetSystemTimeNV",
+   "linker_set_key" : "eglGetSystemTimeNV",
+   "return_type" : "_ZTIy",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglInitialize",
+   "linker_set_key" : "eglInitialize",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglLockSurfaceKHR",
+   "linker_set_key" : "eglLockSurfaceKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPKi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglMakeCurrent",
+   "linker_set_key" : "eglMakeCurrent",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglPresentationTimeANDROID",
+   "linker_set_key" : "eglPresentationTimeANDROID",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIx"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglQueryAPI",
+   "linker_set_key" : "eglQueryAPI",
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglQueryContext",
+   "linker_set_key" : "eglQueryContext",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglQueryStreamKHR",
+   "linker_set_key" : "eglQueryStreamKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglQueryStreamTimeKHR",
+   "linker_set_key" : "eglQueryStreamTimeKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPy"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglQueryStreamu64KHR",
+   "linker_set_key" : "eglQueryStreamu64KHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIPy"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglQueryString",
+   "linker_set_key" : "eglQueryString",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglQuerySurface",
+   "linker_set_key" : "eglQuerySurface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglReleaseTexImage",
+   "linker_set_key" : "eglReleaseTexImage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglReleaseThread",
+   "linker_set_key" : "eglReleaseThread",
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglSetDamageRegionKHR",
+   "linker_set_key" : "eglSetDamageRegionKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglSignalSyncKHR",
+   "linker_set_key" : "eglSignalSyncKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglStreamAttribKHR",
+   "linker_set_key" : "eglStreamAttribKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglStreamConsumerAcquireKHR",
+   "linker_set_key" : "eglStreamConsumerAcquireKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglStreamConsumerGLTextureExternalKHR",
+   "linker_set_key" : "eglStreamConsumerGLTextureExternalKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglStreamConsumerReleaseKHR",
+   "linker_set_key" : "eglStreamConsumerReleaseKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglSurfaceAttrib",
+   "linker_set_key" : "eglSurfaceAttrib",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglSwapBuffers",
+   "linker_set_key" : "eglSwapBuffers",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglSwapBuffersWithDamageKHR",
+   "linker_set_key" : "eglSwapBuffersWithDamageKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglSwapInterval",
+   "linker_set_key" : "eglSwapInterval",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglTerminate",
+   "linker_set_key" : "eglTerminate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglUnlockSurfaceKHR",
+   "linker_set_key" : "eglUnlockSurfaceKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "function_name" : "eglWaitClient",
+   "linker_set_key" : "eglWaitClient",
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglWaitGL",
+   "linker_set_key" : "eglWaitGL",
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglWaitNative",
+   "linker_set_key" : "eglWaitNative",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglWaitSync",
+   "linker_set_key" : "eglWaitSync",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "function_name" : "eglWaitSyncKHR",
+   "linker_set_key" : "eglWaitSyncKHR",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIRKNSt3__15arrayIhLj20EEE",
+   "name" : "const std::array<unsigned char, 20> &",
+   "referenced_type" : "_ZTIKNSt3__15arrayIhLj20EEE",
+   "self_type" : "_ZTIRKNSt3__15arrayIhLj20EEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP13ANativeWindow",
+   "name" : "ANativeWindow *",
+   "referenced_type" : "_ZTI13ANativeWindow",
+   "self_type" : "_ZTIP13ANativeWindow",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP19egl_native_pixmap_t",
+   "name" : "egl_native_pixmap_t *",
+   "referenced_type" : "_ZTI19egl_native_pixmap_t",
+   "self_type" : "_ZTIP19egl_native_pixmap_t",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFPKhPN5angle15PlatformMethodsEPKcE",
+   "name" : "const unsigned char *(*)(angle::PlatformMethods *, const char *)",
+   "referenced_type" : "_ZTIFPKhPN5angle15PlatformMethodsEPKcE",
+   "self_type" : "_ZTIPFPKhPN5angle15PlatformMethodsEPKcE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFdPN5angle15PlatformMethodsEE",
+   "name" : "double (*)(angle::PlatformMethods *)",
+   "referenced_type" : "_ZTIFdPN5angle15PlatformMethodsEE",
+   "self_type" : "_ZTIPFdPN5angle15PlatformMethodsEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPKcE",
+   "name" : "void (*)(angle::PlatformMethods *, const char *)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKcE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKcE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPKcbE",
+   "name" : "void (*)(angle::PlatformMethods *, const char *, bool)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKcbE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKcbE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPKciE",
+   "name" : "void (*)(angle::PlatformMethods *, const char *, int)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKciE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPKciiE",
+   "name" : "void (*)(angle::PlatformMethods *, const char *, int, int)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciiE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKciiE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPKciiiiE",
+   "name" : "void (*)(angle::PlatformMethods *, const char *, int, int, int, int)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKciiiiE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKciiiiE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPKhPKcyE",
+   "name" : "void (*)(angle::PlatformMethods *, const unsigned char *, const char *, unsigned long long)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPKhPKcyE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKhPKcyE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE",
+   "name" : "void (*)(angle::PlatformMethods *, angle::FeaturesVk *)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE",
+   "name" : "void (*)(angle::PlatformMethods *, angle::WorkaroundsD3D *)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE",
+   "name" : "void (*)(angle::PlatformMethods *, const std::__1::array<unsigned char, 20> &, unsigned int, const unsigned char *)",
+   "referenced_type" : "_ZTIFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE",
+   "self_type" : "_ZTIPFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFvvE",
+   "name" : "void (*)()",
+   "referenced_type" : "_ZTIFvvE",
+   "self_type" : "_ZTIPFvvE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE",
+   "name" : "unsigned long long (*)(angle::PlatformMethods *, char, const unsigned char *, const char *, unsigned long long, double, int, const char **, const unsigned char *, const unsigned long long *, unsigned char)",
+   "referenced_type" : "_ZTIFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE",
+   "self_type" : "_ZTIPFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPK15AHardwareBuffer",
+   "name" : "const AHardwareBuffer *",
+   "referenced_type" : "_ZTIK15AHardwareBuffer",
+   "self_type" : "_ZTIPK15AHardwareBuffer",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/libs/EGL/include/private/EGL/cache.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKi",
+   "name" : "const int *",
+   "referenced_type" : "_ZTIKi",
+   "self_type" : "_ZTIPKi",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKy",
+   "name" : "const unsigned long long *",
+   "referenced_type" : "_ZTIKy",
+   "self_type" : "_ZTIPKy",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN5angle10FeaturesVkE",
+   "name" : "angle::FeaturesVk *",
+   "referenced_type" : "_ZTIN5angle10FeaturesVkE",
+   "self_type" : "_ZTIPN5angle10FeaturesVkE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN5angle14WorkaroundsD3DE",
+   "name" : "angle::WorkaroundsD3D *",
+   "referenced_type" : "_ZTIN5angle14WorkaroundsD3DE",
+   "self_type" : "_ZTIPN5angle14WorkaroundsD3DE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPN5angle15PlatformMethodsE",
+   "name" : "angle::PlatformMethods *",
+   "referenced_type" : "_ZTIN5angle15PlatformMethodsE",
+   "self_type" : "_ZTIPN5angle15PlatformMethodsE",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPKc",
+   "name" : "const char **",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIPPKc",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPPv",
+   "name" : "void **",
+   "referenced_type" : "_ZTIPv",
+   "self_type" : "_ZTIPPv",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPx",
+   "name" : "long long *",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIPx",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPy",
+   "name" : "unsigned long long *",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIPy",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIA15_KPKc",
+   "name" : "const char *const[15]",
+   "referenced_type" : "_ZTIA15_PKc",
+   "self_type" : "_ZTIA15_KPKc",
+   "size" : 60,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK15AHardwareBuffer",
+   "name" : "const AHardwareBuffer",
+   "referenced_type" : "_ZTI15AHardwareBuffer",
+   "self_type" : "_ZTIK15AHardwareBuffer",
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKNSt3__15arrayIhLj20EEE",
+   "name" : "const std::array<unsigned char, 20>",
+   "referenced_type" : "_ZTINSt3__15arrayIhLj20EEE",
+   "self_type" : "_ZTIKNSt3__15arrayIhLj20EEE",
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/native/opengl/libs/EGL/include/private/EGL/cache.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKi",
+   "name" : "const int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIKi",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/egl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKy",
+   "name" : "const unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIKy",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "pData",
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "iWidth",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "iHeight",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "iStride",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI17EGLClientPixmapHI",
+   "name" : "EGLClientPixmapHI",
+   "referenced_type" : "_ZTI17EGLClientPixmapHI",
+   "self_type" : "_ZTI17EGLClientPixmapHI",
+   "size" : 16,
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "context",
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "field_name" : "currentTime",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIPFdPN5angle15PlatformMethodsEE"
+    },
+    {
+     "field_name" : "monotonicallyIncreasingTime",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPFdPN5angle15PlatformMethodsEE"
+    },
+    {
+     "field_name" : "logError",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKcE"
+    },
+    {
+     "field_name" : "logWarning",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKcE"
+    },
+    {
+     "field_name" : "logInfo",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKcE"
+    },
+    {
+     "field_name" : "getTraceCategoryEnabledFlag",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPFPKhPN5angle15PlatformMethodsEPKcE"
+    },
+    {
+     "field_name" : "addTraceEvent",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIPFyPN5angle15PlatformMethodsEcPKhPKcydiPS5_S3_PKyhE"
+    },
+    {
+     "field_name" : "updateTraceEventDuration",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKhPKcyE"
+    },
+    {
+     "field_name" : "histogramCustomCounts",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKciiiiE"
+    },
+    {
+     "field_name" : "histogramEnumeration",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKciiE"
+    },
+    {
+     "field_name" : "histogramSparse",
+     "field_offset" : 352,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKciE"
+    },
+    {
+     "field_name" : "histogramBoolean",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPKcbE"
+    },
+    {
+     "field_name" : "overrideWorkaroundsD3D",
+     "field_offset" : 416,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPNS_14WorkaroundsD3DEE"
+    },
+    {
+     "field_name" : "overrideFeaturesVk",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsEPNS_10FeaturesVkEE"
+    },
+    {
+     "field_name" : "cacheProgram",
+     "field_offset" : 480,
+     "referenced_type" : "_ZTIPFvPN5angle15PlatformMethodsERKNSt3__15arrayIhLj20EEEjPKhE"
+    }
+   ],
+   "linker_set_key" : "_ZTIN5angle15PlatformMethodsE",
+   "name" : "angle::PlatformMethods",
+   "referenced_type" : "_ZTIN5angle15PlatformMethodsE",
+   "self_type" : "_ZTIN5angle15PlatformMethodsE",
+   "size" : 64,
+   "source_file" : "/frameworks/native/opengl/include/EGL/Platform.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

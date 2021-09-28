@@ -1,0 +1,2024 @@
+{
+ "array_types" :
+ [
+  {
+   "linker_set_key" : "_ZTIA_c",
+   "name" : "char []",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIA_c",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDi",
+   "name" : "char32_t",
+   "referenced_type" : "_ZTIDi",
+   "self_type" : "_ZTIDi",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIDn",
+   "name" : "nullptr_t",
+   "referenced_type" : "_ZTIDn",
+   "self_type" : "_ZTIDn",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIDs",
+   "name" : "char16_t",
+   "referenced_type" : "_ZTIDs",
+   "self_type" : "_ZTIDs",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIa",
+   "name" : "signed char",
+   "referenced_type" : "_ZTIa",
+   "self_type" : "_ZTIa",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTId",
+   "name" : "double",
+   "referenced_type" : "_ZTId",
+   "self_type" : "_ZTId",
+   "size" : 8
+  },
+  {
+   "alignment" : 16,
+   "linker_set_key" : "_ZTIe",
+   "name" : "long double",
+   "referenced_type" : "_ZTIe",
+   "self_type" : "_ZTIe",
+   "size" : 16
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIf",
+   "name" : "float",
+   "referenced_type" : "_ZTIf",
+   "self_type" : "_ZTIf",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIm",
+   "name" : "unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIm",
+   "size" : 8
+  },
+  {
+   "alignment" : 16,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIn",
+   "name" : "__int128",
+   "referenced_type" : "_ZTIn",
+   "self_type" : "_ZTIn",
+   "size" : 16
+  },
+  {
+   "alignment" : 16,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIo",
+   "name" : "unsigned __int128",
+   "referenced_type" : "_ZTIo",
+   "self_type" : "_ZTIo",
+   "size" : 16
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIs",
+   "name" : "short",
+   "referenced_type" : "_ZTIs",
+   "self_type" : "_ZTIs",
+   "size" : 2
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIw",
+   "name" : "wchar_t",
+   "referenced_type" : "_ZTIw",
+   "self_type" : "_ZTIw",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIy",
+   "name" : "unsigned long long",
+   "referenced_type" : "_ZTIy",
+   "self_type" : "_ZTIy",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapper6unwrapEv"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperC1EPKcm"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperC2EPKcm"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperD1Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperD2Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslator9translateEv"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorC1EPKcmj"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorC2EPKcmj"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorD1Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorD2Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor18calculateNumInputsEPKN4llvm8FunctionEj"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor18readThreadableFlagEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor22populatePragmaMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor22populateReduceMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor23populateForEachMetadataEPKN4llvm11NamedMDNodeES4_"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor25readBuildChecksumMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor26populateObjectSlotMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor7extractEv"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC1EPKN4llvm6ModuleE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC1EPKcm"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC2EPKN4llvm6ModuleE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC2EPKcm"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorD1Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorD2Ev"
+  },
+  {
+   "name" : "_ZN8llvm_3_218WriteBitcodeToFileEPKN4llvm6ModuleERNS0_11raw_ostreamE"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor20kWrapperMetadataNameE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "BCHeaderField::kInvalid"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "BCHeaderField::kBitcodeHash"
+    },
+    {
+     "enum_field_value" : 16385,
+     "name" : "BCHeaderField::kAndroidCompilerVersion"
+    },
+    {
+     "enum_field_value" : 16386,
+     "name" : "BCHeaderField::kAndroidOptimizationLevel"
+    }
+   ],
+   "linker_set_key" : "_ZTIN13BCHeaderField3TagE",
+   "name" : "BCHeaderField::Tag",
+   "referenced_type" : "_ZTIN13BCHeaderField3TagE",
+   "self_type" : "_ZTIN13BCHeaderField3TagE",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "bcinfo::BC_NOT_BC"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "bcinfo::BC_WRAPPER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "bcinfo::BC_RAW"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo10BCFileTypeE",
+   "name" : "bcinfo::BCFileType",
+   "referenced_type" : "_ZTIN6bcinfo10BCFileTypeE",
+   "self_type" : "_ZTIN6bcinfo10BCFileTypeE",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "bcinfo::RS_FP_Full"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "bcinfo::RS_FP_Relaxed"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo16RSFloatPrecisionE",
+   "name" : "bcinfo::RSFloatPrecision",
+   "referenced_type" : "_ZTIN6bcinfo16RSFloatPrecisionE",
+   "self_type" : "_ZTIN6bcinfo16RSFloatPrecisionE",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "bcinfo::MD_SIG_None"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "bcinfo::MD_SIG_In"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "bcinfo::MD_SIG_Out"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "bcinfo::MD_SIG_Usr"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "bcinfo::MD_SIG_X"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "bcinfo::MD_SIG_Y"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "bcinfo::MD_SIG_Kernel"
+    },
+    {
+     "enum_field_value" : 64,
+     "name" : "bcinfo::MD_SIG_Z"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "bcinfo::MD_SIG_Ctxt"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo23MetadataSignatureBitvalE",
+   "name" : "bcinfo::MetadataSignatureBitval",
+   "referenced_type" : "_ZTIN6bcinfo23MetadataSignatureBitvalE",
+   "self_type" : "_ZTIN6bcinfo23MetadataSignatureBitvalE",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::unwrap",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapper6unwrapEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo14BitcodeWrapperE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperC1EPKcm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo14BitcodeWrapperE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperC2EPKcm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo14BitcodeWrapperE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::~BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo14BitcodeWrapperE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::~BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo14BitcodeWrapperE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::translate",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslator9translateEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17BitcodeTranslatorE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorC1EPKcmj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17BitcodeTranslatorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorC2EPKcmj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17BitcodeTranslatorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::~BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17BitcodeTranslatorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::~BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17BitcodeTranslatorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::calculateNumInputs",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor18calculateNumInputsEPKN4llvm8FunctionEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm8FunctionE"
+    },
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIj",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::readThreadableFlag",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor18readThreadableFlagEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populatePragmaMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor22populatePragmaMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populateReduceMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor22populateReduceMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populateForEachMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor23populateForEachMetadataEPKN4llvm11NamedMDNodeES4_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::readBuildChecksumMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor25readBuildChecksumMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populateObjectSlotMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor26populateObjectSlotMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm11NamedMDNodeE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::extract",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor7extractEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC1EPKN4llvm6ModuleE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm6ModuleE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC1EPKcm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC2EPKN4llvm6ModuleE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKN4llvm6ModuleE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC2EPKcm",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::~MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::~MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "_ZTIPN6bcinfo17MetadataExtractorE"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor20kWrapperMetadataNameE",
+   "name" : "bcinfo::MetadataExtractor::kWrapperMetadataName",
+   "referenced_type" : "_ZTIA_Kc",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  }
+ ],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIRj",
+   "name" : "unsigned int &",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIRj",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/bitcode_wrapperer.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP12WrapperInput",
+   "name" : "WrapperInput *",
+   "referenced_type" : "_ZTI12WrapperInput",
+   "self_type" : "_ZTIP12WrapperInput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_input.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13BCHeaderField",
+   "name" : "BCHeaderField *",
+   "referenced_type" : "_ZTI13BCHeaderField",
+   "self_type" : "_ZTIP13BCHeaderField",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP13WrapperOutput",
+   "name" : "WrapperOutput *",
+   "referenced_type" : "_ZTI13WrapperOutput",
+   "self_type" : "_ZTIP13WrapperOutput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_output.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP16BitcodeWrapperer",
+   "name" : "BitcodeWrapperer *",
+   "referenced_type" : "_ZTI16BitcodeWrapperer",
+   "self_type" : "_ZTIP16BitcodeWrapperer",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/bitcode_wrapperer.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP16FileWrapperInput",
+   "name" : "FileWrapperInput *",
+   "referenced_type" : "_ZTI16FileWrapperInput",
+   "self_type" : "_ZTIP16FileWrapperInput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_input.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP17FileWrapperOutput",
+   "name" : "FileWrapperOutput *",
+   "referenced_type" : "_ZTI17FileWrapperOutput",
+   "self_type" : "_ZTIP17FileWrapperOutput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_output.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP20InMemoryWrapperInput",
+   "name" : "InMemoryWrapperInput *",
+   "referenced_type" : "_ZTI20InMemoryWrapperInput",
+   "self_type" : "_ZTIP20InMemoryWrapperInput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/in_memory_wrapper_input.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPK13BCHeaderField",
+   "name" : "const BCHeaderField *",
+   "referenced_type" : "_ZTIK13BCHeaderField",
+   "self_type" : "_ZTIPK13BCHeaderField",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN4llvm11NamedMDNodeE",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "_ZTIKN4llvm11NamedMDNodeE",
+   "self_type" : "_ZTIPKN4llvm11NamedMDNodeE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN4llvm6ModuleE",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "_ZTIKN4llvm6ModuleE",
+   "self_type" : "_ZTIPKN4llvm6ModuleE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN4llvm8FunctionE",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "_ZTIKN4llvm8FunctionE",
+   "self_type" : "_ZTIPKN4llvm8FunctionE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN6bcinfo14BitcodeWrapperE",
+   "name" : "const bcinfo::BitcodeWrapper *",
+   "referenced_type" : "_ZTIKN6bcinfo14BitcodeWrapperE",
+   "self_type" : "_ZTIPKN6bcinfo14BitcodeWrapperE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN6bcinfo17BitcodeTranslatorE",
+   "name" : "const bcinfo::BitcodeTranslator *",
+   "referenced_type" : "_ZTIKN6bcinfo17BitcodeTranslatorE",
+   "self_type" : "_ZTIPKN6bcinfo17BitcodeTranslatorE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN6bcinfo17MetadataExtractor6ReduceE",
+   "name" : "const bcinfo::MetadataExtractor::Reduce *",
+   "referenced_type" : "_ZTIKN6bcinfo17MetadataExtractor6ReduceE",
+   "self_type" : "_ZTIPKN6bcinfo17MetadataExtractor6ReduceE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKN6bcinfo17MetadataExtractorE",
+   "name" : "const bcinfo::MetadataExtractor *",
+   "referenced_type" : "_ZTIKN6bcinfo17MetadataExtractorE",
+   "self_type" : "_ZTIPKN6bcinfo17MetadataExtractorE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKh",
+   "name" : "const unsigned char *",
+   "referenced_type" : "_ZTIKh",
+   "self_type" : "_ZTIPKh",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKj",
+   "name" : "const unsigned int *",
+   "referenced_type" : "_ZTIKj",
+   "self_type" : "_ZTIPKj",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN6bcinfo14BitcodeWrapperE",
+   "name" : "bcinfo::BitcodeWrapper *",
+   "referenced_type" : "_ZTIN6bcinfo14BitcodeWrapperE",
+   "self_type" : "_ZTIPN6bcinfo14BitcodeWrapperE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN6bcinfo17BitcodeTranslatorE",
+   "name" : "bcinfo::BitcodeTranslator *",
+   "referenced_type" : "_ZTIN6bcinfo17BitcodeTranslatorE",
+   "self_type" : "_ZTIPN6bcinfo17BitcodeTranslatorE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN6bcinfo17MetadataExtractor6ReduceE",
+   "name" : "bcinfo::MetadataExtractor::Reduce *",
+   "referenced_type" : "_ZTIN6bcinfo17MetadataExtractor6ReduceE",
+   "self_type" : "_ZTIPN6bcinfo17MetadataExtractor6ReduceE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPN6bcinfo17MetadataExtractorE",
+   "name" : "bcinfo::MetadataExtractor *",
+   "referenced_type" : "_ZTIN6bcinfo17MetadataExtractorE",
+   "self_type" : "_ZTIPN6bcinfo17MetadataExtractorE",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPPKc",
+   "name" : "const char **",
+   "referenced_type" : "_ZTIPKc",
+   "self_type" : "_ZTIPPKc",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPh",
+   "name" : "unsigned char *",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIPh",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPt",
+   "name" : "unsigned short *",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIPt",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIA_Kc",
+   "name" : "char const[]",
+   "referenced_type" : "_ZTIA_c",
+   "self_type" : "_ZTIA_Kc",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIK13BCHeaderField",
+   "name" : "const BCHeaderField",
+   "referenced_type" : "_ZTI13BCHeaderField",
+   "self_type" : "_ZTIK13BCHeaderField",
+   "size" : 24,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4llvm11NamedMDNodeE",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "_ZTIN4llvm11NamedMDNodeE",
+   "self_type" : "_ZTIKN4llvm11NamedMDNodeE",
+   "size" : 56,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4llvm6ModuleE",
+   "name" : "const llvm::Module",
+   "referenced_type" : "_ZTIN4llvm6ModuleE",
+   "self_type" : "_ZTIKN4llvm6ModuleE",
+   "size" : 664,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN4llvm8FunctionE",
+   "name" : "const llvm::Function",
+   "referenced_type" : "_ZTIN4llvm8FunctionE",
+   "self_type" : "_ZTIKN4llvm8FunctionE",
+   "size" : 152,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN6bcinfo14BitcodeWrapperE",
+   "name" : "const bcinfo::BitcodeWrapper",
+   "referenced_type" : "_ZTIN6bcinfo14BitcodeWrapperE",
+   "self_type" : "_ZTIKN6bcinfo14BitcodeWrapperE",
+   "size" : 40,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN6bcinfo17BitcodeTranslatorE",
+   "name" : "const bcinfo::BitcodeTranslator",
+   "referenced_type" : "_ZTIN6bcinfo17BitcodeTranslatorE",
+   "self_type" : "_ZTIKN6bcinfo17BitcodeTranslatorE",
+   "size" : 40,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN6bcinfo17MetadataExtractor6ReduceE",
+   "name" : "const bcinfo::MetadataExtractor::Reduce",
+   "referenced_type" : "_ZTIN6bcinfo17MetadataExtractor6ReduceE",
+   "self_type" : "_ZTIKN6bcinfo17MetadataExtractor6ReduceE",
+   "size" : 64,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKN6bcinfo17MetadataExtractorE",
+   "name" : "const bcinfo::MetadataExtractor",
+   "referenced_type" : "_ZTIN6bcinfo17MetadataExtractorE",
+   "self_type" : "_ZTIKN6bcinfo17MetadataExtractorE",
+   "size" : 176,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKh",
+   "name" : "const unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIKh",
+   "size" : 1,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKj",
+   "name" : "const unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIKj",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKm",
+   "name" : "const unsigned long",
+   "referenced_type" : "_ZTIm",
+   "self_type" : "_ZTIKm",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTI12WrapperInput",
+   "name" : "WrapperInput",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI12WrapperInput",
+   "self_type" : "_ZTI12WrapperInput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_input.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI12WrapperInput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN12WrapperInputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN12WrapperInputD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput4ReadEPhm"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput5AtEofEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput4SizeEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput4SeekEj"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "ID_",
+     "referenced_type" : "_ZTIN13BCHeaderField3TagE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "len_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "data_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPh"
+    }
+   ],
+   "linker_set_key" : "_ZTI13BCHeaderField",
+   "name" : "BCHeaderField",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI13BCHeaderField",
+   "self_type" : "_ZTI13BCHeaderField",
+   "size" : 24,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTI13WrapperOutput",
+   "name" : "WrapperOutput",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI13WrapperOutput",
+   "self_type" : "_ZTI13WrapperOutput",
+   "size" : 8,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_output.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI13WrapperOutput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN13WrapperOutputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN13WrapperOutputD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN13WrapperOutput5WriteEh"
+    },
+    {
+     "mangled_component_name" : "_ZN13WrapperOutput5WriteEPKhm"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "infile_",
+     "referenced_type" : "_ZTIP12WrapperInput"
+    },
+    {
+     "access" : "private",
+     "field_name" : "outfile_",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIP13WrapperOutput"
+    },
+    {
+     "access" : "private",
+     "field_name" : "buffer_",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTINSt3__16vectorIhNS_9allocatorIhEEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "buffer_size_",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "cursor_",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "infile_at_eof_",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "infile_bc_offset_",
+     "field_offset" : 480,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "wrapper_bc_offset_",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "wrapper_bc_size_",
+     "field_offset" : 544,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_header_version_",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_target_api_",
+     "field_offset" : 608,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_compiler_version_",
+     "field_offset" : 640,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_optimization_level_",
+     "field_offset" : 672,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "pnacl_bc_version_",
+     "field_offset" : 704,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "header_fields_",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTINSt3__16vectorI13BCHeaderFieldNS_9allocatorIS1_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "variable_field_data_",
+     "field_offset" : 960,
+     "referenced_type" : "_ZTINSt3__16vectorIPhNS_9allocatorIS1_EEEE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "error_",
+     "field_offset" : 1152,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTI16BitcodeWrapperer",
+   "name" : "BitcodeWrapperer",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI16BitcodeWrapperer",
+   "self_type" : "_ZTI16BitcodeWrapperer",
+   "size" : 152,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/bitcode_wrapperer.h"
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTI12WrapperInput"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "_name",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_at_eof",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_size_found",
+     "field_offset" : 136,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_size",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIl"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_file",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIP7__sFILE"
+    }
+   ],
+   "linker_set_key" : "_ZTI16FileWrapperInput",
+   "name" : "FileWrapperInput",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI16FileWrapperInput",
+   "self_type" : "_ZTI16FileWrapperInput",
+   "size" : 40,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_input.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI16FileWrapperInput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN16FileWrapperInputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN16FileWrapperInputD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput4ReadEPhm"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput5AtEofEv"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput4SizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput4SeekEj"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTI13WrapperOutput"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "_name",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_file",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIP7__sFILE"
+    }
+   ],
+   "linker_set_key" : "_ZTI17FileWrapperOutput",
+   "name" : "FileWrapperOutput",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI17FileWrapperOutput",
+   "self_type" : "_ZTI17FileWrapperOutput",
+   "size" : 24,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_output.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI17FileWrapperOutput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN17FileWrapperOutputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN17FileWrapperOutputD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN17FileWrapperOutput5WriteEh"
+    },
+    {
+     "mangled_component_name" : "_ZN17FileWrapperOutput5WriteEPKhm"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "_ZTI12WrapperInput"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "_buffer",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_pos",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_at_eof",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_size",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIm"
+    }
+   ],
+   "linker_set_key" : "_ZTI20InMemoryWrapperInput",
+   "name" : "InMemoryWrapperInput",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTI20InMemoryWrapperInput",
+   "self_type" : "_ZTI20InMemoryWrapperInput",
+   "size" : 40,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/in_memory_wrapper_input.h",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI20InMemoryWrapperInput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN20InMemoryWrapperInputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN20InMemoryWrapperInputD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput4ReadEPhm"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput5AtEofEv"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput4SizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput4SeekEj"
+    }
+   ]
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mFileType",
+     "referenced_type" : "_ZTIN6bcinfo10BCFileTypeE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcode",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcodeSize",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mHeaderVersion",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mTargetAPI",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCompilerVersion",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mOptimizationLevel",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo14BitcodeWrapperE",
+   "name" : "bcinfo::BitcodeWrapper",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN6bcinfo14BitcodeWrapperE",
+   "self_type" : "_ZTIN6bcinfo14BitcodeWrapperE",
+   "size" : 40,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mBitcode",
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcodeSize",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mTranslatedBitcode",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mTranslatedBitcodeSize",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mVersion",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo17BitcodeTranslatorE",
+   "name" : "bcinfo::BitcodeTranslator",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN6bcinfo17BitcodeTranslatorE",
+   "self_type" : "_ZTIN6bcinfo17BitcodeTranslatorE",
+   "size" : 40,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "mReduceName",
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "mInitializerName",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "mAccumulatorName",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "mCombinerName",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "mOutConverterName",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "mHalterName",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "field_name" : "mSignature",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "mInputCount",
+     "field_offset" : 416,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "mAccumulatorDataSize",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo17MetadataExtractor6ReduceE",
+   "name" : "bcinfo::MetadataExtractor::Reduce",
+   "referenced_type" : "_ZTIN6bcinfo17MetadataExtractor6ReduceE",
+   "self_type" : "_ZTIN6bcinfo17MetadataExtractor6ReduceE",
+   "size" : 64,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mModule",
+     "referenced_type" : "_ZTIPKN4llvm6ModuleE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcode",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcodeSize",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportVarCount",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportFuncCount",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachSignatureCount",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportReduceCount",
+     "field_offset" : 384,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportVarNameList",
+     "field_offset" : 448,
+     "referenced_type" : "_ZTIPPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportFuncNameList",
+     "field_offset" : 512,
+     "referenced_type" : "_ZTIPPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachNameList",
+     "field_offset" : 576,
+     "referenced_type" : "_ZTIPPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachSignatureList",
+     "field_offset" : 640,
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachInputCountList",
+     "field_offset" : 704,
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportReduceList",
+     "field_offset" : 768,
+     "referenced_type" : "_ZTIPKN6bcinfo17MetadataExtractor6ReduceE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPragmaCount",
+     "field_offset" : 832,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPragmaKeyList",
+     "field_offset" : 896,
+     "referenced_type" : "_ZTIPPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPragmaValueList",
+     "field_offset" : 960,
+     "referenced_type" : "_ZTIPPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mObjectSlotCount",
+     "field_offset" : 1024,
+     "referenced_type" : "_ZTIm"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mObjectSlotList",
+     "field_offset" : 1088,
+     "referenced_type" : "_ZTIPKj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCompilerVersion",
+     "field_offset" : 1152,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mOptimizationLevel",
+     "field_offset" : 1184,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mRSFloatPrecision",
+     "field_offset" : 1216,
+     "referenced_type" : "_ZTIN6bcinfo16RSFloatPrecisionE"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mIsThreadable",
+     "field_offset" : 1248,
+     "referenced_type" : "_ZTIb"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBuildChecksum",
+     "field_offset" : 1280,
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mHasDebugInfo",
+     "field_offset" : 1344,
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo17MetadataExtractorE",
+   "name" : "bcinfo::MetadataExtractor",
+   "record_kind" : "class",
+   "referenced_type" : "_ZTIN6bcinfo17MetadataExtractorE",
+   "self_type" : "_ZTIN6bcinfo17MetadataExtractorE",
+   "size" : 176,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "Magic",
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "Version",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "BitcodeOffset",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "BitcodeSize",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "HeaderVersion",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "TargetAPI",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "PNaClVersion",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "CompilerVersionTag",
+     "field_offset" : 224,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "CompilerVersionLen",
+     "field_offset" : 240,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "CompilerVersion",
+     "field_offset" : 256,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "OptimizationLevelTag",
+     "field_offset" : 288,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "OptimizationLevelLen",
+     "field_offset" : 304,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "OptimizationLevel",
+     "field_offset" : 320,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTIN6bcinfo21AndroidBitcodeWrapperE",
+   "name" : "bcinfo::AndroidBitcodeWrapper",
+   "referenced_type" : "_ZTIN6bcinfo21AndroidBitcodeWrapperE",
+   "self_type" : "_ZTIN6bcinfo21AndroidBitcodeWrapperE",
+   "size" : 44,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

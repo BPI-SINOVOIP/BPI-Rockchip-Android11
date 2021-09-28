@@ -1,0 +1,691 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_libcap_strdup"
+  },
+  {
+   "name" : "cap_clear"
+  },
+  {
+   "name" : "cap_clear_flag"
+  },
+  {
+   "name" : "cap_compare"
+  },
+  {
+   "name" : "cap_copy_ext"
+  },
+  {
+   "name" : "cap_copy_int"
+  },
+  {
+   "name" : "cap_drop_bound"
+  },
+  {
+   "name" : "cap_dup"
+  },
+  {
+   "name" : "cap_free"
+  },
+  {
+   "name" : "cap_from_name"
+  },
+  {
+   "name" : "cap_from_text"
+  },
+  {
+   "name" : "cap_get_bound"
+  },
+  {
+   "name" : "cap_get_fd"
+  },
+  {
+   "name" : "cap_get_file"
+  },
+  {
+   "name" : "cap_get_flag"
+  },
+  {
+   "name" : "cap_get_pid"
+  },
+  {
+   "name" : "cap_get_proc"
+  },
+  {
+   "name" : "cap_init"
+  },
+  {
+   "name" : "cap_set_fd"
+  },
+  {
+   "name" : "cap_set_file"
+  },
+  {
+   "name" : "cap_set_flag"
+  },
+  {
+   "name" : "cap_set_proc"
+  },
+  {
+   "name" : "cap_size"
+  },
+  {
+   "name" : "cap_to_name"
+  },
+  {
+   "name" : "cap_to_text"
+  },
+  {
+   "name" : "capgetp"
+  },
+  {
+   "name" : "capsetp"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_cap_names"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CAP_EFFECTIVE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CAP_PERMITTED"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CAP_INHERITABLE"
+    }
+   ],
+   "linker_set_key" : "cap_flag_t",
+   "name" : "cap_flag_t",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "cap_flag_t"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CAP_CLEAR"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CAP_SET"
+    }
+   ],
+   "linker_set_key" : "cap_flag_value_t",
+   "name" : "cap_flag_value_t",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "cap_flag_value_t"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "cap_clear",
+   "linker_set_key" : "cap_clear",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_clear_flag",
+   "linker_set_key" : "cap_clear_flag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_compare",
+   "linker_set_key" : "cap_compare",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_copy_ext",
+   "linker_set_key" : "cap_copy_ext",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-27"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_copy_int",
+   "linker_set_key" : "cap_copy_int",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-28"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_drop_bound",
+   "linker_set_key" : "cap_drop_bound",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_dup",
+   "linker_set_key" : "cap_dup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-25"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_free",
+   "linker_set_key" : "cap_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-27"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_from_name",
+   "linker_set_key" : "cap_from_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-21"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_from_text",
+   "linker_set_key" : "cap_from_text",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-22",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_get_bound",
+   "linker_set_key" : "cap_get_bound",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_get_fd",
+   "linker_set_key" : "cap_get_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_get_file",
+   "linker_set_key" : "cap_get_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "return_type" : "type-7",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_get_flag",
+   "linker_set_key" : "cap_get_flag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-14"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_get_pid",
+   "linker_set_key" : "cap_get_pid",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-19",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_get_proc",
+   "linker_set_key" : "cap_get_proc",
+   "return_type" : "type-19",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_init",
+   "linker_set_key" : "cap_init",
+   "return_type" : "type-25",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_set_fd",
+   "linker_set_key" : "cap_set_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_set_file",
+   "linker_set_key" : "cap_set_file",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-11"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_set_flag",
+   "linker_set_key" : "cap_set_flag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_set_proc",
+   "linker_set_key" : "cap_set_proc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_size",
+   "linker_set_key" : "cap_size",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_to_name",
+   "linker_set_key" : "cap_to_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-24",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "cap_to_text",
+   "linker_set_key" : "cap_to_text",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-21"
+    }
+   ],
+   "return_type" : "type-24",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "capgetp",
+   "linker_set_key" : "capgetp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "function_name" : "capsetp",
+   "linker_set_key" : "capsetp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_cap_struct *",
+   "name" : "_cap_struct *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_cap_struct *",
+   "name" : "_cap_struct *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_cap_struct *",
+   "name" : "_cap_struct *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-22",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_cap_struct *",
+   "name" : "_cap_struct *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-25",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_cap_struct *",
+   "name" : "_cap_struct *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_cap_struct *",
+   "name" : "_cap_struct *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "cap_flag_value_t *",
+   "name" : "cap_flag_value_t *",
+   "referenced_type" : "type-15",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-10",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const int *",
+   "name" : "const int *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-18",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-28",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-17",
+   "self_type" : "type-21",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-10",
+   "self_type" : "type-9",
+   "size" : 1,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const int",
+   "name" : "const int",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 4,
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "source_file" : "/external/libcap/libcap/include/sys/capability.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

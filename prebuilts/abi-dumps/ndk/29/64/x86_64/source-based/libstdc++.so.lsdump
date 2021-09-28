@@ -1,0 +1,3905 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 2,
+   "linker_set_key" : "_fpreg [8]",
+   "name" : "_fpreg [8]",
+   "referenced_type" : "type-26",
+   "self_type" : "type-34",
+   "size" : 80,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 2,
+   "linker_set_key" : "_fpxreg [8]",
+   "name" : "_fpxreg [8]",
+   "referenced_type" : "type-29",
+   "self_type" : "type-36",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 2,
+   "linker_set_key" : "_libc_fpxreg [8]",
+   "name" : "_libc_fpxreg [8]",
+   "referenced_type" : "type-135",
+   "self_type" : "type-138",
+   "size" : 128,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_libc_xmmreg [16]",
+   "name" : "_libc_xmmreg [16]",
+   "referenced_type" : "type-136",
+   "self_type" : "type-139",
+   "size" : 256,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_xmmreg [8]",
+   "name" : "_xmmreg [8]",
+   "referenced_type" : "type-31",
+   "self_type" : "type-37",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "char [16]",
+   "name" : "char [16]",
+   "referenced_type" : "type-5",
+   "self_type" : "type-4",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "char [32]",
+   "name" : "char [32]",
+   "referenced_type" : "type-5",
+   "self_type" : "type-133",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "char [8]",
+   "name" : "char [8]",
+   "referenced_type" : "type-5",
+   "self_type" : "type-120",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *[65]",
+   "name" : "const char *[65]",
+   "referenced_type" : "type-148",
+   "self_type" : "type-147",
+   "size" : 520,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [10]",
+   "name" : "int [10]",
+   "referenced_type" : "type-13",
+   "self_type" : "type-161",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [12]",
+   "name" : "int [12]",
+   "referenced_type" : "type-13",
+   "self_type" : "type-55",
+   "size" : 48,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [14]",
+   "name" : "int [14]",
+   "referenced_type" : "type-13",
+   "self_type" : "type-163",
+   "size" : 56,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [2]",
+   "name" : "int [2]",
+   "referenced_type" : "type-13",
+   "self_type" : "type-61",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/posix_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [32]",
+   "name" : "int [32]",
+   "referenced_type" : "type-13",
+   "self_type" : "type-42",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long [23]",
+   "name" : "long [23]",
+   "referenced_type" : "type-9",
+   "self_type" : "type-141",
+   "size" : 184,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long [4]",
+   "name" : "long [4]",
+   "referenced_type" : "type-9",
+   "self_type" : "type-158",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [4]",
+   "name" : "unsigned char [4]",
+   "referenced_type" : "type-167",
+   "self_type" : "type-166",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/bits/mbstate_t.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [12]",
+   "name" : "unsigned int [12]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-41",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [24]",
+   "name" : "unsigned int [24]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-128",
+   "size" : 96,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [32]",
+   "name" : "unsigned int [32]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-44",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [44]",
+   "name" : "unsigned int [44]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-39",
+   "size" : 176,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [4]",
+   "name" : "unsigned int [4]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-32",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [64]",
+   "name" : "unsigned int [64]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-45",
+   "size" : 256,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [6]",
+   "name" : "unsigned int [6]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-35",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int [7]",
+   "name" : "unsigned int [7]",
+   "referenced_type" : "type-23",
+   "self_type" : "type-25",
+   "size" : 28,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long [16]",
+   "name" : "unsigned long [16]",
+   "referenced_type" : "type-18",
+   "self_type" : "type-17",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/posix_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long [8]",
+   "name" : "unsigned long [8]",
+   "referenced_type" : "type-18",
+   "self_type" : "type-134",
+   "size" : 64,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long long [2]",
+   "name" : "unsigned long long [2]",
+   "referenced_type" : "type-24",
+   "self_type" : "type-48",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long long [5]",
+   "name" : "unsigned long long [5]",
+   "referenced_type" : "type-24",
+   "self_type" : "type-49",
+   "size" : 40,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long long [8]",
+   "name" : "unsigned long long [8]",
+   "referenced_type" : "type-24",
+   "self_type" : "type-65",
+   "size" : 64,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 2,
+   "linker_set_key" : "unsigned short [3]",
+   "name" : "unsigned short [3]",
+   "referenced_type" : "type-28",
+   "self_type" : "type-30",
+   "size" : 6,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 2,
+   "linker_set_key" : "unsigned short [4]",
+   "name" : "unsigned short [4]",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 8
+  },
+  {
+   "alignment" : 16,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 16
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-118",
+   "self_type" : "type-118",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-167",
+   "self_type" : "type-167",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-24",
+   "self_type" : "type-24",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-28",
+   "self_type" : "type-28",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-53",
+   "self_type" : "type-53"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZdaPv"
+  },
+  {
+   "name" : "_ZdaPvRKSt9nothrow_t"
+  },
+  {
+   "name" : "_ZdlPv"
+  },
+  {
+   "name" : "_ZdlPvRKSt9nothrow_t"
+  },
+  {
+   "name" : "_Znam"
+  },
+  {
+   "name" : "_ZnamRKSt9nothrow_t"
+  },
+  {
+   "name" : "_Znwm"
+  },
+  {
+   "name" : "_ZnwmRKSt9nothrow_t"
+  },
+  {
+   "name" : "__cxa_guard_abort"
+  },
+  {
+   "name" : "__cxa_guard_acquire"
+  },
+  {
+   "name" : "__cxa_guard_release"
+  },
+  {
+   "name" : "__cxa_pure_virtual"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZSt7nothrow"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "ANDROID_LOG_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "ANDROID_LOG_DEFAULT"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "ANDROID_LOG_VERBOSE"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "ANDROID_LOG_DEBUG"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "ANDROID_LOG_INFO"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "ANDROID_LOG_WARN"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "ANDROID_LOG_ERROR"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "ANDROID_LOG_FATAL"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "ANDROID_LOG_SILENT"
+    }
+   ],
+   "linker_set_key" : "android_LogPriority",
+   "name" : "android_LogPriority",
+   "referenced_type" : "type-94",
+   "self_type" : "type-94",
+   "size" : 4,
+   "source_file" : "/system/core/liblog/include/android/log.h",
+   "underlying_type" : "type-23",
+   "unique_id" : "android_LogPriority"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "LOG_ID_MIN"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "LOG_ID_MAIN"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "LOG_ID_RADIO"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "LOG_ID_EVENTS"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "LOG_ID_SYSTEM"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "LOG_ID_CRASH"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "LOG_ID_STATS"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "LOG_ID_SECURITY"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "LOG_ID_KERNEL"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "LOG_ID_MAX"
+    }
+   ],
+   "linker_set_key" : "log_id",
+   "name" : "log_id",
+   "referenced_type" : "type-95",
+   "self_type" : "type-95",
+   "size" : 4,
+   "source_file" : "/system/core/liblog/include/android/log.h",
+   "underlying_type" : "type-23",
+   "unique_id" : "log_id"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "memory_order_relaxed"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "memory_order_consume"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "memory_order_acquire"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "memory_order_release"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "memory_order_acq_rel"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "memory_order_seq_cst"
+    }
+   ],
+   "linker_set_key" : "memory_order",
+   "name" : "memory_order",
+   "referenced_type" : "type-168",
+   "self_type" : "type-168",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/stdatomic.h",
+   "underlying_type" : "type-23",
+   "unique_id" : "_ZTS12memory_order"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void ()",
+   "name" : "void ()",
+   "referenced_type" : "type-73",
+   "return_type" : "type-53",
+   "self_type" : "type-73",
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/signal.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (int)",
+   "name" : "void (int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "referenced_type" : "type-71",
+   "return_type" : "type-53",
+   "self_type" : "type-71",
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/signal.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (int, siginfo *, void *)",
+   "name" : "void (int, siginfo *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-107"
+    },
+    {
+     "referenced_type" : "type-52"
+    }
+   ],
+   "referenced_type" : "type-106",
+   "return_type" : "type-53",
+   "self_type" : "type-106",
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (sigval)",
+   "name" : "void (sigval)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-51"
+    }
+   ],
+   "referenced_type" : "type-58",
+   "return_type" : "type-53",
+   "self_type" : "type-58",
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const void *)",
+   "name" : "void (void *, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-79"
+    }
+   ],
+   "referenced_type" : "type-86",
+   "return_type" : "type-53",
+   "self_type" : "type-86",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned long, const void *)",
+   "name" : "void *(unsigned long, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-79"
+    }
+   ],
+   "referenced_type" : "type-78",
+   "return_type" : "type-52",
+   "self_type" : "type-78",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned long, unsigned long, const void *)",
+   "name" : "void *(unsigned long, unsigned long, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-79"
+    }
+   ],
+   "referenced_type" : "type-89",
+   "return_type" : "type-52",
+   "self_type" : "type-89",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(void *, unsigned long, const void *)",
+   "name" : "void *(void *, unsigned long, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-79"
+    }
+   ],
+   "referenced_type" : "type-83",
+   "return_type" : "type-52",
+   "self_type" : "type-83",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "operator delete[]",
+   "linker_set_key" : "_ZdaPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    }
+   ],
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator delete[]",
+   "linker_set_key" : "_ZdaPvRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-100"
+    }
+   ],
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator delete",
+   "linker_set_key" : "_ZdlPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    }
+   ],
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator delete",
+   "linker_set_key" : "_ZdlPvRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-52"
+    },
+    {
+     "referenced_type" : "type-100"
+    }
+   ],
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new[]",
+   "linker_set_key" : "_Znam",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-52",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new[]",
+   "linker_set_key" : "_ZnamRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-100"
+    }
+   ],
+   "return_type" : "type-52",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new",
+   "linker_set_key" : "_Znwm",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-18"
+    }
+   ],
+   "return_type" : "type-52",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "operator new",
+   "linker_set_key" : "_ZnwmRKSt9nothrow_t",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "referenced_type" : "type-100"
+    }
+   ],
+   "return_type" : "type-52",
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "function_name" : "__cxa_guard_abort",
+   "linker_set_key" : "__cxa_guard_abort",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-156"
+    }
+   ],
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "function_name" : "__cxa_guard_acquire",
+   "linker_set_key" : "__cxa_guard_acquire",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-156"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "function_name" : "__cxa_guard_release",
+   "linker_set_key" : "__cxa_guard_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-156"
+    }
+   ],
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "function_name" : "__cxa_pure_virtual",
+   "linker_set_key" : "__cxa_pure_virtual",
+   "return_type" : "type-53",
+   "source_file" : "/bionic/libc/bionic/__cxa_pure_virtual.cpp"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "_ZSt7nothrow",
+   "name" : "std::nothrow",
+   "referenced_type" : "type-99",
+   "source_file" : "/bionic/libstdc++/include/new"
+  }
+ ],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const std::nothrow_t &",
+   "name" : "const std::nothrow_t &",
+   "referenced_type" : "type-99",
+   "self_type" : "type-100",
+   "size" : 8,
+   "source_file" : "/bionic/libstdc++/include/new"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__sFILE *",
+   "name" : "__sFILE *",
+   "referenced_type" : "type-75",
+   "self_type" : "type-74",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__sFILE *",
+   "name" : "__sFILE *",
+   "referenced_type" : "type-97",
+   "self_type" : "type-96",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__va_list_tag *",
+   "name" : "__va_list_tag *",
+   "referenced_type" : "type-102",
+   "self_type" : "type-101",
+   "size" : 8,
+   "source_file" : "/bionic/libc/async_safe/include/async_safe/log.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_fpstate_64 *",
+   "name" : "_fpstate_64 *",
+   "referenced_type" : "type-43",
+   "self_type" : "type-68",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_guard_t *",
+   "name" : "_guard_t *",
+   "referenced_type" : "type-154",
+   "self_type" : "type-156",
+   "size" : 8,
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_libc_fpstate *",
+   "name" : "_libc_fpstate *",
+   "referenced_type" : "type-137",
+   "self_type" : "type-142",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-5",
+   "self_type" : "type-152",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/getopt.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char **",
+   "name" : "char **",
+   "referenced_type" : "type-152",
+   "self_type" : "type-153",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/unistd.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-149",
+   "self_type" : "type-148",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-80",
+   "self_type" : "type-79",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "robust_list *",
+   "name" : "robust_list *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-6",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/futex.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "siginfo *",
+   "name" : "siginfo *",
+   "referenced_type" : "type-108",
+   "self_type" : "type-107",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "ucontext *",
+   "name" : "ucontext *",
+   "referenced_type" : "type-143",
+   "self_type" : "type-144",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "user_fpregs_struct *",
+   "name" : "user_fpregs_struct *",
+   "referenced_type" : "type-127",
+   "self_type" : "type-132",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "user_regs_struct *",
+   "name" : "user_regs_struct *",
+   "referenced_type" : "type-129",
+   "self_type" : "type-131",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)()",
+   "name" : "void (*)()",
+   "referenced_type" : "type-73",
+   "self_type" : "type-72",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(int)",
+   "name" : "void (*)(int)",
+   "referenced_type" : "type-71",
+   "self_type" : "type-70",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(int, siginfo *, void *)",
+   "name" : "void (*)(int, siginfo *, void *)",
+   "referenced_type" : "type-106",
+   "self_type" : "type-105",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(sigval)",
+   "name" : "void (*)(sigval)",
+   "referenced_type" : "type-58",
+   "self_type" : "type-57",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void (*)(void *, const void *)",
+   "name" : "void (*)(void *, const void *)",
+   "referenced_type" : "type-86",
+   "self_type" : "type-85",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-53",
+   "self_type" : "type-52",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *(*)(unsigned long, const void *)",
+   "name" : "void *(*)(unsigned long, const void *)",
+   "referenced_type" : "type-78",
+   "self_type" : "type-77",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *(*)(unsigned long, unsigned long, const void *)",
+   "name" : "void *(*)(unsigned long, unsigned long, const void *)",
+   "referenced_type" : "type-89",
+   "self_type" : "type-88",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *(*)(void *, unsigned long, const void *)",
+   "name" : "void *(*)(void *, unsigned long, const void *)",
+   "referenced_type" : "type-83",
+   "self_type" : "type-82",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-5",
+   "self_type" : "type-149",
+   "size" : 1,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const char *const[65]",
+   "name" : "const char *const[65]",
+   "referenced_type" : "type-147",
+   "self_type" : "type-150",
+   "size" : 520,
+   "source_file" : "/bionic/libc/include/signal.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const std::nothrow_t",
+   "name" : "const std::nothrow_t",
+   "referenced_type" : "type-98",
+   "self_type" : "type-99",
+   "size" : 1,
+   "source_file" : "/bionic/libstdc++/include/new"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-53",
+   "self_type" : "type-80",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "void (*volatile)(void *, const void *)",
+   "name" : "void (*volatile)(void *, const void *)",
+   "referenced_type" : "type-85",
+   "self_type" : "type-87",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "void *(*volatile)(unsigned long, const void *)",
+   "name" : "void *(*volatile)(unsigned long, const void *)",
+   "referenced_type" : "type-77",
+   "self_type" : "type-81",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "void *(*volatile)(unsigned long, unsigned long, const void *)",
+   "name" : "void *(*volatile)(unsigned long, unsigned long, const void *)",
+   "referenced_type" : "type-88",
+   "self_type" : "type-90",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 8,
+   "is_volatile" : true,
+   "linker_set_key" : "void *(*volatile)(void *, unsigned long, const void *)",
+   "name" : "void *(*volatile)(void *, unsigned long, const void *)",
+   "referenced_type" : "type-82",
+   "self_type" : "type-84",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "fds_bits",
+     "referenced_type" : "type-17"
+    }
+   ],
+   "linker_set_key" : "__kernel_fd_set",
+   "name" : "__kernel_fd_set",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/posix_types.h",
+   "unique_id" : "_ZTS15__kernel_fd_set"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "val",
+     "referenced_type" : "type-61"
+    }
+   ],
+   "linker_set_key" : "__kernel_fsid_t",
+   "name" : "__kernel_fsid_t",
+   "referenced_type" : "type-60",
+   "self_type" : "type-60",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/posix_types.h",
+   "unique_id" : "_ZTS15__kernel_fsid_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "it_interval",
+     "referenced_type" : "type-19"
+    },
+    {
+     "field_name" : "it_value",
+     "field_offset" : 128,
+     "referenced_type" : "type-19"
+    }
+   ],
+   "linker_set_key" : "__kernel_itimerspec",
+   "name" : "__kernel_itimerspec",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS19__kernel_itimerspec"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "tv_usec",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "__kernel_old_timeval",
+   "name" : "__kernel_old_timeval",
+   "referenced_type" : "type-21",
+   "self_type" : "type-21",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS20__kernel_old_timeval"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_handler",
+     "referenced_type" : "type-70"
+    },
+    {
+     "field_name" : "sa_flags",
+     "field_offset" : 64,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "sa_restorer",
+     "field_offset" : 128,
+     "referenced_type" : "type-72"
+    },
+    {
+     "field_name" : "sa_mask",
+     "field_offset" : 192,
+     "referenced_type" : "type-18"
+    }
+   ],
+   "linker_set_key" : "__kernel_sigaction",
+   "name" : "__kernel_sigaction",
+   "referenced_type" : "type-69",
+   "self_type" : "type-69",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/signal.h",
+   "unique_id" : "_ZTS18__kernel_sigaction"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "tv_nsec",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "__kernel_timespec",
+   "name" : "__kernel_timespec",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS17__kernel_timespec"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_kill",
+     "referenced_type" : "type-112"
+    },
+    {
+     "field_name" : "_timer",
+     "referenced_type" : "type-113"
+    },
+    {
+     "field_name" : "_rt",
+     "referenced_type" : "type-114"
+    },
+    {
+     "field_name" : "_sigchld",
+     "referenced_type" : "type-115"
+    },
+    {
+     "field_name" : "_sigfault",
+     "referenced_type" : "type-116"
+    },
+    {
+     "field_name" : "_sigpoll",
+     "referenced_type" : "type-122"
+    },
+    {
+     "field_name" : "_sigsys",
+     "referenced_type" : "type-123"
+    }
+   ],
+   "linker_set_key" : "__sifields",
+   "name" : "__sifields",
+   "record_kind" : "union",
+   "referenced_type" : "type-111",
+   "self_type" : "type-111",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTS10__sifields"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "_pid",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_uid",
+     "field_offset" : 32,
+     "referenced_type" : "type-23"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:38:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:38:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:38:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:38:3",
+   "referenced_type" : "type-112",
+   "self_type" : "type-112",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_tid",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_overrun",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_sigval",
+     "field_offset" : 64,
+     "referenced_type" : "type-51"
+    },
+    {
+     "field_name" : "_sys_private",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:42:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:42:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:42:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:42:3",
+   "referenced_type" : "type-113",
+   "self_type" : "type-113",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt0_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_pid",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_uid",
+     "field_offset" : 32,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "_sigval",
+     "field_offset" : 64,
+     "referenced_type" : "type-51"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:48:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:48:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:48:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:48:3",
+   "referenced_type" : "type-114",
+   "self_type" : "type-114",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt1_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_pid",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_uid",
+     "field_offset" : 32,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "_status",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_utime",
+     "field_offset" : 128,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "_stime",
+     "field_offset" : 192,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:53:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:53:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:53:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:53:3",
+   "referenced_type" : "type-115",
+   "self_type" : "type-115",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt2_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_addr",
+     "referenced_type" : "type-52"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "type-117"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3",
+   "referenced_type" : "type-116",
+   "self_type" : "type-116",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt3_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_addr_lsb",
+     "referenced_type" : "type-118"
+    },
+    {
+     "field_name" : "_addr_bnd",
+     "referenced_type" : "type-119"
+    },
+    {
+     "field_name" : "_addr_pkey",
+     "referenced_type" : "type-121"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5",
+   "record_kind" : "union",
+   "referenced_type" : "type-117",
+   "self_type" : "type-117",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt3_Ut_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_dummy_bnd",
+     "referenced_type" : "type-120"
+    },
+    {
+     "field_name" : "_lower",
+     "field_offset" : 64,
+     "referenced_type" : "type-52"
+    },
+    {
+     "field_name" : "_upper",
+     "field_offset" : 128,
+     "referenced_type" : "type-52"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:73:7) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:73:7",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:73:7) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:73:7",
+   "referenced_type" : "type-119",
+   "self_type" : "type-119",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt3_Ut_Ut_E"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "_dummy_pkey",
+     "referenced_type" : "type-120"
+    },
+    {
+     "field_name" : "_pkey",
+     "field_offset" : 64,
+     "referenced_type" : "type-23"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:78:7) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:78:7",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:60:3)::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:71:5)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:78:7) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:78:7",
+   "referenced_type" : "type-121",
+   "self_type" : "type-121",
+   "size" : 12,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt3_Ut_Ut0_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_band",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "_fd",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:84:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:84:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:84:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:84:3",
+   "referenced_type" : "type-122",
+   "self_type" : "type-122",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt4_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_call_addr",
+     "referenced_type" : "type-52"
+    },
+    {
+     "field_name" : "_syscall",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_arch",
+     "field_offset" : 96,
+     "referenced_type" : "type-23"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:88:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:88:3",
+   "name" : "__sifields::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:88:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:88:3",
+   "referenced_type" : "type-123",
+   "self_type" : "type-123",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN10__sifieldsUt5_E"
+  },
+  {
+   "alignment" : 2,
+   "fields" :
+   [
+    {
+     "field_name" : "significand",
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "exponent",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    }
+   ],
+   "linker_set_key" : "_fpreg",
+   "name" : "_fpreg",
+   "referenced_type" : "type-26",
+   "self_type" : "type-26",
+   "size" : 10,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS6_fpreg"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "cw",
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "sw",
+     "field_offset" : 32,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "tag",
+     "field_offset" : 64,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "ipoff",
+     "field_offset" : 96,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "cssel",
+     "field_offset" : 128,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "dataoff",
+     "field_offset" : 160,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "datasel",
+     "field_offset" : 192,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "_st",
+     "field_offset" : 224,
+     "referenced_type" : "type-34"
+    },
+    {
+     "field_name" : "status",
+     "field_offset" : 864,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "magic",
+     "field_offset" : 880,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "_fxsr_env",
+     "field_offset" : 896,
+     "referenced_type" : "type-35"
+    },
+    {
+     "field_name" : "mxcsr",
+     "field_offset" : 1088,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "reserved",
+     "field_offset" : 1120,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "_fxsr_st",
+     "field_offset" : 1152,
+     "referenced_type" : "type-36"
+    },
+    {
+     "field_name" : "_xmm",
+     "field_offset" : 2176,
+     "referenced_type" : "type-37"
+    },
+    {
+     "field_offset" : 3200,
+     "referenced_type" : "type-38"
+    },
+    {
+     "field_offset" : 4608,
+     "referenced_type" : "type-40"
+    }
+   ],
+   "linker_set_key" : "_fpstate_32",
+   "name" : "_fpstate_32",
+   "referenced_type" : "type-33",
+   "self_type" : "type-33",
+   "size" : 624,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS11_fpstate_32"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "padding1",
+     "referenced_type" : "type-39"
+    },
+    {
+     "field_name" : "padding",
+     "referenced_type" : "type-39"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_fpstate_32::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:62:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:62:3",
+   "name" : "_fpstate_32::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:62:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:62:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-38",
+   "self_type" : "type-38",
+   "size" : 176,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTSN11_fpstate_32Ut_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "padding2",
+     "referenced_type" : "type-41"
+    },
+    {
+     "field_name" : "sw_reserved",
+     "referenced_type" : "type-22"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_fpstate_32::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:66:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:66:3",
+   "name" : "_fpstate_32::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:66:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:66:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-40",
+   "self_type" : "type-40",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTSN11_fpstate_32Ut0_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "cwd",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "swd",
+     "field_offset" : 16,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "twd",
+     "field_offset" : 32,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fop",
+     "field_offset" : 48,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "rip",
+     "field_offset" : 64,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rdp",
+     "field_offset" : 128,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "mxcsr",
+     "field_offset" : 192,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "mxcsr_mask",
+     "field_offset" : 224,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "st_space",
+     "field_offset" : 256,
+     "referenced_type" : "type-44"
+    },
+    {
+     "field_name" : "xmm_space",
+     "field_offset" : 1280,
+     "referenced_type" : "type-45"
+    },
+    {
+     "field_name" : "reserved2",
+     "field_offset" : 3328,
+     "referenced_type" : "type-41"
+    },
+    {
+     "field_offset" : 3712,
+     "referenced_type" : "type-46"
+    }
+   ],
+   "linker_set_key" : "_fpstate_64",
+   "name" : "_fpstate_64",
+   "referenced_type" : "type-43",
+   "self_type" : "type-43",
+   "size" : 512,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS11_fpstate_64"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "reserved3",
+     "referenced_type" : "type-41"
+    },
+    {
+     "field_name" : "sw_reserved",
+     "referenced_type" : "type-22"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "_fpstate_64::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:83:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:83:3",
+   "name" : "_fpstate_64::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:83:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:83:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-46",
+   "self_type" : "type-46",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTSN11_fpstate_64Ut_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "magic1",
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "extended_size",
+     "field_offset" : 32,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "xfeatures",
+     "field_offset" : 64,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "xstate_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "padding",
+     "field_offset" : 160,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "linker_set_key" : "_fpx_sw_bytes",
+   "name" : "_fpx_sw_bytes",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS13_fpx_sw_bytes"
+  },
+  {
+   "alignment" : 2,
+   "fields" :
+   [
+    {
+     "field_name" : "significand",
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "exponent",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "padding",
+     "field_offset" : 80,
+     "referenced_type" : "type-30"
+    }
+   ],
+   "linker_set_key" : "_fpxreg",
+   "name" : "_fpxreg",
+   "referenced_type" : "type-29",
+   "self_type" : "type-29",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS7_fpxreg"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "state",
+     "referenced_type" : "type-155"
+    },
+    {
+     "field_name" : "aligner",
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "_guard_t",
+   "name" : "_guard_t",
+   "record_kind" : "union",
+   "referenced_type" : "type-154",
+   "self_type" : "type-154",
+   "size" : 8,
+   "source_file" : "/bionic/libc/bionic/__cxa_guard.cpp",
+   "unique_id" : "_ZTS8_guard_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "xfeatures",
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "reserved1",
+     "field_offset" : 64,
+     "referenced_type" : "type-48"
+    },
+    {
+     "field_name" : "reserved2",
+     "field_offset" : 192,
+     "referenced_type" : "type-49"
+    }
+   ],
+   "linker_set_key" : "_header",
+   "name" : "_header",
+   "referenced_type" : "type-47",
+   "self_type" : "type-47",
+   "size" : 64,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS7_header"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "cwd",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "swd",
+     "field_offset" : 16,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "ftw",
+     "field_offset" : 32,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fop",
+     "field_offset" : 48,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "rip",
+     "field_offset" : 64,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rdp",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "mxcsr",
+     "field_offset" : 192,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "mxcr_mask",
+     "field_offset" : 224,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "_st",
+     "field_offset" : 256,
+     "referenced_type" : "type-138"
+    },
+    {
+     "field_name" : "_xmm",
+     "field_offset" : 1280,
+     "referenced_type" : "type-139"
+    },
+    {
+     "field_name" : "padding",
+     "field_offset" : 3328,
+     "referenced_type" : "type-128"
+    }
+   ],
+   "linker_set_key" : "_libc_fpstate",
+   "name" : "_libc_fpstate",
+   "referenced_type" : "type-137",
+   "self_type" : "type-137",
+   "size" : 512,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h",
+   "unique_id" : "_libc_fpstate"
+  },
+  {
+   "alignment" : 2,
+   "fields" :
+   [
+    {
+     "field_name" : "significand",
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "exponent",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "padding",
+     "field_offset" : 80,
+     "referenced_type" : "type-30"
+    }
+   ],
+   "linker_set_key" : "_libc_fpxreg",
+   "name" : "_libc_fpxreg",
+   "referenced_type" : "type-135",
+   "self_type" : "type-135",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h",
+   "unique_id" : "_libc_fpxreg"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "element",
+     "referenced_type" : "type-32"
+    }
+   ],
+   "linker_set_key" : "_libc_xmmreg",
+   "name" : "_libc_xmmreg",
+   "referenced_type" : "type-136",
+   "self_type" : "type-136",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h",
+   "unique_id" : "_libc_xmmreg"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "element",
+     "referenced_type" : "type-32"
+    }
+   ],
+   "linker_set_key" : "_xmmreg",
+   "name" : "_xmmreg",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS7_xmmreg"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "fpstate",
+     "referenced_type" : "type-43"
+    },
+    {
+     "field_name" : "xstate_hdr",
+     "field_offset" : 4096,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "ymmh",
+     "field_offset" : 4608,
+     "referenced_type" : "type-59"
+    }
+   ],
+   "linker_set_key" : "_xstate",
+   "name" : "_xstate",
+   "referenced_type" : "type-62",
+   "self_type" : "type-62",
+   "size" : 832,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS7_xstate"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "ymmh_space",
+     "referenced_type" : "type-45"
+    }
+   ],
+   "linker_set_key" : "_ymmh_state",
+   "name" : "_ymmh_state",
+   "referenced_type" : "type-59",
+   "self_type" : "type-59",
+   "size" : 256,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS11_ymmh_state"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "__flag",
+     "referenced_type" : "type-170"
+    }
+   ],
+   "linker_set_key" : "atomic_flag",
+   "name" : "atomic_flag",
+   "referenced_type" : "type-169",
+   "self_type" : "type-169",
+   "size" : 1,
+   "source_file" : "/bionic/libc/include/stdatomic.h",
+   "unique_id" : "_ZTS11atomic_flag"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "div_t",
+   "name" : "div_t",
+   "referenced_type" : "type-91",
+   "self_type" : "type-91",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdlib.h",
+   "unique_id" : "div_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "fds_bits",
+     "referenced_type" : "type-17"
+    }
+   ],
+   "linker_set_key" : "fd_set",
+   "name" : "fd_set",
+   "referenced_type" : "type-151",
+   "self_type" : "type-151",
+   "size" : 128,
+   "source_file" : "/bionic/libc/include/sys/select.h",
+   "unique_id" : "fd_set"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "it_interval",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "it_value",
+     "field_offset" : 128,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "itimerspec",
+   "name" : "itimerspec",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS10itimerspec"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "it_interval",
+     "referenced_type" : "type-11"
+    },
+    {
+     "field_name" : "it_value",
+     "field_offset" : 128,
+     "referenced_type" : "type-11"
+    }
+   ],
+   "linker_set_key" : "itimerval",
+   "name" : "itimerval",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS9itimerval"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "ldiv_t",
+   "name" : "ldiv_t",
+   "referenced_type" : "type-92",
+   "self_type" : "type-92",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/stdlib.h",
+   "unique_id" : "ldiv_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "lldiv_t",
+   "name" : "lldiv_t",
+   "referenced_type" : "type-93",
+   "self_type" : "type-93",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/stdlib.h",
+   "unique_id" : "lldiv_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "arena",
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "ordblks",
+     "field_offset" : 64,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "smblks",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "hblks",
+     "field_offset" : 192,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "hblkhd",
+     "field_offset" : 256,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "usmblks",
+     "field_offset" : 320,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "fsmblks",
+     "field_offset" : 384,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "uordblks",
+     "field_offset" : 448,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "fordblks",
+     "field_offset" : 512,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "keepcost",
+     "field_offset" : 576,
+     "referenced_type" : "type-18"
+    }
+   ],
+   "linker_set_key" : "mallinfo",
+   "name" : "mallinfo",
+   "referenced_type" : "type-76",
+   "self_type" : "type-76",
+   "size" : 80,
+   "source_file" : "/bionic/libc/include/malloc.h",
+   "unique_id" : "mallinfo"
+  },
+  {
+   "alignment" : 16,
+   "fields" :
+   [
+    {
+     "field_name" : "__clang_max_align_nonce1",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "__clang_max_align_nonce2",
+     "field_offset" : 128,
+     "referenced_type" : "type-3"
+    }
+   ],
+   "linker_set_key" : "max_align_t",
+   "name" : "max_align_t",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 32,
+   "source_file" : "/prebuilts/clang-tools/linux-x86/lib64/clang/9.0.1/include/__stddef_max_align_t.h",
+   "unique_id" : "_ZTS11max_align_t"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "__seq",
+     "referenced_type" : "type-166"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 32,
+     "referenced_type" : "type-166"
+    }
+   ],
+   "linker_set_key" : "mbstate_t",
+   "name" : "mbstate_t",
+   "referenced_type" : "type-165",
+   "self_type" : "type-165",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/mbstate_t.h",
+   "unique_id" : "_ZTS9mbstate_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "gregs",
+     "referenced_type" : "type-141"
+    },
+    {
+     "field_name" : "fpregs",
+     "field_offset" : 1472,
+     "referenced_type" : "type-142"
+    },
+    {
+     "field_name" : "__reserved1",
+     "field_offset" : 1536,
+     "referenced_type" : "type-134"
+    }
+   ],
+   "linker_set_key" : "mcontext_t",
+   "name" : "mcontext_t",
+   "referenced_type" : "type-140",
+   "self_type" : "type-140",
+   "size" : 256,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h",
+   "unique_id" : "mcontext_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "flags",
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "stack_base",
+     "field_offset" : 64,
+     "referenced_type" : "type-52"
+    },
+    {
+     "field_name" : "stack_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "guard_size",
+     "field_offset" : 192,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "sched_policy",
+     "field_offset" : 256,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sched_priority",
+     "field_offset" : 288,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "__reserved",
+     "field_offset" : 320,
+     "referenced_type" : "type-4"
+    }
+   ],
+   "linker_set_key" : "pthread_attr_t",
+   "name" : "pthread_attr_t",
+   "referenced_type" : "type-124",
+   "self_type" : "type-124",
+   "size" : 56,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS14pthread_attr_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-158"
+    }
+   ],
+   "linker_set_key" : "pthread_barrier_t",
+   "name" : "pthread_barrier_t",
+   "referenced_type" : "type-157",
+   "self_type" : "type-157",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS17pthread_barrier_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-55"
+    }
+   ],
+   "linker_set_key" : "pthread_cond_t",
+   "name" : "pthread_cond_t",
+   "referenced_type" : "type-159",
+   "self_type" : "type-159",
+   "size" : 48,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS14pthread_cond_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-161"
+    }
+   ],
+   "linker_set_key" : "pthread_mutex_t",
+   "name" : "pthread_mutex_t",
+   "referenced_type" : "type-160",
+   "self_type" : "type-160",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS15pthread_mutex_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-163"
+    }
+   ],
+   "linker_set_key" : "pthread_rwlock_t",
+   "name" : "pthread_rwlock_t",
+   "referenced_type" : "type-162",
+   "self_type" : "type-162",
+   "size" : 56,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS16pthread_rwlock_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "pthread_spinlock_t",
+   "name" : "pthread_spinlock_t",
+   "referenced_type" : "type-164",
+   "self_type" : "type-164",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS18pthread_spinlock_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "next",
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "robust_list",
+   "name" : "robust_list",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/futex.h",
+   "unique_id" : "_ZTS11robust_list"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "list",
+     "referenced_type" : "type-7"
+    },
+    {
+     "field_name" : "futex_offset",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "list_op_pending",
+     "field_offset" : 128,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "robust_list_head",
+   "name" : "robust_list_head",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/futex.h",
+   "unique_id" : "_ZTS16robust_list_head"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_flags",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "type-104"
+    },
+    {
+     "field_name" : "sa_mask",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "sa_restorer",
+     "field_offset" : 192,
+     "referenced_type" : "type-72"
+    }
+   ],
+   "linker_set_key" : "sigaction",
+   "name" : "sigaction",
+   "referenced_type" : "type-103",
+   "self_type" : "type-103",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h",
+   "unique_id" : "_ZTS9sigaction"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_flags",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_offset" : 64,
+     "referenced_type" : "type-126"
+    },
+    {
+     "field_name" : "sa_mask",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "sa_restorer",
+     "field_offset" : 192,
+     "referenced_type" : "type-72"
+    }
+   ],
+   "linker_set_key" : "sigaction64",
+   "name" : "sigaction64",
+   "referenced_type" : "type-125",
+   "self_type" : "type-125",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h",
+   "unique_id" : "_ZTS11sigaction64"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_handler",
+     "referenced_type" : "type-70"
+    },
+    {
+     "field_name" : "sa_sigaction",
+     "referenced_type" : "type-105"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "sigaction64::(anonymous union at bionic/libc/include/bits/signal_types.h:80:22) at bionic/libc/include/bits/signal_types.h:80:22 <Spelling=bionic/libc/include/bits/signal_types.h:72:3>",
+   "name" : "sigaction64::(anonymous union at bionic/libc/include/bits/signal_types.h:80:22) at bionic/libc/include/bits/signal_types.h:80:22 <Spelling=bionic/libc/include/bits/signal_types.h:72:3>",
+   "record_kind" : "union",
+   "referenced_type" : "type-126",
+   "self_type" : "type-126",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h",
+   "unique_id" : "_ZTSN11sigaction64Ut_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sa_handler",
+     "referenced_type" : "type-70"
+    },
+    {
+     "field_name" : "sa_sigaction",
+     "referenced_type" : "type-105"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "sigaction::(anonymous union at bionic/libc/include/bits/signal_types.h:79:20) at bionic/libc/include/bits/signal_types.h:79:20 <Spelling=bionic/libc/include/bits/signal_types.h:72:3>",
+   "name" : "sigaction::(anonymous union at bionic/libc/include/bits/signal_types.h:79:20) at bionic/libc/include/bits/signal_types.h:79:20 <Spelling=bionic/libc/include/bits/signal_types.h:72:3>",
+   "record_kind" : "union",
+   "referenced_type" : "type-104",
+   "self_type" : "type-104",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/signal_types.h",
+   "unique_id" : "_ZTSN9sigactionUt_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "ss_sp",
+     "referenced_type" : "type-52"
+    },
+    {
+     "field_name" : "ss_flags",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ss_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    }
+   ],
+   "linker_set_key" : "sigaltstack",
+   "name" : "sigaltstack",
+   "referenced_type" : "type-145",
+   "self_type" : "type-145",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/signal.h",
+   "unique_id" : "_ZTS11sigaltstack"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "r8",
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r9",
+     "field_offset" : 64,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r10",
+     "field_offset" : 128,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r11",
+     "field_offset" : 192,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r12",
+     "field_offset" : 256,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r13",
+     "field_offset" : 320,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r14",
+     "field_offset" : 384,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r15",
+     "field_offset" : 448,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rdi",
+     "field_offset" : 512,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rsi",
+     "field_offset" : 576,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rbp",
+     "field_offset" : 640,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rbx",
+     "field_offset" : 704,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rdx",
+     "field_offset" : 768,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rax",
+     "field_offset" : 832,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rcx",
+     "field_offset" : 896,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rsp",
+     "field_offset" : 960,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "rip",
+     "field_offset" : 1024,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "eflags",
+     "field_offset" : 1088,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "cs",
+     "field_offset" : 1152,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "gs",
+     "field_offset" : 1168,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fs",
+     "field_offset" : 1184,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_offset" : 1200,
+     "referenced_type" : "type-67"
+    },
+    {
+     "field_name" : "err",
+     "field_offset" : 1216,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "trapno",
+     "field_offset" : 1280,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "oldmask",
+     "field_offset" : 1344,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "cr2",
+     "field_offset" : 1408,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "fpstate",
+     "field_offset" : 1472,
+     "referenced_type" : "type-68"
+    },
+    {
+     "field_name" : "reserved1",
+     "field_offset" : 1536,
+     "referenced_type" : "type-65"
+    }
+   ],
+   "linker_set_key" : "sigcontext",
+   "name" : "sigcontext",
+   "referenced_type" : "type-66",
+   "self_type" : "type-66",
+   "size" : 256,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS10sigcontext"
+  },
+  {
+   "alignment" : 2,
+   "fields" :
+   [
+    {
+     "field_name" : "ss",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__pad0",
+     "referenced_type" : "type-28"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "sigcontext::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:210:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:210:3",
+   "name" : "sigcontext::(anonymous union at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:210:3) at bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h:210:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-67",
+   "self_type" : "type-67",
+   "size" : 2,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTSN10sigcontextUt_E"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "gs",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__gsh",
+     "field_offset" : 16,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fs",
+     "field_offset" : 32,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__fsh",
+     "field_offset" : 48,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "es",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__esh",
+     "field_offset" : 80,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "ds",
+     "field_offset" : 96,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__dsh",
+     "field_offset" : 112,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "di",
+     "field_offset" : 128,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "si",
+     "field_offset" : 160,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "bp",
+     "field_offset" : 192,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "sp",
+     "field_offset" : 224,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "bx",
+     "field_offset" : 256,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "dx",
+     "field_offset" : 288,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "cx",
+     "field_offset" : 320,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "ax",
+     "field_offset" : 352,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "trapno",
+     "field_offset" : 384,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "err",
+     "field_offset" : 416,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "ip",
+     "field_offset" : 448,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "cs",
+     "field_offset" : 480,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__csh",
+     "field_offset" : 496,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 512,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "sp_at_signal",
+     "field_offset" : 544,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "ss",
+     "field_offset" : 576,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "__ssh",
+     "field_offset" : 592,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fpstate",
+     "field_offset" : 608,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "oldmask",
+     "field_offset" : 640,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "cr2",
+     "field_offset" : 672,
+     "referenced_type" : "type-23"
+    }
+   ],
+   "linker_set_key" : "sigcontext_32",
+   "name" : "sigcontext_32",
+   "referenced_type" : "type-63",
+   "self_type" : "type-63",
+   "size" : 88,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS13sigcontext_32"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "r8",
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r9",
+     "field_offset" : 64,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r10",
+     "field_offset" : 128,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r11",
+     "field_offset" : 192,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r12",
+     "field_offset" : 256,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r13",
+     "field_offset" : 320,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r14",
+     "field_offset" : 384,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "r15",
+     "field_offset" : 448,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "di",
+     "field_offset" : 512,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "si",
+     "field_offset" : 576,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "bp",
+     "field_offset" : 640,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "bx",
+     "field_offset" : 704,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "dx",
+     "field_offset" : 768,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "ax",
+     "field_offset" : 832,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "cx",
+     "field_offset" : 896,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "sp",
+     "field_offset" : 960,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "ip",
+     "field_offset" : 1024,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 1088,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "cs",
+     "field_offset" : 1152,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "gs",
+     "field_offset" : 1168,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fs",
+     "field_offset" : 1184,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "ss",
+     "field_offset" : 1200,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "err",
+     "field_offset" : 1216,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "trapno",
+     "field_offset" : 1280,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "oldmask",
+     "field_offset" : 1344,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "cr2",
+     "field_offset" : 1408,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "fpstate",
+     "field_offset" : 1472,
+     "referenced_type" : "type-24"
+    },
+    {
+     "field_name" : "reserved1",
+     "field_offset" : 1536,
+     "referenced_type" : "type-65"
+    }
+   ],
+   "linker_set_key" : "sigcontext_64",
+   "name" : "sigcontext_64",
+   "referenced_type" : "type-64",
+   "self_type" : "type-64",
+   "size" : 256,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-x86/asm/sigcontext.h",
+   "unique_id" : "_ZTS13sigcontext_64"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sigev_value",
+     "referenced_type" : "type-51"
+    },
+    {
+     "field_name" : "sigev_signo",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sigev_notify",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_sigev_un",
+     "field_offset" : 128,
+     "referenced_type" : "type-54"
+    }
+   ],
+   "linker_set_key" : "sigevent",
+   "name" : "sigevent",
+   "referenced_type" : "type-50",
+   "self_type" : "type-50",
+   "size" : 64,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTS8sigevent"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_pad",
+     "referenced_type" : "type-55"
+    },
+    {
+     "field_name" : "_tid",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_sigev_thread",
+     "referenced_type" : "type-56"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "sigevent::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3",
+   "name" : "sigevent::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-54",
+   "self_type" : "type-54",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN8sigeventUt_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "_function",
+     "referenced_type" : "type-57"
+    },
+    {
+     "field_name" : "_attribute",
+     "field_offset" : 64,
+     "referenced_type" : "type-52"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "sigevent::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:229:5) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:229:5",
+   "name" : "sigevent::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:226:3)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:229:5) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:229:5",
+   "referenced_type" : "type-56",
+   "self_type" : "type-56",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN8sigeventUt_Ut_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "referenced_type" : "type-109"
+    }
+   ],
+   "linker_set_key" : "siginfo",
+   "name" : "siginfo",
+   "referenced_type" : "type-108",
+   "self_type" : "type-108",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTS7siginfo"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "referenced_type" : "type-110"
+    },
+    {
+     "field_name" : "_si_pad",
+     "referenced_type" : "type-42"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "siginfo::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3",
+   "name" : "siginfo::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-109",
+   "self_type" : "type-109",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN7siginfoUt_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "si_signo",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "si_errno",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "si_code",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "_sifields",
+     "field_offset" : 128,
+     "referenced_type" : "type-111"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "siginfo::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:103:5) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:103:5 <Spelling=bionic/libc/kernel/uapi/asm-generic/siginfo.h:95:19>",
+   "name" : "siginfo::(anonymous union at bionic/libc/kernel/uapi/asm-generic/siginfo.h:102:3)::(anonymous struct at bionic/libc/kernel/uapi/asm-generic/siginfo.h:103:5) at bionic/libc/kernel/uapi/asm-generic/siginfo.h:103:5 <Spelling=bionic/libc/kernel/uapi/asm-generic/siginfo.h:95:19>",
+   "referenced_type" : "type-110",
+   "self_type" : "type-110",
+   "size" : 48,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTSN7siginfoUt_Ut_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sival_int",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sival_ptr",
+     "referenced_type" : "type-52"
+    }
+   ],
+   "linker_set_key" : "sigval",
+   "name" : "sigval",
+   "record_kind" : "union",
+   "referenced_type" : "type-51",
+   "self_type" : "type-51",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/siginfo.h",
+   "unique_id" : "_ZTS6sigval"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "std::nothrow_t",
+   "name" : "std::nothrow_t",
+   "referenced_type" : "type-98",
+   "self_type" : "type-98",
+   "size" : 1,
+   "source_file" : "/bionic/libstdc++/include/new",
+   "unique_id" : "_ZTSSt9nothrow_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "tv_nsec",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "timespec",
+   "name" : "timespec",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS8timespec"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "tv_sec",
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "tv_usec",
+     "field_offset" : 64,
+     "referenced_type" : "type-9"
+    }
+   ],
+   "linker_set_key" : "timeval",
+   "name" : "timeval",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS7timeval"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "tz_minuteswest",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "tz_dsttime",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "timezone",
+   "name" : "timezone",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/time.h",
+   "unique_id" : "_ZTS8timezone"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "uc_flags",
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "uc_link",
+     "field_offset" : 64,
+     "referenced_type" : "type-144"
+    },
+    {
+     "field_name" : "uc_stack",
+     "field_offset" : 128,
+     "referenced_type" : "type-145"
+    },
+    {
+     "field_name" : "uc_mcontext",
+     "field_offset" : 320,
+     "referenced_type" : "type-140"
+    },
+    {
+     "field_offset" : 2368,
+     "referenced_type" : "type-146"
+    },
+    {
+     "field_name" : "__fpregs_mem",
+     "field_offset" : 2432,
+     "referenced_type" : "type-137"
+    }
+   ],
+   "linker_set_key" : "ucontext",
+   "name" : "ucontext",
+   "referenced_type" : "type-143",
+   "self_type" : "type-143",
+   "size" : 816,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h",
+   "unique_id" : "ucontext"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "uc_sigmask",
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "uc_sigmask64",
+     "referenced_type" : "type-18"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "ucontext::(anonymous union at bionic/libc/include/sys/ucontext.h:381:3) at bionic/libc/include/sys/ucontext.h:381:3",
+   "name" : "ucontext::(anonymous union at bionic/libc/include/sys/ucontext.h:381:3) at bionic/libc/include/sys/ucontext.h:381:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-146",
+   "self_type" : "type-146",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/ucontext.h",
+   "unique_id" : "ucontext::(anonymous union at bionic/libc/include/sys/ucontext.h:381:3)"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "regs",
+     "referenced_type" : "type-129"
+    },
+    {
+     "field_name" : "u_fpvalid",
+     "field_offset" : 1728,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "pad0",
+     "field_offset" : 1760,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "i387",
+     "field_offset" : 1792,
+     "referenced_type" : "type-127"
+    },
+    {
+     "field_name" : "u_tsize",
+     "field_offset" : 5888,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "u_dsize",
+     "field_offset" : 5952,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "u_ssize",
+     "field_offset" : 6016,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "start_code",
+     "field_offset" : 6080,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "start_stack",
+     "field_offset" : 6144,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "signal",
+     "field_offset" : 6208,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "reserved",
+     "field_offset" : 6272,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "pad1",
+     "field_offset" : 6304,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "u_ar0",
+     "field_offset" : 6336,
+     "referenced_type" : "type-131"
+    },
+    {
+     "field_name" : "u_fpstate",
+     "field_offset" : 6400,
+     "referenced_type" : "type-132"
+    },
+    {
+     "field_name" : "magic",
+     "field_offset" : 6464,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "u_comm",
+     "field_offset" : 6528,
+     "referenced_type" : "type-133"
+    },
+    {
+     "field_name" : "u_debugreg",
+     "field_offset" : 6784,
+     "referenced_type" : "type-134"
+    },
+    {
+     "field_name" : "error_code",
+     "field_offset" : 7296,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "fault_address",
+     "field_offset" : 7360,
+     "referenced_type" : "type-18"
+    }
+   ],
+   "linker_set_key" : "user",
+   "name" : "user",
+   "referenced_type" : "type-130",
+   "self_type" : "type-130",
+   "size" : 928,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "cwd",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "swd",
+     "field_offset" : 16,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "ftw",
+     "field_offset" : 32,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "fop",
+     "field_offset" : 48,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "rip",
+     "field_offset" : 64,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rdp",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "mxcsr",
+     "field_offset" : 192,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "mxcr_mask",
+     "field_offset" : 224,
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "st_space",
+     "field_offset" : 256,
+     "referenced_type" : "type-44"
+    },
+    {
+     "field_name" : "xmm_space",
+     "field_offset" : 1280,
+     "referenced_type" : "type-45"
+    },
+    {
+     "field_name" : "padding",
+     "field_offset" : 3328,
+     "referenced_type" : "type-128"
+    }
+   ],
+   "linker_set_key" : "user_fpregs_struct",
+   "name" : "user_fpregs_struct",
+   "referenced_type" : "type-127",
+   "self_type" : "type-127",
+   "size" : 512,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_fpregs_struct"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "r15",
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r14",
+     "field_offset" : 64,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r13",
+     "field_offset" : 128,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r12",
+     "field_offset" : 192,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rbp",
+     "field_offset" : 256,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rbx",
+     "field_offset" : 320,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r11",
+     "field_offset" : 384,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r10",
+     "field_offset" : 448,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r9",
+     "field_offset" : 512,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "r8",
+     "field_offset" : 576,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rax",
+     "field_offset" : 640,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rcx",
+     "field_offset" : 704,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rdx",
+     "field_offset" : 768,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rsi",
+     "field_offset" : 832,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rdi",
+     "field_offset" : 896,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "orig_rax",
+     "field_offset" : 960,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rip",
+     "field_offset" : 1024,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "cs",
+     "field_offset" : 1088,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "eflags",
+     "field_offset" : 1152,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "rsp",
+     "field_offset" : 1216,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "ss",
+     "field_offset" : 1280,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "fs_base",
+     "field_offset" : 1344,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "gs_base",
+     "field_offset" : 1408,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "ds",
+     "field_offset" : 1472,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "es",
+     "field_offset" : 1536,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "fs",
+     "field_offset" : 1600,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "gs",
+     "field_offset" : 1664,
+     "referenced_type" : "type-18"
+    }
+   ],
+   "linker_set_key" : "user_regs_struct",
+   "name" : "user_regs_struct",
+   "referenced_type" : "type-129",
+   "self_type" : "type-129",
+   "size" : 216,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_regs_struct"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

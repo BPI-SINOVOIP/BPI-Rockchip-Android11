@@ -1,0 +1,1710 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIb",
+   "name" : "bool",
+   "referenced_type" : "_ZTIb",
+   "self_type" : "_ZTIb",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIl",
+   "name" : "long",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIl",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "AAudioStreamBuilder_delete"
+  },
+  {
+   "name" : "AAudioStreamBuilder_openStream"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setAllowedCapturePolicy"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setBufferCapacityInFrames"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setChannelCount"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setContentType"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setDataCallback"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setDeviceId"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setDirection"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setErrorCallback"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setFormat"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setFramesPerDataCallback"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setInputPreset"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setPerformanceMode"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setPrivacySensitive"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setSampleRate"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setSamplesPerFrame"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setSessionId"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setSharingMode"
+  },
+  {
+   "name" : "AAudioStreamBuilder_setUsage"
+  },
+  {
+   "name" : "AAudioStream_close"
+  },
+  {
+   "name" : "AAudioStream_getAllowedCapturePolicy"
+  },
+  {
+   "name" : "AAudioStream_getBufferCapacityInFrames"
+  },
+  {
+   "name" : "AAudioStream_getBufferSizeInFrames"
+  },
+  {
+   "name" : "AAudioStream_getChannelCount"
+  },
+  {
+   "name" : "AAudioStream_getContentType"
+  },
+  {
+   "name" : "AAudioStream_getDeviceId"
+  },
+  {
+   "name" : "AAudioStream_getDirection"
+  },
+  {
+   "name" : "AAudioStream_getFormat"
+  },
+  {
+   "name" : "AAudioStream_getFramesPerBurst"
+  },
+  {
+   "name" : "AAudioStream_getFramesPerDataCallback"
+  },
+  {
+   "name" : "AAudioStream_getFramesRead"
+  },
+  {
+   "name" : "AAudioStream_getFramesWritten"
+  },
+  {
+   "name" : "AAudioStream_getInputPreset"
+  },
+  {
+   "name" : "AAudioStream_getPerformanceMode"
+  },
+  {
+   "name" : "AAudioStream_getSampleRate"
+  },
+  {
+   "name" : "AAudioStream_getSamplesPerFrame"
+  },
+  {
+   "name" : "AAudioStream_getSessionId"
+  },
+  {
+   "name" : "AAudioStream_getSharingMode"
+  },
+  {
+   "name" : "AAudioStream_getState"
+  },
+  {
+   "name" : "AAudioStream_getTimestamp"
+  },
+  {
+   "name" : "AAudioStream_getUsage"
+  },
+  {
+   "name" : "AAudioStream_getXRunCount"
+  },
+  {
+   "name" : "AAudioStream_isMMapUsed"
+  },
+  {
+   "name" : "AAudioStream_isPrivacySensitive"
+  },
+  {
+   "name" : "AAudioStream_read"
+  },
+  {
+   "name" : "AAudioStream_release"
+  },
+  {
+   "name" : "AAudioStream_requestFlush"
+  },
+  {
+   "name" : "AAudioStream_requestPause"
+  },
+  {
+   "name" : "AAudioStream_requestStart"
+  },
+  {
+   "name" : "AAudioStream_requestStop"
+  },
+  {
+   "name" : "AAudioStream_setBufferSizeInFrames"
+  },
+  {
+   "name" : "AAudioStream_waitForStateChange"
+  },
+  {
+   "name" : "AAudioStream_write"
+  },
+  {
+   "name" : "AAudio_convertResultToText"
+  },
+  {
+   "name" : "AAudio_convertStreamStateToText"
+  },
+  {
+   "name" : "AAudio_createStreamBuilder"
+  },
+  {
+   "name" : "AAudio_getMMapPolicy"
+  },
+  {
+   "name" : "AAudio_setMMapPolicy"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_OK"
+    },
+    {
+     "enum_field_value" : -900,
+     "name" : "AAUDIO_ERROR_BASE"
+    },
+    {
+     "enum_field_value" : -899,
+     "name" : "AAUDIO_ERROR_DISCONNECTED"
+    },
+    {
+     "enum_field_value" : -898,
+     "name" : "AAUDIO_ERROR_ILLEGAL_ARGUMENT"
+    },
+    {
+     "enum_field_value" : -896,
+     "name" : "AAUDIO_ERROR_INTERNAL"
+    },
+    {
+     "enum_field_value" : -895,
+     "name" : "AAUDIO_ERROR_INVALID_STATE"
+    },
+    {
+     "enum_field_value" : -892,
+     "name" : "AAUDIO_ERROR_INVALID_HANDLE"
+    },
+    {
+     "enum_field_value" : -890,
+     "name" : "AAUDIO_ERROR_UNIMPLEMENTED"
+    },
+    {
+     "enum_field_value" : -889,
+     "name" : "AAUDIO_ERROR_UNAVAILABLE"
+    },
+    {
+     "enum_field_value" : -888,
+     "name" : "AAUDIO_ERROR_NO_FREE_HANDLES"
+    },
+    {
+     "enum_field_value" : -887,
+     "name" : "AAUDIO_ERROR_NO_MEMORY"
+    },
+    {
+     "enum_field_value" : -886,
+     "name" : "AAUDIO_ERROR_NULL"
+    },
+    {
+     "enum_field_value" : -885,
+     "name" : "AAUDIO_ERROR_TIMEOUT"
+    },
+    {
+     "enum_field_value" : -884,
+     "name" : "AAUDIO_ERROR_WOULD_BLOCK"
+    },
+    {
+     "enum_field_value" : -883,
+     "name" : "AAUDIO_ERROR_INVALID_FORMAT"
+    },
+    {
+     "enum_field_value" : -882,
+     "name" : "AAUDIO_ERROR_OUT_OF_RANGE"
+    },
+    {
+     "enum_field_value" : -881,
+     "name" : "AAUDIO_ERROR_NO_SERVICE"
+    },
+    {
+     "enum_field_value" : -880,
+     "name" : "AAUDIO_ERROR_INVALID_RATE"
+    }
+   ],
+   "linker_set_key" : "_ZTI18$AAUDIO_ERROR_BASE",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:87:1)",
+   "referenced_type" : "_ZTI18$AAUDIO_ERROR_BASE",
+   "self_type" : "_ZTI18$AAUDIO_ERROR_BASE",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_POLICY_NEVER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AAUDIO_POLICY_AUTO"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AAUDIO_POLICY_ALWAYS"
+    }
+   ],
+   "linker_set_key" : "_ZTI21$AAUDIO_POLICY_ALWAYS",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudioTesting.h:34:1)",
+   "referenced_type" : "_ZTI21$AAUDIO_POLICY_ALWAYS",
+   "self_type" : "_ZTI21$AAUDIO_POLICY_ALWAYS",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudioTesting.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "AAUDIO_FORMAT_INVALID"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_FORMAT_UNSPECIFIED"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_FORMAT_PCM_I16"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AAUDIO_FORMAT_PCM_FLOAT"
+    }
+   ],
+   "linker_set_key" : "_ZTI22$AAUDIO_FORMAT_INVALID",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:60:1)",
+   "referenced_type" : "_ZTI22$AAUDIO_FORMAT_INVALID",
+   "self_type" : "_ZTI22$AAUDIO_FORMAT_INVALID",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_DIRECTION_OUTPUT"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_DIRECTION_INPUT"
+    }
+   ],
+   "linker_set_key" : "_ZTI23$AAUDIO_DIRECTION_INPUT",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:46:1)",
+   "referenced_type" : "_ZTI23$AAUDIO_DIRECTION_INPUT",
+   "self_type" : "_ZTI23$AAUDIO_DIRECTION_INPUT",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_CONTENT_TYPE_SPEECH"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AAUDIO_CONTENT_TYPE_MUSIC"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AAUDIO_CONTENT_TYPE_MOVIE"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "AAUDIO_CONTENT_TYPE_SONIFICATION"
+    }
+   ],
+   "linker_set_key" : "_ZTI26$AAUDIO_CONTENT_TYPE_MOVIE",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:343:1)",
+   "referenced_type" : "_ZTI26$AAUDIO_CONTENT_TYPE_MOVIE",
+   "self_type" : "_ZTI26$AAUDIO_CONTENT_TYPE_MOVIE",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : -1,
+     "name" : "AAUDIO_SESSION_ID_NONE"
+    },
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_SESSION_ID_ALLOCATE"
+    }
+   ],
+   "linker_set_key" : "_ZTI27$AAUDIO_SESSION_ID_ALLOCATE",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:462:1)",
+   "referenced_type" : "_ZTI27$AAUDIO_SESSION_ID_ALLOCATE",
+   "self_type" : "_ZTI27$AAUDIO_SESSION_ID_ALLOCATE",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIi"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_STREAM_STATE_UNINITIALIZED"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_STREAM_STATE_UNKNOWN"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AAUDIO_STREAM_STATE_OPEN"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AAUDIO_STREAM_STATE_STARTING"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "AAUDIO_STREAM_STATE_STARTED"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "AAUDIO_STREAM_STATE_PAUSING"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "AAUDIO_STREAM_STATE_PAUSED"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "AAUDIO_STREAM_STATE_FLUSHING"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "AAUDIO_STREAM_STATE_FLUSHED"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "AAUDIO_STREAM_STATE_STOPPING"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "AAUDIO_STREAM_STATE_STOPPED"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "AAUDIO_STREAM_STATE_CLOSING"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "AAUDIO_STREAM_STATE_CLOSED"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "AAUDIO_STREAM_STATE_DISCONNECTED"
+    }
+   ],
+   "linker_set_key" : "_ZTI27$AAUDIO_STREAM_STATE_CLOSED",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:173:1)",
+   "referenced_type" : "_ZTI27$AAUDIO_STREAM_STATE_CLOSED",
+   "self_type" : "_ZTI27$AAUDIO_STREAM_STATE_CLOSED",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_ALLOW_CAPTURE_BY_ALL"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AAUDIO_ALLOW_CAPTURE_BY_SYSTEM"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AAUDIO_ALLOW_CAPTURE_BY_NONE"
+    }
+   ],
+   "linker_set_key" : "_ZTI28$AAUDIO_ALLOW_CAPTURE_BY_ALL",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:423:1)",
+   "referenced_type" : "_ZTI28$AAUDIO_ALLOW_CAPTURE_BY_ALL",
+   "self_type" : "_ZTI28$AAUDIO_ALLOW_CAPTURE_BY_ALL",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_INPUT_PRESET_GENERIC"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "AAUDIO_INPUT_PRESET_CAMCORDER"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "AAUDIO_INPUT_PRESET_VOICE_RECOGNITION"
+    },
+    {
+     "enum_field_value" : 7,
+     "name" : "AAUDIO_INPUT_PRESET_VOICE_COMMUNICATION"
+    },
+    {
+     "enum_field_value" : 9,
+     "name" : "AAUDIO_INPUT_PRESET_UNPROCESSED"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "AAUDIO_INPUT_PRESET_VOICE_PERFORMANCE"
+    }
+   ],
+   "linker_set_key" : "_ZTI30$AAUDIO_INPUT_PRESET_CAMCORDER",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:377:1)",
+   "referenced_type" : "_ZTI30$AAUDIO_INPUT_PRESET_CAMCORDER",
+   "self_type" : "_ZTI30$AAUDIO_INPUT_PRESET_CAMCORDER",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_SHARING_MODE_EXCLUSIVE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_SHARING_MODE_SHARED"
+    }
+   ],
+   "linker_set_key" : "_ZTI30$AAUDIO_SHARING_MODE_EXCLUSIVE",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:193:1)",
+   "referenced_type" : "_ZTI30$AAUDIO_SHARING_MODE_EXCLUSIVE",
+   "self_type" : "_ZTI30$AAUDIO_SHARING_MODE_EXCLUSIVE",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "AAUDIO_CALLBACK_RESULT_CONTINUE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_CALLBACK_RESULT_STOP"
+    }
+   ],
+   "linker_set_key" : "_ZTI32$AAUDIO_CALLBACK_RESULT_CONTINUE",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:814:1)",
+   "referenced_type" : "_ZTI32$AAUDIO_CALLBACK_RESULT_CONTINUE",
+   "self_type" : "_ZTI32$AAUDIO_CALLBACK_RESULT_CONTINUE",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 1,
+     "name" : "AAUDIO_USAGE_MEDIA"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "AAUDIO_USAGE_VOICE_COMMUNICATION"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "AAUDIO_USAGE_VOICE_COMMUNICATION_SIGNALLING"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "AAUDIO_USAGE_ALARM"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "AAUDIO_USAGE_NOTIFICATION"
+    },
+    {
+     "enum_field_value" : 6,
+     "name" : "AAUDIO_USAGE_NOTIFICATION_RINGTONE"
+    },
+    {
+     "enum_field_value" : 10,
+     "name" : "AAUDIO_USAGE_NOTIFICATION_EVENT"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "AAUDIO_USAGE_ASSISTANCE_ACCESSIBILITY"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "AAUDIO_USAGE_ASSISTANCE_NAVIGATION_GUIDANCE"
+    },
+    {
+     "enum_field_value" : 13,
+     "name" : "AAUDIO_USAGE_ASSISTANCE_SONIFICATION"
+    },
+    {
+     "enum_field_value" : 14,
+     "name" : "AAUDIO_USAGE_GAME"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "AAUDIO_USAGE_ASSISTANT"
+    },
+    {
+     "enum_field_value" : 1000,
+     "name" : "AAUDIO_SYSTEM_USAGE_EMERGENCY"
+    },
+    {
+     "enum_field_value" : 1001,
+     "name" : "AAUDIO_SYSTEM_USAGE_SAFETY"
+    },
+    {
+     "enum_field_value" : 1002,
+     "name" : "AAUDIO_SYSTEM_USAGE_VEHICLE_STATUS"
+    },
+    {
+     "enum_field_value" : 1003,
+     "name" : "AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT"
+    }
+   ],
+   "linker_set_key" : "_ZTI33$AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:242:1)",
+   "referenced_type" : "_ZTI33$AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT",
+   "self_type" : "_ZTI33$AAUDIO_SYSTEM_USAGE_ANNOUNCEMENT",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 10,
+     "name" : "AAUDIO_PERFORMANCE_MODE_NONE"
+    },
+    {
+     "enum_field_value" : 11,
+     "name" : "AAUDIO_PERFORMANCE_MODE_POWER_SAVING"
+    },
+    {
+     "enum_field_value" : 12,
+     "name" : "AAUDIO_PERFORMANCE_MODE_LOW_LATENCY"
+    }
+   ],
+   "linker_set_key" : "_ZTI36$AAUDIO_PERFORMANCE_MODE_LOW_LATENCY",
+   "name" : "(anonymous enum at frameworks/av/media/libaaudio/include/aaudio/AAudio.h:209:1)",
+   "referenced_type" : "_ZTI36$AAUDIO_PERFORMANCE_MODE_LOW_LATENCY",
+   "self_type" : "_ZTI36$AAUDIO_PERFORMANCE_MODE_LOW_LATENCY",
+   "size" : 4,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h",
+   "underlying_type" : "_ZTIj"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFiP18AAudioStreamStructPvS1_iE",
+   "name" : "int (AAudioStreamStruct *, void *, void *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFiP18AAudioStreamStructPvS1_iE",
+   "return_type" : "_ZTIi",
+   "self_type" : "_ZTIFiP18AAudioStreamStructPvS1_iE",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIFvP18AAudioStreamStructPviE",
+   "name" : "void (AAudioStreamStruct *, void *, int)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "referenced_type" : "_ZTIFvP18AAudioStreamStructPviE",
+   "return_type" : "_ZTIv",
+   "self_type" : "_ZTIFvP18AAudioStreamStructPviE",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "AAudioStreamBuilder_delete",
+   "linker_set_key" : "AAudioStreamBuilder_delete",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_openStream",
+   "linker_set_key" : "AAudioStreamBuilder_openStream",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setAllowedCapturePolicy",
+   "linker_set_key" : "AAudioStreamBuilder_setAllowedCapturePolicy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setBufferCapacityInFrames",
+   "linker_set_key" : "AAudioStreamBuilder_setBufferCapacityInFrames",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setChannelCount",
+   "linker_set_key" : "AAudioStreamBuilder_setChannelCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setContentType",
+   "linker_set_key" : "AAudioStreamBuilder_setContentType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setDataCallback",
+   "linker_set_key" : "AAudioStreamBuilder_setDataCallback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPFiP18AAudioStreamStructPvS1_iE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setDeviceId",
+   "linker_set_key" : "AAudioStreamBuilder_setDeviceId",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setDirection",
+   "linker_set_key" : "AAudioStreamBuilder_setDirection",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setErrorCallback",
+   "linker_set_key" : "AAudioStreamBuilder_setErrorCallback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPFvP18AAudioStreamStructPviE"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setFormat",
+   "linker_set_key" : "AAudioStreamBuilder_setFormat",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setFramesPerDataCallback",
+   "linker_set_key" : "AAudioStreamBuilder_setFramesPerDataCallback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setInputPreset",
+   "linker_set_key" : "AAudioStreamBuilder_setInputPreset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setPerformanceMode",
+   "linker_set_key" : "AAudioStreamBuilder_setPerformanceMode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setPrivacySensitive",
+   "linker_set_key" : "AAudioStreamBuilder_setPrivacySensitive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIb"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setSampleRate",
+   "linker_set_key" : "AAudioStreamBuilder_setSampleRate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setSamplesPerFrame",
+   "linker_set_key" : "AAudioStreamBuilder_setSamplesPerFrame",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setSessionId",
+   "linker_set_key" : "AAudioStreamBuilder_setSessionId",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setSharingMode",
+   "linker_set_key" : "AAudioStreamBuilder_setSharingMode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStreamBuilder_setUsage",
+   "linker_set_key" : "AAudioStreamBuilder_setUsage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_close",
+   "linker_set_key" : "AAudioStream_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getAllowedCapturePolicy",
+   "linker_set_key" : "AAudioStream_getAllowedCapturePolicy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getBufferCapacityInFrames",
+   "linker_set_key" : "AAudioStream_getBufferCapacityInFrames",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getBufferSizeInFrames",
+   "linker_set_key" : "AAudioStream_getBufferSizeInFrames",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getChannelCount",
+   "linker_set_key" : "AAudioStream_getChannelCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getContentType",
+   "linker_set_key" : "AAudioStream_getContentType",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getDeviceId",
+   "linker_set_key" : "AAudioStream_getDeviceId",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getDirection",
+   "linker_set_key" : "AAudioStream_getDirection",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getFormat",
+   "linker_set_key" : "AAudioStream_getFormat",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getFramesPerBurst",
+   "linker_set_key" : "AAudioStream_getFramesPerBurst",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getFramesPerDataCallback",
+   "linker_set_key" : "AAudioStream_getFramesPerDataCallback",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getFramesRead",
+   "linker_set_key" : "AAudioStream_getFramesRead",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getFramesWritten",
+   "linker_set_key" : "AAudioStream_getFramesWritten",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIl",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getInputPreset",
+   "linker_set_key" : "AAudioStream_getInputPreset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getPerformanceMode",
+   "linker_set_key" : "AAudioStream_getPerformanceMode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getSampleRate",
+   "linker_set_key" : "AAudioStream_getSampleRate",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getSamplesPerFrame",
+   "linker_set_key" : "AAudioStream_getSamplesPerFrame",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getSessionId",
+   "linker_set_key" : "AAudioStream_getSessionId",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getSharingMode",
+   "linker_set_key" : "AAudioStream_getSharingMode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getState",
+   "linker_set_key" : "AAudioStream_getState",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getTimestamp",
+   "linker_set_key" : "AAudioStream_getTimestamp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPl"
+    },
+    {
+     "referenced_type" : "_ZTIPl"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getUsage",
+   "linker_set_key" : "AAudioStream_getUsage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_getXRunCount",
+   "linker_set_key" : "AAudioStream_getXRunCount",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_isMMapUsed",
+   "linker_set_key" : "AAudioStream_isMMapUsed",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudioTesting.h"
+  },
+  {
+   "function_name" : "AAudioStream_isPrivacySensitive",
+   "linker_set_key" : "AAudioStream_isPrivacySensitive",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIb",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_read",
+   "linker_set_key" : "AAudioStream_read",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_release",
+   "linker_set_key" : "AAudioStream_release",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_requestFlush",
+   "linker_set_key" : "AAudioStream_requestFlush",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_requestPause",
+   "linker_set_key" : "AAudioStream_requestPause",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_requestStart",
+   "linker_set_key" : "AAudioStream_requestStart",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_requestStop",
+   "linker_set_key" : "AAudioStream_requestStop",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_setBufferSizeInFrames",
+   "linker_set_key" : "AAudioStream_setBufferSizeInFrames",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_waitForStateChange",
+   "linker_set_key" : "AAudioStream_waitForStateChange",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIPi"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudioStream_write",
+   "linker_set_key" : "AAudioStream_write",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP18AAudioStreamStruct"
+    },
+    {
+     "referenced_type" : "_ZTIPKv"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIl"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudio_convertResultToText",
+   "linker_set_key" : "AAudio_convertResultToText",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudio_convertStreamStateToText",
+   "linker_set_key" : "AAudio_convertStreamStateToText",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIPKc",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudio_createStreamBuilder",
+   "linker_set_key" : "AAudio_createStreamBuilder",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP25AAudioStreamBuilderStruct"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "function_name" : "AAudio_getMMapPolicy",
+   "linker_set_key" : "AAudio_getMMapPolicy",
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudioTesting.h"
+  },
+  {
+   "function_name" : "AAudio_setMMapPolicy",
+   "linker_set_key" : "AAudio_setMMapPolicy",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudioTesting.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP18AAudioStreamStruct",
+   "name" : "AAudioStreamStruct *",
+   "referenced_type" : "_ZTI18AAudioStreamStruct",
+   "self_type" : "_ZTIP18AAudioStreamStruct",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIP25AAudioStreamBuilderStruct",
+   "name" : "AAudioStreamBuilderStruct *",
+   "referenced_type" : "_ZTI25AAudioStreamBuilderStruct",
+   "self_type" : "_ZTIP25AAudioStreamBuilderStruct",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFiP18AAudioStreamStructPvS1_iE",
+   "name" : "int (*)(AAudioStreamStruct *, void *, void *, int)",
+   "referenced_type" : "_ZTIFiP18AAudioStreamStructPvS1_iE",
+   "self_type" : "_ZTIPFiP18AAudioStreamStructPvS1_iE",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPFvP18AAudioStreamStructPviE",
+   "name" : "void (*)(AAudioStreamStruct *, void *, int)",
+   "referenced_type" : "_ZTIFvP18AAudioStreamStructPviE",
+   "self_type" : "_ZTIPFvP18AAudioStreamStructPviE",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPKv",
+   "name" : "const void *",
+   "referenced_type" : "_ZTIKv",
+   "self_type" : "_ZTIPKv",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP18AAudioStreamStruct",
+   "name" : "AAudioStreamStruct **",
+   "referenced_type" : "_ZTIP18AAudioStreamStruct",
+   "self_type" : "_ZTIPP18AAudioStreamStruct",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPP25AAudioStreamBuilderStruct",
+   "name" : "AAudioStreamBuilderStruct **",
+   "referenced_type" : "_ZTIP25AAudioStreamBuilderStruct",
+   "self_type" : "_ZTIPP25AAudioStreamBuilderStruct",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPi",
+   "name" : "int *",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIPi",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPl",
+   "name" : "long *",
+   "referenced_type" : "_ZTIl",
+   "self_type" : "_ZTIPl",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "_ZTIPv",
+   "name" : "void *",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIPv",
+   "size" : 8,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKv",
+   "name" : "const void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIKv",
+   "source_file" : "/frameworks/av/media/libaaudio/include/aaudio/AAudio.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

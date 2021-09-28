@@ -1,0 +1,1135 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 4
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-30",
+   "self_type" : "type-30",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "usb_descriptor_iter_init"
+  },
+  {
+   "name" : "usb_descriptor_iter_next"
+  },
+  {
+   "name" : "usb_device_bulk_transfer"
+  },
+  {
+   "name" : "usb_device_claim_interface"
+  },
+  {
+   "name" : "usb_device_close"
+  },
+  {
+   "name" : "usb_device_connect_kernel_driver"
+  },
+  {
+   "name" : "usb_device_control_transfer"
+  },
+  {
+   "name" : "usb_device_get_descriptors_length"
+  },
+  {
+   "name" : "usb_device_get_device_descriptor"
+  },
+  {
+   "name" : "usb_device_get_fd"
+  },
+  {
+   "name" : "usb_device_get_manufacturer_name"
+  },
+  {
+   "name" : "usb_device_get_name"
+  },
+  {
+   "name" : "usb_device_get_name_from_unique_id"
+  },
+  {
+   "name" : "usb_device_get_product_id"
+  },
+  {
+   "name" : "usb_device_get_product_name"
+  },
+  {
+   "name" : "usb_device_get_raw_descriptors"
+  },
+  {
+   "name" : "usb_device_get_serial"
+  },
+  {
+   "name" : "usb_device_get_string"
+  },
+  {
+   "name" : "usb_device_get_string_ucs2"
+  },
+  {
+   "name" : "usb_device_get_unique_id"
+  },
+  {
+   "name" : "usb_device_get_unique_id_from_name"
+  },
+  {
+   "name" : "usb_device_get_vendor_id"
+  },
+  {
+   "name" : "usb_device_get_version"
+  },
+  {
+   "name" : "usb_device_is_writeable"
+  },
+  {
+   "name" : "usb_device_new"
+  },
+  {
+   "name" : "usb_device_open"
+  },
+  {
+   "name" : "usb_device_release_interface"
+  },
+  {
+   "name" : "usb_device_reset"
+  },
+  {
+   "name" : "usb_device_set_configuration"
+  },
+  {
+   "name" : "usb_device_set_interface"
+  },
+  {
+   "name" : "usb_host_cleanup"
+  },
+  {
+   "name" : "usb_host_get_fd"
+  },
+  {
+   "name" : "usb_host_init"
+  },
+  {
+   "name" : "usb_host_load"
+  },
+  {
+   "name" : "usb_host_read_event"
+  },
+  {
+   "name" : "usb_host_run"
+  },
+  {
+   "name" : "usb_request_cancel"
+  },
+  {
+   "name" : "usb_request_free"
+  },
+  {
+   "name" : "usb_request_new"
+  },
+  {
+   "name" : "usb_request_queue"
+  },
+  {
+   "name" : "usb_request_wait"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (const char *, void *)",
+   "name" : "int (const char *, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "referenced_type" : "type-8",
+   "return_type" : "type-9",
+   "self_type" : "type-8",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (void *)",
+   "name" : "int (void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "referenced_type" : "type-12",
+   "return_type" : "type-9",
+   "self_type" : "type-12",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "usb_descriptor_iter_init",
+   "linker_set_key" : "usb_descriptor_iter_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-27"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_descriptor_iter_next",
+   "linker_set_key" : "usb_descriptor_iter_next",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-27"
+    }
+   ],
+   "return_type" : "type-28",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_bulk_transfer",
+   "linker_set_key" : "usb_device_bulk_transfer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_claim_interface",
+   "linker_set_key" : "usb_device_claim_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_close",
+   "linker_set_key" : "usb_device_close",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_connect_kernel_driver",
+   "linker_set_key" : "usb_device_connect_kernel_driver",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_control_transfer",
+   "linker_set_key" : "usb_device_control_transfer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_descriptors_length",
+   "linker_set_key" : "usb_device_get_descriptors_length",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-20",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_device_descriptor",
+   "linker_set_key" : "usb_device_get_device_descriptor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-16",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_fd",
+   "linker_set_key" : "usb_device_get_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_manufacturer_name",
+   "linker_set_key" : "usb_device_get_manufacturer_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-14",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_name",
+   "linker_set_key" : "usb_device_get_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_name_from_unique_id",
+   "linker_set_key" : "usb_device_get_name_from_unique_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-14",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_product_id",
+   "linker_set_key" : "usb_device_get_product_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-15",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_product_name",
+   "linker_set_key" : "usb_device_get_product_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-14",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_raw_descriptors",
+   "linker_set_key" : "usb_device_get_raw_descriptors",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_serial",
+   "linker_set_key" : "usb_device_get_serial",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-14",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_string",
+   "linker_set_key" : "usb_device_get_string",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-14",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_string_ucs2",
+   "linker_set_key" : "usb_device_get_string_ucs2",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-21"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_unique_id",
+   "linker_set_key" : "usb_device_get_unique_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_unique_id_from_name",
+   "linker_set_key" : "usb_device_get_unique_id_from_name",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_vendor_id",
+   "linker_set_key" : "usb_device_get_vendor_id",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-15",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_get_version",
+   "linker_set_key" : "usb_device_get_version",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_is_writeable",
+   "linker_set_key" : "usb_device_is_writeable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_new",
+   "linker_set_key" : "usb_device_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-33",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_open",
+   "linker_set_key" : "usb_device_open",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-33",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_release_interface",
+   "linker_set_key" : "usb_device_release_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_reset",
+   "linker_set_key" : "usb_device_reset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_set_configuration",
+   "linker_set_key" : "usb_device_set_configuration",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_device_set_interface",
+   "linker_set_key" : "usb_device_set_interface",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-30"
+    },
+    {
+     "referenced_type" : "type-30"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_cleanup",
+   "linker_set_key" : "usb_host_cleanup",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-38"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_get_fd",
+   "linker_set_key" : "usb_host_get_fd",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-38"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_init",
+   "linker_set_key" : "usb_host_init",
+   "return_type" : "type-38",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_load",
+   "linker_set_key" : "usb_host_load",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-38"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_read_event",
+   "linker_set_key" : "usb_host_read_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-38"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_host_run",
+   "linker_set_key" : "usb_host_run",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-38"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_cancel",
+   "linker_set_key" : "usb_request_cancel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-31"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_free",
+   "linker_set_key" : "usb_request_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-31"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_new",
+   "linker_set_key" : "usb_request_new",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_queue",
+   "linker_set_key" : "usb_request_queue",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-31"
+    }
+   ],
+   "return_type" : "type-9",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "function_name" : "usb_request_wait",
+   "linker_set_key" : "usb_request_wait",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-33"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-31",
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-4",
+   "self_type" : "type-14",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-25",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const usb_device *",
+   "name" : "const usb_device *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-24",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const usb_device_descriptor *",
+   "name" : "const usb_device_descriptor *",
+   "referenced_type" : "type-17",
+   "self_type" : "type-16",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const usb_endpoint_descriptor *",
+   "name" : "const usb_endpoint_descriptor *",
+   "referenced_type" : "type-35",
+   "self_type" : "type-37",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "int (*)(const char *, void *)",
+   "name" : "int (*)(const char *, void *)",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "int (*)(void *)",
+   "name" : "int (*)(void *)",
+   "referenced_type" : "type-12",
+   "self_type" : "type-13",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long *",
+   "name" : "unsigned long *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-21",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "usb_descriptor_header *",
+   "name" : "usb_descriptor_header *",
+   "referenced_type" : "type-29",
+   "self_type" : "type-28",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "usb_descriptor_iter *",
+   "name" : "usb_descriptor_iter *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-27",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "usb_device *",
+   "name" : "usb_device *",
+   "referenced_type" : "type-34",
+   "self_type" : "type-33",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "usb_host_context *",
+   "name" : "usb_host_context *",
+   "referenced_type" : "type-39",
+   "self_type" : "type-38",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "usb_request *",
+   "name" : "usb_request *",
+   "referenced_type" : "type-32",
+   "self_type" : "type-31",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void **",
+   "name" : "void **",
+   "referenced_type" : "type-5",
+   "self_type" : "type-19",
+   "size" : 8,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-4",
+   "self_type" : "type-11",
+   "size" : 1,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-3",
+   "self_type" : "type-26",
+   "size" : 1,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const usb_device",
+   "name" : "const usb_device",
+   "referenced_type" : "type-23",
+   "self_type" : "type-22",
+   "size" : 4172,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const usb_device_descriptor",
+   "name" : "const usb_device_descriptor",
+   "referenced_type" : "type-18",
+   "self_type" : "type-17",
+   "size" : 18,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const usb_endpoint_descriptor",
+   "name" : "const usb_endpoint_descriptor",
+   "referenced_type" : "type-36",
+   "self_type" : "type-35",
+   "size" : 9,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "config",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "config_end",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "curr_desc",
+     "field_offset" : 128,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "usb_descriptor_iter",
+   "name" : "usb_descriptor_iter",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 24,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h",
+   "unique_id" : "usb_descriptor_iter"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "dev",
+     "referenced_type" : "type-33"
+    },
+    {
+     "field_name" : "buffer",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "buffer_length",
+     "field_offset" : 128,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "actual_length",
+     "field_offset" : 160,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "max_packet_size",
+     "field_offset" : 192,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "private_data",
+     "field_offset" : 256,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "endpoint",
+     "field_offset" : 320,
+     "referenced_type" : "type-9"
+    },
+    {
+     "field_name" : "client_data",
+     "field_offset" : 384,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "usb_request",
+   "name" : "usb_request",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 56,
+   "source_file" : "/system/core/libusbhost/include/usbhost/usbhost.h",
+   "unique_id" : "usb_request"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

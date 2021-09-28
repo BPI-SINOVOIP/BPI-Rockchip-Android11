@@ -1,0 +1,3379 @@
+{
+ "array_types" :
+ [
+  {
+   "linker_set_key" : "char []",
+   "name" : "char []",
+   "referenced_type" : "type-4",
+   "self_type" : "type-59",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 1
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char16_t",
+   "name" : "char16_t",
+   "referenced_type" : "type-289",
+   "self_type" : "type-289",
+   "size" : 2
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char32_t",
+   "name" : "char32_t",
+   "referenced_type" : "type-290",
+   "self_type" : "type-290",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-70",
+   "self_type" : "type-70",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "float",
+   "name" : "float",
+   "referenced_type" : "type-69",
+   "self_type" : "type-69",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-37",
+   "self_type" : "type-37",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-36",
+   "self_type" : "type-36",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-180",
+   "self_type" : "type-180",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-68",
+   "self_type" : "type-68",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "nullptr_t",
+   "name" : "nullptr_t",
+   "referenced_type" : "type-71",
+   "self_type" : "type-71",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-66",
+   "self_type" : "type-66",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "signed char",
+   "name" : "signed char",
+   "referenced_type" : "type-65",
+   "self_type" : "type-65",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-67",
+   "self_type" : "type-67",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-64",
+   "self_type" : "type-64",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "wchar_t",
+   "name" : "wchar_t",
+   "referenced_type" : "type-291",
+   "self_type" : "type-291",
+   "size" : 4
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapper6unwrapEv"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperC1EPKcj"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperC2EPKcj"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperD1Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo14BitcodeWrapperD2Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslator9translateEv"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorC1EPKcjj"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorC2EPKcjj"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorD1Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17BitcodeTranslatorD2Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor18calculateNumInputsEPKN4llvm8FunctionEj"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor18readThreadableFlagEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor22populatePragmaMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor22populateReduceMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor23populateForEachMetadataEPKN4llvm11NamedMDNodeES4_"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor25readBuildChecksumMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor26populateObjectSlotMetadataEPKN4llvm11NamedMDNodeE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor7extractEv"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC1EPKN4llvm6ModuleE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC1EPKcj"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC2EPKN4llvm6ModuleE"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorC2EPKcj"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorD1Ev"
+  },
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractorD2Ev"
+  },
+  {
+   "name" : "_ZN8llvm_3_218WriteBitcodeToFileEPKN4llvm6ModuleERNS0_11raw_ostreamE"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "name" : "_ZN6bcinfo17MetadataExtractor20kWrapperMetadataNameE"
+  }
+ ],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "BCHeaderField::kInvalid"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "BCHeaderField::kBitcodeHash"
+    },
+    {
+     "enum_field_value" : 16385,
+     "name" : "BCHeaderField::kAndroidCompilerVersion"
+    },
+    {
+     "enum_field_value" : 16386,
+     "name" : "BCHeaderField::kAndroidOptimizationLevel"
+    }
+   ],
+   "linker_set_key" : "BCHeaderField::Tag",
+   "name" : "BCHeaderField::Tag",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h",
+   "underlying_type" : "type-5",
+   "unique_id" : "_ZTSN13BCHeaderField3TagE"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "bcinfo::BC_NOT_BC"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "bcinfo::BC_WRAPPER"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "bcinfo::BC_RAW"
+    }
+   ],
+   "linker_set_key" : "bcinfo::BCFileType",
+   "name" : "bcinfo::BCFileType",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h",
+   "underlying_type" : "type-5",
+   "unique_id" : "_ZTSN6bcinfo10BCFileTypeE"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "bcinfo::MD_SIG_None"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "bcinfo::MD_SIG_In"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "bcinfo::MD_SIG_Out"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "bcinfo::MD_SIG_Usr"
+    },
+    {
+     "enum_field_value" : 8,
+     "name" : "bcinfo::MD_SIG_X"
+    },
+    {
+     "enum_field_value" : 16,
+     "name" : "bcinfo::MD_SIG_Y"
+    },
+    {
+     "enum_field_value" : 32,
+     "name" : "bcinfo::MD_SIG_Kernel"
+    },
+    {
+     "enum_field_value" : 64,
+     "name" : "bcinfo::MD_SIG_Z"
+    },
+    {
+     "enum_field_value" : 128,
+     "name" : "bcinfo::MD_SIG_Ctxt"
+    }
+   ],
+   "linker_set_key" : "bcinfo::MetadataSignatureBitval",
+   "name" : "bcinfo::MetadataSignatureBitval",
+   "referenced_type" : "type-62",
+   "self_type" : "type-62",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h",
+   "underlying_type" : "type-5",
+   "unique_id" : "_ZTSN6bcinfo23MetadataSignatureBitvalE"
+  },
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "bcinfo::RS_FP_Full"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "bcinfo::RS_FP_Relaxed"
+    }
+   ],
+   "linker_set_key" : "bcinfo::RSFloatPrecision",
+   "name" : "bcinfo::RSFloatPrecision",
+   "referenced_type" : "type-39",
+   "self_type" : "type-39",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h",
+   "underlying_type" : "type-5",
+   "unique_id" : "_ZTSN6bcinfo16RSFloatPrecisionE"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::unwrap",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapper6unwrapEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperC1EPKcj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperC2EPKcj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::~BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeWrapper::~BitcodeWrapper",
+   "linker_set_key" : "_ZN6bcinfo14BitcodeWrapperD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-26"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::translate",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslator9translateEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorC1EPKcjj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorC2EPKcjj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::~BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "function_name" : "bcinfo::BitcodeTranslator::~BitcodeTranslator",
+   "linker_set_key" : "_ZN6bcinfo17BitcodeTranslatorD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::calculateNumInputs",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor18calculateNumInputsEPKN4llvm8FunctionEj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-58"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::readThreadableFlag",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor18readThreadableFlagEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-55"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populatePragmaMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor22populatePragmaMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-55"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populateReduceMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor22populateReduceMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-55"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populateForEachMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor23populateForEachMetadataEPKN4llvm11NamedMDNodeES4_",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-55"
+    },
+    {
+     "referenced_type" : "type-55"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::readBuildChecksumMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor25readBuildChecksumMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-55"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "bcinfo::MetadataExtractor::populateObjectSlotMetadata",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor26populateObjectSlotMetadataEPKN4llvm11NamedMDNodeE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-55"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::extract",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor7extractEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-25",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC1EPKN4llvm6ModuleE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC1EPKcj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC2EPKN4llvm6ModuleE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorC2EPKcj",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::~MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "function_name" : "bcinfo::MetadataExtractor::~MetadataExtractor",
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractorD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-23",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  }
+ ],
+ "global_vars" :
+ [
+  {
+   "linker_set_key" : "_ZN6bcinfo17MetadataExtractor20kWrapperMetadataNameE",
+   "name" : "bcinfo::MetadataExtractor::kWrapperMetadataName",
+   "referenced_type" : "type-60",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  }
+ ],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int &",
+   "name" : "unsigned int &",
+   "referenced_type" : "type-5",
+   "self_type" : "type-738",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/bitcode_wrapperer.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "BCHeaderField *",
+   "name" : "BCHeaderField *",
+   "referenced_type" : "type-9",
+   "self_type" : "type-8",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "BitcodeWrapperer *",
+   "name" : "BitcodeWrapperer *",
+   "referenced_type" : "type-31",
+   "self_type" : "type-35",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/bitcode_wrapperer.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "FileWrapperInput *",
+   "name" : "FileWrapperInput *",
+   "referenced_type" : "type-740",
+   "self_type" : "type-743",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_input.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "FileWrapperOutput *",
+   "name" : "FileWrapperOutput *",
+   "referenced_type" : "type-744",
+   "self_type" : "type-747",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_output.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "InMemoryWrapperInput *",
+   "name" : "InMemoryWrapperInput *",
+   "referenced_type" : "type-38",
+   "self_type" : "type-748",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/in_memory_wrapper_input.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "WrapperInput *",
+   "name" : "WrapperInput *",
+   "referenced_type" : "type-27",
+   "self_type" : "type-28",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_input.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "WrapperOutput *",
+   "name" : "WrapperOutput *",
+   "referenced_type" : "type-29",
+   "self_type" : "type-30",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_output.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "bcinfo::BitcodeTranslator *",
+   "name" : "bcinfo::BitcodeTranslator *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "bcinfo::BitcodeWrapper *",
+   "name" : "bcinfo::BitcodeWrapper *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-26",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "bcinfo::MetadataExtractor *",
+   "name" : "bcinfo::MetadataExtractor *",
+   "referenced_type" : "type-49",
+   "self_type" : "type-48",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "bcinfo::MetadataExtractor::Reduce *",
+   "name" : "bcinfo::MetadataExtractor::Reduce *",
+   "referenced_type" : "type-43",
+   "self_type" : "type-45",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const BCHeaderField *",
+   "name" : "const BCHeaderField *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const bcinfo::BitcodeTranslator *",
+   "name" : "const bcinfo::BitcodeTranslator *",
+   "referenced_type" : "type-47",
+   "self_type" : "type-46",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const bcinfo::BitcodeWrapper *",
+   "name" : "const bcinfo::BitcodeWrapper *",
+   "referenced_type" : "type-21",
+   "self_type" : "type-22",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const bcinfo::MetadataExtractor *",
+   "name" : "const bcinfo::MetadataExtractor *",
+   "referenced_type" : "type-61",
+   "self_type" : "type-63",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const bcinfo::MetadataExtractor::Reduce *",
+   "name" : "const bcinfo::MetadataExtractor::Reduce *",
+   "referenced_type" : "type-42",
+   "self_type" : "type-44",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char **",
+   "name" : "const char **",
+   "referenced_type" : "type-2",
+   "self_type" : "type-40",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-101",
+   "self_type" : "type-103",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-137",
+   "self_type" : "type-139",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-173",
+   "self_type" : "type-175",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-210",
+   "self_type" : "type-212",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-246",
+   "self_type" : "type-248",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-282",
+   "self_type" : "type-284",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-321",
+   "self_type" : "type-323",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-357",
+   "self_type" : "type-359",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-393",
+   "self_type" : "type-395",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-429",
+   "self_type" : "type-431",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-465",
+   "self_type" : "type-467",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-501",
+   "self_type" : "type-503",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-537",
+   "self_type" : "type-539",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-56",
+   "self_type" : "type-58",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-573",
+   "self_type" : "type-575",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-609",
+   "self_type" : "type-611",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-645",
+   "self_type" : "type-647",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-681",
+   "self_type" : "type-683",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-717",
+   "self_type" : "type-719",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-730",
+   "self_type" : "type-732",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-770",
+   "self_type" : "type-772",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-807",
+   "self_type" : "type-809",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-847",
+   "self_type" : "type-849",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-884",
+   "self_type" : "type-886",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Function *",
+   "name" : "const llvm::Function *",
+   "referenced_type" : "type-924",
+   "self_type" : "type-926",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-132",
+   "self_type" : "type-131",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-168",
+   "self_type" : "type-167",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-205",
+   "self_type" : "type-204",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-241",
+   "self_type" : "type-240",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-277",
+   "self_type" : "type-276",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-316",
+   "self_type" : "type-315",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-352",
+   "self_type" : "type-351",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-388",
+   "self_type" : "type-387",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-424",
+   "self_type" : "type-423",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-460",
+   "self_type" : "type-459",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-496",
+   "self_type" : "type-495",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-51",
+   "self_type" : "type-50",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-532",
+   "self_type" : "type-531",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-568",
+   "self_type" : "type-567",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-604",
+   "self_type" : "type-603",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-640",
+   "self_type" : "type-639",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-676",
+   "self_type" : "type-675",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-712",
+   "self_type" : "type-711",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-734",
+   "self_type" : "type-736",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-765",
+   "self_type" : "type-764",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-802",
+   "self_type" : "type-801",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-842",
+   "self_type" : "type-841",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-879",
+   "self_type" : "type-878",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-919",
+   "self_type" : "type-918",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::Module *",
+   "name" : "const llvm::Module *",
+   "referenced_type" : "type-96",
+   "self_type" : "type-95",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-134",
+   "self_type" : "type-136",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-170",
+   "self_type" : "type-172",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-207",
+   "self_type" : "type-209",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-243",
+   "self_type" : "type-245",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-279",
+   "self_type" : "type-281",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-318",
+   "self_type" : "type-320",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-354",
+   "self_type" : "type-356",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-390",
+   "self_type" : "type-392",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-426",
+   "self_type" : "type-428",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-462",
+   "self_type" : "type-464",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-498",
+   "self_type" : "type-500",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-53",
+   "self_type" : "type-55",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-534",
+   "self_type" : "type-536",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-570",
+   "self_type" : "type-572",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-606",
+   "self_type" : "type-608",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-642",
+   "self_type" : "type-644",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-678",
+   "self_type" : "type-680",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-714",
+   "self_type" : "type-716",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-726",
+   "self_type" : "type-729",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-767",
+   "self_type" : "type-769",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-804",
+   "self_type" : "type-806",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-844",
+   "self_type" : "type-846",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-881",
+   "self_type" : "type-883",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-921",
+   "self_type" : "type-923",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const llvm::NamedMDNode *",
+   "name" : "const llvm::NamedMDNode *",
+   "referenced_type" : "type-98",
+   "self_type" : "type-100",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const unsigned int *",
+   "name" : "const unsigned int *",
+   "referenced_type" : "type-15",
+   "self_type" : "type-41",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-7",
+   "self_type" : "type-6",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned short *",
+   "name" : "unsigned short *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-17",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "is_const" : true,
+   "linker_set_key" : "char const[]",
+   "name" : "char const[]",
+   "referenced_type" : "type-59",
+   "self_type" : "type-60",
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const BCHeaderField",
+   "name" : "const BCHeaderField",
+   "referenced_type" : "type-9",
+   "self_type" : "type-13",
+   "size" : 12,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const bcinfo::BitcodeTranslator",
+   "name" : "const bcinfo::BitcodeTranslator",
+   "referenced_type" : "type-1",
+   "self_type" : "type-47",
+   "size" : 20,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const bcinfo::BitcodeWrapper",
+   "name" : "const bcinfo::BitcodeWrapper",
+   "referenced_type" : "type-20",
+   "self_type" : "type-21",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const bcinfo::MetadataExtractor",
+   "name" : "const bcinfo::MetadataExtractor",
+   "referenced_type" : "type-49",
+   "self_type" : "type-61",
+   "size" : 96,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const bcinfo::MetadataExtractor::Reduce",
+   "name" : "const bcinfo::MetadataExtractor::Reduce",
+   "referenced_type" : "type-43",
+   "self_type" : "type-42",
+   "size" : 36,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 1,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-102",
+   "self_type" : "type-101",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-138",
+   "self_type" : "type-137",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-174",
+   "self_type" : "type-173",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-211",
+   "self_type" : "type-210",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-247",
+   "self_type" : "type-246",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-283",
+   "self_type" : "type-282",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-322",
+   "self_type" : "type-321",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-358",
+   "self_type" : "type-357",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-394",
+   "self_type" : "type-393",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-430",
+   "self_type" : "type-429",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-466",
+   "self_type" : "type-465",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-502",
+   "self_type" : "type-501",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-538",
+   "self_type" : "type-537",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-574",
+   "self_type" : "type-573",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-57",
+   "self_type" : "type-56",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-610",
+   "self_type" : "type-609",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-646",
+   "self_type" : "type-645",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-682",
+   "self_type" : "type-681",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-718",
+   "self_type" : "type-717",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-731",
+   "self_type" : "type-730",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-771",
+   "self_type" : "type-770",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-808",
+   "self_type" : "type-807",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-848",
+   "self_type" : "type-847",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-885",
+   "self_type" : "type-884",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Function",
+   "name" : "const llvm::Function",
+   "referenced_type" : "type-925",
+   "self_type" : "type-924",
+   "size" : 84,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-133",
+   "self_type" : "type-132",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-169",
+   "self_type" : "type-168",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-206",
+   "self_type" : "type-205",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-242",
+   "self_type" : "type-241",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-278",
+   "self_type" : "type-277",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-317",
+   "self_type" : "type-316",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-353",
+   "self_type" : "type-352",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-389",
+   "self_type" : "type-388",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-425",
+   "self_type" : "type-424",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-461",
+   "self_type" : "type-460",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-497",
+   "self_type" : "type-496",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-52",
+   "self_type" : "type-51",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-533",
+   "self_type" : "type-532",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-569",
+   "self_type" : "type-568",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-605",
+   "self_type" : "type-604",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-641",
+   "self_type" : "type-640",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-677",
+   "self_type" : "type-676",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-713",
+   "self_type" : "type-712",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-735",
+   "self_type" : "type-734",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-766",
+   "self_type" : "type-765",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-803",
+   "self_type" : "type-802",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-843",
+   "self_type" : "type-842",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-880",
+   "self_type" : "type-879",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-920",
+   "self_type" : "type-919",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::Module",
+   "name" : "const llvm::Module",
+   "referenced_type" : "type-97",
+   "self_type" : "type-96",
+   "size" : 476,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-135",
+   "self_type" : "type-134",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-171",
+   "self_type" : "type-170",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-208",
+   "self_type" : "type-207",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-244",
+   "self_type" : "type-243",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-280",
+   "self_type" : "type-279",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-319",
+   "self_type" : "type-318",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-355",
+   "self_type" : "type-354",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-391",
+   "self_type" : "type-390",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-427",
+   "self_type" : "type-426",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-463",
+   "self_type" : "type-462",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-499",
+   "self_type" : "type-498",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-535",
+   "self_type" : "type-534",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-54",
+   "self_type" : "type-53",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-571",
+   "self_type" : "type-570",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-607",
+   "self_type" : "type-606",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-643",
+   "self_type" : "type-642",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-679",
+   "self_type" : "type-678",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-715",
+   "self_type" : "type-714",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-727",
+   "self_type" : "type-726",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-768",
+   "self_type" : "type-767",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-805",
+   "self_type" : "type-804",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-845",
+   "self_type" : "type-844",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-882",
+   "self_type" : "type-881",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-922",
+   "self_type" : "type-921",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const llvm::NamedMDNode",
+   "name" : "const llvm::NamedMDNode",
+   "referenced_type" : "type-99",
+   "self_type" : "type-98",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-7",
+   "self_type" : "type-11",
+   "size" : 1,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-5",
+   "self_type" : "type-15",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "ID_",
+     "referenced_type" : "type-10"
+    },
+    {
+     "access" : "private",
+     "field_name" : "len_",
+     "field_offset" : 32,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "data_",
+     "field_offset" : 64,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "BCHeaderField",
+   "name" : "BCHeaderField",
+   "record_kind" : "class",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 12,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/BCHeaderField.h",
+   "unique_id" : "_ZTS13BCHeaderField"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "infile_",
+     "referenced_type" : "type-28"
+    },
+    {
+     "access" : "private",
+     "field_name" : "outfile_",
+     "field_offset" : 32,
+     "referenced_type" : "type-30"
+    },
+    {
+     "access" : "private",
+     "field_name" : "buffer_",
+     "field_offset" : 64,
+     "referenced_type" : "type-32"
+    },
+    {
+     "access" : "private",
+     "field_name" : "buffer_size_",
+     "field_offset" : 160,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "cursor_",
+     "field_offset" : 192,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "infile_at_eof_",
+     "field_offset" : 224,
+     "referenced_type" : "type-25"
+    },
+    {
+     "access" : "private",
+     "field_name" : "infile_bc_offset_",
+     "field_offset" : 256,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "wrapper_bc_offset_",
+     "field_offset" : 288,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "wrapper_bc_size_",
+     "field_offset" : 320,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_header_version_",
+     "field_offset" : 352,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_target_api_",
+     "field_offset" : 384,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_compiler_version_",
+     "field_offset" : 416,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "android_optimization_level_",
+     "field_offset" : 448,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "pnacl_bc_version_",
+     "field_offset" : 480,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "header_fields_",
+     "field_offset" : 512,
+     "referenced_type" : "type-33"
+    },
+    {
+     "access" : "private",
+     "field_name" : "variable_field_data_",
+     "field_offset" : 608,
+     "referenced_type" : "type-34"
+    },
+    {
+     "access" : "private",
+     "field_name" : "error_",
+     "field_offset" : 704,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "linker_set_key" : "BitcodeWrapperer",
+   "name" : "BitcodeWrapperer",
+   "record_kind" : "class",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 92,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/bitcode_wrapperer.h",
+   "unique_id" : "_ZTS16BitcodeWrapperer"
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-27"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "_name",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_at_eof",
+     "field_offset" : 64,
+     "referenced_type" : "type-25"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_size_found",
+     "field_offset" : 72,
+     "referenced_type" : "type-25"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_size",
+     "field_offset" : 96,
+     "referenced_type" : "type-36"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_file",
+     "field_offset" : 128,
+     "referenced_type" : "type-742"
+    }
+   ],
+   "linker_set_key" : "FileWrapperInput",
+   "name" : "FileWrapperInput",
+   "record_kind" : "class",
+   "referenced_type" : "type-740",
+   "self_type" : "type-740",
+   "size" : 20,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_input.h",
+   "unique_id" : "_ZTS16FileWrapperInput",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI16FileWrapperInput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN16FileWrapperInputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN16FileWrapperInputD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput4ReadEPhj"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput5AtEofEv"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput4SizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZN16FileWrapperInput4SeekEj"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-29"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "_name",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_file",
+     "field_offset" : 64,
+     "referenced_type" : "type-745"
+    }
+   ],
+   "linker_set_key" : "FileWrapperOutput",
+   "name" : "FileWrapperOutput",
+   "record_kind" : "class",
+   "referenced_type" : "type-744",
+   "self_type" : "type-744",
+   "size" : 12,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/file_wrapper_output.h",
+   "unique_id" : "_ZTS17FileWrapperOutput",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI17FileWrapperOutput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN17FileWrapperOutputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN17FileWrapperOutputD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN17FileWrapperOutput5WriteEh"
+    },
+    {
+     "mangled_component_name" : "_ZN17FileWrapperOutput5WriteEPKhj"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-27"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "_buffer",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_pos",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_at_eof",
+     "field_offset" : 96,
+     "referenced_type" : "type-25"
+    },
+    {
+     "access" : "private",
+     "field_name" : "_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "InMemoryWrapperInput",
+   "name" : "InMemoryWrapperInput",
+   "record_kind" : "class",
+   "referenced_type" : "type-38",
+   "self_type" : "type-38",
+   "size" : 20,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/in_memory_wrapper_input.h",
+   "unique_id" : "_ZTS20InMemoryWrapperInput",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI20InMemoryWrapperInput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN20InMemoryWrapperInputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN20InMemoryWrapperInputD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput4ReadEPhj"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput5AtEofEv"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput4SizeEv"
+    },
+    {
+     "mangled_component_name" : "_ZN20InMemoryWrapperInput4SeekEj"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "WrapperInput",
+   "name" : "WrapperInput",
+   "record_kind" : "class",
+   "referenced_type" : "type-27",
+   "self_type" : "type-27",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_input.h",
+   "unique_id" : "_ZTS12WrapperInput",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI12WrapperInput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN12WrapperInputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN12WrapperInputD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput4ReadEPhj"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput5AtEofEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput4SizeEv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN12WrapperInput4SeekEj"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "WrapperOutput",
+   "name" : "WrapperOutput",
+   "record_kind" : "class",
+   "referenced_type" : "type-29",
+   "self_type" : "type-29",
+   "size" : 4,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/Wrap/wrapper_output.h",
+   "unique_id" : "_ZTS13WrapperOutput",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTI13WrapperOutput"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN13WrapperOutputD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN13WrapperOutputD0Ev"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN13WrapperOutput5WriteEh"
+    },
+    {
+     "mangled_component_name" : "_ZN13WrapperOutput5WriteEPKhj"
+    }
+   ]
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "Magic",
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "Version",
+     "field_offset" : 32,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "BitcodeOffset",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "BitcodeSize",
+     "field_offset" : 96,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "HeaderVersion",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "TargetAPI",
+     "field_offset" : 160,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "PNaClVersion",
+     "field_offset" : 192,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "CompilerVersionTag",
+     "field_offset" : 224,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "CompilerVersionLen",
+     "field_offset" : 240,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "CompilerVersion",
+     "field_offset" : 256,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "OptimizationLevelTag",
+     "field_offset" : 288,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "OptimizationLevelLen",
+     "field_offset" : 304,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "OptimizationLevel",
+     "field_offset" : 320,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "bcinfo::AndroidBitcodeWrapper",
+   "name" : "bcinfo::AndroidBitcodeWrapper",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 44,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h",
+   "unique_id" : "_ZTSN6bcinfo21AndroidBitcodeWrapperE"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mBitcode",
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcodeSize",
+     "field_offset" : 32,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mTranslatedBitcode",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mTranslatedBitcodeSize",
+     "field_offset" : 96,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mVersion",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "bcinfo::BitcodeTranslator",
+   "name" : "bcinfo::BitcodeTranslator",
+   "record_kind" : "class",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 20,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeTranslator.h",
+   "unique_id" : "_ZTSN6bcinfo17BitcodeTranslatorE"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mFileType",
+     "referenced_type" : "type-19"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcode",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcodeSize",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mHeaderVersion",
+     "field_offset" : 96,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mTargetAPI",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCompilerVersion",
+     "field_offset" : 160,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mOptimizationLevel",
+     "field_offset" : 192,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "bcinfo::BitcodeWrapper",
+   "name" : "bcinfo::BitcodeWrapper",
+   "record_kind" : "class",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 28,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/BitcodeWrapper.h",
+   "unique_id" : "_ZTSN6bcinfo14BitcodeWrapperE"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mModule",
+     "referenced_type" : "type-50"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcode",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBitcodeSize",
+     "field_offset" : 64,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportVarCount",
+     "field_offset" : 96,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportFuncCount",
+     "field_offset" : 128,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachSignatureCount",
+     "field_offset" : 160,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportReduceCount",
+     "field_offset" : 192,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportVarNameList",
+     "field_offset" : 224,
+     "referenced_type" : "type-40"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportFuncNameList",
+     "field_offset" : 256,
+     "referenced_type" : "type-40"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachNameList",
+     "field_offset" : 288,
+     "referenced_type" : "type-40"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachSignatureList",
+     "field_offset" : 320,
+     "referenced_type" : "type-41"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportForEachInputCountList",
+     "field_offset" : 352,
+     "referenced_type" : "type-41"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mExportReduceList",
+     "field_offset" : 384,
+     "referenced_type" : "type-44"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPragmaCount",
+     "field_offset" : 416,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPragmaKeyList",
+     "field_offset" : 448,
+     "referenced_type" : "type-40"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mPragmaValueList",
+     "field_offset" : 480,
+     "referenced_type" : "type-40"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mObjectSlotCount",
+     "field_offset" : 512,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mObjectSlotList",
+     "field_offset" : 544,
+     "referenced_type" : "type-41"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mCompilerVersion",
+     "field_offset" : 576,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mOptimizationLevel",
+     "field_offset" : 608,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mRSFloatPrecision",
+     "field_offset" : 640,
+     "referenced_type" : "type-39"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mIsThreadable",
+     "field_offset" : 672,
+     "referenced_type" : "type-25"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mBuildChecksum",
+     "field_offset" : 704,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mHasDebugInfo",
+     "field_offset" : 736,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "linker_set_key" : "bcinfo::MetadataExtractor",
+   "name" : "bcinfo::MetadataExtractor",
+   "record_kind" : "class",
+   "referenced_type" : "type-49",
+   "self_type" : "type-49",
+   "size" : 96,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h",
+   "unique_id" : "_ZTSN6bcinfo17MetadataExtractorE"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "mReduceName",
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "mInitializerName",
+     "field_offset" : 32,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "mAccumulatorName",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "mCombinerName",
+     "field_offset" : 96,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "mOutConverterName",
+     "field_offset" : 128,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "mHalterName",
+     "field_offset" : 160,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "mSignature",
+     "field_offset" : 192,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "mInputCount",
+     "field_offset" : 224,
+     "referenced_type" : "type-5"
+    },
+    {
+     "field_name" : "mAccumulatorDataSize",
+     "field_offset" : 256,
+     "referenced_type" : "type-5"
+    }
+   ],
+   "linker_set_key" : "bcinfo::MetadataExtractor::Reduce",
+   "name" : "bcinfo::MetadataExtractor::Reduce",
+   "referenced_type" : "type-43",
+   "self_type" : "type-43",
+   "size" : 36,
+   "source_file" : "/frameworks/compile/libbcc/bcinfo/include/bcinfo/MetadataExtractor.h",
+   "unique_id" : "_ZTSN6bcinfo17MetadataExtractor6ReduceE"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

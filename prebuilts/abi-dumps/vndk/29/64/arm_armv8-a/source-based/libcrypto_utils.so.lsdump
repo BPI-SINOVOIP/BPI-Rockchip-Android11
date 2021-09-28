@@ -1,0 +1,287 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memcpy"
+  },
+  {
+   "name" : "__aeabi_memcpy4"
+  },
+  {
+   "name" : "__aeabi_memcpy8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  },
+  {
+   "name" : "android_pubkey_decode"
+  },
+  {
+   "name" : "android_pubkey_encode"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android_pubkey_decode",
+   "linker_set_key" : "android_pubkey_decode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-23"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "function_name" : "android_pubkey_encode",
+   "linker_set_key" : "android_pubkey_encode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-12"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-23"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const rsa_st *",
+   "name" : "const rsa_st *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-12",
+   "size" : 4,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-21",
+   "self_type" : "type-22",
+   "size" : 4,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "rsa_st *",
+   "name" : "rsa_st *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 4,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "rsa_st **",
+   "name" : "rsa_st **",
+   "referenced_type" : "type-2",
+   "self_type" : "type-4",
+   "size" : 4,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const rsa_st",
+   "name" : "const rsa_st",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 152,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-20",
+   "self_type" : "type-21",
+   "size" : 1,
+   "source_file" : "/system/core/libcrypto_utils/include/crypto_utils/android_pubkey.h"
+  }
+ ],
+ "record_types" : [],
+ "rvalue_reference_types" : []
+}

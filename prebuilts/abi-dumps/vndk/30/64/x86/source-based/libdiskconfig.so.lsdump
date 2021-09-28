@@ -1,0 +1,641 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA0_h",
+   "name" : "unsigned char [0]",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIA0_h",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA440_h",
+   "name" : "unsigned char [440]",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIA440_h",
+   "size" : 440,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "_ZTIA4_12pc_partition",
+   "name" : "pc_partition [4]",
+   "referenced_type" : "_ZTI12pc_partition",
+   "self_type" : "_ZTIA4_12pc_partition",
+   "size" : 64,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIc",
+   "name" : "char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIc",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIh",
+   "name" : "unsigned char",
+   "referenced_type" : "_ZTIh",
+   "self_type" : "_ZTIh",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIi",
+   "name" : "int",
+   "referenced_type" : "_ZTIi",
+   "self_type" : "_ZTIi",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIj",
+   "name" : "unsigned int",
+   "referenced_type" : "_ZTIj",
+   "self_type" : "_ZTIj",
+   "size" : 4
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "_ZTIt",
+   "name" : "unsigned short",
+   "referenced_type" : "_ZTIt",
+   "self_type" : "_ZTIt",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "_ZTIv",
+   "name" : "void",
+   "referenced_type" : "_ZTIv",
+   "self_type" : "_ZTIv"
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "_ZTIx",
+   "name" : "long long",
+   "referenced_type" : "_ZTIx",
+   "self_type" : "_ZTIx",
+   "size" : 8
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "alloc_wl"
+  },
+  {
+   "name" : "apply_disk_config"
+  },
+  {
+   "name" : "config_mbr"
+  },
+  {
+   "name" : "dump_disk_config"
+  },
+  {
+   "name" : "find_mbr_part"
+  },
+  {
+   "name" : "find_part"
+  },
+  {
+   "name" : "find_part_device"
+  },
+  {
+   "name" : "free_wl"
+  },
+  {
+   "name" : "load_diskconfig"
+  },
+  {
+   "name" : "process_disk_config"
+  },
+  {
+   "name" : "wlist_add"
+  },
+  {
+   "name" : "wlist_commit"
+  },
+  {
+   "name" : "wlist_free"
+  },
+  {
+   "name" : "write_raw_image"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "alloc_wl",
+   "linker_set_key" : "alloc_wl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "return_type" : "_ZTIP10write_list",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "apply_disk_config",
+   "linker_set_key" : "apply_disk_config",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "config_mbr",
+   "linker_set_key" : "config_mbr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    }
+   ],
+   "return_type" : "_ZTIP10write_list",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "dump_disk_config",
+   "linker_set_key" : "dump_disk_config",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "find_mbr_part",
+   "linker_set_key" : "find_mbr_part",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "find_part",
+   "linker_set_key" : "find_part",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIP9part_info",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "find_part_device",
+   "linker_set_key" : "find_part_device",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    }
+   ],
+   "return_type" : "_ZTIPc",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "free_wl",
+   "linker_set_key" : "free_wl",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10write_list"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "load_diskconfig",
+   "linker_set_key" : "load_diskconfig",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPc"
+    }
+   ],
+   "return_type" : "_ZTIP9disk_info",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "process_disk_config",
+   "linker_set_key" : "process_disk_config",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP9disk_info"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "wlist_add",
+   "linker_set_key" : "wlist_add",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPP10write_list"
+    },
+    {
+     "referenced_type" : "_ZTIP10write_list"
+    }
+   ],
+   "return_type" : "_ZTIP10write_list",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "wlist_commit",
+   "linker_set_key" : "wlist_commit",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "referenced_type" : "_ZTIP10write_list"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "wlist_free",
+   "linker_set_key" : "wlist_free",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIP10write_list"
+    }
+   ],
+   "return_type" : "_ZTIv",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "function_name" : "write_raw_image",
+   "linker_set_key" : "write_raw_image",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIPKc"
+    },
+    {
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "return_type" : "_ZTIi",
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP10write_list",
+   "name" : "write_list *",
+   "referenced_type" : "_ZTI10write_list",
+   "self_type" : "_ZTIP10write_list",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP9disk_info",
+   "name" : "disk_info *",
+   "referenced_type" : "_ZTI9disk_info",
+   "self_type" : "_ZTIP9disk_info",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIP9part_info",
+   "name" : "part_info *",
+   "referenced_type" : "_ZTI9part_info",
+   "self_type" : "_ZTIP9part_info",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPKc",
+   "name" : "const char *",
+   "referenced_type" : "_ZTIKc",
+   "self_type" : "_ZTIPKc",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPP10write_list",
+   "name" : "write_list **",
+   "referenced_type" : "_ZTIP10write_list",
+   "self_type" : "_ZTIPP10write_list",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "_ZTIPc",
+   "name" : "char *",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIPc",
+   "size" : 4,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "_ZTIKc",
+   "name" : "const char",
+   "referenced_type" : "_ZTIc",
+   "self_type" : "_ZTIKc",
+   "size" : 1,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "next",
+     "referenced_type" : "_ZTIP10write_list"
+    },
+    {
+     "field_name" : "offset",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIx"
+    },
+    {
+     "field_name" : "len",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "data",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIA0_h"
+    }
+   ],
+   "linker_set_key" : "_ZTI10write_list",
+   "name" : "write_list",
+   "referenced_type" : "_ZTI10write_list",
+   "self_type" : "_ZTI10write_list",
+   "size" : 16,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "status",
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "start",
+     "field_offset" : 8,
+     "referenced_type" : "_ZTI3chs"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "end",
+     "field_offset" : 40,
+     "referenced_type" : "_ZTI3chs"
+    },
+    {
+     "field_name" : "start_lba",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "len_lba",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI12pc_partition",
+   "name" : "pc_partition",
+   "referenced_type" : "_ZTI12pc_partition",
+   "self_type" : "_ZTI12pc_partition",
+   "size" : 16,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "code",
+     "referenced_type" : "_ZTIA440_h"
+    },
+    {
+     "field_name" : "disk_sig",
+     "field_offset" : 3520,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "pad",
+     "field_offset" : 3552,
+     "referenced_type" : "_ZTIt"
+    },
+    {
+     "field_name" : "ptable",
+     "field_offset" : 3568,
+     "referenced_type" : "_ZTIA4_12pc_partition"
+    },
+    {
+     "field_name" : "mbr_sig",
+     "field_offset" : 4080,
+     "referenced_type" : "_ZTIt"
+    }
+   ],
+   "linker_set_key" : "_ZTI14pc_boot_record",
+   "name" : "pc_boot_record",
+   "referenced_type" : "_ZTI14pc_boot_record",
+   "self_type" : "_ZTI14pc_boot_record",
+   "size" : 512,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 1,
+   "fields" :
+   [
+    {
+     "field_name" : "head",
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "sector",
+     "field_offset" : 8,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "cylinder",
+     "field_offset" : 16,
+     "referenced_type" : "_ZTIh"
+    }
+   ],
+   "linker_set_key" : "_ZTI3chs",
+   "name" : "chs",
+   "referenced_type" : "_ZTI3chs",
+   "self_type" : "_ZTI3chs",
+   "size" : 3,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "device",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "scheme",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "sect_size",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIi"
+    },
+    {
+     "field_name" : "skip_lba",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "num_lba",
+     "field_offset" : 128,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "part_lst",
+     "field_offset" : 160,
+     "referenced_type" : "_ZTIP9part_info"
+    },
+    {
+     "field_name" : "num_parts",
+     "field_offset" : 192,
+     "referenced_type" : "_ZTIi"
+    }
+   ],
+   "linker_set_key" : "_ZTI9disk_info",
+   "name" : "disk_info",
+   "referenced_type" : "_ZTI9disk_info",
+   "self_type" : "_ZTI9disk_info",
+   "size" : 28,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "_ZTIPc"
+    },
+    {
+     "field_name" : "flags",
+     "field_offset" : 32,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "type",
+     "field_offset" : 40,
+     "referenced_type" : "_ZTIh"
+    },
+    {
+     "field_name" : "len_kb",
+     "field_offset" : 64,
+     "referenced_type" : "_ZTIj"
+    },
+    {
+     "field_name" : "start_lba",
+     "field_offset" : 96,
+     "referenced_type" : "_ZTIj"
+    }
+   ],
+   "linker_set_key" : "_ZTI9part_info",
+   "name" : "part_info",
+   "referenced_type" : "_ZTI9part_info",
+   "self_type" : "_ZTI9part_info",
+   "size" : 16,
+   "source_file" : "/system/core/libdiskconfig/include/diskconfig/diskconfig.h"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

@@ -1,0 +1,5844 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-27",
+   "self_type" : "type-27",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "float",
+   "name" : "float",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 8
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "glActiveTexture"
+  },
+  {
+   "name" : "glAlphaFunc"
+  },
+  {
+   "name" : "glAlphaFuncx"
+  },
+  {
+   "name" : "glAlphaFuncxOES"
+  },
+  {
+   "name" : "glBindBuffer"
+  },
+  {
+   "name" : "glBindFramebufferOES"
+  },
+  {
+   "name" : "glBindRenderbufferOES"
+  },
+  {
+   "name" : "glBindTexture"
+  },
+  {
+   "name" : "glBindVertexArrayOES"
+  },
+  {
+   "name" : "glBlendEquationOES"
+  },
+  {
+   "name" : "glBlendEquationSeparateOES"
+  },
+  {
+   "name" : "glBlendFunc"
+  },
+  {
+   "name" : "glBlendFuncSeparateOES"
+  },
+  {
+   "name" : "glBufferData"
+  },
+  {
+   "name" : "glBufferSubData"
+  },
+  {
+   "name" : "glCheckFramebufferStatusOES"
+  },
+  {
+   "name" : "glClear"
+  },
+  {
+   "name" : "glClearColor"
+  },
+  {
+   "name" : "glClearColorx"
+  },
+  {
+   "name" : "glClearColorxOES"
+  },
+  {
+   "name" : "glClearDepthf"
+  },
+  {
+   "name" : "glClearDepthfOES"
+  },
+  {
+   "name" : "glClearDepthx"
+  },
+  {
+   "name" : "glClearDepthxOES"
+  },
+  {
+   "name" : "glClearStencil"
+  },
+  {
+   "name" : "glClientActiveTexture"
+  },
+  {
+   "name" : "glClipPlanef"
+  },
+  {
+   "name" : "glClipPlanefIMG"
+  },
+  {
+   "name" : "glClipPlanefOES"
+  },
+  {
+   "name" : "glClipPlanex"
+  },
+  {
+   "name" : "glClipPlanexIMG"
+  },
+  {
+   "name" : "glClipPlanexOES"
+  },
+  {
+   "name" : "glColor4f"
+  },
+  {
+   "name" : "glColor4ub"
+  },
+  {
+   "name" : "glColor4x"
+  },
+  {
+   "name" : "glColor4xOES"
+  },
+  {
+   "name" : "glColorMask"
+  },
+  {
+   "name" : "glColorPointer"
+  },
+  {
+   "name" : "glColorPointerBounds"
+  },
+  {
+   "name" : "glCompressedTexImage2D"
+  },
+  {
+   "name" : "glCompressedTexSubImage2D"
+  },
+  {
+   "name" : "glCopyTexImage2D"
+  },
+  {
+   "name" : "glCopyTexSubImage2D"
+  },
+  {
+   "name" : "glCullFace"
+  },
+  {
+   "name" : "glCurrentPaletteMatrixOES"
+  },
+  {
+   "name" : "glDeleteBuffers"
+  },
+  {
+   "name" : "glDeleteFencesNV"
+  },
+  {
+   "name" : "glDeleteFramebuffersOES"
+  },
+  {
+   "name" : "glDeleteRenderbuffersOES"
+  },
+  {
+   "name" : "glDeleteTextures"
+  },
+  {
+   "name" : "glDeleteVertexArraysOES"
+  },
+  {
+   "name" : "glDepthFunc"
+  },
+  {
+   "name" : "glDepthMask"
+  },
+  {
+   "name" : "glDepthRangef"
+  },
+  {
+   "name" : "glDepthRangefOES"
+  },
+  {
+   "name" : "glDepthRangex"
+  },
+  {
+   "name" : "glDepthRangexOES"
+  },
+  {
+   "name" : "glDisable"
+  },
+  {
+   "name" : "glDisableClientState"
+  },
+  {
+   "name" : "glDisableDriverControlQCOM"
+  },
+  {
+   "name" : "glDiscardFramebufferEXT"
+  },
+  {
+   "name" : "glDrawArrays"
+  },
+  {
+   "name" : "glDrawElements"
+  },
+  {
+   "name" : "glDrawTexfOES"
+  },
+  {
+   "name" : "glDrawTexfvOES"
+  },
+  {
+   "name" : "glDrawTexiOES"
+  },
+  {
+   "name" : "glDrawTexivOES"
+  },
+  {
+   "name" : "glDrawTexsOES"
+  },
+  {
+   "name" : "glDrawTexsvOES"
+  },
+  {
+   "name" : "glDrawTexxOES"
+  },
+  {
+   "name" : "glDrawTexxvOES"
+  },
+  {
+   "name" : "glEGLImageTargetRenderbufferStorageOES"
+  },
+  {
+   "name" : "glEGLImageTargetTexture2DOES"
+  },
+  {
+   "name" : "glEnable"
+  },
+  {
+   "name" : "glEnableClientState"
+  },
+  {
+   "name" : "glEnableDriverControlQCOM"
+  },
+  {
+   "name" : "glEndTilingQCOM"
+  },
+  {
+   "name" : "glExtGetBufferPointervQCOM"
+  },
+  {
+   "name" : "glExtGetBuffersQCOM"
+  },
+  {
+   "name" : "glExtGetFramebuffersQCOM"
+  },
+  {
+   "name" : "glExtGetProgramBinarySourceQCOM"
+  },
+  {
+   "name" : "glExtGetProgramsQCOM"
+  },
+  {
+   "name" : "glExtGetRenderbuffersQCOM"
+  },
+  {
+   "name" : "glExtGetShadersQCOM"
+  },
+  {
+   "name" : "glExtGetTexLevelParameterivQCOM"
+  },
+  {
+   "name" : "glExtGetTexSubImageQCOM"
+  },
+  {
+   "name" : "glExtGetTexturesQCOM"
+  },
+  {
+   "name" : "glExtIsProgramBinaryQCOM"
+  },
+  {
+   "name" : "glExtTexObjectStateOverrideiQCOM"
+  },
+  {
+   "name" : "glFinish"
+  },
+  {
+   "name" : "glFinishFenceNV"
+  },
+  {
+   "name" : "glFlush"
+  },
+  {
+   "name" : "glFogf"
+  },
+  {
+   "name" : "glFogfv"
+  },
+  {
+   "name" : "glFogx"
+  },
+  {
+   "name" : "glFogxOES"
+  },
+  {
+   "name" : "glFogxv"
+  },
+  {
+   "name" : "glFogxvOES"
+  },
+  {
+   "name" : "glFramebufferRenderbufferOES"
+  },
+  {
+   "name" : "glFramebufferTexture2DMultisampleIMG"
+  },
+  {
+   "name" : "glFramebufferTexture2DOES"
+  },
+  {
+   "name" : "glFrontFace"
+  },
+  {
+   "name" : "glFrustumf"
+  },
+  {
+   "name" : "glFrustumfOES"
+  },
+  {
+   "name" : "glFrustumx"
+  },
+  {
+   "name" : "glFrustumxOES"
+  },
+  {
+   "name" : "glGenBuffers"
+  },
+  {
+   "name" : "glGenFencesNV"
+  },
+  {
+   "name" : "glGenFramebuffersOES"
+  },
+  {
+   "name" : "glGenRenderbuffersOES"
+  },
+  {
+   "name" : "glGenTextures"
+  },
+  {
+   "name" : "glGenVertexArraysOES"
+  },
+  {
+   "name" : "glGenerateMipmapOES"
+  },
+  {
+   "name" : "glGetBooleanv"
+  },
+  {
+   "name" : "glGetBufferParameteriv"
+  },
+  {
+   "name" : "glGetBufferPointervOES"
+  },
+  {
+   "name" : "glGetClipPlanef"
+  },
+  {
+   "name" : "glGetClipPlanefOES"
+  },
+  {
+   "name" : "glGetClipPlanex"
+  },
+  {
+   "name" : "glGetClipPlanexOES"
+  },
+  {
+   "name" : "glGetDriverControlStringQCOM"
+  },
+  {
+   "name" : "glGetDriverControlsQCOM"
+  },
+  {
+   "name" : "glGetError"
+  },
+  {
+   "name" : "glGetFenceivNV"
+  },
+  {
+   "name" : "glGetFixedv"
+  },
+  {
+   "name" : "glGetFixedvOES"
+  },
+  {
+   "name" : "glGetFloatv"
+  },
+  {
+   "name" : "glGetFramebufferAttachmentParameterivOES"
+  },
+  {
+   "name" : "glGetIntegerv"
+  },
+  {
+   "name" : "glGetLightfv"
+  },
+  {
+   "name" : "glGetLightxv"
+  },
+  {
+   "name" : "glGetLightxvOES"
+  },
+  {
+   "name" : "glGetMaterialfv"
+  },
+  {
+   "name" : "glGetMaterialxv"
+  },
+  {
+   "name" : "glGetMaterialxvOES"
+  },
+  {
+   "name" : "glGetPointerv"
+  },
+  {
+   "name" : "glGetRenderbufferParameterivOES"
+  },
+  {
+   "name" : "glGetString"
+  },
+  {
+   "name" : "glGetTexEnvfv"
+  },
+  {
+   "name" : "glGetTexEnviv"
+  },
+  {
+   "name" : "glGetTexEnvxv"
+  },
+  {
+   "name" : "glGetTexEnvxvOES"
+  },
+  {
+   "name" : "glGetTexGenfvOES"
+  },
+  {
+   "name" : "glGetTexGenivOES"
+  },
+  {
+   "name" : "glGetTexGenxvOES"
+  },
+  {
+   "name" : "glGetTexParameterfv"
+  },
+  {
+   "name" : "glGetTexParameteriv"
+  },
+  {
+   "name" : "glGetTexParameterxv"
+  },
+  {
+   "name" : "glGetTexParameterxvOES"
+  },
+  {
+   "name" : "glHint"
+  },
+  {
+   "name" : "glIsBuffer"
+  },
+  {
+   "name" : "glIsEnabled"
+  },
+  {
+   "name" : "glIsFenceNV"
+  },
+  {
+   "name" : "glIsFramebufferOES"
+  },
+  {
+   "name" : "glIsRenderbufferOES"
+  },
+  {
+   "name" : "glIsTexture"
+  },
+  {
+   "name" : "glIsVertexArrayOES"
+  },
+  {
+   "name" : "glLightModelf"
+  },
+  {
+   "name" : "glLightModelfv"
+  },
+  {
+   "name" : "glLightModelx"
+  },
+  {
+   "name" : "glLightModelxOES"
+  },
+  {
+   "name" : "glLightModelxv"
+  },
+  {
+   "name" : "glLightModelxvOES"
+  },
+  {
+   "name" : "glLightf"
+  },
+  {
+   "name" : "glLightfv"
+  },
+  {
+   "name" : "glLightx"
+  },
+  {
+   "name" : "glLightxOES"
+  },
+  {
+   "name" : "glLightxv"
+  },
+  {
+   "name" : "glLightxvOES"
+  },
+  {
+   "name" : "glLineWidth"
+  },
+  {
+   "name" : "glLineWidthx"
+  },
+  {
+   "name" : "glLineWidthxOES"
+  },
+  {
+   "name" : "glLoadIdentity"
+  },
+  {
+   "name" : "glLoadMatrixf"
+  },
+  {
+   "name" : "glLoadMatrixx"
+  },
+  {
+   "name" : "glLoadMatrixxOES"
+  },
+  {
+   "name" : "glLoadPaletteFromModelViewMatrixOES"
+  },
+  {
+   "name" : "glLogicOp"
+  },
+  {
+   "name" : "glMapBufferOES"
+  },
+  {
+   "name" : "glMaterialf"
+  },
+  {
+   "name" : "glMaterialfv"
+  },
+  {
+   "name" : "glMaterialx"
+  },
+  {
+   "name" : "glMaterialxOES"
+  },
+  {
+   "name" : "glMaterialxv"
+  },
+  {
+   "name" : "glMaterialxvOES"
+  },
+  {
+   "name" : "glMatrixIndexPointerOES"
+  },
+  {
+   "name" : "glMatrixIndexPointerOESBounds"
+  },
+  {
+   "name" : "glMatrixMode"
+  },
+  {
+   "name" : "glMultMatrixf"
+  },
+  {
+   "name" : "glMultMatrixx"
+  },
+  {
+   "name" : "glMultMatrixxOES"
+  },
+  {
+   "name" : "glMultiDrawArraysEXT"
+  },
+  {
+   "name" : "glMultiDrawElementsEXT"
+  },
+  {
+   "name" : "glMultiTexCoord4f"
+  },
+  {
+   "name" : "glMultiTexCoord4x"
+  },
+  {
+   "name" : "glMultiTexCoord4xOES"
+  },
+  {
+   "name" : "glNormal3f"
+  },
+  {
+   "name" : "glNormal3x"
+  },
+  {
+   "name" : "glNormal3xOES"
+  },
+  {
+   "name" : "glNormalPointer"
+  },
+  {
+   "name" : "glNormalPointerBounds"
+  },
+  {
+   "name" : "glOrthof"
+  },
+  {
+   "name" : "glOrthofOES"
+  },
+  {
+   "name" : "glOrthox"
+  },
+  {
+   "name" : "glOrthoxOES"
+  },
+  {
+   "name" : "glPixelStorei"
+  },
+  {
+   "name" : "glPointParameterf"
+  },
+  {
+   "name" : "glPointParameterfv"
+  },
+  {
+   "name" : "glPointParameterx"
+  },
+  {
+   "name" : "glPointParameterxOES"
+  },
+  {
+   "name" : "glPointParameterxv"
+  },
+  {
+   "name" : "glPointParameterxvOES"
+  },
+  {
+   "name" : "glPointSize"
+  },
+  {
+   "name" : "glPointSizePointerOES"
+  },
+  {
+   "name" : "glPointSizePointerOESBounds"
+  },
+  {
+   "name" : "glPointSizex"
+  },
+  {
+   "name" : "glPointSizexOES"
+  },
+  {
+   "name" : "glPolygonOffset"
+  },
+  {
+   "name" : "glPolygonOffsetx"
+  },
+  {
+   "name" : "glPolygonOffsetxOES"
+  },
+  {
+   "name" : "glPopMatrix"
+  },
+  {
+   "name" : "glPushMatrix"
+  },
+  {
+   "name" : "glQueryMatrixxOES"
+  },
+  {
+   "name" : "glReadPixels"
+  },
+  {
+   "name" : "glRenderbufferStorageMultisampleIMG"
+  },
+  {
+   "name" : "glRenderbufferStorageOES"
+  },
+  {
+   "name" : "glRotatef"
+  },
+  {
+   "name" : "glRotatex"
+  },
+  {
+   "name" : "glRotatexOES"
+  },
+  {
+   "name" : "glSampleCoverage"
+  },
+  {
+   "name" : "glSampleCoveragex"
+  },
+  {
+   "name" : "glSampleCoveragexOES"
+  },
+  {
+   "name" : "glScalef"
+  },
+  {
+   "name" : "glScalex"
+  },
+  {
+   "name" : "glScalexOES"
+  },
+  {
+   "name" : "glScissor"
+  },
+  {
+   "name" : "glSetFenceNV"
+  },
+  {
+   "name" : "glShadeModel"
+  },
+  {
+   "name" : "glStartTilingQCOM"
+  },
+  {
+   "name" : "glStencilFunc"
+  },
+  {
+   "name" : "glStencilMask"
+  },
+  {
+   "name" : "glStencilOp"
+  },
+  {
+   "name" : "glTestFenceNV"
+  },
+  {
+   "name" : "glTexCoordPointer"
+  },
+  {
+   "name" : "glTexCoordPointerBounds"
+  },
+  {
+   "name" : "glTexEnvf"
+  },
+  {
+   "name" : "glTexEnvfv"
+  },
+  {
+   "name" : "glTexEnvi"
+  },
+  {
+   "name" : "glTexEnviv"
+  },
+  {
+   "name" : "glTexEnvx"
+  },
+  {
+   "name" : "glTexEnvxOES"
+  },
+  {
+   "name" : "glTexEnvxv"
+  },
+  {
+   "name" : "glTexEnvxvOES"
+  },
+  {
+   "name" : "glTexGenfOES"
+  },
+  {
+   "name" : "glTexGenfvOES"
+  },
+  {
+   "name" : "glTexGeniOES"
+  },
+  {
+   "name" : "glTexGenivOES"
+  },
+  {
+   "name" : "glTexGenxOES"
+  },
+  {
+   "name" : "glTexGenxvOES"
+  },
+  {
+   "name" : "glTexImage2D"
+  },
+  {
+   "name" : "glTexParameterf"
+  },
+  {
+   "name" : "glTexParameterfv"
+  },
+  {
+   "name" : "glTexParameteri"
+  },
+  {
+   "name" : "glTexParameteriv"
+  },
+  {
+   "name" : "glTexParameterx"
+  },
+  {
+   "name" : "glTexParameterxOES"
+  },
+  {
+   "name" : "glTexParameterxv"
+  },
+  {
+   "name" : "glTexParameterxvOES"
+  },
+  {
+   "name" : "glTexSubImage2D"
+  },
+  {
+   "name" : "glTranslatef"
+  },
+  {
+   "name" : "glTranslatex"
+  },
+  {
+   "name" : "glTranslatexOES"
+  },
+  {
+   "name" : "glUnmapBufferOES"
+  },
+  {
+   "name" : "glVertexPointer"
+  },
+  {
+   "name" : "glVertexPointerBounds"
+  },
+  {
+   "name" : "glViewport"
+  },
+  {
+   "name" : "glWeightPointerOES"
+  },
+  {
+   "name" : "glWeightPointerOESBounds"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "KHRONOS_FALSE"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "KHRONOS_TRUE"
+    },
+    {
+     "enum_field_value" : 2147483647,
+     "name" : "KHRONOS_BOOLEAN_ENUM_FORCE_SIZE"
+    }
+   ],
+   "linker_set_key" : "khronos_boolean_enum_t",
+   "name" : "khronos_boolean_enum_t",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/KHR/khrplatform.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "khronos_boolean_enum_t"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "glActiveTexture",
+   "linker_set_key" : "glActiveTexture",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glAlphaFunc",
+   "linker_set_key" : "glAlphaFunc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glAlphaFuncx",
+   "linker_set_key" : "glAlphaFuncx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glAlphaFuncxOES",
+   "linker_set_key" : "glAlphaFuncxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBindBuffer",
+   "linker_set_key" : "glBindBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glBindFramebufferOES",
+   "linker_set_key" : "glBindFramebufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBindRenderbufferOES",
+   "linker_set_key" : "glBindRenderbufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBindTexture",
+   "linker_set_key" : "glBindTexture",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glBindVertexArrayOES",
+   "linker_set_key" : "glBindVertexArrayOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBlendEquationOES",
+   "linker_set_key" : "glBlendEquationOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBlendEquationSeparateOES",
+   "linker_set_key" : "glBlendEquationSeparateOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBlendFunc",
+   "linker_set_key" : "glBlendFunc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glBlendFuncSeparateOES",
+   "linker_set_key" : "glBlendFuncSeparateOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glBufferData",
+   "linker_set_key" : "glBufferData",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glBufferSubData",
+   "linker_set_key" : "glBufferSubData",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-22"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCheckFramebufferStatusOES",
+   "linker_set_key" : "glCheckFramebufferStatusOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClear",
+   "linker_set_key" : "glClear",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClearColor",
+   "linker_set_key" : "glClearColor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClearColorx",
+   "linker_set_key" : "glClearColorx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClearColorxOES",
+   "linker_set_key" : "glClearColorxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClearDepthf",
+   "linker_set_key" : "glClearDepthf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClearDepthfOES",
+   "linker_set_key" : "glClearDepthfOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClearDepthx",
+   "linker_set_key" : "glClearDepthx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClearDepthxOES",
+   "linker_set_key" : "glClearDepthxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClearStencil",
+   "linker_set_key" : "glClearStencil",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClientActiveTexture",
+   "linker_set_key" : "glClientActiveTexture",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClipPlanef",
+   "linker_set_key" : "glClipPlanef",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClipPlanefIMG",
+   "linker_set_key" : "glClipPlanefIMG",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClipPlanefOES",
+   "linker_set_key" : "glClipPlanefOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClipPlanex",
+   "linker_set_key" : "glClipPlanex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glClipPlanexIMG",
+   "linker_set_key" : "glClipPlanexIMG",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glClipPlanexOES",
+   "linker_set_key" : "glClipPlanexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glColor4f",
+   "linker_set_key" : "glColor4f",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glColor4ub",
+   "linker_set_key" : "glColor4ub",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glColor4x",
+   "linker_set_key" : "glColor4x",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glColor4xOES",
+   "linker_set_key" : "glColor4xOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glColorMask",
+   "linker_set_key" : "glColorMask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glColorPointer",
+   "linker_set_key" : "glColorPointer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCompressedTexImage2D",
+   "linker_set_key" : "glCompressedTexImage2D",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCompressedTexSubImage2D",
+   "linker_set_key" : "glCompressedTexSubImage2D",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCopyTexImage2D",
+   "linker_set_key" : "glCopyTexImage2D",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCopyTexSubImage2D",
+   "linker_set_key" : "glCopyTexSubImage2D",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCullFace",
+   "linker_set_key" : "glCullFace",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glCurrentPaletteMatrixOES",
+   "linker_set_key" : "glCurrentPaletteMatrixOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDeleteBuffers",
+   "linker_set_key" : "glDeleteBuffers",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDeleteFencesNV",
+   "linker_set_key" : "glDeleteFencesNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDeleteFramebuffersOES",
+   "linker_set_key" : "glDeleteFramebuffersOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDeleteRenderbuffersOES",
+   "linker_set_key" : "glDeleteRenderbuffersOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDeleteTextures",
+   "linker_set_key" : "glDeleteTextures",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDeleteVertexArraysOES",
+   "linker_set_key" : "glDeleteVertexArraysOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDepthFunc",
+   "linker_set_key" : "glDepthFunc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDepthMask",
+   "linker_set_key" : "glDepthMask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDepthRangef",
+   "linker_set_key" : "glDepthRangef",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDepthRangefOES",
+   "linker_set_key" : "glDepthRangefOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDepthRangex",
+   "linker_set_key" : "glDepthRangex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDepthRangexOES",
+   "linker_set_key" : "glDepthRangexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDisable",
+   "linker_set_key" : "glDisable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDisableClientState",
+   "linker_set_key" : "glDisableClientState",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDisableDriverControlQCOM",
+   "linker_set_key" : "glDisableDriverControlQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDiscardFramebufferEXT",
+   "linker_set_key" : "glDiscardFramebufferEXT",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-4"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawArrays",
+   "linker_set_key" : "glDrawArrays",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDrawElements",
+   "linker_set_key" : "glDrawElements",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glDrawTexfOES",
+   "linker_set_key" : "glDrawTexfOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexfvOES",
+   "linker_set_key" : "glDrawTexfvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexiOES",
+   "linker_set_key" : "glDrawTexiOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexivOES",
+   "linker_set_key" : "glDrawTexivOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexsOES",
+   "linker_set_key" : "glDrawTexsOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-15"
+    },
+    {
+     "referenced_type" : "type-15"
+    },
+    {
+     "referenced_type" : "type-15"
+    },
+    {
+     "referenced_type" : "type-15"
+    },
+    {
+     "referenced_type" : "type-15"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexsvOES",
+   "linker_set_key" : "glDrawTexsvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-17"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexxOES",
+   "linker_set_key" : "glDrawTexxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glDrawTexxvOES",
+   "linker_set_key" : "glDrawTexxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glEGLImageTargetRenderbufferStorageOES",
+   "linker_set_key" : "glEGLImageTargetRenderbufferStorageOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glEGLImageTargetTexture2DOES",
+   "linker_set_key" : "glEGLImageTargetTexture2DOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glEnable",
+   "linker_set_key" : "glEnable",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glEnableClientState",
+   "linker_set_key" : "glEnableClientState",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glEnableDriverControlQCOM",
+   "linker_set_key" : "glEnableDriverControlQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glEndTilingQCOM",
+   "linker_set_key" : "glEndTilingQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetBufferPointervQCOM",
+   "linker_set_key" : "glExtGetBufferPointervQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetBuffersQCOM",
+   "linker_set_key" : "glExtGetBuffersQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetFramebuffersQCOM",
+   "linker_set_key" : "glExtGetFramebuffersQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetProgramBinarySourceQCOM",
+   "linker_set_key" : "glExtGetProgramBinarySourceQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-28"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetProgramsQCOM",
+   "linker_set_key" : "glExtGetProgramsQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetRenderbuffersQCOM",
+   "linker_set_key" : "glExtGetRenderbuffersQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetShadersQCOM",
+   "linker_set_key" : "glExtGetShadersQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetTexLevelParameterivQCOM",
+   "linker_set_key" : "glExtGetTexLevelParameterivQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetTexSubImageQCOM",
+   "linker_set_key" : "glExtGetTexSubImageQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtGetTexturesQCOM",
+   "linker_set_key" : "glExtGetTexturesQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-9"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtIsProgramBinaryQCOM",
+   "linker_set_key" : "glExtIsProgramBinaryQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glExtTexObjectStateOverrideiQCOM",
+   "linker_set_key" : "glExtTexObjectStateOverrideiQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFinish",
+   "linker_set_key" : "glFinish",
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFinishFenceNV",
+   "linker_set_key" : "glFinishFenceNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFlush",
+   "linker_set_key" : "glFlush",
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFogf",
+   "linker_set_key" : "glFogf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFogfv",
+   "linker_set_key" : "glFogfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFogx",
+   "linker_set_key" : "glFogx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFogxOES",
+   "linker_set_key" : "glFogxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFogxv",
+   "linker_set_key" : "glFogxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFogxvOES",
+   "linker_set_key" : "glFogxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFramebufferRenderbufferOES",
+   "linker_set_key" : "glFramebufferRenderbufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFramebufferTexture2DMultisampleIMG",
+   "linker_set_key" : "glFramebufferTexture2DMultisampleIMG",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFramebufferTexture2DOES",
+   "linker_set_key" : "glFramebufferTexture2DOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFrontFace",
+   "linker_set_key" : "glFrontFace",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFrustumf",
+   "linker_set_key" : "glFrustumf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFrustumfOES",
+   "linker_set_key" : "glFrustumfOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glFrustumx",
+   "linker_set_key" : "glFrustumx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glFrustumxOES",
+   "linker_set_key" : "glFrustumxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGenBuffers",
+   "linker_set_key" : "glGenBuffers",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGenFencesNV",
+   "linker_set_key" : "glGenFencesNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGenFramebuffersOES",
+   "linker_set_key" : "glGenFramebuffersOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGenRenderbuffersOES",
+   "linker_set_key" : "glGenRenderbuffersOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGenTextures",
+   "linker_set_key" : "glGenTextures",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGenVertexArraysOES",
+   "linker_set_key" : "glGenVertexArraysOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGenerateMipmapOES",
+   "linker_set_key" : "glGenerateMipmapOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetBooleanv",
+   "linker_set_key" : "glGetBooleanv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-5"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetBufferParameteriv",
+   "linker_set_key" : "glGetBufferParameteriv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetBufferPointervOES",
+   "linker_set_key" : "glGetBufferPointervOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetClipPlanef",
+   "linker_set_key" : "glGetClipPlanef",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetClipPlanefOES",
+   "linker_set_key" : "glGetClipPlanefOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetClipPlanex",
+   "linker_set_key" : "glGetClipPlanex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetClipPlanexOES",
+   "linker_set_key" : "glGetClipPlanexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetDriverControlStringQCOM",
+   "linker_set_key" : "glGetDriverControlStringQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-28"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetDriverControlsQCOM",
+   "linker_set_key" : "glGetDriverControlsQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-9"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetError",
+   "linker_set_key" : "glGetError",
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetFenceivNV",
+   "linker_set_key" : "glGetFenceivNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetFixedv",
+   "linker_set_key" : "glGetFixedv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetFixedvOES",
+   "linker_set_key" : "glGetFixedvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetFloatv",
+   "linker_set_key" : "glGetFloatv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetFramebufferAttachmentParameterivOES",
+   "linker_set_key" : "glGetFramebufferAttachmentParameterivOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetIntegerv",
+   "linker_set_key" : "glGetIntegerv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetLightfv",
+   "linker_set_key" : "glGetLightfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetLightxv",
+   "linker_set_key" : "glGetLightxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetLightxvOES",
+   "linker_set_key" : "glGetLightxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetMaterialfv",
+   "linker_set_key" : "glGetMaterialfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetMaterialxv",
+   "linker_set_key" : "glGetMaterialxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetMaterialxvOES",
+   "linker_set_key" : "glGetMaterialxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetPointerv",
+   "linker_set_key" : "glGetPointerv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-12"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetRenderbufferParameterivOES",
+   "linker_set_key" : "glGetRenderbufferParameterivOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetString",
+   "linker_set_key" : "glGetString",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexEnvfv",
+   "linker_set_key" : "glGetTexEnvfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexEnviv",
+   "linker_set_key" : "glGetTexEnviv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexEnvxv",
+   "linker_set_key" : "glGetTexEnvxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexEnvxvOES",
+   "linker_set_key" : "glGetTexEnvxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetTexGenfvOES",
+   "linker_set_key" : "glGetTexGenfvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetTexGenivOES",
+   "linker_set_key" : "glGetTexGenivOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetTexGenxvOES",
+   "linker_set_key" : "glGetTexGenxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glGetTexParameterfv",
+   "linker_set_key" : "glGetTexParameterfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-35"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexParameteriv",
+   "linker_set_key" : "glGetTexParameteriv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexParameterxv",
+   "linker_set_key" : "glGetTexParameterxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glGetTexParameterxvOES",
+   "linker_set_key" : "glGetTexParameterxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glHint",
+   "linker_set_key" : "glHint",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glIsBuffer",
+   "linker_set_key" : "glIsBuffer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glIsEnabled",
+   "linker_set_key" : "glIsEnabled",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glIsFenceNV",
+   "linker_set_key" : "glIsFenceNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glIsFramebufferOES",
+   "linker_set_key" : "glIsFramebufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glIsRenderbufferOES",
+   "linker_set_key" : "glIsRenderbufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glIsTexture",
+   "linker_set_key" : "glIsTexture",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glIsVertexArrayOES",
+   "linker_set_key" : "glIsVertexArrayOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLightModelf",
+   "linker_set_key" : "glLightModelf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightModelfv",
+   "linker_set_key" : "glLightModelfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightModelx",
+   "linker_set_key" : "glLightModelx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightModelxOES",
+   "linker_set_key" : "glLightModelxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLightModelxv",
+   "linker_set_key" : "glLightModelxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightModelxvOES",
+   "linker_set_key" : "glLightModelxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLightf",
+   "linker_set_key" : "glLightf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightfv",
+   "linker_set_key" : "glLightfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightx",
+   "linker_set_key" : "glLightx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightxOES",
+   "linker_set_key" : "glLightxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLightxv",
+   "linker_set_key" : "glLightxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLightxvOES",
+   "linker_set_key" : "glLightxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLineWidth",
+   "linker_set_key" : "glLineWidth",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLineWidthx",
+   "linker_set_key" : "glLineWidthx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLineWidthxOES",
+   "linker_set_key" : "glLineWidthxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLoadIdentity",
+   "linker_set_key" : "glLoadIdentity",
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLoadMatrixf",
+   "linker_set_key" : "glLoadMatrixf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLoadMatrixx",
+   "linker_set_key" : "glLoadMatrixx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glLoadMatrixxOES",
+   "linker_set_key" : "glLoadMatrixxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLoadPaletteFromModelViewMatrixOES",
+   "linker_set_key" : "glLoadPaletteFromModelViewMatrixOES",
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glLogicOp",
+   "linker_set_key" : "glLogicOp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMapBufferOES",
+   "linker_set_key" : "glMapBufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-10",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMaterialf",
+   "linker_set_key" : "glMaterialf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMaterialfv",
+   "linker_set_key" : "glMaterialfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMaterialx",
+   "linker_set_key" : "glMaterialx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMaterialxOES",
+   "linker_set_key" : "glMaterialxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMaterialxv",
+   "linker_set_key" : "glMaterialxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMaterialxvOES",
+   "linker_set_key" : "glMaterialxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMatrixIndexPointerOES",
+   "linker_set_key" : "glMatrixIndexPointerOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMatrixMode",
+   "linker_set_key" : "glMatrixMode",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMultMatrixf",
+   "linker_set_key" : "glMultMatrixf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMultMatrixx",
+   "linker_set_key" : "glMultMatrixx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMultMatrixxOES",
+   "linker_set_key" : "glMultMatrixxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMultiDrawArraysEXT",
+   "linker_set_key" : "glMultiDrawArraysEXT",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    },
+    {
+     "referenced_type" : "type-37"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMultiDrawElementsEXT",
+   "linker_set_key" : "glMultiDrawElementsEXT",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-26"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glMultiTexCoord4f",
+   "linker_set_key" : "glMultiTexCoord4f",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMultiTexCoord4x",
+   "linker_set_key" : "glMultiTexCoord4x",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glMultiTexCoord4xOES",
+   "linker_set_key" : "glMultiTexCoord4xOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glNormal3f",
+   "linker_set_key" : "glNormal3f",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glNormal3x",
+   "linker_set_key" : "glNormal3x",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glNormal3xOES",
+   "linker_set_key" : "glNormal3xOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glNormalPointer",
+   "linker_set_key" : "glNormalPointer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glOrthof",
+   "linker_set_key" : "glOrthof",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glOrthofOES",
+   "linker_set_key" : "glOrthofOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glOrthox",
+   "linker_set_key" : "glOrthox",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glOrthoxOES",
+   "linker_set_key" : "glOrthoxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glPixelStorei",
+   "linker_set_key" : "glPixelStorei",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointParameterf",
+   "linker_set_key" : "glPointParameterf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointParameterfv",
+   "linker_set_key" : "glPointParameterfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointParameterx",
+   "linker_set_key" : "glPointParameterx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointParameterxOES",
+   "linker_set_key" : "glPointParameterxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glPointParameterxv",
+   "linker_set_key" : "glPointParameterxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointParameterxvOES",
+   "linker_set_key" : "glPointParameterxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glPointSize",
+   "linker_set_key" : "glPointSize",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointSizePointerOES",
+   "linker_set_key" : "glPointSizePointerOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointSizex",
+   "linker_set_key" : "glPointSizex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPointSizexOES",
+   "linker_set_key" : "glPointSizexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glPolygonOffset",
+   "linker_set_key" : "glPolygonOffset",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPolygonOffsetx",
+   "linker_set_key" : "glPolygonOffsetx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPolygonOffsetxOES",
+   "linker_set_key" : "glPolygonOffsetxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glPopMatrix",
+   "linker_set_key" : "glPopMatrix",
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glPushMatrix",
+   "linker_set_key" : "glPushMatrix",
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glQueryMatrixxOES",
+   "linker_set_key" : "glQueryMatrixxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "return_type" : "type-2",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glReadPixels",
+   "linker_set_key" : "glReadPixels",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-10"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glRenderbufferStorageMultisampleIMG",
+   "linker_set_key" : "glRenderbufferStorageMultisampleIMG",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glRenderbufferStorageOES",
+   "linker_set_key" : "glRenderbufferStorageOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glRotatef",
+   "linker_set_key" : "glRotatef",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glRotatex",
+   "linker_set_key" : "glRotatex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glRotatexOES",
+   "linker_set_key" : "glRotatexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glSampleCoverage",
+   "linker_set_key" : "glSampleCoverage",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glSampleCoveragex",
+   "linker_set_key" : "glSampleCoveragex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glSampleCoveragexOES",
+   "linker_set_key" : "glSampleCoveragexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glScalef",
+   "linker_set_key" : "glScalef",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glScalex",
+   "linker_set_key" : "glScalex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glScalexOES",
+   "linker_set_key" : "glScalexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glScissor",
+   "linker_set_key" : "glScissor",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glSetFenceNV",
+   "linker_set_key" : "glSetFenceNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glShadeModel",
+   "linker_set_key" : "glShadeModel",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glStartTilingQCOM",
+   "linker_set_key" : "glStartTilingQCOM",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glStencilFunc",
+   "linker_set_key" : "glStencilFunc",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glStencilMask",
+   "linker_set_key" : "glStencilMask",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glStencilOp",
+   "linker_set_key" : "glStencilOp",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTestFenceNV",
+   "linker_set_key" : "glTestFenceNV",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexCoordPointer",
+   "linker_set_key" : "glTexCoordPointer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnvf",
+   "linker_set_key" : "glTexEnvf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnvfv",
+   "linker_set_key" : "glTexEnvfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnvi",
+   "linker_set_key" : "glTexEnvi",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnviv",
+   "linker_set_key" : "glTexEnviv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnvx",
+   "linker_set_key" : "glTexEnvx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnvxOES",
+   "linker_set_key" : "glTexEnvxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexEnvxv",
+   "linker_set_key" : "glTexEnvxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexEnvxvOES",
+   "linker_set_key" : "glTexEnvxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexGenfOES",
+   "linker_set_key" : "glTexGenfOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexGenfvOES",
+   "linker_set_key" : "glTexGenfvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexGeniOES",
+   "linker_set_key" : "glTexGeniOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexGenivOES",
+   "linker_set_key" : "glTexGenivOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexGenxOES",
+   "linker_set_key" : "glTexGenxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexGenxvOES",
+   "linker_set_key" : "glTexGenxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexImage2D",
+   "linker_set_key" : "glTexImage2D",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameterf",
+   "linker_set_key" : "glTexParameterf",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameterfv",
+   "linker_set_key" : "glTexParameterfv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-34"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameteri",
+   "linker_set_key" : "glTexParameteri",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameteriv",
+   "linker_set_key" : "glTexParameteriv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameterx",
+   "linker_set_key" : "glTexParameterx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameterxOES",
+   "linker_set_key" : "glTexParameterxOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexParameterxv",
+   "linker_set_key" : "glTexParameterxv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTexParameterxvOES",
+   "linker_set_key" : "glTexParameterxvOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-37"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glTexSubImage2D",
+   "linker_set_key" : "glTexSubImage2D",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTranslatef",
+   "linker_set_key" : "glTranslatef",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    },
+    {
+     "referenced_type" : "type-32"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTranslatex",
+   "linker_set_key" : "glTranslatex",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glTranslatexOES",
+   "linker_set_key" : "glTranslatexOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glUnmapBufferOES",
+   "linker_set_key" : "glUnmapBufferOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-2"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "function_name" : "glVertexPointer",
+   "linker_set_key" : "glVertexPointer",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glViewport",
+   "linker_set_key" : "glViewport",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-8"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "function_name" : "glWeightPointerOES",
+   "linker_set_key" : "glWeightPointerOES",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-2"
+    },
+    {
+     "referenced_type" : "type-8"
+    },
+    {
+     "referenced_type" : "type-24"
+    }
+   ],
+   "return_type" : "type-11",
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 8,
+   "linker_set_key" : "__GLsync *",
+   "name" : "__GLsync *",
+   "referenced_type" : "type-19",
+   "self_type" : "type-18",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-27",
+   "self_type" : "type-28",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-31",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES2/gl2ext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const float *",
+   "name" : "const float *",
+   "referenced_type" : "type-33",
+   "self_type" : "type-34",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const int *",
+   "name" : "const int *",
+   "referenced_type" : "type-36",
+   "self_type" : "type-37",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const short *",
+   "name" : "const short *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-17",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned char *",
+   "name" : "const unsigned char *",
+   "referenced_type" : "type-14",
+   "self_type" : "type-13",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const unsigned int *",
+   "name" : "const unsigned int *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-4",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "const void *const *",
+   "name" : "const void *const *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-26",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "float *",
+   "name" : "float *",
+   "referenced_type" : "type-32",
+   "self_type" : "type-35",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long *",
+   "name" : "long *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-21",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned char *",
+   "name" : "unsigned char *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-2",
+   "self_type" : "type-9",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-11",
+   "self_type" : "type-10",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "void **",
+   "name" : "void **",
+   "referenced_type" : "type-10",
+   "self_type" : "type-12",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-27",
+   "self_type" : "type-30",
+   "size" : 1,
+   "source_file" : "/frameworks/native/opengl/include/GLES2/gl2ext.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const float",
+   "name" : "const float",
+   "referenced_type" : "type-32",
+   "self_type" : "type-33",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const int",
+   "name" : "const int",
+   "referenced_type" : "type-8",
+   "self_type" : "type-36",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 2,
+   "is_const" : true,
+   "linker_set_key" : "const short",
+   "name" : "const short",
+   "referenced_type" : "type-15",
+   "self_type" : "type-16",
+   "size" : 2,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned char",
+   "name" : "const unsigned char",
+   "referenced_type" : "type-6",
+   "self_type" : "type-14",
+   "size" : 1,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-3",
+   "size" : 4,
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-11",
+   "self_type" : "type-25",
+   "source_file" : "/frameworks/native/opengl/include/GLES/gl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const void *const",
+   "name" : "const void *const",
+   "referenced_type" : "type-24",
+   "self_type" : "type-23",
+   "size" : 8,
+   "source_file" : "/frameworks/native/opengl/include/GLES/glext.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "pData",
+     "referenced_type" : "type-10"
+    },
+    {
+     "field_name" : "iWidth",
+     "field_offset" : 64,
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "iHeight",
+     "field_offset" : 96,
+     "referenced_type" : "type-8"
+    },
+    {
+     "field_name" : "iStride",
+     "field_offset" : 128,
+     "referenced_type" : "type-8"
+    }
+   ],
+   "linker_set_key" : "EGLClientPixmapHI",
+   "name" : "EGLClientPixmapHI",
+   "referenced_type" : "type-29",
+   "self_type" : "type-29",
+   "size" : 24,
+   "source_file" : "/frameworks/native/opengl/include/EGL/eglext.h",
+   "unique_id" : "EGLClientPixmapHI"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

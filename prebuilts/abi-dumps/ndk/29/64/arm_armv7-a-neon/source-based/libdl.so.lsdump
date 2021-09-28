@@ -1,0 +1,3005 @@
+{
+ "array_types" :
+ [
+  {
+   "alignment" : 1,
+   "linker_set_key" : "char [32]",
+   "name" : "char [32]",
+   "referenced_type" : "type-36",
+   "self_type" : "type-35",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "char [4092]",
+   "name" : "char [4092]",
+   "referenced_type" : "type-36",
+   "self_type" : "type-44",
+   "size" : 4092,
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [10]",
+   "name" : "int [10]",
+   "referenced_type" : "type-1",
+   "self_type" : "type-64",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [1]",
+   "name" : "int [1]",
+   "referenced_type" : "type-1",
+   "self_type" : "type-61",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [2]",
+   "name" : "int [2]",
+   "referenced_type" : "type-1",
+   "self_type" : "type-55",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/posix_types.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int [8]",
+   "name" : "int [8]",
+   "referenced_type" : "type-1",
+   "self_type" : "type-37",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [16]",
+   "name" : "unsigned char [16]",
+   "referenced_type" : "type-22",
+   "self_type" : "type-78",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "unsigned char [8]",
+   "name" : "unsigned char [8]",
+   "referenced_type" : "type-22",
+   "self_type" : "type-21",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned long [18]",
+   "name" : "unsigned long [18]",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 72,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned long [32]",
+   "name" : "unsigned long [32]",
+   "referenced_type" : "type-25",
+   "self_type" : "type-53",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/posix_types.h"
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "unsigned long long [32]",
+   "name" : "unsigned long long [32]",
+   "referenced_type" : "type-28",
+   "self_type" : "type-27",
+   "size" : 256,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "user_fpregs::fp_reg [8]",
+   "name" : "user_fpregs::fp_reg [8]",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 96,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  }
+ ],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-36",
+   "self_type" : "type-36",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-57",
+   "self_type" : "type-57",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-32",
+   "self_type" : "type-32",
+   "size" : 8
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-22",
+   "self_type" : "type-22",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-25",
+   "self_type" : "type-25",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-28",
+   "self_type" : "type-28",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-42",
+   "self_type" : "type-42",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "__cfi_init"
+  },
+  {
+   "name" : "__cfi_shadow_size"
+  },
+  {
+   "name" : "__cfi_slowpath"
+  },
+  {
+   "name" : "__cfi_slowpath_diag"
+  },
+  {
+   "binding" : "weak",
+   "name" : "android_dlopen_ext"
+  },
+  {
+   "binding" : "weak",
+   "name" : "android_get_LD_LIBRARY_PATH"
+  },
+  {
+   "binding" : "weak",
+   "name" : "android_get_application_target_sdk_version"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dl_iterate_phdr"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dl_unwind_find_exidx"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dladdr"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dlclose"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dlerror"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dlopen"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dlsym"
+  },
+  {
+   "binding" : "weak",
+   "name" : "dlvsym"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 2,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "CFIShadow::kInvalidShadow"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "CFIShadow::kUncheckedShadow"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "CFIShadow::kRegularShadowMin"
+    }
+   ],
+   "linker_set_key" : "CFIShadow::ShadowValues",
+   "name" : "CFIShadow::ShadowValues",
+   "referenced_type" : "type-41",
+   "self_type" : "type-41",
+   "size" : 2,
+   "source_file" : "/bionic/libc/private/CFIShadow.h",
+   "underlying_type" : "type-42",
+   "unique_id" : "_ZTSN9CFIShadow12ShadowValuesE"
+  }
+ ],
+ "function_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (dl_phdr_info *, unsigned int, void *)",
+   "name" : "int (dl_phdr_info *, unsigned int, void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-110"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "referenced_type" : "type-109",
+   "return_type" : "type-1",
+   "self_type" : "type-109",
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (void *, const void *)",
+   "name" : "void (void *, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "referenced_type" : "type-4",
+   "return_type" : "type-5",
+   "self_type" : "type-4",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned int, const void *)",
+   "name" : "void *(unsigned int, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "referenced_type" : "type-121",
+   "return_type" : "type-6",
+   "self_type" : "type-121",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(unsigned int, unsigned int, const void *)",
+   "name" : "void *(unsigned int, unsigned int, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "referenced_type" : "type-12",
+   "return_type" : "type-6",
+   "self_type" : "type-12",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(void *, unsigned int, const void *)",
+   "name" : "void *(void *, unsigned int, const void *)",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-7"
+    }
+   ],
+   "referenced_type" : "type-124",
+   "return_type" : "type-6",
+   "self_type" : "type-124",
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "functions" :
+ [
+  {
+   "function_name" : "__cfi_init",
+   "linker_set_key" : "__cfi_init",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-45",
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp"
+  },
+  {
+   "function_name" : "__cfi_shadow_size",
+   "linker_set_key" : "__cfi_shadow_size",
+   "return_type" : "type-13",
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp"
+  },
+  {
+   "function_name" : "__cfi_slowpath",
+   "linker_set_key" : "__cfi_slowpath",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-28"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp"
+  },
+  {
+   "function_name" : "__cfi_slowpath_diag",
+   "linker_set_key" : "__cfi_slowpath_diag",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-28"
+    },
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp"
+  },
+  {
+   "function_name" : "android_dlopen_ext",
+   "linker_set_key" : "android_dlopen_ext",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-50"
+    },
+    {
+     "referenced_type" : "type-1"
+    },
+    {
+     "referenced_type" : "type-46"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/bionic/libc/include/android/dlext.h"
+  },
+  {
+   "function_name" : "android_get_LD_LIBRARY_PATH",
+   "linker_set_key" : "android_get_LD_LIBRARY_PATH",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-47"
+    },
+    {
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-5",
+   "source_file" : "/bionic/libdl/libdl.cpp"
+  },
+  {
+   "function_name" : "android_get_application_target_sdk_version",
+   "linker_set_key" : "android_get_application_target_sdk_version",
+   "return_type" : "type-1",
+   "source_file" : "/bionic/libc/include/android/api-level.h"
+  },
+  {
+   "function_name" : "dl_iterate_phdr",
+   "linker_set_key" : "dl_iterate_phdr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-111"
+    },
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "function_name" : "dl_unwind_find_exidx",
+   "linker_set_key" : "dl_unwind_find_exidx",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-112"
+    }
+   ],
+   "return_type" : "type-13",
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "function_name" : "dladdr",
+   "linker_set_key" : "dladdr",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-7"
+    },
+    {
+     "referenced_type" : "type-48"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "function_name" : "dlclose",
+   "linker_set_key" : "dlclose",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    }
+   ],
+   "return_type" : "type-1",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "function_name" : "dlerror",
+   "linker_set_key" : "dlerror",
+   "return_type" : "type-47",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "function_name" : "dlopen",
+   "linker_set_key" : "dlopen",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-50"
+    },
+    {
+     "referenced_type" : "type-1"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "function_name" : "dlsym",
+   "linker_set_key" : "dlsym",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "function_name" : "dlvsym",
+   "linker_set_key" : "dlvsym",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-6"
+    },
+    {
+     "referenced_type" : "type-50"
+    },
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-6",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "Dl_info *",
+   "name" : "Dl_info *",
+   "referenced_type" : "type-49",
+   "self_type" : "type-48",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "__sFILE *",
+   "name" : "__sFILE *",
+   "referenced_type" : "type-118",
+   "self_type" : "type-117",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/stdio.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android_namespace_t *",
+   "name" : "android_namespace_t *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/android/dlext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "char *",
+   "name" : "char *",
+   "referenced_type" : "type-36",
+   "self_type" : "type-47",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android_dlextinfo *",
+   "name" : "const android_dlextinfo *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-46",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/android/dlext.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-51",
+   "self_type" : "type-50",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const elf32_phdr *",
+   "name" : "const elf32_phdr *",
+   "referenced_type" : "type-108",
+   "self_type" : "type-107",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const void *",
+   "name" : "const void *",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "dl_phdr_info *",
+   "name" : "dl_phdr_info *",
+   "referenced_type" : "type-106",
+   "self_type" : "type-110",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "dynamic *",
+   "name" : "dynamic *",
+   "referenced_type" : "type-66",
+   "self_type" : "type-114",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int (*)(dl_phdr_info *, unsigned int, void *)",
+   "name" : "int (*)(dl_phdr_info *, unsigned int, void *)",
+   "referenced_type" : "type-109",
+   "self_type" : "type-111",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "int *",
+   "name" : "int *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-112",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "link_map *",
+   "name" : "link_map *",
+   "referenced_type" : "type-113",
+   "self_type" : "type-115",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "unsigned int *",
+   "name" : "unsigned int *",
+   "referenced_type" : "type-13",
+   "self_type" : "type-45",
+   "size" : 4,
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "user_fpregs *",
+   "name" : "user_fpregs *",
+   "referenced_type" : "type-18",
+   "self_type" : "type-38",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "user_regs *",
+   "name" : "user_regs *",
+   "referenced_type" : "type-23",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/sys/user.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void (*)(void *, const void *)",
+   "name" : "void (*)(void *, const void *)",
+   "referenced_type" : "type-4",
+   "self_type" : "type-10",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-5",
+   "self_type" : "type-6",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(unsigned int, const void *)",
+   "name" : "void *(*)(unsigned int, const void *)",
+   "referenced_type" : "type-121",
+   "self_type" : "type-120",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(unsigned int, unsigned int, const void *)",
+   "name" : "void *(*)(unsigned int, unsigned int, const void *)",
+   "referenced_type" : "type-12",
+   "self_type" : "type-11",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *(*)(void *, unsigned int, const void *)",
+   "name" : "void *(*)(void *, unsigned int, const void *)",
+   "referenced_type" : "type-124",
+   "self_type" : "type-123",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const android_dlextinfo",
+   "name" : "const android_dlextinfo",
+   "referenced_type" : "type-31",
+   "self_type" : "type-30",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/android/dlext.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-36",
+   "self_type" : "type-51",
+   "size" : 1,
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const elf32_phdr",
+   "name" : "const elf32_phdr",
+   "referenced_type" : "type-80",
+   "self_type" : "type-108",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/link.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-13",
+   "self_type" : "type-39",
+   "size" : 4,
+   "source_file" : "/bionic/libc/private/CFIShadow.h"
+  },
+  {
+   "is_const" : true,
+   "linker_set_key" : "const void",
+   "name" : "const void",
+   "referenced_type" : "type-5",
+   "self_type" : "type-8",
+   "source_file" : "/bionic/libc/include/dlfcn.h"
+  },
+  {
+   "alignment" : 4,
+   "is_volatile" : true,
+   "linker_set_key" : "void (*volatile)(void *, const void *)",
+   "name" : "void (*volatile)(void *, const void *)",
+   "referenced_type" : "type-10",
+   "self_type" : "type-9",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_volatile" : true,
+   "linker_set_key" : "void *(*volatile)(unsigned int, const void *)",
+   "name" : "void *(*volatile)(unsigned int, const void *)",
+   "referenced_type" : "type-120",
+   "self_type" : "type-122",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_volatile" : true,
+   "linker_set_key" : "void *(*volatile)(unsigned int, unsigned int, const void *)",
+   "name" : "void *(*volatile)(unsigned int, unsigned int, const void *)",
+   "referenced_type" : "type-11",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  },
+  {
+   "alignment" : 4,
+   "is_volatile" : true,
+   "linker_set_key" : "void *(*volatile)(void *, unsigned int, const void *)",
+   "name" : "void *(*volatile)(void *, unsigned int, const void *)",
+   "referenced_type" : "type-123",
+   "self_type" : "type-125",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/malloc.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "v",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "padding",
+     "field_offset" : 32,
+     "referenced_type" : "type-44"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "(anonymous struct at /bionic/libdl/libdl_cfi.cpp:27:8) at /bionic/libdl/libdl_cfi.cpp:27:8",
+   "name" : "(anonymous struct at /bionic/libdl/libdl_cfi.cpp:27:8) at /bionic/libdl/libdl_cfi.cpp:27:8",
+   "referenced_type" : "type-43",
+   "self_type" : "type-43",
+   "size" : 4096,
+   "source_file" : "/bionic/libdl/libdl_cfi.cpp",
+   "unique_id" : "_ZTS3$_0"
+  },
+  {
+   "alignment" : 1,
+   "linker_set_key" : "CFIShadow",
+   "name" : "CFIShadow",
+   "record_kind" : "class",
+   "referenced_type" : "type-40",
+   "self_type" : "type-40",
+   "size" : 1,
+   "source_file" : "/bionic/libc/private/CFIShadow.h",
+   "unique_id" : "_ZTS9CFIShadow"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "dli_fname",
+     "referenced_type" : "type-50"
+    },
+    {
+     "field_name" : "dli_fbase",
+     "field_offset" : 32,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "dli_sname",
+     "field_offset" : 64,
+     "referenced_type" : "type-50"
+    },
+    {
+     "field_name" : "dli_saddr",
+     "field_offset" : 96,
+     "referenced_type" : "type-6"
+    }
+   ],
+   "linker_set_key" : "Dl_info",
+   "name" : "Dl_info",
+   "referenced_type" : "type-49",
+   "self_type" : "type-49",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/dlfcn.h",
+   "unique_id" : "Dl_info"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "ch_type",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ch_size",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ch_addralign",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf32_Chdr",
+   "name" : "Elf32_Chdr",
+   "referenced_type" : "type-90",
+   "self_type" : "type-90",
+   "size" : 12,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS10Elf32_Chdr"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "l_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_time_stamp",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_checksum",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_version",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_flags",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf32_Lib",
+   "name" : "Elf32_Lib",
+   "referenced_type" : "type-92",
+   "self_type" : "type-92",
+   "size" : 20,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS9Elf32_Lib"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "m_value",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "m_info",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "m_poffset",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "m_repeat",
+     "field_offset" : 128,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "m_stride",
+     "field_offset" : 144,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "Elf32_Move",
+   "name" : "Elf32_Move",
+   "referenced_type" : "type-94",
+   "self_type" : "type-94",
+   "size" : 24,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS10Elf32_Move"
+  },
+  {
+   "alignment" : 2,
+   "fields" :
+   [
+    {
+     "field_name" : "si_boundto",
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "si_flags",
+     "field_offset" : 16,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "Elf32_Syminfo",
+   "name" : "Elf32_Syminfo",
+   "referenced_type" : "type-96",
+   "self_type" : "type-96",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf32_Syminfo"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vda_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vda_next",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf32_Verdaux",
+   "name" : "Elf32_Verdaux",
+   "referenced_type" : "type-99",
+   "self_type" : "type-99",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf32_Verdaux"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vd_version",
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_flags",
+     "field_offset" : 16,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_ndx",
+     "field_offset" : 32,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_cnt",
+     "field_offset" : 48,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_hash",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vd_aux",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vd_next",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf32_Verdef",
+   "name" : "Elf32_Verdef",
+   "referenced_type" : "type-98",
+   "self_type" : "type-98",
+   "size" : 20,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS12Elf32_Verdef"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vna_hash",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vna_flags",
+     "field_offset" : 32,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vna_other",
+     "field_offset" : 48,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vna_name",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vna_next",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf32_Vernaux",
+   "name" : "Elf32_Vernaux",
+   "referenced_type" : "type-103",
+   "self_type" : "type-103",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf32_Vernaux"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vn_version",
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vn_cnt",
+     "field_offset" : 16,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vn_file",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vn_aux",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vn_next",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf32_Verneed",
+   "name" : "Elf32_Verneed",
+   "referenced_type" : "type-102",
+   "self_type" : "type-102",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf32_Verneed"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "a_type",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "a_un",
+     "field_offset" : 32,
+     "referenced_type" : "type-87"
+    }
+   ],
+   "linker_set_key" : "Elf32_auxv_t",
+   "name" : "Elf32_auxv_t",
+   "referenced_type" : "type-86",
+   "self_type" : "type-86",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS12Elf32_auxv_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "a_val",
+     "referenced_type" : "type-13"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "Elf32_auxv_t::(anonymous union at bionic/libc/include/elf.h:49:3) at bionic/libc/include/elf.h:49:3",
+   "name" : "Elf32_auxv_t::(anonymous union at bionic/libc/include/elf.h:49:3) at bionic/libc/include/elf.h:49:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-87",
+   "self_type" : "type-87",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTSN12Elf32_auxv_tUt_E"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "ch_type",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ch_reserved",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ch_size",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "ch_addralign",
+     "field_offset" : 128,
+     "referenced_type" : "type-28"
+    }
+   ],
+   "linker_set_key" : "Elf64_Chdr",
+   "name" : "Elf64_Chdr",
+   "referenced_type" : "type-91",
+   "self_type" : "type-91",
+   "size" : 24,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS10Elf64_Chdr"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "d_tag",
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "d_un",
+     "field_offset" : 64,
+     "referenced_type" : "type-69"
+    }
+   ],
+   "linker_set_key" : "Elf64_Dyn",
+   "name" : "Elf64_Dyn",
+   "referenced_type" : "type-68",
+   "self_type" : "type-68",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9Elf64_Dyn"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "d_val",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "d_ptr",
+     "referenced_type" : "type-28"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "Elf64_Dyn::(anonymous union at bionic/libc/kernel/uapi/linux/elf.h:126:3) at bionic/libc/kernel/uapi/linux/elf.h:126:3",
+   "name" : "Elf64_Dyn::(anonymous union at bionic/libc/kernel/uapi/linux/elf.h:126:3) at bionic/libc/kernel/uapi/linux/elf.h:126:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-69",
+   "self_type" : "type-69",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTSN9Elf64_DynUt_E"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "l_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_time_stamp",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_checksum",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_version",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_flags",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf64_Lib",
+   "name" : "Elf64_Lib",
+   "referenced_type" : "type-93",
+   "self_type" : "type-93",
+   "size" : 20,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS9Elf64_Lib"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "m_value",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "m_info",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "m_poffset",
+     "field_offset" : 128,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "m_repeat",
+     "field_offset" : 192,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "m_stride",
+     "field_offset" : 208,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "Elf64_Move",
+   "name" : "Elf64_Move",
+   "referenced_type" : "type-95",
+   "self_type" : "type-95",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS10Elf64_Move"
+  },
+  {
+   "alignment" : 2,
+   "fields" :
+   [
+    {
+     "field_name" : "si_boundto",
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "si_flags",
+     "field_offset" : 16,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "Elf64_Syminfo",
+   "name" : "Elf64_Syminfo",
+   "referenced_type" : "type-97",
+   "self_type" : "type-97",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf64_Syminfo"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vda_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vda_next",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf64_Verdaux",
+   "name" : "Elf64_Verdaux",
+   "referenced_type" : "type-101",
+   "self_type" : "type-101",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf64_Verdaux"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vd_version",
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_flags",
+     "field_offset" : 16,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_ndx",
+     "field_offset" : 32,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_cnt",
+     "field_offset" : 48,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vd_hash",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vd_aux",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vd_next",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf64_Verdef",
+   "name" : "Elf64_Verdef",
+   "referenced_type" : "type-100",
+   "self_type" : "type-100",
+   "size" : 20,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS12Elf64_Verdef"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vna_hash",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vna_flags",
+     "field_offset" : 32,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vna_other",
+     "field_offset" : 48,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vna_name",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vna_next",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf64_Vernaux",
+   "name" : "Elf64_Vernaux",
+   "referenced_type" : "type-105",
+   "self_type" : "type-105",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf64_Vernaux"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "vn_version",
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vn_cnt",
+     "field_offset" : 16,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "vn_file",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vn_aux",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "vn_next",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "Elf64_Verneed",
+   "name" : "Elf64_Verneed",
+   "referenced_type" : "type-104",
+   "self_type" : "type-104",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS13Elf64_Verneed"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "a_type",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "a_un",
+     "field_offset" : 64,
+     "referenced_type" : "type-89"
+    }
+   ],
+   "linker_set_key" : "Elf64_auxv_t",
+   "name" : "Elf64_auxv_t",
+   "referenced_type" : "type-88",
+   "self_type" : "type-88",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTS12Elf64_auxv_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "a_val",
+     "referenced_type" : "type-28"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "Elf64_auxv_t::(anonymous union at bionic/libc/include/elf.h:56:3) at bionic/libc/include/elf.h:56:3",
+   "name" : "Elf64_auxv_t::(anonymous union at bionic/libc/include/elf.h:56:3) at bionic/libc/include/elf.h:56:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-89",
+   "self_type" : "type-89",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/elf.h",
+   "unique_id" : "_ZTSN12Elf64_auxv_tUt_E"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fds_bits",
+     "referenced_type" : "type-53"
+    }
+   ],
+   "linker_set_key" : "__kernel_fd_set",
+   "name" : "__kernel_fd_set",
+   "referenced_type" : "type-52",
+   "self_type" : "type-52",
+   "size" : 128,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/posix_types.h",
+   "unique_id" : "_ZTS15__kernel_fd_set"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "val",
+     "referenced_type" : "type-55"
+    }
+   ],
+   "linker_set_key" : "__kernel_fsid_t",
+   "name" : "__kernel_fsid_t",
+   "referenced_type" : "type-54",
+   "self_type" : "type-54",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/asm-generic/posix_types.h",
+   "unique_id" : "_ZTS15__kernel_fsid_t"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "flags",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "reserved_addr",
+     "field_offset" : 64,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "reserved_size",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "relro_fd",
+     "field_offset" : 128,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "library_fd",
+     "field_offset" : 160,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "library_fd_offset",
+     "field_offset" : 192,
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "library_namespace",
+     "field_offset" : 256,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "android_dlextinfo",
+   "name" : "android_dlextinfo",
+   "referenced_type" : "type-31",
+   "self_type" : "type-31",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/android/dlext.h",
+   "unique_id" : "android_dlextinfo"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 32,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "div_t",
+   "name" : "div_t",
+   "referenced_type" : "type-15",
+   "self_type" : "type-15",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdlib.h",
+   "unique_id" : "div_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "dlpi_addr",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "dlpi_name",
+     "field_offset" : 32,
+     "referenced_type" : "type-50"
+    },
+    {
+     "field_name" : "dlpi_phdr",
+     "field_offset" : 64,
+     "referenced_type" : "type-107"
+    },
+    {
+     "field_name" : "dlpi_phnum",
+     "field_offset" : 96,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "dl_phdr_info",
+   "name" : "dl_phdr_info",
+   "referenced_type" : "type-106",
+   "self_type" : "type-106",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/link.h",
+   "unique_id" : "dl_phdr_info"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "d_tag",
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "d_un",
+     "field_offset" : 32,
+     "referenced_type" : "type-67"
+    }
+   ],
+   "linker_set_key" : "dynamic",
+   "name" : "dynamic",
+   "referenced_type" : "type-66",
+   "self_type" : "type-66",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS7dynamic"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "d_val",
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "d_ptr",
+     "referenced_type" : "type-13"
+    }
+   ],
+   "is_anonymous" : true,
+   "linker_set_key" : "dynamic::(anonymous union at bionic/libc/kernel/uapi/linux/elf.h:119:3) at bionic/libc/kernel/uapi/linux/elf.h:119:3",
+   "name" : "dynamic::(anonymous union at bionic/libc/kernel/uapi/linux/elf.h:119:3) at bionic/libc/kernel/uapi/linux/elf.h:119:3",
+   "record_kind" : "union",
+   "referenced_type" : "type-67",
+   "self_type" : "type-67",
+   "size" : 4,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTSN7dynamicUt_E"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "e_ident",
+     "referenced_type" : "type-78"
+    },
+    {
+     "field_name" : "e_type",
+     "field_offset" : 128,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_machine",
+     "field_offset" : 144,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_version",
+     "field_offset" : 160,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_entry",
+     "field_offset" : 192,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_phoff",
+     "field_offset" : 224,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_shoff",
+     "field_offset" : 256,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_flags",
+     "field_offset" : 288,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_ehsize",
+     "field_offset" : 320,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_phentsize",
+     "field_offset" : 336,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_phnum",
+     "field_offset" : 352,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_shentsize",
+     "field_offset" : 368,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_shnum",
+     "field_offset" : 384,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_shstrndx",
+     "field_offset" : 400,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "elf32_hdr",
+   "name" : "elf32_hdr",
+   "referenced_type" : "type-77",
+   "self_type" : "type-77",
+   "size" : 52,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9elf32_hdr"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "n_namesz",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "n_descsz",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "n_type",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "elf32_note",
+   "name" : "elf32_note",
+   "referenced_type" : "type-84",
+   "self_type" : "type-84",
+   "size" : 12,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf32_note"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "p_type",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_offset",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_vaddr",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_paddr",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_filesz",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_memsz",
+     "field_offset" : 160,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_flags",
+     "field_offset" : 192,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_align",
+     "field_offset" : 224,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "elf32_phdr",
+   "name" : "elf32_phdr",
+   "referenced_type" : "type-80",
+   "self_type" : "type-80",
+   "size" : 32,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf32_phdr"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "r_offset",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "r_info",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "elf32_rel",
+   "name" : "elf32_rel",
+   "referenced_type" : "type-70",
+   "self_type" : "type-70",
+   "size" : 8,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9elf32_rel"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "r_offset",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "r_info",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "r_addend",
+     "field_offset" : 64,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "elf32_rela",
+   "name" : "elf32_rela",
+   "referenced_type" : "type-72",
+   "self_type" : "type-72",
+   "size" : 12,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf32_rela"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "sh_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_type",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_flags",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_addr",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_offset",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_size",
+     "field_offset" : 160,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_link",
+     "field_offset" : 192,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_info",
+     "field_offset" : 224,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_addralign",
+     "field_offset" : 256,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_entsize",
+     "field_offset" : 288,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "elf32_shdr",
+   "name" : "elf32_shdr",
+   "referenced_type" : "type-82",
+   "self_type" : "type-82",
+   "size" : 40,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf32_shdr"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "st_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "st_value",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "st_size",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "st_info",
+     "field_offset" : 96,
+     "referenced_type" : "type-22"
+    },
+    {
+     "field_name" : "st_other",
+     "field_offset" : 104,
+     "referenced_type" : "type-22"
+    },
+    {
+     "field_name" : "st_shndx",
+     "field_offset" : 112,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "elf32_sym",
+   "name" : "elf32_sym",
+   "referenced_type" : "type-74",
+   "self_type" : "type-74",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9elf32_sym"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "e_ident",
+     "referenced_type" : "type-78"
+    },
+    {
+     "field_name" : "e_type",
+     "field_offset" : 128,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_machine",
+     "field_offset" : 144,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_version",
+     "field_offset" : 160,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_entry",
+     "field_offset" : 192,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "e_phoff",
+     "field_offset" : 256,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "e_shoff",
+     "field_offset" : 320,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "e_flags",
+     "field_offset" : 384,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "e_ehsize",
+     "field_offset" : 416,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_phentsize",
+     "field_offset" : 432,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_phnum",
+     "field_offset" : 448,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_shentsize",
+     "field_offset" : 464,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_shnum",
+     "field_offset" : 480,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "e_shstrndx",
+     "field_offset" : 496,
+     "referenced_type" : "type-42"
+    }
+   ],
+   "linker_set_key" : "elf64_hdr",
+   "name" : "elf64_hdr",
+   "referenced_type" : "type-79",
+   "self_type" : "type-79",
+   "size" : 64,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9elf64_hdr"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "n_namesz",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "n_descsz",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "n_type",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "elf64_note",
+   "name" : "elf64_note",
+   "referenced_type" : "type-85",
+   "self_type" : "type-85",
+   "size" : 12,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf64_note"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "p_type",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_flags",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "p_offset",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "p_vaddr",
+     "field_offset" : 128,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "p_paddr",
+     "field_offset" : 192,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "p_filesz",
+     "field_offset" : 256,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "p_memsz",
+     "field_offset" : 320,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "p_align",
+     "field_offset" : 384,
+     "referenced_type" : "type-28"
+    }
+   ],
+   "linker_set_key" : "elf64_phdr",
+   "name" : "elf64_phdr",
+   "referenced_type" : "type-81",
+   "self_type" : "type-81",
+   "size" : 56,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf64_phdr"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "r_offset",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "r_info",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    }
+   ],
+   "linker_set_key" : "elf64_rel",
+   "name" : "elf64_rel",
+   "referenced_type" : "type-71",
+   "self_type" : "type-71",
+   "size" : 16,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9elf64_rel"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "r_offset",
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "r_info",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "r_addend",
+     "field_offset" : 128,
+     "referenced_type" : "type-32"
+    }
+   ],
+   "linker_set_key" : "elf64_rela",
+   "name" : "elf64_rela",
+   "referenced_type" : "type-73",
+   "self_type" : "type-73",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf64_rela"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "sh_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_type",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_flags",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "sh_addr",
+     "field_offset" : 128,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "sh_offset",
+     "field_offset" : 192,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "sh_size",
+     "field_offset" : 256,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "sh_link",
+     "field_offset" : 320,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_info",
+     "field_offset" : 352,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sh_addralign",
+     "field_offset" : 384,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "sh_entsize",
+     "field_offset" : 448,
+     "referenced_type" : "type-28"
+    }
+   ],
+   "linker_set_key" : "elf64_shdr",
+   "name" : "elf64_shdr",
+   "referenced_type" : "type-83",
+   "self_type" : "type-83",
+   "size" : 64,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS10elf64_shdr"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "st_name",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "st_info",
+     "field_offset" : 32,
+     "referenced_type" : "type-22"
+    },
+    {
+     "field_name" : "st_other",
+     "field_offset" : 40,
+     "referenced_type" : "type-22"
+    },
+    {
+     "field_name" : "st_shndx",
+     "field_offset" : 48,
+     "referenced_type" : "type-42"
+    },
+    {
+     "field_name" : "st_value",
+     "field_offset" : 64,
+     "referenced_type" : "type-28"
+    },
+    {
+     "field_name" : "st_size",
+     "field_offset" : 128,
+     "referenced_type" : "type-28"
+    }
+   ],
+   "linker_set_key" : "elf64_sym",
+   "name" : "elf64_sym",
+   "referenced_type" : "type-75",
+   "self_type" : "type-75",
+   "size" : 24,
+   "source_file" : "/bionic/libc/kernel/uapi/linux/elf.h",
+   "unique_id" : "_ZTS9elf64_sym"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 32,
+     "referenced_type" : "type-17"
+    }
+   ],
+   "linker_set_key" : "ldiv_t",
+   "name" : "ldiv_t",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/stdlib.h",
+   "unique_id" : "ldiv_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "l_addr",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "l_name",
+     "field_offset" : 32,
+     "referenced_type" : "type-47"
+    },
+    {
+     "field_name" : "l_ld",
+     "field_offset" : 64,
+     "referenced_type" : "type-114"
+    },
+    {
+     "field_name" : "l_next",
+     "field_offset" : 96,
+     "referenced_type" : "type-115"
+    },
+    {
+     "field_name" : "l_prev",
+     "field_offset" : 128,
+     "referenced_type" : "type-115"
+    }
+   ],
+   "linker_set_key" : "link_map",
+   "name" : "link_map",
+   "referenced_type" : "type-113",
+   "self_type" : "type-113",
+   "size" : 20,
+   "source_file" : "/bionic/libc/include/link.h",
+   "unique_id" : "link_map"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "quot",
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "rem",
+     "field_offset" : 64,
+     "referenced_type" : "type-32"
+    }
+   ],
+   "linker_set_key" : "lldiv_t",
+   "name" : "lldiv_t",
+   "referenced_type" : "type-76",
+   "self_type" : "type-76",
+   "size" : 16,
+   "source_file" : "/bionic/libc/include/stdlib.h",
+   "unique_id" : "lldiv_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "arena",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ordblks",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "smblks",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "hblks",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "hblkhd",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "usmblks",
+     "field_offset" : 160,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "fsmblks",
+     "field_offset" : 192,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "uordblks",
+     "field_offset" : 224,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "fordblks",
+     "field_offset" : 256,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "keepcost",
+     "field_offset" : 288,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "mallinfo",
+   "name" : "mallinfo",
+   "referenced_type" : "type-119",
+   "self_type" : "type-119",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/malloc.h",
+   "unique_id" : "mallinfo"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "__clang_max_align_nonce1",
+     "referenced_type" : "type-32"
+    },
+    {
+     "field_name" : "__clang_max_align_nonce2",
+     "field_offset" : 64,
+     "referenced_type" : "type-57"
+    }
+   ],
+   "linker_set_key" : "max_align_t",
+   "name" : "max_align_t",
+   "referenced_type" : "type-56",
+   "self_type" : "type-56",
+   "size" : 16,
+   "source_file" : "/prebuilts/clang-tools/linux-x86/lib64/clang/9.0.1/include/__stddef_max_align_t.h",
+   "unique_id" : "_ZTS11max_align_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "flags",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "stack_base",
+     "field_offset" : 32,
+     "referenced_type" : "type-6"
+    },
+    {
+     "field_name" : "stack_size",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "guard_size",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sched_policy",
+     "field_offset" : 128,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "sched_priority",
+     "field_offset" : 160,
+     "referenced_type" : "type-1"
+    }
+   ],
+   "linker_set_key" : "pthread_attr_t",
+   "name" : "pthread_attr_t",
+   "referenced_type" : "type-58",
+   "self_type" : "type-58",
+   "size" : 24,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS14pthread_attr_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-37"
+    }
+   ],
+   "linker_set_key" : "pthread_barrier_t",
+   "name" : "pthread_barrier_t",
+   "referenced_type" : "type-59",
+   "self_type" : "type-59",
+   "size" : 32,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS17pthread_barrier_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-61"
+    }
+   ],
+   "linker_set_key" : "pthread_cond_t",
+   "name" : "pthread_cond_t",
+   "referenced_type" : "type-60",
+   "self_type" : "type-60",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS14pthread_cond_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-61"
+    }
+   ],
+   "linker_set_key" : "pthread_mutex_t",
+   "name" : "pthread_mutex_t",
+   "referenced_type" : "type-62",
+   "self_type" : "type-62",
+   "size" : 4,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS15pthread_mutex_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-64"
+    }
+   ],
+   "linker_set_key" : "pthread_rwlock_t",
+   "name" : "pthread_rwlock_t",
+   "referenced_type" : "type-63",
+   "self_type" : "type-63",
+   "size" : 40,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS16pthread_rwlock_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "__private",
+     "referenced_type" : "type-55"
+    }
+   ],
+   "linker_set_key" : "pthread_spinlock_t",
+   "name" : "pthread_spinlock_t",
+   "referenced_type" : "type-65",
+   "self_type" : "type-65",
+   "size" : 8,
+   "source_file" : "/bionic/libc/include/bits/pthread_types.h",
+   "unique_id" : "_ZTS18pthread_spinlock_t"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "r_version",
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "r_map",
+     "field_offset" : 32,
+     "referenced_type" : "type-115"
+    },
+    {
+     "field_name" : "r_brk",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "r_state",
+     "field_offset" : 96,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "r_ldbase",
+     "field_offset" : 128,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "r_debug",
+   "name" : "r_debug",
+   "referenced_type" : "type-116",
+   "self_type" : "type-116",
+   "size" : 20,
+   "source_file" : "/bionic/libc/include/link.h",
+   "unique_id" : "r_debug"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "regs",
+     "referenced_type" : "type-23"
+    },
+    {
+     "field_name" : "u_fpvalid",
+     "field_offset" : 576,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "u_tsize",
+     "field_offset" : 608,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "u_dsize",
+     "field_offset" : 640,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "u_ssize",
+     "field_offset" : 672,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "start_code",
+     "field_offset" : 704,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "start_stack",
+     "field_offset" : 736,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "signal",
+     "field_offset" : 768,
+     "referenced_type" : "type-17"
+    },
+    {
+     "field_name" : "reserved",
+     "field_offset" : 800,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "u_ar0",
+     "field_offset" : 832,
+     "referenced_type" : "type-34"
+    },
+    {
+     "field_name" : "magic",
+     "field_offset" : 864,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "u_comm",
+     "field_offset" : 896,
+     "referenced_type" : "type-35"
+    },
+    {
+     "field_name" : "u_debugreg",
+     "field_offset" : 1152,
+     "referenced_type" : "type-37"
+    },
+    {
+     "field_name" : "u_fp",
+     "field_offset" : 1408,
+     "referenced_type" : "type-18"
+    },
+    {
+     "field_name" : "u_fp0",
+     "field_offset" : 2336,
+     "referenced_type" : "type-38"
+    }
+   ],
+   "linker_set_key" : "user",
+   "name" : "user",
+   "referenced_type" : "type-33",
+   "self_type" : "type-33",
+   "size" : 296,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fpregs",
+     "referenced_type" : "type-19"
+    },
+    {
+     "field_name" : "fpsr",
+     "field_offset" : 768,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "fpcr",
+     "field_offset" : 800,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "ftype",
+     "field_offset" : 832,
+     "referenced_type" : "type-21"
+    },
+    {
+     "field_name" : "init_flag",
+     "field_offset" : 896,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "user_fpregs",
+   "name" : "user_fpregs",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 116,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_fpregs"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "sign1",
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "unused",
+     "field_offset" : 1,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "sign2",
+     "field_offset" : 16,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "exponent",
+     "field_offset" : 17,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "j",
+     "field_offset" : 31,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "mantissa1",
+     "field_offset" : 32,
+     "referenced_type" : "type-13"
+    },
+    {
+     "field_name" : "mantissa0",
+     "field_offset" : 64,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "linker_set_key" : "user_fpregs::fp_reg",
+   "name" : "user_fpregs::fp_reg",
+   "referenced_type" : "type-20",
+   "self_type" : "type-20",
+   "size" : 12,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_fpregs::fp_reg"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "uregs",
+     "referenced_type" : "type-24"
+    }
+   ],
+   "linker_set_key" : "user_regs",
+   "name" : "user_regs",
+   "referenced_type" : "type-23",
+   "self_type" : "type-23",
+   "size" : 72,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_regs"
+  },
+  {
+   "alignment" : 8,
+   "fields" :
+   [
+    {
+     "field_name" : "fpregs",
+     "referenced_type" : "type-27"
+    },
+    {
+     "field_name" : "fpscr",
+     "field_offset" : 2048,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "linker_set_key" : "user_vfp",
+   "name" : "user_vfp",
+   "referenced_type" : "type-26",
+   "self_type" : "type-26",
+   "size" : 264,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_vfp"
+  },
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "fpexc",
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "fpinst",
+     "field_offset" : 32,
+     "referenced_type" : "type-25"
+    },
+    {
+     "field_name" : "fpinst2",
+     "field_offset" : 64,
+     "referenced_type" : "type-25"
+    }
+   ],
+   "linker_set_key" : "user_vfp_exc",
+   "name" : "user_vfp_exc",
+   "referenced_type" : "type-29",
+   "self_type" : "type-29",
+   "size" : 12,
+   "source_file" : "/bionic/libc/include/sys/user.h",
+   "unique_id" : "user_vfp_exc"
+  }
+ ],
+ "rvalue_reference_types" : []
+}

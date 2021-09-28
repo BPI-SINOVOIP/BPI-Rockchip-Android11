@@ -1,0 +1,1577 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-19",
+   "self_type" : "type-19",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-18",
+   "self_type" : "type-18",
+   "size" : 4
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl10onFirstRefEv"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl13getPropertiesENSt3__18functionIFviRKNS2_15ISoundTriggerHw10PropertiesEEEE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl14loadSoundModelERKNS2_15ISoundTriggerHw10SoundModelERKNS_2spINS2_23ISoundTriggerHwCallbackEEEiNSt3__18functionIFviiEEE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl15stopRecognitionEi"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16convertUuidToHalEP12audio_uuid_sPKNS0_5audio6common4V2_04UuidE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16doLoadSoundModelERKNS2_15ISoundTriggerHw10SoundModelENS_2spINS4_16SoundModelClientEEE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16startRecognitionEiRKNS2_15ISoundTriggerHw17RecognitionConfigE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16unloadSoundModelEi"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl17nextUniqueModelIdEv"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl18convertUuidFromHalEPNS0_5audio6common4V2_04UuidEPK12audio_uuid_s"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl18soundModelCallbackEP25sound_trigger_model_eventPv"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl19recognitionCallbackEP31sound_trigger_recognition_eventPv"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl19stopAllRecognitionsEv"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_018soundModelCallbackEP25sound_trigger_model_event"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_019recognitionCallbackEP31sound_trigger_recognition_event"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20loadPhraseSoundModelERKNS2_15ISoundTriggerHw16PhraseSoundModelERKNS_2spINS2_23ISoundTriggerHwCallbackEEEiNSt3__18functionIFviiEEE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl22convertSoundModelToHalEPKNS2_15ISoundTriggerHw10SoundModelE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl24convertPropertiesFromHalEPNS2_15ISoundTriggerHw10PropertiesEPK24sound_trigger_properties"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl25convertTriggerPhraseToHalEP20sound_trigger_phrasePKNS2_15ISoundTriggerHw6PhraseE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl29convertRecognitionConfigToHalEPKNS2_15ISoundTriggerHw17RecognitionConfigE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl29convertSoundModelEventFromHalEPNS2_23ISoundTriggerHwCallback10ModelEventEPK25sound_trigger_model_event"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl30convertRecognitionEventFromHalEPNS2_23ISoundTriggerHwCallback16RecognitionEventEPK31sound_trigger_recognition_event"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl34convertPhraseRecognitionExtraToHalEP38sound_trigger_phrase_recognition_extraPKNS2_22PhraseRecognitionExtraE"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl35convertPhaseRecognitionEventFromHalEPNS2_23ISoundTriggerHwCallback22PhraseRecognitionEventEPK38sound_trigger_phrase_recognition_event"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl36convertPhraseRecognitionExtraFromHalEPNS2_22PhraseRecognitionExtraEPK38sound_trigger_phrase_recognition_extra"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplC1Ev"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplC2Ev"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD0Ev"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD1Ev"
+  },
+  {
+   "name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD2Ev"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE10do_compareEPKvSD_"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE10do_destroyEPvj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE12do_constructEPvj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE15do_move_forwardEPvPKvj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE16do_move_backwardEPvPKvj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE7do_copyEPvPKvj"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNK7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEE8do_splatEPvPKvj"
+  }
+ ],
+ "elf_objects" :
+ [
+  {
+   "binding" : "weak",
+   "name" : "_ZTVN7android12SortedVectorINS_16key_value_pair_tIiNS_2spINS_8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientEEEEEEE"
+  },
+  {
+   "name" : "_ZTVN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_0E"
+  },
+  {
+   "name" : "_ZTVN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplE"
+  }
+ ],
+ "enum_types" : [],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::onFirstRef",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl10onFirstRefEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::getProperties",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl13getPropertiesENSt3__18functionIFviRKNS2_15ISoundTriggerHw10PropertiesEEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-100"
+    }
+   ],
+   "return_type" : "type-99",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::loadSoundModel",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl14loadSoundModelERKNS2_15ISoundTriggerHw10SoundModelERKNS_2spINS2_23ISoundTriggerHwCallbackEEEiNSt3__18functionIFviiEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-41"
+    },
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-102"
+    }
+   ],
+   "return_type" : "type-101",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::stopRecognition",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl15stopRecognitionEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-103",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertUuidToHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16convertUuidToHalEP12audio_uuid_sPKNS0_5audio6common4V2_04UuidE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-67"
+    },
+    {
+     "referenced_type" : "type-71"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::doLoadSoundModel",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16doLoadSoundModelERKNS2_15ISoundTriggerHw10SoundModelENS_2spINS4_16SoundModelClientEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-41"
+    },
+    {
+     "referenced_type" : "type-104"
+    }
+   ],
+   "return_type" : "type-19",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::startRecognition",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16startRecognitionEiRKNS2_15ISoundTriggerHw17RecognitionConfigE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-50"
+    }
+   ],
+   "return_type" : "type-105",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::unloadSoundModel",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16unloadSoundModelEi",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-106",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::nextUniqueModelId",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl17nextUniqueModelIdEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-18",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertUuidFromHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl18convertUuidFromHalEPNS0_5audio6common4V2_04UuidEPK12audio_uuid_s",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-62"
+    },
+    {
+     "referenced_type" : "type-66"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::soundModelCallback",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl18soundModelCallbackEP25sound_trigger_model_eventPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-60"
+    },
+    {
+     "referenced_type" : "type-98"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::recognitionCallback",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl19recognitionCallbackEP31sound_trigger_recognition_eventPv",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-58"
+    },
+    {
+     "referenced_type" : "type-98"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::stopAllRecognitions",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl19stopAllRecognitionsEv",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-107",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient_2_0::soundModelCallback",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_018soundModelCallbackEP25sound_trigger_model_event",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-57"
+    },
+    {
+     "referenced_type" : "type-60"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient_2_0::recognitionCallback",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_019recognitionCallbackEP31sound_trigger_recognition_event",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-57"
+    },
+    {
+     "referenced_type" : "type-58"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::loadPhraseSoundModel",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20loadPhraseSoundModelERKNS2_15ISoundTriggerHw16PhraseSoundModelERKNS_2spINS2_23ISoundTriggerHwCallbackEEEiNSt3__18functionIFviiEEE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-47"
+    },
+    {
+     "referenced_type" : "type-44"
+    },
+    {
+     "referenced_type" : "type-19"
+    },
+    {
+     "referenced_type" : "type-111"
+    }
+   ],
+   "return_type" : "type-110",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertSoundModelToHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl22convertSoundModelToHalEPKNS2_15ISoundTriggerHw10SoundModelE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-84"
+    }
+   ],
+   "return_type" : "type-82",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertPropertiesFromHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl24convertPropertiesFromHalEPNS2_15ISoundTriggerHw10PropertiesEPK24sound_trigger_properties",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-72"
+    },
+    {
+     "referenced_type" : "type-76"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertTriggerPhraseToHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl25convertTriggerPhraseToHalEP20sound_trigger_phrasePKNS2_15ISoundTriggerHw6PhraseE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-77"
+    },
+    {
+     "referenced_type" : "type-81"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertRecognitionConfigToHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl29convertRecognitionConfigToHalEPKNS2_15ISoundTriggerHw17RecognitionConfigE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-92"
+    }
+   ],
+   "return_type" : "type-90",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertSoundModelEventFromHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl29convertSoundModelEventFromHalEPNS2_23ISoundTriggerHwCallback10ModelEventEPK25sound_trigger_model_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-34"
+    },
+    {
+     "referenced_type" : "type-38"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertRecognitionEventFromHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl30convertRecognitionEventFromHalEPNS2_23ISoundTriggerHwCallback16RecognitionEventEPK31sound_trigger_recognition_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-29"
+    },
+    {
+     "referenced_type" : "type-33"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertPhraseRecognitionExtraToHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl34convertPhraseRecognitionExtraToHalEP38sound_trigger_phrase_recognition_extraPKNS2_22PhraseRecognitionExtraE",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    },
+    {
+     "referenced_type" : "type-85"
+    },
+    {
+     "referenced_type" : "type-89"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertPhaseRecognitionEventFromHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl35convertPhaseRecognitionEventFromHalEPNS2_23ISoundTriggerHwCallback22PhraseRecognitionEventEPK38sound_trigger_phrase_recognition_event",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-24"
+    },
+    {
+     "referenced_type" : "type-28"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "private",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::convertPhraseRecognitionExtraFromHal",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl36convertPhraseRecognitionExtraFromHalEPNS2_22PhraseRecognitionExtraEPK38sound_trigger_phrase_recognition_extra",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-93"
+    },
+    {
+     "referenced_type" : "type-97"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundTriggerHalImpl",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplC1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundTriggerHalImpl",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplC2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::~SoundTriggerHalImpl",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD0Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::~SoundTriggerHalImpl",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD1Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "access" : "protected",
+   "function_name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::~SoundTriggerHalImpl",
+   "linker_set_key" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD2Ev",
+   "parameters" :
+   [
+    {
+     "is_this_ptr" : true,
+     "referenced_type" : "type-13"
+    }
+   ],
+   "return_type" : "type-12",
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::PhraseSoundModel &",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::PhraseSoundModel &",
+   "referenced_type" : "type-45",
+   "self_type" : "type-47",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::RecognitionConfig &",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::RecognitionConfig &",
+   "referenced_type" : "type-48",
+   "self_type" : "type-50",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::SoundModel &",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::SoundModel &",
+   "referenced_type" : "type-39",
+   "self_type" : "type-41",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::sp<android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback> &",
+   "name" : "const android::sp<android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback> &",
+   "referenced_type" : "type-42",
+   "self_type" : "type-44",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  }
+ ],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::audio::common::V2_0::Uuid *",
+   "name" : "android::hardware::audio::common::V2_0::Uuid *",
+   "referenced_type" : "type-63",
+   "self_type" : "type-62",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHw *",
+   "name" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHw *",
+   "referenced_type" : "type-15",
+   "self_type" : "type-14",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHw::Properties *",
+   "name" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHw::Properties *",
+   "referenced_type" : "type-73",
+   "self_type" : "type-72",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback::ModelEvent *",
+   "name" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback::ModelEvent *",
+   "referenced_type" : "type-35",
+   "self_type" : "type-34",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback::PhraseRecognitionEvent *",
+   "name" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback::PhraseRecognitionEvent *",
+   "referenced_type" : "type-25",
+   "self_type" : "type-24",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback::RecognitionEvent *",
+   "name" : "android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback::RecognitionEvent *",
+   "referenced_type" : "type-30",
+   "self_type" : "type-29",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::PhraseRecognitionExtra *",
+   "name" : "android::hardware::soundtrigger::V2_0::PhraseRecognitionExtra *",
+   "referenced_type" : "type-94",
+   "self_type" : "type-93",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl *",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl *",
+   "referenced_type" : "type-1",
+   "self_type" : "type-13",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient *",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient *",
+   "referenced_type" : "type-16",
+   "self_type" : "type-21",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient_2_0 *",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient_2_0 *",
+   "referenced_type" : "type-55",
+   "self_type" : "type-57",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::TrampolineSoundTriggerHw_2_0 *",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::TrampolineSoundTriggerHw_2_0 *",
+   "referenced_type" : "type-51",
+   "self_type" : "type-54",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "audio_uuid_s *",
+   "name" : "audio_uuid_s *",
+   "referenced_type" : "type-68",
+   "self_type" : "type-67",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::audio::common::V2_0::Uuid *",
+   "name" : "const android::hardware::audio::common::V2_0::Uuid *",
+   "referenced_type" : "type-69",
+   "self_type" : "type-71",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::Phrase *",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::Phrase *",
+   "referenced_type" : "type-79",
+   "self_type" : "type-81",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::RecognitionConfig *",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::RecognitionConfig *",
+   "referenced_type" : "type-48",
+   "self_type" : "type-92",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::SoundModel *",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::SoundModel *",
+   "referenced_type" : "type-39",
+   "self_type" : "type-84",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::PhraseRecognitionExtra *",
+   "name" : "const android::hardware::soundtrigger::V2_0::PhraseRecognitionExtra *",
+   "referenced_type" : "type-87",
+   "self_type" : "type-89",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient *",
+   "name" : "const android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient *",
+   "referenced_type" : "type-22",
+   "self_type" : "type-23",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const audio_uuid_s *",
+   "name" : "const audio_uuid_s *",
+   "referenced_type" : "type-64",
+   "self_type" : "type-66",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const char *",
+   "name" : "const char *",
+   "referenced_type" : "type-3",
+   "self_type" : "type-2",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const sound_trigger_model_event *",
+   "name" : "const sound_trigger_model_event *",
+   "referenced_type" : "type-36",
+   "self_type" : "type-38",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const sound_trigger_phrase_recognition_event *",
+   "name" : "const sound_trigger_phrase_recognition_event *",
+   "referenced_type" : "type-26",
+   "self_type" : "type-28",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const sound_trigger_phrase_recognition_extra *",
+   "name" : "const sound_trigger_phrase_recognition_extra *",
+   "referenced_type" : "type-95",
+   "self_type" : "type-97",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const sound_trigger_properties *",
+   "name" : "const sound_trigger_properties *",
+   "referenced_type" : "type-74",
+   "self_type" : "type-76",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "const sound_trigger_recognition_event *",
+   "name" : "const sound_trigger_recognition_event *",
+   "referenced_type" : "type-31",
+   "self_type" : "type-33",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_hw_device *",
+   "name" : "sound_trigger_hw_device *",
+   "referenced_type" : "type-6",
+   "self_type" : "type-5",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_model_event *",
+   "name" : "sound_trigger_model_event *",
+   "referenced_type" : "type-61",
+   "self_type" : "type-60",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_phrase *",
+   "name" : "sound_trigger_phrase *",
+   "referenced_type" : "type-78",
+   "self_type" : "type-77",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_phrase_recognition_extra *",
+   "name" : "sound_trigger_phrase_recognition_extra *",
+   "referenced_type" : "type-86",
+   "self_type" : "type-85",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_recognition_config *",
+   "name" : "sound_trigger_recognition_config *",
+   "referenced_type" : "type-91",
+   "self_type" : "type-90",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_recognition_event *",
+   "name" : "sound_trigger_recognition_event *",
+   "referenced_type" : "type-59",
+   "self_type" : "type-58",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "sound_trigger_sound_model *",
+   "name" : "sound_trigger_sound_model *",
+   "referenced_type" : "type-83",
+   "self_type" : "type-82",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "void *",
+   "name" : "void *",
+   "referenced_type" : "type-12",
+   "self_type" : "type-98",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  }
+ ],
+ "qualified_types" :
+ [
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::audio::common::V2_0::Uuid",
+   "name" : "const android::hardware::audio::common::V2_0::Uuid",
+   "referenced_type" : "type-70",
+   "self_type" : "type-69",
+   "size" : 16,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::Phrase",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::Phrase",
+   "referenced_type" : "type-80",
+   "self_type" : "type-79",
+   "size" : 56,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::PhraseSoundModel",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::PhraseSoundModel",
+   "referenced_type" : "type-46",
+   "self_type" : "type-45",
+   "size" : 72,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::RecognitionConfig",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::RecognitionConfig",
+   "referenced_type" : "type-49",
+   "self_type" : "type-48",
+   "size" : 48,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::SoundModel",
+   "name" : "const android::hardware::soundtrigger::V2_0::ISoundTriggerHw::SoundModel",
+   "referenced_type" : "type-40",
+   "self_type" : "type-39",
+   "size" : 56,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::PhraseRecognitionExtra",
+   "name" : "const android::hardware::soundtrigger::V2_0::PhraseRecognitionExtra",
+   "referenced_type" : "type-88",
+   "self_type" : "type-87",
+   "size" : 32,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient",
+   "name" : "const android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient",
+   "referenced_type" : "type-16",
+   "self_type" : "type-22",
+   "size" : 20,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const android::sp<android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback>",
+   "name" : "const android::sp<android::hardware::soundtrigger::V2_0::ISoundTriggerHwCallback>",
+   "referenced_type" : "type-43",
+   "self_type" : "type-42",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const audio_uuid_s",
+   "name" : "const audio_uuid_s",
+   "referenced_type" : "type-65",
+   "self_type" : "type-64",
+   "size" : 16,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 1,
+   "is_const" : true,
+   "linker_set_key" : "const char",
+   "name" : "const char",
+   "referenced_type" : "type-4",
+   "self_type" : "type-3",
+   "size" : 1,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const sound_trigger_model_event",
+   "name" : "const sound_trigger_model_event",
+   "referenced_type" : "type-37",
+   "self_type" : "type-36",
+   "size" : 16,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const sound_trigger_phrase_recognition_event",
+   "name" : "const sound_trigger_phrase_recognition_event",
+   "referenced_type" : "type-27",
+   "self_type" : "type-26",
+   "size" : 1080,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const sound_trigger_phrase_recognition_extra",
+   "name" : "const sound_trigger_phrase_recognition_extra",
+   "referenced_type" : "type-96",
+   "self_type" : "type-95",
+   "size" : 96,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const sound_trigger_properties",
+   "name" : "const sound_trigger_properties",
+   "referenced_type" : "type-75",
+   "self_type" : "type-74",
+   "size" : 180,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 8,
+   "is_const" : true,
+   "linker_set_key" : "const sound_trigger_recognition_event",
+   "name" : "const sound_trigger_recognition_event",
+   "referenced_type" : "type-32",
+   "self_type" : "type-31",
+   "size" : 112,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_const" : true,
+   "linker_set_key" : "const unsigned int",
+   "name" : "const unsigned int",
+   "referenced_type" : "type-18",
+   "self_type" : "type-17",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  },
+  {
+   "alignment" : 4,
+   "is_volatile" : true,
+   "linker_set_key" : "volatile std::atomic<unsigned int>",
+   "name" : "volatile std::atomic<unsigned int>",
+   "referenced_type" : "type-8",
+   "self_type" : "type-7",
+   "size" : 4,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h"
+  }
+ ],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-11"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mModuleName",
+     "field_offset" : 64,
+     "referenced_type" : "type-2"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mHwDevice",
+     "field_offset" : 96,
+     "referenced_type" : "type-5"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mNextModelId",
+     "field_offset" : 128,
+     "referenced_type" : "type-7"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mClients",
+     "field_offset" : 160,
+     "referenced_type" : "type-9"
+    },
+    {
+     "access" : "private",
+     "field_name" : "mLock",
+     "field_offset" : 352,
+     "referenced_type" : "type-10"
+    }
+   ],
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl",
+   "record_kind" : "class",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 48,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h",
+   "unique_id" : "_ZTSN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImplD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl10onFirstRefEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase15onLastStrongRefEPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase20onIncStrongAttemptedEjPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase13onLastWeakRefEPKv"
+    }
+   ]
+  },
+  {
+   "access" : "protected",
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-20"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "protected",
+     "field_name" : "mId",
+     "field_offset" : 64,
+     "referenced_type" : "type-17"
+    },
+    {
+     "access" : "protected",
+     "field_name" : "mHalHandle",
+     "field_offset" : 96,
+     "referenced_type" : "type-19"
+    },
+    {
+     "access" : "protected",
+     "field_name" : "mCookie",
+     "field_offset" : 128,
+     "referenced_type" : "type-19"
+    }
+   ],
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient",
+   "record_kind" : "class",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 20,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h",
+   "unique_id" : "_ZTSN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientE",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientD1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClientD0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase10onFirstRefEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase15onLastStrongRefEPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase20onIncStrongAttemptedEjPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase13onLastWeakRefEPKv"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClient19recognitionCallbackEP31sound_trigger_recognition_event"
+    },
+    {
+     "is_pure" : true,
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl16SoundModelClient18soundModelCallbackEP25sound_trigger_model_event"
+    }
+   ]
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-16"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mCallback",
+     "field_offset" : 160,
+     "referenced_type" : "type-56"
+    }
+   ],
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient_2_0",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::SoundModelClient_2_0",
+   "record_kind" : "class",
+   "referenced_type" : "type-55",
+   "self_type" : "type-55",
+   "size" : 24,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h",
+   "unique_id" : "_ZTSN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_0E",
+   "vtable_components" :
+   [
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_0E"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_0D1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_0D0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase10onFirstRefEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase15onLastStrongRefEPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase20onIncStrongAttemptedEjPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase13onLastWeakRefEPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_019recognitionCallbackEP31sound_trigger_recognition_event"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl20SoundModelClient_2_018soundModelCallbackEP25sound_trigger_model_event"
+    }
+   ]
+  },
+  {
+   "access" : "private",
+   "alignment" : 4,
+   "base_specifiers" :
+   [
+    {
+     "referenced_type" : "type-53"
+    }
+   ],
+   "fields" :
+   [
+    {
+     "access" : "private",
+     "field_name" : "mImpl",
+     "field_offset" : 32,
+     "referenced_type" : "type-52"
+    }
+   ],
+   "linker_set_key" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::TrampolineSoundTriggerHw_2_0",
+   "name" : "android::hardware::soundtrigger::V2_0::implementation::SoundTriggerHalImpl::TrampolineSoundTriggerHw_2_0",
+   "referenced_type" : "type-51",
+   "self_type" : "type-51",
+   "size" : 16,
+   "source_file" : "/hardware/interfaces/soundtrigger/2.0/default/SoundTriggerHalImpl.h",
+   "unique_id" : "_ZTSN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0E",
+   "vtable_components" :
+   [
+    {
+     "component_value" : 8,
+     "kind" : "vbase_offset"
+    },
+    {
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0E"
+    },
+    {
+     "mangled_component_name" : "_ZNK7android8hardware12soundtrigger4V2_015ISoundTriggerHw8isRemoteEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw14interfaceChainENSt3__18functionIFvRKNS0_8hidl_vecINS0_11hidl_stringEEEEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw5debugERKNS0_11hidl_handleERKNS0_8hidl_vecINS0_11hidl_stringEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw19interfaceDescriptorENSt3__18functionIFvRKNS0_11hidl_stringEEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw12getHashChainENSt3__18functionIFvRKNS0_8hidl_vecINS0_10hidl_arrayIhLj32EJEEEEEEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw21setHALInstrumentationEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw11linkToDeathERKNS_2spINS0_20hidl_death_recipientEEEy"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw4pingEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw12getDebugInfoENSt3__18functionIFvRKNS_4hidl4base4V1_09DebugInfoEEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw21notifySyspropsChangedEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_015ISoundTriggerHw13unlinkToDeathERKNS_2spINS0_20hidl_death_recipientEEE"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0D1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0D0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_013getPropertiesENSt3__18functionIFviRKNS2_15ISoundTriggerHw10PropertiesEEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_014loadSoundModelERKNS2_15ISoundTriggerHw10SoundModelERKNS_2spINS2_23ISoundTriggerHwCallbackEEEiNSt3__18functionIFviiEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_020loadPhraseSoundModelERKNS2_15ISoundTriggerHw16PhraseSoundModelERKNS_2spINS2_23ISoundTriggerHwCallbackEEEiNSt3__18functionIFviiEEE"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_016unloadSoundModelEi"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_016startRecognitionEiRKNS2_15ISoundTriggerHw17RecognitionConfigERKNS_2spINS2_23ISoundTriggerHwCallbackEEEi"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_015stopRecognitionEi"
+    },
+    {
+     "mangled_component_name" : "_ZN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_019stopAllRecognitionsEv"
+    },
+    {
+     "kind" : "vcall_offset"
+    },
+    {
+     "kind" : "vcall_offset"
+    },
+    {
+     "kind" : "vcall_offset"
+    },
+    {
+     "kind" : "vcall_offset"
+    },
+    {
+     "component_value" : -8,
+     "kind" : "vcall_offset"
+    },
+    {
+     "component_value" : -8,
+     "kind" : "offset_to_top"
+    },
+    {
+     "kind" : "rtti",
+     "mangled_component_name" : "_ZTIN7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0E"
+    },
+    {
+     "kind" : "complete_dtor_pointer",
+     "mangled_component_name" : "_ZTv0_n12_N7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0D1Ev"
+    },
+    {
+     "kind" : "deleting_dtor_pointer",
+     "mangled_component_name" : "_ZTv0_n12_N7android8hardware12soundtrigger4V2_014implementation19SoundTriggerHalImpl28TrampolineSoundTriggerHw_2_0D0Ev"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase10onFirstRefEv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase15onLastStrongRefEPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase20onIncStrongAttemptedEjPKv"
+    },
+    {
+     "mangled_component_name" : "_ZN7android7RefBase13onLastWeakRefEPKv"
+    }
+   ]
+  }
+ ],
+ "rvalue_reference_types" : []
+}

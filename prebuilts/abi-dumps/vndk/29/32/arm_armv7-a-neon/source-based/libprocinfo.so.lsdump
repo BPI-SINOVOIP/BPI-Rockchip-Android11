@@ -1,0 +1,338 @@
+{
+ "array_types" : [],
+ "builtin_types" :
+ [
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "bool",
+   "name" : "bool",
+   "referenced_type" : "type-17",
+   "self_type" : "type-17",
+   "size" : 1
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "char",
+   "name" : "char",
+   "referenced_type" : "type-5",
+   "self_type" : "type-5",
+   "size" : 1
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "double",
+   "name" : "double",
+   "referenced_type" : "type-3",
+   "self_type" : "type-3",
+   "size" : 8
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "int",
+   "name" : "int",
+   "referenced_type" : "type-16",
+   "self_type" : "type-16",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "linker_set_key" : "long",
+   "name" : "long",
+   "referenced_type" : "type-13",
+   "self_type" : "type-13",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "linker_set_key" : "long double",
+   "name" : "long double",
+   "referenced_type" : "type-11",
+   "self_type" : "type-11",
+   "size" : 8
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "linker_set_key" : "long long",
+   "name" : "long long",
+   "referenced_type" : "type-8",
+   "self_type" : "type-8",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "linker_set_key" : "short",
+   "name" : "short",
+   "referenced_type" : "type-10",
+   "self_type" : "type-10",
+   "size" : 2
+  },
+  {
+   "alignment" : 1,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned char",
+   "name" : "unsigned char",
+   "referenced_type" : "type-6",
+   "self_type" : "type-6",
+   "size" : 1
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned int",
+   "name" : "unsigned int",
+   "referenced_type" : "type-2",
+   "self_type" : "type-2",
+   "size" : 4
+  },
+  {
+   "alignment" : 4,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long",
+   "name" : "unsigned long",
+   "referenced_type" : "type-9",
+   "self_type" : "type-9",
+   "size" : 4
+  },
+  {
+   "alignment" : 8,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned long long",
+   "name" : "unsigned long long",
+   "referenced_type" : "type-12",
+   "self_type" : "type-12",
+   "size" : 8
+  },
+  {
+   "alignment" : 2,
+   "is_integral" : true,
+   "is_unsigned" : true,
+   "linker_set_key" : "unsigned short",
+   "name" : "unsigned short",
+   "referenced_type" : "type-7",
+   "self_type" : "type-7",
+   "size" : 2
+  },
+  {
+   "linker_set_key" : "void",
+   "name" : "void",
+   "referenced_type" : "type-4",
+   "self_type" : "type-4"
+  }
+ ],
+ "elf_functions" :
+ [
+  {
+   "name" : "_ZN7android8procinfo14GetProcessInfoEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "name" : "_ZN7android8procinfo27GetProcessInfoFromProcPidFdEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE"
+  },
+  {
+   "binding" : "weak",
+   "name" : "_ZNSt3__124__put_character_sequenceIcNS_11char_traitsIcEEEERNS_13basic_ostreamIT_T0_EES7_PKS4_j"
+  },
+  {
+   "name" : "__aeabi_memclr"
+  },
+  {
+   "name" : "__aeabi_memclr4"
+  },
+  {
+   "name" : "__aeabi_memclr8"
+  },
+  {
+   "name" : "__aeabi_memcpy"
+  },
+  {
+   "name" : "__aeabi_memcpy4"
+  },
+  {
+   "name" : "__aeabi_memcpy8"
+  },
+  {
+   "name" : "__aeabi_memset"
+  },
+  {
+   "name" : "__aeabi_memset4"
+  },
+  {
+   "name" : "__aeabi_memset8"
+  }
+ ],
+ "elf_objects" : [],
+ "enum_types" :
+ [
+  {
+   "alignment" : 4,
+   "enum_fields" :
+   [
+    {
+     "enum_field_value" : 0,
+     "name" : "android::procinfo::kProcessStateUnknown"
+    },
+    {
+     "enum_field_value" : 1,
+     "name" : "android::procinfo::kProcessStateRunning"
+    },
+    {
+     "enum_field_value" : 2,
+     "name" : "android::procinfo::kProcessStateSleeping"
+    },
+    {
+     "enum_field_value" : 3,
+     "name" : "android::procinfo::kProcessStateUninterruptibleWait"
+    },
+    {
+     "enum_field_value" : 4,
+     "name" : "android::procinfo::kProcessStateStopped"
+    },
+    {
+     "enum_field_value" : 5,
+     "name" : "android::procinfo::kProcessStateZombie"
+    }
+   ],
+   "linker_set_key" : "android::procinfo::ProcessState",
+   "name" : "android::procinfo::ProcessState",
+   "referenced_type" : "type-1",
+   "self_type" : "type-1",
+   "size" : 4,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h",
+   "underlying_type" : "type-2",
+   "unique_id" : "_ZTSN7android8procinfo12ProcessStateE"
+  }
+ ],
+ "function_types" : [],
+ "functions" :
+ [
+  {
+   "function_name" : "android::procinfo::GetProcessInfo",
+   "linker_set_key" : "_ZN7android8procinfo14GetProcessInfoEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  },
+  {
+   "function_name" : "android::procinfo::GetProcessInfoFromProcPidFd",
+   "linker_set_key" : "_ZN7android8procinfo27GetProcessInfoFromProcPidFdEiPNS0_11ProcessInfoEPNSt3__112basic_stringIcNS3_11char_traitsIcEENS3_9allocatorIcEEEE",
+   "parameters" :
+   [
+    {
+     "referenced_type" : "type-16"
+    },
+    {
+     "referenced_type" : "type-18"
+    },
+    {
+     "default_arg" : true,
+     "referenced_type" : "type-19"
+    }
+   ],
+   "return_type" : "type-17",
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  }
+ ],
+ "global_vars" : [],
+ "lvalue_reference_types" : [],
+ "pointer_types" :
+ [
+  {
+   "alignment" : 4,
+   "linker_set_key" : "android::procinfo::ProcessInfo *",
+   "name" : "android::procinfo::ProcessInfo *",
+   "referenced_type" : "type-14",
+   "self_type" : "type-18",
+   "size" : 4,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  },
+  {
+   "alignment" : 4,
+   "linker_set_key" : "std::basic_string<char, std::char_traits<char>, std::allocator<char> > *",
+   "name" : "std::basic_string<char, std::char_traits<char>, std::allocator<char> > *",
+   "referenced_type" : "type-20",
+   "self_type" : "type-19",
+   "size" : 4,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h"
+  }
+ ],
+ "qualified_types" : [],
+ "record_types" :
+ [
+  {
+   "alignment" : 4,
+   "fields" :
+   [
+    {
+     "field_name" : "name",
+     "referenced_type" : "type-15"
+    },
+    {
+     "field_name" : "state",
+     "field_offset" : 96,
+     "referenced_type" : "type-1"
+    },
+    {
+     "field_name" : "tid",
+     "field_offset" : 128,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "pid",
+     "field_offset" : 160,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "ppid",
+     "field_offset" : 192,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "tracer",
+     "field_offset" : 224,
+     "referenced_type" : "type-16"
+    },
+    {
+     "field_name" : "uid",
+     "field_offset" : 256,
+     "referenced_type" : "type-2"
+    },
+    {
+     "field_name" : "gid",
+     "field_offset" : 288,
+     "referenced_type" : "type-2"
+    }
+   ],
+   "linker_set_key" : "android::procinfo::ProcessInfo",
+   "name" : "android::procinfo::ProcessInfo",
+   "referenced_type" : "type-14",
+   "self_type" : "type-14",
+   "size" : 40,
+   "source_file" : "/system/core/libprocinfo/include/procinfo/process.h",
+   "unique_id" : "_ZTSN7android8procinfo11ProcessInfoE"
+  }
+ ],
+ "rvalue_reference_types" : []
+}
