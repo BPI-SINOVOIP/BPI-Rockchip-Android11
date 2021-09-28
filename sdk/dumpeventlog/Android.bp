@@ -1,0 +1,12 @@
+// Copyright 2007 The Android Open Source Project
+//
+
+java_binary_host {
+    name: "dumpeventlog",
+
+    srcs: ["src/**/*.java"],
+
+    wrapper: "etc/dumpeventlog",
+    main_class: "com.android.dumpeventlog.DumpEventLog",
+    libs: ["ddmlib-prebuilt"],
+}
