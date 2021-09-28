@@ -1,0 +1,13 @@
+filegroup {
+    name: "services.appwidget-sources",
+    srcs: ["java/**/*.java"],
+    path: "java",
+    visibility: ["//frameworks/base/services"],
+}
+
+java_library_static {
+    name: "services.appwidget",
+    defaults: ["services_defaults"],
+    srcs: [":services.appwidget-sources"],
+    libs: ["services.core"],
+}

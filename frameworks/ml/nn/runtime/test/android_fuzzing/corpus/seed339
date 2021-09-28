@@ -1,0 +1,907 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 128
+      }
+      scale: 0.000274334714
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3395069552
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0.0235284772
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 28
+      }
+      scale: 0.0235284772
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 256
+      }
+      scale: 0.00083225267
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 494588775
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+      }
+      scale: 0.0235284772
+      zero_point: 0
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2471168233
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+        dimension: 112
+      }
+      scale: 0.0235284772
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 797982799
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 3
+        dimension: 3
+        dimension: 512
+      }
+      scale: 0.0168358777
+      zero_point: 132
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 61622525
+      }
+    }
+    operand {
+      type: TENSOR_QUANT16_ASYMM
+      dimensions {
+      }
+      scale: 0.00060008571
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 293037861
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 7
+        dimension: 7
+        dimension: 1024
+      }
+      scale: 0.0235284772
+      zero_point: 0
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 797982799
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 512
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1024
+        dimension: 1
+        dimension: 1
+        dimension: 1024
+      }
+      scale: 0.0199816935
+      zero_point: 126
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3110841981
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 128
+        dimension: 14
+        dimension: 14
+        dimension: 1
+        dimension: 1
+        dimension: 56
+        dimension: 56
+        dimension: 512
+      }
+      scale: 0.0235284772
+      zero_point: 0
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 797982799
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+        dimension: 3
+      }
+      scale: 0.0100944191
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1298800706
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 14
+        dimension: 1024
+      }
+      scale: 0.00115174765
+      zero_point: 0
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 980364469
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 256
+        dimension: 512
+      }
+      scale: 0.00687028049
+      zero_point: 0
+      lifetime: CONSTANT_REFERENCE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 834090405
+      }
+    }
+  }
+  operations {
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 195
+        index: 196
+        index: 197
+        index: 198
+        index: 199
+        index: 200
+        index: 201
+      }
+      outputs {
+        index: 202
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 124
+        index: 123
+        index: 9
+        index: 13
+        index: 125
+        index: 126
+        index: 11
+        index: 122
+        index: 12
+        index: 14
+        index: 7
+        index: 120
+        index: 10
+      }
+      outputs {
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 0
+        index: 1
+        index: 2
+        index: 3
+        index: 4
+        index: 5
+        index: 6
+      }
+      outputs {
+        index: 7
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 140
+        index: 135
+        index: 212
+        index: 165
+        index: 167
+        index: 215
+        index: 211
+        index: 210
+        index: 166
+        index: 214
+        index: 138
+      }
+      outputs {
+        index: 172
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 219
+        index: 63
+        index: 187
+        index: 194
+        index: 218
+      }
+      outputs {
+        index: 195
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 150
+        index: 151
+        index: 152
+        index: 153
+        index: 154
+        index: 155
+        index: 156
+      }
+      outputs {
+        index: 157
+      }
+    }
+    operation {
+      type: AVERAGE_POOL_2D
+      inputs {
+        index: 207
+        index: 8
+        index: 7
+        index: 204
+        index: 208
+        index: 202
+        index: 205
+        index: 11
+        index: 12
+        index: 203
+        index: 13
+        index: 206
+      }
+      outputs {
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 157
+        index: 158
+        index: 159
+        index: 160
+        index: 161
+        index: 162
+        index: 163
+        index: 164
+      }
+      outputs {
+        index: 165
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 107
+        index: 139
+        index: 137
+        index: 135
+        index: 110
+        index: 87
+        index: 1
+        index: 138
+        index: 141
+        index: 136
+      }
+      outputs {
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 195
+        index: 196
+        index: 197
+        index: 198
+        index: 199
+        index: 200
+        index: 201
+      }
+      outputs {
+        index: 202
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 87
+        index: 64
+        index: 88
+        index: 66
+        index: 62
+        index: 84
+        index: 82
+        index: 60
+        index: 65
+        index: 86
+        index: 83
+        index: 63
+        index: 85
+        index: 89
+        index: 61
+      }
+      outputs {
+        index: 67
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 15
+        index: 16
+        index: 17
+        index: 18
+        index: 19
+        index: 20
+        index: 21
+      }
+      outputs {
+        index: 22
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+      }
+      outputs {
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 75
+        index: 76
+        index: 77
+        index: 78
+        index: 79
+        index: 80
+        index: 81
+      }
+      outputs {
+        index: 82
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 187
+        index: 188
+        index: 189
+        index: 190
+        index: 191
+        index: 192
+        index: 193
+        index: 194
+      }
+      outputs {
+        index: 195
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 209
+        index: 210
+        index: 211
+        index: 212
+        index: 213
+        index: 214
+        index: 215
+      }
+      outputs {
+        index: 216
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 121
+        index: 122
+        index: 124
+      }
+      outputs {
+        index: 142
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 141
+        index: 127
+        index: 132
+        index: 135
+        index: 133
+        index: 139
+        index: 130
+        index: 137
+        index: 134
+        index: 129
+        index: 140
+        index: 136
+        index: 131
+        index: 128
+      }
+      outputs {
+      }
+    }
+    operation {
+      type: RESHAPE
+      inputs {
+        index: 216
+        index: 125
+        index: 124
+        index: 120
+        index: 217
+        index: 121
+        index: 126
+        index: 122
+        index: 123
+      }
+      outputs {
+        index: 127
+      }
+    }
+    operation {
+      type: RESHAPE
+      inputs {
+        index: 216
+        index: 217
+      }
+      outputs {
+        index: 218
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 45
+        index: 46
+        index: 47
+        index: 48
+        index: 49
+        index: 50
+        index: 51
+      }
+      outputs {
+        index: 52
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 97
+        index: 98
+        index: 99
+        index: 100
+        index: 101
+        index: 102
+        index: 103
+        index: 104
+      }
+      outputs {
+        index: 105
+      }
+    }
+    operation {
+      type: HEATMAP_MAX_KEYPOINT
+      inputs {
+        index: 0
+        index: 1
+        index: 2
+      }
+      outputs {
+        index: 3
+        index: 4
+      }
+    }
+    operation {
+      type: AVERAGE_POOL_2D
+      inputs {
+        index: 202
+        index: 203
+        index: 204
+        index: 205
+        index: 206
+        index: 207
+        index: 208
+      }
+      outputs {
+        index: 209
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 71
+        index: 73
+        index: 96
+        index: 72
+        index: 91
+        index: 74
+        index: 69
+        index: 90
+        index: 70
+        index: 95
+        index: 94
+        index: 67
+        index: 92
+        index: 68
+      }
+      outputs {
+        index: 97
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 23
+        index: 22
+        index: 29
+        index: 53
+        index: 26
+        index: 58
+        index: 59
+        index: 25
+        index: 24
+        index: 57
+        index: 52
+        index: 54
+        index: 28
+        index: 56
+      }
+      outputs {
+        index: 60
+        index: 30
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 129
+        index: 158
+        index: 133
+        index: 131
+        index: 183
+        index: 162
+        index: 164
+        index: 159
+        index: 160
+        index: 185
+        index: 184
+        index: 157
+        index: 182
+      }
+      outputs {
+        index: 165
+        index: 187
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 165
+        index: 166
+        index: 167
+        index: 168
+        index: 169
+        index: 170
+        index: 171
+      }
+      outputs {
+        index: 172
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+      }
+      outputs {
+        index: 37
+      }
+    }
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 156
+        index: 150
+        index: 155
+        index: 36
+        index: 153
+        index: 151
+        index: 35
+        index: 37
+        index: 152
+        index: 154
+      }
+      outputs {
+        index: 157
+        index: 6
+      }
+    }
+    operation {
+      type: DEPTHWISE_CONV_2D
+      inputs {
+        index: 97
+        index: 98
+        index: 99
+        index: 100
+        index: 101
+        index: 102
+        index: 103
+        index: 104
+      }
+      outputs {
+        index: 105
+      }
+    }
+  }
+  input_indexes {
+  }
+  output_indexes {
+  }
+  is_relaxed: false
+}

@@ -1,0 +1,234 @@
+model {
+  operands {
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 1
+        dimension: 3
+        dimension: 1
+        dimension: 4
+      }
+      scale: 0
+      zero_point: 50
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 797982799
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 1
+      }
+      scale: 0
+      zero_point: 41
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 1
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 3
+        dimension: 4
+        dimension: 1
+      }
+      scale: 0.5
+      zero_point: 127
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1991679158
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 3
+        dimension: 4
+        dimension: 1
+      }
+      scale: 0.5
+      zero_point: 127
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1991679158
+      }
+    }
+    operand {
+      type: BOOL
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2447340639
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2447340639
+      }
+    }
+  }
+  operations {
+    operation {
+      type: CONV_2D
+      inputs {
+        index: 6
+        index: 1
+        index: 0
+        index: 5
+        index: 7
+        index: 5
+      }
+      outputs {
+        index: 8
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+  }
+  output_indexes {
+    index: 8
+    index: 8
+  }
+  is_relaxed: false
+}

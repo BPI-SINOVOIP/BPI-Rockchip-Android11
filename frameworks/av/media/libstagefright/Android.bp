@@ -1,0 +1,346 @@
+cc_library_headers {
+    name: "libstagefright_headers",
+    export_include_dirs: ["include"],
+    vendor_available: true,
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.media",
+        "com.android.media.swcodec",
+    ],
+    min_sdk_version: "29",
+}
+
+cc_library_static {
+    name: "libstagefright_esds",
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.media",
+    ],
+    min_sdk_version: "29",
+
+    srcs: ["ESDS.cpp"],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+        ],
+        cfi: true,
+    },
+    shared_libs: [
+        "libstagefright_foundation",
+        "libutils"
+    ],
+}
+
+cc_library_static {
+    name: "libstagefright_metadatautils",
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.media",
+    ],
+    min_sdk_version: "29",
+
+    srcs: ["MetaDataUtils.cpp"],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+        ],
+        cfi: true,
+    },
+
+    header_libs: [
+        "libstagefright_foundation_headers",
+    ],
+    shared_libs: ["libmediandk"],
+    export_include_dirs: ["include"],
+}
+
+cc_library_shared {
+    name: "libstagefright_codecbase",
+
+    export_include_dirs: ["include"],
+
+    srcs: [
+        "CodecBase.cpp",
+        "FrameRenderTracker.cpp",
+        "MediaCodecListWriter.cpp",
+        "SkipCutBuffer.cpp",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+
+    header_libs: [
+        "libmediadrm_headers",
+        "media_ndk_headers",
+    ],
+
+    shared_libs: [
+        "libgui",
+        "libhidlallocatorutils",
+        "liblog",
+        "libmedia_codeclist",
+        "libmedia_omx",
+        "libstagefright_foundation",
+        "libui",
+        "libutils",
+        "android.hardware.cas.native@1.0",
+        "android.hardware.drm@1.0",
+    ],
+
+    sanitize: {
+        cfi: true,
+        misc_undefined: [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+}
+
+cc_library_static {
+    name: "libstagefright_mpeg2extractor",
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.media",
+    ],
+    min_sdk_version: "29",
+
+    srcs: [
+        "Utils.cpp",
+        "MediaSource.cpp",
+        "HevcUtils.cpp",
+    ],
+
+    shared_libs: [
+        "liblog",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    header_libs: [
+        "libaudioclient_headers",
+        "libmedia_headers",
+        "media_ndk_headers",
+    ],
+
+    cflags: [
+        "-Wno-multichar",
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+        "-Wall",
+    ],
+
+    sanitize: {
+        cfi: true,
+        misc_undefined: [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+}
+
+cc_library_shared {
+    name: "libstagefright_framecapture_utils",
+
+    srcs: [
+        "FrameCaptureLayer.cpp",
+        "FrameCaptureProcessor.cpp",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "libcutils",
+        "libEGL",
+        "libGLESv1_CM",
+        "libGLESv2",
+        "libgui",
+        "liblog",
+        "libprocessgroup",
+        "libstagefright_foundation",
+        "libsync",
+        "libui",
+        "libutils",
+        "librga",
+        "libgraphicpolicy",
+    ],
+
+    static_libs: [
+        "librenderengine",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    cflags: [
+        "-Wno-multichar",
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+        "-Wall",
+    ],
+
+    sanitize: {
+        // TODO: re-enabled cfi for this lib after b/139945549 fixed
+        cfi: false,
+        misc_undefined: [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+}
+cc_library {
+    name: "libstagefright",
+
+    srcs: [
+        "AACWriter.cpp",
+        "ACodec.cpp",
+        "ACodecBufferChannel.cpp",
+        "AHierarchicalStateMachine.cpp",
+        "AMRWriter.cpp",
+        "AudioSource.cpp",
+        "BufferImpl.cpp",
+        "CallbackDataSource.cpp",
+        "CallbackMediaSource.cpp",
+        "CameraSource.cpp",
+        "CameraSourceTimeLapse.cpp",
+        "DataConverter.cpp",
+        "FrameDecoder.cpp",
+        "HevcUtils.cpp",
+        "InterfaceUtils.cpp",
+        "JPEGSource.cpp",
+        "MPEG2TSWriter.cpp",
+        "MPEG4Writer.cpp",
+        "MediaAdapter.cpp",
+        "MediaClock.cpp",
+        "MediaCodec.cpp",
+        "MediaCodecList.cpp",
+        "MediaCodecListOverrides.cpp",
+        "MediaCodecSource.cpp",
+        "MediaExtractor.cpp",
+        "MediaExtractorFactory.cpp",
+        "MediaSource.cpp",
+        "MediaSync.cpp",
+        "MediaTrack.cpp",
+        "MediaMuxer.cpp",
+        "NuMediaExtractor.cpp",
+        "OggWriter.cpp",
+        "OMXClient.cpp",
+        "OmxInfoBuilder.cpp",
+        "RemoteMediaExtractor.cpp",
+        "RemoteMediaSource.cpp",
+        "SimpleDecodingSource.cpp",
+        "StagefrightMediaScanner.cpp",
+        "SurfaceMediaSource.cpp",
+        "SurfaceUtils.cpp",
+        "ThrottledSource.cpp",
+        "Utils.cpp",
+        "VideoFrameSchedulerBase.cpp",
+        "VideoFrameScheduler.cpp",
+    ],
+
+    shared_libs: [
+        "libstagefright_framecapture_utils",
+        "libaudioutils",
+        "libbase",
+        "libbinder",
+        "libbinder_ndk",
+        "libcamera_client",
+        "libcodec2",
+        "libcodec2_vndk",
+        "libcutils",
+        "libdatasource",
+        "libdl",
+        "libdl_android",
+        "libgui",
+        "liblog",
+        "libmedia",
+        "libmedia_codeclist",
+        "libmedia_omx",
+        "libmedia_omx_client",
+        "libaudioclient",
+        "libmediametrics",
+        "libui",
+        "libutils",
+        "libmedia_helper",
+        "libsfplugin_ccodec",
+        "libsfplugin_ccodec_utils",
+        "libstagefright_codecbase",
+        "libstagefright_foundation",
+        "libstagefright_omx_utils",
+        "libRScpp",
+        "libhidlallocatorutils",
+        "libhidlbase",
+        "libhidlmemory",
+        "android.hidl.allocator@1.0",
+        "android.hardware.cas.native@1.0",
+        "android.hardware.drm@1.0",
+        "android.hardware.media.omx@1.0",
+    ],
+
+    static_libs: [
+        "libstagefright_esds",
+        "libstagefright_color_conversion",
+        "libyuv_static",
+        "libstagefright_mediafilter",
+        "libstagefright_webm",
+        "libstagefright_timedtext",
+        "libogg",
+        "libwebm",
+        "libstagefright_id3",
+    ],
+
+    header_libs:[
+        "libmediadrm_headers",
+        "libnativeloader-headers",
+        "libstagefright_xmlparser_headers",
+        "media_ndk_headers",
+    ],
+
+    export_shared_lib_headers: [
+        "libgui",
+        "libhidlmemory",
+        "libmedia",
+        "android.hidl.allocator@1.0",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    cflags: [
+        "-Wno-multichar",
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+        "-Wall",
+    ],
+
+    version_script: "exports.lds",
+
+    product_variables: {
+        debuggable: {
+            // enable experiments only in userdebug and eng builds
+            cflags: ["-DENABLE_STAGEFRIGHT_EXPERIMENTS"],
+        },
+    },
+
+    sanitize: {
+        cfi: true,
+        misc_undefined: [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+}

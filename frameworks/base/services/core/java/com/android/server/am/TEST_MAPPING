@@ -1,0 +1,67 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsAppTestCases",
+      "options": [
+        {
+          "include-filter": "android.app.cts.TaskDescriptionTest"
+        },
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        },
+        {
+          "exclude-annotation": "androidx.test.filters.LargeTest"
+        },
+        {
+          "exclude-annotation": "androidx.test.filters.FlakyTest"
+        }
+      ]
+    },
+    {
+      "name": "FrameworksServicesTests",
+      "options": [
+        {
+          "include-filter": "com.android.server.am."
+        },
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        },
+        {
+          "exclude-annotation": "androidx.test.filters.FlakyTest"
+        }
+      ]
+    },
+    {
+      "name": "FrameworksMockingServicesTests",
+      "options": [
+        {
+          "include-filter": "com.android.server.am."
+        },
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        },
+        {
+          "exclude-annotation": "androidx.test.filters.FlakyTest"
+        }
+      ]
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "FrameworksServicesTests",
+      "options": [
+        {
+          "include-filter": "com.android.server.am."
+        }
+      ]
+    },
+    {
+      "name": "CtsAppSecurityHostTestCases",
+      "options": [
+        {
+          "include-filter": "android.appsecurity.cts.AppDataIsolationTests"
+        }
+      ]
+    }
+  ]
+}

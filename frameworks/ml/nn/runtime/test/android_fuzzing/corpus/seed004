@@ -1,0 +1,83 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 1
+        dimension: 2
+        dimension: 2
+        dimension: 3
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 248291570
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 1
+        dimension: 1
+        dimension: 3
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 4
+      }
+      data {
+        random_seed: 2444110529
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 1
+        dimension: 2
+        dimension: 2
+        dimension: 3
+      }
+      scale: 0
+      zero_point: 16384
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 32107
+      }
+    }
+  }
+  operations {
+    operation {
+      type: PRELU
+      inputs {
+        index: 0
+        index: 1
+      }
+      outputs {
+        index: 2
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+    index: 1
+  }
+  output_indexes {
+    index: 2
+  }
+  is_relaxed: true
+}

@@ -1,0 +1,41 @@
+cc_library_shared {
+    name: "libneuralnetworks_packageinfo",
+    defaults: ["neuralnetworks_defaults"],
+
+    srcs: [
+        "PackageInfo.cpp",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libutils",
+    ],
+
+    export_include_dirs: ["include"],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+    ],
+
+    // enumerate stable entry points, for apex use
+    stubs: {
+        symbol_file: "libneuralnetworks_packageinfo.map.txt",
+        versions: [
+            "1",
+        ],
+    },
+
+    header_abi_checker: {
+        enabled: true,
+        symbol_file: "libneuralnetworks_packageinfo.map.txt",
+    },
+
+    visibility: [
+        "//frameworks/ml/nn:__subpackages__",
+    ],
+}

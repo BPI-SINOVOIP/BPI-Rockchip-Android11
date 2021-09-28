@@ -1,0 +1,35 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsNNAPITestCases"
+    },
+    {
+      "name": "NeuralNetworksTest_static",
+      "options": [
+        {
+          // Restrict NeuralNetworksTest_static to run only a single
+          // pass consisting of:
+          // * useCpuOnly = 0
+          // * computeMode = ComputeMode::ASYNC
+          // * allowSyncExecHal = 1
+          //
+          // The value here is a bitmask indicating only "pass 10"
+          // should be run (1024 = 2^10). The bit conversions can be
+          // found in frameworks/ml/nn/runtime/test/TestMain.cpp.
+          "native-test-flag": "1024"
+        }
+      ]
+    },
+    {
+      "name": "NeuralNetworksTest_utils"
+    }
+  ],
+  "imports": [
+    {
+      "path": "hardware/interfaces/neuralnetworks"
+    },
+    {
+      "path": "external/tensorflow/tensorflow/lite/delegates/nnapi"
+    }
+  ]
+}

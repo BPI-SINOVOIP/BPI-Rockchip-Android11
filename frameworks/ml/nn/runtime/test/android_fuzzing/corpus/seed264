@@ -1,0 +1,44 @@
+model {
+  operands {
+    operand {
+      type: INT32
+      dimensions {
+        dimension: 0
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 346926773
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 4241970376
+      }
+    }
+  }
+  operations {
+  }
+  input_indexes {
+  }
+  output_indexes {
+  }
+  is_relaxed: false
+}

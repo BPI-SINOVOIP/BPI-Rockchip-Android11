@@ -1,0 +1,130 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 230054595
+      }
+    }
+    operand {
+      type: BOOL
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 1
+        dimension: 2
+        dimension: 3
+        dimension: 2
+        dimension: 2
+        dimension: 1
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 130636881
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+    operand {
+      type: BOOL
+      dimensions {
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 695387117
+      }
+    }
+  }
+  operations {
+    operation {
+      type: FLOOR
+      inputs {
+        index: 0
+        index: 4
+        index: 2
+        index: 3
+      }
+      outputs {
+        index: 0
+        index: 1
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+    index: 1
+  }
+  output_indexes {
+  }
+  is_relaxed: true
+}

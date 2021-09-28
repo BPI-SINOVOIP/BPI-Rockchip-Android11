@@ -1,0 +1,30 @@
+cc_library_static {
+    name: "libcpustats",
+
+    srcs: [
+        "CentralTendencyStatistics.cpp",
+        "ThreadCpuUsage.cpp",
+    ],
+
+    local_include_dirs: [
+        "include",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+
+    host_supported: true,
+
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+
+}

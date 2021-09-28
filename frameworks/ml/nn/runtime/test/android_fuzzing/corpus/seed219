@@ -1,0 +1,101 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 5
+        dimension: 2
+        dimension: 1
+      }
+      scale: 1
+      zero_point: 9
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3594302024
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2675451323
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 2
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2560180502
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 6
+        dimension: 2
+        dimension: 2
+        dimension: 1
+      }
+      scale: 1
+      zero_point: 9
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1183632182
+      }
+    }
+  }
+  operations {
+    operation {
+      type: SPACE_TO_BATCH_ND
+      inputs {
+        index: 0
+        index: 1
+        index: 2
+      }
+      outputs {
+        index: 3
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+    index: 1
+    index: 2
+  }
+  output_indexes {
+    index: 3
+  }
+  is_relaxed: false
+}

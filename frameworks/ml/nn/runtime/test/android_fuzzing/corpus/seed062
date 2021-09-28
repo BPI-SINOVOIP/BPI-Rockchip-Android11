@@ -1,0 +1,100 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 3
+        dimension: 2
+        dimension: 3
+        dimension: 1
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2821860654
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 4
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2958023433
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 4
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3068306799
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 1
+        dimension: 1
+        dimension: 3
+        dimension: 1
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2692612273
+      }
+    }
+  }
+  operations {
+    operation {
+      type: SLICE
+      inputs {
+        index: 0
+        index: 1
+        index: 2
+      }
+      outputs {
+        index: 3
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+    index: 1
+    index: 2
+  }
+  output_indexes {
+    index: 3
+  }
+  is_relaxed: true
+}

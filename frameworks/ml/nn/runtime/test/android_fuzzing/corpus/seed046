@@ -1,0 +1,78 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_FLOAT16
+      dimensions {
+        dimension: 4
+        dimension: 1
+        dimension: 1
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 4098496440
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1542669739
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT16
+      dimensions {
+        dimension: 4
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 4098496440
+      }
+    }
+  }
+  operations {
+    operation {
+      type: SQUEEZE
+      inputs {
+        index: 0
+        index: 1
+      }
+      outputs {
+        index: 2
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+  }
+  output_indexes {
+    index: 2
+  }
+  is_relaxed: false
+}

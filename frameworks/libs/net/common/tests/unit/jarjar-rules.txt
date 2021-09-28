@@ -1,0 +1,4 @@
+# Ensure that the tests can directly use the version of classes from the library. Otherwise, they
+# will use whatever version is currently in the bootclasspath on the device running the test.
+# These rules must match the jarjar rules used to build the library.
+rule android.net.util.** com.android.net.module.util.@1

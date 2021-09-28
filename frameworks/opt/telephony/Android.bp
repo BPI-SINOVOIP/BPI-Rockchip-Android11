@@ -1,0 +1,100 @@
+// Copyright 2018 Google Inc. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+
+filegroup {
+    name: "opt-telephony-srcs",
+    srcs: [
+        "src/java/android/telephony/**/*.java",
+    ],
+    path: "src/java",
+}
+
+filegroup {
+    name: "opt-telephony-htmls",
+    srcs: [
+        "src/java/android/telephony/**/*.html",
+    ],
+}
+
+filegroup {
+    name: "opt-telephony-common-srcs",
+    srcs: [
+        "src/java/**/*.java",
+    ],
+    path: "src/java",
+}
+
+filegroup {
+    name: "jarjar-rules-shared",
+    srcs: ["jarjar-rules-shared.txt"],
+}
+
+genrule {
+    name: "statslog-telephony-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module telephony"
+        + " --javaPackage com.android.internal.telephony --javaClass TelephonyStatsLog",
+    out: ["com/android/internal/telephony/TelephonyStatsLog.java"],
+}
+
+java_library {
+    name: "telephony-common",
+    installable: true,
+
+    aidl: {
+        local_include_dirs: ["src/java"],
+    },
+    srcs: [
+        ":opt-telephony-common-srcs",
+        ":framework-telephony-common-shared-srcs",
+        ":net-utils-telephony-common-srcs",
+        ":statslog-telephony-java-gen",
+        ":statslog-cellbroadcast-java-gen",
+        "src/java/**/I*.aidl",
+        "src/java/**/*.logtags",
+    ],
+
+    jarjar_rules: ":jarjar-rules-shared",
+
+    libs: [
+        "android.hardware.radio-V1.0-java",
+        "android.hardware.radio-V1.1-java",
+        "android.hardware.radio-V1.2-java",
+        "android.hardware.radio-V1.3-java",
+        "android.hardware.radio-V1.4-java",
+        "android.hardware.radio-V1.5-java",
+        "voip-common",
+        "ims-common",
+        "unsupportedappusage",
+    ],
+    static_libs: [
+        "android.hardware.radio.config-V1.0-java-shallow",
+        "android.hardware.radio.config-V1.1-java-shallow",
+        "android.hardware.radio.config-V1.2-java-shallow",
+        "android.hardware.radio.deprecated-V1.0-java-shallow",
+        "ecc-protos-lite",
+        "libphonenumber-nogeocoder",
+        "PlatformProperties",
+        "net-utils-framework-common",
+        "telephony-protos",
+    ],
+
+    product_variables: {
+        pdk: {
+            // enable this build only when platform library is available
+            enabled: false,
+        },
+    },
+}

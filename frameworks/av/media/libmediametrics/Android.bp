@@ -1,0 +1,60 @@
+cc_library_headers {
+    name: "libmediametrics_headers",
+    export_include_dirs: ["include"],
+}
+
+cc_library_shared {
+    name: "libmediametrics",
+
+    srcs: [
+        "IMediaMetricsService.cpp",
+        "MediaMetricsItem.cpp",
+        "MediaMetrics.cpp",
+    ],
+
+    shared_libs: [
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libutils",
+    ],
+
+    export_include_dirs: ["include"],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-Wthread-safety",
+        "-Wunreachable-code",
+    ],
+
+    sanitize: {
+        misc_undefined: [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+        cfi: true,
+    },
+
+    // enumerate stable entry points, for apex use
+    stubs: {
+        symbol_file: "libmediametrics.map.txt",
+        versions: [
+            "1" ,
+        ]
+    },
+
+    header_abi_checker: {
+        enabled: true,
+        symbol_file: "libmediametrics.map.txt",
+    },
+
+    visibility: [
+        "//cts/tests/tests/nativemedia/mediametrics",
+        "//frameworks/av:__subpackages__",
+        "//frameworks/base/apex/media/framework",
+        "//frameworks/base/core/jni",
+        "//frameworks/base/media/jni",
+    ],
+}

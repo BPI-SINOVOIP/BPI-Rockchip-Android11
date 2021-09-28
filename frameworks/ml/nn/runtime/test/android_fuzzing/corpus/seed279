@@ -1,0 +1,123 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 2
+        dimension: 2
+        dimension: 1
+      }
+      scale: 1
+      zero_point: 128
+      lifetime: TEMPORARY_VARIABLE
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 797982799
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+        dimension: 2
+        dimension: 2
+        dimension: 1
+      }
+      scale: 1
+      zero_point: 128
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 70664445
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+      }
+      scale: 1
+      zero_point: 128
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 70664445
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 1
+      }
+      scale: 1
+      zero_point: 128
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 4075274624
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 173552573
+      }
+    }
+  }
+  operations {
+    operation {
+      type: ADD
+      inputs {
+        index: 2
+        index: 3
+        index: 4
+      }
+      outputs {
+        index: 0
+      }
+    }
+    operation {
+      type: RELU
+      inputs {
+        index: 0
+      }
+      outputs {
+        index: 1
+      }
+    }
+  }
+  input_indexes {
+    index: 2
+  }
+  output_indexes {
+    index: 1
+  }
+  is_relaxed: false
+}

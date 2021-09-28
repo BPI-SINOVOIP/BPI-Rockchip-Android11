@@ -1,0 +1,115 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 4
+        dimension: 4
+      }
+      scale: 1
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2791491534
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 3
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3398268191
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 3
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3398268191
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 4
+        dimension: 2
+      }
+      scale: 0.5
+      zero_point: 0
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 328404974
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 3
+        dimension: 2
+      }
+      scale: 0.5
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2063247693
+      }
+    }
+  }
+  operations {
+    operation {
+      type: HASHTABLE_LOOKUP
+      inputs {
+        index: 0
+        index: 0
+        index: 2
+        index: 1
+      }
+      outputs {
+        index: 3
+        index: 4
+      }
+    }
+  }
+  input_indexes {
+    index: 1
+    index: 2
+    index: 2
+  }
+  output_indexes {
+  }
+  is_relaxed: false
+}

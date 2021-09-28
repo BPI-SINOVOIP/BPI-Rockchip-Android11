@@ -1,0 +1,52 @@
+model {
+  operands {
+    operand {
+      type: INT32
+      dimensions {
+        dimension: 2
+        dimension: 5
+        dimension: 1
+        dimension: 3
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2823836134
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 2
+        dimension: 3
+      }
+      scale: 1
+      zero_point: 127
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1200850562
+      }
+    }
+  }
+  operations {
+  }
+  input_indexes {
+    index: 0
+    index: 0
+  }
+  output_indexes {
+    index: 4
+  }
+  is_relaxed: true
+}

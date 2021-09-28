@@ -1,0 +1,140 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 2
+        dimension: 1
+        dimension: 2
+      }
+      scale: 0.084
+      zero_point: 127
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 3457258799
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 2
+        dimension: 1
+        dimension: 2
+      }
+      scale: 0.05
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 527432607
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 2
+        dimension: 1
+        dimension: 2
+      }
+      scale: 0.089
+      zero_point: 123
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2593880907
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 2
+        dimension: 1
+        dimension: 2
+      }
+      scale: 0.029
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 795372652
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1503006379
+      }
+    }
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 2
+        dimension: 1
+        dimension: 8
+      }
+      scale: 0.1
+      zero_point: 127
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1647557000
+      }
+    }
+  }
+  operations {
+    operation {
+      type: CONCATENATION
+      inputs {
+        index: 0
+        index: 1
+        index: 2
+        index: 3
+        index: 4
+      }
+      outputs {
+        index: 5
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+    index: 1
+    index: 2
+    index: 3
+  }
+  output_indexes {
+    index: 5
+  }
+  is_relaxed: false
+}

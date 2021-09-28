@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Official label of the wifi stack -->
+    <string name="wifiResourcesAppLabel" product="default">System Wi-Fi Resources</string>
+    <!-- Notification title for a nearby open wireless network.-->
+    <string name="wifi_available_title">Connect to open Wi\u2011Fi network</string>
+    <!-- Notification title when the system is connecting to the specified network. The network name is specified in the notification content. -->
+    <string name="wifi_available_title_connecting">Connecting to Wi\u2011Fi network</string>
+    <!-- Notification title when the system has connected to the network. The network name is specified in the notification content. -->
+    <string name="wifi_available_title_connected">Connected to Wi\u2011Fi network</string>
+    <!-- Notification title when the system failed to connect to the specified network. -->
+    <string name="wifi_available_title_failed_to_connect">Could not connect to Wi\u2011Fi network</string>
+    <!-- Notification content when the system failed to connect to the specified network. This informs the user that tapping on this notification will open the wifi picker. -->
+    <string name="wifi_available_content_failed_to_connect">Tap to see all networks</string>
+    <!-- Notification action name for connecting to the network specified in the notification body. -->
+    <string name="wifi_available_action_connect">Connect</string>
+    <!-- Notification action name for opening the wifi picker, showing the user all the nearby networks. -->
+    <string name="wifi_available_action_all_networks">All networks</string>
+
+    <!-- Text shown when viewing channel settings for notifications related to network status -->
+    <string name="notification_channel_network_status">Network status</string>
+    <!-- Text shown when viewing channel settings for notifications related to network alerts -->
+    <string name="notification_channel_network_alerts">Network alerts</string>
+    <!-- Text shown when viewing the channel settings for notification about open nearby wireless networks. -->
+    <string name="notification_channel_network_available">Network available</string>
+
+    <!-- Notification title for a connection to a app suggested wireless network.-->
+    <string name="wifi_suggestion_title">Allow suggested Wi\u2011Fi networks?</string>
+    <!-- Notification content for a connection to a app suggested wireless network.-->
+    <string name="wifi_suggestion_content"><xliff:g id="name" example="App123">%s</xliff:g> suggested networks. Device may connect automatically. </string>
+    <!-- Notification action for allowing app specified in the notification body.-->
+    <string name="wifi_suggestion_action_allow_app">Allow</string>
+    <!-- Notification action for disallowing app specified in the notification body.-->
+    <string name="wifi_suggestion_action_disallow_app">No thanks</string>
+
+    <!-- Notification title for a connection to a SIM-based carrier network without IMSI privacy protection. -->
+    <string name="wifi_suggestion_imsi_privacy_title">Connect to <xliff:g id="carrierName" example="xxxMobile">%s</xliff:g> Wi\u2011Fi?</string>
+    <!-- Notification content for a connection to a SIM-based carrier network without IMSI privacy protection.-->
+    <string name="wifi_suggestion_imsi_privacy_content">These networks receive a SIM ID that can be used to track device location</string>
+    <!-- Notification action for allowing carrier specified in the notification body.-->
+    <string name="wifi_suggestion_action_allow_imsi_privacy_exemption_carrier">Connect</string>
+    <!-- Notification action for disallowing carrier specified in the notification body.-->
+    <string name="wifi_suggestion_action_disallow_imsi_privacy_exemption_carrier">Don\u0027t connect</string>
+    <!-- Confirmation dialog title for a connection to a SIM-based carrier network without IMSI privacy protection. -->
+    <string name="wifi_suggestion_imsi_privacy_exemption_confirmation_title">Confirm connection?</string>
+    <!-- Confirmation dialog content for a connection to a SIM-based carrier network without IMSI privacy protection. -->
+    <string name="wifi_suggestion_imsi_privacy_exemption_confirmation_content">If you connect, <xliff:g id="carrierName" example="xxxMobile">%s</xliff:g> Wi\u2011Fi networks may access or share a unique ID associated with your SIM. This may allow your device\u0027s location to be tracked.</string>
+    <!-- Confirmation dialog action for allowing carrier specified in the dialog body -->
+    <string name="wifi_suggestion_action_allow_imsi_privacy_exemption_confirmation">Connect</string>
+    <!-- Confirmation dialog action for disallowing carrier specified in the dialog body -->
+    <string name="wifi_suggestion_action_disallow_imsi_privacy_exemption_confirmation">Don\u0027t connect</string>
+
+
+
+    <!--Notification title for Wi-Fi Wake onboarding. This is displayed the first time a user disables Wi-Fi with the feature enabled. -->
+    <string name="wifi_wakeup_onboarding_title">Wi\u2011Fi will turn on automatically</string>
+    <!--Notification subtext for Wi-Fi Wake onboarding.-->
+    <string name="wifi_wakeup_onboarding_subtext">When you\'re near a high quality saved network</string>
+    <!--Notification action to disable Wi-Fi Wake during onboarding.-->
+    <string name="wifi_wakeup_onboarding_action_disable">Don\'t turn back on</string>
+    <!--Notification title for when Wi-Fi Wake enables Wi-Fi.-->
+    <string name="wifi_wakeup_enabled_title">Wi\u2011Fi turned on automatically</string>
+    <!--Notification content for when Wi-Fi Wake enables Wi-Fi. %1$s is the SSID of the nearby saved network that triggered the wakeup. -->
+    <string name="wifi_wakeup_enabled_content">You\u0027re near a saved network: <xliff:g id="network_ssid">%1$s</xliff:g></string>
+
+     <!-- A notification is shown when a user's selected SSID is later disabled due to connectivity problems.  This is the notification's title / ticker. -->
+     <string name="wifi_watchdog_network_disabled">Couldn\'t connect to Wi-Fi</string>
+     <!-- A notification is shown when a user's selected SSID is later disabled due to connectivity problems.  The complete alert msg is: <hotspot name> + this string, i.e. "Linksys has a poor internet connection" -->
+    <string name="wifi_watchdog_network_disabled_detailed">\u0020has a poor internet connection.</string>
+
+    <!-- A notification is shown the first time a connection is attempted on an app owned AP -->
+    <!-- title for this message -->
+    <string name="wifi_connect_alert_title">Allow connection?</string>
+    <!-- message explaining who is connecting to what -->
+    <string name="wifi_connect_alert_message">Application %1$s would like to connect to Wifi Network %2$s</string>
+    <!-- default application in case name can not be found -->
+    <string name="wifi_connect_default_application">An application</string>
+
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="ok">OK</string>
+
+    <string name="wifi_p2p_invitation_sent_title">Invitation sent</string>
+    <string name="wifi_p2p_invitation_to_connect_title">Invitation to connect</string>
+
+    <string name="wifi_p2p_from_message">From: </string>
+    <string name="wifi_p2p_to_message">To: </string>
+    <string name="wifi_p2p_enter_pin_message">Type the required PIN: </string>
+    <string name="wifi_p2p_show_pin_message">PIN: </string>
+
+    <string name="wifi_p2p_frequency_conflict_message" product="tablet">The tablet will temporarily disconnect from Wi-Fi while it\'s connected to <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="wifi_p2p_frequency_conflict_message" product="tv">Your Android TV device will temporarily disconnect from Wi-Fi while it\'s connected to <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="wifi_p2p_frequency_conflict_message" product="default">The phone will temporarily disconnect from Wi-Fi while it\'s connected to <xliff:g id="device_name">%1$s</xliff:g></string>
+    <!-- Dialog ok button-->
+    <string name="dlg_ok">OK</string>
+
+    <!-- Start of string constants used to inform the user that the current network may be failing to connect due to not supporting randomized MAC-->
+    <string name="wifi_cannot_connect_with_randomized_mac_title">Can\'t connect to <xliff:g id="ssid">%1$s</xliff:g></string>
+    <string name="wifi_cannot_connect_with_randomized_mac_message">Tap to change privacy settings and retry</string>
+    <string name="wifi_disable_mac_randomization_dialog_title">Change privacy setting?</string>
+    <string name="wifi_disable_mac_randomization_dialog_message"> To connect, <xliff:g id="ssid">%1$s</xliff:g> needs to use your device MAC address, a unique identifier. Currently, your privacy setting for this network uses a randomized identifier.
+        \n\nThis change may allow your device\'s location to be tracked by nearby devices. </string>
+    <string name="wifi_disable_mac_randomization_dialog_confirm_text">Change setting</string>
+    <string name="wifi_disable_mac_randomization_dialog_success">Setting updated. Try connecting again.</string>
+    <string name="wifi_disable_mac_randomization_dialog_failure">Can\'t change privacy setting</string>
+    <string name="wifi_disable_mac_randomization_dialog_network_not_found">Network not found</string>
+    <!-- End of string constants used to inform the user that the current network may be failing to connect due to not supporting randomized MAC-->
+
+    <!-- A notification is shown when eap failure happens. It should be overridden by carrier-specific overlays. -->
+    <string name="wifi_eap_error_message_code_32760"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32760</string>
+    <string name="wifi_eap_error_message_code_32761"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32761</string>
+    <string name="wifi_eap_error_message_code_32762"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32762</string>
+    <string name="wifi_eap_error_message_code_32763"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32763</string>
+    <string name="wifi_eap_error_message_code_32764"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32764</string>
+    <string name="wifi_eap_error_message_code_32765"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32765</string>
+    <string name="wifi_eap_error_message_code_32766"><xliff:g id="ssid">%1$s</xliff:g> : EAP authentication error 32766</string>
+
+
+    <!-- A notification is shown when softap auto shutdown timeout expired. It should be overridden by carrier-specific overlays. -->
+    <string name="wifi_softap_auto_shutdown_timeout_expired_title">Hotspot turned off</string>
+    <string name="wifi_softap_auto_shutdown_timeout_expired_summary">No devices connected. Tap to modify.</string>
+
+    <!-- A notification is shown when eap-sim/aka/aka' wifi network is disconnected due to sim removal -->
+    <string name="wifi_sim_required_title">Wi\u2011Fi disconnected</string>
+    <string name="wifi_sim_required_message">To connect to <xliff:g id="ssid">%1$s</xliff:g>, insert a <xliff:g id="carrier_name">%2$s</xliff:g> SIM</string>
+</resources>

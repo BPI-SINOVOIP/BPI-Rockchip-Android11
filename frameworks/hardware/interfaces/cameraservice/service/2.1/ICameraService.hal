@@ -1,0 +1,48 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.frameworks.cameraservice.service@2.1;
+
+import android.frameworks.cameraservice.common@2.0::Status;
+import android.frameworks.cameraservice.service@2.0::ICameraService;
+import android.frameworks.cameraservice.service@2.1::CameraStatusAndId;
+import android.frameworks.cameraservice.service@2.1::ICameraServiceListener;
+import android.frameworks.cameraservice.service@2.1::PhysicalCameraStatusAndId;
+
+interface ICameraService extends @2.0::ICameraService {
+    /**
+     * Add listener for changes to camera device status.
+     *
+     * Identical to @2.0::ICameraService.addListener, except that:
+     *
+     * - The listener now contains an onPhysicalCameraStatusChanged function,
+     * which is called by the camera service when a physical camera backing a
+     * logical multi-camera becomes unavailable or available again.
+     * - The function returns a vector of the newer version of CameraStatusAndId
+     * which contains unavailable physical cameras if the specified camera is a
+     * logical multi-camera.
+     *
+     * @param listener the listener interface to be added. The cameraserver will
+     *         call callbacks on this interface when a camera device's status
+     *         changes.
+     * @return status Status code of the operation
+     * @return statuses a list of CameraStatusAndIds which stores the deviceIds,
+     *         their corresponding statuses, and the unavailable physical camera Ids
+     *         if the device is a logical multi-camera.
+     */
+    addListener_2_1(ICameraServiceListener listener)
+        generates (Status status, vec<CameraStatusAndId> statuses);
+};

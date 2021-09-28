@@ -1,0 +1,18 @@
+// Add tests for all the mainline modules relying on this library.
+{
+  "presubmit": [
+    {
+      // Unit tests for service-wifi.jar
+      "name": "FrameworksWifiTests"
+    },
+    {
+      // Unit tests for framework-wifi.jar
+      "name": "FrameworksWifiApiTests"
+    }
+    // TODO: Re-enable when this is stable.
+    // {
+      // Wifi CTS tests
+      // "name": "CtsWifiTestCases"
+    // }
+  ]
+}

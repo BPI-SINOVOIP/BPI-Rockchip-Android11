@@ -1,0 +1,174 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+java_defaults {
+    name: "wifi-service-common",
+    defaults: ["wifi-module-sdk-version-defaults"],
+    errorprone: {
+        javacflags: ["-Xep:CheckReturnValue:ERROR"],
+    },
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+    },
+}
+
+filegroup {
+    name: "wifi-service-srcs",
+    srcs: [
+        "java/**/*.java",
+        "java/**/*.logtags",
+        ":framework-wifi-service-shared-srcs",
+        ":net-utils-wifi-service-common-srcs",
+        ":statslog-wifi-java-gen",
+    ],
+}
+
+filegroup {
+    name: "wifi-service-BaseWifiService",
+    srcs: ["java/com/android/server/wifi/BaseWifiService.java"],
+    path: "java",
+}
+
+// pre-jarjar version of wifi-service that builds against pre-jarjar version of framework-wifi
+java_library {
+    name: "wifi-service-pre-jarjar",
+    installable: false,
+    defaults: ["wifi-service-common"],
+    srcs: [ ":wifi-service-srcs" ],
+    // java_api_finder must accompany `srcs`
+    plugins: ["java_api_finder"],
+
+    sdk_version: "system_server_current",
+    libs: [
+        "error_prone_annotations",
+        "jsr305",
+        "framework-annotations-lib",
+        // load the resources from the resources APK.
+        "ServiceWifiResources",
+        // need pre-jarjar symbols so that wifi-service can reference the original class names at
+        // compile time
+        "framework-wifi-pre-jarjar",
+        "framework-statsd.stubs.module_lib",
+        "framework-tethering.stubs.module_lib",
+        "unsupportedappusage",
+    ],
+
+    static_libs: [
+        "android.hardware.wifi-V1.0-java",
+        "android.hardware.wifi-V1.1-java",
+        "android.hardware.wifi-V1.2-java",
+        "android.hardware.wifi-V1.3-java",
+        "android.hardware.wifi-V1.4-java",
+        "android.hardware.wifi.hostapd-V1.0-java",
+        "android.hardware.wifi.hostapd-V1.1-java",
+        "android.hardware.wifi.hostapd-V1.2-java",
+        "android.hardware.wifi.supplicant-V1.0-java",
+        "android.hardware.wifi.supplicant-V1.1-java",
+        "android.hardware.wifi.supplicant-V1.2-java",
+        "android.hardware.wifi.supplicant-V1.3-java",
+        "android.hidl.manager-V1.2-java",
+        "androidx.annotation_annotation",
+        "bouncycastle-unbundled",
+        "ksoap2",
+        // Note: libprotobuf-java-lite uses a few core platform APIs which
+        // does show up as @hide API usage. But, this can be safely ignored
+        // since the library uses reflection to ensure that the OS does provide
+        // the necessary core platform APIs.
+        "libprotobuf-java-lite",
+        "libnanohttpd",
+        "services.net-module-wifi",
+        "wifi-lite-protos",
+        "wifi-nano-protos"
+    ],
+}
+
+// wifi-service static library
+// ============================================================
+java_library {
+    name: "service-wifi",
+    defaults: ["wifi-service-common"],
+    installable: true,
+    static_libs: ["wifi-service-pre-jarjar"],
+
+    // need to include `libs` so that Soong doesn't complain about missing classes after jarjaring
+    libs: [
+        "framework-wifi.impl",
+    ],
+
+    sdk_version: "system_server_current",
+
+    jarjar_rules: ":wifi-jarjar-rules",
+    optimize: {
+        enabled: true,
+        shrink: true,
+        proguard_flags_files: ["proguard.flags"],
+    },
+    dex_preopt: {
+        enabled: false,
+        app_image: false,
+    },
+
+    visibility: [
+        "//frameworks/opt/net/wifi/service/apex",
+        "//frameworks/opt/net/wifi/tests/wifitests/apex",
+    ],
+    apex_available: [
+        "com.android.wifi",
+        "test_com.android.wifi",
+    ],
+}
+
+// Statsd auto-generated code
+// ============================================================
+genrule {
+    name: "statslog-wifi-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module wifi " +
+         " --javaPackage com.android.server.wifi.proto --javaClass WifiStatsLog",
+    out: ["com/android/server/wifi/proto/WifiStatsLog.java"],
+}
+
+// APK to hold all the wifi overlayable resources.
+// ============================================================
+android_app {
+    name: "ServiceWifiResources",
+    defaults: ["wifi-service-common"],
+    resource_dirs: [
+        "res",
+    ],
+    privileged: true,
+    sdk_version: "system_current",
+    export_package_resources: true,
+    manifest: "AndroidManifest_Resources.xml",
+    apex_available: [
+        "com.android.wifi",
+        "test_com.android.wifi",
+    ],
+    certificate: ":com.android.wifi.resources.certificate",
+}
+
+android_app_certificate {
+    name: "com.android.wifi.resources.certificate",
+    certificate: "resources-certs/com.android.wifi.resources"
+}
+
+// Prebuilt for the wifi.rc file.
+prebuilt_etc {
+    name: "wifi.rc",
+    src: "wifi.rc",
+    sub_dir: "init"
+}

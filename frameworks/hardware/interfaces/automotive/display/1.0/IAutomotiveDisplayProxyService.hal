@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package android.frameworks.automotive.display@1.0;
+
+import android.hardware.graphics.bufferqueue@2.0::IGraphicBufferProducer;
+
+interface IAutomotiveDisplayProxyService {
+    /**
+     * Gets an IGraphicBufferProducer instance from the service.
+     *
+     * @param  id   Target's stable display identifier
+     *
+     * @return igbp Returns an IGraphicBufferProducer object, that can be
+     *              converted to an ANativeWindow object.
+     */
+    getIGraphicBufferProducer(uint64_t id) generates (IGraphicBufferProducer igbp);
+
+    /**
+     * Sets the ANativeWindow, which is associated with the
+     * IGraphicBufferProducer, to be visible and to take over the display.
+     *
+     * @param  id      Target display ID
+     *
+     * @return success Returns true on success.
+     */
+    showWindow(uint64_t id) generates (bool success);
+
+    /**
+     * Sets the ANativeWindow, which is associated with the
+     * IGraphicBufferProducer, to be invisible and to release the control
+     * over display.
+     *
+     * @param  id      Target display ID
+     *
+     * @return success Returns true on success.
+     */
+    hideWindow(uint64_t id) generates (bool success);
+
+    /**
+     * Returns the stable identifiers of all available displays.
+     *
+     * @return ids A list of stable display identifiers.
+     */
+    getDisplayIdList() generates (vec<uint64_t> ids);
+
+    /**
+     * Returns the descriptor of the target display.
+     *
+     * @param  id    Stable ID of a target display.
+     * @return cfg   DisplayConfig of the active display.
+     * @return state Current state of the active display.
+     */
+    getDisplayInfo(uint64_t id) generates (HwDisplayConfig cfg, HwDisplayState state);
+};

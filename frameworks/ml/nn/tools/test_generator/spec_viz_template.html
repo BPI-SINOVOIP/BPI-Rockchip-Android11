@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>$spec_name</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            margin: 0;
+            height: 100%;
+            background-color: rgb(61, 65, 77);
+        }
+
+        #main {
+            width: 62%;
+            transition: 0.5s;
+        }
+
+        #main h1 {
+            padding: 20px;
+            color: #eee;
+            font-size: 24px;
+        }
+
+        .subgraph h3 {
+            text-transform: capitalize;
+        }
+
+        .subgraph {
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .subgraph table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .subgraph thead {
+            background-color: rgb(61, 65, 77);
+            color: white;
+            text-transform: capitalize;
+        }
+
+        .subgraph tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .subgraph tbody tr:hover {
+            background-color: #d8d8d8;
+        }
+
+        .subgraph td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .subgraph select {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 18px;
+            color: black;
+        }
+
+        .subgraph svg {
+            background: white;
+            border: 1px solid #ccc;
+        }
+
+        .subgraph .edges line {
+            stroke: #333;
+        }
+
+        .subgraph .nodes text {
+            color: black;
+            pointer-events: none;
+            font-family: sans-serif;
+            font-size: 11px;
+        }
+
+        #sidebar {
+            height: 100%;
+            width: 38%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            background-color: #eee;
+            overflow-x: hidden;
+            transition: 0.5s;
+            border-left: 1px solid #ccc;
+        }
+
+        #sidebar #sidebar-main {
+            padding: 50px;
+        }
+
+        #sidebar h1 {
+            margin-top: 6px;
+            margin-bottom: 24px;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        #sidebar .subtitle {
+            margin-bottom: 6px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        #sidebar .property {
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        #sidebar .property_title {
+            float: left;
+            width: 80px;
+            margin-top: 0;
+            padding-top: 10px;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        #sidebar .property_text {
+            margin-top: 8px;
+            margin-left: 100px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            padding: 8px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        #sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .tooltip {
+            color: blue;
+        }
+
+        .tooltip .tooltipcontent {
+            visibility: hidden;
+            color: black;
+            background-color: #eee;
+            margin-top: 18px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltipcontent {
+            visibility: visible;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        graphs = $graph_dump;
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        <h1>$spec_name</h1>
+        <div class="subgraph" id="main-subgraph">
+            <label for="main-selector">Choose a subgraph: </label>
+            <select id="main-selector" onchange="renderSubgraph(this.value)"></select>
+            <div id="main-tables"></div>
+            <h3>Visual Graph</h3>
+            <svg id="subgraph-svg" width="100%" height="720"></svg>
+        </div>
+    </div>
+
+    <div id="sidebar">
+        <div id="sidebar-main">
+        </div>
+    </div>
+
+    <script>
+        // Render the sidebar view of a given node object.
+        // The node must have "name" and "group" fields available.
+        function renderSidebar(node) {
+            var sidebar = document.getElementById("sidebar-main");
+            sidebar.innerHTML = "";
+            if (node == null) return;
+
+            // Sidebar subtitle -- text taken from node.group.
+            var subtitle = document.createElement("p");
+            subtitle.classList.add("subtitle");
+            subtitle.innerHTML = node.group;
+            sidebar.appendChild(subtitle);
+
+            // Sidebar title -- text taken from node.name.
+            var title = document.createElement("h1");
+            title.innerHTML = node.name;
+            sidebar.appendChild(title);
+
+            // List all the other fields in sidebar.
+            var ignoredFields = ["name", "group"];
+            for (var property in node) {
+                if (ignoredFields.includes(property)) continue;
+
+                var propertyTitle = document.createElement("h2");
+                propertyTitle.classList.add("property_title");
+                propertyTitle.innerHTML = property;
+
+                var propertyText = document.createElement("p");
+                propertyText.classList.add("property_text");
+                propertyText.innerHTML = node[property];
+
+                var propertyDiv = document.createElement("div");
+                propertyDiv.classList.add("property");
+                propertyDiv.appendChild(propertyTitle);
+                propertyDiv.appendChild(propertyText);
+                sidebar.appendChild(propertyDiv);
+            }
+        }
+
+        // Render the SVG DAG visualization, from TFLite graph visualizer.
+        // https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/tools/visualize.py
+        //
+        // The node coordiates are pre-calculated from the python visualizer.
+        function renderSvg(subgraph) {
+            var data = graphs[subgraph]["subgraph"];
+            var svg = d3.select("#subgraph-svg");
+            svg.selectAll("*").remove();
+            var width = svg.attr("width");
+            var height = svg.attr("height");
+            // Make the graph scrollable.
+            svg = svg.call(d3.zoom().on("zoom", function () {
+                svg.attr("transform", d3.event.transform);
+            })).append("g");
+            var color = d3.scaleOrdinal(d3.schemeDark2);
+            var simulation = d3.forceSimulation()
+                .force("link", d3.forceLink().id(function (d) { return d.id; }))
+                .force("charge", d3.forceManyBody())
+                .force("center", d3.forceCenter(0.5 * width, 0.5 * height));
+            var edge = svg.append("g").attr("class", "edges").selectAll("line")
+                .data(data.edges).enter().append("path").attr("stroke", "black").attr("fill", "none")
+            // Make the node group
+            var node = svg.selectAll(".nodes")
+                .data(data.nodes)
+                .enter().append("g")
+                .attr("x", function (d) { return d.x })
+                .attr("y", function (d) { return d.y })
+                .attr("transform", function (d) {
+                    return "translate( " + d.x + ", " + d.y + ")"
+                })
+                .attr("class", "nodes")
+                .call(d3.drag()
+                    .on("start", function (d) {
+                        if (!d3.event.active) simulation.alphaTarget(1.0).restart();
+                        d.fx = d.x; d.fy = d.y;
+                    })
+                    .on("drag", function (d) {
+                        d.fx = d3.event.x; d.fy = d3.event.y;
+                    })
+                    .on("end", function (d) {
+                        if (!d3.event.active) simulation.alphaTarget(0);
+                        d.fx = d.fy = null;
+                    }));
+            // Within the group, draw a box for the node position and text
+            // on the side.
+            var node_width = 150;
+            var node_height = 30;
+            node.append("rect")
+                .attr("r", "5px")
+                .attr("width", function (d) { return d.group == 1 ? node_width : node_width + 50; })
+                .attr("height", node_height)
+                .attr("rx", function (d) { return d.group == 1 ? 1 : 10; })
+                .attr("stroke", "#000000")
+                .attr("fill", function (d) { return d.group == 1 ? "#dddddd" : "#000000"; })
+                .attr("onclick", function (d) {
+                    return "renderSidebar(graphs." + subgraph + ".details." +
+                        (d.group == 1 ? "operands" : "operations") + "[" +
+                        d.index.toString() + "])";
+                });
+            node.append("text")
+                .text(function (d) { return d.name; })
+                .attr("x", 5)
+                .attr("y", 20)
+                .attr("fill", function (d) { return d.group == 1 ? "#000000" : "#eeeeee"; })
+            // Setup force parameters and update position callback
+            var node = svg.selectAll(".nodes")
+                .data(data.nodes);
+            // Bind the links
+            var name_to_g = {}
+            node.each(function (data, index, nodes) {
+                name_to_g[data.id] = this;
+            });
+            function proc(w, t) {
+                return parseInt(w.getAttribute(t));
+            }
+            edge.attr("d", function (d) {
+                function lerp(t, a, b) {
+                    return (1.0 - t) * a + t * b;
+                }
+                var x1 = proc(name_to_g[d.source], "x") + node_width / 2;
+                var y1 = proc(name_to_g[d.source], "y") + node_height;
+                var x2 = proc(name_to_g[d.target], "x") + node_width / 2;
+                var y2 = proc(name_to_g[d.target], "y");
+                var s = "M " + x1 + " " + y1
+                    + " C " + x1 + " " + lerp(.5, y1, y2)
+                    + " " + x2 + " " + lerp(.5, y1, y2)
+                    + " " + x2 + " " + y2
+                return s;
+            });
+        }
+
+        // Open a new window and present the full text data.
+        function showFullData(data) {
+            window.open().document.write(data);
+        }
+
+        // Renders a single table.
+        function renderTable(title, data, headers) {
+            var parent = document.getElementById("main-tables");
+
+            // Create heading.
+            var heading = document.createElement("h3");
+            heading.innerHTML = title;
+            parent.appendChild(heading);
+
+            // Filter out headers that do not appear in any data element.
+            headers = headers.filter(function (key) {
+                return data.some(function (elem) { return key in elem; });
+            });
+
+            // Render the table headers.
+            var table = document.createElement("table");
+            let header = table.createTHead().insertRow();
+            for (let key of headers) { header.insertCell().innerHTML = key; }
+
+            // Render the table body.
+            // Since the "data" field could be very large, we omit the full content and
+            // append a "View Full" button to the end.
+            var omittableFields = ["data"];
+            let body = table.createTBody();
+            for (const [index, elem] of data.entries()) {
+                let row = body.insertRow();
+                row.id = "details-" + title.toLowerCase() + "-" + index.toString();
+
+                for (let key of headers) {
+                    var cell = row.insertCell();
+                    var data = key in elem ? elem[key] : "-";
+                    if (omittableFields.includes(key) && data.length > 100) {
+                        // If the data exceeds the length limit, only print the first 80 and
+                        // the last 20 characters.
+                        data = data.substring(0, 80) + " ... " +
+                            data.substring(data.length - 20, data.length) + " ";
+                        cell.innerHTML = data;
+
+                        // Append a "View Full" button to the end.
+                        var href = document.createElement("a");
+                        href.innerHTML = "View Full";
+                        href.href = "javascript:void(0)";
+                        href.onclick = function () { showFullData(elem[key]); };
+                        cell.appendChild(href);
+                    } else {
+                        cell.innerHTML = data;
+                    }
+                }
+            }
+            parent.appendChild(table);
+        }
+
+        function renderTables(subgraph) {
+            document.getElementById("main-tables").innerHTML = "";
+            renderTable("Configurations", graphs[subgraph].details.configurations, [
+                "relaxed",
+                "use shared memory",
+                "expect failure"
+            ]);
+            renderTable("Operands", graphs[subgraph].details.operands, [
+                "index",
+                "name",
+                "type",
+                "dimensions",
+                "scale",
+                "zero point",
+                "channel dim",
+                "lifetime",
+                "data"
+            ]);
+            renderTable("Operations", graphs[subgraph].details.operations, [
+                "index",
+                "opcode",
+                "inputs",
+                "outputs"
+            ]);
+        }
+
+        // Re-render all the information related to a subgraph.
+        // Invoked everytime when the main-selector changes.
+        function renderSubgraph(subgraph) {
+            renderTables(subgraph);
+            renderSvg(subgraph);
+            renderSidebar(null);  // Clear sidebar.
+        }
+
+        // Renders the main-selector and the first subgraph choice in the main-selector.
+        // Only invoked once when the page gets loaded the first time.
+        function renderMain() {
+            var selector = document.getElementById("main-selector");
+            var first = true;
+            for (var subgraph in graphs) {
+                var option = document.createElement("option");
+                option.value = subgraph;
+                option.text = subgraph;
+                selector.appendChild(option);
+                if (first) {
+                    first = false;
+                    renderSubgraph(subgraph);
+                }
+            }
+        }
+        renderMain();
+    </script>
+</body>
+</html>

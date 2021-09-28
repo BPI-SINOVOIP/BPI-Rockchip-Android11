@@ -1,0 +1,77 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 2
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 4166309954
+      }
+    }
+    operand {
+      type: TENSOR_INT32
+      dimensions {
+        dimension: 0
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 797982799
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT32
+      dimensions {
+        dimension: 2
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 4213891330
+      }
+    }
+  }
+  operations {
+    operation {
+      type: TRANSPOSE
+      inputs {
+        index: 0
+        index: 1
+      }
+      outputs {
+        index: 2
+      }
+    }
+  }
+  input_indexes {
+    index: 0
+    index: 1
+  }
+  output_indexes {
+    index: 2
+  }
+  is_relaxed: true
+}

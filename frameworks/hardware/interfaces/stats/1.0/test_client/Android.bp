@@ -1,0 +1,14 @@
+cc_binary {
+    name: "stats_client",
+    srcs: [
+        "StatsClient.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "libutils",
+        "libstatslog",
+        "android.frameworks.stats@1.0",
+    ],
+}
+

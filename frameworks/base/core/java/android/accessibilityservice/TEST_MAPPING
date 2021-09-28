@@ -1,0 +1,26 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsAccessibilityServiceTestCases",
+      "options": [
+        {
+          "include-annotation": "android.platform.test.annotations.Presubmit"
+        },
+        {
+          "exclude-annotation": "android.support.test.filters.FlakyTest"
+        }
+      ]
+    }
+  ],
+  "postsubmit": [
+    {
+      "name": "CtsAccessibilityServiceSdk29TestCases"
+    },
+    {
+      "name": "CtsAccessibilityServiceTestCases"
+    },
+    {
+      "name": "CtsAccessibilityTestCases"
+    }
+  ]
+}

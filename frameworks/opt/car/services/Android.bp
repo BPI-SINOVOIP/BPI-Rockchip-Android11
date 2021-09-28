@@ -1,0 +1,32 @@
+java_library {
+    name: "car-frameworks-service",
+    installable: true,
+    libs: [
+        "services",
+        "android.hardware.automotive.vehicle-V2.0-java",
+        "android.car.internal.event-log-tags",
+    ],
+    required: ["libcar-framework-service-jni"],
+    srcs: [
+        "src/**/*.java",
+        "src/com/android/internal/car/ICarServiceHelper.aidl",
+    ],
+    static_libs: [
+        "android.car.userlib",
+        "android.car.watchdoglib",
+        "carwatchdog_aidl_interface-java",
+    ],
+}
+
+cc_library_shared {
+    name: "libcar-framework-service-jni",
+    shared_libs: [
+        "libandroid_runtime",
+        "libhidlbase",
+        "liblog",
+        "libnativehelper",
+        "libsuspend",
+        "libutils",
+    ],
+    srcs: ["src/jni/com_android_internal_car_CarServiceHelperService.cpp"],
+}

@@ -1,0 +1,13 @@
+filegroup {
+    name: "services.print-sources",
+    srcs: ["java/**/*.java"],
+    path: "java",
+    visibility: ["//frameworks/base/services"],
+}
+
+java_library_static {
+    name: "services.print",
+    defaults: ["services_defaults"],
+    srcs: [":services.print-sources"],
+    libs: ["services.core"],
+}

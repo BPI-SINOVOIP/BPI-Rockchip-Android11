@@ -1,0 +1,14 @@
+filegroup {
+    name: "services.backup-sources",
+    srcs: ["java/**/*.java"],
+    path: "java",
+    visibility: ["//frameworks/base/services"],
+}
+
+java_library_static {
+    name: "services.backup",
+    defaults: ["services_defaults"],
+    srcs: [":services.backup-sources"],
+    libs: ["services.core"],
+    static_libs: ["backuplib"],
+}

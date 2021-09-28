@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_with_label_containing_button"
+                android:text="OK"
+                android:contentDescription="OK button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp" />
+
+            <TextView
+                android:id="@+id/oath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="I hereby declare, on oath, that I absolutely and entirely renounce and abjure all allegiance
+    and fidelity to any foreign prince, potentate, state, or sovereignty of whom or which I have
+    heretofore been a subject or citizen; that I will support and defend the Constitution and
+    laws of the United States of America against all enemies, foreign and domestic; that I will
+    bear true faith and allegiance to the same; that I will bear arms on behalf of the United
+    States when required by the law; that I will perform noncombatant service in the
+    Armed Forces of the United States when required by the law; that I will perform work of
+    national importance under civilian direction when required by the law; and that I take this
+    obligation freely without any mental reservation or purpose of evasion; so help me God."/>
+
+            <Button
+                android:text="Good Button"
+                android:id="@+id/bottom_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
+
+</LinearLayout>

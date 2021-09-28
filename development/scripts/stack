@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+#
+# Copyright (C) 2013 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""stack symbolizes native crash dumps."""
+
+import argparse
+import sys
+
+import stack_core
+import symbol
+
+def main():
+  parser = argparse.ArgumentParser(description='Parse and symbolize crashes')
+  parser.add_argument('--arch', help='the target architecture')
+  parser.add_argument('--syms', '--symdir', help='the symbols directory')
+  parser.add_argument('file',
+                      metavar='FILE',
+                      default='-',
+                      nargs='?',  # Required for default.
+                      help='should contain a stack trace in it somewhere the '
+                           'tool will find that and re-print it with source '
+                           'files and line numbers. If you don\'t pass FILE, '
+                           'or if file is -, it reads from stdin.')
+
+  args = parser.parse_args()
+
+  if args.arch:
+    symbol.ARCH = args.arch
+  if args.syms:
+    symbol.SYMBOLS_DIR = args.syms
+  if args.file == '-':
+    print "Reading native crash info from stdin"
+    f = sys.stdin
+  else:
+    print "Searching for native crashes in %s" % args.file
+    f = open(args.file, "r")
+
+  lines = f.readlines()
+  f.close()
+
+  stack_core.ConvertTrace(lines)
+
+if __name__ == "__main__":
+  main()
+
+# vi: ts=2 sw=2

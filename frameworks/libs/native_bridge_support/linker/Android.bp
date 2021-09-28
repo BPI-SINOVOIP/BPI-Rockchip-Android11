@@ -1,0 +1,75 @@
+//
+// Copyright (C) 2020 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+cc_library_headers {
+    name: "native_bridge_guest_linker_headers",
+    export_include_dirs: ["include"],
+    host_supported: true,
+    native_bridge_supported: true,
+}
+
+cc_binary {
+    name: "native_bridge_guest_linker",
+    overrides: ["linker"],
+    stem: "linker",
+    defaults: ["linker_bin_template"],
+    srcs: [
+        "__libc_init_main_thread.cpp",
+        "linker_tls.cpp",
+        "linker_translate_path.cpp",
+    ],
+
+    include_dirs: [
+        "bionic/linker",
+    ],
+
+    enabled: false,
+    target: {
+       native_bridge: {
+           enabled: true,
+       }
+    },
+    arch: {
+        arm: {
+            srcs: ["init_static_tls_arm.S"],
+            version_script: "linker.arm.map",
+        },
+        arm64: {
+            srcs: ["init_static_tls_arm64.S"],
+            version_script: "linker.generic.map",
+        },
+    },
+
+    cflags: [
+        // TODO(b/133135269): workaround to skip hardcoded 'bootstrap' directory from guest library search.
+        // See https://android-review.googlesource.com/c/platform/bionic/+/954353/7/linker/linker.cpp#1165
+        "-D__ANDROID_APEX__=native_bridge_apex",
+    ],
+
+    header_libs: ["native_bridge_guest_linker_headers"],
+
+    native_bridge_supported: true,
+
+    multilib: {
+        lib64: {
+            suffix: "64",
+        },
+    },
+
+    compile_multilib: "both",
+
+    static_libs: ["liblinker_debuggerd_stub"],
+}

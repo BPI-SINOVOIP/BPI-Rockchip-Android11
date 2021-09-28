@@ -1,0 +1,32 @@
+cc_library_shared {
+    name: "libaudiopolicyenginedefault",
+    srcs: [
+        "src/Engine.cpp",
+        "src/EngineInstance.cpp",
+    ],
+    cflags: [
+        "-fvisibility=hidden",
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+    ],
+    header_libs: [
+        "libbase_headers",
+        "libaudiopolicycommon",
+        "libaudiopolicyengine_interface_headers",
+    ],
+    static_libs: [
+        "libaudiopolicycomponents",
+        "libaudiopolicyengine_common",
+        "libaudiopolicyengine_config",
+    ],
+    shared_libs: [
+        "libaudiofoundation",
+        "liblog",
+        "libcutils",
+        "libutils",
+        "libmedia_helper",
+        "libaudiopolicy",
+        "libxml2",
+    ],
+}

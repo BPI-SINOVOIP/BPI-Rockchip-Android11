@@ -1,0 +1,103 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_QUANT8_ASYMM
+      dimensions {
+        dimension: 300
+      }
+      scale: 1
+      zero_point: 1
+      lifetime: SUBGRAPH_OUTPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 2803911451
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: CONSTANT_COPY
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 5871118
+      }
+    }
+    operand {
+      type: TENSOR_FLOAT16
+      dimensions {
+        dimension: 1
+        dimension: 2
+        dimension: 2
+        dimension: 8
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1331284804
+      }
+    }
+    operand {
+      type: INT32
+      dimensions {
+        dimension: 300
+      }
+      scale: 0
+      zero_point: 0
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 1156226111
+      }
+    }
+  }
+  operations {
+    operation {
+      type: DEPTH_TO_SPACE
+      inputs {
+        index: 0
+        index: 1
+        index: 2
+      }
+      outputs {
+        index: 3
+      }
+    }
+    operation {
+      type: QUANTIZE
+      inputs {
+        index: 0
+      }
+      outputs {
+        index: 1
+      }
+    }
+  }
+  input_indexes {
+    index: 2
+    index: 0
+  }
+  output_indexes {
+  }
+  is_relaxed: false
+}

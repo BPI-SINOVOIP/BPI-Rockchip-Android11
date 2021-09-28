@@ -1,0 +1,76 @@
+{
+    "imports": [
+        {
+            "path": "frameworks/base/services/core/java/com/android/server/am"
+        },
+        {
+            "path": "frameworks/base/services/core/java/com/android/server/wm"
+        }
+    ],
+    "presubmit": [
+        {
+            "name": "CtsFragmentTestCases"
+        },
+        {
+            "name": "CtsFragmentTestCasesSdk26"
+        },
+        {
+            "file_patterns": ["(/|^)AppOpsManager.java"],
+            "name": "CtsAppOpsTestCases"
+        },
+        {
+            "file_patterns": ["(/|^)AppOpsManager.java"],
+            "name": "FrameworksServicesTests",
+            "options": [
+                {
+                    "include-filter": "com.android.server.appop"
+                }
+            ]
+        },
+        {
+            "file_patterns": ["(/|^)AppOpsManager.java"],
+            "name": "CtsStatsdHostTestCases",
+            "options": [
+                {
+                    "include-filter": "android.cts.statsd.atom.UidAtomTests#testAppOps"
+                }
+            ]
+        },
+        {
+            "file_patterns": ["(/|^)AppOpsManager.java"],
+            "name": "CtsPermission2TestCases",
+            "options": [
+                {
+                    "include-filter": "android.permission2.cts.RuntimePermissionProperties"
+                }
+            ]
+        },
+        {
+            "name": "CtsToastTestCases",
+            "file_patterns": ["INotificationManager\\.aidl"]
+        },
+        {
+            "name": "CtsWindowManagerDeviceTestCases",
+            "options": [
+                {
+                    "include-filter": "android.server.wm.ToastWindowTest"
+                }
+            ],
+            "file_patterns": ["INotificationManager\\.aidl"]
+        },
+        {
+            "name": "CtsInstantAppTests",
+            "file_patterns": ["(/|^)InstantAppResolve[^/]*"]
+        }
+    ],
+    "postsubmit": [
+        {
+            "file_patterns": ["(/|^)ActivityThreadClientTest.java"],
+            "name": "FrameworksMockingCoreTests"
+        },
+        {
+            "file_patterns": ["(/|^)ActivityThreadTest.java"],
+            "name": "FrameworksCoreTests"
+        }
+    ]
+}

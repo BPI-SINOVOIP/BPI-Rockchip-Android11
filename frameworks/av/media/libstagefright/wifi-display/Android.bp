@@ -1,0 +1,61 @@
+cc_library_shared {
+    name: "libstagefright_wfd",
+
+    srcs: [
+        "MediaSender.cpp",
+        "Parameters.cpp",
+        "rtp/RTPSender.cpp",
+        "source/Converter.cpp",
+        "source/MediaPuller.cpp",
+        "source/PlaybackSession.cpp",
+        "source/RepeaterSource.cpp",
+        "source/TSPacketizer.cpp",
+        "source/WifiDisplaySource.cpp",
+        "VideoFormats.cpp",
+	"WfdUtils.cpp",
+	"ANetworkSession.cpp",
+	"ParsedMessage.cpp",
+    ],
+
+    include_dirs: [
+        "frameworks/av/media/libstagefright",
+        "frameworks/native/include/media/openmax",
+        "frameworks/native/include/media/hardware",
+        "frameworks/av/media/libstagefright/mpeg2ts",
+    ],
+
+    header_libs: [
+        "libmediadrm_headers",
+        "libmediametrics_headers",  
+    ],  
+
+    shared_libs: [
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libmedia",
+        "libstagefright",
+        "libstagefright_foundation",
+        "libui",
+        "libgui",
+        "libutils",
+	"libmedia_omx",
+	"libstagefright_foundation",
+    ],
+
+    cflags: [
+        "-Wno-multichar",
+        "-Werror",
+        "-Wall",
+    ],
+
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+        ],
+        cfi: true,
+        diag: {
+            cfi: true,
+        },
+    },
+}

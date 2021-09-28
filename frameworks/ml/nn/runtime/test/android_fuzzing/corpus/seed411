@@ -1,0 +1,30 @@
+model {
+  operands {
+    operand {
+      type: TENSOR_FLOAT16
+      dimensions {
+        dimension: 2
+      }
+      scale: 0
+      zero_point: 127
+      lifetime: SUBGRAPH_INPUT
+      channel_quant {
+        scales {
+        }
+        channel_dim: 0
+      }
+      data {
+        random_seed: 673338489
+      }
+    }
+  }
+  operations {
+  }
+  input_indexes {
+    index: 0
+    index: 0
+  }
+  output_indexes {
+  }
+  is_relaxed: true
+}

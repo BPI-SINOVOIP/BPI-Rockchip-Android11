@@ -1,0 +1,33 @@
+cc_library_static {
+    name: "libstagefright_color_conversion",
+
+    srcs: [
+        "ColorConverter.cpp",
+        "SoftwareRenderer.cpp",
+    ],
+
+    include_dirs: [
+        "frameworks/native/include/media/openmax",
+    ],
+
+    shared_libs: [
+        "libui",
+        "libnativewindow",
+    ],
+
+    header_libs: [
+        "libstagefright_headers",
+        "libstagefright_foundation_headers",
+    ],
+
+    static_libs: ["libyuv_static"],
+
+    cflags: ["-Werror"],
+
+    sanitize: {
+        misc_undefined: [
+            "signed-integer-overflow",
+        ],
+        cfi: true,
+    },
+}

@@ -1,0 +1,15 @@
+{
+    "presubmit": [
+        {
+            "name": "CtsPermissionTestCases",
+            "options": [
+                {
+                    "include-filter": "android.permission.cts.PermissionControllerTest"
+                },
+                {
+                    "include-filter": "android.permission.cts.RuntimePermissionPresentationInfoTest"
+                }
+            ]
+        }
+    ]
+}

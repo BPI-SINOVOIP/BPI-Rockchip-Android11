@@ -1,0 +1,33 @@
+//##############################################################
+// CarSetupWizardLib app just for Robolectric test target.     #
+//##############################################################
+android_app {
+    name: "CarSetupWizardLib",
+
+    resource_dirs: ["res"],
+
+    platform_apis: true,
+
+    privileged: true,
+
+    libs: ["android.car"],
+
+    static_libs: ["car-setup-wizard-lib"],
+}
+
+//##############################################################
+// CarSetupWizardLib Robolectric test target.                  #
+//##############################################################
+android_robolectric_test {
+    name: "CarSetupWizardLibRoboTests",
+
+    srcs: ["src/**/*.java"],
+
+    java_resource_dirs: ["config"],
+
+    libs: [
+        "android.car",
+    ],
+
+    instrumentation_for: "CarSetupWizardLib",
+}

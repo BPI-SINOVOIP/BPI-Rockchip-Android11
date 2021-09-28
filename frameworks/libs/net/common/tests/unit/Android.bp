@@ -1,0 +1,32 @@
+//########################################################################
+// Build NetworkStaticLibTests package
+//########################################################################
+
+android_library {
+    name: "NetworkStaticLibTestsLib",
+    srcs: ["src/**/*.java","src/**/*.kt"],
+    min_sdk_version: "29",
+    jarjar_rules: "jarjar-rules.txt",
+    static_libs: [
+        "net-utils-framework-common",
+        "androidx.test.rules",
+    ],
+    libs: [
+        "android.test.runner",
+        "android.test.base",
+    ],
+    visibility: [
+        "//frameworks/base/packages/Tethering/tests/integration",
+        "//packages/modules/NetworkStack/tests/integration",
+    ]
+}
+
+android_test {
+    name: "NetworkStaticLibTests",
+    certificate: "platform",
+    static_libs: [
+        "NetworkStaticLibTestsLib",
+    ],
+    test_suites: ["device-tests"],
+}
+

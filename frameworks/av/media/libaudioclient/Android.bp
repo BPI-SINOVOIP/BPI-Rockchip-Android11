@@ -1,0 +1,167 @@
+cc_library_headers {
+    name: "libaudioclient_headers",
+    vendor_available: true,
+    min_sdk_version: "29",
+
+    header_libs: [
+        "libaudiofoundation_headers",
+    ],
+    export_include_dirs: [
+        "include",
+    ],
+    export_header_lib_headers: [
+        "libaudiofoundation_headers",
+    ],
+}
+
+cc_library_shared {
+    name: "libaudiopolicy",
+    srcs: [
+        "AudioAttributes.cpp",
+        "AudioPolicy.cpp",
+        "AudioProductStrategy.cpp",
+        "AudioVolumeGroup.cpp",
+    ],
+    shared_libs: [
+        "capture_state_listener-aidl-cpp",
+        "libaudiofoundation",
+        "libaudioutils",
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libutils",
+    ],
+    cflags: [
+        "-Werror",
+        "-Wall",
+    ],
+    include_dirs: ["system/media/audio_utils/include"],
+    export_include_dirs: ["include"],
+    export_shared_lib_headers: [
+        "capture_state_listener-aidl-cpp",
+    ],
+}
+
+cc_library_shared {
+    name: "libaudioclient",
+
+    aidl: {
+        export_aidl_headers: true,
+        local_include_dirs: ["aidl"],
+        include_dirs: [
+            "frameworks/av/media/libaudioclient/aidl",
+        ],
+    },
+
+    srcs: [
+        // AIDL files for audioclient interfaces
+        // The headers for these interfaces will be available to any modules that
+        // include libaudioclient, at the path "aidl/package/path/BnFoo.h"
+        ":libaudioclient_aidl_callback",
+        ":libaudioclient_aidl_private",
+        ":libaudioclient_aidl",
+
+        "AudioEffect.cpp",
+        "AudioRecord.cpp",
+        "AudioSanitizer.cpp",
+        "AudioSystem.cpp",
+        "AudioTrack.cpp",
+        "AudioTrackShared.cpp",
+        "IAudioFlinger.cpp",
+        "IAudioFlingerClient.cpp",
+        "IAudioPolicyService.cpp",
+        "IAudioPolicyServiceClient.cpp",
+        "IAudioTrack.cpp",
+        "IEffect.cpp",
+        "IEffectClient.cpp",
+        "ToneGenerator.cpp",
+        "PlayerBase.cpp",
+        "RecordingActivityTracker.cpp",
+        "TrackPlayerBase.cpp",
+    ],
+    shared_libs: [
+        "capture_state_listener-aidl-cpp",
+        "libaudiofoundation",
+        "libaudioutils",
+        "libaudiopolicy",
+        "libaudiomanager",
+        "libbinder",
+        "libcutils",
+        "libdl",
+        "liblog",
+        "libmedia_helper",
+        "libmediametrics",
+        "libmediautils",
+        "libnblog",
+        "libprocessgroup",
+        "libutils",
+        "libvibrator",
+    ],
+    export_shared_lib_headers: ["libbinder"],
+
+    include_dirs: [
+        "frameworks/av/media/libnbaio/include_mono/",
+    ],
+    local_include_dirs: [
+        "include/media", "aidl"
+    ],
+    header_libs: [
+        "libaudioclient_headers",
+        "libbase_headers",
+        "libmedia_headers",
+    ],
+    export_header_lib_headers: ["libaudioclient_headers"],
+
+    // for memory heap analysis
+    static_libs: [
+        "libc_malloc_debug_backtrace",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+    ],
+    sanitize: {
+        misc_undefined : [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+}
+
+// AIDL interface between libaudioclient and framework.jar
+filegroup {
+    name: "libaudioclient_aidl",
+    srcs: [
+        "aidl/android/media/IPlayer.aidl",
+    ],
+    path: "aidl",
+}
+
+// Used to strip the "aidl/" from the path, so the build system can predict the
+// output filename.
+filegroup {
+    name: "libaudioclient_aidl_private",
+    srcs: [
+        "aidl/android/media/IAudioRecord.aidl",
+    ],
+    path: "aidl",
+}
+
+// AIDL interface for audio track callback
+filegroup {
+    name: "libaudioclient_aidl_callback",
+    srcs: [
+        "aidl/android/media/IAudioTrackCallback.aidl",
+    ],
+    path: "aidl",
+}
+
+aidl_interface {
+    name: "capture_state_listener-aidl",
+    unstable: true,
+    local_include_dir: "aidl",
+    srcs: [
+        "aidl/android/media/ICaptureStateListener.aidl",
+    ],
+}

@@ -1,0 +1,45 @@
+{
+    "presubmit": [
+        {
+            "name": "FrameworksMockingServicesTests",
+            "file_patterns": ["AlarmManagerService\\.java"],
+            "options": [
+                {
+                  "include-filter": "com.android.server."
+                },
+                {
+                  "include-annotation": "android.platform.test.annotations.Presubmit"
+                },
+                {
+                  "exclude-annotation": "androidx.test.filters.FlakyTest"
+                }
+            ]
+        },
+        {
+            "name": "CtsLocationFineTestCases"
+        },
+        {
+            "name": "CtsLocationCoarseTestCases"
+        },
+        {
+            "name": "CtsLocationNoneTestCases"
+        },
+        {
+            "name": "CtsToastTestCases",
+            "file_patterns": ["NotificationManagerService\\.java"]
+        },
+        {
+            "name": "CtsWindowManagerDeviceTestCases",
+            "options": [
+                {
+                    "include-filter": "android.server.wm.ToastWindowTest"
+                }
+            ],
+            "file_patterns": ["NotificationManagerService\\.java"]
+        },
+        {
+            "name": "CtsScopedStorageHostTest",
+            "file_patterns": ["StorageManagerService\\.java"]
+        }
+    ]
+}

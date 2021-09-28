@@ -1,0 +1,92 @@
+cc_defaults {
+    name: "gpuservice_defaults",
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wformat",
+        "-Wthread-safety",
+        "-Wunused",
+        "-Wunreachable-code",
+    ],
+}
+
+cc_defaults {
+    name: "libgpuservice_defaults",
+    defaults: ["gpuservice_defaults"],
+    cflags: [
+        "-DLOG_TAG=\"GpuService\"",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "libgfxstats",
+        "libgraphicsenv",
+        "liblog",
+        "libutils",
+        "libvkjson",
+    ],
+    static_libs: [
+        "libserviceutils",
+    ],
+    export_static_lib_headers: [
+        "libserviceutils",
+    ],
+    export_shared_lib_headers: [
+        "libgraphicsenv",
+    ],
+}
+
+cc_defaults {
+    name: "libgpuservice_production_defaults",
+    defaults: ["libgpuservice_defaults"],
+    cflags: [
+        "-fvisibility=hidden",
+        "-fwhole-program-vtables", // requires ThinLTO
+    ],
+    lto: {
+        thin: true,
+    },
+}
+
+filegroup {
+    name: "libgpuservice_sources",
+    srcs: [
+        "GpuService.cpp",
+    ],
+}
+
+cc_library_shared {
+    name: "libgpuservice",
+    defaults: ["libgpuservice_production_defaults"],
+    srcs: [
+        ":libgpuservice_sources",
+    ],
+}
+
+cc_defaults {
+    name: "libgpuservice_binary",
+    defaults: ["gpuservice_defaults"],
+    shared_libs: [
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libutils",
+    ],
+    ldflags: ["-Wl,--export-dynamic"],
+}
+
+filegroup {
+    name: "gpuservice_binary_sources",
+    srcs: ["main_gpuservice.cpp"],
+}
+
+cc_binary {
+    name: "gpuservice",
+    defaults: ["libgpuservice_binary"],
+    init_rc: ["gpuservice.rc"],
+    srcs: [":gpuservice_binary_sources"],
+    shared_libs: [
+        "libgpuservice",
+    ],
+}

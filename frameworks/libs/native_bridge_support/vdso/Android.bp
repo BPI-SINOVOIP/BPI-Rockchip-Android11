@@ -1,0 +1,54 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+cc_library_shared {
+    name: "libnative_bridge_vdso",
+    enabled: false,
+    native_bridge_supported: true,
+    target: {
+       native_bridge: {
+           enabled: true,
+       }
+    },
+    arch: {
+        arm64: {
+            srcs: ["vdso_arm64.S"],
+        },
+        arm: {
+            srcs: ["vdso_arm.S"],
+        },
+    },
+    export_include_dirs: ["include"],
+    // Make sure we do not drag any dependencies for vdso library (-Wl,--exclude-libs,ALL)
+    ldflags: [
+        "-Wl,--exclude-libs,ALL",
+        "-Wl,-soname,linux-vdso.so.1",
+
+        // TODO(b/146399556): Use -z,separate-code to ensure that each segment's p_offset and
+        // p_vaddr values are equal to work around problems with __libc_init_vdso in Bionic.
+        "-Wl,-z,separate-code",
+    ],
+    system_shared_libs: [],
+    // Opt out of native_coverage when opting out of system_shared_libs
+    native_coverage: false,
+    nocrt: true,
+    stl: "none",
+    // no_standard_libs: true,
+    strip: {
+        keep_symbols_and_debug_frame: true,
+    },
+    pack_relocations: false,
+}
