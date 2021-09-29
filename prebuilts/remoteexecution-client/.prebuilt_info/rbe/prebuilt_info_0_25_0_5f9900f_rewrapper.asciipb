@@ -1,0 +1,15 @@
+drops {
+  dest_file: "0.25.0.5f9900f/rewrapper"
+  version: "0.25.0.5f9900f"
+  version_group: "rbe"
+  git_project: "platform/prebuilts/remoteexecution-client"
+  git_branch: "master"
+  kokoro_drop {
+    full_job_name: "re-client/gcp_ubuntu/release"
+    build_number: "216"
+    artifact_gcs_bucket: "reclient-release-artifacts"
+    artifact_root: "prod/re-client/gcp_ubuntu/release/216/20210323-102702"
+    artifact_name: "rewrapper"
+    artifact_permission_mode: "755"
+  }
+}

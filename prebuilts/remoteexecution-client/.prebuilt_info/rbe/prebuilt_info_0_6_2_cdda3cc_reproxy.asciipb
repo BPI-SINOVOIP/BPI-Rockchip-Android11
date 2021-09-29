@@ -1,0 +1,15 @@
+drops {
+  dest_file: "0.6.2.cdda3cc/reproxy"
+  version: "0.6.2.cdda3cc"
+  version_group: "rbe"
+  git_project: "platform/prebuilts/remoteexecution-client"
+  git_branch: "master"
+  kokoro_drop {
+    full_job_name: "re-client/gcp_ubuntu/release"
+    build_number: "53"
+    artifact_gcs_bucket: "reclient-release-artifacts"
+    artifact_root: "prod/re-client/gcp_ubuntu/release/53/20191219-115552"
+    artifact_name: "reproxy"
+    artifact_permission_mode: "755"
+  }
+}

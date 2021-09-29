@@ -1,0 +1,15 @@
+drops {
+  dest_file: "0.22.0.d95c8de/bootstrap"
+  version: "0.22.0.d95c8de"
+  version_group: "rbe"
+  git_project: "platform/prebuilts/remoteexecution-client"
+  git_branch: "master"
+  kokoro_drop {
+    full_job_name: "re-client/gcp_ubuntu/release"
+    build_number: "211"
+    artifact_gcs_bucket: "reclient-release-artifacts"
+    artifact_root: "prod/re-client/gcp_ubuntu/release/211/20210225-121840"
+    artifact_name: "bootstrap"
+    artifact_permission_mode: "755"
+  }
+}
