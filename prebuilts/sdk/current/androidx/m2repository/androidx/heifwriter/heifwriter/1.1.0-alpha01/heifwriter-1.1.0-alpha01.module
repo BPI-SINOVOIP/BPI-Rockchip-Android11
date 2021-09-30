@@ -1,0 +1,97 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.heifwriter",
+    "module": "heifwriter",
+    "version": "1.1.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "heifwriter-1.1.0-alpha01.aar",
+          "url": "heifwriter-1.1.0-alpha01.aar",
+          "size": 33776,
+          "sha512": "034137031ab99af3cfe036762f1d4e4bd73389f105ea7ea72a667f4acf56c142e0f7536b7f662eed5df21f6fc1401488d3a6dd99d874031ac3558a18fcbcb316",
+          "sha256": "5945a735220e45598594d02c8419bc0d17e224efbb338f8d80f03a1be0d263e4",
+          "sha1": "1e83895f98e4ea7c659e6785021e205643156ad6",
+          "md5": "5cec3c3361f43bd95f12917ab10b33e4"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "heifwriter-1.1.0-alpha01.aar",
+          "url": "heifwriter-1.1.0-alpha01.aar",
+          "size": 33776,
+          "sha512": "034137031ab99af3cfe036762f1d4e4bd73389f105ea7ea72a667f4acf56c142e0f7536b7f662eed5df21f6fc1401488d3a6dd99d874031ac3558a18fcbcb316",
+          "sha256": "5945a735220e45598594d02c8419bc0d17e224efbb338f8d80f03a1be0d263e4",
+          "sha1": "1e83895f98e4ea7c659e6785021e205643156ad6",
+          "md5": "5cec3c3361f43bd95f12917ab10b33e4"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "heifwriter-1.1.0-alpha01-sources.jar",
+          "url": "heifwriter-1.1.0-alpha01-sources.jar",
+          "size": 24769,
+          "sha512": "0ced81c8ba8fb504507527f5690a79f5339dfc903b1ee048f7d2f1f9f0ba2d2f083a800cf4884b89d5e9cf8efd8f1849dd25cebe8e0792ce04b19e91279ce40d",
+          "sha256": "c5eebadf4a3a4817b1b4259d6bee65550b650fd1b315b0392533c02c0e67d231",
+          "sha1": "de4227a7d5f7733fd172f34a41fc0a7c9e927f8e",
+          "md5": "8b5bdd74d89549e0f577d6c82d7703ab"
+        }
+      ]
+    }
+  ]
+}

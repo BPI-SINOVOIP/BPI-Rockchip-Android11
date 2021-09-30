@@ -1,0 +1,125 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.mediarouter",
+    "module": "mediarouter",
+    "version": "1.2.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.media",
+          "module": "media",
+          "version": {
+            "requires": "1.2.0-alpha04"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mediarouter-1.2.0-alpha01.aar",
+          "url": "mediarouter-1.2.0-alpha01.aar",
+          "size": 721557,
+          "sha512": "34e792665bd68cf55c550e7c49821dad2a8de0db9d8c3a9f0e936ebbb6a81563b45ea4cecfd90765887eac6e413ff5e0860aa2ab0194a0f4393a829e8b980834",
+          "sha256": "62e1c5d41c809284cbf10f3344f11aebb5094178ce421d78448ce582430da4bc",
+          "sha1": "1343cb9d665cdd8b2589cb0780ae56d62a680910",
+          "md5": "f51aac3599f6d1c92aed7b04b3af310a"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.3.0-beta01"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.0.2"
+          }
+        },
+        {
+          "group": "androidx.palette",
+          "module": "palette",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.media",
+          "module": "media",
+          "version": {
+            "requires": "1.2.0-alpha04"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mediarouter-1.2.0-alpha01.aar",
+          "url": "mediarouter-1.2.0-alpha01.aar",
+          "size": 721557,
+          "sha512": "34e792665bd68cf55c550e7c49821dad2a8de0db9d8c3a9f0e936ebbb6a81563b45ea4cecfd90765887eac6e413ff5e0860aa2ab0194a0f4393a829e8b980834",
+          "sha256": "62e1c5d41c809284cbf10f3344f11aebb5094178ce421d78448ce582430da4bc",
+          "sha1": "1343cb9d665cdd8b2589cb0780ae56d62a680910",
+          "md5": "f51aac3599f6d1c92aed7b04b3af310a"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "mediarouter-1.2.0-alpha01-sources.jar",
+          "url": "mediarouter-1.2.0-alpha01-sources.jar",
+          "size": 180775,
+          "sha512": "e306f8fa1ae45d33a7ecdd111c56933b647fc5b9c415decfc51d7a56c38be31e37202c645054b583aca734f87049dab0d1273a2062b189b3938c8de245653b38",
+          "sha256": "0e0ffbb636494cf5012c9e03b48cacb326def9f99984729374801a0fe075ace0",
+          "sha1": "36b52e2bf5dc595950cdc052394908a8709ad91d",
+          "md5": "c275e8b2e55a49ece69af2baba5a3a9e"
+        }
+      ]
+    }
+  ]
+}

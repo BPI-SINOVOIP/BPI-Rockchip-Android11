@@ -1,0 +1,223 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.car",
+    "module": "car",
+    "version": "1.0.0-alpha8",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.2.2",
+      "buildId:": "6390815"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.2.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.4.0-alpha01"
+          }
+        },
+        {
+          "group": "androidx.gridlayout",
+          "module": "gridlayout",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.preference",
+          "module": "preference",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "1.1.0"
+          },
+          "thirdPartyCompatibility": {
+            "artifactSelector": {
+              "name": "constraintlayout",
+              "type": "aar",
+              "extension": "aar"
+            }
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "car-1.0.0-alpha8.aar",
+          "url": "car-1.0.0-alpha8.aar",
+          "size": 347405,
+          "sha512": "77698e231a093cfd5e45dad1a3ce432dc3042d8745f8a5657f6c40e15c56091139127e1c4890673f45a4204f20000363c550f1132ac5cf3a057b404a6893f3f2",
+          "sha256": "f6f230b6c2a05329f68c66727a6afdadfd6603b35c8673132b0dccc57db35af8",
+          "sha1": "7592e3afc6fab81fcca98d1bc4c177eb2b9d20d7",
+          "md5": "dcf46139db735167dff39c6734baaa0d"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.cardview",
+          "module": "cardview",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.2.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.4.0-alpha01"
+          }
+        },
+        {
+          "group": "androidx.gridlayout",
+          "module": "gridlayout",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.preference",
+          "module": "preference",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "1.1.0"
+          },
+          "thirdPartyCompatibility": {
+            "artifactSelector": {
+              "name": "constraintlayout",
+              "type": "aar",
+              "extension": "aar"
+            }
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "car-1.0.0-alpha8.aar",
+          "url": "car-1.0.0-alpha8.aar",
+          "size": 347405,
+          "sha512": "77698e231a093cfd5e45dad1a3ce432dc3042d8745f8a5657f6c40e15c56091139127e1c4890673f45a4204f20000363c550f1132ac5cf3a057b404a6893f3f2",
+          "sha256": "f6f230b6c2a05329f68c66727a6afdadfd6603b35c8673132b0dccc57db35af8",
+          "sha1": "7592e3afc6fab81fcca98d1bc4c177eb2b9d20d7",
+          "md5": "dcf46139db735167dff39c6734baaa0d"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "car-1.0.0-alpha8-sources.jar",
+          "url": "car-1.0.0-alpha8-sources.jar",
+          "size": 139715,
+          "sha512": "eef66e84fd4616b2c3cbbacd0d641dd27bea42336482b0b8dd5147ae4282e135430513d8a2246e455121cdc3ab894b049a2e2bbfda2a3a2f6e485a973be92692",
+          "sha256": "dc498e4e7d0483047d223560c8bc93e112d41fb0fe42c3a8a79a1dcb3534c75e",
+          "sha1": "0b1b7fabb97c1d759bfb2b0a2fc43c4cadff70ce",
+          "md5": "89c3e423c941e512fe9a6a27e8630c6e"
+        }
+      ]
+    }
+  ]
+}

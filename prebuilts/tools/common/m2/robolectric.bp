@@ -1,0 +1,96 @@
+java_import_host {
+    name: "robolectric-accessibility-test-framework-2.1",
+    jars: ["repository/com/google/android/apps/common/testing/accessibility/framework/accessibility-test-framework/2.1/accessibility-test-framework-2.1.jar"],
+}
+
+java_import_host {
+    name: "robolectric-ant-1.8.0",
+    jars: ["repository/org/apache/ant/ant/1.8.0/ant-1.8.0.jar"],
+}
+
+java_import_host {
+    name: "robolectric-compile-testing-0.15",
+    jars: ["repository/com/google/testing/compile/compile-testing/0.15/compile-testing-0.15.jar"],
+}
+
+java_import_host {
+    name: "robolectric-diffutils-1.3.0",
+    jars: ["repository/com/googlecode/java-diff-utils/diffutils/1.3.0/diffutils-1.3.0.jar"],
+}
+
+java_import_host {
+    name: "robolectric-httpclient-4.0.3",
+    jars: ["repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar"],
+}
+
+java_import_host {
+    name: "robolectric-httpcore-4.0.1",
+    jars: ["repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar"],
+}
+
+java_import_host {
+    name: "robolectric-javax.annotation-api-1.2",
+    jars: ["repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar"],
+}
+
+java_import_host {
+    name: "robolectric-maven-ant-tasks-2.1.3",
+    jars: ["repository/org/apache/maven/maven-ant-tasks/2.1.3/maven-ant-tasks-2.1.3.jar"],
+}
+
+java_import_host {
+    name: "robolectric-xstream-1.4.8",
+    jars: ["repository/com/thoughtworks/xstream/xstream/1.4.8/xstream-1.4.8.jar"],
+}
+
+// SQLite requires special handling to embed the prebuilt native libs
+java_import_host {
+    name: "robolectric-sqlite4java-import",
+    jars: ["repository/com/almworks/sqlite4java/sqlite4java/0.282/sqlite4java-0.282.jar"],
+}
+
+// Situate the SQLite native libraries
+java_genrule_host {
+    name: "robolectric-sqlite4java-native",
+    out: ["robolectric-sqlite4java-native.jar"],
+    srcs: [
+        "repository/com/almworks/sqlite4java/libsqlite4java-linux-amd64/0.282/libsqlite4java-linux-amd64-0.282.so",
+        "repository/com/almworks/sqlite4java/libsqlite4java-linux-i386/0.282/libsqlite4java-linux-i386-0.282.so",
+        "repository/com/almworks/sqlite4java/libsqlite4java-osx/0.282/libsqlite4java-osx-0.282.jnilib",
+        "repository/com/almworks/sqlite4java/sqlite4java-win32-x64/0.282/sqlite4java-win32-x64-0.282.dll",
+        "repository/com/almworks/sqlite4java/sqlite4java-win32-x86/0.282/sqlite4java-win32-x86-0.282.dll",
+    ],
+    tools: ["soong_zip"],
+    cmd: "D=$(genDir)/sqlite-native && mkdir $$D && cp $(in) $$D && " +
+        "mkdir $$D/linux-x86_64 && mv $$D/*linux-amd64* $$D/linux-x86_64/libsqlite4java.so && " +
+        "mkdir $$D/linux-x86 && mv $$D/*linux-i386* $$D/linux-x86/libsqlite4java.so && " +
+        "mkdir $$D/mac-x86_64 && mv $$D/*osx* $$D/mac-x86_64/libsqlite4java.jnilib && " +
+        "mkdir $$D/windows-x86_64 && mv $$D/*win32-x64* $$D/windows-x86_64/sqlite4java.dll && " +
+        "mkdir $$D/windows-x86 && mv $$D/*win32-x86* $$D/windows-x86/sqlite4java.dll && " +
+        "$(location soong_zip) -o $(out) -C $$D -D $$D",
+}
+
+java_library_host {
+    name: "robolectric-sqlite4java-0.282",
+    static_libs: [
+        "robolectric-sqlite4java-import",
+        "robolectric-sqlite4java-native",
+    ],
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Additional versions of dependencies needed by AOSP
+// external/robolectric-shadows which are required for the master-gpl branch.
+// These can be removed once AOSP is updated with Q.
+////////////////////////////////////////////////////////////////////////////////
+
+java_import_host {
+    name: "robolectric-assertj-core-3.8.0",
+    jars: ["repository/org/assertj/assertj-core/3.8.0/assertj-core-3.8.0.jar"],
+}
+
+android_library_import {
+    name: "robolectric-monitor-1.0.2-alpha1",
+    aars: ["repository/com/android/support/test/monitor/1.0.2-alpha1/monitor-1.0.2-alpha1.aar"],
+    sdk_version: "current",
+}

@@ -1,0 +1,146 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.navigation",
+    "module": "navigation-ui",
+    "version": "2.4.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.navigation",
+          "module": "navigation-runtime",
+          "version": {
+            "requires": "2.4.0-alpha01"
+          }
+        },
+        {
+          "group": "androidx.customview",
+          "module": "customview",
+          "version": {
+            "requires": "1.1.0-rc01"
+          }
+        },
+        {
+          "group": "androidx.drawerlayout",
+          "module": "drawerlayout",
+          "version": {
+            "requires": "1.1.0-rc01"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "navigation-ui-2.4.0-alpha01.aar",
+          "url": "navigation-ui-2.4.0-alpha01.aar",
+          "size": 86977,
+          "sha512": "35d27d133fca0eb024ae52e2343bf73cea590c1438e96a8cc8e881a47bddaedbfd4665bb0537e254fd7a6ec6cb0de954c0e7263bb19999b73da97e078406e2c3",
+          "sha256": "9ed9b987cfefa6c3a4f10bd622ee21b21238a61ca108704f91deaf53e987be70",
+          "sha1": "441ed8d72f571e433c0cf9cffa96f92d6329826a",
+          "md5": "f92524fb13533e357fe6af7f2f0624fd"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.navigation",
+          "module": "navigation-runtime",
+          "version": {
+            "requires": "2.4.0-alpha01"
+          }
+        },
+        {
+          "group": "androidx.customview",
+          "module": "customview",
+          "version": {
+            "requires": "1.1.0-rc01"
+          }
+        },
+        {
+          "group": "androidx.drawerlayout",
+          "module": "drawerlayout",
+          "version": {
+            "requires": "1.1.0-rc01"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.transition",
+          "module": "transition",
+          "version": {
+            "requires": "1.3.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "navigation-ui-2.4.0-alpha01.aar",
+          "url": "navigation-ui-2.4.0-alpha01.aar",
+          "size": 86977,
+          "sha512": "35d27d133fca0eb024ae52e2343bf73cea590c1438e96a8cc8e881a47bddaedbfd4665bb0537e254fd7a6ec6cb0de954c0e7263bb19999b73da97e078406e2c3",
+          "sha256": "9ed9b987cfefa6c3a4f10bd622ee21b21238a61ca108704f91deaf53e987be70",
+          "sha1": "441ed8d72f571e433c0cf9cffa96f92d6329826a",
+          "md5": "f92524fb13533e357fe6af7f2f0624fd"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "navigation-ui-2.4.0-alpha01-sources.jar",
+          "url": "navigation-ui-2.4.0-alpha01-sources.jar",
+          "size": 13607,
+          "sha512": "4ebf92d186bf3adf911aba24daf95cde2b327de28a2ce02a1e7ef6cf4e6ddc1214bbaa905b8154380727e283a58575e108c22c96f3b0bca01ebd1be0bbdf9321",
+          "sha256": "6ffa1a363bed7f50da110f18e9339582b8a4389d8c96f6cf643223423cae6504",
+          "sha1": "b2971cbfd8a5e73ebc3984f3c117fef224325de2",
+          "md5": "603f5688dafc2a2250ed38e358a8c18a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.paging",
+    "module": "paging-common",
+    "version": "3.0.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-common",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.3.71"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.3.4"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-common-3.0.0-alpha02.jar",
+          "url": "paging-common-3.0.0-alpha02.jar",
+          "size": 618114,
+          "sha512": "b5329baa9f16647aedff88a117e57260690cc311b7860a2924726a54301cfc8e3913178140b1c767730369f41a4c7fddd0e881e0b8e294177edceff5d4537af1",
+          "sha256": "77a745ad5de71f8cf1e042e01ae822ff84e28f6179b2563c788f2a52fb2685cd",
+          "sha1": "70eef25a5e9d49afb8b305ab23ca617778cb1d9f",
+          "md5": "38b64299c9380719ec7d48be08f956fe"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-common",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.3.71"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.3.4"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-common-3.0.0-alpha02.jar",
+          "url": "paging-common-3.0.0-alpha02.jar",
+          "size": 618114,
+          "sha512": "b5329baa9f16647aedff88a117e57260690cc311b7860a2924726a54301cfc8e3913178140b1c767730369f41a4c7fddd0e881e0b8e294177edceff5d4537af1",
+          "sha256": "77a745ad5de71f8cf1e042e01ae822ff84e28f6179b2563c788f2a52fb2685cd",
+          "sha1": "70eef25a5e9d49afb8b305ab23ca617778cb1d9f",
+          "md5": "38b64299c9380719ec7d48be08f956fe"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "paging-common-3.0.0-alpha02-sources.jar",
+          "url": "paging-common-3.0.0-alpha02-sources.jar",
+          "size": 116300,
+          "sha512": "7707e3135df1e07b72fc7414fbe5b0503660549d3e9e681239712341baa7642727c4612c8c8ee6bcc60096f5fff772de64fb20690feafbf353aa61e30b7b79f6",
+          "sha256": "1b7b7f8e70a4b6494d778aed12284b822ca1a9eb0880375ad0db15538c6d0b34",
+          "sha1": "03f6b117ba15773d527c85f2d566aa2cc5767612",
+          "md5": "82de288b4791b13f9f24d3172766d2bd"
+        }
+      ]
+    }
+  ]
+}

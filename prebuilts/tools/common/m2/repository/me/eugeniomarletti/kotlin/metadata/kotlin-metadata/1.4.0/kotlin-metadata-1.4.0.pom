@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>me.eugeniomarletti.kotlin.metadata</groupId>
+  <artifactId>kotlin-metadata</artifactId>
+  <version>1.4.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>1.2.40</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.eugeniomarletti.kotlin.metadata</groupId>
+      <artifactId>kotlin-compiler-lite</artifactId>
+      <version>1.0.3-k-1.2.40</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <name>kotlin-metadata</name>
+  <description>Analysis of Kotlin type metadata during annotation processing.</description>
+  <url>https://github.com/Takhion/kotlin-metadata</url>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://github.com/Takhion/kotlin-metadata/blob/v1.4.0/LICENSE</url>
+    </license>
+  </licenses>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/Takhion/kotlin-metadata/issues</url>
+  </issueManagement>
+  <developers>
+    <developer>
+      <name>Eugenio Marletti</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/Takhion/kotlin-metadata.git</connection>
+    <developerConnection>scm:git:ssh://github.com/Takhion/kotlin-metadata.git</developerConnection>
+    <tag>v1.4.0</tag>
+    <url>https://github.com/Takhion/kotlin-metadata/tree/v1.4.0</url>
+  </scm>
+</project>

@@ -1,0 +1,104 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.percentlayout",
+    "module": "percentlayout",
+    "version": "1.1.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "percentlayout-1.1.0-alpha01.aar",
+          "url": "percentlayout-1.1.0-alpha01.aar",
+          "size": 13437,
+          "sha512": "032f28f6d9af7e04df14507addae486b1a4883ff0686f840645a1ca349bf1761d9042bb565440607d136f2926a9cc686270b5a7e54e22b93d2d6efbab9d0a7d9",
+          "sha256": "1b6758e222c039a71055df084927579ec540f33af154327adffb14cc2ff21213",
+          "sha1": "631c18231ff99ce78d54e3c269d7fe82fa6d8e1a",
+          "md5": "c547f127c84d4aed2197e577dc78db91"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "percentlayout-1.1.0-alpha01.aar",
+          "url": "percentlayout-1.1.0-alpha01.aar",
+          "size": 13437,
+          "sha512": "032f28f6d9af7e04df14507addae486b1a4883ff0686f840645a1ca349bf1761d9042bb565440607d136f2926a9cc686270b5a7e54e22b93d2d6efbab9d0a7d9",
+          "sha256": "1b6758e222c039a71055df084927579ec540f33af154327adffb14cc2ff21213",
+          "sha1": "631c18231ff99ce78d54e3c269d7fe82fa6d8e1a",
+          "md5": "c547f127c84d4aed2197e577dc78db91"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "percentlayout-1.1.0-alpha01-sources.jar",
+          "url": "percentlayout-1.1.0-alpha01-sources.jar",
+          "size": 11165,
+          "sha512": "a59b5f34e6f8751dcf94794f4de6732e6d135e088becb3eba434ae5a455638e57e78397df5d03480856841341463e7158eb39e650c92041c033d73cd2df72ebf",
+          "sha256": "f8486765b1409524ebe594edcc9cecd264fcfa377107b96c599a3128721f2838",
+          "sha1": "a10000cdcd18b9a187b90af6d6b9e928eb850f9b",
+          "md5": "b3ecd976c129924707634b4016c4f594"
+        }
+      ]
+    }
+  ]
+}

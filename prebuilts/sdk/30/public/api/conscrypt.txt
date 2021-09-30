@@ -1,0 +1,15 @@
+// Signature format: 2.0
+package android.net.ssl {
+
+  public class SSLEngines {
+    method public static boolean isSupportedEngine(@NonNull javax.net.ssl.SSLEngine);
+    method public static void setUseSessionTickets(@NonNull javax.net.ssl.SSLEngine, boolean);
+  }
+
+  public class SSLSockets {
+    method public static boolean isSupportedSocket(@NonNull javax.net.ssl.SSLSocket);
+    method public static void setUseSessionTickets(@NonNull javax.net.ssl.SSLSocket, boolean);
+  }
+
+}
+

@@ -1,0 +1,28 @@
+// Signature format: 2.0
+package com.android.libraries.tv.tvsystem.wifi {
+
+  public final class SoftApConfiguration implements android.os.Parcelable {
+    method public int describeContents();
+    method @Nullable public android.net.MacAddress getBssid();
+    method @Nullable public String getSsid();
+    method @Nullable public String getWpa2Passphrase();
+    method public void writeToParcel(@NonNull android.os.Parcel, int);
+    field @NonNull public static final android.os.Parcelable.Creator<com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration> CREATOR;
+  }
+
+  public static final class SoftApConfiguration.Builder {
+    ctor public SoftApConfiguration.Builder();
+    ctor public SoftApConfiguration.Builder(@NonNull com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration);
+    method @NonNull public com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration build();
+    method @NonNull public com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration.Builder setBssid(@Nullable android.net.MacAddress);
+    method @NonNull public com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration.Builder setSsid(@Nullable String);
+    method @NonNull public com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration.Builder setWpa2Passphrase(@Nullable String);
+  }
+
+  public final class TvWifiManager {
+    ctor public TvWifiManager(@NonNull android.content.Context);
+    method @RequiresPermission(anyOf={android.Manifest.permission.NETWORK_SETTINGS, android.Manifest.permission.NETWORK_SETUP_WIZARD}) public void startLocalOnlyHotspot(@NonNull com.android.libraries.tv.tvsystem.wifi.SoftApConfiguration, @Nullable java.util.concurrent.Executor, @Nullable android.net.wifi.WifiManager.LocalOnlyHotspotCallback);
+  }
+
+}
+

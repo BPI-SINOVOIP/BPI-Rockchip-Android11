@@ -1,0 +1,97 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.lifecycle",
+    "module": "lifecycle-service",
+    "version": "2.3.0-alpha05",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.3.0-alpha05"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lifecycle-service-2.3.0-alpha05.aar",
+          "url": "lifecycle-service-2.3.0-alpha05.aar",
+          "size": 3548,
+          "sha512": "39b273c23937b892fa2f6dd36a24ce07d3ae9be2162a2f72f7ba85c318ebcd5202a54584d4e99bbdebf1031cee8109ebac8c9cd5fb589f45ddaea8916504fb30",
+          "sha256": "ed0c456de23f22dd02f610da55774387b2fb4502b706749cbeedaf7c56b4a53e",
+          "sha1": "a548fd7565136dcb6cde5446dac8028d77af169e",
+          "md5": "d6b0f18b0cb13c15c4e737d6d827df7e"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.3.0-alpha05"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lifecycle-service-2.3.0-alpha05.aar",
+          "url": "lifecycle-service-2.3.0-alpha05.aar",
+          "size": 3548,
+          "sha512": "39b273c23937b892fa2f6dd36a24ce07d3ae9be2162a2f72f7ba85c318ebcd5202a54584d4e99bbdebf1031cee8109ebac8c9cd5fb589f45ddaea8916504fb30",
+          "sha256": "ed0c456de23f22dd02f610da55774387b2fb4502b706749cbeedaf7c56b4a53e",
+          "sha1": "a548fd7565136dcb6cde5446dac8028d77af169e",
+          "md5": "d6b0f18b0cb13c15c4e737d6d827df7e"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "lifecycle-service-2.3.0-alpha05-sources.jar",
+          "url": "lifecycle-service-2.3.0-alpha05-sources.jar",
+          "size": 2853,
+          "sha512": "979627cb3b88a14fccae7c6dbdf0124ac7fb6590840bf48dd965811eeb6129cabe12b9200083115a2b5d99c6172716bcb11243edcb98c7832939cbb649039cdf",
+          "sha256": "821d7ef6cfa5d768f9f73327ab92b400dc2edb05343b99ce78ba1b9a8866cd1a",
+          "sha1": "1be95a2b00fd4a7f88c01acae9f6635504f6a5ef",
+          "md5": "da94b954e7856cab464491de573095e8"
+        }
+      ]
+    }
+  ]
+}

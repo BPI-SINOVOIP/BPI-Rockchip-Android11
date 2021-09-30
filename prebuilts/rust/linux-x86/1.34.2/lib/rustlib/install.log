@@ -1,0 +1,262 @@
+$ umask 022 && mkdir -p "/src/out/lib/rustlib"
+$ echo "3" > "/src/out/lib/rustlib/rust-installer-version"
+install: creating uninstall script at /src/out/lib/rustlib/uninstall.sh
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/install.sh /src/out/lib/rustlib/uninstall.sh
+install: installing component 'rustc'
+$ echo "rustc" >> "/src/out/lib/rustlib/components"
+$ umask 022 && mkdir -p "/src/out/bin"
+install: copying file /src/out/bin/rust-gdb
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/bin/rust-gdb /src/out/bin/rust-gdb
+$ chmod 755 /src/out/bin/rust-gdb
+$ echo "file:/src/out/bin/rust-gdb" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/bin"
+install: copying file /src/out/bin/rustc
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/bin/rustc /src/out/bin/rustc
+$ chmod 755 /src/out/bin/rustc
+$ echo "file:/src/out/bin/rustc" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/bin"
+install: copying file /src/out/bin/rustdoc
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/bin/rustdoc /src/out/bin/rustdoc
+$ chmod 755 /src/out/bin/rustdoc
+$ echo "file:/src/out/bin/rustdoc" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/bin"
+install: copying file /src/out/bin/rust-lldb
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/bin/rust-lldb /src/out/bin/rust-lldb
+$ chmod 755 /src/out/bin/rust-lldb
+$ echo "file:/src/out/bin/rust-lldb" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/bin"
+install: copying file /src/out/bin/rust-gdbgui
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/bin/rust-gdbgui /src/out/bin/rust-gdbgui
+$ chmod 755 /src/out/bin/rust-gdbgui
+$ echo "file:/src/out/bin/rust-gdbgui" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libarena-a84fc95aedd17045.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libarena-a84fc95aedd17045.so /src/out/lib/libarena-a84fc95aedd17045.so
+$ chmod 644 /src/out/lib/libarena-a84fc95aedd17045.so
+$ echo "file:/src/out/lib/libarena-a84fc95aedd17045.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libsyntax_ext-f9161b6ef362a0d4.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libsyntax_ext-f9161b6ef362a0d4.so /src/out/lib/libsyntax_ext-f9161b6ef362a0d4.so
+$ chmod 644 /src/out/lib/libsyntax_ext-f9161b6ef362a0d4.so
+$ echo "file:/src/out/lib/libsyntax_ext-f9161b6ef362a0d4.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libLLVM-8-rust-1.34.2-stable.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libLLVM-8-rust-1.34.2-stable.so /src/out/lib/libLLVM-8-rust-1.34.2-stable.so
+$ chmod 644 /src/out/lib/libLLVM-8-rust-1.34.2-stable.so
+$ echo "file:/src/out/lib/libLLVM-8-rust-1.34.2-stable.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libtest-f73888264e9191bb.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libtest-f73888264e9191bb.so /src/out/lib/libtest-f73888264e9191bb.so
+$ chmod 644 /src/out/lib/libtest-f73888264e9191bb.so
+$ echo "file:/src/out/lib/libtest-f73888264e9191bb.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libserialize-d9e80fd4681d073a.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libserialize-d9e80fd4681d073a.so /src/out/lib/libserialize-d9e80fd4681d073a.so
+$ chmod 644 /src/out/lib/libserialize-d9e80fd4681d073a.so
+$ echo "file:/src/out/lib/libserialize-d9e80fd4681d073a.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libterm-daf42308060fe3b3.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libterm-daf42308060fe3b3.so /src/out/lib/libterm-daf42308060fe3b3.so
+$ chmod 644 /src/out/lib/libterm-daf42308060fe3b3.so
+$ echo "file:/src/out/lib/libterm-daf42308060fe3b3.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libstd-cdf83fc191b5d8a6.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libstd-cdf83fc191b5d8a6.so /src/out/lib/libstd-cdf83fc191b5d8a6.so
+$ chmod 644 /src/out/lib/libstd-cdf83fc191b5d8a6.so
+$ echo "file:/src/out/lib/libstd-cdf83fc191b5d8a6.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_traits-0573219e76b62628.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_traits-0573219e76b62628.so /src/out/lib/librustc_traits-0573219e76b62628.so
+$ chmod 644 /src/out/lib/librustc_traits-0573219e76b62628.so
+$ echo "file:/src/out/lib/librustc_traits-0573219e76b62628.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_privacy-ea82028671eb9c2f.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_privacy-ea82028671eb9c2f.so /src/out/lib/librustc_privacy-ea82028671eb9c2f.so
+$ chmod 644 /src/out/lib/librustc_privacy-ea82028671eb9c2f.so
+$ echo "file:/src/out/lib/librustc_privacy-ea82028671eb9c2f.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libsyntax_pos-e758981dc2bb49b8.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libsyntax_pos-e758981dc2bb49b8.so /src/out/lib/libsyntax_pos-e758981dc2bb49b8.so
+$ chmod 644 /src/out/lib/libsyntax_pos-e758981dc2bb49b8.so
+$ echo "file:/src/out/lib/libsyntax_pos-e758981dc2bb49b8.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_save_analysis-f4bf796e9d81ec1d.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_save_analysis-f4bf796e9d81ec1d.so /src/out/lib/librustc_save_analysis-f4bf796e9d81ec1d.so
+$ chmod 644 /src/out/lib/librustc_save_analysis-f4bf796e9d81ec1d.so
+$ echo "file:/src/out/lib/librustc_save_analysis-f4bf796e9d81ec1d.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libgraphviz-0ca3d15fe0eb5eb1.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libgraphviz-0ca3d15fe0eb5eb1.so /src/out/lib/libgraphviz-0ca3d15fe0eb5eb1.so
+$ chmod 644 /src/out/lib/libgraphviz-0ca3d15fe0eb5eb1.so
+$ echo "file:/src/out/lib/libgraphviz-0ca3d15fe0eb5eb1.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_borrowck-02ab75054f900480.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_borrowck-02ab75054f900480.so /src/out/lib/librustc_borrowck-02ab75054f900480.so
+$ chmod 644 /src/out/lib/librustc_borrowck-02ab75054f900480.so
+$ echo "file:/src/out/lib/librustc_borrowck-02ab75054f900480.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_target-de277137893d6209.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_target-de277137893d6209.so /src/out/lib/librustc_target-de277137893d6209.so
+$ chmod 644 /src/out/lib/librustc_target-de277137893d6209.so
+$ echo "file:/src/out/lib/librustc_target-de277137893d6209.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_errors-25443e1378b87999.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_errors-25443e1378b87999.so /src/out/lib/librustc_errors-25443e1378b87999.so
+$ chmod 644 /src/out/lib/librustc_errors-25443e1378b87999.so
+$ echo "file:/src/out/lib/librustc_errors-25443e1378b87999.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_passes-38ac710f6edea89c.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_passes-38ac710f6edea89c.so /src/out/lib/librustc_passes-38ac710f6edea89c.so
+$ chmod 644 /src/out/lib/librustc_passes-38ac710f6edea89c.so
+$ echo "file:/src/out/lib/librustc_passes-38ac710f6edea89c.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_plugin-6584fac5b564c7a1.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_plugin-6584fac5b564c7a1.so /src/out/lib/librustc_plugin-6584fac5b564c7a1.so
+$ chmod 644 /src/out/lib/librustc_plugin-6584fac5b564c7a1.so
+$ echo "file:/src/out/lib/librustc_plugin-6584fac5b564c7a1.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc-e3e616c17ce5b792.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc-e3e616c17ce5b792.so /src/out/lib/librustc-e3e616c17ce5b792.so
+$ chmod 644 /src/out/lib/librustc-e3e616c17ce5b792.so
+$ echo "file:/src/out/lib/librustc-e3e616c17ce5b792.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_data_structures-1996cebf322bb533.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_data_structures-1996cebf322bb533.so /src/out/lib/librustc_data_structures-1996cebf322bb533.so
+$ chmod 644 /src/out/lib/librustc_data_structures-1996cebf322bb533.so
+$ echo "file:/src/out/lib/librustc_data_structures-1996cebf322bb533.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_mir-5d1116448e35e7f6.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_mir-5d1116448e35e7f6.so /src/out/lib/librustc_mir-5d1116448e35e7f6.so
+$ chmod 644 /src/out/lib/librustc_mir-5d1116448e35e7f6.so
+$ echo "file:/src/out/lib/librustc_mir-5d1116448e35e7f6.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_allocator-ed461df42c9babfe.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_allocator-ed461df42c9babfe.so /src/out/lib/librustc_allocator-ed461df42c9babfe.so
+$ chmod 644 /src/out/lib/librustc_allocator-ed461df42c9babfe.so
+$ echo "file:/src/out/lib/librustc_allocator-ed461df42c9babfe.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libfmt_macros-81e027940f2b7d79.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libfmt_macros-81e027940f2b7d79.so /src/out/lib/libfmt_macros-81e027940f2b7d79.so
+$ chmod 644 /src/out/lib/libfmt_macros-81e027940f2b7d79.so
+$ echo "file:/src/out/lib/libfmt_macros-81e027940f2b7d79.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_cratesio_shim-76315b96a8d6c1b6.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_cratesio_shim-76315b96a8d6c1b6.so /src/out/lib/librustc_cratesio_shim-76315b96a8d6c1b6.so
+$ chmod 644 /src/out/lib/librustc_cratesio_shim-76315b96a8d6c1b6.so
+$ echo "file:/src/out/lib/librustc_cratesio_shim-76315b96a8d6c1b6.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_resolve-d191ca29dd458c15.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_resolve-d191ca29dd458c15.so /src/out/lib/librustc_resolve-d191ca29dd458c15.so
+$ chmod 644 /src/out/lib/librustc_resolve-d191ca29dd458c15.so
+$ echo "file:/src/out/lib/librustc_resolve-d191ca29dd458c15.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_codegen_ssa-028ebb5e2a5988d9.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_codegen_ssa-028ebb5e2a5988d9.so /src/out/lib/librustc_codegen_ssa-028ebb5e2a5988d9.so
+$ chmod 644 /src/out/lib/librustc_codegen_ssa-028ebb5e2a5988d9.so
+$ echo "file:/src/out/lib/librustc_codegen_ssa-028ebb5e2a5988d9.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_typeck-45d7dd541435c043.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_typeck-45d7dd541435c043.so /src/out/lib/librustc_typeck-45d7dd541435c043.so
+$ chmod 644 /src/out/lib/librustc_typeck-45d7dd541435c043.so
+$ echo "file:/src/out/lib/librustc_typeck-45d7dd541435c043.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_fs_util-368b315c65f0b065.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_fs_util-368b315c65f0b065.so /src/out/lib/librustc_fs_util-368b315c65f0b065.so
+$ chmod 644 /src/out/lib/librustc_fs_util-368b315c65f0b065.so
+$ echo "file:/src/out/lib/librustc_fs_util-368b315c65f0b065.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_lint-4497b5caceb2ea72.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_lint-4497b5caceb2ea72.so /src/out/lib/librustc_lint-4497b5caceb2ea72.so
+$ chmod 644 /src/out/lib/librustc_lint-4497b5caceb2ea72.so
+$ echo "file:/src/out/lib/librustc_lint-4497b5caceb2ea72.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_metadata-76da7101239307d2.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_metadata-76da7101239307d2.so /src/out/lib/librustc_metadata-76da7101239307d2.so
+$ chmod 644 /src/out/lib/librustc_metadata-76da7101239307d2.so
+$ echo "file:/src/out/lib/librustc_metadata-76da7101239307d2.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/libsyntax-087da8498b028f6d.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/libsyntax-087da8498b028f6d.so /src/out/lib/libsyntax-087da8498b028f6d.so
+$ chmod 644 /src/out/lib/libsyntax-087da8498b028f6d.so
+$ echo "file:/src/out/lib/libsyntax-087da8498b028f6d.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_incremental-a80b204cba07478e.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_incremental-a80b204cba07478e.so /src/out/lib/librustc_incremental-a80b204cba07478e.so
+$ chmod 644 /src/out/lib/librustc_incremental-a80b204cba07478e.so
+$ echo "file:/src/out/lib/librustc_incremental-a80b204cba07478e.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib/rustlib/x86_64-unknown-linux-gnu/codegen-backends"
+install: copying file /src/out/lib/rustlib/x86_64-unknown-linux-gnu/codegen-backends/librustc_codegen_llvm-llvm.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/rustlib/x86_64-unknown-linux-gnu/codegen-backends/librustc_codegen_llvm-llvm.so /src/out/lib/rustlib/x86_64-unknown-linux-gnu/codegen-backends/librustc_codegen_llvm-llvm.so
+$ chmod 755 /src/out/lib/rustlib/x86_64-unknown-linux-gnu/codegen-backends/librustc_codegen_llvm-llvm.so
+$ echo "file:/src/out/lib/rustlib/x86_64-unknown-linux-gnu/codegen-backends/librustc_codegen_llvm-llvm.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib/rustlib/x86_64-unknown-linux-gnu/lib"
+install: copying file /src/out/lib/rustlib/x86_64-unknown-linux-gnu/lib/libLLVM-8-rust-1.34.2-stable.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/rustlib/x86_64-unknown-linux-gnu/lib/libLLVM-8-rust-1.34.2-stable.so /src/out/lib/rustlib/x86_64-unknown-linux-gnu/lib/libLLVM-8-rust-1.34.2-stable.so
+$ chmod 644 /src/out/lib/rustlib/x86_64-unknown-linux-gnu/lib/libLLVM-8-rust-1.34.2-stable.so
+$ echo "file:/src/out/lib/rustlib/x86_64-unknown-linux-gnu/lib/libLLVM-8-rust-1.34.2-stable.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib/rustlib/etc"
+install: copying file /src/out/lib/rustlib/etc/lldb_rust_formatters.py
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/rustlib/etc/lldb_rust_formatters.py /src/out/lib/rustlib/etc/lldb_rust_formatters.py
+$ chmod 644 /src/out/lib/rustlib/etc/lldb_rust_formatters.py
+$ echo "file:/src/out/lib/rustlib/etc/lldb_rust_formatters.py" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib/rustlib/etc"
+install: copying file /src/out/lib/rustlib/etc/debugger_pretty_printers_common.py
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/rustlib/etc/debugger_pretty_printers_common.py /src/out/lib/rustlib/etc/debugger_pretty_printers_common.py
+$ chmod 644 /src/out/lib/rustlib/etc/debugger_pretty_printers_common.py
+$ echo "file:/src/out/lib/rustlib/etc/debugger_pretty_printers_common.py" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib/rustlib/etc"
+install: copying file /src/out/lib/rustlib/etc/gdb_rust_pretty_printing.py
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/rustlib/etc/gdb_rust_pretty_printing.py /src/out/lib/rustlib/etc/gdb_rust_pretty_printing.py
+$ chmod 644 /src/out/lib/rustlib/etc/gdb_rust_pretty_printing.py
+$ echo "file:/src/out/lib/rustlib/etc/gdb_rust_pretty_printing.py" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib/rustlib/etc"
+install: copying file /src/out/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/rustlib/etc/gdb_load_rust_pretty_printers.py /src/out/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
+$ chmod 644 /src/out/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
+$ echo "file:/src/out/lib/rustlib/etc/gdb_load_rust_pretty_printers.py" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_codegen_utils-741666f3889340ce.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_codegen_utils-741666f3889340ce.so /src/out/lib/librustc_codegen_utils-741666f3889340ce.so
+$ chmod 644 /src/out/lib/librustc_codegen_utils-741666f3889340ce.so
+$ echo "file:/src/out/lib/librustc_codegen_utils-741666f3889340ce.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/lib"
+install: copying file /src/out/lib/librustc_driver-2146d3e6cf6eb050.so
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/lib/librustc_driver-2146d3e6cf6eb050.so /src/out/lib/librustc_driver-2146d3e6cf6eb050.so
+$ chmod 644 /src/out/lib/librustc_driver-2146d3e6cf6eb050.so
+$ echo "file:/src/out/lib/librustc_driver-2146d3e6cf6eb050.so" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/share/man/man1"
+install: copying file /src/out/share/man/man1/rustc.1
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/share/man/man1/rustc.1 /src/out/share/man/man1/rustc.1
+$ chmod 644 /src/out/share/man/man1/rustc.1
+$ echo "file:/src/out/share/man/man1/rustc.1" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/share/man/man1"
+install: copying file /src/out/share/man/man1/rustdoc.1
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/share/man/man1/rustdoc.1 /src/out/share/man/man1/rustdoc.1
+$ chmod 644 /src/out/share/man/man1/rustdoc.1
+$ echo "file:/src/out/share/man/man1/rustdoc.1" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/share/doc/rust"
+install: copying file /src/out/share/doc/rust/LICENSE-MIT
+install: backing up existing file at /src/out/share/doc/rust/LICENSE-MIT
+$ mv -f /src/out/share/doc/rust/LICENSE-MIT /src/out/share/doc/rust/LICENSE-MIT.old
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/share/doc/rust/LICENSE-MIT /src/out/share/doc/rust/LICENSE-MIT
+$ chmod 644 /src/out/share/doc/rust/LICENSE-MIT
+$ echo "file:/src/out/share/doc/rust/LICENSE-MIT" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/share/doc/rust"
+install: copying file /src/out/share/doc/rust/README.md
+install: backing up existing file at /src/out/share/doc/rust/README.md
+$ mv -f /src/out/share/doc/rust/README.md /src/out/share/doc/rust/README.md.old
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/share/doc/rust/README.md /src/out/share/doc/rust/README.md
+$ chmod 644 /src/out/share/doc/rust/README.md
+$ echo "file:/src/out/share/doc/rust/README.md" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/share/doc/rust"
+install: copying file /src/out/share/doc/rust/LICENSE-APACHE
+install: backing up existing file at /src/out/share/doc/rust/LICENSE-APACHE
+$ mv -f /src/out/share/doc/rust/LICENSE-APACHE /src/out/share/doc/rust/LICENSE-APACHE.old
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/share/doc/rust/LICENSE-APACHE /src/out/share/doc/rust/LICENSE-APACHE
+$ chmod 644 /src/out/share/doc/rust/LICENSE-APACHE
+$ echo "file:/src/out/share/doc/rust/LICENSE-APACHE" >> "/src/out/lib/rustlib/manifest-rustc"
+$ umask 022 && mkdir -p "/src/out/share/doc/rust"
+install: copying file /src/out/share/doc/rust/COPYRIGHT
+$ cp /src/toolchain/rustc/build/tmp/dist/rustc-1.34.2-x86_64-unknown-linux-gnu/rustc/share/doc/rust/COPYRIGHT /src/out/share/doc/rust/COPYRIGHT
+$ chmod 644 /src/out/share/doc/rust/COPYRIGHT
+$ echo "file:/src/out/share/doc/rust/COPYRIGHT" >> "/src/out/lib/rustlib/manifest-rustc"

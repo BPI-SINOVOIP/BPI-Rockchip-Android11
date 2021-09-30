@@ -1,0 +1,132 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-runtime",
+    "version": "2.3.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.3.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-framework",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite",
+          "version": {
+            "requires": "2.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-runtime-2.3.0-alpha02.aar",
+          "url": "room-runtime-2.3.0-alpha02.aar",
+          "size": 98019,
+          "sha512": "4c9688609866bae535cd9ec744abc98bbc1d377ec655405b785496cdf316fe23cf51d7296bef84fec0aa3b3413278d2d2a9cb0e1f297e005614974cae9707256",
+          "sha256": "3d742a0a5b055e08eeab682861490dfcdb6f3fba1577fd42b73a3e935cc8e260",
+          "sha1": "b7479b539072ed1980bc00e5e7e1c044a530892a",
+          "md5": "a8b46e96aa9389d547f794bd25a1982a"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.3.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-framework",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite",
+          "version": {
+            "requires": "2.1.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-runtime",
+          "version": {
+            "requires": "2.0.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-runtime-2.3.0-alpha02.aar",
+          "url": "room-runtime-2.3.0-alpha02.aar",
+          "size": 98019,
+          "sha512": "4c9688609866bae535cd9ec744abc98bbc1d377ec655405b785496cdf316fe23cf51d7296bef84fec0aa3b3413278d2d2a9cb0e1f297e005614974cae9707256",
+          "sha256": "3d742a0a5b055e08eeab682861490dfcdb6f3fba1577fd42b73a3e935cc8e260",
+          "sha1": "b7479b539072ed1980bc00e5e7e1c044a530892a",
+          "md5": "a8b46e96aa9389d547f794bd25a1982a"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "room-runtime-2.3.0-alpha02-sources.jar",
+          "url": "room-runtime-2.3.0-alpha02-sources.jar",
+          "size": 69151,
+          "sha512": "3e69ef0afee741f3feaf2001af6cbb2a72250c870e44ae055e8fbb6ba31fb93ae1dfa4922d9d5db258232fe7a7ab8871f4ac78ef270122416b73c67844fcf664",
+          "sha256": "cd3fccce1b0331ae12c3a85595f365fb8217bc56303058f3b532e6b24a6391b5",
+          "sha1": "29fe26a386feeb9edbb84a2b6c979bb9d5c934e1",
+          "md5": "dafea292fa94d995fe71e84a31ea6801"
+        }
+      ]
+    }
+  ]
+}

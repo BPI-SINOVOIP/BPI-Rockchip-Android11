@@ -1,0 +1,127 @@
+subdirs=["tools"]
+
+filegroup {
+    name: "api-version-xml",
+    srcs: [
+        "*/public/api/android.txt",
+        "*/public/api/android.xml",
+    ],
+}
+
+filegroup {
+    name: "current-support-api",
+    srcs: [
+        "current/support-api.txt",
+    ],
+}
+
+filegroup {
+    name: "current-androidx-api",
+    srcs: [
+        "current/androidx-api.txt",
+    ],
+}
+
+filegroup {
+    name: "metalava-sdk-android-jars",
+    srcs: [
+        "**/android.jar",
+    ],
+}
+
+droiddoc_exported_dir {
+    name: "sdk-dir",
+    path: ".",
+}
+
+genrule {
+    name: "public-api-incompatibilities-with-last-released",
+    srcs: [
+        "*/public/api/incompatibilities.txt",
+    ],
+    cmd: "cp -f $$(echo $(in) | tr \" \" \"\\n\" | sort -t/ -k3 -n | tail -1) $(genDir)/incompatibilities.txt",
+    out: [
+        "incompatibilities.txt",
+    ],
+}
+
+genrule {
+    name: "system-api-incompatibilities-with-last-released",
+    srcs: [
+        "*/system/api/incompatibilities.txt",
+    ],
+    cmd: "cp -f $$(echo $(in) | tr \" \" \"\\n\" | sort -t/ -k3 -n | tail -1) $(genDir)/incompatibilities.txt",
+    out: [
+        "incompatibilities.txt",
+    ],
+}
+
+genrule {
+    name: "module-lib-api-incompatibilities-with-last-released",
+    srcs: [
+        "*/module-lib/api/incompatibilities.txt",
+    ],
+    cmd: "cp -f $$(echo $(in) | tr \" \" \"\\n\" | sort -t/ -k3 -n | tail -1) $(genDir)/incompatibilities.txt",
+    out: [
+        "incompatibilities.txt",
+    ],
+}
+
+genrule {
+    name: "system-server-api-incompatibilities-with-last-released",
+    srcs: [
+        "*/system-server/api/incompatibilities.txt",
+    ],
+    cmd: "cp -f $$(echo $(in) | tr \" \" \"\\n\" | sort -t/ -k3 -n | tail -1) $(genDir)/incompatibilities.txt",
+    out: [
+        "incompatibilities.txt",
+    ],
+}
+
+genrule {
+    name: "last-released-public-api-for-metalava-annotations",
+    srcs: [
+        "*/public/api/android.txt",
+    ],
+    cmd: "cp -f $$(echo $(in) | tr \" \" \"\\n\" | sort -t/ -k3 -n | tail -2 | head -1) $(genDir)/last-released-api-for-metalava-annotations.txt",
+    out: [
+        "last-released-api-for-metalava-annotations.txt",
+    ],
+}
+
+prebuilt_apis {
+    name: "sdk",
+    api_dirs: [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "current",
+    ],
+}

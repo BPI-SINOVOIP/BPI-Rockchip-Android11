@@ -1,0 +1,139 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.biometric",
+    "module": "biometric",
+    "version": "1.1.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.fragment",
+          "module": "fragment",
+          "version": {
+            "requires": "1.2.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "biometric-1.1.0-alpha01.aar",
+          "url": "biometric-1.1.0-alpha01.aar",
+          "size": 162679,
+          "sha512": "31d70b426f89f6775aa300df908e604d65f0965e2b87f37927a1f0351c8d93e2e5b8b29ec5e8247ebbedfc1d4359d7c20fb774c82930544f178dce21d3f15c15",
+          "sha256": "f917426d8ee388fd4a8f4a315ed329b48344783ec37db45f7e691f583021370a",
+          "sha1": "dc2d1c072753bb50e534f97154cc47ba0090d01f",
+          "md5": "8052655196dfc738b10193b85fadd731"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.activity",
+          "module": "activity",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.fragment",
+          "module": "fragment",
+          "version": {
+            "requires": "1.2.5"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "biometric-1.1.0-alpha01.aar",
+          "url": "biometric-1.1.0-alpha01.aar",
+          "size": 162679,
+          "sha512": "31d70b426f89f6775aa300df908e604d65f0965e2b87f37927a1f0351c8d93e2e5b8b29ec5e8247ebbedfc1d4359d7c20fb774c82930544f178dce21d3f15c15",
+          "sha256": "f917426d8ee388fd4a8f4a315ed329b48344783ec37db45f7e691f583021370a",
+          "sha1": "dc2d1c072753bb50e534f97154cc47ba0090d01f",
+          "md5": "8052655196dfc738b10193b85fadd731"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "biometric-1.1.0-alpha01-sources.jar",
+          "url": "biometric-1.1.0-alpha01-sources.jar",
+          "size": 34483,
+          "sha512": "68b8ebbc69cfa3c4e142d994d16a1aa2463150f8441721b1efc49066c7dd41cea2e9b63713897b392f971120e8e47274ee121d50888122269fc0ebf9892fb7ff",
+          "sha256": "55b1cb977283975f6ec54c8bbb20891d34263dce894780644c85ca05f405ac1d",
+          "sha1": "d3ccf9bbe71d74c6dd18b9597a3a06960ff77e5c",
+          "md5": "03adb8c7c61468f4656383809841363f"
+        }
+      ]
+    }
+  ]
+}

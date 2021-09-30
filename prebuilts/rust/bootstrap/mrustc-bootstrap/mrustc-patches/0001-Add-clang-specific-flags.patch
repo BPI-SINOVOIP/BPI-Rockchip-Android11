@@ -1,0 +1,31 @@
+From 78e15cfed8228b7abf819271154133afaa9520a3 Mon Sep 17 00:00:00 2001
+From: Matthew Maurer <mmaurer@google.com>
+Date: Thu, 13 Jun 2019 11:30:54 -0700
+Subject: [PATCH 1/2] Add clang specific flags
+
+* Use compiler-rt to provide __muloti4
+* Tell it to still pull in gcc_s for unwinding
+---
+ src/trans/codegen_c.cpp | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/trans/codegen_c.cpp b/src/trans/codegen_c.cpp
+index 2ab4ff35..8c2e1ce6 100644
+--- a/src/trans/codegen_c.cpp
++++ b/src/trans/codegen_c.cpp
+@@ -638,6 +638,12 @@ namespace {
+                 args.push_back(m_outfile_path_c.c_str());
+                 if( is_executable )
+                 {
++                    // TODO Only pass this to clang 
++                    // Needed with clang for __muloti4
++                    args.push_back("--rtlib=compiler-rt");
++                    // Still link in unwind runtime &c
++                    args.push_back("-lgcc_s");
++
+                     for( const auto& crate : m_crate.m_ext_crates )
+                     {
+                         args.push_back(crate.second.m_path + ".o");
+-- 
+2.22.0.410.gd8fdbe21b5-goog
+

@@ -1,0 +1,146 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.browser",
+    "module": "browser",
+    "version": "1.3.0-alpha04",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "listenablefuture",
+          "version": {
+            "requires": "1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "browser-1.3.0-alpha04.aar",
+          "url": "browser-1.3.0-alpha04.aar",
+          "size": 201007,
+          "sha512": "2b9ee063b553396081f2a3d2af0b8ad978ec9734415d1c1ce62383dbdca2ba1779ace5b617f77baf7b5c16920bfeb919d5e89b203164e8c0290f17135affce30",
+          "sha256": "211744c2a79351d4bdeef46cef8040cc84235a842b338a3e81a8a8eb0898ceab",
+          "sha1": "3d00c5abaa823874e0c774ef9e4f96688ac1c946",
+          "md5": "637e7dcb8b9694b090f30390e31dab53"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.collection",
+          "module": "collection",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.interpolator",
+          "module": "interpolator",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "listenablefuture",
+          "version": {
+            "requires": "1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "browser-1.3.0-alpha04.aar",
+          "url": "browser-1.3.0-alpha04.aar",
+          "size": 201007,
+          "sha512": "2b9ee063b553396081f2a3d2af0b8ad978ec9734415d1c1ce62383dbdca2ba1779ace5b617f77baf7b5c16920bfeb919d5e89b203164e8c0290f17135affce30",
+          "sha256": "211744c2a79351d4bdeef46cef8040cc84235a842b338a3e81a8a8eb0898ceab",
+          "sha1": "3d00c5abaa823874e0c774ef9e4f96688ac1c946",
+          "md5": "637e7dcb8b9694b090f30390e31dab53"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "browser-1.3.0-alpha04-sources.jar",
+          "url": "browser-1.3.0-alpha04-sources.jar",
+          "size": 93033,
+          "sha512": "888a74d793520893e38e9dfb6175cbdd58d0b759ec4bf263e2a9448a7977992d34ef0bf3f442705a3526818758a57e1a118ab7ffae7e7c3abf84a7d2eb2d3c5a",
+          "sha256": "85b6efafb14c2a5d0916446e5c0cf8c0a65c43bf3df31ee85ac41e174f44a129",
+          "sha1": "641f649c24ecc538d606da9af6c01b1f1aef54b5",
+          "md5": "769ed240b45329e771666ee95c188d10"
+        }
+      ]
+    }
+  ]
+}

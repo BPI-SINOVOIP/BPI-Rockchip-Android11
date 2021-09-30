@@ -1,0 +1,35 @@
+// Baseline format: 1.0
+AddedAbstractMethod: android.content.pm.PackageManager#arePermissionsIndividuallyControlled():
+    Added method android.content.pm.PackageManager.arePermissionsIndividuallyControlled() to the system API
+AddedAbstractMethod: android.webkit.WebViewProvider#getWebViewRenderProcess():
+    Added method android.webkit.WebViewProvider.getWebViewRenderProcess() to the system API
+AddedAbstractMethod: android.webkit.WebViewProvider#getWebViewRenderProcessClient():
+    Added method android.webkit.WebViewProvider.getWebViewRenderProcessClient() to the system API
+AddedAbstractMethod: android.webkit.WebViewProvider#setWebViewRenderProcessClient(java.util.concurrent.Executor, android.webkit.WebViewRenderProcessClient):
+    Added method android.webkit.WebViewProvider.setWebViewRenderProcessClient(java.util.concurrent.Executor,android.webkit.WebViewRenderProcessClient) to the system API
+
+
+RemovedDeprecatedMethod: android.location.LocationManager#addGpsMeasurementListener(android.location.GpsMeasurementsEvent.Listener):
+    Removed deprecated method android.location.LocationManager.addGpsMeasurementListener(android.location.GpsMeasurementsEvent.Listener)
+RemovedDeprecatedMethod: android.location.LocationManager#addGpsNavigationMessageListener(android.location.GpsNavigationMessageEvent.Listener):
+    Removed deprecated method android.location.LocationManager.addGpsNavigationMessageListener(android.location.GpsNavigationMessageEvent.Listener)
+RemovedDeprecatedMethod: android.location.LocationManager#removeGpsMeasurementListener(android.location.GpsMeasurementsEvent.Listener):
+    Removed deprecated method android.location.LocationManager.removeGpsMeasurementListener(android.location.GpsMeasurementsEvent.Listener)
+RemovedDeprecatedMethod: android.location.LocationManager#removeGpsNavigationMessageListener(android.location.GpsNavigationMessageEvent.Listener):
+    Removed deprecated method android.location.LocationManager.removeGpsNavigationMessageListener(android.location.GpsNavigationMessageEvent.Listener)
+RemovedDeprecatedMethod: android.telephony.TelephonyManager#answerRingingCall():
+    Removed deprecated method android.telephony.TelephonyManager.answerRingingCall()
+RemovedDeprecatedMethod: android.telephony.TelephonyManager#endCall():
+    Removed deprecated method android.telephony.TelephonyManager.endCall()
+RemovedDeprecatedMethod: android.telephony.TelephonyManager#silenceRinger():
+    Removed deprecated method android.telephony.TelephonyManager.silenceRinger()
+
+
+RemovedField: android.Manifest.permission#CAPTURE_SECURE_VIDEO_OUTPUT:
+    Removed field android.Manifest.permission.CAPTURE_SECURE_VIDEO_OUTPUT
+RemovedField: android.Manifest.permission#CAPTURE_VIDEO_OUTPUT:
+    Removed field android.Manifest.permission.CAPTURE_VIDEO_OUTPUT
+RemovedField: android.Manifest.permission#MANAGE_DEVICE_ADMINS:
+    Removed field android.Manifest.permission.MANAGE_DEVICE_ADMINS
+RemovedField: android.Manifest.permission#READ_FRAME_BUFFER:
+    Removed field android.Manifest.permission.READ_FRAME_BUFFER

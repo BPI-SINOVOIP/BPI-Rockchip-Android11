@@ -1,0 +1,91 @@
+// Baseline format: 1.0
+ChangedThrows: android.app.admin.DevicePolicyManager#setAlwaysOnVpnPackage(android.content.ComponentName, String, boolean):
+    Method android.app.admin.DevicePolicyManager.setAlwaysOnVpnPackage no longer throws exception java.lang.UnsupportedOperationException
+ChangedThrows: java.util.Optional#orElseThrow(java.util.function.Supplier<? extends X>):
+    Method java.util.Optional.orElseThrow added thrown exception X
+ChangedThrows: java.util.OptionalDouble#orElseThrow(java.util.function.Supplier<X>):
+    Method java.util.OptionalDouble.orElseThrow added thrown exception X
+ChangedThrows: java.util.OptionalInt#orElseThrow(java.util.function.Supplier<X>):
+    Method java.util.OptionalInt.orElseThrow added thrown exception X
+ChangedThrows: java.util.OptionalLong#orElseThrow(java.util.function.Supplier<X>):
+    Method java.util.OptionalLong.orElseThrow added thrown exception X
+ChangedThrows: java.util.regex.Matcher#start(int):
+    Method java.util.regex.Matcher.start no longer throws exception java.lang.IllegalStateException
+ChangedThrows: java.util.regex.Pattern#compile(String, int):
+    Method java.util.regex.Pattern.compile no longer throws exception java.util.regex.PatternSyntaxException
+
+
+ChangedType: android.os.Parcel#readSparseArray(ClassLoader):
+    Method android.os.Parcel.readSparseArray has changed return type from android.util.SparseArray to android.util.SparseArray<T>
+
+
+InvalidNullConversion: android.os.DropBoxManager#getNextEntry(String, long) parameter #0:
+    Attempted to remove @NonNull annotation from parameter tag in android.os.DropBoxManager.getNextEntry(String tag, long msec)
+InvalidNullConversion: java.io.PrintWriter#format(String, java.lang.Object...) parameter #1:
+    Attempted to change parameter from @Nullable to @NonNull: incompatible change for parameter args in java.io.PrintWriter.format(String format, java.lang.Object... args)
+InvalidNullConversion: java.io.PrintWriter#format(java.util.Locale, String, java.lang.Object...) parameter #2:
+    Attempted to change parameter from @Nullable to @NonNull: incompatible change for parameter args in java.io.PrintWriter.format(java.util.Locale l, String format, java.lang.Object... args)
+InvalidNullConversion: java.io.PrintWriter#printf(String, java.lang.Object...) parameter #1:
+    Attempted to change parameter from @Nullable to @NonNull: incompatible change for parameter args in java.io.PrintWriter.printf(String format, java.lang.Object... args)
+InvalidNullConversion: java.io.PrintWriter#printf(java.util.Locale, String, java.lang.Object...) parameter #2:
+    Attempted to change parameter from @Nullable to @NonNull: incompatible change for parameter args in java.io.PrintWriter.printf(java.util.Locale l, String format, java.lang.Object... args)
+InvalidNullConversion: java.lang.Character#toChars(int):
+    Attempted to remove @NonNull annotation from method java.lang.Character.toChars(int)
+InvalidNullConversion: java.lang.Class#getEnumConstants():
+    Attempted to change method return from @NonNull to @Nullable: incompatible change for method java.lang.Class.getEnumConstants()
+InvalidNullConversion: java.lang.Class#getSigners():
+    Attempted to change method return from @NonNull to @Nullable: incompatible change for method java.lang.Class.getSigners()
+InvalidNullConversion: java.lang.String#format(String, java.lang.Object...) parameter #1:
+    Attempted to change parameter from @Nullable to @NonNull: incompatible change for parameter args in java.lang.String.format(String format, java.lang.Object... args)
+InvalidNullConversion: java.lang.String#format(java.util.Locale, String, java.lang.Object...) parameter #2:
+    Attempted to change parameter from @Nullable to @NonNull: incompatible change for parameter args in java.lang.String.format(java.util.Locale l, String format, java.lang.Object... args)
+InvalidNullConversion: java.util.Map#put(K, V) parameter #0:
+    Attempted to remove @NonNull annotation from parameter key in java.util.Map.put(K key, V value)
+InvalidNullConversion: java.util.Map#put(K, V) parameter #1:
+    Attempted to remove @NonNull annotation from parameter value in java.util.Map.put(K key, V value)
+InvalidNullConversion: java.util.Map#putIfAbsent(K, V) parameter #0:
+    Attempted to remove @NonNull annotation from parameter key in java.util.Map.putIfAbsent(K key, V value)
+InvalidNullConversion: java.util.Map#putIfAbsent(K, V) parameter #1:
+    Attempted to remove @NonNull annotation from parameter value in java.util.Map.putIfAbsent(K key, V value)
+InvalidNullConversion: java.util.Map#replace(K, V) parameter #0:
+    Attempted to remove @NonNull annotation from parameter key in java.util.Map.replace(K key, V value)
+InvalidNullConversion: java.util.Map#replace(K, V) parameter #1:
+    Attempted to remove @NonNull annotation from parameter value in java.util.Map.replace(K key, V value)
+
+
+RemovedDeprecatedMethod: android.graphics.Picture#createFromStream(java.io.InputStream):
+    Removed deprecated method android.graphics.Picture.createFromStream(java.io.InputStream)
+RemovedDeprecatedMethod: android.graphics.Picture#writeToStream(java.io.OutputStream):
+    Removed deprecated method android.graphics.Picture.writeToStream(java.io.OutputStream)
+RemovedDeprecatedMethod: android.icu.text.CollationElementIterator#hashCode():
+    Removed deprecated method android.icu.text.CollationElementIterator.hashCode()
+RemovedDeprecatedMethod: android.icu.text.CurrencyPluralInfo#hashCode():
+    Removed deprecated method android.icu.text.CurrencyPluralInfo.hashCode()
+RemovedDeprecatedMethod: android.icu.text.PluralRules#hashCode():
+    Removed deprecated method android.icu.text.PluralRules.hashCode()
+RemovedDeprecatedMethod: android.icu.text.StringPrepParseException#hashCode():
+    Removed deprecated method android.icu.text.StringPrepParseException.hashCode()
+RemovedDeprecatedMethod: android.location.LocationManager#addNmeaListener(android.location.GpsStatus.NmeaListener):
+    Removed deprecated method android.location.LocationManager.addNmeaListener(android.location.GpsStatus.NmeaListener)
+RemovedDeprecatedMethod: android.location.LocationManager#removeNmeaListener(android.location.GpsStatus.NmeaListener):
+    Removed deprecated method android.location.LocationManager.removeNmeaListener(android.location.GpsStatus.NmeaListener)
+RemovedDeprecatedMethod: android.telephony.TelephonyManager#getNeighboringCellInfo():
+    Removed deprecated method android.telephony.TelephonyManager.getNeighboringCellInfo()
+
+
+RemovedMethod: android.companion.AssociationRequest.Builder#checkNotUsed():
+    Removed method android.companion.AssociationRequest.Builder.checkNotUsed()
+RemovedMethod: android.companion.AssociationRequest.Builder#markUsed():
+    Removed method android.companion.AssociationRequest.Builder.markUsed()
+RemovedMethod: android.companion.BluetoothDeviceFilter.Builder#checkNotUsed():
+    Removed method android.companion.BluetoothDeviceFilter.Builder.checkNotUsed()
+RemovedMethod: android.companion.BluetoothDeviceFilter.Builder#markUsed():
+    Removed method android.companion.BluetoothDeviceFilter.Builder.markUsed()
+RemovedMethod: android.companion.BluetoothLeDeviceFilter.Builder#checkNotUsed():
+    Removed method android.companion.BluetoothLeDeviceFilter.Builder.checkNotUsed()
+RemovedMethod: android.companion.BluetoothLeDeviceFilter.Builder#markUsed():
+    Removed method android.companion.BluetoothLeDeviceFilter.Builder.markUsed()
+RemovedMethod: android.companion.WifiDeviceFilter.Builder#checkNotUsed():
+    Removed method android.companion.WifiDeviceFilter.Builder.checkNotUsed()
+RemovedMethod: android.companion.WifiDeviceFilter.Builder#markUsed():
+    Removed method android.companion.WifiDeviceFilter.Builder.markUsed()

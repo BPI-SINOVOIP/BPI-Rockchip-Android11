@@ -1,0 +1,97 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.sqlite",
+    "module": "sqlite",
+    "version": "2.1.0-rc01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sqlite-2.1.0-rc01.aar",
+          "url": "sqlite-2.1.0-rc01.aar",
+          "size": 10954,
+          "sha512": "9d5a0cfa2ea73662a2e10518b7fe903e60ab04e768bf4f2878a8fbfd289c238854168677363e10c1525ec73510fa43661f50a24088700b2472f68718c68f5ce6",
+          "sha256": "55e21e98784795de6c9ee289066f4e9ef50dd8323631f25f3861629bbc374fb7",
+          "sha1": "0b13819c3e4516c2aab6a41cb3340ac92a6bbf90",
+          "md5": "7ac7ba8d39473b7421a836f883cf3f19"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sqlite-2.1.0-rc01.aar",
+          "url": "sqlite-2.1.0-rc01.aar",
+          "size": 10954,
+          "sha512": "9d5a0cfa2ea73662a2e10518b7fe903e60ab04e768bf4f2878a8fbfd289c238854168677363e10c1525ec73510fa43661f50a24088700b2472f68718c68f5ce6",
+          "sha256": "55e21e98784795de6c9ee289066f4e9ef50dd8323631f25f3861629bbc374fb7",
+          "sha1": "0b13819c3e4516c2aab6a41cb3340ac92a6bbf90",
+          "md5": "7ac7ba8d39473b7421a836f883cf3f19"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "sqlite-2.1.0-rc01-sources.jar",
+          "url": "sqlite-2.1.0-rc01-sources.jar",
+          "size": 18099,
+          "sha512": "2e19ef9763389125c49b3b1ab79c879113ed0d1e7e25db66877c392b204a94c43becd8574a6d845348c9786b5c779b1665240a7dc20cbc08bec6c7401b84b440",
+          "sha256": "fa549a8ddbfb26bf205705dca503cc0a4f32a44ede48fe4ad3cce4045da787ed",
+          "sha1": "14a22f2d6e0dacf6c6f369bbdbbfcc8f1d195f3c",
+          "md5": "34fa7ae80592e1fc2484107d7ad235b3"
+        }
+      ]
+    }
+  ]
+}

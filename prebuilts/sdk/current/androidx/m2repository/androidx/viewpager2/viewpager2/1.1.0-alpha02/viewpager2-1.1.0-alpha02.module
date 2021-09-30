@@ -1,0 +1,139 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.viewpager2",
+    "module": "viewpager2",
+    "version": "1.1.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.fragment",
+          "module": "fragment",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.2.0-alpha04"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "viewpager2-1.1.0-alpha02.aar",
+          "url": "viewpager2-1.1.0-alpha02.aar",
+          "size": 65848,
+          "sha512": "fc8b24ef3720e1528ce0812e152f32ff6c80443819201c5e6afb535bd5f95ee5f3082b5561d50311585d45d2687eddf9fbb82731e4fcfac91f783b36ce467ba0",
+          "sha256": "8969c8c332bf1bf293a354f5bdfe2cb2e8fafd12bbdf0d5c77de4810ef222585",
+          "sha1": "edbe1d64d2ccae8ea0ce4c37d525e5973598396e",
+          "md5": "3d6a2b858b8a38247d33b400e40710ef"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.fragment",
+          "module": "fragment",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.2.0-alpha04"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.collection",
+          "module": "collection",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "viewpager2-1.1.0-alpha02.aar",
+          "url": "viewpager2-1.1.0-alpha02.aar",
+          "size": 65848,
+          "sha512": "fc8b24ef3720e1528ce0812e152f32ff6c80443819201c5e6afb535bd5f95ee5f3082b5561d50311585d45d2687eddf9fbb82731e4fcfac91f783b36ce467ba0",
+          "sha256": "8969c8c332bf1bf293a354f5bdfe2cb2e8fafd12bbdf0d5c77de4810ef222585",
+          "sha1": "edbe1d64d2ccae8ea0ce4c37d525e5973598396e",
+          "md5": "3d6a2b858b8a38247d33b400e40710ef"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "viewpager2-1.1.0-alpha02-sources.jar",
+          "url": "viewpager2-1.1.0-alpha02-sources.jar",
+          "size": 38453,
+          "sha512": "a22602877a32ee35dc258ef746fcdbc529e80b0187d243473f342df0b77001af809fd98cfaa64471651e293e2c03026a8cf1db6dda283d255c1b06d55d1a922d",
+          "sha256": "497d038c80fd41aa6e02d8022df82d41897dd3916a04d5e595e99a214248f1f8",
+          "sha1": "ed5a4a7bfd10723571a47beeb95fecb73562c7fb",
+          "md5": "2aa675d723baddf529c10c1d1823fc8f"
+        }
+      ]
+    }
+  ]
+}

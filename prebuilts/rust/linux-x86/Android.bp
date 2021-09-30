@@ -1,0 +1,406 @@
+rust_prebuilt_dylib {
+    name: "libstd_x86_64-unknown-linux-gnu",
+    stem: "libstd",
+    suffix: "-0322c10236bca08f",
+    crate_name: "std",
+    target: {
+        linux_glibc_x86_64: {
+            srcs: ["1.40.0/lib/rustlib/x86_64-unknown-linux-gnu/lib/libstd-0322c10236bca08f.so"],
+            enabled: true,
+        },
+    },
+    enabled: false,
+    host_supported: true,
+}
+
+rust_prebuilt_dylib {
+    name: "libtest_x86_64-unknown-linux-gnu",
+    stem: "libtest",
+    suffix: "-c1e6fb83f3eb04e6",
+    crate_name: "test",
+    target: {
+        linux_glibc_x86_64: {
+            srcs: ["1.40.0/lib/rustlib/x86_64-unknown-linux-gnu/lib/libtest-c1e6fb83f3eb04e6.so"],
+            enabled: true,
+        },
+    },
+    enabled: false,
+    host_supported: true,
+}
+
+// Sysroot Libraries
+rustc = "1.40.0/src/stdlibs"
+
+// The basic crates are only available as static libraries
+// .rust_sysroot is appended to the name to prevent accidental direct usage
+// of these crates by user code.
+// The most likely place for this to occur would be liblibc.
+rust_library_rlib {
+    name: "libcore.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "core",
+    srcs: [rustc + "/src/libcore/lib.rs"],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libbacktrace_sys.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "backtrace_sys",
+    srcs: [rustc + "/vendor/backtrace-sys/src/lib.rs"],
+    features: [
+        "core", "compiler_builtins"
+    ],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "librustc_demangle.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "rustc_demangle",
+    srcs: [rustc + "/vendor/rustc-demangle/src/lib.rs"],
+    features: [
+        "core", "compiler_builtins"
+    ],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_rlib {
+    name: "libbacktrace_rs.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "backtrace_rs",
+    srcs: [rustc + "/vendor/backtrace/src/lib.rs"],
+    features: [
+        "core", "compiler_builtins"
+    ],
+    rlibs: [
+        "libbacktrace_sys.rust_sysroot",
+        "libcfg_if.rust_sysroot",
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+        "librustc_demangle.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libcompiler_builtins.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "compiler_builtins",
+    features: [
+        "compiler-builtins",
+        "core",
+        "default",
+    ],
+    srcs: [rustc + "/vendor/compiler_builtins/src/lib.rs"],
+    rlibs: ["libcore.rust_sysroot"],
+    flags: [
+        "-C",
+        "panic=abort",
+    ],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_rlib {
+    name: "liblibc.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "libc",
+    features: ["align"],
+    srcs: [rustc + "/vendor/libc/src/lib.rs"],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
+    // Generated via build.rs autodetect on compiler version. May need to be
+    // regenerated on compiler version bump.
+    flags: [
+        "--cfg",
+        "freebsd11",
+        "--cfg",
+        "libc_priv_mod_use",
+        "--cfg",
+        "libc_union",
+        "--cfg",
+        "libc_const_size_of",
+        "--cfg",
+        "libc_align",
+        "--cfg",
+        "libc_core_cvoid",
+        "--cfg",
+        "libc_packedN",
+        "--cfg",
+        "libc_thread_local",
+    ],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_rlib {
+    name: "liballoc.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "alloc",
+    srcs: [rustc + "/src/liballoc/lib.rs"],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libcfg_if.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "cfg_if",
+    features: [
+        "compiler_builtins",
+        "core",
+    ],
+    srcs: [rustc + "/vendor/cfg-if/src/lib.rs"],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libpanic_abort.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "panic_abort",
+    srcs: [rustc + "/src/libpanic_abort/lib.rs"],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libpanic_unwind.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "panic_unwind",
+    srcs: [rustc + "/src/libpanic_unwind/lib.rs"],
+    rlibs: [
+        "liballoc.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+        "libunwind.rust_sysroot",
+        "libcompiler_builtins.rust_sysroot",
+        "libcfg_if.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libunwind.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "unwind",
+    srcs: [rustc + "/src/libunwind/lib.rs"],
+    rlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+        "libcfg_if.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libhashbrown.rust_sysroot",
+    deny_warnings: false,
+    crate_name: "hashbrown",
+    srcs: [rustc + "/vendor/hashbrown/src/lib.rs"],
+    edition: "2018",
+    features: [
+        "alloc",
+        "compiler_builtins",
+        "core",
+        "nightly",
+        "rustc-dep-of-std",
+        "rustc-internal-api",
+    ],
+    flags: ["--cfg=has_extern_crate_alloc"],
+    no_stdlibs: true,
+    rlibs: [
+        "libcore.rust_sysroot",
+        "libcompiler_builtins.rust_sysroot",
+        "liballoc.rust_sysroot",
+        "libunwind.rust_sysroot",
+    ],
+}
+
+// Top level sysroot libraries are available both as static and dynamic
+rust_library_dylib {
+    name: "libstd",
+    deny_warnings: false,
+    crate_name: "std",
+    edition: "2018",
+    srcs: [rustc + "/src/libstd/lib.rs"],
+    features: [
+        "default",
+        "std_detect_dlsym_getauxval",
+        "std_detect_file_io",
+    ],
+    no_stdlibs: true,
+    rlibs: [
+        "libbacktrace_rs.rust_sysroot",
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+        "libcfg_if.rust_sysroot",
+        "liballoc.rust_sysroot",
+        "libhashbrown.rust_sysroot",
+        "libunwind.rust_sysroot",
+        "libpanic_unwind.rust_sysroot",
+    ],
+}
+
+// libstd does not actually need a separate .static version, as it statically
+// links its dependencies whether compiled as rlib or dylib.
+// However, since libterm and libtest do need a separate .static version
+// until we have dynamic selection included, I'm splitting libstd for symmetry
+
+rust_library_rlib {
+    name: "libstd.static",
+    deny_warnings: false,
+    crate_name: "std",
+    edition: "2018",
+    srcs: [rustc + "/src/libstd/lib.rs"],
+    features: [
+        "default",
+        "std_detect_dlsym_getauxval",
+        "std_detect_file_io",
+    ],
+    no_stdlibs: true,
+    rlibs: [
+        "libbacktrace_rs.rust_sysroot",
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+        "liblibc.rust_sysroot",
+        "libcfg_if.rust_sysroot",
+        "liballoc.rust_sysroot",
+        "libhashbrown.rust_sysroot",
+        "libunwind.rust_sysroot",
+        "libpanic_unwind.rust_sysroot",
+    ],
+}
+
+rust_library_dylib {
+    name: "libterm",
+    deny_warnings: false,
+    crate_name: "term",
+    srcs: [rustc + "/src/libterm/lib.rs"],
+    no_stdlibs: true,
+    dylibs: ["libstd"],
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libterm.static",
+    deny_warnings: false,
+    crate_name: "term",
+    srcs: [rustc + "/src/libterm/lib.rs"],
+    no_stdlibs: true,
+    rlibs: ["libstd.static"],
+    edition: "2018",
+}
+
+rust_library_dylib {
+    name: "libgetopts",
+    deny_warnings: false,
+    crate_name: "getopts",
+    srcs: [rustc + "/vendor/getopts/src/lib.rs"],
+    dylibs: ["libstd"],
+    // libunicode_width is a no_std crate. This means it can't build into a
+    // shared object without explicit eh_personality etc. items which it
+    // doesn't have. Link it in statically.
+    rlibs: ["libunicode_width"],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_rlib {
+    name: "libgetopts.static",
+    deny_warnings: false,
+    crate_name: "getopts",
+    srcs: [rustc + "/vendor/getopts/src/lib.rs"],
+    rlibs: [
+        "libunicode_width.static",
+        "libstd.static",
+    ],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_rlib {
+    name: "libunicode_width",
+    deny_warnings: false,
+    crate_name: "unicode_width",
+    srcs: [rustc + "/vendor/unicode-width/src/lib.rs"],
+    dylibs: ["libstd"],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_rlib {
+    name: "libunicode_width.static",
+    deny_warnings: false,
+    crate_name: "unicode_width",
+    srcs: [rustc + "/vendor/unicode-width/src/lib.rs"],
+    rlibs: ["libstd.static"],
+    no_stdlibs: true,
+    edition: "2015",
+}
+
+rust_library_dylib {
+    name: "libtest",
+    deny_warnings: false,
+    crate_name: "test",
+    srcs: [rustc + "/src/libtest/lib.rs"],
+    dylibs: [
+        "libterm",
+        "libgetopts",
+        "libstd",
+    ],
+    rlibs: [
+        "liblibc.rust_sysroot",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}
+
+rust_library_rlib {
+    name: "libtest.static",
+    deny_warnings: false,
+    crate_name: "test",
+    srcs: [rustc + "/src/libtest/lib.rs"],
+    rlibs: [
+        "liblibc.rust_sysroot",
+        "libterm.static",
+        "libgetopts.static",
+        "libstd.static",
+    ],
+    no_stdlibs: true,
+    edition: "2018",
+}

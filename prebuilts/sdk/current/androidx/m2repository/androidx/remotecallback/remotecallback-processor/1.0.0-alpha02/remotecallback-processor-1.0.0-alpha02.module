@@ -1,0 +1,106 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.remotecallback",
+    "module": "remotecallback-processor",
+    "version": "1.0.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "remotecallback-processor-1.0.0-alpha02.jar",
+          "url": "remotecallback-processor-1.0.0-alpha02.jar",
+          "size": 13492,
+          "sha512": "a39ee1a1688916dfe40a94ae664c3c949ff3b39968ca93ffc161cb9486272b3cbc95ddbd50bbe592224b95bc8ee1b2debc1ac83039f31118f7b75be778b8ae50",
+          "sha256": "834f35da1a00e5d1e7b164aace324a5675296b91540153efa80e0dd1753a28e9",
+          "sha1": "995dedc4e13f49e09417a77ce319e28c318a424f",
+          "md5": "bbd245a104f350256f392668a34c6dcd"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.squareup",
+          "module": "javapoet",
+          "version": {
+            "requires": "1.13.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "remotecallback-processor-1.0.0-alpha02.jar",
+          "url": "remotecallback-processor-1.0.0-alpha02.jar",
+          "size": 13492,
+          "sha512": "a39ee1a1688916dfe40a94ae664c3c949ff3b39968ca93ffc161cb9486272b3cbc95ddbd50bbe592224b95bc8ee1b2debc1ac83039f31118f7b75be778b8ae50",
+          "sha256": "834f35da1a00e5d1e7b164aace324a5675296b91540153efa80e0dd1753a28e9",
+          "sha1": "995dedc4e13f49e09417a77ce319e28c318a424f",
+          "md5": "bbd245a104f350256f392668a34c6dcd"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "remotecallback-processor-1.0.0-alpha02-sources.jar",
+          "url": "remotecallback-processor-1.0.0-alpha02-sources.jar",
+          "size": 8006,
+          "sha512": "b4a5a593423f1595c849623fe5328bee14434f527690816732b116f701267af96a560d29fba913350f5a2b0dc5d7ba6c80d3f82cfd32ade53583268ee7020776",
+          "sha256": "3e588df7005394855297640b94fbdbc6890e0b8b6eeb3b975860f316e2f0dd56",
+          "sha1": "ef27de0730222e8ab63dd02b30161373728b259a",
+          "md5": "56a0b2f634af9c793aca87847524059a"
+        }
+      ]
+    }
+  ]
+}

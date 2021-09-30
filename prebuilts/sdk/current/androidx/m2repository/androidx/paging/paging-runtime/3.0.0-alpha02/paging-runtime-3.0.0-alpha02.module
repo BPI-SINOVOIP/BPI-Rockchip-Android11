@@ -1,0 +1,188 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.paging",
+    "module": "paging-runtime",
+    "version": "3.0.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.0.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.0.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-ktx",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.2.0-alpha04"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.3.71"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.3.4"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-runtime-3.0.0-alpha02.aar",
+          "url": "paging-runtime-3.0.0-alpha02.aar",
+          "size": 70285,
+          "sha512": "9e0c7cbe49be4eb906da3ec3c35d94d4029b1ad1dd0525c42159483176c4b89c24ed38718f4c6967c654054723c99f14d7deabb3b300a7a0e6dd2529fa2ef415",
+          "sha256": "2ab681f19499c01047490361904c293abf4f7b4287ccc7ce7c547e16a985e50b",
+          "sha1": "edb3b0d4281d42ba474d0cf40d7a94756eba0631",
+          "md5": "99bff0e2c4e40997f65a6f35027c585e"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.0.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.0.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-ktx",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.recyclerview",
+          "module": "recyclerview",
+          "version": {
+            "requires": "1.2.0-alpha04"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.3.71"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.3.4"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-runtime-3.0.0-alpha02.aar",
+          "url": "paging-runtime-3.0.0-alpha02.aar",
+          "size": 70285,
+          "sha512": "9e0c7cbe49be4eb906da3ec3c35d94d4029b1ad1dd0525c42159483176c4b89c24ed38718f4c6967c654054723c99f14d7deabb3b300a7a0e6dd2529fa2ef415",
+          "sha256": "2ab681f19499c01047490361904c293abf4f7b4287ccc7ce7c547e16a985e50b",
+          "sha1": "edb3b0d4281d42ba474d0cf40d7a94756eba0631",
+          "md5": "99bff0e2c4e40997f65a6f35027c585e"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "paging-runtime-3.0.0-alpha02-sources.jar",
+          "url": "paging-runtime-3.0.0-alpha02-sources.jar",
+          "size": 28307,
+          "sha512": "0932a8e8141cc7b0e1ee2179574c9d8c6252835928e7256522de7627889b26439143b6c9574159c8356f8e969a506f983428e072755735e875aa8e006246fca1",
+          "sha256": "d0ab69b5281038b7b869082162e9aad73c1a59d7b9ae8d231c4545b4086237e3",
+          "sha1": "ca880685cc407d64329a5442f276a7e64c1e6033",
+          "md5": "a433ae7675f3457aa0ec21b26a69f06c"
+        }
+      ]
+    }
+  ]
+}

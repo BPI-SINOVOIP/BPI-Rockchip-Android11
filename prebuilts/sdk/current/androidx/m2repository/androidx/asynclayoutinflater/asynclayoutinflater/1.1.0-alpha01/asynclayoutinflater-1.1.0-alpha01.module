@@ -1,0 +1,111 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.asynclayoutinflater",
+    "module": "asynclayoutinflater",
+    "version": "1.1.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId:": "6616358"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asynclayoutinflater-1.1.0-alpha01.aar",
+          "url": "asynclayoutinflater-1.1.0-alpha01.aar",
+          "size": 7669,
+          "sha512": "575c1f2de3f9e7543ba17713cbc7aa2922c5e80f45f3db011a47389674955f048b1496457b611a9b6294b43b306104d2890b3e937b6e064264b883005c0f4a08",
+          "sha256": "d260cef802d2b7760f6281ac476c9d25900aef26ae7f04d3418be8d928ddc385",
+          "sha1": "5dac7a82f12455a6172715fc4a072a1a26c912e0",
+          "md5": "47282411c014207a7e17c5f2fcbe7d7f"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asynclayoutinflater-1.1.0-alpha01.aar",
+          "url": "asynclayoutinflater-1.1.0-alpha01.aar",
+          "size": 7669,
+          "sha512": "575c1f2de3f9e7543ba17713cbc7aa2922c5e80f45f3db011a47389674955f048b1496457b611a9b6294b43b306104d2890b3e937b6e064264b883005c0f4a08",
+          "sha256": "d260cef802d2b7760f6281ac476c9d25900aef26ae7f04d3418be8d928ddc385",
+          "sha1": "5dac7a82f12455a6172715fc4a072a1a26c912e0",
+          "md5": "47282411c014207a7e17c5f2fcbe7d7f"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "asynclayoutinflater-1.1.0-alpha01-sources.jar",
+          "url": "asynclayoutinflater-1.1.0-alpha01-sources.jar",
+          "size": 3460,
+          "sha512": "9244819cee2fc9bf54a97471c620304a03ed661bbd2664e7d8fb42fc48276385b7a734fe0d1eff5a661b2b5f3c63f50079ed27720fd8846b1bce841bdc399446",
+          "sha256": "4f1508f053a4ca1124dd0a92ed84c791389555531c5fa0fd6262e4a518141805",
+          "sha1": "883c2ea90ea2a96155f0c6b7dd51782b82935ad8",
+          "md5": "38339bb8e00300a99d7b1760a4b395cc"
+        }
+      ]
+    }
+  ]
+}
