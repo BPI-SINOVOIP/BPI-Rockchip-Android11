@@ -242,10 +242,10 @@ cp $IMAGE_PATH/* $STUB_PATH/IMAGES/
 
 #Generate patches
 
-.repo/repo/repo forall  -c "$PROJECT_TOP/device/rockchip/common/gen_patches_body.sh"
-.repo/repo/repo manifest -r -o out/commit_id.xml
+#.repo/repo/repo forall  -c "$PROJECT_TOP/device/rockchip/common/gen_patches_body.sh"
+#.repo/repo/repo manifest -r -o out/commit_id.xml
 #Copy stubs
-cp out/commit_id.xml $STUB_PATH/manifest_${DATE}.xml
+#cp out/commit_id.xml $STUB_PATH/manifest_${DATE}.xml
 
 mkdir -p $STUB_PATCH_PATH/kernel
 cp kernel/.config $STUB_PATCH_PATH/kernel
