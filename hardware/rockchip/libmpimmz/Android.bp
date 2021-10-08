@@ -9,7 +9,6 @@ genrule {
     srcs: libmpimmz_src + [
         "version.sh",
         "version.h.template",
-        ".git/"
     ],
     out: ["version.h"],
     cmd: "bash $(location version.sh) < $(in) > $(out)",

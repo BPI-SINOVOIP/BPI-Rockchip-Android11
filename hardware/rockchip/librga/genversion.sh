@@ -6,10 +6,12 @@ cd $CURRENTDIR
 
 rm -f $CURRENTDIR/version.h
 
-commit_ts=`git log -1 --format="%ct"`
+#commit_ts=`git log -1 --format="%ct"`
+commit_ts="1633587064"
 commit_time=`date -d@$commit_ts +"%Y-%m-%d %H:%M:%S"`
 current_time=`date +"%Y-%m-%d %H:%M:%S"`
-git_version=`git log -1 --format="%h"`
+#git_version=`git log -1 --format="%h"`
+git_version="04be8dc"
 current_product=$TARGET_PRODUCT
 
 VERSION_TARGET="$(cat version.h.template | sed  -e 's/\$GIT_BUILD_VERSION/'"$git_version build: $current_time"'/g' -e 's/\$PRODUCT_BASE/'"$current_product"'/g' version.h.template)"

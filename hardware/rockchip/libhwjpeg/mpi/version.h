@@ -1,1 +1,1 @@
-#define GIT_INFO "0161028 author: Chen Jinsen [project] add licence declare"
+#define GIT_INFO "04be8dc author: August ignore github oversize files"

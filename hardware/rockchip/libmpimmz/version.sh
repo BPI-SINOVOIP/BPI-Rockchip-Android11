@@ -1,7 +1,9 @@
 #!/bin/bash
 rm -f version.h
 
-COMMIT_INFO=$(cd $(dirname $0) && git log -1 --oneline --date=short --pretty=format:"%h date: %cd author: %<|(20)%an")
+#dangku, fix no repo compile error
+#COMMIT_INFO=$(cd $(dirname $0) && git log -1 --oneline --date=short --pretty=format:"%h date: %cd author: %<|(20)%an")
+COMMIT_INFO="e68d783 date: 2021-08-05 author: Meiyou Chen"
 BUILD_TIME=$(date "+%G-%m-%d %H:%M:%S")
 MPI_MMZ_VERSION="build:$BUILD_TIME   git-$COMMIT_INFO"
 

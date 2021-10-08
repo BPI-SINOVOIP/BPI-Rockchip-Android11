@@ -19,7 +19,6 @@ genrule {
 	name: "gen_rga_api_version",
 	srcs: [
 		"version.h.template",
-		".git/"
 	],
 	out: ["version.h"],
 
