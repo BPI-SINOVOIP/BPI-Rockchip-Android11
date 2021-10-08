@@ -13,17 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include device/rockchip/rk356x_box/CommonBoardConfig.mk
+BUILD_WITH_GO_OPT := false
 
-PRODUCT_MAKEFILES := \
-        $(LOCAL_DIR)/rk356x_box/rk356x_box.mk \
-        $(LOCAL_DIR)/rk356x_box_32/rk356x_box_32.mk \
-        $(LOCAL_DIR)/bananapi_r2pro_box/bananapi_r2pro_box.mk
+BOARD_SELINUX_ENFORCING := false
 
-COMMON_LUNCH_CHOICES := \
-    rk356x_box-user \
-    rk356x_box-userdebug \
-    rk356x_box_32-user \
-    rk356x_box_32-userdebug \
-    bananapi_r2pro_box-user \
-    bananapi_r2pro_box-userdebug
+# AB image definition
+BOARD_USES_AB_IMAGE := false
+BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := false
 
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+    include device/rockchip/common/BoardConfig_AB.mk
+    TARGET_RECOVERY_FSTAB := device/rockchip/rk356x_box/bananapi_r2pro_box/recovery.fstab_AB
+endif
+
+PRODUCT_UBOOT_CONFIG := rk3568
+PRODUCT_KERNEL_DTS := rk3568-bananapi-r2pro
+BOARD_GSENSOR_MXC6655XA_SUPPORT := true
