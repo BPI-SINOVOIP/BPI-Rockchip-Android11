@@ -64,15 +64,41 @@
 		vin-supply = <&vcc3v3_sys>;
 	};
 
-	vcc3v3_pcie: gpio-regulator {
+	vcc3v3_pcie: vcc3v3-pcie {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc3v3_pcie";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		enable-active-high;
 		gpio = <&gpio0 RK_PD4 GPIO_ACTIVE_HIGH>;
-		startup-delay-us = <5000>;
-		vin-supply = <&dc_12v>;
+		startup-delay-us = <20000>;
+		vin-supply = <&vcc5v0_sys>;
+	};
+
+	vcc3v3_minipcie: vcc3v3-minipcie {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc3v3_minipcie";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+		regulator-boot-on;
+		enable-active-high;
+		gpio = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
+		//startup-delay-us = <5000>;
+		vin-supply = <&vcc3v3_sys>;
+	};
+
+	vcc3v3_ngff: vcc3v3-ngff {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc3v3_ngff";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-always-on;
+		regulator-boot-on;
+		enable-active-high;
+		gpio = <&gpio4 RK_PC1 GPIO_ACTIVE_HIGH>;
+		//startup-delay-us = <5000>;
+		vin-supply = <&vcc3v3_sys>;
 	};
 
 	vcc3v3_bu: vcc3v3-bu {
@@ -369,9 +395,19 @@
 	status = "okay";
 };
 
+&pcie3x1 {
+	rockchip,bifurcation;
+	reset-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc3v3_pcie>;
+	//ngff3v3-supply = <&vcc3v3_ngff>;
+	status = "okay";
+};
+
 &pcie3x2 {
+	rockchip,bifurcation;
 	reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie>;
+	//minipcie3v3-supply = <&vcc3v3_minipcie>;
 	status = "okay";
 };
 
@@ -430,7 +466,7 @@
 };
 
 &sata2 {
-	status = "disabled";
+	status = "okay";
 };
 
 &sdmmc2 {
