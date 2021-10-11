@@ -1,7 +1,21 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/******************************************************************************
+ *
+ * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of version 2 of the GNU General Public License as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ ******************************************************************************/
+
 #ifndef _HALMAC_TX_DESC_AP_H_
 #define _HALMAC_TX_DESC_AP_H_
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 /*TXDESC_WORD0*/
 
@@ -11,18 +25,47 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_IE_END_BODY(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 31)
+#define SET_TX_DESC_IE_END_BODY_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 31)
+#define GET_TX_DESC_IE_END_BODY(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 31)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_GF(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 30)
 #define SET_TX_DESC_GF_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 30)
 #define GET_TX_DESC_GF(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 30)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_AGG_EN_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 30)
+#define SET_TX_DESC_AGG_EN_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 30)
+#define GET_TX_DESC_AGG_EN_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 30)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_NO_ACM(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 29)
 #define SET_TX_DESC_NO_ACM_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 29)
 #define GET_TX_DESC_NO_ACM(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 29)
 
 #endif
 
-#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_BK_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 29)
+#define SET_TX_DESC_BK_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 29)
+#define GET_TX_DESC_BK_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 29)
+
+#endif
+
+#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_BCNPKT_TSF_CTRL(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 28)
 #define SET_TX_DESC_BCNPKT_TSF_CTRL_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 28)
@@ -30,16 +73,11 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_AMSDU_PAD_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 27)
 #define SET_TX_DESC_AMSDU_PAD_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 27)
 #define GET_TX_DESC_AMSDU_PAD_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 27)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_LS(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 26)
 #define SET_TX_DESC_LS_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 26)
 #define GET_TX_DESC_LS(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 26)
@@ -49,6 +87,19 @@
 #define SET_TX_DESC_BMC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 24)
 #define SET_TX_DESC_BMC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1, 24)
 #define GET_TX_DESC_BMC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1, 24)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_PKT_OFFSET_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1f, 24)
+#define SET_TX_DESC_PKT_OFFSET_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0x1f, 24)
+#define GET_TX_DESC_PKT_OFFSET_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0x1f, 24)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8814B_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_OFFSET(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0xff, 16)
 #define SET_TX_DESC_OFFSET_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0xff, 16)
 #define GET_TX_DESC_OFFSET(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0xff, 16)
@@ -56,14 +107,69 @@
 #define SET_TX_DESC_TXPKTSIZE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, __Value, 0xffff, 0)
 #define GET_TX_DESC_TXPKTSIZE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword0, 0xffff, 0)
 
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+
 /*TXDESC_WORD1*/
+
+#define SET_TX_DESC_AMSDU(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 30)
+#define SET_TX_DESC_AMSDU_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 30)
+#define GET_TX_DESC_AMSDU(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 30)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_FTM_EN_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 30)
+#define SET_TX_DESC_FTM_EN_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 30)
+#define GET_TX_DESC_FTM_EN_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 30)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_MOREDATA(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 29)
 #define SET_TX_DESC_MOREDATA_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 29)
 #define GET_TX_DESC_MOREDATA(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 29)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT || HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_HW_AES_IV_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 29)
+#define SET_TX_DESC_HW_AES_IV_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 29)
+#define GET_TX_DESC_HW_AES_IV_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 29)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_MHR_CP(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 25)
+#define SET_TX_DESC_MHR_CP_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 25)
+#define GET_TX_DESC_MHR_CP(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 25)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_PKT_OFFSET(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1f, 24)
 #define SET_TX_DESC_PKT_OFFSET_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1f, 24)
 #define GET_TX_DESC_PKT_OFFSET(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1f, 24)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_SMH_EN_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 24)
+#define SET_TX_DESC_SMH_EN_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 24)
+#define GET_TX_DESC_SMH_EN_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 24)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_SEC_TYPE(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x3, 22)
 #define SET_TX_DESC_SEC_TYPE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x3, 22)
 #define GET_TX_DESC_SEC_TYPE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x3, 22)
@@ -73,6 +179,19 @@
 #define SET_TX_DESC_RATE_ID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1f, 16)
 #define SET_TX_DESC_RATE_ID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1f, 16)
 #define GET_TX_DESC_RATE_ID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1f, 16)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_SMH_CAM(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0xff, 16)
+#define SET_TX_DESC_SMH_CAM_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0xff, 16)
+#define GET_TX_DESC_SMH_CAM(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0xff, 16)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_PIFS(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 15)
 #define SET_TX_DESC_PIFS_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 15)
 #define GET_TX_DESC_PIFS(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 15)
@@ -82,12 +201,46 @@
 #define SET_TX_DESC_RD_NAV_EXT(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 13)
 #define SET_TX_DESC_RD_NAV_EXT_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 13)
 #define GET_TX_DESC_RD_NAV_EXT(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 13)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_EXT_EDCA(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 13)
+#define SET_TX_DESC_EXT_EDCA_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 13)
+#define GET_TX_DESC_EXT_EDCA(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 13)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8814B_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_QSEL(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1f, 8)
 #define SET_TX_DESC_QSEL_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1f, 8)
 #define GET_TX_DESC_QSEL(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1f, 8)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_SPECIAL_CW(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 7)
+#define SET_TX_DESC_SPECIAL_CW_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x1, 7)
+#define GET_TX_DESC_SPECIAL_CW(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x1, 7)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_MACID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x7f, 0)
 #define SET_TX_DESC_MACID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x7f, 0)
 #define GET_TX_DESC_MACID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x7f, 0)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_MACID_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x7f, 0)
+#define SET_TX_DESC_MACID_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, __Value, 0x7f, 0)
+#define GET_TX_DESC_MACID_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword1, 0x7f, 0)
 
 #endif
 
@@ -102,7 +255,15 @@
 
 #endif
 
-#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_CHK_EN_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 31)
+#define SET_TX_DESC_CHK_EN_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 31)
+#define GET_TX_DESC_CHK_EN_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x1, 31)
+
+#endif
+
+#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
 
 #define SET_TX_DESC_FTM_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 30)
 #define SET_TX_DESC_FTM_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 30)
@@ -110,11 +271,48 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANTCEL_D_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xf, 28)
+#define SET_TX_DESC_ANTCEL_D_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xf, 28)
+#define GET_TX_DESC_ANTCEL_D_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0xf, 28)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_DMA_PRI(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 26)
+#define SET_TX_DESC_DMA_PRI_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 26)
+#define GET_TX_DESC_DMA_PRI(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x1, 26)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
 
 #define SET_TX_DESC_G_ID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x3f, 24)
 #define SET_TX_DESC_G_ID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x3f, 24)
 #define GET_TX_DESC_G_ID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x3f, 24)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_MAX_AMSDU_MODE(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x3, 24)
+#define SET_TX_DESC_MAX_AMSDU_MODE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x3, 24)
+#define GET_TX_DESC_MAX_AMSDU_MODE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x3, 24)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANTSEL_C_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xf, 24)
+#define SET_TX_DESC_ANTSEL_C_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xf, 24)
+#define GET_TX_DESC_ANTSEL_C_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0xf, 24)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_BT_NULL(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 23)
 #define SET_TX_DESC_BT_NULL_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 23)
 #define GET_TX_DESC_BT_NULL(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x1, 23)
@@ -133,6 +331,19 @@
 #define SET_TX_DESC_BK(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 16)
 #define SET_TX_DESC_BK_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 16)
 #define GET_TX_DESC_BK(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x1, 16)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_DMA_TXAGG_NUM_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xff, 16)
+#define SET_TX_DESC_DMA_TXAGG_NUM_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xff, 16)
+#define GET_TX_DESC_DMA_TXAGG_NUM_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0xff, 16)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_NULL_1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 15)
 #define SET_TX_DESC_NULL_1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 15)
 #define GET_TX_DESC_NULL_1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x1, 15)
@@ -151,7 +362,7 @@
 
 #endif
 
-#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_TRI_FRAME(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 9)
 #define SET_TX_DESC_TRI_FRAME_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1, 9)
@@ -159,11 +370,24 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_P_AID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1ff, 0)
 #define SET_TX_DESC_P_AID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0x1ff, 0)
 #define GET_TX_DESC_P_AID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0x1ff, 0)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_TXDESC_CHECKSUM_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xffff, 0)
+#define SET_TX_DESC_TXDESC_CHECKSUM_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, __Value, 0xffff, 0)
+#define GET_TX_DESC_TXDESC_CHECKSUM_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword2, 0xffff, 0)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 
 /*TXDESC_WORD3*/
 
@@ -179,22 +403,25 @@
 #define SET_TX_DESC_USE_MAX_TIME_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 16)
 #define SET_TX_DESC_USE_MAX_TIME_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 16)
 #define GET_TX_DESC_USE_MAX_TIME_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 16)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_OFFLOAD_SIZE(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x7fff, 16)
+#define SET_TX_DESC_OFFLOAD_SIZE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x7fff, 16)
+#define GET_TX_DESC_OFFLOAD_SIZE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x7fff, 16)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_NAVUSEHDR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 15)
 #define SET_TX_DESC_NAVUSEHDR_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 15)
 #define GET_TX_DESC_NAVUSEHDR(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 15)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 #define SET_TX_DESC_CHK_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 14)
 #define SET_TX_DESC_CHK_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 14)
 #define GET_TX_DESC_CHK_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 14)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_HW_RTS_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 13)
 #define SET_TX_DESC_HW_RTS_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 13)
 #define GET_TX_DESC_HW_RTS_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 13)
@@ -204,6 +431,19 @@
 #define SET_TX_DESC_CTS2SELF(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 11)
 #define SET_TX_DESC_CTS2SELF_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 11)
 #define GET_TX_DESC_CTS2SELF(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 11)
+
+#endif
+
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_CHANNEL_DMA(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1f, 11)
+#define SET_TX_DESC_CHANNEL_DMA_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1f, 11)
+#define GET_TX_DESC_CHANNEL_DMA(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1f, 11)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_DISDATAFB(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 10)
 #define SET_TX_DESC_DISDATAFB_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 10)
 #define GET_TX_DESC_DISDATAFB(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 10)
@@ -219,7 +459,18 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_IE_CNT(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x7, 6)
+#define SET_TX_DESC_IE_CNT_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x7, 6)
+#define GET_TX_DESC_IE_CNT(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x7, 6)
+#define SET_TX_DESC_IE_CNT_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 5)
+#define SET_TX_DESC_IE_CNT_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1, 5)
+#define GET_TX_DESC_IE_CNT_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1, 5)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_WHEADER_LEN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1f, 0)
 #define SET_TX_DESC_WHEADER_LEN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1f, 0)
@@ -227,7 +478,15 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8814B_SUPPORT)
+
+#define SET_TX_DESC_WHEADER_LEN_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1f, 0)
+#define SET_TX_DESC_WHEADER_LEN_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, __Value, 0x1f, 0)
+#define GET_TX_DESC_WHEADER_LEN_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword3, 0x1f, 0)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 
 /*TXDESC_WORD4*/
@@ -260,34 +519,42 @@
 #define SET_TX_DESC_DATARATE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword4, __Value, 0x7f, 0)
 #define GET_TX_DESC_DATARATE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword4, 0x7f, 0)
 
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
-
 /*TXDESC_WORD5*/
 
 #define SET_TX_DESC_POLLUTED(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 31)
 #define SET_TX_DESC_POLLUTED_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 31)
 #define GET_TX_DESC_POLLUTED(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x1, 31)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_TXPWR_OFSET(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x7, 28)
 #define SET_TX_DESC_TXPWR_OFSET_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x7, 28)
 #define GET_TX_DESC_TXPWR_OFSET(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x7, 28)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
 #define SET_TX_DESC_TX_ANT(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0xf, 24)
 #define SET_TX_DESC_TX_ANT_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0xf, 24)
 #define GET_TX_DESC_TX_ANT(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0xf, 24)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_DROP_ID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 24)
+#define SET_TX_DESC_DROP_ID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 24)
+#define GET_TX_DESC_DROP_ID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x3, 24)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_PORT_ID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x7, 21)
 #define SET_TX_DESC_PORT_ID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x7, 21)
 #define GET_TX_DESC_PORT_ID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x7, 21)
 
 #endif
 
-#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_MULTIPLE_PORT(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x7, 18)
 #define SET_TX_DESC_MULTIPLE_PORT_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x7, 18)
@@ -295,59 +562,26 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_SIGNALING_TAPKT_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 17)
 #define SET_TX_DESC_SIGNALING_TAPKT_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 17)
 #define GET_TX_DESC_SIGNALING_TAPKT_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x1, 17)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_RTS_SC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0xf, 13)
 #define SET_TX_DESC_RTS_SC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0xf, 13)
 #define GET_TX_DESC_RTS_SC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0xf, 13)
 #define SET_TX_DESC_RTS_SHORT(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 12)
 #define SET_TX_DESC_RTS_SHORT_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 12)
 #define GET_TX_DESC_RTS_SHORT(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x1, 12)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 #define SET_TX_DESC_VCS_STBC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 10)
 #define SET_TX_DESC_VCS_STBC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 10)
 #define GET_TX_DESC_VCS_STBC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x3, 10)
-
-#endif
-
-#if (HALMAC_8188F_SUPPORT)
-
-#define SET_TX_DESC_RTS_STBC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 10)
-#define SET_TX_DESC_RTS_STBC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 10)
-#define GET_TX_DESC_RTS_STBC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x3, 10)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_DATA_STBC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 8)
 #define SET_TX_DESC_DATA_STBC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 8)
 #define GET_TX_DESC_DATA_STBC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x3, 8)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 #define SET_TX_DESC_DATA_LDPC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 7)
 #define SET_TX_DESC_DATA_LDPC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x1, 7)
 #define GET_TX_DESC_DATA_LDPC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x1, 7)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_DATA_BW(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 5)
 #define SET_TX_DESC_DATA_BW_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, __Value, 0x3, 5)
 #define GET_TX_DESC_DATA_BW(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword5, 0x3, 5)
@@ -368,49 +602,135 @@
 #define SET_TX_DESC_ANTSEL_D(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 30)
 #define SET_TX_DESC_ANTSEL_D_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 30)
 #define GET_TX_DESC_ANTSEL_D(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 30)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANT_MAPD_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 30)
+#define SET_TX_DESC_ANT_MAPD_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 30)
+#define GET_TX_DESC_ANT_MAPD_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 30)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
 #define SET_TX_DESC_ANT_MAPD(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 28)
 #define SET_TX_DESC_ANT_MAPD_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 28)
 #define GET_TX_DESC_ANT_MAPD(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 28)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANT_MAPC_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 28)
+#define SET_TX_DESC_ANT_MAPC_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 28)
+#define GET_TX_DESC_ANT_MAPC_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 28)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
 #define SET_TX_DESC_ANT_MAPC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 26)
 #define SET_TX_DESC_ANT_MAPC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 26)
 #define GET_TX_DESC_ANT_MAPC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 26)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANT_MAPB_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 26)
+#define SET_TX_DESC_ANT_MAPB_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 26)
+#define GET_TX_DESC_ANT_MAPB_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 26)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
 #define SET_TX_DESC_ANT_MAPB(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 24)
 #define SET_TX_DESC_ANT_MAPB_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 24)
 #define GET_TX_DESC_ANT_MAPB(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 24)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANT_MAPA_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 24)
+#define SET_TX_DESC_ANT_MAPA_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 24)
+#define GET_TX_DESC_ANT_MAPA_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 24)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
 #define SET_TX_DESC_ANT_MAPA(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 22)
 #define SET_TX_DESC_ANT_MAPA_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 22)
 #define GET_TX_DESC_ANT_MAPA(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 22)
 #define SET_TX_DESC_ANTSEL_C(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 20)
 #define SET_TX_DESC_ANTSEL_C_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 20)
 #define GET_TX_DESC_ANTSEL_C(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 20)
-#define SET_TX_DESC_ANTSEL_B(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 18)
-#define SET_TX_DESC_ANTSEL_B_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 18)
-#define GET_TX_DESC_ANTSEL_B(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 18)
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8198F_SUPPORT)
 
+#define SET_TX_DESC_ANTSEL_B_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xf, 20)
+#define SET_TX_DESC_ANTSEL_B_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xf, 20)
+#define GET_TX_DESC_ANTSEL_B_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0xf, 20)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
+#define SET_TX_DESC_ANTSEL_B(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 18)
+#define SET_TX_DESC_ANTSEL_B_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 18)
+#define GET_TX_DESC_ANTSEL_B(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 18)
 #define SET_TX_DESC_ANTSEL_A(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 16)
 #define SET_TX_DESC_ANTSEL_A_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0x3, 16)
 #define GET_TX_DESC_ANTSEL_A(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0x3, 16)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANTSEL_A_V1(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xf, 16)
+#define SET_TX_DESC_ANTSEL_A_V1_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xf, 16)
+#define GET_TX_DESC_ANTSEL_A_V1(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0xf, 16)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 #define SET_TX_DESC_MBSSID(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xf, 12)
 #define SET_TX_DESC_MBSSID_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xf, 12)
 #define GET_TX_DESC_MBSSID(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0xf, 12)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+
 #define SET_TX_DESC_SW_DEFINE(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xfff, 0)
 #define SET_TX_DESC_SW_DEFINE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xfff, 0)
 #define GET_TX_DESC_SW_DEFINE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0xfff, 0)
+
+#endif
+
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_SWPS_SEQ(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xfff, 0)
+#define SET_TX_DESC_SWPS_SEQ_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, __Value, 0xfff, 0)
+#define GET_TX_DESC_SWPS_SEQ(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword6, 0xfff, 0)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
+
 
 /*TXDESC_WORD7*/
 
 #define SET_TX_DESC_DMA_TXAGG_NUM(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xff, 24)
 #define SET_TX_DESC_DMA_TXAGG_NUM_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xff, 24)
 #define GET_TX_DESC_DMA_TXAGG_NUM(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, 0xff, 24)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 #define SET_TX_DESC_FINAL_DATA_RATE(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xff, 24)
 #define SET_TX_DESC_FINAL_DATA_RATE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xff, 24)
 #define GET_TX_DESC_FINAL_DATA_RATE(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, 0xff, 24)
@@ -420,7 +740,18 @@
 
 #endif
 
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
+#if (HALMAC_8198F_SUPPORT)
+
+#define SET_TX_DESC_ANTSEL_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0x1, 19)
+#define SET_TX_DESC_ANTSEL_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0x1, 19)
+#define GET_TX_DESC_ANTSEL_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, 0x1, 19)
+#define SET_TX_DESC_MBSSID_EX(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0x7, 16)
+#define SET_TX_DESC_MBSSID_EX_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0x7, 16)
+#define GET_TX_DESC_MBSSID_EX(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, 0x7, 16)
+
+#endif
+
+#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8198F_SUPPORT)
 
 #define SET_TX_DESC_TX_BUFF_SIZE(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xffff, 0)
 #define SET_TX_DESC_TX_BUFF_SIZE_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xffff, 0)
@@ -431,11 +762,6 @@
 #define SET_TX_DESC_TIMESTAMP(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xffff, 0)
 #define SET_TX_DESC_TIMESTAMP_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, __Value, 0xffff, 0)
 #define GET_TX_DESC_TIMESTAMP(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword7, 0xffff, 0)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 
 /*TXDESC_WORD8*/
 
@@ -463,46 +789,21 @@
 #define SET_TX_DESC_SMH_EN(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x1, 24)
 #define SET_TX_DESC_SMH_EN_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x1, 24)
 #define GET_TX_DESC_SMH_EN(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0x1, 24)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_TAILPAGE_L(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0xff, 24)
 #define SET_TX_DESC_TAILPAGE_L_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0xff, 24)
 #define GET_TX_DESC_TAILPAGE_L(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0xff, 24)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 #define SET_TX_DESC_SDIO_DMASEQ(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0xff, 16)
 #define SET_TX_DESC_SDIO_DMASEQ_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0xff, 16)
 #define GET_TX_DESC_SDIO_DMASEQ(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0xff, 16)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_NEXTHEADPAGE_L(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0xff, 16)
 #define SET_TX_DESC_NEXTHEADPAGE_L_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0xff, 16)
 #define GET_TX_DESC_NEXTHEADPAGE_L(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0xff, 16)
 #define SET_TX_DESC_EN_HWSEQ(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x1, 15)
 #define SET_TX_DESC_EN_HWSEQ_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x1, 15)
 #define GET_TX_DESC_EN_HWSEQ(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0x1, 15)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
 #define SET_TX_DESC_EN_HWEXSEQ(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x1, 14)
 #define SET_TX_DESC_EN_HWEXSEQ_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x1, 14)
 #define GET_TX_DESC_EN_HWEXSEQ(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0x1, 14)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_DATA_RC(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x3f, 8)
 #define SET_TX_DESC_DATA_RC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x3f, 8)
 #define GET_TX_DESC_DATA_RC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0x3f, 8)
@@ -513,11 +814,6 @@
 #define SET_TX_DESC_RTS_RC_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, __Value, 0x3f, 0)
 #define GET_TX_DESC_RTS_RC(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword8, 0x3f, 0)
 
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
-
-
 /*TXDESC_WORD9*/
 
 #define SET_TX_DESC_TAILPAGE_H(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, __Value, 0xf, 28)
@@ -526,11 +822,6 @@
 #define SET_TX_DESC_NEXTHEADPAGE_H(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, __Value, 0xf, 24)
 #define SET_TX_DESC_NEXTHEADPAGE_H_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, __Value, 0xf, 24)
 #define GET_TX_DESC_NEXTHEADPAGE_H(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, 0xf, 24)
-
-#endif
-
-#if (HALMAC_8814A_SUPPORT || HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT || HALMAC_8188F_SUPPORT)
-
 #define SET_TX_DESC_SW_SEQ(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, __Value, 0xfff, 12)
 #define SET_TX_DESC_SW_SEQ_NO_CLR(__pTxDesc, __Value)    HALMAC_SET_DESC_FIELD_NO_CLR(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, __Value, 0xfff, 12)
 #define GET_TX_DESC_SW_SEQ(__pTxDesc)    HALMAC_GET_DESC_FIELD(((PHALMAC_TX_DESC)__pTxDesc)->Dword9, 0xfff, 12)
@@ -546,7 +837,7 @@
 
 #endif
 
-#if (HALMAC_8822B_SUPPORT || HALMAC_8197F_SUPPORT || HALMAC_8821C_SUPPORT)
+#if (HALMAC_8822B_SUPPORT || HALMAC_8821C_SUPPORT)
 
 
 /*WORD10*/
@@ -565,3 +856,4 @@
 
 
 #endif
+

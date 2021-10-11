@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2015 - 2016 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2015 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,21 +11,21 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef _RTL8822BE_H_
 #define _RTL8822BE_H_
 
 #include <drv_types.h>		/* PADAPTER */
-#include "../../hal_halmac.h"	/* HALMAC_RX_FIFO_SIZE_8822B */
 
-/* pic buffer descriptor */
 #define TX_BD_NUM_8822BE	128
-#define RX_BD_NUM_8822BE	128
+#define RX_BD_NUM_8822BE	PCI_MAX_RX_COUNT /* TODO */
+
+#ifdef CONFIG_CONCURRENT_MODE
+#define TX_BD_NUM_BEQ_8822BE	(TX_BD_NUM_8822BE << 1)
+#else
+#define TX_BD_NUM_BEQ_8822BE	TX_BD_NUM_8822BE
+#endif /* CONFIG_CONCURRENT_MODE */
+
 #define TX_BD_NUM_8822BE_BCN	2
 #define TX_BD_NUM_8822BE_CMD	128
 
@@ -45,7 +45,7 @@
 
 #define TX_BUFFER_SEG_NUM	1 /* 0:2 seg, 1: 4 seg, 2: 8 seg. */
 
-#define MAX_RECVBUF_SZ_8822B	HALMAC_RX_FIFO_SIZE_8822B
+#define MAX_RECVBUF_SZ_8822B	24576	/* 24k */
 
 /* TX BD */
 #define SET_TXBUFFER_DESC_LEN_WITH_OFFSET(__pTxDesc, __Offset, __Valeu) \
@@ -101,6 +101,7 @@ s32 rtl8822be_hal_xmitframe_enqueue(PADAPTER, struct xmit_frame *);
 #ifdef CONFIG_XMIT_THREAD_MODE
 	s32 rtl8822be_xmit_buf_handler(PADAPTER);
 #endif
+u32 InitMAC_TRXBD_8822BE(PADAPTER adapter);
 
 void rtl8822be_xmitframe_resume(PADAPTER);
 
@@ -109,10 +110,6 @@ s32 rtl8822be_init_recv_priv(PADAPTER);
 void rtl8822be_free_recv_priv(PADAPTER);
 int rtl8822be_init_rxbd_ring(PADAPTER);
 void rtl8822be_free_rxbd_ring(PADAPTER);
-#ifdef CONFIG_NAPI
-int rtl8822be_rx_mpdu(_adapter *padapter, int remaing_rxdesc, int budget);
-u16 rtl8822be_check_rxdesc_remain(_adapter *padapter, int rx_queue_idx);
-#endif
 
 /* rtl8822bs_ops.c */
 

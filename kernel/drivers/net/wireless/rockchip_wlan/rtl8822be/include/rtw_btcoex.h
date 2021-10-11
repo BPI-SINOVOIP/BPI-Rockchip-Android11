@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2013 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
+#ifdef CONFIG_BT_COEXIST
+
 #ifndef __RTW_BTCOEX_H__
 #define __RTW_BTCOEX_H__
 
@@ -54,9 +51,9 @@ typedef enum _BT_CTRL_STATUS {
 } BT_CTRL_STATUS, *PBT_CTRL_STATUS;
 
 typedef enum _BTCOEX_SUSPEND_STATE {
-	BTCOEX_SUSPEND_STATE_RESUME		= 0x0,
-	BTCOEX_SUSPEND_STATE_SUSPEND		= 0x1,
-	BTCOEX_SUSPEND_STATE_SUSPEND_KEEP_ANT	= 0x2,
+	BTCOEX_SUSPEND_STATE_RESUME					= 0x0,
+	BTCOEX_SUSPEND_STATE_SUSPEND				= 0x1,
+	BTCOEX_SUSPEND_STATE_SUSPEND_KEEP_ANT		= 0x2,
 	BTCOEX_SUSPEND_STATE_MAX
 } BTCOEX_SUSPEND_STATE, *PBTCOEX_SUSPEND_STATE;
 
@@ -369,6 +366,8 @@ struct bt_coex_info {
 
 void rtw_btcoex_Initialize(PADAPTER);
 void rtw_btcoex_PowerOnSetting(PADAPTER padapter);
+void rtw_btcoex_AntInfoSetting(PADAPTER padapter);
+void rtw_btcoex_PowerOffSetting(PADAPTER padapter);
 void rtw_btcoex_PreLoadFirmware(PADAPTER padapter);
 void rtw_btcoex_HAL_Initialize(PADAPTER padapter, u8 bWifiOnly);
 void rtw_btcoex_IpsNotify(PADAPTER, u8 type);
@@ -382,8 +381,9 @@ void rtw_btcoex_BtInfoNotify(PADAPTER, u8 length, u8 *tmpBuf);
 void rtw_btcoex_BtMpRptNotify(PADAPTER, u8 length, u8 *tmpBuf);
 void rtw_btcoex_SuspendNotify(PADAPTER, u8 state);
 void rtw_btcoex_HaltNotify(PADAPTER);
-void rtw_btcoex_ScoreBoardStatusNotify(PADAPTER, u8 length, u8 *tmpBuf);
 void rtw_btcoex_switchband_notify(u8 under_scan, u8 band_type);
+void rtw_btcoex_WlFwDbgInfoNotify(PADAPTER padapter, u8* tmpBuf, u8 length);
+void rtw_btcoex_rx_rate_change_notify(PADAPTER padapter, u8 is_data_frame, u8 rate_id);
 void rtw_btcoex_SwitchBtTRxMask(PADAPTER);
 void rtw_btcoex_Switch(PADAPTER, u8 enable);
 u8 rtw_btcoex_IsBtDisabled(PADAPTER);
@@ -404,35 +404,32 @@ void rtw_btcoex_SetDBG(PADAPTER, u32 *pDbgModule);
 u32 rtw_btcoex_GetDBG(PADAPTER, u8 *pStrBuf, u32 bufSize);
 u8 rtw_btcoex_IncreaseScanDeviceNum(PADAPTER);
 u8 rtw_btcoex_IsBtLinkExist(PADAPTER);
-void rtw_btcoex_BTOffOnNotify(PADAPTER padapter, u8 bBTON);
+void rtw_btcoex_pta_off_on_notify(PADAPTER padapter, u8 bBTON);
 
 #ifdef CONFIG_RF4CE_COEXIST
-void rtw_btcoex_rf4ce_voice_Notify(PADAPTER padapter, u8 type);
-void rtw_btcoex_set_rf4ce_link_state(PADAPTER padapter, u8 state);
-u8 rtw_btcoex_get_rf4ce_link_state(PADAPTER padapter);
-void rtw_btcoex_set_rf4ce_voice_state(PADAPTER padapter, u8 state);
-u8 rtw_btcoex_get_rf4ce_voice_state(PADAPTER padapter);
+void rtw_btcoex_SetRf4ceLinkState(PADAPTER padapter, u8 state);
+u8 rtw_btcoex_GetRf4ceLinkState(PADAPTER padapter);
 #endif
 
 #ifdef CONFIG_BT_COEXIST_SOCKET_TRX
-	void rtw_btcoex_SetBtPatchVersion(PADAPTER padapter, u16 btHciVer, u16 btPatchVer);
-	void rtw_btcoex_SetHciVersion(PADAPTER  padapter, u16 hciVersion);
-	void rtw_btcoex_StackUpdateProfileInfo(void);
-	void rtw_btcoex_init_socket(_adapter *padapter);
-	void rtw_btcoex_close_socket(_adapter *padapter);
-	void rtw_btcoex_dump_tx_msg(u8 *tx_msg, u8 len, u8 *msg_name);
-	u8 rtw_btcoex_sendmsgbysocket(_adapter *padapter, u8 *msg, u8 msg_size, bool force);
-	u8 rtw_btcoex_create_kernel_socket(_adapter *padapter);
-	void rtw_btcoex_close_kernel_socket(_adapter *padapter);
-	void rtw_btcoex_recvmsgbysocket(void *data);
-	u16 rtw_btcoex_parse_recv_data(u8 *msg, u8 msg_size);
-	u8 rtw_btcoex_btinfo_cmd(PADAPTER padapter, u8 *pbuf, u16 length);
-	void rtw_btcoex_parse_hci_cmd(_adapter *padapter, u8 *cmd, u16 len);
-	void rtw_btcoex_SendEventExtBtCoexControl(PADAPTER Adapter, u8 bNeedDbgRsp, u8 dataLen, void *pData);
-	void rtw_btcoex_SendEventExtBtInfoControl(PADAPTER Adapter, u8 dataLen, void *pData);
-	void rtw_btcoex_SendScanNotify(PADAPTER padapter, u8 scanType);
-	#define BT_SendEventExtBtCoexControl(Adapter, bNeedDbgRsp, dataLen, pData) rtw_btcoex_SendEventExtBtCoexControl(Adapter, bNeedDbgRsp, dataLen, pData)
-	#define BT_SendEventExtBtInfoControl(Adapter, dataLen, pData) rtw_btcoex_SendEventExtBtInfoControl(Adapter, dataLen, pData)
+void rtw_btcoex_SetBtPatchVersion(PADAPTER padapter, u16 btHciVer, u16 btPatchVer);
+void rtw_btcoex_SetHciVersion(PADAPTER  padapter, u16 hciVersion);
+void rtw_btcoex_StackUpdateProfileInfo(void);
+void rtw_btcoex_init_socket(_adapter *padapter);
+void rtw_btcoex_close_socket(_adapter *padapter);
+void rtw_btcoex_dump_tx_msg(u8 *tx_msg, u8 len, u8 *msg_name);
+u8 rtw_btcoex_sendmsgbysocket(_adapter *padapter, u8 *msg, u8 msg_size, bool force);
+u8 rtw_btcoex_create_kernel_socket(_adapter *padapter);
+void rtw_btcoex_close_kernel_socket(_adapter *padapter);
+void rtw_btcoex_recvmsgbysocket(void *data);
+u16 rtw_btcoex_parse_recv_data(u8 *msg, u8 msg_size);
+u8 rtw_btcoex_btinfo_cmd(PADAPTER padapter, u8 *pbuf, u16 length);
+void rtw_btcoex_parse_hci_cmd(_adapter *padapter, u8 *cmd, u16 len);
+void rtw_btcoex_SendEventExtBtCoexControl(PADAPTER Adapter, u8 bNeedDbgRsp, u8 dataLen, void *pData);
+void rtw_btcoex_SendEventExtBtInfoControl(PADAPTER Adapter, u8 dataLen, void *pData);
+void rtw_btcoex_SendScanNotify(PADAPTER padapter, u8 scanType);
+#define BT_SendEventExtBtCoexControl(Adapter, bNeedDbgRsp, dataLen, pData) rtw_btcoex_SendEventExtBtCoexControl(Adapter, bNeedDbgRsp, dataLen, pData)
+#define BT_SendEventExtBtInfoControl(Adapter, dataLen, pData) rtw_btcoex_SendEventExtBtInfoControl(Adapter, dataLen, pData)
 #endif /* CONFIG_BT_COEXIST_SOCKET_TRX */
 u16 rtw_btcoex_btreg_read(PADAPTER padapter, u8 type, u16 addr, u32 *data);
 u16 rtw_btcoex_btreg_write(PADAPTER padapter, u8 type, u16 addr, u16 val);
@@ -447,8 +444,12 @@ u8 rtw_btcoex_get_ant_div_cfg(PADAPTER padapter);
 /* ==================================================
  * Below Functions are called by BT-Coex
  * ================================================== */
-void rtw_btcoex_rx_ampdu_apply(PADAPTER);
-void rtw_btcoex_LPS_Enter(PADAPTER);
-void rtw_btcoex_LPS_Leave(PADAPTER);
+void rtw_btcoex_rx_ampdu_apply(PADAPTER padapter);
+void rtw_btcoex_LPS_Enter(PADAPTER padapter);
+u8 rtw_btcoex_LPS_Leave(PADAPTER padapter);
 
 #endif /* __RTW_BTCOEX_H__ */
+#endif /* CONFIG_BT_COEXIST */
+
+void rtw_btcoex_set_ant_info(PADAPTER padapter);
+

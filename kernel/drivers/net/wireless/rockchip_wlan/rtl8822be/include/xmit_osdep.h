@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __XMIT_OSDEP_H_
 #define __XMIT_OSDEP_H_
 
@@ -33,11 +28,11 @@ struct pkt_file {
 #ifdef PLATFORM_WINDOWS
 
 #ifdef PLATFORM_OS_XP
-	#ifdef CONFIG_USB_HCI
-		#include <usb.h>
-		#include <usbdlib.h>
-		#include <usbioctl.h>
-	#endif
+#ifdef CONFIG_USB_HCI
+#include <usb.h>
+#include <usbdlib.h>
+#include <usbioctl.h>
+#endif
 #endif
 
 #ifdef CONFIG_GSPI_HCI
@@ -54,28 +49,28 @@ extern NDIS_STATUS rtw_xmit_entry(
 	IN UINT				flags
 );
 
-#endif
+#endif /* PLATFORM_WINDOWS */
 
 #ifdef PLATFORM_FREEBSD
-	#define NR_XMITFRAME	256
-	extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
-	extern void rtw_xmit_entry_wrap(struct ifnet *pifp);
+#define NR_XMITFRAME	256
+extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+extern void rtw_xmit_entry_wrap(struct ifnet *pifp);
 #endif /* PLATFORM_FREEBSD */
 
 #ifdef PLATFORM_LINUX
 
-	#define NR_XMITFRAME	256
+#define NR_XMITFRAME	256
 
-	struct xmit_priv;
-	struct pkt_attrib;
-	struct sta_xmit_priv;
-	struct xmit_frame;
-	struct xmit_buf;
+struct xmit_priv;
+struct pkt_attrib;
+struct sta_xmit_priv;
+struct xmit_frame;
+struct xmit_buf;
 
-	extern int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
-	extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+extern int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
+extern int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev);
 
-#endif
+#endif /* PLATFORM_LINUX */
 
 void rtw_os_xmit_schedule(_adapter *padapter);
 

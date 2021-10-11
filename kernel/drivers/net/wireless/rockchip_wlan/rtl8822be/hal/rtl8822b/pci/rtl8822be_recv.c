@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2015 - 2016 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2015 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #define _RTL8822BE_RECV_C_
 
 #include <drv_types.h>		/* PADAPTER and etc. */
@@ -115,11 +110,7 @@ static u32 rtl8822be_wait_rxrdy(_adapter *padapter,
  *   "index of RX queue descriptor maintained by host (write pointer)" and
  *   "index of RX queue descriptor maintained by hardware (read pointer)"
  */
-#ifdef CONFIG_NAPI
-u16 rtl8822be_check_rxdesc_remain(_adapter *padapter, int rx_queue_idx)
-#else
 static u16 rtl8822be_check_rxdesc_remain(_adapter *padapter, int rx_queue_idx)
-#endif
 {
 	struct recv_priv *r_priv = &padapter->recvpriv;
 	u16 desc_idx_hw = 0, desc_idx_host = 0, num_rxdesc_to_handle = 0;
@@ -161,78 +152,28 @@ static u16 rtl8822be_check_rxdesc_remain(_adapter *padapter, int rx_queue_idx)
 	return num_rxdesc_to_handle;
 }
 
-static void rtl8822be_query_rx_desc_status(union recv_frame *precvframe,
-		u8 *pdesc)
-{
-	struct rx_pkt_attrib	*pattrib = &precvframe->u.hdr.attrib;
-
-	_rtw_memset(pattrib, 0, sizeof(struct rx_pkt_attrib));
-
-	/* Offset 0 */
-	pattrib->pkt_len = (u16)GET_RX_DESC_PKT_LEN_8822B(pdesc);
-	pattrib->crc_err = (u8)GET_RX_DESC_CRC32_8822B(pdesc);
-	pattrib->icv_err = (u8)GET_RX_DESC_ICV_ERR_8822B(pdesc);
-	pattrib->drvinfo_sz = (u8)GET_RX_DESC_DRV_INFO_SIZE_8822B(pdesc) * 8;
-	pattrib->encrypt = (u8)GET_RX_DESC_SECURITY_8822B(pdesc);
-	pattrib->qos = (u8)GET_RX_DESC_QOS_8822B(pdesc);
-	pattrib->shift_sz = (u8)GET_RX_DESC_SHIFT_8822B(pdesc);
-	pattrib->physt = (u8)GET_RX_DESC_PHYST_8822B(pdesc);
-	pattrib->bdecrypted = !GET_RX_DESC_SWDEC_8822B(pdesc);
-
-	/* Offset 1 */
-	pattrib->priority = (u8)GET_RX_DESC_TID_8822B(pdesc);
-	pattrib->mdata = (u8)GET_RX_DESC_MD_8822B(pdesc);
-	pattrib->mfrag = (u8)GET_RX_DESC_MF_8822B(pdesc);
-
-	/* Offset 8 */
-	pattrib->seq_num = (u16)GET_RX_DESC_SEQ_8822B(pdesc);
-	pattrib->frag_num = (u8)GET_RX_DESC_FRAG_8822B(pdesc);
-
-	if (GET_RX_DESC_C2H_8822B(pdesc))
-		pattrib->pkt_rpt_type = C2H_PACKET;
-	else
-		pattrib->pkt_rpt_type = NORMAL_RX;
-
-	/* Offset 12 */
-	pattrib->data_rate = (u8)GET_RX_DESC_RX_RATE_8822B(pdesc);
-
-	/* Offset 16 */
-	/* Offset 20 */
-
-}
-
-#ifdef CONFIG_NAPI
-int rtl8822be_rx_mpdu(_adapter *padapter, int remaing_rxdesc, int budget)
-#else
 static void rtl8822be_rx_mpdu(_adapter *padapter)
-#endif
 {
 	struct recv_priv *r_priv = &padapter->recvpriv;
 	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(padapter);
 	_queue *pfree_recv_queue = &r_priv->free_recv_queue;
 	HAL_DATA_TYPE *pHalData = GET_HAL_DATA(padapter);
 	union recv_frame *precvframe = NULL;
-	u8 *pphy_info = NULL;
 	struct rx_pkt_attrib *pattrib = NULL;
 	int rx_q_idx = RX_MPDU_QUEUE;
 	u32 count = r_priv->rxringcount;
+	u16 remaing_rxdesc = 0;
 	u8 *rx_bd;
 	struct sk_buff *skb;
-#ifdef CONFIG_NAPI
-	int rx = 0;
-	u32 status;
-#else
-	u16 remaing_rxdesc = 0;
-#endif
+	u32 desc_size;
+
+
+	desc_size = rtl8822b_get_rx_desc_size(padapter);
 
 	/* RX NORMAL PKT */
 
-#ifdef CONFIG_NAPI
-	while ((rx < budget) && remaing_rxdesc) {
-#else
 	remaing_rxdesc = rtl8822be_check_rxdesc_remain(padapter, rx_q_idx);
 	while (remaing_rxdesc) {
-#endif
 
 		/* rx descriptor */
 		rx_bd = (u8 *)&r_priv->rx_ring[rx_q_idx].buf_desc[r_priv->rx_ring[rx_q_idx].idx];
@@ -261,13 +202,9 @@ static void rtl8822be_rx_mpdu(_adapter *padapter)
 				       __func__, __LINE__);
 
 		{
-			DBG_COUNTER(padapter->rx_logs.intf_rx);
 			precvframe = rtw_alloc_recvframe(pfree_recv_queue);
 
 			if (precvframe == NULL) {
-				RT_TRACE(_module_rtl871x_recv_c_, _drv_err_,
-					("recvbuf2recvframe: precvframe==NULL\n"));
-				DBG_COUNTER(padapter->rx_logs.intf_rx_err_recvframe);
 				goto done;
 			}
 
@@ -279,8 +216,7 @@ static void rtl8822be_rx_mpdu(_adapter *padapter)
 					 r_priv->rxbuffersize,
 					 PCI_DMA_FROMDEVICE);
 
-
-			rtl8822be_query_rx_desc_status(precvframe, skb->data);
+			rtl8822b_query_rx_desc(precvframe, skb->data);
 			pattrib = &precvframe->u.hdr.attrib;
 
 #ifdef CONFIG_RX_PACKET_APPEND_FCS
@@ -302,7 +238,7 @@ static void rtl8822be_rx_mpdu(_adapter *padapter)
 				       pattrib->shift_sz);
 
 			if (rtw_os_alloc_recvframe(padapter, precvframe,
-				   (skb->data + HALMAC_RX_DESC_SIZE_8822B +
+				   (skb->data + desc_size +
 				    pattrib->drvinfo_sz + pattrib->shift_sz),
 						   skb) == _FAIL) {
 
@@ -315,7 +251,6 @@ static void rtl8822be_rx_mpdu(_adapter *padapter)
 						       skb_tail_pointer(skb),
 						       r_priv->rxbuffersize,
 						       PCI_DMA_FROMDEVICE);
-				DBG_COUNTER(padapter->rx_logs.intf_rx_err_skb);
 				goto done;
 			}
 
@@ -323,30 +258,13 @@ static void rtl8822be_rx_mpdu(_adapter *padapter)
 
 			if (pattrib->pkt_rpt_type == NORMAL_RX) {
 				/* Normal rx packet */
-				if (pattrib->physt)
-					pphy_info = (u8 *)(skb->data) +
-						    HALMAC_RX_DESC_SIZE_8822B;
-
-#ifdef CONFIG_CONCURRENT_MODE
-				pre_recv_entry(precvframe, pphy_info);
-#endif
-
-				if (pattrib->physt && pphy_info)
-					rx_query_phy_status(precvframe,
-							    pphy_info);
-
-				if (rtw_recv_entry(precvframe) != _SUCCESS)
-					RT_TRACE(_module_hci_ops_os_c_,
-						 _drv_info_,
-						("recvbuf2recvframe: rtw_recv_entry() Fail\n"));
+				pre_recv_entry(precvframe, pattrib->physt ? ((u8 *)(skb->data) + desc_size) : NULL);
 			} else {
-				if (pattrib->pkt_rpt_type == C2H_PACKET) {
+				if (pattrib->pkt_rpt_type == C2H_PACKET)
 					rtl8822b_c2h_handler_no_io(padapter,
 							     skb->data,
-						     HALMAC_RX_DESC_SIZE_8822B +
+							     desc_size +
 							     pattrib->pkt_len);
-				} else
-					DBG_COUNTER(padapter->rx_logs.intf_rx_report);
 
 				rtw_free_recvframe(precvframe,
 						   pfree_recv_queue);
@@ -374,16 +292,9 @@ done:
 			       rtw_read32(padapter, REG_RXQ_RXBD_IDX));
 
 		remaing_rxdesc--;
-#ifdef CONFIG_NAPI
-		rx++;
-#endif
 	}
-#ifdef CONFIG_NAPI
-	return rx;
-#endif
 }
 
-#ifndef CONFIG_NAPI
 static void rtl8822be_recv_tasklet(void *priv)
 {
 	_irqL	irqL;
@@ -399,14 +310,13 @@ static void rtl8822be_recv_tasklet(void *priv)
 	rtw_write32(padapter, REG_HIMR1_8822B, pHalData->IntrMask[1]);
 	_exit_critical(&pdvobjpriv->irq_th_lock, &irqL);
 }
-#endif
 
 static void rtl8822be_xmit_beacon(PADAPTER Adapter)
 {
 #if defined(CONFIG_AP_MODE) && defined(CONFIG_NATIVEAP_MLME)
 	struct mlme_priv *pmlmepriv = &Adapter->mlmepriv;
 
-	if (check_fwstate(pmlmepriv, WIFI_AP_STATE)) {
+	if (MLME_IS_AP(Adapter) || MLME_IS_MESH(Adapter)) {
 		/* send_beacon(Adapter); */
 		if (pmlmepriv->update_bcn == _TRUE)
 			tx_beacon_hdl(Adapter, NULL);
@@ -426,30 +336,24 @@ s32 rtl8822be_init_recv_priv(_adapter *padapter)
 	struct recv_priv	*precvpriv = &padapter->recvpriv;
 	s32	ret = _SUCCESS;
 
-	_func_enter_;
 
 #ifdef PLATFORM_LINUX
-#ifndef CONFIG_NAPI
 	tasklet_init(&precvpriv->recv_tasklet,
 		     (void(*)(unsigned long))rtl8822be_recv_tasklet,
 		     (unsigned long)padapter);
-#endif
 
 	tasklet_init(&precvpriv->irq_prepare_beacon_tasklet,
 		     (void(*)(unsigned long))rtl8822be_prepare_bcn_tasklet,
 		     (unsigned long)padapter);
 #endif
 
-	_func_exit_;
 
 	return ret;
 }
 
 void rtl8822be_free_recv_priv(_adapter *padapter)
 {
-	_func_enter_;
 
-	_func_exit_;
 }
 
 int rtl8822be_init_rxbd_ring(_adapter *padapter)
@@ -462,8 +366,9 @@ int rtl8822be_init_rxbd_ring(_adapter *padapter)
 	struct sk_buff *skb = NULL;
 	u8	*rx_desc = NULL;
 	int	i, rx_queue_idx;
-
-	_func_enter_;
+#ifdef CONFIG_DHC_PATCH
+	u8	times_alloc_skb_failed = 0, wait_ms = 100;
+#endif
 
 	/* rx_queue_idx 0:RX_MPDU_QUEUE */
 	/* rx_queue_idx 1:RX_CMD_QUEUE */
@@ -487,8 +392,24 @@ int rtl8822be_init_rxbd_ring(_adapter *padapter)
 		r_priv->rx_ring[rx_queue_idx].idx = 0;
 
 		for (i = 0; i < r_priv->rxringcount; i++) {
+#ifdef CONFIG_DHC_PATCH
+realloc_skb:
+#endif
 			skb = dev_alloc_skb(r_priv->rxbuffersize);
 			if (!skb) {
+#ifdef CONFIG_DHC_PATCH
+				/*  DHCWIFI-103: Failed to allocate skb due to 1G ram size is not enough for Android.
+				 * 		 Try to reallocate after releasing some memroy.
+			   	 */
+				times_alloc_skb_failed++;
+				if(times_alloc_skb_failed <= 3)
+				{
+					RTW_INFO("Failed %d times to allocate skb, try to reallocate after sleeping\n", 
+						times_alloc_skb_failed);
+					rtw_msleep_os(wait_ms);
+					goto realloc_skb;
+				}
+#endif
 				RTW_INFO("Cannot allocate skb for RX ring\n");
 				return _FAIL;
 			}
@@ -518,7 +439,6 @@ int rtl8822be_init_rxbd_ring(_adapter *padapter)
 		}
 	}
 
-	_func_exit_;
 
 	return _SUCCESS;
 }
@@ -530,7 +450,6 @@ void rtl8822be_free_rxbd_ring(_adapter *padapter)
 	struct pci_dev *pdev = pdvobjpriv->ppcidev;
 	int i, rx_queue_idx;
 
-	_func_enter_;
 
 	/* rx_queue_idx 0:RX_MPDU_QUEUE */
 	/* rx_queue_idx 1:RX_CMD_QUEUE */
@@ -558,6 +477,4 @@ void rtl8822be_free_rxbd_ring(_adapter *padapter)
 		r_priv->rx_ring[rx_queue_idx].buf_desc = NULL;
 	}
 
-	_func_exit_;
 }
-

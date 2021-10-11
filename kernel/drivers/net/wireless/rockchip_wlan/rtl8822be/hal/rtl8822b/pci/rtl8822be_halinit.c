@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2015 - 2016 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2015 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,16 +11,12 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 
 #define _RTL8822BE_HALINIT_C_
 #include <drv_types.h>          /* PADAPTER, basic_types.h and etc. */
 #include <hal_data.h>		/* HAL_DATA_TYPE */
+#include "../../hal_halmac.h"	/* HALMAC API */
 #include "../rtl8822b.h"
 #include "rtl8822be.h"
 
@@ -157,7 +153,7 @@ u32 InitMAC_TRXBD_8822BE(PADAPTER Adapter)
 	rtw_write16(Adapter, REG_VIQ_TXBD_NUM_8822B,
 		    TX_BD_NUM_8822BE | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
 	rtw_write16(Adapter, REG_BEQ_TXBD_NUM_8822B,
-		    TX_BD_NUM_8822BE | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
+		    TX_BD_NUM_BEQ_8822BE | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
 	rtw_write16(Adapter, REG_BKQ_TXBD_NUM_8822B,
 		    TX_BD_NUM_8822BE | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
 	rtw_write16(Adapter, REG_HI0Q_TXBD_NUM_8822B,
@@ -176,6 +172,7 @@ u32 InitMAC_TRXBD_8822BE(PADAPTER Adapter)
 		    TX_BD_NUM_8822BE | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
 	rtw_write16(Adapter, REG_HI7Q_TXBD_NUM_8822B,
 		    TX_BD_NUM_8822BE | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
+
 
 	/* rx. support 32 bits in linux */
 
@@ -225,170 +222,39 @@ u32 InitMAC_TRXBD_8822BE(PADAPTER Adapter)
 	return _SUCCESS;
 }
 
-
-static VOID
-Hal_DBIWrite1Byte_8822BE(
-	IN	PADAPTER	Adapter,
-	IN	u2Byte		Addr,
-	IN	u1Byte		Data
-)
+#ifdef CONFIG_RTW_LED
+static void init_hwled(PADAPTER adapter, u8 enable)
 {
-	u1Byte tmpU1b = 0, count = 0;
-	u2Byte WriteAddr = 0, Remainder = Addr % 4;
+	u8 mode = 0;
+	struct led_priv *ledpriv = adapter_to_led(adapter);
 
+	if (ledpriv->LedStrategy != HW_LED)
+		return;
 
-	/* Write DBI 1Byte Data */
-	WriteAddr = REG_DBI_WDATA_V1_8822B + Remainder;
-	rtw_write8(Adapter, WriteAddr, Data);
-
-	/* Write DBI 2Byte Address & Write Enable */
-	WriteAddr = (Addr & 0xfffc) | (BIT0 << (Remainder + 12));
-	rtw_write16(Adapter, REG_DBI_FLAG_V1_8822B, WriteAddr);
-
-	/* Write DBI Write Flag */
-	rtw_write8(Adapter, REG_DBI_FLAG_V1_8822B + 2, 0x1);
-
-	tmpU1b = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B + 2);
-	count = 0;
-	while (tmpU1b && count < 20) {
-		rtw_udelay_os(10);
-		tmpU1b = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B + 2);
-		count++;
-	}
+	rtw_halmac_led_cfg(adapter_to_dvobj(adapter), enable, mode);
 }
+#endif /* CONFIG_RTW_LED */
 
-/*	Description:
- *		PCI configuration space read operation on RTL814AE
- *
- *	modify by gw from 8192EE
- *
- * [copy] from win driver */
-static u1Byte
-Hal_DBIRead1Byte_8822BE(
-	IN	PADAPTER	Adapter,
-	IN	u2Byte		Addr
-)
+static void hal_init_misc(PADAPTER adapter)
 {
-	u2Byte ReadAddr = Addr & 0xfffc;
-	u1Byte ret = 0, tmpU1b = 0, count = 0;
-
-	rtw_write16(Adapter, REG_DBI_FLAG_V1_8822B, ReadAddr);
-	rtw_write8(Adapter, REG_DBI_FLAG_V1_8822B + 2, 0x2);
-	tmpU1b = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B + 2);
-	count = 0;
-	while (tmpU1b && count < 20) {
-		rtw_udelay_os(10);
-		tmpU1b = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B + 2);
-		count++;
-	}
-	if (0 == tmpU1b) {
-		ReadAddr = REG_DBI_RDATA_V1_8822B + Addr % 4;
-		ret = rtw_read8(Adapter, ReadAddr);
-	}
-
-	return ret;
-}
-
-VOID EnableAspmBackDoor_8822BE(PADAPTER Adapter)
-{
-	u1Byte tmp1byte = 0;
-
-	printk("%s\n",__FUNCTION__);
-	
-	//Bit7 for L0s
-	tmp1byte = Hal_DBIRead1Byte_8822BE(Adapter, 0x70f);
-	Hal_DBIWrite1Byte_8822BE(Adapter, 0x70f, (tmp1byte | BIT7 ));
-	
-	//Bit 3 for L1 ,  Bit4 for clock req
-	tmp1byte = Hal_DBIRead1Byte_8822BE(Adapter, 0x719);
-	Hal_DBIWrite1Byte_8822BE(Adapter, 0x719, (tmp1byte | BIT3 | BIT4));
-	
-	
-
-}
-
-VOID EnableL1Off_8822BE(PADAPTER Adapter)
-{
-	u1Byte tmp1byte = 0;
-	
-	//Bit5 for L1SS
-	tmp1byte = Hal_DBIRead1Byte_8822BE(Adapter, 0x718);
-	Hal_DBIWrite1Byte_8822BE(Adapter, 0x718, (tmp1byte | BIT5 ));
-
-}
-
-VOID EnableAspmBackDoor_8822BE_old(PADAPTER Adapter)
-{
-	u32 tmp4Byte = 0, count = 0;
-	u8 tmp1byte = 0;
-
-	/* 0x70f BIT7 is used to control L0S
-	 * 20100212 Tynli: Set register offset 0x70f in PCI configuration space to the value 0x23
-	 * for all bridge suggested by SD1. Origianally this is only for INTEL.
-	 * 20100422 Joseph: Set PCI configuration space offset 0x70F to 0x93 to Enable L0s for all platform.
-	 * This is suggested by SD1 Glayrainx and for Lenovo's request.
-	 * 20120316 YJ: Use BIT31|value(read from 0x70C) intead of 0x93.
-	 */
-	rtw_write16(Adapter, REG_DBI_FLAG_V1_8822B, 0x70c);
-	rtw_write8(Adapter, REG_DBI_FLAG_V1_8822B+2, 0x2);
-	tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-	count = 0;
-	while(tmp1byte && count < 20) {
-		rtw_udelay_os(10);
-		tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-		count++;
-	}
-	if(0 == tmp1byte) {
-		tmp4Byte=rtw_read32(Adapter, REG_DBI_RDATA_V1_8822B);
-		rtw_write32(Adapter, REG_DBI_WDATA_V1_8822B, tmp4Byte|BIT31);
-		rtw_write16(Adapter, REG_DBI_FLAG_V1_8822B, 0xf70c);
-		rtw_write8(Adapter, REG_DBI_FLAG_V1_8822B+2, 0x1);
-	}
-
-	tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-	count = 0;
-	while(tmp1byte && count < 20) {
-		rtw_udelay_os(10);
-		tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-		count++;
-	}
-
-	/* 0x719 Bit3 is for L1 BIT4 is for clock request
-	 * 20100427 Joseph: Disable L1 for Toshiba AMD platform. If AMD platform do not contain
-	 * L1 patch, driver shall disable L1 backdoor.
-	 * 20120316 YJ: Use BIT11|BIT12|value(read from 0x718) intead of 0x1b.
-	 */
-	rtw_write16(Adapter, REG_DBI_FLAG_V1_8822B, 0x718);
-	rtw_write8(Adapter, REG_DBI_FLAG_V1_8822B+2, 0x2);
-	tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-	count = 0;
-	while(tmp1byte && count < 20) {
-		rtw_udelay_os(10);
-		tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-		count++;
-	}
-
-	if(GET_HAL_DATA(Adapter)->bSupportBackDoor || (0 == tmp1byte)) {
-		tmp4Byte = rtw_read32(Adapter, REG_DBI_RDATA_V1_8822B);
-		rtw_write32(Adapter, REG_DBI_WDATA_V1_8822B, tmp4Byte|BIT11|BIT12);
-		rtw_write16(Adapter, REG_DBI_FLAG_V1_8822B, 0xf718);
-		rtw_write8(Adapter, REG_DBI_FLAG_V1_8822B+2, 0x1);
-	}
-	tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-	count = 0;
-	while(tmp1byte && count < 20) {
-		rtw_udelay_os(10);
-		tmp1byte = rtw_read8(Adapter, REG_DBI_FLAG_V1_8822B+2);
-		count++;
-	}
+#ifdef CONFIG_RTW_LED
+	struct led_priv *ledpriv = adapter_to_led(adapter);
+#ifdef CONFIG_SW_LED
+	pledpriv->bRegUseLed = _TRUE;
+	ledpriv->LedStrategy = SW_LED_MODE1;
+#else /* HW LED */
+	ledpriv->LedStrategy = HW_LED;
+#endif /* CONFIG_SW_LED */
+	init_hwled(adapter, 1);
+#endif
 }
 
 u32 rtl8822be_init(PADAPTER padapter)
 {
 	u8 ok = _TRUE;
 	u8 val8;
-	struct registry_priv  *registry_par = &padapter->registrypriv;
 	PHAL_DATA_TYPE hal;
+	struct registry_priv  *registry_par = &padapter->registrypriv;
 
 	hal = GET_HAL_DATA(padapter);
 
@@ -411,30 +277,34 @@ u32 rtl8822be_init(PADAPTER padapter)
 
 	rtl8822b_phy_init_haldm(padapter);
 #ifdef CONFIG_BEAMFORMING
-	rtl8822b_phy_init_beamforming(padapter);
+	rtl8822b_phy_bf_init(padapter);
+#endif
+
+#ifdef CONFIG_FW_MULTI_PORT_SUPPORT
+	/*HW /FW init*/
+	rtw_hal_set_default_port_id_cmd(padapter, 0);
 #endif
 
 #ifdef CONFIG_BT_COEXIST
 	/* Init BT hw config. */
-	if (_TRUE == hal->EEPROMBluetoothCoexist)
+	if (hal->EEPROMBluetoothCoexist == _TRUE) {
 		rtw_btcoex_HAL_Initialize(padapter, _FALSE);
+		#ifdef CONFIG_FW_MULTI_PORT_SUPPORT
+		rtw_hal_set_wifi_btc_port_id_cmd(padapter);
+		#endif
+	} else
 #endif /* CONFIG_BT_COEXIST */
+		rtw_btcoex_wifionly_hw_config(padapter);
 
-	//EnableAspmBackDoor_8822BE(padapter);
-	//EnableL1Off_8822BE(padapter);
+	hal->pci_backdoor_ctrl = registry_par->pci_aspm_config;
+
+	rtw_pci_aspm_config(padapter);
 
 	rtl8822b_init_misc(padapter);
+	hal_init_misc(padapter);
 
-#if 0
-	/* disable pre_tx */
-	val8 = rtw_read8(padapter, REG_SW_AMPDU_BURST_MODE_CTRL_8822B);
-	val8 &= ~BIT(6);
-	rtw_write8(padapter, REG_SW_AMPDU_BURST_MODE_CTRL_8822B, val8);
-
-	/* set ampdu count to 0x3F */
-	rtw_write8(padapter, 0x4CA, 0x3F);
-	rtw_write8(padapter, 0x4CB, 0x3F);
-#endif
+	/* TX interrupt migration - 3pkts or 0.448 ms */
+	rtw_write32(padapter, REG_INT_MIG_8822B, 0x33000000);
 
 	return _SUCCESS;
 }
@@ -486,6 +356,9 @@ void rtl8822be_init_default_value(PADAPTER padapter)
 					       BIT_BCNDMAINT0_MSK	|
 					       BIT_HSISR_IND_ON_INT_MSK |
 					       BIT_C2HCMD_MSK		|
+			#ifdef CONFIG_LPS_LCLK
+						BIT_CPWM_MSK		|
+			#endif
 					       BIT_HIGHDOK_MSK		|
 					       BIT_MGTDOK_MSK		|
 					       BIT_BKDOK_MSK		|

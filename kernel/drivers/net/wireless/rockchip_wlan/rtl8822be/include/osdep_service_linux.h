@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2013 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __OSDEP_LINUX_SERVICE_H_
 #define __OSDEP_LINUX_SERVICE_H_
 
@@ -33,9 +28,10 @@
 #endif
 /* #include <linux/smp_lock.h> */
 #include <linux/netdevice.h>
+#include <linux/inetdevice.h>
 #include <linux/skbuff.h>
 #include <linux/circ_buf.h>
-#include <linux/uaccess.h>
+#include <asm/uaccess.h>
 #include <asm/byteorder.h>
 #include <asm/atomic.h>
 #include <asm/io.h>
@@ -49,6 +45,7 @@
 #include <linux/etherdevice.h>
 #include <linux/wireless.h>
 #include <net/iw_handler.h>
+#include <net/addrconf.h>
 #include <linux/if_arp.h>
 #include <linux/rtnetlink.h>
 #include <linux/delay.h>
@@ -81,7 +78,16 @@
 
 /* Monitor mode */
 #include <net/ieee80211_radiotap.h>
-#include <linux/ieee80211.h>
+
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 24))
+	#include <linux/ieee80211.h>
+#endif
+
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 25) && \
+	 LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 29))
+	#define CONFIG_IEEE80211_HT_ADDT_INFO
+#endif
+
 #ifdef CONFIG_IOCTL_CFG80211
 	/*	#include <linux/ieee80211.h> */
 	#include <net/cfg80211.h>
@@ -126,6 +132,27 @@
 	#endif
 #endif
 
+#if defined(CONFIG_RTW_GRO) && (!defined(CONFIG_RTW_NAPI))
+
+	#error "Enable NAPI before enable GRO\n"
+
+#endif
+
+
+#if (KERNEL_VERSION(2, 6, 29) > LINUX_VERSION_CODE && defined(CONFIG_RTW_NAPI))
+
+	#undef CONFIG_RTW_NAPI
+	/*#warning "Linux Kernel version too old to support NAPI (should newer than 2.6.29)\n"*/
+
+#endif
+
+#if (KERNEL_VERSION(2, 6, 33) > LINUX_VERSION_CODE && defined(CONFIG_RTW_GRO))
+
+	#undef CONFIG_RTW_GRO
+	/*#warning "Linux Kernel version too old to support GRO(should newer than 2.6.33)\n"*/
+
+#endif
+
 typedef struct	semaphore _sema;
 typedef	spinlock_t	_lock;
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37))
@@ -133,7 +160,14 @@ typedef	spinlock_t	_lock;
 #else
 	typedef struct semaphore	_mutex;
 #endif
-typedef struct timer_list _timer;
+struct rtw_timer_list {
+	struct timer_list timer;
+	void (*function)(void *);
+	void *arg;
+};
+
+typedef struct rtw_timer_list _timer;
+typedef struct completion _completion;
 
 struct	__queue	{
 	struct	list_head	queue;
@@ -154,8 +188,6 @@ typedef void		*_thread_hdl_;
 typedef int		thread_return;
 typedef void	*thread_context;
 
-#define thread_exit() complete_and_exit(NULL, 0)
-
 typedef void timer_hdl_return;
 typedef void *timer_hdl_context;
 
@@ -168,6 +200,8 @@ typedef void *timer_hdl_context;
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 24))
 	#define DMA_BIT_MASK(n) (((n) == 64) ? ~0ULL : ((1ULL<<(n))-1))
 #endif
+
+typedef unsigned long systime;
 
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 22))
 /* Porting from linux kernel, for compatible with old kernel. */
@@ -264,27 +298,44 @@ __inline static void rtw_list_delete(_list *plist)
 	list_del_init(plist);
 }
 
-#define RTW_TIMER_HDL_ARGS void *FunctionContext
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
+static inline void timer_hdl(struct timer_list *in_timer)
+#else
+static inline void timer_hdl(unsigned long cntx)
+#endif
+{
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
+	_timer *ptimer = from_timer(ptimer, in_timer, timer);
+#else
+	_timer *ptimer = (_timer *)cntx;
+#endif
+	ptimer->function(ptimer->arg);
+}
 
 __inline static void _init_timer(_timer *ptimer, _nic_hdl nic_hdl, void *pfunc, void *cntx)
 {
-	/* setup_timer(ptimer, pfunc,(u32)cntx);	 */
 	ptimer->function = pfunc;
-	ptimer->data = (unsigned long)cntx;
-	init_timer(ptimer);
+	ptimer->arg = cntx;
+
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
+	timer_setup(&ptimer->timer, timer_hdl, 0);
+#else
+	/* setup_timer(ptimer, pfunc,(u32)cntx);	 */
+	ptimer->timer.function = timer_hdl;
+	ptimer->timer.data = (unsigned long)ptimer;
+	init_timer(&ptimer->timer);
+#endif
 }
 
 __inline static void _set_timer(_timer *ptimer, u32 delay_time)
 {
-	mod_timer(ptimer , (jiffies + (delay_time * HZ / 1000)));
+	mod_timer(&ptimer->timer , (jiffies + (delay_time * HZ / 1000)));
 }
 
 __inline static void _cancel_timer(_timer *ptimer, u8 *bcancelled)
 {
-	del_timer_sync(ptimer);
-	*bcancelled = 1;
+	*bcancelled = del_timer_sync(&ptimer->timer) == 1 ? 1 : 0;
 }
-
 
 static inline void _init_workitem(_workitem *pwork, void *pfunc, void *cntx)
 {
@@ -371,16 +422,30 @@ static inline void rtw_netif_stop_queue(struct net_device *pnetdev)
 	netif_stop_queue(pnetdev);
 #endif
 }
-static inline void rtw_netif_carrier_on(struct net_device *pnetdev)
+static inline void rtw_netif_device_attach(struct net_device *pnetdev)
 {
 	netif_device_attach(pnetdev);
+}
+static inline void rtw_netif_device_detach(struct net_device *pnetdev)
+{
+	netif_device_detach(pnetdev);
+}
+static inline void rtw_netif_carrier_on(struct net_device *pnetdev)
+{
 	netif_carrier_on(pnetdev);
 }
-static inline void rtw_merge_string(char *dst, int dst_len, const char *src1, const char *src2)
+static inline void rtw_netif_carrier_off(struct net_device *pnetdev)
+{
+	netif_carrier_off(pnetdev);
+}
+
+static inline int rtw_merge_string(char *dst, int dst_len, const char *src1, const char *src2)
 {
 	int	len = 0;
 	len += snprintf(dst + len, dst_len - len, "%s", src1);
 	len += snprintf(dst + len, dst_len - len, "%s", src2);
+
+	return len;
 }
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 27))
@@ -408,11 +473,11 @@ static inline void rtw_merge_string(char *dst, int dst_len, const char *src1, co
 #define NDEV_FMT "%s"
 #define NDEV_ARG(ndev) ndev->name
 #define ADPT_FMT "%s"
-#define ADPT_ARG(adapter) adapter->pnetdev->name
+#define ADPT_ARG(adapter) (adapter->pnetdev ? adapter->pnetdev->name : NULL)
 #define FUNC_NDEV_FMT "%s(%s)"
 #define FUNC_NDEV_ARG(ndev) __func__, ndev->name
 #define FUNC_ADPT_FMT "%s(%s)"
-#define FUNC_ADPT_ARG(adapter) __func__, adapter->pnetdev->name
+#define FUNC_ADPT_ARG(adapter) __func__, (adapter->pnetdev ? adapter->pnetdev->name : NULL)
 
 struct rtw_netdev_priv_indicator {
 	void *priv;

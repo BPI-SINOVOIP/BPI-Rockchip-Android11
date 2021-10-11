@@ -1,7 +1,7 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ * Copyright(c) 2015 - 2017 Realtek Corporation.
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -11,634 +11,978 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
-
+ *****************************************************************************/
 #include "mp_precomp.h"
 #include "../phydm_precomp.h"
 
-#if (RTL8822B_SUPPORT == 1)  
 
+#if (RTL8822B_SUPPORT == 1)
+#if (PHYDM_FW_API_ENABLE_8822B == 1)
 /* ======================================================================== */
 /* These following functions can be used for PHY DM only*/
 
-u4Byte	reg82c_8822b;
-u4Byte	reg838_8822b;
-u4Byte	reg830_8822b;
-u4Byte	reg83c_8822b;
-u4Byte	rega20_8822b;
-u4Byte	rega24_8822b;
-u4Byte	rega28_8822b;
-ODM_BW_E	bw_8822b;
-u1Byte	central_ch_8822b;
+enum channel_width	bw_8822b;
+u8	central_ch_8822b;
+u8	central_ch_8822b_drp;
 
-u4Byte	cca_ifem_ccut[12][4] = {
-	/*20M*/
-	{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*40M*/ 				
-	{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-	{0x00000000, 0x79a0ea28, 0x00000000, 0x79a0ea28}, /*Reg830*/
-	{0x87765541, 0x87766341, 0x87765541, 0x87766341}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*80M*/
-	{0x75C97010, 0x75C97010, 0x75C97010, 0x75C97010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x00000000, 0x87746641, 0x00000000, 0x87746641}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}}; /*Reg83C*/
-u4Byte	cca_efem_ccut[12][4] = {
-	/*20M*/
-	{0x75A76010, 0x75A76010, 0x75A76010, 0x75A75010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x87766651, 0x87766431, 0x87766451, 0x87766431}, /*Reg838*/
-	{0x9194b2b9, 0x9194b2b9, 0x9194b2b9, 0x9194b2b9}, /*Reg83C*/
-	/*40M*/
-	{0x75A85010, 0x75A75010, 0x75A85010, 0x75A75010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x87766431, 0x87766431, 0x87766431, 0x87766431}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*80M*/
-	{0x76BA7010, 0x75BA7010, 0x76BA7010, 0x75BA7010}, /*Reg82C*/
-	{0x79a0ea28, 0x00000000, 0x79a0ea28, 0x00000000}, /*Reg830*/
-	{0x76666641, 0x76666641, 0x76666641, 0x76666641}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}}; /*Reg83C*/
-u4Byte	cca_ifem_ccut_RFTType5[12][4] = {
-	/*20M*/
-	{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x00000000, 0x00000000, 0x87766461, 0x87766461}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*40M*/ 				
-	{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-	{0x00000000, 0x79a0ea28, 0x00000000, 0x79a0ea28}, /*Reg830*/
-	{0x87765541, 0x87766341, 0x87765541, 0x87766341}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*80M*/
-	{0x75C97010, 0x75C97010, 0x75C97010, 0x75C97010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x00000000, 0x76666641, 0x00000000, 0x76666641}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}}; /*Reg83C*/
-u4Byte	cca_ifem_ccut_RFTType3[12][4] = {
-	/*20M*/
-	{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x00000000, 0x00000000, 0x87766461, 0x87766461}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*40M*/ 				
-	{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-	{0x00000000, 0x79a0ea28, 0x00000000, 0x79a0ea28}, /*Reg830*/
-	{0x87765541, 0x87766341, 0x87765541, 0x87766341}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-	/*80M*/
-	{0x75C97010, 0x75C97010, 0x75C97010, 0x75C97010}, /*Reg82C*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-	{0x00000000, 0x76666641, 0x00000000, 0x76666641}, /*Reg838*/
-	{0x00000000, 0x00000000, 0x00000000, 0x00000000}}; /*Reg83C*/
+#if !(DM_ODM_SUPPORT_TYPE == ODM_CE)
+	u32	cca_ifem_bcut[3][4] = {
+		{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
+		{0x79a0ea2a, 0x79a0ea2a, 0x79a0ea2a, 0x79a0ea2a}, /*Reg830*/
+		{0x87766441, 0x87746341, 0x87765541, 0x87746341} /*Reg838*/
+	};
+	u32	cca_efem_bcut[3][4] = {
+		{0x75B76010, 0x75B76010, 0x75B76010, 0x75B75010}, /*Reg82C*/
+		{0x79a0ea2a, 0x79a0ea2a, 0x79a0ea2a, 0x79a0ea2a}, /*Reg830*/
+		{0x87766451, 0x87766431, 0x87766451, 0x87766431} /*Reg838*/
+	};
+#endif
 
-BOOLEAN
-phydm_rfe_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u1Byte					channel
-	)
+u32 cca_ifem_ccut[3][4] = {
+	{0x75C97010, 0x75C97010, 0x75C97010, 0x75C97010}, /*Reg82C*/
+	{0x79a0eaaa, 0x79A0EAAC, 0x79a0eaaa, 0x79a0eaaa}, /*Reg830*/
+	{0x87765541, 0x87746341, 0x87765541, 0x87746341} /*Reg838*/
+};
+u32 cca_efem_ccut[3][4] = {
+	{0x75B86010, 0x75B76010, 0x75B86010, 0x75B76010}, /*Reg82C*/
+	{0x79A0EAA8, 0x79A0EAAC, 0x79A0EAA8, 0x79a0eaaa}, /*Reg830*/
+	{0x87766451, 0x87766431, 0x87766451, 0x87766431} /*Reg838*/
+};
+u32 cca_ifem_ccut_rfetype[3][4] = {
+	{0x75da8010, 0x75da8010, 0x75da8010, 0x75da8010}, /*Reg82C*/
+	{0x79a0eaaa, 0x97A0EAAC, 0x79a0eaaa, 0x79a0eaaa}, /*Reg830*/
+	{0x87765561, 0x86666361, 0x87765561, 0x86666361} /*Reg838*/
+};
+
+__iram_odm_func__
+void
+phydm_rxagc_switch_8822b(
+		struct PHY_DM_STRUCT		*p_dm,
+		boolean enable_rxagc_switch
+)
 {
-	if (pDM_Odm->RFEType == 4) {
+	if ((p_dm->rfe_type == 15) || (p_dm->rfe_type == 16)) {
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("Microsoft case!\n"));
+
+	} else {
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("Not Microsoft case\n"));
+		return;
+	}
+
+	if (enable_rxagc_switch == true) {
+		if ((*p_dm->p_channel >= 36) && (*p_dm->p_channel <= 64)) {
+			odm_set_bb_reg(p_dm, 0x958, BIT(4), 0x1);
+			odm_set_bb_reg(p_dm, 0xc1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x1);
+			odm_set_bb_reg(p_dm, 0xe1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x5);
+		} else if ((*p_dm->p_channel >= 100) && (*p_dm->p_channel <= 144)) {
+			odm_set_bb_reg(p_dm, 0x958, BIT(4), 0x1);
+			odm_set_bb_reg(p_dm, 0xc1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x2);
+			odm_set_bb_reg(p_dm, 0xe1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x6);
+		} else if (*p_dm->p_channel >= 149) {
+			odm_set_bb_reg(p_dm, 0x958, BIT(4), 0x1);
+			odm_set_bb_reg(p_dm, 0xc1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x3);
+			odm_set_bb_reg(p_dm, 0xe1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x7);
+		}
+		p_dm->brxagcswitch = true;
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("Microsoft case! AGC table (path-b) is switched!\n"));
+
+	} else {
+		if ((*p_dm->p_channel >= 36) && (*p_dm->p_channel <= 64)) {
+			odm_set_bb_reg(p_dm, 0x958, BIT(4), 0x1);
+			odm_set_bb_reg(p_dm, 0xc1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x1);
+			odm_set_bb_reg(p_dm, 0xe1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x1);
+		} else if ((*p_dm->p_channel >= 100) && (*p_dm->p_channel <= 144)) {
+			odm_set_bb_reg(p_dm, 0x958, BIT(4), 0x1);
+			odm_set_bb_reg(p_dm, 0xc1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x2);
+			odm_set_bb_reg(p_dm, 0xe1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x2);
+		} else if (*p_dm->p_channel >= 149) {
+			odm_set_bb_reg(p_dm, 0x958, BIT(4), 0x1);
+			odm_set_bb_reg(p_dm, 0xc1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x3);
+			odm_set_bb_reg(p_dm, 0xe1c, (BIT(11)|BIT(10)|BIT(9)|BIT(8)), 0x3);
+		}
+		p_dm->brxagcswitch = false;
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("AGC table are the same on path-a and b\n"));
+
+	}
+		
+}
+
+__iram_odm_func__
+void
+phydm_igi_toggle_8822b(
+	struct PHY_DM_STRUCT				*p_dm
+)
+{
+	u32 igi = 0x20;
+
+	igi = odm_get_bb_reg(p_dm, 0xc50, 0x7f);
+	odm_set_bb_reg(p_dm, 0xc50, 0x7f, (igi - 2));
+	odm_set_bb_reg(p_dm, 0xc50, 0x7f, igi);
+	odm_set_bb_reg(p_dm, 0xe50, 0x7f, (igi - 2));
+	odm_set_bb_reg(p_dm, 0xe50, 0x7f, igi);
+}
+
+__iram_odm_func__
+void 
+phydm_8822b_type18_rfe(
+	struct PHY_DM_STRUCT				*p_dm,
+	u8					channel
+)
+{
+
+	if (channel <= 14) {
+	
+		/* signal source */
+		odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x745774);
+		odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x745774);
+		odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x57);
+		odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x57);
+	
+	} else if ((channel > 35) && (channel <= 64)) {
+		/* signal source */
+		odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x177517);
+		odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x177517);
+		odm_set_bb_reg(p_dm, 0xcb4, MASKLWORD, 0x7557);
+		odm_set_bb_reg(p_dm, 0xeb4, MASKLWORD, 0x7557);
+		odm_set_bb_reg(p_dm, 0xcb8, BIT(5), 0);
+		odm_set_bb_reg(p_dm, 0xeb8, BIT(5), 0);
+	
+	} else if (channel > 64) {
+		/* signal source */
+		odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x177517);
+		odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x177517);
+		odm_set_bb_reg(p_dm, 0xcb4, MASKLWORD, 0x7575);
+		odm_set_bb_reg(p_dm, 0xeb4, MASKLWORD, 0x7575);
+		odm_set_bb_reg(p_dm, 0xcb8, BIT(5), 0);
+		odm_set_bb_reg(p_dm, 0xeb8, BIT(5), 0);
+		
+	}
+
+	/* invertor and antenna switch */
+	if (channel <= 14) {
+		/* inverse or not */
+		odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x8);
+		odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x2);
+		odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x8);
+		odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x2);
+	
+		/* antenna switch table */
+		if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
+			/* 2TX or 2RX */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xf050);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xf050);
+		} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
+			/* TXA+RXA or TXB+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xf055);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xf055);
+		} else {
+			/* TXB+RXA or TXA+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xf550);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xf550);
+		}
+
+	} else if (channel > 35) {
+		/* inverse or not */
+		odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+		odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10) | BIT(9) | BIT(8)), 0x0);
+		odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+		odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10) | BIT(9) | BIT(8)), 0x0);
+
+		if ((channel > 35) && (channel <= 64))
+			odm_set_bb_reg(p_dm, 0xcbc, BIT(9), 0x1);
+		else
+			odm_set_bb_reg(p_dm, 0xcbc, BIT(8), 0x1);
+		/* delay 400ns for PAPE */
+		/* odm_set_bb_reg(p_dm, 0x810, MASKBYTE3|BIT20|BIT21|BIT22|BIT23, 0x211); */
+
+		/* antenna switch table */
+		if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
+			/* 2TX or 2RX */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa501);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa501);
+		} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
+			/* TXA+RXA or TXB+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa500);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa500);
+		} else {
+			/* TXB+RXA or TXA+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa005);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa005);
+		}
+	}
+
+}
+
+__iram_odm_func__
+void 
+phydm_8822b_type15_rfe(
+	struct PHY_DM_STRUCT				*p_dm,
+	u8					channel
+)
+{
+	if (channel <= 14) {
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x777777);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x777777);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x77);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x77);
+		
+	} else if ((channel > 35) && (channel <= 64)) {
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x777747);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x777747);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE0, 0x57);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE0, 0x57);
+				
+	} else if (channel > 64) {
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x777747);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x777747);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE0, 0x75);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE0, 0x75);
+
+	} else
+			return;
+	
+	/* inverse or not */
+	odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+	odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10) | BIT(9) | BIT(8)), 0x0);
+	odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+	odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10) | BIT(9) | BIT(8)), 0x0);
+
+	
+	/* antenna switch table */
+	if (channel <= 14) {
+		if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
+			/* 2TX or 2RX */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa501);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa501);
+		} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
+			/* TXA+RXA or TXB+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa500);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa500);
+		} else {
+			/* TXB+RXA or TXA+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa005);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa005);
+		}
+	} else if (channel > 35) {
+		odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa5a5);
+		odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa5a5);
+	}
+
+}
+
+__iram_odm_func__
+u32
+phydm_check_bit_mask(u32 bit_mask, u32 data_original, u32 data)
+{
+	u8 bit_shift;
+	if (bit_mask != 0xfffff) {
+		for (bit_shift = 0; bit_shift <= 19; bit_shift++) {
+			if (((bit_mask >> bit_shift) & 0x1) == 1)
+				break;
+		}
+		return ((data_original)&(~bit_mask)) | (data << bit_shift);
+	}
+
+	return data;
+}
+
+__iram_odm_func__
+void
+phydm_rfe_8822b_setting(
+	void		*p_dm_void,
+	u8		rfe_num,
+	u8		path_mux_sel,
+	u8		inv_en,
+	u8		source_sel
+)
+{
+	struct PHY_DM_STRUCT		*p_dm = (struct PHY_DM_STRUCT *)p_dm_void;
+	u32		debug_level = p_dm->debug_level;/*no use, just prevent FW 3081 compile warning*/
+
+	debug_level = 5; /*no use, just prevent FW 3081 compile warning*/
+
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("8822B RFE[%d]:{Path=0x%x}{inv_en=%d}{source=0x%x}\n", 
+		rfe_num, path_mux_sel, inv_en, source_sel));
+
+	if(rfe_num > 11) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("[Warning] Wrong RFE num=%d}\n", rfe_num));
+		return;
+	}
+	
+	 /*[Path_mux_sel]*/
+	odm_set_bb_reg(p_dm, 0x1990, BIT(rfe_num), ((path_mux_sel == BB_PATH_A) ? 0 : 1));
+	 
+	/*[Inv_en]*/
+	odm_set_bb_reg(p_dm, 0xcbc, BIT(rfe_num), (u32)inv_en);
+	odm_set_bb_reg(p_dm, 0xebc, BIT(rfe_num), (u32)inv_en);
+
+	/*[Output Source Signal Selection]*/
+	if (rfe_num <= 7) {
+		odm_set_bb_reg(p_dm, 0xcb0, ((0xf)<<(rfe_num * 4)), (u32)source_sel);
+		odm_set_bb_reg(p_dm, 0xeb0, ((0xf)<<(rfe_num * 4)), (u32)source_sel);
+	} else {
+		odm_set_bb_reg(p_dm, 0xcb4, ((0xf)<<((rfe_num - 8) * 4)), (u32)source_sel);
+		odm_set_bb_reg(p_dm, 0xeb4, ((0xf)<<((rfe_num - 8) * 4)), (u32)source_sel);
+	}
+}
+
+__iram_odm_func__
+void
+phydm_rfe_8822b_init(
+	struct PHY_DM_STRUCT	*p_dm
+)
+{
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("8822B RFE_Init, RFE_type=((%d))\n", p_dm->rfe_type));
+	
+	/* chip top mux */
+	odm_set_bb_reg(p_dm, 0x64, BIT(29) | BIT(28), 0x3);
+	odm_set_bb_reg(p_dm, 0x4c, BIT(26) | BIT(25), 0x0);
+	odm_set_bb_reg(p_dm, 0x40, BIT(2), 0x1);
+
+	/* from s0 or s1 */
+	odm_set_bb_reg(p_dm, 0x1990, 0x3f, 0x30);
+	odm_set_bb_reg(p_dm, 0x1990, (BIT(11) | BIT(10)), 0x3);
+
+	/* input or output */
+	odm_set_bb_reg(p_dm, 0x974, 0x3f, 0x3f);
+	odm_set_bb_reg(p_dm, 0x974, (BIT(11) | BIT(10)), 0x3);
+}
+
+__iram_odm_func__
+boolean
+phydm_rfe_8822b(
+	struct PHY_DM_STRUCT	*p_dm,
+	u8						channel
+)
+{
+	boolean	is_channel_2g = (channel <= 14) ? true : false;
+	u8		rfe_type = p_dm->rfe_type;
+
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("[8822B] Update RFE PINs: CH:%d, T/RX_path:{ 0x%x, 0x%x}, cut_ver:%d, rfe_type:%d\n", 
+		channel, p_dm->tx_ant_status, p_dm->rx_ant_status, p_dm->cut_version, rfe_type));
+
+	if (((channel > 14) && (channel < 36)) || ((channel == 0)))
+		return false;
+
+	/* Distinguish the setting band */
+	p_dm->rfe_hwsetting_band = (is_channel_2g) ? 1 : 2;
+
+	/* HW Setting for each RFE type */
+	if ((rfe_type == 4) || (rfe_type == 11)) {
 
 		/*TRSW  = trsw_forced_BT ? 0x804[0] : (0xCB8[2] ? 0xCB8[0] : trsw_lut);	trsw_lut = TXON*/
 		/*TRSWB = trsw_forced_BT ? (~0x804[0]) : (0xCB8[2] ? 0xCB8[1] : trswb_lut);	trswb_lut = TXON*/
 		/*trsw_forced_BT = 0x804[1] ? 0 : (~GNT_WL); */
-		/*ODM_SetBBReg(pDM_Odm, 0x804, (BIT1|BIT0), 0x0);*/
+		/*odm_set_bb_reg(p_dm, 0x804, (BIT(1)|BIT(0)), 0x0);*/
 		/* Default setting is in PHY parameters */
-	
-		if (channel <= 14) {
+
+		if (is_channel_2g) {
+
 			/* signal source */
-			ODM_SetBBReg(pDM_Odm, 0xcb0, (bMaskByte2|bMaskLWord), 0x745774);
-			ODM_SetBBReg(pDM_Odm, 0xeb0, (bMaskByte2|bMaskLWord), 0x745774);
-			ODM_SetBBReg(pDM_Odm, 0xcb4, bMaskByte1, 0x57);
-			ODM_SetBBReg(pDM_Odm, 0xeb4, bMaskByte1, 0x57);
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x745774);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x745774);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x57);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x57);
 
 			/* inverse or not */
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x8);
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT11|BIT10), 0x2);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x8);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT11|BIT10), 0x2);
+			odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x8);
+			odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x2);
+			odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x8);
+			odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x2);
 
 			/* antenna switch table */
-			if ((pDM_Odm->RXAntStatus == (ODM_RF_A|ODM_RF_B)) || (pDM_Odm->TXAntStatus == (ODM_RF_A|ODM_RF_B))) {
+			if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
 				/* 2TX or 2RX */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xf050);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xf050);
-			} else if (pDM_Odm->RXAntStatus == pDM_Odm->TXAntStatus) {
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xf050);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xf050);
+			} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
 				/* TXA+RXA or TXB+RXB */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xf055);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xf055);
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xf055);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xf055);
 			} else {
 				/* TXB+RXA or TXA+RXB */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xf550);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xf550);
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xf550);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xf550);
 			}
-				
-		} else if (channel > 35) {
-			/* signal source */
-			ODM_SetBBReg(pDM_Odm, 0xcb0, (bMaskByte2|bMaskLWord), 0x477547);
-			ODM_SetBBReg(pDM_Odm, 0xeb0, (bMaskByte2|bMaskLWord), 0x477547);
-			ODM_SetBBReg(pDM_Odm, 0xcb4, bMaskByte1, 0x75);
-			ODM_SetBBReg(pDM_Odm, 0xeb4, bMaskByte1, 0x75);
 
-			/* inverse or not */
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT11|BIT10), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT11|BIT10), 0x0);
-
-			/* antenna switch table */
-			if ((pDM_Odm->RXAntStatus == (ODM_RF_A|ODM_RF_B)) || (pDM_Odm->TXAntStatus == (ODM_RF_A|ODM_RF_B))) {
-				/* 2TX or 2RX */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa501);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa501);
-			} else if (pDM_Odm->RXAntStatus == pDM_Odm->TXAntStatus) {
-				/* TXA+RXA or TXB+RXB */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa500);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa500);
-			} else {
-				/* TXB+RXA or TXA+RXB */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa005);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa005);
-			}
-		} else
-			return FALSE;
-
-		
-	} else {
-		if (((pDM_Odm->CutVersion == ODM_CUT_A) || (pDM_Odm->CutVersion == ODM_CUT_B)) && (pDM_Odm->RFEType < 2)) {
-			if (channel <= 14) {
-				/* signal source */
-				ODM_SetBBReg(pDM_Odm, 0xcb0, (bMaskByte2|bMaskLWord), 0x704570);
-				ODM_SetBBReg(pDM_Odm, 0xeb0, (bMaskByte2|bMaskLWord), 0x704570);
-				ODM_SetBBReg(pDM_Odm, 0xcb4, bMaskByte1, 0x45);
-				ODM_SetBBReg(pDM_Odm, 0xeb4, bMaskByte1, 0x45);
-			} else if (channel > 35) {
-				ODM_SetBBReg(pDM_Odm, 0xcb0, (bMaskByte2|bMaskLWord), 0x174517);
-				ODM_SetBBReg(pDM_Odm, 0xeb0, (bMaskByte2|bMaskLWord), 0x174517);
-				ODM_SetBBReg(pDM_Odm, 0xcb4, bMaskByte1, 0x45);
-				ODM_SetBBReg(pDM_Odm, 0xeb4, bMaskByte1, 0x45);
-			} else
-				return FALSE;
-
-			/* delay 400ns for PAPE */
-			ODM_SetBBReg(pDM_Odm, 0x810, bMaskByte3|BIT20|BIT21|BIT22|BIT23, 0x211);
-
-			/* antenna switch table */
-			ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa555);
-			ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa555);
-
-			/* inverse or not */
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT11|BIT10), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT11|BIT10), 0x0);
-
-			ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: Using old RFE control pin setting for A-cut and B-cut\n", __func__));
 		} else {
-			if (channel <= 14) {
-				/* signal source */
-				ODM_SetBBReg(pDM_Odm, 0xcb0, (bMaskByte2|bMaskLWord), 0x745774);
-				ODM_SetBBReg(pDM_Odm, 0xeb0, (bMaskByte2|bMaskLWord), 0x745774);
-				ODM_SetBBReg(pDM_Odm, 0xcb4, bMaskByte1, 0x57);
-				ODM_SetBBReg(pDM_Odm, 0xeb4, bMaskByte1, 0x57);
-			} else if (channel > 35) {
-				/* signal source */
-				ODM_SetBBReg(pDM_Odm, 0xcb0, (bMaskByte2|bMaskLWord), 0x477547);
-				ODM_SetBBReg(pDM_Odm, 0xeb0, (bMaskByte2|bMaskLWord), 0x477547);
-				ODM_SetBBReg(pDM_Odm, 0xcb4, bMaskByte1, 0x75);
-				ODM_SetBBReg(pDM_Odm, 0xeb4, bMaskByte1, 0x75);
-			} else
-				return FALSE;
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x477547);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x477547);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x75);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x75);
 
 			/* inverse or not */
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xcbc, (BIT11|BIT10), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x0);
-			ODM_SetBBReg(pDM_Odm, 0xebc, (BIT11|BIT10), 0x0);
-
-			/* delay 400ns for PAPE */
-			/* ODM_SetBBReg(pDM_Odm, 0x810, bMaskByte3|BIT20|BIT21|BIT22|BIT23, 0x211); */
+			odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x0);
 
 			/* antenna switch table */
-			if ((pDM_Odm->RXAntStatus == (ODM_RF_A|ODM_RF_B)) || (pDM_Odm->TXAntStatus == (ODM_RF_A|ODM_RF_B))) {
+			if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
 				/* 2TX or 2RX */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa501);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa501);
-			} else if (pDM_Odm->RXAntStatus == pDM_Odm->TXAntStatus) {
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa501);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa501);
+			} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
 				/* TXA+RXA or TXB+RXB */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa500);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa500);
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa500);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa500);
 			} else {
 				/* TXB+RXA or TXA+RXB */
-				ODM_SetBBReg(pDM_Odm, 0xca0, bMaskLWord, 0xa005);
-				ODM_SetBBReg(pDM_Odm, 0xea0, bMaskLWord, 0xa005);
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa005);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa005);
 			}
 		}
-	}
+	} else if ((rfe_type == 1) || (rfe_type == 2) || (rfe_type == 6) || (rfe_type == 7) || (rfe_type == 9)) {
+		/* eFem */
+		if ((p_dm->cut_version == ODM_CUT_B) && (rfe_type < 2)) {
+			if (is_channel_2g) {
+				/* signal source */
+				odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x704570);
+				odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x704570);
+				odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x45);
+				odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x45);
+			} else {
+				odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x174517);
+				odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x174517);
+				odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x45);
+				odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x45);
+			}
+
+			/* delay 400ns for PAPE */
+			odm_set_bb_reg(p_dm, 0x810, 0xfff00000, 0x211);
+
+			/* antenna switch table */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa555);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa555);
+
+			/* inverse or not */
+			odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x0);
+		} else {
+			if (is_channel_2g) {
+				/* signal source */
+				odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x705770);
+				odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x705770);
+				odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x57);
+				odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x57);
+				odm_set_bb_reg(p_dm, 0xcb8, BIT(4), 0);
+				odm_set_bb_reg(p_dm, 0xeb8, BIT(4), 0);
+			} else {
+				/* signal source */
+				odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x177517);
+				odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x177517);
+				odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x75);
+				odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x75);
+				odm_set_bb_reg(p_dm, 0xcb8, BIT(5), 0);
+				odm_set_bb_reg(p_dm, 0xeb8, BIT(5), 0);
+			}
+			
+			/* inverse or not */
+			odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x0);
+
+			/* delay 400ns for PAPE */
+			/* odm_set_bb_reg(p_dm, 0x810, MASKBYTE3|BIT20|BIT21|BIT22|BIT23, 0x211); */
+
+			/* antenna switch table */
+			if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
+				/* 2TX or 2RX */
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa501);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa501);
+			} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
+				/* TXA+RXA or TXB+RXB */
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa500);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa500);
+			} else {
+				/* TXB+RXA or TXA+RXB */
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa005);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa005);
+			}
+		}
+	} else if ((rfe_type == 0) || (rfe_type == 3) || (rfe_type == 5) || (rfe_type == 8) || (rfe_type == 10) || (rfe_type == 12) || (rfe_type == 13) || (rfe_type == 14) || (rfe_type == 16) || (rfe_type == 17)) {
+		/* iFEM */
+		if (is_channel_2g) {
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x745774);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x745774);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x57);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x57);
 	
-	/* chip top mux */
-	ODM_SetBBReg(pDM_Odm, 0x64, BIT29|BIT28, 0x3);
-	ODM_SetBBReg(pDM_Odm, 0x4c, BIT26|BIT25, 0x0);
-	ODM_SetBBReg(pDM_Odm, 0x40, BIT2, 0x1);
+		} else {
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x477547);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x477547);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x75);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x75);
+		}
 
-	/* from s0 or s1 */
-	ODM_SetBBReg(pDM_Odm, 0x1990, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x30);
-	ODM_SetBBReg(pDM_Odm, 0x1990, (BIT11|BIT10), 0x3);
+		/* inverse or not */
+		odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+		odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x0);
+		odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+		odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x0);
 
-	/* input or output */
-	ODM_SetBBReg(pDM_Odm, 0x974, (BIT5|BIT4|BIT3|BIT2|BIT1|BIT0), 0x3f);
-	ODM_SetBBReg(pDM_Odm, 0x974, (BIT11|BIT10), 0x3);
+		/* antenna switch table */
+		if (is_channel_2g) {
+			if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
+				/* 2TX or 2RX */
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa501);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa501);
+			} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
+				/* TXA+RXA or TXB+RXB */
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa500);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa500);
+			} else {
+				/* TXB+RXA or TXA+RXB */
+				odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa005);
+				odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa005);
+			}
+		} else {
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa5a5);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa5a5);
+		}
+	} else if (rfe_type == 15) {
+		/* iFEM for Microsoft, 5G low/high band at S0 only */
+		phydm_8822b_type15_rfe(p_dm, channel);
+	} else if (rfe_type == 18) {
+		/* iFEM for Roku, 5G low/high band at S0/S1 */
+		phydm_8822b_type18_rfe(p_dm, channel);
+	}
+	#if (defined(CONFIG_CUMITEK_SMART_ANTENNA))
+	else if (rfe_type == SMTANT_TMP_RFE_TYPE) {
+		/*modify from RFE_TYPE = 1*/
+	
+		if (is_channel_2g) {
+			#if 0
+			/* signal source */
+			odm_set_bb_reg(p_dm, 0xcb0, 0xffffff, 0x705770);
+			odm_set_bb_reg(p_dm, 0xeb0, 0xffffff, 0x705770);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKBYTE1, 0x57);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x57);
+			odm_set_bb_reg(p_dm, 0xcb8, BIT(4), 0);
+			odm_set_bb_reg(p_dm, 0xeb8, BIT(4), 0);
+			
+			/* inverse or not */
+			odm_set_bb_reg(p_dm, 0xcbc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xcbc, (BIT(11) | BIT(10)), 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, 0x3f, 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, (BIT(11) | BIT(10)), 0x0);
+			
+			#endif
+		} else {
+			/* signal source */
+			#if 1
+			/*path A*/
+			odm_set_bb_reg(p_dm, 0x1990, BIT(3), 0);		/*RFE_CTRL_3*/ /*A_0*/
+			odm_set_bb_reg(p_dm, 0x1990, BIT(1), 0);		/*RFE_CTRL_0*/ /*A_1*/
+			odm_set_bb_reg(p_dm, 0x1990, BIT(8), 0);		/*RFE_CTRL_8*/ /*A_2*/
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: Update RFE control pin setting (ch%d, TxPath 0x%x, RxPath 0x%x)\n", __func__, channel, pDM_Odm->TXAntStatus, pDM_Odm->RXAntStatus));
+			/*path B*/
+			odm_set_bb_reg(p_dm, 0x1990, BIT(4), 1);		/*RFE_CTRL_4*/ 	/*B_0*/
+			odm_set_bb_reg(p_dm, 0x1990, BIT(11), 1);	/*RFE_CTRL_11*/	/*B_1*/
+			odm_set_bb_reg(p_dm, 0x1990, BIT(9), 1); 		/*RFE_CTRL_9*/	/*B_2*/
 
-	return TRUE;
+			odm_set_bb_reg(p_dm, 0xcb0, MASKDWORD, 0x77178519);
+			//odm_set_bb_reg(p_dm, 0xeb0, MASKDWORD, 0x77177517);
+			odm_set_bb_reg(p_dm, 0xeb0, MASKDWORD, 0x771c7517);
+			odm_set_bb_reg(p_dm, 0xcb4, MASKDWORD, 0x757a);
+			//odm_set_bb_reg(p_dm, 0xeb4, MASKBYTE1, 0x7577);
+			odm_set_bb_reg(p_dm, 0xeb4, MASKDWORD, 0xd5e7);
+
+			/* inverse or not */
+			odm_set_bb_reg(p_dm, 0xcbc, 0xfff, 0x0);
+			odm_set_bb_reg(p_dm, 0xebc, 0xfff, 0x0);
+			#else
+			phydm_rfe_8822b_setting(p_dm, 1, BB_PATH_A, 0, PAPE_5G);
+			phydm_rfe_8822b_setting(p_dm, 2, BB_PATH_A, 0, TRSW_B);
+			phydm_rfe_8822b_setting(p_dm, 5, BB_PATH_B, 0, PAPE_5G);
+			phydm_rfe_8822b_setting(p_dm, 10, BB_PATH_B, 0, TRSW_B);
+			#endif
+
+			odm_set_bb_reg(p_dm, 0xcb8, BIT(5), 0);
+			odm_set_bb_reg(p_dm, 0xeb8, BIT(5), 0);
+		}
+			
+		/* delay 400ns for PAPE */
+		/* odm_set_bb_reg(p_dm, 0x810, MASKBYTE3|BIT20|BIT21|BIT22|BIT23, 0x211); */
+
+		/* antenna switch table */
+		if ((p_dm->rx_ant_status == BB_PATH_AB) || (p_dm->tx_ant_status == BB_PATH_AB)) {
+			/* 2TX or 2RX */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa501);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa501);
+		} else if (p_dm->rx_ant_status == p_dm->tx_ant_status) {
+			/* TXA+RXA or TXB+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa500);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa500);
+		} else {
+			/* TXB+RXA or TXA+RXB */
+			odm_set_bb_reg(p_dm, 0xca0, MASKLWORD, 0xa005);
+			odm_set_bb_reg(p_dm, 0xea0, MASKLWORD, 0xa005);
+		}
+	}
+	#endif
+
+	return true;
 }
 
-VOID
-phydm_ccapar_by_rfe_8822b(
-	IN	PDM_ODM_T				pDM_Odm
-	)
+__iram_odm_func__
+u8
+phydm_is_dfs_channel(u8 channel_num)
 {
-#if !(DM_ODM_SUPPORT_TYPE == ODM_CE)
-	u4Byte	cca_ifem_bcut[12][4] = {
-		/*20M*/
-		{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg838*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-		/*40M*/					
-		{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-		{0x00000000, 0x79a0ea28, 0x00000000, 0x79a0ea28}, /*Reg830*/
-		{0x87765541, 0x87766341, 0x87765541, 0x87766341}, /*Reg838*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-		/*80M*/
-		{0x75D97010, 0x75D97010, 0x75D97010, 0x75D97010}, /*Reg82C*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-		{0x00000000, 0x87746641, 0x00000000, 0x87746641}, /*Reg838*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000} }; /*Reg83C*/
-	u4Byte	cca_efem_bcut[12][4] = {
-		/*20M*/
-		{0x75A76010, 0x75A76010, 0x75A76010, 0x75A75010}, /*Reg82C*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-		{0x87766651, 0x87766431, 0x87766451, 0x87766431}, /*Reg838*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-		/*40M*/
-		{0x75A75010, 0x75A75010, 0x75A75010, 0x75A75010}, /*Reg82C*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-		{0x87766431, 0x87766431, 0x87766431, 0x87766431}, /*Reg838*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg83C*/
-		/*80M*/
-		{0x75BA7010, 0x75BA7010, 0x75BA7010, 0x75BA7010}, /*Reg82C*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}, /*Reg830*/
-		{0x87766431, 0x87766431, 0x87766431, 0x87766431}, /*Reg838*/
-		{0x00000000, 0x00000000, 0x00000000, 0x00000000}}; /*Reg83C*/
-#endif
+	if(channel_num >= 52 && channel_num <= 140)
+		return 1;
+	else
+		return 0;
+}
 
-	u4Byte	cca_ifem[12][4], cca_efem[12][4];
-	u1Byte	row, col;
-	u4Byte	reg82c, reg830, reg838, reg83c;
+__iram_odm_func__
+void
+phydm_ccapar_by_rfe_8822b(
+	struct PHY_DM_STRUCT				*p_dm
+)
+{
+	u32	cca_ifem[3][4], cca_efem[3][4];
+	u8	col;
+	u32	reg82c, reg830, reg838;
+	boolean	is_efem_cca = false, is_ifem_cca = false, is_rfe_type = false;
 
-	if (pDM_Odm->CutVersion == ODM_CUT_A)
-		return;
 #if !(DM_ODM_SUPPORT_TYPE == ODM_CE)
-	if (pDM_Odm->CutVersion == ODM_CUT_B) {
-		ODM_MoveMemory(pDM_Odm, cca_efem, cca_efem_bcut, 48*4);
-		ODM_MoveMemory(pDM_Odm, cca_ifem, cca_ifem_bcut, 48*4);
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: Update CCA parameters for Bcut\n", __func__));
+	if (p_dm->cut_version == ODM_CUT_B) {
+		odm_move_memory(p_dm, cca_efem, cca_efem_bcut, 12 * 4);
+		odm_move_memory(p_dm, cca_ifem, cca_ifem_bcut, 12 * 4);
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("%s: Update CCA parameters for Bcut\n", __func__));
 	} else
 #endif
 	{
-		ODM_MoveMemory(pDM_Odm, cca_efem, cca_efem_ccut, 48*4);
-		if (pDM_Odm->RFEType == 5) {
-			ODM_MoveMemory(pDM_Odm, cca_ifem, cca_ifem_ccut_RFTType5, 48*4);
-		} else if (pDM_Odm->RFEType == 3) {
-			ODM_MoveMemory(pDM_Odm, cca_ifem, cca_ifem_ccut_RFTType3, 48*4);
-		} else {
-		ODM_MoveMemory(pDM_Odm, cca_ifem, cca_ifem_ccut, 48*4);
-		} ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: Update CCA parameters for Ccut\n", __func__));
-	}	
-
-	if (bw_8822b == ODM_BW20M)
-		row = 0;
-	else if (bw_8822b == ODM_BW40M)
-		row = 4;
-	else
-		row = 8;
+		odm_move_memory(p_dm, cca_efem, cca_efem_ccut, 12 * 4);
+	if ((p_dm->rfe_type == 3) || (p_dm->rfe_type == 5) || (p_dm->rfe_type == 12) || (p_dm->rfe_type == 15) || (p_dm->rfe_type == 16) || (p_dm->rfe_type == 17)) {
+		odm_move_memory(p_dm, cca_ifem, cca_ifem_ccut_rfetype, 12 * 4);
+		is_rfe_type = true;
+	} else
+		odm_move_memory(p_dm, cca_ifem, cca_ifem_ccut, 12 * 4);
+	
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("%s: Update CCA parameters for Ccut\n", __func__));
+	}
 
 	if (central_ch_8822b <= 14) {
-		if ((pDM_Odm->RXAntStatus == ODM_RF_A) || (pDM_Odm->RXAntStatus == ODM_RF_B))
-			col = 0;
+		if ((p_dm->rx_ant_status == BB_PATH_A) || (p_dm->rx_ant_status == BB_PATH_B))
+			col = 0;	/*1R 2G*/
 		else
-			col = 1;
+			col = 1;	/*2R 2G*/
 	} else {
-		if ((pDM_Odm->RXAntStatus == ODM_RF_A) || (pDM_Odm->RXAntStatus == ODM_RF_B))
-			col = 2;
+		if ((p_dm->rx_ant_status == BB_PATH_A) || (p_dm->rx_ant_status == BB_PATH_B))
+			col = 2;	/*1R 5G*/
 		else
-			col = 3;
+			col = 3;	/*2R 5G*/
 	}
 
-	if ((pDM_Odm->RFEType == 1) || (pDM_Odm->RFEType == 4) || (pDM_Odm->RFEType == 6) || (pDM_Odm->RFEType == 7)) {
-		/*eFEM => RFE type 1 & RFE type 4 & RFE type 6 & RFE type 7*/
-		reg82c = (cca_efem[row][col] != 0)?cca_efem[row][col]:reg82c_8822b;
-		reg830 = (cca_efem[row + 1][col] != 0)?cca_efem[row + 1][col]:reg830_8822b;
-		reg838 = (cca_efem[row + 2][col] != 0)?cca_efem[row + 2][col]:reg838_8822b;
-		reg83c = (cca_efem[row + 3][col] != 0)?cca_efem[row + 3][col]:reg83c_8822b;
-	} else if ((pDM_Odm->RFEType == 2)||(pDM_Odm->RFEType == 9)) {
+	if ((p_dm->rfe_type == 1) || (p_dm->rfe_type == 4) || (p_dm->rfe_type == 6) || (p_dm->rfe_type == 7) || (p_dm->rfe_type == 11)) {
+		/*eFEM => RFE type 1 & RFE type 4 & RFE type 6 & RFE type 7 & RFE type 11*/
+		reg82c = cca_efem[0][col];
+		reg830 = cca_efem[1][col];
+		reg838 = cca_efem[2][col];
+		is_efem_cca = true;
+	} else if ((p_dm->rfe_type == 2) || (p_dm->rfe_type == 9)) {
 		/*5G eFEM, 2G iFEM => RFE type 2, 5G eFEM => RFE type 9 */
 		if (central_ch_8822b <= 14) {
-			reg82c = (cca_ifem[row][col] != 0)?cca_ifem[row][col]:reg82c_8822b;
-			reg830 = (cca_ifem[row + 1][col] != 0)?cca_ifem[row + 1][col]:reg830_8822b;
-			reg838 = (cca_ifem[row + 2][col] != 0)?cca_ifem[row + 2][col]:reg838_8822b;
-			reg83c = (cca_ifem[row + 3][col] != 0)?cca_ifem[row + 3][col]:reg83c_8822b;
+			reg82c = cca_ifem[0][col];
+			reg830 = cca_ifem[1][col];
+			reg838 = cca_ifem[2][col];
+			is_ifem_cca = true;
 		} else {
-			reg82c = (cca_efem[row][col] != 0)?cca_efem[row][col]:reg82c_8822b;
-			reg830 = (cca_efem[row + 1][col] != 0)?cca_efem[row + 1][col]:reg830_8822b;
-			reg838 = (cca_efem[row + 2][col] != 0)?cca_efem[row + 2][col]:reg838_8822b;
-			reg83c = (cca_efem[row + 3][col] != 0)?cca_efem[row + 3][col]:reg83c_8822b;
+			reg82c = cca_efem[0][col];
+			reg830 = cca_efem[1][col];
+			reg838 = cca_efem[2][col];
+			is_efem_cca = true;
 		}
 	} else {
-		/*iFEM =>RFE type 0 & RFE type 8*/
-		reg82c = (cca_ifem[row][col] != 0)?cca_ifem[row][col]:reg82c_8822b;
-		reg830 = (cca_ifem[row + 1][col] != 0)?cca_ifem[row + 1][col]:reg830_8822b;
-		reg838 = (cca_ifem[row + 2][col] != 0)?cca_ifem[row + 2][col]:reg838_8822b;
-		reg83c = (cca_ifem[row + 3][col] != 0)?cca_ifem[row + 3][col]:reg83c_8822b;
-	}
-	
-	ODM_SetBBReg(pDM_Odm, 0x82c, bMaskDWord, reg82c);
-	ODM_SetBBReg(pDM_Odm, 0x830, bMaskDWord, reg830);
-	ODM_SetBBReg(pDM_Odm, 0x838, bMaskDWord, reg838);
-	ODM_SetBBReg(pDM_Odm, 0x83c, bMaskDWord, reg83c);
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: (Pkt%d, Intf%d, RFE%d), row = %d, col = %d\n", 
-		__func__, pDM_Odm->PackageType, pDM_Odm->SupportInterface, pDM_Odm->RFEType, row, col));
-}
-
-VOID
-phydm_ccapar_by_bw_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_BW_E				bandwidth
-	)
-{
-	u4Byte		reg82c;
-
-
-	if (pDM_Odm->CutVersion != ODM_CUT_A)
-		return;
-
-	/* A-cut */
-	reg82c = ODM_GetBBReg(pDM_Odm, 0x82c, bMaskDWord);
-
-	if (bandwidth == ODM_BW20M) {
-		/* 82c[15:12] = 4 */
-		/* 82c[27:24] = 6 */
-		
-		reg82c &= (~(0x0f00f000));
-		reg82c |= ((0x4) << 12);
-		reg82c |= ((0x6) << 24);
-	} else if (bandwidth == ODM_BW40M) {
-		/* 82c[19:16] = 9 */
-		/* 82c[27:24] = 6 */
-	
-		reg82c &= (~(0x0f0f0000));
-		reg82c |= ((0x9) << 16);
-		reg82c |= ((0x6) << 24);
-	} else if (bandwidth == ODM_BW80M) {
-		/* 82c[15:12] 7 */
-		/* 82c[19:16] b */
-		/* 82c[23:20] d */
-		/* 82c[27:24] 3 */
-	
-		reg82c &= (~(0x0ffff000));
-		reg82c |= ((0xdb7) << 12);
-		reg82c |= ((0x3) << 24);
+		/* iFEM =>RFEtype 3 & RFE type 5 & RFE type 0 & RFE type 8 & RFE type 10 & RFE type 12 & RFE type 13 & RFE type 15~17 */
+		reg82c = cca_ifem[0][col];
+		reg830 = cca_ifem[1][col];
+		reg838 = cca_ifem[2][col];
+		is_ifem_cca = true;
 	}
 
-	ODM_SetBBReg(pDM_Odm, 0x82c, bMaskDWord, reg82c);
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_CcaParByBw_8822b(): Update CCA parameters for Acut\n"));
+	odm_set_bb_reg(p_dm, 0x82c, MASKDWORD, reg82c);
+
+	if (is_ifem_cca == true)
+		if (((p_dm->cut_version == ODM_CUT_B) && (col == 1 || col == 3) && (bw_8822b == CHANNEL_WIDTH_40)) ||
+			((is_rfe_type == false) && (col == 3) && (bw_8822b == CHANNEL_WIDTH_40)) ||
+			((p_dm->rfe_type == 5) && (col == 3)))
+			odm_set_bb_reg(p_dm, 0x830, MASKDWORD, 0x79a0ea28);
+		else
+			odm_set_bb_reg(p_dm, 0x830, MASKDWORD, reg830);
+	else
+		odm_set_bb_reg(p_dm, 0x830, MASKDWORD, reg830);
+
+	odm_set_bb_reg(p_dm, 0x838, MASKDWORD, reg838);
+
+	if ((is_efem_cca == true) && !(p_dm->cut_version == ODM_CUT_B))
+		odm_set_bb_reg(p_dm, 0x83c, MASKDWORD, 0x9194b2b9);
+
+	/* enlarge big jump size in type 16 for MS case */
+	if ((p_dm->rfe_type == 16) && (central_ch_8822b <= 14))
+		odm_set_bb_reg(p_dm, 0x8c8, BIT(3) | BIT (2) | BIT(1), 0x3);
+
+	/* 0x82c sub-adjust for tpye 15 and 16 */
+	if ((p_dm->rfe_type == 15) || (p_dm->rfe_type == 16))
+		odm_set_bb_reg(p_dm, 0x82c, 0xff000, 0x97);
 	
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("%s: (Pkt%d, Intf%d, RFE%d), col = %d\n",
+		__func__, p_dm->package_type, p_dm->support_interface, p_dm->rfe_type, col));
 }
 
-VOID
-phydm_ccapar_by_rxpath_8822b(
-	IN	PDM_ODM_T				pDM_Odm
-	)
-{
-
-	if (pDM_Odm->CutVersion != ODM_CUT_A)
-		return;
-
-	if ((pDM_Odm->RXAntStatus == ODM_RF_A) || (pDM_Odm->RXAntStatus == ODM_RF_B)) {
-		/* 838[7:4] = 8 */
-		/* 838[11:8] = 7 */
-		/* 838[15:12] = 6 */
-		/* 838[19:16] = 7 */
-		/* 838[23:20] = 7 */
-		/* 838[27:24] = 7 */
-		ODM_SetBBReg(pDM_Odm, 0x838, 0x0ffffff0, 0x777678);
-	} else {
-		/* 838[7:4] = 3 */
-		/* 838[11:8] = 3 */
-		/* 838[15:12] = 6 */
-		/* 838[19:16] = 6 */
-		/* 838[23:20] = 7 */
-		/* 838[27:24] = 7 */
-		ODM_SetBBReg(pDM_Odm, 0x838, 0x0ffffff0, 0x776633);
-	}
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_CcaParByRxPath_8822b(): Update CCA parameters for Acut\n"));
-
-}
-
-VOID
+__iram_odm_func__
+void
 phydm_rxdfirpar_by_bw_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_BW_E				bandwidth
-	)
+	struct PHY_DM_STRUCT				*p_dm,
+	enum channel_width				bandwidth
+)
 {
-	if (bandwidth == ODM_BW40M) {
+	if (bandwidth == CHANNEL_WIDTH_40) {
 		/* RX DFIR for BW40 */
-		ODM_SetBBReg(pDM_Odm, 0x948, BIT29|BIT28, 0x1);
-		ODM_SetBBReg(pDM_Odm, 0x94c, BIT29|BIT28, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0xc20, BIT31, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0xe20, BIT31, 0x0);
-	} else if (bandwidth == ODM_BW80M) {
+		odm_set_bb_reg(p_dm, 0x948, BIT(29) | BIT(28), 0x1);
+		odm_set_bb_reg(p_dm, 0x94c, BIT(29) | BIT(28), 0x0);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(31), 0x0);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(31), 0x0);
+	} else if (bandwidth == CHANNEL_WIDTH_80) {
 		/* RX DFIR for BW80 */
-		ODM_SetBBReg(pDM_Odm, 0x948, BIT29|BIT28, 0x2);
-		ODM_SetBBReg(pDM_Odm, 0x94c, BIT29|BIT28, 0x1);
-		ODM_SetBBReg(pDM_Odm, 0xc20, BIT31, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0xe20, BIT31, 0x0);
+		odm_set_bb_reg(p_dm, 0x948, BIT(29) | BIT(28), 0x2);
+		odm_set_bb_reg(p_dm, 0x94c, BIT(29) | BIT(28), 0x1);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(31), 0x0);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(31), 0x0);
 	} else {
 		/* RX DFIR for BW20, BW10 and BW5*/
-		ODM_SetBBReg(pDM_Odm, 0x948, BIT29|BIT28, 0x2);
-		ODM_SetBBReg(pDM_Odm, 0x94c, BIT29|BIT28, 0x2);
-		ODM_SetBBReg(pDM_Odm, 0xc20, BIT31, 0x1);
-		ODM_SetBBReg(pDM_Odm, 0xe20, BIT31, 0x1);
+		odm_set_bb_reg(p_dm, 0x948, BIT(29) | BIT(28), 0x2);
+		odm_set_bb_reg(p_dm, 0x94c, BIT(29) | BIT(28), 0x2);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(31), 0x1);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(31), 0x1);
 	}
+	/* PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("phydm_rxdfirpar_by_bw_8822b\n"));*/
 }
 
-BOOLEAN
+__iram_odm_func__
+boolean
 phydm_write_txagc_1byte_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u4Byte					PowerIndex,
-	IN	ODM_RF_RADIO_PATH_E		Path,	
-	IN	u1Byte					HwRate
-	)
+	struct PHY_DM_STRUCT				*p_dm,
+	u32					power_index,
+	enum rf_path		path,
+	u8					hw_rate
+)
 {
-	u4Byte	offset_txagc[2] = {0x1d00, 0x1d80};
-	u1Byte	rate_idx = (HwRate & 0xfc), i;
-	u1Byte	rate_offset = (HwRate & 0x3);
-	u4Byte	txagc_content = 0x0;
+#if (PHYDM_FW_API_FUNC_ENABLE_8822B == 1)
+
+	u32	offset_txagc[2] = {0x1d00, 0x1d80};
+	u8	rate_idx = (hw_rate & 0xfc), i;
+	u8	rate_offset = (hw_rate & 0x3);
+	u32	txagc_content = 0x0;
 
 	/* For debug command only!!!! */
 
-	/* Error handling  */
-	if ((Path > ODM_RF_PATH_B) || (HwRate > 0x53)) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_write_txagc_1byte_8822b(): unsupported path (%d)\n", Path));
-		return FALSE;
+	/* Error handling */
+	if ((path > RF_PATH_B) || (hw_rate > 0x53)) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("phydm_write_txagc_1byte_8822b(): unsupported path (%d)\n", path));
+		return false;
 	}
 
 	/* For HW limitation, We can't write TXAGC once a byte. */
 	for (i = 0; i < 4; i++) {
 		if (i != rate_offset)
-			txagc_content = txagc_content|(config_phydm_read_txagc_8822b(pDM_Odm, Path, rate_idx + i) << (i << 3));
+			txagc_content = txagc_content | (config_phydm_read_txagc_8822b(p_dm, path, rate_idx + i) << (i << 3));
 		else
-			txagc_content = txagc_content|((PowerIndex & 0x3f) << (i << 3));
+			txagc_content = txagc_content | ((power_index & 0x3f) << (i << 3));
 	}
-	ODM_SetBBReg(pDM_Odm, (offset_txagc[Path] + rate_idx), bMaskDWord, txagc_content);
+	odm_set_bb_reg(p_dm, (offset_txagc[path] + rate_idx), MASKDWORD, txagc_content);
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_write_txagc_1byte_8822b(): Path-%d Rate index 0x%x (0x%x) = 0x%x\n", 
-		Path, HwRate, (offset_txagc[Path] + HwRate), PowerIndex));
-	return TRUE;
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("phydm_write_txagc_1byte_8822b(): path-%d rate index 0x%x (0x%x) = 0x%x\n",
+		path, hw_rate, (offset_txagc[path] + hw_rate), power_index));
+	return true;
+#else
+	return false;
+#endif
 }
 
-VOID
+__iram_odm_func__
+void
 phydm_init_hw_info_by_rfe_type_8822b(
-	IN	PDM_ODM_T				pDM_Odm
+	struct PHY_DM_STRUCT				*p_dm
 )
 {
-	u2Byte	mask_path_a = 0x0303;
-	u2Byte	mask_path_b = 0x0c0c;
-	/*u2Byte	mask_path_c = 0x3030;*/
-	/*u2Byte	mask_path_d = 0xc0c0;*/
+#if (PHYDM_FW_API_FUNC_ENABLE_8822B == 1)
+	u16	mask_path_a = 0x0303;
+	u16	mask_path_b = 0x0c0c;
+	/*u16	mask_path_c = 0x3030;*/
+	/*u16	mask_path_d = 0xc0c0;*/
 
-	pDM_Odm->bInitHwInfoByRfe = FALSE;
+	p_dm->is_init_hw_info_by_rfe = false;
 
-	if ((pDM_Odm->RFEType == 1) || (pDM_Odm->RFEType == 6) || (pDM_Odm->RFEType == 7)) {
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA|ODM_BOARD_EXT_LNA_5G|ODM_BOARD_EXT_PA|ODM_BOARD_EXT_PA_5G));
+	if ((p_dm->rfe_type == 1) || (p_dm->rfe_type == 6) || (p_dm->rfe_type == 7)) {
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA | ODM_BOARD_EXT_LNA_5G | ODM_BOARD_EXT_PA | ODM_BOARD_EXT_PA_5G));
 
-		if (pDM_Odm->RFEType == 6) {
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GPA, (TYPE_GPA1 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_APA, (TYPE_APA1 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GLNA, (TYPE_GLNA1 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_ALNA, (TYPE_ALNA1 & (mask_path_a|mask_path_b)));
-		} else if (pDM_Odm->RFEType == 7) {
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GPA, (TYPE_GPA2 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_APA, (TYPE_APA2 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GLNA, (TYPE_GLNA2 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_ALNA, (TYPE_ALNA2 & (mask_path_a|mask_path_b)));
+		if (p_dm->rfe_type == 6) {
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_GPA, (TYPE_GPA1 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_APA, (TYPE_APA1 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_GLNA, (TYPE_GLNA1 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA1 & (mask_path_a | mask_path_b)));
+		} else if (p_dm->rfe_type == 7) {
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_GPA, (TYPE_GPA2 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_APA, (TYPE_APA2 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_GLNA, (TYPE_GLNA2 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA2 & (mask_path_a | mask_path_b)));
 		} else {
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GPA, (TYPE_GPA0 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_APA, (TYPE_APA0 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GLNA, (TYPE_GLNA0 & (mask_path_a|mask_path_b)));
-			ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a|mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_GPA, (TYPE_GPA0 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_APA, (TYPE_APA0 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_GLNA, (TYPE_GLNA0 & (mask_path_a | mask_path_b)));
+			odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a | mask_path_b)));
 		}
 
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 1);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, TRUE);
-	} else if (pDM_Odm->RFEType == 2) {
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA_5G|ODM_BOARD_EXT_PA_5G));
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_APA, (TYPE_APA0 & (mask_path_a|mask_path_b)));	
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a|mask_path_b)));	
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 2);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, TRUE);
-	} else if (pDM_Odm->RFEType == 9) {
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA_5G));
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a|mask_path_b)));	
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 1);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, FALSE);
-	} else if ((pDM_Odm->RFEType == 3) || (pDM_Odm->RFEType == 5)) {
-		/* RFE type 3: 8822BS\8822BU TFBGA iFEM */
-		/* RFE type 5: 8822BE TFBGA iFEM */
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, 0);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 2);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, FALSE);
-	} else if (pDM_Odm->RFEType == 4) {
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA|ODM_BOARD_EXT_LNA_5G|ODM_BOARD_EXT_PA|ODM_BOARD_EXT_PA_5G));
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GPA, (TYPE_GPA0 & (mask_path_a|mask_path_b)));
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_APA, (TYPE_APA0 & (mask_path_a|mask_path_b)));
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_GLNA, (TYPE_GLNA0 & (mask_path_a|mask_path_b)));
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a|mask_path_b)));	
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 1);
 
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, true);
+	} else if (p_dm->rfe_type == 2) {
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA_5G | ODM_BOARD_EXT_PA_5G));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_APA, (TYPE_APA0 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a | mask_path_b)));
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, true);
+	} else if (p_dm->rfe_type == 9) {
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA_5G));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a | mask_path_b)));
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 1);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
+	} else if (p_dm->rfe_type == 3) {
+		/* RFE type 3: 8822BS\8822BU TFBGA iFEM */
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, 0);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
+	} else if (p_dm->rfe_type == 5) {
+		/* RFE type 5: 8822BE TFBGA iFEM */
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, ODM_BOARD_SLIM);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
+	} else if (p_dm->rfe_type == 12) {
+		/* RFE type 12: QFN iFEM */
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, 0);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 1);
 		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, TRUE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, TRUE);
-	} else if (pDM_Odm->RFEType == 8) {
-		/* RFE Type 8: TFBGA iFEM AP */
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, 0);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
+	} else if (p_dm->rfe_type == 4) {
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA | ODM_BOARD_EXT_LNA_5G | ODM_BOARD_EXT_PA | ODM_BOARD_EXT_PA_5G));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_GPA, (TYPE_GPA0 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_APA, (TYPE_APA0 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_GLNA, (TYPE_GLNA0 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA0 & (mask_path_a | mask_path_b)));
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, true);
+	} else if (p_dm->rfe_type == 11) {
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, (ODM_BOARD_EXT_LNA | ODM_BOARD_EXT_LNA_5G | ODM_BOARD_EXT_PA | ODM_BOARD_EXT_PA_5G));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_GPA, (TYPE_GPA1 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_APA, (TYPE_APA1 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_GLNA, (TYPE_GLNA1 & (mask_path_a | mask_path_b)));
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_ALNA, (TYPE_ALNA1 & (mask_path_a | mask_path_b)));
 		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 2);
 		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, FALSE);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, true);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, true);
+
+	} else if (p_dm->rfe_type == 8) {
+	/* RFE type 8: TFBGA iFEM AP */
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, 0);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 2);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
+	} else if (p_dm->rfe_type == 10) {
+	/* RFE type 10: QFN iFEM AP PCIE TRSW */
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, ODM_BOARD_EXT_TRSW);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 1);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
 	} else {
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_BOARD_TYPE, 0);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_PACKAGE_TYPE, 1);
-		
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_LNA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_EXT_PA, FALSE);
-		ODM_CmnInfoInit(pDM_Odm, ODM_CMNINFO_5G_EXT_PA, FALSE);
+	/* RFE Type 0: QFN iFEM */
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_BOARD_TYPE, 0);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_PACKAGE_TYPE, 1);
+
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_LNA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_EXT_PA, false);
+		odm_cmn_info_init(p_dm, ODM_CMNINFO_5G_EXT_PA, false);
 	}
 
-	pDM_Odm->bInitHwInfoByRfe = TRUE;
+	p_dm->is_init_hw_info_by_rfe = true;
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_init_hw_info_by_rfe_type_8822b(): RFE type (%d), Board type (0x%x), Package type (%d)\n", pDM_Odm->RFEType, pDM_Odm->BoardType, pDM_Odm->PackageType));
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_init_hw_info_by_rfe_type_8822b(): 5G ePA (%d), 5G eLNA (%d), 2G ePA (%d), 2G eLNA (%d)\n", pDM_Odm->ExtPA5G, pDM_Odm->ExtLNA5G, pDM_Odm->ExtPA, pDM_Odm->ExtLNA));
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("phydm_init_hw_info_by_rfe_type_8822b(): 5G PA type (%d), 5G LNA type (%d), 2G PA type (%d), 2G LNA type (%d)\n", pDM_Odm->TypeAPA, pDM_Odm->TypeALNA, pDM_Odm->TypeGPA, pDM_Odm->TypeGLNA));
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG,
+		("%s: RFE type (%d), Board type (0x%x), Package type (%d)\n", __func__, p_dm->rfe_type, p_dm->board_type, p_dm->package_type));
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG,
+		("%s: 5G ePA (%d), 5G eLNA (%d), 2G ePA (%d), 2G eLNA (%d)\n", __func__, p_dm->ext_pa_5g, p_dm->ext_lna_5g, p_dm->ext_pa, p_dm->ext_lna));
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG,
+		("%s: 5G PA type (%d), 5G LNA type (%d), 2G PA type (%d), 2G LNA type (%d)\n", __func__, p_dm->type_apa, p_dm->type_alna, p_dm->type_gpa, p_dm->type_glna));
+
+#endif	/*PHYDM_FW_API_FUNC_ENABLE_8822B == 1*/
 }
 
-s4Byte
+__iram_odm_func__
+s32
 phydm_get_condition_number_8822B(
-	IN	PDM_ODM_T				pDM_Odm
+	struct PHY_DM_STRUCT				*p_dm
 )
 {
-	s4Byte	ret_val;
+	s32	ret_val;
 
-	ODM_SetBBReg( pDM_Odm, 0x1988, BIT22, 0x1);
-	ret_val = (s4Byte)ODM_GetBBReg(pDM_Odm, 0xf84, (BIT17|BIT16|bMaskLWord));
+	odm_set_bb_reg(p_dm, 0x1988, BIT(22), 0x1);
+	ret_val = (s32)odm_get_bb_reg(p_dm, 0xf84, (BIT(17) | BIT(16) | MASKLWORD));
 
 	if (bw_8822b == 0) {
 		ret_val = ret_val << (8 - 4);
@@ -650,313 +994,743 @@ phydm_get_condition_number_8822B(
 		ret_val = ret_val << (6 - 4);
 		ret_val = ret_val / 52;
 	}
-	
+
 	return ret_val;
 }
-
 
 /* ======================================================================== */
 
 /* ======================================================================== */
 /* These following functions can be used by driver*/
 
-u4Byte
+__iram_odm_func__
+u32
 config_phydm_read_rf_reg_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E		RFPath,
-	IN	u4Byte					RegAddr,
-	IN	u4Byte					BitMask
-	)
+	struct PHY_DM_STRUCT		*p_dm,
+	enum rf_path		path,
+	u32					reg_addr,
+	u32					bit_mask
+)
 {
-	u4Byte	Readback_Value, Direct_Addr;
-	u4Byte	offset_readRF[2] = {0x2800, 0x2c00};
-	u4Byte	power_RF[2] = {0x1c, 0xec};
+	u32	readback_value, direct_addr;
+	u32	offset_read_rf[2] = {0x2800, 0x2c00};
 
 	/* Error handling.*/
-	if (RFPath > ODM_RF_PATH_B) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_read_rf_reg_8822b(): unsupported path (%d)\n", RFPath));
-		return INVALID_RF_DATA;
-	}
-
-	/*  Error handling. Check if RF power is enable or not */
-	/*  0xffffffff means RF power is disable */
-	if (ODM_GetMACReg(pDM_Odm, power_RF[RFPath], bMaskByte3) != 0x7) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_read_rf_reg_8822b(): Read fail, RF is disabled\n"));
+	if (path > RF_PATH_B) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_read_rf_reg_8822b(): unsupported path (%d)\n", path));
 		return INVALID_RF_DATA;
 	}
 
 	/* Calculate offset */
-	RegAddr &= 0xff;
-	Direct_Addr = offset_readRF[RFPath] + (RegAddr << 2);
+	reg_addr &= 0xff;
+	direct_addr = offset_read_rf[path] + (reg_addr << 2);
 
 	/* RF register only has 20bits */
-	BitMask &= bRFRegOffsetMask;
+	bit_mask &= RFREGOFFSETMASK;
 
 	/* Read RF register directly */
-	Readback_Value = ODM_GetBBReg(pDM_Odm, Direct_Addr, BitMask);
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_read_rf_reg_8822b(): RF-%d 0x%x = 0x%x, bit mask = 0x%x\n", 
-		RFPath, RegAddr, Readback_Value, BitMask));
-	return Readback_Value;
+	readback_value = odm_get_bb_reg(p_dm, direct_addr, bit_mask);
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_read_rf_reg_8822b(): RF-%d 0x%x = 0x%x, bit mask = 0x%x\n",
+			path, reg_addr, readback_value, bit_mask));
+	return readback_value;
 }
 
-BOOLEAN
+__iram_odm_func__
+boolean
 config_phydm_write_rf_reg_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E		RFPath,
-	IN	u4Byte					RegAddr,
-	IN	u4Byte					BitMask,
-	IN	u4Byte					Data
-	)
+	struct PHY_DM_STRUCT				*p_dm,
+	enum rf_path		path,
+	u32					reg_addr,
+	u32					bit_mask,
+	u32					data
+)
 {
-	u4Byte	DataAndAddr = 0, Data_original = 0;
-	u4Byte	offset_writeRF[2] = {0xc90, 0xe90};
-	u4Byte	power_RF[2] = {0x1c, 0xec};
-	u1Byte	BitShift;
+	u32	data_and_addr = 0, data_original = 0;
+	u32	offset_write_rf[2] = {0xc90, 0xe90};
 
 	/* Error handling.*/
-	if (RFPath > ODM_RF_PATH_B) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_rf_reg_8822b(): unsupported path (%d)\n", RFPath));
-		return FALSE;
+	if (path > RF_PATH_B) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_write_rf_reg_8822b(): unsupported path (%d)\n", path));
+		return false;
 	}
 
 	/* Read RF register content first */
-	RegAddr &= 0xff;
-	BitMask = BitMask & bRFRegOffsetMask;
+	reg_addr &= 0xff;
+	bit_mask = bit_mask & RFREGOFFSETMASK;
 
-	if (BitMask != bRFRegOffsetMask) {
-		Data_original = config_phydm_read_rf_reg_8822b(pDM_Odm, RFPath, RegAddr, bRFRegOffsetMask);
+	if (bit_mask != RFREGOFFSETMASK) {
+		data_original = config_phydm_read_rf_reg_8822b(p_dm, path, reg_addr, RFREGOFFSETMASK);
 
 		/* Error handling. RF is disabled */
-		if (config_phydm_read_rf_check_8822b(Data_original) == FALSE) {
-			ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_rf_reg_8822b(): Write fail, RF is disable\n"));
-			return FALSE;
+		if (config_phydm_read_rf_check_8822b(data_original) == false) {
+			PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_write_rf_reg_8822b(): Write fail, RF is disable\n"));
+			return false;
 		}
 
 		/* check bit mask */
-		if (BitMask != 0xfffff) {
-			for (BitShift = 0; BitShift <= 19; BitShift++) {
-				if (((BitMask >> BitShift) & 0x1) == 1)
-					break;
-			}
-			Data = ((Data_original) & (~BitMask)) | (Data << BitShift);
-		}
-	} else if (ODM_GetMACReg(pDM_Odm, power_RF[RFPath], bMaskByte3) != 0x7) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_rf_reg_8822b(): Write fail, RF is disabled\n"));
-		return FALSE;
+		data = phydm_check_bit_mask(bit_mask, data_original, data);
 	}
 
 	/* Put write addr in [27:20]  and write data in [19:00] */
-	DataAndAddr = ((RegAddr<<20) | (Data&0x000fffff)) & 0x0fffffff;	
+	data_and_addr = ((reg_addr << 20) | (data & 0x000fffff)) & 0x0fffffff;
 
-	/* Write Operation */
-	ODM_SetBBReg(pDM_Odm, offset_writeRF[RFPath], bMaskDWord, DataAndAddr);
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_rf_reg_8822b(): RF-%d 0x%x = 0x%x (original: 0x%x), bit mask = 0x%x\n", 
-		RFPath, RegAddr, Data, Data_original, BitMask));
-	return TRUE;
+	/* Write operation */
+	odm_set_bb_reg(p_dm, offset_write_rf[path], MASKDWORD, data_and_addr);
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_write_rf_reg_8822b(): RF-%d 0x%x = 0x%x (original: 0x%x), bit mask = 0x%x\n",
+			path, reg_addr, data, data_original, bit_mask));
+
+#if (defined(CONFIG_RUN_IN_DRV))
+	if (p_dm->support_interface == ODM_ITRF_PCIE)
+		ODM_delay_us(13);
+#elif (defined(CONFIG_RUN_IN_FW))
+	ODM_delay_us(13);
+#endif
+
+	return true;
 }
 
-BOOLEAN
+__iram_odm_func__
+boolean
 config_phydm_write_txagc_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u4Byte					PowerIndex,
-	IN	ODM_RF_RADIO_PATH_E		Path,	
-	IN	u1Byte					HwRate
-	)
+	struct PHY_DM_STRUCT				*p_dm,
+	u32					power_index,
+	enum rf_path		path,
+	u8					hw_rate
+)
 {
-	u4Byte	offset_txagc[2] = {0x1d00, 0x1d80};
-	u1Byte	rate_idx = (HwRate & 0xfc);
+	u32	offset_txagc[2] = {0x1d00, 0x1d80};
+	u8	rate_idx = (hw_rate & 0xfc);
 
 	/* Input need to be HW rate index, not driver rate index!!!! */
 
-        if (pDM_Odm->bDisablePhyApi) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_txagc_8822b(): disable PHY API for debug!!\n"));
-		return TRUE;
+	if (p_dm->is_disable_phy_api) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_write_txagc_8822b(): disable PHY API for debug!!\n"));
+		return true;
 	}
 
-	/* Error handling  */
-	if ((Path > ODM_RF_PATH_B) || (HwRate > 0x53)) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_txagc_8822b(): unsupported path (%d)\n", Path));
-		return FALSE;
+	/* Error handling */
+	if ((path > RF_PATH_B) || (hw_rate > 0x53)) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_write_txagc_8822b(): unsupported path (%d)\n", path));
+		return false;
 	}
 
 	/* driver need to construct a 4-byte power index */
-	ODM_SetBBReg(pDM_Odm, (offset_txagc[Path] + rate_idx), bMaskDWord, PowerIndex);
+	odm_set_bb_reg(p_dm, (offset_txagc[path] + rate_idx), MASKDWORD, power_index);
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_write_txagc_8822b(): Path-%d Rate index 0x%x (0x%x) = 0x%x\n", 
-		Path, HwRate, (offset_txagc[Path] + HwRate), PowerIndex));
-	return TRUE;
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_write_txagc_8822b(): path-%d rate index 0x%x (0x%x) = 0x%x\n",
+		path, hw_rate, (offset_txagc[path] + hw_rate), power_index));
+	return true;
+
 }
 
-u1Byte
+__iram_odm_func__
+u8
 config_phydm_read_txagc_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_RF_RADIO_PATH_E		Path,
-	IN	u1Byte					HwRate
-	)
+	struct PHY_DM_STRUCT				*p_dm,
+	enum rf_path		path,
+	u8					hw_rate
+)
 {
-	u1Byte	readBack_data;
+#if (PHYDM_FW_API_FUNC_ENABLE_8822B == 1)
+	u8	read_back_data;
 
 	/* Input need to be HW rate index, not driver rate index!!!! */
 
-	/* Error handling  */
-	if ((Path > ODM_RF_PATH_B) || (HwRate > 0x53)) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_read_txagc_8822b(): unsupported path (%d)\n", Path));
+	/* Error handling */
+	if ((path > RF_PATH_B) || (hw_rate > 0x53)) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_read_txagc_8822b(): unsupported path (%d)\n", path));
 		return INVALID_TXAGC_DATA;
 	}
 
 	/* Disable TX AGC report */
-	ODM_SetBBReg(pDM_Odm, 0x1998, BIT16, 0x0);							/* need to check */
+	odm_set_bb_reg(p_dm, 0x1998, BIT(16), 0x0);							/* need to check */
 
 	/* Set data rate index (bit0~6) and path index (bit7) */
-	ODM_SetBBReg(pDM_Odm, 0x1998, bMaskByte0, (HwRate|(Path << 7)));
+	odm_set_bb_reg(p_dm, 0x1998, MASKBYTE0, (hw_rate | (path << 7)));
 
 	/* Enable TXAGC report */
-	ODM_SetBBReg(pDM_Odm, 0x1998, BIT16, 0x1);
+	odm_set_bb_reg(p_dm, 0x1998, BIT(16), 0x1);
 
 	/* Read TX AGC report */
-	readBack_data = (u1Byte)ODM_GetBBReg(pDM_Odm, 0xd30, 0x7f0000);
+	read_back_data = (u8)odm_get_bb_reg(p_dm, 0xd30, 0x7f0000);
 
 	/* Driver have to disable TXAGC report after reading TXAGC (ref. user guide v11) */
-	ODM_SetBBReg(pDM_Odm, 0x1998, BIT16, 0x0);	
-	
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_read_txagc_8822b(): Path-%d rate index 0x%x = 0x%x\n", Path, HwRate, readBack_data));
-	return readBack_data;
+	odm_set_bb_reg(p_dm, 0x1998, BIT(16), 0x0);
+
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_read_txagc_8822b(): path-%d rate index 0x%x = 0x%x\n", path, hw_rate, read_back_data));
+	return read_back_data;
+#else
+	return 0;
+#endif
 }
 
-BOOLEAN
-config_phydm_switch_band_8822b(	
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u1Byte					central_ch
-	)
+__iram_odm_func__
+void
+phydm_dynamic_spur_det_eliminate(
+	struct PHY_DM_STRUCT				*p_dm
+)
 {
-	u4Byte		rf_reg18;
-	BOOLEAN		rf_reg_status = TRUE;
+#if (PHYDM_FW_API_FUNC_ENABLE_8822B == 1)
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_band_8822b()======================>\n"));	
+	u32		freq_2g[FREQ_PT_2G_NUM] = {0xFC67, 0xFC27, 0xFFE6, 0xFFA6, 0xFC67, 0xFCE7, 0xFCA7, 0xFC67, 0xFC27, 0xFFE6, 0xFFA6, 0xFF66, 0xFF26, 0xFCE7};
+	u32		freq_5g[FREQ_PT_5G_NUM] = {0xFFC0, 0xFFC0, 0xFC81, 0xFC81, 0xFC41, 0xFC40, 0xFF80, 0xFF80, 0xFF40, 0xFD42};
+	u32		freq_2g_n1[FREQ_PT_2G_NUM] = {0}, freq_2g_p1[FREQ_PT_2G_NUM] = {0};
+	u32		freq_5g_n1[FREQ_PT_5G_NUM] = {0}, freq_5g_p1[FREQ_PT_5G_NUM] = {0};
+	u32		freq_pt_2g_final = 0, freq_pt_5g_final = 0, freq_pt_2g_b_final = 0, freq_pt_5g_b_final = 0;
+	u32		max_ret_psd_final = 0, max_ret_psd_b_final = 0;
+	u32		max_ret_psd_2nd[PSD_SMP_NUM] = {0}, max_ret_psd_b_2nd[PSD_SMP_NUM] = {0};
+	u32		psd_set[PSD_VAL_NUM] = {0}, psd_set_B[PSD_VAL_NUM] = {0};
+	u32		rank_psd_index_in[PSD_VAL_NUM] = {0}, rank_sample_index_in[PSD_SMP_NUM] = {0};
+	u32		rank_psd_index_out[PSD_VAL_NUM] = {0};
+	u32		rank_sample_index_out[PSD_SMP_NUM] = {0};
+	u32		reg_910_15_12 = 0;
+	u8		j = 0, k = 0, threshold_nbi = 0x8D, threshold_csi = 0x8D;
+	u8		idx = 0, set_result_nbi = PHYDM_SET_NO_NEED, set_result_csi = PHYDM_SET_NO_NEED;
+	boolean	s_dopsd = false, s_donbi_a = false, s_docsi = false, s_donbi_b = false;
 
-	if (pDM_Odm->bDisablePhyApi) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_band_8822b(): disable PHY API for debug!!\n"));
-		return TRUE;
+	/* Reset NBI/CSI everytime after changing channel/BW/band  */
+	odm_set_bb_reg(p_dm, 0x874, BIT(0), 0x0);
+	odm_set_bb_reg(p_dm, 0x880, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x884, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x888, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x88c, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x890, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x894, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x898, MASKDWORD, 0);
+	odm_set_bb_reg(p_dm, 0x89c, MASKDWORD, 0);
+
+	/* 2G Channel Setting > 20M: 5, 6, 7, 8, 13; 40M: 3~11 */
+	if ((*p_dm->p_channel >= 1) && (*p_dm->p_channel <= 14)) {
+		if (*p_dm->p_band_width == CHANNEL_WIDTH_20) {
+
+			if (*p_dm->p_channel >= 5 && *p_dm->p_channel <= 8)
+				idx = *p_dm->p_channel - 5;
+			else if (*p_dm->p_channel == 13)
+				idx = 4;
+			else
+				idx = 16;
+		} else {
+
+			if (*p_dm->p_channel >= 3 && *p_dm->p_channel <= 11)
+				idx = *p_dm->p_channel + 2;
+			else
+				idx = 16;
+		}
+	} else { /* 5G Channel Setting > 20M: 153, 161; 40M: 54, 118, 151, 159; 80M: 58, 122, 155, 155 */
+		switch (*p_dm->p_channel) {
+		case 153:
+			idx = 0;
+			break;
+		case 161:
+			idx = 1;
+			break;
+		case 54:
+			idx = 2;
+			break;
+		case 118:
+			idx = 3;
+			break;
+		case 151:
+			idx = 4;
+			break;
+		case 159:
+			idx = 5;
+			break;
+		case 58:
+			idx = 6;
+			break;
+		case 122:
+			idx = 7;
+			break;
+		case 155:
+			idx = 8;
+			break;
+		default:
+			idx = 16;
+			break;
+		}
 	}
 
-	rf_reg18 = config_phydm_read_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x18, bRFRegOffsetMask);
+	if (idx <= 16) {
+		s_dopsd = true;
+	} else {
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("[Return Point] Idx Is Exceed, Not Support Dynamic Spur Detection and Eliminator\n"));
+		return;
+	}
+	
+	PHYDM_DBG(p_dm, ODM_COMP_API, ("[%s] idx = %d, BW = %d, Channel = %d\n", __func__, idx, *p_dm->p_band_width, *p_dm->p_channel));
+
+	for (k = 0; k < FREQ_PT_2G_NUM; k++) {
+		freq_2g_n1[k] = freq_2g[k] - 1;
+		freq_2g_p1[k] = freq_2g[k] + 1;
+	}
+
+	for (k = 0; k < FREQ_PT_5G_NUM; k++) {
+		freq_5g_n1[k] = freq_5g[k] - 1;
+		freq_5g_p1[k] = freq_5g[k] + 1;
+	}
+
+	if ((s_dopsd == true) && (idx <= 13)) {
+		for (k = 0; k < PSD_SMP_NUM; k++) {
+			if (k == 0) {
+				freq_pt_2g_final = freq_2g_n1[idx];
+				freq_pt_2g_b_final = freq_2g_n1[idx] | BIT(16);
+				if (idx <= 10) {
+					freq_pt_5g_final = freq_5g_n1[idx];
+					freq_pt_5g_b_final = freq_5g_n1[idx] | BIT(16);
+				}
+			} else if (k == 1) {
+				freq_pt_2g_final = freq_2g[idx];
+				freq_pt_2g_b_final = freq_2g[idx] | BIT(16);
+				if (idx <= 10) {
+					freq_pt_5g_final = freq_5g[idx];
+					freq_pt_5g_b_final = freq_5g[idx] | BIT(16);
+				}
+			} else if (k == 2) {
+				freq_pt_2g_final = freq_2g_p1[idx];
+				freq_pt_2g_b_final = freq_2g_p1[idx] | BIT(16);
+				if (idx <= 10) {
+					freq_pt_5g_final = freq_5g_p1[idx];
+					freq_pt_5g_b_final = freq_5g_p1[idx] | BIT(16);
+				}
+			}
+
+			for (j = 0; j < PSD_VAL_NUM; j++) {
+				odm_set_bb_reg(p_dm, 0xc00, MASKBYTE0, 0x4);/* disable 3-wire, path-A */
+				odm_set_bb_reg(p_dm, 0xe00, MASKBYTE0, 0x4);/* disable 3-wire, path-B */
+				reg_910_15_12 = odm_get_bb_reg(p_dm, 0x910, (BIT(15) | BIT(14) | BIT(13) | BIT(12)));
+
+				if (p_dm->rx_ant_status & BB_PATH_A) {
+					odm_set_bb_reg(p_dm, 0x808, MASKBYTE0, (((BB_PATH_A)<<4) | BB_PATH_A));/*path-A*/
+
+					if ((*p_dm->p_channel >= 1) && (*p_dm->p_channel <= 14))
+						odm_set_bb_reg(p_dm, 0x910, MASKDWORD, BIT(22) | freq_pt_2g_final);/* Start PSD */
+					else
+						odm_set_bb_reg(p_dm, 0x910, MASKDWORD, BIT(22) | freq_pt_5g_final);/* Start PSD */
+
+					ODM_delay_us(500);
+
+					psd_set[j] = odm_get_bb_reg(p_dm, 0xf44, MASKLWORD);
+
+					odm_set_bb_reg(p_dm, 0x910, BIT(22), 0x0);/* turn off PSD */
+				}
+
+				if (p_dm->rx_ant_status & BB_PATH_B) {
+					odm_set_bb_reg(p_dm, 0x808, MASKBYTE0, (((BB_PATH_B)<<4) | BB_PATH_B));/*path-B*/
+
+					if ((*p_dm->p_channel > 0) && (*p_dm->p_channel <= 14))
+						odm_set_bb_reg(p_dm, 0x910, MASKDWORD, BIT(22) | freq_pt_2g_b_final);/* Start PSD */
+					else
+						odm_set_bb_reg(p_dm, 0x910, MASKDWORD, BIT(22) | freq_pt_5g_b_final);/* Start PSD */
+
+					ODM_delay_us(500);
+
+					psd_set_B[j] = odm_get_bb_reg(p_dm, 0xf44, MASKLWORD);
+
+					odm_set_bb_reg(p_dm, 0x910, BIT(22), 0x0);/* turn off PSD */
+				}
+
+				odm_set_bb_reg(p_dm, 0xc00, MASKBYTE0, 0x7);/*eanble 3-wire*/
+				odm_set_bb_reg(p_dm, 0xe00, MASKBYTE0, 0x7);
+				odm_set_bb_reg(p_dm, 0x910, (BIT(15) | BIT(14) | BIT(13) | BIT(12)), reg_910_15_12);
+
+				odm_set_bb_reg(p_dm, 0x808, MASKBYTE0, (((p_dm->rx_ant_status)<<4) | p_dm->rx_ant_status));
+
+				/* Toggle IGI to let RF enter RX mode, because BB doesn't send 3-wire command when RX path is enable */
+				phydm_igi_toggle_8822b(p_dm);
+
+			}
+			if (p_dm->rx_ant_status & BB_PATH_A) {
+				phydm_seq_sorting(p_dm, psd_set, rank_psd_index_in, rank_psd_index_out, PSD_VAL_NUM);
+				max_ret_psd_2nd[k] = psd_set[0];
+			}
+			if (p_dm->rx_ant_status & BB_PATH_B) {
+				phydm_seq_sorting(p_dm, psd_set_B, rank_psd_index_in, rank_psd_index_out, PSD_VAL_NUM);
+				max_ret_psd_b_2nd[k] = psd_set_B[0];
+			}
+		}
+
+		if (p_dm->rx_ant_status & BB_PATH_A) {
+			phydm_seq_sorting(p_dm, max_ret_psd_2nd, rank_sample_index_in, rank_sample_index_out, PSD_SMP_NUM);
+			max_ret_psd_final = max_ret_psd_2nd[0];
+
+			if (max_ret_psd_final >= threshold_nbi)
+				s_donbi_a = true;
+			else
+				s_donbi_a = false;
+		}
+		if (p_dm->rx_ant_status & BB_PATH_B) {
+			phydm_seq_sorting(p_dm, max_ret_psd_b_2nd, rank_sample_index_in, rank_sample_index_out, PSD_SMP_NUM);
+			max_ret_psd_b_final = max_ret_psd_b_2nd[0];
+
+			if (max_ret_psd_b_final >= threshold_nbi)
+				s_donbi_b = true;
+			else
+				s_donbi_b = false;
+		}
+
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("[%s] max_ret_psd_final = %d, max_ret_psd_b_final = %d\n", __func__, max_ret_psd_final, max_ret_psd_b_final));
+
+		if ((max_ret_psd_final >= threshold_csi) || (max_ret_psd_b_final >= threshold_csi))
+			s_docsi = true;
+		else
+			s_docsi = false;
+
+	} else {
+		PHYDM_DBG(p_dm, ODM_COMP_API, ("[Return Point] s_dopsd is flase, Not Support Dynamic Spur Detection and Eliminator\n"));
+		return;
+	}
+
+	if (s_donbi_a == true || s_donbi_b == true) {
+		if (*p_dm->p_band_width == CHANNEL_WIDTH_20) {
+			if (*p_dm->p_channel == 153)
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 5760, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 161)
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 5800, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel >= 5 && *p_dm->p_channel <= 8)
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 2440, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 13)
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 2480, PHYDM_DONT_CARE);
+			else
+				set_result_nbi = PHYDM_SET_NO_NEED;
+		} else if (*p_dm->p_band_width == CHANNEL_WIDTH_40) {
+			if (*p_dm->p_channel == 54) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5280, PHYDM_DONT_CARE);
+			} else if (*p_dm->p_channel == 118) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5600, PHYDM_DONT_CARE);
+			} else if (*p_dm->p_channel == 151) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5760, PHYDM_DONT_CARE);
+			} else if (*p_dm->p_channel == 159) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5800, PHYDM_DONT_CARE);
+				/* 2.4G */
+			} else if ((*p_dm->p_channel >= 4) && (*p_dm->p_channel <= 6)) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 2440, PHYDM_DONT_CARE);
+			} else if (*p_dm->p_channel == 11) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 2480, PHYDM_DONT_CARE);
+			} else
+				set_result_nbi = PHYDM_SET_NO_NEED;
+		} else if (*p_dm->p_band_width == CHANNEL_WIDTH_80) {
+			if (*p_dm->p_channel == 58) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 80, 5280, PHYDM_DONT_CARE);
+			} else if (*p_dm->p_channel == 122) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 80, 5600, PHYDM_DONT_CARE);
+			} else if (*p_dm->p_channel == 155) {
+				set_result_nbi = phydm_nbi_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 80, 5760, PHYDM_DONT_CARE);
+			} else
+				set_result_nbi = PHYDM_SET_NO_NEED;
+		} else
+			set_result_nbi = PHYDM_SET_NO_NEED;
+	}
+
+	/* Modify CCA parameters due to NBI */
+	if (((p_dm->rfe_type == 15) || (p_dm->rfe_type == 16)) && (s_donbi_a == true || s_donbi_b == true))
+		odm_set_bb_reg(p_dm, 0x82c, 0xff000, 0x86);
+	else
+		odm_set_bb_reg(p_dm, 0x82c, 0xff000, 0x97);
+
+	if ((s_donbi_a == true || s_donbi_b == true) && (p_dm->rfe_type == 12)) {
+		if (*p_dm->p_band_width == CHANNEL_WIDTH_20) {
+			if (*p_dm->p_channel >= 5 && *p_dm->p_channel <= 7)
+				odm_set_bb_reg(p_dm, 0x82c, 0xf000, 0x3);
+		}
+	} else {
+		odm_set_bb_reg(p_dm, 0x82c, 0xf000, 0x7);
+	}
+
+	if (s_docsi == true) {
+		if (*p_dm->p_band_width == CHANNEL_WIDTH_20) {
+			if (*p_dm->p_channel == 153)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 5760, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 161)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 5800, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel >= 5 && *p_dm->p_channel <= 8)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 2440, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 13)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 20, 2480, PHYDM_DONT_CARE);
+			else
+				set_result_csi = PHYDM_SET_NO_NEED;
+		} else if (*p_dm->p_band_width == CHANNEL_WIDTH_40) {
+			if (*p_dm->p_channel == 54)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5280, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 118)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5600, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 151)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5760, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 159)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 5800, PHYDM_DONT_CARE);
+			else if ((*p_dm->p_channel >= 3) && (*p_dm->p_channel <= 10))
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 2440, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 11)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 40, 2480, PHYDM_DONT_CARE);
+			else
+				set_result_csi = PHYDM_SET_NO_NEED;
+		} else if (*p_dm->p_band_width == CHANNEL_WIDTH_80) {
+			if (*p_dm->p_channel == 58)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 80, 5280, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 122)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 80, 5600, PHYDM_DONT_CARE);
+			else if (*p_dm->p_channel == 155)
+				set_result_csi = phydm_csi_mask_setting(p_dm, FUNC_ENABLE, *p_dm->p_channel, 80, 5760, PHYDM_DONT_CARE);
+			else
+				set_result_csi = PHYDM_SET_NO_NEED;
+		} else
+			set_result_csi = PHYDM_SET_NO_NEED;
+	}
+
+#endif	/*PHYDM_SPUR_CANCELL_ENABLE_8822B == 1*/
+}
+
+__iram_odm_func__
+void phydm_spur_calibration_8822b(struct PHY_DM_STRUCT *p_dm)
+{
+	if (*p_dm->p_is_scan_in_process)
+		return;
+
+#ifdef CONFIG_8822B_SPUR_CALIBRATION
+		odm_set_bb_reg(p_dm, 0x87c, BIT(13), 0x0);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(28), 0x0);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(28), 0x0);
+		
+		phydm_dynamic_spur_det_eliminate(p_dm);
+		
+		PHYDM_DBG(p_dm, ODM_COMP_API,
+			  ("Enable spur eliminator at normal\n"));
+#else
+		PHYDM_DBG(p_dm, ODM_COMP_API,
+			  ("NBI and CSI notch at normal\n"));
+#endif
+}
+
+__iram_odm_func__
+boolean
+config_phydm_switch_band_8822b(
+	struct PHY_DM_STRUCT				*p_dm,
+	u8					central_ch
+)
+{
+	u32		rf_reg18;
+	boolean		rf_reg_status = true;
+	u32		reg_8;
+
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_band_8822b()======================>\n"));
+
+	if (p_dm->is_disable_phy_api) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_band_8822b(): disable PHY API for debug!!\n"));
+		return true;
+	}
+
+	rf_reg18 = config_phydm_read_rf_reg_8822b(p_dm, RF_PATH_A, 0x18, RFREGOFFSETMASK);
 	rf_reg_status = rf_reg_status & config_phydm_read_rf_check_8822b(rf_reg18);
 
 	if (central_ch <= 14) {
 		/* 2.4G */
 
 		/* Enable CCK block */
-		ODM_SetBBReg(pDM_Odm, 0x808, BIT28, 0x1);
+		odm_set_bb_reg(p_dm, 0x808, BIT(28), 0x1);
 
 		/* Disable MAC CCK check */
-		ODM_SetBBReg(pDM_Odm, 0x454, BIT7, 0x0);
+		odm_set_bb_reg(p_dm, 0x454, BIT(7), 0x0);
 
 		/* Disable BB CCK check */
-		ODM_SetBBReg(pDM_Odm, 0xa80, BIT18, 0x0);
+		odm_set_bb_reg(p_dm, 0xa80, BIT(18), 0x0);
 
 		/*CCA Mask*/
-		ODM_SetBBReg(pDM_Odm, 0x814, 0x0000FC00, 15); /*default value*/
+		odm_set_bb_reg(p_dm, 0x814, 0x0000FC00, 15); /*default value*/
 
 		/* RF band */
-		rf_reg18 = (rf_reg18 & (~(BIT16|BIT9|BIT8)));
+		rf_reg18 = (rf_reg18 & (~(BIT(16) | BIT(9) | BIT(8))));
+
+		/* RxHP dynamic control */
+		/* QFN eFEM RxHP are always low at 2G */
+		reg_8 = odm_get_bb_reg(p_dm, 0x19a8, BIT(31));
+		
+		/* SoML on */
+		if (reg_8 == 0x1) {
+			odm_set_bb_reg(p_dm, 0xc04, (BIT(18)|BIT(21)), 0x0);
+			odm_set_bb_reg(p_dm, 0xe04, (BIT(18)|BIT(21)), 0x0);
+			if ((p_dm->rfe_type == 3) || (p_dm->rfe_type == 5) || (p_dm->rfe_type == 8) || (p_dm->rfe_type == 17)) {
+				odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108492);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(19), 0x0);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x1);
+			} else {
+				odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108000);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(19), 0x0);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x0);
+			}
+		}
+
+		/* SoML off */
+		if (reg_8 == 0x0) {
+			odm_set_bb_reg(p_dm, 0xc04, (BIT(18)|BIT(21)), 0x0); 
+			odm_set_bb_reg(p_dm, 0xe04, (BIT(18)|BIT(21)), 0x0); 
+			if ((p_dm->rfe_type == 1) || (p_dm->rfe_type == 6) || (p_dm->rfe_type == 7) || (p_dm->rfe_type == 9)) {
+				odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108000);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(19), 0x0);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x0);
+			} else {
+				odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108492);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(19), 0x0);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x1);
+			}
+		}
+
+		if (p_dm->rfe_type == 12) {
+			odm_set_rf_reg(p_dm, RF_PATH_A, 0xB3, RFREGOFFSETMASK, 0x3C360);
+			odm_set_rf_reg(p_dm, RF_PATH_B, 0xB3, RFREGOFFSETMASK, 0x3C360);
+		}
 	} else if (central_ch > 35) {
 		/* 5G */
 
 		/* Enable BB CCK check */
-		ODM_SetBBReg(pDM_Odm, 0xa80, BIT18, 0x1);
-		
+		odm_set_bb_reg(p_dm, 0xa80, BIT(18), 0x1);
+
 		/* Enable CCK check */
-		ODM_SetBBReg(pDM_Odm, 0x454, BIT7, 0x1);
+		odm_set_bb_reg(p_dm, 0x454, BIT(7), 0x1);
 
 		/* Disable CCK block */
-		ODM_SetBBReg(pDM_Odm, 0x808, BIT28, 0x0);
+		odm_set_bb_reg(p_dm, 0x808, BIT(28), 0x0);
 
 		/*CCA Mask*/
-		ODM_SetBBReg(pDM_Odm, 0x814, 0x0000FC00, 15); /*default value*/
-		//ODM_SetBBReg(pDM_Odm, 0x814, 0x0000FC00, 34); /*CCA mask = 13.6us*/
+	#if (DM_ODM_SUPPORT_TYPE == ODM_AP)
+		odm_set_bb_reg(p_dm, 0x814, 0x0000FC00, 34); /*CCA mask = 13.6us*/
+	#else	
+		if ((!p_dm->wifi_test))
+			odm_set_bb_reg(p_dm, 0x814, 0x0000FC00, 34); /*CCA mask = 13.6us*/
+		else
+			odm_set_bb_reg(p_dm, 0x814, 0x0000FC00, 15); /*default value*/
+	#endif
 
 		/* RF band */
-		rf_reg18 = (rf_reg18 & (~(BIT16|BIT9|BIT8)));
-		rf_reg18 = (rf_reg18|BIT8|BIT16);
+		rf_reg18 = (rf_reg18 & (~(BIT(16) | BIT(9) | BIT(8))));
+		rf_reg18 = (rf_reg18 | BIT(8) | BIT(16));
+
+		/* RxHP dynamic control */
+		reg_8 = odm_get_bb_reg(p_dm, 0x19a8, BIT(31));
+
+		/* SoML on */
+		if (reg_8 == 0x1) {
+			odm_set_bb_reg(p_dm, 0xc04, (BIT(18)|BIT(21)), 0x0);
+			odm_set_bb_reg(p_dm, 0xe04, (BIT(18)|BIT(21)), 0x0);
+			odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108000);
+			odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x0);
+		}
+
+		/* SoML off */
+		if (reg_8 == 0x0) {
+			odm_set_bb_reg(p_dm, 0xc04, (BIT(18)|BIT(21)), 0x0); 
+			odm_set_bb_reg(p_dm, 0xe04, (BIT(18)|BIT(21)), 0x0); 
+			if ((p_dm->rfe_type == 1) || (p_dm->rfe_type == 6) || (p_dm->rfe_type == 7) || (p_dm->rfe_type == 9)) {
+				odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108000);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(19), 0x0);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x0);
+			} else {
+				odm_set_bb_reg(p_dm, 0x8cc, MASKDWORD, 0x08108492);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(19), 0x0);
+				odm_set_bb_reg(p_dm, 0x8d8, BIT(27), 0x1);
+			}
+		}
+
+		if (p_dm->rfe_type == 12) {
+			odm_set_rf_reg(p_dm, RF_PATH_A, 0xB3, RFREGOFFSETMASK, 0xFC760);
+			odm_set_rf_reg(p_dm, RF_PATH_B, 0xB3, RFREGOFFSETMASK, 0xFC760);
+		}
 	} else {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_band_8822b(): Fail to switch band (ch: %d)\n", central_ch));
-		return FALSE;
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_band_8822b(): Fail to switch band (ch: %d)\n", central_ch));
+		return false;
 	}
 
-	rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x18, bRFRegOffsetMask, rf_reg18);
+	odm_set_rf_reg(p_dm, RF_PATH_A, 0x18, RFREGOFFSETMASK, rf_reg18);
 
-	if (pDM_Odm->RFType > ODM_1T1R)
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_B, 0x18, bRFRegOffsetMask, rf_reg18);
+	if (p_dm->rf_type > RF_1T1R)
+		odm_set_rf_reg(p_dm, RF_PATH_B, 0x18, RFREGOFFSETMASK, rf_reg18);
 
-	if (phydm_rfe_8822b(pDM_Odm, central_ch) == FALSE)
-		return FALSE;
+	if (phydm_rfe_8822b(p_dm, central_ch) == false)
+		return false;
 
-	if (rf_reg_status == FALSE) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_band_8822b(): Fail to switch band (ch: %d), because writing RF register is fail\n", central_ch));	
-		return FALSE;
+	if (rf_reg_status == false) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_band_8822b(): Fail to switch band (ch: %d), because writing RF register is fail\n", central_ch));
+		return false;
 	}
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_band_8822b(): Success to switch band (ch: %d)\n", central_ch));	
-	return TRUE;
+	/* Dynamic spur detection by PSD and NBI/CSI mask */
+	if (*(p_dm->p_mp_mode)) {
+		/* reset NBI */
+		odm_set_bb_reg(p_dm, 0x87c, BIT(13), 0x0);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(28), 0x0);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(28), 0x0);
+		phydm_dynamic_spur_det_eliminate(p_dm);
+	} else {
+		/* Normal mode */
+		phydm_spur_calibration_8822b(p_dm);
+	}
+	
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_band_8822b(): Success to switch band (ch: %d)\n", central_ch));
+	return true;
 }
 
-BOOLEAN
-config_phydm_switch_channel_8822b(	
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u1Byte					central_ch
-	)
+__iram_odm_func__
+boolean
+config_phydm_switch_channel_8822b(
+	struct PHY_DM_STRUCT				*p_dm,
+	u8					central_ch
+)
 {
-	pDIG_T		pDM_DigTable = &pDM_Odm->DM_DigTable;
-	u4Byte		rf_reg18 = 0, rf_regB8 = 0, rf_regBE = 0xff;
-	BOOLEAN		rf_reg_status = TRUE;
-	u1Byte		low_band[15] = {0x7, 0x6, 0x6, 0x5, 0x0, 0x0, 0x7, 0xff, 0x6, 0x5, 0x0, 0x0, 0x7, 0x6, 0x6};
-	u1Byte		middle_band[23] = {0x6, 0x5, 0x0, 0x0, 0x7, 0x6, 0x6, 0xff, 0x0, 0x0, 0x7, 0x6, 0x6, 0x5, 0x0, 0xff, 0x7, 0x6, 0x6, 0x5, 0x0, 0x0, 0x7};
-	u1Byte		high_band[15] = {0x5, 0x5, 0x0, 0x7, 0x7, 0x6, 0x5, 0xff, 0x0, 0x7, 0x7, 0x6, 0x5, 0x5, 0x0};
+	struct phydm_dig_struct		*p_dm_dig_table = &p_dm->dm_dig_table;
+	u32		rf_reg18 = 0, rf_reg_be = 0xff;
+	boolean		rf_reg_status = true;
+	u8		low_band[15] = {0x7, 0x6, 0x6, 0x5, 0x0, 0x0, 0x7, 0xff, 0x6, 0x5, 0x0, 0x0, 0x7, 0x6, 0x6};
+	u8		middle_band[23] = {0x6, 0x5, 0x0, 0x0, 0x7, 0x6, 0x6, 0xff, 0x0, 0x0, 0x7, 0x6, 0x6, 0x5, 0x0, 0xff, 0x7, 0x6, 0x6, 0x5, 0x0, 0x0, 0x7};
+	u8		high_band[15] = {0x5, 0x5, 0x0, 0x7, 0x7, 0x6, 0x5, 0xff, 0x0, 0x7, 0x7, 0x6, 0x5, 0x5, 0x0};
+	u8		band_index = 0;
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b()====================>\n"));
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b()====================>\n"));
 
-	if (pDM_Odm->bDisablePhyApi) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): disable PHY API for debug!!\n"));
-		return TRUE;
+	if (p_dm->is_disable_phy_api) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): disable PHY API for debug!!\n"));
+		return true;
 	}
 
 	central_ch_8822b = central_ch;
-	rf_reg18 = config_phydm_read_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x18, bRFRegOffsetMask);
-	rf_reg_status = rf_reg_status & config_phydm_read_rf_check_8822b(rf_reg18);
-	rf_reg18 = (rf_reg18 & (~(BIT18|BIT17|bMaskByte0)));
+	
+	/* Errir handling for wrong HW setting due to wrong channel setting */
+	if (central_ch_8822b <= 14)
+		band_index = 1;
+	else
+		band_index = 2;
 
-	if (pDM_Odm->CutVersion == ODM_CUT_A) {
-		rf_regB8 = config_phydm_read_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xb8, bRFRegOffsetMask);
-		rf_reg_status = rf_reg_status & config_phydm_read_rf_check_8822b(rf_regB8);
-	}
+	if (p_dm->rfe_hwsetting_band != band_index)
+		phydm_rfe_8822b(p_dm, central_ch_8822b);
+
+	if ((p_dm->rfe_type == 15) || (p_dm->rfe_type == 18))
+		phydm_rfe_8822b(p_dm, central_ch_8822b);
+
+	/* RF register setting */
+	rf_reg18 = config_phydm_read_rf_reg_8822b(p_dm, RF_PATH_A, 0x18, RFREGOFFSETMASK);
+	rf_reg_status = rf_reg_status & config_phydm_read_rf_check_8822b(rf_reg18);
+	rf_reg18 = (rf_reg18 & (~(BIT(18) | BIT(17) | MASKBYTE0)));
 
 	/* Switch band and channel */
 	if (central_ch <= 14) {
 		/* 2.4G */
 
 		/* 1. RF band and channel*/
-		rf_reg18 = (rf_reg18|central_ch);
+		rf_reg18 = (rf_reg18 | central_ch);
 
 		/* 2. AGC table selection */
-		ODM_SetBBReg(pDM_Odm, 0x958, 0x1f, 0x0);
-		pDM_DigTable->agcTableIdx = 0x0;
+		odm_set_bb_reg(p_dm, 0x958, 0x1f, 0x0);
+		p_dm_dig_table->agc_table_idx = 0x0;
 
 		/* 3. Set central frequency for clock offset tracking */
-		ODM_SetBBReg(pDM_Odm, 0x860, 0x1ffe0000, 0x96a);
-
-		/* Fix A-cut LCK fail issue @ 5285MHz~5375MHz, 0xb8[19]=0x0 */
-		if (pDM_Odm->CutVersion == ODM_CUT_A)
-			rf_regB8 = rf_regB8 | BIT19;
+		odm_set_bb_reg(p_dm, 0x860, 0x1ffe0000, 0x96a);
 
 		/* CCK TX filter parameters */
+
 		if (central_ch == 14) {
-			ODM_SetBBReg(pDM_Odm, 0xa20, bMaskHWord, 0x8488);
-			ODM_SetBBReg(pDM_Odm, 0xa24, bMaskDWord, 0x00006577);
-			ODM_SetBBReg(pDM_Odm, 0xa28, bMaskLWord, 0x0000);
+			odm_set_bb_reg(p_dm, 0xa24, MASKDWORD, 0x00006577);
+			odm_set_bb_reg(p_dm, 0xa28, MASKLWORD, 0x0000);
 		} else {
-			ODM_SetBBReg(pDM_Odm, 0xa20, bMaskHWord, (rega20_8822b>>16));
-			ODM_SetBBReg(pDM_Odm, 0xa24, bMaskDWord, rega24_8822b);
-			ODM_SetBBReg(pDM_Odm, 0xa28, bMaskLWord, (rega28_8822b & bMaskLWord));
+			odm_set_bb_reg(p_dm, 0xa24, MASKDWORD, 0x384f6577);
+			odm_set_bb_reg(p_dm, 0xa28, MASKLWORD, 0x1525);
 		}
 
 	} else if (central_ch > 35) {
@@ -966,534 +1740,588 @@ config_phydm_switch_channel_8822b(
 		rf_reg18 = (rf_reg18 | central_ch);
 
 		/* 2. AGC table selection */
-		if ((central_ch >= 36) && (central_ch <= 64)) {
-			ODM_SetBBReg(pDM_Odm, 0x958, 0x1f, 0x1);
-			pDM_DigTable->agcTableIdx = 0x1;
-		} else if ((central_ch >= 100) && (central_ch <= 144)) {
-			ODM_SetBBReg(pDM_Odm, 0x958, 0x1f, 0x2);
-			pDM_DigTable->agcTableIdx = 0x2;
-		} else if (central_ch >= 149) {
-			ODM_SetBBReg(pDM_Odm, 0x958, 0x1f, 0x3);
-			pDM_DigTable->agcTableIdx = 0x3;
-		} else {
-			ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): Fail to switch channel (AGC) (ch: %d)\n", central_ch));
-			return FALSE;
+		if (!((p_dm->rfe_type == 15) || (p_dm->rfe_type == 16))) {
+			if ((central_ch >= 36) && (central_ch <= 64)) {
+				odm_set_bb_reg(p_dm, 0x958, 0x1f, 0x1);
+				p_dm_dig_table->agc_table_idx = 0x1;
+			} else if ((central_ch >= 100) && (central_ch <= 144)) {
+				odm_set_bb_reg(p_dm, 0x958, 0x1f, 0x2);
+				p_dm_dig_table->agc_table_idx = 0x2;
+			} else if (central_ch >= 149) {
+				odm_set_bb_reg(p_dm, 0x958, 0x1f, 0x3);
+				p_dm_dig_table->agc_table_idx = 0x3;
+			} else {
+				PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): Fail to switch channel (AGC) (ch: %d)\n", central_ch));
+				return false;
+			}
+		} else if ((p_dm->rfe_type == 15) || (p_dm->rfe_type == 16)) {
+				if (p_dm->brxagcswitch == true) {
+					phydm_rxagc_switch_8822b(p_dm, true);
+				} else {
+					phydm_rxagc_switch_8822b(p_dm, false);
+				}
 		}
 
 		/* 3. Set central frequency for clock offset tracking */
 		if ((central_ch >= 36) && (central_ch <= 48))
-			ODM_SetBBReg(pDM_Odm, 0x860, 0x1ffe0000, 0x494);
+			odm_set_bb_reg(p_dm, 0x860, 0x1ffe0000, 0x494);
 		else if ((central_ch >= 52) && (central_ch <= 64))
-			ODM_SetBBReg(pDM_Odm, 0x860, 0x1ffe0000, 0x453);
+			odm_set_bb_reg(p_dm, 0x860, 0x1ffe0000, 0x453);
 		else if ((central_ch >= 100) && (central_ch <= 116))
-			ODM_SetBBReg(pDM_Odm, 0x860, 0x1ffe0000, 0x452);
+			odm_set_bb_reg(p_dm, 0x860, 0x1ffe0000, 0x452);
 		else if ((central_ch >= 118) && (central_ch <= 177))
-			ODM_SetBBReg(pDM_Odm, 0x860, 0x1ffe0000, 0x412);
+			odm_set_bb_reg(p_dm, 0x860, 0x1ffe0000, 0x412);
 		else {
-			ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): Fail to switch channel (fc_area) (ch: %d)\n", central_ch));
-			return FALSE;
+			PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): Fail to switch channel (fc_area) (ch: %d)\n", central_ch));
+			return false;
 		}
 
-		/* Fix A-cut LCK fail issue @ 5285MHz~5375MHz, 0xb8[19]=0x0 */
-		if (pDM_Odm->CutVersion == ODM_CUT_A) {
-			if ((central_ch >= 57) && (central_ch <= 75))
-				rf_regB8 = rf_regB8 & (~BIT19);
-			else
-				rf_regB8 = rf_regB8 | BIT19;
-		}
 	} else {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): Fail to switch channel (ch: %d)\n", central_ch));
-		return FALSE;
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): Fail to switch channel (ch: %d)\n", central_ch));
+		return false;
 	}
 
 	/* Modify IGI for MP driver to aviod PCIE interference */
-	if ((pDM_Odm->mp_mode == TRUE) && ((pDM_Odm->RFEType == 3) || (pDM_Odm->RFEType == 5))) {
+	if ((*(p_dm->p_mp_mode) == true) && ((p_dm->rfe_type == 3) || (p_dm->rfe_type == 5))) {
 		if (central_ch == 14)
-			ODM_Write_DIG(pDM_Odm, 0x26);
+			odm_write_dig(p_dm, 0x26);
 		else
-			ODM_Write_DIG(pDM_Odm, 0x20);
+			odm_write_dig(p_dm, 0x20);
 	}
 
 	/* Modify the setting of register 0xBE to reduce phase noise */
 	if (central_ch <= 14)
-		rf_regBE = 0x0;
+		rf_reg_be = 0x0;
 	else if ((central_ch >= 36) && (central_ch <= 64))
-		rf_regBE = low_band[(central_ch - 36)>>1];
+		rf_reg_be = low_band[(central_ch - 36) >> 1];
 	else if ((central_ch >= 100) && (central_ch <= 144))
-		rf_regBE = middle_band[(central_ch - 100)>>1];
+		rf_reg_be = middle_band[(central_ch - 100) >> 1];
 	else if ((central_ch >= 149) && (central_ch <= 177))
-		rf_regBE = high_band[(central_ch - 149)>>1];
-	else
-		rf_regBE = 0xff;
+		rf_reg_be = high_band[(central_ch - 149) >> 1];
 
-	if (rf_regBE != 0xff)
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xbe, (BIT17|BIT16|BIT15), rf_regBE);
+	if (rf_reg_be != 0xff)
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xbe, (BIT(17) | BIT(16) | BIT(15)), rf_reg_be);
 	else {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): Fail to switch channel (ch: %d, Phase noise)\n", central_ch));
-		return FALSE;
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): Fail to switch channel (ch: %d, Phase noise)\n", central_ch));
+		return false;
 	}
 
 	/* Fix channel 144 issue, ask by RFSI Alvin*/
 	/* 00 when freq < 5400;  01 when 5400<=freq<=5720; 10 when freq > 5720; 2G don't care*/
 	/* need to set 0xdf[18]=1 before writing RF18 when channel 144 */
 	if (central_ch == 144) {
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xdf, BIT18, 0x1);
-		rf_reg18 = (rf_reg18 | BIT17);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xdf, BIT(18), 0x1);
+		rf_reg18 = (rf_reg18 | BIT(17));
 	} else {
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xdf, BIT18, 0x0);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xdf, BIT(18), 0x0);
 
 		if (central_ch > 144)
-			rf_reg18 = (rf_reg18 | BIT18);
+			rf_reg18 = (rf_reg18 | BIT(18));
 		else if (central_ch >= 80)
-			rf_reg18 = (rf_reg18 | BIT17);
+			rf_reg18 = (rf_reg18 | BIT(17));
 	}
 
-	rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x18, bRFRegOffsetMask, rf_reg18);
+	odm_set_rf_reg(p_dm, RF_PATH_A, 0x18, RFREGOFFSETMASK, rf_reg18);
 
-	if (pDM_Odm->CutVersion == ODM_CUT_A)
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xb8, bRFRegOffsetMask, rf_regB8);
+	if (p_dm->rf_type > RF_1T1R)
+		odm_set_rf_reg(p_dm, RF_PATH_B, 0x18, RFREGOFFSETMASK, rf_reg18);
 
-	if (pDM_Odm->RFType > ODM_1T1R) {
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_B, 0x18, bRFRegOffsetMask, rf_reg18);
-
-		if (pDM_Odm->CutVersion == ODM_CUT_A)
-			rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_B, 0xb8, bRFRegOffsetMask, rf_regB8);
+	if (rf_reg_status == false) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): Fail to switch channel (ch: %d), because writing RF register is fail\n", central_ch));
+		return false;
 	}
 
-	if (rf_reg_status == FALSE) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): Fail to switch channel (ch: %d), because writing RF register is fail\n", central_ch));
-		return FALSE;
+	/* Debug for RF resister reading error during synthesizer parameters parsing */
+	odm_set_rf_reg(p_dm, RF_PATH_A, 0xb8, BIT(19), 0);
+	odm_set_rf_reg(p_dm, RF_PATH_A, 0xb8, BIT(19), 1);
+
+	phydm_igi_toggle_8822b(p_dm);
+
+	phydm_ccapar_by_rfe_8822b(p_dm);
+
+	/* Dynamic spur detection by PSD and NBI/CSI mask */
+	if (*(p_dm->p_mp_mode)) {
+		/* reset NBI */
+		odm_set_bb_reg(p_dm, 0x87c, BIT(13), 0x0);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(28), 0x0);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(28), 0x0);
+		phydm_dynamic_spur_det_eliminate(p_dm);
+	} else {
+		/* Normal mode */
+		phydm_spur_calibration_8822b(p_dm);
 	}
 
-	phydm_ccapar_by_rfe_8822b(pDM_Odm);
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_channel_8822b(): Success to switch channel (ch: %d)\n", central_ch));
-	return TRUE;
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_channel_8822b(): Success to switch channel (ch: %d)\n", central_ch));
+	return true;
 }
 
-BOOLEAN
-config_phydm_switch_bandwidth_8822b(	
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u1Byte					primary_ch_idx,
-	IN	ODM_BW_E				bandwidth
-	)
+__iram_odm_func__
+boolean
+config_phydm_switch_bandwidth_8822b(
+	struct PHY_DM_STRUCT				*p_dm,
+	u8					primary_ch_idx,
+	enum channel_width				bandwidth
+)
 {
-	u4Byte		rf_reg18;
-	u1Byte		IGI;
-	BOOLEAN		rf_reg_status = TRUE;
+	u32		rf_reg18, val32;
+	boolean		rf_reg_status = true;
+	u8		rfe_type = p_dm->rfe_type;
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_bandwidth_8822b()===================>\n"));
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_bandwidth_8822b()===================>\n"));
 
-	if (pDM_Odm->bDisablePhyApi) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_bandwidth_8822b(): disable PHY API for debug!!\n"));
-		return TRUE;
+	if (p_dm->is_disable_phy_api) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_bandwidth_8822b(): disable PHY API for debug!!\n"));
+		return true;
 	}
 
-	/* Error handling  */
-	if ((bandwidth >= ODM_BW_MAX) || ((bandwidth == ODM_BW40M) && (primary_ch_idx > 2)) || ((bandwidth == ODM_BW80M) && (primary_ch_idx > 4))) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_bandwidth_8822b(): Fail to switch bandwidth (bw: %d, primary ch: %d)\n", bandwidth, primary_ch_idx));
-		return FALSE;
+	/* Error handling */
+	if ((bandwidth >= CHANNEL_WIDTH_MAX) || ((bandwidth == CHANNEL_WIDTH_40) && (primary_ch_idx > 2)) || ((bandwidth == CHANNEL_WIDTH_80) && (primary_ch_idx > 4))) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_bandwidth_8822b(): Fail to switch bandwidth (bw: %d, primary ch: %d)\n", bandwidth, primary_ch_idx));
+		return false;
 	}
+	/*Make protection*/
+	if (central_ch_8822b == 165 && !(*p_dm->p_mp_mode))
+		bandwidth = CHANNEL_WIDTH_20;
 
 	bw_8822b = bandwidth;
-	rf_reg18 = config_phydm_read_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x18, bRFRegOffsetMask);
+	rf_reg18 = config_phydm_read_rf_reg_8822b(p_dm, RF_PATH_A, 0x18, RFREGOFFSETMASK);
 	rf_reg_status = rf_reg_status & config_phydm_read_rf_check_8822b(rf_reg18);
 
 	/* Switch bandwidth */
 	switch (bandwidth) {
-	case ODM_BW20M:
+	case CHANNEL_WIDTH_20:
 	{
 		/* Small BW([7:6]) = 0, primary channel ([5:2]) = 0, rf mode([1:0]) = 20M */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, bMaskByte0, ODM_BW20M);
+		/* odm_set_bb_reg(p_dm, 0x8ac, MASKBYTE0, CHANNEL_WIDTH_20);*/
 
 		/* ADC clock = 160M clock for BW20 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT9|BIT8), 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT16, 0x1);
+		/* odm_set_bb_reg(p_dm, 0x8ac, (BIT(9) | BIT(8)), 0x0);*/
+		/* odm_set_bb_reg(p_dm, 0x8ac, BIT(16), 0x1);*/
 
 		/* DAC clock = 160M clock for BW20 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT21|BIT20), 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT28, 0x1);
+		/* odm_set_bb_reg(p_dm, 0x8ac, (BIT(21) | BIT(20)), 0x0);*/
+		/* odm_set_bb_reg(p_dm, 0x8ac, BIT(28), 0x1);*/
+
+		val32 = odm_get_bb_reg(p_dm, 0x8ac, MASKDWORD);
+		val32 &= 0xFFCFFC00;
+		val32 |= (CHANNEL_WIDTH_20);
+		odm_set_bb_reg(p_dm, 0x8ac, MASKDWORD, val32);
 
 		/* ADC buffer clock */
-		ODM_SetBBReg(pDM_Odm, 0x8c4, BIT30, 0x1);
+		odm_set_bb_reg(p_dm, 0x8c4, BIT(30), 0x1);
 
 		/* RF bandwidth */
-		rf_reg18 = (rf_reg18 | BIT11 | BIT10);
+		rf_reg18 = (rf_reg18 | BIT(11) | BIT(10));
 
 		break;
 	}
-	case ODM_BW40M:
+	case CHANNEL_WIDTH_40:
 	{
 		/* Small BW([7:6]) = 0, primary channel ([5:2]) = sub-channel, rf mode([1:0]) = 40M */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, bMaskByte0, (((primary_ch_idx & 0xf) << 2)|ODM_BW40M));
+		/* odm_set_bb_reg(p_dm, 0x8ac, MASKBYTE0, (((primary_ch_idx & 0xf) << 2) | CHANNEL_WIDTH_40));*/
 
 		/* CCK primary channel */
 		if (primary_ch_idx == 1)
-			ODM_SetBBReg(pDM_Odm, 0xa00, BIT4, primary_ch_idx);
+			odm_set_bb_reg(p_dm, 0xa00, BIT(4), primary_ch_idx);
 		else
-			ODM_SetBBReg(pDM_Odm, 0xa00, BIT4, 0);
+			odm_set_bb_reg(p_dm, 0xa00, BIT(4), 0);
 
 		/* ADC clock = 160M clock for BW40 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT11|BIT10), 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT17, 0x1);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(11) | BIT(10)), 0x0);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(17), 0x1);*/
 
 		/* DAC clock = 160M clock for BW20 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT23|BIT22), 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT29, 0x1);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(23) | BIT(22)), 0x0);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(29), 0x1);*/
+
+		val32 = odm_get_bb_reg(p_dm, 0x8ac, MASKDWORD);
+		val32 &= 0xFF3FF300;
+		val32 |= (((primary_ch_idx & 0xf) << 2) | CHANNEL_WIDTH_40);
+		odm_set_bb_reg(p_dm, 0x8ac, MASKDWORD, val32);
 
 		/* ADC buffer clock */
-		ODM_SetBBReg(pDM_Odm, 0x8c4, BIT30, 0x1);
+		odm_set_bb_reg(p_dm, 0x8c4, BIT(30), 0x1);
 
 		/* RF bandwidth */
-		rf_reg18 = (rf_reg18 & (~(BIT11|BIT10)));
-		rf_reg18 = (rf_reg18|BIT11);		
+		rf_reg18 = (rf_reg18 & (~(BIT(11) | BIT(10))));
+		rf_reg18 = (rf_reg18 | BIT(11));
 
 		break;
 	}
-	case ODM_BW80M:
+	case CHANNEL_WIDTH_80:
 	{
 		/* Small BW([7:6]) = 0, primary channel ([5:2]) = sub-channel, rf mode([1:0]) = 80M */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, bMaskByte0, (((primary_ch_idx & 0xf) << 2)|ODM_BW80M));
+		/*odm_set_bb_reg(p_dm, 0x8ac, MASKBYTE0, (((primary_ch_idx & 0xf) << 2) | CHANNEL_WIDTH_80));*/
 
 		/* ADC clock = 160M clock for BW80 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT13|BIT12), 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT18, 0x1);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(13) | BIT(12)), 0x0);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(18), 0x1);*/
 
 		/* DAC clock = 160M clock for BW20 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT25|BIT24), 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT30, 0x1);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(25) | BIT(24)), 0x0);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(30), 0x1);*/
+
+		val32 = odm_get_bb_reg(p_dm, 0x8ac, MASKDWORD);
+		val32 &= 0xFCEFCF00;
+		val32 |= (((primary_ch_idx & 0xf) << 2) | CHANNEL_WIDTH_80);
+		odm_set_bb_reg(p_dm, 0x8ac, MASKDWORD, val32);
 
 		/* ADC buffer clock */
-		ODM_SetBBReg(pDM_Odm, 0x8c4, BIT30, 0x1);
+		odm_set_bb_reg(p_dm, 0x8c4, BIT(30), 0x1);
 
 		/* RF bandwidth */
-		rf_reg18 = (rf_reg18 & (~(BIT11|BIT10)));
-		rf_reg18 = (rf_reg18|BIT10);
+		rf_reg18 = (rf_reg18 & (~(BIT(11) | BIT(10))));
+		rf_reg18 = (rf_reg18 | BIT(10));
+
+		/* Parameters for SD4 TP requirement */
+		if ((rfe_type == 2) || (rfe_type == 3) || (rfe_type == 17) ) {
+			odm_set_bb_reg(p_dm, 0x840, 0x0000f000, 0x6);
+			odm_set_bb_reg(p_dm, 0x8c8, BIT(10), 0x1);
+		}
 
 		break;
 	}
-	case ODM_BW5M:
+	case CHANNEL_WIDTH_5:
 	{
 		/* Small BW([7:6]) = 1, primary channel ([5:2]) = 0, rf mode([1:0]) = 20M */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, bMaskByte0, (BIT6|ODM_BW20M));
+		/*dm_set_bb_reg(p_dm, 0x8ac, MASKBYTE0, (BIT(6) | CHANNEL_WIDTH_20));*/
 
 		/* ADC clock = 40M clock */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT9|BIT8), 0x2);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT16, 0x0);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(9) | BIT(8)), 0x2);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(16), 0x0);*/
 
 		/* DAC clock = 160M clock for BW20 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT21|BIT20), 0x2);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT28, 0x0);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(21) | BIT(20)), 0x2);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(28), 0x0);*/
+
+		val32 = odm_get_bb_reg(p_dm, 0x8ac, MASKDWORD);
+		val32 &= 0xEFEEFE00;
+		val32 |= ((BIT(6) | CHANNEL_WIDTH_20));
+		odm_set_bb_reg(p_dm, 0x8ac, MASKDWORD, val32);
 
 		/* ADC buffer clock */
-		ODM_SetBBReg(pDM_Odm, 0x8c4, BIT30, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8c8, BIT31, 0x1);
+		odm_set_bb_reg(p_dm, 0x8c4, BIT(30), 0x0);
+		odm_set_bb_reg(p_dm, 0x8c8, BIT(31), 0x1);
 
 		/* RF bandwidth */
-		rf_reg18 = (rf_reg18|BIT11|BIT10);
+		rf_reg18 = (rf_reg18 | BIT(11) | BIT(10));
 
 		break;
 	}
-	case ODM_BW10M:
+	case CHANNEL_WIDTH_10:
 	{
 		/* Small BW([7:6]) = 1, primary channel ([5:2]) = 0, rf mode([1:0]) = 20M */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, bMaskByte0, (BIT7|ODM_BW20M));
+		/*odm_set_bb_reg(p_dm, 0x8ac, MASKBYTE0, (BIT(7) | CHANNEL_WIDTH_20));*/
 
 		/* ADC clock = 80M clock */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT9|BIT8), 0x3);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT16, 0x0);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(9) | BIT(8)), 0x3);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(16), 0x0);*/
 
 		/* DAC clock = 160M clock for BW20 */
-		ODM_SetBBReg(pDM_Odm, 0x8ac, (BIT21|BIT20), 0x3);
-		ODM_SetBBReg(pDM_Odm, 0x8ac, BIT28, 0x0);
+		/*odm_set_bb_reg(p_dm, 0x8ac, (BIT(21) | BIT(20)), 0x3);*/
+		/*odm_set_bb_reg(p_dm, 0x8ac, BIT(28), 0x0);*/
+
+		val32 = odm_get_bb_reg(p_dm, 0x8ac, MASKDWORD);
+		val32 &= 0xEFFEFF00;
+		val32 |= ((BIT(7) | CHANNEL_WIDTH_20));
+		odm_set_bb_reg(p_dm, 0x8ac, MASKDWORD, val32);
 
 		/* ADC buffer clock */
-		ODM_SetBBReg(pDM_Odm, 0x8c4, BIT30, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x8c8, BIT31, 0x1);
+		odm_set_bb_reg(p_dm, 0x8c4, BIT(30), 0x0);
+		odm_set_bb_reg(p_dm, 0x8c8, BIT(31), 0x1);
 
 		/* RF bandwidth */
-		rf_reg18 = (rf_reg18|BIT11|BIT10);
+		rf_reg18 = (rf_reg18 | BIT(11) | BIT(10));
 
 		break;
 	}
 	default:
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_bandwidth_8822b(): Fail to switch bandwidth (bw: %d, primary ch: %d)\n", bandwidth, primary_ch_idx));
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_bandwidth_8822b(): Fail to switch bandwidth (bw: %d, primary ch: %d)\n", bandwidth, primary_ch_idx));
 	}
 
 	/* Write RF register */
-	rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x18, bRFRegOffsetMask, rf_reg18);
+	odm_set_rf_reg(p_dm, RF_PATH_A, 0x18, RFREGOFFSETMASK, rf_reg18);
 
-	if (pDM_Odm->RFType > ODM_1T1R)
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_B, 0x18, bRFRegOffsetMask, rf_reg18);
+	if (p_dm->rf_type > RF_1T1R)
+		odm_set_rf_reg(p_dm, RF_PATH_B, 0x18, RFREGOFFSETMASK, rf_reg18);
 
-	if (rf_reg_status == FALSE) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_bandwidth_8822b(): Fail to switch bandwidth (bw: %d, primary ch: %d), because writing RF register is fail\n", bandwidth, primary_ch_idx));
-		return FALSE;
+	if (rf_reg_status == false) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_bandwidth_8822b(): Fail to switch bandwidth (bw: %d, primary ch: %d), because writing RF register is fail\n", bandwidth, primary_ch_idx));
+		return false;
 	}
 
 	/* Modify RX DFIR parameters */
-	phydm_rxdfirpar_by_bw_8822b(pDM_Odm, bandwidth);
+	phydm_rxdfirpar_by_bw_8822b(p_dm, bandwidth);
+
+	/* Toggle IGI to let RF enter RX mode */
+	phydm_igi_toggle_8822b(p_dm);
 
 	/* Modify CCA parameters */
-	phydm_ccapar_by_bw_8822b(pDM_Odm, bandwidth);
-	phydm_ccapar_by_rfe_8822b(pDM_Odm);
+	phydm_ccapar_by_rfe_8822b(p_dm);
+
+	/* Dynamic spur detection by PSD and NBI/CSI mask */
+	if (*(p_dm->p_mp_mode)) {
+		/* reset NBI */
+		odm_set_bb_reg(p_dm, 0x87c, BIT(13), 0x0);
+		odm_set_bb_reg(p_dm, 0xc20, BIT(28), 0x0);
+		odm_set_bb_reg(p_dm, 0xe20, BIT(28), 0x0);
+		phydm_dynamic_spur_det_eliminate(p_dm);
+	} else {
+		/* Normal mode */
+		phydm_spur_calibration_8822b(p_dm);
+	}
 
 	/* Toggle RX path to avoid RX dead zone issue */
-	ODM_SetBBReg(pDM_Odm, 0x808, bMaskByte0, 0x0);
-	ODM_SetBBReg(pDM_Odm, 0x808, bMaskByte0, (pDM_Odm->RXAntStatus|(pDM_Odm->RXAntStatus<<4)));
+	odm_set_bb_reg(p_dm, 0x808, MASKBYTE0, 0x0);
+	odm_set_bb_reg(p_dm, 0x808, MASKBYTE0, (p_dm->rx_ant_status | (p_dm->rx_ant_status << 4)));
 
-	/* Toggle IGI to let RF enter RX mode, because BB doesn't send 3-wire command when RX path is enable */
-	IGI = (u1Byte)ODM_GetBBReg(pDM_Odm, ODM_REG(IGI_A, pDM_Odm), ODM_BIT(IGI, pDM_Odm));
-	ODM_SetBBReg(pDM_Odm, ODM_REG(IGI_A, pDM_Odm), ODM_BIT(IGI, pDM_Odm), IGI - 2);
-	ODM_SetBBReg(pDM_Odm, ODM_REG(IGI_B, pDM_Odm), ODM_BIT(IGI, pDM_Odm), IGI - 2);
-	ODM_SetBBReg(pDM_Odm, ODM_REG(IGI_A, pDM_Odm), ODM_BIT(IGI, pDM_Odm), IGI);
-	ODM_SetBBReg(pDM_Odm, ODM_REG(IGI_B, pDM_Odm), ODM_BIT(IGI, pDM_Odm), IGI);
-
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_switch_bandwidth_8822b(): Success to switch bandwidth (bw: %d, primary ch: %d)\n", bandwidth, primary_ch_idx));
-	return TRUE;
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_switch_bandwidth_8822b(): Success to switch bandwidth (bw: %d, primary ch: %d)\n", bandwidth, primary_ch_idx));
+	return true;
 }
 
-BOOLEAN
-config_phydm_switch_channel_bw_8822b(	
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	u1Byte					central_ch,
-	IN	u1Byte					primary_ch_idx,
-	IN	ODM_BW_E				bandwidth
-	)
+__iram_odm_func__
+boolean
+config_phydm_switch_channel_bw_8822b(
+	struct PHY_DM_STRUCT				*p_dm,
+	u8					central_ch,
+	u8					primary_ch_idx,
+	enum channel_width				bandwidth
+)
 {
 
 	/* Switch band */
-	if (config_phydm_switch_band_8822b(pDM_Odm, central_ch) == FALSE)
-		return FALSE;
+	if (config_phydm_switch_band_8822b(p_dm, central_ch) == false)
+		return false;
 
 	/* Switch channel */
-	if (config_phydm_switch_channel_8822b(pDM_Odm, central_ch) == FALSE)
-		return FALSE;
+	if (config_phydm_switch_channel_8822b(p_dm, central_ch) == false)
+		return false;
 
 	/* Switch bandwidth */
-	if (config_phydm_switch_bandwidth_8822b(pDM_Odm, primary_ch_idx, bandwidth) == FALSE)
-		return FALSE;
+	if (config_phydm_switch_bandwidth_8822b(p_dm, primary_ch_idx, bandwidth) == false)
+		return false;
 
-	return TRUE;
+	return true;
 }
 
-BOOLEAN
+__iram_odm_func__
+boolean
 config_phydm_trx_mode_8822b(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_RF_PATH_E			TxPath,
-	IN	ODM_RF_PATH_E			RxPath,
-	IN	BOOLEAN					bTx2Path
-	)
+	struct PHY_DM_STRUCT				*p_dm,
+	enum bb_path			tx_path,
+	enum bb_path			rx_path,
+	boolean					is_tx2_path
+)
 {
-	BOOLEAN		rf_reg_status = TRUE;
-	u1Byte		IGI;
-	u4Byte		rf_reg33 = 0;
-	u2Byte		counter = 0;
-	//PDM_ODM_T		pDM_Odm = (PDM_ODM_T)pDM_VOID;
-	//PADAPTER		pAdapter	= pDM_Odm->Adapter;
-	//PMGNT_INFO		pMgntInfo = &(pAdapter->MgntInfo);
+	u32		rf_reg33 = 0;
+	u16		counter = 0;
+	/* struct PHY_DM_STRUCT*		p_dm = (struct PHY_DM_STRUCT*)p_dm_void; */
+	/* struct _ADAPTER*		p_adapter	= p_dm->adapter; */
+	/* PMGNT_INFO		p_mgnt_info = &(p_adapter->mgnt_info); */
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b()=====================>\n"));	
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b()=====================>\n"));
 
-	if (pDM_Odm->bDisablePhyApi) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): disable PHY API for debug!!\n"));
-		return TRUE;
+	if (p_dm->is_disable_phy_api) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): disable PHY API for debug!!\n"));
+		return true;
 	}
 
-	if ((TxPath & (~(ODM_RF_A|ODM_RF_B))) != 0) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): Wrong TX setting (TX: 0x%x)\n", TxPath));
-		return FALSE;
+	if ((tx_path & (~BB_PATH_AB)) != 0) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): Wrong TX setting (TX: 0x%x)\n", tx_path));
+		return false;
 	}
 
-	if ((RxPath & (~(ODM_RF_A|ODM_RF_B))) != 0) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): Wrong RX setting (RX: 0x%x)\n", RxPath));
-		return FALSE;
+	if ((rx_path & (~BB_PATH_AB)) != 0) {
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): Wrong RX setting (RX: 0x%x)\n", rx_path));
+		return false;
 	}
 
 	/* RF mode of path-A and path-B */
 	/* Cannot shut down path-A, beacause synthesizer will be shut down when path-A is in shut down mode */
-	if ((TxPath|RxPath) & ODM_RF_A)
-		ODM_SetBBReg(pDM_Odm, 0xc08, bMaskLWord, 0x3231);
+	/* 3-wire setting */
+	if ((tx_path | rx_path) & BB_PATH_A)
+		odm_set_bb_reg(p_dm, 0xc08, MASKLWORD, 0x3231);
 	else
-		ODM_SetBBReg(pDM_Odm, 0xc08, bMaskLWord, 0x1111);
+		odm_set_bb_reg(p_dm, 0xc08, MASKLWORD, 0x1111);
 
-	if ((TxPath|RxPath) & ODM_RF_B)
-		ODM_SetBBReg(pDM_Odm, 0xe08, bMaskLWord, 0x3231);
+	if ((tx_path | rx_path) & BB_PATH_B)
+		odm_set_bb_reg(p_dm, 0xe08, MASKLWORD, 0x3231);
 	else
-		ODM_SetBBReg(pDM_Odm, 0xe08, bMaskLWord, 0x1111);
+		odm_set_bb_reg(p_dm, 0xe08, MASKLWORD, 0x1111);
 
 	/* Set TX antenna by Nsts */
-	ODM_SetBBReg(pDM_Odm, 0x93c, (BIT19|BIT18), 0x3);
-	ODM_SetBBReg(pDM_Odm, 0x80c, (BIT29|BIT28), 0x1);
+	odm_set_bb_reg(p_dm, 0x93c, (BIT(19) | BIT(18)), 0x3);
+	odm_set_bb_reg(p_dm, 0x80c, (BIT(29) | BIT(28)), 0x1);
 
 	/* Control CCK TX path by 0xa07[7] */
-	ODM_SetBBReg(pDM_Odm, 0x80c, BIT30, 0x1);
+	odm_set_bb_reg(p_dm, 0x80c, BIT(30), 0x1);
 
-	/* TX logic map and TX path en for Nsts = 1, and CCK TX path*/	
-	if (TxPath & ODM_RF_A) {
-		ODM_SetBBReg(pDM_Odm, 0x93c, 0xfff00000, 0x001);
-		ODM_SetBBReg(pDM_Odm, 0xa04, 0xf0000000, 0x8);
-	} else if (TxPath & ODM_RF_B) {
-		ODM_SetBBReg(pDM_Odm, 0x93c, 0xfff00000, 0x002);
-		ODM_SetBBReg(pDM_Odm, 0xa04, 0xf0000000, 0x4);
+	/* TX logic map and TX path en for Nsts = 1, and CCK TX path*/
+	if (tx_path & BB_PATH_A) {
+		odm_set_bb_reg(p_dm, 0x93c, 0xfff00000, 0x001);
+		odm_set_bb_reg(p_dm, 0xa04, 0xf0000000, 0x8);
+	} else if (tx_path & BB_PATH_B) {
+		odm_set_bb_reg(p_dm, 0x93c, 0xfff00000, 0x002);
+		odm_set_bb_reg(p_dm, 0xa04, 0xf0000000, 0x4);
 	}
-		
+
 	/* TX logic map and TX path en for Nsts = 2*/
-	if ((TxPath == ODM_RF_A) || (TxPath == ODM_RF_B))
-		ODM_SetBBReg(pDM_Odm, 0x940, 0xfff0, 0x01);
+	/* Due to LO is stand-by while 1T at path-b in normal driver, so 0x940 is the same setting btw path-A/B*/
+	if ((tx_path == BB_PATH_A) || (tx_path == BB_PATH_B))
+		odm_set_bb_reg(p_dm, 0x940, 0xfff0, 0x01);
 	else
-		ODM_SetBBReg(pDM_Odm, 0x940, 0xfff0, 0x43);
+		odm_set_bb_reg(p_dm, 0x940, 0xfff0, 0x43);
 
 	/* TX path enable */
-	ODM_SetBBReg(pDM_Odm, 0x80c, bMaskByte0, ((TxPath << 4)|TxPath));
+	odm_set_bb_reg(p_dm, 0x80c, MASKBYTE0, ((tx_path << 4) | tx_path));
 
 	/* Tx2path for 1ss */
-	if (!((TxPath == ODM_RF_A) || (TxPath == ODM_RF_B))) {
-		if (bTx2Path || pDM_Odm->mp_mode) {
+	if (!((tx_path == BB_PATH_A) || (tx_path == BB_PATH_B))) {
+		if (is_tx2_path || *(p_dm->p_mp_mode)) {
 			/* 2Tx for OFDM */
-			ODM_SetBBReg(pDM_Odm, 0x93c, 0xfff00000, 0x043);
+			odm_set_bb_reg(p_dm, 0x93c, 0xfff00000, 0x043);
 
 			/* 2Tx for CCK */
-			ODM_SetBBReg(pDM_Odm, 0xa04, 0xf0000000, 0xc);
+			odm_set_bb_reg(p_dm, 0xa04, 0xf0000000, 0xc);
 		}
 	}
 
 	/* Always disable MRC for CCK CCA */
-	ODM_SetBBReg(pDM_Odm, 0xa2c, BIT22, 0x0);
+	odm_set_bb_reg(p_dm, 0xa2c, BIT(22), 0x0);
 
 	/* Always disable MRC for CCK barker */
-	ODM_SetBBReg(pDM_Odm, 0xa2c, BIT18, 0x0);
+	odm_set_bb_reg(p_dm, 0xa2c, BIT(18), 0x0);
 
-	/* CCK RX 1st and 2nd path setting*/	
-	if (RxPath & ODM_RF_A)
-		ODM_SetBBReg(pDM_Odm, 0xa04, 0x0f000000, 0x0);
-	else if (RxPath & ODM_RF_B)
-		ODM_SetBBReg(pDM_Odm, 0xa04, 0x0f000000, 0x5);
+	/* CCK RX 1st and 2nd path setting*/
+	if (rx_path & BB_PATH_A)
+		odm_set_bb_reg(p_dm, 0xa04, 0x0f000000, 0x0);
+	else if (rx_path & BB_PATH_B)
+		odm_set_bb_reg(p_dm, 0xa04, 0x0f000000, 0x5);
 
 	/* RX path enable */
-	ODM_SetBBReg(pDM_Odm, 0x808, bMaskByte0, ((RxPath << 4)|RxPath));
+	odm_set_bb_reg(p_dm, 0x808, MASKBYTE0, ((rx_path << 4) | rx_path));
 
-	if ((RxPath == ODM_RF_A) || (RxPath == ODM_RF_B)) {
+	if ((rx_path == BB_PATH_A) || (rx_path == BB_PATH_B)) {
 		/* 1R */
 
 		/* Disable MRC for CCA */
-		/* ODM_SetBBReg(pDM_Odm, 0xa2c, BIT22, 0x0); */
+		/* odm_set_bb_reg(p_dm, 0xa2c, BIT22, 0x0); */
 
 		/* Disable MRC for barker */
-		/* ODM_SetBBReg(pDM_Odm, 0xa2c, BIT18, 0x0); */
-		
+		/* odm_set_bb_reg(p_dm, 0xa2c, BIT18, 0x0); */
+
 		/* Disable CCK antenna diversity */
-		/* ODM_SetBBReg(pDM_Odm, 0xa00, BIT15, 0x0); */
+		/* odm_set_bb_reg(p_dm, 0xa00, BIT15, 0x0); */
 
 		/* Disable Antenna weighting */
-		ODM_SetBBReg(pDM_Odm, 0x1904, BIT16, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x800, BIT28, 0x0);
-		ODM_SetBBReg(pDM_Odm, 0x850, BIT23, 0x0);
+		odm_set_bb_reg(p_dm, 0x1904, BIT(16), 0x0);
+		odm_set_bb_reg(p_dm, 0x800, BIT(28), 0x0);
+		odm_set_bb_reg(p_dm, 0x850, BIT(23), 0x0);
 	} else {
 		/* 2R */
 
 		/* Enable MRC for CCA */
-		/* ODM_SetBBReg(pDM_Odm, 0xa2c, BIT22, 0x1); */
+		/* odm_set_bb_reg(p_dm, 0xa2c, BIT22, 0x1); */
 
 		/* Enable MRC for barker */
-		/* ODM_SetBBReg(pDM_Odm, 0xa2c, BIT18, 0x1); */
+		/* odm_set_bb_reg(p_dm, 0xa2c, BIT18, 0x1); */
 
 		/* Disable CCK antenna diversity */
-		/* ODM_SetBBReg(pDM_Odm, 0xa00, BIT15, 0x0); */
+		/* odm_set_bb_reg(p_dm, 0xa00, BIT15, 0x0); */
 
 		/* Enable Antenna weighting */
-		ODM_SetBBReg(pDM_Odm, 0x1904, BIT16, 0x1);
-		ODM_SetBBReg(pDM_Odm, 0x800, BIT28, 0x1);
-		ODM_SetBBReg(pDM_Odm, 0x850, BIT23, 0x1);
+		odm_set_bb_reg(p_dm, 0x1904, BIT(16), 0x1);
+		odm_set_bb_reg(p_dm, 0x800, BIT(28), 0x1);
+		odm_set_bb_reg(p_dm, 0x850, BIT(23), 0x1);
 	}
 
 	/* Update TXRX antenna status for PHYDM */
-	pDM_Odm->TXAntStatus =  (TxPath & 0x3);
-	pDM_Odm->RXAntStatus =  (RxPath & 0x3);
+	p_dm->tx_ant_status = (tx_path & 0x3);
+	p_dm->rx_ant_status = (rx_path & 0x3);
 
 	/* MP driver need to support path-B TX\RX */
 
-	while(1){
+	while (1) {
 		counter++;
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xef, bRFRegOffsetMask, 0x80000);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x33, bRFRegOffsetMask, 0x00001);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xef, RFREGOFFSETMASK, 0x80000);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x33, RFREGOFFSETMASK, 0x00001);
 
 		ODM_delay_us(2);
-		rf_reg33 = config_phydm_read_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x33, bRFRegOffsetMask);
-		
+		rf_reg33 = config_phydm_read_rf_reg_8822b(p_dm, RF_PATH_A, 0x33, RFREGOFFSETMASK);
+
 		if ((rf_reg33 == 0x00001) && (config_phydm_read_rf_check_8822b(rf_reg33)))
 			break;
 		else if (counter == 100) {
-			ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): Fail to set TRx mode setting, because writing RF mode table is fail\n"));
-			return FALSE;
+			PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): Fail to set TRx mode setting, because writing RF mode table is fail\n"));
+			return false;
 		}
 	}
 
-	if ((pDM_Odm->mp_mode) || (*pDM_Odm->pAntennaTest) || (pDM_Odm->Normalrxpath)) {
+	if (*(p_dm->p_mp_mode) || (*p_dm->p_antenna_test) || (p_dm->normal_rx_path)) {
 		/*	0xef 0x80000  0x33 0x00001  0x3e 0x00034  0x3f 0x4080e  0xef 0x00000    suggested by Lucas*/
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xef, bRFRegOffsetMask, 0x80000);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x33, bRFRegOffsetMask, 0x00001);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x3e, bRFRegOffsetMask, 0x00034);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x3f, bRFRegOffsetMask, 0x4080e);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xef, bRFRegOffsetMask, 0x00000);
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): MP mode or Antenna test mode!! support path-B TX and RX\n"));
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xef, RFREGOFFSETMASK, 0x80000);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x33, RFREGOFFSETMASK, 0x00001);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x3e, RFREGOFFSETMASK, 0x00034);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x3f, RFREGOFFSETMASK, 0x4080e);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xef, RFREGOFFSETMASK, 0x00000);
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): MP mode or Antenna test mode!! support path-B TX and RX\n"));
 	} else {
 		/*	0xef 0x80000  0x33 0x00001  0x3e 0x00034  0x3f 0x4080c  0xef 0x00000 */
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xef, bRFRegOffsetMask, 0x80000);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x33, bRFRegOffsetMask, 0x00001);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x3e, bRFRegOffsetMask, 0x00034);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0x3f, bRFRegOffsetMask, 0x4080c);
-		rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xef, bRFRegOffsetMask, 0x00000);
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): Normal mode!! Do not support path-B TX and RX\n"));
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xef, RFREGOFFSETMASK, 0x80000);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x33, RFREGOFFSETMASK, 0x00001);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x3e, RFREGOFFSETMASK, 0x00034);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0x3f, RFREGOFFSETMASK, 0x4080c);
+		odm_set_rf_reg(p_dm, RF_PATH_A, 0xef, RFREGOFFSETMASK, 0x00000);
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): Normal mode!! Do not support path-B TX and RX\n"));
 	}
 
-	rf_reg_status = rf_reg_status & config_phydm_write_rf_reg_8822b(pDM_Odm, ODM_RF_PATH_A, 0xef, bRFRegOffsetMask, 0x00000);
+	odm_set_rf_reg(p_dm, RF_PATH_A, 0xef, RFREGOFFSETMASK, 0x00000);
 
-	if (rf_reg_status == FALSE) {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): Fail to set TRx mode setting (TX: 0x%x, RX: 0x%x), because writing RF register is fail\n", TxPath, RxPath));
-		return FALSE;
-	}
-
-	/* Toggle IGI to let RF enter RX mode, because BB doesn't send 3-wire command when RX path is enable */
-	IGI = (u1Byte)ODM_GetBBReg(pDM_Odm, ODM_REG(IGI_A, pDM_Odm), ODM_BIT(IGI, pDM_Odm));
-	ODM_Write_DIG(pDM_Odm, IGI - 2);
-	ODM_Write_DIG(pDM_Odm, IGI);
+	/* Toggle igi to let RF enter RX mode, because BB doesn't send 3-wire command when RX path is enable */
+	phydm_igi_toggle_8822b(p_dm);
 
 	/* Modify CCA parameters */
-	phydm_ccapar_by_rxpath_8822b(pDM_Odm);
-	phydm_ccapar_by_rfe_8822b(pDM_Odm);
-	phydm_rfe_8822b(pDM_Odm, central_ch_8822b);
+	phydm_ccapar_by_rfe_8822b(p_dm);
 
-	ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_trx_mode_8822b(): Success to set TRx mode setting (TX: 0x%x, RX: 0x%x)\n", TxPath, RxPath));
-	return TRUE;
+	/* HW Setting depending on RFE type & band */
+	phydm_rfe_8822b(p_dm, central_ch_8822b);
+
+	PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("config_phydm_trx_mode_8822b(): Success to set TRx mode setting (TX: 0x%x, RX: 0x%x)\n", tx_path, rx_path));
+	return true;
 }
 
-BOOLEAN
-config_phydm_parameter_init(
-	IN	PDM_ODM_T				pDM_Odm,
-	IN	ODM_PARAMETER_INIT_E	type
-	)
+__iram_odm_func__
+boolean
+config_phydm_parameter_init_8822b(
+	struct PHY_DM_STRUCT				*p_dm,
+	enum odm_parameter_init_e	type
+)
 {
 	if (type == ODM_PRE_SETTING) {
-		ODM_SetBBReg(pDM_Odm, 0x808, (BIT28|BIT29), 0x0);
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_parameter_init(): Pre setting: disable OFDM and CCK block\n"));
+		odm_set_bb_reg(p_dm, 0x808, (BIT(28) | BIT(29)), 0x0);
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("%s: Pre setting: disable OFDM and CCK block\n", __func__));
 	} else if (type == ODM_POST_SETTING) {
-		ODM_SetBBReg(pDM_Odm, 0x808, (BIT28|BIT29), 0x3);
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_parameter_init(): Post setting: enable OFDM and CCK block\n"));
-		reg82c_8822b = ODM_GetBBReg(pDM_Odm, 0x82c, bMaskDWord);
-		reg838_8822b = ODM_GetBBReg(pDM_Odm, 0x838, bMaskDWord);
-		reg830_8822b = ODM_GetBBReg(pDM_Odm, 0x830, bMaskDWord);
-		reg83c_8822b = ODM_GetBBReg(pDM_Odm, 0x83c, bMaskDWord);
-		rega20_8822b = ODM_GetBBReg(pDM_Odm, 0xa20, bMaskDWord);
-		rega24_8822b = ODM_GetBBReg(pDM_Odm, 0xa24, bMaskDWord);
-		rega28_8822b = ODM_GetBBReg(pDM_Odm, 0xa28, bMaskDWord);
+		odm_set_bb_reg(p_dm, 0x808, (BIT(28) | BIT(29)), 0x3);
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("%s: Post setting: enable OFDM and CCK block\n", __func__));
+#if (PHYDM_FW_API_FUNC_ENABLE_8822B == 1)
+	} else if (type == ODM_INIT_FW_SETTING) {
+		u8	h2c_content[4] = {0};
+		
+		h2c_content[0] = p_dm->rfe_type;
+		h2c_content[1] = p_dm->rf_type;
+		h2c_content[2] = p_dm->cut_version;
+		h2c_content[3] = (p_dm->tx_ant_status << 4) | p_dm->rx_ant_status;
+		
+		odm_fill_h2c_cmd(p_dm, PHYDM_H2C_FW_GENERAL_INIT, 4, h2c_content);
+#endif
 	} else {
-		ODM_RT_TRACE(pDM_Odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("config_phydm_parameter_init(): Wrong type!!\n"));
-		return FALSE;
+		PHYDM_DBG(p_dm, ODM_PHY_CONFIG, ("%s: Wrong type!!\n", __func__));
+		return false;
 	}
 
-	return TRUE;
+	return true;
 }
 
 /* ======================================================================== */
+#endif	/*PHYDM_FW_API_ENABLE_8822B == 1*/
 #endif	/* RTL8822B_SUPPORT == 1 */
-

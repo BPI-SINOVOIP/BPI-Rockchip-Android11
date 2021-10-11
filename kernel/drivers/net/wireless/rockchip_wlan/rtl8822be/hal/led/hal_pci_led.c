@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2012 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,15 +11,11 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 
 #include <drv_types.h>
 #include <hal_data.h>
+#ifdef CONFIG_RTW_SW_LED
 
 /*
  *	Description:
@@ -69,10 +65,8 @@ SwLedBlink(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
 	/* Determine if we shall change LED state again. */
@@ -186,10 +180,8 @@ SwLedBlink5(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
 	switch (pLed->CurrLedState) {
@@ -256,10 +248,8 @@ SwLedBlink6(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
 	switch (pLed->CurrLedState) {
@@ -321,7 +311,6 @@ SwLedBlink7(
 	PADAPTER		Adapter = pLed->padapter;
 
 	SwLedOn(Adapter, pLed);
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 }
 
 
@@ -343,13 +332,10 @@ SwLedBlink8(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink8 CurrLedAction %d,\n", pLed->CurrLedState));
 
 	/* Determine if we shall change LED state again. */
 	if (pLed->CurrLedState != LED_BLINK_NO_LINK)
@@ -409,10 +395,8 @@ SwLedBlink9(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
 	/* Determine if we shall change LED state again. */
@@ -483,7 +467,6 @@ SwLedBlink9(
 		}
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink9 CurrLedAction %d,\n", pLed->CurrLedState));
 
 }
 
@@ -500,10 +483,8 @@ SwLedBlink10(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
 	/* Determine if we shall change LED state again. */
@@ -546,7 +527,6 @@ SwLedBlink10(
 		}
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink10 CurrLedAction %d,\n", pLed->CurrLedState));
 
 }
 
@@ -563,10 +543,8 @@ SwLedBlink11(
 	if (pLed->bLedBlinkInProgress == _TRUE) {
 		if (pLed->BlinkingLedState == RTW_LED_ON) {
 			SwLedOn(Adapter, pLed);
-			RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%ld): turn on\n", pLed->BlinkTimes));
 		} else {
 			SwLedOff(Adapter, pLed);
-			RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Blinktimes (%ld): turn off\n", pLed->BlinkTimes));
 		}
 	}
 
@@ -606,7 +584,6 @@ SwLedBlink11(
 		}
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink11 CurrLedAction %d,\n", pLed->CurrLedState));
 
 }
 
@@ -623,10 +600,8 @@ SwLedBlink12(
 	/* Change LED according to BlinkingLedState specified. */
 	if (pLed->BlinkingLedState == RTW_LED_ON) {
 		SwLedOn(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink12 Blinktimes (%d): turn on\n", pLed->BlinkTimes));
 	} else {
 		SwLedOff(Adapter, pLed);
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink12 Blinktimes (%d): turn off\n", pLed->BlinkTimes));
 	}
 
 	/* Determine if we shall change LED state again. */
@@ -657,7 +632,6 @@ SwLedBlink12(
 	case LED_BLINK_Azurewave_40Mbps:
 	case LED_BLINK_Azurewave_80Mbps:
 	case LED_BLINK_Azurewave_MAXMbps:
-	/* RT_TRACE(_module_rtl8712_led_c_,_drv_info_,("SwLedBlink12 pTurboCa->TxThroughput (%d) pTurboCa->RxThroughput (%d)\n", pTurboCa->TxThroughput, pTurboCa->RxThroughput)); */
 	/* if(pTurboCa->TxThroughput + pTurboCa->RxThroughput == 0) */
 	/*	bStopBlinking = _TRUE; */
 
@@ -735,7 +709,6 @@ SwLedBlink12(
 		}
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("SwLedBlink12 stopblink %d CurrLedAction %d BlinkingLedState %d,\n", bStopBlinking, pLed->CurrLedState, pLed->BlinkingLedState));
 
 }
 
@@ -824,7 +797,7 @@ void BlinkTimerCallback(void *data)
 		return;
 	}
 
-#ifdef CONFIG_LED_HANDLED_BY_CMD_THREAD
+#ifdef CONFIG_RTW_LED_HANDLED_BY_CMD_THREAD
 	rtw_led_blink_cmd(padapter, pLed);
 #else
 	BlinkHandler(pLed);
@@ -889,7 +862,6 @@ SwLedControlMode0(
 		break;
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Led0 %d Led1 %d\n", pLed0->CurrLedState, pLed1->CurrLedState));
 }
 
 
@@ -989,7 +961,6 @@ SwLedControlMode1(
 		break;
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Led %d\n", pLed->CurrLedState));
 }
 
 VOID
@@ -1080,7 +1051,6 @@ SwLedControlMode2(
 		break;
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Led0 %d, Led1 %d\n", pLed0->CurrLedState, pLed1->CurrLedState));
 }
 
 
@@ -1140,7 +1110,6 @@ SwLedControlMode3(
 		break;
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Led0 %d, Led1 %d\n", pLed0->CurrLedState, pLed1->CurrLedState));
 }
 
 
@@ -1199,7 +1168,6 @@ SwLedControlMode4(
 		break;
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Led0 %d, Led1 %d\n", pLed0->CurrLedState, pLed1->CurrLedState));
 }
 
 /* added by vivi, for led new mode */
@@ -1553,7 +1521,6 @@ SwLedControlMode9(
 		break;
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Ledcontrol 9 current led state %d,\n", pLed->CurrLedState));
 
 }
 
@@ -1724,7 +1691,6 @@ SwLedControlMode10(
 
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Ledcontrol 10 current led0 state %d led1 state %d,\n", pLed0->CurrLedState, pLed1->CurrLedState));
 
 }
 
@@ -1818,7 +1784,6 @@ SwLedControlMode11(
 
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("Ledcontrol 11 current led state %d\n", pLed->CurrLedState));
 
 }
 
@@ -1834,7 +1799,6 @@ SwLedControlMode12(
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
 	LED_STATE	LedState = LED_UNKNOWN;
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("====>Ledcontrol 12 current led0 state %d\n", pLed->CurrLedState));
 
 	/* Decide led state */
 	switch (LedAction) {
@@ -1962,7 +1926,6 @@ SwLedControlMode12(
 
 	}
 
-	RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("<====Ledcontrol 12 current led0 state %d\n", pLed->CurrLedState));
 
 }
 
@@ -1986,8 +1949,7 @@ LedControlPCIE(
 	/*	return; */
 
 #ifdef CONFIG_CONCURRENT_MODE
-	/* Only do led action for PRIMARY_ADAPTER */
-	if (padapter->adapter_type != PRIMARY_ADAPTER)
+	if (!is_primary_adapter(padapter))
 		return;
 #endif
 
@@ -1999,7 +1961,6 @@ LedControlPCIE(
 	     LedAction == LED_CTL_NO_LINK ||
 	     LedAction == LED_CTL_START_TO_LINK ||
 	     LedAction == LED_CTL_POWER_ON)) {
-		RT_TRACE(_module_rtl8712_led_c_, _drv_info_, ("LedControlPCIE(): RfOffReason=0x%x\n", adapter_to_pwrctl(padapter)->rfoff_reason));
 		return;
 	}
 
@@ -2182,7 +2143,7 @@ InitLed(
 
 	ResetLedStatus(pLed);
 
-	_init_timer(&(pLed->BlinkTimer), padapter->pnetdev, BlinkTimerCallback, pLed);
+	rtw_init_timer(&(pLed->BlinkTimer), padapter, BlinkTimerCallback, pLed);
 }
 
 
@@ -2198,3 +2159,4 @@ DeInitLed(
 	_cancel_timer_ex(&(pLed->BlinkTimer));
 	ResetLedStatus(pLed);
 }
+#endif

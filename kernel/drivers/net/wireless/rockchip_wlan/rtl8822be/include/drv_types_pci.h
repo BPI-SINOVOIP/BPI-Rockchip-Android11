@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __DRV_TYPES_PCI_H__
 #define __DRV_TYPES_PCI_H__
 
@@ -29,10 +24,8 @@
 #define	INTEL_VENDOR_ID				0x8086
 #define	SIS_VENDOR_ID					0x1039
 #define	ATI_VENDOR_ID					0x1002
-#define	AMD_VENDOR_ID					0x1022
-#define	NVI_VENDOR_ID					0x10de
-
 #define	ATI_DEVICE_ID					0x7914
+#define	AMD_VENDOR_ID					0x1022
 
 #define	PCI_MAX_BRIDGE_NUMBER			255
 #define	PCI_MAX_DEVICES				32
@@ -89,7 +82,6 @@ enum pci_bridge_vendor {
 	PCI_BRIDGE_VENDOR_ATI, /* = 0x02, */ /* 0b'0000,0010 */
 	PCI_BRIDGE_VENDOR_AMD, /* = 0x04, */ /* 0b'0000,0100 */
 	PCI_BRIDGE_VENDOR_SIS ,/* = 0x08, */ /* 0b'0000,1000 */
-	PCI_BRIDGE_VENDOR_NVI ,/* = 0x10, */ /* 0b'0001,0000 */
 	PCI_BRIDGE_VENDOR_UNKNOWN, /* = 0x40, */ /* 0b'0100,0000 */
 	PCI_BRIDGE_VENDOR_MAX ,/* = 0x80 */
 } ;

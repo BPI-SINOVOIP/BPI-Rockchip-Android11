@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2013 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,18 +11,11 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
-#ifdef CONFIG_BT_COEXIST
-
+ *****************************************************************************/
 #include <drv_types.h>
-#include <hal_btcoex.h>
 #include <hal_data.h>
-
+#ifdef CONFIG_BT_COEXIST
+#include <hal_btcoex.h>
 
 void rtw_btcoex_Initialize(PADAPTER padapter)
 {
@@ -32,6 +25,16 @@ void rtw_btcoex_Initialize(PADAPTER padapter)
 void rtw_btcoex_PowerOnSetting(PADAPTER padapter)
 {
 	hal_btcoex_PowerOnSetting(padapter);
+}
+
+void rtw_btcoex_AntInfoSetting(PADAPTER padapter)
+{
+	hal_btcoex_AntInfoSetting(padapter);
+}
+
+void rtw_btcoex_PowerOffSetting(PADAPTER padapter)
+{
+	hal_btcoex_PowerOffSetting(padapter);
 }
 
 void rtw_btcoex_PreLoadFirmware(PADAPTER padapter)
@@ -78,12 +81,16 @@ void rtw_btcoex_ScanNotify(PADAPTER padapter, u8 type)
 	if (_FALSE == pHalData->EEPROMBluetoothCoexist)
 		return;
 
-#ifdef CONFIG_CONCURRENT_MODE
 	if (_FALSE == type) {
+		#ifdef CONFIG_CONCURRENT_MODE
 		if (rtw_mi_buddy_check_fwstate(padapter, WIFI_SITE_MONITOR))
 			return;
+		#endif
+
+		if (DEV_MGMT_TX_NUM(adapter_to_dvobj(padapter))
+			|| DEV_ROCH_NUM(adapter_to_dvobj(padapter)))
+			return;
 	}
-#endif
 
 #ifdef CONFIG_BT_COEXIST_SOCKET_TRX
 	if (pBtMgnt->ExtConfig.bEnableWifiScanNotify)
@@ -231,20 +238,19 @@ void rtw_btcoex_HaltNotify(PADAPTER padapter)
 	hal_btcoex_HaltNotify(padapter, do_halt);
 }
 
-void rtw_btcoex_ScoreBoardStatusNotify(PADAPTER padapter, u8 length, u8 *tmpBuf)
-{
-	PHAL_DATA_TYPE	pHalData;
-
-	pHalData = GET_HAL_DATA(padapter);
-	if (_FALSE == pHalData->EEPROMBluetoothCoexist)
-		return;
-
-	hal_btcoex_ScoreBoardStatusNotify(padapter, length, tmpBuf);
-}
-
 void rtw_btcoex_switchband_notify(u8 under_scan, u8 band_type)
 {
 	hal_btcoex_switchband_notify(under_scan, band_type);
+}
+
+void rtw_btcoex_WlFwDbgInfoNotify(PADAPTER padapter, u8* tmpBuf, u8 length)
+{
+	hal_btcoex_WlFwDbgInfoNotify(padapter, tmpBuf, length);
+}
+
+void rtw_btcoex_rx_rate_change_notify(PADAPTER padapter, u8 is_data_frame, u8 rate_id)
+{
+	hal_btcoex_rx_rate_change_notify(padapter, is_data_frame, rate_id);
 }
 
 void rtw_btcoex_SwitchBtTRxMask(PADAPTER padapter)
@@ -270,13 +276,6 @@ void rtw_btcoex_Handler(PADAPTER padapter)
 
 	if (_FALSE == pHalData->EEPROMBluetoothCoexist)
 		return;
-
-#if defined(CONFIG_CONCURRENT_MODE)
-	if (padapter->adapter_type != PRIMARY_ADAPTER)
-		return;
-#endif
-
-
 
 	hal_btcoex_Hanlder(padapter);
 }
@@ -391,48 +390,22 @@ void rtw_btcoex_StackUpdateProfileInfo(void)
 	hal_btcoex_StackUpdateProfileInfo();
 }
 
-void rtw_btcoex_BTOffOnNotify(PADAPTER padapter, u8 bBTON)
+void rtw_btcoex_pta_off_on_notify(PADAPTER padapter, u8 bBTON)
 {
-	hal_btcoex_BTOffOnNotify(padapter, bBTON);
+	hal_btcoex_pta_off_on_notify(padapter, bBTON);
 }
 
 #ifdef CONFIG_RF4CE_COEXIST
-void rtw_btcoex_rf4ce_voice_Notify(PADAPTER padapter, u8 type)
-{
-
-	/* Notify only when state was changed */
-
-	#if 0 /* TODO */
-	PHAL_DATA_TYPE	pHalData;
-
-	pHalData = GET_HAL_DATA(padapter);
-	if (_FALSE == pHalData->EEPROMBluetoothCoexist)
-		return;
-
-	hal_btcoex_rf4ce_voice_Notify(padapter, type);
-	#endif
-}
-
-void rtw_btcoex_set_rf4ce_link_state(PADAPTER padapter, u8 state)
+void rtw_btcoex_SetRf4ceLinkState(PADAPTER padapter, u8 state)
 {
 	hal_btcoex_set_rf4ce_link_state(state);
 }
 
-u8 rtw_btcoex_get_rf4ce_link_state(PADAPTER padapter)
+u8 rtw_btcoex_GetRf4ceLinkState(PADAPTER padapter)
 {
 	return hal_btcoex_get_rf4ce_link_state();
 }
-
-void rtw_btcoex_set_rf4ce_voice_state(PADAPTER padapter, u8 state)
-{
-	hal_btcoex_set_rf4ce_voice_state(state);
-}
-
-u8 rtw_btcoex_get_rf4ce_voice_state(PADAPTER padapter)
-{
-	return hal_btcoex_get_rf4ce_voice_state();
-}
-#endif /* CONFIG_RF4CE_COEXIST */
+#endif
 
 /* ==================================================
  * Below Functions are called by BT-Coex
@@ -455,7 +428,7 @@ void rtw_btcoex_LPS_Enter(PADAPTER padapter)
 	rtw_set_ps_mode(padapter, PS_MODE_MIN, 0, lpsVal, "BTCOEX");
 }
 
-void rtw_btcoex_LPS_Leave(PADAPTER padapter)
+u8 rtw_btcoex_LPS_Leave(PADAPTER padapter)
 {
 	struct pwrctrl_priv *pwrpriv;
 
@@ -464,9 +437,10 @@ void rtw_btcoex_LPS_Leave(PADAPTER padapter)
 
 	if (pwrpriv->pwr_mode != PS_MODE_ACTIVE) {
 		rtw_set_ps_mode(padapter, PS_MODE_ACTIVE, 0, 0, "BTCOEX");
-		LPS_RF_ON_check(padapter, 100);
 		pwrpriv->bpower_saving = _FALSE;
 	}
+
+	return _TRUE;
 }
 
 u16 rtw_btcoex_btreg_read(PADAPTER padapter, u8 type, u16 addr, u32 *data)
@@ -511,7 +485,7 @@ u8 rtw_btcoex_get_pg_rfe_type(PADAPTER padapter)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
 
-	return pHalData->RFEType;
+	return pHalData->rfe_type;
 }
 
 u8 rtw_btcoex_is_tfbga_package_type(PADAPTER padapter)
@@ -1391,14 +1365,14 @@ void rtw_btcoex_recvmsgbysocket(void *data)
 			/* attend ack */
 			pcoex_info->BT_attend = _TRUE;
 			RTW_INFO("RX_ATTEND_ACK!,sock_open:%d, BT_attend:%d\n", pcoex_info->sock_open, pcoex_info->BT_attend);
-			rtw_btcoex_BTOffOnNotify(pbtcoexadapter, pcoex_info->BT_attend);
+			rtw_btcoex_pta_off_on_notify(pbtcoexadapter, pcoex_info->BT_attend);
 			break;
 
 		case RX_ATTEND_REQ:
 			pcoex_info->BT_attend = _TRUE;
 			RTW_INFO("RX_BT_ATTEND_REQ!,sock_open:%d, BT_attend:%d\n", pcoex_info->sock_open, pcoex_info->BT_attend);
 			rtw_btcoex_sendmsgbysocket(pbtcoexadapter, attend_ack, sizeof(attend_ack), _FALSE);
-			rtw_btcoex_BTOffOnNotify(pbtcoexadapter, pcoex_info->BT_attend);
+			rtw_btcoex_pta_off_on_notify(pbtcoexadapter, pcoex_info->BT_attend);
 			break;
 
 		case RX_INVITE_REQ:
@@ -1406,21 +1380,21 @@ void rtw_btcoex_recvmsgbysocket(void *data)
 			pcoex_info->BT_attend = _TRUE;
 			RTW_INFO("RX_INVITE_REQ!,sock_open:%d, BT_attend:%d\n", pcoex_info->sock_open, pcoex_info->BT_attend);
 			rtw_btcoex_sendmsgbysocket(pbtcoexadapter, invite_rsp, sizeof(invite_rsp), _FALSE);
-			rtw_btcoex_BTOffOnNotify(pbtcoexadapter, pcoex_info->BT_attend);
+			rtw_btcoex_pta_off_on_notify(pbtcoexadapter, pcoex_info->BT_attend);
 			break;
 
 		case RX_INVITE_RSP:
 			/*invite rsp*/
 			pcoex_info->BT_attend = _TRUE;
 			RTW_INFO("RX_INVITE_RSP!,sock_open:%d, BT_attend:%d\n", pcoex_info->sock_open, pcoex_info->BT_attend);
-			rtw_btcoex_BTOffOnNotify(pbtcoexadapter, pcoex_info->BT_attend);
+			rtw_btcoex_pta_off_on_notify(pbtcoexadapter, pcoex_info->BT_attend);
 			break;
 
 		case RX_LEAVE_ACK:
 			/* mean BT know wifi  will leave */
 			pcoex_info->BT_attend = _FALSE;
 			RTW_INFO("RX_LEAVE_ACK!,sock_open:%d, BT_attend:%d\n", pcoex_info->sock_open, pcoex_info->BT_attend);
-			rtw_btcoex_BTOffOnNotify(pbtcoexadapter, pcoex_info->BT_attend);
+			rtw_btcoex_pta_off_on_notify(pbtcoexadapter, pcoex_info->BT_attend);
 			break;
 
 		case RX_BT_LEAVE:
@@ -1428,7 +1402,7 @@ void rtw_btcoex_recvmsgbysocket(void *data)
 			rtw_btcoex_sendmsgbysocket(pbtcoexadapter, leave_ack, sizeof(leave_ack), _FALSE); /* no ack */
 			pcoex_info->BT_attend = _FALSE;
 			RTW_INFO("RX_BT_LEAVE!sock_open:%d, BT_attend:%d\n", pcoex_info->sock_open, pcoex_info->BT_attend);
-			rtw_btcoex_BTOffOnNotify(pbtcoexadapter, pcoex_info->BT_attend);
+			rtw_btcoex_pta_off_on_notify(pbtcoexadapter, pcoex_info->BT_attend);
 			break;
 
 		default:
@@ -1597,7 +1571,7 @@ void rtw_btcoex_init_socket(_adapter *padapter)
 		pbtcoexadapter = padapter;
 		/* We expect BT is off if BT don't send ack to wifi */
 		RTW_INFO("We expect BT is off if BT send ack to wifi\n");
-		rtw_btcoex_BTOffOnNotify(pbtcoexadapter, _FALSE);
+		rtw_btcoex_pta_off_on_notify(pbtcoexadapter, _FALSE);
 		if (rtw_btcoex_create_kernel_socket(padapter) == _SUCCESS)
 			pcoex_info->is_exist = _TRUE;
 		else {
@@ -1767,3 +1741,22 @@ void rtw_btcoex_SendScanNotify(PADAPTER padapter, u8 scanType)
 }
 #endif /* CONFIG_BT_COEXIST_SOCKET_TRX */
 #endif /* CONFIG_BT_COEXIST */
+
+void rtw_btcoex_set_ant_info(PADAPTER padapter)
+{
+#ifdef CONFIG_BT_COEXIST
+	PHAL_DATA_TYPE hal = GET_HAL_DATA(padapter);
+
+	if (hal->EEPROMBluetoothCoexist == _TRUE) {
+		u8 bMacPwrCtrlOn = _FALSE;
+
+		rtw_btcoex_AntInfoSetting(padapter);
+		rtw_hal_get_hwreg(padapter, HW_VAR_APFM_ON_MAC, &bMacPwrCtrlOn);
+		if (bMacPwrCtrlOn == _TRUE)
+			rtw_btcoex_PowerOnSetting(padapter);
+	}
+	else
+#endif
+		rtw_btcoex_wifionly_AntInfoSetting(padapter);
+}
+

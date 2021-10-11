@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2013 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 /*
  * Description:
  *	This file can be applied to following platforms:
@@ -24,20 +19,20 @@
  */
 #include <drv_types.h>
 #ifdef CONFIG_GPIO_WAKEUP
-	#include <linux/gpio.h>
+#include <linux/gpio.h>
 #endif
 
 #ifdef CONFIG_MMC
-	#if defined(CONFIG_PLATFORM_ARM_SUN50IW1P1)
-		extern void sunxi_mmc_rescan_card(unsigned ids);
-		extern void sunxi_wlan_set_power(int on);
-		extern int sunxi_wlan_get_bus_index(void);
-		extern int sunxi_wlan_get_oob_irq(void);
-		extern int sunxi_wlan_get_oob_irq_flags(void);
-	#endif
-	#ifdef CONFIG_GPIO_WAKEUP
-		extern unsigned int oob_irq;
-	#endif
+#if defined(CONFIG_PLATFORM_ARM_SUN50IW1P1)
+extern void sunxi_mmc_rescan_card(unsigned ids);
+extern void sunxi_wlan_set_power(int on);
+extern int sunxi_wlan_get_bus_index(void);
+extern int sunxi_wlan_get_oob_irq(void);
+extern int sunxi_wlan_get_oob_irq_flags(void);
+#endif
+#ifdef CONFIG_GPIO_WAKEUP
+extern unsigned int oob_irq;
+#endif
 #endif /* CONFIG_MMC */
 
 /*

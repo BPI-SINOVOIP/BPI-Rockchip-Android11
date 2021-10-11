@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2015 - 2016 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2015 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef _RTL8822B_HAL_H_
 #define _RTL8822B_HAL_H_
 
@@ -25,7 +20,11 @@
 #include "../hal/halmac/halmac_api.h"	/* MAC REG definition */
 
 
-#define MAX_RECVBUF_SZ		HALMAC_RX_FIFO_SIZE_8822B
+#ifdef CONFIG_SUPPORT_TRX_SHARED
+#define MAX_RECVBUF_SZ		46080	/* 45KB, TX: (256-64)KB */
+#else /* !CONFIG_SUPPORT_TRX_SHARED */
+#define MAX_RECVBUF_SZ		24576	/* 24KB, TX: 256KB */
+#endif /* !CONFIG_SUPPORT_TRX_SHARED */
 
 /*
  * MAC Register definition
@@ -40,8 +39,8 @@
 #define REG_C2HEVT_CLEAR	0x1AF			/* hal_com.c */
 #define REG_BCN_CTRL_1		REG_BCN_CTRL_CLINT0_8822B	/* hal_com.c */
 #define REG_TSFTR1		REG_FREERUN_CNT_8822B	/* hal_com.c */
-#define REG_RXFLTMAP2		REG_RXFLTMAP_8822B	/* rtw_mp.c */
-#define REG_ATIMWND_1		0x0570
+#define REG_WOWLAN_WAKE_REASON	0x01C7 /* hal_com.c */
+#define REG_GPIO_PIN_CTRL_2		REG_GPIO_EXT_CTRL_8822B		/* hal_com.c */
 
 /* RXERR_RPT, for rtw_mp.c */
 #define RXERR_TYPE_OFDM_PPDU		0
@@ -150,9 +149,6 @@
 #define rB_LSSIWrite_Jaguar		0xE90	/* RF write addr, LSSI Parameter (rtl8822b_phy.c) */
 #define rB_RFE_Pinmux_Jaguar		0xEB0	/* hal_mp.c */
 
-/* Page0(0x000) */
-#define REG_GPIO_PIN_CTRL_2		0x0060 /* RTL8723 WIFI/BT/GPS Multi-Function GPIO Pin Control. */
-
 /* Page1(0x100) */
 #define bBBResetB			0x100
 
@@ -198,30 +194,15 @@
 #define RF_0x52			0x52
 #define RF_WeLut_Jaguar		0xEF	/* rtl8822b_phy.c */
 
-/*
- * 8822B files path
- */
-#define RTL8822B_FW_IMG		"rtl8822b/FW_NIC.bin"
-#define RTL8822B_FW_WW_IMG	"rtl8822b/FW_WoWLAN.bin"
-#define RTL8822B_PHY_REG	"rtl8822b/PHY_REG.txt"
-#define RTL8822B_PHY_RADIO_A	"rtl8822b/RadioA.txt"
-#define RTL8822B_PHY_RADIO_B	"rtl8822b/RadioB.txt"
-#define RTL8822B_TXPWR_TRACK	"rtl8822b/TxPowerTrack.txt"
-#define RTL8822B_AGC_TAB	"rtl8822b/AGC_TAB.txt"
-#define RTL8822B_PHY_MACREG	"rtl8822b/MAC_REG.txt"
-#define RTL8822B_PHY_REG_PG	"rtl8822b/PHY_REG_PG.txt"
-#define RTL8822B_PHY_REG_MP	"rtl8822b/PHY_REG_MP.txt"
-#define RTL8822B_TXPWR_LMT	"rtl8822b/TXPWR_LMT.txt"
-
-
 /* General Functions */
 void rtl8822b_init_hal_spec(PADAPTER);				/* hal/hal_com.c */
 
+#ifdef CONFIG_MP_INCLUDED
 /* MP Functions */
 #include <rtw_mp.h>		/* struct mp_priv */
-void rtl8822b_phy_init_haldm(PADAPTER);				/* rtw_mp.c */
 void rtl8822b_prepare_mp_txdesc(PADAPTER, struct mp_priv *);	/* rtw_mp.c */
 void rtl8822b_mp_config_rfpath(PADAPTER);			/* hal_mp.c */
+#endif
 
 #ifdef CONFIG_USB_HCI
 #include <rtl8822bu_hal.h>

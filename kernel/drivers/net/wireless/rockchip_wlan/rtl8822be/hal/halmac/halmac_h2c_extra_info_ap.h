@@ -1,4 +1,18 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/******************************************************************************
+ *
+ * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of version 2 of the GNU General Public License as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ ******************************************************************************/
+
 #ifndef _HAL_H2CEXTRAINFO_H2C_C2H_AP_H_
 #define _HAL_H2CEXTRAINFO_H2C_C2H_AP_H_
 #define PHY_PARAMETER_INFO_GET_LENGTH(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X00, 0, 8)
@@ -67,4 +81,43 @@
 #define CH_EXTRA_INFO_GET_CH_EXTRA_INFO_DATA(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X00, 16, 1)
 #define CH_EXTRA_INFO_SET_CH_EXTRA_INFO_DATA(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X00, 16, 1, __Value)
 #define CH_EXTRA_INFO_SET_CH_EXTRA_INFO_DATA_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X00, 16, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_BYTEDATA_L(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X00, 0, 16)
+#define HIOE_INSTRUCTION_INFO_SET_BYTEDATA_L(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X00, 0, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_BYTEDATA_L_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X00, 0, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_BITDATA(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X00, 0, 16)
+#define HIOE_INSTRUCTION_INFO_SET_BITDATA(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X00, 0, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_BITDATA_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X00, 0, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_BYTEDATA_H(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X00, 16, 16)
+#define HIOE_INSTRUCTION_INFO_SET_BYTEDATA_H(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X00, 16, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_BYTEDATA_H_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X00, 16, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_BITMASK(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X00, 16, 16)
+#define HIOE_INSTRUCTION_INFO_SET_BITMASK(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X00, 16, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_BITMASK_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X00, 16, 16, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_REG_ADDR(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 0, 22)
+#define HIOE_INSTRUCTION_INFO_SET_REG_ADDR(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 0, 22, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_REG_ADDR_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 0, 22, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_DELAY_VALUE(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 0, 22)
+#define HIOE_INSTRUCTION_INFO_SET_DELAY_VALUE(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 0, 22, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_DELAY_VALUE_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 0, 22, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_MODE_SELECT(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 22, 1)
+#define HIOE_INSTRUCTION_INFO_SET_MODE_SELECT(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 22, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_MODE_SELECT_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 22, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_IO_DELAY(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 23, 1)
+#define HIOE_INSTRUCTION_INFO_SET_IO_DELAY(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 23, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_IO_DELAY_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 23, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_BYTEMASK(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 24, 4)
+#define HIOE_INSTRUCTION_INFO_SET_BYTEMASK(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 24, 4, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_BYTEMASK_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 24, 4, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_RD_EN(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 28, 1)
+#define HIOE_INSTRUCTION_INFO_SET_RD_EN(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 28, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_RD_EN_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 28, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_WR_EN(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 29, 1)
+#define HIOE_INSTRUCTION_INFO_SET_WR_EN(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 29, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_WR_EN_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 29, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_RAW_R(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 30, 1)
+#define HIOE_INSTRUCTION_INFO_SET_RAW_R(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 30, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_RAW_R_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 30, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_GET_RAW(__pExtraInfo)    GET_C2H_FIELD(__pExtraInfo + 0X04, 31, 1)
+#define HIOE_INSTRUCTION_INFO_SET_RAW(__pExtraInfo, __Value)    SET_C2H_FIELD_CLR(__pExtraInfo + 0X04, 31, 1, __Value)
+#define HIOE_INSTRUCTION_INFO_SET_RAW_NO_CLR(__pExtraInfo, __Value)    SET_C2H_FIELD_NO_CLR(__pExtraInfo + 0X04, 31, 1, __Value)
 #endif

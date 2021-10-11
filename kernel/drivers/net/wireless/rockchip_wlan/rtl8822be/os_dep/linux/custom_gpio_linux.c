@@ -1,7 +1,6 @@
 /******************************************************************************
- * Customer code to add GPIO control during WLAN start/stop
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -12,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #include "drv_types.h"
 
 #ifdef CONFIG_PLATFORM_SPRD
@@ -29,27 +23,27 @@
 #if !(defined ANDROID_2X)
 
 #ifdef CONFIG_RTL8188E
-	#include <mach/regulator.h>
-	#include <linux/regulator/consumer.h>
+#include <mach/regulator.h>
+#include <linux/regulator/consumer.h>
 #endif /* CONFIG_RTL8188E */
 
 #ifndef GPIO_WIFI_POWER
-	#define GPIO_WIFI_POWER -1
+#define GPIO_WIFI_POWER -1
 #endif /* !GPIO_WIFI_POWER */
 
 #ifndef GPIO_WIFI_RESET
-	#define GPIO_WIFI_RESET -1
+#define GPIO_WIFI_RESET -1
 #endif /* !GPIO_WIFI_RESET */
 
 #ifndef GPIO_WIFI_PWDN
-	#define GPIO_WIFI_PWDN -1
+#define GPIO_WIFI_PWDN -1
 #endif /* !GPIO_WIFI_RESET */
 #ifdef CONFIG_GSPI_HCI
-	extern unsigned int oob_irq;
+extern unsigned int oob_irq;
 #endif /* CONFIG_GSPI_HCI */
 
 #ifdef CONFIG_SDIO_HCI
-	extern int rtw_mp_mode;
+extern int rtw_mp_mode;
 #else /* !CONFIG_SDIO_HCI */
 #endif /* !CONFIG_SDIO_HCI */
 
@@ -162,11 +156,11 @@ void rtw_wifi_gpio_wlan_ctrl(int onoff)
 #include <mach/ldo.h>
 
 #ifdef CONFIG_RTL8188E
-	extern int sprd_3rdparty_gpio_wifi_power;
+extern int sprd_3rdparty_gpio_wifi_power;
 #endif
 extern int sprd_3rdparty_gpio_wifi_pwd;
 #if  defined(CONFIG_RTL8723B)
-	extern int sprd_3rdparty_gpio_bt_reset;
+extern int sprd_3rdparty_gpio_bt_reset;
 #endif
 
 int rtw_wifi_gpio_init(void)

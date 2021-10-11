@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __INC_HAL8723DPHYREG_H__
 #define __INC_HAL8723DPHYREG_H__
 
@@ -536,7 +531,7 @@
 #define		bOFDMTxStatus					0x2
 
 #define		IS_BB_REG_OFFSET_92S(_Offset)		((_Offset >= 0x800) && (_Offset <= 0xfff))
-#define	RF_TX_GAIN_OFFSET_8723D(_val) (abs((_val)) | (((_val) > 0) ? BIT(5) : 0))
+#define		RF_TX_GAIN_OFFSET_8723D(_val) (abs((_val)) | (((_val) > 0) ? BIT(4) : 0))
 
 /* 2. Page8(0x800) */
 #define		bRFMOD							0x1	/* Reg 0x800 rFPGA0_RFMOD */

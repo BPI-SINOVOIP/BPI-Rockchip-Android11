@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #define _HCI_INTF_C_
 
 #include <drv_types.h>
@@ -31,7 +26,7 @@
 #endif
 
 
-#if defined(PLATFORM_LINUX) && defined (PLATFORM_WINDOWS)
+#if defined(PLATFORM_LINUX) && defined(PLATFORM_WINDOWS)
 
 	#error "Shall be Linux or Windows, but not both!\n"
 
@@ -57,6 +52,7 @@ int rtw_resume_process(_adapter *padapter);
 
 static int rtw_drv_init(struct pci_dev *pdev, const struct pci_device_id *pdid);
 static void rtw_dev_remove(struct pci_dev *pdev);
+static void rtw_dev_shutdown(struct pci_dev *pdev);
 
 static struct specific_device_id specific_device_id_tbl[] = {
 	{.idVendor = 0x0b05, .idProduct = 0x1791, .flags = SPEC_DEV_ID_DISABLE_HT},
@@ -89,6 +85,12 @@ struct pci_device_id rtw_pci_id_tbl[] = {
 #ifdef CONFIG_RTL8822B
 	{PCI_DEVICE(PCI_VENDER_ID_REALTEK, 0xB822), .driver_data = RTL8822B},
 #endif
+#ifdef CONFIG_RTL8821C
+	{PCI_DEVICE(PCI_VENDER_ID_REALTEK, 0xC821), .driver_data = RTL8821C},
+	{PCI_DEVICE(PCI_VENDER_ID_REALTEK, 0xC82A), .driver_data = RTL8821C},
+	{PCI_DEVICE(PCI_VENDER_ID_REALTEK, 0xC82B), .driver_data = RTL8821C},
+#endif
+
 	{},
 };
 
@@ -102,7 +104,7 @@ static struct pci_drv_priv pci_drvpriv = {
 	.rtw_pci_drv.name = (char *)DRV_NAME,
 	.rtw_pci_drv.probe = rtw_drv_init,
 	.rtw_pci_drv.remove = rtw_dev_remove,
-	.rtw_pci_drv.shutdown = rtw_dev_remove,
+	.rtw_pci_drv.shutdown = rtw_dev_shutdown,
 	.rtw_pci_drv.id_table = rtw_pci_id_tbl,
 #ifdef CONFIG_PM
 	.rtw_pci_drv.suspend = rtw_pci_suspend,
@@ -118,8 +120,7 @@ static u16 pcibridge_vendors[PCI_BRIDGE_VENDOR_MAX] = {
 	INTEL_VENDOR_ID,
 	ATI_VENDOR_ID,
 	AMD_VENDOR_ID,
-	SIS_VENDOR_ID,
-	NVI_VENDOR_ID
+	SIS_VENDOR_ID
 };
 
 #define PCI_PM_CAP_ID		0x01	/* The Capability ID for PME function */
@@ -140,7 +141,7 @@ void	PlatformClearPciPMEStatus(PADAPTER Adapter)
 
 	result = pci_read_config_byte(pdev, 0x34, &CapPointer);
 	if (result != 0)
-		RTW_INFO("%s() pci_read_config_byte 0x34 Failed!\n", __FUNCTION__);
+		RTW_INFO("%s() pci_read_config_byte 0x34 Failed!\n", __func__);
 	else {
 		RTW_INFO("PlatformClearPciPMEStatus(): PCI configration 0x34 = 0x%2x\n", CapPointer);
 		do {
@@ -153,14 +154,14 @@ void	PlatformClearPciPMEStatus(PADAPTER Adapter)
 			/* result = pci_read_config_word(pdev, CapPointer, &CapHdr); */
 			result = pci_read_config_byte(pdev, CapPointer, &CapHdr.CapabilityID);
 			if (result != 0) {
-				RTW_INFO("%s() pci_read_config_byte %x Failed!\n", __FUNCTION__, CapPointer);
+				RTW_INFO("%s() pci_read_config_byte %x Failed!\n", __func__, CapPointer);
 				CapId = 0xff;
 				break;
 			}
 
 			result = pci_read_config_byte(pdev, CapPointer + 1, &CapHdr.Next);
 			if (result != 0) {
-				RTW_INFO("%s() pci_read_config_byte %x Failed!\n", __FUNCTION__, CapPointer);
+				RTW_INFO("%s() pci_read_config_byte %x Failed!\n", __func__, CapPointer);
 				CapId = 0xff;
 				break;
 			}
@@ -201,6 +202,207 @@ void	PlatformClearPciPMEStatus(PADAPTER Adapter)
 	RTW_INFO("PME, value_offset = %x, PME EN = %x\n", CapPointer + 5, PCIClkReq);
 }
 
+void rtw_pci_aspm_config_clkreql0sl1(_adapter *padapter)
+{
+	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
+	u8 tmp8 = 0;
+	u16 tmp16 = 0;
+
+	/* 0x70f Bit7 for L0s */
+	tmp8 = rtw_hal_pci_dbi_read(padapter, 0x70f);
+
+	if (pHalData->pci_backdoor_ctrl & PCI_BC_ASPM_L0s)
+		tmp8 |= BIT7;
+	else
+		tmp8 &= (~BIT7);
+
+	/* Default set L1 entrance latency to 16us */
+	/* L0s: b[0-2], L1: b[3-5]*/
+	if (pHalData->pci_backdoor_ctrl & PCI_BC_ASPM_L1) {
+		tmp8 &= (~0x38);
+		tmp8 |= 0x20;
+#ifdef CONFIG_PCI_DYNAMIC_ASPM
+		pHalData->bAspmL1LastIdle = 1;
+#endif
+	}
+
+	rtw_hal_pci_dbi_write(padapter, 0x70f, tmp8);
+
+
+	/* 0x719 Bit 3 for L1 ,  Bit4 for clock req */
+	tmp8 = rtw_hal_pci_dbi_read(padapter, 0x719);
+
+	if (pHalData->pci_backdoor_ctrl & PCI_BC_ASPM_L1)
+		tmp8 |= BIT3;
+	else
+		tmp8 &= (~BIT3);
+
+	if (pHalData->pci_backdoor_ctrl & PCI_BC_CLK_REQ)
+		tmp8 |= BIT4;
+	else
+		tmp8 &= (~BIT4);
+
+	rtw_hal_pci_dbi_write(padapter, 0x719, tmp8);
+
+	if (pHalData->pci_backdoor_ctrl & PCI_BC_CLK_REQ) {
+		tmp16 = rtw_hal_pci_mdio_read(padapter, 0x10);
+		rtw_hal_pci_mdio_write(padapter, 0x10, (tmp16 | BIT2));
+	}
+}
+
+void rtw_pci_aspm_config_l1off(_adapter *padapter)
+{
+	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
+
+	u8 enable_l1off = _FALSE;
+
+	if (pHalData->pci_backdoor_ctrl & PCI_BC_ASPM_L1Off)
+		enable_l1off = rtw_hal_pci_l1off_nic_support(padapter);
+
+	padapter->hal_func.hal_set_l1ssbackdoor_handler(padapter, enable_l1off);
+
+}
+
+void rtw_pci_aspm_config_l1off_general(_adapter *padapter, u8 enablel1off)
+{
+
+	u8 tmp8;
+	u16 tmp16;
+
+	if (enablel1off) {
+		/* 0x718 Bit5 for L1SS */
+		tmp8 = rtw_hal_pci_dbi_read(padapter, 0x718);
+		rtw_hal_pci_dbi_write(padapter, 0x718, (tmp8 | BIT5));
+
+		tmp16 = rtw_hal_pci_mdio_read(padapter, 0x1b);
+		rtw_hal_pci_mdio_write(padapter, 0x1b, (tmp16 | BIT4));
+	} else {
+		tmp8 = rtw_hal_pci_dbi_read(padapter, 0x718);
+		rtw_hal_pci_dbi_write(padapter, 0x718, (tmp8 & (~BIT5)));
+	}
+
+}
+
+#ifdef CONFIG_PCI_DYNAMIC_ASPM
+void rtw_pci_aspm_config_dynamic_l1_ilde_time(_adapter *padapter)
+{
+	BOOLEAN	 bCurrentIdle = 1;	/* Default idle 4us (0x70F = 0x17)*/
+	HAL_DATA_TYPE *pHalData	= GET_HAL_DATA(padapter);
+	struct mlme_priv *pmlmepriv = &(padapter->mlmepriv);
+	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(padapter);
+	int current_tx_tp = pdvobjpriv->traffic_stat.cur_tx_tp;
+	int current_rx_tp = pdvobjpriv->traffic_stat.cur_rx_tp;
+	int current_tp = current_tx_tp + current_rx_tp;
+	u8 tmp8 = 0;
+
+	if (padapter->registrypriv.wifi_spec)
+		return;
+
+	if (!(pHalData->pci_backdoor_ctrl & PCI_BC_ASPM_L1))
+		return;
+
+#if 0
+	RTW_INFO("current_tx_tp = %d\n", current_tx_tp);
+	RTW_INFO("current_rx_tp = %d\n", current_rx_tp);
+	RTW_INFO("current_tp = %d\n", current_tp);
+#endif
+
+	if ((rtw_linked_check(padapter) == _TRUE) && 
+		((current_tx_tp >= 50)||
+		(current_rx_tp >= 50)))
+		/*(current_rx_tp >= 10))*/
+		/*(current_tp >= 10))*/
+	{
+		bCurrentIdle = 0;
+	}	
+	else
+	{
+		bCurrentIdle = 1;
+	}
+
+	if(bCurrentIdle != pHalData->bAspmL1LastIdle)
+	{
+		pHalData->bAspmL1LastIdle = bCurrentIdle;
+
+		tmp8 = rtw_hal_pci_dbi_read(padapter, 0x70F);
+		tmp8 &= (~0x38);
+
+		if(bCurrentIdle) {
+			/*tmp8 |= 0x10; *//*L1 entrance latency: 4us*/
+			/*tmp8 |= 0x18; *//*L1 entrance latency: 8us*/
+			tmp8 |= 0x20; /*L1 entrance latency: 16us*/
+			rtw_hal_pci_dbi_write(padapter, 0x70F, tmp8 );
+		}
+		else {
+			tmp8 |= 0x28; /*L1 entrance latency: 32us*/
+			rtw_hal_pci_dbi_write(padapter, 0x70F, tmp8 );
+		}
+	}
+
+}
+#endif
+
+void rtw_pci_dump_aspm_info(_adapter *padapter)
+{
+	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
+	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
+	struct pci_priv	*pcipriv = &(pdvobjpriv->pcipriv);
+	u8 tmp8 = 0;
+	u16 tmp16 = 0;
+	u32 tmp32 = 0;
+	u8 l1_idle = 0;
+
+
+	RTW_INFO("***** ASPM Capability *****\n");
+
+	pci_read_config_dword(pdvobjpriv->ppcidev, pcipriv->pciehdr_offset + PCI_EXP_LNKCAP, &tmp32);
+
+	RTW_INFO("CLK REQ:	%s\n", (tmp32&PCI_EXP_LNKCAP_CLKPM) ? "Enable" : "Disable");
+
+	RTW_INFO("ASPM L0s:	%s\n", (tmp32&BIT10) ? "Enable" : "Disable");
+	RTW_INFO("ASPM L1:	%s\n", (tmp32&BIT11) ? "Enable" : "Disable");
+
+	tmp8 = rtw_hal_pci_l1off_capability(padapter);
+	RTW_INFO("ASPM L1OFF:%s\n", tmp8 ? "Enable" : "Disable");
+
+	RTW_INFO("***** ASPM CTRL Reg *****\n");
+
+	pci_read_config_word(pdvobjpriv->ppcidev, pcipriv->pciehdr_offset + PCI_EXP_LNKCTL, &tmp16);
+
+	RTW_INFO("CLK REQ:	%s\n", (tmp16&PCI_EXP_LNKCTL_CLKREQ_EN) ? "Enable" : "Disable");
+	RTW_INFO("ASPM L0s:	%s\n", (tmp16&BIT0) ? "Enable" : "Disable");
+	RTW_INFO("ASPM L1:	%s\n", (tmp16&BIT1) ? "Enable" : "Disable");
+
+	tmp8 = rtw_hal_pci_l1off_nic_support(padapter);
+	RTW_INFO("ASPM L1OFF:%s\n", tmp8 ? "Enable" : "Disable");
+
+	RTW_INFO("***** ASPM Backdoor *****\n");
+
+	tmp8 = rtw_hal_pci_dbi_read(padapter, 0x719);
+	RTW_INFO("CLK REQ:	%s\n", (tmp8 & BIT4) ? "Enable" : "Disable");
+
+	tmp8 = rtw_hal_pci_dbi_read(padapter, 0x70f);
+	l1_idle = tmp8 & 0x38;
+	RTW_INFO("ASPM L0s:	%s\n", (tmp8&BIT7) ? "Enable" : "Disable");
+
+	tmp8 = rtw_hal_pci_dbi_read(padapter, 0x719);
+	RTW_INFO("ASPM L1:	%s\n", (tmp8 & BIT3) ? "Enable" : "Disable");
+
+	tmp8 = rtw_hal_pci_dbi_read(padapter, 0x718);
+	RTW_INFO("ASPM L1OFF:%s\n", (tmp8 & BIT5) ? "Enable" : "Disable");
+	
+	RTW_INFO("********* MISC **********\n");
+	RTW_INFO("ASPM L1 Idel Time: 0x%x\n", l1_idle>>3);
+	RTW_INFO("*************************\n");
+}
+
+void rtw_pci_aspm_config(_adapter *padapter)
+{
+	rtw_pci_aspm_config_clkreql0sl1(padapter);
+	rtw_pci_aspm_config_l1off(padapter);
+	rtw_pci_dump_aspm_info(padapter);
+}
+
 static u8 rtw_pci_platform_switch_device_pci_aspm(_adapter *padapter, u8 value)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
@@ -222,7 +424,7 @@ static u8 rtw_pci_platform_switch_device_pci_aspm(_adapter *padapter, u8 value)
 
 /*
  * When we set 0x01 to enable clk request. Set 0x0 to disable clk req.
- *   */
+ */
 static u8 rtw_pci_switch_clk_req(_adapter *padapter, u8 value)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
@@ -264,10 +466,8 @@ void rtw_pci_disable_aspm(_adapter *padapter)
 	if (!rtw_is_hw_init_completed(padapter))
 		return;
 
-	if (pcipriv->pcibridge_vendor == PCI_BRIDGE_VENDOR_UNKNOWN) {
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("%s(): PCI(Bridge) UNKNOWN.\n", __FUNCTION__));
+	if (pcipriv->pcibridge_vendor == PCI_BRIDGE_VENDOR_UNKNOWN)
 		return;
-	}
 
 	linkctrl_reg = pcipriv->linkctrl_reg;
 	pcibridge_linkctrlreg = pcipriv->pcibridge_linkctrlreg;
@@ -290,6 +490,7 @@ void rtw_pci_disable_aspm(_adapter *padapter)
 	{
 		/*for promising device will in L0 state after an I/O.*/
 		u8 tmp_u1b;
+
 		pci_read_config_byte(pdev, (pcipriv->pciehdr_offset + 0x10), &tmp_u1b);
 	}
 
@@ -313,9 +514,10 @@ void rtw_pci_disable_aspm(_adapter *padapter)
 }
 
 /*Enable RTL8192SE ASPM & Enable Pci Bridge ASPM for
-power saving We should follow the sequence to enable
-RTL8192SE first then enable Pci Bridge ASPM
-or the system will show bluescreen.*/
+ * power saving We should follow the sequence to enable
+ * RTL8192SE first then enable Pci Bridge ASPM
+ * or the system will show bluescreen.
+*/
 void rtw_pci_enable_aspm(_adapter *padapter)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
@@ -343,7 +545,8 @@ void rtw_pci_enable_aspm(_adapter *padapter)
 
 	/* Get Bridge ASPM Support
 	 * not to enable bridge aspm if bridge does not support
-	 * Added by sherry 20100803	 */
+	 * Added by sherry 20100803
+	*/
 	{
 		/* Get the Link Capability, it ls located at offset 0x0c from the PCIE Capability */
 		pci_read_config_dword(bridge_pdev, (pcipriv->pcibridge_pciehdr_offset + 0x0C), &u_device_aspmsupportsetting);
@@ -371,7 +574,7 @@ void rtw_pci_enable_aspm(_adapter *padapter)
 
 	/*
 	* Skip following settings if ASPM has already enabled, added by Roger, 2013.03.15.
-	*   */
+	*/
 	if ((pcipriv->pcibridge_linkctrlreg & (BIT0 | BIT1)) &&
 	    (pcipriv->linkctrl_reg & (BIT0 | BIT1))) {
 		/* BIT0: L0S, BIT1:L1 */
@@ -503,7 +706,7 @@ static s32	rtw_set_pci_cache_line_size(struct pci_dev *pdev, u8 CacheLineSizeToS
 			goto _SET_CACHELINE_SIZE_FAIL;
 		}
 
-		if ((ucPciCacheLineSize != CacheLineSizeToSet)) {
+		if (ucPciCacheLineSize != CacheLineSizeToSet) {
 			RTW_INFO("Failed to set Cache Line Size to 0x%x! ucPciCacheLineSize=%x\n", CacheLineSizeToSet, ucPciCacheLineSize);
 			goto _SET_CACHELINE_SIZE_FAIL;
 		}
@@ -524,17 +727,17 @@ _SET_CACHELINE_SIZE_FAIL:
 static s32 rtw_pci_parse_configuration(struct pci_dev *pdev, struct dvobj_priv *pdvobjpriv)
 {
 	struct pci_priv	*pcipriv = &(pdvobjpriv->pcipriv);
-	/* PPCI_COMMON_CONFIG      	pPciConfig = (PPCI_COMMON_CONFIG) pucBuffer; */
+	/* PPCI_COMMON_CONFIG pPciConfig = (PPCI_COMMON_CONFIG) pucBuffer; */
 	/* u16	usPciCommand = pPciConfig->Command; */
 	u16	usPciCommand = 0;
-	int	Result, ret;
+	int	Result, ret = _FAIL;
 	u8	CapabilityOffset;
-	RT_PCI_CAPABILITIES_HEADER	CapabilityHdr;
+	RT_PCI_CAPABILITIES_HEADER CapabilityHdr;
 	u8	PCIeCap;
 	u8	LinkCtrlReg;
 	u8	ClkReqReg;
 
-	/* RTW_INFO("%s==>\n", __FUNCTION__); */
+	/* RTW_INFO("%s==>\n", __func__); */
 
 	pci_read_config_word(pdev, PCI_COMMAND, &usPciCommand);
 
@@ -691,7 +894,8 @@ static s32 rtw_pci_parse_configuration(struct pci_dev *pdev, struct dvobj_priv *
 		}
 
 		/* Include 92C suggested by SD1. Added by tynli. 2009.11.25.
-		 * Enable the Backdoor */
+		 * Enable the Backdoor
+		 */
 		{
 			u8	tmp;
 
@@ -710,7 +914,8 @@ static s32 rtw_pci_parse_configuration(struct pci_dev *pdev, struct dvobj_priv *
 
 /*
  * Update PCI dependent default settings.
- *   */
+ *
+ */
 static void rtw_pci_update_default_setting(_adapter *padapter)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
@@ -785,7 +990,7 @@ static void rtw_pci_update_default_setting(_adapter *padapter)
 		if (pHalData->CustomerID == RT_CID_TOSHIBA &&
 		    pcipriv->pcibridge_vendor == PCI_BRIDGE_VENDOR_AMD &&
 		    !pcipriv->amd_l1_patch && !b_support_l1_on_amd) {
-			RTW_INFO("%s(): Disable L1 Backdoor!!\n", __FUNCTION__);
+			RTW_INFO("%s(): Disable L1 Backdoor!!\n", __func__);
 			b_support_backdoor = _FALSE;
 		}
 		rtw_hal_set_def_var(padapter, HAL_DEF_PCI_SUUPORT_L1_BACKDOOR, &b_support_backdoor);
@@ -841,7 +1046,7 @@ u8 PlatformEnableDMA64(PADAPTER Adapter)
 static irqreturn_t rtw_pci_interrupt(int irq, void *priv, struct pt_regs *regs)
 {
 	struct dvobj_priv *dvobj = (struct dvobj_priv *)priv;
-	_adapter *adapter = dvobj->padapters[IFACE_ID0];
+	_adapter *adapter = dvobj_get_primary_adapter(dvobj);
 
 	if (dvobj->irq_enabled == 0)
 		return IRQ_HANDLED;
@@ -940,6 +1145,14 @@ static void rtw_decide_chip_type_by_pci_driver_data(struct dvobj_priv *pdvobj, c
 		RTW_INFO("CHIP TYPE: RTL8822BE\n");
 	}
 #endif
+
+#if defined(CONFIG_RTL8821C)
+	if (pdvobj->chip_type == RTL8821C) {
+		pdvobj->HardwareType = HARDWARE_TYPE_RTL8821CE;
+		RTW_INFO("CHIP TYPE: RTL8821CE\n");
+	}
+#endif
+
 }
 
 static struct dvobj_priv	*pci_dvobj_init(struct pci_dev *pdev, const struct pci_device_id *pdid)
@@ -955,7 +1168,6 @@ static struct dvobj_priv	*pci_dvobj_init(struct pci_dev *pdev, const struct pci_
 	u8	PciBgVIdIdx;
 	int	i;
 
-	_func_enter_;
 
 	dvobj = devobj_init();
 	if (dvobj == NULL)
@@ -1035,7 +1247,7 @@ static struct dvobj_priv	*pci_dvobj_init(struct pci_dev *pdev, const struct pci_
 #endif /* RTK_DMP_PLATFORM */
 
 #ifdef RTK_DMP_PLATFORM
-	dvobj->pci_mem_start = (unsigned long)ioremap(pmem_start, pmem_len);
+	dvobj->pci_mem_start = (unsigned long)ioremap_nocache(pmem_start, pmem_len);
 #elif defined(RTK_129X_PLATFORM)
 	if (pdev->bus->number == 0x00)
 		dvobj->ctrl_start =
@@ -1053,7 +1265,7 @@ static struct dvobj_priv	*pci_dvobj_init(struct pci_dev *pdev, const struct pci_
 	dvobj->tran_addr = dvobj->ctrl_start + PCIE_TRANSLATE_OFFSET;
 
 	dvobj->pci_mem_start =
-		(unsigned long)ioremap(pmem_start, pmem_len);
+		(unsigned long)ioremap_nocache(pmem_start, pmem_len);
 #else
 	/* shared mem start */
 	dvobj->pci_mem_start = (unsigned long)pci_iomap(pdev, i, pmem_len);
@@ -1140,7 +1352,6 @@ free_dvobj:
 		dvobj = NULL;
 	}
 exit:
-	_func_exit_;
 	return dvobj;
 }
 
@@ -1148,7 +1359,6 @@ exit:
 static void pci_dvobj_deinit(struct pci_dev *pdev)
 {
 	struct dvobj_priv *dvobj = pci_get_drvdata(pdev);
-	_func_enter_;
 
 	pci_set_drvdata(pdev, NULL);
 	if (dvobj) {
@@ -1177,7 +1387,6 @@ static void pci_dvobj_deinit(struct pci_dev *pdev)
 	pci_release_regions(pdev);
 	pci_disable_device(pdev);
 
-	_func_exit_;
 }
 
 
@@ -1220,6 +1429,10 @@ u8 rtw_set_hal_ops(_adapter *padapter)
 #if defined(CONFIG_RTL8822B)
 	if (rtw_get_chip_type(padapter) == RTL8822B)
 		rtl8822be_set_hal_ops(padapter);
+#endif
+#if defined(CONFIG_RTL8821C)
+	if (rtw_get_chip_type(padapter) == RTL8821C)
+		rtl8821ce_set_hal_ops(padapter);
 #endif
 
 	if (rtw_hal_ops_check(padapter) == _FAIL)
@@ -1268,18 +1481,21 @@ void pci_set_intf_ops(_adapter *padapter, struct _io_ops *pops)
 		rtl8822be_set_intf_ops(pops);
 #endif
 
+#if defined(CONFIG_RTL8821C)
+	if (rtw_get_chip_type(padapter) == RTL8821C)
+		rtl8821ce_set_intf_ops(pops);
+#endif
+
 }
 
 static void pci_intf_start(_adapter *padapter)
 {
 
-	RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("+pci_intf_start\n"));
 	RTW_INFO("+pci_intf_start\n");
 
 	/* Enable hw interrupt */
 	rtw_hal_enable_interrupt(padapter);
 
-	RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("-pci_intf_start\n"));
 	RTW_INFO("-pci_intf_start\n");
 }
 static void rtw_mi_pci_tasklets_kill(_adapter *padapter)
@@ -1291,9 +1507,7 @@ static void rtw_mi_pci_tasklets_kill(_adapter *padapter)
 	for (i = 0; i < dvobj->iface_nums; i++) {
 		iface = dvobj->padapters[i];
 		if ((iface) && rtw_is_adapter_up(iface)) {
-#ifndef CONFIG_NAPI
 			tasklet_kill(&(padapter->recvpriv.recv_tasklet));
-#endif
 			tasklet_kill(&(padapter->recvpriv.irq_prepare_beacon_tasklet));
 			tasklet_kill(&(padapter->xmitpriv.xmit_tasklet));
 		}
@@ -1303,7 +1517,6 @@ static void rtw_mi_pci_tasklets_kill(_adapter *padapter)
 static void pci_intf_stop(_adapter *padapter)
 {
 
-	RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("+pci_intf_stop\n"));
 
 	/* Disable hw interrupt */
 	if (!rtw_is_surprise_removed(padapter)) {
@@ -1315,13 +1528,11 @@ static void pci_intf_stop(_adapter *padapter)
 
 		rtw_hal_irp_reset(padapter);
 
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("pci_intf_stop: SurpriseRemoved==_FALSE\n"));
 	} else {
 		/* Clear irq_enabled to prevent handle interrupt function. */
 		adapter_to_dvobj(padapter)->irq_enabled = 0;
 	}
 
-	RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("-pci_intf_stop\n"));
 
 }
 
@@ -1353,12 +1564,12 @@ static int rtw_pci_suspend(struct pci_dev *pdev, pm_message_t state)
 {
 	int ret = 0;
 	struct dvobj_priv *dvobj = pci_get_drvdata(pdev);
-	_adapter *padapter = dvobj->padapters[IFACE_ID0];
+	_adapter *padapter = dvobj_get_primary_adapter(dvobj);
 
 	ret = rtw_suspend_common(padapter);
 	ret = pci_save_state(pdev);
 	if (ret != 0) {
-		RTW_INFO("%s Failed on pci_save_state (%d)\n", __FUNCTION__, ret);
+		RTW_INFO("%s Failed on pci_save_state (%d)\n", __func__, ret);
 		goto exit;
 	}
 
@@ -1370,11 +1581,11 @@ static int rtw_pci_suspend(struct pci_dev *pdev, pm_message_t state)
 #ifdef CONFIG_WOWLAN
 	ret = pci_enable_wake(pdev, pci_choose_state(pdev, state), true);
 	if (ret != 0)
-		RTW_INFO("%s Failed on pci_enable_wake (%d)\n", __FUNCTION__, ret);
+		RTW_INFO("%s Failed on pci_enable_wake (%d)\n", __func__, ret);
 #endif
 	ret = pci_set_power_state(pdev, pci_choose_state(pdev, state));
 	if (ret != 0)
-		RTW_INFO("%s Failed on pci_set_power_state (%d)\n", __FUNCTION__, ret);
+		RTW_INFO("%s Failed on pci_set_power_state (%d)\n", __func__, ret);
 
 exit:
 	return ret;
@@ -1389,20 +1600,20 @@ int rtw_resume_process(_adapter *padapter)
 static int rtw_pci_resume(struct pci_dev *pdev)
 {
 	struct dvobj_priv *dvobj = pci_get_drvdata(pdev);
-	_adapter *padapter = dvobj->padapters[IFACE_ID0];
+	_adapter *padapter = dvobj_get_primary_adapter(dvobj);
 	struct net_device *pnetdev = padapter->pnetdev;
 	struct pwrctrl_priv *pwrpriv = dvobj_to_pwrctl(dvobj);
 	int	err = 0;
 
 	err = pci_set_power_state(pdev, PCI_D0);
 	if (err != 0) {
-		RTW_INFO("%s Failed on pci_set_power_state (%d)\n", __FUNCTION__, err);
+		RTW_INFO("%s Failed on pci_set_power_state (%d)\n", __func__, err);
 		goto exit;
 	}
 
 	err = pci_enable_device(pdev);
 	if (err != 0) {
-		RTW_INFO("%s Failed on pci_enable_device (%d)\n", __FUNCTION__, err);
+		RTW_INFO("%s Failed on pci_enable_device (%d)\n", __func__, err);
 		goto exit;
 	}
 
@@ -1410,7 +1621,7 @@ static int rtw_pci_resume(struct pci_dev *pdev)
 #ifdef CONFIG_WOWLAN
 	err =  pci_enable_wake(pdev, PCI_D0, 0);
 	if (err != 0) {
-		RTW_INFO("%s Failed on pci_enable_wake (%d)\n", __FUNCTION__, err);
+		RTW_INFO("%s Failed on pci_enable_wake (%d)\n", __func__, err);
 		goto exit;
 	}
 #endif
@@ -1419,7 +1630,7 @@ static int rtw_pci_resume(struct pci_dev *pdev)
 #else
 	err = pci_restore_state(pdev);
 	if (err != 0) {
-		RTW_INFO("%s Failed on pci_restore_state (%d)\n", __FUNCTION__, err);
+		RTW_INFO("%s Failed on pci_restore_state (%d)\n", __func__, err);
 		goto exit;
 	}
 #endif
@@ -1428,27 +1639,23 @@ static int rtw_pci_resume(struct pci_dev *pdev)
 	device_set_wakeup_enable(&pdev->dev, false);
 #endif
 
-	if (pwrpriv->bInternalAutoSuspend)
+	if (pwrpriv->wowlan_mode || pwrpriv->wowlan_ap_mode) {
+		rtw_resume_lock_suspend();
 		err = rtw_resume_process(padapter);
-	else {
-		if (pwrpriv->wowlan_mode || pwrpriv->wowlan_ap_mode) {
+		rtw_resume_unlock_suspend();
+	} else {
+#ifdef CONFIG_RESUME_IN_WORKQUEUE
+		rtw_resume_in_workqueue(pwrpriv);
+#else
+		if (rtw_is_earlysuspend_registered(pwrpriv)) {
+			/* jeff: bypass resume here, do in late_resume */
+			rtw_set_do_late_resume(pwrpriv, _TRUE);
+		} else {
 			rtw_resume_lock_suspend();
 			err = rtw_resume_process(padapter);
 			rtw_resume_unlock_suspend();
-		} else {
-#ifdef CONFIG_RESUME_IN_WORKQUEUE
-			rtw_resume_in_workqueue(pwrpriv);
-#else
-			if (rtw_is_earlysuspend_registered(pwrpriv)) {
-				/* jeff: bypass resume here, do in late_resume */
-				rtw_set_do_late_resume(pwrpriv, _TRUE);
-			} else {
-				rtw_resume_lock_suspend();
-				err = rtw_resume_process(padapter);
-				rtw_resume_unlock_suspend();
-			}
-#endif
 		}
+#endif
 	}
 
 exit:
@@ -1482,11 +1689,7 @@ _adapter *rtw_pci_primary_adapter_init(struct dvobj_priv *dvobj, struct pci_dev 
 #ifdef CONFIG_MI_WITH_MBSSID_CAM
 	padapter->hw_port = HW_PORT0;
 #else
-#ifndef CONFIG_HWPORT_SWAP
 	padapter->hw_port = HW_PORT0;
-#else /* CONFIG_HWPORT_SWAP */
-	padapter->hw_port = HW_PORT1;
-#endif /* !CONFIG_HWPORT_SWAP */
 #endif
 
 	if (rtw_init_io_priv(padapter, pci_set_intf_ops) == _FAIL)
@@ -1494,10 +1697,8 @@ _adapter *rtw_pci_primary_adapter_init(struct dvobj_priv *dvobj, struct pci_dev 
 
 	/* step 2.	hook HalFunc, allocate HalData */
 	/* hal_set_hal_ops(padapter); */
-	if (rtw_set_hal_ops(padapter) == _FAIL) {
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("Initialize hal resource Failed!\n"));
+	if (rtw_set_hal_ops(padapter) == _FAIL)
 		goto free_hal_data;
-	}
 
 	/* step 3. */
 	padapter->intf_start = &pci_intf_start;
@@ -1509,26 +1710,22 @@ _adapter *rtw_pci_primary_adapter_init(struct dvobj_priv *dvobj, struct pci_dev 
 	/* .4 */
 	rtw_hal_chip_configure(padapter);
 
-	/* step 4. read efuse/eeprom data and get mac_addr */
-	if (rtw_hal_read_chip_info(padapter) == _FAIL) {
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("Initialize driver read chip info Failed!\n"));
-		goto free_hal_data;
-	}
-
-	/* step 5. */
-	if (rtw_init_drv_sw(padapter) == _FAIL) {
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("Initialize driver software resource Failed!\n"));
-		goto free_hal_data;
-	}
-
 #ifdef CONFIG_BT_COEXIST
 	rtw_btcoex_Initialize(padapter);
-#endif /* CONFIG_BT_COEXIST */
+#endif
+	rtw_btcoex_wifionly_initialize(padapter);
 
-	if (rtw_hal_inirp_init(padapter) == _FAIL) {
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("Initialize PCI desc ring Failed!\n"));
-		goto free_timer;
-	}
+	/* step 4. read efuse/eeprom data and get mac_addr */
+	if (rtw_hal_read_chip_info(padapter) == _FAIL)
+		goto free_hal_data;
+
+	/* step 5. */
+	if (rtw_init_drv_sw(padapter) == _FAIL)
+		goto free_hal_data;
+
+	if (rtw_hal_inirp_init(padapter) == _FAIL)
+		goto free_hal_data;
+
 	rtw_macaddr_cfg(adapter_mac_addr(padapter),  get_hal_mac_addr(padapter));
 
 #ifdef CONFIG_MI_WITH_MBSSID_CAM
@@ -1552,12 +1749,6 @@ _adapter *rtw_pci_primary_adapter_init(struct dvobj_priv *dvobj, struct pci_dev 
 
 	status = _SUCCESS;
 
-free_timer:
-#ifdef CONFIG_NEW_SIGNAL_STAT_PROCESS
-	if (status != _SUCCESS)
-		_cancel_timer_ex(&padapter->recvpriv.signal_stat_timer);
-#endif
-
 free_hal_data:
 	if (status != _SUCCESS && padapter->HalData)
 		rtw_hal_free_data(padapter);
@@ -1578,10 +1769,10 @@ static void rtw_pci_primary_adapter_deinit(_adapter *padapter)
 	/*	padapter->intf_stop(padapter); */
 
 	if (check_fwstate(pmlmepriv, _FW_LINKED))
-		rtw_disassoc_cmd(padapter, 0, _FALSE);
+		rtw_disassoc_cmd(padapter, 0, RTW_CMDF_DIRECTLY);
 
 #ifdef CONFIG_AP_MODE
-	if (check_fwstate(&padapter->mlmepriv, WIFI_AP_STATE) == _TRUE) {
+	if (MLME_IS_AP(padapter) || MLME_IS_MESH(padapter)) {
 		free_mlme_ap_info(padapter);
 #ifdef CONFIG_HOSTAPD_MLME
 		hostapd_mode_unload(padapter);
@@ -1630,7 +1821,6 @@ static int rtw_drv_init(struct pci_dev *pdev, const struct pci_device_id *pdid)
 	struct dvobj_priv *dvobj;
 	struct net_device *pnetdev;
 
-	RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("+rtw_drv_init\n"));
 	/* RTW_INFO("+rtw_drv_init\n"); */
 
 	/* step 0. */
@@ -1638,10 +1828,8 @@ static int rtw_drv_init(struct pci_dev *pdev, const struct pci_device_id *pdid)
 
 	/* Initialize dvobj_priv */
 	dvobj = pci_dvobj_init(pdev, pdid);
-	if (dvobj == NULL) {
-		RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("initialize device object priv Failed!\n"));
+	if (dvobj == NULL)
 		goto exit;
-	}
 
 	/* Initialize primary adapter */
 	padapter = rtw_pci_primary_adapter_init(dvobj, pdev);
@@ -1687,7 +1875,6 @@ static int rtw_drv_init(struct pci_dev *pdev, const struct pci_device_id *pdid)
 	if (pci_alloc_irq(dvobj) != _SUCCESS)
 		goto os_ndevs_deinit;
 
-	RT_TRACE(_module_hci_intfs_c_, _drv_err_, ("-871x_drv - drv_init, success!\n"));
 	/* RTW_INFO("-871x_drv - drv_init, success!\n"); */
 
 	status = _SUCCESS;
@@ -1720,13 +1907,11 @@ exit:
 static void rtw_dev_remove(struct pci_dev *pdev)
 {
 	struct dvobj_priv *pdvobjpriv = pci_get_drvdata(pdev);
-	_adapter *padapter = pdvobjpriv->padapters[IFACE_ID0];
+	_adapter *padapter = dvobj_get_primary_adapter(pdvobjpriv);
 	struct net_device *pnetdev = padapter->pnetdev;
 
-	_func_exit_;
-
 	if (pdvobjpriv->processing_dev_remove == _TRUE) {
-		RTW_WARN("%s-line%d: Warning! device has been removed!\n", __FUNCTION__, __LINE__);
+		RTW_WARN("%s-line%d: Warning! device has been removed!\n", __func__, __LINE__);
 		return;
 	}
 
@@ -1739,9 +1924,6 @@ static void rtw_dev_remove(struct pci_dev *pdev)
 
 	/* TODO: use rtw_os_ndevs_deinit instead at the first stage of driver's dev deinit function */
 	rtw_os_ndevs_unregister(pdvobjpriv);
-#ifdef CONFIG_NAPI
-	netif_napi_del(&padapter->napi);
-#endif
 
 #if 0
 #ifdef RTK_DMP_PLATFORM
@@ -1765,7 +1947,7 @@ static void rtw_dev_remove(struct pci_dev *pdev)
 	rtw_unregister_early_suspend(dvobj_to_pwrctl(pdvobjpriv));
 #endif
 
-	if (padapter->bFWReady == _TRUE) {
+	if (GET_HAL_DATA(padapter)->bFWReady == _TRUE) {
 		rtw_pm_set_ips(padapter, IPS_NONE);
 		rtw_pm_set_lps(padapter, PS_MODE_ACTIVE);
 
@@ -1796,10 +1978,26 @@ static void rtw_dev_remove(struct pci_dev *pdev)
 
 	RTW_INFO("-r871xu_dev_remove, done\n");
 
-	_func_exit_;
 	return;
 }
 
+static void rtw_dev_shutdown(struct pci_dev *pdev)
+{
+	struct dvobj_priv *pdvobjpriv = pci_get_drvdata(pdev);
+	_adapter *padapter = dvobj_get_primary_adapter(pdvobjpriv);
+	struct net_device *pnetdev = padapter->pnetdev;
+
+#ifdef CONFIG_RTL8723D
+	if (IS_HARDWARE_TYPE_8723DE(padapter)) {
+		u1Byte u1Tmp;
+
+		u1Tmp = PlatformEFIORead1Byte(padapter, 0x75 /*REG_HCI_OPT_CTRL_8723D+1*/);
+		PlatformEFIOWrite1Byte(padapter, 0x75 /*REG_HCI_OPT_CTRL_8723D+1*/, (u1Tmp|BIT0));/*Disable USB Suspend Signal*/
+	}
+#endif
+
+	rtw_dev_remove(pdev);
+}
 
 static int __init rtw_drv_entry(void)
 {
@@ -1819,6 +2017,7 @@ static int __init rtw_drv_entry(void)
 	rtw_suspend_lock_init();
 	rtw_drv_proc_init();
 	rtw_ndev_notifier_register();
+	rtw_inetaddr_notifier_register();
 
 	ret = pci_register_driver(&pci_drvpriv.rtw_pci_drv);
 
@@ -1827,6 +2026,7 @@ static int __init rtw_drv_entry(void)
 		rtw_suspend_lock_uninit();
 		rtw_drv_proc_deinit();
 		rtw_ndev_notifier_unregister();
+		rtw_inetaddr_notifier_unregister();
 		goto exit;
 	}
 
@@ -1846,6 +2046,7 @@ static void __exit rtw_drv_halt(void)
 	rtw_suspend_lock_uninit();
 	rtw_drv_proc_deinit();
 	rtw_ndev_notifier_unregister();
+	rtw_inetaddr_notifier_unregister();
 
 	RTW_PRINT("module exit success\n");
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2013 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2013 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __RTL8821A_XMIT_H__
 #define __RTL8821A_XMIT_H__
 
@@ -141,38 +136,38 @@ typedef struct txdescriptor_8821a {
 } TXDESC_8821A, *PTXDESC_8821A;
 
 #ifdef CONFIG_SDIO_HCI
-	s32 InitXmitPriv8821AS(PADAPTER padapter);
-	void FreeXmitPriv8821AS(PADAPTER padapter);
-	s32 XmitBufHandler8821AS(PADAPTER padapter);
-	s32 MgntXmit8821AS(PADAPTER padapter, struct xmit_frame *pmgntframe);
-	s32	HalXmitNoLock8821AS(PADAPTER padapter, struct xmit_frame *pxmitframe);
-	s32 HalXmit8821AS(PADAPTER padapter, struct xmit_frame *pxmitframe);
-	#ifndef CONFIG_SDIO_TX_TASKLET
-		thread_return XmitThread8821AS(thread_context context);
-	#endif /* !CONFIG_SDIO_TX_TASKLET */
+s32 InitXmitPriv8821AS(PADAPTER padapter);
+void FreeXmitPriv8821AS(PADAPTER padapter);
+s32 XmitBufHandler8821AS(PADAPTER padapter);
+s32 MgntXmit8821AS(PADAPTER padapter, struct xmit_frame *pmgntframe);
+s32	HalXmitNoLock8821AS(PADAPTER padapter, struct xmit_frame *pxmitframe);
+s32 HalXmit8821AS(PADAPTER padapter, struct xmit_frame *pxmitframe);
+#ifndef CONFIG_SDIO_TX_TASKLET
+thread_return XmitThread8821AS(thread_context context);
+#endif /* !CONFIG_SDIO_TX_TASKLET */
 #endif /* CONFIG_SDIO_HCI */
 
 #if 0
-	#ifdef CONFIG_USB_HCI
-		s32 rtl8821au_init_xmit_priv(PADAPTER padapter);
-		void rtl8821au_free_xmit_priv(PADAPTER padapter);
-		s32 rtl8821au_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
-		s32 rtl8821au_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
-		s32 rtl8821au_hal_xmitframe_enqueue(PADAPTER padapter, struct xmit_frame *pxmitframe);
-		s32 rtl8821au_xmit_buf_handler(PADAPTER padapter);
-		void rtl8821au_xmit_tasklet(void *priv);
-		s32 rtl8821au_xmitframe_complete(PADAPTER padapter, struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
-	#endif /* CONFIG_USB_HCI */
+#ifdef CONFIG_USB_HCI
+s32 rtl8821au_init_xmit_priv(PADAPTER padapter);
+void rtl8821au_free_xmit_priv(PADAPTER padapter);
+s32 rtl8821au_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
+s32 rtl8821au_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
+s32 rtl8821au_hal_xmitframe_enqueue(PADAPTER padapter, struct xmit_frame *pxmitframe);
+s32 rtl8821au_xmit_buf_handler(PADAPTER padapter);
+void rtl8821au_xmit_tasklet(void *priv);
+s32 rtl8821au_xmitframe_complete(PADAPTER padapter, struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
+#endif /* CONFIG_USB_HCI */
 
-	#ifdef CONFIG_PCI_HCI
-		s32 rtl8821e_init_xmit_priv(PADAPTER padapter);
-		void rtl8821e_free_xmit_priv(PADAPTER padapter);
-		struct xmit_buf *rtl8821e_dequeue_xmitbuf(struct rtw_tx_ring *ring);
-		void rtl8821e_xmitframe_resume(PADAPTER padapter);
-		s32 rtl8821e_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
-		s32 rtl8821e_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
-		void rtl8821e_xmit_tasklet(void *priv);
-	#endif /* CONFIG_PCI_HCI */
+#ifdef CONFIG_PCI_HCI
+s32 rtl8821e_init_xmit_priv(PADAPTER padapter);
+void rtl8821e_free_xmit_priv(PADAPTER padapter);
+struct xmit_buf *rtl8821e_dequeue_xmitbuf(struct rtw_tx_ring *ring);
+void rtl8821e_xmitframe_resume(PADAPTER padapter);
+s32 rtl8821e_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
+s32 rtl8821e_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
+void rtl8821e_xmit_tasklet(void *priv);
+#endif /* CONFIG_PCI_HCI */
 #endif
 
 #endif /* __RTL8821_XMIT_H__ */

@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __USB_OPS_H_
 #define __USB_OPS_H_
 
@@ -36,69 +31,69 @@ enum {
 #define MAX_USB_IO_CTL_SIZE		(MAX_VENDOR_REQ_CMD_SIZE + ALIGNMENT_UNIT)
 
 #ifdef PLATFORM_LINUX
-	#include <usb_ops_linux.h>
+#include <usb_ops_linux.h>
 #endif /* PLATFORM_LINUX */
 
 #ifdef CONFIG_RTL8188E
-	void rtl8188eu_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8188eu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif
+void rtl8188eu_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8188eu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif
 #endif
 
 #if defined(CONFIG_RTL8812A) || defined(CONFIG_RTL8821A)
-	void rtl8812au_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8812au(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif
+void rtl8812au_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8812au(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif
 #endif
 
 #ifdef CONFIG_RTL8814A
-	void rtl8814au_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8814au(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif
+void rtl8814au_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8814au(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif
 #endif /* CONFIG_RTL8814 */
 
 #ifdef CONFIG_RTL8192E
-	void rtl8192eu_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8192eu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif
+void rtl8192eu_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8192eu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif
 
 #endif
 
 #ifdef CONFIG_RTL8188F
-	void rtl8188fu_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8188fu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif
+void rtl8188fu_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8188fu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif
 #endif
 
 #ifdef CONFIG_RTL8723B
-	void rtl8723bu_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8723bu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif
+void rtl8723bu_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8723bu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif
 #endif
 
 #ifdef CONFIG_RTL8703B
-	void rtl8703bu_set_hw_type(struct dvobj_priv *pdvobj);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8703bu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif /* CONFIG_SUPPORT_USB_INT */
+void rtl8703bu_set_hw_type(struct dvobj_priv *pdvobj);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8703bu(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif /* CONFIG_SUPPORT_USB_INT */
 #endif /* CONFIG_RTL8703B */
 
 void usb_set_intf_ops(_adapter *padapter, struct _io_ops *pops);
 
 #ifdef CONFIG_RTL8723D
-	void rtl8723du_set_hw_type(struct dvobj_priv *pdvobj);
-	void rtl8723du_set_intf_ops(struct _io_ops *pops);
-	void rtl8723du_recv_tasklet(void *priv);
-	void rtl8723du_xmit_tasklet(void *priv);
-	#ifdef CONFIG_SUPPORT_USB_INT
-		void interrupt_handler_8723du(_adapter *padapter, u16 pkt_len, u8 *pbuf);
-	#endif /* CONFIG_SUPPORT_USB_INT */
+void rtl8723du_set_hw_type(struct dvobj_priv *pdvobj);
+void rtl8723du_set_intf_ops(struct _io_ops *pops);
+void rtl8723du_recv_tasklet(void *priv);
+void rtl8723du_xmit_tasklet(void *priv);
+#ifdef CONFIG_SUPPORT_USB_INT
+void interrupt_handler_8723du(_adapter *padapter, u16 pkt_len, u8 *pbuf);
+#endif /* CONFIG_SUPPORT_USB_INT */
 #endif /* CONFIG_RTL8723D */
 
 enum RTW_USB_SPEED {
@@ -122,7 +117,7 @@ static inline u8 rtw_usb_bulk_size_boundary(_adapter *padapter, int buf_len)
 
 	if (IS_SUPER_SPEED_USB(padapter))
 		rst = (0 == (buf_len) % USB_SUPER_SPEED_BULK_SIZE) ? _TRUE : _FALSE;
-	if (IS_HIGH_SPEED_USB(padapter))
+	else if (IS_HIGH_SPEED_USB(padapter))
 		rst = (0 == (buf_len) % USB_HIGH_SPEED_BULK_SIZE) ? _TRUE : _FALSE;
 	else
 		rst = (0 == (buf_len) % USB_FULL_SPEED_BULK_SIZE) ? _TRUE : _FALSE;

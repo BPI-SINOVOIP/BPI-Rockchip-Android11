@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2012 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #define _XMIT_OSDEP_C_
 
 #include <drv_types.h>
@@ -30,7 +25,6 @@ uint rtw_remainder_len(struct pkt_file *pfile)
 
 void _rtw_open_pktfile(_pkt *pktptr, struct pkt_file *pfile)
 {
-	_func_enter_;
 
 	pfile->pkt = pktptr;
 	pfile->cur_addr = pfile->buf_start = pktptr->data;
@@ -38,14 +32,12 @@ void _rtw_open_pktfile(_pkt *pktptr, struct pkt_file *pfile)
 
 	pfile->cur_buffer = pfile->buf_start ;
 
-	_func_exit_;
 }
 
 uint _rtw_pktfile_read(struct pkt_file *pfile, u8 *rmem, uint rlen)
 {
 	uint	len = 0;
 
-	_func_enter_;
 
 	len =  rtw_remainder_len(pfile);
 	len = (rlen > len) ? len : rlen;
@@ -56,21 +48,17 @@ uint _rtw_pktfile_read(struct pkt_file *pfile, u8 *rmem, uint rlen)
 	pfile->cur_addr += len;
 	pfile->pkt_len -= len;
 
-	_func_exit_;
 
 	return len;
 }
 
 sint rtw_endofpktfile(struct pkt_file *pfile)
 {
-	_func_enter_;
 
 	if (pfile->pkt_len == 0) {
-		_func_exit_;
 		return _TRUE;
 	}
 
-	_func_exit_;
 
 	return _FALSE;
 }
@@ -207,6 +195,12 @@ static inline bool rtw_os_need_wake_queue(_adapter *padapter, u16 qidx)
 	if (padapter->registrypriv.wifi_spec) {
 		if (pxmitpriv->hwxmits[qidx].accnt < WMM_XMIT_THRESHOLD)
 			return _TRUE;
+#ifdef DBG_CONFIG_ERROR_DETECT
+#ifdef DBG_CONFIG_ERROR_RESET
+	} else if (rtw_hal_sreset_inprogress(padapter) == _TRUE) {
+		return _FALSE;
+#endif/* #ifdef DBG_CONFIG_ERROR_RESET */
+#endif/* #ifdef DBG_CONFIG_ERROR_DETECT */
 	} else {
 #ifdef CONFIG_MCC_MODE
 		if (MCC_EN(padapter)) {
@@ -306,6 +300,13 @@ void rtw_os_xmit_schedule(_adapter *padapter)
 		tasklet_hi_schedule(&pxmitpriv->xmit_tasklet);
 
 	_exit_critical_bh(&pxmitpriv->lock, &irqL);
+	
+#if defined(CONFIG_PCI_HCI) && defined(CONFIG_XMIT_THREAD_MODE)
+	if (_rtw_queue_empty(&padapter->xmitpriv.pending_xmitbuf_queue) == _FALSE)
+		_rtw_up_sema(&padapter->xmitpriv.xmit_sema);
+#endif
+	
+
 #endif
 }
 
@@ -403,10 +404,10 @@ int rtw_mlcst2unicst(_adapter *padapter, struct sk_buff *skb)
 		}
 
 		/* avoid come from STA1 and send back STA1 */
-		if (_rtw_memcmp(psta->hwaddr, &skb->data[6], 6) == _TRUE
-		    || _rtw_memcmp(psta->hwaddr, null_addr, 6) == _TRUE
-		    || _rtw_memcmp(psta->hwaddr, bc_addr, 6) == _TRUE
-		   ) {
+		if (_rtw_memcmp(psta->cmn.mac_addr, &skb->data[6], 6) == _TRUE
+			|| _rtw_memcmp(psta->cmn.mac_addr, null_addr, 6) == _TRUE
+			|| _rtw_memcmp(psta->cmn.mac_addr, bc_addr, 6) == _TRUE
+		) {
 			DBG_COUNTER(padapter->tx_logs.os_tx_m2u_ignore_self);
 			continue;
 		}
@@ -416,7 +417,7 @@ int rtw_mlcst2unicst(_adapter *padapter, struct sk_buff *skb)
 		newskb = rtw_skb_copy(skb);
 
 		if (newskb) {
-			_rtw_memcpy(newskb->data, psta->hwaddr, 6);
+			_rtw_memcpy(newskb->data, psta->cmn.mac_addr, 6);
 			res = rtw_xmit(padapter, &newskb);
 			if (res < 0) {
 				DBG_COUNTER(padapter->tx_logs.os_tx_m2u_entry_err_xmit);
@@ -452,21 +453,18 @@ int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
 	u16 queue;
 #endif
 
-	_func_enter_;
 
 	if (padapter->registrypriv.mp_mode) {
 		RTW_INFO("MP_TX_DROP_OS_FRAME\n");
 		goto drop_packet;
 	}
 	DBG_COUNTER(padapter->tx_logs.os_tx);
-	RT_TRACE(_module_rtl871x_mlme_c_, _drv_info_, ("+xmit_enry\n"));
 
 	if (rtw_if_up(padapter) == _FALSE) {
 		DBG_COUNTER(padapter->tx_logs.os_tx_err_up);
-		RT_TRACE(_module_xmit_osdep_c_, _drv_err_, ("rtw_xmit_entry: rtw_if_up fail\n"));
-#ifdef DBG_TX_DROP_FRAME
+		#ifdef DBG_TX_DROP_FRAME
 		RTW_INFO("DBG_TX_DROP_FRAME %s if_up fail\n", __FUNCTION__);
-#endif
+		#endif
 		goto drop_packet;
 	}
 
@@ -474,15 +472,15 @@ int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
 
 #ifdef CONFIG_TX_MCAST2UNI
 	if (!rtw_mc2u_disable
-	    && check_fwstate(pmlmepriv, WIFI_AP_STATE) == _TRUE
-	    && (IP_MCAST_MAC(pkt->data)
-		|| ICMPV6_MCAST_MAC(pkt->data)
-#ifdef CONFIG_TX_BCAST2UNI
-		|| is_broadcast_mac_addr(pkt->data)
-#endif
-	       )
-	    && (padapter->registrypriv.wifi_spec == 0)
-	   ) {
+		&& (MLME_IS_AP(padapter) || MLME_IS_MESH(padapter))
+		&& (IP_MCAST_MAC(pkt->data)
+			|| ICMPV6_MCAST_MAC(pkt->data)
+			#ifdef CONFIG_TX_BCAST2UNI
+			|| is_broadcast_mac_addr(pkt->data)
+			#endif
+			)
+		&& (padapter->registrypriv.wifi_spec == 0)
+	) {
 		if (pxmitpriv->free_xmitframe_cnt > (NR_XMITFRAME / 4)) {
 			res = rtw_mlcst2unicst(padapter, pkt);
 			if (res == _TRUE)
@@ -497,23 +495,20 @@ int _rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
 
 	res = rtw_xmit(padapter, &pkt);
 	if (res < 0) {
-#ifdef DBG_TX_DROP_FRAME
+		#ifdef DBG_TX_DROP_FRAME
 		RTW_INFO("DBG_TX_DROP_FRAME %s rtw_xmit fail\n", __FUNCTION__);
-#endif
+		#endif
 		goto drop_packet;
 	}
 
-	RT_TRACE(_module_xmit_osdep_c_, _drv_info_, ("rtw_xmit_entry: tx_pkts=%d\n", (u32)pxmitpriv->tx_pkts));
 	goto exit;
 
 drop_packet:
 	pxmitpriv->tx_drop++;
 	rtw_os_pkt_complete(padapter, pkt);
-	RT_TRACE(_module_xmit_osdep_c_, _drv_notice_, ("rtw_xmit_entry: drop, tx_drop=%d\n", (u32)pxmitpriv->tx_drop));
 
 exit:
 
-	_func_exit_;
 
 	return 0;
 }
@@ -525,8 +520,11 @@ int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
 	int ret = 0;
 
 	if (pkt) {
-		if (check_fwstate(pmlmepriv, WIFI_MONITOR_STATE) == _TRUE)
+		if (check_fwstate(pmlmepriv, WIFI_MONITOR_STATE) == _TRUE) {
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 24))
 			rtw_monitor_xmit_entry((struct sk_buff *)pkt, pnetdev);
+#endif
+		}
 		else {
 			rtw_mstat_update(MSTAT_TYPE_SKB, MSTAT_ALLOC_SUCCESS, pkt->truesize);
 			ret = _rtw_xmit_entry(pkt, pnetdev);

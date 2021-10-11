@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 
 #ifndef __HAL_PG_H__
 #define __HAL_PG_H__
@@ -27,6 +22,7 @@
 #define PPG_BB_GAIN_5G_TX_OFFSET_MASK	0x1F
 #define PPG_THERMAL_OFFSET_MASK			0x1F
 #define KFREE_BB_GAIN_2G_TX_OFFSET(_ppg_v) (((_ppg_v) == PPG_BB_GAIN_2G_TX_OFFSET_MASK) ? 0 : (((_ppg_v) & 0x01) ? ((_ppg_v) >> 1) : (-((_ppg_v) >> 1))))
+#define KFREE_BB_GAIN_2G_TXB_OFFSET(_ppg_v) (((_ppg_v) == PPG_BB_GAIN_2G_TXB_OFFSET_MASK) ? 0 : (((_ppg_v) & 0x10) ? ((_ppg_v) >> 5) : (-((_ppg_v) >> 5))))
 #define KFREE_BB_GAIN_5G_TX_OFFSET(_ppg_v) (((_ppg_v) == PPG_BB_GAIN_5G_TX_OFFSET_MASK) ? 0 : (((_ppg_v) & 0x01) ? ((_ppg_v) >> 1) : (-((_ppg_v) >> 1))))
 #define KFREE_THERMAL_OFFSET(_ppg_v) (((_ppg_v) == PPG_THERMAL_OFFSET_MASK) ? 0 : (((_ppg_v) & 0x01) ? ((_ppg_v) >> 1) : (-((_ppg_v) >> 1))))
 
@@ -428,12 +424,6 @@
  *	EEPROM/Efuse PG Offset for 8822B
  * ====================================================
  */
-#define GET_PG_KFREE_ON_8822B(_pg_m)		LE_BITS_TO_1BYTE(((u8 *)(_pg_m)) + 0xC1, 4, 1)
-#define GET_PG_KFREE_THERMAL_K_ON_8822B(_pg_m)	LE_BITS_TO_1BYTE(((u8 *)(_pg_m)) + 0xC8, 5, 1)
-
-#define PPG_BB_GAIN_2G_TXA_OFFSET_8822B		0xEE
-#define PPG_THERMAL_OFFSET_8822B		0xEF
-
 #define	EEPROM_TX_PWR_INX_8822B			0x10
 
 #define	EEPROM_ChannelPlan_8822B		0xB8
@@ -478,15 +468,9 @@
  *	EEPROM/Efuse PG Offset for 8821C
  * ====================================================
  */
-#define GET_PG_KFREE_ON_8821C(_pg_m)		LE_BITS_TO_1BYTE(((u8 *)(_pg_m)) + 0xC1, 4, 1)
-#define GET_PG_KFREE_THERMAL_K_ON_8821C(_pg_m)	LE_BITS_TO_1BYTE(((u8 *)(_pg_m)) + 0xC8, 5, 1)
-
-#define PPG_BB_GAIN_2G_TXA_OFFSET_8821C		0xEE
-#define PPG_THERMAL_OFFSET_8821C		0xEF
-
 #define	EEPROM_TX_PWR_INX_8821C			0x10
 
-#define	EEPROM_ChannelPlan_8821C		0xB8
+#define	EEPROM_CHANNEL_PLAN_8821C		0xB8
 #define	EEPROM_XTAL_8821C			0xB9
 #define	EEPROM_THERMAL_METER_8821C		0xBA
 #define	EEPROM_IQK_LCK_8821C			0xBB
@@ -504,8 +488,9 @@
 #define	EEPROM_FEATURE_OPTION_8821C		0xC2
 #define	EEPROM_RF_BT_SETTING_8821C		0xC3
 #define	EEPROM_VERSION_8821C			0xC4
-#define	EEPROM_CustomID_8821C			0xC5
+#define	EEPROM_CUSTOMER_ID_8821C			0xC5
 #define	EEPROM_TX_BBSWING_2G_8821C		0xC6
+#define	EEPROM_TX_BBSWING_5G_8821C		0xC7
 #define	EEPROM_TX_PWR_CALIBRATE_RATE_8821C	0xC8
 #define	EEPROM_RF_ANTENNA_OPT_8821C		0xC9
 #define	EEPROM_RFE_OPTION_8821C			0xCA
@@ -531,7 +516,11 @@
 #define GET_PG_KFREE_THERMAL_K_ON_8723D(_pg_m)	\
 	LE_BITS_TO_1BYTE(((u8 *)(_pg_m)) + 0xC8, 5, 1)
 
+#define PPG_8723D_S1	0
+#define PPG_8723D_S0	1
+
 #define PPG_BB_GAIN_2G_TXA_OFFSET_8723D		0xEE
+#define PPG_BB_GAIN_2G_TX_OFFSET_8723D		0x1EE
 #define PPG_THERMAL_OFFSET_8723D		0xEF
 
 #define	EEPROM_TX_PWR_INX_8723D			0x10
@@ -554,18 +543,6 @@
 #define	EEPROM_RF_ANTENNA_OPT_8723D		0xC9
 #define	EEPROM_RFE_OPTION_8723D			0xCA
 #define EEPROM_COUNTRY_CODE_8723D		0xCB
-
-/* MAC Hidden */
-#define PPG_MAC_HIDDEN_START_8723D		0xF0
-#define PPG_MAC_HIDDEN_END_8723D		0xFF
-#define EEPROM_HCI_AND_PACKAGE_TYPE_8723D	0xF8
-#define EEPROM_WL_FUNC_CAP_8723D		0xF9
-#define EEPROM_BW_AND_ANT_NUM_CAP_8723D		0xFB
-#define GET_PMH_HCI_TYPE_8723D(_pmh_m)		LE_BITS_TO_1BYTE(((u8 *)(_pmh_m)) + EEPROM_HCI_AND_PACKAGE_TYPE_8723D - PPG_MAC_HIDDEN_START_8723D, 0, 4)
-#define	GET_PMH_PACKAGE_TYPE_8723D(_pmh_m)	LE_BITS_TO_1BYTE(((u8 *)(_pmh_m)) + EEPROM_HCI_AND_PACKAGE_TYPE_8723D - PPG_MAC_HIDDEN_START_8723D, 4, 4)
-#define GET_PMH_WL_FUNC_CAP_8723D(_pmh_m)	LE_BITS_TO_1BYTE(((u8 *)(_pmh_m)) + EEPROM_WL_FUNC_CAP_8723D - PPG_MAC_HIDDEN_START_8723D, 0, 4)
-#define GET_PMH_BW_CAP_8723D(_pmh_m)		LE_BITS_TO_1BYTE(((u8 *)(_pmh_m)) + EEPROM_BW_AND_ANT_NUM_CAP_8723D - PPG_MAC_HIDDEN_START_8723D, 0, 3)
-#define GET_PMH_ANT_NUM_CAP_8723D(_pmh_m)	LE_BITS_TO_1BYTE(((u8 *)(_pmh_m)) + EEPROM_BW_AND_ANT_NUM_CAP_8723D - PPG_MAC_HIDDEN_START_8723D, 5, 3)
 
 /* RTL8723DE */
 #define EEPROM_MAC_ADDR_8723DE              0xD0
@@ -682,15 +659,6 @@
 #define EEPROM_Default_LNAType						0
 
 /* New EFUSE default value */
-#define EEPROM_DEFAULT_24G_INDEX			0x2D
-#define EEPROM_DEFAULT_24G_HT20_DIFF		0X02
-#define EEPROM_DEFAULT_24G_OFDM_DIFF	0X04
-
-#define EEPROM_DEFAULT_5G_INDEX			0X2A
-#define EEPROM_DEFAULT_5G_HT20_DIFF		0X00
-#define EEPROM_DEFAULT_5G_OFDM_DIFF		0X04
-
-#define EEPROM_DEFAULT_DIFF				0XFE
 #define EEPROM_DEFAULT_CHANNEL_PLAN		0x7F
 #define EEPROM_DEFAULT_BOARD_OPTION		0x00
 #define EEPROM_DEFAULT_RFE_OPTION_8192E 0xFF

@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2015 - 2016 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2015 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 /***** temporarily flag *******/
 #define CONFIG_SINGLE_IMG
 /* #define CONFIG_DISABLE_ODM */
@@ -26,11 +21,15 @@
  * Public  General Config
  */
 #define AUTOCONF_INCLUDED
-#define DRV_NAME "rtl8822be"
+#define DRV_NAME "rtl88x2be"
 
 #define CONFIG_PCI_HCI
 #define CONFIG_PCIE_HCI
 #define PLATFORM_LINUX
+
+//DHC
+#define CONFIG_DHC_PATCH
+#define CONFIG_SG
 
 /*
  * Wi-Fi Functions Config
@@ -48,8 +47,7 @@
 	/*#define CONFIG_DRV_ISSUE_PROV_REQ*/ /* IOT FOR S2 */
 	#define CONFIG_SET_SCAN_DENY_TIMER
 #endif
-
-#define TX_AMSDU
+#define CONFIG_TX_AMSDU
 
 /*
  * Internal  General Config
@@ -57,60 +55,65 @@
 /*#define CONFIG_PWRCTRL*/
 /*#define CONFIG_H2CLBK*/
 #define CONFIG_TRX_BD_ARCH	/* PCI only */
+#define CONFIG_RSSI_PRIORITY
+#define CONFIG_DYNAMIC_SOML
 #define USING_RX_TAG
-/*#define CONFIG_NAPI*/
-/*#define CONFIG_GRO*/
-#define CONFIG_C2H_PACKET_EN	/* necessary for 8822B */
+
 #define CONFIG_EMBEDDED_FWIMG
+#ifdef CONFIG_EMBEDDED_FWIMG
+	#define	LOAD_FW_HEADER_FROM_DRIVER
+#endif
 /*#define CONFIG_FILE_FWIMG*/
 
-/*#define CONFIG_XMIT_ACK*/
+#define CONFIG_XMIT_ACK
 #ifdef CONFIG_XMIT_ACK
 	#define CONFIG_ACTIVE_KEEP_ALIVE_CHECK
 #endif
-
-/*#define CONFIG_TCP_CSUM_OFFLOAD_RX*/
-
-/*#define CONFIG_DRVEXT_MODULE*/
-
 
 /*#define CONFIG_DISABLE_MCS13TO15	1*/	/* Disable MSC13-15 rates for more stable TX throughput with some 5G APs */
 
 #define BUF_DESC_ARCH		/* if defined, hardware follows Rx buffer descriptor architecture */
 
-#define CONFIG_DFS	1
+#ifdef CONFIG_POWER_SAVING
 
-/*#define CONFIG_IPS*/
-#ifdef CONFIG_IPS
-	/*#define CONFIG_IPS_LEVEL_2*/	 /* enable this to set default IPS mode to IPS_LEVEL_2 */
+	#define CONFIG_IPS
+	#ifdef CONFIG_IPS
+		/*#define CONFIG_IPS_LEVEL_2*/ /* enable this to set default IPS mode to IPS_LEVEL_2 */
+	#endif
+
+	#define CONFIG_LPS
+
+	#if defined(CONFIG_LPS)
+		/*#define CONFIG_LPS_LCLK*/ /* 32K */
+	#endif
+
+	#ifdef CONFIG_LPS_LCLK
+		#define CONFIG_XMIT_THREAD_MODE
+		#define LPS_RPWM_WAIT_MS 300
+	#endif
+
+	#ifdef CONFIG_LPS
+		#define CONFIG_WMMPS_STA 1
+	#endif /* CONFIG_LPS */
+
 #endif
-/*#define SUPPORT_HW_RFOFF_DETECTED*/
+
+#define CONFIG_PCI_ASPM
+#ifdef CONFIG_PCI_ASPM
+#define CONFIG_PCI_DYNAMIC_ASPM
+#endif
 
 #define CONFIG_HIGH_CHAN_SUPER_CALIBRATION
-#define CONFIG_LPS
-
-#if defined(CONFIG_LPS)
-	/*#define CONFIG_LPS_LCLK*/	 /* 32K */
-#endif
-
-
-#ifdef CONFIG_LPS_LCLK
-	#define CONFIG_XMIT_THREAD_MODE
-#endif
-
+/*#define SUPPORT_HW_RFOFF_DETECTED*/
 /*#define CONFIG_ANTENNA_DIVERSITY*/
 
-/*#define CONFIG_CONCURRENT_MODE*/
+ 
 #ifdef CONFIG_CONCURRENT_MODE
-	/*#define CONFIG_HWPORT_SWAP*/			/* Port0->Sec, Port1->Pri */
-	#define CONFIG_RUNTIME_PORT_SWITCH
+	/*#define CONFIG_HWPORT_SWAP*/				/* Port0->Sec, Port1->Pri */
+	/*#define CONFIG_RUNTIME_PORT_SWITCH*/
 	/*#define DBG_RUNTIME_PORT_SWITCH*/
-	#define CONFIG_SCAN_BACKOP
 	/*#define CONFIG_ATMEL_RC_PATCH*/
 	/*#define CONFIG_TSF_RESET_OFFLOAD*/			/* For 2 PORT TSF SYNC. */
-#else /* NAPI doesn't support CONCURRENT mode currently*/
-	#define CONFIG_NAPI
-	#define CONFIG_GRO
 #endif
 
 #define CONFIG_AP_MODE
@@ -145,7 +148,7 @@
 	/*#define CONFIG_P2P_IPS*/
 	#define CONFIG_P2P_OP_CHK_SOCIAL_CH
 	#define CONFIG_CFG80211_ONECHANNEL_UNDER_CONCURRENT  /* replace CONFIG_P2P_CHK_INVITE_CH_LIST flag */
-	#define CONFIG_P2P_INVITE_IOT
+	/*#define CONFIG_P2P_INVITE_IOT*/
 #endif
 
 /* Added by Kurt 20110511 */
@@ -163,13 +166,13 @@
 
 #define CONFIG_SKB_COPY	/* for amsdu */
 
-/*#define CONFIG_LED*/
-#ifdef CONFIG_LED
-	/*#define CONFIG_SW_LED*/
-	#ifdef CONFIG_SW_LED
-		/*#define CONFIG_LED_HANDLED_BY_CMD_THREAD*/
+/*#define CONFIG_RTW_LED*/
+#ifdef CONFIG_RTW_LED
+	/*#define CONFIG_RTW_SW_LED*/
+	#ifdef CONFIG_RTW_SW_LED
+		/*#define CONFIG_RTW_LED_HANDLED_BY_CMD_THREAD*/
 	#endif
-#endif /* CONFIG_LED */
+#endif /* CONFIG_RTW_LED */
 
 #define CONFIG_GLOBAL_UI_PID
 
@@ -190,11 +193,13 @@
 #define CONFIG_TX_MCAST2UNI		/* Support IP multicast->unicast*/
 /*#define CONFIG_CHECK_AC_LIFETIME 1*/	/* Check packet lifetime of 4 ACs. */
 
+#define CONFIG_BEAMFORMING
+
 /*
  * Software feature Related Config
  */
-#define RTW_HALMAC			/* Use HALMAC architecture, necessary for 8822B */
-/* #define CONFIG_RF4CE_COEXIST */	/* ZigBee coexist support */
+#define RTW_HALMAC		/* Use HALMAC architecture, necessary for 8822B */
+#define CONFIG_RTW_IOCTL_SET_COUNTRY
 
 /*
  * Interface  Related Config
@@ -218,12 +223,6 @@
 
 #define DISABLE_BB_RF	0
 
-#ifdef CONFIG_GPIO_WAKEUP
-	#ifndef WAKEUP_GPIO_IDX
-		#define WAKEUP_GPIO_IDX 14
-	#endif
-#endif
-
 /*#define RTL8191C_FPGA_NETWORKTYPE_ADHOC 0*/
 
 #ifdef CONFIG_MP_INCLUDED
@@ -246,6 +245,9 @@
 	#ifndef CONFIG_LPS
 		#define CONFIG_LPS	/* download reserved page to FW */
 	#endif
+	/* Enable ZigBee coexist */
+	/* #define CONFIG_RF4CE_COEXIST */
+
 #endif /* !CONFIG_BT_COEXIST */
 
 
@@ -260,19 +262,10 @@
 /* Try to handle the Beacon error found in some types of TP-LINK APs */
 #define CONFIG_ATTEMPT_TO_FIX_AP_BEACON_ERROR
 
-#define CONFIG_80211D
-
-#define CONFIG_BEAMFORMING
-#ifdef CONFIG_BEAMFORMING
-#define BEAMFORMING_SUPPORT 0	/* Use driver self mechanism, not phydm */
-#define RTW_BEAMFORMING_VERSION_2
-#endif /* CONFIG_BEAMFORMING */
-
 /*
  * Debug Related Config
  */
 #define DBG	1
-/*#define CONFIG_DEBUG_RTL871X*/ /* RT_TRACE, RT_PRINT_DATA, _func_enter_, _func_exit_ */
 
 #define CONFIG_PROC_DEBUG
 
@@ -282,6 +275,7 @@
 /*
 #define DBG_CONFIG_ERROR_DETECT_INT
 #define DBG_CONFIG_ERROR_RESET
+
 #define DBG_IO
 #define DBG_DELAY_OS
 #define DBG_MEM_ALLOC
@@ -301,12 +295,11 @@
 #if 0
 #define DBG_NOISE_MONITOR
 
-#define DBG_TX_POWER_IDX
-
 #define DBG_SHOW_MCUFWDL_BEFORE_51_ENABLE
 #define DBG_ROAMING_TEST
 
 #define DBG_HAL_INIT_PROFILING
+#define DBG_TXBD_DESC_DUMP
 
 #define DBG_MEMORY_LEAK	1
 

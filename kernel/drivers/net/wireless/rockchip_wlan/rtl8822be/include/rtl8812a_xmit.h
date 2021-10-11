@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __RTL8812A_XMIT_H__
 #define __RTL8812A_XMIT_H__
 
@@ -286,7 +281,7 @@ typedef struct txdescriptor_8812 {
 #define SET_TX_DESC_TX_DESC_CHECKSUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 0, 16, __Value)
 #define SET_TX_DESC_USB_TXAGG_NUM_8812(__pTxDesc, __Value) SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 24, 8, __Value)
 #ifdef CONFIG_SDIO_HCI
-	#define SET_TX_DESC_SDIO_TXSEQ_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 16, 8, __Value)
+#define SET_TX_DESC_SDIO_TXSEQ_8812(__pTxDesc, __Value)			SET_BITS_TO_LE_4BYTE(__pTxDesc+28, 16, 8, __Value)
 #endif
 
 /* Dword 8 */
@@ -324,33 +319,39 @@ void rtl8812a_fill_txdesc_sectype(struct pkt_attrib *pattrib, u8 *ptxdesc);
 void rtl8812a_fill_txdesc_vcs(PADAPTER padapter, struct pkt_attrib *pattrib, u8 *ptxdesc);
 void rtl8812a_fill_txdesc_phy(PADAPTER padapter, struct pkt_attrib *pattrib, u8 *ptxdesc);
 #if defined(CONFIG_CONCURRENT_MODE)
-	void fill_txdesc_force_bmc_camid(struct pkt_attrib *pattrib, u8 *ptxdesc);
+void fill_txdesc_force_bmc_camid(struct pkt_attrib *pattrib, u8 *ptxdesc);
 #endif
+void fill_txdesc_bmc_tx_rate(struct pkt_attrib *pattrib, u8 *ptxdesc);
 
 #ifdef CONFIG_USB_HCI
-	s32 rtl8812au_init_xmit_priv(PADAPTER padapter);
-	void rtl8812au_free_xmit_priv(PADAPTER padapter);
-	s32 rtl8812au_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
-	s32 rtl8812au_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
-	s32	 rtl8812au_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe);
-	s32 rtl8812au_xmit_buf_handler(PADAPTER padapter);
-	void rtl8812au_xmit_tasklet(void *priv);
-	s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
+s32 rtl8812au_init_xmit_priv(PADAPTER padapter);
+void rtl8812au_free_xmit_priv(PADAPTER padapter);
+s32 rtl8812au_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
+s32 rtl8812au_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
+s32	 rtl8812au_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe);
+s32 rtl8812au_xmit_buf_handler(PADAPTER padapter);
+void rtl8812au_xmit_tasklet(void *priv);
+s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
 #endif
 
 #ifdef CONFIG_PCI_HCI
-	s32 rtl8812ae_init_xmit_priv(PADAPTER padapter);
-	void rtl8812ae_free_xmit_priv(PADAPTER padapter);
-	struct xmit_buf *rtl8812ae_dequeue_xmitbuf(struct rtw_tx_ring *ring);
-	void	rtl8812ae_xmitframe_resume(_adapter *padapter);
-	s32 rtl8812ae_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
-	s32 rtl8812ae_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
-	s32	rtl8812ae_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe);
-	void rtl8812ae_xmit_tasklet(void *priv);
+s32 rtl8812ae_init_xmit_priv(PADAPTER padapter);
+void rtl8812ae_free_xmit_priv(PADAPTER padapter);
+struct xmit_buf *rtl8812ae_dequeue_xmitbuf(struct rtw_tx_ring *ring);
+void	rtl8812ae_xmitframe_resume(_adapter *padapter);
+s32 rtl8812ae_hal_xmit(PADAPTER padapter, struct xmit_frame *pxmitframe);
+s32 rtl8812ae_mgnt_xmit(PADAPTER padapter, struct xmit_frame *pmgntframe);
+s32	rtl8812ae_hal_xmitframe_enqueue(_adapter *padapter, struct xmit_frame *pxmitframe);
+void rtl8812ae_xmit_tasklet(void *priv);
+
+#ifdef CONFIG_XMIT_THREAD_MODE
+s32 rtl8812ae_xmit_buf_handler(_adapter *padapter);
+#endif
+
 #endif
 
 #ifdef CONFIG_TX_EARLY_MODE
-	void UpdateEarlyModeInfo8812(struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
+void UpdateEarlyModeInfo8812(struct xmit_priv *pxmitpriv, struct xmit_buf *pxmitbuf);
 #endif
 
 void _dbg_dump_tx_info(_adapter	*padapter, int frame_tag, u8 *ptxdesc);
@@ -362,5 +363,5 @@ u8	SCMapping_8812(PADAPTER Adapter, struct pkt_attrib	*pattrib);
 #endif /* __RTL8812_XMIT_H__ */
 
 #ifdef CONFIG_RTL8821A
-	#include "rtl8821a_xmit.h"
+#include "rtl8821a_xmit.h"
 #endif /* CONFIG_RTL8821A */

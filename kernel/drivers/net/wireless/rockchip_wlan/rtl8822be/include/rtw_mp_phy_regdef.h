@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 /*****************************************************************************
  *
  * Module:	__RTW_MP_PHY_REGDEF_H_
@@ -1025,13 +1020,13 @@
 
 /* for PutRFRegsetting & GetRFRegSetting BitMask */
 #if (RTL92SE_FPGA_VERIFY == 1)
-	/* #define		bMask12Bits               0xfff */	/* RF Reg mask bits
-	* #define		bMask20Bits               0xfff */	/* RF Reg mask bits T65 RF */
-	#define		bRFRegOffsetMask	0xfff
+/* #define		bMask12Bits               0xfff */	/* RF Reg mask bits */
+/* #define		bMask20Bits               0xfff */	/* RF Reg mask bits T65 RF */
+#define		bRFRegOffsetMask	0xfff
 #else
-	/* #define		bMask12Bits               0xfffff */	/* RF Reg mask bits
-	* #define		bMask20Bits               0xfffff */	/* RF Reg mask bits T65 RF */
-	#define		bRFRegOffsetMask	0xfffff
+/* #define		bMask12Bits               0xfffff */	/* RF Reg mask bits */
+/* #define		bMask20Bits               0xfffff */	/* RF Reg mask bits T65 RF */
+#define		bRFRegOffsetMask	0xfffff
 #endif
 #define		bEnable                   0x1	/* Useless */
 #define		bDisable                  0x0
@@ -1066,12 +1061,12 @@
 #define		bWNICControl	0x2
 
 #if 0
-	#define		ANTENNA_A	0x1	/* Useless */
-	#define		ANTENNA_B	0x2
-	#define		ANTENNA_AB	0x3	/* ANTENNA_A | ANTENNA_B */
+#define		ANTENNA_A	0x1	/* Useless */
+#define		ANTENNA_B	0x2
+#define		ANTENNA_AB	0x3	/* ANTENNA_A | ANTENNA_B */
 
-	#define		ANTENNA_C	0x4
-	#define		ANTENNA_D	0x8
+#define		ANTENNA_C	0x4
+#define		ANTENNA_D	0x8
 #endif
 
 #define RCR_AAP			BIT(0)				/* accept all physical address */

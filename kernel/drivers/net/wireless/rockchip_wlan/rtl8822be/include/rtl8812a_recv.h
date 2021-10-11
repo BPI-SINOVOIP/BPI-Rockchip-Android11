@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2007 - 2017 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -11,12 +11,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110, USA
- *
- *
- ******************************************************************************/
+ *****************************************************************************/
 #ifndef __RTL8812A_RECV_H__
 #define __RTL8812A_RECV_H__
 
@@ -116,7 +111,7 @@
 #define GET_RX_STATUS_DESC_EOSP_8812(__pRxStatusDesc)					LE_BITS_TO_4BYTE(__pRxStatusDesc+12, 11, 1)
 #define GET_RX_STATUS_DESC_BSSID_FIT_8812(__pRxStatusDesc)			LE_BITS_TO_4BYTE(__pRxStatusDesc+12, 12, 2)
 #ifdef CONFIG_USB_RX_AGGREGATION
-	#define GET_RX_STATUS_DESC_USB_AGG_PKTNUM_8812(__pRxStatusDesc)	LE_BITS_TO_4BYTE(__pRxStatusDesc+12, 16, 8)
+#define GET_RX_STATUS_DESC_USB_AGG_PKTNUM_8812(__pRxStatusDesc)	LE_BITS_TO_4BYTE(__pRxStatusDesc+12, 16, 8)
 #endif
 #define GET_RX_STATUS_DESC_PATTERN_MATCH_8812(__pRxDesc)			LE_BITS_TO_4BYTE(__pRxDesc+12, 29, 1)
 #define GET_RX_STATUS_DESC_UNICAST_MATCH_8812(__pRxDesc)			LE_BITS_TO_4BYTE(__pRxDesc+12, 30, 1)
@@ -138,19 +133,19 @@
 
 
 #ifdef CONFIG_SDIO_HCI
-	s32 InitRecvPriv8821AS(PADAPTER padapter);
-	void FreeRecvPriv8821AS(PADAPTER padapter);
+s32 InitRecvPriv8821AS(PADAPTER padapter);
+void FreeRecvPriv8821AS(PADAPTER padapter);
 #endif /* CONFIG_SDIO_HCI */
 
 #ifdef CONFIG_USB_HCI
-	void rtl8812au_init_recvbuf(_adapter *padapter, struct recv_buf *precvbuf);
-	s32 rtl8812au_init_recv_priv(PADAPTER padapter);
-	void rtl8812au_free_recv_priv(PADAPTER padapter);
+void rtl8812au_init_recvbuf(_adapter *padapter, struct recv_buf *precvbuf);
+s32 rtl8812au_init_recv_priv(PADAPTER padapter);
+void rtl8812au_free_recv_priv(PADAPTER padapter);
 #endif
 
 #ifdef CONFIG_PCI_HCI
-	s32 rtl8812ae_init_recv_priv(PADAPTER padapter);
-	void rtl8812ae_free_recv_priv(PADAPTER padapter);
+s32 rtl8812ae_init_recv_priv(PADAPTER padapter);
+void rtl8812ae_free_recv_priv(PADAPTER padapter);
 #endif
 
 void rtl8812_query_rx_desc_status(union recv_frame *precvframe, u8 *pdesc);
