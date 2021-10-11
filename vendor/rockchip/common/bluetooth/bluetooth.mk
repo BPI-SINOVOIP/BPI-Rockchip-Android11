@@ -1,5 +1,10 @@
 CUR_PATH := vendor/rockchip/common/bluetooth
 
+BT_KO_FILES := $(shell find $(TOPDIR)kernel/drivers/bluetooth -name "*.ko" -type f)
+
+BOARD_VENDOR_KERNEL_MODULES += \
+        $(foreach file, $(BT_KO_FILES), $(file))
+
 ifeq ($(strip $(BLUETOOTH_USE_BPLUS)),true)
 PRODUCT_PACKAGES += \
 	libbt-client-api \
