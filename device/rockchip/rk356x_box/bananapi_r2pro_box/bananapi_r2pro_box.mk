@@ -90,8 +90,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # copy input keylayout and device config
 PRODUCT_COPY_FILES += \
-    device/rockchip/rk356x_box/remote_config/fe700030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fe700030_pwm.kl \
-    device/rockchip/rk356x_box/remote_config/fe6e0030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fe6e0030_pwm.kl
+    device/rockchip/rk356x_box/remote_config/fdd70030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fdd70030_pwm.kl \
 
 # Vendor seccomp policy files for media components:
 PRODUCT_COPY_FILES += \
