@@ -20,7 +20,8 @@ PRODUCT_MAKEFILES := \
         $(LOCAL_DIR)/rk3566_r/rk3566_r.mk \
         $(LOCAL_DIR)/rk3568_r/rk3568_r.mk \
         $(LOCAL_DIR)/rk3566_eink/rk3566_eink.mk \
-        $(LOCAL_DIR)/rk3566_einkw6/rk3566_einkw6.mk
+        $(LOCAL_DIR)/rk3566_einkw6/rk3566_einkw6.mk \
+	$(LOCAL_DIR)/bananapi_r2pro/bananapi_r2pro.mk
 
 COMMON_LUNCH_CHOICES := \
     rk3566_32bit-userdebug \
@@ -34,6 +35,8 @@ COMMON_LUNCH_CHOICES := \
     rk3566_eink-userdebug \
     rk3566_eink-user \
     rk3566_einkw6-userdebug \
-    rk3566_einkw6-user
+    rk3566_einkw6-user \
+    bananapi_r2pro-userdebug \
+    bananapi_r2pro-user
 
 
