@@ -111,6 +111,10 @@ static int hym8563_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	tm->tm_mon = bcd2bin(buf[5] & HYM8563_MONTH_MASK) - 1; /* 0 = Jan */
 	tm->tm_year = bcd2bin(buf[6]) + 100;
 
+	dev_dbg(&client->dev, "%4d-%02d-%02d(%d) %02d:%02d:%02d\n",
+		1900 + tm->tm_year, tm->tm_mon + 1, tm->tm_mday, tm->tm_wday,
+		tm->tm_hour, tm->tm_min, tm->tm_sec);
+
 	return 0;
 }
 
@@ -119,6 +123,10 @@ static int hym8563_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	struct i2c_client *client = to_i2c_client(dev);
 	u8 buf[7];
 	int ret;
+
+	dev_dbg(&client->dev, "%4d-%02d-%02d(%d) %02d:%02d:%02d\n",
+		1900 + tm->tm_year, tm->tm_mon + 1, tm->tm_mday, tm->tm_wday,
+		tm->tm_hour, tm->tm_min, tm->tm_sec);
 
 	/* Years >= 2100 are to far in the future, 19XX is to early */
 	if (tm->tm_year < 100 || tm->tm_year >= 200)
@@ -219,6 +227,10 @@ static int hym8563_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alm)
 	struct rtc_time *alm_tm = &alm->time;
 	u8 buf[4];
 	int ret;
+
+	dev_dbg(&client->dev, "%4d-%02d-%02d(%d) %02d:%02d:%02d enabled %d\n",
+		1900 + alm_tm->tm_year, alm_tm->tm_mon + 1, alm_tm->tm_mday, alm_tm->tm_wday,
+		alm_tm->tm_hour, alm_tm->tm_min, alm_tm->tm_sec, alm->enabled);
 
 	/*
 	 * The alarm has no seconds so deal with it
@@ -540,7 +552,7 @@ static int hym8563_probe(struct i2c_client *client,
 	hym8563->client = client;
 	i2c_set_clientdata(client, hym8563);
 
-	device_set_wakeup_capable(&client->dev, true);
+	device_init_wakeup(&client->dev, true);
 
 	ret = hym8563_init_device(client);
 	if (ret) {
