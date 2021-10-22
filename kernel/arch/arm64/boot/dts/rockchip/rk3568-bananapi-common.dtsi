@@ -1770,7 +1770,7 @@
 
 /* bpi, hw only support host, no otg */
 &usbdrd_dwc3 {
-	dr_mode = "host";
+	dr_mode = "peripheral";
 	extcon = <&usb2phy0>;
 	status = "okay";
 };
