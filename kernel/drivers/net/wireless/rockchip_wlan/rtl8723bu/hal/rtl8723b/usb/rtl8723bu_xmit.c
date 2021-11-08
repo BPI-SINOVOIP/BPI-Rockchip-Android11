@@ -209,6 +209,7 @@ s32 rtl8723bu_xmit_buf_handler(PADAPTER padapter)
 	/* PHAL_DATA_TYPE phal; */
 	struct xmit_priv *pxmitpriv;
 	struct xmit_buf *pxmitbuf;
+	struct xmit_frame *pxmitframe;
 	s32 ret;
 
 
@@ -243,7 +244,9 @@ s32 rtl8723bu_xmit_buf_handler(PADAPTER padapter)
 		if (pxmitbuf == NULL)
 			break;
 
+		pxmitframe = (struct xmit_frame *) pxmitbuf->priv_data;
 		rtw_write_port(padapter, pxmitbuf->ff_hwaddr, pxmitbuf->len, (unsigned char *)pxmitbuf);
+		rtw_free_xmitframe(pxmitpriv, pxmitframe);
 
 	} while (1);
 
@@ -267,13 +270,13 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 	struct pkt_attrib *pattrib = &pxmitframe->attrib;
 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
 	struct security_priv *psecuritypriv = &padapter->securitypriv;
-
+#ifdef CONFIG_80211N_HT
 	if ((pxmitframe->frame_tag == DATA_FRAMETAG) &&
 	    (pxmitframe->attrib.ether_type != 0x0806) &&
 	    (pxmitframe->attrib.ether_type != 0x888e) &&
 	    (pxmitframe->attrib.dhcp_pkt != 1))
 		rtw_issue_addbareq_cmd(padapter, pxmitframe);
-
+#endif /* CONFIG_80211N_HT */
 	mem_addr = pxmitframe->buf_addr;
 
 
@@ -305,7 +308,13 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 #ifdef CONFIG_XMIT_THREAD_MODE
 		pxmitbuf->len = w_sz;
 		pxmitbuf->ff_hwaddr = ff_hwaddr;
-		enqueue_pending_xmitbuf(pxmitpriv, pxmitbuf);
+
+		if (pxmitframe->attrib.qsel == QSLT_BEACON)
+			/* download rsvd page*/
+			rtw_write_port(padapter, ff_hwaddr, w_sz, (u8 *)pxmitbuf);
+		else
+			enqueue_pending_xmitbuf(pxmitpriv, pxmitbuf);
+
 #else
 		inner_ret = rtw_write_port(padapter, ff_hwaddr, w_sz, (unsigned char *)pxmitbuf);
 #endif
@@ -320,6 +329,9 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 
 	}
 
+#ifdef CONFIG_XMIT_THREAD_MODE
+	if (pxmitframe->attrib.qsel == QSLT_BEACON)
+#endif
 	rtw_free_xmitframe(pxmitpriv, pxmitframe);
 
 	if (ret != _SUCCESS)
@@ -549,12 +561,12 @@ s32 rtl8723bu_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 	}
 
 	_exit_critical_bh(&pxmitpriv->lock, &irqL);
-
+#ifdef CONFIG_80211N_HT
 	if ((pfirstframe->attrib.ether_type != 0x0806) &&
 	    (pfirstframe->attrib.ether_type != 0x888e) &&
 	    (pfirstframe->attrib.dhcp_pkt != 1))
 		rtw_issue_addbareq_cmd(padapter, pfirstframe);
-
+#endif /* CONFIG_80211N_HT */
 #ifndef CONFIG_USE_USB_BUFFER_ALLOC_TX
 	/* 3 3. update first frame txdesc */
 	if ((PACKET_OFFSET_SZ != 0)
@@ -571,7 +583,18 @@ s32 rtl8723bu_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 	ff_hwaddr = rtw_get_ff_hwaddr(pfirstframe);
 
 	/* xmit address == ((xmit_frame*)pxmitbuf->priv_data)->buf_addr */
+#ifdef CONFIG_XMIT_THREAD_MODE
+	pxmitbuf->len = pbuf_tail;
+	pxmitbuf->ff_hwaddr = ff_hwaddr;
+
+	if (pfirstframe->attrib.qsel == QSLT_BEACON)
+		/* download rsvd page*/
+		rtw_write_port(padapter, ff_hwaddr, pbuf_tail, (u8 *)pxmitbuf);
+	else
+		enqueue_pending_xmitbuf(pxmitpriv, pxmitbuf);
+#else
 	rtw_write_port(padapter, ff_hwaddr, pbuf_tail, (u8 *)pxmitbuf);
+#endif
 
 
 	/* 3 5. update statisitc */
@@ -581,6 +604,9 @@ s32 rtl8723bu_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 
 	rtw_count_tx_stats(padapter, pfirstframe, pbuf_tail);
 
+#ifdef CONFIG_XMIT_THREAD_MODE
+	if (pfirstframe->attrib.qsel == QSLT_BEACON)
+#endif
 	rtw_free_xmitframe(pxmitpriv, pfirstframe);
 
 	return _TRUE;

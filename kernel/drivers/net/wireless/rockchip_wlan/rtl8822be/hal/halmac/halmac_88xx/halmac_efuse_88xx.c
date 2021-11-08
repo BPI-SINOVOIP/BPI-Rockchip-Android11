@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -20,1387 +20,1387 @@
 
 #if HALMAC_88XX_SUPPORT
 
-static HALMAC_EFUSE_CMD_CONSTRUCT_STATE
-halmac_query_efuse_curr_state_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+#define RSVD_EFUSE_SIZE		16
+#define RSVD_CS_EFUSE_SIZE	24
+#define FEATURE_DUMP_PHY_EFUSE	HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE
+#define FEATURE_DUMP_LOG_EFUSE	HALMAC_FEATURE_DUMP_LOGICAL_EFUSE
+#define FEATURE_DUMP_LOG_EFUSE_MASK	HALMAC_FEATURE_DUMP_LOGICAL_EFUSE_MASK
 
-static HALMAC_RET_STATUS
-halmac_dump_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_READ_CFG cfg
-);
+static enum halmac_cmd_construct_state
+efuse_cmd_cnstr_state_88xx(struct halmac_adapter *adapter);
 
-static HALMAC_RET_STATUS
-halmac_read_hw_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u32 size,
-	OUT u8 *pEfuse_map
-);
+static enum halmac_ret_status
+proc_dump_efuse_88xx(struct halmac_adapter *adapter,
+		     enum halmac_efuse_read_cfg cfg);
 
-static HALMAC_RET_STATUS
-halmac_read_logical_efuse_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pMap
-);
+static enum halmac_ret_status
+read_hw_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u32 size,
+		   u8 *map);
 
-static HALMAC_RET_STATUS
-halmac_func_pg_efuse_by_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN HALMAC_EFUSE_READ_CFG cfg
-);
+static enum halmac_ret_status
+read_log_efuse_map_88xx(struct halmac_adapter *adapter, u8 *map);
 
-static HALMAC_RET_STATUS
-halmac_dump_efuse_fw_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+static enum halmac_ret_status
+proc_pg_efuse_by_map_88xx(struct halmac_adapter *adapter,
+			  struct halmac_pg_efuse_info *info,
+			  enum halmac_efuse_read_cfg cfg);
 
-static HALMAC_RET_STATUS
-halmac_dump_efuse_drv_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+static enum halmac_ret_status
+dump_efuse_fw_88xx(struct halmac_adapter *adapter);
 
-static HALMAC_RET_STATUS
-halmac_func_write_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u8 value
-);
+static enum halmac_ret_status
+dump_efuse_drv_88xx(struct halmac_adapter *adapter);
 
-static HALMAC_RET_STATUS
-halmac_update_eeprom_mask_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	INOUT PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	OUT u8 *pEeprom_mask_updated
-);
+static enum halmac_ret_status
+proc_write_log_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value);
 
-static HALMAC_RET_STATUS
-halmac_check_efuse_enough_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN u8 *pEeprom_mask_updated
-);
+static enum halmac_ret_status
+update_eeprom_mask_88xx(struct halmac_adapter *adapter,
+			struct halmac_pg_efuse_info *info, u8 *updated_mask);
 
-static HALMAC_RET_STATUS
-halmac_program_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN u8 *pEeprom_mask_updated
-);
+static enum halmac_ret_status
+check_efuse_enough_88xx(struct halmac_adapter *adapter,
+			struct halmac_pg_efuse_info *info, u8 *updated_mask);
+
+static enum halmac_ret_status
+pg_extend_efuse_88xx(struct halmac_adapter *adapter,
+		     struct halmac_pg_efuse_info *info, u8 word_en,
+		     u8 pre_word_en, u32 eeprom_offset);
+
+static enum halmac_ret_status
+proc_pg_efuse_88xx(struct halmac_adapter *adapter,
+		   struct halmac_pg_efuse_info *info, u8 word_en,
+		   u8 pre_word_en, u32 eeprom_offset);
+
+static enum halmac_ret_status
+program_efuse_88xx(struct halmac_adapter *adapter,
+		   struct halmac_pg_efuse_info *info, u8 *updated_mask);
+
+static void
+mask_eeprom_88xx(struct halmac_adapter *adapter,
+		 struct halmac_pg_efuse_info *info);
 
 /**
- * halmac_dump_efuse_map_88xx() - dump "physical" efuse map
- * @pHalmac_adapter : the adapter of halmac
+ * dump_efuse_map_88xx() - dump "physical" efuse map
+ * @adapter : the adapter of halmac
  * @cfg : dump efuse method
  * Author : Ivan Lin/KaiYuan Chang
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_dump_efuse_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_READ_CFG cfg
-)
+enum halmac_ret_status
+dump_efuse_map_88xx(struct halmac_adapter *adapter,
+		    enum halmac_efuse_read_cfg cfg)
 {
-	u8 *pEfuse_map = NULL;
-	u32 efuse_size = pHalmac_adapter->hw_config_info.efuse_size;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	u8 *map = NULL;
+	u8 *efuse_map;
+	u32 efuse_size = adapter->hw_cfg_info.efuse_size;
+	u32 prtct_efuse_size = adapter->hw_cfg_info.prtct_efuse_size;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
+	if (cfg == HALMAC_EFUSE_R_FW &&
+	    halmac_fw_validate(adapter) != HALMAC_RET_SUCCESS)
+		return HALMAC_RET_NO_DLFW;
 
-	if (cfg == HALMAC_EFUSE_R_FW) {
-		if (halmac_fw_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-			return HALMAC_RET_NO_DLFW;
-	}
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
+	PLTFM_MSG_TRACE("[TRACE]cfg = %d\n", cfg);
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_TRACE, "[TRACE]halmac_dump_efuse_map_88xx ==========>\n");
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_TRACE, "[TRACE]cfg=%d\n", cfg);
-
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	if (pHalmac_adapter->halmac_state.mac_power == HALMAC_MAC_POWER_OFF)
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_WARN, "[WARN]Dump efuse in suspend mode\n");
+	if (adapter->halmac_state.mac_pwr == HALMAC_MAC_POWER_OFF)
+		PLTFM_MSG_ERR("[ERR]Dump efuse in suspend\n");
 
-	*pProcess_status = HALMAC_CMD_PROCESS_IDLE;
-	pHalmac_adapter->event_trigger.physical_efuse_map = 1;
+	*proc_status = HALMAC_CMD_PROCESS_IDLE;
+	adapter->evnt.phy_efuse_map = 1;
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, HALMAC_EFUSE_BANK_WIFI);
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank!!\n");
 		return status;
 	}
 
-	status = halmac_dump_efuse_88xx(pHalmac_adapter, cfg);
-
+	status = proc_dump_efuse_88xx(adapter, cfg);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_read_efuse error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]dump efuse!!\n");
 		return status;
 	}
 
-	if (pHalmac_adapter->hal_efuse_map_valid == _TRUE) {
-		*pProcess_status = HALMAC_CMD_PROCESS_DONE;
+	if (adapter->efuse_map_valid == 1) {
+		*proc_status = HALMAC_CMD_PROCESS_DONE;
+		efuse_map = adapter->efuse_map;
 
-		pEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, efuse_size);
-		if (pEfuse_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local efuse map Fail!!\n");
+		map = (u8 *)PLTFM_MALLOC(efuse_size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc!!\n");
 			return HALMAC_RET_MALLOC_FAIL;
 		}
-		PLATFORM_RTL_MEMSET(pDriver_adapter, pEfuse_map, 0xFF, efuse_size);
-		PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pEfuse_map, pHalmac_adapter->pHalEfuse_map, efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX);
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pEfuse_map + efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX + HALMAC_RESERVED_CS_EFUSE_SIZE_88XX,
-			pHalmac_adapter->pHalEfuse_map + efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX + HALMAC_RESERVED_CS_EFUSE_SIZE_88XX,
-			HALMAC_PROTECTED_EFUSE_SIZE_88XX - HALMAC_RESERVED_EFUSE_SIZE_88XX - HALMAC_RESERVED_CS_EFUSE_SIZE_88XX);
-		PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
+		PLTFM_MEMSET(map, 0xFF, efuse_size);
+		PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+#if HALMAC_PLATFORM_WINDOWS
+		PLTFM_MEMCPY(map, efuse_map, efuse_size);
+#else
+		PLTFM_MEMCPY(map, efuse_map, efuse_size - prtct_efuse_size);
+		PLTFM_MEMCPY(map + efuse_size - prtct_efuse_size +
+			     RSVD_CS_EFUSE_SIZE,
+			     efuse_map + efuse_size - prtct_efuse_size +
+			     RSVD_CS_EFUSE_SIZE,
+			     prtct_efuse_size - RSVD_EFUSE_SIZE -
+			     RSVD_CS_EFUSE_SIZE);
+#endif
+		PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-		PLATFORM_EVENT_INDICATION(pDriver_adapter, HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE, *pProcess_status, pEfuse_map, efuse_size);
-		pHalmac_adapter->event_trigger.physical_efuse_map = 0;
+		PLTFM_EVENT_SIG(HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE,
+				*proc_status, map, efuse_size);
+		adapter->evnt.phy_efuse_map = 0;
 
-		PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+		PLTFM_FREE(map, efuse_size);
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_dump_efuse_map_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_dump_efuse_map_bt_88xx() - dump "BT physical" efuse map
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_efuse_bank : bt efuse bank
- * @bt_efuse_map_size : bt efuse map size. get from halmac_get_efuse_size API
- * @pBT_efuse_map : bt efuse map
+ * dump_efuse_map_bt_88xx() - dump "BT physical" efuse map
+ * @adapter : the adapter of halmac
+ * @bank : bt efuse bank
+ * @size : bt efuse map size. get from halmac_get_efuse_size API
+ * @map : bt efuse map
  * Author : Soar / Ivan Lin
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_dump_efuse_map_bt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_BANK halmac_efuse_bank,
-	IN u32 bt_efuse_map_size,
-	OUT u8 *pBT_efuse_map
-)
+enum halmac_ret_status
+dump_efuse_map_bt_88xx(struct halmac_adapter *adapter,
+		       enum halmac_efuse_bank bank, u32 size, u8 *map)
 {
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_TRACE, "[TRACE]halmac_dump_efuse_map_bt_88xx ==========>\n");
-
-	if (pHalmac_adapter->hw_config_info.bt_efuse_size != bt_efuse_map_size)
+	if (adapter->hw_cfg_info.bt_efuse_size != size)
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 
-	if ((halmac_efuse_bank >= HALMAC_EFUSE_BANK_MAX) || (halmac_efuse_bank == HALMAC_EFUSE_BANK_WIFI)) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Undefined BT bank\n");
+	if (bank >= HALMAC_EFUSE_BANK_MAX || bank == HALMAC_EFUSE_BANK_WIFI) {
+		PLTFM_MSG_ERR("[ERR]Undefined BT bank\n");
 		return HALMAC_RET_EFUSE_BANK_INCORRECT;
 	}
 
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, halmac_efuse_bank);
+	status = switch_efuse_bank_88xx(adapter, bank);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank!!\n");
 		return status;
 	}
 
-	status = halmac_read_hw_efuse_88xx(pHalmac_adapter, 0, bt_efuse_map_size, pBT_efuse_map);
-
+	status = read_hw_efuse_88xx(adapter, 0, size, map);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_read_hw_efuse_88xx error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]read hw efuse\n");
 		return status;
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_dump_efuse_map_bt_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_write_efuse_bt_88xx() - write "BT physical" efuse offset
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_offset : offset
- * @halmac_value : Write value
- * @pBT_efuse_map : bt efuse map
+ * write_efuse_bt_88xx() - write "BT physical" efuse offset
+ * @adapter : the adapter of halmac
+ * @offset : offset
+ * @value : Write value
+ * @map : bt efuse map
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_write_efuse_bt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	IN u8 halmac_value,
-	IN HALMAC_EFUSE_BANK halmac_efuse_bank
-)
+enum halmac_ret_status
+write_efuse_bt_88xx(struct halmac_adapter *adapter, u32 offset, u8 value,
+		    enum halmac_efuse_bank bank)
 {
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
-
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_write_efuse_bt_88xx ==========>\n");
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]offset : %X value : %X Bank : %X\n", halmac_offset, halmac_value, halmac_efuse_bank);
-
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait/Rcvd event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	if (halmac_offset >= pHalmac_adapter->hw_config_info.efuse_size) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Offset is too large\n");
+	if (offset >= adapter->hw_cfg_info.efuse_size) {
+		PLTFM_MSG_ERR("[ERR]Offset is too large\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if ((halmac_efuse_bank > HALMAC_EFUSE_BANK_MAX) || (halmac_efuse_bank == HALMAC_EFUSE_BANK_WIFI)) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Undefined BT bank\n");
+	if (bank > HALMAC_EFUSE_BANK_MAX || bank == HALMAC_EFUSE_BANK_WIFI) {
+		PLTFM_MSG_ERR("[ERR]Undefined BT bank\n");
 		return HALMAC_RET_EFUSE_BANK_INCORRECT;
 	}
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, halmac_efuse_bank);
+	status = switch_efuse_bank_88xx(adapter, bank);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank!!\n");
 		return status;
 	}
 
-	status = halmac_func_write_efuse_88xx(pHalmac_adapter, halmac_offset, halmac_value);
+	status = write_hw_efuse_88xx(adapter, offset, value);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_write_efuse error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]write efuse\n");
 		return status;
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_write_efuse_bt_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_read_efuse_bt_88xx() - read "BT physical" efuse offset
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_offset : offset
- * @pValue : 1 byte efuse value
- * @HALMAC_EFUSE_BANK : efuse bank
+ * read_efuse_bt_88xx() - read "BT physical" efuse offset
+ * @adapter : the adapter of halmac
+ * @offset : offset
+ * @value : 1 byte efuse value
+ * @bank : efuse bank
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_read_efuse_bt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	OUT u8 *pValue,
-	IN HALMAC_EFUSE_BANK halmac_efuse_bank
-)
+enum halmac_ret_status
+read_efuse_bt_88xx(struct halmac_adapter *adapter, u32 offset, u8 *value,
+		   enum halmac_efuse_bank bank)
 {
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_read_efuse_bt_88xx ==========>\n");
-
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait/Rcvd event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	if (halmac_offset >= pHalmac_adapter->hw_config_info.efuse_size) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Offset is too large\n");
+	if (offset >= adapter->hw_cfg_info.efuse_size) {
+		PLTFM_MSG_ERR("[ERR]Offset is too large\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if ((halmac_efuse_bank > HALMAC_EFUSE_BANK_MAX) || (halmac_efuse_bank == HALMAC_EFUSE_BANK_WIFI)) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Undefined BT bank\n");
+	if (bank > HALMAC_EFUSE_BANK_MAX || bank == HALMAC_EFUSE_BANK_WIFI) {
+		PLTFM_MSG_ERR("[ERR]Undefined BT bank\n");
 		return HALMAC_RET_EFUSE_BANK_INCORRECT;
 	}
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, halmac_efuse_bank);
+	status = switch_efuse_bank_88xx(adapter, bank);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
 		return status;
 	}
 
-	status = halmac_func_read_efuse_88xx(pHalmac_adapter, halmac_offset, 1, pValue);
+	status = read_efuse_88xx(adapter, offset, 1, value);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_read_efuse error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]read efuse\n");
 		return status;
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_read_efuse_bt_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_cfg_efuse_auto_check_88xx() - check efuse after writing it
- * @pHalmac_adapter : the adapter of halmac
+ * cfg_efuse_auto_check_88xx() - check efuse after writing it
+ * @adapter : the adapter of halmac
  * @enable : 1, enable efuse auto check. others, disable
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_cfg_efuse_auto_check_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 enable
-)
+enum halmac_ret_status
+cfg_efuse_auto_check_88xx(struct halmac_adapter *adapter, u8 enable)
 {
-	VOID *pDriver_adapter = NULL;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	adapter->efuse_auto_check_en = enable;
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_cfg_efuse_auto_check_88xx ==========> function enable = %d\n", enable);
-
-	pHalmac_adapter->efuse_auto_check_en = enable;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_cfg_efuse_auto_check_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_get_efuse_available_size_88xx() - get efuse available size
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_size : physical efuse available size
+ * get_efuse_available_size_88xx() - get efuse available size
+ * @adapter : the adapter of halmac
+ * @size : physical efuse available size
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_get_efuse_available_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u32 *halmac_size
-)
+enum halmac_ret_status
+get_efuse_available_size_88xx(struct halmac_adapter *adapter, u32 *size)
 {
-	HALMAC_RET_STATUS status;
-	VOID *pDriver_adapter = NULL;
+	enum halmac_ret_status status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_get_efuse_available_size_88xx ==========>\n");
-
-	status = halmac_dump_logical_efuse_map_88xx(pHalmac_adapter, HALMAC_EFUSE_R_DRV);
+	status = dump_log_efuse_map_88xx(adapter, HALMAC_EFUSE_R_DRV);
 
 	if (status != HALMAC_RET_SUCCESS)
 		return status;
 
-	*halmac_size = pHalmac_adapter->hw_config_info.efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX - pHalmac_adapter->efuse_end;
+	*size = adapter->hw_cfg_info.efuse_size -
+		adapter->hw_cfg_info.prtct_efuse_size -	adapter->efuse_end;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_get_efuse_available_size_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_get_efuse_size_88xx() - get "physical" efuse size
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_size : physical efuse size
+ * get_efuse_size_88xx() - get "physical" efuse size
+ * @adapter : the adapter of halmac
+ * @size : physical efuse size
  * Author : Ivan Lin/KaiYuan Chang
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_get_efuse_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u32 *halmac_size
-)
+enum halmac_ret_status
+get_efuse_size_88xx(struct halmac_adapter *adapter, u32 *size)
 {
-	VOID *pDriver_adapter = NULL;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	*size = adapter->hw_cfg_info.efuse_size;
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_get_efuse_size_88xx ==========>\n");
-
-	*halmac_size = pHalmac_adapter->hw_config_info.efuse_size;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_get_efuse_size_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_get_logical_efuse_size_88xx() - get "logical" efuse size
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_size : logical efuse size
+ * get_log_efuse_size_88xx() - get "logical" efuse size
+ * @adapter : the adapter of halmac
+ * @size : logical efuse size
  * Author : Ivan Lin/KaiYuan Chang
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_get_logical_efuse_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u32 *halmac_size
-)
+enum halmac_ret_status
+get_log_efuse_size_88xx(struct halmac_adapter *adapter, u32 *size)
 {
-	VOID *pDriver_adapter = NULL;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	*size = adapter->hw_cfg_info.eeprom_size;
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_get_logical_efuse_size_88xx ==========>\n");
-
-	*halmac_size = pHalmac_adapter->hw_config_info.eeprom_size;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_get_logical_efuse_size_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_dump_logical_efuse_map_88xx() - dump "logical" efuse map
- * @pHalmac_adapter : the adapter of halmac
+ * dump_log_efuse_map_88xx() - dump "logical" efuse map
+ * @adapter : the adapter of halmac
  * @cfg : dump efuse method
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_dump_logical_efuse_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_READ_CFG cfg
-)
+enum halmac_ret_status
+dump_log_efuse_map_88xx(struct halmac_adapter *adapter,
+			enum halmac_efuse_read_cfg cfg)
 {
-	u8 *pEeprom_map = NULL;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	u8 *map = NULL;
+	u32 size = adapter->hw_cfg_info.eeprom_size;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
+	if (cfg == HALMAC_EFUSE_R_FW &&
+	    halmac_fw_validate(adapter) != HALMAC_RET_SUCCESS)
+		return HALMAC_RET_NO_DLFW;
 
-	if (cfg == HALMAC_EFUSE_R_FW) {
-		if (halmac_fw_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-			return HALMAC_RET_NO_DLFW;
-	}
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
+	PLTFM_MSG_TRACE("[TRACE]cfg = %d\n", cfg);
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_dump_logical_efuse_map_88xx ==========>\n");
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]cfg = %d\n", cfg);
-
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait/Rcvd event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	if (pHalmac_adapter->halmac_state.mac_power == HALMAC_MAC_POWER_OFF)
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_WARN, "[WARN]Dump logical efuse in suspend mode\n");
+	if (adapter->halmac_state.mac_pwr == HALMAC_MAC_POWER_OFF)
+		PLTFM_MSG_ERR("[ERR]Dump efuse in suspend\n");
 
-	*pProcess_status = HALMAC_CMD_PROCESS_IDLE;
-	pHalmac_adapter->event_trigger.logical_efuse_map = 1;
+	*proc_status = HALMAC_CMD_PROCESS_IDLE;
+	adapter->evnt.log_efuse_map = 1;
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, HALMAC_EFUSE_BANK_WIFI);
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
 		return status;
 	}
 
-	status = halmac_dump_efuse_88xx(pHalmac_adapter, cfg);
-
+	status = proc_dump_efuse_88xx(adapter, cfg);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_eeprom_parser_88xx error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]dump efuse\n");
 		return status;
 	}
 
-	if (pHalmac_adapter->hal_efuse_map_valid == _TRUE) {
-		*pProcess_status = HALMAC_CMD_PROCESS_DONE;
+	if (adapter->efuse_map_valid == 1) {
+		*proc_status = HALMAC_CMD_PROCESS_DONE;
 
-		pEeprom_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_size);
-		if (pEeprom_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+		map = (u8 *)PLTFM_MALLOC(size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc map\n");
 			return HALMAC_RET_MALLOC_FAIL;
 		}
-		PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_map, 0xFF, eeprom_size);
+		PLTFM_MEMSET(map, 0xFF, size);
 
-		if (halmac_eeprom_parser_88xx(pHalmac_adapter, pHalmac_adapter->pHalEfuse_map, pEeprom_map) != HALMAC_RET_SUCCESS) {
-			PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		if (eeprom_parser_88xx(adapter, adapter->efuse_map, map) !=
+		    HALMAC_RET_SUCCESS) {
+			PLTFM_FREE(map, size);
 			return HALMAC_RET_EEPROM_PARSING_FAIL;
 		}
 
-		PLATFORM_EVENT_INDICATION(pDriver_adapter, HALMAC_FEATURE_DUMP_LOGICAL_EFUSE, *pProcess_status, pEeprom_map, eeprom_size);
-		pHalmac_adapter->event_trigger.logical_efuse_map = 0;
+		PLTFM_EVENT_SIG(HALMAC_FEATURE_DUMP_LOGICAL_EFUSE,
+				*proc_status, map, size);
+		adapter->evnt.log_efuse_map = 0;
 
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		PLTFM_FREE(map, size);
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_dump_logical_efuse_map_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
+
+	return HALMAC_RET_SUCCESS;
+}
+
+enum halmac_ret_status
+dump_log_efuse_mask_88xx(struct halmac_adapter *adapter,
+			 enum halmac_efuse_read_cfg cfg)
+{
+	u8 *map = NULL;
+	u32 size = adapter->hw_cfg_info.eeprom_size;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
+
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
+
+	if (cfg == HALMAC_EFUSE_R_FW &&
+	    halmac_fw_validate(adapter) != HALMAC_RET_SUCCESS)
+		return HALMAC_RET_NO_DLFW;
+
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
+	PLTFM_MSG_TRACE("[TRACE]cfg = %d\n", cfg);
+
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
+		return HALMAC_RET_BUSY_STATE;
+	}
+
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
+		return HALMAC_RET_ERROR_STATE;
+	}
+
+	if (adapter->halmac_state.mac_pwr == HALMAC_MAC_POWER_OFF)
+		PLTFM_MSG_ERR("[ERR]Dump efuse in suspend\n");
+
+	*proc_status = HALMAC_CMD_PROCESS_IDLE;
+	adapter->evnt.log_efuse_mask = 1;
+
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
+		return status;
+	}
+
+	status = proc_dump_efuse_88xx(adapter, cfg);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]dump efuse\n");
+		return status;
+	}
+
+	if (adapter->efuse_map_valid == 1) {
+		*proc_status = HALMAC_CMD_PROCESS_DONE;
+
+		map = (u8 *)PLTFM_MALLOC(size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc map\n");
+			return HALMAC_RET_MALLOC_FAIL;
+		}
+		PLTFM_MEMSET(map, 0xFF, size);
+
+		if (eeprom_mask_parser_88xx(adapter, adapter->efuse_map, map) !=
+		    HALMAC_RET_SUCCESS) {
+			PLTFM_FREE(map, size);
+			return HALMAC_RET_EEPROM_PARSING_FAIL;
+		}
+
+		PLTFM_EVENT_SIG(HALMAC_FEATURE_DUMP_LOGICAL_EFUSE_MASK,
+				*proc_status, map, size);
+		adapter->evnt.log_efuse_mask = 0;
+
+		PLTFM_FREE(map, size);
+	}
+
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
+		return HALMAC_RET_ERROR_STATE;
+
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_read_logical_efuse_88xx() - read logical efuse map 1 byte
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_offset : offset
- * @pValue : 1 byte efuse value
+ * read_logical_efuse_88xx() - read logical efuse map 1 byte
+ * @adapter : the adapter of halmac
+ * @offset : offset
+ * @value : 1 byte efuse value
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_read_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	OUT u8 *pValue
-)
+enum halmac_ret_status
+read_logical_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 *value)
 {
-	u8 *pEeprom_map = NULL;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	u8 *map = NULL;
+	u32 size = adapter->hw_cfg_info.eeprom_size;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_read_logical_efuse_88xx ==========>\n");
-
-	if (halmac_offset >= eeprom_size) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Offset is too large\n");
+	if (offset >= size) {
+		PLTFM_MSG_ERR("[ERR]Offset is too large\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait/Rcvd event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, HALMAC_EFUSE_BANK_WIFI);
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
 		return status;
 	}
 
-	pEeprom_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_size);
-	if (pEeprom_map == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+	map = (u8 *)PLTFM_MALLOC(size);
+	if (!map) {
+		PLTFM_MSG_ERR("[ERR]malloc map\n");
 		return HALMAC_RET_MALLOC_FAIL;
 	}
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_map, 0xFF, eeprom_size);
+	PLTFM_MEMSET(map, 0xFF, size);
 
-	status = halmac_read_logical_efuse_map_88xx(pHalmac_adapter, pEeprom_map);
+	status = read_log_efuse_map_88xx(adapter, map);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_read_logical_efuse_map error = %x\n", status);
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		PLTFM_MSG_ERR("[ERR]read logical efuse\n");
+		PLTFM_FREE(map, size);
 		return status;
 	}
 
-	*pValue = *(pEeprom_map + halmac_offset);
+	*value = *(map + offset);
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS) {
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS) {
+		PLTFM_FREE(map, size);
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_read_logical_efuse_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
-	PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+	PLTFM_FREE(map, size);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_write_logical_efuse_88xx() - write "logical" efuse offset
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_offset : offset
- * @halmac_value : value
+ * write_log_efuse_88xx() - write "logical" efuse offset
+ * @adapter : the adapter of halmac
+ * @offset : offset
+ * @value : value
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_write_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	IN u8 halmac_value
-)
+enum halmac_ret_status
+write_log_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value)
 {
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_write_logical_efuse_88xx ==========>\n");
-
-	if (halmac_offset >= pHalmac_adapter->hw_config_info.eeprom_size) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Offset is too large\n");
+	if (offset >= adapter->hw_cfg_info.eeprom_size) {
+		PLTFM_MSG_ERR("[ERR]Offset is too large\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait/Rcvd event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, HALMAC_EFUSE_BANK_WIFI);
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
 		return status;
 	}
 
-	status = halmac_func_write_logical_efuse_88xx(pHalmac_adapter, halmac_offset, halmac_value);
+	status = proc_write_log_efuse_88xx(adapter, offset, value);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_write_logical_efuse error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]write logical efuse\n");
 		return status;
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_write_logical_efuse_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_pg_efuse_by_map_88xx() - pg logical efuse by map
- * @pHalmac_adapter : the adapter of halmac
- * @pPg_efuse_info : efuse map information
+ * pg_efuse_by_map_88xx() - pg logical efuse by map
+ * @adapter : the adapter of halmac
+ * @info : efuse map information
  * @cfg : dump efuse method
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_pg_efuse_by_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN HALMAC_EFUSE_READ_CFG cfg
-)
+enum halmac_ret_status
+pg_efuse_by_map_88xx(struct halmac_adapter *adapter,
+		     struct halmac_pg_efuse_info *info,
+		     enum halmac_efuse_read_cfg cfg)
 {
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_pg_efuse_by_map_88xx ==========>\n");
-
-	if (pPg_efuse_info->efuse_map_size != pHalmac_adapter->hw_config_info.eeprom_size) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_map_size is incorrect, should be %d bytes\n", pHalmac_adapter->hw_config_info.eeprom_size);
+	if (info->efuse_map_size != adapter->hw_cfg_info.eeprom_size) {
+		PLTFM_MSG_ERR("[ERR]map size error\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if ((pPg_efuse_info->efuse_map_size & 0xF) > 0) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_map_size should be multiple of 16\n");
+	if ((info->efuse_map_size & 0xF) > 0) {
+		PLTFM_MSG_ERR("[ERR]not multiple of 16\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if (pPg_efuse_info->efuse_mask_size != pPg_efuse_info->efuse_map_size >> 4) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_mask_size is incorrect, should be %d bytes\n", pPg_efuse_info->efuse_map_size >> 4);
+	if (info->efuse_mask_size != info->efuse_map_size >> 4) {
+		PLTFM_MSG_ERR("[ERR]mask size error\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if (pPg_efuse_info->pEfuse_map == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_map is NULL\n");
+	if (!info->efuse_map) {
+		PLTFM_MSG_ERR("[ERR]map is NULL\n");
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	if (pPg_efuse_info->pEfuse_mask == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_mask is NULL\n");
+	if (!info->efuse_mask) {
+		PLTFM_MSG_ERR("[ERR]mask is NULL\n");
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	if (*pProcess_status == HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Wait/Rcvd event(dump efuse)...\n");
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
 		return HALMAC_RET_BUSY_STATE;
 	}
 
-	if (halmac_query_efuse_curr_state_88xx(pHalmac_adapter) != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_WARN, "[WARN]Not idle state(dump efuse)...\n");
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
 		return HALMAC_RET_ERROR_STATE;
 	}
 
-	status = halmac_func_switch_efuse_bank_88xx(pHalmac_adapter, HALMAC_EFUSE_BANK_WIFI);
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_func_switch_efuse_bank error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
 		return status;
 	}
 
-	status = halmac_func_pg_efuse_by_map_88xx(pHalmac_adapter, pPg_efuse_info, cfg);
-
+	status = proc_pg_efuse_by_map_88xx(adapter, info, cfg);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_pg_efuse_by_map error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]pg efuse\n");
 		return status;
 	}
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_IDLE) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_pg_efuse_by_map_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_mask_logical_efuse_88xx() - mask logical efuse
- * @pHalmac_adapter : the adapter of halmac
- * @pEfuse_info : efuse map information
+ * mask_log_efuse_88xx() - mask logical efuse
+ * @adapter : the adapter of halmac
+ * @info : efuse map information
  * Author : Soar
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_mask_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	INOUT PHALMAC_PG_EFUSE_INFO pEfuse_info
-)
+enum halmac_ret_status
+mask_log_efuse_88xx(struct halmac_adapter *adapter,
+		    struct halmac_pg_efuse_info *info)
 {
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
-
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
-
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_mask_logical_efuse_88xx ==========>\n");
-
-	if (pEfuse_info->efuse_map_size != pHalmac_adapter->hw_config_info.eeprom_size) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_map_size is incorrect, should be %d bytes\n", pHalmac_adapter->hw_config_info.eeprom_size);
+	if (info->efuse_map_size != adapter->hw_cfg_info.eeprom_size) {
+		PLTFM_MSG_ERR("[ERR]map size error\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if ((pEfuse_info->efuse_map_size & 0xF) > 0) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_map_size should be multiple of 16\n");
+	if ((info->efuse_map_size & 0xF) > 0) {
+		PLTFM_MSG_ERR("[ERR]not multiple of 16\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if (pEfuse_info->efuse_mask_size != pEfuse_info->efuse_map_size >> 4) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_mask_size is incorrect, should be %d bytes\n", pEfuse_info->efuse_map_size >> 4);
+	if (info->efuse_mask_size != info->efuse_map_size >> 4) {
+		PLTFM_MSG_ERR("[ERR]mask size error\n");
 		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
 	}
 
-	if (pEfuse_info->pEfuse_map == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_map is NULL\n");
+	if (!info->efuse_map) {
+		PLTFM_MSG_ERR("[ERR]map is NULL\n");
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	if (pEfuse_info->pEfuse_mask == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]efuse_mask is NULL\n");
+	if (!info->efuse_mask) {
+		PLTFM_MSG_ERR("[ERR]mask is NULL\n");
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	halmac_mask_eeprom_88xx(pHalmac_adapter, pEfuse_info);
+	mask_eeprom_88xx(adapter, info);
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_TRACE, "[TRACE]halmac_mask_logical_efuse_88xx <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_EFUSE_CMD_CONSTRUCT_STATE
-halmac_query_efuse_curr_state_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-)
+static enum halmac_cmd_construct_state
+efuse_cmd_cnstr_state_88xx(struct halmac_adapter *adapter)
 {
-	return pHalmac_adapter->halmac_state.efuse_state_set.efuse_cmd_construct_state;
+	return adapter->halmac_state.efuse_state.cmd_cnstr_state;
 }
 
-HALMAC_RET_STATUS
-halmac_func_switch_efuse_bank_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_BANK efuse_bank
-)
+enum halmac_ret_status
+switch_efuse_bank_88xx(struct halmac_adapter *adapter,
+		       enum halmac_efuse_bank bank)
 {
 	u8 reg_value;
-	PHALMAC_API pHalmac_api;
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
 
-	pHalmac_api = (PHALMAC_API)pHalmac_adapter->pHalmac_api;
-
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_BUSY) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_BUSY) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
-	reg_value = HALMAC_REG_READ_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 1);
+	reg_value = HALMAC_REG_R8(REG_LDO_EFUSE_CTRL + 1);
 
-	if (efuse_bank == (reg_value & (BIT(0) | BIT(1))))
+	if (bank == (reg_value & (BIT(0) | BIT(1))))
 		return HALMAC_RET_SUCCESS;
 
 	reg_value &= ~(BIT(0) | BIT(1));
-	reg_value |= efuse_bank;
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 1, reg_value);
+	reg_value |= bank;
+	HALMAC_REG_W8(REG_LDO_EFUSE_CTRL + 1, reg_value);
 
-	if ((HALMAC_REG_READ_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 1) & (BIT(0) | BIT(1))) != efuse_bank)
+	reg_value = HALMAC_REG_R8(REG_LDO_EFUSE_CTRL + 1);
+	if ((reg_value & (BIT(0) | BIT(1))) != bank)
 		return HALMAC_RET_SWITCH_EFUSE_BANK_FAIL;
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_dump_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_READ_CFG cfg
-)
+static enum halmac_ret_status
+proc_dump_efuse_88xx(struct halmac_adapter *adapter,
+		     enum halmac_efuse_read_cfg cfg)
 {
-	u32 chk_h2c_init;
-	VOID *pDriver_adapter = NULL;
-	PHALMAC_API pHalmac_api = (PHALMAC_API)pHalmac_adapter->pHalmac_api;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
-	HALMAC_CMD_PROCESS_STATUS *pProcess_status = &pHalmac_adapter->halmac_state.efuse_state_set.process_status;
+	u32 h2c_init;
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
 
-	*pProcess_status = HALMAC_CMD_PROCESS_SENDING;
+	*proc_status = HALMAC_CMD_PROCESS_SENDING;
 
-	if (halmac_transition_efuse_state_88xx(pHalmac_adapter, HALMAC_EFUSE_CMD_CONSTRUCT_H2C_SENT) != HALMAC_RET_SUCCESS)
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_H2C_SENT) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_ERROR_STATE;
 
 	if (cfg == HALMAC_EFUSE_R_AUTO) {
-		chk_h2c_init = HALMAC_REG_READ_32(pHalmac_adapter, REG_H2C_PKT_READADDR);
-		if (HALMAC_DLFW_NONE == pHalmac_adapter->halmac_state.dlfw_state || 0 == chk_h2c_init)
-			status = halmac_dump_efuse_drv_88xx(pHalmac_adapter);
+		h2c_init = HALMAC_REG_R32(REG_H2C_PKT_READADDR);
+		if (adapter->halmac_state.dlfw_state == HALMAC_DLFW_NONE ||
+		    h2c_init == 0)
+			status = dump_efuse_drv_88xx(adapter);
 		else
-			status = halmac_dump_efuse_fw_88xx(pHalmac_adapter);
+			status = dump_efuse_fw_88xx(adapter);
 	} else if (cfg == HALMAC_EFUSE_R_FW) {
-		status = halmac_dump_efuse_fw_88xx(pHalmac_adapter);
+		status = dump_efuse_fw_88xx(adapter);
 	} else {
-		status = halmac_dump_efuse_drv_88xx(pHalmac_adapter);
+		status = dump_efuse_drv_88xx(adapter);
 	}
 
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_read_efuse error = %x\n", status);
+		PLTFM_MSG_ERR("[ERR]dump efsue drv/fw\n");
 		return status;
 	}
 
 	return status;
 }
 
-HALMAC_RET_STATUS
-halmac_transition_efuse_state_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_CMD_CONSTRUCT_STATE dest_state
-)
+enum halmac_ret_status
+cnv_efuse_state_88xx(struct halmac_adapter *adapter,
+		     enum halmac_cmd_construct_state dest_state)
 {
-	PHALMAC_EFUSE_STATE_SET pEfuse_state = &pHalmac_adapter->halmac_state.efuse_state_set;
+	struct halmac_efuse_state *state = &adapter->halmac_state.efuse_state;
 
-	if ((pEfuse_state->efuse_cmd_construct_state != HALMAC_EFUSE_CMD_CONSTRUCT_IDLE)
-	    && (pEfuse_state->efuse_cmd_construct_state != HALMAC_EFUSE_CMD_CONSTRUCT_BUSY)
-	    && (pEfuse_state->efuse_cmd_construct_state != HALMAC_EFUSE_CMD_CONSTRUCT_H2C_SENT))
+	if (state->cmd_cnstr_state != HALMAC_CMD_CNSTR_IDLE &&
+	    state->cmd_cnstr_state != HALMAC_CMD_CNSTR_BUSY &&
+	    state->cmd_cnstr_state != HALMAC_CMD_CNSTR_H2C_SENT)
 		return HALMAC_RET_ERROR_STATE;
 
-	if (pEfuse_state->efuse_cmd_construct_state == dest_state)
+	if (state->cmd_cnstr_state == dest_state)
 		return HALMAC_RET_ERROR_STATE;
 
-	if (dest_state == HALMAC_EFUSE_CMD_CONSTRUCT_BUSY) {
-		if (pEfuse_state->efuse_cmd_construct_state == HALMAC_EFUSE_CMD_CONSTRUCT_H2C_SENT)
+	if (dest_state == HALMAC_CMD_CNSTR_BUSY) {
+		if (state->cmd_cnstr_state == HALMAC_CMD_CNSTR_H2C_SENT)
 			return HALMAC_RET_ERROR_STATE;
-	} else if (dest_state == HALMAC_EFUSE_CMD_CONSTRUCT_H2C_SENT) {
-		if (pEfuse_state->efuse_cmd_construct_state == HALMAC_EFUSE_CMD_CONSTRUCT_IDLE)
+	} else if (dest_state == HALMAC_CMD_CNSTR_H2C_SENT) {
+		if (state->cmd_cnstr_state == HALMAC_CMD_CNSTR_IDLE)
 			return HALMAC_RET_ERROR_STATE;
 	}
 
-	pEfuse_state->efuse_cmd_construct_state = dest_state;
+	state->cmd_cnstr_state = dest_state;
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_read_hw_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u32 size,
-	OUT u8 *pEfuse_map
-)
+static enum halmac_ret_status
+read_hw_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u32 size,
+		   u8 *map)
 {
-	u8 value8;
+	u8 enable;
 	u32 value32;
-	u32 address;
-	u32 tmp32, counter;
-	VOID *pDriver_adapter = NULL;
-	PHALMAC_API pHalmac_api;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-	pHalmac_api = (PHALMAC_API)pHalmac_adapter->pHalmac_api;
+	u32 addr;
+	u32 tmp32;
+	u32 cnt;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
 
 	/* Read efuse no need 2.5V LDO */
-	value8 = HALMAC_REG_READ_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 3);
-	if (value8 & BIT(7))
-		HALMAC_REG_WRITE_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 3, (u8)(value8 & ~(BIT(7))));
+	enable = 0;
+	status = api->halmac_set_hw_value(adapter, HALMAC_HW_LDO25_EN, &enable);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]dis ldo25\n");
+		return status;
+	}
+	value32 = HALMAC_REG_R32(REG_EFUSE_CTRL);
 
-	value32 = HALMAC_REG_READ_32(pHalmac_adapter, REG_EFUSE_CTRL);
+	for (addr = offset; addr < offset + size; addr++) {
+		value32 &= ~(BIT_MASK_EF_DATA | BITS_EF_ADDR);
+		value32 |= ((addr & BIT_MASK_EF_ADDR) << BIT_SHIFT_EF_ADDR);
+		HALMAC_REG_W32(REG_EFUSE_CTRL, value32 & (~BIT_EF_FLAG));
 
-	for (address = offset; address < offset + size; address++) {
-		value32 = value32 & ~((BIT_MASK_EF_DATA) | (BIT_MASK_EF_ADDR << BIT_SHIFT_EF_ADDR));
-		value32 = value32 | ((address & BIT_MASK_EF_ADDR) << BIT_SHIFT_EF_ADDR);
-		HALMAC_REG_WRITE_32(pHalmac_adapter, REG_EFUSE_CTRL, value32 & (~BIT_EF_FLAG));
-
-		counter = 1000000;
+		cnt = 1000000;
 		do {
-			PLATFORM_RTL_DELAY_US(pDriver_adapter, 1);
-			tmp32 = HALMAC_REG_READ_32(pHalmac_adapter, REG_EFUSE_CTRL);
-			counter--;
-			if (counter == 0) {
-				PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]HALMAC_RET_EFUSE_R_FAIL\n");
+			PLTFM_DELAY_US(1);
+			tmp32 = HALMAC_REG_R32(REG_EFUSE_CTRL);
+			cnt--;
+			if (cnt == 0) {
+				PLTFM_MSG_ERR("[ERR]read\n");
 				return HALMAC_RET_EFUSE_R_FAIL;
 			}
 		} while ((tmp32 & BIT_EF_FLAG) == 0);
 
-		*(pEfuse_map + address - offset) = (u8)(tmp32 & BIT_MASK_EF_DATA);
+		*(map + addr - offset) = (u8)(tmp32 & BIT_MASK_EF_DATA);
 	}
 
 	return HALMAC_RET_SUCCESS;
 }
 
-HALMAC_RET_STATUS
-halmac_func_write_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u8 value
-)
+enum halmac_ret_status
+write_hw_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value)
 {
-	const u8 wite_protect_code = 0x69;
-	u32 value32, tmp32, counter;
-	VOID *pDriver_adapter = NULL;
-	PHALMAC_API pHalmac_api;
+	const u8 unlock_code = 0x69;
 	u8 value_read = 0;
+	u8 enable;
+	u32 value32;
+	u32 tmp32;
+	u32 cnt;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-	pHalmac_api = (PHALMAC_API)pHalmac_adapter->pHalmac_api;
+	PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+	adapter->efuse_map_valid = 0;
+	PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-	PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-	pHalmac_adapter->hal_efuse_map_valid = _FALSE;
-	PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_PMC_DBG_CTRL2 + 3, wite_protect_code);
+	HALMAC_REG_W8(REG_PMC_DBG_CTRL2 + 3, unlock_code);
 
 	/* Enable 2.5V LDO */
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 3, (u8)(HALMAC_REG_READ_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 3) | BIT(7)));
+	enable = 1;
+	status = api->halmac_set_hw_value(adapter, HALMAC_HW_LDO25_EN, &enable);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]en ldo25\n");
+		return status;
+	}
 
-	value32 = HALMAC_REG_READ_32(pHalmac_adapter, REG_EFUSE_CTRL);
-	value32 = value32 & ~((BIT_MASK_EF_DATA) | (BIT_MASK_EF_ADDR << BIT_SHIFT_EF_ADDR));
-	value32 = value32 | ((offset & BIT_MASK_EF_ADDR) << BIT_SHIFT_EF_ADDR) | (value & BIT_MASK_EF_DATA);
-	HALMAC_REG_WRITE_32(pHalmac_adapter, REG_EFUSE_CTRL, value32 | BIT_EF_FLAG);
+	value32 = HALMAC_REG_R32(REG_EFUSE_CTRL);
+	value32 &= ~(BIT_MASK_EF_DATA | BITS_EF_ADDR);
+	value32 = value32 | ((offset & BIT_MASK_EF_ADDR) << BIT_SHIFT_EF_ADDR) |
+			(value & BIT_MASK_EF_DATA);
+	HALMAC_REG_W32(REG_EFUSE_CTRL, value32 | BIT_EF_FLAG);
 
-	counter = 1000000;
+	cnt = 1000000;
 	do {
-		PLATFORM_RTL_DELAY_US(pDriver_adapter, 1);
-		tmp32 = HALMAC_REG_READ_32(pHalmac_adapter, REG_EFUSE_CTRL);
-		counter--;
-		if (counter == 0) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_write_efuse Fail !!\n");
+		PLTFM_DELAY_US(1);
+		tmp32 = HALMAC_REG_R32(REG_EFUSE_CTRL);
+		cnt--;
+		if (cnt == 0) {
+			PLTFM_MSG_ERR("[ERR]write!!\n");
 			return HALMAC_RET_EFUSE_W_FAIL;
 		}
 	} while (BIT_EF_FLAG == (tmp32 & BIT_EF_FLAG));
 
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_PMC_DBG_CTRL2 + 3, 0x00);
+	HALMAC_REG_W8(REG_PMC_DBG_CTRL2 + 3, 0x00);
 
 	/* Disable 2.5V LDO */
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 3, (u8)(HALMAC_REG_READ_8(pHalmac_adapter, REG_LDO_EFUSE_CTRL + 3) & ~(BIT(7))));
+	enable = 0;
+	status = api->halmac_set_hw_value(adapter, HALMAC_HW_LDO25_EN, &enable);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]dis ldo25\n");
+		return status;
+	}
 
-	if (pHalmac_adapter->efuse_auto_check_en == 1) {
-		if (halmac_read_hw_efuse_88xx(pHalmac_adapter, offset, 1, &value_read) != HALMAC_RET_SUCCESS)
+	if (adapter->efuse_auto_check_en == 1) {
+		if (read_hw_efuse_88xx(adapter, offset, 1, &value_read) !=
+		    HALMAC_RET_SUCCESS)
 			return HALMAC_RET_EFUSE_R_FAIL;
 		if (value_read != value) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_write_efuse Fail: result 0x%X != write value 0x%X !!\n", value_read, value);
+			PLTFM_MSG_ERR("[ERR]efuse compare\n");
 			return HALMAC_RET_EFUSE_W_FAIL;
 		}
 	}
+
 	return HALMAC_RET_SUCCESS;
 }
 
-HALMAC_RET_STATUS
-halmac_eeprom_parser_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pPhysical_efuse_map,
-	OUT u8 *pLogical_efuse_map
-)
+enum halmac_ret_status
+eeprom_parser_88xx(struct halmac_adapter *adapter, u8 *phy_map, u8 *log_map)
 {
-	u8 j;
+	u8 i;
 	u8 value8;
-	u8 block_index;
-	u8 valid_word_enable, word_enable;
-	u8 efuse_read_header, efuse_read_header2 = 0;
-	u32 eeprom_index;
-	u32 efuse_index = 0;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	VOID *pDriver_adapter = NULL;
+	u8 blk_idx;
+	u8 word_en;
+	u8 valid;
+	u8 hdr;
+	u8 hdr2 = 0;
+	u32 eeprom_idx;
+	u32 efuse_idx = 0;
+	u32 prtct_efuse_size = adapter->hw_cfg_info.prtct_efuse_size;
+	struct halmac_hw_cfg_info *hw_info = &adapter->hw_cfg_info;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pLogical_efuse_map, 0xFF, eeprom_size);
+	PLTFM_MEMSET(log_map, 0xFF, hw_info->eeprom_size);
 
 	do {
-		value8 = *(pPhysical_efuse_map + efuse_index);
-		efuse_read_header = value8;
+		value8 = *(phy_map + efuse_idx);
+		hdr = value8;
 
-		if ((efuse_read_header & 0x1f) == 0x0f) {
-			efuse_index++;
-			value8 = *(pPhysical_efuse_map + efuse_index);
-			efuse_read_header2 = value8;
-			block_index = ((efuse_read_header2 & 0xF0) >> 1) | ((efuse_read_header >> 5) & 0x07);
-			word_enable = efuse_read_header2 & 0x0F;
+		if ((hdr & 0x1f) == 0x0f) {
+			efuse_idx++;
+			value8 = *(phy_map + efuse_idx);
+			hdr2 = value8;
+			if (hdr2 == 0xff)
+				break;
+			blk_idx = ((hdr2 & 0xF0) >> 1) | ((hdr >> 5) & 0x07);
+			word_en = hdr2 & 0x0F;
 		} else {
-			block_index = (efuse_read_header & 0xF0) >> 4;
-			word_enable = efuse_read_header & 0x0F;
+			blk_idx = (hdr & 0xF0) >> 4;
+			word_en = hdr & 0x0F;
 		}
 
-		if (efuse_read_header == 0xff)
+		if (hdr == 0xff)
 			break;
 
-		efuse_index++;
+		efuse_idx++;
 
-		if (efuse_index >= pHalmac_adapter->hw_config_info.efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX - 1)
+		if (efuse_idx >= hw_info->efuse_size - prtct_efuse_size - 1)
 			return HALMAC_RET_EEPROM_PARSING_FAIL;
 
-		for (j = 0; j < 4; j++) {
-			valid_word_enable = (u8)((~(word_enable >> j)) & BIT(0));
-			if (valid_word_enable == 1) {
-				eeprom_index = (block_index << 3) + (j << 1);
+		for (i = 0; i < 4; i++) {
+			valid = (u8)((~(word_en >> i)) & BIT(0));
+			if (valid == 1) {
+				eeprom_idx = (blk_idx << 3) + (i << 1);
 
-				if ((eeprom_index + 1) > eeprom_size) {
-					PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]EEPROM addr exceeds eeprom_size:0x%X, at eFuse 0x%X\n", eeprom_size, efuse_index - 1);
-					if ((efuse_read_header & 0x1f) == 0x0f)
-						PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]EEPROM header: 0x%X, 0x%X,\n", efuse_read_header, efuse_read_header2);
-					else
-						PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]EEPROM header: 0x%X,\n", efuse_read_header);
+				if ((eeprom_idx + 1) > hw_info->eeprom_size) {
+					PLTFM_MSG_ERR("[ERR]efuse idx:0x%X\n",
+						      efuse_idx - 1);
+
+					PLTFM_MSG_ERR("[ERR]read hdr:0x%X\n",
+						      hdr);
+
+					PLTFM_MSG_ERR("[ERR]rad hdr2:0x%X\n",
+						      hdr2);
 
 					return HALMAC_RET_EEPROM_PARSING_FAIL;
 				}
 
-				value8 = *(pPhysical_efuse_map + efuse_index);
-				*(pLogical_efuse_map + eeprom_index) = value8;
+				value8 = *(phy_map + efuse_idx);
+				*(log_map + eeprom_idx) = value8;
 
-				eeprom_index++;
-				efuse_index++;
+				eeprom_idx++;
+				efuse_idx++;
 
-				if (efuse_index > pHalmac_adapter->hw_config_info.efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX - 1)
+				if (efuse_idx > hw_info->efuse_size -
+				    prtct_efuse_size - 1)
 					return HALMAC_RET_EEPROM_PARSING_FAIL;
 
-				value8 = *(pPhysical_efuse_map + efuse_index);
-				*(pLogical_efuse_map + eeprom_index) = value8;
+				value8 = *(phy_map + efuse_idx);
+				*(log_map + eeprom_idx) = value8;
 
-				efuse_index++;
+				efuse_idx++;
 
-				if (efuse_index > pHalmac_adapter->hw_config_info.efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX)
+				if (efuse_idx > hw_info->efuse_size -
+				    prtct_efuse_size)
 					return HALMAC_RET_EEPROM_PARSING_FAIL;
 			}
 		}
 	} while (1);
 
-	pHalmac_adapter->efuse_end = efuse_index;
+	adapter->efuse_end = efuse_idx;
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_read_logical_efuse_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pMap
-)
+enum halmac_ret_status
+eeprom_mask_parser_88xx(struct halmac_adapter *adapter, u8 *phy_map,
+			u8 *log_mask)
 {
-	u8 *pEfuse_map = NULL;
+	u8 i;
+	u8 value8;
+	u8 blk_idx;
+	u8 word_en;
+	u8 valid;
+	u8 hdr;
+	u8 hdr2 = 0;
+	u32 eeprom_idx;
+	u32 efuse_idx = 0;
+	u32 prtct_efuse_size = adapter->hw_cfg_info.prtct_efuse_size;
+	struct halmac_hw_cfg_info *hw_info = &adapter->hw_cfg_info;
+
+	PLTFM_MEMSET(log_mask, 0xFF, hw_info->eeprom_size);
+
+	do {
+		value8 = *(phy_map + efuse_idx);
+		hdr = value8;
+
+		if ((hdr & 0x1f) == 0x0f) {
+			efuse_idx++;
+			value8 = *(phy_map + efuse_idx);
+			hdr2 = value8;
+			if (hdr2 == 0xff)
+				break;
+			blk_idx = ((hdr2 & 0xF0) >> 1) | ((hdr >> 5) & 0x07);
+			word_en = hdr2 & 0x0F;
+		} else {
+			blk_idx = (hdr & 0xF0) >> 4;
+			word_en = hdr & 0x0F;
+		}
+
+		if (hdr == 0xff)
+			break;
+
+		efuse_idx++;
+
+		if (efuse_idx >= hw_info->efuse_size - prtct_efuse_size - 1)
+			return HALMAC_RET_EEPROM_PARSING_FAIL;
+
+		for (i = 0; i < 4; i++) {
+			valid = (u8)((~(word_en >> i)) & BIT(0));
+			if (valid == 1) {
+				eeprom_idx = (blk_idx << 3) + (i << 1);
+
+				if ((eeprom_idx + 1) > hw_info->eeprom_size) {
+					PLTFM_MSG_ERR("[ERR]efuse idx:0x%X\n",
+						      efuse_idx - 1);
+
+					PLTFM_MSG_ERR("[ERR]read hdr:0x%X\n",
+						      hdr);
+
+					PLTFM_MSG_ERR("[ERR]read hdr2:0x%X\n",
+						      hdr2);
+
+					return HALMAC_RET_EEPROM_PARSING_FAIL;
+				}
+
+				*(log_mask + eeprom_idx) = 0x00;
+
+				eeprom_idx++;
+				efuse_idx++;
+
+				if (efuse_idx > hw_info->efuse_size -
+				    prtct_efuse_size - 1)
+					return HALMAC_RET_EEPROM_PARSING_FAIL;
+
+				*(log_mask + eeprom_idx) = 0x00;
+
+				efuse_idx++;
+
+				if (efuse_idx > hw_info->efuse_size -
+				    prtct_efuse_size)
+					return HALMAC_RET_EEPROM_PARSING_FAIL;
+			}
+		}
+	} while (1);
+
+	adapter->efuse_end = efuse_idx;
+
+	return HALMAC_RET_SUCCESS;
+}
+
+static enum halmac_ret_status
+read_log_efuse_map_88xx(struct halmac_adapter *adapter, u8 *map)
+{
+	u8 *local_map = NULL;
 	u32 efuse_size;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-	efuse_size = pHalmac_adapter->hw_config_info.efuse_size;
+	if (adapter->efuse_map_valid == 0) {
+		efuse_size = adapter->hw_cfg_info.efuse_size;
 
-	if (pHalmac_adapter->hal_efuse_map_valid == _FALSE) {
-		pEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, efuse_size);
-		if (pEfuse_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local efuse map Fail!!\n");
+		local_map = (u8 *)PLTFM_MALLOC(efuse_size);
+		if (!local_map) {
+			PLTFM_MSG_ERR("[ERR]local map\n");
 			return HALMAC_RET_MALLOC_FAIL;
 		}
 
-		status = halmac_func_read_efuse_88xx(pHalmac_adapter, 0, efuse_size, pEfuse_map);
+		status = read_efuse_88xx(adapter, 0, efuse_size, local_map);
 		if (status != HALMAC_RET_SUCCESS) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_read_efuse error = %x\n", status);
-			PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+			PLTFM_MSG_ERR("[ERR]read efuse\n");
+			PLTFM_FREE(local_map, efuse_size);
 			return status;
 		}
 
-		if (pHalmac_adapter->pHalEfuse_map == NULL) {
-			pHalmac_adapter->pHalEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, efuse_size);
-			if (pHalmac_adapter->pHalEfuse_map == NULL) {
-				PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate efuse map Fail!!\n");
-				PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+		if (!adapter->efuse_map) {
+			adapter->efuse_map = (u8 *)PLTFM_MALLOC(efuse_size);
+			if (!adapter->efuse_map) {
+				PLTFM_MSG_ERR("[ERR]malloc adapter map\n");
+				PLTFM_FREE(local_map, efuse_size);
 				return HALMAC_RET_MALLOC_FAIL;
 			}
 		}
 
-		PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pHalmac_adapter->pHalEfuse_map, pEfuse_map, efuse_size);
-		pHalmac_adapter->hal_efuse_map_valid = _TRUE;
-		PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
+		PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+		PLTFM_MEMCPY(adapter->efuse_map, local_map, efuse_size);
+		adapter->efuse_map_valid = 1;
+		PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-		PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+		PLTFM_FREE(local_map, efuse_size);
 	}
 
-	if (halmac_eeprom_parser_88xx(pHalmac_adapter, pHalmac_adapter->pHalEfuse_map, pMap) != HALMAC_RET_SUCCESS)
+	if (eeprom_parser_88xx(adapter, adapter->efuse_map, map) !=
+	    HALMAC_RET_SUCCESS)
 		return HALMAC_RET_EEPROM_PARSING_FAIL;
 
 	return status;
 }
 
-static HALMAC_RET_STATUS
-halmac_func_pg_efuse_by_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN HALMAC_EFUSE_READ_CFG cfg
-)
+static enum halmac_ret_status
+proc_pg_efuse_by_map_88xx(struct halmac_adapter *adapter,
+			  struct halmac_pg_efuse_info *info,
+			  enum halmac_efuse_read_cfg cfg)
 {
-	u8 *pEeprom_mask_updated = NULL;
-	u32 eeprom_mask_size = pHalmac_adapter->hw_config_info.eeprom_size >> 4;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	u8 *updated_mask = NULL;
+	u32 mask_size = adapter->hw_cfg_info.eeprom_size >> 4;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	pEeprom_mask_updated = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_mask_size);
-	if (pEeprom_mask_updated == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+	updated_mask = (u8 *)PLTFM_MALLOC(mask_size);
+	if (!updated_mask) {
+		PLTFM_MSG_ERR("[ERR]malloc updated mask\n");
 		return HALMAC_RET_MALLOC_FAIL;
 	}
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_mask_updated, 0x00, eeprom_mask_size);
+	PLTFM_MEMSET(updated_mask, 0x00, mask_size);
 
-	status = halmac_update_eeprom_mask_88xx(pHalmac_adapter, pPg_efuse_info, pEeprom_mask_updated);
-
+	status = update_eeprom_mask_88xx(adapter, info, updated_mask);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_update_eeprom_mask_88xx error = %x\n", status);
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_mask_updated, eeprom_mask_size);
+		PLTFM_MSG_ERR("[ERR]update eeprom mask\n");
+		PLTFM_FREE(updated_mask, mask_size);
 		return status;
 	}
 
-	status = halmac_check_efuse_enough_88xx(pHalmac_adapter, pPg_efuse_info, pEeprom_mask_updated);
-
+	status = check_efuse_enough_88xx(adapter, info, updated_mask);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_check_efuse_enough_88xx error = %x\n", status);
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_mask_updated, eeprom_mask_size);
+		PLTFM_MSG_ERR("[ERR]chk efuse enough\n");
+		PLTFM_FREE(updated_mask, mask_size);
 		return status;
 	}
 
-	status = halmac_program_efuse_88xx(pHalmac_adapter, pPg_efuse_info, pEeprom_mask_updated);
-
+	status = program_efuse_88xx(adapter, info, updated_mask);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_program_efuse_88xx error = %x\n", status);
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_mask_updated, eeprom_mask_size);
+		PLTFM_MSG_ERR("[ERR]pg efuse\n");
+		PLTFM_FREE(updated_mask, mask_size);
 		return status;
 	}
 
-	PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_mask_updated, eeprom_mask_size);
+	PLTFM_FREE(updated_mask, mask_size);
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_dump_efuse_drv_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-)
+static enum halmac_ret_status
+dump_efuse_drv_88xx(struct halmac_adapter *adapter)
 {
-	u8 *pEfuse_map = NULL;
-	u32 efuse_size;
-	VOID *pDriver_adapter = NULL;
+	u8 *map = NULL;
+	u32 efuse_size = adapter->hw_cfg_info.efuse_size;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	efuse_size = pHalmac_adapter->hw_config_info.efuse_size;
-
-	if (pHalmac_adapter->pHalEfuse_map == NULL) {
-		pHalmac_adapter->pHalEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, efuse_size);
-		if (pHalmac_adapter->pHalEfuse_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate efuse map Fail!!\n");
-			halmac_reset_feature_88xx(pHalmac_adapter, HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE);
+	if (!adapter->efuse_map) {
+		adapter->efuse_map = (u8 *)PLTFM_MALLOC(efuse_size);
+		if (!adapter->efuse_map) {
+			PLTFM_MSG_ERR("[ERR]malloc adapter map!!\n");
+			reset_ofld_feature_88xx(adapter,
+						FEATURE_DUMP_PHY_EFUSE);
 			return HALMAC_RET_MALLOC_FAIL;
 		}
 	}
 
-	if (pHalmac_adapter->hal_efuse_map_valid == _FALSE) {
-		pEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, efuse_size);
-		if (pEfuse_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local efuse map Fail!!\n");
+	if (adapter->efuse_map_valid == 0) {
+		map = (u8 *)PLTFM_MALLOC(efuse_size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc map\n");
 			return HALMAC_RET_MALLOC_FAIL;
 		}
 
-		if (halmac_read_hw_efuse_88xx(pHalmac_adapter, 0, efuse_size, pEfuse_map) != HALMAC_RET_SUCCESS) {
-			PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+		if (read_hw_efuse_88xx(adapter, 0, efuse_size, map) !=
+		    HALMAC_RET_SUCCESS) {
+			PLTFM_FREE(map, efuse_size);
 			return HALMAC_RET_EFUSE_R_FAIL;
 		}
 
-		PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pHalmac_adapter->pHalEfuse_map, pEfuse_map, efuse_size);
-		pHalmac_adapter->hal_efuse_map_valid = _TRUE;
-		PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
+		PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+		PLTFM_MEMCPY(adapter->efuse_map, map, efuse_size);
+		adapter->efuse_map_valid = 1;
+		PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-		PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+		PLTFM_FREE(map, efuse_size);
 	}
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_dump_efuse_fw_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-)
+static enum halmac_ret_status
+dump_efuse_fw_88xx(struct halmac_adapter *adapter)
 {
-	u8 pH2c_buff[HALMAC_H2C_CMD_SIZE_88XX] = { 0 };
-	u16 h2c_seq_mum = 0;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_H2C_HEADER_INFO h2c_header_info;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	u8 h2c_buf[H2C_PKT_SIZE_88XX] = { 0 };
+	u16 seq_num = 0;
+	u32 efuse_size = adapter->hw_cfg_info.efuse_size;
+	struct halmac_h2c_header_info hdr_info;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
+	hdr_info.sub_cmd_id = SUB_CMD_ID_DUMP_PHYSICAL_EFUSE;
+	hdr_info.content_size = 0;
+	hdr_info.ack = 1;
+	set_h2c_pkt_hdr_88xx(adapter, h2c_buf, &hdr_info, &seq_num);
 
-	h2c_header_info.sub_cmd_id = SUB_CMD_ID_DUMP_PHYSICAL_EFUSE;
-	h2c_header_info.content_size = 0;
-	h2c_header_info.ack = _TRUE;
-	halmac_set_fw_offload_h2c_header_88xx(pHalmac_adapter, pH2c_buff, &h2c_header_info, &h2c_seq_mum);
-	pHalmac_adapter->halmac_state.efuse_state_set.seq_num = h2c_seq_mum;
+	adapter->halmac_state.efuse_state.seq_num = seq_num;
 
-	if (pHalmac_adapter->pHalEfuse_map == NULL) {
-		pHalmac_adapter->pHalEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, pHalmac_adapter->hw_config_info.efuse_size);
-		if (pHalmac_adapter->pHalEfuse_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]halmac allocate efuse map Fail!!\n");
-			halmac_reset_feature_88xx(pHalmac_adapter, HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE);
+	if (!adapter->efuse_map) {
+		adapter->efuse_map = (u8 *)PLTFM_MALLOC(efuse_size);
+		if (!adapter->efuse_map) {
+			PLTFM_MSG_ERR("[ERR]malloc adapter map\n");
+			reset_ofld_feature_88xx(adapter,
+						FEATURE_DUMP_PHY_EFUSE);
 			return HALMAC_RET_MALLOC_FAIL;
 		}
 	}
 
-	if (pHalmac_adapter->hal_efuse_map_valid == _FALSE) {
-		status = halmac_send_h2c_pkt_88xx(pHalmac_adapter, pH2c_buff, HALMAC_H2C_CMD_SIZE_88XX, _TRUE);
+	if (adapter->efuse_map_valid == 0) {
+		status = send_h2c_pkt_88xx(adapter, h2c_buf);
 		if (status != HALMAC_RET_SUCCESS) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]halmac_read_efuse_fw Fail = %x!!\n", status);
-			halmac_reset_feature_88xx(pHalmac_adapter, HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE);
+			PLTFM_MSG_ERR("[ERR]send h2c pkt\n");
+			reset_ofld_feature_88xx(adapter,
+						FEATURE_DUMP_PHY_EFUSE);
 			return status;
 		}
 	}
@@ -1408,329 +1408,404 @@ halmac_dump_efuse_fw_88xx(
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_func_write_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u8 value
-)
+static enum halmac_ret_status
+proc_write_log_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value)
 {
-	u8 pg_efuse_byte1, pg_efuse_byte2;
-	u8 pg_block, pg_block_index;
-	u8 pg_efuse_header, pg_efuse_header2;
-	u8 *pEeprom_map = NULL;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	u32 efuse_end, pg_efuse_num;
-	VOID *pDriver_adapter = NULL;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	u8 byte1;
+	u8 byte2;
+	u8 blk;
+	u8 blk_idx;
+	u8 hdr;
+	u8 hdr2;
+	u8 *map = NULL;
+	u32 eeprom_size = adapter->hw_cfg_info.eeprom_size;
+	u32 prtct_efuse_size = adapter->hw_cfg_info.prtct_efuse_size;
+	u32 end;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	pEeprom_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_size);
-	if (pEeprom_map == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+	map = (u8 *)PLTFM_MALLOC(eeprom_size);
+	if (!map) {
+		PLTFM_MSG_ERR("[ERR]malloc map\n");
 		return HALMAC_RET_MALLOC_FAIL;
 	}
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_map, 0xFF, eeprom_size);
+	PLTFM_MEMSET(map, 0xFF, eeprom_size);
 
-	status = halmac_read_logical_efuse_map_88xx(pHalmac_adapter, pEeprom_map);
+	status = read_log_efuse_map_88xx(adapter, map);
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_read_logical_efuse_map_88xx error = %x\n", status);
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		PLTFM_MSG_ERR("[ERR]read logical efuse\n");
+		PLTFM_FREE(map, eeprom_size);
 		return status;
 	}
 
-	if (*(pEeprom_map + offset) != value) {
-		efuse_end = pHalmac_adapter->efuse_end;
-		pg_block = (u8)(offset >> 3);
-		pg_block_index = (u8)((offset & (8 - 1)) >> 1);
+	if (*(map + offset) != value) {
+		end = adapter->efuse_end;
+		blk = (u8)(offset >> 3);
+		blk_idx = (u8)((offset & (8 - 1)) >> 1);
 
 		if (offset > 0x7f) {
-			pg_efuse_header = (((pg_block & 0x07) << 5) & 0xE0) | 0x0F;
-			pg_efuse_header2 = (u8)(((pg_block & 0x78) << 1) + ((0x1 << pg_block_index) ^ 0x0F));
+			hdr = (((blk & 0x07) << 5) & 0xE0) | 0x0F;
+			hdr2 = (u8)(((blk & 0x78) << 1) +
+						((0x1 << blk_idx) ^ 0x0F));
 		} else {
-			pg_efuse_header = (u8)((pg_block << 4) + ((0x01 << pg_block_index) ^ 0x0F));
+			hdr = (u8)((blk << 4) + ((0x01 << blk_idx) ^ 0x0F));
 		}
 
 		if ((offset & 1) == 0) {
-			pg_efuse_byte1 = value;
-			pg_efuse_byte2 = *(pEeprom_map + offset + 1);
+			byte1 = value;
+			byte2 = *(map + offset + 1);
 		} else {
-			pg_efuse_byte1 = *(pEeprom_map + offset - 1);
-			pg_efuse_byte2 = value;
+			byte1 = *(map + offset - 1);
+			byte2 = value;
 		}
 
 		if (offset > 0x7f) {
-			pg_efuse_num = 4;
-			if (pHalmac_adapter->hw_config_info.efuse_size <= (pg_efuse_num + HALMAC_PROTECTED_EFUSE_SIZE_88XX + pHalmac_adapter->efuse_end)) {
-				PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+			if (adapter->hw_cfg_info.efuse_size <=
+			    4 + prtct_efuse_size + end) {
+				PLTFM_FREE(map, eeprom_size);
 				return HALMAC_RET_EFUSE_NOT_ENOUGH;
 			}
-			halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end, pg_efuse_header);
-			halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 1, pg_efuse_header2);
-			halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 2, pg_efuse_byte1);
-			status = halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 3, pg_efuse_byte2);
-		} else {
-			pg_efuse_num = 3;
-			if (pHalmac_adapter->hw_config_info.efuse_size <= (pg_efuse_num + HALMAC_PROTECTED_EFUSE_SIZE_88XX + pHalmac_adapter->efuse_end)) {
-				PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
-				return HALMAC_RET_EFUSE_NOT_ENOUGH;
-			}
-			halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end, pg_efuse_header);
-			halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 1, pg_efuse_byte1);
-			status = halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 2, pg_efuse_byte2);
-		}
 
-		if (status != HALMAC_RET_SUCCESS) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac_write_logical_efuse error = %x\n", status);
-			PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
-			return status;
+			status = write_hw_efuse_88xx(adapter, end, hdr);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
+
+			status = write_hw_efuse_88xx(adapter, end + 1, hdr2);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
+
+			status = write_hw_efuse_88xx(adapter, end + 2, byte1);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
+
+			status = write_hw_efuse_88xx(adapter, end + 3, byte2);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
+		} else {
+			if (adapter->hw_cfg_info.efuse_size <=
+			    3 + prtct_efuse_size + end) {
+				PLTFM_FREE(map, eeprom_size);
+				return HALMAC_RET_EFUSE_NOT_ENOUGH;
+			}
+
+			status = write_hw_efuse_88xx(adapter, end, hdr);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
+
+			status = write_hw_efuse_88xx(adapter, end + 1, byte1);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
+
+			status = write_hw_efuse_88xx(adapter, end + 2, byte2);
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return status;
+			}
 		}
 	}
 
-	PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+	PLTFM_FREE(map, eeprom_size);
 
 	return HALMAC_RET_SUCCESS;
 }
 
-HALMAC_RET_STATUS
-halmac_func_read_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u32 size,
-	OUT u8 *pEfuse_map
-)
+enum halmac_ret_status
+read_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u32 size, u8 *map)
 {
-	VOID *pDriver_adapter = NULL;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	if (pEfuse_map == NULL) {
-		PLATFORM_MSG_PRINT(pHalmac_adapter->pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]Malloc for dump efuse map error\n");
+	if (!map) {
+		PLTFM_MSG_ERR("[ERR]malloc map\n");
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	if (pHalmac_adapter->hal_efuse_map_valid == _TRUE) {
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pEfuse_map, pHalmac_adapter->pHalEfuse_map + offset, size);
+	if (adapter->efuse_map_valid == 1) {
+		PLTFM_MEMCPY(map, adapter->efuse_map + offset, size);
 	} else {
-		if (halmac_read_hw_efuse_88xx(pHalmac_adapter, offset, size, pEfuse_map) != HALMAC_RET_SUCCESS)
+		if (read_hw_efuse_88xx(adapter, offset, size, map) !=
+		    HALMAC_RET_SUCCESS)
 			return HALMAC_RET_EFUSE_R_FAIL;
 	}
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_update_eeprom_mask_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	INOUT PHALMAC_PG_EFUSE_INFO	pPg_efuse_info,
-	OUT u8 *pEeprom_mask_updated
-)
+static enum halmac_ret_status
+update_eeprom_mask_88xx(struct halmac_adapter *adapter,
+			struct halmac_pg_efuse_info *info, u8 *updated_mask)
 {
-	u8 *pEeprom_map = NULL;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	u8 *pEeprom_map_pg, *pEeprom_mask;
-	u16 i, j;
-	u16 map_byte_offset, mask_byte_offset;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	u8 *map = NULL;
+	u8 clr_bit = 0;
+	u32 eeprom_size = adapter->hw_cfg_info.eeprom_size;
+	u8 *map_pg;
+	u8 *efuse_mask;
+	u16 i;
+	u16 j;
+	u16 map_offset;
+	u16 mask_offset;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	VOID *pDriver_adapter = NULL;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	pEeprom_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_size);
-	if (pEeprom_map == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+	map = (u8 *)PLTFM_MALLOC(eeprom_size);
+	if (!map) {
+		PLTFM_MSG_ERR("[ERR]malloc map\n");
 		return HALMAC_RET_MALLOC_FAIL;
 	}
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_map, 0xFF, eeprom_size);
+	PLTFM_MEMSET(map, 0xFF, eeprom_size);
 
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_mask_updated, 0x00, pPg_efuse_info->efuse_mask_size);
+	PLTFM_MEMSET(updated_mask, 0x00, info->efuse_mask_size);
 
-	status = halmac_read_logical_efuse_map_88xx(pHalmac_adapter, pEeprom_map);
+	status = read_log_efuse_map_88xx(adapter, map);
 
 	if (status != HALMAC_RET_SUCCESS) {
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		PLTFM_FREE(map, eeprom_size);
 		return status;
 	}
 
-	pEeprom_map_pg = pPg_efuse_info->pEfuse_map;
-	pEeprom_mask = pPg_efuse_info->pEfuse_mask;
+	map_pg = info->efuse_map;
+	efuse_mask = info->efuse_mask;
 
+	for (i = 0; i < info->efuse_mask_size; i++)
+		*(updated_mask + i) = *(efuse_mask + i);
 
-	for (i = 0; i < pPg_efuse_info->efuse_mask_size; i++)
-		*(pEeprom_mask_updated + i) = *(pEeprom_mask + i);
-
-	for (i = 0; i < pPg_efuse_info->efuse_map_size; i = i + 16) {
-		for (j = 0; j < 16; j = j + 2) {
-			map_byte_offset = i + j;
-			mask_byte_offset = i >> 4;
-			if (*(pEeprom_map_pg + map_byte_offset) == *(pEeprom_map + map_byte_offset)) {
-				if (*(pEeprom_map_pg + map_byte_offset + 1) == *(pEeprom_map + map_byte_offset + 1)) {
-					switch (j) {
-					case 0:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(4) ^ 0xFF);
-						break;
-					case 2:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(5) ^ 0xFF);
-						break;
-					case 4:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(6) ^ 0xFF);
-						break;
-					case 6:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(7) ^ 0xFF);
-						break;
-					case 8:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(0) ^ 0xFF);
-						break;
-					case 10:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(1) ^ 0xFF);
-						break;
-					case 12:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(2) ^ 0xFF);
-						break;
-					case 14:
-						*(pEeprom_mask_updated + mask_byte_offset) = *(pEeprom_mask_updated + mask_byte_offset) & (BIT(3) ^ 0xFF);
-						break;
-					default:
-						break;
-					}
+	for (i = 0; i < info->efuse_map_size; i += 16) {
+		for (j = 0; j < 16; j += 2) {
+			map_offset = i + j;
+			mask_offset = i >> 4;
+			if (*(u16 *)(map_pg + map_offset) ==
+			    *(u16 *)(map + map_offset)) {
+				switch (j) {
+				case 0:
+					clr_bit = BIT(4);
+					break;
+				case 2:
+					clr_bit = BIT(5);
+					break;
+				case 4:
+					clr_bit = BIT(6);
+					break;
+				case 6:
+					clr_bit = BIT(7);
+					break;
+				case 8:
+					clr_bit = BIT(0);
+					break;
+				case 10:
+					clr_bit = BIT(1);
+					break;
+				case 12:
+					clr_bit = BIT(2);
+					break;
+				case 14:
+					clr_bit = BIT(3);
+					break;
+				default:
+					break;
 				}
+				*(updated_mask + mask_offset) &= ~clr_bit;
 			}
 		}
 	}
 
-	PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+	PLTFM_FREE(map, eeprom_size);
 
 	return status;
 }
 
-static HALMAC_RET_STATUS
-halmac_check_efuse_enough_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN u8 *pEeprom_mask_updated
-)
+static enum halmac_ret_status
+check_efuse_enough_88xx(struct halmac_adapter *adapter,
+			struct halmac_pg_efuse_info *info, u8 *updated_mask)
 {
-	u8 pre_word_enb, word_enb;
-	u8 pg_efuse_header, pg_efuse_header2;
-	u8 pg_block;
-	u16 i, j;
-	u32 efuse_end;
-	u32 tmp_eeprom_offset, pg_efuse_num = 0;
+	u8 pre_word_en;
+	u16 i;
+	u16 j;
+	u32 eeprom_offset;
+	u32 pg_num = 0;
 
-	efuse_end = pHalmac_adapter->efuse_end;
+	for (i = 0; i < info->efuse_map_size; i = i + 8) {
+		eeprom_offset = i;
 
-	for (i = 0; i < pPg_efuse_info->efuse_map_size; i = i + 8) {
-		tmp_eeprom_offset = i;
+		if ((eeprom_offset & 7) > 0)
+			pre_word_en = (*(updated_mask + (i >> 4)) & 0x0F);
+		else
+			pre_word_en = (*(updated_mask + (i >> 4)) >> 4);
 
-		if ((tmp_eeprom_offset & 7) > 0) {
-			pre_word_enb = (*(pEeprom_mask_updated + (i >> 4)) & 0x0F);
-			word_enb = pre_word_enb ^ 0x0F;
-		} else {
-			pre_word_enb = (*(pEeprom_mask_updated + (i >> 4)) >> 4);
-			word_enb = pre_word_enb ^ 0x0F;
-		}
-
-		pg_block = (u8)(tmp_eeprom_offset >> 3);
-
-		if (pre_word_enb > 0) {
-			if (tmp_eeprom_offset > 0x7f) {
-				pg_efuse_header = (((pg_block & 0x07) << 5) & 0xE0) | 0x0F;
-				pg_efuse_header2 = (u8)(((pg_block & 0x78) << 1) + word_enb);
-			} else {
-				pg_efuse_header = (u8)((pg_block << 4) + word_enb);
-			}
-
-			if (tmp_eeprom_offset > 0x7f) {
-				pg_efuse_num++;
-				pg_efuse_num++;
-				efuse_end = efuse_end + 2;
+		if (pre_word_en > 0) {
+			if (eeprom_offset > 0x7f) {
+				pg_num += 2;
 				for (j = 0; j < 4; j++) {
-					if (((pre_word_enb >> j) & 0x1) > 0) {
-						pg_efuse_num++;
-						pg_efuse_num++;
-						efuse_end = efuse_end + 2;
-					}
+					if (((pre_word_en >> j) & 0x1) > 0)
+						pg_num += 2;
 				}
 			} else {
-				pg_efuse_num++;
-				efuse_end = efuse_end + 1;
+				pg_num++;
 				for (j = 0; j < 4; j++) {
-					if (((pre_word_enb >> j) & 0x1) > 0) {
-						pg_efuse_num++;
-						pg_efuse_num++;
-						efuse_end = efuse_end + 2;
-					}
+					if (((pre_word_en >> j) & 0x1) > 0)
+						pg_num += 2;
 				}
 			}
 		}
 	}
 
-	if (pHalmac_adapter->hw_config_info.efuse_size <= (pg_efuse_num + HALMAC_PROTECTED_EFUSE_SIZE_88XX + pHalmac_adapter->efuse_end))
+	if (adapter->hw_cfg_info.efuse_size <=
+	    (pg_num + adapter->hw_cfg_info.prtct_efuse_size +
+	    adapter->efuse_end))
 		return HALMAC_RET_EFUSE_NOT_ENOUGH;
 
 	return HALMAC_RET_SUCCESS;
 }
 
-static HALMAC_RET_STATUS
-halmac_program_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN u8 *pEeprom_mask_updated
-)
+static enum halmac_ret_status
+pg_extend_efuse_88xx(struct halmac_adapter *adapter,
+		     struct halmac_pg_efuse_info *info, u8 word_en,
+		     u8 pre_word_en, u32 eeprom_offset)
 {
-	u8 pre_word_enb, word_enb;
-	u8 pg_efuse_header, pg_efuse_header2;
-	u8 pg_block;
-	u16 i, j;
+	u8 blk;
+	u8 hdr;
+	u8 hdr2;
+	u16 i;
 	u32 efuse_end;
-	u32 tmp_eeprom_offset;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	efuse_end = pHalmac_adapter->efuse_end;
+	efuse_end = adapter->efuse_end;
 
-	for (i = 0; i < pPg_efuse_info->efuse_map_size; i = i + 8) {
-		tmp_eeprom_offset = i;
+	blk = (u8)(eeprom_offset >> 3);
+	hdr = (((blk & 0x07) << 5) & 0xE0) | 0x0F;
+	hdr2 = (u8)(((blk & 0x78) << 1) + word_en);
 
-		if (((tmp_eeprom_offset >> 3) & 1) > 0) {
-			pre_word_enb = (*(pEeprom_mask_updated + (i >> 4)) & 0x0F);
-			word_enb = pre_word_enb ^ 0x0F;
-		} else {
-			pre_word_enb = (*(pEeprom_mask_updated + (i >> 4)) >> 4);
-			word_enb = pre_word_enb ^ 0x0F;
-		}
+	status = write_hw_efuse_88xx(adapter, efuse_end, hdr);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]write efuse\n");
+		return status;
+	}
 
-		pg_block = (u8)(tmp_eeprom_offset >> 3);
+	status = write_hw_efuse_88xx(adapter, efuse_end + 1, hdr2);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]write efuse(+1)\n");
+		return status;
+	}
 
-		if (pre_word_enb > 0) {
-			if (tmp_eeprom_offset > 0x7f) {
-				pg_efuse_header = (((pg_block & 0x07) << 5) & 0xE0) | 0x0F;
-				pg_efuse_header2 = (u8)(((pg_block & 0x78) << 1) + word_enb);
-			} else {
-				pg_efuse_header = (u8)((pg_block << 4) + word_enb);
+	efuse_end = efuse_end + 2;
+	for (i = 0; i < 4; i++) {
+		if (((pre_word_en >> i) & 0x1) > 0) {
+			status = write_hw_efuse_88xx(adapter, efuse_end,
+						     *(info->efuse_map +
+						     eeprom_offset +
+						     (i << 1)));
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_MSG_ERR("[ERR]write efuse(<<1)\n");
+				return status;
 			}
 
-			if (tmp_eeprom_offset > 0x7f) {
-				halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end, pg_efuse_header);
-				status = halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 1, pg_efuse_header2);
-				efuse_end = efuse_end + 2;
-				for (j = 0; j < 4; j++) {
-					if (((pre_word_enb >> j) & 0x1) > 0) {
-						halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end, *(pPg_efuse_info->pEfuse_map + tmp_eeprom_offset + (j << 1)));
-						status = halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 1, *(pPg_efuse_info->pEfuse_map + tmp_eeprom_offset + (j << 1) + 1));
-						efuse_end = efuse_end + 2;
-					}
+			status = write_hw_efuse_88xx(adapter, efuse_end + 1,
+						     *(info->efuse_map +
+						     eeprom_offset + (i << 1)
+						     + 1));
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_MSG_ERR("[ERR]write efuse(<<1)+1\n");
+				return status;
+			}
+			efuse_end = efuse_end + 2;
+		}
+	}
+	adapter->efuse_end = efuse_end;
+	return status;
+}
+
+static enum halmac_ret_status
+proc_pg_efuse_88xx(struct halmac_adapter *adapter,
+		   struct halmac_pg_efuse_info *info, u8 word_en,
+		   u8 pre_word_en, u32 eeprom_offset)
+{
+	u8 blk;
+	u8 hdr;
+	u16 i;
+	u32 efuse_end;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+
+	efuse_end = adapter->efuse_end;
+
+	blk = (u8)(eeprom_offset >> 3);
+	hdr = (u8)((blk << 4) + word_en);
+
+	status = write_hw_efuse_88xx(adapter, efuse_end, hdr);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]write efuse\n");
+		return status;
+	}
+	efuse_end = efuse_end + 1;
+	for (i = 0; i < 4; i++) {
+		if (((pre_word_en >> i) & 0x1) > 0) {
+			status = write_hw_efuse_88xx(adapter, efuse_end,
+						     *(info->efuse_map +
+						     eeprom_offset +
+						     (i << 1)));
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_MSG_ERR("[ERR]write efuse(<<1)\n");
+				return status;
+			}
+			status = write_hw_efuse_88xx(adapter, efuse_end + 1,
+						     *(info->efuse_map +
+						     eeprom_offset + (i << 1)
+						     + 1));
+			if (status != HALMAC_RET_SUCCESS) {
+				PLTFM_MSG_ERR("[ERR]write efuse(<<1)+1\n");
+				return status;
+			}
+			efuse_end = efuse_end + 2;
+		}
+	}
+	adapter->efuse_end = efuse_end;
+	return status;
+}
+
+static enum halmac_ret_status
+program_efuse_88xx(struct halmac_adapter *adapter,
+		   struct halmac_pg_efuse_info *info, u8 *updated_mask)
+{
+	u8 pre_word_en;
+	u8 word_en;
+	u16 i;
+	u32 eeprom_offset;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+
+	for (i = 0; i < info->efuse_map_size; i = i + 8) {
+		eeprom_offset = i;
+
+		if (((eeprom_offset >> 3) & 1) > 0) {
+			pre_word_en = (*(updated_mask + (i >> 4)) & 0x0F);
+			word_en = pre_word_en ^ 0x0F;
+		} else {
+			pre_word_en = (*(updated_mask + (i >> 4)) >> 4);
+			word_en = pre_word_en ^ 0x0F;
+		}
+
+		if (pre_word_en > 0) {
+			if (eeprom_offset > 0x7f) {
+				status = pg_extend_efuse_88xx(adapter, info,
+							      word_en,
+							      pre_word_en,
+							      eeprom_offset);
+				if (status != HALMAC_RET_SUCCESS) {
+					PLTFM_MSG_ERR("[ERR]extend efuse\n");
+					return status;
 				}
 			} else {
-				status = halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end, pg_efuse_header);
-				efuse_end = efuse_end + 1;
-				for (j = 0; j < 4; j++) {
-					if (((pre_word_enb >> j) & 0x1) > 0) {
-						halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end, *(pPg_efuse_info->pEfuse_map + tmp_eeprom_offset + (j << 1)));
-						status = halmac_func_write_efuse_88xx(pHalmac_adapter, efuse_end + 1, *(pPg_efuse_info->pEfuse_map + tmp_eeprom_offset + (j << 1) + 1));
-						efuse_end = efuse_end + 2;
-					}
+				status = proc_pg_efuse_88xx(adapter, info,
+							    word_en,
+							    pre_word_en,
+							    eeprom_offset);
+				if (status != HALMAC_RET_SUCCESS) {
+					PLTFM_MSG_ERR("[ERR]extend efuse");
+					return status;
 				}
 			}
 		}
@@ -1739,155 +1814,172 @@ halmac_program_efuse_88xx(
 	return status;
 }
 
-VOID
-halmac_mask_eeprom_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	INOUT PHALMAC_PG_EFUSE_INFO	pEfuse_info
-)
+static void
+mask_eeprom_88xx(struct halmac_adapter *adapter,
+		 struct halmac_pg_efuse_info *info)
 {
-	u8 pre_word_enb;
-	u8 *pEeprom_mask_updated;
-	u16 i, j;
-	u32 tmp_eeprom_offset;
+	u8 pre_word_en;
+	u8 *updated_mask;
+	u8 *efuse_map;
+	u16 i;
+	u16 j;
+	u32 offset;
 
-	pEeprom_mask_updated = pEfuse_info->pEfuse_mask;
+	updated_mask = info->efuse_mask;
+	efuse_map = info->efuse_map;
 
-	for (i = 0; i < pEfuse_info->efuse_map_size; i = i + 8) {
-		tmp_eeprom_offset = i;
+	for (i = 0; i < info->efuse_map_size; i = i + 8) {
+		offset = i;
 
-		if (((tmp_eeprom_offset >> 3) & 1) > 0)
-			pre_word_enb = (*(pEeprom_mask_updated + (i >> 4)) & 0x0F);
+		if (((offset >> 3) & 1) > 0)
+			pre_word_en = (*(updated_mask + (i >> 4)) & 0x0F);
 		else
-			pre_word_enb = (*(pEeprom_mask_updated + (i >> 4)) >> 4);
+			pre_word_en = (*(updated_mask + (i >> 4)) >> 4);
 
 		for (j = 0; j < 4; j++) {
-			if (((pre_word_enb >> j) & 0x1) == 0) {
-				*(pEfuse_info->pEfuse_map + tmp_eeprom_offset + (j << 1)) = 0xFF;
-				*(pEfuse_info->pEfuse_map + tmp_eeprom_offset + (j << 1) + 1) = 0xFF;
+			if (((pre_word_en >> j) & 0x1) == 0) {
+				*(efuse_map + offset + (j << 1)) = 0xFF;
+				*(efuse_map + offset + (j << 1) + 1) = 0xFF;
 			}
 		}
 	}
 }
 
-HALMAC_RET_STATUS
-halmac_parse_efuse_data_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pC2h_buf,
-	IN u32 c2h_size
-)
+enum halmac_ret_status
+get_efuse_data_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size)
 {
-	u8 segment_id = 0, segment_size = 0, h2c_seq = 0;
-	u8 *pEeprom_map = NULL;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	u8 h2c_return_code = 0;
-	VOID *pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-	HALMAC_CMD_PROCESS_STATUS process_status;
+	u8 seg_id;
+	u8 seg_size;
+	u8 seq_num;
+	u8 fw_rc;
+	u8 *map = NULL;
+	u32 eeprom_size = adapter->hw_cfg_info.eeprom_size;
+	struct halmac_efuse_state *state = &adapter->halmac_state.efuse_state;
+	enum halmac_cmd_process_status proc_status;
 
-	h2c_seq = (u8)EFUSE_DATA_GET_H2C_SEQ(pC2h_buf);
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]Seq num : h2c -> %d c2h -> %d\n", pHalmac_adapter->halmac_state.efuse_state_set.seq_num, h2c_seq);
-	if (h2c_seq != pHalmac_adapter->halmac_state.efuse_state_set.seq_num) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]Seq num mismactch : h2c -> %d c2h -> %d\n", pHalmac_adapter->halmac_state.efuse_state_set.seq_num, h2c_seq);
+	seq_num = (u8)EFUSE_DATA_GET_H2C_SEQ(buf);
+	PLTFM_MSG_TRACE("[TRACE]Seq num : h2c->%d c2h->%d\n",
+			state->seq_num, seq_num);
+	if (seq_num != state->seq_num) {
+		PLTFM_MSG_ERR("[ERR]Seq num mismatch : h2c->%d c2h->%d\n",
+			      state->seq_num, seq_num);
 		return HALMAC_RET_SUCCESS;
 	}
 
-	if (pHalmac_adapter->halmac_state.efuse_state_set.process_status != HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]Not in HALMAC_CMD_PROCESS_SENDING\n");
+	if (state->proc_status != HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_ERR("[ERR]not cmd sending\n");
 		return HALMAC_RET_SUCCESS;
 	}
 
-	segment_id = (u8)EFUSE_DATA_GET_SEGMENT_ID(pC2h_buf);
-	segment_size = (u8)EFUSE_DATA_GET_SEGMENT_SIZE(pC2h_buf);
-	if (segment_id == 0)
-		pHalmac_adapter->efuse_segment_size = segment_size;
+	seg_id = (u8)EFUSE_DATA_GET_SEGMENT_ID(buf);
+	seg_size = (u8)EFUSE_DATA_GET_SEGMENT_SIZE(buf);
+	if (seg_id == 0)
+		adapter->efuse_seg_size = seg_size;
 
-	pEeprom_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_size);
-	if (pEeprom_map == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+	map = (u8 *)PLTFM_MALLOC(eeprom_size);
+	if (!map) {
+		PLTFM_MSG_ERR("[ERR]malloc map\n");
 		return HALMAC_RET_MALLOC_FAIL;
 	}
-	PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_map, 0xFF, eeprom_size);
+	PLTFM_MEMSET(map, 0xFF, eeprom_size);
 
-	PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-	PLATFORM_RTL_MEMCPY(pDriver_adapter, pHalmac_adapter->pHalEfuse_map + segment_id * pHalmac_adapter->efuse_segment_size,
-		pC2h_buf + HALMAC_C2H_DATA_OFFSET_88XX, segment_size);
-	PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
+	PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+	PLTFM_MEMCPY(adapter->efuse_map + seg_id * adapter->efuse_seg_size,
+		     buf + C2H_DATA_OFFSET_88XX, seg_size);
+	PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-	if (EFUSE_DATA_GET_END_SEGMENT(pC2h_buf) == _FALSE) {
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+	if (EFUSE_DATA_GET_END_SEGMENT(buf) == 0) {
+		PLTFM_FREE(map, eeprom_size);
 		return HALMAC_RET_SUCCESS;
 	}
 
-	h2c_return_code = pHalmac_adapter->halmac_state.efuse_state_set.fw_return_code;
+	fw_rc = state->fw_rc;
 
-	if (HALMAC_H2C_RETURN_SUCCESS == (HALMAC_H2C_RETURN_CODE)h2c_return_code) {
-		process_status = HALMAC_CMD_PROCESS_DONE;
-		pHalmac_adapter->halmac_state.efuse_state_set.process_status = process_status;
+	if ((enum halmac_h2c_return_code)fw_rc == HALMAC_H2C_RETURN_SUCCESS) {
+		proc_status = HALMAC_CMD_PROCESS_DONE;
+		state->proc_status = proc_status;
 
-		PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-		pHalmac_adapter->hal_efuse_map_valid = _TRUE;
-		PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
+		PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+		adapter->efuse_map_valid = 1;
+		PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-		if (pHalmac_adapter->event_trigger.physical_efuse_map == 1) {
-			PLATFORM_EVENT_INDICATION(pDriver_adapter, HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE, process_status, pHalmac_adapter->pHalEfuse_map, pHalmac_adapter->hw_config_info.efuse_size);
-			pHalmac_adapter->event_trigger.physical_efuse_map = 0;
+		if (adapter->evnt.phy_efuse_map == 1) {
+			PLTFM_EVENT_SIG(FEATURE_DUMP_PHY_EFUSE,
+					proc_status, adapter->efuse_map,
+					adapter->hw_cfg_info.efuse_size);
+			adapter->evnt.phy_efuse_map = 0;
 		}
 
-		if (pHalmac_adapter->event_trigger.logical_efuse_map == 1) {
-			if (halmac_eeprom_parser_88xx(pHalmac_adapter, pHalmac_adapter->pHalEfuse_map, pEeprom_map) != HALMAC_RET_SUCCESS) {
-				PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		if (adapter->evnt.log_efuse_map == 1) {
+			if (eeprom_parser_88xx(adapter, adapter->efuse_map,
+					       map) != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
 				return HALMAC_RET_EEPROM_PARSING_FAIL;
 			}
-			PLATFORM_EVENT_INDICATION(pDriver_adapter, HALMAC_FEATURE_DUMP_LOGICAL_EFUSE, process_status, pEeprom_map, eeprom_size);
-			pHalmac_adapter->event_trigger.logical_efuse_map = 0;
+			PLTFM_EVENT_SIG(FEATURE_DUMP_LOG_EFUSE, proc_status,
+					map, eeprom_size);
+			adapter->evnt.log_efuse_map = 0;
 		}
+
+		if (adapter->evnt.log_efuse_mask == 1) {
+			if (eeprom_mask_parser_88xx(adapter, adapter->efuse_map,
+						    map)
+						    != HALMAC_RET_SUCCESS) {
+				PLTFM_FREE(map, eeprom_size);
+				return HALMAC_RET_EEPROM_PARSING_FAIL;
+			}
+			PLTFM_EVENT_SIG(FEATURE_DUMP_LOG_EFUSE_MASK,
+					proc_status, map, eeprom_size);
+			adapter->evnt.log_efuse_mask = 0;
+		}
+
 	} else {
-		process_status = HALMAC_CMD_PROCESS_ERROR;
-		pHalmac_adapter->halmac_state.efuse_state_set.process_status = process_status;
+		proc_status = HALMAC_CMD_PROCESS_ERROR;
+		state->proc_status = proc_status;
 
-		if (pHalmac_adapter->event_trigger.physical_efuse_map == 1) {
-			PLATFORM_EVENT_INDICATION(pDriver_adapter, HALMAC_FEATURE_DUMP_PHYSICAL_EFUSE, process_status, &pHalmac_adapter->halmac_state.efuse_state_set.fw_return_code, 1);
-			pHalmac_adapter->event_trigger.physical_efuse_map = 0;
+		if (adapter->evnt.phy_efuse_map == 1) {
+			PLTFM_EVENT_SIG(FEATURE_DUMP_PHY_EFUSE, proc_status,
+					&state->fw_rc, 1);
+			adapter->evnt.phy_efuse_map = 0;
 		}
 
-		if (pHalmac_adapter->event_trigger.logical_efuse_map == 1) {
-			if (halmac_eeprom_parser_88xx(pHalmac_adapter, pHalmac_adapter->pHalEfuse_map, pEeprom_map) != HALMAC_RET_SUCCESS) {
-				PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
-				return HALMAC_RET_EEPROM_PARSING_FAIL;
-			}
-			PLATFORM_EVENT_INDICATION(pDriver_adapter, HALMAC_FEATURE_DUMP_LOGICAL_EFUSE, process_status, &pHalmac_adapter->halmac_state.efuse_state_set.fw_return_code, 1);
-			pHalmac_adapter->event_trigger.logical_efuse_map = 0;
+		if (adapter->evnt.log_efuse_map == 1) {
+			PLTFM_EVENT_SIG(FEATURE_DUMP_LOG_EFUSE, proc_status,
+					&state->fw_rc, 1);
+			adapter->evnt.log_efuse_map = 0;
+		}
+
+		if (adapter->evnt.log_efuse_mask == 1) {
+			PLTFM_EVENT_SIG(FEATURE_DUMP_LOG_EFUSE_MASK,
+					proc_status, &state->fw_rc, 1);
+			adapter->evnt.log_efuse_mask = 0;
 		}
 	}
 
-	PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+	PLTFM_FREE(map, eeprom_size);
 
 	return HALMAC_RET_SUCCESS;
 }
 
-HALMAC_RET_STATUS
-halmac_query_dump_physical_efuse_status_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT HALMAC_CMD_PROCESS_STATUS *pProcess_status,
-	INOUT u8 *data,
-	INOUT u32 *size
-)
+enum halmac_ret_status
+get_dump_phy_efuse_status_88xx(struct halmac_adapter *adapter,
+			       enum halmac_cmd_process_status *proc_status,
+			       u8 *data, u32 *size)
 {
-	u8 *pEfuse_map = NULL;
-	u32 efuse_size = pHalmac_adapter->hw_config_info.efuse_size;
-	VOID *pDriver_adapter = NULL;
-	PHALMAC_EFUSE_STATE_SET pEfuse_state_set = &pHalmac_adapter->halmac_state.efuse_state_set;
+	u8 *map = NULL;
+	u32 efuse_size = adapter->hw_cfg_info.efuse_size;
+	u32 prtct_efuse_size = adapter->hw_cfg_info.prtct_efuse_size;
+	struct halmac_efuse_state *state = &adapter->halmac_state.efuse_state;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
+	*proc_status = state->proc_status;
 
-	*pProcess_status = pEfuse_state_set->process_status;
-
-	if (data == NULL)
+	if (!data)
 		return HALMAC_RET_NULL_POINTER;
 
-	if (size == NULL)
+	if (!size)
 		return HALMAC_RET_NULL_POINTER;
 
-	if (*pProcess_status == HALMAC_CMD_PROCESS_DONE) {
+	if (*proc_status == HALMAC_CMD_PROCESS_DONE) {
 		if (*size < efuse_size) {
 			*size = efuse_size;
 			return HALMAC_RET_BUFFER_TOO_SMALL;
@@ -1895,51 +1987,53 @@ halmac_query_dump_physical_efuse_status_88xx(
 
 		*size = efuse_size;
 
-		pEfuse_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, efuse_size);
-		if (pEfuse_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local efuse map Fail!!\n");
+		map = (u8 *)PLTFM_MALLOC(efuse_size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc map\n");
 			return HALMAC_RET_MALLOC_FAIL;
 		}
-		PLATFORM_RTL_MEMSET(pDriver_adapter, pEfuse_map, 0xFF, efuse_size);
-		PLATFORM_MUTEX_LOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pEfuse_map, pHalmac_adapter->pHalEfuse_map, efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX);
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, pEfuse_map + efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX + HALMAC_RESERVED_CS_EFUSE_SIZE_88XX,
-			pHalmac_adapter->pHalEfuse_map + efuse_size - HALMAC_PROTECTED_EFUSE_SIZE_88XX + HALMAC_RESERVED_CS_EFUSE_SIZE_88XX,
-			HALMAC_PROTECTED_EFUSE_SIZE_88XX - HALMAC_RESERVED_EFUSE_SIZE_88XX - HALMAC_RESERVED_CS_EFUSE_SIZE_88XX);
-		PLATFORM_MUTEX_UNLOCK(pDriver_adapter, &pHalmac_adapter->EfuseMutex);
+		PLTFM_MEMSET(map, 0xFF, efuse_size);
+		PLTFM_MUTEX_LOCK(&adapter->efuse_mutex);
+#if HALMAC_PLATFORM_WINDOWS
+		PLTFM_MEMCPY(map, adapter->efuse_map, efuse_size);
+#else
+		PLTFM_MEMCPY(map, adapter->efuse_map,
+			     efuse_size - prtct_efuse_size);
+		PLTFM_MEMCPY(map + efuse_size - prtct_efuse_size +
+			     RSVD_CS_EFUSE_SIZE,
+			     adapter->efuse_map + efuse_size -
+			     prtct_efuse_size + RSVD_CS_EFUSE_SIZE,
+			     prtct_efuse_size - RSVD_EFUSE_SIZE -
+			     RSVD_CS_EFUSE_SIZE);
+#endif
+		PLTFM_MUTEX_UNLOCK(&adapter->efuse_mutex);
 
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, data, pEfuse_map, *size);
+		PLTFM_MEMCPY(data, map, *size);
 
-		PLATFORM_RTL_FREE(pDriver_adapter, pEfuse_map, efuse_size);
+		PLTFM_FREE(map, efuse_size);
 	}
 
 	return HALMAC_RET_SUCCESS;
 }
 
-HALMAC_RET_STATUS
-halmac_query_dump_logical_efuse_status_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT HALMAC_CMD_PROCESS_STATUS *pProcess_status,
-	INOUT u8 *data,
-	INOUT u32 *size
-)
+enum halmac_ret_status
+get_dump_log_efuse_status_88xx(struct halmac_adapter *adapter,
+			       enum halmac_cmd_process_status *proc_status,
+			       u8 *data, u32 *size)
 {
-	u8 *pEeprom_map = NULL;
-	u32 eeprom_size = pHalmac_adapter->hw_config_info.eeprom_size;
-	VOID *pDriver_adapter = NULL;
-	PHALMAC_EFUSE_STATE_SET pEfuse_state_set = &pHalmac_adapter->halmac_state.efuse_state_set;
+	u8 *map = NULL;
+	u32 eeprom_size = adapter->hw_cfg_info.eeprom_size;
+	struct halmac_efuse_state *state = &adapter->halmac_state.efuse_state;
 
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
+	*proc_status = state->proc_status;
 
-	*pProcess_status = pEfuse_state_set->process_status;
-
-	if (data == NULL)
+	if (!data)
 		return HALMAC_RET_NULL_POINTER;
 
-	if (size == NULL)
+	if (!size)
 		return HALMAC_RET_NULL_POINTER;
 
-	if (*pProcess_status == HALMAC_CMD_PROCESS_DONE) {
+	if (*proc_status == HALMAC_CMD_PROCESS_DONE) {
 		if (*size < eeprom_size) {
 			*size = eeprom_size;
 			return HALMAC_RET_BUFFER_TOO_SMALL;
@@ -1947,51 +2041,216 @@ halmac_query_dump_logical_efuse_status_88xx(
 
 		*size = eeprom_size;
 
-		pEeprom_map = (u8 *)PLATFORM_RTL_MALLOC(pDriver_adapter, eeprom_size);
-		if (pEeprom_map == NULL) {
-			PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_EFUSE, HALMAC_DBG_ERR, "[ERR]halmac allocate local eeprom map Fail!!\n");
+		map = (u8 *)PLTFM_MALLOC(eeprom_size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc map\n");
 			return HALMAC_RET_MALLOC_FAIL;
 		}
-		PLATFORM_RTL_MEMSET(pDriver_adapter, pEeprom_map, 0xFF, eeprom_size);
+		PLTFM_MEMSET(map, 0xFF, eeprom_size);
 
-		if (halmac_eeprom_parser_88xx(pHalmac_adapter, pHalmac_adapter->pHalEfuse_map, pEeprom_map) != HALMAC_RET_SUCCESS) {
-			PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		if (eeprom_parser_88xx(adapter, adapter->efuse_map, map) !=
+		    HALMAC_RET_SUCCESS) {
+			PLTFM_FREE(map, eeprom_size);
 			return HALMAC_RET_EEPROM_PARSING_FAIL;
 		}
 
-		PLATFORM_RTL_MEMCPY(pDriver_adapter, data, pEeprom_map, *size);
+		PLTFM_MEMCPY(data, map, *size);
 
-		PLATFORM_RTL_FREE(pDriver_adapter, pEeprom_map, eeprom_size);
+		PLTFM_FREE(map, eeprom_size);
 	}
 
 	return HALMAC_RET_SUCCESS;
 }
 
-HALMAC_RET_STATUS
-halmac_parse_h2c_ack_phy_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pC2h_buf,
-	IN u32 c2h_size
-)
+enum halmac_ret_status
+get_dump_log_efuse_mask_status_88xx(struct halmac_adapter *adapter,
+				    enum halmac_cmd_process_status *proc_status,
+				    u8 *data, u32 *size)
 {
-	u8 h2c_seq = 0;
-	u8 h2c_return_code;
-	VOID *pDriver_adapter = pHalmac_adapter->pDriver_adapter;
+	u8 *map = NULL;
+	u32 eeprom_size = adapter->hw_cfg_info.eeprom_size;
+	struct halmac_efuse_state *state = &adapter->halmac_state.efuse_state;
 
-	h2c_seq = (u8)H2C_ACK_HDR_GET_H2C_SEQ(pC2h_buf);
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]Seq num : h2c -> %d c2h -> %d\n", pHalmac_adapter->halmac_state.efuse_state_set.seq_num, h2c_seq);
-	if (h2c_seq != pHalmac_adapter->halmac_state.efuse_state_set.seq_num) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]Seq num mismactch : h2c -> %d c2h -> %d\n", pHalmac_adapter->halmac_state.efuse_state_set.seq_num, h2c_seq);
+	*proc_status = state->proc_status;
+
+	if (!data)
+		return HALMAC_RET_NULL_POINTER;
+
+	if (!size)
+		return HALMAC_RET_NULL_POINTER;
+
+	if (*proc_status == HALMAC_CMD_PROCESS_DONE) {
+		if (*size < eeprom_size) {
+			*size = eeprom_size;
+			return HALMAC_RET_BUFFER_TOO_SMALL;
+		}
+
+		*size = eeprom_size;
+
+		map = (u8 *)PLTFM_MALLOC(eeprom_size);
+		if (!map) {
+			PLTFM_MSG_ERR("[ERR]malloc map\n");
+			return HALMAC_RET_MALLOC_FAIL;
+		}
+		PLTFM_MEMSET(map, 0xFF, eeprom_size);
+
+		if (eeprom_mask_parser_88xx(adapter, adapter->efuse_map, map) !=
+		    HALMAC_RET_SUCCESS) {
+			PLTFM_FREE(map, eeprom_size);
+			return HALMAC_RET_EEPROM_PARSING_FAIL;
+		}
+
+		PLTFM_MEMCPY(data, map, *size);
+
+		PLTFM_FREE(map, eeprom_size);
+	}
+
+	return HALMAC_RET_SUCCESS;
+}
+
+enum halmac_ret_status
+get_h2c_ack_phy_efuse_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size)
+{
+	u8 seq_num = 0;
+	u8 fw_rc;
+	struct halmac_efuse_state *state = &adapter->halmac_state.efuse_state;
+
+	seq_num = (u8)H2C_ACK_HDR_GET_H2C_SEQ(buf);
+	PLTFM_MSG_TRACE("[TRACE]Seq num : h2c->%d c2h->%d\n",
+			state->seq_num, seq_num);
+	if (seq_num != state->seq_num) {
+		PLTFM_MSG_ERR("[ERR]Seq num mismatch : h2c->%d c2h->%d\n",
+			      state->seq_num, seq_num);
 		return HALMAC_RET_SUCCESS;
 	}
 
-	if (pHalmac_adapter->halmac_state.efuse_state_set.process_status != HALMAC_CMD_PROCESS_SENDING) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]Not in HALMAC_CMD_PROCESS_SENDING\n");
+	if (state->proc_status != HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_ERR("[ERR]not cmd sending\n");
 		return HALMAC_RET_SUCCESS;
 	}
 
-	h2c_return_code = (u8)H2C_ACK_HDR_GET_H2C_RETURN_CODE(pC2h_buf);
-	pHalmac_adapter->halmac_state.efuse_state_set.fw_return_code = h2c_return_code;
+	fw_rc = (u8)H2C_ACK_HDR_GET_H2C_RETURN_CODE(buf);
+	state->fw_rc = fw_rc;
+
+	return HALMAC_RET_SUCCESS;
+}
+
+u32
+get_rsvd_efuse_size_88xx(struct halmac_adapter *adapter)
+{
+	return adapter->hw_cfg_info.prtct_efuse_size;
+}
+
+/**
+ * write_wifi_phy_efuse_88xx() - write wifi physical efuse
+ * @adapter : the adapter of halmac
+ * @offset : the efuse offset to be written
+ * @value : the value to be written
+ * Author : Yong-Ching Lin
+ * Return : enum halmac_ret_status
+ * More details of status code can be found in prototype document
+ */
+enum halmac_ret_status
+write_wifi_phy_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value)
+{
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
+
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
+
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
+
+	if (offset >= adapter->hw_cfg_info.efuse_size) {
+		PLTFM_MSG_ERR("[ERR]Offset is too large\n");
+		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
+	}
+
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
+		return HALMAC_RET_BUSY_STATE;
+	}
+
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
+		return HALMAC_RET_ERROR_STATE;
+	}
+
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
+		return status;
+	}
+
+	status = write_hw_efuse_88xx(adapter, offset, value);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]write physical efuse\n");
+		return status;
+	}
+
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
+		return HALMAC_RET_ERROR_STATE;
+
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
+
+	return HALMAC_RET_SUCCESS;
+}
+
+/**
+ * read_wifi_phy_efuse_88xx() - read wifi physical efuse
+ * @adapter : the adapter of halmac
+ * @offset : the efuse offset to be read
+ * @size : the length to be read
+ * @value : pointer to the pre-allocated space where
+ the efuse content is to be copied
+ * Author : Yong-Ching Lin
+ * Return : enum halmac_ret_status
+ * More details of status code can be found in prototype document
+ */
+enum halmac_ret_status
+read_wifi_phy_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u32 size,
+			 u8 *value)
+{
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
+	enum halmac_cmd_process_status *proc_status;
+
+	proc_status = &adapter->halmac_state.efuse_state.proc_status;
+
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
+
+	if (offset >= adapter->hw_cfg_info.efuse_size ||
+	    offset + size >= adapter->hw_cfg_info.efuse_size) {
+		PLTFM_MSG_ERR("[ERR] Wrong efuse index\n");
+		return HALMAC_RET_EFUSE_SIZE_INCORRECT;
+	}
+
+	if (*proc_status == HALMAC_CMD_PROCESS_SENDING) {
+		PLTFM_MSG_WARN("[WARN]Wait event(efuse)\n");
+		return HALMAC_RET_BUSY_STATE;
+	}
+
+	if (efuse_cmd_cnstr_state_88xx(adapter) != HALMAC_CMD_CNSTR_IDLE) {
+		PLTFM_MSG_WARN("[WARN]Not idle(efuse)\n");
+		return HALMAC_RET_ERROR_STATE;
+	}
+
+	status = switch_efuse_bank_88xx(adapter, HALMAC_EFUSE_BANK_WIFI);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]switch efuse bank\n");
+		return status;
+	}
+
+	status = read_hw_efuse_88xx(adapter, offset, size, value);
+	if (status != HALMAC_RET_SUCCESS) {
+		PLTFM_MSG_ERR("[ERR]read hw efuse\n");
+		return status;
+	}
+
+	if (cnv_efuse_state_88xx(adapter, HALMAC_CMD_CNSTR_IDLE) !=
+	    HALMAC_RET_SUCCESS)
+		return HALMAC_RET_ERROR_STATE;
+
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }

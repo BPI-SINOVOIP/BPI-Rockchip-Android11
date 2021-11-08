@@ -40,7 +40,7 @@ static void SwLedOn_8822be(PADAPTER adapter, PLED_PCIE pLed)
 #if 0
 	u16 LedReg = REG_LEDCFG0;
 	u8 LedCfg = 0;
-	struct led_priv	*ledpriv = &(adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(adapter);
 
 	if (RTW_CANNOT_RUN(adapter))
 		return;
@@ -86,7 +86,7 @@ static void SwLedOff_8822be(PADAPTER adapter, PLED_PCIE pLed)
 #if 0
 	u16 LedReg = REG_LEDCFG0;
 	PHAL_DATA_TYPE hal = GET_HAL_DATA(adapter);
-	struct led_priv	*ledpriv = &adapter->ledpriv;
+	struct led_priv	*ledpriv = adapter_to_led(adapter);
 
 	if (RTW_CANNOT_RUN(adapter))
 		return;
@@ -135,7 +135,7 @@ static void SwLedOff_8822be(PADAPTER adapter, PLED_PCIE pLed)
  */
 void rtl8822be_InitSwLeds(PADAPTER adapter)
 {
-	struct led_priv *pledpriv = &adapter->ledpriv;
+	struct led_priv *pledpriv = adapter_to_led(adapter);
 
 	pledpriv->LedControlHandler = LedControlPCIE;
 
@@ -153,7 +153,7 @@ void rtl8822be_InitSwLeds(PADAPTER adapter)
  */
 void rtl8822be_DeInitSwLeds(PADAPTER adapter)
 {
-	struct led_priv	*ledpriv = &adapter->ledpriv;
+	struct led_priv	*ledpriv = adapter_to_led(adapter);
 
 	DeInitLed(&ledpriv->SwLed0);
 	DeInitLed(&ledpriv->SwLed1);

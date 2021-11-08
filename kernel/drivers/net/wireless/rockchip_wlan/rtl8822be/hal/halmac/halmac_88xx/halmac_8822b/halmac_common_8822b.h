@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2017 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -20,19 +20,16 @@
 
 #if HALMAC_8822B_SUPPORT
 
-HALMAC_RET_STATUS
-halmac_get_hw_value_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_HW_ID hw_id,
-	OUT VOID *pvalue
-);
+enum halmac_ret_status
+get_hw_value_8822b(struct halmac_adapter *adapter,
+		   enum halmac_hw_id hw_id, void *value);
 
-HALMAC_RET_STATUS
-halmac_set_hw_value_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_HW_ID hw_id,
-	IN VOID *pvalue
-);
+enum halmac_ret_status
+set_hw_value_8822b(struct halmac_adapter *adapter,
+		   enum halmac_hw_id hw_id, void *value);
+
+enum halmac_ret_status
+fill_txdesc_check_sum_8822b(struct halmac_adapter *adapter, u8 *txdesc);
 
 #endif/* HALMAC_8822B_SUPPORT */
 

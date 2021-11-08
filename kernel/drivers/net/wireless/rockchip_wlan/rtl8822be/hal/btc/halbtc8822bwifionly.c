@@ -17,7 +17,7 @@
 
 VOID
 ex_hal8822b_wifi_only_hw_config(
-	IN struct wifi_only_cfg *pwifionlycfg
+	IN struct wifi_only_cfg  *pwifionlycfg
 	)
 {
 	/*BB control*/
@@ -54,6 +54,16 @@ ex_hal8822b_wifi_only_switchbandnotify(
 {
 	hal8822b_wifi_only_switch_antenna(pwifionlycfg, is_5g);
 }
+
+VOID
+ex_hal8822b_wifi_only_connectnotify(
+	IN struct wifi_only_cfg *pwifionlycfg,
+	IN u1Byte  is_5g
+	)
+{
+	hal8822b_wifi_only_switch_antenna(pwifionlycfg, is_5g);
+}
+
 
 VOID
 hal8822b_wifi_only_switch_antenna(IN struct wifi_only_cfg *pwifionlycfg,

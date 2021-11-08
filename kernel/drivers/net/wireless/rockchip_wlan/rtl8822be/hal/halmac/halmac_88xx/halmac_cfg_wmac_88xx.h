@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -20,180 +20,113 @@
 
 #if HALMAC_88XX_SUPPORT
 
-HALMAC_RET_STATUS
-halmac_cfg_mac_addr_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	IN PHALMAC_WLAN_ADDR pHal_address
-);
+enum halmac_ret_status
+cfg_mac_addr_88xx(struct halmac_adapter *adapter, u8 port,
+		  union halmac_wlan_addr *addr);
 
-HALMAC_RET_STATUS
-halmac_cfg_bssid_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	IN PHALMAC_WLAN_ADDR pHal_address
-);
+enum halmac_ret_status
+cfg_bssid_88xx(struct halmac_adapter *adapter, u8 port,
+	       union halmac_wlan_addr *addr);
 
-HALMAC_RET_STATUS
-halmac_cfg_transmitter_addr_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	IN PHALMAC_WLAN_ADDR pHal_address
-);
+enum halmac_ret_status
+cfg_transmitter_addr_88xx(struct halmac_adapter *adapter, u8 port,
+			  union halmac_wlan_addr *addr);
 
-HALMAC_RET_STATUS
-halmac_cfg_net_type_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	IN HALMAC_NETWORK_TYPE_SELECT net_type
-);
+enum halmac_ret_status
+cfg_net_type_88xx(struct halmac_adapter *adapter, u8 port,
+		  enum halmac_network_type_select net_type);
 
-HALMAC_RET_STATUS
-halmac_cfg_tsf_rst_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port
-);
+enum halmac_ret_status
+cfg_tsf_rst_88xx(struct halmac_adapter *adapter, u8 port);
 
-HALMAC_RET_STATUS
-halmac_cfg_bcn_space_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	IN u32 bcn_space
-);
+enum halmac_ret_status
+cfg_bcn_space_88xx(struct halmac_adapter *adapter, u8 port, u32 bcn_space);
 
-HALMAC_RET_STATUS
-halmac_rw_bcn_ctrl_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	IN u8 write_en,
-	INOUT PHALMAC_BCN_CTRL pBcn_ctrl
-);
+enum halmac_ret_status
+rw_bcn_ctrl_88xx(struct halmac_adapter *adapter, u8 port, u8 write_en,
+		 struct halmac_bcn_ctrl *ctrl);
 
-HALMAC_RET_STATUS
-halmac_cfg_multicast_addr_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_WLAN_ADDR pHal_address
-);
+enum halmac_ret_status
+cfg_multicast_addr_88xx(struct halmac_adapter *adapter,
+			union halmac_wlan_addr *addr);
 
-HALMAC_RET_STATUS
-halmac_cfg_operation_mode_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_WIRELESS_MODE wireless_mode
-);
+enum halmac_ret_status
+cfg_operation_mode_88xx(struct halmac_adapter *adapter,
+			enum halmac_wireless_mode mode);
 
-HALMAC_RET_STATUS
-halmac_cfg_ch_bw_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 channel,
-	IN HALMAC_PRI_CH_IDX pri_ch_idx,
-	IN HALMAC_BW bw
-);
+enum halmac_ret_status
+cfg_ch_bw_88xx(struct halmac_adapter *adapter, u8 ch,
+	       enum halmac_pri_ch_idx idx, enum halmac_bw bw);
 
-HALMAC_RET_STATUS
-halmac_cfg_ch_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 channel
-);
+enum halmac_ret_status
+cfg_ch_88xx(struct halmac_adapter *adapter, u8 ch);
 
-HALMAC_RET_STATUS
-halmac_cfg_pri_ch_idx_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_PRI_CH_IDX pri_ch_idx
-);
+enum halmac_ret_status
+cfg_pri_ch_idx_88xx(struct halmac_adapter *adapter, enum halmac_pri_ch_idx idx);
 
-HALMAC_RET_STATUS
-halmac_cfg_bw_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_BW bw
-);
+enum halmac_ret_status
+cfg_bw_88xx(struct halmac_adapter *adapter, enum halmac_bw bw);
 
-HALMAC_RET_STATUS
-halmac_enable_bb_rf_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 enable
-);
+void
+cfg_txfifo_lt_88xx(struct halmac_adapter *adapter,
+		   struct halmac_txfifo_lifetime_cfg *cfg);
 
-VOID
-halmac_config_ampdu_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_AMPDU_CONFIG pAmpdu_config
-);
+enum halmac_ret_status
+enable_bb_rf_88xx(struct halmac_adapter *adapter, u8 enable);
 
-HALMAC_RET_STATUS
-halmac_cfg_la_mode_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_LA_MODE la_mode
-);
+enum halmac_ret_status
+cfg_la_mode_88xx(struct halmac_adapter *adapter, enum halmac_la_mode mode);
 
-HALMAC_RET_STATUS
-halmac_cfg_rx_fifo_expanding_mode_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_RX_FIFO_EXPANDING_MODE rx_fifo_expanding_mode
-);
+enum halmac_ret_status
+cfg_rxfifo_expand_mode_88xx(struct halmac_adapter *adapter,
+			    enum halmac_rx_fifo_expanding_mode mode);
 
-HALMAC_RET_STATUS
-halmac_config_security_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_SECURITY_SETTING pSec_setting
-);
+enum halmac_ret_status
+config_security_88xx(struct halmac_adapter *adapter,
+		     struct halmac_security_setting *setting);
 
 u8
-halmac_get_used_cam_entry_num_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HAL_SECURITY_TYPE sec_type
-);
+get_used_cam_entry_num_88xx(struct halmac_adapter *adapter,
+			    enum hal_security_type sec_type);
 
-HALMAC_RET_STATUS
-halmac_write_cam_88xx(
-	IN PHALMAC_ADAPTER	pHalmac_adapter,
-	IN u32 entry_index,
-	IN PHALMAC_CAM_ENTRY_INFO pCam_entry_info
-);
+enum halmac_ret_status
+write_cam_88xx(struct halmac_adapter *adapter, u32 idx,
+	       struct halmac_cam_entry_info *info);
 
-HALMAC_RET_STATUS
-halmac_read_cam_entry_88xx(
-	IN PHALMAC_ADAPTER	pHalmac_adapter,
-	IN u32 entry_index,
-	OUT PHALMAC_CAM_ENTRY_FORMAT pContent
-);
+enum halmac_ret_status
+read_cam_entry_88xx(struct halmac_adapter *adapter, u32 idx,
+		    struct halmac_cam_entry_format *content);
 
-HALMAC_RET_STATUS
-halmac_clear_cam_entry_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 entry_index
-);
+enum halmac_ret_status
+clear_cam_entry_88xx(struct halmac_adapter *adapter, u32 idx);
 
-VOID
-halmac_rx_shift_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 enable
-);
+void
+rx_shift_88xx(struct halmac_adapter *adapter, u8 enable);
 
-HALMAC_RET_STATUS
-halmac_cfg_edca_para_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_ACQ_ID acq_id,
-	IN PHALMAC_EDCA_PARA pEdca_para
-);
+enum halmac_ret_status
+cfg_edca_para_88xx(struct halmac_adapter *adapter, enum halmac_acq_id acq_id,
+		   struct halmac_edca_para *param);
 
-VOID
-halmac_rx_clk_gate_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 enable
-);
+void
+rx_clk_gate_88xx(struct halmac_adapter *adapter, u8 enable);
 
-HALMAC_RET_STATUS
-halmac_rx_cut_amsdu_cfg_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_CUT_AMSDU_CFG pCut_amsdu_cfg
-);
+enum halmac_ret_status
+rx_cut_amsdu_cfg_88xx(struct halmac_adapter *adapter,
+		      struct halmac_cut_amsdu_cfg *cfg);
 
-HALMAC_RET_STATUS
-halmac_get_mac_addr_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 halmac_port,
-	OUT PHALMAC_WLAN_ADDR pHal_address
-);
+enum halmac_ret_status
+fast_edca_cfg_88xx(struct halmac_adapter *adapter,
+		   struct halmac_fast_edca_cfg *cfg);
+
+enum halmac_ret_status
+get_mac_addr_88xx(struct halmac_adapter *adapter, u8 port,
+		  union halmac_wlan_addr *addr);
+
+void
+rts_full_bw_88xx(struct halmac_adapter *adapter, u8 enable);
+
+void
+cfg_mac_clk_88xx(struct halmac_adapter *adapter);
 
 #endif/* HALMAC_88XX_SUPPORT */
 

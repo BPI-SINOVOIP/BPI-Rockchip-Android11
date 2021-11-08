@@ -21,10 +21,10 @@
  *	Description:
  *		Turn on LED according to LedPin specified.
  *   */
-VOID
+void
 HwLedBlink(
-	IN	PADAPTER			Adapter,
-	IN	PLED_PCIE			pLed
+		PADAPTER			Adapter,
+		PLED_PCIE			pLed
 )
 {
 
@@ -53,9 +53,9 @@ HwLedBlink(
  *		Implement LED blinking behavior for SW_LED_MODE0.
  *		It toggle off LED and schedule corresponding timer if necessary.
  *   */
-VOID
+void
 SwLedBlink(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -168,9 +168,9 @@ SwLedBlink(
 	}
 }
 
-VOID
+void
 SwLedBlink5(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -236,9 +236,9 @@ SwLedBlink5(
 }
 
 
-VOID
+void
 SwLedBlink6(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -303,9 +303,9 @@ SwLedBlink6(
 
 }
 
-VOID
+void
 SwLedBlink7(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -320,9 +320,9 @@ SwLedBlink7(
  *		Implement LED blinking behavior for SW_LED_MODE8.
  *		It toggle off LED and schedule corresponding timer if necessary.
  *   */
-VOID
+void
 SwLedBlink8(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -383,9 +383,9 @@ SwLedBlink8(
 	}
 }
 
-VOID
+void
 SwLedBlink9(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -471,9 +471,9 @@ SwLedBlink9(
 }
 
 
-VOID
+void
 SwLedBlink10(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -531,9 +531,9 @@ SwLedBlink10(
 }
 
 
-VOID
+void
 SwLedBlink11(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -588,9 +588,9 @@ SwLedBlink11(
 }
 
 
-VOID
+void
 SwLedBlink12(
-	IN PLED_PCIE		pLed
+	PLED_PCIE		pLed
 )
 {
 	PADAPTER		Adapter = pLed->padapter;
@@ -720,7 +720,7 @@ SwLedBlink12(
 void BlinkHandler(PLED_PCIE pLed)
 {
 	_adapter			*padapter = pLed->padapter;
-	struct led_priv	*ledpriv = &(padapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(padapter);
 
 	if (RTW_CANNOT_RUN(padapter))
 		return;
@@ -732,6 +732,12 @@ void BlinkHandler(PLED_PCIE pLed)
 		return;
 
 	switch (ledpriv->LedStrategy) {
+	#if CONFIG_RTW_SW_LED_TRX_DA_CLASSIFY
+	case SW_LED_MODE_UC_TRX_ONLY:
+		rtw_sw_led_blink_uc_trx_only(pLed);
+		break;
+	#endif
+
 	case SW_LED_MODE1:
 		/* SwLedBlink(pLed); */
 		break;
@@ -807,13 +813,13 @@ void BlinkTimerCallback(void *data)
 /*
  *	Description:
  *		Implement each led action for SW_LED_MODE0. */
-VOID
+void
 SwLedControlMode0(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE pLed1 = &(ledpriv->SwLed1);
 
@@ -865,13 +871,13 @@ SwLedControlMode0(
 }
 
 
-VOID
+void
 SwLedControlMode1(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
 	PLED_PCIE	pLed = &(ledpriv->SwLed1);
 
@@ -963,13 +969,13 @@ SwLedControlMode1(
 
 }
 
-VOID
+void
 SwLedControlMode2(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
 	PLED_PCIE pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE pLed1 = &(ledpriv->SwLed1);
@@ -1055,13 +1061,13 @@ SwLedControlMode2(
 
 
 
-VOID
+void
 SwLedControlMode3(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE pLed1 = &(ledpriv->SwLed1);
 
@@ -1113,13 +1119,13 @@ SwLedControlMode3(
 }
 
 
-VOID
+void
 SwLedControlMode4(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE pLed1 = &(ledpriv->SwLed1);
 
@@ -1171,13 +1177,13 @@ SwLedControlMode4(
 }
 
 /* added by vivi, for led new mode */
-VOID
+void
 SwLedControlMode5(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE pLed1 = &(ledpriv->SwLed1);
 	/* Decide led state */
@@ -1260,13 +1266,13 @@ SwLedControlMode5(
 }
 
 /* added by vivi, for led new mode */
-VOID
+void
 SwLedControlMode6(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE pLed1 = &(ledpriv->SwLed1);
 
@@ -1333,13 +1339,13 @@ SwLedControlMode6(
 
 
 /* added by chiyokolin, for Lenovo */
-VOID
+void
 SwLedControlMode7(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE	pLed0 = &(ledpriv->SwLed0);
 
 	switch (LedAction) {
@@ -1359,13 +1365,13 @@ SwLedControlMode7(
 }
 
 /* added by chiyokolin, for QMI */
-VOID
+void
 SwLedControlMode8(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed = &(ledpriv->SwLed0);
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
 
@@ -1414,13 +1420,13 @@ SwLedControlMode8(
 }
 
 /* added by chiyokolin, for MSI */
-VOID
+void
 SwLedControlMode9(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE pLed = &(ledpriv->SwLed0);
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
 
@@ -1526,14 +1532,14 @@ SwLedControlMode9(
 
 
 /* added by chiyokolin, for Edimax-ASUS */
-VOID
+void
 SwLedControlMode10(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE	pLed0 = &(ledpriv->SwLed0);
 	PLED_PCIE	pLed1 = &(ledpriv->SwLed1);
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
@@ -1696,13 +1702,13 @@ SwLedControlMode10(
 
 
 /* added by hpfan, for Xavi */
-VOID
+void
 SwLedControlMode11(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE	pLed = &(ledpriv->SwLed0);
 
 	/* Decide led state */
@@ -1788,13 +1794,13 @@ SwLedControlMode11(
 }
 
 /* added by chiyokolin, for Azurewave */
-VOID
+void
 SwLedControlMode12(
-	IN	PADAPTER			Adapter,
-	IN	LED_CTL_MODE		LedAction
+		PADAPTER			Adapter,
+		LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(Adapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(Adapter);
 	PLED_PCIE	pLed = &(ledpriv->SwLed0);
 	struct mlme_priv	*pmlmepriv = &(Adapter->mlmepriv);
 	LED_STATE	LedState = LED_UNKNOWN;
@@ -1935,7 +1941,7 @@ LedControlPCIE(
 	LED_CTL_MODE		LedAction
 )
 {
-	struct led_priv	*ledpriv = &(padapter->ledpriv);
+	struct led_priv	*ledpriv = adapter_to_led(padapter);
 
 #if (MP_DRIVER == 1)
 	if (padapter->registrypriv.mp_mode == 1)
@@ -1947,11 +1953,6 @@ LedControlPCIE(
 
 	/* if(priv->bInHctTest) */
 	/*	return; */
-
-#ifdef CONFIG_CONCURRENT_MODE
-	if (!is_primary_adapter(padapter))
-		return;
-#endif
 
 	if ((adapter_to_pwrctl(padapter)->rfoff_reason > RF_CHANGE_BY_PS) &&
 	    (LedAction == LED_CTL_TX ||
@@ -1965,6 +1966,12 @@ LedControlPCIE(
 	}
 
 	switch (ledpriv->LedStrategy) {
+	#if CONFIG_RTW_SW_LED_TRX_DA_CLASSIFY
+	case SW_LED_MODE_UC_TRX_ONLY:
+		rtw_sw_led_ctl_mode_uc_trx_only(padapter, LedAction);
+		break;
+	#endif
+
 	case SW_LED_MODE0:
 		/* SwLedControlMode0(padapter, LedAction); */
 		break;
@@ -2029,7 +2036,7 @@ LedControlPCIE(
  *			radio off. Or IPS state. If IPS no link we will turn on LED, otherwise, we must turn off.
  *			After MAC IO reset, we must write LED control 0x2f2 again.
  *
- * Input:		IN	PADAPTER			Adapter)
+ * Input:			PADAPTER			Adapter)
  *
  * Output:		NONE
  *
@@ -2040,14 +2047,14 @@ LedControlPCIE(
  *	03/27/2009	MHC		Create for LED judge only~!!
  *
  *---------------------------------------------------------------------------*/
-VOID
+void
 gen_RefreshLedState(
-	IN	PADAPTER			Adapter)
+		PADAPTER			Adapter)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 	struct pwrctrl_priv	*pwrctrlpriv = adapter_to_pwrctl(Adapter);
-	struct led_priv	*pledpriv = &(Adapter->ledpriv);
-	PLED_PCIE		pLed0 = &(Adapter->ledpriv.SwLed0);
+	struct led_priv	*pledpriv = adapter_to_led(Adapter);
+	PLED_PCIE		pLed0 = &(pledpriv->SwLed0);
 
 	RTW_INFO("gen_RefreshLedState:() pwrctrlpriv->rfoff_reason=%x\n", pwrctrlpriv->rfoff_reason);
 

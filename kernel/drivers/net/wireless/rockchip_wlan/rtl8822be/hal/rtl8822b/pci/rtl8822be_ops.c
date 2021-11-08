@@ -108,36 +108,8 @@ static void intf_chip_configure(PADAPTER padapter)
 	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(padapter);
 	struct pwrctrl_priv *pwrpriv = dvobj_to_pwrctl(pdvobjpriv);
 
-	/* close ASPM for AMD defaultly */
-	pdvobjpriv->const_amdpci_aspm = 0;
-
-	/* ASPM PS mode. */
-	/* 0 - Disable ASPM, 1 - Enable ASPM without Clock Req, */
-	/* 2 - Enable ASPM with Clock Req, 3- Alwyas Enable ASPM with Clock Req, */
-	/* 4-  Always Enable ASPM without Clock Req. */
-	/* set default to rtl8188ee:3 RTL8192E:2 */
-	pdvobjpriv->const_pci_aspm = 0;
-
-	/* Setting for PCI-E device */
-	pdvobjpriv->const_devicepci_aspm_setting = 0x03;
-
-	/* Setting for PCI-E bridge */
-	pdvobjpriv->const_hostpci_aspm_setting = 0x03;
-
-	/* In Hw/Sw Radio Off situation. */
-	/* 0 - Default, 1 - From ASPM setting without low Mac Pwr, */
-	/* 2 - From ASPM setting with low Mac Pwr, 3 - Bus D3 */
-	/* set default to RTL8192CE:0 RTL8192SE:2 */
-	pdvobjpriv->const_hwsw_rfoff_d3 = 0;
-
-	/* This setting works for those device with backdoor ASPM setting such as EPHY setting. */
-	/* 0: Not support ASPM, 1: Support ASPM, 2: According to chipset. */
-	pdvobjpriv->const_support_pciaspm = 1;
-
 	pwrpriv->reg_rfoff = 0;
 	pwrpriv->rfoff_reason = 0;
-
-	pHalData->bL1OffSupport = _FALSE;
 }
 
 static BOOLEAN rtl8822be_InterruptRecognized(PADAPTER Adapter)
@@ -167,7 +139,8 @@ static BOOLEAN rtl8822be_InterruptRecognized(PADAPTER Adapter)
 	rtw_write32(Adapter, REG_HISR3, pHalData->IntArray[3]);
 
 	if (((pHalData->IntArray[0]) & pHalData->IntrMask[0]) != 0 ||
-	    ((pHalData->IntArray[1]) & pHalData->IntrMask[1]) != 0)
+	    ((pHalData->IntArray[1]) & pHalData->IntrMask[1]) != 0 ||
+	    ((pHalData->IntArray[3]) & pHalData->IntrMask[3]) != 0)
 		bRecognized = _TRUE;
 
 	/* restore IMR */
@@ -178,7 +151,7 @@ static BOOLEAN rtl8822be_InterruptRecognized(PADAPTER Adapter)
 	return bRecognized;
 }
 
-static VOID DisableInterrupt8822be(PADAPTER Adapter)
+static void DisableInterrupt8822be(PADAPTER Adapter)
 {
 	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(Adapter);
 
@@ -188,7 +161,7 @@ static VOID DisableInterrupt8822be(PADAPTER Adapter)
 	pdvobjpriv->irq_enabled = 0;
 }
 
-static VOID rtl8822be_enable_interrupt(PADAPTER Adapter)
+static void rtl8822be_enable_interrupt(PADAPTER Adapter)
 {
 	HAL_DATA_TYPE *pHalData = GET_HAL_DATA(Adapter);
 	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(Adapter);
@@ -201,7 +174,7 @@ static VOID rtl8822be_enable_interrupt(PADAPTER Adapter)
 
 }
 
-static VOID rtl8822be_clear_interrupt(PADAPTER Adapter)
+static void rtl8822be_clear_interrupt(PADAPTER Adapter)
 {
 	u32 u32b;
 	HAL_DATA_TYPE   *pHalData = GET_HAL_DATA(Adapter);
@@ -213,18 +186,23 @@ static VOID rtl8822be_clear_interrupt(PADAPTER Adapter)
 	u32b = rtw_read32(Adapter, REG_HISR1_8822B);
 	rtw_write32(Adapter, REG_HISR1_8822B, u32b);
 	pHalData->IntArray[1] = 0;
+
+	u32b = rtw_read32(Adapter, REG_HISR3_8822B);
+	rtw_write32(Adapter, REG_HISR1_8822B, u32b);
+	pHalData->IntArray[3] = 0;
 }
 
-static VOID rtl8822be_disable_interrupt(PADAPTER Adapter)
+static void rtl8822be_disable_interrupt(PADAPTER Adapter)
 {
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(Adapter);
 
 	rtw_write32(Adapter, REG_HIMR0, 0x0);
 	rtw_write32(Adapter, REG_HIMR1, 0x0);	/* by tynli */
+	rtw_write32(Adapter, REG_HIMR3, 0x0);
 	pdvobjpriv->irq_enabled = 0;
 }
 
-VOID UpdateInterruptMask8822BE(PADAPTER Adapter, u32 AddMSR, u32 AddMSR1,
+void UpdateInterruptMask8822BE(PADAPTER Adapter, u32 AddMSR, u32 AddMSR1,
 			       u32 RemoveMSR, u32 RemoveMSR1)
 {
 	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(Adapter);
@@ -256,6 +234,7 @@ static void rtl8822be_bcn_handler(PADAPTER Adapter, u32 handled[])
 	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(Adapter);
 
 	if (pHalData->IntArray[0] & BIT_TXBCN0OK_MSK) {
+#ifndef CONFIG_PCI_BCN_POLLING
 #ifdef CONFIG_BCN_ICF
 		/* do nothing */
 #else
@@ -268,10 +247,12 @@ static void rtl8822be_bcn_handler(PADAPTER Adapter, u32 handled[])
 			rtl8822be_tx_isr(Adapter, BCN_QUEUE_INX);
 		}
 #endif /* CONFIG_BCN_ICF */
+#endif
 		handled[0] |= BIT_TXBCN0OK_MSK;
 	}
 
 	if (pHalData->IntArray[0] & BIT_TXBCN0ERR_MSK) {
+#ifndef CONFIG_PCI_BCN_POLLING
 #ifdef CONFIG_BCN_ICF
 		RTW_INFO("IMR_TXBCN0ERR isr!\n");
 #else /* !CONFIG_BCN_ICF */
@@ -284,15 +265,16 @@ static void rtl8822be_bcn_handler(PADAPTER Adapter, u32 handled[])
 			rtl8822be_tx_isr(Adapter, BCN_QUEUE_INX);
 		}
 #endif /* CONFIG_BCN_ICF */
+#endif
 		handled[0] |= BIT_TXBCN0ERR_MSK;
 	}
-
 	if (pHalData->IntArray[0] & BIT_BCNDERR0_MSK) {
+#ifndef CONFIG_PCI_BCN_POLLING
 #ifdef CONFIG_BCN_ICF
 		RTW_INFO("BIT_BCNDERR0_MSK isr!\n");
 #else /* !CONFIG_BCN_ICF */
 		/* Release resource and re-transmit beacon to HW */
-		struct tasklet_struct  *bcn_tasklet;
+		_tasklet *bcn_tasklet;
 		/* Modify for MI temporary,
 		 * this processor cannot apply to multi-ap */
 		PADAPTER bcn_adapter = rtw_mi_get_ap_adapter(Adapter);
@@ -302,17 +284,20 @@ static void rtl8822be_bcn_handler(PADAPTER Adapter, u32 handled[])
 		bcn_tasklet = &bcn_adapter->recvpriv.irq_prepare_beacon_tasklet;
 		tasklet_hi_schedule(bcn_tasklet);
 #endif /* CONFIG_BCN_ICF */
+#endif
 		handled[0] |= BIT_BCNDERR0_MSK;
 	}
 
 	if (pHalData->IntArray[0] & BIT_BCNDMAINT0_MSK) {
-		struct tasklet_struct  *bcn_tasklet;
+#ifndef CONFIG_PCI_BCN_POLLING
+		_tasklet *bcn_tasklet;
 		/* Modify for MI temporary,
 		  this processor cannot apply to multi-ap */
 		PADAPTER bcn_adapter = rtw_mi_get_ap_adapter(Adapter);
 
 		bcn_tasklet = &bcn_adapter->recvpriv.irq_prepare_beacon_tasklet;
 		tasklet_hi_schedule(bcn_tasklet);
+#endif
 		handled[0] |= BIT_BCNDMAINT0_MSK;
 	}
 }
@@ -438,6 +423,29 @@ done:
 	return ret;
 }
 
+static void rtl8822be_unmap_beacon_icf(PADAPTER Adapter)
+{
+	_adapter *pri_adapter = GET_PRIMARY_ADAPTER(Adapter);
+	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(pri_adapter);
+	struct xmit_priv	*pxmitpriv = &Adapter->xmitpriv;
+	struct xmit_buf	*pxmitbuf;
+	struct rtw_tx_ring	*ring = &pri_adapter->xmitpriv.tx_ring[BCN_QUEUE_INX];
+	u8	*tx_bufdesc;
+
+	tx_bufdesc = (u8 *)&ring->buf_desc[0];
+	pxmitbuf = &pxmitpriv->pcmd_xmitbuf[CMDBUF_BEACON];
+	if (!pxmitbuf) {
+		RTW_INFO("%s, fail to get xmit_buf\n", __func__);
+		return;
+	}
+//	RTW_INFO("FREE pxmitbuf: %p, buf_desc: %p, sz: %d\n", pxmitbuf, tx_bufdesc, pxmitbuf->len);
+
+	pci_unmap_single(pdvobjpriv->ppcidev,
+			 GET_TX_BD_PHYSICAL_ADDR0_LOW(tx_bufdesc),
+			 pxmitbuf->len,
+			 PCI_DMA_TODEVICE);
+}
+
 u32 rtl8822be_init_bd(_adapter *padapter)
 {
 	struct xmit_priv *t_priv = &padapter->xmitpriv;
@@ -491,8 +499,8 @@ u32 rtl8822be_free_bd(_adapter *padapter)
 static u16
 hal_mdio_read_8822be(PADAPTER Adapter, u8 Addr)
 {
-	u2Byte ret = 0;
-	u1Byte tmpU1b = 0, count = 0;
+	u16 ret = 0;
+	u8 tmpU1b = 0, count = 0;
 
 	rtw_write8(Adapter, REG_PCIE_MIX_CFG_8822B, Addr | BIT6);
 	tmpU1b = rtw_read8(Adapter, REG_PCIE_MIX_CFG_8822B) & BIT6;
@@ -509,10 +517,10 @@ hal_mdio_read_8822be(PADAPTER Adapter, u8 Addr)
 }
 
 
-static VOID
+static void
 hal_mdio_write_8822be(PADAPTER Adapter, u8 Addr, u16 Data)
 {
-	u1Byte tmpU1b = 0, count = 0;
+	u8 tmpU1b = 0, count = 0;
 
 	rtw_write16(Adapter, REG_MDIO_V1_8822B, Data);
 	rtw_write8(Adapter, REG_PCIE_MIX_CFG_8822B, Addr | BIT5);
@@ -528,8 +536,8 @@ hal_mdio_write_8822be(PADAPTER Adapter, u8 Addr, u16 Data)
 
 static void hal_dbi_write_8822be(PADAPTER Adapter, u16 Addr, u8 Data)
 {
-	u1Byte tmpU1b = 0, count = 0;
-	u2Byte WriteAddr = 0, Remainder = Addr % 4;
+	u8 tmpU1b = 0, count = 0;
+	u16 WriteAddr = 0, Remainder = Addr % 4;
 
 
 	/* Write DBI 1Byte Data */
@@ -680,7 +688,7 @@ static void gethwreg(PADAPTER padapter, u8 variable, u8 *val)
 	Description:
 		Query setting of specified variable.
 */
-static u8 gethaldefvar(PADAPTER	padapter, HAL_DEF_VARIABLE eVariable, PVOID pValue)
+static u8 gethaldefvar(PADAPTER	padapter, HAL_DEF_VARIABLE eVariable, void *pValue)
 {
 	HAL_DATA_TYPE *pHalData = GET_HAL_DATA(padapter);
 	u8 bResult = _SUCCESS;
@@ -719,7 +727,6 @@ static bool rtl8822be_gpio_radio_on_off_check(_adapter *adapter, u8 *valid)
 
 void rtl8822be_set_hal_ops(PADAPTER padapter)
 {
-	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(padapter);
 	struct hal_ops *ops;
 	int err;
 
@@ -729,14 +736,12 @@ void rtl8822be_set_hal_ops(PADAPTER padapter)
 		return;
 	}
 
-	printk("%s(%d)init irq_th_lock\n",__func__,__LINE__);
-	_rtw_spinlock_init(&pdvobjpriv->irq_th_lock);
-
 	rtl8822b_set_hal_ops(padapter);
 
 	ops = &padapter->hal_func;
 
 	ops->hal_init = rtl8822be_init;
+	ops->hal_deinit = rtl8822be_deinit;
 	ops->inirp_init = rtl8822be_init_bd;
 	ops->inirp_deinit = rtl8822be_free_bd;
 	ops->irp_reset = rtl8822be_reset_bd;
@@ -787,4 +792,5 @@ void rtl8822be_set_hal_ops(PADAPTER padapter)
 #ifdef CONFIG_RFKILL_POLL
 	ops->hal_radio_onoff_check = rtl8822be_gpio_radio_on_off_check;
 #endif
+	ops->unmap_beacon_icf = rtl8822be_unmap_beacon_icf;
 }

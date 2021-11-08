@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -21,16 +21,19 @@
 
 #if HALMAC_8822B_SUPPORT
 
-#define HALMAC_8822B_PWR_SEQ_VER  "V28"
+#define HALMAC_8822B_PWR_SEQ_VER  "V31"
 
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_card_disable_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_card_enable_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_suspend_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_resume_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_hwpdn_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_enter_lps_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_enter_deep_lps_flow[];
-extern PHALMAC_WLAN_PWR_CFG halmac_8822b_leave_lps_flow[];
+extern struct halmac_wlan_pwr_cfg *card_en_flow_8822b[];
+extern struct halmac_wlan_pwr_cfg *card_dis_flow_8822b[];
+
+#if HALMAC_PLATFORM_TESTPROGRAM
+extern struct halmac_wlan_pwr_cfg *suspend_flow_8822b[];
+extern struct halmac_wlan_pwr_cfg *resume_flow_8822b[];
+extern struct halmac_wlan_pwr_cfg *hwpdn_flow_8822b[];
+extern struct halmac_wlan_pwr_cfg *enter_lps_flow_8822b[];
+extern struct halmac_wlan_pwr_cfg *enter_dlps_flow_8822b[];
+extern struct halmac_wlan_pwr_cfg *leave_lps_flow_8822b[];
+#endif
 
 #endif /* HALMAC_8822B_SUPPORT*/
 

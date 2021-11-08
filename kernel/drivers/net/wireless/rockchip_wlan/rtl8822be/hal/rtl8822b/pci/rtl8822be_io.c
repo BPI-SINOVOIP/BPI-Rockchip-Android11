@@ -17,13 +17,10 @@
 #include <drv_types.h>		/* PADAPTER and etc. */
 
 #ifdef RTK_129X_PLATFORM
-#ifdef CONFIG_RTK_SW_LOCK_API
 #include <soc/realtek/rtd129x_lockapi.h>
-#endif
 
 #define IO_2K_MASK 0xFFFFF800
 #define IO_4K_MASK 0xFFFFF000
-
 #define MAX_RETRY 5
 
 static u32 pci_io_read_129x(struct dvobj_priv *pdvobjpriv, u32 addr, u8 size)
@@ -60,12 +57,10 @@ static u32 pci_io_read_129x(struct dvobj_priv *pdvobjpriv, u32 addr, u8 size)
 
 pci_read_129x_retry:
 
-#ifdef CONFIG_RTK_SW_LOCK_API
-	/* All RBUS1 driver need to have a workaround for emmc hardware error. */
-	/* Need to protect 0xXXXX_X8XX~ 0xXXXX_X9XX. */
-	if((tmp_addr>0x7FF) && (tmp_addr<0xA00))
-		rtk_lockapi_lock(flags, __FUNCTION__);
-#endif
+	/* All RBUS1 driver need to have a workaround for emmc hardware error */
+	/* Need to protect 0xXXXX_X8XX~ 0xXXXX_X9XX */
+	if ((tmp_addr > 0x7FF) && (tmp_addr < 0xA00))
+		rtk_lockapi_lock(flags, __func__);
 
 	switch (size) {
 	case 1:
@@ -82,11 +77,10 @@ pci_read_129x_retry:
 		break;
 	}
 
-#ifdef CONFIG_RTK_SW_LOCK_API
-	if((tmp_addr>0x7FF) && (tmp_addr<0xA00))
-		rtk_lockapi_unlock(flags, __FUNCTION__);
-#endif
+	if ((tmp_addr > 0x7FF) && (tmp_addr < 0xA00))
+		rtk_lockapi_unlock(flags, __func__);
 
+	//DLLP error patch
 	pci_error_status = readl( (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
 	pci_timeout_status = readl((u8 *)(pdvobjpriv->ctrl_start + 0x74));
 
@@ -160,12 +154,10 @@ static void pci_io_write_129x(struct dvobj_priv *pdvobjpriv,
 	} else
 		mask = 0x0;
 
-#ifdef CONFIG_RTK_SW_LOCK_API
-	/* All RBUS1 driver need to have a workaround for emmc hardware error. */
-	/* Need to protect 0xXXXX_X8XX~ 0xXXXX_X9XX. */
-	if((tmp_addr>0x7FF) && (tmp_addr<0xA00))
-		rtk_lockapi_lock(flags, __FUNCTION__);
-#endif
+	/* All RBUS1 driver need to have a workaround for emmc hardware error */
+	/* Need to protect 0xXXXX_X8XX~ 0xXXXX_X9XX */
+	if ((tmp_addr > 0x7FF) && (tmp_addr < 0xA00))
+		rtk_lockapi_lock(flags, __func__);
 
 	switch (size) {
 	case 1:
@@ -185,10 +177,8 @@ static void pci_io_write_129x(struct dvobj_priv *pdvobjpriv,
 		break;
 	}
 
-#ifdef CONFIG_RTK_SW_LOCK_API
-	if((tmp_addr>0x7FF) && (tmp_addr<0xA00))
-		rtk_lockapi_unlock(flags, __FUNCTION__);
-#endif
+	if ((tmp_addr > 0x7FF) && (tmp_addr < 0xA00))
+		rtk_lockapi_unlock(flags, __func__);
 
 	/* PCIE1.1 0x9804FCEC, PCIE2.0 0x9803CCEC & 0x9803CC68
 	 * can't be used because of 1295 hardware issue.
@@ -288,11 +278,7 @@ static int pci_write8(struct intf_hdl *phdl, u32 addr, u8 val)
 {
 	struct dvobj_priv *pdvobjpriv = (struct dvobj_priv *)phdl->pintf_dev;
 
-#ifdef RTK_129X_PLATFORM
-	pci_io_write_129x(pdvobjpriv, addr, 1, val);
-#else
 	writeb(val, (u8 *)pdvobjpriv->pci_mem_start + addr);
-#endif
 	return 1;
 }
 
@@ -300,24 +286,16 @@ static int pci_write16(struct intf_hdl *phdl, u32 addr, u16 val)
 {
 	struct dvobj_priv *pdvobjpriv = (struct dvobj_priv *)phdl->pintf_dev;
 
-#ifdef RTK_129X_PLATFORM
-	pci_io_write_129x(pdvobjpriv, addr, 2, val);
-#else
 	writew(val, (u8 *)pdvobjpriv->pci_mem_start + addr);
 	return 2;
-#endif
 }
 
 static int pci_write32(struct intf_hdl *phdl, u32 addr, u32 val)
 {
 	struct dvobj_priv *pdvobjpriv = (struct dvobj_priv *)phdl->pintf_dev;
 
-#ifdef RTK_129X_PLATFORM
-	pci_io_write_129x(pdvobjpriv, addr, 4, val);
-#else
 	writel(val, (u8 *)pdvobjpriv->pci_mem_start + addr);
 	return 4;
-#endif
 }
 #endif /* RTK_129X_PLATFORM */
 

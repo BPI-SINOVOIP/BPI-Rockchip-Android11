@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -21,69 +21,29 @@
 
 #if HALMAC_88XX_SUPPORT
 
-HALMAC_RET_STATUS
-halmac_pinmux_wl_led_mode_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_WLLED_MODE wlled_mode
-);
+enum halmac_ret_status
+pinmux_wl_led_mode_88xx(struct halmac_adapter *adapter,
+			enum halmac_wlled_mode mode);
 
-VOID
-halmac_pinmux_wl_led_sw_ctrl_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 led_on
-);
+void
+pinmux_wl_led_sw_ctrl_88xx(struct halmac_adapter *adapter, u8 on);
 
-VOID
-halmac_pinmux_sdio_int_polarity_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 low_active
-);
+void
+pinmux_sdio_int_polarity_88xx(struct halmac_adapter *adapter, u8 low_active);
 
-HALMAC_RET_STATUS
-halmac_pinmux_gpio_mode_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 gpio_id,
-	IN u8 output
-);
+enum halmac_ret_status
+pinmux_gpio_mode_88xx(struct halmac_adapter *adapter, u8 gpio_id, u8 output);
 
-HALMAC_RET_STATUS
-halmac_pinmux_gpio_output_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 gpio_id,
-	IN u8 high
-);
+enum halmac_ret_status
+pinmux_gpio_output_88xx(struct halmac_adapter *adapter, u8 gpio_id, u8 high);
 
-HALMAC_RET_STATUS
-halmac_pinmux_pin_status_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 pin_id,
-	IN u8 *pHigh
-);
+enum halmac_ret_status
+pinmux_pin_status_88xx(struct halmac_adapter *adapter, u8 pin_id, u8 *high);
 
-HALMAC_RET_STATUS
-halmac_pinmux_parser_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN const HALMAC_GPIO_PIMUX_LIST *pPinmux_list,
-	IN u32 list_size,
-	IN u32 gpio_id,
-	OUT u32 *pCur_func
-);
-
-HALMAC_RET_STATUS
-halmac_pinmux_switch_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN const HALMAC_GPIO_PIMUX_LIST *pPinmux_list,
-	IN u32 list_size,
-	IN u32 gpio_id,
-	IN HALMAC_GPIO_FUNC gpio_func
-);
-
-HALMAC_RET_STATUS
-halmac_pinmux_record_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_GPIO_FUNC gpio_func,
-	IN u8 val
-);
+enum halmac_ret_status
+pinmux_parser_88xx(struct halmac_adapter *adapter,
+		   const struct halmac_gpio_pimux_list *list, u32 size,
+		   u32 gpio_id, u32 *cur_func);
 
 #endif /* HALMAC_88XX_SUPPORT */
 

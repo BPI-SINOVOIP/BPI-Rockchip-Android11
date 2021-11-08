@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -20,26 +20,29 @@
 
 #if HALMAC_8822B_SUPPORT
 
-HALMAC_RET_STATUS
-halmac_mount_api_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+mount_api_8822b(struct halmac_adapter *adapter);
 
-HALMAC_RET_STATUS
-halmac_init_trx_cfg_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_TRX_MODE halmac_trx_mode
-);
+enum halmac_ret_status
+init_trx_cfg_8822b(struct halmac_adapter *adapter, enum halmac_trx_mode mode);
 
-HALMAC_RET_STATUS
-halmac_init_protocol_cfg_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+init_system_cfg_8822b(struct halmac_adapter *adapter);
 
-HALMAC_RET_STATUS
-halmac_init_h2c_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+init_protocol_cfg_8822b(struct halmac_adapter *adapter);
+
+enum halmac_ret_status
+init_h2c_8822b(struct halmac_adapter *adapter);
+
+enum halmac_ret_status
+init_edca_cfg_8822b(struct halmac_adapter *adapter);
+
+enum halmac_ret_status
+init_wmac_cfg_8822b(struct halmac_adapter *adapter);
+
+enum halmac_ret_status
+pre_init_system_cfg_8822b(struct halmac_adapter *adapter);
 
 #endif /* HALMAC_8822B_SUPPORT */
 

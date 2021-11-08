@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2017 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -19,20 +19,16 @@
 #if HALMAC_8822B_SUPPORT
 
 /**
- * halmac_cfg_drv_info_88xx() - config driver info
- * @pHalmac_adapter : the adapter of halmac
- * @halmac_drv_info : driver information selection
+ * cfg_drv_info_8822b() - config driver info
+ * @adapter : the adapter of halmac
+ * @drv_info : driver information selection
  * Author : KaiYuan Chang/Ivan Lin
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
- * Need to build halmac_cfg_drv_info_8821C, halmac_cfg_drv_info_8822B, halmac_cfg_drv_info_88OO
- * Because 88OO has no need to patch Rx packet counter. Soar 20161110
  */
-HALMAC_RET_STATUS
-halmac_cfg_drv_info_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_DRV_INFO halmac_drv_info
-)
+enum halmac_ret_status
+cfg_drv_info_8822b(struct halmac_adapter *adapter,
+		   enum halmac_drv_info drv_info)
 {
 	u8 drv_info_size = 0;
 	u8 phy_status_en = 0;
@@ -40,23 +36,12 @@ halmac_cfg_drv_info_8822b(
 	u8 plcp_hdr_en = 0;
 	u8 value8;
 	u32 value32;
-	VOID *pDriver_adapter = NULL;
-	PHALMAC_API pHalmac_api;
-	HALMAC_RET_STATUS status = HALMAC_RET_SUCCESS;
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
+	PLTFM_MSG_TRACE("[TRACE]drv info = %d\n", drv_info);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-	pHalmac_api = (PHALMAC_API)pHalmac_adapter->pHalmac_api;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_cfg_drv_info_8822b ==========>\n");
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_cfg_drv_info = %d\n", halmac_drv_info);
-
-	switch (halmac_drv_info) {
+	switch (drv_info) {
 	case HALMAC_DRV_INFO_NONE:
 		drv_info_size = 0;
 		phy_status_en = 0;
@@ -82,39 +67,77 @@ halmac_cfg_drv_info_8822b(
 		plcp_hdr_en = 1;
 		break;
 	default:
-		status = HALMAC_RET_SW_CASE_NOT_SUPPORT;
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_INIT, HALMAC_DBG_ERR, "[ERR]halmac_cfg_drv_info_8822b error = %x\n", status);
-		return status;
+		return HALMAC_RET_SW_CASE_NOT_SUPPORT;
 	}
 
-	if (pHalmac_adapter->txff_allocation.rx_fifo_expanding_mode != HALMAC_RX_FIFO_EXPANDING_MODE_DISABLE)
-		drv_info_size = HALMAC_RX_DESC_DUMMY_SIZE_MAX_8822B >> 3;
+	if (adapter->txff_alloc.rx_fifo_exp_mode !=
+	    HALMAC_RX_FIFO_EXPANDING_MODE_DISABLE)
+		drv_info_size = RX_DESC_DUMMY_SIZE_8822B >> 3;
 
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_RX_DRVINFO_SZ, drv_info_size);
+	HALMAC_REG_W8(REG_RX_DRVINFO_SZ, drv_info_size);
 
-	value8 = HALMAC_REG_READ_8(pHalmac_adapter, REG_TRXFF_BNDY + 1);
+	value8 = HALMAC_REG_R8(REG_TRXFF_BNDY + 1);
 	value8 &= 0xF0;
-	/* value8 |= (drv_info_size + (pHalmac_adapter->hw_config_info.rxdesc_size >> 3) + 1); */
-	value8 |= 0xF; /* For rxdesc len = 0 issue. set to correct value after finding root cause */
-	HALMAC_REG_WRITE_8(pHalmac_adapter, REG_TRXFF_BNDY + 1, value8);
+	/* For rxdesc len = 0 issue */
+	value8 |= 0xF;
+	HALMAC_REG_W8(REG_TRXFF_BNDY + 1, value8);
 
-	pHalmac_adapter->drv_info_size = drv_info_size;
+	adapter->drv_info_size = drv_info_size;
 
-	value32 = HALMAC_REG_READ_32(pHalmac_adapter, REG_RCR);
+	value32 = HALMAC_REG_R32(REG_RCR);
 	value32 = (value32 & (~BIT_APP_PHYSTS));
 	if (phy_status_en == 1)
 		value32 = value32 | BIT_APP_PHYSTS;
-	HALMAC_REG_WRITE_32(pHalmac_adapter, REG_RCR, value32);
+	HALMAC_REG_W32(REG_RCR, value32);
 
-	value32 = HALMAC_REG_READ_32(pHalmac_adapter, REG_WMAC_OPTION_FUNCTION + 4);
+	value32 = HALMAC_REG_R32(REG_WMAC_OPTION_FUNCTION + 4);
 	value32 = (value32 & (~(BIT(8) | BIT(9))));
 	if (sniffer_en == 1)
 		value32 = value32 | BIT(9);
 	if (plcp_hdr_en == 1)
 		value32 = value32 | BIT(8);
-	HALMAC_REG_WRITE_32(pHalmac_adapter, REG_WMAC_OPTION_FUNCTION + 4, value32);
+	HALMAC_REG_W32(REG_WMAC_OPTION_FUNCTION + 4, value32);
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_cfg_drv_info_8822b <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
+
+	return HALMAC_RET_SUCCESS;
+}
+
+/**
+ * init_low_pwr_8822b() - config WMAC register
+ * @adapter
+ * Author : KaiYuan Chang/Ivan Lin
+ * Return : enum halmac_ret_status
+ * More details of status code can be found in prototype document
+ */
+enum halmac_ret_status
+init_low_pwr_8822b(struct halmac_adapter *adapter)
+{
+	return HALMAC_RET_SUCCESS;
+}
+
+void
+cfg_rx_ignore_8822b(struct halmac_adapter *adapter,
+		    struct halmac_mac_rx_ignore_cfg *cfg)
+{
+}
+
+enum halmac_ret_status
+cfg_ampdu_8822b(struct halmac_adapter *adapter,
+		struct halmac_ampdu_config *cfg)
+{
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
+
+	if (cfg->ht_max_len != cfg->vht_max_len) {
+		PLTFM_MSG_ERR("[ERR]max len ht != vht!!\n");
+		return HALMAC_RET_PARA_NOT_SUPPORT;
+	}
+
+	HALMAC_REG_W8(REG_PROT_MODE_CTRL + 2, cfg->max_agg_num);
+	HALMAC_REG_W8(REG_PROT_MODE_CTRL + 3, cfg->max_agg_num);
+
+	if (cfg->max_len_en == 1)
+		HALMAC_REG_W32(REG_AMPDU_MAX_LENGTH, cfg->ht_max_len);
 
 	return HALMAC_RET_SUCCESS;
 }

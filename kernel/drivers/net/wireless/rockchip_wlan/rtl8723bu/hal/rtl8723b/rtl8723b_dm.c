@@ -29,32 +29,6 @@
 /* ************************************************************
  * Global var
  * ************************************************************ */
-
-
-static VOID
-dm_CheckProtection(
-	IN	PADAPTER	Adapter
-)
-{
-#if 0
-	PMGNT_INFO		pMgntInfo = &(Adapter->MgntInfo);
-	u1Byte			CurRate, RateThreshold;
-
-	if (pMgntInfo->pHTInfo->bCurBW40MHz)
-		RateThreshold = MGN_MCS1;
-	else
-		RateThreshold = MGN_MCS3;
-
-	if (Adapter->TxStats.CurrentInitTxRate <= RateThreshold) {
-		pMgntInfo->bDmDisableProtect = TRUE;
-		dbg_print("Forced disable protect: %x\n", Adapter->TxStats.CurrentInitTxRate);
-	} else {
-		pMgntInfo->bDmDisableProtect = FALSE;
-		dbg_print("Enable protect: %x\n", Adapter->TxStats.CurrentInitTxRate);
-	}
-#endif
-}
-
 #ifdef CONFIG_SUPPORT_HW_WPS_PBC
 static void dm_CheckPbcGPIO(_adapter *padapter)
 {
@@ -113,9 +87,9 @@ static void dm_CheckPbcGPIO(_adapter *padapter)
  *
  *	Created by Roger, 2010.03.05.
  *   */
-VOID
+void
 dm_InterruptMigration(
-	IN	PADAPTER	Adapter
+		PADAPTER	Adapter
 )
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
@@ -186,9 +160,10 @@ dm_InterruptMigration(
 /*
  * Initialize GPIO setting registers
  *   */
+#ifdef CONFIG_USB_HCI
 static void
 dm_InitGPIOSetting(
-	IN	PADAPTER	Adapter
+		PADAPTER	Adapter
 )
 {
 	PHAL_DATA_TYPE		pHalData = GET_HAL_DATA(Adapter);
@@ -200,13 +175,14 @@ dm_InitGPIOSetting(
 
 	rtw_write8(Adapter, REG_GPIO_MUXCFG, tmp1byte);
 }
+#endif
 /* ************************************************************
  * functions
  * ************************************************************ */
 static void Init_ODM_ComInfo_8723b(PADAPTER	Adapter)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
-	struct PHY_DM_STRUCT		*pDM_Odm = &(pHalData->odmpriv);
+	struct dm_struct		*pDM_Odm = &(pHalData->odmpriv);
 	u8	cut_ver, fab_ver;
 
 	Init_ODM_ComInfo(Adapter);
@@ -216,34 +192,35 @@ static void Init_ODM_ComInfo_8723b(PADAPTER	Adapter)
 	fab_ver = ODM_TSMC;
 	cut_ver = ODM_CUT_A;
 
-	RTW_INFO("%s(): fab_ver=%d cut_ver=%d\n", __func__, fab_ver, cut_ver);
+	RTW_INFO("%s(): Fv=%d Cv=%d\n", __func__, fab_ver, cut_ver);
 	odm_cmn_info_init(pDM_Odm, ODM_CMNINFO_FAB_VER, fab_ver);
 	odm_cmn_info_init(pDM_Odm, ODM_CMNINFO_CUT_VER, cut_ver);
 }
 
 void
 rtl8723b_InitHalDm(
-	IN	PADAPTER	Adapter
+		PADAPTER	Adapter
 )
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
-	struct PHY_DM_STRUCT		*pDM_Odm = &(pHalData->odmpriv);
+	struct dm_struct		*pDM_Odm = &(pHalData->odmpriv);
 
 #ifdef CONFIG_USB_HCI
 	dm_InitGPIOSetting(Adapter);
 #endif
-	odm_dm_init(pDM_Odm);
-
+	rtw_phydm_init(Adapter);
 }
 
-VOID
+void
 rtl8723b_HalDmWatchDog(
-	IN	PADAPTER	Adapter
+		PADAPTER	Adapter
 )
 {
 	BOOLEAN		bFwCurrentInPSMode = _FALSE;
 	u8 bFwPSAwake = _TRUE;
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
+	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(Adapter);
+	u8 in_lps = _FALSE;
 
 #ifdef CONFIG_MP_INCLUDED
 	/* #if MP_DRIVER */
@@ -255,7 +232,7 @@ rtl8723b_HalDmWatchDog(
 		goto skip_dm;
 
 #ifdef CONFIG_LPS
-	bFwCurrentInPSMode = adapter_to_pwrctl(Adapter)->bFwCurrentInPSMode;
+	bFwCurrentInPSMode = pwrpriv->bFwCurrentInPSMode;
 	rtw_hal_get_hwreg(Adapter, HW_VAR_FWLPS_RF_ON, &bFwPSAwake);
 #endif
 
@@ -274,7 +251,6 @@ rtl8723b_HalDmWatchDog(
 		/*  */
 		/* Dynamically switch RTS/CTS protection. */
 		/*  */
-		/* dm_CheckProtection(Adapter); */
 
 #ifdef CONFIG_PCI_HCI
 		/* 20100630 Joseph: Disable Interrupt Migration mechanism temporarily because it degrades Rx throughput. */
@@ -289,7 +265,12 @@ rtl8723b_HalDmWatchDog(
 #ifdef CONFIG_DISABLE_ODM
 	goto skip_dm;
 #endif
-	rtw_phydm_watchdog(Adapter);
+#ifdef CONFIG_LPS
+	if (pwrpriv->bLeisurePs && bFwCurrentInPSMode && pwrpriv->pwr_mode != PS_MODE_ACTIVE)
+		in_lps = _TRUE;
+#endif
+
+	rtw_phydm_watchdog(Adapter, in_lps);
 
 skip_dm:
 
@@ -306,19 +287,19 @@ skip_dm:
 	return;
 }
 
-void rtl8723b_init_dm_priv(IN PADAPTER Adapter)
+void rtl8723b_init_dm_priv(PADAPTER Adapter)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
-	struct PHY_DM_STRUCT		*podmpriv = &pHalData->odmpriv;
+	struct dm_struct		*podmpriv = &pHalData->odmpriv;
 	Init_ODM_ComInfo_8723b(Adapter);
 	odm_init_all_timers(podmpriv);
 
 }
 
-void rtl8723b_deinit_dm_priv(IN PADAPTER Adapter)
+void rtl8723b_deinit_dm_priv(PADAPTER Adapter)
 {
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
-	struct PHY_DM_STRUCT		*podmpriv = &pHalData->odmpriv;
+	struct dm_struct		*podmpriv = &pHalData->odmpriv;
 
 	odm_cancel_all_timers(podmpriv);
 

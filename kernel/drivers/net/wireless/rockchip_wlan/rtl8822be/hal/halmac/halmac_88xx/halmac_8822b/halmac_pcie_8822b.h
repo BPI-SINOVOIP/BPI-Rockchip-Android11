@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -18,33 +18,28 @@
 
 #include "../../halmac_api.h"
 
-#if HALMAC_8822B_SUPPORT
+#if (HALMAC_8822B_SUPPORT && HALMAC_PCIE_SUPPORT)
 
-extern HALMAC_INTF_PHY_PARA HALMAC_RTL8822B_PCIE_PHY_GEN1[];
-extern HALMAC_INTF_PHY_PARA HALMAC_RTL8822B_PCIE_PHY_GEN2[];
+extern struct halmac_intf_phy_para pcie_gen1_phy_param_8822b[];
+extern struct halmac_intf_phy_para pcie_gen2_phy_param_8822b[];
 
-HALMAC_RET_STATUS
-halmac_mac_power_switch_8822b_pcie(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_MAC_POWER halmac_power
-);
+enum halmac_ret_status
+mac_pwr_switch_pcie_8822b(struct halmac_adapter *adapter,
+			  enum halmac_mac_power pwr);
 
-HALMAC_RET_STATUS
-halmac_pcie_switch_8822b_pcie(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_PCIE_CFG	pcie_cfg
-);
+enum halmac_ret_status
+pcie_switch_8822b(struct halmac_adapter *adapter, enum halmac_pcie_cfg cfg);
 
-HALMAC_RET_STATUS
-halmac_phy_cfg_8822b_pcie(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_INTF_PHY_PLATFORM platform
-);
+enum halmac_ret_status
+phy_cfg_pcie_8822b(struct halmac_adapter *adapter,
+		   enum halmac_intf_phy_platform pltfm);
 
-HALMAC_RET_STATUS
-halmac_interface_integration_tuning_8822b_pcie(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+intf_tun_pcie_8822b(struct halmac_adapter *adapter);
+
+enum halmac_ret_status
+cfgspc_set_pcie_8822b(struct halmac_adapter *adapter,
+		      struct halmac_pcie_cfgspc_param *param);
 
 #endif /* HALMAC_8822B_SUPPORT*/
 

@@ -245,8 +245,6 @@ int rtw_dev_get_feature_set(struct net_device *dev)
 {
 	_adapter *adapter = (_adapter *)rtw_netdev_priv(dev);
 	HAL_DATA_TYPE *HalData = GET_HAL_DATA(adapter);
-	HAL_VERSION *hal_ver = &HalData->version_id;
-
 	int feature_set = 0;
 
 	feature_set |= WIFI_FEATURE_INFRA;
@@ -1235,16 +1233,16 @@ static int rtw_cfgvendor_lstats_get_info(struct wiphy *wiphy,
 	int err = 0;
 	_adapter *padapter = GET_PRIMARY_ADAPTER(wiphy_to_adapter(wiphy));
 	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(padapter);
-	wifi_radio_stat *radio;
+	wifi_radio_stat_internal *radio;
 	wifi_iface_stat *iface;
 	char *output;
 
-	output = rtw_malloc(sizeof(wifi_radio_stat) + sizeof(wifi_iface_stat)+1);
+	output = rtw_malloc(sizeof(wifi_radio_stat_internal) + sizeof(wifi_iface_stat));
 	if (output == NULL) {
 		RTW_DBG("Allocate lstats info buffer fail!\n");
 	}
 
-	radio = (wifi_radio_stat *)output;
+	radio = (wifi_radio_stat_internal *)output;
 
 	radio->num_channels = 0;
 	radio->radio = 1;
@@ -1255,12 +1253,6 @@ static int rtw_cfgvendor_lstats_get_info(struct wiphy *wiphy,
 	radio->on_time = pwrpriv->on_time;
 	radio->tx_time = pwrpriv->tx_time;
 	radio->rx_time = pwrpriv->rx_time;
-	
-	radio->num_tx_levels = 1;
-	radio->tx_time_per_levels = NULL;
-	radio->tx_time_per_levels = (u32*)(output+sizeof(wifi_radio_stat) + sizeof(wifi_iface_stat));
-	*(radio->tx_time_per_levels) = DUMMY_TIME_STATICS;
-
 	radio->on_time_scan = 0;
 	radio->on_time_nbd = 0;
 	radio->on_time_gscan = 0;
@@ -1275,16 +1267,15 @@ static int rtw_cfgvendor_lstats_get_info(struct wiphy *wiphy,
 	RTW_INFO("radio->on_time :  %u ms\n", (radio->on_time));
 	RTW_INFO("radio->tx_time :  %u ms\n", (radio->tx_time));
 	RTW_INFO("radio->rx_time :  %u ms\n", (radio->rx_time));
-	RTW_INFO("radio->tx_time_per_levels value :  %u ms\n", *(radio->tx_time_per_levels));
 	#endif /* CONFIG_RTW_WIFI_HAL_DEBUG */
 	
 	RTW_DBG(FUNC_NDEV_FMT" %s\n", FUNC_NDEV_ARG(wdev_to_ndev(wdev)), (char*)data);
 	err =  rtw_cfgvendor_send_cmd_reply(wiphy, wdev_to_ndev(wdev), 
-		output, sizeof(wifi_iface_stat) + sizeof(wifi_radio_stat)+1);
+		output, sizeof(wifi_iface_stat) + sizeof(wifi_radio_stat_internal));
 	if (unlikely(err))
 		RTW_ERR(FUNC_NDEV_FMT"Vendor Command reply failed ret:%d \n"
 			, FUNC_NDEV_ARG(wdev_to_ndev(wdev)), err);
-	rtw_mfree(output, sizeof(wifi_iface_stat) + sizeof(wifi_radio_stat)+1);
+	rtw_mfree(output, sizeof(wifi_iface_stat) + sizeof(wifi_radio_stat_internal));
 	return err;
 }
 static int rtw_cfgvendor_lstats_set_info(struct wiphy *wiphy,	

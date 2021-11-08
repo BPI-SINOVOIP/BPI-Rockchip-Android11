@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -20,162 +20,107 @@
 
 #if HALMAC_88XX_SUPPORT
 
-HALMAC_RET_STATUS
-halmac_dump_efuse_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_READ_CFG cfg
-);
+enum halmac_ret_status
+dump_efuse_map_88xx(struct halmac_adapter *adapter,
+		    enum halmac_efuse_read_cfg cfg);
 
-HALMAC_RET_STATUS
-halmac_dump_efuse_map_bt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_BANK halmac_efuse_bank,
-	IN u32 bt_efuse_map_size,
-	OUT u8 *pBT_efuse_map
-);
+enum halmac_ret_status
+eeprom_parser_88xx(struct halmac_adapter *adapter, u8 *phy_map, u8 *log_map);
 
-HALMAC_RET_STATUS
-halmac_write_efuse_bt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	IN u8 halmac_value,
-	IN HALMAC_EFUSE_BANK halmac_efuse_bank
-);
+enum halmac_ret_status
+eeprom_mask_parser_88xx(struct halmac_adapter *adapter, u8 *phy_map,
+			u8 *log_mask);
 
-HALMAC_RET_STATUS
-halmac_read_efuse_bt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	OUT u8 *pValue,
-	IN HALMAC_EFUSE_BANK halmac_efuse_bank
-);
+enum halmac_ret_status
+dump_efuse_map_bt_88xx(struct halmac_adapter *adapter,
+		       enum halmac_efuse_bank bank, u32 size, u8 *map);
 
-HALMAC_RET_STATUS
-halmac_cfg_efuse_auto_check_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 enable
-);
+enum halmac_ret_status
+write_efuse_bt_88xx(struct halmac_adapter *adapter, u32 offset, u8 value,
+		    enum halmac_efuse_bank bank);
 
-HALMAC_RET_STATUS
-halmac_get_efuse_available_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u32 *halmac_size
-);
+enum halmac_ret_status
+read_efuse_bt_88xx(struct halmac_adapter *adapter, u32 offset, u8 *value,
+		   enum halmac_efuse_bank bank);
 
-HALMAC_RET_STATUS
-halmac_get_efuse_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u32 *halmac_size
-);
+enum halmac_ret_status
+cfg_efuse_auto_check_88xx(struct halmac_adapter *adapter, u8 enable);
 
-HALMAC_RET_STATUS
-halmac_get_logical_efuse_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u32 *halmac_size
-);
+enum halmac_ret_status
+get_efuse_available_size_88xx(struct halmac_adapter *adapter, u32 *size);
 
-HALMAC_RET_STATUS
-halmac_dump_logical_efuse_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_READ_CFG cfg
-);
+enum halmac_ret_status
+get_efuse_size_88xx(struct halmac_adapter *adapter, u32 *size);
 
-HALMAC_RET_STATUS
-halmac_read_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	OUT u8 *pValue
-);
+enum halmac_ret_status
+get_log_efuse_size_88xx(struct halmac_adapter *adapter, u32 *size);
 
-HALMAC_RET_STATUS
-halmac_write_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 halmac_offset,
-	IN u8 halmac_value
-);
+enum halmac_ret_status
+dump_log_efuse_map_88xx(struct halmac_adapter *adapter,
+			enum halmac_efuse_read_cfg cfg);
+enum halmac_ret_status
+dump_log_efuse_mask_88xx(struct halmac_adapter *adapter,
+			 enum halmac_efuse_read_cfg cfg);
 
-HALMAC_RET_STATUS
-halmac_pg_efuse_by_map_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PG_EFUSE_INFO pPg_efuse_info,
-	IN HALMAC_EFUSE_READ_CFG cfg
-);
+enum halmac_ret_status
+read_logical_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 *value);
 
-HALMAC_RET_STATUS
-halmac_mask_logical_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	INOUT PHALMAC_PG_EFUSE_INFO pEfuse_info
-);
+enum halmac_ret_status
+write_log_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value);
 
-HALMAC_RET_STATUS
-halmac_func_read_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u32 size,
-	OUT u8 *pEfuse_map
-);
+enum halmac_ret_status
+pg_efuse_by_map_88xx(struct halmac_adapter *adapter,
+		     struct halmac_pg_efuse_info *info,
+		     enum halmac_efuse_read_cfg cfg);
 
-HALMAC_RET_STATUS
-halmac_func_write_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 offset,
-	IN u8 value
-);
+enum halmac_ret_status
+mask_log_efuse_88xx(struct halmac_adapter *adapter,
+		    struct halmac_pg_efuse_info *info);
 
-HALMAC_RET_STATUS
-halmac_func_switch_efuse_bank_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_BANK efuse_bank
-);
+enum halmac_ret_status
+read_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u32 size, u8 *map);
 
-HALMAC_RET_STATUS
-halmac_transition_efuse_state_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_EFUSE_CMD_CONSTRUCT_STATE dest_state
-);
+enum halmac_ret_status
+write_hw_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value);
 
-VOID
-halmac_mask_eeprom_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	INOUT PHALMAC_PG_EFUSE_INFO	pEfuse_info
-);
+enum halmac_ret_status
+switch_efuse_bank_88xx(struct halmac_adapter *adapter,
+		       enum halmac_efuse_bank bank);
 
-HALMAC_RET_STATUS
-halmac_parse_efuse_data_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pC2h_buf,
-	IN u32 c2h_size
-);
+enum halmac_ret_status
+get_efuse_data_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size);
 
-HALMAC_RET_STATUS
-halmac_query_dump_physical_efuse_status_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT HALMAC_CMD_PROCESS_STATUS *pProcess_status,
-	INOUT u8 *data,
-	INOUT u32 *size
-);
+enum halmac_ret_status
+cnv_efuse_state_88xx(struct halmac_adapter *adapter,
+		     enum halmac_cmd_construct_state dest_state);
 
-HALMAC_RET_STATUS
-halmac_query_dump_logical_efuse_status_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT HALMAC_CMD_PROCESS_STATUS *pProcess_status,
-	INOUT u8 *data,
-	INOUT u32 *size
-);
+enum halmac_ret_status
+get_dump_phy_efuse_status_88xx(struct halmac_adapter *adapter,
+			       enum halmac_cmd_process_status *proc_status,
+			       u8 *data, u32 *size);
 
-HALMAC_RET_STATUS
-halmac_parse_h2c_ack_phy_efuse_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pC2h_buf,
-	IN u32 c2h_size
-);
+enum halmac_ret_status
+get_dump_log_efuse_status_88xx(struct halmac_adapter *adapter,
+			       enum halmac_cmd_process_status *proc_status,
+			       u8 *data, u32 *size);
 
-HALMAC_RET_STATUS
-halmac_eeprom_parser_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pPhysical_efuse_map,
-	OUT u8 *pLogical_efuse_map
-);
+enum halmac_ret_status
+get_dump_log_efuse_mask_status_88xx(struct halmac_adapter *adapter,
+				    enum halmac_cmd_process_status *proc_status,
+				    u8 *data, u32 *size);
+
+enum halmac_ret_status
+get_h2c_ack_phy_efuse_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size);
+
+u32
+get_rsvd_efuse_size_88xx(struct halmac_adapter *adapter);
+
+enum halmac_ret_status
+write_wifi_phy_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u8 value);
+
+enum halmac_ret_status
+read_wifi_phy_efuse_88xx(struct halmac_adapter *adapter, u32 offset, u32 size,
+			 u8 *value);
 
 #endif /* HALMAC_88XX_SUPPORT */
 

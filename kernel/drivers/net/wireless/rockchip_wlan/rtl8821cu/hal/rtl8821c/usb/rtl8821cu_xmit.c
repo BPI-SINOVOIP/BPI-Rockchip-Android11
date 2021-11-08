@@ -263,8 +263,17 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz, u8 bag
 			/* HW will ignore this setting if the transmission rate is legacy OFDM */
 			if (pmlmeinfo->preamble_mode == PREAMBLE_SHORT)
 				SET_TX_DESC_DATA_SHORT_8821C(ptxdesc, 1);
-
-			SET_TX_DESC_DATARATE_8821C(ptxdesc, MRateToHwRate(pmlmeext->tx_rate));
+#ifdef CONFIG_IP_R_MONITOR
+			if((pattrib->ether_type == ETH_P_ARP) &&
+				(IsSupportedTxOFDM(padapter->registrypriv.wireless_mode))) {
+				SET_TX_DESC_DATARATE_8821C(ptxdesc, MRateToHwRate(IEEE80211_OFDM_RATE_6MB));
+				#ifdef DBG_IP_R_MONITOR
+				RTW_INFO(FUNC_ADPT_FMT ": SP Packet(0x%04X) rate=0x%x SeqNum = %d\n",
+					FUNC_ADPT_ARG(padapter), pattrib->ether_type, MRateToHwRate(pmlmeext->tx_rate), pattrib->seqnum);
+				#endif/*DBG_IP_R_MONITOR*/
+			 } else
+#endif/*CONFIG_IP_R_MONITOR*/
+				SET_TX_DESC_DATARATE_8821C(ptxdesc, MRateToHwRate(pmlmeext->tx_rate));
 		}
 
 #ifdef CONFIG_TDLS

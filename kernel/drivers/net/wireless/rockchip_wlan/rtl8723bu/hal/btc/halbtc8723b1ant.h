@@ -98,12 +98,10 @@ struct coex_dm_8723b_1ant {
 	/* fw mechanism */
 	boolean		cur_ignore_wlan_act;
 	boolean		pre_ignore_wlan_act;
-	u8		pre_ps_tdma;
 	u8		cur_ps_tdma;
 	u8		ps_tdma_para[5];
 	u8		ps_tdma_du_adj_type;
 	boolean		auto_tdma_adjust;
-	boolean		pre_ps_tdma_on;
 	boolean		cur_ps_tdma_on;
 	boolean		pre_bt_auto_report;
 	boolean		cur_bt_auto_report;
@@ -196,9 +194,10 @@ struct coex_sta_8723b_1ant {
 	u32					wrong_profile_notification;
 	u32					bt_coex_supported_version;
 	u8					a2dp_bit_pool;
-	u8					cut_version;
+	u8					kt_ver;
 	u8					hid_busy_num;
 	u8					bt_info_ext2;
+	boolean					HID_418;
 };
 
 #define BT_8723B_1ANT_ANTDET_PSD_POINTS			256	/* MAX:1024 */
@@ -304,4 +303,3 @@ void ex_halbtc8723b1ant_display_ant_detection(IN struct btc_coexist *btcoexist);
 #endif
 
 #endif
-

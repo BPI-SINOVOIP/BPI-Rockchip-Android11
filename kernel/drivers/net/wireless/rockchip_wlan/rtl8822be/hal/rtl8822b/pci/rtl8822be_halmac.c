@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2015 - 2017 Realtek Corporation.
+ * Copyright(c) 2015 - 2018 Realtek Corporation.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -18,7 +18,7 @@
 #include "../rtl8822b.h"	/* rtl8822b_get_tx_desc_size() */
 #include "rtl8822be.h"
 
-static u8 pci_write_port_not_xmitframe(void *d,  u32 size, u8 *pBuf)
+static u8 pci_write_port_not_xmitframe(void *d,  u32 size, u8 *pBuf,  u8 qsel)
 {
 	struct dvobj_priv *pobj = (struct dvobj_priv *)d;
 	struct pci_dev *pdev = pobj->ppcidev;
@@ -30,7 +30,6 @@ static u8 pci_write_port_not_xmitframe(void *d,  u32 size, u8 *pBuf)
 	u16 tx_page_size = 128;
 	u16 tx_page_used = 0;
 	int i;
-	u16 seg_num = ((TX_BUFFER_SEG_NUM == 0) ? 2 : ((TX_BUFFER_SEG_NUM == 1) ? 4 : 8));
 
 
 	/* map TX DESC buf_addr (including TX DESC + tx data) */
@@ -54,13 +53,24 @@ static u8 pci_write_port_not_xmitframe(void *d,  u32 size, u8 *pBuf)
 		return _FALSE;
 	}
 	/* BD init */
-	rtw_write32(padapter, REG_BCNQ_TXBD_DESA_8822B,
-		    txbd_dma & DMA_BIT_MASK(32));
+	if (qsel == HALMAC_TXDESC_QSEL_H2C_CMD) {
+		rtw_write32(padapter, REG_H2CQ_TXBD_DESA_8822B,
+			txbd_dma & DMA_BIT_MASK(32));
 
-#ifdef CONFIG_64BIT_DMA
-	rtw_write32(padapter, REG_BCNQ_TXBD_DESA_8822B + 4,
-		    ((u64)txbd_dma) >> 32);
-#endif
+	#ifdef CONFIG_64BIT_DMA
+		rtw_write32(padapter, REG_H2CQ_TXBD_DESA_8822B + 4,
+			((u64)txbd_dma) >> 32);
+	#endif
+		rtw_write32(padapter, REG_H2CQ_TXBD_NUM_8822B,
+			2 | ((RTL8822BE_SEG_NUM << 12) & 0x3000));
+	} else {
+		rtw_write32(padapter, REG_BCNQ_TXBD_DESA_8822B,
+			txbd_dma & DMA_BIT_MASK(32));
+	#ifdef CONFIG_64BIT_DMA
+		rtw_write32(padapter, REG_BCNQ_TXBD_DESA_8822B + 4,
+			((u64)txbd_dma) >> 32);
+	#endif
+	}
 	/*
 	 * Reset all tx buffer desciprtor content
 	 * -- Reset first element
@@ -88,14 +98,17 @@ static u8 pci_write_port_not_xmitframe(void *d,  u32 size, u8 *pBuf)
 	SET_TXBUFFER_DESC_ADD_LOW_WITH_OFFSET(txbd, 1,
 		mapping + TX_WIFI_INFO_SIZE); /* pkt */
 
-	/* BCN_QUEUE_INX */
 	wmb();
-	SET_TX_BD_OWN(txbd, 1);
 
-
-	/* kick start */
-	rtw_write8(padapter, REG_RX_RXBD_NUM + 1,
+	if (qsel == HALMAC_TXDESC_QSEL_H2C_CMD)
+		rtw_write16(padapter, REG_H2CQ_TXBD_IDX, 1);
+	else {
+		SET_TX_BD_OWN(txbd, 1);
+		/* kick start */
+		rtw_write8(padapter, REG_RX_RXBD_NUM + 1,
 		rtw_read8(padapter, REG_RX_RXBD_NUM + 1) | BIT(4));
+	}
+
 	udelay(100);
 
 	pci_free_consistent(pdev, sizeof(struct tx_buf_desc), txbd, txbd_dma);
@@ -110,8 +123,8 @@ static u8 pci_write_data_not_xmitframe(void *d, u8 *pBuf, u32 size, u8 qsel)
 {
 	struct dvobj_priv *pobj = (struct dvobj_priv *)d;
 	PADAPTER padapter = dvobj_get_primary_adapter(pobj);
-	PHALMAC_ADAPTER halmac = dvobj_to_halmac((struct dvobj_priv *)d);
-	PHALMAC_API api = HALMAC_GET_API(halmac);
+	struct halmac_adapter *halmac = dvobj_to_halmac((struct dvobj_priv *)d);
+	struct halmac_api *api = HALMAC_GET_API(halmac);
 	u32 desclen = 0;
 	u32 len = 0;
 	u8 *buf = NULL;
@@ -151,7 +164,7 @@ static u8 pci_write_data_not_xmitframe(void *d, u8 *pBuf, u32 size, u8 qsel)
 
 	api->halmac_fill_txdesc_checksum(halmac, buf);
 
-	ret = pci_write_port_not_xmitframe(d, size, buf);
+	ret = pci_write_port_not_xmitframe(d, size, buf, qsel);
 
 	if (ret == _SUCCESS)
 		ret = _TRUE;
@@ -167,20 +180,18 @@ static u8 pci_write_data_rsvd_page_xmitframe(void *d, u8 *pBuf, u32 size)
 {
 	struct dvobj_priv *pobj = (struct dvobj_priv *)d;
 	PADAPTER padapter = dvobj_get_primary_adapter(pobj);
-	PHALMAC_ADAPTER halmac = dvobj_to_halmac((struct dvobj_priv *)d);
 	struct xmit_priv        *pxmitpriv = &padapter->xmitpriv;
-	struct xmit_frame       *pcmdframe = NULL;
-	struct pkt_attrib       *pattrib = NULL;
 	struct rtw_tx_ring *ring = &pxmitpriv->tx_ring[BCN_QUEUE_INX];
 	struct pci_dev *pdev = pobj->ppcidev;
+	struct xmit_frame       *pcmdframe = NULL;
 	struct xmit_buf       	*pxmitbuf = NULL;
+	struct pkt_attrib       *pattrib = NULL;
+	u32 desclen = 0;
+	u8 *txdesc = NULL;
 	u8 DLBcnCount = 0;
 	u32 poll = 0;
 	u8 *txbd;
 	BOOLEAN bcn_valid = _FALSE;
-	PHALMAC_API api = HALMAC_GET_API(halmac);
-	u32 desclen = 0;
-	u8 *txdesc = NULL;
 
 	if (size + TXDESC_OFFSET > MAX_CMDBUF_SZ) {
 		RTW_INFO("%s: total buffer size(%d) > MAX_CMDBUF_SZ(%d)\n"
@@ -210,6 +221,7 @@ static u8 pci_write_data_rsvd_page_xmitframe(void *d, u8 *pBuf, u32 size)
 
 	/* Clear beacon valid check bit. */
 	rtw_hal_set_hwreg(padapter, HW_VAR_BCN_VALID, NULL);
+	rtw_hal_set_hwreg(padapter, HW_VAR_DL_BCN_SEL, NULL);
 
 	dump_mgntframe(padapter, pcmdframe);
 
@@ -233,16 +245,15 @@ static u8 pci_write_data_rsvd_page_xmitframe(void *d, u8 *pBuf, u32 size)
 	return _TRUE;
 }
 
-
 static u8 pci_write_data_h2c_normal(void *d, u8 *pBuf, u32 size)
 {
 	struct dvobj_priv *pobj = (struct dvobj_priv *)d;
 	PADAPTER padapter = dvobj_get_primary_adapter(pobj);
-	PHALMAC_ADAPTER halmac = dvobj_to_halmac((struct dvobj_priv *)d);
+	struct halmac_adapter *halmac = dvobj_to_halmac((struct dvobj_priv *)d);
 	struct xmit_priv        *pxmitpriv = &padapter->xmitpriv;
 	struct xmit_frame       *pcmdframe = NULL;
 	struct pkt_attrib       *pattrib = NULL;
-	PHALMAC_API api;
+	struct halmac_api *api;
 	u32 desclen;
 	u8 *buf;
 
@@ -267,7 +278,7 @@ static u8 pci_write_data_h2c_normal(void *d, u8 *pBuf, u32 size)
 
 	SET_TX_DESC_TXPKTSIZE_8822B(buf, size);
 	SET_TX_DESC_OFFSET_8822B(buf, 0);
-	SET_TX_DESC_QSEL_8822B(buf, HALMAC_QUEUE_SELECT_CMD);
+	SET_TX_DESC_QSEL_8822B(buf, HALMAC_TXDESC_QSEL_H2C_CMD);
 	SET_TX_DESC_TXDESC_CHECKSUM_8822B(buf, 0);
 	api->halmac_fill_txdesc_checksum(halmac, buf);
 
@@ -289,11 +300,16 @@ static u8 pci_write_data_rsvd_page(void *d, u8 *pBuf, u32 size)
 	struct dvobj_priv *pobj = (struct dvobj_priv *)d;
 	PADAPTER padapter = dvobj_get_primary_adapter(pobj);
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
+	u8 ret;
 
 	if (pHalData->not_xmitframe_fw_dl)
-		return pci_write_data_not_xmitframe(d, pBuf, size, HALMAC_TXDESC_QSEL_BEACON);
+		ret = pci_write_data_not_xmitframe(d, pBuf, size, HALMAC_TXDESC_QSEL_BEACON);
 	else
-		return pci_write_data_rsvd_page_xmitframe(d, pBuf, size);
+		ret = pci_write_data_rsvd_page_xmitframe(d, pBuf, size);
+
+	if (ret == _TRUE)
+		return 1;
+	return 0;
 }
 
 static u8 pci_write_data_h2c(void *d, u8 *pBuf, u32 size)
@@ -301,17 +317,22 @@ static u8 pci_write_data_h2c(void *d, u8 *pBuf, u32 size)
 	struct dvobj_priv *pobj = (struct dvobj_priv *)d;
 	PADAPTER padapter = dvobj_get_primary_adapter(pobj);
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
+	u8 ret;
 
 	if (pHalData->not_xmitframe_fw_dl)
-		return pci_write_data_not_xmitframe(d, pBuf, size, HALMAC_TXDESC_QSEL_H2C_CMD);
+		ret = pci_write_data_not_xmitframe(d, pBuf, size, HALMAC_TXDESC_QSEL_H2C_CMD);
 	else
-		return pci_write_data_h2c_normal(d, pBuf, size);
+		ret = pci_write_data_h2c_normal(d, pBuf, size);
+
+	if (ret == _TRUE)
+		return 1;
+	return 0;
 }
 
 int rtl8822be_halmac_init_adapter(PADAPTER padapter)
 {
 	struct dvobj_priv *d;
-	PHALMAC_PLATFORM_API api;
+	struct halmac_platform_api *api;
 	int err;
 
 	d = adapter_to_dvobj(padapter);

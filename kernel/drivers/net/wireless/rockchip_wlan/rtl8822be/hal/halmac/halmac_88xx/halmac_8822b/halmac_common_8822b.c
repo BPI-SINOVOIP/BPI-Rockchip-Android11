@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2017 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -13,101 +13,160 @@
  *
  ******************************************************************************/
 
+#include "halmac_8822b_cfg.h"
 #include "halmac_common_8822b.h"
 #include "../halmac_common_88xx.h"
+#include "halmac_cfg_wmac_8822b.h"
 
 #if HALMAC_8822B_SUPPORT
 
+static void
+cfg_ldo25_8822b(struct halmac_adapter *adapter, u8 enable);
+
 /**
- * halmac_get_hw_value_8822b() -get hw config value
- * @pHalmac_adapter : the adapter of halmac
+ * get_hw_value_8822b() -get hw config value
+ * @adapter : the adapter of halmac
  * @hw_id : hw id for driver to query
  * @pvalue : hw value, reference table to get data type
  * Author : KaiYuan Chang / Ivan Lin
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_get_hw_value_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_HW_ID hw_id,
-	OUT VOID *pvalue
-)
+enum halmac_ret_status
+get_hw_value_8822b(struct halmac_adapter *adapter, enum halmac_hw_id hw_id,
+		   void *value)
 {
-	VOID *pDriver_adapter = NULL;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
-
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_get_hw_value_8822b ==========>\n");
-
-	if (pvalue == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]halmac_get_hw_value_8822b (NULL ==pvalue)\n");
+	if (!value) {
+		PLTFM_MSG_ERR("[ERR]%s (NULL ==pvalue)\n", __func__);
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	if (halmac_get_hw_value_88xx(pHalmac_adapter, hw_id, pvalue) != HALMAC_RET_SUCCESS) {
-		/*switch (hw_id) {
-		default:
-			return HALMAC_RET_PARA_NOT_SUPPORT;
-		}*/
+	if (get_hw_value_88xx(adapter, hw_id, value) == HALMAC_RET_SUCCESS)
+		return HALMAC_RET_SUCCESS;
+
+	switch (hw_id) {
+	case HALMAC_HW_FW_MAX_SIZE:
+		*(u32 *)value = WLAN_FW_MAX_SIZE_8822B;
+		break;
+	case HALMAC_HW_SDIO_INT_LAT:
+		break;
+	case HALMAC_HW_SDIO_CLK_CNT:
+		break;
+	default:
+		return HALMAC_RET_PARA_NOT_SUPPORT;
 	}
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_get_hw_value_8822b <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
 
 	return HALMAC_RET_SUCCESS;
 }
 
 /**
- * halmac_set_hw_value_8822b() -set hw config value
- * @pHalmac_adapter : the adapter of halmac
+ * set_hw_value_8822b() -set hw config value
+ * @adapter : the adapter of halmac
  * @hw_id : hw id for driver to config
  * @pvalue : hw value, reference table to get data type
  * Author : KaiYuan Chang / Ivan Lin
- * Return : HALMAC_RET_STATUS
+ * Return : enum halmac_ret_status
  * More details of status code can be found in prototype document
  */
-HALMAC_RET_STATUS
-halmac_set_hw_value_8822b(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_HW_ID hw_id,
-	IN VOID *pvalue
-)
+enum halmac_ret_status
+set_hw_value_8822b(struct halmac_adapter *adapter, enum halmac_hw_id hw_id,
+		   void *value)
 {
-	VOID *pDriver_adapter = NULL;
+	enum halmac_ret_status status = HALMAC_RET_SUCCESS;
 
-	if (halmac_adapter_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_ADAPTER_INVALID;
+	PLTFM_MSG_TRACE("[TRACE]%s ===>\n", __func__);
 
-	if (halmac_api_validate(pHalmac_adapter) != HALMAC_RET_SUCCESS)
-		return HALMAC_RET_API_INVALID;
-
-	pDriver_adapter = pHalmac_adapter->pDriver_adapter;
-
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_set_hw_value_8822b ==========>\n");
-
-	if (pvalue == NULL) {
-		PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_ERR, "[ERR]halmac_set_hw_value_8822b (NULL == pvalue)\n");
+	if (!value) {
+		PLTFM_MSG_ERR("[ERR]null pointer\n");
 		return HALMAC_RET_NULL_POINTER;
 	}
 
-	if (halmac_set_hw_value_88xx(pHalmac_adapter, hw_id, pvalue) != HALMAC_RET_SUCCESS) {
-		switch (hw_id) {
-		case HALMAC_HW_SDIO_TX_FORMAT:
-			break;
-		default:
-			return HALMAC_RET_PARA_NOT_SUPPORT;
-		}
+	if (set_hw_value_88xx(adapter, hw_id, value) == HALMAC_RET_SUCCESS)
+		return HALMAC_RET_SUCCESS;
+
+	switch (hw_id) {
+	case HALMAC_HW_AMPDU_CONFIG:
+		status = cfg_ampdu_8822b(adapter,
+					 (struct halmac_ampdu_config *)value);
+		break;
+	case HALMAC_HW_SDIO_TX_FORMAT:
+		break;
+	case HALMAC_HW_RXGCK_FIFO:
+		break;
+	case HALMAC_HW_RX_IGNORE:
+		break;
+	case HALMAC_HW_LDO25_EN:
+		cfg_ldo25_8822b(adapter, *(u8 *)value);
+		break;
+	case HALMAC_HW_PCIE_REF_AUTOK:
+		break;
+	case HALMAC_HW_SDIO_WT_EN:
+		break;
+	case HALMAC_HW_SDIO_CLK_MONITOR:
+		break;
+	default:
+		return HALMAC_RET_PARA_NOT_SUPPORT;
 	}
 
-	PLATFORM_MSG_PRINT(pDriver_adapter, HALMAC_MSG_H2C, HALMAC_DBG_TRACE, "[TRACE]halmac_set_hw_value_8822b <==========\n");
+	PLTFM_MSG_TRACE("[TRACE]%s <===\n", __func__);
+
+	return status;
+}
+
+/**
+ * halmac_fill_txdesc_check_sum_88xx() -  fill in tx desc check sum
+ * @adapter : the adapter of halmac
+ * @txdesc : tx desc packet
+ * Author : KaiYuan Chang/Ivan Lin
+ * Return : enum halmac_ret_status
+ * More details of status code can be found in prototype document
+ */
+enum halmac_ret_status
+fill_txdesc_check_sum_8822b(struct halmac_adapter *adapter, u8 *txdesc)
+{
+	__le16 chksum = 0;
+	__le16 *data;
+	u32 i;
+
+	if (!txdesc) {
+		PLTFM_MSG_ERR("[ERR]null pointer");
+		return HALMAC_RET_NULL_POINTER;
+	}
+
+	if (adapter->tx_desc_checksum != 1)
+		PLTFM_MSG_TRACE("[TRACE]chksum disable");
+
+	SET_TX_DESC_TXDESC_CHECKSUM(txdesc, 0x0000);
+
+	data = (__le16 *)(txdesc);
+
+	/* HW clculates only 32byte */
+	for (i = 0; i < 8; i++)
+		chksum ^= (*(data + 2 * i) ^ *(data + (2 * i + 1)));
+
+	/* *(data + 2 * i) & *(data + (2 * i + 1) have endain issue*/
+	/* Process eniadn issue after checksum calculation */
+	SET_TX_DESC_TXDESC_CHECKSUM(txdesc, rtk_le16_to_cpu(chksum));
 
 	return HALMAC_RET_SUCCESS;
+}
+
+static void
+cfg_ldo25_8822b(struct halmac_adapter *adapter, u8 enable)
+{
+	u8 value8;
+	struct halmac_api *api = (struct halmac_api *)adapter->halmac_api;
+
+	value8 = HALMAC_REG_R8(REG_LDO_EFUSE_CTRL + 3);
+
+	if (enable == 1)
+		HALMAC_REG_W8(REG_LDO_EFUSE_CTRL + 3, (u8)(value8 | BIT(7)));
+	else
+		HALMAC_REG_W8(REG_LDO_EFUSE_CTRL + 3, (u8)(value8 & ~BIT(7)));
 }
 
 #endif /* HALMAC_8822B_SUPPORT */

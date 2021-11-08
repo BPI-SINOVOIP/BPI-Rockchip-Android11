@@ -12,13 +12,9 @@
  * more details.
  *
  *****************************************************************************/
-#ifndef	__ODM_RTL8723B_H__
+#ifndef __ODM_RTL8723B_H__
 #define __ODM_RTL8723B_H__
 
-s8
-odm_CCKRSSI_8723B(
-	u8	LNA_idx,
-	u8	VGA_idx
-);
+s8 phydm_cck_rssi_8723b(struct dm_struct *dm, u8 lna_idx, u8 vga_idx);
 
 #endif

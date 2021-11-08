@@ -22,11 +22,10 @@
 #define _TKIP_WTMIC_		0x3
 #define _AES_				0x4
 #define _WEP104_			0x5
-#define _WEP_WPA_MIXED_	0x07  /* WEP + WPA */
 #define _SMS4_				0x06
-#ifdef CONFIG_IEEE80211W
+#define _WEP_WPA_MIXED_		0x07 /* WEP + WPA */
 #define _BIP_				0x8
-#endif /* CONFIG_IEEE80211W */
+
 /* 802.11W use wrong key */
 #define IEEE80211W_RIGHT_KEY	0x0
 #define IEEE80211W_WRONG_KEY	0x1
@@ -127,24 +126,24 @@ struct security_priv {
 
 	/* WEP */
 	u32	  dot11PrivacyKeyIndex;	/* this is only valid for legendary wep, 0~3 for key id. (tx key index) */
-	union Keytype dot11DefKey[4];			/* this is only valid for def. key	 */
-	u32	dot11DefKeylen[4];
-	u8	dot11Def_camid[4];
+	union Keytype dot11DefKey[6];			/* this is only valid for def. key	 */
+	u32	dot11DefKeylen[6];
+	u8	dot11Def_camid[6];
 	u8 	key_mask; /* use to restore wep key after hal_init */
 
 	u32 dot118021XGrpPrivacy;	/* This specify the privacy algthm. used for Grp key */
 	u32	dot118021XGrpKeyid;		/* key id used for Grp Key ( tx key index) */
-	union Keytype	dot118021XGrpKey[4];	/* 802.1x Group Key, for inx0 and inx1	 */
-	union Keytype	dot118021XGrptxmickey[4];
-	union Keytype	dot118021XGrprxmickey[4];
+	union Keytype	dot118021XGrpKey[6];	/* 802.1x Group Key, for inx0 and inx1	 */
+	union Keytype	dot118021XGrptxmickey[6];
+	union Keytype	dot118021XGrprxmickey[6];
 	union pn48		dot11Grptxpn;			/* PN48 used for Grp Key xmit. */
 	union pn48		dot11Grprxpn;			/* PN48 used for Grp Key recv. */
 	u8				iv_seq[4][8];
 #ifdef CONFIG_IEEE80211W
 	u32	dot11wBIPKeyid;						/* key id used for BIP Key ( tx key index) */
 	union Keytype	dot11wBIPKey[6];		/* BIP Key, for index4 and index5 */
-	union pn48		dot11wBIPtxpn;			/* PN48 used for Grp Key xmit. */
-	union pn48		dot11wBIPrxpn;			/* PN48 used for Grp Key recv. */
+	union pn48		dot11wBIPtxpn;			/* PN48 used for BIP xmit. */
+	union pn48		dot11wBIPrxpn;			/* PN48 used for BIP recv. */
 #endif /* CONFIG_IEEE80211W */
 #ifdef CONFIG_AP_MODE
 	/* extend security capabilities for AP_MODE */
@@ -165,6 +164,8 @@ struct security_priv {
 	u8 wps_ie[MAX_WPS_IE_LEN];/* added in assoc req */
 	int wps_ie_len;
 
+	u8 owe_ie[MAX_OWE_IE_LEN];/* added in assoc req */
+	int owe_ie_len;
 
 	u8	binstallGrpkey;
 #ifdef CONFIG_GTK_OL
@@ -177,6 +178,9 @@ struct security_priv {
 	u8	bcheck_grpkey;
 	u8	bgrpkey_handshake;
 
+	u8	auth_alg;
+	u8	auth_type;
+	u8	extauth_status;
 	/* u8	packet_cnt; */ /* unused, removed */
 
 	s32	sw_encrypt;/* from registry_priv */
@@ -190,9 +194,6 @@ struct security_priv {
 	u32 ndisencryptstatus;	/* NDIS_802_11_ENCRYPTION_STATUS */
 
 	NDIS_802_11_WEP ndiswep;
-#ifdef PLATFORM_WINDOWS
-	u8 KeyMaterial[16];/* variable length depending on above field. */
-#endif
 
 	u8 assoc_info[600];
 	u8 szofcapability[256]; /* for wpa2 usage */
@@ -447,6 +448,12 @@ static const unsigned long K[64] = {
 #ifdef CONFIG_IEEE80211W
 int omac1_aes_128(const u8 *key, const u8 *data, size_t data_len, u8 *mac);
 #endif /* CONFIG_IEEE80211W */
+#ifdef CONFIG_RTW_MESH_AEK
+int aes_siv_encrypt(const u8 *key, const u8 *pw, size_t pwlen
+	, size_t num_elem, const u8 *addr[], const size_t *len, u8 *out);
+int aes_siv_decrypt(const u8 *key, const u8 *iv_crypt, size_t iv_c_len
+	, size_t num_elem, const u8 *addr[], const size_t *len, u8 *out);
+#endif
 void rtw_secmicsetkey(struct mic_data *pmicdata, u8 *key);
 void rtw_secmicappendbyte(struct mic_data *pmicdata, u8 b);
 void rtw_secmicappend(struct mic_data *pmicdata, u8 *src, u32 nBytes);
@@ -472,7 +479,7 @@ u32	rtw_BIP_verify(_adapter *padapter, u8 *whdr_pos, sint flen
 	, const u8 *key, u16 id, u64* ipn);
 #endif
 #ifdef CONFIG_TDLS
-void wpa_tdls_generate_tpk(_adapter *padapter, PVOID sta);
+void wpa_tdls_generate_tpk(_adapter *padapter, void *sta);
 int wpa_tdls_ftie_mic(u8 *kck, u8 trans_seq,
 			u8 *lnkid, u8 *rsnie, u8 *timeoutie, u8 *ftie,
 			u8 *mic);
@@ -488,5 +495,11 @@ u8 rtw_handle_tkip_countermeasure(_adapter *adapter, const char *caller);
 #ifdef CONFIG_WOWLAN
 u16 rtw_calc_crc(u8  *pdata, int length);
 #endif /*CONFIG_WOWLAN*/
+
+#define rtw_sec_chk_auth_alg(a, s) \
+	((a)->securitypriv.auth_alg == (s))
+
+#define rtw_sec_chk_auth_type(a, s) \
+	((a)->securitypriv.auth_type == (s))
 
 #endif /* __RTL871X_SECURITY_H_ */

@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2018 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -16,7 +16,7 @@
 #ifndef __HALMAC__HW_CFG_H__
 #define __HALMAC__HW_CFG_H__
 
-#include <drv_conf.h>	/* CONFIG_[IC] */
+#include <drv_conf.h>	/* CONFIG_[IC], CONFIG_[INTF]_HCI */
 
 #ifdef CONFIG_RTL8723A
 #define HALMAC_8723A_SUPPORT	1
@@ -138,6 +138,19 @@
 #define HALMAC_8198F_SUPPORT	0
 #endif
 
+#ifdef CONFIG_RTL8192F
+#define HALMAC_8192F_SUPPORT	1
+#else
+#define HALMAC_8192F_SUPPORT	0
+#endif
+
+#ifdef CONFIG_RTL8197G
+#define HALMAC_8197G_SUPPORT	1
+#else
+#define HALMAC_8197G_SUPPORT	0
+#endif
+
+
 
 /* Halmac support IC version */
 
@@ -163,6 +176,30 @@
 #define HALMAC_8822C_SUPPORT	1
 #else
 #define HALMAC_8822C_SUPPORT	0
+#endif
+
+#ifdef CONFIG_RTL8812F
+#define HALMAC_8812F_SUPPORT	1
+#else
+#define HALMAC_8812F_SUPPORT	0
+#endif
+
+
+/* Interface support */
+#ifdef CONFIG_SDIO_HCI
+#define HALMAC_SDIO_SUPPORT	1
+#else
+#define HALMAC_SDIO_SUPPORT	0
+#endif
+#ifdef CONFIG_USB_HCI
+#define HALMAC_USB_SUPPORT	1
+#else
+#define HALMAC_USB_SUPPORT	0
+#endif
+#ifdef CONFIG_PCI_HCI
+#define HALMAC_PCIE_SUPPORT	1
+#else
+#define HALMAC_PCIE_SUPPORT	0
 #endif
 
 #endif /* __HALMAC__HW_CFG_H__ */

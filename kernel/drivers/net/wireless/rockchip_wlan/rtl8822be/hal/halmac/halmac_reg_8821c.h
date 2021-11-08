@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -395,6 +395,7 @@
 #define REG_PTCL_ERR_STATUS_8821C 0x04E2
 #define REG_NULL_PKT_STATUS_EXTEND_8821C 0x04E3
 #define REG_VIDEO_ENHANCEMENT_FUN_8821C 0x04E4
+#define REG_PRECNT_CTRL_8821C 0x04E5
 #define REG_BT_POLLUTE_PKT_CNT_8821C 0x04E8
 #define REG_PTCL_DBG_8821C 0x04EC
 #define REG_CPUMGQ_TIMER_CTRL2_8821C 0x04F4
@@ -791,10 +792,9 @@
 #define REG_SDIO_RESPONSE_TIMER_8821C 0x10250088
 #define REG_SDIO_CMD_CRC_8821C 0x1025008A
 #define REG_SDIO_HSISR_8821C 0x10250090
-#define REG_SDIO_HSIMR_8821C 0x10250091
 #define REG_SDIO_ERR_RPT_8821C 0x102500C0
-#define REG_SDIO_CMD_ERRCNT_8821C 0x102500C1
-#define REG_SDIO_DATA_ERRCNT_8821C 0x102500C2
+#define REG_SDIO_CMD_ERRCNT_8821C 0x102500C2
+#define REG_SDIO_DATA_ERRCNT_8821C 0x102500C3
 #define REG_SDIO_CMD_ERR_CONTENT_8821C 0x102500C4
 #define REG_SDIO_CRC_ERR_IDX_8821C 0x102500C9
 #define REG_SDIO_DATA_CRC_8821C 0x102500CA

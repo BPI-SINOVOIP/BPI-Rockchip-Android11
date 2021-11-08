@@ -29,9 +29,6 @@
 #define CONFIG_USB_HCI
 #define PLATFORM_LINUX
 
-//DHC
-#define CONFIG_SG
-
 /*
  * Wi-Fi Functions Config
  */
@@ -199,9 +196,6 @@
 #endif
 #define RTW_NOTCH_FILTER 0 /* 0:Disable, 1:Enable, */
 
-#define CONFIG_TX_MCAST2UNI		/*Support IP multicast->unicast*/
-/* #define CONFIG_CHECK_AC_LIFETIME 1 */	/* Check packet lifetime of 4 ACs. */
-
 
 /*
  * Interface  Related Config
@@ -309,7 +303,6 @@
  */
 #define DBG	1
 
-#define CONFIG_PROC_DEBUG
 #define DBG_CONFIG_ERROR_DETECT
 
 /*#define DBG_CONFIG_ERROR_DETECT_INT*/

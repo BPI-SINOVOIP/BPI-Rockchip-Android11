@@ -32,9 +32,12 @@ void rtl8822b_init_hal_spec(PADAPTER adapter)
 	hal_spec->macid_num = 128;
 	/* hal_spec->sec_cam_ent_num follow halmac setting */
 	hal_spec->sec_cap = SEC_CAP_CHK_BMC;
+
 	hal_spec->rfpath_num_2g = 2;
 	hal_spec->rfpath_num_5g = 2;
+	hal_spec->rf_reg_path_num = 2;
 	hal_spec->max_tx_cnt = 2;
+
 	hal_spec->tx_nss_num = 2;
 	hal_spec->rx_nss_num = 2;
 	hal_spec->band_cap = BAND_CAP_2G | BAND_CAP_5G;
@@ -42,11 +45,23 @@ void rtl8822b_init_hal_spec(PADAPTER adapter)
 	hal_spec->port_num = 5;
 	hal_spec->proto_cap = PROTO_CAP_11B | PROTO_CAP_11G | PROTO_CAP_11N | PROTO_CAP_11AC;
 
+	hal_spec->txgi_max = 63;
+	hal_spec->txgi_pdbm = 2;
+
 	hal_spec->wl_func = 0
-			| WL_FUNC_P2P
-			| WL_FUNC_MIRACAST
-			| WL_FUNC_TDLS
-			;
+			    | WL_FUNC_P2P
+			    | WL_FUNC_MIRACAST
+			    | WL_FUNC_TDLS
+			    ;
+
+#if CONFIG_TX_AC_LIFETIME
+	hal_spec->tx_aclt_unit_factor = 8;
+#endif
+
+	hal_spec->rx_tsf_filter = 1;
+
+	hal_spec->pg_txpwr_saddr = 0x10;
+	hal_spec->pg_txgi_diff_factor = 1;
 
 	hal_spec->hci_type = 0;
 
@@ -190,9 +205,9 @@ void rtl8822b_init_misc(PADAPTER adapter)
 	PHAL_DATA_TYPE hal;
 	u8 v8 = 0;
 	u32 v32 = 0;
-#ifdef RTW_AMPDU_AGG_RETRY_NEW
-	u32 ctrl, ctrl_new;
-#endif /* RTW_AMPDU_AGG_RETRY_NEW */
+#ifdef RTW_AMPDU_AGG_RETRY_AND_NEW
+	u32 ctrl;
+#endif /* RTW_AMPDU_AGG_RETRY_AND_NEW */
 
 
 	hal = GET_HAL_DATA(adapter);
@@ -216,16 +231,12 @@ void rtl8822b_init_misc(PADAPTER adapter)
 			if (iface) {
 				iface->registrypriv.wireless_mode = WIRELESS_MODE_5G;
 				iface->registrypriv.channel = 149;
-
+#ifdef CONFIG_80211N_HT
 				iface->registrypriv.stbc_cap &= ~(BIT0 | BIT4);
+#endif /* CONFIG_80211N_HT */
 			}
 		}
 	}
-
-	/* Modify to make sure first time change channel(band) would be done properly */
-	hal->current_channel = 0;
-	hal->current_channel_bw = CHANNEL_WIDTH_MAX;
-	hal->current_band_type = BAND_MAX;
 
 	/* initial security setting */
 	invalidate_cam_all(adapter);
@@ -249,39 +260,22 @@ void rtl8822b_init_misc(PADAPTER adapter)
 	rtw_hal_rcr_add(adapter, BIT_TCPOFLD_EN_8822B);
 #endif /* CONFIG_TCP_CSUM_OFFLOAD_RX*/
 
-#ifdef CONFIG_CONCURRENT_MODE
-	/* DHCWIFI-121: Temporarily solution for HW PORT 1 that has to turn on 0x551 bit 3 enable EN_BCN_FUNCTION.
-	 * 		Otherwise, HW PORT 1 can't transmit any packet by MAC layer blocking.
-	 *		TO BE MODIFIED when wifi team releases final solution.
-	 */
-	rtw_write8(adapter, 0x551, rtw_read8(adapter, 0x551) | BIT3);
-#endif
-
-#ifdef RTW_AMPDU_AGG_RETRY_NEW
-	/* Enable AMPDU aggregation mode with retry MPDUs and new MPDUs. */
-	ctrl = rtw_read32(adapter, REG_FWHW_TXQ_CTRL_8822B);
-	ctrl_new = ctrl;
-	RTW_PRINT("%s: default 0x%x = 0x%08x\n",
-		  __FUNCTION__, REG_FWHW_TXQ_CTRL_8822B, ctrl);
-	RTW_PRINT("%s: default AMPDU agg with retry and new: %s\n",
-		  __FUNCTION__, ctrl&BIT_EN_RTY_BK_8822B?"false":"true");
-	if (ctrl & BIT_EN_RTY_BK_8822B) {
-		ctrl_new &= ~BIT_EN_RTY_BK_8822B;
-		RTW_PRINT("%s: Enable AMPDU agg with retry and new!\n",
-			  __FUNCTION__);
-	}
-	/* 0x423[2] */
-#define BIT_EN_RTY_BK_COD_8822B	BIT(2)
+#ifdef RTW_AMPDU_AGG_RETRY_AND_NEW
+	v32 = rtw_read32(adapter, REG_FWHW_TXQ_CTRL_8822B);
+	ctrl = v32;
+	/* Enable AMPDU aggregation mode with retry MPDUs and new MPDUs */
+	v32 &= ~BIT_EN_RTY_BK_8822B;
 	/* Don't agg if retry packet rate fall back */
-	ctrl_new |= (BIT_EN_RTY_BK_COD_8822B << 24);
-	if (ctrl_new != ctrl) {
-		rtw_write32(adapter, REG_FWHW_TXQ_CTRL_8822B, ctrl_new);
-		ctrl = rtw_read32(adapter, REG_FWHW_TXQ_CTRL_8822B);
-		RTW_PRINT("%s: final 0x%x = 0x%08x (read back:0x%08x)\n",
-			  __FUNCTION__, REG_FWHW_TXQ_CTRL_8822B,
-			  ctrl_new, ctrl);
-	}
-#endif /* RTW_AMPDU_AGG_RETRY_NEW */
+#define BIT_EN_RTY_BK_COD_8822B	(BIT(2)	<< 24) /* 0x423[2] */
+	v32 |= BIT_EN_RTY_BK_COD_8822B;
+	if (v32 != ctrl)
+		rtw_write32(adapter, REG_FWHW_TXQ_CTRL_8822B, v32);
+
+	RTW_INFO("%s: AMPDU agg retry with new/break when rate fall back: "
+		 "%s / %s\n", __FUNCTION__,
+		 (v32 & BIT_EN_RTY_BK_8822B) ? "false" : "true",
+		 (v32 & BIT_EN_RTY_BK_COD_8822B) ? "true" : "false");
+#endif /* RTW_AMPDU_AGG_RETRY_AND_NEW */
 
 #ifdef CONFIG_LPS_PWR_TRACKING
 	rtl8822b_set_fw_thermal_rpt_cmd(adapter, _TRUE, hal->eeprom_thermal_meter + THERMAL_DIFF_TH);
@@ -354,21 +348,11 @@ void rtl8822b_init_default_value(PADAPTER adapter)
 
 	hal = GET_HAL_DATA(adapter);
 
-	if (adapter->registrypriv.wireless_mode == WIRELESS_MODE_MAX)
-	adapter->registrypriv.wireless_mode = WIRELESS_MODE_24G | WIRELESS_MODE_5G;
-
 	/* init default value */
 	hal->fw_ractrl = _FALSE;
 
-	if (!adapter_to_pwrctl(adapter)->bkeepfwalive)
-		hal->LastHMEBoxNum = 0;
-
 	/* init phydm default value */
 	hal->bIQKInitialized = _FALSE;
-	hal->odmpriv.rf_calibrate_info.tm_trigger = 0; /* for IQK */
-	hal->odmpriv.rf_calibrate_info.thermal_value_hp_index = 0;
-	for (i = 0; i < HP_THERMAL_NUM; i++)
-		hal->odmpriv.rf_calibrate_info.thermal_value_hp[i] = 0;
 
 	/* init Efuse variables */
 	hal->EfuseUsedBytes = 0;

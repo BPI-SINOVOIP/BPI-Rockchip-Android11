@@ -2664,16 +2664,13 @@ u8 array_mp_8723b_fw_mp[] = {
 };
 
 void
-odm_read_firmware_mp_8723b_fw_mp(
-	struct PHY_DM_STRUCT    *p_dm,
-	u8	*p_firmware,
-	u32	*p_firmware_size
-)
+odm_read_firmware_mp_8723b_fw_mp(struct dm_struct *dm, u8 *p_firmware,
+				 u32 *p_firmware_size)
 {
 #if (DM_ODM_SUPPORT_TYPE & (ODM_CE))
 	*((SIZE_PTR *)p_firmware) = (SIZE_PTR)array_mp_8723b_fw_mp;
 #else
-	odm_move_memory(p_dm, p_firmware, array_mp_8723b_fw_mp, array_length_mp_8723b_fw_mp);
+	odm_move_memory(dm, p_firmware, array_mp_8723b_fw_mp, array_length_mp_8723b_fw_mp);
 #endif
 	*p_firmware_size = array_length_mp_8723b_fw_mp;
 }

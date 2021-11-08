@@ -20,6 +20,143 @@
 #include "../rtl8822b.h"
 #include "rtl8822be.h"
 
+#ifdef CONFIG_FWLPS_IN_IPS
+u8 rtl8822be_fw_ips_init(_adapter *padapter)
+{
+	struct sreset_priv *psrtpriv = &GET_HAL_DATA(padapter)->srestpriv;
+	struct debug_priv *pdbgpriv = &adapter_to_dvobj(padapter)->drv_dbg;
+	struct pwrctrl_priv *pwrctl = adapter_to_pwrctl(padapter);
+
+	if (pwrctl->bips_processing == _TRUE && psrtpriv->silent_reset_inprogress == _FALSE
+		&& GET_HAL_DATA(padapter)->bFWReady == _TRUE && pwrctl->pre_ips_type == 0) {
+		systime start_time;
+		u8 cpwm_orig, cpwm_now, rpwm;
+		u8 bMacPwrCtrlOn = _TRUE;
+
+		RTW_INFO("%s: Leaving FW_IPS\n", __func__);
+#ifdef CONFIG_LPS_LCLK
+		/* for polling cpwm */
+		cpwm_orig = 0;
+		rtw_hal_get_hwreg(padapter, HW_VAR_CPWM, &cpwm_orig);
+
+		/* set rpwm */
+		rtw_hal_get_hwreg(padapter, HW_VAR_RPWM_TOG, &rpwm);
+		rpwm += 0x80;
+		rpwm |= PS_ACK;
+		rtw_hal_set_hwreg(padapter, HW_VAR_SET_RPWM, (u8 *)(&rpwm));
+
+
+		RTW_INFO("%s: write rpwm=%02x\n", __func__, rpwm);
+
+		pwrctl->tog = (rpwm + 0x80) & 0x80;
+
+		/* do polling cpwm */
+		start_time = rtw_get_current_time();
+		do {
+
+			rtw_mdelay_os(1);
+
+			rtw_hal_get_hwreg(padapter, HW_VAR_CPWM, &cpwm_now);
+			if ((cpwm_orig ^ cpwm_now) & 0x80) {
+				#ifdef DBG_CHECK_FW_PS_STATE
+				RTW_INFO("%s: polling cpwm ok when leaving IPS in FWLPS state, cpwm_orig=%02x, cpwm_now=%02x, 0x100=0x%x\n"
+					, __func__, cpwm_orig, cpwm_now, rtw_read8(padapter, REG_CR));
+				#endif /* DBG_CHECK_FW_PS_STATE */
+				break;
+			}
+
+			if (rtw_get_passing_time_ms(start_time) > 100) {
+				RTW_INFO("%s: polling cpwm timeout when leaving IPS in FWLPS state, cpwm_orig=%02x, cpwm_now=%02x, 0x100=0x%x\n",
+					__func__, cpwm_orig, cpwm_now, rtw_read8(padapter, REG_CR));
+				break;
+			}
+		} while (1);
+#endif /* CONFIG_LPS_LCLK */
+		rtl8822b_set_FwPwrModeInIPS_cmd(padapter, 0);
+
+		rtw_hal_set_hwreg(padapter, HW_VAR_APFM_ON_MAC, &bMacPwrCtrlOn);
+#ifdef CONFIG_LPS_LCLK
+		#ifdef DBG_CHECK_FW_PS_STATE
+		if (rtw_fw_ps_state(padapter) == _FAIL) {
+			RTW_INFO("after hal init, fw ps state in 32k\n");
+			pdbgpriv->dbg_ips_drvopen_fail_cnt++;
+		}
+		#endif /* DBG_CHECK_FW_PS_STATE */
+#endif /* CONFIG_LPS_LCLK */
+		return _SUCCESS;
+	}
+	return _FAIL;
+}
+
+u8 rtl8822be_fw_ips_deinit(_adapter *padapter)
+{
+	struct sreset_priv *psrtpriv =  &GET_HAL_DATA(padapter)->srestpriv;
+	struct debug_priv *pdbgpriv = &adapter_to_dvobj(padapter)->drv_dbg;
+	struct pwrctrl_priv *pwrctl = adapter_to_pwrctl(padapter);
+
+	if (pwrctl->bips_processing == _TRUE && psrtpriv->silent_reset_inprogress == _FALSE
+		&& GET_HAL_DATA(padapter)->bFWReady == _TRUE && padapter->netif_up == _TRUE) {
+		int cnt = 0;
+		u8 val8 = 0, rpwm;
+
+		RTW_INFO("%s: issue H2C to FW when entering IPS\n", __func__);
+
+		rtl8822b_set_FwPwrModeInIPS_cmd(padapter, 0x1);
+#ifdef CONFIG_LPS_LCLK
+		/* poll 0x1cc to make sure H2C command already finished by FW; MAC_0x1cc=0 means H2C done by FW. */
+		do {
+			val8 = rtw_read8(padapter, REG_HMETFR);
+			cnt++;
+			RTW_INFO("%s  polling REG_HMETFR=0x%x, cnt=%d\n", __func__, val8, cnt);
+			rtw_mdelay_os(10);
+		} while (cnt < 100 && (val8 != 0));
+
+		/* H2C done, enter 32k */
+		if (val8 == 0) {
+			/* set rpwm to enter 32k */
+			rtw_hal_get_hwreg(padapter, HW_VAR_RPWM_TOG, &rpwm);
+			rpwm += 0x80;
+			rpwm |= BIT(0);
+			rtw_hal_set_hwreg(padapter, HW_VAR_SET_RPWM, (u8 *)(&rpwm));
+			RTW_INFO("%s: write rpwm=%02x\n", __func__, rpwm);
+			pwrctl->tog = (val8 + 0x80) & 0x80;
+
+			cnt = val8 = 0;
+			do {
+				val8 = rtw_read8(padapter, REG_CR);
+				cnt++;
+				RTW_INFO("%s  polling 0x100=0x%x, cnt=%d\n", __func__, val8, cnt);
+				rtw_mdelay_os(10);
+			} while (cnt < 100 && (val8 != 0xEA));
+
+			#ifdef DBG_CHECK_FW_PS_STATE
+			if (val8 != 0xEA)
+				RTW_INFO("MAC_1C0=%08x, MAC_1C4=%08x, MAC_1C8=%08x, MAC_1CC=%08x\n"
+					, rtw_read32(padapter, 0x1c0), rtw_read32(padapter, 0x1c4)
+					, rtw_read32(padapter, 0x1c8), rtw_read32(padapter, REG_HMETFR));
+			#endif /* DBG_CHECK_FW_PS_STATE */
+		} else {
+			RTW_INFO("MAC_1C0=%08x, MAC_1C4=%08x, MAC_1C8=%08x, MAC_1CC=%08x\n"
+				, rtw_read32(padapter, 0x1c0), rtw_read32(padapter, 0x1c4)
+				, rtw_read32(padapter, 0x1c8), rtw_read32(padapter, REG_HMETFR));
+		}
+
+		RTW_INFO("polling done when entering IPS, check result : 0x100=0x%x, cnt=%d, MAC_1cc=0x%02x\n"
+			, rtw_read8(padapter, REG_CR), cnt, rtw_read8(padapter, REG_HMETFR));
+
+		pwrctl->pre_ips_type = 0;
+#endif /* CONFIG_LPS_LCLK */
+		return _SUCCESS;
+	}
+
+	pdbgpriv->dbg_carddisable_cnt++;
+	pwrctl->pre_ips_type = 1;
+
+	return _FAIL;
+
+}
+
+#endif
 u32 InitMAC_TRXBD_8822BE(PADAPTER Adapter)
 {
 	u8 tmpU1b;
@@ -260,6 +397,12 @@ u32 rtl8822be_init(PADAPTER padapter)
 
 	InitMAC_TRXBD_8822BE(padapter);
 
+#ifdef CONFIG_FWLPS_IN_IPS
+	if (_SUCCESS == rtl8822be_fw_ips_init(padapter)) {
+		printk("%s(%d) ooo fw_ips_init init success\n",__func__,__LINE__);
+		return _SUCCESS;
+	}
+#endif
 	ok = rtl8822b_hal_init(padapter);
 	if (_FALSE == ok)
 		return _FAIL;
@@ -399,3 +542,45 @@ void rtl8822be_init_default_value(PADAPTER padapter)
 	pHalData->IntrMask[3] = pHalData->IntrMaskDefault[3];
 
 }
+
+static void hal_deinit_misc(PADAPTER adapter)
+{
+#ifdef CONFIG_RTW_LED
+	struct led_priv *ledpriv = adapter_to_led(adapter);
+
+	init_hwled(adapter, 0);
+#ifdef CONFIG_RTW_SW_LED
+	if (ledpriv->bRegUseLed == _TRUE)
+		rtw_halmac_led_cfg(adapter_to_dvobj(adapter), _FALSE, 3);
+#endif
+#endif /* CONFIG_RTW_LED */
+}
+
+u32 rtl8822be_deinit(PADAPTER padapter)
+{
+	struct pwrctrl_priv *pwrctl = adapter_to_pwrctl(padapter);
+	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(padapter);
+	struct dvobj_priv *pobj_priv = adapter_to_dvobj(padapter);
+	u8 status = _TRUE;
+
+	RTW_INFO("==> %s\n", __func__);
+
+#ifdef CONFIG_FWLPS_IN_IPS
+	if (_SUCCESS == rtl8822be_fw_ips_deinit(padapter))
+		goto exit;
+#endif
+
+	hal_deinit_misc(padapter);
+	status = rtl8822b_deinit(padapter);
+	if (status == _FALSE) {
+		RTW_INFO("%s: rtl8822b_hal_deinit fail\n", __func__);
+		return _FAIL;
+	}
+
+#ifdef CONFIG_FWLPS_IN_IPS
+exit:
+#endif
+	RTW_INFO("%s <==\n", __func__);
+	return _SUCCESS;
+}
+

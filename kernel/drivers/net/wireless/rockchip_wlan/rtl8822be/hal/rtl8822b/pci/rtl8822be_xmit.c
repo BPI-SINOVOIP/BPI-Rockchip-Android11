@@ -48,13 +48,14 @@ s32 rtl8822be_init_xmit_priv(_adapter *padapter)
 	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
 	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(padapter);
 
-	//_rtw_spinlock_init(&pdvobjpriv->irq_th_lock);
+	_rtw_spinlock_init(&pdvobjpriv->irq_th_lock);
 
 #ifdef PLATFORM_LINUX
 	tasklet_init(&pxmitpriv->xmit_tasklet,
 		     (void(*)(unsigned long))rtl8822be_xmit_tasklet,
 		     (unsigned long)padapter);
 #endif
+	rtl8822b_init_xmit_priv(padapter);
 
 	return ret;
 }
@@ -63,7 +64,6 @@ void rtl8822be_free_xmit_priv(_adapter *padapter)
 {
 	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(padapter);
 
-	printk("%s(%d)free irq_th_lock\n",__func__,__LINE__);
 	_rtw_spinlock_free(&pdvobjpriv->irq_th_lock);
 }
 
@@ -242,7 +242,7 @@ void fill_txbd_own(_adapter *padapter, u8 *txbd, u16 queue_idx,
         host_wp = (ptxring->idx + ptxring->qlen) % ptxring->entries;
         rtw_write16(padapter, get_txbd_rw_reg(queue_idx), host_wp);
 }
-
+/*
 static u16 ffaddr2dma(u32 addr)
 {
 	u16	dma_ctrl;
@@ -276,7 +276,7 @@ static u16 ffaddr2dma(u32 addr)
 
 	return dma_ctrl;
 }
-
+*/
 /*
  * Fill tx buffer desciptor. Map each buffer address in tx buffer descriptor
  * segment. Designed for tx buffer descriptor architecture
@@ -369,6 +369,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 	sint bmcst = IS_MCAST(pattrib->ra);
 	u16 SWDefineContent = 0x0;
 	u8 DriverFixedRate = 0x0;
+	u8 hw_port = rtw_hal_get_port(padapter);
 
 	ptxdesc = pxmitframe->buf_addr;
 	_rtw_memset(ptxdesc, 0, TXDESC_SIZE);
@@ -408,10 +409,10 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 
 	if (!pattrib->qos_en) {
 		/* Hw set sequence number */
-		SET_TX_DESC_EN_HWSEQ_8822B(ptxdesc, 1);
-		SET_TX_DESC_EN_HWEXSEQ_8822B(ptxdesc, 0);
 		SET_TX_DESC_DISQSELSEQ_8822B(ptxdesc, 1);
-		SET_TX_DESC_HW_SSN_SEL_8822B(ptxdesc, 0);
+		SET_TX_DESC_EN_HWSEQ_8822B(ptxdesc, 1);
+		SET_TX_DESC_HW_SSN_SEL_8822B(ptxdesc, pattrib->hw_ssn_sel);
+		SET_TX_DESC_EN_HWEXSEQ_8822B(ptxdesc, 0);
 	} else
 		SET_TX_DESC_SW_SEQ_8822B(ptxdesc, pattrib->seqnum);
 
@@ -422,6 +423,9 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 #ifdef CONFIG_CONCURRENT_MODE
 		if (bmcst)
 			rtl8822b_fill_txdesc_force_bmc_camid(pattrib, ptxdesc);
+#endif
+#ifdef CONFIG_SUPPORT_DYNAMIC_TXPWR
+		rtw_phydm_set_dyntxpwr(padapter, ptxdesc, pattrib->mac_id);
 #endif
 
 		if ((pattrib->ether_type != 0x888e) &&
@@ -518,8 +522,18 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 			 * is legacy OFDM. */
 			if (pmlmeinfo->preamble_mode == PREAMBLE_SHORT)
 				SET_TX_DESC_DATA_SHORT_8822B(ptxdesc, 1);
-
-			SET_TX_DESC_DATARATE_8822B(ptxdesc,
+#ifdef CONFIG_IP_R_MONITOR
+			if((pattrib->ether_type == ETH_P_ARP) &&
+				(IsSupportedTxOFDM(padapter->registrypriv.wireless_mode))) {
+				SET_TX_DESC_DATARATE_8822B(ptxdesc,
+					   MRateToHwRate(IEEE80211_OFDM_RATE_6MB));
+				#ifdef DBG_IP_R_MONITOR
+				RTW_INFO(FUNC_ADPT_FMT ": SP Packet(0x%04X) rate=0x%x SeqNum = %d\n",
+					FUNC_ADPT_ARG(padapter), pattrib->ether_type, MRateToHwRate(pmlmeext->tx_rate), pattrib->seqnum);
+				#endif/*DBG_IP_R_MONITOR*/
+			 } else
+#endif/*CONFIG_IP_R_MONITOR*/
+				SET_TX_DESC_DATARATE_8822B(ptxdesc,
 					   MRateToHwRate(pmlmeext->tx_rate));
 		}
 
@@ -535,6 +549,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 #endif /* CONFIG_XMIT_ACK */
 #endif
 	} else if ((pxmitframe->frame_tag & 0x0f) == MGNT_FRAMETAG) {
+		SET_TX_DESC_MBSSID_8822B(ptxdesc, pattrib->mbssid & 0xF);
 		SET_TX_DESC_USE_RATE_8822B(ptxdesc, 1);
 		DriverFixedRate = 0x01;
 
@@ -575,8 +590,8 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 	}
 
 #ifdef CONFIG_ANTENNA_DIVERSITY
-	odm_set_tx_ant_by_tx_info(&pHalData->odmpriv, ptxdesc,
-			     pxmitframe->attrib.mac_id);
+	if (!bmcst && pattrib->psta)
+		odm_set_tx_ant_by_tx_info(adapter_to_phydm(padapter), ptxdesc, pattrib->psta->cmn.mac_id);
 #endif
 
 	rtl8822b_fill_txdesc_bf(pxmitframe, ptxdesc);
@@ -588,8 +603,8 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 
 	SET_TX_DESC_SW_DEFINE_8822B(ptxdesc, SWDefineContent);
 
-	SET_TX_DESC_PORT_ID_8822B(ptxdesc, get_hw_port(padapter));
-	SET_TX_DESC_MULTIPLE_PORT_8822B(ptxdesc, get_hw_port(padapter));
+	SET_TX_DESC_PORT_ID_8822B(ptxdesc, hw_port);
+	SET_TX_DESC_MULTIPLE_PORT_8822B(ptxdesc, hw_port);
 
 	rtl8822b_cal_txdesc_chksum(padapter, ptxdesc);
 	rtl8822b_dbg_dump_tx_desc(padapter, pxmitframe->frame_tag, ptxdesc);
@@ -612,13 +627,13 @@ s32 rtl8822be_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 	struct rtw_tx_ring *ptx_ring;
 
 
-
+#ifdef CONFIG_80211N_HT
 	if ((pxmitframe->frame_tag == DATA_FRAMETAG) &&
 	    (pxmitframe->attrib.ether_type != 0x0806) &&
 	    (pxmitframe->attrib.ether_type != 0x888e) &&
 	    (pxmitframe->attrib.dhcp_pkt != 1))
 		rtw_issue_addbareq_cmd(padapter, pxmitframe);
-
+#endif /* CONFIG_80211N_HT */
 	for (t = 0; t < pattrib->nr_frags; t++) {
 
 		if (inner_ret != _SUCCESS && ret == _SUCCESS)
@@ -792,17 +807,15 @@ s32 rtl8822be_xmit_buf_handler(_adapter *padapter)
 	ret = _rtw_down_sema(&pxmitpriv->xmit_sema);
 
 	if (ret == _FAIL) {
-		RT_TRACE(_module_hal_xmit_c_, _drv_emerg_,
-				("%s: down XmitBufSema fail!\n", __FUNCTION__));
+		RTW_ERR("%s: down XmitBufSema fail!\n", __FUNCTION__);
 		return _FAIL;
 	}
 
 	if (RTW_CANNOT_RUN(padapter)) {
-		RT_TRACE(_module_hal_xmit_c_, _drv_notice_
-				, ("%s: bDriverStopped(%s) bSurpriseRemoved(%s)!\n"
-				, __func__
-				, rtw_is_drv_stopped(padapter)?"True":"False"
-				, rtw_is_surprise_removed(padapter)?"True":"False"));
+		RTW_INFO("%s: bDriverStopped(%s) bSurpriseRemoved(%s)!\n"
+			, __func__
+			, rtw_is_drv_stopped(padapter)?"True":"False"
+			, rtw_is_surprise_removed(padapter)?"True":"False");
 		return _FAIL;
 	}
 
@@ -812,8 +825,7 @@ s32 rtl8822be_xmit_buf_handler(_adapter *padapter)
 #ifdef CONFIG_LPS_LCLK
 	ret = rtw_register_tx_alive(padapter);
 	if (ret != _SUCCESS) {
-		RT_TRACE(_module_hal_xmit_c_, _drv_notice_,
-				 ("%s: wait to leave LPS_LCLK\n", __FUNCTION__));
+		RTW_INFO("%s: wait to leave LPS_LCLK\n", __FUNCTION__);
 		return _SUCCESS;
 	}
 #endif
@@ -1212,7 +1224,8 @@ s32 rtl8822be_mgnt_xmit(_adapter *padapter, struct xmit_frame *pmgntframe)
 	struct pkt_attrib	*pattrib = &pmgntframe->attrib;
 	s32 ret = _SUCCESS;
 
-	if ((GET_HAL_DATA(padapter)->bFWReady == _FALSE) && (pattrib->qsel == QSLT_BEACON)) /* For FW download rsvd page */
+	/* For FW download rsvd page and H2C pkt */
+	if ((pattrib->qsel == QSLT_CMD) || (pattrib->qsel == QSLT_BEACON))
 		ret = rtl8822be_dump_xframe(padapter, pmgntframe);
 	else
 		enqueue_pending_xmitbuf(pxmitpriv, pmgntframe->pxmitbuf);

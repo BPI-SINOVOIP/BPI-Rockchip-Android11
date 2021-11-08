@@ -32,15 +32,11 @@
 #define RTL8822BE_SEG_NUM       1 /* 0:2 seg, 1: 4 seg, 2: 8 seg */
 
 #ifndef MAX_RECVBUF_SZ
-	#ifdef PLATFORM_OS_CE
-		#define MAX_RECVBUF_SZ (8192+1024)
-	#else /* !PLATFORM_OS_CE */
-		#ifndef CONFIG_MINIMAL_MEMORY_USAGE
-			#define MAX_RECVBUF_SZ (32768)
-		#else
-			#define MAX_RECVBUF_SZ (4000)
-		#endif
-	#endif /* PLATFORM_OS_CE */
+	#ifndef CONFIG_MINIMAL_MEMORY_USAGE
+		#define MAX_RECVBUF_SZ (32768)
+	#else
+		#define MAX_RECVBUF_SZ (4000)
+	#endif
 #endif /* !MAX_RECVBUF_SZ */
 
 #define TX_BUFFER_SEG_NUM	1 /* 0:2 seg, 1: 4 seg, 2: 8 seg. */
@@ -69,6 +65,7 @@
 
 /* rtl8822be_halinit.c */
 u32 rtl8822be_init(PADAPTER);
+u32 rtl8822be_deinit(PADAPTER padapter);
 void rtl8822be_init_default_value(PADAPTER);
 
 /* rtl8822be_halmac.c */

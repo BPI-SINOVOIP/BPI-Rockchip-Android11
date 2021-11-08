@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Copyright(c) 2016 - 2017 Realtek Corporation. All rights reserved.
+ * Copyright(c) 2016 - 2019 Realtek Corporation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
@@ -22,295 +22,145 @@
 
 #if HALMAC_88XX_SUPPORT
 
-HALMAC_RET_STATUS
-halmac_ofld_func_cfg_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_OFLD_FUNC_INFO pOfld_func_info
-);
+enum halmac_ret_status
+ofld_func_cfg_88xx(struct halmac_adapter *adapter,
+		   struct halmac_ofld_func_info *info);
 
-HALMAC_RET_STATUS
-halmac_dl_drv_rsvd_page_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 pg_offset,
-	IN u8 *pHalmac_buf,
-	IN u32 halmac_size
-);
+enum halmac_ret_status
+dl_drv_rsvd_page_88xx(struct halmac_adapter *adapter, u8 pg_offset, u8 *buf,
+		      u32 size);
 
-HALMAC_RET_STATUS
-halmac_download_rsvd_page_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u16 pg_addr,
-	IN u8 *pHal_buf,
-	IN u32 size
-);
+enum halmac_ret_status
+dl_rsvd_page_88xx(struct halmac_adapter *adapter, u16 pg_addr, u8 *buf,
+		  u32 size);
 
-HALMAC_RET_STATUS
-halmac_get_hw_value_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_HW_ID hw_id,
-	OUT VOID *pvalue
-);
+enum halmac_ret_status
+get_hw_value_88xx(struct halmac_adapter *adapter, enum halmac_hw_id hw_id,
+		  void *value);
 
-HALMAC_RET_STATUS
-halmac_set_hw_value_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_HW_ID hw_id,
-	IN VOID *pvalue
-);
+enum halmac_ret_status
+set_hw_value_88xx(struct halmac_adapter *adapter, enum halmac_hw_id hw_id,
+		  void *value);
 
-HALMAC_RET_STATUS
-halmac_set_fw_offload_h2c_header_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u8 *pHal_h2c_hdr,
-	IN PHALMAC_H2C_HEADER_INFO pH2c_header_info,
-	OUT u16 *pSeq_num
-);
+enum halmac_ret_status
+get_watcher_88xx(struct halmac_adapter *adapter, enum halmac_watcher_sel sel,
+		 void *value);
 
-HALMAC_RET_STATUS
-halmac_send_h2c_pkt_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pHal_buff,
-	IN u32 size,
-	IN u8 ack
-);
+enum halmac_ret_status
+set_h2c_pkt_hdr_88xx(struct halmac_adapter *adapter, u8 *hdr,
+		     struct halmac_h2c_header_info *info, u16 *seq_num);
 
-HALMAC_RET_STATUS
-halmac_get_h2c_buff_free_space_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+send_h2c_pkt_88xx(struct halmac_adapter *adapter, u8 *pkt);
 
-HALMAC_RET_STATUS
-halmac_get_c2h_info_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *halmac_buf,
-	IN u32 halmac_size
-);
+enum halmac_ret_status
+get_h2c_buf_free_space_88xx(struct halmac_adapter *adapter);
 
-HALMAC_RET_STATUS
-halmac_debug_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+get_c2h_info_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size);
 
-HALMAC_RET_STATUS
-halmac_cfg_parameter_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_PHY_PARAMETER_INFO para_info,
-	IN u8 full_fifo
-);
+enum halmac_ret_status
+mac_debug_88xx(struct halmac_adapter *adapter);
 
-HALMAC_RET_STATUS
-halmac_update_packet_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_PACKET_ID pkt_id,
-	IN u8 *pkt,
-	IN u32 pkt_size
-);
+enum halmac_ret_status
+cfg_parameter_88xx(struct halmac_adapter *adapter,
+		   struct halmac_phy_parameter_info *info, u8 full_fifo);
 
-HALMAC_RET_STATUS
-halmac_bcn_ie_filter_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_BCN_IE_INFO pBcn_ie_info
-);
+enum halmac_ret_status
+update_packet_88xx(struct halmac_adapter *adapter, enum halmac_packet_id pkt_id,
+		   u8 *pkt, u32 size);
 
-HALMAC_RET_STATUS
-halmac_update_datapack_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_DATA_TYPE halmac_data_type,
-	IN PHALMAC_PHY_PARAMETER_INFO para_info
-);
+enum halmac_ret_status
+send_scan_packet_88xx(struct halmac_adapter *adapter, u8 index,
+		      u8 *pkt, u32 size);
 
-HALMAC_RET_STATUS
-halmac_run_datapack_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_DATA_TYPE halmac_data_type
-);
+enum halmac_ret_status
+drop_scan_packet_88xx(struct halmac_adapter *adapter,
+		      struct halmac_drop_pkt_option *option);
 
-HALMAC_RET_STATUS
-halmac_send_bt_coex_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pBt_buf,
-	IN u32 bt_size,
-	IN u8 ack
-);
+enum halmac_ret_status
+bcn_ie_filter_88xx(struct halmac_adapter *adapter,
+		   struct halmac_bcn_ie_info *info);
 
-HALMAC_RET_STATUS
-halmac_send_original_h2c_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *original_h2c,
-	IN u16 *seq,
-	IN u8 ack
-);
+enum halmac_ret_status
+update_datapack_88xx(struct halmac_adapter *adapter,
+		     enum halmac_data_type data_type,
+		     struct halmac_phy_parameter_info *info);
 
-HALMAC_RET_STATUS
-halmac_fill_txdesc_check_sum_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *cur_desc
-);
+enum halmac_ret_status
+run_datapack_88xx(struct halmac_adapter *adapter,
+		  enum halmac_data_type data_type);
 
-HALMAC_RET_STATUS
-halmac_dump_fifo_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HAL_FIFO_SEL halmac_fifo_sel,
-	IN u32 halmac_start_addr,
-	IN u32 halmac_fifo_dump_size,
-	OUT u8 *pFifo_map
-);
+enum halmac_ret_status
+send_bt_coex_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size, u8 ack);
+
+enum halmac_ret_status
+dump_fifo_88xx(struct halmac_adapter *adapter, enum hal_fifo_sel sel,
+	       u32 start_addr, u32 size, u8 *data);
 
 u32
-halmac_get_fifo_size_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HAL_FIFO_SEL halmac_fifo_sel
-);
+get_fifo_size_88xx(struct halmac_adapter *adapter, enum hal_fifo_sel sel);
 
-HALMAC_RET_STATUS
-halmac_set_h2c_header_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	OUT u8 *pHal_h2c_hdr,
-	IN u16 *seq,
-	IN u8 ack
-);
+enum halmac_ret_status
+set_h2c_header_88xx(struct halmac_adapter *adapter, u8 *hdr, u16 *seq, u8 ack);
 
-HALMAC_RET_STATUS
-halmac_add_ch_info_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_CH_INFO pCh_info
-);
+enum halmac_ret_status
+add_ch_info_88xx(struct halmac_adapter *adapter, struct halmac_ch_info *info);
 
-HALMAC_RET_STATUS
-halmac_add_extra_ch_info_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_CH_EXTRA_INFO pCh_extra_info
-);
+enum halmac_ret_status
+add_extra_ch_info_88xx(struct halmac_adapter *adapter,
+		       struct halmac_ch_extra_info *info);
 
-HALMAC_RET_STATUS
-halmac_ctrl_ch_switch_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_CH_SWITCH_OPTION pCs_option
-);
+enum halmac_ret_status
+ctrl_ch_switch_88xx(struct halmac_adapter *adapter,
+		    struct halmac_ch_switch_option *opt);
 
-HALMAC_RET_STATUS
-halmac_clear_ch_info_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+clear_ch_info_88xx(struct halmac_adapter *adapter);
 
-HALMAC_RET_STATUS
-halmac_send_general_info_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_GENERAL_INFO pGeneral_info
-);
+enum halmac_ret_status
+chk_txdesc_88xx(struct halmac_adapter *adapter, u8 *buf, u32 size);
 
-HALMAC_RET_STATUS
-halmac_chk_txdesc_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 *pHalmac_buf,
-	IN u32 halmac_size
-);
+enum halmac_ret_status
+get_version_88xx(struct halmac_adapter *adapter, struct halmac_ver *ver);
 
-HALMAC_RET_STATUS
-halmac_get_version_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_VER pVersion
-);
+enum halmac_ret_status
+p2pps_88xx(struct halmac_adapter *adapter, struct halmac_p2pps *info);
 
-HALMAC_RET_STATUS
-halmac_p2pps_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_P2PPS    pP2PPS
-);
+enum halmac_ret_status
+query_status_88xx(struct halmac_adapter *adapter,
+		  enum halmac_feature_id feature_id,
+		  enum halmac_cmd_process_status *proc_status, u8 *data,
+		  u32 *size);
 
-HALMAC_RET_STATUS
-halmac_query_status_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_FEATURE_ID feature_id,
-	OUT HALMAC_CMD_PROCESS_STATUS *pProcess_status,
-	INOUT u8 *data,
-	INOUT u32 *size
-);
+enum halmac_ret_status
+cfg_drv_rsvd_pg_num_88xx(struct halmac_adapter *adapter,
+			 enum halmac_drv_rsvd_pg_num pg_num);
 
-HALMAC_RET_STATUS
-halmac_cfg_drv_rsvd_pg_num_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN HALMAC_DRV_RSVD_PG_NUM pg_num
-);
+enum halmac_ret_status
+h2c_lb_88xx(struct halmac_adapter *adapter);
 
-HALMAC_RET_STATUS
-halmac_h2c_lb_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter
-);
+enum halmac_ret_status
+pwr_seq_parser_88xx(struct halmac_adapter *adapter,
+		    struct halmac_wlan_pwr_cfg **cmd_seq);
 
-HALMAC_RET_STATUS
-halmac_pwr_seq_parser_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u8 cut,
-	IN u8 fab,
-	IN u8 intf,
-	IN PHALMAC_WLAN_PWR_CFG *ppPwr_seq_cfg
+enum halmac_ret_status
+parse_intf_phy_88xx(struct halmac_adapter *adapter,
+		    struct halmac_intf_phy_para *param,
+		    enum halmac_intf_phy_platform pltfm,
+		    enum hal_intf_phy intf_phy);
 
-);
-
-HALMAC_RET_STATUS
-halmac_parse_intf_phy_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN PHALMAC_INTF_PHY_PARA pIntf_phy_para,
-	IN HALMAC_INTF_PHY_PLATFORM platform,
-	IN HAL_INTF_PHY intf_phy
-);
-
-HALMAC_RET_STATUS
-halmac_txfifo_is_empty_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 chk_num
-);
+enum halmac_ret_status
+txfifo_is_empty_88xx(struct halmac_adapter *adapter, u32 chk_num);
 
 u8*
-halmac_adaptive_malloc_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u32 size,
-	OUT u32 *pNew_size
-);
+smart_malloc_88xx(struct halmac_adapter *adapter, u32 size, u32 *new_size);
 
-HALMAC_RET_STATUS
-halmac_ltecoex_reg_read_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u16 offset,
-	OUT u32 *pValue
-);
+enum halmac_ret_status
+ltecoex_reg_read_88xx(struct halmac_adapter *adapter, u16 offset, u32 *value);
 
-HALMAC_RET_STATUS
-halmac_ltecoex_reg_write_88xx(
-	IN PHALMAC_ADAPTER pHalmac_adapter,
-	IN u16 offset,
-	IN u32 value
-);
-
-HALMAC_RET_STATUS
-halmac_download_flash_88xx(
-	IN PHALMAC_ADAPTER	pHalmac_adapter,
-	IN u8 *pHalmac_fw,
-	IN u32 halmac_fw_size,
-	IN u32 rom_address
-);
-
-HALMAC_RET_STATUS
-halmac_read_flash_88xx(
-	IN PHALMAC_ADAPTER	pHalmac_adapter,
-	u32 addr
-);
-
-HALMAC_RET_STATUS
-halmac_erase_flash_88xx(
-	IN PHALMAC_ADAPTER	pHalmac_adapter,
-	u8 erase_cmd,
-	u32 addr
-);
-
-HALMAC_RET_STATUS
-halmac_check_flash_88xx(
-	IN PHALMAC_ADAPTER	pHalmac_adapter,
-	IN u8 *pHalmac_fw,
-	IN u32 halmac_fw_size,
-	IN u32 addr
-);
+enum halmac_ret_status
+ltecoex_reg_write_88xx(struct halmac_adapter *adapter, u16 offset, u32 value);
 
 #endif/* HALMAC_88XX_SUPPORT */
 

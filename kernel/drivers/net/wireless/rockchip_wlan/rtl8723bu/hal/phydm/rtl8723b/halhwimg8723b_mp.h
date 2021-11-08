@@ -28,11 +28,8 @@ extern u8 rtl8723b_fw_bt_img_array[rtl8723b_fw_bt_img_array_length];
 extern const u32 rtl8723b_phyreg_array_mp[rtl8723b_phyreg_array_mp_length];
 
 void
-odm_read_firmware_mp_8723b_fw_mp(
-	struct PHY_DM_STRUCT    *p_dm,
-	u8	*p_firmware,
-	u32	*p_firmware_size
-);
+odm_read_firmware_mp_8723b_fw_mp(struct dm_struct *dm, u8 *p_firmware,
+				 u32 *p_firmware_size);
 
 
 #endif /* CONFIG_MP_INCLUDED */
