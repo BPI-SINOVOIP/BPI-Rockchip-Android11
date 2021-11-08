@@ -72,6 +72,7 @@ static wifi_device supported_wifi_devices[] = {
 	{"AP6335",	"02d0:4335"},
 	{"AP6255",      "02d0:a9bf"},
 	{"RTL8822BE",	"10ec:b822"},
+	{"RTL8822CE",   "10ec:c822"},
 	{"MVL88W8977",	"02df:9145"},
 	{"SPRDWL",	"0000:0000"},
 };
