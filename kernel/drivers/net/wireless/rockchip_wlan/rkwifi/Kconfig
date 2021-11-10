@@ -29,6 +29,20 @@ config AP6XXX_WIFI6
 	  If you choose to build a module, it'll be called dhd. Say M if
 	  unsure.
 
+
+config AP6275S
+	tristate "support wifi6 ap6275s(80211ax)"
+	#depends on MMC && WLAN_80211
+	select CFG80211
+	select MAC80211
+	---help---
+	  This driver supports wifi6 for ap6275s chipset.
+
+	  This driver uses the kernel's wireless extensions subsystem.
+
+	  If you choose to build a module, it'll be called dhd. Say M if
+	  unsure.
+
 config AP6XXX_INDEP_POWER
 	tristate "support WiFi keepalive during host shutdown"
 	select CFG80211

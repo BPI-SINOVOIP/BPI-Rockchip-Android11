@@ -334,6 +334,9 @@
 		compatible = "wlan-platdata";
 		rockchip,grf = <&grf>;
 		wifi_chip_type = "ap6398s";
+		pinctrl-names = "default";
+		pinctrl-0 = <&wifi_host_wake_irq>;
+		WIFI,host_wake_irq = <&gpio3 RK_PD4 GPIO_ACTIVE_HIGH>;
 		status = "disabled";
 	};
 
@@ -1501,6 +1504,18 @@
 		};
 	};
 
+	wireless-wlan {
+                wifi_host_wake_irq: wifi-host-wake-irq {
+                        rockchip,pins = <3 RK_PD4 RK_FUNC_GPIO &pcfg_pull_down>;
+                };
+        };
+
+        wireless-bluetooth {
+                uart8_gpios: uart8-gpios {
+                        rockchip,pins = <2 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
+                };
+        };
+
 	usb {
 		vcc5v0_host_en: vcc5v0-host-en {
 			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
@@ -1508,12 +1523,6 @@
 
 		vcc5v0_otg_en: vcc5v0-otg-en {
 			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-	};
-
-	wireless-bluetooth {
-		uart8_gpios: uart8-gpios {
-			rockchip,pins = <2 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };
