@@ -1,1 +1,0 @@
-promgramming_image_tool is a tool for making a burning image. it can support emmc spi nor spi nand and so on. 
