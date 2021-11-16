@@ -216,6 +216,14 @@
 
 /odm/media(/.*)?    u:object_r:oemfs:s0
 
+#for 4G/5G Gongle
+/dev/ttyUSB[0-9]   u:object_r:radio_device:s0
+/dev/ttyACM[0-9]   u:object_r:radio_device:s0
+/dev/cdc-wdm[0-9]  u:object_r:radio_device:s0
+/dev/qcqmi[0-9]        u:object_r:radio_device:s0
+/vendor/bin/hw/rild    u:object_r:rild_exec:s0
+/dev/socket/rildOemHook    u:object_r:rild_socket:s0
+
 /(odm|vendor/odm)/bundled_(.*)(/.*)?     u:object_r:vendor_app_file:s0
 
 #flash_img

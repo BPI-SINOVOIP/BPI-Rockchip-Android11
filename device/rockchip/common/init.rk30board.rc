@@ -250,10 +250,10 @@ on property:persist.internet_adb_enable=0
     setprop service.adb.tcp.port 0
     restart adbd
 
-# for telephony function
-on property:ro.boot.noril=true
-    setprop ro.radio.noril true
-    stop ril-daemon
+## for telephony function
+#on property:ro.boot.noril=true
+#    setprop ro.radio.noril true
+#    stop ril-daemon
 
 # set ro.serialno
 on property:vendor.serialno=*

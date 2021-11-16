@@ -26,7 +26,24 @@ $(call inherit-product, device/rockchip/rk356x/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/../overlay
+#For RK3568 EC20
+ifeq ($(strip $(BOARD_QUECTEL_RIL)),true)
+PRODUCT_PACKAGES += rild
+
+PRODUCT_COPY_FILES += \
+	vendor/bananapi/phone/libquectel-ril/arm64-v8a/libreference-ril.so:vendor/lib64/libquectel-ril.so \
+	vendor/bananapi/phone/libquectel-ril/arm64-v8a/chat:system/bin/chat \
+	vendor/bananapi/phone/libquectel-ril/arm64-v8a/ip-up:system/bin/ip-up \
+	vendor/bananapi/phone/libquectel-ril/arm64-v8a/ip-down:system/bin/ip-down \
+	vendor/bananapi/phone/apns-conf.xml:system/etc/apns-conf.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.telephony.default_network=9 \
+	rild.libpath=/vendor/lib64/libquectel-ril.so \
+	rild.libargs=-d /dev/ttyUSB0
+endif
+
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay $(LOCAL_PATH)/../overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 

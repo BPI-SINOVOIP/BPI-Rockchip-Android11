@@ -41,6 +41,14 @@
 /dev/h265e                0666   system     system
 /dev/avsd                 0666   system     system
 
+#for 4G/5G Gongle
+#quectel port
+/dev/ttyUSB*              0660   radio      radio
+/dev/ttyACM*              0660   radio      radio
+/dev/cdc-wdm*             0660   radio      radio
+/dev/qcqmi*               0660   radio      radio
+/dev/cdc-acm*             0660   radio      radio
+
 # for Sensor HAL
 /dev/akm8973              0660   system     system
 /dev/accelerometer        0660   system     system

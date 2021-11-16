@@ -19,7 +19,8 @@ common_shared_libraries := \
 
 common_cflags := -Werror -Wall -Wno-missing-field-initializers -Wno-unused-variable -Wno-unused-parameter
 
-common_local_tidy_flags := -warnings-as-errors=clang-analyzer-security*,cert-*
+#bpi, comment for 4G/5G compile
+#common_local_tidy_flags := -warnings-as-errors=clang-analyzer-security*,cert-*
 common_local_tidy_checks := -*,clang-analyzer-security*,cert-*,-cert-err34-c,-cert-err58-cpp
 common_local_tidy_checks += ,-cert-env33-c
 
