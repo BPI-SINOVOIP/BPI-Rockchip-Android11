@@ -31,16 +31,18 @@ ifeq ($(strip $(BOARD_QUECTEL_RIL)),true)
 PRODUCT_PACKAGES += rild
 
 PRODUCT_COPY_FILES += \
-	vendor/bananapi/phone/libquectel-ril/arm64-v8a/libreference-ril.so:vendor/lib64/libquectel-ril.so \
-	vendor/bananapi/phone/libquectel-ril/arm64-v8a/chat:system/bin/chat \
-	vendor/bananapi/phone/libquectel-ril/arm64-v8a/ip-up:system/bin/ip-up \
-	vendor/bananapi/phone/libquectel-ril/arm64-v8a/ip-down:system/bin/ip-down \
-	vendor/bananapi/phone/apns-conf.xml:system/etc/apns-conf.xml
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/libreference-ril.so:vendor/lib64/libquectel-ril.so \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/chat:system/bin/chat \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/ip-up:system/bin/ip-up \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/ip-down:system/bin/ip-down \
+	vendor/bananapi/modem/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.default_network=9 \
 	rild.libpath=/vendor/lib64/libquectel-ril.so \
 	rild.libargs=-d /dev/ttyUSB0
+
+DEVICE_MANIFEST_FILE += vendor/bananapi/modem/manifest.xml
 endif
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay $(LOCAL_PATH)/../overlay
