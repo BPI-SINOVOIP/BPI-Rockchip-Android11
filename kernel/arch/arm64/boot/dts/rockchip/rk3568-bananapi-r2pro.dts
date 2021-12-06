@@ -24,6 +24,14 @@
 		io-channels = <&saradc 2>;
 	};
 
+	/* rtl8367rb */
+	rtkgsw: rtkgsw@0 {
+		compatible = "rockchip,rtk-gsw";
+		rockchip,mdio = <&mdio1>;
+		rockchip,reset-pin = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
+
 	vcc2v5_sys: vcc2v5-ddr {
 		compatible = "regulator-fixed";
 		regulator-name = "vcc2v5-sys";
@@ -259,7 +267,7 @@
 	phy-mode = "rgmii";
 	clock_in_out = "output";
 
-	snps,reset-gpio = <&gpio3 RK_PB0 GPIO_ACTIVE_LOW>;
+	snps,reset-gpio;
 	snps,reset-active-low;
 	/* Reset time is 20ms, 100ms for rtl8211f */
 	snps,reset-delays-us = <0 20000 100000>;
@@ -278,8 +286,15 @@
 	tx_delay = <0x4f>;
 	rx_delay = <0x26>;
 
-	phy-handle = <&rgmii_phy1>;
+	/* comment for rtl8367rb
+	phy-handle = <&rgmii_phy1>;*/
 	status = "okay";
+
+	fixed-link {
+		speed = <1000>;
+		full-duplex;
+		pause;
+	};
 };
 
 /*
@@ -340,12 +355,13 @@
 	};
 };
 
+/* comment for rtl8367rb
 &mdio1 {
 	rgmii_phy1: phy@0 {
 		compatible = "ethernet-phy-ieee802.3-c22";
 		reg = <0x0>;
 	};
-};
+};*/
 
 &video_phy0 {
 	status = "okay";
@@ -497,4 +513,9 @@
 
 &fan {
 	status = "okay";
+};
+
+/* rtl8367rb io 3v3 */
+&pmu_io_domains {
+        vccio6-supply = <&vcc_3v3>;
 };

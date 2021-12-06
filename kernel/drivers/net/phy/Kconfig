@@ -210,6 +210,12 @@ config LED_TRIGGER_PHY
 		for any speed known to the PHY.
 
 
+config RTL8367RB_GSW
+	tristate "rtl8367rb-vb Gigabit Switch support for rk3568"
+	depends on NET_VENDOR_STMICRO
+	help
+	  This driver supports rtl8367rb in rk3568
+
 comment "MII PHY device drivers"
 
 config SFP
