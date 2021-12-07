@@ -256,7 +256,8 @@ public class EthernetSettings extends SettingsPreferenceFragment
         }
         String[] ifaces = mEthManager.getAvailableInterfaces();
         if (ifaces.length > 0) {
-            mIfaceName = ifaces[0];//"eth0";
+            /*bpi, get primary ifaces ethernet info*/
+            mIfaceName = SystemProperties.get("ro.net.eth_primary", ifaces[0]);//"eth0";
         }
         if (null == mIfaceName) {
             Log.e(TAG, "get ethernet ifaceName failed");
