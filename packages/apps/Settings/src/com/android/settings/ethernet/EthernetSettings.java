@@ -99,6 +99,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 import com.android.settings.ethernet.ethernet_static_ip_dialog;
 
+import com.android.settings.Utils;
+
 public class EthernetSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener {
     private static final String TAG = "EthernetSettings";
@@ -125,6 +127,7 @@ public class EthernetSettings extends SettingsPreferenceFragment
     private static String mEthdns1 = null;
     private static String mEthdns2 = null;
     private final static String nullIpInfo = "0.0.0.0";
+	private final static String nullMacInfo = "00:00:00:00:00";
 
     private ListPreference mkeyEthMode;
     //    private SwitchPreference mEthCheckBox;
@@ -337,7 +340,7 @@ public class EthernetSettings extends SettingsPreferenceFragment
 
     private void refreshUI() {
 
-        //    setStringSummary(KEY_ETH_HW_ADDRESS,mEthHwAddress);
+        setStringSummary(KEY_ETH_HW_ADDRESS,mEthHwAddress);
 
         setStringSummary(KEY_ETH_IP_ADDRESS, mEthIpAddress);
         setStringSummary(KEY_ETH_NET_MASK, mEthNetmask);
@@ -546,6 +549,18 @@ public class EthernetSettings extends SettingsPreferenceFragment
         }
     }
 
+    /*bpi, get ethernet mac address*/
+    public void getEthMacAddress(){
+        String tempMacInfo;
+
+        tempMacInfo = Utils.getMacAddress(mIfaceName);
+        if ((tempMacInfo != null) && (!tempMacInfo.equals(""))) {
+		    mEthHwAddress = tempMacInfo;
+		} else {
+            mEthHwAddress = nullMacInfo;
+        }
+    }
+
     /*
      * TODO:
      */
@@ -568,6 +583,8 @@ public class EthernetSettings extends SettingsPreferenceFragment
              */
             getEthInfoFromStaticIp();
         }
+
+        getEthMacAddress();
     }
 
     /*
