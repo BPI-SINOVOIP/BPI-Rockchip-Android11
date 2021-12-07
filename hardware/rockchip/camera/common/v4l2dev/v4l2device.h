@@ -321,6 +321,7 @@ public:
     virtual status_t open();
     virtual status_t close();
 
+    status_t queryDvTimings(struct v4l2_dv_timings &timings);
     status_t queryFormats(int pad, std::vector<uint32_t> &formats);
     status_t setFormat(int pad, int width, int height, int formatCode, int field, int quantization);
     status_t setSelection(int pad, int target, int top, int left, int width, int height);

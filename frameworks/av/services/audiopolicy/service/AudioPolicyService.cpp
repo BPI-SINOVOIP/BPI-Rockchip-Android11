@@ -489,8 +489,11 @@ void AudioPolicyService::updateUidStates_l()
     char decrypt[PROPERTY_VALUE_MAX];
     property_get("persist.sys.bootvideo.enable",decrypt, "false");
     if(!strcmp(decrypt, "true")) {
-        mSensorPrivacyPolicy = new SensorPrivacyPolicy(this);
-        mSensorPrivacyPolicy->registerSelf();
+        if (mSensorPrivacyPolicy.get() == NULL) {
+            mSensorPrivacyPolicy = new SensorPrivacyPolicy(this);
+            mSensorPrivacyPolicy->registerSelf();
+        }
+        
     }  // boot video end.
 
     // if Sensor Privacy is enabled then all recordings should be silenced.

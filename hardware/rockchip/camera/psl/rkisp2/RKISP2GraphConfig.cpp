@@ -75,8 +75,7 @@ const string MEDIACTL_PREVIEWNAME = "rkisp1_selfpath";
 const string MEDIACTL_POSTVIEWNAME = "postview";
 
 const string MEDIACTL_STATNAME = "rkisp1-statistics";
-const string MEDIACTL_VIDEONAME_CIF = "stream_cif";
-const string MEDIACTL_VIDEONAME_CIF_MIPI_ID0 = "stream_cif_mipi_id0";
+const string MEDIACTL_VIDEONAME_CIF = "stream_cif_dvp_id0";
 
 RKISP2GraphConfig::RKISP2GraphConfig() :
         mManager(nullptr),
@@ -2536,6 +2535,9 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
     string paramName = "none";
     std::vector<std::string> elementNames;
     PlatformData::getCameraHWInfo()->getMediaCtlElementNames(elementNames);
+    struct v4l2_dv_timings timings;
+    CLEAR(timings);
+    PlatformData::getCameraHWInfo()->getDvTimings(cameraId, timings);
     for (auto &it: elementNames) {
         LOGD("elementNames:%s",it.c_str());
         if (it.find("dphy") != std::string::npos &&
@@ -2550,9 +2552,17 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
         if (it.find("isp-subdev") != std::string::npos)
             IspName = it;
         if (it.find("mainpath") != std::string::npos)
-            mpName = it;
+            if (timings.bt.interlaced != V4L2_DV_INTERLACED) {
+                LOGD("%s Line:%d, V4L2_DV_INTERLACED", __func__, __LINE__);
+                mpName = it;
+            }
         if (it.find("selfpath") != std::string::npos)
-            spName = it;
+            if (timings.bt.interlaced == V4L2_DV_INTERLACED) {
+                   LOGD("%s Line:%d, V4L2_DV_INTERLACED", __func__, __LINE__);
+                   mpName = it;
+            }else{
+                spName = it;
+            }
         if (PlatformData::getCameraHWInfo()->isIspSupportRawPath() &&
             it.find("rawpath") != std::string::npos)
             rpName = it;
@@ -2610,13 +2620,6 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
                 addLinkParams("rkisp-isp-subdev", 2, "rkisp_mainpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
                 addLinkParams("rkisp-isp-subdev", 2, "rkisp_selfpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
             }
-	    } else if(mipName2.find("mipi") != std::string::npos) {
-            addLinkParams(mipName, mipSrcPad, mipName2, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
-            addLinkParams(mipName2, 1, "stream_cif_mipi_id0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
-            addLinkParams(mipName2, 2, "stream_cif_mipi_id1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
-            addLinkParams(mipName2, 3, "stream_cif_mipi_id2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
-            addLinkParams(mipName2, 4, "stream_cif_mipi_id3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
-            mSensorLinkedToCIF = true;
 	    } else {
             addLinkParams(mipName, mipSrcPad, csiName, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
             addLinkParams(csiName, csiSrcPad, IspName, ispSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
@@ -2628,13 +2631,6 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
     // isp input pad format and selection config
     addFormatParams(IspName, ispInWidth, ispInHeight, ispSinkPad, ispInFormat, 0, 0, mediaCtlConfig);
     addSelectionParams(IspName, ispInWidth, ispInHeight, 0, 0, V4L2_SEL_TGT_CROP, ispSinkPad, mediaCtlConfig);
-    if(mSensorLinkedToCIF){
-		addImguVideoNode(IMGU_NODE_VIDEO, MEDIACTL_VIDEONAME_CIF_MIPI_ID0, mediaCtlConfig);
-		addFormatParams(MEDIACTL_VIDEONAME_CIF_MIPI_ID0, mCurSensorFormat.width, mCurSensorFormat.height,
-				0, V4L2_PIX_FMT_NV12, 0, 0, mediaCtlConfig);
-        return OK;
-    }
-
 
     // if enable raw but isp doesn't support rawPath, use mainPath to output raw
     if ((rawStream != NULL || LogHelper::isDumpTypeEnable(CAMERA_DUMP_RAW)) &&

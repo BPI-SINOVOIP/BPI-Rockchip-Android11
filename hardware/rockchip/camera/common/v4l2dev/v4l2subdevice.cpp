@@ -343,6 +343,27 @@ status_t V4L2Subdevice::getSensorFormats(int pad, uint32_t code, std::vector<str
     return OK;
 }
 
+status_t V4L2Subdevice::queryDvTimings(struct v4l2_dv_timings &timings)
+{
+    LOGI("@%s device = %s", __FUNCTION__, mName.c_str());
+    int ret = 0;
+
+    if (mState == DEVICE_CLOSED) {
+        LOGE("%s invalid device state %d",__FUNCTION__, mState);
+        return INVALID_OPERATION;
+    }
+
+    ret = pbxioctl(VIDIOC_SUBDEV_QUERY_DV_TIMINGS, &timings);
+    LOGE("%s, ret:%d, I:%d, wxh:%dx%d", __func__, ret,
+		    timings.bt.interlaced, timings.bt.width, timings.bt.height);
+    if (ret < 0) {
+        LOGE("VIDIOC_SUBDEV_QUERY_DV_TIMINGS failed: %s", strerror(errno));
+        return UNKNOWN_ERROR;
+    }
+
+    return NO_ERROR;
+}
+
 } NAMESPACE_DECLARATION_END
 ////////////////////////////////////////////////////////////////////
 //                          PRIVATE METHODS

@@ -2529,6 +2529,9 @@ status_t GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
     string paramName = "none";
     std::vector<std::string> elementNames;
     PlatformData::getCameraHWInfo()->getMediaCtlElementNames(elementNames);
+    struct v4l2_dv_timings timings;
+    CLEAR(timings);
+    PlatformData::getCameraHWInfo()->getDvTimings(cameraId, timings);
     for (auto &it: elementNames) {
         if (it.find("mipi") != std::string::npos &&
             mSnsLinkedPhyEntNm == it)
@@ -2536,9 +2539,18 @@ status_t GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
         if (it.find("isp-subdev") != std::string::npos)
             IspName = it;
         if (it.find("mainpath") != std::string::npos)
-            mpName = it;
-        if (it.find("selfpath") != std::string::npos)
-            spName = it;
+            if (timings.bt.interlaced != V4L2_DV_INTERLACED) {
+                   LOGD("%s Line:%d, V4L2_DV_INTERLACED", __func__, __LINE__);
+                   mpName = it;
+            }
+        if (it.find("selfpath") != std::string::npos){
+            if (timings.bt.interlaced == V4L2_DV_INTERLACED) {
+                   LOGD("%s Line:%d, V4L2_DV_INTERLACED", __func__, __LINE__);
+                   mpName = it;
+            }else{
+                spName = it;
+            }
+        }
         if (PlatformData::getCameraHWInfo()->isIspSupportRawPath() &&
             it.find("rawpath") != std::string::npos)
             rpName = it;

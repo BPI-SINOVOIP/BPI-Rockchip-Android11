@@ -1786,6 +1786,51 @@ status_t CameraHWInfo::getSensorFrameDuration(int32_t cameraId, int32_t &duratio
     return ret;
 }
 
+status_t CameraHWInfo::getDvTimings(int32_t cameraId,
+		struct v4l2_dv_timings &timings) const
+{
+    status_t ret = NO_ERROR;
+    const char *devname;
+    std::string sDevName;
+
+    string sensorEntityName = "none";
+
+    ret = getSensorEntityName(cameraId, sensorEntityName);
+    if (ret != NO_ERROR)
+        return UNKNOWN_ERROR;
+
+    for (size_t i = 0; i < mSensorInfo.size(); i++) {
+        if (sensorEntityName.find(mSensorInfo[i].mSensorName) == std::string::npos)
+            continue;
+
+        std::ostringstream stringStream;
+        stringStream << "/dev/" << mSensorInfo[i].mDeviceName.c_str();
+        sDevName = stringStream.str();
+    }
+    devname = sDevName.c_str();
+    std::shared_ptr<V4L2Subdevice> device = std::make_shared<V4L2Subdevice>(devname);
+    if (device.get() == nullptr) {
+        LOGE("Couldn't open device %s", devname);
+        return UNKNOWN_ERROR;
+    }
+
+    ret = device->open();
+    if (ret != NO_ERROR) {
+        LOGE("Error opening device (%s)", devname);
+        return ret;
+    }
+
+    ret = device->queryDvTimings(timings);
+    if (ret != NO_ERROR) {
+        LOGE("Error queryDvTimings ret:%d (%s)", ret, devname);
+    }
+
+    ret |= device->close();
+    if (ret != NO_ERROR)
+        LOGE("Error closing device (%s)", devname);
+
+    return ret;
+}
 /**
  * Get all available sensor modes from the driver
  *

@@ -6073,6 +6073,12 @@ bool AudioFlinger::DirectOutputThread::shouldStandby_l()
     bool trackPaused = false;
     bool trackStopped = false;
 
+    // add by hh@rock-chips.com for audio bitstream
+    // put the HAL in standby when HAL is bitstream mode and audio track is paused
+    audio_format_t mainFormat = audio_get_main_format(mFormat);
+    if ((mType == DIRECT) && (mainFormat == AUDIO_FORMAT_IEC61937) && !usesHwAvSync()) {
+        return !mStandby;
+    }
     // do not put the HAL in standby when paused. AwesomePlayer clear the offloaded AudioTrack
     // after a timeout and we will enter standby then.
     if (mTracks.size() > 0) {

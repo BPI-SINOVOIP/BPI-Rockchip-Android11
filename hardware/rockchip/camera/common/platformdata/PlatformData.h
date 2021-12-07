@@ -215,6 +215,7 @@ public:
     status_t getSensorBayerPattern(int32_t cameraId,
                                    int32_t &bayerPattern) const;
     status_t getSensorFrameDuration(int32_t cameraId, int32_t &duration) const;
+    status_t getDvTimings(int32_t cameraId, struct v4l2_dv_timings &timings) const;
     void getMediaCtlElementNames(std::vector<std::string> &elementNames, bool isFirst = false) const;
     bool isIspSupportRawPath() const;
     std::string getFullMediaCtlElementName(const std::vector<std::string> elementNames,

@@ -88,8 +88,8 @@ void Converter::releaseEncoder() {
 
     while(!mInputBufferQueue.empty()) {
         sp<ABuffer> buffer = *mInputBufferQueue.begin();
-        mInputBufferQueue.erase(mInputBufferQueue.begin());
         releaseABufferEx(buffer);
+        mInputBufferQueue.erase(mInputBufferQueue.begin());
     }
 
     mEncoder->release();
@@ -317,10 +317,10 @@ void Converter::onMessageReceived(const sp<AMessage> &msg) {
 
                 if (what == MediaPuller::kWhatAccessUnit) {
                     sp<ABuffer> accessUnit;
-		      sp<ABuffer> access = (sp<ABuffer>) accessUnit;
-                    CHECK(msg->findBuffer("accessUnit", &access));
-
-                     releaseABufferEx(accessUnit);
+                    CHECK(msg->findBuffer("accessUnit", &accessUnit));
+                    if (accessUnit != NULL) {
+                        releaseABufferEx(accessUnit);
+                    }
                 }
                 break;
             }

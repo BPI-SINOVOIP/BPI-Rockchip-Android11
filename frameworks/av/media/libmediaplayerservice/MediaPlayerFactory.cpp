@@ -150,6 +150,7 @@ player_type MediaPlayerFactory::getPlayerType(const sp<IMediaPlayer>& client,
         || strstr(filePath.string(), ".mid")
         || strstr(filePath.string(), ".MID")
         || strstr(filePath.string(), ".mp3")
+        || strstr(filePath.string(), ".aac")
         || strstr(filePath.string(), ".apk")
         || strstr(filePath.string(), "notification_sound_cache")
         || strstr(filePath.string(), "ringtone_cache")
