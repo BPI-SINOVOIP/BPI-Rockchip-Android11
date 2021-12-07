@@ -35,6 +35,7 @@ import android.os.INetworkManagementService;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -633,9 +634,14 @@ final class EthernetTracker {
     private void updateIfaceMatchRegexp() {
         final String match = mContext.getResources().getString(
                 com.android.internal.R.string.config_ethernet_iface_regex);
-        mIfaceMatch = mIncludeTestInterfaces
-                ? "(" + match + "|" + TEST_IFACE_REGEXP + ")"
-                : match;
+
+        /*dangku, set eth1 as primary eth*/
+        mIfaceMatch = SystemProperties.get("ro.net.eth_primary", null);
+        if (mIfaceMatch == null) {
+            mIfaceMatch = mIncludeTestInterfaces
+                    ? "(" + match + "|" + TEST_IFACE_REGEXP + ")"
+                    : match;
+        }
         Log.d(TAG, "Interface match regexp set to '" + mIfaceMatch + "'");
     }
 
