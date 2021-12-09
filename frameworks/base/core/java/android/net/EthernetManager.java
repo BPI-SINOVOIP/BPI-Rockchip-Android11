@@ -148,6 +148,18 @@ public class EthernetManager {
      * @hide
      */
     @UnsupportedAppUsage
+    public String getEthernetHwaddr(String iface) {
+        try {
+            return mService.getEthernetHwaddr(iface);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
+    /**
+     * @hide
+     */
+    @UnsupportedAppUsage
     public String getIpAddress(String iface) {
         try {
             return mService.getIpAddress(iface);

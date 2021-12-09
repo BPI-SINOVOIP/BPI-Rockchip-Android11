@@ -31,6 +31,7 @@ interface IEthernetManager
     IpConfiguration getConfiguration(String iface);
     void setConfiguration(String iface, in IpConfiguration config);
     boolean isAvailable(String iface);
+    String getEthernetHwaddr(String iface);
     String getIpAddress(String iface);
     String getNetmask(String iface);
     String getGateway(String iface);

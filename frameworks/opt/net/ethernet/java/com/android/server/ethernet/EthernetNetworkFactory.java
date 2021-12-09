@@ -216,6 +216,14 @@ public class EthernetNetworkFactory extends NetworkFactory {
         return mTrackingInterfaces.containsKey(interfacName);
     }
 
+    String getEthernetHwaddr(String iface) {
+        NetworkInterfaceState netState = mTrackingInterfaces.get(iface);
+        if (null != netState) {
+            Log.d(TAG, "getEthernetHwaddr: " + netState.mHwAddress);
+        }
+        return netState.mHwAddress;
+    }
+
     String getIpAddress(String iface) {
         IpConfiguration config = mEthernetManager.getConfiguration(iface);
         if (config.getIpAssignment() == IpAssignment.STATIC) {

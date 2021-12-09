@@ -140,6 +140,17 @@ public class EthernetServiceImpl extends IEthernetManager.Stub {
     }
 
     @Override
+    public String getEthernetHwaddr(String iface) {
+        enforceAccessPermission();
+
+        if (mTracker.isRestrictedInterface(iface)) {
+            enforceUseRestrictedNetworksPermission();
+        }
+
+        return mTracker.getEthernetHwaddr(iface);
+    }
+
+    @Override
     public String getIpAddress(String iface) {
         enforceAccessPermission();
 

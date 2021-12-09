@@ -174,6 +174,10 @@ final class EthernetTracker {
         return mFactory.hasInterface(iface);
     }
 
+    String getEthernetHwaddr(String iface) {
+        return mFactory.getEthernetHwaddr(iface);
+    }
+
     String getIpAddress(String iface) {
         return mFactory.getIpAddress(iface);
     }

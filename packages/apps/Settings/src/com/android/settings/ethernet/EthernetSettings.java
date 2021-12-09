@@ -219,7 +219,7 @@ public class EthernetSettings extends SettingsPreferenceFragment
 
         switch (EtherState) {
             case ETHER_STATE_DISCONNECTED:
-                mEthHwAddress = nullIpInfo;
+                mEthHwAddress = nullMacInfo;
                 mEthIpAddress = nullIpInfo;
                 mEthNetmask = nullIpInfo;
                 mEthGateway = nullIpInfo;
@@ -549,26 +549,14 @@ public class EthernetSettings extends SettingsPreferenceFragment
         }
     }
 
-    /*bpi, get ethernet mac address*/
-    public void getEthMacAddress(){
-        String tempMacInfo;
-
-        tempMacInfo = Utils.getMacAddress(mIfaceName);
-        if ((tempMacInfo != null) && (!tempMacInfo.equals(""))) {
-		    mEthHwAddress = tempMacInfo;
-		} else {
-            mEthHwAddress = nullMacInfo;
-        }
-    }
-
     /*
      * TODO:
      */
     public void getEthInfo() {
-        /*
-        mEthHwAddress = mEthManager.getEthernetHwaddr(mEthManager.getEthernetIfaceName());
-        if (mEthHwAddress == null) mEthHwAddress = nullIpInfo;
-        */
+        mEthHwAddress = mEthManager.getEthernetHwaddr(mIfaceName);
+        if (mEthHwAddress == null)
+            mEthHwAddress = nullMacInfo;
+
         IpAssignment mode = mEthManager.getConfiguration(mIfaceName).getIpAssignment();
 
 
@@ -584,7 +572,6 @@ public class EthernetSettings extends SettingsPreferenceFragment
             getEthInfoFromStaticIp();
         }
 
-        getEthMacAddress();
     }
 
     /*
