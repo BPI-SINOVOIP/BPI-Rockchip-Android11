@@ -216,12 +216,22 @@ public class EthernetNetworkFactory extends NetworkFactory {
         return mTrackingInterfaces.containsKey(interfacName);
     }
 
+    boolean getEthernetIfaceState(String iface) {
+        NetworkInterfaceState netState = mTrackingInterfaces.get(iface);
+        if (null != netState) {
+            //Log.d(TAG, "getEthernetIfaceState " + netState.mLinkUp);
+            return netState.mLinkUp;
+        }
+        return false;
+    }
+
     String getEthernetHwaddr(String iface) {
         NetworkInterfaceState netState = mTrackingInterfaces.get(iface);
         if (null != netState) {
-            Log.d(TAG, "getEthernetHwaddr: " + netState.mHwAddress);
+            //Log.d(TAG, "getEthernetHwaddr: " + netState.mHwAddress);
+            return netState.mHwAddress;
         }
-        return netState.mHwAddress;
+        return "";
     }
 
     String getIpAddress(String iface) {

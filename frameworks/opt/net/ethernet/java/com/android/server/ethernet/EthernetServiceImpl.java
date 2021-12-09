@@ -140,6 +140,28 @@ public class EthernetServiceImpl extends IEthernetManager.Stub {
     }
 
     @Override
+    public void setEthernetEnabled(String iface,boolean enable) {
+        enforceAccessPermission();
+
+        if (mTracker.isRestrictedInterface(iface)) {
+            enforceUseRestrictedNetworksPermission();
+        }
+
+        mTracker.setEthernetEnabled(iface, enable);
+    }
+
+    @Override
+    public boolean getEthernetIfaceState(String iface) {
+        enforceAccessPermission();
+
+        if (mTracker.isRestrictedInterface(iface)) {
+            enforceUseRestrictedNetworksPermission();
+        }
+
+        return mTracker.getEthernetIfaceState(iface);
+    }
+
+    @Override
     public String getEthernetHwaddr(String iface) {
         enforceAccessPermission();
 

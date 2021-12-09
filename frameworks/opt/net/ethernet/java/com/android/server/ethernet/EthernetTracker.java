@@ -39,6 +39,7 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.provider.Settings;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.IndentingPrintWriter;
@@ -172,6 +173,39 @@ final class EthernetTracker {
 
     boolean isTrackingInterface(String iface) {
         return mFactory.hasInterface(iface);
+    }
+
+    void setEthernetEnabled(String iface,boolean enable) {
+        if (!iface.matches(mIfaceMatch)) {
+            return;
+        }
+
+        Log.e(TAG, "setEthernetEnabled iface: " + iface + " enable: " + enable);
+        try {
+               if (enable) {
+                   mHandler.post(() -> updateInterfaceState(iface, true));
+                   Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ETHERNET_ON, 1);
+               } else {
+                   mHandler.post(() -> updateInterfaceState(iface, false));
+                   Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ETHERNET_ON, 0);
+               }
+        } catch (Exception e) {
+            Log.e(TAG, "Error set ethernet enable " + iface + ": " + e);
+        }
+    }
+
+    boolean getEthernetOnState() {
+	    return Settings.System.getInt(mContext.getContentResolver(), Settings.Global.ETHERNET_ON, 0) != 0;
+	}
+
+    boolean getEthernetIfaceState(String iface) {
+		boolean mLinkUp = mFactory.getEthernetIfaceState(iface);
+		boolean ethernetOn = getEthernetOnState();
+		if (mLinkUp && ethernetOn) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     String getEthernetHwaddr(String iface) {
@@ -436,7 +470,8 @@ final class EthernetTracker {
             if (DBG) {
                 Log.i(TAG, "interfaceLinkStateChanged, iface: " + iface + ", up: " + up);
             }
-            mHandler.post(() -> updateInterfaceState(iface, up));
+            if (getEthernetOnState())
+                mHandler.post(() -> updateInterfaceState(iface, up));
         }
 
         @Override

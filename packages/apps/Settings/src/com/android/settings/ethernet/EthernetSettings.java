@@ -111,6 +111,7 @@ public class EthernetSettings extends SettingsPreferenceFragment
         ETHER_STATE_CONNECTED
     }
 
+    private static final String KEY_ETH_ENABLE = "ethernet_enable";
     private static final String KEY_ETH_IP_ADDRESS = "ethernet_ip_addr";
     private static final String KEY_ETH_HW_ADDRESS = "ethernet_hw_addr";
     private static final String KEY_ETH_NET_MASK = "ethernet_netmask";
@@ -130,7 +131,7 @@ public class EthernetSettings extends SettingsPreferenceFragment
 	private final static String nullMacInfo = "00:00:00:00:00";
 
     private ListPreference mkeyEthMode;
-    //    private SwitchPreference mEthCheckBox;
+    private SwitchPreference mEthEnableSwitch;
     private CheckBoxPreference staticEthernet;
 
     private final IntentFilter mIntentFilter;
@@ -248,6 +249,8 @@ public class EthernetSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.ethernet_settings);
 
+        mEthEnableSwitch = (SwitchPreference) findPreference(KEY_ETH_ENABLE);
+
         mContext = this.getActivity().getApplicationContext();
         mEthManager = (EthernetManager) getSystemService(Context.ETHERNET_SERVICE);
 
@@ -287,12 +290,7 @@ public class EthernetSettings extends SettingsPreferenceFragment
             mkeyEthMode = (ListPreference) findPreference(KEY_ETH_MODE);
             mkeyEthMode.setOnPreferenceChangeListener(this);
         }
-    /*
-        if (mEthCheckBox== null) {
-            mEthCheckBox = (SwitchPreference) findPreference("ethernet");
-            mEthCheckBox.setOnPreferenceChangeListener(this);
-        }
-    */
+
         //handleEtherStateChange(1 == getEthernetCarrierState(mIfaceName)? EthernetManager.ETHER_STATE_CONNECTED/*mEthManager.getEthernetConnectState()*/);
         refreshUI();
         log("resume");
@@ -363,14 +361,28 @@ public class EthernetSettings extends SettingsPreferenceFragment
                 mkeyEthMode.setValue("StaticIP");
                 mkeyEthMode.setSummary(R.string.usestatic);
             }
-/*            int isEnable = mEthManager.getEthernetIfaceState();
-            if(isEnable == ETHER_IFACE_STATE_UP) {
-                mEthCheckBox.setChecked(true);
-            }else{
-                mEthCheckBox.setChecked(false);
-            }
-*/
+
+            boolean isEnable = mEthManager.getEthernetIfaceState(mIfaceName);
+			Log.d(TAG, "updateCheckbox, isEnable: " + isEnable);
+            mEthEnableSwitch.setChecked(isEnable);
         }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if(preference == mEthEnableSwitch){
+            if(mIfaceName == null)
+                return false;
+
+            if(mEthEnableSwitch.isChecked()){
+                Log.d(TAG, "onPreferenceTreeClick, enable ethernet");
+                mEthManager.setEthernetEnabled(mIfaceName,true);
+            }else{
+			    Log.d(TAG, "onPreferenceTreeClick, disable ethernet");
+                mEthManager.setEthernetEnabled(mIfaceName,false);
+            }
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override

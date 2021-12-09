@@ -144,6 +144,29 @@ public class EthernetManager {
         }
     }
 
+    /** @hide
+     */
+    @UnsupportedAppUsage
+    public void setEthernetEnabled(String iface,boolean enable){
+        try {
+            mService.setEthernetEnabled(iface, enable);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
+    /**
+     * @hide
+     */
+    @UnsupportedAppUsage
+    public boolean getEthernetIfaceState(String iface) {
+        try {
+            return mService.getEthernetIfaceState(iface);
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
     /**
      * @hide
      */
