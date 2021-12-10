@@ -64,3 +64,12 @@ PRODUCT_PROPERTY_OVERRIDES += persist.wifi.sleep.delay.ms=0
 PRODUCT_PROPERTY_OVERRIDES += persist.bt.power.down=true
 
 PRODUCT_PROPERTY_OVERRIDES += ro.net.eth_primary=eth1
+PRODUCT_PROPERTY_OVERRIDES += ro.net.eth_secondary=eth0
+# 0-dhcp, 1-static
+PRODUCT_PROPERTY_OVERRIDES += persist.net.eth0.mode=1
+# static info
+PRODUCT_PROPERTY_OVERRIDES += persist.net.eth0.staticinfo=172.16.1.1,24,172.16.1.1,114.114.114.114,8.8.8.8
+# dhcp server info
+PRODUCT_PROPERTY_OVERRIDES += persist.dhcpserver.enable=1
+PRODUCT_PROPERTY_OVERRIDES += persist.dhcpserver.start=172.16.1.100
+PRODUCT_PROPERTY_OVERRIDES += persist.dhcpserver.end=172.16.1.150

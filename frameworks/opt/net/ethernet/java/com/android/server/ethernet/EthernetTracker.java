@@ -93,6 +93,8 @@ final class EthernetTracker {
     private final EthernetNetworkFactory mFactory;
     private final EthernetConfigStore mConfigStore;
 
+    private EthernetNetworkFactoryExt mEthernetNetworkFactoryExt;
+
     private final RemoteCallbackList<IEthernetServiceListener> mListeners =
             new RemoteCallbackList<>();
     private final TetheredInterfaceRequestList mTetheredInterfaceRequests =
@@ -135,6 +137,8 @@ final class EthernetTracker {
         NetworkCapabilities nc = createNetworkCapabilities(true /* clear default capabilities */);
         mFactory = new EthernetNetworkFactory(handler, context, nc);
         mFactory.register();
+
+        mEthernetNetworkFactoryExt = new EthernetNetworkFactoryExt();
     }
 
     void start() {
@@ -154,6 +158,8 @@ final class EthernetTracker {
         }
 
         mHandler.post(this::trackAvailableInterfaces);
+
+        mEthernetNetworkFactoryExt.start(mContext, mNMService);
     }
 
     void updateIpConfiguration(String iface, IpConfiguration ipConfiguration) {
@@ -472,16 +478,31 @@ final class EthernetTracker {
             }
             if (getEthernetOnState())
                 mHandler.post(() -> updateInterfaceState(iface, up));
+
+            /*bpi, tracking esecondary eth*/
+            mEthernetNetworkFactoryExt.interfaceLinkStateChanged(iface, up);
         }
 
         @Override
         public void interfaceAdded(String iface) {
+            if (DBG) {
+                Log.i(TAG, "interfaceAdded, iface: " + iface);
+            }
             mHandler.post(() -> maybeTrackInterface(iface));
+
+            /*bpi, add secondary eth*/
+            mEthernetNetworkFactoryExt.interfaceAdded(iface);
         }
 
         @Override
         public void interfaceRemoved(String iface) {
+            if (DBG) {
+                Log.i(TAG, "interfaceRemoved, iface: " + iface);
+            }
             mHandler.post(() -> stopTrackingInterface(iface));
+
+            /*bpi, remove secondary eth*/
+            mEthernetNetworkFactoryExt.interfaceRemoved(iface);
         }
     }
 
