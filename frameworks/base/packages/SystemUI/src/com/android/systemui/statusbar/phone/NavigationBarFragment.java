@@ -1049,6 +1049,29 @@ public class NavigationBarFragment extends LifecycleFragment implements Callback
             volumeAddButton.setVisibility(View.GONE);
             volumeSubButton.setVisibility(View.GONE);
         }
+        /*bpi, add poweroff navigation button*/
+        ButtonDispatcher poweroffButton = mNavigationBarView.getPoweroffButton();
+        poweroffButton.setOnClickListener(this:: onPoweroffClick);
+        poweroffButton.setOnTouchListener(this:: onPoweroffTouch);
+        boolean isShowPowerButton="true".equals(SystemProperties.get("ro.rk.systembar.powericon","true"));
+        if (isShowPowerButton) {
+            poweroffButton.setVisibility(View.VISIBLE);
+        }else{
+            poweroffButton.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean onPoweroffTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            Intent intent=new Intent(Intent.ACTION_NAVIGATIONBAR_POWEROFF);
+            getContext().sendBroadcast(intent);
+        }
+        return false;
+    }
+
+    private void onPoweroffClick(View v) {
+        Intent intent=new Intent(Intent.ACTION_NAVIGATIONBAR_POWEROFF);
+        getContext().sendBroadcast(intent);
     }
 
     private boolean onHomeTouch(View v, MotionEvent event) {

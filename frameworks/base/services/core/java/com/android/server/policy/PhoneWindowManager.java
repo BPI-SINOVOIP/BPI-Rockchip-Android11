@@ -2020,6 +2020,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_DREAMING_STARTED);
         filter.addAction(Intent.ACTION_DREAMING_STOPPED);
+        filter.addAction(Intent.ACTION_NAVIGATIONBAR_POWEROFF);
         context.registerReceiver(mDreamReceiver, filter);
 
         // register for multiuser-relevant broadcasts
@@ -4494,6 +4495,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 if (mKeyguardDelegate != null) {
                     mKeyguardDelegate.onDreamingStopped();
                 }
+            } else if (Intent.ACTION_NAVIGATIONBAR_POWEROFF.equals(intent.getAction())) {
+                showGlobalActionsInternal();
             }
         }
     };

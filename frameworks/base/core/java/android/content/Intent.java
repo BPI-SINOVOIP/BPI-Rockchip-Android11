@@ -2393,6 +2393,13 @@ public class Intent implements Parcelable, Cloneable {
     public static final String ACTION_BOOT_COMPLETED = "android.intent.action.BOOT_COMPLETED";
 
     /**
+     * Broadcast Action:  This is a broadcase when virtual poweroff button on navagation bar
+	 * clicked or touched, for SystemUI used only. 
+     *
+     * @hide
+     */
+    public static final String ACTION_NAVIGATIONBAR_POWEROFF = "action.SYSTEMUI_NAVIGATIONBAR_POWEROFF";
+    /**
      * Broadcast Action: This is broadcast when a user action should request a
      * temporary system dialog to dismiss.  Some examples of temporary system
      * dialogs are the notification window-shade and the recent tasks dialog.

@@ -125,7 +125,7 @@ public class NavigationBarView extends FrameLayout implements
     private KeyButtonDrawable mVolumeAddIcon;
     private KeyButtonDrawable mVolumeSubIcon;
     private KeyButtonDrawable mScreenshotIcon;
-
+    private KeyButtonDrawable mPoweroffIcon;
     private EdgeBackGestureHandler mEdgeBackGestureHandler;
     private final DeadZone mDeadZone;
     private boolean mDeadZoneConsuming = false;
@@ -335,6 +335,7 @@ public class NavigationBarView extends FrameLayout implements
         mButtonDispatchers.put(R.id.screenshot, new ButtonDispatcher(R.id.screenshot));
         mButtonDispatchers.put(R.id.volume_add, new ButtonDispatcher(R.id.volume_add));
         mButtonDispatchers.put(R.id.volume_sub, new ButtonDispatcher(R.id.volume_sub));
+        mButtonDispatchers.put(R.id.poweroff, new ButtonDispatcher(R.id.poweroff));
         mDeadZone = new DeadZone(this);
 
         mNavColorSampleMargin = getResources()
@@ -483,6 +484,9 @@ public class NavigationBarView extends FrameLayout implements
         return mButtonDispatchers.get(R.id.screenshot);
     }
 
+    public ButtonDispatcher getPoweroffButton(){
+        return mButtonDispatchers.get(R.id.poweroff);
+    }
     public ButtonDispatcher getVolumeAddButton() {
         return mButtonDispatchers.get(R.id.volume_add);
     }
@@ -539,6 +543,7 @@ public class NavigationBarView extends FrameLayout implements
         mVolumeAddIcon = getDrawable(R.drawable.ic_sysbar_volume_add_button);
         mVolumeSubIcon = getDrawable(R.drawable.ic_sysbar_volume_sub_button);
         mScreenshotIcon = getDrawable(R.drawable.ic_sysbar_capture_button);
+        mPoweroffIcon  = getDrawable(R.drawable.ic_sysbar_poweroff);
     }
 
     public KeyButtonDrawable getBackDrawable() {
@@ -695,6 +700,7 @@ public class NavigationBarView extends FrameLayout implements
         getVolumeAddButton().setImageDrawable(mVolumeAddIcon);
         getVolumeSubButton().setImageDrawable(mVolumeSubIcon);
         getScreenshotButton().setImageDrawable(mScreenshotIcon);
+        getPoweroffButton().setImageDrawable(mPoweroffIcon);
 
         updateRecentsIcon();
 
