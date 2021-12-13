@@ -75,7 +75,7 @@ import java.util.List;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost, InternetAdbDialogHost,
         AdbClearKeysDialogHost, LogPersistDialogHost,
         BluetoothA2dpHwOffloadRebootDialog.OnA2dpHwDialogConfirmedListener,
         AbstractBluetoothPreferenceController.Callback {
@@ -94,11 +94,23 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     private final BroadcastReceiver mEnableAdbReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            for (AbstractPreferenceController controller : mPreferenceControllers) {
-                if (controller instanceof AdbOnChangeListener) {
-                    ((AdbOnChangeListener) controller).onAdbSettingChanged();
-                }
-            }
+            String action = intent.getAction();
+            Log.d(TAG, "mEnableAdbReceiver.onReceive action=" + action);
+            if(AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED.equals(action)){
+                for (AbstractPreferenceController controller : mPreferenceControllers) {
+                    if (controller instanceof AdbOnChangeListener) {
+                        ((AdbOnChangeListener) controller).onAdbSettingChanged();
+                    }
+                 }
+
+            }else if(InternetAdbPreferenceController.ACTION_ENABLE_INTERNET_ADB_STATE_CHANGED.equals(action)){
+                for (AbstractPreferenceController controller : mPreferenceControllers) {
+                    if (controller instanceof InternetAdbOnChangeListener) {
+                        ((InternetAdbOnChangeListener) controller).onInternetAdbSettingChanged();
+                    }
+                }   
+
+             }
         }
     };
 
@@ -326,6 +338,22 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controller.onAdbDialogDismissed();
     }
 
+
+     @Override
+    public void onEnableInternetAdbDialogConfirmed() {
+        final InternetAdbPreferenceController controller = getDevelopmentOptionsController(
+                InternetAdbPreferenceController.class);
+        controller.onInternetAdbDialogConfirmed();
+
+    }
+
+    @Override
+    public void onEnableInternetAdbDialogDismissed() {
+        final InternetAdbPreferenceController controller = getDevelopmentOptionsController(
+                InternetAdbPreferenceController.class);
+        controller.onInternetAdbDialogDismissed();
+    }
+
     @Override
     public void onAdbClearKeysDialogConfirmed() {
         final ClearAdbKeysPreferenceController controller = getDevelopmentOptionsController(
@@ -404,9 +432,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private void registerReceivers() {
+        IntentFilter adb_filter = new IntentFilter();
+        adb_filter.addAction(AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED);
+        adb_filter.addAction(InternetAdbPreferenceController.ACTION_ENABLE_INTERNET_ADB_STATE_CHANGED);
+
         LocalBroadcastManager.getInstance(getContext())
-                .registerReceiver(mEnableAdbReceiver, new IntentFilter(
-                        AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
+                .registerReceiver(mEnableAdbReceiver, adb_filter);
 
         final IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED);
@@ -485,6 +516,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         controllers.add(new SelectDSUPreferenceController(context));
         controllers.add(new AdbPreferenceController(context, fragment));
+        controllers.add(new InternetAdbPreferenceController(context, fragment));
         controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
         controllers.add(new WirelessDebuggingPreferenceController(context, lifecycle));
         controllers.add(new AdbAuthorizationTimeoutPreferenceController(context));
