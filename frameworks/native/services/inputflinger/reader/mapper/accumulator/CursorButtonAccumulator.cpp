@@ -105,13 +105,15 @@ uint32_t CursorButtonAccumulator::getButtonState() const {
         }
     }
     if (mBtnRight) {
+        /*bpi, always return back
         char targetProduct[PROPERTY_VALUE_MAX] = {0};
         property_get("ro.target.product", targetProduct, "");
         if (strcmp(targetProduct, "box") == 0 || strcmp(targetProduct, "atv") == 0) {
             result |= AMOTION_EVENT_BUTTON_BACK;
         } else {
             result |= AMOTION_EVENT_BUTTON_SECONDARY;
-        }
+        }*/
+        result |= AMOTION_EVENT_BUTTON_BACK;
     }
     if (mBtnMiddle) {
         result |= AMOTION_EVENT_BUTTON_TERTIARY;
