@@ -88,12 +88,16 @@ public class PredictionService extends AppPredictionService {
         Intent browserIntent = new Intent(Intent.ACTION_MAIN);
         browserIntent.addCategory(Intent.CATEGORY_APP_BROWSER);
 
+        Intent settingsIntent = new Intent(Intent.ACTION_MAIN);
+        settingsIntent.addCategory(Intent.CATEGORY_APP_SETTINGS);
+
         String[] DEFAULT_PACKAGES = new String[] {
               getDefaultSystemHandlerActivityPackageName(calendarIntent),
               getDefaultSystemHandlerActivityPackageName(galleryIntent),
               getDefaultSystemHandlerActivityPackageName(mapsIntent),
               getDefaultSystemHandlerActivityPackageName(emailIntent),
               getDefaultSystemHandlerActivityPackageName(browserIntent),
+              getDefaultSystemHandlerActivityPackageName(settingsIntent),
         };
 
         Log.d(TAG, "AppPredictionService onCreate");
