@@ -32,18 +32,17 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class DensityPreferenceController extends AbstractPreferenceController implements
+public class RotationPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "DensityPrefContr";
+    private static final String TAG = "RotationPrefContr";
 
-    private static final String KEY_DENSITY = "screen_density";
-    private static final int DEFAULT_DISPLAY = 0;
-    private static final int DEFAULT_DENSITY = 280;
+    private static final String KEY_ROTATION = "screen_rotation";
+    private static final int ROTATION_FREE = -1;
 
     private IWindowManager mWindowManager;
 
-    public DensityPreferenceController(Context context) {
+    public RotationPreferenceController(Context context) {
         super(context);
         mWindowManager = IWindowManager.Stub.asInterface(
                 ServiceManager.getService(Context.WINDOW_SERVICE));
@@ -56,98 +55,103 @@ public class DensityPreferenceController extends AbstractPreferenceController im
 
     @Override
     public String getPreferenceKey() {
-        return KEY_DENSITY;
+        return KEY_ROTATION;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final DensityListPreference densityListPreference = (DensityListPreference) preference;
+        final RotationListPreference rotationListPreference = (RotationListPreference) preference;
 
-        int currentDensity = getDensity();
-        Log.d(TAG, "updateState: current density is " + currentDensity);
-        densityListPreference.setValue(String.valueOf(currentDensity));
+        int currentRotation = getRotation();
+        Log.d(TAG, "updateState: current rotation is " + currentRotation);
+        rotationListPreference.setValue(String.valueOf(currentRotation));
 
-        updateDensityPreferenceDescription(densityListPreference,
-                Long.parseLong(densityListPreference.getValue()));
+        updateRotationPreferenceDescription(rotationListPreference,
+                Long.parseLong(rotationListPreference.getValue()));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         try {
             int value = Integer.parseInt((String) newValue);
-            Log.d(TAG, "onPreferenceChange: set density is " + value);
-            setDensity(value);
-            updateDensityPreferenceDescription((DensityListPreference) preference, value);
+            Log.d(TAG, "onPreferenceChange: set rotation is " + value);
+            setRotation(value);
+            updateRotationPreferenceDescription((RotationListPreference) preference, value);
         } catch (NumberFormatException e) {
-            Log.e(TAG, "could not persist screen density setting", e);
+            Log.e(TAG, "could not persist screen rotation setting", e);
         }
         return true;
     }
 
-    public static CharSequence getDensityDescription(
-            long currentDensity, CharSequence[] entries, CharSequence[] values) {
-        if (currentDensity < 0 || entries == null || values == null
+    public static CharSequence getRotationDescription(
+            long currentRotation, CharSequence[] entries, CharSequence[] values) {
+        if (currentRotation < 0 || entries == null || values == null
                 || values.length != entries.length) {
             return null;
         }
 
         for (int i = 0; i < values.length; i++) {
-            long density = Long.parseLong(values[i].toString());
-            if (currentDensity == density) {
+            long rotation = Long.parseLong(values[i].toString());
+            if (currentRotation == rotation) {
                 return entries[i];
             }
         }
         return null;
     }
 
-    private void updateDensityPreferenceDescription(DensityListPreference preference,
-            long currentDensity) {
+    private void updateRotationPreferenceDescription(RotationListPreference preference,
+            long currentRotation) {
         final CharSequence[] entries = preference.getEntries();
         final CharSequence[] values = preference.getEntryValues();
         final String summary;
         if (preference.isDisabledByAdmin()) {
             summary = mContext.getString(com.android.settings.R.string.disabled_by_policy_title);
         } else {
-            if (0 == currentDensity || Integer.MAX_VALUE == currentDensity) {
-                summary = preference.getContext().getResources().getStringArray(R.array.screen_density_entries)[4];
+            if (-1 == currentRotation || Integer.MAX_VALUE == currentRotation) {
+                summary = preference.getContext().getResources().getStringArray(R.array.screen_rotation_entries)[0];
             } else {
-                final CharSequence densityDescription = getDensityDescription(
-                        currentDensity, entries, values);
-                if (densityDescription == null) {
+                final CharSequence rotationDescription = getRotationDescription(
+                        currentRotation, entries, values);
+                if (rotationDescription == null) {
                     summary = "";
                 } else {
-                    summary = mContext.getString(R.string.screen_density_summary, densityDescription);
+                    summary = mContext.getString(R.string.screen_rotation_summary, rotationDescription);
                 }
             }
         }
         preference.setSummary(summary);
     }
 
-    private void setDensity(int density) {
-        Log.d(TAG, "setDensity, density = " + density);
+    private void setRotation(int rotation) {
+        Log.d(TAG, "setRotation, rotation = " + rotation);
 
         try {
-            mWindowManager.setForcedDisplayDensityForUser(DEFAULT_DISPLAY, density, UserHandle.USER_CURRENT);
+            if (rotation == ROTATION_FREE) {
+                mWindowManager.thawRotation();
+            } else {
+                mWindowManager.freezeRotation(rotation);
+            }
         } catch (RemoteException e) {
-            Log.e(TAG, "setDensity failed, density = " + density);
+            Log.e(TAG, "setRotation failed, rotation = " + rotation);
         }
     }
 	
-	private int getDensity() {
-        try {
-            int initialDensity = mWindowManager.getInitialDisplayDensity(DEFAULT_DISPLAY);
-		    int baseDensity = mWindowManager.getBaseDisplayDensity(DEFAULT_DISPLAY);
-		    Log.d(TAG, "getDensity, initialDensity = " + initialDensity + " baseDensity = " + baseDensity);
+    private int getRotation() {
+        int rotation = 1;
 
-            if (initialDensity != baseDensity) {
-                return baseDensity;
+        try {
+            if (mWindowManager.isRotationFrozen()) {
+                rotation = mWindowManager.getDefaultDisplayRotation();
             } else {
-                return initialDensity;
+                rotation = ROTATION_FREE;
             }
+
+            Log.d(TAG, "getRotation, rotation = " + rotation);
+
         } catch (RemoteException e) {
-            Log.e(TAG, "getDensity failed");
+            Log.e(TAG, "getRotation failed");
         }
 
-        return DEFAULT_DENSITY;
-	}
+        return rotation;
+    }
 }

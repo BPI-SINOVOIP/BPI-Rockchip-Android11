@@ -79,6 +79,14 @@
         android:entryValues="@array/screen_density_values"
         settings:keywords="@string/keywords_screen_density" />
 
+    <com.android.settings.display.RotationListPreference
+        android:key="screen_rotation"
+        android:title="@string/screen_rotation"
+        android:summary="@string/summary_placeholder"
+        android:entries="@array/screen_rotation_entries"
+        android:entryValues="@array/screen_rotation_values"
+        settings:keywords="@string/keywords_screen_rotation" />
+
     <Preference
         android:key="adaptive_sleep_entry"
         android:title="@string/adaptive_sleep_title"

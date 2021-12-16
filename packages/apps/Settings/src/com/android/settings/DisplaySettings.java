@@ -33,6 +33,7 @@ import com.android.settings.display.TapToWakePreferenceController;
 import com.android.settings.display.ThemePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.display.DensityPreferenceController;
+import com.android.settings.display.RotationPreferenceController;
 import com.android.settings.display.VrDisplayPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -48,7 +49,6 @@ public class DisplaySettings extends DashboardFragment {
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KET_HDMI_SETTINGS = "hdmi_settings";
-    private static final String KEY_SCREEN_DENSITY = "screen_density";
 
     @Override
     public int getMetricsCategory() {
@@ -90,7 +90,8 @@ public class DisplaySettings extends DashboardFragment {
         controllers.add(new ScreenSaverPreferenceController(context));
         controllers.add(new TapToWakePreferenceController(context));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
-        controllers.add(new DensityPreferenceController(context, KEY_SCREEN_DENSITY));
+        controllers.add(new DensityPreferenceController(context));
+        controllers.add(new RotationPreferenceController(context));
         controllers.add(new VrDisplayPreferenceController(context));
         controllers.add(new ShowOperatorNamePreferenceController(context));
         controllers.add(new ThemePreferenceController(context));
