@@ -71,6 +71,14 @@
         android:entryValues="@array/dream_timeout_values"
         settings:keywords="@string/keywords_screen_timeout" />
 
+    <com.android.settings.display.DensityListPreference
+        android:key="screen_density"
+        android:title="@string/screen_density"
+        android:summary="@string/summary_placeholder"
+        android:entries="@array/screen_density_entries"
+        android:entryValues="@array/screen_density_values"
+        settings:keywords="@string/keywords_screen_density" />
+
     <Preference
         android:key="adaptive_sleep_entry"
         android:title="@string/adaptive_sleep_title"
