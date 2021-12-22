@@ -179,12 +179,30 @@
 	};
 };
 
+&video_phy0 {
+        status = "okay";
+};
+
+&video_phy1 {
+        status = "disabled";
+};
+
+&route_dsi0 {
+        status = "okay";
+        connect = <&vp1_out_dsi0>;
+};
+
+&route_dsi1 {
+        status = "disabled";
+        connect = <&vp1_out_dsi0>;
+};
+
 /*
  * video_phy0 needs to be enabled
  * when dsi0 is enabled
  */
 &dsi0 {
-	status = "disabled";
+	status = "okay";
 };
 
 &dsi0_in_vp0 {
@@ -192,11 +210,16 @@
 };
 
 &dsi0_in_vp1 {
-	status = "disabled";
+	status = "okay";
 };
 
 &dsi0_panel {
 	power-supply = <&vcc3v3_lcd0_n>;
+	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+};
+
+&backlight {
+	status = "okay";
 };
 
 /*
@@ -217,6 +240,10 @@
 
 &dsi1_panel {
 	power-supply = <&vcc3v3_lcd1_n>;
+};
+
+&backlight1 {
+	status = "disabled";
 };
 
 &edp {
@@ -302,6 +329,7 @@
  * when mipi panel is connected to dsi1.
  */
 &gt1x {
+	status = "disabled";
 	power-supply = <&vcc3v3_lcd0_n>;
 };
 
@@ -362,14 +390,6 @@
 		reg = <0x0>;
 	};
 };*/
-
-&video_phy0 {
-	status = "okay";
-};
-
-&video_phy1 {
-	status = "disabled";
-};
 
 &pcie30phy {
 	status = "okay";
@@ -433,11 +453,6 @@
 	};
 };
 
-&route_dsi0 {
-	status = "disabled";
-	connect = <&vp1_out_dsi0>;
-};
-
 &sata2 {
 	status = "okay";
 };
@@ -471,8 +486,8 @@
 };
 
 &vcc3v3_lcd0_n {
-	status = "disabled";
-	gpio = <&gpio0 RK_PC7 GPIO_ACTIVE_HIGH>;
+	status = "okay";
+	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
 	enable-active-high;
 };
 
@@ -507,8 +522,18 @@
 	};
 };
 
+/* backlight for panel0 */
+&pwm4 {
+	status = "okay";
+};
+
 &pwm8 {
 	status = "okay";
+};
+
+/* backlight for panel1 */
+&pwm9 {
+	status = "disabled";
 };
 
 &fan {
