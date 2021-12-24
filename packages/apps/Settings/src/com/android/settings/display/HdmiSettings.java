@@ -387,13 +387,13 @@ public class HdmiSettings extends SettingsPreferenceFragment
 
         mAuxCategory = (PreferenceCategory) findPreference(KEY_AUX_CATEGORY);
         mAuxScreenVH = (CheckBoxPreference) findPreference(KEY_AUX_SCREEN_VH);
-        mAuxScreenVH.setChecked(SystemProperties.getBoolean("persist.sys.rotation.efull", false));
+        mAuxScreenVH.setChecked(SystemProperties.getBoolean("persist.sys.rotation.efull-1", false));
         mAuxScreenVH.setOnPreferenceChangeListener(this);
-        mAuxCategory.removePreference(mAuxScreenVH);
+        //mAuxCategory.removePreference(mAuxScreenVH);
         mAuxScreenVHList = (ListPreference) findPreference(KEY_AUX_SCREEN_VH_LIST);
         mAuxScreenVHList.setOnPreferenceChangeListener(this);
         mAuxScreenVHList.setOnPreferenceClickListener(this);
-        mAuxCategory.removePreference(mAuxScreenVHList);
+        //mAuxCategory.removePreference(mAuxScreenVHList);
     }
 
     private void sendSwitchDeviceOffOnMsg(ITEM_CONTROL control, int status) {
@@ -592,7 +592,7 @@ public class HdmiSettings extends SettingsPreferenceFragment
             showWaitingDialog(R.string.dialog_getting_screen_info);
             sendUpdateStateMsg(ITEM_CONTROL.SHOW_RESOLUTION_ITEM, 1000);
         } else if (preference == mAuxScreenVHList) {
-            String value = SystemProperties.get("persist.sys.rotation.einit", "0");
+            String value = SystemProperties.get("persist.sys.rotation.einit-1", "0");
             mAuxScreenVHList.setValue(value);
         }
         return true;
@@ -650,15 +650,15 @@ public class HdmiSettings extends SettingsPreferenceFragment
             mEnableDisplayListener = false;
             showWaitingDialog(R.string.dialog_wait_screen_connect);
             if ((Boolean) obj) {
-                SystemProperties.set("persist.sys.rotation.efull", "true");
+                SystemProperties.set("persist.sys.rotation.efull-1", "true");
             } else {
-                SystemProperties.set("persist.sys.rotation.efull", "false");
+                SystemProperties.set("persist.sys.rotation.efull-1", "false");
             }
             sendSwitchDeviceOffOnMsg(ITEM_CONTROL.REFRESH_DISPLAY_STATUS_INFO, SWITCH_STATUS_OFF_ON);
         } else if (preference == mAuxScreenVHList) {
             mEnableDisplayListener = false;
             showWaitingDialog(R.string.dialog_wait_screen_connect);
-            SystemProperties.set("persist.sys.rotation.einit", obj.toString());
+            SystemProperties.set("persist.sys.rotation.einit-1", obj.toString());
             //mDisplayManager.forceScheduleTraversalLocked();
             sendSwitchDeviceOffOnMsg(ITEM_CONTROL.REFRESH_DISPLAY_STATUS_INFO, SWITCH_STATUS_OFF_ON);
         }

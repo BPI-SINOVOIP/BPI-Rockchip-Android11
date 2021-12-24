@@ -9,17 +9,17 @@
 
     <PreferenceCategory
         android:key="aux_category"
-        android:title="@string/screen_title">
+        android:title="@string/secondary_screen_title">
 
         <CheckBoxPreference
             android:key="aux_screen_vh"
-            android:title="@string/screen_full_vh" />
+            android:title="@string/secondary_screen_full_vh" />
 
         <ListPreference
             android:entries="@array/dual_screen_ver_hor_entries"
             android:entryValues="@array/dual_screen_ver_hor_values"
             android:key="aux_screen_vhlist"
-            android:title="@string/screen_rotation" />
+            android:title="@string/secondary_screen_rotation" />
     </PreferenceCategory>
 
 

@@ -77,6 +77,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.dhcpserver.start=172.16.1.100 \
 	persist.dhcpserver.end=172.16.1.150
 
+# navigation bar power and voice button
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.rk.systembar.voiceicon=true \
 	ro.rk.systembar.powericon=true
+
+# secondary screen rotation(0=0, 1=90, 2=180, 3=270)
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.rotation.einit-1=0
+
+# secondary screen full display
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.rotation.efull-1=false
+
+# primary/secondary screen mouse control
+PRODUCT_PROPERTY_OVERRIDES += \
+	sys.mouse.presentation=1
