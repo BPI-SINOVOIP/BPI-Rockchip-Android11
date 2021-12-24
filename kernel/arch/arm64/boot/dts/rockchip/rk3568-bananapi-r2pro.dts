@@ -184,7 +184,7 @@
 };
 
 &video_phy1 {
-        status = "disabled";
+        status = "okay";
 };
 
 &route_dsi0 {
@@ -193,8 +193,8 @@
 };
 
 &route_dsi1 {
-        status = "disabled";
-        connect = <&vp1_out_dsi0>;
+        status = "okay";
+        connect = <&vp1_out_dsi1>;
 };
 
 /*
@@ -227,7 +227,7 @@
  * when dsi1 is enabled
  */
 &dsi1 {
-	status = "disabled";
+	status = "okay";
 };
 
 &dsi1_in_vp0 {
@@ -235,15 +235,15 @@
 };
 
 &dsi1_in_vp1 {
-	status = "disabled";
+	status = "okay";
 };
 
 &dsi1_panel {
-	power-supply = <&vcc3v3_lcd1_n>;
+	power-supply = <&vcc3v3_lcd0_n>;
 };
 
 &backlight1 {
-	status = "disabled";
+	status = "okay";
 };
 
 &edp {
@@ -533,7 +533,7 @@
 
 /* backlight for panel1 */
 &pwm9 {
-	status = "disabled";
+	status = "okay";
 };
 
 &fan {
