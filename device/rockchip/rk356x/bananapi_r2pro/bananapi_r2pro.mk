@@ -80,7 +80,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # navigation bar power and voice button
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.rk.systembar.voiceicon=true \
-	ro.rk.systembar.powericon=true
+	ro.rk.systembar.powericon=true \
+	ro.rk.systembar.rotateicon=false
 
 # secondary screen rotation(0=0, 1=90, 2=180, 3=270)
 PRODUCT_PROPERTY_OVERRIDES += \

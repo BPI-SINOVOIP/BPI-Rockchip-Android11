@@ -142,6 +142,10 @@ import javax.inject.Inject;
 
 import dagger.Lazy;
 
+import android.view.IWindowManager;
+import android.view.WindowManagerGlobal;
+import android.view.Surface;
+
 /**
  * Fragment containing the NavigationBarFragment. Contains logic for what happens
  * on clicks and view states of the nav bar.
@@ -214,6 +218,9 @@ public class NavigationBarFragment extends LifecycleFragment implements Callback
     public int mDisplayId;
     private boolean mIsOnDefaultDisplay;
     public boolean mHomeBlockedThisTouch;
+
+    //for rotation
+    private static int rotation =  0;
 
     /**
      * When user is QuickSwitching between apps of different orientations, we'll draw a fake
@@ -1059,6 +1066,17 @@ public class NavigationBarFragment extends LifecycleFragment implements Callback
         }else{
             poweroffButton.setVisibility(View.GONE);
         }
+
+        /*bpi, add rotation navigation button*/
+        ButtonDispatcher rotationButton = mNavigationBarView.getRotationButton();
+        rotationButton.setOnClickListener(this:: onRotationClick);
+        rotationButton.setOnTouchListener(this:: onRotationTouch);
+        boolean showRotationButton="true".equals(SystemProperties.get("ro.rk.systembar.rotateicon","true"));
+        if (showRotationButton) {
+            rotationButton.setVisibility(View.VISIBLE);
+        } else {
+            rotationButton.setVisibility(View.GONE);
+        }
     }
 
     private boolean onPoweroffTouch(View v, MotionEvent event) {
@@ -1072,6 +1090,49 @@ public class NavigationBarFragment extends LifecycleFragment implements Callback
     private void onPoweroffClick(View v) {
         Intent intent=new Intent(Intent.ACTION_NAVIGATIONBAR_POWEROFF);
         getContext().sendBroadcast(intent);
+    }
+
+    private boolean onRotationTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            try {
+                // ROTATION_0 = 0;
+                // ROTATION_90 = 1;
+                // ROTATION_180 = 2;
+                // ROTATION_270 = 3;
+               IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+                rotation = wm.getDefaultDisplayRotation();
+                rotation ++;
+                if(rotation > Surface.ROTATION_270)
+                    rotation = Surface.ROTATION_0;
+
+                Log.w(TAG, "navigation rotation " + rotation);
+
+                wm.freezeRotation(rotation);
+            } catch (RemoteException exc) {
+                Log.w(TAG, "Unable to Rotation");
+            }
+        }
+        return false;
+    }
+
+    private void onRotationClick(View v) {
+        try {
+            // ROTATION_0 = 0;
+            // ROTATION_90 = 1;
+            // ROTATION_180 = 2;
+            // ROTATION_270 = 3;
+            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            rotation = wm.getDefaultDisplayRotation();
+            rotation ++;
+            if(rotation > Surface.ROTATION_270)
+                rotation = Surface.ROTATION_0;
+
+            Log.w(TAG, "navigation rotation " + rotation);
+
+            wm.freezeRotation(rotation);
+        } catch (RemoteException exc) {
+            Log.w(TAG, "Unable to Rotation");
+        }
     }
 
     private boolean onHomeTouch(View v, MotionEvent event) {

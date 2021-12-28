@@ -126,6 +126,7 @@ public class NavigationBarView extends FrameLayout implements
     private KeyButtonDrawable mVolumeSubIcon;
     private KeyButtonDrawable mScreenshotIcon;
     private KeyButtonDrawable mPoweroffIcon;
+    private KeyButtonDrawable mRotationIcon;
     private EdgeBackGestureHandler mEdgeBackGestureHandler;
     private final DeadZone mDeadZone;
     private boolean mDeadZoneConsuming = false;
@@ -336,6 +337,7 @@ public class NavigationBarView extends FrameLayout implements
         mButtonDispatchers.put(R.id.volume_add, new ButtonDispatcher(R.id.volume_add));
         mButtonDispatchers.put(R.id.volume_sub, new ButtonDispatcher(R.id.volume_sub));
         mButtonDispatchers.put(R.id.poweroff, new ButtonDispatcher(R.id.poweroff));
+        mButtonDispatchers.put(R.id.rotation, new ButtonDispatcher(R.id.rotation));
         mDeadZone = new DeadZone(this);
 
         mNavColorSampleMargin = getResources()
@@ -487,6 +489,11 @@ public class NavigationBarView extends FrameLayout implements
     public ButtonDispatcher getPoweroffButton(){
         return mButtonDispatchers.get(R.id.poweroff);
     }
+
+    public ButtonDispatcher getRotationButton(){
+        return mButtonDispatchers.get(R.id.rotation);
+    }
+
     public ButtonDispatcher getVolumeAddButton() {
         return mButtonDispatchers.get(R.id.volume_add);
     }
@@ -544,6 +551,7 @@ public class NavigationBarView extends FrameLayout implements
         mVolumeSubIcon = getDrawable(R.drawable.ic_sysbar_volume_sub_button);
         mScreenshotIcon = getDrawable(R.drawable.ic_sysbar_capture_button);
         mPoweroffIcon  = getDrawable(R.drawable.ic_sysbar_poweroff);
+        mRotationIcon  = getDrawable(R.drawable.ic_sysbar_rotation);
     }
 
     public KeyButtonDrawable getBackDrawable() {
@@ -701,6 +709,7 @@ public class NavigationBarView extends FrameLayout implements
         getVolumeSubButton().setImageDrawable(mVolumeSubIcon);
         getScreenshotButton().setImageDrawable(mScreenshotIcon);
         getPoweroffButton().setImageDrawable(mPoweroffIcon);
+        getRotationButton().setImageDrawable(mRotationIcon);
 
         updateRecentsIcon();
 
