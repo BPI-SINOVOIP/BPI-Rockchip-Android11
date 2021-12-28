@@ -94,8 +94,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # primary/secondary screen mouse control
 PRODUCT_PROPERTY_OVERRIDES += \
 	sys.mouse.presentation=1
-
-# primary/secondary screen
-PRODUCT_PROPERTY_OVERRIDES += \
-       vendor.hwc.device.primary=DSI1 \
-       vendor.hwc.device.extend=HDMI-A
