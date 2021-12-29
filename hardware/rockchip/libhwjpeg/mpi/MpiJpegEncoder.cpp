@@ -27,7 +27,6 @@
 #include "mpp_err.h"
 #include "Utils.h"
 #include "MpiDebug.h"
-#include "version.h"
 #include "RKEncoderWraper.h"
 #include "QList.h"
 #include "MpiJpegEncoder.h"
@@ -76,8 +75,6 @@ MpiJpegEncoder::MpiJpegEncoder() :
     mInputFile(NULL),
     mOutputFile(NULL)
 {
-    ALOGI("version - %s", GIT_INFO);
-
     /* input format set to YUV420SP default */
     mInputFmt = INPUT_FMT_YUV420SP;
 

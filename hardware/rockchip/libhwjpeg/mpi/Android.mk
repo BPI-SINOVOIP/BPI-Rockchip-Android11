@@ -1,10 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-$(info $(shell ($(LOCAL_PATH)/compile_setup.sh $(LOCAL_PATH))))
-
-include $(CLEAR_VARS)
-
 LOCAL_ARM_MODE := thumb
 # used for testing
 # LOCAL_CFLAGS += -g -O0

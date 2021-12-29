@@ -31,7 +31,6 @@
 #include "QList.h"
 #include "JpegParser.h"
 #include "Utils.h"
-#include "version.h"
 #include "MpiJpegDecoder.h"
 
 uint32_t dec_debug = 0;
@@ -78,8 +77,6 @@ MpiJpegDecoder::MpiJpegDecoder() :
     mInputFile(NULL),
     mOutputFile(NULL)
 {
-    ALOGI("version - %s", GIT_INFO);
-
     // Output Format set to YUV420SP default
     mOutputFmt = OUT_FORMAT_YUV420SP;
     mBpp = 1.5;
