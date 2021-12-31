@@ -103,6 +103,7 @@ static int rockchip_set_ethaddr(void)
 			if (!randomed) {
 				net_random_ethaddr(&ethaddr[i * ARP_HLEN]);
 				randomed = true;
+				printf("random ethaddr\n");
 			} else {
 				if (i > 0) {
 					memcpy(&ethaddr[i * ARP_HLEN],
@@ -123,6 +124,7 @@ static int rockchip_set_ethaddr(void)
 			else
 				sprintf(mac, "eth%daddr", i);
 			env_set(mac, buf);
+			printf("eth%daddr: %s\n", i, buf);
 		}
 	}
 
@@ -208,6 +210,8 @@ static int rockchip_set_serialno(void)
 #ifdef CONFIG_ROCKCHIP_VENDOR_PARTITION
 	}
 #endif
+
+	printf("serial: %s\n", serialno_str);
 
 	return ret;
 }
