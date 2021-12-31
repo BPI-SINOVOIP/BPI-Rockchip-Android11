@@ -7,6 +7,7 @@
 #include <common.h>
 #include <dwc3-uboot.h>
 #include <usb.h>
+#include <bananapi-common.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -61,4 +62,14 @@ void set_dtb_name(void)
 	printf("dtb variant: %s\n", dtb_name);
 
 	env_set("dtb_name", dtb_name);
+}
+
+int rk_board_late_init(void)
+{
+	if (board_is_bananapi_r2pro()) {
+		printf("board: Bananapi R2Pro\n");
+		env_set("board", "bananapi_r2pro");
+	}
+
+	return 0;
 }

@@ -4,4 +4,4 @@
 # Copyright (c) 2020 Rockchip Electronics Co., Ltd
 #
 
-obj-y	+= bananapi_r2pro.o
+obj-y	+= bananapi_r2pro.o hw_rev.o
