@@ -509,14 +509,19 @@ int rockchip_read_resource_file(void *buf, const char *name, int offset, int len
 int rockchip_read_resource_dtb(void *fdt_addr, char **hash, int *hash_size)
 {
 	struct resource_file *file = NULL;
+	char *def_dtb;
 	int ret;
+
+	def_dtb = env_get("dtb_name");
+	if (!def_dtb)
+		def_dtb = DEFAULT_DTB_FILE;
 
 #ifdef CONFIG_ROCKCHIP_HWID_DTB
 	file = resource_read_hwid_dtb();
 #endif
 	/* If dtbs matched hardware id(GPIO/ADC) not found, try the default */
 	if (!file)
-		file = get_file_info(DEFAULT_DTB_FILE);
+		file = get_file_info(def_dtb);
 
 	if (!file)
 		return -ENODEV;

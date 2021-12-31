@@ -199,8 +199,15 @@ endif
 LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))
 LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))
 
+ifdef CONFIG_ARCH_BANANAPI_R2PRO
+DTBS := rk3568-bananapi-*.dtb
+bananapi-r2pro-dtbs: dtbs kernel.img $(LOGO) $(LOGO_KERNEL)
+	$(Q)$(srctree)/scripts/mkimg --dtb $(DTBS) --keep-dtb-name
+PHONY += bananapi-r2pro-dtbs
+else
 %.img: rockchip/%.dtb kernel.img $(LOGO) $(LOGO_KERNEL)
 	$(Q)$(srctree)/scripts/mkimg --dtb $*.dtb
+endif
 
 CLEAN_DIRS += out
 CLEAN_FILES += boot.img kernel.img resource.img zboot.img

@@ -1,4 +1,11 @@
 # SPDX-License-Identifier: GPL-2.0
+
+ifeq ($(CONFIG_ARCH_BANANAPI_R2PRO),y)
+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-bananapi-r2pro.dtb \
+	rk3568-bananapi-r2pro-hdmi.dtb \
+	rk3568-bananapi-r2pro-lcd0.dtb \
+	rk3568-bananapi-r2pro-lcd1.dtb
+else
 dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-ad-d6-anx6345.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-ad-r35-mb-rk618-dual-lvds.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-ad-r35-mb-rk618-hdmi.dtb
@@ -110,4 +117,4 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-nvr-demo-v10-linux.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-nvr-demo-v10-linux-spi-nand.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-nvr-demo-v12-linux.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-nvr-demo-v12-linux-spi-nand.dtb
-dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-bananapi-r2pro.dtb
+endif

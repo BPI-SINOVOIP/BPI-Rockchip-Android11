@@ -27,7 +27,7 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
 endif
 
 PRODUCT_UBOOT_CONFIG := bananapi_r2pro
-PRODUCT_KERNEL_DTS := rk3568-bananapi-r2pro
+PRODUCT_KERNEL_DTS := bananapi-r2pro-dtbs
 PRODUCT_KERNEL_CONFIG := bananapi_r2pro_defconfig android-11.config
 
 BOARD_GSENSOR_MXC6655XA_SUPPORT := true
@@ -36,5 +36,5 @@ BOARD_HS_ETHERNET := true
 BOARD_QUECTEL_RIL := true
 BOARD_HAVE_DONGLE := true
 
-# primary panel landscape
-SF_PRIMARY_DISPLAY_ORIENTATION := 90
+# primary panel orientation
+SF_PRIMARY_DISPLAY_ORIENTATION := 0

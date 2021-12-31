@@ -1,0 +1,364 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+ *
+ * 10.1 inch 1200x1920 mipi AML101FDJI4001, ICHX8279.
+ *
+ */
+
+/dts-v1/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+#include "rk3568-bananapi-r2pro.dts"
+
+&video_phy0 {
+        status = "okay";
+};
+
+&video_phy1 {
+        status = "okay";
+};
+
+&route_dsi0 {
+        status = "okay";
+        connect = <&vp1_out_dsi0>;
+};
+
+&route_dsi1 {
+        status = "okay";
+        connect = <&vp1_out_dsi1>;
+};
+
+/*
+ * video_phy0 needs to be enabled
+ * when dsi0 is enabled
+ */
+&dsi0 {
+	status = "okay";
+};
+
+&dsi0_in_vp0 {
+	status = "disabled";
+};
+
+&dsi0_in_vp1 {
+	status = "okay";
+};
+
+&dsi0_panel {
+	power-supply = <&vcc3v3_lcd0_n>;
+	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+
+	panel-init-sequence = [
+			15 00 02 B0 01
+			15 00 02 C0 26
+			15 00 02 C1 10
+			15 00 02 C2 0E
+			15 00 02 C3 00
+			15 00 02 C4 00
+			15 00 02 C5 23
+			15 00 02 C6 11
+			15 00 02 C7 22
+			15 00 02 C8 20
+			15 00 02 C9 1E
+			15 00 02 CA 1C
+			15 00 02 CB 0C
+			15 00 02 CC 0A
+			15 00 02 CD 08
+			15 00 02 CE 06
+			15 00 02 CF 18
+			15 00 02 D0 02
+			15 00 02 D1 00
+			15 00 02 D2 00
+			15 00 02 D3 00
+			15 00 02 D4 26
+			15 00 02 D5 0F
+			15 00 02 D6 0D
+			15 00 02 D7 00
+			15 00 02 D8 00
+			15 00 02 D9 23
+			15 00 02 DA 11
+			15 00 02 DB 21
+			15 00 02 DC 1F
+			15 00 02 DD 1D
+			15 00 02 DE 1B
+			15 00 02 DF 0B
+			15 00 02 E0 09
+			15 00 02 E1 07
+			15 00 02 E2 05
+			15 00 02 E3 17
+			15 00 02 E4 01
+			15 00 02 E5 00
+			15 00 02 E6 00
+			15 00 02 E7 00
+			15 00 02 B0 03
+			15 00 02 BE 04
+			15 00 02 B9 40
+			15 00 02 CC 88
+			15 00 02 C8 0C
+			15 00 02 C9 07
+			15 00 02 CD 01
+			15 00 02 CA 40
+			15 00 02 CE 1A
+			15 00 02 CF 60
+			15 00 02 D2 08
+			15 00 02 D3 08
+			15 00 02 DB 01
+			15 00 02 D9 06
+			15 00 02 D4 00
+			15 00 02 D5 01
+			15 00 02 D6 04
+			15 00 02 D7 03
+			15 00 02 C2 00
+			15 00 02 C3 0E
+			15 00 02 C4 00
+			15 00 02 C5 0E
+			15 00 02 DD 00
+			15 00 02 DE 0E
+			15 00 02 E6 00
+			15 00 02 E7 0E
+			15 00 02 C2 00
+			15 00 02 C3 0E
+			15 00 02 C4 00
+			15 00 02 C5 0E
+			15 00 02 DD 00
+			15 00 02 DE 0E
+			15 00 02 E6 00
+			15 00 02 E7 0E
+			15 00 02 B0 06
+			15 00 02 C0 A5
+			15 00 02 D5 1C
+			15 00 02 C0 00
+			15 00 02 B0 00
+			15 00 02 BD 30
+
+			15 00 02 F9 5C
+			15 00 02 C2 14
+			15 00 02 C4 14
+			15 00 02 BF 15
+			15 00 02 C0 0C
+
+
+			15 00 02 B0 00
+			15 00 02 B1 79
+			15 00 02 BA 8F
+
+			05 78 01 11
+			05 78 01 29
+		];
+
+		panel-exit-sequence = [
+			05 00 01 28
+			05 00 01 10
+		];
+
+		disp_timings0: display-timings {
+			native-mode = <&dsi0_timing0>;
+			dsi0_timing0: timing0 {
+				clock-frequency = <160000000>;
+				hactive = <1200>;
+				vactive = <1920>;
+				hfront-porch = <80>;
+				hsync-len = <1>;
+				hback-porch = <60>;
+				vfront-porch = <35>;
+				vsync-len = <1>;
+				vback-porch = <25>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <1>;
+			};
+		};
+};
+
+&backlight {
+	status = "okay";
+};
+
+/*
+ * video_phy1 needs to be enabled
+ * when dsi1 is enabled
+ */
+&dsi1 {
+	status = "okay";
+};
+
+&dsi1_in_vp0 {
+	status = "disabled";
+};
+
+&dsi1_in_vp1 {
+	status = "okay";
+};
+
+&dsi1_panel {
+	power-supply = <&vcc3v3_lcd0_n>;
+	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+
+	panel-init-sequence = [
+			15 00 02 B0 01
+			15 00 02 C0 26
+			15 00 02 C1 10
+			15 00 02 C2 0E
+			15 00 02 C3 00
+			15 00 02 C4 00
+			15 00 02 C5 23
+			15 00 02 C6 11
+			15 00 02 C7 22
+			15 00 02 C8 20
+			15 00 02 C9 1E
+			15 00 02 CA 1C
+			15 00 02 CB 0C
+			15 00 02 CC 0A
+			15 00 02 CD 08
+			15 00 02 CE 06
+			15 00 02 CF 18
+			15 00 02 D0 02
+			15 00 02 D1 00
+			15 00 02 D2 00
+			15 00 02 D3 00
+			15 00 02 D4 26
+			15 00 02 D5 0F
+			15 00 02 D6 0D
+			15 00 02 D7 00
+			15 00 02 D8 00
+			15 00 02 D9 23
+			15 00 02 DA 11
+			15 00 02 DB 21
+			15 00 02 DC 1F
+			15 00 02 DD 1D
+			15 00 02 DE 1B
+			15 00 02 DF 0B
+			15 00 02 E0 09
+			15 00 02 E1 07
+			15 00 02 E2 05
+			15 00 02 E3 17
+			15 00 02 E4 01
+			15 00 02 E5 00
+			15 00 02 E6 00
+			15 00 02 E7 00
+			15 00 02 B0 03
+			15 00 02 BE 04
+			15 00 02 B9 40
+			15 00 02 CC 88
+			15 00 02 C8 0C
+			15 00 02 C9 07
+			15 00 02 CD 01
+			15 00 02 CA 40
+			15 00 02 CE 1A
+			15 00 02 CF 60
+			15 00 02 D2 08
+			15 00 02 D3 08
+			15 00 02 DB 01
+			15 00 02 D9 06
+			15 00 02 D4 00
+			15 00 02 D5 01
+			15 00 02 D6 04
+			15 00 02 D7 03
+			15 00 02 C2 00
+			15 00 02 C3 0E
+			15 00 02 C4 00
+			15 00 02 C5 0E
+			15 00 02 DD 00
+			15 00 02 DE 0E
+			15 00 02 E6 00
+			15 00 02 E7 0E
+			15 00 02 C2 00
+			15 00 02 C3 0E
+			15 00 02 C4 00
+			15 00 02 C5 0E
+			15 00 02 DD 00
+			15 00 02 DE 0E
+			15 00 02 E6 00
+			15 00 02 E7 0E
+			15 00 02 B0 06
+			15 00 02 C0 A5
+			15 00 02 D5 1C
+			15 00 02 C0 00
+			15 00 02 B0 00
+			15 00 02 BD 30
+
+			15 00 02 F9 5C
+			15 00 02 C2 14
+			15 00 02 C4 14
+			15 00 02 BF 15
+			15 00 02 C0 0C
+
+
+			15 00 02 B0 00
+			15 00 02 B1 79
+			15 00 02 BA 8F
+
+			05 78 01 11
+			05 78 01 29
+		];
+
+		panel-exit-sequence = [
+			05 00 01 28
+			05 00 01 10
+		];
+
+		disp_timings1: display-timings {
+			native-mode = <&dsi1_timing0>;
+			dsi1_timing0: timing0 {
+				clock-frequency = <160000000>;
+				hactive = <1200>;
+				vactive = <1920>;
+				hfront-porch = <80>;
+				hsync-len = <1>;
+				hback-porch = <60>;
+				vfront-porch = <35>;
+				vsync-len = <1>;
+				vback-porch = <25>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <1>;
+			};
+		};
+};
+
+&backlight1 {
+	status = "okay";
+};
+
+&vcc3v3_lcd0_n {
+	status = "okay";
+	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	enable-active-high;
+};
+
+&vcc3v3_lcd1_n {
+	status = "disabled";
+	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	enable-active-high;
+};
+
+/* backlight for panel0 */
+&pwm4 {
+	status = "okay";
+};
+
+/* backlight for panel1 */
+&pwm9 {
+	status = "okay";
+};
+
+&hdmi {
+	status = "okay";
+};
+
+&hdmi_in_vp0 {
+	status = "okay";
+};
+
+&hdmi_in_vp1 {
+	status = "disabled";
+};
+
+&route_hdmi {
+	status = "okay";
+	connect = <&vp0_out_hdmi>;
+};

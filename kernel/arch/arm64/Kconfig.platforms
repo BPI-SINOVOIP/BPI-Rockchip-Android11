@@ -163,6 +163,13 @@ config ARCH_ROCKCHIP
 	  This enables support for the ARMv8 based Rockchip chipsets,
 	  like the RK3368.
 
+config ARCH_BANANAPI_R2PRO
+	bool "Bananapi R2Pro Single Board Computer"
+	depends on ARCH_ROCKCHIP
+	help
+	  This enables support for the board Bananapi R2Pro of Sinovoip
+	  which is based on ARMv8 SoC of Rockchip RK3568 chipsets.
+
 config ARCH_SEATTLE
 	bool "AMD Seattle SoC Family"
 	help

@@ -21,6 +21,8 @@ while [ $# -gt 0 ]; do
 			DTB=$2
 			shift 2
 			;;
+		--keep-dtb-name)
+			DTB_ARGS="--dtbname"; shift 1;;
 		-h)
 			usage
 			exit 0
@@ -63,7 +65,7 @@ else
 	KERNEL_ZIMAGE_ARG="--kernel ${objtree}/arch/arm64/boot/Image.lz4"
 	ZIMAGE=Image.lz4
 fi
-if [ ! -f ${DTB_PATH} ]; then
+if ! find ${DTB_PATH} >/dev/null; then
 	echo "No dtb" >&2
 	usage
 	exit 1
@@ -221,11 +223,11 @@ if [ "${srctree}" != "${objtree}" ]; then
 		cp -a ${LOGO_KERNEL_PATH} ${objtree}/;
 	fi
 fi
-scripts/resource_tool ${DTB_PATH} ${LOGO} ${LOGO_KERNEL} >/dev/null
+scripts/resource_tool ${DTB_ARGS} ${DTB_PATH} ${LOGO} ${LOGO_KERNEL} >/dev/null
 
-if [ "${ARCH}" == "arm64" ]; then
-	./scripts/io-domain.sh ${srctree}/arch/arm64/boot/dts/rockchip/.${DTB}
-fi
+#if [ "${ARCH}" == "arm64" ]; then
+#	./scripts/io-domain.sh ${srctree}/arch/arm64/boot/dts/rockchip/.${DTB}
+#fi
 
 echo "  Image:  resource.img (with ${DTB} ${LOGO} ${LOGO_KERNEL}) is ready"
 

@@ -31,3 +31,34 @@ int board_usb_init(int index, enum usb_init_type init)
 	return dwc3_uboot_init(&dwc3_device_data);
 }
 #endif
+
+#define BANANAPI_R2PRO_HDMI	0
+#define BANANAPI_R2PRO_LCD0	1
+#define BANANAPI_R2PRO_LCD1	2
+char *get_board_variant(void)
+{
+	int board_rev = 1;
+
+	switch(board_rev) {
+		case BANANAPI_R2PRO_HDMI:
+			return "r2pro-hdmi";
+		case BANANAPI_R2PRO_LCD0:
+			return "r2pro-lcd0";
+		case BANANAPI_R2PRO_LCD1:
+			return "r2pro-lcd1";
+		default:
+			return "r2pro";
+	}
+}
+
+void set_dtb_name(void)
+{
+	char dtb_name[64] = {0, };
+
+	snprintf(dtb_name, ARRAY_SIZE(dtb_name),
+			"rk3568-bananapi-%s.dtb", get_board_variant());
+
+	printf("dtb variant: %s\n", dtb_name);
+
+	env_set("dtb_name", dtb_name);
+}

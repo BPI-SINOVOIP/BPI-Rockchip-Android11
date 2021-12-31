@@ -1,0 +1,117 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+ *
+ */
+
+/dts-v1/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+#include "rk3568-bananapi-r2pro.dts"
+
+&video_phy0 {
+        status = "disabled";
+};
+
+&video_phy1 {
+        status = "disabled";
+};
+
+&route_dsi0 {
+        status = "disabled";
+        connect = <&vp1_out_dsi0>;
+};
+
+&route_dsi1 {
+        status = "disabled";
+        connect = <&vp1_out_dsi1>;
+};
+
+/*
+ * video_phy0 needs to be enabled
+ * when dsi0 is enabled
+ */
+&dsi0 {
+	status = "disabled";
+};
+
+&dsi0_in_vp0 {
+	status = "disabled";
+};
+
+&dsi0_in_vp1 {
+	status = "disabled";
+};
+
+&dsi0_panel {
+	power-supply = <&vcc3v3_lcd0_n>;
+	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+};
+
+&backlight {
+	status = "disabled";
+};
+
+/*
+ * video_phy1 needs to be enabled
+ * when dsi1 is enabled
+ */
+&dsi1 {
+	status = "disabled";
+};
+
+&dsi1_in_vp0 {
+	status = "disabled";
+};
+
+&dsi1_in_vp1 {
+	status = "disabled";
+};
+
+&dsi1_panel {
+	power-supply = <&vcc3v3_lcd0_n>;
+};
+
+&backlight1 {
+	status = "disabled";
+};
+
+&vcc3v3_lcd0_n {
+	status = "disabled";
+	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	enable-active-high;
+};
+
+&vcc3v3_lcd1_n {
+	status = "disabled";
+	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	enable-active-high;
+};
+
+/* backlight for panel0 */
+&pwm4 {
+	status = "disabled";
+};
+
+/* backlight for panel1 */
+&pwm9 {
+	status = "disabled";
+};
+
+&hdmi {
+	status = "okay";
+};
+
+&hdmi_in_vp0 {
+	status = "okay";
+};
+
+&hdmi_in_vp1 {
+	status = "disabled";
+};
+
+&route_hdmi {
+	status = "okay";
+	connect = <&vp0_out_hdmi>;
+};

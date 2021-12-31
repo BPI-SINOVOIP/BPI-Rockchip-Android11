@@ -78,6 +78,11 @@ __weak int rk_board_init(void)
 	return 0;
 }
 
+__weak void set_dtb_name(void)
+{
+	return;
+}
+
 /*
  * define serialno max length, the max length is 512 Bytes
  * The remaining bytes are used to ensure that the first 512 bytes
@@ -450,6 +455,8 @@ int board_init(void)
 #ifdef DEBUG
 	soc_clk_dump();
 #endif
+
+	set_dtb_name();
 
 #ifdef CONFIG_USING_KERNEL_DTB
 #ifdef CONFIG_MTD_BLK
