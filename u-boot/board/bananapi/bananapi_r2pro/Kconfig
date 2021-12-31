@@ -1,0 +1,15 @@
+if TARGET_BANANAPI_R2PRO
+
+config SYS_BOARD
+	default "bananapi_r2pro"
+
+config SYS_VENDOR
+	default "bananapi"
+
+config SYS_CONFIG_NAME
+	default "bananapi_r2pro"
+
+config BOARD_SPECIFIC_OPTIONS # dummy
+	def_bool y
+
+endif

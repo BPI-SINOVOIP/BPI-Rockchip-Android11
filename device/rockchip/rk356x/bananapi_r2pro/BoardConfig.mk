@@ -26,8 +26,10 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     TARGET_RECOVERY_FSTAB := device/rockchip/rk356x/rk3566_r/recovery.fstab_AB
 endif
 
-PRODUCT_UBOOT_CONFIG := rk3568
+PRODUCT_UBOOT_CONFIG := bananapi_r2pro
 PRODUCT_KERNEL_DTS := rk3568-bananapi-r2pro
+PRODUCT_KERNEL_CONFIG := bananapi_r2pro_defconfig android-11.config
+
 BOARD_GSENSOR_MXC6655XA_SUPPORT := true
 BOARD_CAMERA_SUPPORT_EXT := true
 BOARD_HS_ETHERNET := true
