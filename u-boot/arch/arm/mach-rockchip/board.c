@@ -150,6 +150,7 @@ static int rockchip_set_serialno(void)
 	u8 low[CPUID_LEN / 2], high[CPUID_LEN / 2];
 	u8 cpuid[CPUID_LEN] = {0};
 	char serialno_str[VENDOR_SN_MAX];
+	char cpuid_str[CPUID_LEN * 2 + 1];
 	int ret = 0, i;
 	u64 serialno;
 
@@ -201,6 +202,12 @@ static int rockchip_set_serialno(void)
 		for (i = 0; i < CPUID_LEN; i++)
 			cpuid[i] = (u8)(rand());
 #endif
+		memset(cpuid_str, 0, sizeof(cpuid_str));
+		for (i = 0; i < CPUID_LEN; i++)
+		sprintf(&cpuid_str[i * 2], "%02x", cpuid[i]);
+
+		printf("cpuid: %s\n", cpuid_str);
+
 		/* Generate the serial number based on CPU ID */
 		for (i = 0; i < 8; i++) {
 			low[i] = cpuid[1 + (i << 1)];
@@ -211,6 +218,7 @@ static int rockchip_set_serialno(void)
 		serialno |= (u64)crc32_no_comp(serialno, high, 8) << 32;
 		snprintf(serialno_str, sizeof(serialno_str), "%llx", serialno);
 
+		env_set("cpuid#", cpuid_str);
 		env_set("serial#", serialno_str);
 #ifdef CONFIG_ROCKCHIP_VENDOR_PARTITION
 	}
