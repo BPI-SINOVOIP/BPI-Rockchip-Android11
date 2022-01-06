@@ -111,13 +111,21 @@ PRODUCT_PACKAGES += \
     pcba_core \
     bdt
 PRODUCT_COPY_FILES += \
-   vendor/rockchip/common/wifi/iwconfig:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwconfig \
-   vendor/rockchip/common/wifi/iwlist:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwlist \
-   bootable/recovery/pcba_core/rkhal3_camera/media-ctl:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/media-ctl \
-   $(TARGET_DEVICE_DIR)/bt_vendor.conf:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/bt_vendor.conf \
-   $(call find-copy-subdir-files,*,bootable/recovery/pcba_core/res,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba) \
-   $(call find-copy-subdir-files,"*.ko",$(TOPDIR)kernel/drivers/net/wireless/rockchip_wlan,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules) \
+    vendor/rockchip/common/wifi/iwconfig:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwconfig \
+    vendor/rockchip/common/wifi/iwlist:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/iwlist \
+    bootable/recovery/pcba_core/rkhal3_camera/media-ctl:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/media-ctl \
+    $(TARGET_DEVICE_DIR)/bt_vendor.conf:$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/bt_vendor.conf \
+    $(call find-copy-subdir-files,*,bootable/recovery/pcba_core/res,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba)
+
+# wifi modules and firmwares
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,"*.ko",$(TOPDIR)kernel/drivers/net/wireless/rockchip_wlan,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules) \
     $(call find-copy-subdir-files,*,vendor/rockchip/common/wifi/firmware,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/firmware)
+
+# bluetooth modules and firmwares
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,"*.ko",$(TOPDIR)kernel/drivers/bluetooth,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/pcba/lib/modules) \
+    $(call find-copy-subdir-files,*,hardware/realtek/rtkbt/vendor/firmware,$(PRODUCT_OUT)/$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/firmware)
 endif
 
 # librkskia
