@@ -38,3 +38,5 @@ BOARD_HAVE_DONGLE := true
 
 # primary panel orientation
 SF_PRIMARY_DISPLAY_ORIENTATION := 0
+
+BOARD_HAS_FACTORY_TEST := true
