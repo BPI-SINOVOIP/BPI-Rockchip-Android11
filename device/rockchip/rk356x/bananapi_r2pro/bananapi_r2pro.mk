@@ -27,6 +27,11 @@ $(call inherit-product, device/rockchip/common/device.mk)
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/bananapi/apps/apps.mk)
 
+# copy input keylayout and device config
+PRODUCT_COPY_FILES += \
+	device/rockchip/rk356x_box/remote_config/fdd70030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fdd70030_pwm.kl \
+	device/rockchip/common/adc-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/adc-keys.kl
+
 #For RK3568 EC20
 ifeq ($(strip $(BOARD_QUECTEL_RIL)),true)
 PRODUCT_PACKAGES += rild
