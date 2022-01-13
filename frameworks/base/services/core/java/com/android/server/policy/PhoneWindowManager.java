@@ -3971,6 +3971,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             }
 
             case KeyEvent.KEYCODE_POWER: {
+		/*bpi, ignore power key for factory test*/
+		boolean productTest = SystemProperties.getBoolean("ro.test.producttest", false);
+		if (productTest) {
+			Log.d(TAG, "BPI, ignore power key for factory test");
+			break;
+		}
+
                 EventLogTags.writeInterceptPower(
                         KeyEvent.actionToString(event.getAction()),
                         mPowerKeyHandled ? 1 : 0, mPowerKeyPressCounter);
