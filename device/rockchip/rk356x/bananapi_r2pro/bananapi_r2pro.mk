@@ -62,6 +62,10 @@ PRODUCT_MODEL := bananapi_r2pro
 PRODUCT_MANUFACTURER := Sinovoip
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
+ifeq ($(BOARD_HAS_FACTORY_TEST),true)
+PRODUCT_LOCALES := zh_CN en_US
+endif
+
 #
 ## add Rockchip properties
 #
