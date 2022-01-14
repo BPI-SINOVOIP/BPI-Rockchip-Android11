@@ -44,6 +44,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
@@ -999,14 +1000,22 @@ public class Calculator extends Activity
                 mEvaluator.requireResult(Evaluator.MAIN_INDEX, this, mResultText);
             }
         }
-        if (mFormulaText.getText().toString().equals("83,991,906")) {
-                Intent intent=new Intent("android.rk.intent.action.startStressTest");
-                this.startActivity(intent);
-            }
-        if (mFormulaText.getText().toString().equals("000.")) {
-        Intent intent=new Intent("rk.intent.action.startDevicetest");
-        this.startActivity(intent);
-        }
+
+	boolean productTest = SystemProperties.getBoolean("ro.test.producttest", false);
+	if (productTest) {
+		if (mFormulaText.getText().toString().equals("83,991,906")) {
+			Intent intent=new Intent("android.rk.intent.action.startStressTest");
+			this.startActivity(intent);
+		}
+		if (mFormulaText.getText().toString().equals("000.")) {
+			Intent intent=new Intent("rk.intent.action.startDevicetest");
+			this.startActivity(intent);
+		}
+		if (mFormulaText.getText().toString().equals("111.")) {
+			Intent intent=new Intent("rk.intent.action.startAgingtest");
+			this.startActivity(intent);
+		}
+	}
     }
 
     private void onDelete() {
