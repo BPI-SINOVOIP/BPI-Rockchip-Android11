@@ -134,7 +134,11 @@ fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
+if [[ $TARGET_PRODUCT =~ "bananapi_r2pro" ]]; then
+cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS -j$BUILD_JOBS && cd -
+else
 cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j$BUILD_JOBS && cd -
+fi
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else
