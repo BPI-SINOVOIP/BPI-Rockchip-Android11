@@ -23,6 +23,28 @@
 #include <asm/byteorder.h>
 #include <asm/io.h>
 
+#if defined(CONFIG_TARGET_BANANAPI_R2PRO)
+#define CONFIG_LOAD_LINUX
+#endif
+
+#if defined(CONFIG_LOAD_LINUX)
+#include <linux/ctype.h>
+
+static
+int check_rockchip_script(ulong addr)
+{
+        char *buf;
+        char magic[32];
+        int size = snprintf(magic, sizeof(magic), "rockchip-uboot-config\n");
+
+        buf = map_sysmem(addr, 0);
+        if (strncasecmp(magic, buf, size))
+                return -EINVAL;
+
+        return size;
+}
+#endif
+
 int
 source (ulong addr, const char *fit_uname)
 {
@@ -38,6 +60,9 @@ source (ulong addr, const char *fit_uname)
 	int		noffset;
 	const void	*fit_data;
 	size_t		fit_len;
+#endif
+#if defined(CONFIG_LOAD_LINUX)
+        int size;
 #endif
 #if defined(CONFIG_IMAGE_FORMAT_LEGACY) || defined(CONFIG_FIT)
 	int		verify = env_get_yesno("verify");
@@ -131,8 +156,19 @@ source (ulong addr, const char *fit_uname)
 		break;
 #endif
 	default:
+#if defined(CONFIG_LOAD_LINUX)
+		size = check_rockchip_script(addr);
+		if (size > 0) {
+			data = (u32*)(addr + size);
+			len = simple_strtoul(env_get("filesize"), NULL, 16) - size;
+		} else {
+			puts ("Wrong image format for \"source\" command\n");
+			return 1;
+		}
+#else
 		puts ("Wrong image format for \"source\" command\n");
 		return 1;
+#endif
 	}
 
 	debug ("** Script length: %ld\n", len);

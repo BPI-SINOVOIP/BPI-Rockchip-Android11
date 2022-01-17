@@ -29,6 +29,7 @@ endif
 PRODUCT_UBOOT_CONFIG := bananapi_r2pro
 PRODUCT_KERNEL_DTS := bananapi-r2pro-dtbs
 PRODUCT_KERNEL_CONFIG := bananapi_r2pro_defconfig android-11.config
+PRODUCT_KERNEL_DIR := kernel
 
 BOARD_GSENSOR_MXC6655XA_SUPPORT := true
 BOARD_CAMERA_SUPPORT_EXT := true

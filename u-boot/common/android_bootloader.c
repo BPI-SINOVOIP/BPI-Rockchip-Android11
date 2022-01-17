@@ -861,7 +861,7 @@ int android_fdt_overlay_apply(void *fdt_addr)
 		if (!ret) {
 			snprintf(buf, 32, "%s%d", "androidboot.dtbo_idx=", index);
 			env_update("bootargs", buf);
-			printf("ANDROID: fdt overlay OK\n");
+			printf("ANDROID: fdt overlay OK(idx=%d)\n", index);
 		} else {
 			memcpy(fdt_addr, fdt_backup, totalsize);
 			printf("ANDROID: fdt overlay failed, ret=%d\n", ret);
