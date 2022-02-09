@@ -334,7 +334,9 @@ static void rtl8822ce_update_txbd(struct xmit_frame *pxmitframe,
 	SET_TX_BD_PSB(txbd, page_size_length);
 	/* starting addr of TXDESC */
 	SET_TX_BD_PHYSICAL_ADDR0_LOW(txbd, mapping);
-
+#ifdef CONFIG_64BIT_DMA
+        SET_TX_BD_PHYSICAL_ADDR0_HIGH(txbd, (u32)(mapping >> 32));
+#endif
 	/*
 	 * It is assumed that in linux implementation, packet is coalesced
 	 * in only one buffer. Extension mode is not supported here
@@ -344,6 +346,10 @@ static void rtl8822ce_update_txbd(struct xmit_frame *pxmitframe,
 	SET_TXBUFFER_DESC_AMSDU_WITH_OFFSET(txbd, 1, 0);
 	SET_TXBUFFER_DESC_ADD_LOW_WITH_OFFSET(txbd, 1,
 				      mapping + TX_WIFI_INFO_SIZE); /* pkt */
+#ifdef CONFIG_64BIT_DMA
+	SET_TXBUFFER_DESC_ADD_HIGH_WITH_OFFSET(txbd, 1,
+					(u32)((mapping + TX_WIFI_INFO_SIZE) >> 32)); /* pkt */
+#endif
 #endif
 
 	/*buf_desc_debug("TX:%s, txbd = 0x%p\n", __FUNCTION__, txbd);*/
@@ -421,10 +427,8 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, s32 sz)
 		rtl8822c_fill_txdesc_sectype(pattrib, ptxdesc);
 		rtl8822c_fill_txdesc_vcs(padapter, pattrib, ptxdesc);
 
-#ifdef CONFIG_CONCURRENT_MODE
 		if (bmcst)
 			rtl8822c_fill_txdesc_force_bmc_camid(pattrib, ptxdesc);
-#endif
 
 		if ((pattrib->ether_type != 0x888e) &&
 		    (pattrib->ether_type != 0x0806) &&
@@ -692,32 +696,6 @@ s32 rtl8822ce_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 		if (pxmitpriv->dump_txbd_desc)
 			rtw_tx_desc_backup(padapter, pxmitframe, TX_WIFI_INFO_SIZE, ff_hwaddr);
 #endif
-
-
-#ifdef CONFIG_PCI_TX_POLLING_V2
-		if (BE_QUEUE_INX == ff_hwaddr) { 
-			/*while (ptx_ring->qlen > (29*(NR_XMITBUFF>>5))) { *//*90.6%*/
-			/*while (ptx_ring->qlen > (14*(NR_XMITBUFF>>4))) { *//*87.5%*/
-			while (ptx_ring->qlen > (6*(NR_XMITBUFF>>3))) { /*75%*/
-			/*while (ptx_ring->qlen > (NR_XMITBUFF>>1)) { *//*50%*/
-				rtl8822ce_tx_isr_polling(padapter, BE_QUEUE_INX);
-			}
-		}
-#ifndef CONFIG_PCI_TX_POLLING
-		else if (MGT_QUEUE_INX == ff_hwaddr){
-			while (ptx_ring->qlen > 2) {	/* mini. qlen=2 */
-				rtl8822ce_tx_isr_polling(padapter, MGT_QUEUE_INX); /*mgnt frame use xmit_buf_ext, only 32 buf.*/
-			}
-		} else if ((HIGH_QUEUE_INX == ff_hwaddr) ||(BK_QUEUE_INX == ff_hwaddr) ||
-			 (VI_QUEUE_INX == ff_hwaddr) ||(VO_QUEUE_INX == ff_hwaddr)){
-			while (ptx_ring->qlen > (6*(TX_BD_NUM_8822CE>>3))) { /*75%*/
-			/*while (ptx_ring->qlen > (TX_BD_NUM_8822CE>>1)) { *//*50%*/
-				rtl8822ce_tx_isr_polling(padapter, ff_hwaddr);
-			}
-		}
-#endif
-#endif
-
 		_exit_critical(&pdvobjpriv->irq_th_lock, &irqL);
 
 		inner_ret = rtw_write_port(padapter, ff_hwaddr, w_sz,
@@ -951,6 +929,15 @@ void rtl8822ce_xmitframe_resume(_adapter *padapter)
 		if (!check_nic_enough_desc_all(padapter))
 			break;
 	#endif
+
+#ifdef CONFIG_RTW_MGMT_QUEUE
+		/* dump management frame directly */
+		pxmitframe = rtw_dequeue_mgmt_xframe(pxmitpriv);
+		if (pxmitframe) {
+			rtl8822ce_dump_xframe(padapter, pxmitframe);
+			continue;
+		}
+#endif
 
 		pxmitbuf = rtw_alloc_xmitbuf(pxmitpriv);
 		if (!pxmitbuf)
@@ -1270,6 +1257,29 @@ s32 rtl8822ce_hal_xmit(_adapter *padapter, struct xmit_frame *pxmitframe)
 	return pre_xmitframe(padapter, pxmitframe);
 }
 
+#ifdef CONFIG_RTW_MGMT_QUEUE
+s32 rtl8822ce_hal_mgmt_xmitframe_enqueue(_adapter *padapter,
+					struct xmit_frame *pxmitframe)
+{
+	struct xmit_priv *pxmitpriv = &padapter->xmitpriv;
+	s32 err;
+
+	err = rtw_mgmt_xmitframe_enqueue(padapter, pxmitframe);
+	if (err != _SUCCESS) {
+		rtw_free_xmitframe(pxmitpriv, pxmitframe);
+		pxmitpriv->tx_drop++;
+	} else {
+#ifdef PLATFORM_LINUX
+		if (check_nic_enough_desc(padapter,
+					  &pxmitframe->attrib) == _TRUE)
+			tasklet_hi_schedule(&pxmitpriv->xmit_tasklet);
+#endif
+	}
+
+	return err;
+}
+#endif
+
 s32 rtl8822ce_hal_xmitframe_enqueue(_adapter *padapter,
 				    struct xmit_frame *pxmitframe)
 {
@@ -1302,7 +1312,6 @@ int rtl8822ce_init_txbd_ring(_adapter *padapter, unsigned int q_idx,
 	dma_addr_t dma;
 	int i;
 
-
 	RTW_INFO("%s entries num:%d\n", __func__, entries);
 
 	txbd = pci_alloc_consistent(pdev, sizeof(*txbd) * entries, &dma);
@@ -1334,7 +1343,7 @@ void rtl8822ce_free_txbd_ring(_adapter *padapter, unsigned int prio)
 	struct rtw_tx_ring *ring = &t_priv->tx_ring[prio];
 	u8 *txbd;
 	struct xmit_buf	*pxmitbuf;
-
+	dma_addr_t mapping;
 
 	while (ring->qlen) {
 		txbd = (u8 *)(&ring->buf_desc[ring->idx]);
@@ -1346,8 +1355,12 @@ void rtl8822ce_free_txbd_ring(_adapter *padapter, unsigned int prio)
 		pxmitbuf = rtl8822ce_dequeue_xmitbuf(ring);
 
 		if (pxmitbuf) {
+			mapping = GET_TX_BD_PHYSICAL_ADDR0_LOW(txbd);
+		#ifdef CONFIG_64BIT_DMA
+			mapping |= (dma_addr_t)GET_TX_BD_PHYSICAL_ADDR0_HIGH(txbd) << 32;
+		#endif
 			pci_unmap_single(pdev,
-				GET_TX_BD_PHYSICAL_ADDR0_LOW(txbd),
+				mapping,
 				pxmitbuf->len, PCI_DMA_TODEVICE);
 
 			rtw_free_xmitbuf(t_priv, pxmitbuf);
@@ -1467,6 +1480,7 @@ void rtl8822ce_tx_isr(PADAPTER Adapter, int prio)
 	u8 *tx_desc;
 	u16 tmp_4bytes;
 	u16 desc_idx_hw = 0, desc_idx_host = 0;
+	dma_addr_t mapping;
 
 #ifdef CONFIG_LPS_LCLK
 	int index;
@@ -1489,8 +1503,12 @@ void rtl8822ce_tx_isr(PADAPTER Adapter, int prio)
 		pxmitbuf = rtl8822ce_dequeue_xmitbuf(ring);
 
 		if (pxmitbuf) {
+			mapping = GET_TX_BD_PHYSICAL_ADDR0_LOW(tx_desc);
+		#ifdef CONFIG_64BIT_DMA
+			mapping |= (dma_addr_t)GET_TX_BD_PHYSICAL_ADDR0_HIGH(tx_desc) << 32;
+		#endif
 			pci_unmap_single(pdvobjpriv->ppcidev,
-				GET_TX_BD_PHYSICAL_ADDR0_LOW(tx_desc),
+				mapping,
 				pxmitbuf->len, PCI_DMA_TODEVICE);
 			rtw_sctx_done(&pxmitbuf->sctx);
 			rtw_free_xmitbuf(&(pxmitbuf->padapter->xmitpriv),
@@ -1519,75 +1537,6 @@ void rtl8822ce_tx_isr(PADAPTER Adapter, int prio)
 	    && rtw_xmit_ac_blocked(Adapter) != _TRUE)
 		rtw_mi_xmit_tasklet_schedule(Adapter);
 }
-
-#ifdef CONFIG_PCI_TX_POLLING_V2
-void rtl8822ce_tx_isr_polling(PADAPTER Adapter, int prio)
-{
-	struct xmit_priv *t_priv = &Adapter->xmitpriv;
-	struct dvobj_priv *pdvobjpriv = adapter_to_dvobj(Adapter);
-	struct rtw_tx_ring *ring = &t_priv->tx_ring[prio];
-	struct xmit_buf	*pxmitbuf;
-	u8 *tx_desc;
-	u16 tmp_4bytes;
-	u16 desc_idx_hw = 0, desc_idx_host = 0;
-	u32 qlen_ths;
-
-#ifdef CONFIG_LPS_LCLK
-	int index;
-	s32 enter32k = _SUCCESS;
-	struct pwrctrl_priv *pwrpriv = adapter_to_pwrctl(Adapter);
-#endif
-	qlen_ths = ring->qlen >>3; /*10% ~ 6% */
-	/*qlen_ths = 1;*/
-
-	while (ring->qlen >= qlen_ths) {
-		tx_desc = (u8 *)&ring->buf_desc[ring->idx];
-
-		/*  beacon use cmd buf Never run into here */
-		if (!rtl8822ce_check_txdesc_closed(Adapter, prio, ring)){
-			return;
-		}
-
-		buf_desc_debug("TX: %s, q_idx = %d, tx_bd = %04x, close [%04x] r_idx [%04x]\n",
-			       __func__, prio, (u32)tx_desc, ring->idx,
-			       (ring->idx + 1) % ring->entries);
-
-		ring->idx = (ring->idx + 1) % ring->entries;
-		pxmitbuf = rtl8822ce_dequeue_xmitbuf(ring);
-
-		if (pxmitbuf) {
-			pci_unmap_single(pdvobjpriv->ppcidev,
-				GET_TX_BD_PHYSICAL_ADDR0_LOW(tx_desc),
-				pxmitbuf->len, PCI_DMA_TODEVICE);
-			rtw_sctx_done(&pxmitbuf->sctx);
-			rtw_free_xmitbuf(&(pxmitbuf->padapter->xmitpriv),
-					 pxmitbuf);
-
-		} else {
-			RTW_INFO("%s qlen=%d!=0,but have xmitbuf in pendingQ\n",
-				 __func__, ring->qlen);
-			break;
-		}
-	}
-
-#ifdef CONFIG_LPS_LCLK
-	for (index = 0; index < HW_QUEUE_ENTRY; index++) {
-		if (index != BCN_QUEUE_INX) {
-			if (_rtw_queue_empty(&(Adapter->xmitpriv.tx_ring[index].queue)) == _FALSE) {
-				enter32k = _FAIL;
-				break;
-			}
-		}
-	}
-	if (enter32k)
-		_set_workitem(&(pwrpriv->dma_event));
-#endif
-
-	if (check_tx_desc_resource(Adapter, prio)
-	    && rtw_xmit_ac_blocked(Adapter) != _TRUE)
-		rtw_mi_xmit_tasklet_schedule(Adapter);
-}
-#endif
 
 #else /* !CONFIG_BCN_ICF */
 void rtl8822ce_tx_isr(PADAPTER Adapter, int prio)
@@ -1599,6 +1548,7 @@ void rtl8822ce_tx_isr(PADAPTER Adapter, int prio)
 	u8 *tx_desc;
 	u16 tmp_4bytes;
 	u16 desc_idx_hw = 0, desc_idx_host = 0;
+	dma_addr_t mapping;
 
 #ifdef CONFIG_LPS_LCLK
 	int index;
@@ -1632,6 +1582,10 @@ void rtl8822ce_tx_isr(PADAPTER Adapter, int prio)
 
 		pxmitbuf = rtl8822ce_dequeue_xmitbuf(ring);
 		if (pxmitbuf) {
+			mapping = GET_TX_BD_PHYSICAL_ADDR0_LOW(tx_desc);
+		#ifdef CONFIG_64BIT_DMA
+			mapping |= (dma_addr_t)GET_TX_BD_PHYSICAL_ADDR0_HIGH(tx_desc) << 32;
+		#endif
 			pci_unmap_single(pdvobjpriv->ppcidev,
 				 GET_TX_BD_PHYSICAL_ADDR0_LOW(tx_desc),
 					 pxmitbuf->len, PCI_DMA_TODEVICE);

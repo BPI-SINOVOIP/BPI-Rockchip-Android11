@@ -279,6 +279,9 @@ done:
 
 
 		SET_RX_BD_PHYSICAL_ADDR_LOW(rx_bd, *((dma_addr_t *)skb->cb));
+	#ifdef CONFIG_64BIT_DMA
+		SET_RX_BD_PHYSICAL_ADDR_HIGH(rx_bd, (*((dma_addr_t *)skb->cb)>>32));
+	#endif
 		/*Max. MPDU size is 11454 bytes, fix Rx buffer size to 12K is safe.*/
 		/*Even most Rx frame size is smaller than 4K, 12K Rx buffer size will not affect Rx efficiency.*/
 		SET_RX_BD_RXBUFFSIZE(rx_bd, 12*1024);
@@ -417,7 +420,9 @@ int rtl8822ce_init_rxbd_ring(_adapter *padapter)
 			/*Even most Rx frame size is smaller than 4K, 12K Rx buffer size will not affect Rx efficiency.*/
 			SET_RX_BD_RXBUFFSIZE(rx_desc, 12*1024);
 			SET_RX_BD_PHYSICAL_ADDR_LOW(rx_desc, *mapping);
-
+		#ifdef CONFIG_64BIT_DMA
+			SET_RX_BD_PHYSICAL_ADDR_HIGH(rx_desc, (u32)(*mapping >> 32));
+		#endif
 			buf_desc_debug("RX:rx buffer desc addr[%d] = %x, skb(rx_buf) = %x, buffer addr (virtual = %x, physical = %x)\n",
 				i, (u32)&r_priv->rx_ring[rx_queue_idx].buf_desc[i],
 				(u32)r_priv->rx_ring[rx_queue_idx].rx_buf[i],

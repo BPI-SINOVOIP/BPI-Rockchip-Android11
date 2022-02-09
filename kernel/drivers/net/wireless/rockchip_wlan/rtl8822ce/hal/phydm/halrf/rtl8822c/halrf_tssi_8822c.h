@@ -86,12 +86,26 @@
 
 /*---------------------------End Define Parameters----------------------------*/
 
+void halrf_calculate_tssi_codeword_8822c(
+	void *dm_void);
+
+void halrf_set_tssi_codeword_8822c(
+	void *dm_void, u16 *tssi_value);
+
+void halrf_tssi_dck_8822c(
+	void *dm_void);
 
 void halrf_tssi_get_efuse_8822c(
 	void *dm_void);
 
+u32 halrf_tssi_get_de_8822c(
+	void *dm_void, u8 path);
+
 void halrf_tssi_get_kfree_efuse_8822c(
 	void *dm_void);
+
+void halrf_tssi_set_de_for_tx_verify_8822c(
+	void *dm_void, u32 tssi_de, u8 path);
 
 void halrf_enable_tssi_8822c(
 	void *dm_void);

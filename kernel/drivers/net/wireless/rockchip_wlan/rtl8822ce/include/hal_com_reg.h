@@ -23,6 +23,7 @@
 /* 8188E PKT_BUFF_ACCESS_CTRL value */
 #define TXPKT_BUF_SELECT				0x69
 #define RXPKT_BUF_SELECT				0xA5
+#define TXREPORT_BUF_SELECT			0x7F
 #define DISABLE_TRXPKT_BUF_ACCESS		0x0
 
 #ifndef RTW_HALMAC
@@ -173,6 +174,8 @@
 #define REG_TXDMA_OFFSET_CHK			0x020C
 #define REG_TXDMA_STATUS				0x0210
 #define REG_RQPN_NPQ					0x0214
+#define REG_TQPNT1						0x0218
+#define REG_TQPNT2						0x021C
 #define REG_AUTO_LLT					0x0224
 
 
@@ -508,9 +511,12 @@
 #define REG_WLAN_ACT_MASK_CTRL_1		0x076C
 
 /* GPIO Control */
-#define REG_SW_GPIO_SHARE_CTRL			0x1038
+#define REG_SW_GPIO_SHARE_CTRL_0		0x1038
+#define REG_SW_GPIO_SHARE_CTRL_1		0x103C
 #define REG_SW_GPIO_A_OUT				0x1040
 #define REG_SW_GPIO_A_OEN				0x1044
+#define REG_SW_GPIO_B_OEN				0x1058
+#define REG_SW_GPIO_B_OUT				0x105C
 
 /* Hardware Port 2 */
 #define REG_MACID2						0x1620
@@ -680,6 +686,7 @@ Default: 00b.
 #define USB_INTR_CONTENT_HISRE_OFFSET		52
 #define USB_INTR_CONTENT_LENGTH				56
 
+
 /* WOL bit information */
 #define HAL92C_WOL_PTK_UPDATE_EVENT		BIT(0)
 #define HAL92C_WOL_GTK_UPDATE_EVENT		BIT(1)
@@ -722,7 +729,6 @@ Default: 00b.
 
 #define RRSR_CCK_RATES (RRSR_11M | RRSR_5_5M | RRSR_2M | RRSR_1M)
 #define RRSR_OFDM_RATES (RRSR_54M | RRSR_48M | RRSR_36M | RRSR_24M | RRSR_18M | RRSR_12M | RRSR_9M | RRSR_6M)
-
 
 /* ----------------------------------------------------------------------------
  * Rate Definition
@@ -1250,9 +1256,13 @@ Current IOREG MAP
 /* 2 REG_LED_CFG				(Offset 0x004C) */
 #define BIT_SW_SPDT_SEL			BIT(22)
 
-/* 2 REG_SW_GPIO_SHARE_CTRL		(Offset 0x1038) */
+/* 2 REG_SW_GPIO_SHARE_CTRL_0	(Offset 0x1038) */
 #define BIT_BTGP_WAKE_LOC		(BIT(10) | BIT(11))
 #define BIT_SW_GPIO_FUNC 		BIT(0)
+
+/* 2 REG_SW_GPIO_SHARE_CTRL_1	(Offset 0x103C) */
+#define 	BIT_WLMAC_DBG_LOC	(BIT(9) | BIT(10))
+#define 	BIT_WL_GPIO_SEL		(BIT(30) | BIT(31))
 
 /* 2 8051FWDL
  * 2 MCUFWDL */
@@ -1862,6 +1872,7 @@ Current IOREG MAP
 #define LAST_ENTRY_OF_TX_PKT_BUFFER_8723D		255
 #define LAST_ENTRY_OF_TX_PKT_BUFFER_8710B		255
 #define LAST_ENTRY_OF_TX_PKT_BUFFER_8192F		255
+#define LAST_ENTRY_OF_TX_PKT_BUFFER_8723F		255
 #define POLLING_LLT_THRESHOLD				20
 #if defined(CONFIG_RTL8723B) && defined(CONFIG_PCI_HCI)
 	#define POLLING_READY_TIMEOUT_COUNT		6000

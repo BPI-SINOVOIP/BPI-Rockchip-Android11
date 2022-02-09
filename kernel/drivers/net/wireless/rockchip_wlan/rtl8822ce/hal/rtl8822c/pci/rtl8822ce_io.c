@@ -16,7 +16,7 @@
 
 #include <drv_types.h>		/* PADAPTER and etc. */
 
-#ifdef RTK_129X_PLATFORM
+#ifdef CONFIG_PLATFORM_RTK129X
 #include <soc/realtek/rtd129x_lockapi.h>
 
 #define IO_2K_MASK 0xFFFFF800
@@ -33,7 +33,7 @@ static u32 pci_io_read_129x(struct dvobj_priv *pdvobjpriv, u32 addr, u8 size)
 	u32 translate_val = 0;
 	u32 tmp_addr = addr & 0xFFF;
 	_irqL irqL;
-	u32 pci_error_status = 0, pci_timeout_status = 0;
+	u32 pci_error_status = 0;
 	int retry_cnt = 0;
 	unsigned long flags;
 
@@ -82,22 +82,6 @@ pci_read_129x_retry:
 
 	//DLLP error patch
 	pci_error_status = readl( (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
-	pci_timeout_status = readl((u8 *)(pdvobjpriv->ctrl_start + 0x74));
-
-	//pcie timeout patch
-	if (pci_timeout_status & 0x01) {
-		writel(pci_error_status, (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
-		writel(pci_timeout_status, (u8 *)(pdvobjpriv->ctrl_start + 0x74));
-		RTW_WARN("RTD129X: %s: pci (0x74:%x, 0x7C:%x) reg=0x%x val=0x%x\n", 
-			__func__, pci_timeout_status, pci_error_status, addr, rval);
-
-		if(retry_cnt < MAX_RETRY) {
-			retry_cnt++;
-			goto pci_read_129x_retry;
-		}
-	}
-
-	//DLLP error patch
 	if(pci_error_status & 0x1F) {
 		writel(pci_error_status, (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
 		RTW_WARN("RTD129X: %s: DLLP(#%d) 0x%x reg=0x%x val=0x%x\n", __func__, retry_cnt, pci_error_status, addr, rval);
@@ -297,7 +281,7 @@ static int pci_write32(struct intf_hdl *phdl, u32 addr, u32 val)
 	writel(val, (u8 *)pdvobjpriv->pci_mem_start + addr);
 	return 4;
 }
-#endif /* RTK_129X_PLATFORM */
+#endif /* CONFIG_PLATFORM_RTK129X */
 
 static void pci_read_mem(struct intf_hdl *phdl, u32 addr, u32 cnt, u8 *rmem)
 {
@@ -332,7 +316,7 @@ void rtl8822ce_set_intf_ops(struct _io_ops *pops)
 
 	_rtw_memset((u8 *)pops, 0, sizeof(struct _io_ops));
 
-#ifdef RTK_129X_PLATFORM
+#ifdef CONFIG_PLATFORM_RTK129X
 	pops->_read8 = &pci_read8_129x;
 	pops->_read16 = &pci_read16_129x;
 	pops->_read32 = &pci_read32_129x;
@@ -340,12 +324,12 @@ void rtl8822ce_set_intf_ops(struct _io_ops *pops)
 	pops->_read8 = &pci_read8;
 	pops->_read16 = &pci_read16;
 	pops->_read32 = &pci_read32;
-#endif /* RTK_129X_PLATFORM */
+#endif /* CONFIG_PLATFORM_RTK129X */
 
 	pops->_read_mem = &pci_read_mem;
 	pops->_read_port = &pci_read_port;
 
-#ifdef RTK_129X_PLATFORM
+#ifdef CONFIG_PLATFORM_RTK129X
 	pops->_write8 = &pci_write8_129x;
 	pops->_write16 = &pci_write16_129x;
 	pops->_write32 = &pci_write32_129x;
@@ -353,7 +337,7 @@ void rtl8822ce_set_intf_ops(struct _io_ops *pops)
 	pops->_write8 = &pci_write8;
 	pops->_write16 = &pci_write16;
 	pops->_write32 = &pci_write32;
-#endif /* RTK_129X_PLATFORM */
+#endif /* CONFIG_PLATFORM_RTK129X */
 
 	pops->_write_mem = &pci_write_mem;
 	pops->_write_port = &pci_write_port;

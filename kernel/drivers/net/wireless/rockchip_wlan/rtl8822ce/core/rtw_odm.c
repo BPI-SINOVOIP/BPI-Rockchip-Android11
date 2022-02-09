@@ -160,6 +160,7 @@ void rtw_odm_acquirespinlock(_adapter *adapter,	enum rt_spinlock_type type)
 	switch (type) {
 	case RT_IQK_SPINLOCK:
 		_enter_critical_bh(&pHalData->IQKSpinLock, &irqL);
+		break;
 	default:
 		break;
 	}
@@ -173,29 +174,15 @@ void rtw_odm_releasespinlock(_adapter *adapter,	enum rt_spinlock_type type)
 	switch (type) {
 	case RT_IQK_SPINLOCK:
 		_exit_critical_bh(&pHalData->IQKSpinLock, &irqL);
+		break;
 	default:
 		break;
 	}
 }
 
-inline u8 rtw_odm_get_dfs_domain(struct dvobj_priv *dvobj)
+s16 rtw_odm_get_tx_power_mbm(struct dm_struct *dm, u8 rfpath, u8 rate, u8 bw, u8 cch)
 {
-#ifdef CONFIG_DFS_MASTER
-	struct dm_struct *pDM_Odm = dvobj_to_phydm(dvobj);
-
-	return pDM_Odm->dfs_region_domain;
-#else
-	return PHYDM_DFS_DOMAIN_UNKNOWN;
-#endif
-}
-
-inline u8 rtw_odm_dfs_domain_unknown(struct dvobj_priv *dvobj)
-{
-#ifdef CONFIG_DFS_MASTER
-	return rtw_odm_get_dfs_domain(dvobj) == PHYDM_DFS_DOMAIN_UNKNOWN;
-#else
-	return 1;
-#endif
+	return phy_get_txpwr_single_mbm(dm->adapter, rfpath, mgn_rate_to_rs(rate), rate, bw, cch, 0, 0, 0, NULL);
 }
 
 #ifdef CONFIG_DFS_MASTER
@@ -218,6 +205,20 @@ inline void rtw_odm_radar_detect_enable(_adapter *adapter)
 inline BOOLEAN rtw_odm_radar_detect(_adapter *adapter)
 {
 	return phydm_radar_detect(adapter_to_phydm(adapter));
+}
+
+static enum phydm_dfs_region_domain _rtw_dfs_regd_to_phydm[] = {
+	[RTW_DFS_REGD_NONE]	= PHYDM_DFS_DOMAIN_UNKNOWN,
+	[RTW_DFS_REGD_FCC]	= PHYDM_DFS_DOMAIN_FCC,
+	[RTW_DFS_REGD_MKK]	= PHYDM_DFS_DOMAIN_MKK,
+	[RTW_DFS_REGD_ETSI]	= PHYDM_DFS_DOMAIN_ETSI,
+};
+
+#define rtw_dfs_regd_to_phydm(region) (((region) >= RTW_DFS_REGD_NUM) ? _rtw_dfs_regd_to_phydm[RTW_DFS_REGD_NONE] : _rtw_dfs_regd_to_phydm[(region)])
+
+void rtw_odm_update_dfs_region(struct dvobj_priv *dvobj)
+{
+	odm_cmn_info_init(dvobj_to_phydm(dvobj), ODM_CMNINFO_DFS_REGION_DOMAIN, rtw_dfs_regd_to_phydm(rtw_rfctl_get_dfs_domain(dvobj_to_rfctl(dvobj))));
 }
 
 inline u8 rtw_odm_radar_detect_polling_int_ms(struct dvobj_priv *dvobj)
@@ -336,12 +337,6 @@ void rtw_odm_parse_rx_phy_status_chinfo(union recv_frame *rframe, u8 *phys)
 				#define RXSC_U80M_OF_160M	13
 
 				static const s8 cch_offset_by_rxsc[15] = {0, 2, -2, 6, -6, 10, -10, 14, -14, 4, -4, 12, -12, 8, -8};
-
-				if (phys_t1->rf_mode > 3) {
-					/* invalid rf_mode */
-					rtw_warn_on(1);
-					goto type1_end;
-				}
 
 				if (phys_t1->rf_mode == 0) {
 					/* RF 20MHz */

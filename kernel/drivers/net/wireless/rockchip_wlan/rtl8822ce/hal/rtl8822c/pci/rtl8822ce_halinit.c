@@ -271,24 +271,6 @@ u32 InitMAC_TRXBD_8822CE(PADAPTER Adapter)
 		    ((u64)pxmitpriv->tx_ring[HIGH_QUEUE_INX].dma) >> 32);
 	rtw_write32(Adapter, REG_RXQ_RXBD_DESA_8822C + 4,
 		    ((u64)precvpriv->rx_ring[RX_MPDU_QUEUE].dma) >> 32);
-
-
-	/* 2009/10/28 MH If RX descriptor address is not equal to zero.
-	* We will enable DMA 64 bit functuion.
-	* Note: We never saw thd consition which the descripto address are
-	*	divided into 4G down and 4G upper separate area.
-	*/
-	if (((u64)precvpriv->rx_ring[RX_MPDU_QUEUE].dma) >> 32 != 0) {
-		RTW_INFO("Enable DMA64 bit\n");
-
-		/* Check if other descriptor address is zero and
-		 * abnormally be in 4G lower area. */
-		if (((u64)pxmitpriv->tx_ring[MGT_QUEUE_INX].dma) >> 32)
-			RTW_INFO("MGNT_QUEUE HA=0\n");
-
-		PlatformEnableDMA64(Adapter);
-	} else
-		RTW_INFO("Enable DMA32 bit\n");
 #endif
 
 	/* pci buffer descriptor mode: Reset the Read/Write point to 0 */
@@ -345,20 +327,14 @@ u32 InitMAC_TRXBD_8822CE(PADAPTER Adapter)
 	rtw_write16(Adapter, REG_HI7Q_TXBD_NUM_8822C,
 		    TX_BD_NUM_8822CE | ((RTL8822CE_SEG_NUM << 12) & 0x3000));
 
-
-	/* rx. support 32 bits in linux */
-
-
-	/* using 64bit
+#ifdef CONFIG_64BIT_DMA
 	rtw_write16(Adapter, REG_RX_RXBD_NUM_8822C,
-		RX_BD_NUM_8822CE |((RTL8822CE_SEG_NUM<<13 ) & 0x6000) |0x8000);
-	*/
-
-
-	/* using 32bit */
+		    RX_BD_NUM_8822CE |((RTL8822CE_SEG_NUM<<13 ) & 0x6000) |
+		    0x8000);
+#else
 	rtw_write16(Adapter, REG_RX_RXBD_NUM_8822C,
 		    RX_BD_NUM_8822CE | ((RTL8822CE_SEG_NUM << 13) & 0x6000));
-
+#endif
 	/* reset read/write point */
 	rtw_write32(Adapter, REG_TSFTIMER_HCI_8822C, 0XFFFFFFFF);
 
@@ -491,6 +467,13 @@ u32 rtl8822ce_init(PADAPTER padapter)
 	rtl8822c_init_misc(padapter);
 	hal_init_misc(padapter);
 
+#ifdef CONFIG_USB_CONFIG_OFFLOAD_8822C
+	/* Check HCI Configuration if MIX mode, BT-USB, WiFi-PCIe */
+	/* 3b'010 is WiFi-PCIe + BT-UART. 3b'011 is WiFi-PCIe + BT-USB */
+	if (0x3 == ((rtw_read32(padapter, REG_SYS_STATUS1_8822C)>>12)&0x7))
+		rtl8822c_set_usb_suspend_mode(padapter);
+#endif
+
 #ifdef CONFIG_8822CE_INT_MIGRATION 
 	/* TX interrupt migration - 3pkts or 7*64=448us */
 	rtw_write32(padapter, REG_INT_MIG_8822C, 0x03070000);
@@ -548,7 +531,7 @@ void rtl8822ce_init_default_value(PADAPTER padapter)
 			#ifdef CONFIG_LPS_LCLK
 						BIT_CPWM_MSK		|
 			#endif
-			#if (!(defined (CONFIG_PCI_TX_POLLING) || defined (CONFIG_PCI_TX_POLLING_V2)))
+			#ifndef CONFIG_PCI_TX_POLLING
 					       BIT_HIGHDOK_MSK		|
 					       BIT_MGTDOK_MSK		|
 					       BIT_BKDOK_MSK		|

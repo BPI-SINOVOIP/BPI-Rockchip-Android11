@@ -28,15 +28,15 @@
 #if (RTL8822C_SUPPORT)
 void phydm_dynamic_switch_htstf_agc_8822c(struct dm_struct *dm)
 {
-	u8 ndp_valid_cnt = 0;
-	u8 ndp_valid_cnt_diff = 0;
+	u16 ndp_valid_cnt = 0;
+	u16 ndp_valid_cnt_diff = 0;
 
 	if (dm->bhtstfdisabled)
 		return;
 
 	/*set debug port to 0x51f*/
 	if (phydm_set_bb_dbg_port(dm, DBGPORT_PRI_1, 0x51f)) {
-		ndp_valid_cnt = (u8)(phydm_get_bb_dbg_port_val(dm) & 0xff);
+		ndp_valid_cnt = (u16)(phydm_get_bb_dbg_port_val(dm) & 0xff);
 		phydm_release_bb_dbg_port(dm);
 
 		ndp_valid_cnt_diff = DIFF_2(dm->ndp_cnt_pre, ndp_valid_cnt);

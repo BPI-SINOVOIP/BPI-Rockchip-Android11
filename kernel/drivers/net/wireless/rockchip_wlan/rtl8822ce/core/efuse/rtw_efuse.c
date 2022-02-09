@@ -56,6 +56,7 @@ BOOLEAN rtw_file_efuse_IsMasked(PADAPTER pAdapter, u16 Offset, u8 *maskbuf)
 
 	return (result > 0) ? 0 : 1;
 }
+
 BOOLEAN efuse_IsBT_Masked(PADAPTER pAdapter, u16 Offset)
 {
 	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(pAdapter);
@@ -63,6 +64,8 @@ BOOLEAN efuse_IsBT_Masked(PADAPTER pAdapter, u16 Offset)
 	if (pAdapter->registrypriv.boffefusemask)
 		return FALSE;
 
+#ifdef CONFIG_BT_EFUSE_MASK
+#ifdef CONFIG_RTL8822C
 #ifdef CONFIG_USB_HCI
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return (IS_BT_MASKED(8822C, _MUSB, Offset)) ? TRUE : FALSE;
@@ -75,7 +78,8 @@ BOOLEAN efuse_IsBT_Masked(PADAPTER pAdapter, u16 Offset)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return (IS_BT_MASKED(8822C, _MSDIO, Offset)) ? TRUE : FALSE;
 #endif
-
+#endif /*#ifdef CONFIG_RTL8822C*/
+#endif /* CONFIG_BT_EFUSE_MASK */
 	return FALSE;
 }
 
@@ -83,18 +87,22 @@ void rtw_bt_efuse_mask_array(PADAPTER pAdapter, u8 *pArray)
 {
 	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(pAdapter);
 
+#ifdef CONFIG_BT_EFUSE_MASK
+#ifdef CONFIG_RTL8822C
 #ifdef CONFIG_USB_HCI
 if (IS_HARDWARE_TYPE_8822CU(pAdapter))
-		GET_MASK_ARRAY(8822C, _MUSB, pArray);
+		GET_BT_MASK_ARRAY(8822C, _MUSB, pArray);
 #endif
 #ifdef CONFIG_PCI_HCI
 	if (IS_HARDWARE_TYPE_8822CE(pAdapter))
-		GET_MASK_ARRAY(8822C, _MPCIE, pArray);
+		GET_BT_MASK_ARRAY(8822C, _MPCIE, pArray);
 #endif
 #ifdef CONFIG_SDIO_HCI
 	if (IS_HARDWARE_TYPE_8822CS(pAdapter))
-		GET_MASK_ARRAY(8822C, _MSDIO, pArray);
+		GET_BT_MASK_ARRAY(8822C, _MSDIO, pArray);
 #endif
+#endif /*#ifdef CONFIG_RTL8822C*/
+#endif /* CONFIG_BT_EFUSE_MASK */
 
 }
 
@@ -102,6 +110,8 @@ u16 rtw_get_bt_efuse_mask_arraylen(PADAPTER pAdapter)
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 
+#ifdef CONFIG_BT_EFUSE_MASK
+#ifdef CONFIG_RTL8822C
 #ifdef CONFIG_USB_HCI
 	if (IS_HARDWARE_TYPE_8822CU(pAdapter))
 		return GET_BT_MASK_ARRAY_LEN(8822C, _MUSB);
@@ -114,12 +124,14 @@ u16 rtw_get_bt_efuse_mask_arraylen(PADAPTER pAdapter)
 	if (IS_HARDWARE_TYPE_8822CS(pAdapter))
 		return GET_BT_MASK_ARRAY_LEN(8822C, _MSDIO);
 #endif
+#endif /*#ifdef CONFIG_RTL8822C*/
+#endif /* CONFIG_BT_EFUSE_MASK */
+
 	return 0;
 }
 
 BOOLEAN efuse_IsMasked(PADAPTER pAdapter, u16 Offset)
 {
-	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(pAdapter);
 
 	if (pAdapter->registrypriv.boffefusemask)
 		return FALSE;
@@ -190,6 +202,14 @@ BOOLEAN efuse_IsMasked(PADAPTER pAdapter, u16 Offset)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return (IS_MASKED(8822C, _MUSB, Offset)) ? TRUE : FALSE;
 #endif
+#if defined(CONFIG_RTL8814B)
+	if (IS_HARDWARE_TYPE_8814B(pAdapter))
+		return (IS_MASKED(8814B, _MUSB, Offset)) ? TRUE : FALSE;
+#endif
+#if defined(CONFIG_RTL8723F)
+	if (IS_HARDWARE_TYPE_8723F(pAdapter))
+		return (IS_MASKED(8723F, _MUSB, Offset)) ? TRUE : FALSE;
+#endif
 #endif /*CONFIG_USB_HCI*/
 
 #ifdef CONFIG_PCI_HCI
@@ -234,6 +254,10 @@ BOOLEAN efuse_IsMasked(PADAPTER pAdapter, u16 Offset)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return (IS_MASKED(8822C, _MPCIE, Offset)) ? TRUE : FALSE;
 #endif
+#if defined(CONFIG_RTL8814B)
+	if (IS_HARDWARE_TYPE_8814B(pAdapter))
+		return (IS_MASKED(8814B, _MPCIE, Offset)) ? TRUE : FALSE;
+#endif
 #endif /*CONFIG_PCI_HCI*/
 
 #ifdef CONFIG_SDIO_HCI
@@ -277,6 +301,10 @@ BOOLEAN efuse_IsMasked(PADAPTER pAdapter, u16 Offset)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return (IS_MASKED(8822C, _MSDIO, Offset)) ? TRUE : FALSE;
 #endif
+#if defined(CONFIG_RTL8723F)
+	if (IS_HARDWARE_TYPE_8723F(pAdapter))
+		return (IS_MASKED(8723F, _MSDIO, Offset)) ? TRUE : FALSE;
+#endif
 #endif /*CONFIG_SDIO_HCI*/
 
 	return FALSE;
@@ -284,7 +312,6 @@ BOOLEAN efuse_IsMasked(PADAPTER pAdapter, u16 Offset)
 
 void rtw_efuse_mask_array(PADAPTER pAdapter, u8 *pArray)
 {
-	PHAL_DATA_TYPE pHalData = GET_HAL_DATA(pAdapter);
 
 #ifdef CONFIG_USB_HCI
 #if defined(CONFIG_RTL8188E)
@@ -339,6 +366,14 @@ void rtw_efuse_mask_array(PADAPTER pAdapter, u8 *pArray)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		GET_MASK_ARRAY(8822C, _MUSB, pArray);
 #endif
+#if defined(CONFIG_RTL8814B)
+	if (IS_HARDWARE_TYPE_8814B(pAdapter))
+		GET_MASK_ARRAY(8814B, _MUSB, pArray);
+#endif
+#if defined(CONFIG_RTL8723F)
+	if (IS_HARDWARE_TYPE_8723F(pAdapter))
+		GET_MASK_ARRAY(8723F, _MUSB, pArray);
+#endif
 #endif /*CONFIG_USB_HCI*/
 
 #ifdef CONFIG_PCI_HCI
@@ -381,6 +416,10 @@ void rtw_efuse_mask_array(PADAPTER pAdapter, u8 *pArray)
 #if defined(CONFIG_RTL8822C)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		GET_MASK_ARRAY(8822C, _MPCIE, pArray);
+#endif
+#if defined(CONFIG_RTL8814B)
+	if (IS_HARDWARE_TYPE_8814B(pAdapter))
+		GET_MASK_ARRAY(8814B, _MPCIE, pArray);
 #endif
 #endif /*CONFIG_PCI_HCI*/
 
@@ -425,12 +464,15 @@ void rtw_efuse_mask_array(PADAPTER pAdapter, u8 *pArray)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		GET_MASK_ARRAY(8822C , _MSDIO, pArray);
 #endif
+#if defined(CONFIG_RTL8723F)
+	if (IS_HARDWARE_TYPE_8723F(pAdapter))
+		GET_MASK_ARRAY(8723F, _MSDIO, pArray);
+#endif
 #endif /*CONFIG_SDIO_HCI*/
 }
 
 u16 rtw_get_efuse_mask_arraylen(PADAPTER pAdapter)
 {
-	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 
 #ifdef CONFIG_USB_HCI
 #if defined(CONFIG_RTL8188E)
@@ -485,6 +527,15 @@ u16 rtw_get_efuse_mask_arraylen(PADAPTER pAdapter)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return GET_MASK_ARRAY_LEN(8822C, _MUSB);
 #endif
+#if defined(CONFIG_RTL8814B)
+	if (IS_HARDWARE_TYPE_8814B(pAdapter)) {
+		return GET_MASK_ARRAY_LEN(8814B, _MUSB);
+	}
+#endif
+#if defined(CONFIG_RTL8723F)
+	if (IS_HARDWARE_TYPE_8723F(pAdapter))
+		return GET_MASK_ARRAY_LEN(8723F, _MUSB);
+#endif
 #endif /*CONFIG_USB_HCI*/
 
 #ifdef CONFIG_PCI_HCI
@@ -527,6 +578,10 @@ u16 rtw_get_efuse_mask_arraylen(PADAPTER pAdapter)
 #if defined(CONFIG_RTL8822C)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return GET_MASK_ARRAY_LEN(8822C, _MPCIE);
+#endif
+#if defined(CONFIG_RTL8814B)
+	if (IS_HARDWARE_TYPE_8814B(pAdapter))
+		return GET_MASK_ARRAY_LEN(8814B, _MPCIE);
 #endif
 #endif /*CONFIG_PCI_HCI*/
 
@@ -571,6 +626,10 @@ u16 rtw_get_efuse_mask_arraylen(PADAPTER pAdapter)
 	if (IS_HARDWARE_TYPE_8822C(pAdapter))
 		return GET_MASK_ARRAY_LEN(8822C, _MSDIO);
 #endif
+#if defined(CONFIG_RTL8723F)
+	if (IS_HARDWARE_TYPE_8723F(pAdapter))
+		return GET_MASK_ARRAY_LEN(8723F, _MSDIO);
+#endif
 #endif/*CONFIG_SDIO_HCI*/
 	return 0;
 }
@@ -595,29 +654,6 @@ static void rtw_mask_map_read(PADAPTER padapter, u16 addr, u16 cnts, u8 *data)
 		}
 	}
 }
-
-static void rtw_bt_mask_map_read(PADAPTER padapter, u16 addr, u16 cnts, u8 *data)
-{
-	u16 i = 0;
-
-	if (padapter->registrypriv.boffefusemask == 0) {
-			for (i = 0; i < cnts; i++) {
-				if (padapter->registrypriv.bBTFileMaskEfuse == _TRUE) {
-						if (rtw_file_efuse_IsMasked(padapter, addr + i, btmaskfileBuffer)) /*use BT file efuse mask.*/
-							data[i] = 0xff;
-						else
-							RTW_DBG("data[%x] = %x\n", i, data[i]);
-				} else {
-						if (efuse_IsBT_Masked(padapter, addr + i)) /*use drv internal efuse mask.*/
-							data[i] = 0xff;
-						else
-							RTW_DBG("data[%x] = %x\n", i, data[i]);
-					}
-			}
-	}
-
-}
-
 
 u8 rtw_efuse_mask_map_read(PADAPTER padapter, u16 addr, u16 cnts, u8 *data)
 {
@@ -692,7 +728,6 @@ void rtw_efuse_analyze(PADAPTER	padapter, u8 Type, u8 Fake)
 	u16	eFuse_Addr = 0;
 	u8 offset, wden;
 	u16	 i, j;
-	u8	u1temp = 0;
 	u8	efuseHeader = 0, efuseExtHdr = 0, efuseData[EFUSE_MAX_WORD_UNIT*2] = {0}, dataCnt = 0;
 	u16	efuseHeader2Byte = 0;
 	u8	*eFuseWord = NULL;// [EFUSE_MAX_SECTION_NUM][EFUSE_MAX_WORD_UNIT];
@@ -711,6 +746,11 @@ void rtw_efuse_analyze(PADAPTER	padapter, u8 Type, u8 Fake)
 	u8	ParseEfuseExtHdr, ParseEfuseHeader, ParseOffset, ParseWDEN, ParseOffset2_0;
 
 	eFuseWord = rtw_zmalloc(EFUSE_MAX_SECTION_NUM * (EFUSE_MAX_WORD_UNIT * 2));
+
+	if (eFuseWord == NULL) {
+		RTW_INFO("%s:rtw_zmalloc eFuseWord = NULL !!\n", __func__);
+		return;
+	}
 
 	RTW_INFO("\n");
 	if (Type == 0) {
@@ -1076,7 +1116,7 @@ u8 rtw_efuse_access(PADAPTER adapter, u8 write, u16 addr, u16 cnts, u8 *data)
 {
 	struct dvobj_priv *d;
 	u8 *efuse = NULL;
-	u32 size, i;
+	u32 size;
 	int err;
 
 
@@ -1134,7 +1174,7 @@ u8 rtw_efuse_bt_access(PADAPTER adapter, u8 write, u16 addr, u16 cnts, u8 *data)
 {
 	struct dvobj_priv *d;
 	u8 *efuse = NULL;
-	u32 size, i;
+	u32 size;
 	int err = _FAIL;
 
 
@@ -1233,11 +1273,12 @@ exit:
 	return status;
 }
 
+
 u8 rtw_efuse_map_write(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 {
 	struct dvobj_priv *d;
 	u8 *efuse = NULL;
-	u32 size, i;
+	u32 size;
 	int err;
 	u8 mask_buf[64] = "";
 	u16 mask_len = sizeof(u8) * rtw_get_efuse_mask_arraylen(adapter);
@@ -1315,6 +1356,29 @@ int Efuse_PgPacketWrite(PADAPTER adapter, u8 offset, u8 word_en, u8 *data, BOOLE
 	return _FALSE;
 }
 
+static void rtw_bt_mask_map_read(PADAPTER padapter, u16 addr, u16 cnts, u8 *data)
+{
+	u16 i = 0;
+
+#ifdef CONFIG_BT_EFUSE_MASK
+	if (padapter->registrypriv.boffefusemask == 0) {
+			for (i = 0; i < cnts; i++) {
+				if (padapter->registrypriv.bBTFileMaskEfuse == _TRUE) {
+						if (rtw_file_efuse_IsMasked(padapter, addr + i, btmaskfileBuffer)) /*use BT file efuse mask.*/
+							data[i] = 0xff;
+						else
+							RTW_INFO("data[%x] = %x\n", i, data[i]);
+				} else {
+						if (efuse_IsBT_Masked(padapter, addr + i)) /*use drv internal efuse mask.*/
+							data[i] = 0xff;
+						else
+							RTW_INFO("data[%x] = %x\n", i, data[i]);
+					}
+			}
+	}
+#endif /*CONFIG_BT_EFUSE_MASK*/
+}
+
 u8 rtw_BT_efuse_map_read(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 {
 	hal_ReadEFuse_BT_logic_map(adapter, addr, cnts, data);
@@ -1323,6 +1387,7 @@ u8 rtw_BT_efuse_map_read(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 
 	return _SUCCESS;
 }
+
 
 static u16
 hal_EfuseGetCurrentSize_BT(
@@ -1339,7 +1404,6 @@ hal_EfuseGetCurrentSize_BT(
 	u8	hoffset = 0, hworden = 0;
 	u8	efuse_data, word_cnts = 0;
 	u16	retU2 = 0;
-	u8 bContinual = _TRUE;
 
 
 	btusedbytes = fakeBTEfuseUsedBytes;
@@ -1410,6 +1474,28 @@ hal_EfuseGetCurrentSize_BT(
 	return retU2;
 }
 
+#ifdef CONFIG_RTL8822C
+void rtw_pre_bt_efuse(PADAPTER padapter)
+{
+	char pgdata[4] = {0x72, 0x80, 0x14, 0x90}; /*BT 5M PLL*/
+	u8 status = 1;
+	u8 bkmask;
+	BOOLEAN bt_en;
+
+	bkmask = padapter->registrypriv.boffefusemask;
+	padapter->registrypriv.boffefusemask = 1;
+
+	bt_en = rtw_read8(padapter, 0x6A) & BIT2 ? _TRUE : _FALSE;
+	if (IS_HARDWARE_TYPE_8822C(padapter) && bt_en == _TRUE) {
+			status = rtw_BT_efuse_map_write(padapter, 0x1f8, 4, pgdata);
+			RTW_INFO("%s done!!!\n", __FUNCTION__);
+	}
+	if (status == _FAIL)
+		RTW_INFO("%s: fail\n", __FUNCTION__);
+	padapter->registrypriv.boffefusemask = bkmask;
+}
+#endif
+
 u8 rtw_BT_efuse_map_write(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 {
 #define RT_ASSERT_RET(expr)									\
@@ -1452,10 +1538,10 @@ u8 rtw_BT_efuse_map_write(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 
 	_rtw_memcpy(efuse , map, mapLen);
 	_rtw_memcpy(efuse + addr, data, cnts);
-
+#ifdef CONFIG_BT_EFUSE_MASK
 	if (adapter->registrypriv.boffefusemask == 0) {
 		for (i = 0; i < cnts; i++) {
-			if (adapter->registrypriv.bFileMaskEfuse == _TRUE) {
+			if (adapter->registrypriv.bBTFileMaskEfuse == _TRUE) {
 				if (rtw_file_efuse_IsMasked(adapter, addr + i, btmaskfileBuffer)) /*use file efuse mask. */
 					efuse[addr + i] = map[addr + i];
 			} else {
@@ -1465,6 +1551,7 @@ u8 rtw_BT_efuse_map_write(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 			RTW_INFO("%s , efuse[%x] = %x, map = %x\n", __func__, addr + i, efuse[ addr + i], map[addr + i]);
 		}
 	}
+#endif /*CONFIG_BT_EFUSE_MASK*/
 	/* precheck pg efuse data byte*/
 	chk_total_byte = 0;
 	idx = 0;
@@ -1528,7 +1615,10 @@ u8 rtw_BT_efuse_map_write(PADAPTER adapter, u16 addr, u16 cnts, u8 *data)
 		offset++;
 	}
 exit:
-	rtw_mfree(map, mapLen);
+	if (efuse)
+		rtw_mfree(efuse, mapLen);
+	if (map)
+		rtw_mfree(map, mapLen);
 	return ret;
 }
 
@@ -1541,7 +1631,6 @@ void hal_ReadEFuse_BT_logic_map(
 {
 
 	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(padapter);
-	PEFUSE_HAL		pEfuseHal = &pHalData->EfuseHal;
 
 	u8	*efuseTbl, *phyefuse;
 	u8	bank;
@@ -1677,8 +1766,6 @@ static u8 hal_EfusePartialWriteCheck(
 	PPGPKT_STRUCT	pTargetPkt,
 	u8				bPseudoTest)
 {
-	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(padapter);
-	PEFUSE_HAL		pEfuseHal = &pHalData->EfuseHal;
 	u8	bRet = _FALSE;
 	u16	startAddr = 0, efuse_max_available_len = EFUSE_BT_REAL_BANK_CONTENT_LEN, efuse_max = EFUSE_BT_REAL_BANK_CONTENT_LEN;
 	u8	efuse_data = 0;
@@ -1787,7 +1874,6 @@ static u8 hal_EfusePgPacketWrite1ByteHeader(
 	PPGPKT_STRUCT	pTargetPkt,
 	u8				bPseudoTest)
 {
-	u8	bRet = _FALSE;
 	u8	pg_header = 0, tmp_header = 0;
 	u16	efuse_addr = *pAddr;
 	u8	repeatcnt = 0;
@@ -2603,7 +2689,7 @@ u8 rtw_efuse_map_write(PADAPTER padapter, u16 addr, u16 cnts, u8 *data)
 	if (padapter->registrypriv.boffefusemask == 0) {
 		for (i = 0; i < cnts; i++) {
 			if (padapter->registrypriv.bFileMaskEfuse == _TRUE) {
-				if (rtw_file_efuse_IsMasked(padapter, addr + i), maskfileBuffer) /*use file efuse mask. */
+				if (rtw_file_efuse_IsMasked(padapter, addr + i, maskfileBuffer)) /*use file efuse mask. */
 					efuse[addr + i] = map[addr + i];
 			} else {
 				if (efuse_IsMasked(padapter, addr + i))
@@ -3150,7 +3236,14 @@ void EFUSE_ShadowMapUpdate(
 	/* PlatformMoveMemory((void *)&pHalData->EfuseMap[EFUSE_MODIFY_MAP][0], */
 	/* (void *)&pHalData->EfuseMap[EFUSE_INIT_MAP][0], mapLen); */
 #endif /* !RTW_HALMAC */
+#ifdef CONFIG_MP_INCLUDED
+	if (rtw_mp_mode_check(pAdapter)) {
+		PEFUSE_HAL pEfuseHal = &pHalData->EfuseHal;
 
+		if (GET_EFUSE_UPDATE_ON(pAdapter))
+			_rtw_memcpy(pHalData->efuse_eeprom_data, pEfuseHal->fakeEfuseModifiedMap, mapLen);
+	}
+#endif
 	rtw_mask_map_read(pAdapter, 0x00, mapLen, pHalData->efuse_eeprom_data);
 
 	rtw_dump_cur_efuse(pAdapter);
@@ -3246,7 +3339,7 @@ int retriveAdaptorInfoFile(char *path, u8 *efuse_data)
 }
 #endif /* CONFIG_ADAPTOR_INFO_CACHING_FILE */
 
-u8 rtw_efuse_file_read(PADAPTER padapter, u8 *filepatch, u8 *buf, u32 len)
+u8 rtw_efuse_file_read(PADAPTER padapter, u8 *filepath, u8 *buf, u32 len)
 {
 	char *ptmpbuf = NULL, *ptr;
 	u8 val8;
@@ -3258,27 +3351,24 @@ u8 rtw_efuse_file_read(PADAPTER padapter, u8 *filepatch, u8 *buf, u32 len)
 	if (ptmpbuf == NULL)
 		return _FALSE;
 
-	count = rtw_retrieve_from_file(filepatch, ptmpbuf, bufsize);
+	count = rtw_retrieve_from_file(filepath, ptmpbuf, bufsize);
 	if (count <= 90) {
 		rtw_mfree(ptmpbuf, bufsize);
-		RTW_ERR("%s, filepatch %s, size=%d, FAIL!!\n", __FUNCTION__, filepatch, count);
+		RTW_ERR("%s, filepatch %s, size=%d, FAIL!!\n", __FUNCTION__, filepath, count);
 		return _FALSE;
 	}
-
 	i = 0;
 	j = 0;
 	ptr = ptmpbuf;
 	while ((j < len) && (i < count)) {
 		if (ptmpbuf[i] == '\0')
 			break;
-
 		ptr = strpbrk(&ptmpbuf[i], " \t\n\r");
 		if (ptr) {
 			if (ptr == &ptmpbuf[i]) {
 				i++;
 				continue;
 			}
-
 			/* Add string terminating null */
 			*ptr = 0;
 		} else {
@@ -3293,14 +3383,50 @@ u8 rtw_efuse_file_read(PADAPTER padapter, u8 *filepatch, u8 *buf, u32 len)
 			RTW_DBG("i=%d, j=%d, 0x%02x\n", i, j, buf[j]);
 			j++;
 		}
-
 		i = ptr - ptmpbuf + 1;
 	}
-
 	rtw_mfree(ptmpbuf, bufsize);
-	RTW_INFO("%s, filepatch %s, size=%d, done\n", __FUNCTION__, filepatch, count);
+	RTW_INFO("%s, filepatch %s, size=%d, done\n", __FUNCTION__, filepath, count);
 	return _TRUE;
 }
+
+#if !defined(CONFIG_RTW_ANDROID_GKI)
+u8 rtw_efuse_file_store(PADAPTER padapter, u8 *filepath, u8 *buf, u32 len)
+{
+	int err = 0, i = 0, j = 0, mapLen = 0 ;
+	char *cbuf, *pchr;
+
+	cbuf = rtw_zmalloc(len * 3);
+	pchr = cbuf;
+
+	if (filepath && buf) {
+		if (cbuf == NULL) {
+			RTW_INFO("%s, malloc cbuf _FAIL\n", __FUNCTION__);
+			err = _FAIL;
+		} else {
+			for (i = 0; i <= len; i += 16) {
+				for (j = 0; j < 16; j++)
+					pchr += sprintf(pchr, "%02X ", buf[i + j]);
+				pchr += sprintf(pchr, "\n");
+			}
+
+			err = rtw_store_to_file(filepath, cbuf, strlen(cbuf));
+			RTW_INFO("%s, rtw_store_to_file len=%d,err =%d, len(cbuf)=%zd\n", __FUNCTION__, len, err, strlen(cbuf));
+			if (err == strlen(cbuf)) {
+				err = _SUCCESS;
+				RTW_INFO("%s, filepatch %s, len=%d, done\n", __FUNCTION__, filepath, len);
+			} else {
+				err = _FAIL;
+				RTW_INFO("%s, filepatch %s, len=%d,err =%d, _FAIL\n", __FUNCTION__, filepath, len, err);
+			}
+		}
+	}
+	if (cbuf)
+		rtw_mfree(cbuf, len * 3);
+
+	return err;
+}
+#endif /* !defined(CONFIG_RTW_ANDROID_GKI) */
 
 #ifdef CONFIG_EFUSE_CONFIG_FILE
 u32 rtw_read_efuse_from_file(const char *path, u8 *buf, int map_size)
@@ -3313,10 +3439,10 @@ u32 rtw_read_efuse_from_file(const char *path, u8 *buf, int map_size)
 	u32 ret = _FAIL;
 
 	u8 *file_data = NULL;
-	u32 file_size, read_size, pos = 0;
+	u32 file_size = 16384, read_size, pos = 0;
 	u8 *map = NULL;
 
-	if (rtw_is_file_readable_with_size(path, &file_size) != _TRUE) {
+	if (rtw_readable_file_sz_chk(path, file_size) != _TRUE) {
 		RTW_PRINT("%s %s is not readable\n", __func__, path);
 		goto exit;
 	}
@@ -3404,7 +3530,7 @@ u32 rtw_read_macaddr_from_file(const char *path, u8 *buf)
 	u32 ret = _FAIL;
 
 	u8 file_data[17];
-	u32 read_size, pos = 0;
+	u32 read_size;
 	u8 addr[ETH_ALEN];
 
 	if (rtw_is_file_readable(path) != _TRUE) {

@@ -214,3 +214,4 @@ u32 rtl8822c_get_rx_desc_size(struct _ADAPTER *a)
 
 	return size;
 }
+

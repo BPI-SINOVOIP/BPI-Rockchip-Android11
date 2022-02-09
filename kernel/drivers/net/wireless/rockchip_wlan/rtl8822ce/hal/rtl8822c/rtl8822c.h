@@ -25,6 +25,10 @@
 #define DRIVER_EARLY_INT_TIME_8822C	0x05
 #define BCN_DMA_ATIME_INT_TIME_8822C	0x02
 
+#define C2H_GET_CMD_ID_1BYTE(c2h_pkt) LE_BITS_TO_1BYTE(c2h_pkt + 0X00, 0, 8)
+
+#define C2H_GET_SEQ_1BYTE(c2h_pkt) LE_BITS_TO_1BYTE(c2h_pkt + 0X01, 0, 8)
+
 /* rtl8822c_ops.c */
 struct hw_port_reg {
 	u32 net_type;	/*reg_offset*/
@@ -94,13 +98,9 @@ void rtl8822c_query_rx_desc(union recv_frame *, u8 *pdesc);
 
 /* rtl8822c_cmd.c */
 s32 rtl8822c_fillh2ccmd(PADAPTER, u8 id, u32 buf_len, u8 *pbuf);
-void rtl8822c_set_FwPwrMode_cmd(PADAPTER, u8 psmode);
-
-#ifdef CONFIG_TDLS
-#ifdef CONFIG_TDLS_CH_SW
-void rtl8822c_set_BcnEarly_C2H_Rpt_cmd(PADAPTER padapter, u8 enable);
-#endif
-#endif
+void _rtl8822c_set_FwPwrMode_cmd(PADAPTER adapter, u8 psmode, u8 rfon_ctrl);
+void rtl8822c_set_FwPwrMode_cmd(PADAPTER adapter, u8 psmode);
+void rtl8822c_set_FwPwrMode_rfon_ctrl_cmd(PADAPTER adapter, u8 rfon_ctrl);
 
 void rtl8822c_set_FwPwrModeInIPS_cmd(PADAPTER adapter, u8 cmd_param);
 void rtl8822c_req_txrpt_cmd(PADAPTER, u8 macid);
@@ -108,6 +108,8 @@ void rtl8822c_c2h_handler(PADAPTER, u8 *pbuf, u16 length);
 #ifdef CONFIG_WOWLAN
 void rtl8822c_set_fw_pwrmode_inips_cmd_wowlan(PADAPTER padapter, u8 ps_mode);
 #endif
+void rtl8822c_set_usb_suspend_mode(PADAPTER padapter);
+
 void rtl8822c_c2h_handler_no_io(PADAPTER, u8 *pbuf, u16 length);
 
 #ifdef CONFIG_BT_COEXIST
@@ -129,7 +131,9 @@ void rtl8822c_set_channel_bw(PADAPTER adapter, u8 center_ch, enum channel_width,
 void rtl8822c_set_tx_power_level(PADAPTER, u8 channel);
 void rtl8822c_set_txpwr_done(_adapter *adapter);
 void rtl8822c_set_tx_power_index(PADAPTER adapter, u32 powerindex, enum rf_path rfpath, u8 rate);
-u8 rtl8822c_get_tx_power_index(PADAPTER adapter, enum rf_path rfpath, u8 rate, u8 bandwidth, u8 channel, struct txpwr_idx_comp *tic);
+
+u8 rtl8822c_get_dis_dpd_by_rate_diff(PADAPTER adapter, u8 rate);
+
 void rtl8822c_notch_filter_switch(PADAPTER, bool enable);
 #ifdef CONFIG_BEAMFORMING
 void rtl8822c_phy_bf_init(PADAPTER);

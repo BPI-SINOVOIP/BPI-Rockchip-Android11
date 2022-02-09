@@ -41,8 +41,6 @@
 	#endif
 #endif
 
-#define CONFIG_IEEE80211_BAND_5GHZ
-
 /*#define CONFIG_IOCTL_CFG80211*/
 #ifdef CONFIG_IOCTL_CFG80211
 	/*#define RTW_USE_CFG80211_STA_EVENT*/ /* Indecate new sta asoc through cfg80211_new_sta */
@@ -106,14 +104,13 @@
 
 /*#define CONFIG_PCI_ASPM*/
 #ifdef CONFIG_PCI_ASPM
-#define CONFIG_PCI_DYNAMIC_ASPM
+#define CONFIG_PCI_DYNAMIC_ASPM_L1_LATENCY
 #endif
 
 #define CONFIG_HIGH_CHAN_SUPER_CALIBRATION
 /*#define SUPPORT_HW_RFOFF_DETECTED*/
 /*#define CONFIG_ANTENNA_DIVERSITY*/
 
-#define CONFIG_AP_MODE
 #ifdef CONFIG_AP_MODE
 	/*#define CONFIG_INTERRUPT_BASED_TXBCN*/ /* Tx Beacon when driver BCN_OK ,BCN_ERR interrupt occurs */
 	#if defined(CONFIG_CONCURRENT_MODE) && defined(CONFIG_INTERRUPT_BASED_TXBCN)
@@ -132,7 +129,6 @@
 	/*#define CONFIG_AUTO_AP_MODE*/
 #endif
 
-#define CONFIG_P2P
 #ifdef CONFIG_P2P
 	/* The CONFIG_WFD is for supporting the Wi-Fi display */
 	#define CONFIG_WFD
@@ -174,9 +170,6 @@
 #define CONFIG_GLOBAL_UI_PID
 
 /*#define CONFIG_RTW_80211K*/
-
-#define CONFIG_LAYER2_ROAMING
-#define CONFIG_LAYER2_ROAMING_RESUME
 /*#define CONFIG_ADAPTOR_INFO_CACHING_FILE*/ /* now just applied on 8192cu only, should make it general...*/
 /*#define CONFIG_RESUME_IN_WORKQUEUE*/
 /*#define CONFIG_SET_SCAN_DENY_TIMER*/
@@ -204,6 +197,7 @@
 /*
  * Interface  Related Config
  */
+#define CONFIG_USB_CONFIG_OFFLOAD_8822C
 
 /*
  * HAL  Related Config
@@ -267,8 +261,6 @@
  */
 #define DBG	1
 
-#define CONFIG_PROC_DEBUG
-
 #define CONFIG_DBG_COUNTER
 
 #define DBG_CONFIG_ERROR_DETECT
@@ -311,16 +303,12 @@
 #define	DBG_TXBD_DESC_DUMP
 
 
-/* #define CONFIG_RTW_8822C_BETA_DEV */
-#ifdef CONFIG_RTW_8822C_BETA_DEV
 /* #define CONFIG_NO_FW */
 /* #define CONFIG_DISABLE_ODM */
-/* #define CONFIG_DEFAULT_PWR_BY_RATE_TABLE */
-#endif
 
-/*#define CONFIG_8822CE_INT_MIGRATION*/
-
-#define CONFIG_PCI_BCN_POLLING
+/* #define CONFIG_8822CE_INT_MIGRATION */
 
 #define CONFIG_PCI_TX_POLLING
 /*#define CONFIG_PCI_TX_POLLING_V2*/
+
+/* #define CONFIG_64BIT_DMA */
