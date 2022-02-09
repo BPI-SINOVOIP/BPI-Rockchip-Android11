@@ -471,10 +471,29 @@
 	pinctrl-0 = <&spdifm1_tx>;
 };
 
+&uart0 {
+	status = "disabled";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart0_xfer>;
+	//pinctrl-0 = <&uart0_xfer &uart0_ctsn &uart0_rtsn>;
+};
+
+&uart7 {
+	status = "disabled";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart7m1_xfer>;
+};
+
 &uart8 {
 	status = "disabled";
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart8m0_xfer &uart8m0_ctsn>;
+};
+
+&uart9 {
+	status = "disabled";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart9m1_xfer>;
 };
 
 &vcc3v3_lcd0_n {
@@ -528,8 +547,27 @@
 	status = "okay";
 };
 
+&pwm10 {
+	status = "disabled";
+};
+
 &fan {
 	status = "okay";
+};
+
+&spi3 {
+	status = "disabled";
+	pinctrl-names = "default", "high_speed";
+	pinctrl-0 = <&spi3m1_cs0 &spi3m1_pins>;
+	pinctrl-1 = <&spi3m1_cs0 &spi3m1_pins_hs>;
+
+	max-freq = <48000000>;
+
+	spi_dev@0 {
+		compatible = "rockchip,spidev";
+		reg = <0>;
+		spi-max-frequency = <12000000>;
+	};
 };
 
 /* rtl8367rb io 3v3 */
