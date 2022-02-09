@@ -38,9 +38,7 @@ struct pci_priv {
 	BOOLEAN		pci_clk_req;
 
 	u8	pciehdr_offset;
-#ifdef RTK_129X_PLATFORM
-	u8	busnumber;
-#endif
+
 	u8	linkctrl_reg;
 	u8	pcibridge_linkctrlreg;
 

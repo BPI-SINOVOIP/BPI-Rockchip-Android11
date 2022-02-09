@@ -303,11 +303,9 @@ int rtw_bfer_rf_number = 0; /*BeamformerCapRfNum Rf path number, 0 for auto, oth
 int rtw_bfee_rf_number = 0; /*BeamformeeCapRfNum  Rf path number, 0 for auto, others for manual*/
 
 #endif /* CONFIG_80211N_HT */
-/*
- * DHCWIFI-73: Enable 11AC products GO/Soft-AP default VHT80. rtw_vht_enable = 2
- */
+
 #ifdef CONFIG_80211AC_VHT
-int rtw_vht_enable = 2; /* 0:disable, 1:enable, 2:force auto enable */
+int rtw_vht_enable = 1; /* 0:disable, 1:enable, 2:force auto enable */
 module_param(rtw_vht_enable, int, 0644);
 
 int rtw_ampdu_factor = 7;
@@ -1811,10 +1809,6 @@ struct net_device *rtw_init_netdev(_adapter *old_padapter)
 #endif
 #endif
 
-/* Bug46108 2015/02/13 by Borg
- * Enable scatter & gather can definitely reduce the number of memory copy to enhance Tx performance.
- * After kernel 3.10, It is allowed to enable NETIF_F_SG but no checksum offload.
- */ 
 #ifdef CONFIG_RTW_NETIF_SG
         pnetdev->features |= NETIF_F_SG;
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 39)
@@ -2596,6 +2590,9 @@ u8 rtw_init_drv_sw(_adapter *padapter)
 
 		dvobj->macid_ctl.num = rtw_min(hal_spec->macid_num, MACID_NUM_SW_LIMIT);
 
+		dvobj->macid_ctl.macid_cap = hal_spec->macid_cap;
+		dvobj->macid_ctl.macid_txrpt = hal_spec->macid_txrpt;
+		dvobj->macid_ctl.macid_txrpt_pgsz = hal_spec->macid_txrpt_pgsz;
 		dvobj->cam_ctl.sec_cap = hal_spec->sec_cap;
 		dvobj->cam_ctl.num = rtw_min(hal_spec->sec_cam_ent_num, SEC_CAM_ENT_NUM_SW_LIMIT);
 

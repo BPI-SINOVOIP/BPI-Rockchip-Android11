@@ -6262,6 +6262,7 @@ static int cfg80211_rtw_set_monitor_channel(struct wiphy *wiphy
 
 	switch (chandef->width) {
 	case NL80211_CHAN_WIDTH_20_NOHT:
+		/* fall through */
 	case NL80211_CHAN_WIDTH_20:
 		target_width = CHANNEL_WIDTH_20;
 		target_offset = HAL_PRIME_CHNL_OFFSET_DONT_CARE;

@@ -295,7 +295,7 @@ done:
 	}
 }
 
-static void rtl8822be_recv_tasklet(void *priv)
+static void rtl8822be_recv_tasklet(unsigned long priv)
 {
 	_irqL	irqL;
 	_adapter	*padapter = (_adapter *)priv;
@@ -324,7 +324,7 @@ static void rtl8822be_xmit_beacon(PADAPTER Adapter)
 #endif
 }
 
-static void rtl8822be_prepare_bcn_tasklet(void *priv)
+static void rtl8822be_prepare_bcn_tasklet(unsigned long priv)
 {
 	_adapter *padapter = (_adapter *)priv;
 
@@ -366,9 +366,6 @@ int rtl8822be_init_rxbd_ring(_adapter *padapter)
 	struct sk_buff *skb = NULL;
 	u8	*rx_desc = NULL;
 	int	i, rx_queue_idx;
-#ifdef CONFIG_DHC_PATCH
-	u8	times_alloc_skb_failed = 0, wait_ms = 100;
-#endif
 
 
 	/* rx_queue_idx 0:RX_MPDU_QUEUE */
@@ -393,23 +390,8 @@ int rtl8822be_init_rxbd_ring(_adapter *padapter)
 		r_priv->rx_ring[rx_queue_idx].idx = 0;
 
 		for (i = 0; i < r_priv->rxringcount; i++) {
-#ifdef CONFIG_DHC_PATCH
-realloc_skb:
-#endif
 			skb = dev_alloc_skb(r_priv->rxbuffersize);
 			if (!skb) {
-#ifdef CONFIG_DHC_PATCH
-				/*  DHCWIFI-103: Failed to allocate skb due to 1G ram size is not enough for Android.
-				 * 		 Try to reallocate after releasing some memroy.
-			   	 */
-				times_alloc_skb_failed++;
-				if(times_alloc_skb_failed <= 3){
-					RTW_INFO("Failed %d times to allocate skb, try to reallocate after sleeping\n", 
-						times_alloc_skb_failed);
-					rtw_msleep_os(wait_ms);
-					goto realloc_skb;
-				}
-#endif
 				RTW_INFO("Cannot allocate skb for RX ring\n");
 				return _FAIL;
 			}

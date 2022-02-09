@@ -445,7 +445,11 @@ u32 rtl8822be_init(PADAPTER padapter)
 
 	rtl8822b_init_misc(padapter);
 	hal_init_misc(padapter);
-
+#ifdef CONFIG_USB_CONFIG_OFFLOAD_8822B
+	if (((rtw_read32(padapter, REG_SYS_STATUS1_8822B) >> 12) & 0x7)
+		== 0x3)
+		rtl8822b_set_usb_config_offload(padapter);
+#endif
 	/* TX interrupt migration - 3pkts or 0.448 ms */
 	rtw_write32(padapter, REG_INT_MIG_8822B, 0x33000000);
 

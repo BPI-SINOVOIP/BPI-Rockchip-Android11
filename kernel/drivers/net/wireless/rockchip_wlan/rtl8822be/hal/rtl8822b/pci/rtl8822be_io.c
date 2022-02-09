@@ -33,7 +33,7 @@ static u32 pci_io_read_129x(struct dvobj_priv *pdvobjpriv, u32 addr, u8 size)
 	u32 translate_val = 0;
 	u32 tmp_addr = addr & 0xFFF;
 	_irqL irqL;
-	u32 pci_error_status = 0, pci_timeout_status = 0;
+	u32 pci_error_status = 0;
 	int retry_cnt = 0;
 	unsigned long flags;
 
@@ -82,22 +82,6 @@ pci_read_129x_retry:
 
 	//DLLP error patch
 	pci_error_status = readl( (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
-	pci_timeout_status = readl((u8 *)(pdvobjpriv->ctrl_start + 0x74));
-
-	//pcie timeout patch
-	if (pci_timeout_status & 0x01) {
-		writel(pci_error_status, (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
-		writel(pci_timeout_status, (u8 *)(pdvobjpriv->ctrl_start + 0x74));
-		RTW_WARN("RTD129X: %s: pci (0x74:%x, 0x7C:%x) reg=0x%x val=0x%x\n", 
-			__func__, pci_timeout_status, pci_error_status, addr, rval);
-
-		if(retry_cnt < MAX_RETRY) {
-			retry_cnt++;
-			goto pci_read_129x_retry;
-		}
-	}
-
-	//DLLP error patch
 	if(pci_error_status & 0x1F) {
 		writel(pci_error_status, (u8 *)(pdvobjpriv->ctrl_start + 0x7C));
 		RTW_WARN("RTD129X: %s: DLLP(#%d) 0x%x reg=0x%x val=0x%x\n", __func__, retry_cnt, pci_error_status, addr, rval);

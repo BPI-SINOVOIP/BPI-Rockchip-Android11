@@ -794,7 +794,6 @@ static struct dvobj_priv	*pci_dvobj_init(struct pci_dev *pdev, const struct pci_
 	}
 
 #ifdef RTK_129X_PLATFORM
-	pcipriv->busnumber = pdev->bus->number;
 	if (pdev->bus->number == 0x00) {
 		pmem_start = PCIE_SLOT1_MEM_START;
 		pmem_len   = PCIE_SLOT1_MEM_LEN;

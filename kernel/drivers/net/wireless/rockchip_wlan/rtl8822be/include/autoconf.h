@@ -25,7 +25,7 @@
 
 #define CONFIG_PCI_HCI
 #define PLATFORM_LINUX
-#define CONFIG_DHC_PATCH
+
 /*
  * Wi-Fi Functions Config
  */
@@ -195,6 +195,7 @@
 /*
  * Interface  Related Config
  */
+#define CONFIG_USB_CONFIG_OFFLOAD_8822B
 
 /*
  * HAL  Related Config

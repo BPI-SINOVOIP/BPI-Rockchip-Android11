@@ -30,7 +30,7 @@
 #define buf_desc_debug(...)  do {} while (0)
 #endif
 
-static void rtl8822be_xmit_tasklet(void *priv)
+static void rtl8822be_xmit_tasklet(unsigned long priv)
 {
 	_irqL irqL;
 	_adapter *padapter = (_adapter *)priv;

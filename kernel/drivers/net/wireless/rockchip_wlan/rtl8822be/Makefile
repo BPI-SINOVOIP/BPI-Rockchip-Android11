@@ -8,11 +8,11 @@ EXTRA_CFLAGS += -O1
 #EXTRA_CFLAGS += -Wshadow -Wpointer-arith -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
 
 EXTRA_CFLAGS += -Wno-unused-variable
-EXTRA_CFLAGS += -Wno-unused-value
-EXTRA_CFLAGS += -Wno-unused-label
-EXTRA_CFLAGS += -Wno-unused-parameter
-EXTRA_CFLAGS += -Wno-unused-function
-EXTRA_CFLAGS += -Wno-unused
+#EXTRA_CFLAGS += -Wno-unused-value
+#EXTRA_CFLAGS += -Wno-unused-label
+#EXTRA_CFLAGS += -Wno-unused-parameter
+#EXTRA_CFLAGS += -Wno-unused-function
+#EXTRA_CFLAGS += -Wno-unused
 #EXTRA_CFLAGS += -Wno-uninitialized
 
 GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
@@ -82,7 +82,7 @@ CONFIG_RTW_GRO = y
 CONFIG_RTW_NETIF_SG = y
 CONFIG_RTW_IPCAM_APPLICATION = n
 CONFIG_RTW_REPEATER_SON = n
-CONFIG_RTW_WIFI_HAL = y
+CONFIG_RTW_WIFI_HAL = n
 CONFIG_ICMP_VOQ = n
 CONFIG_IP_R_MONITOR = n #arp VOQ and high rate
 # user priority mapping rule : tos, dscp
@@ -146,8 +146,8 @@ CONFIG_PLATFORM_ARM_TCC8920_JB42 = n
 CONFIG_PLATFORM_ARM_TCC8930_JB42 = n
 CONFIG_PLATFORM_ARM_RK2818 = n
 CONFIG_PLATFORM_ARM_RK3066 = n
-CONFIG_PLATFORM_ARM_RK3188 = y
-CONFIG_PLATFORM_ARM_RK3399 = n
+CONFIG_PLATFORM_ARM_RK3188 = n
+CONFIG_PLATFORM_ARM_RK3399 = y
 CONFIG_PLATFORM_ARM_URBETTER = n
 CONFIG_PLATFORM_ARM_TI_PANDA = n
 CONFIG_PLATFORM_MIPS_JZ4760 = n
@@ -174,9 +174,6 @@ CONFIG_PLATFORM_MOZART = n
 CONFIG_PLATFORM_RTK119X = n
 CONFIG_PLATFORM_RTK119X_AM = n
 CONFIG_PLATFORM_RTK129X = n
-CONFIG_PLATFORM_RTK139X = n
-CONFIG_PLATFORM_RTK13XX = n
-CONFIG_PLATFORM_RTK16XX = n
 CONFIG_PLATFORM_RTK390X = n
 CONFIG_PLATFORM_NOVATEK_NT72668 = n
 CONFIG_PLATFORM_HISILICON = n
@@ -831,7 +828,7 @@ MODULE_NAME = 88x2bu
 endif
 endif
 ifeq ($(CONFIG_PCI_HCI), y)
-MODULE_NAME = 88x2be
+MODULE_NAME = 8822be
 endif
 ifeq ($(CONFIG_SDIO_HCI), y)
 MODULE_NAME = 88x2bs
@@ -1250,12 +1247,6 @@ ifeq ($(CONFIG_IP_R_MONITOR), y)
 EXTRA_CFLAGS += -DCONFIG_IP_R_MONITOR
 endif
 
-ANDROID_BRANCH_NAME = $(filter \
-        android-8.0.0-b \
-        android-9.0.0-b \
-	android-q-b,$(BRANCH_PARENT))
-
-ifneq ($(ANDROID_BRANCH_NAME),)
 ifeq ($(CONFIG_RTW_WIFI_HAL), y)
 #EXTRA_CFLAGS += -DCONFIG_RTW_WIFI_HAL_DEBUG
 EXTRA_CFLAGS += -DCONFIG_RTW_WIFI_HAL
@@ -1263,7 +1254,6 @@ EXTRA_CFLAGS += -DCONFIG_RTW_CFGVEDNOR_LLSTATS
 EXTRA_CFLAGS += -DCONFIG_RTW_CFGVENDOR_RANDOM_MAC_OUI
 EXTRA_CFLAGS += -DCONFIG_RTW_CFGVEDNOR_RSSIMONITOR
 EXTRA_CFLAGS += -DCONFIG_RTW_CFGVENDOR_WIFI_LOGGER
-endif
 endif
 
 ifeq ($(CONFIG_MP_VHT_HW_TX_MODE), y)
@@ -1273,7 +1263,7 @@ ifeq ($(CONFIG_PLATFORM_I386_PC), y)
 EXTRA_CFLAGS += -mhard-float
 else
 ## For ARM ToolChain use Hardware FLOATING
-#EXTRA_CFLAGS += -mfloat-abi=hard
+EXTRA_CFLAGS += -mfloat-abi=hard
 endif
 endif
 
@@ -1404,7 +1394,7 @@ ifeq ($(CONFIG_SDIO_HCI), y)
 _PLATFORM_FILES += platform/platform_ARM_SUN50IW1P1_sdio.o
 endif
 
-ARCH ?= arm64
+ARCH := arm64
 # ===Cross compile setting for Android 5.1(64) SDK ===
 CROSS_COMPILE := /home/android_sdk/Allwinner/a64/android-51/lichee/out/sun50iw1p1/android/common/buildroot/external-toolchain/bin/aarch64-linux-gnu-
 KSRC :=/home/android_sdk/Allwinner/a64/android-51/lichee/linux-3.10/
@@ -1675,13 +1665,13 @@ EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN -DCONFIG_PLATFORM_ANDROID -DCONFIG_PLATFO
 EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
 EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
 # default setting for Power control
-#EXTRA_CFLAGS += -DRTW_ENABLE_WIFI_CONTROL_FUNC
+EXTRA_CFLAGS += -DRTW_ENABLE_WIFI_CONTROL_FUNC
 EXTRA_CFLAGS += -DRTW_SUPPORT_PLATFORM_SHUTDOWN
 # default setting for Special function
-ARCH := arm64
+ARCH := arm
 CROSS_COMPILE := /home/android_sdk/Rockchip/Rk3188/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin/arm-eabi-
 KSRC := /home/android_sdk/Rockchip/Rk3188/kernel
-MODULE_NAME := 8822be
+MODULE_NAME := wlan
 endif
 
 ifeq ($(CONFIG_PLATFORM_ARM_RK3066), y)
@@ -1726,7 +1716,7 @@ ifeq ($(CONFIG_SDIO_HCI), y)
 EXTRA_CFLAGS += -DCONFIG_PLATFORM_OPS
 _PLATFORM_FILES += platform/platform_rockchips_sdio.o
 ifeq ($(CONFIG_RTL8822B), y)
-USER_MODULE_NAME := 8822be
+USER_MODULE_NAME := 8822bs
 endif
 endif
 
@@ -2081,9 +2071,9 @@ ARCH := arm
 #CROSS_COMPILE := arm-linux-gnueabihf-
 KVER  := 3.10.24
 #KSRC :=/home/android_sdk/Allwinner/a20/android-kitkat44/lichee/linux-3.4
-CROSS_COMPILE := $(CROSS)
-KSRC := $(LINUX_KERNEL_PATH)
-MODULE_NAME := 8822be
+CROSS_COMPILE := /home/realtek/software_phoenix/phoenix/toolchain/usr/local/arm-2013.11/bin/arm-linux-gnueabihf-
+KSRC := /home/realtek/software_phoenix/linux-kernel
+MODULE_NAME := 8192eu
 
 endif
 
@@ -2109,7 +2099,7 @@ endif
 
 ifeq ($(CONFIG_PLATFORM_RTK129X), y)
 EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
-EXTRA_CFLAGS += -DRTK_129X_PLATFORM -DCONFIG_RF4CE_COEXIST
+EXTRA_CFLAGS += -DRTK_129X_PLATFORM
 EXTRA_CFLAGS += -DCONFIG_TRAFFIC_PROTECT
 # default setting for Android 4.1, 4.2
 EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
@@ -2127,110 +2117,20 @@ EXTRA_CFLAGS += -Wno-error=date-time
 ifeq ($(RTK_ANDROID_VERSION), nougat)
 EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
 endif
-
-ARCH ?= arm64
-
-# ==== Cross compile setting for Android 4.4 SDK =====
-#CROSS_COMPILE := arm-linux-gnueabihf-
-KVER  := 4.1.10
-CROSS_COMPILE := $(CROSS)
-KSRC := $(LINUX_KERNEL_PATH)
-MODULE_NAME := 8822be
-endif
-
-ifeq ($(CONFIG_PLATFORM_RTK139X), y)
-EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
-EXTRA_CFLAGS += -DRTK_139X_PLATFORM -DCONFIG_RF4CE_COEXIST
-EXTRA_CFLAGS += -DCONFIG_TRAFFIC_PROTECT
-# default setting for Android 4.1, 4.2
-EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
-EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
-#EXTRA_CFLAGS += -DCONFIG_P2P_IPS -DCONFIG_QOS_OPTIMIZATION
-EXTRA_CFLAGS += -DCONFIG_QOS_OPTIMIZATION
-# Enable this for Android 5.0
-EXTRA_CFLAGS += -DCONFIG_RADIO_WORK
-EXTRA_CFLAGS += -Wno-error=date-time
-# default setting for Android 7.0
-#ifeq ($(RTK_ANDROID_VERSION), nougat)
-#EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
-#endif
 #EXTRA_CFLAGS += -DCONFIG_#PLATFORM_OPS
 ifeq ($(CONFIG_USB_HCI), y)
 EXTRA_CFLAGS += -DCONFIG_USE_USB_BUFFER_ALLOC_TX
 endif
 
-ARCH ?= arm64
+ARCH := arm64
 
 # ==== Cross compile setting for Android 4.4 SDK =====
 #CROSS_COMPILE := arm-linux-gnueabihf-
-KVER  := 4.1.10
-CROSS_COMPILE := $(CROSS)
-KSRC := $(LINUX_KERNEL_PATH)
-MODULE_NAME := 8822be
-endif
-
-ifeq ($(CONFIG_PLATFORM_RTK13XX), y)
-EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
-EXTRA_CFLAGS += -DRTK_13XX_PLATFORM -DCONFIG_RF4CE_COEXIST
-EXTRA_CFLAGS += -DCONFIG_TRAFFIC_PROTECT
-# default setting for Android 4.1, 4.2
-EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
-EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
-#EXTRA_CFLAGS += -DCONFIG_P2P_IPS -DCONFIG_QOS_OPTIMIZATION
-EXTRA_CFLAGS += -DCONFIG_QOS_OPTIMIZATION
-# Enable this for Android 5.0
-ifneq ($(ANDROID_VERSION), kitkat)
-EXTRA_CFLAGS += -DCONFIG_RADIO_WORK
-endif
-EXTRA_CFLAGS += -Wno-error=date-time
-# default setting for Android 7.0
-#ifeq ($(RTK_ANDROID_VERSION), nougat)
-#EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
-#endif
-#EXTRA_CFLAGS += -DCONFIG_#PLATFORM_OPS
-ifeq ($(CONFIG_USB_HCI), y)
-EXTRA_CFLAGS += -DCONFIG_USE_USB_BUFFER_ALLOC_TX
-endif
-
-ARCH ?= arm64
-
-# ==== Cross compile setting for Android 4.4 SDK =====
-#CROSS_COMPILE := arm-linux-gnueabihf-
-CROSS_COMPILE := $(CROSS)
-KSRC := $(LINUX_KERNEL_PATH)
-MODULE_NAME := 8822be
-endif
-
-ifeq ($(CONFIG_PLATFORM_RTK16XX), y)
-EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
-EXTRA_CFLAGS += -DRTK_16XX_PLATFORM -DCONFIG_RF4CE_COEXIST
-EXTRA_CFLAGS += -DCONFIG_TRAFFIC_PROTECT
-# default setting for Android 4.1, 4.2
-EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
-EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
-#EXTRA_CFLAGS += -DCONFIG_P2P_IPS -DCONFIG_QOS_OPTIMIZATION
-EXTRA_CFLAGS += -DCONFIG_QOS_OPTIMIZATION
-# Enable this for Android 5.0
-EXTRA_CFLAGS += -DCONFIG_RADIO_WORK
-EXTRA_CFLAGS += -Wno-error=date-time
-# default setting for Android 7.0
-#ifeq ($(RTK_ANDROID_VERSION), nougat)
-#EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
-#endif
-#EXTRA_CFLAGS += -DCONFIG_#PLATFORM_OPS
-ifeq ($(CONFIG_USB_HCI), y)
-EXTRA_CFLAGS += -DCONFIG_USE_USB_BUFFER_ALLOC_TX
-endif
-
-
-ARCH ?= arm64
-
-# ==== Cross compile setting for Android 4.4 SDK =====
-#CROSS_COMPILE := arm-linux-gnueabihf-
-KVER  := 4.1.10
-CROSS_COMPILE := $(CROSS)
-KSRC := $(LINUX_KERNEL_PATH)
-MODULE_NAME := 8822be
+#KVER  := 4.1.10
+#CROSS_COMPILE := $(CROSS)
+#KSRC := $(LINUX_KERNEL_PATH)
+CROSS_COMPILE := /home/android_sdk/DHC/trunk-6.0.0_r1-QA160627/phoenix/toolchain/asdk64-4.9.4-a53-EL-3.10-g2.19-a64nt-160307/bin/asdk64-linux-
+KSRC := /home/android_sdk/DHC/trunk-6.0.0_r1-QA160627/linux-kernel
 endif
 
 ifeq ($(CONFIG_PLATFORM_RTK390X), y)
@@ -2470,7 +2370,7 @@ export CONFIG_RTL8822BE = m
 all: modules
 
 modules:
-	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE="$(CROSS_COMPILE)" -C $(KSRC) M=$(shell pwd)  modules
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
 
 strip:
 	$(CROSS_COMPILE)strip $(MODULE_NAME).ko --strip-unneeded
