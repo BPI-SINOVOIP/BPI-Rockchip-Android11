@@ -154,7 +154,7 @@ int check_wifi_chip_type_string(char *type)
 			PLOG(DEBUG) << "PCIE WIFI identify sucess";
 		else {
 			PLOG(DEBUG) << "maybe there is no usb wifi or sdio or pcie wifi,set default wifi module Brocom APXXX";
-			strcpy(recoginze_wifi_chip, "APXXX");
+			strcpy(recoginze_wifi_chip, "RTL8822CE");
 			identify_sucess = 1 ;
 		}
 	}
