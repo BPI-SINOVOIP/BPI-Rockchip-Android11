@@ -29,17 +29,14 @@ public:
     ~MpiJpegDecoder();
 
     typedef struct {
-        /**************** Decode-Input  *****************/
         /*
-         * Output address memory allocated by mpp-decoder default. You can
-         * designated the "outputPhyAddr" to specifies the decoded output
-         * address.
+         * output address memory allocated by decoder default, and you can
+         * designated the "outputPhyAddr" to specifies output address.
          */
         uint32_t   outputPhyAddr;
 
-        /**************** Decode-Ouput  *****************/
         /*
-         * NOTE: Since the output frame buffer send to vpu is aligned, it is
+         * NOTE: since the output frame buffer send to vpu is aligned, it is
          * neccessary to crop output with JPEG image dimens.
          *
          * vpu frame buffer width: FrameWidth
@@ -49,11 +46,10 @@ public:
         uint32_t   FrameHeight;        // buffer vertical stride
         uint32_t   DisplayWidth;       // valid width for display
         uint32_t   DisplayHeight;      // valid height for display
-
         uint32_t   ErrorInfo;          // error information
         uint32_t   OutputSize;
 
-        uint8_t   *MemVirAddr;
+        char      *MemVirAddr;
         uint32_t   MemPhyAddr;
 
         void      *FrameHandler;       // MppFrame handler
@@ -63,17 +59,16 @@ public:
     void flushBuffer();
 
     /**
-     * Output frame buffers within limits, so release frame buffer if one
+     * output frame buffers within limits, so release frame buffer if one
      * frame has been display successful.
      */
     void deinitOutputFrame(OutputFrame_t *aframeOut);
 
-    MPP_RET decode_sendpacket(char* input_buf, size_t buf_len,
-                              uint32_t outPhyAddr = 0);
-    MPP_RET decode_getoutframe(OutputFrame_t *aframeOut);
+    MPP_RET sendpacket(char* inputBuf, size_t length, int outPhyAddr = 0);
+    MPP_RET getoutframe(OutputFrame_t *aframeOut);
 
-    bool decodePacket(char* data, size_t size, OutputFrame_t *aframeOut);
-    bool decodeFile(const char *input_file, const char *output_file);
+    bool decodePacket(char* buf, size_t length, OutputFrame_t *aframeOut);
+    bool decodeFile(const char *inputFile, const char *outputFile);
 
 private:
     typedef enum {
@@ -82,7 +77,7 @@ private:
     } OutputFormat;
 
     MppCtx          mMppCtx;
-    MppApi          *mMpi;
+    MppApi         *mMpi;
 
     int             mInitOK;
     bool            mFdOutput;
@@ -94,8 +89,8 @@ private:
     int             mOutputFmt;
     uint32_t        mPacketCount;
 
-    QList           *mPackets;
-    QList           *mFrames;
+    QList          *mPackets;
+    QList          *mFrames;
 
     /*
      * packet buffer group
@@ -106,14 +101,14 @@ private:
     MppBufferGroup  mPacketGroup;
     MppBufferGroup  mFrameGroup;
 
-    /* Dump input & output for debug */
-    FILE            *mInputFile;
-    FILE            *mOutputFile;
+    /* dump input & output for debug */
+    FILE           *mInputFile;
+    FILE           *mOutputFile;
 
-    bool reinitMppDecoder();
+    bool reInitDecoder();
 
-    void setup_output_frame_from_mpp_frame(OutputFrame_t *oframe, MppFrame mframe);
-    MPP_RET crop_output_frame_if_neccessary(OutputFrame_t *oframe);
+    void setupOutputFrameFromMppFrame(OutputFrame_t *frameOut, MppFrame frame);
+    void cropOutputFrameIfNeccessary(OutputFrame_t *frameOut);
 };
 
 #endif  // __MPI_JPEG_DECODER_H__

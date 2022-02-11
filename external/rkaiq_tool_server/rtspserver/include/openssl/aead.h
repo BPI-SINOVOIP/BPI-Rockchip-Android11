@@ -21,7 +21,6 @@
 extern "C" {
 #endif
 
-
 // Authenticated Encryption with Additional Data.
 //
 // AEAD couples confidentiality and integrity in a single primitive. AEAD
@@ -87,7 +86,6 @@ extern "C" {
 //
 // The "seal" and "open" operations return one on success and zero on error.
 
-
 // AEAD algorithms.
 
 // EVP_aead_aes_128_gcm is AES-128 in Galois Counter Mode.
@@ -97,7 +95,7 @@ extern "C" {
 // effectively randomized, which means one must consider collisions. Unless
 // implementing an existing protocol which has already specified incorrect
 // parameters, only use 12-byte nonces.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_gcm(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_gcm(void);
 
 // EVP_aead_aes_192_gcm is AES-192 in Galois Counter Mode.
 //
@@ -110,7 +108,7 @@ OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_gcm(void);
 // effectively randomized, which means one must consider collisions. Unless
 // implementing an existing protocol which has already specified incorrect
 // parameters, only use 12-byte nonces.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_192_gcm(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_192_gcm(void);
 
 // EVP_aead_aes_256_gcm is AES-256 in Galois Counter Mode.
 //
@@ -119,83 +117,81 @@ OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_192_gcm(void);
 // effectively randomized, which means one must consider collisions. Unless
 // implementing an existing protocol which has already specified incorrect
 // parameters, only use 12-byte nonces.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_gcm(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_gcm(void);
 
 // EVP_aead_chacha20_poly1305 is the AEAD built from ChaCha20 and
 // Poly1305 as described in RFC 7539.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_chacha20_poly1305(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_chacha20_poly1305(void);
 
 // EVP_aead_xchacha20_poly1305 is ChaCha20-Poly1305 with an extended nonce that
 // makes random generation of nonces safe.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_xchacha20_poly1305(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_xchacha20_poly1305(void);
 
 // EVP_aead_aes_128_ctr_hmac_sha256 is AES-128 in CTR mode with HMAC-SHA256 for
 // authentication. The nonce is 12 bytes; the bottom 32-bits are used as the
 // block counter, thus the maximum plaintext size is 64GB.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_ctr_hmac_sha256(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_ctr_hmac_sha256(void);
 
 // EVP_aead_aes_256_ctr_hmac_sha256 is AES-256 in CTR mode with HMAC-SHA256 for
 // authentication. See |EVP_aead_aes_128_ctr_hmac_sha256| for details.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_ctr_hmac_sha256(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_ctr_hmac_sha256(void);
 
 // EVP_aead_aes_128_gcm_siv is AES-128 in GCM-SIV mode. See
 // https://tools.ietf.org/html/draft-irtf-cfrg-gcmsiv-02
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_gcm_siv(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_gcm_siv(void);
 
 // EVP_aead_aes_256_gcm_siv is AES-256 in GCM-SIV mode. See
 // https://tools.ietf.org/html/draft-irtf-cfrg-gcmsiv-02
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_gcm_siv(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_gcm_siv(void);
 
 // EVP_aead_aes_128_ccm_bluetooth is AES-128-CCM with M=4 and L=2 (4-byte tags
 // and 13-byte nonces), as decribed in the Bluetooth Core Specification v5.0,
 // Volume 6, Part E, Section 1.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_ccm_bluetooth(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_ccm_bluetooth(void);
 
 // EVP_aead_aes_128_ccm_bluetooth_8 is AES-128-CCM with M=8 and L=2 (8-byte tags
 // and 13-byte nonces), as used in the Bluetooth Mesh Networking Specification
 // v1.0.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_ccm_bluetooth_8(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_ccm_bluetooth_8(void);
 
 // EVP_has_aes_hardware returns one if we enable hardware support for fast and
 // constant-time AES-GCM.
 OPENSSL_EXPORT int EVP_has_aes_hardware(void);
 
-
 // Utility functions.
 
 // EVP_AEAD_key_length returns the length, in bytes, of the keys used by
 // |aead|.
-OPENSSL_EXPORT size_t EVP_AEAD_key_length(const EVP_AEAD *aead);
+OPENSSL_EXPORT size_t EVP_AEAD_key_length(const EVP_AEAD* aead);
 
 // EVP_AEAD_nonce_length returns the length, in bytes, of the per-message nonce
 // for |aead|.
-OPENSSL_EXPORT size_t EVP_AEAD_nonce_length(const EVP_AEAD *aead);
+OPENSSL_EXPORT size_t EVP_AEAD_nonce_length(const EVP_AEAD* aead);
 
 // EVP_AEAD_max_overhead returns the maximum number of additional bytes added
 // by the act of sealing data with |aead|.
-OPENSSL_EXPORT size_t EVP_AEAD_max_overhead(const EVP_AEAD *aead);
+OPENSSL_EXPORT size_t EVP_AEAD_max_overhead(const EVP_AEAD* aead);
 
 // EVP_AEAD_max_tag_len returns the maximum tag length when using |aead|. This
 // is the largest value that can be passed as |tag_len| to
 // |EVP_AEAD_CTX_init|.
-OPENSSL_EXPORT size_t EVP_AEAD_max_tag_len(const EVP_AEAD *aead);
-
+OPENSSL_EXPORT size_t EVP_AEAD_max_tag_len(const EVP_AEAD* aead);
 
 // AEAD operations.
 
 union evp_aead_ctx_st_state {
-  uint8_t opaque[580];
-  uint64_t alignment;
+    uint8_t opaque[580];
+    uint64_t alignment;
 };
 
 // An EVP_AEAD_CTX represents an AEAD algorithm configured with a specific key
 // and message-independent IV.
 typedef struct evp_aead_ctx_st {
-  const EVP_AEAD *aead;
-  union evp_aead_ctx_st_state state;
-  // tag_len may contain the actual length of the authentication tag if it is
-  // known at initialization time.
-  uint8_t tag_len;
+    const EVP_AEAD* aead;
+    union evp_aead_ctx_st_state state;
+    // tag_len may contain the actual length of the authentication tag if it is
+    // known at initialization time.
+    uint8_t tag_len;
 } EVP_AEAD_CTX;
 
 // EVP_AEAD_MAX_KEY_LENGTH contains the maximum key length used by
@@ -219,17 +215,15 @@ typedef struct evp_aead_ctx_st {
 // initialized with |EVP_AEAD_CTX_init| before use. It is safe, but not
 // necessary, to call |EVP_AEAD_CTX_cleanup| in this state. This may be used for
 // more uniform cleanup of |EVP_AEAD_CTX|.
-OPENSSL_EXPORT void EVP_AEAD_CTX_zero(EVP_AEAD_CTX *ctx);
+OPENSSL_EXPORT void EVP_AEAD_CTX_zero(EVP_AEAD_CTX* ctx);
 
 // EVP_AEAD_CTX_new allocates an |EVP_AEAD_CTX|, calls |EVP_AEAD_CTX_init| and
 // returns the |EVP_AEAD_CTX|, or NULL on error.
-OPENSSL_EXPORT EVP_AEAD_CTX *EVP_AEAD_CTX_new(const EVP_AEAD *aead,
-                                              const uint8_t *key,
-                                              size_t key_len, size_t tag_len);
+OPENSSL_EXPORT EVP_AEAD_CTX* EVP_AEAD_CTX_new(const EVP_AEAD* aead, const uint8_t* key, size_t key_len, size_t tag_len);
 
 // EVP_AEAD_CTX_free calls |EVP_AEAD_CTX_cleanup| and |OPENSSL_free| on
 // |ctx|.
-OPENSSL_EXPORT void EVP_AEAD_CTX_free(EVP_AEAD_CTX *ctx);
+OPENSSL_EXPORT void EVP_AEAD_CTX_free(EVP_AEAD_CTX* ctx);
 
 // EVP_AEAD_CTX_init initializes |ctx| for the given AEAD algorithm. The |impl|
 // argument is ignored and should be NULL. Authentication tags may be truncated
@@ -240,14 +234,13 @@ OPENSSL_EXPORT void EVP_AEAD_CTX_free(EVP_AEAD_CTX *ctx);
 // Returns 1 on success. Otherwise returns 0 and pushes to the error stack. In
 // the error case, you do not need to call |EVP_AEAD_CTX_cleanup|, but it's
 // harmless to do so.
-OPENSSL_EXPORT int EVP_AEAD_CTX_init(EVP_AEAD_CTX *ctx, const EVP_AEAD *aead,
-                                     const uint8_t *key, size_t key_len,
-                                     size_t tag_len, ENGINE *impl);
+OPENSSL_EXPORT int EVP_AEAD_CTX_init(EVP_AEAD_CTX* ctx, const EVP_AEAD* aead, const uint8_t* key, size_t key_len,
+                                     size_t tag_len, ENGINE* impl);
 
 // EVP_AEAD_CTX_cleanup frees any data allocated by |ctx|. It is a no-op to
 // call |EVP_AEAD_CTX_cleanup| on a |EVP_AEAD_CTX| that has been |memset| to
 // all zeros.
-OPENSSL_EXPORT void EVP_AEAD_CTX_cleanup(EVP_AEAD_CTX *ctx);
+OPENSSL_EXPORT void EVP_AEAD_CTX_cleanup(EVP_AEAD_CTX* ctx);
 
 // EVP_AEAD_CTX_seal encrypts and authenticates |in_len| bytes from |in| and
 // authenticates |ad_len| bytes from |ad| and writes the result to |out|. It
@@ -269,11 +262,9 @@ OPENSSL_EXPORT void EVP_AEAD_CTX_cleanup(EVP_AEAD_CTX *ctx);
 // filled with zero bytes and |*out_len| set to zero.
 //
 // If |in| and |out| alias then |out| must be == |in|.
-OPENSSL_EXPORT int EVP_AEAD_CTX_seal(const EVP_AEAD_CTX *ctx, uint8_t *out,
-                                     size_t *out_len, size_t max_out_len,
-                                     const uint8_t *nonce, size_t nonce_len,
-                                     const uint8_t *in, size_t in_len,
-                                     const uint8_t *ad, size_t ad_len);
+OPENSSL_EXPORT int EVP_AEAD_CTX_seal(const EVP_AEAD_CTX* ctx, uint8_t* out, size_t* out_len, size_t max_out_len,
+                                     const uint8_t* nonce, size_t nonce_len, const uint8_t* in, size_t in_len,
+                                     const uint8_t* ad, size_t ad_len);
 
 // EVP_AEAD_CTX_open authenticates |in_len| bytes from |in| and |ad_len| bytes
 // from |ad| and decrypts at most |in_len| bytes into |out|. It returns one on
@@ -294,11 +285,9 @@ OPENSSL_EXPORT int EVP_AEAD_CTX_seal(const EVP_AEAD_CTX *ctx, uint8_t *out,
 // filled with zero bytes and |*out_len| set to zero.
 //
 // If |in| and |out| alias then |out| must be == |in|.
-OPENSSL_EXPORT int EVP_AEAD_CTX_open(const EVP_AEAD_CTX *ctx, uint8_t *out,
-                                     size_t *out_len, size_t max_out_len,
-                                     const uint8_t *nonce, size_t nonce_len,
-                                     const uint8_t *in, size_t in_len,
-                                     const uint8_t *ad, size_t ad_len);
+OPENSSL_EXPORT int EVP_AEAD_CTX_open(const EVP_AEAD_CTX* ctx, uint8_t* out, size_t* out_len, size_t max_out_len,
+                                     const uint8_t* nonce, size_t nonce_len, const uint8_t* in, size_t in_len,
+                                     const uint8_t* ad, size_t ad_len);
 
 // EVP_AEAD_CTX_seal_scatter encrypts and authenticates |in_len| bytes from |in|
 // and authenticates |ad_len| bytes from |ad|. It writes |in_len| bytes of
@@ -329,13 +318,11 @@ OPENSSL_EXPORT int EVP_AEAD_CTX_open(const EVP_AEAD_CTX *ctx, uint8_t *out,
 //
 // If |in| and |out| alias then |out| must be == |in|. |out_tag| may not alias
 // any other argument.
-OPENSSL_EXPORT int EVP_AEAD_CTX_seal_scatter(
-    const EVP_AEAD_CTX *ctx, uint8_t *out,
-    uint8_t *out_tag, size_t *out_tag_len, size_t max_out_tag_len,
-    const uint8_t *nonce, size_t nonce_len,
-    const uint8_t *in, size_t in_len,
-    const uint8_t *extra_in, size_t extra_in_len,
-    const uint8_t *ad, size_t ad_len);
+OPENSSL_EXPORT int EVP_AEAD_CTX_seal_scatter(const EVP_AEAD_CTX* ctx, uint8_t* out, uint8_t* out_tag,
+                                             size_t* out_tag_len, size_t max_out_tag_len, const uint8_t* nonce,
+                                             size_t nonce_len, const uint8_t* in, size_t in_len,
+                                             const uint8_t* extra_in, size_t extra_in_len, const uint8_t* ad,
+                                             size_t ad_len);
 
 // EVP_AEAD_CTX_open_gather decrypts and authenticates |in_len| bytes from |in|
 // and authenticates |ad_len| bytes from |ad| using |in_tag_len| bytes of
@@ -352,15 +339,13 @@ OPENSSL_EXPORT int EVP_AEAD_CTX_seal_scatter(
 // occurs, |out| will be filled with zero bytes.
 //
 // If |in| and |out| alias then |out| must be == |in|.
-OPENSSL_EXPORT int EVP_AEAD_CTX_open_gather(
-    const EVP_AEAD_CTX *ctx, uint8_t *out, const uint8_t *nonce,
-    size_t nonce_len, const uint8_t *in, size_t in_len, const uint8_t *in_tag,
-    size_t in_tag_len, const uint8_t *ad, size_t ad_len);
+OPENSSL_EXPORT int EVP_AEAD_CTX_open_gather(const EVP_AEAD_CTX* ctx, uint8_t* out, const uint8_t* nonce,
+                                            size_t nonce_len, const uint8_t* in, size_t in_len, const uint8_t* in_tag,
+                                            size_t in_tag_len, const uint8_t* ad, size_t ad_len);
 
 // EVP_AEAD_CTX_aead returns the underlying AEAD for |ctx|, or NULL if one has
 // not been set.
-OPENSSL_EXPORT const EVP_AEAD *EVP_AEAD_CTX_aead(const EVP_AEAD_CTX *ctx);
-
+OPENSSL_EXPORT const EVP_AEAD* EVP_AEAD_CTX_aead(const EVP_AEAD_CTX* ctx);
 
 // TLS-specific AEAD algorithms.
 //
@@ -371,89 +356,82 @@ OPENSSL_EXPORT const EVP_AEAD *EVP_AEAD_CTX_aead(const EVP_AEAD_CTX *ctx);
 // unpredictable. They only accept an |ad| parameter of length 11 (the standard
 // TLS one with length omitted).
 
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_cbc_sha1_tls(void);
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_cbc_sha1_tls_implicit_iv(void);
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_cbc_sha256_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_cbc_sha1_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_cbc_sha1_tls_implicit_iv(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_cbc_sha256_tls(void);
 
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_cbc_sha1_tls(void);
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_cbc_sha1_tls_implicit_iv(void);
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_cbc_sha256_tls(void);
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_cbc_sha384_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_cbc_sha1_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_cbc_sha1_tls_implicit_iv(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_cbc_sha256_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_cbc_sha384_tls(void);
 
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_des_ede3_cbc_sha1_tls(void);
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_des_ede3_cbc_sha1_tls_implicit_iv(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_des_ede3_cbc_sha1_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_des_ede3_cbc_sha1_tls_implicit_iv(void);
 
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_null_sha1_tls(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_null_sha1_tls(void);
 
 // EVP_aead_aes_128_gcm_tls12 is AES-128 in Galois Counter Mode using the TLS
 // 1.2 nonce construction.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_gcm_tls12(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_gcm_tls12(void);
 
 // EVP_aead_aes_256_gcm_tls12 is AES-256 in Galois Counter Mode using the TLS
 // 1.2 nonce construction.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_gcm_tls12(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_gcm_tls12(void);
 
 // EVP_aead_aes_128_gcm_tls13 is AES-128 in Galois Counter Mode using the TLS
 // 1.3 nonce construction.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_128_gcm_tls13(void);
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_128_gcm_tls13(void);
 
 // EVP_aead_aes_256_gcm_tls13 is AES-256 in Galois Counter Mode using the TLS
 // 1.3 nonce construction.
-OPENSSL_EXPORT const EVP_AEAD *EVP_aead_aes_256_gcm_tls13(void);
-
+OPENSSL_EXPORT const EVP_AEAD* EVP_aead_aes_256_gcm_tls13(void);
 
 // Obscure functions.
 
 // evp_aead_direction_t denotes the direction of an AEAD operation.
-enum evp_aead_direction_t {
-  evp_aead_open,
-  evp_aead_seal,
+enum evp_aead_direction_t
+{
+    evp_aead_open,
+    evp_aead_seal,
 };
 
 // EVP_AEAD_CTX_init_with_direction calls |EVP_AEAD_CTX_init| for normal
 // AEADs. For TLS-specific and SSL3-specific AEADs, it initializes |ctx| for a
 // given direction.
-OPENSSL_EXPORT int EVP_AEAD_CTX_init_with_direction(
-    EVP_AEAD_CTX *ctx, const EVP_AEAD *aead, const uint8_t *key, size_t key_len,
-    size_t tag_len, enum evp_aead_direction_t dir);
+OPENSSL_EXPORT int EVP_AEAD_CTX_init_with_direction(EVP_AEAD_CTX* ctx, const EVP_AEAD* aead, const uint8_t* key,
+                                                    size_t key_len, size_t tag_len, enum evp_aead_direction_t dir);
 
 // EVP_AEAD_CTX_get_iv sets |*out_len| to the length of the IV for |ctx| and
 // sets |*out_iv| to point to that many bytes of the current IV. This is only
 // meaningful for AEADs with implicit IVs (i.e. CBC mode in TLS 1.0).
 //
 // It returns one on success or zero on error.
-OPENSSL_EXPORT int EVP_AEAD_CTX_get_iv(const EVP_AEAD_CTX *ctx,
-                                       const uint8_t **out_iv, size_t *out_len);
+OPENSSL_EXPORT int EVP_AEAD_CTX_get_iv(const EVP_AEAD_CTX* ctx, const uint8_t** out_iv, size_t* out_len);
 
 // EVP_AEAD_CTX_tag_len computes the exact byte length of the tag written by
 // |EVP_AEAD_CTX_seal_scatter| and writes it to |*out_tag_len|. It returns one
 // on success or zero on error. |in_len| and |extra_in_len| must equal the
 // arguments of the same names passed to |EVP_AEAD_CTX_seal_scatter|.
-OPENSSL_EXPORT int EVP_AEAD_CTX_tag_len(const EVP_AEAD_CTX *ctx,
-                                        size_t *out_tag_len,
-                                        const size_t in_len,
+OPENSSL_EXPORT int EVP_AEAD_CTX_tag_len(const EVP_AEAD_CTX* ctx, size_t* out_tag_len, const size_t in_len,
                                         const size_t extra_in_len);
 
-
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 
-#if !defined(BORINGSSL_NO_CXX)
+    #if !defined(BORINGSSL_NO_CXX)
 extern "C++" {
 
 BSSL_NAMESPACE_BEGIN
 
-using ScopedEVP_AEAD_CTX =
-    internal::StackAllocated<EVP_AEAD_CTX, void, EVP_AEAD_CTX_zero,
-                             EVP_AEAD_CTX_cleanup>;
+using ScopedEVP_AEAD_CTX = internal::StackAllocated<EVP_AEAD_CTX, void, EVP_AEAD_CTX_zero, EVP_AEAD_CTX_cleanup>;
 
 BORINGSSL_MAKE_DELETER(EVP_AEAD_CTX, EVP_AEAD_CTX_free)
 
 BSSL_NAMESPACE_END
 
-}  // extern C++
-#endif
+} // extern C++
+    #endif
 
 #endif
 
-#endif  // OPENSSL_HEADER_AEAD_H
+#endif // OPENSSL_HEADER_AEAD_H

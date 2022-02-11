@@ -27,50 +27,50 @@
 #include "mediactl.h"
 
 #ifdef __ANDROID__
-#include <log/log.h>
+    #include <log/log.h>
 #endif
 
 struct media_entity {
-  struct media_device* media;
-  struct media_entity_desc info;
-  struct media_pad* pads;
-  struct media_link* links;
-  unsigned int max_links;
-  unsigned int num_links;
+    struct media_device* media;
+    struct media_entity_desc info;
+    struct media_pad* pads;
+    struct media_link* links;
+    unsigned int max_links;
+    unsigned int num_links;
 
-  char devname[32];
-  int fd;
+    char devname[32];
+    int fd;
 };
 
 struct media_device {
-  int fd;
-  int refcount;
-  char* devnode;
+    int fd;
+    int refcount;
+    char* devnode;
 
-  struct media_device_info info;
-  struct media_entity* entities;
-  unsigned int entities_count;
+    struct media_device_info info;
+    struct media_entity* entities;
+    unsigned int entities_count;
 
-  void (*debug_handler)(void*, ...);
-  void* debug_priv;
+    void (*debug_handler)(void*, ...);
+    void* debug_priv;
 
-  struct {
-    struct media_entity* v4l;
-    struct media_entity* fb;
-    struct media_entity* alsa;
-    struct media_entity* dvb;
-  } def;
+    struct {
+        struct media_entity* v4l;
+        struct media_entity* fb;
+        struct media_entity* alsa;
+        struct media_entity* dvb;
+    } def;
 };
 
 #ifndef __ANDROID__
-#define media_dbg(media, ...) (media)->debug_handler((media)->debug_priv, __VA_ARGS__)
+    #define media_dbg(media, ...) (media)->debug_handler((media)->debug_priv, __VA_ARGS__)
 #else
-#define __BI_FILENAME__ (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 : __FILE__)
+    #define __BI_FILENAME__ (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 : __FILE__)
 
-#define media_dbg(media, format, ...) \
-    do { \
-        ALOGD("%s:%d - " format "", __BI_FILENAME__, __LINE__, ##__VA_ARGS__); \
-    } while(0)
+    #define media_dbg(media, format, ...)                                                                              \
+        do {                                                                                                           \
+            ALOGD("%s:%d - " format "", __BI_FILENAME__, __LINE__, ##__VA_ARGS__);                                     \
+        } while (0)
 
 #endif
 

@@ -138,9 +138,13 @@
 #if defined(CONFIG_AVB_VBMETA_PUBLIC_KEY_VALIDATE)
 #define RKIMG_BOOTCOMMAND			\
 	"boot_android ${devtype} ${devnum};"
+#elif defined(CONFIG_FIT_SIGNATURE)
+#define RKIMG_BOOTCOMMAND			\
+	"boot_fit;"
 #else
 #define RKIMG_BOOTCOMMAND			\
 	"boot_android ${devtype} ${devnum};"	\
+	"boot_fit;"				\
 	"bootrkp;"				\
 	"run distro_bootcmd;"
 #endif
@@ -148,5 +152,6 @@
 #endif /* CONFIG_SPL_BUILD */
 
 #define CONFIG_DISPLAY_BOARDINFO_LATE
+#define CONFIG_SYS_AUTOLOAD	"no"
 
 #endif /* _ROCKCHIP_COMMON_H_ */

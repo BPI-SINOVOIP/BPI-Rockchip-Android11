@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 #include "rk_aiq_types.h"
-#include "linux/rk-camera-module.h"
+#include "rk-camera-module.h"
 #include "MessageBus.h"
 #include "hwi/isp20/rkisp2-config.h"
 #include "hwi/isp21/rkisp21-config.h"
@@ -250,6 +250,7 @@ typedef struct {
 
 typedef struct {
     int  model_idx;
+    bool valid;
     char media_dev_path[DEV_PATH_LEN];
     char pp_input_image_path[DEV_PATH_LEN];
     char pp_m_bypass_path[DEV_PATH_LEN];
@@ -297,6 +298,10 @@ typedef struct {
     char mipi_id1[DEV_PATH_LEN];
     char mipi_id2[DEV_PATH_LEN];
     char mipi_id3[DEV_PATH_LEN];
+    char dvp_id0[DEV_PATH_LEN];
+    char dvp_id1[DEV_PATH_LEN];
+    char dvp_id2[DEV_PATH_LEN];
+    char dvp_id3[DEV_PATH_LEN];
     char mipi_dphy_rx_path[DEV_PATH_LEN];
     char mipi_csi2_sd_path[DEV_PATH_LEN];
     char lvds_sd_path[DEV_PATH_LEN];

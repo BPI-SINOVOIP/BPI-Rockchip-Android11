@@ -18,6 +18,7 @@
 
 #include "drmconnector.h"
 #include "drmdevice.h"
+#include "rockchip/utils/drmdebug.h"
 
 #include <errno.h>
 #include <stdint.h>
@@ -321,12 +322,16 @@ int DrmConnector::UpdateModes() {
     m.set_id(drm_->next_mode_id());
     new_raw_modes.push_back(m);
   }
+  raw_modes_.swap(new_raw_modes);
 
   if (!preferred_mode_found && modes_.size() != 0) {
     preferred_mode_id_ = modes_[0].id();
   }
 
   bModeReady_ = true;
+
+  HWC2_ALOGD_IF_DEBUG("conn=%d state=%d count_modes.size=%d modes_.size=%zu new_raw_modes.size=%zu",
+        id_, state_,c->count_modes, modes_.size(),new_raw_modes.size());
 
   drmModeFreeConnector(c);
 
@@ -357,7 +362,6 @@ int DrmConnector::UpdateDisplayMode(int display_id, int update_base_timeline){
     ALOGI("%s,line=%d, display=%d persist.vendor.resolution.%s=%s",__FUNCTION__,__LINE__,display_id,
           display_id == HWC_DISPLAY_PRIMARY ? "main" : "aux",resolution_value);
   }
-
 
   if(strcmp(resolution_value,"Unkonw") != 0){
     ALOGI("%s,line=%d, resolution_value=%s",__FUNCTION__,__LINE__,resolution_value);
@@ -509,6 +513,26 @@ int DrmConnector::SetDisplayModeInfo(int display_id) {
   }
 
   return ret;
+}
+
+int DrmConnector::UpdateOverscan(int display_id, char *overscan_value){
+  char overscan_property[PROPERTY_VALUE_MAX]={0};
+
+  snprintf(overscan_property,PROPERTY_VALUE_MAX,"persist.vendor.overscan.%s",cUniqueName_);
+  property_get(overscan_property, overscan_value, "Unkonw");
+
+  // ALOGI("%s,line=%d, display=%d %s=%s",__FUNCTION__,__LINE__,display_id,overscan_property,overscan_value);
+
+  if(!strcmp(overscan_value,"Unkonw")){
+    if(display_id == HWC_DISPLAY_PRIMARY){
+      property_get("persist.vendor.overscan.main", overscan_value, "Unkonw");
+    }else{
+      property_get("persist.vendor.overscan.aux", overscan_value, "Unkonw");
+    }
+    // ALOGI("%s,line=%d, display=%d persist.vendor.overscan.%s=%s",__FUNCTION__,__LINE__,display_id,
+    //       display_id == HWC_DISPLAY_PRIMARY ? "main" : "aux", overscan_value);
+  }
+  return 0;
 }
 
 int DrmConnector::UpdateBCSH(int display_id, int update_base_timeline){
@@ -727,10 +751,6 @@ int DrmConnector::UpdateOutputFormat(int display_id, int update_base_timeline){
   drmModeAtomicFree(pset);
   pset = NULL;
 
-  return 0;
-}
-
-int DrmConnector::UpdateOverscan(){
   return 0;
 }
 

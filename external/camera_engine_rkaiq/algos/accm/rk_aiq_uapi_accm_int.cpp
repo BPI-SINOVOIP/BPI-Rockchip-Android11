@@ -37,13 +37,20 @@ rk_aiq_uapi_accm_QueryCcmInfo(const RkAiqAlgoContext *ctx,
     ccm_querry_info->bound_bit = ccm_contex->ccmHwConf.bound_bit;
     ccm_querry_info->color_inhibition_level = ccm_contex->accmRest.color_inhibition_level;
     ccm_querry_info->color_saturation_level = ccm_contex->accmRest.color_saturation_level;
-    ccm_querry_info->finalSat = ccm_contex->accmRest.fSaturation;
-    strcpy(ccm_querry_info->illumination, ccm_contex->accmRest.pCcmProfile1->illumination);
-    strcpy(ccm_querry_info->ccmname1, ccm_contex->accmRest.pCcmProfile1->name);
-    if (ccm_contex->accmRest.pCcmProfile2)
-        strcpy(ccm_querry_info->ccmname2, ccm_contex->accmRest.pCcmProfile2->name);
-    else
-        strcpy(ccm_querry_info->ccmname2, ccm_contex->accmRest.pCcmProfile1->name);
+
+    ccm_querry_info->finalSat = 0;
+     memset(ccm_querry_info->illumination, 0x0, sizeof(ccm_querry_info->illumination));
+     memset(ccm_querry_info->ccmname1, 0x0, sizeof(ccm_querry_info->ccmname1));
+     memset(ccm_querry_info->ccmname2, 0x0, sizeof(ccm_querry_info->ccmname2));
+     if (ccm_querry_info->ccm_en && ccm_contex->mCurAtt.mode == RK_AIQ_CCM_MODE_AUTO){
+        ccm_querry_info->finalSat = ccm_contex->accmRest.fSaturation;
+        strcpy(ccm_querry_info->illumination, ccm_contex->accmRest.pCcmProfile1->illumination);
+        strcpy(ccm_querry_info->ccmname1, ccm_contex->accmRest.pCcmProfile1->name);
+        if (ccm_contex->accmRest.pCcmProfile2)
+            strcpy(ccm_querry_info->ccmname2, ccm_contex->accmRest.pCcmProfile2->name);
+        else
+            strcpy(ccm_querry_info->ccmname2, ccm_contex->accmRest.pCcmProfile1->name);
+    }
 
     return XCAM_RETURN_NO_ERROR;
 }

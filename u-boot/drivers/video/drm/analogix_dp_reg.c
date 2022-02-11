@@ -103,10 +103,11 @@ void analogix_dp_init_analog_param(struct analogix_dp_device *dp)
 			reg ^= REF_CLK_MASK;
 
 		analogix_dp_write(dp, ANALOGIX_DP_PLL_REG_1, reg);
-		analogix_dp_write(dp, ANALOGIX_DP_PLL_REG_2, 0x95);
+		analogix_dp_write(dp, ANALOGIX_DP_PLL_REG_2, 0x99);
 		analogix_dp_write(dp, ANALOGIX_DP_PLL_REG_3, 0x40);
 		analogix_dp_write(dp, ANALOGIX_DP_PLL_REG_4, 0x58);
 		analogix_dp_write(dp, ANALOGIX_DP_PLL_REG_5, 0x22);
+		analogix_dp_write(dp, ANALOGIX_DP_BIAS, 0x44);
 	}
 
 	reg = DRIVE_DVDD_BIT_1_0625V | VCO_BIT_600_MICRO;
@@ -915,12 +916,10 @@ bool analogix_dp_ssc_supported(struct analogix_dp_device *dp)
 void analogix_dp_set_link_bandwidth(struct analogix_dp_device *dp, u32 bwtype)
 {
 	union phy_configure_opts phy_cfg;
-	u32 reg, status;
+	u32 status;
 	int ret;
 
-	reg = bwtype;
-	if ((bwtype == DP_LINK_BW_2_7) || (bwtype == DP_LINK_BW_1_62))
-		analogix_dp_write(dp, ANALOGIX_DP_LINK_BW_SET, reg);
+	analogix_dp_write(dp, ANALOGIX_DP_LINK_BW_SET, bwtype);
 
 	phy_cfg.dp.lanes = dp->link_train.lane_count;
 	phy_cfg.dp.link_rate =
@@ -1005,6 +1004,8 @@ void analogix_dp_set_lane_link_training(struct analogix_dp_device *dp)
 	}
 
 	phy_cfg.dp.lanes = dp->link_train.lane_count;
+	phy_cfg.dp.link_rate =
+		drm_dp_bw_code_to_link_rate(dp->link_train.link_rate) / 100;
 	phy_cfg.dp.set_lanes = false;
 	phy_cfg.dp.set_rate = false;
 	phy_cfg.dp.set_voltages = true;
@@ -1058,6 +1059,10 @@ void analogix_dp_set_training_pattern(struct analogix_dp_device *dp,
 		break;
 	case TRAINING_PTN2:
 		reg = SCRAMBLING_DISABLE | SW_TRAINING_PATTERN_SET_PTN2;
+		analogix_dp_write(dp, ANALOGIX_DP_TRAINING_PTN_SET, reg);
+		break;
+	case TRAINING_PTN3:
+		reg = SCRAMBLING_DISABLE | SW_TRAINING_PATTERN_SET_PTN3;
 		analogix_dp_write(dp, ANALOGIX_DP_TRAINING_PTN_SET, reg);
 		break;
 	case DP_NONE:

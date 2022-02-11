@@ -337,6 +337,7 @@ SettingsProcessor::fillAeInputParams(const CameraMetadata *settings,
         } else {
             aeParams->ev_shift = 0.0f;
         }
+        LOGD("ev_shift:%f, evCompensation:%d, stepEV:%f", aeParams->ev_shift, aeCtrl->evCompensation, stepEV);
         aeParams->manual_exposure_time = 0;
         aeParams->manual_analog_gain = 0;
 

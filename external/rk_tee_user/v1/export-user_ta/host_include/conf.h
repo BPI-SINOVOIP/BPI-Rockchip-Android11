@@ -4,6 +4,9 @@
 #define CFG_ARM64_core 1 /* 'y' */
 #define CFG_ARM64_ta_arm64 1 /* 'y' */
 #define CFG_BCH_SUPPORT 1 /* 'y' */
+#define CFG_CORE_CLUSTER_SHIFT 2 /* '2' */
+#define CFG_CORE_WORKAROUND_SPECTRE_BP 1 /* 'y' */
+#define CFG_CORE_WORKAROUND_SPECTRE_BP_SEC 1 /* 'y' */
 #define CFG_CRYPTO 1 /* 'y' */
 #define CFG_CRYPTO_AES 1 /* 'y' */
 #define CFG_CRYPTO_CBC 1 /* 'y' */
@@ -40,6 +43,8 @@
 #define CFG_LIBUTILS_WITH_ISOC 1 /* 'y' */
 #define CFG_LTC_OPTEE_THREAD 1 /* 'y' */
 #define CFG_NUM_THREADS 2 /* '2' */
+#define CFG_OPTEE_REVISION_MAJOR 1 /* '1' */
+#define CFG_OPTEE_REVISION_MINOR 1 /* '1' */
 #define CFG_OTP_SUPPORT 1 /* 'y' */
 #define CFG_PM_STUBS 1 /* 'y' */
 #define CFG_REE_FS 1 /* 'y' */
@@ -55,6 +60,7 @@
 #define CFG_RK_EFUSE 1 /* 'y' */
 /* CFG_RK_HW_CRYPTO is not set ('n') */
 #define CFG_RK_MASK_NATIVE_INTR 1 /* 'y' */
+#define CFG_RK_OS_SERVICE 1 /* 'y' */
 #define CFG_RK_OTP 1 /* 'y' */
 #define CFG_RK_OTP_WITH_DEVICEINFO 1 /* 'y' */
 /* CFG_RK_RPMB_READ_ONEBLOCK is not set ('n') */
@@ -64,6 +70,7 @@
 #define CFG_RK_UART 1 /* 'y' */
 #define CFG_RK_UBOOT_STORE 1 /* 'y' */
 #define CFG_RK_UBOOT_STORE_EFUSE 1 /* 'y' */
+#define CFG_RK_UBOOT_WRITE_TOYBRICK_SEED 1 /* 'y' */
 #define CFG_RPMB_FS 1 /* 'y' */
 /* CFG_RPMB_FS_DEBUG_DATA is not set ('n') */
 #define CFG_RPMB_FS_DEV_ID 0 /* '0' */

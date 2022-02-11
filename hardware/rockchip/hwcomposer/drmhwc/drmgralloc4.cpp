@@ -65,6 +65,11 @@
 
 #include <android/hardware/graphics/mapper/4.0/IMapper.h>
 #include <gralloctypes/Gralloc4.h>
+
+#ifdef ANDROID_S
+#include <hardware/hardware_rockchip.h>
+#endif
+
 // #include <aidl/arm/graphics/ArmMetadataType.h>
 
 using android::hardware::graphics::mapper::V4_0::Error;

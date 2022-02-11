@@ -26,6 +26,7 @@ TARGET_CPU_SMP := true
 # AB image definition
 BOARD_USES_AB_IMAGE := false
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := false
+PRODUCT_KERNEL_DTS := rk3326-863-lp3-v10-rkisp1
 
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     include device/rockchip/common/BoardConfig_AB.mk

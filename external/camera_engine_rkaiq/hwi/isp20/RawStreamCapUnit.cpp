@@ -28,9 +28,12 @@ RawStreamCapUnit::RawStreamCapUnit (const rk_sensor_full_info_t *s_info, bool li
         if (linked_to_isp)
             _dev[0] = new V4l2Device (s_info->isp_info->rawwr2_path);//rkisp_rawwr2
         else {
-            if (s_info->dvp_itf)
-                _dev[0] = new V4l2Device (s_info->cif_info->stream_cif_path);
-            else
+            if (s_info->dvp_itf) {
+                if (strlen(s_info->cif_info->stream_cif_path))
+                    _dev[0] = new V4l2Device (s_info->cif_info->stream_cif_path);
+                else
+                    _dev[0] = new V4l2Device (s_info->cif_info->dvp_id0);
+            } else
                 _dev[0] = new V4l2Device (s_info->cif_info->mipi_id0);
         }
         _dev[0]->open();

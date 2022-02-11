@@ -348,10 +348,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Seek
         mCurSaturation = 50;
         mCurHue = 50;
         mCurColorTempIndex = getDefaultColorTempIndex(6500);
-        int ret[][] = CubicLutUtil.get3DLutFromAsset(MainActivity.this, "default.lut");
+        /*int ret[][] = CubicLutUtil.get3DLutFromAsset(MainActivity.this, "default.lut");
         if(ret != null){
-            mRkDisplayOutputManager.set3DLut(mCurDpy, 729, ret[0], ret[1], ret[2]);
-        }
+            mRkDisplayOutputManager.set3DLut(mCurDpy, ret[0].length, ret[0], ret[1], ret[2]);
+        }*/
         updateBrightness();
         updateSaturation();
         updateContrast();
@@ -372,7 +372,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Seek
     private void set3DLut() {
         int ret[][] = CubicLutUtil.get3DLutFromFile(LUT_3D_CONFIG_PATH);
         if(ret != null){
-            mRkDisplayOutputManager.set3DLut(mCurDpy, 729, ret[0], ret[1], ret[2]);
+            mRkDisplayOutputManager.set3DLut(mCurDpy, ret[0].length, ret[0], ret[1], ret[2]);
         }
     }
 

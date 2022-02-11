@@ -28,6 +28,7 @@
 #include <unordered_map>
 #include <memory>
 #include <string>
+#include <mutex>
 #include "rk_aiq_algo_des.h"
 
 namespace RkCam {
@@ -97,6 +98,7 @@ public:
 private:
   static std::map<std::string, CamCalibDbProj_t *> mCalibDbsMap;
   static CalibDb_Sensor_ParaV2_t mSensorInfo;
+  static std::mutex calib_mutex;
     // isp20
     static int CamCalibDbFreeSceneCtx(void* ctx);
     static int CamCalibDbFreeSensorCtx(CalibDb_Sensor_ParaV2_t* sensor);

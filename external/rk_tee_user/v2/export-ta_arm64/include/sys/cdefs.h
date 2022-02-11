@@ -5,6 +5,14 @@
 #ifndef SYS_CDEFS_H
 #define SYS_CDEFS_H
 
+#if defined(__cplusplus)
+#define	__BEGIN_DECLS	extern "C" {
+#define	__END_DECLS	}
+#else
+#define	__BEGIN_DECLS
+#define	__END_DECLS
+#endif
+
 /*
  * GCC 2.95 provides `__restrict' as an extension to C90 to support the
  * C99-specific `restrict' type qualifier.  We happen to use `__restrict' as

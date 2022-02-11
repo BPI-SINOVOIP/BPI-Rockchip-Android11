@@ -1,16 +1,10 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
+ * Copyright (c) 2020, ARM Limited. All rights reserved.
  * Copyright (c) 2014, STMicroelectronics International N.V.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
  */
 
+#include <errno.h>
 #include <limits.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -22,6 +16,7 @@
 
 #include "xtest_test.h"
 #include "xtest_helpers.h"
+#include "xtest_uuid_helpers.h"
 #include <signed_hdr.h>
 #include <util.h>
 
@@ -34,10 +29,12 @@
 #include <ta_miss_test.h>
 #include <ta_sims_keepalive_test.h>
 #include <ta_concurrent.h>
+#include <ta_tpm_log_test.h>
+#include <ta_supp_plugin.h>
 #include <sdp_basic.h>
-#ifdef CFG_SECSTOR_TA_MGMT_PTA
 #include <pta_secstor_ta_mgmt.h>
-#endif
+
+#include <test_supp_plugin.h>
 
 #ifndef MIN
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -595,7 +592,6 @@ static void xtest_tee_test_1007(ADBG_Case_t *c)
 }
 ADBG_CASE_DEFINE(regression, 1007, xtest_tee_test_1007, "Test Panic");
 
-#ifdef CFG_SECSTOR_TA_MGMT_PTA
 #ifndef TA_DIR
 # ifdef __ANDROID__
 #define TA_DIR "/vendor/lib/optee_armtz"
@@ -672,7 +668,42 @@ out:
 	TEEC_CloseSession(&session);
 	return r;
 }
-#endif /*CFG_SECSTOR_TA_MGMT_PTA*/
+
+static void test_1008_corrupt_ta(ADBG_Case_t *c)
+{
+	TEEC_UUID uuid = PTA_SECSTOR_TA_MGMT_UUID;
+	TEEC_Result res = TEEC_ERROR_GENERIC;
+	TEEC_Session session = { };
+	uint32_t ret_orig = 0;
+
+	res = xtest_teec_open_session(&session, &uuid, NULL, &ret_orig);
+	if (res) {
+		if (ADBG_EXPECT_TEEC_RESULT(c, TEEC_ERROR_ITEM_NOT_FOUND,
+					    res))
+			Do_ADBG_Log("PTA Secure Storage TA Management not found: skip test");
+		return;
+	}
+	TEEC_CloseSession(&session);
+
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, offsetof(struct shdr, magic), 1));
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, offsetof(struct shdr, img_type), 1));
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, offsetof(struct shdr, img_size), 1));
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, offsetof(struct shdr, algo), 1));
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, offsetof(struct shdr, hash_size), 1));
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, offsetof(struct shdr, sig_size), 1));
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, sizeof(struct shdr), 1)); /* hash */
+	ADBG_EXPECT_TRUE(c,
+		load_corrupt_ta(c, sizeof(struct shdr) + 32, 1)); /* sig */
+	ADBG_EXPECT_TRUE(c, load_corrupt_ta(c, 3000, 1)); /* payload */
+	ADBG_EXPECT_TRUE(c, load_corrupt_ta(c, 8000, 1)); /* payload */
+}
 
 static void xtest_tee_test_1008(ADBG_Case_t *c)
 {
@@ -722,45 +753,22 @@ static void xtest_tee_test_1008(ADBG_Case_t *c)
 	{
 		size_t n = 0;
 
-		(void)ADBG_EXPECT_TEEC_RESULT(c, TEEC_ERROR_GENERIC,
-			xtest_teec_open_session(&session_crypt,
-						&create_fail_test_ta_uuid, NULL,
-						&ret_orig));
-		/*
-		 * Run this several times to see that there's no memory leakage.
-		 */
 		for (n = 0; n < 100; n++) {
 			Do_ADBG_Log("n = %zu", n);
 			(void)ADBG_EXPECT_TEEC_RESULT(c, TEEC_ERROR_GENERIC,
 				xtest_teec_open_session(&session_crypt,
 					&create_fail_test_ta_uuid,
 					NULL, &ret_orig));
+			/* level > 0 may be used to detect/debug memory leaks */
+			if (!level)
+				break;
 		}
 	}
 	Do_ADBG_EndSubCase(c, "Create session fail");
 
-#ifdef CFG_SECSTOR_TA_MGMT_PTA
 	Do_ADBG_BeginSubCase(c, "Load corrupt TA");
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, offsetof(struct shdr, magic), 1));
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, offsetof(struct shdr, img_type), 1));
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, offsetof(struct shdr, img_size), 1));
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, offsetof(struct shdr, algo), 1));
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, offsetof(struct shdr, hash_size), 1));
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, offsetof(struct shdr, sig_size), 1));
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, sizeof(struct shdr), 1)); /* hash */
-	ADBG_EXPECT_TRUE(c,
-		load_corrupt_ta(c, sizeof(struct shdr) + 32, 1)); /* sig */
-	ADBG_EXPECT_TRUE(c, load_corrupt_ta(c, 3000, 1)); /* payload */
-	ADBG_EXPECT_TRUE(c, load_corrupt_ta(c, 8000, 1)); /* payload */
+	test_1008_corrupt_ta(c);
 	Do_ADBG_EndSubCase(c, "Load corrupt TA");
-#endif /*CFG_SECSTOR_TA_MGMT_PTA*/
 }
 ADBG_CASE_DEFINE(regression, 1008, xtest_tee_test_1008,
 		"TEE internal client API");
@@ -1124,7 +1132,7 @@ static void xtest_tee_test_1013_single(ADBG_Case_t *c, double *mean_concurrency,
 
 	/*
 	 * Concurrency can be limited by several factors, for instance in a
-	 * single CPU system it's dependent on the Preemtion Model used by
+	 * single CPU system it's dependent on the Preemption Model used by
 	 * the kernel (Preemptible Kernel (Low-Latency Desktop) gives the
 	 * best result there).
 	 */
@@ -1207,7 +1215,7 @@ static void xtest_tee_test_1013(ADBG_Case_t *c)
 #endif
 }
 ADBG_CASE_DEFINE(regression, 1013, xtest_tee_test_1013,
-		"Test concurency with concurrent TA");
+		"Test concurrency with concurrent TA");
 
 #ifdef CFG_SECURE_DATA_PATH
 static void xtest_tee_test_1014(ADBG_Case_t *c)
@@ -1234,16 +1242,21 @@ static void xtest_tee_test_1014(ADBG_Case_t *c)
 	Do_ADBG_EndSubCase(c, "SDP: SDP TA invokes a SDP TA");
 
 	test = TEST_TA_TO_PTA;
-	Do_ADBG_BeginSubCase(c, "SDP: SDP TA invokes a SDP pTA");
+	Do_ADBG_BeginSubCase(c, "SDP: SDP TA invokes a test pTA (invoke_tests.pta)");
 	ret = sdp_basic_test(test, size, loop, ion_heap, rnd_offset, 0);
 	ADBG_EXPECT(c, 0, ret);
-	Do_ADBG_EndSubCase(c, "SDP: SDP TA invokes a SDP pTA");
+	Do_ADBG_EndSubCase(c, "SDP: SDP TA invokes a test pTA (invoke_tests.pta)");
 
 	test = TEST_NS_TO_PTA;
-	Do_ADBG_BeginSubCase(c, "SDP: NSec CA invokes SDP pTA (should fail)");
+	Do_ADBG_BeginSubCase(c, "SDP: NSec CA invokes a test pTA (invoke_tests.pta) (should fail)");
 	ret = sdp_basic_test(test, size, loop, ion_heap, rnd_offset, 0);
 	ADBG_EXPECT(c, 1, ret);
-	Do_ADBG_EndSubCase(c, "SDP: NSec CA invokes SDP pTA (should fail)");
+	Do_ADBG_EndSubCase(c, "SDP: NSec CA invokes a test pTA (invoke_tests.pta) (should fail)");
+
+	Do_ADBG_BeginSubCase(c, "SDP: Invoke TA with out of bounds SDP memref");
+	ret = sdp_out_of_bounds_memref_test(size, ion_heap, 0);
+	ADBG_EXPECT(c, 0, ret);
+	Do_ADBG_EndSubCase(c, NULL);
 }
 ADBG_CASE_DEFINE(regression, 1014, xtest_tee_test_1014,
 		"Test secure data path against SDP TAs and pTAs");
@@ -1351,23 +1364,55 @@ out:
 ADBG_CASE_DEFINE(regression, 1017, xtest_tee_test_1017,
 		"Test coalescing memrefs");
 
+static void invoke_1byte_out_of_bounds(ADBG_Case_t *c, TEEC_Session *session,
+				       TEEC_SharedMemory *shm)
+{
+	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+	TEEC_Result ret = TEEC_ERROR_GENERIC;
+	uint32_t ret_orig = 0;
+
+	op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_PARTIAL_INPUT,
+					 TEEC_NONE, TEEC_NONE, TEEC_NONE);
+
+	op.params[0].memref.parent = shm;
+	op.params[0].memref.size = shm->size / 2;
+	op.params[0].memref.offset = shm->size - (shm->size / 2) + 1;
+
+	ret = TEEC_InvokeCommand(session, TA_OS_TEST_CMD_PARAMS,
+				 &op, &ret_orig);
+
+	ADBG_EXPECT_COMPARE_UNSIGNED(c, ret_orig, !=, TEEC_ORIGIN_TRUSTED_APP);
+	if (ret != TEEC_ERROR_BAD_PARAMETERS && ret != TEEC_ERROR_GENERIC) {
+		ADBG_EXPECT(c, TEEC_ERROR_BAD_PARAMETERS, ret);
+		ADBG_EXPECT(c, TEEC_ERROR_GENERIC, ret);
+	}
+}
+
 static void xtest_tee_test_1018(ADBG_Case_t *c)
 {
 	TEEC_Session session = { };
 	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
 	uint32_t ret_orig = 0;
 	TEEC_SharedMemory shm = { };
+	TEEC_Result ret = TEEC_ERROR_GENERIC;
 	size_t page_size = 4096;
+	/* Intentionally not 4kB aligned and odd */
+	uint8_t buffer[6001] = { };
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+				      xtest_teec_open_session(&session,
+							      &os_test_ta_uuid,
+							      NULL,
+							      &ret_orig)))
+		return;
+
+	Do_ADBG_BeginSubCase(c, "Out of bounds > 4kB on allocated shm");
 
 	shm.size = 8 * page_size;
 	shm.flags = TEEC_MEM_INPUT | TEEC_MEM_OUTPUT;
 	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
-		TEEC_AllocateSharedMemory(&xtest_teec_ctx, &shm)))
-		return;
-
-	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
-		xtest_teec_open_session(&session, &os_test_ta_uuid, NULL,
-		                        &ret_orig)))
+				      TEEC_AllocateSharedMemory(&xtest_teec_ctx,
+								&shm)))
 		goto out;
 
 	op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_PARTIAL_INPUT,
@@ -1396,23 +1441,56 @@ static void xtest_tee_test_1018(ADBG_Case_t *c)
 	op.params[3].memref.size = 3 * page_size;
 	op.params[3].memref.offset = 6 * page_size;
 
-	/*
-	 * Depending on the tee driver we may have different error codes.
-	 * What's most important is that secure world doesn't panic and
-	 * that someone detects an error.
-	 */
-	ADBG_EXPECT_NOT(c, TEE_SUCCESS,
-			TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_PARAMS, &op,
-					   &ret_orig));
+	ret = TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_PARAMS, &op,
+				 &ret_orig);
 
-	TEEC_CloseSession(&session);
-out:
+	ADBG_EXPECT_COMPARE_UNSIGNED(c, ret_orig, !=, TEEC_ORIGIN_TRUSTED_APP);
+	if (ret != TEEC_ERROR_BAD_PARAMETERS && ret != TEEC_ERROR_GENERIC) {
+		ADBG_EXPECT(c, TEEC_ERROR_BAD_PARAMETERS, ret);
+		ADBG_EXPECT(c, TEEC_ERROR_GENERIC, ret);
+	}
+
 	TEEC_ReleaseSharedMemory(&shm);
+	Do_ADBG_EndSubCase(c, NULL);
+
+	Do_ADBG_BeginSubCase(c, "Out of bounds by 1 byte on registered shm");
+
+	memset(&shm, 0, sizeof(shm));
+	shm.flags = TEEC_MEM_INPUT | TEEC_MEM_OUTPUT;
+	shm.buffer = buffer;
+	shm.size = sizeof(buffer);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+				      TEEC_RegisterSharedMemory(&xtest_teec_ctx,
+								&shm)))
+		goto out;
+
+	invoke_1byte_out_of_bounds(c, &session, &shm);
+
+	TEEC_ReleaseSharedMemory(&shm);
+	Do_ADBG_EndSubCase(c, NULL);
+
+	Do_ADBG_BeginSubCase(c, "Out of bounds by 1 byte ref on allocated shm");
+
+	memset(&shm, 0, sizeof(shm));
+	shm.size = sizeof(buffer);
+	shm.flags = TEEC_MEM_INPUT | TEEC_MEM_OUTPUT;
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+				      TEEC_AllocateSharedMemory(&xtest_teec_ctx,
+								&shm)))
+		goto out;
+
+	invoke_1byte_out_of_bounds(c, &session, &shm);
+
+	TEEC_ReleaseSharedMemory(&shm);
+	Do_ADBG_EndSubCase(c, NULL);
+
+out:
+	TEEC_CloseSession(&session);
 }
 ADBG_CASE_DEFINE(regression, 1018, xtest_tee_test_1018,
 		"Test memref out of bounds");
 
-#if defined(CFG_TA_DYNLINK)
 static void xtest_tee_test_1019(ADBG_Case_t *c)
 {
 	TEEC_Session session = { };
@@ -1438,7 +1516,6 @@ static void xtest_tee_test_1019(ADBG_Case_t *c)
 }
 ADBG_CASE_DEFINE(regression, 1019, xtest_tee_test_1019,
 		"Test dynamically linked TA");
-#endif /*CFG_TA_DYNLINK*/
 
 static void xtest_tee_test_1020(ADBG_Case_t *c)
 {
@@ -1561,7 +1638,7 @@ static void test_panic_ca_to_ta(ADBG_Case_t *c, const TEEC_UUID *uuid,
 		goto bail1;
 
 	exp_counter = multi_instance ? 0 : 1;
-	if (ADBG_EXPECT(c, exp_counter, counter))
+	if (!ADBG_EXPECT(c, exp_counter, counter))
 		goto bail1;
 
 	if (!ADBG_EXPECT_TEEC_RESULT(c, TEEC_ERROR_TARGET_DEAD,
@@ -1578,7 +1655,7 @@ static void test_panic_ca_to_ta(ADBG_Case_t *c, const TEEC_UUID *uuid,
 		goto bail1;
 
 	/* Attempt to open a session on panicked context */
-	if (!ADBG_EXPECT_TEEC_RESULT(c, TEEC_ERROR_TARGET_DEAD,
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
 			xtest_teec_open_session(&cs[1], uuid, NULL,
 						&ret_orig)))
 		goto bail1;
@@ -1602,7 +1679,8 @@ static void test_panic_ca_to_ta(ADBG_Case_t *c, const TEEC_UUID *uuid,
 	if (!ADBG_EXPECT_TEEC_SUCCESS(c, sims_get_counter(&cs[2], &counter)))
 		goto bail2;
 
-	if (!ADBG_EXPECT(c, 0, counter))
+	exp_counter = multi_instance ? 0 : 1;
+	if (!ADBG_EXPECT(c, exp_counter, counter))
 		goto bail2;
 
 bail2:
@@ -1717,3 +1795,681 @@ static void xtest_tee_test_1021(ADBG_Case_t *c)
 }
 ADBG_CASE_DEFINE(regression, 1021, xtest_tee_test_1021,
 		 "Test panic context release");
+
+static void xtest_tee_test_1022(ADBG_Case_t *c)
+{
+	TEEC_Session session = { 0 };
+	uint32_t ret_orig = 0;
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+			xtest_teec_open_session(&session, &os_test_ta_uuid,
+				NULL, &ret_orig)))
+		return;
+
+	(void)ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CALL_LIB_DL, NULL,
+				   &ret_orig));
+
+	(void)ADBG_EXPECT_TEEC_RESULT(c,
+		TEEC_ERROR_TARGET_DEAD,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CALL_LIB_DL_PANIC,
+				   NULL, &ret_orig));
+
+	(void)ADBG_EXPECT_TEEC_ERROR_ORIGIN(c, TEEC_ORIGIN_TEE, ret_orig);
+
+	TEEC_CloseSession(&session);
+}
+ADBG_CASE_DEFINE(regression, 1022, xtest_tee_test_1022,
+		"Test dlopen()/dlsym()/dlclose() API");
+
+/*
+ * Testing the ELF initialization (.init_array)
+ *
+ * - The TA has a global variable which can also be accessed by the two shared
+ *   libraries os_test_lib (linked with the TA) and os_test_lib_dl (loaded via
+ *   dlopen())
+ * - The TA and both libraries have initialization functions (declared with the
+ *   "constructor" attribute) which perform the following:
+ *     * The TA multiplies by 10 then adds 1
+ *     * os_test_lib multiplies by 10 then adds 2
+ *     * os_test_lib_dl multiplies by 10 then adds 3
+ * By testing the variable value we make sure the initializations occurred in
+ * the correct order.
+ */
+static void xtest_tee_test_1023(ADBG_Case_t *c)
+{
+	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+	TEEC_Session session = { 0 };
+	uint32_t ret_orig = 0;
+
+	op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_OUTPUT, TEEC_NONE,
+					 TEEC_NONE, TEEC_NONE);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+			xtest_teec_open_session(&session, &os_test_ta_uuid,
+				NULL, &ret_orig)))
+		return;
+
+	(void)ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_GET_GLOBAL_VAR, &op,
+				   &ret_orig));
+
+	/* Expected: initialization of os_test_lib, then TA */
+	(void)ADBG_EXPECT_COMPARE_SIGNED(c, op.params[0].value.a, ==, 21);
+
+	(void)ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CALL_LIB_DL, NULL,
+				   &ret_orig));
+
+	(void)ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_GET_GLOBAL_VAR, &op,
+				   &ret_orig));
+
+	/* Expected: initialization of os_test_lib_dl */
+	(void)ADBG_EXPECT_COMPARE_SIGNED(c, op.params[0].value.a, ==, 213);
+
+	TEEC_CloseSession(&session);
+}
+ADBG_CASE_DEFINE(regression, 1023, xtest_tee_test_1023,
+		"Test ELF initialization (.init_array)");
+
+#ifdef CFG_CORE_TPM_EVENT_LOG
+static void xtest_tee_test_1024(ADBG_Case_t *c)
+{
+	TEEC_Session session = {};
+	uint32_t ret_orig = 0;
+
+	xtest_teec_open_session(&session, &tpm_log_test_ta_uuid,
+				NULL, &ret_orig);
+
+	Do_ADBG_BeginSubCase(c, "TPM test service invocation");
+	ADBG_EXPECT_TEEC_SUCCESS(c, TEEC_InvokeCommand(&session,
+				  TA_TPM_TEST_GET_LOG,
+				  NULL, &ret_orig));
+	Do_ADBG_EndSubCase(c, "TPM test service invocation");
+
+	Do_ADBG_BeginSubCase(c, "TPM test passing short buffer");
+	ADBG_EXPECT_TEEC_SUCCESS(c, TEEC_InvokeCommand(&session,
+				  TA_TPM_TEST_SHORT_BUF,
+				  NULL, &ret_orig));
+	Do_ADBG_EndSubCase(c, "TPM test passing short buffer");
+
+	TEEC_CloseSession(&session);
+}
+
+ADBG_CASE_DEFINE(regression, 1024, xtest_tee_test_1024,
+		 "Test PTA_SYSTEM_GET_TPM_EVENT_LOG Service");
+#endif /* CFG_CORE_TPM_EVENT_LOG */
+
+static void xtest_tee_test_1025(ADBG_Case_t *c)
+{
+	TEEC_Session session = {};
+	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+	uint32_t ret_orig = 0;
+	uint8_t *empty_buf = NULL;
+	TEEC_SharedMemory shm = { };
+	TEEC_Result res = TEEC_ERROR_GENERIC;
+
+	Do_ADBG_BeginSubCase(c, "Invalid NULL buffer memref registration");
+
+	memset(&shm, 0, sizeof(shm));
+	shm.flags = TEEC_MEM_INPUT;
+	shm.buffer = NULL;
+	shm.size = 0;
+
+	ADBG_EXPECT(c, TEEC_ERROR_BAD_PARAMETERS,
+		    TEEC_RegisterSharedMemory(&xtest_teec_ctx, &shm));
+
+	memset(&shm, 0, sizeof(shm));
+	shm.flags = TEEC_MEM_OUTPUT;
+	shm.buffer = NULL;
+	shm.size = 0;
+
+	ADBG_EXPECT(c, TEEC_ERROR_BAD_PARAMETERS,
+		    TEEC_RegisterSharedMemory(&xtest_teec_ctx, &shm));
+
+	Do_ADBG_EndSubCase(c, "Invalid NULL buffer memref registration");
+
+	if (!xtest_teec_ctx.memref_null) {
+		Do_ADBG_Log("Skip subcases: MEMREF_NULL capability not supported");
+		return;
+	}
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+				      xtest_teec_open_session(&session,
+							      &os_test_ta_uuid,
+							      NULL, &ret_orig)))
+		return;
+
+	empty_buf = malloc(1);
+	if (!empty_buf) {
+		(void)ADBG_EXPECT_TEEC_SUCCESS(c, TEEC_ERROR_OUT_OF_MEMORY);
+		goto out_session;
+	}
+
+	op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_TEMP_INPUT,
+					 TEEC_MEMREF_TEMP_INPUT,
+					 TEEC_MEMREF_TEMP_OUTPUT,
+					 TEEC_MEMREF_TEMP_OUTPUT);
+
+	Do_ADBG_BeginSubCase(c,
+			     "Input/Output MEMREF Buffer NULL - Size 0 bytes");
+
+	op.params[0].tmpref.buffer = empty_buf;
+	op.params[0].tmpref.size = 0;
+
+	op.params[1].tmpref.buffer = NULL;
+	op.params[1].tmpref.size = 0;
+
+	op.params[2].tmpref.buffer = empty_buf;
+	op.params[2].tmpref.size = 0;
+
+	op.params[3].tmpref.buffer = NULL;
+	op.params[3].tmpref.size = 0;
+
+	ADBG_EXPECT(c, TEE_SUCCESS,
+		    TEEC_InvokeCommand(&session,
+				       TA_OS_TEST_CMD_NULL_MEMREF_PARAMS, &op,
+				       &ret_orig));
+
+	Do_ADBG_EndSubCase(c, "Input/Output MEMREF Buffer NULL - Size 0 bytes");
+
+	Do_ADBG_BeginSubCase(c, "Input MEMREF Buffer NULL - Size non 0 bytes");
+
+	op.params[0].tmpref.buffer = empty_buf;
+	op.params[0].tmpref.size = 1;
+
+	op.params[1].tmpref.buffer = NULL;
+	op.params[1].tmpref.size = 0;
+
+	op.params[2].tmpref.buffer = empty_buf;
+	op.params[2].tmpref.size = 0;
+
+	op.params[3].tmpref.buffer = NULL;
+	op.params[3].tmpref.size = 0;
+
+	ADBG_EXPECT(c, TEE_ERROR_BAD_PARAMETERS,
+		    TEEC_InvokeCommand(&session,
+				       TA_OS_TEST_CMD_NULL_MEMREF_PARAMS, &op,
+				       &ret_orig));
+
+	TEEC_CloseSession(&session);
+
+	Do_ADBG_EndSubCase(c, "Input MEMREF Buffer NULL - Size non 0 bytes");
+
+	Do_ADBG_BeginSubCase(c, "Input MEMREF Buffer NULL over PTA invocation");
+
+	/* Pseudo TA is optional: warn and nicely exit if not found */
+	res = xtest_teec_open_session(&session, &pta_invoke_tests_ta_uuid, NULL,
+				      &ret_orig);
+	if (res == TEEC_ERROR_ITEM_NOT_FOUND) {
+		Do_ADBG_Log(" - 1025 -   skip test, pseudo TA not found");
+		goto out;
+	}
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, res))
+		goto out;
+
+	op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_TEMP_INOUT, TEEC_NONE,
+					 TEEC_NONE, TEEC_NONE);
+	op.params[0].tmpref.buffer = NULL;
+	op.params[0].tmpref.size = 0;
+
+	ADBG_EXPECT(c, TEE_SUCCESS,
+		    TEEC_InvokeCommand(&session,
+				       PTA_INVOKE_TESTS_CMD_MEMREF_NULL,
+				       &op, &ret_orig));
+
+out_session:
+	TEEC_CloseSession(&session);
+out:
+	Do_ADBG_EndSubCase(c, NULL);
+	free(empty_buf);
+}
+ADBG_CASE_DEFINE(regression, 1025, xtest_tee_test_1025,
+		 "Test memref NULL and/or 0 bytes size");
+
+#define TEE_UUID_NS_NAME_SIZE  128
+
+/*
+ * TEE Client UUID name space identifier (UUIDv4)
+ *
+ * Value here is random UUID that is allocated as name space identifier for
+ * forming Client UUID's for TEE environment using UUIDv5 scheme.
+ */
+static const char *client_uuid_linux_ns = "58ac9ca0-2086-4683-a1b8-ec4bc08e01b6";
+
+/* TEEC_LOGIN_PUBLIC's Client UUID is NIL UUID */
+static TEEC_UUID client_uuid_public = { };
+
+static void xtest_tee_test_1026(ADBG_Case_t *c)
+{
+	TEEC_Result result = TEEC_ERROR_GENERIC;
+	uint32_t ret_orig = 0;
+	TEEC_Session session = { };
+	uint32_t login = UINT32_MAX;
+	TEEC_UUID client_uuid = { };
+
+	result = TEEC_OpenSession(&xtest_teec_ctx, &session, &os_test_ta_uuid,
+				  TEEC_LOGIN_PUBLIC, NULL, NULL, &ret_orig);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	result = ta_os_test_cmd_client_identity(&session, &login,
+						&client_uuid);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		goto out;
+
+	ADBG_EXPECT_COMPARE_UNSIGNED(c, login, ==, TEEC_LOGIN_PUBLIC);
+
+	ADBG_EXPECT_EQUAL(c, &client_uuid_public, &client_uuid,
+			  sizeof(TEEC_UUID));
+
+out:
+	TEEC_CloseSession(&session);
+}
+
+ADBG_CASE_DEFINE(regression, 1026, xtest_tee_test_1026,
+		 "Session: public login");
+
+/*
+ * regression_1027
+ * Depends on OpenSSL
+ * Depends on kernel commit "tee: optee: Add support for session login client UUID generation"
+ * Linaro tree: https://github.com/linaro-swg/linux/commit/ad19acdcdbc5
+ * Upstream: <put sha-1 here when known>
+ *
+ * xtest skips the test when not built with OpenSSL.
+ */
+static void xtest_tee_test_1027(ADBG_Case_t *c)
+{
+#ifdef OPENSSL_FOUND
+	TEEC_Result result = TEEC_ERROR_GENERIC;
+	uint32_t ret_orig = 0;
+	TEEC_Session session = { };
+	uint32_t login = UINT32_MAX;
+	TEEC_UUID client_uuid = { };
+	TEEC_UUID expected_client_uuid = { };
+	TEEC_UUID uuid_ns = { };
+	char uuid_name[TEE_UUID_NS_NAME_SIZE] = { };
+
+	result = xtest_uuid_from_str(&uuid_ns, client_uuid_linux_ns);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	sprintf(uuid_name, "uid=%x", geteuid());
+
+	result = xtest_uuid_v5(&expected_client_uuid, &uuid_ns, uuid_name,
+			       strlen(uuid_name));
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	result = TEEC_OpenSession(&xtest_teec_ctx, &session, &os_test_ta_uuid,
+				  TEEC_LOGIN_USER, NULL, NULL, &ret_orig);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	result = ta_os_test_cmd_client_identity(&session, &login,
+						&client_uuid);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		goto out;
+
+	ADBG_EXPECT_COMPARE_UNSIGNED(c, login, ==, TEEC_LOGIN_USER);
+
+	ADBG_EXPECT_EQUAL(c, &expected_client_uuid, &client_uuid,
+			  sizeof(TEEC_UUID));
+
+out:
+	TEEC_CloseSession(&session);
+#else /*!OPENSSL_FOUND*/
+	UNUSED(c);
+	UNUSED(client_uuid_linux_ns);
+	/* xtest_uuid_v5() depends on OpenSSL */
+	Do_ADBG_Log("OpenSSL not available, skipping test 1027");
+#endif
+}
+
+ADBG_CASE_DEFINE(regression, 1027, xtest_tee_test_1027,
+		 "Session: user login for current user");
+
+/*
+ * regression_1028
+ * Depends on OpenSSL and kernel commit "tee: optee: Add support for session login client UUID generation"
+ * Linaro tree: https://github.com/linaro-swg/linux/commit/ad19acdcdbc5
+ * Upstream: <put sha-1 here when known>
+ *
+ * xtest skips the test when not built with OpenSSL.
+ */
+static void xtest_tee_test_1028(ADBG_Case_t *c)
+{
+#ifdef OPENSSL_FOUND
+	TEEC_Result result = TEEC_ERROR_GENERIC;
+	uint32_t ret_orig = 0;
+	TEEC_Session session = { };
+	uint32_t login = UINT32_MAX;
+	TEEC_UUID client_uuid = { };
+	TEEC_UUID expected_client_uuid = { };
+	TEEC_UUID uuid_ns = { };
+	char uuid_name[TEE_UUID_NS_NAME_SIZE] = { };
+	uint32_t group = 0;
+
+	group = getegid();
+
+	result = xtest_uuid_from_str(&uuid_ns, client_uuid_linux_ns);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	sprintf(uuid_name, "gid=%x", group);
+
+	result = xtest_uuid_v5(&expected_client_uuid, &uuid_ns, uuid_name,
+			       strlen(uuid_name));
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	result = TEEC_OpenSession(&xtest_teec_ctx, &session, &os_test_ta_uuid,
+				  TEEC_LOGIN_GROUP, &group, NULL, &ret_orig);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		return;
+
+	result = ta_os_test_cmd_client_identity(&session, &login,
+						&client_uuid);
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, result))
+		goto out;
+
+	ADBG_EXPECT_COMPARE_UNSIGNED(c, login, ==, TEEC_LOGIN_GROUP);
+
+	ADBG_EXPECT_EQUAL(c, &expected_client_uuid, &client_uuid,
+			  sizeof(TEEC_UUID));
+
+out:
+	TEEC_CloseSession(&session);
+#else /*!OPENSSL_FOUND*/
+	UNUSED(c);
+	/* xtest_uuid_v5() depends on OpenSSL */
+	Do_ADBG_Log("OpenSSL not available, skipping test 1028");
+#endif
+}
+
+ADBG_CASE_DEFINE(regression, 1028, xtest_tee_test_1028,
+		 "Session: group login for current user's effective group");
+
+static void xtest_tee_test_1029(ADBG_Case_t *c)
+{
+	TEEC_Result res = TEEC_SUCCESS;
+	TEEC_Session session = { 0 };
+	uint32_t ret_orig = 0;
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+			xtest_teec_open_session(&session, &os_test_ta_uuid,
+						NULL, &ret_orig)))
+		return;
+
+	Do_ADBG_BeginSubCase(c, "TLS variables (main program)");
+	res = TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_TLS_TEST_MAIN, NULL,
+				 &ret_orig);
+	if (res == TEEC_ERROR_NOT_SUPPORTED)
+		Do_ADBG_Log(" - 1029 -   skip test, "
+			    "TA returned TEEC_ERROR_NOT_SUPPORTED");
+	else
+		ADBG_EXPECT_TEEC_SUCCESS(c, res);
+	Do_ADBG_EndSubCase(c, "TLS variables (main program)");
+
+	Do_ADBG_BeginSubCase(c, "TLS variables (shared library)");
+	res = TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_TLS_TEST_SHLIB, NULL,
+				 &ret_orig);
+	if (res == TEEC_ERROR_NOT_SUPPORTED)
+		Do_ADBG_Log(" - 1029 -   skip test, "
+			    "TA returned TEEC_ERROR_NOT_SUPPORTED");
+	else
+		ADBG_EXPECT_TEEC_SUCCESS(c, res);
+	Do_ADBG_EndSubCase(c, "TLS variables (shared library)");
+
+	TEEC_CloseSession(&session);
+}
+ADBG_CASE_DEFINE(regression, 1029, xtest_tee_test_1029,
+		 "Test __thread attribute");
+
+static void xtest_tee_test_1030(ADBG_Case_t *c)
+{
+	TEEC_Session session = { 0 };
+	uint32_t ret_orig = 0;
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+			xtest_teec_open_session(&session, &os_test_ta_uuid,
+						NULL, &ret_orig)))
+		return;
+
+	Do_ADBG_BeginSubCase(c, "Before dlopen()");
+	ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_DL_PHDR, NULL,
+				   &ret_orig));
+	Do_ADBG_EndSubCase(c, "Before dlopen()");
+
+	Do_ADBG_BeginSubCase(c, "After dlopen()");
+	ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_DL_PHDR_DL, NULL,
+				   &ret_orig));
+	Do_ADBG_EndSubCase(c, "After dlopen()");
+
+	TEEC_CloseSession(&session);
+}
+ADBG_CASE_DEFINE(regression, 1030, xtest_tee_test_1030,
+		 "Test dl_iterate_phdr()");
+
+#ifndef __clang__
+static void xtest_tee_test_1031(ADBG_Case_t *c)
+{
+	TEEC_Result ret = TEE_SUCCESS;
+	TEEC_Session session = { 0 };
+	uint32_t ret_orig = 0;
+
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+			xtest_teec_open_session(&session, &os_test_ta_uuid,
+						NULL, &ret_orig)))
+		return;
+
+	Do_ADBG_BeginSubCase(c, "Global object constructor (main program)");
+	ret = TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CXX_CTOR_MAIN, NULL,
+				   &ret_orig);
+	if (ret == TEEC_ERROR_NOT_SUPPORTED) {
+		printf("TA not built with C++ support, skipping C++ tests\n");
+		Do_ADBG_EndSubCase(c, "Global object constructor (main program)");
+		goto out;
+
+	}
+	ADBG_EXPECT_TEEC_SUCCESS(c, ret);
+	Do_ADBG_EndSubCase(c, "Global object constructor (main program)");
+
+	Do_ADBG_BeginSubCase(c, "Global object constructor (shared library)");
+	ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CXX_CTOR_SHLIB,
+				   NULL, &ret_orig));
+	Do_ADBG_EndSubCase(c, "Global object constructor (shared library)");
+
+	Do_ADBG_BeginSubCase(c, "Global object constructor (dlopen()ed lib)");
+	ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CXX_CTOR_SHLIB_DL,
+				   NULL, &ret_orig));
+	Do_ADBG_EndSubCase(c, "Global object constructor (dlopen()ed lib)");
+
+	Do_ADBG_BeginSubCase(c, "Exceptions (simple)");
+	ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CXX_EXC_MAIN, NULL,
+				   &ret_orig));
+	Do_ADBG_EndSubCase(c, "Exceptions (simple)");
+
+	Do_ADBG_BeginSubCase(c, "Exceptions (mixed C/C++ frames)");
+	ADBG_EXPECT_TEEC_SUCCESS(c,
+		TEEC_InvokeCommand(&session, TA_OS_TEST_CMD_CXX_EXC_MIXED, NULL,
+				   &ret_orig));
+	Do_ADBG_EndSubCase(c, "Exceptions (mixed C/C++ frames)");
+out:
+	TEEC_CloseSession(&session);
+}
+ADBG_CASE_DEFINE(regression, 1031, xtest_tee_test_1031,
+		 "Test C++ features");
+#endif
+
+static void xtest_tee_test_1032(ADBG_Case_t *c)
+{
+	TEEC_Result res = TEEC_SUCCESS;
+	TEEC_Context ctx = { };
+	TEEC_SharedMemory shm1 = {
+		.buffer = xtest_tee_test_1032,
+		.size = 32,
+		.flags = TEEC_MEM_INPUT,
+	};
+	static const uint8_t dummy_data[32] = { 1, 2, 3, 4, };
+	TEEC_SharedMemory shm2 = {
+		.buffer = (void *)dummy_data,
+		.size = sizeof(dummy_data),
+		.flags = TEEC_MEM_INPUT,
+	};
+
+	res = TEEC_InitializeContext(xtest_tee_name, &ctx);
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c, res))
+		return;
+
+	res = TEEC_RegisterSharedMemory(&ctx, &shm1);
+	if (ADBG_EXPECT_TEEC_SUCCESS(c, res))
+		TEEC_ReleaseSharedMemory(&shm1);
+
+	res = TEEC_RegisterSharedMemory(&ctx, &shm2);
+	if (ADBG_EXPECT_TEEC_SUCCESS(c, res))
+		TEEC_ReleaseSharedMemory(&shm2);
+
+	TEEC_FinalizeContext(&ctx);
+}
+ADBG_CASE_DEFINE(regression, 1032, xtest_tee_test_1032,
+		"Register read-only shared memory");
+
+static void xtest_tee_test_1033(ADBG_Case_t *c)
+{
+	TEEC_Session session = { };
+	uint32_t ret_orig = 0;
+
+	/* TA will ping the test plugin during open session operation */
+	if (!ADBG_EXPECT_TEEC_SUCCESS(c,
+		xtest_teec_open_session(&session, &supp_plugin_test_ta_uuid,
+					NULL, &ret_orig)))
+		return;
+
+	Do_ADBG_BeginSubCase(c, "Pass values to/from a plugin");
+	{
+		TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+
+		op.params[0].value.a = 20;
+		op.params[0].value.b = 10;
+		op.params[1].value.a = '+';
+		op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INOUT,
+						 TEEC_VALUE_INPUT, TEEC_NONE,
+						 TEEC_NONE);
+
+		ADBG_EXPECT_TEEC_SUCCESS(c,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_PASS_VALUES, &op,
+					   &ret_orig));
+		ADBG_EXPECT(c, 30, op.params[0].value.a);
+
+		/* reassign, because the values was changed during previous op */
+		op.params[0].value.a = 20;
+		op.params[0].value.b = 10;
+		op.params[1].value.a = '-';
+		ADBG_EXPECT_TEEC_SUCCESS(c,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_PASS_VALUES, &op,
+					   &ret_orig));
+		ADBG_EXPECT(c, 10, op.params[0].value.a);
+	}
+	Do_ADBG_EndSubCase(c, "Pass values to/from a plugin");
+
+	Do_ADBG_BeginSubCase(c, "Pass array to a plugin");
+	{
+		TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+		uint8_t to_plugin[] = { 0, 1, 2, 3, 4, 5 };
+
+		op.params[0].tmpref.buffer = to_plugin;
+		op.params[0].tmpref.size = sizeof(to_plugin);
+		op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_TEMP_INPUT,
+						 TEEC_VALUE_OUTPUT,
+						 TEEC_NONE, TEEC_NONE);
+
+		ADBG_EXPECT_TEEC_SUCCESS(c,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_WRITE_ARR,
+					   &op, &ret_orig));
+
+		/*
+		 * The test plugin must calculate a sum of the input elements
+		 * and store it to 'op.params[1].value.a'
+		 */
+		ADBG_EXPECT(c, 15, op.params[1].value.a);
+	}
+	Do_ADBG_EndSubCase(c, "Pass array to a plugin");
+
+	Do_ADBG_BeginSubCase(c, "Get array from a plugin");
+	{
+		TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+		char from_plugin[64] = { };
+		char expected_arr[] = "Array from plugin";
+		size_t expectes_size = sizeof(expected_arr);
+
+		op.params[0].tmpref.buffer = from_plugin;
+		op.params[0].tmpref.size = sizeof(from_plugin);
+		op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_TEMP_OUTPUT,
+						 TEEC_VALUE_OUTPUT, TEEC_NONE,
+						 TEEC_NONE);
+		ADBG_EXPECT_TEEC_SUCCESS(c,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_GET_ARR, &op,
+					   &ret_orig));
+		ADBG_EXPECT(c, expectes_size, op.params[1].value.a);
+		ADBG_EXPECT_EQUAL(c, expected_arr, from_plugin, expectes_size);
+	}
+	Do_ADBG_EndSubCase(c, "Get array from a plugin");
+
+	Do_ADBG_BeginSubCase(c, "Not allow bad input to a plugin");
+	{
+		TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+
+		op.paramTypes = TEEC_PARAM_TYPES(TEEC_NONE, TEEC_NONE,
+						 TEEC_NONE, TEEC_NONE);
+		ADBG_EXPECT_TEEC_RESULT(c, TEE_ERROR_BAD_PARAMETERS,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_BAD_UUID, &op,
+					   &ret_orig));
+		ADBG_EXPECT_TEEC_RESULT(c, TEE_ERROR_BAD_PARAMETERS,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_BAD_IN_DATA, &op,
+					   &ret_orig));
+		ADBG_EXPECT_TEEC_RESULT(c, TEE_ERROR_BAD_PARAMETERS,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_BAD_IN_LEN, &op,
+					   &ret_orig));
+	}
+	Do_ADBG_EndSubCase(c, "Not allow bad input to a plugin");
+
+	Do_ADBG_BeginSubCase(c, "Call an unknown plugin");
+	{
+		TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+
+		op.paramTypes = TEEC_PARAM_TYPES(TEEC_NONE, TEEC_NONE,
+						 TEEC_NONE, TEEC_NONE);	
+		ADBG_EXPECT_TEEC_RESULT(c, TEEC_ERROR_ITEM_NOT_FOUND,
+			TEEC_InvokeCommand(&session,
+					   TA_SUPP_PLUGIN_CMD_UNKNOWN_UUID,
+					   &op, &ret_orig));
+	}
+	Do_ADBG_EndSubCase(c, "Call an unknown plugin");
+
+	TEEC_CloseSession(&session);
+}
+ADBG_CASE_DEFINE(regression, 1033, xtest_tee_test_1033,
+		 "Test the supplicant plugin framework");

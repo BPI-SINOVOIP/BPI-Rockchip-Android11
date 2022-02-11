@@ -1,14 +1,6 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright (c) 2014, STMicroelectronics International N.V.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
  */
 
 #include <assert.h>
@@ -18,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ta_crypt.h>
+#include <ta_os_test.h>
 #include <utee_defines.h>
 
 #include "xtest_helpers.h"
@@ -30,7 +23,7 @@ TEEC_Context xtest_teec_ctx;
 
 TEEC_Result xtest_teec_ctx_init(void)
 {
-	return TEEC_InitializeContext(_device, &xtest_teec_ctx);
+	return TEEC_InitializeContext(xtest_tee_name, &xtest_teec_ctx);
 }
 
 TEEC_Result xtest_teec_open_session(TEEC_Session *session,
@@ -381,6 +374,61 @@ TEEC_Result ta_crypt_cmd_free_operation(ADBG_Case_t *c, TEEC_Session *s,
 	}
 
 	return res;
+}
+
+bool ta_crypt_cmd_is_algo_supported(ADBG_Case_t *c, TEEC_Session *s,
+				    uint32_t algo, uint32_t element)
+{
+	TEEC_Result res = TEEC_ERROR_GENERIC;
+	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
+	uint32_t ret_orig = 0;
+	TEEC_Result st = TEEC_ERROR_GENERIC;
+
+	op.params[0].value.a = algo;
+	op.params[0].value.b = element;
+
+	op.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INPUT, TEEC_VALUE_OUTPUT,
+					 TEEC_NONE, TEEC_NONE);
+
+	res = TEEC_InvokeCommand(s, TA_CRYPT_CMD_IS_ALGO_SUPPORTED, &op,
+				 &ret_orig);
+	if (res != TEEC_SUCCESS) {
+		(void)ADBG_EXPECT_TEEC_ERROR_ORIGIN(c, TEEC_ORIGIN_TRUSTED_APP,
+						    ret_orig);
+		return res;
+	}
+
+	st = op.params[1].value.a;
+	ADBG_EXPECT_TRUE(c, st == TEEC_SUCCESS ||
+			 st == TEEC_ERROR_NOT_SUPPORTED);
+	if (st == TEE_SUCCESS)
+		return true;
+	return false;
+}
+
+TEEC_Result ta_os_test_cmd_client_identity(TEEC_Session *session,
+					   uint32_t *login,
+					   TEEC_UUID *client_uuid)
+{
+	TEEC_Operation operation = { };
+	TEEC_Result result = TEEC_ERROR_GENERIC;
+
+	operation.params[1].tmpref.buffer = client_uuid;
+	operation.params[1].tmpref.size = sizeof(*client_uuid);
+
+	operation.paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_OUTPUT,
+						TEEC_MEMREF_TEMP_OUTPUT,
+						TEEC_NONE, TEEC_NONE);
+
+	result = TEEC_InvokeCommand(session, TA_OS_TEST_CMD_CLIENT_IDENTITY,
+				    &operation, NULL);
+
+	if (result != TEEC_SUCCESS)
+		return result;
+
+	*login = operation.params[0].value.a;
+
+	return TEEC_SUCCESS;
 }
 
 void xtest_mutex_init(pthread_mutex_t *mutex)

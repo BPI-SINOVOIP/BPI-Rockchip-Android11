@@ -1216,7 +1216,7 @@ static int rkvenc_init(struct mpp_dev *mpp)
 
 	mpp->iommu_info->hdl = rkvenc_iommu_fault_handle;
 
-	return ret;
+	return 0;
 }
 
 static int rkvenc_exit(struct mpp_dev *mpp)
@@ -1453,6 +1453,8 @@ static int rkvenc_probe(struct platform_device *pdev)
 
 	mpp->session_max_buffers = RKVENC_SESSION_MAX_BUFFERS;
 	rkvenc_procfs_init(mpp);
+	/* register current device to mpp service */
+	mpp_dev_register_srv(mpp, mpp->srv);
 	dev_info(dev, "probing finish\n");
 
 	return 0;

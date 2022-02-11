@@ -18,8 +18,7 @@
 #define __MPP_FRAME_H__
 
 #include "mpp_buffer.h"
-
-typedef void* MppFrame;
+#include "mpp_meta.h"
 
 /*
  * bit definition for mode flag in MppFrame
@@ -42,6 +41,10 @@ typedef void* MppFrame;
 // for multiview stream
 #define MPP_FRAME_FLAG_VIEW_ID_MASK     (0x000000f0)
 
+#define MPP_FRAME_FLAG_IEP_DEI_MASK     (0x00000f00)
+#define MPP_FRAME_FLAG_IEP_DEI_I2O1     (0x00000100)
+#define MPP_FRAME_FLAG_IEP_DEI_I4O2     (0x00000200)
+#define MPP_FRAME_FLAG_IEP_DEI_I4O1     (0x00000300)
 
 /*
  * MPEG vs JPEG YUV range.
@@ -53,22 +56,36 @@ typedef enum {
     MPP_FRAME_RANGE_NB,                 ///< Not part of ABI
 } MppFrameColorRange;
 
+typedef enum {
+    MPP_FRAME_VIDEO_FMT_COMPONEMT   = 0,
+    MPP_FRAME_VIDEO_FMT_PAL         = 1,
+    MPP_FRAME_VIDEO_FMT_NTSC        = 2,
+    MPP_FRAME_VIDEO_FMT_SECAM       = 3,
+    MPP_FRAME_VIDEO_FMT_MAC         = 4,
+    MPP_FRAME_VIDEO_FMT_UNSPECIFIED = 5,
+    MPP_FRAME_VIDEO_FMT_RESERVED0   = 6,
+    MPP_FRAME_VIDEO_FMT_RESERVED1   = 7,
+} MppFrameVideoFormat;
+
 /*
  * Chromaticity coordinates of the source primaries.
  */
 typedef enum {
-    MPP_FRAME_PRI_RESERVED0   = 0,
-    MPP_FRAME_PRI_BT709       = 1,      ///< also ITU-R BT1361 / IEC 61966-2-4 / SMPTE RP177 Annex B
-    MPP_FRAME_PRI_UNSPECIFIED = 2,
-    MPP_FRAME_PRI_RESERVED    = 3,
-    MPP_FRAME_PRI_BT470M      = 4,      ///< also FCC Title 47 Code of Federal Regulations 73.682 (a)(20)
+    MPP_FRAME_PRI_RESERVED0     = 0,
+    MPP_FRAME_PRI_BT709         = 1,    ///< also ITU-R BT1361 / IEC 61966-2-4 / SMPTE RP177 Annex B
+    MPP_FRAME_PRI_UNSPECIFIED   = 2,
+    MPP_FRAME_PRI_RESERVED      = 3,
+    MPP_FRAME_PRI_BT470M        = 4,    ///< also FCC Title 47 Code of Federal Regulations 73.682 (a)(20)
 
-    MPP_FRAME_PRI_BT470BG     = 5,      ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM
-    MPP_FRAME_PRI_SMPTE170M   = 6,      ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC
-    MPP_FRAME_PRI_SMPTE240M   = 7,      ///< functionally identical to above
-    MPP_FRAME_PRI_FILM        = 8,      ///< colour filters using Illuminant C
-    MPP_FRAME_PRI_BT2020      = 9,      ///< ITU-R BT2020
-    MPP_FRAME_PRI_SMPTEST428_1 = 10,    ///< SMPTE ST 428-1 (CIE 1931 XYZ)
+    MPP_FRAME_PRI_BT470BG       = 5,    ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM
+    MPP_FRAME_PRI_SMPTE170M     = 6,    ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC
+    MPP_FRAME_PRI_SMPTE240M     = 7,    ///< functionally identical to above
+    MPP_FRAME_PRI_FILM          = 8,    ///< colour filters using Illuminant C
+    MPP_FRAME_PRI_BT2020        = 9,    ///< ITU-R BT2020
+    MPP_FRAME_PRI_SMPTEST428_1  = 10,   ///< SMPTE ST 428-1 (CIE 1931 XYZ)
+    MPP_FRAME_PRI_SMPTE431      = 11,   ///< SMPTE ST 431-2 (2011) / DCI P3
+    MPP_FRAME_PRI_SMPTE432      = 12,   ///< SMPTE ST 432-1 (2010) / P3 D65 / Display P3
+    MPP_FRAME_PRI_JEDEC_P22     = 22,   ///< JEDEC P22 phosphors
     MPP_FRAME_PRI_NB,                   ///< Not part of ABI
 } MppFrameColorPrimaries;
 
@@ -113,6 +130,10 @@ typedef enum {
     MPP_FRAME_SPC_YCOCG       = 8,      ///< Used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16
     MPP_FRAME_SPC_BT2020_NCL  = 9,      ///< ITU-R BT2020 non-constant luminance system
     MPP_FRAME_SPC_BT2020_CL   = 10,     ///< ITU-R BT2020 constant luminance system
+    MPP_FRAME_SPC_SMPTE2085   = 11,     ///< SMPTE 2085, Y'D'zD'x
+    MPP_FRAME_SPC_CHROMA_DERIVED_NCL = 12,  ///< Chromaticity-derived non-constant luminance system
+    MPP_FRAME_SPC_CHROMA_DERIVED_CL = 13,   ///< Chromaticity-derived constant luminance system
+    MPP_FRAME_SPC_ICTCP       = 14,     ///< ITU-R BT.2100-0, ICtCp
     MPP_FRAME_SPC_NB,                   ///< Not part of ABI
 } MppFrameColorSpace;
 
@@ -142,57 +163,104 @@ typedef enum {
     MPP_CHROMA_LOC_NB,                  ///< Not part of ABI
 } MppFrameChromaLocation;
 
-#define MPP_FRAME_FMT_MASK    0x000f0000
-#define MPP_FRAME_FMT_YUV     0x00000000
-#define MPP_FRAME_FMT_RGB     0x00010000
-#define MPP_FRAME_FMT_COMPLEX 0x00020000
+#define MPP_FRAME_FMT_MASK          (0x000fffff)
+
+#define MPP_FRAME_FMT_COLOR_MASK    (0x000f0000)
+#define MPP_FRAME_FMT_YUV           (0x00000000)
+#define MPP_FRAME_FMT_RGB           (0x00010000)
+
+#define MPP_FRAME_FBC_MASK          (0x00f00000)
+#define MPP_FRAME_FBC_NONE          (0x00000000)
+/*
+ * AFBC_V1 is for ISP output.
+ * It has default payload offset to be calculated * from width and height:
+ * Payload offset = MPP_ALIGN(MPP_ALIGN(width, 16) * MPP_ALIGN(height, 16) / 16, SZ_4K)
+ */
+#define MPP_FRAME_FBC_AFBC_V1       (0x00100000)
+/*
+ * AFBC_V2 is for video decoder output.
+ * It stores payload offset in first 32-bit in header address
+ * Payload offset is always set to zero.
+ */
+#define MPP_FRAME_FBC_AFBC_V2       (0x00200000)
+
+#define MPP_FRAME_FMT_LE_MASK       (0x01000000)
+
+#define MPP_FRAME_FMT_IS_YUV(fmt)   (((fmt & MPP_FRAME_FMT_COLOR_MASK) == MPP_FRAME_FMT_YUV) && \
+                                     ((fmt & MPP_FRAME_FMT_MASK) < MPP_FMT_YUV_BUTT))
+#define MPP_FRAME_FMT_IS_RGB(fmt)   (((fmt & MPP_FRAME_FMT_COLOR_MASK) == MPP_FRAME_FMT_RGB) && \
+                                     ((fmt & MPP_FRAME_FMT_MASK) < MPP_FMT_RGB_BUTT))
 
 /*
- *mpp color format define
+ * For MPP_FRAME_FBC_AFBC_V1 the 16byte aligned stride is used.
  */
+#define MPP_FRAME_FMT_IS_FBC(fmt)   (fmt & MPP_FRAME_FBC_MASK)
+
+#define MPP_FRAME_FMT_IS_LE(fmt)    ((fmt & MPP_FRAME_FMT_LE_MASK) == MPP_FRAME_FMT_LE_MASK)
+#define MPP_FRAME_FMT_IS_BE(fmt)    ((fmt & MPP_FRAME_FMT_LE_MASK) == 0)
+
+/* mpp color format index definition */
 typedef enum {
-    MPP_FMT_YUV420SP        = MPP_FRAME_FMT_YUV,        /* YYYY... UV... (NV12)     */
+    MPP_FMT_YUV420SP        = (MPP_FRAME_FMT_YUV + 0),  /* YYYY... UV... (NV12)     */
     /*
      * A rockchip specific pixel format, without gap between pixel aganist
      * the P010_10LE/P010_10BE
      */
-    MPP_FMT_YUV420SP_10BIT,
-    MPP_FMT_YUV422SP,                                   /* YYYY... UVUV... (NV16)   */
-    MPP_FMT_YUV422SP_10BIT,                             ///< Not part of ABI
-    MPP_FMT_YUV420P,                                    /* YYYY... U...V...  (I420) */
-    MPP_FMT_YUV420SP_VU,                                /* YYYY... VUVUVU... (NV21) */
-    MPP_FMT_YUV422P,                                    /* YYYY... UU...VV...(422P) */
-    MPP_FMT_YUV422SP_VU,                                /* YYYY... VUVUVU... (NV61) */
-    MPP_FMT_YUV422_YUYV,                                /* YUYVYUYV... (YUY2)       */
-    MPP_FMT_YUV422_YVYU,                                /* YVYUYVYU... (YVY2)       */
-    MPP_FMT_YUV422_UYVY,                                /* UYVYUYVY... (UYVY)       */
-    MPP_FMT_YUV422_VYUY,                                /* VYUYVYUY... (VYUY)       */
-    MPP_FMT_YUV400,                                     /* YYYY...                  */
-    MPP_FMT_YUV440SP,                                   /* YYYY... UVUV...          */
-    MPP_FMT_YUV411SP,                                   /* YYYY... UV...            */
-    MPP_FMT_YUV444SP,                                   /* YYYY... UVUVUVUV...      */
+    MPP_FMT_YUV420SP_10BIT  = (MPP_FRAME_FMT_YUV + 1),
+    MPP_FMT_YUV422SP        = (MPP_FRAME_FMT_YUV + 2),  /* YYYY... UVUV... (NV16)   */
+    MPP_FMT_YUV422SP_10BIT  = (MPP_FRAME_FMT_YUV + 3),  ///< Not part of ABI
+    MPP_FMT_YUV420P         = (MPP_FRAME_FMT_YUV + 4),  /* YYYY... U...V...  (I420) */
+    MPP_FMT_YUV420SP_VU     = (MPP_FRAME_FMT_YUV + 5),  /* YYYY... VUVUVU... (NV21) */
+    MPP_FMT_YUV422P         = (MPP_FRAME_FMT_YUV + 6),  /* YYYY... UU...VV...(422P) */
+    MPP_FMT_YUV422SP_VU     = (MPP_FRAME_FMT_YUV + 7),  /* YYYY... VUVUVU... (NV61) */
+    MPP_FMT_YUV422_YUYV     = (MPP_FRAME_FMT_YUV + 8),  /* YUYVYUYV... (YUY2)       */
+    MPP_FMT_YUV422_YVYU     = (MPP_FRAME_FMT_YUV + 9),  /* YVYUYVYU... (YVY2)       */
+    MPP_FMT_YUV422_UYVY     = (MPP_FRAME_FMT_YUV + 10), /* UYVYUYVY... (UYVY)       */
+    MPP_FMT_YUV422_VYUY     = (MPP_FRAME_FMT_YUV + 11), /* VYUYVYUY... (VYUY)       */
+    MPP_FMT_YUV400          = (MPP_FRAME_FMT_YUV + 12), /* YYYY...                  */
+    MPP_FMT_YUV440SP        = (MPP_FRAME_FMT_YUV + 13), /* YYYY... UVUV...          */
+    MPP_FMT_YUV411SP        = (MPP_FRAME_FMT_YUV + 14), /* YYYY... UV...            */
+    MPP_FMT_YUV444SP        = (MPP_FRAME_FMT_YUV + 15), /* YYYY... UVUVUVUV...      */
     MPP_FMT_YUV_BUTT,
-    MPP_FMT_RGB565          = MPP_FRAME_FMT_RGB,        /* 16-bit RGB               */
-    MPP_FMT_BGR565,                                     /* 16-bit RGB               */
-    MPP_FMT_RGB555,                                     /* 15-bit RGB               */
-    MPP_FMT_BGR555,                                     /* 15-bit RGB               */
-    MPP_FMT_RGB444,                                     /* 12-bit RGB               */
-    MPP_FMT_BGR444,                                     /* 12-bit RGB               */
-    MPP_FMT_RGB888,                                     /* 24-bit RGB               */
-    MPP_FMT_BGR888,                                     /* 24-bit RGB               */
-    MPP_FMT_RGB101010,                                  /* 30-bit RGB               */
-    MPP_FMT_BGR101010,                                  /* 30-bit RGB               */
-    MPP_FMT_ARGB8888,                                   /* 32-bit RGB               */
-    MPP_FMT_ABGR8888,                                   /* 32-bit RGB               */
-    MPP_FMT_BGRA8888,                                   /* 32-bit RGB               */
-    MPP_FMT_RGBA8888,                                   /* 32-bit RGB               */
+
+    MPP_FMT_RGB565          = (MPP_FRAME_FMT_RGB + 0),  /* 16-bit RGB               */
+    MPP_FMT_BGR565          = (MPP_FRAME_FMT_RGB + 1),  /* 16-bit RGB               */
+    MPP_FMT_RGB555          = (MPP_FRAME_FMT_RGB + 2),  /* 15-bit RGB               */
+    MPP_FMT_BGR555          = (MPP_FRAME_FMT_RGB + 3),  /* 15-bit RGB               */
+    MPP_FMT_RGB444          = (MPP_FRAME_FMT_RGB + 4),  /* 12-bit RGB               */
+    MPP_FMT_BGR444          = (MPP_FRAME_FMT_RGB + 5),  /* 12-bit RGB               */
+    MPP_FMT_RGB888          = (MPP_FRAME_FMT_RGB + 6),  /* 24-bit RGB               */
+    MPP_FMT_BGR888          = (MPP_FRAME_FMT_RGB + 7),  /* 24-bit RGB               */
+    MPP_FMT_RGB101010       = (MPP_FRAME_FMT_RGB + 8),  /* 30-bit RGB               */
+    MPP_FMT_BGR101010       = (MPP_FRAME_FMT_RGB + 9),  /* 30-bit RGB               */
+    MPP_FMT_ARGB8888        = (MPP_FRAME_FMT_RGB + 10), /* 32-bit RGB               */
+    MPP_FMT_ABGR8888        = (MPP_FRAME_FMT_RGB + 11), /* 32-bit RGB               */
+    MPP_FMT_BGRA8888        = (MPP_FRAME_FMT_RGB + 12), /* 32-bit RGB               */
+    MPP_FMT_RGBA8888        = (MPP_FRAME_FMT_RGB + 13), /* 32-bit RGB               */
     MPP_FMT_RGB_BUTT,
-    /* simliar to I420, but Pixels are grouped in macroblocks of 8x4 size  */
-    MPP_FMT_YUV420_8Z4      = MPP_FRAME_FMT_COMPLEX,
-    /* The end of the formats have a complex layout */
-    MPP_FMT_COMPLEX_BUTT,
-    MPP_FMT_BUTT            = MPP_FMT_COMPLEX_BUTT,
+
+    MPP_FMT_BUTT,
 } MppFrameFormat;
+
+/**
+ * Rational number (pair of numerator and denominator).
+ */
+typedef struct MppFrameRational {
+    RK_S32 num; ///< Numerator
+    RK_S32 den; ///< Denominator
+} MppFrameRational;
+
+typedef struct MppFrameMasteringDisplayMetadata {
+    RK_U16 display_primaries[3][2];
+    RK_U16 white_point[2];
+    RK_U32 max_luminance;
+    RK_U32 min_luminance;
+} MppFrameMasteringDisplayMetadata;
+
+typedef struct MppFrameContentLightMetadata {
+    RK_U16 MaxCLL;
+    RK_U16 MaxFALL;
+} MppFrameContentLightMetadata;
 
 typedef enum {
     MPP_FRAME_ERR_UNKNOW           = 0x0001,
@@ -212,6 +280,30 @@ MppFrame mpp_frame_get_next(MppFrame frame);
 
 /*
  * normal parameter
+ *
+ *    offset_x
+ *   <-------->
+ *
+ *   <---------------+      hor_stride      +--------------->
+ *
+ *   +------------------------------------------------------+   ^   ^
+ *   |                                                      |   |   |
+ *   |                                                      |   |   | offset_y
+ *   |                                                      |   |   |
+ *   |        +--------------------------------+  ^         |   |   v
+ *   |        |                                |  |         |   |
+ *   |        |                                |  +         |   +
+ *   |        |                                |            |
+ *   |        |        valid data area         | height     | ver_stride
+ *   |        |                                |            |
+ *   |        |                                |  +         |   +
+ *   |        |                                |  |         |   |
+ *   |        +--------------------------------+  v         |   |
+ *   |                                                      |   |
+ *   |        <----------+   width   +--------->            |   |
+ *   |                                                      |   |
+ *   +------------------------------------------------------+   v
+ *
  */
 RK_U32  mpp_frame_get_width(const MppFrame frame);
 void    mpp_frame_set_width(MppFrame frame, RK_U32 width);
@@ -221,6 +313,13 @@ RK_U32  mpp_frame_get_hor_stride(const MppFrame frame);
 void    mpp_frame_set_hor_stride(MppFrame frame, RK_U32 hor_stride);
 RK_U32  mpp_frame_get_ver_stride(const MppFrame frame);
 void    mpp_frame_set_ver_stride(MppFrame frame, RK_U32 ver_stride);
+void    mpp_frame_set_hor_stride_pixel(MppFrame frame, RK_U32 hor_stride_pixel);
+RK_U32  mpp_frame_get_hor_stride_pixel(const MppFrame frame);
+
+RK_U32  mpp_frame_get_offset_x(const MppFrame frame);
+void    mpp_frame_set_offset_x(MppFrame frame, RK_U32 offset_x);
+RK_U32  mpp_frame_get_offset_y(const MppFrame frame);
+void    mpp_frame_set_offset_y(MppFrame frame, RK_U32 offset_y);
 RK_U32  mpp_frame_get_mode(const MppFrame frame);
 void    mpp_frame_set_mode(MppFrame frame, RK_U32 mode);
 RK_U32  mpp_frame_get_discard(const MppFrame frame);
@@ -252,6 +351,13 @@ MppBuffer mpp_frame_get_buffer(const MppFrame frame);
 void    mpp_frame_set_buffer(MppFrame frame, MppBuffer buffer);
 
 /*
+ * meta data parameter
+ */
+RK_S32  mpp_frame_has_meta(const MppFrame frame);
+MppMeta mpp_frame_get_meta(const MppFrame frame);
+void    mpp_frame_set_meta(MppFrame frame, MppMeta meta);
+
+/*
  * color related parameter
  */
 MppFrameColorRange mpp_frame_get_color_range(const MppFrame frame);
@@ -266,7 +372,12 @@ MppFrameChromaLocation mpp_frame_get_chroma_location(const MppFrame frame);
 void    mpp_frame_set_chroma_location(MppFrame frame, MppFrameChromaLocation chroma_location);
 MppFrameFormat mpp_frame_get_fmt(MppFrame frame);
 void    mpp_frame_set_fmt(MppFrame frame, MppFrameFormat fmt);
-
+MppFrameRational mpp_frame_get_sar(const MppFrame frame);
+void    mpp_frame_set_sar(MppFrame frame, MppFrameRational sar);
+MppFrameMasteringDisplayMetadata mpp_frame_get_mastering_display(const MppFrame frame);
+void    mpp_frame_set_mastering_display(MppFrame frame, MppFrameMasteringDisplayMetadata mastering_display);
+MppFrameContentLightMetadata mpp_frame_get_content_light(const MppFrame frame);
+void    mpp_frame_set_content_light(MppFrame frame, MppFrameContentLightMetadata content_light);
 
 /*
  * HDR parameter

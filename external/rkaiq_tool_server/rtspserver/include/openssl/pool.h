@@ -23,13 +23,11 @@
 extern "C" {
 #endif
 
-
 // Buffers and buffer pools.
 //
 // |CRYPTO_BUFFER|s are simply reference-counted blobs. A |CRYPTO_BUFFER_POOL|
 // is an intern table for |CRYPTO_BUFFER|s. This allows for a single copy of a
 // given blob to be kept in memory and referenced from multiple places.
-
 
 DEFINE_STACK_OF(CRYPTO_BUFFER)
 
@@ -38,15 +36,14 @@ DEFINE_STACK_OF(CRYPTO_BUFFER)
 OPENSSL_EXPORT CRYPTO_BUFFER_POOL* CRYPTO_BUFFER_POOL_new(void);
 
 // CRYPTO_BUFFER_POOL_free frees |pool|, which must be empty.
-OPENSSL_EXPORT void CRYPTO_BUFFER_POOL_free(CRYPTO_BUFFER_POOL *pool);
+OPENSSL_EXPORT void CRYPTO_BUFFER_POOL_free(CRYPTO_BUFFER_POOL* pool);
 
 // CRYPTO_BUFFER_new returns a |CRYPTO_BUFFER| containing a copy of |data|, or
 // else NULL on error. If |pool| is not NULL then the returned value may be a
 // reference to a previously existing |CRYPTO_BUFFER| that contained the same
 // data. Otherwise, the returned, fresh |CRYPTO_BUFFER| will be added to the
 // pool.
-OPENSSL_EXPORT CRYPTO_BUFFER *CRYPTO_BUFFER_new(const uint8_t *data, size_t len,
-                                                CRYPTO_BUFFER_POOL *pool);
+OPENSSL_EXPORT CRYPTO_BUFFER* CRYPTO_BUFFER_new(const uint8_t* data, size_t len, CRYPTO_BUFFER_POOL* pool);
 
 // CRYPTO_BUFFER_alloc creates an unpooled |CRYPTO_BUFFER| of the given size and
 // writes the underlying data pointer to |*out_data|. It returns NULL on error.
@@ -55,35 +52,32 @@ OPENSSL_EXPORT CRYPTO_BUFFER *CRYPTO_BUFFER_new(const uint8_t *data, size_t len,
 // |out_data| before passing the returned pointer to any other BoringSSL
 // functions. Once initialized, the |CRYPTO_BUFFER| should be treated as
 // immutable.
-OPENSSL_EXPORT CRYPTO_BUFFER *CRYPTO_BUFFER_alloc(uint8_t **out_data,
-                                                  size_t len);
+OPENSSL_EXPORT CRYPTO_BUFFER* CRYPTO_BUFFER_alloc(uint8_t** out_data, size_t len);
 
 // CRYPTO_BUFFER_new_from_CBS acts the same as |CRYPTO_BUFFER_new|.
-OPENSSL_EXPORT CRYPTO_BUFFER *CRYPTO_BUFFER_new_from_CBS(
-    CBS *cbs, CRYPTO_BUFFER_POOL *pool);
+OPENSSL_EXPORT CRYPTO_BUFFER* CRYPTO_BUFFER_new_from_CBS(CBS* cbs, CRYPTO_BUFFER_POOL* pool);
 
 // CRYPTO_BUFFER_free decrements the reference count of |buf|. If there are no
 // other references, or if the only remaining reference is from a pool, then
 // |buf| will be freed.
-OPENSSL_EXPORT void CRYPTO_BUFFER_free(CRYPTO_BUFFER *buf);
+OPENSSL_EXPORT void CRYPTO_BUFFER_free(CRYPTO_BUFFER* buf);
 
 // CRYPTO_BUFFER_up_ref increments the reference count of |buf| and returns
 // one.
-OPENSSL_EXPORT int CRYPTO_BUFFER_up_ref(CRYPTO_BUFFER *buf);
+OPENSSL_EXPORT int CRYPTO_BUFFER_up_ref(CRYPTO_BUFFER* buf);
 
 // CRYPTO_BUFFER_data returns a pointer to the data contained in |buf|.
-OPENSSL_EXPORT const uint8_t *CRYPTO_BUFFER_data(const CRYPTO_BUFFER *buf);
+OPENSSL_EXPORT const uint8_t* CRYPTO_BUFFER_data(const CRYPTO_BUFFER* buf);
 
 // CRYPTO_BUFFER_len returns the length, in bytes, of the data contained in
 // |buf|.
-OPENSSL_EXPORT size_t CRYPTO_BUFFER_len(const CRYPTO_BUFFER *buf);
+OPENSSL_EXPORT size_t CRYPTO_BUFFER_len(const CRYPTO_BUFFER* buf);
 
 // CRYPTO_BUFFER_init_CBS initialises |out| to point at the data from |buf|.
-OPENSSL_EXPORT void CRYPTO_BUFFER_init_CBS(const CRYPTO_BUFFER *buf, CBS *out);
-
+OPENSSL_EXPORT void CRYPTO_BUFFER_init_CBS(const CRYPTO_BUFFER* buf, CBS* out);
 
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 
 extern "C++" {
 
@@ -95,8 +89,8 @@ BORINGSSL_MAKE_UP_REF(CRYPTO_BUFFER, CRYPTO_BUFFER_up_ref)
 
 BSSL_NAMESPACE_END
 
-}  // extern C++
+} // extern C++
 
 #endif
 
-#endif  // OPENSSL_HEADER_POOL_H
+#endif // OPENSSL_HEADER_POOL_H

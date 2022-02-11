@@ -13,14 +13,14 @@
  */
 #undef _ANSI_ARGS_
 #if ((defined(__STDC__) || defined(SABER)) && !defined(NO_PROTOTYPE)) || defined(__cplusplus) || defined(USE_PROTOTYPE)
-#   define _ANSI_ARGS_(x)	x
+    #define _ANSI_ARGS_(x) x
 #else
-#   define _ANSI_ARGS_(x)	()
+    #define _ANSI_ARGS_(x) ()
 #endif
 #ifdef __cplusplus
-#   define EXTERN extern "C"
+    #define EXTERN extern "C"
 #else
-#   define EXTERN extern
+    #define EXTERN extern
 #endif
 
 /* The code from the spec assumes a type "event"; make this a void*: */
@@ -46,13 +46,15 @@ typedef void* packet;
 #define drand48 drand30
 
 /* The code calls "exit()", but we don't want to exit, so make it a noop: */
-#define exit(n) do {} while (0)
+#define exit(n)                                                                                                        \
+    do {                                                                                                               \
+    } while (0)
 
 #ifndef FALSE
-#define FALSE 0
+    #define FALSE 0
 #endif
 #ifndef TRUE
-#define TRUE 1
+    #define TRUE 1
 #endif
 
 /* EXPORTS: */
@@ -63,8 +65,8 @@ EXTERN void OnReceive _ANSI_ARGS_((packet, event, int*, int*, int*, double*, dou
 
 /* IMPORTS: */
 
-EXTERN void Schedule _ANSI_ARGS_((double,event));
-EXTERN void Reschedule _ANSI_ARGS_((double,event));
+EXTERN void Schedule _ANSI_ARGS_((double, event));
+EXTERN void Reschedule _ANSI_ARGS_((double, event));
 EXTERN void SendRTCPReport _ANSI_ARGS_((event));
 EXTERN void SendBYEPacket _ANSI_ARGS_((event));
 EXTERN int TypeOfEvent _ANSI_ARGS_((event));

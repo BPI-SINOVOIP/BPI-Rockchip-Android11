@@ -8,13 +8,7 @@
 #include "H264LiveVideoServerMediaSubsession.h"
 #include "RtspServer.h"
 
-RtspServer::RtspServer() :
-    mEnv(NULL),
-    mSms(NULL),
-    mRtspServer(NULL),
-    mProcThread(NULL),
-    mCamDev(NULL),
-    mEncoder(NULL)
+RtspServer::RtspServer() : mEnv(NULL), mSms(NULL), mRtspServer(NULL), mProcThread(NULL), mCamDev(NULL), mEncoder(NULL)
 {
     ALOGD("RtspServer enter");
 }
@@ -38,7 +32,7 @@ RtspServer::~RtspServer()
     }
 }
 
-bool RtspServer::init(MetaInfo *meta)
+bool RtspServer::init(MetaInfo* meta)
 {
     if (meta == NULL) {
         ALOGE("Failed to get metaData");
@@ -59,11 +53,10 @@ bool RtspServer::init(MetaInfo *meta)
         strcpy(mStreamName, meta->stream_name);
     }
 
-
     return initOther(meta);
 }
 
-bool RtspServer::initOther(MetaInfo *meta)
+bool RtspServer::initOther(MetaInfo* meta)
 {
     mCamDev = new CamCaptureHelper();
     // start CamCaptureHelper.
@@ -85,7 +78,7 @@ bool RtspServer::initOther(MetaInfo *meta)
     encInfo.width = meta->width;
     encInfo.height = meta->height;
     encInfo.format = ENC_INPUT_YUV420_SEMIPLANAR;
-    encInfo.framerate = 30; // 30fps
+    encInfo.framerate = 30;    // 30fps
     encInfo.bitRate = 8000000; // 500k default
     encInfo.IDRInterval = 1;
     encInfo.rc_mode = 1;
@@ -99,7 +92,7 @@ bool RtspServer::initOther(MetaInfo *meta)
     return true;
 }
 
-void RtspServer::onDoGetNextFrame(QMediaBuffer *outBuf)
+void RtspServer::onDoGetNextFrame(QMediaBuffer* outBuf)
 {
     bool ret = true;
     QMediaBuffer camBuf;
@@ -135,8 +128,7 @@ bool RtspServer::start()
     resetDoneFlag();
     mProcThread = new std::thread(&RtspServer::doEventLoop, this);
 
-    mSms = ServerMediaSession::createNew(*mEnv, mStreamName, "test",
-                                         "Session streamed by \"cameraPushTest\"");
+    mSms = ServerMediaSession::createNew(*mEnv, mStreamName, "test", "Session streamed by \"cameraPushTest\"");
     mSms->addSubsession(H264LiveVideoServerMediaSubsession::createNew(*mEnv, True, this));
     mRtspServer->addServerMediaSession(mSms);
 
@@ -184,7 +176,7 @@ void RtspServer::doEventLoop()
 
 static RtspServer _g_rtsp_server;
 
-int init_rtsp(const char *video_dev, int width, int height)
+int init_rtsp(const char* video_dev, int width, int height)
 {
     RtspServer::MetaInfo info;
     info.width = width;

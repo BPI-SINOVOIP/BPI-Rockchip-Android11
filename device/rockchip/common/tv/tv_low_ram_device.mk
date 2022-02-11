@@ -14,9 +14,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.madvise-random=true \
     ro.lmk.medium=700 \
     dalvik.vm.heapgrowthlimit=128m \
-    dalvik.vm.heapsize=256m
+    dalvik.vm.heapsize=256m \
+    persist.proc_compact.enable=true \
+    persist.proc_compact.app_enable=false \
+    persist.proc_compact.first_pc_delay_mins=1 \
+    persist.proc_compact.periodic_pc_delay_mins=3 \
+    dalvik.vm.usejit=false \
+    ro.config.per_app_memcg=false
 PRODUCT_COPY_FILES += \
-    device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml
+    device/rockchip/common/lowmem_package_filter.xml:system/etc/lowmem_package_filter.xml \
+    device/rockchip/common/tv/init.enableswap.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.enableswap.rc \
+    device/rockchip/common/tv/fstab.enableswap:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.enableswap
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
 PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
@@ -25,4 +33,5 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD :=false
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 PRODUCT_DISABLE_SCUDO := true
 TARGET_VNDK_USE_CORE_VARIANT := true
+PRODUCT_HAVE_RKAPPS := false
 endif

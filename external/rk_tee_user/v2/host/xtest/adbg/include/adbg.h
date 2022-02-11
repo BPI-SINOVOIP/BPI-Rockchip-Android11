@@ -1,14 +1,6 @@
+/* SPDX-License-Identifier: GPL-2.0 */
 /*
  * Copyright (c) 2014, STMicroelectronics International N.V.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
  */
 
 #ifndef ADBG_H
@@ -62,9 +54,16 @@ typedef struct adbg_suite_def {
 			.Title_p = Title, \
 			.Run_fp = Run, \
 		}; \
+		struct adbg_case_def_head *ch = &(ADBG_Suite_ ## Suite).cases; \
+		struct adbg_case_def *cd = NULL; \
 		\
-		TAILQ_INSERT_TAIL(&(ADBG_Suite_ ## Suite).cases, \
-				 &case_def, link); \
+		TAILQ_FOREACH(cd, ch, link) \
+			if (strcmp(case_def.TestID_p, cd->TestID_p) < 0) \
+				break; \
+		if (cd) \
+			TAILQ_INSERT_BEFORE(cd, &case_def, link); \
+		else \
+			TAILQ_INSERT_TAIL(ch, &case_def, link); \
 	}
 
 /*

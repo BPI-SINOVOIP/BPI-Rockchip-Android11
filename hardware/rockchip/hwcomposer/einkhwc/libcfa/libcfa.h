@@ -24,13 +24,16 @@ extern "C" {
 #include <inttypes.h>
 namespace android {
 /**
+ *
  * Description : for short stride
- *  WIDTH : image width (1072)
- *  HEIGHT : image height (1448)
- *	color_buffer : input image RGB8888/888 raw data
+ *  WIDTH : image width 
+ *  HEIGHT : image height 
+ *	color_buffer : input image RGB8888 raw data
  *  gray_buffer : output data
+ *
  */
-void image_to_cfa_grayscale(int WIDTH, int HEIGHT,unsigned char *color_buffer, unsigned char *gray_buffer);
+ //7寸彩屏WIDTH = 1680, HEIGHT = 1264, color_buffer大小為(WIDTH*HEIGHT*4) bytes, gray_buffer大小為(WIDTH*HEIGHT) bytes.
+void image_to_cfa_grayscale_gen2_ARGBB8888(int WIDTH, int HEIGHT,unsigned char *color_buffer, unsigned char *gray_buffer);
 }
 #if defined(__cplusplus)
 }

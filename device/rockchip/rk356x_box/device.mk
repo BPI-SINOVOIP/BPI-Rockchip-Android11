@@ -61,7 +61,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.ota.host = www.rockchip.com:2300 \
+			      ro.product.ota.host = 192.168.1.1:8888 \
     ro.vendor.sdkversion = $(CURRENT_SDK_VERSION) \
     vendor.gralloc.disable_afbc = 0
 
@@ -94,7 +94,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/etc/camera/hardware/rockchip/camera/etc/camera/camera3_profiles_rk356x.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/camera3_profiles.xml \
 	$(call find-copy-subdir-files,*,$(CAMERA_ETC_PATH)/firmware,$(TARGET_COPY_OUT_VENDOR)/firmware) \
 	$(call find-copy-subdir-files,*,$(CAMERA_ETC_PATH)/camera,$(TARGET_COPY_OUT_VENDOR)/etc/camera) \
-	$(call find-copy-subdir-files,*,$(CAMERA_ETC_PATH)/tools,$(TARGET_COPY_OUT_VENDOR)/bin) \
 	$(call find-copy-subdir-files,*,$(IQ_FILES_PATH)/,$(TARGET_COPY_OUT_VENDOR)/etc/camera/rkisp2/) \
 	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/etc/camera/external/camera_engine_rkaiq/iqfiles,$(TARGET_COPY_OUT_VENDOR)/etc/camera/rkisp2/)
 endif

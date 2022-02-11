@@ -1,28 +1,7 @@
+// SPDX-License-Identifier: BSD-2-Clause
 /*
  * Copyright (c) 2014, STMicroelectronics International N.V.
  * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include <tee_internal_api.h>
@@ -362,8 +341,7 @@ static TEE_Result unpack_attrs(const uint8_t *buf, size_t blen,
 			uintptr_t p;
 
 			a[n].attributeID = ap[n].id;
-#define TEE_ATTR_BIT_VALUE		  (1 << 29)
-			if (ap[n].id & TEE_ATTR_BIT_VALUE) {
+			if (ap[n].id & TEE_ATTR_FLAG_VALUE) {
 				a[n].content.value.a = ap[n].a;
 				a[n].content.value.b = ap[n].b;
 				continue;
@@ -579,11 +557,19 @@ TEE_Result ta_entry_derive_key(uint32_t param_type, TEE_Param params[4])
 TEE_Result ta_entry_random_number_generate(uint32_t param_type,
 					   TEE_Param params[4])
 {
+	void *buf = NULL;
+
 	ASSERT_PARAM_TYPE(TEE_PARAM_TYPES
 			  (TEE_PARAM_TYPE_MEMREF_OUTPUT, TEE_PARAM_TYPE_NONE,
 			   TEE_PARAM_TYPE_NONE, TEE_PARAM_TYPE_NONE));
 
-	TEE_GenerateRandom(params[0].memref.buffer, params[0].memref.size);
+	buf = TEE_Malloc(params[0].memref.size, 0);
+	if (!buf)
+		return TEE_ERROR_OUT_OF_MEMORY;
+
+	TEE_GenerateRandom(buf, params[0].memref.size);
+	TEE_MemMove(params[0].memref.buffer, buf, params[0].memref.size);
+	TEE_Free(buf);
 	return TEE_SUCCESS;
 }
 
@@ -630,7 +616,9 @@ TEE_Result ta_entry_ae_update(uint32_t param_type, TEE_Param params[4])
 TEE_Result ta_entry_ae_encrypt_final(uint32_t param_type, TEE_Param params[4])
 {
 	TEE_OperationHandle op = VAL2HANDLE(params[0].value.a);
-	TEE_Result res = TEE_ERROR_GENERIC;
+	TEE_Result res = TEE_ERROR_OUT_OF_MEMORY;
+	void *b2 = NULL;
+	void *b3 = NULL;
 
 	ASSERT_PARAM_TYPE(TEE_PARAM_TYPES
 			  (TEE_PARAM_TYPE_VALUE_INPUT,
@@ -638,16 +626,31 @@ TEE_Result ta_entry_ae_encrypt_final(uint32_t param_type, TEE_Param params[4])
 			   TEE_PARAM_TYPE_MEMREF_OUTPUT,
 			   TEE_PARAM_TYPE_MEMREF_OUTPUT));
 
-	res = TEE_AEEncryptFinal(op,
-			params[1].memref.buffer, params[1].memref.size,
-			params[2].memref.buffer, &params[2].memref.size,
-			params[3].memref.buffer, &params[3].memref.size);
+	b2 = TEE_Malloc(params[2].memref.size, 0);
+	b3 = TEE_Malloc(params[3].memref.size, 0);
+	if (!b2 || !b3)
+		goto out;
+
+	res = TEE_AEEncryptFinal(op, params[1].memref.buffer,
+				 params[1].memref.size, b2,
+				 &params[2].memref.size, b3,
+				 &params[3].memref.size);
+	if (!res) {
+		TEE_MemMove(params[2].memref.buffer, b2, params[2].memref.size);
+		TEE_MemMove(params[3].memref.buffer, b3, params[3].memref.size);
+	}
+out:
+	TEE_Free(b2);
+	TEE_Free(b3);
 	return res;
 }
 
 TEE_Result ta_entry_ae_decrypt_final(uint32_t param_type, TEE_Param params[4])
 {
 	TEE_OperationHandle op = VAL2HANDLE(params[0].value.a);
+	TEE_Result res = TEE_ERROR_OUT_OF_MEMORY;
+	void *b2 = NULL;
+	void *b3 = NULL;
 
 	ASSERT_PARAM_TYPE(TEE_PARAM_TYPES
 			  (TEE_PARAM_TYPE_VALUE_INPUT,
@@ -655,10 +658,23 @@ TEE_Result ta_entry_ae_decrypt_final(uint32_t param_type, TEE_Param params[4])
 			   TEE_PARAM_TYPE_MEMREF_OUTPUT,
 			   TEE_PARAM_TYPE_MEMREF_INPUT));
 
-	return TEE_AEDecryptFinal(op,
-			params[1].memref.buffer, params[1].memref.size,
-			params[2].memref.buffer, &params[2].memref.size,
-			params[3].memref.buffer, params[3].memref.size);
+	b2 = TEE_Malloc(params[2].memref.size, 0);
+	b3 = TEE_Malloc(params[3].memref.size, 0);
+	if (!b2 || !b3)
+		goto out;
+
+	TEE_MemMove(b3, params[3].memref.buffer, params[3].memref.size);
+	res = TEE_AEDecryptFinal(op, params[1].memref.buffer,
+				 params[1].memref.size, b2,
+				 &params[2].memref.size, b3,
+				 params[3].memref.size);
+	if (!res)
+		TEE_MemMove(params[2].memref.buffer, b2, params[2].memref.size);
+out:
+	TEE_Free(b2);
+	TEE_Free(b3);
+
+	return res;
 }
 
 TEE_Result ta_entry_get_object_buffer_attribute(uint32_t param_type,
@@ -687,4 +703,18 @@ TEE_Result ta_entry_get_object_value_attribute(uint32_t param_type,
 
 	return TEE_GetObjectValueAttribute(o, params[0].value.b,
 				   &params[1].value.a, &params[1].value.b);
+}
+
+TEE_Result ta_entry_is_algo_supported(uint32_t param_type,
+				      TEE_Param params[TEE_NUM_PARAMS])
+{
+	ASSERT_PARAM_TYPE(TEE_PARAM_TYPES
+			  (TEE_PARAM_TYPE_VALUE_INPUT,
+			   TEE_PARAM_TYPE_VALUE_OUTPUT, TEE_PARAM_TYPE_NONE,
+			   TEE_PARAM_TYPE_NONE));
+
+	params[1].value.a = TEE_IsAlgorithmSupported(params[0].value.a,
+						     params[0].value.b);
+
+	return TEE_SUCCESS;
 }

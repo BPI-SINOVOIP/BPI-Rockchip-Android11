@@ -6,26 +6,16 @@
 #ifndef _OS_TEST_LIB_H_
 #define _OS_TEST_LIB_H_
 
-#if defined(CFG_TA_DYNLINK)
+#include <tee_api_types.h>
 
 int os_test_shlib_add(int a, int b);
 void os_test_shlib_panic(void);
 
-#else
+#if defined(WITH_TLS_TESTS)
+extern __thread int os_test_shlib_tls_a;
+extern __thread int os_test_shlib_tls_b;
+#endif
 
-#include <compiler.h>
-#include <tee_internal_api.h>
-
-static inline int os_test_shlib_add(int a __unused, int b __unused)
-{
-	TEE_Panic(0);
-	return 0;
-}
-
-static inline void os_test_shlib_panic(void)
-{
-}
-
-#endif /* CFG_TA_DYNLINK */
+TEE_Result os_test_shlib_cxx_ctor(void);
 
 #endif /* _OS_TEST_LIB_H_ */

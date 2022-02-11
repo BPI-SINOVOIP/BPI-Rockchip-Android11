@@ -128,7 +128,7 @@ RawStreamProcUnit::set_working_mode(int mode)
     default:
         _mipi_dev_max = 1;
     }
-    LOGD("%s: working_mode:0x%x, _mipi_dev_max=%d\n", _working_mode, _mipi_dev_max);
+    LOGD("working_mode:0x%x, _mipi_dev_max=%d\n", _working_mode, _mipi_dev_max);
 }
 
 void

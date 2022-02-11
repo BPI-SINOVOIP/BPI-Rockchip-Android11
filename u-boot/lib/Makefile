@@ -48,6 +48,7 @@ obj-y += list_sort.o
 obj-$(CONFIG_OPTEE_CLIENT) += optee_clientApi/
 endif
 
+obj-$(CONFIG_XBC) += libxbc/
 obj-$(CONFIG_$(SPL_TPL_)AVB_LIBAVB) += avb/libavb/
 obj-$(CONFIG_$(SPL_TPL_)AVB_LIBAVB_ATX) += avb/libavb_atx/
 obj-$(CONFIG_$(SPL_TPL_)AVB_LIBAVB_USER) += avb/libavb_user/
@@ -96,7 +97,10 @@ obj-y += time.o
 obj-y += hexdump.o
 obj-$(CONFIG_TRACE) += trace.o
 obj-$(CONFIG_LIB_UUID) += uuid.o
+
+ifneq ($(CONFIG_LIB_HW_RAND)$(CONFIG_RNG_ROCKCHIP),yy)
 obj-$(CONFIG_LIB_RAND) += rand.o
+endif
 
 ifdef CONFIG_SPL_BUILD
 ifdef CONFIG_TPL_BUILD

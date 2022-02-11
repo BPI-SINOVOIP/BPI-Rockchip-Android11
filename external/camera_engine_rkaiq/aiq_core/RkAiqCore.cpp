@@ -612,6 +612,9 @@ RkAiqCore::analyzeInternal(enum rk_aiq_core_analyze_type_e type)
     if (mAlogsComSharedParams.init) {
          // run algos without stats to generate
          // initial params
+        CalibDb_Aec_ParaV2_t* calibv2_ae_calib =
+            (CalibDb_Aec_ParaV2_t*)(CALIBDBV2_GET_MODULE_PTR((void*)(mAlogsComSharedParams.calibv2), ae_calib));
+
         auto mapIter = mAlogsGroupSharedParamsMap.begin();
         while (mapIter != mAlogsGroupSharedParamsMap.end()) {
             RkAiqAlgosGroupShared_t* &shared = mapIter->second;
@@ -630,6 +633,17 @@ RkAiqCore::analyzeInternal(enum rk_aiq_core_analyze_type_e type)
             shared->ispStats->af_stats_valid = false;
             shared->ispStats->atmo_stats_valid = false;
             shared->aecStatsBuf = nullptr;
+
+            shared->curExp.LinearExp.exp_real_params.analog_gain = \
+                calibv2_ae_calib->LinearAeCtrl.InitExp.InitGainValue;
+            shared->curExp.LinearExp.exp_real_params.integration_time = \
+                calibv2_ae_calib->LinearAeCtrl.InitExp.InitTimeValue;
+            for (int32_t i = 0; i < 3; i++) {
+                shared->curExp.HdrExp[i].exp_real_params.analog_gain = \
+                    calibv2_ae_calib->HdrAeCtrl.InitExp.InitGainValue[i];
+                shared->curExp.HdrExp[i].exp_real_params.integration_time = \
+                    calibv2_ae_calib->HdrAeCtrl.InitExp.InitTimeValue[i];
+            }
 
             mapIter++;
         }
@@ -4694,7 +4708,7 @@ void RkAiqCore::onThumbnailsResult(const rkaiq_thumbnails_t& thumbnail) {
                   thumbnail.config.stream_type, thumbnail.config.width_intfactor,
                   thumbnail.config.height_intfactor, thumbnail.buffer->info.width,
                   thumbnail.buffer->info.height);
-#if 1
+#if 0
     thumbnail.buffer->ref(thumbnail.buffer);
     if (thumbnail.frame_id == 1) {
         char* ptr = reinterpret_cast<char*>(thumbnail.buffer->map(thumbnail.buffer));

@@ -47,50 +47,6 @@ int RkRgaCompatibleFormat(int format) {
     return format;
 }
 
-int RkRgaGetRgaFormat(int format) {
-    /* Because the format of librga is the value of driver format << 8 . */
-#ifdef ANDROID
-    switch (format & 0xFF) {
-        case HAL_PIXEL_FORMAT_BPP_1:
-            return RK_FORMAT_BPP1;
-        case HAL_PIXEL_FORMAT_BPP_2:
-            return RK_FORMAT_BPP2;
-        case HAL_PIXEL_FORMAT_BPP_4:
-            return RK_FORMAT_BPP4;
-        case HAL_PIXEL_FORMAT_BPP_8:
-            return RK_FORMAT_BPP8;
-        case HAL_PIXEL_FORMAT_RGB_565:
-            return RK_FORMAT_RGB_565;
-        case HAL_PIXEL_FORMAT_RGB_888:
-            return RK_FORMAT_RGB_888;
-        case HAL_PIXEL_FORMAT_RGBA_8888:
-            return RK_FORMAT_RGBA_8888;
-        case HAL_PIXEL_FORMAT_RGBX_8888:
-            return RK_FORMAT_RGBX_8888;
-        case HAL_PIXEL_FORMAT_BGRA_8888:
-            return RK_FORMAT_BGRA_8888;
-        case HAL_PIXEL_FORMAT_YCrCb_420_SP:
-            return RK_FORMAT_YCrCb_420_SP;
-        case HAL_PIXEL_FORMAT_YCrCb_NV12:
-            return RK_FORMAT_YCbCr_420_SP;
-        case HAL_PIXEL_FORMAT_YCrCb_NV12_VIDEO:
-            return RK_FORMAT_YCbCr_420_SP;
-        case HAL_PIXEL_FORMAT_YCrCb_NV12_10:
-            return RK_FORMAT_YCbCr_420_SP_10B; //0x20
-    }
-#endif
-    if (format & 0xFF00 || format == 0)
-        return format;
-    else {
-        format = RkRgaCompatibleFormat(format);
-        if (format & 0xFF00 || format == 0)
-            return format;
-    }
-
-    ALOGE("%x is unsupport format now,pilese fix.", format);
-    return -1;
-}
-
 #ifdef ANDROID
 int RkRgaGetRgaFormatFromAndroid(int format) {
     switch (format) {
@@ -119,13 +75,34 @@ int RkRgaGetRgaFormatFromAndroid(int format) {
         case HAL_PIXEL_FORMAT_YCrCb_NV12_VIDEO:
             return RK_FORMAT_YCbCr_420_SP;
         case HAL_PIXEL_FORMAT_YCrCb_NV12_10:
-            return RK_FORMAT_YCbCr_420_SP_10B;//0x20
+            return RK_FORMAT_YCbCr_420_SP_10B; //0x20
         default:
             ALOGE("%x is unsupport format now,pilese fix.", format);
             return -1;
     }
 }
 #endif
+
+int RkRgaGetRgaFormat(int format) {
+    /* Because the format of librga is the value of driver format << 8 . */
+#ifdef ANDROID
+    if (format & 0xFF) {
+        format = RkRgaGetRgaFormatFromAndroid(format);
+        if (format < 0)
+            return -1;
+    }
+#endif
+    if (format & 0xFF00 || format == 0)
+        return format;
+    else {
+        format = RkRgaCompatibleFormat(format);
+        if (format & 0xFF00 || format == 0)
+            return format;
+    }
+
+    ALOGE("%x is unsupport format now,pilese fix.", format);
+    return -1;
+}
 
 uint32_t bytesPerPixel(int format) {
     if (!(format & 0xFF00 || format == 0)) {
@@ -137,6 +114,10 @@ uint32_t bytesPerPixel(int format) {
         case RK_FORMAT_RGBX_8888:
         case RK_FORMAT_BGRA_8888:
         case RK_FORMAT_BGRX_8888:
+        case RK_FORMAT_ARGB_8888:
+        case RK_FORMAT_XRGB_8888:
+        case RK_FORMAT_ABGR_8888:
+        case RK_FORMAT_XBGR_8888:
             return 4;
         case RK_FORMAT_RGB_888:
         case RK_FORMAT_BGR_888:
@@ -147,6 +128,10 @@ uint32_t bytesPerPixel(int format) {
         case RK_FORMAT_BGR_565:
         case RK_FORMAT_BGRA_5551:
         case RK_FORMAT_BGRA_4444:
+        case RK_FORMAT_ARGB_5551:
+        case RK_FORMAT_ARGB_4444:
+        case RK_FORMAT_ABGR_5551:
+        case RK_FORMAT_ABGR_4444:
             return 2;
         case RK_FORMAT_BPP1:
         case RK_FORMAT_BPP2:
@@ -588,6 +573,15 @@ bool NormalRgaIsRgbFormat(int format) {
         case RK_FORMAT_BGRA_4444:
         case RK_FORMAT_BGR_888:
         case RK_FORMAT_BGR_565:
+        /*ARGB*/
+        case RK_FORMAT_ARGB_8888:
+        case RK_FORMAT_XRGB_8888:
+        case RK_FORMAT_ARGB_5551:
+        case RK_FORMAT_ARGB_4444:
+        case RK_FORMAT_ABGR_8888:
+        case RK_FORMAT_XBGR_8888:
+        case RK_FORMAT_ABGR_5551:
+        case RK_FORMAT_ABGR_4444:
             ret = true;
             break;
         default:
@@ -607,6 +601,12 @@ bool NormalRgaFormatHasAlpha(int format) {
         case RK_FORMAT_BGRA_8888:
         case RK_FORMAT_BGRA_5551:
         case RK_FORMAT_BGRA_4444:
+        case RK_FORMAT_ARGB_8888:
+        case RK_FORMAT_ARGB_5551:
+        case RK_FORMAT_ARGB_4444:
+        case RK_FORMAT_ABGR_8888:
+        case RK_FORMAT_ABGR_5551:
+        case RK_FORMAT_ABGR_4444:
             ret = true;
             break;
         default:

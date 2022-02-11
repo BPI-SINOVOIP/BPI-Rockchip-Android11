@@ -39,18 +39,34 @@ std::tuple<int, std::vector<DrmCompositionPlane>> Planner::TryHwcPolicy(
             return std::make_tuple(ret, std::vector<DrmCompositionPlane>());
           }
           break;
-        // After E.C.O.
-        case 0x3566a:
-        case 0x3568a:
+        // // After E.C.O.
+        // case 0x3566a:
+        // case 0x3568a:
+        //   ret = i->TryHwcPolicy(&composition, layers, crtc, gles_policy);
+        //   if (ret) {
+        //     ALOGE("Failed provision stage with ret %d", ret);
+        //     return std::make_tuple(ret, std::vector<DrmCompositionPlane>());
+        //   }
+        //   break;
+        // case 0x3399:
+        //   ret = i->TryHwcPolicy(&composition, layers, crtc, gles_policy);
+        //   if (ret) {
+        //     ALOGE("Failed provision stage with ret %d", ret);
+        //     return std::make_tuple(ret, std::vector<DrmCompositionPlane>());
+        //   }
+        // case 0x3588:
+        //   ret = i->TryHwcPolicy(&composition, layers, crtc, gles_policy);
+        //   if (ret) {
+        //     ALOGE("Failed provision stage with ret %d", ret);
+        //     return std::make_tuple(ret, std::vector<DrmCompositionPlane>());
+        //   }
+        //   break;
+        default:
           ret = i->TryHwcPolicy(&composition, layers, crtc, gles_policy);
           if (ret) {
             ALOGE("Failed provision stage with ret %d", ret);
             return std::make_tuple(ret, std::vector<DrmCompositionPlane>());
           }
-          break;
-        default:
-            ALOGE("Failed provision stage with ret %d", ret);
-            return std::make_tuple(ret, std::vector<DrmCompositionPlane>());
           break;
       }
     }

@@ -22,7 +22,7 @@
 #include <list>
 #include "v4l2_device.h"
 #include "rk_aiq_pool.h"
-#include "linux/rk-camera-module.h"
+#include "rk-camera-module.h"
 
 struct rk_cam_vcm_tim {
     struct timeval vcm_start_t;

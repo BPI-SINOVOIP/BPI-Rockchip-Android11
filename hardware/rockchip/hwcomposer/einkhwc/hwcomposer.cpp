@@ -140,10 +140,8 @@ enum panel_refresh_mode {
     EPD_RESUME            = 19,
     EPD_POWER_OFF        = 20,
     EPD_FORCE_FULL       = 21,
-
-//test mode, no use
-    EPD_PART_EINK        = 22,
-    EPD_FULL_EINK        = 23,
+    EPD_AUTO_DU          = 22,
+    EPD_AUTO_DU4           = 23,
 };
 
 /*
@@ -161,6 +159,8 @@ struct ebc_buf_info {
     int win_y2;
     int width_mm;
     int height_mm;
+    int needpic; //16 or 32
+    char tid_name[16];
 };
 
 struct win_coordinate{
@@ -656,12 +656,10 @@ int gray256_to_gray16(char *gray256_addr,int *gray16_buffer,int h,int w,int vir_
   return 0;
 }
 
-int logo_gray256_to_gray16(char *gray256_addr,int *gray16_buffer,int h,int w,int vir_w){
-  ATRACE_CALL();
-
+int logo_gray256_to_gray16(char *gray256_addr,char *gray16_buffer, int h,int w,int vir_w)
+{
   char src_data;
   char  g0,g3;
-  char *temp_dst = (char *)gray16_buffer;
 
   for(int i = 0; i < h;i++){
       for(int j = 0; j< w / 2;j++){
@@ -672,10 +670,9 @@ int logo_gray256_to_gray16(char *gray256_addr,int *gray16_buffer,int h,int w,int
           src_data = *gray256_addr;
           g3 =  src_data&0xf0;
           gray256_addr++;
-          *temp_dst = g0|g3;
-          temp_dst++;
+          *gray16_buffer = g0|g3;
+          gray16_buffer++;
       }
-      //gray256_addr += (vir_w - w);
   }
   return 0;
 }
@@ -1752,7 +1749,7 @@ void Rgb888_to_color_eink2(char *dst, int *src, int fb_height, int fb_width, int
 		src_r1 = src;
 		src_r2 = src + vir_width;
 		int row_mod3 = i % 3;
-		if (row_mod3 == 0) {
+		if (row_mod3 == 1) {
 			for (j = 0; j < w_div6; j++) {
 				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
 				*dst_r1++ = r | (b<<4);
@@ -1763,20 +1760,20 @@ void Rgb888_to_color_eink2(char *dst, int *src, int fb_height, int fb_width, int
 				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
 				*dst_r1++ = b | (g<<4);
 				*dst_r2++ = r | (b<<4);
-			}
-		} else if (row_mod3 == 1) {
-			for (j = 0; j < w_div6; j++) {
-				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
-				*dst_r1++ = b | (g<<4);
-				*dst_r2++ = r | (b<<4);
-				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
-				*dst_r1++ = r | (b<<4);
-				*dst_r2++ = g | (r<<4);
-				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
-				*dst_r1++ = g | (r<<4);
-				*dst_r2++ = b | (g<<4);
 			}
 		} else if (row_mod3 == 2) {
+			for (j = 0; j < w_div6; j++) {
+				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
+				*dst_r1++ = b | (g<<4);
+				*dst_r2++ = r | (b<<4);
+				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
+				*dst_r1++ = r | (b<<4);
+				*dst_r2++ = g | (r<<4);
+				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
+				*dst_r1++ = g | (r<<4);
+				*dst_r2++ = b | (g<<4);
+			}
+		} else if (row_mod3 == 0) {
 			for (j = 0; j < w_div6; j++) {
 				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
 				*dst_r1++ = g | (r<<4);
@@ -2073,6 +2070,7 @@ int hwc_post_epd(int *buffer, Rect rect, int mode){
 
   struct ebc_buf_info_t buf_info;
 
+  snprintf(buf_info.tid_name, 16, "hwc_logo");
   if(ioctl(ebc_fd, EBC_GET_BUFFER,&buf_info)!=0)
   {
      ALOGE("EBC_GET_BUFFER failed\n");
@@ -2084,6 +2082,7 @@ int hwc_post_epd(int *buffer, Rect rect, int mode){
   buf_info.win_y1 = rect.top;
   buf_info.win_y2 = rect.bottom;
   buf_info.epd_mode = mode;
+  buf_info.needpic = 16;
 
 
   char value[PROPERTY_VALUE_MAX];
@@ -2219,12 +2218,12 @@ int Rgb888ToGray16ByRga(char *dst_buf,int *src_buf,int  fb_height, int fb_width,
     src.rotation = 0;
     dst.dither.enable = 0;
     dst.dither.mode = 0;
+    dst.color_space_mode = 0x1 << 2;
 
-    dst.dither.lut0_l = 0x0000;
+    dst.dither.lut0_l = 0x3210;
     dst.dither.lut0_h = 0x7654;
     dst.dither.lut1_l = 0xba98;
-    dst.dither.lut1_h = 0xffcc;
-
+    dst.dither.lut1_h = 0xfedc;
     ret = rkRga.RkRgaBlit(&src, &dst, NULL);
     if(ret) {
         ALOGE("rgaRotateScale error : src[x=%d,y=%d,w=%d,h=%d,ws=%d,hs=%d,format=0x%x],dst[x=%d,y=%d,w=%d,h=%d,ws=%d,hs=%d,format=0x%x]",
@@ -2242,10 +2241,11 @@ int hwc_post_epd_logo(const char src_path[]) {
 
     if (ebc_buf_info.panel_color == 1) {
         image_new_addr = (char *)malloc(ebc_buf_info.width * ebc_buf_info.height * 4);
-        image_addr = (char *)malloc(ebc_buf_info.width * ebc_buf_info.height * 4);
+        image_addr = (char *)malloc(ebc_buf_info.width * ebc_buf_info.height);
         drawLogoPic(src_path, (void *)image_new_addr, ebc_buf_info.width, ebc_buf_info.height);
-     free(image_new_addr);
-     image_new_addr = NULL;
+        image_to_cfa_grayscale_gen2_ARGBB8888(ebc_buf_info.width, ebc_buf_info.height, (unsigned char *)image_new_addr, (unsigned char *)image_addr);
+        free(image_new_addr);
+        image_new_addr = NULL;
     }
     else if (ebc_buf_info.panel_color == 2) {
         image_addr = (char *)malloc(ebc_buf_info.width * ebc_buf_info.height * 4);
@@ -2269,7 +2269,9 @@ int hwc_post_epd_logo(const char src_path[]) {
         hwc_post_epd(gray16_buffer_bak, rect, EPD_PART_GC16);
     }
 
-    if (ebc_buf_info.panel_color == 2)
+    if (ebc_buf_info.panel_color == 1)
+        logo_gray256_to_gray16((char *)image_addr, (char *)gray16_buffer, ebc_buf_info.height, ebc_buf_info.width, ebc_buf_info.width);
+    else if (ebc_buf_info.panel_color == 2)
         Rgb888_to_color_eink2((char *)gray16_buffer, (int *)image_addr, ebc_buf_info.height, ebc_buf_info.width, ebc_buf_info.width);
     else
         Rgb888ToGray16ByRga((char *)gray16_buffer, (int *)image_addr, ebc_buf_info.height, ebc_buf_info.width, ebc_buf_info.width);
@@ -2291,8 +2293,21 @@ int hwc_post_epd_logo(const char src_path[]) {
 
     return 0;
 }
+
 static int hwc_adajust_sf_vsync(int mode){
   static int last_mode = EPD_NULL;
+  static int resume_count = 5;
+
+  if ((last_mode == EPD_SUSPEND) && (mode != EPD_RESUME))
+    return 0;
+
+  if ((last_mode == EPD_RESUME) && (mode == EPD_SUSPEND))
+    resume_count = 0;
+
+  if ((last_mode == EPD_RESUME) && (resume_count > 0)) {
+    resume_count--;
+    return 0;
+  }
 
   if(mode == last_mode)
     return 0;
@@ -2308,6 +2323,13 @@ static int hwc_adajust_sf_vsync(int mode){
     case EPD_DU:
     case EPD_DU4:
       strcpy(refresh_skip_count, "5");
+      break;
+    case EPD_RESUME:
+      resume_count = 5;
+      strcpy(refresh_skip_count, "29");
+      break;
+    case EPD_SUSPEND:
+      strcpy(refresh_skip_count, "29");
       break;
     default:
       strcpy(refresh_skip_count, "2");
@@ -2464,7 +2486,7 @@ static int hwc_set_power_mode(struct hwc_composer_device_1 *dev, int display,
       gPowerMode = EPD_SUSPEND;
       gCurrentEpdMode = EPD_SUSPEND;
       ALOGD("%s,line = %d , mode = %d , gPowerMode = %d,gCurrentEpdMode = %d",__FUNCTION__,__LINE__,mode,gPowerMode,gCurrentEpdMode);
-
+      hwc_adajust_sf_vsync(EPD_SUSPEND);
       char power_status[255];
       char power_connected[255];
       property_get("sys.power.status",power_status, "0");
@@ -2501,10 +2523,11 @@ static int hwc_set_power_mode(struct hwc_composer_device_1 *dev, int display,
      break;
     case HWC_POWER_MODE_DOZE_SUSPEND:
     case HWC_POWER_MODE_NORMAL:
-      ALOGD("%s,line = %d , mode = %d , gPowerMode = %d,gCurrentEpdMode = %d",__FUNCTION__,__LINE__,mode,gPowerMode,gCurrentEpdMode);
       gPowerMode = EPD_RESUME;
       gCurrentEpdMode = EPD_FULL_GC16;
       not_fullmode_count = 50;
+      ALOGD("%s,line = %d , mode = %d , gPowerMode = %d,gCurrentEpdMode = %d",__FUNCTION__,__LINE__,mode,gPowerMode,gCurrentEpdMode);
+      hwc_adajust_sf_vsync(EPD_RESUME);
       break;
   }
   return 0;
@@ -2548,14 +2571,8 @@ static int hwc_get_display_configs(struct hwc_composer_device_1 *dev,
     return 0;
 
   uint32_t width = 0, height = 0 , vrefresh = 0 ;
-  if (ebc_buf_info.panel_color == 2) {
-    width = ebc_buf_info.width;
-    height = ebc_buf_info.height;
-  }
-  else {
-    width = ebc_buf_info.width - (ebc_buf_info.width % 8);
-    height = ebc_buf_info.height - (ebc_buf_info.height % 2);
-  }
+  width = ebc_buf_info.width - (ebc_buf_info.width % 8);
+  height = ebc_buf_info.height - (ebc_buf_info.height % 2);
   hwc_info.framebuffer_width = width;
   hwc_info.framebuffer_height = height;
   hwc_info.vrefresh = vrefresh ? vrefresh : 60;

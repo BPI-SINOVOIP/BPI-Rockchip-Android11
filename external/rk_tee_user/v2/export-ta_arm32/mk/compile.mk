@@ -35,9 +35,10 @@ comp-cflags-warns-high = \
 	-Wmissing-prototypes -Wnested-externs -Wpointer-arith \
 	-Wshadow -Wstrict-prototypes -Wswitch-default \
 	-Wwrite-strings \
-	-Wno-missing-field-initializers -Wno-format-zero-length
+	-Wno-missing-field-initializers -Wno-format-zero-length \
+	-Werror
 comp-cflags-warns-medium = \
-	-Waggregate-return -Wredundant-decls
+	-Wredundant-decls
 comp-cflags-warns-low = \
 	-Wold-style-definition -Wstrict-aliasing=2 \
 	-Wundef
@@ -48,7 +49,8 @@ comp-cflags-warns-3:= $(comp-cflags-warns-2) $(comp-cflags-warns-low)
 
 WARNS		?= 3
 
-comp-cflags$(sm)	+= $(comp-cflags-warns-$(WARNS))
+comp-cflags$(sm) += $(comp-cflags-warns-$(WARNS)) \
+			$(comp-cflags-warns-$(COMPILER_$(sm)))
 
 CHECK ?= sparse
 
@@ -68,8 +70,8 @@ comp-lib-$2	:= $(libname)-$(sm)
 cleanfiles := $$(cleanfiles) $$(comp-dep-$2) $$(comp-cmd-file-$2) $2
 
 ifeq ($$(filter %.c,$1),$1)
-#comp-q-$2 := CC
-comp-q-$2 := $$(CC$(sm))
+comp-q-$2 := CC # one trailing space
+comp-compiler-$2 := $$(CC$(sm))
 comp-flags-$2 = $$(filter-out $$(CFLAGS_REMOVE) $$(cflags-remove) \
 			      $$(cflags-remove-$$(comp-sm-$2)) \
 			      $$(cflags-remove-$2), \
@@ -83,22 +85,23 @@ echo-check-cmd-$2 = $(cmd-echo) $$(subst \",\\\",$$(check-cmd-$2))
 endif
 
 else ifeq ($$(filter %.S,$1),$1)
-#comp-q-$2 := AS
-comp-q-$2 := $$(CC$(sm))
-comp-flags-$2 = -DASM=1 $$(filter-out $$(AFLAGS_REMOVE) $$(aflags-remove) \
-				      $$(aflags-remove-$$(comp-sm-$2)) \
-				      $$(aflags-remove-$2), \
-			   $$(AFLAGS) $$(comp-aflags$$(comp-sm-$2)) \
-			   $$(aflags$$(comp-sm-$2)) $$(aflags-$2))
+comp-q-$2 := AS # one trailing space
+comp-compiler-$2 := $$(CC$(sm))
+comp-flags-$2 = $$(filter-out $$(AFLAGS_REMOVE) $$(aflags-remove) \
+			      $$(aflags-remove-$$(comp-sm-$2)) \
+			      $$(aflags-remove-$2), \
+		   $$(AFLAGS) $$(comp-aflags$$(comp-sm-$2)) \
+		   $$(aflags$$(comp-sm-$2)) $$(aflags-$2))
 
 else ifeq ($$(filter %.cpp,$1),$1)
-comp-q-$2 := $$(CXX$(sm))
+comp-q-$2 := CXX
+comp-compiler-$2 := $$(CXX$(sm))
 comp-flags-$2 = $$(filter-out $$(CXXFLAGS_REMOVE) $$(cxxflags-remove) \
-                             $$(cxxflags-remove-$$(comp-sm-$2)) \
-                             $$(cxxflags-remove-$2), \
-                  $$(CXXFLAGS$$(arch-bits-$$(comp-sm-$2))) $$(CXXFLAGS_WARNS) \
-                  $$(comp-cxxflags$$(comp-sm-$2)) $$(cxxflags$$(comp-sm-$2)) \
-                  $$(cxxflags-lib$$(comp-lib-$2)) $$(cxxflags-$2))
+			      $$(cxxflags-remove-$$(comp-sm-$2)) \
+			      $$(cxxflags-remove-$2), \
+		   $$(CXXFLAGS) $$(comp-cxxflags$$(comp-sm-$2)) \
+		   $$(cxxflags$$(comp-sm-$2)) $$(cxxflags-$2))
+
 else
 $$(error "Don't know what to do with $1")
 endif
@@ -117,8 +120,7 @@ comp-cppflags-$2 = $$(filter-out $$(CPPFLAGS_REMOVE) $$(cppflags-remove) \
 comp-flags-$2 += -MD -MF $$(comp-dep-$2) -MT $$@
 comp-flags-$2 += $$(comp-cppflags-$2)
 
-#comp-cmd-$2 = $$(CC$(sm)) $$(comp-flags-$2) -c $$< -o $$@
-comp-cmd-$2 = $$(comp-q-$2) $$(comp-flags-$2) -c $$< -o $$@
+comp-cmd-$2 = $$(comp-compiler-$2) $$(comp-flags-$2) -c $$< -o $$@
 comp-objcpy-cmd-$2 = $$(OBJCOPY$(sm)) \
 	--rename-section .rodata=.rodata.$1 \
 	--rename-section .rodata.str1.1=.rodata.str1.1.$1 \
@@ -144,7 +146,7 @@ $2: $1 FORCE-GENSRC$(sm)
 		$$(echo-check-$2) '  CHECK   $$<' ;\
 		$$(echo-check-cmd-$2) ;\
 		$$(check-cmd-$2) ;\
-		$(cmd-echo-silent) '  $$(comp-q-$2)      $$@' ;\
+		$(cmd-echo-silent) '  $$(comp-q-$2)     $$@' ;\
 		$(cmd-echo) $$(subst \",\\\",$$(comp-cmd-$2)) ;\
 		$$(comp-cmd-$2) ;\
 		$(cmd-echo) $$(comp-objcpy-cmd-$2) ;\
@@ -172,6 +174,7 @@ define _gen-asm-defines-file
 # c-filename in $1
 # h-filename in $2
 # s-filename in $3
+# Dependencies in $4
 
 FORCE-GENSRC$(sm): $(2)
 
@@ -207,7 +210,7 @@ comp-cmd-$3 = $$(CC$(sm)) $$(comp-flags-$3) -fverbose-asm -S $$< -o $$@
 -include $$(comp-cmd-file-$3)
 -include $$(comp-dep-$3)
 
-$3: $1 $(conf-file) FORCE
+$3: $1 $(conf-file) $(4) FORCE
 # Check if any prerequisites are newer than the target and
 # check if command line has changed
 	$$(if $$(strip $$(filter-out FORCE, $$?) \
@@ -215,13 +218,14 @@ $3: $1 $(conf-file) FORCE
 	    $$(filter-out $$(old-cmd-$3), $$(comp-cmd-$3))), \
 		@set -e ;\
 		mkdir -p $$(dir $2) $$(dir $3) ;\
+		$(cmd-echo-silent) '  CC      $$@'; 			\
 		$(cmd-echo) $$(subst \",\\\",$$(comp-cmd-$3)) ;\
 		$$(comp-cmd-$3) ;\
 		echo "old-cmd-$3 := $$(subst \",\\\",$$(comp-cmd-$3))" > \
 			$$(comp-cmd-file-$3) ;\
 	)
 
-guard-$2 := $$(subst -,_,$$(subst .,_,$$(subst /,_,$2)))
+guard-$2 := $$(subst -,_,$$(subst .,_,$$(subst /,_,$$(subst +,_,$2))))
 
 $(2): $(3)
 	$(q)set -e;							\
@@ -229,7 +233,7 @@ $(2): $(3)
 	mkdir -p $$(dir $$@);					\
 	echo "#ifndef $$(guard-$2)" >$$@.tmp;			\
 	echo "#define $$(guard-$2)" >>$$@.tmp;			\
-	sed -ne 's|^==>\([^ ]*\) [\$$$$#]*\([-0-9]*\) \([^@/]*\).*|#define \1\t\2\t/* \3*/|p' \
+	sed -ne 's|^.*==>\([^ ]*\) [\$$$$#]*\([-0-9]*\) \([^@/]*\).*|#define \1\t\2\t/* \3*/|p' \
 	< $$< >>$$@.tmp;					\
 	echo "#endif" >>$$@.tmp;				\
 	$$(call mv-if-changed,$$@.tmp,$$@)
@@ -237,7 +241,7 @@ $(2): $(3)
 endef
 
 define gen-asm-defines-file
-$(call _gen-asm-defines-file,$1,$2,$(dir $2).$(notdir $(2:.h=.s)))
+$(call _gen-asm-defines-file,$1,$2,$(dir $2).$(notdir $(2:.h=.s)),$(asm-defines-$(notdir $(1))-deps))
 endef
 
 $(foreach f,$(asm-defines-files),$(eval $(call gen-asm-defines-file,$(f),$(out-dir)/$(sm)/include/generated/$(basename $(notdir $(f))).h)))

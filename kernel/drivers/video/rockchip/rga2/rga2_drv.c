@@ -42,17 +42,17 @@
 #include <linux/wakelock.h>
 #include <linux/scatterlist.h>
 #include <linux/version.h>
-#include <linux/debugfs.h>
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
 #include <linux/pm_runtime.h>
-#include <linux/dma-buf.h>
+#include <linux/dma-buf-cache.h>
 #endif
 
 #include "rga2.h"
 #include "rga2_reg_info.h"
 #include "rga2_mmu_info.h"
 #include "RGA2_API.h"
+#include "rga2_debugger.h"
 
 #if IS_ENABLED(CONFIG_ION_ROCKCHIP) && (LINUX_VERSION_CODE < KERNEL_VERSION(4, 4, 0))
 #include <linux/rockchip_ion.h>
@@ -75,25 +75,11 @@
  */
 #define RGA2_PHY_PAGE_SIZE	(((8192 * 8192 * 4) / 4096) + 1)
 
-
-/* Driver information */
-#define DRIVER_DESC		"RGA2 Device Driver"
-#define DRIVER_NAME		"rga2"
-#define RGA2_VERSION   "2.000"
-
 ktime_t rga2_start;
 ktime_t rga2_end;
 int rga2_flag;
 int first_RGA2_proc;
 static int rk3368;
-#if RGA2_DEBUGFS
-int RGA2_TEST_REG;
-int RGA2_TEST_MSG;
-int RGA2_TEST_TIME;
-int RGA2_CHECK_MODE;
-int RGA2_NONUSE;
-int RGA2_INT_FLAG;
-#endif
 
 rga2_session rga2_session_global;
 long (*rga2_ioctl_kernel_p)(struct rga_req *);
@@ -111,22 +97,7 @@ static void rga2_del_running_list(void);
 static void rga2_del_running_list_timeout(void);
 static void rga2_try_set_reg(void);
 
-
-/* Logging */
-#define RGA_DEBUG 1
-#if RGA_DEBUG
-#define DBG(format, args...) printk(KERN_DEBUG "%s: " format, DRIVER_NAME, ## args)
-#define ERR(format, args...) printk(KERN_ERR "%s: " format, DRIVER_NAME, ## args)
-#define WARNING(format, args...) printk(KERN_WARN "%s: " format, DRIVER_NAME, ## args)
-#define INFO(format, args...) printk(KERN_INFO "%s: " format, DRIVER_NAME, ## args)
-#else
-#define DBG(format, args...)
-#define ERR(format, args...)
-#define WARNING(format, args...)
-#define INFO(format, args...)
-#endif
-
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 static const char *rga2_get_cmd_mode_str(u32 cmd)
 {
 	switch (cmd) {
@@ -276,6 +247,23 @@ static const char *rga2_get_format_name(uint32_t format)
 	case RGA2_FORMAT_BGRA_4444:
 		return "BGRA4444";
 
+	case RGA2_FORMAT_ARGB_8888:
+		return "ARGB8888";
+	case RGA2_FORMAT_XRGB_8888:
+		return "XBGR8888";
+	case RGA2_FORMAT_ARGB_5551:
+		return "ARGB5551";
+	case RGA2_FORMAT_ARGB_4444:
+		return "ARGB4444";
+	case RGA2_FORMAT_ABGR_8888:
+		return "ABGR8888";
+	case RGA2_FORMAT_XBGR_8888:
+		return "XBGR8888";
+	case RGA2_FORMAT_ABGR_5551:
+		return "ABGR5551";
+	case RGA2_FORMAT_ABGR_4444:
+		return "ABGR4444";
+
 	case RGA2_FORMAT_YCbCr_422_SP:
 		return "YCbCr422SP";
 	case RGA2_FORMAT_YCbCr_422_P:
@@ -396,71 +384,6 @@ static int rga2_align_check(struct rga2_req *req)
 	return 0;
 }
 
-static int rga2_memory_check(void *vaddr, u32 w, u32 h, u32 format, int fd)
-{
-	int bits = 32;
-	int temp_data = 0;
-	void *one_line = kzalloc(w * 4, GFP_KERNEL);
-
-	if (!one_line) {
-		ERR("kzalloc fail %s[%d]\n", __func__, __LINE__);
-		return 0;
-	}
-	switch (format) {
-	case RGA2_FORMAT_RGBA_8888:
-	case RGA2_FORMAT_RGBX_8888:
-	case RGA2_FORMAT_BGRA_8888:
-	case RGA2_FORMAT_BGRX_8888:
-		bits = 32;
-		break;
-	case RGA2_FORMAT_RGB_888:
-	case RGA2_FORMAT_BGR_888:
-		bits = 24;
-		break;
-	case RGA2_FORMAT_RGB_565:
-	case RGA2_FORMAT_RGBA_5551:
-	case RGA2_FORMAT_RGBA_4444:
-	case RGA2_FORMAT_BGR_565:
-	case RGA2_FORMAT_YCbCr_422_SP:
-	case RGA2_FORMAT_YCbCr_422_P:
-	case RGA2_FORMAT_YCrCb_422_SP:
-	case RGA2_FORMAT_YCrCb_422_P:
-	case RGA2_FORMAT_BGRA_5551:
-	case RGA2_FORMAT_BGRA_4444:
-		bits = 16;
-		break;
-	case RGA2_FORMAT_YCbCr_420_SP:
-	case RGA2_FORMAT_YCbCr_420_P:
-	case RGA2_FORMAT_YCrCb_420_SP:
-	case RGA2_FORMAT_YCrCb_420_P:
-		bits = 12;
-		break;
-	case RGA2_FORMAT_YCbCr_420_SP_10B:
-	case RGA2_FORMAT_YCrCb_420_SP_10B:
-	case RGA2_FORMAT_YCbCr_422_SP_10B:
-	case RGA2_FORMAT_YCrCb_422_SP_10B:
-		bits = 15;
-		break;
-	default:
-		INFO("un know format\n");
-		kfree(one_line);
-		return -1;
-	}
-	temp_data = w * (h - 1) * bits >> 3;
-	if (fd > 0) {
-		INFO("vaddr is%p, bits is %d, fd check\n", vaddr, bits);
-		memcpy(one_line, (char *)vaddr + temp_data, w * bits >> 3);
-		INFO("fd check ok\n");
-	} else {
-		INFO("vir addr memory check.\n");
-		memcpy((void *)((char *)vaddr + temp_data), one_line,
-		       w * bits >> 3);
-		INFO("vir addr check ok.\n");
-	}
-	kfree(one_line);
-	return 0;
-}
-
 int rga2_scale_check(struct rga2_req *req)
 {
 	u32 saw, sah, daw, dah;
@@ -513,19 +436,6 @@ static void rga2_printf_cmd_buf(u32 *cmd_buf)
 	     src_aw, src_ah, src_stride, src_format);
 	DBG("dst : aw = %d ah = %d stride = %d format is %x\n",
 	     dst_aw, dst_ah, dst_stride, dst_format);
-}
-
-static bool is_yuv422p_format(u32 format)
-{
-	bool ret = false;
-
-	switch (format) {
-	case RGA2_FORMAT_YCbCr_422_P:
-	case RGA2_FORMAT_YCrCb_422_P:
-		ret = true;
-		break;
-	}
-	return ret;
 }
 
 static inline void rga2_write(u32 b, u32 r)
@@ -711,7 +621,7 @@ static int rga2_flush(rga2_session *session, unsigned long arg)
 	int ret = 0;
 	int ret_timeout;
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	ktime_t start = ktime_set(0, 0);
 	ktime_t end = ktime_set(0, 0);
 
@@ -760,7 +670,7 @@ static int rga2_flush(rga2_session *session, unsigned long arg)
 		ret = -ETIMEDOUT;
 	}
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_TEST_TIME) {
 		end = ktime_get();
 		end = ktime_sub(end, start);
@@ -872,6 +782,14 @@ static struct rga2_reg * rga2_reg_init(rga2_session *session, struct rga2_req *r
 	INIT_LIST_HEAD(&reg->session_link);
 	INIT_LIST_HEAD(&reg->status_link);
 
+    ret = rga2_get_dma_info(reg, req);
+    if (ret < 0) {
+        pr_err("fail to get dma buffer info!\n");
+        free_page((unsigned long)reg);
+
+        return NULL;
+    }
+
     if ((req->mmu_info.src0_mmu_flag & 1) || (req->mmu_info.src1_mmu_flag & 1)
         || (req->mmu_info.dst_mmu_flag & 1) || (req->mmu_info.els_mmu_flag & 1))
     {
@@ -890,16 +808,6 @@ static struct rga2_reg * rga2_reg_init(rga2_session *session, struct rga2_req *r
 
         return NULL;
     }
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-	reg->sg_src0 = req->sg_src0;
-	reg->sg_dst = req->sg_dst;
-	reg->sg_src1 = req->sg_src1;
-	reg->sg_els = req->sg_els;
-	reg->attach_src0 = req->attach_src0;
-	reg->attach_dst = req->attach_dst;
-	reg->attach_src1 = req->attach_src1;
-	reg->attach_els = req->attach_els;
-#endif
 
     mutex_lock(&rga2_service.lock);
 	list_add_tail(&reg->status_link, &rga2_service.waiting);
@@ -977,7 +885,7 @@ static void rga2_try_set_reg(void)
 				rga2_write(reg->csc_reg[i], RGA2_CSC_COE_BASE + i * 4);
 			}
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 			if (RGA2_TEST_REG) {
 				if (rga2_flag) {
 					int32_t *p;
@@ -1005,7 +913,7 @@ static void rga2_try_set_reg(void)
 			/* All CMD finish int */
 			rga2_write(rga2_read(RGA2_INT)|(0x1<<10)|(0x1<<9)|(0x1<<8), RGA2_INT);
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 			if (RGA2_TEST_TIME)
 				rga2_start = ktime_get();
 #endif
@@ -1013,7 +921,7 @@ static void rga2_try_set_reg(void)
 			/* Start proc */
 			atomic_set(&reg->session->done, 0);
 			rga2_write(0x1, RGA2_CMD_CTRL);
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 			if (RGA2_TEST_REG) {
 				if (rga2_flag) {
 					INFO("CMD_READ_BACK_REG\n");
@@ -1038,59 +946,6 @@ static void rga2_try_set_reg(void)
 		}
 	}
 }
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-static int rga2_put_dma_buf(struct rga2_req *req, struct rga2_reg *reg)
-{
-	struct dma_buf_attachment *attach = NULL;
-	struct sg_table *sgt = NULL;
-	struct dma_buf *dma_buf = NULL;
-
-	if (!req && !reg)
-		return -EINVAL;
-
-	attach = reg ? reg->attach_src0 : req->attach_src0;
-	sgt = reg ? reg->sg_src0 : req->sg_src0;
-	if (attach && sgt)
-		dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-	if (attach) {
-		dma_buf = attach->dmabuf;
-		dma_buf_detach(dma_buf, attach);
-		dma_buf_put(dma_buf);
-	}
-
-	attach = reg ? reg->attach_dst : req->attach_dst;
-	sgt = reg ? reg->sg_dst : req->sg_dst;
-	if (attach && sgt)
-		dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-	if (attach) {
-		dma_buf = attach->dmabuf;
-		dma_buf_detach(dma_buf, attach);
-		dma_buf_put(dma_buf);
-	}
-
-	attach = reg ? reg->attach_src1 : req->attach_src1;
-	sgt = reg ? reg->sg_src1 : req->sg_src1;
-	if (attach && sgt)
-		dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-	if (attach) {
-		dma_buf = attach->dmabuf;
-		dma_buf_detach(dma_buf, attach);
-		dma_buf_put(dma_buf);
-	}
-
-	attach = reg ? reg->attach_els : req->attach_els;
-	sgt = reg ? reg->sg_els : req->sg_els;
-	if (attach && sgt)
-		dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-	if (attach) {
-		dma_buf = attach->dmabuf;
-		dma_buf_detach(dma_buf, attach);
-		dma_buf_put(dma_buf);
-	}
-
-	return 0;
-}
-#endif
 
 static void rga2_del_running_list(void)
 {
@@ -1106,9 +961,7 @@ static void rga2_del_running_list(void)
 			else
 				tbuf->back += reg->MMU_len;
 		}
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-		rga2_put_dma_buf(NULL, reg);
-#endif
+		rga2_put_dma_info(reg);
 		atomic_sub(1, &reg->session->task_running);
 		atomic_sub(1, &rga2_service.total_running);
 
@@ -1139,9 +992,7 @@ static void rga2_del_running_list_timeout(void)
 			else
 				tbuf->back += reg->MMU_len;
 		}
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-		rga2_put_dma_buf(NULL, reg);
-#endif
+		rga2_put_dma_info(reg);
 		atomic_sub(1, &reg->session->task_running);
 		atomic_sub(1, &rga2_service.total_running);
 		rga2_soft_reset();
@@ -1153,315 +1004,6 @@ static void rga2_del_running_list_timeout(void)
 	}
 	return;
 }
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-static int rga2_get_img_info(rga_img_info_t *img,
-			     u8 mmu_flag,
-			     struct sg_table **psgt,
-			     struct dma_buf_attachment **pattach)
-{
-	struct dma_buf_attachment *attach = NULL;
-	struct device *rga_dev = NULL;
-	struct sg_table *sgt = NULL;
-	struct dma_buf *dma_buf = NULL;
-	u32 vir_w, vir_h;
-	int yrgb_addr = -1;
-	int ret = 0;
-
-	rga_dev = rga2_drvdata->dev;
-	yrgb_addr = (int)img->yrgb_addr;
-	vir_w = img->vir_w;
-	vir_h = img->vir_h;
-
-	if (yrgb_addr > 0) {
-		dma_buf = dma_buf_get(img->yrgb_addr);
-		if (IS_ERR(dma_buf)) {
-			ret = -EINVAL;
-			pr_err("dma_buf_get fail fd[%d]\n", yrgb_addr);
-			return ret;
-		}
-
-		attach = dma_buf_attach(dma_buf, rga_dev);
-		if (IS_ERR(attach)) {
-			dma_buf_put(dma_buf);
-			ret = -EINVAL;
-			pr_err("Failed to attach dma_buf\n");
-			return ret;
-		}
-#if RGA2_DEBUGFS
-	if (RGA2_CHECK_MODE) {
-		void *vaddr = dma_buf_vmap(dma_buf);
-		if (vaddr)
-			rga2_memory_check(vaddr, img->vir_w, img->vir_h,
-					  img->format, img->yrgb_addr);
-		dma_buf_vunmap(dma_buf, vaddr);
-	}
-#endif
-
-		*pattach = attach;
-		sgt = dma_buf_map_attachment(attach, DMA_BIDIRECTIONAL);
-		if (IS_ERR(sgt)) {
-			ret = -EINVAL;
-			pr_err("Failed to map src attachment\n");
-			goto err_get_sg;
-		}
-		if (!mmu_flag) {
-			ret = -EINVAL;
-			pr_err("Fix it please enable iommu flag\n");
-			goto err_get_sg;
-		}
-
-		if (mmu_flag) {
-			*psgt = sgt;
-			img->yrgb_addr = img->uv_addr;
-			img->uv_addr = img->yrgb_addr + (vir_w * vir_h);
-			if (is_yuv422p_format(img->format))
-				img->v_addr = img->uv_addr + (vir_w * vir_h) / 2;
-			else
-				img->v_addr = img->uv_addr + (vir_w * vir_h) / 4;
-		}
-	} else {
-		img->yrgb_addr = img->uv_addr;
-		img->uv_addr = img->yrgb_addr + (vir_w * vir_h);
-		if (is_yuv422p_format(img->format))
-			img->v_addr = img->uv_addr + (vir_w * vir_h) / 2;
-		else
-			img->v_addr = img->uv_addr + (vir_w * vir_h) / 4;
-	}
-
-	return ret;
-
-err_get_sg:
-	if (!IS_ERR(sgt) && sgt)
-		dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-	if (!IS_ERR(attach) && attach) {
-		dma_buf = attach->dmabuf;
-		dma_buf_detach(dma_buf, attach);
-		*pattach = NULL;
-		dma_buf_put(dma_buf);
-	}
-	return ret;
-}
-
-static int rga2_get_dma_buf(struct rga2_req *req)
-{
-	struct dma_buf *dma_buf = NULL;
-	u8 mmu_flag = 0;
-	int ret = 0;
-
-	req->sg_src0 = NULL;
-	req->sg_src1 = NULL;
-	req->sg_dst = NULL;
-	req->sg_els = NULL;
-	req->attach_src0 = NULL;
-	req->attach_dst = NULL;
-	req->attach_src1 = NULL;
-	req->attach_els = NULL;
-	mmu_flag = req->mmu_info.src0_mmu_flag;
-	ret = rga2_get_img_info(&req->src, mmu_flag, &req->sg_src0,
-				&req->attach_src0);
-	if (ret) {
-		pr_err("src:rga2_get_img_info fail\n");
-		goto err_src;
-	}
-
-	mmu_flag = req->mmu_info.dst_mmu_flag;
-	ret = rga2_get_img_info(&req->dst, mmu_flag, &req->sg_dst,
-				&req->attach_dst);
-	if (ret) {
-		pr_err("dst:rga2_get_img_info fail\n");
-		goto err_dst;
-	}
-
-	mmu_flag = req->mmu_info.src1_mmu_flag;
-	ret = rga2_get_img_info(&req->src1, mmu_flag, &req->sg_src1,
-				&req->attach_src1);
-	if (ret) {
-		pr_err("src1:rga2_get_img_info fail\n");
-		goto err_src1;
-	}
-
-	mmu_flag = req->mmu_info.els_mmu_flag;
-	ret = rga2_get_img_info(&req->pat, mmu_flag, &req->sg_els,
-							&req->attach_els);
-	if (ret) {
-		pr_err("els:rga2_get_img_info fail\n");
-		goto err_els;
-	}
-
-	return ret;
-
-err_els:
-	if (req->sg_src1 && req->attach_src1) {
-		dma_buf_unmap_attachment(req->attach_src1,
-			req->sg_src1, DMA_BIDIRECTIONAL);
-		dma_buf = req->attach_src1->dmabuf;
-		dma_buf_detach(dma_buf, req->attach_src1);
-		dma_buf_put(dma_buf);
-	}
-err_src1:
-	if (req->sg_dst && req->attach_dst) {
-		dma_buf_unmap_attachment(req->attach_dst,
-					 req->sg_dst, DMA_BIDIRECTIONAL);
-		dma_buf = req->attach_dst->dmabuf;
-		dma_buf_detach(dma_buf, req->attach_dst);
-		dma_buf_put(dma_buf);
-	}
-err_dst:
-	if (req->sg_src0 && req->attach_src0) {
-		dma_buf_unmap_attachment(req->attach_src0,
-					 req->sg_src0, DMA_BIDIRECTIONAL);
-		dma_buf = req->attach_src0->dmabuf;
-		dma_buf_detach(dma_buf, req->attach_src0);
-		dma_buf_put(dma_buf);
-	}
-err_src:
-
-	return ret;
-}
-#else
-static int rga2_convert_dma_buf(struct rga2_req *req)
-{
-	struct ion_handle *hdl;
-	ion_phys_addr_t phy_addr;
-	size_t len;
-	int ret;
-	u32 src_vir_w, dst_vir_w;
-	void *vaddr = NULL;
-
-	src_vir_w = req->src.vir_w;
-	dst_vir_w = req->dst.vir_w;
-
-	req->sg_src0 = NULL;
-	req->sg_src1 = NULL;
-	req->sg_dst  = NULL;
-	req->sg_els  = NULL;
-
-	if ((int)req->src.yrgb_addr > 0) {
-		hdl = ion_import_dma_buf(rga2_drvdata->ion_client,
-					 req->src.yrgb_addr);
-		if (IS_ERR(hdl)) {
-			ret = PTR_ERR(hdl);
-			pr_err("RGA2 SRC ERROR ion buf handle\n");
-			return ret;
-		}
-#if RGA2_DEBUGFS
-	if (RGA2_CHECK_MODE) {
-		vaddr = ion_map_kernel(rga2_drvdata->ion_client, hdl);
-		if (vaddr)
-			rga2_memory_check(vaddr, req->src.vir_w, req->src.vir_h,
-					  req->src.format, req->src.yrgb_addr);
-		ion_unmap_kernel(rga2_drvdata->ion_client, hdl);
-	}
-#endif
-		if (req->mmu_info.src0_mmu_flag) {
-			req->sg_src0 =
-				ion_sg_table(rga2_drvdata->ion_client, hdl);
-			req->src.yrgb_addr = req->src.uv_addr;
-			req->src.uv_addr =
-				req->src.yrgb_addr + (src_vir_w * req->src.vir_h);
-			req->src.v_addr =
-				req->src.uv_addr + (src_vir_w * req->src.vir_h) / 4;
-		} else {
-			ion_phys(rga2_drvdata->ion_client, hdl, &phy_addr, &len);
-			req->src.yrgb_addr = phy_addr;
-			req->src.uv_addr =
-				req->src.yrgb_addr + (src_vir_w * req->src.vir_h);
-			req->src.v_addr =
-				req->src.uv_addr + (src_vir_w * req->src.vir_h) / 4;
-		}
-		ion_free(rga2_drvdata->ion_client, hdl);
-	} else {
-		req->src.yrgb_addr = req->src.uv_addr;
-		req->src.uv_addr =
-			req->src.yrgb_addr + (src_vir_w * req->src.vir_h);
-		req->src.v_addr =
-			req->src.uv_addr + (src_vir_w * req->src.vir_h) / 4;
-	}
-
-	if ((int)req->dst.yrgb_addr > 0) {
-		hdl = ion_import_dma_buf(rga2_drvdata->ion_client,
-					 req->dst.yrgb_addr);
-		if (IS_ERR(hdl)) {
-			ret = PTR_ERR(hdl);
-			pr_err("RGA2 DST ERROR ion buf handle\n");
-			return ret;
-		}
-#if RGA2_DEBUGFS
-	if (RGA2_CHECK_MODE) {
-		vaddr = ion_map_kernel(rga2_drvdata->ion_client, hdl);
-		if (vaddr)
-			rga2_memory_check(vaddr, req->dst.vir_w, req->dst.vir_h,
-					  req->dst.format, req->dst.yrgb_addr);
-		ion_unmap_kernel(rga2_drvdata->ion_client, hdl);
-	}
-#endif
-		if (req->mmu_info.dst_mmu_flag) {
-			req->sg_dst =
-				ion_sg_table(rga2_drvdata->ion_client, hdl);
-			req->dst.yrgb_addr = req->dst.uv_addr;
-			req->dst.uv_addr =
-				req->dst.yrgb_addr + (dst_vir_w * req->dst.vir_h);
-			req->dst.v_addr =
-				req->dst.uv_addr + (dst_vir_w * req->dst.vir_h) / 4;
-		} else {
-			ion_phys(rga2_drvdata->ion_client, hdl, &phy_addr, &len);
-			req->dst.yrgb_addr = phy_addr;
-			req->dst.uv_addr =
-				req->dst.yrgb_addr + (dst_vir_w * req->dst.vir_h);
-			req->dst.v_addr =
-				req->dst.uv_addr + (dst_vir_w * req->dst.vir_h) / 4;
-		}
-		ion_free(rga2_drvdata->ion_client, hdl);
-	} else {
-		req->dst.yrgb_addr = req->dst.uv_addr;
-		req->dst.uv_addr =
-			req->dst.yrgb_addr + (dst_vir_w * req->dst.vir_h);
-		req->dst.v_addr =
-			req->dst.uv_addr + (dst_vir_w * req->dst.vir_h) / 4;
-	}
-
-	if ((int)req->src1.yrgb_addr > 0) {
-		hdl = ion_import_dma_buf(rga2_drvdata->ion_client,
-					 req->src1.yrgb_addr);
-		if (IS_ERR(hdl)) {
-			ret = PTR_ERR(hdl);
-			pr_err("RGA2 ERROR ion buf handle\n");
-			return ret;
-		}
-		if (req->mmu_info.dst_mmu_flag) {
-			req->sg_src1 =
-				ion_sg_table(rga2_drvdata->ion_client, hdl);
-			req->src1.yrgb_addr = req->src1.uv_addr;
-			req->src1.uv_addr =
-				req->src1.yrgb_addr + (req->src1.vir_w * req->src1.vir_h);
-			req->src1.v_addr =
-				req->src1.uv_addr + (req->src1.vir_w * req->src1.vir_h) / 4;
-		} else {
-			ion_phys(rga2_drvdata->ion_client, hdl, &phy_addr, &len);
-			req->src1.yrgb_addr = phy_addr;
-			req->src1.uv_addr =
-				req->src1.yrgb_addr + (req->src1.vir_w * req->src1.vir_h);
-			req->src1.v_addr =
-				req->src1.uv_addr + (req->src1.vir_w * req->src1.vir_h) / 4;
-		}
-		ion_free(rga2_drvdata->ion_client, hdl);
-	} else {
-		req->src1.yrgb_addr = req->src1.uv_addr;
-		req->src1.uv_addr =
-			req->src1.yrgb_addr + (req->src1.vir_w * req->src1.vir_h);
-		req->src1.v_addr =
-			req->src1.uv_addr + (req->src1.vir_w * req->src1.vir_h) / 4;
-	}
-	if (is_yuv422p_format(req->src.format))
-		req->src.v_addr = req->src.uv_addr + (req->src.vir_w * req->src.vir_h) / 2;
-	if (is_yuv422p_format(req->dst.format))
-		req->dst.v_addr = req->dst.uv_addr + (req->dst.vir_w * req->dst.vir_h) / 2;
-	if (is_yuv422p_format(req->src1.format))
-		req->src1.v_addr = req->src1.uv_addr + (req->src1.vir_w * req->dst.vir_h) / 2;
-
-	return 0;
-}
-#endif
 
 static int rga2_blit_flush_cache(rga2_session *session, struct rga2_req *req)
 {
@@ -1475,19 +1017,13 @@ static int rga2_blit_flush_cache(rga2_session *session, struct rga2_req *req)
 		ret = -ENOMEM;
 		goto err_free_reg;
 	}
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-	if (rga2_get_dma_buf(req)) {
-		pr_err("RGA2 : DMA buf copy error\n");
-		ret = -EFAULT;
+
+	ret = rga2_get_dma_info(reg, req);
+	if (ret < 0) {
+		pr_err("fail to get dma buffer info!\n");
 		goto err_free_reg;
 	}
-#else
-	if (rga2_convert_dma_buf(req)) {
-		pr_err("RGA2 : DMA buf copy error\n");
-		ret = -EFAULT;
-		goto err_free_reg;
-	}
-#endif
+
 	if ((req->mmu_info.src0_mmu_flag & 1) || (req->mmu_info.src1_mmu_flag & 1) ||
 	    (req->mmu_info.dst_mmu_flag & 1) || (req->mmu_info.els_mmu_flag & 1)) {
 		reg->MMU_map = true;
@@ -1516,60 +1052,32 @@ static int rga2_blit(rga2_session *session, struct rga2_req *req)
 	int num = 0;
 	struct rga2_reg *reg;
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-	if (rga2_get_dma_buf(req)) {
-		pr_err("RGA2 : DMA buf copy error\n");
+	/* check value if legal */
+	ret = rga2_check_param(req);
+	if (ret == -EINVAL) {
+		pr_err("req argument is inval\n");
+		return ret;
+	}
+
+	reg = rga2_reg_init(session, req);
+	if (reg == NULL) {
+		pr_err("init reg fail\n");
 		return -EFAULT;
 	}
-#else
-	if (rga2_convert_dma_buf(req)) {
-		pr_err("RGA2 : DMA buf copy error\n");
-		return -EFAULT;
-	}
-#endif
-	do {
-		/* check value if legal */
-		ret = rga2_check_param(req);
-		if(ret == -EINVAL) {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-			pr_err("req argument is inval\n");
-			goto err_put_dma_buf;
-#else
-			pr_err("req argument is inval\n");
-			break;
-#endif
-		}
 
-		reg = rga2_reg_init(session, req);
-		if(reg == NULL) {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-			pr_err("init reg fail\n");
-			goto err_put_dma_buf;
-#else
-			break;
-#endif
-		}
+	num = 1;
+	mutex_lock(&rga2_service.lock);
+	atomic_add(num, &rga2_service.total_running);
+	rga2_try_set_reg();
+	mutex_unlock(&rga2_service.lock);
 
-		num = 1;
-		mutex_lock(&rga2_service.lock);
-		atomic_add(num, &rga2_service.total_running);
-		rga2_try_set_reg();
-		mutex_unlock(&rga2_service.lock);
-
-		return 0;
-	}
-	while(0);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 4, 0))
-err_put_dma_buf:
-	rga2_put_dma_buf(req, NULL);
-#endif
-	return -EFAULT;
+	return 0;
 }
 
 static int rga2_blit_async(rga2_session *session, struct rga2_req *req)
 {
 	int ret = -1;
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_TEST_MSG) {
 		if (1) {
 			print_debug_info(req);
@@ -1597,7 +1105,7 @@ static int rga2_blit_sync(rga2_session *session, struct rga2_req *req)
 	memcpy(&req_bak, req, sizeof(req_bak));
 retry:
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_TEST_MSG) {
 		if (1) {
 			print_debug_info(req);
@@ -1669,7 +1177,7 @@ retry:
 		ret = -ETIMEDOUT;
 	}
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_TEST_TIME) {
 		rga2_end = ktime_get();
 		rga2_end = ktime_sub(rga2_end, rga2_start);
@@ -1731,7 +1239,7 @@ static long rga_ioctl(struct file *file, uint32_t cmd, unsigned long arg)
 	}
 
 	memset(&req, 0x0, sizeof(req));
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_TEST_MSG)
 		INFO("cmd is %s\n", rga2_get_cmd_mode_str(cmd));
 	if (RGA2_NONUSE) {
@@ -1913,7 +1421,7 @@ static long compat_rga_ioctl(struct file *file, uint32_t cmd, unsigned long arg)
 
 	session = (rga2_session *)file->private_data;
 
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_TEST_MSG)
 		INFO("using %s\n", __func__);
 #endif
@@ -2145,7 +1653,7 @@ static void RGA2_flush_page(void)
 
 static irqreturn_t rga2_irq_thread(int irq, void *dev_id)
 {
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_INT_FLAG)
 		INFO("irqthread INT[%x],STATS[%x]\n", rga2_read(RGA2_INT),
 		     rga2_read(RGA2_STATUS));
@@ -2163,7 +1671,7 @@ static irqreturn_t rga2_irq_thread(int irq, void *dev_id)
 
 static irqreturn_t rga2_irq(int irq,  void *dev_id)
 {
-#if RGA2_DEBUGFS
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 	if (RGA2_INT_FLAG)
 		INFO("irq INT[%x], STATS[%x]\n", rga2_read(RGA2_INT),
 		     rga2_read(RGA2_STATUS));
@@ -2200,6 +1708,47 @@ static const struct of_device_id rockchip_rga_dt_ids[] = {
 	{ .compatible = "rockchip,rga2", },
 	{},
 };
+
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
+static int rga2_debugger_init(struct rga_debugger **debugger_p)
+{
+	struct rga_debugger *debugger;
+
+	*debugger_p = kzalloc(sizeof(struct rga_debugger), GFP_KERNEL);
+	if (*debugger_p == NULL) {
+		ERR("can not alloc for rga2 debugger\n");
+		return -ENOMEM;
+	}
+
+	debugger = *debugger_p;
+
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUG_FS
+	mutex_init(&debugger->debugfs_lock);
+	INIT_LIST_HEAD(&debugger->debugfs_entry_list);
+#endif
+
+#ifdef CONFIG_ROCKCHIP_RGA2_PROC_FS
+	mutex_init(&debugger->procfs_lock);
+	INIT_LIST_HEAD(&debugger->procfs_entry_list);
+#endif
+
+	rga2_debugfs_init();
+	rga2_procfs_init();
+
+	return 0;
+}
+
+static int rga2_debugger_remove(struct rga_debugger **debugger_p)
+{
+	rga2_debugfs_remove();
+	rga2_procfs_remove();
+
+	kfree(*debugger_p);
+	*debugger_p = NULL;
+
+	return 0;
+}
+#endif
 
 static int rga2_drv_probe(struct platform_device *pdev)
 {
@@ -2284,6 +1833,11 @@ static int rga2_drv_probe(struct platform_device *pdev)
 		ERR("cannot register miscdev (%d)\n", ret);
 		goto err_misc_register;
 	}
+
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
+	rga2_debugger_init(&rga2_drvdata->debugger);
+#endif
+
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 1, 0))
 	rga2_init_version();
 	INFO("Driver loaded successfully ver:%s\n", rga2_drvdata->version);
@@ -2307,6 +1861,10 @@ static int rga2_drv_remove(struct platform_device *pdev)
 {
 	struct rga2_drvdata_t *data = platform_get_drvdata(pdev);
 	DBG("%s [%d]\n",__FUNCTION__,__LINE__);
+
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
+	rga2_debugger_remove(&data->debugger);
+#endif
 
 	wake_lock_destroy(&data->wake_lock);
 	misc_deregister(&(data->miscdev));
@@ -2336,116 +1894,7 @@ static struct platform_driver rga2_driver = {
 	},
 };
 
-#if RGA2_DEBUGFS
-void rga2_slt(void);
-
-static int rga2_debug_show(struct seq_file *m, void *data)
-{
-	seq_puts(m, "echo reg > rga2 to open rga reg MSG\n");
-	seq_puts(m, "echo msg  > rga2 to open rga msg MSG\n");
-	seq_puts(m, "echo time > rga2 to open rga time MSG\n");
-	seq_puts(m, "echo check > rga2 to open rga check flag\n");
-	seq_puts(m, "echo stop > rga2 to stop using hardware\n");
-	seq_puts(m, "echo int > rga2 to open interruppt MSG\n");
-	return 0;
-}
-
-static ssize_t rga2_debug_write(struct file *file, const char __user *ubuf,
-			      size_t len, loff_t *offp)
-{
-	char buf[14];
-
-	if (len > sizeof(buf) - 1)
-		return -EINVAL;
-	if (copy_from_user(buf, ubuf, len))
-		return -EFAULT;
-	buf[len - 1] = '\0';
-
-	if (strncmp(buf, "reg", 4) == 0) {
-		if (RGA2_TEST_REG) {
-			RGA2_TEST_REG = 0;
-			INFO("close rga2 reg!\n");
-		} else {
-			RGA2_TEST_REG = 1;
-			INFO("open rga2 reg!\n");
-		}
-	} else if (strncmp(buf, "msg", 3) == 0) {
-		if (RGA2_TEST_MSG) {
-			RGA2_TEST_MSG = 0;
-			INFO("close rga2 test MSG!\n");
-		} else {
-			RGA2_TEST_MSG = 1;
-			INFO("open rga2 test MSG!\n");
-		}
-	} else if (strncmp(buf, "time", 4) == 0) {
-		if (RGA2_TEST_TIME) {
-			RGA2_TEST_TIME = 0;
-			INFO("close rga2 test time!\n");
-		} else {
-			RGA2_TEST_TIME = 1;
-			INFO("open rga2 test time!\n");
-		}
-	} else if (strncmp(buf, "check", 5) == 0) {
-		if (RGA2_CHECK_MODE) {
-			RGA2_CHECK_MODE = 0;
-			INFO("close rga2 check flag!\n");
-		} else {
-			RGA2_CHECK_MODE = 1;
-			INFO("open rga2 check flag!\n");
-		}
-	} else if (strncmp(buf, "stop", 4) == 0) {
-		if (RGA2_NONUSE) {
-			RGA2_NONUSE = 0;
-			INFO("stop using rga hardware!\n");
-		} else {
-			RGA2_NONUSE = 1;
-			INFO("use rga hardware!\n");
-		}
-	} else if (strncmp(buf, "int", 3) == 0) {
-		if (RGA2_INT_FLAG) {
-			RGA2_INT_FLAG = 0;
-			INFO("close inturrupt MSG!\n");
-		} else {
-			RGA2_INT_FLAG = 1;
-			INFO("open inturrupt MSG!\n");
-		}
-	} else if (strncmp(buf, "slt", 3) == 0) {
-		rga2_slt();
-	}
-
-	return len;
-}
-
-static int rga2_debug_open(struct inode *inode, struct file *file)
-
-{
-	return single_open(file, rga2_debug_show, NULL);
-}
-
-static const struct file_operations rga2_debug_fops = {
-	.owner = THIS_MODULE,
-	.open = rga2_debug_open,
-	.read = seq_read,
-	.llseek = seq_lseek,
-	.release = single_release,
-	.write = rga2_debug_write,
-};
-
-static void rga2_debugfs_add(void)
-{
-	struct dentry *rga2_debug_root;
-	struct dentry *ent;
-
-	rga2_debug_root = debugfs_create_dir("rga2_debug", NULL);
-
-	ent = debugfs_create_file("rga2", 0644, rga2_debug_root,
-				  NULL, &rga2_debug_fops);
-	if (!ent) {
-		pr_err("create rga2_debugfs err\n");
-		debugfs_remove_recursive(rga2_debug_root);
-	}
-}
-
+#ifdef CONFIG_ROCKCHIP_RGA2_DEBUGGER
 void rga2_slt(void)
 {
 	int i;
@@ -2641,9 +2090,6 @@ static int __init rga2_init(void)
 
 #if RGA2_TEST_CASE
 	rga2_test_0();
-#endif
-#if RGA2_DEBUGFS
-	rga2_debugfs_add();
 #endif
 	INFO("Module initialized.\n");
 

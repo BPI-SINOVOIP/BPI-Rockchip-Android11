@@ -26,14 +26,11 @@
 // thread.h.
 #include <openssl/thread.h>
 
-
 #if defined(__cplusplus)
 extern "C" {
 #endif
 
-
 // crypto.h contains functions for initializing the crypto library.
-
 
 // CRYPTO_library_init initializes the crypto library. It must be called if the
 // library is built with BORINGSSL_NO_STATIC_INITIALIZER. Otherwise, it does
@@ -66,7 +63,6 @@ OPENSSL_EXPORT int FIPS_mode(void);
 // tests will always be run.
 OPENSSL_EXPORT int BORINGSSL_self_test(void);
 
-
 // Deprecated functions.
 
 // OPENSSL_VERSION_TEXT contains a string the identifies the version of
@@ -82,7 +78,7 @@ OPENSSL_EXPORT int BORINGSSL_self_test(void);
 // OpenSSL_version is a compatibility function that returns the string
 // "BoringSSL" if |which| is |OPENSSL_VERSION| and placeholder strings
 // otherwise.
-OPENSSL_EXPORT const char *OpenSSL_version(int which);
+OPENSSL_EXPORT const char* OpenSSL_version(int which);
 
 #define SSLEAY_VERSION OPENSSL_VERSION
 #define SSLEAY_CFLAGS OPENSSL_CFLAGS
@@ -91,7 +87,7 @@ OPENSSL_EXPORT const char *OpenSSL_version(int which);
 #define SSLEAY_DIR OPENSSL_DIR
 
 // SSLeay_version calls |OpenSSL_version|.
-OPENSSL_EXPORT const char *SSLeay_version(int which);
+OPENSSL_EXPORT const char* SSLeay_version(int which);
 
 // SSLeay is a compatibility function that returns OPENSSL_VERSION_NUMBER from
 // base.h.
@@ -126,8 +122,7 @@ OPENSSL_EXPORT void OPENSSL_load_builtin_modules(void);
 #define OPENSSL_INIT_NO_LOAD_CONFIG 0
 
 // OPENSSL_init_crypto calls |CRYPTO_library_init| and returns one.
-OPENSSL_EXPORT int OPENSSL_init_crypto(uint64_t opts,
-                                       const OPENSSL_INIT_SETTINGS *settings);
+OPENSSL_EXPORT int OPENSSL_init_crypto(uint64_t opts, const OPENSSL_INIT_SETTINGS* settings);
 
 // OPENSSL_cleanup does nothing.
 OPENSSL_EXPORT void OPENSSL_cleanup(void);
@@ -136,9 +131,8 @@ OPENSSL_EXPORT void OPENSSL_cleanup(void);
 // |BORINGSSL_FIPS| and zero otherwise.
 OPENSSL_EXPORT int FIPS_mode_set(int on);
 
-
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 #endif
 
-#endif  // OPENSSL_HEADER_CRYPTO_H
+#endif // OPENSSL_HEADER_CRYPTO_H

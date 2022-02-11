@@ -61,10 +61,8 @@
 extern "C" {
 #endif
 
-
 // ECDSA contains functions for signing and verifying with the Digital Signature
 // Algorithm over elliptic curves.
-
 
 // Signing and verifying.
 
@@ -73,22 +71,19 @@ extern "C" {
 // space. On successful exit, |*sig_len| is set to the actual number of bytes
 // written. The |type| argument should be zero. It returns one on success and
 // zero otherwise.
-OPENSSL_EXPORT int ECDSA_sign(int type, const uint8_t *digest,
-                              size_t digest_len, uint8_t *sig,
-                              unsigned int *sig_len, const EC_KEY *key);
+OPENSSL_EXPORT int ECDSA_sign(int type, const uint8_t* digest, size_t digest_len, uint8_t* sig, unsigned int* sig_len,
+                              const EC_KEY* key);
 
 // ECDSA_verify verifies that |sig_len| bytes from |sig| constitute a valid
 // signature by |key| of |digest|. (The |type| argument should be zero.) It
 // returns one on success or zero if the signature is invalid or an error
 // occurred.
-OPENSSL_EXPORT int ECDSA_verify(int type, const uint8_t *digest,
-                                size_t digest_len, const uint8_t *sig,
-                                size_t sig_len, const EC_KEY *key);
+OPENSSL_EXPORT int ECDSA_verify(int type, const uint8_t* digest, size_t digest_len, const uint8_t* sig, size_t sig_len,
+                                const EC_KEY* key);
 
 // ECDSA_size returns the maximum size of an ECDSA signature using |key|. It
 // returns zero if |key| is NULL or if it doesn't have a group set.
-OPENSSL_EXPORT size_t ECDSA_size(const EC_KEY *key);
-
+OPENSSL_EXPORT size_t ECDSA_size(const EC_KEY* key);
 
 // Low-level signing and verification.
 //
@@ -96,65 +91,58 @@ OPENSSL_EXPORT size_t ECDSA_size(const EC_KEY *key);
 // the two values in an ECDSA signature to be handled separately.
 
 struct ecdsa_sig_st {
-  BIGNUM *r;
-  BIGNUM *s;
+    BIGNUM* r;
+    BIGNUM* s;
 };
 
 // ECDSA_SIG_new returns a fresh |ECDSA_SIG| structure or NULL on error.
-OPENSSL_EXPORT ECDSA_SIG *ECDSA_SIG_new(void);
+OPENSSL_EXPORT ECDSA_SIG* ECDSA_SIG_new(void);
 
 // ECDSA_SIG_free frees |sig| its member |BIGNUM|s.
-OPENSSL_EXPORT void ECDSA_SIG_free(ECDSA_SIG *sig);
+OPENSSL_EXPORT void ECDSA_SIG_free(ECDSA_SIG* sig);
 
 // ECDSA_SIG_get0 sets |*out_r| and |*out_s|, if non-NULL, to the two
 // components of |sig|.
-OPENSSL_EXPORT void ECDSA_SIG_get0(const ECDSA_SIG *sig, const BIGNUM **out_r,
-                                   const BIGNUM **out_s);
+OPENSSL_EXPORT void ECDSA_SIG_get0(const ECDSA_SIG* sig, const BIGNUM** out_r, const BIGNUM** out_s);
 
 // ECDSA_SIG_set0 sets |sig|'s components to |r| and |s|, neither of which may
 // be NULL. On success, it takes ownership of each argument and returns one.
 // Otherwise, it returns zero.
-OPENSSL_EXPORT int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s);
+OPENSSL_EXPORT int ECDSA_SIG_set0(ECDSA_SIG* sig, BIGNUM* r, BIGNUM* s);
 
 // ECDSA_do_sign signs |digest_len| bytes from |digest| with |key| and returns
 // the resulting signature structure, or NULL on error.
-OPENSSL_EXPORT ECDSA_SIG *ECDSA_do_sign(const uint8_t *digest,
-                                        size_t digest_len, const EC_KEY *key);
+OPENSSL_EXPORT ECDSA_SIG* ECDSA_do_sign(const uint8_t* digest, size_t digest_len, const EC_KEY* key);
 
 // ECDSA_do_verify verifies that |sig| constitutes a valid signature by |key|
 // of |digest|. It returns one on success or zero if the signature is invalid
 // or on error.
-OPENSSL_EXPORT int ECDSA_do_verify(const uint8_t *digest, size_t digest_len,
-                                   const ECDSA_SIG *sig, const EC_KEY *key);
-
+OPENSSL_EXPORT int ECDSA_do_verify(const uint8_t* digest, size_t digest_len, const ECDSA_SIG* sig, const EC_KEY* key);
 
 // ASN.1 functions.
 
 // ECDSA_SIG_parse parses a DER-encoded ECDSA-Sig-Value structure from |cbs| and
 // advances |cbs|. It returns a newly-allocated |ECDSA_SIG| or NULL on error.
-OPENSSL_EXPORT ECDSA_SIG *ECDSA_SIG_parse(CBS *cbs);
+OPENSSL_EXPORT ECDSA_SIG* ECDSA_SIG_parse(CBS* cbs);
 
 // ECDSA_SIG_from_bytes parses |in| as a DER-encoded ECDSA-Sig-Value structure.
 // It returns a newly-allocated |ECDSA_SIG| structure or NULL on error.
-OPENSSL_EXPORT ECDSA_SIG *ECDSA_SIG_from_bytes(const uint8_t *in,
-                                               size_t in_len);
+OPENSSL_EXPORT ECDSA_SIG* ECDSA_SIG_from_bytes(const uint8_t* in, size_t in_len);
 
 // ECDSA_SIG_marshal marshals |sig| as a DER-encoded ECDSA-Sig-Value and appends
 // the result to |cbb|. It returns one on success and zero on error.
-OPENSSL_EXPORT int ECDSA_SIG_marshal(CBB *cbb, const ECDSA_SIG *sig);
+OPENSSL_EXPORT int ECDSA_SIG_marshal(CBB* cbb, const ECDSA_SIG* sig);
 
 // ECDSA_SIG_to_bytes marshals |sig| as a DER-encoded ECDSA-Sig-Value and, on
 // success, sets |*out_bytes| to a newly allocated buffer containing the result
 // and returns one. Otherwise, it returns zero. The result should be freed with
 // |OPENSSL_free|.
-OPENSSL_EXPORT int ECDSA_SIG_to_bytes(uint8_t **out_bytes, size_t *out_len,
-                                      const ECDSA_SIG *sig);
+OPENSSL_EXPORT int ECDSA_SIG_to_bytes(uint8_t** out_bytes, size_t* out_len, const ECDSA_SIG* sig);
 
 // ECDSA_SIG_max_len returns the maximum length of a DER-encoded ECDSA-Sig-Value
 // structure for a group whose order is represented in |order_len| bytes, or
 // zero on overflow.
 OPENSSL_EXPORT size_t ECDSA_SIG_max_len(size_t order_len);
-
 
 // Deprecated functions.
 
@@ -164,18 +152,16 @@ OPENSSL_EXPORT size_t ECDSA_SIG_max_len(size_t order_len);
 // be written to. Rather, a fresh |ECDSA_SIG| is allocated and the previous one
 // is freed. On successful exit, |*inp| is advanced past the DER structure. It
 // returns the result or NULL on error.
-OPENSSL_EXPORT ECDSA_SIG *d2i_ECDSA_SIG(ECDSA_SIG **out, const uint8_t **inp,
-                                        long len);
+OPENSSL_EXPORT ECDSA_SIG* d2i_ECDSA_SIG(ECDSA_SIG** out, const uint8_t** inp, long len);
 
 // i2d_ECDSA_SIG marshals a signature from |sig| to an ASN.1, DER
 // structure. If |outp| is not NULL then the result is written to |*outp| and
 // |*outp| is advanced just past the output. It returns the number of bytes in
 // the result, whether written or not, or a negative value on error.
-OPENSSL_EXPORT int i2d_ECDSA_SIG(const ECDSA_SIG *sig, uint8_t **outp);
-
+OPENSSL_EXPORT int i2d_ECDSA_SIG(const ECDSA_SIG* sig, uint8_t** outp);
 
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 
 extern "C++" {
 
@@ -185,7 +171,7 @@ BORINGSSL_MAKE_DELETER(ECDSA_SIG, ECDSA_SIG_free)
 
 BSSL_NAMESPACE_END
 
-}  // extern C++
+} // extern C++
 
 #endif
 
@@ -196,4 +182,4 @@ BSSL_NAMESPACE_END
 #define ECDSA_R_RANDOM_NUMBER_GENERATION_FAILED 104
 #define ECDSA_R_ENCODE_ERROR 105
 
-#endif  // OPENSSL_HEADER_ECDSA_H
+#endif // OPENSSL_HEADER_ECDSA_H

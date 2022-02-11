@@ -171,7 +171,6 @@ extern "C" {
 #define TLS1_AD_USER_CANCELLED 90
 #define TLS1_AD_NO_RENEGOTIATION 100
 #define TLS1_AD_MISSING_EXTENSION 109
-// codes 110-114 are from RFC3546
 #define TLS1_AD_UNSUPPORTED_EXTENSION 110
 #define TLS1_AD_CERTIFICATE_UNOBTAINABLE 111
 #define TLS1_AD_UNRECOGNIZED_NAME 112
@@ -179,6 +178,8 @@ extern "C" {
 #define TLS1_AD_BAD_CERTIFICATE_HASH_VALUE 114
 #define TLS1_AD_UNKNOWN_PSK_IDENTITY 115
 #define TLS1_AD_CERTIFICATE_REQUIRED 116
+#define TLS1_AD_NO_APPLICATION_PROTOCOL 120
+#define TLS1_AD_ECH_REQUIRED 121  // draft-ietf-tls-esni-10
 
 // ExtensionType values from RFC6066
 #define TLSEXT_TYPE_server_name 0
@@ -202,21 +203,54 @@ extern "C" {
 // ExtensionType value from RFC7627
 #define TLSEXT_TYPE_extended_master_secret 23
 
+// ExtensionType value from draft-ietf-quic-tls. Drafts 00 through 32 use
+// 0xffa5 which is part of the Private Use section of the registry, and it
+// collides with TLS-LTS and, based on scans, something else too (though this
+// hasn't been a problem in practice since it's QUIC-only). Drafts 33 onward
+// use the value 57 which was officially registered with IANA.
+#define TLSEXT_TYPE_quic_transport_parameters_legacy 0xffa5
+
+// ExtensionType value from RFC9000
+#define TLSEXT_TYPE_quic_transport_parameters 57
+
+// TLSEXT_TYPE_quic_transport_parameters_standard is an alias for
+// |TLSEXT_TYPE_quic_transport_parameters|. Use
+// |TLSEXT_TYPE_quic_transport_parameters| instead.
+#define TLSEXT_TYPE_quic_transport_parameters_standard \
+  TLSEXT_TYPE_quic_transport_parameters
+
+// ExtensionType value from RFC8879
+#define TLSEXT_TYPE_cert_compression 27
+
 // ExtensionType value from RFC4507
 #define TLSEXT_TYPE_session_ticket 35
 
-// ExtensionType values from draft-ietf-tls-tls13-18
+// ExtensionType values from RFC8446
 #define TLSEXT_TYPE_supported_groups 10
-#define TLSEXT_TYPE_key_share 40
 #define TLSEXT_TYPE_pre_shared_key 41
 #define TLSEXT_TYPE_early_data 42
 #define TLSEXT_TYPE_supported_versions 43
 #define TLSEXT_TYPE_cookie 44
 #define TLSEXT_TYPE_psk_key_exchange_modes 45
-#define TLSEXT_TYPE_ticket_early_data_info 46
+#define TLSEXT_TYPE_certificate_authorities 47
+#define TLSEXT_TYPE_signature_algorithms_cert 50
+#define TLSEXT_TYPE_key_share 51
 
 // ExtensionType value from RFC5746
 #define TLSEXT_TYPE_renegotiate 0xff01
+
+// ExtensionType value from draft-ietf-tls-subcerts.
+#define TLSEXT_TYPE_delegated_credential 0x22
+
+// ExtensionType value from draft-vvv-tls-alps. This is not an IANA defined
+// extension number.
+#define TLSEXT_TYPE_application_settings 17513
+
+// ExtensionType values from draft-ietf-tls-esni-10. This is not an IANA defined
+// extension number.
+#define TLSEXT_TYPE_encrypted_client_hello 0xfe0a
+#define TLSEXT_TYPE_ech_is_inner 0xda09
+#define TLSEXT_TYPE_ech_outer_extensions 0xfd00
 
 // ExtensionType value from RFC6962
 #define TLSEXT_TYPE_certificate_timestamp 18
@@ -228,6 +262,7 @@ extern "C" {
 #define TLSEXT_TYPE_channel_id 30032
 
 // status request value from RFC 3546
+#define TLSEXT_STATUSTYPE_nothing (-1)
 #define TLSEXT_STATUSTYPE_ocsp 1
 
 // ECPointFormat values from RFC 4492
@@ -248,6 +283,10 @@ extern "C" {
 #define TLSEXT_hash_sha256 4
 #define TLSEXT_hash_sha384 5
 #define TLSEXT_hash_sha512 6
+
+// From https://www.rfc-editor.org/rfc/rfc8879.html#section-3
+#define TLSEXT_cert_compression_zlib 1
+#define TLSEXT_cert_compression_brotli 2
 
 #define TLSEXT_MAXLEN_host_name 255
 
@@ -413,7 +452,7 @@ extern "C" {
 #define TLS1_CK_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 0x0300CCA9
 #define TLS1_CK_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256 0x0300CCAC
 
-// TLS 1.3 ciphersuites from draft-ietf-tls-tls13-16
+// TLS 1.3 ciphersuites from RFC 8446.
 #define TLS1_CK_AES_128_GCM_SHA256 0x03001301
 #define TLS1_CK_AES_256_GCM_SHA384 0x03001302
 #define TLS1_CK_CHACHA20_POLY1305_SHA256 0x03001303
@@ -585,10 +624,10 @@ extern "C" {
 #define TLS1_TXT_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256 \
   "ECDHE-PSK-CHACHA20-POLY1305"
 
-// TLS 1.3 ciphersuites from draft-ietf-tls-tls13-16
-#define TLS1_TXT_AES_128_GCM_SHA256 "AEAD-AES128-GCM-SHA256"
-#define TLS1_TXT_AES_256_GCM_SHA384 "AEAD-AES256-GCM-SHA384"
-#define TLS1_TXT_CHACHA20_POLY1305_SHA256 "AEAD-CHACHA20-POLY1305-SHA256"
+// TLS 1.3 ciphersuites from RFC 8446.
+#define TLS1_TXT_AES_128_GCM_SHA256 "TLS_AES_128_GCM_SHA256"
+#define TLS1_TXT_AES_256_GCM_SHA384 "TLS_AES_256_GCM_SHA384"
+#define TLS1_TXT_CHACHA20_POLY1305_SHA256 "TLS_CHACHA20_POLY1305_SHA256"
 
 
 #define TLS_CT_RSA_SIGN 1
@@ -600,22 +639,6 @@ extern "C" {
 #define TLS_CT_ECDSA_FIXED_ECDH 66
 
 #define TLS_MD_MAX_CONST_SIZE 20
-#define TLS_MD_CLIENT_FINISH_CONST "client finished"
-#define TLS_MD_CLIENT_FINISH_CONST_SIZE 15
-#define TLS_MD_SERVER_FINISH_CONST "server finished"
-#define TLS_MD_SERVER_FINISH_CONST_SIZE 15
-#define TLS_MD_KEY_EXPANSION_CONST "key expansion"
-#define TLS_MD_KEY_EXPANSION_CONST_SIZE 13
-#define TLS_MD_CLIENT_WRITE_KEY_CONST "client write key"
-#define TLS_MD_CLIENT_WRITE_KEY_CONST_SIZE 16
-#define TLS_MD_SERVER_WRITE_KEY_CONST "server write key"
-#define TLS_MD_SERVER_WRITE_KEY_CONST_SIZE 16
-#define TLS_MD_IV_BLOCK_CONST "IV block"
-#define TLS_MD_IV_BLOCK_CONST_SIZE 8
-#define TLS_MD_MASTER_SECRET_CONST "master secret"
-#define TLS_MD_MASTER_SECRET_CONST_SIZE 13
-#define TLS_MD_EXTENDED_MASTER_SECRET_CONST "extended master secret"
-#define TLS_MD_EXTENDED_MASTER_SECRET_CONST_SIZE 22
 
 
 #ifdef  __cplusplus

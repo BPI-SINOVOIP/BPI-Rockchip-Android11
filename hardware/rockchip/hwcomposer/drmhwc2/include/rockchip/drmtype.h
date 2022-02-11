@@ -155,6 +155,7 @@ typedef enum attribute_flag {
 }attribute_flag_t;
 
 typedef struct hwc2_drm_display {
+  uint32_t soc_id;
   bool bStandardSwitchResolution = false;
   int framebuffer_width;
   int framebuffer_height;
@@ -169,6 +170,7 @@ typedef struct hwc2_drm_display {
   int display_timeline;
   int hotplug_timeline;
   bool hdr_mode;
+  char overscan_value[PROPERTY_VALUE_MAX]={0};
   const struct disp_info* baseparameter_info;
 } hwc2_drm_display_t;
 

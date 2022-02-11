@@ -17,7 +17,7 @@ endif
 .PHONY: all
 ifneq ($(wildcard $(TA_DEV_KIT_DIR)/host_include/conf.mk),)
 ifeq "$(BUILD_CA)" "y"
-all: rkdemo ta
+all: rk_test ta
 else
 all: ta
 endif
@@ -33,17 +33,18 @@ ta:
 			  O=$(out-dir)/ta \
 			  $@
 
-.PHONY: rkdemo
-rkdemo:
-	$(q)$(MAKE) -C host/rkdemo CROSS_COMPILE="$(CROSS_COMPILE_HOST)" \
+.PHONY: rk_test
+rk_test:
+	$(q)$(MAKE) -C host/rk_test CROSS_COMPILE="$(CROSS_COMPILE_HOST)" \
 				--no-builtin-variables \
 				q=$(q) \
-				O=$(out-dir)/rkdemo  \
+				O=$(out-dir)/rk_test  \
 				$@
 
 .PHONY: clean
 ifneq ($(wildcard $(TA_DEV_KIT_DIR)/host_include/conf.mk),)
 clean:
+	$(q)$(MAKE) -C host/rk_test O=$(out-dir) $@
 	$(q)$(MAKE) -C ta O=$(out-dir)/ta q=$(q) $@
 	$(q)find ta/ \( -name "*.ta" -o -name "*.dmp" -o -name "*.elf" -o -name "*.map" -o -name "*.d" \) -exec rm -rf {} \;
 else

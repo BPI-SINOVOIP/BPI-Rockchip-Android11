@@ -51,7 +51,7 @@
 #endif
 
 /*hwc version*/
-#define GHWC_VERSION                    "0.66"
+#define GHWC_VERSION                    "0.67"
 
 /* hdr usage */
 /*usage & 0x0F000000
@@ -159,10 +159,22 @@ class DrmHwcBuffer {
 
 class DrmHwcNativeHandle {
  public:
-  DrmHwcNativeHandle() = default;
+  DrmHwcNativeHandle(){
+
+    int ret = pthread_mutex_init(&lock_, NULL);
+    if (ret) {
+      ALOGE("Failed to initialize DrmHwcNativeHandle lock %d\n", ret);
+      return;
+    }
+  };
 
   DrmHwcNativeHandle(const gralloc_module_t *gralloc, native_handle_t *handle)
       : gralloc_(gralloc), handle_(handle) {
+    int ret = pthread_mutex_init(&lock_, NULL);
+    if (ret) {
+      ALOGE("Failed to initialize DrmHwcNativeHandle lock %d\n", ret);
+      return;
+    }
   }
 
   DrmHwcNativeHandle(DrmHwcNativeHandle &&rhs) {
@@ -170,8 +182,13 @@ class DrmHwcNativeHandle {
     rhs.gralloc_ = NULL;
     handle_ = rhs.handle_;
     rhs.handle_ = NULL;
-  }
 
+    int ret = pthread_mutex_init(&lock_, NULL);
+    if (ret) {
+      ALOGE("Failed to initialize DrmHwcNativeHandle lock %d\n", ret);
+      return;
+    }
+  }
   ~DrmHwcNativeHandle();
 
   DrmHwcNativeHandle &operator=(DrmHwcNativeHandle &&rhs) {
@@ -194,6 +211,7 @@ class DrmHwcNativeHandle {
  private:
   const gralloc_module_t *gralloc_ = NULL;
   native_handle_t *handle_ = NULL;
+  mutable pthread_mutex_t lock_;
 };
 
 template <typename T>

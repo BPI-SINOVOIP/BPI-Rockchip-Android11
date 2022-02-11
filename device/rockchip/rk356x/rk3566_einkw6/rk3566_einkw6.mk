@@ -34,7 +34,7 @@ $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-he
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/rockchip/rk356x/sepolicy_ebook_system
 BOARD_SEPOLICY_DIRS += device/rockchip/rk356x/sepolicy_ebook
 
-DEVICE_PACKAGE_OVERLAYS := device/rockchip/common/overlay $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay device/rockchip/common/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -71,5 +71,5 @@ PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=210 \
                               sys.eink.rgba2y4_by_rga=1 \
                               persist.sys.idle-wakeup=false \
                               persist.sys.idle-delay=5000 \
-                              persist.sys.contrast_key=0xffccba9876543000 \
+                              persist.sys.gamma.level=0.5 \
                               sys.eink.recovery.eink_fb = true

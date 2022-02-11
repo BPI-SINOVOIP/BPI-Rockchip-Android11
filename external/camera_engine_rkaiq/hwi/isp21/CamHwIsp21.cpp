@@ -150,7 +150,8 @@ CamHwIsp21::gen_full_isp_params(const struct isp21_isp_params_cfg* update_params
         if (update_params->module_cfg_update & (1LL << i)) {
 
 #define CHECK_UPDATE_PARAMS(dst, src) \
-            if (memcmp(&dst, &src, sizeof(dst)) == 0) { \
+            if (memcmp(&dst, &src, sizeof(dst)) == 0 && \
+                full_params->frame_id > ISP_PARAMS_EFFECT_DELAY_CNT) { \
                 continue; \
             } \
             *module_cfg_update_partial |= 1LL << i; \

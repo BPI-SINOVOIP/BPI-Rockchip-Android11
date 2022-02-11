@@ -306,7 +306,7 @@ int DrmResources::Init() {
   ret = drmSetClientCap(fd(), DRM_CLIENT_CAP_SHARE_PLANES, 1);
   if (ret) {
     ALOGE("Failed to set share planes %d", ret);
-    return ret;
+    //return ret;
   }
 #endif
 
@@ -919,7 +919,11 @@ int DrmResources::UpdateDisplayRoute(void)
   {
     DrmCrtc *crtc = primary->encoder()->crtc();
     if(!crtc->get_afbc()){
+#ifdef USE_GRALLOC_4 // Android 11 use Gralloc 4.0
+      property_set("vendor.gralloc.no_afbc_for_fb_target_layer", "1");
+#else
       property_set( PROPERTY_TYPE ".gralloc.disable_afbc", "1");
+#endif
       ALOGD_IF(log_level(DBG_VERBOSE), "%s:line=%d primary conn[%d] crtc=%d support AFBC(%d), to disable AFBC\n",
                __FUNCTION__, __LINE__, primary->id(), crtc->id(),crtc->get_afbc());
     }

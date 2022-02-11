@@ -3,6 +3,9 @@ on property:sys.boot_completed=1
     chown system system /sys/class/devfreq/ff400000.gpu/min_freq
     chown system system /sys/class/devfreq/ff400000.gpu/max_freq
     chmod 0664 /sys/class/devfreq/ff400000.gpu/governor
+    chmod 0664 /sys/class/devfreq/ff400000.gpu/min_freq
+    chmod 0664 /sys/class/devfreq/ff400000.gpu/max_freq
+
     write /sys/devices/system/cpu/cpufreq/policy0/interactive/target_loads 65
 
 on boot

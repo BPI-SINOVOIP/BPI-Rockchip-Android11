@@ -161,7 +161,7 @@ public class SlideshowPage extends ActivityState {
             return;
         }
 
-        mSlideshowView.next(slide.bitmap, slide.item.getRotation()>0?(slide.item.getRotation()-90):slide.item.getRotation());
+        mSlideshowView.next(slide.bitmap, 0/*slide.item.getRotation()*/);
 
         setStateResult(Activity.RESULT_OK, mResultIntent
                 .putExtra(KEY_ITEM_PATH, slide.item.getPath().toString())

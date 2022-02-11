@@ -558,6 +558,7 @@
 			resets = <&cru SRST_USB3OTG0>;
 			reset-names = "usb3-otg";
 			snps,dis_enblslpm_quirk;
+			snps,dis-u1u2-quirk;
 			snps,dis-u2-freeclk-exists-quirk;
 			snps,dis-del-phy-power-chg-quirk;
 			snps,dis-tx-ipgap-linecheck-quirk;
@@ -1146,16 +1147,20 @@
 		>;
 		rockchip,pvtm-ch = <0 5>;
 
+		opp-700000000 {
+			opp-hz = /bits/ 64 <700000000>;
+			opp-microvolt = <0>;
+		};
+		opp-900000000 {
+			opp-hz = /bits/ 64 <900000000>;
+			opp-microvolt = <900000>;
+		};
 		opp-1000000000 {
 			opp-hz = /bits/ 64 <1000000000>;
 			opp-microvolt = <950000>;
 			opp-microvolt-L0 = <950000>;
 			opp-microvolt-L1 = <925000>;
 			opp-microvolt-L2 = <0>;
-		};
-		opp-900000000 {
-			opp-hz = /bits/ 64 <900000000>;
-			opp-microvolt = <0>;
 		};
 	};
 
@@ -2149,11 +2154,15 @@
 		clocks = <&scmi_clk 3>;
 		clock-names = "dmc_clk";
 		operating-points-v2 = <&dmc_opp_table>;
-		ddr_timing = <&ddr_timing>;
 		vop-bw-dmc-freq = <
 		/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
-			0	572	324000
-			573	99999	528000
+			0	286	324000
+			287	99999	528000
+		>;
+		vop-frame-bw-dmc-freq = <
+		/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
+			0	620	324000
+			621	99999	780000
 		>;
 		cpu-bw-dmc-freq = <
 		/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
@@ -2181,6 +2190,19 @@
 		status = "disabled";
 	};
 
+	dmc_fsp: dmc-fsp {
+		compatible = "rockchip,rk3568-dmc-fsp";
+
+		debug_print_level = <0>;
+		ddr3_params = <&ddr3_params>;
+		ddr4_params = <&ddr4_params>;
+		lpddr3_params = <&lpddr3_params>;
+		lpddr4_params = <&lpddr4_params>;
+		lpddr4x_params = <&lpddr4x_params>;
+
+		status = "okay";
+	};
+
 	dmc_opp_table: dmc-opp-table {
 		compatible = "operating-points-v2";
 
@@ -2191,12 +2213,17 @@
 		rockchip,low-temp = <0>;
 		rockchip,low-temp-adjust-volt = <
 			/* MHz    MHz    uV */
-			   0      1560   25000
+			   0      1560   75000
 		>;
 		rockchip,leakage-voltage-sel = <
 			1   80    0
 			81  254   1
 		>;
+		rockchip,pvtm-voltage-sel = <
+			0        82000   0
+			82001    100000  1
+		>;
+		rockchip,pvtm-ch = <0 5>;
 
 		opp-1560000000 {
 			opp-hz = /bits/ 64 <1560000000>;

@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: BSD-2-Clause */
 /*
  * Copyright (c) 2018-2019, Linaro Limited
+ * Copyright (c) 2020, Open Mobile Platform LLC
  */
 #ifndef __PTA_SYSTEM_H
 #define __PTA_SYSTEM_H
@@ -159,5 +160,45 @@
  * [in]     value[3].b: Extra pad after memory range
  */
 #define PTA_SYSTEM_REMAP		9
+
+/*
+ * Load a shared library
+ *
+ * [in]     memref[0]: the UUID of the shared library (@filename)
+ * [in]     value[1].a: @flags, must be (RTLD_NOW | RTLD_GLOBAL | RTLD_NODELETE)
+ *
+ * Used by: (libdl) dlopen(const char *filename, int flags)
+ */
+#define PTA_SYSTEM_DLOPEN               10
+
+/*
+ * Resolve a symbol in a previously loaded shared library or in the whole TA
+ *
+ * [in]     memref[0]: the UUID of the shared library, or the nil UUID to
+ *                     search the whole TA
+ * [in]     memref[1]: symbol name (@symbol)
+ * [out]    value[2]: address of the symbol or NULL
+ *
+ * Used by: (libdl) dlsym(void *handle, const char *symbol)
+ */
+#define PTA_SYSTEM_DLSYM                11
+
+/*
+ * Retrieves a copy of the TPM Event log held in secure memory.
+ *
+ * [out]    memref[0]: Pointer to the buffer where to store the event log.
+ */
+#define PTA_SYSTEM_GET_TPM_EVENT_LOG	12
+
+/*
+ * Invoke a tee-supplicant's plugin
+ *
+ * [in]     memref[0]        uuid of the plugin (TEE_UUID)
+ * [in]     value[1].a       command for the plugin
+ * [in]     value[1].b       sub_command for the plugin
+ * [in/out] memref[2]        additional data for the plugin
+ * [out]    value[3].a       output length of data
+ */
+#define PTA_SYSTEM_SUPP_PLUGIN_INVOKE	13
 
 #endif /* __PTA_SYSTEM_H */

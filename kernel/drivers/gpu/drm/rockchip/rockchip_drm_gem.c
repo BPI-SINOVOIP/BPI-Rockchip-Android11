@@ -17,11 +17,12 @@
 #include <drm/drm_gem.h>
 #include <drm/drm_vma_manager.h>
 
-#include <linux/dma-buf.h>
+#include <linux/dma-buf-cache.h>
 #include <linux/genalloc.h>
 #include <linux/iommu.h>
 #include <linux/pagemap.h>
 #include <linux/vmalloc.h>
+#include <linux/swiotlb.h>
 
 #include "rockchip_drm_drv.h"
 #include "rockchip_drm_gem.h"
@@ -101,6 +102,30 @@ static void rockchip_gem_free_list(struct list_head lists[])
 			kfree(info);
 		}
 	}
+}
+
+static struct sg_table *rockchip_gem_pages_to_sg(struct page **pages, unsigned int nr_pages)
+{
+	struct sg_table *sg = NULL;
+	int ret;
+#define SG_SIZE_MAX	(IO_TLB_SEGSIZE * (1 << IO_TLB_SHIFT))
+
+	sg = kmalloc(sizeof(struct sg_table), GFP_KERNEL);
+	if (!sg) {
+		ret = -ENOMEM;
+		goto out;
+	}
+
+	ret = __sg_alloc_table_from_pages(sg, pages, nr_pages, 0,
+					  nr_pages << PAGE_SHIFT,
+					  SG_SIZE_MAX, GFP_KERNEL);
+	if (ret)
+		goto out;
+
+	return sg;
+out:
+	kfree(sg);
+	return ERR_PTR(ret);
 }
 
 static int rockchip_gem_get_pages(struct rockchip_gem_object *rk_obj)
@@ -199,7 +224,7 @@ static int rockchip_gem_get_pages(struct rockchip_gem_object *rk_obj)
 	DRM_DEBUG_KMS("%s, %d, end = %d, n_pages = %d\n", __func__, __LINE__,
 			end, n_pages);
 
-	rk_obj->sgt = drm_prime_pages_to_sg(dst_pages, rk_obj->num_pages);
+	rk_obj->sgt = rockchip_gem_pages_to_sg(dst_pages, rk_obj->num_pages);
 
 	if (IS_ERR(rk_obj->sgt)) {
 		ret = PTR_ERR(rk_obj->sgt);
@@ -369,7 +394,7 @@ static int rockchip_gem_alloc_secure(struct rockchip_gem_object *rk_obj)
 		paddr += PAGE_SIZE;
 		i++;
 	}
-	sgt = drm_prime_pages_to_sg(rk_obj->pages, rk_obj->num_pages);
+	sgt = rockchip_gem_pages_to_sg(rk_obj->pages, rk_obj->num_pages);
 	if (IS_ERR(sgt)) {
 		ret = PTR_ERR(sgt);
 		goto err_free_pages;
@@ -678,6 +703,20 @@ err_free_rk_obj:
 	return ERR_PTR(ret);
 }
 
+static void rockchip_gem_destroy(struct drm_gem_object *obj, struct sg_table *sg)
+{
+	struct dma_buf_attachment *attach;
+	struct dma_buf *dma_buf;
+
+	attach = obj->import_attach;
+	if (sg)
+		dma_buf_unmap_attachment(attach, sg, DMA_BIDIRECTIONAL);
+	dma_buf = attach->dmabuf;
+	dma_buf_detach(attach->dmabuf, attach);
+	/* remove the reference */
+	dma_buf_put(dma_buf);
+}
+
 /*
  * rockchip_gem_free_object - (struct drm_driver)->gem_free_object_unlocked
  * callback function
@@ -696,7 +735,13 @@ void rockchip_gem_free_object(struct drm_gem_object *obj)
 				     rk_obj->sgt->nents, DMA_BIDIRECTIONAL);
 		}
 		drm_free_large(rk_obj->pages);
-#ifndef CONFIG_ARCH_ROCKCHIP
+#if defined(CONFIG_DMABUF_CACHE)
+		/*
+		 * The dma_buf_unmap_attachment and dma_buf_detach will be re-defined if
+		 * CONFIG_DMABUF_CACHE is enabled.
+		 */
+		rockchip_gem_destroy(obj, rk_obj->sgt);
+#elif !defined(CONFIG_ARCH_ROCKCHIP)
 		drm_prime_gem_destroy(obj, rk_obj->sgt);
 #endif
 	} else {
@@ -788,7 +833,7 @@ struct sg_table *rockchip_gem_prime_get_sg_table(struct drm_gem_object *obj)
 	int ret;
 
 	if (rk_obj->pages)
-		return drm_prime_pages_to_sg(rk_obj->pages, rk_obj->num_pages);
+		return rockchip_gem_pages_to_sg(rk_obj->pages, rk_obj->num_pages);
 
 	sgt = kzalloc(sizeof(*sgt), GFP_KERNEL);
 	if (!sgt)
@@ -905,9 +950,13 @@ void *rockchip_gem_prime_vmap(struct drm_gem_object *obj)
 {
 	struct rockchip_gem_object *rk_obj = to_rockchip_obj(obj);
 
-	if (rk_obj->pages)
-		return vmap(rk_obj->pages, rk_obj->num_pages, VM_MAP,
-			    pgprot_writecombine(PAGE_KERNEL));
+	if (rk_obj->pages) {
+		pgprot_t prot;
+
+		prot = rk_obj->flags & ROCKCHIP_BO_CACHABLE ? PAGE_KERNEL : pgprot_writecombine(PAGE_KERNEL);
+
+		return vmap(rk_obj->pages, rk_obj->num_pages, VM_MAP, prot);
+	}
 
 	if (rk_obj->dma_attrs & DMA_ATTR_NO_KERNEL_MAPPING)
 		return NULL;

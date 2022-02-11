@@ -86,11 +86,11 @@
 #define V4L2_SEL_FLAG_KEEP_CONFIG (1 << 2)
 
 struct v4l2_edid {
-  __u32 pad;
-  __u32 start_block;
-  __u32 blocks;
-  __u32 reserved[5];
-  __u8* edid;
+    __u32 pad;
+    __u32 start_block;
+    __u32 blocks;
+    __u32 reserved[5];
+    __u8* edid;
 };
 
 /* Backward compatibility target definitions --- to be removed. */

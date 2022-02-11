@@ -8,7 +8,8 @@
 
 #include "RKHWEncApi.h"
 
-typedef enum {
+typedef enum
+{
     UNSUPPORT_PROFILE = -1,
     BASELINE_PROFILE = 66,
     MAIN_PROFILE = 77,
@@ -20,7 +21,8 @@ typedef enum {
  * parameter set rbsp. See Annex A.
  * @published All
  */
-typedef enum AVCLevel {
+typedef enum AVCLevel
+{
     AVC_LEVEL_AUTO = 0,
     AVC_LEVEL1_B = 9,
     AVC_LEVEL1 = 10,
@@ -40,11 +42,7 @@ typedef enum AVCLevel {
     AVC_LEVEL5_1 = 51
 } AVCLevel;
 
-RKHWEncApi::RKHWEncApi() :
-    mVpuCtx(NULL),
-    mSpsPpsBuf(NULL),
-    mSpsPpsLen(0),
-    mFrameCount(0)
+RKHWEncApi::RKHWEncApi() : mVpuCtx(NULL), mSpsPpsBuf(NULL), mSpsPpsLen(0), mFrameCount(0)
 {
     ALOGD("RKHWEncApi enter");
 }
@@ -70,12 +68,12 @@ RKHWEncApi::~RKHWEncApi()
     }
 }
 
-bool RKHWEncApi::init(EncCfgInfo *cfg)
+bool RKHWEncApi::init(EncCfgInfo* cfg)
 {
     int32_t ret;
-    EncParameter_t *params = NULL;
+    EncParameter_t* params = NULL;
 
-    mVpuCtx = (VpuCodecContext_t *)malloc(sizeof(VpuCodecContext_t));
+    mVpuCtx = (VpuCodecContext_t*)malloc(sizeof(VpuCodecContext_t));
     ret = vpu_open_context(&mVpuCtx);
     if (ret) {
         ALOGE("ERROR: Failed to open ctx, ErrCode %d", ret);
@@ -124,12 +122,8 @@ bool RKHWEncApi::init(EncCfgInfo *cfg)
           "profileIdc = %d,\n"
           "levelIdc = %d,\n"
           "rc_mode = %d,\n",
-          params->width, params->height,
-          params->bitRate, params->framerate,
-          params->format, params->enableCabac,
-          params->cabacInitIdc, params->intraPicRate,
-          params->profileIdc, params->levelIdc,
-          params->rc_mode);
+          params->width, params->height, params->bitRate, params->framerate, params->format, params->enableCabac,
+          params->cabacInitIdc, params->intraPicRate, params->profileIdc, params->levelIdc, params->rc_mode);
 
     ret = mVpuCtx->init(mVpuCtx, NULL, 0);
     if (ret) {
@@ -139,7 +133,7 @@ bool RKHWEncApi::init(EncCfgInfo *cfg)
 
     mVpuCtx->control(mVpuCtx, VPU_API_ENC_GETCFG, (void*)params);
     if (mVpuCtx->extradata != NULL && mVpuCtx->extradata_size < 2048) {
-        mSpsPpsBuf = (unsigned char *)malloc(2048);
+        mSpsPpsBuf = (unsigned char*)malloc(2048);
         memcpy(mSpsPpsBuf, mVpuCtx->extradata, mVpuCtx->extradata_size);
         mSpsPpsLen = mVpuCtx->extradata_size;
         ALOGD("get h264 sps_pps len %d", mSpsPpsLen);
@@ -148,7 +142,7 @@ bool RKHWEncApi::init(EncCfgInfo *cfg)
     return true;
 }
 
-bool RKHWEncApi::sendFrame(char *data, int32_t size, int64_t pts, int32_t flag)
+bool RKHWEncApi::sendFrame(char* data, int32_t size, int64_t pts, int32_t flag)
 {
     int32_t ret;
     EncInputStream_t aInput;
@@ -178,7 +172,7 @@ bool RKHWEncApi::sendFrame(char *data, int32_t size, int64_t pts, int32_t flag)
         return false; // retry again
     }
 
-    //ALOGI("Send pkt size %d pts %lld flag %d", size, pts, flag);
+    // ALOGI("Send pkt size %d pts %lld flag %d", size, pts, flag);
 
     return true;
 }
@@ -213,12 +207,12 @@ bool RKHWEncApi::sendFrame(int32_t fd, int32_t size, int64_t pts, int32_t flag)
         return false; // retry again
     }
 
-    //ALOGI("send pkt size %d pts %lld flag %d", size, pts, flag);
+    // ALOGI("send pkt size %d pts %lld flag %d", size, pts, flag);
 
     return true;
 }
 
-bool RKHWEncApi::getOutStream(EncoderOut_t *encOut)
+bool RKHWEncApi::getOutStream(EncoderOut_t* encOut)
 {
     int32_t ret;
 
@@ -251,8 +245,8 @@ bool RKHWEncApi::getOutStream(EncoderOut_t *encOut)
         }
 
         mFrameCount++;
-        ALOGI("Get one frame_num %d size %d pts %lld keyFrame %d",
-              mFrameCount, encOut->size, encOut->timeUs, encOut->keyFrame);
+        ALOGI("Get one frame_num %d size %d pts %lld keyFrame %d", mFrameCount, encOut->size, encOut->timeUs,
+              encOut->keyFrame);
 
         return true;
     }

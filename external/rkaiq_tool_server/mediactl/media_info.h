@@ -28,8 +28,8 @@ extern "C" {
 #endif
 
 struct flag_name {
-  __u32 flag;
-  char* name;
+    __u32 flag;
+    char* name;
 };
 
 void print_flags(const struct flag_name* flag_names, unsigned int num_entries, __u32 flags);
@@ -45,6 +45,6 @@ void media_print_pad_text(struct media_entity* entity, const struct media_pad* p
 
 #ifdef __cplusplus
 }
-#endif  // __cplusplus
+#endif // __cplusplus
 
 #endif

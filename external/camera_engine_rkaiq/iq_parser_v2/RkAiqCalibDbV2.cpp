@@ -74,6 +74,7 @@ void calibdbV2_ctx_delete(CamCalibDbV2Context_t* calib_ctx) {
 namespace RkCam {
 
 std::map<std::string, CamCalibDbProj_t *> RkAiqCalibDbV2::mCalibDbsMap;
+std::mutex RkAiqCalibDbV2::calib_mutex;
 
 CamCalibDbV2Context_t *RkAiqCalibDbV2::CalibV2Alloc() {
     CamCalibDbV2Context_t *calibv2 = calibdbV2_ctx_new();
@@ -310,6 +311,7 @@ cJSON *RkAiqCalibDbV2::calib2cjson(const CamCalibDbV2Context_t *calib) {
 CamCalibDbProj_t *RkAiqCalibDbV2::createCalibDbProj(const char *jsfile) {
     std::map<std::string, CamCalibDbProj_t *>::iterator it;
     std::string str(jsfile);
+    const std::lock_guard<std::mutex> lock(RkAiqCalibDbV2::calib_mutex);
 
     it = mCalibDbsMap.find(str);
     if (it != mCalibDbsMap.end()) {
@@ -514,7 +516,7 @@ RkAiqAlgoType_t RkAiqCalibDbV2::string2algostype(const char *str) {
         {"amerge_calib", RK_AIQ_ALGO_TYPE_AMERGE},
         {"atmo_calib", RK_AIQ_ALGO_TYPE_ATMO},
         {"anr_calib", RK_AIQ_ALGO_TYPE_ANR},
-        {"alsc_calib", RK_AIQ_ALGO_TYPE_ALSC},
+        {"lsc_v2", RK_AIQ_ALGO_TYPE_ALSC},
         {"agic_calib_v20", RK_AIQ_ALGO_TYPE_AGIC},
         {"agic_calib_v21", RK_AIQ_ALGO_TYPE_AGIC},
         {"adebayer_calib", RK_AIQ_ALGO_TYPE_ADEBAYER},
@@ -1500,7 +1502,7 @@ int RkAiqCalibDbV2::CamCalibDbFreeSharpV3Ctx(CalibDbV2_SharpV3_t* sharp_v3)
 int RkAiqCalibDbV2::CamCalibDbFreeSceneCtx(void* scene_ctx) {
     CamCalibDbV2Context_t ctx_temp;
     ctx_temp.calib_scene = (char*)scene_ctx;
-    
+
     CamCalibDbV2Context_t* ctx = &ctx_temp;
 
     if(CHECK_ISP_HW_V21()) {

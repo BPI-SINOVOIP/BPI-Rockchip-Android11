@@ -478,7 +478,7 @@ std::tuple<int, int> DrmDevice::Init(const char *path, int num_displays) {
       break;
     }
 
-    std::unique_ptr<DrmPlane> plane(new DrmPlane(this, p));
+    std::unique_ptr<DrmPlane> plane(new DrmPlane(this, p, soc_id_));
 
     ret = plane->Init();
     if (ret) {

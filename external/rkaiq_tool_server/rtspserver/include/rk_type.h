@@ -21,37 +21,36 @@
 
 #if defined(_WIN32) && !defined(__MINGW32CE__)
 
-typedef unsigned char           RK_U8;
-typedef unsigned short          RK_U16;
-typedef unsigned int            RK_U32;
-typedef unsigned long           RK_ULONG;
-typedef unsigned __int64        RK_U64;
+typedef unsigned char RK_U8;
+typedef unsigned short RK_U16;
+typedef unsigned int RK_U32;
+typedef unsigned long RK_ULONG;
+typedef unsigned __int64 RK_U64;
 
-typedef signed char             RK_S8;
-typedef signed short            RK_S16;
-typedef signed int              RK_S32;
-typedef signed long             RK_LONG;
-typedef signed __int64          RK_S64;
+typedef signed char RK_S8;
+typedef signed short RK_S16;
+typedef signed int RK_S32;
+typedef signed long RK_LONG;
+typedef signed __int64 RK_S64;
 
 #else
 
-typedef unsigned char           RK_U8;
-typedef unsigned short          RK_U16;
-typedef unsigned int            RK_U32;
-typedef unsigned long           RK_ULONG;
-typedef unsigned long long int  RK_U64;
+typedef unsigned char RK_U8;
+typedef unsigned short RK_U16;
+typedef unsigned int RK_U32;
+typedef unsigned long RK_ULONG;
+typedef unsigned long long int RK_U64;
 
-
-typedef signed char             RK_S8;
-typedef signed short            RK_S16;
-typedef signed int              RK_S32;
-typedef signed long             RK_LONG;
-typedef signed long long int    RK_S64;
+typedef signed char RK_S8;
+typedef signed short RK_S16;
+typedef signed int RK_S32;
+typedef signed long RK_LONG;
+typedef signed long long int RK_S64;
 
 #endif
 
 #ifndef MODULE_TAG
-#define MODULE_TAG              NULL
+    #define MODULE_TAG NULL
 #endif
 
 /**
@@ -61,7 +60,8 @@ typedef signed long long int    RK_S64;
  *          encoder and Image Signal Process(ISP). So far decoder and encoder
  *          are supported perfectly, and ISP will be supported in the future.
  */
-typedef enum {
+typedef enum
+{
     MPP_CTX_DEC,  /**< decoder */
     MPP_CTX_ENC,  /**< encoder */
     MPP_CTX_ISP,  /**< isp */
@@ -80,25 +80,26 @@ typedef enum {
  *        not differentiate between MPEG-4 and H.264 bit streams, it is
  *        up to the codec to handle this.
  */
-typedef enum {
-    MPP_VIDEO_CodingUnused,             /**< Value when coding is N/A */
-    MPP_VIDEO_CodingAutoDetect,         /**< Autodetection of coding type */
-    MPP_VIDEO_CodingMPEG2,              /**< AKA: H.262 */
-    MPP_VIDEO_CodingH263,               /**< H.263 */
-    MPP_VIDEO_CodingMPEG4,              /**< MPEG-4 */
-    MPP_VIDEO_CodingWMV,                /**< Windows Media Video (WMV1,WMV2,WMV3)*/
-    MPP_VIDEO_CodingRV,                 /**< all versions of Real Video */
-    MPP_VIDEO_CodingAVC,                /**< H.264/AVC */
-    MPP_VIDEO_CodingMJPEG,              /**< Motion JPEG */
-    MPP_VIDEO_CodingVP8,                /**< VP8 */
-    MPP_VIDEO_CodingVP9,                /**< VP9 */
-    MPP_VIDEO_CodingVC1 = 0x01000000,   /**< Windows Media Video (WMV1,WMV2,WMV3)*/
-    MPP_VIDEO_CodingFLV1,               /**< Sorenson H.263 */
-    MPP_VIDEO_CodingDIVX3,              /**< DIVX3 */
+typedef enum
+{
+    MPP_VIDEO_CodingUnused,           /**< Value when coding is N/A */
+    MPP_VIDEO_CodingAutoDetect,       /**< Autodetection of coding type */
+    MPP_VIDEO_CodingMPEG2,            /**< AKA: H.262 */
+    MPP_VIDEO_CodingH263,             /**< H.263 */
+    MPP_VIDEO_CodingMPEG4,            /**< MPEG-4 */
+    MPP_VIDEO_CodingWMV,              /**< Windows Media Video (WMV1,WMV2,WMV3)*/
+    MPP_VIDEO_CodingRV,               /**< all versions of Real Video */
+    MPP_VIDEO_CodingAVC,              /**< H.264/AVC */
+    MPP_VIDEO_CodingMJPEG,            /**< Motion JPEG */
+    MPP_VIDEO_CodingVP8,              /**< VP8 */
+    MPP_VIDEO_CodingVP9,              /**< VP9 */
+    MPP_VIDEO_CodingVC1 = 0x01000000, /**< Windows Media Video (WMV1,WMV2,WMV3)*/
+    MPP_VIDEO_CodingFLV1,             /**< Sorenson H.263 */
+    MPP_VIDEO_CodingDIVX3,            /**< DIVX3 */
     MPP_VIDEO_CodingVP6,
-    MPP_VIDEO_CodingHEVC,               /**< H.265/HEVC */
-    MPP_VIDEO_CodingAVSPLUS,            /**< AVS+ */
-    MPP_VIDEO_CodingAVS,                /**< AVS profile=0x20 */
+    MPP_VIDEO_CodingHEVC,                           /**< H.265/HEVC */
+    MPP_VIDEO_CodingAVSPLUS,                        /**< AVS+ */
+    MPP_VIDEO_CodingAVS,                            /**< AVS profile=0x20 */
     MPP_VIDEO_CodingKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos Standard Extensions */
     MPP_VIDEO_CodingVendorStartUnused = 0x7F000000, /**< Reserved region for introducing Vendor Extensions */
     MPP_VIDEO_CodingMax = 0x7FFFFFFF

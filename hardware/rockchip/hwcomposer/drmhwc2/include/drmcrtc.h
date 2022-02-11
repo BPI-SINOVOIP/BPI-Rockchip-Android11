@@ -45,6 +45,9 @@ class DrmCrtc {
   bool can_overscan() const;
   bool get_afbc() const;
   bool get_alpha_scale() const;
+  bool get_hdr() const;
+  bool get_next_hdr() const;
+
   uint32_t get_soc_id() const { return soc_id_; }
   uint32_t get_port_id() const { return port_id_; }
   uint32_t get_aclk() const { return aclk_; }
@@ -69,6 +72,7 @@ class DrmCrtc {
 
  private:
   DrmDevice *drm_;
+  int drm_version_;
 
   uint32_t id_;
   unsigned pipe_;
@@ -76,9 +80,11 @@ class DrmCrtc {
 
   DrmMode mode_;
 
-  bool can_overscan_;
-  bool can_alpha_scale_;
-  bool b_afbc_;
+  bool b_can_overscan_;
+  bool b_can_alpha_scale_;
+  bool b_can_afbc_; // RK3399
+  bool b_can_hdr10_;
+  bool b_can_next_hdr_;
 
   DrmProperty active_property_;
   DrmProperty mode_property_;

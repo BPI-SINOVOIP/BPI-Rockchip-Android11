@@ -145,10 +145,22 @@
   *  - LDCH: modify the middle row of mesh(minus 6 pixels) when saveMaxFovX == 1 for old LDCH bug(avoid the last pixel in the row map to the interval of [last-5, last-3]).
 			 valid flag: need to set isLdchOld = 1.
   
+  * v4.0.5
+  *  - date: 2021-08-12
+  *  - LDCH: last version didnot completely solve this bug: the middle row of mesh(minus 6 pixels) when saveMaxFovX == 1 for old LDCH bug(avoid the last pixel in the row map to the interval of [last-5, last-3]).
+			 valid flag: need to set isLdchOld = 1.
+  
+  * v4.0.6
+  *  - date: 2021-08-14
+  *  - LDCH: consider these case:
+             1.rhoMaxW < rohMaxH for old LDCH bug(avoid the last pixel in the row map to the interval of [last-5, last-3]).
+			 2.identity mesh between penultimate and last rows may cause old LDCH bug when interpolation.
+			 valid flag: need to set isLdchOld = 1.
+
 */
 
-#define RK_GENMESH_VERSION_REAL_V "v4.0.4"
-#define RK_GENMESH_RELEASE_DATE "2021-07-05"
+#define RK_GENMESH_VERSION_REAL_V "v4.0.6"
+#define RK_GENMESH_RELEASE_DATE "2021-08-14"
 
   /******* DO NOT EDIT THE FOLLOWINGS *******/
 

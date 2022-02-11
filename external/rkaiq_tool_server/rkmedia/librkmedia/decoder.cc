@@ -4,14 +4,16 @@
 
 #include "decoder.h"
 
-namespace easymedia {
+namespace easymedia
+{
 
     DEFINE_REFLECTOR(Decoder)
 
-// request should equal codec_name
+    // request should equal codec_name
     DEFINE_FACTORY_COMMON_PARSE(Decoder)
 
-    bool Decoder::InitConfig(const MediaConfig &cfg) {
+    bool Decoder::InitConfig(const MediaConfig& cfg)
+    {
         UNUSED(cfg);
         return true;
     }

@@ -15,4 +15,5 @@ ${_block_prefix}system_ext  /system_ext ext4 ro,barrier=1 ${_flags},first_stage_
 /devices/platform/*.sata*   auto  vfat defaults voldmanaged=sata:auto
 # For sdmmc
 /devices/platform/${_sdmmc_device}/mmc_host*        auto auto defaults voldmanaged=sdcard1:auto
-/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,inlinecrypt,reserve_root=32768,resgid=1065 latemount,wait,check,quota,formattable,reservedsize=128M
+#/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,inlinecrypt,reserve_root=32768,resgid=1065 latemount,wait,check,quota,formattable,reservedsize=128M
+/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065 latemount,wait,check,fileencryption=software,quota,formattable,reservedsize=128M,checkpoint=fs

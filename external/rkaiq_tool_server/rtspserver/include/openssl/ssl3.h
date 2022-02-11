@@ -120,10 +120,9 @@
 #include <openssl/aead.h>
 #include <openssl/type_check.h>
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
-
 
 // These are kept to support clients that negotiates higher protocol versions
 // using SSLv2 client hello records.
@@ -208,17 +207,17 @@ extern "C" {
 #define SSL3_HM_HEADER_LENGTH 4
 
 #ifndef SSL3_ALIGN_PAYLOAD
-// Some will argue that this increases memory footprint, but it's not actually
-// true. Point is that malloc has to return at least 64-bit aligned pointers,
-// meaning that allocating 5 bytes wastes 3 bytes in either case. Suggested
-// pre-gaping simply moves these wasted bytes from the end of allocated region
-// to its front, but makes data payload aligned, which improves performance.
-#define SSL3_ALIGN_PAYLOAD 8
+    // Some will argue that this increases memory footprint, but it's not actually
+    // true. Point is that malloc has to return at least 64-bit aligned pointers,
+    // meaning that allocating 5 bytes wastes 3 bytes in either case. Suggested
+    // pre-gaping simply moves these wasted bytes from the end of allocated region
+    // to its front, but makes data payload aligned, which improves performance.
+    #define SSL3_ALIGN_PAYLOAD 8
 #else
-#if (SSL3_ALIGN_PAYLOAD & (SSL3_ALIGN_PAYLOAD - 1)) != 0
-#error "insane SSL3_ALIGN_PAYLOAD"
-#undef SSL3_ALIGN_PAYLOAD
-#endif
+    #if (SSL3_ALIGN_PAYLOAD & (SSL3_ALIGN_PAYLOAD - 1)) != 0
+        #error "insane SSL3_ALIGN_PAYLOAD"
+        #undef SSL3_ALIGN_PAYLOAD
+    #endif
 #endif
 
 // This is the maximum MAC (digest) size used by the SSL library. Currently
@@ -248,11 +247,9 @@ extern "C" {
 // SSL3_RT_SEND_MAX_ENCRYPTED_OVERHEAD is the maximum overhead in encrypting a
 // record. This does not include the record header. Some ciphers use explicit
 // nonces, so it includes both the AEAD overhead as well as the nonce.
-#define SSL3_RT_SEND_MAX_ENCRYPTED_OVERHEAD \
-    (EVP_AEAD_MAX_OVERHEAD + EVP_AEAD_MAX_NONCE_LENGTH)
+#define SSL3_RT_SEND_MAX_ENCRYPTED_OVERHEAD (EVP_AEAD_MAX_OVERHEAD + EVP_AEAD_MAX_NONCE_LENGTH)
 
-OPENSSL_STATIC_ASSERT(SSL3_RT_MAX_ENCRYPTED_OVERHEAD >=
-                          SSL3_RT_SEND_MAX_ENCRYPTED_OVERHEAD,
+OPENSSL_STATIC_ASSERT(SSL3_RT_MAX_ENCRYPTED_OVERHEAD >= SSL3_RT_SEND_MAX_ENCRYPTED_OVERHEAD,
                       "max overheads are inconsistent");
 
 // SSL3_RT_MAX_COMPRESSED_LENGTH is an alias for
@@ -260,10 +257,8 @@ OPENSSL_STATIC_ASSERT(SSL3_RT_MAX_ENCRYPTED_OVERHEAD >=
 // compression overhead.
 #define SSL3_RT_MAX_COMPRESSED_LENGTH SSL3_RT_MAX_PLAIN_LENGTH
 
-#define SSL3_RT_MAX_ENCRYPTED_LENGTH \
-  (SSL3_RT_MAX_ENCRYPTED_OVERHEAD + SSL3_RT_MAX_COMPRESSED_LENGTH)
-#define SSL3_RT_MAX_PACKET_SIZE \
-  (SSL3_RT_MAX_ENCRYPTED_LENGTH + SSL3_RT_HEADER_LENGTH)
+#define SSL3_RT_MAX_ENCRYPTED_LENGTH (SSL3_RT_MAX_ENCRYPTED_OVERHEAD + SSL3_RT_MAX_COMPRESSED_LENGTH)
+#define SSL3_RT_MAX_PACKET_SIZE (SSL3_RT_MAX_ENCRYPTED_LENGTH + SSL3_RT_HEADER_LENGTH)
 
 #define SSL3_MD_CLIENT_FINISHED_CONST "\x43\x4C\x4E\x54"
 #define SSL3_MD_SERVER_FINISHED_CONST "\x53\x52\x56\x52"
@@ -280,18 +275,18 @@ OPENSSL_STATIC_ASSERT(SSL3_RT_MAX_ENCRYPTED_OVERHEAD >=
 #define SSL3_AL_FATAL 2
 
 #define SSL3_AD_CLOSE_NOTIFY 0
-#define SSL3_AD_UNEXPECTED_MESSAGE 10     // fatal
-#define SSL3_AD_BAD_RECORD_MAC 20         // fatal
-#define SSL3_AD_DECOMPRESSION_FAILURE 30  // fatal
-#define SSL3_AD_HANDSHAKE_FAILURE 40      // fatal
+#define SSL3_AD_UNEXPECTED_MESSAGE 10    // fatal
+#define SSL3_AD_BAD_RECORD_MAC 20        // fatal
+#define SSL3_AD_DECOMPRESSION_FAILURE 30 // fatal
+#define SSL3_AD_HANDSHAKE_FAILURE 40     // fatal
 #define SSL3_AD_NO_CERTIFICATE 41
 #define SSL3_AD_BAD_CERTIFICATE 42
 #define SSL3_AD_UNSUPPORTED_CERTIFICATE 43
 #define SSL3_AD_CERTIFICATE_REVOKED 44
 #define SSL3_AD_CERTIFICATE_EXPIRED 45
 #define SSL3_AD_CERTIFICATE_UNKNOWN 46
-#define SSL3_AD_ILLEGAL_PARAMETER 47       // fatal
-#define SSL3_AD_INAPPROPRIATE_FALLBACK 86  // fatal
+#define SSL3_AD_ILLEGAL_PARAMETER 47      // fatal
+#define SSL3_AD_INAPPROPRIATE_FALLBACK 86 // fatal
 
 #define SSL3_CT_RSA_SIGN 1
 
@@ -322,12 +317,10 @@ OPENSSL_STATIC_ASSERT(SSL3_RT_MAX_ENCRYPTED_OVERHEAD >=
 #define SSL3_MT_SERVER_DONE SSL3_MT_SERVER_HELLO_DONE
 #define SSL3_MT_NEWSESSION_TICKET SSL3_MT_NEW_SESSION_TICKET
 
-
 #define SSL3_MT_CCS 1
 
-
-#ifdef  __cplusplus
-}  // extern C
+#ifdef __cplusplus
+} // extern C
 #endif
 
-#endif  // OPENSSL_HEADER_SSL3_H
+#endif // OPENSSL_HEADER_SSL3_H

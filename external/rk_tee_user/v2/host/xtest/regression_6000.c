@@ -1,14 +1,6 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright (c) 2014, STMicroelectronics International N.V.
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
  */
 
 #include <string.h>
@@ -24,9 +16,6 @@
 #include <tee_api_defines.h>
 #include <tee_api_defines_extensions.h>
 #include <tee_api_types.h>
-#ifdef WITH_GP_TESTS
-#include <TTA_DS_protocol.h>
-#endif
 #include <util.h>
 
 #define DEFINE_TEST_MULTIPLE_STORAGE_IDS(test_name)			     \
@@ -682,125 +671,6 @@ static void test_file_hole(ADBG_Case_t *c, uint32_t storage_id)
 exit:
 	TEEC_CloseSession(&sess);
 }
-
-#ifdef WITH_GP_TESTS
-static TEEC_Result ds_seek_obj_inv_handle(TEEC_Session *sess)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_VALUE_INPUT, TEEC_NONE, TEEC_NONE, TEEC_NONE);
-
-	op.params[0].value.a = CASE_DATA_OBJECT_NOT_PERSISTENT;
-
-	return TEEC_InvokeCommand(
-		sess, CMD_SeekObjectData_panic, &op, &org);
-}
-
-static TEEC_Result ds_seek_gp(
-	TEEC_Session *sess, TEE_Whence wh, uint32_t wh_off, uint32_t set_off,
-	void *in, size_t in_size, void *out, size_t out_size)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_VALUE_INPUT, TEEC_VALUE_INPUT, TEEC_MEMREF_TEMP_INPUT,
-		TEEC_MEMREF_TEMP_OUTPUT);
-
-	op.params[0].value.a = wh;
-	op.params[0].value.b = wh_off;
-	op.params[1].value.a = set_off;
-	op.params[2].tmpref.buffer = in;
-	op.params[2].tmpref.size = in_size;
-	op.params[3].tmpref.buffer = out;
-	op.params[3].tmpref.size = out_size;
-
-	return TEEC_InvokeCommand(sess, CMD_SeekWriteReadObjectData, &op, &org);
-}
-
-static TEEC_Result ds_init_object_and_attributes(TEEC_Session *sess,
-            uint32_t obj_type, uint32_t obj_size, const void *attr_meta,
-            size_t attr_meta_len, const void *attr_data, size_t attr_data_len,
-            uint32_t option)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_VALUE_INPUT, TEEC_MEMREF_TEMP_INPUT,
-		TEEC_MEMREF_TEMP_INPUT, TEEC_VALUE_INPUT);
-
-	op.params[0].value.a = obj_type;
-	op.params[0].value.b = obj_size;
-	op.params[1].tmpref.buffer = (void *)attr_meta;
-	op.params[1].tmpref.size = attr_meta_len;
-	op.params[2].tmpref.buffer = (void *)attr_data;
-	op.params[2].tmpref.size = attr_data_len;
-	op.params[3].value.a = option;
-
-	return TEEC_InvokeCommand(sess, CMD_InitObjectAndAttributes, &op, &org);
-}
-
-static TEEC_Result ds_rename_access_conflict(TEEC_Session *sess)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_NONE, TEEC_NONE, TEEC_NONE, TEEC_NONE);
-
-	return TEEC_InvokeCommand(
-		sess, CMD_RenamePersistentObject_AccessConflict, &op, &org);
-}
-
-static TEEC_Result ds_start_enum_no_item(TEEC_Session *sess)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-	TEEC_Result res = TEEC_ERROR_GENERIC;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_VALUE_OUTPUT, TEEC_NONE, TEEC_NONE, TEEC_NONE);
-
-	res = TEEC_InvokeCommand(
-		sess, CMD_StartNGetPersistentObjectEnumerator_itemNotFound,
-		&op, &org);
-
-	if (res != TEEC_SUCCESS)
-		return res;
-
-	if (op.params[0].value.a != 0 || op.params[0].value.b != 0)
-		return TEEC_ERROR_GENERIC;
-
-	return res;
-}
-
-static TEEC_Result ds_rename_success(TEEC_Session *sess)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_NONE, TEEC_NONE, TEEC_NONE, TEEC_NONE);
-
-	return TEEC_InvokeCommand(
-		sess, CMD_RenamePersistentObject_Success, &op, &org);
-}
-
-static TEEC_Result ds_null_close_free_reset(TEEC_Session *sess)
-{
-	TEEC_Operation op = TEEC_OPERATION_INITIALIZER;
-	uint32_t org = 0;
-
-	op.paramTypes = TEEC_PARAM_TYPES(
-		TEEC_NONE, TEEC_NONE, TEEC_NONE, TEEC_NONE);
-
-	return TEEC_InvokeCommand(
-		sess, CMD_CloseFreeAndResetObjectSuccessHandleNull, &op, &org);
-}
-#endif
 
 /* create */
 static void xtest_tee_test_6001_single(ADBG_Case_t *c, uint32_t storage_id)
@@ -1475,46 +1345,6 @@ seek_write_read_out:
 DEFINE_TEST_MULTIPLE_STORAGE_IDS(xtest_tee_test_6010)
 ADBG_CASE_DEFINE(regression, 6010, xtest_tee_test_6010, "Test Storage");
 
-#ifdef WITH_GP_TESTS
-static void xtest_tee_test_6011(ADBG_Case_t *c)
-{
-	TEEC_Session sess = { };
-	uint32_t orig = 0;
-	/*
-	 * Test data from
-	 * Invoke_InitObjectAndAttributes_TEE_TYPE_AES_success_attribute_
-	 * TEE_ATTR_SECRET_VALUE_correct_size (9d-9a-91)
-	 */
-	static const uint8_t attr_meta[] = {
-0xc0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x20,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-	};
-	static const uint8_t attr_data[] = {
-0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,0x2b,0x73,0xae,0xf0,0x85,0x7d,0x77,
-0x81,0x1f,0x35,0x2c,0x07,0x3b,0x61,0x08,0xd7,0x2d,0x98,0x10,0xa3,0x09,0x14,
-0xdf,0xf4,
-	};
-
-	if (!ADBG_EXPECT_TEEC_SUCCESS(
-			c, xtest_teec_open_session(&sess, &gp_tta_ds_uuid,
-					NULL, &orig)))
-		return;
-
-	if (!ADBG_EXPECT_TEEC_SUCCESS(
-			c, ds_init_object_and_attributes(&sess, 0xa0000010,
-					0x100, attr_meta, sizeof(attr_meta),
-					attr_data, sizeof(attr_data), 0)))
-		goto exit;
-
-exit:
-	TEEC_CloseSession(&sess);
-}
-ADBG_CASE_DEFINE(regression, 6011, xtest_tee_test_6011,
-		 "Test TEE GP TTA DS init objects");
-#endif /*WITH_GP_TESTS*/
-
 static void xtest_tee_test_6012_single(ADBG_Case_t *c, uint32_t storage_id)
 {
 	TEEC_Session sess = { };
@@ -2131,8 +1961,7 @@ static void xtest_tee_test_6020_single(ADBG_Case_t *c, uint32_t storage_id)
 				TA_STORAGE_CMD_OPEN_ID_IN_SHM,
 				file_01, sizeof(file_01),
 				TEE_DATA_FLAG_ACCESS_WRITE |
-				TEE_DATA_FLAG_ACCESS_WRITE_META |
-				TEE_DATA_FLAG_OVERWRITE,
+				TEE_DATA_FLAG_ACCESS_WRITE_META,
 				0,
 				NULL, 0,
 				&obj,
@@ -2169,8 +1998,7 @@ static void xtest_tee_test_6020_single(ADBG_Case_t *c, uint32_t storage_id)
 
 	res = fs_open(&sess, file_01, sizeof(file_01),
 				TEE_DATA_FLAG_ACCESS_WRITE |
-				TEE_DATA_FLAG_ACCESS_WRITE_META |
-				TEE_DATA_FLAG_OVERWRITE,
+				TEE_DATA_FLAG_ACCESS_WRITE_META,
 				&obj,
 				storage_id);
 
@@ -2198,8 +2026,7 @@ static void xtest_tee_test_6020_single(ADBG_Case_t *c, uint32_t storage_id)
 
 	res = fs_open(&sess, file_01, sizeof(file_01),
 				TEE_DATA_FLAG_ACCESS_WRITE |
-				TEE_DATA_FLAG_ACCESS_WRITE_META |
-				TEE_DATA_FLAG_OVERWRITE,
+				TEE_DATA_FLAG_ACCESS_WRITE_META,
 				&obj,
 				storage_id);
 
@@ -2220,7 +2047,7 @@ static void xtest_tee_test_6020_single(ADBG_Case_t *c, uint32_t storage_id)
 				storage_id);
 
 	ADBG_EXPECT_TEEC_RESULT(c, TEE_ERROR_TARGET_DEAD, res);
-
+	TEEC_CloseSession(&sess);
 	return;
 exit1:
 	ADBG_EXPECT_TEEC_SUCCESS(c, fs_unlink(&sess, obj));

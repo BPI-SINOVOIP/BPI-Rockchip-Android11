@@ -855,12 +855,13 @@ fail:
 static void *rkvdec_prepare_with_reset(struct mpp_dev *mpp,
 				       struct mpp_task *mpp_task)
 {
+	unsigned long flags;
 	struct mpp_task *out_task = NULL;
 	struct rkvdec_dev *dec = to_rkvdec_dev(mpp);
 
-	mutex_lock(&mpp->queue->running_lock);
+	spin_lock_irqsave(&mpp->queue->running_lock, flags);
 	out_task = list_empty(&mpp->queue->running_list) ? mpp_task : NULL;
-	mutex_unlock(&mpp->queue->running_lock);
+	spin_unlock_irqrestore(&mpp->queue->running_lock, flags);
 
 	if (out_task && !dec->had_reset) {
 		struct rkvdec_task *task = to_rkvdec_task(out_task);
@@ -1899,6 +1900,8 @@ static int rkvdec_probe(struct platform_device *pdev)
 
 	mpp->session_max_buffers = RKVDEC_SESSION_MAX_BUFFERS;
 	rkvdec_procfs_init(mpp);
+	/* register current device to mpp service */
+	mpp_dev_register_srv(mpp, mpp->srv);
 	dev_info(dev, "probing finish\n");
 
 	return 0;

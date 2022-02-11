@@ -414,7 +414,7 @@ static void ClearContext(alsc_handle_t hAlsc)
 
 }
 
-/** @brief called once in init(), to arrange data to fill alsc_mode_data_t from CalibDb */
+/** @brief called to arrange data to fill alsc_mode_data_t from CalibDb */
 static XCamReturn UpdateLscCalibPara(alsc_handle_t hAlsc)
 {
     const CalibDbV2_LSC_t* calib2 = hAlsc->calibLscV2;
@@ -727,7 +727,7 @@ XCamReturn AlscConfig
     LOGD_ALSC("%s: byPass: %d  mode:%d used for case: %d\n", __FUNCTION__,
         hAlsc->mCurAtt.byPass, hAlsc->mCurAtt.mode,hAlsc->alscRest.caseIndex);
     if(hAlsc->mCurAtt.byPass != true ) {
-        hAlsc->lscHwConf.lsc_en = true;
+        hAlsc->lscHwConf.lsc_en = hAlsc->calibLscV2->common.enable;
         if(hAlsc->mCurAtt.mode == RK_AIQ_LSC_MODE_AUTO) {
             AlscAutoConfig(hAlsc);
         } else if(hAlsc->mCurAtt.mode == RK_AIQ_LSC_MODE_MANUAL) {

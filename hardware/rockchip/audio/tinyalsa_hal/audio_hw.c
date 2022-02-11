@@ -53,6 +53,11 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 #define SND_CARDS_NODE          "/proc/asound/cards"
+#define SAMPLECOUNT 441*5*2*2
+
+#define CHR_VALID (1 << 1)
+#define CHL_VALID (1 << 0)
+#define CH_CHECK (1 << 2)
 
 struct SurroundFormat {
     audio_format_t format;
@@ -292,6 +297,7 @@ struct dev_proc_info SPEAKER_OUT_NAME[] = /* add codes& dai name here*/
     {"rockchipes8316c", NULL,},
     {"rockchipes8323c", NULL,},
     {"rockchipes8388c", NULL,},
+    {"rockchipes8388", NULL,},
     {"rockchipes8396c", NULL,},
     {"rockchiprk", NULL, },
     {"rockchiprk809co", NULL,},
@@ -337,6 +343,8 @@ struct dev_proc_info MIC_IN_NAME[] =
     {"realtekrt5678co", NULL,},
     {"rockchipes8316c", NULL,},
     {"rockchipes8323c", NULL,},
+    {"rockchipes8388c", NULL,},
+    {"rockchipes8388", NULL,},
     {"rockchipes8396c", NULL,},
     {"rockchipes7210", NULL,},
     {"rockchipes7243", NULL,},
@@ -700,6 +708,61 @@ static void read_in_sound_card(struct stream_in *in)
     return ;
 }
 
+static uint32_t channel_check(void *data, unsigned int len)
+{
+    short *pcmLeftChannel = (short*)data;
+    short *pcmRightChannel = pcmLeftChannel + 1;
+    unsigned int index = 0;
+    int leftValid = 0x0;
+    int rightValid = 0x0;
+    short valuel = 0;
+    short valuer = 0;
+    uint32_t validflag = 0;
+
+    valuel = *pcmLeftChannel;
+    valuer = *pcmRightChannel;
+    for (index = 0; index < len; index += 2) {
+        if ((pcmLeftChannel[index] >= valuel + 50) ||
+            (pcmLeftChannel[index] <= valuel - 50))
+            leftValid++;
+        if ((pcmRightChannel[index] >= valuer + 50) ||
+            (pcmRightChannel[index] <= valuer - 50))
+            rightValid++;
+    }
+    if (leftValid > 20)
+        validflag |= CHL_VALID;
+    if (rightValid > 20)
+        validflag |= CHR_VALID;
+    return validflag;
+}
+
+static void channel_fixed(void *data, unsigned len, uint32_t chFlag)
+{
+    short *ch0 ,*ch1, *pcmValid, *pcmInvalid;
+
+    if ((chFlag&(CHL_VALID | CHR_VALID)) == 0 ||
+        (chFlag&(CHL_VALID | CHR_VALID)) == (CHL_VALID | CHR_VALID))
+        return;
+    ch0 = (short*)data;
+    ch1 = ch0 + 1;
+    pcmValid = ch0;
+    pcmInvalid = ch0;
+    if (chFlag & CHL_VALID)
+        pcmInvalid  = ch1;
+    else if (chFlag & CHR_VALID)
+        pcmValid = ch1;
+    for (unsigned index = 0; index < len; index += 2) {
+        pcmInvalid[index] = pcmValid[index];
+    }
+    return;
+}
+
+static void channel_check_start(struct stream_in *in)
+{
+    in->channel_flag = CH_CHECK;
+    in->start_checkcount = 0;
+}
+
 static bool is_bitstream(struct stream_out *out)
 {
     if (out == NULL) {
@@ -994,9 +1057,9 @@ static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
     }
 
     if (in->frames_in == 0) {
-        size = pcm_frames_to_bytes(in->pcm,pcm_get_buffer_size(in->pcm));
+        size = pcm_frames_to_bytes(in->pcm, in->config->period_size);
         in->read_status = pcm_read(in->pcm,
-                                   (void*)in->buffer,pcm_frames_to_bytes(in->pcm, in->config->period_size));
+                                   (void*)in->buffer, size);
         if (in->read_status != 0) {
             ALOGE("get_next_buffer() pcm_read error %d", in->read_status);
             buffer->raw = NULL;
@@ -1004,6 +1067,21 @@ static int get_next_buffer(struct resampler_buffer_provider *buffer_provider,
             return in->read_status;
         }
 
+        if (in->config->channels == 2) {
+            if (in->channel_flag & CH_CHECK) {
+                if (in->start_checkcount < SAMPLECOUNT) {
+                    in->start_checkcount += size;
+                } else {
+                    in->channel_flag = channel_check((void*)in->buffer, size / 2);
+                    in->channel_flag &= ~CH_CHECK;
+                }
+            }
+            channel_fixed((void*)in->buffer, size / 2, in->channel_flag & ~CH_CHECK);
+        }
+
+#ifdef RK_DENOISE_ENABLE
+        rkdenoise_process(in->mDenioseState, (void*)in->buffer, size, (void*)in->buffer);
+#endif
         //fwrite(in->buffer,pcm_frames_to_bytes(in->pcm,pcm_get_buffer_size(in->pcm)),1,in_debug);
         in->frames_in = in->config->period_size;
 
@@ -1122,6 +1200,7 @@ static int start_input_stream(struct stream_in *in)
     int card = 0;
     int device = 0;
 
+    channel_check_start(in);
     in_dump(in, 0);
     read_in_sound_card(in);
     route_pcm_card_open(adev->dev_in[SND_IN_SOUND_CARD_MIC].card,
@@ -1202,6 +1281,26 @@ static int start_input_stream(struct stream_in *in)
         card = adev->dev_in[SND_IN_SOUND_CARD_MIC].card;
         device =  adev->dev_in[SND_IN_SOUND_CARD_MIC].device;
         in->pcm = pcm_open(card, device, PCM_IN, in->config);
+#ifdef RK_DENOISE_ENABLE
+        {
+            int ch = in->config->channels;
+            int period = in->config->period_size;
+            int rate = in->config->rate;
+            int type = 0;
+            {
+                char value[PROPERTY_VALUE_MAX];
+                property_get("vendor.audio.anr.speex", value, "0");
+                type = atoi(value);
+            }
+            if (in->mDenioseState)
+                rkdenoise_destroy(in->mDenioseState);
+            in->mDenioseState = rkdenoise_create(rate, ch, period, type ? ALG_SPX : ALG_SKV);
+            if (in->mDenioseState == NULL) {
+                ALOGW("crate rkdenoise failed!!!");
+            }
+        }
+#endif
+
     } else {
         card = adev->dev_in[SND_IN_SOUND_CARD_BT].card;
         device = adev->dev_in[SND_IN_SOUND_CARD_BT].device;
@@ -2507,6 +2606,7 @@ static int in_set_parameters(struct audio_stream *stream, const char *kvpairs)
         val = atoi(value) & ~AUDIO_DEVICE_BIT_IN;
         /* no audio device uses val == 0 */
         if ((in->device != val) && (val != 0)) {
+            channel_check_start(in);
             /* force output standby to start or stop SCO pcm stream if needed */
             if ((val & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET) ^
                     (in->device & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET)) {
@@ -2630,6 +2730,7 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     struct stream_in *in = (struct stream_in *)stream;
     struct audio_device *adev = in->dev;
     size_t frames_rq = bytes / audio_stream_in_frame_size(stream);
+    size_t frames_rd = 0;
 
     if (in->device & AUDIO_DEVICE_IN_HDMI) {
         unsigned int rate = get_hdmiin_audio_rate(adev);
@@ -2664,9 +2765,11 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
         ret = process_frames(in, buffer, frames_rq);
       else */
     //ALOGV("%s:frames_rq:%d",__FUNCTION__,frames_rq);
-    ret = read_frames(in, buffer, frames_rq);
-    if (ret > 0)
-        ret = 0;
+    frames_rd = read_frames(in, buffer, frames_rq);
+    if (frames_rd > 0) {
+        in->frames_read += frames_rd;
+        bytes = frames_rd * audio_stream_in_frame_size(stream);
+    }
 
     dump_in_data(buffer, bytes);
 
@@ -2695,48 +2798,6 @@ static ssize_t in_read(struct audio_stream_in *stream, void* buffer,
     if (in->device & AUDIO_DEVICE_IN_HDMI) {
         goto exit;
     }
-
-#ifdef SPEEX_DENOISE_ENABLE
-    if(!adev->mic_mute && ret== 0) {
-        int index = 0;
-        int startPos = 0;
-        spx_int16_t* data = (spx_int16_t*) buffer;
-
-        int channel_count = audio_channel_count_from_out_mask(in->channel_mask);
-        int curFrameSize = bytes/(channel_count*sizeof(int16_t));
-        long ch;
-        ALOGV("channel_count:%d",channel_count);
-        if(curFrameSize != in->mSpeexFrameSize)
-            ALOGD("the current request have some error mSpeexFrameSize %d bytes %d ",in->mSpeexFrameSize, bytes);
-
-        while(curFrameSize >= startPos+in->mSpeexFrameSize) {
-            if( 2 == channel_count) {
-                for(index = startPos; index< startPos +in->mSpeexFrameSize ; index++ )
-                    in->mSpeexPcmIn[index-startPos] = data[index*channel_count]/2 + data[index*channel_count+1]/2;
-            } else {
-                for(index = startPos; index< startPos +in->mSpeexFrameSize ; index++ )
-                    in->mSpeexPcmIn[index-startPos] = data[index*channel_count];
-            }
-            speex_preprocess_run(in->mSpeexState,in->mSpeexPcmIn);
-#ifndef TARGET_RK2928
-            for(ch = 0 ; ch < channel_count; ch++)
-                for(index = startPos; index< startPos + in->mSpeexFrameSize ; index++ ) {
-                    data[index*channel_count+ch] = in->mSpeexPcmIn[index-startPos];
-                }
-#else
-            for(index = startPos; index< startPos + in->mSpeexFrameSize ; index++ ) {
-                int tmp = (int)in->mSpeexPcmIn[index-startPos]+ in->mSpeexPcmIn[index-startPos]/2;
-                data[index*channel_count+0] = tmp > 32767 ? 32767 : (tmp < -32768 ? -32768 : tmp);
-            }
-            for(int ch = 1 ; ch < channel_count; ch++)
-                for(index = startPos; index< startPos + in->mSpeexFrameSize ; index++ ) {
-                    data[index*channel_count+ch] = data[index*channel_count+0];
-                }
-#endif
-            startPos += in->mSpeexFrameSize;
-        }
-    }
-#endif
 
 #ifdef ALSA_IN_DEBUG
         fwrite(buffer, bytes, 1, in_debug);
@@ -2845,6 +2906,40 @@ static int adev_get_microphones(const struct audio_hw_device *dev,
     ALOGD("%s,get capture mic actual_mic_count =%d",__func__,actual_mic_count);
     *mic_count = actual_mic_count;
     return 0;
+}
+
+static int in_get_capture_position(const struct audio_stream_in *stream,
+                        int64_t *frames, int64_t *time)
+{
+    ALOGD("%s");
+    if (stream == NULL || frames == NULL || time == NULL) {
+        return -EINVAL;
+    }
+    struct stream_in *in = (struct stream_in *)stream;
+    int ret = -ENOSYS;
+
+    pthread_mutex_lock(&in->lock);
+    // note: ST sessions do not close the alsa pcm driver synchronously
+    // on standby. Therefore, we may return an error even though the
+    // pcm stream is still opened.
+    if (in->standby) {
+        ALOGD("skip when standby is true.");
+        goto exit;
+    }
+    if (in->pcm) {
+        struct timespec timestamp;
+        size_t avail;
+        if (pcm_get_htimestamp(in->pcm, &avail, &timestamp) == 0) {
+            *frames = in->frames_read + avail;
+            *time = timestamp.tv_sec * 1000000000LL + timestamp.tv_nsec;
+            ret = 0;
+            ALOGD("Pos: %lld %lld", *time, *frames);
+        }
+    }
+exit:
+    pthread_mutex_unlock(&in->lock);
+
+    return ret;
 }
 
 static int in_get_active_microphones(const struct audio_stream_in *stream,
@@ -3549,7 +3644,11 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
     in->stream.read = in_read;
     in->stream.get_input_frames_lost = in_get_input_frames_lost;
     in->stream.get_active_microphones = in_get_active_microphones;
+    in->stream.get_capture_position = in_get_capture_position;
 
+#ifdef RK_DENOISE_ENABLE
+    in->mDenioseState = NULL;
+#endif
     in->dev = adev;
     in->standby = true;
     in->requested_rate = config->sample_rate;
@@ -3575,12 +3674,6 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
 
     in->buffer = malloc(pcm_config->period_size * pcm_config->channels
                         * audio_stream_in_frame_size(&in->stream));
-#ifdef SPEEX_DENOISE_ENABLE
-    in->mSpeexState = NULL;
-    in->mSpeexFrameSize = 0;
-    in->mSpeexPcmIn = NULL;
-#endif
-
     if (!in->buffer) {
         ret = -ENOMEM;
         goto err_malloc;
@@ -3618,40 +3711,9 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
         ALOGE("crate voice process failed!");
     }
 #endif
-
-#ifdef SPEEX_DENOISE_ENABLE
-    uint32_t size;
-    int denoise = 1;
-    int noiseSuppress = -24;
-    int channel_count = audio_channel_count_from_out_mask(config->channel_mask);
-
-    size = in_get_buffer_size(in);
-    in->mSpeexFrameSize = size/(channel_count * sizeof(int16_t));
-    ALOGD("in->mSpeexFrameSize:%d in->requested_rate:%d",in->mSpeexFrameSize, in->requested_rate);
-    in->mSpeexPcmIn = malloc(sizeof(int16_t)*in->mSpeexFrameSize);
-    if(!in->mSpeexPcmIn) {
-        ALOGE("speexPcmIn malloc failed");
-        goto err_speex_malloc;
-    }
-    in->mSpeexState = speex_preprocess_state_init(in->mSpeexFrameSize, in->requested_rate);
-    if(in->mSpeexState == NULL) {
-        ALOGE("speex error");
-        goto err_speex_malloc;
-    }
-
-    speex_preprocess_ctl(in->mSpeexState, SPEEX_PREPROCESS_SET_DENOISE, &denoise);
-    speex_preprocess_ctl(in->mSpeexState, SPEEX_PREPROCESS_SET_NOISE_SUPPRESS, &noiseSuppress);
-
-#endif
-
 out:
     *stream_in = &in->stream;
     return 0;
-
-err_speex_malloc:
-#ifdef SPEEX_DENOISE_ENABLE
-    free(in->mSpeexPcmIn);
-#endif
 err_resampler:
     free(in->buffer);
 err_malloc:
@@ -3689,13 +3751,10 @@ static void adev_close_input_stream(struct audio_hw_device *dev,
     }
 #endif
 
-#ifdef SPEEX_DENOISE_ENABLE
-    if (in->mSpeexState) {
-        speex_preprocess_state_destroy(in->mSpeexState);
-    }
-    if(in->mSpeexPcmIn) {
-        free(in->mSpeexPcmIn);
-    }
+#ifdef RK_DENOISE_ENABLE
+    if (in->mDenioseState)
+        rkdenoise_destroy(in->mDenioseState);
+    in->mDenioseState = NULL;
 #endif
     free(in->buffer);
     free(stream);

@@ -625,7 +625,7 @@ OMX_BOOL Rkvpu_SendInputData(OMX_COMPONENTTYPE *pOMXComponent)
             }
         }
 
-        if (pVideoEnc->codecId == OMX_VIDEO_CodingAVC) {
+        if (pVideoEnc->codecId == OMX_VIDEO_CodingAVC || pVideoEnc->codecId == OMX_VIDEO_CodingHEVC) {
             if (rockchipInputPort->portDefinition.format.video.eColorFormat == OMX_COLOR_FormatAndroidOpaque) {
                 if (pVideoEnc->bFrame_num < 60 && (pVideoEnc->bFrame_num % 5 == 0)) {
                     EncParameter_t vpug;
@@ -690,7 +690,7 @@ OMX_BOOL Rkvpu_Post_OutputStream(OMX_COMPONENTTYPE *pOMXComponent)
         EncoderOut_t pOutput;
         OMX_U8 *aOut_buf = outputUseBuffer->bufferHeader->pBuffer;
         Rockchip_OSAL_Memset(&pOutput, 0, sizeof(EncoderOut_t));
-        if ((OMX_FALSE == pVideoEnc->bSpsPpsHeaderFlag) && (pVideoEnc->codecId == OMX_VIDEO_CodingAVC)) {
+        if ((OMX_FALSE == pVideoEnc->bSpsPpsHeaderFlag)) {
             if (pVideoEnc->bSpsPpsLen > 0) {
                 Rockchip_OSAL_Memcpy(aOut_buf, pVideoEnc->bSpsPpsbuf, pVideoEnc->bSpsPpsLen);
                 outputUseBuffer->remainDataLen = pVideoEnc->bSpsPpsLen;
@@ -1328,23 +1328,19 @@ OMX_ERRORTYPE Rkvpu_Enc_ComponentInit(OMX_COMPONENTTYPE *pOMXComponent)
         pVideoEnc->bLast_config_frame = 0;
         pVideoEnc->bSpsPpsHeaderFlag = OMX_FALSE;
         pVideoEnc->bSpsPpsbuf = NULL;
-        if (pVideoEnc->codecId == (OMX_VIDEO_CODINGTYPE)OMX_VIDEO_CodingHEVC) {
+
+        if (p_vpu_ctx->extradata == NULL) {
+            omx_err("init get extradata fail!");
             pVideoEnc->bSpsPpsbuf = NULL;
             pVideoEnc->bSpsPpsLen = 0;
+            goto EXIT;
         } else {
-            if (p_vpu_ctx->extradata == NULL) {
-                omx_err("init get extradata fail!");
-                pVideoEnc->bSpsPpsbuf = NULL;
-                pVideoEnc->bSpsPpsLen = 0;
-                goto EXIT;
+            if ((p_vpu_ctx->extradata != NULL) && p_vpu_ctx->extradata_size > 0 && p_vpu_ctx->extradata_size <= 2048) {
+                pVideoEnc->bSpsPpsbuf = (OMX_U8 *)Rockchip_OSAL_Malloc(2048);
+                Rockchip_OSAL_Memcpy(pVideoEnc->bSpsPpsbuf, p_vpu_ctx->extradata, p_vpu_ctx->extradata_size);
+                pVideoEnc->bSpsPpsLen = p_vpu_ctx->extradata_size;
             } else {
-                if ((p_vpu_ctx->extradata != NULL) && p_vpu_ctx->extradata_size > 0 && p_vpu_ctx->extradata_size <= 2048) {
-                    pVideoEnc->bSpsPpsbuf = (OMX_U8 *)Rockchip_OSAL_Malloc(2048);
-                    Rockchip_OSAL_Memcpy(pVideoEnc->bSpsPpsbuf, p_vpu_ctx->extradata, p_vpu_ctx->extradata_size);
-                    pVideoEnc->bSpsPpsLen = p_vpu_ctx->extradata_size;
-                } else {
-                    omx_err("p_vpu_ctx->extradata = %p,p_vpu_ctx->extradata_size = %d", p_vpu_ctx->extradata, p_vpu_ctx->extradata_size);
-                }
+                omx_err("p_vpu_ctx->extradata = %p,p_vpu_ctx->extradata_size = %d", p_vpu_ctx->extradata, p_vpu_ctx->extradata_size);
             }
         }
     }

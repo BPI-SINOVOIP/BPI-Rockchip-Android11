@@ -1,3 +1,14 @@
+//genrule {
+//    name: "gen_hwjpeg_version",
+//    srcs: [
+//        "version.h.template",
+//        "genversion.sh",
+//        ".git/HEAD",
+//    ],
+//    cmd: "bash $(location genversion.sh) > $(out)",
+//    out: ["version.h"],
+//}
+
 cc_library_headers {
     name: "libhwjpeg_headers",
     vendor: true,
@@ -5,4 +16,50 @@ cc_library_headers {
         "inc",
         "inc/mpp_inc",
     ],
+}
+
+cc_library_shared {
+    name: "libhwjpeg",
+    // generated_headers: ["gen_hwjpeg_version"],
+    vendor: true,
+
+    arch: {
+        arm: {
+            instruction_set: "thumb",
+        },
+    },
+
+    cppflags: [
+        "-std=c++11",
+        "-fno-threadsafe-statics",
+    ],
+
+    srcs: [
+        "src/Utils.cpp",
+        "src/QList.cpp",
+        "src/MpiDebug.cpp",
+        "src/BitReader.cpp",
+        "src/JpegParser.cpp",
+        "src/ExifBuilder.cpp",
+        "src/RKExifWrapper.cpp",
+        "src/MpiJpegEncoder.cpp",
+        "src/MpiJpegDecoder.cpp",
+    ],
+
+    shared_libs: [
+        "libutils",
+        "liblog",
+        "libmpp",
+        "librga",
+    ],
+
+    header_libs: [
+        "libhwjpeg_headers",
+        "libhardware_headers",
+    ],
+
+    export_header_lib_headers: ["libhwjpeg_headers"],
+    export_shared_lib_headers: ["libutils",],
+
+    // compile_multilib: "32",
 }

@@ -195,9 +195,6 @@ int hwc_get_handle_size(buffer_handle_t hnd);
 int hwc_get_handle_attributes(buffer_handle_t hnd, std::vector<int> *attrs);
 int hwc_get_handle_attibute(buffer_handle_t hnd, attribute_flag_t flag);
 int hwc_get_handle_primefd(buffer_handle_t hnd);
-#if RK_DRM_GRALLOC
-uint32_t hwc_get_handle_phy_addr(buffer_handle_t hnd);
-#endif
 void hwc_list_nodraw(hwc_display_contents_1_t  *list);
 void hwc_sync_release(hwc_display_contents_1_t  *list);
 

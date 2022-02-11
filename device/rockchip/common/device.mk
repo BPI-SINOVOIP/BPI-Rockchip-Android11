@@ -95,7 +95,7 @@ PRODUCT_COPY_FILES += \
 
 #SDK Version
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR10
+    ro.rksdk.version=ANDROID$(PLATFORM_VERSION)_RKR11
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -1295,6 +1295,11 @@ AB_OTA_PARTITIONS += \
     vendor_boot
 endif
 
+ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
+AB_OTA_PARTITIONS += \
+    logo
+endif
+
 # A/B OTA dexopt package
 PRODUCT_PACKAGES += otapreopt_script
 
@@ -1433,3 +1438,16 @@ PRODUCT_COPY_FILES += \
 # build libmpimmz for rknn
 PRODUCT_PACKAGES += \
 	libmpimmz
+
+# prebuild camera binary tools
+ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += \
+	media-ctl \
+	v4l2-ctl
+ifneq (,$(filter rk356x, $(strip $(TARGET_BOARD_PLATFORM))))
+PRODUCT_PACKAGES += \
+	rkaiq_tool_server \
+	rkaiq_demo \
+	rkaiq_3A_server
+endif
+endif

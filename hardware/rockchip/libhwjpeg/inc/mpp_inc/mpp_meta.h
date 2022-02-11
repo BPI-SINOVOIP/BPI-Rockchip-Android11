@@ -20,9 +20,6 @@
 #include <stdint.h>
 #include "rk_type.h"
 
-#include "mpp_frame.h"
-#include "mpp_packet.h"
-
 #define FOURCC_META(a, b, c, d) ((RK_U32)(a) << 24  | \
                                 ((RK_U32)(b) << 16) | \
                                 ((RK_U32)(c) << 8)  | \
@@ -76,25 +73,32 @@ typedef enum MppMetaKey_e {
     KEY_INPUT_IDR_REQ           = FOURCC_META('i', 'i', 'd', 'r'),   /* input idr frame request flag */
     KEY_OUTPUT_INTRA            = FOURCC_META('o', 'i', 'd', 'r'),   /* output intra frame indicator */
 
-    /* flow control key */
-    KEY_WIDTH                   = FOURCC_META('w', 'd', 't', 'h'),
-    KEY_HEIGHT                  = FOURCC_META('h', 'g', 'h', 't'),
-    KEY_BITRATE                 = FOURCC_META('b', 'p', 's', ' '),
-    KEY_BITRATE_UP              = FOURCC_META('b', 'p', 's', 'u'),
-    KEY_BITRATE_LOW             = FOURCC_META('b', 'p', 's', 'l'),
-    KEY_INPUT_FPS               = FOURCC_META('i', 'f', 'p', 's'),
-    KEY_OUTPUT_FPS              = FOURCC_META('o', 'f', 'p', 's'),
-    KEY_GOP                     = FOURCC_META('g', 'o', 'p', ' '),
-    KEY_QP                      = FOURCC_META('q', 'p', ' ', ' '),
-    KEY_QP_MIN                  = FOURCC_META('q', 'm', 'i', 'n'),
-    KEY_QP_MAX                  = FOURCC_META('q', 'm', 'a', 'x'),
-    KEY_QP_DIFF_RANGE           = FOURCC_META('q', 'd', 'i', 'f'),
-    KEY_RC_MODE                 = FOURCC_META('r', 'c', 'm', 'o'),
+    /* mpp_frame / mpp_packet meta data info key */
+    KEY_TEMPORAL_ID             = FOURCC_META('t', 'l', 'i', 'd'),
+    KEY_LONG_REF_IDX            = FOURCC_META('l', 't', 'i', 'd'),
+    KEY_ENC_AVERAGE_QP          = FOURCC_META('a', 'v', 'g', 'q'),
+    KEY_ROI_DATA                = FOURCC_META('r', 'o', 'i', ' '),
+    KEY_OSD_DATA                = FOURCC_META('o', 's', 'd', ' '),
+    KEY_OSD_DATA2               = FOURCC_META('o', 's', 'd', '2'),
+    KEY_USER_DATA               = FOURCC_META('u', 's', 'r', 'd'),
+    KEY_USER_DATAS              = FOURCC_META('u', 'r', 'd', 's'),
+
+    /* input motion list for smart p rate control */
+    KEY_MV_LIST                 = FOURCC_META('m', 'v', 'l', 't'),
+
+    /* frame long-term reference frame operation */
+    KEY_ENC_MARK_LTR            = FOURCC_META('m', 'l', 't', 'r'),
+    KEY_ENC_USE_LTR             = FOURCC_META('u', 'l', 't', 'r'),
+
+    /* MLVEC specified encoder feature  */
+    KEY_ENC_FRAME_QP            = FOURCC_META('f', 'r', 'm', 'q'),
+    KEY_ENC_BASE_LAYER_PID      = FOURCC_META('b', 'p', 'i', 'd'),
 } MppMetaKey;
 
-typedef void* MppMeta;
-
 #define mpp_meta_get(meta) mpp_meta_get_with_tag(meta, MODULE_TAG, __FUNCTION__)
+
+#include "mpp_frame.h"
+#include "mpp_packet.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -102,6 +106,7 @@ extern "C" {
 
 MPP_RET mpp_meta_get_with_tag(MppMeta *meta, const char *tag, const char *caller);
 MPP_RET mpp_meta_put(MppMeta meta);
+RK_S32  mpp_meta_size(MppMeta meta);
 
 MPP_RET mpp_meta_set_s32(MppMeta meta, MppMetaKey key, RK_S32 val);
 MPP_RET mpp_meta_set_s64(MppMeta meta, MppMetaKey key, RK_S64 val);

@@ -38,6 +38,48 @@ ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE := libcfa
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_SRC_FILES_arm := libcfa/lib/libcfa.so
+LOCAL_32_BIT_ONLY := true
+include $(BUILD_PREBUILT)
+
+ifeq (${TARGET_ARCH},arm64)
+include $(CLEAR_VARS)
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE := libcfa
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_SRC_FILES_arm64 := libcfa/lib64/libcfa.so
+include $(BUILD_PREBUILT)
+endif
+
+include $(CLEAR_VARS)
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE := libeink
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_SRC_FILES_arm := libregal/lib/libeink.so
+LOCAL_32_BIT_ONLY := true
+include $(BUILD_PREBUILT)
+
+ifeq (${TARGET_ARCH},arm64)
+include $(CLEAR_VARS)
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_MODULE := libeink
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_SRC_FILES_arm64 := libregal/lib64/libeink.so
+include $(BUILD_PREBUILT)
+endif
+
+include $(CLEAR_VARS)
 
 LOCAL_SHARED_LIBRARIES := \
 	libcutils \
@@ -49,7 +91,9 @@ LOCAL_SHARED_LIBRARIES := \
         librga \
         libjpeg \
         libpng \
-        libskia
+        libskia \
+        libcfa \
+        libeink
 
 LOCAL_STATIC_LIBRARIES := \
 	libtinyxml2

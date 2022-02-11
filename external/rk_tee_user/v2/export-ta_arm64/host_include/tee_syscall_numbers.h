@@ -79,10 +79,8 @@
 #define TEE_SCN_SE_CHANNEL_CLOSE__DEPRECATED		69
 /* End of deprecated Secure Element API syscalls */
 #define TEE_SCN_CACHE_OPERATION			70
-#define TEE_SCN_CRYP_RANDOM_NUMBER_ADD_ENTROPY	71
-#define TEE_SCN_DERIVE_KEY_FROM_HARD		72
 
-#define TEE_SCN_MAX				72
+#define TEE_SCN_MAX				70
 
 /* Maximum number of allowed arguments for a syscall */
 #define TEE_SVC_MAX_ARGS			8

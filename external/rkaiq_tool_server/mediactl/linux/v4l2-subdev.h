@@ -34,9 +34,10 @@
  * @V4L2_SUBDEV_FORMAT_TRY: try format, for negotiation only
  * @V4L2_SUBDEV_FORMAT_ACTIVE: active format, applied to the device
  */
-enum v4l2_subdev_format_whence {
-  V4L2_SUBDEV_FORMAT_TRY = 0,
-  V4L2_SUBDEV_FORMAT_ACTIVE = 1,
+enum v4l2_subdev_format_whence
+{
+    V4L2_SUBDEV_FORMAT_TRY = 0,
+    V4L2_SUBDEV_FORMAT_ACTIVE = 1,
 };
 
 /**
@@ -46,10 +47,10 @@ enum v4l2_subdev_format_whence {
  * @format: media bus format (format code and frame size)
  */
 struct v4l2_subdev_format {
-  __u32 which;
-  __u32 pad;
-  struct v4l2_mbus_framefmt format;
-  __u32 reserved[8];
+    __u32 which;
+    __u32 pad;
+    struct v4l2_mbus_framefmt format;
+    __u32 reserved[8];
 };
 
 /**
@@ -59,10 +60,10 @@ struct v4l2_subdev_format {
  * @rect: pad crop rectangle boundaries
  */
 struct v4l2_subdev_crop {
-  __u32 which;
-  __u32 pad;
-  struct v4l2_rect rect;
-  __u32 reserved[8];
+    __u32 which;
+    __u32 pad;
+    struct v4l2_rect rect;
+    __u32 reserved[8];
 };
 
 /**
@@ -73,11 +74,11 @@ struct v4l2_subdev_crop {
  * @which: format type (from enum v4l2_subdev_format_whence)
  */
 struct v4l2_subdev_mbus_code_enum {
-  __u32 pad;
-  __u32 index;
-  __u32 code;
-  __u32 which;
-  __u32 reserved[8];
+    __u32 pad;
+    __u32 index;
+    __u32 code;
+    __u32 which;
+    __u32 reserved[8];
 };
 
 /**
@@ -88,15 +89,15 @@ struct v4l2_subdev_mbus_code_enum {
  * @which: format type (from enum v4l2_subdev_format_whence)
  */
 struct v4l2_subdev_frame_size_enum {
-  __u32 index;
-  __u32 pad;
-  __u32 code;
-  __u32 min_width;
-  __u32 max_width;
-  __u32 min_height;
-  __u32 max_height;
-  __u32 which;
-  __u32 reserved[8];
+    __u32 index;
+    __u32 pad;
+    __u32 code;
+    __u32 min_width;
+    __u32 max_width;
+    __u32 min_height;
+    __u32 max_height;
+    __u32 which;
+    __u32 reserved[8];
 };
 
 /**
@@ -105,9 +106,9 @@ struct v4l2_subdev_frame_size_enum {
  * @interval: frame interval in seconds
  */
 struct v4l2_subdev_frame_interval {
-  __u32 pad;
-  struct v4l2_fract interval;
-  __u32 reserved[9];
+    __u32 pad;
+    struct v4l2_fract interval;
+    __u32 reserved[9];
 };
 
 /**
@@ -121,14 +122,14 @@ struct v4l2_subdev_frame_interval {
  * @which: format type (from enum v4l2_subdev_format_whence)
  */
 struct v4l2_subdev_frame_interval_enum {
-  __u32 index;
-  __u32 pad;
-  __u32 code;
-  __u32 width;
-  __u32 height;
-  struct v4l2_fract interval;
-  __u32 which;
-  __u32 reserved[8];
+    __u32 index;
+    __u32 pad;
+    __u32 code;
+    __u32 width;
+    __u32 height;
+    struct v4l2_fract interval;
+    __u32 which;
+    __u32 reserved[8];
 };
 
 /**
@@ -147,12 +148,12 @@ struct v4l2_subdev_frame_interval_enum {
  * an application and a driver.
  */
 struct v4l2_subdev_selection {
-  __u32 which;
-  __u32 pad;
-  __u32 target;
-  __u32 flags;
-  struct v4l2_rect r;
-  __u32 reserved[8];
+    __u32 which;
+    __u32 pad;
+    __u32 target;
+    __u32 flags;
+    struct v4l2_rect r;
+    __u32 reserved[8];
 };
 
 /* Backwards compatibility define --- to be removed */

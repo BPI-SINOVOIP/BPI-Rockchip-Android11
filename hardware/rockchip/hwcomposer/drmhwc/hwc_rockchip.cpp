@@ -2659,9 +2659,6 @@ void hwc_sync_release(hwc_display_contents_1_t  *list)
 			return ;
 		}
 		if (layer->acquireFenceFd>0){
-#if RK_PRINT_LAYER_NAME
-			ALOGV(">>>close acquireFenceFd:%d,layername=%s",layer->acquireFenceFd,layer->LayerName);
-#endif
 			close(layer->acquireFenceFd);
 			list->hwLayers[i].acquireFenceFd = -1;
 		}

@@ -6,7 +6,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -65,6 +65,10 @@
 #include <stdio.h>
 #endif
 
+#if defined(__APPLE__)
+#include <TargetConditionals.h>
+#endif
+
 // Include a BoringSSL-only header so consumers including this header without
 // setting up include paths do not accidentally pick up the system
 // opensslconf.h.
@@ -86,24 +90,32 @@ extern "C" {
 #elif defined(__x86) || defined(__i386) || defined(__i386__) || defined(_M_IX86)
 #define OPENSSL_32_BIT
 #define OPENSSL_X86
-#elif defined(__aarch64__)
+#elif defined(__AARCH64EL__) || defined(_M_ARM64)
 #define OPENSSL_64_BIT
 #define OPENSSL_AARCH64
-#elif defined(__arm) || defined(__arm__) || defined(_M_ARM)
+#elif defined(__ARMEL__) || defined(_M_ARM)
 #define OPENSSL_32_BIT
 #define OPENSSL_ARM
 #elif (defined(__PPC64__) || defined(__powerpc64__)) && defined(_LITTLE_ENDIAN)
 #define OPENSSL_64_BIT
 #define OPENSSL_PPC64LE
-#elif defined(__mips__) && !defined(__LP64__)
+#elif defined(__MIPSEL__) && !defined(__LP64__)
 #define OPENSSL_32_BIT
 #define OPENSSL_MIPS
-#elif defined(__mips__) && defined(__LP64__)
+#elif defined(__MIPSEL__) && defined(__LP64__)
 #define OPENSSL_64_BIT
 #define OPENSSL_MIPS64
+#elif defined(__riscv) && __SIZEOF_POINTER__ == 8
+#define OPENSSL_64_BIT
+#elif defined(__riscv) && __SIZEOF_POINTER__ == 4
+#define OPENSSL_32_BIT
 #elif defined(__pnacl__)
 #define OPENSSL_32_BIT
 #define OPENSSL_PNACL
+#elif defined(__wasm__)
+#define OPENSSL_32_BIT
+#elif defined(__asmjs__)
+#define OPENSSL_32_BIT
 #elif defined(__myriad2__)
 #define OPENSSL_32_BIT
 #else
@@ -116,13 +128,24 @@ extern "C" {
 
 #if defined(__APPLE__)
 #define OPENSSL_APPLE
+// Note |TARGET_OS_MAC| is set for all Apple OS variants. |TARGET_OS_OSX|
+// targets macOS specifically.
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX
+#define OPENSSL_MACOS
+#endif
+#if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
+#define OPENSSL_IOS
+#endif
 #endif
 
 #if defined(_WIN32)
 #define OPENSSL_WINDOWS
 #endif
 
-#if defined(__linux__)
+// Trusty isn't Linux but currently defines __linux__. As a workaround, we
+// exclude it here.
+// TODO(b/169780122): Remove this workaround once Trusty no longer defines it.
+#if defined(__linux__) && !defined(TRUSTY) && !defined(OPTEE)
 #define OPENSSL_LINUX
 #endif
 
@@ -132,15 +155,36 @@ extern "C" {
 
 #if defined(TRUSTY)
 #define OPENSSL_TRUSTY
-#define OPENSSL_NO_THREADS
+#define OPENSSL_NO_THREADS_CORRUPT_MEMORY_AND_LEAK_SECRETS_IF_THREADED
 #endif
 
-#if !defined(OPENSSL_NO_THREADS)
+#if defined(__ANDROID_API__)
+#define OPENSSL_ANDROID
+#endif
+
+#if defined(__FreeBSD__)
+#define OPENSSL_FREEBSD
+#endif
+
+// BoringSSL requires platform's locking APIs to make internal global state
+// thread-safe, including the PRNG. On some single-threaded embedded platforms,
+// locking APIs may not exist, so this dependency may be disabled with the
+// following build flag.
+//
+// IMPORTANT: Doing so means the consumer promises the library will never be
+// used in any multi-threaded context. It causes BoringSSL to be globally
+// thread-unsafe. Setting it inappropriately will subtly and unpredictably
+// corrupt memory and leak secret keys.
+//
+// Do not set this flag on any platform where threads are possible. BoringSSL
+// maintainers will not provide support for any consumers that do so. Changes
+// which break such unsupported configurations will not be reverted.
+#if !defined(OPENSSL_NO_THREADS_CORRUPT_MEMORY_AND_LEAK_SECRETS_IF_THREADED)
 #define OPENSSL_THREADS
 #endif
 
 #define OPENSSL_IS_BORINGSSL
-#define OPENSSL_VERSION_NUMBER 0x1010007f
+#define OPENSSL_VERSION_NUMBER 0x1010107f
 #define SSLEAY_VERSION_NUMBER OPENSSL_VERSION_NUMBER
 
 // BORINGSSL_API_VERSION is a positive integer that increments as BoringSSL
@@ -151,7 +195,7 @@ extern "C" {
 // A consumer may use this symbol in the preprocessor to temporarily build
 // against multiple revisions of BoringSSL at the same time. It is not
 // recommended to do so for longer than is necessary.
-#define BORINGSSL_API_VERSION 4
+#define BORINGSSL_API_VERSION 16
 
 #if defined(BORINGSSL_SHARED_LIBRARY)
 
@@ -180,7 +224,7 @@ extern "C" {
 #endif  // defined(BORINGSSL_SHARED_LIBRARY)
 
 
-#if defined(__GNUC__)
+#if defined(__GNUC__) || defined(__clang__)
 // MinGW has two different printf implementations. Ensure the format macro
 // matches the selected implementation. See
 // https://sourceforge.net/p/mingw-w64/wiki2/gnu%20printf/.
@@ -209,6 +253,35 @@ extern "C" {
 #define OPENSSL_UNUSED
 #endif
 
+// C and C++ handle inline functions differently. In C++, an inline function is
+// defined in just the header file, potentially emitted in multiple compilation
+// units (in cases the compiler did not inline), but each copy must be identical
+// to satsify ODR. In C, a non-static inline must be manually emitted in exactly
+// one compilation unit with a separate extern inline declaration.
+//
+// In both languages, exported inline functions referencing file-local symbols
+// are problematic. C forbids this altogether (though GCC and Clang seem not to
+// enforce it). It works in C++, but ODR requires the definitions be identical,
+// including all names in the definitions resolving to the "same entity". In
+// practice, this is unlikely to be a problem, but an inline function that
+// returns a pointer to a file-local symbol
+// could compile oddly.
+//
+// Historically, we used static inline in headers. However, to satisfy ODR, use
+// plain inline in C++, to allow inline consumer functions to call our header
+// functions. Plain inline would also work better with C99 inline, but that is
+// not used much in practice, extern inline is tedious, and there are conflicts
+// with the old gnu89 model:
+// https://stackoverflow.com/questions/216510/extern-inline
+#if defined(__cplusplus)
+#define OPENSSL_INLINE inline
+#else
+// Add OPENSSL_UNUSED so that, should an inline function be emitted via macro
+// (e.g. a |STACK_OF(T)| implementation) in a source file without tripping
+// clang's -Wunused-function.
+#define OPENSSL_INLINE static inline OPENSSL_UNUSED
+#endif
+
 #if defined(BORINGSSL_UNSAFE_FUZZER_MODE) && \
     !defined(BORINGSSL_UNSAFE_DETERMINISTIC_MODE)
 #define BORINGSSL_UNSAFE_DETERMINISTIC_MODE
@@ -218,22 +291,38 @@ extern "C" {
 #if __has_feature(address_sanitizer)
 #define OPENSSL_ASAN
 #endif
+#if __has_feature(thread_sanitizer)
+#define OPENSSL_TSAN
+#endif
 #if __has_feature(memory_sanitizer)
 #define OPENSSL_MSAN
+#define OPENSSL_ASM_INCOMPATIBLE
 #endif
 #endif
 
-// Have a generic fall-through for different versions of C/C++.
-#if defined(__cplusplus) && __cplusplus >= 201703L
-#define OPENSSL_FALLTHROUGH [[fallthrough]]
-#elif defined(__cplusplus) && __cplusplus >= 201103L && defined(__clang__)
-#define OPENSSL_FALLTHROUGH [[clang::fallthrough]]
-#elif defined(__cplusplus) && __cplusplus >= 201103L && __GNUC__ >= 7
-#define OPENSSL_FALLTHROUGH [[gnu::fallthrough]]
-#elif  __GNUC__ >= 7 // gcc 7
-#define OPENSSL_FALLTHROUGH __attribute__ ((fallthrough))
-#else // C++11 on gcc 6, and all other cases
-#define OPENSSL_FALLTHROUGH
+#if defined(OPENSSL_ASM_INCOMPATIBLE)
+#undef OPENSSL_ASM_INCOMPATIBLE
+#if !defined(OPENSSL_NO_ASM)
+#define OPENSSL_NO_ASM
+#endif
+#endif  // OPENSSL_ASM_INCOMPATIBLE
+
+#if defined(__cplusplus)
+// enums can be predeclared, but only in C++ and only if given an explicit type.
+// C doesn't support setting an explicit type for enums thus a #define is used
+// to do this only for C++. However, the ABI type between C and C++ need to have
+// equal sizes, which is confirmed in a unittest.
+#define BORINGSSL_ENUM_INT : int
+enum ssl_early_data_reason_t BORINGSSL_ENUM_INT;
+enum ssl_encryption_level_t BORINGSSL_ENUM_INT;
+enum ssl_private_key_result_t BORINGSSL_ENUM_INT;
+enum ssl_renegotiate_mode_t BORINGSSL_ENUM_INT;
+enum ssl_select_cert_result_t BORINGSSL_ENUM_INT;
+enum ssl_select_cert_result_t BORINGSSL_ENUM_INT;
+enum ssl_ticket_aead_result_t BORINGSSL_ENUM_INT;
+enum ssl_verify_result_t BORINGSSL_ENUM_INT;
+#else
+#define BORINGSSL_ENUM_INT
 #endif
 
 // CRYPTO_THREADID is a dummy value.
@@ -276,14 +365,12 @@ typedef struct X509_POLICY_NODE_st X509_POLICY_NODE;
 typedef struct X509_POLICY_TREE_st X509_POLICY_TREE;
 typedef struct X509_VERIFY_PARAM_st X509_VERIFY_PARAM;
 typedef struct X509_algor_st X509_ALGOR;
-typedef struct X509_crl_info_st X509_CRL_INFO;
 typedef struct X509_crl_st X509_CRL;
 typedef struct X509_extension_st X509_EXTENSION;
 typedef struct X509_info_st X509_INFO;
 typedef struct X509_name_entry_st X509_NAME_ENTRY;
 typedef struct X509_name_st X509_NAME;
 typedef struct X509_pubkey_st X509_PUBKEY;
-typedef struct X509_req_info_st X509_REQ_INFO;
 typedef struct X509_req_st X509_REQ;
 typedef struct X509_sig_st X509_SIG;
 typedef struct X509_val_st X509_VAL;
@@ -291,6 +378,7 @@ typedef struct bignum_ctx BN_CTX;
 typedef struct bignum_st BIGNUM;
 typedef struct bio_method_st BIO_METHOD;
 typedef struct bio_st BIO;
+typedef struct blake2b_state_st BLAKE2B_CTX;
 typedef struct bn_gencb_st BN_GENCB;
 typedef struct bn_mont_ctx_st BN_MONT_CTX;
 typedef struct buf_mem_st BUF_MEM;
@@ -315,6 +403,11 @@ typedef struct evp_aead_st EVP_AEAD;
 typedef struct evp_cipher_ctx_st EVP_CIPHER_CTX;
 typedef struct evp_cipher_st EVP_CIPHER;
 typedef struct evp_encode_ctx_st EVP_ENCODE_CTX;
+typedef struct evp_hpke_aead_st EVP_HPKE_AEAD;
+typedef struct evp_hpke_ctx_st EVP_HPKE_CTX;
+typedef struct evp_hpke_kdf_st EVP_HPKE_KDF;
+typedef struct evp_hpke_kem_st EVP_HPKE_KEM;
+typedef struct evp_hpke_key_st EVP_HPKE_KEY;
 typedef struct evp_pkey_asn1_method_st EVP_PKEY_ASN1_METHOD;
 typedef struct evp_pkey_ctx_st EVP_PKEY_CTX;
 typedef struct evp_pkey_method_st EVP_PKEY_METHOD;
@@ -337,12 +430,18 @@ typedef struct spake2_ctx_st SPAKE2_CTX;
 typedef struct srtp_protection_profile_st SRTP_PROTECTION_PROFILE;
 typedef struct ssl_cipher_st SSL_CIPHER;
 typedef struct ssl_ctx_st SSL_CTX;
+typedef struct ssl_ech_keys_st SSL_ECH_KEYS;
 typedef struct ssl_method_st SSL_METHOD;
 typedef struct ssl_private_key_method_st SSL_PRIVATE_KEY_METHOD;
+typedef struct ssl_quic_method_st SSL_QUIC_METHOD;
 typedef struct ssl_session_st SSL_SESSION;
 typedef struct ssl_st SSL;
 typedef struct ssl_ticket_aead_method_st SSL_TICKET_AEAD_METHOD;
 typedef struct st_ERR_FNS ERR_FNS;
+typedef struct trust_token_st TRUST_TOKEN;
+typedef struct trust_token_client_st TRUST_TOKEN_CLIENT;
+typedef struct trust_token_issuer_st TRUST_TOKEN_ISSUER;
+typedef struct trust_token_method_st TRUST_TOKEN_METHOD;
 typedef struct v3_ext_ctx X509V3_CTX;
 typedef struct x509_attributes_st X509_ATTRIBUTE;
 typedef struct x509_cert_aux_st X509_CERT_AUX;
@@ -364,6 +463,18 @@ typedef void *OPENSSL_BLOCK;
 #define BORINGSSL_NO_CXX
 #endif
 
+#if defined(BORINGSSL_PREFIX)
+#define BSSL_NAMESPACE_BEGIN \
+  namespace bssl {           \
+  inline namespace BORINGSSL_PREFIX {
+#define BSSL_NAMESPACE_END \
+  }                        \
+  }
+#else
+#define BSSL_NAMESPACE_BEGIN namespace bssl {
+#define BSSL_NAMESPACE_END }
+#endif
+
 // MSVC doesn't set __cplusplus to 201103 to indicate C++11 support (see
 // https://connect.microsoft.com/VisualStudio/feedback/details/763051/a-value-of-predefined-macro-cplusplus-is-still-199711l)
 // so MSVC is just assumed to support C++11.
@@ -372,6 +483,7 @@ typedef void *OPENSSL_BLOCK;
 #endif
 
 #if !defined(BORINGSSL_NO_CXX)
+
 extern "C++" {
 
 #include <memory>
@@ -387,12 +499,13 @@ extern "C++" {
 #if defined(BORINGSSL_NO_CXX)
 
 #define BORINGSSL_MAKE_DELETER(type, deleter)
+#define BORINGSSL_MAKE_UP_REF(type, up_ref_func)
 
 #else
 
 extern "C++" {
 
-namespace bssl {
+BSSL_NAMESPACE_BEGIN
 
 namespace internal {
 
@@ -423,8 +536,39 @@ class StackAllocated {
   StackAllocated() { init(&ctx_); }
   ~StackAllocated() { cleanup(&ctx_); }
 
-  StackAllocated(const StackAllocated<T, CleanupRet, init, cleanup> &) = delete;
-  T& operator=(const StackAllocated<T, CleanupRet, init, cleanup> &) = delete;
+  StackAllocated(const StackAllocated &) = delete;
+  StackAllocated& operator=(const StackAllocated &) = delete;
+
+  T *get() { return &ctx_; }
+  const T *get() const { return &ctx_; }
+
+  T *operator->() { return &ctx_; }
+  const T *operator->() const { return &ctx_; }
+
+  void Reset() {
+    cleanup(&ctx_);
+    init(&ctx_);
+  }
+
+ private:
+  T ctx_;
+};
+
+template <typename T, typename CleanupRet, void (*init)(T *),
+          CleanupRet (*cleanup)(T *), void (*move)(T *, T *)>
+class StackAllocatedMovable {
+ public:
+  StackAllocatedMovable() { init(&ctx_); }
+  ~StackAllocatedMovable() { cleanup(&ctx_); }
+
+  StackAllocatedMovable(StackAllocatedMovable &&other) {
+    init(&ctx_);
+    move(&ctx_, &other.ctx_);
+  }
+  StackAllocatedMovable &operator=(StackAllocatedMovable &&other) {
+    move(&ctx_, &other.ctx_);
+    return *this;
+  }
 
   T *get() { return &ctx_; }
   const T *get() const { return &ctx_; }
@@ -457,7 +601,19 @@ class StackAllocated {
 template <typename T>
 using UniquePtr = std::unique_ptr<T, internal::Deleter<T>>;
 
-}  // namespace bssl
+#define BORINGSSL_MAKE_UP_REF(type, up_ref_func)             \
+  inline UniquePtr<type> UpRef(type *v) {                    \
+    if (v != nullptr) {                                      \
+      up_ref_func(v);                                        \
+    }                                                        \
+    return UniquePtr<type>(v);                               \
+  }                                                          \
+                                                             \
+  inline UniquePtr<type> UpRef(const UniquePtr<type> &ptr) { \
+    return UpRef(ptr.get());                                 \
+  }
+
+BSSL_NAMESPACE_END
 
 }  // extern C++
 

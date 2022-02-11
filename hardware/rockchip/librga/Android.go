@@ -27,14 +27,18 @@ func Defaults(ctx android.LoadHookContext) {
             Cflags []string
             Shared_libs []string
             Include_dirs []string
+            Header_libs []string
+            Export_header_lib_headers []string
             Double_loadable *bool
         }
 
         p := &props{}
-        p.Srcs = getSrcs(ctx)
-        p.Cflags = getCflags(ctx)
-        p.Shared_libs = getSharedLibs(ctx)
-        p.Include_dirs = getIncludeDirs(ctx)
+        p.Srcs = getSrcs(ctx, sdkVersion)
+        p.Cflags = getCflags(ctx, sdkVersion)
+        p.Shared_libs = getSharedLibs(ctx, sdkVersion)
+        p.Include_dirs = getIncludeDirs(ctx, sdkVersion)
+        p.Header_libs = getHeaders(ctx, sdkVersion)
+        p.Export_header_lib_headers = getExportHeaders(ctx, sdkVersion)
 
         double_loadable := true
         p.Double_loadable = &double_loadable
@@ -49,20 +53,30 @@ func Defaults(ctx android.LoadHookContext) {
         }
 
         p := &props{}
-        p.Srcs = getSrcs(ctx)
-        p.Cflags = getCflags(ctx)
-        p.Shared_libs = getSharedLibs(ctx)
-        p.Include_dirs = getIncludeDirs(ctx)
+        p.Srcs = getSrcs(ctx, sdkVersion)
+        p.Cflags = getCflags(ctx, sdkVersion)
+        p.Shared_libs = getSharedLibs(ctx, sdkVersion)
+        p.Include_dirs = getIncludeDirs(ctx, sdkVersion)
 
         ctx.AppendProperties(p)
     }
 }
 
 //条件编译主要修改函数
-func getCflags(ctx android.BaseContext) ([]string) {
-    var cppflags []string
+func getSrcs(ctx android.BaseContext, sdkVersion int) ([]string) {
+    var src []string
 
-    sdkVersion := ctx.AConfig().PlatformSdkVersionInt()
+    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_RK_GRALLOC_VERSION"),"4") ) {
+        if (sdkVersion >= 30 ) {
+            src = append(src, "core/platform_gralloc4.cpp")
+        }
+    }
+
+    return src
+}
+
+func getCflags(ctx android.BaseContext, sdkVersion int) ([]string) {
+    var cppflags []string
 
     //该打印输出为: TARGET_PRODUCT:rk3328 fmt.Println("TARGET_PRODUCT:",ctx.AConfig().Getenv("TARGET_PRODUCT")) //通过 strings.EqualFold 比较字符串，可参考go语言字符串对比
     if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_BOARD_PLATFORM"),"rk3368") ) {
@@ -80,10 +94,8 @@ func getCflags(ctx android.BaseContext) ([]string) {
     return cppflags
 }
 
-func getSharedLibs(ctx android.BaseContext) ([]string) {
+func getSharedLibs(ctx android.BaseContext, sdkVersion int) ([]string) {
     var libs []string
-
-    sdkVersion := ctx.AConfig().PlatformSdkVersionInt()
 
     if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_RK_GRALLOC_VERSION"),"4") ) {
         if (sdkVersion >= 30 ) {
@@ -100,10 +112,8 @@ func getSharedLibs(ctx android.BaseContext) ([]string) {
     return libs
 }
 
-func getIncludeDirs(ctx android.BaseContext) ([]string) {
+func getIncludeDirs(ctx android.BaseContext, sdkVersion int) ([]string) {
     var dirs []string
-
-    sdkVersion := ctx.AConfig().PlatformSdkVersionInt()
 
     if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_RK_GRALLOC_VERSION"),"4") ) {
         if (sdkVersion >= 30 ) {
@@ -123,16 +133,22 @@ func getIncludeDirs(ctx android.BaseContext) ([]string) {
     return dirs
 }
 
-func getSrcs(ctx android.BaseContext) ([]string) {
-    var src []string
+func getHeaders(ctx android.BaseContext, sdkVersion int) ([]string) {
+    var headers []string
 
-    sdkVersion := ctx.AConfig().PlatformSdkVersionInt()
-
-    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_RK_GRALLOC_VERSION"),"4") ) {
-        if (sdkVersion >= 30 ) {
-            src = append(src, "core/platform_gralloc4.cpp")
-        }
+    if (sdkVersion >= 31 ) {
+        headers = append(headers, "libhardware_rockchip_headers")
     }
 
-    return src
+    return headers
+}
+
+func getExportHeaders(ctx android.BaseContext, sdkVersion int) ([]string) {
+    var headers []string
+
+    if (sdkVersion >= 31 ) {
+        headers = append(headers, "libhardware_rockchip_headers")
+    }
+
+    return headers
 }

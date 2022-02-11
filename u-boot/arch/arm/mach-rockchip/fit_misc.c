@@ -93,7 +93,7 @@ static int fit_gunzip_image(void *fit, int node, ulong *load_addr,
 #if CONFIG_IS_ENABLED(MISC_DECOMPRESS)
 	ret = misc_decompress_process((ulong)(*load_addr),
 				      (ulong)(*src_addr), (ulong)(*src_len),
-				      DECOM_GZIP, false, &len, flags);
+				      DECOM_GZIP, true, &len, flags);
 #else
 	ret = gunzip((void *)(*load_addr), ALIGN(len, FIT_MAX_SPL_IMAGE_SZ),
 		     (void *)(*src_addr), (void *)(&len));
@@ -189,8 +189,7 @@ int fit_board_verify_required_sigs(void)
 	uint8_t vboot = 0;
 
 #ifdef CONFIG_SPL_BUILD
-#if defined(CONFIG_SPL_ROCKCHIP_SECURE_OTP_V1) || \
-    defined(CONFIG_SPL_ROCKCHIP_SECURE_OTP_V2)
+#if defined(CONFIG_SPL_ROCKCHIP_SECURE_OTP)
 	struct udevice *dev;
 
 	dev = misc_otp_get_device(OTP_S);

@@ -78,7 +78,7 @@
 #define KEY_REF_FRM_CFG "reference_frame_config"
 
 // mpp special
-#define KEY_MPP_GROUP_MAX_FRAMES "fg_max_frames"  // framegroup max frame num
+#define KEY_MPP_GROUP_MAX_FRAMES "fg_max_frames" // framegroup max frame num
 #define KEY_MPP_SPLIT_MODE "split_mode"
 #define KEY_OUTPUT_TIMEOUT "output_timeout"
 
@@ -222,4 +222,4 @@
 
 #define KEY_ROCKX_ASYNC_CALLBACK "aysnc_callback_enable"
 
-#endif  // #ifndef EASYMEDIA_MEDIA_KEY_STRING_H_
+#endif // #ifndef EASYMEDIA_MEDIA_KEY_STRING_H_

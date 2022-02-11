@@ -29,18 +29,18 @@ extern "C" {
 #endif
 
 struct media_link {
-  struct media_pad* source;
-  struct media_pad* sink;
-  struct media_link* twin;
-  __u32 flags;
-  __u32 padding[3];
+    struct media_pad* source;
+    struct media_pad* sink;
+    struct media_link* twin;
+    __u32 flags;
+    __u32 padding[3];
 };
 
 struct media_pad {
-  struct media_entity* entity;
-  __u32 index;
-  __u32 flags;
-  __u32 padding[3];
+    struct media_entity* entity;
+    __u32 index;
+    __u32 flags;
+    __u32 padding[3];
 };
 
 struct media_device;
@@ -235,8 +235,9 @@ const char* media_entity_get_devname(struct media_entity* entity);
  *
  * @return The type of @a entity.
  */
-static inline unsigned int media_entity_type(struct media_entity* entity) {
-  return media_entity_get_info(entity)->type & MEDIA_ENT_TYPE_MASK;
+static inline unsigned int media_entity_type(struct media_entity* entity)
+{
+    return media_entity_get_info(entity)->type & MEDIA_ENT_TYPE_MASK;
 }
 
 /**

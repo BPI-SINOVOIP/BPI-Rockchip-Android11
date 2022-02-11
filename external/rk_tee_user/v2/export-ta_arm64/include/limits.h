@@ -24,6 +24,9 @@
 #define LLONG_MAX __LONG_LONG_MAX__
 #define LLONG_MIN (-LLONG_MAX - 1LL)
 
+#define LONG_LONG_MAX __LONG_LONG_MAX__
+#define LONG_LONG_MIN (-LONG_LONG_MAX-1)
+
 #define MB_LEN_MAX 1
 
 #define SCHAR_MAX __SCHAR_MAX__
@@ -48,5 +51,5 @@
 
 #define ULONG_MAX (LONG_MAX * 2UL + 1UL)
 #define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-
+#define ULONG_LONG_MAX (LONG_LONG_MAX * 2ULL + 1)
 #endif /* LIMITS_H */

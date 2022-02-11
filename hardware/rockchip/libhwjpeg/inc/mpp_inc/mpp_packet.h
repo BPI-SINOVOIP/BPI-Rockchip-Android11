@@ -17,9 +17,7 @@
 #ifndef __MPP_PACKET_H__
 #define __MPP_PACKET_H__
 
-#include "mpp_buffer.h"
-
-typedef void* MppPacket;
+#include "mpp_meta.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -78,6 +76,21 @@ MppBuffer   mpp_packet_get_buffer(const MppPacket packet);
 MPP_RET mpp_packet_read(MppPacket packet, size_t offset, void *data, size_t size);
 MPP_RET mpp_packet_write(MppPacket packet, size_t offset, void *data, size_t size);
 
+/*
+ * meta data access interface
+ */
+RK_S32  mpp_packet_has_meta(const MppPacket packet);
+MppMeta mpp_packet_get_meta(const MppPacket packet);
+
+/*
+ * multi packet sequence interface for slice/split encoding/decoding
+ * partition - the packet is a part of a while image
+ * soi - Start Of Image
+ * eoi - End Of Image
+ */
+RK_U32  mpp_packet_is_partition(const MppPacket packet);
+RK_U32  mpp_packet_is_soi(const MppPacket packet);
+RK_U32  mpp_packet_is_eoi(const MppPacket packet);
 
 #ifdef __cplusplus
 }

@@ -65,7 +65,6 @@
 extern "C" {
 #endif
 
-
 /* The nid library provides numbered values for ASN.1 object identifiers and
  * other symbols. These values are used by other libraries to identify
  * cryptographic primitives.
@@ -78,7 +77,6 @@ extern "C" {
  *
  * These values should not be used outside of a single process; they are not
  * stable identifiers. */
-
 
 #define SN_undef "UNDEF"
 #define LN_undef "undefined"
@@ -745,14 +743,12 @@ extern "C" {
 #define SN_pbe_WithSHA1And3_Key_TripleDES_CBC "PBE-SHA1-3DES"
 #define LN_pbe_WithSHA1And3_Key_TripleDES_CBC "pbeWithSHA1And3-KeyTripleDES-CBC"
 #define NID_pbe_WithSHA1And3_Key_TripleDES_CBC 146
-#define OBJ_pbe_WithSHA1And3_Key_TripleDES_CBC \
-  1L, 2L, 840L, 113549L, 1L, 12L, 1L, 3L
+#define OBJ_pbe_WithSHA1And3_Key_TripleDES_CBC 1L, 2L, 840L, 113549L, 1L, 12L, 1L, 3L
 
 #define SN_pbe_WithSHA1And2_Key_TripleDES_CBC "PBE-SHA1-2DES"
 #define LN_pbe_WithSHA1And2_Key_TripleDES_CBC "pbeWithSHA1And2-KeyTripleDES-CBC"
 #define NID_pbe_WithSHA1And2_Key_TripleDES_CBC 147
-#define OBJ_pbe_WithSHA1And2_Key_TripleDES_CBC \
-  1L, 2L, 840L, 113549L, 1L, 12L, 1L, 4L
+#define OBJ_pbe_WithSHA1And2_Key_TripleDES_CBC 1L, 2L, 840L, 113549L, 1L, 12L, 1L, 4L
 
 #define SN_pbe_WithSHA1And128BitRC2_CBC "PBE-SHA1-RC2-128"
 #define LN_pbe_WithSHA1And128BitRC2_CBC "pbeWithSHA1And128BitRC2-CBC"
@@ -986,23 +982,19 @@ extern "C" {
 
 #define SN_id_smime_mod_ets_eSignature_88 "id-smime-mod-ets-eSignature-88"
 #define NID_id_smime_mod_ets_eSignature_88 200
-#define OBJ_id_smime_mod_ets_eSignature_88 \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 5L
+#define OBJ_id_smime_mod_ets_eSignature_88 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 5L
 
 #define SN_id_smime_mod_ets_eSignature_97 "id-smime-mod-ets-eSignature-97"
 #define NID_id_smime_mod_ets_eSignature_97 201
-#define OBJ_id_smime_mod_ets_eSignature_97 \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 6L
+#define OBJ_id_smime_mod_ets_eSignature_97 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 6L
 
 #define SN_id_smime_mod_ets_eSigPolicy_88 "id-smime-mod-ets-eSigPolicy-88"
 #define NID_id_smime_mod_ets_eSigPolicy_88 202
-#define OBJ_id_smime_mod_ets_eSigPolicy_88 \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 7L
+#define OBJ_id_smime_mod_ets_eSigPolicy_88 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 7L
 
 #define SN_id_smime_mod_ets_eSigPolicy_97 "id-smime-mod-ets-eSigPolicy-97"
 #define NID_id_smime_mod_ets_eSigPolicy_97 203
-#define OBJ_id_smime_mod_ets_eSigPolicy_97 \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 8L
+#define OBJ_id_smime_mod_ets_eSigPolicy_97 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 0L, 8L
 
 #define SN_id_smime_ct_receipt "id-smime-ct-receipt"
 #define NID_id_smime_ct_receipt 204
@@ -1030,18 +1022,15 @@ extern "C" {
 
 #define SN_id_smime_ct_DVCSRequestData "id-smime-ct-DVCSRequestData"
 #define NID_id_smime_ct_DVCSRequestData 210
-#define OBJ_id_smime_ct_DVCSRequestData \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 1L, 7L
+#define OBJ_id_smime_ct_DVCSRequestData 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 1L, 7L
 
 #define SN_id_smime_ct_DVCSResponseData "id-smime-ct-DVCSResponseData"
 #define NID_id_smime_ct_DVCSResponseData 211
-#define OBJ_id_smime_ct_DVCSResponseData \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 1L, 8L
+#define OBJ_id_smime_ct_DVCSResponseData 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 1L, 8L
 
 #define SN_id_smime_aa_receiptRequest "id-smime-aa-receiptRequest"
 #define NID_id_smime_aa_receiptRequest 212
-#define OBJ_id_smime_aa_receiptRequest \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 1L
+#define OBJ_id_smime_aa_receiptRequest 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 1L
 
 #define SN_id_smime_aa_securityLabel "id-smime-aa-securityLabel"
 #define NID_id_smime_aa_securityLabel 213
@@ -1049,8 +1038,7 @@ extern "C" {
 
 #define SN_id_smime_aa_mlExpandHistory "id-smime-aa-mlExpandHistory"
 #define NID_id_smime_aa_mlExpandHistory 214
-#define OBJ_id_smime_aa_mlExpandHistory \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 3L
+#define OBJ_id_smime_aa_mlExpandHistory 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 3L
 
 #define SN_id_smime_aa_contentHint "id-smime-aa-contentHint"
 #define NID_id_smime_aa_contentHint 215
@@ -1062,13 +1050,11 @@ extern "C" {
 
 #define SN_id_smime_aa_encapContentType "id-smime-aa-encapContentType"
 #define NID_id_smime_aa_encapContentType 217
-#define OBJ_id_smime_aa_encapContentType \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 6L
+#define OBJ_id_smime_aa_encapContentType 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 6L
 
 #define SN_id_smime_aa_contentIdentifier "id-smime-aa-contentIdentifier"
 #define NID_id_smime_aa_contentIdentifier 218
-#define OBJ_id_smime_aa_contentIdentifier \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 7L
+#define OBJ_id_smime_aa_contentIdentifier 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 7L
 
 #define SN_id_smime_aa_macValue "id-smime-aa-macValue"
 #define NID_id_smime_aa_macValue 219
@@ -1076,103 +1062,83 @@ extern "C" {
 
 #define SN_id_smime_aa_equivalentLabels "id-smime-aa-equivalentLabels"
 #define NID_id_smime_aa_equivalentLabels 220
-#define OBJ_id_smime_aa_equivalentLabels \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 9L
+#define OBJ_id_smime_aa_equivalentLabels 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 9L
 
 #define SN_id_smime_aa_contentReference "id-smime-aa-contentReference"
 #define NID_id_smime_aa_contentReference 221
-#define OBJ_id_smime_aa_contentReference \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 10L
+#define OBJ_id_smime_aa_contentReference 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 10L
 
 #define SN_id_smime_aa_encrypKeyPref "id-smime-aa-encrypKeyPref"
 #define NID_id_smime_aa_encrypKeyPref 222
-#define OBJ_id_smime_aa_encrypKeyPref \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 11L
+#define OBJ_id_smime_aa_encrypKeyPref 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 11L
 
 #define SN_id_smime_aa_signingCertificate "id-smime-aa-signingCertificate"
 #define NID_id_smime_aa_signingCertificate 223
-#define OBJ_id_smime_aa_signingCertificate \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 12L
+#define OBJ_id_smime_aa_signingCertificate 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 12L
 
 #define SN_id_smime_aa_smimeEncryptCerts "id-smime-aa-smimeEncryptCerts"
 #define NID_id_smime_aa_smimeEncryptCerts 224
-#define OBJ_id_smime_aa_smimeEncryptCerts \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 13L
+#define OBJ_id_smime_aa_smimeEncryptCerts 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 13L
 
 #define SN_id_smime_aa_timeStampToken "id-smime-aa-timeStampToken"
 #define NID_id_smime_aa_timeStampToken 225
-#define OBJ_id_smime_aa_timeStampToken \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 14L
+#define OBJ_id_smime_aa_timeStampToken 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 14L
 
 #define SN_id_smime_aa_ets_sigPolicyId "id-smime-aa-ets-sigPolicyId"
 #define NID_id_smime_aa_ets_sigPolicyId 226
-#define OBJ_id_smime_aa_ets_sigPolicyId \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 15L
+#define OBJ_id_smime_aa_ets_sigPolicyId 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 15L
 
 #define SN_id_smime_aa_ets_commitmentType "id-smime-aa-ets-commitmentType"
 #define NID_id_smime_aa_ets_commitmentType 227
-#define OBJ_id_smime_aa_ets_commitmentType \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 16L
+#define OBJ_id_smime_aa_ets_commitmentType 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 16L
 
 #define SN_id_smime_aa_ets_signerLocation "id-smime-aa-ets-signerLocation"
 #define NID_id_smime_aa_ets_signerLocation 228
-#define OBJ_id_smime_aa_ets_signerLocation \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 17L
+#define OBJ_id_smime_aa_ets_signerLocation 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 17L
 
 #define SN_id_smime_aa_ets_signerAttr "id-smime-aa-ets-signerAttr"
 #define NID_id_smime_aa_ets_signerAttr 229
-#define OBJ_id_smime_aa_ets_signerAttr \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 18L
+#define OBJ_id_smime_aa_ets_signerAttr 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 18L
 
 #define SN_id_smime_aa_ets_otherSigCert "id-smime-aa-ets-otherSigCert"
 #define NID_id_smime_aa_ets_otherSigCert 230
-#define OBJ_id_smime_aa_ets_otherSigCert \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 19L
+#define OBJ_id_smime_aa_ets_otherSigCert 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 19L
 
 #define SN_id_smime_aa_ets_contentTimestamp "id-smime-aa-ets-contentTimestamp"
 #define NID_id_smime_aa_ets_contentTimestamp 231
-#define OBJ_id_smime_aa_ets_contentTimestamp \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 20L
+#define OBJ_id_smime_aa_ets_contentTimestamp 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 20L
 
 #define SN_id_smime_aa_ets_CertificateRefs "id-smime-aa-ets-CertificateRefs"
 #define NID_id_smime_aa_ets_CertificateRefs 232
-#define OBJ_id_smime_aa_ets_CertificateRefs \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 21L
+#define OBJ_id_smime_aa_ets_CertificateRefs 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 21L
 
 #define SN_id_smime_aa_ets_RevocationRefs "id-smime-aa-ets-RevocationRefs"
 #define NID_id_smime_aa_ets_RevocationRefs 233
-#define OBJ_id_smime_aa_ets_RevocationRefs \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 22L
+#define OBJ_id_smime_aa_ets_RevocationRefs 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 22L
 
 #define SN_id_smime_aa_ets_certValues "id-smime-aa-ets-certValues"
 #define NID_id_smime_aa_ets_certValues 234
-#define OBJ_id_smime_aa_ets_certValues \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 23L
+#define OBJ_id_smime_aa_ets_certValues 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 23L
 
 #define SN_id_smime_aa_ets_revocationValues "id-smime-aa-ets-revocationValues"
 #define NID_id_smime_aa_ets_revocationValues 235
-#define OBJ_id_smime_aa_ets_revocationValues \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 24L
+#define OBJ_id_smime_aa_ets_revocationValues 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 24L
 
 #define SN_id_smime_aa_ets_escTimeStamp "id-smime-aa-ets-escTimeStamp"
 #define NID_id_smime_aa_ets_escTimeStamp 236
-#define OBJ_id_smime_aa_ets_escTimeStamp \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 25L
+#define OBJ_id_smime_aa_ets_escTimeStamp 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 25L
 
 #define SN_id_smime_aa_ets_certCRLTimestamp "id-smime-aa-ets-certCRLTimestamp"
 #define NID_id_smime_aa_ets_certCRLTimestamp 237
-#define OBJ_id_smime_aa_ets_certCRLTimestamp \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 26L
+#define OBJ_id_smime_aa_ets_certCRLTimestamp 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 26L
 
 #define SN_id_smime_aa_ets_archiveTimeStamp "id-smime-aa-ets-archiveTimeStamp"
 #define NID_id_smime_aa_ets_archiveTimeStamp 238
-#define OBJ_id_smime_aa_ets_archiveTimeStamp \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 27L
+#define OBJ_id_smime_aa_ets_archiveTimeStamp 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 27L
 
 #define SN_id_smime_aa_signatureType "id-smime-aa-signatureType"
 #define NID_id_smime_aa_signatureType 239
-#define OBJ_id_smime_aa_signatureType \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 28L
+#define OBJ_id_smime_aa_signatureType 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 2L, 28L
 
 #define SN_id_smime_aa_dvcs_dvc "id-smime-aa-dvcs-dvc"
 #define NID_id_smime_aa_dvcs_dvc 240
@@ -1216,38 +1182,31 @@ extern "C" {
 
 #define SN_id_smime_spq_ets_sqt_unotice "id-smime-spq-ets-sqt-unotice"
 #define NID_id_smime_spq_ets_sqt_unotice 250
-#define OBJ_id_smime_spq_ets_sqt_unotice \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 5L, 2L
+#define OBJ_id_smime_spq_ets_sqt_unotice 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 5L, 2L
 
 #define SN_id_smime_cti_ets_proofOfOrigin "id-smime-cti-ets-proofOfOrigin"
 #define NID_id_smime_cti_ets_proofOfOrigin 251
-#define OBJ_id_smime_cti_ets_proofOfOrigin \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 1L
+#define OBJ_id_smime_cti_ets_proofOfOrigin 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 1L
 
 #define SN_id_smime_cti_ets_proofOfReceipt "id-smime-cti-ets-proofOfReceipt"
 #define NID_id_smime_cti_ets_proofOfReceipt 252
-#define OBJ_id_smime_cti_ets_proofOfReceipt \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 2L
+#define OBJ_id_smime_cti_ets_proofOfReceipt 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 2L
 
 #define SN_id_smime_cti_ets_proofOfDelivery "id-smime-cti-ets-proofOfDelivery"
 #define NID_id_smime_cti_ets_proofOfDelivery 253
-#define OBJ_id_smime_cti_ets_proofOfDelivery \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 3L
+#define OBJ_id_smime_cti_ets_proofOfDelivery 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 3L
 
 #define SN_id_smime_cti_ets_proofOfSender "id-smime-cti-ets-proofOfSender"
 #define NID_id_smime_cti_ets_proofOfSender 254
-#define OBJ_id_smime_cti_ets_proofOfSender \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 4L
+#define OBJ_id_smime_cti_ets_proofOfSender 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 4L
 
 #define SN_id_smime_cti_ets_proofOfApproval "id-smime-cti-ets-proofOfApproval"
 #define NID_id_smime_cti_ets_proofOfApproval 255
-#define OBJ_id_smime_cti_ets_proofOfApproval \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 5L
+#define OBJ_id_smime_cti_ets_proofOfApproval 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 5L
 
 #define SN_id_smime_cti_ets_proofOfCreation "id-smime-cti-ets-proofOfCreation"
 #define NID_id_smime_cti_ets_proofOfCreation 256
-#define OBJ_id_smime_cti_ets_proofOfCreation \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 6L
+#define OBJ_id_smime_cti_ets_proofOfCreation 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 6L, 6L
 
 #define SN_md4 "MD4"
 #define LN_md4 "md4"
@@ -1703,8 +1662,7 @@ extern "C" {
 #define SN_id_pkix_OCSP_acceptableResponses "acceptableResponses"
 #define LN_id_pkix_OCSP_acceptableResponses "Acceptable OCSP Responses"
 #define NID_id_pkix_OCSP_acceptableResponses 368
-#define OBJ_id_pkix_OCSP_acceptableResponses \
-  1L, 3L, 6L, 1L, 5L, 5L, 7L, 48L, 1L, 4L
+#define OBJ_id_pkix_OCSP_acceptableResponses 1L, 3L, 6L, 1L, 5L, 5L, 7L, 48L, 1L, 4L
 
 #define SN_id_pkix_OCSP_noCheck "noCheck"
 #define LN_id_pkix_OCSP_noCheck "OCSP No Check"
@@ -3466,8 +3424,7 @@ extern "C" {
 
 #define SN_id_smime_ct_compressedData "id-smime-ct-compressedData"
 #define NID_id_smime_ct_compressedData 786
-#define OBJ_id_smime_ct_compressedData \
-  1L, 2L, 840L, 113549L, 1L, 9L, 16L, 1L, 9L
+#define OBJ_id_smime_ct_compressedData 1L, 2L, 840L, 113549L, 1L, 9L, 16L, 1L, 9L
 
 #define SN_id_ct_asciiTextWithCRLF "id-ct-asciiTextWithCRLF"
 #define NID_id_ct_asciiTextWithCRLF 787
@@ -3549,16 +3506,13 @@ extern "C" {
 #define NID_cryptocom 806
 #define OBJ_cryptocom 1L, 2L, 643L, 2L, 9L
 
-#define SN_id_GostR3411_94_with_GostR3410_2001 \
-  "id-GostR3411-94-with-GostR3410-2001"
-#define LN_id_GostR3411_94_with_GostR3410_2001 \
-  "GOST R 34.11-94 with GOST R 34.10-2001"
+#define SN_id_GostR3411_94_with_GostR3410_2001 "id-GostR3411-94-with-GostR3410-2001"
+#define LN_id_GostR3411_94_with_GostR3410_2001 "GOST R 34.11-94 with GOST R 34.10-2001"
 #define NID_id_GostR3411_94_with_GostR3410_2001 807
 #define OBJ_id_GostR3411_94_with_GostR3410_2001 1L, 2L, 643L, 2L, 2L, 3L
 
 #define SN_id_GostR3411_94_with_GostR3410_94 "id-GostR3411-94-with-GostR3410-94"
-#define LN_id_GostR3411_94_with_GostR3410_94 \
-  "GOST R 34.11-94 with GOST R 34.10-94"
+#define LN_id_GostR3411_94_with_GostR3410_94 "GOST R 34.11-94 with GOST R 34.10-94"
 #define NID_id_GostR3411_94_with_GostR3410_94 808
 #define OBJ_id_GostR3411_94_with_GostR3410_94 1L, 2L, 643L, 2L, 2L, 4L
 
@@ -3610,8 +3564,7 @@ extern "C" {
 #define NID_id_GostR3410_94DH 818
 #define OBJ_id_GostR3410_94DH 1L, 2L, 643L, 2L, 2L, 99L
 
-#define SN_id_Gost28147_89_CryptoPro_KeyMeshing \
-  "id-Gost28147-89-CryptoPro-KeyMeshing"
+#define SN_id_Gost28147_89_CryptoPro_KeyMeshing "id-Gost28147-89-CryptoPro-KeyMeshing"
 #define NID_id_Gost28147_89_CryptoPro_KeyMeshing 819
 #define OBJ_id_Gost28147_89_CryptoPro_KeyMeshing 1L, 2L, 643L, 2L, 2L, 14L, 1L
 
@@ -3631,116 +3584,89 @@ extern "C" {
 #define NID_id_Gost28147_89_TestParamSet 823
 #define OBJ_id_Gost28147_89_TestParamSet 1L, 2L, 643L, 2L, 2L, 31L, 0L
 
-#define SN_id_Gost28147_89_CryptoPro_A_ParamSet \
-  "id-Gost28147-89-CryptoPro-A-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_A_ParamSet "id-Gost28147-89-CryptoPro-A-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_A_ParamSet 824
 #define OBJ_id_Gost28147_89_CryptoPro_A_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 1L
 
-#define SN_id_Gost28147_89_CryptoPro_B_ParamSet \
-  "id-Gost28147-89-CryptoPro-B-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_B_ParamSet "id-Gost28147-89-CryptoPro-B-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_B_ParamSet 825
 #define OBJ_id_Gost28147_89_CryptoPro_B_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 2L
 
-#define SN_id_Gost28147_89_CryptoPro_C_ParamSet \
-  "id-Gost28147-89-CryptoPro-C-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_C_ParamSet "id-Gost28147-89-CryptoPro-C-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_C_ParamSet 826
 #define OBJ_id_Gost28147_89_CryptoPro_C_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 3L
 
-#define SN_id_Gost28147_89_CryptoPro_D_ParamSet \
-  "id-Gost28147-89-CryptoPro-D-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_D_ParamSet "id-Gost28147-89-CryptoPro-D-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_D_ParamSet 827
 #define OBJ_id_Gost28147_89_CryptoPro_D_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 4L
 
-#define SN_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet \
-  "id-Gost28147-89-CryptoPro-Oscar-1-1-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet "id-Gost28147-89-CryptoPro-Oscar-1-1-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet 828
-#define OBJ_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 31L, 5L
+#define OBJ_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 5L
 
-#define SN_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet \
-  "id-Gost28147-89-CryptoPro-Oscar-1-0-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet "id-Gost28147-89-CryptoPro-Oscar-1-0-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet 829
-#define OBJ_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 31L, 6L
+#define OBJ_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 6L
 
-#define SN_id_Gost28147_89_CryptoPro_RIC_1_ParamSet \
-  "id-Gost28147-89-CryptoPro-RIC-1-ParamSet"
+#define SN_id_Gost28147_89_CryptoPro_RIC_1_ParamSet "id-Gost28147-89-CryptoPro-RIC-1-ParamSet"
 #define NID_id_Gost28147_89_CryptoPro_RIC_1_ParamSet 830
-#define OBJ_id_Gost28147_89_CryptoPro_RIC_1_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 31L, 7L
+#define OBJ_id_Gost28147_89_CryptoPro_RIC_1_ParamSet 1L, 2L, 643L, 2L, 2L, 31L, 7L
 
 #define SN_id_GostR3410_94_TestParamSet "id-GostR3410-94-TestParamSet"
 #define NID_id_GostR3410_94_TestParamSet 831
 #define OBJ_id_GostR3410_94_TestParamSet 1L, 2L, 643L, 2L, 2L, 32L, 0L
 
-#define SN_id_GostR3410_94_CryptoPro_A_ParamSet \
-  "id-GostR3410-94-CryptoPro-A-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_A_ParamSet "id-GostR3410-94-CryptoPro-A-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_A_ParamSet 832
 #define OBJ_id_GostR3410_94_CryptoPro_A_ParamSet 1L, 2L, 643L, 2L, 2L, 32L, 2L
 
-#define SN_id_GostR3410_94_CryptoPro_B_ParamSet \
-  "id-GostR3410-94-CryptoPro-B-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_B_ParamSet "id-GostR3410-94-CryptoPro-B-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_B_ParamSet 833
 #define OBJ_id_GostR3410_94_CryptoPro_B_ParamSet 1L, 2L, 643L, 2L, 2L, 32L, 3L
 
-#define SN_id_GostR3410_94_CryptoPro_C_ParamSet \
-  "id-GostR3410-94-CryptoPro-C-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_C_ParamSet "id-GostR3410-94-CryptoPro-C-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_C_ParamSet 834
 #define OBJ_id_GostR3410_94_CryptoPro_C_ParamSet 1L, 2L, 643L, 2L, 2L, 32L, 4L
 
-#define SN_id_GostR3410_94_CryptoPro_D_ParamSet \
-  "id-GostR3410-94-CryptoPro-D-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_D_ParamSet "id-GostR3410-94-CryptoPro-D-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_D_ParamSet 835
 #define OBJ_id_GostR3410_94_CryptoPro_D_ParamSet 1L, 2L, 643L, 2L, 2L, 32L, 5L
 
-#define SN_id_GostR3410_94_CryptoPro_XchA_ParamSet \
-  "id-GostR3410-94-CryptoPro-XchA-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_XchA_ParamSet "id-GostR3410-94-CryptoPro-XchA-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_XchA_ParamSet 836
-#define OBJ_id_GostR3410_94_CryptoPro_XchA_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 33L, 1L
+#define OBJ_id_GostR3410_94_CryptoPro_XchA_ParamSet 1L, 2L, 643L, 2L, 2L, 33L, 1L
 
-#define SN_id_GostR3410_94_CryptoPro_XchB_ParamSet \
-  "id-GostR3410-94-CryptoPro-XchB-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_XchB_ParamSet "id-GostR3410-94-CryptoPro-XchB-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_XchB_ParamSet 837
-#define OBJ_id_GostR3410_94_CryptoPro_XchB_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 33L, 2L
+#define OBJ_id_GostR3410_94_CryptoPro_XchB_ParamSet 1L, 2L, 643L, 2L, 2L, 33L, 2L
 
-#define SN_id_GostR3410_94_CryptoPro_XchC_ParamSet \
-  "id-GostR3410-94-CryptoPro-XchC-ParamSet"
+#define SN_id_GostR3410_94_CryptoPro_XchC_ParamSet "id-GostR3410-94-CryptoPro-XchC-ParamSet"
 #define NID_id_GostR3410_94_CryptoPro_XchC_ParamSet 838
-#define OBJ_id_GostR3410_94_CryptoPro_XchC_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 33L, 3L
+#define OBJ_id_GostR3410_94_CryptoPro_XchC_ParamSet 1L, 2L, 643L, 2L, 2L, 33L, 3L
 
 #define SN_id_GostR3410_2001_TestParamSet "id-GostR3410-2001-TestParamSet"
 #define NID_id_GostR3410_2001_TestParamSet 839
 #define OBJ_id_GostR3410_2001_TestParamSet 1L, 2L, 643L, 2L, 2L, 35L, 0L
 
-#define SN_id_GostR3410_2001_CryptoPro_A_ParamSet \
-  "id-GostR3410-2001-CryptoPro-A-ParamSet"
+#define SN_id_GostR3410_2001_CryptoPro_A_ParamSet "id-GostR3410-2001-CryptoPro-A-ParamSet"
 #define NID_id_GostR3410_2001_CryptoPro_A_ParamSet 840
 #define OBJ_id_GostR3410_2001_CryptoPro_A_ParamSet 1L, 2L, 643L, 2L, 2L, 35L, 1L
 
-#define SN_id_GostR3410_2001_CryptoPro_B_ParamSet \
-  "id-GostR3410-2001-CryptoPro-B-ParamSet"
+#define SN_id_GostR3410_2001_CryptoPro_B_ParamSet "id-GostR3410-2001-CryptoPro-B-ParamSet"
 #define NID_id_GostR3410_2001_CryptoPro_B_ParamSet 841
 #define OBJ_id_GostR3410_2001_CryptoPro_B_ParamSet 1L, 2L, 643L, 2L, 2L, 35L, 2L
 
-#define SN_id_GostR3410_2001_CryptoPro_C_ParamSet \
-  "id-GostR3410-2001-CryptoPro-C-ParamSet"
+#define SN_id_GostR3410_2001_CryptoPro_C_ParamSet "id-GostR3410-2001-CryptoPro-C-ParamSet"
 #define NID_id_GostR3410_2001_CryptoPro_C_ParamSet 842
 #define OBJ_id_GostR3410_2001_CryptoPro_C_ParamSet 1L, 2L, 643L, 2L, 2L, 35L, 3L
 
-#define SN_id_GostR3410_2001_CryptoPro_XchA_ParamSet \
-  "id-GostR3410-2001-CryptoPro-XchA-ParamSet"
+#define SN_id_GostR3410_2001_CryptoPro_XchA_ParamSet "id-GostR3410-2001-CryptoPro-XchA-ParamSet"
 #define NID_id_GostR3410_2001_CryptoPro_XchA_ParamSet 843
-#define OBJ_id_GostR3410_2001_CryptoPro_XchA_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 36L, 0L
+#define OBJ_id_GostR3410_2001_CryptoPro_XchA_ParamSet 1L, 2L, 643L, 2L, 2L, 36L, 0L
 
-#define SN_id_GostR3410_2001_CryptoPro_XchB_ParamSet \
-  "id-GostR3410-2001-CryptoPro-XchB-ParamSet"
+#define SN_id_GostR3410_2001_CryptoPro_XchB_ParamSet "id-GostR3410-2001-CryptoPro-XchB-ParamSet"
 #define NID_id_GostR3410_2001_CryptoPro_XchB_ParamSet 844
-#define OBJ_id_GostR3410_2001_CryptoPro_XchB_ParamSet \
-  1L, 2L, 643L, 2L, 2L, 36L, 1L
+#define OBJ_id_GostR3410_2001_CryptoPro_XchB_ParamSet 1L, 2L, 643L, 2L, 2L, 36L, 1L
 
 #define SN_id_GostR3410_94_a "id-GostR3410-94-a"
 #define NID_id_GostR3410_94_a 845
@@ -3773,25 +3699,18 @@ extern "C" {
 #define NID_id_GostR3410_2001_cc 851
 #define OBJ_id_GostR3410_2001_cc 1L, 2L, 643L, 2L, 9L, 1L, 5L, 4L
 
-#define SN_id_GostR3411_94_with_GostR3410_94_cc \
-  "id-GostR3411-94-with-GostR3410-94-cc"
-#define LN_id_GostR3411_94_with_GostR3410_94_cc \
-  "GOST R 34.11-94 with GOST R 34.10-94 Cryptocom"
+#define SN_id_GostR3411_94_with_GostR3410_94_cc "id-GostR3411-94-with-GostR3410-94-cc"
+#define LN_id_GostR3411_94_with_GostR3410_94_cc "GOST R 34.11-94 with GOST R 34.10-94 Cryptocom"
 #define NID_id_GostR3411_94_with_GostR3410_94_cc 852
-#define OBJ_id_GostR3411_94_with_GostR3410_94_cc \
-  1L, 2L, 643L, 2L, 9L, 1L, 3L, 3L
+#define OBJ_id_GostR3411_94_with_GostR3410_94_cc 1L, 2L, 643L, 2L, 9L, 1L, 3L, 3L
 
-#define SN_id_GostR3411_94_with_GostR3410_2001_cc \
-  "id-GostR3411-94-with-GostR3410-2001-cc"
-#define LN_id_GostR3411_94_with_GostR3410_2001_cc \
-  "GOST R 34.11-94 with GOST R 34.10-2001 Cryptocom"
+#define SN_id_GostR3411_94_with_GostR3410_2001_cc "id-GostR3411-94-with-GostR3410-2001-cc"
+#define LN_id_GostR3411_94_with_GostR3410_2001_cc "GOST R 34.11-94 with GOST R 34.10-2001 Cryptocom"
 #define NID_id_GostR3411_94_with_GostR3410_2001_cc 853
-#define OBJ_id_GostR3411_94_with_GostR3410_2001_cc \
-  1L, 2L, 643L, 2L, 9L, 1L, 3L, 4L
+#define OBJ_id_GostR3411_94_with_GostR3410_2001_cc 1L, 2L, 643L, 2L, 9L, 1L, 3L, 4L
 
 #define SN_id_GostR3410_2001_ParamSet_cc "id-GostR3410-2001-ParamSet-cc"
-#define LN_id_GostR3410_2001_ParamSet_cc \
-  "GOST R 3410-2001 Parameter Set Cryptocom"
+#define LN_id_GostR3410_2001_ParamSet_cc "GOST R 3410-2001 Parameter Set Cryptocom"
 #define NID_id_GostR3410_2001_ParamSet_cc 854
 #define OBJ_id_GostR3410_2001_ParamSet_cc 1L, 2L, 643L, 2L, 9L, 1L, 8L, 1L
 
@@ -4136,52 +4055,41 @@ extern "C" {
 
 #define SN_dhSinglePass_stdDH_sha1kdf_scheme "dhSinglePass-stdDH-sha1kdf-scheme"
 #define NID_dhSinglePass_stdDH_sha1kdf_scheme 936
-#define OBJ_dhSinglePass_stdDH_sha1kdf_scheme \
-  1L, 3L, 133L, 16L, 840L, 63L, 0L, 2L
+#define OBJ_dhSinglePass_stdDH_sha1kdf_scheme 1L, 3L, 133L, 16L, 840L, 63L, 0L, 2L
 
-#define SN_dhSinglePass_stdDH_sha224kdf_scheme \
-  "dhSinglePass-stdDH-sha224kdf-scheme"
+#define SN_dhSinglePass_stdDH_sha224kdf_scheme "dhSinglePass-stdDH-sha224kdf-scheme"
 #define NID_dhSinglePass_stdDH_sha224kdf_scheme 937
 #define OBJ_dhSinglePass_stdDH_sha224kdf_scheme 1L, 3L, 132L, 1L, 11L, 0L
 
-#define SN_dhSinglePass_stdDH_sha256kdf_scheme \
-  "dhSinglePass-stdDH-sha256kdf-scheme"
+#define SN_dhSinglePass_stdDH_sha256kdf_scheme "dhSinglePass-stdDH-sha256kdf-scheme"
 #define NID_dhSinglePass_stdDH_sha256kdf_scheme 938
 #define OBJ_dhSinglePass_stdDH_sha256kdf_scheme 1L, 3L, 132L, 1L, 11L, 1L
 
-#define SN_dhSinglePass_stdDH_sha384kdf_scheme \
-  "dhSinglePass-stdDH-sha384kdf-scheme"
+#define SN_dhSinglePass_stdDH_sha384kdf_scheme "dhSinglePass-stdDH-sha384kdf-scheme"
 #define NID_dhSinglePass_stdDH_sha384kdf_scheme 939
 #define OBJ_dhSinglePass_stdDH_sha384kdf_scheme 1L, 3L, 132L, 1L, 11L, 2L
 
-#define SN_dhSinglePass_stdDH_sha512kdf_scheme \
-  "dhSinglePass-stdDH-sha512kdf-scheme"
+#define SN_dhSinglePass_stdDH_sha512kdf_scheme "dhSinglePass-stdDH-sha512kdf-scheme"
 #define NID_dhSinglePass_stdDH_sha512kdf_scheme 940
 #define OBJ_dhSinglePass_stdDH_sha512kdf_scheme 1L, 3L, 132L, 1L, 11L, 3L
 
-#define SN_dhSinglePass_cofactorDH_sha1kdf_scheme \
-  "dhSinglePass-cofactorDH-sha1kdf-scheme"
+#define SN_dhSinglePass_cofactorDH_sha1kdf_scheme "dhSinglePass-cofactorDH-sha1kdf-scheme"
 #define NID_dhSinglePass_cofactorDH_sha1kdf_scheme 941
-#define OBJ_dhSinglePass_cofactorDH_sha1kdf_scheme \
-  1L, 3L, 133L, 16L, 840L, 63L, 0L, 3L
+#define OBJ_dhSinglePass_cofactorDH_sha1kdf_scheme 1L, 3L, 133L, 16L, 840L, 63L, 0L, 3L
 
-#define SN_dhSinglePass_cofactorDH_sha224kdf_scheme \
-  "dhSinglePass-cofactorDH-sha224kdf-scheme"
+#define SN_dhSinglePass_cofactorDH_sha224kdf_scheme "dhSinglePass-cofactorDH-sha224kdf-scheme"
 #define NID_dhSinglePass_cofactorDH_sha224kdf_scheme 942
 #define OBJ_dhSinglePass_cofactorDH_sha224kdf_scheme 1L, 3L, 132L, 1L, 14L, 0L
 
-#define SN_dhSinglePass_cofactorDH_sha256kdf_scheme \
-  "dhSinglePass-cofactorDH-sha256kdf-scheme"
+#define SN_dhSinglePass_cofactorDH_sha256kdf_scheme "dhSinglePass-cofactorDH-sha256kdf-scheme"
 #define NID_dhSinglePass_cofactorDH_sha256kdf_scheme 943
 #define OBJ_dhSinglePass_cofactorDH_sha256kdf_scheme 1L, 3L, 132L, 1L, 14L, 1L
 
-#define SN_dhSinglePass_cofactorDH_sha384kdf_scheme \
-  "dhSinglePass-cofactorDH-sha384kdf-scheme"
+#define SN_dhSinglePass_cofactorDH_sha384kdf_scheme "dhSinglePass-cofactorDH-sha384kdf-scheme"
 #define NID_dhSinglePass_cofactorDH_sha384kdf_scheme 944
 #define OBJ_dhSinglePass_cofactorDH_sha384kdf_scheme 1L, 3L, 132L, 1L, 14L, 2L
 
-#define SN_dhSinglePass_cofactorDH_sha512kdf_scheme \
-  "dhSinglePass-cofactorDH-sha512kdf-scheme"
+#define SN_dhSinglePass_cofactorDH_sha512kdf_scheme "dhSinglePass-cofactorDH-sha512kdf-scheme"
 #define NID_dhSinglePass_cofactorDH_sha512kdf_scheme 945
 #define OBJ_dhSinglePass_cofactorDH_sha512kdf_scheme 1L, 3L, 132L, 1L, 14L, 3L
 
@@ -4236,7 +4144,6 @@ extern "C" {
 
 #define SN_CECPQ2 "CECPQ2"
 #define NID_CECPQ2 959
-
 
 #if defined(__cplusplus)
 } /* extern C */

@@ -21,6 +21,7 @@
 #include "rt5678_config.h"
 #include "rt3224_config.h"
 #include "wm8960_config.h"
+#include "es8388_config.h"
 #include "es8396_config.h"
 #include "rt5651_config.h"
 #include "es8316_config.h"
@@ -54,6 +55,14 @@ struct alsa_sound_card_config sound_card_config_list[] = {
     {
         .sound_card_name = "realtekrt5678co",
         .route_table = &rt5678_config_table,
+    },
+    {
+        .sound_card_name = "rockchipes8388",
+        .route_table = &es8388_config_table,
+    },
+    {
+        .sound_card_name = "rockchipes8388c",
+        .route_table = &es8388_config_table,
     },
     {
         .sound_card_name = "rockchipes8396c",

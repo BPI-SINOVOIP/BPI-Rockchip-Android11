@@ -8,30 +8,34 @@
 #include "stream.h"
 #include "utils.h"
 
-namespace easymedia {
+namespace easymedia
+{
 
-    static bool process_buffer(Flow* f, MediaBufferVector &input_vector);
+    static bool process_buffer(Flow* f, MediaBufferVector& input_vector);
 
-    class _API LinkFlow : public Flow {
-        public:
-            LinkFlow(const char* param);
-            virtual ~LinkFlow();
-            static const char* GetFlowName() {
-                return "link_flow";
-            }
-            int Control(unsigned long int request, ...);
+    class _API LinkFlow : public Flow
+    {
+      public:
+        LinkFlow(const char* param);
+        virtual ~LinkFlow();
+        static const char* GetFlowName()
+        {
+            return "link_flow";
+        }
+        int Control(unsigned long int request, ...);
 
-        private:
-            friend bool process_buffer(Flow* f, MediaBufferVector &input_vector);
+      private:
+        friend bool process_buffer(Flow* f, MediaBufferVector& input_vector);
 
-        private:
-            int enable;
-            int socket_fd;
+      private:
+        int enable;
+        int socket_fd;
     };
 
-    LinkFlow::LinkFlow(const char* param) {
+    LinkFlow::LinkFlow(const char* param)
+    {
         std::map<std::string, std::string> params;
-        if(!parse_media_param_map(param, params)) {
+        if (!parse_media_param_map(param, params)) {
             SetError(-EINVAL);
             return;
         }
@@ -48,29 +52,31 @@ namespace easymedia {
         sm.input_maxcachenum.push_back(0);
         sm.process = process_buffer;
 
-        if(!InstallSlotMap(sm, "LinkFLow", 0)) {
+        if (!InstallSlotMap(sm, "LinkFLow", 0)) {
             LOG("Fail to InstallSlotMap for LinkFLow\n");
             return;
         }
         SetFlowTag("LinkFLow");
     }
 
-    LinkFlow::~LinkFlow() {
+    LinkFlow::~LinkFlow()
+    {
         StopAllThread();
     }
 
-    bool process_buffer(Flow* f, MediaBufferVector &input_vector) {
+    bool process_buffer(Flow* f, MediaBufferVector& input_vector)
+    {
         LinkFlow* flow = static_cast<LinkFlow*>(f);
-        auto &buffer = input_vector[0];
-        if(!buffer || !flow) {
+        auto& buffer = input_vector[0];
+        if (!buffer || !flow) {
             return false;
         }
 
-        if(flow->enable > 0) {
+        if (flow->enable > 0) {
             auto link_handler = flow->GetCaptureHandler();
-            if(link_handler) {
-                link_handler((unsigned char*)buffer->GetPtr(), buffer->GetValidSize(),
-                             flow->socket_fd, NULL);
+            if (link_handler) {
+                link_handler((unsigned char*)buffer->GetPtr(), buffer->GetValidSize(), flow->socket_fd,
+                             buffer->GetFrameSequenceNumber());
                 flow->enable--;
             }
         }
@@ -80,14 +86,15 @@ namespace easymedia {
     static const uint32_t kSocket_fd = (1 << 0);
     static const uint32_t kEnable_Link = (1 << 1);
 
-    int LinkFlow::Control(unsigned long int request, ...) {
+    int LinkFlow::Control(unsigned long int request, ...)
+    {
         va_list ap;
         va_start(ap, request);
         auto value = va_arg(ap, int);
         va_end(ap);
         assert(value);
 
-        switch(request) {
+        switch (request) {
             case kSocket_fd:
                 socket_fd = value;
                 break;
@@ -100,10 +107,12 @@ namespace easymedia {
     }
 
     DEFINE_FLOW_FACTORY(LinkFlow, Flow)
-    const char* FACTORY(LinkFlow)::ExpectedInputDataType() {
+    const char* FACTORY(LinkFlow)::ExpectedInputDataType()
+    {
         return nullptr;
     }
-    const char* FACTORY(LinkFlow)::OutPutDataType() {
+    const char* FACTORY(LinkFlow)::OutPutDataType()
+    {
         return "";
     }
 

@@ -25,37 +25,38 @@ const char trace_ext_prefix[]  = "TA";
 /* exprted to user_ta_header.c, built within TA */
 struct utee_params;
 
+#ifdef ARM32
+#define _C_FUNCTION(name) name##_c
+#else
+#define _C_FUNCTION(name) name
+#endif /* ARM32 */
+
+/* From libutee */
 TEE_Result __utee_entry(unsigned long func, unsigned long session_id,
 			struct utee_params *up, unsigned long cmd_id);
 
-void __noreturn __ta_entry(unsigned long func, unsigned long session_id,
-			   struct utee_params *up, unsigned long cmd_id);
+void __noreturn _C_FUNCTION(__ta_entry)(unsigned long func,
+					unsigned long session_id,
+					struct utee_params *up,
+					unsigned long cmd_id);
 
-void __noreturn __ta_entry(unsigned long func, unsigned long session_id,
-			   struct utee_params *up, unsigned long cmd_id)
+void __noreturn _C_FUNCTION(__ta_entry)(unsigned long func,
+					unsigned long session_id,
+					struct utee_params *up,
+					unsigned long cmd_id)
 {
-	TEE_Result res = TEE_SUCCESS;
+	TEE_Result res = __utee_entry(func, session_id, up, cmd_id);
 
-#if defined(ARM32) && defined(CFG_UNWIND)
-	/*
-	 * This function is the bottom of the user call stack: mark it as such
-	 * so that the unwinding code won't try to go further down.
-	 */
-	asm(".cantunwind");
-#endif
-
-	res = __utee_entry(func, session_id, up, cmd_id);
-
-#if defined(CFG_TA_FTRACE_SUPPORT)
+#if defined(CFG_FTRACE_SUPPORT)
 	/*
 	 * __ta_entry is the first TA API called from TEE core. As it being
 	 * __noreturn API, we need to call ftrace_return in this API just
-	 * before utee_return syscall to get proper ftrace call graph.
+	 * before _utee_return syscall to get proper ftrace call graph.
 	 */
 	ftrace_return();
 #endif
 
-	utee_return(res);
+	_utee_return(res);
 }
 
 /*
@@ -125,7 +126,7 @@ const struct user_ta_property ta_props[] = {
 
 const size_t ta_num_props = sizeof(ta_props) / sizeof(ta_props[0]);
 
-#ifdef CFG_TA_FTRACE_SUPPORT
+#ifdef CFG_FTRACE_SUPPORT
 struct __ftrace_info __ftrace_info = {
 #ifdef __ILP32__
 	.buf_start.ptr32 = { .lo = (uint32_t)&__ftrace_buf_start },

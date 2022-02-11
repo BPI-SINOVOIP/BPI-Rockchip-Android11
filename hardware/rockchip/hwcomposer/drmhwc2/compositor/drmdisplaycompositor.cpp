@@ -501,11 +501,11 @@ int DrmDisplayCompositor::CommitFrame(DrmDisplayComposition *display_comp,
   if(mirror_commit){
     if (mirror_commit_crtc->can_overscan()) {
       int mirror_display_id = mirror_commit_crtc->display();
-      DrmConnector *mirror_connector = drm->GetConnectorForDisplay(display_);
+      DrmConnector *mirror_connector = drm->GetConnectorForDisplay(mirror_display_id);
       if (!mirror_connector) {
-        ALOGE("Could not locate connector for display %d", display_);
+        ALOGE("Could not locate connector for display %d", mirror_display_id);
       }
-      int ret = CheckOverscan(pset,mirror_commit_crtc,mirror_display_id,connector->unique_name());
+      int ret = CheckOverscan(pset,mirror_commit_crtc,mirror_display_id,mirror_connector->unique_name());
       if(ret < 0){
         drmModeAtomicFree(pset);
         return ret;

@@ -482,34 +482,5 @@ int hwc_get_handle_primefd(buffer_handle_t hnd)
     return fd;
 #endif
 }
-
-#if RK_DRM_GRALLOC
-uint32_t hwc_get_handle_phy_addr(buffer_handle_t hnd)
-{
-#if USE_GRALLOC_4
-    uint64_t internal_format = 0;
-    internal_format = gralloc4::get_internal_format(hnd);
-    return internal_format;
-#else // #if USE_GRALLOC_4
-
-    int ret = 0;
-    int op = GRALLOC_MODULE_PERFORM_GET_HADNLE_PHY_ADDR;
-    uint32_t phy_addr = 0;
-
-    if(gralloc && gralloc->perform)
-        ret = gralloc->perform(gralloc, op, hnd, &phy_addr);
-    else
-        ret = -EINVAL;
-
-    if(ret != 0)
-    {
-        ALOGE("%s:cann't get value from gralloc", __FUNCTION__);
-    }
-
-    return phy_addr;
-#endif
-}
-#endif
-
 }
 

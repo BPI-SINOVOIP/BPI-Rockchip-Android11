@@ -14,32 +14,33 @@ static const struct SampleFormatEntry {
     SampleFormat fmt;
     const char* fmt_str;
 } sample_format_string_map[] = {
-    {SAMPLE_FMT_U8, AUDIO_PCM_U8},     {SAMPLE_FMT_S16, AUDIO_PCM_S16},
-    {SAMPLE_FMT_S32, AUDIO_PCM_S32},   {SAMPLE_FMT_FLT, AUDIO_PCM_FLT},
-    {SAMPLE_FMT_U8P, AUDIO_PCM_U8P},   {SAMPLE_FMT_S16P, AUDIO_PCM_S16P},
-    {SAMPLE_FMT_S32P, AUDIO_PCM_S32P}, {SAMPLE_FMT_FLTP, AUDIO_PCM_FLTP},
-    {SAMPLE_FMT_G711A, AUDIO_G711A},   {SAMPLE_FMT_G711U, AUDIO_G711U},
-    {SAMPLE_FMT_FLTP, AUDIO_AAC},
+    {SAMPLE_FMT_U8, AUDIO_PCM_U8},     {SAMPLE_FMT_S16, AUDIO_PCM_S16},   {SAMPLE_FMT_S32, AUDIO_PCM_S32},
+    {SAMPLE_FMT_FLT, AUDIO_PCM_FLT},   {SAMPLE_FMT_U8P, AUDIO_PCM_U8P},   {SAMPLE_FMT_S16P, AUDIO_PCM_S16P},
+    {SAMPLE_FMT_S32P, AUDIO_PCM_S32P}, {SAMPLE_FMT_FLTP, AUDIO_PCM_FLTP}, {SAMPLE_FMT_G711A, AUDIO_G711A},
+    {SAMPLE_FMT_G711U, AUDIO_G711U},   {SAMPLE_FMT_FLTP, AUDIO_AAC},
 };
 
-const char* SampleFmtToString(SampleFormat fmt) {
+const char* SampleFmtToString(SampleFormat fmt)
+{
     FIND_ENTRY_TARGET(fmt, sample_format_string_map, fmt, fmt_str)
     return nullptr;
 }
 
-SampleFormat StringToSampleFmt(const char* fmt_str) {
+SampleFormat StringToSampleFmt(const char* fmt_str)
+{
     FIND_ENTRY_TARGET_BY_STRCMP(fmt_str, sample_format_string_map, fmt_str, fmt)
     return SAMPLE_FMT_NONE;
 }
 
-bool SampleInfoIsValid(const SampleInfo &sample_info) {
-    return (sample_info.fmt != SAMPLE_FMT_NONE) && (sample_info.channels > 0) &&
-           (sample_info.sample_rate > 0);
+bool SampleInfoIsValid(const SampleInfo& sample_info)
+{
+    return (sample_info.fmt != SAMPLE_FMT_NONE) && (sample_info.channels > 0) && (sample_info.sample_rate > 0);
 }
 
-size_t GetSampleSize(const SampleInfo &sample_info) {
+size_t GetSampleSize(const SampleInfo& sample_info)
+{
     size_t sample_size = sample_info.channels;
-    switch(sample_info.fmt) {
+    switch (sample_info.fmt) {
         case SAMPLE_FMT_U8:
         case SAMPLE_FMT_U8P:
         case SAMPLE_FMT_G711A:
@@ -58,14 +59,15 @@ size_t GetSampleSize(const SampleInfo &sample_info) {
     }
 }
 
-namespace easymedia {
+namespace easymedia
+{
 
-    bool ParseSampleInfoFromMap(std::map<std::string, std::string> &params,
-                                SampleInfo &si) {
+    bool ParseSampleInfoFromMap(std::map<std::string, std::string>& params, SampleInfo& si)
+    {
         std::string value;
         CHECK_EMPTY(value, params, KEY_INPUTDATATYPE)
         si.fmt = StringToSampleFmt(value.c_str());
-        if(si.fmt == SAMPLE_FMT_NONE) {
+        if (si.fmt == SAMPLE_FMT_NONE) {
             LOG("unsupport sample fmt %s\n", value.c_str());
             return false;
         }
@@ -78,10 +80,11 @@ namespace easymedia {
         return true;
     }
 
-    std::string to_param_string(const SampleInfo &si) {
+    std::string to_param_string(const SampleInfo& si)
+    {
         std::string s;
         const char* fmt = SampleFmtToString(si.fmt);
-        if(!fmt) {
+        if (!fmt) {
             return s;
         }
         PARAM_STRING_APPEND(s, KEY_INPUTDATATYPE, fmt);

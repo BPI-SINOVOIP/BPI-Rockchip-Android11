@@ -11,31 +11,37 @@
 
 class RtspServer
 {
-public:
+  public:
     RtspServer();
     ~RtspServer();
 
     typedef struct {
         char dev_name[64];    // camera v4l2 device name
-        int  width;           // camera v4l2 vfmt width
-        int  height;          // camera v4l2 vfmt height
+        int width;            // camera v4l2 vfmt width
+        int height;           // camera v4l2 vfmt height
         char stream_name[64]; // rtsp url stream name
-        int  port_num;        // rtsp port number
+        int port_num;         // rtsp port number
     } MetaInfo;
 
-    bool init(MetaInfo *meta);
+    bool init(MetaInfo* meta);
 
-    void setDoneFlag() { fDoneFlag = ~0; }
-    void resetDoneFlag() { fDoneFlag = 0; }
+    void setDoneFlag()
+    {
+        fDoneFlag = ~0;
+    }
+    void resetDoneFlag()
+    {
+        fDoneFlag = 0;
+    }
     void doEventLoop();
 
     bool start();
     bool stop();
 
     // It is called every time sent occurs.
-    void onDoGetNextFrame(QMediaBuffer *outBuf);
+    void onDoGetNextFrame(QMediaBuffer* outBuf);
 
-private:
+  private:
     UsageEnvironment* mEnv;
     ServerMediaSession* mSms;
     RTSPServer* mRtspServer;
@@ -43,15 +49,15 @@ private:
 
     char fDoneFlag;
 
-    std::thread *mProcThread;
+    std::thread* mProcThread;
 
-    CamCaptureHelper *mCamDev;
-    RKHWEncApi *mEncoder;
+    CamCaptureHelper* mCamDev;
+    RKHWEncApi* mEncoder;
 
-    bool initOther(MetaInfo *meta);
+    bool initOther(MetaInfo* meta);
 };
 
 int init_rtsp(const char* video_dev, int width, int height);
 void deinit_rtsp();
 
-#endif  // RTSP_SENDER_NODE_
+#endif // RTSP_SENDER_NODE_

@@ -17,7 +17,7 @@
 #define LOG_TAG "hwc-resource-manager"
 
 #include "resourcemanager.h"
-#include "drmhwcomposer.h"
+#include "drmlayer.h"
 
 #include <cutils/properties.h>
 #include <log/log.h>
@@ -82,7 +82,7 @@ int ResourceManager::AddDrmDevice(std::string path) {
     ALOGE("Failed to create importer instance");
     return -ENODEV;
   }
-  importers_.push_back(importer);
+  importers_.push_back(std::move(importer));
   drms_.push_back(std::move(drm));
   num_displays_ += displays_added;
   return ret;
@@ -167,65 +167,6 @@ int ResourceManager::assignPlaneByPlaneMask(DrmDevice* drm, int active_display_n
     }
   }
 
-  // Second, assign still unused DrmPlane
-  if(active_display_num == 1){
-    if(all_unused_plane_mask!=0){
-      for(auto &display_id : active_display_){
-        DrmCrtc *crtc = drm->GetCrtcForDisplay(display_id);
-        if(!crtc){
-            ALOGE("%s,line=%d crtc is NULL.",__FUNCTION__,__LINE__);
-            return -1;
-        }
-
-        if(!dynamic_assigin_enable_ && crtc->get_plane_mask() > 0)
-          continue;
-
-        uint32_t crtc_mask = 1 << crtc->pipe();
-        for(auto &plane_group : all_plane_group){
-          uint64_t plane_group_win_type = plane_group->win_type;
-          if((all_unused_plane_mask & plane_group_win_type) > 0){
-            plane_group->set_current_possible_crtcs(crtc_mask);
-            all_unused_plane_mask &= (~plane_group_win_type);
-          }
-        }
-      }
-    }
-  }else if(active_display_num == 2){
-    for(auto &display_id : active_display_){
-      DrmCrtc *crtc = drm->GetCrtcForDisplay(display_id);
-      if(!crtc){
-          ALOGE("%s,line=%d crtc is NULL.",__FUNCTION__,__LINE__);
-          return -1;
-      }
-
-      if(!dynamic_assigin_enable_ && crtc->get_plane_mask() > 0)
-        continue;
-
-      uint32_t crtc_mask = 1 << crtc->pipe();
-      uint64_t plane_mask = crtc->get_plane_mask();
-      uint64_t need_plane_mask = 0;
-      for(int i = 0 ; i < ARRAY_SIZE(planes_mask_names); i++){
-        if((planes_mask_names[i].mask & plane_mask)==0){
-          need_plane_mask |= planes_mask_names[i].mask;
-        }
-      }
-
-      for(auto &plane_group : all_plane_group){
-        uint64_t plane_group_win_type = plane_group->win_type;
-        if(((all_unused_plane_mask & need_plane_mask) & plane_group_win_type) == plane_group_win_type){
-          plane_group->set_current_possible_crtcs(crtc_mask);
-          all_unused_plane_mask &= (~plane_group_win_type);
-
-          for(int i = 0 ; i < ARRAY_SIZE(planes_mask_names); i++){
-            if((planes_mask_names[i].mask & plane_group_win_type) > 0){
-              need_plane_mask &= (~planes_mask_names[i].mask);
-            }
-          }
-        }
-      }
-    }
-  }
-
   for(auto &plane_group : all_plane_group){
     ALOGI_IF(DBG_INFO,"%s,line=%d, name=%s cur_crtcs_mask=0x%x",__FUNCTION__,__LINE__,
              plane_group->planes[0]->name(),plane_group->current_possible_crtcs);
@@ -252,6 +193,7 @@ struct assign_plane_group assign_mask_rk3566[] = {
 
 
 int ResourceManager::assignPlaneByRK3566(DrmDevice* drm, int active_display_num){
+
   // all plane mask init
   uint64_t all_unused_plane_mask = 0;
   std::vector<PlaneGroup*> all_plane_group = drm->GetPlaneGroups();
@@ -336,7 +278,6 @@ int ResourceManager::assignPlaneByRK3566(DrmDevice* drm, int active_display_num)
     ALOGI_IF(DBG_INFO,"%s,line=%d, name=%s cur_crtcs_mask=0x%x",__FUNCTION__,__LINE__,
              plane_group->planes[0]->name(),plane_group->current_possible_crtcs);
   }
-
   return 0;
 }
 
@@ -479,7 +420,6 @@ int ResourceManager::assignPlaneByHWC(DrmDevice* drm, int active_display_num){
     ALOGI_IF(DBG_INFO,"%s,line=%d, name=%s cur_crtcs_mask=0x%x",__FUNCTION__,__LINE__,
              plane_group->planes[0]->name(),plane_group->current_possible_crtcs);
   }
-
   return 0;
 }
 
@@ -513,18 +453,24 @@ int ResourceManager::assignPlaneGroup(){
     }
   }
 
-  if(isRK3566(soc_id_)){
-    if(have_plane_mask){
-      assignPlaneByPlaneMask(drm, active_display_num);
+
+  if(isRK356x(soc_id_)){
+    if(isRK3566(soc_id_)){
+      if(have_plane_mask){
+        assignPlaneByPlaneMask(drm, active_display_num);
+      }else{
+        assignPlaneByRK3566(drm, active_display_num);
+      }
     }else{
-      assignPlaneByRK3566(drm, active_display_num);
+      if(have_plane_mask){
+        assignPlaneByPlaneMask(drm, active_display_num);
+      }else{
+        assignPlaneByHWC(drm, active_display_num);
+      }
+
     }
   }else{
-    if(have_plane_mask){
-      assignPlaneByPlaneMask(drm, active_display_num);
-    }else{
-      assignPlaneByHWC(drm, active_display_num);
-    }
+    assignPlaneByPlaneMask(drm, active_display_num);
   }
   return 0;
 }

@@ -14,7 +14,7 @@
 		};
 
 		display_reserved: framebuffer@10900000 {
-			reg = <0x0 0x10900000 0x0 0x2000000>;
+			reg = <0x0 0x10900000 0x0 0x2c00000>;
 		};
 	};
 
@@ -85,6 +85,22 @@
 		opp-hz = /bits/ 64 <150000000>;
 		opp-microvolt = <825000>;
 	};
+};
+
+&lpddr4_params {
+	/* freq info, freq_0 is final frequency, unit: MHz */
+	freq_0 = <528>;
+	freq_1 = <324>;
+	freq_2 = <324>;
+	freq_3 = <324>;
+};
+
+&lpddr4x_params {
+	/* freq info, freq_0 is final frequency, unit: MHz */
+	freq_0 = <528>;
+	freq_1 = <324>;
+	freq_2 = <324>;
+	freq_3 = <324>;
 };
 
 &rockchip_suspend {

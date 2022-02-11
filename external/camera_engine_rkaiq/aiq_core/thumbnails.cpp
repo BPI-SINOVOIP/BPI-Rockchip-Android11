@@ -302,14 +302,14 @@ rkaiq_stream_type_t ThumbnailsConfig::PipeNodesToStreamType(
     rkaiq_stream_type_t type = RKISP_STREAM_NONE;
 
     for (auto it : Isp20DevToMaskMap) {
-        LOGE_ANALYZER("type %d, mask %" PRIx64 "", it.first, it.second);
+        LOGD_ANALYZER("type %d, mask %" PRIx64 "", it.first, it.second);
     }
 
     for (auto it : Isp20DevToMaskMap) {
         if ((config.after_nodes & it.second) &&
             (config.before_node != (config.before_node & it.second))) {
             type = it.first;
-            LOGE_ANALYZER("owner %d matched type %d, before %" PRIx64 " after %" PRIx64 "",
+            LOGI_ANALYZER("owner %d matched type %d, before %" PRIx64 " after %" PRIx64 "",
                           config.owner_cookies, type, config.before_node, config.after_nodes);
             break;
         } else {
@@ -323,7 +323,7 @@ rkaiq_stream_type_t ThumbnailsConfig::PipeNodesToStreamType(
 bool ThumbnailsConfig::ParseRequests(const CalibDbV2_Thumbnails_Param_t* db) {
     XCAM_ASSERT(db != nullptr);
 
-    LOGE("Dump configs db: ");
+    LOGD_ANALYZER("Dump configs db: ");
     for (uint32_t j = 0; j < db->thumbnail_configs_len; j++) {
         auto config = db->thumbnail_configs[j];
         DumpConfig(config);
@@ -333,7 +333,7 @@ bool ThumbnailsConfig::ParseRequests(const CalibDbV2_Thumbnails_Param_t* db) {
         auto config = db->thumbnail_configs[j];
         auto type   = PipeNodesToStreamType(config);
         if (type == RKISP_STREAM_NONE) {
-            LOGE("Cannot find suitable stream for %d nodes after %" PRIx64 " before %" PRIx64 "",
+            LOGD_ANALYZER("Cannot find suitable stream for %d nodes after %" PRIx64 " before %" PRIx64 "",
                  config.owner_cookies, config.after_nodes, config.before_node);
             continue;
         }
@@ -601,7 +601,7 @@ void ThumbnailsService::OnFrameEvent(const rkaiq_image_source_t& source) {
 #endif
 
     if (RefCountedVideoBuffer::IsValid(source.image_source)) {
-        LOGE(">>>>>> source type %d , w %d h %d", source.src_type, source.image_source->info.width,
+        LOGD_ANALYZER(">>>>>> source type %d , w %d h %d", source.src_type, source.image_source->info.width,
              source.image_source->info.height);
         auto src = std::make_shared<RefCountedVideoBuffer>(source.image_source);
         auto& scaler  = scalers_.at(source.src_type);
@@ -611,7 +611,7 @@ void ThumbnailsService::OnFrameEvent(const rkaiq_image_source_t& source) {
             if (buf) {
                 auto dst = std::make_shared<RefCountedVideoBuffer>(buf, false);
                 if (*(src) <= *(dst)) {
-                    LOGE("thumbnail src %dx%d is smaller than or equal to dst %dx%d",
+                    LOGW_ANALYZER("thumbnail src %dx%d is smaller than or equal to dst %dx%d",
                          src->buffer->info.width, src->buffer->info.height, dst->buffer->info.width,
                          dst->buffer->info.height);
                     continue;
@@ -624,7 +624,7 @@ void ThumbnailsService::OnFrameEvent(const rkaiq_image_source_t& source) {
                 src                      = dst;
                 param.payload->thumbnail = std::make_pair(config, dst);
                 scaler->enqueue(param);
-                LOGD_ANALYZER("thumbnail enqueue id %d type %d 1/%d x 1/%d to scaler",
+                LOGI_ANALYZER("thumbnail enqueue id %d type %d 1/%d x 1/%d to scaler",
                               source.frame_id, source.src_type, config.width_intfactor,
                               config.height_intfactor);
             } else {

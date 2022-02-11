@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include "rk_aiq_comm.h"
 #include "rk_aiq_mems_sensor.h"
+#include "rk-camera-module.h"
 #include "adebayer/rk_aiq_types_algo_adebayer.h"
 #include "ae/rk_aiq_types_ae_algo.h"
 #include "awb/rk_aiq_types_awb_algo.h"
@@ -376,6 +377,8 @@ typedef struct {
     uint32_t isp_acq_height;
     rk_aiq_sensor_nr_switch_t nr_switch;
     rk_aiq_lens_descriptor lens_des;
+    struct rkmodule_awb_inf otp_awb;
+    struct rkmodule_lsc_inf *otp_lsc;
 } rk_aiq_exposure_sensor_descriptor;
 
 // exposure

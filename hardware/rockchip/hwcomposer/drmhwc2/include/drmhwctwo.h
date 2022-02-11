@@ -15,7 +15,7 @@
  */
 
 #include "drmdisplaycompositor.h"
-#include "drmhwcomposer.h"
+#include "drmlayer.h"
 #include "resourcemanager.h"
 #include "vsyncworker.h"
 #include "platform.h"
@@ -30,7 +30,7 @@ namespace android {
 
 class DrmGralloc;
 class DrmHwcTwo;
-
+class GemHandle;
 
 DrmHwcTwo *g_ctx = NULL;
 
@@ -46,19 +46,22 @@ class DrmHwcTwo : public hwc2_device_t {
   HWC2::Error Init();
 
  private:
+
   class HwcLayer {
    public:
-    HwcLayer(uint32_t layer_id){
+    HwcLayer(uint32_t layer_id, DrmDevice *drm){
       id_ = layer_id;
       drmGralloc_ = DrmGralloc::getInstance();
+      drm_ = drm;
       bufferInfoMap_.clear();
-    }
+    };
 
     void clear(){
       buffer_ = NULL;
       acquire_fence_.Close();
       release_fence_.Close();
       next_release_fence_.Close();
+
     }
 
     HWC2::Composition sf_type() const {
@@ -81,6 +84,42 @@ class DrmHwcTwo : public hwc2_device_t {
       return z_order_;
     }
 
+    class GemHandle {
+      public:
+        GemHandle(){};
+        ~GemHandle(){
+          if(uBufferId_ == 0 || uGemHandle_ == 0)
+            return;
+          int ret = drmGralloc_->hwc_free_gemhandle(uBufferId_);
+          if(ret){
+            HWC2_ALOGE("%s hwc_free_gemhandle fail, buffer_id =%" PRIx64, name_, uBufferId_);
+          }
+
+        };
+
+        int InitGemHandle(DrmDevice *drm,
+                          DrmGralloc *drm_gralloc,
+                          const char *name,
+                          uint64_t buffer_fd,
+                          uint64_t buffer_id){
+            drm_ = drm;
+            drmGralloc_ = drm_gralloc;
+            name_ = name;
+            uBufferId_ = buffer_id;
+            int ret = drmGralloc_->hwc_get_gemhandle_from_fd(drm_->fd(), buffer_fd, uBufferId_, &uGemHandle_);
+            if(ret){
+              HWC2_ALOGE("%s hwc_get_gemhandle_from_fd fail, buffer_id =%" PRIx64, name_, uBufferId_);
+            }
+            return ret;
+        };
+        uint32_t GetGemHandle(){ return uGemHandle_;};
+      private:
+        DrmDevice *drm_;
+        DrmGralloc *drmGralloc_;
+        uint64_t uBufferId_=0;
+        uint32_t uGemHandle_=0;
+        const char *name_;
+    };
     typedef struct bufferInfo{
       bufferInfo(){};
       int iFd_=0;
@@ -91,8 +130,10 @@ class DrmHwcTwo : public hwc2_device_t {
       int iByteStride_=0;
       int iUsage_=0;
       uint32_t uFourccFormat_=0;
+      uint32_t uGemHandle_=0;
       uint64_t uModifier_=0;
       uint64_t uBufferId_;
+      GemHandle gemHandle_;
       std::string sLayerName_;
     }bufferInfo_t;
 
@@ -140,6 +181,8 @@ class DrmHwcTwo : public hwc2_device_t {
           pBufferInfo_->uModifier_ = drmGralloc_->hwc_get_handle_format_modifier(buffer_);
           drmGralloc_->hwc_get_handle_name(buffer_,pBufferInfo_->sLayerName_);
           layer_name_ = pBufferInfo_->sLayerName_;
+          pBufferInfo_->gemHandle_.InitGemHandle(drm_, drmGralloc_, pBufferInfo_->sLayerName_.c_str(), pBufferInfo_->iFd_, buffer_id);
+          pBufferInfo_->uGemHandle_ = pBufferInfo_->gemHandle_.GetGemHandle();
           HWC2_ALOGD_IF_VERBOSE("bufferInfoMap_ size = %zu insert success! BufferId=%" PRIx64 " Name=%s",
                                bufferInfoMap_.size(),buffer_id,pBufferInfo_->sLayerName_.c_str());
         }
@@ -234,6 +277,7 @@ class DrmHwcTwo : public hwc2_device_t {
 
     uint32_t id_;
     DrmGralloc *drmGralloc_;
+    DrmDevice *drm_;
 
     // Buffer info map
     bool bHasCache_ = false;
@@ -262,9 +306,13 @@ class DrmHwcTwo : public hwc2_device_t {
 
     HWC2::Error RegisterVsyncCallback(hwc2_callback_data_t data,
                                       hwc2_function_pointer_t func);
+    HWC2::Error UnregisterVsyncCallback();
 
     HWC2::Error RegisterInvalidateCallback(hwc2_callback_data_t data,
                                       hwc2_function_pointer_t func);
+
+    HWC2::Error UnregisterInvalidateCallback();
+
     void ClearDisplay();
     void ReleaseResource();
 
@@ -327,6 +375,7 @@ class DrmHwcTwo : public hwc2_device_t {
    int UpdateDisplayMode();
    int UpdateHdmiOutputFormat();
    int UpdateBCSH();
+   int UpdateOverscan();
    int SwitchHdrMode();
 
    // Static Screen opt function
@@ -462,7 +511,7 @@ class DrmHwcTwo : public hwc2_device_t {
     return;
 };
 
-  ResourceManager resource_manager_;
+  ResourceManager *resource_manager_;
   std::map<hwc2_display_t, HwcDisplay> displays_;
   std::map<HWC2::Callback, HwcCallback> callbacks_;
   std::string mDumpString;

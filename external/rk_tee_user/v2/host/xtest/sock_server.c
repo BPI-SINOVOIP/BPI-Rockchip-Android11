@@ -1,14 +1,6 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright (c) 2016, Linaro Limited
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License Version 2 as
- * published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
  */
 
 #include <sys/types.h>
@@ -347,6 +339,8 @@ static bool sock_server_init(struct sock_server *ts, struct sock_io_cb *cb,
 
 	for (ai = ai0; ai; ai = ai->ai_next)
 		sock_server_add_fd(ts, ai);
+
+	freeaddrinfo(ai0);
 
 	if (!ts->num_binds)
 		return false;

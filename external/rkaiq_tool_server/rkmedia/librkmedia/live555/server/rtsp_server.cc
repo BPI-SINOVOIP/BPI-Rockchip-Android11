@@ -14,8 +14,7 @@
 #endif
 
 #if !defined(LIVE555_SERVER_H264) && !defined(LIVE555_SERVER_H265)
-    #error                                                                         \
-    "This RTSP !VIDEO! implementation currently only support at least one of h264 and h265!!!"
+    #error "This RTSP !VIDEO! implementation currently only support at least one of h264 and h265!!!"
 #endif
 
 #ifdef LIVE555_SERVER_H264
@@ -37,63 +36,65 @@
 #include "media_reflector.h"
 #include "media_type.h"
 
-namespace easymedia {
-    static bool SendMediaToServer(Flow* f, MediaBufferVector &input_vector);
-    class RtspServerFlow : public Flow {
-        public:
-            RtspServerFlow(const char* param);
-            virtual ~RtspServerFlow();
-            static const char* GetFlowName() {
-                return "live555_rtsp_server";
-            }
+namespace easymedia
+{
+    static bool SendMediaToServer(Flow* f, MediaBufferVector& input_vector);
+    class RtspServerFlow : public Flow
+    {
+      public:
+        RtspServerFlow(const char* param);
+        virtual ~RtspServerFlow();
+        static const char* GetFlowName()
+        {
+            return "live555_rtsp_server";
+        }
 
-        private:
-            Live555MediaInput* server_input;
-            std::shared_ptr<RtspConnection> rtspConnection;
+      private:
+        Live555MediaInput* server_input;
+        std::shared_ptr<RtspConnection> rtspConnection;
 
-            std::string channel_name;
-            std::string video_type;
-            std::string audio_type;
-            friend bool SendMediaToServer(Flow* f, MediaBufferVector &input_vector);
-            void CallPlayVideoHandler();
-            void CallPlayAudioHandler();
+        std::string channel_name;
+        std::string video_type;
+        std::string audio_type;
+        friend bool SendMediaToServer(Flow* f, MediaBufferVector& input_vector);
+        void CallPlayVideoHandler();
+        void CallPlayAudioHandler();
     };
 
-    bool SendMediaToServer(Flow* f, MediaBufferVector &input_vector) {
+    bool SendMediaToServer(Flow* f, MediaBufferVector& input_vector)
+    {
         RtspServerFlow* rtsp_flow = (RtspServerFlow*)f;
 
-        for(auto &buffer : input_vector) {
-            if(!buffer) {
+        for (auto& buffer : input_vector) {
+            if (!buffer) {
                 continue;
             }
-            if(buffer && buffer->IsHwBuffer()) {
+            if (buffer && buffer->IsHwBuffer()) {
                 // hardware buffer is limited, copy it
                 auto new_buffer = MediaBuffer::Clone(*buffer.get());
                 new_buffer->SetType(buffer->GetType());
                 buffer = new_buffer;
             }
 
-            if((buffer->GetUserFlag() & MediaBuffer::kIntra)) {
+            if ((buffer->GetUserFlag() & MediaBuffer::kIntra)) {
                 std::list<std::shared_ptr<easymedia::MediaBuffer>> spspps;
-                if(rtsp_flow->video_type == VIDEO_H264) {
-                    spspps = split_h264_separate((const uint8_t*)buffer->GetPtr(),
-                                                 buffer->GetValidSize(),
+                if (rtsp_flow->video_type == VIDEO_H264) {
+                    spspps = split_h264_separate((const uint8_t*)buffer->GetPtr(), buffer->GetValidSize(),
                                                  buffer->GetUSTimeStamp());
-                } else if(rtsp_flow->video_type == VIDEO_H265) {
-                    spspps = split_h265_separate((const uint8_t*)buffer->GetPtr(),
-                                                 buffer->GetValidSize(),
+                } else if (rtsp_flow->video_type == VIDEO_H265) {
+                    spspps = split_h265_separate((const uint8_t*)buffer->GetPtr(), buffer->GetValidSize(),
                                                  buffer->GetUSTimeStamp());
                 }
                 // Independently send vps, sps, pps packets to live555.
-                for(auto &buf : spspps) {
+                for (auto& buf : spspps) {
                     rtsp_flow->server_input->PushNewVideo(buf);
                 }
                 // The original Intr frame information is sent to live555.
                 // At this time it still contains extra information.
                 rtsp_flow->server_input->PushNewVideo(buffer);
-            } else if(buffer->GetType() == Type::Audio) {
+            } else if (buffer->GetType() == Type::Audio) {
                 rtsp_flow->server_input->PushNewAudio(buffer);
-            } else if(buffer->GetType() == Type::Video) {
+            } else if (buffer->GetType() == Type::Video) {
                 rtsp_flow->server_input->PushNewVideo(buffer);
             } else {
                 // muxer buffer
@@ -104,10 +105,11 @@ namespace easymedia {
         return true;
     }
 
-    RtspServerFlow::RtspServerFlow(const char* param) {
+    RtspServerFlow::RtspServerFlow(const char* param)
+    {
         std::list<std::string> input_data_types;
         std::map<std::string, std::string> params;
-        if(!parse_media_param_map(param, params)) {
+        if (!parse_media_param_map(param, params)) {
             SetError(-EINVAL);
             return;
         }
@@ -118,64 +120,59 @@ namespace easymedia {
 
         value = params[KEY_PORT_NUM];
         int port = std::stoi(value);
-        std::string &username = params[KEY_USERNAME];
-        std::string &userpwd = params[KEY_USERPASSWORD];
+        std::string& username = params[KEY_USERNAME];
+        std::string& userpwd = params[KEY_USERPASSWORD];
         rtspConnection = RtspConnection::getInstance(port, username, userpwd);
         int sample_rate = 0, channels = 0, profiles = 0;
         unsigned bitrate = 0;
         value = params[KEY_SAMPLE_RATE];
-        if(!value.empty()) {
+        if (!value.empty()) {
             sample_rate = std::stoi(value);
         }
 
         value = params[KEY_CHANNELS];
-        if(!value.empty()) {
+        if (!value.empty()) {
             channels = std::stoi(value);
         }
 
         value = params[KEY_PROFILE];
-        if(!value.empty()) {
+        if (!value.empty()) {
             profiles = std::stoi(value);
         }
 
         value = params[KEY_SAMPLE_FMT];
-        if(!value.empty()) {
+        if (!value.empty()) {
             bitrate = std::stoi(value);
         }
 
-        if(rtspConnection) {
+        if (rtspConnection) {
             int in_idx = 0;
             std::string markname;
             SlotMap sm;
 
-            for(auto &type : input_data_types) {
-                if(type == VIDEO_H264 || type == VIDEO_H265 || type == IMAGE_JPEG) {
+            for (auto& type : input_data_types) {
+                if (type == VIDEO_H264 || type == VIDEO_H265 || type == IMAGE_JPEG) {
                     video_type = type;
-                } else if(type == AUDIO_AAC || type == AUDIO_G711A ||
-                          type == AUDIO_G711U || type == AUDIO_G726 ||
-                          type == AUDIO_MP2 || type == MUXER_MPEG_TS ||
-                          type == MUXER_MPEG_PS) {
+                } else if (type == AUDIO_AAC || type == AUDIO_G711A || type == AUDIO_G711U || type == AUDIO_G726 ||
+                           type == AUDIO_MP2 || type == MUXER_MPEG_TS || type == MUXER_MPEG_PS) {
                     audio_type = type;
                 }
                 sm.input_slots.push_back(in_idx);
                 in_idx++;
             }
-            server_input = rtspConnection->createNewChannel(
-                               channel_name, video_type, audio_type, channels, sample_rate, bitrate,
-                               profiles);
-            server_input->SetStartVideoStreamCallback(
-                std::bind(&RtspServerFlow::CallPlayVideoHandler, this));
-            server_input->SetStartAudioStreamCallback(
-                std::bind(&RtspServerFlow::CallPlayAudioHandler, this));
+            server_input = rtspConnection->createNewChannel(channel_name, video_type, audio_type, channels, sample_rate,
+                                                            bitrate, profiles);
+            server_input->SetStartVideoStreamCallback(std::bind(&RtspServerFlow::CallPlayVideoHandler, this));
+            server_input->SetStartAudioStreamCallback(std::bind(&RtspServerFlow::CallPlayAudioHandler, this));
             sm.process = SendMediaToServer;
             sm.thread_model = Model::ASYNCCOMMON;
             sm.mode_when_full = InputMode::BLOCKING;
             sm.input_maxcachenum.push_back(0); // no limit
-            if(sm.input_slots.size() > 1) {
+            if (sm.input_slots.size() > 1) {
                 sm.input_maxcachenum.push_back(0);
             }
             markname = "rtsp " + channel_name + std::to_string(in_idx);
-            if(!InstallSlotMap(sm, markname, 0)) {
+            if (!InstallSlotMap(sm, markname, 0)) {
                 LOG("Fail to InstallSlotMap, %s\n", markname.c_str());
                 goto err;
             }
@@ -183,39 +180,44 @@ namespace easymedia {
             goto err;
         }
         return;
-err:
+    err:
         SetError(-EINVAL);
     }
 
-    void RtspServerFlow::CallPlayVideoHandler() {
+    void RtspServerFlow::CallPlayVideoHandler()
+    {
         auto handler = GetPlayVideoHandler();
-        if(handler != nullptr) {
+        if (handler != nullptr) {
             handler(this);
         }
     }
 
-    void RtspServerFlow::CallPlayAudioHandler() {
+    void RtspServerFlow::CallPlayAudioHandler()
+    {
         auto handler = GetPlayAudioHandler();
-        if(handler) {
+        if (handler) {
             handler(this);
         }
     }
 
-    RtspServerFlow::~RtspServerFlow() {
+    RtspServerFlow::~RtspServerFlow()
+    {
         AutoPrintLine apl(__func__);
         StopAllThread();
         SetDisable();
-        if(rtspConnection) {
+        if (rtspConnection) {
             rtspConnection->removeChannel(channel_name);
         }
         server_input = nullptr;
     }
 
     DEFINE_FLOW_FACTORY(RtspServerFlow, Flow)
-    const char* FACTORY(RtspServerFlow)::ExpectedInputDataType() {
+    const char* FACTORY(RtspServerFlow)::ExpectedInputDataType()
+    {
         return "";
     }
-    const char* FACTORY(RtspServerFlow)::OutPutDataType() {
+    const char* FACTORY(RtspServerFlow)::OutPutDataType()
+    {
         return "";
     }
 

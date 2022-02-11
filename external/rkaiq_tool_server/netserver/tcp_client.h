@@ -18,21 +18,22 @@
 
 using namespace std;
 
-class TCPClient {
- private:
-  int sock;
-  std::string address;
-  int port;
-  struct sockaddr_in server;
+class TCPClient
+{
+  private:
+    int sock;
+    std::string address;
+    int port;
+    struct sockaddr_in server;
 
- public:
-  TCPClient();
-  virtual ~TCPClient();
-  bool Setup(string address, int port);
-  bool Send(string data);
-  int Send(char* buff, int size);
-  string Receive(int size);
-  int Receive(char* buff, int size);
+  public:
+    TCPClient();
+    virtual ~TCPClient();
+    bool Setup(string address, int port);
+    bool Send(string data);
+    int Send(char* buff, int size);
+    string Receive(int size);
+    int Receive(char* buff, int size);
 };
 
 #endif

@@ -36,6 +36,7 @@
 #ifndef _DRM_GRALLOC_H_
 #define _DRM_GRALLOC_H_
 #include "rockchip/drmtype.h"
+#include "rockchip/utils/drmdebug.h"
 #if USE_GRALLOC_4
 #include "rockchip/drmgralloc4.h"
 #endif
@@ -53,6 +54,41 @@ public:
 		static DrmGralloc drmGralloc_;
 		return &drmGralloc_;
 	}
+
+  class GemHandle{
+  public:
+    GemHandle(int drm_fd, uint32_t gem_handle):
+      iDrmFd_(drm_fd),
+      uGemHandle_(gem_handle),
+      uRefCnt_(1){};
+
+    void AddRefCnt() { uRefCnt_++; };
+    bool CanRelease() {
+      uRefCnt_--;
+      if(uRefCnt_ != 0)
+        return false;
+
+      ReleaseGemHandle();
+      return true;
+    };
+    int ReleaseGemHandle() {
+      struct drm_gem_close gem_close;
+      memset(&gem_close, 0, sizeof(gem_close));
+      gem_close.handle = uGemHandle_;
+      int ret = drmIoctl(iDrmFd_, DRM_IOCTL_GEM_CLOSE, &gem_close);
+      if (ret) {
+        HWC2_ALOGE("Failed to close gem handle %d %d",uGemHandle_, ret);
+        return ret;
+      }
+      return 0;
+    };
+
+    uint32_t GetGemHandle() {return uGemHandle_;};
+  private:
+    int iDrmFd_;
+    uint32_t uGemHandle_;
+    uint32_t uRefCnt_;
+  };
 
   void set_drm_version(int version);
   int hwc_get_handle_width(buffer_handle_t hnd);
@@ -73,7 +109,8 @@ public:
   uint32_t hwc_get_handle_phy_addr(buffer_handle_t hnd);
   uint64_t hwc_get_handle_format_modifier(buffer_handle_t hnd);
   uint32_t hwc_get_handle_fourcc_format(buffer_handle_t hnd);
-  uint64_t hwc_get_handle_internal_format(buffer_handle_t hnd);
+  int hwc_get_gemhandle_from_fd(int drm_device_fd, uint64_t buffer_fd, uint64_t buffer_id, uint32_t *out_gem_handle);
+  int hwc_free_gemhandle(uint64_t buffer_id);
 
 private:
 	DrmGralloc();
@@ -82,6 +119,7 @@ private:
 	DrmGralloc& operator=(const DrmGralloc&);
 
   int drmVersion_;
+  std::map<uint64_t, std::shared_ptr<GemHandle>> mapGemHandles_;
 #if USE_GRALLOC_4
 #else
   const gralloc_module_t *gralloc_;

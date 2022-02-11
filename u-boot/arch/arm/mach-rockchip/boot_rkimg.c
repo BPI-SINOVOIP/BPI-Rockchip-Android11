@@ -19,6 +19,7 @@
 #include <key.h>
 #include <mmc.h>
 #include <malloc.h>
+#include <nvme.h>
 #include <stdlib.h>
 #include <sysmem.h>
 #include <asm/io.h>
@@ -36,6 +37,11 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
+__weak int rk_board_early_fdt_fixup(void *blob)
+{
+	return 0;
+}
+
 static void boot_devtype_init(void)
 {
 	const char *devtype_num_set = "run rkimg_bootdev";
@@ -47,6 +53,12 @@ static void boot_devtype_init(void)
 	if (done)
 		return;
 
+	/*
+	 * The loader stage does not support SATA, and the boot device
+	 * can only be other storage. Therefore, it is necessary to
+	 * initialize the SATA device before judging the initialization
+	 * of atag boot device
+	 */
 #if defined(CONFIG_SCSI) && defined(CONFIG_CMD_SCSI) && defined(CONFIG_AHCI)
 	ret = run_command("scsi scan", 0);
 	if (!ret) {
@@ -58,6 +70,25 @@ static void boot_devtype_init(void)
 			env_set("devnum", devnum);
 			goto finish;
 		}
+	}
+#endif
+
+#ifdef CONFIG_NVME
+	struct udevice *udev;
+
+	pci_init();
+	ret = nvme_scan_namespace();
+	if (!ret) {
+		ret = blk_get_device(IF_TYPE_NVME, 0, &udev);
+		if (!ret) {
+			devtype = "nvme";
+			devnum = "0";
+			env_set("devtype", devtype);
+			env_set("devnum", devnum);
+			goto finish;
+		}
+	} else {
+		printf("Set nvme as boot storage fail ret=%d\n", ret);
 	}
 #endif
 
@@ -147,6 +178,9 @@ static int get_bootdev_type(void)
 	} else if (!strcmp(devtype, "scsi")) {
 		type = IF_TYPE_SCSI;
 		boot_media = "scsi";
+	} else if (!strcmp(devtype, "nvme")) {
+		type = IF_TYPE_NVME;
+		boot_media = "nvme";
 	} else {
 		/* Add new to support */
 	}
@@ -507,7 +541,7 @@ int rockchip_read_dtb_file(void *fdt_addr)
 {
 	int hash_size = 0;
 	int ret = -1;
-	u32 fdt_size;
+	u32 fdt_size = 0;
 	char *hash;
 
 	/* init from storage if resource list is empty */
@@ -517,6 +551,7 @@ int rockchip_read_dtb_file(void *fdt_addr)
 #ifdef CONFIG_ROCKCHIP_EARLY_DISTRO_DTB
 	ret = rockchip_read_distro_dtb(fdt_addr);
 	if (!ret) {
+		fdt_size = fdt_totalsize(fdt_addr);
 		if (!sysmem_alloc_base(MEM_FDT, (phys_addr_t)fdt_addr,
 		     ALIGN(fdt_size, RK_BLK_SIZE) + CONFIG_SYS_FDT_PAD))
 			return -ENOMEM;
@@ -547,6 +582,8 @@ int rockchip_read_dtb_file(void *fdt_addr)
 			       ALIGN(fdt_size, RK_BLK_SIZE) +
 			       CONFIG_SYS_FDT_PAD))
 		return -ENOMEM;
+
+	rk_board_early_fdt_fixup(fdt_addr);
 
 #if defined(CONFIG_ANDROID_BOOT_IMAGE) && defined(CONFIG_OF_LIBFDT_OVERLAY)
 	android_fdt_overlay_apply((void *)fdt_addr);

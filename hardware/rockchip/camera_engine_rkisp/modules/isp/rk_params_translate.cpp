@@ -281,7 +281,7 @@ void ParamsTranslate::convert_to_rkisp_aec_config( XCamAeParam* aec_params,
         config->win.bottom_height = sensor_desc->sensor_output_height;
     }
     // bias
-    config->ae_bias = (int)(aec_params->ev_shift);
+    config->ae_bias = (int)(aec_params->ev_shift*100);
 
     if (config->mode == HAL_AE_OPERATION_MODE_AUTO) {
         config->frame_time_ns_min = aec_params->exposure_time_min;

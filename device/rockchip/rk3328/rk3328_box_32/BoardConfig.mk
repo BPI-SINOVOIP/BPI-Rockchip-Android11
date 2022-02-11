@@ -17,7 +17,7 @@ include device/rockchip/rk3328/BoardConfig.mk
 BUILD_WITH_GO_OPT := false
 PRODUCT_UBOOT_CONFIG ?= rk3328
 PRODUCT_KERNEL_ARCH ?= arm64
-PRODUCT_KERNEL_DTS := rk3328-box-liantong-avb
+PRODUCT_KERNEL_DTS := rk3328-evb-android-avb
 PRODUCT_KERNEL_CONFIG ?= rockchip_defconfig android-11.config
 
 TARGET_ARCH := arm
@@ -43,14 +43,17 @@ BOARD_OVERRIDE_RS_CPU_VARIANT_64 :=
 TARGET_USES_64_BIT_BCMDHD := false
 TARGET_USES_64_BIT_BINDER := true
 
-# HACK: Build apps as 64b for volantis_64_only
-ifneq (,$(filter ro.zygote=zygote64, $(PRODUCT_DEFAULT_PROPERTY_OVERRIDES)))
-TARGET_PREFER_32_BIT_APPS :=
-TARGET_SUPPORTS_64_BIT_APPS := true
-endif
+TARGET_PREFER_32_BIT_APPS := true
+TARGET_SUPPORTS_64_BIT_APPS := false
+
+BOARD_OVERRIDE_RS_CPU_VARIANT_64 :=
 
 MALLOC_SVELTE := true
 BOARD_TV_LOW_MEMOPT := true# AB image definition
+
+TARGET_USES_64_BIT_BCMDHD := false
+TARGET_USES_64_BIT_BINDER := true
+
 BOARD_USES_AB_IMAGE := false
 
 ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)

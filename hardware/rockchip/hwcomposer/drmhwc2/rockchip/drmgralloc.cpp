@@ -42,7 +42,6 @@
 #endif
 #include "rockchip/drmgralloc.h"
 
-
 #include <log/log.h>
 #include <inttypes.h>
 #include <errno.h>
@@ -547,31 +546,6 @@ uint32_t DrmGralloc::hwc_get_handle_fourcc_format(buffer_handle_t hnd)
 }
 
 
-uint64_t DrmGralloc::hwc_get_handle_internal_format(buffer_handle_t hnd)
-{
-#if USE_GRALLOC_4
-    uint64_t internal_format = 0;
-    internal_format = gralloc4::get_internal_format(hnd);
-    return internal_format;
-#else // #if USE_GRALLOC_4
-    int ret = 0;
-    int op = GRALLOC_MODULE_PERFORM_GET_INTERNAL_FORMAT;
-    uint64_t internal_format = 0;
-
-    if(gralloc_ && gralloc_->perform)
-        ret = gralloc_->perform(gralloc_, op, hnd, &internal_format);
-    else
-        ret = -EINVAL;
-
-    if(ret != 0)
-    {
-        ALOGE("%s:cann't get value from gralloc", __FUNCTION__);
-    }
-
-    return internal_format;
-#endif
-}
-
 void* DrmGralloc::hwc_get_handle_lock(buffer_handle_t hnd, int width, int height){
   void* cpu_addr = NULL;
 #if USE_GRALLOC_4
@@ -604,7 +578,49 @@ int DrmGralloc::hwc_get_handle_unlock(buffer_handle_t hnd){
   return ret;
 }
 
+int DrmGralloc::hwc_get_gemhandle_from_fd(int drm_device_fd,
+                                          uint64_t buffer_fd,
+                                          uint64_t buffer_id,
+                                          uint32_t *out_gem_handle){
+  auto mapGemHandle = mapGemHandles_.find(buffer_id);
+  if(mapGemHandle == mapGemHandles_.end()){
+    HWC2_ALOGD_IF_VERBOSE("Call drmPrimeFDToHandle buf_fd=%" PRIu64 " buf_id=%" PRIx64, buffer_fd, buffer_id);
+    uint32_t gem_handle;
+    int ret = drmPrimeFDToHandle(drm_device_fd, buffer_fd, &gem_handle);
+    if (ret) {
+      HWC2_ALOGE("failed to import prime fd %" PRIu64 " ret=%d", buffer_fd, ret);
+      return ret;
+    }
+    auto ptrGemHandle = std::make_shared<GemHandle>(drm_device_fd,gem_handle);
+    auto res = mapGemHandles_.insert(std::pair<uint64_t, std::shared_ptr<GemHandle>>(buffer_id, ptrGemHandle));
+    if(res.second==false){
+        HWC2_ALOGE("mapGemHandles_ insert fail. maybe buffer_id %" PRIu64 " has existed", buffer_id);
+        return -1;
+    }
+    HWC2_ALOGD_IF_VERBOSE("Get GemHandle buf_fd=%" PRIu64 " buf_id=%" PRIx64 " GemHandle=%d", buffer_fd, buffer_id, gem_handle);
+    *out_gem_handle = gem_handle;
+    return 0;
+  }
 
+  HWC2_ALOGD_IF_VERBOSE("Cache GemHandle buf_fd=%" PRIu64 " buf_id=%" PRIx64 " GemHandle=%d", buffer_fd, buffer_id,mapGemHandle->second->GetGemHandle());
+  mapGemHandle->second->AddRefCnt();
+  *out_gem_handle = mapGemHandle->second->GetGemHandle();
+  return 0;
+}
 
+int DrmGralloc::hwc_free_gemhandle(uint64_t buffer_id){
+  auto mapGemHandle = mapGemHandles_.find(buffer_id);
+  if(mapGemHandle == mapGemHandles_.end()){
+    HWC2_ALOGI("Can't find buf_id=%" PRIx64 " GemHandle.", buffer_id);
+    return -1;
+  }
 
+  if(mapGemHandle->second->CanRelease()){
+    mapGemHandles_.erase(mapGemHandle);
+    HWC2_ALOGD_IF_VERBOSE("Release GemHandle buf_id=%" PRIx64 " success!", buffer_id);
+    return 0;
+  }
+  HWC2_ALOGD_IF_VERBOSE("Sub GemHandle RefCnt buf_id=%" PRIx64 " success!", buffer_id);
+  return 0;
+}
 }

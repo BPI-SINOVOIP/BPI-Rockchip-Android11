@@ -29,6 +29,8 @@
 
 RKAIQ_BEGIN_DECLARE
 typedef const CalibDbV2_LscTableProfile_t* pLscTableProfile_t;
+
+/** @brief store LSC recent/last results*/
 typedef struct alsc_rest_s {
     uint32_t caseIndex;
     float fVignetting;
@@ -117,6 +119,7 @@ typedef struct alsc_context_s {
     alsc_rest_t alscRest;
     rk_aiq_lsc_cfg_t lscHwConf; //hw para
     unsigned int count;
+
     //ctrl & api
     rk_aiq_lsc_attrib_t mCurAtt;
     rk_aiq_lsc_attrib_t mNewAtt;

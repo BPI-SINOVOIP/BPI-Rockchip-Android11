@@ -18,8 +18,7 @@
 #define __VPU_H__
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #include "rk_type.h"
@@ -41,7 +40,6 @@ extern "C"
 #define VPU_REG_NUM_ENC                 (96)
 
 typedef enum {
-
     VPU_ENC                 = 0x0,
     VPU_DEC                 = 0x1,
     VPU_PP                  = 0x2,
@@ -50,9 +48,8 @@ typedef enum {
     VPU_DEC_RKV             = 0x5,
     VPU_ENC_RKV             = 0x6,
     VPU_DEC_AVS             = 0x7,
-    VPU_ENC_H265E           = 0x8,
+    VPU_ENC_VEPU22          = 0x8,
     VPU_TYPE_BUTT           ,
-
 } VPU_CLIENT_TYPE;
 
 /* Hardware decoder configuration description */
@@ -93,7 +90,6 @@ typedef struct VPUHwEndConfig {
 } VPUHwEncConfig_t;
 
 typedef enum {
-
     // common command
     VPU_CMD_REGISTER            ,
     VPU_CMD_REGISTER_ACK_OK     ,
@@ -122,9 +118,6 @@ RK_U32 VPUCheckSupportWidth();
 
 #ifdef __cplusplus
 }
-
 #endif
 
-#endif                       /* __VPU_H__ */
-
-
+#endif /* __VPU_H__ */

@@ -24,6 +24,7 @@ include device/rockchip/rk3326/PX30_Android11/BoardConfig.mk
 include device/rockchip/common/BoardConfig.mk
 $(call inherit-product, device/rockchip/rk3326/device-common.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
+$(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -45,7 +46,7 @@ DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
 #
 ## add Rockchip properties
 #
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=160
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=280
 # Reduces GC frequency of foreground apps by 50%
 PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.foreground-heap-growth-multiplier=2.0
 # set zygote

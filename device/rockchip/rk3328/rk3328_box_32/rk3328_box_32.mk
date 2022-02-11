@@ -38,6 +38,8 @@ $(call inherit-product, device/rockchip/rk3328/device-common.mk)
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/rockchip/common/device.mk)
 
+PRODUCT_FSTAB_TEMPLATE := device/rockchip/rk3328/fstab_box.in
+
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/../overlay
 #TODO TV?
 PRODUCT_CHARACTERISTICS := tv
@@ -54,6 +56,8 @@ PRODUCT_MANUFACTURER := Rockchip
 
 # Disable bluetooth because of continuous driver crashes
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
+
+BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M,logo:16M
 
 # tmp compile needed
 BOARD_WITH_RKTOOLBOX := false
@@ -74,9 +78,10 @@ PRODUCT_PACKAGES += \
     android.hardware.tv.input@1.0-impl
 
 # Display
-TARGET_BASE_PARAMETER_IMAGE := device/rockchip/common/baseparameter/baseparameter_fb720.img
+TARGET_BASE_PARAMETER_IMAGE := device/rockchip/rk3328/baseparameter.img
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160
+    ro.sf.lcd_density=160 \
+    persist.vendor.framebuffer.main=1280x720@60
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.zygote=zygote32
 

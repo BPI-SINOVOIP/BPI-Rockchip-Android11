@@ -1,0 +1,20 @@
+cc_prebuilt_binary {
+    name: "media-ctl",
+    allow_undefined_symbols: true,
+    proprietary: true,
+    // These are already stripped, and restripping them just issues diagnostics.
+    strip: {
+        none: true,
+    },
+    srcs: ["etc/tools/media-ctl"],
+}
+cc_prebuilt_binary {
+    name: "v4l2-ctl",
+    allow_undefined_symbols: true,
+    proprietary: true,
+    // These are already stripped, and restripping them just issues diagnostics.
+    strip: {
+        none: true,
+    },
+    srcs: ["etc/tools/v4l2-ctl"],
+}

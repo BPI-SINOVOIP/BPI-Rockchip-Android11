@@ -65,17 +65,16 @@
 extern "C" {
 #endif
 
-
 #if !defined(OPENSSL_THREADS)
 typedef struct crypto_mutex_st {
-  char padding;  // Empty structs have different sizes in C and C++.
+    char padding; // Empty structs have different sizes in C and C++.
 } CRYPTO_MUTEX;
 #elif defined(OPENSSL_WINDOWS)
 // CRYPTO_MUTEX can appear in public header files so we really don't want to
 // pull in windows.h. It's statically asserted that this structure is large
 // enough to contain a Windows SRWLOCK by thread_win.c.
 typedef union crypto_mutex_st {
-  void *handle;
+    void* handle;
 } CRYPTO_MUTEX;
 #elif defined(__MACH__) && defined(__APPLE__)
 typedef pthread_rwlock_t CRYPTO_MUTEX;
@@ -86,8 +85,8 @@ typedef pthread_rwlock_t CRYPTO_MUTEX;
 // structure is large enough to contain a |pthread_rwlock_t| by
 // thread_pthread.c.
 typedef union crypto_mutex_st {
-  double alignment;
-  uint8_t padding[3*sizeof(int) + 5*sizeof(unsigned) + 16 + 8];
+    double alignment;
+    uint8_t padding[3 * sizeof(int) + 5 * sizeof(unsigned) + 16 + 8];
 } CRYPTO_MUTEX;
 #endif
 
@@ -99,7 +98,6 @@ typedef union crypto_mutex_st {
 // do that. Instead we statically assert that the size and native alignment of
 // a plain uint32_t and an _Atomic uint32_t are equal in refcount_c11.c.
 typedef uint32_t CRYPTO_refcount_t;
-
 
 // Deprecated functions.
 //
@@ -120,72 +118,63 @@ typedef uint32_t CRYPTO_refcount_t;
 OPENSSL_EXPORT int CRYPTO_num_locks(void);
 
 // CRYPTO_set_locking_callback does nothing.
-OPENSSL_EXPORT void CRYPTO_set_locking_callback(
-    void (*func)(int mode, int lock_num, const char *file, int line));
+OPENSSL_EXPORT void CRYPTO_set_locking_callback(void (*func)(int mode, int lock_num, const char* file, int line));
 
 // CRYPTO_set_add_lock_callback does nothing.
-OPENSSL_EXPORT void CRYPTO_set_add_lock_callback(int (*func)(
-    int *num, int amount, int lock_num, const char *file, int line));
+OPENSSL_EXPORT void CRYPTO_set_add_lock_callback(int (*func)(int* num, int amount, int lock_num, const char* file,
+                                                             int line));
 
 // CRYPTO_get_locking_callback returns NULL.
-OPENSSL_EXPORT void (*CRYPTO_get_locking_callback(void))(int mode, int lock_num,
-                                                         const char *file,
-                                                         int line);
+OPENSSL_EXPORT void (*CRYPTO_get_locking_callback(void))(int mode, int lock_num, const char* file, int line);
 
 // CRYPTO_get_lock_name returns a fixed, dummy string.
-OPENSSL_EXPORT const char *CRYPTO_get_lock_name(int lock_num);
+OPENSSL_EXPORT const char* CRYPTO_get_lock_name(int lock_num);
 
 // CRYPTO_THREADID_set_callback returns one.
-OPENSSL_EXPORT int CRYPTO_THREADID_set_callback(
-    void (*threadid_func)(CRYPTO_THREADID *threadid));
+OPENSSL_EXPORT int CRYPTO_THREADID_set_callback(void (*threadid_func)(CRYPTO_THREADID* threadid));
 
 // CRYPTO_THREADID_set_numeric does nothing.
-OPENSSL_EXPORT void CRYPTO_THREADID_set_numeric(CRYPTO_THREADID *id,
-                                                unsigned long val);
+OPENSSL_EXPORT void CRYPTO_THREADID_set_numeric(CRYPTO_THREADID* id, unsigned long val);
 
 // CRYPTO_THREADID_set_pointer does nothing.
-OPENSSL_EXPORT void CRYPTO_THREADID_set_pointer(CRYPTO_THREADID *id, void *ptr);
+OPENSSL_EXPORT void CRYPTO_THREADID_set_pointer(CRYPTO_THREADID* id, void* ptr);
 
 // CRYPTO_THREADID_current does nothing.
-OPENSSL_EXPORT void CRYPTO_THREADID_current(CRYPTO_THREADID *id);
+OPENSSL_EXPORT void CRYPTO_THREADID_current(CRYPTO_THREADID* id);
 
 // CRYPTO_set_id_callback does nothing.
 OPENSSL_EXPORT void CRYPTO_set_id_callback(unsigned long (*func)(void));
 
 typedef struct {
-  int references;
-  struct CRYPTO_dynlock_value *data;
+    int references;
+    struct CRYPTO_dynlock_value* data;
 } CRYPTO_dynlock;
 
 // CRYPTO_set_dynlock_create_callback does nothing.
 OPENSSL_EXPORT void CRYPTO_set_dynlock_create_callback(
-    struct CRYPTO_dynlock_value *(*dyn_create_function)(const char *file,
-                                                        int line));
+    struct CRYPTO_dynlock_value* (*dyn_create_function)(const char* file, int line));
 
 // CRYPTO_set_dynlock_lock_callback does nothing.
-OPENSSL_EXPORT void CRYPTO_set_dynlock_lock_callback(void (*dyn_lock_function)(
-    int mode, struct CRYPTO_dynlock_value *l, const char *file, int line));
+OPENSSL_EXPORT void CRYPTO_set_dynlock_lock_callback(void (*dyn_lock_function)(int mode, struct CRYPTO_dynlock_value* l,
+                                                                               const char* file, int line));
 
 // CRYPTO_set_dynlock_destroy_callback does nothing.
-OPENSSL_EXPORT void CRYPTO_set_dynlock_destroy_callback(
-    void (*dyn_destroy_function)(struct CRYPTO_dynlock_value *l,
-                                 const char *file, int line));
+OPENSSL_EXPORT void CRYPTO_set_dynlock_destroy_callback(void (*dyn_destroy_function)(struct CRYPTO_dynlock_value* l,
+                                                                                     const char* file, int line));
 
 // CRYPTO_get_dynlock_create_callback returns NULL.
-OPENSSL_EXPORT struct CRYPTO_dynlock_value *(
-    *CRYPTO_get_dynlock_create_callback(void))(const char *file, int line);
+OPENSSL_EXPORT struct CRYPTO_dynlock_value* (*CRYPTO_get_dynlock_create_callback(void))(const char* file, int line);
 
 // CRYPTO_get_dynlock_lock_callback returns NULL.
-OPENSSL_EXPORT void (*CRYPTO_get_dynlock_lock_callback(void))(
-    int mode, struct CRYPTO_dynlock_value *l, const char *file, int line);
+OPENSSL_EXPORT void (*CRYPTO_get_dynlock_lock_callback(void))(int mode, struct CRYPTO_dynlock_value* l,
+                                                              const char* file, int line);
 
 // CRYPTO_get_dynlock_destroy_callback returns NULL.
-OPENSSL_EXPORT void (*CRYPTO_get_dynlock_destroy_callback(void))(
-    struct CRYPTO_dynlock_value *l, const char *file, int line);
-
+OPENSSL_EXPORT void (*CRYPTO_get_dynlock_destroy_callback(void))(struct CRYPTO_dynlock_value* l, const char* file,
+                                                                 int line);
 
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 #endif
 
-#endif  // OPENSSL_HEADER_THREAD_H
+#endif // OPENSSL_HEADER_THREAD_H

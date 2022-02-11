@@ -53,18 +53,15 @@
  * (eay@cryptsoft.com).  This product includes software written by Tim
  * Hudson (tjh@cryptsoft.com). */
 
-
 #ifndef OPENSSL_HEADER_PKCS8_H
 #define OPENSSL_HEADER_PKCS8_H
 
 #include <openssl/base.h>
 #include <openssl/x509.h>
 
-
 #if defined(__cplusplus)
 extern "C" {
 #endif
-
 
 // PKCS8_encrypt serializes and encrypts a PKCS8_PRIV_KEY_INFO with PBES1 or
 // PBES2 as defined in PKCS #5. Only pbeWithSHAAnd128BitRC4,
@@ -82,19 +79,16 @@ extern "C" {
 //
 // The resulting structure is stored in an |X509_SIG| which must be freed by the
 // caller.
-OPENSSL_EXPORT X509_SIG *PKCS8_encrypt(int pbe_nid, const EVP_CIPHER *cipher,
-                                       const char *pass, int pass_len,
-                                       const uint8_t *salt, size_t salt_len,
-                                       int iterations,
-                                       PKCS8_PRIV_KEY_INFO *p8inf);
+OPENSSL_EXPORT X509_SIG* PKCS8_encrypt(int pbe_nid, const EVP_CIPHER* cipher, const char* pass, int pass_len,
+                                       const uint8_t* salt, size_t salt_len, int iterations,
+                                       PKCS8_PRIV_KEY_INFO* p8inf);
 
 // PKCS8_marshal_encrypted_private_key behaves like |PKCS8_encrypt| but encrypts
 // an |EVP_PKEY| and writes the serialized EncryptedPrivateKeyInfo to |out|. It
 // returns one on success and zero on error.
-OPENSSL_EXPORT int PKCS8_marshal_encrypted_private_key(
-    CBB *out, int pbe_nid, const EVP_CIPHER *cipher, const char *pass,
-    size_t pass_len, const uint8_t *salt, size_t salt_len, int iterations,
-    const EVP_PKEY *pkey);
+OPENSSL_EXPORT int PKCS8_marshal_encrypted_private_key(CBB* out, int pbe_nid, const EVP_CIPHER* cipher,
+                                                       const char* pass, size_t pass_len, const uint8_t* salt,
+                                                       size_t salt_len, int iterations, const EVP_PKEY* pkey);
 
 // PKCS8_decrypt decrypts and decodes a PKCS8_PRIV_KEY_INFO with PBES1 or PBES2
 // as defined in PKCS #5. Only pbeWithSHAAnd128BitRC4,
@@ -107,25 +101,19 @@ OPENSSL_EXPORT int PKCS8_marshal_encrypted_private_key(
 // zero bytes, the PKCS #12 encoding of the empty string.
 //
 // The resulting structure must be freed by the caller.
-OPENSSL_EXPORT PKCS8_PRIV_KEY_INFO *PKCS8_decrypt(X509_SIG *pkcs8,
-                                                  const char *pass,
-                                                  int pass_len);
+OPENSSL_EXPORT PKCS8_PRIV_KEY_INFO* PKCS8_decrypt(X509_SIG* pkcs8, const char* pass, int pass_len);
 
 // PKCS8_parse_encrypted_private_key behaves like |PKCS8_decrypt| but it parses
 // the EncryptedPrivateKeyInfo structure from |cbs| and advances |cbs|. It
 // returns a newly-allocated |EVP_PKEY| on success and zero on error.
-OPENSSL_EXPORT EVP_PKEY *PKCS8_parse_encrypted_private_key(CBS *cbs,
-                                                           const char *pass,
-                                                           size_t pass_len);
+OPENSSL_EXPORT EVP_PKEY* PKCS8_parse_encrypted_private_key(CBS* cbs, const char* pass, size_t pass_len);
 
 // PKCS12_get_key_and_certs parses a PKCS#12 structure from |in|, authenticates
 // and decrypts it using |password|, sets |*out_key| to the included private
 // key and appends the included certificates to |out_certs|. It returns one on
 // success and zero on error. The caller takes ownership of the outputs.
-OPENSSL_EXPORT int PKCS12_get_key_and_certs(EVP_PKEY **out_key,
-                                            STACK_OF(X509) *out_certs,
-                                            CBS *in, const char *password);
-
+OPENSSL_EXPORT int PKCS12_get_key_and_certs(EVP_PKEY** out_key, STACK_OF(X509) * out_certs, CBS* in,
+                                            const char* password);
 
 // Deprecated functions.
 
@@ -143,28 +131,27 @@ OPENSSL_EXPORT void PKCS12_PBE_add(void);
 // (✝) If |out_p12| is not NULL and the function is successful, |*out_p12| will
 // be freed if not NULL itself and the result will be written to |*out_p12|.
 // New code should not depend on this.
-OPENSSL_EXPORT PKCS12 *d2i_PKCS12(PKCS12 **out_p12, const uint8_t **ber_bytes,
-                                  size_t ber_len);
+OPENSSL_EXPORT PKCS12* d2i_PKCS12(PKCS12** out_p12, const uint8_t** ber_bytes, size_t ber_len);
 
 // d2i_PKCS12_bio acts like |d2i_PKCS12| but reads from a |BIO|.
-OPENSSL_EXPORT PKCS12* d2i_PKCS12_bio(BIO *bio, PKCS12 **out_p12);
+OPENSSL_EXPORT PKCS12* d2i_PKCS12_bio(BIO* bio, PKCS12** out_p12);
 
 // d2i_PKCS12_fp acts like |d2i_PKCS12| but reads from a |FILE|.
-OPENSSL_EXPORT PKCS12* d2i_PKCS12_fp(FILE *fp, PKCS12 **out_p12);
+OPENSSL_EXPORT PKCS12* d2i_PKCS12_fp(FILE* fp, PKCS12** out_p12);
 
 // i2d_PKCS12 is a dummy function which copies the contents of |p12|. If |out|
 // is not NULL then the result is written to |*out| and |*out| is advanced just
 // past the output. It returns the number of bytes in the result, whether
 // written or not, or a negative value on error.
-OPENSSL_EXPORT int i2d_PKCS12(const PKCS12 *p12, uint8_t **out);
+OPENSSL_EXPORT int i2d_PKCS12(const PKCS12* p12, uint8_t** out);
 
 // i2d_PKCS12_bio writes the contents of |p12| to |bio|. It returns one on
 // success and zero on error.
-OPENSSL_EXPORT int i2d_PKCS12_bio(BIO *bio, const PKCS12 *p12);
+OPENSSL_EXPORT int i2d_PKCS12_bio(BIO* bio, const PKCS12* p12);
 
 // i2d_PKCS12_fp writes the contents of |p12| to |fp|. It returns one on
 // success and zero on error.
-OPENSSL_EXPORT int i2d_PKCS12_fp(FILE *fp, const PKCS12 *p12);
+OPENSSL_EXPORT int i2d_PKCS12_fp(FILE* fp, const PKCS12* p12);
 
 // PKCS12_parse calls |PKCS12_get_key_and_certs| on the ASN.1 data stored in
 // |p12|. The |out_pkey| and |out_cert| arguments must not be NULL and, on
@@ -180,9 +167,8 @@ OPENSSL_EXPORT int i2d_PKCS12_fp(FILE *fp, const PKCS12 *p12);
 // It returns one on success and zero on error.
 //
 // Use |PKCS12_get_key_and_certs| instead.
-OPENSSL_EXPORT int PKCS12_parse(const PKCS12 *p12, const char *password,
-                                EVP_PKEY **out_pkey, X509 **out_cert,
-                                STACK_OF(X509) **out_ca_certs);
+OPENSSL_EXPORT int PKCS12_parse(const PKCS12* p12, const char* password, EVP_PKEY** out_pkey, X509** out_cert,
+                                STACK_OF(X509) * *out_ca_certs);
 
 // PKCS12_verify_mac returns one if |password| is a valid password for |p12|
 // and zero otherwise. Since |PKCS12_parse| doesn't take a length parameter,
@@ -192,8 +178,7 @@ OPENSSL_EXPORT int PKCS12_parse(const PKCS12 *p12, const char *password,
 // |password[password_len]| must be zero and no other NUL bytes may appear in
 // |password|. If the |password_len| checks fail, zero is returned
 // immediately.
-OPENSSL_EXPORT int PKCS12_verify_mac(const PKCS12 *p12, const char *password,
-                                     int password_len);
+OPENSSL_EXPORT int PKCS12_verify_mac(const PKCS12* p12, const char* password, int password_len);
 
 // PKCS12_create returns a newly-allocated |PKCS12| object containing |pkey|,
 // |cert|, and |chain|, encrypted with the specified password. |name|, if not
@@ -206,18 +191,15 @@ OPENSSL_EXPORT int PKCS12_verify_mac(const PKCS12 *p12, const char *password,
 // Each of |key_nid|, |cert_nid|, |iterations|, and |mac_iterations| may be zero
 // to use defaults, which are |NID_pbe_WithSHA1And3_Key_TripleDES_CBC|,
 // |NID_pbe_WithSHA1And40BitRC2_CBC|, 2048, and one, respectively.
-OPENSSL_EXPORT PKCS12 *PKCS12_create(const char *password, const char *name,
-                                     const EVP_PKEY *pkey, X509 *cert,
-                                     const STACK_OF(X509) *chain, int key_nid,
-                                     int cert_nid, int iterations,
+OPENSSL_EXPORT PKCS12* PKCS12_create(const char* password, const char* name, const EVP_PKEY* pkey, X509* cert,
+                                     const STACK_OF(X509) * chain, int key_nid, int cert_nid, int iterations,
                                      int mac_iterations, int key_type);
 
 // PKCS12_free frees |p12| and its contents.
-OPENSSL_EXPORT void PKCS12_free(PKCS12 *p12);
-
+OPENSSL_EXPORT void PKCS12_free(PKCS12* p12);
 
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 
 extern "C++" {
 
@@ -228,7 +210,7 @@ BORINGSSL_MAKE_DELETER(PKCS8_PRIV_KEY_INFO, PKCS8_PRIV_KEY_INFO_free)
 
 BSSL_NAMESPACE_END
 
-}  // extern C++
+} // extern C++
 
 #endif
 
@@ -266,4 +248,4 @@ BSSL_NAMESPACE_END
 #define PKCS8_R_INVALID_CHARACTERS 131
 #define PKCS8_R_UNSUPPORTED_OPTIONS 132
 
-#endif  // OPENSSL_HEADER_PKCS8_H
+#endif // OPENSSL_HEADER_PKCS8_H

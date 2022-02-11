@@ -29,16 +29,20 @@ namespace android {
 
 class ResourceManager {
  public:
-  ResourceManager();
-  ResourceManager(const ResourceManager &) = delete;
-  ResourceManager &operator=(const ResourceManager &) = delete;
+  static ResourceManager* getInstance(){
+    static ResourceManager drmResourceManager_;
+    return &drmResourceManager_;
+  }
+
   int Init();
   DrmDevice *GetDrmDevice(int display);
   std::shared_ptr<Importer> GetImporter(int display);
   DrmConnector *AvailableWritebackConnector(int display);
+
   const std::vector<std::unique_ptr<DrmDevice>> &getDrmDevices() const {
     return drms_;
   }
+
   int getDisplayCount() const {
     return num_displays_;
   }
@@ -51,14 +55,19 @@ class ResourceManager {
       active_display_.erase(display);
   }
   uint32_t getActiveDisplayCnt() { return active_display_.size();}
+
   int assignPlaneGroup();
   int assignPlaneByPlaneMask(DrmDevice* drm, int active_display_num);
   int assignPlaneByRK3566(DrmDevice* drm, int active_display_num);
   int assignPlaneByHWC(DrmDevice* drm, int active_display_num);
+
   int getFb0Fd() { return fb0_fd;}
   int getSocId() { return soc_id_;}
-  DrmGralloc *getGralloc() { return drmGralloc_;}
+
  private:
+  ResourceManager();
+  ResourceManager(const ResourceManager &) = delete;
+  ResourceManager &operator=(const ResourceManager &) = delete;
   int AddDrmDevice(std::string path);
 
   int num_displays_;

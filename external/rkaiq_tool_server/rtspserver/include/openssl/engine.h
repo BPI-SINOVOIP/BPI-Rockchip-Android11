@@ -21,7 +21,6 @@
 extern "C" {
 #endif
 
-
 // Engines are collections of methods. Methods are tables of function pointers,
 // defined for certain algorithms, that allow operations on those algorithms to
 // be overridden via a callback. This can be used, for example, to implement an
@@ -32,17 +31,15 @@ extern "C" {
 // you wish before setting it on an |ENGINE|. Any functions pointers that
 // are NULL indicate that the default behaviour should be used.
 
-
 // Allocation and destruction.
 
 // ENGINE_new returns an empty ENGINE that uses the default method for all
 // algorithms.
-OPENSSL_EXPORT ENGINE *ENGINE_new(void);
+OPENSSL_EXPORT ENGINE* ENGINE_new(void);
 
 // ENGINE_free decrements the reference counts for all methods linked from
 // |engine| and frees |engine| itself. It returns one.
-OPENSSL_EXPORT int ENGINE_free(ENGINE *engine);
-
+OPENSSL_EXPORT int ENGINE_free(ENGINE* engine);
 
 // Method accessors.
 //
@@ -53,16 +50,11 @@ OPENSSL_EXPORT int ENGINE_free(ENGINE *engine);
 //
 // Set functions return one on success and zero on allocation failure.
 
-OPENSSL_EXPORT int ENGINE_set_RSA_method(ENGINE *engine,
-                                         const RSA_METHOD *method,
-                                         size_t method_size);
-OPENSSL_EXPORT RSA_METHOD *ENGINE_get_RSA_method(const ENGINE *engine);
+OPENSSL_EXPORT int ENGINE_set_RSA_method(ENGINE* engine, const RSA_METHOD* method, size_t method_size);
+OPENSSL_EXPORT RSA_METHOD* ENGINE_get_RSA_method(const ENGINE* engine);
 
-OPENSSL_EXPORT int ENGINE_set_ECDSA_method(ENGINE *engine,
-                                           const ECDSA_METHOD *method,
-                                           size_t method_size);
-OPENSSL_EXPORT ECDSA_METHOD *ENGINE_get_ECDSA_method(const ENGINE *engine);
-
+OPENSSL_EXPORT int ENGINE_set_ECDSA_method(ENGINE* engine, const ECDSA_METHOD* method, size_t method_size);
+OPENSSL_EXPORT ECDSA_METHOD* ENGINE_get_ECDSA_method(const ENGINE* engine);
 
 // Generic method functions.
 //
@@ -71,26 +63,24 @@ OPENSSL_EXPORT ECDSA_METHOD *ENGINE_get_ECDSA_method(const ENGINE *engine);
 
 // METHOD_ref increments the reference count of |method|. This is a no-op for
 // now because all methods are currently static.
-void METHOD_ref(void *method);
+void METHOD_ref(void* method);
 
 // METHOD_unref decrements the reference count of |method| and frees it if the
 // reference count drops to zero. This is a no-op for now because all methods
 // are currently static.
-void METHOD_unref(void *method);
-
+void METHOD_unref(void* method);
 
 // Private functions.
 
 // openssl_method_common_st contains the common part of all method structures.
 // This must be the first member of all method structures.
 struct openssl_method_common_st {
-  int references;  // dummy – not used.
-  char is_static;
+    int references; // dummy – not used.
+    char is_static;
 };
 
-
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 
 extern "C++" {
 
@@ -100,10 +90,10 @@ BORINGSSL_MAKE_DELETER(ENGINE, ENGINE_free)
 
 BSSL_NAMESPACE_END
 
-}  // extern C++
+} // extern C++
 
 #endif
 
 #define ENGINE_R_OPERATION_NOT_SUPPORTED 100
 
-#endif  // OPENSSL_HEADER_ENGINE_H
+#endif // OPENSSL_HEADER_ENGINE_H

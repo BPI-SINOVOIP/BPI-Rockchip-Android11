@@ -44,7 +44,7 @@ void QMediaBuffer::setBufferID(int id)
     mBufferID = id;
 }
 
-void QMediaBuffer::setPrivateData(void *data)
+void QMediaBuffer::setPrivateData(void* data)
 {
     mPrivateData = data;
 }

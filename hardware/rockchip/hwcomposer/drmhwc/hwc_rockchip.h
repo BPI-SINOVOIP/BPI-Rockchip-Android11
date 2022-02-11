@@ -61,9 +61,15 @@
 #endif
 
 #if DRM_DRIVER_VERSION == 2
+
 typedef struct hdr_output_metadata hdr_metadata_s;
+#ifdef ANDROID_S
+#define HDR_METADATA_EOTF_T(hdr_metadata) hdr_metadata.hdmi_metadata_type1.eotf
+#define HDR_METADATA_EOTF_P(hdr_metadata) hdr_metadata->hdmi_metadata_type1.eotf
+#else
 #define HDR_METADATA_EOTF_T(hdr_metadata) hdr_metadata.hdmi_metadata_type.eotf
 #define HDR_METADATA_EOTF_P(hdr_metadata) hdr_metadata->hdmi_metadata_type.eotf
+#endif // End of ANDROID_S
 #else
 typedef struct hdr_static_metadata hdr_metadata_s;
 #define HDR_METADATA_EOTF_T(hdr_metadata) hdr_metadata.eotf

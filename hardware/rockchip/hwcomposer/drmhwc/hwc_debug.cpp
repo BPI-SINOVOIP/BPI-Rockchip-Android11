@@ -304,12 +304,8 @@ int DumpLayerList(hwc_display_contents_1_t *dc, const gralloc_module_t *gralloc)
                 fwrite((const void *)cpu_addr,(size_t)(size),1,pfile);
                 fflush(pfile);
                 fclose(pfile);
-                ALOGD("dump surface layer_name: %s,data_name %s,w:%d,h:%d,stride :%d,size=%d,cpu_addr=%p",
-                    sf_layer->LayerName,data_name,width,height,byte_stride,size,cpu_addr);
             } else {
                 ALOGE("Open %s fail", data_name);
-                ALOGD("dump surface layer_name: %s,data_name %s,w:%d,h:%d,stride :%d,size=%d,cpu_addr=%p",
-                    sf_layer->LayerName,data_name,width,height,byte_stride,size,cpu_addr);
             }
 #if USE_GRALLOC_4
             gralloc4::unlock(sf_layer->handle);

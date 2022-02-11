@@ -25,6 +25,7 @@
 #include <linux/pm_runtime.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
+#include <soc/rockchip/rockchip_iommu.h>
 
 /** MMU register offsets */
 #define RK_MMU_DTE_ADDR		0x00	/* Directory table address */
@@ -121,11 +122,6 @@ struct rockchip_iommu_data {
 	u32 version;
 };
 
-/* list of clocks required by IOMMU */
-static const char * const rk_iommu_clocks[] = {
-	"aclk", "iface",
-};
-
 struct rk_iommu {
 	struct device *dev;
 	void __iomem **bases;
@@ -135,7 +131,6 @@ struct rk_iommu {
 	bool reset_disabled;
 	bool skip_read;      /* rk3126/rk3128 can't read vop iommu registers */
 	bool dlr_disable; /* avoid access iommu when runtime ops called */
-	bool fetch_dte_time_limit; /* if have fetch dte time limit */
 	bool cmd_retry;
 	struct iommu_device iommu;
 	struct list_head node; /* entry in rk_iommu_domain.iommus */
@@ -1264,6 +1259,20 @@ static void rk_iommu_disable(struct rk_iommu *iommu)
 	clk_bulk_disable(iommu->num_clocks, iommu->clocks);
 }
 
+int rockchip_iommu_disable(struct device *dev)
+{
+	struct rk_iommu *iommu;
+
+	iommu = rk_iommu_from_dev(dev);
+	if (!iommu)
+		return -ENODEV;
+
+	rk_iommu_disable(iommu);
+
+	return 0;
+}
+EXPORT_SYMBOL(rockchip_iommu_disable);
+
 /* Must be called with iommu powered on and attached */
 static int rk_iommu_enable(struct rk_iommu *iommu)
 {
@@ -1297,11 +1306,10 @@ static int rk_iommu_enable(struct rk_iommu *iommu)
 		rk_iommu_base_command(iommu->bases[i], RK_MMU_CMD_ZAP_CACHE);
 		rk_iommu_write(iommu->bases[i], RK_MMU_INT_MASK, RK_MMU_IRQ_MASK);
 
-		if (iommu->fetch_dte_time_limit) {
-			auto_gate = rk_iommu_read(iommu->bases[i], RK_MMU_AUTO_GATING);
-			auto_gate |= DISABLE_FETCH_DTE_TIME_LIMIT;
-			rk_iommu_write(iommu->bases[i], RK_MMU_AUTO_GATING, auto_gate);
-		}
+		/* Workaround for iommu blocked, BIT(31) default to 1 */
+		auto_gate = rk_iommu_read(iommu->bases[i], RK_MMU_AUTO_GATING);
+		auto_gate |= DISABLE_FETCH_DTE_TIME_LIMIT;
+		rk_iommu_write(iommu->bases[i], RK_MMU_AUTO_GATING, auto_gate);
 	}
 
 	ret = rk_iommu_enable_paging(iommu);
@@ -1312,6 +1320,18 @@ out_disable_clocks:
 	clk_bulk_disable(iommu->num_clocks, iommu->clocks);
 	return ret;
 }
+
+int rockchip_iommu_enable(struct device *dev)
+{
+	struct rk_iommu *iommu;
+
+	iommu = rk_iommu_from_dev(dev);
+	if (!iommu)
+		return -ENODEV;
+
+	return rk_iommu_enable(iommu);
+}
+EXPORT_SYMBOL(rockchip_iommu_enable);
 
 static void rk_iommu_detach_device(struct iommu_domain *domain,
 				   struct device *dev)
@@ -1734,51 +1754,22 @@ static int rk_iommu_probe(struct platform_device *pdev)
 					"rockchip,disable-device-link-resume");
 
 	if (of_machine_is_compatible("rockchip,rv1126") ||
-	    of_machine_is_compatible("rockchip,rv1109")) {
-		iommu->fetch_dte_time_limit = true;
+	    of_machine_is_compatible("rockchip,rv1109"))
 		iommu->cmd_retry = device_property_read_bool(dev,
 					"rockchip,enable-cmd-retry");
-	}
 
-	iommu->num_clocks = ARRAY_SIZE(rk_iommu_clocks);
-
-	/* RK1808 isp iommu has an extra sclk */
-	err = of_property_match_string(dev->of_node, "clock-names", "sclk");
-	if (err >= 0)
-		iommu->num_clocks++;
-
-	iommu->clocks = devm_kcalloc(iommu->dev, iommu->num_clocks,
-				     sizeof(*iommu->clocks), GFP_KERNEL);
-	if (!iommu->clocks)
-		return -ENOMEM;
-
-	for (i = 0; i < iommu->num_clocks; ++i) {
-		if (i == 2) {
-			iommu->clocks[i].id = "sclk";
-		} else {
-			err = of_property_match_string(dev->of_node,
-						       "clock-names",
-						       rk_iommu_clocks[i]);
-			if (err < 0) {
-				if (!strcmp(rk_iommu_clocks[i], "iface")) {
-					iommu->clocks[i].id = "hclk";
-					dev_warn(dev, "iommu hclk need to update to iface\n");
-				}
-			} else {
-				iommu->clocks[i].id = rk_iommu_clocks[i];
-			}
-		}
-	}
 	/*
 	 * iommu clocks should be present for all new devices and devicetrees
 	 * but there are older devicetrees without clocks out in the wild.
 	 * So clocks as optional for the time being.
 	 */
-	err = devm_clk_bulk_get(iommu->dev, iommu->num_clocks, iommu->clocks);
+	err = devm_clk_bulk_get_all(dev, &iommu->clocks);
 	if (err == -ENOENT)
 		iommu->num_clocks = 0;
-	else if (err)
+	else if (err < 0)
 		return err;
+	else
+		iommu->num_clocks = err;
 
 	err = clk_bulk_prepare(iommu->num_clocks, iommu->clocks);
 	if (err)

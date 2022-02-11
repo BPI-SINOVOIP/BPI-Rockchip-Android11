@@ -85,7 +85,7 @@ int board_select_fdt_index(ulong dt_table_hdr)
 #define BANANAPI_R2PRO_LCD1	2
 char *get_board_variant(void)
 {
-	int board_rev = 0;
+	int board_rev = 1;
 
 	switch(board_rev) {
 		case BANANAPI_R2PRO_HDMI:

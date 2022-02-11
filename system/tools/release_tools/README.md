@@ -42,3 +42,14 @@ release_tool -i manifest_20181119.1436.xml -b manifest_20181119.1436.xml -o mani
 ```
 ./restore_patches.sh [可选, 补丁包路径, 若不指定则默认为: SDK/PATCHES]
 ```
+
+### AOSP + Gerrit工具
+这两个脚本提供了新工程整合时的操作，注意，脚本依赖gitolite_tool，可以用cmake自行编译下
+- 检查xml中的project是否都在gerrit上创建过，如果没有创建，则创建，注意要删除kernel等无用的工程，以免浪费gerrit的空间
+```shell
+./create_gerrit_projects.sh /path/to/xml
+```
+- 检查上一步中去掉的gerrit上无用的工程，生成remove.xml，整合工程时include即可
+```shell
+./genernate_remove.sh /path/to/xml output.xml
+```

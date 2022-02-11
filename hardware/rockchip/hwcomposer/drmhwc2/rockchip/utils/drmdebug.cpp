@@ -84,5 +84,106 @@ bool LogLevel(LOG_LEVEL log_level){
 void IncFrameCnt() { g_frame++; }
 int GetFrameCnt(){ return g_frame;}
 
+int hwc_get_int_property(const char* pcProperty,const char* default_value)
+{
+    char value[PROPERTY_VALUE_MAX];
+    int new_value = 0;
+
+    if(pcProperty == NULL || default_value == NULL)
+    {
+        ALOGE("hwc_get_int_property: invalid param");
+        return -1;
+    }
+
+    property_get(pcProperty, value, default_value);
+    new_value = atoi(value);
+
+    return new_value;
+}
+
+bool hwc_get_bool_property(const char* pcProperty,const char* default_value)
+{
+    char value[PROPERTY_VALUE_MAX];
+    bool result = false;
+
+    if(pcProperty == NULL || default_value == NULL)
+    {
+        ALOGE("hwc_get_int_property: invalid param");
+        return -1;
+    }
+
+    property_get(pcProperty, value, default_value);
+    if(!strcmp(value,"true"))
+        result = true;
+    else
+        result = false;
+
+    return result;
+}
+
+
+int hwc_get_string_property(const char* pcProperty,const char* default_value,char* retult)
+{
+    if(pcProperty == NULL || default_value == NULL || retult == NULL)
+    {
+        ALOGE("hwc_get_string_property: invalid param");
+        return -1;
+    }
+    property_get(pcProperty, retult, default_value);
+
+    return 0;
+}
+
+bool isRK356x(uint32_t soc_id){
+  switch(soc_id){
+    case 0x3566:
+    case 0x3566a:
+    case 0x3568:
+    case 0x3568a:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool isRK3566(uint32_t soc_id){
+  switch(soc_id){
+    case 0x3566:
+    case 0x3566a:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool isRK3399(uint32_t soc_id){
+  switch(soc_id){
+    case 0x3399:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool isRK3588(uint32_t soc_id){
+  switch(soc_id){
+    case 0x3588:
+      return true;
+    default:
+      return false;
+  }
+}
+
+bool isDrmVerison44(uint32_t drm_version){
+  return drm_version == 1;
+}
+bool isDrmVerison419(uint32_t drm_version){
+  return drm_version == 2;
+}
+bool isDrmVerison510(uint32_t drm_version){
+  return drm_version == 3;
+}
+
+
 }
 

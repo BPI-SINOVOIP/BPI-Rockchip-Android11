@@ -63,7 +63,7 @@ class DrmConnector {
   int UpdateDisplayMode(int display_id, int update_base_timeline);
   int UpdateBCSH(int display_id, int update_base_timeline);
   int UpdateOutputFormat(int display_id, int update_base_timeline);
-  int UpdateOverscan();
+  int UpdateOverscan(int display_id, char *overscan_value);
   int SetDisplayModeInfo(int display_id);
   bool ParseHdmiOutputFormat(char* strprop, output_format *format, output_depth *depth);
   void ResetModesReady(){ bModeReady_ = false;};

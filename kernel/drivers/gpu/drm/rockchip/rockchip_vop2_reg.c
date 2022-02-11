@@ -7,6 +7,7 @@
 #include <drm/drmP.h>
 #include <linux/kernel.h>
 #include <linux/component.h>
+#include <dt-bindings/display/rockchip_vop.h>
 
 #include "rockchip_drm_vop.h"
 #include "rockchip_vop_reg.h"
@@ -1006,7 +1007,7 @@ static const struct vop2_win_regs rk3568_esmart_win_data = {
 static const struct vop2_win_data rk3568_vop_win_data[] = {
 	{
 	  .name = "Smart0-win0",
-	  .phys_id = 4,
+	  .phys_id = ROCKCHIP_VOP2_SMART0,
 	  .base = 0x400,
 	  .formats = formats_win_lite,
 	  .nformats = ARRAY_SIZE(formats_win_lite),
@@ -1029,7 +1030,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Smart1-win0",
-	  .phys_id = 5,
+	  .phys_id = ROCKCHIP_VOP2_SMART1,
 	  .formats = formats_win_lite,
 	  .nformats = ARRAY_SIZE(formats_win_lite),
 	  .format_modifiers = format_modifiers,
@@ -1052,7 +1053,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Esmart1-win0",
-	  .phys_id = 3,
+	  .phys_id = ROCKCHIP_VOP2_ESMART1,
 	  .formats = formats_win_full_10bit_yuyv,
 	  .nformats = ARRAY_SIZE(formats_win_full_10bit_yuyv),
 	  .format_modifiers = format_modifiers,
@@ -1075,7 +1076,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Esmart0-win0",
-	  .phys_id = 2,
+	  .phys_id = ROCKCHIP_VOP2_ESMART0,
 	  .formats = formats_win_full_10bit_yuyv,
 	  .nformats = ARRAY_SIZE(formats_win_full_10bit_yuyv),
 	  .format_modifiers = format_modifiers,
@@ -1098,7 +1099,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Cluster0-win0",
-	  .phys_id = 0,
+	  .phys_id = ROCKCHIP_VOP2_CLUSTER0,
 	  .base = 0x00,
 	  .formats = formats_win_full_10bit,
 	  .nformats = ARRAY_SIZE(formats_win_full_10bit),
@@ -1120,7 +1121,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Cluster0-win1",
-	  .phys_id = 0,
+	  .phys_id = ROCKCHIP_VOP2_CLUSTER0,
 	  .base = 0x80,
 	  .layer_sel_id = -1,
 	  .formats = formats_win_full_10bit,
@@ -1140,7 +1141,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Cluster1-win0",
-	  .phys_id = 1,
+	  .phys_id = ROCKCHIP_VOP2_CLUSTER1,
 	  .base = 0x00,
 	  .formats = formats_win_full_10bit,
 	  .nformats = ARRAY_SIZE(formats_win_full_10bit),
@@ -1162,7 +1163,7 @@ static const struct vop2_win_data rk3568_vop_win_data[] = {
 
 	{
 	  .name = "Cluster1-win1",
-	  .phys_id = 1,
+	  .phys_id = ROCKCHIP_VOP2_CLUSTER1,
 	  .layer_sel_id = -1,
 	  .formats = formats_win_full_10bit,
 	  .nformats = ARRAY_SIZE(formats_win_full_10bit),
@@ -1235,12 +1236,12 @@ static const struct vop2_ctrl rk3568_vop_ctrl = {
 	.edp_dclk_pol = VOP_REG(RK3568_DSP_IF_POL, 0x1, 15),
 	.mipi_pin_pol = VOP_REG(RK3568_DSP_IF_POL, 0x7, 16),
 	.mipi_dclk_pol = VOP_REG(RK3568_DSP_IF_POL, 0x1, 19),
-	.win_vp_id[0] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 16),
-	.win_vp_id[1] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 18),
-	.win_vp_id[2] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 24),
-	.win_vp_id[3] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 26),
-	.win_vp_id[4] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 28),
-	.win_vp_id[5] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 30),
+	.win_vp_id[ROCKCHIP_VOP2_CLUSTER0] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 16),
+	.win_vp_id[ROCKCHIP_VOP2_CLUSTER1] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 18),
+	.win_vp_id[ROCKCHIP_VOP2_ESMART0] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 24),
+	.win_vp_id[ROCKCHIP_VOP2_ESMART1] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 26),
+	.win_vp_id[ROCKCHIP_VOP2_SMART0] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 28),
+	.win_vp_id[ROCKCHIP_VOP2_SMART1] = VOP_REG(RK3568_OVL_PORT_SEL, 0x3, 30),
 	.win_dly[0] = VOP_REG(RK3568_CLUSTER_DLY_NUM, 0xffff, 0),
 	.win_dly[1] = VOP_REG(RK3568_CLUSTER_DLY_NUM, 0xffff, 16),
 	.win_dly[2] = VOP_REG(RK3568_SMART_DLY_NUM, 0xff, 0),

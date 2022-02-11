@@ -121,6 +121,9 @@ typedef struct rk_aiq_awb_stat_cfg_v201_s {
     rk_aiq_awb_xy_type_v201_t xyRangeTypeForBlkStatistics; //used when blkMeasureMode>BLK_MEASURE_MODE_ALL
     rk_aiq_awb_blk_stat_realwp_ill_e illIdxForBlkStatistics; //blkMeasureMode used when blkMeasureMode>BLK_MEASURE_MODE_ALL
     bool blkStatisticsWithLumaWeightEn;
+    int  groupIllIndxCurrent;//for time share
+    int  IllIndxSetCurrent[RK_AIQ_AWB_MAX_WHITEREGIONS_NUM];//for time share
+    char timeSign[64];
 } rk_aiq_awb_stat_cfg_v201_t;
 
 //typedef struct stat3a_lightType_s

@@ -4,7 +4,8 @@ HwJpeg 库用于支持 Rockchip 平台 JPEG 硬编解码，是平台 MPP（Media
 类封装了硬解码相关操作，用于支持图片或 MJPEG 码流解码。
 
 工程包含主要目录：
-- mpi：HwJpeg 库实现代码
+- inc：HwJpeg 库头文件
+- src：HwJpeg 库实现代码
 - test：HwJpeg 测试实例
 
 > 工程代码使用 mk 文件组织，在 Android SDK 环境下直接编译使用即可。
@@ -19,18 +20,20 @@ MpiJpegDecoder 类是平台 JPEG 硬解码的封装，支持输入 JPG 图片及
 decodePacket & decodeFile 为同步解码方式，同步解码方式使用简单，阻塞等待解码输出，
 OutputFrame_t 为解码输出封装，包含输出帧宽、高、物理地址、虚拟地址等信息。
 
-- decode_sendpacket(char* input_buf, size_t buf_len);
-- decode_getoutframe(OutputFrame_t *aframeOut);
+- sendpacket(char* input_buf, size_t buf_len);
+- getoutframe(OutputFrame_t *aframeOut);
 
-decode_sendpacket & decode_getoutframe 用于配合实现异步解码输出，应用端处理开启两个线程，一
-个线程送输入 decode_sendpacket，另一个线程异步取输出 decode_getoutframe。
+sendpacket & getoutframe 用于配合实现异步解码输出，应用端处理开启两个线程，一
+个线程送输入 sendpacket，另一个线程异步取输出 getoutframe。
 
 **Note:**
 1. HwJpeg 解码默认输出 RAW NV12 数据
 2. 平台硬解码器只处理对齐过的 buffer，因此 MpiJpegDecoder 输出的 YUV buffer 经过 16 位对齐。
-如果原始宽高非 16 位对齐，直接显示可能出现底部绿边等问题，MpiJpegDecoder 实现代码中 OUTPUT_CROP
-宏用于实现 OutFrame 的裁剪操作，可手动开启，也可以外部获取 OutFrame 句柄再进行相应的裁剪。
-3. OutFrame buffer 在解码库内部循环使用，在解码显示完成之后使用 deinitOutputFrame 释放内存
+如果原始宽高非 16 位对齐，直接显示可能出现底部绿边等问题，MpiJpegDecoder 实现代码中 mOutputCrop
+用于实现 OutFrame 的裁剪操作，可手动开启，也可以外部获取 OutFrame 句柄再进行相应的裁剪。
+3. OutFrame buffer 在解码库内部循环使用，在解码显示完成之后使用 deinitOutputFrame 释放内存。
+4. 默认情况下，输出 buffer 使用内部申请的 buffer 轮转池，但是也允许外部传递 dma buffer fd 用作
+解码输出，额外传递的 dma buffer fd 由 decodePacket 函数参数 OutputFrame_t->outputPhyAddr 传入。
 
 解码使用示例：
 ```
@@ -63,7 +66,7 @@ MpiJpegEncoder 类是平台 JPEG 硬编码的封装，目前主要有三类接�
 encodeFrame & encodeFile 为同步阻塞编码方式，OutputPacket_t 为编码输出封装，
 包含输出数据的内存地址信息。
 
-- encode(EncInInfo *inInfo, OutputPacket_t *outPkt);
+- encode(EncInInfo *aInInfo, EncOutInfo *aOutInfo);
 
 encode 输入数据类型为文件 fd，是为 cameraHal 设计的一套编码方式，输出 JPEG 图片
 包含编码缩略图、APP1 EXIF 头信息等。

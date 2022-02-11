@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 include device/rockchip/rk3326/BoardConfig.mk
-BUILD_WITH_GO_OPT := true
+BUILD_WITH_GO_OPT := false
 
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv8-a
@@ -24,4 +24,21 @@ TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_SMP := true
 
 PRODUCT_UBOOT_CONFIG := px30
-PRODUCT_KERNEL_DTS := px30-evb-ddr3-v10-avb
+PRODUCT_KERNEL_DTS := px30-evb-ddr3-v11-avb
+# AB image definition
+BOARD_USES_AB_IMAGE := false
+BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := false
+
+ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
+    include device/rockchip/common/BoardConfig_AB.mk
+    TARGET_RECOVERY_FSTAB := device/rockchip/rk3326/rk3326_r/recovery.fstab_AB
+endif
+
+# Allow deprecated BUILD_ module types to get DDK building
+BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+BUILD_BROKEN_USES_BUILD_HOST_EXECUTABLE := true
+BUILD_BROKEN_USES_BUILD_HOST_SHARED_LIBRARY := true
+BUILD_BROKEN_USES_BUILD_HOST_STATIC_LIBRARY := true
+
+#for external camera
+BOARD_CAMERA_SUPPORT_EXT := true

@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 include device/rockchip/rk356x/BoardConfig.mk
-BUILD_WITH_GO_OPT := true
 
 DONT_UNCOMPRESS_PRIV_APPS_DEXS := false
 
@@ -38,16 +37,5 @@ BOARD_CAMERA_SUPPORT_EXT := true
 #Config RK EBOOK
 BUILD_WITH_RK_EBOOK := true
 SF_PRIMARY_DISPLAY_ORIENTATION := 270
-
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv8-2a
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-
-TARGET_2ND_ARCH :=
-TARGET_2ND_ARCH_VARIANT :=
-TARGET_2ND_CPU_ABI :=
-TARGET_2ND_CPU_ABI2 :=
-TARGET_2ND_CPU_VARIANT :=
 
 PRODUCT_HAVE_OPTEE := false

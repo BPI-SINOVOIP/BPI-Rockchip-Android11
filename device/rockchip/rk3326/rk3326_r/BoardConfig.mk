@@ -23,7 +23,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a53
 TARGET_CPU_SMP := true
 
-PRODUCT_KERNEL_DTS := rk3326-863-lp3-v10-rkisp1
+PRODUCT_KERNEL_DTS := rk3326-evb-lp3-v10-avb
 # AB image definition
 BOARD_USES_AB_IMAGE := false
 BOARD_ROCKCHIP_VIRTUAL_AB_ENABLE := false

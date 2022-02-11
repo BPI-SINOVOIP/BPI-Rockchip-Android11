@@ -44,7 +44,7 @@ PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0 \
-    ro.product.ota.host = www.rockchip.com:2300 \
+    ro.product.ota.host = 192.168.1.1:8888 \
     ro.sf.lcd_density=280
 
 PRODUCT_HAVE_OPTEE := true

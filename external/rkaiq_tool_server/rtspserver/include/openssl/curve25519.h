@@ -21,11 +21,9 @@
 extern "C" {
 #endif
 
-
 // Curve25519.
 //
 // Curve25519 is an elliptic curve. See https://tools.ietf.org/html/rfc7748.
-
 
 // X25519.
 //
@@ -39,8 +37,7 @@ extern "C" {
 
 // X25519_keypair sets |out_public_value| and |out_private_key| to a freshly
 // generated, public–private key pair.
-OPENSSL_EXPORT void X25519_keypair(uint8_t out_public_value[32],
-                                   uint8_t out_private_key[32]);
+OPENSSL_EXPORT void X25519_keypair(uint8_t out_public_value[32], uint8_t out_private_key[32]);
 
 // X25519 writes a shared key to |out_shared_key| that is calculated from the
 // given private key and the peer's public value. It returns one on success and
@@ -48,15 +45,12 @@ OPENSSL_EXPORT void X25519_keypair(uint8_t out_public_value[32],
 //
 // Don't use the shared key directly, rather use a KDF and also include the two
 // public values as inputs.
-OPENSSL_EXPORT int X25519(uint8_t out_shared_key[32],
-                          const uint8_t private_key[32],
+OPENSSL_EXPORT int X25519(uint8_t out_shared_key[32], const uint8_t private_key[32],
                           const uint8_t peer_public_value[32]);
 
 // X25519_public_from_private calculates a Diffie-Hellman public value from the
 // given private key and writes it to |out_public_value|.
-OPENSSL_EXPORT void X25519_public_from_private(uint8_t out_public_value[32],
-                                               const uint8_t private_key[32]);
-
+OPENSSL_EXPORT void X25519_public_from_private(uint8_t out_public_value[32], const uint8_t private_key[32]);
 
 // Ed25519.
 //
@@ -74,21 +68,18 @@ OPENSSL_EXPORT void X25519_public_from_private(uint8_t out_public_value[32],
 
 // ED25519_keypair sets |out_public_key| and |out_private_key| to a freshly
 // generated, public–private key pair.
-OPENSSL_EXPORT void ED25519_keypair(uint8_t out_public_key[32],
-                                    uint8_t out_private_key[64]);
+OPENSSL_EXPORT void ED25519_keypair(uint8_t out_public_key[32], uint8_t out_private_key[64]);
 
 // ED25519_sign sets |out_sig| to be a signature of |message_len| bytes from
 // |message| using |private_key|. It returns one on success or zero on
 // allocation failure.
-OPENSSL_EXPORT int ED25519_sign(uint8_t out_sig[64], const uint8_t *message,
-                                size_t message_len,
+OPENSSL_EXPORT int ED25519_sign(uint8_t out_sig[64], const uint8_t* message, size_t message_len,
                                 const uint8_t private_key[64]);
 
 // ED25519_verify returns one iff |signature| is a valid signature, by
 // |public_key| of |message_len| bytes from |message|. It returns zero
 // otherwise.
-OPENSSL_EXPORT int ED25519_verify(const uint8_t *message, size_t message_len,
-                                  const uint8_t signature[64],
+OPENSSL_EXPORT int ED25519_verify(const uint8_t* message, size_t message_len, const uint8_t signature[64],
                                   const uint8_t public_key[32]);
 
 // ED25519_keypair_from_seed calculates a public and private key from an
@@ -96,10 +87,8 @@ OPENSSL_EXPORT int ED25519_verify(const uint8_t *message, size_t message_len,
 // happen to be the first 32 bytes of a private key) so this function is for
 // interoperating with systems that may store just a seed instead of a full
 // private key.
-OPENSSL_EXPORT void ED25519_keypair_from_seed(uint8_t out_public_key[32],
-                                              uint8_t out_private_key[64],
+OPENSSL_EXPORT void ED25519_keypair_from_seed(uint8_t out_public_key[32], uint8_t out_private_key[64],
                                               const uint8_t seed[32]);
-
 
 // SPAKE2.
 //
@@ -113,9 +102,10 @@ OPENSSL_EXPORT void ED25519_keypair_from_seed(uint8_t out_public_key[32],
 // spake2_role_t enumerates the different “roles” in SPAKE2. The protocol
 // requires that the symmetry of the two parties be broken so one participant
 // must be “Alice” and the other be “Bob”.
-enum spake2_role_t {
-  spake2_role_alice,
-  spake2_role_bob,
+enum spake2_role_t
+{
+    spake2_role_alice,
+    spake2_role_bob,
 };
 
 // SPAKE2_CTX_new creates a new |SPAKE2_CTX| (which can only be used for a
@@ -127,13 +117,11 @@ enum spake2_role_t {
 // bound into the protocol. For example MAC addresses, hostnames, usernames
 // etc. These values are not exposed and can avoid context-confusion attacks
 // when a password is shared between several devices.
-OPENSSL_EXPORT SPAKE2_CTX *SPAKE2_CTX_new(
-    enum spake2_role_t my_role,
-    const uint8_t *my_name, size_t my_name_len,
-    const uint8_t *their_name, size_t their_name_len);
+OPENSSL_EXPORT SPAKE2_CTX* SPAKE2_CTX_new(enum spake2_role_t my_role, const uint8_t* my_name, size_t my_name_len,
+                                          const uint8_t* their_name, size_t their_name_len);
 
 // SPAKE2_CTX_free frees |ctx| and all the resources that it has allocated.
-OPENSSL_EXPORT void SPAKE2_CTX_free(SPAKE2_CTX *ctx);
+OPENSSL_EXPORT void SPAKE2_CTX_free(SPAKE2_CTX* ctx);
 
 // SPAKE2_MAX_MSG_SIZE is the maximum size of a SPAKE2 message.
 #define SPAKE2_MAX_MSG_SIZE 32
@@ -147,10 +135,8 @@ OPENSSL_EXPORT void SPAKE2_CTX_free(SPAKE2_CTX *ctx);
 // This function can only be called once for a given |SPAKE2_CTX|.
 //
 // It returns one on success and zero on error.
-OPENSSL_EXPORT int SPAKE2_generate_msg(SPAKE2_CTX *ctx, uint8_t *out,
-                                       size_t *out_len, size_t max_out_len,
-                                       const uint8_t *password,
-                                       size_t password_len);
+OPENSSL_EXPORT int SPAKE2_generate_msg(SPAKE2_CTX* ctx, uint8_t* out, size_t* out_len, size_t max_out_len,
+                                       const uint8_t* password, size_t password_len);
 
 // SPAKE2_MAX_KEY_SIZE is the maximum amount of key material that SPAKE2 will
 // produce.
@@ -176,15 +162,11 @@ OPENSSL_EXPORT int SPAKE2_generate_msg(SPAKE2_CTX *ctx, uint8_t *out,
 // |SPAKE2_CTX_free| is the only acceptable operation on it.
 //
 // Returns one on success or zero on error.
-OPENSSL_EXPORT int SPAKE2_process_msg(SPAKE2_CTX *ctx, uint8_t *out_key,
-                                      size_t *out_key_len,
-                                      size_t max_out_key_len,
-                                      const uint8_t *their_msg,
-                                      size_t their_msg_len);
-
+OPENSSL_EXPORT int SPAKE2_process_msg(SPAKE2_CTX* ctx, uint8_t* out_key, size_t* out_key_len, size_t max_out_key_len,
+                                      const uint8_t* their_msg, size_t their_msg_len);
 
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 
 extern "C++" {
 
@@ -194,8 +176,8 @@ BORINGSSL_MAKE_DELETER(SPAKE2_CTX, SPAKE2_CTX_free)
 
 BSSL_NAMESPACE_END
 
-}  // extern C++
+} // extern C++
 
 #endif
 
-#endif  // OPENSSL_HEADER_CURVE25519_H
+#endif // OPENSSL_HEADER_CURVE25519_H

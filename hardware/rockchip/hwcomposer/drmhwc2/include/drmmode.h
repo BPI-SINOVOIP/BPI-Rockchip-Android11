@@ -82,6 +82,7 @@ class DrmMode {
   uint32_t flags() const;
   uint32_t interlaced() const;
   uint32_t type() const;
+  bool is_8k_mode() const;
 
   std::string name() const;
 

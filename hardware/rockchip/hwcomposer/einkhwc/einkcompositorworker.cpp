@@ -51,13 +51,14 @@
 #include <sched.h>
 #include <libsync/sw_sync.h>
 #include <android/sync.h>
-
+#include "libcfa/libcfa.h"
+#include "libregal/libeink.h"
 
 namespace android {
 
 static const int kMaxQueueDepth = 1;
 static const int kAcquireWaitTimeoutMs = 3000;
-
+static int last_regal = 0;
 EinkCompositorWorker::EinkCompositorWorker()
     : Worker("Eink-compositor", HAL_PRIORITY_URGENT_DISPLAY),
       timeline_fd_(-1),
@@ -77,6 +78,11 @@ EinkCompositorWorker::~EinkCompositorWorker() {
     close(ebc_fd);
     ebc_fd = -1;
   }
+  munmap(waveform_base, 0x100000);
+  if (waveform_fd > 0) {
+    close(waveform_fd);
+    waveform_fd = -1;
+  }
   if(rga_output_addr != NULL){
     //Get virtual address
     const gralloc_module_t *gralloc;
@@ -93,8 +99,22 @@ EinkCompositorWorker::~EinkCompositorWorker() {
   }
   if (gray256_new_buffer != NULL)
     free(gray256_new_buffer);
-  if (rgba_new_buffer != NULL)
-    free(rgba_new_buffer);
+
+  if (gray256_old_buffer != NULL)
+    free(gray256_old_buffer);
+}
+
+const char *pvi_wf_get_version(const char *waveform)
+{
+	static char spi_id_buffer[32];
+	int i;
+
+	for (i = 0; i < 31; i++)
+		spi_id_buffer[i] = waveform[i + 0x41];
+
+	spi_id_buffer[31] = '\0';
+
+	return (const char *)spi_id_buffer;
 }
 
 int EinkCompositorWorker::Init(struct hwc_context_t *ctx) {
@@ -127,6 +147,8 @@ int EinkCompositorWorker::Init(struct hwc_context_t *ctx) {
       return -1;
   }
 
+  snprintf(commit_buf_info.tid_name, 16, "hwc_compose");
+
   if(ioctl(ebc_fd, EBC_GET_BUFFER,&commit_buf_info)!=0)
   {
      ALOGE("EBC_GET_BUFFER failed\n");
@@ -138,8 +160,35 @@ int EinkCompositorWorker::Init(struct hwc_context_t *ctx) {
   gray16_buffer = (int*)(vaddr_real + commit_buf_info.offset);
 
   gray256_new_buffer = (int *)malloc(ebc_buf_info.width * ebc_buf_info.height);
-  rgba_new_buffer = (int *)malloc(ebc_buf_info.width * ebc_buf_info.height * 4);
+  gray256_old_buffer = (int *)malloc(ebc_buf_info.width * ebc_buf_info.height);
+  memset(gray256_old_buffer, 0xff, ebc_buf_info.width * ebc_buf_info.height);
+  memset(gray256_new_buffer, 0xff, ebc_buf_info.width * ebc_buf_info.height);
 
+  //init waveform for eink regal mode
+  waveform_fd = open("/dev/waveform", O_RDWR,0);
+  if (waveform_fd < 0) {
+      ALOGE("open /dev/waveform failed\n");
+      goto OUT;
+  }
+  waveform_base = mmap(0, 0x100000, PROT_READ|PROT_WRITE, MAP_SHARED, waveform_fd, 0);
+  if (waveform_base == MAP_FAILED) {
+      ALOGE("Error mapping the waveform buffer (%s)\n", strerror(errno));
+      close(waveform_fd);
+      waveform_fd = -1;
+      goto OUT;
+  }
+
+  ALOGD("waveform version: %s\n", pvi_wf_get_version((char *)waveform_base));
+  ret = EInk_Init((char *)waveform_base);
+  if (ret) {
+      ALOGE("EInk_Init error, ret = %d\n", ret);
+      close(waveform_fd);
+      waveform_fd = -1;
+      goto OUT;
+  }
+  ALOGD("eink regal lib init success\n");
+
+OUT:
   return InitWorker();
 }
 
@@ -352,17 +401,10 @@ int EinkCompositorWorker::Rgba8888ClipRgba(DrmRgaBuffer &rgaBuffer,const buffer_
     src_t = 0;
     dst_l = 0;
     dst_t = 0;
-    if (ebc_buf_info.panel_color == 2) {
-      src_w = ebc_buf_info.width - (ebc_buf_info.width % 8);
-      src_h = ebc_buf_info.height - (ebc_buf_info.height % 2);
-      dst_w = ebc_buf_info.width - (ebc_buf_info.width % 8);
-      dst_h = ebc_buf_info.height - (ebc_buf_info.height % 2);
-    }else {
-      src_w = ebc_buf_info.width - (ebc_buf_info.width % 8);
-      src_h = ebc_buf_info.height - (ebc_buf_info.height % 2);
-      dst_w = ebc_buf_info.width - (ebc_buf_info.width % 8);
-      dst_h = ebc_buf_info.height - (ebc_buf_info.height % 2);
-    }
+    src_w = ebc_buf_info.width - (ebc_buf_info.width % 8);
+    src_h = ebc_buf_info.height - (ebc_buf_info.height % 2);
+    dst_w = ebc_buf_info.width - (ebc_buf_info.width % 8);
+    dst_h = ebc_buf_info.height - (ebc_buf_info.height % 2);
 
     if(dst_w < 0 || dst_h <0 )
       ALOGE("RGA invalid dst_w=%d,dst_h=%d",dst_w,dst_h);
@@ -428,8 +470,13 @@ int EinkCompositorWorker::Rgba888ToGray16ByRga(int *output_buffer, const buffer_
     src_buf_format = hwc_get_handle_format(fb_handle);
 #endif
 
-    hwc_lock(fb_handle, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
+    src_vir = NULL;
+    ret = hwc_lock(fb_handle, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
                   0, 0, src_buf_w, src_buf_h, (void **)&src_vir);
+    if(ret || src_vir == NULL){
+      ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", src_vir, ret);
+      return ret;
+    }
 
     src_l = 0;
     src_t = 0;
@@ -469,16 +516,20 @@ int EinkCompositorWorker::Rgba888ToGray16ByRga(int *output_buffer, const buffer_
 		dst.dither.mode = 0;
 
     //A2,DU only support two greys(f,0), DU4 support greys(f,a,5,0), others support 16 greys
-    uint64_t contrast_key =0;
-    if ((epd_mode == EPD_A2) || (epd_mode == EPD_DU)) {
+    uint64_t contrast_key =0xfedcba9876543210;
+    if ((epd_mode == EPD_A2) || (epd_mode == EPD_DU) || (epd_mode == EPD_AUTO_DU)) {
         contrast_key = 0xffffff0000000000;
-    } else if (epd_mode == EPD_DU4) {
+    } else if ((epd_mode == EPD_DU4) || (epd_mode == EPD_AUTO_DU4)) {
         contrast_key = 0xfffffaaa55500000;
-    } else {
+    }
+//使用新的对比度调节方法debug.sf.gamma.gamma，不再使用persist.vendor.hwc.contrast_key属性
+/*
+    else {
         char value[PROPERTY_VALUE_MAX];
         property_get("persist.vendor.hwc.contrast_key",value,"0xffccba9876540000");
         sscanf(value,"%" PRIx64,&contrast_key);
     }
+*/
     dst.dither.lut0_l = (contrast_key & 0xffff);
     dst.dither.lut0_h = (contrast_key & 0xffff0000) >> 16;
     dst.dither.lut1_l = (contrast_key & 0xffff00000000) >> 32;
@@ -696,6 +747,7 @@ int EinkCompositorWorker::PostEink(int *buffer, Rect rect, int mode){
   commit_buf_info.win_y1 = rect.top;
   commit_buf_info.win_y2 = rect.bottom;
   commit_buf_info.epd_mode = mode;
+  commit_buf_info.needpic = 16;
 
   ALOGD_IF(log_level(DBG_DEBUG),"%s, line = %d ,mode = %d, (x1,x2,y1,y2) = (%d,%d,%d,%d) ",
             __FUNCTION__,__LINE__,mode,commit_buf_info.win_x1,commit_buf_info.win_x2,
@@ -729,6 +781,7 @@ int EinkCompositorWorker::PostEinkY8(int *buffer, Rect rect, int mode){
   commit_buf_info.win_y1 = rect.top;
   commit_buf_info.win_y2 = rect.bottom;
   commit_buf_info.epd_mode = mode;
+  commit_buf_info.needpic = 32;
 
   ALOGD_IF(log_level(DBG_DEBUG),"%s, line = %d ,mode = %d, (x1,x2,y1,y2) = (%d,%d,%d,%d) ",
             __FUNCTION__,__LINE__,mode,commit_buf_info.win_x1,commit_buf_info.win_x2,
@@ -749,7 +802,6 @@ int EinkCompositorWorker::PostEinkY8(int *buffer, Rect rect, int mode){
 
   unsigned long vaddr_real = intptr_t(ebc_buffer_base);
   gray16_buffer = (int*)(vaddr_real + commit_buf_info.offset);
-
 
   return 0;
 }
@@ -800,8 +852,13 @@ int EinkCompositorWorker::ConvertToColorEink2(const buffer_handle_t &fb_handle){
     return ret;
   }
 
-  hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
+  framebuffer_base = NULL;
+  ret = hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
                 0, 0, width, height, (void **)&framebuffer_base);
+  if(ret || framebuffer_base == NULL){
+    ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", framebuffer_base, ret);
+    return ret;
+  }
 
   if(output_format == HAL_PIXEL_FORMAT_RGBA_8888)
     Rgb888_to_color_eink2((char*)gray16_buffer,(int*)(framebuffer_base),height,width,ebc_buf_info.width);
@@ -815,6 +872,7 @@ int EinkCompositorWorker::ConvertToColorEink2(const buffer_handle_t &fb_handle){
 
   return 0;
 }
+
 int EinkCompositorWorker::ConvertToColorEink1(const buffer_handle_t &fb_handle){
 
   ALOGD_IF(log_level(DBG_DEBUG), "%s", __FUNCTION__);
@@ -823,10 +881,12 @@ int EinkCompositorWorker::ConvertToColorEink1(const buffer_handle_t &fb_handle){
 
   char* framebuffer_base = NULL;
   int framebuffer_wdith, framebuffer_height, output_format, ret;
+
+  output_format = hwc_get_handle_attibute(fb_handle,ATT_FORMAT);
+
   if (ebc_buf_info.panel_color == 1) {
     framebuffer_wdith = ebc_buf_info.width - (ebc_buf_info.width % 8);
     framebuffer_height = ebc_buf_info.height - (ebc_buf_info.height % 2);
-    output_format = HAL_PIXEL_FORMAT_RGBA_8888;
   } else{
     return -1;
   }
@@ -855,23 +915,47 @@ int EinkCompositorWorker::ConvertToColorEink1(const buffer_handle_t &fb_handle){
     return ret;
   }
 
-  hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
+  framebuffer_base = NULL;
+  ret = hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
                 0, 0, width, height, (void **)&framebuffer_base);
-
-  if(rga_output_addr != NULL){
-    hwc_unlock(src_hnd);
-    rga_output_addr = NULL;
+  if(ret || framebuffer_base == NULL){
+    ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", framebuffer_base, ret);
+    return ret;
   }
+
+  if(output_format == HAL_PIXEL_FORMAT_RGBA_8888) {
+    image_to_cfa_grayscale_gen2_ARGBB8888(width, height, (unsigned char *)framebuffer_base, (unsigned char *)gray256_new_buffer);
+    gray256_to_gray16_dither((char *)gray256_new_buffer, gray16_buffer, height, width, ebc_buf_info.width);
+  }
+  if(framebuffer_base != NULL){
+    hwc_unlock(src_hnd);
+    framebuffer_base = NULL;
+  }
+
   return 0;
 }
 
-int EinkCompositorWorker::ConvertToY8(const buffer_handle_t &fb_handle) {
+static void do_gray256_buffer(uint32_t *buffer_in, uint32_t *buffer_out, int width, int height)
+{
+	uint32_t src_data;
+	uint32_t *src = buffer_in;
+	uint32_t *dst = buffer_out;
+
+	for(int i = 0; i < height; i++) {
+		for(int j = 0; j< width/4; j++) {
+			src_data = *src++;
+			src_data &= 0xf0f0f0f0;
+			*dst++ = src_data;
+		}
+	}
+}
+
+int EinkCompositorWorker::InToOrOutY8Regal(const buffer_handle_t &fb_handle) {
 
   DumpLayer("rgba", fb_handle);
 
   ALOGD_IF(log_level(DBG_DEBUG), "%s", __FUNCTION__);
 
-  char *gray256_addr = NULL;
   int framebuffer_wdith, framebuffer_height, output_format, ret;
   framebuffer_wdith = ebc_buf_info.width - (ebc_buf_info.width % 8);
   framebuffer_height = ebc_buf_info.height - (ebc_buf_info.height % 2);
@@ -899,10 +983,67 @@ int EinkCompositorWorker::ConvertToY8(const buffer_handle_t &fb_handle) {
     return ret;
   }
 
-  hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
+  rga_output_addr = NULL;
+  ret = hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
                 0, 0, width, height, (void **)&rga_output_addr);
+  if(ret || rga_output_addr == NULL){
+    ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", rga_output_addr, ret);
+    return ret;
+  }
+  do_gray256_buffer((uint32_t *)rga_output_addr, (uint32_t *)gray16_buffer, ebc_buf_info.width, ebc_buf_info.height);
+  memcpy(gray256_old_buffer, gray16_buffer, ebc_buf_info.width * ebc_buf_info.height);
 
-  memcpy(gray256_new_buffer,rga_output_addr,ebc_buf_info.width * ebc_buf_info.height);
+  if(rga_output_addr != NULL){
+    hwc_unlock(src_hnd);
+    rga_output_addr = NULL;
+  }
+  return 0;
+}
+
+int EinkCompositorWorker::ConvertToY8Regal(const buffer_handle_t &fb_handle) {
+
+  DumpLayer("rgba", fb_handle);
+
+  ALOGD_IF(log_level(DBG_DEBUG), "%s", __FUNCTION__);
+
+  int framebuffer_wdith, framebuffer_height, output_format, ret;
+  framebuffer_wdith = ebc_buf_info.width - (ebc_buf_info.width % 8);
+  framebuffer_height = ebc_buf_info.height - (ebc_buf_info.height % 2);
+  output_format = HAL_PIXEL_FORMAT_YCrCb_NV12;
+
+  DrmRgaBuffer &rga_buffer = rgaBuffers[0];
+  if (!rga_buffer.Allocate(framebuffer_wdith, framebuffer_height, output_format)) {
+    ALOGE("Failed to allocate rga buffer with size %dx%d", framebuffer_wdith, framebuffer_height);
+    return -ENOMEM;
+  }
+
+  int width,height,stride,byte_stride,format,size;
+  buffer_handle_t src_hnd = rga_buffer.buffer()->handle;
+
+  width = hwc_get_handle_attibute(src_hnd,ATT_WIDTH);
+  height = hwc_get_handle_attibute(src_hnd,ATT_HEIGHT);
+  stride = hwc_get_handle_attibute(src_hnd,ATT_STRIDE);
+  byte_stride = hwc_get_handle_attibute(src_hnd,ATT_BYTE_STRIDE);
+  format = hwc_get_handle_attibute(src_hnd,ATT_FORMAT);
+  size = hwc_get_handle_attibute(src_hnd,ATT_SIZE);
+
+  ret = Rgba888ToGray256ByRga(rga_buffer, fb_handle);
+  if (ret) {
+    ALOGE("Failed to prepare rga buffer for RGA rotate %d", ret);
+    return ret;
+  }
+
+  rga_output_addr = NULL;
+  ret = hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
+                0, 0, width, height, (void **)&rga_output_addr);
+  if(ret || rga_output_addr == NULL){
+    ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", rga_output_addr, ret);
+    return ret;
+  }
+  do_gray256_buffer((uint32_t *)rga_output_addr, (uint32_t *)gray16_buffer, ebc_buf_info.width, ebc_buf_info.height);
+  eink_process((uint8_t *)gray16_buffer, (uint8_t *)gray256_old_buffer, ebc_buf_info.width, ebc_buf_info.height);
+  memcpy(gray256_old_buffer, gray16_buffer, ebc_buf_info.width * ebc_buf_info.height);
+
   if(rga_output_addr != NULL){
     hwc_unlock(src_hnd);
     rga_output_addr = NULL;
@@ -954,9 +1095,13 @@ int EinkCompositorWorker::ConvertToY4Dither(const buffer_handle_t &fb_handle, in
       ALOGE("Failed to prepare rga buffer for RGA rotate %d", ret);
       return ret;
     }
-
-    hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
+    rga_output_addr = NULL;
+    ret = hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
                   0, 0, width, height, (void **)&rga_output_addr);
+    if(ret || rga_output_addr == NULL){
+      ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", rga_output_addr, ret);
+      return ret;
+    }
 
     gray256_addr = rga_output_addr;
     gray256_to_gray16_dither(gray256_addr,gray16_buffer,ebc_buf_info.height, ebc_buf_info.width, ebc_buf_info.width);
@@ -1004,8 +1149,13 @@ int EinkCompositorWorker::ConvertToY1Dither(const buffer_handle_t &fb_handle) {
     return ret;
   }
 
+  rga_output_addr=NULL;
   hwc_lock(src_hnd, GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK, //gr_handle->usage,
                 0, 0, width, height, (void **)&rga_output_addr);
+  if(ret || rga_output_addr == NULL){
+    ALOGE("Failed to lock rga buffer, rga_output_addr =%p, ret=%d", rga_output_addr, ret);
+    return ret;
+  }
 
   gray256_addr = rga_output_addr;
   if(rga_output_addr == NULL)
@@ -1021,6 +1171,7 @@ int EinkCompositorWorker::ConvertToY1Dither(const buffer_handle_t &fb_handle) {
   }
   return 0;
 }
+
 int EinkCompositorWorker::ColorCommit(int epd_mode) {
   Rect screen_rect = Rect(0, 0, ebc_buf_info.width, ebc_buf_info.height);
   int *gray16_buffer_bak = gray16_buffer;
@@ -1028,14 +1179,15 @@ int EinkCompositorWorker::ColorCommit(int epd_mode) {
   gLastEpdMode = epd_mode;
   return 0;
 }
+
 int EinkCompositorWorker::EinkCommit(int epd_mode) {
   Rect screen_rect = Rect(0, 0, ebc_buf_info.width, ebc_buf_info.height);
-  int *gray256_new_buffer_bak = gray256_new_buffer;
+  int *gray256_new_buffer_bak = gray16_buffer;
   PostEinkY8(gray256_new_buffer_bak, screen_rect, epd_mode);
   gLastEpdMode = epd_mode;
   return 0;
 }
-
+ 
 int EinkCompositorWorker::Y4Commit(int epd_mode) {
   Rect screen_rect = Rect(0, 0, ebc_buf_info.width, ebc_buf_info.height);
   int *gray16_buffer_bak = gray16_buffer;
@@ -1052,7 +1204,6 @@ int EinkCompositorWorker::A2Commit(int epd_mode) {
       epd_tmp_mode = EPD_A2_ENTER;
   else
       epd_tmp_mode = epd_mode;
-
   PostEink(gray16_buffer_bak, screen_rect, epd_tmp_mode);
   gLastEpdMode = epd_mode;
   return 0;
@@ -1085,17 +1236,11 @@ int EinkCompositorWorker::SetColorEinkMode(EinkComposition *composition) {
     case EPD_SUSPEND:
        // release_wake_lock("show_advt_lock");
       break;
-    case EPD_RESUME:
-      ConvertToColorEink2(composition->fb_handle);
-      Y4Commit(composition->einkMode);
-      break;
-    case EPD_PART_EINK:
-    case EPD_FULL_EINK:
-      ConvertToColorEink2(composition->fb_handle);
-      EinkCommit(composition->einkMode);
-      break;
     default:
-      ConvertToColorEink2(composition->fb_handle);
+	if (ebc_buf_info.panel_color == 1)
+        ConvertToColorEink1(composition->fb_handle);
+	else
+        ConvertToColorEink2(composition->fb_handle);
       Y4Commit(composition->einkMode);
       break;
   }
@@ -1112,6 +1257,15 @@ int EinkCompositorWorker::SetEinkMode(EinkComposition *composition) {
     return -1;
   }
 
+  if (last_regal) {
+  	if (composition->einkMode != EPD_FULL_GLD16
+		&& composition->einkMode != EPD_FULL_GLR16
+		&& composition->einkMode != EPD_PART_GLD16
+		&& composition->einkMode != EPD_PART_GLR16) {
+  		last_regal = !last_regal;
+  	}
+  }
+
   switch(composition->einkMode){
     case EPD_A2_DITHER:
       ConvertToY1Dither(composition->fb_handle);
@@ -1124,11 +1278,22 @@ int EinkCompositorWorker::SetEinkMode(EinkComposition *composition) {
     case EPD_SUSPEND:
        // release_wake_lock("show_advt_lock");
       break;
-    case EPD_PART_EINK:
-    case EPD_FULL_EINK:
-      ConvertToY8(composition->fb_handle);
-      EinkCommit(composition->einkMode);
-      break;
+    case EPD_FULL_GLD16:
+    case EPD_FULL_GLR16:
+    case EPD_PART_GLD16:
+    case EPD_PART_GLR16:
+      if (waveform_fd > 0) {
+	   if (last_regal) {
+          	ConvertToY8Regal(composition->fb_handle);
+          	EinkCommit(composition->einkMode);
+	   } else {
+	       last_regal = !last_regal;
+		InToOrOutY8Regal(composition->fb_handle);
+          	EinkCommit(EPD_FORCE_FULL);
+	   }
+          break;
+      }
+      FALLTHROUGH_INTENDED;
     default:
       ConvertToY4Dither(composition->fb_handle, composition->einkMode);
       Y4Commit(composition->einkMode);
@@ -1169,7 +1334,7 @@ void EinkCompositorWorker::Compose(
     }
   }
   if(isSupportRkRga()){
-    if(ebc_buf_info.panel_color == 2)
+    if(ebc_buf_info.panel_color)
       ret = SetColorEinkMode(composition.get());
     else
       ret = SetEinkMode(composition.get());

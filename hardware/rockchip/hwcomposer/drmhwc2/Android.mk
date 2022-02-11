@@ -37,14 +37,31 @@ LOCAL_PATH := $(call my-dir)
 
 BOARD_USES_DRM_HWCOMPOSER2=false
 BOARD_USES_DRM_HWCOMPOSER=false
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk356x)
+# API 31 -> Android 12.0
+ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 31)))
+# RK356x RK3588 use DrmHwc2
+ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
         BOARD_USES_DRM_HWCOMPOSER2=false
 else  # BUILD_WITH_RK_EBOOK
         BOARD_USES_DRM_HWCOMPOSER2=true
 endif # BUILD_WITH_RK_EBOOK
 else
-        BOARD_USES_DRM_HWCOMPOSER=true
+        BOARD_USES_DRM_HWCOMPOSER2=false
+endif
+endif
+
+# API 30 -> Android 11.0
+ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 30)))
+ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifeq ($(strip $(BUILD_WITH_RK_EBOOK)),true)
+        BOARD_USES_DRM_HWCOMPOSER2=false
+else  # BUILD_WITH_RK_EBOOK
+        BOARD_USES_DRM_HWCOMPOSER2=true
+endif # BUILD_WITH_RK_EBOOK
+else
+        BOARD_USES_DRM_HWCOMPOSER2=false
+endif
 endif
 
 ifeq ($(strip $(BOARD_USES_DRM_HWCOMPOSER2)),true)
@@ -88,17 +105,18 @@ LOCAL_SRC_FILES := \
   drm/drmcompositorworker.cpp \
   drm/resourcemanager.cpp \
   drm/vsyncworker.cpp \
+  drm/invalidateworker.cpp \
   platform/platform.cpp \
   utils/autolock.cpp \
   platform/platformdrmgeneric.cpp \
   rockchip/utils/drmdebug.cpp \
-  rockchip/hwcutils.cpp \
+  rockchip/drmlayer.cpp \
   rockchip/drmtype.cpp \
   rockchip/drmgralloc.cpp \
-  rockchip/platform/drmvop.cpp \
-  rockchip/platform/drmvop2.cpp \
-  rockchip/invalidateworker.cpp \
-  rockchip/drmbaseparameter.cpp
+  rockchip/drmbaseparameter.cpp \
+  rockchip/platform/drmvop3399.cpp \
+  rockchip/platform/drmvop356x.cpp \
+  rockchip/platform/drmvop3588.cpp
 
 LOCAL_CPPFLAGS += \
   -DHWC2_USE_CPP11 \
@@ -123,10 +141,6 @@ LOCAL_C_INCLUDES += \
     hardware/rockchip/hwcomposer/drmhwc2/include
 
 LOCAL_CPPFLAGS += -DANDROID_R
-
-ifneq (,$(filter mali-tDVx mali-G52, $(TARGET_BOARD_PLATFORM_GPU)))
-LOCAL_CPPFLAGS += -DVOP2=1
-endif
 
 ifeq ($(TARGET_RK_GRALLOC_VERSION),4) # Gralloc 4.0
 

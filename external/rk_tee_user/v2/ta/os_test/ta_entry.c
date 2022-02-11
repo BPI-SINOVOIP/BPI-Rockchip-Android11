@@ -1,28 +1,7 @@
+// SPDX-License-Identifier: BSD-2-Clause
 /*
  * Copyright (c) 2014, STMicroelectronics International N.V.
  * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- * this list of conditions and the following disclaimer in the documentation
- * and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
  */
 #include <stdint.h>
 #include <init.h>
@@ -109,11 +88,62 @@ TEE_Result TA_InvokeCommandEntryPoint(void *pSessionContext,
 	case TA_OS_TEST_CMD_PARAMS:
 		return ta_entry_params(nParamTypes, pParams);
 
+	case TA_OS_TEST_CMD_NULL_MEMREF_PARAMS:
+		return ta_entry_null_memref(nParamTypes, pParams);
+
 	case TA_OS_TEST_CMD_CALL_LIB:
 		return ta_entry_call_lib(nParamTypes, pParams);
 
 	case TA_OS_TEST_CMD_CALL_LIB_PANIC:
 		return ta_entry_call_lib_panic(nParamTypes, pParams);
+
+	case TA_OS_TEST_CMD_CALL_LIB_DL:
+		return ta_entry_call_lib_dl(nParamTypes, pParams);
+
+	case TA_OS_TEST_CMD_CALL_LIB_DL_PANIC:
+		return ta_entry_call_lib_dl_panic(nParamTypes, pParams);
+
+	case TA_OS_TEST_CMD_GET_GLOBAL_VAR:
+		return ta_entry_get_global_var(nParamTypes, pParams);
+
+	case TA_OS_TEST_CMD_CLIENT_IDENTITY:
+		return ta_entry_client_identity(nParamTypes, pParams);
+
+	case TA_OS_TEST_CMD_TLS_TEST_MAIN:
+		return ta_entry_tls_test_main();
+
+	case TA_OS_TEST_CMD_TLS_TEST_SHLIB:
+		return ta_entry_tls_test_shlib();
+
+	case TA_OS_TEST_CMD_DL_PHDR:
+		return ta_entry_dl_phdr();
+
+	case TA_OS_TEST_CMD_DL_PHDR_DL:
+		return ta_entry_dl_phdr_dl();
+
+#if defined(WITH_CXX_TESTS)
+	case TA_OS_TEST_CMD_CXX_CTOR_MAIN:
+		return ta_entry_cxx_ctor_main();
+
+	case TA_OS_TEST_CMD_CXX_CTOR_SHLIB:
+		return ta_entry_cxx_ctor_shlib();
+
+	case TA_OS_TEST_CMD_CXX_CTOR_SHLIB_DL:
+		return ta_entry_cxx_ctor_shlib_dl();
+
+	case TA_OS_TEST_CMD_CXX_EXC_MAIN:
+		return ta_entry_cxx_exc_main();
+
+	case TA_OS_TEST_CMD_CXX_EXC_MIXED:
+		return ta_entry_cxx_exc_mixed();
+#else
+	case TA_OS_TEST_CMD_CXX_CTOR_MAIN:
+	case TA_OS_TEST_CMD_CXX_CTOR_SHLIB:
+	case TA_OS_TEST_CMD_CXX_CTOR_SHLIB_DL:
+	case TA_OS_TEST_CMD_CXX_EXC_MAIN:
+	case TA_OS_TEST_CMD_CXX_EXC_MIXED:
+		return TEE_ERROR_NOT_SUPPORTED;
+#endif
 
 	default:
 		return TEE_ERROR_BAD_PARAMETERS;

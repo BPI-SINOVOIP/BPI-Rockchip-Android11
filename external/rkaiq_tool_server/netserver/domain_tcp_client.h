@@ -13,7 +13,7 @@
 #include "logger/log.h"
 
 #ifdef __ANDROID__
-#define LOCAL_SOCKET_PATH "/dev/socket/camera_tool"
+    #define LOCAL_SOCKET_PATH "/dev/socket/camera_tool"
 #endif
 
 #define SERVER_PORT 5543
@@ -21,22 +21,23 @@
 
 using namespace std;
 
-class DomainTCPClient {
- private:
-  int sock;
-  std::string address;
-  int port;
-  struct sockaddr_un server;
+class DomainTCPClient
+{
+  private:
+    int sock;
+    std::string address;
+    int port;
+    struct sockaddr_un server;
 
- public:
-  DomainTCPClient();
-  virtual ~DomainTCPClient();
-  bool Setup(string domainPath);
-  bool Send(string data);
-  int Send(char* buff, int size);
-  string Receive(int size);
-  int Receive(char* buff, int size);
-  void Close();
+  public:
+    DomainTCPClient();
+    virtual ~DomainTCPClient();
+    bool Setup(string domainPath);
+    bool Send(string data);
+    int Send(char* buff, int size);
+    string Receive(int size);
+    int Receive(char* buff, int size);
+    void Close();
 };
 
 #endif

@@ -30,6 +30,7 @@ struct ebc_buf_s {
 	int win_y1;
 	int win_x2;
 	int win_y2;
+	int needpic;
 };
 
 struct ebc_buf_s *ebc_osd_buf_get(void);
@@ -40,7 +41,7 @@ int ebc_add_to_dsp_buf_list(struct ebc_buf_s *dsp_buf);
 int ebc_get_dsp_list_enum_num(void);
 struct ebc_buf_s *ebc_dsp_buf_get(void);
 struct ebc_buf_s *ebc_find_buf_by_phy_addr(unsigned long phy_addr);
-struct ebc_buf_s *ebc_empty_buf_get(void);
+struct ebc_buf_s *ebc_empty_buf_get(const char *tid_name);
 unsigned long ebc_phy_buf_base_get(void);
 char *ebc_virt_buf_base_get(void);
 int ebc_buf_state_show(char *buf);

@@ -3,7 +3,7 @@ $(error SHLIBUUID not set)
 endif
 link-out-dir = $(out-dir)
 
-SIGN ?= $(TA_DEV_KIT_DIR)/scripts/sign.py
+SIGN ?= $(TA_DEV_KIT_DIR)/scripts/sign_encrypt.py
 #TA_SIGN_KEY ?= $(TA_DEV_KIT_DIR)/keys/default_ta.pem
 TA_SIGN_KEY := $(TA_DEV_KIT_DIR)/keys/rk_privkey.pem
 
@@ -24,12 +24,13 @@ cleanfiles += $(link-out-dir)/$(shlibuuid).ta
 
 shlink-ldflags  = $(LDFLAGS)
 shlink-ldflags += -shared -z max-page-size=4096
+shlink-ldflags += $(call ld-option,-z separate-loadable-segments)
 shlink-ldflags += --as-needed # Do not add dependency on unused shlib
 
 shlink-ldadd  = $(LDADD)
 shlink-ldadd += $(addprefix -L,$(libdirs))
 shlink-ldadd += --start-group $(addprefix -l,$(libnames)) --end-group
-ldargs-$(shlibname).so := $(shlink-ldflags) $(objs) $(shlink-ldadd)
+ldargs-$(shlibname).so := $(shlink-ldflags) $(objs) $(shlink-ldadd) $(libgcc$(sm))
 
 
 $(link-out-dir)/$(shlibname).so: $(objs) $(libdeps)
@@ -51,5 +52,5 @@ $(link-out-dir)/$(shlibuuid).elf: $(link-out-dir)/$(shlibname).so
 $(link-out-dir)/$(shlibuuid).ta: $(link-out-dir)/$(shlibname).stripped.so \
 				$(TA_SIGN_KEY)
 	@$(cmd-echo-silent) '  SIGN    $@'
-	$(q)$(SIGN) --key $(TA_SIGN_KEY) --uuid $(shlibuuid) --version 0 \
+	$(q)$(PYTHON3) $(SIGN) --key $(TA_SIGN_KEY) --uuid $(shlibuuid) \
 		--in $< --out $@

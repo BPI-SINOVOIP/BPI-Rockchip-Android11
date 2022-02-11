@@ -260,6 +260,94 @@ static const struct dw_hdmi_mpll_config rockchip_mpll_cfg[] = {
 	}
 };
 
+static const struct dw_hdmi_mpll_config rockchip_mpll_cfg_rk356x[] = {
+	{
+		30666000, {
+			{ 0x00b3, 0x0000 },
+			{ 0x2153, 0x0000 },
+			{ 0x40f3, 0x0000 },
+		},
+	},  {
+		36800000, {
+			{ 0x00b3, 0x0000 },
+			{ 0x2153, 0x0000 },
+			{ 0x40a2, 0x0001 },
+		},
+	},  {
+		46000000, {
+			{ 0x00b3, 0x0000 },
+			{ 0x2142, 0x0001 },
+			{ 0x40a2, 0x0001 },
+		},
+	},  {
+		61333000, {
+			{ 0x0072, 0x0001 },
+			{ 0x2142, 0x0001 },
+			{ 0x40a2, 0x0001 },
+		},
+	},  {
+		73600000, {
+			{ 0x0072, 0x0001 },
+			{ 0x2142, 0x0001 },
+			{ 0x4061, 0x0002 },
+		},
+	},  {
+		92000000, {
+			{ 0x0072, 0x0001 },
+			{ 0x2145, 0x0002 },
+			{ 0x4061, 0x0002 },
+		},
+	},  {
+		122666000, {
+			{ 0x0051, 0x0002 },
+			{ 0x2145, 0x0002 },
+			{ 0x4061, 0x0002 },
+		},
+	},  {
+		147200000, {
+			{ 0x0051, 0x0002 },
+			{ 0x2145, 0x0002 },
+			{ 0x4064, 0x0003 },
+		},
+	},  {
+		184000000, {
+			{ 0x0051, 0x0002 },
+			{ 0x214c, 0x0003 },
+			{ 0x4064, 0x0003 },
+		},
+	},  {
+		226666000, {
+			{ 0x0040, 0x0003 },
+			{ 0x214c, 0x0003 },
+			{ 0x4064, 0x0003 },
+		},
+	},  {
+		272000000, {
+			{ 0x0040, 0x0003 },
+			{ 0x214c, 0x0003 },
+			{ 0x5a64, 0x0003 },
+		},
+	},  {
+		340000000, {
+			{ 0x0040, 0x0002 },
+			{ 0x3b4c, 0x0003 },
+			{ 0x5a64, 0x0003 },
+		},
+	},  {
+		600000000, {
+			{ 0x1a40, 0x0003 },
+			{ 0x3b4c, 0x0003 },
+			{ 0x5a64, 0x0003 },
+		},
+	},  {
+		~0UL, {
+			{ 0x0000, 0x0000 },
+			{ 0x0000, 0x0000 },
+			{ 0x0000, 0x0000 },
+		},
+	}
+};
+
 static const struct dw_hdmi_mpll_config rockchip_mpll_cfg_420[] = {
 	{
 		30666000, {
@@ -343,6 +431,19 @@ static const struct dw_hdmi_mpll_config rockchip_rk3288w_mpll_cfg_420[] = {
 static const struct dw_hdmi_curr_ctrl rockchip_cur_ctr[] = {
 	/*      pixelclk    bpp8    bpp10   bpp12 */
 	{
+		600000000, { 0x0000, 0x0000, 0x0000 },
+	},  {
+		~0UL,      { 0x0000, 0x0000, 0x0000},
+	}
+};
+
+static const struct dw_hdmi_curr_ctrl rockchip_cur_ctr_rk356x[] = {
+	/*      pixelclk    bpp8    bpp10   bpp12 */
+	{
+		272000000, { 0x0000, 0x0000, 0x0000 },
+	},  {
+		340000000, { 0x0001, 0x0000, 0x0000 },
+	},  {
 		600000000, { 0x0000, 0x0000, 0x0000 },
 	},  {
 		~0UL,      { 0x0000, 0x0000, 0x0000},
@@ -1098,7 +1199,7 @@ dw_hdmi_rockchip_attach_properties(struct drm_connector *connector,
 		drm_object_attach_property(&connector->base, prop, 0);
 	}
 
-	prop = drm_property_create_range(connector->dev, 0,
+	prop = drm_property_create_range(connector->dev, DRM_MODE_PROP_IMMUTABLE,
 					 "hdmi_color_depth_capacity",
 					 0, 0xff);
 	if (prop) {
@@ -1106,7 +1207,7 @@ dw_hdmi_rockchip_attach_properties(struct drm_connector *connector,
 		drm_object_attach_property(&connector->base, prop, 0);
 	}
 
-	prop = drm_property_create_range(connector->dev, 0,
+	prop = drm_property_create_range(connector->dev, DRM_MODE_PROP_IMMUTABLE,
 					 "hdmi_output_mode_capacity",
 					 0, 0xf);
 	if (prop) {
@@ -1142,7 +1243,7 @@ dw_hdmi_rockchip_attach_properties(struct drm_connector *connector,
 		drm_object_attach_property(&connector->base, prop, 0);
 	}
 
-	prop = drm_property_create_enum(connector->dev, 0,
+	prop = drm_property_create_enum(connector->dev, DRM_MODE_PROP_IMMUTABLE,
 					 "output_type_capacity",
 					 output_type_cap_list,
 					 ARRAY_SIZE(output_type_cap_list));
@@ -1244,8 +1345,11 @@ dw_hdmi_rockchip_set_property(struct drm_connector *connector,
 			hdmi->color_changed++;
 		return 0;
 	} else if (property == hdmi->quant_range) {
+		u64 quant_range = hdmi->hdmi_quant_range;
+
 		hdmi->hdmi_quant_range = val;
-		dw_hdmi_set_quant_range(hdmi->hdmi);
+		if (quant_range != hdmi->hdmi_quant_range)
+			dw_hdmi_set_quant_range(hdmi->hdmi);
 		return 0;
 	} else if (property == config->hdr_output_metadata_property) {
 		return 0;
@@ -1524,9 +1628,9 @@ static struct rockchip_hdmi_chip_data rk3568_chip_data = {
 
 static const struct dw_hdmi_plat_data rk3568_hdmi_drv_data = {
 	.mode_valid = dw_hdmi_rockchip_mode_valid,
-	.mpll_cfg   = rockchip_mpll_cfg,
+	.mpll_cfg   = rockchip_mpll_cfg_rk356x,
 	.mpll_cfg_420 = rockchip_mpll_cfg_420,
-	.cur_ctr    = rockchip_cur_ctr,
+	.cur_ctr    = rockchip_cur_ctr_rk356x,
 	.phy_config = rockchip_phy_config,
 	.phy_data = &rk3568_chip_data,
 	.ycbcr_420_allowed = true,

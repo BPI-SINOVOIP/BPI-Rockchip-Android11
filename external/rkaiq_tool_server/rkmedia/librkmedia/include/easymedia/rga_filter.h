@@ -11,28 +11,33 @@
 #include "filter.h"
 #include "image.h"
 
-namespace easymedia {
+namespace easymedia
+{
 
-class ImageBuffer;
+    class ImageBuffer;
 
-class RgaFilter : public Filter {
- public:
-  RgaFilter(const char* param);
-  virtual ~RgaFilter() = default;
-  static const char* GetFilterName() { return "rkrga"; }
-  virtual int Process(std::shared_ptr<MediaBuffer> input, std::shared_ptr<MediaBuffer>& output) override;
+    class RgaFilter : public Filter
+    {
+      public:
+        RgaFilter(const char* param);
+        virtual ~RgaFilter() = default;
+        static const char* GetFilterName()
+        {
+            return "rkrga";
+        }
+        virtual int Process(std::shared_ptr<MediaBuffer> input, std::shared_ptr<MediaBuffer>& output) override;
 
-  void SetRects(std::vector<ImageRect> vec_rect);
-  static RockchipRga gRkRga;
+        void SetRects(std::vector<ImageRect> vec_rect);
+        static RockchipRga gRkRga;
 
- private:
-  std::vector<ImageRect> vec_rect;
-  int rotate;
-};
+      private:
+        std::vector<ImageRect> vec_rect;
+        int rotate;
+    };
 
-int rga_blit(std::shared_ptr<ImageBuffer> src, std::shared_ptr<ImageBuffer> dst, ImageRect* src_rect = nullptr,
-             ImageRect* dst_rect = nullptr, int rotate = 0);
+    int rga_blit(std::shared_ptr<ImageBuffer> src, std::shared_ptr<ImageBuffer> dst, ImageRect* src_rect = nullptr,
+                 ImageRect* dst_rect = nullptr, int rotate = 0);
 
-}  // namespace easymedia
+} // namespace easymedia
 
-#endif  // #ifndef EASYMEDIA_RGA_H_
+#endif // #ifndef EASYMEDIA_RGA_H_

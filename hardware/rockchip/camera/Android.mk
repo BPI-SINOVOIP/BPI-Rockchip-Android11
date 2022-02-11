@@ -84,9 +84,15 @@ JPEGSRC = common/jpeg/ExifCreater.cpp \
           common/jpeg/ImgEncoderCore.cpp \
           common/jpeg/ImgEncoder.cpp \
           common/jpeg/JpegMakerCore.cpp \
-          common/jpeg/ImgHWEncoder.cpp \
           common/jpeg/JpegMaker.cpp \
           common/jpeg/jpeg_compressor.cpp
+
+
+ifeq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 30)))
+JPEGSRC += common/jpeg/ImgHWEncoderMpp.cpp
+else
+JPEGSRC += common/jpeg/ImgHWEncoder.cpp
+endif
 
 GCSSSRC = common/gcss/graph_query_manager.cpp \
           common/gcss/gcss_item.cpp \
@@ -156,11 +162,16 @@ LOCAL_C_INCLUDES += \
     system/core/liblog/include \
     kernel/include/uapi \
     hardware/rockchip/librkvpu \
-    hardware/rockchip/jpeghw \
     hardware/rockchip/librga \
     external/libchrome \
     external/libdrm/include/drm \
     $(LOCAL_PATH)/include/arc
+
+ifeq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 30)))
+LOCAL_C_INCLUDES += hardware/rockchip/libhwjpeg/inc
+else
+LOCAL_C_INCLUDES += hardware/rockchip/jpeghw
+endif
 
 # API 29 -> Android 10.0
 ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 29)))
@@ -194,6 +205,7 @@ CPPHACKS = \
     -DRKCAMERA_REDEFINE_LOG \
     -DRK_DRM_GRALLOC=1 \
     -DRK_HW_JPEG_ENCODE \
+    -DPLATFORM_SDK_API_VERSION=$(PLATFORM_SDK_VERSION) \
 
 # rk3368 gralloc module from other platforms
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3368)
@@ -261,10 +273,15 @@ LOCAL_SHARED_LIBRARIES:= \
     libui \
     librkisp \
     libhardware \
-    libjpeghwenc \
     libvpu \
     libcamera_metadata \
     librga
+
+ifeq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 30)))
+LOCAL_SHARED_LIBRARIES += libhwjpeg
+else
+LOCAL_SHARED_LIBRARIES += libjpeghwenc
+endif
 
 ifneq (,$(findstring rk356x,$(TARGET_BOARD_PLATFORM)))
 ifeq ($(PRODUCT_HAVE_EPTZ),true)

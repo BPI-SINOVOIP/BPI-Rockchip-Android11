@@ -268,4 +268,11 @@ uint32_t DrmMode::type() const {
 std::string DrmMode::name() const {
   return name_;
 }
+
+bool DrmMode::is_8k_mode() const {
+  if( h_display_ > 4096 )
+    return true;
+  else
+    return false;
+}
 }  // namespace android

@@ -30,44 +30,28 @@ endif
 endif
 
 ################################################################################
-# Build rkdemo                                                                 #
+# Build rktest                                                                 #
 ################################################################################
 include $(CLEAR_VARS)
 LOCAL_CFLAGS += -DANDROID_BUILD -DUSER_SPACE
 LOCAL_LDFLAGS += $(CLIENT_LIB_PATH)/libteec.so
 LOCAL_LDFLAGS += -llog
 
-LOCAL_SRC_FILES += host/rkdemo/rkdemo_ca.c
+SRC_FILES_DIR := $(wildcard $(LOCAL_PATH)/host/rk_test/*.c)
+LOCAL_SRC_FILES += $(SRC_FILES_DIR:$(LOCAL_PATH)/%=%)
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/ta/testapp/include \
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/ta/rk_test/include \
+		$(LOCAL_PATH)/host/rk_test/include \
+		$(LOCAL_PATH)/export-user_ta/host_include \
 		$(OPTEE_CLIENT_PATH)/public
 
-LOCAL_MODULE := testapp
+LOCAL_MODULE := rktest
 LOCAL_MODULE_TAGS := optional
 ifeq (1,$(strip $(shell expr $(PLATFORM_VERSION) \>= 8)))
 LOCAL_PROPRIETARY_MODULE := true
 endif
 include $(BUILD_EXECUTABLE)
 
-################################################################################
-# Build rkdemo_storage                                                         #
-################################################################################
-include $(CLEAR_VARS)
-LOCAL_CFLAGS += -DANDROID_BUILD -DUSER_SPACE
-LOCAL_LDFLAGS += $(CLIENT_LIB_PATH)/libteec.so
-LOCAL_LDFLAGS += -llog
-
-LOCAL_SRC_FILES += host/rkdemo/rkdemo_storage_ca.c
-
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/ta/testapp_storage/include \
-		$(OPTEE_CLIENT_PATH)/public
-
-LOCAL_MODULE := testapp_storage
-LOCAL_MODULE_TAGS := optional
-ifeq (1,$(strip $(shell expr $(PLATFORM_VERSION) \>= 8)))
-LOCAL_PROPRIETARY_MODULE := true
-endif
-include $(BUILD_EXECUTABLE)
 
 include $(LOCAL_PATH)/ta/Android.mk
 endif

@@ -35,7 +35,7 @@
 
 BOARD_USES_DRM_HWCOMPOSER2=false
 BOARD_USES_DRM_HWCOMPOSER=false
-ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk356x)
+ifneq ($(filter rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 BOARD_USES_DRM_HWCOMPOSER2=true
 else
 BOARD_USES_DRM_HWCOMPOSER=true
@@ -100,6 +100,12 @@ ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 30)))
 LOCAL_CFLAGS += -DANDROID_R
 endif
 
+ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 31)))
+LOCAL_CFLAGS += -Wno-unreachable-code-loop-increment -DANDROID_S
+LOCAL_HEADER_LIBRARIES += \
+    libhardware_rockchip_headers
+endif
+
 # API 29 -> Android 10.0
 ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 29)))
 
@@ -108,7 +114,8 @@ LOCAL_CFLAGS += -DDRM_DRIVER_VERSION=2 -DUSE_NO_ASPECT_RATIO=1
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_GPU)), mali-tDVx)
 LOCAL_C_INCLUDES += \
-       hardware/rockchip/libgralloc/bifrost
+       hardware/rockchip/libgralloc/bifrost \
+       hardware/rockchip/libgralloc/midgard
 endif
 
 ifneq (,$(filter mali-t860 mali-t760, $(TARGET_BOARD_PLATFORM_GPU)))
@@ -418,6 +425,7 @@ LOCAL_CFLAGS += -DUSE_GRALLOC_4=1
 
 LOCAL_C_INCLUDES += \
         hardware/rockchip/libgralloc/bifrost/src \
+        hardware/rockchip/libgralloc/midgard/src \
         hardware/libhardware/include
 
 LOCAL_SRC_FILES += \

@@ -1003,7 +1003,7 @@ public class Calculator extends Activity
 
 	boolean productTest = SystemProperties.getBoolean("ro.test.producttest", false);
 	if (productTest) {
-		if (mFormulaText.getText().toString().equals("83,991,906")) {
+		if (mFormulaText.getText().toString().equals("222.")) {
 			Intent intent=new Intent("android.rk.intent.action.startStressTest");
 			this.startActivity(intent);
 		}

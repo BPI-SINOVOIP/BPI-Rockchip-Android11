@@ -29,6 +29,7 @@
 
 RKAIQ_BEGIN_DECLARE
 
+/** @brief LSC config table to be set to hardware*/
 typedef struct rk_aiq_lsc_cfg_s {
     bool lsc_en;
     unsigned short r_data_tbl[LSC_DATA_TBL_SIZE];
@@ -40,8 +41,6 @@ typedef struct rk_aiq_lsc_cfg_s {
     unsigned short x_size_tbl[LSC_SIZE_TBL_SIZE];
     unsigned short y_size_tbl[LSC_SIZE_TBL_SIZE];
 } rk_aiq_lsc_cfg_t;
-
-
 
 RKAIQ_END_DECLARE
 

@@ -32,6 +32,8 @@ on init
     #eink
     chown root system /dev/ebc
     chmod 0666 /dev/ebc
+    chown root system /dev/waveform
+    chmod 0666 /dev/waveform
 
 on boot
     chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate

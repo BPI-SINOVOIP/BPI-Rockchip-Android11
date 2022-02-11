@@ -9,8 +9,8 @@ endif
 # LDFLAGS that are suitable for the client applications, not for TAs
 LDFLAGS=
 
-TA_DIRS := testapp \
-	   testapp_storage \
+TA_DIRS := rk_test  \
+
 
 ifdef CFG_GP_PACKAGE_PATH
 TA_DIRS += GP_TTA_Arithmetical \

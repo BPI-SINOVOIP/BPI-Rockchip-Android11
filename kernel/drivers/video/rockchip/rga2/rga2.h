@@ -124,7 +124,16 @@ enum
 	RGA2_FORMAT_BPP_1            = 0x24,
 	RGA2_FORMAT_BPP_2            = 0x25,
 	RGA2_FORMAT_BPP_4            = 0x26,
-	RGA2_FORMAT_BPP_8            = 0x27
+	RGA2_FORMAT_BPP_8            = 0x27,
+
+	RGA2_FORMAT_ARGB_8888    = 0x28,
+	RGA2_FORMAT_XRGB_8888    = 0x29,
+	RGA2_FORMAT_ARGB_5551    = 0x2a,
+	RGA2_FORMAT_ARGB_4444    = 0x2b,
+	RGA2_FORMAT_ABGR_8888    = 0x2c,
+	RGA2_FORMAT_XBGR_8888    = 0x2d,
+	RGA2_FORMAT_ABGR_5551    = 0x2e,
+	RGA2_FORMAT_ABGR_4444    = 0x2f,
 };
 
 typedef struct mdp_img
@@ -316,7 +325,7 @@ typedef struct rga_img_info_t
     unsigned short vir_h;
 
     unsigned short endian_mode; //for BPP
-    unsigned short alpha_swap;
+    unsigned short alpha_swap;    /* not use */
 }
 rga_img_info_t;
 
@@ -336,6 +345,18 @@ typedef struct rga_img_info_32_t
     unsigned short alpha_swap;
 }
 rga_img_info_32_t;
+
+struct rga_dma_buffer_t {
+	/* DMABUF information */
+	struct dma_buf *dma_buf;
+	struct dma_buf_attachment *attach;
+	struct sg_table *sgt;
+
+	dma_addr_t iova;
+	unsigned long size;
+	void *vaddr;
+	enum dma_data_direction dir;
+};
 
 struct rga_req {
     uint8_t render_mode;            /* (enum) process mode sel */
@@ -572,20 +593,12 @@ struct rga2_req
     u8 alpha_zero_key;
     u8 src_trans_mode;
 
-    u8 alpha_swp;
+    u8 alpha_swp;           /* not use */
     u8 dither_mode;
 
     u8 rgb2yuv_mode;
 
 	u8 buf_type;
-	struct sg_table *sg_src0;
-	struct sg_table *sg_src1;
-	struct sg_table *sg_dst;
-	struct sg_table *sg_els;
-	struct dma_buf_attachment *attach_src0;
-	struct dma_buf_attachment *attach_src1;
-	struct dma_buf_attachment *attach_dst;
-	struct dma_buf_attachment *attach_els;
 };
 
 struct rga2_mmu_buf_t {
@@ -726,15 +739,10 @@ struct rga2_reg {
 	uint32_t MMU_len;
 	bool MMU_map;
 
-	struct sg_table *sg_src0;
-	struct sg_table *sg_src1;
-	struct sg_table *sg_dst;
-	struct sg_table *sg_els;
-
-	struct dma_buf_attachment *attach_src0;
-	struct dma_buf_attachment *attach_src1;
-	struct dma_buf_attachment *attach_dst;
-	struct dma_buf_attachment *attach_els;
+	struct rga_dma_buffer_t dma_buffer_src0;
+	struct rga_dma_buffer_t dma_buffer_src1;
+	struct rga_dma_buffer_t dma_buffer_dst;
+	struct rga_dma_buffer_t dma_buffer_els;
 };
 
 struct rga2_service_info {
@@ -764,7 +772,6 @@ struct rga2_service_info {
 };
 
 #define RGA2_TEST_CASE 0
-#define RGA2_DEBUGFS 1
 
 //General Registers
 #define RGA2_SYS_CTRL             0x000

@@ -63,17 +63,13 @@
 #include <audio_utils/resampler.h>
 #include <audio_route/audio_route.h>
 
-
-//#include <speex/speex.h>
-#include <speex/speex_preprocess.h>
-
-
 #include <poll.h>
 #include <linux/fb.h>
 #include <hardware_legacy/uevent.h>
 
 #include "voice_preprocess.h"
 #include "audio_hw_hdmi.h"
+#include "denoise/rkdenoise.h"
 
 #define AUDIO_HAL_VERSION "ALSA Audio Version: V1.1.0"
 
@@ -103,7 +99,7 @@
 #define MAX_SUPPORTED_SAMPLE_RATES 2
 
 #ifndef BOX_HAL
-#define SPEEX_DENOISE_ENABLE
+#define RK_DENOISE_ENABLE
 #endif
 
 #define HW_PARAMS_FLAG_LPCM 0
@@ -153,8 +149,8 @@ struct pcm_config pcm_config = {
 struct pcm_config pcm_config_in = {
     .channels = 2,
     .rate = 44100,
-#ifdef SPEEX_DENOISE_ENABLE
-    .period_size = 1024,
+#ifdef RK_DENOISE_ENABLE
+    .period_size = 441,
 #else
     .period_size = 256,
 #endif
@@ -379,11 +375,12 @@ struct stream_in {
     struct audio_device *dev;
     audio_channel_mask_t supported_channel_masks[MAX_SUPPORTED_CHANNEL_MASKS + 1];
     uint32_t supported_sample_rates[MAX_SUPPORTED_SAMPLE_RATES + 1];
-#ifdef SPEEX_DENOISE_ENABLE
-    SpeexPreprocessState* mSpeexState;
-    int mSpeexFrameSize;
-    int16_t *mSpeexPcmIn;
+#ifdef RK_DENOISE_ENABLE
+    hrkdeniose mDenioseState;
 #endif
+    uint32_t channel_flag;
+    int start_checkcount;
+    uint64_t frames_read;
 };
 
 #define STRING_TO_ENUM(string) { #string, string }

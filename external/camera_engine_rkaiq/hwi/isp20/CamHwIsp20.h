@@ -39,7 +39,8 @@ namespace RkCam {
 
 #define ISP20HW_SUBM (0x1)
 
-#define MAX_PARAMS_QUEUE_SIZE         5
+#define MAX_PARAMS_QUEUE_SIZE           5
+#define ISP_PARAMS_EFFECT_DELAY_CNT     2
 
 class CamHwIsp20
     : public CamHwBase, virtual public Isp20Params, public V4l2Device

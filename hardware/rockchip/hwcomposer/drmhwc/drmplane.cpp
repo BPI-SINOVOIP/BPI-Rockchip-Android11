@@ -164,8 +164,11 @@ int DrmPlane::Init() {
     ALOGI("Could not get colorspace property");
 
   ret = drm_->GetPlaneProperty(*this, "ZPOS", &zpos_property_);
-  if (ret)
-    ALOGE("Could not get ZPOS property");
+  if (ret){
+    ret = drm_->GetPlaneProperty(*this, "zpos", &zpos_property_);
+    if (ret)
+      ALOGE("Could not get ZPOS property");
+  }
 
   ret = drm_->GetPlaneProperty(*this, "SHARE_FLAGS", &area_id_property_);
   if (ret)

@@ -573,7 +573,8 @@ void convertAecCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Co
             aec_json.LinearAeCtrl.DySetpoint.ExpLevel[i] = maxexp * aec_xml.LinearAeCtrl.DySetpoint[AEC_DNMODE_DAY].ExpValue[i];
 
         if(aec_xml.LinearAeCtrl.DySetPointEn == false) {
-            memset(aec_json.LinearAeCtrl.DySetpoint.DySetpoint, aec_xml.LinearAeCtrl.SetPoint, aec_json.LinearAeCtrl.DySetpoint.DySetpoint_len * sizeof(float));
+            for(int i = 0; i < aec_json.LinearAeCtrl.DySetpoint.DySetpoint_len; i++)
+                aec_json.LinearAeCtrl.DySetpoint.DySetpoint[i] = aec_xml.LinearAeCtrl.SetPoint;
         } else {
             memcpy(aec_json.LinearAeCtrl.DySetpoint.DySetpoint, aec_xml.LinearAeCtrl.DySetpoint[AEC_DNMODE_DAY].DySetpoint, aec_json.LinearAeCtrl.DySetpoint.DySetpoint_len * sizeof(float));
         }
@@ -936,7 +937,8 @@ void convertAecCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Co
             aec_json.LinearAeCtrl.DySetpoint.ExpLevel[i] = maxexp * aec_tune_xml->LinearAeCtrl.DySetpoint.ExpValue[i];
 
         if(aec_tune_xml->LinearAeCtrl.DySetPointEn == false) {
-            memset(aec_json.LinearAeCtrl.DySetpoint.DySetpoint, aec_tune_xml->LinearAeCtrl.SetPoint, aec_json.LinearAeCtrl.DySetpoint.DySetpoint_len * sizeof(float));
+            for(int i = 0; i < aec_json.LinearAeCtrl.DySetpoint.DySetpoint_len; i++)
+                aec_json.LinearAeCtrl.DySetpoint.DySetpoint[i] = aec_tune_xml->LinearAeCtrl.SetPoint;
         } else {
             memcpy(aec_json.LinearAeCtrl.DySetpoint.DySetpoint, aec_tune_xml->LinearAeCtrl.DySetpoint.DySetpoint, aec_json.LinearAeCtrl.DySetpoint.DySetpoint_len * sizeof(float));
         }

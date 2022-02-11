@@ -85,6 +85,7 @@ OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_128_ecb(void);
 OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_128_cbc(void);
 OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_128_ctr(void);
 OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_128_ofb(void);
+OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_128_xts(void);
 
 OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_256_ecb(void);
 OPENSSL_EXPORT const EVP_CIPHER *EVP_aes_256_cbc(void);

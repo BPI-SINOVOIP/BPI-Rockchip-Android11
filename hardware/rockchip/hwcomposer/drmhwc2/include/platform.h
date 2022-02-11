@@ -18,7 +18,7 @@
 #define ANDROID_DRM_PLATFORM_H_
 
 #include "drmdisplaycomposition.h"
-#include "drmhwcomposer.h"
+#include "drmlayer.h"
 
 #include <hardware/hardware.h>
 #include <hardware/hwcomposer.h>

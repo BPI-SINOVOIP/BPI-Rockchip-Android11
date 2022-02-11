@@ -1412,6 +1412,8 @@ else
 INSTALLED_TRUST_TARGET := $(strip $(wildcard u-boot/trust.img))
 endif
 
+INSTALLED_EBOOK_LOGO_TARGET := $(strip $(wildcard $(TARGET_DEVICE_DIR)/ota/logo.img))
+
 .PHONY: notice_files
 
 # Create the rule to combine the files into text and html/xml forms
@@ -4812,6 +4814,13 @@ ifeq (1,$(strip $(shell expr $(BOARD_BOOT_HEADER_VERSION) \>= 3)))
 	$(hide) mkdir -p $(zip_root)/IMAGES
 	$(hide) cp $(TARGET_PREBUILT_RESOURCE) $(zip_root)/IMAGES/resource.img
 endif
+endif
+
+ifeq ($(INSTALLED_EBOOK_LOGO_TARGET),)
+	$(info No logo.img to otapackage)
+else
+	$(hide) mkdir -p $(zip_root)/IMAGES
+	$(hide) cp $(INSTALLED_EBOOK_LOGO_TARGET) $(zip_root)/IMAGES/logo.img
 endif
 
 ifneq ($(PRODUCT_SYSTEM_BASE_FS_PATH),)

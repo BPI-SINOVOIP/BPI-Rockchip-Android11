@@ -555,86 +555,6 @@ int pcm_write(struct pcm *pcm, const void *data, unsigned int count)
     }
 }
 
-/********************************
- *  author:charles chen
- *  data:2012.09.27
- *  parameter
- *  data: the input data buf point
- *  len: the input data len need consider the pcm_format
- *  ret:
- *  0: Left and right channel is valid
- *  1: Left      channel is valid
- *  2: Right    channel is valid
- *
- *  defalt the input signal is like LRLRLR, default pcm_format is 16bit
- **********************************/
-#define SAMPLECOUNT		441 * 5 * 2 * 2
-
-int channalFlags = -1; // mean the channel is not checked now
-int startCheckCount = 0;
-
-int channel_check(void *data, unsigned len)
-{
-    short *pcmLeftChannel = (short*)data;
-    short *pcmRightChannel = pcmLeftChannel + 1;
-    unsigned index = 0;
-    int leftValid = 0x0;
-    int rightValid = 0x0;
-    short checkValue = 0;
-
-    checkValue = *pcmLeftChannel;
-
-    for (index = 0; index < len; index += 2) {
-        if ((pcmLeftChannel[index] >= checkValue + 50) ||
-	    (pcmLeftChannel[index] <= checkValue - 50))
-        {
-            leftValid++; // = 0x01;
-	}
-    }
-
-    if (leftValid > 20)
-        leftValid = 0x01;
-    else
-        leftValid = 0;
-
-    checkValue = *pcmRightChannel;
-
-    for (index = 0; index < len; index += 2) {
-        if ((pcmRightChannel[index] >= checkValue + 50) ||
-	    (pcmRightChannel[index] <= checkValue - 50))
-        {
-	    rightValid++; // = 0x02;
-	}
-    }
-
-    if (rightValid > 20)
-        rightValid = 0x02;
-    else
-        rightValid = 0;
-
-    return leftValid|rightValid;
-}
-
-void channel_fixed(void *data, unsigned len, int chFlag)
-{
-    if (chFlag <= 0 || chFlag > 2 )
-        return;
-
-    short *pcmValid = (short*)data;
-    short *pcmInvalid = pcmValid;
-
-    if (chFlag == 1)
-        pcmInvalid += 1;
-    else if (chFlag == 2)
-        pcmValid += 1;
-
-    for (unsigned index = 0; index < len; index += 2) {
-        pcmInvalid[index] = pcmValid[index];
-    }
-
-    return;
-}
-
 int pcm_read(struct pcm *pcm, void *data, unsigned int count)
 {
     struct snd_xferi x;
@@ -663,19 +583,6 @@ int pcm_read(struct pcm *pcm, void *data, unsigned int count)
             }
             return oops(pcm, errno, "cannot read stream data");
         }
-
-        if (pcm->config.channels == 2) {
-            if (channalFlags == -1 ) {
-                if (startCheckCount < SAMPLECOUNT) {
-                    startCheckCount += count;
-                } else {
-                    channalFlags = channel_check(data,count / 2);
-                }
-            }
-
-            channel_fixed(data,count / 2, channalFlags);
-        }
-
         return 0;
     }
 }
@@ -955,10 +862,6 @@ int pcm_close(struct pcm *pcm)
         munmap(pcm->mmap_buffer, pcm_frames_to_bytes(pcm, pcm->buffer_size));
     }
 
-    if (pcm->flags & PCM_IN) {
-        channalFlags = -1;
-        startCheckCount = 0;
-    }
     if (pcm->fd >= 0)
         close(pcm->fd);
     pcm->prepared = 0;

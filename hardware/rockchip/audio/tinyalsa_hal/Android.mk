@@ -15,6 +15,17 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := libanr
+LOCAL_MODULE_TAGS := optional
+LOCAL_MULTILIB := 32
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_SRC_FILES := denoise/skv/libanr.so
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 
 LOCAL_MODULE := audio.primary.$(TARGET_BOARD_HARDWARE)
 LOCAL_PROPRIETARY_MODULE := true
@@ -25,7 +36,9 @@ LOCAL_SRC_FILES := \
 	alsa_route.c \
 	alsa_mixer.c \
 	voice_preprocess.c \
-	audio_hw_hdmi.c
+	audio_hw_hdmi.c \
+	denoise/rkdenoise.c
+
 LOCAL_C_INCLUDES += \
 	$(call include-path-for, audio-utils) \
 	$(call include-path-for, audio-route) \

@@ -6,7 +6,8 @@
 
 #include <stdio.h>
 
-namespace easymedia {
+namespace easymedia
+{
 
     LockMutex::LockMutex()
 #ifndef NDEBUG
@@ -14,77 +15,93 @@ namespace easymedia {
 #endif
     {
     }
-    LockMutex::~LockMutex() {
+    LockMutex::~LockMutex()
+    {
 #ifndef NDEBUG
         assert(lock_times == 0 && "mutex lock/unlock mismatch");
 #endif
     }
 
-    void LockMutex::locktimeinc() {
+    void LockMutex::locktimeinc()
+    {
 #ifndef NDEBUG
         lock_times++;
 #endif
     }
-    void LockMutex::locktimedec() {
+    void LockMutex::locktimedec()
+    {
 #ifndef NDEBUG
         lock_times--;
 #endif
     }
 
-    void ConditionLockMutex::lock() {
+    void ConditionLockMutex::lock()
+    {
         mtx.lock();
         locktimeinc();
     }
-    void ConditionLockMutex::unlock() {
+    void ConditionLockMutex::unlock()
+    {
         locktimedec();
         mtx.unlock();
     }
-    void ConditionLockMutex::wait() {
+    void ConditionLockMutex::wait()
+    {
         cond.wait(mtx);
     }
-    void ConditionLockMutex::notify() {
+    void ConditionLockMutex::notify()
+    {
         cond.notify_all();
     }
 
-    ReadWriteLockMutex::ReadWriteLockMutex() : valid(true) {
+    ReadWriteLockMutex::ReadWriteLockMutex() : valid(true)
+    {
         int ret = pthread_rwlock_init(&rwlock, NULL);
-        if(ret) {
+        if (ret) {
             fprintf(stderr, "Fail to pthread_rwlock_init\n");
             valid = false;
         }
     }
-    ReadWriteLockMutex::~ReadWriteLockMutex() {
-        if(valid) {
+    ReadWriteLockMutex::~ReadWriteLockMutex()
+    {
+        if (valid) {
             pthread_rwlock_destroy(&rwlock);
         }
     }
-    void ReadWriteLockMutex::lock() {
+    void ReadWriteLockMutex::lock()
+    {
         // write lock
-        if(valid) {
+        if (valid) {
             pthread_rwlock_wrlock(&rwlock);
         }
         locktimeinc();
     }
-    void ReadWriteLockMutex::unlock() {
+    void ReadWriteLockMutex::unlock()
+    {
         locktimedec();
-        if(valid) {
+        if (valid) {
             pthread_rwlock_unlock(&rwlock);
         }
     }
-    void ReadWriteLockMutex::read_lock() {
-        if(valid) {
+    void ReadWriteLockMutex::read_lock()
+    {
+        if (valid) {
             pthread_rwlock_rdlock(&rwlock);
         }
         locktimeinc();
     }
 
-    SpinLockMutex::SpinLockMutex() : flag(ATOMIC_FLAG_INIT) {}
-    void SpinLockMutex::lock() {
-        while(flag.test_and_set(std::memory_order_acquire))
+    SpinLockMutex::SpinLockMutex() : flag(ATOMIC_FLAG_INIT)
+    {
+    }
+    void SpinLockMutex::lock()
+    {
+        while (flag.test_and_set(std::memory_order_acquire))
             ;
         locktimeinc();
     }
-    void SpinLockMutex::unlock() {
+    void SpinLockMutex::unlock()
+    {
         locktimedec();
         flag.clear(std::memory_order_release);
     }

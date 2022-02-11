@@ -240,7 +240,15 @@ sp<IMemory> RockitMetadataRetriever::getFrameAtTime(
     Mutex::Autolock autoLock(mLock);
     if (!check())
         return NULL;
+
     Debug("%s: this = %p", __FUNCTION__, this);
+    if (timeUs < 0) {
+        int64_t duration = 0;
+        RtMetaData* meta = mCtx->mRtMetaData;
+        meta->findInt64(kRetrieverKeyDuration, &duration);
+        timeUs = duration / 3;
+    }
+
     return getFrameInternal(timeUs, option, colorFormat, metaOnly);
 }
 

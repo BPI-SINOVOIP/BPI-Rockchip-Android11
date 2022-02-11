@@ -1,14 +1,15 @@
 #include "H264LiveVideoSource.h"
 #include "RtspServer.h"
 
-H264LiveVideoSource* H264LiveVideoSource::createNew(UsageEnvironment& env, void *listener)
+H264LiveVideoSource* H264LiveVideoSource::createNew(UsageEnvironment& env, void* listener)
 {
     return new H264LiveVideoSource(env, listener);
 }
 
-H264LiveVideoSource::H264LiveVideoSource(UsageEnvironment& env, void *listener)
-    : FramedSource(env) {
-    env << "H264LiveVideoSource::H264LiveVideoSource" << "\n";
+H264LiveVideoSource::H264LiveVideoSource(UsageEnvironment& env, void* listener) : FramedSource(env)
+{
+    env << "H264LiveVideoSource::H264LiveVideoSource"
+        << "\n";
     fHasTriggerKeyFrame = False;
     fSendHeaderCount = 1;
     fTruncatedBytesNum = 0;
@@ -21,12 +22,15 @@ H264LiveVideoSource::~H264LiveVideoSource()
 {
 }
 
- unsigned int H264LiveVideoSource::maxFrameSize() const { return 1024 * 1024; }
+unsigned int H264LiveVideoSource::maxFrameSize() const
+{
+    return 1024 * 1024;
+}
 
 void H264LiveVideoSource::doGetNextFrame()
 {
     QMediaBuffer outBuf;
-    RtspServer *server = (RtspServer*)fListener;
+    RtspServer* server = (RtspServer*)fListener;
 
     server->onDoGetNextFrame(&outBuf);
     if (outBuf.getData()) {
@@ -44,4 +48,3 @@ void H264LiveVideoSource::doGetNextFrame()
         FramedSource::afterGetting(this);
     }
 }
-

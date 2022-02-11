@@ -61,7 +61,7 @@ PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.version = 1.0.0 \
-    ro.product.ota.host = www.rockchip.com:2300 \
+    ro.product.ota.host = 192.168.1.1:8888 \
     ro.vendor.sdkversion = $(CURRENT_SDK_VERSION) \
     vendor.gralloc.no_afbc_for_fb_target_layer = 1
 

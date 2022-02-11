@@ -77,42 +77,31 @@ static const CodecProfileLevel kM2VProfileLevels[] = {
 };
 
 static const CodecProfileLevel kM4VProfileLevels[] = {
-    { OMX_VIDEO_MPEG4ProfileSimple, OMX_VIDEO_MPEG4Level0 },
-    { OMX_VIDEO_MPEG4ProfileSimple, OMX_VIDEO_MPEG4Level0b},
-    { OMX_VIDEO_MPEG4ProfileSimple, OMX_VIDEO_MPEG4Level1 },
-    { OMX_VIDEO_MPEG4ProfileSimple, OMX_VIDEO_MPEG4Level2 },
     { OMX_VIDEO_MPEG4ProfileSimple, OMX_VIDEO_MPEG4Level3 },
 };
 
 static const CodecProfileLevel kH263ProfileLevels[] = {
-    { OMX_VIDEO_H263ProfileBaseline, OMX_VIDEO_H263Level10 },
-    { OMX_VIDEO_H263ProfileBaseline, OMX_VIDEO_H263Level20 },
-    { OMX_VIDEO_H263ProfileBaseline, OMX_VIDEO_H263Level30 },
     { OMX_VIDEO_H263ProfileBaseline, OMX_VIDEO_H263Level45 },
-    { OMX_VIDEO_H263ProfileISWV2,    OMX_VIDEO_H263Level10 },
-    { OMX_VIDEO_H263ProfileISWV2,    OMX_VIDEO_H263Level20 },
-    { OMX_VIDEO_H263ProfileISWV2,    OMX_VIDEO_H263Level30 },
     { OMX_VIDEO_H263ProfileISWV2,    OMX_VIDEO_H263Level45 },
 };
 
-//only report echo profile highest level, Reference soft avc dec
 static const CodecProfileLevel kH264ProfileLevelsMax[] = {
     { OMX_VIDEO_AVCProfileBaseline, OMX_VIDEO_AVCLevel51 },
     { OMX_VIDEO_AVCProfileMain, OMX_VIDEO_AVCLevel51},
     { OMX_VIDEO_AVCProfileHigh, OMX_VIDEO_AVCLevel51},
+    { OMX_VIDEO_AVCProfileHigh10, OMX_VIDEO_AVCLevel52},
 };
 
 static const CodecProfileLevel kH265ProfileLevels[] = {
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel1  },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel2  },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel21 },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel3  },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel31 },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel4  },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel41 },
-    { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel5  },
     { OMX_VIDEO_HEVCProfileMain, OMX_VIDEO_HEVCMainTierLevel51 },
     { OMX_VIDEO_HEVCProfileMain10, OMX_VIDEO_HEVCMainTierLevel51 },
+};
+
+static const CodecProfileLevel kVP9ProfileLevels[] = {
+    { OMX_VIDEO_VP9Profile0, OMX_VIDEO_VP9Level51 },
+    { OMX_VIDEO_VP9Profile2, OMX_VIDEO_VP9Level51 },
+    { OMX_VIDEO_VP9Profile2HDR, OMX_VIDEO_VP9Level51 },
+    { OMX_VIDEO_VP9Profile2HDR10Plus, OMX_VIDEO_VP9Level51 },
 };
 
 OMX_ERRORTYPE Rkvpu_OMX_UseBuffer(
@@ -1479,6 +1468,14 @@ OMX_ERRORTYPE Rkvpu_OMX_GetParameter(
             }
             profileLevel->eProfile = kH265ProfileLevels[index].mProfile;
             profileLevel->eLevel = kH265ProfileLevels[index].mLevel;
+        } else if (pVideoDec->codecId == OMX_VIDEO_CodingVP9) {
+            nProfileLevels =
+                sizeof(kVP9ProfileLevels) / sizeof(kVP9ProfileLevels[0]);
+            if (index >= nProfileLevels) {
+                return OMX_ErrorNoMore;
+            }
+            profileLevel->eProfile = kVP9ProfileLevels[index].mProfile;
+            profileLevel->eLevel = kVP9ProfileLevels[index].mLevel;
         } else if (pVideoDec->codecId  == OMX_VIDEO_CodingMPEG4) {
             nProfileLevels =
                 sizeof(kM4VProfileLevels) / sizeof(kM4VProfileLevels[0]);

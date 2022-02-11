@@ -392,6 +392,27 @@ IM_API IM_STATUS rga_set_buffer_info(const rga_buffer_t src, rga_buffer_t dst, r
     return IM_STATUS_SUCCESS;
 }
 
+IM_API static inline void rga_apply_rect(rga_buffer_t *image, im_rect *rect) {
+    if (rect->width > 0 && rect->height > 0) {
+        image->width = rect->width;
+        image->height = rect->height;
+    }
+}
+
+IM_API void rga_check_perpare(rga_buffer_t *src, rga_buffer_t *dst, rga_buffer_t *pat,
+                              im_rect *src_rect, im_rect *dst_rect, im_rect *pat_rect, int mode_usage) {
+
+      if (mode_usage & IM_CROP) {
+          dst_rect->width = src_rect->width;
+          dst_rect->height = src_rect->height;
+      }
+
+      rga_apply_rect(src, src_rect);
+      rga_apply_rect(dst, dst_rect);
+      if (rga_is_buffer_valid(*pat))
+          rga_apply_rect(pat, pat_rect);
+}
+
 IM_API IM_STATUS rga_get_info(rga_info_table_entry *return_table) {
     char buf[16];
     int  rga_version = 0, rga_svn_version = 0;
@@ -933,6 +954,8 @@ IM_API IM_STATUS rga_check_format(const char *name, rga_buffer_t info, im_rect r
 
     if (format == RK_FORMAT_RGBA_8888 || format == RK_FORMAT_BGRA_8888 ||
         format == RK_FORMAT_RGBX_8888 || format == RK_FORMAT_BGRX_8888 ||
+        format == RK_FORMAT_ARGB_8888 || format == RK_FORMAT_ABGR_8888 ||
+        format == RK_FORMAT_XRGB_8888 || format == RK_FORMAT_XBGR_8888 ||
         format == RK_FORMAT_RGB_888   || format == RK_FORMAT_BGR_888   ||
         format == RK_FORMAT_RGB_565   || format == RK_FORMAT_BGR_565) {
         if (~format_usage & IM_RGA_SUPPORT_FORMAT_RGB) {
@@ -942,7 +965,9 @@ IM_API IM_STATUS rga_check_format(const char *name, rga_buffer_t info, im_rect r
             return IM_STATUS_NOT_SUPPORTED;
         }
     } else if (format == RK_FORMAT_RGBA_4444 || format == RK_FORMAT_BGRA_4444 ||
-               format == RK_FORMAT_RGBA_5551 || format == RK_FORMAT_BGRA_5551) {
+               format == RK_FORMAT_RGBA_5551 || format == RK_FORMAT_BGRA_5551 ||
+               format == RK_FORMAT_ARGB_4444 || format == RK_FORMAT_ABGR_4444 ||
+               format == RK_FORMAT_ARGB_5551 || format == RK_FORMAT_ABGR_5551) {
         if (~format_usage & IM_RGA_SUPPORT_FORMAT_RGB_OTHER) {
             imSetErrorMsg("%s unsupported RGBA 4444/5551 format, format = 0x%x(%s)\n%s",
                           name, info.format, translate_format_str(info.format),
@@ -972,7 +997,8 @@ IM_API IM_STATUS rga_check_format(const char *name, rga_buffer_t info, im_rect r
             (info.width % 2)  || (info.height % 2) ||
             (rect.x % 2) || (rect.y % 2) ||
             (rect.width % 2) || (rect.height % 2)) {
-            imSetErrorMsg("%s, Error yuv not align to 2, rect[x,y,w,h] = [%d, %d, %d, %d], "
+            imSetErrorMsg("%s, Error yuv not align to 2 or width stride not align to 4, "
+                          "rect[x,y,w,h] = [%d, %d, %d, %d], "
                           "wstride = %d, hstride = %d, format = 0x%x(%s)\n%s",
                           name, rect.x, rect.y, info.width, info.height, info.wstride, info.hstride,
                           info.format, translate_format_str(info.format),
@@ -1173,7 +1199,7 @@ IM_API IM_STATUS rga_check_feature(rga_buffer_t src, rga_buffer_t pat, rga_buffe
 }
 
 IM_API IM_STATUS imcheck_t(const rga_buffer_t src, const rga_buffer_t dst, const rga_buffer_t pat,
-                           im_rect src_rect, const im_rect dst_rect, const im_rect pat_rect, int mode_usage) {
+                           const im_rect src_rect, const im_rect dst_rect, const im_rect pat_rect, int mode_usage) {
     bool pat_enable = 0;
     IM_STATUS ret = IM_STATUS_NOERROR;
     rga_info_table_entry rga_info;
@@ -1622,15 +1648,8 @@ IM_API IM_STATUS improcess(rga_buffer_t src, rga_buffer_t dst, rga_buffer_t pat,
     if (ret <= 0)
         return (IM_STATUS)ret;
 
-    if (srect.width > 0 && srect.height > 0) {
-        src.width = srect.width;
-        src.height = srect.height;
-    }
-
-    if (drect.width > 0 && drect.height > 0) {
-        dst.width = drect.width;
-        dst.height = drect.height;
-    }
+    rga_apply_rect(&src, &srect);
+    rga_apply_rect(&dst, &drect);
 
     rga_set_rect(&srcinfo.rect, srect.x, srect.y, src.width, src.height, src.wstride, src.hstride, src.format);
     rga_set_rect(&dstinfo.rect, drect.x, drect.y, dst.width, dst.height, dst.wstride, dst.hstride, dst.format);
@@ -1642,10 +1661,7 @@ IM_API IM_STATUS improcess(rga_buffer_t src, rga_buffer_t dst, rga_buffer_t pat,
         if (ret <= 0)
             return (IM_STATUS)ret;
 
-        if (prect.width > 0 && prect.height > 0) {
-            pat.width = prect.width;
-            pat.height = prect.height;
-        }
+        rga_apply_rect(&pat, &prect);
 
         rga_set_rect(&patinfo.rect, prect.x, prect.y, pat.width, pat.height, pat.wstride, pat.hstride, pat.format);
     }
@@ -1697,13 +1713,13 @@ IM_API IM_STATUS improcess(rga_buffer_t src, rga_buffer_t dst, rga_buffer_t pat,
     if (usage & IM_ALPHA_BLEND_MASK) {
         switch(usage & IM_ALPHA_BLEND_MASK) {
             case IM_ALPHA_BLEND_SRC:
-                srcinfo.blend = 0xff0001;
+                srcinfo.blend = 0x1;
                 break;
             case IM_ALPHA_BLEND_DST:
-                srcinfo.blend = 0xff0002;
+                srcinfo.blend = 0x2;
                 break;
             case IM_ALPHA_BLEND_SRC_OVER:
-                srcinfo.blend = (usage & IM_ALPHA_BLEND_PRE_MUL) ? 0xff0405 : 0xff0105;
+                srcinfo.blend = (usage & IM_ALPHA_BLEND_PRE_MUL) ? 0x405 : 0x105;
                 break;
             case IM_ALPHA_BLEND_SRC_IN:
                 break;
@@ -1712,7 +1728,7 @@ IM_API IM_STATUS improcess(rga_buffer_t src, rga_buffer_t dst, rga_buffer_t pat,
             case IM_ALPHA_BLEND_SRC_OUT:
                 break;
             case IM_ALPHA_BLEND_DST_OVER:
-                srcinfo.blend = (usage & IM_ALPHA_BLEND_PRE_MUL) ? 0xff0504 : 0xff0501;
+                srcinfo.blend = (usage & IM_ALPHA_BLEND_PRE_MUL) ? 0x504 : 0x501;
                 break;
             case IM_ALPHA_BLEND_SRC_ATOP:
                 break;
@@ -1724,6 +1740,13 @@ IM_API IM_STATUS improcess(rga_buffer_t src, rga_buffer_t dst, rga_buffer_t pat,
 
         if(srcinfo.blend == 0)
             ALOGE("rga_im2d: Could not find blend usage : 0x%x \n", usage);
+
+        /* set global alpha */
+        if (src.global_alpha > 0)
+            srcinfo.blend ^= src.global_alpha << 16;
+        else {
+            srcinfo.blend ^= 0xFF << 16;
+        }
     }
 
     /* color key */
@@ -1758,10 +1781,6 @@ IM_API IM_STATUS improcess(rga_buffer_t src, rga_buffer_t dst, rga_buffer_t pat,
     if (usage & IM_ROP) {
         srcinfo.rop_code = dst.rop_code;
     }
-
-    /* set global alpha */
-    if ((src.global_alpha > 0) && (usage & IM_ALPHA_BLEND_MASK))
-        srcinfo.blend &= src.global_alpha << 16;
 
     /* special config for color space convert */
     if ((dst.color_space_mode & IM_YUV_TO_RGB_MASK) && (dst.color_space_mode & IM_RGB_TO_YUV_MASK)) {

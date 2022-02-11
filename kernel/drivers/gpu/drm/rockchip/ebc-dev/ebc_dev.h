@@ -25,6 +25,9 @@
 #define EBC_SUCCESS		(0)
 #define EBC_ERROR		(-1)
 
+#define WF_4BIT		16
+#define WF_5BIT		32
+
 /*
  * ebc status notify
  */
@@ -79,6 +82,8 @@ enum panel_refresh_mode {
 	EPD_RESUME		= 19,
 	EPD_POWER_OFF		= 20,
 	EPD_FORCE_FULL		= 21,
+	EPD_AUTO_DU		= 22,
+	EPD_AUTO_DU4		= 23,
 };
 
 /*
@@ -96,6 +101,8 @@ struct ebc_buf_info {
 	int win_y2;
 	int width_mm;
 	int height_mm;
+	int needpic;
+	char tid_name[16];
 };
 
 #if IS_ENABLED(CONFIG_ROCKCHIP_EBC_DEV)

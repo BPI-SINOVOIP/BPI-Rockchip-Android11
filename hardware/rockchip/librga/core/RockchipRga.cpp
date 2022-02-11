@@ -48,11 +48,7 @@
 #include <utils/Mutex.h>
 #include <utils/Singleton.h>
 #include <ui/PixelFormat.h>
-#include <ui/Rect.h>
-#include <ui/Region.h>
-#include <ui/DisplayInfo.h>
 #include <ui/GraphicBufferMapper.h>
-#include <gui/ISurfaceComposer.h>
 #endif
 
 #include "RockchipRga.h"
@@ -238,7 +234,7 @@ RGA_SINGLETON_STATIC_INSTANCE(RockchipRga)
     int RockchipRga::RkRgaGetBufferFd(bo_t *bo_info, int *fd) {
 #if LIBDRM
         int ret = 0;
-        ret = drmPrimeHandleToFD(bo_info->fd, bo_info->handle, 0, fd);
+        ret = drmPrimeHandleToFD(bo_info->fd, bo_info->handle, DRM_CLOEXEC | DRM_RDWR, fd);
         return ret;
 #else
         return -1;

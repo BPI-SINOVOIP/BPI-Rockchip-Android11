@@ -5,58 +5,62 @@
 #include "flow.h"
 #include "stream.h"
 
-namespace easymedia {
+namespace easymedia
+{
 
-    static bool send_buffer(Flow* f, MediaBufferVector &input_vector);
+    static bool send_buffer(Flow* f, MediaBufferVector& input_vector);
 
-    class OutPutStreamFlow : public Flow {
-        public:
-            OutPutStreamFlow(const char* param);
-            virtual ~OutPutStreamFlow() {
-                AutoPrintLine apl(__func__);
-                StopAllThread();
-            };
-            static const char* GetFlowName() {
-                return "output_stream";
+    class OutPutStreamFlow : public Flow
+    {
+      public:
+        OutPutStreamFlow(const char* param);
+        virtual ~OutPutStreamFlow()
+        {
+            AutoPrintLine apl(__func__);
+            StopAllThread();
+        };
+        static const char* GetFlowName()
+        {
+            return "output_stream";
+        }
+        virtual int Control(unsigned long int request, ...) final
+        {
+            if (!out_stream) {
+                return -1;
             }
-            virtual int Control(unsigned long int request, ...) final {
-                if(!out_stream) {
-                    return -1;
-                }
-                va_list vl;
-                va_start(vl, request);
-                void* arg = va_arg(vl, void*);
-                va_end(vl);
-                return out_stream->IoCtrl(request, arg);
-            }
+            va_list vl;
+            va_start(vl, request);
+            void* arg = va_arg(vl, void*);
+            va_end(vl);
+            return out_stream->IoCtrl(request, arg);
+        }
 
-        private:
-            std::shared_ptr<Stream> out_stream;
-            friend bool send_buffer(Flow* f, MediaBufferVector &input_vector);
+      private:
+        std::shared_ptr<Stream> out_stream;
+        friend bool send_buffer(Flow* f, MediaBufferVector& input_vector);
     };
 
-    OutPutStreamFlow::OutPutStreamFlow(const char* param) {
+    OutPutStreamFlow::OutPutStreamFlow(const char* param)
+    {
         std::list<std::string> separate_list;
         std::map<std::string, std::string> params;
-        if(!ParseWrapFlowParams(param, params, separate_list)) {
+        if (!ParseWrapFlowParams(param, params, separate_list)) {
             SetError(-EINVAL);
             return;
         }
-        std::string &name = params[KEY_NAME];
+        std::string& name = params[KEY_NAME];
         const char* stream_name = name.c_str();
         SlotMap sm;
         int input_maxcachenum = 10;
         ParseParamToSlotMap(params, sm, input_maxcachenum);
-        if(sm.thread_model == Model::NONE)
-            sm.thread_model =
-                !params[KEY_FPS].empty() ? Model::ASYNCATOMIC : Model::ASYNCCOMMON;
-        if(sm.mode_when_full == InputMode::NONE) {
+        if (sm.thread_model == Model::NONE)
+            sm.thread_model = !params[KEY_FPS].empty() ? Model::ASYNCATOMIC : Model::ASYNCCOMMON;
+        if (sm.mode_when_full == InputMode::NONE) {
             sm.mode_when_full = InputMode::DROPCURRENT;
         }
-        const std::string &stream_param = separate_list.back();
-        auto stream =
-            REFLECTOR(Stream)::Create<Stream>(stream_name, stream_param.c_str());
-        if(!stream) {
+        const std::string& stream_param = separate_list.back();
+        auto stream = REFLECTOR(Stream)::Create<Stream>(stream_name, stream_param.c_str());
+        if (!stream) {
             LOG("Fail to create stream %s\n", stream_name);
             SetError(-EINVAL);
             return;
@@ -66,7 +70,7 @@ namespace easymedia {
         sm.process = send_buffer;
         std::string tag = "OutputStreamFlow:";
         tag.append(stream_name);
-        if(!InstallSlotMap(sm, tag, -1)) {
+        if (!InstallSlotMap(sm, tag, -1)) {
             LOG("Fail to InstallSlotMap for %s\n", tag.c_str());
             SetError(-EINVAL);
             return;
@@ -75,21 +79,24 @@ namespace easymedia {
         SetFlowTag(tag);
     }
 
-    bool send_buffer(Flow* f, MediaBufferVector &input_vector) {
+    bool send_buffer(Flow* f, MediaBufferVector& input_vector)
+    {
         OutPutStreamFlow* flow = static_cast<OutPutStreamFlow*>(f);
-        auto &buffer = input_vector[0];
-        if(!buffer) {
+        auto& buffer = input_vector[0];
+        if (!buffer) {
             return true;
         }
         return flow->out_stream->Write(buffer);
     }
 
     DEFINE_FLOW_FACTORY(OutPutStreamFlow, Flow)
-// TODO!
-    const char* FACTORY(OutPutStreamFlow)::ExpectedInputDataType() {
+    // TODO!
+    const char* FACTORY(OutPutStreamFlow)::ExpectedInputDataType()
+    {
         return "";
     }
-    const char* FACTORY(OutPutStreamFlow)::OutPutDataType() {
+    const char* FACTORY(OutPutStreamFlow)::OutPutDataType()
+    {
         return nullptr;
     }
 

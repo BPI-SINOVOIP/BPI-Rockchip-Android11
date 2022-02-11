@@ -226,6 +226,8 @@ TEE_Result TEE_SetOperationKey2(TEE_OperationHandle operation,
 void TEE_CopyOperation(TEE_OperationHandle dstOperation,
 		       TEE_OperationHandle srcOperation);
 
+TEE_Result TEE_IsAlgorithmSupported(uint32_t algId, uint32_t element);
+
 /* Cryptographic Operations API - Message Digest Functions */
 
 void TEE_DigestUpdate(TEE_OperationHandle operation,
@@ -331,14 +333,6 @@ void TEE_DeriveKey(TEE_OperationHandle operation,
 /* Cryptographic Operations API - Random Number Generation Functions */
 
 void TEE_GenerateRandom(void *randomBuffer, uint32_t randomBufferLen);
-
-void TEE_RandomAddEntropy(void *entropyBuffer, uint32_t entropyBufferLen);
-
-/*TA can use TEE_DerivekeyFromHard to derive key from hard unique key
-*data should not be NULL; dataLen should not be 0.
-*key should not be NULL; keyLen should bigger than 0 and not bigger than 32.
-*/
-void TEE_DerivekeyFromHard(void *data, uint32_t dataLen, void *key, uint32_t keyLen);
 
 /* Date & Time API */
 

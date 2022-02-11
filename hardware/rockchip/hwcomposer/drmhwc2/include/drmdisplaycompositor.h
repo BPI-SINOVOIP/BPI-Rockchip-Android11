@@ -20,7 +20,7 @@
 
 #include "drmdisplaycomposition.h"
 #include "drmframebuffer.h"
-#include "drmhwcomposer.h"
+#include "drmlayer.h"
 #include "resourcemanager.h"
 #include "vsyncworker.h"
 #include "drmcompositorworker.h"

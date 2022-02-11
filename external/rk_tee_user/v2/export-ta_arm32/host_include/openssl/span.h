@@ -21,10 +21,12 @@
 
 extern "C++" {
 
+#include <stdlib.h>
+
 #include <algorithm>
 #include <type_traits>
 
-namespace bssl {
+BSSL_NAMESPACE_BEGIN
 
 template <typename T>
 class Span;
@@ -104,6 +106,8 @@ class Span : private internal::SpanBase<const T> {
       std::is_convertible<decltype(std::declval<C>().data()), T *>::value &&
       std::is_integral<decltype(std::declval<C>().size())>::value>;
 
+  static const size_t npos = static_cast<size_t>(-1);
+
  public:
   constexpr Span() : Span(nullptr, 0) {}
   constexpr Span(T *ptr, size_t len) : data_(ptr), size_(len) {}
@@ -124,19 +128,48 @@ class Span : private internal::SpanBase<const T> {
 
   T *data() const { return data_; }
   size_t size() const { return size_; }
+  bool empty() const { return size_ == 0; }
 
   T *begin() const { return data_; }
   const T *cbegin() const { return data_; }
-  T *end() const { return data_ + size_; };
-  const T *cend() const { return end(); };
+  T *end() const { return data_ + size_; }
+  const T *cend() const { return end(); }
 
-  T &operator[](size_t i) const { return data_[i]; }
-  T &at(size_t i) const { return data_[i]; }
+  T &front() const {
+    if (size_ == 0) {
+      abort();
+    }
+    return data_[0];
+  }
+  T &back() const {
+    if (size_ == 0) {
+      abort();
+    }
+    return data_[size_ - 1];
+  }
+
+  T &operator[](size_t i) const {
+    if (i >= size_) {
+      abort();
+    }
+    return data_[i];
+  }
+  T &at(size_t i) const { return (*this)[i]; }
+
+  Span subspan(size_t pos = 0, size_t len = npos) const {
+    if (pos > size_) {
+      abort();  // absl::Span throws an exception here.
+    }
+    return Span(data_ + pos, std::min(size_ - pos, len));
+  }
 
  private:
   T *data_;
   size_t size_;
 };
+
+template <typename T>
+const size_t Span<T>::npos;
 
 template <typename T>
 Span<T> MakeSpan(T *ptr, size_t size) {
@@ -158,7 +191,7 @@ auto MakeConstSpan(const C &c) -> decltype(MakeConstSpan(c.data(), c.size())) {
   return MakeConstSpan(c.data(), c.size());
 }
 
-}  // namespace bssl
+BSSL_NAMESPACE_END
 
 }  // extern C++
 

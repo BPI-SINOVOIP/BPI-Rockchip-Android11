@@ -17,8 +17,6 @@
  * limitations under the License.
  */
 
-#include "im2d_api/im2d.hpp"
-#include "args.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,12 +27,15 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#include "RgaUtils.h"
-#include "rga.h"
-
 #ifdef ANDROID
 #include <ui/GraphicBuffer.h>
 #endif
+
+#include "im2d_api/im2d.hpp"
+#include "RockchipRga.h"
+#include "RgaUtils.h"
+#include "rga.h"
+#include "args.h"
 
 #define ERROR               -1
 
@@ -678,13 +679,13 @@ int main(int argc, char*  argv[]) {
     sp<GraphicBuffer> gbuffer = reinterpret_cast<GraphicBuffer*>(dst_buf);
     if (gbuffer != NULL) {
         ret = gbuffer->lock(GRALLOC_USAGE_SW_WRITE_OFTEN, (void**)&outbuf);
-        output_buf_data_to_file(outbuf, dst.format, dst.width, dst.height, 0);
+        output_buf_data_to_file(outbuf, dst.format, dst.wstride, dst.hstride, 0);
         ret = gbuffer->unlock();
     }
 #else
     if (dst_buf != NULL) {
         ret = dst_buf->lock(GRALLOC_USAGE_SW_WRITE_OFTEN, (void**)&outbuf);
-        output_buf_data_to_file(outbuf, dst.format, dst.width, dst.height, 0);
+        output_buf_data_to_file(outbuf, dst.format, dst.wstride, dst.hstride, 0);
         ret = dst_buf->unlock();
     }
 #endif
@@ -697,7 +698,7 @@ int main(int argc, char*  argv[]) {
     }
 
     if (dst_buf != NULL) {
-        output_buf_data_to_file(dst_buf, dst.format, dst.width, dst.height, 0);
+        output_buf_data_to_file(dst_buf, dst.format, dst.wstride, dst.hstride, 0);
         free(dst_buf);
         dst_buf = NULL;
     }

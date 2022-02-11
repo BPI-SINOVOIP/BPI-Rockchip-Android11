@@ -21,8 +21,7 @@
 
 static enum v4l2_buf_type m_cur_type;
 
-CamCaptureHelper::CamCaptureHelper() :
-    mDevfd(-1)
+CamCaptureHelper::CamCaptureHelper() : mDevfd(-1)
 {
     ALOGD("CamCaptureHelper enter");
     // default v4l2 request buffer count
@@ -54,13 +53,13 @@ int CamCaptureHelper::v4l2Ioctl(int fd, int req, void* arg)
     return ret;
 }
 
-bool CamCaptureHelper::init(MetaInfo *meta)
+bool CamCaptureHelper::init(MetaInfo* meta)
 {
-    struct v4l2_capability     cap;
-    struct v4l2_format         vfmt;
+    struct v4l2_capability cap;
+    struct v4l2_format vfmt;
     struct v4l2_requestbuffers req;
-    struct v4l2_buffer         buf;
-    enum   v4l2_buf_type       type;
+    struct v4l2_buffer buf;
+    enum v4l2_buf_type type;
 
     int i, buf_len;
 
@@ -69,8 +68,8 @@ bool CamCaptureHelper::init(MetaInfo *meta)
         return false;
     }
 
-    ALOGD("camera capture init start: dev %s, wh %dx%d, format %d, bufcnt %d",
-          meta->video_dev, meta->width, meta->height, meta->format, mPixBufCnt);
+    ALOGD("camera capture init start: dev %s, wh %dx%d, format %d, bufcnt %d", meta->video_dev, meta->width,
+          meta->height, meta->format, mPixBufCnt);
 
     mDevfd = open(meta->video_dev, O_RDWR, 0);
     if (mDevfd < 0) {
@@ -84,8 +83,7 @@ bool CamCaptureHelper::init(MetaInfo *meta)
         goto _FAIL;
     }
 
-    if (!(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE)
-            && !(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE_MPLANE)) {
+    if (!(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE) && !(cap.capabilities & V4L2_CAP_VIDEO_CAPTURE_MPLANE)) {
         ALOGE("Capture not supported");
         goto _FAIL;
     }
@@ -124,9 +122,9 @@ bool CamCaptureHelper::init(MetaInfo *meta)
     ALOGD("VIDIOC_G_FMT w %d h %d", vfmt.fmt.pix.width, vfmt.fmt.pix.height);
 
     // Request memory-mapped buffers
-    //req = (struct v4l2_requestbuffers) {0};
-    req.count  = mPixBufCnt;
-    req.type   = type;
+    // req = (struct v4l2_requestbuffers) {0};
+    req.count = mPixBufCnt;
+    req.type = type;
     req.memory = V4L2_MEMORY_MMAP;
     if (-1 == v4l2Ioctl(mDevfd, VIDIOC_REQBUFS, &req)) {
         ALOGE("Device does not support mmap");
@@ -139,11 +137,11 @@ bool CamCaptureHelper::init(MetaInfo *meta)
     }
 
     // mmap() the buffers into userspace memory
-    for (i = 0 ; i < mPixBufCnt; i++) {
-        //buf = (struct v4l2_buffer) {0};
-        buf.type    = type;
-        buf.memory  = V4L2_MEMORY_MMAP;
-        buf.index   = i;
+    for (i = 0; i < mPixBufCnt; i++) {
+        // buf = (struct v4l2_buffer) {0};
+        buf.type = type;
+        buf.memory = V4L2_MEMORY_MMAP;
+        buf.index = i;
         struct v4l2_plane planes[FMT_NUM_PLANES];
         buf.memory = V4L2_MEMORY_MMAP;
         if (V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE == type) {
@@ -160,19 +158,12 @@ bool CamCaptureHelper::init(MetaInfo *meta)
             // tmp_buffers[n_buffers].length = buf.m.planes[0].length;
             buf_len = buf.m.planes[0].length;
             mCambuf[i].start =
-                    mmap(NULL /* start anywhere */,
-                         buf.m.planes[0].length,
-                    PROT_READ | PROT_WRITE /* required */,
-                    MAP_SHARED /* recommended */,
-                    mDevfd, buf.m.planes[0].m.mem_offset);
+                mmap(NULL /* start anywhere */, buf.m.planes[0].length, PROT_READ | PROT_WRITE /* required */,
+                     MAP_SHARED /* recommended */, mDevfd, buf.m.planes[0].m.mem_offset);
         } else {
             buf_len = buf.length;
-            mCambuf[i].start =
-                    mmap(NULL /* start anywhere */,
-                         buf.length,
-                         PROT_READ | PROT_WRITE /* required */,
-                         MAP_SHARED /* recommended */,
-                         mDevfd, buf.m.offset);
+            mCambuf[i].start = mmap(NULL /* start anywhere */, buf.length, PROT_READ | PROT_WRITE /* required */,
+                                    MAP_SHARED /* recommended */, mDevfd, buf.m.offset);
         }
         if (MAP_FAILED == mCambuf[i].start) {
             ALOGE("ERROR: Failed to map device frame buffers");
@@ -181,7 +172,7 @@ bool CamCaptureHelper::init(MetaInfo *meta)
         mCambuf[i].length = buf_len;
 
         struct v4l2_exportbuffer expbuf;
-        //struct v4l2_exportbuffer expbuf = (struct v4l2_exportbuffer) {0} ;
+        // struct v4l2_exportbuffer expbuf = (struct v4l2_exportbuffer) {0} ;
         // xcam_mem_clear (expbuf);
         expbuf.type = type;
         expbuf.index = i;
@@ -195,13 +186,13 @@ bool CamCaptureHelper::init(MetaInfo *meta)
         mCambuf[i].export_fd = expbuf.fd;
     }
 
-    for (i = 0; i < mPixBufCnt; i++ ) {
+    for (i = 0; i < mPixBufCnt; i++) {
         struct v4l2_plane planes[FMT_NUM_PLANES];
 
-        //buf = (struct v4l2_buffer) {0};
-        buf.type    = type;
-        buf.memory  = V4L2_MEMORY_MMAP;
-        buf.index   = i;
+        // buf = (struct v4l2_buffer) {0};
+        buf.type = type;
+        buf.memory = V4L2_MEMORY_MMAP;
+        buf.index = i;
 
         if (V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE == type) {
             buf.m.planes = planes;
@@ -241,7 +232,7 @@ void CamCaptureHelper::deinit()
     v4l2Ioctl(mDevfd, VIDIOC_STREAMOFF, &type);
 
     // un-mmap() buffers
-    for (i = 0 ; i < mPixBufCnt; i++) {
+    for (i = 0; i < mPixBufCnt; i++) {
         munmap(mCambuf[i].start, mCambuf[i].length);
         close(mCambuf[i].export_fd);
     }
@@ -263,8 +254,8 @@ int CamCaptureHelper::v4l2DequeueBuf()
     }
 
     type = m_cur_type;
-    //buf = (struct v4l2_buffer) {0};
-    buf.type   = type;
+    // buf = (struct v4l2_buffer) {0};
+    buf.type = type;
     buf.memory = V4L2_MEMORY_MMAP;
 
     struct v4l2_plane planes[FMT_NUM_PLANES];
@@ -304,10 +295,10 @@ void CamCaptureHelper::v4l2QueueBuf(int idx)
         return;
 
     type = m_cur_type;
-    //buf = (struct v4l2_buffer) {0};
-    buf.type   = type;
+    // buf = (struct v4l2_buffer) {0};
+    buf.type = type;
     buf.memory = V4L2_MEMORY_MMAP;
-    buf.index  = idx;
+    buf.index = idx;
 
     struct v4l2_plane planes[FMT_NUM_PLANES];
     if (V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE == type) {

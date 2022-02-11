@@ -30,21 +30,21 @@ public:
 
     // Supported lists for InputFormat
     typedef enum {
-        INPUT_FMT_YUV420SP      = MPP_FMT_YUV420SP,
-        INPUT_FMT_YUV420P       = MPP_FMT_YUV420P,
-        INPUT_FMT_YUV422SP_VU   = MPP_FMT_YUV422SP_VU,
-        INPUT_FMT_YUV422_YUYV   = MPP_FMT_YUV422_YUYV,
-        INPUT_FMT_YUV422_UYVY   = MPP_FMT_YUV422_UYVY,
-        INPUT_FMT_ARGB8888      = MPP_FMT_ARGB8888,
-        INPUT_FMT_RGBA8888      = MPP_FMT_RGBA8888,
-        INPUT_FMT_ABGR8888      = MPP_FMT_ABGR8888
+        INPUT_FMT_YUV420SP     = MPP_FMT_YUV420SP,
+        INPUT_FMT_YUV420P      = MPP_FMT_YUV420P,
+        INPUT_FMT_YUV422SP_VU  = MPP_FMT_YUV422SP_VU,
+        INPUT_FMT_YUV422_YUYV  = MPP_FMT_YUV422_YUYV,
+        INPUT_FMT_YUV422_UYVY  = MPP_FMT_YUV422_UYVY,
+        INPUT_FMT_ARGB8888     = MPP_FMT_ARGB8888,
+        INPUT_FMT_RGBA8888     = MPP_FMT_RGBA8888,
+        INPUT_FMT_ABGR8888     = MPP_FMT_ABGR8888
     } InputFormat;
 
     typedef struct {
-        uint8_t *data;
-        int size;
+        char  *data;
+        int    size;
         /* Output packet hander */
-        void *packetHandler;
+        void  *packetHandler;
     } OutputPacket_t;
 
     typedef struct {
@@ -68,47 +68,47 @@ public:
         int thumbQLvl;
 
         void *exifInfo;
+        void *gpsInfo;
     } EncInInfo;
+
+    typedef struct {
+        /* output buffer information */
+        int outputPhyAddr;
+        unsigned char *outputVirAddr;
+        int outBufLen;
+
+        /* output packet hander */
+        OutputPacket_t outPkt;
+    } EncOutInfo;
 
     bool prepareEncoder();
     void flushBuffer();
+
+    void updateEncodeQuality(int quant);
     bool updateEncodeCfg(int width, int height,
-                         InputFormat fmt = INPUT_FMT_YUV420SP, int qLvl = 8);
+                         InputFormat fmt = INPUT_FMT_YUV420SP, int qLvl = 8,
+                         int wstride = 0, int hstride = 0);
 
     /*
-     * Output packet buffers within limits, so release packet buffer if one
+     * output packet buffers within limits, so release packet buffer if one
      * packet has been display successful.
      */
     void deinitOutputPacket(OutputPacket_t *aPktOut);
 
     bool encodeFrame(char *data, OutputPacket_t *aPktOut);
-    bool encodeFile(const char *input_file, const char *output_file);
-
-
-    /*
-     * Encode raw image by commit input fd to the encoder.
-     *
-     * param[in] aInfoIn    - input parameter for picture encode
-     * param[in] dst_offset - output buffer offset, equals to jpeg header_len
-     * param[out] aPktOut   - pointer to buffer pointer containing output data.
-     */
-    bool encodeImageFD(EncInInfo *aInfoIn,
-                       int dst_offset, OutputPacket_t *aPktOut);
+    bool encodeFile(const char *inputFile, const char *outputFile);
 
     /*
-     * ThumbNail encode for a large resolution input image.
+     * designed for Rockchip cameraHal, commit input\output fd for encoder
      *
-     * param[in] aInfoIn   - input parameter for thumnNail encode
-     * param[out] outPkt   - pointer to buffer pointer containing output data.
+     * param[in] aInfoIn - pointer to input buffer parameter for encoder
+     * param[in/out] aInfoOut - pointer to output buffer parameter for encoder
      */
-    bool encodeThumb(EncInInfo *aInfoIn, uint8_t **data, int *len);
-
-    /* designed for Rockchip cameraHal, commit input fd for encode */
-    bool encode(EncInInfo *inInfo, OutputPacket_t *outPkt);
+    bool encode(EncInInfo *aInInfo, EncOutInfo *aOutInfo);
 
 private:
     MppCtx          mMppCtx;
-    MppApi          *mMpi;
+    MppApi         *mMpi;
 
     int             mInitOK;
     uint32_t        mFrameCount;
@@ -116,9 +116,11 @@ private:
     /*
      * Format of the raw input data for encode
      */
-    int             mInputWidth;
-    int             mInputHeight;
-    InputFormat     mInputFmt;
+    int             mWidth;
+    int             mHeight;
+    int             mHorStride;
+    int             mVerStride;
+    InputFormat     mFmt;
 
      /* coding quality - range from (1 - 10) */
     int             mEncodeQuality;
@@ -128,19 +130,26 @@ private:
     /*
      * output packet list
      *
-     * Note: Output packet buffers within limits, so wo need to release output
+     * Note: output packet buffers within limits, so wo need to release output
      * buffer as soon as we process everything
      */
-    QList           *mPackets;
+    QList          *mPackets;
 
-    /* Dump input & output for debug */
-    FILE            *mInputFile;
-    FILE            *mOutputFile;
+    /* dump input & output for debug */
+    FILE           *mInputFile;
+    FILE           *mOutputFile;
 
-    void updateEncodeQuality(int quant);
-    MPP_RET cropInputYUVImage(EncInInfo *aInfoIn, void* outAddr);
+    int getFrameSize(InputFormat fmt, int width, int height);
 
-    MPP_RET runFrameEnc(MppFrame in_frame, MppPacket out_packet);
+    MPP_RET runFrameEnc(MppFrame inFrm, MppPacket outPkt);
+
+    MPP_RET cropThumbImage(EncInInfo *aInfoIn, void* outAddr);
+
+    /* encode raw image by commit input fd to the encoder */
+    bool encodeImageFD(EncInInfo *aInfoIn, EncOutInfo *aInfoOut);
+
+    /* thumbNail encode for a large resolution input image */
+    bool encodeThumb(EncInInfo *aInfoIn, uint8_t **data, int *len);
 };
 
 #endif  // __MPI_JPEG_ENCODER_H__

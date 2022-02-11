@@ -7,21 +7,23 @@
 #include "buffer.h"
 #include "utils.h"
 
-namespace easymedia {
+namespace easymedia
+{
 
     DEFINE_REFLECTOR(Demuxer)
 
-// request should equal demuxer_name
+    // request should equal demuxer_name
     DEFINE_FACTORY_COMMON_PARSE(Demuxer)
 
-    Demuxer::Demuxer(const char* param) : total_time(0.0f) {
+    Demuxer::Demuxer(const char* param) : total_time(0.0f)
+    {
         std::map<std::string, std::string> params;
-        if(!parse_media_param_map(param, params)) {
+        if (!parse_media_param_map(param, params)) {
             return;
         }
-        for(auto &p : params) {
-            const std::string &key = p.first;
-            if(key == KEY_PATH) {
+        for (auto& p : params) {
+            const std::string& key = p.first;
+            if (key == KEY_PATH) {
                 path = p.second;
             }
         }

@@ -40,6 +40,11 @@
 #include <stdint.h>
 #include <hardware/gralloc.h>
 
+#ifdef ANDROID_S
+#include <hardware/hardware_rockchip.h>
+#include <hardware/gralloc_rockchip.h>
+#endif
+
 typedef struct hwc_drm_bo {
   uint32_t width;
   uint32_t height;

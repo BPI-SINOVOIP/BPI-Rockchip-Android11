@@ -796,9 +796,15 @@ int DrmHwcNativeHandle::CopyBufferHandle(buffer_handle_t handle,
 
 DrmHwcNativeHandle::~DrmHwcNativeHandle() {
   Clear();
+  pthread_mutex_destroy(&lock_);
 }
 
 void DrmHwcNativeHandle::Clear() {
+    AutoLock lock(&lock_, "DrmHwcNativeHandle::Clear");
+    int ret = lock.Lock();
+    if (ret)
+      return;
+
 #if USE_GRALLOC_4
       if ( handle_ != NULL )
       {
@@ -807,7 +813,6 @@ void DrmHwcNativeHandle::Clear() {
           handle_ = NULL;
       }
 #else   // USE_GRALLOC_4
-
   if (gralloc_ != NULL && handle_ != NULL) {
     gralloc_->unregisterBuffer(gralloc_, handle_);
     free_buffer_handle(handle_);
@@ -4020,7 +4025,11 @@ static int hwc_get_display_configs(struct hwc_composer_device_1 *dev,
        disable_afbdc = true;
 #endif
     if(disable_afbdc){
+#ifdef USE_GRALLOC_4 // Android 11 use Gralloc 4.0
+      property_set("vendor.gralloc.no_afbc_for_fb_target_layer", "1");
+#else
       property_set( PROPERTY_TYPE ".gralloc.disable_afbc", "1");
+#endif
       ALOGI("%s:line=%d primary framebuffer size %dx%d not support AFBDC, to disable AFBDC\n",
                __FUNCTION__, __LINE__, hd->framebuffer_width,hd->framebuffer_height);
     }

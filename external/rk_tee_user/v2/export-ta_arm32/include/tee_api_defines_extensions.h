@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: BSD-2-Clause */
 /*
  * Copyright (c) 2014, Linaro Limited
+ * Copyright (c) 2021, SumUp Services GmbH
  */
 
 #ifndef TEE_API_DEFINES_EXTENSIONS_H
@@ -63,6 +64,11 @@
 #define TEE_ALG_RSASSA_PKCS1_V1_5	0xF0000830
 
 /*
+ *  TDEA CMAC (NIST SP800-38B)
+ */
+#define TEE_ALG_DES3_CMAC	0xF0000613
+
+/*
  * Implementation-specific object storage constants
  */
 
@@ -88,5 +94,12 @@
  */
 #define TEE_MEMORY_ACCESS_NONSECURE          0x10000000
 #define TEE_MEMORY_ACCESS_SECURE             0x20000000
+
+/*
+ * Implementation-specific login types
+ */
+
+/* Private login method for REE kernel clients */
+#define TEE_LOGIN_REE_KERNEL		0x80000000
 
 #endif /* TEE_API_DEFINES_EXTENSIONS_H */

@@ -34,7 +34,7 @@
 #error Neither __ILP32__ nor __LP64__ is defined
 #endif
 
-#ifndef ASM
+#ifndef __ASSEMBLER__
 
 /* 7.18.1.1 Exact-width interger types */
 #ifndef __int8_t_defined
@@ -93,7 +93,7 @@ typedef unsigned long uintptr_t;
 typedef int64_t intmax_t;
 typedef uint64_t uintmax_t;
 
-#endif /*ASM*/
+#endif /*__ASSEMBLER__*/
 
 /*
  * 7.18.2 Limits of specified-width integer types
@@ -168,6 +168,20 @@ typedef uint64_t uintmax_t;
  * 7.18.4 Macros for integer constants
  */
 
+#ifdef __ASSEMBLER__
+#define U(v)		v
+#define UL(v)		v
+#define ULL(v)		v
+#define L(v)		v
+#define LL(v)		v
+#else
+#define U(v)		v ## U
+#define UL(v)		v ## UL
+#define ULL(v)		v ## ULL
+#define L(v)		v ## L
+#define LL(v)		v ## LL
+#endif
+
 /* 7.18.4.1 Macros for minimum-width integer constants */
 
 #define INT8_C(v)	v
@@ -175,26 +189,21 @@ typedef uint64_t uintmax_t;
 #define INT16_C(v)	v
 #define UINT16_C(v)	v
 #define INT32_C(v)	v
-#define UINT32_C(v)	v ## U
+#define UINT32_C(v)	U(v)
 #ifdef __ILP32__
-#define INT64_C(v)	v ## LL
-#define UINT64_C(v)	v ## ULL
+#define INT64_C(v)	LL(v)
+#define UINT64_C(v)	ULL(v)
 #endif
 #ifdef __LP64__
-#define INT64_C(v)	v ## L
-#define UINT64_C(v)	v ## UL
+#define INT64_C(v)	L(v)
+#define UINT64_C(v)	UL(v)
 #endif
 
-#ifdef ASM
-#define UINTPTR_C(v) v
-#else
-#define UINTPTR_C(v) v ## LU
-#endif
+#define UINTPTR_C(v)	UL(v)
 
 /* 7.18.4.2 Macros for greatest-width integer constants */
 
 #define INTMAX_C(v)	INT64_C(v)
 #define UINTMAX_C(v)	UINT64_C(v)
-
 
 #endif /* STDINT_H */

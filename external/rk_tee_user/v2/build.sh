@@ -8,18 +8,37 @@ WORK_DIR_TOP=$(cd `dirname $0` ; pwd)
 #./build.sh ta to compile TA with 32 bits
 
 TOOLCHAIN_PREBUILTS=$WORK_DIR_TOP/../../../prebuilts
-TOOLCHAIN_PATH_ARM32=gcc/linux-x86/arm/gcc-linaro-6.3.1-2017.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
-TOOLCHAIN_PATH_AARCH64=gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+TOOLCHAIN_PATH_ARM32=gcc/linux-x86/arm/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf/bin/
+TOOLCHAIN_PATH_AARCH64=gcc/linux-x86/aarch64/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/bin/
+CROSS_COMPILE32=arm-none-linux-gnueabihf-
+CROSS_COMPILE64=aarch64-none-linux-gnu-
 
 if [ ! -d "$TOOLCHAIN_PREBUILTS" ]; then
 	TOOLCHAIN_PREBUILTS=$WORK_DIR_TOP/../../../../prebuilts
 fi
 
-AARCH64_TOOLCHAIN=$TOOLCHAIN_PREBUILTS/$TOOLCHAIN_PATH_AARCH64
-ARM32_TOOLCHAIN=$TOOLCHAIN_PREBUILTS/$TOOLCHAIN_PATH_ARM32
+AARCH64_TOOLCHAIN=$TOOLCHAIN_PREBUILTS/$TOOLCHAIN_PATH_AARCH64/$CROSS_COMPILE64
+ARM32_TOOLCHAIN=$TOOLCHAIN_PREBUILTS/$TOOLCHAIN_PATH_ARM32/$CROSS_COMPILE32
 
 make TA_DEV_KIT_DIR=$WORK_DIR_TOP/export-ta_arm32 clean
 BUILD_CATA_BITS="$1"
+
+if [ "$BUILD_CATA_BITS" == "3264" ] || [ "$BUILD_CATA_BITS" == "6464" ]; then
+	if [ ! -d "$TOOLCHAIN_PREBUILTS/$TOOLCHAIN_PATH_AARCH64" ]; then
+		echo "Toolchain error! Need toolchain version: $TOOLCHAIN_PATH_AARCH64"
+		echo "You can get it from following address:"
+		echo "https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads"
+		exit
+	fi
+else
+	if [ ! -d "$TOOLCHAIN_PREBUILTS/$TOOLCHAIN_PATH_ARM32" ]; then
+		echo "Toolchain error! Need toolchain version: $TOOLCHAIN_PATH_ARM32"
+		echo "You can get it from following address:"
+		echo "https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads"
+		exit
+	fi
+fi
+
 if [ "$BUILD_CATA_BITS" == "3232" ]; then
 	export BUILD_CA=y
 	make CROSS_COMPILE_HOST=$ARM32_TOOLCHAIN \

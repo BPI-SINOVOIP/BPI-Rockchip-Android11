@@ -26,7 +26,7 @@
 #include <mediactl.h>
 #include <v4l2_device.h>
 #include <base/xcam_log.h>
-#include <linux/rk-camera-module.h>
+#include <rk-camera-module.h>
 #include <RkAiqManager.h>
 #include <RkAiqCalibDb.h>
 #include <sys/ioctl.h>
@@ -383,9 +383,42 @@ int rkisp_cl_prepare(void* cl_ctx,
         //default
         work_mode = RK_AIQ_WORKING_MODE_NORMAL;
     }
-    ret = rk_aiq_uapi_sysctl_prepare(aiq_ctx, prepare_params->width, prepare_params->height, work_mode);
+    rk_aiq_static_info_t s_info;
+    rk_aiq_uapi_sysctl_getStaticMetas(aiq_ctx->_sensor_entity_name, &s_info);
+    // check if hdr mode is supported
+    if (work_mode != 0) {
+        bool b_work_mode_supported = false;
+        rk_aiq_sensor_info_t* sns_info = &s_info.sensor_info;
+        for (int i = 0; i < SUPPORT_FMT_MAX; i++)
+            // TODO, should decide the resolution firstly,
+            // then check if the mode is supported on this
+            // resolution
+            if ((sns_info->support_fmt[i].hdr_mode == 5/*HDR_X2*/ &&
+                work_mode == RK_AIQ_WORKING_MODE_ISP_HDR2) ||
+                (sns_info->support_fmt[i].hdr_mode == 6/*HDR_X3*/ &&
+                 work_mode == RK_AIQ_WORKING_MODE_ISP_HDR3)) {
+                b_work_mode_supported = true;
+                break;
+            }
+
+        if (!b_work_mode_supported) {
+            LOGE("ctx->_sensor_entity_name:%s",aiq_ctx->_sensor_entity_name);
+            LOGE("\nWARNING !!!"
+                   "work mode %d is not supported, changed to normal !!!\n\n",
+                   work_mode);
+            work_mode = RK_AIQ_WORKING_MODE_NORMAL;
+        }
+    }
+
     gAiqCameraHalAdapter->set_static_metadata (prepare_params->staticMeta);
     gAiqCameraHalAdapter->set_working_mode(work_mode);
+    camera_metadata_entry mode_3dnr = gAiqCameraHalAdapter->get_static_metadata().find(RK_NR_FEATURE_3DNR_MODE);
+    if(mode_3dnr.count == 1) {
+	    ALOGI("RK_MODULE_NR:%d",mode_3dnr.data.u8[0]);
+        rk_aiq_uapi_sysctl_setModuleCtl(aiq_ctx,RK_MODULE_NR, mode_3dnr.data.u8[0]);
+    }
+
+    ret = rk_aiq_uapi_sysctl_prepare(aiq_ctx, prepare_params->width, prepare_params->height, work_mode);
 
     CamHwIsp20::selectIqFile(aiq_ctx->_sensor_entity_name, iq_file_full_name);
     property_set(CAM_IQ_PROPERTY_KEY,iq_file_full_name);

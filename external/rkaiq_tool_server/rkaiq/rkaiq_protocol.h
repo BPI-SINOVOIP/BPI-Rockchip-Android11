@@ -16,28 +16,29 @@
 int StopProcess(const char* process, const char* str);
 int WaitProcessExit(const char* process, int sec);
 
-class RKAiqProtocol {
- public:
-  RKAiqProtocol() = default;
-  virtual ~RKAiqProtocol() = default;
-  static int DoChangeAppMode(appRunStatus mode);
-  static void HandlerTCPMessage(int sockfd, char* buffer, int size);
-  static void HandlerCheckDevice(int sockfd, char* buffer, int size);
-  static void HandlerReceiveFile(int sockfd, char* buffer, int size);
-  static int MessageForward(int sockfd, char* buffer, int size);
-  static int doMessageForward(int sockfd);
-  static int ConnectAiq();
-  static void DisConnectAiq();
-  static void KillApp();
-  static int StartApp();
-  static int StartRTSP();
-  static int StopRTSP();
-  static void Exit();
+class RKAiqProtocol
+{
+  public:
+    RKAiqProtocol() = default;
+    virtual ~RKAiqProtocol() = default;
+    static int DoChangeAppMode(appRunStatus mode);
+    static void HandlerTCPMessage(int sockfd, char* buffer, int size);
+    static void HandlerCheckDevice(int sockfd, char* buffer, int size);
+    static void HandlerReceiveFile(int sockfd, char* buffer, int size);
+    static int MessageForward(int sockfd, char* buffer, int size);
+    static int doMessageForward(int sockfd);
+    static int ConnectAiq();
+    static void DisConnectAiq();
+    static void KillApp();
+    static int StartApp();
+    static int StartRTSP();
+    static int StopRTSP();
+    static void Exit();
 
- private:
-  static std::mutex mutex_;
-  static bool is_recv_running;
-  static std::unique_ptr<std::thread> forward_thread;
+  private:
+    static std::mutex mutex_;
+    static bool is_recv_running;
+    static std::unique_ptr<std::thread> forward_thread;
 };
 
 #endif

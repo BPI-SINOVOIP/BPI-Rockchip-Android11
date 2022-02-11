@@ -25,14 +25,14 @@
 #include <stdint.h>
 
 struct media_device_info {
-  char driver[16];
-  char model[32];
-  char serial[40];
-  char bus_info[32];
-  __u32 media_version;
-  __u32 hw_revision;
-  __u32 driver_version;
-  __u32 reserved[31];
+    char driver[16];
+    char model[32];
+    char serial[40];
+    char bus_info[32];
+    __u32 media_version;
+    __u32 hw_revision;
+    __u32 driver_version;
+    __u32 reserved[31];
 };
 
 /*
@@ -147,60 +147,60 @@ struct media_device_info {
 #define MEDIA_ENT_ID_FLAG_NEXT (1U << 31)
 
 struct media_entity_desc {
-  __u32 id;
-  char name[32];
-  __u32 type;
-  __u32 revision;
-  __u32 flags;
-  __u32 group_id;
-  __u16 pads;
-  __u16 links;
+    __u32 id;
+    char name[32];
+    __u32 type;
+    __u32 revision;
+    __u32 flags;
+    __u32 group_id;
+    __u16 pads;
+    __u16 links;
 
-  __u32 reserved[4];
+    __u32 reserved[4];
 
-  union {
-    /* Node specifications */
-    struct {
-      __u32 major;
-      __u32 minor;
-    } dev;
+    union {
+        /* Node specifications */
+        struct {
+            __u32 major;
+            __u32 minor;
+        } dev;
 
-    /*
-     * TODO: this shouldn't have been added without
-     * actual drivers that use this. When the first real driver
-     * appears that sets this information, special attention
-     * should be given whether this information is 1) enough, and
-     * 2) can deal with udev rules that rename devices. The struct
-     * dev would not be sufficient for this since that does not
-     * contain the subdevice information. In addition, struct dev
-     * can only refer to a single device, and not to multiple (e.g.
-     * pcm and mixer devices).
-     */
-    struct {
-      __u32 card;
-      __u32 device;
-      __u32 subdevice;
-    } alsa;
+        /*
+         * TODO: this shouldn't have been added without
+         * actual drivers that use this. When the first real driver
+         * appears that sets this information, special attention
+         * should be given whether this information is 1) enough, and
+         * 2) can deal with udev rules that rename devices. The struct
+         * dev would not be sufficient for this since that does not
+         * contain the subdevice information. In addition, struct dev
+         * can only refer to a single device, and not to multiple (e.g.
+         * pcm and mixer devices).
+         */
+        struct {
+            __u32 card;
+            __u32 device;
+            __u32 subdevice;
+        } alsa;
 
-    /*
-     * DEPRECATED: previous node specifications. Kept just to
-     * avoid breaking compilation. Use media_entity_desc.dev
-     * instead.
-     */
-    struct {
-      __u32 major;
-      __u32 minor;
-    } v4l;
-    struct {
-      __u32 major;
-      __u32 minor;
-    } fb;
-    int dvb;
+        /*
+         * DEPRECATED: previous node specifications. Kept just to
+         * avoid breaking compilation. Use media_entity_desc.dev
+         * instead.
+         */
+        struct {
+            __u32 major;
+            __u32 minor;
+        } v4l;
+        struct {
+            __u32 major;
+            __u32 minor;
+        } fb;
+        int dvb;
 
-    /* Sub-device specifications */
-    /* Nothing needed yet */
-    __u8 raw[184];
-  };
+        /* Sub-device specifications */
+        /* Nothing needed yet */
+        __u8 raw[184];
+    };
 };
 
 #define MEDIA_PAD_FL_SINK (1 << 0)
@@ -208,10 +208,10 @@ struct media_entity_desc {
 #define MEDIA_PAD_FL_MUST_CONNECT (1 << 2)
 
 struct media_pad_desc {
-  __u32 entity; /* entity ID */
-  __u16 index;  /* pad index */
-  __u32 flags;  /* pad flags */
-  __u32 reserved[2];
+    __u32 entity; /* entity ID */
+    __u16 index;  /* pad index */
+    __u32 flags;  /* pad flags */
+    __u32 reserved[2];
 };
 
 #define MEDIA_LNK_FL_ENABLED (1 << 0)
@@ -223,19 +223,19 @@ struct media_pad_desc {
 #define MEDIA_LNK_FL_INTERFACE_LINK (1 << 28)
 
 struct media_link_desc {
-  struct media_pad_desc source;
-  struct media_pad_desc sink;
-  __u32 flags;
-  __u32 reserved[2];
+    struct media_pad_desc source;
+    struct media_pad_desc sink;
+    __u32 flags;
+    __u32 reserved[2];
 };
 
 struct media_links_enum {
-  __u32 entity;
-  /* Should have enough room for pads elements */
-  struct media_pad_desc* pads;
-  /* Should have enough room for links elements */
-  struct media_link_desc* links;
-  __u32 reserved[4];
+    __u32 entity;
+    /* Should have enough room for pads elements */
+    struct media_pad_desc* pads;
+    /* Should have enough room for links elements */
+    struct media_link_desc* links;
+    __u32 reserved[4];
 };
 
 /* Interface type ranges */
@@ -276,29 +276,29 @@ struct media_links_enum {
 #define MEDIA_V2_ENTITY_HAS_FLAGS(media_version) ((media_version) >= ((4 << 16) | (19 << 8) | 0))
 
 struct media_v2_entity {
-  __u32 id;
-  char name[64];
-  __u32 function; /* Main function of the entity */
-  __u32 flags;
-  __u32 reserved[5];
+    __u32 id;
+    char name[64];
+    __u32 function; /* Main function of the entity */
+    __u32 flags;
+    __u32 reserved[5];
 } __attribute__((packed));
 
 /* Should match the specific fields at media_intf_devnode */
 struct media_v2_intf_devnode {
-  __u32 major;
-  __u32 minor;
+    __u32 major;
+    __u32 minor;
 } __attribute__((packed));
 
 struct media_v2_interface {
-  __u32 id;
-  __u32 intf_type;
-  __u32 flags;
-  __u32 reserved[9];
+    __u32 id;
+    __u32 intf_type;
+    __u32 flags;
+    __u32 reserved[9];
 
-  union {
-    struct media_v2_intf_devnode devnode;
-    __u32 raw[16];
-  };
+    union {
+        struct media_v2_intf_devnode devnode;
+        __u32 raw[16];
+    };
 } __attribute__((packed));
 
 /*
@@ -310,39 +310,39 @@ struct media_v2_interface {
 #define MEDIA_V2_PAD_HAS_INDEX(media_version) ((media_version) >= ((4 << 16) | (19 << 8) | 0))
 
 struct media_v2_pad {
-  __u32 id;
-  __u32 entity_id;
-  __u32 flags;
-  __u32 index;
-  __u32 reserved[4];
+    __u32 id;
+    __u32 entity_id;
+    __u32 flags;
+    __u32 index;
+    __u32 reserved[4];
 } __attribute__((packed));
 
 struct media_v2_link {
-  __u32 id;
-  __u32 source_id;
-  __u32 sink_id;
-  __u32 flags;
-  __u32 reserved[6];
+    __u32 id;
+    __u32 source_id;
+    __u32 sink_id;
+    __u32 flags;
+    __u32 reserved[6];
 } __attribute__((packed));
 
 struct media_v2_topology {
-  __u64 topology_version;
+    __u64 topology_version;
 
-  __u32 num_entities;
-  __u32 reserved1;
-  __u64 ptr_entities;
+    __u32 num_entities;
+    __u32 reserved1;
+    __u64 ptr_entities;
 
-  __u32 num_interfaces;
-  __u32 reserved2;
-  __u64 ptr_interfaces;
+    __u32 num_interfaces;
+    __u32 reserved2;
+    __u64 ptr_interfaces;
 
-  __u32 num_pads;
-  __u32 reserved3;
-  __u64 ptr_pads;
+    __u32 num_pads;
+    __u32 reserved3;
+    __u64 ptr_pads;
 
-  __u32 num_links;
-  __u32 reserved4;
-  __u64 ptr_links;
+    __u32 num_links;
+    __u32 reserved4;
+    __u64 ptr_links;
 } __attribute__((packed));
 
 /* ioctls */

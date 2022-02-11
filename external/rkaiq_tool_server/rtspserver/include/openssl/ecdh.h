@@ -75,9 +75,7 @@
 extern "C" {
 #endif
 
-
 // Elliptic curve Diffie-Hellman.
-
 
 // ECDH_compute_key calculates the shared key between |pub_key| and |priv_key|.
 // If |kdf| is not NULL, then it is called with the bytes of the shared key and
@@ -85,9 +83,8 @@ extern "C" {
 // return value. Otherwise, as many bytes of the shared key as will fit are
 // copied directly to, at most, |outlen| bytes at |out|. It returns the number
 // of bytes written to |out|, or -1 on error.
-OPENSSL_EXPORT int ECDH_compute_key(
-    void *out, size_t outlen, const EC_POINT *pub_key, const EC_KEY *priv_key,
-    void *(*kdf)(const void *in, size_t inlen, void *out, size_t *outlen));
+OPENSSL_EXPORT int ECDH_compute_key(void* out, size_t outlen, const EC_POINT* pub_key, const EC_KEY* priv_key,
+                                    void* (*kdf)(const void* in, size_t inlen, void* out, size_t* outlen));
 
 // ECDH_compute_key_fips calculates the shared key between |pub_key| and
 // |priv_key| and hashes it with the appropriate SHA function for |out_len|. The
@@ -101,13 +98,10 @@ OPENSSL_EXPORT int ECDH_compute_key(
 // This function allows the FIPS module to compute an ECDH and KDF within the
 // module boundary without taking an arbitrary function pointer for the KDF,
 // which isn't very FIPSy.
-OPENSSL_EXPORT int ECDH_compute_key_fips(uint8_t *out, size_t out_len,
-                                         const EC_POINT *pub_key,
-                                         const EC_KEY *priv_key);
-
+OPENSSL_EXPORT int ECDH_compute_key_fips(uint8_t* out, size_t out_len, const EC_POINT* pub_key, const EC_KEY* priv_key);
 
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 #endif
 
 #define ECDH_R_KDF_FAILED 100
@@ -115,4 +109,4 @@ OPENSSL_EXPORT int ECDH_compute_key_fips(uint8_t *out, size_t out_len,
 #define ECDH_R_POINT_ARITHMETIC_FAILURE 102
 #define ECDH_R_UNKNOWN_DIGEST_LENGTH 103
 
-#endif  // OPENSSL_HEADER_ECDH_H
+#endif // OPENSSL_HEADER_ECDH_H

@@ -566,7 +566,8 @@ RESULT CamIA10Engine::updateAeConfig(struct CamIA10_DyCfg* cfg) {
                 SetPoint = pAecGlobal->NightSetPoint;
 
             aecCfg.SetPoint = (SetPoint) +
-                (set->ae_bias / 100.0f) * MAX(10, SetPoint / (1 - pAecGlobal->ClmTolerance / 100.0f) / 10.0f) ;
+                (set->ae_bias / 100.0f) * MAX(20, SetPoint / (1 - pAecGlobal->ClmTolerance / 100.0f) / 10.0f) ;
+            LOGD("ae_bias:%d, aecCfg.SetPoint:%f", set->ae_bias, aecCfg.SetPoint);
 
             mLightMode = cfg->LightMode;
 

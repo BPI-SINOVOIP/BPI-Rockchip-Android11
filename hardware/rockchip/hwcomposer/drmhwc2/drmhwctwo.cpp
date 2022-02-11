@@ -19,7 +19,7 @@
 
 #include "drmhwctwo.h"
 #include "drmdisplaycomposition.h"
-#include "drmhwcomposer.h"
+#include "drmlayer.h"
 #include "platform.h"
 #include "vsyncworker.h"
 #include "rockchip/utils/drmdebug.h"
@@ -62,7 +62,9 @@ class DrmVsyncCallback : public VsyncCallback {
 
   void Callback(int display, int64_t timestamp) {
     auto hook = reinterpret_cast<HWC2_PFN_VSYNC>(hook_);
-    hook(data_, display, timestamp);
+    if(hook){
+      hook(data_, display, timestamp);
+    }
   }
 
  private:
@@ -78,7 +80,9 @@ class DrmInvalidateCallback : public InvalidateCallback {
 
   void Callback(int display) {
     auto hook = reinterpret_cast<HWC2_PFN_REFRESH>(hook_);
-    hook(data_, display);
+    if(hook){
+      hook(data_, display);
+    }
   }
 
  private:
@@ -87,7 +91,8 @@ class DrmInvalidateCallback : public InvalidateCallback {
 };
 
 
-DrmHwcTwo::DrmHwcTwo() {
+DrmHwcTwo::DrmHwcTwo()
+  : resource_manager_(ResourceManager::getInstance()) {
   common.tag = HARDWARE_DEVICE_TAG;
   common.version = HWC_DEVICE_API_VERSION_2_0;
   common.close = HookDevClose;
@@ -99,14 +104,14 @@ HWC2::Error DrmHwcTwo::CreateDisplay(hwc2_display_t displ,
                                      HWC2::DisplayType type) {
   HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64,displ);
 
-  DrmDevice *drm = resource_manager_.GetDrmDevice(displ);
-  std::shared_ptr<Importer> importer = resource_manager_.GetImporter(displ);
+  DrmDevice *drm = resource_manager_->GetDrmDevice(displ);
+  std::shared_ptr<Importer> importer = resource_manager_->GetImporter(displ);
   if (!drm || !importer) {
     ALOGE("Failed to get a valid drmresource and importer");
     return HWC2::Error::NoResources;
   }
   displays_.emplace(std::piecewise_construct, std::forward_as_tuple(displ),
-                    std::forward_as_tuple(&resource_manager_, drm, importer,
+                    std::forward_as_tuple(resource_manager_, drm, importer,
                                           displ, type));
   displays_.at(displ).Init();
   return HWC2::Error::None;
@@ -114,14 +119,14 @@ HWC2::Error DrmHwcTwo::CreateDisplay(hwc2_display_t displ,
 
 HWC2::Error DrmHwcTwo::Init() {
   HWC2_ALOGD_IF_VERBOSE();
-  int rv = resource_manager_.Init();
+  int rv = resource_manager_->Init();
   if (rv) {
     ALOGE("Can't initialize the resource manager %d", rv);
     return HWC2::Error::NoResources;
   }
 
   HWC2::Error ret = HWC2::Error::None;
-  for (int i = 0; i < resource_manager_.getDisplayCount(); i++) {
+  for (int i = 0; i < resource_manager_->getDisplayCount(); i++) {
     ret = CreateDisplay(i, HWC2::DisplayType::Physical);
     if (ret != HWC2::Error::None) {
       ALOGE("Failed to create display %d with error %d", i, ret);
@@ -129,7 +134,7 @@ HWC2::Error DrmHwcTwo::Init() {
     }
   }
 
-  auto &drmDevices = resource_manager_.getDrmDevices();
+  auto &drmDevices = resource_manager_->getDrmDevices();
   for (auto &device : drmDevices) {
     device->RegisterHotplugHandler(new DrmHotplugHandler(this, device.get()));
   }
@@ -212,6 +217,22 @@ HWC2::Error DrmHwcTwo::RegisterCallback(int32_t descriptor,
 
   if (!function) {
     callbacks_.erase(callback);
+    switch (callback) {
+      case HWC2::Callback::Vsync: {
+        for (std::pair<const hwc2_display_t, DrmHwcTwo::HwcDisplay> &d :
+             displays_)
+          d.second.UnregisterVsyncCallback();
+        break;
+      }
+      case HWC2::Callback::Refresh: {
+        for (std::pair<const hwc2_display_t, DrmHwcTwo::HwcDisplay> &d :
+             displays_)
+          d.second.UnregisterInvalidateCallback();
+          break;
+      }
+      default:
+        break;
+    }
     return HWC2::Error::None;
   }
 
@@ -222,7 +243,7 @@ HWC2::Error DrmHwcTwo::RegisterCallback(int32_t descriptor,
       auto hotplug = reinterpret_cast<HWC2_PFN_HOTPLUG>(function);
       hotplug(data, HWC_DISPLAY_PRIMARY,
               static_cast<int32_t>(HWC2::Connection::Connected));
-      auto &drmDevices = resource_manager_.getDrmDevices();
+      auto &drmDevices = resource_manager_->getDrmDevices();
       for (auto &device : drmDevices)
         HandleInitialHotplugState(device.get());
       break;
@@ -254,7 +275,7 @@ DrmHwcTwo::HwcDisplay::HwcDisplay(ResourceManager *resource_manager,
       importer_(importer),
       handle_(handle),
       type_(type),
-      client_layer_(UINT32_MAX),
+      client_layer_(UINT32_MAX,drm),
       init_success_(false){
 }
 
@@ -357,6 +378,9 @@ HWC2::Error DrmHwcTwo::HwcDisplay::Init() {
   resource_manager_->creatActiveDisplayCnt(display);
   resource_manager_->assignPlaneGroup();
 
+  // soc_id
+  ctx_.soc_id = resource_manager_->getSocId();
+  // vop aclk
   ctx_.aclk = crtc_->get_aclk();
   // Baseparameter Info
   ctx_.baseparameter_info = connector_->baseparameter_info();
@@ -443,11 +467,12 @@ HWC2::Error DrmHwcTwo::HwcDisplay::CheckStateAndReinit() {
     return HWC2::Error::NoResources;
   }
 
+  // soc_id
+  ctx_.soc_id = resource_manager_->getSocId();
+  // vop aclk
   ctx_.aclk = crtc_->get_aclk();
-
-  // Baseparameter info
+  // Baseparameter Info
   ctx_.baseparameter_info = connector_->baseparameter_info();
-
   // Standard Switch Resolution Mode
   ctx_.bStandardSwitchResolution = hwc_get_bool_property("vendor.hwc.enable_display_configs","false");
 
@@ -532,6 +557,19 @@ HWC2::Error DrmHwcTwo::HwcDisplay::RegisterInvalidateCallback(
   return HWC2::Error::None;
 }
 
+HWC2::Error DrmHwcTwo::HwcDisplay::UnregisterVsyncCallback() {
+  HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64,handle_);;
+  vsync_worker_.RegisterCallback(NULL);
+  return HWC2::Error::None;
+}
+
+HWC2::Error DrmHwcTwo::HwcDisplay::UnregisterInvalidateCallback() {
+  HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64,handle_);
+  invalidate_worker_.RegisterCallback(NULL);
+  return HWC2::Error::None;
+}
+
+
 HWC2::Error DrmHwcTwo::HwcDisplay::AcceptDisplayChanges() {
   HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64,handle_);
   for (std::pair<const hwc2_layer_t, DrmHwcTwo::HwcLayer> &l : layers_)
@@ -540,7 +578,7 @@ HWC2::Error DrmHwcTwo::HwcDisplay::AcceptDisplayChanges() {
 }
 
 HWC2::Error DrmHwcTwo::HwcDisplay::CreateLayer(hwc2_layer_t *layer) {
-  layers_.emplace(static_cast<hwc2_layer_t>(layer_idx_), HwcLayer(layer_idx_));
+  layers_.emplace(static_cast<hwc2_layer_t>(layer_idx_), HwcLayer(layer_idx_, drm_));
   *layer = static_cast<hwc2_layer_t>(layer_idx_);
   ++layer_idx_;
   HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64 ", layer-id=%" PRIu64,handle_,*layer);
@@ -550,7 +588,9 @@ HWC2::Error DrmHwcTwo::HwcDisplay::CreateLayer(hwc2_layer_t *layer) {
 HWC2::Error DrmHwcTwo::HwcDisplay::DestroyLayer(hwc2_layer_t layer) {
   HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64 ", layer-id=%" PRIu64,handle_,layer);
 
-  if(layers_.count(layer)){
+  auto map_layer = layers_.find(layer);
+  if (map_layer != layers_.end()){
+    map_layer->second.clear();
     layers_.erase(layer);
     return HWC2::Error::None;
   }else{
@@ -823,11 +863,19 @@ HWC2::Error DrmHwcTwo::HwcDisplay::GetDisplayConfigs(uint32_t *num_configs,
       ctx_.framebuffer_height = best_mode.v_display();
       ctx_.vrefresh = best_mode.v_refresh();
       /*
-       * Limit to 1080p if large than 2160p
+       * RK3588：Limit to 4096x2160 if large than 2160p
+       * Other:  Limit to 1920x1080 if large than 2160p
        */
-      if (ctx_.framebuffer_height >= 2160 && ctx_.framebuffer_width >= ctx_.framebuffer_height) {
-        ctx_.framebuffer_width = ctx_.framebuffer_width * (1080.0 / ctx_.framebuffer_height);
-        ctx_.framebuffer_height = 1080;
+      if(isRK3588(resource_manager_->getSocId())){
+        if (ctx_.framebuffer_height >= 2160 && ctx_.framebuffer_width >= ctx_.framebuffer_height) {
+          ctx_.framebuffer_width = ctx_.framebuffer_width * (2160.0 / ctx_.framebuffer_height);
+          ctx_.framebuffer_height = 2160;
+        }
+      }else{
+        if (ctx_.framebuffer_height >= 2160 && ctx_.framebuffer_width >= ctx_.framebuffer_height) {
+          ctx_.framebuffer_width = ctx_.framebuffer_width * (1080.0 / ctx_.framebuffer_height);
+          ctx_.framebuffer_height = 1080;
+        }
       }
     } else {
       ctx_.framebuffer_width = 1920;
@@ -843,13 +891,18 @@ HWC2::Error DrmHwcTwo::HwcDisplay::GetDisplayConfigs(uint32_t *num_configs,
     bool disable_afbdc = false;
     if(handle_ == HWC_DISPLAY_PRIMARY){
       if(isRK356x(resource_manager_->getSocId())){
-        if(ctx_.framebuffer_width % 4 != 0)
-           disable_afbdc = true;
-        if(disable_afbdc){
-          property_set( "vendor.gralloc.no_afbc_for_fb_target_layer", "1");
-          ALOGI("%s:line=%d RK356x primary framebuffer size %dx%d not support AFBC, to disable AFBC\n",
-                   __FUNCTION__, __LINE__, ctx_.framebuffer_width,ctx_.framebuffer_height);
+        if(ctx_.framebuffer_width % 4 != 0){
+          disable_afbdc = true;
+          HWC2_ALOGI("RK356x primary framebuffer size %dx%d not support AFBC, to disable AFBC\n",
+                      ctx_.framebuffer_width,ctx_.framebuffer_height);
         }
+      }
+      if(hwc_get_int_property("ro.vendor.rk_sdk","0") == 0){
+          disable_afbdc = true;
+          HWC2_ALOGI("Maybe GSI SDK, to disable AFBC\n");
+      }
+      if(disable_afbdc){
+        property_set( "vendor.gralloc.no_afbc_for_fb_target_layer", "1");
       }
     }
     if (!configs) {
@@ -884,6 +937,7 @@ HWC2::Error DrmHwcTwo::HwcDisplay::GetDisplayRequests(int32_t *display_requests,
                                                       hwc2_layer_t *layers,
                                                       int32_t *layer_requests) {
   HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64,handle_);
+
   // TODO: I think virtual display should request
   //      HWC2_DISPLAY_REQUEST_WRITE_CLIENT_TARGET_TO_OUTPUT here
   uint32_t num_request = 0;
@@ -1098,7 +1152,6 @@ HWC2::Error DrmHwcTwo::HwcDisplay::ValidatePlanes() {
   return HWC2::Error::None;
 }
 
-
 HWC2::Error DrmHwcTwo::HwcDisplay::CreateComposition() {
   HWC2_ALOGD_IF_VERBOSE("display-id=%" PRIu64,handle_);
   int ret;
@@ -1150,14 +1203,18 @@ HWC2::Error DrmHwcTwo::HwcDisplay::CreateComposition() {
     return HWC2::Error::BadConfig;
   }
 
-  ret = composition->CreateAndAssignReleaseFences();
-  AddFenceToRetireFence(composition->take_out_fence());
+  // 利用 vendor.hwc.disable_releaseFence 属性强制关闭ReleaseFence，主要用于调试
+  char value[PROPERTY_VALUE_MAX];
+  property_get("vendor.hwc.disable_releaseFence", value, "0");
+  if(atoi(value) == 0){
+    ret = composition->CreateAndAssignReleaseFences();
+    AddFenceToRetireFence(composition->take_out_fence());
+  }
+
   ret = compositor_.QueueComposition(std::move(composition));
 
   return HWC2::Error::None;
 }
-
-
 
 HWC2::Error DrmHwcTwo::HwcDisplay::PresentDisplay(int32_t *retire_fence) {
   ATRACE_CALL();
@@ -1406,6 +1463,7 @@ HWC2::Error DrmHwcTwo::HwcDisplay::ValidateDisplay(uint32_t *num_types,
   UpdateLogLevel();
   UpdateBCSH();
   UpdateHdmiOutputFormat();
+  UpdateOverscan();
   if(!ctx_.bStandardSwitchResolution){
     UpdateDisplayMode();
     drm_->UpdateDisplayMode(handle_);
@@ -1631,9 +1689,16 @@ int DrmHwcTwo::HwcDisplay::UpdateDisplayMode(){
         }
       }
     }
-
   }
+  return 0;
+}
 
+int DrmHwcTwo::HwcDisplay::UpdateOverscan(){
+  // RK3588 没有Overscan模块，所以需要用图层Scale实现Overscan效果
+  if(isRK3588(resource_manager_->getSocId()))
+    connector_->UpdateOverscan(handle_, ctx_.overscan_value);
+  else
+    ;// do notiong.
   return 0;
 }
 
@@ -1878,22 +1943,6 @@ void DrmHwcTwo::HwcLayer::PopulateDrmLayer(hwc2_layer_t layer_id, DrmHwcLayer *d
   drmHwcLayer->alpha       = static_cast<uint16_t>(255.0f * alpha_ + 0.5f);
   drmHwcLayer->sf_composition = sf_type();
 
-  switch (blending_) {
-    case HWC2::BlendMode::None:
-      drmHwcLayer->blending = DrmHwcBlending::kNone;
-      break;
-    case HWC2::BlendMode::Premultiplied:
-      drmHwcLayer->blending = DrmHwcBlending::kPreMult;
-      break;
-    case HWC2::BlendMode::Coverage:
-      drmHwcLayer->blending = DrmHwcBlending::kCoverage;
-      break;
-    default:
-      ALOGE("Unknown blending mode b=%d", blending_);
-      drmHwcLayer->blending = DrmHwcBlending::kNone;
-      break;
-  }
-
   OutputFd release_fence     = release_fence_output();
   drmHwcLayer->sf_handle     = buffer_;
   drmHwcLayer->acquire_fence = acquire_fence_.Release();
@@ -1905,21 +1954,8 @@ void DrmHwcTwo::HwcLayer::PopulateDrmLayer(hwc2_layer_t layer_id, DrmHwcLayer *d
   drmHwcLayer->uAclk_ = ctx->aclk;
   drmHwcLayer->uDclk_ = ctx->dclk;
 
-  float w_scale = 1;
-  float h_scale = 1;
-  if(!ctx->bStandardSwitchResolution){
-    w_scale = ctx->rel_xres / (float)ctx->framebuffer_width;
-    h_scale = ctx->rel_yres / (float)ctx->framebuffer_height;
-  }
-
-  hwc_rect_t display_frame;
-
-  display_frame.left   = (int)(display_frame_.left   * w_scale);
-  display_frame.right  = (int)(display_frame_.right  * w_scale);
-  display_frame.top    = (int)(display_frame_.top    * h_scale);
-  display_frame.bottom = (int)(display_frame_.bottom * h_scale);
-
-  drmHwcLayer->SetDisplayFrame(display_frame);
+  drmHwcLayer->SetBlend(blending_);
+  drmHwcLayer->SetDisplayFrame(display_frame_, ctx);
   drmHwcLayer->SetSourceCrop(source_crop_);
   drmHwcLayer->SetTransform(transform_);
 
@@ -1937,6 +1973,7 @@ void DrmHwcTwo::HwcLayer::PopulateDrmLayer(hwc2_layer_t layer_id, DrmHwcLayer *d
     drmHwcLayer->uFourccFormat_   = pBufferInfo_->uFourccFormat_;
     drmHwcLayer->uModifier_       = pBufferInfo_->uModifier_;
     drmHwcLayer->sLayerName_      = pBufferInfo_->sLayerName_;
+    drmHwcLayer->uGemHandle_      = pBufferInfo_->uGemHandle_;
   }else{
     drmHwcLayer->iFd_     = -1;
     drmHwcLayer->iWidth_  = -1;
@@ -1946,6 +1983,7 @@ void DrmHwcTwo::HwcLayer::PopulateDrmLayer(hwc2_layer_t layer_id, DrmHwcLayer *d
     drmHwcLayer->iUsage   = -1;
     drmHwcLayer->uFourccFormat_   = 0x20202020; //0x20 is space
     drmHwcLayer->uModifier_ = 0;
+    drmHwcLayer->uGemHandle_ = 0;
     drmHwcLayer->sLayerName_.clear();
   }
 
@@ -1981,21 +2019,7 @@ void DrmHwcTwo::HwcLayer::PopulateFB(hwc2_layer_t layer_id, DrmHwcLayer *drmHwcL
   drmHwcLayer->uAclk_ = ctx->aclk;
   drmHwcLayer->uDclk_ = ctx->dclk;
 
-  float w_scale = 1;
-  float h_scale = 1;
-  if(!ctx->bStandardSwitchResolution){
-    w_scale = ctx->rel_xres / (float)ctx->framebuffer_width;
-    h_scale = ctx->rel_yres / (float)ctx->framebuffer_height;
-  }
-
-  hwc_rect_t display_frame;
-
-  display_frame.left   = (int)(display_frame_.left   * w_scale);
-  display_frame.right  = (int)(display_frame_.right  * w_scale);
-  display_frame.top    = (int)(display_frame_.top    * h_scale);
-  display_frame.bottom = (int)(display_frame_.bottom * h_scale);
-
-  drmHwcLayer->SetDisplayFrame(display_frame);
+  drmHwcLayer->SetDisplayFrame(display_frame_, ctx);
   drmHwcLayer->SetSourceCrop(source_crop_);
   drmHwcLayer->SetTransform(transform_);
 
@@ -2010,6 +2034,7 @@ void DrmHwcTwo::HwcLayer::PopulateFB(hwc2_layer_t layer_id, DrmHwcLayer *drmHwcL
     drmHwcLayer->uFourccFormat_   = pBufferInfo_->uFourccFormat_;
     drmHwcLayer->uModifier_       = pBufferInfo_->uModifier_;
     drmHwcLayer->sLayerName_      = pBufferInfo_->sLayerName_;
+    drmHwcLayer->uGemHandle_      = pBufferInfo_->uGemHandle_;
 
   }else{
     drmHwcLayer->iFd_     = -1;
@@ -2020,6 +2045,7 @@ void DrmHwcTwo::HwcLayer::PopulateFB(hwc2_layer_t layer_id, DrmHwcLayer *drmHwcL
     drmHwcLayer->iUsage   = -1;
     drmHwcLayer->uFourccFormat_   = DRM_FORMAT_ABGR8888; // fb target default DRM_FORMAT_ABGR8888
     drmHwcLayer->uModifier_ = 0;
+    drmHwcLayer->uGemHandle_      = 0;
     drmHwcLayer->sLayerName_.clear();
   }
 
@@ -2027,7 +2053,6 @@ void DrmHwcTwo::HwcLayer::PopulateFB(hwc2_layer_t layer_id, DrmHwcLayer *drmHwcL
 
   return;
 }
-
 
 void DrmHwcTwo::HwcLayer::DumpLayerInfo(String8 &output) {
 
@@ -2098,10 +2123,10 @@ void DrmHwcTwo::HandleDisplayHotplug(hwc2_display_t displayid, int state) {
   if (cb == callbacks_.end())
     return;
 
-  if(isRK3566(resource_manager_.getSocId())){
+  if(isRK3566(resource_manager_->getSocId())){
       ALOGD_IF(LogLevel(DBG_DEBUG),"HandleDisplayHotplug skip display-id=%" PRIu64 " state=%d",displayid,state);
       if(displayid != HWC_DISPLAY_PRIMARY){
-        auto &drmDevices = resource_manager_.getDrmDevices();
+        auto &drmDevices = resource_manager_->getDrmDevices();
         for (auto &device : drmDevices) {
           if(state==DRM_MODE_CONNECTED)
             device->SetCommitMirrorDisplayId(displayid);

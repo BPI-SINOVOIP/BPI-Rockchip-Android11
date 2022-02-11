@@ -18,7 +18,7 @@
 #define ANDROID_DRM_DISPLAY_COMPOSITION_H_
 
 #include "drmcrtc.h"
-#include "drmhwcomposer.h"
+#include "drmlayer.h"
 #include "drmplane.h"
 #include "rockchip/utils/drmdebug.h"
 

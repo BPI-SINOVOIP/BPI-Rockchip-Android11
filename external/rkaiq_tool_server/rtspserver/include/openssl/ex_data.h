@@ -117,22 +117,19 @@
 extern "C" {
 #endif
 
-
 // ex_data is a mechanism for associating arbitrary extra data with objects.
 // For each type of object that supports ex_data, different users can be
 // assigned indexes in which to store their data. Each index has callback
 // functions that are called when an object of that type is freed or
 // duplicated.
 
-
 typedef struct crypto_ex_data_st CRYPTO_EX_DATA;
-
 
 // Type-specific functions.
 //
 // Each type that supports ex_data provides three functions:
 
-#if 0  // Sample
+#if 0 // Sample
 
 // TYPE_get_ex_new_index allocates a new index for |TYPE|. An optional
 // |free_func| argument may be provided which is called when the owning object
@@ -153,8 +150,7 @@ OPENSSL_EXPORT int TYPE_set_ex_data(TYPE *t, int index, void *arg);
 // previous call to |TYPE_get_ex_new_index|.
 OPENSSL_EXPORT void *TYPE_get_ex_data(const TYPE *t, int index);
 
-#endif  // Sample
-
+#endif // Sample
 
 // Callback types.
 
@@ -171,9 +167,7 @@ OPENSSL_EXPORT void *TYPE_get_ex_data(const TYPE *t, int index);
 // This callback may be called with a NULL value for |ptr| if |parent| has no
 // value set for this index. However, the callbacks may also be skipped entirely
 // if no extra data pointers are set on |parent| at all.
-typedef void CRYPTO_EX_free(void *parent, void *ptr, CRYPTO_EX_DATA *ad,
-                            int index, long argl, void *argp);
-
+typedef void CRYPTO_EX_free(void* parent, void* ptr, CRYPTO_EX_DATA* ad, int index, long argl, void* argp);
 
 // Deprecated functions.
 
@@ -181,9 +175,8 @@ typedef void CRYPTO_EX_free(void *parent, void *ptr, CRYPTO_EX_DATA *ad,
 OPENSSL_EXPORT void CRYPTO_cleanup_all_ex_data(void);
 
 // CRYPTO_EX_dup is a legacy callback function type which is ignored.
-typedef int CRYPTO_EX_dup(CRYPTO_EX_DATA *to, const CRYPTO_EX_DATA *from,
-                          void **from_d, int index, long argl, void *argp);
-
+typedef int CRYPTO_EX_dup(CRYPTO_EX_DATA* to, const CRYPTO_EX_DATA* from, void** from_d, int index, long argl,
+                          void* argp);
 
 // Private structures.
 
@@ -192,12 +185,11 @@ typedef int CRYPTO_EX_dup(CRYPTO_EX_DATA *to, const CRYPTO_EX_DATA *from,
 typedef int CRYPTO_EX_unused;
 
 struct crypto_ex_data_st {
-  STACK_OF(void) *sk;
+    STACK_OF(void) * sk;
 };
 
-
 #if defined(__cplusplus)
-}  // extern C
+} // extern C
 #endif
 
-#endif  // OPENSSL_HEADER_EX_DATA_H
+#endif // OPENSSL_HEADER_EX_DATA_H

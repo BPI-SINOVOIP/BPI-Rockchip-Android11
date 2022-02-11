@@ -18,7 +18,7 @@ public class CubicLutUtil {
     }
 
     public static int[][] get3DLutFromFile(String path) {
-        int[][] ret = new int[3][729];
+        int[][] ret = null;
         try {
             File file = new File(path);
             if(!file.exists()){
@@ -34,6 +34,11 @@ public class CubicLutUtil {
             while (txt != null) {
                 lines++;
                 txt = reader.readLine();
+                if (txt.startsWith("Length")) {
+                    int length = Integer.parseInt(txt.replaceAll("\\s+", "").replaceAll("Length", ""));
+                    ret = new int[3][length * length * length];
+                    continue;
+                }
                 if (txt.equals("{")) {
                     is3DLutData = true;
                     continue;
@@ -41,7 +46,7 @@ public class CubicLutUtil {
                     is3DLutData = false;
                     break;
                 }
-                if (is3DLutData) {
+                if (is3DLutData && ret != null) {
                     temp = txt.trim().split(" ");
                     ret[0][i] = floatLutToIntLut(Float.parseFloat(temp[0]));
                     ret[1][i] = floatLutToIntLut(Float.parseFloat(temp[1]));
@@ -51,7 +56,7 @@ public class CubicLutUtil {
             }
             reader.close();
             fileReader.close();
-            if(i != 729){
+            if(ret != null && i != ret[0].length){
                 ret = null;
             }
         } catch (Exception e) {
@@ -62,7 +67,7 @@ public class CubicLutUtil {
     }
 
     public static int[][] get3DLutFromAsset(Context context, String fileName) {
-        int[][] ret = new int[3][729];
+        int[][] ret = null;
         try {
             AssetManager am = context.getResources().getAssets();
             InputStreamReader inputReader = new InputStreamReader(am.open(fileName));
@@ -75,6 +80,11 @@ public class CubicLutUtil {
             while (txt != null) {
                 lines++;
                 txt = reader.readLine();
+                if (txt.startsWith("Length")) {
+                    int length = Integer.parseInt(txt.replaceAll("\\s+", "").replaceAll("Length", ""));
+                    ret = new int[3][length * length * length];
+                    continue;
+                }
                 if (txt.equals("{")) {
                     is3DLutData = true;
                     continue;
@@ -92,7 +102,7 @@ public class CubicLutUtil {
             }
             reader.close();
             inputReader.close();
-            if(i != 729){
+            if(ret != null && i != ret[0].length){
                 ret = null;
             }
         } catch (Exception e) {
