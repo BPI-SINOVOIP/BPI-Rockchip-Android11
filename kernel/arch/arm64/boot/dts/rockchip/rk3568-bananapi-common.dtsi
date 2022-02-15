@@ -395,7 +395,22 @@
 
 &dmc {
 	center-supply = <&vdd_logic>;
+	vop-bw-dmc-freq = <
+	/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
+		0       286     780000
+		287     99999   1560000
+	>;
+	vop-frame-bw-dmc-freq = <
+	/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
+		0       620     528000
+		621     99999   780000
+	>;
 	status = "okay";
+};
+
+&dmc_opp_table {
+	/delete-property/ rockchip,pvtm-voltage-sel;
+	/delete-property/ rockchip,pvtm-ch;
 };
 
 &dsi0 {
