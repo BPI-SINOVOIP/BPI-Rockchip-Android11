@@ -65,14 +65,18 @@ class GlobalActions implements GlobalActionsProvider.GlobalActionsListener {
         mKeyguardShowing = keyguardShowing;
         mDeviceProvisioned = deviceProvisioned;
         mShowing = true;
-        if (mGlobalActionsAvailable && !"box".equals(SystemProperties.get("ro.target.product","unkonw"))) {
-            mHandler.postDelayed(mShowTimeout, 5000);
-            mGlobalActionsProvider.showGlobalActions();
-        } else {
-            // SysUI isn't alive, show legacy menu.
-            ensureLegacyCreated();
-            mLegacyGlobalActions.showDialog(mKeyguardShowing, mDeviceProvisioned);
-        }
+        // if (mGlobalActionsAvailable && !"box".equals(SystemProperties.get("ro.target.product","unkonw"))) {
+        //     mHandler.postDelayed(mShowTimeout, 5000);
+        //     mGlobalActionsProvider.showGlobalActions();
+        // } else {
+        //     // SysUI isn't alive, show legacy menu.
+        //     ensureLegacyCreated();
+        //     mLegacyGlobalActions.showDialog(mKeyguardShowing, mDeviceProvisioned);
+        // }
+        //
+        // bpi, SysUI isn't alive, show legacy menu.
+        ensureLegacyCreated();
+        mLegacyGlobalActions.showDialog(mKeyguardShowing, mDeviceProvisioned);
     }
 
     @Override
