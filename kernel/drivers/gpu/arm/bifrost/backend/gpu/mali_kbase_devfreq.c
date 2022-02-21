@@ -58,7 +58,8 @@ static struct monitor_dev_profile mali_mdevp = {
  *
  * Return: Voltage value in uV, 0 in case of error.
  */
-static unsigned long get_voltage(struct kbase_device *kbdev, unsigned long freq)
+static unsigned long get_voltage(struct kbase_device *kbdev, unsigned long freq,
+	unsigned long volt)
 {
 	struct dev_pm_opp *opp;
 	unsigned long voltage = 0;
@@ -69,9 +70,10 @@ static unsigned long get_voltage(struct kbase_device *kbdev, unsigned long freq)
 
 	opp = dev_pm_opp_find_freq_exact(kbdev->dev, freq, true);
 
-	if (IS_ERR_OR_NULL(opp))
+	if (IS_ERR_OR_NULL(opp)) {
 		dev_err(kbdev->dev, "Failed to get opp (%ld)\n", PTR_ERR(opp));
-	else {
+		voltage = volt;
+	} else {
 		voltage = dev_pm_opp_get_voltage(opp);
 #if KERNEL_VERSION(4, 11, 0) <= LINUX_VERSION_CODE
 		dev_pm_opp_put(opp);
@@ -87,7 +89,7 @@ static unsigned long get_voltage(struct kbase_device *kbdev, unsigned long freq)
 }
 
 void kbase_devfreq_opp_translate(struct kbase_device *kbdev, unsigned long freq,
-	u64 *core_mask, unsigned long *freqs, unsigned long *volts)
+	unsigned long volt, u64 *core_mask, unsigned long *freqs, unsigned long *volts)
 {
 	unsigned int i;
 
@@ -111,7 +113,7 @@ void kbase_devfreq_opp_translate(struct kbase_device *kbdev, unsigned long freq,
 	 * and nominal frequency and the corresponding voltage.
 	 */
 	if (i == kbdev->num_opps) {
-		unsigned long voltage = get_voltage(kbdev, freq);
+		unsigned long voltage = get_voltage(kbdev, freq, volt);
 
 		*core_mask = kbdev->gpu_props.props.raw_props.shader_present;
 
@@ -157,6 +159,7 @@ kbase_devfreq_target(struct device *dev, unsigned long *target_freq, u32 flags)
 
 	kbase_devfreq_opp_translate(kbdev,
 				    nominal_freq,
+				    nominal_volt,
 				    &core_mask,
 				    freqs,
 				    volts);
