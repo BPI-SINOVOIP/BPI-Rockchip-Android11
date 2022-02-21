@@ -23,6 +23,9 @@ on boot
     # reduce schedul time to improve io performance
     write /sys/kernel/debug/sched_features NO_ENERGY_AWARE
 
+    chown system system /sys/devices/platform/fe8a0000.usb2-phy/otg_mode
+    chmod 0660 /sys/devices/platform/fe8a0000.usb2-phy/otg_mode
+
 on init
     # Increased power consumption and CPU in exchange for memory
     write /proc/sys/vm/swappiness 100

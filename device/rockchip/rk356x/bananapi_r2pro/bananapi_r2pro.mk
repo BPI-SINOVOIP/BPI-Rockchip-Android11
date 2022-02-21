@@ -74,7 +74,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=213 \
 	ro.wifi.sleep.power.down=true \
 	persist.wifi.sleep.delay.ms=0 \
-	persist.bt.power.down=true
+	persist.bt.power.down=true \
+	persist.usb.show=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.net.eth_primary=eth1 \

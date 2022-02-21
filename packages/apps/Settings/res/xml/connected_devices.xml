@@ -70,6 +70,14 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.connecteddevice.AdvancedConnectedDeviceController"/>
 
+    <SwitchPreference
+        android:key="connect_to_pc"
+        android:title="@string/connect_to_pc"
+        android:icon="@drawable/ic_usb"
+        android:persistent="false"
+        android:order="-100"
+        />
+
     <com.android.settingslib.widget.FooterPreference
         android:key="discoverable_footer"
         android:title="@string/bluetooth_off_footer"

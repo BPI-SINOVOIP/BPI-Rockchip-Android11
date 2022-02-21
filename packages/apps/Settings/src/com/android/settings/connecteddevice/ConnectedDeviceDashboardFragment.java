@@ -28,6 +28,13 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.slices.SlicePreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
@@ -38,6 +45,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     static final String KEY_CONNECTED_DEVICES = "connected_device_list";
     @VisibleForTesting
     static final String KEY_AVAILABLE_DEVICES = "available_device_list";
+
+    public static final String KEY_CONNECT_TO_PC = "connect_to_pc";
 
     @Override
     public int getMetricsCategory() {
@@ -63,6 +72,21 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     protected int getPreferenceScreenResId() {
         return R.xml.connected_devices;
     }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ConnectToPcPreferenceController(context, KEY_CONNECT_TO_PC));
+
+        return controllers;
+    }
+
+
 
     @Override
     public void onAttach(Context context) {
