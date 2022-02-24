@@ -24,6 +24,7 @@ DECLARE_GLOBAL_DATA_PTR;
 struct rk_pcie {
 	struct udevice	*dev;
 	struct udevice  *vpcie3v3;
+	struct udevice  *vdevice3v3;
 	void		*dbi_base;
 	void		*apb_base;
 	void		*cfg_base;
@@ -568,6 +569,15 @@ static int rockchip_pcie_init_port(struct udevice *dev)
 		}
 	}
 
+	if (priv->vdevice3v3) {
+		ret = regulator_set_enable(priv->vdevice3v3, true);
+		if (ret) {
+			dev_err(priv->dev, "failed to enable vdevice3v3 (ret=%d)\n",
+				ret);
+			return ret;
+		}
+	}
+
 	if (priv->is_bifurcation) {
 		phy_cfg.pcie.is_bifurcation = true;
 		ret = generic_phy_configure(&priv->phy, &phy_cfg);
@@ -665,6 +675,13 @@ static int rockchip_pcie_parse_dt(struct udevice *dev)
 					  &priv->vpcie3v3);
 	if (ret && ret != -ENOENT) {
 		dev_err(dev, "failed to get vpcie3v3 supply (ret=%d)\n", ret);
+		return ret;
+	}
+
+	ret = device_get_supply_regulator(dev, "vdevice3v3-supply",
+					  &priv->vdevice3v3);
+	if (ret && ret != -ENOENT) {
+		dev_err(dev, "failed to get vdevice3v3 supply (ret=%d)\n", ret);
 		return ret;
 	}
 
