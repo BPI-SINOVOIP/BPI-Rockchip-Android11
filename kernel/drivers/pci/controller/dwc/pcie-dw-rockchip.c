@@ -142,8 +142,11 @@ struct rk_pcie {
 	bool				is_signal_test;
 	bool				bifurcation;
 	struct regulator		*vpcie3v3;
+	struct regulator		*vdevice3v3;
 	struct irq_domain		*irq_domain;
 	raw_spinlock_t			intx_lock;
+
+	u8				bus_nr;
 };
 
 struct rk_pcie_of_data {
@@ -454,36 +457,41 @@ static int rk_pcie_establish_link(struct dw_pcie *pci)
 	/* Enable LTSSM */
 	rk_pcie_enable_ltssm(rk_pcie);
 
-	/*
-	 * PCIe requires the refclk to be stable for 100µs prior to releasing
-	 * PERST and T_PVPERL (Power stable to PERST# inactive) should be a
-	 * minimum of 100ms.  See table 2-4 in section 2.6.2 AC, the PCI Express
-	 * Card Electromechanical Specification 3.0. So 100ms in total is the min
-	 * requuirement here. We add a 1s for sake of hoping everthings work fine.
-	 */
-	msleep(1000);
-	gpiod_set_value_cansleep(rk_pcie->rst_gpio, 1);
-
-	for (retries = 0; retries < 10; retries++) {
-		if (dw_pcie_link_up(pci)) {
-			/*
-			 * We may be here in case of L0 in Gen1. But if EP is capable
-			 * of Gen2 or Gen3, Gen switch may happen just in this time, but
-			 * we keep on accessing devices in unstable link status. Given
-			 * that LTSSM max timeout is 24ms per period, we can wait a bit
-			 * more for Gen switch.
-			 */
-			msleep(100);
-			dev_info(pci->dev, "PCIe Link up, LTSSM is 0x%x\n",
-				 rk_pcie_readl_apb(rk_pcie, PCIE_CLIENT_LTSSM_STATUS));
-			rk_pcie_debug_dump(rk_pcie);
-			return 0;
-		}
-
-		dev_info_ratelimited(pci->dev, "PCIe Linking... LTSSM is 0x%x\n",
-				     rk_pcie_readl_apb(rk_pcie, PCIE_CLIENT_LTSSM_STATUS));
-		rk_pcie_debug_dump(rk_pcie);
+	if (rk_pcie->in_suspend == true && rk_pcie->bus_nr == 0) {
+		dev_err(pci->dev, "link is not connected, skip\n");
+		return 0;
+	} else {
+		/*
+		 * PCIe requires the refclk to be stable for 100µs prior to releasing
+		 * PERST and T_PVPERL (Power stable to PERST# inactive) should be a
+		 * minimum of 100ms.  See table 2-4 in section 2.6.2 AC, the PCI Express
+		 * Card Electromechanical Specification 3.0. So 100ms in total is the min
+		 * requuirement here. We add a 1s for sake of hoping everthings work fine.
+		 */
 		msleep(1000);
+		gpiod_set_value_cansleep(rk_pcie->rst_gpio, 1);
+
+		for (retries = 0; retries < 10; retries++) {
+			if (dw_pcie_link_up(pci)) {
+				/*
+				 * We may be here in case of L0 in Gen1. But if EP is capable
+				 * of Gen2 or Gen3, Gen switch may happen just in this time, but
+				 * we keep on accessing devices in unstable link status. Given
+				 * that LTSSM max timeout is 24ms per period, we can wait a bit
+				 * more for Gen switch.
+				 */
+				msleep(100);
+				dev_info(pci->dev, "PCIe Link up, LTSSM is 0x%x\n",
+					 rk_pcie_readl_apb(rk_pcie, PCIE_CLIENT_LTSSM_STATUS));
+				rk_pcie_debug_dump(rk_pcie);
+				return 0;
+			}
+
+			dev_info_ratelimited(pci->dev, "PCIe Linking... LTSSM is 0x%x\n",
+					     rk_pcie_readl_apb(rk_pcie, PCIE_CLIENT_LTSSM_STATUS));
+			rk_pcie_debug_dump(rk_pcie);
+			msleep(1000);
+		}
 	}
 
 	dev_err(pci->dev, "PCIe Link Fail\n");
@@ -686,6 +694,8 @@ static int rk_add_pcie_port(struct rk_pcie *rk_pcie)
 		dev_err(dev, "failed to initialize host\n");
 		return ret;
 	}
+
+	rk_pcie->bus_nr = pp->root_bus_nr;
 
 	ret = rk_pcie_host_init_dma_trx(rk_pcie);
 	if (ret) {
@@ -1250,12 +1260,17 @@ static int rk_pcie_enable_power(struct rk_pcie *rk_pcie)
 	int ret = 0;
 	struct device *dev = rk_pcie->pci->dev;
 
-	if (IS_ERR(rk_pcie->vpcie3v3))
-		return ret;
+	if (!IS_ERR(rk_pcie->vpcie3v3)) {
+		ret = regulator_enable(rk_pcie->vpcie3v3);
+		if (ret)
+			dev_err(dev, "fail to enable vpcie3v3 regulator\n");
+	}
 
-	ret = regulator_enable(rk_pcie->vpcie3v3);
-	if (ret)
-		dev_err(dev, "fail to enable vpcie3v3 regulator\n");
+	if (!IS_ERR(rk_pcie->vdevice3v3)) {
+		ret = regulator_enable(rk_pcie->vdevice3v3);
+		if (ret)
+			dev_err(dev, "fail to enable vdevice3v3 regulator\n");
+	}
 
 	return ret;
 }
@@ -1265,12 +1280,19 @@ static int rk_pcie_disable_power(struct rk_pcie *rk_pcie)
 	int ret = 0;
 	struct device *dev = rk_pcie->pci->dev;
 
-	if (IS_ERR(rk_pcie->vpcie3v3))
-		return ret;
+	pr_info("[BPI]%s\n", __func__);
 
-	ret = regulator_disable(rk_pcie->vpcie3v3);
-	if (ret)
-		dev_err(dev, "fail to disable vpcie3v3 regulator\n");
+	if (!IS_ERR(rk_pcie->vdevice3v3)) {
+		ret = regulator_disable(rk_pcie->vdevice3v3);
+		if (ret)
+			dev_err(dev, "fail to disable vdevice3v3 regulator\n");
+	}
+
+	if (!IS_ERR(rk_pcie->vpcie3v3)) {
+		ret = regulator_disable(rk_pcie->vpcie3v3);
+		if (ret)
+			dev_err(dev, "fail to disable vpcie3v3 regulator\n");
+	}
 
 	return ret;
 }
@@ -1324,6 +1346,13 @@ static int rk_pcie_really_probe(void *p)
 	if (ret) {
 		dev_err(dev, "resource init failed\n");
 		return ret;
+	}
+
+	rk_pcie->vdevice3v3 = devm_regulator_get_optional(dev, "vdevice3v3");
+	if (IS_ERR(rk_pcie->vdevice3v3)) {
+		if (PTR_ERR(rk_pcie->vdevice3v3) != -ENODEV)
+			return PTR_ERR(rk_pcie->vdevice3v3);
+		dev_info(dev, "no vdevice3v3 regulator found\n");
 	}
 
 	/* DON'T MOVE ME: must be enable before phy init */
@@ -1446,9 +1475,9 @@ remove_irq_domain:
 	if (rk_pcie->irq_domain)
 		irq_domain_remove(rk_pcie->irq_domain);
 deinit_clk:
-	rk_pcie_clk_deinit(rk_pcie);
+	//rk_pcie_clk_deinit(rk_pcie);
 disable_vpcie3v3:
-	rk_pcie_disable_power(rk_pcie);
+	//rk_pcie_disable_power(rk_pcie);
 
 	return ret;
 }
@@ -1483,6 +1512,7 @@ static int __maybe_unused rockchip_dw_pcie_suspend(struct device *dev)
 
 	rk_pcie->in_suspend = true;
 
+	gpiod_set_value_cansleep(rk_pcie->rst_gpio, 0);
 	ret = rk_pcie_disable_power(rk_pcie);
 
 	return ret;

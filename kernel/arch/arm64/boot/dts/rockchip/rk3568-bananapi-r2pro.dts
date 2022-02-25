@@ -89,11 +89,8 @@
 		regulator-name = "vcc3v3_minipcie";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-		regulator-always-on;
-		regulator-boot-on;
 		enable-active-high;
 		gpio = <&gpio0 RK_PC6 GPIO_ACTIVE_HIGH>;
-		//startup-delay-us = <5000>;
 		vin-supply = <&vcc3v3_sys>;
 	};
 
@@ -102,11 +99,8 @@
 		regulator-name = "vcc3v3_ngff";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-		regulator-always-on;
-		regulator-boot-on;
 		enable-active-high;
 		gpio = <&gpio4 RK_PC1 GPIO_ACTIVE_HIGH>;
-		//startup-delay-us = <5000>;
 		vin-supply = <&vcc3v3_sys>;
 	};
 
@@ -391,7 +385,7 @@
 	rockchip,bifurcation;
 	reset-gpios = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie>;
-	//ngff3v3-supply = <&vcc3v3_ngff>;
+	vdevice3v3-supply = <&vcc3v3_ngff>;
 	status = "okay";
 };
 
@@ -399,7 +393,7 @@
 	rockchip,bifurcation;
 	reset-gpios = <&gpio2 RK_PD6 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc3v3_pcie>;
-	//minipcie3v3-supply = <&vcc3v3_minipcie>;
+	vdevice3v3-supply = <&vcc3v3_minipcie>;
 	status = "okay";
 };
 
