@@ -78,8 +78,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.usb.show=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.net.eth_primary=eth1 \
-	ro.net.eth_secondary=eth0
+	ro.net.eth_primary=eth0 \
+	ro.net.eth_secondary=eth1
 
 # 0-dhcp, 1-static
 PRODUCT_PROPERTY_OVERRIDES += \
