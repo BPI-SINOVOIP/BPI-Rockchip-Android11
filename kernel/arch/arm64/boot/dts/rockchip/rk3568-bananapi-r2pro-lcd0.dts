@@ -47,7 +47,7 @@
 
 &dsi0_panel {
 	power-supply = <&vcc3v3_lcd0_n>;
-	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+	reset-gpios = <&gpio2 RK_PD0 GPIO_ACTIVE_LOW>;
 
 	panel-init-sequence = [
 			39 00 04 FF 98 81 03
@@ -298,8 +298,8 @@
 };
 
 &dsi1_panel {
-	power-supply = <&vcc3v3_lcd0_n>;
-	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+	power-supply = <&vcc3v3_lcd1_n>;
+	reset-gpios = <&gpio2 RK_PD1 GPIO_ACTIVE_LOW>;
 
 	panel-init-sequence = [
 			39 00 04 FF 98 81 03
@@ -540,8 +540,8 @@
 };
 
 &vcc3v3_lcd1_n {
-	status = "disabled";
-	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	status = "okay";
+	gpio = <&gpio2 RK_PC1 GPIO_ACTIVE_HIGH>;
 	enable-active-high;
 };
 

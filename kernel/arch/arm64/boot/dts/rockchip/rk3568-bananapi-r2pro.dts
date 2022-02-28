@@ -92,7 +92,7 @@
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		enable-active-high;
-		gpio = <&gpio4 RK_PC1 GPIO_ACTIVE_HIGH>;
+		gpio = <&gpio0 RK_PB7 GPIO_ACTIVE_HIGH>;
 		vin-supply = <&vcc3v3_sys>;
 	};
 
@@ -201,7 +201,7 @@
 
 &dsi0_panel {
 	power-supply = <&vcc3v3_lcd0_n>;
-	//reset-gpios = <&gpio0 RK_PB7 GPIO_ACTIVE_LOW>;
+	reset-gpios = <&gpio2 RK_PD0 GPIO_ACTIVE_LOW>;
 };
 
 &backlight {
@@ -225,7 +225,8 @@
 };
 
 &dsi1_panel {
-	power-supply = <&vcc3v3_lcd0_n>;
+	power-supply = <&vcc3v3_lcd1_n>;
+	reset-gpios = <&gpio2 RK_PD1 GPIO_ACTIVE_LOW>;
 };
 
 &backlight1 {
@@ -480,8 +481,8 @@
 };
 
 &vcc3v3_lcd1_n {
-	status = "disabled";
-	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	status = "okay";
+	gpio = <&gpio2 RK_PC1 GPIO_ACTIVE_HIGH>;
 	enable-active-high;
 };
 
@@ -495,8 +496,9 @@
 };
 
 &wireless_bluetooth {
-	//BT,wake_gpio     = <&gpio3 RK_PB5 GPIO_ACTIVE_HIGH>;
-        //BT,wake_host_irq = <&gpio2 RK_PD7 GPIO_ACTIVE_HIGH>;
+	/delete-property/ BT,reset_gpio;
+	/delete-property/ BT,wake_gpio;
+	BT,wake_host_irq = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
 	status = "disabled";
 };
 
