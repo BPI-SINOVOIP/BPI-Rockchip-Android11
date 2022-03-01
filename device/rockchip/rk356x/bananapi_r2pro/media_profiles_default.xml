@@ -196,22 +196,32 @@
 -->
 
         <!--  If your sensor driver don't support 720p stream, Please turn off this element -->
-<!--
         <EncoderProfile quality="720p" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="6000000"
+                   bitRate="9000000"
                    width="1280"
                    height="720"
                    frameRate="30" />
 
             <Audio codec="aac"
-                   bitRate="61000"
+                   bitRate="96000"
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
- -->
-        <!--  If your sensor driver don't support 1080p stream, Please turn off this element -->
 
+        <!--  If your sensor driver don't support 1080p stream, Please turn off this element -->
+        <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
+            <Video codec="h264"
+                   bitRate="12000000"
+                   width="1920"
+                   height="1080"
+                   frameRate="30" />
+
+            <Audio codec="aac"
+                   bitRate="96000"
+                   sampleRate="44100"
+                   channels="1" />
+        </EncoderProfile>
 
         <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
             <Video codec="h264"
@@ -336,21 +346,32 @@
 -->
 
         <!--  If your sensor driver don't support 720p stream, Please turn off this element -->
-<!--
         <EncoderProfile quality="timelapse720p" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="3000000"
+                   bitRate="9000000"
                    width="1280"
                    height="720"
                    frameRate="30" />
 
             <Audio codec="aac"
-                   bitRate="61000"
+                   bitRate="96000"
                    sampleRate="44100"
                    channels="1" />
         </EncoderProfile>
--->
+
         <!--  If your sensor driver don't support 108p stream, Please turn off this element -->
+        <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
+            <Video codec="h264"
+                   bitRate="12000000"
+                   width="1920"
+                   height="1080"
+                   frameRate="30" />
+
+            <Audio codec="aac"
+                   bitRate="96000"
+                   sampleRate="44100"
+                   channels="1" />
+        </EncoderProfile>
 
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />

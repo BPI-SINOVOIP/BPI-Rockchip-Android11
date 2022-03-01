@@ -881,7 +881,7 @@ static int os08a10_s_power(struct v4l2_subdev *sd, int on)
 	struct i2c_client *client = os08a10->client;
 	int ret = 0;
 
-	dev_info(&client->dev, "%s(%d) on(%d)\n", __func__, __LINE__, on);
+	dev_dbg(&client->dev, "%s(%d) on(%d)\n", __func__, __LINE__, on);
 
 	mutex_lock(&os08a10->mutex);
 
