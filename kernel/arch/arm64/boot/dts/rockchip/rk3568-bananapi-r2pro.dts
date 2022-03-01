@@ -440,7 +440,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&sdmmc2m0_bus4 &sdmmc2m0_cmd &sdmmc2m0_clk>;
 	sd-uhs-sdr104;
-	status = "disabled";
+	status = "okay";
 };
 
 &spdif_8ch {
@@ -463,7 +463,7 @@
 };
 
 &uart8 {
-	status = "disabled";
+	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart8m0_xfer &uart8m0_ctsn>;
 };
@@ -487,19 +487,19 @@
 };
 
 &sdio_pwrseq {
-	status = "disabled";
+	status = "okay";
 };
 
 &wireless_wlan {
 	wifi_chip_type = "ap6275s";
-	status = "disabled";
+	status = "okay";
 };
 
 &wireless_bluetooth {
 	/delete-property/ BT,reset_gpio;
 	/delete-property/ BT,wake_gpio;
 	BT,wake_host_irq = <&gpio3 RK_PA0 GPIO_ACTIVE_HIGH>;
-	status = "disabled";
+	status = "okay";
 };
 
 &adc_keys {
