@@ -119,7 +119,12 @@ struct goodix_ts_data {
     u8  fixed_cfg;
     u8  fw_error;
     u8  pnl_init_error;
-	u8 cfg_file_num;
+    u8 cfg_file_num;
+
+    u8 gtp_change_x2y;
+    u8 gtp_x_reverse;
+    u8 gtp_y_reverse;
+
 //add struct tp_device by Sam
     struct  tp_device  tp;
 

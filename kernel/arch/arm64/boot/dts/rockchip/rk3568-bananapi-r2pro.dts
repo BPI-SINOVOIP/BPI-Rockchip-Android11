@@ -304,6 +304,29 @@
 	status = "okay";
 };
 
+&i2c1 {
+	status = "okay";
+	gt9xx: gt9xx@14 {
+		compatible = "goodix,gt9xx";
+		reg = <0x14>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&gt9xx_gpio>;
+		touch-gpio = <&gpio0 RK_PB5 IRQ_TYPE_LEVEL_HIGH>;
+		reset-gpio = <&gpio0 RK_PB6 GPIO_ACTIVE_HIGH>;
+
+		max-x = <800>;
+		max-y = <1280>;
+		cfg_file_num = <0>;
+
+		gtp_change_x2y = <1>;
+		gtp_x_reverse = <0>;
+		gtp_y_reverse = <1>;
+
+		tp-size = <89>;
+		tp-supply = <&vcc3v3_lcd1_n>;
+        };
+};
+
 &i2c3 {
 	status = "okay";
 	hym8563: hym8563@51 {
@@ -397,6 +420,13 @@
 	rtc {
 		rtc_int: rtc-int {
 			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+	};
+
+	gt9xx {
+		gt9xx_gpio: gt9xx-gpio {
+			rockchip,pins = <0 RK_PB5 RK_FUNC_GPIO &pcfg_pull_up>,
+					<0 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 };

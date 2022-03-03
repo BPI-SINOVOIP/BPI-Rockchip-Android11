@@ -62,9 +62,9 @@ static u8 bgt9110 = FALSE;
 static u8 bgt9111 = FALSE;
 static u8 bgt970 = FALSE;
 static u8 bgt910 = FALSE;
-static u8 gtp_change_x2y = TRUE;
-static u8 gtp_x_reverse = FALSE;
-static u8 gtp_y_reverse = TRUE;
+//static u8 gtp_change_x2y = TRUE;
+//static u8 gtp_x_reverse = FALSE;
+//static u8 gtp_y_reverse = TRUE;
 
 static const char *goodix_ts_name = "goodix-ts";
 static struct workqueue_struct *goodix_wq;
@@ -422,14 +422,14 @@ Output:
 *********************************************************/
 static void gtp_touch_down(struct goodix_ts_data* ts,s32 id,s32 x,s32 y,s32 w)
 {
-	if (gtp_change_x2y)
+	if (ts->gtp_change_x2y)
 		GTP_SWAP(x, y);
 
 	if (!bgt911 && !bgt970) {
-		if (gtp_x_reverse)
+		if (ts->gtp_x_reverse)
 			x = ts->abs_x_max - x;
 
-		if (gtp_y_reverse)
+		if (ts->gtp_y_reverse)
 			y = ts->abs_y_max - y;
 	}
 
@@ -525,7 +525,7 @@ static void gtp_pen_down(s32 x, s32 y, s32 w, s32 id)
 {
     struct goodix_ts_data *ts = i2c_get_clientdata(i2c_connect_client);
 
-	if (gtp_change_x2y)
+	if (ts->gtp_change_x2y)
 		GTP_SWAP(x, y);
 
     
@@ -1438,6 +1438,7 @@ static s32 gtp_init_panel(struct goodix_ts_data *ts)
     GTP_INFO("  <%s>_%d \n", __func__, __LINE__);
    
     if(m89or101){
+		GTP_INFO("  <%s>_%d, cfg=m89or101, cfg_file_num=%d\n", __func__, __LINE__, ts->cfg_file_num);
 	    if (ts->cfg_file_num) {
 		    send_cfg_buf[0] = gtp_dat_8_9_1;
 		    cfg_info_len[0] =  CFG_GROUP_LEN(gtp_dat_8_9_1);
@@ -2095,7 +2096,7 @@ static s8 gtp_request_input_dev(struct i2c_client *client,
     input_set_capability(ts->input_dev, EV_KEY, KEY_POWER);
 #endif 
 
-	if (gtp_change_x2y)
+	if (ts->gtp_change_x2y)
 		GTP_SWAP(ts->abs_x_max, ts->abs_y_max);
 
 #if defined(CONFIG_CHROME_PLATFORMS)
@@ -2651,68 +2652,12 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
     	return -EINVAL;
     }
 
-	if (val == 89) {
-		m89or101 = TRUE;
-		gtp_change_x2y = TRUE;
-		gtp_x_reverse = FALSE;
-		gtp_y_reverse = TRUE;
-	} else if (val == 101) {
-		m89or101 = FALSE;
-		gtp_change_x2y = TRUE;
-		gtp_x_reverse = TRUE;
-		gtp_y_reverse = FALSE;
-	} else if (val == 911) {
-		m89or101 = FALSE;
-		bgt911 = TRUE;
-		gtp_change_x2y = TRUE;
-		gtp_x_reverse = FALSE;
-		gtp_y_reverse = TRUE;
-	} else if (val == 9110) {
-		m89or101 = FALSE;
-		bgt9110 = TRUE;
-		gtp_change_x2y = TRUE;
-		gtp_x_reverse = TRUE;
-		gtp_y_reverse = FALSE;
-	} else if (val == 9111) {
-		m89or101 = FALSE;
-		bgt9111 = TRUE;
-		gtp_change_x2y = TRUE;
-		gtp_x_reverse = FALSE;
-		gtp_y_reverse = FALSE;
-	} else if (val == 970) {
-		m89or101 = FALSE;
-		bgt911 = FALSE;
-		bgt970 = TRUE;
-		gtp_change_x2y = FALSE;
-		gtp_x_reverse = FALSE;
-		gtp_y_reverse = TRUE;
-	} else if (val == 910) {
-		m89or101 = FALSE;
-		bgt911 = FALSE;
-		bgt970 = FALSE;
-		bgt910 = TRUE;
-		gtp_change_x2y = TRUE;
-		gtp_x_reverse = FALSE;
-		gtp_y_reverse = TRUE;
-	}
-
-	ts->tp_regulator = devm_regulator_get(&client->dev, "tp");
-	if (IS_ERR(ts->tp_regulator)) {
-		dev_err(&client->dev, "failed to get regulator, %ld\n",
-			PTR_ERR(ts->tp_regulator));
-		return PTR_ERR(ts->tp_regulator);
-	}
-
-	ret = regulator_enable(ts->tp_regulator);
-	if (ret < 0)
-		GTP_ERROR("failed to enable tp regulator\n");
-	msleep(20);
-
-    ts->irq_pin = of_get_named_gpio_flags(np, "touch-gpio", 0, (enum of_gpio_flags *)(&ts->irq_flags));
+	ts->irq_pin = of_get_named_gpio_flags(np, "touch-gpio", 0, (enum of_gpio_flags *)(&ts->irq_flags));
     ts->rst_pin = of_get_named_gpio_flags(np, "reset-gpio", 0, &rst_flags);
     ts->pwr_pin = of_get_named_gpio_flags(np, "power-gpio", 0, &pwr_flags);
     //ts->tp_select_pin = of_get_named_gpio_flags(np, "tp-select-gpio", 0, &tp_select_flags);
-    if (of_property_read_u32(np, "max-x", &val)) {
+
+	if (of_property_read_u32(np, "max-x", &val)) {
     	dev_err(&client->dev, "no max-x defined\n");
     	return -EINVAL;
     }
@@ -2727,6 +2672,65 @@ static int goodix_ts_probe(struct i2c_client *client, const struct i2c_device_id
     } else {
 	    ts->cfg_file_num = val;
     }
+
+	if (val == 89) {
+		m89or101 = TRUE;
+	} else if (val == 101) {
+		m89or101 = FALSE;
+
+	} else if (val == 911) {
+		m89or101 = FALSE;
+		bgt911 = TRUE;
+	} else if (val == 9110) {
+		m89or101 = FALSE;
+		bgt9110 = TRUE;
+	} else if (val == 9111) {
+		m89or101 = FALSE;
+		bgt9111 = TRUE;
+	} else if (val == 970) {
+		m89or101 = FALSE;
+		bgt911 = FALSE;
+		bgt970 = TRUE;
+	} else if (val == 910) {
+		m89or101 = FALSE;
+		bgt911 = FALSE;
+		bgt970 = FALSE;
+		bgt910 = TRUE;
+	}
+
+	if (of_property_read_u32(np, "gtp_change_x2y", &val)) {
+		dev_err(&client->dev, "no gtp_change_x2y defined\n");
+    	return -EINVAL;
+	} else {
+		ts->gtp_change_x2y = val;
+	}
+
+	if (of_property_read_u32(np, "gtp_x_reverse", &val)) {
+		dev_err(&client->dev, "no gtp_x_reverse defined\n");
+    	return -EINVAL;
+	} else {
+		ts->gtp_x_reverse = val;
+	}
+
+	if (of_property_read_u32(np, "gtp_y_reverse", &val)) {
+		dev_err(&client->dev, "no gtp_y_reverse defined\n");
+    	return -EINVAL;
+	} else {
+		ts->gtp_y_reverse = val;
+	}
+
+	ts->tp_regulator = devm_regulator_get(&client->dev, "tp");
+	if (IS_ERR(ts->tp_regulator)) {
+		dev_err(&client->dev, "failed to get regulator, %ld\n",
+			PTR_ERR(ts->tp_regulator));
+		return PTR_ERR(ts->tp_regulator);
+	}
+
+	ret = regulator_enable(ts->tp_regulator);
+	if (ret < 0)
+		GTP_ERROR("failed to enable tp regulator\n");
+	msleep(20);
+
     ts->pendown =PEN_RELEASE;
     ts->client = client;
     
