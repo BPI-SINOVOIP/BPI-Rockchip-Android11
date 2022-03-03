@@ -12,9 +12,18 @@
 #define IS_RANGE(x, min, max)   ((x) > (min) && (x) < (max))
 
 #define HWID_ADC_CHANNEL        1
+#define DSI0_ADC_CHANNEL		5
+#define DSI1_ADC_CHANNEL		2
+#define EDP_ADC_CHANNEL			4
+#define LVDS_ADC_CHANNEL		5
+
+#define BANANAPI_R2PRO_HDMI	0	/*hdmi only*/
+#define BANANAPI_R2PRO_LCD0	1	/*800x1280 dsi*/
+#define BANANAPI_R2PRO_LCD1	2	/*1200x1920 dsi*/
 
 #if defined(CONFIG_TARGET_BANANAPI_R2PRO)
 int board_is_bananapi_r2pro(void);
+int get_display_id(void);
 #endif
 
 #endif
