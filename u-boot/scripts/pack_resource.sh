@@ -12,6 +12,7 @@ BOOT_OLD=$1
 BOOT_NEW=boot.img
 
 TOOL=../rkbin/tools/resource_tool
+[ -x ./tools/resource_tool ] && TOOL=./tools/resource_tool
 IMAGES=./tools/images/
 TMP_DIR=.resource_tmp
 TMP_DIR2=.boot_tmp
@@ -55,7 +56,7 @@ append_images_to_resource()
 	else
 		cp -r ${IMAGES}   ${TMP_DIR}
 	fi
-	${TOOL} --pack --root=${TMP_DIR} --image=${RSCE_NEW} `find ${TMP_DIR} -type f|sort`
+	${TOOL} --pack --dtbname --root=${TMP_DIR} --image=${RSCE_NEW} `find ${TMP_DIR} -type f|sort`
 
 	echo
 	echo "Packed resources:"

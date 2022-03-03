@@ -559,7 +559,7 @@ void sha256_csum(const unsigned char *input, unsigned int ilen,
 	sha256_finish(&ctx, output);
 }
 
-#define DEBUG
+/* #define DEBUG */
 
 static bool g_debug =
 #ifdef DEBUG
