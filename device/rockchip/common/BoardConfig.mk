@@ -306,6 +306,7 @@ BOARD_HAVE_BLUETOOTH ?= true
 BLUETOOTH_USE_BPLUS ?= false
 BOARD_HAVE_BLUETOOTH_BCM ?= false
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/rockchip/$(TARGET_BOARD_PLATFORM)/bluetooth
+BOARD_CUSTOM_BT_CONFIG := device/rockchip/common/bluetooth/vnd_rksdk.txt
 include device/rockchip/common/wifi_bt_common.mk
 
 #Camera flash
