@@ -866,6 +866,19 @@ static int rfkill_wlan_probe(struct platform_device *pdev)
 			goto fail_alloc;
 	}
 
+	ret = rfkill_rk_setup_gpio(&pdata->wifi_int_b, wlan_name,
+					   "wlan_wake_host");
+	if (ret) {
+		goto fail_alloc;
+	} else {
+		ret = gpio_direction_input(pdata->wifi_int_b.io);
+		if (ret < 0) {
+			pr_err("%s: gpio_direction_input(%d) for WL_HOST_WAKE failed\n",
+				__func__, pdata->wifi_int_b.io);
+			goto fail_alloc;
+		}
+	}
+
 	wake_lock_init(&rfkill->wlan_irq_wl, WAKE_LOCK_SUSPEND,
 		       "rfkill_wlan_wake");
 
