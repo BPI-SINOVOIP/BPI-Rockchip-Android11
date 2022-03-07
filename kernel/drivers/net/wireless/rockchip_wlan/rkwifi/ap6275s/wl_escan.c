@@ -199,7 +199,7 @@ wl_ch_host_to_driver(int ioctl_ver, u16 channel)
 	return wl_chspec_host_to_driver(ioctl_ver, chanspec);
 }
 
-static inline struct wl_bss_info *next_bss(struct wl_scan_results *list,
+static inline struct wl_bss_info *next_bss(wl_scan_results_t *list,
 	struct wl_bss_info *bss)
 {
 	return bss = bss ?
@@ -210,7 +210,7 @@ static inline struct wl_bss_info *next_bss(struct wl_scan_results *list,
 static s32
 wl_escan_inform_bss(struct net_device *dev, struct wl_escan_info *escan)
 {
-	struct wl_scan_results *bss_list;
+	wl_scan_results_t *bss_list;
 	s32 err = 0;
 #if defined(RSSIAVG)
 	int rssi;
@@ -219,16 +219,6 @@ wl_escan_inform_bss(struct net_device *dev, struct wl_escan_info *escan)
 	bss_list = escan->bss_list;
 
 	ESCAN_SCAN(dev->name, "scanned AP count (%d)\n", bss_list->count);
-
-	/* Delete disconnected cache */
-#if defined(BSSCACHE)
-	wl_delete_disconnected_bss_cache(&escan->g_bss_cache_ctrl,
-		(u8*)&escan->disconnected_bssid);
-#if defined(RSSIAVG)
-	wl_delete_disconnected_rssi_cache(&escan->g_rssi_cache_ctrl,
-		(u8*)&escan->disconnected_bssid);
-#endif
-#endif
 
 	/* Update cache */
 #if defined(RSSIAVG)
@@ -773,7 +763,7 @@ wl_escan_timeout(unsigned long data)
 {
 	wl_event_msg_t msg;
 	struct wl_escan_info *escan = (struct wl_escan_info *)data;
-	struct wl_scan_results *bss_list;
+	wl_scan_results_t *bss_list;
 	struct wl_bss_info *bi = NULL;
 	s32 i;
 	u32 channel;
@@ -1064,7 +1054,7 @@ wl_escan_get_scan(struct net_device *dev, dhd_pub_t *dhdp,
 	int i = 0;
 	int len_prep = 0, len_ret = 0;
 	wl_bss_info_t *bi = NULL;
-	struct wl_scan_results *bss_list;
+	wl_scan_results_t *bss_list;
 	__u16 buflen_from_user = dwrq->length;
 #if defined(BSSCACHE)
 	wl_bss_cache_t *node;
@@ -1242,7 +1232,7 @@ wl_escan_mesh_info(struct net_device *dev, struct wl_escan_info *escan,
 {
 	int i = 0;
 	wl_bss_info_t *bi = NULL;
-	struct wl_scan_results *bss_list;
+	wl_scan_results_t *bss_list;
 	int16 bi_rssi, bi_chan;
 	wlc_ssid_t bi_meshid;
 	bool is_mesh_peer = FALSE, found = FALSE;
@@ -1314,7 +1304,7 @@ wl_escan_mesh_peer(struct net_device *dev, struct wl_escan_info *escan,
 {
 	int i = 0;
 	wl_bss_info_t *bi = NULL;
-	struct wl_scan_results *bss_list;
+	wl_scan_results_t *bss_list;
 	int16 bi_rssi, bi_chan, max_rssi = -100;
 	uint min_hop_cnt = 255;
 	wlc_ssid_t bi_meshid;

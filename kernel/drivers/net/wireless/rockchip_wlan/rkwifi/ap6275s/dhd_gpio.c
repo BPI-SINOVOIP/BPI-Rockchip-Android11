@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+
 #include <osl.h>
 #include <dhd_linux.h>
 #include <linux/gpio.h>
@@ -154,6 +154,7 @@ static int dhd_wlan_get_mac_addr(unsigned char *buf
 #endif /* EXAMPLE_GET_MAC */
 	}
 
+	err = rockchip_wifi_mac_addr(buf);
 #ifdef EXAMPLE_GET_MAC_VER2
 	/* EXAMPLE code */
 	{

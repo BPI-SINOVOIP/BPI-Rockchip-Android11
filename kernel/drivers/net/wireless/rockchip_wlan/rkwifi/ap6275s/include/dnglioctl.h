@@ -1,7 +1,7 @@
 /*
  * HND Run Time Environment ioctl.
  *
- * Copyright (C) 1999-2019, Broadcom.
+ * Copyright (C) 2020, Broadcom.
  *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
@@ -17,20 +17,22 @@
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
  *
- *      Notwithstanding the above, under no circumstances may you combine this
- * software in any way with any other Broadcom software provided under a license
- * other than the GPL, without Broadcom's express prior written consent.
  *
- *
- * <<Broadcom-WL-IPTag/Open:>>
- *
- * $Id: rte_ioctl.h 699094 2017-05-11 22:41:10Z $
+ * <<Broadcom-WL-IPTag/Dual:>>
  */
 
+#ifndef _dngl_ioctl_h_
+#define _dngl_ioctl_h_
+
+/* ==== Dongle IOCTLs i.e. non-d11 IOCTLs ==== */
+
 #ifndef _rte_ioctl_h_
-#define _rte_ioctl_h_
+/* ================================================================ */
+/* These are the existing ioctls moved from src/include/rte_ioctl.h */
+/* ================================================================ */
 
 /* RTE IOCTL definitions for generic ether devices */
+#define RTEIOCTLSTART		0x8901
 #define RTEGHWADDR		0x8901
 #define RTESHWADDR		0x8902
 #define RTEGMTU			0x8903
@@ -50,12 +52,20 @@
 #define RTED11DMALPBK_UNINIT	0x8911	/* D11 DMA loopback uninit */
 #define RTED11DMALPBK_RUN	0x8912	/* D11 DMA loopback run */
 #define RTEDEVTSBUFPOST		0x8913	/* Async interface for tsync buffer post */
+#define RTED11DMAHOSTLPBK_RUN	0x8914  /* D11 DMA host memory loopback run */
+#define RTEDEVGETTSF		0x8915  /* Get device TSF */
+#define RTEDURATIONUNIT		0x8916  /* Duration unit */
+#define RTEWRITE_WAR_REGS	0x8917  /* write workaround regs */
+#define RTEDEVRMPMK		0x8918  /* Remove PMK */
+#define RTEDEVDBGVAL		0x8919  /* Set debug val */
+/* Ensure last RTE IOCTL define val is assigned to RTEIOCTLEND */
+#define RTEIOCTLEND		0x8919  /* LAST RTE IOCTL value */
 
-#define RTE_IOCTL_QUERY			0x00
-#define RTE_IOCTL_SET			0x01
+#define RTE_IOCTL_QUERY		0x00
+#define RTE_IOCTL_SET		0x01
 #define RTE_IOCTL_OVL_IDX_MASK	0x1e
-#define RTE_IOCTL_OVL_RSV		0x20
-#define RTE_IOCTL_OVL			0x40
+#define RTE_IOCTL_OVL_RSV	0x20
+#define RTE_IOCTL_OVL		0x40
 #define RTE_IOCTL_OVL_IDX_SHIFT	1
 
 enum hnd_ioctl_cmd {
@@ -71,7 +81,15 @@ enum hnd_ioctl_cmd {
 	BUS_UPDATE_FLOW_PKTS_MAX = 8,
 	BUS_UPDATE_EXTRA_TXLFRAGS = 9,
 	BUS_UPDATE_FRWD_RESRV_BUFCNT = 10,
-	BUS_PCIE_CONFIG_ACCESS = 11
+	BUS_PCIE_CONFIG_ACCESS = 11,
+	BUS_HC_EVENT_MASK_UPDATE = 12,
+	BUS_SET_MAC_WAKE_STATE = 13,
+	BUS_FRWD_PKT_RXCMPLT = 14,
+	BUS_PCIE_LATENCY_ENAB = 15, /* to enable latency feature in pcie */
+	BUS_GET_MAXITEMS = 16,
+	BUS_SET_BUS_CSO_CAP = 17,	/* Update the CSO cap from wl layer to bus layer */
+	BUS_DUMP_RX_DMA_STALL_RELATED_INFO = 18,
+	BUS_UPDATE_RESVPOOL_STATE = 19	/* Update resvpool state */
 };
 
 #define SDPCMDEV_SET_MAXTXPKTGLOM	1
@@ -95,9 +113,65 @@ typedef struct memuse_info {
 	uint32 mf_count;        /* Malloc failure count */
 } memuse_info_t;
 
+/* Different DMA loopback modes */
+#define M2M_DMA_LOOPBACK	0	/* PCIE M2M mode */
+#define D11_DMA_LOOPBACK	1	/* PCIE M2M and D11 mode without ucode */
+#define BMC_DMA_LOOPBACK	2	/* PCIE M2M and D11 mode with ucode */
+#define M2M_NON_DMA_LOOPBACK	3	/* Non DMA(indirect) mode */
+#define D11_DMA_HOST_MEM_LPBK	4	/* D11 mode */
+#define M2M_DMA_WRITE_TO_RAM	6	/* PCIE M2M write to specific memory mode */
+#define M2M_DMA_READ_FROM_RAM	7	/* PCIE M2M read from specific memory mode */
+#define D11_DMA_WRITE_TO_RAM	8	/* D11 write to specific memory mode */
+#define D11_DMA_READ_FROM_RAM	9	/* D11 read from specific memory mode */
+
 /* For D11 DMA loopback test */
+typedef struct d11_dmalpbk_init_args {
+	uint8 core_num;
+	uint8 lpbk_mode;
+} d11_dmalpbk_init_args_t;
+
 typedef struct d11_dmalpbk_args {
 	uint8 *buf;
 	int32 len;
+	void *p;
+	uint8 core_num;
+	uint8 pad[3];
 } d11_dmalpbk_args_t;
+
+typedef enum wl_config_var {
+	WL_VAR_TX_PKTFETCH_INDUCE = 1,
+	WL_VAR_LAST
+} wl_config_var_t;
+
+typedef struct wl_config_buf {
+	wl_config_var_t var;
+	uint32 val;
+} wl_config_buf_t;
+
+/* ================================================================ */
+/* These are the existing ioctls moved from src/include/rte_ioctl.h */
+/* ================================================================ */
 #endif /* _rte_ioctl_h_ */
+
+/* MPU test iovar version */
+#define MPU_TEST_STRUCT_VER	0
+
+/* MPU test OP */
+#define MPU_TEST_OP_READ	0
+#define MPU_TEST_OP_WRITE	1
+#define MPU_TEST_OP_EXECUTE	2
+
+/* Debug iovar for MPU testing */
+typedef struct mpu_test_args {
+	/* version control */
+	uint16 ver;
+	uint16 len;	/* the length of this structure */
+	/* data */
+	uint32 addr;
+	uint8 op;	/* see MPU_TEST_OP_XXXX */
+	uint8 rsvd;
+	uint16 size;	/* valid for read/write */
+	uint8 val[];
+} mpu_test_args_t;
+
+#endif /* _dngl_ioctl_h_ */

@@ -1,7 +1,7 @@
 /*
  * Linux cfg80211 driver - Android related functions
  *
- * Copyright (C) 1999-2019, Broadcom.
+ * Copyright (C) 2020, Broadcom.
  *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
@@ -17,14 +17,8 @@
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
  *
- *      Notwithstanding the above, under no circumstances may you combine this
- * software in any way with any other Broadcom software provided under a license
- * other than the GPL, without Broadcom's express prior written consent.
  *
- *
- * <<Broadcom-WL-IPTag/Open:>>
- *
- * $Id: wl_android.h 794110 2018-12-12 05:03:21Z $
+ * <<Broadcom-WL-IPTag/Dual:>>
  */
 
 #ifndef _wl_android_
@@ -39,13 +33,13 @@
 /* If any feature uses the Generic Netlink Interface, put it here to enable WL_GENL
  * automatically
  */
-#if defined(BT_WIFI_HANDOVER)
+#if defined(WL_SDO) || defined(BT_WIFI_HANDOVER)
 #define WL_GENL
-#endif // endif
+#endif
 
 #ifdef WL_GENL
 #include <net/genetlink.h>
-#endif // endif
+#endif
 
 typedef struct _android_wifi_priv_cmd {
     char *buf;
@@ -112,6 +106,11 @@ do {	\
 int wl_android_init(void);
 int wl_android_exit(void);
 void wl_android_post_init(void);
+void wl_android_set_wifi_on_flag(bool enable);
+#if defined(WLAN_ACCEL_BOOT)
+int wl_android_wifi_accel_on(struct net_device *dev, bool force_reg_on);
+int wl_android_wifi_accel_off(struct net_device *dev, bool force_reg_on);
+#endif /* WLAN_ACCEL_BOOT */
 int wl_android_wifi_on(struct net_device *dev);
 int wl_android_wifi_off(struct net_device *dev, bool on_failure);
 int wl_android_priv_cmd(struct net_device *net, struct ifreq *ifr);
@@ -121,7 +120,6 @@ int wl_ext_iapsta_attach_netdev(struct net_device *net, int ifidx, uint8 bssidx)
 int wl_ext_iapsta_attach_name(struct net_device *net, int ifidx);
 int wl_ext_iapsta_dettach_netdev(struct net_device *net, int ifidx);
 int wl_ext_iapsta_update_net_device(struct net_device *net, int ifidx);
-void wl_ext_add_remove_pm_enable_work(struct net_device *dev, bool add);
 #ifdef PROPTX_MAXCOUNT
 void wl_ext_update_wlfc_maxcount(struct dhd_pub *dhd);
 int wl_ext_get_wlfc_maxcount(struct dhd_pub *dhd, int ifidx);
@@ -131,11 +129,19 @@ int wl_ext_iapsta_alive_postinit(struct net_device *dev);
 int wl_ext_iapsta_attach(dhd_pub_t *pub);
 void wl_ext_iapsta_dettach(dhd_pub_t *pub);
 #ifdef WL_CFG80211
+bool wl_legacy_chip_check(struct net_device *net);
+bool wl_new_chip_check(struct net_device *net);
 u32 wl_ext_iapsta_update_channel(dhd_pub_t *dhd, struct net_device *dev, u32 channel);
 void wl_ext_iapsta_update_iftype(struct net_device *net, int ifidx, int wl_iftype);
 bool wl_ext_iapsta_iftype_enabled(struct net_device *net, int wl_iftype);
+bool wl_ext_iapsta_other_if_enabled(struct net_device *net);
+void wl_ext_iapsta_enable_master_if(struct net_device *dev, bool post);
+void wl_ext_iapsta_restart_master(struct net_device *dev);
 void wl_ext_iapsta_ifadding(struct net_device *net, int ifidx);
 bool wl_ext_iapsta_mesh_creating(struct net_device *net);
+int wl_android_set_spect(struct net_device *dev, int spect);
+s32 wl_android_get_band_chanspecs(struct net_device *ndev, void *buf, s32 buflen,
+	chanspec_band_t band, bool acs_req);
 #endif
 extern int op_mode;
 #endif
@@ -188,6 +194,22 @@ enum wl_ext_status {
 	WL_EXT_STATUS_STA_CONNECTED,
 	WL_EXT_STATUS_AP_DISABLED
 };
+#if defined(WL_EXT_IAPSTA) && defined(WL_CFG80211)
+int wl_ext_in4way_sync(struct net_device *dev, uint action,
+	enum wl_ext_status status, void *context);
+#endif /* WL_EXT_IAPSTA && WL_CFG80211 */
+#if defined(WL_EXT_IAPSTA) && defined(WL_WIRELESS_EXT)
+int wl_ext_in4way_sync_wext(struct net_device *dev, uint action,
+	enum wl_ext_status status, void *context);
+#endif /* WL_EXT_IAPSTA && WL_WIRELESS_EXT */
+#if defined(WL_EXT_IAPSTA)
+void wl_ext_update_eapol_status(dhd_pub_t *dhd, int ifidx,
+	uint eapol_status);
+#else
+static INLINE void wl_ext_update_eapol_status(dhd_pub_t *dhd, int ifidx,
+	uint eapol_status) { }
+#endif /* WL_EXT_IAPSTA */
+
 typedef struct wl_conn_info {
 	uint8 bssidx;
 	wlc_ssid_t ssid;
@@ -237,7 +259,7 @@ enum {
 	BCM_E_DEV_LOST,
 #ifdef BT_WIFI_HANDOVER
 	BCM_E_DEV_BT_WIFI_HO_REQ,
-#endif // endif
+#endif
 	BCM_E_MAX
 };
 
@@ -258,12 +280,28 @@ s32 wl_netlink_send_msg(int pid, int type, int seq, const void *data, size_t siz
 #define WL_CH_BANDWIDTH_20MHZ 20
 #define WL_CH_BANDWIDTH_40MHZ 40
 #define WL_CH_BANDWIDTH_80MHZ 80
+#define WL_CH_BANDWIDTH_160MHZ 160
+
 /* max number of mac filter list
  * restrict max number to 10 as maximum cmd string size is 255
  */
 #define MAX_NUM_MAC_FILT        10
 #define	WL_GET_BAND(ch)	(((uint)(ch) <= CH_MAX_2G_CHANNEL) ?	\
 	WLC_BAND_2G : WLC_BAND_5G)
+
+/* SoftAP auto channel feature */
+#define APCS_BAND_2G_LEGACY1	20
+#define APCS_BAND_2G_LEGACY2	0
+#define APCS_BAND_AUTO		"band=auto"
+#define APCS_BAND_2G		"band=2g"
+#define APCS_BAND_5G		"band=5g"
+#define APCS_BAND_6G		"band=6g"
+#define FREQ_STR		"freq="
+#define APCS_MAX_2G_CHANNELS	11
+#define APCS_MAX_RETRY		10
+#define APCS_DEFAULT_2G_CH	1
+#define APCS_DEFAULT_5G_CH	149
+#define APCS_DEFAULT_6G_CH	5
 
 int wl_android_set_ap_mac_list(struct net_device *dev, int macmode, struct maclist *maclist);
 #ifdef WL_BCNRECV
@@ -293,6 +331,11 @@ extern int wl_android_bcnrecv_event(struct net_device *ndev,
 #define TSPEC_DEF_MIN_PHY_RATE 6000000
 #define TSPEC_DEF_DIALOG_TOKEN 7
 #endif /* WL_CAC_TS */
+
+#ifdef WL_SUPPORT_AUTO_CHANNEL
+#define WLC_ACS_BAND_INVALID	0xffffu
+#endif /* WL_SUPPORT_AUTO_CHANNEL */
+#define WL_PRIV_CMD_LEN 64
 
 /* terence:
  * BSSCACHE: Cache bss list
@@ -326,7 +369,7 @@ extern int g_wifi_on;
 typedef struct wl_rssi_cache {
 	struct wl_rssi_cache *next;
 	int dirty;
-	struct timeval tv;
+	struct osl_timespec tv;
 	struct ether_addr BSSID;
 	int16 RSSI[RSSIAVG_LEN];
 } wl_rssi_cache_t;
@@ -385,7 +428,7 @@ int wl_ext_get_best_channel(struct net_device *net,
 #if defined(BSSCACHE)
 	wl_bss_cache_ctrl_t *bss_cache_ctrl,
 #else
-	struct wl_scan_results *bss_list,
+	wl_scan_results_t *bss_list,
 #endif
 	int ioctl_ver, int *best_2g_ch, int *best_5g_ch
 );

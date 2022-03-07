@@ -1,7 +1,7 @@
 /*
  * Common function shared by Linux WEXT, cfg80211 and p2p drivers
  *
- * Copyright (C) 1999-2019, Broadcom.
+ * Copyright (C) 2020, Broadcom.
  *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
@@ -17,14 +17,8 @@
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
  *
- *      Notwithstanding the above, under no circumstances may you combine this
- * software in any way with any other Broadcom software provided under a license
- * other than the GPL, without Broadcom's express prior written consent.
  *
- *
- * <<Broadcom-WL-IPTag/Open:>>
- *
- * $Id: wldev_common.h 813004 2019-04-03 07:16:21Z $
+ * <<Broadcom-WL-IPTag/Dual:>>
  */
 #ifndef __WLDEV_COMMON_H__
 #define __WLDEV_COMMON_H__
@@ -49,7 +43,7 @@ s32 wldev_ioctl_set(
  */
 s32 wldev_iovar_getbuf(
 	struct net_device *dev, s8 *iovar_name,
-	const void *param, s32 paramlen, void *buf, s32 buflen, struct mutex* buf_sync);
+	const void *param, u32 paramlen, void *buf, u32 buflen, struct mutex* buf_sync);
 
 /** Set named IOVARs, this function calls wl_dev_ioctl with
  *  WLC_SET_VAR IOCTL code
@@ -100,10 +94,14 @@ extern int dhd_net_wifi_platform_set_power(struct net_device *dev, bool on,
 extern void dhd_get_customized_country_code(struct net_device *dev, char *country_iso_code,
 	wl_country_t *cspec);
 extern void dhd_bus_country_set(struct net_device *dev, wl_country_t *cspec, bool notify);
+
+#ifdef OEM_ANDROID
 extern bool dhd_force_country_change(struct net_device *dev);
+#endif
+
 extern void dhd_bus_band_set(struct net_device *dev, uint band);
 extern int wldev_set_country(struct net_device *dev, char *country_code, bool notify,
-	bool user_enforced, int revinfo);
+	int revinfo);
 extern int net_os_wake_lock(struct net_device *dev);
 extern int net_os_wake_unlock(struct net_device *dev);
 extern int net_os_wake_lock_timeout(struct net_device *dev);
@@ -116,8 +114,11 @@ extern int net_os_set_max_dtim_enable(struct net_device *dev, int val);
 #ifdef DISABLE_DTIM_IN_SUSPEND
 extern int net_os_set_disable_dtim_in_suspend(struct net_device *dev, int val);
 #endif /* DISABLE_DTIM_IN_SUSPEND */
+
+#if defined(OEM_ANDROID)
 extern int wl_parse_ssid_list_tlv(char** list_str, wlc_ssid_ext_t* ssid,
 	int max, int *bytes_left);
+#endif /* defined(OEM_ANDROID) */
 
 /* Get the link speed from dongle, speed is in kpbs */
 int wldev_get_link_speed(struct net_device *dev, int *plink_speed);

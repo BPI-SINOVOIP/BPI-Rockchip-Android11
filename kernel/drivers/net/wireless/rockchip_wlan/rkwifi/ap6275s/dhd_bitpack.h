@@ -1,7 +1,7 @@
 /*
- * Dongle WL Header definitions
+ * Bit packing and Base64 utils for EWP
  *
- * Copyright (C) 1999-2019, Broadcom.
+ * Copyright (C) 2020, Broadcom.
  *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
@@ -17,27 +17,17 @@
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
  *
- *      Notwithstanding the above, under no circumstances may you combine this
- * software in any way with any other Broadcom software provided under a license
- * other than the GPL, without Broadcom's express prior written consent.
- *
  *
  * <<Broadcom-WL-IPTag/Open:>>
  *
- * $Id: dngl_wlhdr.h 514727 2014-11-12 03:02:48Z $
+ * $Id$
  */
 
-#ifndef _dngl_wlhdr_h_
-#define _dngl_wlhdr_h_
+#ifndef __BITPACK_H_
+#define __BITPACK_H_
 
-typedef struct wl_header {
-    uint8   type;           /* Header type */
-    uint8   version;        /* Header version */
-	int8	rssi;			/* RSSI */
-	uint8	pad;			/* Unused */
-} wl_header_t;
+#define BYTE_SIZE(a) ((a + 7)/8)
 
-#define WL_HEADER_LEN   sizeof(wl_header_t)
-#define WL_HEADER_TYPE  0
-#define WL_HEADER_VER   1
-#endif /* _dngl_wlhdr_h_ */
+extern int32 dhd_bit_pack(char *buf, int32 buf_len, int bit_offset, uint32 data, int32 bit_length);
+extern int32 dhd_base64_encode(char* in_buf, int32 in_buf_len, char* out_buf, int32 out_buf_len);
+#endif /* __BITPACK_H */

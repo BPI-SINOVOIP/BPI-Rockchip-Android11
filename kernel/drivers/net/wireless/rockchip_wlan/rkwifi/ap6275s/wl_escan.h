@@ -22,8 +22,7 @@ typedef struct wl_escan_info {
 	int escan_state;
 	int ioctl_ver;
 	u8 escan_buf[ESCAN_BUF_SIZE];
-	struct wl_scan_results *bss_list;
-	struct ether_addr disconnected_bssid;
+	wl_scan_results_t *bss_list;
 	u8 *escan_ioctl_buf;
 	struct mutex usr_sync; /* maily for up/down synchronization */
 	int autochannel;

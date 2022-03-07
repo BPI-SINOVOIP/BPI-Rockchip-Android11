@@ -1,7 +1,7 @@
-# SPDX-License-Identifier: GPL-2.0
 # bcmdhd
 
 MODULE_NAME := bcmdhd
+#CONFIG_BCMDHD := m
 CONFIG_BCMDHD_SDIO := y
 #CONFIG_BCMDHD_PCIE := y
 #CONFIG_BCMDHD_USB := y
@@ -17,14 +17,16 @@ CONFIG_VTS_SUPPORT := y
 CONFIG_MACH_PLATFORM := y
 #CONFIG_BCMDHD_DTS := y
 
-DHDCFLAGS = -Wall -Wstrict-prototypes -Dlinux -DBCMDRIVER                 \
+DHDCFLAGS = -Wall -Wstrict-prototypes -Dlinux -DLINUX -DBCMDRIVER         \
 	-DBCMDONGLEHOST -DBCMDMA32 -DBCMFILEIMAGE                             \
-	-DDHDTHREAD -DDHD_DEBUG -DSHOW_EVENTS -DBCMDBG -DGET_OTP_MAC_ENABLE   \
+	-DDHDTHREAD -DDHD_DEBUG -DSHOW_EVENTS -DGET_OTP_MAC_ENABLE            \
 	-DWIFI_ACT_FRAME -DARP_OFFLOAD_SUPPORT -DSUPPORT_PM2_ONLY             \
 	-DKEEP_ALIVE -DPKT_FILTER_SUPPORT -DDHDTCPACK_SUPPRESS                \
-	-DDHD_DONOT_FORWARD_BCMEVENT_AS_NETWORK_PKT                           \
+	-DDHD_DONOT_FORWARD_BCMEVENT_AS_NETWORK_PKT -DOEM_ANDROID             \
 	-DMULTIPLE_SUPPLICANT -DTSQ_MULTIPLIER -DMFP -DDHD_8021X_DUMP         \
 	-DPOWERUP_MAX_RETRY=0 -DIFACE_HANG_FORCE_DEV_CLOSE -DWAIT_DEQUEUE     \
+	-DUSE_NEW_RSPEC_DEFS                                                  \
+	-DSUSPEND_EVENT -DGTK_OFFLOAD_SUPPORT				\
 	-DWL_EXT_IAPSTA -DWL_ESCAN -DCCODE_LIST                               \
 	-DENABLE_INSMOD_NO_FW_LOAD                                            \
 	-Idrivers/net/wireless/rockchip_wlan/rkwifi/ap6275s \
@@ -36,7 +38,7 @@ DHDOFILES = aiutils.o siutils.o sbutils.o bcmutils.o bcmwifi_channels.o   \
 	bcmevent.o hndpmu.o linux_osl.o wldev_common.o wl_android.o           \
 	dhd_debug_linux.o dhd_debug.o dhd_mschdbg.o dhd_dbg_ring.o            \
 	hnd_pktq.o hnd_pktpool.o bcmxtlv.o linux_pkt.o bcmstdlib_s.o frag.o   \
-	dhd_linux_exportfs.o dhd_linux_pktdump.o                              \
+	dhd_linux_exportfs.o dhd_linux_pktdump.o dhd_mschdbg.o                \
 	dhd_config.o dhd_ccode.o wl_event.o wl_android_ext.o wl_escan.o
 
 ifneq ($(CONFIG_WIRELESS_EXT),)
@@ -46,7 +48,7 @@ endif
 ifneq ($(CONFIG_CFG80211),)
 	DHDOFILES += wl_cfg80211.o wl_cfgscan.o wl_cfgp2p.o
 	DHDOFILES += wl_linux_mon.o wl_cfg_btcoex.o wl_cfgvendor.o
-	DHDOFILES += dhd_cfg80211.o
+	DHDOFILES += dhd_cfg80211.o wl_cfgvif.o
 	DHDCFLAGS += -DWL_CFG80211 -DWLP2P -DWL_CFG80211_STA_EVENT
 #	DHDCFLAGS += -DWL_IFACE_COMB_NUM_CHANNELS
 	DHDCFLAGS += -DCUSTOM_PNO_EVENT_LOCK_xTIME=10
@@ -58,9 +60,10 @@ ifneq ($(CONFIG_CFG80211),)
 	DHDCFLAGS += -DWL_VIRTUAL_APSTA
 	DHDCFLAGS += -DPNO_SUPPORT -DEXPLICIT_DISCIF_CLEANUP
 	DHDCFLAGS += -DDHD_USE_SCAN_WAKELOCK
+	DHDCFLAGS += -DWLFBT
+	DHDCFLAGS += -DDHD_LOSSLESS_ROAMING
 #	DHDCFLAGS += -DWL_STATIC_IF
 #	DHDCFLAGS += -DWL_CLIENT_SAE
-#	DHDCFLAGS += -DWL_SAE
 endif
 
 #BCMDHD_SDIO
@@ -69,7 +72,7 @@ DHDCFLAGS += -DBCMSDIO -DMMC_SDIO_ABORT -DBCMLXSDMMC -DUSE_SDIOFIFO_IOVAR \
 	-DSDTEST -DBDC -DDHD_USE_IDLECOUNT -DCUSTOM_SDIO_F2_BLKSIZE=256       \
 	-DBCMSDIOH_TXGLOM -DBCMSDIOH_TXGLOM_EXT -DRXFRAME_THREAD              \
 	-DDHDENABLE_TAILPAD -DSUPPORT_P2P_GO_PS                               \
-	-DBCMSDIO_RXLIM_POST -DCONSOLE_DPC
+	-DBCMSDIO_RXLIM_POST -DBCMSDIO_TXSEQ_SYNC -DCONSOLE_DPC
 ifeq ($(CONFIG_BCMDHD_OOB),y)
 	DHDCFLAGS += -DOOB_INTR_ONLY -DCUSTOMER_OOB -DHW_OOB
 ifeq ($(CONFIG_BCMDHD_DISABLE_WOWLAN),y)
@@ -88,6 +91,7 @@ DHDCFLAGS += -DPCIE_FULL_DONGLE -DBCMPCIE -DCUSTOM_DPC_PRIO_SETTING=-1    \
 	-DDONGLE_ENABLE_ISOLATION
 DHDCFLAGS += -DDHD_LB -DDHD_LB_RXP -DDHD_LB_STATS -DDHD_LB_TXP
 DHDCFLAGS += -DDHD_PKTID_AUDIT_ENABLED
+DHDCFLAGS += -DINSMOD_FW_LOAD
 ifeq ($(CONFIG_BCMDHD_OOB),y)
 	DHDCFLAGS += -DCUSTOMER_OOB -DBCMPCIE_OOB_HOST_WAKE
 endif
@@ -131,6 +135,7 @@ endif
 
 #VTS_SUPPORT
 ifeq ($(CONFIG_VTS_SUPPORT),y)
+DHDCFLAGS += -DDHD_NOTIFY_MAC_CHANGED
 ifneq ($(CONFIG_CFG80211),)
 DHDCFLAGS += -DGSCAN_SUPPORT -DRTT_SUPPORT -DLINKSTAT_SUPPORT             \
 	-DCUSTOM_COUNTRY_CODE -DDHD_GET_VALID_CHANNELS                        \
@@ -176,6 +181,24 @@ endif
 ifneq ($(CONFIG_CSI_SUPPORT),)
 	DHDCFLAGS += -DCSI_SUPPORT
 	DHDOFILES += dhd_csi.o
+endif
+
+# For TPUT_IMPROVE
+ifneq ($(CONFIG_BCMDHD_TPUT),)
+	DHDCFLAGS += -DDHD_TPUT_PATCH
+ifneq ($(CONFIG_BCMDHD_SDIO),)
+	DHDCFLAGS += -DDYNAMIC_MAX_HDR_READ
+	DHDCFLAGS :=$(filter-out -DSDTEST,$(DHDCFLAGS))
+endif
+ifneq ($(CONFIG_BCMDHD_PCIE),)
+	DHDCFLAGS += -DDHD_LB_TXP_DEFAULT_ENAB
+	DHDCFLAGS += -DSET_RPS_CPUS -DSET_XPS_CPUS
+	DHDCFLAGS += -DDHD_LB_PRIMARY_CPUS=0xF0 -DDHD_LB_SECONDARY_CPUS=0x0E
+endif
+endif
+
+ifeq ($(CONFIG_BCMDHD),m)
+	DHDCFLAGS += -DBCMDHD_MODULAR
 endif
 
 #obj-$(CONFIG_RKWIFI) += $(MODULE_NAME).o

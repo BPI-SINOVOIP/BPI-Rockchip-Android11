@@ -78,6 +78,7 @@
 #include <asm/unaligned.h>
 #include <dbus.h>
 #include <bcmutils.h>
+#include <bcmdevs_legacy.h>
 #include <bcmdevs.h>
 #include <linux/usb.h>
 #include <usbrdl.h>
@@ -602,7 +603,7 @@ int matches_loopback_pkt(void *buf);
  * multiple code paths in this file dequeue a URB request, this function makes sure that it happens
  * in a concurrency save manner. Don't call this from a sleepable process context.
  */
-static urb_req_t * BCMFASTPATH
+static urb_req_t *
 dbus_usbos_qdeq(struct list_head *urbreq_q, spinlock_t *lock)
 {
 	unsigned long flags;
@@ -633,7 +634,7 @@ dbus_usbos_qdeq(struct list_head *urbreq_q, spinlock_t *lock)
 	return req;
 }
 
-static void BCMFASTPATH
+static void
 dbus_usbos_qenq(struct list_head *urbreq_q, urb_req_t *req, spinlock_t *lock)
 {
 	unsigned long flags;
@@ -844,7 +845,7 @@ dbus_usbos_send_complete(CALLBACK_ARGS)
  * In order to receive USB traffic from the dongle, we need to supply the Linux kernel with a free
  * URB that is going to contain received data.
  */
-static int BCMFASTPATH
+static int
 dbus_usbos_recv_urb_submit(usbos_info_t *usbos_info, dbus_irb_rx_t *rxirb, uint32 ep_idx)
 {
 	urb_req_t *req;
@@ -928,7 +929,7 @@ fail:
  * Called by worked thread when a 'receive URB' completed or Linux kernel when it returns a URB to
  * this driver.
  */
-static void BCMFASTPATH
+static void
 dbus_usbos_recv_complete_handle(urb_req_t *req, int len, int status)
 {
 	dbus_irb_rx_t *rxirb = req->arg;

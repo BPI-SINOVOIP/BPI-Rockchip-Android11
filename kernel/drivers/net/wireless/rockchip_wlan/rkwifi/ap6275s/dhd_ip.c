@@ -1,7 +1,7 @@
 /*
  * IP Packet Parser Module.
  *
- * Copyright (C) 1999-2019, Broadcom.
+ * Copyright (C) 2020, Broadcom.
  *
  *      Unless you and Broadcom execute a separate written software license
  * agreement governing use of this software, this software is licensed to you
@@ -17,14 +17,10 @@
  * derived from this software.  The special exception does not apply to any
  * modifications of the software.
  *
- *      Notwithstanding the above, under no circumstances may you combine this
- * software in any way with any other Broadcom software provided under a license
- * other than the GPL, without Broadcom's express prior written consent.
- *
  *
  * <<Broadcom-WL-IPTag/Open:>>
  *
- * $Id: dhd_ip.c 813282 2019-04-04 09:42:28Z $
+ * $Id$
  */
 #include <typedefs.h>
 #include <osl.h>
@@ -38,6 +34,7 @@
 #include <dhd_dbg.h>
 
 #include <dhd_ip.h>
+#include <dhd_config.h>
 
 #if defined(DHDTCPACK_SUPPRESS) || defined(DHDTCPSYNC_FLOOD_BLK)
 #include <dhd_bus.h>
@@ -185,7 +182,7 @@ _tdata_psh_info_pool_enq(tcpack_sup_module_t *tcpack_sup_mod,
 	tcpack_sup_mod->tdata_psh_info_free = tdata_psh_info;
 #ifdef DHDTCPACK_SUP_DBG
 	tcpack_sup_mod->psh_info_enq_num++;
-#endif // endif
+#endif
 }
 
 static tdata_psh_info_t*
@@ -287,7 +284,6 @@ static void _tdata_psh_info_pool_deinit(dhd_pub_t *dhdp,
 	ASSERT(i == TCPDATA_PSH_INFO_MAXNUM);
 	MFREE(dhdp->osh, tcpack_sup_mod->tdata_psh_info_pool,
 		sizeof(tdata_psh_info_t) * TCPDATA_PSH_INFO_MAXNUM);
-	tcpack_sup_mod->tdata_psh_info_pool = NULL;
 
 	return;
 }
@@ -496,15 +492,15 @@ int dhd_tcpack_suppress_set(dhd_pub_t *dhdp, uint8 mode)
 #endif /* BCMSDIO */
 #ifdef BCMPCIE
 		case TCPACK_SUP_HOLD:
-			dhdp->tcpack_sup_ratio = CUSTOM_TCPACK_SUPP_RATIO;
-			dhdp->tcpack_sup_delay = CUSTOM_TCPACK_DELAY_TIME;
+			dhdp->tcpack_sup_ratio = dhdp->conf->tcpack_sup_ratio;
+			dhdp->tcpack_sup_delay = dhdp->conf->tcpack_sup_delay;
 			for (i = 0; i < TCPACK_INFO_MAXNUM; i++) {
 				tcpack_info_t *tcpack_info_tbl =
 					&tcpack_sup_module->tcpack_info_tbl[i];
 				tcpack_info_tbl->dhdp = dhdp;
 #ifndef TCPACK_SUPPRESS_HOLD_HRT
-				init_timer_compat(&tcpack_info_tbl->timer,
-					dhd_tcpack_send, tcpack_info_tbl);
+				init_timer_compat(&tcpack_info_tbl->timer, dhd_tcpack_send,
+					tcpack_info_tbl);
 #else
 				tasklet_hrtimer_init(&tcpack_info_tbl->timer,
 					dhd_tcpack_send, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
