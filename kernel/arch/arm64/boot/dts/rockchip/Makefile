@@ -4,7 +4,8 @@ ifeq ($(CONFIG_ARCH_BANANAPI_R2PRO),y)
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-bananapi-r2pro.dtb \
 	rk3568-bananapi-r2pro-hdmi.dtb \
 	rk3568-bananapi-r2pro-lcd0.dtb \
-	rk3568-bananapi-r2pro-lcd1.dtb
+	rk3568-bananapi-r2pro-lcd1.dtb \
+	rk3568-bananapi-r2pro-lcd2.dtb
 else
 dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-ad-d6-anx6345.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-ad-r35-mb-rk618-dual-lvds.dtb

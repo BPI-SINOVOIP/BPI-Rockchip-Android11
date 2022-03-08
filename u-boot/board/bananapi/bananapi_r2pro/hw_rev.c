@@ -52,10 +52,12 @@ int get_display_id(void)
 
 	if (IS_RANGE(edp_value, 0, 50)) {
 		printf("edp connected\n");
+		return BANANAPI_R2PRO_LCD2;
 	}
 
 	if (IS_RANGE(lvds_value, 0, 50)) {
 		printf("lvds connected\n");
+		return BANANAPI_R2PRO_LCD3;
 	}
 
 	return BANANAPI_R2PRO_HDMI;

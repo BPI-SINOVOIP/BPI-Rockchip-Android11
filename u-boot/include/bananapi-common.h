@@ -20,6 +20,8 @@
 #define BANANAPI_R2PRO_HDMI	0	/*hdmi only*/
 #define BANANAPI_R2PRO_LCD0	1	/*800x1280 dsi*/
 #define BANANAPI_R2PRO_LCD1	2	/*1200x1920 dsi*/
+#define BANANAPI_R2PRO_LCD2	3	/* edp */
+#define BANANAPI_R2PRO_LCD3	4	/* lvds */
 
 #if defined(CONFIG_TARGET_BANANAPI_R2PRO)
 int board_is_bananapi_r2pro(void);

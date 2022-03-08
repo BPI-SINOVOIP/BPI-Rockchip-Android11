@@ -91,6 +91,10 @@ char *get_board_variant(void)
 			return "r2pro-lcd0";
 		case BANANAPI_R2PRO_LCD1:
 			return "r2pro-lcd1";
+		case BANANAPI_R2PRO_LCD2:
+			return "r2pro-lcd2";
+		case BANANAPI_R2PRO_LCD3:
+			return "r2pro-lcd3";
 		default:
 			return "r2pro";
 	}
