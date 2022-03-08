@@ -166,20 +166,20 @@
 };
 
 &video_phy0 {
-        status = "okay";
+        status = "disabled";
 };
 
 &video_phy1 {
-        status = "okay";
+        status = "disabled";
 };
 
 &route_dsi0 {
-        status = "okay";
+        status = "disabled";
         connect = <&vp1_out_dsi0>;
 };
 
 &route_dsi1 {
-        status = "okay";
+        status = "disabled";
         connect = <&vp1_out_dsi1>;
 };
 
@@ -188,7 +188,7 @@
  * when dsi0 is enabled
  */
 &dsi0 {
-	status = "okay";
+	status = "disabled";
 };
 
 &dsi0_in_vp0 {
@@ -196,7 +196,7 @@
 };
 
 &dsi0_in_vp1 {
-	status = "okay";
+	status = "disabled";
 };
 
 &dsi0_panel {
@@ -205,7 +205,7 @@
 };
 
 &backlight {
-	status = "okay";
+	status = "disabled";
 };
 
 /*
@@ -213,7 +213,7 @@
  * when dsi1 is enabled
  */
 &dsi1 {
-	status = "okay";
+	status = "disabled";
 };
 
 &dsi1_in_vp0 {
@@ -221,7 +221,7 @@
 };
 
 &dsi1_in_vp1 {
-	status = "okay";
+	status = "disabled";
 };
 
 &dsi1_panel {
@@ -230,11 +230,11 @@
 };
 
 &backlight1 {
-	status = "okay";
+	status = "disabled";
 };
 
 &edp {
-	hpd-gpios = <&gpio0 RK_PC2 GPIO_ACTIVE_HIGH>;
+	force-hpd;
 	status = "disabled";
 };
 
@@ -247,6 +247,11 @@
 };
 
 &edp_in_vp1 {
+	status = "disabled";
+};
+
+&route_edp {
+	connect = <&vp1_out_edp>;
 	status = "disabled";
 };
 
@@ -505,13 +510,13 @@
 };
 
 &vcc3v3_lcd0_n {
-	status = "okay";
+	status = "disabled";
 	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
 	enable-active-high;
 };
 
 &vcc3v3_lcd1_n {
-	status = "okay";
+	status = "disabled";
 	gpio = <&gpio2 RK_PC1 GPIO_ACTIVE_HIGH>;
 	enable-active-high;
 };
@@ -544,7 +549,7 @@
 
 /* backlight for panel0 */
 &pwm4 {
-	status = "okay";
+	status = "disabled";
 };
 
 &pwm8 {
@@ -553,7 +558,7 @@
 
 /* backlight for panel1 */
 &pwm9 {
-	status = "okay";
+	status = "disabled";
 };
 
 &pwm10 {
