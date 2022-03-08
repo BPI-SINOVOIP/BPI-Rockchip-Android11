@@ -1,0 +1,667 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2020 Rockchip Electronics Co., Ltd.
+ *
+ * 10.1 inch 800x1280 mipi RXT101IY23026, IC9881 for dsi0 and dsi1
+ * 13.3 inch 1920x1080 eDP M133X30-56 for eDP
+ */
+
+/dts-v1/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+#include "rk3568-bananapi-r2pro.dts"
+
+&video_phy0 {
+        status = "okay";
+};
+
+&video_phy1 {
+        status = "okay";
+};
+
+&route_dsi0 {
+        status = "okay";
+        connect = <&vp1_out_dsi0>;
+};
+
+&route_dsi1 {
+        status = "okay";
+        connect = <&vp1_out_dsi1>;
+};
+
+/*
+ * video_phy0 needs to be enabled
+ * when dsi0 is enabled
+ */
+&dsi0 {
+	status = "okay";
+};
+
+&dsi0_in_vp0 {
+	status = "disabled";
+};
+
+&dsi0_in_vp1 {
+	status = "okay";
+};
+
+&dsi0_panel {
+	power-supply = <&vcc3v3_lcd0_n>;
+	reset-gpios = <&gpio2 RK_PD0 GPIO_ACTIVE_LOW>;
+
+	panel-init-sequence = [
+			39 00 04 FF 98 81 03
+			15 00 02 01 00
+			15 00 02 02 00
+			15 00 02 03 53
+			15 00 02 04 53
+			15 00 02 05 13
+			15 00 02 06 04
+			15 00 02 07 02
+			15 00 02 08 02
+			15 00 02 09 00
+			15 00 02 0a 00
+			15 00 02 0b 00
+			15 00 02 0c 00
+			15 00 02 0d 00
+			15 00 02 0e 00
+			15 00 02 0f 00 
+			15 00 02 10 00 
+			15 00 02 11 00 
+			15 00 02 12 00 
+			15 00 02 13 00 
+			15 00 02 14 00 
+			15 00 02 15 00 
+			15 00 02 16 00 
+			15 00 02 17 00 
+			15 00 02 18 00 
+			15 00 02 19 00 
+			15 00 02 1a 00 
+			15 00 02 1b 00 
+			15 00 02 1c 00
+			15 00 02 1d 00 
+			15 00 02 1e C0
+			15 00 02 1f 80 
+			15 00 02 20 02 
+			15 00 02 21 09 
+			15 00 02 22 00 
+			15 00 02 23 00 
+			15 00 02 24 00 
+			15 00 02 25 00 
+			15 00 02 26 00 
+			15 00 02 27 00 
+			15 00 02 28 55 
+			15 00 02 29 03 
+			15 00 02 2a 00 
+			15 00 02 2b 00 
+			15 00 02 2c 00 
+			15 00 02 2d 00 
+			15 00 02 2e 00 
+			15 00 02 2f 00 
+			15 00 02 30 00 
+			15 00 02 31 00 
+			15 00 02 32 00 
+			15 00 02 33 00 
+			15 00 02 34 00 
+			15 00 02 35 00 
+			15 00 02 36 00 
+			15 00 02 37 00 
+			15 00 02 38 3c 
+			15 00 02 39 00 
+			15 00 02 3a 00 
+			15 00 02 3b 00 
+			15 00 02 3c 00 
+			15 00 02 3d 00 
+			15 00 02 3e 00 
+			15 00 02 3f 00 
+			15 00 02 40 00 
+			15 00 02 41 00 
+			15 00 02 42 00 
+			15 00 02 43 00 
+			15 00 02 44 00 
+			15 00 02 50 01 
+			15 00 02 51 23 
+			15 00 02 52 45 
+			15 00 02 53 67 
+			15 00 02 54 89 
+			15 00 02 55 ab 
+			15 00 02 56 01 
+			15 00 02 57 23 
+			15 00 02 58 45 
+			15 00 02 59 67 
+			15 00 02 5a 89 
+			15 00 02 5b ab 
+			15 00 02 5c cd 
+			15 00 02 5d ef
+			15 00 02 5e 01 
+			15 00 02 5f 0A 
+			15 00 02 60 02 
+			15 00 02 61 02 
+			15 00 02 62 08 
+			15 00 02 63 15 
+			15 00 02 64 14
+			15 00 02 65 02
+			15 00 02 66 11 
+			15 00 02 67 10 
+			15 00 02 68 02 
+			15 00 02 69 0F 
+			15 00 02 6a 0E 
+			15 00 02 6b 02 
+			15 00 02 6c 0D 
+			15 00 02 6d 0C 
+			15 00 02 6e 06 
+			15 00 02 6f 02 
+			15 00 02 70 02 
+			15 00 02 71 02
+			15 00 02 72 02 
+			15 00 02 73 02 
+			15 00 02 74 02
+			15 00 02 75 0A 
+			15 00 02 76 02 
+			15 00 02 77 02 
+			15 00 02 78 06 
+			15 00 02 79 15 
+			15 00 02 7a 14 
+			15 00 02 7b 02 
+			15 00 02 7c 10 
+			15 00 02 7d 11 
+			15 00 02 7e 02 
+			15 00 02 7f 0C 
+			15 00 02 80 0D 
+			15 00 02 81 02 
+			15 00 02 82 0E 
+			15 00 02 83 0F
+			15 00 02 84 08 
+			15 00 02 85 02 
+			15 00 02 86 02 
+			15 00 02 87 02 
+			15 00 02 88 02 
+			15 00 02 89 02 
+			15 00 02 8a 02
+			39 00 04 FF 98 81 04 
+			15 00 02 6C 15
+			15 00 02 6E 30 
+			15 00 02 6F 55 
+			15 00 02 3A 24 
+			15 00 02 8D 1F 
+			15 00 02 87 BA 
+			15 00 02 26 76 
+			15 00 02 B2 D1 
+			15 00 02 B5 07 
+			15 00 02 35 1F 
+			15 00 02 31 75 
+			15 00 02 3B 98   
+			15 00 02 38 01	
+			15 00 02 39 00   
+			15 00 02 88 0B
+			39 00 04 FF 98 81 01 
+			15 00 02 22 0A 
+			15 00 02 31 09
+			15 00 02 35 07 
+			15 00 02 53 48
+			15 00 02 40 33
+			15 00 02 55 88 
+			15 00 02 50 95 
+			15 00 02 51 95 
+			15 00 02 60 30
+			15 00 02 34 01 
+			15 00 02 A0 0F 
+			15 00 02 A1 17 
+			15 00 02 A2 22 
+			15 00 02 A3 19 
+			15 00 02 A4 15 
+			15 00 02 A5 28 
+			15 00 02 A6 1C 
+			15 00 02 A7 1C 
+			15 00 02 A8 78 
+			15 00 02 A9 1C 
+			15 00 02 AA 28 
+			15 00 02 AB 69 
+			15 00 02 AC 1A 
+			15 00 02 AD 19 
+			15 00 02 AE 4B 
+			15 00 02 AF 22 
+			15 00 02 B0 2A 
+			15 00 02 B1 4B 
+			15 00 02 B2 6B 
+			15 00 02 B3 3F
+			15 00 02 C0 01 
+			15 00 02 C1 17 
+			15 00 02 C2 22 
+			15 00 02 C3 19 
+			15 00 02 C4 15 
+			15 00 02 C5 28 
+			15 00 02 C6 1C 
+			15 00 02 C7 1D 
+			15 00 02 C8 78 
+			15 00 02 C9 1C 
+			15 00 02 CA 28 
+			15 00 02 CB 69 
+			15 00 02 CC 1A 
+			15 00 02 CD 19 
+			15 00 02 CE 4B 
+			15 00 02 CF 22 
+			15 00 02 D0 2A 
+			15 00 02 D1 4B 
+			15 00 02 D2 6B
+			15 00 02 D3 3F
+			39 00 04 FF 98 81 00
+			15 00 02 35 00
+			05 78 01 11
+			05 78 01 29
+			39 00 04 FF 98 81 00
+		];
+
+		panel-exit-sequence = [
+			05 00 01 28
+			05 00 01 10
+		];
+
+		disp_timings0: display-timings {
+			native-mode = <&dsi0_timing0>;
+			dsi0_timing0: timing0 {
+				clock-frequency = <68000000>;
+				hactive = <800>;
+				vactive = <1280>;
+				hfront-porch = <20>;
+				hsync-len = <20>;
+				hback-porch = <20>;
+				vfront-porch = <20>;
+				vsync-len = <16>;
+				vback-porch = <18>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <1>;
+			};
+		};
+};
+
+&backlight {
+	status = "okay";
+};
+
+/*
+ * video_phy1 needs to be enabled
+ * when dsi1 is enabled
+ */
+&dsi1 {
+	status = "okay";
+};
+
+&dsi1_in_vp0 {
+	status = "disabled";
+};
+
+&dsi1_in_vp1 {
+	status = "okay";
+};
+
+&dsi1_panel {
+	power-supply = <&vcc3v3_lcd1_n>;
+	reset-gpios = <&gpio3 RK_PA2 GPIO_ACTIVE_LOW>;  //40pin io
+
+	panel-init-sequence = [
+			39 00 04 FF 98 81 03
+			15 00 02 01 00
+			15 00 02 02 00
+			15 00 02 03 53
+			15 00 02 04 53
+			15 00 02 05 13
+			15 00 02 06 04
+			15 00 02 07 02
+			15 00 02 08 02
+			15 00 02 09 00
+			15 00 02 0a 00
+			15 00 02 0b 00
+			15 00 02 0c 00
+			15 00 02 0d 00
+			15 00 02 0e 00
+			15 00 02 0f 00 
+			15 00 02 10 00 
+			15 00 02 11 00 
+			15 00 02 12 00 
+			15 00 02 13 00 
+			15 00 02 14 00 
+			15 00 02 15 00 
+			15 00 02 16 00 
+			15 00 02 17 00 
+			15 00 02 18 00 
+			15 00 02 19 00 
+			15 00 02 1a 00 
+			15 00 02 1b 00 
+			15 00 02 1c 00
+			15 00 02 1d 00 
+			15 00 02 1e C0
+			15 00 02 1f 80 
+			15 00 02 20 02 
+			15 00 02 21 09 
+			15 00 02 22 00 
+			15 00 02 23 00 
+			15 00 02 24 00 
+			15 00 02 25 00 
+			15 00 02 26 00 
+			15 00 02 27 00 
+			15 00 02 28 55 
+			15 00 02 29 03 
+			15 00 02 2a 00 
+			15 00 02 2b 00 
+			15 00 02 2c 00 
+			15 00 02 2d 00 
+			15 00 02 2e 00 
+			15 00 02 2f 00 
+			15 00 02 30 00 
+			15 00 02 31 00 
+			15 00 02 32 00 
+			15 00 02 33 00 
+			15 00 02 34 00 
+			15 00 02 35 00 
+			15 00 02 36 00 
+			15 00 02 37 00 
+			15 00 02 38 3c 
+			15 00 02 39 00 
+			15 00 02 3a 00 
+			15 00 02 3b 00 
+			15 00 02 3c 00 
+			15 00 02 3d 00 
+			15 00 02 3e 00 
+			15 00 02 3f 00 
+			15 00 02 40 00 
+			15 00 02 41 00 
+			15 00 02 42 00 
+			15 00 02 43 00 
+			15 00 02 44 00 
+			15 00 02 50 01 
+			15 00 02 51 23 
+			15 00 02 52 45 
+			15 00 02 53 67 
+			15 00 02 54 89 
+			15 00 02 55 ab 
+			15 00 02 56 01 
+			15 00 02 57 23 
+			15 00 02 58 45 
+			15 00 02 59 67 
+			15 00 02 5a 89 
+			15 00 02 5b ab 
+			15 00 02 5c cd 
+			15 00 02 5d ef
+			15 00 02 5e 01 
+			15 00 02 5f 0A 
+			15 00 02 60 02 
+			15 00 02 61 02 
+			15 00 02 62 08 
+			15 00 02 63 15 
+			15 00 02 64 14
+			15 00 02 65 02
+			15 00 02 66 11 
+			15 00 02 67 10 
+			15 00 02 68 02 
+			15 00 02 69 0F 
+			15 00 02 6a 0E 
+			15 00 02 6b 02 
+			15 00 02 6c 0D 
+			15 00 02 6d 0C 
+			15 00 02 6e 06 
+			15 00 02 6f 02 
+			15 00 02 70 02 
+			15 00 02 71 02
+			15 00 02 72 02 
+			15 00 02 73 02 
+			15 00 02 74 02
+			15 00 02 75 0A 
+			15 00 02 76 02 
+			15 00 02 77 02 
+			15 00 02 78 06 
+			15 00 02 79 15 
+			15 00 02 7a 14 
+			15 00 02 7b 02 
+			15 00 02 7c 10 
+			15 00 02 7d 11 
+			15 00 02 7e 02 
+			15 00 02 7f 0C 
+			15 00 02 80 0D 
+			15 00 02 81 02 
+			15 00 02 82 0E 
+			15 00 02 83 0F
+			15 00 02 84 08 
+			15 00 02 85 02 
+			15 00 02 86 02 
+			15 00 02 87 02 
+			15 00 02 88 02 
+			15 00 02 89 02 
+			15 00 02 8a 02
+			39 00 04 FF 98 81 04 
+			15 00 02 6C 15
+			15 00 02 6E 30 
+			15 00 02 6F 55 
+			15 00 02 3A 24 
+			15 00 02 8D 1F 
+			15 00 02 87 BA 
+			15 00 02 26 76 
+			15 00 02 B2 D1 
+			15 00 02 B5 07 
+			15 00 02 35 1F 
+			15 00 02 31 75 
+			15 00 02 3B 98   
+			15 00 02 38 01	
+			15 00 02 39 00   
+			15 00 02 88 0B
+			39 00 04 FF 98 81 01 
+			15 00 02 22 0A 
+			15 00 02 31 09
+			15 00 02 35 07 
+			15 00 02 53 48
+			15 00 02 40 33
+			15 00 02 55 88 
+			15 00 02 50 95 
+			15 00 02 51 95 
+			15 00 02 60 30
+			15 00 02 34 01 
+			15 00 02 A0 0F 
+			15 00 02 A1 17 
+			15 00 02 A2 22 
+			15 00 02 A3 19 
+			15 00 02 A4 15 
+			15 00 02 A5 28 
+			15 00 02 A6 1C 
+			15 00 02 A7 1C 
+			15 00 02 A8 78 
+			15 00 02 A9 1C 
+			15 00 02 AA 28 
+			15 00 02 AB 69 
+			15 00 02 AC 1A 
+			15 00 02 AD 19 
+			15 00 02 AE 4B 
+			15 00 02 AF 22 
+			15 00 02 B0 2A 
+			15 00 02 B1 4B 
+			15 00 02 B2 6B 
+			15 00 02 B3 3F
+			15 00 02 C0 01 
+			15 00 02 C1 17 
+			15 00 02 C2 22 
+			15 00 02 C3 19 
+			15 00 02 C4 15 
+			15 00 02 C5 28 
+			15 00 02 C6 1C 
+			15 00 02 C7 1D 
+			15 00 02 C8 78 
+			15 00 02 C9 1C 
+			15 00 02 CA 28 
+			15 00 02 CB 69 
+			15 00 02 CC 1A 
+			15 00 02 CD 19 
+			15 00 02 CE 4B 
+			15 00 02 CF 22 
+			15 00 02 D0 2A 
+			15 00 02 D1 4B 
+			15 00 02 D2 6B
+			15 00 02 D3 3F
+			39 00 04 FF 98 81 00
+			15 00 02 35 00
+			05 78 01 11
+			05 78 01 29
+			39 00 04 FF 98 81 00
+		];
+
+		panel-exit-sequence = [
+			05 00 01 28
+			05 00 01 10
+		];
+
+		disp_timings1: display-timings {
+			native-mode = <&dsi1_timing0>;
+			dsi1_timing0: timing0 {
+				clock-frequency = <68000000>;
+				hactive = <800>;
+				vactive = <1280>;
+				hfront-porch = <20>;
+				hsync-len = <20>;
+				hback-porch = <20>;
+				vfront-porch = <20>;
+				vsync-len = <16>;
+				vback-porch = <18>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <1>;
+			};
+		};
+};
+
+&backlight1 {
+	status = "okay";
+};
+
+&vcc3v3_lcd0_n {
+	status = "okay";
+	gpio = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+	enable-active-high;
+};
+
+&vcc3v3_lcd1_n {
+	status = "okay";
+	gpio = <&gpio2 RK_PC1 GPIO_ACTIVE_HIGH>;
+	enable-active-high;
+};
+
+/* backlight for panel0 */
+&pwm4 {
+	status = "okay";
+};
+
+/* backlight for panel1 */
+&pwm9 {
+	status = "okay";
+};
+
+
+/ {
+	edp-panel {
+		compatible = "simple-panel";
+		status = "okay";
+		backlight = <&backlight1>;
+		power-supply = <&vcc3v3_lcd1_n>;
+		reset-gpios = <&gpio2 RK_PD1 GPIO_ACTIVE_LOW>;
+		prepare-delay-ms = <120>;
+		enable-delay-ms = <120>;
+		unprepare-delay-ms = <120>;
+		disable-delay-ms = <120>;
+
+		display-timings {
+			native-mode = <&edp_timing>;
+
+			edp_timing: timing0 {
+				clock-frequency = <138000000>;
+				hactive = <1920>;
+				vactive = <1080>;
+				hfront-porch = <80>;
+				hsync-len = <40>;
+				hback-porch = <40>;
+				vfront-porch = <20>;
+				vsync-len = <5>;
+				vback-porch = <6>;
+				hsync-active = <0>;
+				vsync-active = <0>;
+				de-active = <0>;
+				pixelclk-active = <0>;
+			};
+		};
+
+		port {
+			panel_in_edp: endpoint {
+				remote-endpoint = <&edp_out_panel>;
+			};
+		};
+	};
+};
+
+&edp {
+	status = "okay";
+	force-hpd;
+
+	ports {
+		port@1 {
+			reg = <1>;
+
+			edp_out_panel: endpoint {
+				remote-endpoint = <&panel_in_edp>;
+			};
+		};
+	};
+};
+
+&edp_phy {
+	status = "okay";
+};
+
+&edp_in_vp0 {
+	status = "okay";
+};
+
+&edp_in_vp1 {
+	status = "disabled";
+};
+
+&route_edp {
+	connect = <&vp0_out_edp>;
+	status = "okay";
+};
+
+&hdmi {
+	status = "disabled";
+};
+
+&hdmi_in_vp0 {
+	status = "disabled";
+};
+
+&hdmi_in_vp1 {
+	status = "disabled";
+};
+
+&route_hdmi {
+	status = "disabled";
+	connect = <&vp0_out_hdmi>;
+};
+
+&i2c1 {
+	status = "okay";
+	gt9xx: gt9xx@14 {
+		max-x = <800>;
+		max-y = <1280>;
+		configfile-num = <0>;
+
+		gtp_change_x2y = <1>;
+		gtp_x_reverse = <0>;
+		gtp_y_reverse = <1>;
+
+		/* bpi, ro.surface_flinger.primary_display_orientation=ORIENTATION_90 */
+		/*gtp_change_x2y = <0>;
+		gtp_x_reverse = <1>;
+		gtp_y_reverse = <1>;*/
+
+		tp-supply = <&vcc3v3_lcd0_n>;
+	};
+};
