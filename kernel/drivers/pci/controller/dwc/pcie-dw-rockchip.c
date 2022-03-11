@@ -466,12 +466,12 @@ static int rk_pcie_establish_link(struct dw_pcie *pci)
 		 * PERST and T_PVPERL (Power stable to PERST# inactive) should be a
 		 * minimum of 100ms.  See table 2-4 in section 2.6.2 AC, the PCI Express
 		 * Card Electromechanical Specification 3.0. So 100ms in total is the min
-		 * requuirement here. We add a 1s for sake of hoping everthings work fine.
+		 * requuirement here. We add a 200ms for sake of hoping everthings work fine.
 		 */
-		msleep(1000);
+		msleep(200);
 		gpiod_set_value_cansleep(rk_pcie->rst_gpio, 1);
 
-		for (retries = 0; retries < 10; retries++) {
+		for (retries = 0; retries < 100; retries++) {
 			if (dw_pcie_link_up(pci)) {
 				/*
 				 * We may be here in case of L0 in Gen1. But if EP is capable
@@ -480,7 +480,7 @@ static int rk_pcie_establish_link(struct dw_pcie *pci)
 				 * that LTSSM max timeout is 24ms per period, we can wait a bit
 				 * more for Gen switch.
 				 */
-				msleep(100);
+				msleep(50);
 				dev_info(pci->dev, "PCIe Link up, LTSSM is 0x%x\n",
 					 rk_pcie_readl_apb(rk_pcie, PCIE_CLIENT_LTSSM_STATUS));
 				rk_pcie_debug_dump(rk_pcie);
@@ -490,7 +490,7 @@ static int rk_pcie_establish_link(struct dw_pcie *pci)
 			dev_info_ratelimited(pci->dev, "PCIe Linking... LTSSM is 0x%x\n",
 					     rk_pcie_readl_apb(rk_pcie, PCIE_CLIENT_LTSSM_STATUS));
 			rk_pcie_debug_dump(rk_pcie);
-			msleep(1000);
+			msleep(20);
 		}
 	}
 
@@ -1467,6 +1467,10 @@ static int rk_pcie_really_probe(void *p)
 	dw_pcie_dbi_ro_wr_dis(pci);
 
 	device_init_wakeup(dev, true);
+
+	/* Enable async system PM for multiports SOC */
+	device_enable_async_suspend(dev);
+
 	drv->driver.pm = &rockchip_dw_pcie_pm_ops;
 
 	return 0;
