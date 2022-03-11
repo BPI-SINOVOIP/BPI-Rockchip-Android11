@@ -16,6 +16,35 @@
 	model = "Bananapi R2Pro";
 	compatible = "rockchip,rk3568-bananapi-r2pro", "rockchip,rk3568";
 
+	mtkgsw: mtkgsw@0 {
+		compatible = "mediatek,mt753x";
+		rockchip,mdio = <&mdio0>;
+		rockchip,portmap = "lllll";
+		rockchip,mdio_master_pinmux = <0>;
+		rockchip,reset-pin = <&gpio3 RK_PB7 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+
+		port5: port@5 {
+			compatible = "mediatek,mt753x-port";
+			reg = <5>;
+			phy-mode = "rgmii";
+			fixed-link {
+				speed = <1000>;
+				full-duplex;
+			};
+		};
+
+		port6: port@6 {
+			compatible = "mediatek,mt753x-port";
+			reg = <6>;
+			phy-mode = "sgmii";
+			fixed-link {
+				speed = <2500>;
+				full-duplex;
+			};
+		};
+	};
+
 	rk_headset: rk-headset {
 		compatible = "rockchip_headset";
 		headset_gpio = <&gpio3 RK_PC2 GPIO_ACTIVE_HIGH>;
@@ -275,11 +304,17 @@
 		     &gmac0_rgmii_clk
 		     &gmac0_rgmii_bus>;
 
-	tx_delay = <0x3c>;
-	rx_delay = <0x2f>;
+	tx_delay = <0x4f>;
+	rx_delay = <0x0f>;
 
-	phy-handle = <&rgmii_phy0>;
+	/*phy-handle = <&rgmii_phy0>; comment for mtk gsw*/
 	status = "okay";
+
+	fixed-link {
+		speed = <1000>;
+		full-duplex;
+		pause;
+	};
 };
 
 &gmac1 {
@@ -302,8 +337,8 @@
 		     &gmac1m1_rgmii_clk
 		     &gmac1m1_rgmii_bus>;
 
-	tx_delay = <0x4f>;
-	rx_delay = <0x26>;
+	tx_delay = <0x3c>;
+	rx_delay = <0x2f>;
 
 	phy-handle = <&rgmii_phy1>;
 	status = "okay";
@@ -375,12 +410,14 @@
 	};
 };
 
+/* comment for mtk gsw
 &mdio0 {
 	rgmii_phy0: phy@0 {
 		compatible = "ethernet-phy-ieee802.3-c22";
 		reg = <0x0>;
 	};
 };
+*/
 
 &mdio1 {
 	rgmii_phy1: phy@0 {

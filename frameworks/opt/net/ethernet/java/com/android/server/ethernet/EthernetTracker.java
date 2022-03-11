@@ -695,7 +695,7 @@ final class EthernetTracker {
         final String match = mContext.getResources().getString(
                 com.android.internal.R.string.config_ethernet_iface_regex);
 
-        /*dangku, set eth1 as primary eth*/
+        /*dangku, set primary eth*/
         mIfaceMatch = SystemProperties.get("ro.net.eth_primary", null);
         if (mIfaceMatch == null) {
             mIfaceMatch = mIncludeTestInterfaces
