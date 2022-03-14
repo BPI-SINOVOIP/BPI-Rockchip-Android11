@@ -17,10 +17,12 @@
 		<key>CONFIG_CPU_SW_DOMAIN_PAN</key>
 		<value type="bool">y</value>
 	</config>
+<!-- bpi, for io command debug	
 	<config>
 		<key>CONFIG_DEVKMEM</key>
 		<value type="bool">n</value>
 	</config>
+-->
 	<config>
 		<key>CONFIG_OABI_COMPAT</key>
 		<value type="bool">n</value>
@@ -77,10 +79,12 @@
 			<value type="bool">y</value>
 		</config>
 	</conditions>
+<!-- bpi, for io command debug
 	<config>
 		<key>CONFIG_DEVKMEM</key>
 		<value type="bool">n</value>
 	</config>
+-->
 	<config>
 		<key>CONFIG_PAGE_TABLE_ISOLATION</key>
 		<value type="bool">y</value>
