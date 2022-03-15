@@ -464,6 +464,7 @@ static int mt753x_probe(struct platform_device *pdev)
 
 			gsw->name = rev.name;
 			gsw->model = sw->model;
+			gsw->sw = sw;
 
 			dev_info(gsw->dev, "Switch is MediaTek %s rev %d",
 				 gsw->name, rev.rev);
@@ -518,6 +519,30 @@ fail:
 	return ret;
 }
 
+static int mt753x_suspend(struct platform_device *pdev, pm_message_t state)
+{
+	//struct gsw_mt753x *gsw = platform_get_drvdata(pdev);
+	return 0;
+}
+
+static int mt753x_resume(struct platform_device *pdev)
+{
+	struct gsw_mt753x *gsw = platform_get_drvdata(pdev);
+	int ret = -EINVAL;
+
+	/* Initialize the switch */
+	ret = gsw->sw->init(gsw);
+	if (ret) {
+		dev_err(gsw->dev, "Switch resume failed");
+		return ret;
+	}
+
+	if (gsw->sw->post_init)
+		gsw->sw->post_init(gsw);
+
+	return 0;
+}
+
 static int mt753x_remove(struct platform_device *pdev)
 {
 	struct gsw_mt753x *gsw = platform_get_drvdata(pdev);
@@ -549,6 +574,8 @@ MODULE_DEVICE_TABLE(of, mt753x_ids);
 static struct platform_driver mt753x_driver = {
 	.probe = mt753x_probe,
 	.remove = mt753x_remove,
+	.suspend = mt753x_suspend,
+	.resume = mt753x_resume,
 	.driver = {
 		.name = "mt753x",
 		.of_match_table = mt753x_ids,

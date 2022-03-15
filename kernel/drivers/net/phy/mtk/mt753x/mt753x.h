@@ -79,6 +79,8 @@ struct gsw_mt753x {
 	u32 cpu_port;
 #endif
 
+	struct mt753x_sw_id *sw;
+
 	int global_vlan_enable;
 	struct mt753x_vlan_entry vlan_entries[MT753X_NUM_VLANS];
 	struct mt753x_port_entry port_entries[MT753X_NUM_PORTS];
