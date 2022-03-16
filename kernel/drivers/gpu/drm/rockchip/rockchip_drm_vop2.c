@@ -4344,14 +4344,12 @@ static void vop2_crtc_atomic_enable(struct drm_crtc *crtc, struct drm_crtc_state
 			VOP_CTRL_SET(vop2, lvds_dual_channel_swap, 1);
 	}
 
-	if (vcstate->output_if & VOP_OUTPUT_IF_MIPI0) {
+	if ((vcstate->output_if & VOP_OUTPUT_IF_MIPI0) || (vcstate->output_if & VOP_OUTPUT_IF_MIPI1)) {
 		VOP_CTRL_SET(vop2, mipi0_en, 1);
 		VOP_CTRL_SET(vop2, mipi0_mux, vp_data->id);
 		VOP_CTRL_SET(vop2, mipi_pin_pol, val);
 		VOP_CTRL_SET(vop2, mipi_dclk_pol, dclk_inv);
-	}
 
-	if (vcstate->output_if & VOP_OUTPUT_IF_MIPI1) {
 		VOP_CTRL_SET(vop2, mipi1_en, 1);
 		VOP_CTRL_SET(vop2, mipi1_mux, vp_data->id);
 		VOP_CTRL_SET(vop2, mipi_pin_pol, val);
