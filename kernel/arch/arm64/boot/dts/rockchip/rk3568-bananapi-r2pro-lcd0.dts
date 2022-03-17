@@ -591,3 +591,19 @@
 		tp-supply = <&vcc3v3_lcd0_n>;
 	};
 };
+
+/* dual dsi, one vp */
+&dmc {
+	center-supply = <&vdd_logic>;
+	vop-bw-dmc-freq = <
+	/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
+		0       286     528000
+		287     99999   780000
+	>;
+	vop-frame-bw-dmc-freq = <
+	/* min_bw(MB/s) max_bw(MB/s) freq(KHz) */
+		0       620     528000
+		621     99999   780000
+	>;
+	status = "okay";
+};
