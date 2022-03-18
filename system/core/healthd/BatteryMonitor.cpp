@@ -44,6 +44,7 @@
 
 #define POWER_SUPPLY_SUBSYSTEM "power_supply"
 #define POWER_SUPPLY_SYSFS_PATH "/sys/class/" POWER_SUPPLY_SUBSYSTEM
+#define THERMAL_ZONE0_SYSFS_PATH "/sys/class/thermal/thermal_zone0"
 #define FAKE_BATTERY_CAPACITY 42
 #define FAKE_BATTERY_TEMPERATURE 424
 #define MILLION 1.0e6
@@ -281,9 +282,15 @@ void BatteryMonitor::updateValues(void) {
         mHealthInfo->batteryFullChargeDesignCapacityUah =
                 getIntField(mHealthdConfig->batteryFullChargeDesignCapacityUahPath);
 
-    props.batteryTemperature = mBatteryFixedTemperature ?
-        mBatteryFixedTemperature :
-        getIntField(mHealthdConfig->batteryTemperaturePath);
+    if (property_get_bool("ro.no_battery_thermal_temp", false)) {
+        props.batteryTemperature = mBatteryFixedTemperature ?
+            mBatteryFixedTemperature :
+            (int)(getIntField(mHealthdConfig->batteryTemperaturePath) / 100);
+    } else {
+        props.batteryTemperature = mBatteryFixedTemperature ?
+            mBatteryFixedTemperature :
+            getIntField(mHealthdConfig->batteryTemperaturePath);
+    }
 
     std::string buf;
 
@@ -666,8 +673,12 @@ void BatteryMonitor::init(struct healthd_config *hc) {
 
                 if (mHealthdConfig->batteryTemperaturePath.isEmpty()) {
                     path.clear();
-                    path.appendFormat("%s/%s/temp", POWER_SUPPLY_SYSFS_PATH,
+                    if (property_get_bool("ro.no_battery_thermal_temp", false)) {
+                        path.appendFormat("%s/temp", THERMAL_ZONE0_SYSFS_PATH);
+                    } else {
+                        path.appendFormat("%s/%s/temp", POWER_SUPPLY_SYSFS_PATH,
                                       name);
+                    }
                     if (access(path, R_OK) == 0) {
                         mHealthdConfig->batteryTemperaturePath = path;
                     }

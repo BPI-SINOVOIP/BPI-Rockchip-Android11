@@ -9,4 +9,5 @@ dontaudit healthd self:capability { dac_override sys_admin dac_read_search };
 domain_trans(init, charger_exec, healthd);
 
 r_dir_file(hal_health_default, sysfs_batteryinfo)
+r_dir_file(hal_health_default, sysfs_thermal)
 rw_rockchip_graphic_device(hal_health_default)

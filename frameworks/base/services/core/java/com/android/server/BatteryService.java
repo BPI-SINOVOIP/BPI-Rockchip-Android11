@@ -118,7 +118,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class BatteryService extends SystemService {
     private static final String TAG = BatteryService.class.getSimpleName();
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static final int BATTERY_SCALE = 100;    // battery capacity is a percentage
 
@@ -418,6 +418,11 @@ public final class BatteryService extends SystemService {
         // shut down gracefully if temperature is too high (> 68.0C by default)
         // wait until the system has booted before attempting to display the
         // shutdown dialog.
+        if (DEBUG) {
+            Slog.d(TAG, "shutdownIfOverTempLocked, batteryTemp=" + mHealthInfo.batteryTemperature);
+            Slog.d(TAG, "shutdownIfOverTempLocked, mShutdownBatteryTemperature=" + mShutdownBatteryTemperature);
+        }
+
         if (mHealthInfo.batteryTemperature > mShutdownBatteryTemperature) {
             mHandler.post(new Runnable() {
                 @Override

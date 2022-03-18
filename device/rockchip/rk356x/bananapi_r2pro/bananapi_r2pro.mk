@@ -75,7 +75,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.wifi.sleep.power.down=true \
 	persist.wifi.sleep.delay.ms=0 \
 	persist.bt.power.down=true \
-	persist.usb.show=1
+	persist.usb.show=1 \
+	ro.no_battery_thermal_temp=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.net.eth_primary=eth0 \
