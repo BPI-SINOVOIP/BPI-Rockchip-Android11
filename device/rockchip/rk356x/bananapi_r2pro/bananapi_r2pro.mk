@@ -28,6 +28,10 @@ $(call inherit-product, device/rockchip/common/device.mk)
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, vendor/bananapi/apps/apps.mk)
 
+# opengapps, github.com/opengapps/aosp_build
+GAPPS_VARIANT := pico
+$(call inherit-product-if-exists, vendor/opengapps/build/opengapps-packages.mk)
+
 # copy input keylayout and device config
 PRODUCT_COPY_FILES += \
 	device/rockchip/rk356x_box/remote_config/fdd70030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fdd70030_pwm.kl \
