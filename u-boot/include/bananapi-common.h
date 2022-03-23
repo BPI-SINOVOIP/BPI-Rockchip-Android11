@@ -11,6 +11,7 @@
 
 #define IS_RANGE(x, min, max)   ((x) > (min) && (x) < (max))
 
+#define RECOVERY_KEY_CHANNEL	0
 #define HWID_ADC_CHANNEL        1
 #define DSI0_ADC_CHANNEL		5
 #define DSI1_ADC_CHANNEL		2

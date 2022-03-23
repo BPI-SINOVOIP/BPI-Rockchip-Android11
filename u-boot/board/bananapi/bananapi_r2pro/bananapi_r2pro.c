@@ -10,6 +10,7 @@
 #include <dwc3-uboot.h>
 #include <usb.h>
 #include <mapmem.h>
+#include <adc.h>
 
 #include <bananapi-common.h>
 
@@ -34,6 +35,36 @@ int usb_gadget_handle_interrupts(void)
 int board_usb_init(int index, enum usb_init_type init)
 {
 	return dwc3_uboot_init(&dwc3_device_data);
+}
+#endif
+
+#if defined(CONFIG_ADC)
+#define KEY_DOWN_MIN_VAL	0
+#define KEY_DOWN_MAX_VAL	30
+
+int rockchip_dnl_key_pressed(void)
+{
+	const void *blob = gd->fdt_blob;
+	int node, ret, channel = RECOVERY_KEY_CHANNEL;
+	u32 val, chns[2];
+
+	node = fdt_node_offset_by_compatible(blob, 0, "adc-keys");
+	if (node >= 0) {
+		if (!fdtdec_get_int_array(blob, node, "io-channels", chns, 2))
+			channel = chns[1];
+	}
+
+	ret = adc_channel_single_shot("saradc", channel, &val);
+	if (ret) {
+		printf("%s: Failed to read saradc, ret=%d\n", __func__, ret);
+		return 0;
+	}
+
+	printf("dnl_key_adc = %d\n", val);
+
+	return ((val >= KEY_DOWN_MIN_VAL) && (val <= KEY_DOWN_MAX_VAL));
+
+	return 0;
 }
 #endif
 
