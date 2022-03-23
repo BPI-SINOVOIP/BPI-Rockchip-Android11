@@ -1522,6 +1522,10 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
 
         mTargetSdk = info.applicationInfo.targetSdkVersion;
         mShowForAllUsers = (info.flags & FLAG_SHOW_FOR_ALL_USERS) != 0;
+        if (android.os.SystemProperties.get("persist.sys.app.rotation").equals("force_land")) {
+            android.util.Slog.d("ROCKCHIP", "ActivityRecord.java screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE");
+            info.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        }
         setOrientation(info.screenOrientation);
         mRotationAnimationHint = info.rotationAnimation;
 
@@ -6316,6 +6320,10 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
     }
 
     void setRequestedOrientation(int requestedOrientation) {
+        if (android.os.SystemProperties.get("persist.sys.app.rotation").equals("force_land")) {
+            android.util.Slog.d("ROCKCHIP", "ActivityRecord.java setRequestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE");
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        }
         setOrientation(requestedOrientation, mayFreezeScreenLocked());
         mAtmService.getTaskChangeNotificationController().notifyActivityRequestedOrientationChanged(
                 task.mTaskId, requestedOrientation);

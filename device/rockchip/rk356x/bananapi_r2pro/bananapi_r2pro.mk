@@ -111,3 +111,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # primary/secondary screen mouse control
 PRODUCT_PROPERTY_OVERRIDES += \
 	sys.mouse.presentation=1
+
+# force app landscape
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	persist.sys.app.rotation=force_land

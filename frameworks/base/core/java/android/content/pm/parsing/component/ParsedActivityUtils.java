@@ -147,6 +147,10 @@ public class ParsedActivityUtils {
                         sa.getInt(R.styleable.AndroidManifestActivity_recreateOnConfigChanges, 0));
 
                 int screenOrientation = sa.getInt(R.styleable.AndroidManifestActivity_screenOrientation, SCREEN_ORIENTATION_UNSPECIFIED);
+                if (android.os.SystemProperties.get("persist.sys.app.rotation").equals("force_land")) {
+                    Slog.d("ROCKCHIP", "ParsedActivityUtils.java screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE");
+                    screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+                }
                 int resizeMode = getActivityResizeMode(pkg, sa, screenOrientation);
                 activity.screenOrientation = screenOrientation;
                 activity.resizeMode = resizeMode;

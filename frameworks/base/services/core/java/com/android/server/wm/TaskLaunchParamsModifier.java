@@ -497,6 +497,10 @@ class TaskLaunchParamsModifier implements LaunchParamsModifier {
      * @return corresponding resolved orientation value.
      */
     private int resolveOrientation(@NonNull ActivityRecord activity) {
+        if (android.os.SystemProperties.get("persist.sys.app.rotation").equals("force_land")) {
+            android.util.Slog.d("ROCKCHIP", "TaskLaunchParamsModifier.java screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE");
+            activity.info.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+        }
         int orientation = activity.info.screenOrientation;
         switch (orientation) {
             case SCREEN_ORIENTATION_NOSENSOR:

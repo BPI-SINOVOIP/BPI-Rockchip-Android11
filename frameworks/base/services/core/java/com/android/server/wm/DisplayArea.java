@@ -31,6 +31,7 @@ import static com.android.server.wm.DisplayAreaProto.WINDOW_CONTAINER;
 import static com.android.server.wm.ProtoLogGroup.WM_DEBUG_ORIENTATION;
 import static com.android.server.wm.WindowContainerChildProto.DISPLAY_AREA;
 
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.proto.ProtoOutputStream;
@@ -220,6 +221,10 @@ public class DisplayArea<T extends WindowContainer> extends WindowContainer<T> {
                     return true;
                 }
             }
+            if (android.os.SystemProperties.get("persist.sys.app.rotation").equals("force_land")) {
+                android.util.Slog.d("ROCKCHIP", "DisplayArea<WindowToken> screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE");
+                w.mAttrs.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+            }
             final int req = w.mAttrs.screenOrientation;
             if (req == SCREEN_ORIENTATION_UNSPECIFIED || req == SCREEN_ORIENTATION_BEHIND
                     || req == SCREEN_ORIENTATION_UNSET) {
@@ -244,6 +249,10 @@ public class DisplayArea<T extends WindowContainer> extends WindowContainer<T> {
 
             if (win == null) {
                 return candidate;
+            }
+            if (android.os.SystemProperties.get("persist.sys.app.rotation").equals("force_land")) {
+                android.util.Slog.d("ROCKCHIP", "DisplayArea.java getOrientation screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE");
+                win.mAttrs.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
             }
             int req = win.mAttrs.screenOrientation;
             ProtoLog.v(WM_DEBUG_ORIENTATION, "%s forcing orientation to %d for display id=%d",
