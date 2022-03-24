@@ -193,8 +193,8 @@
 		};
 	};
 
-	spdif-sound {
-		status = "okay";
+	spdif_sound: spdif-sound {
+		status = "disabled";
 		compatible = "simple-audio-card";
 		simple-audio-card,name = "ROCKCHIP,SPDIF";
 		simple-audio-card,cpu {
@@ -206,9 +206,9 @@
 	};
 
 	spdif_out: spdif-out {
-			status = "okay";
-			compatible = "linux,spdif-dit";
-			#sound-dai-cells = <0>;
+		status = "disabled";
+		compatible = "linux,spdif-dit";
+		#sound-dai-cells = <0>;
 	};
 
 	vad_sound: vad-sound {
@@ -1459,10 +1459,6 @@
 
 &sfc {
 	status = "disabled";
-};
-
-&spdif_8ch {
-	status = "okay";
 };
 
 &tsadc {
