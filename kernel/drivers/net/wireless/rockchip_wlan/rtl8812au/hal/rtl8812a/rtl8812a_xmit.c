@@ -82,12 +82,12 @@ struct EMInfo {
 void
 InsertEMContent_8812(
 	struct EMInfo *pEMInfo,
-	IN pu1Byte	VirtualAddress)
+	u8 *VirtualAddress)
 {
 
 #if RTL8188E_EARLY_MODE_PKT_NUM_10 == 1
-	u1Byte index = 0;
-	u4Byte	dwtmp = 0;
+	u8 index = 0;
+	u32	dwtmp = 0;
 #endif
 
 	_rtw_memset(VirtualAddress, 0, EARLY_MODE_INFO_SIZE);
@@ -435,8 +435,8 @@ void rtl8812a_fill_txdesc_phy(PADAPTER padapter, struct pkt_attrib *pattrib, u8 
 
 u8
 BWMapping_8812(
-	IN	PADAPTER		Adapter,
-	IN	struct pkt_attrib	*pattrib
+		PADAPTER		Adapter,
+		struct pkt_attrib	*pattrib
 )
 {
 	u8	BWSettingOfDesc = 0;
@@ -464,8 +464,8 @@ BWMapping_8812(
 
 u8
 SCMapping_8812(
-	IN	PADAPTER		Adapter,
-	IN	struct pkt_attrib	*pattrib
+		PADAPTER		Adapter,
+		struct pkt_attrib	*pattrib
 )
 {
 	u8	SCSettingOfDesc = 0;

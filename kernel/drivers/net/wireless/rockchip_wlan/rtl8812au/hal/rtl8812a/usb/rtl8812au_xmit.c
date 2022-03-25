@@ -52,10 +52,12 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz , u8 ba
 	struct mlme_ext_priv	*pmlmeext = &padapter->mlmeextpriv;
 	struct mlme_ext_info	*pmlmeinfo = &(pmlmeext->mlmext_info);
 	sint	bmcst = IS_MCAST(pattrib->ra);
+#if defined(CONFIG_80211N_HT)
 	struct sta_info *psta = NULL;
 	u8 max_agg_num = 0;
 	u8 _max_ampdu_size = 0;
 	u8 ht_max_ampdu_size = 0;
+#endif/*CONFIG_80211N_HT*/
 	u8 vht_max_ampdu_size = 0;
 	struct dvobj_priv	*pdvobjpriv = adapter_to_dvobj(padapter);
 
@@ -146,7 +148,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz , u8 ba
 #endif
 		   ) {
 			/* Non EAP & ARP & DHCP type data packet */
-
+#if defined(CONFIG_80211N_HT)
 			if (pattrib->ampdu_en == _TRUE) {
 				SET_TX_DESC_AGG_ENABLE_8812(ptxdesc, 1);
 				if (padapter->driver_tx_max_agg_num != 0xFF) {
@@ -195,6 +197,7 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz , u8 ba
 				/* Set A-MPDU aggregation. */
 				SET_TX_DESC_AMPDU_DENSITY_8812(ptxdesc, pattrib->ampdu_spacing);
 			} else
+#endif/*CONFIG_80211N_HT*/
 				SET_TX_DESC_AGG_BREAK_8812(ptxdesc, 1);
 
 			rtl8812a_fill_txdesc_phy(padapter, pattrib, ptxdesc);
@@ -239,8 +242,17 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz , u8 ba
 			/* HW will ignore this setting if the transmission rate is legacy OFDM. */
 			if (pmlmeinfo->preamble_mode == PREAMBLE_SHORT)
 				SET_TX_DESC_DATA_SHORT_8812(ptxdesc, 1);
-
-			SET_TX_DESC_TX_RATE_8812(ptxdesc, MRateToHwRate(pmlmeext->tx_rate));
+#ifdef CONFIG_IP_R_MONITOR
+			if((pattrib->ether_type == ETH_P_ARP) &&
+				(IsSupportedTxOFDM(padapter->registrypriv.wireless_mode))) {
+				SET_TX_DESC_TX_RATE_8812(ptxdesc, MRateToHwRate(IEEE80211_OFDM_RATE_6MB));
+				#ifdef DBG_IP_R_MONITOR
+				RTW_INFO(FUNC_ADPT_FMT ": SP Packet(0x%04X) rate=0x%x SeqNum = %d\n",
+					FUNC_ADPT_ARG(padapter), pattrib->ether_type, MRateToHwRate(pmlmeext->tx_rate), pattrib->seqnum);
+				#endif/*DBG_IP_R_MONITOR*/
+			 } else
+#endif/*CONFIG_IP_R_MONITOR*/
+				SET_TX_DESC_TX_RATE_8812(ptxdesc, MRateToHwRate(pmlmeext->tx_rate));
 		}
 
 #ifdef CONFIG_TDLS
@@ -319,7 +331,8 @@ static s32 update_txdesc(struct xmit_frame *pxmitframe, u8 *pmem, s32 sz , u8 ba
 	}
 
 #ifdef CONFIG_ANTENNA_DIVERSITY
-	odm_set_tx_ant_by_tx_info(&pHalData->odmpriv, ptxdesc, pxmitframe->attrib.mac_id);
+	if (!bmcst && pattrib->psta)
+		odm_set_tx_ant_by_tx_info(adapter_to_phydm(padapter), ptxdesc, pattrib->psta->cmn.mac_id);
 #endif
 
 #ifdef CONFIG_BEAMFORMING
@@ -346,6 +359,7 @@ s32 rtl8812au_xmit_buf_handler(PADAPTER padapter)
 	PHAL_DATA_TYPE phal;
 	struct xmit_priv *pxmitpriv;
 	struct xmit_buf *pxmitbuf;
+	struct xmit_frame *pxmitframe;
 	s32 ret;
 
 
@@ -378,9 +392,10 @@ s32 rtl8812au_xmit_buf_handler(PADAPTER padapter)
 		pxmitbuf = dequeue_pending_xmitbuf(pxmitpriv);
 		if (pxmitbuf == NULL)
 			break;
-
+		pxmitframe = (struct xmit_frame *) pxmitbuf->priv_data;
 		/* only XMITBUF_DATA & XMITBUF_MGNT */
 		rtw_write_port_and_wait(padapter, pxmitbuf->ff_hwaddr, pxmitbuf->len, (unsigned char *)pxmitbuf, 500);
+		rtw_free_xmitframe(pxmitpriv, pxmitframe);
 	} while (1);
 
 #ifdef CONFIG_LPS_LCLK
@@ -415,7 +430,7 @@ u32 upload_txpktbuf_8812au(_adapter *adapter, u8 *buf, u32 buflen)
 		}
 		rtw_write32(adapter, REG_PKTBUF_DBG_CTRL, 0xff800000+(beacon_head<<6) + qw_addr);
 		loop_cnt = 0;
-		while ((rtw_read32(adapter, REG_PKTBUF_DBG_CTRL) & BIT23) == 1) {
+		while ((rtw_read32(adapter, REG_PKTBUF_DBG_CTRL) & BIT23) != _FALSE) {
 			rtw_udelay_os(10);
 			if (loop_cnt++ == 100)
 				return _FALSE;
@@ -448,7 +463,7 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 	    (pxmitframe->attrib.ether_type != 0x888e) &&
 	    (pxmitframe->attrib.ether_type != 0x88b4) &&
 	    (pxmitframe->attrib.dhcp_pkt != 1))
-		rtw_issue_addbareq_cmd(padapter, pxmitframe);
+		rtw_issue_addbareq_cmd(padapter, pxmitframe, _FALSE);
 #endif /* CONFIG_80211N_HT */
 	mem_addr = pxmitframe->buf_addr;
 
@@ -490,7 +505,7 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 		pxmitbuf->len = w_sz;
 		pxmitbuf->ff_hwaddr = ff_hwaddr;
 
-		if (pxmitbuf->buf_tag == XMITBUF_CMD)
+		if (pxmitframe->attrib.qsel == QSLT_BEACON)
 			/* download rsvd page */
 			inner_ret = rtw_write_port(padapter, ff_hwaddr, w_sz, (unsigned char *)pxmitbuf);
 		else
@@ -509,6 +524,9 @@ static s32 rtw_dump_xframe(_adapter *padapter, struct xmit_frame *pxmitframe)
 
 	}
 
+#ifdef CONFIG_XMIT_THREAD_MODE
+	if (pxmitframe->attrib.qsel == QSLT_BEACON)
+#endif
 	rtw_free_xmitframe(pxmitpriv, pxmitframe);
 
 	if (ret != _SUCCESS)
@@ -691,9 +709,7 @@ s32 rtl8812au_xmitframe_complete(_adapter *padapter, struct xmit_priv *pxmitpriv
 
 		len = rtw_wlan_pkt_size(pxmitframe) + TXDESC_SIZE + (pxmitframe->pkt_offset * PACKET_OFFSET_SZ);
 
-		if (_RND8(pbuf + len) > MAX_XMITBUF_SZ)
-			/* if (_RND8(pbuf + len) > (MAX_XMITBUF_SZ/2))//to do : for TX TP finial tune , Georgia 2012-0323 */
-		{
+		if (_RND8(pbuf + len) > MAX_XMITBUF_SZ) {
 			/* RTW_INFO("%s....len> MAX_XMITBUF_SZ\n",__FUNCTION__); */
 			pxmitframe->agg_num = 1;
 			pxmitframe->pkt_offset = 1;
@@ -786,7 +802,7 @@ agg_end:
 	    (pfirstframe->attrib.ether_type != 0x888e) &&
 	    (pfirstframe->attrib.ether_type != 0x88b4) &&
 	    (pfirstframe->attrib.dhcp_pkt != 1))
-		rtw_issue_addbareq_cmd(padapter, pfirstframe);
+		rtw_issue_addbareq_cmd(padapter, pfirstframe, _FALSE);
 #endif /* CONFIG_80211N_HT */
 #ifndef CONFIG_USE_USB_BUFFER_ALLOC_TX
 	/* 3 3. update first frame txdesc */
@@ -817,7 +833,7 @@ agg_end:
 	pxmitbuf->len = pbuf_tail;
 	pxmitbuf->ff_hwaddr = ff_hwaddr;
 
-	if (pxmitbuf->buf_tag == XMITBUF_CMD)
+	if (pfirstframe->attrib.qsel == QSLT_BEACON)
 		/* download rsvd page*/
 		rtw_write_port(padapter, ff_hwaddr, pbuf_tail, (u8 *)pxmitbuf);
 	else
@@ -834,6 +850,9 @@ agg_end:
 
 	rtw_count_tx_stats(padapter, pfirstframe, pbuf_tail);
 
+#ifdef CONFIG_XMIT_THREAD_MODE
+	if (pfirstframe->attrib.qsel == QSLT_BEACON)
+#endif
 	rtw_free_xmitframe(pxmitpriv, pfirstframe);
 
 	return _TRUE;

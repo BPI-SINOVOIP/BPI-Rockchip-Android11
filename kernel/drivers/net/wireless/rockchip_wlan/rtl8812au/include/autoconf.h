@@ -30,7 +30,6 @@
 
 #define PLATFORM_LINUX
 
-#define CONFIG_SG 1
 
 /* #define CONFIG_IOCTL_CFG80211 1 */
 
@@ -59,28 +58,19 @@
 	#define CONFIG_ACTIVE_KEEP_ALIVE_CHECK
 #endif
 
-#define CONFIG_80211N_HT	1
-
-#ifdef CONFIG_80211N_HT
-	#define CONFIG_80211AC_VHT 1
-	#define CONFIG_BEAMFORMING
-
-	#ifdef CONFIG_BEAMFORMING
-		#define CONFIG_BEAMFORMER_FW_NDPA
-		#define CONFIG_PHYDM_BEAMFORMING
-		#ifdef CONFIG_PHYDM_BEAMFORMING
-		#define BEAMFORMING_SUPPORT		1	/*for phydm beamforming*/
-		#define SUPPORT_MU_BF				0
-		#else
-		#define BEAMFORMING_SUPPORT		0	/*for driver beamforming*/
-		#endif
+#define CONFIG_80211N_HT
+#define CONFIG_80211AC_VHT
+#ifdef CONFIG_80211AC_VHT
+	#ifndef CONFIG_80211N_HT
+		#define CONFIG_80211N_HT
 	#endif
+#endif
 
+#ifdef CONFIG_80211AC_VHT
+	#define CONFIG_BEAMFORMING
 #endif
 
 #define CONFIG_RECV_REORDERING_CTRL	1
-
-#define CONFIG_DFS	1
 
  /* #define CONFIG_SUPPORT_USB_INT */
  #ifdef CONFIG_SUPPORT_USB_INT
@@ -105,7 +95,7 @@
 
 	#ifdef CONFIG_LPS_LCLK
 		#ifdef CONFIG_POWER_SAVING
-			#define CONFIG_XMIT_THREAD_MODE
+			/* #define CONFIG_XMIT_THREAD_MODE */
 		#endif /* CONFIG_POWER_SAVING */
 		#ifndef CONFIG_SUPPORT_USB_INT
 			#define LPS_RPWM_WAIT_MS 300
@@ -162,7 +152,7 @@
 	#define CONFIG_P2P_PS
 	#define CONFIG_P2P_OP_CHK_SOCIAL_CH
 	#define CONFIG_CFG80211_ONECHANNEL_UNDER_CONCURRENT  /* replace CONFIG_P2P_CHK_INVITE_CH_LIST flag */
-	#define CONFIG_P2P_INVITE_IOT
+	/*#define CONFIG_P2P_INVITE_IOT*/
 #endif
 
 /* Added by Kurt 20110511 */
@@ -201,9 +191,6 @@
 /* #define CONFIG_BACKGROUND_NOISE_MONITOR */
 #endif
 #define RTW_NOTCH_FILTER 0 /* 0:Disable, 1:Enable, */
-
-#define CONFIG_TX_MCAST2UNI		/*Support IP multicast->unicast*/
-/* #define CONFIG_CHECK_AC_LIFETIME 1 */	/* Check packet lifetime of 4 ACs. */
 
 
 /*
@@ -317,16 +304,11 @@
 
 #define	RTL8188E_EARLY_MODE_PKT_NUM_10	0
 
-#define CONFIG_80211D
-
-#define CONFIG_ATTEMPT_TO_FIX_AP_BEACON_ERROR
 
 /*
  * Debug Related Config
  */
 #define DBG	1
-
-#define CONFIG_PROC_DEBUG
 
 #define DBG_CONFIG_ERROR_DETECT
 /* #define DBG_CONFIG_ERROR_DETECT_INT */
@@ -357,3 +339,4 @@
 /*#define DBG_MEMORY_LEAK*/
 #define	DBG_RX_DFRAME_RAW_DATA
 /*#define CONFIG_USE_EXTERNAL_POWER  */        /* NOT USB2.0 power, so no 500mA power constraint, no limitation in Power by Rate*/
+/*#define DBG_FW_DEBUG_MSG_PKT*/ /* FW use this feature to tx debug broadcast pkt. This pkt include FW debug message*/

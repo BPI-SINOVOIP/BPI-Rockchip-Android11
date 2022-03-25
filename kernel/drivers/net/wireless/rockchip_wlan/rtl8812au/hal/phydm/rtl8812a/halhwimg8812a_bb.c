@@ -20,54 +20,58 @@
 #if (RTL8812A_SUPPORT == 1)
 static boolean
 check_positive(
-	struct PHY_DM_STRUCT *p_dm,
+	struct dm_struct *dm,
 	const u32	condition1,
 	const u32	condition2,
 	const u32	condition3,
 	const u32	condition4
 )
 {
-	u8	_board_type = ((p_dm->board_type & BIT(4)) >> 4) << 0 | /* _GLNA*/
-			((p_dm->board_type & BIT(3)) >> 3) << 1 | /* _GPA*/
-			((p_dm->board_type & BIT(7)) >> 7) << 2 | /* _ALNA*/
-			((p_dm->board_type & BIT(6)) >> 6) << 3 | /* _APA */
-			((p_dm->board_type & BIT(2)) >> 2) << 4 | /* _BT*/
-			((p_dm->board_type & BIT(1)) >> 1) << 5 | /* _NGFF*/
-			((p_dm->board_type & BIT(5)) >> 5) << 6;  /* _TRSWT*/
+	u8	_board_type = ((dm->board_type & BIT(4)) >> 4) << 0 | /* _GLNA*/
+			((dm->board_type & BIT(3)) >> 3) << 1 | /* _GPA*/
+			((dm->board_type & BIT(7)) >> 7) << 2 | /* _ALNA*/
+			((dm->board_type & BIT(6)) >> 6) << 3 | /* _APA */
+			((dm->board_type & BIT(2)) >> 2) << 4 | /* _BT*/
+			((dm->board_type & BIT(1)) >> 1) << 5 | /* _NGFF*/
+			((dm->board_type & BIT(5)) >> 5) << 6;  /* _TRSWT*/
 
 	u32	cond1 = condition1, cond2 = condition2, cond3 = condition3, cond4 = condition4;
 
-	u8	cut_version_for_para = (p_dm->cut_version ==  ODM_CUT_A) ? 15 : p_dm->cut_version;
-	u8	pkg_type_for_para = (p_dm->package_type == 0) ? 15 : p_dm->package_type;
+	u8	cut_version_for_para = (dm->cut_version ==  ODM_CUT_A) ? 15 : dm->cut_version;
+	u8	pkg_type_for_para = (dm->package_type == 0) ? 15 : dm->package_type;
 
 	u32	driver1 = cut_version_for_para << 24 |
-			(p_dm->support_interface & 0xF0) << 16 |
-			p_dm->support_platform << 16 |
+			(dm->support_interface & 0xF0) << 16 |
+			dm->support_platform << 16 |
 			pkg_type_for_para << 12 |
-			(p_dm->support_interface & 0x0F) << 8  |
+			(dm->support_interface & 0x0F) << 8  |
 			_board_type;
 
-	u32	driver2 = (p_dm->type_glna & 0xFF) <<  0 |
-			(p_dm->type_gpa & 0xFF)  <<  8 |
-			(p_dm->type_alna & 0xFF) << 16 |
-			(p_dm->type_apa & 0xFF)  << 24;
+	u32	driver2 = (dm->type_glna & 0xFF) <<  0 |
+			(dm->type_gpa & 0xFF)  <<  8 |
+			(dm->type_alna & 0xFF) << 16 |
+			(dm->type_apa & 0xFF)  << 24;
 
 	u32	driver3 = 0;
 
-	u32	driver4 = (p_dm->type_glna & 0xFF00) >>  8 |
-			(p_dm->type_gpa & 0xFF00) |
-			(p_dm->type_alna & 0xFF00) << 8 |
-			(p_dm->type_apa & 0xFF00)  << 16;
+	u32	driver4 = (dm->type_glna & 0xFF00) >>  8 |
+			(dm->type_gpa & 0xFF00) |
+			(dm->type_alna & 0xFF00) << 8 |
+			(dm->type_apa & 0xFF00)  << 16;
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT,
-	("===> check_positive (cond1, cond2, cond3, cond4) = (0x%X 0x%X 0x%X 0x%X)\n", cond1, cond2, cond3, cond4));
-	PHYDM_DBG(p_dm, ODM_COMP_INIT,
-	("===> check_positive (driver1, driver2, driver3, driver4) = (0x%X 0x%X 0x%X 0x%X)\n", driver1, driver2, driver3, driver4));
+	PHYDM_DBG(dm, ODM_COMP_INIT,
+		  "===> %s (cond1, cond2, cond3, cond4) = (0x%X 0x%X 0x%X 0x%X)\n",
+		  __func__, cond1, cond2, cond3, cond4);
+	PHYDM_DBG(dm, ODM_COMP_INIT,
+		  "===> %s (driver1, driver2, driver3, driver4) = (0x%X 0x%X 0x%X 0x%X)\n",
+		  __func__, driver1, driver2, driver3, driver4);
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT,
-	("	(Platform, Interface) = (0x%X, 0x%X)\n", p_dm->support_platform, p_dm->support_interface));
-	PHYDM_DBG(p_dm, ODM_COMP_INIT,
-	("	(Board, Package) = (0x%X, 0x%X)\n", p_dm->board_type, p_dm->package_type));
+	PHYDM_DBG(dm, ODM_COMP_INIT,
+		  "	(Platform, Interface) = (0x%X, 0x%X)\n",
+		  dm->support_platform, dm->support_interface);
+	PHYDM_DBG(dm, ODM_COMP_INIT,
+		  "	(Board, Package) = (0x%X, 0x%X)\n", dm->board_type,
+		  dm->package_type);
 
 
 	/*============== value Defined Check ===============*/
@@ -105,15 +109,6 @@ check_positive(
 			return false;
 	} else
 		return false;
-}
-static boolean
-check_negative(
-	struct PHY_DM_STRUCT *p_dm,
-	const u32	condition1,
-	const u32	condition2
-)
-{
-	return true;
 }
 
 /******************************************************************************
@@ -456,19 +451,17 @@ u32 array_mp_8812a_agc_tab[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_agc_tab(
-	struct	PHY_DM_STRUCT *p_dm
-)
+odm_read_and_config_mp_8812a_agc_tab(struct dm_struct *dm)
 {
 	u32	i = 0;
 	u8	c_cond;
 	boolean	is_matched = true, is_skipped = false;
-	u32	array_len = sizeof(array_mp_8812a_agc_tab)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_agc_tab) / sizeof(u32);
 	u32	*array = array_mp_8812a_agc_tab;
 
 	u32	v1 = 0, v2 = 0, pre_v1 = 0, pre_v2 = 0;
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_agc_tab\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
 	while ((i + 1) < array_len) {
 		v1 = array[i];
@@ -476,22 +469,22 @@ odm_read_and_config_mp_8812a_agc_tab(
 
 		if (v1 & (BIT(31) | BIT(30))) {/*positive & negative condition*/
 			if (v1 & BIT(31)) {/* positive condition*/
-				c_cond  = (u8)((v1 & (BIT(29)|BIT(28))) >> 28);
+				c_cond  = (u8)((v1 & (BIT(29) | BIT(28))) >> 28);
 				if (c_cond == COND_ENDIF) {/*end*/
 					is_matched = true;
 					is_skipped = false;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ENDIF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ENDIF\n");
 				} else if (c_cond == COND_ELSE) { /*else*/
-					is_matched = is_skipped?false:true;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ELSE\n"));
+					is_matched = is_skipped ? false : true;
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ELSE\n");
 				} else {/*if , else if*/
 					pre_v1 = v1;
 					pre_v2 = v2;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("IF or ELSE IF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "IF or ELSE IF\n");
 				}
 			} else if (v1 & BIT(30)) { /*negative condition*/
 				if (is_skipped == false) {
-					if (check_positive(p_dm, pre_v1, pre_v2, v1, v2)) {
+					if (check_positive(dm, pre_v1, pre_v2, v1, v2)) {
 						is_matched = true;
 						is_skipped = true;
 					} else {
@@ -503,7 +496,7 @@ odm_read_and_config_mp_8812a_agc_tab(
 			}
 		} else {
 			if (is_matched)
-				odm_config_bb_agc_8812a(p_dm, v1, MASKDWORD, v2);
+				odm_config_bb_agc_8812a(dm, v1, MASKDWORD, v2);
 		}
 		i = i + 2;
 	}
@@ -584,11 +577,8 @@ u32 array_mp_8812a_agc_tab_diff_hb[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_agc_tab_diff(
-	struct PHY_DM_STRUCT *p_dm,
-	u32	array[],
-	u32	array_len
-)
+odm_read_and_config_mp_8812a_agc_tab_diff(struct dm_struct *dm, u32 array[],
+					  u32 array_len)
 {
 	u32	i = 0;
 	u8	c_cond;
@@ -596,7 +586,7 @@ odm_read_and_config_mp_8812a_agc_tab_diff(
 
 	u32	v1 = 0, v2 = 0, pre_v1 = 0, pre_v2 = 0;
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_agc_tab_diff\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
 	while ((i + 1) < array_len) {
 		v1 = array[i];
@@ -604,22 +594,22 @@ odm_read_and_config_mp_8812a_agc_tab_diff(
 
 		if (v1 & (BIT(31) | BIT(30))) {/*positive & negative condition*/
 			if (v1 & BIT(31)) {/* positive condition*/
-				c_cond  = (u8)((v1 & (BIT(29)|BIT(28))) >> 28);
+				c_cond  = (u8)((v1 & (BIT(29) | BIT(28))) >> 28);
 				if (c_cond == COND_ENDIF) {/*end*/
 					is_matched = true;
 					is_skipped = false;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ENDIF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ENDIF\n");
 				} else if (c_cond == COND_ELSE) { /*else*/
-					is_matched = is_skipped?false:true;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ELSE\n"));
+					is_matched = is_skipped ? false : true;
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ELSE\n");
 				} else {/*if , else if*/
 					pre_v1 = v1;
 					pre_v2 = v2;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("IF or ELSE IF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "IF or ELSE IF\n");
 				}
 			} else if (v1 & BIT(30)) { /*negative condition*/
 				if (is_skipped == false) {
-					if (check_positive(p_dm, pre_v1, pre_v2, v1, v2)) {
+					if (check_positive(dm, pre_v1, pre_v2, v1, v2)) {
 						is_matched = true;
 						is_skipped = true;
 					} else {
@@ -631,7 +621,7 @@ odm_read_and_config_mp_8812a_agc_tab_diff(
 			}
 		} else {
 			if (is_matched)
-				odm_config_bb_agc_8812a(p_dm, v1, MASKDWORD, v2);
+				odm_config_bb_agc_8812a(dm, v1, MASKDWORD, v2);
 		}
 		i = i + 2;
 	}
@@ -881,19 +871,17 @@ u32 array_mp_8812a_phy_reg[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg(
-	struct	PHY_DM_STRUCT *p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg(struct dm_struct *dm)
 {
 	u32	i = 0;
 	u8	c_cond;
 	boolean	is_matched = true, is_skipped = false;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg;
 
 	u32	v1 = 0, v2 = 0, pre_v1 = 0, pre_v2 = 0;
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
 	while ((i + 1) < array_len) {
 		v1 = array[i];
@@ -901,22 +889,22 @@ odm_read_and_config_mp_8812a_phy_reg(
 
 		if (v1 & (BIT(31) | BIT(30))) {/*positive & negative condition*/
 			if (v1 & BIT(31)) {/* positive condition*/
-				c_cond  = (u8)((v1 & (BIT(29)|BIT(28))) >> 28);
+				c_cond  = (u8)((v1 & (BIT(29) | BIT(28))) >> 28);
 				if (c_cond == COND_ENDIF) {/*end*/
 					is_matched = true;
 					is_skipped = false;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ENDIF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ENDIF\n");
 				} else if (c_cond == COND_ELSE) { /*else*/
-					is_matched = is_skipped?false:true;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ELSE\n"));
+					is_matched = is_skipped ? false : true;
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ELSE\n");
 				} else {/*if , else if*/
 					pre_v1 = v1;
 					pre_v2 = v2;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("IF or ELSE IF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "IF or ELSE IF\n");
 				}
 			} else if (v1 & BIT(30)) { /*negative condition*/
 				if (is_skipped == false) {
-					if (check_positive(p_dm, pre_v1, pre_v2, v1, v2)) {
+					if (check_positive(dm, pre_v1, pre_v2, v1, v2)) {
 						is_matched = true;
 						is_skipped = true;
 					} else {
@@ -928,7 +916,7 @@ odm_read_and_config_mp_8812a_phy_reg(
 			}
 		} else {
 			if (is_matched)
-				odm_config_bb_phy_8812a(p_dm, v1, MASKDWORD, v2);
+				odm_config_bb_phy_8812a(dm, v1, MASKDWORD, v2);
 		}
 		i = i + 2;
 	}
@@ -951,19 +939,17 @@ u32 array_mp_8812a_phy_reg_mp[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg_mp(
-	struct	PHY_DM_STRUCT *p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg_mp(struct dm_struct *dm)
 {
 	u32	i = 0;
 	u8	c_cond;
 	boolean	is_matched = true, is_skipped = false;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg_mp)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg_mp) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg_mp;
 
 	u32	v1 = 0, v2 = 0, pre_v1 = 0, pre_v2 = 0;
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg_mp\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
 	while ((i + 1) < array_len) {
 		v1 = array[i];
@@ -971,22 +957,22 @@ odm_read_and_config_mp_8812a_phy_reg_mp(
 
 		if (v1 & (BIT(31) | BIT(30))) {/*positive & negative condition*/
 			if (v1 & BIT(31)) {/* positive condition*/
-				c_cond  = (u8)((v1 & (BIT(29)|BIT(28))) >> 28);
+				c_cond  = (u8)((v1 & (BIT(29) | BIT(28))) >> 28);
 				if (c_cond == COND_ENDIF) {/*end*/
 					is_matched = true;
 					is_skipped = false;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ENDIF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ENDIF\n");
 				} else if (c_cond == COND_ELSE) { /*else*/
-					is_matched = is_skipped?false:true;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("ELSE\n"));
+					is_matched = is_skipped ? false : true;
+					PHYDM_DBG(dm, ODM_COMP_INIT, "ELSE\n");
 				} else {/*if , else if*/
 					pre_v1 = v1;
 					pre_v2 = v2;
-					PHYDM_DBG(p_dm, ODM_COMP_INIT, ("IF or ELSE IF\n"));
+					PHYDM_DBG(dm, ODM_COMP_INIT, "IF or ELSE IF\n");
 				}
 			} else if (v1 & BIT(30)) { /*negative condition*/
 				if (is_skipped == false) {
-					if (check_positive(p_dm, pre_v1, pre_v2, v1, v2)) {
+					if (check_positive(dm, pre_v1, pre_v2, v1, v2)) {
 						is_matched = true;
 						is_skipped = true;
 					} else {
@@ -998,7 +984,7 @@ odm_read_and_config_mp_8812a_phy_reg_mp(
 			}
 		} else {
 			if (is_matched)
-				odm_config_bb_phy_8812a(p_dm, v1, MASKDWORD, v2);
+				odm_config_bb_phy_8812a(dm, v1, MASKDWORD, v2);
 		}
 		i = i + 2;
 	}
@@ -1064,40 +1050,38 @@ u32 array_mp_8812a_phy_reg_pg[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg_pg(
-	struct PHY_DM_STRUCT	*p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg_pg(struct dm_struct *dm)
 {
 	u32	i = 0;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg_pg;
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	struct _ADAPTER	*adapter = p_dm->adapter;
-	HAL_DATA_TYPE	*p_hal_data = GET_HAL_DATA(adapter);
+	void	*adapter = dm->adapter;
+	HAL_DATA_TYPE	*hal_data = GET_HAL_DATA(((PADAPTER)adapter));
 
-	PlatformZeroMemory(p_hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT*MAX_BYTES_LINE_HWCONFIG_TXT);
-	p_hal_data->nLinesReadPwrByRate = array_len/6;
+	PlatformZeroMemory(hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT * MAX_BYTES_LINE_HWCONFIG_TXT);
+	hal_data->nLinesReadPwrByRate = array_len / 6;
 #endif
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg_pg\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
-	p_dm->phy_reg_pg_version = 1;
-	p_dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
+	dm->phy_reg_pg_version = 1;
+	dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
 
 	for (i = 0; i < array_len; i += 6) {
 		u32	v1 = array[i];
-		u32	v2 = array[i+1];
-		u32	v3 = array[i+2];
-		u32	v4 = array[i+3];
-		u32	v5 = array[i+4];
-		u32	v6 = array[i+5];
+		u32	v2 = array[i + 1];
+		u32	v3 = array[i + 2];
+		u32	v4 = array[i + 3];
+		u32	v5 = array[i + 4];
+		u32	v6 = array[i + 5];
 
-		odm_config_bb_phy_reg_pg_8812a(p_dm, v1, v2, v3, v4, v5, v6);
+		odm_config_bb_phy_reg_pg_8812a(dm, v1, v2, v3, v4, v5, v6);
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	rsprintf((char *)p_hal_data->BufOfLinesPwrByRate[i/6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
-		(v1 == 0?"2.4G":"  5G"), (v2 == 0?"A":"B"), (v3 == 0?"1Tx":"2Tx"), v4, v5, v6);
+	rsprintf((char *)hal_data->BufOfLinesPwrByRate[i / 6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
+		(v1 == 0 ? "2.4G" : "  5G"), (v2 == 0 ? "A" : "B"), (v3 == 0 ? "1Tx" : "2Tx"), v4, v5, v6);
 #endif
 	}
 }
@@ -1158,40 +1142,38 @@ u32 array_mp_8812a_phy_reg_pg_asus[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg_pg_asus(
-	struct PHY_DM_STRUCT	*p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg_pg_asus(struct dm_struct *dm)
 {
 	u32	i = 0;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_asus)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_asus) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg_pg_asus;
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	struct _ADAPTER	*adapter = p_dm->adapter;
-	HAL_DATA_TYPE	*p_hal_data = GET_HAL_DATA(adapter);
+	void	*adapter = dm->adapter;
+	HAL_DATA_TYPE	*hal_data = GET_HAL_DATA(((PADAPTER)adapter));
 
-	PlatformZeroMemory(p_hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT*MAX_BYTES_LINE_HWCONFIG_TXT);
-	p_hal_data->nLinesReadPwrByRate = array_len/6;
+	PlatformZeroMemory(hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT * MAX_BYTES_LINE_HWCONFIG_TXT);
+	hal_data->nLinesReadPwrByRate = array_len / 6;
 #endif
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg_pg_asus\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
-	p_dm->phy_reg_pg_version = 1;
-	p_dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
+	dm->phy_reg_pg_version = 1;
+	dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
 
 	for (i = 0; i < array_len; i += 6) {
 		u32	v1 = array[i];
-		u32	v2 = array[i+1];
-		u32	v3 = array[i+2];
-		u32	v4 = array[i+3];
-		u32	v5 = array[i+4];
-		u32	v6 = array[i+5];
+		u32	v2 = array[i + 1];
+		u32	v3 = array[i + 2];
+		u32	v4 = array[i + 3];
+		u32	v5 = array[i + 4];
+		u32	v6 = array[i + 5];
 
-		odm_config_bb_phy_reg_pg_8812a(p_dm, v1, v2, v3, v4, v5, v6);
+		odm_config_bb_phy_reg_pg_8812a(dm, v1, v2, v3, v4, v5, v6);
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	rsprintf((char *)p_hal_data->BufOfLinesPwrByRate[i/6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
-		(v1 == 0?"2.4G":"  5G"), (v2 == 0?"A":"B"), (v3 == 0?"1Tx":"2Tx"), v4, v5, v6);
+	rsprintf((char *)hal_data->BufOfLinesPwrByRate[i / 6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
+		(v1 == 0 ? "2.4G" : "  5G"), (v2 == 0 ? "A" : "B"), (v3 == 0 ? "1Tx" : "2Tx"), v4, v5, v6);
 #endif
 	}
 }
@@ -1252,40 +1234,38 @@ u32 array_mp_8812a_phy_reg_pg_dni[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg_pg_dni(
-	struct PHY_DM_STRUCT	*p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg_pg_dni(struct dm_struct *dm)
 {
 	u32	i = 0;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_dni)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_dni) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg_pg_dni;
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	struct _ADAPTER	*adapter = p_dm->adapter;
-	HAL_DATA_TYPE	*p_hal_data = GET_HAL_DATA(adapter);
+	void	*adapter = dm->adapter;
+	HAL_DATA_TYPE	*hal_data = GET_HAL_DATA(((PADAPTER)adapter));
 
-	PlatformZeroMemory(p_hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT*MAX_BYTES_LINE_HWCONFIG_TXT);
-	p_hal_data->nLinesReadPwrByRate = array_len/6;
+	PlatformZeroMemory(hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT * MAX_BYTES_LINE_HWCONFIG_TXT);
+	hal_data->nLinesReadPwrByRate = array_len / 6;
 #endif
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg_pg_dni\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
-	p_dm->phy_reg_pg_version = 1;
-	p_dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
+	dm->phy_reg_pg_version = 1;
+	dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
 
 	for (i = 0; i < array_len; i += 6) {
 		u32	v1 = array[i];
-		u32	v2 = array[i+1];
-		u32	v3 = array[i+2];
-		u32	v4 = array[i+3];
-		u32	v5 = array[i+4];
-		u32	v6 = array[i+5];
+		u32	v2 = array[i + 1];
+		u32	v3 = array[i + 2];
+		u32	v4 = array[i + 3];
+		u32	v5 = array[i + 4];
+		u32	v6 = array[i + 5];
 
-		odm_config_bb_phy_reg_pg_8812a(p_dm, v1, v2, v3, v4, v5, v6);
+		odm_config_bb_phy_reg_pg_8812a(dm, v1, v2, v3, v4, v5, v6);
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	rsprintf((char *)p_hal_data->BufOfLinesPwrByRate[i/6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
-		(v1 == 0?"2.4G":"  5G"), (v2 == 0?"A":"B"), (v3 == 0?"1Tx":"2Tx"), v4, v5, v6);
+	rsprintf((char *)hal_data->BufOfLinesPwrByRate[i / 6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
+		(v1 == 0 ? "2.4G" : "  5G"), (v2 == 0 ? "A" : "B"), (v3 == 0 ? "1Tx" : "2Tx"), v4, v5, v6);
 #endif
 	}
 }
@@ -1346,40 +1326,38 @@ u32 array_mp_8812a_phy_reg_pg_nec[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg_pg_nec(
-	struct PHY_DM_STRUCT	*p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg_pg_nec(struct dm_struct *dm)
 {
 	u32	i = 0;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_nec)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_nec) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg_pg_nec;
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	struct _ADAPTER	*adapter = p_dm->adapter;
-	HAL_DATA_TYPE	*p_hal_data = GET_HAL_DATA(adapter);
+	void	*adapter = dm->adapter;
+	HAL_DATA_TYPE	*hal_data = GET_HAL_DATA(((PADAPTER)adapter));
 
-	PlatformZeroMemory(p_hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT*MAX_BYTES_LINE_HWCONFIG_TXT);
-	p_hal_data->nLinesReadPwrByRate = array_len/6;
+	PlatformZeroMemory(hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT * MAX_BYTES_LINE_HWCONFIG_TXT);
+	hal_data->nLinesReadPwrByRate = array_len / 6;
 #endif
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg_pg_nec\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
-	p_dm->phy_reg_pg_version = 1;
-	p_dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
+	dm->phy_reg_pg_version = 1;
+	dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
 
 	for (i = 0; i < array_len; i += 6) {
 		u32	v1 = array[i];
-		u32	v2 = array[i+1];
-		u32	v3 = array[i+2];
-		u32	v4 = array[i+3];
-		u32	v5 = array[i+4];
-		u32	v6 = array[i+5];
+		u32	v2 = array[i + 1];
+		u32	v3 = array[i + 2];
+		u32	v4 = array[i + 3];
+		u32	v5 = array[i + 4];
+		u32	v6 = array[i + 5];
 
-		odm_config_bb_phy_reg_pg_8812a(p_dm, v1, v2, v3, v4, v5, v6);
+		odm_config_bb_phy_reg_pg_8812a(dm, v1, v2, v3, v4, v5, v6);
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	rsprintf((char *)p_hal_data->BufOfLinesPwrByRate[i/6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
-		(v1 == 0?"2.4G":"  5G"), (v2 == 0?"A":"B"), (v3 == 0?"1Tx":"2Tx"), v4, v5, v6);
+	rsprintf((char *)hal_data->BufOfLinesPwrByRate[i / 6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
+		(v1 == 0 ? "2.4G" : "  5G"), (v2 == 0 ? "A" : "B"), (v3 == 0 ? "1Tx" : "2Tx"), v4, v5, v6);
 #endif
 	}
 }
@@ -1440,40 +1418,38 @@ u32 array_mp_8812a_phy_reg_pg_tplink[] = {
 };
 
 void
-odm_read_and_config_mp_8812a_phy_reg_pg_tplink(
-	struct PHY_DM_STRUCT	*p_dm
-)
+odm_read_and_config_mp_8812a_phy_reg_pg_tplink(struct dm_struct *dm)
 {
 	u32	i = 0;
-	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_tplink)/sizeof(u32);
+	u32	array_len = sizeof(array_mp_8812a_phy_reg_pg_tplink) / sizeof(u32);
 	u32	*array = array_mp_8812a_phy_reg_pg_tplink;
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	struct _ADAPTER	*adapter = p_dm->adapter;
-	HAL_DATA_TYPE	*p_hal_data = GET_HAL_DATA(adapter);
+	void	*adapter = dm->adapter;
+	HAL_DATA_TYPE	*hal_data = GET_HAL_DATA(((PADAPTER)adapter));
 
-	PlatformZeroMemory(p_hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT*MAX_BYTES_LINE_HWCONFIG_TXT);
-	p_hal_data->nLinesReadPwrByRate = array_len/6;
+	PlatformZeroMemory(hal_data->BufOfLinesPwrByRate, MAX_LINES_HWCONFIG_TXT * MAX_BYTES_LINE_HWCONFIG_TXT);
+	hal_data->nLinesReadPwrByRate = array_len / 6;
 #endif
 
-	PHYDM_DBG(p_dm, ODM_COMP_INIT, ("===> odm_read_and_config_mp_8812a_phy_reg_pg_tplink\n"));
+	PHYDM_DBG(dm, ODM_COMP_INIT, "===> %s\n", __func__);
 
-	p_dm->phy_reg_pg_version = 1;
-	p_dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
+	dm->phy_reg_pg_version = 1;
+	dm->phy_reg_pg_value_type = PHY_REG_PG_EXACT_VALUE;
 
 	for (i = 0; i < array_len; i += 6) {
 		u32	v1 = array[i];
-		u32	v2 = array[i+1];
-		u32	v3 = array[i+2];
-		u32	v4 = array[i+3];
-		u32	v5 = array[i+4];
-		u32	v6 = array[i+5];
+		u32	v2 = array[i + 1];
+		u32	v3 = array[i + 2];
+		u32	v4 = array[i + 3];
+		u32	v5 = array[i + 4];
+		u32	v6 = array[i + 5];
 
-		odm_config_bb_phy_reg_pg_8812a(p_dm, v1, v2, v3, v4, v5, v6);
+		odm_config_bb_phy_reg_pg_8812a(dm, v1, v2, v3, v4, v5, v6);
 
 #if (DM_ODM_SUPPORT_TYPE == ODM_WIN)
-	rsprintf((char *)p_hal_data->BufOfLinesPwrByRate[i/6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
-		(v1 == 0?"2.4G":"  5G"), (v2 == 0?"A":"B"), (v3 == 0?"1Tx":"2Tx"), v4, v5, v6);
+	rsprintf((char *)hal_data->BufOfLinesPwrByRate[i / 6], 100, "%s, %s, %s, 0x%X, 0x%08X, 0x%08X,",
+		(v1 == 0 ? "2.4G" : "  5G"), (v2 == 0 ? "A" : "B"), (v3 == 0 ? "1Tx" : "2Tx"), v4, v5, v6);
 #endif
 	}
 }

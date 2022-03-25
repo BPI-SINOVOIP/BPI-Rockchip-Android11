@@ -32,10 +32,10 @@
  *
  * Note:		For RF type 0222D
  *---------------------------------------------------------------------------*/
-VOID
+void
 PHY_RF6052SetBandwidth8812(
-	IN	PADAPTER				Adapter,
-	IN	enum channel_width		Bandwidth)	/* 20M or 40M */
+		PADAPTER				Adapter,
+		enum channel_width		Bandwidth)	/* 20M or 40M */
 {
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(Adapter);
 
@@ -66,18 +66,18 @@ PHY_RF6052SetBandwidth8812(
 
 static int
 phy_RF6052_Config_ParaFile_8812(
-	IN	PADAPTER		Adapter
+		PADAPTER		Adapter
 )
 {
 	enum rf_path			eRFPath;
 	int					rtStatus = _SUCCESS;
 	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
+	struct hal_spec_t *hal_spec = GET_HAL_SPEC(Adapter);
 
 	/* 3 */ /* ----------------------------------------------------------------- */
 	/* 3 */ /* <2> Initialize RF */
 	/* 3 */ /* ----------------------------------------------------------------- */
-	/* for(eRFPath = RF_PATH_A; eRFPath <pHalData->NumTotalRFPath; eRFPath++) */
-	for (eRFPath = 0; eRFPath < pHalData->NumTotalRFPath; eRFPath++) {
+	for (eRFPath = 0; eRFPath < hal_spec->rf_reg_path_num; eRFPath++) {
 		/*----Initialize RF fom connfiguration file----*/
 		switch (eRFPath) {
 		case RF_PATH_A:
@@ -134,16 +134,9 @@ phy_RF6052_Config_ParaFile_Fail:
 
 int
 PHY_RF6052_Config_8812(
-	IN	PADAPTER		Adapter)
+		PADAPTER		Adapter)
 {
-	HAL_DATA_TYPE		*pHalData = GET_HAL_DATA(Adapter);
 	int					rtStatus = _SUCCESS;
-
-	/* Initialize general global value */
-	if (pHalData->rf_type == RF_1T1R)
-		pHalData->NumTotalRFPath = 1;
-	else
-		pHalData->NumTotalRFPath = 2;
 
 	/*  */
 	/* Config BB and RF */
@@ -151,7 +144,6 @@ PHY_RF6052_Config_8812(
 	rtStatus = phy_RF6052_Config_ParaFile_8812(Adapter);
 
 	return rtStatus;
-
 }
 
 
