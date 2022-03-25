@@ -37,6 +37,12 @@ PRODUCT_COPY_FILES += \
 	device/rockchip/rk356x_box/remote_config/fdd70030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fdd70030_pwm.kl \
 	device/rockchip/common/adc-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/adc-keys.kl
 
+# update realtek bluetooth configs
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_RTK)), true)
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/rtkbt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/rtkbt.conf
+endif
+
 #For RK3568 EC20
 ifeq ($(strip $(BOARD_QUECTEL_RIL)),true)
 PRODUCT_PACKAGES += rild
