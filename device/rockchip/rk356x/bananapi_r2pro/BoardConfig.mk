@@ -42,6 +42,7 @@ BOARD_CUSTOM_BT_CONFIG := $(TARGET_DEVICE_DIR)/vnd_$(TARGET_DEVICE).txt
 # primary panel orientation
 SF_PRIMARY_DISPLAY_ORIENTATION := 0
 
+TARGET_ROCKCHIP_PCBATEST := false
 BOARD_HAS_FACTORY_TEST := false
 
 # increase super partition size for system, system_ext, vendor, product and odm
