@@ -66,12 +66,7 @@ DECLARE_GLOBAL_DATA_PTR;
 
 #define PMU1CRU_BASE			0xfd7f0000
 #define PMU1CRU_SOFTRST_CON03		0x0a0c
-
-#define HDPTXPHY0_BASE			0xfed60000
-#define HDPTXPHY_LANE_REG0301		0x0c04
-#define HDPTXPHY_LANE_REG0401		0x1004
-#define HDPTXPHY_LANE_REG0501		0x1404
-#define HDPTXPHY_LANE_REG0601		0x1804
+#define PMU1CRU_SOFTRST_CON04		0x0a10
 
 #ifdef CONFIG_ARM64
 #include <asm/armv8/mmu.h>
@@ -783,6 +778,20 @@ void rockchip_stimer_init(void)
 	writel(0x1, CONFIG_ROCKCHIP_STIMER_BASE + 0x4);
 }
 
+static u32 gpio4d_iomux_sel_l = 0xffffffff;
+static u32 gpio4d_iomux_sel_h;
+static u32 gpio0a_iomux_sel_h;
+
+void spl_board_sd_iomux_save(void)
+{
+	struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
+	struct rk3588_pmu1_ioc * const pmu1_ioc = (void *)PMU1_IOC_BASE;
+
+	gpio4d_iomux_sel_l = readl(&bus_ioc->gpio4d_iomux_sel_l);
+	gpio4d_iomux_sel_h = readl(&bus_ioc->gpio4d_iomux_sel_h);
+	gpio0a_iomux_sel_h = readl(&pmu1_ioc->gpio0a_iomux_sel_h);
+}
+
 void spl_board_storages_fixup(struct spl_image_loader *loader)
 {
 	int ret = 0;
@@ -790,7 +799,7 @@ void spl_board_storages_fixup(struct spl_image_loader *loader)
 	if (!loader)
 		return;
 
-	if (loader->boot_device == BOOT_DEVICE_MMC2) {
+	if (loader->boot_device == BOOT_DEVICE_MMC2 && gpio4d_iomux_sel_l != 0xffffffff) {
 		struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
 		struct rk3588_pmu1_ioc * const pmu1_ioc = (void *)PMU1_IOC_BASE;
 		struct mmc *mmc = NULL;
@@ -802,9 +811,9 @@ void spl_board_storages_fixup(struct spl_image_loader *loader)
 
 		no_card = mmc_getcd(mmc) == 0;
 		if (no_card) {
-			writel(0xffff00aa, &bus_ioc->gpio4d_iomux_sel_l);
-			writel(0xffff0000, &bus_ioc->gpio4d_iomux_sel_h);
-			writel(0xffff0000, &pmu1_ioc->gpio0a_iomux_sel_h);
+			writel(0xffffuL << 16 | gpio4d_iomux_sel_l, &bus_ioc->gpio4d_iomux_sel_l);
+			writel(0xffffuL << 16 | gpio4d_iomux_sel_h, &bus_ioc->gpio4d_iomux_sel_h);
+			writel(0xffffuL << 16 | gpio0a_iomux_sel_h, &pmu1_ioc->gpio0a_iomux_sel_h);
 		}
 	}
 }
@@ -856,6 +865,15 @@ int arch_cpu_init(void)
 		writel(0x00070002, EMMC_IOC_BASE + EMMC_IOC_GPIO2A_DS_L);
 		writel(0x77772222, EMMC_IOC_BASE + EMMC_IOC_GPIO2D_DS_L);
 		writel(0x07000200, EMMC_IOC_BASE + EMMC_IOC_GPIO2D_DS_H);
+	} else if (readl(BUS_IOC_BASE + BUS_IOC_GPIO2D_IOMUX_SEL_L) == 0x1111) {
+		/*
+		 * set the emmc io drive strength:
+		 * data and cmd: 50ohm
+		 * clock: 25ohm
+		 */
+		writel(0x00770052, EMMC_IOC_BASE + EMMC_IOC_GPIO2A_DS_L);
+		writel(0x77772222, EMMC_IOC_BASE + EMMC_IOC_GPIO2D_DS_L);
+		writel(0x77772222, EMMC_IOC_BASE + EMMC_IOC_GPIO2D_DS_H);
 	} else if ((readl(BUS_IOC_BASE + BUS_IOC_GPIO2B_IOMUX_SEL_L) & 0xf0ff) == 0x3033) {
 		writel(0x33002200, VCCIO3_5_IOC_BASE + IOC_VCCIO3_5_GPIO2A_DS_H);
 		writel(0x30332022, VCCIO3_5_IOC_BASE + IOC_VCCIO3_5_GPIO2B_DS_L);
@@ -881,13 +899,11 @@ int arch_cpu_init(void)
 	writel(0x20002000, USB2PHY2_GRF_BASE + USB2PHY_GRF_CON2);
 	writel(0x20002000, USB2PHY3_GRF_BASE + USB2PHY_GRF_CON2);
 
-	/* Disable hdptxphy by default */
-	writel(0x38003800, PMU1CRU_BASE + PMU1CRU_SOFTRST_CON03);
-	writel(0x80, HDPTXPHY0_BASE + HDPTXPHY_LANE_REG0301);
-	writel(0x80, HDPTXPHY0_BASE + HDPTXPHY_LANE_REG0401);
-	writel(0x80, HDPTXPHY0_BASE + HDPTXPHY_LANE_REG0501);
-	writel(0x80, HDPTXPHY0_BASE + HDPTXPHY_LANE_REG0601);
+	/* Assert hdptxphy init,cmn,lane reset */
+	writel(0xb800b800, PMU1CRU_BASE + PMU1CRU_SOFTRST_CON03);
+	writel(0x00030003, PMU1CRU_BASE + PMU1CRU_SOFTRST_CON04);
 
+	spl_board_sd_iomux_save();
 #endif
 	/* Select usb otg0 phy status to 0 that make rockusb can work at high-speed */
 	writel(0x00080008, USBGRF_BASE + USB_GRF_USB3OTG0_CON1);

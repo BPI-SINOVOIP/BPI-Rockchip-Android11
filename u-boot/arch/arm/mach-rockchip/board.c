@@ -86,6 +86,8 @@ __weak void set_dtb_name(void)
 	return;
 }
 
+
+#ifdef CONFIG_ROCKCHIP_SET_ETHADDR
 /*
  * define serialno max length, the max length is 512 Bytes
  * The remaining bytes are used to ensure that the first 512 bytes
@@ -147,7 +149,9 @@ static int rockchip_set_ethaddr(void)
 
 	return 0;
 }
+#endif
 
+#ifdef CONFIG_ROCKCHIP_SET_SN
 static int rockchip_set_serialno(void)
 {
 	u8 low[CPUID_LEN / 2], high[CPUID_LEN / 2];
@@ -231,6 +235,8 @@ static int rockchip_set_serialno(void)
 
 	return ret;
 }
+#endif
+
 
 #if defined(CONFIG_USB_FUNCTION_FASTBOOT)
 int fb_set_reboot_flag(void)
@@ -379,8 +385,12 @@ static void cmdline_handle(void)
 
 int board_late_init(void)
 {
+#ifdef CONFIG_ROCKCHIP_SET_ETHADDR
 	rockchip_set_ethaddr();
+#endif
+#ifdef CONFIG_ROCKCHIP_SET_SN
 	rockchip_set_serialno();
+#endif
 	setup_download_mode();
 #if (CONFIG_ROCKCHIP_BOOT_MODE_REG > 0)
 	setup_boot_mode();
@@ -676,6 +686,7 @@ int board_bidram_reserve(struct bidram *bidram)
 	return 0;
 }
 
+#ifdef CONFIG_SYSMEM
 int board_sysmem_reserve(struct sysmem *sysmem)
 {
 #ifdef CONFIG_SKIP_RELOCATE_UBOOT
@@ -687,6 +698,7 @@ int board_sysmem_reserve(struct sysmem *sysmem)
 #endif
 	return 0;
 }
+#endif
 
 parse_fn_t board_bidram_parse_fn(void)
 {
@@ -849,7 +861,7 @@ int bootm_image_populate_dtb(void *img)
 	else
 		gd->fdt_blob = (void *)env_get_ulong("fdt_addr_r", 16, 0);
 
-	return resource_populate_dtb(img, (void *)gd->fdt_blob);
+	return rockchip_ram_read_dtb_file(img, (void *)gd->fdt_blob);
 }
 
 /*
@@ -898,7 +910,7 @@ int board_do_bootm(int argc, char * const argv[])
 
 		ret = bootm_image_populate_dtb(img);
 		if (ret) {
-			printf("bootm can't read dtb\n");
+			printf("bootm can't read dtb, ret=%d\n", ret);
 			return ret;
 		}
 
@@ -922,7 +934,7 @@ int board_do_bootm(int argc, char * const argv[])
 
 		ret = bootm_image_populate_dtb(img);
 		if (ret) {
-			printf("bootm can't read dtb\n");
+			printf("bootm can't read dtb, ret=%d\n", ret);
 			return ret;
 		}
 		snprintf(boot_cmd, sizeof(boot_cmd), "boot_fit %s", argv[1]);

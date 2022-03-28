@@ -33,6 +33,14 @@ config DRM_ROCKCHIP_DW_HDMI
 	 for the Synopsys DesignWare HDMI driver. If you want to
 	 enable HDMI on, you should selet this option.
 
+config DRM_ROCKCHIP_DW_HDMI_QP
+	bool "Rockchip specific extensions for Synopsys DW HDMI QP"
+	depends on DRM_ROCKCHIP
+	help
+	 This selects support for Rockchip SoC specific extensions
+	 for the Synopsys DesignWare HDMI QP driver. If you want to
+	 enable HDMI on, you should select this option.
+
 config DRM_ROCKCHIP_INNO_HDMI
 	bool "Rockchip specific extensions for INNO HDMI"
 	depends on DRM_ROCKCHIP
@@ -148,6 +156,13 @@ config DRM_ROCKCHIP_SAMSUNG_MIPI_DCPHY
 	help
 	  Enable this to support the Rockchip MIPI DCPHY
 	  with SAMSUNG IP block.
+
+config PHY_ROCKCHIP_SAMSUNG_HDPTX_HDMI
+	bool "Rockchip Samsung HDMI/DP Combo PHY HDMI driver"
+	depends on DRM_ROCKCHIP
+	help
+	  Support for Rockchip HDMI/DP Combo PHY HDMI with Samsung
+	  IP block.
 
 config ROCKCHIP_DRM_TVE
 	bool "Rockchip TVE Support"

@@ -12,4 +12,5 @@ allow bootanim property_socket:sock_file write;
 allow bootanim audio_service:service_manager find;
 allow bootanim mediametrics_service:service_manager find;
 allow bootanim system_prop:property_service set;
+allow bootanim mediametrics:binder call;
 rw_rockchip_graphic_device(bootanim)
