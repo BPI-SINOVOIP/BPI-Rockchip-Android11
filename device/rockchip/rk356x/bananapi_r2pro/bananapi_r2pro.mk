@@ -86,6 +86,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.wifi.sleep.delay.ms=0 \
 	persist.bt.power.down=true \
 	persist.usb.show=1 \
+	persist.usb.boot=host \
 	ro.no_battery_thermal_temp=true
 
 PRODUCT_PROPERTY_OVERRIDES += \

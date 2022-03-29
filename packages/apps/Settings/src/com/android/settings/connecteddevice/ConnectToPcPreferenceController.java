@@ -48,7 +48,8 @@ public class ConnectToPcPreferenceController extends AbstractPreferenceControlle
     private static final String HOST_MODE_STR = "host";
     private static final String SLAVE_MODE_STR = "peripheral";
 
-    public static final String PERSIST_PRO = "persist.usb.mode";
+    public static final String USB_MODE_PRO = "persist.usb.mode";
+    public static final String USB_BOOT_PRO = "persist.usb.boot";
 
     private Handler mHandler;
     private SwitchPreference mConnectToPc;
@@ -70,7 +71,7 @@ public class ConnectToPcPreferenceController extends AbstractPreferenceControlle
                      } else if(SLAVE_MODE.equals(mode)) {
                          mConnectToPc.setChecked(true);
                      }
-                     SystemProperties.set(PERSIST_PRO, mode);
+                     SystemProperties.set(USB_MODE_PRO, mode);
                  } else {
                      Log.e(TAG, "unexpect msg:"+ msg.what);
                  }
@@ -119,8 +120,10 @@ public class ConnectToPcPreferenceController extends AbstractPreferenceControlle
         Log.v(TAG,"onPreferenceChange:"+mode);
         if(mode){
             mMode = SLAVE_MODE;
+            SystemProperties.set(USB_BOOT_PRO, SLAVE_MODE_STR);
         }else{
             mMode = HOST_MODE;
+            SystemProperties.set(USB_BOOT_PRO, HOST_MODE_STR);
         }
 
         mConnectToPc.setEnabled(false);

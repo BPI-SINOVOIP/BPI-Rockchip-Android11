@@ -39,3 +39,9 @@ on init
 
 on property:cts_gts.status=true
     setprop vendor.hwc.compose_policy 2
+
+on property:persist.usb.boot=host
+    write /sys/devices/platform/fe8a0000.usb2-phy/otg_mode host
+
+on property:persist.usb.boot=peripheral
+    write /sys/devices/platform/fe8a0000.usb2-phy/otg_mode peripheral
