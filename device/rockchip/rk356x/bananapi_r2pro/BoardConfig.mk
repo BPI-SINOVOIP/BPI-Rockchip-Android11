@@ -45,6 +45,8 @@ SF_PRIMARY_DISPLAY_ORIENTATION := 0
 TARGET_ROCKCHIP_PCBATEST := false
 BOARD_HAS_FACTORY_TEST := false
 
+BOARD_HAVE_OPENGAPPS := false
+
 # increase super partition size for system, system_ext, vendor, product and odm
 # must be a multiple of its block size(65536)
 #ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)

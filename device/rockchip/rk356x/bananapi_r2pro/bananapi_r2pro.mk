@@ -29,8 +29,10 @@ $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-he
 $(call inherit-product-if-exists, vendor/bananapi/apps/apps.mk)
 
 # opengapps, github.com/opengapps/aosp_build
+ifeq ($(strip $(BOARD_HAVE_OPENGAPPS)), true)
 GAPPS_VARIANT := pico
 $(call inherit-product-if-exists, vendor/opengapps/build/opengapps-packages.mk)
+endif
 
 # copy input keylayout and device config
 PRODUCT_COPY_FILES += \
