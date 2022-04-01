@@ -102,6 +102,8 @@ KERNEL_ARCH=`get_build_var PRODUCT_KERNEL_ARCH`
 KERNEL_DEFCONFIG=`get_build_var PRODUCT_KERNEL_CONFIG`
 if [ "$KERNEL_DTS" = "" ] ; then
 KERNEL_DTS=`get_build_var PRODUCT_KERNEL_DTS`
+else
+KERNEL_DTS=${KERNEL_DTS}.img
 fi
 echo "-------------------KERNEL_DTS:$KERNEL_DTS"
 PACK_TOOL_DIR=RKTools/linux/Linux_Pack_Firmware
@@ -134,11 +136,7 @@ fi
 # build kernel
 if [ "$BUILD_KERNEL" = true ] ; then
 echo "Start build kernel"
-if [[ $TARGET_PRODUCT =~ "bananapi_r2pro" ]]; then
 cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS -j$BUILD_JOBS && cd -
-else
-cd kernel && make clean && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DEFCONFIG && make $ADDON_ARGS ARCH=$KERNEL_ARCH $KERNEL_DTS.img -j$BUILD_JOBS && cd -
-fi
 if [ $? -eq 0 ]; then
     echo "Build kernel ok!"
 else

@@ -204,6 +204,9 @@ DTBS := rk3568-bananapi-*.dtb
 bananapi-r2pro-dtbs: dtbs kernel.img $(LOGO) $(LOGO_KERNEL)
 	$(Q)$(srctree)/scripts/mkimg --dtb $(DTBS) --keep-dtb-name
 PHONY += bananapi-r2pro-dtbs
+
+%.img: rockchip/%.dtb kernel.img $(LOGO) $(LOGO_KERNEL)
+	$(Q)$(srctree)/scripts/mkimg --dtb $*.dtb --keep-dtb-name
 else
 %.img: rockchip/%.dtb kernel.img $(LOGO) $(LOGO_KERNEL)
 	$(Q)$(srctree)/scripts/mkimg --dtb $*.dtb
