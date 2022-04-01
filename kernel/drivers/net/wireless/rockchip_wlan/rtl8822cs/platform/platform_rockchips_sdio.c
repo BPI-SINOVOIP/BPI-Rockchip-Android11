@@ -40,8 +40,10 @@ int platform_wifi_power_on(void)
 	msleep(100);
 	rockchip_wifi_set_carddetect(1);
 
+#ifdef CONFIG_GPIO_WAKEUP
 	oob_irq = rockchip_wifi_get_oob_irq();
 	RTW_PRINT("get oob_irq=%d\n", oob_irq);
+#endif
 
 	return ret;
 }
