@@ -111,7 +111,7 @@ static int hym8563_rtc_read_time(struct device *dev, struct rtc_time *tm)
 	tm->tm_mon = bcd2bin(buf[5] & HYM8563_MONTH_MASK) - 1; /* 0 = Jan */
 	tm->tm_year = bcd2bin(buf[6]) + 100;
 
-	dev_info(&client->dev, "%4d-%02d-%02d(%d) %02d:%02d:%02d\n",
+	dev_info(&client->dev, "read_time:%4d-%02d-%02d(%d) %02d:%02d:%02d\n",
 		1900 + tm->tm_year, tm->tm_mon + 1, tm->tm_mday, tm->tm_wday,
 		tm->tm_hour, tm->tm_min, tm->tm_sec);
 
@@ -124,7 +124,7 @@ static int hym8563_rtc_set_time(struct device *dev, struct rtc_time *tm)
 	u8 buf[7];
 	int ret;
 
-	dev_info(&client->dev, "%4d-%02d-%02d(%d) %02d:%02d:%02d\n",
+	dev_info(&client->dev, "set_time:%4d-%02d-%02d(%d) %02d:%02d:%02d\n",
 		1900 + tm->tm_year, tm->tm_mon + 1, tm->tm_mday, tm->tm_wday,
 		tm->tm_hour, tm->tm_min, tm->tm_sec);
 
@@ -228,7 +228,7 @@ static int hym8563_rtc_set_alarm(struct device *dev, struct rtc_wkalrm *alm)
 	u8 buf[4];
 	int ret;
 
-	dev_info(&client->dev, "%4d-%02d-%02d(%d) %02d:%02d:%02d enabled %d\n",
+	dev_info(&client->dev, "set_alarm:%4d-%02d-%02d(%d) %02d:%02d:%02d enabled %d\n",
 		1900 + alm_tm->tm_year, alm_tm->tm_mon + 1, alm_tm->tm_mday, alm_tm->tm_wday,
 		alm_tm->tm_hour, alm_tm->tm_min, alm_tm->tm_sec, alm->enabled);
 

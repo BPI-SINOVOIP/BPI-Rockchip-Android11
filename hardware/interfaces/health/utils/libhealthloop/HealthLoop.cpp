@@ -181,7 +181,12 @@ void HealthLoop::WakeAlarmEvent(uint32_t /*epevents*/) {
 }
 
 void HealthLoop::WakeAlarmInit(void) {
+#if BOARD_NO_BATTERY
+    /* bpi, disable wakeup because no hw battery and ac always */
+    wakealarm_fd_.reset(timerfd_create(CLOCK_BOOTTIME, TFD_NONBLOCK));
+#else
     wakealarm_fd_.reset(timerfd_create(CLOCK_BOOTTIME_ALARM, TFD_NONBLOCK));
+#endif
     if (wakealarm_fd_ == -1) {
         KLOG_ERROR(LOG_TAG, "wakealarm_init: timerfd_create failed\n");
         return;

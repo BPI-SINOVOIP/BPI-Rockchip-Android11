@@ -13,6 +13,7 @@
 // limitations under the License.
 
 cc_library_static {
+    defaults: ["cc_libhealthloop_defaults"],
     name: "libhealthloop",
     vendor_available: true,
     recovery_available: true,
@@ -32,4 +33,25 @@ cc_library_static {
     export_include_dirs: [
         "include",
     ],
+}
+
+bootstrap_go_package {
+    name: "soong-libhealthloop",
+    pkgPath: "android/soong/libhealthloop",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+          "Android.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+cc_libhealthloop {
+    name: "cc_libhealthloop_defaults"
 }
