@@ -149,6 +149,9 @@ if [ "$KERNEL_ARCH" = "arm64" ]; then
 else
     KERNEL_DEBUG=kernel/arch/arm/boot/zImage
 fi
+if [ ! -d "$OUT" ]; then
+    mkdir -p $OUT
+fi
 cp -rf $KERNEL_DEBUG $OUT/kernel
 fi
 
