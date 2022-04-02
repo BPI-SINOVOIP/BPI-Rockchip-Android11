@@ -51,7 +51,7 @@ LOCAL_CFLAGS += -DLIBTINYALSA_ENABLE_VNDK_EXT
 ifneq ($(filter box atv, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 LOCAL_CFLAGS += -DBOX_HAL
 endif
-ifeq ($(strip $(TARGET_PRODUCT)),bananapi_r2pro)
+ifneq ($(filter bananapi_%, $(TARGET_PRODUCT)), )
 LOCAL_CFLAGS += -DBOX_HAL
 endif
 ifeq ($(strip $(BOARD_USE_DRM)),true)

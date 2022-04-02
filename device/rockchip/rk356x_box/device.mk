@@ -5,6 +5,9 @@ PRODUCT_PACKAGES += \
     displayd \
     libion
 
+PRODUCT_PACKAGES += \
+    RockchipPinnerService
+
 # Disable partial updates
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.use_partial_updates=false
@@ -12,8 +15,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 BOARD_SEPOLICY_DIRS += vendor/rockchip/hardware/interfaces/neuralnetworks/1.0/default/sepolicy
 PRODUCT_PACKAGES += \
     public.libraries-rockchip \
-    librknnhal_bridge.rockchip \
     librknn_api_android \
+    rknn_server \
+    librknnhal_bridge.rockchip \
     rockchip.hardware.neuralnetworks@1.0-impl \
     rockchip.hardware.neuralnetworks@1.0-service
 
@@ -41,8 +45,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.rk356x.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rk356x.rc \
     $(LOCAL_PATH)/wake_lock_filter.xml:system/etc/wake_lock_filter.xml \
     $(LOCAL_PATH)/package_performance.xml:$(TARGET_COPY_OUT_ODM)/etc/package_performance.xml \
-    $(TARGET_DEVICE_DIR)/media_profiles_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    $(LOCAL_PATH)/etc/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
+    $(TARGET_DEVICE_DIR)/media_profiles_default.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml\
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml
@@ -61,42 +64,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
 PRODUCT_PROPERTY_OVERRIDES += \
-			      ro.product.ota.host = 192.168.1.1:8888 \
+    ro.product.ota.host = www.rockchip.com:2300 \
     ro.vendor.sdkversion = $(CURRENT_SDK_VERSION) \
     vendor.gralloc.disable_afbc = 0
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/public.libraries.txt:vendor/etc/public.libraries.txt
-
-TARGET_BOARD_CONCISE_RESOLUTION := false
-# remove some resolution which are not commonly used
-ifeq ($(TARGET_BOARD_CONCISE_RESOLUTION),true)
-PRODUCT_COPY_FILES += \
-    device/rockchip/rk356x_box/etc/resolution_white.xml:/system/usr/share/resolution_white.xml
-endif
-
-#add for camera aiq2.0
-#
-PRODUCT_PACKAGES += \
-       rkaiq_tool_server \
-       rkaiq_3A_server
-PRODUCT_COPY_FILES += \
-       external/camera_engine_rkaiq/rkisp2x_tuner/reset_camera.sh:$(TARGET_COPY_OUT_VENDOR)/etc/camera/reset_camera.sh
-
-# default enalbe mipi camera for box, noeed disable please
-TARGET_BOARD_USE_MIPI_CAMEAR := true
-
-# for box mipi camera
-ifeq ($(TARGET_BOARD_USE_MIPI_CAMEAR),true)
-CAMERA_ETC_PATH := $(TOP)/hardware/rockchip/camera/etc
-IQ_FILES_PATH := $(TOP)/external/camera_engine_rkaiq/iqfiles
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/etc/camera/hardware/rockchip/camera/etc/camera/camera3_profiles_rk356x.xml:$(TARGET_COPY_OUT_VENDOR)/etc/camera/camera3_profiles.xml \
-	$(call find-copy-subdir-files,*,$(CAMERA_ETC_PATH)/firmware,$(TARGET_COPY_OUT_VENDOR)/firmware) \
-	$(call find-copy-subdir-files,*,$(CAMERA_ETC_PATH)/camera,$(TARGET_COPY_OUT_VENDOR)/etc/camera) \
-	$(call find-copy-subdir-files,*,$(IQ_FILES_PATH)/,$(TARGET_COPY_OUT_VENDOR)/etc/camera/rkisp2/) \
-	$(call find-copy-subdir-files,*,$(LOCAL_PATH)/etc/camera/external/camera_engine_rkaiq/iqfiles,$(TARGET_COPY_OUT_VENDOR)/etc/camera/rkisp2/)
-endif
 
 #
 # add Rockchip properties here
@@ -124,8 +97,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.build.shutdown_timeout=6 \
 	persist.enable_task_snapshots=false \
 	persist.sys.show_color_option=false \
-	persist.bt.power.down=true \
-	ro.wifi.sleep.power.down=true \
-	persist.wifi.sleep.delay.ms=0 \
 	persist.enable_task_snapshots=false \
 	ro.vendor.frameratelock=true
+
+#
+#add for camera aiq2.0
+#
+PRODUCT_PACKAGES += \
+	rkaiq_tool_server \
+	rkaiq_3A_server
+PRODUCT_COPY_FILES += \
+	external/camera_engine_rkaiq/rkisp2x_tuner/reset_camera.sh:$(TARGET_COPY_OUT_VENDOR)/etc/camera/reset_camera.sh

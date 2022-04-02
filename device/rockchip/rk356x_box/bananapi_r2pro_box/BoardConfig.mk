@@ -15,8 +15,7 @@
 #
 include device/rockchip/rk356x_box/CommonBoardConfig.mk
 BUILD_WITH_GO_OPT := false
-
-BOARD_SELINUX_ENFORCING := false
+BOARD_SELINUX_ENFORCING ?= false
 
 # AB image definition
 BOARD_USES_AB_IMAGE := false
@@ -27,6 +26,31 @@ ifeq ($(strip $(BOARD_USES_AB_IMAGE)), true)
     TARGET_RECOVERY_FSTAB := device/rockchip/rk356x_box/bananapi_r2pro_box/recovery.fstab_AB
 endif
 
-PRODUCT_UBOOT_CONFIG := rk3568
-PRODUCT_KERNEL_DTS := rk3568-bananapi-r2pro
-BOARD_GSENSOR_MXC6655XA_SUPPORT := true
+PRODUCT_UBOOT_CONFIG := bananapi_r2pro
+PRODUCT_KERNEL_DTS := bananapi-r2pro-hdmi
+PRODUCT_KERNEL_CONFIG := bananapi_r2pro_defconfig android-11.config
+PRODUCT_KERNEL_DIR := kernel
+
+BOARD_GSENSOR_MXC6655XA_SUPPORT := false
+BOARD_CAMERA_SUPPORT_EXT := true
+BOARD_HS_ETHERNET := true
+BOARD_QUECTEL_RIL := false
+BOARD_HAVE_DONGLE := false
+
+BOARD_MEMTRACK_SUPPORT := true
+
+BOARD_CUSTOM_BT_CONFIG := $(TARGET_DEVICE_DIR)/vnd_$(TARGET_DEVICE).txt
+
+# primary panel orientation
+SF_PRIMARY_DISPLAY_ORIENTATION := 0
+
+TARGET_ROCKCHIP_PCBATEST := false
+BOARD_HAS_FACTORY_TEST := false
+
+BOARD_HAVE_OPENGAPPS := false
+
+# increase super partition size for system, system_ext, vendor, product and odm
+# must be a multiple of its block size(65536)
+#ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
+#    BOARD_SUPER_PARTITION_SIZE := 5169676288
+#endif

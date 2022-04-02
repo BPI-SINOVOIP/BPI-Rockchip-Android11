@@ -7,11 +7,12 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_RTK := true
 BOARD_HAVE_BLUETOOTH_RTK_COEX := true
 
+# bpi, use specific configurations in target device dir
+ifeq ($(filter bananapi_%, $(TARGET_PRODUCT)), )
 ifneq ($(filter atv box, $(strip $(TARGET_BOARD_PLATFORM_PRODUCT))), )
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(CUR_PATH)/bluetooth
 endif
 
-ifneq ($(strip $(TARGET_PRODUCT)),bananapi_r2pro)
 ifneq ($(filter rk3328, $(strip $(TARGET_BOARD_PLATFORM))), )
 PRODUCT_COPY_FILES += \
         $(CUR_PATH)/vendor/etc/bluetooth/rtkbt_S0.conf:vendor/etc/bluetooth/rtkbt.conf

@@ -24,7 +24,6 @@ PRODUCT_PACKAGES += \
 $(call inherit-product-if-exists, vendor/rockchip/common/npu/npu.mk)
 
 BOARD_SEPOLICY_DIRS += device/rockchip/rk356x/sepolicy_vendor
-TARGET_SYSTEM_PROP += device/rockchip/rk356x/rk356x.prop
 # enable this for support f2fs with data partion
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
@@ -75,27 +74,28 @@ PRODUCT_COPY_FILES += \
 # add Rockchip properties here
 #
 PRODUCT_PROPERTY_OVERRIDES += \
-                ro.ril.ecclist=112,911 \
-                ro.opengles.version=196610 \
-                wifi.interface=wlan0 \
-                ro.audio.monitorOrientation=true \
-                debug.nfc.fw_download=false \
-                debug.nfc.se=false \
-                vendor.hwc.compose_policy=1 \
-                sys.wallpaper.rgb565=0 \
-                sf.power.control=2073600 \
-                sys.rkadb.root=0 \
-                ro.sf.fakerotation=false \
-                ro.tether.denied=false \
-                sys.resolution.changed=false \
-                ro.default.size=100 \
-                ro.product.usbfactory=rockchip_usb \
-                wifi.supplicant_scan_interval=15 \
-                ro.factory.tool=0 \
-                ro.kernel.android.checkjni=0 \
-                ro.build.shutdown_timeout=6 \
-                persist.enable_task_snapshots=false \
-                ro.vendor.frameratelock=true
+	ro.vendor.rk_sdk=1 \
+	ro.ril.ecclist=112,911 \
+	ro.opengles.version=196610 \
+	wifi.interface=wlan0 \
+	ro.audio.monitorOrientation=true \
+	debug.nfc.fw_download=false \
+	debug.nfc.se=false \
+	vendor.hwc.compose_policy=1 \
+	sys.wallpaper.rgb565=0 \
+	sf.power.control=2073600 \
+	sys.rkadb.root=0 \
+	ro.sf.fakerotation=false \
+	ro.tether.denied=false \
+	sys.resolution.changed=false \
+	ro.default.size=100 \
+	ro.product.usbfactory=rockchip_usb \
+	wifi.supplicant_scan_interval=15 \
+	ro.factory.tool=0 \
+	ro.kernel.android.checkjni=0 \
+	ro.build.shutdown_timeout=6 \
+	persist.enable_task_snapshots=false \
+	ro.vendor.frameratelock=true
 
 #
 #add for camera aiq2.0

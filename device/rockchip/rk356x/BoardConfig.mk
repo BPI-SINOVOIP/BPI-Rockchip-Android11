@@ -2,7 +2,7 @@
 # Copyright (c) 2020 Rockchip Electronics Co., Ltd
 #
 
-CURRENT_SDK_VERSION := rk356x_ANDROID10.0_MID_V1.0
+CURRENT_SDK_VERSION := rk356x_ANDROID11.0_MID_rkr11
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a

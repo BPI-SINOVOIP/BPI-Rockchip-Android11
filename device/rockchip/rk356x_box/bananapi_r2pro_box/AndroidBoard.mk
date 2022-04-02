@@ -2,6 +2,6 @@
 -include device/rockchip/common/build/rockchip/RebuildFstab.mk
 
 # generate dtbo image for device
--include device/rockchip/common/build/rockchip/RebuildDtboImg.mk
+-include device/rockchip/common/build/rockchip/RebuildMultiDtboImg.mk
 # generate parameter.txt for device
 -include device/rockchip/common/build/rockchip/RebuildParameter.mk

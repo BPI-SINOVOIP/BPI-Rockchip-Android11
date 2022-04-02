@@ -62,6 +62,10 @@
 
     <!-- Package of the unbundled tv remote service which can connect to tv remote provider -->
     <string translatable="false" name="config_tvRemoteServicePackage">com.google.android.tv.remote.service</string>
+
+    <!-- Shutdown if the thermal_zone0 temperature exceeds (this value * 0.1) Celsius. -->
+    <integer name="config_shutdownBatteryTemperature">1150</integer>
+
     <string-array translatable="false" name="config_globalActionsList">
         <item>power</item>
         <item>restart</item>

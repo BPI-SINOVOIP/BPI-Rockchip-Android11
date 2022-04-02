@@ -34,7 +34,8 @@ func globalDefaults(ctx android.BaseContext) ([]string) {
     var cflags []string
     fmt.Println("TARGET_PRODUCT:",ctx.AConfig().Getenv("TARGET_PRODUCT"))
 
-    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_PRODUCT"),"bananapi_r2pro")){
+    if (strings.EqualFold(ctx.AConfig().Getenv("TARGET_PRODUCT"),"bananapi_r2pro") ||
+	strings.EqualFold(ctx.AConfig().Getenv("TARGET_PRODUCT"),"bananapi_r2pro_box")){
         cflags = append(cflags,"-DBOARD_NO_BATTERY=1")
     }
 

@@ -14,11 +14,10 @@
 # limitations under the License.
 #
 
-TARGET_BOARD_PLATFORM_PRODUCT := box
-
 # First lunching is R, api_level is 30
 PRODUCT_SHIPPING_API_LEVEL := 30
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
+DTBO_DEVICETREE := dt-overlay i2c5 uart0 uart0_cts_rts uart7 uart9 spi3
 PRODUCT_SDMMC_DEVICE := fe2b0000.dwmmc
 
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk
@@ -27,10 +26,46 @@ include device/rockchip/common/BoardConfig.mk
 $(call inherit-product, device/rockchip/rk356x_box/device.mk)
 $(call inherit-product, device/rockchip/common/device.mk)
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product-if-exists, vendor/bananapi/apps/apps.mk)
 
-#DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/../overlay
+# opengapps, github.com/opengapps/aosp_build
+ifeq ($(strip $(BOARD_HAVE_OPENGAPPS)), true)
+GAPPS_VARIANT := pico
+$(call inherit-product-if-exists, vendor/opengapps/build/opengapps-packages.mk)
+endif
+
+# copy input keylayout and device config
+PRODUCT_COPY_FILES += \
+	device/rockchip/rk356x_box/remote_config/fdd70030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fdd70030_pwm.kl \
+	device/rockchip/common/adc-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/adc-keys.kl
+
+# update realtek bluetooth configs
+ifeq ($(strip $(BOARD_HAVE_BLUETOOTH_RTK)), true)
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/rtkbt.conf:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth/rtkbt.conf
+endif
+
+#For RK3568 EC20
+ifeq ($(strip $(BOARD_QUECTEL_RIL)),true)
+PRODUCT_PACKAGES += rild
+
+PRODUCT_COPY_FILES += \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/libreference-ril.so:vendor/lib64/libquectel-ril.so \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/chat:system/bin/chat \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/ip-up:system/bin/ip-up \
+	vendor/bananapi/modem/libquectel-ril/arm64-v8a/ip-down:system/bin/ip-down \
+	vendor/bananapi/modem/apns-conf.xml:system/etc/apns-conf.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.telephony.default_network=9 \
+	rild.libpath=/vendor/lib64/libquectel-ril.so \
+	rild.libargs=-d /dev/ttyUSB0
+
+DEVICE_MANIFEST_FILE += vendor/bananapi/modem/manifest.xml
+endif
+
+PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk356x_box/bananapi_r2pro_box/overlay
 DEVICE_MANIFEST_FILE := device/rockchip/rk356x_box/bananapi_r2pro_box/manifest.xml
-
 PRODUCT_FSTAB_TEMPLATE := device/rockchip/rk356x_box/fstab_box.in
 
 PRODUCT_CHARACTERISTICS := tv
@@ -41,20 +76,32 @@ PRODUCT_BRAND := Bananapi
 PRODUCT_MODEL := bananapi_r2pro_box
 PRODUCT_MANUFACTURER := Sinovoip
 PRODUCT_AAPT_PREF_CONFIG := tvdpi
+
+ifeq ($(BOARD_HAS_FACTORY_TEST),true)
+PRODUCT_LOCALES := zh_CN en_US
+endif
+
 #
 ## add Rockchip properties
 #
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=213
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.sf.lcd_density=213 \
+	ro.wifi.sleep.power.down=true \
+	persist.wifi.sleep.delay.ms=0 \
+	persist.bt.power.down=true \
+	persist.usb.show=1 \
+	persist.usb.boot=host \
+	ro.no_battery_thermal_temp=true
 
 # TV Input HAL
 PRODUCT_PACKAGES += \
-    android.hardware.tv.input@1.0-impl
+	android.hardware.tv.input@1.0-impl
 
 # Display
 TARGET_BASE_PARAMETER_IMAGE := device/rockchip/rk356x_box/etc/baseparameter_auto.img
 
 # Disable bluetooth because of continuous driver crashes
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
+#PRODUCT_DEFAULT_PROPERTY_OVERRIDES += config.disable_bluetooth=true
 
 # tmp compile needed
 BOARD_WITH_RKTOOLBOX := false
@@ -63,75 +110,63 @@ BOARD_WITH_RKTOOLBOX := false
 PRODUCT_USE_PREBUILT_GTVS := no
 BUILD_WITH_GOOGLE_FRP := false
 
-BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M,logo:16M
-
-# Get the long list of APNs
-PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/apns-full-conf.xml:system/etc/apns-conf.xml
-PRODUCT_COPY_FILES += vendor/rockchip/common/phone/etc/spn-conf.xml:system/etc/spn-conf.xml
-
-PRODUCT_PACKAGES += \
-    RKTvLauncher \
-    libcrypto_vendor.vendor \
-    displayd \
-    libion \
-    MediaCenter \
-    RockchipPinnerService
-
-PRODUCT_PACKAGES += \
-    android.hardware.memtrack@1.0-service \
-    android.hardware.memtrack@1.0-impl \
-    memtrack.$(TARGET_BOARD_PLATFORM)
-
-PRODUCT_PACKAGE_OVERLAYS += device/rockchip/rk356x_box/bananapi_r2pro_box/overlay
-
 # GTVS add the Client ID (provided by Google)
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.clientidbase=android-rockchip-tv
+	ro.com.google.clientidbase=android-rockchip-tv
 
-# copy input keylayout and device config
-PRODUCT_COPY_FILES += \
-    device/rockchip/rk356x_box/remote_config/fdd70030_pwm.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fdd70030_pwm.kl \
+BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M,logo:16M
 
-# Vendor seccomp policy files for media components:
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
-
-PRODUCT_COPY_FILES += \
-    frameworks/av/media/libeffects/data/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-
-BOARD_HS_ETHERNET := true
+PRODUCT_PACKAGES += \
+	RKTvLauncher \
+	libcrypto_vendor.vendor \
+	MediaCenter
 
 #
 #add Rockchip properties here
 #
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.machinetype=356x_box \
-    wifi.interface=wlan0 \
-    ro.audio.monitorOrientation=true \
-    persist.vendor.rk_vulkan=true \
-    sf.power.control=2073600 \
-    ro.tether.denied=false \
-    sys.resolution.changed=false \
-    ro.product.usbfactory=rockchip_usb \
-    wifi.supplicant_scan_interval=15 \
-    ro.kernel.android.checkjni=0 \
-    ro.vendor.nrdp.modelgroup=NEXUSPLAYERFUGU \
-    vendor.hwc.device.primary=HDMI-A,TV \
-    persist.vendor.framebuffer.main=1920x1080@60 \
-    ro.vendor.sdkversion=RK356x_ANDROID11.0_BOX_V1.0.8 \
+	persist.sys.machinetype=356x_box \
+	wifi.interface=wlan0 \
+	ro.audio.monitorOrientation=true \
+	persist.vendor.rk_vulkan=true \
+	sf.power.control=2073600 \
+	ro.tether.denied=false \
+	sys.resolution.changed=false \
+	ro.product.usbfactory=rockchip_usb \
+	wifi.supplicant_scan_interval=15 \
+	ro.kernel.android.checkjni=0 \
+	ro.vendor.nrdp.modelgroup=NEXUSPLAYERFUGU \
+	vendor.hwc.device.primary=HDMI-A,TV \
+	persist.vendor.framebuffer.main=1920x1080@60 \
+	ro.vendor.sdkversion=RK356x_ANDROID11.0_BOX_V1.0.8 \
 
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072 \
-    ro.hwui.drop_shadow_cache_size=4.0 \
-    ro.hwui.gradient_cache_size=0.8 \
-    ro.hwui.layer_cache_size=32.0 \
-    ro.hwui.path_cache_size=24.0 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=512 \
-    ro.hwui.texture_cache_flushrate=0.4 \
-    ro.hwui.texture_cache_size=72.0 \
-    debug.hwui.use_partial_updates=false
+	ro.opengles.version=131072 \
+	ro.hwui.drop_shadow_cache_size=4.0 \
+	ro.hwui.gradient_cache_size=0.8 \
+	ro.hwui.layer_cache_size=32.0 \
+	ro.hwui.path_cache_size=24.0 \
+	ro.hwui.text_large_cache_width=2048 \
+	ro.hwui.text_large_cache_height=1024 \
+	ro.hwui.text_small_cache_width=1024 \
+	ro.hwui.text_small_cache_height=512 \
+	ro.hwui.texture_cache_flushrate=0.4 \
+	ro.hwui.texture_cache_size=72.0 \
+	debug.hwui.use_partial_updates=false
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.net.eth_primary=eth0 \
+	ro.net.eth_secondary=eth1
+
+# 0-dhcp, 1-static
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.net.eth1.mode=1 \
+	persist.net.eth1.staticinfo=172.16.1.1,24,172.16.1.1,114.114.114.114,8.8.8.8 \
+	persist.dhcpserver.enable=1 \
+	persist.dhcpserver.start=172.16.1.100 \
+	persist.dhcpserver.end=172.16.1.150
+
+# force app landscape
+#PRODUCT_PROPERTY_OVERRIDES += \
+#	persist.sys.app.rotation=force_land
