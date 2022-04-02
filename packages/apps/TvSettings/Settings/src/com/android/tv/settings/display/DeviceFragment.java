@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.DisplayManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import androidx.leanback.preference.LeanbackPreferenceFragment;
 import androidx.preference.ListPreference;
 import androidx.preference.CheckBoxPreference;
@@ -55,7 +56,12 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
     public static final String KEY_ZOOM = "zoom";
     public static final String KEY_FIXED_ROTATION = "fixed_rotation";
     public static final String KEY_ROTATION = "rotation";
+    public static final String KEY_DENSITY = "density";
     public static final String KEY_ADVANCED_SETTINGS = "advanced_settings";
+
+    private static final int DEFAULT_DISPLAY = 0;
+    private static final int DEFAULT_DENSITY = 213;
+
     protected PreferenceScreen mPreferenceScreen;
     /**
      * 分辨率设置
@@ -77,6 +83,10 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
      * 屏幕旋转设置
      */
     protected ListPreference mRotationPreference;
+    /**
+     * 屏幕density设置
+     */
+    protected ListPreference mDensityPreference;
     /**
      * 高级设置
      */
@@ -129,6 +139,7 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
         updateResolutionValue();
         updateColorValue();
         updateRotation();
+        updateDensity();
     }
 
 
@@ -158,6 +169,7 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
         mZoomPreference = findPreference(KEY_ZOOM);
         mFixedRotationPreference = (CheckBoxPreference) findPreference(KEY_FIXED_ROTATION);
         mRotationPreference = (ListPreference) findPreference(KEY_ROTATION);
+        mDensityPreference = (ListPreference) findPreference(KEY_DENSITY);
         mTextTitle = (TextView) getActivity().findViewById(androidx.preference.R.id.decor_title);
         if (!mIsUseDisplayd) {
             mDisplayInfo = getDisplayInfo();
@@ -181,6 +193,8 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
             mColorPreference.setEntries(mDisplayInfo.getColors());
             mColorPreference.setEntryValues(mDisplayInfo.getColors());
         }
+        //mDensityPreference.setEntries(mDisplayInfo.getDensity());
+        //mDensityPreference.setEntryValues(mDisplayInfo.getDensity());
         mTextTitle.setText(mDisplayInfo.getDescription());
     }
 
@@ -192,6 +206,7 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
 
         mZoomPreference.setOnPreferenceClickListener(this);
         mRotationPreference.setOnPreferenceChangeListener(this);
+        mDensityPreference.setOnPreferenceChangeListener(this);
         mFixedRotationPreference.setOnPreferenceClickListener(this);
         mAdvancedSettingsPreference.setOnPreferenceClickListener(this);
     }
@@ -227,6 +242,11 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
+    }
+
+    public void updateDensity() {
+        int currentDensity = getDensity();
+        mDensityPreference.setValue(String.valueOf(currentDensity));
     }
 
     public void updateColorValue() {
@@ -280,6 +300,33 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
 
     }
 
+    public void setDensity(int density) {
+        Log.d(TAG, "setDensity, density = " + density);
+        try {
+            wm.setForcedDisplayDensityForUser(DEFAULT_DISPLAY, density, UserHandle.USER_CURRENT);
+        } catch (Exception e) {
+            Log.d(TAG, "setDensity, density = " + density);
+        }
+    }
+
+    public int getDensity() {
+        try {
+            int initialDensity = wm.getInitialDisplayDensity(DEFAULT_DISPLAY);
+            int baseDensity = wm.getBaseDisplayDensity(DEFAULT_DISPLAY);
+            Log.d(TAG, "getDensity,initialDensity=" + initialDensity + " baseDensity=" + baseDensity);
+
+            if (initialDensity != baseDensity) {
+                return baseDensity;
+            } else {
+                return initialDensity;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "getDensity failed");
+        }
+
+        return DEFAULT_DENSITY;
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object obj) {
         Log.i(TAG, "onPreferenceChange:" + obj);
@@ -309,6 +356,9 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
                   } catch (Exception e) {
                                 Log.e(TAG, "freezeRotation error");
                   }
+        } else if (preference == mDensityPreference) {
+            int value = Integer.parseInt((String) obj);
+            setDensity(value);
         }
         return true;
     }
@@ -346,7 +396,6 @@ public class DeviceFragment extends LeanbackPreferenceFragment implements Prefer
         }
         return true;
     }
-
 
     @SuppressLint("NewApi")
     protected void showConfirmSetModeDialog() {

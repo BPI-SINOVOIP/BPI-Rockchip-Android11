@@ -44,6 +44,12 @@
         android:entries="@array/hdmi_rotation_entries"
         android:entryValues="@array/hdmi_rotation_values"/>
 
+    <ListPreference
+        android:key="density"
+        android:title="@string/density"
+        android:entries="@array/density_entries"
+        android:entryValues="@array/density_values"/>
+
     <Preference
         android:key="advanced_settings"
         android:title="@string/advance_settings" />

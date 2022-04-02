@@ -26,6 +26,7 @@ public class UsbModeSettings {
     // 0 otg 1 host 2 peripheral
     public static final String HOST_MODE = new String("host");
     public static final String SLAVE_MODE = new String("otg");
+    public static final String USB_BOOT_PRO = "persist.usb.boot";
     public static final String PROP_FAKE_DATA_ROLE = "persist.fake_data_role";
     private static final String FILE_NAME_RK3399 = "/sys/kernel/debug/usb@fe800000/rk_usb_force_mode";
     private static final String FILE_NAME_RK3328 = "/sys/devices/platform/ff450000.syscon/ff450000.syscon:usb2-phy@100/otg_mode";
@@ -152,10 +153,12 @@ public class UsbModeSettings {
                 if (mMode == HOST_MODE) {
                     mStorageManager.disableUsbMassStorage();
                     Log.d("UsbModeSettings", "mStorageManager.disableUsbMassStorage()*******************");
+                    SystemProperties.set(USB_BOOT_PRO, HOST_MODE);
                     Write2File(file, mMode);
                 } else {
                     Write2File(file, mMode);
                     Log.d("UsbModeSettings", "mStorageManager.enableUsbMassStorage()  in *******************");
+                    SystemProperties.set(USB_BOOT_PRO, SLAVE_MODE);
                     mStorageManager.enableUsbMassStorage();
                     Log.d("UsbModeSettings", "mStorageManager.enableUsbMassStorage()   out*******************");
                 }
