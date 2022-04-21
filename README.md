@@ -46,7 +46,7 @@ If bananapi_r2pro target choosen , then
 
 Or bananapi_r2pro_box target choosen, then
 
-    ./build.sh -AUCKu -d rk3568-bananapi-r2pro-hdmi
+    $ ./build.sh -AUCKu -d rk3568-bananapi-r2pro-hdmi
 ----------
 **Flash**
 
