@@ -39,14 +39,14 @@ int get_display_id(void)
 	printf("edp_adc=%d\n", edp_value);
 	printf("lvds_adc=%d\n", lvds_value);
 
-	/* connected: 0-50 */
-	if (IS_RANGE(dsi0_value, 0, 50)) {
-		printf("dsi0 connected\n");
+    /* support dual dsi connect same panel at the same time*/
+	if (IS_RANGE(dsi0_value, 0, 50) || IS_RANGE(dsi1_value, 0, 50)) {
+		printf("800x1280 dsi connected\n");
 		return BANANAPI_R2PRO_LCD0;
 	}
 
-	if (IS_RANGE(dsi1_value, 0, 50)) {
-		printf("dsi1 connected\n");
+	if (IS_RANGE(dsi0_value, 150, 200) || IS_RANGE(dsi1_value, 150, 200)) {
+		printf("1200x1920 dsi connected\n");
 		return BANANAPI_R2PRO_LCD1;
 	}
 
@@ -55,7 +55,7 @@ int get_display_id(void)
 		return BANANAPI_R2PRO_LCD2;
 	}
 
-	if (IS_RANGE(lvds_value, 0, 50)) {
+	if (IS_RANGE(lvds_value, 330, 380)) {
 		printf("lvds connected\n");
 		return BANANAPI_R2PRO_LCD3;
 	}
