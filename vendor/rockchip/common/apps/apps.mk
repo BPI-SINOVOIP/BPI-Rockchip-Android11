@@ -1,5 +1,6 @@
 
-ifneq ($(strip $(TARGET_PRODUCT)), bananapi_r2pro)
+ifeq ($(filter bananapi_%, $(TARGET_PRODUCT)), )
+
 PRODUCT_PACKAGES += \
 	RKUpdateService
 

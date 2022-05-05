@@ -6,6 +6,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-bananapi-r2pro.dtb \
 	rk3568-bananapi-r2pro-lcd0.dtb \
 	rk3568-bananapi-r2pro-lcd1.dtb \
 	rk3568-bananapi-r2pro-lcd2.dtb \
+	rk3568-bananapi-r2pro-lcd3.dtb \
 	rk3568-bananapi-r2pro-lcd-all.dtb
 else
 dtb-$(CONFIG_ARCH_ROCKCHIP) += px30-ad-d6-anx6345.dtb
