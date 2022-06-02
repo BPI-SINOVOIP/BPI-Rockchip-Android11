@@ -357,25 +357,47 @@
 
 &i2c1 {
 	status = "okay";
-	gt9xx: gt9xx@14 {
+	gt9xx: gt9xx@5d {
 		compatible = "goodix,gt9xx";
-		reg = <0x14>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&gt9xx_gpio>;
-		touch-gpio = <&gpio0 RK_PB5 IRQ_TYPE_LEVEL_HIGH>;
+		status = "okay";
+		reg = <0x5d>;
+		vdd_ana-supply = <&vcc3v3_lcd0_n>;
 		reset-gpio = <&gpio0 RK_PB6 GPIO_ACTIVE_HIGH>;
+		irq-gpio = <&gpio0 RK_PB5 GPIO_ACTIVE_HIGH>;
+		rotation = <4>;
 
-		max-x = <800>;
-		max-y = <1280>;
-		cfg_file_num = <0>;
+		/*800x1280, RXT101 panel*/
+		goodix,cfg-group0 = [
+			46 00 05 20 03 05 3D 00 01 0F 1E 0F 50 32 03
+			05 00 00 00 00 00 00 04 18 1A 1E 14 8E 2E 88
+			2C 2A B5 06 00 00 00 22 02 24 00 00 00 00 00
+			00 00 00 00 00 00 0F 46 94 C5 02 07 00 00 04
+			FF 11 00 CA 18 00 9E 20 00 7B 2C 00 63 3C 00
+			63 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+			00 00 00 00 00 00 00 15 14 11 10 0F 0E 0D 0C
+			09 08 07 06 05 04 01 00 FF FF FF FF FF FF FF
+			FF 00 00 00 00 00 00 00 02 04 06 07 08 0A 0C
+			0D 0F 10 11 12 13 19 1B 1C 1E 1F 20 21 22 23
+			24 25 26 27 28 FF FF FF FF 00 00 00 00 00 00
+			00 00 00 00 70 01 ];
 
-		gtp_change_x2y = <1>;
-		gtp_x_reverse = <0>;
-		gtp_y_reverse = <1>;
-
-		tp-size = <89>;
-		tp-supply = <&vcc3v3_lcd1_n>;
-        };
+		/*1200x1920, AML101 panel*/
+		goodix,cfg-group1 = [
+			00 80 07 B0 04 0A 3C 00 01 0A 28 1F 55 32 03
+			05 00 00 00 00 00 00 00 18 1A 1E 14 90 2F AA
+			1E 20 31 0D 00 00 00 22 03 1D 00 00 00 00 00
+			00 00 00 00 00 00 14 2D 94 D5 02 08 00 00 04
+			9A 15 00 8C 19 00 80 1E 00 77 23 00 70 29 00
+			70 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+			00 00 00 00 00 00 00 00 01 04 05 06 07 08 09
+			0C 0D 0E 0F 10 11 14 15 16 17 18 19 00 00 00
+			00 00 00 00 00 00 00 29 28 27 26 25 24 23 22
+			21 20 1F 1E 1C 1B 19 14 13 12 11 10 0F 0E 0D
+			0C 0A 08 07 06 04 02 00 FF 00 00 00 00 00 00
+			00 00 00 00 12 01 ];
+	};
 };
 
 &i2c3 {

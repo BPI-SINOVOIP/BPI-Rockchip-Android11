@@ -365,22 +365,6 @@
 
 &i2c1 {
 	status = "okay";
-	gt9xx: gt9xx@14 {
-		max-x = <1200>;
-		max-y = <1920>;
-		configfile-num = <1>;
-
-		gtp_change_x2y = <1>;
-		gtp_x_reverse = <1>;
-		gtp_y_reverse = <0>;
-
-		/* bpi, ro.surface_flinger.primary_display_orientation=ORIENTATION_90 */
-		/*gtp_change_x2y = <0>;
-		gtp_x_reverse = <0>;
-		gtp_y_reverse = <0>;*/
-
-		tp-supply = <&vcc3v3_lcd0_n>;
-	};
 };
 
 /* dual dsi, one vp */
