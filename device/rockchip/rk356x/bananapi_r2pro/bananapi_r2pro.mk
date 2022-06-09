@@ -17,7 +17,7 @@
 # First lunching is R, api_level is 30
 PRODUCT_SHIPPING_API_LEVEL := 30
 PRODUCT_DTBO_TEMPLATE := $(LOCAL_PATH)/dt-overlay.in
-DTBO_DEVICETREE := dt-overlay i2c5 uart0 uart0_cts_rts uart7 uart9 spi3
+DTBO_DEVICETREE := dt-overlay i2c5 uart0 uart0_cts_rts uart5 uart7 uart9 spi3
 PRODUCT_SDMMC_DEVICE := fe2b0000.dwmmc
 
 include device/rockchip/common/build/rockchip/DynamicPartitions.mk

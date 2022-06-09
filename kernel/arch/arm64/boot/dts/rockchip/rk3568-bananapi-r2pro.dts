@@ -47,7 +47,7 @@
 
 	rk_headset: rk-headset {
 		compatible = "rockchip_headset";
-		headset_gpio = <&gpio3 RK_PC2 GPIO_ACTIVE_HIGH>;
+		headset_gpio = <&gpio3 RK_PC1 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&hp_det>;
 		io-channels = <&saradc 2>;
@@ -489,7 +489,7 @@
 
 	headphone {
 		hp_det: hp-det {
-			rockchip,pins = <3 RK_PC2 RK_FUNC_GPIO &pcfg_pull_up>;
+			rockchip,pins = <3 RK_PC1 RK_FUNC_GPIO &pcfg_pull_up>;
 		};
 	};
 
@@ -560,6 +560,12 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart0_xfer>;
 	//pinctrl-0 = <&uart0_xfer &uart0_ctsn &uart0_rtsn>;
+};
+
+&uart5 {
+	status = "disabled";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart5m1_xfer>;
 };
 
 &uart7 {
