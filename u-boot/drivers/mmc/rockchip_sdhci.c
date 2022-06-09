@@ -61,8 +61,7 @@ DECLARE_GLOBAL_DATA_PTR;
 #define DWCMSHC_EMMC_DLL_INC_VALUE	2
 #define DWCMSHC_EMMC_DLL_INC		8
 #define DWCMSHC_EMMC_DLL_DLYENA		BIT(27)
-#define DLL_TXCLK_TAPNUM_DEFAULT	0x8
-#define DLL_TXCLK_TAPNUM_90_DEGREES	0x8
+#define DLL_TXCLK_TAPNUM_DEFAULT	0x10   /*bpi, default tapnum 0x10 for rk3568*/
 #define DLL_STRBIN_TAPNUM_DEFAULT	0x3
 #define DLL_TXCLK_TAPNUM_FROM_SW	BIT(24)
 #define DLL_TXCLK_NO_INVERTER		BIT(29)
@@ -323,7 +322,7 @@ static int dwcmshc_sdhci_emmc_set_clock(struct sdhci_host *host, unsigned int cl
 {
 	struct rockchip_sdhc *priv = container_of(host, struct rockchip_sdhc, host);
 	struct sdhci_data *data = (struct sdhci_data *)dev_get_driver_data(priv->dev);
-	u32 txclk_tapnum = DLL_TXCLK_TAPNUM_90_DEGREES, extra;
+	u32 extra;
 	int timeout = 500, ret;
 
 	ret = rockchip_emmc_set_clock(host, clock);
@@ -354,9 +353,8 @@ static int dwcmshc_sdhci_emmc_set_clock(struct sdhci_host *host, unsigned int cl
 		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_RXCLK);
 
 		extra = DWCMSHC_EMMC_DLL_DLYENA |
-			DLL_TXCLK_TAPNUM_FROM_SW |
-			DLL_TXCLK_NO_INVERTER|
-			txclk_tapnum;
+			DLL_TXCLK_TAPNUM_DEFAULT |
+			DLL_TXCLK_TAPNUM_FROM_SW;
 
 		sdhci_writel(host, extra, DWCMSHC_EMMC_DLL_TXCLK);
 
