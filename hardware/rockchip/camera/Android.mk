@@ -103,13 +103,11 @@ GCSSSRC = common/gcss/graph_query_manager.cpp \
 
 ISP_VERSION := rkisp1
 
-#rk1126 use RKISP2CameraHw
-ifneq (,$(findstring rv1126,$(TARGET_BOARD_PLATFORM)))
+#rk1126,rk356x,rk3588 use RKISP2CameraHw
+ifneq ($(filter rk1126 rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
   ISP_VERSION := rkisp2
 endif
-#rk356x use RKISP2CameraHw
 ifneq (,$(findstring rk356x,$(TARGET_BOARD_PLATFORM)))
-  ISP_VERSION := rkisp2
 ifeq ($(PRODUCT_HAVE_EPTZ),true)
   LOCAL_CFLAGS += -DRK_EPTZ
 endif
@@ -204,7 +202,6 @@ CPPHACKS = \
     -DDUMP_IMAGE \
     -DRKCAMERA_REDEFINE_LOG \
     -DRK_DRM_GRALLOC=1 \
-    -DRK_HW_JPEG_ENCODE \
     -DPLATFORM_SDK_API_VERSION=$(PLATFORM_SDK_VERSION) \
 
 # rk3368 gralloc module from other platforms
@@ -214,6 +211,10 @@ endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3126c)
 LOCAL_CFLAGS += -DTARGET_RK312X
+endif
+
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3588)
+	LOCAL_CFLAGS += -DTARGET_RK3588
 endif
 
 ifeq ($(strip $(Have3AControlLoop)), true)

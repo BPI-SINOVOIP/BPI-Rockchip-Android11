@@ -4,11 +4,11 @@ RGA (Raster Graphic Acceleration Unit)是一个独立的2D硬件加速器，可�
 
 ### 版本说明
 
-**RGA API** 版本: 1.3.1
+**RGA API** 版本: 1.7.2
 
 ### 适用芯片平台
 
-Rockchip RK3066 | RK3188 | RK2926 | RK2928 | RK3026 | RK3028 | RK3128 | Sofia3gr | RK3288 | RK3288w | RK3190 | RK1108 | RK3368 | RK3326 | RK3228 | RK3228H | RK3326 | RK1808 | RV1126 | RV1109 | RK3399 | RK3399pro | RK3566 | RK3568
+Rockchip RK3066 | RK3188 | RK2926 | RK2928 | RK3026 | RK3028 | RK3128 | Sofia3gr | RK3288 | RK3288w | RK3190 | RK1108 | RK3368 | RK3326 | RK3228 | RK3228H | RK3326 | RK1808 | RV1126 | RV1109 | RK3399 | RK3399pro | RK3566 | RK3568 | RK3588
 
 ### 目录说明
 
@@ -35,15 +35,11 @@ Rockchip RK3066 | RK3188 | RK2926 | RK2928 | RK3026 | RK3028 | RK3128 | Sofia3gr
 修改librga源码根目录下的文件**cmake-android.sh**。执行以下操作完成编译：
 
 ```bash
-$ mkdir build
-$ cd build
-$ cp ../cmake-android.sh ./
 $ chmod +x ./cmake-android.sh
 $ ./cmake-android.sh
-$ make
 ```
 
-**[编译选项]**
+​    **[编译选项]**
 
 1. 指定ANDROID_NDK_HOME为NDK开发包的路径
 2. 指定CMAKE_ANDROID为android SDK包中cmake可执行文件的路径
@@ -52,17 +48,14 @@ $ make
 
 * **Cmake (buildroot/debian)**
 
-修改librga源码根目录下的**buildroot.cmake**文件。执行以下操作完成编译:
+修改librga源码根目录下的**buildroot.cmake**文件。执行以下脚本完成编译:
 
 ```bash
-$ mkdir build
-$ cd build
-$ cp ../cmake-linux.sh ./
-$ chmod +x ./cmake-linux.sh
+$ chmod +x ./cmake-android.sh
 $ ./cmake-linux.sh
 ```
 
-**[编译选项]**
+​    **[编译选项]**
 
 1. 指定TOOLCHAIN_HOME为交叉编译工具的路径
 2. 指定CMAKE_C_COMPILER为gcc编译命令的路径
@@ -83,17 +76,13 @@ $ ninja -C build-rga install
 
 * **头文件引用**
 
-  * 调用librga
-
-    include/RockchipRga.h
-
-  * 调用im2d api
+  * C++调用im2d api
 
     im2d_api/im2d.hpp
 
-  * C_API
+  * C调用im2d api
 
-    include/RgaApi.h
+    im2d_api/im2d.h
 
 * **库文件**
 

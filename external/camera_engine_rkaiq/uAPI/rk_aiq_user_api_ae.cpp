@@ -11,7 +11,7 @@
 
 #include "base/xcam_common.h"
 #include "rk_aiq_user_api_ae.h"
-#include "RkAiqHandleInt.h"
+#include "algo_handlers/RkAiqAeHandle.h"
 
 RKAIQ_BEGIN_DECLARE
 

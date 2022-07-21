@@ -58,12 +58,12 @@ const struct format_table_entry format_table[] = {
     { RK_FORMAT_YCbCr_422_SP,       "cbcr422sp" },
     { RK_FORMAT_YCbCr_422_P,        "cbcr422p" },
     { RK_FORMAT_YCbCr_420_SP,       "nv12" },
-    { RK_FORMAT_YCbCr_420_P,        "crcb420p" },
+    { RK_FORMAT_YCbCr_420_P,        "cbcr420p" },
 
     { RK_FORMAT_YCrCb_422_SP,       "crcb422sp" },
     { RK_FORMAT_YCrCb_422_P,        "crcb422p" },
     { RK_FORMAT_YCrCb_420_SP,       "crcb420sp" },
-    { RK_FORMAT_YCrCb_420_P,        "crcb422p" },
+    { RK_FORMAT_YCrCb_420_P,        "crcb420p" },
 
     { RK_FORMAT_BPP1,               "bpp1" },
     { RK_FORMAT_BPP2,               "bpp2" },
@@ -102,6 +102,8 @@ const struct format_table_entry format_table[] = {
     { RK_FORMAT_XBGR_8888,          "xbgr8888" },
     { RK_FORMAT_ABGR_5551,          "abgr5551" },
     { RK_FORMAT_ABGR_4444,          "abgr4444" },
+
+    { RK_FORMAT_RGBA2BPP,           "rgba2bpp" },
 
     { RK_FORMAT_UNKNOWN,            "unknown" }
 };
@@ -167,6 +169,8 @@ float get_bpp_from_format(int format) {
             bpp = 2;
             break;
 #endif
+        case RK_FORMAT_RGBA2BPP:
+            return 0.25;
         case RK_FORMAT_Y4:
             bpp = 0.5;
             break;
@@ -181,11 +185,6 @@ float get_bpp_from_format(int format) {
         case RK_FORMAT_YCbCr_420_P:
         case RK_FORMAT_YCrCb_420_P:
         case RK_FORMAT_YCrCb_420_SP:
-        /* yuyv */
-        case RK_FORMAT_YVYU_420:
-        case RK_FORMAT_VYUY_420:
-        case RK_FORMAT_YUYV_420:
-        case RK_FORMAT_UYVY_420:
             bpp = 1.5;
             break;
         case RK_FORMAT_RGB_565:
@@ -207,6 +206,10 @@ float get_bpp_from_format(int format) {
         case RK_FORMAT_VYUY_422:
         case RK_FORMAT_YUYV_422:
         case RK_FORMAT_UYVY_422:
+        case RK_FORMAT_YVYU_420:
+        case RK_FORMAT_VYUY_420:
+        case RK_FORMAT_YUYV_420:
+        case RK_FORMAT_UYVY_420:
             bpp = 2;
             break;
         /*RK encoder requires alignment of odd multiples of 256.*/
@@ -239,6 +242,90 @@ float get_bpp_from_format(int format) {
     }
 
     return bpp;
+}
+
+int get_perPixel_stride_from_format(int format) {
+    #ifdef LINUX
+    if (!(format & 0xFF00 || format == 0)) {
+        format = RkRgaCompatibleFormat(format);
+    }
+#endif
+
+    switch (format) {
+#ifdef ANDROID
+        case HAL_PIXEL_FORMAT_RGB_565:
+            return (2 * 8);
+        case HAL_PIXEL_FORMAT_RGB_888:
+            return (3 * 8);
+        case HAL_PIXEL_FORMAT_RGBA_8888:
+        case HAL_PIXEL_FORMAT_RGBX_8888:
+        case HAL_PIXEL_FORMAT_BGRA_8888:
+            return  (4 * 8);
+        case HAL_PIXEL_FORMAT_YCrCb_420_SP:
+        case HAL_PIXEL_FORMAT_YCrCb_NV12:
+            return  (1 * 8);
+        case HAL_PIXEL_FORMAT_YCrCb_NV12_10:
+            return  (1 * 10);
+#endif
+        case RK_FORMAT_RGBA2BPP:
+            return 2;
+        case RK_FORMAT_Y4:
+            return  0.5 * 8;
+        case RK_FORMAT_BPP1:
+        case RK_FORMAT_BPP2:
+        case RK_FORMAT_BPP4:
+        case RK_FORMAT_BPP8:
+        case RK_FORMAT_YCbCr_400:
+        case RK_FORMAT_YCbCr_420_SP:
+        case RK_FORMAT_YCbCr_420_P:
+        case RK_FORMAT_YCrCb_420_P:
+        case RK_FORMAT_YCrCb_420_SP:
+        case RK_FORMAT_YCbCr_422_SP:
+        case RK_FORMAT_YCbCr_422_P:
+        case RK_FORMAT_YCrCb_422_SP:
+        case RK_FORMAT_YCrCb_422_P:
+            return  (1 * 8);
+        case RK_FORMAT_YCbCr_420_SP_10B:
+        case RK_FORMAT_YCrCb_420_SP_10B:
+        case RK_FORMAT_YCbCr_422_10b_SP:
+        case RK_FORMAT_YCrCb_422_10b_SP:
+            return  (1 * 10);
+        case RK_FORMAT_RGB_565:
+        case RK_FORMAT_RGBA_5551:
+        case RK_FORMAT_RGBA_4444:
+        case RK_FORMAT_BGR_565:
+        case RK_FORMAT_BGRA_5551:
+        case RK_FORMAT_BGRA_4444:
+        case RK_FORMAT_ARGB_5551:
+        case RK_FORMAT_ARGB_4444:
+        case RK_FORMAT_ABGR_5551:
+        case RK_FORMAT_ABGR_4444:
+        /* yuyv */
+        case RK_FORMAT_YVYU_422:
+        case RK_FORMAT_VYUY_422:
+        case RK_FORMAT_YUYV_422:
+        case RK_FORMAT_UYVY_422:
+        case RK_FORMAT_YVYU_420:
+        case RK_FORMAT_VYUY_420:
+        case RK_FORMAT_YUYV_420:
+        case RK_FORMAT_UYVY_420:
+            return  (2 * 8);
+        case RK_FORMAT_BGR_888:
+        case RK_FORMAT_RGB_888:
+            return  (3 * 8);
+        case RK_FORMAT_RGBA_8888:
+        case RK_FORMAT_RGBX_8888:
+        case RK_FORMAT_BGRA_8888:
+        case RK_FORMAT_BGRX_8888:
+        case RK_FORMAT_ARGB_8888:
+        case RK_FORMAT_XRGB_8888:
+        case RK_FORMAT_ABGR_8888:
+        case RK_FORMAT_XBGR_8888:
+            return  (4 * 8);
+        default:
+            printf("Is unsupport format now, please fix \n");
+            return 0;
+    }
 }
 
 int get_buf_size_by_w_h_f(int w, int h, int f) {
@@ -274,6 +361,33 @@ int get_buf_from_file(void *buf, int f, int sw, int sh, int index) {
     return 0;
 }
 
+int get_buf_from_file_FBC(void *buf, int f, int sw, int sh, int index) {
+#ifdef ANDROID
+    const char *inputFilePath = "/data/in%dw%d-h%d-%s-afbc.bin";
+#endif
+
+#ifdef LINUX
+    const char *inputFilePath = "/usr/data/in%dw%d-h%d-%s-afbc.bin";
+#endif
+
+    char filePath[100];
+    char fstring[30];
+    int ret = 0;
+
+    ret = get_string_by_format(fstring, f);
+    snprintf(filePath, 100, inputFilePath, index, sw, sh, fstring);
+
+    FILE *file = fopen(filePath, "rb");
+    if (!file) {
+        fprintf(stderr, "Could not open %s\n", filePath);
+        return -EINVAL;
+    }
+    fread(buf, get_buf_size_by_w_h_f(sw, sh, f) * 1.5, 1, file);
+    fclose(file);
+
+    return 0;
+}
+
 int output_buf_data_to_file(void *buf, int f, int sw, int sh, int index) {
 #ifdef ANDROID
     const char *outputFilePath = "/data/out%dw%d-h%d-%s.bin";
@@ -300,3 +414,30 @@ int output_buf_data_to_file(void *buf, int f, int sw, int sh, int index) {
     return 0;
 }
 
+int output_buf_data_to_file_FBC(void *buf, int f, int sw, int sh, int index) {
+#ifdef ANDROID
+    const char *outputFilePath = "/data/out%dw%d-h%d-%s-afbc.bin";
+#endif
+
+#ifdef LINUX
+    const char *outputFilePath = "/usr/data/out%dw%d-h%d-%s-afbc.bin";
+#endif
+
+    char filePath[100];
+    char fstring[30];
+    int ret = 0;
+
+    ret = get_string_by_format(fstring, f);
+    snprintf(filePath, 100, outputFilePath, index, sw, sh, fstring);
+
+    FILE *file = fopen(filePath, "wb+");
+    if (!file) {
+        fprintf(stderr, "Could not open %s\n", filePath);
+        return false;
+    } else
+        fprintf(stderr, "open %s and write ok\n", filePath);
+    fwrite(buf, get_buf_size_by_w_h_f(sw, sh, f) * 1.5, 1, file);
+    fclose(file);
+
+    return 0;
+}

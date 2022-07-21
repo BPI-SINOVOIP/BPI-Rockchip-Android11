@@ -19,9 +19,11 @@
 #define _RK_AIQ_USER_API2_ADPCC_H_
 
 //#include "adpcc/rk_aiq_uapi_adpcc_int.h"
-#include "uAPI/rk_aiq_user_api_adpcc.h"
 
+#ifndef RK_AIQ_SYS_CTX_T
+#define RK_AIQ_SYS_CTX_T
 typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
+#endif
 
 RKAIQ_BEGIN_DECLARE
 

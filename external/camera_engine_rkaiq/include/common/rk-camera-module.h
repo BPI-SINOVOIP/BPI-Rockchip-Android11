@@ -9,8 +9,12 @@
 
 #include <linux/types.h>
 
+#include "rk_isp20_hw.h"
+
 #define RKMODULE_API_VERSION		KERNEL_VERSION(0, 1, 0x2)
 
+/* using for rk3588 dual isp unite */
+#define RKMOUDLE_UNITE_EXTEND_PIXEL	128
 /* using for rv1109 and rv1126 */
 #define RKMODULE_EXTEND_LINE		24
 
@@ -27,6 +31,11 @@
 #define RKMODULE_CAMERA_MODULE_FACING	"rockchip,camera-module-facing"
 #define RKMODULE_CAMERA_MODULE_NAME	"rockchip,camera-module-name"
 #define RKMODULE_CAMERA_LENS_NAME	"rockchip,camera-module-lens-name"
+
+#define RKMODULE_CAMERA_SYNC_MODE	"rockchip,camera-module-sync-mode"
+#define RKMODULE_INTERNAL_MASTER_MODE	"internal_master"
+#define RKMODULE_EXTERNAL_MASTER_MODE	"external_master"
+#define RKMODULE_SLAVE_MODE		"slave"
 
 /* BT.656 & BT.1120 multi channel
  * On which channels it can send video data
@@ -106,6 +115,64 @@
 
 #define RKMODULE_GET_SONY_BRL	\
 	_IOR('V', BASE_VIDIOC_PRIVATE + 19, __u32)
+
+#define RKMODULE_GET_CHANNEL_INFO	\
+	_IOWR('V', BASE_VIDIOC_PRIVATE + 20, struct rkmodule_channel_info)
+
+#define RKMODULE_GET_SYNC_MODE       \
+	_IOR('V', BASE_VIDIOC_PRIVATE + 21, __u32)
+
+#define RKMODULE_SET_SYNC_MODE       \
+	_IOW('V', BASE_VIDIOC_PRIVATE + 22, __u32)
+
+#define RKMODULE_SET_MCLK       \
+	_IOW('V', BASE_VIDIOC_PRIVATE + 23, __u32)
+
+#define RKMODULE_SET_LINK_FREQ       \
+	_IOW('V', BASE_VIDIOC_PRIVATE + 24, __s64)
+
+#define RKMODULE_SET_BUS_CONFIG       \
+	_IOW('V', BASE_VIDIOC_PRIVATE + 25, struct rkmodule_bus_config)
+
+#define RKMODULE_GET_BUS_CONFIG       \
+	_IOR('V', BASE_VIDIOC_PRIVATE + 26, struct rkmodule_bus_config)
+
+#define RKMODULE_SET_REGISTER       \
+	_IOW('V', BASE_VIDIOC_PRIVATE + 27, struct rkmodule_reg)
+
+#define RKMODULE_SYNC_I2CDEV       \
+        _IOW('V', BASE_VIDIOC_PRIVATE + 28, __u8)
+
+#define RKMODULE_SYNC_I2CDEV_COMPLETE       \
+        _IOW('V', BASE_VIDIOC_PRIVATE + 29, __u8)
+
+//csi0/csi1 phy支持full/split mode
+enum rkmodule_phy_mode {
+	PHY_FULL_MODE,
+	PHY_SPLIT_01,
+	PHY_SPLIT_23,
+};
+
+struct rkmodule_mipi_lvds_bus {
+	__u32 bus_type;
+	__u32 lanes;
+	__u32 phy_mode;
+};
+
+struct rkmodule_bus_config {
+	union {
+		struct rkmodule_mipi_lvds_bus bus;
+		__u32 reserved[32];
+	};
+} __attribute__ ((packed));
+
+struct rkmodule_reg {
+    __u64 num_regs;
+    __u64 preg_addr;
+    __u64 preg_value;
+    __u64 preg_addr_bytes;
+    __u64 preg_value_bytes;
+} __attribute__ ((packed));
 
 /**
  * struct rkmodule_base_inf - module base information
@@ -286,11 +353,38 @@ struct rkmodule_lsc_cfg {
  * NO_HDR: linear mode
  * HDR_X2: hdr two frame or line mode
  * HDR_X3: hdr three or line mode
+ * HDR_COMPR: linearised and compressed data for hdr
  */
 enum rkmodule_hdr_mode {
 	NO_HDR = 0,
 	HDR_X2 = 5,
 	HDR_X3 = 6,
+	HDR_COMPR,
+};
+
+enum rkmodule_hdr_compr_segment {
+	HDR_COMPR_SEGMENT_4 = 4,
+	HDR_COMPR_SEGMENT_12 = 12,
+	HDR_COMPR_SEGMENT_16 = 16,
+};
+
+/* rkmodule_hdr_compr
+ * linearised and compressed data for hdr: data_src = K * data_compr + XX
+ *
+ * bit: bit of src data, max 20 bit.
+ * segment: linear segment, support 4, 6 or 16.
+ * k_shift: left shift bit of slop amplification factor, 2^k_shift, [0 15].
+ * slope_k: K * 2^k_shift.
+ * data_src_shitf: left shift bit of source data, data_src = 2^data_src_shitf
+ * data_compr: compressed data.
+ */
+struct rkmodule_hdr_compr {
+	enum rkmodule_hdr_compr_segment segment;
+	__u8 bit;
+	__u8 k_shift;
+	__u8 data_src_shitf[HDR_COMPR_SEGMENT_16];
+	__u16 data_compr[HDR_COMPR_SEGMENT_16];
+	__u32 slope_k[HDR_COMPR_SEGMENT_16];
 };
 
 /**
@@ -329,6 +423,7 @@ struct rkmodule_hdr_esp {
 struct rkmodule_hdr_cfg {
 	__u32 hdr_mode;
 	struct rkmodule_hdr_esp esp;
+	struct rkmodule_hdr_compr compr;
 } __attribute__ ((packed));
 
 /* sensor lvds sync code
@@ -498,4 +593,46 @@ struct rkmodule_dcg_ratio {
 	__u32 div_coeff;
 };
 
+struct rkmodule_channel_info {
+	__u32 index;
+	__u32 vc;
+	__u32 width;
+	__u32 height;
+	__u32 bus_fmt;
+	__u32 data_type;
+	__u32 data_bit;
+} __attribute__ ((packed));
+
+/*
+ * link to vicap
+ * linear mode: pad0~pad3 for id0~id3;
+ *
+ * HDR_X2: id0 fiexd to vc0 for long frame
+ *         id1 fixed to vc1 for short frame;
+ *         id2~id3 reserved, can config by PAD2~PAD3
+ *
+ * HDR_X3: id0 fiexd to vc0 for long frame
+ *         id1 fixed to vc1 for middle frame
+ *         id2 fixed to vc2 for short frame;
+ *         id3 reserved, can config by PAD3
+ *
+ * link to isp, the connection relationship is as follows
+ */
+enum rkmodule_max_pad {
+	PAD0, /* link to isp */
+	PAD1, /* link to csi wr0 | hdr x2:L x3:M */
+	PAD2, /* link to csi wr1 | hdr      x3:L */
+	PAD3, /* link to csi wr2 | hdr x2:M x3:S */
+	PAD_MAX,
+};
+
+/*
+ * sensor exposure sync mode
+ */
+enum rkmodule_sync_mode {
+	NO_SYNC_MODE = 0,
+	EXTERNAL_MASTER_MODE,
+	INTERNAL_MASTER_MODE,
+	SLAVE_MODE,
+};
 #endif /* _UAPI_RKMODULE_CAMERA_H */

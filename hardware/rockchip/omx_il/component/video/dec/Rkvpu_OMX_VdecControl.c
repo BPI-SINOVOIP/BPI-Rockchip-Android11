@@ -55,11 +55,6 @@
 #include "vpu_mem_pool.h"
 #include "vpu_mem.h"
 #include "omx_video_global.h"
-#if AVS100
-#include <errno.h>
-#include "drmrga.h"
-#include "RgaApi.h"
-#endif
 #ifdef USE_ANB
 #include "Rockchip_OSAL_Android.h"
 #endif
@@ -877,10 +872,7 @@ OMX_ERRORTYPE Rkvpu_Frame2Outbuf(OMX_COMPONENTTYPE *pOMXComponent, OMX_BUFFERHEA
         OMX_U8 *dst_uv = (OMX_U8 *)(pOutputBuffer->pBuffer + y_size);
         OMX_U8 *src_uv =  (OMX_U8 *)(buff_vir + uv_offset);
         OMX_U32 i = 0, j = 0;
-#if AVS100
-        OMX_U32 srcFormat, dstFormat;
-        srcFormat = dstFormat = HAL_PIXEL_FORMAT_YCrCb_NV12;
-#endif
+
         omx_trace("mWidth = %d mHeight = %d mStride = %d,mSlicHeight %d", mWidth, mHeight, mStride, mSliceHeight);
         pOutputBuffer->nFilledLen = mWidth * mHeight * 3 / 2;
 #if AVS100
@@ -895,21 +887,7 @@ OMX_ERRORTYPE Rkvpu_Frame2Outbuf(OMX_COMPONENTTYPE *pOMXComponent, OMX_BUFFERHEA
         } else {
             OMX_BOOL useRga = (mWidth * mHeight >= 1280 * 720) ? OMX_TRUE : OMX_FALSE;
             if (useRga) {
-                rga_info_t rgasrc;
-                rga_info_t rgadst;
-                memset(&rgasrc, 0, sizeof(rga_info_t));
-                rgasrc.fd = -1;
-                rgasrc.mmuFlag = 1;
-                rgasrc.virAddr = buff_vir;
-
-                memset(&rgadst, 0, sizeof(rga_info_t));
-                rgadst.fd = -1;
-                rgadst.mmuFlag = 1;
-                rgadst.virAddr = pOutputBuffer->pBuffer;
-
-                rga_set_rect(&rgasrc.rect, 0, 0, mWidth, mHeight, mStride, mSliceHeight, srcFormat);
-                rga_set_rect(&rgadst.rect, 0, 0, mWidth, mHeight, mWidth, mHeight, dstFormat);
-                RgaBlit(&rgasrc, &rgadst, NULL);
+                rga_nv12_crop(buff_vir, pOutputBuffer->pBuffer, mWidth, mHeight, mStride, mSliceHeight, pVideoDec->rga_ctx);
             } else {
                 for (i = 0; i < mHeight; i++) {
                     Rockchip_OSAL_Memcpy((char*)pOutputBuffer->pBuffer + i * mWidth, buff_vir + i * mStride, mWidth);

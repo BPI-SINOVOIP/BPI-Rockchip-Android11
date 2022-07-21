@@ -21,37 +21,45 @@
 #include "xcam_log.h"
 
 
-#define LIMIT_VALUE(value,max_value,min_value)      (value > max_value? max_value : value < min_value ? min_value : value)
+/********************also use for dehaze, tmo and drc*******************/
+//for noramlize EnvLv
+#define MAX_ENV_LUMA (65)
+#define MAX_ENV_EXPO (10.0*1.0)
+#define MIN_ENV_LUMA (0)
+#define MIN_ENV_EXPO (30.0*256.0)
+#define MAX_ENV_LV (MAX_ENV_LUMA / MAX_ENV_EXPO)
+#define MIN_ENV_LV (MIN_ENV_LUMA / MIN_ENV_EXPO)
+#define ENVLVMAX     (1.0)
+#define ENVLVMIN     (0.0)
+#define ISOMIN     (50)
+#define ISOMAX     (204800)
+#define BIGMODE     (2560)
+#define FUNCTION_DISABLE (0)
+#define FUNCTION_ENABLE (1)
+#define MOVE_COEF_DEFAULT (0)
+#define SHIFT4BIT(A)         (A*16)
 #define SHIFT6BIT(A)         (A*64)
 #define SHIFT7BIT(A)         (A*128)
+#define SHIFT8BIT(A)         (A*256)
 #define SHIFT10BIT(A)         (A*1024)
 #define SHIFT11BIT(A)         (A*2048)
 #define SHIFT12BIT(A)         (A*4096)
-
+#define SHIFT13BIT(A)         (A*8191)
+#define SHIFT14BIT(A)         (A*16383)
+#define SHIFT15BIT(A)         (A*32767)
+#define LIMIT_VALUE(value,max_value,min_value)      (value > max_value? max_value : value < min_value ? min_value : value)
 #define LIMIT_PARA(a,b,c,d,e)      (c+(a-e)*(b-c)/(d -e))
 
-
-#define AMERGE_RET_SUCCESS             0   //!< this has to be 0, if clauses rely on it
-#define AMERGE_RET_FAILURE             1   //!< general failure
-#define AMERGE_RET_NOTSUPP             2   //!< feature not supported
-#define AMERGE_RET_BUSY                3   //!< there's already something going on...
-#define AMERGE_RET_CANCELED            4   //!< operation canceled
-#define AMERGE_RET_OUTOFMEM            5   //!< out of memory
-#define AMERGE_RET_OUTOFRANGE          6   //!< parameter/value out of range
-#define AMERGE_RET_IDLE                7   //!< feature/subsystem is in idle state
-#define AMERGE_RET_WRONG_HANDLE        8   //!< handle is wrong
-#define AMERGE_RET_NULL_POINTER        9   //!< the/one/all parameter(s) is a(are) NULL pointer(s)
-#define AMERGE_RET_NOTAVAILABLE       10   //!< profile not available
-#define AMERGE_RET_DIVISION_BY_ZERO   11   //!< a divisor equals ZERO
-#define AMERGE_RET_WRONG_STATE        12   //!< state machine in wrong state
-#define AMERGE_RET_INVALID_PARM       13   //!< invalid parameter
-#define AMERGE_RET_PENDING            14   //!< command pending
-#define AMERGE_RET_WRONG_CONFIG       15   //!< given configuration is invalid
+typedef enum FrameNumber_e {
+    LINEAR_NUM   = 1,
+    HDR_2X_NUM   = 2,
+    HDR_3X_NUM   = 3,
+    HDR_NUM_MAX
+} FrameNumber_t;
+/****************************************************************************/
 
 #define MAXLUMAK     (1.5)
 #define MAXLUMAB     (30)
-#define ENVLVMAX     (1.0)
-#define ENVLVMIN     (0.0)
 #define MOVECOEFMAX     (1.0)
 #define MOVECOEFMIN     (0.0)
 #define OECURVESMOOTHMAX     (200)
@@ -68,8 +76,15 @@
 #define TOLERANCEMIN     (0.0)
 #define IQPARAMAX     (1)
 #define IQPARAMIN     (0)
+#define IQ_TH0_PARAMAX     (1023)
+#define IQ_TH0_PARAMIN     (0)
 #define AMERGE_MAX_IQ_DOTS (13)
-
+#define SW_HDRMGE_GAIN_FIX (0x40)
+#define SW_HDRMGE_GAIN_INV_FIX (0xfff)
+#define SW_HDRMGE_LM_DIF_0P9_FIX (255)
+#define SW_HDRMGE_MS_DIF_0P8_FIX (255)
+#define SHORT_MODE_COEF_MAX (0.001)
+#define HDR_LONG_FRMAE_MODE_OECURVE (0)
 
 typedef enum AmergeState_e {
     AMERGE_STATE_INVALID       = 0,
@@ -83,10 +98,21 @@ typedef enum AmergeState_e {
 typedef enum AmergeVersion_e {
     AMERGE_ISP20      = 0,
     AMERGE_ISP21      = 1,
+    AMERGE_ISP30      = 2,
     AMERGE_HW_MAX
 } AmergeVersion_t;
 
-typedef struct MergeHandleData_s
+typedef struct MergeExpoData_s {
+    float nextLExpo;
+    float nextMExpo;
+    float nextSExpo;
+    float nextSGain;
+    float nextMGain;
+    float nextRatioLS;
+    float nextRatioLM;
+} MergeExpoData_t;
+
+typedef struct MergeHandleDataV20_s
 {
     int MergeMode;
     float OECurve_smooth;
@@ -95,16 +121,35 @@ typedef struct MergeHandleData_s
     float MDCurveLM_offset;
     float MDCurveMS_smooth;
     float MDCurveMS_offset;
+} MergeHandleDataV20_t;
+
+typedef struct MergeHandleDataV30_s
+{
+    int MergeMode;
+    float OECurve_smooth;
+    float OECurve_offset;
+    float MDCurveLM_smooth;
+    float MDCurveLM_offset;
+    float MDCurveMS_smooth;
+    float MDCurveMS_offset;
+    float MDCurve_Coef;
+    float MDCurve_ms_thd0;
+    float MDCurve_lm_thd0;
+} MergeHandleDataV30_t;
+
+typedef struct MergeHandleData_s {
+    union {
+        MergeHandleDataV20_t Merge_v20;
+        MergeHandleDataV30_t Merge_v30;
+    };
 } MergeHandleData_t;
 
 typedef struct MergePrevCtrlData_s
 {
     int MergeMode;
-    float L2S_ratio;
-    float LExpo;
     float EnvLv;
     float MoveCoef;
-    merge_OpMode_t ApiMode;
+    merge_OpModeV21_t ApiMode;
 } MergePrevCtrlData_t;
 
 typedef struct AmergePrevData_s
@@ -121,18 +166,12 @@ typedef struct MergeCurrAeResult_s {
     float SfrmMaxLuma;
     float SfrmMaxLumaPdf;
     float GlobalEnvLv;
-    float L2M_Ratio;
-    float M2S_Ratio;
     float Lv_fac;
     float Contrast_fac;
 } MergeCurrAeResult_t;
 
 typedef struct MergeCurrCtrlData_s
 {
-    float L2S_Ratio;
-    float L2M_Ratio;
-    float L2L_Ratio;
-    float LExpo;
     float EnvLv;
     float MoveCoef;
     float MergeOEDamp;
@@ -148,9 +187,71 @@ typedef struct MergeCurrData_s
 
 typedef struct AmergeProcResData_s
 {
-    MgeProcRes_t Res;
+    union {
+        MgeProcRes_t Merge_v20;
+        MgeProcResV2_t Merge_v30;
+    };
+    bool update;
     bool LongFrameMode;
 } AmergeProcResData_t;
+
+typedef struct AmergeConfigV20_s {
+    MergeBaseFrame_t BaseFrm;
+    int MergeMode;
+    int MaxEnvLvKnots;
+    int MaxMoveCoefKnots;
+    float* EnvLv; //0: dark 1:bright
+    float* MoveCoef;
+    float* OECurve_smooth;  //current over exposure curve slope
+    float* OECurve_offset; //current over exposure curve offset
+    float* MDCurveLM_smooth;  //Move Detect curve slope betwwen long frame and middle frame
+    float* MDCurveLM_offset;  //Move Detect curve offset betwwen long frame and middle frame
+    float* MDCurveMS_smooth;  //Move Detect curve slope betwwen middle frame and short frame
+    float* MDCurveMS_offset;  //Move Detect curve slope betwwen middle frame and short frame
+    float ByPassThr;
+    float OECurve_damp;
+    float MDCurveLM_damp;
+    float MDCurveMS_damp ;
+} AmergeConfigV20_t;
+
+typedef struct AmergeConfigV30_s {
+    MergeBaseFrame_t BaseFrm;
+    float ByPassThr;
+    int MergeMode;
+
+    int LongFrmMaxEnvLvKnots;
+    int LongFrmMaxMoveCoefKnots;
+    float* LongFrmEnvLv; //0: dark 1:bright
+    float* LongFrmOECurve_smooth;  //current over exposure curve slope
+    float* LongFrmOECurve_offset; //current over exposure curve offset
+    float* LongFrmMoveCoef;
+    float* LongFrmMDCurveLM_smooth;  //Move Detect curve slope betwwen long frame and middle frame
+    float* LongFrmMDCurveLM_offset;  //Move Detect curve offset betwwen long frame and middle frame
+    float* LongFrmMDCurveMS_smooth;  //Move Detect curve slope betwwen middle frame and short frame
+    float* LongFrmMDCurveMS_offset;  //Move Detect curve slope betwwen middle frame and short frame
+    float LongFrmOECurve_damp;
+    float LongFrmMDCurveLM_damp;
+    float LongFrmMDCurveMS_damp ;
+
+    int ShortFrmMaxEnvLvKnots;
+    int ShortFrmMaxMoveCoefKnots;
+    float* ShortFrmEnvLv; //0: dark 1:bright
+    float* ShortFrmOECurve_smooth;  //current over exposure curve slope
+    float* ShortFrmOECurve_offset; //current over exposure curve offset
+    float* ShortFrmMoveCoef;
+    float* ShortFrmMDCurve_Coef;  //Move Detect curve slope betwwen long frame and middle frame
+    float* ShortFrmMDCurve_ms_thd0;  //Move Detect curve offset betwwen long frame and middle frame
+    float* ShortFrmMDCurve_lm_thd0;  //Move Detect curve slope betwwen middle frame and short frame
+    float ShortFrmOECurve_damp;
+    float ShortFrmMDCurve_damp;
+} AmergeConfigV30_t;
+
+typedef struct AmergeConfig_s {
+    union {
+        AmergeConfigV20_t Merge_v20;
+        AmergeConfigV30_t Merge_v30;
+    };
+} AmergeConfig_t;
 
 typedef struct SensorInfo_s
 {
@@ -168,11 +269,18 @@ typedef struct SensorInfo_s
     float MinExpoS;
 } SensorInfo_t;
 
+typedef struct AmergeCalib_s {
+    union {
+        CalibDbV2_merge_t Merge_v20;
+        CalibDbV2_merge_V2_t Merge_v30;
+    };
+} AmergeCalib_t;
+
 typedef struct AmergeContext_s
 {
     //api
     mergeAttr_t mergeAttr;
-    CalibDbV2_merge_t pCalibDB;
+    AmergeCalib_t pCalibDB;
     AmergeState_t state;
     AmergeConfig_t Config;
     AmergePrevData_t PrevData ;
@@ -180,23 +288,9 @@ typedef struct AmergeContext_s
     MergeCurrAeResult_t AeResult;
     MergeCurrData_t CurrData;
     SensorInfo_t SensorInfo;
-    AmergeVersion_t HWversion;
     bool SceneChange;
-    uint32_t width;
-    uint32_t height;
     int frameCnt;
-    int FrameNumber;
+    FrameNumber_t FrameNumber;
 } AmergeContext_t;
-
-typedef AmergeContext_t* AmergeHandle_t;
-
-typedef struct AmergeInstanceConfig_s {
-    AmergeHandle_t              hAmerge;
-} AmergeInstanceConfig_t;
-
-typedef struct _RkAiqAlgoContext {
-    AmergeInstanceConfig_t AmergeInstConfig;
-    //void* place_holder[0];
-} RkAiqAlgoContext;
 
 #endif

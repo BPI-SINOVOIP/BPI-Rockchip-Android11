@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,11 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+#include "uAPI2/rk_aiq_user_api2_amerge.h"
 
-#include "include/uAPI2/rk_aiq_user_api2_amerge.h"
-#include "RkAiqHandleInt.h"
+#include "RkAiqCamGroupHandleInt.h"
+#include "algo_handlers/RkAiqAmergeHandle.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -29,23 +29,79 @@ rk_aiq_user_api2_amerge_SetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, amerge_attrib
 {
     CHECK_USER_API_ENABLE2(sys_ctx);
     CHECK_USER_API_ENABLE(RK_AIQ_ALGO_TYPE_AMERGE);
-    RkAiqAmergeHandleInt* algo_handle =
-        algoHandle<RkAiqAmergeHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_AMERGE);
 
-    if (algo_handle) {
-        return algo_handle->setAttrib(attr);
+    if (sys_ctx->cam_type == RK_AIQ_CAM_TYPE_GROUP) {
+#ifdef RKAIQ_ENABLE_CAMGROUP
+
+        RkAiqCamGroupAmergeHandleInt* algo_handle =
+            camgroupAlgoHandle<RkAiqCamGroupAmergeHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_AMERGE);
+
+        if (algo_handle) {
+            return algo_handle->setAttrib(attr);
+        } else {
+            XCamReturn ret                            = XCAM_RETURN_NO_ERROR;
+            const rk_aiq_camgroup_ctx_t* camgroup_ctx = (rk_aiq_camgroup_ctx_t *)sys_ctx;
+            for (auto camCtx : camgroup_ctx->cam_ctxs_array) {
+                if (!camCtx)
+                    continue;
+
+                RkAiqAmergeHandleInt* singleCam_algo_handle =
+                    algoHandle<RkAiqAmergeHandleInt>(camCtx, RK_AIQ_ALGO_TYPE_AMERGE);
+                if (singleCam_algo_handle) {
+                    ret = singleCam_algo_handle->setAttrib(attr);
+                    if (ret != XCAM_RETURN_NO_ERROR) LOGE("%s returned: %d", __FUNCTION__, ret);
+                }
+            }
+        }
+#else
+        return XCAM_RETURN_ERROR_FAILED;
+#endif
+    } else {
+        RkAiqAmergeHandleInt* algo_handle =
+            algoHandle<RkAiqAmergeHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_AMERGE);
+
+        if (algo_handle) {
+            return algo_handle->setAttrib(attr);
+        }
     }
 
     return XCAM_RETURN_NO_ERROR;
 }
+
 XCamReturn
 rk_aiq_user_api2_amerge_GetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, amerge_attrib_t* attr)
 {
-    RkAiqAmergeHandleInt* algo_handle =
-        algoHandle<RkAiqAmergeHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_AMERGE);
+    RKAIQ_API_SMART_LOCK(sys_ctx);
 
-    if (algo_handle) {
-        return algo_handle->getAttrib(attr);
+    if (sys_ctx->cam_type == RK_AIQ_CAM_TYPE_GROUP) {
+#ifdef RKAIQ_ENABLE_CAMGROUP
+        RkAiqCamGroupAmergeHandleInt* algo_handle =
+            camgroupAlgoHandle<RkAiqCamGroupAmergeHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_AMERGE);
+
+        if (algo_handle) {
+            return algo_handle->getAttrib(attr);
+        } else {
+            const rk_aiq_camgroup_ctx_t* camgroup_ctx = (rk_aiq_camgroup_ctx_t *)sys_ctx;
+            for (auto camCtx : camgroup_ctx->cam_ctxs_array) {
+                if (!camCtx)
+                    continue;
+
+                RkAiqAmergeHandleInt* singleCam_algo_handle =
+                    algoHandle<RkAiqAmergeHandleInt>(camCtx, RK_AIQ_ALGO_TYPE_AMERGE);
+                if (singleCam_algo_handle)
+                    return singleCam_algo_handle->getAttrib(attr);
+            }
+        }
+#else
+        return XCAM_RETURN_ERROR_FAILED;
+#endif
+    } else {
+        RkAiqAmergeHandleInt* algo_handle =
+            algoHandle<RkAiqAmergeHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_AMERGE);
+
+        if (algo_handle) {
+            return algo_handle->getAttrib(attr);
+        }
     }
 
     return XCAM_RETURN_NO_ERROR;

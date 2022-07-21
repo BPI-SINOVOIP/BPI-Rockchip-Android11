@@ -14,8 +14,6 @@ int setGammaAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int getGammaAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int setDpccAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int getDpccAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
-int setDehazeAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
-int getDehazeAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int setCcmAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int getCcmAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int queryCCMInfo(rk_aiq_sys_ctx_t* ctx, char* data);
@@ -25,6 +23,7 @@ int getAwbCCT(rk_aiq_sys_ctx_t* ctx, char* data);
 int queryWBInfo(rk_aiq_sys_ctx_t* ctx, char* data);
 int setAcpAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
 int getAcpAttrib(rk_aiq_sys_ctx_t* ctx, char* data);
+int enqueueRkRawFile(rk_aiq_sys_ctx_t* ctx, char* data);
 #endif
 
 

@@ -20,26 +20,19 @@
 #ifndef _RK_AIQ_RESOURCE_TRANSLATOR_V21_H_
 #define _RK_AIQ_RESOURCE_TRANSLATOR_V21_H_
 
-#include "IRkAiqResourceTranslator.h"
-#include "rk_aiq_types.h"
+#include "RkAiqResourceTranslator.h"
 
 namespace RkCam {
 
 class RkAiqResourceTranslatorV21
-    : public IRkAiqResourceTranslator
+    : public RkAiqResourceTranslator
 {
 public:
     RkAiqResourceTranslatorV21 ()          = default;
     virtual ~RkAiqResourceTranslatorV21 () = default;
 
-    virtual XCamReturn translateIspStats (const SmartPtr<VideoBuffer> &from,
-                                  SmartPtr<RkAiqIspStatsIntProxy> &to);
-    virtual XCamReturn translateAecStats (const SmartPtr<VideoBuffer> &from,
-                                  SmartPtr<RkAiqAecStatsProxy> &to);
     virtual XCamReturn translateAwbStats (const SmartPtr<VideoBuffer> &from,
                                   SmartPtr<RkAiqAwbStatsProxy> &to);
-    virtual XCamReturn translateAfStats (const SmartPtr<VideoBuffer> &from,
-                                 SmartPtr<RkAiqAfStatsProxy> &to);
     virtual XCamReturn translateAdehazeStats (const SmartPtr<VideoBuffer> &from,
                                       SmartPtr<RkAiqAdehazeStatsProxy> &to);
 

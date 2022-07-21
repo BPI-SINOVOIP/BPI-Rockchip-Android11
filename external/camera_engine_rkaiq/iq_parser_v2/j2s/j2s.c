@@ -618,8 +618,6 @@ static int j2s_json_to_array_with_index(j2s_ctx* ctx, cJSON* json,
     if (query) {
         cJSON* root;
 
-        ret = 0;
-
         /* Clear the original array */
         root = cJSON_CreateArray();
         cJSON_ReplaceItemInObjectCaseSensitive(parent, obj->name, root);

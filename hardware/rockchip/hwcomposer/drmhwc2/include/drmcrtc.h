@@ -48,12 +48,15 @@ class DrmCrtc {
   bool get_hdr() const;
   bool get_next_hdr() const;
 
+  const DrmMode &kernel_mode() const;
+
   uint32_t get_soc_id() const { return soc_id_; }
   uint32_t get_port_id() const { return port_id_; }
   uint32_t get_aclk() const { return aclk_; }
   uint64_t get_plane_mask() const { return plane_mask_; }
   void  set_hwc_plane_mask(uint64_t hwc_plane_mask) { hwc_plane_mask_ =  hwc_plane_mask; }
   uint64_t get_hwc_plane_mask() const { return hwc_plane_mask_; }
+
 
   const DrmProperty &active_property() const;
   const DrmProperty &mode_property() const;

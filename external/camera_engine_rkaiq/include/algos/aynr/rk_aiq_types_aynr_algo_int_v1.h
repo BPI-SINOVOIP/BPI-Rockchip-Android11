@@ -26,7 +26,7 @@
 #include "rk_aiq_comm.h"
 #include "RkAiqCalibDbTypes.h"
 #include "aynr/rk_aiq_types_aynr_algo_v1.h"
-#include "RkAiqCalibDbTypesV2.h"
+#include "ynr_head_v1.h"
 
 RKAIQ_BEGIN_DECLARE
 

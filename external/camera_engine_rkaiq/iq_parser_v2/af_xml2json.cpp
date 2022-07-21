@@ -67,8 +67,11 @@ void convertAfCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Con
     af_json->contrast_af.AdaptiveDir = (CalibDbV2_Af_SearchDir_t)af_xml->contrast_af.AdaptiveDir;
     af_json->contrast_af.AdaptiveSteps = af_xml->contrast_af.AdaptiveSteps;
     memcpy(af_json->contrast_af.AdaptRangeTbl, af_xml->contrast_af.AdaptRangeTbl, sizeof(af_json->contrast_af.AdaptRangeTbl));
-    af_json->contrast_af.TrigThers = af_xml->contrast_af.TrigThers;
+    af_json->contrast_af.TrigThers[0] = af_xml->contrast_af.TrigThers;
+    af_json->contrast_af.TrigThersFv[0] = 0;
+    af_json->contrast_af.TrigThersNums = 1;
     af_json->contrast_af.LumaTrigThers = af_xml->contrast_af.LumaTrigThers;
+    af_json->contrast_af.ExpTrigThers = 2.0f;
 
     af_json->contrast_af.StableThers = af_xml->contrast_af.StableThers;
     af_json->contrast_af.StableFrames = af_xml->contrast_af.StableFrames;
@@ -94,6 +97,9 @@ void convertAfCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Con
     af_json->contrast_af.SearchLumaStableThers = af_xml->contrast_af.SearchLumaStableThers;
 
     af_json->contrast_af.FlatValue = af_xml->contrast_af.FlatValue;
+
+    af_json->contrast_af.PointLightLumaTh = 3000;
+    af_json->contrast_af.PointLightCntTh = 300;
 
     af_json->laser_af.enable = af_xml->laser_af.enable;
     memcpy(af_json->laser_af.vcmDot, af_xml->laser_af.vcmDot, sizeof(af_json->laser_af.vcmDot));

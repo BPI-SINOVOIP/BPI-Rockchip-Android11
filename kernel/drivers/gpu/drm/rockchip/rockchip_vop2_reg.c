@@ -41,6 +41,7 @@ static const uint32_t formats_win_full_10bit[] = {
 	DRM_FORMAT_NV12_10,
 	DRM_FORMAT_NV16_10,
 	DRM_FORMAT_NV24_10,
+	DRM_FORMAT_YUYV, /* yuv422_8bit non-Linear mode only*/
 };
 
 static const uint32_t formats_win_full_10bit_yuyv[] = {
@@ -119,8 +120,6 @@ static const uint64_t format_modifiers_afbc[] = {
 				AFBC_FORMAT_MOD_YTR |
 				AFBC_FORMAT_MOD_SPARSE |
 				AFBC_FORMAT_MOD_SPLIT),
-
-	DRM_FORMAT_MOD_LINEAR,
 	DRM_FORMAT_MOD_INVALID,
 };
 

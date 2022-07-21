@@ -16,7 +16,7 @@
 /* CFG_CORE_DEBUG_CHECK_STACKS is not set */
 /* CFG_CORE_DUMP_OOM is not set */
 #define CFG_CORE_DYN_SHM 1
-#define CFG_CORE_HEAP_SIZE (128 * 1024)
+#define CFG_CORE_HEAP_SIZE 131072
 #define CFG_CORE_HUK_SUBKEY_COMPAT 1
 /* CFG_CORE_LARGE_PHYS_ADDR is not set */
 #define CFG_CORE_MAX_SYSCALL_RECURSION 4
@@ -50,10 +50,6 @@
 #define CFG_CRYPTO_CTS 1
 #define CFG_CRYPTO_DES 1
 #define CFG_CRYPTO_DH 1
-/* CFG_CRYPTO_DRIVER is not set */
-#define CFG_CRYPTO_DRIVER_DEBUG 0
-/* CFG_CRYPTO_DRV_CIPHER is not set */
-/* CFG_CRYPTO_DRV_HASH is not set */
 #define CFG_CRYPTO_DSA 1
 #define CFG_CRYPTO_ECB 1
 #define CFG_CRYPTO_ECC 1
@@ -120,8 +116,8 @@
 #define CFG_RK_ATAGS_MEM_PARAM 1
 /* CFG_RK_CRYPTO is not set */
 #define CFG_RK_CRYPTO_BORINGSSL 1
-/* CFG_RK_CRYPTO_V2 is not set */
 #define CFG_RK_MASK_NATIVE_INTR 1
+#define CFG_RK_OEM_NS_OTP 1
 #define CFG_RK_OS_SERVICE 1
 #define CFG_RK_OTP 1
 #define CFG_RK_RPMB_NO_DIRF_HASH 1

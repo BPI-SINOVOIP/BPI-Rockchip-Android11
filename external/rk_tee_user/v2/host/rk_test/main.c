@@ -35,8 +35,11 @@ static const struct {
 	{"otp_read",			OTP_READ},
 	{"otp_write",			OTP_WRITE},
 	{"otp_size",			OTP_SIZE},
+	{"otp_ns_read",			OTP_NS_READ},
+	{"otp_ns_write",		OTP_NS_WRITE},
 #endif
 	{"trng",			TRNG_READ},
+	{"socket",			SOCKET},
 	{NULL,				TEST_NULL},
 };
 

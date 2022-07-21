@@ -21,6 +21,9 @@ TEE_Result rk_get_trng(uint8_t *buffer, uint32_t size)
 	uint32_t error_origin = 0;
 	TEE_UUID uuid = RK_OS_SERVICE_UUID;
 
+	if (!buffer || size == 0)
+		return TEE_ERROR_BAD_PARAMETERS;
+
 	param_type = TEE_PARAM_TYPES(TEE_PARAM_TYPE_NONE, TEE_PARAM_TYPE_NONE,
 				     TEE_PARAM_TYPE_NONE, TEE_PARAM_TYPE_NONE);
 

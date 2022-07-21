@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
-
 #include "rk_aiq_user_api_aldch.h"
-#include "RkAiqHandleInt.h"
+
+#include "algo_handlers/RkAiqAldchHandle.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -30,11 +30,38 @@ rk_aiq_user_api_aldch_SetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_ldch_att
     CHECK_USER_API_ENABLE2(sys_ctx);
     CHECK_USER_API_ENABLE(RK_AIQ_ALGO_TYPE_ALDCH);
     RKAIQ_API_SMART_LOCK(sys_ctx);
-    RkAiqAldchHandleInt* algo_handle =
-        algoHandle<RkAiqAldchHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ALDCH);
 
-    if (algo_handle) {
-        return algo_handle->setAttrib(attr);
+    if (sys_ctx->cam_type == RK_AIQ_CAM_TYPE_GROUP) {
+    #ifdef RKAIQ_ENABLE_CAMGROUP
+        RkAiqCamGroupAldchHandleInt* algo_handle =
+            camgroupAlgoHandle<RkAiqCamGroupAldchHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ALDCH);
+
+        if (algo_handle) {
+            return algo_handle->setAttrib(attr);
+        } else {
+            XCamReturn ret = XCAM_RETURN_ERROR_FAILED;
+            const rk_aiq_camgroup_ctx_t* camgroup_ctx = (rk_aiq_camgroup_ctx_t *)sys_ctx;
+            for (auto camCtx : camgroup_ctx->cam_ctxs_array) {
+                if (!camCtx)
+                    continue;
+
+                RkAiqAldchHandleInt* singleCam_algo_handle =
+                    algoHandle<RkAiqAldchHandleInt>(camCtx, RK_AIQ_ALGO_TYPE_ALDCH);
+                if (singleCam_algo_handle)
+                    ret = singleCam_algo_handle->setAttrib(attr);
+            }
+            return ret;
+        }
+    #else
+        return XCAM_RETURN_ERROR_FAILED;
+    #endif
+    } else {
+        RkAiqAldchHandleInt* algo_handle =
+            algoHandle<RkAiqAldchHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ALDCH);
+
+        if (algo_handle) {
+            return algo_handle->setAttrib(attr);
+        }
     }
 
     return XCAM_RETURN_ERROR_FAILED;
@@ -44,11 +71,38 @@ XCamReturn
 rk_aiq_user_api_aldch_GetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_ldch_attrib_t *attr)
 {
     RKAIQ_API_SMART_LOCK(sys_ctx);
-    RkAiqAldchHandleInt* algo_handle =
-        algoHandle<RkAiqAldchHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ALDCH);
 
-    if (algo_handle) {
-        return algo_handle->getAttrib(attr);
+    if (sys_ctx->cam_type == RK_AIQ_CAM_TYPE_GROUP) {
+    #ifdef RKAIQ_ENABLE_CAMGROUP
+        RkAiqCamGroupAldchHandleInt* algo_handle =
+            camgroupAlgoHandle<RkAiqCamGroupAldchHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ALDCH);
+
+        if (algo_handle) {
+            return algo_handle->getAttrib(attr);
+        } else {
+            XCamReturn ret = XCAM_RETURN_ERROR_FAILED;
+            const rk_aiq_camgroup_ctx_t* camgroup_ctx = (rk_aiq_camgroup_ctx_t *)sys_ctx;
+            for (auto camCtx : camgroup_ctx->cam_ctxs_array) {
+                if (!camCtx)
+                    continue;
+
+                RkAiqAldchHandleInt* singleCam_algo_handle =
+                    algoHandle<RkAiqAldchHandleInt>(camCtx, RK_AIQ_ALGO_TYPE_ALDCH);
+                if (singleCam_algo_handle)
+                    ret = singleCam_algo_handle->getAttrib(attr);
+            }
+            return ret;
+        }
+    #else
+        return XCAM_RETURN_ERROR_FAILED;
+    #endif
+    } else {
+        RkAiqAldchHandleInt* algo_handle =
+            algoHandle<RkAiqAldchHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ALDCH);
+
+        if (algo_handle) {
+            return algo_handle->getAttrib(attr);
+        }
     }
 
     return XCAM_RETURN_ERROR_FAILED;

@@ -180,7 +180,7 @@ void AtmoGetStats
         pAtmoCtx->CurrStatsData.other_stats.tmo_luma[i] = ROData->other_stats.tmo_luma[i];
     }
 
-    if(pAtmoCtx->FrameNumber == 3)
+    if(pAtmoCtx->FrameNumber == HDR_3X_NUM)
     {
         for(int i = 0; i < 25; i++)
             pAtmoCtx->CurrStatsData.other_stats.middle_luma[i] = ROData->other_stats.middle_luma[i];
@@ -225,7 +225,7 @@ void AtmoGetAeResult
         pAtmoCtx->CurrAeResult.BlockLumaS[i] = pAtmoCtx->CurrStatsData.other_stats.short_luma[i];
         pAtmoCtx->CurrAeResult.BlockLumaL[i] = pAtmoCtx->CurrStatsData.other_stats.long_luma[i];
     }
-    if(pAtmoCtx->FrameNumber == 3)
+    if(pAtmoCtx->FrameNumber == HDR_3X_NUM)
         for(int i = 0; i < 25; i++)
             pAtmoCtx->CurrAeResult.BlockLumaM[i] = pAtmoCtx->CurrStatsData.other_stats.middle_luma[i];
     else
@@ -235,7 +235,7 @@ void AtmoGetAeResult
     //transfer CurrAeResult data into AhdrHandle
     switch (pAtmoCtx->FrameNumber)
     {
-    case 1:
+    case LINEAR_NUM:
         pAtmoCtx->CurrData.CtrlData.LExpo = AecHdrPreResult.LinearExp.exp_real_params.analog_gain * AecHdrPreResult.LinearExp.exp_real_params.integration_time;
         pAtmoCtx->CurrData.CtrlData.L2S_Ratio = 1;
         pAtmoCtx->CurrData.CtrlData.L2M_Ratio = 1;
@@ -245,7 +245,7 @@ void AtmoGetAeResult
         pAtmoCtx->CurrAeResult.OEPdf = AecHdrPreResult.OverExpROIPdf[0];
         pAtmoCtx->CurrAeResult.DarkPdf = AecHdrPreResult.LowLightROIPdf[0];
         break;
-    case 2:
+    case HDR_2X_NUM:
         pAtmoCtx->CurrData.CtrlData.L2S_Ratio = pAtmoCtx->CurrAeResult.M2S_Ratio;
         pAtmoCtx->CurrData.CtrlData.L2M_Ratio = 1;
         pAtmoCtx->CurrData.CtrlData.L2L_Ratio = 1;
@@ -255,7 +255,7 @@ void AtmoGetAeResult
         pAtmoCtx->CurrAeResult.OEPdf = AecHdrPreResult.OverExpROIPdf[1];
         pAtmoCtx->CurrAeResult.DarkPdf = AecHdrPreResult.LowLightROIPdf[1];
         break;
-    case 3:
+    case HDR_3X_NUM:
         pAtmoCtx->CurrData.CtrlData.L2S_Ratio = pAtmoCtx->CurrAeResult.L2M_Ratio * pAtmoCtx->CurrAeResult.M2S_Ratio;
         pAtmoCtx->CurrData.CtrlData.L2M_Ratio = pAtmoCtx->CurrAeResult.L2M_Ratio;
         pAtmoCtx->CurrData.CtrlData.L2L_Ratio = 1;
@@ -289,7 +289,7 @@ void AtmoGetSensorInfo
 ) {
     LOG1_ATMO( "%s:enter!\n", __FUNCTION__);
 
-    pAtmoCtx->SensorInfo.LongFrmMode = AecHdrProcResult.LongFrmMode && (pAtmoCtx->FrameNumber != 1);
+    pAtmoCtx->SensorInfo.LongFrmMode = AecHdrProcResult.LongFrmMode && (pAtmoCtx->FrameNumber != LINEAR_NUM);
 
     for(int i = 0; i < 3; i++)
     {
@@ -299,7 +299,7 @@ void AtmoGetSensorInfo
         pAtmoCtx->SensorInfo.HdrMaxIntegrationTime[i] = AecHdrProcResult.HdrMaxIntegrationTime[i];
     }
 
-    if(pAtmoCtx->FrameNumber == 1)
+    if(pAtmoCtx->FrameNumber == LINEAR_NUM)
     {
         //pAtmoCtx->SensorInfo.MaxExpoL = pAtmoCtx->SensorInfo.HdrMaxGain[1] * pAtmoCtx->SensorInfo.HdrMaxIntegrationTime[1];
         //pAtmoCtx->SensorInfo.MinExpoL = pAtmoCtx->SensorInfo.HdrMinGain[1] * pAtmoCtx->SensorInfo.HdrMinIntegrationTime[1];
@@ -309,7 +309,7 @@ void AtmoGetSensorInfo
         pAtmoCtx->CurrAeResult.LumaDeviationLinear = AecHdrProcResult.LumaDeviation;
         pAtmoCtx->CurrAeResult.LumaDeviationLinear = abs(pAtmoCtx->CurrAeResult.LumaDeviationLinear);
     }
-    else if(pAtmoCtx->FrameNumber == 2)
+    else if(pAtmoCtx->FrameNumber == HDR_2X_NUM)
     {
         pAtmoCtx->SensorInfo.MaxExpoL = pAtmoCtx->SensorInfo.HdrMaxGain[1] * pAtmoCtx->SensorInfo.HdrMaxIntegrationTime[1];
         pAtmoCtx->SensorInfo.MinExpoL = pAtmoCtx->SensorInfo.HdrMinGain[1] * pAtmoCtx->SensorInfo.HdrMinIntegrationTime[1];
@@ -321,7 +321,7 @@ void AtmoGetSensorInfo
         pAtmoCtx->CurrAeResult.LumaDeviationS = AecHdrProcResult.HdrLumaDeviation[0];
         pAtmoCtx->CurrAeResult.LumaDeviationS = abs(pAtmoCtx->CurrAeResult.LumaDeviationS);
     }
-    else if(pAtmoCtx->FrameNumber == 3)
+    else if(pAtmoCtx->FrameNumber == HDR_3X_NUM)
     {
         pAtmoCtx->SensorInfo.MaxExpoL = pAtmoCtx->SensorInfo.HdrMaxGain[2] * pAtmoCtx->SensorInfo.HdrMaxIntegrationTime[2];
         pAtmoCtx->SensorInfo.MinExpoL = pAtmoCtx->SensorInfo.HdrMinGain[2] * pAtmoCtx->SensorInfo.HdrMinIntegrationTime[2];
@@ -376,7 +376,7 @@ void AtmoApiSetLevel
         LIMIT_VALUE(pAtmoCtx->CurrData.HandleData.DetailsLowLight, DETAILSLOWLIGHTMAX, DETAILSLOWLIGHTMIN);
 
     pAtmoCtx->AtmoConfig.bTmoEn = true;
-    pAtmoCtx->ProcRes.isLinearTmo = pAtmoCtx->FrameNumber == 1 ;
+    pAtmoCtx->ProcRes.isLinearTmo = pAtmoCtx->FrameNumber == LINEAR_NUM ;
 
     /*
         pAtmoCtx->CurrData.HandleData.TmoContrast *= 1 + level_diff;
@@ -595,7 +595,7 @@ void AtmoApiManualUpdate
     if (pAtmoCtx->tmoAttr.stManual.bUpdateTmo == true)
     {
         pAtmoCtx->AtmoConfig.bTmoEn = pAtmoCtx->tmoAttr.stManual.stTmoManual.Enable;
-        pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->AtmoConfig.bTmoEn && pAtmoCtx->FrameNumber == 1;
+        pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->AtmoConfig.bTmoEn && pAtmoCtx->FrameNumber == LINEAR_NUM;
         pAtmoCtx->CurrData.HandleData.DetailsLowLight = pAtmoCtx->tmoAttr.stManual.stTmoManual.stDtlsLL * DETAILSLOWLIGHTMIN ;
         pAtmoCtx->CurrData.HandleData.DetailsLowLight = LIMIT_VALUE(pAtmoCtx->CurrData.HandleData.DetailsLowLight
                 , DETAILSLOWLIGHTMAX, DETAILSLOWLIGHTMIN);
@@ -759,17 +759,15 @@ void AtmoUpdateConfig
     pAtmoCtx->AtmoConfig.global.iir = LIMIT_VALUE(pCalibDb->TmoTuningPara.GlobaTMO.IIR, IIRMAX, IIRMIN);
 
     //tmo En
-    if(pAtmoCtx->FrameNumber == 2 || pAtmoCtx->FrameNumber == 3) {
+    if(pAtmoCtx->FrameNumber == HDR_2X_NUM || pAtmoCtx->FrameNumber == HDR_3X_NUM) {
         pAtmoCtx->AtmoConfig.bTmoEn = true;
         pAtmoCtx->AtmoConfig.isLinearTmo = false;
     }
-    else if(pAtmoCtx->FrameNumber == 1)
+    else if(pAtmoCtx->FrameNumber == LINEAR_NUM)
     {
         pAtmoCtx->AtmoConfig.bTmoEn = pCalibDb->TmoTuningPara.Enable;
         pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->AtmoConfig.bTmoEn;
     }
-
-
 
     for(int i = 0; i < pAtmoCtx->AtmoConfig.Luma.len; i++)
         LOG1_ATMO("%s: mode:%d Globalluma[%d]:%f EnvLv[%d]:%f ISO[%d]:%f Tolerance:%f\n", __FUNCTION__,
@@ -1032,13 +1030,13 @@ void TmoGetCurrIOData
     pAtmoCtx->ProcRes.TmoFlicker.PredictK.Hdr3xLongPercent = 0.5;
     pAtmoCtx->ProcRes.TmoFlicker.PredictK.UseLongLowTh = 1.02;
     pAtmoCtx->ProcRes.TmoFlicker.PredictK.UseLongUpTh = 0.98;
-    if(pAtmoCtx->FrameNumber == 1)
+    if(pAtmoCtx->FrameNumber == LINEAR_NUM)
         pAtmoCtx->ProcRes.TmoFlicker.LumaDeviation[0] = pAtmoCtx->CurrAeResult.LumaDeviationLinear;
-    else if(pAtmoCtx->FrameNumber == 2) {
+    else if(pAtmoCtx->FrameNumber == HDR_2X_NUM) {
         pAtmoCtx->ProcRes.TmoFlicker.LumaDeviation[0] = pAtmoCtx->CurrAeResult.LumaDeviationS;
         pAtmoCtx->ProcRes.TmoFlicker.LumaDeviation[1] = pAtmoCtx->CurrAeResult.LumaDeviationL;
     }
-    else if(pAtmoCtx->FrameNumber == 3) {
+    else if(pAtmoCtx->FrameNumber == HDR_3X_NUM) {
         pAtmoCtx->ProcRes.TmoFlicker.LumaDeviation[0] = pAtmoCtx->CurrAeResult.LumaDeviationS;
         pAtmoCtx->ProcRes.TmoFlicker.LumaDeviation[1] = pAtmoCtx->CurrAeResult.LumaDeviationM;
         pAtmoCtx->ProcRes.TmoFlicker.LumaDeviation[2] = pAtmoCtx->CurrAeResult.LumaDeviationL;
@@ -1364,7 +1362,7 @@ void AtmoProcessing
         ApiOffProcess(pAtmoCtx);
 
         pAtmoCtx->AtmoConfig.bTmoEn = true;
-        pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->FrameNumber == 1 ? true : false;
+        pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->FrameNumber == LINEAR_NUM;
         pAtmoCtx->CurrData.HandleData.DetailsLowLight *= 1 + (float)(pAtmoCtx->tmoAttr.stDarkArea.level) * 0.4;
         pAtmoCtx->CurrData.HandleData.DetailsLowLight =
             LIMIT_VALUE(pAtmoCtx->CurrData.HandleData.DetailsLowLight, DETAILSLOWLIGHTMAX, DETAILSLOWLIGHTMIN);
@@ -1378,7 +1376,7 @@ void AtmoProcessing
 
         //tmo en
         pAtmoCtx->AtmoConfig.bTmoEn = pAtmoCtx->AtmoConfig.bTmoEn;
-        pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->AtmoConfig.bTmoEn && pAtmoCtx->FrameNumber == 1;
+        pAtmoCtx->AtmoConfig.isLinearTmo = pAtmoCtx->AtmoConfig.bTmoEn && pAtmoCtx->FrameNumber == LINEAR_NUM;
 
         //log after updating
         LOGD_ATMO("%s:  GlobalLumaMode:%f CtrlData.EnvLv:%f CtrlData.ISO:%f GlobeLuma:%f GlobeMaxLuma:%f \n", __FUNCTION__,  pAtmoCtx->AtmoConfig.Luma.globalLumaMode,

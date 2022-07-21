@@ -45,7 +45,7 @@ public:
 
   static int addScene(CamCalibDbProj_t *calibproj, const char *main_scene,
                       const char *sub_scene, CamCalibDbV2Context_t *calib);
-  static void* refToScene(CamCalibDbProj_t *calibproj,
+  static CamCalibDbV2Context_t refToScene(CamCalibDbProj_t *calibproj,
                                            const char *main_scene,
                                            const char *sub_scene);
 

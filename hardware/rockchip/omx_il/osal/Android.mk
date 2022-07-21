@@ -73,6 +73,7 @@ endif
 
 LOCAL_C_INCLUDES := $(ROCKCHIP_OMX_INC)/khronos \
 	$(ROCKCHIP_OMX_INC)/rockchip \
+	$(ROCKCHIP_OMX_INC)/linux \
 	$(ROCKCHIP_OMX_TOP)/osal \
 	$(ROCKCHIP_OMX_COMPONENT)/common \
 	$(ROCKCHIP_OMX_COMPONENT)/video/dec \
@@ -85,6 +86,7 @@ LOCAL_C_INCLUDES := $(ROCKCHIP_OMX_INC)/khronos \
 	$(TOP)/hardware/rockchip/librkvpu \
 	$(TOP)/hardware/rockchip/librkvpu/omx_get_gralloc_private \
 	$(TOP)/system/core/libcutils
+
 
 ifeq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 26)))
 LOCAL_C_INCLUDES += \

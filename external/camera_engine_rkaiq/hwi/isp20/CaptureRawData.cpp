@@ -167,6 +167,8 @@ const struct capture_fmt CaptureRawData::csirx_fmts[] =
 CaptureRawData::CaptureRawData ()
     : sns_width(0)
     , sns_height(0)
+    , pixelformat(0)
+    , _stride_perline(0)
     , _is_raw_dir_exist(false)
     , _is_capture_raw(false)
     , _capture_raw_num(0)
@@ -174,6 +176,23 @@ CaptureRawData::CaptureRawData ()
     , _capture_image_mutex(false)
     , _capture_image_cond(false)
     , _capture_raw_type(CAPTURE_RAW_ASYNC)
+    , _camId(-1)
+{
+}
+
+CaptureRawData::CaptureRawData(int32_t camId)
+    : sns_width(0)
+    , sns_height(0)
+    , pixelformat(0)
+    , _stride_perline(0)
+    , _is_raw_dir_exist(false)
+    , _is_capture_raw(false)
+    , _capture_raw_num(0)
+    , _capture_metadata_num(0)
+    , _capture_image_mutex(false)
+    , _capture_image_cond(false)
+    , _capture_raw_type(CAPTURE_RAW_ASYNC)
+    , _camId(camId)
 {
 }
 
@@ -231,7 +250,8 @@ CaptureRawData::set_value_to_file(const char* path, int value, uint32_t sequence
 {
     char buffer[16] = {0};
     int fp;
-
+    if (access(path, F_OK) == -1)
+        return false;
     fp = open(path, O_CREAT | O_RDWR | O_SYNC, S_IRWXU | S_IRUSR | S_IXUSR | S_IROTH | S_IXOTH);
     if (fp != -1) {
         ftruncate(fp, 0);
@@ -252,10 +272,21 @@ int CaptureRawData::detect_capture_raw_status(uint32_t sequence, bool first_trig
     snprintf(file_name, sizeof(file_name), "%s", CAPTURE_CNT_FILENAME);
     if (!_is_capture_raw) {
         uint32_t rawFrmId = 0;
-        get_value_from_file(file_name, _capture_raw_num, rawFrmId);
+
+        bool ret = get_value_from_file(file_name, _capture_raw_num, rawFrmId);
+        if (!ret) {
+            // test multi cam mode
+            snprintf(file_name, sizeof(file_name), "%.50s_c%d", CAPTURE_CNT_FILENAME, _camId);
+            get_value_from_file(file_name, _capture_raw_num, rawFrmId);
+        }
 
         if (_capture_raw_num > 0) {
-            set_value_to_file(file_name, _capture_raw_num, sequence);
+            bool ret = set_value_to_file(file_name, _capture_raw_num, sequence);
+            if (!ret) {
+                // test multi cam mode
+                snprintf(file_name, sizeof(file_name), "%.50s_c%d", CAPTURE_CNT_FILENAME, _camId);
+                set_value_to_file(file_name, _capture_raw_num, sequence);
+            }
             _is_capture_raw = true;
             _capture_metadata_num = _capture_raw_num;
             if (first_trigger)
@@ -269,7 +300,7 @@ int CaptureRawData::detect_capture_raw_status(uint32_t sequence, bool first_trig
 int CaptureRawData::update_capture_raw_status(bool first_trigger)
 {
     char file_name[64] = {0};
-    snprintf(file_name, sizeof(file_name), "%s", CAPTURE_CNT_FILENAME);
+    snprintf(file_name, sizeof(file_name), "%.63s", CAPTURE_CNT_FILENAME);
     if (_is_capture_raw && !first_trigger) {
         if (_capture_raw_type == CAPTURE_RAW_AND_YUV_SYNC) {
             _capture_image_mutex.lock();
@@ -278,7 +309,12 @@ int CaptureRawData::update_capture_raw_status(bool first_trigger)
         }
 
         if (!--_capture_raw_num) {
-            set_value_to_file(file_name, _capture_raw_num);
+            bool ret = set_value_to_file(file_name, _capture_raw_num);
+            if (!ret) {
+                // test multi cam mode
+                snprintf(file_name, sizeof(file_name), "%.50s_c%d", CAPTURE_CNT_FILENAME, _camId);
+                set_value_to_file(file_name, _capture_raw_num);
+            }
             _is_capture_raw = false;
         }
     }
@@ -466,6 +502,23 @@ CaptureRawData::write_metadata_to_file(const char* dir_path,
                          1,
                          focusCode,
                          zoomCode);
+            else if (CHECK_ISP_HW_V30())
+                snprintf(buffer,
+                         sizeof(buffer),
+                         "frame%08d-l_s-gain[%08.5f_%08.5f]-time[%08.5f_%08.5f]-"
+                         "awbGain[%08d_%08d_%08d_%08d]-dgain[%08d]-afcode[%08d_%08d]\n",
+                         frame_id,
+                         expParams->data()->aecExpInfo.HdrExp[1].exp_real_params.analog_gain,
+                         expParams->data()->aecExpInfo.HdrExp[0].exp_real_params.analog_gain,
+                         expParams->data()->aecExpInfo.HdrExp[1].exp_real_params.integration_time,
+                         expParams->data()->aecExpInfo.HdrExp[0].exp_real_params.integration_time,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_red,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_green_r,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_green_b,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_blue,
+                         1,
+                         focusCode,
+                         zoomCode);
         } else {
             if (CHECK_ISP_HW_V20())
                 snprintf(buffer,
@@ -494,6 +547,21 @@ CaptureRawData::write_metadata_to_file(const char* dir_path,
                          ispParams.isp_params_v21.others.awb_gain_cfg.gain0_green_r,
                          ispParams.isp_params_v21.others.awb_gain_cfg.gain0_green_b,
                          ispParams.isp_params_v21.others.awb_gain_cfg.gain0_blue,
+                         1,
+                         focusCode,
+                         zoomCode);
+            else if (CHECK_ISP_HW_V30())
+                snprintf(buffer,
+                         sizeof(buffer),
+                         "frame%08d-gain[%08.5f]-time[%08.5f]-"
+                         "awbGain[%08d_%08d_%08d_%08d]-dgain[%08d]-afcode[%08d_%08d]\n",
+                         frame_id,
+                         expParams->data()->aecExpInfo.LinearExp.exp_real_params.analog_gain,
+                         expParams->data()->aecExpInfo.LinearExp.exp_real_params.integration_time,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_red,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_green_r,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_green_b,
+                         ispParams.isp_params_v3x[0].others.awb_gain_cfg.gain0_blue,
                          1,
                          focusCode,
                          zoomCode);
@@ -630,10 +698,13 @@ CaptureRawData::creat_raw_dir(const char* path)
 {
     time_t now;
     struct tm* timenow;
+    struct timeval tv;
+    struct timezone tz;
 
     if (!path)
         return XCAM_RETURN_ERROR_FAILED;
 
+    gettimeofday(&tv, &tz);
     time(&now);
     timenow = localtime(&now);
 
@@ -644,14 +715,16 @@ CaptureRawData::creat_raw_dir(const char* path)
         return XCAM_RETURN_ERROR_PARAM;
     }
 
-    snprintf(raw_dir_path, sizeof(raw_dir_path), "%s/raw_%04d-%02d-%02d_%02d-%02d-%02d",
+    snprintf(raw_dir_path, sizeof(raw_dir_path), "%s/Cam%d-raw_%04d-%02d-%02d_%02d-%02d-%02d-%03ld",
              path,
+             _camId,
              timenow->tm_year + 1900,
              timenow->tm_mon + 1,
              timenow->tm_mday,
              timenow->tm_hour,
              timenow->tm_min,
-             timenow->tm_sec);
+             timenow->tm_sec,
+             tv.tv_usec/1000);
 
     LOGV_CAMHW_SUBM(CAPTURERAW_SUBM, "mkdir %s for capturing %d frames raw!\n",
                     raw_dir_path, _capture_raw_num);
@@ -691,8 +764,8 @@ CaptureRawData::capture_raw_ctl(capture_raw_t type, int count, const char* captu
 
         char cmd_buffer[32] = {0};
         snprintf(cmd_buffer, sizeof(cmd_buffer),
-                 "echo %d > %s",
-                 count, CAPTURE_CNT_FILENAME);
+                 "echo %d > %s_c%d",
+                 count, CAPTURE_CNT_FILENAME, _camId);
         system(cmd_buffer);
 
         _capture_image_mutex.lock();
@@ -723,20 +796,26 @@ void CaptureRawData::save_metadata_and_register
         uint32_t rawFrmId = 0;
 
         snprintf(file_name, sizeof(file_name), "%s", CAPTURE_CNT_FILENAME);
-        get_value_from_file(file_name, capture_cnt, rawFrmId);
+        bool ret = get_value_from_file(file_name, capture_cnt, rawFrmId);
+        if (!ret) {
+            // test multi cam mode
+            snprintf(file_name, sizeof(file_name), "%.50s_c%d", CAPTURE_CNT_FILENAME, _camId);
+            get_value_from_file(file_name, capture_cnt, rawFrmId);
+        }
         LOGD_CAMHW_SUBM(CAPTURERAW_SUBM, "rawFrmId: %d, sequence: %d, _capture_metadata_num: %d\n",
                         rawFrmId, frameId,
                         _capture_metadata_num);
-        if (_is_raw_dir_exist && frameId >= rawFrmId && expParams.ptr())
+        if (_is_raw_dir_exist && frameId >= rawFrmId && expParams.ptr()) {
 #ifdef WRITE_ISP_REG
             write_reg_to_file(ISP_REGS_BASE, 0x0, 0x6000, frameId);
 #endif
 #ifdef WRITE_ISPP_REG
-        write_reg_to_file(ISPP_REGS_BASE, 0x0, 0xc94, frameId);
+            write_reg_to_file(ISPP_REGS_BASE, 0x0, 0xc94, frameId);
 #endif
-        write_metadata_to_file(raw_dir_path,
-                               frameId,
-                               ispParams, expParams, afParams,working_mode);
+            write_metadata_to_file(raw_dir_path,
+                    frameId,
+                    ispParams, expParams, afParams,working_mode);
+        }
         _capture_metadata_num--;
         if (!_capture_metadata_num) {
             _is_raw_dir_exist = false;

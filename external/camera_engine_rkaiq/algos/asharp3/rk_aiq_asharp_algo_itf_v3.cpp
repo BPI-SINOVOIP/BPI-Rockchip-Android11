@@ -17,9 +17,10 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "asharp3/rk_aiq_asharp_algo_itf_v3.h"
 #include "asharp3/rk_aiq_asharp_algo_v3.h"
+#include "rk_aiq_algo_types.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -33,15 +34,14 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
 
     XCamReturn result = XCAM_RETURN_NO_ERROR;
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
     LOGI_ASHARP("%s:oyyf (enter)\n", __FUNCTION__ );
 
 #if 1
     Asharp_Context_V3_t* pAsharpCtx = NULL;
 #if ASHARP_USE_JSON_FILE_V3
-    Asharp3_result_t ret = Asharp_Init_V3(&pAsharpCtx, cfgInt->calibv2);
+    Asharp3_result_t ret = Asharp_Init_V3(&pAsharpCtx, cfg->calibv2);
 #else
-    Asharp3_result_t ret = Asharp_Init_V3(&pAsharpCtx, cfgInt->calib);
+    Asharp3_result_t ret = Asharp_Init_V3(&pAsharpCtx, cfg->calib);
 #endif
 
     if(ret != ASHARP3_RET_SUCCESS) {
@@ -84,17 +84,17 @@ prepare(RkAiqAlgoCom* params)
     LOGI_ASHARP("%s: oyyf (enter)\n", __FUNCTION__ );
 
     Asharp_Context_V3_t* pAsharpCtx = (Asharp_Context_V3_t *)params->ctx;
-    RkAiqAlgoConfigAsharpV3Int* pCfgParam = (RkAiqAlgoConfigAsharpV3Int*)params;
+    RkAiqAlgoConfigAsharpV3* pCfgParam = (RkAiqAlgoConfigAsharpV3*)params;
     pAsharpCtx->prepare_type = params->u.prepare.conf_type;
 
     if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )) {
 #if(ASHARP_USE_JSON_FILE_V3)
         CalibDbV2_SharpV3_t *calibv2_sharp =
-            (CalibDbV2_SharpV3_t *)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calibv2, sharp_v3));
+            (CalibDbV2_SharpV3_t *)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->com.u.prepare.calibv2, sharp_v3));
         pAsharpCtx->sharp_v3 = *calibv2_sharp;
 #else
         pAsharpCtx->list_sharp_v3 =
-            (struct list_head*)(CALIBDB_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calib, list_sharp_v3));
+            (struct list_head*)(CALIBDB_GET_MODULE_PTR(pCfgParam->com.u.prepare.calib, list_sharp_v3));
 #endif
         pAsharpCtx->isIQParaUpdate = true;
         pAsharpCtx->isReCalculate |= 1;
@@ -119,10 +119,10 @@ pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGD_ASHARP("%s: oyyf (enter)\n", __FUNCTION__ );
     Asharp_Context_V3_t* pAsharpCtx = (Asharp_Context_V3_t *)inparams->ctx;
 
-    RkAiqAlgoPreAsharpV3Int* pAsharpPreParams = (RkAiqAlgoPreAsharpV3Int*)inparams;
+    RkAiqAlgoPreAsharpV3* pAsharpPreParams = (RkAiqAlgoPreAsharpV3*)inparams;
 
     oldGrayMode = pAsharpCtx->isGrayMode;
-    if (pAsharpPreParams->rk_com.u.proc.gray_mode) {
+    if (pAsharpPreParams->com.u.proc.gray_mode) {
         pAsharpCtx->isGrayMode = true;
     } else {
         pAsharpCtx->isGrayMode = false;
@@ -151,8 +151,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGD_ASHARP("%s:oyyf (enter)\n", __FUNCTION__ );
 
 #if 1
-    RkAiqAlgoProcAsharpV3Int* pAsharpProcParams = (RkAiqAlgoProcAsharpV3Int*)inparams;
-    RkAiqAlgoProcResAsharpV3Int* pAsharpProcResParams = (RkAiqAlgoProcResAsharpV3Int*)outparams;
+    RkAiqAlgoProcAsharpV3* pAsharpProcParams = (RkAiqAlgoProcAsharpV3*)inparams;
+    RkAiqAlgoProcResAsharpV3* pAsharpProcResParams = (RkAiqAlgoProcResAsharpV3*)outparams;
     Asharp_Context_V3_t* pAsharpCtx = (Asharp_Context_V3_t *)inparams->ctx;
     Asharp3_ExpInfo_t stExpInfo;
     memset(&stExpInfo, 0x00, sizeof(Asharp3_ExpInfo_t));
@@ -182,11 +182,11 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     stExpInfo.snr_mode = 0;
 
 #if 1// TODO Merge:
-    XCamVideoBuffer* xCamAePreRes = pAsharpProcParams->rk_com.u.proc.res_comb->ae_pre_res;
-    RkAiqAlgoPreResAeInt* pAEPreRes = nullptr;
+    XCamVideoBuffer* xCamAePreRes = pAsharpProcParams->com.u.proc.res_comb->ae_pre_res;
+    RkAiqAlgoPreResAe* pAEPreRes = nullptr;
     if (xCamAePreRes) {
         // xCamAePreRes->ref(xCamAePreRes);
-        pAEPreRes = (RkAiqAlgoPreResAeInt*)xCamAePreRes->map(xCamAePreRes);
+        pAEPreRes = (RkAiqAlgoPreResAe*)xCamAePreRes->map(xCamAePreRes);
         if (!pAEPreRes) {
             LOGE_ASHARP("ae pre result is null");
         } else {
@@ -196,7 +196,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     }
 #endif
 
-    RKAiqAecExpInfo_t *curExp = pAsharpProcParams->rk_com.u.proc.curExp;
+    RKAiqAecExpInfo_t *curExp = pAsharpProcParams->com.u.proc.curExp;
     if(curExp != NULL) {
         stExpInfo.snr_mode = curExp->CISFeature.SNR;
         if(pAsharpProcParams->hdr_mode == RK_AIQ_WORKING_MODE_NORMAL) {

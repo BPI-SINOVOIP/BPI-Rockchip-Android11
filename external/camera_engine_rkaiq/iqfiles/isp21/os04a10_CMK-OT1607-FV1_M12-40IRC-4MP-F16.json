@@ -154,6 +154,8 @@
 									}
 								},
 								"AecSpeed":	{
+									"SmoothEn":	1,
+									"DyDampEn":	1,
 									"DampOver":	0.15,
 									"DampUnder":	0.45,
 									"DampDark2Bright":	0.15,
@@ -423,7 +425,7 @@
 							"manualPara":	{
 								"mode":	"CALIB_MWB_MODE_SCENE",
 								"cfg":	{
-									"mwbGain":	[1.23141, 1, 1, 3.12931],
+									"mwbGain":	[1.32703, 1, 1, 3.31432],
 									"scene":	"CALIB_WB_SCENE_CLOUDY_DAYLIGHT",
 									"cct":	{
 										"CCT":	5000,
@@ -433,7 +435,7 @@
 							},
 							"autoPara":	{
 								"hdrPara":	{
-									"frameChooseMode":	"CALIB_AWB_HDR_FRAME_CHOOSE_MODE_MANUAL",
+									"frameChooseMode":	"CALIB_AWB_HDR_FRAME_CHOOSE_MODE_AUTO",
 									"frameChoose":	1
 								},
 								"lscBypassEnable":	0,
@@ -454,42 +456,42 @@
 									"lumaValue_len":	1,
 									"maxR":	[230],
 									"maxR_len":	1,
-									"minR":	[6],
+									"minR":	[3],
 									"minR_len":	1,
 									"maxG":	[230],
 									"maxG_len":	1,
-									"minG":	[9],
+									"minG":	[3],
 									"minG_len":	1,
 									"maxB":	[230],
 									"maxB_len":	1,
-									"minB":	[6],
+									"minB":	[3],
 									"minB_len":	1,
-									"maxY":	[210],
+									"maxY":	[230],
 									"maxY_len":	1,
-									"minY":	[9],
+									"minY":	[3],
 									"minY_len":	1
 								},
 								"rgb2TcsPara":	{
-									"pseudoLuminanceWeight":	[0.33334, 0.333414, 0.333246],
-									"rotationMat":	[-0.589753, 0.807584, -0.223756, 0.807584, 0.589753, 0.566345, 0, 0, 1]
+									"pseudoLuminanceWeight":	[0.374556, 0.375338, 0.250105],
+									"rotationMat":	[-0.52139, 0.853319, 1.20072, 0.853319, 0.52139, 0.602424, 0, 0, 1]
 								},
 								"rgb2RotationYuvMat":	[0.0292969, 0.134766, 0.0136719, 38.9375, -0.0839844, -0.00390625, 0.0683594, 137.562, 0.0488281, -0.0507812, 0.0488281, 106.812, 0, 0, 0, 1],
 								"extraWpRange":	[{
 										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_UV",
 										"mode":	"CALIB_AWB_EXCLUDE_WP_MODE",
-										"region":	[0, 0, 0, 0]
+										"region":	[244, 249, 228, 211]
 									}, {
-										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_UV",
+										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_XY",
 										"mode":	"CALIB_AWB_EXCLUDE_WP_MODE",
-										"region":	[0, 0, 0, 0]
+										"region":	[-1096, -985, 140, 65]
 									}, {
-										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_UV",
+										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_XY",
 										"mode":	"CALIB_AWB_EXCLUDE_WP_MODE",
-										"region":	[0, 0, 0, 0]
+										"region":	[-40, 158, 121, 16]
 									}, {
-										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_UV",
+										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_XY",
 										"mode":	"CALIB_AWB_EXCLUDE_WP_MODE",
-										"region":	[0, 0, 0, 0]
+										"region":	[-235, -40, 237, 80]
 									}, {
 										"domain":	"CALIB_AWB_EXTRA_RANGE_DOMAIN_UV",
 										"mode":	"CALIB_AWB_EXCLUDE_WP_MODE",
@@ -540,19 +542,19 @@
 										}],
 									"wpDiffWeightLvSet_len":	2
 								},
-								"wpDiffBlkWeiEnable":	1,
+								"wpDiffBlkWeiEnable":	0,
 								"wpDiffBlkWeight":	[6, 6, 6, 8, 8, 8, 8, 10, 8, 8, 8, 8, 6, 6, 6, 6, 6, 8, 8, 10, 10, 12, 12, 12, 10, 10, 8, 8, 6, 6, 6, 8, 10, 12, 14, 16, 18, 20, 18, 16, 14, 12, 10, 8, 6, 8, 8, 12, 16, 22, 26, 30, 32, 30, 26, 22, 16, 12, 8, 8, 8, 10, 14, 22, 28, 36, 42, 46, 42, 36, 28, 22, 14, 10, 8, 8, 10, 16, 26, 36, 46, 54, 58, 54, 46, 36, 26, 16, 10, 8, 8, 12, 18, 30, 42, 54, 63, 63, 63, 54, 42, 30, 18, 12, 8, 10, 12, 20, 32, 46, 58, 63, 63, 63, 58, 46, 32, 20, 12, 10, 8, 12, 18, 30, 42, 54, 63, 63, 63, 54, 42, 30, 18, 12, 8, 8, 10, 16, 26, 36, 46, 54, 58, 54, 46, 36, 26, 16, 10, 8, 8, 10, 14, 22, 28, 36, 42, 46, 42, 36, 28, 22, 14, 10, 8, 8, 8, 12, 16, 22, 26, 30, 32, 30, 26, 22, 16, 12, 8, 8, 6, 8, 10, 12, 14, 16, 18, 20, 18, 16, 14, 12, 10, 8, 6, 6, 6, 8, 8, 10, 10, 12, 12, 12, 10, 10, 8, 8, 6, 6, 6, 6, 6, 8, 8, 8, 8, 10, 8, 8, 8, 8, 6, 6, 6],
 								"lightSources":	[{
 										"name":	"A",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_INDOOR",
-										"standardGainValue":	[1.23141, 1, 1, 3.12931],
+										"standardGainValue":	[1.32703, 1, 1, 3.31432],
 										"uvRegion":	{
-											"u":	[122.5, 32.5, 38, 123.373],
-											"v":	[127.5, 129.5, 101, 126.961]
+											"u":	[122.5, 46, 53.5, 122.5],
+											"v":	[127.5, 114, 101, 125.5]
 										},
 										"xyRegion":	{
-											"normal":	[-1.5176, -0.9399, 0.1128, -0.0004],
-											"big":	[-1.5181, -0.9399, 0.1772, -0.1255]
+											"normal":	[-0.043241, 0.269704, 0.137002, -0.0709569],
+											"big":	[-0.0365239, 0.269333, 0.205713, -0.156499]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -562,20 +564,20 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 90, 75],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}, {
 										"name":	"CWF",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_INDOOR",
-										"standardGainValue":	[2.06225, 1, 1, 2.6536],
+										"standardGainValue":	[1.88234, 1, 1, 2.88169],
 										"uvRegion":	{
-											"u":	[60.6976, 68.3503, 125.5, 123],
-											"v":	[77.062, 64.7614, 125, 125.5]
+											"u":	[58.5, 63, 125.5, 123],
+											"v":	[85, 76.5, 125, 125.5]
 										},
 										"xyRegion":	{
-											"normal":	[-0.9399, -0.4618, -0.0785, -0.2168],
-											"big":	[-0.9399, -0.4618, 0.0785, -0.2672]
+											"normal":	[0.269704, 0.746667, -0.0709569, -0.174737],
+											"big":	[0.250667, 0.762667, -0.0707288, -0.224003]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -585,20 +587,20 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 70, 60, 50, 40],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}, {
 										"name":	"D50",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_AMBIGUITY",
-										"standardGainValue":	[1.77768, 1, 1, 1.88893],
+										"standardGainValue":	[1.90508, 1, 1, 1.97851],
 										"uvRegion":	{
-											"u":	[61.9024, 77.2189, 126.5, 126],
-											"v":	[65.2302, 38.6273, 124, 125.5]
+											"u":	[63, 77.5, 126.5, 126],
+											"v":	[76.5, 48, 124, 125.5]
 										},
 										"xyRegion":	{
-											"normal":	[-0.4606, -0.1098, 0.2267, -0.1676],
-											"big":	[-0.4619, -0.1071, 0.2371, -0.2794]
+											"normal":	[0.74937, 1.11205, 0.175891, -0.221691],
+											"big":	[0.752687, 1.11696, 0.226317, -0.248106]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -608,20 +610,20 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}, {
 										"name":	"D65",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_OUTDOOR",
-										"standardGainValue":	[2.21952, 1, 1, 1.62171],
+										"standardGainValue":	[2.20617, 1, 1, 1.70399],
 										"uvRegion":	{
-											"u":	[72.6314, 91.2333, 128.489, 125.387],
-											"v":	[39.6175, 29.829, 121.951, 123.852]
+											"u":	[77.5, 85.5, 126.5, 126.5],
+											"v":	[48, 31, 123, 124]
 										},
 										"xyRegion":	{
-											"normal":	[-0.102, 0.072, 0.0953, -0.1705],
-											"big":	[-0.1097, 0.0764, 0.2242, -0.2768]
+											"normal":	[1.11696, 1.37, 0.116835, -0.165689],
+											"big":	[1.11877, 1.37, 0.162757, -0.177666]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -631,20 +633,20 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 90, 80, 70],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}, {
 										"name":	"D75",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_OUTDOOR",
-										"standardGainValue":	[2.24223, 1, 1, 1.47815],
+										"standardGainValue":	[2.29955, 1, 1, 1.58086],
 										"uvRegion":	{
-											"u":	[129.061, 127.072, 83.918, 95.4263],
-											"v":	[122.493, 122.753, 34.0998, 31.3102]
+											"u":	[127, 126.5, 85.5, 95.5],
+											"v":	[122, 123, 31.5, 23]
 										},
 										"xyRegion":	{
-											"normal":	[0.0764, 0.228, 0.1116, -0.1705],
-											"big":	[0.0764, 0.2993, 0.2257, -0.2865]
+											"normal":	[1.37629, 1.52705, 0.10863, -0.132693],
+											"big":	[1.37, 1.52733, 0.143597, -0.168426]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -654,20 +656,20 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 90, 80, 70, 50],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}, {
 										"name":	"HZ",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_INDOOR",
-										"standardGainValue":	[1.00443, 1, 1, 3.82795],
+										"standardGainValue":	[1.11832, 1, 1, 3.63318],
 										"uvRegion":	{
-											"u":	[121.23, 36.5, 35.5, 122.5],
-											"v":	[130.004, 149.5, 128.5, 127.5]
+											"u":	[122, 46.5, 46, 122.5],
+											"v":	[128.5, 134.5, 114.5, 127.5]
 										},
 										"xyRegion":	{
-											"normal":	[-1.8402, -1.5181, 0.0544, -0.0587],
-											"big":	[-1.8576, -1.5181, 0.1212, -0.1197]
+											"normal":	[-0.284681, -0.043241, 0.0769974, -0.0831237],
+											"big":	[-0.337556, -0.0365239, 0.101782, -0.16204]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -677,20 +679,20 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 90, 75, 50],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}, {
 										"name":	"TL84",
 										"doorType":	"CALIB_AWB_DOOR_TYPE_INDOOR",
-										"standardGainValue":	[1.81259, 1, 1, 2.41123],
+										"standardGainValue":	[1.52744, 1, 1, 2.60334],
 										"uvRegion":	{
-											"u":	[123.155, 37.5, 63.8677, 124.335],
-											"v":	[126.888, 101, 71.791, 122.193]
+											"u":	[122.5, 53.5, 59, 123],
+											"v":	[125.5, 100.5, 85, 125]
 										},
 										"xyRegion":	{
-											"normal":	[-0.941, -0.4567, 0.1041, -0.076],
-											"big":	[-0.9418, -0.4567, 0.1986, -0.0798]
+											"normal":	[0.272, 0.747928, 0.170131, -0.0721733],
+											"big":	[0.273259, 0.749333, 0.235821, -0.0727816]
 										},
 										"rtYuvRegion":	{
 											"thcurve_u":	[50, 54, 70, 78, 110, 142],
@@ -700,8 +702,8 @@
 										},
 										"staWeight":	[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 90, 80, 70, 60, 60],
 										"dayGainLvThSet":	[1024, 8192],
-										"defaultDayGainLow":	[2.06225, 1, 1, 2.6536],
-										"defaultDayGainHigh":	[1.77768, 1, 1, 1.88893],
+										"defaultDayGainLow":	[1.88234, 1, 1, 2.88169],
+										"defaultDayGainHigh":	[1.90508, 1, 1, 1.97851],
 										"xyType2Enable":	1
 									}],
 								"lightSources_len":	7
@@ -789,7 +791,7 @@
 										"high_len":	1
 									}
 								},
-								"defaultNightGain":	[1.23141, 1, 1, 3.12931],
+								"defaultNightGain":	[1.32703, 1, 1, 3.31432],
 								"lumaValueMatrix":	[0, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144],
 								"defaultNightGainWeight":	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 								"probCalcDis":	{
@@ -827,42 +829,42 @@
 									"enable":	1,
 									"colorBlock":	[{
 											"index":	15,
-											"meanC":	30.2118,
-											"meanH":	38.39
+											"meanC":	24.9298,
+											"meanH":	40.1105
 										}, {
 											"index":	13,
-											"meanC":	23.0534,
-											"meanH":	-75.6013
+											"meanC":	25.9446,
+											"meanH":	-70.0917
 										}, {
 											"index":	5,
-											"meanC":	12.7078,
-											"meanH":	-62.9863
+											"meanC":	12.9021,
+											"meanH":	-65.9844
 										}, {
 											"index":	10,
-											"meanC":	12.4866,
-											"meanH":	-29.4792
+											"meanC":	12.2567,
+											"meanH":	-44.4133
 										}, {
 											"index":	14,
-											"meanC":	15.8352,
-											"meanH":	153.706
+											"meanC":	15.251,
+											"meanH":	159.265
 										}, {
 											"index":	16,
-											"meanC":	32.666,
-											"meanH":	95.4902
+											"meanC":	31.0475,
+											"meanH":	94.9178
 										}],
 									"colorBlock_len":	6,
 									"lsUsedForEstimation":	[{
 											"name":	"A",
-											"RGain":	1.23141,
-											"BGain":	3.12931
+											"RGain":	1.32703,
+											"BGain":	3.31432
 										}, {
 											"name":	"D50",
-											"RGain":	1.77768,
-											"BGain":	1.88893
+											"RGain":	1.90508,
+											"BGain":	1.97851
 										}, {
 											"name":	"TL84",
-											"RGain":	1.81259,
-											"BGain":	2.41123
+											"RGain":	1.52744,
+											"BGain":	2.60334
 										}],
 									"lsUsedForEstimation_len":	3,
 									"alpha":	0.9
@@ -2269,6 +2271,10 @@
 								"win_v_offs":	0,
 								"win_h_size":	0,
 								"win_v_size":	0,
+								"video_win_h_offs":	0,
+								"video_win_v_offs":	0,
+								"video_win_h_size":	0,
+								"video_win_v_size":	0,
 								"fixed_mode":	{
 									"code":	8
 								},
@@ -2278,17 +2284,34 @@
 								"infinity_mode":	{
 									"code":	32
 								},
+								"ldg_param":	{
+									"enable":	0,
+									"ldg_xl":	10,
+									"ldg_yl":	28,
+									"ldg_kl":	1286,
+									"ldg_xh":	118,
+									"ldg_yh":	8,
+									"ldg_kh":	1340
+								},
+								"highlight":	{
+									"ther0":	245,
+									"ther1":	200
+								},
 								"contrast_af":	{
 									"enable":	1,
 									"Afss":	"CalibDbV2_CAM_AFM_FSS_ADAPTIVE_RANGE",
 									"FullDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
-									"FullSteps":	9,
-									"FullRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+									"FullRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"FullRangeTbl_len":	9,
 									"AdaptiveDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
-									"AdaptiveSteps":	9,
-									"AdaptRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-									"TrigThers":	0.075,
-									"LumaTrigThers":	0,
+									"AdaptRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"AdaptRangeTbl_len":	9,
+									"TrigThers":	[0.075],
+									"TrigThers_len":	1,
+									"TrigThersFv":	[0],
+									"TrigThersFv_len":	1,
+									"LumaTrigThers":	1,
+									"ExpTrigThers":	1,
 									"StableThers":	0.02,
 									"StableFrames":	3,
 									"StableTime":	200,
@@ -2306,7 +2329,81 @@
 									"SearchPauseLumaThers":	0,
 									"SearchLumaStableFrames":	0,
 									"SearchLumaStableThers":	0,
-									"FlatValue":	0
+									"Stage1QuickFoundThers":	0.01,
+									"Stage2QuickFoundThers":	0.2,
+									"FlatValue":	0,
+									"PointLightLumaTh":	4095,
+									"PointLightCntTh":	225,
+									"ZoomCfg":	{
+										"QuickFoundThersZoomIdx":	[0],
+										"QuickFoundThersZoomIdx_len":	1,
+										"QuickFoundThers":	[0],
+										"QuickFoundThers_len":	1,
+										"SearchStepZoomIdx":	[0],
+										"SearchStepZoomIdx_len":	1,
+										"SearchStep":	[0],
+										"SearchStep_len":	1,
+										"StopStepZoomIdx":	[0],
+										"StopStepZoomIdx_len":	1,
+										"StopStep":	[0],
+										"StopStep_len":	1,
+										"SkipHighPassZoomIdx":	0,
+										"SkipHighPassGain":	0
+									}
+								},
+								"video_contrast_af":	{
+									"enable":	1,
+									"Afss":	"CalibDbV2_CAM_AFM_FSS_ADAPTIVE_RANGE",
+									"FullDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
+									"FullRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"FullRangeTbl_len":	9,
+									"AdaptiveDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
+									"AdaptRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"AdaptRangeTbl_len":	9,
+									"TrigThers":	[0.075],
+									"TrigThers_len":	1,
+									"TrigThersFv":	[0],
+									"TrigThersFv_len":	1,
+									"LumaTrigThers":	1,
+									"ExpTrigThers":	1,
+									"StableThers":	0.02,
+									"StableFrames":	3,
+									"StableTime":	200,
+									"SceneDiffEnable":	0,
+									"SceneDiffThers":	0,
+									"SceneDiffBlkThers":	0,
+									"CenterSceneDiffThers":	0,
+									"ValidMaxMinRatio":	0,
+									"ValidValueThers":	0,
+									"OutFocusValue":	50,
+									"OutFocusPos":	30,
+									"WeightEnable":	0,
+									"Weight":	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+									"SearchPauseLumaEnable":	0,
+									"SearchPauseLumaThers":	0,
+									"SearchLumaStableFrames":	0,
+									"SearchLumaStableThers":	0,
+									"Stage1QuickFoundThers":	0.01,
+									"Stage2QuickFoundThers":	0.2,
+									"FlatValue":	0,
+									"PointLightLumaTh":	4095,
+									"PointLightCntTh":	225,
+									"ZoomCfg":	{
+										"QuickFoundThersZoomIdx":	[0],
+										"QuickFoundThersZoomIdx_len":	1,
+										"QuickFoundThers":	[0],
+										"QuickFoundThers_len":	1,
+										"SearchStepZoomIdx":	[0],
+										"SearchStepZoomIdx_len":	1,
+										"SearchStep":	[0],
+										"SearchStep_len":	1,
+										"StopStepZoomIdx":	[0],
+										"StopStepZoomIdx_len":	1,
+										"StopStep":	[0],
+										"StopStep_len":	1,
+										"SkipHighPassZoomIdx":	0,
+										"SkipHighPassGain":	0
+									}
 								},
 								"laser_af":	{
 									"enable":	0,
@@ -2314,13 +2411,47 @@
 									"distanceDot":	[0.2, 0.24, 0.34, 0.4, 0.66, 1, 3]
 								},
 								"pdaf":	{
-									"enable":	0
+									"enable":	0,
+									"pdVsCdDebug":	0,
+									"pdDataBit":	10,
+									"pdBlkLevel":	64,
+									"pdSearchRadius":	3,
+									"pdMirrorInCalib":	1,
+									"pdWidth":	508,
+									"pdHeight":	760,
+									"pdIsoPara":
+									[
+										{
+											"iso": 50,
+											"pdNoiseFactor":	0.15,
+											"pdConfdRatio1":	1,
+											"pdConfdRatio2":	1,
+											"pdConfdThresh":	0.4,
+											"defocusPdThresh":	18,
+											"stablePdRatio":	0.125,
+											"stablePdOffset":	8,
+											"stableCntRatio":	1.5,
+											"noconfCntThresh":	4,
+											"fineSearchTbl":	[{
+												"confidence":	512,
+												"range":	4,
+												"stepPos":	1
+											}, {
+												"confidence":	256,
+												"range":	8,
+												"stepPos":	2
+											}],
+											"fineSearchTbl_len":	2
+										}
+									],
+									"pdIsoPara_len":	1
 								},
 								"vcmcfg":	{
 									"start_current":	-1,
 									"rated_current":	-1,
 									"step_mode":	-1,
-									"extra_delay":	0
+									"extra_delay":	0,
+									"posture_diff":	0.1
 								},
 								"measiso_cfg":	[{
 										"iso":	50,
@@ -2387,17 +2518,42 @@
 										"afmThres":	4,
 										"gammaY":	[0, 45, 108, 179, 245, 344, 409, 459, 500, 567, 622, 676, 759, 833, 896, 962, 1023],
 										"gaussWeight":	[32, 16, 8]
-									}],
+									}
+								],
 								"zoomfocus_tbl":	{
-									"tbl_len":	0,
-									"focal_length":	[],
-									"focal_length_len":	0,
-									"zoom_pos":	[],
-									"zoom_pos_len":	0,
-									"focus_infpos":	[],
-									"focus_infpos_len":	0,
-									"focus_macropos":	[],
-									"focus_macropos_len":	0
+									"widemod_deviate":	10,
+									"telemod_deviate":	10,
+									"zoom_move_dot":	[0],
+									"zoom_move_dot_len":	1,
+									"zoom_move_step":	[16],
+									"zoom_move_step_len":	1,
+									"focal_length":	[0],
+									"focal_length_len":	1,
+									"zoomcode":	[0],
+									"zoomcode_len":	1,
+									"focuscode":	[{
+											"pos":	0.5,
+											"code":	[0],
+											"code_len":	1
+										}, {
+											"pos":	-1,
+											"code":	[0],
+											"code_len":	1
+										}],
+									"focuscode_len":	2,
+									"ZoomSearchTbl":	[0],
+									"ZoomSearchTbl_len":	1,
+									"ZoomSearchRefCurveIdx":	0,
+									"FocusSearchMargin":	50,
+									"FocusSearchPlusRange":	[0],
+									"FocusSearchPlusRange_len":	1,
+									"FocusStage1Step":	1,
+									"searchZoomRange":	100,
+									"searchFocusRange":	100,
+									"searchEmax":	100,
+									"searchEavg":	100,
+									"IsZoomFocusRec":	0,
+									"ZoomInfoDir":	"/userdata"
 								}
 							}
 						},

@@ -3,13 +3,8 @@
 
 #include "base/xcam_common.h"
 #include "rk_aiq_algo_des.h"
-
-typedef struct adebayer_attrib_s {
-    unsigned char enable;
-    unsigned char enhance_strength[9];
-    unsigned char low_freq_thresh;
-    unsigned char high_freq_thresh;
-} adebayer_attrib_t;
+#include "rk_aiq_comm.h"
+#include "rk_aiq_types_algo_adebayer_int.h"
 
 // need_sync means the implementation should consider
 // the thread synchronization

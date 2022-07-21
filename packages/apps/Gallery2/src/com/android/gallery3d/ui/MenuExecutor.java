@@ -24,8 +24,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import androidx.core.content.FileProvider;
 import androidx.print.PrintHelper;
 import android.util.ConfigUtil;
 import android.view.Menu;
@@ -39,6 +41,7 @@ import com.android.gallery3d.data.MediaItem;
 import com.android.gallery3d.data.MediaObject;
 import com.android.gallery3d.data.Path;
 import com.android.gallery3d.filtershow.crop.CropActivity;
+import com.android.gallery3d.util.FileUtils;
 import com.android.gallery3d.util.Future;
 import com.android.gallery3d.util.GalleryUtils;
 import com.android.gallery3d.util.ThreadPool.Job;
@@ -267,6 +270,12 @@ public class MenuExecutor {
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.putExtra("mimeType", intent.getType());
                 Activity activity = mActivity;
+                Uri uri = intent.getData();
+                if (null != uri && "file".equals(uri.getScheme())) {
+                    uri = FileUtils.adjustFileUri(mActivity.getAndroidContext(), uri);
+                    intent.setDataAndType(uri, intent.getType());
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
                 activity.startActivity(Intent.createChooser(
                         intent, activity.getString(R.string.set_as)));
                 return;

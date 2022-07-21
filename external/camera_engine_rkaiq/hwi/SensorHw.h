@@ -23,7 +23,7 @@
 #include <istream>
 #include "v4l2_device.h"
 #include "rk_aiq_pool.h"
-#include "rk-camera-module.h"
+#include "common/rk-camera-module.h"
 #include "v4l2_buffer_proxy.h"
 
 /************ BELOW FROM kernel/include/uapi/linux/rk-preisp.h ************/
@@ -72,6 +72,9 @@ class BaseSensorHw : public V4l2SubDevice {
 public:
     explicit BaseSensorHw(const char* name): V4l2SubDevice (name) {}
     virtual ~BaseSensorHw() {}
+    virtual void setCamPhyId(int phyId) {
+        mCamPhyId = phyId;
+    }
      virtual XCamReturn setExposureParams(SmartPtr<RkAiqExpParamsProxy>& expPar) { return XCAM_RETURN_NO_ERROR;}
     virtual XCamReturn getSensorModeData(const char* sns_ent_name,
                                  rk_aiq_exposure_sensor_descriptor& sns_des) { return XCAM_RETURN_NO_ERROR;}
@@ -92,8 +95,11 @@ public:
     virtual XCamReturn stop() { return XCAM_RETURN_NO_ERROR;}
     virtual XCamReturn on_dqueue(int dev_idx, SmartPtr<V4l2BufferProxy> buf_proxy) { return XCAM_RETURN_NO_ERROR; }
     virtual bool is_virtual_sensor() { return false; }
+    virtual XCamReturn set_sync_mode(uint32_t mode) {return XCAM_RETURN_NO_ERROR;}
 protected:
     XCAM_DEAD_COPY (BaseSensorHw);
+    uint32_t get_v4l2_pixelformat(uint32_t pixelcode);
+    int mCamPhyId;
 };
 
 class SensorHw : public BaseSensorHw {
@@ -119,15 +125,16 @@ public:
     virtual XCamReturn get_mirror_flip(bool& mirror, bool& flip);
     virtual XCamReturn start(bool prepared = false);
     virtual XCamReturn stop();
+    virtual XCamReturn set_sync_mode(uint32_t mode);
 
-private:
     XCAM_DEAD_COPY (SensorHw);
+protected:
     Mutex _mutex;
     int _working_mode;
     std::list<std::pair<SmartPtr<RkAiqExpParamsProxy>, bool>> _exp_list;
     std::map<int, SmartPtr<RkAiqExpParamsProxy>> _effecting_exp_map;
     bool _first;
-    int _frame_sequence;
+    uint32_t _frame_sequence;
     rk_aiq_exposure_sensor_descriptor _sensor_desc;
     std::list<SmartPtr<RkAiqExpParamsProxy>> _delayed_gain_list;
     std::list<SmartPtr<RkAiqExpParamsProxy>> _delayed_dcg_gain_mode_list;
@@ -140,7 +147,38 @@ private:
     int _dcg_gain_mode_delay;
     bool _dcg_gain_mode_delayed;
     bool _dcg_gain_mode_with_time;
+    bool _is_i2c_exp;
     SmartPtr<RkAiqExpParamsPool> _expParamsPool;
+
+    enum {
+        RK_EXP_UPDATE_TIME,
+        RK_EXP_UPDATE_GAIN,
+        RK_EXP_UPDATE_DCG,
+    };
+    typedef struct pending_split_exps_s {
+        bool is_rk_exp_res;
+        union {
+            struct {
+                uint16_t line_length_pixels;
+                uint32_t frame_length_lines;
+                float pixel_clock_freq_mhz;
+                int   dcg_mode[3];
+                RkAiqExpSensorParam_t sensor_params[3];
+                uint32_t update_bits;
+            } rk_exp_res;
+
+            struct {
+                unsigned int   nNumRegs;
+                unsigned int   RegAddr[MAX_I2CDATA_LEN];
+                unsigned int   RegValue[MAX_I2CDATA_LEN];
+                unsigned int   AddrByteNum[MAX_I2CDATA_LEN];
+                unsigned int   ValueByteNum[MAX_I2CDATA_LEN];
+            } i2c_exp_res;
+        };
+    } pending_split_exps_t;
+
+    std::map<uint32_t, pending_split_exps_t> _pending_spilt_map;
+
     static uint16_t DEFAULT_POOL_SIZE;
     std::string _sns_entity_name;
     bool _mirror;
@@ -149,9 +187,14 @@ private:
     int get_sensor_fps(float& fps);
     XCamReturn setLinearSensorExposure(RKAiqAecExpInfo_t* expPar);
     XCamReturn setHdrSensorExposure(RKAiqAecExpInfo_t* expPar);
+    XCamReturn setLinearSensorExposure(pending_split_exps_t* expPar);
+    XCamReturn setHdrSensorExposure(pending_split_exps_t* expPar);
     XCamReturn setExposure(int frameid);
     XCamReturn setSensorDpcc(Sensor_dpcc_res_t* SensorDpccInfo);
     XCamReturn composeExpParam( RKAiqAecExpInfo_t* timeValid, RKAiqAecExpInfo_t* gainValid, RKAiqAecExpInfo_t* dcgGainModeValid, RKAiqAecExpInfo_t* newExp);
+    XCamReturn split_locked(SmartPtr<RkAiqExpParamsProxy>& exp_param, uint32_t sof_id);
+    XCamReturn handle_sof_internal(int64_t time, int frameid);
+    XCamReturn setI2cDAta(pending_split_exps_t* exps);
     int get_nr_switch(rk_aiq_sensor_nr_switch_t* nr_switch);
     XCamReturn _set_mirror_flip();
 

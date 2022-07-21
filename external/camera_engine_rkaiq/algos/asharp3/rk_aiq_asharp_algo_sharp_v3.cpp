@@ -1,5 +1,6 @@
 
 #include "rk_aiq_asharp_algo_sharp_v3.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 

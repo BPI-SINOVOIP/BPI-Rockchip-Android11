@@ -31,7 +31,9 @@ LOCAL_MODULE := audio.primary.$(TARGET_BOARD_HARDWARE)
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_SRC_FILES := \
-	audio_bitstream.c \
+	bitstream/audio_iec958.c \
+	bitstream/audio_bitstream.c \
+	bitstream/audio_bitstream_manager.c \
 	audio_hw.c \
 	alsa_route.c \
 	alsa_mixer.c \
@@ -87,6 +89,10 @@ endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3128)
     LOCAL_CFLAGS += -DRK3128
 endif
+ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3588)
+    LOCAL_CFLAGS += -DRK3588
+    LOCAL_CFLAGS += -DIEC958_FORAMT
+endif
 ifeq ($(strip $(TARGET_BOARD_PLATFORM_PRODUCT)), laptop)
 LOCAL_CFLAGS += -DRK3399_LAPTOP
 LOCAL_CFLAGS += -DBT_AP_SCO
@@ -95,7 +101,20 @@ ifeq ($(AUD_VOICE_CONFIG),voice_support)
 LOCAL_CFLAGS += -DVOICE_SUPPORT
 endif
 LOCAL_CFLAGS += -Wno-error
-LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils libaudioroute libhardware_legacy libspeexresampler
+
+LOCAL_SHARED_LIBRARIES := liblog libcutils libaudioutils libaudioroute libhardware_legacy libspeexresampler
+
+#API 31 -> Android 12.0, Android 12.0 link libtinyalsa_iec958
+ifneq (1, $(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 31)))
+LOCAL_SHARED_LIBRARIES += libtinyalsa_iec958
+else
+LOCAL_SHARED_LIBRARIES += libtinyalsa
+endif
+
+ifeq ($(strip $(BOARD_SUPPORT_MULTIAUDIO)), true)
+LOCAL_CFLAGS += -DSUPPORT_MULTIAUDIO
+endif
+
 LOCAL_STATIC_LIBRARIES := libspeex
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)

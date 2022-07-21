@@ -2010,6 +2010,10 @@
 								"win_v_offs":	0,
 								"win_h_size":	0,
 								"win_v_size":	0,
+								"video_win_h_offs":	0,
+								"video_win_v_offs":	0,
+								"video_win_h_size":	0,
+								"video_win_v_size":	0,
 								"fixed_mode":	{
 									"code":	8
 								},
@@ -2019,17 +2023,34 @@
 								"infinity_mode":	{
 									"code":	32
 								},
+								"ldg_param":	{
+									"enable":	0,
+									"ldg_xl":	10,
+									"ldg_yl":	28,
+									"ldg_kl":	1286,
+									"ldg_xh":	118,
+									"ldg_yh":	8,
+									"ldg_kh":	1340
+								},
+								"highlight":	{
+									"ther0":	245,
+									"ther1":	200
+								},
 								"contrast_af":	{
 									"enable":	1,
 									"Afss":	"CalibDbV2_CAM_AFM_FSS_ADAPTIVE_RANGE",
 									"FullDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
-									"FullSteps":	9,
-									"FullRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+									"FullRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"FullRangeTbl_len":	9,
 									"AdaptiveDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
-									"AdaptiveSteps":	9,
-									"AdaptRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-									"TrigThers":	0.075,
-									"LumaTrigThers":	0,
+									"AdaptRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"AdaptRangeTbl_len":	9,
+									"TrigThers":	[0.075],
+									"TrigThers_len":	1,
+									"TrigThersFv":	[0],
+									"TrigThersFv_len":	1,
+									"LumaTrigThers":	1,
+									"ExpTrigThers":	1,
 									"StableThers":	0.02,
 									"StableFrames":	3,
 									"StableTime":	200,
@@ -2047,7 +2068,81 @@
 									"SearchPauseLumaThers":	0,
 									"SearchLumaStableFrames":	0,
 									"SearchLumaStableThers":	0,
-									"FlatValue":	0
+									"Stage1QuickFoundThers":	0.01,
+									"Stage2QuickFoundThers":	0.2,
+									"FlatValue":	0,
+									"PointLightLumaTh":	4095,
+									"PointLightCntTh":	225,
+									"ZoomCfg":	{
+										"QuickFoundThersZoomIdx":	[0],
+										"QuickFoundThersZoomIdx_len":	1,
+										"QuickFoundThers":	[0],
+										"QuickFoundThers_len":	1,
+										"SearchStepZoomIdx":	[0],
+										"SearchStepZoomIdx_len":	1,
+										"SearchStep":	[0],
+										"SearchStep_len":	1,
+										"StopStepZoomIdx":	[0],
+										"StopStepZoomIdx_len":	1,
+										"StopStep":	[0],
+										"StopStep_len":	1,
+										"SkipHighPassZoomIdx":	0,
+										"SkipHighPassGain":	0
+									}
+								},
+								"video_contrast_af":	{
+									"enable":	1,
+									"Afss":	"CalibDbV2_CAM_AFM_FSS_ADAPTIVE_RANGE",
+									"FullDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
+									"FullRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"FullRangeTbl_len":	9,
+									"AdaptiveDir":	"CalibDbV2_CAM_AFM_ADAPTIVE_SEARCH",
+									"AdaptRangeTbl":	[0, 8, 16, 24, 32, 40, 48, 56, 64],
+									"AdaptRangeTbl_len":	9,
+									"TrigThers":	[0.075],
+									"TrigThers_len":	1,
+									"TrigThersFv":	[0],
+									"TrigThersFv_len":	1,
+									"LumaTrigThers":	1,
+									"ExpTrigThers":	1,
+									"StableThers":	0.02,
+									"StableFrames":	3,
+									"StableTime":	200,
+									"SceneDiffEnable":	0,
+									"SceneDiffThers":	0,
+									"SceneDiffBlkThers":	0,
+									"CenterSceneDiffThers":	0,
+									"ValidMaxMinRatio":	0,
+									"ValidValueThers":	0,
+									"OutFocusValue":	50,
+									"OutFocusPos":	30,
+									"WeightEnable":	0,
+									"Weight":	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+									"SearchPauseLumaEnable":	0,
+									"SearchPauseLumaThers":	0,
+									"SearchLumaStableFrames":	0,
+									"SearchLumaStableThers":	0,
+									"Stage1QuickFoundThers":	0.01,
+									"Stage2QuickFoundThers":	0.2,
+									"FlatValue":	0,
+									"PointLightLumaTh":	4095,
+									"PointLightCntTh":	225,
+									"ZoomCfg":	{
+										"QuickFoundThersZoomIdx":	[0],
+										"QuickFoundThersZoomIdx_len":	1,
+										"QuickFoundThers":	[0],
+										"QuickFoundThers_len":	1,
+										"SearchStepZoomIdx":	[0],
+										"SearchStepZoomIdx_len":	1,
+										"SearchStep":	[0],
+										"SearchStep_len":	1,
+										"StopStepZoomIdx":	[0],
+										"StopStepZoomIdx_len":	1,
+										"StopStep":	[0],
+										"StopStep_len":	1,
+										"SkipHighPassZoomIdx":	0,
+										"SkipHighPassGain":	0
+									}
 								},
 								"laser_af":	{
 									"enable":	0,
@@ -2055,13 +2150,47 @@
 									"distanceDot":	[0.2, 0.24, 0.34, 0.4, 0.66, 1, 3]
 								},
 								"pdaf":	{
-									"enable":	0
+									"enable":	0,
+									"pdVsCdDebug":	0,
+									"pdDataBit":	10,
+									"pdBlkLevel":	64,
+									"pdSearchRadius":	3,
+									"pdMirrorInCalib":	1,
+									"pdWidth":	508,
+									"pdHeight":	760,
+									"pdIsoPara":
+									[
+										{
+											"iso": 50,
+											"pdNoiseFactor":	0.15,
+											"pdConfdRatio1":	1,
+											"pdConfdRatio2":	1,
+											"pdConfdThresh":	0.4,
+											"defocusPdThresh":	18,
+											"stablePdRatio":	0.125,
+											"stablePdOffset":	8,
+											"stableCntRatio":	1.5,
+											"noconfCntThresh":	4,
+											"fineSearchTbl":	[{
+												"confidence":	512,
+												"range":	4,
+												"stepPos":	1
+											}, {
+												"confidence":	256,
+												"range":	8,
+												"stepPos":	2
+											}],
+											"fineSearchTbl_len":	2
+										}
+									],
+									"pdIsoPara_len":	1
 								},
 								"vcmcfg":	{
 									"start_current":	-1,
 									"rated_current":	-1,
 									"step_mode":	-1,
-									"extra_delay":	0
+									"extra_delay":	0,
+									"posture_diff":	0.1
 								},
 								"measiso_cfg":	[{
 										"iso":	50,
@@ -2128,17 +2257,42 @@
 										"afmThres":	4,
 										"gammaY":	[0, 45, 108, 179, 245, 344, 409, 459, 500, 567, 622, 676, 759, 833, 896, 962, 1023],
 										"gaussWeight":	[32, 16, 8]
-									}],
+									}
+								],
 								"zoomfocus_tbl":	{
-									"tbl_len":	0,
-									"focal_length":	[],
-									"focal_length_len":	0,
-									"zoom_pos":	[],
-									"zoom_pos_len":	0,
-									"focus_infpos":	[],
-									"focus_infpos_len":	0,
-									"focus_macropos":	[],
-									"focus_macropos_len":	0
+									"widemod_deviate":	10,
+									"telemod_deviate":	10,
+									"zoom_move_dot":	[0],
+									"zoom_move_dot_len":	1,
+									"zoom_move_step":	[16],
+									"zoom_move_step_len":	1,
+									"focal_length":	[0],
+									"focal_length_len":	1,
+									"zoomcode":	[0],
+									"zoomcode_len":	1,
+									"focuscode":	[{
+											"pos":	0.5,
+											"code":	[0],
+											"code_len":	1
+										}, {
+											"pos":	-1,
+											"code":	[0],
+											"code_len":	1
+										}],
+									"focuscode_len":	2,
+									"ZoomSearchTbl":	[0],
+									"ZoomSearchTbl_len":	1,
+									"ZoomSearchRefCurveIdx":	0,
+									"FocusSearchMargin":	50,
+									"FocusSearchPlusRange":	[0],
+									"FocusSearchPlusRange_len":	1,
+									"FocusStage1Step":	1,
+									"searchZoomRange":	100,
+									"searchFocusRange":	100,
+									"searchEmax":	100,
+									"searchEavg":	100,
+									"IsZoomFocusRec":	0,
+									"ZoomInfoDir":	"/userdata"
 								}
 							}
 						},

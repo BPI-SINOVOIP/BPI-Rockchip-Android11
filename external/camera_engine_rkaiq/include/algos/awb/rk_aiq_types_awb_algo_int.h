@@ -25,7 +25,8 @@
 
 #include "awb/rk_aiq_types_awb_algo.h"
 #include "RkAiqCalibDbTypes.h"
-#include "RkAiqCalibDbTypesV2.h"
+#include "awb_head.h"
+#include "awb_uapi_head.h"
 
 typedef enum rk_aiq_wb_scene_e {
     RK_AIQ_WBCT_INCANDESCENT = 0,
@@ -62,6 +63,8 @@ typedef enum rk_aiq_wb_mwb_mode_e {
 } rk_aiq_wb_mwb_mode_t;
 
 typedef struct rk_aiq_wb_mwb_attrib_s {
+    rk_aiq_uapi_sync_t sync;
+
     rk_aiq_wb_mwb_mode_t mode;
     union MWBPara_u {
         rk_aiq_wb_gain_t gain;
@@ -115,6 +118,12 @@ typedef enum rk_aiq_wb_op_mode_s {
     RK_AIQ_WB_MODE_MAX
 } rk_aiq_wb_op_mode_t;
 
+typedef struct rk_aiq_uapiV2_wb_opMode_s {
+  rk_aiq_uapi_sync_t sync;
+
+  rk_aiq_wb_op_mode_t mode;
+} rk_aiq_uapiV2_wb_opMode_t;
+
 typedef struct rk_aiq_wb_attrib_s {
     bool byPass;
     rk_aiq_wb_op_mode_t mode;
@@ -162,6 +171,8 @@ typedef struct rk_aiq_uapiV2_wb_awb_wbGainAdjustLut_s {
 } rk_aiq_uapiV2_wb_awb_wbGainAdjustLut_t;
 
 typedef struct rk_aiq_uapiV2_wb_awb_wbGainAdjust_s {
+  rk_aiq_uapi_sync_t sync;
+
   // M4_BOOL_DESC("enable", "1")
   bool enable;
   // M4_STRUCT_LIST_DESC("lutAll", M4_SIZE(1,8), "normal_ui_style")
@@ -169,11 +180,24 @@ typedef struct rk_aiq_uapiV2_wb_awb_wbGainAdjust_s {
   int lutAll_len;
 } rk_aiq_uapiV2_wb_awb_wbGainAdjust_t;
 
+typedef struct rk_aiq_uapiV2_wb_awb_wbGainOffset_s{
+  rk_aiq_uapi_sync_t sync;
+
+  CalibDbV2_Awb_gain_offset_cfg_t gainOffset;
+}rk_aiq_uapiV2_wb_awb_wbGainOffset_t;
+
+
+typedef struct rk_aiq_uapiV2_wb_awb_mulWindow_s {
+  rk_aiq_uapi_sync_t sync;
+
+  CalibDbV2_Awb_Mul_Win_t multiWindw;
+} rk_aiq_uapiV2_wb_awb_mulWindow_t;
+
 
 typedef struct rk_aiq_uapiV2_wbV21_awb_attrib_s {
     rk_aiq_uapiV2_wb_awb_wbGainAdjust_t wbGainAdjust;
     CalibDbV2_Awb_gain_offset_cfg_t wbGainOffset;
-} rk_aiq_uapiV2_wbV21_awb_attrib_t;
+} rk_aiq_uapiV2_wbV21_awb_attrib_t,rk_aiq_uapiV2_wbV30_awb_attrib_t;
 
 typedef struct rk_aiq_uapiV2_wbV20_awb_attrib_s {
     rk_aiq_uapiV2_wb_awb_wbGainAdjust_t wbGainAdjust;
@@ -183,10 +207,12 @@ typedef struct rk_aiq_uapiV2_wbV20_awb_attrib_s {
 
 
 typedef struct rk_aiq_uapiV2_wbV21_attrib_s {
+    rk_aiq_uapi_sync_t sync;
+
     bool byPass;
     rk_aiq_wb_op_mode_t mode;
     rk_aiq_wb_mwb_attrib_t stManual;
-    rk_aiq_uapiV2_wbV21_awb_attrib_t stAuto;
+    rk_aiq_uapiV2_wbV30_awb_attrib_t stAuto;
 } rk_aiq_uapiV2_wbV21_attrib_t;
 
 typedef struct rk_aiq_uapiV2_wbV20_attrib_s {
@@ -196,6 +222,13 @@ typedef struct rk_aiq_uapiV2_wbV20_attrib_s {
     rk_aiq_uapiV2_wbV20_awb_attrib_t stAuto;
 } rk_aiq_uapiV2_wbV20_attrib_t;
 
+typedef struct rk_aiq_uapiV2_wbV30_attrib_s {
+    rk_aiq_uapi_sync_t sync;
 
+    bool byPass;
+    rk_aiq_wb_op_mode_t mode;
+    rk_aiq_wb_mwb_attrib_t stManual;
+    rk_aiq_uapiV2_wbV30_awb_attrib_t stAuto;
+} rk_aiq_uapiV2_wbV30_attrib_t;
 #endif
 

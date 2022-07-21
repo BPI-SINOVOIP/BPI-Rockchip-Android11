@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
  * limitations under the License.
  *
  */
-
-#include "algos/aie/rk_aiq_uapi_aie_int.h"
-#include "RkAiqHandleInt.h"
+#include "aie/rk_aiq_uapi_aie_int.h"
+#include "algo_handlers/RkAiqAieHandle.h"
 
 RKAIQ_BEGIN_DECLARE
 

@@ -111,6 +111,7 @@ typedef struct Aec_uapi_advanced_attr_uapi_s {
 } Aec_uapi_advanced_attr_uapi_t;
 
 typedef struct __uapi_expsw_attr_uapi_s {
+    rk_aiq_uapi_sync_t                 sync;
     uint8_t Enable;
     CalibDb_CamRawStatsModeV2_t RawStatsMode;
     CalibDb_CamHistStatsModeV2_t HistStatsMode;
@@ -160,5 +161,103 @@ typedef struct uapi_expinfo {
     // M4_NUMBER_DESC("PixelClockFreqMHZ", "f32", M4_RANGE(0,4096), "0", M4_DIGIT(2),M4_HIDE(1))
     float             PixelClockFreqMHZ;
 } uapi_expinfo_t;
+
+/*****************************************************************************/
+/**
+ * @brief   ISP AEC HW-Meas Stats Params
+ */
+/*****************************************************************************/
+
+typedef struct uapi_rawhist_stats_s {
+    // M4_ARRAY_DESC("bins", "u32", M4_SIZE(1,256), M4_RANGE(0,268435456), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    unsigned int bins[RAWHIST_BIN_N_MAX];
+} uapi_rawhist_stats_t;
+
+typedef struct uapi_sihist_stats_s {
+    // M4_ARRAY_DESC("bins", "u32", M4_SIZE(1,32), M4_RANGE(0,268435456), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    unsigned int bins[SIHIST_BIN_N_MAX];
+} uapi_sihist_stats_t;
+
+typedef struct uapi_rawae_big_stats_s {
+    // M4_ARRAY_DESC("channelr_xy", "u16", M4_SIZE(1,225), M4_RANGE(0,1023), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channelr_xy[RAWAEBIG_WIN_NUM];
+
+    // M4_ARRAY_DESC("channelg_xy", "u16", M4_SIZE(1,225), M4_RANGE(0,4095), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channelg_xy[RAWAEBIG_WIN_NUM];
+
+    // M4_ARRAY_DESC("channelb_xy", "u16", M4_SIZE(1,225), M4_RANGE(0,1023), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channelb_xy[RAWAEBIG_WIN_NUM];
+
+    // M4_ARRAY_DESC("channely_xy", "u16", M4_SIZE(1,225), M4_RANGE(0,4095), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channely_xy[RAWAEBIG_WIN_NUM]; //not HW!
+
+    // M4_ARRAY_DESC("wndx_sumr", "u64", M4_SIZE(1,4), M4_RANGE(0,536870912), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint64_t wndx_sumr[RAWAEBIG_SUBWIN_NUM];
+
+    // M4_ARRAY_DESC("wndx_sumg", "u64", M4_SIZE(1,4), M4_RANGE(0,4294967296), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint64_t wndx_sumg[RAWAEBIG_SUBWIN_NUM];
+
+    // M4_ARRAY_DESC("wndx_sumb", "u64", M4_SIZE(1,4), M4_RANGE(0,536870912), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint64_t wndx_sumb[RAWAEBIG_SUBWIN_NUM];
+
+    // M4_ARRAY_DESC("wndx_channelr", "u16", M4_SIZE(1,4), M4_RANGE(0,1023), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t wndx_channelr[RAWAEBIG_SUBWIN_NUM]; //not HW!
+
+    // M4_ARRAY_DESC("wndx_channelg", "u16", M4_SIZE(1,4), M4_RANGE(0,4095), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t wndx_channelg[RAWAEBIG_SUBWIN_NUM]; //not HW!
+
+    // M4_ARRAY_DESC("wndx_channelb", "u16", M4_SIZE(1,4), M4_RANGE(0,1023), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t wndx_channelb[RAWAEBIG_SUBWIN_NUM]; //not HW!
+
+    // M4_ARRAY_DESC("wndx_channely", "u16", M4_SIZE(1,4), M4_RANGE(0,4095), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t wndx_channely[RAWAEBIG_SUBWIN_NUM]; //not HW!
+} uapi_rawae_big_stats_t;
+
+typedef struct uapi_rawae_lite_stat_s {
+    // M4_ARRAY_DESC("channelr_xy", "u16", M4_SIZE(1,25), M4_RANGE(0,1023), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channelr_xy[RAWAELITE_WIN_NUM];
+
+    // M4_ARRAY_DESC("channelg_xy", "u16", M4_SIZE(1,25), M4_RANGE(0,4095), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channelg_xy[RAWAELITE_WIN_NUM];
+
+    // M4_ARRAY_DESC("channelb_xy", "u16", M4_SIZE(1,25), M4_RANGE(0,1023), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channelb_xy[RAWAELITE_WIN_NUM];
+
+    // M4_ARRAY_DESC("channely_xy", "u16", M4_SIZE(1,25), M4_RANGE(0,4095), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint16_t channely_xy[RAWAELITE_WIN_NUM]; //not HW!
+} uapi_rawae_lite_stat_t;
+
+typedef struct uapi_yuvae_stats_s {
+    // M4_ARRAY_DESC("channely_xy", "u64", M4_SIZE(1,4), M4_RANGE(0,4294967296), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    uint64_t ro_yuvae_sumy[YUVAE_SUBWIN_NUM];
+
+    // M4_ARRAY_DESC("channely_xy", "u8", M4_SIZE(1,225), M4_RANGE(0,255), "0", M4_DIGIT(0), M4_DYNAMIC(0))
+    unsigned char mean[YUVAE_WIN_NUM];
+} uapi_yuvae_stats_t;
+
+typedef struct uapi_raw_stats_s {
+    //rawae
+    // M4_STRUCT_DESC("rawae_big", "normal_ui_style")
+    uapi_rawae_big_stats_t rawae_big;
+    // M4_STRUCT_DESC("rawae_lite", "normal_ui_style")
+    uapi_rawae_lite_stat_t rawae_lite;
+    //rawhist
+    // M4_STRUCT_DESC("rawhist_big", "normal_ui_style")
+    uapi_rawhist_stats_t rawhist_big;
+    // M4_STRUCT_DESC("rawhist_lite", "normal_ui_style")
+    uapi_rawhist_stats_t rawhist_lite;
+} uapi_raw_stats_t;
+
+typedef struct uapi_ae_hwstats_s {
+    // M4_STRUCT_LIST_DESC("chn", M4_SIZE(1,3), "normal_ui_style")
+    uapi_raw_stats_t chn[3];
+    // M4_STRUCT_DESC("extra", "normal_ui_style")
+    uapi_raw_stats_t extra;
+    // M4_STRUCT_DESC("yuvae", "normal_ui_style")
+    uapi_yuvae_stats_t yuvae;
+    // M4_STRUCT_DESC("sihist", "normal_ui_style")
+    uapi_sihist_stats_t sihist;
+} uapi_ae_hwstats_t;
+
 
 #endif /*__AEC_UAPI_HEAD_H__*/

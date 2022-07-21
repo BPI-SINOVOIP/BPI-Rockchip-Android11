@@ -514,6 +514,8 @@ RKISP2PostProcessUnit::processFrame(const std::shared_ptr<PostProcBuffer>& in,
         croph &= ~0x3;
         cropleft = (in->cambuf->width() - cropw) / 2;
         croptop = (in->cambuf->height() - croph) / 2;
+        cropleft &= ~0x1;
+        croptop &= ~0x1;
 
         LOGD("%s: crop region(%d,%d,%d,%d) from (%d,%d) to %dx%d, infmt %d,%d, outfmt %d,%d",
              __FUNCTION__, cropw, croph, cropleft, croptop,

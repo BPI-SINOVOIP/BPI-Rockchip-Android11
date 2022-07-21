@@ -315,6 +315,7 @@ _LIBCPP_PUSH_MACROS
 
 _LIBCPP_BEGIN_NAMESPACE_STD
 
+#ifndef _LIBCPP_FOR_OPTEE
 using ::signbit;
 using ::fpclassify;
 using ::isfinite;
@@ -526,6 +527,7 @@ using ::scalblnl;
 using ::scalbnl;
 using ::tgammal;
 using ::truncl;
+#endif
 
 #if _LIBCPP_STD_VER > 14
 inline _LIBCPP_INLINE_VISIBILITY float       hypot(       float x,       float y,       float z ) { return sqrt(x*x + y*y + z*z); }

@@ -41,7 +41,7 @@ class GraphConfigNode;
 #define MP_MAX_HEIGHT       3312
 // selfPath output capacity
 #define SP_MAX_WIDTH        1920
-#define SP_MAX_HEIGHT       1920
+#define SP_MAX_HEIGHT       1080
 // postpipeline limitation, limited by RGA now
 #if defined(TARGET_RK312X)
 #define PP_MAX_WIDTH        2048

@@ -43,14 +43,25 @@ config ENV_IS_NOWHERE
 config ENVF
 	bool "Environment fragment is store in envf partition"
 	depends on ENV_IS_NOWHERE
+	select ENV_PARTITION
 	help
 	  Use this if you want to add a env fragment partition to overlay/store
 	  some specific environments.
 
+config SPL_ENVF
+	bool "Environment fragment is store in envf partition in SPL"
+	depends on ENVF && SPL
+	default y
+	select SPL_ENV_PARTITION
+	help
+	  Use this if you want to add a env fragment partition to overlay/store
+	  some specific environments in SPL. But now only parse env partition
+	  table.
+
 config ENVF_LIST
-	string "Specific environments list of env fragment"
+	string "Specific environments white list of env fragment"
 	depends on ENVF
-	default ""
+	default "blkdevparts mtdparts sys_bootargs app reserved"
 	help
 	  The environment white list.
 
@@ -488,7 +499,8 @@ if ARCH_ROCKCHIP
 config ENV_OFFSET
 	hex "Environment offset"
 	depends on !ENV_IS_IN_UBI
-	depends on !ENV_IS_NOWHERE
+	depends on !ENV_IS_NOWHERE || ENVF
+	default 0x0 if ENVF
 	default 0x3f8000
 	help
 	  Offset from the start of the device (or partition)
@@ -499,6 +511,43 @@ config ENV_SIZE
 	help
 	  Size of the environment storage area
 
+if ENVF
+config ENV_OFFSET_REDUND
+	hex "Environment redundant(backup) offset"
+	default ENV_OFFSET
+	help
+	  Redundant(backup) offset from the start of the device (or partition),
+	  this size must be ENV_SIZE.
+
+if CMD_NAND || MTD_SPI_NAND
+config ENV_NAND_OFFSET
+	hex "Environment offset in Nand"
+	default 0x0
+
+config ENV_NAND_OFFSET_REDUND
+	hex "Environment redundant(backup) offset in Nand"
+	default ENV_NAND_OFFSET
+
+config ENV_NAND_SIZE
+	hex "Environment size in Nand"
+	default 0x40000
+endif
+
+if SPI_FLASH
+config ENV_NOR_OFFSET
+	hex "Environment offset in Nor"
+	default 0x0
+
+config ENV_NOR_OFFSET_REDUND
+	hex "Environment redundant(backup) offset in Nor"
+	default ENV_NOR_OFFSET
+
+config ENV_NOR_SIZE
+	hex "Environment size in Nor"
+	default 0x10000
+endif
+
+endif
 endif
 
 endmenu

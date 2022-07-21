@@ -32,100 +32,6 @@
 namespace android {
 
 class DrmDevice;
-class DrmPlanes;
-
-typedef struct tagPlaneGroup{
-  bool     bReserved;
-  bool     bUse;
-  uint32_t zpos;
-  uint32_t possible_crtcs;
-  uint64_t share_id;
-  uint64_t win_type;
-	std::vector<DrmPlane*> planes;
-
-  // RK356x support dynamic switching
-  uint32_t enable_possible_crtc=0;
-  uint32_t disable_possible_crtc=0;
-  uint32_t disable_necessary_cnt=0;
-  uint32_t current_crtc=0;
-  uint32_t current_possible_crtcs=0;
-
-  bool is_release(uint32_t   crtc_mask){
-    if(bReserved)
-      return false;
-    if((crtc_mask & current_crtc) > 0 && !(crtc_mask & current_possible_crtcs)){
-      return true;
-    }
-    return false;
-  }
-  bool release(uint32_t crtc_mask){
-    if(bReserved)
-      return false;
-    if(!(possible_crtcs & crtc_mask))
-      return false;
-
-    if(!(current_crtc & crtc_mask))
-      return false;
-
-    enable_possible_crtc = 0;
-    disable_possible_crtc = 0;
-
-    return true;
-  }
-
-  bool release_necessary_cnt(uint32_t crtc_mask){
-    if(bReserved)
-      return false;
-    if(!(possible_crtcs & crtc_mask))
-      return false;
-
-    if(!(current_crtc & crtc_mask))
-      return false;
-
-    if(disable_necessary_cnt < 3){
-      disable_necessary_cnt++;
-      disable_possible_crtc=0;
-    }else{
-      enable_possible_crtc=0;
-      disable_necessary_cnt=0;
-    }
-
-    return true;
-  }
-
-  bool acquire(uint32_t crtc_mask){
-    if(bReserved)
-      return false;
-    if(possible_crtcs == crtc_mask){
-      set_current_possible_crtcs(crtc_mask);
-      enable_possible_crtc = crtc_mask;
-      disable_possible_crtc = crtc_mask;
-      return true;
-    }
-
-    if(!(possible_crtcs & crtc_mask))
-      return false;
-
-    if(!(current_possible_crtcs & crtc_mask))
-      return false;
-
-    if(!disable_possible_crtc && !enable_possible_crtc){
-      current_crtc = crtc_mask;
-    }
-
-    if(!(current_crtc & crtc_mask))
-      return false;
-
-    enable_possible_crtc = crtc_mask;
-    disable_possible_crtc = crtc_mask;
-    return true;
-  }
-
-  bool set_current_possible_crtcs(uint32_t crtc_mask){
-    current_possible_crtcs = crtc_mask;
-    return true;
-  }
-}PlaneGroup;
 
 class Importer {
  public:
@@ -161,14 +67,15 @@ class Planner {
     virtual bool SupportPlatform(uint32_t soc_id) = 0;
 
     virtual int TryHwcPolicy(std::vector<DrmCompositionPlane> *composition,
-                                std::vector<DrmHwcLayer*> &layers,
-                                DrmCrtc *crtc, bool gles_policy) = 0;
+                             std::vector<DrmHwcLayer*> &layers,
+                             std::vector<PlaneGroup *> &plane_groups,
+                             DrmCrtc *crtc,
+                             bool gles_policy) = 0;
     virtual int MatchPlanes(std::vector<DrmCompositionPlane> *composition,
                                 std::vector<DrmHwcLayer*> &layers,
                                 DrmCrtc *crtc,
                                 std::vector<PlaneGroup *> &plane_groups) = 0;
    protected:
-
     // Inserts the given layer:plane in the composition at the back
     virtual int MatchPlane(std::vector<DrmCompositionPlane> *composition_planes,
                      std::vector<PlaneGroup *> &plane_groups,
@@ -189,7 +96,10 @@ class Planner {
   // Returns: A tuple with the status of the operation (0 for success) and
   //          a vector of the resulting plan (ie: layer->plane mapping).
   std::tuple<int, std::vector<DrmCompositionPlane>> TryHwcPolicy(
-      std::vector<DrmHwcLayer*> &layers, DrmCrtc *crtc, bool gles_policy);
+      std::vector<DrmHwcLayer*> &layers,
+      std::vector<PlaneGroup *> &plane_groups,
+      DrmCrtc *crtc,
+      bool gles_policy);
 
   template <typename T, typename... A>
   void AddStage(A &&... args) {
@@ -198,8 +108,33 @@ class Planner {
   }
 
  private:
-
   std::vector<std::unique_ptr<PlanStage>> stages_;
+};
+
+class HwcPlatform {
+ public:
+  class Platform {
+   public:
+    virtual ~Platform() {
+    }
+    virtual bool SupportPlatform(uint32_t soc_id) = 0;
+    virtual int TryAssignPlane(DrmDevice* drm, const std::set<int> &active_display) = 0;
+  };
+
+  // Creates a planner instance with platform-specific planning stages
+  static std::unique_ptr<HwcPlatform> CreateInstance(DrmDevice *drm);
+
+  // Try to assign DrmPlane to display
+  int TryAssignPlane(DrmDevice* drm, const std::set<int> &active_display);
+
+  template <typename T, typename... A>
+  void AddStage(A &&... args) {
+    stages_.emplace_back(
+        std::unique_ptr<Platform>(new T(std::forward(args)...)));
+  }
+
+ private:
+  std::vector<std::unique_ptr<Platform>> stages_;
 };
 }  // namespace android
 #endif

@@ -1,5 +1,5 @@
 /*
- * rk_aiq_algo_awb_itf.h
+ * rk_aiq_algo_adehaze_itf.h
  *
  *  Copyright (c) 2019 Rockchip Corporation
  *

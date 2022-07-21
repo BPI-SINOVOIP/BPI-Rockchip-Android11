@@ -17,9 +17,9 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "amfnr/rk_aiq_amfnr_algo_itf_v1.h"
 #include "amfnr/rk_aiq_amfnr_algo_v1.h"
+#include "rk_aiq_algo_types.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -33,15 +33,14 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
 
     XCamReturn result = XCAM_RETURN_NO_ERROR;
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
-    LOGI_ANR("%s: (enter) calibdb:%p \n", __FUNCTION__, cfgInt->calib);
+    LOGI_ANR("%s: (enter) calibdb:%p \n", __FUNCTION__, cfg->calib);
 
 	Amfnr_Context_V1_t* pAmfnrCtx = NULL;
 
 	#if AMFNR_USE_JSON_PARA_V1
-	Amfnr_Result_V1_t ret = Amfnr_Init_Json_V1(&pAmfnrCtx, cfgInt->calibv2);
+	Amfnr_Result_V1_t ret = Amfnr_Init_Json_V1(&pAmfnrCtx, cfg->calibv2);
 	#else  
-    Amfnr_Result_V1_t ret = Amfnr_Init_V1(&pAmfnrCtx, cfgInt->calib);
+    Amfnr_Result_V1_t ret = Amfnr_Init_V1(&pAmfnrCtx, cfg->calib);
 	#endif
     if(ret != AMFNR_RET_V1_SUCCESS) {
         result = XCAM_RETURN_ERROR_FAILED;
@@ -83,16 +82,16 @@ prepare(RkAiqAlgoCom* params)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
     Amfnr_Context_V1_t* pAmfnrCtx = (Amfnr_Context_V1_t *)params->ctx;
-    RkAiqAlgoConfigAmfnrInt* pCfgParam = (RkAiqAlgoConfigAmfnrInt*)params;
+    RkAiqAlgoConfigAmfnr* pCfgParam = (RkAiqAlgoConfigAmfnr*)params;
 	pAmfnrCtx->prepare_type = params->u.prepare.conf_type;
 	
 	if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )){
 		#if AMFNR_USE_JSON_PARA_V1
-		void *pCalibDbV2 = (void*)(pCfgParam->rk_com.u.prepare.calibv2);
+		void *pCalibDbV2 = (void*)(pCfgParam->com.u.prepare.calibv2);
 		CalibDbV2_MFNR_t *mfnr_v1 = (CalibDbV2_MFNR_t*)(CALIBDBV2_GET_MODULE_PTR((void*)pCalibDbV2, mfnr_v1));
 		mfnr_calibdbV2_assign_v1(&pAmfnrCtx->mfnr_v1, mfnr_v1);
 		#else
-	  	void *pCalibDb = (void*)(pCfgParam->rk_com.u.prepare.calib);
+	  	void *pCalibDb = (void*)(pCfgParam->com.u.prepare.calib);
         pAmfnrCtx->stMfnrCalib=
             *(CalibDb_MFNR_2_t*)(CALIBDB_GET_MODULE_PTR((void*)pCalibDb, mfnr));
 		#endif
@@ -117,9 +116,9 @@ pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
     Amfnr_Context_V1_t* pAmfnrCtx = (Amfnr_Context_V1_t *)inparams->ctx;
 	
-    RkAiqAlgoPreAmfnrInt* pAnrPreParams = (RkAiqAlgoPreAmfnrInt*)inparams;
+    RkAiqAlgoPreAmfnr* pAnrPreParams = (RkAiqAlgoPreAmfnr*)inparams;
 
-    if (pAnrPreParams->rk_com.u.proc.gray_mode) {
+    if (pAnrPreParams->com.u.proc.gray_mode) {
         pAmfnrCtx->isGrayMode = true;
     }else {
         pAmfnrCtx->isGrayMode = false;
@@ -143,8 +142,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
 #if 1
-    RkAiqAlgoProcAmfnrInt* pAmfnrProcParams = (RkAiqAlgoProcAmfnrInt*)inparams;
-    RkAiqAlgoProcResAmfnrInt* pAmfnrProcResParams = (RkAiqAlgoProcResAmfnrInt*)outparams;
+    RkAiqAlgoProcAmfnr* pAmfnrProcParams = (RkAiqAlgoProcAmfnr*)inparams;
+    RkAiqAlgoProcResAmfnr* pAmfnrProcResParams = (RkAiqAlgoProcResAmfnr*)outparams;
     Amfnr_Context_V1_t* pAmfnrCtx = (Amfnr_Context_V1_t *)inparams->ctx;
     Amfnr_ExpInfo_V1_t stExpInfo;
     memset(&stExpInfo, 0x00, sizeof(Amfnr_ExpInfo_V1_t));
@@ -174,8 +173,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 	stExpInfo.snr_mode = 0;
 
 #if 1
-    RKAiqAecExpInfo_t *preExp = pAmfnrProcParams->rk_com.u.proc.preExp;
-    RKAiqAecExpInfo_t *curExp = pAmfnrProcParams->rk_com.u.proc.curExp;
+    RKAiqAecExpInfo_t *preExp = pAmfnrProcParams->com.u.proc.preExp;
+    RKAiqAecExpInfo_t *curExp = pAmfnrProcParams->com.u.proc.curExp;
 
     if(preExp != NULL && curExp != NULL) {
         stExpInfo.cur_snr_mode = curExp->CISFeature.SNR;

@@ -62,7 +62,7 @@
 #endif
 #endif
 
-#include "version.h"
+#include "im2d_api/im2d.h"
 
 #ifdef ANDROID
 namespace android {
@@ -78,6 +78,10 @@ RGA_SINGLETON_STATIC_INSTANCE(RockchipRga)
         mLogAlways(0),
         mContext(NULL) {
         RkRgaInit();
+
+#ifdef ANDROID
+        property_set("vendor.rga_api.version", RGA_API_VERSION);
+#endif
         ALOGE("%s", RGA_API_FULL_VERSION);
     }
 
@@ -298,8 +302,8 @@ RGA_SINGLETON_STATIC_INSTANCE(RockchipRga)
         if (!rgaInfo)
             return -EINVAL;
 
-        ALOGE("fd-vir-phy-hnd-format[%d, %p, %p, %p, %d]", rgaInfo->fd,
-              rgaInfo->virAddr, rgaInfo->phyAddr, (void*)rgaInfo->hnd, rgaInfo->format);
+        ALOGE("fd-vir-phy-hnd-format[%d, %p, %p, %lx, %d]", rgaInfo->fd,
+              rgaInfo->virAddr, rgaInfo->phyAddr, (unsigned long)rgaInfo->hnd, rgaInfo->format);
         ALOGE("rect[%d, %d, %d, %d, %d, %d, %d, %d]",
               rgaInfo->rect.xoffset, rgaInfo->rect.yoffset,
               rgaInfo->rect.width,   rgaInfo->rect.height, rgaInfo->rect.wstride,

@@ -569,7 +569,7 @@ void PlatformData::init()
         deinit();
         return;
     }
-
+    mCameraHWInfo->initAvailableSensorOutputFormats();
     int numberOfCameras = PlatformData::numberOfCameras();
     if (numberOfCameras == 0 || numberOfCameras > MAX_CPF_CACHED) {
         LOGE("Camera HAL Basic Platform initialization failed !!number of camera: %d", numberOfCameras);
@@ -1061,11 +1061,31 @@ CameraHWInfo::CameraHWInfo() :
 status_t CameraHWInfo::init(const std::vector<std::string> &mediaDevicePath)
 {
     mMediaControllerPathName = mediaDevicePath;
-    readProperty();
+    //readProperty();
     mMediaCtlElementNames.clear();
     getMediaCtlElementNames(mMediaCtlElementNames, true);
 
     return initDriverList();
+}
+
+status_t CameraHWInfo::initAvailableSensorOutputFormats(void)
+{
+    status_t ret = OK;
+    SensorFormat tmpOutputFormats;
+
+    LOGI("@%s", __FUNCTION__);
+    mSensorOutputFormats.clear();
+
+    int numberOfCameras = PlatformData::numberOfCameras();
+    int i = 0;
+    for (i = 0; i < numberOfCameras; i++) {
+        getAvailableSensorOutputFormats(i, tmpOutputFormats, true);
+        mSensorOutputFormats[i] = tmpOutputFormats;
+    }
+
+	LOGI("@%s mSensorOutputFormats.size()(%d)", __FUNCTION__, mSensorOutputFormats.size());
+
+    return ret;
 }
 
 status_t CameraHWInfo::initDriverList()
@@ -1096,7 +1116,7 @@ status_t CameraHWInfo::initDriverList()
         if (mcExist == 0) {
             mHasMediaController = true;
             ret = findMediaControllerSensors(mcPathName);
-            ret |= findMediaDeviceInfo(mcPathName);
+            //ret |= findMediaDeviceInfo(mcPathName);
             for (auto &it : mSensorInfo)
                 ret |= findAttachedSubdevs(mcPathName, it);
         } else {
@@ -1608,14 +1628,23 @@ status_t CameraHWInfo::getSensorEntityName(int32_t cameraId,
 }
 
 status_t CameraHWInfo::getAvailableSensorOutputFormats(int32_t cameraId,
-                                               SensorFormat &OutputFormats) const
+                                               SensorFormat &OutputFormats, bool isFirst) const
 {
     status_t ret = NO_ERROR;
     const char *devname;
     std::string sDevName;
     OutputFormats.clear();
 
+    LOGI("@%s cameraId(%d) isFirst(%s)", __FUNCTION__, cameraId, isFirst?"true":"false");
     string sensorEntityName = "none";
+
+    if(!isFirst) {
+        if (mSensorOutputFormats.find(cameraId) != mSensorOutputFormats.end()) {
+            LOGI("@%s cameraId(%d)", __FUNCTION__, mSensorOutputFormats.find(cameraId)->first);
+            OutputFormats = mSensorOutputFormats.find(cameraId)->second;
+        }
+        return ret;
+    }
 
     ret = getSensorEntityName(cameraId, sensorEntityName);
     if (ret != NO_ERROR)
@@ -1630,6 +1659,7 @@ status_t CameraHWInfo::getAvailableSensorOutputFormats(int32_t cameraId,
         sDevName = stringStream.str();
     }
     devname = sDevName.c_str();
+    LOGI("@%s, sensor name: %s, subdev path: %s.", __FUNCTION__, sensorEntityName.c_str(), devname);
     std::shared_ptr<V4L2Subdevice> device = std::make_shared<V4L2Subdevice>(devname);
     if (device.get() == nullptr) {
         LOGE("Couldn't open device %s", devname);
@@ -1645,22 +1675,52 @@ status_t CameraHWInfo::getAvailableSensorOutputFormats(int32_t cameraId,
     std::vector<uint32_t> formats;
     device->queryFormats(0, formats);
 
+    struct v4l2_subdev_selection aSelection;
+    status_t status = NO_ERROR;
+
     std::vector<struct v4l2_subdev_frame_size_enum> fse;
     struct SensorFrameSize frameSize;
     for (auto it = formats.begin(); it != formats.end(); ++it) {
         device->getSensorFormats(0, *it, fse);
         //sort from smallest to biggest
         std:sort(fse.begin(), fse.end(), compareFuncForSensorFormat);
-        for (auto iter = fse.begin(); iter != fse.end(); ++iter) {
+    }
+
+    //enum all supported framesize
+    for (auto iter = fse.begin(); iter != fse.end(); ++iter) {
+        //set matched fmt first for getSelection correct
+        status = device->setFormat(iter->pad, iter->min_width,
+                                   iter->min_height, iter->code,
+                                   0, 0);
+        if (status < 0) {
+            LOGW("setFormat failed, may be not realized, ignore selection!");
+        }
+
+        status |= device->getSelection(aSelection);
+        if (status >= 0) {
+            frameSize.left = aSelection.r.left;
+            frameSize.top = aSelection.r.top;
+            frameSize.min_width = aSelection.r.width;
+            frameSize.min_height = aSelection.r.height;
+            frameSize.max_width = aSelection.r.width;
+            frameSize.max_height = aSelection.r.height;
+        } else {
+            LOGW("getSelection failed, may be not realized, use default selection!");
+            frameSize.left = 0;
+            frameSize.top = 0;
             frameSize.min_width = (*iter).min_width;
             frameSize.min_height = (*iter).min_height;
             frameSize.max_width = (*iter).max_width;
             frameSize.max_height = (*iter).max_height;
-            LOGD("@%s %d: code: 0x%x, frame size: Min(%dx%d) Max(%dx%d)", __FUNCTION__, __LINE__,
-                 *it, frameSize.min_width, frameSize.min_height, frameSize.max_width, frameSize.max_height);
-            OutputFormats[*it].push_back(frameSize);
         }
+        LOGD("@%s %d: code: 0x%x, frame size:"
+             "Min(%dx%d) Max(%dx%d), left/top(%d,%d)",
+             __FUNCTION__, __LINE__,
+             iter->code, frameSize.min_width, frameSize.min_height,
+             frameSize.max_width, frameSize.max_height, frameSize.left, frameSize.top);
+        OutputFormats[iter->code].push_back(frameSize);
     }
+
     if(!formats.size() || !fse.size()) {
         LOGE("@%s %s: Enum sensor frame size failed", __FUNCTION__, devname);
         ret = UNKNOWN_ERROR;
@@ -1823,6 +1883,52 @@ status_t CameraHWInfo::getDvTimings(int32_t cameraId,
     ret = device->queryDvTimings(timings);
     if (ret != NO_ERROR) {
         LOGE("Error queryDvTimings ret:%d (%s)", ret, devname);
+    }
+
+    ret |= device->close();
+    if (ret != NO_ERROR)
+        LOGE("Error closing device (%s)", devname);
+
+    return ret;
+}
+
+status_t CameraHWInfo::getSensorFormat(int32_t cameraId,
+		struct v4l2_subdev_format &aFormat) const
+{
+    status_t ret = NO_ERROR;
+    const char *devname;
+    std::string sDevName;
+
+    string sensorEntityName = "none";
+
+    ret = getSensorEntityName(cameraId, sensorEntityName);
+    if (ret != NO_ERROR)
+        return UNKNOWN_ERROR;
+
+    for (size_t i = 0; i < mSensorInfo.size(); i++) {
+        if (sensorEntityName.find(mSensorInfo[i].mSensorName) == std::string::npos)
+            continue;
+
+        std::ostringstream stringStream;
+        stringStream << "/dev/" << mSensorInfo[i].mDeviceName.c_str();
+        sDevName = stringStream.str();
+    }
+    devname = sDevName.c_str();
+    std::shared_ptr<V4L2Subdevice> device = std::make_shared<V4L2Subdevice>(devname);
+    if (device.get() == nullptr) {
+        LOGE("Couldn't open device %s", devname);
+        return UNKNOWN_ERROR;
+    }
+
+    ret = device->open();
+    if (ret != NO_ERROR) {
+        LOGE("Error opening device (%s)", devname);
+        return ret;
+    }
+
+    ret = device->getFormat(aFormat);
+    if (ret != NO_ERROR) {
+        LOGE("Error getFormat ret:%d (%s)", ret, devname);
     }
 
     ret |= device->close();

@@ -315,7 +315,7 @@ MPP_RET MpiJpegDecoder::sendpacket(char *inputBuf, size_t length, int outPhyAddr
 
     /* dump input data if neccessary */
     if ((dec_debug & DEBUG_RECORD_IN) && (mPacketCount % 10 == 0)) {
-        char fileName[40];
+        char fileName[60];
 
         sprintf(fileName, "/data/video/dec_input_%d.jpg", mPacketCount);
         mInputFile = fopen(fileName, "wb");
@@ -446,8 +446,8 @@ SEND_OUT:
 
 MPP_RET MpiJpegDecoder::getoutframe(OutputFrame_t *aframeOut)
 {
-    MPP_RET ret   = MPP_OK;
-    MppTask task  = NULL;
+    MPP_RET ret  = MPP_OK;
+    MppTask task = NULL;
 
     if (!mInitOK)
         return MPP_ERR_VPU_CODEC_INIT;
@@ -480,7 +480,7 @@ MPP_RET MpiJpegDecoder::getoutframe(OutputFrame_t *aframeOut)
 
         /* dump output buffer if neccessary */
         if ((dec_debug & DEBUG_RECORD_OUT) && mPacketCount % 10 == 0) {
-            char fileName[40];
+            char fileName[60];
 
             sprintf(fileName, "/data/video/dec_output_%dx%d_%d.yuv",
                     aframeOut->FrameWidth, aframeOut->FrameHeight, mPacketCount);

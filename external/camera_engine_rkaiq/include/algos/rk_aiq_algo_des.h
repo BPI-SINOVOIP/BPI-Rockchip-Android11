@@ -53,6 +53,16 @@
 RKAIQ_BEGIN_DECLARE
 
 typedef struct _RkAiqAlgoContext RkAiqAlgoContext;
+#ifndef RKAIQAECEXPINFO_T
+#define RKAIQAECEXPINFO_T
+typedef struct RKAiqAecExpInfo_s RKAiqAecExpInfo_t;
+#endif
+#ifndef CAMCALIBDBCONTEXT_T
+#define CAMCALIBDBCONTEXT_T
+typedef void CamCalibDbContext_t;
+#endif
+typedef struct CamCalibDbV2Context_s CamCalibDbV2Context_t;
+typedef struct _RkAiqResComb RkAiqResComb;
 
 typedef enum RkAiqAlgoType_e {
     RK_AIQ_ALGO_TYPE_NONE = -1,
@@ -73,7 +83,7 @@ typedef enum RkAiqAlgoType_e {
     RK_AIQ_ALGO_TYPE_ADHAZ,
     RK_AIQ_ALGO_TYPE_A3DLUT,
     RK_AIQ_ALGO_TYPE_ALDCH,
-    RK_AIQ_ALGO_TYPE_AR2Y,
+    RK_AIQ_ALGO_TYPE_ACSM,
     RK_AIQ_ALGO_TYPE_ACP,
     RK_AIQ_ALGO_TYPE_AIE,
     RK_AIQ_ALGO_TYPE_ASHARP,
@@ -91,12 +101,16 @@ typedef enum RkAiqAlgoType_e {
     RK_AIQ_ALGO_TYPE_AFEC,
     RK_AIQ_ALGO_TYPE_AMD,
     RK_AIQ_ALGO_TYPE_AGAIN,
+    RK_AIQ_ALGO_TYPE_ACAC,
     RK_AIQ_ALGO_TYPE_MAX
 } RkAiqAlgoType_t;
 
 typedef struct _AlgoCtxInstanceCfg {
     uint32_t isp_hw_version;
     uint32_t module_hw_version;
+    CamCalibDbContext_t* calib;
+    CamCalibDbV2Context_t* calibv2;
+    bool isGroupMode;
 } AlgoCtxInstanceCfg;
 
 typedef struct _RkAiqAlgoDesComm {
@@ -119,6 +133,7 @@ typedef enum RkAiqAlgoConfType_e {
     RK_AIQ_ALGO_CONFTYPE_NEEDRESET   = 0x04,
     RK_AIQ_ALGO_CONFTYPE_CHANGERES   = 0x08,
     RK_AIQ_ALGO_CONFTYPE_KEEPSTATUS  = 0x10,
+    RK_AIQ_ALGO_CONFTYPE_CHANGECAMS  = 0x20,
     RK_AIQ_ALGO_CONFTYPE_MAX
 } RkAiqAlgoConfType_t;
 
@@ -131,17 +146,28 @@ typedef struct _RkAiqAlgoCom {
             int sns_op_width;
             int sns_op_height;
             int conf_type;
+            CamCalibDbContext_t* calib;
+            CamCalibDbV2Context_t* calibv2;
         } prepare; //for prepare function
 
         struct {
             bool init;
+            int iso;
+            bool fill_light_on;
+            bool gray_mode;
+            bool is_bw_sensor;
+            RKAiqAecExpInfo_t *preExp;
+            RKAiqAecExpInfo_t *curExp;
+            RKAiqAecExpInfo_t *nxtExp;
+            RkAiqResComb* res_comb;
         } proc; //for pre/processing/post function
     } u;
     void* reserverd; //transfer whatever used by prepare/pre/processing/post
 } RkAiqAlgoCom;
 
+// generic result type
 typedef struct _RkAiqAlgoResCom {
-    void* palce_holder[1];
+    char place_holder[1];
 } RkAiqAlgoResCom;
 
 typedef struct _RkAiqAlgoDescription {

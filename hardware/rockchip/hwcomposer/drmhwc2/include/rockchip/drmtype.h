@@ -85,6 +85,59 @@ public:
     float outMinLuminance;
 };
 
+// definition from kernel-5.10/include/drm/drm_connector.h.
+
+/*
+ * This is a consolidated colorimetry list supported by HDMI and
+ * DP protocol standard. The respective connectors will register
+ * a property with the subset of this list (supported by that
+ * respective protocol). Userspace will set the colorspace through
+ * a colorspace property which will be created and exposed to
+ * userspace.
+ */
+
+/* For Default case, driver will set the colorspace */
+#define DRM_MODE_COLORIMETRY_DEFAULT                    0
+/* CEA 861 Normal Colorimetry options */
+#define DRM_MODE_COLORIMETRY_NO_DATA                    0
+#define DRM_MODE_COLORIMETRY_SMPTE_170M_YCC             1
+#define DRM_MODE_COLORIMETRY_BT709_YCC                  2
+/* CEA 861 Extended Colorimetry Options */
+#define DRM_MODE_COLORIMETRY_XVYCC_601                  3
+#define DRM_MODE_COLORIMETRY_XVYCC_709                  4
+#define DRM_MODE_COLORIMETRY_SYCC_601                   5
+#define DRM_MODE_COLORIMETRY_OPYCC_601                  6
+#define DRM_MODE_COLORIMETRY_OPRGB                      7
+#define DRM_MODE_COLORIMETRY_BT2020_CYCC                8
+#define DRM_MODE_COLORIMETRY_BT2020_RGB                 9
+#define DRM_MODE_COLORIMETRY_BT2020_YCC                 10
+/* Additional Colorimetry extension added as part of CTA 861.G */
+#define DRM_MODE_COLORIMETRY_DCI_P3_RGB_D65             11
+#define DRM_MODE_COLORIMETRY_DCI_P3_RGB_THEATER         12
+/* Additional Colorimetry Options added for DP 1.4a VSC Colorimetry Format */
+#define DRM_MODE_COLORIMETRY_RGB_WIDE_FIXED             13
+#define DRM_MODE_COLORIMETRY_RGB_WIDE_FLOAT             14
+#define DRM_MODE_COLORIMETRY_BT601_YCC                  15
+
+enum DrmColorspaceType {
+  DEFAULT            = DRM_MODE_COLORIMETRY_DEFAULT,
+  SMPTE_170M_YCC     = DRM_MODE_COLORIMETRY_SMPTE_170M_YCC,
+  BT709_YCC          = DRM_MODE_COLORIMETRY_BT709_YCC,
+  XVYCC_601          = DRM_MODE_COLORIMETRY_XVYCC_601,
+  XVYCC_709          = DRM_MODE_COLORIMETRY_XVYCC_709,
+  SYCC_601           = DRM_MODE_COLORIMETRY_SYCC_601,
+  OPYCC_601          = DRM_MODE_COLORIMETRY_OPYCC_601,
+  OPRGB              = DRM_MODE_COLORIMETRY_OPRGB,
+  BT2020_CYCC        = DRM_MODE_COLORIMETRY_BT2020_CYCC,
+  BT2020_RGB         = DRM_MODE_COLORIMETRY_BT2020_RGB,
+  BT2020_YCC         = DRM_MODE_COLORIMETRY_BT2020_YCC,
+  DCI_P3_RGB_D65     = DRM_MODE_COLORIMETRY_DCI_P3_RGB_D65,
+  DCI_P3_RGB_THEATER = DRM_MODE_COLORIMETRY_DCI_P3_RGB_THEATER,
+  RGB_WIDE_FIXED     = DRM_MODE_COLORIMETRY_RGB_WIDE_FIXED,
+  RGB_WIDE_FLOAT     = DRM_MODE_COLORIMETRY_RGB_WIDE_FLOAT,
+  BT601_YCC          = DRM_MODE_COLORIMETRY_BT601_YCC
+};
+
 
 /* see also http://vektor.theorem.ca/graphics/ycbcr/ */
 enum v4l2_colorspace {
@@ -155,21 +208,23 @@ typedef enum attribute_flag {
 }attribute_flag_t;
 
 typedef struct hwc2_drm_display {
-  uint32_t soc_id;
-  bool bStandardSwitchResolution = false;
-  int framebuffer_width;
-  int framebuffer_height;
-  int vrefresh;
-  int rel_xres;
-  int rel_yres;
-  uint32_t dclk;
-  uint32_t aclk;
-  float w_scale;
-  float h_scale;
-  int bcsh_timeline;
-  int display_timeline;
-  int hotplug_timeline;
-  bool hdr_mode;
+  uint32_t soc_id=0;
+  bool bStandardSwitchResolution=false;
+  int framebuffer_width=0;
+  int framebuffer_height=0;
+  int vrefresh=0;
+  int rel_xoffset=0;
+  int rel_yoffset=0;
+  int rel_xres=0;
+  int rel_yres=0;
+  uint32_t dclk=0;
+  uint32_t aclk=0;
+  float w_scale=0;
+  float h_scale=0;
+  int bcsh_timeline=0;
+  int display_timeline=0;
+  int hotplug_timeline=0;
+  bool hdr_mode=false;
   char overscan_value[PROPERTY_VALUE_MAX]={0};
   const struct disp_info* baseparameter_info;
 } hwc2_drm_display_t;

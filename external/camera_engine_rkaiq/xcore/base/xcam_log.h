@@ -30,6 +30,7 @@
 #include <string.h>
 
 typedef enum {
+    XCORE_LOG_LEVEL_NONE,
     XCORE_LOG_LEVEL_ERR,
     XCORE_LOG_LEVEL_WARNING,
     XCORE_LOG_LEVEL_INFO,
@@ -55,20 +56,24 @@ typedef enum {
     XCORE_LOG_MODULE_ADEHAZE,
     XCORE_LOG_MODULE_A3DLUT,
     XCORE_LOG_MODULE_ALDCH,
-    XCORE_LOG_MODULE_AR2Y, // including CSM,YUV422
-    XCORE_LOG_MODULE_ACP, // color processing
+    XCORE_LOG_MODULE_ACSM,  // including CSM,YUV422
+    XCORE_LOG_MODULE_ACP,   // color processing
     XCORE_LOG_MODULE_AIE,
     XCORE_LOG_MODULE_ASHARP,
     XCORE_LOG_MODULE_AORB,
     XCORE_LOG_MODULE_AFEC,
     XCORE_LOG_MODULE_ACGC,
-    XCORE_LOG_MODULE_ASD, // secen detection
+    XCORE_LOG_MODULE_ASD,  // secen detection
     XCORE_LOG_MODULE_XCORE,
     XCORE_LOG_MODULE_ANALYZER,
     XCORE_LOG_MODULE_CAMHW,
     XCORE_LOG_MODULE_ADEGAMMA,
     XCORE_LOG_MODULE_AMERGE,
-	XCORE_LOG_MODULE_AMD,
+    XCORE_LOG_MODULE_AMD,
+    XCORE_LOG_MODULE_ACAC,
+    XCORE_LOG_MODULE_CAMGROUP,
+    XCORE_LOG_MODULE_AWBGROUP,
+    XCORE_LOG_MODULE_GROUPAEC,
     XCORE_LOG_MODULE_MAX,
 } xcore_log_modules_t;
 
@@ -105,24 +110,38 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 // module debug
 #define XCAM_MODULE_LOG_ERROR(module, submodules, format, ...)    \
     do { \
-        if (XCORE_LOG_LEVEL_ERR <= g_xcore_log_infos[module].log_level && \
-                (submodules & g_xcore_log_infos[module].sub_modules)) \
-            xcam_print_log (module, submodules, XCORE_LOG_LEVEL_ERR, "XCAM ERROR %s:%d: " format "\n", __BI_FILENAME__, __LINE__, ## __VA_ARGS__); \
-    } while(0) \
+        xcam_print_log(module, submodules, XCORE_LOG_LEVEL_ERR, "E:" format "\n", ##__VA_ARGS__); \
+    } while (0)
 
 #define XCAM_MODULE_LOG_WARNING(module, submodules, format, ...)   \
     do { \
         if (XCORE_LOG_LEVEL_WARNING <= g_xcore_log_infos[module].log_level && \
                 (submodules & g_xcore_log_infos[module].sub_modules)) \
-            xcam_print_log (module, submodules, XCORE_LOG_LEVEL_WARNING, "XCAM WARNING %s:%d: " format "\n", __BI_FILENAME__, __LINE__, ## __VA_ARGS__); \
-    } while(0) \
+            xcam_print_log(module, submodules, XCORE_LOG_LEVEL_WARNING, "W:" format "\n", \
+                           ##__VA_ARGS__);                                                \
+    } while (0)
 
 #define XCAM_MODULE_LOG_INFO(module, submodules, format, ...)   \
     do { \
         if (XCORE_LOG_LEVEL_INFO <= g_xcore_log_infos[module].log_level && \
                 (submodules & g_xcore_log_infos[module].sub_modules)) \
-            xcam_print_log (module, submodules, XCORE_LOG_LEVEL_INFO, "XCAM INFO %s:%d: " format "\n", __BI_FILENAME__ , __LINE__, ## __VA_ARGS__); \
-    } while(0) \
+            xcam_print_log (module, submodules, XCORE_LOG_LEVEL_INFO, "I:" format "\n",  ## __VA_ARGS__); \
+    } while(0)
+
+#define XCAM_MODULE_LOG_DEBUG(module, submodules, format, ...)   \
+    do { \
+        if (XCORE_LOG_LEVEL_DEBUG <= g_xcore_log_infos[module].log_level && \
+            (submodules & g_xcore_log_infos[module].sub_modules))                       \
+            xcam_print_log(module, submodules, XCORE_LOG_LEVEL_DEBUG, "D:" format "\n", \
+                           ##__VA_ARGS__);                                              \
+    } while(0)
+
+#ifdef NDEBUG
+
+#define XCAM_MODULE_LOG_LOW1(module, submodules, format, ...)
+#define XCAM_MODULE_LOG_VERBOSE(module, submodules, format, ...)
+
+#else
 
 #define XCAM_MODULE_LOG_VERBOSE(module, submodules, format, ...)   \
     do { \
@@ -131,19 +150,14 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
             xcam_print_log (module, submodules, XCORE_LOG_LEVEL_VERBOSE, "XCAM VERBOSE %s:%d: " format "\n", __BI_FILENAME__ , __LINE__, ## __VA_ARGS__); \
     } while(0) \
 
-#define XCAM_MODULE_LOG_DEBUG(module, submodules, format, ...)   \
-    do { \
-        if (XCORE_LOG_LEVEL_DEBUG <= g_xcore_log_infos[module].log_level && \
-                (submodules & g_xcore_log_infos[module].sub_modules)) \
-          xcam_print_log (module, submodules, XCORE_LOG_LEVEL_DEBUG, "XCAM DEBUG %s:%d: " format "\n", __BI_FILENAME__ , __LINE__, ## __VA_ARGS__); \
-    } while(0) \
-
 #define XCAM_MODULE_LOG_LOW1(module, submodules, format, ...)   \
     do { \
         if (XCORE_LOG_LEVEL_LOW1 <= g_xcore_log_infos[module].log_level && \
                 (submodules & g_xcore_log_infos[module].sub_modules)) \
           xcam_print_log (module, submodules, XCORE_LOG_LEVEL_LOW1, "XCAM LOW1 %s:%d: " format "\n", __BI_FILENAME__, __LINE__, ## __VA_ARGS__); \
-    } while(0) \
+    } while(0)
+
+#endif
 
 // generic/xcore
 #define XCAM_LOG_ERROR(format, ...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_XCORE, 0xff, format, ##__VA_ARGS__)
@@ -176,6 +190,22 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define LOGI_AEC(...) LOGI_AEC_SUBM(0xff, ##__VA_ARGS__)
 #define LOG1_AEC(...) LOG1_AEC_SUBM(0xff, ##__VA_ARGS__)
 
+//define group aec module logs
+#define LOGD_GAEC_SUBM(sub_modules, ...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_GROUPAEC, sub_modules, ##__VA_ARGS__)
+#define LOGE_GAEC_SUBM(sub_modules, ...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_GROUPAEC, sub_modules, ##__VA_ARGS__)
+#define LOGW_GAEC_SUBM(sub_modules, ...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_GROUPAEC, sub_modules, ##__VA_ARGS__)
+#define LOGV_GAEC_SUBM(sub_modules, ...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_GROUPAEC, sub_modules, ##__VA_ARGS__)
+#define LOGI_GAEC_SUBM(sub_modules, ...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_GROUPAEC, sub_modules, ##__VA_ARGS__)
+#define LOG1_GAEC_SUBM(sub_modules, ...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_GROUPAEC, sub_modules, ##__VA_ARGS__)
+
+#define LOGD_GAEC(...) LOGD_GAEC_SUBM(0xff, ##__VA_ARGS__)
+#define LOGE_GAEC(...) LOGE_GAEC_SUBM(0xff, ##__VA_ARGS__)
+#define LOGW_GAEC(...) LOGW_GAEC_SUBM(0xff, ##__VA_ARGS__)
+#define LOGV_GAEC(...) LOGV_GAEC_SUBM(0xff, ##__VA_ARGS__)
+#define LOGI_GAEC(...) LOGI_GAEC_SUBM(0xff, ##__VA_ARGS__)
+#define LOG1_GAEC(...) LOG1_GAEC_SUBM(0xff, ##__VA_ARGS__)
+
+
 // define awb module logs
 #define LOGD_AWB_SUBM(sub_modules, ...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_AWB, sub_modules, ##__VA_ARGS__)
 #define LOGE_AWB_SUBM(sub_modules, ...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_AWB, sub_modules, ##__VA_ARGS__)
@@ -190,6 +220,22 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define LOGV_AWB(...) LOGV_AWB_SUBM(0xff, ##__VA_ARGS__)
 #define LOGI_AWB(...) LOGI_AWB_SUBM(0xff, ##__VA_ARGS__)
 #define LOG1_AWB(...) LOG1_AWB_SUBM(0xff, ##__VA_ARGS__)
+
+// define awbgroup module logs
+#define LOGD_AWBGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_AWBGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGE_AWBGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_AWBGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGW_AWBGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_AWBGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGV_AWBGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_AWBGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGI_AWBGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_AWBGROUP, sub_modules, ##__VA_ARGS__)
+#define LOG1_AWBGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_AWBGROUP, sub_modules, ##__VA_ARGS__)
+
+#define LOGD_AWBGROUP(...) LOGD_AWBGROUP_SUBM(0xff, ##__VA_ARGS__)
+#define LOGE_AWBGROUP(...) LOGE_AWBGROUP_SUBM(0xff, ##__VA_ARGS__)
+#define LOGW_AWBGROUP(...) LOGW_AWBGROUP_SUBM(0xff, ##__VA_ARGS__)
+#define LOGV_AWBGROUP(...) LOGV_AWBGROUP_SUBM(0xff, ##__VA_ARGS__)
+#define LOGI_AWBGROUP(...) LOGI_AWBGROUP_SUBM(0xff, ##__VA_ARGS__)
+#define LOG1_AWBGROUP(...) LOG1_AWBGROUP_SUBM(0xff, ##__VA_ARGS__)
+
 
 // define af module logs
 #define LOGD_AF_SUBM(sub_modules, ...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_AF, sub_modules, ##__VA_ARGS__)
@@ -234,7 +280,7 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define LOGD_AMERGE(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)//AMERGE algo para
 #define LOGE_AMERGE(...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)
 #define LOGW_AMERGE(...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)
-#define LOGV_AMERGE(...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)//AMERGE register data
+#define LOGV_AMERGE(...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)//AMERGE expo register data
 #define LOGI_AMERGE(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)
 #define LOG1_AMERGE(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_AMERGE, 0xff, ##__VA_ARGS__)//AMERGE calc data
 
@@ -342,13 +388,13 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define LOGI_AWDR(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_AWDR, 0xff, ##__VA_ARGS__)
 #define LOG1_AWDR(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_AWDR, 0xff, ##__VA_ARGS__)
 
-// define AR2Y module logs
-#define LOGD_AR2Y(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_AR2Y, 0xff, ##__VA_ARGS__)
-#define LOGE_AR2Y(...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_AR2Y, 0xff, ##__VA_ARGS__)
-#define LOGW_AR2Y(...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_AR2Y, 0xff, ##__VA_ARGS__)
-#define LOGV_AR2Y(...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_AR2Y, 0xff, ##__VA_ARGS__)
-#define LOGI_AR2Y(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_AR2Y, 0xff, ##__VA_ARGS__)
-#define LOG1_AR2Y(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_AR2Y, 0xff, ##__VA_ARGS__)
+// define ACSM module logs
+#define LOGD_ACSM(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_ACSM, 0xff, ##__VA_ARGS__)
+#define LOGE_ACSM(...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_ACSM, 0xff, ##__VA_ARGS__)
+#define LOGW_ACSM(...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_ACSM, 0xff, ##__VA_ARGS__)
+#define LOGV_ACSM(...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_ACSM, 0xff, ##__VA_ARGS__)
+#define LOGI_ACSM(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_ACSM, 0xff, ##__VA_ARGS__)
+#define LOG1_ACSM(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_ACSM, 0xff, ##__VA_ARGS__)
 
 // define AORB module logs
 #define LOGD_AORB(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_AORB, 0xff, ##__VA_ARGS__)
@@ -414,6 +460,14 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define LOGI_AMD(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_AMD, 0xff, ##__VA_ARGS__)
 #define LOG1_AMD(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_AMD, 0xff, ##__VA_ARGS__)
 
+// define ACAC module logs
+#define LOGD_ACAC(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_ACAC, 0xff, ##__VA_ARGS__)
+#define LOGE_ACAC(...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_ACAC, 0xff, ##__VA_ARGS__)
+#define LOGW_ACAC(...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_ACAC, 0xff, ##__VA_ARGS__)
+#define LOGV_ACAC(...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_ACAC, 0xff, ##__VA_ARGS__)
+#define LOGI_ACAC(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_ACAC, 0xff, ##__VA_ARGS__)
+#define LOG1_ACAC(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_ACAC, 0xff, ##__VA_ARGS__)
+
 // define analyzer module logs
 #define LOGD_ANALYZER(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_ANALYZER, 0xff, ##__VA_ARGS__)
 #define LOGE_ANALYZER(...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_ANALYZER, 0xff, ##__VA_ARGS__)
@@ -444,6 +498,21 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define LOGI_CAMHW_SUBM(sub_modules, ...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_CAMHW, sub_modules, ##__VA_ARGS__)
 #define LOG1_CAMHW_SUBM(sub_modules, ...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_CAMHW, sub_modules, ##__VA_ARGS__)
 
+// define camhw group logs
+#define LOGD_CAMGROUP(...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_CAMGROUP, 0xff, ##__VA_ARGS__)
+#define LOGE_CAMGROUP(...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_CAMGROUP, 0xff, ##__VA_ARGS__)
+#define LOGW_CAMGROUP(...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_CAMGROUP, 0xff, ##__VA_ARGS__)
+#define LOGV_CAMGROUP(...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_CAMGROUP, 0xff, ##__VA_ARGS__)
+#define LOGI_CAMGROUP(...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_CAMGROUP, 0xff, ##__VA_ARGS__)
+#define LOG1_CAMGROUP(...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_CAMGROUP, 0xff, ##__VA_ARGS__)
+
+#define LOGD_CAMGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_DEBUG(XCORE_LOG_MODULE_CAMGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGE_CAMGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_ERROR(XCORE_LOG_MODULE_CAMGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGW_CAMGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_WARNING(XCORE_LOG_MODULE_CAMGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGV_CAMGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_VERBOSE(XCORE_LOG_MODULE_CAMGROUP, sub_modules, ##__VA_ARGS__)
+#define LOGI_CAMGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_INFO(XCORE_LOG_MODULE_CAMGROUP, sub_modules, ##__VA_ARGS__)
+#define LOG1_CAMGROUP_SUBM(sub_modules, ...) XCAM_MODULE_LOG_LOW1(XCORE_LOG_MODULE_CAMGROUP, sub_modules, ##__VA_ARGS__)
+
 #define XCAM_LOG_MODULE_ENTER(module) XCAM_MODULE_LOG_LOW1(module, 0xff, "ENTER %s", __func__)
 #define XCAM_LOG_MODULE_EXIT(module) XCAM_MODULE_LOG_LOW1(module, 0xff, "EXIT %s", __func__)
 
@@ -454,6 +523,8 @@ extern xcore_cam_log_module_info_t g_xcore_log_infos[XCORE_LOG_MODULE_MAX];
 #define EXIT_CAMHW_FUNCTION() XCAM_LOG_MODULE_EXIT(XCORE_LOG_MODULE_CAMHW)
 #define ENTER_ANALYZER_FUNCTION() XCAM_LOG_MODULE_ENTER(XCORE_LOG_MODULE_ANALYZER)
 #define EXIT_ANALYZER_FUNCTION() XCAM_LOG_MODULE_EXIT(XCORE_LOG_MODULE_ANALYZER)
+#define ENTER_CAMGROUP_FUNCTION() XCAM_LOG_MODULE_ENTER(XCORE_LOG_MODULE_CAMGROUP)
+#define EXIT_CAMGROUP_FUNCTION() XCAM_LOG_MODULE_EXIT(XCORE_LOG_MODULE_CAMGROUP)
 
 #define NULL_RETURN(ptr) do { if (ptr == NULL) {LOGE("%s is NULL!\n", #ptr); return;} } while(0)
 #define NULL_RETURN_RET(ptr, ret) do { if (ptr == NULL) {LOGE("%s is NULL!\n", #ptr); return ret;} } while(0)

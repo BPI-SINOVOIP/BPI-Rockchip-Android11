@@ -17,7 +17,6 @@
 #ifndef ANDROID_DRM_DISPLAY_COMPOSITOR_H_
 #define ANDROID_DRM_DISPLAY_COMPOSITOR_H_
 
-
 #include "drmdisplaycomposition.h"
 #include "drmframebuffer.h"
 #include "drmlayer.h"
@@ -46,6 +45,7 @@
 #define FLATTEN_COUNTDOWN_INIT 60
 
 namespace android {
+class ResourceManager;
 
 class DrmDisplayCompositor {
  public:
@@ -64,6 +64,7 @@ class DrmDisplayCompositor {
   void SingalCompsition(std::unique_ptr<DrmDisplayComposition> composition);
   void ClearDisplay();
 
+  int display() { return display_;};
   std::tuple<uint32_t, uint32_t, int> GetActiveModeResolution();
 
   bool HaveQueuedComposites() const;
@@ -105,7 +106,24 @@ class DrmDisplayCompositor {
   static const int kAcquireWaitTries = 5;
   static const int kAcquireWaitTimeoutMs = 100;
   int CheckOverscan(drmModeAtomicReqPtr pset, DrmCrtc* crtc, int display, const char *UniqueName);
-  int CommitFrame(DrmDisplayComposition *display_comp, bool test_only,
+  // Multi Thread function.
+  int GetTimestamp();
+  int64_t GetPhasedVSync(int64_t frame_ns, int64_t current);
+  int SyntheticWaitVBlank();
+  void CollectInfo(std::unique_ptr<DrmDisplayComposition> composition,
+                  int status, bool writeback = false);
+  void Commit();
+  int CollectCommitInfo(drmModeAtomicReqPtr pset,
+                  DrmDisplayComposition *display_comp,
+                  bool test_only,
+                  DrmConnector *writeback_conn = NULL,
+                  DrmHwcBuffer *writeback_buffer = NULL);
+  int CommitSidebandStream(drmModeAtomicReqPtr pset,
+                           DrmPlane* plane,
+                           DrmHwcLayer &layer,
+                           int zpos);
+  int CommitFrame(DrmDisplayComposition *display_comp,
+                  bool test_only,
                   DrmConnector *writeback_conn = NULL,
                   DrmHwcBuffer *writeback_buffer = NULL);
   int SetupWritebackCommit(drmModeAtomicReqPtr pset, uint32_t crtc_id,
@@ -132,7 +150,12 @@ class DrmDisplayCompositor {
   DrmCompositorWorker worker_;
   FrameWorker frame_worker_;
 
+  // Store the display request from SF.
   std::queue<std::unique_ptr<DrmDisplayComposition>> composite_queue_;
+  // Store the request that is about to be submitted for display.
+  std::map<int,std::unique_ptr<DrmDisplayComposition>> collect_composition_map_;
+  // Store the request currently being displayed on the screen.
+  std::map<int,std::unique_ptr<DrmDisplayComposition>> active_composition_map_;
 
   std::unique_ptr<DrmDisplayComposition> active_composition_;
 
@@ -160,6 +183,10 @@ class DrmDisplayCompositor {
   int64_t flatten_countdown_;
   std::unique_ptr<Planner> planner_;
   int writeback_fence_;
+  // Multi Thread function.
+  int64_t last_timestamp_;
+  struct timespec vsync_;
+  drmModeAtomicReqPtr pset_ = NULL;
 };
 }  // namespace android
 

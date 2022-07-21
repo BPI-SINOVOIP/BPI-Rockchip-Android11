@@ -16,7 +16,6 @@
  */
 
 #define LOG_TAG "V4L2Subdev"
-
 #include "LogHelper.h"
 #include "v4l2device.h"
 #include "UtilityMacros.h"
@@ -49,7 +48,7 @@ status_t V4L2Subdevice::open()
     status = V4L2DeviceBase::open();
     if (status == NO_ERROR)
         mState = DEVICE_OPEN;
-
+    codeIndex.clear();
     return status;
 }
 
@@ -193,6 +192,41 @@ status_t V4L2Subdevice::setSelection(int pad, int target, int top, int left, int
     return setSelection(selection);
 }
 
+status_t V4L2Subdevice::getSelection(struct v4l2_subdev_selection &aSelection)
+{
+    LOGI("@%s device = %s", __FUNCTION__, mName.c_str());
+    int ret = 0;
+
+    if ((mState != DEVICE_OPEN) &&
+        (mState != DEVICE_CONFIGURED)){
+        LOGE("%s invalid device state %d",__FUNCTION__, mState);
+        return INVALID_OPERATION;
+    }
+    struct v4l2_subdev_selection sel;
+    memset(&sel, 0, sizeof(sel));
+    sel.pad = 0;
+    sel.which = V4L2_SUBDEV_FORMAT_ACTIVE;
+    sel.target = V4L2_SEL_TGT_CROP_BOUNDS;
+
+    ret = pbxioctl(VIDIOC_SUBDEV_G_SELECTION, &sel);
+    if (ret < 0) {
+        LOGE("VIDIOC_SUBDEV_G_SELECTION failed: %s", strerror(errno));
+        return UNKNOWN_ERROR;
+    }
+
+    aSelection = sel;
+
+    LOGI("@%s: pad%d: crop.bounds:(%d,%d)/%dx%d",
+        __FUNCTION__,
+        aSelection.pad,
+        aSelection.r.left,
+        aSelection.r.top,
+        aSelection.r.width,
+        aSelection.r.height);
+
+    return NO_ERROR;
+}
+
 status_t V4L2Subdevice::setSelection(struct v4l2_subdev_selection &aSelection)
 {
     LOGI("@%s device = %s", __FUNCTION__, mName.c_str());
@@ -243,7 +277,17 @@ status_t V4L2Subdevice::queryFormats(int pad, std::vector<uint32_t> &formats)
     aFormat.index = 0;
 
     while (pbxioctl(VIDIOC_SUBDEV_ENUM_MBUS_CODE, &aFormat) == 0) {
+        /*
+         * Since we are iterating through the index
+         * check if this code is already in format to avoid add
+         * the code twice
+         */
+        if (std::find(formats.begin(), formats.end(), aFormat.code) != formats.end()) {
+            aFormat.index++;
+            continue;
+        }
         formats.push_back(aFormat.code);
+        codeIndex[aFormat.code] = aFormat.index;
         aFormat.index++;
     };
 
@@ -267,7 +311,7 @@ status_t V4L2Subdevice::setFrameInterval(struct v4l2_subdev_frame_interval &fint
         finterval.interval.denominator);
     ret = pbxioctl(VIDIOC_SUBDEV_S_FRAME_INTERVAL, &finterval);
     if (ret < 0) {
-        LOGE("VIDIOC_SUBDEV_S_FRAME_INTERVAL failed: %s", strerror(errno));
+        LOGW("VIDIOC_SUBDEV_S_FRAME_INTERVAL failed: %s", strerror(errno));
         return UNKNOWN_ERROR;
     }
 
@@ -303,7 +347,7 @@ status_t V4L2Subdevice::getSensorFrameDuration(int32_t &duration)
 
     ret = pbxioctl(VIDIOC_SUBDEV_G_FRAME_INTERVAL, &finterval);
     if (ret < 0) {
-        LOGE("VIDIOC_SUBDEV_S_FRAME_INTERVAL failed: %s", strerror(errno));
+        LOGW("VIDIOC_SUBDEV_G_FRAME_INTERVAL failed: %s", strerror(errno));
         return UNKNOWN_ERROR;
     }
     duration = 1000 * finterval.interval.numerator / finterval.interval.denominator;
@@ -322,7 +366,7 @@ status_t V4L2Subdevice::getSensorFormats(int pad, uint32_t code, std::vector<str
 
     CLEAR(frame_size);
     frame_size.pad = pad;
-    frame_size.index = 0;
+    frame_size.index = codeIndex[code];
     frame_size.code = code;
 
     if (mState == DEVICE_CLOSED) {

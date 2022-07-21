@@ -1,3 +1,20 @@
+bootstrap_go_package {
+    name: "soong-libmpimmz",
+    pkgPath: "android/soong/libmpimmz",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+          "Android.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
 libmpimmz_src = [
     "src/rk_mpi_mmz.cpp",
     "src/rk_ion.cpp",
@@ -14,8 +31,16 @@ genrule {
     cmd: "bash $(location version.sh) < $(in) > $(out)",
 }
 
-cc_library {
+cc_libmpimmz {
+   name: "cc_libmpimmz_defaults"
+}
+
+cc_library_shared {
     name: "libmpimmz",
+    defaults: [
+        "cc_libmpimmz_defaults"
+    ],
+
     srcs: libmpimmz_src,
     vendor_available: true,
     local_include_dirs: [

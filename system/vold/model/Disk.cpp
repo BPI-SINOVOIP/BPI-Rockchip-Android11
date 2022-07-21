@@ -302,8 +302,8 @@ status_t Disk::readMetadata() {
             }
             tmp = android::base::Trim(tmp);
             mLabel = tmp;
-	    break;
-	}
+            break;
+        }
         default: {
             if (IsVirtioBlkDevice(majorId)) {
                 LOG(DEBUG) << "Recognized experimental block major ID " << majorId
@@ -361,6 +361,7 @@ status_t Disk::readPartitions() {
 
     Table table = Table::kUnknown;
     bool foundParts = false;
+    bool validParts = false;
     for (const auto& line : output) {
         auto split = android::base::Split(line, kSgdiskToken);
         auto it = split.begin();
@@ -386,7 +387,6 @@ status_t Disk::readPartitions() {
                 continue;
             }
             dev_t partDevice = makedev(major(mDevice), minor(mDevice) + i);
-
             if (table == Table::kMbr) {
                 if (++it == split.end()) continue;
                 int type = 0;
@@ -402,6 +402,7 @@ status_t Disk::readPartitions() {
                     case 0x0c:  // W95 FAT32 (LBA)
                     case 0x0e:  // W95 FAT16 (LBA)
                     case 0x83:  // W95 FAT16 (LBA)
+                        validParts = true;
                         createPublicVolume(partDevice);
                         break;
                 }
@@ -410,6 +411,7 @@ status_t Disk::readPartitions() {
                 auto typeGuid = *it;
                 if (++it == split.end()) continue;
                 auto partGuid = *it;
+                validParts = true;
 
                 if (android::base::EqualsIgnoreCase(typeGuid, kGptBasicData)) {
                     createPublicVolume(partDevice);
@@ -421,7 +423,7 @@ status_t Disk::readPartitions() {
     }
 
     // Ugly last ditch effort, treat entire disk as partition
-    if (table == Table::kUnknown || !foundParts) {
+    if (table == Table::kUnknown || !foundParts || !validParts) {
         LOG(WARNING) << mId << " has unknown partition table; trying entire device";
 
         std::string fsType;

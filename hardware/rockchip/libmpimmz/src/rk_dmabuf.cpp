@@ -6,6 +6,12 @@
 #include "rk_dmabuf.h"
 #include "log.h"
 
+#ifdef SUPPORT_DMABUF_ALLOCATOR
+#include "BufferAllocator.h"
+
+static class BufferAllocator* s_dmabuf_allocator = NULL;
+#endif
+
 static int dmabuf_ioctl(int fd, int req, void* arg) {
     int ret = ioctl(fd, req, arg);
     if (ret < 0) {
@@ -46,4 +52,31 @@ void* dmabuf_mmap(int fd, off_t offset, size_t len)
     void* vaddr = mmap(NULL, len, PROT_READ|PROT_WRITE, MAP_SHARED, fd, offset);
 
     return (vaddr==MAP_FAILED) ? NULL : vaddr;
+}
+
+int dmabuf_alloc(uint32_t len, bool is_cma, bool is_cacheable, int *fd)
+{
+    int ret = -1;
+#ifdef SUPPORT_DMABUF_ALLOCATOR
+    if (s_dmabuf_allocator == NULL) {
+        s_dmabuf_allocator = new BufferAllocator();
+    }
+
+    if (is_cma) {
+        ret = s_dmabuf_allocator->Alloc(is_cacheable?kDmabufCmaHeapName:kDmabufCmaUncachedHeapName, len);
+    } else {
+        ret = s_dmabuf_allocator->Alloc(is_cacheable?kDmabufSystemHeapName:kDmabufSystemUncachedHeapName, len);
+    }
+#else
+    (void)len;
+    (void)is_cma;
+    (void)is_cacheable;
+#endif
+
+    if (ret < 0)
+        return -1;
+
+    *fd = ret;
+
+    return 0;
 }

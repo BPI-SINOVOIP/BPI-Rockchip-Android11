@@ -14,10 +14,10 @@
 
 
 AblcResult_t AblcInit(AblcContext_t **ppAblcCtx, CamCalibDbV2Context_t *pCalibDb);
-AblcResult_t AblcConfig(AblcConfig_t *pParams, CalibDbV2_Ablc_t* pBlcCalib);
-void BlcNewMalloc(AblcConfig_t* pBlcPara, CalibDbV2_Ablc_t* pCalibDb);
 AblcResult_t AblcRelease(AblcContext_t *pAblcCtx);
 AblcResult_t AblcProcess(AblcContext_t *pAblcCtx, AblcExpInfo_t *pExpInfo);
+AblcResult_t AblcParamsUpdate(AblcContext_t *pAblcCtx, CalibDbV2_Ablc_t *pCalibDb);
+
 
 #endif
 

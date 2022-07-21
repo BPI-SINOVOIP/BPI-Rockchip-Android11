@@ -884,7 +884,7 @@ void dw_hdmi_qp_selete_output(struct hdmi_edid_data *edid_data,
 			      struct overscan *overscan,
 			      enum dw_hdmi_devtype dev_type,
 			      bool output_bus_format_rgb,
-			      void *data)
+			      void *data, struct display_state *state)
 {
 	struct rockchip_hdmi *hdmi = (struct rockchip_hdmi *)data;
 	struct drm_hdmi_info *hdmi_info = &edid_data->display_info.hdmi;
@@ -1015,6 +1015,13 @@ null_basep:
 	*bus_format = drm_rk_select_color(edid_data, screen_info,
 					  dev_type, output_bus_format_rgb);
 
+	if (state->force_output) {
+		memcpy(edid_data->preferred_mode, &state->force_mode,
+		       sizeof(struct drm_display_mode));
+		if (state->force_bus_format)
+			*bus_format = state->force_bus_format;
+	}
+
 	hdmi->bus_format = *bus_format;
 	color_depth = hdmi_bus_fmt_color_depth(*bus_format);
 	pixel_clk = edid_data->preferred_mode->clock;
@@ -1048,6 +1055,8 @@ null_basep:
 		if (color_depth == 10)
 			hdmi->bus_width |= COLOR_DEPTH_10BIT;
 	}
+
+	rockchip_phy_set_bus_width(conn_state->phy, hdmi->bus_width);
 }
 
 static void rk3588_set_link_mode(struct rockchip_hdmi *hdmi)

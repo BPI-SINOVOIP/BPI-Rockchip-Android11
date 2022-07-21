@@ -26,22 +26,20 @@
 #include "xcam_log.h"
 #include "xcam_common.h"
 
-typedef struct AblcConfig_s {
-    bool enable;
-    int len;
-    float* iso;
-    float* blc_r;
-    float* blc_gr;
-    float* blc_gb;
-    float* blc_b;
-} AblcConfig_t;
 
 typedef struct AblcContext_s {
+    AblcOPMode_t eMode;
+    AblcParams_t stBlc0Params;
+    AblcParams_t stBlc1Params;
+    AblcSelect_t stBlc0Select;
+    AblcSelect_t stBlc1Select;
+    AblcManualAttr_t stBlc0Manual;
+    AblcManualAttr_t stBlc1Manual;
+    AblcProc_t ProcRes;
+
     AblcExpInfo_t stExpInfo;
     AblcState_t eState;
-    AblcConfig_t config;
-    AblcProc_t ProcRes;
-    rk_aiq_blc_attrib_t attr;
+
     CalibDbV2_Ablc_t stBlcCalib;
     int prepare_type;
 

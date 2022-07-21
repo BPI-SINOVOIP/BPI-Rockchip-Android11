@@ -82,9 +82,9 @@ typedef struct CalibDbV2_Ccm_Accm_Cof_Para_s {
 typedef struct CalibDbV2_Ccm_Luma_Ccm_Para_s {
     // M4_ARRAY_DESC("RGB2Y para", "f32", M4_SIZE(1,3), M4_RANGE(0,100), "[38 75 15]", M4_DIGIT(0),  M4_DYNAMIC(0), M4_HIDE(1))
     float rgb2y_para[3];
-    // M4_NUMBER_DESC("low bound pos bit", "f32", M4_RANGE(0.0, 10.0), "8.0", M4_DIGIT(0))
-    float low_bound_pos_bit;
-    // M4_ARRAY_DESC("y alpha curve", "f32", M4_SIZE(1,17), M4_RANGE(0,1024), "[0,64,128,192,256,320,384,448,512,576,640,704,768,832,896,960,1024]", M4_DIGIT(1), M4_DYNAMIC(0))
+    // M4_NUMBER_DESC("bound pos bit", "f32", M4_RANGE(0, 10), "8", M4_DIGIT(0))
+    float low_bound_pos_bit;// low & high y alpha adjust
+    // M4_ARRAY_DESC("y alpha curve", "f32", M4_SIZE(1,17), M4_RANGE(0,1024), "[0,64,128,192,256,320,384,448,512,576,640,704,768,832,896,960,1024]", M4_DIGIT(0), M4_DYNAMIC(0))
     float y_alpha_curve[17];
     // M4_ARRAY_TABLE_DESC("gain alphaScale curve", "array_table_ui", M4_INDEX_DEFAULT)
     CalibDbV2_Ccm_Gain_Scale_Curve_t gain_alphaScale_curve;

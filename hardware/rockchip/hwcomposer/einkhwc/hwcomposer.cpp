@@ -159,7 +159,7 @@ struct ebc_buf_info {
     int win_y2;
     int width_mm;
     int height_mm;
-    int needpic; //16 or 32
+    int needpic; // 1: buf can not be drop by ebc, 0: buf can drop by ebc
     char tid_name[16];
 };
 
@@ -181,7 +181,11 @@ struct win_coordinate{
 #define EBC_SET_FULL_MODE_NUM    (0x7003)
 #define EBC_ENABLE_OVERLAY        (0x7004)
 #define EBC_DISABLE_OVERLAY        (0x7005)
-
+#define EBC_GET_OSD_BUFFER	(0x7006)
+#define EBC_SEND_OSD_BUFFER	(0x7007)
+#define EBC_NEW_BUF_PREPARE	(0x7008)
+#define EBC_SET_DIFF_PERCENT	(0x7009)
+#define EBC_WAIT_NEW_BUF_TIME (0x700a)
 #endif
 
 #define POWEROFF_IMAGE_PATH_USER "/data/misc/poweroff.png"
@@ -328,6 +332,8 @@ static int hwc_prepare(hwc_composer_device_1_t *dev, size_t num_displays,
                        hwc_display_contents_1_t **display_contents) {
 
    UN_USED(dev);
+
+   ioctl(ebc_fd, EBC_NEW_BUF_PREPARE,NULL);
 
    init_log_level();
    for (int i = 0; i < (int)num_displays; ++i) {
@@ -1749,7 +1755,7 @@ void Rgb888_to_color_eink2(char *dst, int *src, int fb_height, int fb_width, int
 		src_r1 = src;
 		src_r2 = src + vir_width;
 		int row_mod3 = i % 3;
-		if (row_mod3 == 1) {
+		if (row_mod3 == 0) {
 			for (j = 0; j < w_div6; j++) {
 				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
 				*dst_r1++ = r | (b<<4);
@@ -1760,20 +1766,20 @@ void Rgb888_to_color_eink2(char *dst, int *src, int fb_height, int fb_width, int
 				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
 				*dst_r1++ = b | (g<<4);
 				*dst_r2++ = r | (b<<4);
+			}
+		} else if (row_mod3 == 1) {
+			for (j = 0; j < w_div6; j++) {
+				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
+				*dst_r1++ = b | (g<<4);
+				*dst_r2++ = r | (b<<4);
+				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
+				*dst_r1++ = r | (b<<4);
+				*dst_r2++ = g | (r<<4);
+				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
+				*dst_r1++ = g | (r<<4);
+				*dst_r2++ = b | (g<<4);
 			}
 		} else if (row_mod3 == 2) {
-			for (j = 0; j < w_div6; j++) {
-				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
-				*dst_r1++ = b | (g<<4);
-				*dst_r2++ = r | (b<<4);
-				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
-				*dst_r1++ = r | (b<<4);
-				*dst_r2++ = g | (r<<4);
-				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
-				*dst_r1++ = g | (r<<4);
-				*dst_r2++ = b | (g<<4);
-			}
-		} else if (row_mod3 == 0) {
 			for (j = 0; j < w_div6; j++) {
 				RGB888_AVG_RGB(src_r1, src_r2, r, g, b);
 				*dst_r1++ = g | (r<<4);
@@ -2082,7 +2088,7 @@ int hwc_post_epd(int *buffer, Rect rect, int mode){
   buf_info.win_y1 = rect.top;
   buf_info.win_y2 = rect.bottom;
   buf_info.epd_mode = mode;
-  buf_info.needpic = 16;
+  buf_info.needpic = 1;
 
 
   char value[PROPERTY_VALUE_MAX];
@@ -2326,10 +2332,10 @@ static int hwc_adajust_sf_vsync(int mode){
       break;
     case EPD_RESUME:
       resume_count = 5;
-      strcpy(refresh_skip_count, "29");
+      strcpy(refresh_skip_count, "5");
       break;
     case EPD_SUSPEND:
-      strcpy(refresh_skip_count, "29");
+      strcpy(refresh_skip_count, "5");
       break;
     default:
       strcpy(refresh_skip_count, "2");
@@ -2380,7 +2386,7 @@ static int hwc_set(hwc_composer_device_1_t *dev, size_t num_displays,
   inc_frame();
   char value[PROPERTY_VALUE_MAX];
 
-  property_get("sys.eink.mode", value, "0");
+  property_get("sys.eink.mode", value, "7");
   int requestEpdMode = atoi(value);
 
   //Handle eink mode.

@@ -30,6 +30,16 @@ typedef struct Sensor_Yuv_Params_s {
 } Sensor_Yuv_Params_t;
 #pragma pack()
 
+#pragma pack(1)
+typedef struct Sensor_Online_Raw_Params_s {
+    uint8_t data_id;
+    uint16_t width;
+    uint16_t height;
+    uint32_t bits;
+    uint16_t sensorImageFormat;
+} Sensor_Online_Raw_Params_t;
+#pragma pack()
+
 class RKAiqOLProtocol
 {
   public:

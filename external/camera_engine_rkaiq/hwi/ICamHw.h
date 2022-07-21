@@ -87,7 +87,9 @@ public:
     virtual ~ICamHw() {};
     virtual XCamReturn init(const char* sns_ent_name) = 0;
     virtual XCamReturn deInit() = 0;
+#ifdef RKAIQ_ENABLE_PARSER_V1
     virtual void setCalib(const CamCalibDbContext_t* calib) = 0;
+#endif
     virtual void setCalib(const CamCalibDbV2Context_t* calibv2) = 0;
     virtual XCamReturn prepare(uint32_t width, uint32_t height, int mode, int t_delay, int g_delay) = 0;
     virtual XCamReturn start() = 0;
@@ -123,10 +125,15 @@ public:
     virtual XCamReturn setLensVcmCfg(rk_aiq_lens_vcmcfg& lens_cfg) = 0;
     virtual XCamReturn FocusCorrection() = 0;
     virtual XCamReturn ZoomCorrection() = 0;
+    virtual XCamReturn setAngleZ(float angleZ) = 0;
     virtual void getShareMemOps(isp_drv_share_mem_ops_t** mem_ops) = 0;
     virtual XCamReturn getEffectiveIspParams(rkisp_effect_params_v20& ispParams, int frame_id) = 0;
     virtual uint64_t getIspModuleEnState() = 0;
     virtual XCamReturn get_sp_resolution(int &width, int &height, int &aligned_w, int &aligned_h) = 0;
+    virtual void setCamPhyId(int phyId) = 0;
+    virtual int getCamPhyId() = 0;
+    virtual void setGroupMode(bool bGroup, bool bMain) = 0;
+    virtual bool get_pdaf_support() = 0;
 private:
     XCAM_DEAD_COPY (ICamHw);
 };

@@ -71,7 +71,11 @@
 #define MAX_SUBDEV_ENUMERATE    256
 
 /* These should be read from the platform configure file */
+#if defined(TARGET_RK3588)
+#define MAX_CAMERAS 6
+#else
 #define MAX_CAMERAS 2
+#endif
 #define BACK_CAMERA_ID 0
 #define FRONT_CAMERA_ID 1
 
@@ -162,12 +166,15 @@ struct SensorDriverDescriptor {
 };
 
 struct SensorFrameSize {
+    uint32_t left;
+    uint32_t top;
     uint32_t min_width;
     uint32_t min_height;
     uint32_t max_width;
     uint32_t max_height;
 };
 typedef std::map<uint32_t, std::vector<struct SensorFrameSize>> SensorFormat;
+typedef std::map<int32_t, SensorFormat> IndexSensorOutputFormats;
 
 enum ExtensionGroups {
     CAPABILITY_NONE = 0,
@@ -211,16 +218,18 @@ public:
     status_t getSensorEntityName(int32_t cameraId,
                                  std::string &sensorEntityName) const;
     status_t getAvailableSensorOutputFormats(int32_t cameraId,
-                                     SensorFormat &OutputFormats) const;
+                                     SensorFormat &OutputFormats, bool isFirst = false) const;
     status_t getSensorBayerPattern(int32_t cameraId,
                                    int32_t &bayerPattern) const;
     status_t getSensorFrameDuration(int32_t cameraId, int32_t &duration) const;
     status_t getDvTimings(int32_t cameraId, struct v4l2_dv_timings &timings) const;
+    status_t getSensorFormat(int32_t cameraId, struct v4l2_subdev_format &aFormat) const;
     void getMediaCtlElementNames(std::vector<std::string> &elementNames, bool isFirst = false) const;
     bool isIspSupportRawPath() const;
     std::string getFullMediaCtlElementName(const std::vector<std::string> elementNames,
                                            const char *value) const;
     const struct SensorDriverDescriptor* getSensorDrvDes(int32_t cameraId) const;
+    status_t initAvailableSensorOutputFormats(void);
 
     std::string mProductName;
     std::string mManufacturerName;
@@ -237,6 +246,8 @@ public:
     bool mHasMediaController; // TODO: REMOVE. WA to overcome BXT MC-related issue with camera ID <-> ISP port
     media_device_info mDeviceInfo;
     std::vector<struct SensorDriverDescriptor> mSensorInfo;
+    IndexSensorOutputFormats mSensorOutputFormats;
+
 private:
     // the below functions are used to init the mSensorInfo
     status_t initDriverList();

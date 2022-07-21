@@ -13,33 +13,113 @@
 #include <linux/gpio/consumer.h>
 #include <linux/mfd/rk630.h>
 
-static const struct regmap_irq rk630_irqs[] = {
+static int rk630_macphy_enable(struct rk630 *rk630, unsigned long rate)
+{
+	u32 val;
+	int ret;
 
-	/* RTC INT_STS0 */
-	[RK630_IRQ_RTC_ALARM] = {
-		.mask = RK630_IRQ_RTC_ALARM_MSK,
-		.reg_offset = 0,
-	},
-	/* RTC INT_STS1 */
-	[RK630_IRQ_SYS_INT] = {
-		.mask = RK630_IRQ_SYS_MSK,
-		.reg_offset = 4,
-	},
-};
+	/* IOMUX */
+	val = 0xfffc5554;
+	ret = regmap_write(rk630->grf, GRF_REG(0x8), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to GRF: %d\n", ret);
+		return ret;
+	}
 
-static const struct regmap_irq_chip rk630_irq_chip = {
-	.name = "rk630",
-	.irqs = rk630_irqs,
-	.num_irqs = ARRAY_SIZE(rk630_irqs),
-	.num_regs = 2,
-	.irq_reg_stride = 4,
-	.status_base = RTC_STATUS0,
-	.mask_base = RTC_INT0_EN,
-	.ack_base = RTC_STATUS0,
-	.init_ack_masked = true,
-};
+	/* IOMUX */
+	val = 0x00330021;
+	ret = regmap_write(rk630->grf, GRF_REG(0x10), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to GRF: %d\n", ret);
+		return ret;
+	}
+
+	/* reset */
+	val = BIT(12 + 16) | BIT(12);
+	ret = regmap_write(rk630->cru, CRU_REG(0x50), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to CRU: %d\n", ret);
+		return ret;
+	}
+	usleep_range(20, 30);
+
+	val = BIT(12 + 16);
+	ret = regmap_write(rk630->cru, CRU_REG(0x50), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to CRU: %d\n", ret);
+		return ret;
+	}
+	usleep_range(20, 30);
+
+	/* power up && led*/
+	val = BIT(1 + 16) | BIT(1) | BIT(2 + 16);
+	ret = regmap_write(rk630->grf, GRF_REG(0x408), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to GRF: %d\n", ret);
+		return ret;
+	}
+	usleep_range(20000, 50000);
+
+	/* mdio_sel: mdio */
+	val = BIT(8 + 16) | BIT(8);
+	ret = regmap_write(rk630->grf, GRF_REG(0x400), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to GRF: %d\n", ret);
+		return ret;
+	}
+
+	/* mode sel: RMII && BGS value: OTP && id */
+	val = (2 << 14) | (0 << 12) | (0x1 << 8) | 1;
+	switch (rate) {
+	case 24000000:
+		val |= 0x6 << 5;
+		break;
+	case 25000000:
+		val |= 0x4 << 5;
+		break;
+	case 27000000:
+		val |= 0x5 << 5;
+		break;
+	default:
+		dev_err(rk630->dev, "Unsupported clock rate: %ld\n", rate);
+		return -EINVAL;
+	}
+
+	ret = regmap_write(rk630->grf, GRF_REG(0x404), val | 0xffff0000);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to GRF: %d\n", ret);
+		return ret;
+	}
+	usleep_range(100, 150);
+
+	return 0;
+}
+
+static int rk630_macphy_disable(struct rk630 *rk630)
+{
+	u32 val;
+	int ret;
+
+	/* GRF_SOC_CON2_CFG */
+	val = BIT(2) | BIT(16 + 2);
+	ret = regmap_write(rk630->grf, GRF_REG(0x408), val);
+	if (ret != 0) {
+		dev_err(rk630->dev, "Could not write to GRF: %d\n", ret);
+		return ret;
+	}
+
+	return 0;
+}
 
 static const struct mfd_cell rk630_devs[] = {
+	{
+		.name = "rk630-efuse",
+		.of_compatible = "rockchip,rk630-efuse",
+	},
+	{
+		.name = "rk630-pinctrl",
+		.of_compatible = "rockchip,rk630-pinctrl",
+	},
 	{
 		.name = "rk630-tve",
 		.of_compatible = "rockchip,rk630-tve",
@@ -47,6 +127,14 @@ static const struct mfd_cell rk630_devs[] = {
 	{
 		.name = "rk630-rtc",
 		.of_compatible = "rockchip,rk630-rtc",
+	},
+	{
+		.name = "rk630-macphy",
+		.of_compatible = "rockchip,rk630-macphy",
+	},
+	{
+		.name = "rk630-codec",
+		.of_compatible = "rockchip,rk630-codec",
 	},
 };
 
@@ -81,6 +169,27 @@ const struct regmap_config rk630_grf_regmap_config = {
 	.rd_table = &rk630_grf_readable_table,
 };
 EXPORT_SYMBOL_GPL(rk630_grf_regmap_config);
+
+static const struct regmap_range rk630_pinctrl_readable_ranges[] = {
+	regmap_reg_range(GPIO0_BASE, GPIO0_BASE + GPIO_VER_ID),
+	regmap_reg_range(GPIO1_BASE, GPIO1_BASE + GPIO_VER_ID),
+};
+
+static const struct regmap_access_table rk630_pinctrl_readable_table = {
+	.yes_ranges = rk630_pinctrl_readable_ranges,
+	.n_yes_ranges = ARRAY_SIZE(rk630_pinctrl_readable_ranges),
+};
+
+const struct regmap_config rk630_pinctrl_regmap_config = {
+	.name = "pinctrl",
+	.reg_bits = 32,
+	.val_bits = 32,
+	.reg_stride = 4,
+	.max_register = GPIO_MAX_REGISTER,
+	.reg_format_endian = REGMAP_ENDIAN_NATIVE,
+	.val_format_endian = REGMAP_ENDIAN_NATIVE,
+	.rd_table = &rk630_pinctrl_readable_table,
+};
 
 static const struct regmap_range rk630_cru_readable_ranges[] = {
 	regmap_reg_range(CRU_SPLL_CON0, CRU_SPLL_CON2),
@@ -128,7 +237,28 @@ const struct regmap_config rk630_rtc_regmap_config = {
 
 int rk630_core_probe(struct rk630 *rk630)
 {
+	bool macphy_enabled = false;
+	struct device_node *np;
+	unsigned long rate;
 	int ret;
+
+	rk630->ref_clk = devm_clk_get(rk630->dev, "ref");
+	if (IS_ERR(rk630->ref_clk)) {
+		dev_err(rk630->dev, "failed to get ref clk source\n");
+		return PTR_ERR(rk630->ref_clk);
+	}
+
+	ret = clk_prepare_enable(rk630->ref_clk);
+	if (ret < 0) {
+		dev_err(rk630->dev, "failed to enable ref clk - %d\n", ret);
+		return ret;
+	}
+	rate = clk_get_rate(rk630->ref_clk);
+
+	ret = devm_add_action_or_reset(rk630->dev, (void (*) (void *))clk_disable_unprepare,
+				       rk630->ref_clk);
+	if (ret)
+		return ret;
 
 	rk630->reset_gpio = devm_gpiod_get(rk630->dev, "reset", 0);
 	if (IS_ERR(rk630->reset_gpio)) {
@@ -148,15 +278,11 @@ int rk630_core_probe(struct rk630 *rk630)
 		return -EINVAL;
 	}
 
-	rk630->regmap_irq_chip = &rk630_irq_chip;
-	ret = devm_regmap_add_irq_chip(rk630->dev, rk630->rtc, rk630->irq,
-				       IRQF_ONESHOT | IRQF_SHARED, -1,
-				       rk630->regmap_irq_chip,
-				       &rk630->irq_data);
-	if (ret) {
-		dev_err(rk630->dev, "Failed to add irq_chip %d\n", ret);
-		return ret;
-	}
+	regmap_update_bits(rk630->grf, PLUMAGE_GRF_SOC_CON0,
+			   RTC_CLAMP_EN_MASK, RTC_CLAMP_EN(1));
+
+	/* disable ext_off\vbat_det\msec\sys_int\periodic interrupt by default */
+	regmap_write(rk630->rtc, RTC_INT1_EN, 0);
 
 	ret = devm_mfd_add_devices(rk630->dev, PLATFORM_DEVID_NONE,
 				   rk630_devs, ARRAY_SIZE(rk630_devs),
@@ -165,6 +291,23 @@ int rk630_core_probe(struct rk630 *rk630)
 		dev_err(rk630->dev, "failed to add MFD children: %d\n", ret);
 		return ret;
 	}
+
+	for_each_child_of_node(rk630->dev->of_node, np) {
+		if (!of_device_is_compatible(np, "rockchip,rk630-macphy"))
+			continue;
+
+		if (!of_device_is_available(np)) {
+			continue;
+		} else {
+			macphy_enabled = true;
+			break;
+		}
+	}
+
+	if (macphy_enabled)
+		rk630_macphy_enable(rk630, rate);
+	else
+		rk630_macphy_disable(rk630);
 
 	return 0;
 }

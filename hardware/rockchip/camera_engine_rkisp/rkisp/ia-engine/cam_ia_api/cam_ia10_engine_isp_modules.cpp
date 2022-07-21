@@ -240,11 +240,11 @@ RESULT cam_ia10_isp_flt_config
 	CamResolutionName_t ResName;   
 	result = CamCalibDbGetResolutionNameByWidthHeight(hCamCalibDb, drv_width, drv_height, &ResName);
 	if (RET_SUCCESS != result) {
-	  LOGD("%s: resolution (%dx%d) not found in database\n", drv_width, drv_height);
+	  LOGE("%s: resolution (%dx%d) not found in database\n", __func__,drv_width, drv_height);
 	}else{
 	  result = CamCalibDbGetDpfProfileByResolution(hCamCalibDb, ResName, &pDpfProfile_t);
 	  if (RET_SUCCESS != result) {
-	    LOGD("%s: get dpf fail (%dx%d) (%s) not found in database\n", drv_width, drv_height, ResName);
+	    LOGE("%s: get dpf fail (%dx%d) (%s) not found in database\n", __func__,drv_width, drv_height, ResName);
 	  } 
 	}
 	
@@ -547,14 +547,14 @@ RESULT cam_ia10_isp_flt_config
 		int no_filter;
 		result = CamCalibDbGetNoOfFilterProfile(hCamCalibDb, pDpfProfile_t, &no_filter);
 		if(result != RET_SUCCESS){
-			LOGD("fail to get no FilterProfile, ret: %d", result);
+			LOGE("fail to get no FilterProfile, ret: %d", result);
 		}else{
 			if(no_filter > 0 && pDpfProfile_t != NULL){
 				if(LightMode <= LIGHT_MODE_MIN ||  LightMode >= LIGHT_MODE_MAX || LightMode > no_filter)
 					LightMode = LIGHT_MODE_DAY;
 			    result = CamCalibDbGetFilterProfileByIdx(hCamCalibDb, pDpfProfile_t, LightMode, &pFilterProfile);
 			    if (result != RET_SUCCESS) {
-			      LOGD("fail to get pGocGlobal, ret: %d", result);
+			      LOGE("fail to get pGocGlobal, ret: %d", result);
 			    }
 			}
 		}
@@ -1611,11 +1611,11 @@ RESULT cam_ia10_isp_demosaicLp_config
 	CamResolutionName_t ResName;   
 	result = CamCalibDbGetResolutionNameByWidthHeight(hCamCalibDb, drv_width, drv_height, &ResName);
 	if (RET_SUCCESS != result) {
-	  LOGD("%s: resolution (%dx%d) not found in database\n", drv_width, drv_height);
+	  LOGE("%s: resolution (%dx%d) not found in database\n", __func__,drv_width, drv_height);
 	}else{
 	  result = CamCalibDbGetDpfProfileByResolution(hCamCalibDb, ResName, &pDpfProfile_t);
 	  if (RET_SUCCESS != result) {
-	    LOGD("%s: get dpf fail (%dx%d) (%s) not found in database\n", drv_width, drv_height, ResName);
+	    LOGE("%s: get dpf fail (%dx%d) (%s) not found in database\n", __func__,drv_width, drv_height, ResName);
 	  } 
 	}
 
@@ -1627,14 +1627,14 @@ RESULT cam_ia10_isp_demosaicLp_config
 	result = CamCalibDbGetNoOfFilterProfile(hCamCalibDb, pDpfProfile_t, &no_filter);
 	
 	if(result != RET_SUCCESS){
-		LOGD("fail to get no FilterProfile, ret: %d", result);
+		LOGE("fail to get no FilterProfile, ret: %d", result);
 	}else{
 		if(no_filter > 0 && pDpfProfile_t != NULL){
 			if(LightMode <= LIGHT_MODE_MIN ||  LightMode >= LIGHT_MODE_MAX || LightMode > no_filter)
 				LightMode = LIGHT_MODE_DAY;
 		    result = CamCalibDbGetFilterProfileByIdx(hCamCalibDb, pDpfProfile_t, LightMode, &pFilterProfile);
 		    if (result != RET_SUCCESS) {
-		      LOGD("fail to get filter profile fail ret: %d", result);
+		      LOGE("fail to get filter profile fail ret: %d", result);
 		    }else{
 				pDemosaicLpConf = &pFilterProfile->DemosaicLpConf;
 		    }

@@ -34,12 +34,12 @@ int rkRgaBlit(struct rkRgaCfg *src_cfg, struct rkRgaCfg *dst_cfg)
     rga_info_t dst;
 
     memset(&src, 0, sizeof(rga_info_t));
-    src.fd = -1;
+    src.fd = src_cfg->fd;
     src.mmuFlag = 1;
     src.virAddr = src_cfg->addr;
 
     memset(&dst, 0, sizeof(rga_info_t));
-    dst.fd = -1;
+    dst.fd = dst_cfg->fd;
     dst.mmuFlag = 1;
     dst.virAddr = dst_cfg->addr;
 

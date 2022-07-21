@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
-
 #include "rk_aiq_user_api_afec.h"
-#include "RkAiqHandleInt.h"
+
+#include "algo_handlers/RkAiqAfecHandle.h"
 
 RKAIQ_BEGIN_DECLARE
 

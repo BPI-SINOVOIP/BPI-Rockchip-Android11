@@ -57,7 +57,7 @@ int setDpccAttrib(rk_aiq_sys_ctx_t* ctx, char* data) {
 int getDpccAttrib(rk_aiq_sys_ctx_t* ctx, char* data) {
     return rk_aiq_user_api2_adpcc_GetAttrib(ctx, (rk_aiq_dpcc_attrib_V20_t *)data);
 }
-
+/*
 int setDehazeAttrib(rk_aiq_sys_ctx_t* ctx, char* data) {
     return rk_aiq_user_api_adehaze_setSwAttrib(ctx, *(adehaze_sw_t *)data);
 }
@@ -65,7 +65,7 @@ int setDehazeAttrib(rk_aiq_sys_ctx_t* ctx, char* data) {
 int getDehazeAttrib(rk_aiq_sys_ctx_t* ctx, char* data) {
     return rk_aiq_user_api_adehaze_getSwAttrib(ctx, (adehaze_sw_t *)data);
 }
-
+*/
 int setCcmAttrib(rk_aiq_sys_ctx_t* ctx, char* data)
 {
     return rk_aiq_user_api_accm_SetAttrib(ctx, *(rk_aiq_ccm_attrib_t*) data);
@@ -108,4 +108,9 @@ int setAcpAttrib(rk_aiq_sys_ctx_t* ctx, char* data)
 int getAcpAttrib(rk_aiq_sys_ctx_t* ctx, char* data)
 {
     return rk_aiq_user_api_acp_GetAttrib(ctx, (acp_attrib_t *) data);
+}
+
+int enqueueRkRawFile(rk_aiq_sys_ctx_t* ctx, char* data)
+{
+    return rk_aiq_uapi_sysctl_enqueueRkRawFile(ctx, data);
 }

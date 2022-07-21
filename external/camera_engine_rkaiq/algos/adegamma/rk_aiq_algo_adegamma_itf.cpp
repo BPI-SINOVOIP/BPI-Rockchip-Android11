@@ -17,9 +17,10 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "adegamma/rk_aiq_algo_adegamma_itf.h"
 #include "adegamma/rk_aiq_adegamma_algo.h"
+#include "rk_aiq_algo_types.h"
+
 RKAIQ_BEGIN_DECLARE
 
 typedef struct _RkAiqAlgoContext {
@@ -34,8 +35,7 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
     AdegammaHandle_t*AdegammaHandle = NULL;
-    AlgoCtxInstanceCfgInt* instanc_int = (AlgoCtxInstanceCfgInt*)cfg;
-    CamCalibDbV2Context_t* calib = instanc_int->calibv2;
+    CamCalibDbV2Context_t* calib = cfg->calibv2;
     ret = AdegammaInit(&AdegammaHandle, calib);
     *context = (RkAiqAlgoContext *)(AdegammaHandle);
 
@@ -62,14 +62,14 @@ prepare(RkAiqAlgoCom* params)
     LOG1_ADEGAMMA("ENTER: %s \n", __func__);
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
     AdegammaHandle_t * AdegammaHandle = (AdegammaHandle_t *)params->ctx;
-    RkAiqAlgoConfigAdegammaInt* pCfgParam = (RkAiqAlgoConfigAdegammaInt*)params;
+    RkAiqAlgoConfigAdegamma* pCfgParam = (RkAiqAlgoConfigAdegamma*)params;
     rk_aiq_degamma_cfg_t *adegamma_config = &AdegammaHandle->adegamma_config;
-    AdegammaHandle->working_mode = pCfgParam->adegamma_config_com.com.u.prepare.working_mode;
-    AdegammaHandle->prepare_type = pCfgParam->adegamma_config_com.com.u.prepare.conf_type;
+    AdegammaHandle->working_mode = pCfgParam->com.u.prepare.working_mode;
+    AdegammaHandle->prepare_type = pCfgParam->com.u.prepare.conf_type;
 
     if(!!(AdegammaHandle->prepare_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )) {
         CalibDbV2_Adegmma_t* adegamma_calib =
-                (CalibDbV2_Adegmma_t*)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calibv2, adegamma_calib));
+            (CalibDbV2_Adegmma_t*)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->com.u.prepare.calibv2, adegamma_calib));
         AdegammaHandle->pCalibDb = adegamma_calib;//reload iq
         LOGD_ADEGAMMA("%s: Adegamma Reload Para!!!\n", __FUNCTION__);
     }
@@ -82,11 +82,11 @@ static XCamReturn
 pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
     LOG1_ADEGAMMA("ENTER: %s \n", __func__);
-    RkAiqAlgoPreAdegammaInt* pAdegammaPreParams = (RkAiqAlgoPreAdegammaInt*)inparams;
+    RkAiqAlgoPreAdegamma* pAdegammaPreParams = (RkAiqAlgoPreAdegamma*)inparams;
     AdegammaHandle_t * AdegammaHandle = (AdegammaHandle_t *)inparams->ctx;
     rk_aiq_degamma_cfg_t *adegamma_config = &AdegammaHandle->adegamma_config;
 
-    if (pAdegammaPreParams->rk_com.u.proc.gray_mode)
+    if (pAdegammaPreParams->com.u.proc.gray_mode)
         AdegammaHandle->Scene_mode = DEGAMMA_OUT_NIGHT;
     else if (DEGAMMA_OUT_NORMAL == AdegammaHandle->working_mode)
         AdegammaHandle->Scene_mode = DEGAMMA_OUT_NORMAL;

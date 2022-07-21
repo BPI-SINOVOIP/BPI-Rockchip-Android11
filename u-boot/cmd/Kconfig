@@ -1060,6 +1060,11 @@ config CMD_ITEST
 	help
 	  Return true/false on integer compare.
 
+config CMD_SCRIPT_UPDATE
+	bool "sd_update/usb_update/tftp_update"
+	help
+	  Auto run sd_update/usb_update/tftp_update.txt from sd/udisk/tftp.
+
 config CMD_SOURCE
 	bool "source"
 	default y
@@ -1533,6 +1538,11 @@ config CMD_EXT4_WRITE
 	bool "ext4 write command support"
 	help
 	  Enables EXT4 FS write command
+
+config CMD_EXT4_SPARSE_WRITE
+	depends on CMD_EXT4
+	bool "ext4 sparse write command support"
+	help
 
 config CMD_FAT
 	bool "FAT command support"

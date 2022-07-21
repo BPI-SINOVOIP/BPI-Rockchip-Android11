@@ -346,6 +346,7 @@ struct tcpm_port {
 	unsigned long delay_ms;
 
 	spinlock_t pd_event_lock;
+	struct mutex pd_handler_lock;
 	u32 pd_events;
 
 	struct kthread_work event_work;
@@ -2017,6 +2018,13 @@ static int tcpm_altmode_enter(struct typec_altmode *altmode)
 {
 	struct tcpm_port *port = typec_altmode_get_drvdata(altmode);
 	u32 header;
+	int ret = 0;
+
+	mutex_lock(&port->pd_handler_lock);
+	if (tcpm_port_is_disconnected(port)) {
+		ret = -ENODEV;
+		goto unlock;
+	}
 
 	mutex_lock(&port->lock);
 	header = VDO(altmode->svid, 1, CMD_ENTER_MODE);
@@ -2025,14 +2033,22 @@ static int tcpm_altmode_enter(struct typec_altmode *altmode)
 	tcpm_queue_vdm(port, header, NULL, 0);
 	mod_vdm_delayed_work(port, 0);
 	mutex_unlock(&port->lock);
-
-	return 0;
+unlock:
+	mutex_unlock(&port->pd_handler_lock);
+	return ret;
 }
 
 static int tcpm_altmode_exit(struct typec_altmode *altmode)
 {
 	struct tcpm_port *port = typec_altmode_get_drvdata(altmode);
 	u32 header;
+	int ret = 0;
+
+	mutex_lock(&port->pd_handler_lock);
+	if (tcpm_port_is_disconnected(port)) {
+		ret = -ENODEV;
+		goto unlock;
+	}
 
 	mutex_lock(&port->lock);
 	header = VDO(altmode->svid, 1, CMD_EXIT_MODE);
@@ -2042,20 +2058,31 @@ static int tcpm_altmode_exit(struct typec_altmode *altmode)
 	mod_vdm_delayed_work(port, 0);
 	mutex_unlock(&port->lock);
 
-	return 0;
+unlock:
+	mutex_unlock(&port->pd_handler_lock);
+	return ret;
 }
 
 static int tcpm_altmode_vdm(struct typec_altmode *altmode,
 			    u32 header, const u32 *data, int count)
 {
 	struct tcpm_port *port = typec_altmode_get_drvdata(altmode);
+	int ret = 0;
+
+	mutex_lock(&port->pd_handler_lock);
+	if (tcpm_port_is_disconnected(port)) {
+		ret = -ENODEV;
+		goto unlock;
+	}
 
 	mutex_lock(&port->lock);
 	tcpm_queue_vdm(port, header, data, count - 1);
 	mod_vdm_delayed_work(port, 0);
 	mutex_unlock(&port->lock);
 
-	return 0;
+unlock:
+	mutex_unlock(&port->pd_handler_lock);
+	return ret;
 }
 
 static int tcpm_altmode_notify(struct typec_altmode *altmode,
@@ -3770,11 +3797,7 @@ static void run_state_machine(struct tcpm_port *port)
 				       tcpm_try_src(port) ? SRC_TRY
 							  : SNK_ATTACHED,
 				       0);
-		else
-			/* Wait for VBUS, but not forever */
-			tcpm_set_state(port, PORT_RESET, PD_T_PS_SOURCE_ON);
 		break;
-
 	case SRC_TRY:
 		port->try_src_count++;
 		tcpm_set_cc(port, tcpm_rp_cc(port));
@@ -4705,7 +4728,8 @@ static void _tcpm_pd_vbus_off(struct tcpm_port *port)
 	case SNK_TRYWAIT_DEBOUNCE:
 		break;
 	case SNK_ATTACH_WAIT:
-		tcpm_set_state(port, SNK_UNATTACHED, 0);
+	case SNK_DEBOUNCED:
+		/* Do nothing, as TCPM is still waiting for vbus to reaach VSAFE5V to connect */
 		break;
 
 	case SNK_NEGOTIATE_CAPABILITIES:
@@ -4773,6 +4797,7 @@ static void tcpm_pd_event_handler(struct kthread_work *work)
 					      event_work);
 	u32 events;
 
+	mutex_lock(&port->pd_handler_lock);
 	mutex_lock(&port->lock);
 
 	spin_lock(&port->pd_event_lock);
@@ -4826,6 +4851,7 @@ static void tcpm_pd_event_handler(struct kthread_work *work)
 	}
 	spin_unlock(&port->pd_event_lock);
 	mutex_unlock(&port->lock);
+	mutex_unlock(&port->pd_handler_lock);
 }
 
 void tcpm_cc_change(struct tcpm_port *port)
@@ -5883,6 +5909,7 @@ struct tcpm_port *tcpm_register_port(struct device *dev, struct tcpc_dev *tcpc)
 
 	mutex_init(&port->lock);
 	mutex_init(&port->swap_lock);
+	mutex_init(&port->pd_handler_lock);
 
 	port->wq = kthread_create_worker(0, dev_name(dev));
 	if (IS_ERR(port->wq))

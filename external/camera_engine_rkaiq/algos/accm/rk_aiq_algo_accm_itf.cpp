@@ -17,9 +17,9 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "accm/rk_aiq_algo_accm_itf.h"
 #include "accm/rk_aiq_accm_algo.h"
+#include "rk_aiq_algo_types.h"
 #include "xcam_log.h"
 
 RKAIQ_BEGIN_DECLARE
@@ -28,13 +28,12 @@ static XCamReturn
 create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
     LOG1_ACCM( "%s: (enter)\n", __FUNCTION__);
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
     RkAiqAlgoContext *ctx = new RkAiqAlgoContext();
     if (ctx == NULL) {
         LOGE_ACCM( "%s: create ccm context fail!\n", __FUNCTION__);
         return XCAM_RETURN_ERROR_MEM;
     }
-        AccmInit(&ctx->accm_para, cfgInt->calibv2);
+        AccmInit(&ctx->accm_para, cfg->calibv2);
 
     *context = ctx;
 
@@ -61,10 +60,10 @@ prepare(RkAiqAlgoCom* params)
     //RkAiqAlgoConfigAccmInt *para = (RkAiqAlgoConfigAccmInt*)params;
     hAccm->accmSwInfo.prepare_type = params->u.prepare.conf_type;
     if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB)){
-        RkAiqAlgoConfigAccmInt* confPara = (RkAiqAlgoConfigAccmInt*)params;
+        RkAiqAlgoConfigAccm* confPara = (RkAiqAlgoConfigAccm*)params;
 
         hAccm->calibV2Ccm =
-                (CalibDbV2_Ccm_Para_V2_t*)(CALIBDBV2_GET_MODULE_PTR(confPara->rk_com.u.prepare.calibv2, ccm_calib));
+                (CalibDbV2_Ccm_Para_V2_t*)(CALIBDBV2_GET_MODULE_PTR(confPara->com.u.prepare.calibv2, ccm_calib));
     }
     AccmPrepare((accm_handle_t)(params->ctx->accm_para));
 
@@ -87,35 +86,19 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
     LOG1_ACCM( "%s: (enter)\n", __FUNCTION__);
 
-    RkAiqAlgoProcAccmInt *procAccm = (RkAiqAlgoProcAccmInt*)inparams;
-    RkAiqAlgoProcResAccmInt *proResAccm = (RkAiqAlgoProcResAccmInt*)outparams;
+    RkAiqAlgoProcAccm *procAccm = (RkAiqAlgoProcAccm*)inparams;
+    RkAiqAlgoProcResAccm *proResAccm = (RkAiqAlgoProcResAccm*)outparams;
     accm_handle_t hAccm = (accm_handle_t)(inparams->ctx->accm_para);
-    RkAiqAlgoProcAccmInt* procPara = (RkAiqAlgoProcAccmInt*)inparams;
-    // cal gain diff, whether converge?
-    float d_gain = 0;
-    d_gain = fabs(procAccm->accm_sw_info.sensorGain - hAccm->accmSwInfo.sensorGain);
-    float d_wbgain = 0;
-    d_wbgain =sqrt( (procAccm->accm_sw_info.awbGain[0]-hAccm->accmSwInfo.awbGain[0])*(procAccm->accm_sw_info.awbGain[0]-hAccm->accmSwInfo.awbGain[0])
-                                     + (procAccm->accm_sw_info.awbGain[1]-hAccm->accmSwInfo.awbGain[1])*(procAccm->accm_sw_info.awbGain[1]-hAccm->accmSwInfo.awbGain[1]));
-    if ((d_wbgain < hAccm->calibV2Ccm->control.wbgain_tolerance)&&(d_gain < hAccm->calibV2Ccm->control.gain_tolerance)
-                   && (!hAccm->calib_update))
-                   hAccm->update = false;
-    else
-        hAccm->update = true;
-    hAccm->calib_update = false;
 
-    procAccm->accm_sw_info.grayMode = procPara->rk_com.u.proc.gray_mode;
+    procAccm->accm_sw_info.grayMode = procAccm->com.u.proc.gray_mode;
     procAccm->accm_sw_info.ccmConverged = hAccm->accmSwInfo.ccmConverged;
     hAccm->accmSwInfo = procAccm->accm_sw_info;
     //LOGI_ACCM( "%s accm_proc_com.u.init:%d \n", __FUNCTION__, inparams->u.proc.init);
-    LOGD_ACCM( "%s: sensorGain:%f, awbGain:%f,%f,  awbIIRDampCoef:%f\n", __FUNCTION__,
-               hAccm->accmSwInfo.sensorGain,
-               hAccm->accmSwInfo.awbGain[0], hAccm->accmSwInfo.awbGain[1],
-               hAccm->accmSwInfo.awbIIRDampCoef);
+    LOGD_ACCM( "%s: awbIIRDampCoef:%f\n", __FUNCTION__, hAccm->accmSwInfo.awbIIRDampCoef);
 
     AccmConfig(hAccm);
-    memcpy(&proResAccm->accm_proc_res_com.accm_hw_conf, &hAccm->ccmHwConf, sizeof(rk_aiq_ccm_cfg_t));
-    proResAccm->accm_proc_res_com.ccm_update = hAccm->update ||hAccm->updateAtt || hAccm->accmSwInfo.ccmConverged;
+    memcpy(&proResAccm->accm_hw_conf, &hAccm->ccmHwConf, sizeof(rk_aiq_ccm_cfg_t));
+    proResAccm->ccm_update = hAccm->update ||hAccm->updateAtt || (!hAccm->accmSwInfo.ccmConverged);
     LOG1_ACCM( "%s: (exit)\n", __FUNCTION__);
     return XCAM_RETURN_NO_ERROR;
 }

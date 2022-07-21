@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 #include "shared_item_pool.h"
@@ -25,17 +24,13 @@ SharedItemPool<T>::SharedItemPool(const char* name, uint32_t max_count)
     ,_name(name ? name : "default")
     , _max_count(max_count)
 {
-    LOG1("ENTER SharedItemPool<%s>:%s", _name, __FUNCTION__);
     if (_max_count > 0)
         reserve (_max_count);
-    LOG1("EXIT SharedItemPool<%s>:%s", _name, __FUNCTION__);
 }
 
 template<typename T>
 SharedItemPool<T>::~SharedItemPool()
 {
-    LOG1("ENTER SharedItemPool<%s>:%s", _name, __FUNCTION__);
-    LOG1("EXIT SharedItemPool<%s>:%s", _name, __FUNCTION__);
 }
 
 template<typename T>
@@ -55,13 +50,6 @@ template<typename T>
 SmartPtr<SharedItemProxy<T>>
 SharedItemPool<T>::get_item()
 {
-#if 0 // dynamic_cast_ptr has performance issue
-    SmartPtr<VideoBuffer> buf = get_buffer();
-    SmartPtr<SharedItemProxy<T>> proxy =
-        buf.dynamic_cast_ptr<SharedItemProxy<T>>() ;
-    return proxy;
-#else
-    // get buf directly, save one call of dynamic_cast_ptr
     SmartPtr<SharedItemProxy<T>> ret_buf;
     SmartPtr<BufferData> data;
 
@@ -76,17 +64,18 @@ SharedItemPool<T>::get_item()
         XCAM_LOG_DEBUG ("BufferPool failed to get buffer");
         return NULL;
     }
+    LOG1_ANALYZER("Get item : %s remain count %d", typeid(T).name(), _buf_list.size());
     SmartPtr<T> data_t = data.dynamic_cast_ptr<T>();
     ret_buf = new SharedItemProxy<T> (data_t);;
     ret_buf->set_buf_pool (SmartPtr<BufferPool>(this));
 
     return ret_buf;
-#endif
 }
 
 template<typename T>
 SmartPtr<BufferData> SharedItemPool<T>::allocate_data (const VideoBufferInfo &buffer_info)
 {
+    LOG1_ANALYZER("New item : %s size %d", typeid(T).name(), sizeof(T));
     return new T();
 }
 

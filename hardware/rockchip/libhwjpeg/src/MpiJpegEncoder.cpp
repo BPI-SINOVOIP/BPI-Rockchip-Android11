@@ -302,12 +302,12 @@ int MpiJpegEncoder::getFrameSize(InputFormat fmt, int width, int height)
 
 bool MpiJpegEncoder::encodeFrame(char *data, OutputPacket_t *aPktOut)
 {
-    MPP_RET    ret       = MPP_OK;
+    MPP_RET    ret      = MPP_OK;
     /* input frame and output packet */
-    MppFrame   inFrm     = NULL;
-    MppBuffer  inFrmBuf  = NULL;
-    void      *inFrmPtr  = NULL;
-    MppPacket  outPkt    = NULL;
+    MppFrame   inFrm    = NULL;
+    MppBuffer  inFrmBuf = NULL;
+    void      *inFrmPtr = NULL;
+    MppPacket  outPkt   = NULL;
 
     if (!mInitOK) {
         ALOGW("please prepare encoder first before encodeFrame");
@@ -349,7 +349,7 @@ bool MpiJpegEncoder::encodeFrame(char *data, OutputPacket_t *aPktOut)
 
     /* dump input frame at fp_input if neccessary */
     if (enc_debug & DEBUG_RECORD_IN) {
-        char fileName[40];
+        char fileName[60];
 
         sprintf(fileName, "/data/video/enc_input_%d.yuv", mFrameCount);
         mInputFile = fopen(fileName, "wb");
@@ -382,7 +382,7 @@ bool MpiJpegEncoder::encodeFrame(char *data, OutputPacket_t *aPktOut)
 
         /* dump output packet at mOutputFile if neccessary */
         if (enc_debug & DEBUG_RECORD_OUT) {
-            char fileName[40];
+            char fileName[60];
 
             sprintf(fileName, "/data/video/enc_output_%d.jpg", mFrameCount);
             mOutputFile = fopen(fileName, "wb");
@@ -456,8 +456,8 @@ ENCODE_OUT:
 
 MPP_RET MpiJpegEncoder::runFrameEnc(MppFrame inFrm, MppPacket outPkt)
 {
-    MPP_RET ret         = MPP_OK;
-    MppTask task        = NULL;
+    MPP_RET ret  = MPP_OK;
+    MppTask task = NULL;
 
     if (!inFrm || !outPkt)
         return MPP_NOK;
@@ -783,7 +783,7 @@ bool MpiJpegEncoder::encode(EncInInfo *inInfo, EncOutInfo *outInfo)
 
     /* dump input data if neccessary */
     if (enc_debug & DEBUG_RECORD_IN) {
-        char fileName[40];
+        char fileName[60];
 
         sprintf(fileName, "/data/video/enc_input_%d.yuv", mFrameCount);
         mInputFile = fopen(fileName, "wb");
@@ -839,7 +839,7 @@ bool MpiJpegEncoder::encode(EncInInfo *inInfo, EncOutInfo *outInfo)
 
     /* dump output buffer if neccessary */
     if (enc_debug & DEBUG_RECORD_OUT) {
-        char fileName[40];
+        char fileName[60];
 
         sprintf(fileName, "/data/video/enc_output_%d.jpg", mFrameCount);
         mOutputFile = fopen(fileName, "wb");

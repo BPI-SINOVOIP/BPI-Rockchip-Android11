@@ -17,7 +17,7 @@
 #ifndef ANDROID_DRM_COMPOSITOR_WORKER_H_
 #define ANDROID_DRM_COMPOSITOR_WORKER_H_
 
-#include "worker.h"
+#include "utils/worker.h"
 
 namespace android {
 

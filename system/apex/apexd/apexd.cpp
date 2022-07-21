@@ -52,6 +52,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <linux/loop.h>
+#include <log/log.h>
 #include <stdlib.h>
 #include <sys/inotify.h>
 #include <sys/ioctl.h>
@@ -1256,7 +1257,7 @@ void snapshotOrRestoreDeIfNeeded(const std::string& base_dir,
     }
   } else if (session.IsRollback()) {
     for (const auto& apex_name : session.GetApexNames()) {
-      if (!gInFsCheckpointMode) {
+      if (!gSupportsFsCheckpoints) {
         // Snapshot before restore so this rollback can be reverted.
         snapshotDataDirectory(base_dir, session.GetRollbackId(), apex_name,
                               true /* pre_restore */);
@@ -1714,6 +1715,11 @@ Result<void> revertActiveSessions(const std::string& crashing_native_process) {
   }
 
   if (!gInFsCheckpointMode) {
+    // SafetyNet logging for b/19393765
+    android_errorWriteLog(0x534e4554, "193932765");
+  }
+
+  if (!gSupportsFsCheckpoints) {
     auto restoreStatus = RestoreActivePackages();
     if (!restoreStatus.ok()) {
       for (auto& session : activeSessions) {
@@ -1731,7 +1737,7 @@ Result<void> revertActiveSessions(const std::string& crashing_native_process) {
   }
 
   for (auto& session : activeSessions) {
-    if (!gInFsCheckpointMode && session.IsRollback()) {
+    if (!gSupportsFsCheckpoints && session.IsRollback()) {
       // If snapshots have already been restored, undo that by restoring the
       // pre-restore snapshot.
       restoreDePreRestoreSnapshotsIfPresent(session);
@@ -2047,7 +2053,7 @@ Result<void> markStagedSessionSuccessful(const int session_id) {
       return Error() << "Failed to mark session " << *session
                      << " as successful : " << cleanup_status.error();
     }
-    if (session->IsRollback() && !gInFsCheckpointMode) {
+    if (session->IsRollback() && !gSupportsFsCheckpoints) {
       deleteDePreRestoreSnapshots(*session);
     }
     return session->UpdateStateAndCommit(SessionState::SUCCESS);

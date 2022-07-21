@@ -784,6 +784,7 @@ static void hdmi_set_op_mode(struct dw_hdmi_qp *hdmi,
 			     bool scdc_support)
 {
 	int frl_rate;
+	int i;
 
 	hdmi_writel(hdmi, 0, FLT_CONFIG0);
 	if (scdc_support)
@@ -806,6 +807,12 @@ static void hdmi_set_op_mode(struct dw_hdmi_qp *hdmi,
 
 	frl_rate = link_cfg->frl_lanes * link_cfg->rate_per_lane;
 	hdmi_start_flt(hdmi, frl_rate);
+
+	for (i = 0; i < 50; i++) {
+		hdmi_modb(hdmi, PKTSCHED_NULL_TX_EN, PKTSCHED_NULL_TX_EN, PKTSCHED_PKT_EN);
+		mdelay(1);
+		hdmi_modb(hdmi, 0, PKTSCHED_NULL_TX_EN, PKTSCHED_PKT_EN);
+	}
 }
 
 static int dw_hdmi_setup(struct dw_hdmi_qp *hdmi,
@@ -924,7 +931,7 @@ int dw_hdmi_detect_hotplug(struct dw_hdmi_qp *hdmi,
 	int ret;
 
 	ret = hdmi->phy.ops->read_hpd(hdmi->rk_hdmi);
-	if (ret) {
+	if (ret || state->force_output) {
 		if (!hdmi->id)
 			conn_state->output_if |= VOP_OUTPUT_IF_HDMI0;
 		else
@@ -1115,14 +1122,13 @@ int rockchip_dw_hdmi_qp_get_timing(struct display_state *state)
 	drm_mode_sort(&hdmi->edid_data);
 	dw_hdmi_qp_selete_output(&hdmi->edid_data, conn_state, &bus_format,
 				 overscan, hdmi->dev_type,
-				 hdmi->output_bus_format_rgb, hdmi->rk_hdmi);
+				 hdmi->output_bus_format_rgb, hdmi->rk_hdmi,
+				 state);
 
 	*mode = *hdmi->edid_data.preferred_mode;
 	hdmi->vic = drm_match_cea_mode(mode);
 
 	printf("mode:%dx%d bus_format:0x%x\n", mode->hdisplay, mode->vdisplay, bus_format);
-	if (state->force_output)
-		bus_format = state->force_bus_format;
 	conn_state->bus_format = bus_format;
 	hdmi->hdmi_data.enc_in_bus_format = bus_format;
 	hdmi->hdmi_data.enc_out_bus_format = bus_format;

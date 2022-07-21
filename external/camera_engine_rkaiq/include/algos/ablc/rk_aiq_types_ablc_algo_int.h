@@ -22,7 +22,8 @@
 #define _RK_AIQ_TYPE_ABLC_ALGO_INT_H_
 #include "ablc/rk_aiq_types_ablc_algo.h"
 #include "RkAiqCalibDbTypes.h"
-#include "RkAiqCalibDbTypesV2.h"
+#include "ablc_head.h"
+#include "ablc_uapi_head.h"
 
 
 #define ABLC_RECALCULATE_DELTE_ISO  (10)
@@ -51,10 +52,10 @@ typedef enum AblcState_e {
 } AblcState_t;
 
 typedef enum AblcOPMode_e {
-    ABLC_OP_MODE_API_OFF          = 0,                    /**< initialization value */
-    ABLC_OP_MODE_API_TOOL             = 1,                   /**< instance is created, but not initialized */
-    ABLC_OP_MODE_API_MANUAL           = 2,                   /**< instance is confiured (ready to start) or stopped */
-    ABLC_OP_MODE_API_MAX                                      /**< max */
+    ABLC_OP_MODE_OFF         = 0,                    /**< initialization value */
+    ABLC_OP_MODE_AUTO             = 1,                   /**< instance is created, but not initialized */
+    ABLC_OP_MODE_MANUAL           = 2,                   /**< instance is confiured (ready to start) or stopped */
+    ABLC_OP_MODE_MAX                                      /**< max */
 } AblcOPMode_t;
 
 typedef enum AblcParamMode_e {
@@ -64,13 +65,29 @@ typedef enum AblcParamMode_e {
     ABLC_PARAM_MODE_MAX                                        /**< max */
 } AblcParamMode_t;
 
-typedef struct AblcManualAttr_s {
+typedef struct AblcParams_s {
+    bool enable;
+    int len;
+    float* iso;
+    float* blc_r;
+    float* blc_gr;
+    float* blc_gb;
+    float* blc_b;
+} AblcParams_t;
+
+#if 0
+typedef struct AblcSelect_s {
     bool enable;
     short int blc_r;
     short int blc_gr;
     short int blc_gb;
     short int blc_b;
-} AblcManualAttr_t;
+} AblcSelect_t;
+
+
+typedef AblcSelect_t AblcManualAttr_t;
+#endif
+
 
 typedef struct AblcProc_s {
     bool enable;
@@ -79,13 +96,25 @@ typedef struct AblcProc_s {
     short int blc_gb;
     short int blc_b;
 
+    bool blc1_enable;
+
+    short int blc1_r;
+    short int blc1_gr;
+    short int blc1_gb;
+    short int blc1_b;
+
     bool isNeedUpdate;
 } AblcProc_t;
 
+
+
 typedef struct rk_aiq_blc_attrib_s {
+    rk_aiq_uapi_sync_t sync;
     AblcOPMode_t eMode;
-    CalibDbV2_Ablc_t stTool;
-    AblcManualAttr_t stManual;
+    AblcParams_t stBlc0Auto;
+    AblcParams_t stBlc1Auto;
+    AblcManualAttr_t stBlc0Manual;
+    AblcManualAttr_t stBlc1Manual;
 } rk_aiq_blc_attrib_t;
 
 typedef struct AblcExpInfo_s {

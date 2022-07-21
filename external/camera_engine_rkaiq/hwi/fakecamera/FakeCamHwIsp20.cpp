@@ -16,8 +16,8 @@
  */
 
 #include "FakeCamHwIsp20.h"
+#include "Isp20Evts.h"
 #include "FakeSensorHw.h"
-#include "Isp20PollThread.h"
 #include "rk_isp20_hw.h"
 #include "Isp20_module_dbg.h"
 #include "mediactl/mediactl-priv.h"
@@ -26,17 +26,19 @@
 #include <sys/stat.h>
 
 namespace RkCam {
-FakeCamHwIsp20::FakeCamHwIsp20()
+FakeCamHwIsp20::FakeCamHwIsp20() : isp_index(0)
 {
     ENTER_CAMHW_FUNCTION();
     _rx_memory_type = V4L2_MEMORY_DMABUF;
     _tx_memory_type = V4L2_MEMORY_DMABUF;
+    mNoReadBack = false;
     EXIT_CAMHW_FUNCTION();
 }
 
 FakeCamHwIsp20::~FakeCamHwIsp20()
 {
     ENTER_CAMHW_FUNCTION();
+    setupOffLineLink(isp_index, false);
     EXIT_CAMHW_FUNCTION();
 }
 
@@ -44,125 +46,18 @@ XCamReturn
 FakeCamHwIsp20::init(const char* sns_ent_name)
 {
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
-    SmartPtr<Isp20PollThread> isp20Pollthread;
-    SmartPtr<PollThread> isp20LumaPollthread;
-    SmartPtr<PollThread> isp20IsppPollthread;
+
+    ret = CamHwIsp20::init(sns_ent_name);
+    if (ret)
+        return ret;
+
+    // special for fake sensor
     SmartPtr<BaseSensorHw> sensorHw;
-    SmartPtr<LensHw> lensHw;
-    std::string sensor_name(sns_ent_name);
-
-    ENTER_CAMHW_FUNCTION();
-
-
-    std::map<std::string, SmartPtr<rk_sensor_full_info_t>>::iterator it;
-    if ((it = mSensorHwInfos.find(sensor_name)) == mSensorHwInfos.end()) {
-        LOGE_CAMHW_SUBM(FAKECAM_SUBM, "can't find sensor %s", sns_ent_name);
-        return XCAM_RETURN_ERROR_SENSOR;
-    }
-    rk_sensor_full_info_t *s_info = it->second.ptr();
+    mSensorDev->close();
     sensorHw = new FakeSensorHw();
     mSensorDev = sensorHw;
     mSensorDev->open();
-    strncpy(sns_name, sns_ent_name, sizeof(sns_name));
-
-    if (s_info->linked_to_isp)
-        _linked_to_isp = true;
-
-    mIspCoreDev = new V4l2SubDevice(s_info->isp_info->isp_dev_path);
-    mIspCoreDev->open();
-    if (s_info->linked_to_isp)
-        mIspCoreDev->subscribe_event(V4L2_EVENT_FRAME_SYNC);
-
-    if (_linked_to_isp) {
-        mIspLumaDev = new V4l2Device(s_info->isp_info->mipi_luma_path);
-    } else
-        mIspLumaDev = new V4l2Device(s_info->cif_info->mipi_luma_path);
-    mIspLumaDev->open();
-
-    _ispp_sd = new V4l2SubDevice(s_info->ispp_info->pp_dev_path);
-    _ispp_sd ->open();
-    LOGI_CAMHW_SUBM(FAKECAM_SUBM, "pp_dev_path: %s\n", s_info->ispp_info->pp_dev_path);
-
-#ifndef DISABLE_PP_STATS
-    mIsppStatsDev = new V4l2Device(s_info->ispp_info->pp_stats_path);
-    mIsppStatsDev->open();
-#endif
-    mIsppParamsDev = new V4l2Device (s_info->ispp_info->pp_input_params_path);
-    mIsppParamsDev->open();
-
-    mIspStatsDev = new V4l2Device (s_info->isp_info->stats_path);
-    mIspStatsDev->open();
-    mIspParamsDev = new V4l2Device (s_info->isp_info->input_params_path);
-    mIspParamsDev->open();
-
-    if (!s_info->module_lens_dev_name.empty()) {
-        lensHw = new LensHw(s_info->module_lens_dev_name.c_str());
-        mLensDev = lensHw;
-        mLensDev->open();
-    }
-
-    if(!s_info->module_ircut_dev_name.empty()) {
-        mIrcutDev = new V4l2SubDevice(s_info->module_ircut_dev_name.c_str());
-        mIrcutDev->open();
-    }
-
-    if (!_linked_to_isp) {
-        if (strlen(s_info->cif_info->mipi_csi2_sd_path) > 0)
-            _cif_csi2_sd = new V4l2SubDevice (s_info->cif_info->mipi_csi2_sd_path);
-        else if (strlen(s_info->cif_info->lvds_sd_path) > 0)
-            _cif_csi2_sd = new V4l2SubDevice (s_info->cif_info->lvds_sd_path);
-        else
-            LOGW_CAMHW_SUBM(FAKECAM_SUBM, "_cif_csi2_sd is null! \n");
-
-        _cif_csi2_sd->open();
-        _cif_csi2_sd->subscribe_event(V4L2_EVENT_FRAME_SYNC);
-    }
-
-    isp20Pollthread = new Isp20PollThread();
-    isp20Pollthread->set_event_handle_dev(sensorHw);
-    if(lensHw.ptr()) {
-        isp20Pollthread->set_focus_handle_dev(lensHw);
-        //isp20Pollthread->set_iris_handle_dev(lensHw);
-    }
-
-    mPollthread = isp20Pollthread;
-    if (_linked_to_isp)
-        mPollthread->set_event_device(mIspCoreDev);
-    else
-        mPollthread->set_event_device(_cif_csi2_sd);
-    mPollthread->set_isp_stats_device(mIspStatsDev);
-    mPollthread->set_isp_params_devices(mIspParamsDev, mIsppParamsDev);
-    mPollthread->set_poll_callback (this);
-
-    isp20LumaPollthread = new PollThread();
-    mPollLumathread = isp20LumaPollthread;
-    mPollLumathread->set_isp_luma_device(mIspLumaDev);
-    mPollLumathread->set_poll_callback (this);
-
-#ifndef DISABLE_PP
-#ifndef DISABLE_PP_STATS
-    isp20IsppPollthread = new PollThread();
-    mPollIsppthread = isp20IsppPollthread;
-    mPollIsppthread->set_ispp_stats_device(mIsppStatsDev);
-    mPollIsppthread->set_poll_callback (this);
-#endif
-#endif
-
-    if (s_info->flash_num) {
-        mFlashLight = new FlashLightHw(s_info->module_flash_dev_name, s_info->flash_num);
-        mFlashLight->init(s_info->flash_num);
-    }
-    if (s_info->flash_ir_num) {
-        mFlashLightIr = new FlashLightHw(s_info->module_flash_ir_dev_name, s_info->flash_ir_num);
-        mFlashLightIr->init(s_info->flash_ir_num);
-    }
-
-    xcam_mem_clear (_full_active_isp_params);
-    xcam_mem_clear (_full_active_ispp_params);
-
-    _state = CAM_HW_STATE_INITED;
-
-    EXIT_CAMHW_FUNCTION();
+    mIspStatsStream->set_event_handle_dev(sensorHw);
 
     return XCAM_RETURN_NO_ERROR;
 }
@@ -171,76 +66,45 @@ XCamReturn
 FakeCamHwIsp20::prepare(uint32_t width, uint32_t height, int mode, int t_delay, int g_delay)
 {
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
-    SmartPtr<Isp20PollThread> isp20Pollthread;
     SmartPtr<BaseSensorHw> sensorHw;
 
     ENTER_CAMHW_FUNCTION();
 
-    XCAM_ASSERT (mCalibDb);
-
-    _hdr_mode = mode;
-
-    Isp20Params::set_working_mode(_hdr_mode);
+    SmartPtr<FakeSensorHw> fakeSensorHw = mSensorDev.dynamic_cast_ptr<FakeSensorHw>();
 
     std::map<std::string, SmartPtr<rk_sensor_full_info_t>>::iterator it;
     if ((it = mSensorHwInfos.find(sns_name)) == mSensorHwInfos.end()) {
-        LOGE_CAMHW_SUBM(FAKECAM_SUBM, "can't find sensor %s", sns_name);
+        LOGE_CAMHW_SUBM(ISP20HW_SUBM, "can't find sensor %s", sns_name);
         return XCAM_RETURN_ERROR_SENSOR;
     }
 
     rk_sensor_full_info_t *s_info = it->second.ptr();
-    int isp_index = s_info->isp_info->model_idx;
-    LOGI_CAMHW_SUBM(FAKECAM_SUBM, "sensor_name(%s) is linked to isp_index(%d)",
-                    sns_name, isp_index);
-    if (_linked_to_isp) {
-        if (_hdr_mode != RK_AIQ_WORKING_MODE_NORMAL) {
-            setupHdrLink(RK_AIQ_WORKING_MODE_ISP_HDR3, isp_index, true);
-        } else {
-            if (mNoReadBack)
-                setupHdrLink(RK_AIQ_WORKING_MODE_ISP_HDR3, isp_index, false);
-            else
-                setupHdrLink(RK_AIQ_WORKING_MODE_ISP_HDR3, isp_index, true);
-        }
-    } else {
-        setupHdrLink(RK_AIQ_WORKING_MODE_ISP_HDR3, isp_index, true);
-        int cif_index = s_info->cif_info->model_idx;
-        setupHdrLink_vidcap(_hdr_mode, cif_index, true);
-    }
-
-    sensorHw = mSensorDev.dynamic_cast_ptr<BaseSensorHw>();
-    ret = sensorHw->set_working_mode(mode);
-    if (ret) {
-        LOGW_CAMHW_SUBM(FAKECAM_SUBM, "set sensor mode error !");
-        return ret;
-    }
-
-    setExpDelayInfo(mode);
-    setLensVcmCfg();
+    isp_index = s_info->isp_info->logic_id;
+    setupOffLineLink(isp_index, true);
     init_mipi_devices(s_info);
-
-    isp20Pollthread = mPollthread.dynamic_cast_ptr<Isp20PollThread>();
-    isp20Pollthread->set_working_mode(mode, _linked_to_isp, false);
-    isp20Pollthread->setCamHw(this);
-    isp20Pollthread->set_mipi_devs(_mipi_tx_devs, _mipi_rx_devs, mIspCoreDev);
-
-    SmartPtr<FakeSensorHw> fakeSensorHw = mSensorDev.dynamic_cast_ptr<FakeSensorHw>();
     fakeSensorHw->set_mipi_tx_devs(_mipi_tx_devs);
 
-    _ispp_module_init_ens = 0;
+    mRawCapUnit->set_tx_devices(_mipi_tx_devs);
+    mRawProcUnit->set_rx_devices(_mipi_rx_devs);
+    mRawProcUnit->setPollCallback(this);
 
-    ret = setupPipelineFmt();
-    if (ret < 0) {
-        LOGE_CAMHW_SUBM(FAKECAM_SUBM, "setupPipelineFmt err: %d\n", ret);
-    }
+    ret = CamHwIsp20::prepare(width, height, mode, t_delay, g_delay);
+    if (ret)
+        return ret;
 
-    if (!_linked_to_isp)
-        prepare_cif_mipi();
+    if (mIspSofStream.ptr())
+        mIspSofStream->setPollCallback (NULL);
 
-    isp20Pollthread->set_event_handle_dev(sensorHw);
-
-    _state = CAM_HW_STATE_PREPARED;
     EXIT_CAMHW_FUNCTION();
     return ret;
+}
+
+XCamReturn
+FakeCamHwIsp20::poll_buffer_ready (SmartPtr<V4l2BufferProxy> &buf, int dev_index)
+{
+    SmartPtr<FakeSensorHw> fakeSensor = mSensorDev.dynamic_cast_ptr<FakeSensorHw>();
+    // notify fakesensor one frame has been processed by ISP
+    return fakeSensor->on_dqueue(dev_index, buf);
 }
 
 XCamReturn
@@ -304,7 +168,31 @@ FakeCamHwIsp20::init_mipi_devices(rk_sensor_full_info_t *s_info)
         }
         _mipi_tx_devs[i]->set_buf_sync (true);
         _mipi_rx_devs[i]->set_buf_sync (true);
+        SmartPtr<FakeSensorHw> fakeSensor = mSensorDev.dynamic_cast_ptr<FakeSensorHw>();
+        rk_aiq_exposure_sensor_descriptor sns_des;
+        fakeSensor->get_format(&sns_des);
+        _mipi_tx_devs[i]->set_format(sns_des.sensor_output_width,
+                                     sns_des.sensor_output_height,
+                                     sns_des.sensor_pixelformat);
+        _mipi_rx_devs[i]->set_format(sns_des.sensor_output_width,
+                                     sns_des.sensor_output_height,
+                                     sns_des.sensor_pixelformat);
     }
+    return XCAM_RETURN_NO_ERROR;
+}
+
+XCamReturn
+FakeCamHwIsp20::poll_event_ready (uint32_t sequence, int type)
+{
+    struct v4l2_event event;
+    event.u.frame_sync.frame_sequence = sequence;
+
+    mIspSofStream->stop();
+    SmartPtr<VideoBuffer> buf =
+        mIspSofStream->new_video_buffer(event, NULL);
+
+    CamHwBase::poll_buffer_ready(buf);
+
     return XCAM_RETURN_NO_ERROR;
 }
 
@@ -318,6 +206,7 @@ FakeCamHwIsp20::enqueueRawBuffer(void *rawdata, bool sync)
     parse_rk_rawdata(rawdata, &vbuf);
     SmartPtr<FakeSensorHw> fakeSensor = mSensorDev.dynamic_cast_ptr<FakeSensorHw>();
     fakeSensor->enqueue_rawbuffer(&vbuf, sync);
+    poll_event_ready(vbuf.buf_info[0].frame_id, V4L2_EVENT_FRAME_SYNC);
     EXIT_XCORE_FUNCTION();
     return ret;
 }
@@ -344,6 +233,7 @@ FakeCamHwIsp20::enqueueRawFile(const char *path)
     fclose(fp);
     SmartPtr<FakeSensorHw> fakeSensor = mSensorDev.dynamic_cast_ptr<FakeSensorHw>();
     fakeSensor->enqueue_rawbuffer(&vbuf, true);
+    poll_event_ready(vbuf.buf_info[0].frame_id, V4L2_EVENT_FRAME_SYNC);
     EXIT_XCORE_FUNCTION();
     return ret;
 }
@@ -354,8 +244,8 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
     unsigned short tag = 0;
     struct _block_header header;
     uint8_t *p = (uint8_t *)rawdata;
-    uint8_t *actual_raw[3];
-    int actual_raw_len[3];
+    uint8_t *actual_raw[3] = {NULL, NULL, NULL};
+    int actual_raw_len[3] = {0, 0, 0};
     bool is_actual_rawdata = false;
     bool bExit = false;
     while(!bExit){
@@ -503,7 +393,7 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
          }else{
 			 if (_rawbuf_type == RK_AIQ_RAW_ADDR) {
                  if (sizeof(uint8_t*) == 4)
-                    vbuf->buf_info[0].data_addr = (uint8_t*)(_st_addr[0].laddr);
+                    vbuf->buf_info[0].data_addr = (uint8_t*)(long)(_st_addr[0].laddr);
                  else if (sizeof(uint8_t*) == 8)
                     vbuf->buf_info[0].data_addr = (uint8_t*)(((uint64_t)_st_addr[0].haddr << 32) + _st_addr[0].laddr);
 
@@ -520,12 +410,16 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
                                        vbuf->buf_info[0].data_length);
 
          vbuf->buf_info[0].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[0].exp_gain = (uint32_t)_finfo.normal_gain_reg;
-         vbuf->buf_info[0].exp_time = (uint32_t)_finfo.normal_exp_reg;
+         vbuf->buf_info[0].exp_gain = (float)_finfo.normal_gain;
+         vbuf->buf_info[0].exp_time = (float)_finfo.normal_exp;
+         vbuf->buf_info[0].exp_gain_reg = (uint32_t)_finfo.normal_gain_reg;
+         vbuf->buf_info[0].exp_time_reg = (uint32_t)_finfo.normal_exp_reg;
          vbuf->buf_info[0].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain:0x%x,time:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[0].exp_gain,
-                                      vbuf->buf_info[0].exp_time);
+                                      vbuf->buf_info[0].exp_time,
+                                      vbuf->buf_info[0].exp_gain_reg,
+                                      vbuf->buf_info[0].exp_time_reg);
     }else if (_rawfmt.hdr_mode == 2) {
          if (is_actual_rawdata) {
             vbuf->buf_info[0].data_addr = actual_raw[0];
@@ -534,7 +428,7 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
          } else {
             if (_rawbuf_type == RK_AIQ_RAW_ADDR) {
              if (sizeof(uint8_t*) == 4)
-                vbuf->buf_info[0].data_addr = (uint8_t*)(_st_addr[0].laddr);
+                vbuf->buf_info[0].data_addr = (uint8_t*)(long)(_st_addr[0].laddr);
              else if (sizeof(uint8_t*) == 8)
                 vbuf->buf_info[0].data_addr = (uint8_t*)(((uint64_t)_st_addr[0].haddr << 32) + _st_addr[0].laddr);
                 vbuf->buf_info[0].data_fd = 0;
@@ -545,24 +439,28 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
              vbuf->buf_info[0].data_length = _st_addr[0].size;
          }
          vbuf->buf_info[0].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[0].exp_gain = (uint32_t)_finfo.hdr_gain_s_reg;
-         vbuf->buf_info[0].exp_time = (uint32_t)_finfo.hdr_exp_s_reg;
+         vbuf->buf_info[0].exp_gain = (float)_finfo.hdr_gain_s;
+         vbuf->buf_info[0].exp_time = (float)_finfo.hdr_exp_s;
+         vbuf->buf_info[0].exp_gain_reg = (uint32_t)_finfo.hdr_gain_s_reg;
+         vbuf->buf_info[0].exp_time_reg = (uint32_t)_finfo.hdr_exp_s_reg;
          vbuf->buf_info[0].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[0]=%p,fd[0]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[0].data_addr,
                                       vbuf->buf_info[0].data_fd,
                                       vbuf->buf_info[0].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[0]:0x%x,time[0]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[0].exp_gain,
-                                      vbuf->buf_info[0].exp_time);
+                                      vbuf->buf_info[0].exp_time,
+                                      vbuf->buf_info[0].exp_gain_reg,
+                                      vbuf->buf_info[0].exp_time_reg);
          if (is_actual_rawdata) {
-            vbuf->buf_info[1].data_addr = actual_raw[2];//actual_raw[1]
+            vbuf->buf_info[1].data_addr = actual_raw[1];//actual_raw[1]
             vbuf->buf_info[1].data_fd = 0;
-            vbuf->buf_info[1].data_length = actual_raw_len[2];//actual_raw_len[1]
+            vbuf->buf_info[1].data_length = actual_raw_len[1];//actual_raw_len[1]
          } else {
              if (_rawbuf_type == RK_AIQ_RAW_ADDR) {
                  if (sizeof(uint8_t*) == 4)
-                    vbuf->buf_info[1].data_addr = (uint8_t*)(_st_addr[1].laddr);
+                    vbuf->buf_info[1].data_addr = (uint8_t*)(long)(_st_addr[1].laddr);
                  else if (sizeof(uint8_t*) == 8)
                     vbuf->buf_info[1].data_addr = (uint8_t*)(((uint64_t)_st_addr[1].haddr << 32) + _st_addr[1].laddr);
                  vbuf->buf_info[1].data_fd = 0;
@@ -573,16 +471,20 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
               vbuf->buf_info[1].data_length = _st_addr[1].size;
          }
          vbuf->buf_info[1].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[1].exp_gain = (uint32_t)_finfo.hdr_gain_m_reg;
-         vbuf->buf_info[1].exp_time = (uint32_t)_finfo.hdr_exp_m_reg;
+         vbuf->buf_info[1].exp_gain = (float)_finfo.hdr_gain_m;
+         vbuf->buf_info[1].exp_time = (float)_finfo.hdr_exp_m;
+         vbuf->buf_info[1].exp_gain_reg = (uint32_t)_finfo.hdr_gain_m_reg;
+         vbuf->buf_info[1].exp_time_reg = (uint32_t)_finfo.hdr_exp_m_reg;
          vbuf->buf_info[1].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[1]=%p,fd[1]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[1].data_addr,
                                       vbuf->buf_info[1].data_fd,
                                       vbuf->buf_info[1].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[1]:0x%x,time[1]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[1].exp_gain,
-                                      vbuf->buf_info[1].exp_time);
+                                      vbuf->buf_info[1].exp_time,
+                                      vbuf->buf_info[1].exp_gain_reg,
+                                      vbuf->buf_info[1].exp_time_reg);
     }else if (_rawfmt.hdr_mode == 3) {
          if (is_actual_rawdata) {
             vbuf->buf_info[0].data_addr = actual_raw[0];
@@ -591,7 +493,7 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
          } else {
             if (_rawbuf_type == RK_AIQ_RAW_ADDR) {
              if (sizeof(uint8_t*) == 4)
-                vbuf->buf_info[0].data_addr = (uint8_t*)(_st_addr[0].laddr);
+                vbuf->buf_info[0].data_addr = (uint8_t*)(long)(_st_addr[0].laddr);
              else if (sizeof(uint8_t*) == 8)
                 vbuf->buf_info[0].data_addr = (uint8_t*)(((uint64_t)_st_addr[0].haddr << 32) + _st_addr[0].laddr);
                 vbuf->buf_info[0].data_fd = 0;
@@ -602,16 +504,20 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
              vbuf->buf_info[0].data_length = _st_addr[0].size;
          }
          vbuf->buf_info[0].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[0].exp_gain = (uint32_t)_finfo.hdr_gain_s_reg;
-         vbuf->buf_info[0].exp_time = (uint32_t)_finfo.hdr_exp_s_reg;
+         vbuf->buf_info[0].exp_gain = (float)_finfo.hdr_gain_s;
+         vbuf->buf_info[0].exp_time = (float)_finfo.hdr_exp_s;
+         vbuf->buf_info[0].exp_gain_reg = (uint32_t)_finfo.hdr_gain_s_reg;
+         vbuf->buf_info[0].exp_time_reg = (uint32_t)_finfo.hdr_exp_s_reg;
          vbuf->buf_info[0].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[0]=%p,fd[0]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[0].data_addr,
                                       vbuf->buf_info[0].data_fd,
                                       vbuf->buf_info[0].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[0]:0x%x,time[0]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[0].exp_gain,
-                                      vbuf->buf_info[0].exp_time);
+                                      vbuf->buf_info[0].exp_time,
+                                      vbuf->buf_info[0].exp_gain_reg,
+                                      vbuf->buf_info[0].exp_time_reg);
 
          if (is_actual_rawdata) {
             vbuf->buf_info[1].data_addr = actual_raw[1];
@@ -620,7 +526,7 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
          } else {
              if (_rawbuf_type == RK_AIQ_RAW_ADDR) {
                  if (sizeof(uint8_t*) == 4)
-                    vbuf->buf_info[1].data_addr = (uint8_t*)(_st_addr[1].laddr);
+                    vbuf->buf_info[1].data_addr = (uint8_t*)(long)(_st_addr[1].laddr);
                  else if (sizeof(uint8_t*) == 8)
                     vbuf->buf_info[1].data_addr = (uint8_t*)(((uint64_t)_st_addr[1].haddr << 32) + _st_addr[1].laddr);
                  vbuf->buf_info[1].data_fd = 0;
@@ -631,16 +537,20 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
               vbuf->buf_info[1].data_length = _st_addr[1].size;
          }
          vbuf->buf_info[1].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[1].exp_gain = (uint32_t)_finfo.hdr_gain_m_reg;
-         vbuf->buf_info[1].exp_time = (uint32_t)_finfo.hdr_exp_m_reg;
+         vbuf->buf_info[1].exp_gain = (float)_finfo.hdr_gain_m;
+         vbuf->buf_info[1].exp_time = (float)_finfo.hdr_exp_m;
+         vbuf->buf_info[1].exp_gain_reg = (uint32_t)_finfo.hdr_gain_m_reg;
+         vbuf->buf_info[1].exp_time_reg = (uint32_t)_finfo.hdr_exp_m_reg;
          vbuf->buf_info[1].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[1]=%p,fd[1]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[1].data_addr,
                                       vbuf->buf_info[1].data_fd,
                                       vbuf->buf_info[1].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[1]:0x%x,time[1]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[1].exp_gain,
-                                      vbuf->buf_info[1].exp_time);
+                                      vbuf->buf_info[1].exp_time,
+                                      vbuf->buf_info[1].exp_gain_reg,
+                                      vbuf->buf_info[1].exp_time_reg);
 
          if (is_actual_rawdata) {
             vbuf->buf_info[2].data_addr = actual_raw[2];
@@ -649,7 +559,7 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
          }else{
              if (_rawbuf_type == RK_AIQ_RAW_ADDR) {
                  if (sizeof(uint8_t*) == 4)
-                    vbuf->buf_info[2].data_addr = (uint8_t*)(_st_addr[2].laddr);
+                    vbuf->buf_info[2].data_addr = (uint8_t*)(long)(_st_addr[2].laddr);
                  else if (sizeof(uint8_t*) == 8)
                     vbuf->buf_info[2].data_addr = (uint8_t*)(((uint64_t)_st_addr[2].haddr << 32) + _st_addr[2].laddr);
                  vbuf->buf_info[2].data_fd = 0;
@@ -660,16 +570,20 @@ FakeCamHwIsp20::parse_rk_rawdata(void *rawdata, struct rk_aiq_vbuf *vbuf)
              vbuf->buf_info[2].data_length = _st_addr[2].size;
          }
          vbuf->buf_info[2].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[2].exp_gain = (uint32_t)_finfo.hdr_gain_l_reg;
-         vbuf->buf_info[2].exp_time = (uint32_t)_finfo.hdr_exp_l_reg;
+         vbuf->buf_info[2].exp_gain = (float)_finfo.hdr_gain_l;
+         vbuf->buf_info[2].exp_time = (float)_finfo.hdr_exp_l;
+         vbuf->buf_info[2].exp_gain_reg = (uint32_t)_finfo.hdr_gain_l_reg;
+         vbuf->buf_info[2].exp_time_reg = (uint32_t)_finfo.hdr_exp_l_reg;
          vbuf->buf_info[2].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[2]=%p,fd[2]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[2]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[2].data_addr,
                                       vbuf->buf_info[2].data_fd,
                                       vbuf->buf_info[2].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[2]:0x%x,time[2]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[2]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[2].exp_gain,
-                                      vbuf->buf_info[2].exp_time);
+                                      vbuf->buf_info[2].exp_time,
+                                      vbuf->buf_info[2].exp_gain_reg,
+                                      vbuf->buf_info[2].exp_time_reg);
     }
 
 }
@@ -681,7 +595,9 @@ FakeCamHwIsp20::parse_rk_rawfile(FILE *fp, struct rk_aiq_vbuf *vbuf)
     struct _block_header header;
     bool bExit = false;
     while(!bExit){
-        fread(&tag, sizeof(tag), 1, fp);
+        int ret = fread(&tag, sizeof(tag), 1, fp);
+        if (ret == 0)
+            break;
         fseek(fp, TAG_BYTE_LEN*(-1), SEEK_CUR);//backforwad to tag start
         LOGD_CAMHW_SUBM(FAKECAM_SUBM, "tag=0x%04x\n",tag);
         switch (tag)
@@ -726,9 +642,9 @@ FakeCamHwIsp20::parse_rk_rawfile(FILE *fp, struct rk_aiq_vbuf *vbuf)
         	{
                 fread(&header, sizeof(header), 1, fp);
                 if (header.block_length > 0) {
-                    vbuf->buf_info[1].data_addr = (uint8_t*)_mipi_rx_devs[1]->get_buffer_by_index(0)->get_expbuf_usrptr();
+                    vbuf->buf_info[2].data_addr = (uint8_t*)_mipi_rx_devs[1]->get_buffer_by_index(0)->get_expbuf_usrptr();
                     fread(vbuf->buf_info[1].data_addr, header.block_length, 1, fp);
-                    vbuf->buf_info[1].data_length = header.block_length;
+                    vbuf->buf_info[2].data_length = header.block_length;
                 }
             	break;
         	}
@@ -796,72 +712,96 @@ FakeCamHwIsp20::parse_rk_rawfile(FILE *fp, struct rk_aiq_vbuf *vbuf)
                                        vbuf->buf_info[0].data_length);
 
          vbuf->buf_info[0].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[0].exp_gain = (uint32_t)_finfo.normal_gain_reg;
-         vbuf->buf_info[0].exp_time = (uint32_t)_finfo.normal_exp_reg;
+         vbuf->buf_info[0].exp_gain = (float)_finfo.normal_gain;
+         vbuf->buf_info[0].exp_time = (float)_finfo.normal_exp;
+         vbuf->buf_info[0].exp_gain_reg = (uint32_t)_finfo.normal_gain_reg;
+         vbuf->buf_info[0].exp_time_reg = (uint32_t)_finfo.normal_exp_reg;
          vbuf->buf_info[0].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain:0x%x,time:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[0].exp_gain,
-                                      vbuf->buf_info[0].exp_time);
+                                      vbuf->buf_info[0].exp_time,
+                                      vbuf->buf_info[0].exp_gain_reg,
+                                      vbuf->buf_info[0].exp_time_reg);
     }else if (_rawfmt.hdr_mode == 2) {
          vbuf->buf_info[0].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[0].exp_gain = (uint32_t)_finfo.hdr_gain_s_reg;
-         vbuf->buf_info[0].exp_time = (uint32_t)_finfo.hdr_exp_s_reg;
+         vbuf->buf_info[0].exp_gain = (float)_finfo.normal_gain;
+         vbuf->buf_info[0].exp_time = (float)_finfo.normal_exp;
+         vbuf->buf_info[0].exp_gain_reg = (uint32_t)_finfo.normal_gain_reg;
+         vbuf->buf_info[0].exp_time_reg = (uint32_t)_finfo.normal_exp_reg;
          vbuf->buf_info[0].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[0]=%p,fd[0]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[0].data_addr,
                                       vbuf->buf_info[0].data_fd,
                                       vbuf->buf_info[0].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[0]:0x%x,time[0]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[0].exp_gain,
-                                      vbuf->buf_info[0].exp_time);
+                                      vbuf->buf_info[0].exp_time,
+                                      vbuf->buf_info[0].exp_gain_reg,
+                                      vbuf->buf_info[0].exp_time_reg);
 
          vbuf->buf_info[1].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[1].exp_gain = (uint32_t)_finfo.hdr_gain_l_reg;
-         vbuf->buf_info[1].exp_time = (uint32_t)_finfo.hdr_exp_l_reg;
+         vbuf->buf_info[1].exp_gain = (float)_finfo.hdr_gain_m;
+         vbuf->buf_info[1].exp_time = (float)_finfo.hdr_exp_m;
+         vbuf->buf_info[1].exp_gain_reg = (uint32_t)_finfo.hdr_gain_m_reg;
+         vbuf->buf_info[1].exp_time_reg = (uint32_t)_finfo.hdr_exp_m_reg;
          vbuf->buf_info[1].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[1]=%p,fd[1]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[1].data_addr,
                                       vbuf->buf_info[1].data_fd,
                                       vbuf->buf_info[1].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[1]:0x%x,time[1]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[1].exp_gain,
-                                      vbuf->buf_info[1].exp_time);
+                                      vbuf->buf_info[1].exp_time,
+                                      vbuf->buf_info[1].exp_gain_reg,
+                                      vbuf->buf_info[1].exp_time_reg);
     }else if (_rawfmt.hdr_mode == 3) {
          vbuf->buf_info[0].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[0].exp_gain = (uint32_t)_finfo.hdr_gain_s_reg;
-         vbuf->buf_info[0].exp_time = (uint32_t)_finfo.hdr_exp_s_reg;
+         vbuf->buf_info[0].exp_gain = (float)_finfo.normal_gain;
+         vbuf->buf_info[0].exp_time = (float)_finfo.normal_exp;
+         vbuf->buf_info[0].exp_gain_reg = (uint32_t)_finfo.normal_gain_reg;
+         vbuf->buf_info[0].exp_time_reg = (uint32_t)_finfo.normal_exp_reg;
          vbuf->buf_info[0].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[0]=%p,fd[0]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[0].data_addr,
                                       vbuf->buf_info[0].data_fd,
                                       vbuf->buf_info[0].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[0]:0x%x,time[0]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[0]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[0].exp_gain,
-                                      vbuf->buf_info[0].exp_time);
+                                      vbuf->buf_info[0].exp_time,
+                                      vbuf->buf_info[0].exp_gain_reg,
+                                      vbuf->buf_info[0].exp_time_reg);
 
          vbuf->buf_info[1].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[1].exp_gain = (uint32_t)_finfo.hdr_gain_m_reg;
-         vbuf->buf_info[1].exp_time = (uint32_t)_finfo.hdr_exp_m_reg;
+         vbuf->buf_info[1].exp_gain = (float)_finfo.hdr_gain_m;
+         vbuf->buf_info[1].exp_time = (float)_finfo.hdr_exp_m;
+         vbuf->buf_info[1].exp_gain_reg = (uint32_t)_finfo.hdr_gain_m_reg;
+         vbuf->buf_info[1].exp_time_reg = (uint32_t)_finfo.hdr_exp_m_reg;
          vbuf->buf_info[1].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[1]=%p,fd[1]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[1].data_addr,
                                       vbuf->buf_info[1].data_fd,
                                       vbuf->buf_info[1].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[1]:0x%x,time[1]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[1]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[1].exp_gain,
-                                      vbuf->buf_info[1].exp_time);
+                                      vbuf->buf_info[1].exp_time,
+                                      vbuf->buf_info[1].exp_gain_reg,
+                                      vbuf->buf_info[1].exp_time_reg);
 
          vbuf->buf_info[2].frame_id = _rawfmt.frame_id;
-         vbuf->buf_info[2].exp_gain = (uint32_t)_finfo.hdr_gain_l_reg;
-         vbuf->buf_info[2].exp_time = (uint32_t)_finfo.hdr_exp_l_reg;
+         vbuf->buf_info[2].exp_gain = (float)_finfo.hdr_gain_l;
+         vbuf->buf_info[2].exp_time = (float)_finfo.hdr_exp_l;
+         vbuf->buf_info[2].exp_gain_reg = (uint32_t)_finfo.hdr_gain_l_reg;
+         vbuf->buf_info[2].exp_time_reg = (uint32_t)_finfo.hdr_exp_l_reg;
          vbuf->buf_info[2].valid = true;
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"data_addr[2]=%p,fd[2]=%d,,length=%d\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[2]: data_addr=%p,fd=%d,,length=%d\n",
                                       vbuf->buf_info[2].data_addr,
                                       vbuf->buf_info[2].data_fd,
                                       vbuf->buf_info[2].data_length);
-         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"gain[2]:0x%x,time[2]:0x%x\n",
+         LOGD_CAMHW_SUBM(FAKECAM_SUBM,"buf_info[2]: gain:%f,time:%f,gain_reg:0x%x,time_reg:0x%x\n",
                                       vbuf->buf_info[2].exp_gain,
-                                      vbuf->buf_info[2].exp_time);
+                                      vbuf->buf_info[2].exp_time,
+                                      vbuf->buf_info[2].exp_gain_reg,
+                                      vbuf->buf_info[2].exp_time_reg);
     }
 
 }
@@ -914,4 +854,167 @@ FakeCamHwIsp20::rawdataPrepare(rk_aiq_raw_prop_t prop)
     EXIT_XCORE_FUNCTION();
     return ret;
 }
+
+XCamReturn FakeCamHwIsp20::setupOffLineLink(int isp_index, bool enable)
+{
+    media_device* device  = NULL;
+    media_entity* entity  = NULL;
+    media_pad* src_pad    = NULL;
+    media_pad* sink_pad   = NULL;
+    int lvds_max_entities = 4;
+    int lvds_entity       = 0;
+
+    device = media_device_new(mIspHwInfos.isp_info[isp_index].media_dev_path);
+    if (!device) return XCAM_RETURN_ERROR_FAILED;
+
+    /* Enumerate entities, pads and links. */
+    media_device_enumerate(device);
+    entity = media_get_entity_by_name(device, "rkisp-isp-subdev", strlen("rkisp-isp-subdev"));
+    if (!entity) {
+        goto FAIL;
+    }
+
+    sink_pad = (media_pad*)media_entity_get_pad(entity, 0);
+    if (!sink_pad) {
+        LOGE_CAMHW_SUBM(ISP20HW_SUBM, "get rkisp-isp-subdev sink pad failed!\n");
+        goto FAIL;
+    }
+
+    for (lvds_entity = 0; lvds_entity < lvds_max_entities; lvds_entity++) {
+        char entity_name[128] = {0};
+        src_pad               = NULL;
+        snprintf(entity_name, 128, "rkcif-mipi-lvds%d", lvds_entity);
+        entity = media_get_entity_by_name(device, entity_name, strlen(entity_name));
+        if (entity) {
+            src_pad = (media_pad*)media_entity_get_pad(entity, 0);
+            if (!src_pad) {
+                LOGE_CAMHW_SUBM(ISP20HW_SUBM, "get rkcif-mipi-lvds%d source pad s failed!\n",
+                                lvds_entity);
+                goto FAIL;
+            }
+        }
+
+        if (src_pad && sink_pad) {
+            if (enable) {
+                media_setup_link(device, src_pad, sink_pad, 0);
+            } else
+                media_setup_link(device, src_pad, sink_pad, MEDIA_LNK_FL_ENABLED);
+        }
+    }
+
+    media_device_unref(device);
+    return XCAM_RETURN_NO_ERROR;
+FAIL:
+    media_device_unref(device);
+    return XCAM_RETURN_ERROR_FAILED;
+}
+
+FakeCamHwIsp21::FakeCamHwIsp21()
+: FakeCamHwIsp20() {
+}
+
+FakeCamHwIsp21::~FakeCamHwIsp21()
+{
+    ENTER_CAMHW_FUNCTION();
+    EXIT_CAMHW_FUNCTION();
+}
+
+XCamReturn
+FakeCamHwIsp21::init(const char* sns_ent_name)
+{
+    xcam_mem_clear (_full_active_isp21_params);
+
+    return FakeCamHwIsp20::init(sns_ent_name);
+}
+
+XCamReturn
+FakeCamHwIsp21::prepare(uint32_t width, uint32_t height, int mode, int t_delay, int g_delay)
+{
+    return FakeCamHwIsp20::prepare(width, height, mode, t_delay, g_delay);
+}
+
+XCamReturn
+FakeCamHwIsp21::enqueueRawBuffer(void *rawdata, bool sync)
+{
+   return  FakeCamHwIsp20::enqueueRawBuffer(rawdata, sync);
+}
+
+XCamReturn
+FakeCamHwIsp21::enqueueRawFile(const char *path)
+{
+   return  FakeCamHwIsp20::enqueueRawFile(path);
+}
+
+XCamReturn
+FakeCamHwIsp21::registRawdataCb(void (*callback)(void *))
+{
+   return  FakeCamHwIsp20::registRawdataCb(callback);
+}
+
+XCamReturn
+FakeCamHwIsp21::rawdataPrepare(rk_aiq_raw_prop_t prop)
+{
+   return  FakeCamHwIsp20::rawdataPrepare(prop);
+}
+
+XCamReturn
+FakeCamHwIsp21::poll_event_ready (uint32_t sequence, int type)
+{
+   return  FakeCamHwIsp20::poll_event_ready (sequence, type);
+}
+
+FakeCamHwIsp3x::FakeCamHwIsp3x()
+: FakeCamHwIsp20() {
+}
+
+FakeCamHwIsp3x::~FakeCamHwIsp3x()
+{
+    ENTER_CAMHW_FUNCTION();
+    EXIT_CAMHW_FUNCTION();
+}
+
+XCamReturn
+FakeCamHwIsp3x::init(const char* sns_ent_name)
+{
+    xcam_mem_clear (_full_active_isp3x_params);
+
+    return FakeCamHwIsp20::init(sns_ent_name);
+}
+
+XCamReturn
+FakeCamHwIsp3x::prepare(uint32_t width, uint32_t height, int mode, int t_delay, int g_delay)
+{
+    return FakeCamHwIsp20::prepare(width, height, mode, t_delay, g_delay);
+}
+
+XCamReturn
+FakeCamHwIsp3x::enqueueRawBuffer(void *rawdata, bool sync)
+{
+   return  FakeCamHwIsp20::enqueueRawBuffer(rawdata, sync);
+}
+
+XCamReturn
+FakeCamHwIsp3x::enqueueRawFile(const char *path)
+{
+   return  FakeCamHwIsp20::enqueueRawFile(path);
+}
+
+XCamReturn
+FakeCamHwIsp3x::registRawdataCb(void (*callback)(void *))
+{
+   return  FakeCamHwIsp20::registRawdataCb(callback);
+}
+
+XCamReturn
+FakeCamHwIsp3x::rawdataPrepare(rk_aiq_raw_prop_t prop)
+{
+   return  FakeCamHwIsp20::rawdataPrepare(prop);
+}
+
+XCamReturn
+FakeCamHwIsp3x::poll_event_ready (uint32_t sequence, int type)
+{
+   return  FakeCamHwIsp20::poll_event_ready (sequence, type);
+}
+
 }; //namspace RkCam

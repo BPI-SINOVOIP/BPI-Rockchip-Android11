@@ -30,7 +30,7 @@ namespace XCam {
 
 
 XCamReturn
-FakeV4l2Device::open ()
+FakeV4l2Device::open (bool nonblock)
 {
     struct v4l2_streamparm param;
 
@@ -151,29 +151,7 @@ FakeV4l2Device::io_control (int cmd, void *arg)
 
 XCamReturn FakeV4l2Device::get_format (struct v4l2_format &format)
 {
-    if (is_activated ()) {
-        format = _format;
-        return XCAM_RETURN_NO_ERROR;
-    }
-
-    if (!is_opened ())
-        return XCAM_RETURN_ERROR_IOCTL;
-#if 0
-    xcam_mem_clear (format);
-    format.type = _buf_type;
-
-    if (this->io_control (VIDIOC_G_FMT, &format) < 0) {
-        // FIXME: also log the device name?
-        XCAM_LOG_ERROR("Fail to get format via ioctl VIDVIO_G_FMT.");
-        return XCAM_RETURN_ERROR_IOCTL;
-    }
-    //TODO
-    format.fmt.pix.width = 3840;
-    format.fmt.pix.height = 2160;
-    format.fmt.pix.pixelformat = V4L2_PIX_FMT_SGBRG10;
-    format.fmt.pix.bytesperline = 0;
-    format.fmt.pix.sizeimage = 10506240;
-#endif
+    format = _format;
     return XCAM_RETURN_NO_ERROR;
 }
 

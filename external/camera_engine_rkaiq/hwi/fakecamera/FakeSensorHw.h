@@ -28,7 +28,7 @@ namespace RkCam {
 #define FAKECAM_SUBM (0x40)
 
 class CTimer;
-class FakeSensorHw : public BaseSensorHw {
+class FakeSensorHw : public SensorHw {
 friend class CTimer;
 public:
     explicit FakeSensorHw();
@@ -45,12 +45,11 @@ public:
     virtual int get_format(rk_aiq_exposure_sensor_descriptor* sns_des);
 
     virtual XCamReturn get_sensor_descriptor (rk_aiq_exposure_sensor_descriptor* sns_des);
-    virtual XCamReturn getEffectiveExpParams(SmartPtr<RkAiqExpParamsProxy>& ExpParams, int frame_id);
     virtual XCamReturn set_working_mode(int mode);
     virtual XCamReturn set_exp_delay_info(int time_delay, int gain_delay, int hcg_lcg_mode_delay);
     virtual XCamReturn set_mirror_flip(bool mirror, bool flip, int32_t& skip_frame_sequence);
     virtual XCamReturn get_mirror_flip(bool& mirror, bool& flip);
-    virtual XCamReturn start();
+    virtual XCamReturn start(bool prepared);
     virtual XCamReturn stop();
     virtual XCamReturn get_selection (int pad, uint32_t target, struct v4l2_subdev_selection &select);
     virtual XCamReturn getFormat(struct v4l2_subdev_format &aFormat);
@@ -63,12 +62,6 @@ public:
 
 private:
     XCAM_DEAD_COPY (FakeSensorHw);
-    Mutex _mutex;
-    Mutex _map_mutex;
-    int _working_mode;
-    bool _first;
-    std::map<int, SmartPtr<RkAiqExpParamsProxy>> _effecting_exp_map;
-    std::string _sns_entity_name;
     int get_sensor_fps(float& fps);
     int get_nr_switch(rk_aiq_sensor_nr_switch_t* nr_switch);
     int _width;
@@ -76,7 +69,6 @@ private:
     uint32_t _fmt_code;
     rk_aiq_rawbuf_type_t _rawbuf_type;
     std::list<struct rk_aiq_vbuf> _vbuf_list;
-    SmartPtr<RkAiqExpParamsPool> mAiqExpParamsPool;
     SmartPtr<V4l2Device>  _mipi_tx_dev[3];
     CTimer *_timer;
     void (*pFunc)(void *addr);

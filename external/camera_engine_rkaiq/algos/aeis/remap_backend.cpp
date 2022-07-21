@@ -122,11 +122,11 @@ void FecRemapBackend::ImportHwBuffers() {
     hw_config_.alloc_param.height      = config_.Height;
     hw_config_.alloc_param.reserved[0] = config_.MeshDensity;
 
-    mem_ops_->alloc_mem((void*)mem_ops_, &hw_config_, &mem_ctx_);
+    mem_ops_->alloc_mem(0, (void*)mem_ops_, &hw_config_, &mem_ctx_);
 }
 
 void FecRemapBackend::ReleaseHwBuffers() {
-    if (mem_ctx_ && mem_ops_) mem_ops_->release_mem(mem_ctx_);
+    if (mem_ctx_ && mem_ops_) mem_ops_->release_mem(0, mem_ctx_);
 }
 
 FecMeshBuffer* FecRemapBackend::GetFreeHwBuffer() {
@@ -135,7 +135,7 @@ FecMeshBuffer* FecRemapBackend::GetFreeHwBuffer() {
     }
 
     const auto mem_info =
-        reinterpret_cast<rk_aiq_fec_share_mem_info_t*>(mem_ops_->get_free_item(mem_ctx_));
+        reinterpret_cast<rk_aiq_fec_share_mem_info_t*>(mem_ops_->get_free_item(0, mem_ctx_));
     if (mem_info != nullptr) {
         return new FecMeshBuffer(mem_info);
     }

@@ -22,26 +22,19 @@
 #include "rk_aiq_types.h"
 #include "rk-camera-module.h"
 #include "MessageBus.h"
-#include "hwi/isp20/rkisp2-config.h"
-#include "hwi/isp21/rkisp21-config.h"
-#include "shared_item_pool.h"
+#include "common/rkisp2-config.h"
+#include "common/rkisp21-config.h"
+#include "common/rkisp3-config.h"
+#include "buffer_pool.h"
 
 #define RKAIQ_ISP_LDCH_ID           (1 << 0)
 
-// base struct
-typedef struct rk_aiq_isp_params_base_s : public RkCam::SharedItemData  {
-public:
-    explicit rk_aiq_isp_params_base_s(): RkCam::SharedItemData() {}
-    virtual ~rk_aiq_isp_params_base_s() {}
+template<class T>
+struct rk_aiq_isp_params_t : public XCam::BufferData {
+    T   result;
     uint32_t update_mask;
     uint32_t module_enable_mask;
     uint32_t frame_id;
-    virtual void reset() {};
-} rk_aiq_isp_params_base_t;
-
-template<class T>
-struct rk_aiq_isp_params_t : rk_aiq_isp_params_base_t {
-    T   result;
 };
 
 //common
@@ -83,11 +76,14 @@ typedef struct rkisp_effect_params {
     union {
         struct isp2x_isp_params_cfg isp_params;
         struct isp21_isp_params_cfg isp_params_v21;
+        struct isp3x_isp_params_cfg isp_params_v3x[3];
     };
     union {
         rk_aiq_awb_stat_cfg_v200_t  awb_cfg;
         rk_aiq_awb_stat_cfg_v201_t  awb_cfg_v201;
+        rk_aiq_isp_awb_meas_cfg_v3x_t awb_cfg_v3x;
     };
+    rk_aiq_isp_blc_v21_t blc_cfg;
 } rkisp_effect_params_v20;
 
 #define RKAIQ_ISPP_TNR_ID           (1 << 0)
@@ -95,6 +91,7 @@ typedef struct rkisp_effect_params {
 #define RKAIQ_ISPP_SHARP_ID         (1 << 2)
 #define RKAIQ_ISPP_FEC_ID           (1 << 3)
 #define RKAIQ_ISPP_ORB_ID           (1 << 4)
+#define RKAIQ_ISPP_FEC_ST_ID        (1<< 17 | RKAIQ_ISPP_FEC_ID)
 
 typedef rk_aiq_isp_params_t<rk_aiq_isp_tnr_t>       rk_aiq_isp_tnr_params_v20_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_ynr_t>       rk_aiq_isp_ynr_params_v20_t;
@@ -108,35 +105,55 @@ typedef rk_aiq_isp_params_t<rk_aiq_isp_orb_t>       rk_aiq_isp_orb_params_v20_t;
 typedef rk_aiq_isp_params_t<rk_aiq_awb_stat_cfg_v201_t>       rk_aiq_isp_awb_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_drc_v21_t>             rk_aiq_isp_drc_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_blc_v21_t>             rk_aiq_isp_blc_params_v21_t;
-typedef rk_aiq_isp_params_t<rk_aiq_isp_gic_v21_t>             rk_aiq_isp_gic_params_v21_t;
-typedef rk_aiq_isp_params_t<rk_aiq_isp_dehaze_v21_t>          rk_aiq_isp_dehaze_params_v21_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_dehaze_t>              rk_aiq_isp_dehaze_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_baynr_v21_t>           rk_aiq_isp_baynr_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_bay3d_v21_t>           rk_aiq_isp_bay3d_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_ynr_v21_t>             rk_aiq_isp_ynr_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_cnr_v21_t>             rk_aiq_isp_cnr_params_v21_t;
 typedef rk_aiq_isp_params_t<rk_aiq_isp_sharp_v21_t>           rk_aiq_isp_sharpen_params_v21_t;
 
+// v3x params struct
+typedef rk_aiq_isp_params_t<rk_aiq_isp_awb_meas_cfg_v3x_t>    rk_aiq_isp_awb_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_af_meas_v3x_t>         rk_aiq_isp_af_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_goc_v3x_t>             rk_aiq_isp_agamma_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_drc_v3x_t>             rk_aiq_isp_drc_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_merge_v3x_t>           rk_aiq_isp_merge_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_dehaze_t>              rk_aiq_isp_dehaze_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_baynr_v3x_t>           rk_aiq_isp_baynr_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_bay3d_v3x_t>           rk_aiq_isp_bay3d_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_ynr_v3x_t>             rk_aiq_isp_ynr_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_cnr_v3x_t>             rk_aiq_isp_cnr_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_sharp_v3x_t>           rk_aiq_isp_sharpen_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_cac_v3x_t>             rk_aiq_isp_cac_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_gain_v3x_t>            rk_aiq_isp_gain_params_v3x_t;
+typedef rk_aiq_isp_params_t<rk_aiq_isp_tnr_v3x_t>             rk_aiq_isp_tnr_params_v3x_t;
+
+
 typedef enum rk_aiq_drv_share_mem_type_e {
     MEM_TYPE_LDCH,
     MEM_TYPE_FEC,
+    MEM_TYPE_CAC,
 } rk_aiq_drv_share_mem_type_t;
 
-typedef void (*alloc_mem_t)(void* ops_ctx, void* cfg, void** mem_ctx);
-typedef void (*release_mem_t)(void* mem_ctx);
-typedef void* (*get_free_item_t)(void* mem_ctx);
+typedef void (*alloc_mem_t)(uint8_t id, void* ops_ctx, void* cfg, void** mem_ctx);
+typedef void (*release_mem_t)(uint8_t id, void* mem_ctx);
+typedef void* (*get_free_item_t)(uint8_t id, void* mem_ctx);
 typedef struct isp_drv_share_mem_ops_s {
     alloc_mem_t alloc_mem;
     release_mem_t release_mem;
     get_free_item_t get_free_item;
-}isp_drv_share_mem_ops_t;
+} isp_drv_share_mem_ops_t;
 
-typedef struct rk_aiq_ldch_share_mem_info_s {
+typedef struct rk_aiq_lut_share_mem_info_s {
     int size;
     void *map_addr;
     void *addr;
     int fd;
     char *state;
-} rk_aiq_ldch_share_mem_info_t;
+} rk_aiq_lut_share_mem_info_t;
+
+typedef rk_aiq_lut_share_mem_info_t rk_aiq_ldch_share_mem_info_t;
+typedef rk_aiq_lut_share_mem_info_t rk_aiq_cac_share_mem_info_t;
 
 typedef struct rk_aiq_fec_share_mem_info_s {
     int size;
@@ -163,8 +180,10 @@ typedef struct rk_aiq_share_mem_config_s {
 struct rk_aiq_vbuf_info {
     uint32_t frame_id;
     uint32_t timestamp;
-    uint32_t exp_time;
-    uint32_t exp_gain;
+    float    exp_time;
+    float    exp_gain;
+    uint32_t exp_time_reg;
+    uint32_t exp_gain_reg;
     uint32_t data_fd;
     uint8_t *data_addr;
     uint32_t data_length;
@@ -173,7 +192,7 @@ struct rk_aiq_vbuf_info {
 };
 
 struct rk_aiq_vbuf {
-        void *base_addr;
+    void *base_addr;
     uint32_t frame_width;
     uint32_t frame_height;
     struct rk_aiq_vbuf_info buf_info[3];/*index: 0-short,1-medium,2-long*/
@@ -192,10 +211,13 @@ enum cam_thread_type_e {
     ISP_POLL_TX,
     ISP_POLL_RX,
     ISP_POLL_SP,
+    ISP_POLL_PDAF_STATS,
     ISP_GAIN,
     ISP_NR_IMG,
     ISPP_GAIN_KG,
     ISPP_GAIN_WR,
+    ISP_POLL_ISPSTREAMSYNC,
+    VICAP_STREAM_ON_EVT,
     ISP_POLL_POST_MAX,
 };
 
@@ -217,14 +239,20 @@ enum cam_thread_type_e {
 #define MAX_MEDIA_INDEX               16
 #define DEV_PATH_LEN                  64
 #define SENSOR_ATTACHED_FLASH_MAX_NUM 2
-#define MAX_CAM_NUM                   4
+#define MAX_CAM_NUM                   8
+
+#define MAX_ISP_LINKED_VICAP_CNT      4
 
 #define ISP_TX_BUF_NUM 4
 #define VIPCAP_TX_BUF_NUM 4
 
 typedef struct {
-    int  model_idx: 3;
-    int  linked_sensor: 3;
+    int  model_idx;
+    int  logic_id;
+    int  phy_id; // physical isp id
+    int  linked_sensor;
+    bool is_multi_isp_mode; // isp-unit mode, 2 isp to 1
+    bool isMultiplex;      // muliplex mode, virtually sed by more than one sensor
     bool linked_dvp;
     bool valid;
     char media_dev_path[DEV_PATH_LEN];
@@ -245,7 +273,7 @@ typedef struct {
     char input_params_path[DEV_PATH_LEN];
     char mipi_luma_path[DEV_PATH_LEN];
     char mipi_dphy_rx_path[DEV_PATH_LEN];
-    char linked_vicap[DEV_PATH_LEN];
+    char linked_vicap[MAX_ISP_LINKED_VICAP_CNT][DEV_PATH_LEN];
 } rk_aiq_isp_t;
 
 typedef struct {
@@ -292,12 +320,16 @@ typedef struct {
 } rk_aiq_isp_hw_info_t;
 
 typedef struct {
-    int  model_idx: 3;
+    int  model_idx;
     char media_dev_path[DEV_PATH_LEN];
     char mipi_id0[DEV_PATH_LEN];
     char mipi_id1[DEV_PATH_LEN];
     char mipi_id2[DEV_PATH_LEN];
     char mipi_id3[DEV_PATH_LEN];
+    char mipi_scl0[DEV_PATH_LEN];
+    char mipi_scl1[DEV_PATH_LEN];
+    char mipi_scl2[DEV_PATH_LEN];
+    char mipi_scl3[DEV_PATH_LEN];
     char dvp_id0[DEV_PATH_LEN];
     char dvp_id1[DEV_PATH_LEN];
     char dvp_id2[DEV_PATH_LEN];
@@ -315,6 +347,16 @@ typedef struct {
     rk_aiq_cif_info_t cif_info[MAX_CAM_NUM];
     rk_aiq_hw_ver_t hw_ver_info;
 } rk_aiq_cif_hw_info_t;
+
+typedef struct {
+    bool pdaf_support;
+    uint32_t pdaf_vc;
+    uint32_t pdaf_width;
+    uint32_t pdaf_height;
+    uint32_t pdaf_pixelformat;
+    uint32_t pdaf_code;
+    char pdaf_vdev[DEV_PATH_LEN];
+} rk_sensor_pdaf_info_t;
 
 typedef struct {
     /* sensor entity name format:
@@ -360,83 +402,56 @@ typedef struct rk_aiq_share_ptr_config_s {
     uint32_t frame_id;
 } rk_aiq_share_ptr_config_t;
 
-class RkAiqIspStats : public RkCam::SharedItemData {
-public:
-    explicit RkAiqIspStats() {
-        xcam_mem_clear(aec_stats);
-        xcam_mem_clear(awb_stats);
-        xcam_mem_clear(awb_stats_v201);
-        xcam_mem_clear(af_stats);
-        aec_stats_valid = false;
-        awb_stats_valid = false;
-        awb_cfg_effect_valid = false;
-        af_stats_valid = false;
-        frame_id = -1;
-    };
-    ~RkAiqIspStats() {};
-    rk_aiq_isp_aec_stats_t aec_stats;
-    bool aec_stats_valid;
-    union {
-        rk_aiq_awb_stat_res_v200_t awb_stats;
-        rk_aiq_awb_stat_res_v201_t awb_stats_v201;
-    };
 
-    bool awb_stats_valid;
-    bool awb_cfg_effect_valid;
-    rk_aiq_isp_af_stats_t af_stats;
-    bool af_stats_valid;
-    rkisp_atmo_stats_t atmo_stats;
-    bool atmo_stats_valid;
-    rkisp_adehaze_stats_t adehaze_stats;
-    bool adehaze_stats_valid;
-    uint32_t frame_id;
-private:
-    XCAM_DEAD_COPY (RkAiqIspStats);
-};
-
-class RkAiqAecStats : public RkCam::SharedItemData {
+class RkAiqAecStats : public XCam::BufferData {
 public:
     explicit RkAiqAecStats() {
         xcam_mem_clear(aec_stats);
         aec_stats_valid = false;
         frame_id = -1;
     };
-    ~RkAiqAecStats() {};
+    virtual ~RkAiqAecStats() {};
     rk_aiq_isp_aec_stats_t aec_stats;
     bool aec_stats_valid;
+    bool af_prior;
     uint32_t frame_id;
 private:
     XCAM_DEAD_COPY (RkAiqAecStats);
 };
 
-class RkAiqAwbStats : public RkCam::SharedItemData {
+class RkAiqAwbStats : public XCam::BufferData {
 public:
     explicit RkAiqAwbStats() {
         xcam_mem_clear(awb_stats);
         xcam_mem_clear(awb_stats_v201);
+        xcam_mem_clear(awb_stats_v3x);
+        xcam_mem_clear(blc_cfg_effect);
         awb_stats_valid = false;
         awb_cfg_effect_valid = false;
         frame_id = -1;
     };
-    ~RkAiqAwbStats() {};
-    rk_aiq_awb_stat_res_v200_t awb_stats;
-    rk_aiq_awb_stat_res_v201_t awb_stats_v201;
-
+    virtual ~RkAiqAwbStats() {};
+    union {
+        rk_aiq_awb_stat_res_v200_t awb_stats;
+        rk_aiq_awb_stat_res_v201_t awb_stats_v201;
+        rk_aiq_isp_awb_stats_v3x_t awb_stats_v3x;
+    };
     bool awb_stats_valid;
     bool awb_cfg_effect_valid;
     uint32_t frame_id;
+    rk_aiq_isp_blc_t blc_cfg_effect;
 private:
     XCAM_DEAD_COPY (RkAiqAwbStats);
 };
 
-class RkAiqAtmoStats : public RkCam::SharedItemData {
+class RkAiqAtmoStats : public XCam::BufferData {
 public:
     explicit RkAiqAtmoStats() {
         xcam_mem_clear(atmo_stats);
         atmo_stats_valid = false;
         frame_id = -1;
     };
-    ~RkAiqAtmoStats() {};
+    virtual ~RkAiqAtmoStats() {};
     rkisp_atmo_stats_t atmo_stats;
     bool atmo_stats_valid;
     uint32_t frame_id;
@@ -444,14 +459,14 @@ private:
     XCAM_DEAD_COPY (RkAiqAtmoStats);
 };
 
-class RkAiqAdehazeStats : public RkCam::SharedItemData {
+class RkAiqAdehazeStats : public XCam::BufferData {
 public:
     explicit RkAiqAdehazeStats() {
         xcam_mem_clear(adehaze_stats);
         adehaze_stats_valid = false;
         frame_id = -1;
     };
-    ~RkAiqAdehazeStats() {};
+    virtual ~RkAiqAdehazeStats() {};
     rkisp_adehaze_stats_t adehaze_stats;
     bool adehaze_stats_valid;
     uint32_t frame_id;
@@ -459,22 +474,26 @@ private:
     XCAM_DEAD_COPY (RkAiqAdehazeStats);
 };
 
-class RkAiqAfStats : public RkCam::SharedItemData {
+class RkAiqAfStats : public XCam::BufferData {
 public:
     explicit RkAiqAfStats() {
         xcam_mem_clear(af_stats);
+        xcam_mem_clear(af_stats_v3x);
         af_stats_valid = false;
         frame_id = -1;
     };
-    ~RkAiqAfStats() {};
-    rk_aiq_isp_af_stats_t af_stats;
+    virtual ~RkAiqAfStats() {};
+    union {
+        rk_aiq_isp_af_stats_t af_stats;
+        rk_aiq_isp_af_stats_v3x_t af_stats_v3x;
+    };
     bool af_stats_valid;
     uint32_t frame_id;
 private:
     XCAM_DEAD_COPY (RkAiqAfStats);
 };
 
-class RkAiqOrbStats : public RkCam::SharedItemData {
+class RkAiqOrbStats : public XCam::BufferData {
 public:
     explicit RkAiqOrbStats() {
         xcam_mem_clear(orb_stats);
@@ -483,12 +502,27 @@ public:
         orb_stats.frame_id = -1;
         orb_stats.img_buf_index = -1;
     };
-    ~RkAiqOrbStats() {};
+    virtual ~RkAiqOrbStats() {};
     rk_aiq_isp_orb_stats_t orb_stats;
     bool orb_stats_valid;
     uint32_t frame_id;
 private:
     XCAM_DEAD_COPY (RkAiqOrbStats);
+};
+
+class RkAiqPdafStats : public XCam::BufferData {
+public:
+    explicit RkAiqPdafStats() {
+        xcam_mem_clear(pdaf_stats);
+        pdaf_stats_valid = false;
+        frame_id = -1;
+    };
+    virtual ~RkAiqPdafStats() {};
+    rk_aiq_isp_pdaf_stats_t pdaf_stats;
+    bool pdaf_stats_valid;
+    uint32_t frame_id;
+private:
+    XCAM_DEAD_COPY (RkAiqPdafStats);
 };
 
 enum rk_aiq_core_analyze_type_e {
@@ -527,12 +561,12 @@ static const char* AnalyzerGroupType2Str[32]    = {
     [RK_AIQ_CORE_ANALYZE_ORB]                   = "ORB",
 };
 
-typedef enum _RkAiqSharedDataType{
-	RK_AIQ_SHARED_TYPE_INVALID,
-	RK_AIQ_SHARED_TYPE_SOF_INFO,
-	RK_AIQ_SHARED_TYPE_3A_STATS,
-	RK_AIQ_SHARED_TYPE_AEC_STATS,
-	RK_AIQ_SHARED_TYPE_ORB_STATS,
+typedef enum _RkAiqSharedDataType {
+    RK_AIQ_SHARED_TYPE_INVALID,
+    RK_AIQ_SHARED_TYPE_SOF_INFO,
+    RK_AIQ_SHARED_TYPE_3A_STATS,
+    RK_AIQ_SHARED_TYPE_AEC_STATS,
+    RK_AIQ_SHARED_TYPE_ORB_STATS,
 } RkAiqSharedDataType;
 
 #endif

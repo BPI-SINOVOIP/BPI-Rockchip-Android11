@@ -26,14 +26,34 @@
 
 #define LIMIT_VALUE(value,max_value,min_value)      (value > max_value? max_value : value < min_value ? min_value : value)
 
+#define ISP3X_SEGNUM_LOG_49     (2)
+#define ISP3X_SEGNUM_LOG_45     (0)
+#define ISP3X_SEGNUM_EQU_45     (1)
+
+
+
+
+typedef struct rk_aiq_gamma_cfg_s {
+    bool gamma_en;
+    int gamma_out_segnum;//0:log 45 segment ; 1:equal segment ;2:log 49 segment ;
+    int gamma_out_offset;
+    int gamma_table[49];
+}  rk_aiq_gamma_cfg_t;
+
+typedef struct GammaCalibDb_s {
+    union {
+        CalibDbV2_gamma_t Gamma_v20;
+        CalibDbV2_gamma_V30_t Gamma_v30;
+    };
+} GammaCalibDb_t;
+
 typedef struct AgammaHandle_s {
     rk_aiq_gamma_cfg_t  agamma_config;
-    CalibDbV2_gamma_t *pCalibDb;
+    GammaCalibDb_t CalibDb;
     rk_aiq_gamma_attr_t agammaAttr;
     AgammaProcRes_t ProcRes;
     int working_mode;
     int prepare_type;
-    int HWversion;
 } AgammaHandle_t;
 
 #endif

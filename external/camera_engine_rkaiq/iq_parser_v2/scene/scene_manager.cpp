@@ -151,9 +151,10 @@ int RkAiqSceneManager::addScene(CamCalibDbProj_t *calibproj,
   return 0;
 }
 
-void*
+CamCalibDbV2Context_t
 RkAiqSceneManager::refToScene(CamCalibDbProj_t *calibproj,
                               const char *main_scene, const char *sub_scene) {
+  CamCalibDbV2Context_t ctx;
   CamCalibMainSceneList_t *main_list = nullptr;
   CamCalibSubSceneList_t *sub_list = nullptr;
   void* dst_calib = nullptr;
@@ -164,15 +165,16 @@ RkAiqSceneManager::refToScene(CamCalibDbProj_t *calibproj,
 
   if (!calibproj) {
     printf("No avaliable CamCalibDbProj loadded!\n");
-    return nullptr;
+    return ctx;
   }
 
   main_list = calibproj->main_scene;
   main_list_len = calibproj->main_scene_len;
+  memset(&ctx, 0, sizeof(CamCalibDbV2Context_t));
 
   if (!main_list || main_list_len < 1) {
     printf("No avaliable main scene!\n");
-    return nullptr;
+    return ctx;
   }
 
   // Find main scene
@@ -188,7 +190,7 @@ RkAiqSceneManager::refToScene(CamCalibDbProj_t *calibproj,
 
   if (!sub_list || sub_list_len < 1) {
     printf("No avaliable main scene!\n");
-    return nullptr;
+    return ctx;
   }
 
   // Find sub scene
@@ -198,12 +200,17 @@ RkAiqSceneManager::refToScene(CamCalibDbProj_t *calibproj,
       continue;
     }
     dst_calib = calibdbv2_get_scene_ptr(&sub_list[curr_sub_scene]);
-    return dst_calib;
+    ctx.calib_scene = (char*)(dst_calib);
+    ctx.sensor_info = &calibproj->sensor_calib;
+    ctx.module_info = &calibproj->module_calib;
+    ctx.sys_cfg = &calibproj->sys_static_cfg;
+
+    return ctx;
   }
 
   printf("Can't find scene:[%s]/[%s]!\n", main_scene, sub_scene);
 
-  return nullptr;
+  return ctx;
 }
 
 } // namespace RkCam

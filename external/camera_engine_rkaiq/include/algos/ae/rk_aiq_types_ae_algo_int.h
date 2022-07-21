@@ -40,7 +40,9 @@
  * @{
  *
  */
-#include "RkAiqCalibDbTypesV2.h"
+#include "moduleinfo_head.h"
+#include "aec_head.h"
+#include "sensorinfo_head.h"
 #include "rk_aiq_types_ae_algo.h"
 
 
@@ -280,6 +282,7 @@ typedef enum {
     AEC_HDR_2FRAME_S = 0,
     AEC_HDR_2FRAME_L = 1,
 
+    AEC_EXTRA_FRAME = 3,
     AEC_NORMAL_FRAME = 0
 } AecFrameMode_t;
 
@@ -389,8 +392,9 @@ typedef struct Aec_uapi_advanced_attr_s {
 
 typedef enum AecHwVersion_e
 {
-    AEC_HARDWARE_V0 = 0,  //at most support Hdr 3_frame, 2 AEBIG & 1 AELITE for input raw
-    AEC_HARDWARE_V1 = 1,  //at most support Hdr 2_frame, 1 AEBIG & 1 AELITE for input raw
+    AEC_HARDWARE_V0 = 0,  //at most support Hdr 3_frame, 2 AEBIG & 1 AELITE for input raw, support yuv luma e.g. rk1126/1109
+    AEC_HARDWARE_V1 = 1,  //at most support Hdr 2_frame, 1 AEBIG & 1 AELITE for input raw, not support yuv luma  e.g. rk356X
+    AEC_HARDWARE_V2 = 2,  //at most support Hdr 3_frame, 2 AEBIG & 1 AELITE for input raw, not support yuv luma e.g. rk3588
     AEC_HARDWARE_MAX,
 } AecHwVersion_t;
 
@@ -413,6 +417,8 @@ typedef struct AecConfig_s {
 
     int                           Workingmode;
     int                           LineHdrMode;
+
+    bool                          AfStatsPrior;
 
     /*params related to driver setting*/
     float                         LinePeriodsPerField;
@@ -448,6 +454,7 @@ typedef struct AecConfig_s* AeConfig_t;     /**< handle to AEC config */
 typedef struct AeInstanceConfig_s {
     AeHandle_t              hAe;            /**< handle returned by AeInit() */
     AeConfig_t              aecCfg;
+    bool                    lockaebyaf;
 } AeInstanceConfig_t;
 
 /*****************************************************************************/
@@ -462,14 +469,17 @@ typedef struct AecPreResult_s {
     float HighLightLuma[MAX_HDR_FRAMENUM];
     float HighLightROIPdf[MAX_HDR_FRAMENUM];
     float OverExpROIPdf[MAX_HDR_FRAMENUM];
-    float L2M_ExpRatio;
-    float M2S_ExpRatio;
+    float NonOverExpLuma[MAX_HDR_FRAMENUM];
+    float NonOverExpPdf[MAX_HDR_FRAMENUM];
 
     float GlobalEnvLv[MAX_HDR_FRAMENUM];
     float BlockEnvLv[ISP2_RAWAE_WINNUM_MAX];
     float GlobalEnvLux;
     float BlockEnvLux[ISP2_RAWAE_WINNUM_MAX];
     float DynamicRange;
+
+    float L2M_ExpRatio;
+    float M2S_ExpRatio;
 
     unsigned char NormalIndex;
 

@@ -28,7 +28,7 @@ typedef std::list<MB_BLK> MB_LIST;
 static MB_LIST mb_list;
 static std::mutex mb_list_mutex;
 
-// you can query version by 'strings' command
+// you can query version by 'strings' command: strings libmpimmz.so | grep git
 const char* mpi_mmz_version = MPI_MMZ_BUILT_VERSION;
 
 static MB_BLK create_blk_from_fd(int fd, RK_U32 len, uint32_t flags)
@@ -45,8 +45,10 @@ static MB_BLK create_blk_from_fd(int fd, RK_U32 len, uint32_t flags)
 
     // get physic addr
     uint64_t paddr = (uint64_t)-1;
-    if (ion_get_phys(fd, &paddr) < 0) {
-        //ALOGW("get physical address fail");
+    if (ion_check_support()) {
+        if (ion_get_phys(fd, &paddr) < 0) {
+            //ALOGW("get physical address fail");
+        }
     }
 
     // get virt addr
@@ -88,8 +90,14 @@ RK_S32 RK_MPI_MMZ_Alloc(MB_BLK *pBlk, RK_U32 u32Len, RK_U32 u32Flags)
 
     // alloc
     int fd = -1;
-    if (ion_alloc(u32Len, is_cma, is_cacheable, &fd) < 0) {
-        return -1;
+    if (ion_check_support()) {
+        if (ion_alloc(u32Len, is_cma, is_cacheable, &fd) < 0) {
+            return -1;
+        }
+    } else {
+        if (dmabuf_alloc(u32Len, is_cma, is_cacheable, &fd) < 0) {
+            return -1;
+        }
     }
 
     MB_BLK mb = create_blk_from_fd(fd, u32Len, u32Flags);

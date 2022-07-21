@@ -189,6 +189,11 @@ static void hdmi_cec_clear_logical_address(const struct hdmi_cec_device* dev)
 		return;
 	}
 
+	if (!ctx->cec_init) {
+		ALOGI("%s cec is not init!", __func__);
+		return;
+	}
+
 	log_addr.num_log_addrs = 0;
 	ret = ioctl(ctx->fd, CEC_ADAP_S_LOG_ADDRS, &log_addr);
 	if (ret) {
@@ -459,6 +464,7 @@ static int hdmi_cec_device_open(const struct hw_module_t* module, const char* na
 
 	dev->enable = true;
 	dev->system_control = false;
+	dev->cec_init = false;
 	/* initialize the procs */
 	dev->device.common.tag = HARDWARE_DEVICE_TAG;
 	dev->device.common.version = HDMI_CEC_DEVICE_API_VERSION_1_0;

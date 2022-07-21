@@ -6,7 +6,6 @@ rk_aiq_uapi_adpcc_SetAttrib(RkAiqAlgoContext *ctx,
                             rk_aiq_dpcc_attrib_V20_t *attr,
                             bool need_sync)
 {
-
     AdpccContext_t* pAdpccCtx = (AdpccContext_t*)ctx;
 
     pAdpccCtx->eMode = attr->eMode;

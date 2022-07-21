@@ -17,9 +17,9 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "ablc/rk_aiq_algo_ablc_itf.h"
 #include "ablc/rk_aiq_ablc_algo.h"
+#include "rk_aiq_algo_types.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -33,10 +33,9 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {   XCamReturn result = XCAM_RETURN_NO_ERROR;
 
     LOG1_ABLC("%s: (enter)\n", __FUNCTION__ );
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
 
     AblcContext_t* pAblcCtx = NULL;
-    AblcResult_t ret = AblcInit(&pAblcCtx, cfgInt->calibv2);
+    AblcResult_t ret = AblcInit(&pAblcCtx, cfg->calibv2);
     if(ret != ABLC_RET_SUCCESS) {
         result = XCAM_RETURN_ERROR_FAILED;
         LOGE_ABLC("%s: Initializaion Ablc failed (%d)\n", __FUNCTION__, ret);
@@ -78,15 +77,15 @@ prepare(RkAiqAlgoCom* params)
     XCamReturn result = XCAM_RETURN_NO_ERROR;
 
     AblcContext_t* pAblcCtx = (AblcContext_t *)params->ctx;
-    RkAiqAlgoConfigAblcInt* pCfgParam = (RkAiqAlgoConfigAblcInt*)params;
+    RkAiqAlgoConfigAblc* pCfgParam = (RkAiqAlgoConfigAblc*)params;
     pAblcCtx->prepare_type = params->u.prepare.conf_type;
 
     if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )) {
         CalibDbV2_Ablc_t* calibv2_ablc_calib =
-            (CalibDbV2_Ablc_t*)(CALIBDBV2_GET_MODULE_PTR((void*)(pCfgParam->rk_com.u.prepare.calibv2), ablc_calib));
+            (CalibDbV2_Ablc_t*)(CALIBDBV2_GET_MODULE_PTR((void*)(pCfgParam->com.u.prepare.calibv2), ablc_calib));
 
         LOGD_ABLC("%s: Ablc Reload Para!\n", __FUNCTION__);
-        memcpy(&pAblcCtx->stBlcCalib, calibv2_ablc_calib, sizeof(CalibDbV2_Ablc_t));
+        memcpy(&pAblcCtx->stBlcCalib, calibv2_ablc_calib, sizeof(pAblcCtx->stBlcCalib));
         pAblcCtx->isUpdateParam = true;
         pAblcCtx->isReCalculate |= 1;
     }
@@ -103,22 +102,8 @@ pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     AblcContext_t* pAblcCtx = (AblcContext_t *)inparams->ctx;
 
     if(pAblcCtx->isUpdateParam) {
-        if(pAblcCtx->attr.eMode == ABLC_OP_MODE_API_TOOL) {
-            BlcNewMalloc(&pAblcCtx->config, &pAblcCtx->attr.stTool);
-            AblcResult_t ret = AblcConfig(&pAblcCtx->config, &pAblcCtx->attr.stTool);
-            if(ret != ABLC_RET_SUCCESS) {
-                result = XCAM_RETURN_ERROR_FAILED;
-                LOGE_ABLC("%s: config Ablc failed (%d)\n", __FUNCTION__, ret);
-            }
-        }
-        else {
-            BlcNewMalloc(&pAblcCtx->config, &pAblcCtx->stBlcCalib);
-            AblcResult_t ret = AblcConfig(&pAblcCtx->config, &pAblcCtx->stBlcCalib);
-            if(ret != ABLC_RET_SUCCESS) {
-                result = XCAM_RETURN_ERROR_FAILED;
-                LOGE_ABLC("%s: config Ablc failed (%d)\n", __FUNCTION__, ret);
-            }
-        }
+        AblcParamsUpdate(pAblcCtx, &pAblcCtx->stBlcCalib);
+        pAblcCtx->isReCalculate |= 1;
         pAblcCtx->isUpdateParam = false;
     }
 
@@ -135,8 +120,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOG1_ABLC("%s: (enter)\n", __FUNCTION__ );
 
 
-    RkAiqAlgoProcAblcInt* pAblcProcParams = (RkAiqAlgoProcAblcInt*)inparams;
-    RkAiqAlgoProcResAblcInt* pAblcProcResParams = (RkAiqAlgoProcResAblcInt*)outparams;
+    RkAiqAlgoProcAblc* pAblcProcParams = (RkAiqAlgoProcAblc*)inparams;
+    RkAiqAlgoProcResAblc* pAblcProcResParams = (RkAiqAlgoProcResAblc*)outparams;
     AblcContext_t* pAblcCtx = (AblcContext_t *)inparams->ctx;
     AblcExpInfo_t stExpInfo;
     memset(&stExpInfo, 0x00, sizeof(AblcExpInfo_t));
@@ -159,17 +144,38 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
         stExpInfo.hdr_mode = 2;
     }
 
-    RKAiqAecExpInfo_t *curExp = pAblcProcParams->rk_com.u.proc.curExp;
+    RKAiqAecExpInfo_t *curExp = pAblcProcParams->com.u.proc.curExp;
     if(curExp != NULL) {
         if(pAblcProcParams->hdr_mode == RK_AIQ_WORKING_MODE_NORMAL) {
-            stExpInfo.arAGain[0] = curExp->LinearExp.exp_real_params.analog_gain;
+            if(curExp->LinearExp.exp_real_params.analog_gain < 1.0) {
+                stExpInfo.arAGain[0] = 1.0;
+                LOGW_ANR("leanr mode again is wrong, use 1.0 instead\n");
+            } else {
+                stExpInfo.arAGain[0] = curExp->LinearExp.exp_real_params.analog_gain;
+            }
+            if(curExp->LinearExp.exp_real_params.digital_gain < 1.0) {
+                stExpInfo.arDGain[0] = 1.0;
+                LOGW_ANR("leanr mode dgain is wrong, use 1.0 instead\n");
+            } else {
+                stExpInfo.arDGain[0] = curExp->LinearExp.exp_real_params.digital_gain;
+            }
             stExpInfo.arDGain[0] = curExp->LinearExp.exp_real_params.digital_gain;
             stExpInfo.arTime[0] = curExp->LinearExp.exp_real_params.integration_time;
             stExpInfo.arIso[0] = stExpInfo.arAGain[0] * stExpInfo.arDGain[0] * 50;
         } else {
             for(int i = 0; i < 3; i++) {
-                stExpInfo.arAGain[i] = curExp->HdrExp[i].exp_real_params.analog_gain;
-                stExpInfo.arDGain[i] = curExp->HdrExp[i].exp_real_params.digital_gain;
+                if(curExp->HdrExp[i].exp_real_params.analog_gain < 1.0) {
+                    stExpInfo.arAGain[i] = 1.0;
+                    LOGW_ANR("hdr mode again is wrong, use 1.0 instead\n");
+                } else {
+                    stExpInfo.arAGain[i] = curExp->HdrExp[i].exp_real_params.analog_gain;
+                }
+                if(curExp->HdrExp[i].exp_real_params.digital_gain < 1.0) {
+                    stExpInfo.arDGain[i] = 1.0;
+                } else {
+                    LOGW_ANR("hdr mode dgain is wrong, use 1.0 instead\n");
+                    stExpInfo.arDGain[i] = curExp->HdrExp[i].exp_real_params.digital_gain;
+                }
                 stExpInfo.arTime[i] = curExp->HdrExp[i].exp_real_params.integration_time;
                 stExpInfo.arIso[i] = stExpInfo.arAGain[i] * stExpInfo.arDGain[i] * 50;
 
@@ -203,8 +209,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     } else {
         pAblcCtx->ProcRes.isNeedUpdate = false;
     }
-    memcpy(&pAblcProcResParams->ablc_proc_res, &pAblcCtx->ProcRes, sizeof(AblcProc_t));
 
+    memcpy(&pAblcProcResParams->ablc_proc_res, &pAblcCtx->ProcRes, sizeof(AblcProc_t));
     pAblcCtx->isReCalculate = 0;
 
     LOG1_ABLC("%s: (exit)\n", __FUNCTION__ );

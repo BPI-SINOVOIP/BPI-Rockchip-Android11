@@ -20,15 +20,21 @@
 #ifndef _RK_AIQ_TYPES_ALSC_ALGO_PRVT_H_
 #define _RK_AIQ_TYPES_ALSC_ALGO_PRVT_H_
 
-#include "alsc/rk_aiq_types_alsc_algo_int.h"
-#include "RkAiqCalibDbTypes.h"
-#include "RkAiqCalibDbTypesV2.h"
+#include "rk_aiq_types.h"
+#include "rk_aiq_types_alsc_algo_int.h"
+#include "alsc_head.h"
 #include "xcam_log.h"
 #include "xcam_common.h"
 #include "list.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 typedef const CalibDbV2_LscTableProfile_t* pLscTableProfile_t;
+
+typedef struct lsc_matrix
+{
+    Cam17x17UShortMatrix_t  LscMatrix[CAM_4CH_COLOR_COMPONENT_MAX];
+} lsc_matrix_t;
 
 /** @brief store LSC recent/last results*/
 typedef struct alsc_rest_s {
@@ -39,36 +45,14 @@ typedef struct alsc_rest_s {
     uint32_t resIdx;
     pLscTableProfile_t pLscProfile1;
     pLscTableProfile_t pLscProfile2;
-    CamLscMatrix_t undampedLscMatrixTable;
-    CamLscMatrix_t dampedLscMatrixTable;
+    lsc_matrix_t undampedLscMatrixTable;
+    lsc_matrix_t dampedLscMatrixTable;
 } alsc_rest_t;
 
 typedef struct illu_node_s {
     void*        p_next;       /**< for adding to a list */
     unsigned int value;
 } illu_node_t;
-
-#if 0
-typedef const CalibDb_LscTableProfile_t* pLscTableProfile_t;
-typedef pLscTableProfile_t*  pLscTableProfileVig_t;
-typedef pLscTableProfileVig_t*  pLscTableProfileVigIll_t;
-typedef pLscTableProfileVigIll_t*  pLscTableProfileVigIllRes_t;
-typedef pLscTableProfileVigIllRes_t*  pLscTableProfileVigIllResUC_t;
-
-typedef struct alsc_context_s {
-    const CalibDb_Lsc_t *calibLsc;//profile para
-    pLscTableProfileVigIllResUC_t pLscTableAll;// reorder para , const CalibDb_LscTableProfile_t *pLscTableAll[USED_FOR_CASE_MAX][LSC_RESOLUTIONS_NUM_MAX][LSC_ILLUMINATION_MAX][LSC_PROFILES_NUM_MAX];
-    CalibDb_ResolutionName_t  curResName;
-    alsc_sw_info_t alscSwInfo;
-    alsc_rest_t alscRest;
-    rk_aiq_lsc_cfg_t lscHwConf; //hw para
-    unsigned int count;
-    //ctrl & api
-    rk_aiq_lsc_attrib_t mCurAtt;
-    rk_aiq_lsc_attrib_t mNewAtt;
-    bool updateAtt;
-} alsc_context_t ;
-#else
 
 typedef struct alsc_illu_case_resolution {
     resolution_t resolution;
@@ -124,8 +108,10 @@ typedef struct alsc_context_s {
     rk_aiq_lsc_attrib_t mCurAtt;
     rk_aiq_lsc_attrib_t mNewAtt;
     bool updateAtt;
+
+    //in some cases, the scene does not change, so it doesn't need to calculate in every frame;
+    bool auto_mode_need_run_algo;
 } alsc_context_t ;
-#endif
 
 typedef alsc_context_t* alsc_handle_t ;
 

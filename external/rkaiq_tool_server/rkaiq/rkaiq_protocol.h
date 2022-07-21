@@ -25,15 +25,16 @@ class RKAiqProtocol
     static void HandlerTCPMessage(int sockfd, char* buffer, int size);
     static void HandlerCheckDevice(int sockfd, char* buffer, int size);
     static void HandlerReceiveFile(int sockfd, char* buffer, int size);
+    static void HandlerOfflineRawProcess(int sockfd, char* buffer, int size);
     static int MessageForward(int sockfd, char* buffer, int size);
     static int doMessageForward(int sockfd);
-    static int ConnectAiq();
-    static void DisConnectAiq();
+    static int offlineRawProcess();
     static void KillApp();
     static int StartApp();
     static int StartRTSP();
     static int StopRTSP();
     static void Exit();
+    static std::unique_ptr<std::thread> offlineRawThread;
 
   private:
     static std::mutex mutex_;

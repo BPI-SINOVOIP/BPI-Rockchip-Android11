@@ -25,6 +25,7 @@ bootstrap_go_package {
 
 subdirs = [
     "algos",
+    "algos_camgroup",
     "iq_parser_v2",
 ]
 
@@ -60,9 +61,11 @@ cc_library_shared {
         "hwi",
         "hwi/isp20",
         "hwi/isp21",
+        "hwi/isp3x",
         "iq_parser",
         "iq_parser_v2",
         "uAPI",
+        "uAPI/include",
         "uAPI2",
         "ipc_server",
         "include",
@@ -74,7 +77,6 @@ cc_library_shared {
         "include/iq_parser",
         "include/iq_parser_v2",
         "include/iq_parser_v2/j2s",
-        "include/uAPI",
         "include/uAPI2",
         "include/ipc_server",
     ],
@@ -92,18 +94,17 @@ cc_library_shared {
     srcs: [
         // AIQ_CORE_SRC
         "aiq_core/RkAiqHandle.cpp",
+        "aiq_core/RkAiqCamgroupHandle.cpp",
         "aiq_core/algo_handlers/*.cpp",
-        "aiq_core/RkAiqHandleInt.cpp",
-        "aiq_core/RkAiqHandleIntV21.cpp",
+        "aiq_core/algo_camgroup_handlers/*.cpp",
         "aiq_core/RkAiqCore.cpp",
-        "aiq_core/RkAiqCoreV21.cpp",
         "aiq_core/RkLumaCore.cpp",
 
-        "aiq_core/RkAiqSharedDataManager.cpp",
         "aiq_core/MessageBus.cpp",
         "aiq_core/RkAiqAnalyzeGroupManager.cpp",
         "aiq_core/RkAiqResourceTranslator.cpp",
         "aiq_core/RkAiqResourceTranslatorV21.cpp",
+        "aiq_core/RkAiqResourceTranslatorV3x.cpp",
         "aiq_core/thumbnails.cpp",
 
         // ALGO_COMMON_SRC
@@ -112,7 +113,6 @@ cc_library_shared {
         // COMMON_SRC
         "common/mediactl/mediactl.c",
         "common/gen_mesh/genMesh.cpp",
-        "common/shared_data_api_wrapper.cpp",
         "common/code_to_pixel_format.cpp",
         "common/media_buffer/media_buffer.c",
         "common/media_buffer/media_buffer_pool.c",
@@ -121,6 +121,7 @@ cc_library_shared {
         "hwi/CamHwBase.cpp",
         "hwi/isp20/CamHwIsp20.cpp",
         "hwi/isp21/CamHwIsp21.cpp",
+        "hwi/isp3x/CamHwIsp3x.cpp",
         "hwi/isp20/Isp20Params.cpp",
         "hwi/isp20/Isp20StatsBuffer.cpp",
         "hwi/isp20/Isp20_module_dbg.cpp",
@@ -131,6 +132,7 @@ cc_library_shared {
         "hwi/isp20/RawStreamCapUnit.cpp",
         "hwi/isp20/RawStreamProcUnit.cpp",
         "hwi/isp20/SPStreamProcUnit.cpp",
+        "hwi/isp20/PdafStreamProcUnit.cpp",
         "hwi/isp20/NrStatsStream.cpp",
         "hwi/isp20/TnrStatsStream.cpp",
         "hwi/isp20/NrStreamProcUnit.cpp",
@@ -139,6 +141,9 @@ cc_library_shared {
         "hwi/isp20/CaptureRawData.cpp",
         "hwi/image_processor.cpp",
         "hwi/isp20/Isp20Evts.cpp",
+        "hwi/fakecamera/FakeCamHwIsp20.cpp",
+        "hwi/fakecamera/FakeSensorHw.cpp",
+        "hwi/IspParamsSplitter.cpp",
 
         // IQ_PARSER_SRC
         "iq_parser/RkAiqCalibParser.cpp",
@@ -160,11 +165,11 @@ cc_library_shared {
         "iq_parser_v2/edgefilter_xml2json_v1.cpp",
 
         // UAPI_SRC
-        "uAPI/rk_aiq_user_api_sysctl.cpp",
         "uAPI2/rk_aiq_user_api2_sysctl.cpp",
-        "uAPI/rk_aiq_user_api_debug.cpp",
+        "uAPI2/rk_aiq_user_api2_debug.cpp",
         "uAPI2/rk_aiq_user_api2_helper.cpp",
         "uAPI2/rk_aiq_user_api2_wrapper.cpp",
+        "common/rkaiq_ini.c",
 
         // XCORE_SRC
         "xcore/xcam_common.cpp",
@@ -177,6 +182,7 @@ cc_library_shared {
         "xcore/buffer_pool.cpp",
         "xcore/poll_thread.cpp",
         "xcore/smart_buffer_priv.cpp",
+        "xcore/fake_v4l2_device.cpp",
 
         // IPC_SERVER_SRC
         "ipc_server/socket_server.cpp",
@@ -186,14 +192,17 @@ cc_library_shared {
         "ipc_server/rkaiq_tool_sharp.cpp",
         "ipc_server/rkaiq_tool_sysctl.cpp",
         "ipc_server/command_process.cpp",
+        "ipc_server/MessageParser.cpp",
 
         "RkAiqManager.cpp",
+		"RkAiqCamGroupManager.cpp"
     ],
 
     static_libs: [
         "librkaiq_ae",
         "librkaiq_awb",
         "librkaiq_af",
+        "librkaiq_pdaf",
         "librkaiq_amerge",
         "librkaiq_atmo",
         "librkaiq_anr",
@@ -216,7 +225,7 @@ cc_library_shared {
         "librkaiq_aldch",
         "librkaiq_alsc",
         "librkaiq_aorb",
-        "librkaiq_ar2y",
+        "librkaiq_acsm",
         "librkaiq_awdr",
         "librkaiq_adrc",
         "librkaiq_asharp_v3",
@@ -231,7 +240,17 @@ cc_library_shared {
         "librkaiq_mfnr_v1",
         "librkaiq_aeis",
         "libgenMeshLib",
-        "libiq_parser_v2"
+        "libiq_parser_v2",
+        "librkaiq_aynr_v3",
+        "librkaiq_acnr_v2",
+        "librkaiq_asharp_v4",
+        "librkaiq_abayer2dnr_v2",
+        "librkaiq_abayertnr_v2",
+        "librkaiq_again_v2",
+        "librkaiq_acac",
+        "librkaiq_camgroup_ae",
+        "librkaiq_camgroup_awb",
+        "librkaiq_camgroup_misc",
     ],
 
     cflags: [
@@ -283,6 +302,8 @@ cc_library_shared {
         "-frtti",
         "-std=c++11",
         "-DANDROID_OS",
+        "-DRKAIQ_ENABLE_PARSER_V1",
+        "-DRKAIQ_ENABLE_CAMGROUP",
     ],
 
     export_include_dirs: [
@@ -290,21 +311,24 @@ cc_library_shared {
         "xcore/base",
         "aiq_core",
         "algos",
+        "algos_camgroup",
         "hwi",
         "iq_parser",
         "iq_parser_v2",
         "uAPI",
+        "uAPI/include",
         "uAPI2",
         "common",
         "include",
         "include/iq_parser",
         "include/iq_parser_v2",
         "include/iq_parser_v2/j2s",
-        "include/uAPI",
         "include/xcore",
         "include/common",
         "include/common/mediactl",
         "include/xcore/base",
         "include/algos",
+        "include/ipc_server",
+        "ipc_server",
     ],
 }

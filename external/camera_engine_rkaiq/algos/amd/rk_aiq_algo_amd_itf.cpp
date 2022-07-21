@@ -17,12 +17,13 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "amd/rk_aiq_algo_amd_itf.h"
 #include "xcam_log.h"
 #include "amd/rk_aiq_types_algo_amd_prvt.h"
 #include "md_lib/motion_detect.h"
 #include "media_buffer/media_buffer_pool.h"
+#include "rk_aiq_algo_types.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -34,16 +35,14 @@ static int gain_blk_isp_stride;
 static XCamReturn
 create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
-    const AlgoCtxInstanceCfgInt* cfg_int = (const AlgoCtxInstanceCfgInt*)cfg;
     RkAiqAlgoContext *ctx = new RkAiqAlgoContext();
     if (ctx == NULL) {
         LOGE_AMD( "%s: create amd context fail!\n", __FUNCTION__);
         return XCAM_RETURN_ERROR_MEM;
     }
     memset(ctx, 0, sizeof(RkAiqAlgoContext));
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
-    ctx->amdCtx.calib = cfgInt->calib;
-    ctx->amdCtx.calibv2 = cfgInt->calibv2;
+    ctx->amdCtx.calib = cfg->calib;
+    ctx->amdCtx.calibv2 = cfg->calibv2;
 
     if (ctx->amdCtx.calib) {
         CalibDb_MFNR_t *calib_mfnr =
@@ -94,18 +93,18 @@ destroy_context(RkAiqAlgoContext *context)
 static XCamReturn
 prepare(RkAiqAlgoCom* params)
 {
-    RkAiqAlgoConfigAmdInt* pCfgParam = (RkAiqAlgoConfigAmdInt*)params;
+    RkAiqAlgoConfigAmd* pCfgParam = (RkAiqAlgoConfigAmd*)params;
     RkAiqAlgoContext* ctx = params->ctx;
 
 	if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )){
-        if (pCfgParam->rk_com.u.prepare.calib) {
+        if (pCfgParam->com.u.prepare.calib) {
             CalibDb_MFNR_t *calib_mfnr =
-                (CalibDb_MFNR_t*)(CALIBDB_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calib, mfnr));
+                (CalibDb_MFNR_t*)(CALIBDB_GET_MODULE_PTR(pCfgParam->com.u.prepare.calib, mfnr));
             if (!calib_mfnr)
                LOGE_AMD( "%s: get calib_mfnr fail!\n", __FUNCTION__);
-        } else if (pCfgParam->rk_com.u.prepare.calibv2) {
+        } else if (pCfgParam->com.u.prepare.calibv2) {
             CalibDbV2_MFNR_t* calibv2_mfnr =
-                    (CalibDbV2_MFNR_t*)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calibv2, mfnr_v1));
+                    (CalibDbV2_MFNR_t*)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->com.u.prepare.calibv2, mfnr_v1));
             if (calibv2_mfnr) {
                 ctx->amdCtx.enable = calibv2_mfnr->TuningPara.motion_detect_en;
                 ctx->amdCtx.motion = (CalibDbV2_MFNR_TuningPara_Motion_t)calibv2_mfnr->TuningPara.Motion;
@@ -118,10 +117,10 @@ prepare(RkAiqAlgoCom* params)
     if (!ctx->amdCtx.enable)
         return XCAM_RETURN_NO_ERROR;
 
-    ctx->amdCtx.imgAlignedW = pCfgParam->amd_config_com.spAlignedW;
-    ctx->amdCtx.imgAlignedH = pCfgParam->amd_config_com.spAlignedH;
-    ctx->amdCtx.imgWidth = pCfgParam->amd_config_com.spWidth;
-    ctx->amdCtx.imgHeight = pCfgParam->amd_config_com.spHeight;
+    ctx->amdCtx.imgAlignedW = pCfgParam->spAlignedW;
+    ctx->amdCtx.imgAlignedH = pCfgParam->spAlignedH;
+    ctx->amdCtx.imgWidth = pCfgParam->spWidth;
+    ctx->amdCtx.imgHeight = pCfgParam->spHeight;
 
     int gain_blk_isp_w                      = ctx->amdCtx.imgWidth;
     gain_blk_isp_stride                     = ((gain_blk_isp_w + 15) / 16) * 16;
@@ -209,10 +208,9 @@ XCamReturn select_motion_params_by_iso(Mt_Params_Select_t *motion_params_selecte
 static XCamReturn
 processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
-    RkAiqAlgoProcResAmd* res_com = (RkAiqAlgoProcResAmd*)outparams;
-    RkAiqAlgoProcResAmdInt* res_int = (RkAiqAlgoProcResAmdInt*)outparams;
+    RkAiqAlgoProcResAmd* res = (RkAiqAlgoProcResAmd*)outparams;
     RkAiqAlgoContext* ctx = inparams->ctx;
-    RkAiqAlgoProcAmdInt *pAmdProcParams = (RkAiqAlgoProcAmdInt*)inparams;
+    RkAiqAlgoProcAmd *pAmdProcParams = (RkAiqAlgoProcAmd*)inparams;
     rk_aiq_amd_algo_stat_t *stats = &pAmdProcParams->stats;
     int ISO = 50;
 
@@ -289,7 +287,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     ctx->amdCtx.cur_index = (ctx->amdCtx.cur_index + 1) % AMD_RATIO_BUF_NUM;
 #endif
     ctx->amdCtx.params.st_ratio = mediabuf;
-    res_com->amd_proc_res = ctx->amdCtx.params;
+    res->amd_proc_res = ctx->amdCtx.params;
     return XCAM_RETURN_NO_ERROR;
 }
 

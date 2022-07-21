@@ -17,6 +17,9 @@ TEE_Result rk_otp_read(uint32_t offset, uint8_t *data, uint32_t len)
 	uint32_t paramtypes;
 	TEE_UUID uuid = RK_OS_SERVICE_UUID;
 
+	if (!data || len == 0)
+		return TEE_ERROR_BAD_PARAMETERS;
+
 	paramtypes = TEE_PARAM_TYPES(TEE_PARAM_TYPE_NONE,
 				     TEE_PARAM_TYPE_NONE,
 				     TEE_PARAM_TYPE_NONE,
@@ -59,6 +62,9 @@ TEE_Result rk_otp_write(uint32_t offset, uint8_t *data, uint32_t len)
 	uint32_t paramtypes;
 	TEE_UUID uuid = RK_OS_SERVICE_UUID;
 
+	if (!data || len == 0)
+		return TEE_ERROR_BAD_PARAMETERS;
+
 	paramtypes = TEE_PARAM_TYPES(TEE_PARAM_TYPE_NONE,
 				     TEE_PARAM_TYPE_NONE,
 				     TEE_PARAM_TYPE_NONE,
@@ -100,6 +106,9 @@ TEE_Result rk_otp_size(uint32_t *otp_size)
 	TEE_Param params[4];
 	uint32_t paramtypes;
 	TEE_UUID uuid = RK_OS_SERVICE_UUID;
+
+	if (!otp_size)
+		return TEE_ERROR_BAD_PARAMETERS;
 
 	paramtypes = TEE_PARAM_TYPES(TEE_PARAM_TYPE_NONE,
 				     TEE_PARAM_TYPE_NONE,

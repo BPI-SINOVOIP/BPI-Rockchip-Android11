@@ -21,8 +21,7 @@
 #define _RK_AIQ_TYPE_ADEGAMMA_ALGO_INT_H_
 #include "adegamma/rk_aiq_types_adegamma_algo.h"
 #include "RkAiqCalibDbTypes.h"
-#include "RkAiqCalibDbTypesV2.h"
-
+#include "adegamma_head.h"
 
 #define DEGAMMA_CRUVE_KNOTS                   (17)
 #define DEGAMMA_CRUVE_X_KNOTS                 (16)

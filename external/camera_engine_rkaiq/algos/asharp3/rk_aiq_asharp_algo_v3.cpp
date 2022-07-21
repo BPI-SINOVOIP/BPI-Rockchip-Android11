@@ -1,6 +1,7 @@
 
 #include "rk_aiq_asharp_algo_v3.h"
 #include "rk_aiq_asharp_algo_itf_v3.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 

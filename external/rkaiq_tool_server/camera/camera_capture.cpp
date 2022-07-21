@@ -194,6 +194,7 @@ void start_capturing(struct capture_info* cap_info)
             /* Nothing to do. */
             break;
         case IO_METHOD_MMAP:
+            LOG_DEBUG("IO_METHOD_MMAP, buffer number:%d\n", cap_info->n_buffers);
             for (i = 0; i < cap_info->n_buffers; ++i) {
                 struct v4l2_buffer buf;
                 CLEAR(buf);

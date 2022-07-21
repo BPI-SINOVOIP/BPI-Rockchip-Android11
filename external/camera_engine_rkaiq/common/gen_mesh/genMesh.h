@@ -144,75 +144,31 @@ void calcLdchMaxLevel(LdchParams &ldchParams, CameraCoeff &camCoeff);
 */
 bool genLDCMeshNLevel(LdchParams &ldchParams, CameraCoeff &camCoeff, int level, unsigned short *pMeshX);
 
-
 /* =============================================================================================================================================================================== */
 
-/* LDCH + FEC(scale)--初始化:
-	1）LDCH的图像宽高: ldchW, ldchH, 如: 3840*2160
-	2）对输入FEC的图像做缩放, 如: 3840*2160 --> 缩放到1920*1080
-	   i)做缩放后的FEC的图像宽高: fecW, fecH
-*/
-void genScaleMeshInit(int ldchW, int ldchH, int fecW, int fecH, LdchParams &ldchParams, FecParams &fecParams, CameraCoeff &camCoeff1, CameraCoeff &camCoeff2);
+/* 输出图像的ROI区域相关参数 */
+struct RoiParams
+{
+	int startW;		/* ROI区域的起始点 */
+	int startH;
+	int roiW;		/* ROI区域的宽高 */
+	int roiH;
+};
 
-/* LDCH + FEC(scale)--反初始化 */
-void genScaleMeshDeInit(LdchParams &ldchParams, FecParams &fecParams);
+/* 根据输出图像的ROI参数，对FEC mesh进行裁剪, 得到最终需求的尺寸 */
+bool cropFecMesh(FecParams &fecParams, RoiParams &roiParams, int level, unsigned short *pCropMeshXI, unsigned char *pCropMeshXF, unsigned short *pCropMeshYI, unsigned char *pCropMeshYF);
 
-/* LDCH + FEC(scale)--mesh 内存申请 */
-void mallocScaleMesh(int ldchMeshSize, unsigned short **pLdchMeshX,
-	int fecMeshSize, unsigned short **pFecMeshXI, unsigned char **pFecMeshXF, unsigned short **pFecMeshYI, unsigned char **pFecMeshYF);
+/* 根据输出图像的ROI参数，对LDCH mesh进行裁剪, 得到最终需求的尺寸 */
+bool cropLdchMesh(LdchParams &ldchParams, RoiParams &roiParams, int level, unsigned short *pMeshX, unsigned short *pRoiMeshX);
 
-/* LDCH + FEC(scale)--mesh 内存释放 */
-void freeScaleMesh(unsigned short *pLdchMeshX, unsigned short *pFecMeshXI, unsigned char *pFecMeshXF, unsigned short *pFecMeshYI, unsigned char *pFecMeshYF);
+/* FEC: 初始化, 用于8k ---> 2个4k */
+void genFecMeshInit8kTo4k(int srcW, int srcH, int dstW, int dstH, int margin,
+	CameraCoeff &camCoeff, CameraCoeff &camCoeff_left, CameraCoeff &camCoeff_right,
+	FecParams &fecParams, FecParams &fecParams_left, FecParams &fecParams_right);
 
-/* LDCH + FEC(scale):
-函数功能: 生成mesh映射表, 用于ISP的LDCH(x方向)和FEC(y方向)
-	输入:
-	1）LDCH&FEC映射表的相关参数, 申请需要的buffer: LdchParams &ldchParams, FecParams &fecParams
-	2）相机标定参数: CameraCoeff &camCoeff
-	3）需要校正的程度: level(0-255: 0表示校正程度为0%, 255表示校正程度为100%)
-	输出:
-	1）bool 是否成功生成
-	2）LDCH映射表: pMeshX
-	3）FEC映射表: pMeshXI, pMeshXF, pMeshYI, pMeshYF
-*/
-bool genScaleMeshNLevel(LdchParams &ldchParams, FecParams &fecParams, CameraCoeff &camCoeff1, CameraCoeff &camCoeff2, int level,
-	unsigned short *pMeshX, unsigned short *pMeshXI, unsigned char *pMeshXF, unsigned short *pMeshYI, unsigned char *pMeshYF);
-
-/* =============================================================================================================================================================================== */
-
-/* LDCH + FEC(crop + scale)--初始化:
-	输入:
-	1）LDCH的图像宽高: ldchW, ldchH, 如: 3840*2160
-	2）对输入FEC的图像先在任意位置(pW,pH)crop得到任意size(roiW*roiH), 再做缩放, 如: 3840*2160 --> 在(100,100)点处进行crop得到(1600*900) --> 缩放到1920*1080
-	   i)  crop的起始点位置: pW, pH
-	   ii) crop区域的宽高: roiW, roiH
-	   iii)做缩放后的FEC的图像宽高: fecW, fecH
-*/
-void genCropScaleMeshInit(int ldchW, int ldchH, double pW, double pH, int roiW, int roiH, int fecW, int fecH,
-	LdchParams &ldchParams, FecParams &fecParams, CameraCoeff &camCoeff1, CameraCoeff &camCoeff2);
-
-/* LDCH + FEC(crop + scale)--反初始化 */
-void genCropScaleMeshDeInit(LdchParams &ldchParams, FecParams &fecParams);
-
-/* LDCH + FEC(crop + scale)--mesh 内存申请 */
-void mallocCropScaleMesh(int ldchMeshSize, unsigned short **pLdchMeshX,
-	int fecMeshSize, unsigned short **pFecMeshXI, unsigned char **pFecMeshXF, unsigned short **pFecMeshYI, unsigned char **pFecMeshYF);
-
-/* LDCH + FEC(crop + scale)--mesh 内存释放 */
-void freeCropScaleMesh(unsigned short *pLdchMeshX, unsigned short *pFecMeshXI, unsigned char *pFecMeshXF, unsigned short *pFecMeshYI, unsigned char *pFecMeshYF);
-
-/* LDCH + FEC(crop + scale):
-函数功能: 生成mesh映射表, 用于ISP的LDCH(x方向)和FEC(y方向)
-	输入:
-	1）LDCH&FEC映射表的相关参数, 申请需要的buffer: LdchParams &ldchParams, FecParams &fecParams
-	2）相机标定参数: CameraCoeff &camCoeff
-	3）需要校正的程度: level(0-255: 0表示校正程度为0%, 255表示校正程度为100%)
-	输出:
-	1）bool 是否成功生成
-	2）LDCH映射表: pMeshX
-	3）FEC映射表: pMeshXI, pMeshXF, pMeshYI, pMeshYF
-*/
-bool genCropScaleMeshNLevel(LdchParams &ldchParams, FecParams &fecParams, CameraCoeff &camCoeff1, CameraCoeff &camCoeff2, int level,
-	unsigned short *pMeshX, unsigned short *pMeshXI, unsigned char *pMeshXF, unsigned short *pMeshYI, unsigned char *pMeshYF);
+/* LDCH: 8k ---> 2个4k */
+void genLdchMeshInit8kTo4k(int srcW, int srcH, int dstW, int dstH, int margin,
+	CameraCoeff &camCoeff, CameraCoeff &camCoeff_left, CameraCoeff &camCoeff_right,
+	LdchParams &ldchParams, LdchParams &ldchParams_left, LdchParams &ldchParams_right);
 
 #endif // !__GENMESH_H__

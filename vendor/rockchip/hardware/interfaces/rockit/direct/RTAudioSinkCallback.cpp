@@ -54,9 +54,7 @@ int32_t RTAudioSinkCallback::open(void *param) {
     int bufferCount = DEFAULT_AUDIOSINK_BUFFERCOUNT;
     int32_t enable = getEnableAudioSetting();
 
-    /*  if current audio stream is mixer output, we set more buffer for audioTrack */
-    audio_output_flags_t flags = (audio_output_flags_t)mAudioSinkParam.flags;
-    if((flags == AUDIO_OUTPUT_FLAG_NONE) && enable) {
+    if (enable) {
        frameCount = ((unsigned long long)mAudioSinkParam.sampleRate * getAudioSinkPcmMsSetting()) / 1000;
        bufferCount = 0;
     }

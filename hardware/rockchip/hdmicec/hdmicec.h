@@ -199,6 +199,7 @@ struct hdmi_cec_context_t {
 	bool system_control;
 	int phy_addr;
 	bool hotplug;
+	bool cec_init;
 };
 
 void init_uevent_thread(hdmi_cec_context_t* ctx);

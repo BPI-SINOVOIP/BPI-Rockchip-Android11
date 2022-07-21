@@ -20,6 +20,9 @@ case $1 in
 	21)
 		set_isp_hw $1
 		;;
+	30)
+		set_isp_hw $1
+		;;
 	*)
 		echo "Wrong ISP HW VERSION !"
 		usage

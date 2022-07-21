@@ -19,6 +19,7 @@
 #ifndef _CAM_HW_ISP20_H_
 #define _CAM_HW_ISP20_H_
 
+#include <linux/rk-video-format.h>
 #include "CamHwBase.h"
 #include "Isp20Params.h"
 #include "SensorHw.h"
@@ -28,6 +29,7 @@
 #include "RawStreamCapUnit.h"
 #include "RawStreamProcUnit.h"
 #include "SPStreamProcUnit.h"
+#include "PdafStreamProcUnit.h"
 #include "TnrStreamProcUnit.h"
 #include "NrStreamProcUnit.h"
 #include "FecParamStream.h"
@@ -35,7 +37,31 @@
 
 struct media_device;
 
+/*
+ * [sub modules]: use bits 4-11 to define the sub modules of each module, the
+ *     specific meaning of each bit is decided by the module itself. These bits
+ *     is designed to implement the sub module's log switch.
+
+ *  ----------------------------
+ * |    sub modules    |  bits  |
+ *  ----------------------------
+ * |  ISP20HW_SUBM     |  0x01  |
+ *  ----------------------------
+ * |  ISP20PARAM_SUBM  |  0x02  |
+ *  ----------------------------
+ * |  SENSOR_SUBM      |  0x04  |
+ *  ----------------------------
+ * |  FL_SUBM          |  0x08  |
+ *  ----------------------------
+ * |  LENS_SUBM        |  0x10  |
+ *  ----------------------------
+ * |  CAPTURERAW_SUBM  |  0x80  |
+ *  ----------------------------
+ */
+
 namespace RkCam {
+
+class IspParamsSplitter;
 
 #define ISP20HW_SUBM (0x1)
 
@@ -46,6 +72,7 @@ class CamHwIsp20
     : public CamHwBase, virtual public Isp20Params, public V4l2Device
     , public isp_drv_share_mem_ops_t {
 public:
+    friend class RawStreamProcUnit;
     explicit CamHwIsp20();
     virtual ~CamHwIsp20();
 
@@ -75,9 +102,10 @@ public:
     XCamReturn getZoomPosition(int& position);
     XCamReturn getLensVcmCfg(rk_aiq_lens_vcmcfg& lens_cfg);
     XCamReturn setLensVcmCfg(rk_aiq_lens_vcmcfg& lens_cfg);
-    XCamReturn setLensVcmCfg();
+    XCamReturn setLensVcmCfg(struct rkmodule_inf& mod_info);
     XCamReturn FocusCorrection();
     XCamReturn ZoomCorrection();
+    XCamReturn setAngleZ(float angleZ);
     virtual void getShareMemOps(isp_drv_share_mem_ops_t** mem_ops);
     uint64_t getIspModuleEnState();
 
@@ -103,6 +131,9 @@ public:
     //should be called after prepare
     XCamReturn get_stream_format(rkaiq_stream_type_t type, struct v4l2_format &format);
     XCamReturn get_sp_resolution(int &width, int &height, int &aligned_w, int &aligned_h);
+    XCamReturn showOtpPdafData(struct rkmodule_pdaf_inf *otp_pdaf);
+    XCamReturn showOtpAfData(struct rkmodule_af_inf *otp_af);
+    bool get_pdaf_support();
     virtual XCamReturn setIspStreamMode(rk_isp_stream_mode_t mode) {
         if (mode == RK_ISP_STREAM_MODE_ONLNIE) {
             mNoReadBack = true;
@@ -119,6 +150,7 @@ public:
         else
             return RK_ISP_STREAM_MODE_OFFLNIE;
     }
+    void notify_isp_stream_status(bool on);
 private:
     XCamReturn handlePpReslut(SmartPtr<cam3aResult> &result);
     XCamReturn setPpConfig(SmartPtr<cam3aResult> &result);
@@ -131,6 +163,7 @@ private:
     static void findAttachedSubdevs(struct media_device *device, uint32_t count, rk_sensor_full_info_t *s_info);
     XCamReturn setExpDelayInfo(int mode);
     void analyzePpInitEns(SmartPtr<cam3aResult> &result);
+    XCamReturn get_sensor_pdafinfo(rk_sensor_full_info_t *sensor_info, rk_sensor_pdaf_info_t *pdaf_info);
 protected:
     XCAM_DEAD_COPY(CamHwIsp20);
     virtual XCamReturn setIspConfig();
@@ -162,6 +195,8 @@ protected:
 
         struct {
             CalibDbV2_Af_VcmCfg_t vcmcfg;
+            CalibDbV2_Af_LdgParam_t ldg_param;
+            CalibDbV2_Af_HighLightParam_t highlight;
         } af;
 
         struct {
@@ -185,6 +220,8 @@ protected:
     static rk_aiq_isp_hw_info_t mIspHwInfos;
     static rk_aiq_cif_hw_info_t mCifHwInfos;
     static std::map<std::string, SmartPtr<rk_sensor_full_info_t>> mSensorHwInfos;
+    static bool mIsMultiIspMode;
+    static uint16_t mMultiIspExtendedPixel;
     void gen_full_isp_params(const struct isp2x_isp_params_cfg* update_params,
                              struct isp2x_isp_params_cfg* full_params,
                                 uint64_t* module_en_update_partial,
@@ -226,16 +263,17 @@ protected:
     XCamReturn hdr_mipi_start_mode(int mode);
     XCamReturn hdr_mipi_stop();
     XCamReturn hdr_mipi_prepare_mode(int mode);
-    static void allocMemResource(void *ops_ctx, void *config, void **mem_ctx);
-    static void releaseMemResource(void *mem_ctx);
-    static void* getFreeItem(void *mem_ctx);
+    static void allocMemResource(uint8_t id, void *ops_ctx, void *config, void **mem_ctx);
+    static void releaseMemResource(uint8_t id, void *mem_ctx);
+    static void* getFreeItem(uint8_t id, void *mem_ctx);
     uint32_t _isp_module_ens;
     bool mNoReadBack;
     uint64_t ispModuleEns;
     rk_aiq_rotation_t _sharp_fbc_rotation;
 
-    rk_aiq_ldch_share_mem_info_t ldch_mem_info_array[ISP2X_LDCH_BUF_NUM];
+    rk_aiq_ldch_share_mem_info_t ldch_mem_info_array[2*ISP2X_MESH_BUF_NUM];
     rk_aiq_fec_share_mem_info_t fec_mem_info_array[FEC_MESH_BUF_NUM];
+    rk_aiq_cac_share_mem_info_t cac_mem_info_array[2*ISP3X_MESH_BUF_NUM];
     typedef struct drv_share_mem_ctx_s {
         void* ops_ctx;
         void* mem_info;
@@ -243,6 +281,7 @@ protected:
     } drv_share_mem_ctx_t;
     drv_share_mem_ctx_t _ldch_drv_mem_ctx;
     drv_share_mem_ctx_t _fec_drv_mem_ctx;
+    drv_share_mem_ctx_t _cac_drv_mem_ctx;
     Mutex _mem_mutex;
     rk_aiq_rect_t _crop_rect;
     uint32_t _ds_width;
@@ -250,7 +289,7 @@ protected:
     uint32_t _ds_width_align;
     uint32_t _ds_heigth_align;
     uint32_t _exp_delay;
-
+    rk_aiq_lens_descriptor _lens_des;
     //ispp
     SmartPtr<FecParamStream>    mFecParamStream;
     SmartPtr<NrStreamProcUnit>  mNrStreamProcUnit;
@@ -261,9 +300,12 @@ protected:
     SmartPtr<RKStream>          mIspParamStream;
     SmartPtr<RKSofEventStream>  mIspSofStream;
     SmartPtr<SPStreamProcUnit> mSpStreamUnit;
+    SmartPtr<RkStreamEventPollThread> mIspStremEvtTh;
 
     SmartPtr<RawStreamCapUnit> mRawCapUnit;
     SmartPtr<RawStreamProcUnit> mRawProcUnit;
+
+    SmartPtr<PdafStreamProcUnit> mPdafStreamUnit;
 
     SmartPtr<cam3aResult> get_3a_module_result (cam3aResultList &results, int32_t type);
     XCamReturn handleIsp3aReslut(SmartPtr<cam3aResult> &result);
@@ -276,6 +318,17 @@ protected:
     std::map<int, rkisp_effect_params_v20> _effecting_ispparam_map;
     SmartPtr<IspParamsAssembler> mParamsAssembler;
     uint32_t mPpModuleInitEns;
+    bool mVicapIspPhyLinkSupported; // if phsical link between vicap and isp, only isp3x support now
+    SmartPtr<IspParamsSplitter> mParamsSplitter;
+    enum ISP_STREAM_STATUS_E {
+        ISP_STREAM_STATUS_INVALID,
+        ISP_STREAM_STATUS_STREAM_ON,
+        ISP_STREAM_STATUS_STREAM_OFF,
+    };
+    int _isp_stream_status;
+
+    rk_sensor_pdaf_info_t mPdafInfo;
+    Mutex     _stop_cond_mutex;
 };
 
 };

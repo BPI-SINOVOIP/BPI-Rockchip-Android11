@@ -1112,6 +1112,8 @@ static int analogix_dp_loader_protect(struct drm_connector *connector, bool on)
 
 		pm_runtime_get_sync(dp->dev);
 
+		analogix_dp_phy_power_on(dp);
+
 		ret = analogix_dp_detect_sink_psr(dp);
 		if (ret)
 			return ret;
@@ -1380,16 +1382,12 @@ static void analogix_dp_bridge_mode_set(struct drm_bridge *bridge,
 	/* Input video dynamic_range & colorimetry */
 	vic = drm_match_cea_mode(mode);
 	if ((vic == 6) || (vic == 7) || (vic == 21) || (vic == 22) ||
-	    (vic == 2) || (vic == 3) || (vic == 17) || (vic == 18)) {
+	    (vic == 2) || (vic == 3) || (vic == 17) || (vic == 18))
 		video->dynamic_range = CEA;
-		video->ycbcr_coeff = COLOR_YCBCR601;
-	} else if (vic) {
+	else if (vic)
 		video->dynamic_range = CEA;
-		video->ycbcr_coeff = COLOR_YCBCR709;
-	} else {
+	else
 		video->dynamic_range = VESA;
-		video->ycbcr_coeff = COLOR_YCBCR709;
-	}
 
 	/* Input vide bpc and color_formats */
 	switch (display_info->bpc) {
@@ -1409,14 +1407,16 @@ static void analogix_dp_bridge_mode_set(struct drm_bridge *bridge,
 		video->color_depth = COLOR_8;
 		break;
 	}
-	if (display_info->color_formats & DRM_COLOR_FORMAT_YCRCB444)
+	if (display_info->color_formats & DRM_COLOR_FORMAT_YCRCB444) {
 		video->color_space = COLOR_YCBCR444;
-	else if (display_info->color_formats & DRM_COLOR_FORMAT_YCRCB422)
+		video->ycbcr_coeff = COLOR_YCBCR709;
+	} else if (display_info->color_formats & DRM_COLOR_FORMAT_YCRCB422) {
 		video->color_space = COLOR_YCBCR422;
-	else if (display_info->color_formats & DRM_COLOR_FORMAT_RGB444)
+		video->ycbcr_coeff = COLOR_YCBCR709;
+	} else {
 		video->color_space = COLOR_RGB;
-	else
-		video->color_space = COLOR_RGB;
+		video->ycbcr_coeff = COLOR_YCBCR601;
+	}
 
 	/*
 	 * NOTE: those property parsing code is used for providing backward

@@ -472,6 +472,17 @@ config VIDEO_LT6911UXC
 	  To compile this driver as a module, choose M here: the
 	  module will be called lt6911uxc.
 
+config VIDEO_LT7911D
+	tristate "Lontium LT7911D decoder"
+	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API
+	select HDMI
+	select V4L2_FWNODE
+	help
+	  Support for the Lontium LT7911D series type-c DP to MIPI CSI-2 bridge.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called lt7911d.
+
 config VIDEO_LT8619C
 	tristate "Lontium LT8619C decoder"
 	depends on VIDEO_V4L2 && I2C && VIDEO_V4L2_SUBDEV_API
@@ -1497,6 +1508,17 @@ config VIDEO_GC02M2
 	  To compile this driver as a module, choose M here: the
 	  module will be called gc02m2.
 
+config VIDEO_GC030A
+	tristate "GalaxyCore GC030A sensor support"
+	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
+	depends on MEDIA_CAMERA_SUPPORT
+	select V4L2_FWNODE
+	help
+	  Support for the GalaxyCore GC030A sensor.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called gc030A.
+
 config VIDEO_GC0312
 	tristate "GalaxyCore GC0312 sensor support"
 	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
@@ -1893,6 +1915,17 @@ config VIDEO_SC2335
 	  To compile this driver as a module, choose M here: the
 	  module will be called sc2335.
 
+config VIDEO_SC2355
+	tristate "SmartSens SC2355 sensor support"
+	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
+	depends on MEDIA_CAMERA_SUPPORT
+	select V4L2_FWNODE
+	help
+	  Support for the SmartSens SC2355 sensor.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called sc2355.
+
 config VIDEO_SC401AI
 	tristate "SmartSens SC401AI sensor support"
 	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
@@ -1936,6 +1969,17 @@ config VIDEO_SC500AI
 
 	  To compile this driver as a module, choose M here: the
 	  module will be called SC500AI.
+
+config VIDEO_SC530AI
+	tristate "SmartSens SC530AI sensor support"
+	depends on I2C && VIDEO_V4L2 && VIDEO_V4L2_SUBDEV_API
+	depends on MEDIA_CAMERA_SUPPORT
+	select V4L2_FWNODE
+	help
+	  Support for the SmartSens SC530AI sensor.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called SC530AI.
 
 config VIDEO_SC5239
 	tristate "SmartSens SC5239 sensor support"

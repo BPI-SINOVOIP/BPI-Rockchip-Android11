@@ -636,7 +636,6 @@ public class BluetoothFragment extends LeanbackPreferenceFragment implements Pre
             Log.i(TAG,"preferece ! = null");
         }
 
-        initDevicePreference(preference);
         mDevicePreferenceMap.put(cachedDevice, preference);
     }
 
@@ -644,40 +643,11 @@ public class BluetoothFragment extends LeanbackPreferenceFragment implements Pre
         return mPreferenceCache != null ? mPreferenceCache.remove(key) : null;
     }
 
-    void initDevicePreference(BluetoothDevicePreference preference) {
-        /* CachedBluetoothDevice cachedDevice = preference.getCachedDevice();
-        if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
-            // Only paired device have an associated advanced settings screen
-            preference.setOnSettingsClickListener(mDeviceProfilesListener);
-        } */
-    }
-
     void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
         mLocalAdapter.stopScanning();
+        btPreference.setFragmentManager(getFragmentManager());
         btPreference.onClicked();
-
     }
-
-    /* private final View.OnClickListener mDeviceProfilesListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Log.i(TAG, "mDeviceProfilesListener->onClick");
-            // User clicked on advanced options icon for a device in the list
-            if (!(v.getTag() instanceof CachedBluetoothDevice)) {
-                Log.w(TAG, "onClick() called for other View: " + v);
-                return;
-            }
-
-            final CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
-            Bundle args = new Bundle();
-            args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
-                    device.getDevice().getAddress());
-            DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
-            profileSettings.setArguments(args);
-            profileSettings.show(getFragmentManager(),
-                    DeviceProfilesSettings.class.getSimpleName());
-        }
-    }; */
 
     void addCachedDevices() {
         Collection<CachedBluetoothDevice> cachedDevices =

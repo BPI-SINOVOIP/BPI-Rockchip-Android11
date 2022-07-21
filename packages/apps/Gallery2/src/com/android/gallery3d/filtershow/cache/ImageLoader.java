@@ -41,6 +41,7 @@ import com.android.gallery3d.exif.ExifTag;
 import com.android.gallery3d.filtershow.imageshow.MasterImage;
 import com.android.gallery3d.filtershow.pipeline.FilterEnvironment;
 import com.android.gallery3d.filtershow.tools.XmpPresets;
+import com.android.gallery3d.util.FileUtils;
 import com.android.gallery3d.util.XmpUtilHelper;
 
 import java.io.FileNotFoundException;
@@ -99,6 +100,10 @@ public final class ImageLoader {
     public static int getMetadataOrientation(Context context, Uri uri) {
         if (uri == null || context == null) {
             throw new IllegalArgumentException("bad argument to getOrientation");
+        }
+
+        if (FileUtils.FILE_PROVIDER_SCHEME.equals(uri.getHost())) {
+            return ORI_NORMAL;
         }
 
         // First try to find orientation data in Gallery's ContentProvider.

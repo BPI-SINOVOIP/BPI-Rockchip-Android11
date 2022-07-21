@@ -178,7 +178,7 @@ V4l2Device::set_buffer_count (uint32_t buf_count)
 
 
 XCamReturn
-V4l2Device::open ()
+V4l2Device::open (bool nonblock)
 {
     struct v4l2_streamparm param;
 
@@ -191,7 +191,10 @@ V4l2Device::open ()
         XCAM_LOG_DEBUG ("v4l2 device open failed, there's no device name");
         return XCAM_RETURN_ERROR_PARAM;
     }
-    _fd = ::open (_name, O_RDWR);
+    if (nonblock)
+        _fd = ::open (_name, O_RDWR | O_CLOEXEC | O_NONBLOCK);
+    else
+        _fd = ::open (_name, O_RDWR | O_CLOEXEC);
     if (_fd == -1) {
         XCAM_LOG_ERROR ("open device(%s) failed", _name);
         return XCAM_RETURN_ERROR_IOCTL;
@@ -557,6 +560,19 @@ V4l2Device::get_crop (struct v4l2_crop &crop)
 }
 
 XCamReturn
+V4l2Device::set_selection (struct v4l2_selection &select)
+{
+    int ret = 0;
+    XCAM_ASSERT (is_opened());
+    ret = this->io_control (VIDIOC_S_SELECTION, &select);
+    if (ret < 0) {
+        XCAM_LOG_ERROR("videodev (%s) VIDIOC_S_SELECTION failed", XCAM_STR(_name));
+        return XCAM_RETURN_ERROR_IOCTL;
+    }
+    return XCAM_RETURN_NO_ERROR;
+}
+
+XCamReturn
 V4l2Device::set_crop (struct v4l2_crop &crop)
 {
     int ret = 0;
@@ -726,6 +742,7 @@ V4l2Device::stop ()
         /* } */
         /* fini_buffer_pool (); */
         /* release the shared buf between mipi tx and rx */
+#if 0 // moved to fini_buffer_pool, buffer may be requested at prepare stage
         if (_memory_type == V4L2_MEMORY_DMABUF) {
             struct v4l2_requestbuffers request_buf;
             xcam_mem_clear (request_buf);
@@ -737,6 +754,7 @@ V4l2Device::stop ()
                 //return XCAM_RETURN_ERROR_IOCTL;
             }
         }
+#endif
     }
 
     if (_buf_pool.size() > 0)
@@ -988,9 +1006,42 @@ XCamReturn
 V4l2Device::fini_buffer_pool()
 {
     uint32_t i = 0;
+    int32_t tried_time = 0;
 
     for (; i < _buf_pool.size(); i++) {
         release_buffer(_buf_pool [i]);
+    }
+
+    if (_memory_type == V4L2_MEMORY_MMAP) {
+        struct v4l2_requestbuffers request_buf;
+        xcam_mem_clear (request_buf);
+        request_buf.type = _buf_type;
+        request_buf.count = 0;
+        request_buf.memory = _memory_type;
+        do {
+            if (io_control (VIDIOC_REQBUFS, &request_buf) < 0) {
+                usleep (100);
+                XCAM_LOG_ERROR ("device(%s) failed on VIDIOC_REQBUFS, retry %d < 50times", XCAM_STR (_name), tried_time);
+                //return XCAM_RETURN_ERROR_IOCTL;
+            } else {
+                break;
+            }
+        } while(tried_time++ < 50);
+    } else if (_memory_type == V4L2_MEMORY_DMABUF) {
+        struct v4l2_requestbuffers request_buf;
+        xcam_mem_clear (request_buf);
+        request_buf.type = _buf_type;
+        request_buf.count = 0;
+        request_buf.memory = _memory_type;
+        do {
+            if (io_control (VIDIOC_REQBUFS, &request_buf) < 0) {
+                usleep (100);
+                XCAM_LOG_ERROR ("device(%s) failed on VIDIOC_REQBUFS, retry %d < 50times", XCAM_STR (_name), tried_time);
+                //return XCAM_RETURN_ERROR_IOCTL;
+            } else {
+                break;
+            }
+        } while(tried_time++ < 50);
     }
 
     _buf_pool.clear ();
@@ -1205,7 +1256,7 @@ V4l2SubDevice::V4l2SubDevice (const char *name)
 }
 
 XCamReturn
-V4l2SubDevice::subscribe_event (int event)
+V4l2Device::subscribe_event (int event)
 {
     struct v4l2_event_subscription sub;
     int ret = 0;
@@ -1224,7 +1275,7 @@ V4l2SubDevice::subscribe_event (int event)
 }
 
 XCamReturn
-V4l2SubDevice::unsubscribe_event (int event)
+V4l2Device::unsubscribe_event (int event)
 {
     struct v4l2_event_subscription sub;
     int ret = 0;
@@ -1243,7 +1294,7 @@ V4l2SubDevice::unsubscribe_event (int event)
 }
 
 XCamReturn
-V4l2SubDevice::dequeue_event (struct v4l2_event &event)
+V4l2Device::dequeue_event (struct v4l2_event &event)
 {
     int ret = 0;
     XCAM_ASSERT (is_opened());

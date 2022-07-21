@@ -23,7 +23,10 @@ typedef enum {
 	OTP_READ,
 	OTP_WRITE,
 	OTP_SIZE,
+	OTP_NS_READ,
+	OTP_NS_WRITE,
 	TRNG_READ,
+	SOCKET,
 	TEST_NULL,
 } enum_func;
 

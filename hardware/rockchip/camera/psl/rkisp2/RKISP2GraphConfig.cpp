@@ -29,7 +29,6 @@
 #include <linux/v4l2-subdev.h>
 #include <algorithm>
 #include "FormatUtils.h"
-
 #include "MediaEntity.h"
 
 using GCSS::GraphConfigNode;
@@ -76,6 +75,7 @@ const string MEDIACTL_POSTVIEWNAME = "postview";
 
 const string MEDIACTL_STATNAME = "rkisp1-statistics";
 const string MEDIACTL_VIDEONAME_CIF = "stream_cif_dvp_id0";
+const string MEDIACTL_VIDEONAME_CIF_MIPI_ID0 = "stream_cif_mipi_id0";
 
 RKISP2GraphConfig::RKISP2GraphConfig() :
         mManager(nullptr),
@@ -2257,16 +2257,21 @@ void RKISP2GraphConfig::isNeedPathCrop(uint32_t path_input_w,
                              bool& sp_need_crop) {
     // filter the same size
     std::vector<camera3_stream_t*> filterStream;
+    int i = 0;
     for (auto s : outputStream) {
         bool filter = false;
+        LOGD("@ %s : outputStream(%d), width-height(%dx%d)",
+            __FUNCTION__, i, s->width , s->height);
         for (auto f : filterStream) {
             if (s->width == f->width &&
                 s->height == f->height) {
                 filter = true;
                 break;
             }
+            LOGD("@ %s : filterStream, width-height(%dx%d)",
+                __FUNCTION__, f->width , f->height);
         }
-
+        i++;
         if (!filter)
             filterStream.push_back(s);
     }
@@ -2326,6 +2331,35 @@ void RKISP2GraphConfig::cal_crop(uint32_t &src_w, uint32_t &src_h, uint32_t &dst
          ratio_src, ratio_dst,src_w, src_h, dst_w, dst_h);
 }
 
+int RKISP2GraphConfig::get_reso_dist(camera3_stream_t* stream, uint32_t max_width, uint32_t max_height)
+{
+    return abs(int(stream->width - max_width)) +
+           abs(int(stream->height - max_height));
+}
+
+uint32_t RKISP2GraphConfig::find_best_fit_format(camera3_stream_t* stream)
+{
+    std::vector<struct SensorFrameSize> frameSize;
+    int dist;
+    uint32_t cur_best_fit = 0;
+    int cur_best_fit_dist = -1;
+
+    LOGD("@%s : request stream:(%dx%d).", __FUNCTION__, stream->width, stream->height);
+    for (auto itf = mAvailableSensorFormat.begin(); itf != mAvailableSensorFormat.end(); ++itf) {
+        frameSize = itf->second;
+        // travel the frameSize from small to large to get the suitable sensor output
+        for (auto it = frameSize.begin(); it != frameSize.end(); ++it) {
+            dist = get_reso_dist(stream, it->max_width, it->max_height);
+            if ((cur_best_fit_dist == -1 || dist < cur_best_fit_dist)) {
+                cur_best_fit_dist = dist;
+                cur_best_fit = itf->first;
+            }
+        }
+    }
+    LOGD("@%s : cur_best_fit(0x%x).", __FUNCTION__, cur_best_fit);
+    return cur_best_fit;
+}
+
 status_t RKISP2GraphConfig::selectSensorOutputFormat(int32_t cameraId, int &w, int &h, uint32_t &format) {
     camera3_stream_t* stream = NULL;
     w = h = 0;
@@ -2358,7 +2392,9 @@ status_t RKISP2GraphConfig::selectSensorOutputFormat(int32_t cameraId, int &w, i
 
     // default sensor Mbus code
     /* TODO  add format select logic, now just pick the first one*/
-    format = mAvailableSensorFormat.begin()->first;
+    /* Find sensor best fit format*/
+    //format = mAvailableSensorFormat.begin()->first;
+    format = find_best_fit_format(stream);
 
     const RKISP2CameraCapInfo *cap = getRKISP2CameraCapInfo(cameraId);
     const std::vector<struct FrameSize_t>& tuningSupportSize = cap->getSupportTuningSizes();
@@ -2430,6 +2466,7 @@ status_t RKISP2GraphConfig::getSensorMediaCtlConfig(int32_t cameraId,
                                           int32_t testPatternMode,
                                           MediaCtlConfig *mediaCtlConfig) {
     status_t ret = OK;
+    HAL_TRACE_CALL(CAM_GLBL_DBG_HIGH);
 
     string sensorEntityName = "none";
     ret = PlatformData::getCameraHWInfo()->getSensorEntityName(cameraId, sensorEntityName);
@@ -2448,6 +2485,7 @@ status_t RKISP2GraphConfig::getSensorMediaCtlConfig(int32_t cameraId,
         LOGE("@%s, fail to get sensor(%s) MediaEntity", __FUNCTION__, sensorEntityName.c_str());
         return UNKNOWN_ERROR;
     }
+
     std::vector<media_link_desc> links;
     sensorEntity->getLinkDesc(links);
     if (links.size()) {
@@ -2498,6 +2536,7 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
                                           MediaCtlConfig *mediaCtlConfig,
                                           std::vector<camera3_stream_t*>& outputStream)
 {
+    HAL_TRACE_CALL(CAM_GLBL_DBG_HIGH);
     //CIF isp
     if (mSensorLinkedToCIF) {
         LOGI("@%s : sensor link to cif", __FUNCTION__);
@@ -2533,11 +2572,17 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
     string rpName = "none";
     string statsName = "none";
     string paramName = "none";
+    string fbcpathName = "none";
+    string scaleName = "none";
     std::vector<std::string> elementNames;
     PlatformData::getCameraHWInfo()->getMediaCtlElementNames(elementNames);
     struct v4l2_dv_timings timings;
     CLEAR(timings);
     PlatformData::getCameraHWInfo()->getDvTimings(cameraId, timings);
+    struct v4l2_subdev_format aFormat;
+    CLEAR(aFormat);
+    PlatformData::getCameraHWInfo()->getSensorFormat(cameraId, aFormat);
+
     for (auto &it: elementNames) {
         LOGD("elementNames:%s",it.c_str());
         if (it.find("dphy") != std::string::npos &&
@@ -2570,6 +2615,10 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
             statsName = it;
         if (it.find("input-params") != std::string::npos)
             paramName = it;
+        if (it.find("fbcpath") != std::string::npos)
+            fbcpathName = it;
+        if (it.find("scale_ch") != std::string::npos)
+            scaleName = it;
     }
     LOGD("%s: mipName = %s", __FUNCTION__, mipName.c_str());
     LOGD("%s: mipName2 = %s", __FUNCTION__, mipName2.c_str());
@@ -2580,6 +2629,8 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
     LOGD("%s: rpName = %s", __FUNCTION__, rpName.c_str());
     LOGD("%s: statsName = %s", __FUNCTION__, statsName.c_str());
     LOGD("%s: paramName = %s", __FUNCTION__, paramName.c_str());
+    LOGD("%s: fbcpathName = %s", __FUNCTION__, fbcpathName.c_str());
+    LOGD("%s: scaleName = %s", __FUNCTION__, scaleName.c_str());
 
     int ispOutWidth, ispInWidth ,ispOutHeight, ispInHeight;
     uint32_t ispOutFormat ,ispInFormat, videoOutFormat;
@@ -2604,7 +2655,14 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
 
     //Dvp doesn't need this link
     if(mIsMipiInterface){
-        if ((mipName.find("dphy2") != std::string::npos) && (mipName2.find("mipi") != std::string::npos)) {
+        media_device_info info;
+        int ret = mMediaCtl->getMediaDevInfo(info);
+        if (ret != OK) {
+            LOGE("Cannot get media device information.");
+        }
+        LOGE("getMediaDevInfo info.model:%s",info.model);
+        if ((fbcpathName.find("fbcpath") == std::string::npos) && (mipName.find("dphy2") != std::string::npos)
+            && (mipName2.find("mipi") != std::string::npos)) {
             //for dual camera
             if(PlatformData::supportDualVideo()) {
                 addLinkParams(mipName, mipSrcPad, mipName2, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
@@ -2619,14 +2677,68 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
 
                 addLinkParams("rkisp-isp-subdev", 2, "rkisp_mainpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
                 addLinkParams("rkisp-isp-subdev", 2, "rkisp_selfpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+            } else {
+                addLinkParams(mipName, mipSrcPad, mipName2, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 1, "stream_cif_mipi_id0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 2, "stream_cif_mipi_id1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 3, "stream_cif_mipi_id2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 4, "stream_cif_mipi_id3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                mSensorLinkedToCIF = true;
             }
-	    } else {
+	    }else if ((std::string(info.model).find("lvds")!= std::string::npos)&&(mipName.find("dphy") != std::string::npos)
+            && (mipName2.find("mipi") != std::string::npos) && scaleName.find("scale") != std::string::npos) {
+            //for rk3588
+            if(aFormat.format.code == MEDIA_BUS_FMT_UYVY8_2X8) {
+                addLinkParams(mipName, mipSrcPad, mipName2, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 1, "stream_cif_mipi_id0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 2, "stream_cif_mipi_id1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 3, "stream_cif_mipi_id2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 4, "stream_cif_mipi_id3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+
+                addLinkParams(mipName2, 5, "rkcif_scale_ch0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 6, "rkcif_scale_ch1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 7, "rkcif_scale_ch2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 8, "rkcif_scale_ch3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                mSensorLinkedToCIF = true;
+            } else {
+                addLinkParams(mipName, mipSrcPad, mipName2, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 1, "stream_cif_mipi_id0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 2, "stream_cif_mipi_id1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 3, "stream_cif_mipi_id2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 4, "stream_cif_mipi_id3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+
+                addLinkParams(mipName2, 5, "rkcif_scale_ch0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 6, "rkcif_scale_ch1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 7, "rkcif_scale_ch2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 8, "rkcif_scale_ch3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(info.model, 0, "rkisp-isp-subdev", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+
+                addLinkParams("rkisp-isp-subdev", 2, "rkisp_mainpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams("rkisp-isp-subdev", 2, "rkisp_selfpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                // addLinkParams("rkisp-isp-subdev", 2, "rkisp_fbcpath", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+            }
+	    } else if ((std::string(info.model).find("lvds")!= std::string::npos)&&(mipName.find("dphy0") != std::string::npos)
+            && (mipName2.find("mipi") != std::string::npos) && aFormat.format.code == MEDIA_BUS_FMT_UYVY8_2X8) {
+            //for rk356x soc sensor
+                addLinkParams(mipName, mipSrcPad, mipName2, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 1, "stream_cif_mipi_id0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 2, "stream_cif_mipi_id1", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 3, "stream_cif_mipi_id2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                addLinkParams(mipName2, 4, "stream_cif_mipi_id3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
+                mSensorLinkedToCIF = true;
+        }else {
             addLinkParams(mipName, mipSrcPad, csiName, csiSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
             addLinkParams(csiName, csiSrcPad, IspName, ispSinkPad, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
             addLinkParams(csiName, 2, "rkisp_rawwr0", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
             addLinkParams(csiName, 4, "rkisp_rawwr2", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
             addLinkParams(csiName, 5, "rkisp_rawwr3", 0, 1, MEDIA_LNK_FL_ENABLED, mediaCtlConfig);
 	    }
+    }
+    if(mSensorLinkedToCIF){
+		addImguVideoNode(IMGU_NODE_VIDEO, MEDIACTL_VIDEONAME_CIF_MIPI_ID0, mediaCtlConfig);
+		addFormatParams(MEDIACTL_VIDEONAME_CIF_MIPI_ID0, mCurSensorFormat.width, mCurSensorFormat.height,
+				0, V4L2_PIX_FMT_NV12, 0, 0, mediaCtlConfig);
+        return OK;
     }
     // isp input pad format and selection config
     addFormatParams(IspName, ispInWidth, ispInHeight, ispSinkPad, ispInFormat, 0, 0, mediaCtlConfig);
@@ -2682,8 +2794,8 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
         select.flags = 0;
         select.r.left = (ispOutWidth - mpInWidth) / 2;
         select.r.top = (ispOutHeight - mpInHeight) / 2;
-        select.r.width = mpInWidth;
-        select.r.height = mpInHeight;
+        select.r.width = mpInWidth & (~15);
+        select.r.height = mpInHeight & (~7);
         if(!mMpOutputRaw) {
             //for the case: isp output size < app stream size, select isp output
             //size as the vidoe node out output size, may happen in tuning dump raw case
@@ -2699,8 +2811,8 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
         } else {
             select.r.left = 0;
             select.r.top = 0;
-            select.r.width = ispOutWidth;
-            select.r.height = ispOutHeight;
+            select.r.width = ispOutWidth & (~15);
+            select.r.height = ispOutHeight & (~7);
             addSelectionVideoParams(mpName, select, mediaCtlConfig);
             addFormatParams(mpName, ispOutWidth, ispOutHeight, mpSinkPad, videoOutFormat, 0, 0, mediaCtlConfig);
         }
@@ -2730,8 +2842,8 @@ status_t RKISP2GraphConfig::getImguMediaCtlConfig(int32_t cameraId,
             select.flags = 0;
             select.r.left = (ispOutWidth - spInWidth) / 2;
             select.r.top = (ispOutHeight - spInHeight) / 2;
-            select.r.width = spInWidth;
-            select.r.height = spInHeight;
+            select.r.width = spInWidth & (~15);
+            select.r.height = spInHeight & (~7);
             //for the case: isp output size < app stream size, select isp output
             //size as the vidoe node out output size, may happen in tuning dump raw case
             uint32_t videoWidth = spInWidth;
@@ -2775,6 +2887,7 @@ status_t RKISP2GraphConfig::getImguMediaCtlData(int32_t cameraId,
                                           MediaCtlConfig *mediaCtlConfigVideo,
                                           MediaCtlConfig *mediaCtlConfigStill)
 {
+    HAL_TRACE_CALL(CAM_GLBL_DBG_HIGH);
     CheckError((!mediaCtlConfig || !mediaCtlConfigVideo || !mediaCtlConfigStill), \
                BAD_VALUE, "@%s null ptr\n", __FUNCTION__);
 
@@ -2902,8 +3015,8 @@ status_t RKISP2GraphConfig::getImguMediaCtlData(int32_t cameraId,
                 select.flags = 0;
                 select.r.left = (ispOutWidth - nodeWidth) / 2;
                 select.r.top = (ispOutHeight - nodeHeight) / 2;
-                select.r.width = nodeWidth;
-                select.r.height = nodeHeight;
+                select.r.width = nodeWidth & (~15);
+                select.r.height = nodeHeight & (~7);
                 addSelectionVideoParams(name.c_str(), select, mediaCtlConfig);
                 LOGD("pipe log name: %s  crop size %dx%d", name.c_str(), nodeWidth, nodeHeight);
             }
@@ -3109,7 +3222,7 @@ status_t RKISP2GraphConfig::getValue(string &nodeName, uint32_t id, int &value)
  * Dump contents of mediaCtlConfig struct
  */
 void RKISP2GraphConfig::dumpMediaCtlConfig(const MediaCtlConfig &config) const {
-
+    HAL_TRACE_CALL(CAM_GLBL_DBG_HIGH);
     size_t i = 0;
     LOGD("MediaCtl config w=%d ,height=%d"
         ,config.mCameraProps.outputWidth,

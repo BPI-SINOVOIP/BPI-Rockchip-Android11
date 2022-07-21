@@ -16,6 +16,6 @@
 # or attempt to derive any source code from the Software;(e) remove or obscure any copyright,
 # patent, or trademark statement or notices contained in the Software.
 # used for rkisp2.0
-ifneq ($(filter rk1126 rk356x, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk1126 rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 include $(call all-subdir-makefiles)
 endif

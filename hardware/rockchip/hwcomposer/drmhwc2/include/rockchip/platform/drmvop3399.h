@@ -133,7 +133,12 @@ typedef struct DrmVop2Context{
   void Init();
   bool SupportPlatform(uint32_t soc_id);
   int TryHwcPolicy(std::vector<DrmCompositionPlane> *composition,
-                        std::vector<DrmHwcLayer*> &layers, DrmCrtc *crtc, bool gles_policy);
+                   std::vector<DrmHwcLayer*> &layers,
+                   std::vector<PlaneGroup *> &plane_groups,
+                   DrmCrtc *crtc,
+                   bool gles_policy);
+  // Try to assign DrmPlane to display
+  int TryAssignPlane(DrmDevice* drm, const std::map<int,int> map_dpys);
 
  protected:
   int TryOverlayPolicy(std::vector<DrmCompositionPlane> *composition,

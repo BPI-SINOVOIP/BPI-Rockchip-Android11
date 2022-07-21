@@ -35,12 +35,14 @@ MediaController::MediaController(const char *path) :
     CLEAR(mDeviceInfo);
     mEntities.clear();
     mEntityDesciptors.clear();
+    mEntityIdDesciptors.clear();
 }
 
 MediaController::~MediaController()
 {
     LOGI("@%s", __FUNCTION__);
     mEntityDesciptors.clear();
+    mEntityIdDesciptors.clear();
     mEntities.clear();
     close();
 }
@@ -154,7 +156,18 @@ status_t MediaController::getDeviceInfo()
         return UNKNOWN_ERROR;
     }
 
-    LOGI("Media device: %s", mDeviceInfo.driver);
+    LOGI("Media device driver: %s\n"
+         "model: %s\n" "serial: %s\n"
+         "bus info: %s\n"
+         "hw revision: %d\n"
+         "driver version: %d.\n",
+         mDeviceInfo.driver,
+         mDeviceInfo.model,
+         mDeviceInfo.serial,
+         mDeviceInfo.bus_info,
+         mDeviceInfo.hw_revision,
+         mDeviceInfo.driver_version);
+
     return NO_ERROR;
 }
 
@@ -167,20 +180,26 @@ status_t MediaController::enqueueMediaRequest(uint32_t mediaRequestId) {
 status_t MediaController::findEntities()
 {
     status_t status = NO_ERROR;
-    struct media_entity_desc entity;
+    struct media_links_enum linksEnum;
+    struct media_link_desc *links = nullptr;
+    struct media_pad_desc *pads = nullptr;
+    struct media_entity_desc entityDesc;
+    int count = 0;
+    std::shared_ptr<MediaEntity> entity;
 
     // Loop until all media entities are found
-    for (int i = 0; ; i++) {
-        CLEAR(entity);
-        status = findMediaEntityById(i | MEDIA_ENT_ID_FLAG_NEXT, entity);
-        if (status != NO_ERROR) {
-            LOGD("@%s: %d media entities found", __FUNCTION__, i);
-            break;
-        }
-        mEntityDesciptors.insert(std::make_pair(entity.name, entity));
+    CLEAR(entityDesc);
+    CLEAR(linksEnum);
+    entityDesc.id |= MEDIA_ENT_ID_FLAG_NEXT;
+    while (xioctl(MEDIA_IOC_ENUM_ENTITIES, &entityDesc) >= 0) {
+        mEntityDesciptors.insert(std::make_pair(entityDesc.name, entityDesc));
+        mEntityIdDesciptors.insert(std::make_pair(entityDesc.id, entityDesc));
         LOGI("entity name: %s, id: %d, pads: %d, links: %d",
-              entity.name, entity.id, entity.pads, entity.links);
+              entityDesc.name, entityDesc.id, entityDesc.pads, entityDesc.links);
+        entityDesc.id |= MEDIA_ENT_ID_FLAG_NEXT;
+        count++;
     }
+    LOGD("@%s: %d media entities found", __FUNCTION__, count);
 
     if (mEntityDesciptors.size() > 0)
         status = NO_ERROR;
@@ -193,19 +212,24 @@ status_t MediaController::getEntityNameForId(unsigned int entityId, std::string 
     LOGI("@%s", __FUNCTION__);
     status_t status = UNKNOWN_ERROR;
 
-    if (mEntityDesciptors.empty()) {
-        LOGE("No media descriptors");
+    if (mEntityIdDesciptors.empty()) {
+        LOGW("No media Id descriptors, try use mEntityDesciptors!");
+        if (mEntityDesciptors.empty()) {
+            LOGE("No media descriptors");
+            return UNKNOWN_ERROR;
+        }
+
+        for (const auto &entityDesciptors : mEntityDesciptors) {
+            if (entityId == entityDesciptors.second.id) {
+                entityName = entityDesciptors.second.name;
+                return NO_ERROR;
+            }
+        }
         return UNKNOWN_ERROR;
     }
+    entityName = mEntityIdDesciptors.find(entityId)->second.name;
 
-    for (const auto &entityDesciptors : mEntityDesciptors) {
-        if (entityId == entityDesciptors.second.id) {
-            entityName = entityDesciptors.second.name;
-            return NO_ERROR;
-        }
-    }
-
-    return status;
+    return NO_ERROR;
 }
 
 /**
@@ -280,17 +304,51 @@ status_t MediaController::findMediaEntityById(int index, struct media_entity_des
     int ret = 0;
     CLEAR(mediaEntityDesc);
     mediaEntityDesc.id = index;
-    ret = xioctl(MEDIA_IOC_ENUM_ENTITIES, &mediaEntityDesc);
-    if (ret < 0) {
-        LOGW("Enumerating entities failed: %s", strerror(errno));
+
+    if (mEntityIdDesciptors.empty()) {
+        LOGW("No media Id descriptors, try enum entities again!");
+        ret = xioctl(MEDIA_IOC_ENUM_ENTITIES, &mediaEntityDesc);
+        if (ret < 0) {
+            LOGW("Enumerating entities failed: %s", strerror(errno));
+            return UNKNOWN_ERROR;
+        }
+    }
+
+    mediaEntityDesc = mEntityIdDesciptors.find(index)->second;
+
+    return NO_ERROR;
+}
+
+/**
+ * Find description for given entity shink name
+ *
+ * Using media controller here to query entity with given shink name.
+ */
+status_t MediaController::findMediaEntityByName(char* name, struct media_entity_desc &mediaEntityDesc)
+{
+    LOGI("@%s", __FUNCTION__);
+    status_t status = UNKNOWN_ERROR;
+
+    if (mEntityDesciptors.empty()) {
+        LOGE("No media descriptors");
         return UNKNOWN_ERROR;
     }
-    return NO_ERROR;
+
+    for (const auto &entityDesciptors : mEntityDesciptors) {
+        LOGE("entityDesciptors.first:%s",entityDesciptors.first.c_str());
+
+        if (strncmp(entityDesciptors.second.name, name, strlen(name)) == 0 &&
+                     entityDesciptors.second.name[strlen(name)] == '\0') {
+            ALOGE("@%s match:%s",__FUNCTION__,entityDesciptors.second.name);
+            return NO_ERROR;
+        }
+    }
+    return status;
 }
 
 status_t MediaController::setFormat(const MediaCtlFormatParams &formatParams)
 {
-    LOGI("@%s entity %s pad %d (%dx%d) format(%d)", __FUNCTION__,
+    LOGI("@%s entity %s pad %d (%dx%d) format(0x%x)", __FUNCTION__,
                                formatParams.entityName.c_str(), formatParams.pad,
                                formatParams.width, formatParams.height,
                                formatParams.formatCode);
@@ -379,7 +437,7 @@ status_t MediaController::setControl(const char* entityName, int controlId, int 
  */
 status_t MediaController::configureLink(const MediaCtlLinkParams &linkParams)
 {
-    LOGI(" @%s: %s \"%s\":%d->\"%s\":%d[%d]", __FUNCTION__,
+    LOGI("%s @%s: %s \"%s\":%d->\"%s\":%d[%d]", mPath.c_str(),__FUNCTION__,
          linkParams.enable?"enable":"disable",
          linkParams.srcName.c_str(), linkParams.srcPad,
          linkParams.sinkName.c_str(), linkParams.sinkPad,linkParams.enable);
@@ -430,7 +488,7 @@ status_t MediaController::configureLink(const MediaCtlLinkParams &linkParams)
         CLEAR(linksEnum);
         struct media_link_desc *links = nullptr;
 
-        srcEntity->getEntityDesc(entityDesc);
+        sinkEntity->getEntityDesc(entityDesc);
         links = new struct media_link_desc[entityDesc.links];
         memset(links, 0, sizeof(struct media_link_desc) * entityDesc.links);
 
@@ -439,7 +497,7 @@ status_t MediaController::configureLink(const MediaCtlLinkParams &linkParams)
         linksEnum.links = links;
         status = enumLinks(linksEnum);
         if (status == NO_ERROR) {
-            srcEntity->updateLinks(linksEnum.links);
+            sinkEntity->updateLinks(linksEnum.links);
         }
         delete[] links;
     }
@@ -465,10 +523,12 @@ status_t MediaController::setupLink(struct media_link_desc &linkDesc)
  */
 status_t MediaController::resetLinks()
 {
-    LOGI("@%s", __FUNCTION__);
+    LOGI("@%s start!", __FUNCTION__);
     status_t status = NO_ERROR;
     for (const auto &entityDesciptors : mEntityDesciptors) {
         struct media_entity_desc entityDesc;
+        struct media_entity_desc entitySrcDesc;
+        struct media_entity_desc entitySinkDesc;
         struct media_links_enum linksEnum;
         CLEAR(entityDesc);
         CLEAR(linksEnum);
@@ -477,7 +537,8 @@ status_t MediaController::resetLinks()
         entityDesc = entityDesciptors.second;
         links = new struct media_link_desc[entityDesc.links];
         memset(links, 0, sizeof(media_link_desc) * entityDesc.links);
-        LOGI("@%s entity id: %d", __FUNCTION__, entityDesc.id);
+        LOGI("@%s entityDesc name: %s, id: %d, links: %d",
+             __FUNCTION__, entityDesc.name, entityDesc.id, entityDesc.links);
 
         linksEnum.entity = entityDesc.id;
         linksEnum.pads = nullptr;
@@ -491,8 +552,13 @@ status_t MediaController::resetLinks()
         for (int j = 0; j < entityDesc.links; j++) {
             if (links[j].flags & MEDIA_LNK_FL_IMMUTABLE)
                 continue;
-
+            entitySrcDesc = mEntityIdDesciptors.find(links[j].source.entity)->second;
+            entitySinkDesc = mEntityIdDesciptors.find(links[j].sink.entity)->second;
             links[j].flags &= ~MEDIA_LNK_FL_ENABLED;
+            LOGI("%s @%s: %s \"%s\":%d->\"%s\":%d[%d]", mPath.c_str(),__FUNCTION__,
+                 (links[j].flags & MEDIA_LNK_FL_ENABLED)?"enabled":"disabled",
+                 entitySrcDesc.name, links[j].source.index,
+                 entitySinkDesc.name, links[j].sink.index,links[j].flags);
             setupLink(links[j]);
         }
         delete[] links;
@@ -513,6 +579,7 @@ status_t MediaController::getMediaEntity(std::shared_ptr<MediaEntity> &entity, c
     struct media_link_desc *links = nullptr;
     struct media_pad_desc *pads = nullptr;
 
+    LOGI("@%s, entityName:%s!", __FUNCTION__, entityName.c_str());
     // check whether the MediaEntity object has already been created
     std::map<std::string, std::shared_ptr<MediaEntity>>::iterator itEntities =
                                      mEntities.find(entityName);
@@ -545,12 +612,13 @@ status_t MediaController::getMediaEntity(std::shared_ptr<MediaEntity> &entity, c
             entity = std::make_shared<MediaEntity>(entityDesc, links, pads);
             mEntities.insert(std::make_pair(entityDesc.name, entity));
         }
+        if (entityDesc.links > 0)
+            delete[] links;
+        if (entityDesc.pads > 0)
+            delete[] pads;
     } else {
         status = UNKNOWN_ERROR;
     }
-
-    delete[] links;
-    delete[] pads;
 
     return status;
 }

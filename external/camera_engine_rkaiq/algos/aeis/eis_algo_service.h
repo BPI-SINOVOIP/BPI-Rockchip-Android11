@@ -31,10 +31,10 @@
 #include "imu_service.h"
 #include "remap_backend.h"
 #include "rk_aiq_algo_des.h"
-#include "rk_aiq_algo_types_int.h"
 #include "rk_aiq_types_priv.h"
 #include "scaler_service.h"
 #include "task_service.h"
+#include "rk_aiq_algo_types.h"
 #include "xcam_common.h"
 
 namespace XCam {
@@ -58,15 +58,15 @@ class EisAlgoAdaptor : public std::enable_shared_from_this<EisAlgoAdaptor> {
     EisAlgoAdaptor(const EisAlgoAdaptor&) = delete;
     const EisAlgoAdaptor& operator=(const EisAlgoAdaptor&) = delete;
 
-    XCamReturn Config(const AlgoCtxInstanceCfgInt* config, const CalibDbV2_Eis_t* calib);
+    XCamReturn Config(const AlgoCtxInstanceCfg* config, const CalibDbV2_Eis_t* calib);
     XCamReturn Prepare(const rk_aiq_mems_sensor_intf_t* mems_sensor_intf,
                        const isp_drv_share_mem_ops_t* mem_ops);
     bool IsValid() { return valid_; }
     bool IsEnabled() { return enable_; }
 
     void Start();
-    void OnFrameEvent(const RkAiqAlgoProcAeisInt* input);
-    void GetProcResult(RkAiqAlgoProcResAeisInt* output);
+    void OnFrameEvent(const RkAiqAlgoProcAeis* input);
+    void GetProcResult(RkAiqAlgoProcResAeis* output);
     void Stop();
 
  private:

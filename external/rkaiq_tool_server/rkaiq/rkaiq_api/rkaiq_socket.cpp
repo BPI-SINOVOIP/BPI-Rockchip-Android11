@@ -15,6 +15,7 @@
 #define MAX_PACKET_SIZE 8192
 
 extern DomainTCPClient g_tcpClient;
+extern int g_app_run_mode;
 
 #pragma pack(1)
 typedef struct RkAiqSocketData {
@@ -26,6 +27,17 @@ typedef struct RkAiqSocketData {
     char* data;
     unsigned int dataHash;
 } RkAiqSocketData;
+
+typedef struct RkAiqSocketDataV2 {
+    uint8_t magic[4]; // = { 'R', 0xAA, 0xFF, 'K' };
+    int32_t cmd_id;
+    int32_t cmd_ret;
+    uint32_t sequence;
+    uint32_t payload_size;
+    uint32_t packet_size;
+    uint8_t* data;
+    uint32_t data_hash; // different offset in data stream
+} RkAiqSocketDataV2;
 #pragma pack()
 
 unsigned int MurMurHash(const void* key, int len)
@@ -62,6 +74,57 @@ unsigned int MurMurHash(const void* key, int len)
     h *= m;
     h ^= h >> 15;
     return h;
+}
+
+static void HexDump(const unsigned char* data, size_t size)
+{
+    printf("####\n");
+    int i;
+    size_t offset = 0;
+    while (offset < size) {
+        printf("%04x  ", offset);
+        for (i = 0; i < 16; i++) {
+            if (i % 8 == 0) {
+                putchar(' ');
+            }
+            if (offset + i < size) {
+                printf("%02x ", data[offset + i]);
+            } else {
+                printf("   ");
+            }
+        }
+        printf("   ");
+        for (i = 0; i < 16 && offset + i < size; i++) {
+            if (isprint(data[offset + i])) {
+                printf("%c", data[offset + i]);
+            } else {
+                putchar('.');
+            }
+        }
+        putchar('\n');
+        offset += 16;
+    }
+    printf("####\n\n");
+}
+
+int ConnectAiq()
+{
+#ifdef __ANDROID__
+    if (g_tcpClient.Setup(LOCAL_SOCKET_PATH) == false) {
+        LOG_DEBUG("domain connect failed\n");
+        g_tcpClient.Close();
+        return -1;
+    }
+#else
+    if (g_tcpClient.Setup("/tmp/UNIX.domain") == false) {
+        LOG_INFO("domain connect failed\n");
+        g_tcpClient.Close();
+        return -1;
+    } else {
+        LOG_INFO("#### Socket connect AIQ success ####\n");
+    }
+#endif
+    return 0;
 }
 
 int RkAiqSocketClientINETSend(int commandID, void* data, unsigned int dataSize)
@@ -103,28 +166,48 @@ int RkAiqSocketClientINETSend(int commandID, void* data, unsigned int dataSize)
 
     LOG_DEBUG("INET send: dataHash %08x\n", packetData.dataHash);
     LOG_DEBUG("INET send: packetSize %d\n", packetSize);
+    LOG_DEBUG("INET send: dataSize %d\n", dataSize);
 
-    g_tcpClient.Send(dataToSend, packetSize);
-    // hexdump(dataToSend, packetSize);
+    int ret = g_tcpClient.Send(dataToSend, packetSize);
+    if (ret < 0 && (errno != EAGAIN && errno != EINTR)) {
+        if (ConnectAiq() < 0) {
+            g_tcpClient.Close();
+            g_app_run_mode = -1; // APP_RUN_STATUS_INIT = -1
+            LOG_ERROR("########################################################\n");
+            LOG_ERROR("#### Forward to AIQ failed! please check AIQ status.####\n");
+            LOG_ERROR("########################################################\n\n");
+            return 1;
+        } else {
+            LOG_ERROR("########################################################\n");
+            LOG_ERROR("#### Forward to AIQ failed! Auto reconnect success.####\n");
+            LOG_ERROR("########################################################\n\n");
+        }
+    }
+
+    LOG_DEBUG("############# inet send data ###################\n");
+    // HexDump((unsigned char*)dataToSend, packetSize);
 
     free(packetData.data);
     packetData.data = NULL;
     free(dataToSend);
     dataToSend = NULL;
 
-    // receive data
-    RkAiqSocketData retPacket;
-    memset((void*)&retPacket, 0, sizeof(RkAiqSocketData));
-    g_tcpClient.Receive((char*)&retPacket, sizeof(RkAiqSocketData));
-    // hexdump((char*)&retPacket, sizeof(RkAiqSocketData));
-    if (memcmp(retPacket.magic, "RK", 2) != 0) {
-        LOG_DEBUG("INET send: return value maigc check failed,return\n");
-        g_tcpClient.Receive(MAX_PACKET_SIZE);
-        return 1;
-    }
+    // // receive data
+    // RkAiqSocketData retPacket;
+    // memset((void*)&retPacket, 0, sizeof(RkAiqSocketData));
+    // g_tcpClient.Receive((char*)&retPacket, sizeof(RkAiqSocketData));
 
-    commandReturnValue = retPacket.commandResult;
-    LOG_DEBUG("INET send: return value:%d\n", commandReturnValue);
+    // LOG_DEBUG("############# inet return data ###################\n");
+    // HexDump((unsigned char*)&retPacket, sizeof(RkAiqSocketData));
+    // if (memcmp(retPacket.magic, "RK", 2) != 0)
+    // {
+    //     LOG_DEBUG("INET send: return value maigc check failed,return\n");
+    //     g_tcpClient.Receive(MAX_PACKET_SIZE);
+    //     return 1;
+    // }
+
+    // commandReturnValue = retPacket.commandResult;
+    // LOG_DEBUG("INET send: return value:%d\n", commandReturnValue);
 
     return commandReturnValue;
 }
@@ -165,7 +248,22 @@ int RkAiqSocketClientINETReceive(int commandID, void* data, unsigned int dataSiz
 
     LOG_DEBUG("INET receive 1: dataHash %08x\n", packetData.dataHash);
 
-    g_tcpClient.Send(dataToSend, packetSize);
+    int ret = g_tcpClient.Send(dataToSend, packetSize);
+    if (ret < 0 && (errno != EAGAIN && errno != EINTR)) {
+        if (ConnectAiq() < 0) {
+            g_tcpClient.Close();
+            g_app_run_mode = -1; // APP_RUN_STATUS_INIT = -1
+            LOG_ERROR("########################################################\n");
+            LOG_ERROR("#### Forward to AIQ failed! please check AIQ status.####\n");
+            LOG_ERROR("########################################################\n\n");
+            return 1;
+        } else {
+            LOG_ERROR("########################################################\n");
+            LOG_ERROR("#### Forward to AIQ failed! Auto reconnect success.####\n");
+            LOG_ERROR("########################################################\n\n");
+        }
+    }
+
     if (packetData.data != NULL) {
         free(packetData.data);
         packetData.data = NULL;

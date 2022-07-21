@@ -126,12 +126,17 @@ endif
 ifneq (,$(filter mali400 mali450, $(TARGET_BOARD_PLATFORM_GPU)))
 LOCAL_C_INCLUDES += \
        hardware/rockchip/libgralloc/utgard
-
 endif
 
 ifeq ($(strip $(TARGET_BOARD_PLATFORM)),rk3368)
+# Android 11+
+ifneq (1,$(strip $(shell expr $(PLATFORM_SDK_VERSION) \< 30)))
+LOCAL_C_INCLUDES += \
+    system/memory/libion/original-kernel-headers
+else
 LOCAL_C_INCLUDES += \
     system/core/libion/original-kernel-headers
+endif
 endif
 
 else

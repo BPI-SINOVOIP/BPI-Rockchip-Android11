@@ -1,7 +1,5 @@
 /*
- * RkAiqAcgcHandle.h
- *
- *  Copyright (c) 2019-2021 Rockchip Eletronics Co., Ltd.
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +12,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+#include "RkAiqAcgcHandle.h"
 
 #include "RkAiqCore.h"
-#include "RkAiqHandle.h"
 
 namespace RkCam {
 
-void RkAiqAcgcHandle::init() {
+DEFINE_HANDLE_REGISTER_TYPE(RkAiqAcgcHandleInt);
+
+void RkAiqAcgcHandleInt::init() {
     ENTER_ANALYZER_FUNCTION();
 
-    deInit();
+    RkAiqHandle::deInit();
     mConfig       = (RkAiqAlgoCom*)(new RkAiqAlgoConfigAcgc());
     mPreInParam   = (RkAiqAlgoCom*)(new RkAiqAlgoPreAcgc());
     mPreOutParam  = (RkAiqAlgoResCom*)(new RkAiqAlgoPreResAcgc());
@@ -37,86 +36,128 @@ void RkAiqAcgcHandle::init() {
     EXIT_ANALYZER_FUNCTION();
 }
 
-XCamReturn RkAiqAcgcHandle::prepare() {
+XCamReturn RkAiqAcgcHandleInt::prepare() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret            = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
 
     ret = RkAiqHandle::prepare();
     RKAIQCORE_CHECK_RET(ret, "acgc handle prepare failed");
 
-    // TODO config acgc common params
-    RkAiqAlgoConfigAcgc* acgc_config = (RkAiqAlgoConfigAcgc*)mConfig;
+    RkAiqAlgoConfigAcgc* acgc_config_int = (RkAiqAlgoConfigAcgc*)mConfig;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
 
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->prepare(mConfig);
-        RKAIQCORE_CHECK_RET(ret, "acgc algo prepare failed");
-    }
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->prepare(mConfig);
+    RKAIQCORE_CHECK_RET(ret, "acgc algo prepare failed");
 
     EXIT_ANALYZER_FUNCTION();
-    return ret;
+    return XCAM_RETURN_NO_ERROR;
 }
 
-XCamReturn RkAiqAcgcHandle::preProcess() {
+XCamReturn RkAiqAcgcHandleInt::preProcess() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret             = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des  = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoPreAcgc* acgc_pre = (RkAiqAlgoPreAcgc*)mPreInParam;
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoPreAcgc* acgc_pre_int        = (RkAiqAlgoPreAcgc*)mPreInParam;
+    RkAiqAlgoPreResAcgc* acgc_pre_res_int = (RkAiqAlgoPreResAcgc*)mPreOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::preProcess();
-    RKAIQCORE_CHECK_RET(ret, "acgc handle preProcess failed");
-
-    // TODO config common acgc preprocess params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->pre_process(mPreInParam, mPreOutParam);
-        RKAIQCORE_CHECK_RET(ret, "acgc handle pre_process failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "acgc handle preProcess failed");
     }
 
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->pre_process(mPreInParam, mPreOutParam);
+    RKAIQCORE_CHECK_RET(ret, "acgc algo pre_process failed");
+
     EXIT_ANALYZER_FUNCTION();
-    return ret;
+    return XCAM_RETURN_NO_ERROR;
 }
 
-XCamReturn RkAiqAcgcHandle::processing() {
-    XCamReturn ret              = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des   = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoProcAcgc* acgc_pre = (RkAiqAlgoProcAcgc*)mProcInParam;
+XCamReturn RkAiqAcgcHandleInt::processing() {
+    ENTER_ANALYZER_FUNCTION();
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoProcAcgc* acgc_proc_int        = (RkAiqAlgoProcAcgc*)mProcInParam;
+    RkAiqAlgoProcResAcgc* acgc_proc_res_int = (RkAiqAlgoProcResAcgc*)mProcOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::processing();
-    RKAIQCORE_CHECK_RET(ret, "acgc handle processing failed");
-
-    // TODO config common acgc processing params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->processing(mProcInParam, mProcOutParam);
-        RKAIQCORE_CHECK_RET(ret, "acgc algo processing failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "acgc handle processing failed");
     }
+
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->processing(mProcInParam, mProcOutParam);
+    RKAIQCORE_CHECK_RET(ret, "acgc algo processing failed");
 
     EXIT_ANALYZER_FUNCTION();
     return ret;
 }
 
-XCamReturn RkAiqAcgcHandle::postProcess() {
+XCamReturn RkAiqAcgcHandleInt::postProcess() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret              = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des   = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoPostAcgc* acgc_pre = (RkAiqAlgoPostAcgc*)mPostInParam;
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoPostAcgc* acgc_post_int        = (RkAiqAlgoPostAcgc*)mPostInParam;
+    RkAiqAlgoPostResAcgc* acgc_post_res_int = (RkAiqAlgoPostResAcgc*)mPostOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::postProcess();
-    RKAIQCORE_CHECK_RET(ret, "acgc handle postProcess failed");
-
-    // TODO config common acgc postProcess params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->post_process(mPostInParam, mPostOutParam);
-        RKAIQCORE_CHECK_RET(ret, "acgc algo postProcess failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "acgc handle postProcess failed");
+        return ret;
     }
 
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->post_process(mPostInParam, mPostOutParam);
+    RKAIQCORE_CHECK_RET(ret, "acgc algo post_process failed");
+
     EXIT_ANALYZER_FUNCTION();
+    return ret;
+}
+
+XCamReturn RkAiqAcgcHandleInt::genIspResult(RkAiqFullParams* params, RkAiqFullParams* cur_params) {
+    ENTER_ANALYZER_FUNCTION();
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
+    RkAiqAlgoProcResAcgc* acgc_com              = (RkAiqAlgoProcResAcgc*)mProcOutParam;
+    rk_aiq_isp_cgc_params_v20_t* cgc_param      = params->mCgcParams->data().ptr();
+
+    if (sharedCom->init) {
+        cgc_param->frame_id = 0;
+    } else {
+        cgc_param->frame_id = shared->frameId;
+    }
+
+    if (!acgc_com) {
+        LOGD_ANALYZER("no acgc result");
+        return XCAM_RETURN_NO_ERROR;
+    }
+
+    if (!this->getAlgoId()) {
+        RkAiqAlgoProcResAcgc* acgc_rk = (RkAiqAlgoProcResAcgc*)acgc_com;
+    }
+
+    cur_params->mCgcParams = params->mCgcParams;
+
+    EXIT_ANALYZER_FUNCTION();
+
     return ret;
 }
 

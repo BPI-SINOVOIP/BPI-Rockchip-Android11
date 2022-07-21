@@ -26,8 +26,66 @@
 #include <set>
 
 namespace android {
+class DrmPlane;
+typedef struct tagPlaneGroup{
+  bool     bReserved;
+  bool     bUse;
+  uint32_t zpos;
+  uint32_t possible_crtcs;
+  uint64_t share_id;
+  uint64_t win_type;
+  int64_t possible_display_=-1;
+	std::vector<DrmPlane*> planes;
 
-// Rk3588
+  uint32_t current_crtc_ = 0;
+
+  bool acquire(uint32_t crtc_mask){
+    if(bReserved)
+      return false;
+
+    if(!(possible_crtcs & crtc_mask))
+      return false;
+
+    if(!(current_crtc_ & crtc_mask))
+      return false;
+
+    return true;
+  }
+
+  bool acquire(uint32_t crtc_mask, int64_t dispaly){
+    if(bReserved)
+      return false;
+
+    if(!(possible_crtcs & crtc_mask))
+      return false;
+
+    if(!(current_crtc_ & crtc_mask))
+      return false;
+
+    if(possible_display_ != dispaly)
+      return false;
+
+    return true;
+  }
+
+  bool set_current_crtc(uint32_t crtc_mask){
+    if(!(possible_crtcs & crtc_mask)){
+      return false;
+    }
+    current_crtc_ = crtc_mask;
+    return true;
+  }
+
+  bool set_current_crtc(uint32_t crtc_mask, int64_t display){
+    current_crtc_ = crtc_mask;
+    possible_display_ = display;
+    return true;
+  }
+
+}PlaneGroup;
+
+
+// RK3588
 enum DrmPlaneTypeRK3588{
       // Cluster 0
       PLANE_RK3588_CLUSTER0_WIN0 = 1 << 0,
@@ -107,11 +165,16 @@ enum DrmPlaneTypeRK356x{
 
       DRM_PLANE_TYPE_CLUSTER0_MASK= 0x3,
       DRM_PLANE_TYPE_CLUSTER1_MASK= 0xc,
-      DRM_PLANE_TYPE_CLUSTER_MASK = 0xf,
+
       DRM_PLANE_TYPE_ESMART0_MASK = 0xf0,
       DRM_PLANE_TYPE_ESMART1_MASK = 0xf00,
+
       DRM_PLANE_TYPE_SMART0_MASK  = 0xf000,
       DRM_PLANE_TYPE_SMART1_MASK  = 0xf0000,
+
+      DRM_PLANE_TYPE_ALL_CLUSTER_MASK = 0xf,
+      DRM_PLANE_TYPE_ALL_ESMART_MASK  = 0xff0,
+      DRM_PLANE_TYPE_ALL_SMART_MASK   = 0xff000,
       DRM_PLANE_TYPE_VOP2_Unknown      = 0xffffffff,
 };
 
@@ -217,6 +280,7 @@ class DrmPlane {
   const DrmProperty &output_w_property() const;
   const DrmProperty &output_h_property() const;
   const DrmProperty &scale_rate_property() const;
+  const DrmProperty &async_commit_property() const;
   bool is_use();
   void set_use(bool b_use);
   bool get_scale();
@@ -289,6 +353,7 @@ class DrmPlane {
   DrmProperty output_w_property_;
   DrmProperty output_h_property_;
   DrmProperty scale_rate_property_;
+  DrmProperty async_commit_property_;
 
   bool bReserved_;
   bool b_use_;

@@ -689,8 +689,7 @@ void smp_process_pairing_public_key(tSMP_CB* p_cb, tSMP_INT_DATA* p_data) {
   memcpy(pt.x, p_cb->peer_publ_key.x, BT_OCTET32_LEN);
   memcpy(pt.y, p_cb->peer_publ_key.y, BT_OCTET32_LEN);
 
-  if (!memcmp(p_cb->peer_publ_key.x, p_cb->loc_publ_key.x, BT_OCTET32_LEN) &&
-      !memcmp(p_cb->peer_publ_key.y, p_cb->loc_publ_key.y, BT_OCTET32_LEN)) {
+  if (!memcmp(p_cb->peer_publ_key.x, p_cb->loc_publ_key.x, BT_OCTET32_LEN)) {
     android_errorWriteLog(0x534e4554, "174886838");
     SMP_TRACE_WARNING("Remote and local public keys can't match");
     tSMP_INT_DATA smp;

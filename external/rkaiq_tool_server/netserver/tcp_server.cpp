@@ -1,7 +1,6 @@
 #include "tcp_server.h"
 
 #include <atomic>
-
 #include <net/if.h>
 #include <pthread.h>
 #include <signal.h>
@@ -43,6 +42,7 @@ int TCPServer::Recvieve(int cilent_socket)
     sigaddset(&set, SIGTERM);
     pthread_sigmask(SIG_BLOCK, &set, NULL);
 
+    std::thread::id threadID = std::this_thread::get_id();
     LOG_DEBUG("TCPServer::Recvieve enter %d\n", cilent_socket);
     char buffer[MAXPACKETSIZE];
     int size = sizeof(buffer);
@@ -65,7 +65,13 @@ int TCPServer::Recvieve(int cilent_socket)
             callback_(cilent_socket, buffer, length);
         }
     }
+
     LOG_DEBUG("TCPServer::Recvieve exit %d\n", cilent_socket);
+    close(cilent_socket);
+    cilent_socket = -1;
+    //
+    recv_threads_finished_id_.push_back(threadID);
+    LOG_DEBUG("TCPServer::recv_threads_finished_id_ len: %d\n", recv_threads_finished_id_.size());
     return 0;
 }
 
@@ -81,10 +87,13 @@ void TCPServer::Accepted()
 
     struct timeval interval = {1, 0};
     setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (char*)&interval, sizeof(struct timeval));
+    int reuseTrue = 1;
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &reuseTrue, sizeof(int));
     while (!quit_) {
         int cilent_socket;
         socklen_t sosize = sizeof(clientAddress);
         cilent_socket = accept(sockfd, (struct sockaddr*)&clientAddress, &sosize);
+
         if (cilent_socket < 0) {
             if (errno != EAGAIN && errno != EINTR) {
                 LOG_ERROR("Error socket accept failed %d %d\n", cilent_socket, errno);

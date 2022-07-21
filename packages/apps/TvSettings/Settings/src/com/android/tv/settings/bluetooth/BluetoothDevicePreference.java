@@ -16,7 +16,8 @@
 
 package com.android.tv.settings.bluetooth;
 
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
+import android.app.FragmentManager;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -34,6 +35,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageView;
+import android.os.Bundle;
 
 import com.android.tv.settings.R;
 //import com.android.tv.settings.search.Index;
@@ -63,6 +65,8 @@ public final class BluetoothDevicePreference extends Preference implements
     private AlertDialog mDisconnectDialog;
 
     private String contentDescription = null;
+
+    private FragmentManager mFragmentManager;
 
     /* Talk-back descriptions for various BT icons */
     Resources r = getContext().getResources();
@@ -157,7 +161,6 @@ public final class BluetoothDevicePreference extends Preference implements
         if (null != findPreferenceInHierarchy("bt_checkbox")) {
             setDependency("bt_checkbox");
         }
-
         if (mCachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
             ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
 
@@ -224,13 +227,18 @@ public final class BluetoothDevicePreference extends Preference implements
         if (mCachedDevice.isConnected()) {
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
-            mCachedDevice.connect(true);
+            // mCachedDevice.connect(true);
+            askConnect();
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             pair();
         }
     }
 
-    // Show disconnect confirmation dialog for a device.
+    public void setFragmentManager(FragmentManager fgManager) {
+        this.mFragmentManager = fgManager;
+    }
+
+    // Show disconnect or forget confirmation dialog for a device.
     private void askDisconnect() {
         Context context = getContext();
         String name = mCachedDevice.getName();
@@ -246,8 +254,53 @@ public final class BluetoothDevicePreference extends Preference implements
             }
         };
 
+        DialogInterface.OnClickListener forgetListerner = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Bundle args = new Bundle();
+                args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
+                        mCachedDevice.getDevice().getAddress());
+                DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
+                profileSettings.setArguments(args);
+                profileSettings.show(mFragmentManager,
+                        DeviceProfilesSettings.class.getSimpleName());
+            }
+        };
+
         mDisconnectDialog = Utils.showDisconnectDialog(context,
-                mDisconnectDialog, disconnectListener, title, Html.fromHtml(message));
+                mDisconnectDialog, disconnectListener, forgetListerner, title, Html.fromHtml(message));
+    }
+
+    private void askConnect() {
+        Context context = getContext();
+        String name = mCachedDevice.getName();
+        if (TextUtils.isEmpty(name)) {
+            name = context.getString(R.string.bluetooth_device);
+        }
+        String message = context.getString(R.string.bluetooth_connect_all_profiles, name);
+        String title = context.getString(R.string.bluetooth_connect_title);
+
+        DialogInterface.OnClickListener connectListener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                mCachedDevice.connect(true);
+            }
+        };
+
+        DialogInterface.OnClickListener forgetListerner = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Bundle args = new Bundle();
+                args.putString(DeviceProfilesSettings.ARG_DEVICE_ADDRESS,
+                        mCachedDevice.getDevice().getAddress());
+                DeviceProfilesSettings profileSettings = new DeviceProfilesSettings();
+                profileSettings.setArguments(args);
+                profileSettings.show(mFragmentManager,
+                        DeviceProfilesSettings.class.getSimpleName());
+            }
+        };
+        //reuse Utils.showDisconnectDialog
+        mDisconnectDialog = Utils.showDisconnectDialog(context,
+                mDisconnectDialog, connectListener, forgetListerner, title, Html.fromHtml(message));
     }
 
     private void pair() {

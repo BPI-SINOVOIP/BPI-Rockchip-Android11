@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HwComposerEnv module xml -->
+<HwComposerEnv Version="1.1.1" >
+  <!--
+    DsiplayMode:
+      Mode: 0=None 1=Slicing 2=Presentation
+      FbWidth: Framebuffer Width
+      FbHeight: Framebuffer Width
+      ConnectorCnt: display count
+
+      Example 1 - Slicing-6x1 1920x1080:
+      x-offset:   0           3840        5760        7680
+      y-offset:
+          0   -   + - - - - - + - - - - - + - - - - - + - - - - - +     -
+                  | HDMI-A-1  | HDMI-A-2  | HDMI-A-3  |   DP-1    |    1080  - FbHeight = 1080
+                  + - - - - - + - - - - - + - - - - - + - - - - - +     -
+
+                  |   3840    |    1920   |    1920   |   3840    |          - FbWidth = 115200
+                                                                             - ConnectorCnt = 4
+
+
+      Example 2 - Slicing-3x2 1920x1080:
+      x-offset:   0           3840
+      y-offset:
+         0  -     + - - - - - + - - - - - +
+         |        | HDMI-A-1  | HDMI-A-2  |   1080
+       1080 -     + - - - - - + - - - - - +
+         |        |   DP-1    | HDMI-A-3  |   1080   - FbHeight = 2160
+                  + - - - - - + - - - - - +
+
+                  |   3840    |   1920    |          - FbWidth = 5760
+                                                     - ConnectorCnt = 4
+  -->
+  <DsiplayMode Mode="0" FbWidth="11520" FbHeight="1080" ConnectorCnt="4">
+    <Connector>
+      <!--
+        Example 1 - Slicing-6x1 1920x1080:
+        Type-TypeId can be obtained through the following process:
+          adb shell modetest -c > modetest-connector.log
+            Tips:
+              Android_SDK_project: mmm external/libdrm/tests/modetest
+              output modetest to $OUT/data/nativetest64/modetest/modetest
+          The modetest-connector log has the following fields:
+
+            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            Connectors:
+            id      encoder status          name            size (mm)       modes   encoders
+            409     408     connected       HDMI-A-1        700x390         26      408
+              modes:
+                index name      refresh (Hz) hdisp hss  hse  htot vdisp vss  vse  vtot
+                #0    3840x1080 60.00        3840  4016 4104 4400 1080  1084 1089 1125 297000 flags: phsync, pvsync; type: preferred
+                (...)
+
+            419      418      connected        HDMI-A-2         510x290          10      418
+              modes:
+                index name      refresh (Hz) hdisp hss  hse  htot vdisp vss  vse  vtot
+                #0    1920x1080 60.00        1920  2008 2052 2200 1080  1084 1089 1125 148500 flags: phsync, pvsync; type: driver
+                (...)
+
+            421      420      connected        HDMI-A-3         510x290          10      420
+              modes:
+                index name      refresh (Hz) hdisp hss  hse  htot vdisp vss  vse  vtot
+                #0    1920x1080 60.00        1920  2008 2052 2200 1080  1084 1089 1125 148500 flags: phsync, pvsync; type: driver
+                (...)
+
+            423      422      connected        DP-1             1020x290        12      422
+              modes:
+                index name     refresh (Hz) hdisp hss  hse  htot vdisp vss  vse  vtot
+                #1   3840x1080 60.00        3840  4016 4104 4400 1080  1084 1089 1125 297000 flags: phsync, pvsync; type: driver
+            - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          Type-TypeId = HDMI-A-1
+          Type-TypeId = HDMI-A-2
+          Type-TypeId = HDMI-A-3
+          Type-TypeId = DP-1
+      -->
+      <Type>HDMI-A</Type>
+      <TypeId>1</TypeId>
+      <SrcX>0</SrcX>    <!-- Framebuffer x 0ffset -->
+      <SrcY>0</SrcY>    <!-- Framebuffer y 0ffset -->
+      <SrcW>3840</SrcW> <!-- Framebuffer Width -->
+      <SrcH>1080</SrcH> <!-- Framebuffer Height-->
+      <DstX>0</DstX>    <!-- unuse , reserved -->
+      <DstY>0</DstY>    <!-- unuse , reserved -->
+      <DstW>0</DstW>    <!-- unuse , reserved -->
+      <DstH>0</DstH>    <!-- unuse , reserved -->
+    </Connector>
+    <Connector>
+      <Type>HDMI-A</Type>
+      <TypeId>2</TypeId>
+      <SrcX>3840</SrcX> <!-- Framebuffer x 0ffset -->
+      <SrcY>0</SrcY>    <!-- Framebuffer y 0ffset -->
+      <SrcW>1920</SrcW> <!-- Framebuffer Width -->
+      <SrcH>1080</SrcH> <!-- Framebuffer Height-->
+      <DstX>0</DstX>    <!-- unuse , reserved-->
+      <DstY>0</DstY>    <!-- unuse , reserved-->
+      <DstW>0</DstW>    <!-- unuse , reserved-->
+      <DstH>0</DstH>    <!-- unuse , reserved-->
+    </Connector>
+    <Connector>
+      <Type>HDMI-A</Type>
+      <TypeId>3</TypeId>
+      <SrcX>5760</SrcX> <!-- Framebuffer x 0ffset -->
+      <SrcY>0</SrcY>    <!-- Framebuffer y 0ffset -->
+      <SrcW>1920</SrcW> <!-- Framebuffer Width -->
+      <SrcH>1080</SrcH> <!-- Framebuffer Height-->
+      <DstX>0</DstX>    <!-- unuse , reserved-->
+      <DstY>0</DstY>    <!-- unuse , reserved-->
+      <DstW>0</DstW>    <!-- unuse , reserved-->
+      <DstH>0</DstH>    <!-- unuse , reserved-->
+    </Connector>
+    <Connector>
+      <Type>DP</Type>
+      <TypeId>1</TypeId>
+      <SrcX>7680</SrcX> <!-- Framebuffer x 0ffset -->
+      <SrcY>0</SrcY>    <!-- Framebuffer y 0ffset -->
+      <SrcW>3840</SrcW> <!-- Framebuffer Width -->
+      <SrcH>1080</SrcH> <!-- Framebuffer Height-->
+      <DstX>0</DstX>    <!-- unuse , reserved-->
+      <DstY>0</DstY>    <!-- unuse , reserved-->
+      <DstW>0</DstW>    <!-- unuse , reserved-->
+      <DstH>0</DstH>    <!-- unuse , reserved-->
+    </Connector>
+  </DsiplayMode>
+</HwComposerEnv>

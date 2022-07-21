@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
+#include "uAPI2/rk_aiq_user_api2_asharp_v3.h"
 
-#include "include/uAPI2/rk_aiq_user_api2_asharp_v3.h"
-#include "RkAiqHandleIntV21.h"
+#include "algo_handlers/RkAiqAsharpV3Handle.h"
 
 RKAIQ_BEGIN_DECLARE
 

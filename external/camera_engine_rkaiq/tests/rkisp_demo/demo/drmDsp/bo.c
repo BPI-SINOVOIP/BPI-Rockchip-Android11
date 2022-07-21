@@ -11,6 +11,8 @@
 #include <xf86drmMode.h>
 #include <drm_fourcc.h>
 
+#include <unistd.h>
+
 #include "bo.h"
 #include "dev.h"
 
@@ -65,6 +67,17 @@ int add_fb_sp_bo(struct sp_bo* bo, uint32_t format) {
     return ret;
   }
   return 0;
+}
+
+static int import_sp_bo_fd(struct sp_bo* bo) {
+    int ret;
+    ret = drmPrimeHandleToFD(bo->dev->fd, bo->handle, DRM_CLOEXEC | DRM_RDWR, &bo->fd);
+    if (ret) {
+        printf("failed to create dumb buffer: %s", strerror(errno));
+        return -1;
+    }
+
+    return 0;
 }
 
 static int map_sp_bo(struct sp_bo* bo) {
@@ -132,7 +145,8 @@ struct sp_bo* create_sp_bo(struct sp_dev* dev, uint32_t width, uint32_t height,
   }
 #endif
 
-  ret = map_sp_bo(bo);
+  ret = import_sp_bo_fd(bo);
+  //ret = map_sp_bo(bo);
   if (ret) {
     printf("failed to map bo ret=%d\n", ret);
     goto err;
@@ -151,6 +165,10 @@ void free_sp_bo(struct sp_bo* bo) {
 
   if (!bo)
     return;
+
+  if (bo->fd >= 0) {
+      close(bo->fd);
+  }
 
   if (bo->map_addr)
     munmap(bo->map_addr, bo->size);

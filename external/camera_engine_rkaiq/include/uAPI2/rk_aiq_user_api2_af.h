@@ -19,7 +19,10 @@
 #define _RK_AIQ_USER_API2_AF_H_
 #include "af/rk_aiq_uapi_af_int.h"
 
+#ifndef RK_AIQ_SYS_CTX_T
+#define RK_AIQ_SYS_CTX_T
 typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
+#endif
 
 RKAIQ_BEGIN_DECLARE
 
@@ -38,9 +41,15 @@ rk_aiq_user_api2_af_ManualTriger(const rk_aiq_sys_ctx_t* sys_ctx);
 XCamReturn
 rk_aiq_user_api2_af_Tracking(const rk_aiq_sys_ctx_t* sys_ctx);
 XCamReturn
-rk_aiq_user_api2_af_SetZoomPos(const rk_aiq_sys_ctx_t* sys_ctx, int zoom_pos);
+rk_aiq_user_api2_af_SetZoomIndex(const rk_aiq_sys_ctx_t* sys_ctx, int index);
 XCamReturn
-rk_aiq_user_api2_af_GetZoomPos(const rk_aiq_sys_ctx_t* sys_ctx, int* zoom_pos);
+rk_aiq_user_api2_af_GetZoomIndex(const rk_aiq_sys_ctx_t* sys_ctx, int *index);
+XCamReturn
+rk_aiq_user_api2_af_EndZoomChg(const rk_aiq_sys_ctx_t* sys_ctx);
+XCamReturn
+rk_aiq_user_api2_af_StartZoomCalib(const rk_aiq_sys_ctx_t* sys_ctx);
+XCamReturn
+rk_aiq_user_api2_af_resetZoom(const rk_aiq_sys_ctx_t* sys_ctx);
 XCamReturn
 rk_aiq_user_api2_af_SetVcmCfg(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_lens_vcmcfg* cfg);
 XCamReturn
@@ -51,6 +60,14 @@ XCamReturn
 rk_aiq_user_api2_af_GetSearchResult(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_af_result_t* result);
 XCamReturn
 rk_aiq_user_api2_af_GetZoomRange(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_af_zoomrange* range);
+XCamReturn
+rk_aiq_user_api2_af_GetFocusRange(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_af_focusrange* range);
+XCamReturn
+rk_aiq_user_api2_af_setAngleZ(const rk_aiq_sys_ctx_t* sys_ctx, float angleZ);
+XCamReturn
+rk_aiq_user_api2_af_getCustomAfRes(const rk_aiq_sys_ctx_t* sys_ctx, rk_tool_customAf_res_t *attr);
+XCamReturn
+rk_aiq_user_api2_af_setCustomAfRes(const rk_aiq_sys_ctx_t* sys_ctx, rk_tool_customAf_res_t *attr);
 
 RKAIQ_END_DECLARE
 

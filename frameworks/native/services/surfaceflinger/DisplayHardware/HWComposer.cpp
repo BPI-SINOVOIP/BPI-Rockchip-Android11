@@ -921,7 +921,6 @@ std::optional<DisplayIdentificationInfo> HWComposer::onHotplugConnect(
 
         info = [this, hwcDisplayId, &port, &data, hasDisplayIdentificationData] {
             const bool isPrimary = !mInternalHwcDisplayId;
-            const bool isExternal = !mExternalHwcDisplayId;
             if (mHasMultiDisplaySupport) {
                 if (const auto info = parseDisplayIdentificationData(port, data)) {
                     return *info;
@@ -932,14 +931,7 @@ std::optional<DisplayIdentificationInfo> HWComposer::onHotplugConnect(
                          "Ignoring identification data for display %" PRIu64, hwcDisplayId);
                 ALOGW(
                          "Ignoring identification data for display %" PRIu64, hwcDisplayId);
-                port = isPrimary ? LEGACY_DISPLAY_TYPE_PRIMARY : LEGACY_DISPLAY_TYPE_EXTERNAL;
-
-                if(isPrimary)
-                  port = LEGACY_DISPLAY_TYPE_PRIMARY;
-                else if(isExternal)
-                  port = LEGACY_DISPLAY_TYPE_EXTERNAL;
-                else
-                  port = LEGACY_DISPLAY_TYPE_THREE;
+                port = isPrimary ? LEGACY_DISPLAY_TYPE_PRIMARY : hwcDisplayId;
             }
 
             return DisplayIdentificationInfo{.id = getFallbackDisplayId(port),

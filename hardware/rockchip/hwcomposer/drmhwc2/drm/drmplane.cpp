@@ -26,7 +26,7 @@
 
 #include <log/log.h>
 #include <xf86drmMode.h>
-
+#include <drm/drm_fourcc.h>
 namespace android {
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
@@ -281,6 +281,14 @@ int DrmPlane::Init() {
       }
     }
   }
+
+  ret = drm_->GetPlaneProperty(*this, "ASYNC_COMMIT", &async_commit_property_);
+  if (ret) {
+    ALOGE("Could not get ASYNC_COMMIT property");
+    return ret;
+  }
+
+
   return 0;
 }
 
@@ -637,16 +645,24 @@ bool DrmPlane::is_support_output(int output_w, int output_h){
 
 bool DrmPlane::is_support_format(uint32_t format, bool afbcd){
   if(isRK3588(soc_id_)){
-    if((win_type_ & PLANE_RK3588_ALL_CLUSTER_MASK) > 0 && afbcd)
-      return support_format_list.count(format);
-    else if((win_type_ & PLANE_RK3588_ALL_ESMART_MASK) > 0 && !afbcd)
+    if((win_type_ & PLANE_RK3588_ALL_CLUSTER_MASK) > 0){
+      if(afbcd){
+        return support_format_list.count(format);
+      }else if(format == DRM_FORMAT_ABGR8888 ||
+               format == DRM_FORMAT_BGR888 ||
+               format == DRM_FORMAT_BGR565 ){
+        return true;
+      }else{
+        return false;
+      }
+    }else if((win_type_ & PLANE_RK3588_ALL_ESMART_MASK) > 0 && !afbcd)
       return support_format_list.count(format);
     else
       return false;
   }else if(isRK356x(soc_id_)){
-    if((win_type_ & DRM_PLANE_TYPE_CLUSTER_MASK) > 0 && afbcd)
+    if((win_type_ & DRM_PLANE_TYPE_ALL_CLUSTER_MASK) > 0 && afbcd)
       return support_format_list.count(format);
-    else if((win_type_ & DRM_PLANE_TYPE_CLUSTER_MASK) == 0 && !afbcd)
+    else if((win_type_ & DRM_PLANE_TYPE_ALL_CLUSTER_MASK) == 0 && !afbcd)
       return support_format_list.count(format);
     else
       return false;
@@ -712,4 +728,9 @@ bool DrmPlane::is_support_output_8k(int output_w, int output_h){
 bool DrmPlane::is_support_transform_8k(int transform){
   return (transform & DRM_PLANE_ROTATION_0) == transform;
 }
+
+const DrmProperty &DrmPlane::async_commit_property() const{
+  return async_commit_property_;
+}
+
 }  // namespace android

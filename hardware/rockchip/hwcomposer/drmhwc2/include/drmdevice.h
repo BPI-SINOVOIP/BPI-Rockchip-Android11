@@ -24,6 +24,7 @@
 #include "drmplane.h"
 #include "platform.h"
 #include "rockchip/drmbaseparameter.h"
+#include "rockchip/drmxml.h"
 
 #include <stdint.h>
 #include <tuple>
@@ -140,8 +141,13 @@ class DrmDevice {
   int UpdateConnectorBaseInfo(unsigned int connector_type,unsigned int connector_id,struct disp_info *info);
   int DumpConnectorBaseInfo(unsigned int connector_type,unsigned int connector_id,struct disp_info *info);
   int SetScreenInfo(unsigned int connector_type,unsigned int connector_id, int index, struct screen_info *info);
+
+  std::map<int, int> GetDisplays() { return displays_;}
+
  private:
   void init_white_modes(void);
+  int InitEnvFromXml();
+  int UpdateInfoFromXml();
   void ConfigurePossibleDisplays();
   int TryEncoderForDisplay(int display, DrmEncoder *enc);
   int GetProperty(uint32_t obj_id, uint32_t obj_type, const char *prop_name,
@@ -175,6 +181,7 @@ class DrmDevice {
   std::pair<uint32_t, uint32_t> max_resolution_;
   std::map<int, int> displays_;
   std::vector<DrmMode> white_modes_;
+  struct DisplayModeXml DmXml_;
 };
 }  // namespace android
 

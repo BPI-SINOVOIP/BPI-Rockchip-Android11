@@ -446,10 +446,12 @@ void convertCalib2calibV20(const CamCalibDbContext_t *calib,CamCalibDbV2Context_
     list_head *awb_calib_para_list =
         (list_head*)CALIBDB_GET_MODULE_PTR((void*)calib, awb_calib_para_v200);
 
+#ifdef RKAIQ_ENABLE_PARSER_V1
     if (awb_calib_para_list)
         GetAwbProfileFromAwbCalibV200ListByIdx(awb_calib_para_list, 0, &awb_calib_v20);
-    else
+#else
         return;
+#endif
 
     const CalibDb_Awb_Adjust_Para_t *awb_adjust = NULL;
 

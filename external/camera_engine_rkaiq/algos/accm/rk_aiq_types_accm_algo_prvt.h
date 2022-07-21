@@ -28,6 +28,14 @@
 RKAIQ_BEGIN_DECLARE
 #define CCM_CURVE_DOT_NUM 17
 
+typedef struct ccm_3ares_info_s{
+    float sensorGain;
+    float awbGain[2];
+    bool wbgain_stable;
+    bool gain_stable;
+} ccm_3ares_info_t;
+
+
 typedef struct accm_rest_s {
     float fSaturation;
     List dominateIlluList;//to record domain illuminant
@@ -41,6 +49,7 @@ typedef struct accm_rest_s {
     float dampedCcOffset[3];
     float color_inhibition_level;
     float color_saturation_level;
+    ccm_3ares_info_t res3a_info;
 } accm_rest_t;
 
 typedef struct illu_node_s {

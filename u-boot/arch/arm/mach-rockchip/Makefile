@@ -12,7 +12,9 @@ obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
 obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
 
 obj-tpl-y += tpl.o
+ifndef CONFIG_SPL_DECOMP_HEADER
 obj-spl-y += spl.o spl-boot-order.o
+endif
 
 ifndef CONFIG_TPL_BUILD
 obj-$(CONFIG_$(SPL_)FIT) += fit_misc.o
@@ -45,7 +47,7 @@ obj-$(CONFIG_USING_KERNEL_DTB) += kernel_dtb.o
 obj-$(CONFIG_ROCKCHIP_FIT_IMAGE) += fit.o
 obj-$(CONFIG_ROCKCHIP_UIMAGE) += uimage.o
 obj-$(CONFIG_ROCKCHIP_SMCCC) += rockchip_smccc.o
-obj-$(CONFIG_ROCKCHIP_VENDOR_PARTITION) += vendor.o
+obj-$(CONFIG_ROCKCHIP_VENDOR_PARTITION) += vendor.o vendor_misc.o
 obj-$(CONFIG_ROCKCHIP_RESOURCE_IMAGE) += resource_img.o resource_logo.o
 obj-$(CONFIG_ROCKCHIP_HWID_DTB) += resource_hwid.o
 obj-$(CONFIG_ROCKCHIP_DEBUGGER) += rockchip_debugger.o
@@ -72,6 +74,7 @@ obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399/
 obj-$(CONFIG_ROCKCHIP_RK3568) += rk3568/
 obj-$(CONFIG_ROCKCHIP_RK3588) += rk3588/
 obj-$(CONFIG_ROCKCHIP_RK1808) += rk1808/
+obj-$(CONFIG_ROCKCHIP_RV1106) += rv1106/
 obj-$(CONFIG_ROCKCHIP_RV1108) += rv1108/
 obj-$(CONFIG_ROCKCHIP_RV1126) += rv1126/
 

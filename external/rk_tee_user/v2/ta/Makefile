@@ -32,7 +32,8 @@ TA_DIRS := create_fail_test \
 	   aes_perf \
 	   socket \
 	   supp_plugin \
-	   rk_test
+	   rk_test \
+	   extra_app
 
 ifeq ($(CFG_SECURE_DATA_PATH),y)
 TA_DIRS += sdp_basic
@@ -43,7 +44,7 @@ all: ta
 
 .PHONY: ta
 ta:
-	$(q)$(foreach dir,$(TA_DIRS), $(MAKE) -C $(dir) O=$(out-dir)/ta/$(dir) &&) true
+	$(q)$(foreach dir,$(TA_DIRS), [ ! -d $(dir) ] || $(MAKE) -C $(dir) O=$(out-dir)/ta/$(dir) &&) true
 
 # remove build directories including ta/<ta-name>/ directories.
 # Note: $(out-dir) may be a relative path.

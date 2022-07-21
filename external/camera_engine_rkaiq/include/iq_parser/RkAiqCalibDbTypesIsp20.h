@@ -1,6 +1,8 @@
 #ifndef _RK_AIQ_CALIB_TYPES_ISP20_H_
 #define _RK_AIQ_CALIB_TYPES_ISP20_H_
 
+#include "adpcc/rk_aiq_types_adpcc_ext.h"
+
 #pragma pack(4)
 
 #define CALIBDB_MAX_ISO_LEVEL 13
@@ -197,6 +199,8 @@ typedef struct CalibDb_AeEnvLvCalib_s {
 
 //2). Auto exposure
 typedef struct CalibDb_AeSpeed_s {
+    bool                    SmoothEn;
+    bool                    DyDampEn;
     float                   DampOver;
     float                   DampUnder;
     float                   DampDark2Bright;
@@ -689,7 +693,7 @@ typedef struct CalibDb_Awb_Cct_Clip_Cfg_s {
     float cri_bound_up[CALD_AWB_CT_CLIP_GRID_NUM_MAX];
     float cri_bound_low[CALD_AWB_CT_CLIP_GRID_NUM_MAX];
 }  CalibDb_Awb_Cct_Clip_Cfg_t;
-typedef struct CalibDb_limit_range_s{
+typedef struct CalibDb_limit_range_s {
     int lumaNum;
     float lumaValue[CALD_AWB_LV_NUM_MAX];
     unsigned short      maxR[CALD_AWB_LV_NUM_MAX];
@@ -700,7 +704,7 @@ typedef struct CalibDb_limit_range_s{
     unsigned short      minB[CALD_AWB_LV_NUM_MAX];
     unsigned short      maxY[CALD_AWB_LV_NUM_MAX];
     unsigned short      minY[CALD_AWB_LV_NUM_MAX];
-}CalibDb_limit_range_t;
+} CalibDb_limit_range_t;
 
 typedef struct CalibDb_Awb_Calib_Para_V200_s {
     struct list_head           listHead;
@@ -1045,18 +1049,6 @@ typedef struct CalibDb_Dpcc_set_s {
     CalibDb_Dpcc_set_RO_t ro;
 } CalibDb_Dpcc_set_t;
 
-typedef struct CalibDb_Dpcc_Fast_Mode_s {
-    int fast_mode_en;
-    int ISO[CALIBDB_DPCC_MAX_ISO_LEVEL];
-    int fast_mode_single_en;
-    int fast_mode_single_level[CALIBDB_DPCC_MAX_ISO_LEVEL];
-    int fast_mode_double_en;
-    int fast_mode_double_level[CALIBDB_DPCC_MAX_ISO_LEVEL];
-    int fast_mode_triple_en;
-    int fast_mode_triple_level[CALIBDB_DPCC_MAX_ISO_LEVEL];
-
-} CalibDb_Dpcc_Fast_Mode_t;
-
 typedef struct CalibDb_Dpcc_Pdaf_s {
     unsigned char en;
     unsigned char point_en[16];
@@ -1087,15 +1079,6 @@ typedef struct CalibDb_Dpcc_Expert_Mode_s {
     unsigned char stage1_use_set1[CALIBDB_DPCC_MAX_ISO_LEVEL];
     CalibDb_Dpcc_set_t set[3];
 } CalibDb_Dpcc_Expert_Mode_t;
-
-typedef struct CalibDb_Dpcc_Sensor_s {
-    float en;
-    float max_level;
-    float iso[CALIBDB_DPCC_MAX_ISO_LEVEL];
-    float level_single[CALIBDB_DPCC_MAX_ISO_LEVEL];
-    float level_multiple[CALIBDB_DPCC_MAX_ISO_LEVEL];
-} CalibDb_Dpcc_Sensor_t;
-
 
 typedef struct CalibDb_Dpcc_s {
     int enable;
@@ -1153,11 +1136,11 @@ typedef struct CalibDb_BayerNr_2_s {
 } CalibDb_BayerNr_2_t;
 
 
-#define CIFISP_LSC_DATA_TBL_SIZE           289
-#define CIFISP_LSC_GRAD_TBL_SIZE           8
-#define CIFISP_LSC_SIZE_TBL_SIZE           8
-#define LSC_GRAD_TBL_SIZE                  8
-#define LSC_ILLUMINATION_MAX               10
+#define CIFISP_LSC_DATA_TBL_SIZE_ISP20  289
+#define CIFISP_LSC_GRAD_TBL_SIZE_ISP20  8
+#define CIFISP_LSC_SIZE_TBL_SIZE_ISP20  8
+#define LSC_GRAD_TBL_SIZE_ISP20         8
+#define LSC_ILLUMINATION_MAX            10
 typedef enum  CalibDb_Used_For_Case_e {
     USED_FOR_CASE_NORMAL = 0,
     USED_FOR_CASE_FLASH,
@@ -1226,10 +1209,10 @@ typedef struct CalibDb_LscTableProfile_s {
     uint16_t                LscXo;
     uint16_t                LscYo;
 
-    uint16_t                LscXGradTbl[LSC_GRAD_TBL_SIZE];
-    uint16_t                LscYGradTbl[LSC_GRAD_TBL_SIZE];
-    uint16_t                LscXSizeTbl[CIFISP_LSC_SIZE_TBL_SIZE];
-    uint16_t                LscYSizeTbl[CIFISP_LSC_SIZE_TBL_SIZE];
+    uint16_t                LscXGradTbl[LSC_GRAD_TBL_SIZE_ISP20];
+    uint16_t                LscYGradTbl[LSC_GRAD_TBL_SIZE_ISP20];
+    uint16_t                LscXSizeTbl[CIFISP_LSC_SIZE_TBL_SIZE_ISP20];
+    uint16_t                LscYSizeTbl[CIFISP_LSC_SIZE_TBL_SIZE_ISP20];
 
     Cam17x17UShortMatrix_t  LscMatrix[CAM_4CH_COLOR_COMPONENT_MAX];     /**< matrix for different color channels */
 } CalibDb_LscTableProfile_t;
@@ -1266,7 +1249,7 @@ typedef struct CalibDb_RKDM_s {
 #define CCM_PROFILE_NAME            ( 25U )
 typedef char                        CalibDb_Ccm_ProfileName_t[CCM_PROFILE_NAME];
 #define CCM_ILLUMINATION_NAME       ( 20U )
-typedef char                        CalibDb_IlluminationName_t[CCM_ILLUMINATION_NAME];
+// typedef char                        CalibDb_IlluminationName_t[CCM_ILLUMINATION_NAME];
 #define CCM_PROFILES_NUM_MAX         ( 5 )
 #define CCM_RESOLUTIONS_NUM_MAX      ( 4 )
 #define CALIBDB_ISO_NUM              ( 9 )

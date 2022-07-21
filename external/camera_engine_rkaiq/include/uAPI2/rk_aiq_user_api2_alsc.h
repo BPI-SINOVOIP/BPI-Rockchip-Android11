@@ -19,14 +19,21 @@
 #define _RK_AIQ_USER_API2_ALSC_H_
 
 #include "alsc/rk_aiq_uapi_alsc_int.h"
-//#include "uAPI/rk_aiq_user_api_alsc.h"
 
+#ifndef RK_AIQ_SYS_CTX_T
+#define RK_AIQ_SYS_CTX_T
 typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
+#endif
 
 RKAIQ_BEGIN_DECLARE
 
+XCamReturn rk_aiq_user_api2_alsc_SetAttrib(const rk_aiq_sys_ctx_t *sys_ctx,
+                                           rk_aiq_lsc_attrib_t attr);
+XCamReturn rk_aiq_user_api2_alsc_GetAttrib(const rk_aiq_sys_ctx_t *sys_ctx,
+                                           rk_aiq_lsc_attrib_t *attr);
 XCamReturn
-rk_aiq_user_api2_alsc_QueryLscInfo(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_lsc_querry_info_t *lsc_querry_info);
+rk_aiq_user_api2_alsc_QueryLscInfo(const rk_aiq_sys_ctx_t *sys_ctx,
+                                   rk_aiq_lsc_querry_info_t *lsc_querry_info);
 
 RKAIQ_END_DECLARE
 

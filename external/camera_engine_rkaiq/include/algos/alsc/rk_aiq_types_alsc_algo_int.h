@@ -20,11 +20,12 @@
 #ifndef _RK_AIQ_TYPE_ALSC_ALGO_INT_H_
 #define _RK_AIQ_TYPE_ALSC_ALGO_INT_H_
 #include "alsc/rk_aiq_types_alsc_algo.h"
+#include "alsc_uapi_head.h"
 
 
 RKAIQ_BEGIN_DECLARE
 
-//add more here
+/** @brief LSC will use these data from other module*/
 typedef struct alsc_sw_info_s {
     float sensorGain;
     float awbGain[2];
@@ -35,13 +36,11 @@ typedef struct alsc_sw_info_s {
     int prepare_type;
 } alsc_sw_info_t;
 
-typedef struct rk_aiq_lsc_mlsc_attrib_s {
-    unsigned short r_data_tbl[LSC_DATA_TBL_SIZE];
-    unsigned short gr_data_tbl[LSC_DATA_TBL_SIZE];
-    unsigned short gb_data_tbl[LSC_DATA_TBL_SIZE];
-    unsigned short b_data_tbl[LSC_DATA_TBL_SIZE];
-
-} rk_aiq_lsc_mlsc_attrib_t;
+/**
+ * @brief Remember, 4 channel data array must be in the head of struct,
+ * and with the order of (r, gr, gb, b)!
+*/
+typedef struct rk_aiq_lsc_table_s rk_aiq_lsc_mlsc_attrib_t;
 
 typedef enum rk_aiq_lsc_op_mode_s {
     RK_AIQ_LSC_MODE_INVALID                     = 0,        /**< initialization value */
@@ -50,14 +49,15 @@ typedef enum rk_aiq_lsc_op_mode_s {
     RK_AIQ_LSC_MODE_MAX
 } rk_aiq_lsc_op_mode_t;
 
-
+/** @brief struct for setting-api, should careful consider when want to modify it*/
 typedef struct rk_aiq_lsc_attrib_s {
     bool byPass;
     rk_aiq_lsc_op_mode_t mode;
     rk_aiq_lsc_mlsc_attrib_t stManual;
-
+    rk_aiq_uapi_sync_t sync;
 } rk_aiq_lsc_attrib_t;
 
+/** @brief struct for setting-api, should careful consider when want to modify it*/
 typedef struct rk_aiq_lsc_querry_info_s {
     bool lsc_en;
     unsigned short r_data_tbl[LSC_DATA_TBL_SIZE];

@@ -57,7 +57,7 @@ struct VideoBufferInfo
 class VideoBuffer {
 public:
     explicit VideoBuffer (int64_t timestamp = InvalidTimestamp)
-        : _timestamp (timestamp)
+        : _timestamp (timestamp), _buf_type(0)
     {}
     explicit VideoBuffer (const VideoBufferInfo &info, int64_t timestamp = InvalidTimestamp)
         : _videoinfo (info)

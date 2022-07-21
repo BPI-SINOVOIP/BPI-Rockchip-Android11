@@ -26,7 +26,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.tv.settings.R;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -70,8 +70,35 @@ public final class Utils {
             DialogInterface.OnClickListener disconnectListener,
             CharSequence title, CharSequence message) {
         if (dialog == null) {
-            dialog = new AlertDialog.Builder(context, R.style.Theme_Settings_Transparent)
+            dialog = new AlertDialog.Builder(context, R.style.Theme_AlertDialog_Dark)
                     .setPositiveButton(android.R.string.ok, disconnectListener)
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+        } else {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            // use disconnectListener for the correct profile(s)
+            CharSequence okText = context.getText(android.R.string.ok);
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                    okText, disconnectListener);
+        }
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.show();
+        return dialog;
+    }
+
+    // Create (or recycle existing) and show forget dialog.
+    static AlertDialog showDisconnectDialog(Context context,
+            AlertDialog dialog,
+            DialogInterface.OnClickListener disconnectListener,
+            DialogInterface.OnClickListener forgetListerner,
+            CharSequence title, CharSequence message) {
+        if (dialog == null) {
+            dialog = new AlertDialog.Builder(context, R.style.Theme_AlertDialog_Dark)
+                    .setPositiveButton(android.R.string.ok, disconnectListener)
+                    .setNeutralButton(R.string.forget, forgetListerner)
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
         } else {

@@ -196,6 +196,15 @@ void DrmMode::ToDrmModeModeInfo(drm_mode_modeinfo *m) const {
   strncpy(m->name, name_.c_str(), DRM_DISPLAY_MODE_LEN);
 }
 
+void DrmMode::dump() const{
+  HWC2_ALOGI("Id=%d w=%d,h=%d,fps=%d,hsync_start=%d,hsync_end=%d,"
+              "htotal=%d,vsync_start=%d,vsync_end=%d,vtotal=%d,flags=%x",
+              id_, h_display_, v_display_, v_refresh_,
+              h_sync_start_, h_sync_end_, h_total_, v_sync_start_,
+              v_sync_end_, v_total_, flags_);
+  return;
+}
+
 uint32_t DrmMode::id() const {
   return id_;
 }

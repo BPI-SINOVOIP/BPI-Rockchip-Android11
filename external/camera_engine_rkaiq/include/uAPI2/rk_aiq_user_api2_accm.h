@@ -19,7 +19,10 @@
 #define _RK_AIQ_USER_API2_ACCM_H_
 #include "accm/rk_aiq_uapi_accm_int.h"
 
+#ifndef RK_AIQ_SYS_CTX_T
+#define RK_AIQ_SYS_CTX_T
 typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
+#endif
 
 RKAIQ_BEGIN_DECLARE
 

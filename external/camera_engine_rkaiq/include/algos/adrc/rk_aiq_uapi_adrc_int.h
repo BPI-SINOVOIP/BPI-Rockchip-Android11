@@ -4,7 +4,7 @@
 #include "base/xcam_common.h"
 #include "rk_aiq_algo_des.h"
 #include "rk_aiq_types_adrc_algo_int.h"
-
+#include "adrc_uapi_head.h"
 
 typedef drcAttr_t drc_attrib_t;
 

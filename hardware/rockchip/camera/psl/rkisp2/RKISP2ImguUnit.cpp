@@ -157,6 +157,9 @@ status_t RKISP2ImguUnit::stopAllWorkers()
         LOGE("Fail to stop raw woker");
         return status;
     }
+    if(mCtrlLoop!=NULL){
+        mCtrlLoop->stop();
+    }
     return status;
 }
 

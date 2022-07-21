@@ -17,7 +17,12 @@
 
 #ifdef TARGET_RK3368
 #include <hardware/img_gralloc_public.h>
+#if PLATFORM_SDK_API_VERSION >= 31
+#include <hardware/hardware_rockchip.h>
+#include <hardware/gralloc_rockchip.h>
+#else
 #include <hardware/gralloc.h>
+#endif
 #else
 #include <gralloc_drm.h>
 #include <gralloc_drm_handle.h>

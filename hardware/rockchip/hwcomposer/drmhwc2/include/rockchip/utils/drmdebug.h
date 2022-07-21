@@ -41,7 +41,7 @@
 
 
 /*hwc version*/
-#define GHWC_VERSION                    "HWC2-1.2.16"
+#define GHWC_VERSION                    "HWC2-1.3.1"
 
 //Print call statck when you call ALOGD_CALLSTACK.
 #define ALOGD_CALLSTACK(...)                             \
@@ -62,11 +62,17 @@ namespace android {
 #define HWC2_ALOGD_IF_DEBUG(x, ...)  \
     ALOGD_IF(LogLevel(DBG_DEBUG),"%s,line=%d " x ,__FUNCTION__,__LINE__, ##__VA_ARGS__)
 
+#define HWC2_ALOGD_IF_INFO(x, ...)  \
+    ALOGI_IF(LogLevel(DBG_INFO),"%s,line=%d " x ,__FUNCTION__,__LINE__, ##__VA_ARGS__)
+
 #define HWC2_ALOGE(x, ...)  \
     ALOGE("%s,line=%d " x ,__FUNCTION__,__LINE__, ##__VA_ARGS__)
 
 #define HWC2_ALOGI(x, ...)  \
     ALOGI("%s,line=%d " x ,__FUNCTION__,__LINE__, ##__VA_ARGS__)
+
+#define HWC2_ALOGW(x, ...)  \
+    ALOGW("%s,line=%d " x ,__FUNCTION__,__LINE__, ##__VA_ARGS__)
 
 
 enum LOG_LEVEL

@@ -20,7 +20,6 @@
 #ifndef _RK_AIQ_ALGO_ACCM_ITF_H_
 #define _RK_AIQ_ALGO_ACCM_ITF_H_
 
-#include "rk_aiq_algo_types_int.h"
 
 #define RKISP_ALGO_ACCM_VERSION     "v0.0.a"
 #define RKISP_ALGO_ACCM_VENDOR      "Rockchip"

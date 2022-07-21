@@ -10,7 +10,7 @@ set_prop(tee, vendor_keymaster_prop)
 allow tee property_socket:sock_file { write };
 allow tee block_device:dir { getattr search };
 allow tee security_block_device:blk_file { ioctl open read write };
-allowxperm tee security_block_device:blk_file ioctl { 0x800ca400 0xc010a401 0x8010a402  0x8004a405 0x8010a403 0x8008a404 0x8010a407 0x8010a406 };
+allowxperm tee security_block_device:blk_file ioctl { 0x4d01 0x800ca400 0xc010a401 0x8010a402  0x8004a405 0x8010a403 0x8008a404 0x8010a407 0x8010a406 };
 allow tee uboot_block_device:blk_file { ioctl open read write };
 allow tee rpmb_block_device:blk_file { ioctl open read write };
 allow tee rpmb_block_device:chr_file rw_file_perms;

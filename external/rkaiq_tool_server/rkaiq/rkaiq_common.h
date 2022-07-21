@@ -53,6 +53,7 @@ extern std::shared_ptr<RKAiqToolManager> rkaiq_manager;
 #define RKID_ISP_OFF "ISP_OFF"
 #define RKID_CHECK "IGNORE"
 #define RKID_SEND_FILE "SendFile"
+#define RKID_OFFLINE_RAW "OffRAW"
 
 #pragma pack(1)
 typedef struct CommandData_s {
@@ -81,6 +82,7 @@ typedef enum
     CMD_ID_CAPTURE_STATUS = 0x0001,
     CMD_ID_CAPTURE_RAW_CAPTURE = 0x0002,
     CMD_ID_CAPTURE_YUV_CAPTURE = 0x0006,
+    CMD_ID_CAPTURE_ONLINE_RAW_CAPTURE = 0x0007,
 } RkispCmdCaptureID_e;
 
 typedef enum
@@ -106,13 +108,24 @@ typedef enum
     DATA_ID_CAPTURE_YUV_GET_PARAM = 0x01,
     DATA_ID_CAPTURE_YUV_SET_PARAM = 0x02,
     DATA_ID_CAPTURE_YUV_START = 0x03,
-    DATA_ID_CAPTURE_YUV_CHECKSUM = 0x04,
+    DATA_ID_CAPTURE_YUV_CHECKSUM = 0x04
 } RkispCmdYuvCaptureProcID_e;
+
+typedef enum
+{
+    DATA_ID_CAPTURE_ONLINE_RAW_STATUS = 0x10,
+    DATA_ID_CAPTURE_ONLINE_RAW_GET_PARAM,
+    DATA_ID_CAPTURE_ONLINE_RAW_SET_PARAM,
+    DATA_ID_CAPTURE_ONLINE_RAW_START,
+    DATA_ID_CAPTURE_ONLINE_RAW_CHECKSUM,
+} RkispCmdOnlineRawCaptureProcID_e;
 
 typedef enum
 {
     RKISP_FORMAT_NV12 = 0x0,
     RKISP_FORMAT_NV16,
+    RKISP_FORMAT_YUYV,
+    RKISP_FORMAT_FBC0,
 } RkispFmt_e;
 
 #define RKCIF_CMD_GET_CSI_MEMORY_MODE _IOR('V', BASE_VIDIOC_PRIVATE + 0, int)

@@ -20,6 +20,9 @@
 
 #ifndef XCAM_DEFS_H
 #define XCAM_DEFS_H
+
+#include <assert.h>
+
 #if defined(__linux__)
 #include "unistd.h"
 #endif

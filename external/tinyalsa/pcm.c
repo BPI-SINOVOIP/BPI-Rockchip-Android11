@@ -597,14 +597,21 @@ struct pcm_params *pcm_params_get(unsigned int card, unsigned int device,
     struct snd_pcm_hw_params *params;
     char fn[256];
     int fd;
-
+    int count = 50;
     snprintf(fn, sizeof(fn), "/dev/snd/pcmC%uD%u%c", card, device,
              flags & PCM_IN ? 'c' : 'p');
 
+retry:
     fd = open(fn, O_RDWR);
     if (fd < 0) {
         fprintf(stderr, "cannot open device '%s'\n", fn);
-        goto err_open;
+        if (count > 0) {
+            usleep(20000);
+            count--;
+            goto retry;
+        } else {
+            goto err_open;
+        }
     }
 
     params = calloc(1, sizeof(struct snd_pcm_hw_params));

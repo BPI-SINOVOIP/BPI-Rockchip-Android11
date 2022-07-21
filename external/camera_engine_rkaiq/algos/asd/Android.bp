@@ -1,12 +1,5 @@
-cc_prebuilt_library_static {
+cc_rockchip_prebuilt_library_static {
     name: "librkaiq_asd",
     vendor: true,
-    arch: {
-        arm: {
-            srcs: ["android/arm/librkaiq_asd.a"],
-        },
-        arm64: {
-            srcs: ["android/arm64/librkaiq_asd.a"],
-        },
-    },
+    aiq: true,
 }

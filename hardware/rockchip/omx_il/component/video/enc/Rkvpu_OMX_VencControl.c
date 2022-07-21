@@ -41,7 +41,6 @@
 #include "Rockchip_OSAL_SharedMemory.h"
 #include "Rockchip_OSAL_Queue.h"
 #include <hardware/hardware.h>
-#include "hardware/rga.h"
 #include <fcntl.h>
 #include <poll.h>
 

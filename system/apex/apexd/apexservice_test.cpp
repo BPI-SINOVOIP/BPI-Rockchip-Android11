@@ -2196,7 +2196,7 @@ class ApexServiceRevertTest : public ApexServiceTest {
     }
   }
 
-  void CheckRevertWasPerformed(const std::vector<std::string>& expected_pkgs) {
+  void CheckActiveApexContents(const std::vector<std::string>& expected_pkgs) {
     // First check that /data/apex/active exists and has correct permissions.
     struct stat sd;
     ASSERT_EQ(0, stat(kActiveApexPackagesDataDir, &sd));
@@ -2234,7 +2234,38 @@ TEST_F(ApexServiceRevertTest, RevertActiveSessionsSuccessful) {
   auto pkg = StringPrintf("%s/com.android.apex.test_package@1.apex",
                           kActiveApexPackagesDataDir);
   SCOPED_TRACE("");
-  CheckRevertWasPerformed({pkg});
+  CheckActiveApexContents({pkg});
+}
+
+// Calling revertActiveSessions should not restore backup on checkpointing
+// devices
+TEST_F(ApexServiceRevertTest,
+       RevertActiveSessionsDoesNotRestoreBackupIfCheckpointingSupported) {
+  if (!supports_fs_checkpointing_) {
+    GTEST_SKIP() << "Can't run if filesystem checkpointing is not supported";
+  }
+
+  PrepareTestApexForInstall installer(GetTestFile("apex.apexd_test_v2.apex"));
+  if (!installer.Prepare()) {
+    return;
+  }
+
+  auto session = ApexSession::CreateSession(1543);
+  ASSERT_TRUE(IsOk(session));
+  ASSERT_TRUE(IsOk(session->UpdateStateAndCommit(SessionState::ACTIVATED)));
+
+  // Make sure /data/apex/active is non-empty.
+  ASSERT_TRUE(IsOk(service_->stagePackages({installer.test_file})));
+
+  PrepareBackup({GetTestFile("apex.apexd_test.apex")});
+
+  ASSERT_TRUE(IsOk(service_->revertActiveSessions()));
+
+  // Check that active apexes were not reverted.
+  auto pkg = StringPrintf("%s/com.android.apex.test_package@2.apex",
+                          kActiveApexPackagesDataDir);
+  SCOPED_TRACE("");
+  CheckActiveApexContents({pkg});
 }
 
 // Should fail to revert active sessions when there are none
@@ -2305,7 +2336,7 @@ TEST_F(ApexServiceRevertTest, ResumesRevert) {
   auto pkg2 = StringPrintf("%s/com.android.apex.test_package_2@1.apex",
                            kActiveApexPackagesDataDir);
   SCOPED_TRACE("");
-  CheckRevertWasPerformed({pkg1, pkg2});
+  CheckActiveApexContents({pkg1, pkg2});
 
   std::vector<ApexSessionInfo> sessions;
   ASSERT_TRUE(IsOk(service_->getSessions(&sessions)));

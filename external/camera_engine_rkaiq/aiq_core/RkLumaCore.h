@@ -27,6 +27,7 @@
 #include "video_buffer.h"
 #include "rk_aiq_luma.h"
 #include "RkAiqCalibDbTypes.h"
+#include "RkAiqCalibDbV2Helper.h"
 #include "rk_aiq_types.h"
 
 using namespace XCam;

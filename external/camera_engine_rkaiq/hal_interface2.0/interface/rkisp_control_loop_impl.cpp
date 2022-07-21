@@ -43,6 +43,7 @@
 #include "rk_aiq_user_api_imgproc.h"
 
 #include "rkaiq.h"
+#include "rk_aiq_api_private.h"
 #include "AiqCameraHalAdapter.h"
 
 #include "isp20/CamHwIsp20.h"
@@ -345,15 +346,21 @@ int rkisp_cl_rkaiq_init(void** cl_ctx, const char* tuning_file_path,
     xcam_get_log_level();
     LOGD("--------------------------rk_aiq_uapi_sysctl_init");
     rk_aiq_sys_ctx_t* aiq_ctx = NULL;
-    aiq_ctx = rk_aiq_uapi_sysctl_init(sns_entity_name, RK_3A_TUNING_FILE_PATH, NULL, NULL);
+    AiqCameraHalAdapter *gAiqCameraHalAdapter = new AiqCameraHalAdapter();
+    rk_aiq_metas_cb sMetas_cb = [=] (rk_aiq_metas_t* metas) -> XCamReturn {
+        LOGD("----------rkisp_aiq_metas_cb---metas.frame_id:%d-----------",metas->frame_id);
+        if((gAiqCameraHalAdapter)!=NULL){
+            gAiqCameraHalAdapter->metaCallback();
+        }
+        return XCAM_RETURN_NO_ERROR;
+    };
+    aiq_ctx = rk_aiq_uapi_sysctl_init(sns_entity_name, RK_3A_TUNING_FILE_PATH, NULL,sMetas_cb);
     RkCamera3VendorTags::get_vendor_tag_ops(&rkcamera_vendor_tag_ops_instance);
     set_camera_metadata_vendor_ops(&rkcamera_vendor_tag_ops_instance);
 
     LOGD("@%s(%d)aiq_ctx pointer(%p)",__FUNCTION__, __LINE__, aiq_ctx);
 
-    AiqCameraHalAdapter *gAiqCameraHalAdapter = NULL;
     if(aiq_ctx){
-        gAiqCameraHalAdapter = new AiqCameraHalAdapter(aiq_ctx->_rkAiqManager,aiq_ctx->_analyzer,aiq_ctx->_camHw);
         gAiqCameraHalAdapter->init(callbacks_ops);
         gAiqCameraHalAdapter->set_aiq_ctx(aiq_ctx);
     }
@@ -410,15 +417,9 @@ int rkisp_cl_prepare(void* cl_ctx,
         }
     }
 
+    ret = rk_aiq_uapi_sysctl_prepare(aiq_ctx, prepare_params->width, prepare_params->height, work_mode);
     gAiqCameraHalAdapter->set_static_metadata (prepare_params->staticMeta);
     gAiqCameraHalAdapter->set_working_mode(work_mode);
-    camera_metadata_entry mode_3dnr = gAiqCameraHalAdapter->get_static_metadata().find(RK_NR_FEATURE_3DNR_MODE);
-    if(mode_3dnr.count == 1) {
-	    ALOGI("RK_MODULE_NR:%d",mode_3dnr.data.u8[0]);
-        rk_aiq_uapi_sysctl_setModuleCtl(aiq_ctx,RK_MODULE_NR, mode_3dnr.data.u8[0]);
-    }
-
-    ret = rk_aiq_uapi_sysctl_prepare(aiq_ctx, prepare_params->width, prepare_params->height, work_mode);
 
     CamHwIsp20::selectIqFile(aiq_ctx->_sensor_entity_name, iq_file_full_name);
     property_set(CAM_IQ_PROPERTY_KEY,iq_file_full_name);

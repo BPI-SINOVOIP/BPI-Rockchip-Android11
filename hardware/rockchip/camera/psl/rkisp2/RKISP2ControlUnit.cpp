@@ -468,6 +468,7 @@ RKISP2ControlUnit::init()
             LOGE("Error initializing 3A control");
             return UNKNOWN_ERROR;
         }
+        mImguUnit->setCtrlLoop(mCtrlLoop);
     } else {
         LOGW("No need 3A control, isSocSensor: %s, rawDump:%d",
              cap->sensorType() == SENSOR_TYPE_SOC ? "Yes" : "No",
@@ -1368,8 +1369,6 @@ RKISP2ControlUnit::handleMessageFlush(Message &msg)
             }
             mStillCapSyncState = STILL_CAP_SYNC_STATE_TO_ENGINE_PRECAP;
         }
-
-        mCtrlLoop->stop();
     }
 
     mImguUnit->flush();

@@ -20,8 +20,13 @@ PRODUCT_COPY_FILES += \
 	$(call find-copy-subdir-files,*,$(CUR_PATH)/tools,$(TARGET_COPY_OUT_SYSTEM)/bin)
 endif
 
-ifneq ($(filter rk1126 rk356x, $(strip $(TARGET_BOARD_PLATFORM))), )
+ifneq ($(filter rk1126 rk356x rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
 IQ_FILES_PATH := $(TOP)/external/camera_engine_rkaiq/iqfiles/isp21
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,$(IQ_FILES_PATH)/,$(TARGET_COPY_OUT_VENDOR)/etc/camera/rkisp2/)
+endif
+ifneq ($(filter rk3588, $(strip $(TARGET_BOARD_PLATFORM))), )
+IQ_FILES_PATH := $(TOP)/external/camera_engine_rkaiq/iqfiles/isp3x
 PRODUCT_COPY_FILES += \
 	$(call find-copy-subdir-files,*,$(IQ_FILES_PATH)/,$(TARGET_COPY_OUT_VENDOR)/etc/camera/rkisp2/)
 endif

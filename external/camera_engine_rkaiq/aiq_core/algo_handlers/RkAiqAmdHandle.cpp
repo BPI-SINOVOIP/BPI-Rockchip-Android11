@@ -1,7 +1,5 @@
 /*
- * RkAiqAmdHandle.h
- *
- *  Copyright (c) 2019-2021 Rockchip Eletronics Co., Ltd.
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,109 +12,185 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
+#include "RkAiqAmdHandle.h"
+
 #include "RkAiqCore.h"
-#include "RkAiqHandle.h"
+#include "common/media_buffer/media_buffer.h"
 
 namespace RkCam {
 
-void RkAiqAmdHandle::init() {
+DEFINE_HANDLE_REGISTER_TYPE(RkAiqAmdHandleInt);
+
+XCamReturn RkAiqAmdHandleInt::prepare() {
     ENTER_ANALYZER_FUNCTION();
 
-    deInit();
-    mConfig       = (RkAiqAlgoCom*)(new RkAiqAlgoConfigAmd());
-    mPreInParam   = (RkAiqAlgoCom*)(new RkAiqAlgoPreAmd());
-    mPreOutParam  = (RkAiqAlgoResCom*)(new RkAiqAlgoPreResAmd());
-    mProcInParam  = (RkAiqAlgoCom*)(new RkAiqAlgoProcAmd());
-    mProcOutParam = (RkAiqAlgoResCom*)(new RkAiqAlgoProcResAmd());
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    ret = RkAiqHandle::prepare();
+    RKAIQCORE_CHECK_RET(ret, "amd handle prepare failed");
+
+    RkAiqAlgoConfigAmd* amd_config_int = (RkAiqAlgoConfigAmd*)mConfig;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
+
+    amd_config_int->spWidth    = sharedCom->spWidth;
+    amd_config_int->spHeight   = sharedCom->spHeight;
+    amd_config_int->spAlignedW = sharedCom->spAlignedWidth;
+    amd_config_int->spAlignedH = sharedCom->spAlignedHeight;
+
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->prepare(mConfig);
+    RKAIQCORE_CHECK_RET(ret, "amd algo prepare failed");
+
+    EXIT_ANALYZER_FUNCTION();
+    return XCAM_RETURN_NO_ERROR;
+}
+
+void RkAiqAmdHandleInt::init() {
+    ENTER_ANALYZER_FUNCTION();
+
+    RkAiqHandle::deInit();
+    mConfig      = (RkAiqAlgoCom*)(new RkAiqAlgoConfigAmd());
+    mPreInParam  = (RkAiqAlgoCom*)(new RkAiqAlgoPreAmd());
+    mPreOutParam = (RkAiqAlgoResCom*)(new RkAiqAlgoPreResAmd());
+    mProcInParam = (RkAiqAlgoCom*)(new RkAiqAlgoProcAmd());
+    // mProcOutParam = (RkAiqAlgoResCom*)(new RkAiqAlgoProcResAmd());
     mPostInParam  = (RkAiqAlgoCom*)(new RkAiqAlgoPostAmd());
     mPostOutParam = (RkAiqAlgoResCom*)(new RkAiqAlgoPostResAmd());
 
     EXIT_ANALYZER_FUNCTION();
 }
 
-XCamReturn RkAiqAmdHandle::prepare() {
+XCamReturn RkAiqAmdHandleInt::updateConfig(bool needSync) { return XCAM_RETURN_NO_ERROR; }
+
+XCamReturn RkAiqAmdHandleInt::preProcess() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret            = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
 
-    ret = RkAiqHandle::prepare();
-    RKAIQCORE_CHECK_RET(ret, "amd handle prepare failed");
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
 
-    // TODO config amd common params
-    RkAiqAlgoConfigAmd* adebayer_config = (RkAiqAlgoConfigAmd*)mConfig;
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->prepare(mConfig);
-        RKAIQCORE_CHECK_RET(ret, "amd algo prepare failed");
-    }
-
-    EXIT_ANALYZER_FUNCTION();
-    return ret;
-}
-
-XCamReturn RkAiqAmdHandle::preProcess() {
-    ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret            = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoPreAmd* amd_pre  = (RkAiqAlgoPreAmd*)mPreInParam;
+    RkAiqAlgoPreAmd* amd_pre_int        = (RkAiqAlgoPreAmd*)mPreInParam;
+    RkAiqAlgoPreResAmd* amd_pre_res_int = (RkAiqAlgoPreResAmd*)mPreOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::preProcess();
-    RKAIQCORE_CHECK_RET(ret, "amd handle preProcess failed");
-
-    // TODO config common amd preprocess params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->pre_process(mPreInParam, mPreOutParam);
-        RKAIQCORE_CHECK_RET(ret, "amd handle pre_process failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "amd handle preProcess failed");
     }
 
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->pre_process(mPreInParam, mPreOutParam);
+    RKAIQCORE_CHECK_RET(ret, "amd algo pre_process failed");
+
     EXIT_ANALYZER_FUNCTION();
-    return ret;
+    return XCAM_RETURN_NO_ERROR;
 }
 
-XCamReturn RkAiqAmdHandle::processing() {
-    XCamReturn ret            = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoProcAmd* amd_pre = (RkAiqAlgoProcAmd*)mProcInParam;
+XCamReturn RkAiqAmdHandleInt::processing() {
+    ENTER_ANALYZER_FUNCTION();
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoProcAmd* amd_proc_int = (RkAiqAlgoProcAmd*)mProcInParam;
+
+    mProcResShared = new RkAiqAlgoProcResAmdIntShared();
+    if (!mProcResShared.ptr()) {
+        LOGE("new amd mProcOutParam failed, bypass!");
+        return XCAM_RETURN_BYPASS;
+    }
+    RkAiqAlgoProcResAmd* amd_proc_res_int = &mProcResShared->result;
+
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::processing();
-    RKAIQCORE_CHECK_RET(ret, "amd handle processing failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "amd handle processing failed");
+    }
 
-    // TODO config common amd processing params
+    memset(&amd_proc_res_int->amd_proc_res, 0,
+           sizeof(amd_proc_res_int->amd_proc_res));
+    amd_proc_int->stats.spImage = shared->sp;
+    amd_proc_int->stats.ispGain = shared->ispGain;
+    RkAiqAlgoDescription* des   = (RkAiqAlgoDescription*)mDes;
+    ret                         = des->processing(mProcInParam, (RkAiqAlgoResCom*)amd_proc_res_int);
+    RKAIQCORE_CHECK_RET(ret, "amd algo processing failed");
 
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->processing(mProcInParam, mProcOutParam);
-        RKAIQCORE_CHECK_RET(ret, "amd algo processing failed");
+    MediaBuffer_t* mbuf = amd_proc_res_int->amd_proc_res.st_ratio;
+    if (mbuf) {
+        MotionBufMetaData_t* metadata = (MotionBufMetaData_t*)mbuf->pMetaData;
+        SmartPtr<BufferProxy> msg_data = new BufferProxy(mProcResShared);
+        msg_data->set_sequence(shared->frameId);
+        SmartPtr<XCamMessage> msg =
+            new RkAiqCoreVdBufMsg(XCAM_MESSAGE_AMD_PROC_RES_OK, metadata->frame_id, msg_data);
+        mAiqCore->post_message(msg);
     }
 
     EXIT_ANALYZER_FUNCTION();
     return ret;
 }
 
-XCamReturn RkAiqAmdHandle::postProcess() {
+XCamReturn RkAiqAmdHandleInt::postProcess() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret            = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoPostAmd* amd_pre = (RkAiqAlgoPostAmd*)mPostInParam;
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoPostAmd* amd_post_int        = (RkAiqAlgoPostAmd*)mPostInParam;
+    RkAiqAlgoPostResAmd* amd_post_res_int = (RkAiqAlgoPostResAmd*)mPostOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::postProcess();
-    RKAIQCORE_CHECK_RET(ret, "amd handle postProcess failed");
-
-    // TODO config common amd postProcess params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->post_process(mPostInParam, mPostOutParam);
-        RKAIQCORE_CHECK_RET(ret, "amd algo postProcess failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "amd handle postProcess failed");
+        return ret;
     }
 
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->post_process(mPostInParam, mPostOutParam);
+    RKAIQCORE_CHECK_RET(ret, "amd algo post_process failed");
+
     EXIT_ANALYZER_FUNCTION();
+    return ret;
+}
+
+XCamReturn RkAiqAmdHandleInt::genIspResult(RkAiqFullParams* params, RkAiqFullParams* cur_params) {
+    ENTER_ANALYZER_FUNCTION();
+
+    XCamReturn ret                = XCAM_RETURN_NO_ERROR;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
+    RkAiqAlgoProcResAmd* amd_com = &mProcResShared->result;
+
+    rk_aiq_isp_md_params_v20_t* md_param = params->mMdParams->data().ptr();
+    if (sharedCom->init) {
+        md_param->frame_id = 0;
+    } else {
+        md_param->frame_id = shared->frameId;
+    }
+
+    if (!amd_com) {
+        LOGD_ANALYZER("no amd result");
+        return XCAM_RETURN_NO_ERROR;
+    }
+
+    md_param->result = amd_com->amd_proc_res;
+
+    if (!this->getAlgoId()) {
+        RkAiqAlgoProcResAmd* amd_rk = (RkAiqAlgoProcResAmd*)amd_com;
+    }
+
+    cur_params->mMdParams = params->mMdParams;
+
+    EXIT_ANALYZER_FUNCTION();
+
     return ret;
 }
 

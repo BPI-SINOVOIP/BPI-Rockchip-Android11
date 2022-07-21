@@ -29,7 +29,7 @@ using namespace XCam;
 namespace RkCam {
 
 class Isp20Evt
-    : public ispHwEvt_t {
+    : public ispHwEvt_t, public BufferData {
 public:
     Isp20Evt(ICamHw *camHw, SmartPtr<SensorHw> sensor)
         : mSensor(sensor), mCamHw(camHw), mTimestamp(-1) {}
@@ -45,6 +45,9 @@ public:
         return mTimestamp;
     }
 
+    virtual uint8_t *map () {return NULL;}
+    virtual bool unmap () {return false;}
+
     uint32_t sequence;
     uint32_t expDelay;
 
@@ -54,6 +57,24 @@ private:
     SmartPtr<SensorHw> mSensor;
     ICamHw *mCamHw;
     int64_t mTimestamp;
+};
+
+class Isp20EvtBuffer
+    : public BufferProxy {
+public:
+    explicit Isp20EvtBuffer(SmartPtr<Isp20Evt> &buf,
+                            SmartPtr<V4l2Device> &device)
+        : BufferProxy (buf) {}
+    virtual ~Isp20EvtBuffer() {};
+    SmartPtr<Isp20Evt> get_data() {
+        SmartPtr<BufferData> buf = get_buffer_data ();
+        return buf.dynamic_cast_ptr<Isp20Evt>();
+    }
+private:
+    XCAM_DEAD_COPY(Isp20EvtBuffer);
+    //SmartPtr<RkAiqSofInfoProxy> _sofParams;
+    //SmartPtr<RKAiqSofInfo_t> _sofInfo;
+    //SmartPtr<SofEventData> _event_data;
 };
 
 }

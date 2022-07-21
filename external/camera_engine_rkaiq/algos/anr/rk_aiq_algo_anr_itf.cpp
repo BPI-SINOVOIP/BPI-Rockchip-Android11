@@ -17,10 +17,9 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "anr/rk_aiq_algo_anr_itf.h"
 #include "anr/rk_aiq_anr_algo.h"
-#include "shared_data_api_wrapper.h"
+#include "rk_aiq_algo_types.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -34,15 +33,14 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
 
     XCamReturn result = XCAM_RETURN_NO_ERROR;
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
 #if 1
     ANRContext_t* pAnrCtx = NULL;
     #if(ANR_USE_JSON_PARA)
-	ANRresult_t ret = ANRInit_json(&pAnrCtx, cfgInt->calibv2);
+	ANRresult_t ret = ANRInit_json(&pAnrCtx, cfg->calibv2);
     #else
-    ANRresult_t ret = ANRInit(&pAnrCtx, cfgInt->calib);
+    ANRresult_t ret = ANRInit(&pAnrCtx, cfg->calib);
     #endif
     if(ret != ANR_RET_SUCCESS) {
         result = XCAM_RETURN_ERROR_FAILED;
@@ -84,12 +82,12 @@ prepare(RkAiqAlgoCom* params)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
     ANRContext_t* pAnrCtx = (ANRContext_t *)params->ctx;
-    RkAiqAlgoConfigAnrInt* pCfgParam = (RkAiqAlgoConfigAnrInt*)params;	
+    RkAiqAlgoConfigAnr* pCfgParam = (RkAiqAlgoConfigAnr*)params;	
 	pAnrCtx->prepare_type = params->u.prepare.conf_type;
 
 	if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )){
 		#if(ANR_USE_JSON_PARA)
-		void *pCalibDbV2 = (void*)(pCfgParam->rk_com.u.prepare.calibv2);
+		void *pCalibDbV2 = (void*)(pCfgParam->com.u.prepare.calibv2);
 		CalibDbV2_BayerNrV1_t *bayernr_v1 = (CalibDbV2_BayerNrV1_t*)(CALIBDBV2_GET_MODULE_PTR((void*)pCalibDbV2, bayernr_v1));
 		bayernr_calibdbV2_assign(&pAnrCtx->bayernr_v1, bayernr_v1);
 		CalibDbV2_MFNR_t *mfnr_v1 = (CalibDbV2_MFNR_t*)(CALIBDBV2_GET_MODULE_PTR((void*)pCalibDbV2, mfnr_v1));
@@ -99,7 +97,7 @@ prepare(RkAiqAlgoCom* params)
 		CalibDbV2_UVNR_t *uvnr_v1 = (CalibDbV2_UVNR_t*)(CALIBDBV2_GET_MODULE_PTR((void*)pCalibDbV2, uvnr_v1));
     	uvnr_calibdbV2_assign(&pAnrCtx->uvnr_v1, uvnr_v1);
 		#else
-		void *pCalibDb = (void*)(pCfgParam->rk_com.u.prepare.calib);
+		void *pCalibDb = (void*)(pCfgParam->com.u.prepare.calib);
         pAnrCtx->stBayernrCalib =
             *(CalibDb_BayerNr_2_t*)(CALIBDB_GET_MODULE_PTR((void*)pCalibDb, bayerNr));
         pAnrCtx->stUvnrCalib =
@@ -130,9 +128,9 @@ pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
     ANRContext_t* pAnrCtx = (ANRContext_t *)inparams->ctx;
 
-    RkAiqAlgoPreAnrInt* pAnrPreParams = (RkAiqAlgoPreAnrInt*)inparams;
+    RkAiqAlgoPreAnr* pAnrPreParams = (RkAiqAlgoPreAnr*)inparams;
 
-    if (pAnrPreParams->rk_com.u.proc.gray_mode) {
+    if (pAnrPreParams->com.u.proc.gray_mode) {
         pAnrCtx->isGrayMode = true;
     }else {
         pAnrCtx->isGrayMode = false;
@@ -156,8 +154,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
 #if 1
-    RkAiqAlgoProcAnrInt* pAnrProcParams = (RkAiqAlgoProcAnrInt*)inparams;
-    RkAiqAlgoProcResAnrInt* pAnrProcResParams = (RkAiqAlgoProcResAnrInt*)outparams;
+    RkAiqAlgoProcAnr* pAnrProcParams = (RkAiqAlgoProcAnr*)inparams;
+    RkAiqAlgoProcResAnr* pAnrProcResParams = (RkAiqAlgoProcResAnr*)outparams;
     ANRContext_t* pAnrCtx = (ANRContext_t *)inparams->ctx;
     ANRExpInfo_t stExpInfo;
     memset(&stExpInfo, 0x00, sizeof(ANRExpInfo_t));
@@ -187,8 +185,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 	stExpInfo.snr_mode = 0;
 
 #if 1
-    RKAiqAecExpInfo_t *preExp = pAnrProcParams->rk_com.u.proc.preExp;
-    RKAiqAecExpInfo_t *curExp = pAnrProcParams->rk_com.u.proc.curExp;
+    RKAiqAecExpInfo_t *preExp = pAnrProcParams->com.u.proc.preExp;
+    RKAiqAecExpInfo_t *curExp = pAnrProcParams->com.u.proc.curExp;
 
     if(preExp != NULL && curExp != NULL) {
         stExpInfo.cur_snr_mode = curExp->CISFeature.SNR;
@@ -218,16 +216,6 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
                     curExp->LinearExp.exp_real_params.digital_gain,
                     curExp->LinearExp.exp_real_params.dcg_mode,
                     curExp->CISFeature.SNR);
-
-            /* test shared data api */
-            RKAiqAecExpInfo_t *exp_param = nullptr;
-            shared_data_api_get_exposure_params(inparams->frame_id, &exp_param);
-            if (exp_param != nullptr)
-                LOGD_ANR("%s: frame_id %d, get exp param: (%f, %f)",
-                        __FUNCTION__,
-                        inparams->frame_id,
-                        exp_param->LinearExp.exp_real_params.analog_gain,
-                        exp_param->LinearExp.exp_real_params.integration_time);
         } else {
             for(int i = 0; i < 3; i++) {
                 stExpInfo.arAGain[i] =  curExp->HdrExp[i].exp_real_params.analog_gain,

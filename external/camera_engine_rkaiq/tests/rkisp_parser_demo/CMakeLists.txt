@@ -34,12 +34,12 @@ endif()
 
 if(ADD_RK_AIQ)
 add_compile_options(-DADD_RK_AIQ)
-SET(RK_AIQ_LIB_DIR ${PROJECT_SOURCE_DIR}/../../build/linux/all_lib/${CMAKE_BUILD_TYPE})
+SET(RK_AIQ_LIB_DIR ${PROJECT_SOURCE_DIR}/../rk_aiq/build/linux/all_lib/${CMAKE_BUILD_TYPE})
 message("rkaiq lib path" ${RK_AIQ_LIB_DIR})
 SET(RK_AIQ_LIB rkaiq)
 endif()
 
-set(RK_AIQ_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../../)
+set(RK_AIQ_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../rk_aiq)
 message("rkaiq src path" ${RK_AIQ_SOURCE_DIR})
 #head file path
 include_directories(
@@ -91,3 +91,10 @@ link_directories("${LIBRARY_OUTPUT_PATH}" "${RK_AIQ_LIB_DIR}")
 #add executable file
 ADD_EXECUTABLE(rkisp_parser ${DIR_SRCS})
 target_link_libraries(rkisp_parser ${RK_AIQ_LIB} ${LINK_ASAN})
+if(ARCH STREQUAL "m32")
+message("arch m32")
+set_target_properties(rkisp_parser PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+else()
+message("arch m64")
+set_target_properties(rkisp_parser PROPERTIES COMPILE_FLAGS "-m64" LINK_FLAGS "-m64")
+endif()

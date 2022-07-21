@@ -23,6 +23,7 @@
 #include <linux/platform_device.h>
 #include <linux/regmap.h>
 #include <linux/reset.h>
+#include <linux/rockchip/cpu.h>
 #include <linux/thermal.h>
 #include <linux/mfd/syscon.h>
 #include <linux/pinctrl/consumer.h>
@@ -94,6 +95,7 @@ struct chip_tsadc_table {
  * struct rockchip_tsadc_chip - hold the private data of tsadc chip
  * @chn_id[SOC_MAX_SENSORS]: the sensor id of chip correspond to the channel
  * @chn_num: the channel number of tsadc chip
+ * @conversion_time: the conversion time of tsadc
  * @tshut_temp: the hardware-controlled shutdown temperature value
  * @tshut_mode: the hardware-controlled shutdown mode (0:CRU 1:GPIO)
  * @tshut_polarity: the hardware-controlled active polarity (0:LOW 1:HIGH)
@@ -105,12 +107,16 @@ struct chip_tsadc_table {
  * @set_tshut_mode: set the hardware-controlled shutdown mode
  * @get_trim_code: get the trim code by otp value
  * @trim_temp: get trim temp by trim code
+ * @set_clk_rate: set clock rate
  * @table: the chip-specific conversion table
  */
 struct rockchip_tsadc_chip {
 	/* The sensor id of chip correspond to the ADC channel */
 	int chn_id[SOC_MAX_SENSORS];
 	int chn_num;
+
+	/* The sensor electrical characteristics */
+	int conversion_time;
 
 	/* The hardware-controlled tshut property */
 	int tshut_temp;
@@ -135,6 +141,7 @@ struct rockchip_tsadc_chip {
 	int (*get_trim_code)(struct platform_device *pdev,
 			     int code, int trim_base);
 	int (*trim_temp)(struct platform_device *pdev);
+	int (*set_clk_rate)(struct platform_device *pdev);
 
 	/* Per-table methods */
 	struct chip_tsadc_table table;
@@ -241,6 +248,7 @@ struct rockchip_thermal_data {
 #define GRF_TSADC_TESTBIT_L			0x0e648
 #define GRF_TSADC_TESTBIT_H			0x0e64c
 
+#define PX30_GRF_SOC_CON0			0x0400
 #define PX30_GRF_SOC_CON2			0x0408
 
 #define RK1808_BUS_GRF_SOC_CON0			0x0400
@@ -264,6 +272,8 @@ struct rockchip_thermal_data {
 #define GRF_TSADC_VCM_EN_H			(0x10001 << 7)
 
 #define GRF_CON_TSADC_CH_INV			(0x10001 << 1)
+#define PX30S_TSADC_TDC_MODE			(0x10001 << 4)
+#define PX30S_TSADC_TRIM			(0xf0007 << 0)
 
 #define MIN_TEMP				(-40000)
 #define LOWEST_TEMP				(-273000)
@@ -899,6 +909,16 @@ static void rk_tsadcv7_initialize(struct regmap *grf, void __iomem *regs,
 	}
 }
 
+static void rk_tsadcv9_initialize(struct regmap *grf, void __iomem *regs,
+				  enum tshut_polarity tshut_polarity)
+{
+	rk_tsadcv2_initialize(grf, regs, tshut_polarity);
+	if (!IS_ERR(grf)) {
+		regmap_write(grf, PX30_GRF_SOC_CON0, PX30S_TSADC_TDC_MODE);
+		regmap_write(grf, PX30_GRF_SOC_CON0, PX30S_TSADC_TRIM);
+	}
+}
+
 static void rk_tsadcv2_irq_ack(void __iomem *regs)
 {
 	u32 val;
@@ -1159,6 +1179,29 @@ static int rk_tsadcv1_trim_temp(struct platform_device *pdev)
 	return thermal->trim * 500;
 }
 
+static int rk_tsadcv1_set_clk_rate(struct platform_device *pdev)
+{
+	struct clk *clk;
+	int error;
+
+	clk = devm_clk_get(&pdev->dev, "tsadc");
+	if (IS_ERR(clk)) {
+		error = PTR_ERR(clk);
+		dev_err(&pdev->dev, "failed to get tsadc clock\n");
+		return error;
+	}
+	error = clk_set_rate(clk, 4000000);
+	if (error < 0) {
+		devm_clk_put(&pdev->dev, clk);
+		dev_err(&pdev->dev,
+			"failed to set tsadc clk rate to 4000000Hz\n");
+		return error;
+	}
+	devm_clk_put(&pdev->dev, clk);
+
+	return 0;
+}
+
 static const struct rockchip_tsadc_chip rv1108_tsadc_data = {
 	.chn_id[SENSOR_CPU] = 0, /* cpu sensor is channel 0 */
 	.chn_num = 1, /* one channel for tsadc */
@@ -1330,6 +1373,29 @@ static const struct rockchip_tsadc_chip px30_tsadc_data = {
 	},
 };
 
+static const struct rockchip_tsadc_chip px30s_tsadc_data = {
+	.chn_id[SENSOR_CPU] = 0, /* cpu sensor is channel 0 */
+	.chn_id[SENSOR_GPU] = 1, /* gpu sensor is channel 1 */
+	.chn_num = 2, /* 1 channels for tsadc */
+	.conversion_time = 2100, /* us */
+	.tshut_mode = TSHUT_MODE_CRU, /* default TSHUT via CRU */
+	.tshut_temp = 95000,
+	.initialize = rk_tsadcv9_initialize,
+	.irq_ack = rk_tsadcv3_irq_ack,
+	.control = rk_tsadcv2_control,
+	.get_temp = rk_tsadcv2_get_temp,
+	.set_alarm_temp = rk_tsadcv2_alarm_temp,
+	.set_tshut_temp = rk_tsadcv2_tshut_temp,
+	.set_tshut_mode = rk_tsadcv2_tshut_mode,
+	.set_clk_rate = rk_tsadcv1_set_clk_rate,
+	.table = {
+		.kNum = 2699,
+		.bNum = 2796,
+		.data_mask = TSADCV2_DATA_MASK,
+		.mode = ADC_INCREMENT,
+	},
+};
+
 static const struct rockchip_tsadc_chip rk3328_tsadc_data = {
 	.chn_id[SENSOR_CPU] = 0, /* cpu sensor is channel 0 */
 	.chn_num = 1, /* one channels for tsadc */
@@ -1469,6 +1535,9 @@ static const struct of_device_id of_rockchip_thermal_match[] = {
 #ifdef CONFIG_CPU_PX30
 	{	.compatible = "rockchip,px30-tsadc",
 		.data = (void *)&px30_tsadc_data,
+	},
+	{	.compatible = "rockchip,px30s-tsadc",
+		.data = (void *)&px30s_tsadc_data,
 	},
 #endif
 #ifdef CONFIG_CPU_RK1808
@@ -1828,6 +1897,8 @@ static int rockchip_thermal_probe(struct platform_device *pdev)
 	thermal->chip = (const struct rockchip_tsadc_chip *)match->data;
 	if (!thermal->chip)
 		return -EINVAL;
+	if (soc_is_px30s())
+		thermal->chip = &px30s_tsadc_data;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	thermal->regs = devm_ioremap_resource(&pdev->dev, res);
@@ -1852,6 +1923,9 @@ static int rockchip_thermal_probe(struct platform_device *pdev)
 		return error;
 	}
 	platform_set_drvdata(pdev, thermal);
+
+	if (thermal->chip->set_clk_rate)
+		thermal->chip->set_clk_rate(pdev);
 
 	thermal->chip->control(thermal->regs, false);
 
@@ -1908,6 +1982,9 @@ static int rockchip_thermal_probe(struct platform_device *pdev)
 	}
 
 	thermal->chip->control(thermal->regs, true);
+	if (thermal->chip->conversion_time)
+		usleep_range(thermal->chip->conversion_time,
+			     thermal->chip->conversion_time + 50);
 
 	for (i = 0; i < thermal->chip->chn_num; i++)
 		rockchip_thermal_toggle_sensor(&thermal->sensors[i], true);
@@ -2014,6 +2091,9 @@ static int __maybe_unused rockchip_thermal_resume(struct device *dev)
 	}
 
 	thermal->chip->control(thermal->regs, true);
+	if (thermal->chip->conversion_time)
+		usleep_range(thermal->chip->conversion_time,
+			     thermal->chip->conversion_time + 50);
 
 	for (i = 0; i < thermal->chip->chn_num; i++)
 		rockchip_thermal_toggle_sensor(&thermal->sensors[i], true);

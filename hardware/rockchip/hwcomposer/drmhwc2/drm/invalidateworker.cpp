@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
+#define ATRACE_TAG ATRACE_TAG_GRAPHICS
 #define LOG_TAG "hwc-invalidate-worker"
 
 #include "rockchip/invalidateworker.h"
-#include "worker.h"
+#include "utils/worker.h"
 
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-
+#include <utils/Trace.h>
 #include <hardware/hardware.h>
 #include <log/log.h>
 
 namespace android {
 
 InvalidateWorker::InvalidateWorker()
-    : Worker("vsync", HAL_PRIORITY_URGENT_DISPLAY),
+    : Worker("hwc2-invalidate", HAL_PRIORITY_URGENT_DISPLAY),
       enable_(false),
       display_(-1),
       refresh_(0),
@@ -52,6 +53,9 @@ void InvalidateWorker::RegisterCallback(std::shared_ptr<InvalidateCallback> call
 }
 
 void InvalidateWorker::InvalidateControl(uint64_t refresh, int refresh_cnt) {
+  if(refresh_ == refresh &&
+     refresh_cnt_ == refresh_cnt)
+    return;
   Lock();
   refresh_ = refresh;
   refresh_cnt_ = refresh_cnt;
@@ -103,6 +107,7 @@ int InvalidateWorker::SyntheticWaitVBlank(int64_t *timestamp) {
 
 
 void InvalidateWorker::Routine() {
+  ATRACE_CALL();
   int ret;
 
   Lock();
@@ -122,6 +127,7 @@ void InvalidateWorker::Routine() {
 
   if(refresh_cnt_ > 0)
     refresh_cnt_--;
+
   std::shared_ptr<InvalidateCallback> callback(callback_);
   Unlock();
 

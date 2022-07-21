@@ -54,6 +54,11 @@ public:
     void reset();
     XCamReturn start();
     void stop();
+    void setCamPhyId(int phyId) {
+        mCamPhyId = phyId;
+    }
+protected:
+    int mCamPhyId;
 private:
     XCAM_DEAD_COPY(IspParamsAssembler);
     XCamReturn queue_locked(SmartPtr<cam3aResult>& result);
@@ -89,8 +94,12 @@ public:
         AntiTmoFlicker.FirstChangeNum = 0;
         AntiTmoFlicker.FirstChangeDone = false;
         AntiTmoFlicker.FirstChangeDoneNum = 0;
+        _working_mode = RK_AIQ_WORKING_MODE_ISP_HDR3;
     };
     virtual ~Isp20Params() {};
+    virtual void setCamPhyId(int phyId) {
+        _CamPhyId = phyId;
+    }
 
     virtual XCamReturn checkIsp20Params(struct isp2x_isp_params_cfg& isp_cfg);
     void set_working_mode(int mode);
@@ -215,6 +224,7 @@ protected:
     u32 _force_ispp_module_ens;
     u64 _force_module_flags;
     int _working_mode;
+    int _CamPhyId;
     AntiTmoFlicker_t AntiTmoFlicker;
     Mutex _mutex;
 

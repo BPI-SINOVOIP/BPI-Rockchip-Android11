@@ -96,6 +96,7 @@ void j2s_release_data(j2s_ctx* ctx, void* ptr);
 
 /* Init/deinit j2s_ctx */
 void j2s_init(j2s_ctx* ctx);
+void j2s_camgroup_init(j2s_ctx* ctx);
 void j2s_deinit(j2s_ctx* ctx);
 
 /* Get size of struct */

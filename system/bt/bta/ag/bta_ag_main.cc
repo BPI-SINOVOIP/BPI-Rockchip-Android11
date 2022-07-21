@@ -666,7 +666,7 @@ void bta_ag_api_register(tBTA_SERVICE_MASK services, tBTA_SEC sec_mask,
     data.api_register.services = services;
     data.api_register.app_id = app_id;
     for (int i = 0; i < BTA_AG_NUM_IDX; i++) {
-      if (!service_names[i].empty()) {
+      if (!service_names[i].empty() && (int)service_names.size() > i) {
         strlcpy(data.api_register.p_name[i], service_names[i].c_str(),
                 BTA_SERVICE_NAME_LEN);
       } else {

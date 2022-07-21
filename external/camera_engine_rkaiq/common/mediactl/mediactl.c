@@ -250,6 +250,7 @@ int media_setup_link(struct media_device *media,
 	}
 
 	/* source pad */
+	memset(&ulink, 0, sizeof(ulink));
 	ulink.source.entity = source->entity->info.id;
 	ulink.source.index = source->index;
 	ulink.source.flags = MEDIA_PAD_FL_SOURCE;
@@ -339,6 +340,7 @@ static int media_enum_links(struct media_device *media)
 		struct media_links_enum links;
 		unsigned int i;
 
+		memset(&links, 0, sizeof(links));
 		links.entity = entity->info.id;
 		links.pads = calloc(entity->info.pads, sizeof(struct media_pad_desc));
 		links.links = calloc(entity->info.links, sizeof(struct media_link_desc));

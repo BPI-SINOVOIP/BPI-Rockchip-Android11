@@ -20,7 +20,6 @@ extern std::shared_ptr<RKAiqMedia> rkaiq_media;
 extern std::shared_ptr<RKAiqToolManager> rkaiq_manager;
 extern std::string iqfile;
 extern std::string g_sensor_name;
-extern std::string g_sensor_name1;
 
 RKAiqToolManager::RKAiqToolManager()
 {
@@ -40,10 +39,6 @@ RKAiqToolManager::RKAiqToolManager()
     rk_aiq_ver_info_t vers;
     sysctl_->GetVersionInfo(&vers, ENUM_ID_SYSCTL_GETVERSIONINFO);
     LOG_ERROR("vers aiq_ver %s iq_parser_ver %s\n", vers.aiq_ver, vers.iq_parser_ver);
-
-    rk_aiq_static_info_t static_info;
-    sysctl_->EnumStaticMetas(&static_info, ENUM_ID_SYSCTL_ENUMSTATICMETAS);
-    LOG_ERROR("the net name is %s\n", static_info.sensor_info.sensor_name);
 }
 
 RKAiqToolManager::~RKAiqToolManager()

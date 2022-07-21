@@ -36,7 +36,7 @@ public:
     }
     virtual ~FakeV4l2Device () {
     }
-    virtual XCamReturn open ();
+    virtual XCamReturn open (bool nonblock = false);
     virtual XCamReturn close ();
     int create_notify_pipe ();
     void destroy_notify_pipe ();

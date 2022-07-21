@@ -374,7 +374,7 @@ Error Display::getRequests(HWC2::DisplayRequest* outDisplayRequests,
                     static_cast<LayerRequest>(layerRequests[element]);
             outLayerRequests->emplace(layer, layerRequest);
         } else {
-            ALOGE("getRequests: invalid layer %" PRIu64 " found on display %"
+            ALOGV("getRequests: invalid layer %" PRIu64 " found on display %"
                     PRIu64, layerIds[element], mId);
         }
     }

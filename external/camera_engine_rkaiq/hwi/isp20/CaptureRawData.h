@@ -40,6 +40,7 @@ public:
     virtual ~CaptureRawData     ();
     CaptureRawData(const CaptureRawData&)=delete;
     CaptureRawData& operator=(const CaptureRawData&)=delete;
+    explicit CaptureRawData(int32_t camId);
     static CaptureRawData& getInstance() {
         static CaptureRawData instance;
         return instance;
@@ -61,6 +62,9 @@ public:
         SmartPtr<RkAiqAfInfoProxy>& afParams,
         int working_mode
     );
+    bool is_need_save_metadata_and_register() {
+        return _capture_metadata_num > 0 ? true : false;
+    }
 private:
     CaptureRawData ();
     int calculate_stride_per_line(const struct capture_fmt& fmt,
@@ -96,7 +100,7 @@ private:
     Mutex _capture_image_mutex;
     Cond _capture_image_cond;
     capture_raw_t _capture_raw_type;
-
+    int32_t _camId;
 };
 
 

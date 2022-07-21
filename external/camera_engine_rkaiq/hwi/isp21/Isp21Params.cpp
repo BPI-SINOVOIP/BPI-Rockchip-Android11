@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-
 #include "Isp21Params.h"
 
 namespace RkCam {
@@ -24,7 +22,7 @@ namespace RkCam {
 
 template<class T>
 void Isp21Params::convertAiqAwbGainToIsp21Params(T& isp_cfg,
-        const rk_aiq_wb_gain_t& awb_gain, const rk_aiq_isp_blc_v21_t &blc,
+        const rk_aiq_wb_gain_t& awb_gain, const rk_aiq_isp_blc_v21_t *blc,
         bool awb_gain_update)
 {
 
@@ -39,12 +37,13 @@ void Isp21Params::convertAiqAwbGainToIsp21Params(T& isp_cfg,
     struct isp21_awb_gain_cfg *  cfg = &isp_cfg.others.awb_gain_cfg;
     uint16_t max_wb_gain = (1 << (ISP2X_WBGAIN_FIXSCALE_BIT + 3)) - 1;
     rk_aiq_wb_gain_t awb_gain1 = awb_gain;
-    if(blc.v0.enable) {
-        awb_gain1.bgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc.v0.blc_b);
-        awb_gain1.gbgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc.v0.blc_gb);
-        awb_gain1.rgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc.v0.blc_r);
-        awb_gain1.grgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc.v0.blc_gr);
+    if(blc != nullptr && blc->v0.enable) {
+        awb_gain1.bgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc->v0.blc_b);
+        awb_gain1.gbgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc->v0.blc_gb);
+        awb_gain1.rgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc->v0.blc_r);
+        awb_gain1.grgain *= (float)((1 << ISP2X_BLC_BIT_MAX) - 1) / ((1 << ISP2X_BLC_BIT_MAX) - 1 - blc->v0.blc_gr);
     }
+
     uint16_t R = (uint16_t)(0.5 + awb_gain1.rgain * (1 << ISP2X_WBGAIN_FIXSCALE_BIT));
     uint16_t B = (uint16_t)(0.5 + awb_gain1.bgain * (1 << ISP2X_WBGAIN_FIXSCALE_BIT));
     uint16_t Gr = (uint16_t)(0.5 + awb_gain1.grgain * (1 << ISP2X_WBGAIN_FIXSCALE_BIT));
@@ -64,11 +63,13 @@ void Isp21Params::convertAiqAwbGainToIsp21Params(T& isp_cfg,
 
 }
 
+template<class T>
 void
-Isp21Params::convertAiqBlcToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
+Isp21Params::convertAiqBlcToIsp21Params(T& isp_cfg,
                                         rk_aiq_isp_blc_v21_t &blc)
 {
-    LOGD_CAMHW_SUBM(ISP20PARAM_SUBM, "%s:(%d) enter \n", __FUNCTION__, __LINE__);
+    LOG1_CAMHW_SUBM(ISP20PARAM_SUBM, "%s:(%d) enter \n", __FUNCTION__, __LINE__);
+    int tmp = 0;
 
     if(blc.v0.enable) {
         isp_cfg.module_ens |= ISP2X_MODULE_BLS;
@@ -99,7 +100,41 @@ Isp21Params::convertAiqBlcToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
     //TODO bls1 params
     isp_cfg.others.bls_cfg.bls1_en = 0;
 
-    LOGD_CAMHW_SUBM(ISP20PARAM_SUBM, "%s:(%d) exit \n", __FUNCTION__, __LINE__);
+#if defined(ISP_HW_V30)
+    struct isp21_awb_gain_cfg *awb_cfg = &isp_cfg.others.awb_gain_cfg;
+    uint16_t base_wb_gain = 1 << ISP2X_WBGAIN_FIXSCALE_BIT;
+
+    isp_cfg.others.bls_cfg.bls1_en = blc.v0.blc1_enable;
+    tmp = blc.v0.blc1_r * awb_cfg->gain0_red  / base_wb_gain;
+    if(tmp > 0x1fff)
+        tmp = 0x1fff;
+    if(tmp < 0)
+        tmp = 0;
+    isp_cfg.others.bls_cfg.bls1_val.r = tmp;
+
+    tmp = blc.v0.blc1_gr * awb_cfg->gain0_green_r / base_wb_gain;
+    if(tmp > 0x1fff)
+        tmp = 0x1fff;
+    if(tmp < 0)
+        tmp = 0;
+    isp_cfg.others.bls_cfg.bls1_val.gr = tmp;
+
+    tmp = blc.v0.blc1_gb * awb_cfg->gain0_green_b / base_wb_gain;
+    if(tmp > 0x1fff)
+        tmp = 0x1fff;
+    if(tmp < 0)
+        tmp = 0;
+    isp_cfg.others.bls_cfg.bls1_val.gb = tmp;
+
+    tmp = blc.v0.blc1_b * awb_cfg->gain0_blue / base_wb_gain;
+    if(tmp > 0x1fff)
+        tmp = 0x1fff;
+    if(tmp < 0)
+        tmp = 0;
+    isp_cfg.others.bls_cfg.bls1_val.b = tmp;
+#endif
+
+    LOG1_CAMHW_SUBM(ISP20PARAM_SUBM, "%s:(%d) exit \n", __FUNCTION__, __LINE__);
 
 }
 
@@ -107,9 +142,7 @@ void
 Isp21Params::convertAiqAdehazeToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
         const rk_aiq_isp_dehaze_v21_t& dhaze)
 {
-
-    bool enable = true;
-    if(enable) {
+    if(dhaze.ProcResV21.enable) {
         isp_cfg.module_en_update |= ISP2X_MODULE_DHAZ;
         isp_cfg.module_ens |= ISP2X_MODULE_DHAZ;
         isp_cfg.module_cfg_update |= ISP2X_MODULE_DHAZ;
@@ -122,65 +155,59 @@ Isp21Params::convertAiqAdehazeToIsp21Params(struct isp21_isp_params_cfg& isp_cfg
 
     struct isp21_dhaz_cfg *  cfg = &isp_cfg.others.dhaz_cfg;
 
-    //isp_cfg.others.dhaz_cfg.enhance_en = dhaze.enhance_en;
-    //isp_cfg.others.dhaz_cfg.dc_en  = dhaze.dc_en;
-    //LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%s:(%d) cfg->dc_en:%d cfg->enhance_en:%d\n", __FUNCTION__, __LINE__, cfg->dc_en,cfg->enhance_en);
+    cfg->enhance_en     = dhaze.ProcResV21.enhance_en;
+    cfg->air_lc_en  = dhaze.ProcResV21.air_lc_en;
+    cfg->hpara_en   = dhaze.ProcResV21.hpara_en;
+    cfg->hist_en    = dhaze.ProcResV21.hist_en;
+    cfg->dc_en  = dhaze.ProcResV21.dc_en;
+    cfg->yblk_th    = dhaze.ProcResV21.yblk_th;
+    cfg->yhist_th   = dhaze.ProcResV21.yhist_th;
+    cfg->dc_max_th  = dhaze.ProcResV21.dc_max_th;
+    cfg->dc_min_th  = dhaze.ProcResV21.dc_min_th;
+    cfg->wt_max     = dhaze.ProcResV21.wt_max;
+    cfg->bright_max     = dhaze.ProcResV21.bright_max;
+    cfg->bright_min     = dhaze.ProcResV21.bright_min;
+    cfg->tmax_base  = dhaze.ProcResV21.tmax_base;
+    cfg->dark_th    = dhaze.ProcResV21.dark_th;
+    cfg->air_max    = dhaze.ProcResV21.air_max;
+    cfg->air_min    = dhaze.ProcResV21.air_min;
+    cfg->tmax_max   = dhaze.ProcResV21.tmax_max;
+    cfg->tmax_off   = dhaze.ProcResV21.tmax_off;
+    cfg->hist_k     = dhaze.ProcResV21.hist_k;
+    cfg->hist_th_off    = dhaze.ProcResV21.hist_th_off;
+    cfg->hist_min   = dhaze.ProcResV21.hist_min;
+    cfg->hist_gratio    = dhaze.ProcResV21.hist_gratio;
+    cfg->hist_scale     = dhaze.ProcResV21.hist_scale;
+    cfg->enhance_value  = dhaze.ProcResV21.enhance_value;
+    cfg->enhance_chroma     = dhaze.ProcResV21.enhance_chroma;
+    cfg->iir_wt_sigma   = dhaze.ProcResV21.iir_wt_sigma;
+    cfg->iir_sigma  = dhaze.ProcResV21.iir_sigma;
+    cfg->stab_fnum  = dhaze.ProcResV21.stab_fnum;
+    cfg->iir_tmax_sigma     = dhaze.ProcResV21.iir_tmax_sigma;
+    cfg->iir_air_sigma  = dhaze.ProcResV21.iir_air_sigma;
+    cfg->iir_pre_wet    = dhaze.ProcResV21.iir_pre_wet;
+    cfg->cfg_wt     = dhaze.ProcResV21.cfg_wt;
+    cfg->cfg_air    = dhaze.ProcResV21.cfg_air;
+    cfg->cfg_alpha  = dhaze.ProcResV21.cfg_alpha;
+    cfg->cfg_gratio     = dhaze.ProcResV21.cfg_gratio;
+    cfg->cfg_tmax   = dhaze.ProcResV21.cfg_tmax;
+    cfg->range_sima     = dhaze.ProcResV21.range_sima;
+    cfg->space_sigma_cur    = dhaze.ProcResV21.space_sigma_cur;
+    cfg->space_sigma_pre    = dhaze.ProcResV21.space_sigma_pre;
+    cfg->dc_weitcur     = dhaze.ProcResV21.dc_weitcur;
+    cfg->bf_weight  = dhaze.ProcResV21.bf_weight;
+    cfg->gaus_h0    = dhaze.ProcResV21.gaus_h0;
+    cfg->gaus_h1    = dhaze.ProcResV21.gaus_h1;
+    cfg->gaus_h2    = dhaze.ProcResV21.gaus_h2;
 
-    cfg->enhance_en     = dhaze.enhance_en;
-    cfg->air_lc_en  = dhaze.air_lc_en;
-    cfg->hpara_en   = dhaze.hpara_en;
-    cfg->hist_en    = dhaze.hist_en;
-    cfg->dc_en  = dhaze.dc_en;
-    cfg->yblk_th    = dhaze.yblk_th;
-    cfg->yhist_th   = dhaze.yhist_th;
-    cfg->dc_max_th  = dhaze.dc_max_th;
-    cfg->dc_min_th  = dhaze.dc_min_th;
-    cfg->wt_max     = dhaze.wt_max;
-    cfg->bright_max     = dhaze.bright_max;
-    cfg->bright_min     = dhaze.bright_min;
-    cfg->tmax_base  = dhaze.tmax_base;
-    cfg->dark_th    = dhaze.dark_th;
-    cfg->air_max    = dhaze.air_max;
-    cfg->air_min    = dhaze.air_min;
-    cfg->tmax_max   = dhaze.tmax_max;
-    cfg->tmax_off   = dhaze.tmax_off;
-    cfg->hist_k     = dhaze.hist_k;
-    cfg->hist_th_off    = dhaze.hist_th_off;
-    cfg->hist_min   = dhaze.hist_min;
-    cfg->hist_gratio    = dhaze.hist_gratio;
-    cfg->hist_scale     = dhaze.hist_scale;
-    cfg->enhance_value  = dhaze.enhance_value;
-    cfg->enhance_chroma     = dhaze.enhance_chroma;
-    cfg->iir_wt_sigma   = dhaze.iir_wt_sigma;
-    cfg->iir_sigma  = dhaze.iir_sigma;
-    cfg->stab_fnum  = dhaze.stab_fnum;
-    cfg->iir_tmax_sigma     = dhaze.iir_tmax_sigma;
-    cfg->iir_air_sigma  = dhaze.iir_air_sigma;
-    cfg->iir_pre_wet    = dhaze.iir_pre_wet;
-    cfg->cfg_wt     = dhaze.cfg_wt;
-    cfg->cfg_air    = dhaze.cfg_air;
-    cfg->cfg_alpha  = dhaze.cfg_alpha;
-    cfg->cfg_gratio     = dhaze.cfg_gratio;
-    cfg->cfg_tmax   = dhaze.cfg_tmax;
-    cfg->range_sima     = dhaze.range_sima;
-    cfg->space_sigma_cur    = dhaze.space_sigma_cur;
-    cfg->space_sigma_pre    = dhaze.space_sigma_pre;
-    cfg->dc_weitcur     = dhaze.dc_weitcur;
-    cfg->bf_weight  = dhaze.bf_weight;
-    cfg->gaus_h0    = dhaze.gaus_h0;
-    cfg->gaus_h1    = dhaze.gaus_h1;
-    cfg->gaus_h2    = dhaze.gaus_h2;
-
-    for(int i = 0; i < 17; i++)
-        cfg->enh_curve[i]     = dhaze.enh_curve[i];
-
-    //LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%s:(%d) cfg->dc_en:%d cfg->enhance_en:%d\n", __FUNCTION__, __LINE__, cfg->dc_en,cfg->enhance_en);
+    for(int i = 0; i < ISP21_DHAZ_ENH_CURVE_NUM; i++)
+        cfg->enh_curve[i]     = dhaze.ProcResV21.enh_curve[i];
 
 }
 
-void
-Isp21Params::convertAiqCcmToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
-                                        const rk_aiq_ccm_cfg_t& ccm)
+template<class T>
+void Isp21Params::convertAiqCcmToIsp21Params(T& isp_cfg,
+        const rk_aiq_ccm_cfg_t& ccm)
 {
     if(ccm.ccmEnable) {
         isp_cfg.module_ens |= ISP2X_MODULE_CCM;
@@ -210,8 +237,7 @@ Isp21Params::convertAiqCcmToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
     cfg->coeff1_y = (u16 )ccm.rgb2y_para[1];
     cfg->coeff2_y = (u16 )ccm.rgb2y_para[2];
     cfg->bound_bit = (u8)ccm.bound_bit;//check
-    cfg->highy_adjust_dis = 1;
-
+    cfg->highy_adjust_dis = 0;
     for( int i = 0; i < 17; i++)
     {
         cfg->alp_y[i] = (u16)(ccm.alp_y[i]);
@@ -880,30 +906,30 @@ Isp21Params::convertAiqDrcToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
         isp_cfg.module_cfg_update &= ~(1LL << Rk_ISP21_DRC_ID);
     }
 
-    isp_cfg.others.drc_cfg.sw_drc_offset_pow2     = adrc_data.DrcProcRes.sw_drc_offset_pow2;
-    isp_cfg.others.drc_cfg.sw_drc_compres_scl  = adrc_data.DrcProcRes.sw_drc_compres_scl;
-    isp_cfg.others.drc_cfg.sw_drc_position  = adrc_data.DrcProcRes.sw_drc_position;
-    isp_cfg.others.drc_cfg.sw_drc_delta_scalein        = adrc_data.DrcProcRes.sw_drc_delta_scalein;
-    isp_cfg.others.drc_cfg.sw_drc_hpdetail_ratio      = adrc_data.DrcProcRes.sw_drc_hpdetail_ratio;
-    isp_cfg.others.drc_cfg.sw_drc_lpdetail_ratio     = adrc_data.DrcProcRes.sw_drc_lpdetail_ratio;
-    isp_cfg.others.drc_cfg.sw_drc_weicur_pix      = adrc_data.DrcProcRes.sw_drc_weicur_pix;
-    isp_cfg.others.drc_cfg.sw_drc_weipre_frame  = adrc_data.DrcProcRes.sw_drc_weipre_frame;
-    isp_cfg.others.drc_cfg.sw_drc_force_sgm_inv0   = adrc_data.DrcProcRes.sw_drc_force_sgm_inv0;
-    isp_cfg.others.drc_cfg.sw_drc_motion_scl     = adrc_data.DrcProcRes.sw_drc_motion_scl;
-    isp_cfg.others.drc_cfg.sw_drc_edge_scl   = adrc_data.DrcProcRes.sw_drc_edge_scl;
-    isp_cfg.others.drc_cfg.sw_drc_space_sgm_inv1    = adrc_data.DrcProcRes.sw_drc_space_sgm_inv1;
-    isp_cfg.others.drc_cfg.sw_drc_space_sgm_inv0     = adrc_data.DrcProcRes.sw_drc_space_sgm_inv0;
-    isp_cfg.others.drc_cfg.sw_drc_range_sgm_inv1     = adrc_data.DrcProcRes.sw_drc_range_sgm_inv1;
-    isp_cfg.others.drc_cfg.sw_drc_range_sgm_inv0 = adrc_data.DrcProcRes.sw_drc_range_sgm_inv0;
-    isp_cfg.others.drc_cfg.sw_drc_weig_maxl    = adrc_data.DrcProcRes.sw_drc_weig_maxl;
-    isp_cfg.others.drc_cfg.sw_drc_weig_bilat  = adrc_data.DrcProcRes.sw_drc_weig_bilat;
-    isp_cfg.others.drc_cfg.sw_drc_iir_weight  = adrc_data.DrcProcRes.sw_drc_iir_weight;
-    isp_cfg.others.drc_cfg.sw_drc_min_ogain  = adrc_data.DrcProcRes.sw_drc_min_ogain;
+    isp_cfg.others.drc_cfg.sw_drc_offset_pow2     = adrc_data.DrcProcRes.Drc_v21.sw_drc_offset_pow2;
+    isp_cfg.others.drc_cfg.sw_drc_compres_scl  = adrc_data.DrcProcRes.Drc_v21.sw_drc_compres_scl;
+    isp_cfg.others.drc_cfg.sw_drc_position  = adrc_data.DrcProcRes.Drc_v21.sw_drc_position;
+    isp_cfg.others.drc_cfg.sw_drc_delta_scalein        = adrc_data.DrcProcRes.Drc_v21.sw_drc_delta_scalein;
+    isp_cfg.others.drc_cfg.sw_drc_hpdetail_ratio      = adrc_data.DrcProcRes.Drc_v21.sw_drc_hpdetail_ratio;
+    isp_cfg.others.drc_cfg.sw_drc_lpdetail_ratio     = adrc_data.DrcProcRes.Drc_v21.sw_drc_lpdetail_ratio;
+    isp_cfg.others.drc_cfg.sw_drc_weicur_pix      = adrc_data.DrcProcRes.Drc_v21.sw_drc_weicur_pix;
+    isp_cfg.others.drc_cfg.sw_drc_weipre_frame  = adrc_data.DrcProcRes.Drc_v21.sw_drc_weipre_frame;
+    isp_cfg.others.drc_cfg.sw_drc_force_sgm_inv0   = adrc_data.DrcProcRes.Drc_v21.sw_drc_force_sgm_inv0;
+    isp_cfg.others.drc_cfg.sw_drc_motion_scl     = adrc_data.DrcProcRes.Drc_v21.sw_drc_motion_scl;
+    isp_cfg.others.drc_cfg.sw_drc_edge_scl   = adrc_data.DrcProcRes.Drc_v21.sw_drc_edge_scl;
+    isp_cfg.others.drc_cfg.sw_drc_space_sgm_inv1    = adrc_data.DrcProcRes.Drc_v21.sw_drc_space_sgm_inv1;
+    isp_cfg.others.drc_cfg.sw_drc_space_sgm_inv0     = adrc_data.DrcProcRes.Drc_v21.sw_drc_space_sgm_inv0;
+    isp_cfg.others.drc_cfg.sw_drc_range_sgm_inv1     = adrc_data.DrcProcRes.Drc_v21.sw_drc_range_sgm_inv1;
+    isp_cfg.others.drc_cfg.sw_drc_range_sgm_inv0 = adrc_data.DrcProcRes.Drc_v21.sw_drc_range_sgm_inv0;
+    isp_cfg.others.drc_cfg.sw_drc_weig_maxl    = adrc_data.DrcProcRes.Drc_v21.sw_drc_weig_maxl;
+    isp_cfg.others.drc_cfg.sw_drc_weig_bilat  = adrc_data.DrcProcRes.Drc_v21.sw_drc_weig_bilat;
+    isp_cfg.others.drc_cfg.sw_drc_iir_weight  = adrc_data.DrcProcRes.Drc_v21.sw_drc_iir_weight;
+    isp_cfg.others.drc_cfg.sw_drc_min_ogain  = adrc_data.DrcProcRes.Drc_v21.sw_drc_min_ogain;
 
     for(int i = 0; i < 17; i++) {
-        isp_cfg.others.drc_cfg.sw_drc_gain_y[i]    = adrc_data.DrcProcRes.sw_drc_gain_y[i];
-        isp_cfg.others.drc_cfg.sw_drc_compres_y[i]    = adrc_data.DrcProcRes.sw_drc_compres_y[i];
-        isp_cfg.others.drc_cfg.sw_drc_scale_y[i]    = adrc_data.DrcProcRes.sw_drc_scale_y[i];
+        isp_cfg.others.drc_cfg.sw_drc_gain_y[i]    = adrc_data.DrcProcRes.Drc_v21.sw_drc_gain_y[i];
+        isp_cfg.others.drc_cfg.sw_drc_compres_y[i]    = adrc_data.DrcProcRes.Drc_v21.sw_drc_compres_y[i];
+        isp_cfg.others.drc_cfg.sw_drc_scale_y[i]    = adrc_data.DrcProcRes.Drc_v21.sw_drc_scale_y[i];
     }
 
 #if 0
@@ -919,74 +945,69 @@ Isp21Params::convertAiqDrcToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
 #endif
 }
 
-void
-Isp21Params::convertAiqAgicToIsp21Params(struct isp21_isp_params_cfg& isp_cfg,
+template<class T>
+void Isp21Params::convertAiqAgicToIsp21Params(T& isp_cfg,
         const rk_aiq_isp_gic_v21_t& agic)
 {
     bool enable = agic.gic_en;
-    if(enable)
-    {
+    if (enable) {
         isp_cfg.module_en_update |= 1LL << RK_ISP2X_GIC_ID;
         isp_cfg.module_ens |= 1LL << RK_ISP2X_GIC_ID;
         isp_cfg.module_cfg_update |= 1LL << RK_ISP2X_GIC_ID;
-    }
-    else
-    {
+    } else {
         isp_cfg.module_en_update |= 1LL << RK_ISP2X_GIC_ID;
         isp_cfg.module_ens &= ~(1LL << RK_ISP2X_GIC_ID);
         isp_cfg.module_cfg_update &= ~(1LL << RK_ISP2X_GIC_ID);
     }
 
     isp_cfg.others.gic_cfg.regmingradthrdark2 = agic.ProcResV21.regmingradthrdark2;
-    isp_cfg.others.gic_cfg.regmingradthrdark1  = agic.ProcResV21.regmingradthrdark1;
-    isp_cfg.others.gic_cfg.regminbusythre  = agic.ProcResV21.regminbusythre;
-    isp_cfg.others.gic_cfg.regdarkthre  = agic.ProcResV21.regdarkthre;
+    isp_cfg.others.gic_cfg.regmingradthrdark1 = agic.ProcResV21.regmingradthrdark1;
+    isp_cfg.others.gic_cfg.regminbusythre     = agic.ProcResV21.regminbusythre;
+    isp_cfg.others.gic_cfg.regdarkthre        = agic.ProcResV21.regdarkthre;
 
-    isp_cfg.others.gic_cfg.regmaxcorvboth  = agic.ProcResV21.regmaxcorvboth;
-    isp_cfg.others.gic_cfg.regdarktthrehi  = agic.ProcResV21.regdarktthrehi;
-    isp_cfg.others.gic_cfg.regkgrad2dark  = agic.ProcResV21.regkgrad2dark;
-    isp_cfg.others.gic_cfg.regkgrad1dark  = agic.ProcResV21.regkgrad1dark;
-    isp_cfg.others.gic_cfg.regstrengthglobal_fix  = agic.ProcResV21.regstrengthglobal_fix;
-    isp_cfg.others.gic_cfg.regdarkthrestep  = agic.ProcResV21.regdarkthrestep;
-    isp_cfg.others.gic_cfg.regkgrad2  = agic.ProcResV21.regkgrad2;
-    isp_cfg.others.gic_cfg.regkgrad1  = agic.ProcResV21.regkgrad1;
-    isp_cfg.others.gic_cfg.reggbthre  = agic.ProcResV21.reggbthre;
+    isp_cfg.others.gic_cfg.regmaxcorvboth        = agic.ProcResV21.regmaxcorvboth;
+    isp_cfg.others.gic_cfg.regdarktthrehi        = agic.ProcResV21.regdarktthrehi;
+    isp_cfg.others.gic_cfg.regkgrad2dark         = agic.ProcResV21.regkgrad2dark;
+    isp_cfg.others.gic_cfg.regkgrad1dark         = agic.ProcResV21.regkgrad1dark;
+    isp_cfg.others.gic_cfg.regstrengthglobal_fix = agic.ProcResV21.regstrengthglobal_fix;
+    isp_cfg.others.gic_cfg.regdarkthrestep       = agic.ProcResV21.regdarkthrestep;
+    isp_cfg.others.gic_cfg.regkgrad2             = agic.ProcResV21.regkgrad2;
+    isp_cfg.others.gic_cfg.regkgrad1             = agic.ProcResV21.regkgrad1;
+    isp_cfg.others.gic_cfg.reggbthre             = agic.ProcResV21.reggbthre;
 
-    isp_cfg.others.gic_cfg.regmaxcorv  = agic.ProcResV21.regmaxcorv;
-    isp_cfg.others.gic_cfg.regmingradthr2  = agic.ProcResV21.regmingradthr2;
-    isp_cfg.others.gic_cfg.regmingradthr1  = agic.ProcResV21.regmingradthr1;
-    isp_cfg.others.gic_cfg.gr_ratio  = agic.ProcResV21.gr_ratio;
-    isp_cfg.others.gic_cfg.noise_scale  = agic.ProcResV21.noise_scale;
-    isp_cfg.others.gic_cfg.noise_base  = agic.ProcResV21.noise_base;
-    isp_cfg.others.gic_cfg.diff_clip  = agic.ProcResV21.diff_clip;
-    for(int i = 0; i < 15; i++)
-        isp_cfg.others.gic_cfg.sigma_y[i]  = agic.ProcResV21.sigma_y[i];
+    isp_cfg.others.gic_cfg.regmaxcorv     = agic.ProcResV21.regmaxcorv;
+    isp_cfg.others.gic_cfg.regmingradthr2 = agic.ProcResV21.regmingradthr2;
+    isp_cfg.others.gic_cfg.regmingradthr1 = agic.ProcResV21.regmingradthr1;
+    isp_cfg.others.gic_cfg.gr_ratio       = agic.ProcResV21.gr_ratio;
+    isp_cfg.others.gic_cfg.noise_scale    = agic.ProcResV21.noise_scale;
+    isp_cfg.others.gic_cfg.noise_base     = agic.ProcResV21.noise_base;
+    isp_cfg.others.gic_cfg.diff_clip      = agic.ProcResV21.diff_clip;
+    for (int i = 0; i < 15; i++) isp_cfg.others.gic_cfg.sigma_y[i] = agic.ProcResV21.sigma_y[i];
+}
 
-
-#if 0
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regmingradthrdark2 %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regmingradthrdark2);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regmingradthrdark1 %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regmingradthrdark1);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regminbusythre %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regminbusythre);
-
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regdarkthre %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regdarkthre);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regmaxcorvboth %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regmaxcorvboth);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regdarktthrehi %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regdarktthrehi);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regkgrad2dark %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regkgrad2dark);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regkgrad1dark %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regkgrad1dark);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regstrengthglobal_fix %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regstrengthglobal_fix);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regdarkthrestep %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regdarkthrestep);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regkgrad2 %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regkgrad2);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regkgrad1 %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regkgrad1);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: reggbthre %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.reggbthre);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regmaxcorv %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regmaxcorv);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regmingradthr2 %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regmingradthr2);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: regmingradthr1 %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.regmingradthr1);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: gr_ratio %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.gr_ratio);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: noise_scale %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.noise_scale);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: noise_base %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.noise_base);
-    LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%d: diff_clip %d", __LINE__, isp_cfg.others.gic_cfg.drc_cfg.diff_clip);
-
-#endif
+template<class T>
+void
+Isp21Params::convertAiqCsmToIsp21Params(T& isp_cfg,
+                                       const rk_aiq_acsm_params_t& csm_param)
+{
+    struct isp21_csm_cfg* csm_cfg = &isp_cfg.others.csm_cfg;
+    if (csm_param.op_mode == RK_AIQ_OP_MODE_MANUAL ||
+        csm_param.op_mode == RK_AIQ_OP_MODE_AUTO) {
+        isp_cfg.module_ens |= ISP2X_MODULE_CSM;
+        isp_cfg.module_en_update |= ISP2X_MODULE_CSM;
+        isp_cfg.module_cfg_update |= ISP2X_MODULE_CSM;
+        csm_cfg->csm_full_range = csm_param.full_range ? 1 : 0;
+        csm_cfg->csm_y_offset = csm_param.y_offset;
+        csm_cfg->csm_c_offset = csm_param.c_offset;
+        for (int i = 0; i < RK_AIQ_CSM_COEFF_NUM; i++) {
+            csm_cfg->csm_coeff[i] = csm_param.coeff[i] > 0
+                                        ? (short)(csm_param.coeff[i] * 128 + 0.5)
+                                        : (short)(csm_param.coeff[i] * 128 - 0.5);
+        }
+    } else {
+        isp_cfg.module_ens &= ~ISP2X_MODULE_CSM;
+        isp_cfg.module_en_update |= ISP2X_MODULE_CSM;
+    }
 }
 
 bool Isp21Params::convert3aResultsToIspCfg(SmartPtr<cam3aResult> &result,
@@ -1003,212 +1024,218 @@ bool Isp21Params::convert3aResultsToIspCfg(SmartPtr<cam3aResult> &result,
     // LOGE_CAMHW_SUBM(ISP20PARAM_SUBM, "%s, module (0x%x) convert params!\n", __FUNCTION__, type);
     switch (type)
     {
-        // followings are specific for isp21
-        case RESULT_TYPE_AWBGAIN_PARAM:
-        {
-            SmartPtr<RkAiqIspAwbGainParamsProxy> awb_gain = result.dynamic_cast_ptr<RkAiqIspAwbGainParamsProxy>();
-            if (awb_gain.ptr() && mBlcResult.ptr()) {
+    // followings are specific for isp21
+    case RESULT_TYPE_AWBGAIN_PARAM:
+    {
+        SmartPtr<RkAiqIspAwbGainParamsProxy> awb_gain = result.dynamic_cast_ptr<RkAiqIspAwbGainParamsProxy>();
+        if (awb_gain.ptr()) {
+            if(mBlcResult.ptr()) {
                 SmartPtr<RkAiqIspBlcParamsProxyV21> blc = mBlcResult.dynamic_cast_ptr<RkAiqIspBlcParamsProxyV21>();
                 convertAiqAwbGainToIsp21Params(isp_cfg,
-                        awb_gain->data()->result, blc->data()->result, true);
-
-            } else
-                LOGE("don't get %s params, convert awbgain params failed!",
-                     awb_gain.ptr() ? "blc" : "awb_gain");
-
-        }
-        break;
-        case RESULT_TYPE_AWB_PARAM:
-        {
-            SmartPtr<RkAiqIspAwbParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspAwbParamsProxyV21>();
-            if (params.ptr())
-                convertAiqAwbToIsp21Params(isp_cfg, params->data()->result, true);
-        }
-        break;
-        case RESULT_TYPE_CCM_PARAM:
-        {
-            SmartPtr<RkAiqIspCcmParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspCcmParamsProxy>();
-            if (params.ptr())
-                convertAiqCcmToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_DRC_PARAM:
-        {
-            SmartPtr<RkAiqIspDrcParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspDrcParamsProxyV21>();
-            if (params.ptr())
-                convertAiqDrcToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_BLC_PARAM:
-        {
-            SmartPtr<RkAiqIspBlcParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspBlcParamsProxyV21>();
-            if (params.ptr())
-                convertAiqBlcToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_RAWNR_PARAM:
-        {
-            SmartPtr<RkAiqIspBaynrParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspBaynrParamsProxyV21>();
-            if (params.ptr())
-                convertAiqRawnrToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_YNR_PARAM:
-        {
-            SmartPtr<RkAiqIspYnrParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspYnrParamsProxyV21>();
-            if (params.ptr())
-                convertAiqYnrToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_UVNR_PARAM:
-        {
-            SmartPtr<RkAiqIspCnrParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspCnrParamsProxyV21>();
-            if (params.ptr())
-                convertAiqUvnrToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_SHARPEN_PARAM:
-        {
-            SmartPtr<RkAiqIspSharpenParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspSharpenParamsProxyV21>();
-            if (params.ptr())
-                convertAiqSharpenToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_DEHAZE_PARAM:
-        {
-            SmartPtr<RkAiqIspDehazeParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspDehazeParamsProxyV21>();
-            if (params.ptr())
-                convertAiqAdehazeToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_GIC_PARAM:
-        {
-            SmartPtr<RkAiqIspGicParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspGicParamsProxyV21>();
-            if (params.ptr())
-                convertAiqAgicToIsp21Params(isp_cfg, params->data()->result);
-        }
-        break;
-        // followings are the same as isp20
-        case RESULT_TYPE_AEC_PARAM:
-        {
-            SmartPtr<RkAiqIspAecParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAecParamsProxy>();
-            if (params.ptr()) {
-                convertAiqAeToIsp20Params(isp_cfg, params->data()->result);
+                                               awb_gain->data()->result, &blc->data()->result, true);
+            } else {
+                convertAiqAwbGainToIsp21Params(isp_cfg,
+                                               awb_gain->data()->result, nullptr, true);
             }
-        }
-        break;
-        case RESULT_TYPE_HIST_PARAM:
-        {
-            SmartPtr<RkAiqIspHistParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspHistParamsProxy>();
-            if (params.ptr())
-                convertAiqHistToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_AF_PARAM:
-        {
-            SmartPtr<RkAiqIspAfParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAfParamsProxy>();
-            if (params.ptr())
-                convertAiqAfToIsp20Params(isp_cfg, params->data()->result, true);
-        }
-        break;
-        case RESULT_TYPE_DPCC_PARAM:
-        {
-            SmartPtr<RkAiqIspDpccParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspDpccParamsProxy>();
-            if (params.ptr())
-                convertAiqDpccToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_MERGE_PARAM:
-        {
-            SmartPtr<RkAiqIspMergeParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspMergeParamsProxy>();
-            if (params.ptr()) {
-                convertAiqMergeToIsp20Params(isp_cfg, params->data()->result);
-            }
-        }
-        break;
-        case RESULT_TYPE_LSC_PARAM:
-        {
-            SmartPtr<RkAiqIspLscParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspLscParamsProxy>();
-            if (params.ptr())
-                convertAiqLscToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_DEBAYER_PARAM:
-        {
-            SmartPtr<RkAiqIspDebayerParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspDebayerParamsProxy>();
-            if (params.ptr())
-                convertAiqAdemosaicToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_LDCH_PARAM:
-        {
-            SmartPtr<RkAiqIspLdchParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspLdchParamsProxy>();
-            if (params.ptr() && params->data()->update_mask & RKAIQ_ISP_LDCH_ID)
-                convertAiqAldchToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_LUT3D_PARAM:
-        {
-            SmartPtr<RkAiqIspLut3dParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspLut3dParamsProxy>();
-            if (params.ptr())
-                convertAiqA3dlutToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_AGAMMA_PARAM:
-        {
-            SmartPtr<RkAiqIspAgammaParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAgammaParamsProxy>();
-            if (params.ptr())
-                convertAiqAgammaToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_ADEGAMMA_PARAM:
-        {
-            SmartPtr<RkAiqIspAdegammaParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAdegammaParamsProxy>();
-            if (params.ptr())
-                convertAiqAdegammaToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_WDR_PARAM:
-#if 0
-        {
-            SmartPtr<RkAiqIspWdrParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspWdrParamsProxy>();
-            if (params.ptr())
-                convertAiqWdrToIsp20Params(isp_cfg, params->data()->result);
-        }
+
+        } else
+            LOGE("don't get awb_gain params, convert awbgain params failed!");
+
+    }
+    break;
+    case RESULT_TYPE_AWB_PARAM:
+    {
+        SmartPtr<RkAiqIspAwbParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspAwbParamsProxyV21>();
+        if (params.ptr())
+            convertAiqAwbToIsp21Params(isp_cfg, params->data()->result, true);
+    }
+    break;
+    case RESULT_TYPE_CCM_PARAM:
+    {
+        SmartPtr<RkAiqIspCcmParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspCcmParamsProxy>();
+#ifndef ISP_HW_V30
+        if (params.ptr())
+            convertAiqCcmToIsp21Params(isp_cfg, params->data()->result);
 #endif
-        break;
-        case RESULT_TYPE_CSM_PARAM:
-#if 0
-        {
-            SmartPtr<RkAiqIspCsmParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspCsmParamsProxy>();
-            if (params.ptr())
-                convertAiqToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_DRC_PARAM:
+    {
+        SmartPtr<RkAiqIspDrcParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspDrcParamsProxy>();
+        if (params.ptr())
+            convertAiqDrcToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_BLC_PARAM:
+    {
+        SmartPtr<RkAiqIspBlcParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspBlcParamsProxyV21>();
+        if (params.ptr())
+            convertAiqBlcToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_RAWNR_PARAM:
+    {
+        SmartPtr<RkAiqIspBaynrParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspBaynrParamsProxyV21>();
+        if (params.ptr())
+            convertAiqRawnrToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_YNR_PARAM:
+    {
+        SmartPtr<RkAiqIspYnrParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspYnrParamsProxyV21>();
+        if (params.ptr())
+            convertAiqYnrToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_UVNR_PARAM:
+    {
+        SmartPtr<RkAiqIspCnrParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspCnrParamsProxyV21>();
+        if (params.ptr())
+            convertAiqUvnrToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_SHARPEN_PARAM:
+    {
+        SmartPtr<RkAiqIspSharpenParamsProxyV21> params = result.dynamic_cast_ptr<RkAiqIspSharpenParamsProxyV21>();
+        if (params.ptr())
+            convertAiqSharpenToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_DEHAZE_PARAM:
+    {
+        SmartPtr<RkAiqIspDehazeParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspDehazeParamsProxy>();
+        if (params.ptr())
+            convertAiqAdehazeToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_GIC_PARAM:
+    {
+        SmartPtr<RkAiqIspGicParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspGicParamsProxy>();
+        if (params.ptr())
+            convertAiqAgicToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    // followings are the same as isp20
+    case RESULT_TYPE_AEC_PARAM:
+    {
+        SmartPtr<RkAiqIspAecParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAecParamsProxy>();
+        if (params.ptr()) {
+            convertAiqAeToIsp20Params(isp_cfg, params->data()->result);
         }
+    }
+    break;
+    case RESULT_TYPE_HIST_PARAM:
+    {
+        SmartPtr<RkAiqIspHistParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspHistParamsProxy>();
+        if (params.ptr())
+            convertAiqHistToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_AF_PARAM:
+    {
+        SmartPtr<RkAiqIspAfParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAfParamsProxy>();
+        if (params.ptr())
+            convertAiqAfToIsp20Params(isp_cfg, params->data()->result, true);
+    }
+    break;
+    case RESULT_TYPE_DPCC_PARAM:
+    {
+        SmartPtr<RkAiqIspDpccParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspDpccParamsProxy>();
+        if (params.ptr())
+            convertAiqDpccToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_MERGE_PARAM:
+    {
+        SmartPtr<RkAiqIspMergeParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspMergeParamsProxy>();
+        if (params.ptr()) {
+            convertAiqMergeToIsp20Params(isp_cfg, params->data()->result);
+        }
+    }
+    break;
+    case RESULT_TYPE_LSC_PARAM:
+    {
+#ifndef ISP_HW_V30
+        SmartPtr<RkAiqIspLscParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspLscParamsProxy>();
+        if (params.ptr())
+            convertAiqLscToIsp20Params(isp_cfg, params->data()->result);
 #endif
+    }
+    break;
+    case RESULT_TYPE_DEBAYER_PARAM:
+    {
+        SmartPtr<RkAiqIspDebayerParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspDebayerParamsProxy>();
+        if (params.ptr())
+            convertAiqAdemosaicToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_LDCH_PARAM:
+    {
+        SmartPtr<RkAiqIspLdchParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspLdchParamsProxy>();
+        if (params.ptr() && params->data()->update_mask & RKAIQ_ISP_LDCH_ID)
+            convertAiqAldchToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_LUT3D_PARAM:
+    {
+        SmartPtr<RkAiqIspLut3dParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspLut3dParamsProxy>();
+        if (params.ptr())
+            convertAiqA3dlutToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_AGAMMA_PARAM:
+    {
+        SmartPtr<RkAiqIspAgammaParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAgammaParamsProxy>();
+        if (params.ptr())
+            convertAiqAgammaToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_ADEGAMMA_PARAM:
+    {
+        SmartPtr<RkAiqIspAdegammaParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspAdegammaParamsProxy>();
+        if (params.ptr())
+            convertAiqAdegammaToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_WDR_PARAM:
+#if 0
+    {
+        SmartPtr<RkAiqIspWdrParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspWdrParamsProxy>();
+        if (params.ptr())
+            convertAiqWdrToIsp20Params(isp_cfg, params->data()->result);
+    }
+#endif
+    break;
+    case RESULT_TYPE_CSM_PARAM:
+    {
+        SmartPtr<RkAiqIspCsmParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspCsmParamsProxy>();
+        if (params.ptr())
+            convertAiqCsmToIsp21Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_CGC_PARAM:
         break;
-        case RESULT_TYPE_CGC_PARAM:
+    case RESULT_TYPE_CONV422_PARAM:
         break;
-        case RESULT_TYPE_CONV422_PARAM:
+    case RESULT_TYPE_YUVCONV_PARAM:
         break;
-        case RESULT_TYPE_YUVCONV_PARAM:
-        break;
-        case RESULT_TYPE_CP_PARAM:
-        {
-            SmartPtr<RkAiqIspCpParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspCpParamsProxy>();
-            if (params.ptr())
-                convertAiqCpToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        case RESULT_TYPE_IE_PARAM:
-        {
-            SmartPtr<RkAiqIspIeParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspIeParamsProxy>();
-            if (params.ptr())
-                convertAiqIeToIsp20Params(isp_cfg, params->data()->result);
-        }
-        break;
-        default:
-            LOGE("unknown param type: 0x%x!", type);
-            return false;
+    case RESULT_TYPE_CP_PARAM:
+    {
+        SmartPtr<RkAiqIspCpParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspCpParamsProxy>();
+        if (params.ptr())
+            convertAiqCpToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    case RESULT_TYPE_IE_PARAM:
+    {
+        SmartPtr<RkAiqIspIeParamsProxy> params = result.dynamic_cast_ptr<RkAiqIspIeParamsProxy>();
+        if (params.ptr())
+            convertAiqIeToIsp20Params(isp_cfg, params->data()->result);
+    }
+    break;
+    default:
+        LOGE("unknown param type: 0x%x!", type);
+        return false;
     }
 
     return true;

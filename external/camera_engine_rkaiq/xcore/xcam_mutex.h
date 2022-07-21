@@ -59,6 +59,10 @@ public:
             XCAM_LOG_WARNING ("Mutex lock failed %d: %s", error_num, strerror(error_num));
         }
     }
+    int trylock() {
+        int error_num = pthread_mutex_trylock (&_mutex);
+        return error_num;
+    }
     void unlock() {
         int error_num = pthread_mutex_unlock (&_mutex);
         if (error_num != 0) {

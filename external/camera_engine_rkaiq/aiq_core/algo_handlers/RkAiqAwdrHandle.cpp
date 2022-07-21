@@ -1,7 +1,5 @@
 /*
- * RkAiqAwdrHandle.h
- *
- *  Copyright (c) 2019-2021 Rockchip Eletronics Co., Ltd.
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +12,39 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+#include "RkAiqAwdrHandle.h"
 
 #include "RkAiqCore.h"
-#include "RkAiqHandle.h"
 
 namespace RkCam {
 
-void RkAiqAwdrHandle::init() {
+DEFINE_HANDLE_REGISTER_TYPE(RkAiqAwdrHandleInt);
+
+XCamReturn RkAiqAwdrHandleInt::prepare() {
     ENTER_ANALYZER_FUNCTION();
 
-    deInit();
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    ret = RkAiqHandle::prepare();
+    RKAIQCORE_CHECK_RET(ret, "awdr handle prepare failed");
+
+    RkAiqAlgoConfigAwdr* awdr_config_int = (RkAiqAlgoConfigAwdr*)mConfig;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->prepare(mConfig);
+    RKAIQCORE_CHECK_RET(ret, "awdr algo prepare failed");
+
+    EXIT_ANALYZER_FUNCTION();
+    return XCAM_RETURN_NO_ERROR;
+}
+
+void RkAiqAwdrHandleInt::init() {
+    ENTER_ANALYZER_FUNCTION();
+
+    RkAiqHandle::deInit();
     mConfig       = (RkAiqAlgoCom*)(new RkAiqAlgoConfigAwdr());
     mPreInParam   = (RkAiqAlgoCom*)(new RkAiqAlgoPreAwdr());
     mPreOutParam  = (RkAiqAlgoResCom*)(new RkAiqAlgoPreResAwdr());
@@ -37,86 +56,108 @@ void RkAiqAwdrHandle::init() {
     EXIT_ANALYZER_FUNCTION();
 }
 
-XCamReturn RkAiqAwdrHandle::prepare() {
+XCamReturn RkAiqAwdrHandleInt::preProcess() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret            = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
 
-    ret = RkAiqHandle::prepare();
-    RKAIQCORE_CHECK_RET(ret, "awdr handle prepare failed");
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
 
-    // TODO config awdr common params
-    RkAiqAlgoConfigAwdr* awdr_config = (RkAiqAlgoConfigAwdr*)mConfig;
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->prepare(mConfig);
-        RKAIQCORE_CHECK_RET(ret, "awdr algo prepare failed");
-    }
-
-    EXIT_ANALYZER_FUNCTION();
-    return ret;
-}
-
-XCamReturn RkAiqAwdrHandle::preProcess() {
-    ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret             = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des  = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoPreAwdr* awdr_pre = (RkAiqAlgoPreAwdr*)mPreInParam;
+    RkAiqAlgoPreAwdr* awdr_pre_int        = (RkAiqAlgoPreAwdr*)mPreInParam;
+    RkAiqAlgoPreResAwdr* awdr_pre_res_int = (RkAiqAlgoPreResAwdr*)mPreOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::preProcess();
-    RKAIQCORE_CHECK_RET(ret, "awdr handle preProcess failed");
-
-    // TODO config common awdr preprocess params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->pre_process(mPreInParam, mPreOutParam);
-        RKAIQCORE_CHECK_RET(ret, "awdr handle pre_process failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "awdr handle preProcess failed");
     }
 
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->pre_process(mPreInParam, mPreOutParam);
+    RKAIQCORE_CHECK_RET(ret, "awdr algo pre_process failed");
+
     EXIT_ANALYZER_FUNCTION();
-    return ret;
+    return XCAM_RETURN_NO_ERROR;
 }
 
-XCamReturn RkAiqAwdrHandle::processing() {
-    XCamReturn ret              = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des   = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoProcAwdr* awdr_pre = (RkAiqAlgoProcAwdr*)mProcInParam;
+XCamReturn RkAiqAwdrHandleInt::processing() {
+    ENTER_ANALYZER_FUNCTION();
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoProcAwdr* awdr_proc_int        = (RkAiqAlgoProcAwdr*)mProcInParam;
+    RkAiqAlgoProcResAwdr* awdr_proc_res_int = (RkAiqAlgoProcResAwdr*)mProcOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::processing();
-    RKAIQCORE_CHECK_RET(ret, "awdr handle processing failed");
-
-    // TODO config common awdr processing params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->processing(mProcInParam, mProcOutParam);
-        RKAIQCORE_CHECK_RET(ret, "awdr algo processing failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "awdr handle processing failed");
     }
+
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->processing(mProcInParam, mProcOutParam);
+    RKAIQCORE_CHECK_RET(ret, "awdr algo processing failed");
 
     EXIT_ANALYZER_FUNCTION();
     return ret;
 }
 
-XCamReturn RkAiqAwdrHandle::postProcess() {
+XCamReturn RkAiqAwdrHandleInt::postProcess() {
     ENTER_ANALYZER_FUNCTION();
-    XCamReturn ret              = XCAM_RETURN_NO_ERROR;
-    RkAiqAlgoDescription* des   = (RkAiqAlgoDescription*)mDes;
-    RkAiqAlgoPostAwdr* awdr_pre = (RkAiqAlgoPostAwdr*)mPostInParam;
+
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    RkAiqAlgoPostAwdr* awdr_post_int        = (RkAiqAlgoPostAwdr*)mPostInParam;
+    RkAiqAlgoPostResAwdr* awdr_post_res_int = (RkAiqAlgoPostResAwdr*)mPostOutParam;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
 
     ret = RkAiqHandle::postProcess();
-    RKAIQCORE_CHECK_RET(ret, "awdr handle postProcess failed");
-
-    // TODO config common awdr postProcess params
-
-    // id != 0 means the thirdparty's algo
-    if (mDes->id != 0) {
-        ret = des->post_process(mPostInParam, mPostOutParam);
-        RKAIQCORE_CHECK_RET(ret, "awdr algo postProcess failed");
+    if (ret) {
+        RKAIQCORE_CHECK_RET(ret, "awdr handle postProcess failed");
+        return ret;
     }
 
+    RkAiqAlgoDescription* des = (RkAiqAlgoDescription*)mDes;
+    ret                       = des->post_process(mPostInParam, mPostOutParam);
+    RKAIQCORE_CHECK_RET(ret, "awdr algo post_process failed");
+
     EXIT_ANALYZER_FUNCTION();
+    return ret;
+}
+
+XCamReturn RkAiqAwdrHandleInt::genIspResult(RkAiqFullParams* params, RkAiqFullParams* cur_params) {
+    ENTER_ANALYZER_FUNCTION();
+
+    XCamReturn ret                = XCAM_RETURN_NO_ERROR;
+    RkAiqCore::RkAiqAlgosGroupShared_t* shared =
+        (RkAiqCore::RkAiqAlgosGroupShared_t*)(getGroupShared());
+    RkAiqCore::RkAiqAlgosComShared_t* sharedCom = &mAiqCore->mAlogsComSharedParams;
+    RkAiqAlgoProcResAwdr* awdr_com = (RkAiqAlgoProcResAwdr*)mProcOutParam;
+    rk_aiq_isp_wdr_params_v20_t* wdr_param = params->mWdrParams->data().ptr();
+
+    if (sharedCom->init) {
+        wdr_param->frame_id = 0;
+    } else {
+        wdr_param->frame_id = shared->frameId;
+    }
+
+    if (!awdr_com) {
+        LOGD_ANALYZER("no awdr result");
+        return XCAM_RETURN_NO_ERROR;
+    }
+
+    if (!this->getAlgoId()) {
+        RkAiqAlgoProcResAwdr* awdr_rk = (RkAiqAlgoProcResAwdr*)awdr_com;
+    }
+
+    cur_params->mWdrParams = params->mWdrParams;
+
+    EXIT_ANALYZER_FUNCTION();
+
     return ret;
 }
 

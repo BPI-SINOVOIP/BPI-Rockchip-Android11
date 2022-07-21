@@ -47,7 +47,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
-import androidx.core.content.FileProvider;
 
 import com.android.gallery3d.R;
 import com.android.gallery3d.common.ApiHelper;
@@ -79,6 +78,7 @@ import com.android.gallery3d.ui.MenuExecutor;
 import com.android.gallery3d.ui.PhotoView;
 import com.android.gallery3d.ui.SelectionManager;
 import com.android.gallery3d.ui.SynchronizedHandler;
+import com.android.gallery3d.util.FileUtils;
 import com.android.gallery3d.util.GalleryUtils;
 import com.android.gallery3d.util.UsageStatistics;
 
@@ -379,7 +379,7 @@ public abstract class PhotoPage extends ActivityState implements
                             boolean isPanorama360 = message.arg1 != 0;
                             Uri contentUri = mCurrentPhoto.getContentUri();
                             if (null != mActivity) {
-                                contentUri = adjustFileUri(mActivity.getAndroidContext(), contentUri);
+                                contentUri = FileUtils.adjustFileUri(mActivity.getAndroidContext(), contentUri);
                             }
                             Intent panoramaIntent = null;
                             if (isPanorama360) {
@@ -588,23 +588,6 @@ public abstract class PhotoPage extends ActivityState implements
                         }
                     }
                 });
-    }
-
-    private static Uri adjustFileUri(Context context, Uri oldUri) {
-        if (null == oldUri || null == oldUri.toString()) {
-            return oldUri;
-        }
-        try{
-            if (oldUri.toString().startsWith("file:///storage")) {
-                Uri uri = FileProvider.getUriForFile(context,
-                        "com.android.gallery3d.fileprovider",
-                        new File(oldUri.getPath()));
-                return uri;
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return oldUri;
     }
 
     @Override

@@ -22,8 +22,8 @@
 #include "rk_aiq_comm.h"
 #include "RkAiqCalibDbTypes.h"
 #include "asharp/rk_aiq_types_asharp_algo.h"
-#include "RkAiqCalibDbTypesV2.h"
-
+#include "sharp_head_v1.h"
+#include "edgefilter_head_v1.h"
 
 RKAIQ_BEGIN_DECLARE
 

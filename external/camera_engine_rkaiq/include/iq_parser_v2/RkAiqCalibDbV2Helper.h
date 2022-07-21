@@ -92,6 +92,42 @@ static calibdb_ctx_member_offset_info_t info_CamCalibDbV2ContextIsp21_t[] = {
     { "cnr_v1", CALIBV2_MODULE_RELATIVE_OFFSET_ISP21(cnr_v1)},
     { "ynr_v2", CALIBV2_MODULE_RELATIVE_OFFSET_ISP21(ynr_v2)},
     { "sharp_v3", CALIBV2_MODULE_RELATIVE_OFFSET_ISP21(sharp_v3)},
+
+
+    { NULL, 0},
+};
+
+#define CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(nm) \
+    CALIB_MODULE_RELATIVE_OFFSET(CamCalibDbV2ContextIsp30_t, nm)
+
+static calibdb_ctx_member_offset_info_t info_CamCalibDbV2ContextIsp30_t[] = {
+    { "ae_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(ae_calib)},
+    { "wb_v21", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(wb_v21)},
+    { "ablc_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(ablc_calib)},
+    { "adegamma_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(adegamma_calib)},
+    { "agic_calib_v21", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(agic_calib_v21)},
+    { "debayer", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(debayer)},
+    { "colorAsGrey", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(colorAsGrey)},
+    { "ccm_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(ccm_calib)},
+    { "lut3d_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(lut3d_calib)},
+    { "aldch", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(aldch)},
+    { "adpcc_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(adpcc_calib)},
+    { "ie", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(ie)},
+    { "cpsl", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(cpsl)},
+    { "cproc", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(cproc)},
+    { "amerge_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(amerge_calib_V2)},
+    { "adrc_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(adrc_calib_V2)},
+    { "agamma_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(agamma_calib_V30)},
+    { "adehaze_calib_v30", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(adehaze_calib_v30)},
+    { "lsc_v2", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(lsc_v2)},
+    { "ynr_v3", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(ynr_v3)},
+    { "cnr_v2", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(cnr_v2)},
+    { "sharp_v4", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(sharp_v4)},
+    { "bayer2dnr_v2", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(bayer2dnr_v2)},
+    { "bayertnr_v2", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(bayertnr_v2)},
+    { "cac_calib", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(cac_calib)},
+    { "af_v30", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(af_v30)},
+    { "gain_v2", CALIBV2_MODULE_RELATIVE_OFFSET_ISP30(gain_v2)},
     { NULL, 0},
 };
 
@@ -100,6 +136,7 @@ static calibdb_ctx_member_offset_info_t info_CamCalibDbV2ContextIsp21_t[] = {
 static calibdb_ctx_infos_t info_CamCalibDbV2Context_array[] = {
     { 20, info_CamCalibDbV2ContextIsp20_t },
     { 21, info_CamCalibDbV2ContextIsp21_t },
+    { 30, info_CamCalibDbV2ContextIsp30_t},
 };
 #pragma GCC diagnostic pop
 
@@ -110,6 +147,8 @@ static inline size_t calibdbV2_scene_ctx_size(CamCalibDbContext_t* ctx) {
         return sizeof(CamCalibDbV2ContextIsp20_t);
     else if (CHECK_ISP_HW_V21())
         return sizeof(CamCalibDbV2ContextIsp21_t);
+    else if (CHECK_ISP_HW_V30())
+        return sizeof(CamCalibDbV2ContextIsp30_t);
     else
         return sizeof(CamCalibDbV2ContextIsp20_t);
 }
@@ -124,6 +163,8 @@ calibdbv2_get_scene_ctx_struct_name(const void* scene_ctx) {
         return "CamCalibDbV2ContextIsp20_t";
     else if (CHECK_ISP_HW_V21())
         return "CamCalibDbV2ContextIsp21_t";
+    else if (CHECK_ISP_HW_V30())
+        return "CamCalibDbV2ContextIsp30_t";
     else
         return NULL;
 }
@@ -137,16 +178,19 @@ calibdbv2_get_scene_ptr(CamCalibSubSceneList_t* scene) {
 #elif defined(ISP_HW_V21)
     if (CHECK_ISP_HW_V21())
         return (&scene->scene_isp21);
+#elif defined(ISP_HW_V30)
+    if (CHECK_ISP_HW_V30())
+        return (&scene->scene_isp30);
 #else
-        return NULL;
+    return NULL;
 #endif
     return NULL;
 }
 
 static inline void*
 calibdbV2_get_module_ptr(void* ctx,
-                       calibdb_ctx_infos_t* info_array,
-                       const char* module_name) {
+                         calibdb_ctx_infos_t* info_array,
+                         const char* module_name) {
     if (strcmp(module_name, "sensor_calib") == 0)
         return ((CamCalibDbV2Context_t*)ctx)->sensor_info;
     else if(strcmp(module_name, "module_calib") == 0)
@@ -158,39 +202,45 @@ calibdbV2_get_module_ptr(void* ctx,
 }
 
 static inline int calibdbV2_to_tuningdb(CamCalibDbV2Tuning_t *dst,
-                                   const CamCalibDbV2Context_t *src) {
-  memcpy(&dst->sensor_calib, src->sensor_info, sizeof(CalibDb_Sensor_ParaV2_t));
-  memcpy(&dst->module_calib, src->module_info, sizeof(CalibDb_Module_ParaV2_t));
-  memcpy(&dst->sys_static_cfg, src->sys_cfg,
-         sizeof(CalibDb_SysStaticCfg_ParaV2_t));
+                                        const CamCalibDbV2Context_t *src) {
+    memcpy(&dst->sensor_calib, src->sensor_info, sizeof(CalibDb_Sensor_ParaV2_t));
+    memcpy(&dst->module_calib, src->module_info, sizeof(CalibDb_Module_ParaV2_t));
+    memcpy(&dst->sys_static_cfg, src->sys_cfg,
+           sizeof(CalibDb_SysStaticCfg_ParaV2_t));
 #if defined(ISP_HW_V20)
-  memcpy(&dst->calib_scene, src->calib_scene,
-         sizeof(CamCalibDbV2ContextIsp20_t));
+    memcpy(&dst->calib_scene, src->calib_scene,
+           sizeof(CamCalibDbV2ContextIsp20_t));
 #elif defined(ISP_HW_V21)
-  memcpy(&dst->calib_scene, src->calib_scene,
-         sizeof(CamCalibDbV2ContextIsp21_t));
+    memcpy(&dst->calib_scene, src->calib_scene,
+           sizeof(CamCalibDbV2ContextIsp21_t));
+#elif defined(ISP_HW_V30)
+    memcpy(&dst->calib_scene, src->calib_scene,
+           sizeof(CamCalibDbV2ContextIsp30_t));
 #else
-#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 NOW !"
+#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 AND V30 NOW !"
 #endif
-  return 0;
+    return 0;
 }
 
 static inline int calibdbV2_from_tuningdb(CamCalibDbV2Context_t *dst,
-                                   const CamCalibDbV2Tuning_t *src) {
-  memcpy(dst->sensor_info, &src->sensor_calib, sizeof(CalibDb_Sensor_ParaV2_t));
-  memcpy(dst->module_info, &src->module_calib, sizeof(CalibDb_Module_ParaV2_t));
-  memcpy(dst->sys_cfg, &src->sys_static_cfg,
-         sizeof(CalibDb_SysStaticCfg_ParaV2_t));
+        const CamCalibDbV2Tuning_t *src) {
+    memcpy(dst->sensor_info, &src->sensor_calib, sizeof(CalibDb_Sensor_ParaV2_t));
+    memcpy(dst->module_info, &src->module_calib, sizeof(CalibDb_Module_ParaV2_t));
+    memcpy(dst->sys_cfg, &src->sys_static_cfg,
+           sizeof(CalibDb_SysStaticCfg_ParaV2_t));
 #if defined(ISP_HW_V20)
-  memcpy(dst->calib_scene, &src->calib_scene,
-         sizeof(CamCalibDbV2ContextIsp20_t));
+    memcpy(dst->calib_scene, &src->calib_scene,
+           sizeof(CamCalibDbV2ContextIsp20_t));
 #elif defined(ISP_HW_V21)
-  memcpy(dst->calib_scene, &src->calib_scene,
-         sizeof(CamCalibDbV2ContextIsp21_t));
+    memcpy(dst->calib_scene, &src->calib_scene,
+           sizeof(CamCalibDbV2ContextIsp21_t));
+#elif defined(ISP_HW_V30)
+    memcpy(dst->calib_scene, &src->calib_scene,
+           sizeof(CamCalibDbV2ContextIsp30_t));
 #else
-#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 NOW !"
+#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 AND V30 NOW !"
 #endif
-  return 0;
+    return 0;
 }
 
 #define CALIBDBV2_GET_MODULE_PTR(ctx, module) \

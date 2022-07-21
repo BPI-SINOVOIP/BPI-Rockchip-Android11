@@ -35,6 +35,12 @@ typedef enum _AE_MODE {
     RAWAE_MODE_L_LITE    = 2
 } AE_MODE;
 
+typedef enum WinSplitMode_s {
+    LEFT_AND_RIGHT_MODE = 0,
+    LEFT_MODE,
+    RIGHT_MODE,
+} WinSplitMode;
+
 /*****************************************************************************/
 /**
  * @brief   ISP2.0 AEC HW-Meas Config Params
@@ -148,6 +154,8 @@ typedef struct rk_aiq_ae_meas_params_s {
 typedef struct rk_aiq_hist_meas_params_s {
     bool   hist_meas_en;
     bool   hist_meas_update;
+    unsigned char ae_swap; // used to choose LITE & BIG
+    unsigned char ae_sel; // used for rawae3 & rawhist3
     rawhistlite_cfg_t rawhist0;
     rawhistbig_cfg_t rawhist1;
     rawhistbig_cfg_t rawhist2;
@@ -276,8 +284,32 @@ typedef struct RkAiqExpSensorParam_s {
     unsigned int isp_digital_gain;
 } RkAiqExpSensorParam_t;
 
-typedef struct {
+#define MAX_I2CDATA_LEN 64
+typedef struct RKAiqExpI2cParam_s {
+    // M4_BOOL_DESC("bValid", "0",M4_HIDE(1))
+    bool           bValid;
 
+    // M4_NUMBER_DESC("nNumRegs", "u32", M4_RANGE(0,65535), "0", M4_DIGIT(0),M4_HIDE(1))
+    unsigned int   nNumRegs;
+
+    // M4_ARRAY_DESC("RegAddr", "u32", M4_SIZE(1,64), M4_RANGE(0,65535), "0", M4_DIGIT(0), M4_DYNAMIC(0),M4_HIDE(1))
+    unsigned int   RegAddr[MAX_I2CDATA_LEN];
+
+    // M4_ARRAY_DESC("AddrByteNum", "u32", M4_SIZE(1,64), M4_RANGE(0,65535), "0", M4_DIGIT(0), M4_DYNAMIC(0),M4_HIDE(1))
+    unsigned int   AddrByteNum[MAX_I2CDATA_LEN];
+
+    // M4_ARRAY_DESC("RegValue", "u32", M4_SIZE(1,64), M4_RANGE(0,65535), "0", M4_DIGIT(0), M4_DYNAMIC(0),M4_HIDE(1))
+    unsigned int   RegValue[MAX_I2CDATA_LEN];
+
+    // M4_ARRAY_DESC("ValueByteNum", "u32", M4_SIZE(1,64), M4_RANGE(0,65535), "0", M4_DIGIT(0), M4_DYNAMIC(0),M4_HIDE(1))
+    unsigned int   ValueByteNum[MAX_I2CDATA_LEN];
+
+    // M4_ARRAY_DESC("DelayFrames", "u32", M4_SIZE(1,64), M4_RANGE(0,65535), "0", M4_DIGIT(0), M4_DYNAMIC(0),M4_HIDE(1))
+    unsigned int   DelayFrames[MAX_I2CDATA_LEN];
+
+} RKAiqExpI2cParam_t;
+
+typedef struct {
     // M4_STRUCT_DESC("RealPara", "normal_ui_style")
     RkAiqExpRealParam_t exp_real_params; //real value
 
@@ -309,7 +341,6 @@ typedef struct {
 } RkAiqIrisParamComb_t;
 
 typedef struct RKAiqAecExpInfo_s {
-
     // M4_STRUCT_DESC("LinearExp", "normal_ui_style")
     RkAiqExpParamComb_t LinearExp;
 
@@ -322,15 +353,26 @@ typedef struct RKAiqAecExpInfo_s {
     // M4_NUMBER_DESC("LineLengthPixels(hts)", "u16", M4_RANGE(0,65535), "0", M4_DIGIT(0))
     uint16_t line_length_pixels;
 
-    // M4_NUMBER_DESC("FrameLengthLines(vts)", "u16", M4_RANGE(0,65535), "0", M4_DIGIT(0))
-    uint16_t frame_length_lines;
+    // M4_NUMBER_DESC("FrameLengthLines(vts)", "u32", M4_RANGE(0,4294967296), "0", M4_DIGIT(0))
+    uint32_t frame_length_lines;
 
     // M4_NUMBER_DESC("PixelClockFreqMhz", "f32", M4_RANGE(0,65535), "0", M4_DIGIT(2))
     float pixel_clock_freq_mhz;
 
     // M4_STRUCT_DESC("CISFeature_t", "normal_ui_style",M4_HIDE(1))
     CISFeature_t CISFeature;
+
+    // M4_STRUCT_DESC("I2cPara", "normal_ui_style",M4_HIDE(1))
+    RKAiqExpI2cParam_t exp_i2c_params;
 } RKAiqAecExpInfo_t;
+
+/**
+ * gcc-4.4.7 disallow typedef redefinition
+ * error: redefinition of typedef 'RKAiqAecExpInfo_t' with include/algos/rk_aiq_algo_des.h
+ */
+#ifndef RKAIQAECEXPINFO_T
+#define RKAIQAECEXPINFO_T
+#endif
 
 /*****************************************************************************/
 /**

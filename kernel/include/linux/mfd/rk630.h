@@ -13,11 +13,13 @@
 #include <linux/regmap.h>
 #include <linux/mfd/core.h>
 
+#ifndef HIWORD_UPDATE
 #define UPDATE(x, h, l)		(((x) << (l)) & GENMASK((h), (l)))
 #define HIWORD_MASK(h, l)	((GENMASK((h), (l)) << 16) | GENMASK((h), (l)))
 #define HIWORD_UPDATE(v, h, l)	((((v) << (l)) & GENMASK((h), (l))) | (GENMASK((h), (l)) << 16))
+#endif
 
-#define RTC_REG(x)			((x) + 0x6000)
+#define RTC_REG(x)			((x) + 0x60000)
 #define RTC_SET_SECONDS			RTC_REG(0x0)
 #define RTC_SET_MINUTES			RTC_REG(0x4)
 #define RTC_SET_HOURS			RTC_REG(0x8)
@@ -61,29 +63,27 @@
 
 #define GRF_REG(x)			((x) + 0x20000)
 #define PLUMAGE_GRF_GPIO0A_IOMUX	GRF_REG(0x0000)
-#define GPIO0A0_SEL_MASK		HIWORD_MASK(1, 0)
-#define GPIO0A0_SEL(x)			HIWORD_UPDATE(x, 1, 0)
-#define GPIO0A1_SEL_MASK		HIWORD_MASK(3, 2)
-#define GPIO0A1_SEL(x)			HIWORD_UPDATE(x, 3, 2)
-#define GPIO0A2_SEL_MASK		HIWORD_MASK(5, 4)
-#define GPIO0A2_SEL(x)			HIWORD_UPDATE(x, 5, 4)
-#define GPIO0A3_SEL_MASK		HIWORD_MASK(7, 6)
-#define GPIO0A3_SEL(x)			HIWORD_UPDATE(x, 7, 6)
-#define GPIO0A4_SEL_MASK		HIWORD_MASK(9, 8)
-#define GPIO0A4_SEL(x)			HIWORD_UPDATE(x, 9, 8)
-#define GPIO0A5_SEL_MASK		HIWORD_MASK(11, 10)
-#define GPIO0A5_SEL(x)			HIWORD_UPDATE(x, 11, 10)
-#define GPIO0A6_SEL_MASK		HIWORD_MASK(13, 12)
-#define GPIO0A6_SEL(x)			HIWORD_UPDATE(x, 13, 12)
-#define GPIO0A7_SEL_MASK		HIWORD_MASK(15, 14)
-#define GPIO0A7_SEL(x)			HIWORD_UPDATE(x, 15, 14)
 #define PLUMAGE_GRF_GPIO0B_IOMUX	GRF_REG(0x0008)
-#define GPIO0B0_SEL_MASK		HIWORD_MASK(1, 0)
-#define GPIO0B0_SEL(x)			HIWORD_UPDATE(x, 1, 0)
 #define PLUMAGE_GRF_GPIO0C_IOMUX	GRF_REG(0x0010)
 #define PLUMAGE_GRF_GPIO0D_IOMUX	GRF_REG(0x0018)
 #define PLUMAGE_GRF_GPIO1A_IOMUX	GRF_REG(0x0020)
 #define PLUMAGE_GRF_GPIO1B_IOMUX	GRF_REG(0x0028)
+#define PIN0_SEL_MASK			HIWORD_MASK(1, 0)
+#define PIN0_SEL(x)			HIWORD_UPDATE(x, 1, 0)
+#define PIN1_SEL_MASK			HIWORD_MASK(3, 2)
+#define PIN1_SEL(x)			HIWORD_UPDATE(x, 3, 2)
+#define PIN2_SEL_MASK			HIWORD_MASK(5, 4)
+#define PIN2_SEL(x)			HIWORD_UPDATE(x, 5, 4)
+#define PIN3_SEL_MASK			HIWORD_MASK(7, 6)
+#define PIN3_SEL(x)			HIWORD_UPDATE(x, 7, 6)
+#define PIN4_SEL_MASK			HIWORD_MASK(9, 8)
+#define PIN4_SEL(x)			HIWORD_UPDATE(x, 9, 8)
+#define PIN5_SEL_MASK			HIWORD_MASK(11, 10)
+#define PIN5_SEL(x)			HIWORD_UPDATE(x, 11, 10)
+#define PIN6_SEL_MASK			HIWORD_MASK(13, 12)
+#define PIN6_SEL(x)			HIWORD_UPDATE(x, 13, 12)
+#define PIN7_SEL_MASK			HIWORD_MASK(15, 14)
+#define PIN7_SEL(x)			HIWORD_UPDATE(x, 15, 14)
 #define PLUMAGE_GRF_GPIO0A_P		GRF_REG(0x0080)
 #define PLUMAGE_GRF_GPIO0B_P		GRF_REG(0x0084)
 #define PLUMAGE_GRF_GPIO0C_P		GRF_REG(0x0088)
@@ -93,6 +93,10 @@
 #define PLUMAGE_GRF_GPIO1B_SR		GRF_REG(0x00D4)
 #define PLUMAGE_GRF_GPIO1B_E		GRF_REG(0x0154)
 #define PLUMAGE_GRF_SOC_CON0		GRF_REG(0x0400)
+#define RTC_CLAMP_EN_MASK		HIWORD_MASK(13, 13)
+#define RTC_CLAMP_EN(x)			HIWORD_UPDATE(x, 13, 13)
+#define SW_TVE_DCLK_POL_MASK		HIWORD_MASK(4, 4)
+#define SW_TVE_DCLK_POL(x)		HIWORD_UPDATE(x, 4, 4)
 #define SW_TVE_DCLK_POL_MASK		HIWORD_MASK(4, 4)
 #define SW_TVE_DCLK_POL(x)		HIWORD_UPDATE(x, 4, 4)
 #define SW_TVE_DCLK_EN_MASK		HIWORD_MASK(3, 3)
@@ -106,6 +110,8 @@
 #define PLUMAGE_GRF_SOC_CON1		GRF_REG(0x0404)
 #define PLUMAGE_GRF_SOC_CON2		GRF_REG(0x0408)
 #define PLUMAGE_GRF_SOC_CON3		GRF_REG(0x040C)
+#define DCLK_UPSAMPLE_2X4X_MASK		HIWORD_MASK(15, 15)
+#define DCLK_UPSAMPLE_2X4X(x)		HIWORD_UPDATE(x, 15, 15)
 #define VDAC_ENVBG_MASK			HIWORD_MASK(12, 12)
 #define VDAC_ENVBG(x)			HIWORD_UPDATE(x, 12, 12)
 #define VDAC_ENSC0_MASK			HIWORD_MASK(11, 11)
@@ -127,7 +133,11 @@
 #define PLUMAGE_GRF_GPIO0_REN0		GRF_REG(0x0500)
 #define PLUMAGE_GRF_GPIO0_REN1		GRF_REG(0x0504)
 #define PLUMAGE_GRF_GPIO1_REN0		GRF_REG(0x0508)
-#define GRF_MAX_REGISTER		PLUMAGE_GRF_GPIO1_REN0
+#define PLUMAGE_GRF_RTC_STATUS		GRF_REG(0x0610)
+
+#ifndef GRF_MAX_REGISTER
+#define GRF_MAX_REGISTER		PLUMAGE_GRF_RTC_STATUS
+#endif
 
 #define CRU_REG(x)			((x) + 0x140000)
 #define CRU_SPLL_CON0			CRU_REG(0x0000)
@@ -154,10 +164,12 @@
 #define CRU_CLKSEL_CON2			CRU_REG(0x0038)
 #define CRU_CLKSEL_CON3			CRU_REG(0x003c)
 #define CRU_GATE_CON0			CRU_REG(0x0040)
-#define DCLK_CVBS_1X_PLL_CLK_EN_MASK	HIWORD_MASK(12, 12)
-#define DCLK_CVBS_1X_PLL_CLK_EN(x)	HIWORD_UPDATE(x, 12, 12)
-#define DCLK_CVBS_4X_PLL_CLK_EN_MASK	HIWORD_MASK(11, 11)
-#define DCLK_CVBS_4X_PLL_CLK_EN(x)	HIWORD_UPDATE(x, 11, 11)
+#define PCLK_EFUSE_EN_MASK		BIT(14 + 16)
+#define PCLK_EFUSE_DISABLE		BIT(14)
+#define DCLK_CVBS_1X_PLL_CLK_GATE_MASK	HIWORD_MASK(12, 12)
+#define DCLK_CVBS_1X_PLL_CLK_GATE(x)	HIWORD_UPDATE(x, 12, 12)
+#define DCLK_CVBS_4X_PLL_CLK_GATE_MASK	HIWORD_MASK(11, 11)
+#define DCLK_CVBS_4X_PLL_CLK_GATE(x)	HIWORD_UPDATE(x, 11, 11)
 #define CRU_SOFTRST_CON0		CRU_REG(0x0050)
 #define DRESETN_CVBS_1X_MASK		HIWORD_MASK(10, 10)
 #define DRESETN_CVBS_1X(x)		HIWORD_UPDATE(x, 10, 10)
@@ -168,6 +180,35 @@
 #define PRESETN_GRF_MASK		HIWORD_MASK(3, 3)
 #define PRESETN_GRF(x)			HIWORD_UPDATE(x, 3, 3)
 #define CRU_MAX_REGISTER		CRU_SOFTRST_CON0
+
+#define GPIO0_BASE			0x30000
+#define GPIO1_BASE			0x40000
+#define GPIO_SWPORT_DR_L		0x00
+#define GPIO_SWPORT_DR_H		0x04
+#define GPIO_SWPORT_DDR_L		0x08
+#define GPIO_SWPORT_DDR_H		0x0c
+#define GPIO_INT_EN_L			0x10
+#define GPIO_INT_EN_H			0x14
+#define GPIO_INT_MASK_L			0x18
+#define GPIO_INT_MASK_H			0x1c
+#define GPIO_INT_TYPE_L			0x20
+#define GPIO_INT_TYPE_H			0x24
+#define GPIO_INT_POLARITY_L		0x28
+#define GPIO_INT_POLARITY_H		0x2c
+#define GPIO_INT_BOTHEDGE_L		0x30
+#define GPIO_INT_BOTHEDGE_H		0x34
+#define GPIO_DEBOUNCE_L			0x38
+#define GPIO_DEBOUNCE_H			0x3c
+#define GPIO_DBCLK_DIV_EN_L		0x40
+#define GPIO_DBCLK_DIV_EN_H		0x44
+#define GPIO_DBCLK_DIV_CON		0x48
+#define GPIO_INT_STATUS			0x50
+#define GPIO_INT_RAWSTATUS		0x58
+#define GPIO_PORT_EOI_L			0x60
+#define GPIO_PORT_EOI_H			0x64
+#define GPIO_EXT_PORT			0x70
+#define GPIO_VER_ID			0x78
+#define GPIO_MAX_REGISTER		(GPIO1_BASE + GPIO_VER_ID)
 
 #define TVE_REG(x)			((x) + 0x10000)
 #define BT656_DECODER_CTRL		TVE_REG(0x3D00)
@@ -217,20 +258,27 @@
 struct rk630 {
 	struct device *dev;
 	struct i2c_client *client;
+	struct clk *ref_clk;
 	struct regmap *grf;
+	struct regmap *pinctrl;
 	struct regmap *cru;
 	struct regmap *tve;
 	struct regmap *rtc;
+	struct regmap *efuse;
+	struct regmap *codec;
 	struct gpio_desc *reset_gpio;
 	int irq;
 	struct regmap_irq_chip_data *irq_data;
 	const struct regmap_irq_chip *regmap_irq_chip;
 };
 
+extern const struct regmap_config rk630_efuse_regmap_config;
 extern const struct regmap_config rk630_rtc_regmap_config;
 extern const struct regmap_config rk630_grf_regmap_config;
+extern const struct regmap_config rk630_pinctrl_regmap_config;
 extern const struct regmap_config rk630_cru_regmap_config;
 extern const struct regmap_config rk630_tve_regmap_config;
+extern const struct regmap_config rk630_codec_regmap_config;
 
 int rk630_core_probe(struct rk630 *rk630);
 int rk630_core_remove(struct rk630 *rk630);

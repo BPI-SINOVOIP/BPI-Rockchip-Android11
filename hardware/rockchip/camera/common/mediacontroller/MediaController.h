@@ -59,7 +59,7 @@ public:
     status_t getMediaDevInfo(media_device_info &info);
     status_t enqueueMediaRequest(uint32_t mediaRequestId);
     status_t findMediaEntityById(int index, struct media_entity_desc &mediaEntityDesc);
-
+    status_t findMediaEntityByName(char* name, struct media_entity_desc &mediaEntityDesc);
 private:
     status_t open();
     status_t close();
@@ -79,6 +79,7 @@ private:
     media_device_info                               mDeviceInfo;        /*!< media controller device info */
     /*!< media entity descriptors, Key: entity name */
     std::map<std::string, struct media_entity_desc> mEntityDesciptors;
+    std::map<uint32_t, struct media_entity_desc> mEntityIdDesciptors;
     /*!< MediaEntities, Key: entity name */
     std::map<std::string, std::shared_ptr<MediaEntity>>  mEntities;
 

@@ -28,6 +28,61 @@
 
 RKAIQ_BEGIN_DECLARE
 
+
+/******************************************************************************
+* Test Function
+******************************************************************************/
+#define _TEST_LSC_VALID_ON_HARDWARE 0
+#if _TEST_LSC_VALID_ON_HARDWARE
+/** @brief set lsc 4 channel table to the given value*/
+static void _memset_lsc(rk_aiq_lsc_cfg_t& tb, uint16_t value) {
+    for (uint32_t i = 0; i < sizeof(tb.r_data_tbl)/sizeof(tb.r_data_tbl[0]); i++)
+    {
+        tb.r_data_tbl[i] = value;
+    }
+    for (uint32_t i = 0; i < sizeof(tb.gr_data_tbl)/sizeof(tb.gr_data_tbl[0]); i++)
+    {
+        tb.gr_data_tbl[i] = value;
+    }
+    for (uint32_t i = 0; i < sizeof(tb.gb_data_tbl)/sizeof(tb.gb_data_tbl[0]); i++)
+    {
+        tb.gb_data_tbl[i] = value;
+    }
+    for (uint32_t i = 0; i < sizeof(tb.b_data_tbl)/sizeof(tb.b_data_tbl[0]); i++)
+    {
+        tb.b_data_tbl[i] = value;
+    }
+}
+
+/** @brief test function: if lsc config is valid in hardware, you will see blink on liveview.*/
+static void _test_if_hw_lsc_valid(alsc_handle_t hAlsc)
+{
+#define ONE_TIME_STATE      1
+#define THREE_TIME_STATE    3
+
+    static int cur_state = ONE_TIME_STATE;
+    int next_state = cur_state;
+
+    switch (cur_state)
+    {
+        case ONE_TIME_STATE: {
+            next_state = THREE_TIME_STATE;
+            _memset_lsc(hAlsc->lscHwConf, 1024);
+        } break;
+
+        case THREE_TIME_STATE: {
+            next_state = ONE_TIME_STATE;
+            _memset_lsc(hAlsc->lscHwConf, 3072);
+        } break;
+
+        default:
+            break;
+    }
+    cur_state = next_state;
+}
+#endif
+
+
 static XCamReturn illuminant_index_estimation(alsc_mode_data_t& alsc_mode_data, float awbGain[2], uint32_t& illu_case_id)
 {
     LOG1_ALSC( "%s: (enter)\n", __FUNCTION__);
@@ -133,7 +188,7 @@ static XCamReturn VignInterpolateMatrices
     const float             fVignetting,
     pLscTableProfile_t   pLscProfile1,
     pLscTableProfile_t   pLscProfile2,
-    CamLscMatrix_t*          pResMatrix
+    lsc_matrix_t*          pResMatrix
 ) {
     XCamReturn iXCamReturn = XCAM_RETURN_ERROR_PARAM;
 
@@ -191,8 +246,8 @@ static XCamReturn VignInterpolateMatrices
 static XCamReturn Damping
 (
     const float     damp,               /**< damping coefficient */
-    CamLscMatrix_t*  pMatrixUndamped,   /**< undamped new computed matrices */
-    CamLscMatrix_t*  pMatrixDamped      /**< old matrices and XCamReturn */
+    lsc_matrix_t*  pMatrixUndamped,   /**< undamped new computed matrices */
+    lsc_matrix_t*  pMatrixDamped      /**< old matrices and XCamReturn */
 ) {
     XCamReturn XCamReturn = XCAM_RETURN_ERROR_PARAM;
 
@@ -729,7 +784,9 @@ XCamReturn AlscConfig
     if(hAlsc->mCurAtt.byPass != true ) {
         hAlsc->lscHwConf.lsc_en = hAlsc->calibLscV2->common.enable;
         if(hAlsc->mCurAtt.mode == RK_AIQ_LSC_MODE_AUTO) {
-            AlscAutoConfig(hAlsc);
+            if (hAlsc->auto_mode_need_run_algo) {
+                AlscAutoConfig(hAlsc);
+            }
         } else if(hAlsc->mCurAtt.mode == RK_AIQ_LSC_MODE_MANUAL) {
             AlscManualConfig(hAlsc);
         } else {
@@ -800,6 +857,7 @@ XCamReturn AlscInit(alsc_handle_t *hAlsc, const CamCalibDbV2Context_t* calib2)
     alsc_context->count = 0;
     alsc_context->mCurAtt.mode = RK_AIQ_LSC_MODE_AUTO;
     alsc_context->alscSwInfo.prepare_type = RK_AIQ_ALGO_CONFTYPE_UPDATECALIB | RK_AIQ_ALGO_CONFTYPE_NEEDRESET;
+    alsc_context->auto_mode_need_run_algo = true;
     ret = UpdateLscCalibPara(alsc_context);
     //print_alsc(alsc_context);
     LOGI_ALSC("%s: (exit)\n", __FUNCTION__);
@@ -893,6 +951,9 @@ XCamReturn AlscProcessing(alsc_handle_t hAlsc)
 
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
 
+#if _TEST_LSC_VALID_ON_HARDWARE
+    _test_if_hw_lsc_valid(hAlsc);
+#endif
 
     LOG1_ALSC("%s: (exit)\n", __FUNCTION__);
     return(ret);

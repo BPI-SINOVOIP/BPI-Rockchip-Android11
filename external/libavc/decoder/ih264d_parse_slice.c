@@ -1435,17 +1435,20 @@ WORD32 ih264d_parse_decode_slice(UWORD8 u1_is_idr_slice,
         i1_is_end_of_poc = 0;
     }
 
-    if (ps_dec->u4_first_slice_in_pic == 0)
+    /* Increment only if the current slice has atleast 1 more MB */
+    if (ps_dec->u4_first_slice_in_pic == 0 &&
+        (ps_dec->ps_parse_cur_slice->u4_first_mb_in_slice <
+        (UWORD32)(ps_dec->u2_total_mbs_coded >> ps_dec->ps_cur_slice->u1_mbaff_frame_flag)))
     {
         ps_dec->ps_parse_cur_slice++;
         ps_dec->u2_cur_slice_num++;
+        // in the case of single core increment ps_decode_cur_slice
+        if(ps_dec->u1_separate_parse == 0)
+        {
+            ps_dec->ps_decode_cur_slice++;
+        }
     }
 
-    // in the case of single core increment ps_decode_cur_slice
-    if((ps_dec->u1_separate_parse == 0) && (ps_dec->u4_first_slice_in_pic == 0))
-    {
-        ps_dec->ps_decode_cur_slice++;
-    }
     ps_dec->u1_slice_header_done = 0;
 
 

@@ -132,16 +132,47 @@ int DrmConnector::Init() {
   if (ret)
     ALOGW("Could not get hdr panel metadata property\n");
 
-  ret = drm_->GetConnectorProperty(*this, "hdmi_output_colorimetry", &hdmi_output_colorimetry_);
-  if (ret)
-    ALOGW("Could not get hdmi_output_colorimetry property\n");
+  // Kernel version 5.10 starts using new attribute definitions Colorspace
+  ret = drm_->GetConnectorProperty(*this, "Colorspace", &colorspace_property_);
+  if (ret){
+    ALOGW("Could not get Colorspace property, try to get hdmi_output_colorimetry property.\n");
+    // Before Kernel version 5.10 starts using old attribute definitions hdmi_output_colorimetry
+    ret = drm_->GetConnectorProperty(*this, "hdmi_output_colorimetry", &colorspace_property_);
+    if(ret){
+      ALOGW("Could not get hdmi_output_colorimetry property.\n");
+    }
+  }
 
-  ret = drm_->GetConnectorProperty(*this, "hdmi_output_format", &hdmi_output_format_);
+  // Kernel version 5.10 starts using new attribute definitions color_format
+  ret = drm_->GetConnectorProperty(*this, "color_format", &color_format_property_);
+  if (ret) {
+    ALOGW("Could not get color_format property, try to get hdmi_output_format property.\n");
+    // Before Kernel version 5.10 using old attribute definitions hdmi_output_format
+    ret = drm_->GetConnectorProperty(*this, "hdmi_output_format", &color_format_property_);
+    if(ret){
+      ALOGW("Could not get hdmi_output_format property.\n");
+    }
+  }
+
+  // Kernel version 5.10 starts using new attribute definitions color_depth
+  ret = drm_->GetConnectorProperty(*this, "color_depth", &color_depth_property_);
+  if (ret) {
+    ALOGW("Could not get color_depth property, try to get hdmi_output_depth\n");
+    // Before Kernel version 5.10 using old attribute definitions hdmi_output_depth
+    ret = drm_->GetConnectorProperty(*this, "hdmi_output_depth", &color_depth_property_);
+    if(ret){
+      ALOGW("Could not get hdmi_output_depth property\n");
+    }
+  }
+
+  // Kernel version 5.10 to get color_format_caps
+  ret = drm_->GetConnectorProperty(*this, "color_format_caps", &color_format_caps_property_);
   if (ret) {
     ALOGW("Could not get hdmi_output_format property\n");
   }
 
-  ret = drm_->GetConnectorProperty(*this, "hdmi_output_depth", &hdmi_output_depth_);
+  // Kernel version 5.10 to get color_depth_caps
+  ret = drm_->GetConnectorProperty(*this, "color_depth_caps", &color_depth_caps_property_);
   if (ret) {
    ALOGW("Could not get hdmi_output_depth property\n");
   }
@@ -153,7 +184,6 @@ int DrmConnector::Init() {
   }else{
     std::tie(ret,unique_id_) = connector_id_property_.value();
   }
-
 
   drm_->GetHdrPanelMetadata(this,&hdr_metadata_);
   bSupportSt2084_ = drm_->is_hdr_panel_support_st2084(this);
@@ -183,6 +213,15 @@ int DrmConnector::Init() {
   }
 
   snprintf(cUniqueName_,30,"%s-%d",drm_->connector_type_str(type_),unique_id_);
+
+  bSpiltMode_=false;
+  ret = drm_->GetConnectorProperty(*this, "USER_SPLIT_MODE", &spilt_mode_property_);
+  if (ret) {
+    ALOGW("Could not get USER_SPLIT_MODE property\n");
+  }else{
+    std::tie(ret,bSpiltMode_) = spilt_mode_property_.value();
+  }
+
   return 0;
 }
 
@@ -331,7 +370,7 @@ int DrmConnector::UpdateModes() {
   bModeReady_ = true;
 
   HWC2_ALOGD_IF_DEBUG("conn=%d state=%d count_modes.size=%d modes_.size=%zu new_raw_modes.size=%zu",
-        id_, state_,c->count_modes, modes_.size(),new_raw_modes.size());
+        id_, state_,c->count_modes, modes_.size(),raw_modes_.size());
 
   drmModeFreeConnector(c);
 
@@ -653,7 +692,7 @@ bool DrmConnector::ParseHdmiOutputFormat(char* strprop, output_format *format, o
 }
 
 int DrmConnector::UpdateOutputFormat(int display_id, int update_base_timeline){
-  if(!(hdmi_output_format_property().id() > 0 || hdmi_output_depth_property().id() > 0)){
+  if(!(color_format_property().id() > 0 || color_depth_property().id() > 0)){
     return 0;
   }
 
@@ -726,17 +765,17 @@ int DrmConnector::UpdateOutputFormat(int display_id, int update_base_timeline){
 
   if(need_change_format > 0) {
     ALOGI("%s,line=%d %s change hdmi output format: %d", __FUNCTION__,__LINE__, cUniqueName_, color_format);
-    ret = drmModeAtomicAddProperty(pset, id(), hdmi_output_format_property().id(), color_format);
+    ret = drmModeAtomicAddProperty(pset, id(), color_format_property().id(), color_format);
     if (ret < 0) {
-      ALOGE("%s:line=%d Failed to add prop[%d] to [%d]", __FUNCTION__, __LINE__, hdmi_output_format_property().id(), id());
+      ALOGE("%s:line=%d Failed to add prop[%d] to [%d]", __FUNCTION__, __LINE__, color_format_property().id(), id());
     }
   }
 
   if(need_change_depth > 0) {
     ALOGI("%s,line=%d %s change hdmi output depth: %d", __FUNCTION__,__LINE__, cUniqueName_, color_depth);
-    ret = drmModeAtomicAddProperty(pset, id(), hdmi_output_depth_property().id(), color_depth);
+    ret = drmModeAtomicAddProperty(pset, id(), color_depth_property().id(), color_depth);
     if (ret < 0) {
-      ALOGE("%s:line=%d Failed to add prop[%d] to [%d]", __FUNCTION__, __LINE__, hdmi_output_depth_property().id(), id());
+      ALOGE("%s:line=%d Failed to add prop[%d] to [%d]", __FUNCTION__, __LINE__, color_depth_property().id(), id());
     }
   }
 
@@ -870,9 +909,9 @@ bool DrmConnector::is_hdmi_support_hdr() const
     return (hdr_metadata_property_.id() && bSupportSt2084_) || (hdr_metadata_property_.id() && bSupportHLG_);
 }
 
-int DrmConnector::switch_hdmi_hdr_mode(android_dataspace_t colorspace){
+int DrmConnector::switch_hdmi_hdr_mode(android_dataspace_t input_colorspace){
   ALOGD_IF(LogLevel(DBG_DEBUG),"%s:line=%d, connector-id=%d, isSupportSt2084 = %d, isSupportHLG = %d , colorspace = %x",
-            __FUNCTION__,__LINE__,id(),isSupportSt2084(),isSupportHLG(),colorspace);
+            __FUNCTION__,__LINE__,id(),isSupportSt2084(),isSupportHLG(),input_colorspace);
   struct hdr_output_metadata hdr_metadata;
   memset(&hdr_metadata, 0, sizeof(struct hdr_output_metadata));
 
@@ -882,11 +921,11 @@ int DrmConnector::switch_hdmi_hdr_mode(android_dataspace_t colorspace){
   hdr_metadata_infoframe &hdmi_metadata_type = hdr_metadata.hdmi_metadata_type;
 #endif
 
-  if((colorspace & HAL_DATASPACE_TRANSFER_MASK) == HAL_DATASPACE_TRANSFER_ST2084
+  if((input_colorspace & HAL_DATASPACE_TRANSFER_MASK) == HAL_DATASPACE_TRANSFER_ST2084
       && isSupportSt2084()){
       ALOGD_IF(LogLevel(DBG_DEBUG),"%s:line=%d has st2084",__FUNCTION__,__LINE__);
       hdmi_metadata_type.eotf = SMPTE_ST2084;
-  }else if((colorspace & HAL_DATASPACE_TRANSFER_MASK) == HAL_DATASPACE_TRANSFER_HLG
+  }else if((input_colorspace & HAL_DATASPACE_TRANSFER_MASK) == HAL_DATASPACE_TRANSFER_HLG
       && isSupportHLG()){
       ALOGD_IF(LogLevel(DBG_DEBUG),"%s:line=%d has HLG",__FUNCTION__,__LINE__);
       hdmi_metadata_type.eotf = HLG;
@@ -896,7 +935,7 @@ int DrmConnector::switch_hdmi_hdr_mode(android_dataspace_t colorspace){
   }
 
   uint32_t blob_id = 0;
-  int colorimetry = 0;
+  DrmColorspaceType colorspace = DrmColorspaceType::DEFAULT;
   int ret = -1;
   bool hdr_state_update = false;
   if(hdr_metadata_property().id())
@@ -919,20 +958,24 @@ int DrmConnector::switch_hdmi_hdr_mode(android_dataspace_t colorspace){
         }
       }
 
-      if(hdmi_output_colorimetry_property().id()){
-          if((colorspace & HAL_DATASPACE_STANDARD_BT2020) == HAL_DATASPACE_STANDARD_BT2020){
-              colorimetry = COLOR_METRY_ITU_2020;
+      if(colorspace_property().id()){
+          if((input_colorspace & HAL_DATASPACE_STANDARD_BT2020) == HAL_DATASPACE_STANDARD_BT2020){
+              if(uColorFormat_ == output_rgb)
+                colorspace = DrmColorspaceType::BT2020_RGB;
+              else
+                colorspace = DrmColorspaceType::BT2020_YCC;
+
           }
 
-          if(colorimetry_ != colorimetry){
+          if(colorspace_ != colorspace){
               hdr_state_update = true;
-              ALOGD_IF(LogLevel(DBG_DEBUG),"%s: change bt2020 colorimetry=%d", __FUNCTION__, colorimetry);
-              ret = drmModeAtomicAddProperty(pset, id(), hdmi_output_colorimetry_property().id(), colorimetry);
+              ALOGD_IF(LogLevel(DBG_DEBUG),"%s: change bt2020 colorspace=%d", __FUNCTION__, colorspace);
+              ret = drmModeAtomicAddProperty(pset, id(), colorspace_property().id(), colorspace);
               if (ret < 0) {
-                ALOGE("%s:line=%d Failed to add prop[%d] to [%d]", __FUNCTION__, __LINE__,hdmi_output_colorimetry_property().id(), id());
+                ALOGE("%s:line=%d Failed to add prop[%d] to [%d]", __FUNCTION__, __LINE__,colorspace_property().id(), id());
               }
           }else{
-              ALOGD_IF(LogLevel(DBG_DEBUG),"%s: no need to update colorimetry", __FUNCTION__);
+              ALOGD_IF(LogLevel(DBG_DEBUG),"%s: no need to update colorspace", __FUNCTION__);
           }
       }
       if(hdr_state_update){
@@ -943,7 +986,7 @@ int DrmConnector::switch_hdmi_hdr_mode(android_dataspace_t colorspace){
             return ret;
         }else{
             memcpy(&last_hdr_metadata_, &hdr_metadata, sizeof(struct hdr_output_metadata));
-            colorimetry_ = colorimetry;
+            colorspace_ = colorspace;
         }
       }
       if (blob_id)
@@ -981,16 +1024,62 @@ const DrmProperty &DrmConnector::hdr_panel_property() const {
   return hdr_panel_property_;
 }
 
-const DrmProperty &DrmConnector::hdmi_output_colorimetry_property() const {
-  return hdmi_output_colorimetry_;
+const DrmProperty &DrmConnector::colorspace_property() const {
+  return colorspace_property_;
 }
 
-const DrmProperty &DrmConnector::hdmi_output_format_property() const {
-  return hdmi_output_format_;
+const DrmProperty &DrmConnector::color_format_property() const {
+  return color_format_property_;
 }
 
-const DrmProperty &DrmConnector::hdmi_output_depth_property() const {
-  return hdmi_output_depth_;
+const DrmProperty &DrmConnector::color_depth_property() const {
+  return color_depth_property_;
 }
 
+int DrmConnector::GetSpiltModeId() const {
+  return (display_ + DRM_CONNECTOR_SPILT_MODE_MASK);
+}
+
+bool DrmConnector::isHorizontalSpilt() const {
+  return bHorizontalSpilt_;
+}
+
+int DrmConnector::setHorizontalSpilt(){
+  bHorizontalSpilt_ = true;
+  return 0;
+}
+
+bool DrmConnector::isCropSpilt() const {
+  return bCropSpilt_;
+}
+
+int DrmConnector::setCropSpilt(int32_t fbWidth,
+                               int32_t fbHeight,
+                               int32_t srcX,
+                               int32_t srcY,
+                               int32_t srcW,
+                               int32_t srcH){
+  bCropSpilt_ = true;
+  FbWidth_ = fbWidth;
+  FbHeight_ = fbHeight;
+  SrcX_ = srcX;
+  SrcY_ = srcY;
+  SrcW_ = srcW;
+  SrcH_ = srcH;
+  return 0;
+}
+
+int DrmConnector::getCropSpiltFb(int32_t *fbWidth, int32_t *fbHeight){
+  *fbWidth = FbWidth_;
+  *fbHeight = FbHeight_;
+  return 0;
+}
+
+int DrmConnector::getCropInfo(int32_t *srcX, int32_t *srcY, int32_t *srcW, int32_t *srcH){
+  *srcX = SrcX_;
+  *srcY = SrcY_;
+  *srcW = SrcW_;
+  *srcH = SrcH_;
+  return 0;
+}
 }  // namespace android

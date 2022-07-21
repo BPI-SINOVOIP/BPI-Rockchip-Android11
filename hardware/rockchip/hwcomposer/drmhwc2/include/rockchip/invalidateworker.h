@@ -17,7 +17,7 @@
 #ifndef DRM_INVALIDATE_WORKER_H_
 #define DRM_INVALIDATE_WORKER_H_
 
-#include "worker.h"
+#include "utils/worker.h"
 
 #include <stdint.h>
 #include <map>

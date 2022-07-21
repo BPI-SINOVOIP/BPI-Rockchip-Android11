@@ -509,7 +509,6 @@ static int rkcif_pipeline_set_stream(struct rkcif_pipeline *p, bool on)
 			cif_dev->reset_watchdog_timer.is_running = false;
 			cif_dev->reset_watchdog_timer.last_buf_wakeup_cnt = 0;
 			cif_dev->reset_watchdog_timer.run_cnt = 0;
-			cif_dev->buf_wake_up_cnt = 0;
 		}
 
 		/* phy -> sensor */
@@ -556,7 +555,6 @@ static int rkcif_pipeline_set_stream(struct rkcif_pipeline *p, bool on)
 				cif_dev->reset_watchdog_timer.is_running = false;
 				cif_dev->reset_watchdog_timer.last_buf_wakeup_cnt = 0;
 				cif_dev->reset_watchdog_timer.run_cnt = 0;
-				cif_dev->buf_wake_up_cnt = 0;
 			}
 
 			/* phy -> sensor */
@@ -1402,8 +1400,8 @@ static int __maybe_unused __rkcif_clr_unready_dev(void)
 	mutex_lock(&rkcif_dev_mutex);
 
 	list_for_each_entry(cif_dev, &rkcif_device_list, list) {
-		subdev_asyn_register_itf(cif_dev);
 		v4l2_async_notifier_clr_unready_dev(&cif_dev->notifier);
+		subdev_asyn_register_itf(cif_dev);
 	}
 
 	mutex_unlock(&rkcif_dev_mutex);

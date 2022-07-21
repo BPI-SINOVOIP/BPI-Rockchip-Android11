@@ -22,6 +22,8 @@
 #include "RkAiqCore.h"
 
 namespace RkCam {
+ 
+RkAiqHandleFactory::map_type* RkAiqHandleFactory::map;
 
 RkAiqHandle::RkAiqHandle(RkAiqAlgoDesComm* des, RkAiqCore* aiqCore)
     : mDes(des), mAiqCore(aiqCore), mEnable(true), mReConfig(false) {
@@ -34,6 +36,11 @@ RkAiqHandle::RkAiqHandle(RkAiqAlgoDesComm* des, RkAiqCore* aiqCore)
     mProcOutParam = NULL;
     mPostInParam  = NULL;
     mPostOutParam = NULL;
+    updateAtt = false;
+    mNextHdl = NULL;
+    mParentHdl = NULL;
+    mIsMulRun = false;
+    mPostShared = true;
 }
 
 RkAiqHandle::~RkAiqHandle() {
@@ -55,12 +62,24 @@ XCamReturn RkAiqHandle::configInparamsCom(RkAiqAlgoCom* com, int type) {
         com->u.prepare.sns_op_width  = sharedCom->snsDes.isp_acq_width;
         com->u.prepare.sns_op_height = sharedCom->snsDes.isp_acq_height;
         com->u.prepare.conf_type     = sharedCom->conf_type;
+#ifdef RKAIQ_ENABLE_PARSER_V1
+        com->u.prepare.calib = (CamCalibDbContext_t*)(sharedCom->calib);
+#endif
+        com->u.prepare.calibv2 = (CamCalibDbV2Context_t*)(sharedCom->calibv2);
     } else {
         com->ctx         = mAlgoCtx;
         com->frame_id    = shared->frameId;
         com->u.proc.init = sharedCom->init;
+        com->u.proc.iso = sharedCom->iso;
+        com->u.proc.fill_light_on = sharedCom->fill_light_on;
+        com->u.proc.gray_mode = sharedCom->gray_mode;
+        com->u.proc.is_bw_sensor = sharedCom->is_bw_sensor;
+        com->u.proc.preExp = &shared->preExp;
+        com->u.proc.curExp = &shared->curExp;
+        com->u.proc.nxtExp = &shared->nxtExp;
+        com->u.proc.res_comb = &shared->res_comb;
     }
-
+out:
     EXIT_ANALYZER_FUNCTION();
 
     return XCAM_RETURN_NO_ERROR;
@@ -139,6 +158,30 @@ void RkAiqHandle::deInit() {
 
     EXIT_ANALYZER_FUNCTION();
 }
+
+void
+RkAiqHandle::waitSignal(rk_aiq_uapi_mode_sync_e sync_mode)
+{
+    if (mAiqCore->isRunningState()) {
+        if (sync_mode == RK_AIQ_UAPI_MODE_ASYNC)
+            return;
+
+        mUpdateCond.timedwait(mCfgMutex, 100000);
+    } else {
+        updateConfig(false);
+    }
+}
+
+void
+RkAiqHandle::sendSignal(rk_aiq_uapi_mode_sync_e sync_mode)
+{
+    if (sync_mode == RK_AIQ_UAPI_MODE_ASYNC)
+        return;
+
+    if (mAiqCore->isRunningState())
+        mUpdateCond.signal();
+}
+
 
 
 };  // namespace RkCam

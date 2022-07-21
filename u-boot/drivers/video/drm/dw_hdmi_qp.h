@@ -202,6 +202,7 @@
 #define PKTSCHED_GCP_TX_EN				BIT(3)
 #define PKTSCHED_AUDS_TX_EN				BIT(2)
 #define PKTSCHED_ACR_TX_EN				BIT(1)
+#define PKTSCHED_NULL_TX_EN				BIT(0)
 #define PKTSCHED_PKT_CONTROL0				0xaac
 #define PKTSCHED_PKT_SEND				0xab0
 #define PKTSCHED_PKT_STATUS0				0xab4
@@ -931,6 +932,6 @@ void dw_hdmi_qp_selete_output(struct hdmi_edid_data *edid_data,
 			      struct overscan *overscan,
 			      enum dw_hdmi_devtype dev_type,
 			      bool output_bus_format_rgb,
-			      void *data);
+			      void *data, struct display_state *state);
 
 #endif /* __DW_HDMI_QP_H__ */

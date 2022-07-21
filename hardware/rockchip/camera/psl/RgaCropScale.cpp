@@ -31,23 +31,38 @@ namespace camera2 {
 #define RGA_VIRTUAL_W (4096)
 #define RGA_ACTIVE_H (2048)
 #define RGA_VIRTUAL_H (2048)
-
+#else
+#if defined(TARGET_RK3588)
+#define RGA_VER (3.0)
+#define RGA_ACTIVE_W (8128)
+#define RGA_VIRTUAL_W (8128)
+#define RGA_ACTIVE_H (8128)
+#define RGA_VIRTUAL_H (8128)
 #else
 #define RGA_VER (2.0)
 #define RGA_ACTIVE_W (4096)
 #define RGA_VIRTUAL_W (4096)
 #define RGA_ACTIVE_H (4096)
 #define RGA_VIRTUAL_H (4096)
-
+#endif
 #endif
 
+#if defined(TARGET_RK3588)
+#include <im2d_api/im2d.h>
+#endif
 int RgaCropScale::CropScaleNV12Or21(struct Params* in, struct Params* out)
 {
 	rga_info_t src, dst;
-
+#if defined(TARGET_RK3588)
+	rga_buffer_handle_t src_handle;
+	rga_buffer_handle_t dst_handle;
+	im_handle_param_t param;
+	memset(&param, 0, sizeof(im_handle_param_t));
+	memset(&src_handle, 0, sizeof(rga_buffer_handle_t));
+	memset(&dst_handle, 0, sizeof(rga_buffer_handle_t));
+#endif
     memset(&src, 0, sizeof(rga_info_t));
     memset(&dst, 0, sizeof(rga_info_t));
-
     if (!in || !out)
         return -1;
 
@@ -70,20 +85,46 @@ int RgaCropScale::CropScaleNV12Or21(struct Params* in, struct Params* out)
         return -1;
     }
 	RockchipRga& rkRga(RockchipRga::get());
-	
+
+#if defined(TARGET_RK3588)
+	param.width = in->width;
+	param.height = in->height;
+	param.format = in->fmt;
+#endif
 	if (in->fd == -1) {
 		src.fd = -1;
 		src.virAddr = (void*)in->vir_addr;
+#if defined(TARGET_RK3588)
+		LOGD("@%s,src virtual:%p",__FUNCTION__,src.virAddr);
+		src_handle = importbuffer_virtualaddr(src.virAddr, &param);
+#endif
 	} else {
 		src.fd = in->fd;
+#if defined(TARGET_RK3588)
+		src_handle = importbuffer_fd(src.fd, &param);
+		LOGD("@%s,src fd:%d,width:%d,height:%d,format:%d",__FUNCTION__,src.fd,param.width,param.height,param.format);
+#endif
 	}
 	src.mmuFlag = ((2 & 0x3) << 4) | 1 | (1 << 8) | (1 << 10);
 
+#if defined(TARGET_RK3588)
+	param.width = out->width;
+	param.height = out->height;
+	param.format = out->fmt;
+#endif
 	if (out->fd == -1 ) {
 		dst.fd = -1;
 		dst.virAddr = (void*)out->vir_addr;
+#if defined(TARGET_RK3588)
+		LOGD("@%s,dst virtual:%p",__FUNCTION__,src.virAddr);
+		dst_handle = importbuffer_virtualaddr(dst.virAddr, &param);
+#endif
 	} else {
 		dst.fd = out->fd;
+#if defined(TARGET_RK3588)
+		dst_handle = importbuffer_fd(dst.fd, &param);
+		LOGD("@%s,dst fd:%d,width:%d,height:%d,format:%d",__FUNCTION__,dst.fd,param.width,param.height,param.format);
+#endif
 	}
 	dst.mmuFlag = ((2 & 0x3) << 4) | 1 | (1 << 8) | (1 << 10);
 
@@ -107,11 +148,25 @@ int RgaCropScale::CropScaleNV12Or21(struct Params* in, struct Params* out)
     if (in->mirror)
 		src.rotation = DRM_RGA_TRANSFORM_FLIP_H;
 
-	if (rkRga.RkRgaBlit(&src, &dst, NULL)) {
-		ALOGE("%s:rga blit failed", __FUNCTION__);
-        return -1;
-	}
+#if defined(TARGET_RK3588)
+        src.handle = src_handle;
+        src.fd = 0;
+        dst.handle = dst_handle;
+        dst.fd = 0;
+#endif
 
+	if (rkRga.RkRgaBlit(&src, &dst, NULL)) {
+	    ALOGE("%s:rga blit failed", __FUNCTION__);
+#if defined(TARGET_RK3588)
+	    releasebuffer_handle(src_handle);
+	    releasebuffer_handle(dst_handle);
+#endif
+	    return -1;
+	}
+#if defined(TARGET_RK3588)
+	releasebuffer_handle(src_handle);
+	releasebuffer_handle(dst_handle);
+#endif
     return 0;
 }
 

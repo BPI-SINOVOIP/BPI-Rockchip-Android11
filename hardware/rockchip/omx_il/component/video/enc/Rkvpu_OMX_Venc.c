@@ -51,7 +51,6 @@
 #include "Rockchip_OSAL_Log.h"
 #include "Rockchip_OSAL_ColorUtils.h"
 
-#include "hardware/rga.h"
 #include "vpu_type.h"
 #include "gralloc_priv_omx.h"
 #include "omx_video_global.h"
@@ -692,6 +691,17 @@ OMX_BOOL Rkvpu_Post_OutputStream(OMX_COMPONENTTYPE *pOMXComponent)
         Rockchip_OSAL_Memset(&pOutput, 0, sizeof(EncoderOut_t));
         if ((OMX_FALSE == pVideoEnc->bSpsPpsHeaderFlag)) {
             if (pVideoEnc->bSpsPpsLen > 0) {
+                if (pVideoEnc->codecId == OMX_VIDEO_CodingHEVC) {
+                    pOutput.data = malloc(1024);
+                    memset(pOutput.data, 0, 1024);
+                    //get sps/pps header
+                    //VPU_API_GET_EXTRA_INFO = 0x200,
+                    p_vpu_ctx->control(p_vpu_ctx, 0x200, &pOutput);
+                    if (pOutput.size > 0 && pOutput.size < 1024) {
+                        pVideoEnc->bSpsPpsLen = pOutput.size;
+                        Rockchip_OSAL_Memcpy(pVideoEnc->bSpsPpsbuf, pOutput.data, pOutput.size);
+                    }
+                }
                 Rockchip_OSAL_Memcpy(aOut_buf, pVideoEnc->bSpsPpsbuf, pVideoEnc->bSpsPpsLen);
                 outputUseBuffer->remainDataLen = pVideoEnc->bSpsPpsLen;
                 outputUseBuffer->nFlags |= OMX_BUFFERFLAG_CODECCONFIG;

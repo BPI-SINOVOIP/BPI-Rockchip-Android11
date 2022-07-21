@@ -20,6 +20,7 @@
 
 #include "v4l2_buffer_proxy.h"
 #include "v4l2_device.h"
+#include <linux/rk-video-format.h>
 
 namespace XCam {
 V4l2Buffer::V4l2Buffer (const struct v4l2_buffer &buf, const struct v4l2_format &format)

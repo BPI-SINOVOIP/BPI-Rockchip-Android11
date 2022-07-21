@@ -30,7 +30,6 @@
 #include "dma_video_buffer.h"
 #include "dvs_app.h"
 #include "remap_backend.h"
-#include "rk_aiq_algo_types_int.h"
 #include "unistd.h"
 #include "xcam_common.h"
 #include "xcam_log.h"
@@ -39,6 +38,7 @@
 #include "image_processor.h"
 #include "scaler_service.h"
 #include "eis_algo_service.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 using namespace RkCam;
 using namespace XCam;
@@ -59,10 +59,9 @@ static XCamReturn create_context(RkAiqAlgoContext** context, const AlgoCtxInstan
         return XCAM_RETURN_ERROR_MEM;
     }
 
-    const AlgoCtxInstanceCfgInt* cfg_int = (const AlgoCtxInstanceCfgInt*)cfg;
     CalibDbV2_Eis_t* calib_eis =
-                (CalibDbV2_Eis_t*)(CALIBDBV2_GET_MODULE_PTR(cfg_int->calibv2, eis_calib));
-    adaptor->Config(cfg_int, calib_eis);
+                (CalibDbV2_Eis_t*)(CALIBDBV2_GET_MODULE_PTR(cfg->calibv2, eis_calib));
+    adaptor->Config(cfg, calib_eis);
 
     ctx->handle = static_cast<void*>(adaptor);
     *context = ctx;
@@ -84,9 +83,9 @@ static XCamReturn destroy_context(RkAiqAlgoContext* context) {
 
 static XCamReturn prepare(RkAiqAlgoCom* params) {
     EisAlgoAdaptor* adaptor = static_cast<EisAlgoAdaptor*>(params->ctx->handle);
-    RkAiqAlgoConfigAeisInt* config = (RkAiqAlgoConfigAeisInt*)params;
+    RkAiqAlgoConfigAeis* config = (RkAiqAlgoConfigAeis*)params;
 
-    return adaptor->Prepare(config->common.mems_sensor_intf, config->mem_ops);
+    return adaptor->Prepare(config->mems_sensor_intf, config->mem_ops);
 }
 
 static XCamReturn pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams) {
@@ -95,8 +94,8 @@ static XCamReturn pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* out
 }
 
 static XCamReturn processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams) {
-    RkAiqAlgoProcAeisInt* input = (RkAiqAlgoProcAeisInt*)(inparams);
-    RkAiqAlgoProcResAeisInt* output = (RkAiqAlgoProcResAeisInt*)outparams;
+    RkAiqAlgoProcAeis* input = (RkAiqAlgoProcAeis*)(inparams);
+    RkAiqAlgoProcResAeis* output = (RkAiqAlgoProcResAeis*)outparams;
     EisAlgoAdaptor* adaptor = static_cast<EisAlgoAdaptor*>(inparams->ctx->handle);
 
     if (!adaptor->IsEnabled()) {

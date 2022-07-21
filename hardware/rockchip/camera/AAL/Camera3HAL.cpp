@@ -231,6 +231,9 @@ int Camera3HAL::configure_streams(camera3_stream_configuration_t *stream_list)
     if (!stream_list)
         return -EINVAL;
 
+    ALOGD("%s: streams list ptr: %p, num %d", __FUNCTION__,
+        stream_list->streams, stream_list->num_streams);
+
     if (!stream_list->streams || !stream_list->num_streams) {
         LOGE("%s: Bad input! streams list ptr: %p, num %d", __FUNCTION__,
             stream_list->streams, stream_list->num_streams);

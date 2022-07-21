@@ -59,9 +59,12 @@ typedef struct AblcParaV2_s {
     Blc_data_t BLC_Data;
 } AblcParaV2_t;
 
+
 typedef struct CalibDbV2_Ablc_s {
     // M4_STRUCT_DESC("BlcTuningPara", "normal_ui_style")
     AblcParaV2_t BlcTuningPara;
+    // M4_STRUCT_DESC("Blc1TuningPara", "normal_ui_style")
+    AblcParaV2_t Blc1TuningPara;
 } CalibDbV2_Ablc_t;
 
 

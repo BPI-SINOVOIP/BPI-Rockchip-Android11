@@ -193,6 +193,7 @@ static void *uevent_loop(void *param)
 						if (event.flags & CEC_EVENT_FL_INITIAL_STATE) {
 							ALOGD("cec adapter init complete, get connect state\n");
 							ctx->hotplug = get_hpd_state_from_node(ctx);
+							ctx->cec_init = true;
 
 							/*
 							 * Framework will start la polling when box turn on,

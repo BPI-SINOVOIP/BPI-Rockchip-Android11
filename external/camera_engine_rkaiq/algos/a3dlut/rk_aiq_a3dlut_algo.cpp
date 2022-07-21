@@ -273,6 +273,38 @@ XCamReturn Alut3dConfig
         return XCAM_RETURN_ERROR_PARAM;
     }
 
+    if (fabs(hAlut3d->restinfo.res3a_info.sensorGain - hAlut3d->swinfo.sensorGain) > hAlut3d->calibV2_lut3d->common.gain_tolerance) {
+        hAlut3d->restinfo.res3a_info.gain_stable = false;
+        LOGD_A3DLUT( "%s: update sensorGain:%f \n", __FUNCTION__, hAlut3d->swinfo.sensorGain);
+        hAlut3d->restinfo.res3a_info.sensorGain = hAlut3d->swinfo.sensorGain;
+    } else {
+        hAlut3d->restinfo.res3a_info.gain_stable = true;
+        LOGD_A3DLUT( "%s: not update sensorGain:%f \n", __FUNCTION__, hAlut3d->swinfo.sensorGain);
+        hAlut3d->swinfo.sensorGain = hAlut3d->restinfo.res3a_info.sensorGain;
+    }
+
+    if (sqrt( (hAlut3d->restinfo.res3a_info.awbGain[0]-hAlut3d->swinfo.awbGain[0])*(hAlut3d->restinfo.res3a_info.awbGain[0]-hAlut3d->swinfo.awbGain[0])
+         + (hAlut3d->restinfo.res3a_info.awbGain[1]-hAlut3d->swinfo.awbGain[1])*(hAlut3d->restinfo.res3a_info.awbGain[1]-hAlut3d->swinfo.awbGain[1])) > hAlut3d->calibV2_lut3d->common.wbgain_tolerance) {
+        hAlut3d->restinfo.res3a_info.wbgain_stable = false;
+        LOGD_A3DLUT( "%s: update awbGain:(%f, %f) \n", __FUNCTION__,
+            hAlut3d->swinfo.awbGain[0], hAlut3d->swinfo.awbGain[1]);
+        hAlut3d->restinfo.res3a_info.awbGain[0] = hAlut3d->swinfo.awbGain[0];
+        hAlut3d->restinfo.res3a_info.awbGain[1] = hAlut3d->swinfo.awbGain[1];
+    } else {
+        hAlut3d->restinfo.res3a_info.wbgain_stable = true;
+        LOGD_A3DLUT( "%s: not update awbGain:(%f, %f) \n", __FUNCTION__,
+            hAlut3d->swinfo.awbGain[0], hAlut3d->swinfo.awbGain[1]);
+        hAlut3d->swinfo.awbGain[0] = hAlut3d->restinfo.res3a_info.awbGain[0];
+        hAlut3d->swinfo.awbGain[1] = hAlut3d->restinfo.res3a_info.awbGain[1];
+    }
+
+    if (hAlut3d->restinfo.res3a_info.wbgain_stable && hAlut3d->restinfo.res3a_info.gain_stable
+                   && (!hAlut3d->calib_update))
+        hAlut3d->update = false;
+    else
+        hAlut3d->update = true;
+    hAlut3d->calib_update = false;
+
     LOGD_A3DLUT("%s: updateAtt: %d\n", __FUNCTION__, hAlut3d->updateAtt);
     if(hAlut3d->updateAtt) {
         hAlut3d->mCurAtt = hAlut3d->mNewAtt;
@@ -307,6 +339,7 @@ XCamReturn Alut3dConfig
         hAlut3d->lut3d_hw_conf.enable = false;
         hAlut3d->lut3d_hw_conf.bypass_en = true;
     }
+    hAlut3d->updateAtt = false;
 
     LOGD_A3DLUT("%s: enable:(%d),bypass_en(%d) \n", __FUNCTION__,
                 hAlut3d->lut3d_hw_conf.enable,
@@ -353,8 +386,8 @@ static XCamReturn UpdateLut3dCalibV2Para(alut3d_handle_t  hAlut3d)
     hAlut3d->mCurAtt.byPass = !(hAlut3d->calibV2_lut3d->common.enable);
     // config manual ccm
     memcpy(hAlut3d->mCurAtt.stManual.look_up_table_r, hAlut3d->calibV2_lut3d->MLut3D.Table.look_up_table_r, sizeof(hAlut3d->mCurAtt.stManual.look_up_table_r));
-    memcpy(hAlut3d->mCurAtt.stManual.look_up_table_g, hAlut3d->calibV2_lut3d->MLut3D.Table.look_up_table_r, sizeof(hAlut3d->mCurAtt.stManual.look_up_table_g));
-    memcpy(hAlut3d->mCurAtt.stManual.look_up_table_b, hAlut3d->calibV2_lut3d->MLut3D.Table.look_up_table_r, sizeof(hAlut3d->mCurAtt.stManual.look_up_table_b));
+    memcpy(hAlut3d->mCurAtt.stManual.look_up_table_g, hAlut3d->calibV2_lut3d->MLut3D.Table.look_up_table_g, sizeof(hAlut3d->mCurAtt.stManual.look_up_table_g));
+    memcpy(hAlut3d->mCurAtt.stManual.look_up_table_b, hAlut3d->calibV2_lut3d->MLut3D.Table.look_up_table_b, sizeof(hAlut3d->mCurAtt.stManual.look_up_table_b));
     hAlut3d->swinfo.lut3dConverged = false;
     hAlut3d->calib_update = true;
 
@@ -389,6 +422,12 @@ XCamReturn Alut3dInit(alut3d_handle_t *hAlut3d, const CamCalibDbV2Context_t* cal
     alut3d_contex->swinfo.awbGain[0] = 1;
     alut3d_contex->swinfo.awbGain[1] = 1;
     alut3d_contex->swinfo.count = 0;
+
+    alut3d_contex->restinfo.res3a_info.sensorGain = 1.0;
+    alut3d_contex->restinfo.res3a_info.awbGain[0] = 1.0;
+    alut3d_contex->restinfo.res3a_info.awbGain[1] = 1.0;
+    alut3d_contex->restinfo.res3a_info.gain_stable = false;
+    alut3d_contex->restinfo.res3a_info.wbgain_stable = false;
 
     alut3d_contex->calibV2_lut3d = calib_lut3d;
     alut3d_contex->mCurAtt.mode = RK_AIQ_LUT3D_MODE_AUTO;

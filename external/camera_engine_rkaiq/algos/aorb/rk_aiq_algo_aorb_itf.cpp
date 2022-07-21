@@ -18,9 +18,10 @@
  */
 
 #include "rk_aiq_algo_aorb_itf.h"
+#include "rk_aiq_algo_types.h"
+#include "rk_aiq_types_priv.h"
 
 #include "orb_algos.h"
-#include "rk_aiq_algo_types_int.h"
 #include "xcam_log.h"
 
 #if OPENCV_SUPPORT
@@ -103,7 +104,7 @@ XCamReturn ORBPrepare(RkAiqAlgoCom* params) {
 
     ORBHandle_t hORB                        = (ORBHandle_t)params->ctx->hORB;
     ORBContext_t* ORBctx                    = (ORBContext_t*)hORB;
-    RkAiqAlgoConfigAorbInt* rkaiqAorbConfig = (RkAiqAlgoConfigAorbInt*)params;
+    RkAiqAlgoConfigAorb* rkaiqAorbConfig = (RkAiqAlgoConfigAorb*)params;
 
     ORBctx->orb_en = rkaiqAorbConfig->orb_calib_cfg.param.orb_en;
 
@@ -133,8 +134,8 @@ XCamReturn ORBPreProcess(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparam
 XCamReturn ORBProcessing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams) {
     XCamReturn result                         = XCAM_RETURN_NO_ERROR;
     ORBHandle_t ORBctx                        = (ORBHandle_t)inparams->ctx->hORB;
-    RkAiqAlgoProcAorbInt* rkaiqAorbProcParam  = (RkAiqAlgoProcAorbInt*)inparams;
-    RkAiqAlgoProcResAorbInt* rkaiqAorbProcOut = (RkAiqAlgoProcResAorbInt*)outparams;
+    RkAiqAlgoProcAorb* rkaiqAorbProcParam  = (RkAiqAlgoProcAorb*)inparams;
+    RkAiqAlgoProcResAorb* rkaiqAorbProcOut = (RkAiqAlgoProcResAorb*)outparams;
 
     if (!ORBctx->orb_en) {
         return XCAM_RETURN_NO_ERROR;

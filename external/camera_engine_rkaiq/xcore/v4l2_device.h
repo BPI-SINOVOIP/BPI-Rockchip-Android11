@@ -98,12 +98,13 @@ public:
     bool set_framerate (uint32_t n, uint32_t d);
     void get_framerate (uint32_t &n, uint32_t &d);
 
-    virtual XCamReturn open ();
+    virtual XCamReturn open (bool nonblock = false);
     virtual XCamReturn close ();
 
     XCamReturn query_cap(struct v4l2_capability &cap);
     XCamReturn get_crop (struct v4l2_crop &crop);
     XCamReturn set_crop (struct v4l2_crop &crop);
+    XCamReturn set_selection (struct v4l2_selection &select);
     // set_format
     virtual XCamReturn get_format (struct v4l2_format &format);
     XCamReturn set_format (struct v4l2_format &format);
@@ -131,6 +132,9 @@ public:
     virtual int get_use_type() { return 0;}
     virtual void set_use_type(int type) {}
     SmartPtr<V4l2Buffer> get_available_buffer ();
+    virtual XCamReturn subscribe_event (int event);
+    virtual XCamReturn unsubscribe_event (int event);
+    virtual XCamReturn dequeue_event (struct v4l2_event &event);
 
 protected:
 
@@ -182,9 +186,6 @@ class V4l2SubDevice
 public:
     explicit V4l2SubDevice (const char *name = NULL);
 
-    virtual XCamReturn subscribe_event (int event);
-    virtual XCamReturn unsubscribe_event (int event);
-    virtual XCamReturn dequeue_event (struct v4l2_event &event);
     virtual XCamReturn get_selection (int pad, uint32_t target, struct v4l2_subdev_selection &select);
     virtual XCamReturn setFormat(struct v4l2_subdev_format &aFormat);
     virtual XCamReturn getFormat(struct v4l2_subdev_format &aFormat);

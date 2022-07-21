@@ -10,6 +10,7 @@
 #include "RkAiqCalibDbTypes.h"
 #include "rk_aiq_types_asharp_algo_prvt.h"
 #include "RkAiqCalibDbTypesV2.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 
 

@@ -1,6 +1,7 @@
 
 #include "rk_aiq_abayernr_algo_v2.h"
 #include "rk_aiq_abayernr_algo_itf_v2.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 

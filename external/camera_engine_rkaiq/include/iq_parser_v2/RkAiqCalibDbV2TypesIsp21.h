@@ -28,7 +28,6 @@
 #include "sharp_head_v3.h"
 
 
-
 RKAIQ_BEGIN_DECLARE
 
 typedef struct CamCalibDbV2ContextIsp21_s {
@@ -85,6 +84,8 @@ typedef struct CamCalibDbV2ContextIsp21_s {
     CalibDbV2_YnrV2_t ynr_v2;
     // M4_STRUCT_DESC("sharp_v3", "normal_ui_style")
     CalibDbV2_SharpV3_t sharp_v3;
+
+
 
 } CamCalibDbV2ContextIsp21_t;
 

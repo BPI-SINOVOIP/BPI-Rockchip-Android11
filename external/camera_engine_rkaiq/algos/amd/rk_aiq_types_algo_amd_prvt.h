@@ -7,6 +7,7 @@
 #include "amd/rk_aiq_types_amd_algo.h"
 #include "amd/rk_aiq_types_algo_amd_int.h"
 #include "media_buffer/media_buffer_pool.h"
+#include "mfnr_head_v1.h"
 
 #define  AMD_RATIO_BUF_NUM      (4)
 typedef struct AmdContext_s {

@@ -109,6 +109,8 @@ extern "C" {
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
+
+#undef _FORTIFY_SOURCE
 #define _FORTIFY_SOURCE 0
 
 #ifdef _GNU_SOURCE

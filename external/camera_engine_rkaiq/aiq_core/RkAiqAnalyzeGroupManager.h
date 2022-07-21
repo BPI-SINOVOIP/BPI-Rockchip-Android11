@@ -1,9 +1,5 @@
-
-
 /*
- * MessageBus.h
- *
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2021 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 #ifndef _RK_AIQ_ANALYZE_GROUP_MANAGER_
@@ -31,8 +26,6 @@
 
 #include "MessageBus.h"
 #include "RkAiqCore.h"
-#include "RkAiqSharedDataManager.h"
-#include "rk_aiq_algo_types_int.h"
 #include "rk_aiq_comm.h"
 #include "rk_aiq_pool.h"
 #include "video_buffer.h"
@@ -48,17 +41,19 @@ class RkAiqAnalyzeGroupMsgHdlThread;
 
 // TODO(Cody): This is just workaround for current implementation
 //using MessageHandleWrapper = std::function<XCamReturn(const std::list<SmartPtr<XCamMessage>>&)>;
-typedef std::function<XCamReturn(std::list<SmartPtr<XCamMessage>>&, uint32_t&)> MessageHandleWrapper;
+typedef std::function<XCamReturn(std::vector<SmartPtr<XCamMessage>>&, uint32_t, uint64_t)>
+    MessageHandleWrapper;
 
 class RkAiqAnalyzerGroup {
  public:
     struct GroupMessage {
-        std::list<SmartPtr<XCamMessage>> msgList;
+        std::vector<SmartPtr<XCamMessage>> msgList;
         uint64_t msg_flags;
     };
 
     RkAiqAnalyzerGroup(RkAiqCore* aiqCore, enum rk_aiq_core_analyze_type_e type,
-                       const uint64_t flag, const RkAiqGrpConditions_t* grpConds);
+                       const uint64_t flag, const RkAiqGrpConditions_t* grpConds,
+                       const bool singleThrd);
     virtual ~RkAiqAnalyzerGroup() = default;
 
     void setConcreteHandler(const MessageHandleWrapper handler) { mHandler = handler; }
@@ -69,6 +64,7 @@ class RkAiqAnalyzerGroup {
 
     const rk_aiq_core_analyze_type_e getType() const { return mGroupType; }
     const uint64_t getDepsFlag() const { return mDepsFlag; }
+    void setDepsFlag(uint64_t new_deps) { mDepsFlag = new_deps; }
 
  private:
     void msgReduction(std::map<uint32_t, GroupMessage>& msgMap);
@@ -77,7 +73,7 @@ class RkAiqAnalyzerGroup {
     // TODO(Cody): use weak ptr
     RkAiqCore* mAiqCore;
     const rk_aiq_core_analyze_type_e mGroupType;
-    const uint64_t mDepsFlag;
+    uint64_t mDepsFlag;
     RkAiqGrpConditions_t mGrpConds;
     SmartPtr<RkAiqAnalyzeGroupMsgHdlThread> mRkAiqGroupMsgHdlTh;
     std::map<uint32_t, GroupMessage> mGroupMsgMap;
@@ -87,8 +83,14 @@ class RkAiqAnalyzerGroup {
 class RkAiqAnalyzeGroupMsgHdlThread : public Thread {
  public:
     RkAiqAnalyzeGroupMsgHdlThread(const std::string name, RkAiqAnalyzerGroup* group)
-        : Thread(name.c_str()), mRkAiqAnalyzerGroup(group){};
+        : Thread(name.c_str()) {
+        if (group != nullptr) mHandlerGroups.push_back(group);
+    };
     ~RkAiqAnalyzeGroupMsgHdlThread() { mMsgsQueue.clear(); };
+
+    void add_group(RkAiqAnalyzerGroup* group) {
+        mHandlerGroups.push_back(group);
+    }
 
     void triger_stop() { mMsgsQueue.pause_pop(); };
 
@@ -109,44 +111,40 @@ class RkAiqAnalyzeGroupMsgHdlThread : public Thread {
     virtual bool loop();
 
  private:
-    RkAiqAnalyzerGroup* mRkAiqAnalyzerGroup;
+    std::vector<RkAiqAnalyzerGroup*> mHandlerGroups;
     SafeList<XCamMessage> mMsgsQueue;
 };
 
 class RkAiqAnalyzeGroupManager {
  public:
-    RkAiqAnalyzeGroupManager(RkAiqCore* aiqCore);
+    RkAiqAnalyzeGroupManager(RkAiqCore* aiqCore, bool single_thread);
     virtual ~RkAiqAnalyzeGroupManager(){};
 
     void parseAlgoGroup(const struct RkAiqAlgoDesCommExt* algoDes);
 
+    uint64_t getGrpDeps(rk_aiq_core_analyze_type_e group);
+    XCamReturn setGrpDeps(rk_aiq_core_analyze_type_e group, uint64_t new_deps);
     XCamReturn start();
     XCamReturn stop();
 
+    XCamReturn firstAnalyze();
     XCamReturn handleMessage(const SmartPtr<XCamMessage> &msg);
-    std::list<int>& getGroupAlgoList(rk_aiq_core_analyze_type_e group) {
+    std::vector<SmartPtr<RkAiqHandle>>& getGroupAlgoList(rk_aiq_core_analyze_type_e group) {
         return mGroupAlgoListMap[group];
     }
+
  protected:
-    XCamReturn measGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn otherGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn amdGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn thumbnailsGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn lscGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn aeGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn awbGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn amfnrGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn aynrGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn grp0MessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn grp1MessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn afMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn eisGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
-    XCamReturn orbGroupMessageHandler(std::list<SmartPtr<XCamMessage>>& msgs, uint32_t& id);
+    XCamReturn groupMessageHandler(std::vector<SmartPtr<XCamMessage>>& msgs, uint32_t id,
+                                   uint64_t grpId);
+    XCamReturn thumbnailsGroupMessageHandler(std::vector<SmartPtr<XCamMessage>>& msgs, uint32_t id,
+                                             uint64_t grpId);
 
  private:
     RkAiqCore* mAiqCore;
+    const bool mSingleThreadMode;
     std::map<uint64_t, SmartPtr<RkAiqAnalyzerGroup>> mGroupMap;
-    std::map<uint64_t, std::list<int>> mGroupAlgoListMap;
+    std::map<uint64_t, std::vector<SmartPtr<RkAiqHandle>>> mGroupAlgoListMap;
+    SmartPtr<RkAiqAnalyzeGroupMsgHdlThread> mMsgThrd;
 };
 
 }  // namespace RkCam

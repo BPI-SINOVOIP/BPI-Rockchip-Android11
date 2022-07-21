@@ -30,11 +30,22 @@ retry:
 		ret = -ENOSYS;
 	mmmc_trace_after_send(mmc, cmd, ret);
 
-	if (ret && cmd->cmdidx != SD_CMD_SEND_IF_COND
-	    && cmd->cmdidx != MMC_CMD_APP_CMD) {
+	if (ret && cmd->cmdidx != SD_CMD_SEND_IF_COND &&
+	    cmd->cmdidx != MMC_CMD_APP_CMD &&
+	    cmd->cmdidx != MMC_CMD_SEND_OP_COND &&
+	    cmd->cmdidx != MMC_SEND_TUNING_BLOCK_HS200 &&
+	    cmd->cmdidx != MMC_CMD_READ_MULTIPLE_BLOCK &&
+	    cmd->cmdidx != MMC_CMD_WRITE_MULTIPLE_BLOCK) {
+		/* execute tuning at last retry. */
+		if (retry_time == 1 &&
+		    mmc->timing == MMC_TIMING_MMC_HS200 &&
+		    ops->execute_tuning) {
+			u32 opcode = MMC_SEND_TUNING_BLOCK_HS200;
+			ops->execute_tuning(mmc->dev, opcode);
+	    	}
 		if (retry_time-- > 0)
 			goto retry;
-		printf("MMC error: The cmd index is %d, ret is %d.....\n", cmd->cmdidx, ret);
+		printf("MMC error: The cmd index is %d, ret is %d\n", cmd->cmdidx, ret);
 	}
 
 	return ret;

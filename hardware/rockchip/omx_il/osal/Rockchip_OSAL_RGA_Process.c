@@ -34,7 +34,6 @@
 #include "Rockchip_OSAL_Log.h"
 #include "Rockchip_OSAL_Memory.h"
 #include "Rockchip_OSAL_RGA_Process.h"
-#include "hardware/rga.h"
 
 #ifdef USE_DRM
 #include "drmrga.h"
@@ -562,4 +561,25 @@ void rga_rgb_copy(RockchipVideoPlane *plane, VPUMemLinear_t *vpumem, uint32_t Wi
 #endif
 }
 
+void rga_nv12_crop(void *srcData, void *dstData, uint32_t width, uint32_t height,
+                   uint32_t stride, uint32_t strideHeight, void *rga_ctx)
+{
+#ifdef USE_DRM
+    rga_info_t src;
+    rga_info_t dst;
+    (void) rga_ctx;
+    memset(&src, 0, sizeof(rga_info_t));
+    memset(&dst, 0, sizeof(rga_info_t));
+
+    src.fd = -1;
+    src.mmuFlag = 1;
+    src.virAddr = srcData;
+    dst.fd = -1;
+    dst.mmuFlag = 1;
+    dst.virAddr = dstData;
+    rga_set_rect(&src.rect, 0, 0, width, height, stride, strideHeight, HAL_PIXEL_FORMAT_YCrCb_NV12);
+    rga_set_rect(&dst.rect, 0, 0, width, height, width, height, HAL_PIXEL_FORMAT_YCrCb_NV12);
+    RgaBlit(&src, &dst, NULL);
+#endif
+}
 

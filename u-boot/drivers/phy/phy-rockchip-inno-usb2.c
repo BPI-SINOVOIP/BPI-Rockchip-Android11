@@ -265,8 +265,11 @@ int rockchip_chg_get_type(void)
 
 	ret = uclass_get_device_by_name(UCLASS_PHY, "usb2-phy", &udev);
 	if (ret == -ENODEV) {
-		pr_err("%s: get u2phy node failed: %d\n", __func__, ret);
-		return ret;
+		ret = uclass_get_device_by_name(UCLASS_PHY, "usb2phy", &udev);
+		if (ret) {
+			pr_err("%s: get usb2 phy node failed: %d\n", __func__, ret);
+			return ret;
+		}
 	}
 
 	rphy = dev_get_priv(udev);
@@ -373,8 +376,11 @@ void otg_phy_init(struct dwc2_udc *dev)
 
 	ret = uclass_get_device_by_name(UCLASS_PHY, "usb2-phy", &udev);
 	if (ret == -ENODEV) {
-		pr_err("%s: get u2phy node failed: %d\n", __func__, ret);
-		return;
+		ret = uclass_get_device_by_name(UCLASS_PHY, "usb2phy", &udev);
+		if (ret) {
+			pr_err("%s: get usb2 phy node failed: %d\n", __func__, ret);
+			return;
+		}
 	}
 
 	rphy = dev_get_priv(udev);
@@ -533,6 +539,9 @@ static int rockchip_usb2phy_of_xlate(struct phy *phy,
 		phy->id = USB2PHY_PORT_OTG;
 		device_get_supply_regulator(phy->dev, "phy-supply",
 					    &rphy->vbus_supply[USB2PHY_PORT_OTG]);
+		if (!rphy->vbus_supply[USB2PHY_PORT_OTG])
+			device_get_supply_regulator(phy->dev, "vbus-supply",
+						    &rphy->vbus_supply[USB2PHY_PORT_OTG]);
 	} else {
 		pr_err("%s: invalid dev name\n", __func__);
 		return -EINVAL;
@@ -1392,6 +1401,7 @@ static const struct rockchip_usb2phy_cfg rk3588_phy_cfgs[] = {
 				.ls_det_en	= { 0x0080, 0, 0, 0, 1 },
 				.ls_det_st	= { 0x0084, 0, 0, 0, 1 },
 				.ls_det_clr	= { 0x0088, 0, 0, 0, 1 },
+				.utmi_iddig	= { 0x00c0, 5, 5, 0, 1 },
 				.utmi_ls	= { 0x00c0, 10, 9, 0, 1 },
 			}
 		},

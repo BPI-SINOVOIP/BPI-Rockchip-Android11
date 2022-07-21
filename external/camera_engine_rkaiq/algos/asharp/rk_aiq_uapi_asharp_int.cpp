@@ -42,6 +42,7 @@ rk_aiq_uapi_asharp_SetIQpara(RkAiqAlgoContext *ctx,
                              bool need_sync)
 {
 
+#ifdef RKAIQ_ENABLE_PARSER_V1
     AsharpContext_t* pAsharpCtx = (AsharpContext_t*)ctx;
 
     if(para->module_bits & (1 << ASHARP_MODULE_SHARP)) {
@@ -110,6 +111,9 @@ rk_aiq_uapi_asharp_SetIQpara(RkAiqAlgoContext *ctx,
     }
 
     return XCAM_RETURN_NO_ERROR;
+#else
+    return XCAM_RETURN_ERROR_PARAM;
+#endif
 }
 
 XCamReturn
@@ -117,6 +121,7 @@ rk_aiq_uapi_asharp_GetIQpara(const RkAiqAlgoContext *ctx,
                              rk_aiq_sharp_IQpara_t *para)
 {
 
+#ifdef RKAIQ_ENABLE_PARSER_V1
     AsharpContext_t* pAsharpCtx = (AsharpContext_t*)ctx;
 
     if(ctx != NULL && para != NULL) {
@@ -180,6 +185,9 @@ rk_aiq_uapi_asharp_GetIQpara(const RkAiqAlgoContext *ctx,
     }
 
     return XCAM_RETURN_NO_ERROR;
+#else
+    return XCAM_RETURN_ERROR_PARAM;
+#endif
 }
 
 

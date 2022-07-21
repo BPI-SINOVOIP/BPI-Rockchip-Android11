@@ -17,23 +17,24 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "acp/rk_aiq_algo_acp_itf.h"
 #include "xcam_log.h"
 #include "acp/rk_aiq_types_algo_acp_prvt.h"
+#include "rk_aiq_algo_types.h"
+#include "RkAiqCalibDbV2Helper.h"
+
 RKAIQ_BEGIN_DECLARE
 
 static XCamReturn
 create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
-    const AlgoCtxInstanceCfgInt* cfg_int = (const AlgoCtxInstanceCfgInt*)cfg;
     RkAiqAlgoContext *ctx = new RkAiqAlgoContext();
     if (ctx == NULL) {
         LOGE_ACP( "%s: create acp context fail!\n", __FUNCTION__);
         return XCAM_RETURN_ERROR_MEM;
     }
-    ctx->acpCtx.calib = cfg_int->calib;
-    ctx->acpCtx.calibv2 = cfg_int->calibv2;
+    ctx->acpCtx.calib = cfg->calib;
+    ctx->acpCtx.calibv2 = cfg->calibv2;
     rk_aiq_acp_params_t* params = &ctx->acpCtx.params;
     if (ctx->acpCtx.calib) {
         CalibDb_cProc_t *cproc =
@@ -69,20 +70,20 @@ static XCamReturn
 prepare(RkAiqAlgoCom* params)
 {
     rk_aiq_acp_params_t* acp_params = &params->ctx->acpCtx.params;
-    RkAiqAlgoConfigAdebayerInt* pCfgParam = (RkAiqAlgoConfigAdebayerInt*)params;
+    RkAiqAlgoConfigAcp* pCfgParam = (RkAiqAlgoConfigAcp*)params;
 
 	if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )){
-        if (pCfgParam->rk_com.u.prepare.calib) {
+        if (pCfgParam->com.u.prepare.calib) {
             CalibDb_cProc_t *cproc =
-                (CalibDb_cProc_t*)(CALIBDB_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calib, cProc));
+                (CalibDb_cProc_t*)(CALIBDB_GET_MODULE_PTR(pCfgParam->com.u.prepare.calib, cProc));
                 acp_params->enable = cproc->enable;
                 acp_params->brightness = cproc->brightness;
                 acp_params->hue = cproc->hue;
                 acp_params->saturation = cproc->saturation;
                 acp_params->contrast = cproc->contrast;
-        } else if (pCfgParam->rk_com.u.prepare.calibv2) {
+        } else if (pCfgParam->com.u.prepare.calibv2) {
                 CalibDbV2_Cproc_t* cproc =
-                    (CalibDbV2_Cproc_t*)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->rk_com.u.prepare.calibv2, cproc));
+                    (CalibDbV2_Cproc_t*)(CALIBDBV2_GET_MODULE_PTR(pCfgParam->com.u.prepare.calibv2, cproc));
 
                 acp_params->enable = cproc->param.enable;
                 acp_params->brightness = cproc->param.brightness;
@@ -105,7 +106,6 @@ static XCamReturn
 processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
     RkAiqAlgoProcResAcp* res_com = (RkAiqAlgoProcResAcp*)outparams;
-    RkAiqAlgoProcResAcpInt* res_int = (RkAiqAlgoProcResAcpInt*)outparams;
     RkAiqAlgoContext* ctx = inparams->ctx;
 
     res_com->acp_res = ctx->acpCtx.params;

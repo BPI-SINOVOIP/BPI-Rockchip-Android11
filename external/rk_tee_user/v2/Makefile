@@ -27,7 +27,7 @@ CROSS_COMPILE_TA ?= $(CROSS_COMPILE)
 .PHONY: all
 ifneq ($(wildcard $(TA_DEV_KIT_DIR)/host_include/conf.mk),)
 ifeq "$(BUILD_CA)" "y"
-all: rk_test xtest ta
+all: rk_test xtest ta extra_app
 else
 all: ta
 endif
@@ -35,6 +35,15 @@ else
 all:
 	$(q)echo "TA_DEV_KIT_DIR is not correctly defined" && false
 endif
+
+.PHONY: extra_app
+extra_app:
+	$(q)[ ! -d host/extra_app ] || \
+	    $(MAKE) -C host/extra_app CROSS_COMPILE="$(CROSS_COMPILE_HOST)" \
+				--no-builtin-variables \
+				q=$(q) \
+				O=$(out-dir)/extra_app  \
+				$@
 
 .PHONY: rk_test
 rk_test:
@@ -64,6 +73,7 @@ clean:
 	$(q)$(MAKE) -C host/rk_test O=$(out-dir) $@
 	$(q)$(MAKE) -C host/xtest O=$(out-dir) $@
 	$(q)$(MAKE) -C ta O=$(out-dir) $@
+	$(q)[ ! -d host/extra_app ] || $(MAKE) -C host/extra_app O=$(out-dir) $@
 	$(q)find ta/ \( -name "*.ta" -o -name "*.dmp" -o -name "*.elf" -o -name "*.map" \) -exec rm -rf {} \;
 
 else

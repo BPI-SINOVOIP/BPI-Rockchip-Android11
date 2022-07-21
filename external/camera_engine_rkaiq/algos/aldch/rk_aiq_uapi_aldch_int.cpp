@@ -33,10 +33,6 @@ rk_aiq_uapi_aldch_SetAttrib(RkAiqAlgoContext *ctx,
         return XCAM_RETURN_ERROR_FAILED;
     }
 
-    if (ldch_contex->correct_level_max != 255 && \
-        ldch_contex->user_config.correct_level != attr.correct_level)
-        attr.correct_level = MAP_TO_255LEVEL(attr.correct_level, ldch_contex->correct_level_max);
-
     if (0 != memcmp(&ldch_contex->user_config, &attr, sizeof(rk_aiq_ldch_attrib_t))) {
         memcpy(&ldch_contex->user_config, &attr, sizeof(rk_aiq_ldch_attrib_t));
 

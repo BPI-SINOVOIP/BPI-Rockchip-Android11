@@ -18,6 +18,7 @@ struct sp_bo {
 
   uint32_t fb_id;
   uint32_t handle;
+  int32_t fd;
   void* map_addr;
   uint32_t pitch;
   uint32_t size;

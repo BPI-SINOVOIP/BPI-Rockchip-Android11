@@ -51,6 +51,9 @@ public:
     virtual XCamReturn poll_buffer_ready (SmartPtr<V4l2BufferProxy> &buf, int dev_index);
     virtual XCamReturn poll_event_ready (uint32_t sequence, int type) { return XCAM_RETURN_ERROR_FAILED; }
     virtual XCamReturn poll_event_failed (int64_t timestamp, const char *msg) { return XCAM_RETURN_ERROR_FAILED; }
+    void setCamPhyId(int phyId) {
+        mCamPhyId = phyId;
+    }
     enum {
         ISP_MIPI_HDR_S = 0,
         ISP_MIPI_HDR_M,
@@ -68,6 +71,7 @@ protected:
     XCAM_DEAD_COPY (RawStreamCapUnit);
     XCamReturn sync_raw_buf(SmartPtr<V4l2BufferProxy> &buf_s, SmartPtr<V4l2BufferProxy> &buf_m, SmartPtr<V4l2BufferProxy> &buf_l);
     bool check_skip_frame(int32_t buf_seq);
+    int mCamPhyId;
 protected:
     SmartPtr<V4l2Device> _dev[3];
     SmartPtr<V4l2Device> _dev_bakup[3];

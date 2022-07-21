@@ -19,76 +19,58 @@
 
 #ifndef _RK_AIQ_TYPE_AGAMMA_ALGO_INT_H_
 #define _RK_AIQ_TYPE_AGAMMA_ALGO_INT_H_
-#include "agamma/rk_aiq_types_agamma_algo.h"
 #include "RkAiqCalibDbTypes.h"
-#include "RkAiqCalibDbTypesV2.h"
-
-
-typedef enum rk_gamma_curve_type_s {
-    RK_GAMMA_CURVE_TYPE_DEFUALT                     = 0,        /**< USE IQ GAMMA CURVE */
-    RK_GAMMA_CURVE_TYPE_SRGB                        = 1,        /**< USE GAMMA 2.2 */
-    RK_GAMMA_CURVE_TYPE_HDR                         = 2,        /**< USE GAMMA HDR DEFAULT */
-    RK_GAMMA_CURVE_TYPE_USER_DEFINE1                = 3,        /**< USE USER DEFINE GAMMA, 2 PARAS DEFINE*/
-    RK_GAMMA_CURVE_TYPE_USER_DEFINE2                = 4,        /**< USE USER DEFINE GAMMA, 32 DOT GAMMA*/
-} rk_gamma_curve_type_t;
-
-
-enum {
-    GAMMA_OUT_LOG_SEGMENT = 0,
-    GAMMA_OUT_EQ_SEGMENT = 1
-};
-
-enum {
-    GAMMA_OUT_NORMAL = 0,
-    GAMMA_OUT_HDR = 1,
-    GAMMA_OUT_NIGHT = 2,
-    GAMMA_OUT_USR1 = 3,
-    GAMMA_OUT_USR2 = 4
-};
+#include "agamma/rk_aiq_types_agamma_algo.h"
+#include "agamma_head.h"
+#include "agamma_uapi_head.h"
 
 typedef enum rk_aiq_gamma_op_mode_s {
     RK_AIQ_GAMMA_MODE_OFF                     = 0,        /**< run iq gamma */
     RK_AIQ_GAMMA_MODE_MANUAL                  = 1,        /**< run manual gamma */
-    RK_AIQ_GAMMA_MODE_TOOL                    = 2,        /**< for tool*/
+    RK_AIQ_GAMMA_MODE_FAST                    = 2,        /**< for tool*/
 } rk_aiq_gamma_op_mode_t;
 
-typedef struct rk_gamma_curve_usr_define1_para_s {
-    float coef1;
-    float coef2;
-}  rk_gamma_curve_usr_define1_para_t;
+typedef struct rk_aiq_gamma_attrV21_s {
+    rk_aiq_gamma_op_mode_t mode;
+    Agamma_api_manualV21_t stManual;
+    Agamma_api_Fast_t stFast;
+}  rk_aiq_gamma_attrV21_t;
 
-typedef struct rk_gamma_curve_usr_define2_para_s {
-    int gamma_out_segnum;//0:log segment ; 1:equal segment ;
-    int gamma_out_offset;
-    int gamma_table[45];
-}  rk_gamma_curve_usr_define2_para_t;
-
-typedef struct Agamma_api_manual_s {
-    bool en;
-    rk_gamma_curve_type_t CurveType;
-    rk_gamma_curve_usr_define1_para_t user1;
-    rk_gamma_curve_usr_define2_para_t user2;
-}  Agamma_api_manual_t;
-
-typedef struct rk_aiq_gamma_cfg_s {
-    bool gamma_en;
-    int gamma_out_segnum;//0:log segment ; 1:equal segment ;
-    int gamma_out_offset;
-    int gamma_table[45];
-}  rk_aiq_gamma_cfg_t;
+typedef struct rk_aiq_gamma_attrV30_s {
+    rk_aiq_gamma_op_mode_t mode;
+    Agamma_api_manualV30_t stManual;
+    Agamma_api_Fast_t stFast;
+}  rk_aiq_gamma_attrV30_t;
 
 typedef struct rk_aiq_gamma_attr_s {
-    rk_aiq_gamma_op_mode_t mode;
-    Agamma_api_manual_t stManual;
-    CalibDbV2_gamma_t stTool;
+    rk_aiq_uapi_sync_t sync;
+
+    rk_aiq_gamma_attrV21_t atrrV21;
+    rk_aiq_gamma_attrV30_t atrrV30;
 }  rk_aiq_gamma_attr_t;
 
-typedef struct AgammaProcRes_s {
+typedef struct AgammaProcResV20_s {
     bool gamma_en;
     int equ_segm;
     int offset;
     int gamma_y[45];
-}  AgammaProcRes_t;
+}  AgammaProcResV20_t;
+
+typedef struct AgammaProcResV21_s {
+    bool gamma_en;
+    int equ_segm;
+    bool EnableDot49;
+    int offset;
+    int gamma_y[49];
+}  AgammaProcResV21_t;
+
+typedef struct AgammaProcRes_s {
+    union {
+        AgammaProcResV20_t Gamma_v20;
+        AgammaProcResV21_t Gamma_v30;
+    };
+} AgammaProcRes_t;
+
 
 #endif
 

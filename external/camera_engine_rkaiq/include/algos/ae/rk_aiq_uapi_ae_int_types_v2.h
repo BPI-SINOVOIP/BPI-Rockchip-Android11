@@ -93,7 +93,8 @@ typedef struct Uapi_MeAttrV2_s {
 typedef Aec_uapi_advanced_attr_t Uapi_ExpSwAttr_AdvancedV2_t;
 
 typedef struct Uapi_ExpSwAttrV2_s {
-    uint8_t                          Enable;
+    rk_aiq_uapi_sync_t                 sync;
+    uint8_t                            Enable;
     CalibDb_CamRawStatsModeV2_t        RawStatsMode;
     CalibDb_CamHistStatsModeV2_t       HistStatsMode;
     CalibDb_CamYRangeModeV2_t          YRangeMode;
@@ -115,39 +116,60 @@ typedef struct Uapi_ExpSwAttrV2_s {
  * @brief   ISP2.1 AEC API LinAeRouteAttr/HdrAeRouteAttr Params
  */
 /*****************************************************************************/
-typedef CalibDb_LinAeRoute_AttrV2_t Uapi_LinAeRouteAttr_t;
+typedef struct Uapi_LinAeRouteAttr_s {
+    rk_aiq_uapi_sync_t            sync;
+    CalibDb_LinAeRoute_AttrV2_t   Params;
+} Uapi_LinAeRouteAttr_t;
 
-typedef CalibDb_HdrAeRoute_AttrV2_t Uapi_HdrAeRouteAttr_t;
+typedef struct Uapi_HdrAeRouteAttr_s {
+    rk_aiq_uapi_sync_t            sync;
+    CalibDb_HdrAeRoute_AttrV2_t   Params;
+} Uapi_HdrAeRouteAttr_t;
 
 /*****************************************************************************/
 /**
  * @brief   ISP2.1 AEC API IrisAttr Params
  */
 /*****************************************************************************/
-typedef CalibDb_AecIrisCtrlV2_t Uapi_IrisAttrV2_t;
+typedef struct Uapi_IrisAttrV2_s {
+    rk_aiq_uapi_sync_t            sync;
+    CalibDb_AecIrisCtrlV2_t       Params;
+} Uapi_IrisAttrV2_t;
 
 /*****************************************************************************/
 /**
  * @brief   ISP2.1 AEC API AecSyncTest Params
  */
 /*****************************************************************************/
-typedef CalibDb_AeSyncTestV2_t Uapi_AecSyncTest_t;
+typedef struct Uapi_AecSyncTest_s {
+    rk_aiq_uapi_sync_t            sync;
+    CalibDb_AeSyncTestV2_t        Params;
+} Uapi_AecSyncTest_t;
 
 /*****************************************************************************/
 /**
  * @brief   ISP2.1 AEC API LinExpAttr/HdrExpAttr Params
  */
 /*****************************************************************************/
-typedef CalibDb_LinearAE_AttrV2_t Uapi_LinExpAttrV2_t;
+typedef struct Uapi_LinExpAttrV2_s {
+    rk_aiq_uapi_sync_t            sync;
+    CalibDb_LinearAE_AttrV2_t     Params;
+} Uapi_LinExpAttrV2_t;
 
-typedef CalibDb_HdrAE_AttrV2_t Uapi_HdrExpAttrV2_t;
+typedef struct Uapi_HdrExpAttrV2_s {
+    rk_aiq_uapi_sync_t            sync;
+    CalibDb_HdrAE_AttrV2_t        Params;
+} Uapi_HdrExpAttrV2_t;
 
 /*****************************************************************************/
 /**
  * @brief   ISP2.0/2.1 AEC API ExpHwAttr Params
  */
 /*****************************************************************************/
-typedef struct window Uapi_ExpWin_t;
+typedef struct Uapi_ExpWin_s {
+    rk_aiq_uapi_sync_t            sync;
+    window_t                      Params;
+} Uapi_ExpWin_t;
 
 /*****************************************************************************/
 /**

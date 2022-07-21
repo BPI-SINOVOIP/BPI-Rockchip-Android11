@@ -77,8 +77,6 @@ LOCAL_SHARED_LIBRARIES += \
 #external/camera_engine_rkaiq
 LOCAL_C_INCLUDES += \
 	external/camera_engine_rkaiq \
-	external/camera_engine_rkaiq/include/uAPI \
-	external/camera_engine_rkaiq/include/uAPI \
 	external/camera_engine_rkaiq/xcore \
 	external/camera_engine_rkaiq/xcore/base \
 	external/camera_engine_rkaiq/aiq_core \
@@ -88,8 +86,9 @@ LOCAL_C_INCLUDES += \
 	external/camera_engine_rkaiq/uAPI \
 	external/camera_engine_rkaiq/uAPI2 \
 	external/camera_engine_rkaiq/common \
+	external/camera_engine_rkaiq/common/linux \
 	external/camera_engine_rkaiq/include \
-	external/camera_engine_rkaiq/include/iq_parser \
+	external/camera_engine_rkaiq/include/uAPI2 \
 	external/camera_engine_rkaiq/include/uAPI \
 	external/camera_engine_rkaiq/include/xcore \
 	external/camera_engine_rkaiq/include/common \
@@ -122,6 +121,9 @@ LOCAL_CFLAGS += -DANDROID_OS
 
 ifeq (rk356x, $(strip $(TARGET_BOARD_PLATFORM)))
 LOCAL_CFLAGS += -DISP_HW_V21
+endif
+ifeq (rk3588, $(strip $(TARGET_BOARD_PLATFORM)))
+LOCAL_CFLAGS += -DISP_HW_V30
 endif
 
 ifeq (rv1126, $(strip $(TARGET_BOARD_PLATFORM)))

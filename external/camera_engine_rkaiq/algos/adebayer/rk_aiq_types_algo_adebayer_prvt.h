@@ -1,7 +1,7 @@
 #ifndef __RKAIQ_TYPES_ALGO_ADEBAYER_PRVT_H__
 #define __RKAIQ_TYPES_ALGO_ADEBAYER_PRVT_H__
 
-#include "base/xcam_common.h"
+#include <atomic>
 #include "rk_aiq_types_algo_adebayer_int.h"
 #include "RkAiqCalibDbTypes.h"
 #include "RkAiqCalibDbTypesV2.h"
@@ -17,7 +17,7 @@ typedef enum AdebayerState_e {
     ADEBAYER_STATE_MAX
 } AdebayerState_t;
 
-typedef struct AdebayerFullParam_s{
+typedef struct AdebayerFullParam_s {
     unsigned char enable;
     int iso[9];
     signed char filter1[5];
@@ -34,38 +34,22 @@ typedef struct AdebayerFullParam_s{
     unsigned char dist_scale;
     unsigned char cnr_strength;
     unsigned char shift_num;
-             bool updated;
-}AdebayerFullParam_t;
+    std::atomic<bool> updated;
+} AdebayerFullParam_t;
 
-typedef struct AdebayerContext_s{
+typedef struct AdebayerContext_s {
     AdebayerConfig_t config;
     AdebayerState_t state;
     CamCalibDbContext_t* pCalibDb;
     CamCalibDbV2Context_t *pCalibDbV2;
     AdebayerFullParam_t full_param;
+    adebayer_attrib_manual_t manualAttrib;
+    rk_aiq_debayer_op_mode_t mode;
     int iso;
-}AdebayerContext_t;
+} AdebayerContext_t;
 
 typedef struct _RkAiqAlgoContext {
     AdebayerContext_t adebayerCtx;
 } RkAiqAlgoContext;
-
-XCamReturn AdebayerInit(AdebayerContext_t *ppAdebayerCtx, CamCalibDbContext_t *pCalibDb, CamCalibDbV2Context_t *pCalibDbV2);
-
-XCamReturn AdebayerRelease(AdebayerContext_t *pAdebayerCtx);
-
-XCamReturn AdebayerStart(AdebayerContext_t *pAdebayerCtx);
-
-XCamReturn AdebayerStop(AdebayerContext_t *pAdebayerCtx);
-
-XCamReturn AdebayerConfig(AdebayerContext_t *pAdebayerCtx, AdebayerConfig_t* pAdebayerConfig);
-
-XCamReturn AdebayerReConfig(AdebayerContext_t *pAdebayerCtx, AdebayerConfig_t* pAdebayerConfig);
-
-XCamReturn AdebayerPreProcess(AdebayerContext_t *pAdebayerCtx);
-
-XCamReturn AdebayerProcess(AdebayerContext_t *pAdebayerCtx, int ISO);
-
-XCamReturn AdebayerGetProcResult(AdebayerContext_t *pAdebayerCtx, AdebayerProcResult_t* pAdebayerResult);
 
 #endif//__RKAIQ_TYPES_ALGO_ADEBAYER_PRVT_H__

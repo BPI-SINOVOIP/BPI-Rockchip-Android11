@@ -18,23 +18,9 @@
 #include "af/rk_aiq_types_af_algo_int.h"
 #include "rk_aiq_algo_types.h"
 #include "RkAiqCalibDbV2Helper.h"
-//#include "RkAiqCalibDbTypes.h"
 #include "xcam_log.h"
-//#include "ae/rk_aiq_types_ae_algo_int.h"
-//#include "af/rk_aiq_af_hw_v200.h"
 #include "rk_aiq_types_atmo_stat_v200.h"
-//#include "rk_aiq_types_ahdr_algo_int.h"
-
-
-
-#define LIMIT_VALUE(value,max_value,min_value)      (value > max_value? max_value : value < min_value ? min_value : value)
-#define SHIFT6BIT(A)         (A*64)
-#define SHIFT7BIT(A)         (A*128)
-#define SHIFT10BIT(A)         (A*1024)
-#define SHIFT11BIT(A)         (A*2048)
-#define SHIFT12BIT(A)         (A*4096)
-
-#define LIMIT_PARA(a,b,c,d,e)      (c+(a-e)*(b-c)/(d -e))
+#include "amerge/rk_aiq_types_amerge_algo_prvt.h"
 
 
 #define ATMO_RET_SUCCESS             0   //!< this has to be 0, if clauses rely on it
@@ -54,12 +40,8 @@
 #define ATMO_RET_PENDING            14   //!< command pending
 #define ATMO_RET_WRONG_CONFIG       15   //!< given configuration is invalid
 
-#define BIGMODE     (2560)
 #define MAXLUMAK     (1.5)
 #define MAXLUMAB     (30)
-
-#define ENVLVMAX     (1.0)
-#define ENVLVMIN     (0.0)
 #define OEPDFMAX     (1.0)
 #define OEPDFMIN     (0.0)
 #define FOCUSLUMAMAX     (100)
@@ -82,8 +64,6 @@
 #define DETAILSHIGHLIGHTMIN     (51)
 #define DARKPDFMAX     (1)
 #define DARKPDFMIN     (0)
-#define ISOMIN     (50)
-#define ISOMAX     (204800)
 #define DETAILSLOWLIGHTMAX     (63)
 #define DETAILSLOWLIGHTMIN     (16)
 #define DYNAMICRANGEMAX     (84)
@@ -95,9 +75,6 @@
 #define IQDETAILSLOWLIGHTMAX     (4)
 #define IQDETAILSLOWLIGHTMIN     (1)
 #define ATMO_MAX_IQ_DOTS (13)
-
-
-
 
 typedef enum AtmoState_e {
     ATMO_STATE_INVALID       = 0,
@@ -220,22 +197,6 @@ typedef struct AtmoProcResData_s
     TmoFlickerPara_t TmoFlicker;
 } AtmoProcResData_t;
 
-typedef struct SensorInfo_s
-{
-    bool  LongFrmMode;
-    float HdrMinGain[MAX_HDR_FRAMENUM];
-    float HdrMaxGain[MAX_HDR_FRAMENUM];
-    float HdrMinIntegrationTime[MAX_HDR_FRAMENUM];
-    float HdrMaxIntegrationTime[MAX_HDR_FRAMENUM];
-
-    float MaxExpoL;
-    float MinExpoL;
-    float MaxExpoM;
-    float MinExpoM;
-    float MaxExpoS;
-    float MinExpoS;
-} SensorInfo_t;
-
 typedef struct AtmoContext_s
 {
     //api
@@ -253,7 +214,7 @@ typedef struct AtmoContext_s
     uint32_t width;
     uint32_t height;
     int frameCnt;
-    int FrameNumber;
+    FrameNumber_t FrameNumber;
 } AtmoContext_t;
 
 typedef AtmoContext_t* AtmoHandle_t;

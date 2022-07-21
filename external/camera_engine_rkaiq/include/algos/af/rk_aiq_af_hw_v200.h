@@ -1,6 +1,8 @@
 #ifndef __RK_AIQ_AF_HW_V200_H__
 #define __RK_AIQ_AF_HW_V200_H__
 
+#include "rk_aiq_types_af_algo.h"
+
 #define ISP_SHARPNESS_GRID_ITEMS 225
 
 typedef struct {
@@ -114,10 +116,26 @@ typedef struct {
 } rawaf_isp_af_meas_t;
 
 typedef struct {
+    bool vcm_config_valid;
+    bool zoomfocus_modifypos;
+    bool focus_correction;
+    bool zoom_correction;
     bool lens_pos_valid;
     bool zoom_pos_valid;
-    unsigned int next_lens_pos;
-    unsigned int next_zoom_pos;
+    bool send_zoom_reback;
+    bool send_focus_reback;
+    bool end_zoom_chg;
+    bool focus_noreback;
+    int next_pos_num;
+    int next_lens_pos[RKAIQ_RAWAF_NEXT_ZOOMFOCUS_NUM];
+    int next_zoom_pos[RKAIQ_RAWAF_NEXT_ZOOMFOCUS_NUM];
+    int use_manual;
+    int auto_focpos;
+    int auto_zoompos;
+    int manual_focpos;
+    int manual_zoompos;
+    int vcm_start_ma;
+    int vcm_end_ma;
 } rawaf_focus_pos_meas_t;
 
 #endif

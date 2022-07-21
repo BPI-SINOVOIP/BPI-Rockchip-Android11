@@ -473,6 +473,8 @@ uint32_t calib_sensor_aec_AecSyncTest_HdrAlterExp_sub_tags[] = {
 };
 
 uint32_t calib_sensor_aec_AecSpeed_sub_tags[] = {
+    CALIB_SENSOR_AEC_SMOOTHEN_TAG_ID,
+    CALIB_SENSOR_AEC_DYDAMPEN_TAG_ID,
     CALIB_SENSOR_AEC_DAMPOVER_TAG_ID,
     CALIB_SENSOR_AEC_DAMPUNDER_TAG_ID,
     CALIB_SENSOR_AEC_DAMPDARK2BRIGHT_TAG_ID,
@@ -3535,6 +3537,14 @@ calib_tag_info_t g_calib_tag_infos[CALIB_IQ_TAG_END] = {
     [CALIB_SENSOR_AEC_AECSPEED_TAG_ID]         =
     {   "AecSpeed", CALIB_TAG_TYPE_STRUCT, {-1, -1},
         check_tags_array_info(calib_sensor_aec_AecSpeed_sub_tags), NULL
+    },
+    [CALIB_SENSOR_AEC_SMOOTHEN_TAG_ID]         =
+    {   "SmoothEn", CALIB_TAG_TYPE_DOUBLE, {-1, -1},
+        check_tags_array_ignore, NULL
+    },
+    [CALIB_SENSOR_AEC_DYDAMPEN_TAG_ID]         =
+    {   "DyDampEn", CALIB_TAG_TYPE_DOUBLE, {-1, -1},
+        check_tags_array_ignore, NULL
     },
     [CALIB_SENSOR_AEC_DAMPOVER_TAG_ID]         =
     {   "DampOver", CALIB_TAG_TYPE_DOUBLE, {-1, -1},

@@ -436,7 +436,7 @@ typedef struct CalibDbV2_Awb_gain_offset_cfg_s{
   // M4_BOOL_DESC("enable", "1")
   bool enable;
   // M4_ARRAY_DESC("offset", "f32", M4_SIZE(1,4), M4_RANGE(-8,8), "0", M4_DIGIT(4), M4_DYNAMIC(0))
-  float offset[4];
+  float offset[4];//rggb
 }CalibDbV2_Awb_gain_offset_cfg_t;
 
 typedef struct CalibDbV2_Wb_Awb_Ext_Com_Para_t{
@@ -550,7 +550,7 @@ typedef struct CalibDbV2_Awb_Luma_Weight_Lv_s {
 
 typedef struct CalibDbV2_Awb_Luma_Weight_s {
   //with differernt luma ,the different weight in WP sum
-  // M4_BOOL_DESC("lscBypassEnable", "0");
+  // M4_BOOL_DESC("enable", "0");
   bool enable;
   // M4_STRUCT_DESC("wpDiffWeiEnableTh", "normal_ui_style")
   CalibDbV2_Awb_Luma_Weight_Enable_Th_t wpDiffWeiEnableTh;

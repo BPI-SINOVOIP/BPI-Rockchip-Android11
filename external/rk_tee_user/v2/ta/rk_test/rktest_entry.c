@@ -99,6 +99,8 @@ TEE_Result TA_InvokeCommandEntryPoint(void *sess_ctx, uint32_t cmd_id,
 		return handle_storage_speed(param_types, params);
 	case RKTEST_TA_CMD_TRNG_READ:
 		return handle_trng_read();
+	case RKTEST_TA_CMD_SOCKET:
+		return handle_socket();
 	default:
 		EMSG("InvokeCommandEntry: BAD PARAMETERS!");
 		return TEE_ERROR_BAD_PARAMETERS;

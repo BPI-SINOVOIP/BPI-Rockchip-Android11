@@ -143,8 +143,156 @@ bool DrmDevice::mode_verify(const DrmMode &m) {
   return false;
 }
 
-void DrmDevice::InitResevedPlane(){
+int DrmDevice::InitEnvFromXml(){
+  tinyxml2::XMLDocument doc;
 
+  int ret = doc.LoadFile(DRM_ENV_XML_PATH);
+  if(ret){
+    HWC2_ALOGW("Can't find %s file. ret=%d", DRM_ENV_XML_PATH, ret);
+    return -1;
+  }
+
+  HWC2_ALOGI("Load %s success.", DRM_ENV_XML_PATH);
+
+  tinyxml2::XMLElement* HwComposerEnv = doc.RootElement();
+  /* usr tingxml2 to parse resolution.xml */
+  if (!HwComposerEnv){
+    HWC2_ALOGW("Can't %s:RootElement fail.", DRM_ENV_XML_PATH);
+    return -1;
+  }
+
+  memset(&DmXml_, 0x0, sizeof(DmXml_));
+
+  const char* verison = "1.1.1";
+  ret = HwComposerEnv->QueryStringAttribute( "Version", &verison);
+  if(ret){
+    HWC2_ALOGW("Can't find %s verison info. ret=%d", DRM_ENV_XML_PATH, ret);
+    return -1;
+  }
+
+  sscanf(verison, "%d.%d.%d", &DmXml_.Version.Major,
+                              &DmXml_.Version.Minor,
+                              &DmXml_.Version.PatchLevel);
+
+
+  tinyxml2::XMLElement* pDisplayMode = HwComposerEnv->FirstChildElement("DsiplayMode");
+  if (!pDisplayMode){
+    HWC2_ALOGE("Can't %s:DsiplayMode fail.", DRM_ENV_XML_PATH);
+    return -1;
+  }
+
+  pDisplayMode->QueryIntAttribute( "Mode", &DmXml_.Mode);
+  pDisplayMode->QueryIntAttribute( "FbWidth", &DmXml_.FbWidth);
+  pDisplayMode->QueryIntAttribute( "FbHeight", &DmXml_.FbHeight);
+  pDisplayMode->QueryIntAttribute( "ConnectorCnt", &DmXml_.ConnectorCnt);
+  HWC2_ALOGI("Version=%d.%d.%d Mode=%d FbWidth=%d FbHeight=%d ConnectorCnt=%d",
+              DmXml_.Version.Major, DmXml_.Version.Minor, DmXml_.Version.PatchLevel,
+              DmXml_.Mode, DmXml_.FbWidth, DmXml_.FbHeight, DmXml_.ConnectorCnt);
+
+  tinyxml2::XMLElement* pConnector = pDisplayMode->FirstChildElement("Connector");
+  if (!pConnector){
+    HWC2_ALOGE("Can't %s:Connector fail.", DRM_ENV_XML_PATH);
+    return -1;
+  }
+  while (pConnector) {
+    static int iConnectorCnt = 0;
+
+    #define PARSE_INT(x) \
+    tinyxml2::XMLElement* _##x = pConnector->FirstChildElement(#x); \
+    if (!_##x) { \
+      HWC2_ALOGE("index=%d failed to parse %s\n", iConnectorCnt, #x); \
+      pConnector = pConnector->NextSiblingElement(); \
+      continue; \
+    } \
+    DmXml_.ConnectorInfo[iConnectorCnt].x = atoi(_##x->GetText())
+
+    #define PARSE_STR(x) \
+    tinyxml2::XMLElement* _##x = pConnector->FirstChildElement(#x); \
+    if (!_##x) { \
+      HWC2_ALOGE("index=%d failed to parse %s\n", iConnectorCnt, #x); \
+      pConnector = pConnector->NextSiblingElement(); \
+      continue; \
+    } \
+    strncpy(DmXml_.ConnectorInfo[iConnectorCnt].x, \
+           _##x->GetText(), \
+           sizeof(_##x->GetText()));
+
+    PARSE_STR(Type);
+    PARSE_INT(TypeId);
+    PARSE_INT(SrcX);
+    PARSE_INT(SrcY);
+    PARSE_INT(SrcW);
+    PARSE_INT(SrcH);
+    PARSE_INT(DstX);
+    PARSE_INT(DstY);
+    PARSE_INT(DstW);
+    PARSE_INT(DstH);
+
+    HWC2_ALOGI("Connector[%d] type=%s-%d [%d,%d,%d,%d]=>[%d,%d,%d,%d]",
+                iConnectorCnt,
+                DmXml_.ConnectorInfo[iConnectorCnt].Type,
+                DmXml_.ConnectorInfo[iConnectorCnt].TypeId,
+                DmXml_.ConnectorInfo[iConnectorCnt].SrcX,
+                DmXml_.ConnectorInfo[iConnectorCnt].SrcY,
+                DmXml_.ConnectorInfo[iConnectorCnt].SrcW,
+                DmXml_.ConnectorInfo[iConnectorCnt].SrcH,
+                DmXml_.ConnectorInfo[iConnectorCnt].DstX,
+                DmXml_.ConnectorInfo[iConnectorCnt].DstY,
+                DmXml_.ConnectorInfo[iConnectorCnt].DstW,
+                DmXml_.ConnectorInfo[iConnectorCnt].DstH);
+    iConnectorCnt++;
+    pConnector = pConnector->NextSiblingElement();
+  }
+
+  DmXml_.Valid = true;
+  return 0;
+}
+
+int DrmDevice::UpdateInfoFromXml(){
+  if(!DmXml_.Valid){
+    HWC2_ALOGW("DmXml_.Valid = %d, ", DmXml_.Valid);
+    return -1;
+  }
+
+  if(DmXml_.Mode == DRM_DISPLAY_MODE_NORMAL){
+    HWC2_ALOGI("DmXml_.Mode = %d ", DmXml_.Mode);
+    return 0;
+  }
+
+  for(int i = 0; i <  DmXml_.ConnectorCnt; i++){
+    for(auto &conn : connectors_) {
+      const char *conn_name = connector_type_str(conn->type());
+      if(!strncmp(conn_name, DmXml_.ConnectorInfo[i].Type, strlen(conn_name)) &&
+          DmXml_.ConnectorInfo[i].TypeId == conn->type_id()){
+        if(DmXml_.Mode == DRM_DISPLAY_MODE_SPLICE){
+          if(conn->setCropSpilt(DmXml_.FbWidth,
+                                DmXml_.FbHeight,
+                                DmXml_.ConnectorInfo[i].SrcX,
+                                DmXml_.ConnectorInfo[i].SrcY,
+                                DmXml_.ConnectorInfo[i].SrcW,
+                                DmXml_.ConnectorInfo[i].SrcH)){
+            HWC2_ALOGW("%s-%d enter CropSpilt Mode fail.",
+                        connector_type_str(conn->type()), conn->type_id());
+          }else{
+            HWC2_ALOGI("%s-%d enter CropSpilt Mode.",
+                        connector_type_str(conn->type()), conn->type_id());
+          }
+        }else if(DmXml_.Mode == DRM_DISPLAY_MODE_HORIZONTAL_SPILT){
+          if(conn->setHorizontalSpilt()){
+            HWC2_ALOGW("%s-%d enter HorizontalSpilt Mode fail.",
+                        connector_type_str(conn->type()), conn->type_id());
+          }else{
+            HWC2_ALOGI("%s-%d enter HorizontalSpilt Mode.",
+                        connector_type_str(conn->type()), conn->type_id());
+          }
+        }
+      }
+    }
+  }
+  return 0;
+}
+
+void DrmDevice::InitResevedPlane(){
   // Reserved DrmPlane
   char reserved_plane_name[PROPERTY_VALUE_MAX] = {0};
   hwc_get_string_property("vendor.hwc.reserved_plane_name","NULL",reserved_plane_name);
@@ -206,9 +354,11 @@ void DrmDevice::InitResevedPlane(){
 
 std::tuple<int, int> DrmDevice::Init(const char *path, int num_displays) {
 
-
   init_white_modes();
-
+  int ret = InitEnvFromXml();
+  if(ret){
+    HWC2_ALOGW("InitEnvFromXml fail, non-fatal error, check for ok.");
+  }
   // Baseparameter init.
   baseparameter_.Init();
 
@@ -232,7 +382,7 @@ std::tuple<int, int> DrmDevice::Init(const char *path, int num_displays) {
     drmFreeVersion(version);
   }
 
-  int ret = drmSetClientCap(fd(), DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1);
+  ret = drmSetClientCap(fd(), DRM_CLIENT_CAP_UNIVERSAL_PLANES, 1);
   if (ret) {
     ALOGE("Failed to set universal plane cap %d", ret);
     return std::make_tuple(ret, 0);
@@ -374,6 +524,11 @@ std::tuple<int, int> DrmDevice::Init(const char *path, int num_displays) {
       connectors_.emplace_back(std::move(conn));
   }
 
+  // Spicling Mode
+  if(UpdateInfoFromXml()){
+    HWC2_ALOGW("UpdateInfoFromXml fail, non-fatal error, check for ok.");
+  }
+
   ConfigurePossibleDisplays();
 
   DrmConnector *primary = NULL;
@@ -394,6 +549,7 @@ std::tuple<int, int> DrmDevice::Init(const char *path, int num_displays) {
       }
     }
   }
+
 
   if (!found_primary) {
     for (auto &conn : connectors_) {
@@ -455,6 +611,15 @@ std::tuple<int, int> DrmDevice::Init(const char *path, int num_displays) {
     conn->set_display(num_displays);
     displays_[num_displays] = num_displays;
     ++num_displays;
+  }
+
+  // SpiltMode
+  for (auto &conn : connectors_) {
+    if(conn->isHorizontalSpilt()){
+      HWC2_ALOGI("%s enable isHorizontalSpilt, to create SpiltModeDisplay id=0x%x",conn->unique_name(),conn->GetSpiltModeId());
+      int spilt_display_id = conn->GetSpiltModeId();
+      displays_[spilt_display_id] = spilt_display_id;
+    }
   }
 
   if (res)
@@ -594,7 +759,7 @@ int DrmDevice::GetCommitMirrorDisplayId() const {
 
 DrmConnector *DrmDevice::GetConnectorForDisplay(int display) const {
   for (auto &conn : connectors_) {
-    if (conn->display() == display)
+    if (conn->display() == (display & ~DRM_CONNECTOR_SPILT_MODE_MASK))
       return conn.get();
   }
   return NULL;
@@ -635,7 +800,7 @@ DrmConnector *DrmDevice::AvailableWritebackConnector(int display) const {
 
 DrmCrtc *DrmDevice::GetCrtcForDisplay(int display) const {
   for (auto &crtc : crtcs_) {
-    if (crtc->display() == display)
+    if (crtc->display() == (display & ~DRM_CONNECTOR_SPILT_MODE_MASK))
       return crtc.get();
   }
   return NULL;
@@ -988,6 +1153,50 @@ int DrmDevice::UpdateDisplayMode(int display_id){
     return 0;
   }
 
+  //  Disable all plane resource with this connetor.
+  {
+    int ret;
+    drmModeAtomicReqPtr pset = drmModeAtomicAlloc();
+    if (!pset) {
+      ALOGE("%s:line=%d Failed to allocate property set",__FUNCTION__, __LINE__);
+      pthread_mutex_unlock(&diplay_route_mutex);
+      return -ENOMEM;
+    }
+
+    DrmCrtc *crtc = conn->encoder()->crtc();
+    // Disable DrmPlane resource.
+    for(auto &plane_group : plane_groups_){
+      uint32_t crtc_mask = 1 << crtc->pipe();
+      if(!plane_group->acquire(crtc_mask))
+          continue;
+      for(auto &plane : plane_group->planes){
+        if(!plane)
+          continue;
+        ret = drmModeAtomicAddProperty(pset, plane->id(),
+                                        plane->crtc_property().id(), 0) < 0 ||
+              drmModeAtomicAddProperty(pset, plane->id(), plane->fb_property().id(),
+                                        0) < 0;
+        if (ret) {
+          ALOGE("Failed to add plane %d disable to pset", plane->id());
+          drmModeAtomicFree(pset);
+          pthread_mutex_unlock(&diplay_route_mutex);
+          return ret;
+        }
+        HWC2_ALOGI("Crtc-id = %d disable plane-id = %d", crtc->id(), plane->id());
+      }
+    }
+
+    uint32_t flags = DRM_MODE_ATOMIC_ALLOW_MODESET;
+    ret = drmModeAtomicCommit(fd_.get(), pset, flags, this);
+    if (ret < 0) {
+      ALOGE("%s:line=%d Failed to commit pset ret=%d\n", __FUNCTION__, __LINE__, ret);
+      drmModeAtomicFree(pset);
+      pthread_mutex_unlock(&diplay_route_mutex);
+      return ret;
+    }
+  }
+
+  int ret;
   drmModeAtomicReqPtr pset = drmModeAtomicAlloc();
   if (!pset) {
     ALOGE("%s:line=%d Failed to allocate property set",__FUNCTION__, __LINE__);
@@ -995,7 +1204,6 @@ int DrmDevice::UpdateDisplayMode(int display_id){
     return -ENOMEM;
   }
 
-  int ret;
   uint32_t blob_id[1] = {0};
 
   struct drm_mode_modeinfo drm_mode;
@@ -1077,8 +1285,7 @@ int DrmDevice::BindDpyRes(int display_id){
     snprintf(property_conn_name,50,"vendor.hwc.device.display-%d",display_id);
     property_set(property_conn_name, conn_name);
   }else{
-    ALOGD_IF(LogLevel(DBG_DEBUG),"%s:line=%d, display-id=%d conn-id=%d can't find crtc resource.",
-              __FUNCTION__,__LINE__,display_id,conn->id());
+    HWC2_ALOGE("display-id=%d conn-id=%d can't find crtc resource.", display_id, conn->id());
     char conn_name[50];
     char property_conn_name[50];
     snprintf(conn_name,50,"%s-%d:no_crtc",connector_type_str(conn->type()),conn->type_id());
@@ -1093,6 +1300,54 @@ int DrmDevice::BindDpyRes(int display_id){
               __FUNCTION__,__LINE__,display_id,conn->id(),conn->current_mode().id());
     pthread_mutex_unlock(&diplay_route_mutex);
     return -EINVAL;
+  }
+
+  // if current mode not equal kernel mode , must to disable all
+  // plane.
+  DrmCrtc *crtc = conn->encoder()->crtc();
+  DrmMode current_mode = conn->current_mode();
+  if(!current_mode.equal_no_flag_and_type(crtc->kernel_mode())){
+    HWC2_ALOGI("Display-id=%d kernel-mode not equal to current-mode,"
+               "must to disable all plane.", display_id);
+
+    int ret;
+    drmModeAtomicReqPtr pset = drmModeAtomicAlloc();
+    if (!pset) {
+      ALOGE("%s:line=%d Failed to allocate property set",__FUNCTION__, __LINE__);
+      pthread_mutex_unlock(&diplay_route_mutex);
+      return -ENOMEM;
+    }
+
+    // Disable DrmPlane resource.
+    for(auto &plane_group : plane_groups_){
+      uint32_t crtc_mask = 1 << crtc->pipe();
+      if(!plane_group->acquire(crtc_mask))
+          continue;
+      for(auto &plane : plane_group->planes){
+        if(!plane)
+          continue;
+        ret = drmModeAtomicAddProperty(pset, plane->id(),
+                                       plane->crtc_property().id(), 0) < 0 ||
+              drmModeAtomicAddProperty(pset, plane->id(), plane->fb_property().id(),
+                                       0) < 0;
+        if (ret) {
+          ALOGE("Failed to add plane %d disable to pset", plane->id());
+          drmModeAtomicFree(pset);
+          pthread_mutex_unlock(&diplay_route_mutex);
+          return ret;
+        }
+        HWC2_ALOGI("Crtc-id = %d disable plane-id = %d", crtc->id(), plane->id());
+      }
+    }
+
+    uint32_t flags = DRM_MODE_ATOMIC_ALLOW_MODESET;
+    ret = drmModeAtomicCommit(fd_.get(), pset, flags, this);
+    if (ret < 0) {
+      ALOGE("%s:line=%d Failed to commit pset ret=%d\n", __FUNCTION__, __LINE__, ret);
+      drmModeAtomicFree(pset);
+      pthread_mutex_unlock(&diplay_route_mutex);
+      return ret;
+    }
   }
 
   drmModeAtomicReqPtr pset = drmModeAtomicAlloc();
@@ -1112,10 +1367,11 @@ int DrmDevice::BindDpyRes(int display_id){
             conn->current_mode().id(),conn->current_mode().h_display(),conn->current_mode().v_display());
   CreatePropertyBlob(&drm_mode, sizeof(drm_mode), &blob_id[0]);
 
-  DrmCrtc *crtc = conn->encoder()->crtc();
-
   // Enable DrmConnector DPMS on.
-  conn->SetDpmsMode(DRM_MODE_DPMS_ON);
+  // The note is due to HJC's suggestion that the DRM driver
+  // will actively call the DPMS_ON interface when connecting Crtc and Connector,
+  // and no additional calls are required.
+  // conn->SetDpmsMode(DRM_MODE_DPMS_ON);
 
   // Bind DrmCrtc and DrmConnector
   DRM_ATOMIC_ADD_PROP(conn->id(), conn->crtc_id_property().id(), crtc->id());
@@ -1175,7 +1431,10 @@ int DrmDevice::ReleaseDpyRes(int display_id){
     }
 
     // Disable DrmConnector resource.
-    conn->SetDpmsMode(DRM_MODE_DPMS_OFF);
+    // The note is due to HJC's suggestion that the DRM driver
+    // will actively call the DPMS_OFF interface when disconnecting the CRTC from the Connector,
+    // and no additional calls are required.
+    // conn->SetDpmsMode(DRM_MODE_DPMS_OFF);
     DRM_ATOMIC_ADD_PROP(conn->id(), conn->crtc_id_property().id(), 0);
 
     // Disable DrmPlane resource.

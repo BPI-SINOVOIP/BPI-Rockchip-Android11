@@ -49,6 +49,7 @@ void kbase_devfreq_enqueue_work(struct kbase_device *kbdev,
  *                               core mask
  * @kbdev:     Device pointer
  * @freq:      Nominal frequency
+ * @volt:      Target voltage in microvolts corresponding to this frequency
  * @core_mask: Pointer to u64 to store core mask to
  * @freqs:     Pointer to array of frequencies
  * @volts:     Pointer to array of voltages

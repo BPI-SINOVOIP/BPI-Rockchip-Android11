@@ -157,10 +157,20 @@
 			 2.identity mesh between penultimate and last rows may cause old LDCH bug when interpolation.
 			 valid flag: need to set isLdchOld = 1.
 
+  * v5.0.0
+  *  - date: 2021-09-23
+  *  - FEC: add function cropFecMesh:
+			the mesh wiil be cropped according to the ROI parameters of the output image.
+
+  * v5.0.1
+  *  - date: 2021-10-09
+  *  - FEC: add function genFecMeshInit8kTo4k: generate FEC mesh for 8k image ---> 2 images of 4k.
+  *  - LDCH: add function genLdchMeshInit8kTo4k: generate LDCH mesh for 8k image ---> 2 images of 4k.
+	 - FEC & LDCH: some other changes.
 */
 
-#define RK_GENMESH_VERSION_REAL_V "v4.0.6"
-#define RK_GENMESH_RELEASE_DATE "2021-08-14"
+#define RK_GENMESH_VERSION_REAL_V "v5.0.1"
+#define RK_GENMESH_RELEASE_DATE "2021-10-09"
 
   /******* DO NOT EDIT THE FOLLOWINGS *******/
 

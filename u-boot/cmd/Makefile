@@ -18,6 +18,7 @@ obj-$(CONFIG_CMD_AMBAPP) += ambapp.o
 obj-$(CONFIG_CMD_ANDROID_AB_SELECT) += android_ab_select.o android_cmds.o
 obj-$(CONFIG_CMD_ARMFLASH) += armflash.o
 obj-y += blk_common.o
+obj-y += blk.o
 obj-$(CONFIG_SOURCE) += source.o
 obj-$(CONFIG_CMD_SOURCE) += source.o
 obj-$(CONFIG_CMD_BDI) += bdinfo.o
@@ -147,7 +148,7 @@ obj-$(CONFIG_CMD_UBIFS) += ubifs.o
 obj-$(CONFIG_CMD_UNIVERSE) += universe.o
 obj-$(CONFIG_CMD_UNZIP) += unzip.o
 obj-$(CONFIG_CMD_LZMADEC) += lzmadec.o
-
+obj-$(CONFIG_CMD_SCRIPT_UPDATE) += script_update.o
 obj-$(CONFIG_CMD_USB) += usb.o disk.o
 obj-$(CONFIG_CMD_FASTBOOT) += fastboot.o
 obj-$(CONFIG_CMD_FS_UUID) += fs_uuid.o

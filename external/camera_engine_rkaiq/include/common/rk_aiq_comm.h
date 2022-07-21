@@ -18,6 +18,7 @@
 #ifndef _RK_AIQ_COMM_H_
 #define _RK_AIQ_COMM_H_
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #ifdef  __cplusplus
@@ -482,6 +483,33 @@ typedef enum {
     RK_MODULE_MAX
 } rk_aiq_module_id_t;
 
+typedef enum {
+    RK_AIQ_UAPI_MODE_DEFAULT = 0,
+    RK_AIQ_UAPI_MODE_SYNC,
+    RK_AIQ_UAPI_MODE_ASYNC
+} rk_aiq_uapi_mode_sync_e;
+
+/*
+ * @sync_mode (param in): flags for param update mode,
+ *   @setAttrib:
+ *     RK_AIQ_UAPI_MODE_DEFAULT:      default is sync mode.
+ *     RK_AIQ_UAPI_MODE_SYNC:         sync mode.
+ *     RK_AIQ_UAPI_MODE_ASYNC:        async mode.
+ *   @getAttrib:
+ *     RK_AIQ_UAPI_MODE_DEFAULT: default to get the attrib that was
+ *       set(sync_mode == RK_AIQ_UAPI_MODE_ASYNC) last time, which
+ *       may not be in effect yet.
+ *     RK_AIQ_UAPI_MODE_SYNC:    get the attrib currently in use.
+ *     RK_AIQ_UAPI_MODE_ASYNC:   the same as RK_AIQ_UAPI_MODE_DEFAULT.
+ *
+ * @done (parsm out): flags for param update status,
+ *     true indicate param has been updated, false
+ *     indicate param has not been updated.
+ */
+typedef struct rk_aiq_uapi_sync_s {
+    rk_aiq_uapi_mode_sync_e     sync_mode;
+    bool                        done;
+} rk_aiq_uapi_sync_t;
 
 extern int g_rkaiq_isp_hw_ver;
 
@@ -490,6 +518,29 @@ extern int g_rkaiq_isp_hw_ver;
 
 #define CHECK_ISP_HW_V21() \
     (g_rkaiq_isp_hw_ver == 21 ? true : false)
+
+#define CHECK_ISP_HW_V30() \
+    (g_rkaiq_isp_hw_ver == 30 ? true : false)
+
+#define CHECK_ISP_HW_V3X() \
+    (g_rkaiq_isp_hw_ver == 30 ? true : \
+     g_rkaiq_isp_hw_ver == 31 ? true : false)
+
+#ifndef AIQ_MAYBE_UNUSED
+#ifdef __GNUC__
+#define AIQ_MAYBE_UNUSED __attribute__((unused))
+#else
+#define AIQ_MAYBE_UNUSED
+#endif
+#endif  // AIQ_MAYBE_UNUSED
+
+#ifndef AIQ_UNUSED_PARAM
+#ifdef __cplusplus
+#define AIQ_UNUSED_PARAM(x) static_cast<void>(x)
+#else
+#define AIQ_UNUSED_PARAM(x) (void)(x)
+#endif
+#endif  // AIQ_UNUSED_PARAM
 
 RKAIQ_END_DECLARE
 

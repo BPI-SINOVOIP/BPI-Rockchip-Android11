@@ -104,17 +104,37 @@ EinkCompositorWorker::~EinkCompositorWorker() {
     free(gray256_old_buffer);
 }
 
-const char *pvi_wf_get_version(const char *waveform)
+static int pvi_check_wf(const char *waveform)
 {
-	static char spi_id_buffer[32];
-	int i;
+	unsigned char mode_version;
+	int ret = -1;
 
-	for (i = 0; i < 31; i++)
-		spi_id_buffer[i] = waveform[i + 0x41];
+	if (!waveform)
+		return -1;
 
-	spi_id_buffer[31] = '\0';
+	mode_version = waveform[16];
 
-	return (const char *)spi_id_buffer;
+	switch (mode_version) {
+	case 0x43:
+	case 0x16:
+	case 0x18:
+	case 0x19:
+	case 0x20:
+	case 0x48:
+		ret = 0;
+		break;
+	case 0x09:
+	case 0x12:
+	case 0x23:
+	case 0x54:
+		ret = -1;
+		break;
+	default:
+		ret = -1;
+		break;
+	}
+
+	return ret;
 }
 
 int EinkCompositorWorker::Init(struct hwc_context_t *ctx) {
@@ -178,7 +198,11 @@ int EinkCompositorWorker::Init(struct hwc_context_t *ctx) {
       goto OUT;
   }
 
-  ALOGD("waveform version: %s\n", pvi_wf_get_version((char *)waveform_base));
+  ret = pvi_check_wf((char *)waveform_base);
+  if (ret) {
+      ALOGE("pvi check wf failed\n");
+      goto OUT;
+  }
   ret = EInk_Init((char *)waveform_base);
   if (ret) {
       ALOGE("EInk_Init error, ret = %d\n", ret);
@@ -207,40 +231,55 @@ void EinkCompositorWorker::QueueComposite(hwc_display_contents_1_t *dc,int Curre
 
   for (size_t i = 0; i < dc->numHwLayers; ++i) {
     hwc_layer_1_t *layer = &dc->hwLayers[i];
-  if (layer != NULL && layer->handle != NULL && layer->compositionType == HWC_FRAMEBUFFER_TARGET){
-    composition->layer_acquire_fences.emplace_back(layer->acquireFenceFd);
-    layer->acquireFenceFd = -1;
-    if (layer->releaseFenceFd >= 0)
-      close(layer->releaseFenceFd);
-    layer->releaseFenceFd = CreateNextTimelineFence();
-    composition->fb_handle = layer->handle;
-    composition->einkMode = CurrentEpdMode;
+    if (layer != NULL && layer->handle != NULL && layer->compositionType == HWC_FRAMEBUFFER_TARGET){
+      // 送显图层必须与上一帧有差别，才可以往屏端更新
+      if(layer->handle != last_fb_handle){
+        composition->layer_acquire_fences.emplace_back(layer->acquireFenceFd);
+        layer->acquireFenceFd = -1;
+        if (layer->releaseFenceFd >= 0)
+          close(layer->releaseFenceFd);
+        layer->releaseFenceFd = CreateNextTimelineFence();
+        composition->fb_handle = layer->handle;
+        last_fb_handle = layer->handle;
 
-    composition->release_timeline = timeline_;
+        if(last_fb_handle_mode == EPD_RESUME){
+          composition->einkMode = EPD_RESUME;
+          last_fb_handle_mode = EPD_NULL;
+          ALOGI("rk-debug force set EPD_RESUME");
+        }else{
+          composition->einkMode = CurrentEpdMode;
+        }
 
-    Lock();
-    int ret = pthread_mutex_lock(&eink_lock_);
-    if (ret) {
-      ALOGE("Failed to acquire compositor lock %d", ret);
-    }
+        composition->release_timeline = timeline_;
 
-    while (composite_queue_.size() >= kMaxQueueDepth) {
-      Unlock();
-      pthread_cond_wait(&eink_queue_cond_,&eink_lock_);
-      Lock();
-    }
+        Lock();
+        int ret = pthread_mutex_lock(&eink_lock_);
+        if (ret) {
+          ALOGE("Failed to acquire compositor lock %d", ret);
+        }
 
-    composite_queue_.push(std::move(composition));
+        while (composite_queue_.size() >= kMaxQueueDepth) {
+          Unlock();
+          pthread_cond_wait(&eink_queue_cond_,&eink_lock_);
+          Lock();
+        }
 
-    ret = pthread_mutex_unlock(&eink_lock_);
-    if (ret)
-      ALOGE("Failed to release compositor lock %d", ret);
+        composite_queue_.push(std::move(composition));
 
-    SignalLocked();
-    Unlock();
+        ret = pthread_mutex_unlock(&eink_lock_);
+        if (ret)
+          ALOGE("Failed to release compositor lock %d", ret);
+
+        SignalLocked();
+        Unlock();
+      }else{
+        ALOGI("rk-debug fb-handle is same");
+        if(CurrentEpdMode == EPD_RESUME){
+          last_fb_handle_mode = EPD_RESUME;
+        }
+      }
     }
   }
-
 }
 
 void EinkCompositorWorker::Routine() {
@@ -747,7 +786,9 @@ int EinkCompositorWorker::PostEink(int *buffer, Rect rect, int mode){
   commit_buf_info.win_y1 = rect.top;
   commit_buf_info.win_y2 = rect.bottom;
   commit_buf_info.epd_mode = mode;
-  commit_buf_info.needpic = 16;
+  commit_buf_info.needpic = 0;
+  if (mode == EPD_RESUME || mode == EPD_FORCE_FULL || mode == EPD_A2_ENTER)
+    commit_buf_info.needpic = 1;
 
   ALOGD_IF(log_level(DBG_DEBUG),"%s, line = %d ,mode = %d, (x1,x2,y1,y2) = (%d,%d,%d,%d) ",
             __FUNCTION__,__LINE__,mode,commit_buf_info.win_x1,commit_buf_info.win_x2,
@@ -781,7 +822,7 @@ int EinkCompositorWorker::PostEinkY8(int *buffer, Rect rect, int mode){
   commit_buf_info.win_y1 = rect.top;
   commit_buf_info.win_y2 = rect.bottom;
   commit_buf_info.epd_mode = mode;
-  commit_buf_info.needpic = 32;
+  commit_buf_info.needpic = 0;
 
   ALOGD_IF(log_level(DBG_DEBUG),"%s, line = %d ,mode = %d, (x1,x2,y1,y2) = (%d,%d,%d,%d) ",
             __FUNCTION__,__LINE__,mode,commit_buf_info.win_x1,commit_buf_info.win_x2,
@@ -809,6 +850,9 @@ int EinkCompositorWorker::PostEinkY8(int *buffer, Rect rect, int mode){
 
 static int not_fullmode_num = 500;
 static int curr_not_fullmode_num = -1;
+static int prev_diff_percent = 0;
+static int cur_diff_percent = 0;
+static int wait_new_buf_time = 0;
 
 int EinkCompositorWorker::ConvertToColorEink2(const buffer_handle_t &fb_handle){
 
@@ -1187,7 +1231,7 @@ int EinkCompositorWorker::EinkCommit(int epd_mode) {
   gLastEpdMode = epd_mode;
   return 0;
 }
- 
+
 int EinkCompositorWorker::Y4Commit(int epd_mode) {
   Rect screen_rect = Rect(0, 0, ebc_buf_info.width, ebc_buf_info.height);
   int *gray16_buffer_bak = gray16_buffer;
@@ -1201,7 +1245,7 @@ int EinkCompositorWorker::A2Commit(int epd_mode) {
   Rect screen_rect = Rect(0, 0, ebc_buf_info.width, ebc_buf_info.height);
   int *gray16_buffer_bak = gray16_buffer;
   if((gLastEpdMode != EPD_A2) && (gLastEpdMode != EPD_A2_DITHER))
-      epd_tmp_mode = EPD_A2_ENTER;
+      epd_tmp_mode = EPD_FORCE_FULL;
   else
       epd_tmp_mode = epd_mode;
   PostEink(gray16_buffer_bak, screen_rect, epd_tmp_mode);
@@ -1220,6 +1264,36 @@ int EinkCompositorWorker::update_fullmode_num(){
         return -1;
     }
     curr_not_fullmode_num = not_fullmode_num;
+  }
+  return 0;
+}
+
+int EinkCompositorWorker::update_diff_percent_num(){
+  char value[PROPERTY_VALUE_MAX];
+  property_get("sys.diff.percent",value,"0");
+
+  cur_diff_percent = atoi(value);
+  if (prev_diff_percent != cur_diff_percent) {
+    if(ioctl(ebc_fd, EBC_SET_DIFF_PERCENT, &cur_diff_percent) != 0) {
+        ALOGE("EBC_SET_DIFF_PERCENT failed\n");
+        return -1;
+    }
+    prev_diff_percent = cur_diff_percent;
+  }
+  return 0;
+}
+
+int EinkCompositorWorker::update_waiting_time(){
+  char value[PROPERTY_VALUE_MAX];
+  property_get("sys.eink.waiting.time",value, "0");
+  int time_value = atoi(value);
+
+  if (wait_new_buf_time != time_value) {
+    if(ioctl(ebc_fd, EBC_WAIT_NEW_BUF_TIME, &time_value) != 0) {
+        ALOGE("EBC_WAIT_NEW_BUF_TIME failed\n");
+        return -1;
+    }
+    wait_new_buf_time = time_value;
   }
   return 0;
 }
@@ -1245,7 +1319,8 @@ int EinkCompositorWorker::SetColorEinkMode(EinkComposition *composition) {
       break;
   }
   update_fullmode_num();
-
+  update_diff_percent_num();
+  update_waiting_time();
   return 0;
 }
 
@@ -1261,7 +1336,8 @@ int EinkCompositorWorker::SetEinkMode(EinkComposition *composition) {
   	if (composition->einkMode != EPD_FULL_GLD16
 		&& composition->einkMode != EPD_FULL_GLR16
 		&& composition->einkMode != EPD_PART_GLD16
-		&& composition->einkMode != EPD_PART_GLR16) {
+		&& composition->einkMode != EPD_PART_GLR16
+		&& composition->einkMode != EPD_FORCE_FULL) {
   		last_regal = !last_regal;
   	}
   }
@@ -1282,6 +1358,7 @@ int EinkCompositorWorker::SetEinkMode(EinkComposition *composition) {
     case EPD_FULL_GLR16:
     case EPD_PART_GLD16:
     case EPD_PART_GLR16:
+    #if 0 // new ebc no support regal mode now, will support later versions
       if (waveform_fd > 0) {
 	   if (last_regal) {
           	ConvertToY8Regal(composition->fb_handle);
@@ -1294,13 +1371,15 @@ int EinkCompositorWorker::SetEinkMode(EinkComposition *composition) {
           break;
       }
       FALLTHROUGH_INTENDED;
+    #endif
     default:
       ConvertToY4Dither(composition->fb_handle, composition->einkMode);
       Y4Commit(composition->einkMode);
       break;
   }
   update_fullmode_num();
-
+  update_diff_percent_num();
+  update_waiting_time();
   return 0;
 }
 

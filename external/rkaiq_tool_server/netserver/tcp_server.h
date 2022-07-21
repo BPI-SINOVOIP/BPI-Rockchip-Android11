@@ -18,6 +18,7 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <list>
 
 #include "logger/log.h"
 
@@ -63,7 +64,10 @@ class TCPServer
     struct sockaddr_in clientAddress;
     RecvCallBack callback_;
     std::unique_ptr<std::thread> accept_thread_;
+
+  public:
     std::vector<std::unique_ptr<std::thread>> recv_threads_;
+    std::list<std::thread::id> recv_threads_finished_id_;
 };
 
 #endif

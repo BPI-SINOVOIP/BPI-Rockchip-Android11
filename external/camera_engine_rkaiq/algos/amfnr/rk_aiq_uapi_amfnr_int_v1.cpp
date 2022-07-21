@@ -41,7 +41,7 @@ rk_aiq_uapi_amfnr_SetIQPara_v1(RkAiqAlgoContext *ctx,
                                rk_aiq_mfnr_IQPara_V1_t *pPara,
                                bool need_sync)
 {
-
+#ifdef RKAIQ_ENABLE_PARSER_V1
     Amfnr_Context_V1_t* pAmfnrCtx = (Amfnr_Context_V1_t*)ctx;
 
     CalibDb_MFNR_2_t calibdb_2;
@@ -87,6 +87,9 @@ rk_aiq_uapi_amfnr_SetIQPara_v1(RkAiqAlgoContext *ctx,
     free(calibdb_2.mode_cell);
 
     return XCAM_RETURN_NO_ERROR;
+#else
+    return XCAM_RETURN_ERROR_PARAM;
+#endif
 }
 
 
@@ -94,7 +97,7 @@ XCamReturn
 rk_aiq_uapi_amfnr_GetIQPara_v1(RkAiqAlgoContext *ctx,
                                rk_aiq_mfnr_IQPara_V1_t *pPara)
 {
-
+#ifdef RKAIQ_ENABLE_PARSER_V1
     Amfnr_Context_V1_t* pAmfnrCtx = (Amfnr_Context_V1_t*)ctx;
 
     if(ctx != NULL && pPara != NULL) {
@@ -141,6 +144,9 @@ rk_aiq_uapi_amfnr_GetIQPara_v1(RkAiqAlgoContext *ctx,
         free(calibdb_2.mode_cell);
     }
     return XCAM_RETURN_NO_ERROR;
+#else
+    return XCAM_RETURN_ERROR_PARAM;
+#endif
 }
 
 

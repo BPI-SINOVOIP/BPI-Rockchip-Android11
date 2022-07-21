@@ -1393,8 +1393,7 @@ IspController::set_3a_fl (int fl_mode, float fl_intensity[],
             control.id = control_id; \
             control.value = val; \
             if (fl_dev->io_control (VIDIOC_S_CTRL, &control) < 0) { \
-                XCAM_LOG_ERROR (" set fl %s to %d failed", #control_id, val); \
-                return XCAM_RETURN_ERROR_IOCTL; \
+                XCAM_LOG_WARNING (" set fl %s to %d failed, maybe not supported", #control_id, val); \
             } \
             XCAM_LOG_DEBUG (" sof seq %d, set fl %p, cid %s to %d, success",\
                             _frame_sequence, fl_dev.ptr(), #control_id, val); \

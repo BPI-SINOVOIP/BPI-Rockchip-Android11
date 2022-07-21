@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,11 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+#include "uAPI2/rk_aiq_user_api2_adehaze.h"
 
-#include "include/uAPI2/rk_aiq_user_api2_adehaze.h"
-#include "RkAiqHandleInt.h"
+#include "algo_handlers/RkAiqAdhazHandle.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -26,35 +25,83 @@ RKAIQ_BEGIN_DECLARE
 
 XCamReturn  rk_aiq_user_api2_adehaze_setSwAttrib(const rk_aiq_sys_ctx_t* sys_ctx, adehaze_sw_V2_t attr)
 {
-    XCamReturn ret = XCAM_RETURN_NO_ERROR;
     CHECK_USER_API_ENABLE2(sys_ctx);
     CHECK_USER_API_ENABLE(RK_AIQ_ALGO_TYPE_ADHAZ);
-    RKAIQ_API_SMART_LOCK(sys_ctx);
 
-    RkAiqAdhazHandleInt* algo_handle =
-        algoHandle<RkAiqAdhazHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ADHAZ);
+    if (sys_ctx->cam_type == RK_AIQ_CAM_TYPE_GROUP) {
+#ifdef RKAIQ_ENABLE_CAMGROUP
+        RkAiqCamGroupAdhazHandleInt* algo_handle =
+            camgroupAlgoHandle<RkAiqCamGroupAdhazHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ADHAZ);
 
-    if (algo_handle) {
-        return algo_handle->setSwAttrib(attr);
+        if (algo_handle) {
+            return algo_handle->setAttrib(attr);
+        } else {
+            XCamReturn ret                            = XCAM_RETURN_NO_ERROR;
+            const rk_aiq_camgroup_ctx_t* camgroup_ctx = (rk_aiq_camgroup_ctx_t *)sys_ctx;
+            for (auto camCtx : camgroup_ctx->cam_ctxs_array) {
+                if (!camCtx)
+                    continue;
+
+                RkAiqAdhazHandleInt* singleCam_algo_handle =
+                    algoHandle<RkAiqAdhazHandleInt>(camCtx, RK_AIQ_ALGO_TYPE_ADHAZ);
+                if (singleCam_algo_handle) {
+                    ret = singleCam_algo_handle->setSwAttrib(attr);
+                    if (ret != XCAM_RETURN_NO_ERROR) LOGE("%s returned: %d", __FUNCTION__, ret);
+                }
+            }
+            return ret;
+        }
+#else
+        return XCAM_RETURN_ERROR_FAILED;
+#endif
+    } else {
+        RkAiqAdhazHandleInt* algo_handle =
+            algoHandle<RkAiqAdhazHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ADHAZ);
+
+        if (algo_handle) {
+            return algo_handle->setSwAttrib(attr);
+        }
     }
 
-    return (ret);
+    return XCAM_RETURN_NO_ERROR;
 }
 
 XCamReturn  rk_aiq_user_api2_adehaze_getSwAttrib(const rk_aiq_sys_ctx_t* sys_ctx, adehaze_sw_V2_t *attr)
 {
     RKAIQ_API_SMART_LOCK(sys_ctx);
-    XCamReturn ret = XCAM_RETURN_NO_ERROR;
 
-    RkAiqAdhazHandleInt* algo_handle =
-        algoHandle<RkAiqAdhazHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ADHAZ);
+    if (sys_ctx->cam_type == RK_AIQ_CAM_TYPE_GROUP) {
+#ifdef RKAIQ_ENABLE_CAMGROUP
+        RkAiqCamGroupAdhazHandleInt* algo_handle =
+            camgroupAlgoHandle<RkAiqCamGroupAdhazHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ADHAZ);
 
-    if (algo_handle) {
-        return algo_handle->getSwAttrib(attr);
+        if (algo_handle) {
+            return algo_handle->getAttrib(attr);
+        } else {
+            const rk_aiq_camgroup_ctx_t* camgroup_ctx = (rk_aiq_camgroup_ctx_t *)sys_ctx;
+            for (auto camCtx : camgroup_ctx->cam_ctxs_array) {
+                if (!camCtx)
+                    continue;
+
+                RkAiqAdhazHandleInt* singleCam_algo_handle =
+                    algoHandle<RkAiqAdhazHandleInt>(camCtx, RK_AIQ_ALGO_TYPE_ADHAZ);
+                if (singleCam_algo_handle)
+                    return singleCam_algo_handle->getSwAttrib(attr);
+            }
+        }
+#else
+        return XCAM_RETURN_ERROR_FAILED;
+#endif
+    } else {
+        RkAiqAdhazHandleInt* algo_handle =
+            algoHandle<RkAiqAdhazHandleInt>(sys_ctx, RK_AIQ_ALGO_TYPE_ADHAZ);
+
+        if (algo_handle) {
+            return algo_handle->getSwAttrib(attr);
+        }
     }
 
-    return (ret);
-
+    return XCAM_RETURN_NO_ERROR;
 }
 
 

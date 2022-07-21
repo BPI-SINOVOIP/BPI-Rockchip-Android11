@@ -17,9 +17,10 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "acnr/rk_aiq_acnr_algo_itf_v1.h"
 #include "acnr/rk_aiq_acnr_algo_v1.h"
+#include "rk_aiq_algo_types.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -33,15 +34,14 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 {
 
     XCamReturn result = XCAM_RETURN_NO_ERROR;
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
 #if 1
     Acnr_Context_V1_t* pAcnrCtx = NULL;
 #if ACNR_USE_JSON_FILE_V1
-    Acnr_result_t ret = Acnr_Init_V1(&pAcnrCtx, cfgInt->calibv2);
+    Acnr_result_t ret = Acnr_Init_V1(&pAcnrCtx, cfg->calibv2);
 #else
-    Acnr_result_t ret = Acnr_Init_V1(&pAcnrCtx, cfgInt->calib);
+    Acnr_result_t ret = Acnr_Init_V1(&pAcnrCtx, cfg->calib);
 #endif
 
     if(ret != ACNR_RET_SUCCESS) {
@@ -84,17 +84,17 @@ prepare(RkAiqAlgoCom* params)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
     Acnr_Context_V1_t* pAcnrCtx = (Acnr_Context_V1_t *)params->ctx;
-    RkAiqAlgoConfigAcnrV1Int* pCfgParam = (RkAiqAlgoConfigAcnrV1Int*)params;
+    RkAiqAlgoConfigAcnrV1* pCfgParam = (RkAiqAlgoConfigAcnrV1*)params;
     pAcnrCtx->prepare_type = params->u.prepare.conf_type;
 
     if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )) {
 #if ACNR_USE_JSON_FILE_V1
-        void *pCalibDbV2 = (void*)(pCfgParam->rk_com.u.prepare.calibv2);
+        void *pCalibDbV2 = (void*)(pCfgParam->com.u.prepare.calibv2);
         CalibDbV2_CNR_t *cnr_v1 =
             (CalibDbV2_CNR_t*)(CALIBDBV2_GET_MODULE_PTR((void*)pCalibDbV2, cnr_v1));
         pAcnrCtx->cnr_v1 = *cnr_v1;
 #else
-        void *pCalibDb = (void*)(pCfgParam->rk_com.u.prepare.calib);
+        void *pCalibDb = (void*)(pCfgParam->com.u.prepare.calib);
         pAcnrCtx->list_cnr_v1 =
             (struct list_head*)(CALIBDB_GET_MODULE_PTR((void*)pCalibDb, uvnr));
 
@@ -122,10 +122,10 @@ pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
     Acnr_Context_V1_t* pAcnrCtx = (Acnr_Context_V1_t *)inparams->ctx;
 
-    RkAiqAlgoPreAcnrV1Int* pAnrPreParams = (RkAiqAlgoPreAcnrV1Int*)inparams;
+    RkAiqAlgoPreAcnrV1* pAnrPreParams = (RkAiqAlgoPreAcnrV1*)inparams;
 
     oldGrayMode = pAcnrCtx->isGrayMode;
-    if (pAnrPreParams->rk_com.u.proc.gray_mode) {
+    if (pAnrPreParams->com.u.proc.gray_mode) {
         pAcnrCtx->isGrayMode = true;
     } else {
         pAcnrCtx->isGrayMode = false;
@@ -153,8 +153,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ANR("%s: (enter)\n", __FUNCTION__ );
 
 #if 1
-    RkAiqAlgoProcAcnrV1Int* pAcnrProcParams = (RkAiqAlgoProcAcnrV1Int*)inparams;
-    RkAiqAlgoProcResAcnrV1Int* pAcnrProcResParams = (RkAiqAlgoProcResAcnrV1Int*)outparams;
+    RkAiqAlgoProcAcnrV1* pAcnrProcParams = (RkAiqAlgoProcAcnrV1*)inparams;
+    RkAiqAlgoProcResAcnrV1* pAcnrProcResParams = (RkAiqAlgoProcResAcnrV1*)outparams;
     Acnr_Context_V1_t* pAcnrCtx = (Acnr_Context_V1_t *)inparams->ctx;
     Acnr_ExpInfo_t stExpInfo;
     memset(&stExpInfo, 0x00, sizeof(Acnr_ExpInfo_t));
@@ -184,11 +184,11 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     stExpInfo.snr_mode = 0;
 
 #if 1// TODO Merge:
-    XCamVideoBuffer* xCamAePreRes = pAcnrProcParams->rk_com.u.proc.res_comb->ae_pre_res;
-    RkAiqAlgoPreResAeInt* pAEPreRes = nullptr;
+    XCamVideoBuffer* xCamAePreRes = pAcnrProcParams->com.u.proc.res_comb->ae_pre_res;
+    RkAiqAlgoPreResAe* pAEPreRes = nullptr;
     if (xCamAePreRes) {
         // xCamAePreRes->ref(xCamAePreRes);
-        pAEPreRes = (RkAiqAlgoPreResAeInt*)xCamAePreRes->map(xCamAePreRes);
+        pAEPreRes = (RkAiqAlgoPreResAe*)xCamAePreRes->map(xCamAePreRes);
         if (!pAEPreRes) {
             LOGE_ANR("ae pre result is null");
         } else {
@@ -198,7 +198,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 #endif
 
 
-    RKAiqAecExpInfo_t *curExp = pAcnrProcParams->rk_com.u.proc.curExp;
+    RKAiqAecExpInfo_t *curExp = pAcnrProcParams->com.u.proc.curExp;
     if(curExp != NULL) {
         stExpInfo.snr_mode = curExp->CISFeature.SNR;
         if(pAcnrProcParams->hdr_mode == RK_AIQ_WORKING_MODE_NORMAL) {

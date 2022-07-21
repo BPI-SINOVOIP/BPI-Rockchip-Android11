@@ -1090,7 +1090,7 @@ OMX_ERRORTYPE Rkvpu_OMX_OutputBufferProcess(OMX_HANDLETYPE hComponent)
                 break;
 
             OMX_U32 numInOmxAl = 0;
-            for (int i = 0; i < rockchipOutputPort->portDefinition.nBufferCountActual; i++) {
+            for (OMX_U32 i = 0; i < rockchipOutputPort->portDefinition.nBufferCountActual; i++) {
                 if (rockchipOutputPort->extendBufferHeader[i].bBufferInOMX == OMX_TRUE) {
                     numInOmxAl++;
                 }

@@ -106,7 +106,7 @@ int initialize_screens(struct sp_dev* dev) {
       continue;
     }
 
-    fill_bo(cr->scanout, 0xFF, 0x0, 0x0, 0xFF);
+    //fill_bo(cr->scanout, 0xFF, 0x0, 0x0, 0xFF);
 
     ret = drmModeSetCrtc(dev->fd, cr->crtc->crtc_id,
                          cr->scanout->fb_id, 0, 0, &c->connector_id,

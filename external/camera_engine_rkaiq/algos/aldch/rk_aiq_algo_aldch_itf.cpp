@@ -17,9 +17,10 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "aldch/rk_aiq_algo_aldch_itf.h"
 #include "aldch/rk_aiq_types_aldch_algo_prvt.h"
+#include "rk_aiq_algo_types.h"
+#include "RkAiqCalibDbV2Helper.h"
 #include "xcam_log.h"
 
 #define LDCH_CUSTOM_MESH "ldch_custom_mesh.bin"
@@ -34,7 +35,7 @@ static XCamReturn alloc_ldch_buf(LDCHContext_t* ldchCtx)
     share_mem_config.alloc_param.width =  ldchCtx->dst_width;
     share_mem_config.alloc_param.height = ldchCtx->dst_height;
     share_mem_config.mem_type = MEM_TYPE_LDCH;
-    ldchCtx->share_mem_ops->alloc_mem(ldchCtx->share_mem_ops,
+    ldchCtx->share_mem_ops->alloc_mem(0, ldchCtx->share_mem_ops,
                                       &share_mem_config,
                                       &ldchCtx->share_mem_ctx);
     return XCAM_RETURN_NO_ERROR;
@@ -43,7 +44,7 @@ static XCamReturn alloc_ldch_buf(LDCHContext_t* ldchCtx)
 static XCamReturn release_ldch_buf(LDCHContext_t* ldchCtx)
 {
     if (ldchCtx->share_mem_ctx)
-        ldchCtx->share_mem_ops->release_mem(ldchCtx->share_mem_ctx);
+        ldchCtx->share_mem_ops->release_mem(0, ldchCtx->share_mem_ctx);
 
     return XCAM_RETURN_NO_ERROR;
 }
@@ -51,7 +52,7 @@ static XCamReturn release_ldch_buf(LDCHContext_t* ldchCtx)
 static XCamReturn get_ldch_buf(LDCHContext_t* ldchCtx)
 {
     ldchCtx->ldch_mem_info = (rk_aiq_ldch_share_mem_info_t *)
-            ldchCtx->share_mem_ops->get_free_item(ldchCtx->share_mem_ctx);
+            ldchCtx->share_mem_ops->get_free_item(0, ldchCtx->share_mem_ctx);
     if (ldchCtx->ldch_mem_info == NULL) {
         LOGE_ALDCH( "%s(%d): no free ldch buf", __FUNCTION__, __LINE__);
         return XCAM_RETURN_ERROR_MEM;
@@ -164,10 +165,10 @@ updateCalibConfig(RkAiqAlgoCom* params)
 {
     LDCHHandle_t hLDCH = (LDCHHandle_t)params->ctx->hLDCH;
     LDCHContext_t* ldchCtx = (LDCHContext_t*)hLDCH;
-    RkAiqAlgoConfigAldchInt* rkaiqAldchConfig = (RkAiqAlgoConfigAldchInt*)params;
+    RkAiqAlgoConfigAldch* rkaiqAldchConfig = (RkAiqAlgoConfigAldch*)params;
 
     CalibDbV2_LDCH_t* calib_ldch_db =
-        (CalibDbV2_LDCH_t*)(CALIBDBV2_GET_MODULE_PTR(rkaiqAldchConfig->rk_com.u.prepare.calibv2, aldch));
+        (CalibDbV2_LDCH_t*)(CALIBDBV2_GET_MODULE_PTR(rkaiqAldchConfig->com.u.prepare.calibv2, aldch));
     CalibDbV2_Ldch_Param_t* calib_ldch = &calib_ldch_db->param;
 
     ldchCtx->ldch_en = calib_ldch->ldch_en;
@@ -182,9 +183,6 @@ updateCalibConfig(RkAiqAlgoCom* params)
 
     ldchCtx->correct_level = calib_ldch->correct_level;
     ldchCtx->correct_level_max = calib_ldch->correct_level_max;
-
-    if (ldchCtx->correct_level_max != 255)
-        ldchCtx->correct_level = MAP_TO_255LEVEL(ldchCtx->correct_level, ldchCtx->correct_level_max);
 
     aiqGenLdchMeshInit(hLDCH);
     bool success = genLDCMeshNLevel(hLDCH->ldchParams, hLDCH->camCoeff,
@@ -238,10 +236,9 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
     /* ctx->hLDCH->aldchReadMeshThread->start(); */
 #endif
 
-    const AlgoCtxInstanceCfgInt* cfg_int = (const AlgoCtxInstanceCfgInt*)cfg;
     LDCHHandle_t ldchCtx = ctx->hLDCH;
     CalibDbV2_LDCH_t* calib_ldch_db =
-            (CalibDbV2_LDCH_t*)(CALIBDBV2_GET_MODULE_PTR(cfg_int->calibv2, aldch));
+            (CalibDbV2_LDCH_t*)(CALIBDBV2_GET_MODULE_PTR(cfg->calibv2, aldch));
     CalibDbV2_Ldch_Param_t* calib_ldch = &calib_ldch_db->param;
 
     ldchCtx->ldch_en = calib_ldch->ldch_en;
@@ -263,9 +260,6 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
 #endif
     ldchCtx->correct_level = calib_ldch->correct_level;
     ldchCtx->correct_level_max = calib_ldch->correct_level_max;
-
-    if (ldchCtx->correct_level_max != 255)
-        ldchCtx->correct_level = MAP_TO_255LEVEL(ldchCtx->correct_level, ldchCtx->correct_level_max);
 
     LOGI_ALDCH("ldch en %d, meshfile: %s, correct_level-max: %d-%d from xml file",
                calib_ldch->ldch_en,
@@ -303,7 +297,7 @@ prepare(RkAiqAlgoCom* params)
 {
     LDCHHandle_t hLDCH = (LDCHHandle_t)params->ctx->hLDCH;
     LDCHContext_t* ldchCtx = (LDCHContext_t*)hLDCH;
-    RkAiqAlgoConfigAldchInt* rkaiqAldchConfig = (RkAiqAlgoConfigAldchInt*)params;
+    RkAiqAlgoConfigAldch* rkaiqAldchConfig = (RkAiqAlgoConfigAldch*)params;
 
     ldchCtx->src_width = params->u.prepare.sns_op_width;
     ldchCtx->src_height = params->u.prepare.sns_op_height;
@@ -376,7 +370,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
     LDCHHandle_t hLDCH = (LDCHHandle_t)inparams->ctx->hLDCH;
     LDCHContext_t* ldchCtx = (LDCHContext_t*)hLDCH;
-    RkAiqAlgoProcResAldchInt* ldchPreOut = (RkAiqAlgoProcResAldchInt*)outparams;
+    RkAiqAlgoProcResAldch* ldchPreOut = (RkAiqAlgoProcResAldch*)outparams;
 
     if (inparams->u.proc.init) {
         ldchPreOut->ldch_result.update = 1;

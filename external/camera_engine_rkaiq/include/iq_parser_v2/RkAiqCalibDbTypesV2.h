@@ -20,6 +20,7 @@
 
 #include "RkAiqCalibDbV2TypesIsp20.h"
 #include "RkAiqCalibDbV2TypesIsp21.h"
+#include "RkAiqCalibDbV2TypesIsp3x.h"
 #include "RkAiqUapitypes.h"
 
 RKAIQ_BEGIN_DECLARE
@@ -135,8 +136,10 @@ typedef struct CamCalibDbV2Tuning_s {
     CamCalibDbV2ContextIsp20_t calib_scene;
 #elif defined(ISP_HW_V21)
     CamCalibDbV2ContextIsp21_t calib_scene;
+#elif defined(ISP_HW_V30)
+    CamCalibDbV2ContextIsp30_t calib_scene;
 #else
-#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 NOW !"
+#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 AND V30 NOW !"
 #endif
 } CamCalibDbV2Tuning_t;
 
@@ -153,8 +156,10 @@ typedef struct CamCalibSubSceneList_s {
     CamCalibDbV2ContextIsp20_t scene_isp20;
 #elif defined(ISP_HW_V21)
     CamCalibDbV2ContextIsp21_t scene_isp21;
+#elif defined(ISP_HW_V30)
+    CamCalibDbV2ContextIsp30_t scene_isp30;
 #else
-#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 NOW !"
+#error "WRONG ISP_HW_VERSION, ONLY SUPPORT V20 AND V21 AND V30 NOW !"
 #endif
 
 } CamCalibSubSceneList_t;
@@ -180,6 +185,13 @@ typedef struct CamCalibDbProj_s {
     // M4_STRUCT_DESC("SysStaticCfg", "normal_ui_style")
     CalibDb_SysStaticCfg_ParaV2_t sys_static_cfg;
 } CamCalibDbProj_t;
+
+/*NOTE: SHOULD be defined next to CamCalibDbProj_t */
+/*The storage struct of file camgroup.json */
+typedef struct CamCalibDbCamgroup_s {
+    //test
+    int group_awb;
+} CamCalibDbCamgroup_t;
 
 RKAIQ_END_DECLARE
 

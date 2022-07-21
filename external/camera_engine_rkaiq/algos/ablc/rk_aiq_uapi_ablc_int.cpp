@@ -2,70 +2,64 @@
 #include "ablc/rk_aiq_types_ablc_algo_prvt.h"
 
 
-bool
-IfBlcDataEqu
+void BlcParamsNewMalloc
 (
-    Blc_data_t* pInput
-)
-{
-    bool equ = true;
-    int pInputLen[5];
-    pInputLen[0] = pInput->ISO_len;
-    pInputLen[1] = pInput->R_Channel_len;
-    pInputLen[2] = pInput->Gr_Channel_len;
-    pInputLen[3] = pInput->Gb_Channel_len;
-    pInputLen[4] = pInput->B_Channel_len;
+    AblcParams_t*           pStoreBlcPara,
+    AblcParams_t*           pInputBlcPara
+) {
+    LOGD_ABLC( "%s:enter!\n", __FUNCTION__);
 
-    for(int i = 0; i < 4; i++)
-        if(pInputLen[i] != pInputLen[i + 1])
-            equ = false;
+    // initial checks
+    DCT_ASSERT(pStoreBlcPara != NULL);
+    DCT_ASSERT(pInputBlcPara != NULL);
 
-    return equ;
-}
+    if(pStoreBlcPara->len != pInputBlcPara->len) {
+        LOGD_ABLC( "%s:enter store_Len:%d! inputLen:%d\n", __FUNCTION__,
+                   pStoreBlcPara->len,
+                   pInputBlcPara->len);
+        if(pStoreBlcPara->iso)
+            free(pStoreBlcPara->iso);
 
-XCamReturn
-rk_aiq_uapi_ablc_SetTool
-(
-    CalibDbV2_Ablc_t* pStore,
-    CalibDbV2_Ablc_t* pInput
-)
-{
-    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+        if(pStoreBlcPara->blc_b)
+            free(pStoreBlcPara->blc_b);
 
-    pStore->BlcTuningPara.enable = pInput->BlcTuningPara.enable;
+        if(pStoreBlcPara->blc_gb)
+            free(pStoreBlcPara->blc_gb);
 
-    bool Ifequ = IfBlcDataEqu(&pInput->BlcTuningPara.BLC_Data);
-    if(!Ifequ) {
-        LOGE_ABLC("%s: Input BLC Data lens is NOT EQUAL !!!\n", __FUNCTION__ );
-        return XCAM_RETURN_ERROR_FAILED;
+        if(pStoreBlcPara->blc_gr)
+            free(pStoreBlcPara->blc_gr);
+
+        if(pStoreBlcPara->blc_r)
+            free(pStoreBlcPara->blc_r);
+
+        pStoreBlcPara->len = pInputBlcPara->len;
+        pStoreBlcPara->iso = (float*)malloc(sizeof(float) * (pInputBlcPara->len));
+        pStoreBlcPara->blc_r = (float*)malloc(sizeof(float) * (pInputBlcPara->len));
+        pStoreBlcPara->blc_gr = (float*)malloc(sizeof(float) * (pInputBlcPara->len));
+        pStoreBlcPara->blc_gb = (float*)malloc(sizeof(float) * (pInputBlcPara->len));
+        pStoreBlcPara->blc_b = (float*)malloc(sizeof(float) * (pInputBlcPara->len));
+
     }
 
-    if(pStore->BlcTuningPara.BLC_Data.ISO_len != pInput->BlcTuningPara.BLC_Data.ISO_len) {
-        free(pStore->BlcTuningPara.BLC_Data.ISO);
-        free(pStore->BlcTuningPara.BLC_Data.R_Channel);
-        free(pStore->BlcTuningPara.BLC_Data.Gr_Channel);
-        free(pStore->BlcTuningPara.BLC_Data.Gb_Channel);
-        free(pStore->BlcTuningPara.BLC_Data.B_Channel);
-        pStore->BlcTuningPara.BLC_Data.ISO = (float *) malloc(sizeof(float) * pInput->BlcTuningPara.BLC_Data.ISO_len);
-        pStore->BlcTuningPara.BLC_Data.R_Channel = (float *) malloc(sizeof(float) * pInput->BlcTuningPara.BLC_Data.ISO_len);
-        pStore->BlcTuningPara.BLC_Data.Gr_Channel = (float *) malloc(sizeof(float) * pInput->BlcTuningPara.BLC_Data.ISO_len);
-        pStore->BlcTuningPara.BLC_Data.Gb_Channel = (float *) malloc(sizeof(float) * pInput->BlcTuningPara.BLC_Data.ISO_len);
-        pStore->BlcTuningPara.BLC_Data.B_Channel = (float *) malloc(sizeof(float) * pInput->BlcTuningPara.BLC_Data.ISO_len);
+    pStoreBlcPara->enable = pInputBlcPara->enable;
+    for(int i = 0; i < pInputBlcPara->len; i++) {
+        pStoreBlcPara->iso[i] = pInputBlcPara->iso[i];
+        pStoreBlcPara->blc_r[i] = pInputBlcPara->blc_r[i];
+        pStoreBlcPara->blc_gr[i] = pInputBlcPara->blc_gr[i];
+        pStoreBlcPara->blc_gb[i] = pInputBlcPara->blc_gb[i];
+        pStoreBlcPara->blc_b[i] = pInputBlcPara->blc_b[i];
+
+        LOGD_ABLC("ablc iso:%f blc:%f %f %f %f\n",
+                  pStoreBlcPara->iso[i],
+                  pStoreBlcPara->blc_r[i],
+                  pStoreBlcPara->blc_gr[i],
+                  pStoreBlcPara->blc_gb[i],
+                  pStoreBlcPara->blc_b[i]);
     }
-    pStore->BlcTuningPara.BLC_Data.ISO_len = pInput->BlcTuningPara.BLC_Data.ISO_len;
-    pStore->BlcTuningPara.BLC_Data.R_Channel_len = pInput->BlcTuningPara.BLC_Data.ISO_len;
-    pStore->BlcTuningPara.BLC_Data.Gr_Channel_len = pInput->BlcTuningPara.BLC_Data.ISO_len;
-    pStore->BlcTuningPara.BLC_Data.Gb_Channel_len = pInput->BlcTuningPara.BLC_Data.ISO_len;
-    pStore->BlcTuningPara.BLC_Data.B_Channel_len = pInput->BlcTuningPara.BLC_Data.ISO_len;
-    memcpy(pStore->BlcTuningPara.BLC_Data.ISO, pInput->BlcTuningPara.BLC_Data.ISO, sizeof(float)*pInput->BlcTuningPara.BLC_Data.ISO_len);
-    memcpy(pStore->BlcTuningPara.BLC_Data.R_Channel, pInput->BlcTuningPara.BLC_Data.R_Channel, sizeof(float)*pInput->BlcTuningPara.BLC_Data.ISO_len);
-    memcpy(pStore->BlcTuningPara.BLC_Data.Gr_Channel, pInput->BlcTuningPara.BLC_Data.Gr_Channel, sizeof(float)*pInput->BlcTuningPara.BLC_Data.ISO_len);
-    memcpy(pStore->BlcTuningPara.BLC_Data.Gb_Channel, pInput->BlcTuningPara.BLC_Data.Gb_Channel, sizeof(float)*pInput->BlcTuningPara.BLC_Data.ISO_len);
-    memcpy(pStore->BlcTuningPara.BLC_Data.B_Channel, pInput->BlcTuningPara.BLC_Data.B_Channel, sizeof(float)*pInput->BlcTuningPara.BLC_Data.ISO_len);
 
-
-    return ret;
+    LOGD_ABLC( "%s:exit!\n", __FUNCTION__);
 }
+
 
 XCamReturn
 rk_aiq_uapi_ablc_SetAttrib(RkAiqAlgoContext *ctx,
@@ -74,11 +68,15 @@ rk_aiq_uapi_ablc_SetAttrib(RkAiqAlgoContext *ctx,
 {
     AblcContext_t* pAblcCtx = (AblcContext_t*)ctx;
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
-    pAblcCtx->attr.eMode = attr->eMode;
-    if(attr->eMode == ABLC_OP_MODE_API_MANUAL)
-        pAblcCtx->attr.stManual = attr->stManual;
-    if(attr->eMode == ABLC_OP_MODE_API_TOOL)
-        ret = rk_aiq_uapi_ablc_SetTool(&pAblcCtx->attr.stTool, &attr->stTool);
+    pAblcCtx->eMode = attr->eMode;
+    if(attr->eMode == ABLC_OP_MODE_MANUAL) {
+        pAblcCtx->stBlc0Manual = attr->stBlc0Manual;
+        pAblcCtx->stBlc1Manual = attr->stBlc1Manual;
+    } else if(attr->eMode == ABLC_OP_MODE_AUTO) {
+        BlcParamsNewMalloc(&pAblcCtx->stBlc0Params, &attr->stBlc0Auto);
+        BlcParamsNewMalloc(&pAblcCtx->stBlc1Params, &attr->stBlc1Auto);
+    }
+
 
     pAblcCtx->isReCalculate |= 1;
     return ret;
@@ -92,12 +90,24 @@ rk_aiq_uapi_ablc_GetAttrib(const RkAiqAlgoContext *ctx,
     AblcContext_t* pAblcCtx = (AblcContext_t*)ctx;
     XCamReturn ret = XCAM_RETURN_NO_ERROR;
 
-    attr->eMode = pAblcCtx->attr.eMode;
-    memcpy(&attr->stManual, &pAblcCtx->attr.stManual, sizeof(AblcManualAttr_t));
-    ret = rk_aiq_uapi_ablc_SetTool(&attr->stTool, &pAblcCtx->attr.stTool);
+    attr->eMode = pAblcCtx->eMode;
+    memcpy(&attr->stBlc0Manual, &pAblcCtx->stBlc0Manual, sizeof(attr->stBlc0Manual));
+    memcpy(&attr->stBlc1Manual, &pAblcCtx->stBlc1Manual, sizeof(attr->stBlc1Manual));
 
+    BlcParamsNewMalloc(&attr->stBlc0Auto, &pAblcCtx->stBlc0Params);
+    BlcParamsNewMalloc(&attr->stBlc1Auto, &pAblcCtx->stBlc1Params);
     return ret;
 }
 
 
+XCamReturn
+rk_aiq_uapi_ablc_GetProc(const RkAiqAlgoContext *ctx,
+                         AblcProc_t *ProcRes)
+{
+    AblcContext_t* pAblcCtx = (AblcContext_t*)ctx;
+    XCamReturn ret = XCAM_RETURN_NO_ERROR;
+
+    *ProcRes = pAblcCtx->ProcRes;
+    return ret;
+}
 

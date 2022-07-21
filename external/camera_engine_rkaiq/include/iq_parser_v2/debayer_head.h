@@ -29,7 +29,7 @@ typedef struct __debayer_array {
     int ISO[9];
     // M4_ARRAY_DESC("sharp_strength", "u8", M4_SIZE(1,9),  M4_RANGE(0, 255), "[4,4,4,4,4,4,4,4,4]", M4_DIGIT(0), M4_DYNAMIC(0), 0)
     unsigned char sharp_strength[9];
-    // M4_ARRAY_DESC("debayer_hf_offset", "u8", M4_SIZE(1,9),  M4_RANGE(0, 255), "[1,1,1,1,1,1,1,1,1]", M4_DIGIT(0), M4_DYNAMIC(0), 0)
+    // M4_ARRAY_DESC("debayer_hf_offset", "u16", M4_SIZE(1,9),  M4_RANGE(0, 255), "[1,1,1,1,1,1,1,1,1]", M4_DIGIT(0), M4_DYNAMIC(0), 0)
     unsigned short debayer_hf_offset[9];
 }Debayer_Array_t;
 

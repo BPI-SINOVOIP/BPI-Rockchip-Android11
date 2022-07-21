@@ -27,8 +27,6 @@
 #include "RkAiqCalibDbTypes.h"
 #include "arawnr2/rk_aiq_types_abayernr_algo_v2.h"
 #include "bayernr_head_v2.h"
-#include "RkAiqCalibDbTypesV2.h"
-#include "RkAiqCalibDbV2Helper.h"
 
 //RKAIQ_BEGIN_DECLARE
 

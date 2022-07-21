@@ -61,6 +61,8 @@ class DrmMode {
              uint32_t flags, uint32_t clock) const;
   void ToDrmModeModeInfo(drm_mode_modeinfo *m) const;
 
+  void dump() const;
+
   uint32_t id() const;
   void set_id(uint32_t id);
 

@@ -17,9 +17,10 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "acgc/rk_aiq_algo_acgc_itf.h"
 #include "xcam_log.h"
+#include "rk_aiq_algo_types.h"
+
 RKAIQ_BEGIN_DECLARE
 
 typedef struct _RkAiqAlgoContext {

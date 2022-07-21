@@ -481,6 +481,8 @@ void convertAecCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Co
             AecGridWeight5x5to15x15(aec_xml.CommCtrl.DayGridWeights.uCoeff, aec_json.CommCtrl.AecGridWeight);
         }
 
+        aec_json.CommCtrl.AecSpeed.SmoothEn = aec_xml.CommCtrl.stAuto.stAeSpeed.SmoothEn;
+        aec_json.CommCtrl.AecSpeed.DyDampEn = aec_xml.CommCtrl.stAuto.stAeSpeed.DyDampEn;
         aec_json.CommCtrl.AecSpeed.DampOver = aec_xml.CommCtrl.stAuto.stAeSpeed.DampOver;
         aec_json.CommCtrl.AecSpeed.DampUnder = aec_xml.CommCtrl.stAuto.stAeSpeed.DampUnder;
         aec_json.CommCtrl.AecSpeed.DampBright2Dark = aec_xml.CommCtrl.stAuto.stAeSpeed.DampBright2Dark;
@@ -844,7 +846,8 @@ void convertAecCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Co
         for(int i = 0; i < AECV2_MAX_GRIDWEIGHT_NUM; i++)
             aec_json.CommCtrl.AecGridWeight[i] = aec_tune_xml->CommCtrl.GridWeights[i];
 
-
+        aec_json.CommCtrl.AecSpeed.SmoothEn = aec_tune_xml->CommCtrl.stAuto.stAeSpeed.SmoothEn;
+        aec_json.CommCtrl.AecSpeed.DyDampEn = aec_tune_xml->CommCtrl.stAuto.stAeSpeed.DyDampEn;
         aec_json.CommCtrl.AecSpeed.DampOver = aec_tune_xml->CommCtrl.stAuto.stAeSpeed.DampOver;
         aec_json.CommCtrl.AecSpeed.DampUnder = aec_tune_xml->CommCtrl.stAuto.stAeSpeed.DampUnder;
         aec_json.CommCtrl.AecSpeed.DampBright2Dark = aec_tune_xml->CommCtrl.stAuto.stAeSpeed.DampBright2Dark;

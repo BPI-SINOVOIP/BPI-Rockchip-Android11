@@ -26,8 +26,6 @@
 #include "rk_aiq_comm.h"
 #include "RkAiqCalibDbTypes.h"
 #include "asharp3/rk_aiq_types_asharp_algo_v3.h"
-#include "RkAiqCalibDbTypesV2.h"
-#include "RkAiqCalibDbV2Helper.h"
 #include "sharp_head_v3.h"
 
 

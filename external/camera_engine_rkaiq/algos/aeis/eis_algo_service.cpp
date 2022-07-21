@@ -151,12 +151,12 @@ int EisAlgoAdaptor::OnMeshCallback(struct dvsEngine* engine, struct meshxyFEC* m
     return 0;
 }
 
-XCamReturn EisAlgoAdaptor::Config(const AlgoCtxInstanceCfgInt* config,
+XCamReturn EisAlgoAdaptor::Config(const AlgoCtxInstanceCfg* config,
                                   const CalibDbV2_Eis_t* calib) {
     calib_  = calib;
     enable_ = calib_->enable;
 
-    if (config->cfg_com.isp_hw_version == 1) {
+    if (config->isp_hw_version == 1) {
         valid_ = false;
         LOGE_AEIS("EIS does not compatible with ISP21");
         return XCAM_RETURN_BYPASS;
@@ -322,7 +322,7 @@ error_out:
     valid_   = false;
 }
 
-void EisAlgoAdaptor::OnFrameEvent(const RkAiqAlgoProcAeisInt* input) {
+void EisAlgoAdaptor::OnFrameEvent(const RkAiqAlgoProcAeis* input) {
     if (input->orb_stats_buf == nullptr || input->nr_img_buf == nullptr) {
         // valid_ = false;
         LOGE_AEIS("EIS process gets no orb stats/nr image, bypassing!");
@@ -339,9 +339,9 @@ void EisAlgoAdaptor::OnFrameEvent(const RkAiqAlgoProcAeisInt* input) {
     auto nr_fd  = nrImg->get_fd();
 
     LOGV_AEIS("OnFrameEvent id %d idx %d fd %d sof %" PRId64 " skew %lf igt %f ag %d fw %u fh %u mode %d",
-              id, nr_idx, nr_fd, input->common.sof, input->common.rolling_shutter_skew,
-              input->common.integration_time, input->common.analog_gain, input->common.frame_width,
-              input->common.frame_height, calib_->mode);
+              id, nr_idx, nr_fd, input->sof, input->rolling_shutter_skew,
+              input->integration_time, input->analog_gain, input->frame_width,
+              input->frame_height, calib_->mode);
     if (imu_ != nullptr &&
         (calib_->mode == EIS_MODE_IMU_ONLY || calib_->mode == EIS_MODE_IMU_AND_IMG)) {
         auto p = imu_->dequeue();
@@ -384,11 +384,11 @@ void EisAlgoAdaptor::OnFrameEvent(const RkAiqAlgoProcAeisInt* input) {
     struct imageData* image = new imageData();
     if (image != nullptr) {
         auto& meta                = image->meta_data;
-        meta.iso_speed            = input->common.analog_gain;
-        meta.exp_time             = input->common.integration_time;
-        meta.rolling_shutter_skew = input->common.rolling_shutter_skew / 1000000000;
+        meta.iso_speed            = input->analog_gain;
+        meta.exp_time             = input->integration_time;
+        meta.rolling_shutter_skew = input->rolling_shutter_skew / 1000000000;
         meta.zoom_ratio           = 1;
-        meta.timestamp_sof_us     = input->common.sof / 1000;
+        meta.timestamp_sof_us     = input->sof / 1000;
 
         image->buffer_index = nr_idx;
         image->frame_index  = orbStats->orb_stats.frame_id;
@@ -418,7 +418,7 @@ void EisAlgoAdaptor::OnFrameEvent(const RkAiqAlgoProcAeisInt* input) {
     }
 }
 
-void EisAlgoAdaptor::GetProcResult(RkAiqAlgoProcResAeisInt* output) {
+void EisAlgoAdaptor::GetProcResult(RkAiqAlgoProcResAeis* output) {
     auto* mesh  = remap_->GetPendingHwResult();
     auto config = remap_->GetConfig();
     if (mesh != nullptr) {

@@ -966,7 +966,7 @@ public class CaptureModule extends CameraModule implements
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                //onShutterButtonClick();
+                onShutterButtonClick();
                 return true;
         }
         return false;

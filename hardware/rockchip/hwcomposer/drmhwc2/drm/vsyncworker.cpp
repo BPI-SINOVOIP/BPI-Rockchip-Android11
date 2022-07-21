@@ -18,7 +18,7 @@
 
 #include "vsyncworker.h"
 #include "drmdevice.h"
-#include "worker.h"
+#include "utils/worker.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -125,14 +125,9 @@ void VSyncWorker::Routine() {
     }
   }
 
-
-  bool enabled = enabled_;
   int display = display_;
   std::shared_ptr<VsyncCallback> callback(callback_);
   Unlock();
-
-  if (!enabled)
-    return;
 
   int64_t timestamp;
   DrmCrtc *crtc = drm_->GetCrtcForDisplay(display);
@@ -163,6 +158,7 @@ void VSyncWorker::Routine() {
     }
   }
 
+  if (!enabled_) return;
   /*
    * There's a race here where a change in callback_ will not take effect until
    * the next subsequent requested vsync. This is unavoidable since we can't

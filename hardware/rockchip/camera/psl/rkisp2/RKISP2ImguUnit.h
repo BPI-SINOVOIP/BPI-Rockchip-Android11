@@ -31,7 +31,7 @@
 #include "workers/RKISP2IDeviceWorker.h"
 #include "workers/RKISP2FrameWorker.h"
 #include "RKISP2MediaCtlHelper.h"
-
+#include "RKISP2CtrlLoop.h"
 namespace android {
 namespace camera2 {
 namespace rkisp2 {
@@ -59,6 +59,10 @@ public:
     virtual void registerErrorCallback(IErrorCallback* errCb) { mErrCb = errCb; }
     void getConfigedHwPathSize(const char* pathName, uint32_t &size);
     void getConfigedSensorOutputSize(uint32_t &size);
+
+    void setCtrlLoop(RKISP2CtrlLoop* ctrlLoop){
+        this->mCtrlLoop = ctrlLoop;
+    }
 
 private:
     status_t configureVideoNodes(std::shared_ptr<RKISP2GraphConfig> graphConfig);
@@ -149,6 +153,8 @@ private:
     static const int RKISP1_MAX_STATISTICS_HEIGHT = 60;
 
     bool mTakingPicture;
+
+    RKISP2CtrlLoop *mCtrlLoop;
 };
 
 } /* namespace rkisp2 */

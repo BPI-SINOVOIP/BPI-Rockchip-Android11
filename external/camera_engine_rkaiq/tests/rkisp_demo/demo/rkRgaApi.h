@@ -9,6 +9,7 @@ struct rkRgaCfg {
     int width;
     int height;
     int fmt;
+    int fd;
     void *addr;
 };
 

@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2021 Rockchip Electronics Co., Ltd
+ *  Copyright (c) 2019-2022 Rockchip Electronics Co., Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,22 @@
  * limitations under the License.
  *
  */
-
 #ifndef _RK_AIQ_USER_API2_AGIC_H_
 #define _RK_AIQ_USER_API2_AGIC_H_
 
-#include "uAPI/rk_aiq_user_api_agic.h"
+#include "agic/rk_aiq_uapi_agic_int.h"
 
+#ifndef RK_AIQ_SYS_CTX_T
+#define RK_AIQ_SYS_CTX_T
 typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
+#endif
 
 RKAIQ_BEGIN_DECLARE
 
-XCamReturn rk_aiq_user_api2_agic_SetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, agic_attrib_t attr);
-XCamReturn rk_aiq_user_api2_agic_GetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, agic_attrib_t* attr);
+XCamReturn rk_aiq_user_api2_agic_v1_SetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, const rkaiq_gic_v1_api_attr_t* attr);
+XCamReturn rk_aiq_user_api2_agic_v1_GetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, rkaiq_gic_v1_api_attr_t* attr);
+XCamReturn rk_aiq_user_api2_agic_v2_SetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, const rkaiq_gic_v2_api_attr_t* attr);
+XCamReturn rk_aiq_user_api2_agic_v2_GetAttrib(const rk_aiq_sys_ctx_t* sys_ctx, rkaiq_gic_v2_api_attr_t* attr);
 
 RKAIQ_END_DECLARE
 

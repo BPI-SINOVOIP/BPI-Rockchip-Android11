@@ -6,10 +6,37 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <compiler.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
 #include <rktest_ta.h>
 #include <rktest.h>
 #include <pta_secstor_ta_mgmt.h>
 
+#define STORAGE_UUID \
+		{ 0x2d26d8a8, 0x5134, 0x4dd8, \
+			{ 0xb3, 0x2f, 0xb3, 0x4b, 0xce, 0xeb, 0xc4, 0x71 } }
+#define STORAGE_CMD_WRITE_OEM_NS_OTP		12
+#define STORAGE_CMD_READ_OEM_NS_OTP		13
+
+static void dump_hex(char *var_name __unused, const uint8_t *data __unused,
+	      uint32_t len __unused)
+{
+	uint32_t i;
+
+	printf("LINE:%d  %s:", __LINE__, var_name);
+	for (i = 0; i < len; i++) {
+		if ((i % 16) == 7)
+			printf(" ");
+		if ((i % 16) == 0)
+			printf("\n");
+		printf("0x%02x", data[i]);
+	}
+	printf("\n");
+}
 
 static TEEC_Result invoke_transfer_data(TEEC_Context *context,
 					TEEC_Session *session,
@@ -240,11 +267,111 @@ static TEEC_Result invoke_otp_size(TEEC_Session *session,
 				  operation, error_origin);
 };
 
+static TEEC_Result invoke_otp_ns_read(TEEC_Session *session,
+				      TEEC_Operation *operation,
+				      uint32_t *error_origin)
+{
+	TEEC_Result res = TEEC_SUCCESS;
+	uint32_t offset = 0;
+	uint8_t read_data[8];
+
+	memset(read_data, 0, sizeof(read_data));
+	memset(operation, 0, sizeof(TEEC_Operation));
+	operation->paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INPUT,
+						 TEEC_MEMREF_TEMP_OUTPUT,
+						 TEEC_NONE, TEEC_NONE);
+	operation->params[0].value.a = offset;
+	operation->params[1].tmpref.size = sizeof(read_data);
+	operation->params[1].tmpref.buffer = (void *)read_data;
+
+	res = TEEC_InvokeCommand(session, STORAGE_CMD_READ_OEM_NS_OTP,
+				 operation, error_origin);
+	if (res != TEEC_SUCCESS) {
+		printf("InvokeCommand ERR! res= 0x%x\n", res);
+		return res;
+	}
+
+	dump_hex("otp_ns_read data", read_data, sizeof(read_data));
+	printf("test otp_ns_read : Pass!\n");
+	return res;
+};
+
+static TEEC_Result invoke_otp_ns_write(TEEC_Session *session,
+				       TEEC_Operation *operation,
+				       uint32_t *error_origin)
+{
+	TEEC_Result res = TEEC_SUCCESS;
+	uint32_t offset = 0;
+	uint8_t write_data = 0x01;
+
+	memset(operation, 0, sizeof(TEEC_Operation));
+	operation->paramTypes = TEEC_PARAM_TYPES(TEEC_VALUE_INPUT,
+						 TEEC_MEMREF_TEMP_INPUT,
+						 TEEC_NONE, TEEC_NONE);
+	operation->params[0].value.a = offset;
+	operation->params[1].tmpref.size = sizeof(write_data);
+	operation->params[1].tmpref.buffer = (void *)&write_data;
+
+	res = TEEC_InvokeCommand(session, STORAGE_CMD_WRITE_OEM_NS_OTP,
+				 operation, error_origin);
+	if (res != TEEC_SUCCESS) {
+		printf("InvokeCommand ERR! res= 0x%x\n", res);
+		return res;
+	}
+
+	printf("test otp_ns_write : Pass!\n");
+	return res;
+};
+
 static TEEC_Result invoke_trng_read(TEEC_Session *session,
 				    TEEC_Operation *operation, uint32_t *error_origin)
 {
 	return TEEC_InvokeCommand(session, RKTEST_TA_CMD_TRNG_READ,
 				  operation, error_origin);
+}
+
+static void *server_init(void *arg __unused)
+{
+	int serv_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	struct sockaddr_in serv_addr;
+
+	memset(&serv_addr, 0, sizeof(serv_addr));
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	serv_addr.sin_port = htons(2345);
+
+	bind(serv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+	listen(serv_sock, 10);
+
+	struct sockaddr_in clnt_addr;
+	socklen_t clnt_addr_size = sizeof(clnt_addr);
+	int clnt_sock = accept(serv_sock, (struct sockaddr *)&clnt_addr, &clnt_addr_size);
+
+	char str[] = "I am data from server!";
+	write(clnt_sock, str, sizeof(str));
+
+	char buffer[64];
+	read(clnt_sock, buffer, sizeof(buffer));
+	printf("Message from TA: %s\n", buffer);
+
+	read(clnt_sock, buffer, 1);
+
+	close(clnt_sock);
+	close(serv_sock);
+	return NULL;
+}
+
+static TEEC_Result invoke_socket(TEEC_Session *session,
+				 TEEC_Operation *operation, uint32_t *error_origin)
+{
+	pthread_t server;
+	pthread_create(&server, 0, server_init, NULL);
+
+	TEEC_Result res;
+	res = TEEC_InvokeCommand(session, RKTEST_TA_CMD_SOCKET,
+				 operation, error_origin);
+	pthread_join(server, NULL);
+	return res;
 }
 
 TEEC_Result rk_test(uint32_t invoke_command)
@@ -256,6 +383,7 @@ TEEC_Result rk_test(uint32_t invoke_command)
 	TEEC_Operation operation;
 	const TEEC_UUID secstor_uuid = PTA_SECSTOR_TA_MGMT_UUID;
 	const TEEC_UUID rktest_uuid = RKTEST_TA_UUID;
+	const TEEC_UUID storage_uuid = STORAGE_UUID;
 	const TEEC_UUID *uuid;
 
 	switch (invoke_command) {
@@ -264,6 +392,13 @@ TEEC_Result rk_test(uint32_t invoke_command)
 		 * Call the built-in TA(secstor_ta_mgmt) to handle SECSTOR.
 		 */
 		uuid = &secstor_uuid;
+		break;
+	case OTP_NS_READ:
+	case OTP_NS_WRITE:
+		/*
+		 * Call the built-in TA(uboot_storedata_otp.ta) to handle NS OTP.
+		 */
+		uuid = &storage_uuid;
 		break;
 	default:
 		uuid = &rktest_uuid;
@@ -325,8 +460,18 @@ TEEC_Result rk_test(uint32_t invoke_command)
 		break;
 	case  OTP_SIZE:
 		res = invoke_otp_size(&session, &operation, &error_origin);
+		break;
+	case  OTP_NS_READ:
+		res = invoke_otp_ns_read(&session, &operation, &error_origin);
+		break;
+	case  OTP_NS_WRITE:
+		res = invoke_otp_ns_write(&session, &operation, &error_origin);
+		break;
 	case  TRNG_READ:
 		res = invoke_trng_read(&session, &operation, &error_origin);
+		break;
+	case  SOCKET:
+		res = invoke_socket(&session, &operation, &error_origin);
 		break;
 	default:
 		printf("Doing nothing.\n");

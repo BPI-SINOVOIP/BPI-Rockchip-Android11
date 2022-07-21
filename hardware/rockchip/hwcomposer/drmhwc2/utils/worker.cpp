@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "worker.h"
+#include "utils/worker.h"
 
 #include <sys/prctl.h>
 #include <sys/resource.h>

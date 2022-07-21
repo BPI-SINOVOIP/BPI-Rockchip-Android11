@@ -49,7 +49,7 @@ CFLAGS += -Wall -Wcast-align  \
 	  -Wno-missing-field-initializers -Wno-format-zero-length
 
 LDFLAGS += -L$(OPTEE_CLIENT_LIB)
-LDFLAGS += -L$(OPTEE_CLIENT_EXPORT)/lib -lteec
+LDFLAGS += -L$(OPTEE_CLIENT_EXPORT)/lib -lteec  -lpthread
 
 
 .PHONY: all

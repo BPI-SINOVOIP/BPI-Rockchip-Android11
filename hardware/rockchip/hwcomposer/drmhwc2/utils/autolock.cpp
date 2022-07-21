@@ -17,7 +17,7 @@
 #define ATRACE_TAG ATRACE_TAG_GRAPHICS
 #define LOG_TAG "hwc-drm-auto-lock"
 
-#include "autolock.h"
+#include "utils/autolock.h"
 
 #include <errno.h>
 #include <pthread.h>

@@ -21,6 +21,10 @@
 
 #include "rockchip_phy.h"
 
+#define MAX_DPHY_BW	4500000L
+#define MAX_CPHY_BW	2000000L
+
+#define MSEC_PER_SEC	1000L
 #define USEC_PER_SEC	1000000LL
 #define PSEC_PER_SEC	1000000000000LL
 
@@ -184,7 +188,7 @@ struct samsung_mipi_dcphy {
 	void *grf;
 	int lanes;
 	bool c_option;
-	struct reset_ctl phy_rst;
+	struct reset_ctl m_phy_rst;
 
 	struct {
 		unsigned long long rate;
@@ -1526,7 +1530,7 @@ samsung_mipi_dcphy_hs_vreg_amp_config(struct samsung_mipi_dcphy *samsung)
 
 static void samsung_mipi_dphy_power_on(struct samsung_mipi_dcphy *samsung)
 {
-	reset_assert(&samsung->phy_rst);
+	reset_assert(&samsung->m_phy_rst);
 
 	samsung_mipi_dcphy_bias_block_enable(samsung);
 	samsung_mipi_dcphy_pll_configure(samsung);
@@ -1535,13 +1539,13 @@ static void samsung_mipi_dphy_power_on(struct samsung_mipi_dcphy *samsung)
 	samsung_mipi_dcphy_pll_enable(samsung);
 	samsung_mipi_dphy_lane_enable(samsung);
 
-	reset_deassert(&samsung->phy_rst);
+	reset_deassert(&samsung->m_phy_rst);
 }
 
 static void samsung_mipi_cphy_power_on(struct samsung_mipi_dcphy *samsung)
 {
 	grf_write(samsung, MIPI_DCPHY_GRF_CON0, M_CPHY_MODE);
-	reset_assert(&samsung->phy_rst);
+	reset_assert(&samsung->m_phy_rst);
 
 	samsung_mipi_dcphy_bias_block_enable(samsung);
 	samsung_mipi_dcphy_hs_vreg_amp_config(samsung);
@@ -1550,7 +1554,7 @@ static void samsung_mipi_cphy_power_on(struct samsung_mipi_dcphy *samsung)
 	samsung_mipi_dcphy_pll_enable(samsung);
 	samsung_mipi_cphy_lane_enable(samsung);
 
-	reset_deassert(&samsung->phy_rst);
+	reset_deassert(&samsung->m_phy_rst);
 }
 
 static void samsung_mipi_dphy_lane_disable(struct samsung_mipi_dcphy *samsung)
@@ -1646,9 +1650,9 @@ samsung_mipi_dcphy_pll_round_rate(struct samsung_mipi_dcphy *samsung,
 				  unsigned long prate, unsigned long rate,
 				  u8 *prediv, u16 *fbdiv, int *dsm, u8 *scaler)
 {
-	unsigned int max_fout = samsung->c_option ? 4500 : 2000;
-	unsigned long best_freq = 0;
-	unsigned int fin, fvco, fout;
+	u64 max_fout = samsung->c_option ? MAX_CPHY_BW : MAX_DPHY_BW;
+	u64 best_freq = 0;
+	u64 fin, fvco, fout;
 	u8 min_prediv, max_prediv;
 	u8 _prediv, best_prediv = 1;
 	u16 _fbdiv, best_fbdiv = 1;
@@ -1661,10 +1665,10 @@ samsung_mipi_dcphy_pll_round_rate(struct samsung_mipi_dcphy *samsung,
 	 * Fvco = ((m+k/65536) x 2 x Fin) / p
 	 * Fout = ((m+k/65536) x 2 x Fin) / (p x 2^s)
 	 */
-	fin = div64_ul(prate, USEC_PER_SEC);
+	fin = div64_ul(prate, MSEC_PER_SEC);
 
 	while (!best_freq) {
-		fout = div64_ul(rate, USEC_PER_SEC);
+		fout = div64_ul(rate, MSEC_PER_SEC);
 		if (fout > max_fout)
 			fout = max_fout;
 
@@ -1675,15 +1679,15 @@ samsung_mipi_dcphy_pll_round_rate(struct samsung_mipi_dcphy *samsung,
 			/*
 			 * 2600MHz ≤ FVCO ≤ 6600MHz
 			 */
-			if (fvco < 2600 || fvco > 6600)
+			if (fvco < 2600 * MSEC_PER_SEC || fvco > 6600 * MSEC_PER_SEC)
 				continue;
 
 			/* 6MHz ≤ Fref(Fin / p) ≤ 30MHz */
-			min_prediv = DIV_ROUND_UP(fin, 30);
-			max_prediv = fin / 6;
+			min_prediv = DIV_ROUND_UP(fin, 30 * MSEC_PER_SEC);
+			max_prediv = DIV_ROUND_CLOSEST(fin, 6 * MSEC_PER_SEC);
 
 			for (_prediv = min_prediv; _prediv <= max_prediv; _prediv++) {
-				u32 delta, tmp;
+				u64 delta, tmp;
 
 				_fbdiv = DIV_ROUND_CLOSEST(fvco * _prediv, 2 * fin);
 
@@ -1700,19 +1704,19 @@ samsung_mipi_dcphy_pll_round_rate(struct samsung_mipi_dcphy *samsung,
 				tmp = DIV_ROUND_CLOSEST((_fbdiv * fin * 2 * 1000), _prediv);
 				tmp += DIV_ROUND_CLOSEST((_dsm * fin * 1000), _prediv << 15);
 
-				delta = abs(fvco - tmp);
+				delta = abs(fvco * MSEC_PER_SEC - tmp);
 				if (delta < min_delta) {
 					best_prediv = _prediv;
 					best_fbdiv = _fbdiv;
 					best_dsm = _dsm;
 					best_scaler = _scaler;
 					min_delta = delta;
-					best_freq = DIV_ROUND_CLOSEST(tmp, 1000) * USEC_PER_SEC;
+					best_freq = DIV_ROUND_CLOSEST(tmp, 1000) * MSEC_PER_SEC;
 				}
 			}
 		}
 
-		rate += USEC_PER_SEC;
+		rate += 100 * MSEC_PER_SEC;
 	}
 
 	*prediv = best_prediv;
@@ -1808,10 +1812,13 @@ static int samsung_mipi_dcphy_probe(struct udevice *dev)
 			return -ENODEV;
 	}
 
-	ret = reset_get_by_name(dev, "phy", &samsung->phy_rst);
+	ret = reset_get_by_name(dev, "m_phy", &samsung->m_phy_rst);
 	if (ret) {
-		pr_err("reset_get_by_name(phy) failed: %d\n", ret);
-		return ret;
+		ret = reset_get_by_name(dev, "phy", &samsung->m_phy_rst);
+		if (ret) {
+			pr_err("reset_get_by_name(phy) failed: %d\n", ret);
+			return ret;
+		}
 	}
 
 	phy->dev = dev;

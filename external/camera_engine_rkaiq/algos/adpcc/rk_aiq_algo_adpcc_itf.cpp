@@ -17,11 +17,10 @@
  *
  */
 
-#include "rk_aiq_algo_types_int.h"
 #include "adpcc/rk_aiq_algo_adpcc_itf.h"
 #include "adpcc/rk_aiq_adpcc_algo.h"
 #include "adpcc/rk_aiq_types_adpcc_algo_prvt.h"
-
+#include "rk_aiq_algo_types.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -32,10 +31,9 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
     XCamReturn result = XCAM_RETURN_NO_ERROR;
 
     LOGI_ADPCC("%s: (enter)\n", __FUNCTION__ );
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
 
     AdpccContext_t* pAdpccCtx = NULL;
-    AdpccResult_t ret = AdpccInit(&pAdpccCtx, cfgInt->calibv2);//load json paras
+    AdpccResult_t ret = AdpccInit(&pAdpccCtx, cfg->calibv2);//load json paras
     if(ret != ADPCC_RET_SUCCESS) {
         result = XCAM_RETURN_ERROR_FAILED;
         LOGE_ADPCC("%s: Initializaion Adpcc failed (%d)\n", __FUNCTION__, ret);
@@ -72,15 +70,15 @@ prepare(RkAiqAlgoCom* params)
 {
     XCamReturn result = XCAM_RETURN_NO_ERROR;
 
-    LOGE_ADPCC("%s: (enter)\n", __FUNCTION__ );
+    LOGD_ADPCC("%s: (enter)\n", __FUNCTION__ );
 
     AdpccContext_t* pAdpccCtx = (AdpccContext_t *)params->ctx;
-    RkAiqAlgoConfigAdpccInt* pCfgParam = (RkAiqAlgoConfigAdpccInt*)params;
+    RkAiqAlgoConfigAdpcc* pCfgParam = (RkAiqAlgoConfigAdpcc*)params;
     AdpccConfig_t* pAdpccConfig = &pCfgParam->stAdpccConfig;
     pAdpccCtx->prepare_type = params->u.prepare.conf_type;
 
     if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB )) {
-        AdpccResult_t ret = AdpccReloadPara(pAdpccCtx, pCfgParam->rk_com.u.prepare.calibv2);
+        AdpccResult_t ret = AdpccReloadPara(pAdpccCtx, pCfgParam->com.u.prepare.calibv2);
         if(ret != ADPCC_RET_SUCCESS) {
             result = XCAM_RETURN_ERROR_FAILED;
             LOGE_ADPCC("%s: Adpcc Reload Para failed (%d)\n", __FUNCTION__, ret);
@@ -106,8 +104,8 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     LOGI_ADPCC("%s: (enter)\n", __FUNCTION__ );
 
 #if 1
-    RkAiqAlgoProcAdpccInt* pAdpccProcParams = (RkAiqAlgoProcAdpccInt*)inparams;
-    RkAiqAlgoProcResAdpccInt* pAdpccProcResParams = (RkAiqAlgoProcResAdpccInt*)outparams;
+    RkAiqAlgoProcAdpcc* pAdpccProcParams = (RkAiqAlgoProcAdpcc*)inparams;
+    RkAiqAlgoProcResAdpcc* pAdpccProcResParams = (RkAiqAlgoProcResAdpcc*)outparams;
     AdpccContext_t* pAdpccCtx = (AdpccContext_t *)inparams->ctx;
     AdpccExpInfo_t stExpInfo;
     memset(&stExpInfo, 0x00, sizeof(AdpccExpInfo_t));
@@ -130,7 +128,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
         stExpInfo.arProcResTime[i] = 0.01;
     }
 
-    pAdpccCtx->isBlackSensor = pAdpccProcParams->rk_com.u.proc.is_bw_sensor;
+    pAdpccCtx->isBlackSensor = pAdpccProcParams->com.u.proc.is_bw_sensor;
 
     if(pAdpccProcParams->hdr_mode == RK_AIQ_WORKING_MODE_NORMAL) {
         stExpInfo.hdr_mode = 0;
@@ -142,7 +140,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
         stExpInfo.hdr_mode = 2;
     }
 
-    RKAiqAecExpInfo_t* pAERes = pAdpccProcParams->rk_com.u.proc.curExp;
+    RKAiqAecExpInfo_t* pAERes = pAdpccProcParams->com.u.proc.curExp;
 
     if(pAERes != NULL) {
         if(pAdpccProcParams->hdr_mode == RK_AIQ_WORKING_MODE_NORMAL) {
@@ -180,10 +178,10 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     AdpccGetProcResult(pAdpccCtx, &pAdpccProcResParams->stAdpccProcResult);
 
     //sensor dpcc setting
-    pAdpccProcResParams->adpcc_proc_res_com.SenDpccRes.enable = pAdpccCtx->SenDpccRes.enable;
-    pAdpccProcResParams->adpcc_proc_res_com.SenDpccRes.total_dpcc = pAdpccCtx->SenDpccRes.total_dpcc;
-    pAdpccProcResParams->adpcc_proc_res_com.SenDpccRes.cur_single_dpcc = pAdpccCtx->SenDpccRes.cur_single_dpcc;
-    pAdpccProcResParams->adpcc_proc_res_com.SenDpccRes.cur_multiple_dpcc = pAdpccCtx->SenDpccRes.cur_multiple_dpcc;
+    pAdpccProcResParams->SenDpccRes.enable = pAdpccCtx->SenDpccRes.enable;
+    pAdpccProcResParams->SenDpccRes.total_dpcc = pAdpccCtx->SenDpccRes.total_dpcc;
+    pAdpccProcResParams->SenDpccRes.cur_single_dpcc = pAdpccCtx->SenDpccRes.cur_single_dpcc;
+    pAdpccProcResParams->SenDpccRes.cur_multiple_dpcc = pAdpccCtx->SenDpccRes.cur_multiple_dpcc;
 
 #endif
 

@@ -292,7 +292,6 @@ def IncrementalOTA_InstallEnd(info):
   except KeyError:
     print "warning: rk loader bin missing from target; not flashing loader"
     target_loader = None
-    return
 
   try:
     source_loader = info.source_zip.read("RKLoader.bin")

@@ -64,14 +64,7 @@ using namespace RkCam;
 using namespace XCam;
 using namespace android::camera2;
 
-typedef struct rk_aiq_sys_ctx_s {
-    const char* _sensor_entity_name;
-    SmartPtr<RkCam::RkAiqManager> _rkAiqManager;
-    SmartPtr<RkCam::ICamHw> _camHw;
-    SmartPtr<RkCam::RkAiqCore> _analyzer;
-    SmartPtr<RkCam::RkLumaCore> _lumaAnalyzer;
-    CamCalibDbContext_t *_calibDb;
-} rk_aiq_sys_ctx_t;
+typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
 
 struct rkisp_cl_frame_rkaiq_s {
     //frame id
@@ -131,14 +124,9 @@ struct Message {
 
 //namespace RkCam {
 class AiqCameraHalAdapter:
-    public HwResListener,
     public IMessageHandler
 {
 private:
-    SmartPtr<RkAiqManager> _rkAiqManager;
-    SmartPtr<RkAiqCore> _analyzer;
-    SmartPtr<ICamHw> _camHw;
-    SmartPtr<HwResListener> _hwResListener;
 
     const cl_result_callback_ops_t *mCallbackOps;
 
@@ -184,9 +172,7 @@ private:  /* Methods */
     status_t requestExitAndWait();
     virtual void messageThreadLoop();
     status_t handleMessageExit(Message &msg);
-    status_t handleIspStatCb(Message &msg);
     status_t handleIspSofCb(Message &msg);
-    status_t handleRkAiqCalcDone(Message &msg);
     status_t handleMessageFlush(Message &msg);
 
 public:
@@ -196,7 +182,7 @@ public:
     camera_metadata_rational_t _transformMatrix[9];
 
 public:
-    explicit AiqCameraHalAdapter(SmartPtr<RkAiqManager> _rkAiqManager,SmartPtr<RkAiqCore> _analyzer,SmartPtr<ICamHw> _camHw);
+    explicit AiqCameraHalAdapter();
     virtual ~AiqCameraHalAdapter();
     void init(const cl_result_callback_ops_t* callbacks);
     void start();
@@ -216,7 +202,7 @@ public:
     void updateAfParams(XCamAfParam *afParams);
     void setFrameParams(const struct rkisp_cl_frame_rkaiq_s* frame_params);
 
-    virtual XCamReturn hwResCb(SmartPtr<VideoBuffer>& hwres);
+    virtual XCamReturn metaCallback();
 
     SmartPtr<AiqInputParams> getAiqInputParams();
     void set_aiq_ctx(rk_aiq_sys_ctx_t* aiq_ctx) { _aiq_ctx = aiq_ctx; };

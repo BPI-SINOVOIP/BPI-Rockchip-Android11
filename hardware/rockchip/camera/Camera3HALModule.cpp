@@ -57,6 +57,7 @@ static int hal_dev_close(hw_device_t* device);
 
 static bool sInstances[MAX_CAMERAS] = {false, false};
 static int sInstanceCount = 0;
+static int sNumcamera = 0;
 
 static const camera_module_callbacks_t *sCallbacks;
 
@@ -105,7 +106,7 @@ static int hal_get_number_of_cameras(void)
     HAL_TRACE_CALL(CAM_GLBL_DBG_HIGH);
     PERFORMANCE_ATRACE_CALL();
 
-    return PlatformData::numberOfCameras();
+    return sNumcamera;
 }
 
 static void hal_get_vendor_tag_ops(vendor_tag_ops_t* ops)
@@ -309,8 +310,10 @@ static void initCameraHAL(void) {
     property_set(CAM_HAL3_PROPERTY_KEY,rkHal3Version);
     PerformanceTraces::reset();
     PlatformData::init();
-    int ret = PlatformData::numberOfCameras();
-    if (ret == 0) {
+    sNumcamera = PlatformData::numberOfCameras();
+
+    LOGD("camera number:%d!", sNumcamera);
+    if (sNumcamera == 0) {
       LOGE("No camera device was found!");
       return;
     }

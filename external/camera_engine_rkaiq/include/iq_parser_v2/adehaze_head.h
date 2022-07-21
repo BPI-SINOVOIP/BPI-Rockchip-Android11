@@ -25,6 +25,9 @@
 RKAIQ_BEGIN_DECLARE
 
 #define CALIBDB_ADEHAZE_ENHANCE_CURVE_KNOTS_NUM               17
+#define ISP3X_DHAZ_SIGMA_IDX_NUM    15
+#define ISP3X_DHAZ_SIGMA_LUT_NUM    17
+
 
 typedef struct DehazeData_s {
     // M4_ARRAY_DESC("ISO", "f32", M4_SIZE(1,100), M4_RANGE(0,10000000), "50",M4_DIGIT(4), M4_DYNAMIC(1))
@@ -343,6 +346,11 @@ typedef struct CalibDbV2_dehaze_V21_s {
     // M4_STRUCT_DESC("DehazeTuningPara", "normal_ui_style")
     CalibDbDehazeV21_t DehazeTuningPara;
 } CalibDbV2_dehaze_V21_t;
+
+typedef struct CalibDbV2_dehaze_V30_s {
+    // M4_STRUCT_DESC("DehazeTuningPara", "normal_ui_style")
+    CalibDbDehazeV21_t DehazeTuningPara;
+} CalibDbV2_dehaze_V30_t;
 
 
 RKAIQ_END_DECLARE

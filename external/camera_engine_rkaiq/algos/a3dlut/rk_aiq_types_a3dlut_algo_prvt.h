@@ -31,6 +31,13 @@
 
 RKAIQ_BEGIN_DECLARE
 
+typedef struct lut3d_3ares_info_s{
+    float sensorGain;
+    float awbGain[2];
+    bool wbgain_stable;
+    bool gain_stable;
+} lut3d_3ares_info_t;
+
 typedef struct alut3d_rest_info_s {
     float alpha;
     List dominateIdxList;//to record domain lutIdx
@@ -38,6 +45,7 @@ typedef struct alut3d_rest_info_s {
     const CalibDbV2_Lut3D_LutPara_t *pLutProfile;
     CalibDbV2_Lut3D_Table_Para_t undampedLut;
     CalibDbV2_Lut3D_Table_Para_t dampedLut;
+    lut3d_3ares_info_t res3a_info;
 } alut3d_rest_info_t;
 
 typedef struct idx_node_s {

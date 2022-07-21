@@ -269,12 +269,12 @@ int init_rtsp(const char* video_dev, int width, int height, std::string enc_type
     easymedia::REFLECTOR(Stream)::DumpFactories();
 
     video_cap_flow = create_video_capture_flow(video_dev, yuv_format, width, height);
-    // g_video_enc_flow = create_video_enc_flow(yuv_format, enc_type, width, height, fps);
-    // g_video_rtsp_flow = create_rtsp_server_flow("main_stream", enc_type);
+    g_video_enc_flow = create_video_enc_flow(yuv_format, enc_type, width, height, fps);
+    g_video_rtsp_flow = create_rtsp_server_flow("main_stream", enc_type);
     video_dump_flow = create_dump_server_flow(yuv_format);
 
-    // g_video_enc_flow->AddDownFlow(g_video_rtsp_flow, 0, 0);
-    // video_cap_flow->AddDownFlow(g_video_enc_flow, 0, 0);
+    g_video_enc_flow->AddDownFlow(g_video_rtsp_flow, 0, 0);
+    video_cap_flow->AddDownFlow(g_video_enc_flow, 0, 0);
     video_cap_flow->AddDownFlow(video_dump_flow, 0, 0);
 
     if (!video_cap_flow || !video_dump_flow) {

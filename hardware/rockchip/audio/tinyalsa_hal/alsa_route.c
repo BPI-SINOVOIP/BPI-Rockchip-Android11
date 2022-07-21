@@ -45,7 +45,8 @@
 
 #define PCM_MAX PCM_DEVICE2_CAPTURE
 
-const struct config_route_table *route_table;
+static const struct config_route_table *route_table = NULL;
+static int route_card = -1;
 
 struct pcm* mPcm[PCM_MAX + 1];
 struct mixer* mMixerPlayback;
@@ -643,8 +644,9 @@ void route_pcm_card_open(int card, uint32_t route)
 
     is_playback = is_playback_route(route);
 
-    if (!route_table) {
+    if (!route_table || route_card != card) {
         route_card_init(card);
+        route_card = card;
     }
 
     const struct config_route *route_info = get_route_config(route);

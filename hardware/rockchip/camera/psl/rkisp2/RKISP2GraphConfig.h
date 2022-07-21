@@ -39,16 +39,25 @@ namespace android {
 namespace camera2 {
 namespace rkisp2 {
 // mainPath output capacity
+#if defined(TARGET_RK3588)
+#define MP_MAX_WIDTH        8192
+#define MP_MAX_HEIGHT       6144
+#else
 #define MP_MAX_WIDTH        4416
 #define MP_MAX_HEIGHT       3312
+#endif
 // selfPath output capacity
 #define SP_MAX_WIDTH        1920
-#define SP_MAX_HEIGHT       1920
+#define SP_MAX_HEIGHT       1080
 // postpipeline limitation, limited by RGA now
 #if defined(TARGET_RK312X)
 #define PP_MAX_WIDTH        2048
 #else
+#if defined(TARGET_RK3588)
+#define PP_MAX_WIDTH        8128
+#else
 #define PP_MAX_WIDTH        4096
+#endif
 #endif
 
 #define NODE_NAME(x) (getNodeName(x).c_str())
@@ -386,6 +395,8 @@ public:
      * available output frame size
      */
     void cal_crop(uint32_t &src_w, uint32_t &src_h, uint32_t &dst_w, uint32_t &dst_h);
+    int get_reso_dist(camera3_stream_t* stream, uint32_t max_width, uint32_t max_height);
+    uint32_t find_best_fit_format(camera3_stream_t* stream);
     status_t selectSensorOutputFormat(int32_t cameraId, int &w, int &h, uint32_t &format);
     string getSinkEntityName(std::shared_ptr<MediaEntity> entity, int port);
     status_t getSensorMediaCtlConfig(int32_t cameraId,

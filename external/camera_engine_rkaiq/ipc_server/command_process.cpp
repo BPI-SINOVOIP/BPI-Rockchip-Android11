@@ -5,7 +5,7 @@
 #endif
 #define LOG_TAG "socket_server.cpp"
 
-int ProcessCommand(rk_aiq_sys_ctx_t* ctx, RkAiqSocketData *dataRecv, RkAiqSocketData *dataReply) {
+int ProcessCommand(rk_aiq_sys_ctx_t* ctx, RkAiqSocketPacket *dataRecv, RkAiqSocketPacket *dataReply) {
     switch(dataRecv->commandID) {
     case ENUM_ID_AE_SETEXPSWATTR:
         dataReply->commandResult = setExpSwAttr(ctx, dataRecv->data);
@@ -334,19 +334,6 @@ int ProcessCommand(rk_aiq_sys_ctx_t* ctx, RkAiqSocketData *dataRecv, RkAiqSocket
         dataReply->commandResult =  getDpccAttrib(ctx, dataReply->data);
         break;
     }
-
-    case ENUM_ID_DEHAZE_SETATTRIB: {
-        dataReply->commandResult = setDehazeAttrib(ctx, dataRecv->data);
-        dataReply->data = NULL;
-        dataReply->dataSize = 0;
-        break;
-    }
-    case ENUM_ID_DEHAZE_GETATTRIB: {
-        dataReply->dataSize = sizeof(adehaze_sw_V2_t);
-        dataReply->data = (char*)malloc(dataReply->dataSize);
-        dataReply->commandResult =  getDehazeAttrib(ctx, dataReply->data);
-        break;
-    }
     case ENUM_ID_ACCM_SETATTRIB: {
         dataReply->commandResult = setCcmAttrib(ctx, dataRecv->data);
         dataReply->data = NULL;
@@ -402,7 +389,15 @@ int ProcessCommand(rk_aiq_sys_ctx_t* ctx, RkAiqSocketData *dataRecv, RkAiqSocket
         dataReply->commandResult =  getAcpAttrib(ctx, dataReply->data);
         break;
     }
+    case ENUM_ID_SYSCTL_ENQUEUERKRAWFILE:
+    {
+        dataReply->commandResult = enqueueRkRawFile(ctx, dataRecv->data);
+        dataReply->data = NULL;
+        dataReply->dataSize = 0;
+        break;
+    }
     default:
+        LOGE("AIQ IPC UNKNOWN CMD: %d\n", dataRecv->commandID);
         return -1;
         break;
     }
@@ -410,7 +405,8 @@ int ProcessCommand(rk_aiq_sys_ctx_t* ctx, RkAiqSocketData *dataRecv, RkAiqSocket
 
     dataReply->commandID = dataRecv->commandID;
     if (dataReply->dataSize != 0 ) {
-        dataReply->dataHash = MurMurHash(dataReply->data, dataReply->dataSize);
+        dataReply->dataHash = RkMSG::MessageParser::MurMurHash(dataReply->data,
+                                                               dataReply->dataSize);
     }
     else {
         dataReply->dataHash = 0;

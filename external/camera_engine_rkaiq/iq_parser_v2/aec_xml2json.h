@@ -24,9 +24,11 @@
 #include "RkAiqCalibDbV2Helper.h"
 
 void CalibV2AecFree(CamCalibDbV2Context_t* calibV2);
+#ifdef RKAIQ_ENABLE_PARSER_V1
 void convertSensorinfoCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CalibDb_Sensor_ParaV2_t* sensor_info);
 void convertModuleinfoCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CalibDb_Module_ParaV2_t* module_info);
 void convertAecCalibV1ToCalibV2(const CamCalibDbContext_t *calib, CamCalibDbV2Context_t* calibV2);
+#endif
 
 
 #endif

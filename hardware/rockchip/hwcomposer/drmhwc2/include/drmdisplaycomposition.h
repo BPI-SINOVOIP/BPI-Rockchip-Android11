@@ -21,6 +21,7 @@
 #include "drmlayer.h"
 #include "drmplane.h"
 #include "rockchip/utils/drmdebug.h"
+#include "utils/drmfence.h"
 
 #include <sstream>
 #include <vector>
@@ -64,8 +65,31 @@ class DrmCompositionPlane {
   };
 
   DrmCompositionPlane() = default;
-  DrmCompositionPlane(DrmCompositionPlane &&rhs) = default;
-  DrmCompositionPlane &operator=(DrmCompositionPlane &&other) = default;
+  DrmCompositionPlane(DrmCompositionPlane &&rhs){
+    type_  = rhs.type();
+    plane_ = rhs.plane();
+    crtc_  = rhs.crtc();
+    mirror_ = rhs.mirror();
+
+    if(rhs.type() == Type::kLayer){
+      zpos_ = rhs.get_zpos();
+      source_layers_.clear();
+      source_layers_.push_back(rhs.source_layers().front());
+    }
+  };
+  DrmCompositionPlane &operator=(DrmCompositionPlane &&rhs){
+    type_  = rhs.type();
+    plane_ = rhs.plane();
+    crtc_  = rhs.crtc();
+    mirror_ = rhs.mirror();
+
+    if(rhs.type() == Type::kLayer){
+      zpos_ = rhs.get_zpos();
+      source_layers_.clear();
+      source_layers_.push_back(rhs.source_layers().front());
+    }
+    return *this;
+  };
   DrmCompositionPlane(Type type, DrmPlane *plane, DrmCrtc *crtc)
       : type_(type),
         plane_(plane),
@@ -107,7 +131,7 @@ class DrmCompositionPlane {
     return source_layers_;
   }
  int get_zpos() { return zpos_; }
- void set_zpos( int zpos) { zpos_ =  zpos; }
+ void set_zpos(int zpos) { zpos_ =  zpos; }
 
  private:
   int zpos_;
@@ -124,21 +148,19 @@ class DrmDisplayComposition {
   DrmDisplayComposition(const DrmDisplayComposition &) = delete;
   ~DrmDisplayComposition();
 
-  int Init(DrmDevice *drm, DrmCrtc *crtc, Importer *importer, Planner *planner,
-           uint64_t frame_no);
+  int Init(DrmDevice *drm, DrmCrtc *crtc, Importer *importer,
+           Planner *planner, uint64_t frame_no, uint64_t display_id);
 
   int SetLayers(DrmHwcLayer *layers, size_t num_layers, bool geometry_changed);
-  int AddPlaneComposition(DrmCompositionPlane plane);
+  int AddPlaneComposition(DrmCompositionPlane &&plane);
   int AddPlaneDisable(DrmPlane *plane);
   int SetDpmsMode(uint32_t dpms_mode);
   int SetDisplayMode(const DrmMode &display_mode);
 
   int DisableUnusedPlanes();
-  int CreateAndAssignReleaseFences();
-  int SignalCompositionDone() {
-    ALOGD_IF(LogLevel(DBG_DEBUG),"%s: signal frame = %" PRIu64, __FUNCTION__,frame_no_);
-    return IncreaseTimelineToPoint(timeline_);
-  }
+  int CreateAndAssignReleaseFences(SyncTimeline &sync_timeline);
+  sp<ReleaseFence> GetReleaseFence(hwc2_layer_t layer_id);
+  int SignalCompositionDone();
 
   std::vector<DrmHwcLayer> &layers() {
     return layers_;
@@ -156,6 +178,9 @@ class DrmDisplayComposition {
     return frame_no_;
   }
 
+  int display() const {
+    return display_id_;
+  }
   DrmCompositionType type() const {
     return type_;
   }
@@ -192,8 +217,6 @@ class DrmDisplayComposition {
 
  private:
   bool validate_composition_type(DrmCompositionType desired);
-  int CreateNextTimelineFence(const char* fence_name);
-  int IncreaseTimelineToPoint(int point);
 
   DrmDevice *drm_ = NULL;
   DrmCrtc *crtc_ = NULL;
@@ -204,7 +227,6 @@ class DrmDisplayComposition {
   uint32_t dpms_mode_ = DRM_MODE_DPMS_ON;
   DrmMode display_mode_;
 
-  int timeline_fd_ = -1;
   int timeline_ = 0;
   int timeline_current_ = 0;
 
@@ -215,6 +237,11 @@ class DrmDisplayComposition {
   std::vector<DrmCompositionPlane> composition_planes_;
 
   uint64_t frame_no_ = 0;
+  uint64_t display_id_;
+
+  // mutable since we need to acquire in HaveQueuedComposites
+  mutable pthread_mutex_t lock_;
+  bool signal_;
 };
 }  // namespace android
 

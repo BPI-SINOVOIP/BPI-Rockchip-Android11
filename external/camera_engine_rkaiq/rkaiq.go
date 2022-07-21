@@ -19,6 +19,9 @@ func rkaiqFlags(ctx android.BaseContext) []string {
     if board == "rk356x" {
        cflags = append(cflags, "-DISP_HW_V21")
     }
+    if board == "rk3588" {
+       cflags = append(cflags, "-DISP_HW_V30")
+    }
     return cflags
 }
 

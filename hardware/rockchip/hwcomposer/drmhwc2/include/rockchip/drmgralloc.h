@@ -90,7 +90,10 @@ public:
     uint32_t uRefCnt_;
   };
 
-  void set_drm_version(int version);
+  int importBuffer(buffer_handle_t rawHandle, buffer_handle_t* outHandle);
+  int freeBuffer(buffer_handle_t handle);
+
+  void set_drm_version(int drm_device, int version);
   int hwc_get_handle_width(buffer_handle_t hnd);
   int hwc_get_handle_height(buffer_handle_t hnd);
   int hwc_get_handle_format(buffer_handle_t hnd);
@@ -109,7 +112,7 @@ public:
   uint32_t hwc_get_handle_phy_addr(buffer_handle_t hnd);
   uint64_t hwc_get_handle_format_modifier(buffer_handle_t hnd);
   uint32_t hwc_get_handle_fourcc_format(buffer_handle_t hnd);
-  int hwc_get_gemhandle_from_fd(int drm_device_fd, uint64_t buffer_fd, uint64_t buffer_id, uint32_t *out_gem_handle);
+  int hwc_get_gemhandle_from_fd(uint64_t buffer_fd, uint64_t buffer_id, uint32_t *out_gem_handle);
   int hwc_free_gemhandle(uint64_t buffer_id);
 
 private:
@@ -117,7 +120,7 @@ private:
 	~DrmGralloc();
 	DrmGralloc(const DrmGralloc&);
 	DrmGralloc& operator=(const DrmGralloc&);
-
+  int drmDeviceFd_;
   int drmVersion_;
   std::map<uint64_t, std::shared_ptr<GemHandle>> mapGemHandles_;
 #if USE_GRALLOC_4

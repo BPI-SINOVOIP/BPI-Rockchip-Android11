@@ -39,3 +39,8 @@ int RKAiqToolSysCtl::EnumStaticMetas(rk_aiq_static_info_t* static_info, int cmdI
 {
     return RkAiqSocketClientINETReceive(cmdID, (void*)static_info, sizeof(rk_aiq_static_info_t));
 }
+
+int RKAiqToolSysCtl::EnqueueRKRawFile(char* filePath, int cmdID)
+{
+    return RkAiqSocketClientINETSend(cmdID, (void*)filePath, strlen(filePath));
+}

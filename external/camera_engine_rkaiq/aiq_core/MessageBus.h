@@ -47,6 +47,7 @@ enum XCamMessageType {
     XCAM_MESSAGE_ISPP_GAIN_WR_OK,
     XCAM_MESSAGE_AMD_PROC_RES_OK,
     XCAM_MESSAGE_AE_PRE_RES_OK,
+    XCAM_MESSAGE_PDAF_STATS_OK,
     XCAM_MESSAGE_ORB_STATS_OK,
 };
 
@@ -70,6 +71,7 @@ static const char* MessageType2Str[64]     = {
     [XCAM_MESSAGE_ISPP_GAIN_WR_OK]          = "ISPP_WR_GAIN",
     [XCAM_MESSAGE_AMD_PROC_RES_OK]          = "AMD_PROC_RES",
     [XCAM_MESSAGE_AE_PRE_RES_OK]            = "AE_PRE_RES",
+    [XCAM_MESSAGE_PDAF_STATS_OK]            = "PDAF_STATS",
  };
 
 struct XCamMessage {

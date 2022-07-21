@@ -121,6 +121,10 @@ typedef struct CalibDb_AeDelayFrmNumV2_s {
 } CalibDb_AeDelayFrmNumV2_t;
 
 typedef struct CalibDb_AeSpeedV2_s {
+    // M4_BOOL_DESC("SmoothEn", "1")
+    bool                    SmoothEn;
+    // M4_BOOL_DESC("DyDampEn", "1")
+    bool                    DyDampEn;
     // M4_NUMBER_DESC("DampOver", "f32", M4_RANGE(0,1.00), "0.15", M4_DIGIT(2),M4_HIDE(0))
     float                   DampOver;
 

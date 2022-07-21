@@ -311,7 +311,7 @@
 			vdd_logic: DCDC_REG1 {
 				regulator-always-on;
 				regulator-boot-on;
-				regulator-min-microvolt = <950000>;
+				regulator-min-microvolt = <850000>;
 				regulator-max-microvolt = <1350000>;
 				regulator-ramp-delay = <6001>;
 				regulator-initial-mode = <0x2>;
@@ -325,7 +325,7 @@
 			vdd_arm: DCDC_REG2 {
 				regulator-always-on;
 				regulator-boot-on;
-				regulator-min-microvolt = <950000>;
+				regulator-min-microvolt = <850000>;
 				regulator-max-microvolt = <1350000>;
 				regulator-ramp-delay = <6001>;
 				regulator-initial-mode = <0x2>;
@@ -557,6 +557,17 @@
 	i2c-scl-falling-time-ns = <50>;
 	i2c-scl-rising-time-ns = <300>;
 
+	dw9714: dw9714@c {
+		compatible = "dongwoon,dw9714";
+		status = "okay";
+		reg = <0x0c>;
+		rockchip,camera-module-index = <0>;
+		rockchip,vcm-start-current = <10>;
+		rockchip,vcm-rated-current = <85>;
+		rockchip,vcm-step-mode = <5>;
+		rockchip,camera-module-facing = "back";
+	};
+
 	ov5695: ov5695@36 {
 		compatible = "ovti,ov5695";
 		reg = <0x36>;
@@ -570,6 +581,7 @@
 		rockchip,camera-module-facing = "back";
 		rockchip,camera-module-name = "TongJu";
 		rockchip,camera-module-lens-name = "CHT842-MD";
+		lens-focus = <&dw9714>;
 		port {
 			ucam_out: endpoint {
 				remote-endpoint = <&mipi_in_ucam>;

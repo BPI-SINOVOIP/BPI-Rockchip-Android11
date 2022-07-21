@@ -23,7 +23,7 @@
 #include "simulator/isp20_hw_simulator.h"
 #endif
 #include "common/rk_aiq_comm.h"
-#include "isp20/rkisp2-config.h"
+#include "common/rkisp2-config.h"
 
 namespace RkCam {
 #define ISP2X_MIPI_RAW_NORMAL 0

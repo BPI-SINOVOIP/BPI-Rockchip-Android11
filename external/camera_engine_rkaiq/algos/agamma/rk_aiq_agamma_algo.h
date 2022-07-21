@@ -28,7 +28,7 @@
 
 RKAIQ_BEGIN_DECLARE
 
-XCamReturn AgammaInit(AgammaHandle_t** para, CamCalibDbV2Context_t* calib);
+XCamReturn AgammaInit(AgammaHandle_t** para, CamCalibDbV2Context_t* pCalib);
 XCamReturn AgammaRelease(AgammaHandle_t* para);
 XCamReturn AgammaPreProc(AgammaHandle_t* para);
 void AgammaProcessing(AgammaHandle_t* para);

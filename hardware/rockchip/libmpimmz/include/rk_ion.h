@@ -24,6 +24,13 @@ int ion_alloc(uint32_t len, bool is_cma, bool is_cacheable, int *fd);
  */
 int ion_get_phys(int fd, uint64_t *paddr);
 
+/*
+    查询系统是否支持ION
+    支持   返回true
+    不支持 返回false
+ */
+bool ion_check_support();
+
 #ifdef __cplusplus
 }
 #endif

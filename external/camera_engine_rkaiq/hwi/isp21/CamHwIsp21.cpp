@@ -16,7 +16,6 @@
  */
 
 #include "CamHwIsp21.h"
-//#include "isp20/Isp20PollThread.h"
 #ifdef ANDROID_OS
 #include <cutils/properties.h>
 #endif
@@ -52,9 +51,6 @@ CamHwIsp21::init(const char* sns_ent_name)
 
     XCamReturn ret = CamHwIsp20::init(sns_ent_name);
 
-    //SmartPtr<Isp20PollThread> isp20Pollthread =
-    //    mPollthread.dynamic_cast_ptr<Isp20PollThread>();
-    //isp20Pollthread->set_need_luma_rd_info(false);
     return ret;
 }
 
@@ -83,7 +79,7 @@ CamHwIsp21::dispatchResult(cam3aResultList& list)
         case RESULT_TYPE_CPSL_PARAM:
         case RESULT_TYPE_IRIS_PARAM:
         case RESULT_TYPE_FOCUS_PARAM:
-        case RESULT_TYPE_EXPOSURE:
+        case RESULT_TYPE_EXPOSURE_PARAM:
             CamHwIsp20::dispatchResult(result);
             break;
         default:
@@ -113,7 +109,7 @@ CamHwIsp21::dispatchResult(SmartPtr<cam3aResult> result)
     case RESULT_TYPE_CPSL_PARAM:
     case RESULT_TYPE_IRIS_PARAM:
     case RESULT_TYPE_FOCUS_PARAM:
-    case RESULT_TYPE_EXPOSURE:
+    case RESULT_TYPE_EXPOSURE_PARAM:
         return CamHwIsp20::dispatchResult(result);
     default:
         handleIsp3aReslut(result);
@@ -159,28 +155,28 @@ CamHwIsp21::gen_full_isp_params(const struct isp21_isp_params_cfg* update_params
 
             full_params->module_cfg_update |= 1LL << i;
             switch (i) {
-            case RK_ISP2X_RAWAE_BIG1_ID:
+            case RK_ISP2X_RAWAE0_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawae0, update_params->meas.rawae0);
                 break;
-            case RK_ISP2X_RAWAE_BIG2_ID:
+            case RK_ISP2X_RAWAE1_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawae1, update_params->meas.rawae1);
                 break;
-            case RK_ISP2X_RAWAE_BIG3_ID:
+            case RK_ISP2X_RAWAE2_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawae2, update_params->meas.rawae2);
                 break;
-            case RK_ISP2X_RAWAE_LITE_ID:
+            case RK_ISP2X_RAWAE3_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawae3, update_params->meas.rawae3);
                 break;
-            case RK_ISP2X_RAWHIST_BIG1_ID:
+            case RK_ISP2X_RAWHIST0_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawhist0, update_params->meas.rawhist0);
                 break;
-            case RK_ISP2X_RAWHIST_BIG2_ID:
+            case RK_ISP2X_RAWHIST1_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawhist1, update_params->meas.rawhist1);
                 break;
-            case RK_ISP2X_RAWHIST_BIG3_ID:
+            case RK_ISP2X_RAWHIST2_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawhist2, update_params->meas.rawhist2);
                 break;
-            case RK_ISP2X_RAWHIST_LITE_ID:
+            case RK_ISP2X_RAWHIST3_ID:
                 CHECK_UPDATE_PARAMS(full_params->meas.rawhist3, update_params->meas.rawhist3);
                 break;
             case RK_ISP2X_YUVAE_ID:
@@ -267,198 +263,15 @@ CamHwIsp21::gen_full_isp_params(const struct isp21_isp_params_cfg* update_params
             case RK_ISP2X_SDG_ID:
                 CHECK_UPDATE_PARAMS(full_params->others.sdg_cfg, update_params->others.sdg_cfg);
                 break;
+            case Rk_ISP2x_CSM_ID:
+                CHECK_UPDATE_PARAMS(full_params->others.csm_cfg, update_params->others.csm_cfg);
+                break;
             default:
                 break;
             }
         }
     }
     EXIT_CAMHW_FUNCTION();
-}
-
-/*
- * some module(HDR/TNR) parameters are related to the next frame exposure
- * and can only be easily obtained at the hwi layer,
- * so these parameters are calculated at hwi and the result is overwritten.
- */
-XCamReturn
-CamHwIsp21::overrideExpRatioToAiqResults(const sint32_t frameId,
-        int module_id,
-        cam3aResultList &results,
-        int hdr_mode)
-{
-    XCamReturn ret = XCAM_RETURN_NO_ERROR;
-    SmartPtr<RkAiqExpParamsProxy> curFrameExpParam;
-    SmartPtr<RkAiqExpParamsProxy> nextFrameExpParam;
-    SmartPtr<BaseSensorHw> mSensorSubdev = mSensorDev.dynamic_cast_ptr<BaseSensorHw>();
-
-    if (mSensorSubdev.ptr()) {
-        if (mSensorSubdev->getEffectiveExpParams(curFrameExpParam, frameId) < 0) {
-            LOGE_CAMHW_SUBM(ISP20HW_SUBM, "exp-sync: module_id: 0x%x, rx id: %d\n",
-                            module_id,
-                            frameId);
-            return ret;
-        }
-
-        if (mSensorSubdev->getEffectiveExpParams(nextFrameExpParam, frameId + 1) < 0) {
-            LOGE_CAMHW_SUBM(ISP20HW_SUBM, "exp-sync: module_id: 0x%x, rx id: %d\n",
-                            module_id,
-                            frameId + 1);
-            return ret;
-        }
-    }
-
-    LOGD_CAMHW_SUBM(ISP20HW_SUBM, "exp-sync: module_id: 0x%x, rx id: %d\n"
-                    "curFrame(%d): lexp: %f-%f, mexp: %f-%f, sexp: %f-%f\n"
-                    "nextFrame(%d): lexp: %f-%f, mexp: %f-%f, sexp: %f-%f\n",
-                    module_id,
-                    frameId,
-                    frameId,
-                    curFrameExpParam->data()->aecExpInfo.HdrExp[2].exp_real_params.analog_gain,
-                    curFrameExpParam->data()->aecExpInfo.HdrExp[2].exp_real_params.integration_time,
-                    curFrameExpParam->data()->aecExpInfo.HdrExp[1].exp_real_params.analog_gain,
-                    curFrameExpParam->data()->aecExpInfo.HdrExp[1].exp_real_params.integration_time,
-                    curFrameExpParam->data()->aecExpInfo.HdrExp[0].exp_real_params.analog_gain,
-                    curFrameExpParam->data()->aecExpInfo.HdrExp[0].exp_real_params.integration_time,
-                    frameId + 1,
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[2].exp_real_params.analog_gain,
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[2].exp_real_params.integration_time,
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[1].exp_real_params.analog_gain,
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[1].exp_real_params.integration_time,
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[0].exp_real_params.analog_gain,
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[0].exp_real_params.integration_time);
-
-    //calc expo
-    float nextLExpo = 0;
-    float nextMExpo = 0;
-    float nextSExpo = 0;
-    float nextRatioLS = 1.0;
-    if(hdr_mode == RK_AIQ_WORKING_MODE_NORMAL) {
-        nextLExpo = nextFrameExpParam->data()->aecExpInfo.LinearExp.exp_real_params.analog_gain * \
-                    nextFrameExpParam->data()->aecExpInfo.LinearExp.exp_real_params.integration_time;
-        nextMExpo = nextLExpo;
-        nextSExpo = nextLExpo;
-    }
-    else if(hdr_mode >= RK_AIQ_WORKING_MODE_ISP_HDR2) {
-        nextLExpo = nextFrameExpParam->data()->aecExpInfo.HdrExp[1].exp_real_params.analog_gain * \
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[1].exp_real_params.integration_time;
-        nextMExpo = nextLExpo;
-        nextSExpo = nextFrameExpParam->data()->aecExpInfo.HdrExp[0].exp_real_params.analog_gain * \
-                    nextFrameExpParam->data()->aecExpInfo.HdrExp[0].exp_real_params.integration_time;
-    }
-    else {
-        LOGE_CAMHW_SUBM(ISP20HW_SUBM, "get wrong hdr mode\n");
-        return ret;
-    }
-
-    nextRatioLS = nextLExpo / nextSExpo;
-    nextRatioLS = nextRatioLS >= 1 ? nextRatioLS : 1;
-
-    switch (module_id) {
-    case Rk_ISP21_DRC_ID:
-    {
-        SmartPtr<cam3aResult> drc_res = get_3a_module_result(results, RESULT_TYPE_DRC_PARAM);
-        SmartPtr<RkAiqIspDrcParamsProxyV21> drcParamsProxy;
-        if (drc_res.ptr()) {
-            drcParamsProxy = drc_res.dynamic_cast_ptr<RkAiqIspDrcParamsProxyV21>();
-        } else {
-            LOGE_CAMHW_SUBM(ISP20HW_SUBM, "get drc params from 3a result failed!\n");
-            return ret;
-        }
-        rk_aiq_isp_drc_v21_t& drc = drcParamsProxy->data()->result;
-
-        if(!drc.bTmoEn)
-            break;
-
-        if (drc.LongFrameMode)
-            nextRatioLS = 1.0;
-
-        //get sw_drc_compres_scl
-        float MFHDR_LOG_Q_BITS = 11;
-        float adrc_gain = drc.DrcProcRes.sw_drc_adrc_gain;
-        float log_ratio2 = log(nextRatioLS * adrc_gain) / log(2.0f) + 12;
-        float offsetbits_int = (float)(drc.DrcProcRes.sw_drc_offset_pow2);
-        float offsetbits = offsetbits_int * pow(2, MFHDR_LOG_Q_BITS);
-        float hdrbits = log_ratio2 * pow(2, MFHDR_LOG_Q_BITS);
-        float hdrvalidbits = hdrbits - offsetbits;
-        float compres_scl = (12 * pow(2, MFHDR_LOG_Q_BITS * 2)) / hdrvalidbits;
-        drc.DrcProcRes.sw_drc_compres_scl = (int)(compres_scl);
-
-        //get sw_drc_min_ogain
-        if(drc.DrcProcRes.sw_drc_min_ogain == 1)
-            drc.DrcProcRes.sw_drc_min_ogain = 1 << 15;
-        else {
-            float sw_drc_min_ogain = 1 / (nextRatioLS * adrc_gain);
-            drc.DrcProcRes.sw_drc_min_ogain = (int)(sw_drc_min_ogain * pow(2, 15) + 0.5);
-        }
-
-        //get sw_drc_compres_y
-        if(drc.CompressMode == COMPRESS_AUTO) {
-            float curveparam, curveparam2, curveparam3, tmp;
-            float luma2[17] = { 0, 1024, 2048, 3072, 4096, 5120, 6144, 7168, 8192, 10240, 12288, 14336, 16384, 18432, 20480, 22528, 24576 };
-            float curveTable[17];
-            float ISP_RAW_BIT = 12;
-            float dstbits = ISP_RAW_BIT * pow(2, MFHDR_LOG_Q_BITS);
-            float validbits = dstbits - offsetbits;
-            for(int i = 0; i < ISP21_DRC_Y_NUM; ++i)
-            {
-                curveparam = (float)(validbits - 0) / (hdrvalidbits - validbits + pow(2, -6));
-                curveparam2 = validbits * (1 + curveparam);
-                curveparam3 = hdrvalidbits * curveparam;
-                tmp = luma2[i] * hdrvalidbits / 24576;
-                curveTable[i] = (tmp * curveparam2 / (tmp + curveparam3));
-                drc.DrcProcRes.sw_drc_compres_y[i] = (int)(curveTable[i]) ;
-            }
-        }
-
-        LOGD_CAMHW_SUBM(ISP20HW_SUBM, "nextRatioLS:%f sw_drc_compres_scl:%d sw_drc_min_ogain:%d\n",
-                        nextRatioLS, drc.DrcProcRes.sw_drc_compres_scl, drc.DrcProcRes.sw_drc_min_ogain);
-        LOGD_CAMHW_SUBM(ISP20HW_SUBM, "CompressMode:%d\n", drc.CompressMode);
-        for(int i = 0; i < ISP21_DRC_Y_NUM; ++i)
-            LOGD_CAMHW_SUBM(ISP20HW_SUBM, "sw_drc_compres_y[%d]:%d\n", i, drc.DrcProcRes.sw_drc_compres_y[i]);
-
-        break;
-    }
-    case RK_ISP2X_HDRMGE_ID:
-    {
-        SmartPtr<cam3aResult> merge_res = get_3a_module_result(results, RESULT_TYPE_MERGE_PARAM);
-        SmartPtr<RkAiqIspMergeParamsProxy> mergeParamsProxy;
-
-        if (merge_res.ptr()) {
-            mergeParamsProxy = merge_res.dynamic_cast_ptr<RkAiqIspMergeParamsProxy>();
-        } else {
-            LOGE_CAMHW_SUBM(ISP20HW_SUBM, "get drc params from 3a result failed!\n");
-            return ret;
-        }
-        RkAiqAmergeProcResult_t& merge = mergeParamsProxy->data()->result;
-
-        if(merge.Res.sw_hdrmge_mode == 0)
-            break;
-
-        //get sw_hdrmge_gain0
-        merge.Res.sw_hdrmge_gain0 = (int)(64 * nextRatioLS);
-        if(nextRatioLS == 1)
-            merge.Res.sw_hdrmge_gain0_inv = (int)(4096 * (1 / nextRatioLS) - 1);
-        else
-            merge.Res.sw_hdrmge_gain0_inv = (int)(4096 * (1 / nextRatioLS));
-
-        //get sw_hdrmge_gain1
-        merge.Res.sw_hdrmge_gain1 = 0x40;
-        merge.Res.sw_hdrmge_gain1_inv = 0xfff;
-
-        //get sw_hdrmge_gain2
-        merge.Res.sw_hdrmge_gain2 = 0x40;
-
-        LOGD_CAMHW_SUBM(ISP20HW_SUBM, "sw_hdrmge_gain0:%d sw_hdrmge_gain0_inv:%d\n",
-                        merge.Res.sw_hdrmge_gain0, merge.Res.sw_hdrmge_gain0_inv);
-
-        break;
-    }
-    default:
-        LOGW_CAMHW_SUBM(ISP20HW_SUBM, "unkown module id: 0x%x!\n", module_id);
-        break;
-    }
-
-    return ret;
 }
 
 XCamReturn
@@ -513,16 +326,6 @@ CamHwIsp21::setIspConfig()
         _full_active_isp21_params.module_cfg_update = 0;
     }
 
-    ret = overrideExpRatioToAiqResults(frameId, Rk_ISP21_DRC_ID, ready_results, _hdr_mode);
-    if (ret < 0) {
-        LOGE_CAMHW_SUBM(ISP20HW_SUBM, "DRC convertExpRatioToAiqResults error!\n");
-    }
-
-    ret = overrideExpRatioToAiqResults(frameId, RK_ISP2X_HDRMGE_ID, ready_results, _hdr_mode);
-    if (ret < 0) {
-        LOGE_CAMHW_SUBM(ISP20HW_SUBM, "Merge convertExpRatioToAiqResults error!\n");
-    }
-
     if (frameId >= 0) {
         SmartPtr<cam3aResult> awb_res = get_3a_module_result(ready_results, RESULT_TYPE_AWB_PARAM);
         SmartPtr<RkAiqIspAwbParamsProxyV21> awbParams;
@@ -542,6 +345,17 @@ CamHwIsp21::setIspConfig()
                                 frameId, (_effecting_ispparam_map.rbegin())->first);
             } else {
                 LOGW_CAMHW_SUBM(ISP20HW_SUBM, "get awb params from 3a result failed for frame %d !\n", frameId);
+            }
+        }
+    }
+
+    if (frameId >= 0) {
+        SmartPtr<cam3aResult> af_res = get_3a_module_result(ready_results, RESULT_TYPE_AF_PARAM);
+        SmartPtr<RkAiqIspAfParamsProxy> afParams;
+        if (af_res.ptr()) {
+            afParams = af_res.dynamic_cast_ptr<RkAiqIspAfParamsProxy>();
+            if (mSpStreamUnit.ptr()) {
+                mSpStreamUnit->update_af_meas_params(&afParams->data()->result);
             }
         }
     }
@@ -631,7 +445,8 @@ CamHwIsp21::setIspConfig()
         }
 
         ispModuleEns = _full_active_isp21_params.module_ens;
-        LOGD_CAMHW_SUBM(ISP20HW_SUBM, "ispparam ens 0x%llx, en_up 0x%llx, cfg_up 0x%llx",
+        LOGD_CAMHW_SUBM(ISP20HW_SUBM, "camId: %d ispparam ens 0x%llx, en_up 0x%llx, cfg_up 0x%llx",
+                        mCamPhyId,
                         _full_active_isp21_params.module_ens,
                         isp_params->module_en_update,
                         isp_params->module_cfg_update);

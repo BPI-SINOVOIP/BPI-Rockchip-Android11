@@ -5,6 +5,7 @@
 #endif
 #define LOG_TAG "aiqtool"
 
+extern uint32_t g_mmapNumber;
 int xioctl(int fh, int request, void* arg)
 {
     int ret;
@@ -38,7 +39,7 @@ void init_mmap(struct capture_info* cap_info)
 
     CLEAR(req);
 
-    req.count = 10;
+    req.count = g_mmapNumber;
     req.type = cap_info->capture_buf_type;
     req.memory = V4L2_MEMORY_MMAP;
 
@@ -101,6 +102,10 @@ void init_mmap(struct capture_info* cap_info)
         }
 
         memset(cap_info->buffers[cap_info->n_buffers].start, 0, cap_info->buffers[cap_info->n_buffers].length);
+    }
+
+    if (g_mmapNumber != 4) {
+        LOG_INFO("mmap init finished.memory map: allocated/request: %u/%u \n", req.count, g_mmapNumber);
     }
 }
 

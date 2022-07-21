@@ -127,7 +127,7 @@ using android::status_t;
 
 status_t importBuffer(buffer_handle_t rawHandle, buffer_handle_t* outHandle);
 
-void freeBuffer(buffer_handle_t handle);
+status_t freeBuffer(buffer_handle_t handle);
 
 status_t lock(buffer_handle_t bufferHandle,
               uint64_t usage,

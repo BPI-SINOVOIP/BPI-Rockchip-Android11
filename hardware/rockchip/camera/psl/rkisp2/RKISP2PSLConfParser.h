@@ -38,7 +38,7 @@ public:
     static IPSLConfParser *getInstance(std::string &xmlConfigName, const std::vector<SensorDriverDescriptor>& sensorNames);
     static void deleteInstance();
     static std::string getSensorMediaDevice(int cameraId);
-    static std::string getImguMediaDevice(int cameraId);
+    static std::string getImguMediaDevice(int cameraId,std::shared_ptr<MediaController> sensorMediaCtl);
 
     virtual CameraCapInfo *getCameraCapInfo(int cameraId);
     virtual camera_metadata_t *constructDefaultMetadata(int cameraId, int reqTemplate);
@@ -67,6 +67,8 @@ public:
     static std::vector<std::string> getSensorMediaDevicePath();
     static std::vector<std::string> getMediaDeviceByName(std::string deviceName);
     static std::vector<std::string> getMediaDeviceByModuleName(std::string moduleName);
+    static std::vector<std::string> getMediaDeviceByNames(const std::vector<std::string> &driverNames);
+    static std::vector<std::string> getMediaDeviceByModuleNames(const std::vector<std::string> &moduleName);
 
 // disable copy constructor and assignment operator
 private:

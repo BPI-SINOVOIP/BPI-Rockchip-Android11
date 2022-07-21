@@ -1,5 +1,5 @@
 /*
- * rk_aiq_algo_ahdr_itf.h
+ * rk_aiq_algo_amerge_itf.h
  *
  *  Copyright (c) 2019 Rockchip Corporation
  *

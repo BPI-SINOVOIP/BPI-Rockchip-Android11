@@ -22,5 +22,6 @@ TEE_Result handle_storage(void);
 TEE_Result handle_transfer_data(uint32_t param_types, TEE_Param params[4]);
 TEE_Result handle_storage_speed(uint32_t param_types, TEE_Param params[4]);
 TEE_Result handle_trng_read(void);
+TEE_Result handle_socket(void);
 
 #endif /*RKTEST_HANDLE_H*/

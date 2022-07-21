@@ -117,7 +117,7 @@ struct ebc_buf_info_t {
 	int win_y2;
 	int width_mm;
 	int height_mm;
-	int needpic; //16 or 32
+	int needpic; // 1: buf can not be drop by ebc, 0: buf can drop by ebc
 	char tid_name[16];
 };
 
@@ -138,6 +138,11 @@ struct win_coordinate{
 #define EBC_SET_FULL_MODE_NUM	(0x7003)
 #define EBC_ENABLE_OVERLAY		(0x7004)
 #define EBC_DISABLE_OVERLAY		(0x7005)
+#define EBC_GET_OSD_BUFFER	(0x7006)
+#define EBC_SEND_OSD_BUFFER	(0x7007)
+#define EBC_NEW_BUF_PREPARE	(0x7008)
+#define EBC_SET_DIFF_PERCENT	(0x7009)
+#define EBC_WAIT_NEW_BUF_TIME (0x700a)
 
 class EinkCompositorWorker : public Worker {
  public:
@@ -177,6 +182,8 @@ class EinkCompositorWorker : public Worker {
   int Y4Commit(int epd_mode);
   int A2Commit(int epd_mode);
   int update_fullmode_num();
+  int update_diff_percent_num();
+  int update_waiting_time();
   int DumpEinkSurface(int *buffer);
   int PostEink(int *buffer, Rect rect, int mode);
   int PostEinkY8(int *buffer, Rect rect, int mode);
@@ -219,6 +226,8 @@ class EinkCompositorWorker : public Worker {
   int *gray256_new_buffer = NULL;
   char* rga_output_addr = NULL;
   bool rgba_to_y4_by_rga = false;
+  buffer_handle_t last_fb_handle = NULL;
+  int last_fb_handle_mode = EPD_PART_GC16;
 };
 }
 

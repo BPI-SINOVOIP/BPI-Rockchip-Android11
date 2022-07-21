@@ -26,21 +26,17 @@ endif
 
 libthreads_dep = dependency('threads')
 
-gen_version = vcs_tag(
-	command : ['./genversion.sh', 'meson'],
-	replace_string : ['$GIT_BUILD_VERSION'],
-	input : 'version.h.template', output : 'version.h',
- )
 add_project_arguments('-DLINUX=1', language : 'cpp')
 
 librga_srcs = [
-	gen_version,
     'core/GrallocOps.cpp',
     'core/NormalRgaApi.cpp',
 	'core/NormalRga.cpp',
 	'core/RgaUtils.cpp',
 	'core/RockchipRga.cpp',
 	'core/RgaApi.cpp',
+	'core/rga_sync.cpp',
+    'im2d_api/im2d_common.cpp',
 	'im2d_api/im2d.cpp',
 ]
 
@@ -66,6 +62,8 @@ install_headers(
 	'include/RgaApi.h',
 	'im2d_api/im2d.h',
 	'im2d_api/im2d.hpp',
+    'im2d_api/im2d_type.h',
+    'im2d_api/im2d_version.h',
     subdir : 'rga',
 )
 

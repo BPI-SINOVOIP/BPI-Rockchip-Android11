@@ -34,7 +34,7 @@ struct spl_image_info {
 	uintptr_t entry_point_bl32;
 	uintptr_t entry_point_bl33;
 #endif
-#if CONFIG_IS_ENABLED(OPTEE)
+#if CONFIG_IS_ENABLED(OPTEE) || CONFIG_IS_ENABLED(KERNEL_BOOT)
 	uintptr_t entry_point_os;	/* point to uboot or kernel */
 #endif
 	void *fdt_addr;
@@ -293,7 +293,8 @@ void spl_invoke_atf(struct spl_image_info *spl_image);
 /**
  * bl31_entry - Fill bl31_params structure, and jump to bl31
  */
-void bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
+void bl31_entry(struct spl_image_info *spl_image,
+		uintptr_t bl31_entry, uintptr_t bl32_entry,
 		uintptr_t bl33_entry, uintptr_t fdt_addr);
 
 /**

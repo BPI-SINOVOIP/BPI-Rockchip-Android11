@@ -1,10 +1,10 @@
 #ifndef __RKAIQ_TYPES_ALGO_AIE_PRVT_H__
 #define __RKAIQ_TYPES_ALGO_AIE_PRVT_H__
 
-#include "rk_aiq_algo_types_int.h"
 #include "base/xcam_common.h"
 #include "RkAiqCalibDbTypes.h"
 #include "RkAiqCalibDbTypesV2.h"
+#include "rk_aiq_types_aie_algo_int.h"
 #include "xcam_log.h"
 
 typedef struct _RkAiqAlgoContext {

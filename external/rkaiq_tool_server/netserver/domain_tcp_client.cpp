@@ -96,7 +96,7 @@ bool DomainTCPClient::Setup(string domainPath)
     int ret = setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char*)&timeout, sizeof(timeout));
 
     if (connect(sock, (struct sockaddr*)&server, sizeof(server)) < 0) {
-        LOG_ERROR("connect domain server failed. Error");
+        LOG_ERROR("connect domain server failed. Error\n");
         close(sock);
         sock = -1;
         return false;

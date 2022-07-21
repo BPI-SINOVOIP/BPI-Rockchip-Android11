@@ -137,9 +137,6 @@
 
 #define VOP2_CLUSTER_YUV444_10 0x12
 
-#define VOP2_COLOR_KEY_NONE		(0 << 31)
-#define VOP2_COLOR_KEY_MASK		(1 << 31)
-
 enum vop2_data_format {
 	VOP2_FMT_ARGB8888 = 0,
 	VOP2_FMT_RGB888,
@@ -557,6 +554,29 @@ struct vop2 {
 
 	/* no move win from one vp to another */
 	bool disable_win_move;
+	/*
+	 * Usually we increase old fb refcount at
+	 * atomic_flush and decrease it when next
+	 * vsync come, this can make user the fb
+	 * not been releasced before vop finish use
+	 * it.
+	 *
+	 * But vop decrease fb refcount by a thread
+	 * vop2_unref_fb_work, which may run a little
+	 * slow sometimes, so when userspace do a rmfb,
+	 *
+	 * see drm_mode_rmfb,
+	 * it will find the fb refcount is still > 1,
+	 * than goto a fallback to init drm_mode_rmfb_work_fn,
+	 * this will cost a long time(>10 ms maybe) and block
+	 * rmfb work. Some userspace don't have with this(such as vo).
+	 *
+	 * Don't reference framebuffer refcount by
+	 * drm_framebuffer_get as some userspace want
+	 * rmfb as soon as possible(nvr vo). And the userspace
+	 * should make sure release fb after it receive the vsync.
+	 */
+	bool skip_ref_fb;
 
 	bool loader_protect;
 
@@ -1228,6 +1248,7 @@ static enum vop2_afbc_format vop2_convert_afbc_format(uint32_t format)
 	case DRM_FORMAT_NV12_10:
 		return VOP2_AFBC_FMT_YUV420_10BIT;
 	case DRM_FORMAT_NV16:
+	case DRM_FORMAT_YUYV:
 		return VOP2_AFBC_FMT_YUV422;
 	case DRM_FORMAT_NV16_10:
 		return VOP2_AFBC_FMT_YUV422_10BIT;
@@ -1295,6 +1316,7 @@ static bool vop2_afbc_uv_swap(uint32_t format)
 	switch (format) {
 	case DRM_FORMAT_NV12:
 	case DRM_FORMAT_NV16:
+	case DRM_FORMAT_YUYV:
 	case DRM_FORMAT_NV12_10:
 	case DRM_FORMAT_NV16_10:
 		return true;
@@ -2346,6 +2368,23 @@ static void vop2_crtc_load_lut(struct drm_crtc *crtc)
 	vp->gamma_lut_active = true;
 
 	spin_unlock(&vop2->reg_lock);
+/*
+ * maybe appear the following case:
+ * -> set gamma
+ * -> config done
+ * -> atomic commit
+ *  --> update win format
+ *  --> update win address
+ *  ---> here maybe meet vop hardware frame start, and triggle some config take affect.
+ *  ---> as only some config take affect, this maybe lead to iommu pagefault.
+ *  --> update win size
+ *  --> update win other parameters
+ * -> config done
+ *
+ * so we add readx_poll_timeout() to make sure the first config done take
+ * effect and then to do next frame config.
+ */
+	readx_poll_timeout(CTRL_GET, dsp_lut_en, dle, dle, 5, 33333);
 #undef CTRL_GET
 }
 
@@ -2929,7 +2968,7 @@ static void vop2_plane_setup_color_key(struct drm_plane *plane)
 	uint32_t g = 0;
 	uint32_t b = 0;
 
-	if (!(vpstate->color_key & VOP2_COLOR_KEY_MASK) || fb->format->is_yuv) {
+	if (!(vpstate->color_key & VOP_COLOR_KEY_MASK) || fb->format->is_yuv) {
 		VOP_WIN_SET(vop2, win, color_key_en, 0);
 		return;
 	}
@@ -4455,7 +4494,12 @@ static void vop2_crtc_atomic_enable(struct drm_crtc *crtc, struct drm_crtc_state
 
 	VOP_MODULE_SET(vop2, vp, vtotal_pw, vtotal << 16 | vsync_len);
 
-	VOP_MODULE_SET(vop2, vp, core_dclk_div, !!(adjusted_mode->flags & DRM_MODE_FLAG_DBLCLK));
+	if (adjusted_mode->flags & DRM_MODE_FLAG_DBLCLK ||
+	    vcstate->output_if & VOP_OUTPUT_IF_BT656)
+		VOP_MODULE_SET(vop2, vp, core_dclk_div, 1);
+	else
+		VOP_MODULE_SET(vop2, vp, core_dclk_div, 0);
+
 	if (vcstate->output_mode == ROCKCHIP_OUT_MODE_YUV420) {
 		VOP_MODULE_SET(vop2, vp, dclk_div2, 1);
 		VOP_MODULE_SET(vop2, vp, dclk_div2_phase_lock, 1);
@@ -5374,8 +5418,8 @@ static void vop2_crtc_atomic_flush(struct drm_crtc *crtc, struct drm_crtc_state 
 
 		if (old_pstate->fb == plane->state->fb)
 			continue;
-
-		drm_framebuffer_get(old_pstate->fb);
+		if (!vop2->skip_ref_fb)
+			drm_framebuffer_get(old_pstate->fb);
 		WARN_ON(drm_crtc_vblank_get(crtc) != 0);
 		drm_flip_work_queue(&vp->fb_unref_work, old_pstate->fb);
 		set_bit(VOP_PENDING_FB_UNREF, &vp->pending);
@@ -5633,7 +5677,8 @@ static void vop2_fb_unref_worker(struct drm_flip_work *work, void *val)
 	struct drm_framebuffer *fb = val;
 
 	drm_crtc_vblank_put(&vp->crtc);
-	drm_framebuffer_put(fb);
+	if (!vp->vop2->skip_ref_fb)
+		drm_framebuffer_put(fb);
 }
 
 static void vop2_handle_vblank(struct vop2 *vop2, struct drm_crtc *crtc)
@@ -6533,6 +6578,7 @@ static int vop2_bind(struct device *dev, struct device *master, void *data)
 	vop2->support_multi_area = of_property_read_bool(dev->of_node, "support-multi-area");
 	vop2->disable_afbc_win = of_property_read_bool(dev->of_node, "disable-afbc-win");
 	vop2->disable_win_move = of_property_read_bool(dev->of_node, "disable-win-move");
+	vop2->skip_ref_fb = of_property_read_bool(dev->of_node, "skip-ref-fb");
 
 	ret = vop2_win_init(vop2);
 	if (ret)

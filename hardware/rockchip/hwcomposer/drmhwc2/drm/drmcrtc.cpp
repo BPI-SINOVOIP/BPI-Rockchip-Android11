@@ -340,4 +340,11 @@ bool DrmCrtc::get_hdr() const {
 bool DrmCrtc::get_next_hdr() const {
     return b_can_next_hdr_;
 }
+
+const DrmMode &DrmCrtc::kernel_mode() const {
+  mode_.dump();
+  return mode_;
+}
+
+
 }  // namespace android

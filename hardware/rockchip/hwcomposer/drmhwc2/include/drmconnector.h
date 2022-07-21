@@ -29,6 +29,9 @@
 
 namespace android {
 
+#define DRM_CONNECTOR_SPILT_MODE_MASK 0xf0
+#define DRM_CONNECTOR_SPILT_RATIO 2
+
 class DrmDevice;
 
 class DrmConnector {
@@ -109,15 +112,30 @@ class DrmConnector {
   bool is_hdmi_support_hdr() const;
   int switch_hdmi_hdr_mode(android_dataspace_t colorspace);
 
+  int GetSpiltModeId() const;
+  bool isHorizontalSpilt() const;
+  int setHorizontalSpilt();
+
+  bool isCropSpilt() const;
+  int setCropSpilt(int32_t fbWidth,
+                   int32_t fbHeight,
+                   int32_t srcX,
+                   int32_t srcY,
+                   int32_t srcW,
+                   int32_t srcH);
+  int getCropSpiltFb(int32_t *fbWidth, int32_t *fbHeight);
+  int getCropInfo(int32_t *srcX, int32_t *srcY, int32_t *srcW, int32_t *srcH);
+
+
   const DrmProperty &brightness_id_property() const;
   const DrmProperty &contrast_id_property() const;
   const DrmProperty &saturation_id_property() const;
   const DrmProperty &hue_id_property() const;
   const DrmProperty &hdr_metadata_property() const;
   const DrmProperty &hdr_panel_property() const;
-  const DrmProperty &hdmi_output_colorimetry_property() const;
-  const DrmProperty &hdmi_output_format_property() const;
-  const DrmProperty &hdmi_output_depth_property() const;
+  const DrmProperty &colorspace_property() const;
+  const DrmProperty &color_format_property() const;
+  const DrmProperty &color_depth_property() const;
 
   const std::vector<DrmHdr> &get_hdr_support_list() const { return drmHdr_; }
   struct hdr_static_metadata* get_hdr_metadata_ptr(){ return &hdr_metadata_; };
@@ -159,10 +177,15 @@ class DrmConnector {
   DrmProperty hue_id_property_;
   DrmProperty hdr_metadata_property_;
   DrmProperty hdr_panel_property_;
-  DrmProperty hdmi_output_colorimetry_;
-  DrmProperty hdmi_output_format_;
-  DrmProperty hdmi_output_depth_;
+  DrmProperty colorspace_property_;
+
+  DrmProperty color_format_property_;
+  DrmProperty color_depth_property_;
+  DrmProperty color_format_caps_property_;
+  DrmProperty color_depth_caps_property_;
+
   DrmProperty connector_id_property_;
+  DrmProperty spilt_mode_property_;
   std::vector<DrmEncoder *> possible_encoders_;
   drmModeConnectorPtr connector_;
 
@@ -175,7 +198,7 @@ class DrmConnector {
   bool bSupportSt2084_;
   bool bSupportHLG_;
   struct hdr_static_metadata hdr_metadata_;
-  int colorimetry_;
+  DrmColorspaceType colorspace_ = DrmColorspaceType::DEFAULT;
   struct hdr_output_metadata last_hdr_metadata_;
   // Baseparameter Support
   bool baseparameter_ready_;
@@ -190,6 +213,18 @@ class DrmConnector {
   // output format
   output_format    uColorFormat_ = output_rgb;
   output_depth uColorDepth_ = depth_24bit;
+  // Spilt mode
+  bool bSpiltMode_=false;
+  // Horizontal mode
+  bool bHorizontalSpilt_=false;
+  // Crop mode
+  bool bCropSpilt_=false;
+  int32_t FbWidth_=0;
+  int32_t FbHeight_=0;
+  int32_t SrcX_=0;
+  int32_t SrcY_=0;
+  int32_t SrcW_=0;
+  int32_t SrcH_=0;
 };
 }  // namespace android
 

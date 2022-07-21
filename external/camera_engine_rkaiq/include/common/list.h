@@ -17,8 +17,10 @@
  * using the generic single-entry routines.
  */
 
-#include <stdlib.h>
 #include <stddef.h>
+#include <stdlib.h>
+
+#include "rk_aiq_comm.h"
 
 #ifndef offsetof
 #define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
@@ -242,18 +244,17 @@ static inline void list_splice(struct list_head *list, struct list_head *head)
  * param:   p_item  The list item to be initialized.
  */
 static inline void list_prepare_item(void* p_item) {
-	//ASSERT(p_item != NULL);
-	((struct list_head*)p_item)->next = NULL;
-	((struct list_head*)p_item)->prev = NULL;
+    // ASSERT(p_item != NULL);
+    ((struct list_head*)p_item)->next = NULL;
+    ((struct list_head*)p_item)->prev = NULL;
 }
 /**
  * print_list -print list.
  * param:   head  The list item to be printed.
  */
-static int  get_list_num(const struct list_head* head)
-{
-	struct list_head* p;
-	p = head->next;
+AIQ_MAYBE_UNUSED static int get_list_num(const struct list_head* head) {
+    struct list_head* p;
+    p       = head->next;
     int num =0;
 	while (p != head)
 	{
@@ -263,29 +264,26 @@ static int  get_list_num(const struct list_head* head)
     return(num);
 }
 
-
 /**
  * print_list -print list.
  * param:   head  The list item to be printed.
  */
-static void print_list(struct list_head* head)
-{
-	struct list_head* p;
-	p = head->next;
-	while (p != head)
-	{
-		printf("%p ", p);
-		p = p->next;
-	}
-	printf("\n");
+AIQ_MAYBE_UNUSED static void print_list(struct list_head* head) {
+    struct list_head* p;
+    p = head->next;
+    while (p != head) {
+        printf("%p ", p);
+        p = p->next;
+    }
+    printf("\n");
 }
 
 /**
  * list_prepare_item -clear list ,the head of list is reserved.
  * param:   l  The list item to be cleared.
  */
-static void clear_list(struct list_head* l) {
-	struct list_head* p;
+AIQ_MAYBE_UNUSED static void clear_list(struct list_head* l) {
+    struct list_head* p;
     if(l==NULL){
         return;
     }
@@ -297,7 +295,6 @@ static void clear_list(struct list_head* l) {
 	}
 	INIT_LIST_HEAD(l);
 }
-
 
 /**
  * list_splice_init - join two lists and reinitialise the emptied list.

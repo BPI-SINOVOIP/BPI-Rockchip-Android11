@@ -42,10 +42,10 @@ RKISP2MediaCtlHelper::RKISP2MediaCtlHelper(std::shared_ptr<MediaController> sens
         mConfigedPipeType(RKISP2IStreamConfigProvider::MEDIA_TYPE_MAX_COUNT)
 {
     if (isIMGU){
-	if(!PlatformData::supportDualVideo()) {
+        if(!PlatformData::supportDualVideo()) {
             mMediaCtl->resetLinks();
             imgMediaCtl->resetLinks();
-	}
+        }
     }
 }
 
@@ -105,16 +105,16 @@ status_t RKISP2MediaCtlHelper::configure(RKISP2IStreamConfigProvider &graphConfi
 
     mConfigedMediaCtlConfigs[type] = *mMediaCtlConfig;
 
-    status = mMediaCtl->getMediaDevInfo(deviceInfo);
-    if (status != NO_ERROR) {
-        LOGE("Error getting device info");
-        return status;
-    }
-    status = mImgMediaCtl->getMediaDevInfo(deviceInfo);
-    if (status != NO_ERROR) {
-        LOGE("Error getting device info");
-        return status;
-    }
+//    status = mMediaCtl->getMediaDevInfo(deviceInfo);
+//    if (status != NO_ERROR) {
+//        LOGE("Error getting device info");
+//        return status;
+//    }
+//    status = mImgMediaCtl->getMediaDevInfo(deviceInfo);
+//    if (status != NO_ERROR) {
+//        LOGE("Error getting device info");
+//        return status;
+//    }
 
     // setting all the Link necessary for the media controller.
     for (unsigned int i = 0; i < mMediaCtlConfig->mLinkParams.size(); i++) {
@@ -496,7 +496,7 @@ status_t RKISP2MediaCtlHelper::closeVideoNodes()
 
 status_t RKISP2MediaCtlHelper::resetLinks(const MediaCtlConfig *config)
 {
-    LOGD("@%s", __FUNCTION__);
+    LOGD("@%s start!", __FUNCTION__);
     status_t status = NO_ERROR;
 
     if (config == nullptr) {

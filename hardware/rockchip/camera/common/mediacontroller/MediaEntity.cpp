@@ -132,6 +132,8 @@ void MediaEntity::updateLinks(const struct media_link_desc *links)
     LOGI("@%s", __FUNCTION__);
 
     mLinks.clear();
+    LOGI("entity name: %s, id: %d, pads: %d, links: %d",
+          mInfo.name, mInfo.id, mInfo.pads, mInfo.links);
     for (int i = 0; i < mInfo.links; i++) {
         LOGI("link %d: pad %d --> sink entity %d:%d (%s%s%s)", i, links[i].source.index,
             links[i].sink.entity, links[i].sink.index, (links[i].flags & MEDIA_LNK_FL_ENABLED)?"enabled":"disabled",

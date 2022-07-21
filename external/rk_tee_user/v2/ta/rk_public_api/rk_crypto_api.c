@@ -277,7 +277,7 @@ TEE_Result rk_cipher_crypto(uint8_t *in, uint8_t *out, uint32_t len,
 		 * Others except CTR, are only for data which is multiple of AES_BLOCK_SIZE */
 		if (((algo == TEE_ALG_AES_CTS) && (len % AES_BLOCK_SIZE == 0)) ||
 		    ((algo != TEE_ALG_AES_CTS) &&
-		    (algo != TEE_ALG_AES_CTR) && (len % AES_BLOCK_SIZE != 0)) )
+		     (algo != TEE_ALG_AES_CTR) && (len % AES_BLOCK_SIZE != 0)))
 			return TEE_ERROR_BAD_PARAMETERS;
 		obj_type = TEE_TYPE_AES;
 		iv_len = AES_BLOCK_SIZE;
@@ -333,7 +333,7 @@ TEE_Result rk_cipher_crypto(uint8_t *in, uint8_t *out, uint32_t len,
 		iv_len = 0;
 
 	res = TEE_AllocateOperation(&crypto_op, algo, mode, op_key_size);
-	if(res != TEE_SUCCESS) {
+	if (res != TEE_SUCCESS) {
 		EMSG("TEE_AllocateOperation failed with code 0x%x", res);
 		goto exit;
 	}
@@ -341,12 +341,12 @@ TEE_Result rk_cipher_crypto(uint8_t *in, uint8_t *out, uint32_t len,
 	/* Set object of key 1 */
 	TEE_InitRefAttribute(&attr, TEE_ATTR_SECRET_VALUE, key, key_len);
 	res = TEE_AllocateTransientObject(obj_type, obj_key_size, &obj);
-	if(res != TEE_SUCCESS) {
+	if (res != TEE_SUCCESS) {
 		EMSG("TEE_AllocateTransientObject failed with code 0x%x", res);
 		goto exit;
 	}
 	res = TEE_PopulateTransientObject(obj, &attr, 1);
-	if(res != TEE_SUCCESS) {
+	if (res != TEE_SUCCESS) {
 		EMSG("TEE_PopulateTransientObject failed with code 0x%x", res);
 		goto exit;
 	}
@@ -356,26 +356,26 @@ TEE_Result rk_cipher_crypto(uint8_t *in, uint8_t *out, uint32_t len,
 		TEE_InitRefAttribute(&attr, TEE_ATTR_SECRET_VALUE, key + key_len,
 				     key_len);
 		res = TEE_AllocateTransientObject(obj_type, obj_key_size, &obj_2);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_AllocateTransientObject failed with code 0x%x", res);
 			goto exit;
 		}
 		res = TEE_PopulateTransientObject(obj_2, &attr, 1);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_PopulateTransientObject failed with code 0x%x", res);
 			goto exit;
 		}
 
 		/* Set operation of two keys */
 		res = TEE_SetOperationKey2(crypto_op, obj, obj_2);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_SetOperationKey2 failed with code 0x%x", res);
 			goto exit;
 		}
 	} else {
 		/* Set operation of one key */
 		res = TEE_SetOperationKey(crypto_op, obj);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_SetOperationKey failed with code 0x%x", res);
 			goto exit;
 		}
@@ -401,6 +401,8 @@ exit:
 
 TEE_Result rk_set_padding(crypto_ctx_t *ctx, int padding)
 {
+	if (!ctx)
+		return TEE_ERROR_BAD_PARAMETERS;
 	if (padding)
 		ctx->padding = PKCS7_PADDING;
 	else
@@ -569,7 +571,7 @@ TEE_Result rk_cipher_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 		iv_len = 0;
 
 	res = TEE_AllocateOperation(&crypto_op, algo, mode, op_key_size);
-	if(res != TEE_SUCCESS) {
+	if (res != TEE_SUCCESS) {
 		EMSG("TEE_AllocateOperation failed with code 0x%x", res);
 		goto exit;
 	}
@@ -577,12 +579,12 @@ TEE_Result rk_cipher_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 	/* Set object of key 1 */
 	TEE_InitRefAttribute(&attr, TEE_ATTR_SECRET_VALUE, key, key_len);
 	res = TEE_AllocateTransientObject(obj_type, obj_key_size, &obj);
-	if(res != TEE_SUCCESS) {
+	if (res != TEE_SUCCESS) {
 		EMSG("TEE_AllocateTransientObject failed with code 0x%x", res);
 		goto exit;
 	}
 	res = TEE_PopulateTransientObject(obj, &attr, 1);
-	if(res != TEE_SUCCESS) {
+	if (res != TEE_SUCCESS) {
 		EMSG("TEE_PopulateTransientObject failed with code 0x%x", res);
 		goto exit;
 	}
@@ -592,26 +594,26 @@ TEE_Result rk_cipher_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 		TEE_InitRefAttribute(&attr, TEE_ATTR_SECRET_VALUE, key + key_len,
 				     key_len);
 		res = TEE_AllocateTransientObject(obj_type, obj_key_size, &obj_2);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_AllocateTransientObject failed with code 0x%x", res);
 			goto exit;
 		}
 		res = TEE_PopulateTransientObject(obj_2, &attr, 1);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_PopulateTransientObject failed with code 0x%x", res);
 			goto exit;
 		}
 
 		/* Set operation of two keys */
 		res = TEE_SetOperationKey2(crypto_op, obj, obj_2);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_SetOperationKey2 failed with code 0x%x", res);
 			goto exit;
 		}
 	} else {
 		/* Set operation of one key */
 		res = TEE_SetOperationKey(crypto_op, obj);
-		if(res != TEE_SUCCESS) {
+		if (res != TEE_SUCCESS) {
 			EMSG("TEE_SetOperationKey failed with code 0x%x", res);
 			goto exit;
 		}
@@ -869,6 +871,7 @@ TEE_Result rk_ae_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 	TEE_Attribute attr;
 	uint32_t obj_type;
 	uint32_t max_key_size = 0;
+	uint32_t tag_bit_len = tag_len * 8;
 
 	if (ctx == NULL || key == NULL)
 		return TEE_ERROR_BAD_PARAMETERS;
@@ -894,8 +897,15 @@ TEE_Result rk_ae_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 	if (algo == TEE_ALG_AES_GCM) {
 		if (iv_len > AES_BLOCK_SIZE)
 			return TEE_ERROR_BAD_PARAMETERS;
+		if (tag_bit_len != 128 && tag_bit_len != 120 && tag_bit_len != 112 &&
+		    tag_bit_len != 104 && tag_bit_len != 96)
+			return TEE_ERROR_BAD_PARAMETERS;
 	} else if (algo == TEE_ALG_AES_CCM) {
 		if (iv_len > 15 || iv_len < 7 || iv == NULL)
+			return TEE_ERROR_BAD_PARAMETERS;
+		if (tag_bit_len != 128 && tag_bit_len != 112 && tag_bit_len != 96 &&
+		    tag_bit_len != 80 && tag_bit_len != 64 && tag_bit_len != 48 &&
+		    tag_bit_len != 32)
 			return TEE_ERROR_BAD_PARAMETERS;
 	} else {
 		return TEE_ERROR_BAD_PARAMETERS;
@@ -927,7 +937,7 @@ TEE_Result rk_ae_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 		goto exit;
 	}
 
-	res = TEE_AEInit(crypto_op, iv, iv_len, tag_len * 8, aad_len, payload_len);
+	res = TEE_AEInit(crypto_op, iv, iv_len, tag_bit_len, aad_len, payload_len);
 	if (res != TEE_SUCCESS) {
 		EMSG("TEE_AEInit failed with code 0x%x", res);
 		goto exit;
@@ -1034,6 +1044,12 @@ TEE_Result rk_hash_begin(crypto_ctx_t *ctx, uint32_t algo)
 {
 	TEE_Result res = 0;
 	TEE_OperationHandle hash_op = NULL;
+
+	if (!ctx)
+		return TEE_ERROR_BAD_PARAMETERS;
+
+	if (TEE_ALG_GET_CLASS(algo) != TEE_OPERATION_DIGEST)
+		return TEE_ERROR_BAD_PARAMETERS;
 
 	res = TEE_AllocateOperation(&hash_op, algo, TEE_MODE_DIGEST, 0);
 	if (res != TEE_SUCCESS) {
@@ -1253,9 +1269,6 @@ TEE_Result rk_mac_begin(crypto_ctx_t *ctx, uint8_t *key, uint32_t key_len,
 	uint32_t hash_algo;
 
 	if (ctx == NULL || key == NULL || key_len == 0)
-		return TEE_ERROR_BAD_PARAMETERS;
-
-	if (TEE_ALG_GET_CLASS(algo) != TEE_OPERATION_MAC)
 		return TEE_ERROR_BAD_PARAMETERS;
 
 #if CRYPTO_DEBUG
@@ -1671,6 +1684,8 @@ TEE_Result rk_rsa_crypto(uint8_t *in, uint8_t *out, uint32_t len,
 	if (mode != TEE_MODE_ENCRYPT && mode != TEE_MODE_DECRYPT)
 		return TEE_ERROR_BAD_PARAMETERS;
 
+	if (TEE_ALG_GET_MAIN_ALG(algo) != TEE_MAIN_ALGO_RSA)
+		return TEE_ERROR_BAD_PARAMETERS;
 #if CRYPTO_DEBUG
 	IMSG("in is 0x%x; out is 0x%x; len is %d; key_len is 0x%x",
 	     *in, *out, len, key->key_len);
@@ -1745,6 +1760,15 @@ TEE_Result rk_rsa_sign(uint8_t *digest, uint8_t *signature, uint32_t digest_len,
 	TEE_Attribute attr[4];
 	uint32_t out_size = 0;
 	uint32_t max_key_size = 0;
+
+	if (!digest || !signature || !signature_len || !key)
+		return TEE_ERROR_BAD_PARAMETERS;
+
+	if (mode != TEE_MODE_SIGN && mode != TEE_MODE_VERIFY)
+		return TEE_ERROR_BAD_PARAMETERS;
+
+	if (TEE_ALG_GET_MAIN_ALG(algo) != TEE_MAIN_ALGO_RSA)
+		return TEE_ERROR_BAD_PARAMETERS;
 
 #if CRYPTO_DEBUG
 	IMSG("digest is 0x%x; signature is 0x%x; digest_len is %d; salt_len is %d",
@@ -1822,6 +1846,15 @@ TEE_Result rk_ecdsa_sign(uint8_t *digest, uint8_t *signature,
 	TEE_Attribute attr[4];
 	uint32_t out_size = 0;
 	uint32_t max_key_size = 0;
+
+	if (!digest || !signature || !signature_len || !key)
+		return TEE_ERROR_BAD_PARAMETERS;
+
+	if (mode != TEE_MODE_SIGN && mode != TEE_MODE_VERIFY)
+		return TEE_ERROR_BAD_PARAMETERS;
+
+	if (TEE_ALG_GET_MAIN_ALG(algo) != TEE_MAIN_ALGO_ECDSA)
+		return TEE_ERROR_BAD_PARAMETERS;
 
 #if CRYPTO_DEBUG
 	IMSG("digest is 0x%x; signature is 0x%x; digest_len is %d; signature_len is %d",

@@ -19,6 +19,8 @@
 
 #include "aie/rk_aiq_algo_aie_itf.h"
 #include "rk_aiq_types_algo_aie_prvt.h"
+#include "rk_aiq_algo_types.h"
+#include "RkAiqCalibDbV2Helper.h"
 
 RKAIQ_BEGIN_DECLARE
 
@@ -32,10 +34,8 @@ create_context(RkAiqAlgoContext **context, const AlgoCtxInstanceCfg* cfg)
     }
     memset(ctx, 0, sizeof(RkAiqAlgoContext));
 
-    AlgoCtxInstanceCfgInt *cfgInt = (AlgoCtxInstanceCfgInt*)cfg;
-
-    ctx->calib = cfgInt->calib;
-    ctx->calibv2 = cfgInt->calibv2;
+    ctx->calib = cfg->calib;
+    ctx->calibv2 = cfg->calibv2;
     if (ctx->calib) {
         CalibDb_IE_t *calib_ie =
             (CalibDb_IE_t*)(CALIBDB_GET_MODULE_PTR(ctx->calib, ie));
@@ -96,10 +96,10 @@ static XCamReturn
 prepare(RkAiqAlgoCom* params)
 {
     if(!!(params->u.prepare.conf_type & RK_AIQ_ALGO_CONFTYPE_UPDATECALIB)){
-        RkAiqAlgoConfigAieInt* confPara = (RkAiqAlgoConfigAieInt*)params;
+        RkAiqAlgoConfigAie* confPara = (RkAiqAlgoConfigAie*)params;
         RkAiqAlgoContext *ctx = params->ctx;
-        ctx->calib = confPara->rk_com.u.prepare.calib;
-        ctx->calibv2 = confPara->rk_com.u.prepare.calibv2;
+        ctx->calib = confPara->com.u.prepare.calib;
+        ctx->calibv2 = confPara->com.u.prepare.calibv2;
         if (ctx->calib) {
             CalibDb_IE_t *calib_ie =
                 (CalibDb_IE_t*)(CALIBDB_GET_MODULE_PTR(ctx->calib, ie));
@@ -118,14 +118,14 @@ static XCamReturn
 pre_process(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
     RkAiqAlgoContext *ctx = inparams->ctx;
-    RkAiqAlgoPreAieInt* pAiePreParams = (RkAiqAlgoPreAieInt*)inparams;
+    RkAiqAlgoPreAie* pAiePreParams = (RkAiqAlgoPreAie*)inparams;
     // force gray_mode by aiq framework
-    if (pAiePreParams->rk_com.u.proc.gray_mode &&
+    if (pAiePreParams->com.u.proc.gray_mode &&
         ctx->params.mode !=  RK_AIQ_IE_EFFECT_BW) {
         ctx->last_params = ctx->params;
         ctx->params.mode = RK_AIQ_IE_EFFECT_BW;
         ctx->skip_frame = 10;
-    } else if (!pAiePreParams->rk_com.u.proc.gray_mode &&
+    } else if (!pAiePreParams->com.u.proc.gray_mode &&
                ctx->params.mode == RK_AIQ_IE_EFFECT_BW) {
         // force non gray_mode by aiq framework
         if (ctx->skip_frame && --ctx->skip_frame == 0)
@@ -140,10 +140,9 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
 {
     RkAiqAlgoContext *ctx = inparams->ctx;
 
-    RkAiqAlgoProcResAieInt* res_int = (RkAiqAlgoProcResAieInt*)outparams;
     RkAiqAlgoProcResAie* res = (RkAiqAlgoProcResAie*)outparams;
 
-    res->params = ctx->params;
+    res->params_com = ctx->params;
 
     rk_aiq_aie_params_int_t* int_params = NULL;
     switch (ctx->params.mode)
@@ -162,7 +161,7 @@ processing(const RkAiqAlgoCom* inparams, RkAiqAlgoResCom* outparams)
     }
 
     if (int_params)
-        res_int->params = *int_params;
+        res->params = *int_params;
 
     return XCAM_RETURN_NO_ERROR;
 }

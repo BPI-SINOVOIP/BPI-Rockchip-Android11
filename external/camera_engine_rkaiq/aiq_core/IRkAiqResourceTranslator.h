@@ -1,7 +1,5 @@
 /*
- * IRkAiqConfigTranslator.h
- *
- *  Copyright (c) 2019 Rockchip Corporation
+ * Copyright (c) 2019-2021 Rockchip Eletronics Co., Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
-
 #ifndef _I_RK_AIQ_RESOURCE_TRANSLATOR_H_
 #define _I_RK_AIQ_RESOURCE_TRANSLATOR_H_
 
@@ -24,29 +20,61 @@
 #include "xcam_log.h"
 #include "video_buffer.h"
 #include "rk_aiq_pool.h"
-#include "RkAiqSharedDataManager.h"
 
 namespace RkCam {
 
 class IRkAiqResourceTranslator {
 public:
-    IRkAiqResourceTranslator ()          {};
+    IRkAiqResourceTranslator ()
+        : mCamPhyId(-1)
+        , mIsGroupMode(false)
+        , mModuleRotation(0) {};
     virtual ~IRkAiqResourceTranslator () {};
 
-    virtual XCamReturn translateIspStats (const SmartPtr<VideoBuffer> &from,
-                                  SmartPtr<RkAiqIspStatsIntProxy> &to) = 0;
-    virtual XCamReturn translateAecStats (const SmartPtr<VideoBuffer> &from,
-                                  SmartPtr<RkAiqAecStatsProxy> &to) = 0;
-    virtual XCamReturn translateAwbStats (const SmartPtr<VideoBuffer> &from,
-                                  SmartPtr<RkAiqAwbStatsProxy> &to) = 0;
-    virtual XCamReturn translateAfStats (const SmartPtr<VideoBuffer> &from,
-                                 SmartPtr<RkAiqAfStatsProxy> &to) = 0;
-    virtual XCamReturn translateOrbStats (const SmartPtr<VideoBuffer> &from,
-                                  SmartPtr<RkAiqOrbStatsProxy> &to) = 0;
-    virtual XCamReturn translateAtmoStats (const SmartPtr<VideoBuffer> &from,
-                                   SmartPtr<RkAiqAtmoStatsProxy> &to) = 0;
-    virtual XCamReturn translateAdehazeStats (const SmartPtr<VideoBuffer> &from,
-                                      SmartPtr<RkAiqAdehazeStatsProxy> &to) = 0;
+    virtual XCamReturn translateIspStats(const SmartPtr<VideoBuffer>& from,
+                                         SmartPtr<RkAiqIspStatsIntProxy>& to,
+                                         const SmartPtr<RkAiqAecStatsProxy>& aecStat,
+                                         const SmartPtr<RkAiqAwbStatsProxy>& awbStat,
+                                         const SmartPtr<RkAiqAfStatsProxy>& afStat,
+                                         const SmartPtr<RkAiqAtmoStatsProxy>& tmoStat,
+                                         const SmartPtr<RkAiqAdehazeStatsProxy>& dehazeStat) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translateAecStats(const SmartPtr<VideoBuffer>& from,
+                                         SmartPtr<RkAiqAecStatsProxy>& to) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translateAwbStats(const SmartPtr<VideoBuffer>& from,
+                                         SmartPtr<RkAiqAwbStatsProxy>& to) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translateAfStats(const SmartPtr<VideoBuffer>& from,
+                                        SmartPtr<RkAiqAfStatsProxy>& to) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translateOrbStats(const SmartPtr<VideoBuffer>& from,
+                                         SmartPtr<RkAiqOrbStatsProxy>& to) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translateAtmoStats(const SmartPtr<VideoBuffer>& from,
+                                          SmartPtr<RkAiqAtmoStatsProxy>& to) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translateAdehazeStats(const SmartPtr<VideoBuffer>& from,
+                                             SmartPtr<RkAiqAdehazeStatsProxy>& to) {
+        return XCAM_RETURN_BYPASS;
+    }
+    virtual XCamReturn translatePdafStats (const SmartPtr<VideoBuffer> &from,
+                                   SmartPtr<RkAiqPdafStatsProxy> &to, bool sns_mirror) {
+        return XCAM_RETURN_BYPASS;
+    }
+    void setCamPhyId(int phyId) { mCamPhyId = phyId;}
+    void setGroupMode(bool bGroup) { mIsGroupMode = bGroup;}
+    void setModuleRot(int rot) { mModuleRotation = rot;}
+protected:
+    int mCamPhyId;
+    bool mIsGroupMode;
+    int mModuleRotation;
 
 private:
     XCAM_DEAD_COPY (IRkAiqResourceTranslator);

@@ -18,11 +18,12 @@
 static int ion_fd = -1;
 static std::vector<struct ion_heap_data> ion_heaps;
 static std::mutex ion_heaps_mutex;
+static const char kIonDevice[] = "/dev/ion";
 
 static int ion_open()
 {
     if (ion_fd < 0) {
-        ion_fd = open("/dev/ion", O_RDONLY | O_CLOEXEC);
+        ion_fd = open(kIonDevice, O_RDONLY | O_CLOEXEC);
         if (ion_fd < 0) {
             ALOGE("open /dev/ion failed: %s", strerror(errno));
         }
@@ -143,4 +144,19 @@ int ion_alloc(uint32_t len, bool is_cma, bool is_cacheable, int *fd)
     *fd = data.fd;
 
     return 0;
+}
+
+bool ion_check_support() {
+    static int ion_support = -1;
+
+    if (ion_support == -1) {
+        if (access(kIonDevice, R_OK) == 0)
+            ion_support = 1;
+        else
+            ion_support = 0;
+
+        ALOGI("%s ION allocator.", ion_support?"Support":"Unsupport");
+    }
+
+    return (ion_support==1);
 }

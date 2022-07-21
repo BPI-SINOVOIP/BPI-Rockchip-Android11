@@ -43,7 +43,7 @@
 #include "Rockchip_OSAL_SharedMemory.h"
 #include "Rockchip_OSAL_Mutex.h"
 
-#include <linux/rockchip_ion.h>
+#include "rockchip_ion.h"
 #include <linux/ion.h>
 #include <dlfcn.h>
 #include <cutils/native_handle.h>

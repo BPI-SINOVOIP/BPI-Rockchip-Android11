@@ -15,20 +15,22 @@ PROJECT(rkisp_demo)
 set(BUILROOT_BUILD_PROJECT true)
 #set(ENABLE_ASAN true)
 
+add_compile_options(${ISP_HW_VERSION})
+
 # ----------------------------------------------------------------------------
 # SET THE COMPILER PATH
 # ----------------------------------------------------------------------------
 if(BUILROOT_BUILD_PROJECT)
-	if(ARCH STREQUAL "aarch64")
-		SET(CMAKE_C_COMPILER "/home/camera/camera/rv1109_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc")
-		SET(CMAKE_CXX_COMPILER "/home/camera/camera/rv1109_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++")
-	else()
-		SET(CMAKE_C_COMPILER "/home/camera/camera/rv1109_sdk/buildroot/output/rockchip_puma/host/bin/arm-linux-gnueabihf-gcc")
-		SET(CMAKE_CXX_COMPILER "/home/camera/camera/rv1109_sdk/buildroot/output/rockchip_puma/host/bin/arm-linux-gnueabihf-g++")
-	endif()
+    #if(ARCH STREQUAL "aarch64")
+	#	SET(CMAKE_C_COMPILER "/home/camera/camera/rv1109_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc")
+	#	SET(CMAKE_CXX_COMPILER "/home/camera/camera/rv1109_sdk/prebuilts/gcc/linux-x86/aarch64/gcc-linaro-6.3.1-2017.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++")
+	#else()
+	#	SET(CMAKE_C_COMPILER "/home/camera/camera/rv1109_sdk/buildroot/output/rockchip_puma/host/bin/arm-linux-gnueabihf-gcc")
+	#	SET(CMAKE_CXX_COMPILER "/home/camera/camera/rv1109_sdk/buildroot/output/rockchip_puma/host/bin/arm-linux-gnueabihf-g++")
+	#endif()
 else()
-    SET(CMAKE_C_COMPILER "/home/hkj/isp2-fpga/fpga-ramdisk/toolchains/host/bin/arm-buildroot-linux-gnueabi-gcc")
-    SET(CMAKE_CXX_COMPILER "/home/hkj/isp2-fpga/fpga-ramdisk/toolchains/host/bin/arm-buildroot-linux-gnueabi-g++")
+    #SET(CMAKE_C_COMPILER "/home/hkj/isp2-fpga/fpga-ramdisk/toolchains/host/bin/arm-buildroot-linux-gnueabi-gcc")
+    #SET(CMAKE_CXX_COMPILER "/home/hkj/isp2-fpga/fpga-ramdisk/toolchains/host/bin/arm-buildroot-linux-gnueabi-g++")
 endif()
 
 # ----------------------------------------------------------------------------
@@ -47,9 +49,10 @@ set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMakeTargets")
 
 #set ADD_RK_AIQ
 set(ADD_RK_AIQ true)
+option(ENABLE_IIO_API "Enable IIO API for EIS algorithm" OFF)
 
 #SET RK_AIQ SOURCE DIR
-set(RK_AIQ_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../../)
+set(RK_AIQ_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../rk_aiq)
 message("rkaiq src path" ${RK_AIQ_SOURCE_DIR})
 
 if(ENABLE_ASAN)
@@ -59,18 +62,30 @@ endif()
 
 if(ADD_RK_AIQ)
 add_compile_options(-std=c++11)
+add_compile_options(-Os)
 add_compile_options(-DADD_RK_AIQ)
-add_compile_options(-O0)
+if(NOT ARCH STREQUAL "fpga")
+	add_compile_options(-fstack-protector-strong -D_FORTIFY_SOURCE=2)
+else ()
+	add_compile_options(-DARCH_FPGA)
+endif()
 # add_compile_options(-v)
-SET(RK_AIQ_LIB_DIR ${RK_AIQ_SOURCE_DIR}/build/linux/all_lib/${CMAKE_BUILD_TYPE})
+SET(RK_AIQ_LIB_DIR ${RK_AIQ_SOURCE_DIR}/build/linux/output/${ARCH}/all_lib/${CMAKE_BUILD_TYPE})
 message("rkaiq lib path" ${RK_AIQ_LIB_DIR})
 SET(RK_AIQ_INCLUDE_DIR
+${RK_AIQ_SOURCE_DIR}
+${RK_AIQ_SOURCE_DIR}/include/
 ${RK_AIQ_SOURCE_DIR}/include/uAPI
 ${RK_AIQ_SOURCE_DIR}/include/xcore/
 ${RK_AIQ_SOURCE_DIR}/include/algos/
 ${RK_AIQ_SOURCE_DIR}/include/common/
-${RK_AIQ_SOURCE_DIR}
 ${RK_AIQ_SOURCE_DIR}/include/iq_parser/
+${RK_AIQ_SOURCE_DIR}/include/iq_parser_v2/
+${RK_AIQ_SOURCE_DIR}/hwi
+${RK_AIQ_SOURCE_DIR}/hwi/isp20
+${RK_AIQ_SOURCE_DIR}/hwi/isp21
+${RK_AIQ_SOURCE_DIR}/hwi/isp3x
+#${FPGA_RGA_INCLUDE_PATH}/include/
 )
 SET(RK_AIQ_LIB rkaiq)
 endif()
@@ -78,12 +93,20 @@ endif()
 ##set extern libraries
 if(ARCH STREQUAL "aarch64")
 	SET(RK_DRM_LIB_DIR ${PROJECT_SOURCE_DIR}/demo/libs/arm64/)
-else()
-	SET(RK_DRM_LIB_DIR ${PROJECT_SOURCE_DIR}/demo/libs/arm32/)
+elseif (ARCH STREQUAL "arm")
+	SET(RK_DRM_LIB_DIR
+		${PROJECT_SOURCE_DIR}/demo/libs/arm32/
+		)
+endif()
+SET(RK_DRM_LIB drm)
+if(NOT ARCH STREQUAL "fpga")
+	SET(RK_RGA_LIB rga)
 endif()
 
-SET(RK_DRM_LIB drm)
-SET(RK_RGA_LIB rga)
+if (ENABLE_IIO_API)
+set(IIO_LIB_DIR ${PROJECT_SOURCE_DIR}/demo/iio/lib)
+set(IIO_LIBS easyiio iio serialport xml2 )
+endif()
 
 #head file path
 include_directories(
@@ -92,12 +115,27 @@ demo/include
 demo/include/rga
 demo/include/libdrm
 demo/drmDsp
+demo/iio/include
 ${RK_AIQ_INCLUDE_DIR}
 )
 #source directory
-AUX_SOURCE_DIRECTORY(demo DIR_SRCS)
-AUX_SOURCE_DIRECTORY(demo/drmDsp DRMDSP_DIR_SRCS)
-list(APPEND DIR_SRCS ${DRMDSP_DIR_SRCS})
+if (NOT ARCH STREQUAL "fpga")
+	AUX_SOURCE_DIRECTORY(demo DIR_SRCS)
+	AUX_SOURCE_DIRECTORY(demo/drmDsp DRMDSP_DIR_SRCS)
+else ()
+	set (DIR_SRCS
+		 demo/rkisp_demo.cpp
+		 demo/drmDsp.c
+		 demo/drmDsp/bo.c
+		 demo/drmDsp/dev.c
+		 demo/drmDsp/modeset.c
+		 )
+endif()
+
+if (ENABLE_IIO_API)
+    AUX_SOURCE_DIRECTORY(demo/iio/demo IIO_DIR_SRCS)
+endif()
+list(APPEND DIR_SRCS ${DRMDSP_DIR_SRCS} ${IIO_DIR_SRCS})
 
 # set output binary path
 if(WIN32)
@@ -118,7 +156,7 @@ message(${LIBRARY_OUTPUT_PATH})
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
 #
-link_directories("${LIBRARY_OUTPUT_PATH}" "${RK_AIQ_LIB_DIR}" "${RK_DRM_LIB_DIR}")
+link_directories("${LIBRARY_OUTPUT_PATH}" "${RK_AIQ_LIB_DIR}" "${RK_DRM_LIB_DIR}" "${IIO_LIB_DIR}")
 #add executable file
-ADD_EXECUTABLE(rkisp_demo ${DIR_SRCS})
-target_link_libraries(rkisp_demo ${RK_AIQ_LIB} ${RK_DRM_LIB} ${RK_RGA_LIB} ${LINK_ASAN} pthread)
+add_executable(rkisp_demo ${DIR_SRCS})
+target_link_libraries(rkisp_demo ${RK_AIQ_LIB} ${RK_DRM_LIB} ${RK_RGA_LIB} ${IIO_LIBS} ${LINK_ASAN} pthread)

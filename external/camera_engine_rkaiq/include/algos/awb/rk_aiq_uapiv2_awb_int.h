@@ -101,5 +101,12 @@ rk_aiq_uapiV2_awb_Lock(RkAiqAlgoContext *ctx);
 XCamReturn
 rk_aiq_uapiV2_awb_Unlock(const RkAiqAlgoContext *ctx);
 
+XCamReturn
+rk_aiq_uapiV2_awb_GetAlgoStat(const RkAiqAlgoContext *ctx,rk_tool_awb_stat_res_full_t *awb_stat_algo);
+
+XCamReturn
+rk_aiq_uapiV2_awb_GetStrategyResult(const RkAiqAlgoContext *ctx,rk_tool_awb_strategy_result_t *awb_strategy_result);
+
+
 #endif
 

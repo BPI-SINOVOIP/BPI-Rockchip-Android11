@@ -1,5 +1,6 @@
 #include <linux/v4l2-subdev.h>
 #include <linux/videodev2.h>
+#include "linux/rk-video-format.h"
 #include "code_to_pixel_format.h"
 #include "xcam_log.h"
 
@@ -54,6 +55,9 @@ uint32_t get_v4l2_pixelformat(uint32_t pixelcode)
         break;
     case MEDIA_BUS_FMT_Y12_1X12:
         pixelformat = V4L2_PIX_FMT_Y12;
+        break;
+    case MEDIA_BUS_FMT_SPD_2X8:
+        pixelformat = V4l2_PIX_FMT_SPD16;
         break;
     default:
         //TODO add other

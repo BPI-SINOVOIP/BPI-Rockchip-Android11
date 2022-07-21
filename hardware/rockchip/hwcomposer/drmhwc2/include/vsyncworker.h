@@ -18,7 +18,7 @@
 #define ANDROID_EVENT_WORKER_H_
 
 #include "drmdevice.h"
-#include "worker.h"
+#include "utils/worker.h"
 
 #include <stdint.h>
 #include <map>

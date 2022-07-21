@@ -1,98 +1,104 @@
-
+/*
+ * Copyright (c) 2019-2022 Rockchip Eletronics Co., Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 #ifndef __RKAIQ_TYPES_ALGO_AGIC_INT_H__
 #define __RKAIQ_TYPES_ALGO_AGIC_INT_H__
 
-//#include "rk_aiq_types_algo_agic.h"
+#include <stdint.h>
+
 #include "RkAiqCalibDbTypes.h"
+#include "rk_aiq_comm.h"
+#include "agic_uapi_head.h"
 
-enum {
-    GIC_NORMAL = 0,
-    GIC_HDR = 1,
-    GIC_NIGHT = 2
-};
+typedef struct rkaiq_gic_v1_hw_param_s {
+    uint8_t edge_open;
 
-typedef enum gic_OpMode_s {
-    AGIC_OPMODE_API_OFF = 0, // run IQ agic
-    AGIC_OPMODE_API_AUTO = 1, //run api auto agic
-    AGIC_OPMODE_API_MANUAL = 2, //run api manual agic
-} gic_OpMode_t;
+    uint16_t regmingradthrdark2;
+    uint16_t regmingradthrdark1;
+    uint16_t regminbusythre;
 
-typedef struct mgicAttr_s {
+    uint16_t regdarkthre;
+    uint16_t regmaxcorvboth;
+    uint16_t regdarktthrehi;
 
-} mgicAttr_t;
+    uint8_t regkgrad2dark;
+    uint8_t regkgrad1dark;
+    uint8_t regstrengthglobal_fix;
+    uint8_t regdarkthrestep;
+    uint8_t regkgrad2;
+    uint8_t regkgrad1;
+    uint8_t reggbthre;
 
-typedef struct agicAttr_s {
+    uint16_t regmaxcorv;
+    uint16_t regmingradthr2;
+    uint16_t regmingradthr1;
 
-} agicAttr_t;
+    uint8_t gr_ratio;
+    uint16_t dnloscale;
+    uint16_t dnhiscale;
+    uint8_t reglumapointsstep;
 
-typedef struct AgicAttr_s {
-    gic_OpMode_t    opMode;
-    agicAttr_t      stAuto;
-    mgicAttr_t      stManual;
-} AgicAttr_t;
+    uint16_t gvaluelimitlo;
+    uint16_t gvaluelimithi;
+    uint8_t fusionratiohilimt1;
 
-typedef struct AgicProcResultV21_s {
-    int regmingradthrdark2;
-    int regmingradthrdark1;
-    int regminbusythre;
-    int regdarkthre;
-    int regmaxcorvboth;
-    int regdarktthrehi;
-    int regkgrad2dark;
-    int regkgrad1dark;
-    int regstrengthglobal_fix;
-    int regdarkthrestep;
-    int regkgrad2;
-    int regkgrad1;
-    int reggbthre;
-    int regmaxcorv;
-    int regmingradthr2;
-    int regmingradthr1;
-    int gr_ratio;
-    int noise_scale;
-    int noise_base;
-    int diff_clip;
-    int sigma_y[15];
-} AgicProcResultV21_t;
+    uint8_t regstrength_fix;
 
-typedef struct AgicProcResultV20_s {
-    int edge_open;
-    int regmingradthrdark2;
-    int regmingradthrdark1;
-    int regminbusythre;
-    int regdarkthre;
-    int regmaxcorvboth;
-    int regdarktthrehi;
-    int regkgrad2dark;
-    int regkgrad1dark;
-    int regstrengthglobal_fix;
-    int regdarkthrestep;
-    int regkgrad2;
-    int regkgrad1;
-    int reggbthre;
-    int regmaxcorv;
-    int regmingradthr2;
-    int regmingradthr1;
-    int gr_ratio;
-    int dnloscale;
-    int dnhiscale;
-    int reglumapointsstep;
-    int gvaluelimitlo;
-    int gvaluelimithi;
-    int fusionratiohilimt1;
-    int regstrength_fix;
-    int sigma_y[15];
-    int noise_cut_en;
-    int noise_coe_a;
-    int noise_coe_b;
-    int diff_clip;
-} AgicProcResultV20_t;
+    uint16_t sigma_y[15];
+
+    uint8_t noise_cut_en;
+    uint16_t noise_coe_a;
+
+    uint16_t noise_coe_b;
+    uint16_t diff_clip;
+} __attribute__((packed)) rkaiq_gic_v1_hw_param_t;
+
+typedef struct rkaiq_gic_v2_hw_param_s {
+    uint16_t regmingradthrdark2;
+    uint16_t regmingradthrdark1;
+    uint16_t regminbusythre;
+
+    uint16_t regdarkthre;
+    uint16_t regmaxcorvboth;
+    uint16_t regdarktthrehi;
+
+    uint8_t regkgrad2dark;
+    uint8_t regkgrad1dark;
+    uint8_t regstrengthglobal_fix;
+    uint8_t regdarkthrestep;
+    uint8_t regkgrad2;
+    uint8_t regkgrad1;
+    uint8_t reggbthre;
+
+    uint16_t regmaxcorv;
+    uint16_t regmingradthr2;
+    uint16_t regmingradthr1;
+
+    uint8_t gr_ratio;
+    uint8_t noise_scale;
+    uint16_t noise_base;
+    uint16_t diff_clip;
+
+    uint16_t sigma_y[15];
+} __attribute__((packed)) rkaiq_gic_v2_hw_param_t;
 
 typedef struct AgicProcResult_s {
     bool gic_cfg_update;
     union {
-        AgicProcResultV20_t ProcResV20;
-        AgicProcResultV21_t ProcResV21;
+        rkaiq_gic_v1_hw_param_t ProcResV20;
+        rkaiq_gic_v2_hw_param_t ProcResV21;
     };
     bool gic_en;
 } AgicProcResult_t;
@@ -123,8 +129,8 @@ typedef struct AgicConfigV20_s {
     float gvaluelimithi;
     float fusionratiohilimt1;
     float textureStrength;
-    float noiseCurve_0 ;
-    float noiseCurve_1 ;
+    float noiseCurve_0;
+    float noiseCurve_1;
     float sigma_y[15];
     unsigned char noise_cut_en;
     unsigned short noise_coe_a;
@@ -165,4 +171,4 @@ typedef struct AgicConfig_s {
     };
 } AgicConfig_t;
 
-#endif//__RKAIQ_TYPES_ALGO_AGIC_INT_H__
+#endif  //__RKAIQ_TYPES_ALGO_AGIC_INT_H__

@@ -79,12 +79,13 @@ RKISP2CameraHw::init()
         return status;
     }
 
-    std::string imguMediaDevice = RKISP2PSLConfParser::getImguMediaDevice(mCameraId);
+    std::string imguMediaDevice = RKISP2PSLConfParser::getImguMediaDevice(mCameraId,mMediaCtl);
     //imguMediaDevice = sensorMediaDevice;
     if (sensorMediaDevice == imguMediaDevice) {
         LOGI("Using sensor media device as imgu media device");
         mImguMediaCtl = mMediaCtl;
     } else {
+        LOGI("Sensor media device not the same with imgu media device.");
         mImguMediaCtl = std::make_shared<MediaController>(imguMediaDevice.c_str());
 
         status = mImguMediaCtl->init();

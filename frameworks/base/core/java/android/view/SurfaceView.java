@@ -874,10 +874,18 @@ public class SurfaceView extends View implements ViewRootImpl.SurfaceChangedCall
         synchronized (mSurfaceControlLock) {
             mSurface.release();
 
+            /* 20220615: Changed randall.zhuo. mSurfaceControl maybe recycled by java GC. We must set to null, or positionLost called by 
+             * android::android_view_RenderNode_requestPositionUpdates(frameworks/base/libs/hwui/jni/android_graphics_RenderNode.cpp)
+             * may cause SIGBUS or SEGMENTFAULT.
+             * mSurfaceControl -> GC -> positionLost
+             * this modify refer android 10
+            */
+            /*
             if (mRtHandlingPositionUpdates) {
                 mRtReleaseSurfaces = true;
                 return;
             }
+            */
 
             if (mSurfaceControl != null) {
                 mTmpTransaction.remove(mSurfaceControl);

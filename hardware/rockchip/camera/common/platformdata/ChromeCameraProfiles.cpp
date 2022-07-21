@@ -81,6 +81,7 @@ status_t ChromeCameraProfiles::init()
 
     createConfParser();
 
+    LOGI("@%s exit!", __FUNCTION__);
     return OK;
 }
 

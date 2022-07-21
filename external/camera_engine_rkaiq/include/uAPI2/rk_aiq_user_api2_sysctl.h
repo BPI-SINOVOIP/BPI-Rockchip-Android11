@@ -20,9 +20,14 @@
 
 #include "rk_aiq.h"
 #include "rk_aiq_algo_des.h"
-#include "rk_aiq_user_api_sysctl.h"
+// #include "rk_aiq_user_api_sysctl.h"
 
 RKAIQ_BEGIN_DECLARE
+
+#ifndef RK_AIQ_SYS_CTX_T
+#define RK_AIQ_SYS_CTX_T
+typedef struct rk_aiq_sys_ctx_s rk_aiq_sys_ctx_t;
+#endif
 
 /********************below are verified api********************/
 
@@ -47,6 +52,11 @@ XCamReturn
 rk_aiq_uapi2_sysctl_preInit(const char* sns_ent_name,
                            rk_aiq_working_mode_t mode,
                            const char* force_iq_file);
+
+XCamReturn
+rk_aiq_uapi2_sysctl_regHwEvtCb(const char* sns_ent_name,
+                               rk_aiq_hwevt_cb hwevt_cb,
+                               void* cb_ctx);
 
 /*!
  * \brief initialze aiq control system context
@@ -300,48 +310,117 @@ rk_aiq_uapi2_sysctl_tuning(const rk_aiq_sys_ctx_t* sys_ctx, char* param);
 
 char* rk_aiq_uapi2_sysctl_readiq(const rk_aiq_sys_ctx_t* sys_ctx, char* param);
 
-/*problem api*/
-#if 0
-//HDR mode may not work;
-XCamReturn rk_aiq_uapi_sysctl_swWorkingModeDyn(const rk_aiq_sys_ctx_t* ctx, rk_aiq_working_mode_t mode);
+XCamReturn
+rk_aiq_uapi2_sysctl_preInit_scene(const char* sns_ent_name, const char *main_scene,
+                                  const char *sub_scene);
 
-//rk_aiq_uapi2_sysctl_setCrop() is not ready yet in hdr mode;
+typedef struct rk_aiq_ctx_camInfo_s {
+    const char* sns_ent_nm;
+    int sns_camPhyId;
+} rk_aiq_ctx_camInfo_t;
+
+XCamReturn
+rk_aiq_uapi2_sysctl_getCamInfos(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_ctx_camInfo_t* camInfo);
+
 /*!
- * \brief set crop window of isp input
- * This API will affect the isp pipeline resolution.
+ * \brief get 3a stats
  *
- * \param[in] rect      set cams crop prop
- * \note Optinal API, should be called before rk_aiq_uapi2_sysctl_prepare
+ * \param[in] ctx             context
+ * \param[out] stats          stats params
+ * \return return 0 if success
+ * \note non-blocked interface, and copy the result to stats.
  */
 XCamReturn
-rk_aiq_uapi2_sysctl_setCrop(const rk_aiq_sys_ctx_t* sys_ctx, rk_aiq_rect_t rect);
-#endif
-
-/*api wait to be verified*/
-#if 0
-XCamReturn rk_aiq_uapi_sysctl_enqueueRkRawFile(const rk_aiq_sys_ctx_t* ctx, const char *path);
-XCamReturn rk_aiq_uapi_sysctl_prepareRkRaw(const rk_aiq_sys_ctx_t* ctx, rk_aiq_raw_prop_t prop);
-XCamReturn rk_aiq_uapi_sysctl_enqueueRkRawBuf(const rk_aiq_sys_ctx_t* ctx, void *rawdata, bool sync);
-XCamReturn rk_aiq_uapi_sysctl_registRkRawCb(const rk_aiq_sys_ctx_t* ctx, void (*callback)(void*));
-XCamReturn rk_aiq_uapi_sysctl_regLib(const rk_aiq_sys_ctx_t* ctx, RkAiqAlgoDesComm* algo_lib_des);
-XCamReturn rk_aiq_uapi_sysctl_unRegLib(const rk_aiq_sys_ctx_t* ctx, const int algo_type, const int lib_id);
-#endif
-
-
-#if 0
-XCamReturn
-rk_aiq_uapi_sysctl_get3AStats(const rk_aiq_sys_ctx_t* ctx,
+rk_aiq_uapi2_sysctl_get3AStats(const rk_aiq_sys_ctx_t* ctx,
                               rk_aiq_isp_stats_t *stats);
 
+/*!
+ * \brief get 3a stats
+ *
+ * \param[in] ctx             context
+ * \param[out] stats          stats params ref
+ * \param[in] timeout_ms      -1 means wait always until stats is available or
+ *                            stopped
+ * \return return 0 if success
+ * \note blocked interface, and return the stats ref, user should
+ *       call \ref rk_aiq_uapi_sysctl_release3AStatsRef to release.
+ */
 XCamReturn
-rk_aiq_uapi_sysctl_get3AStatsBlk(const rk_aiq_sys_ctx_t* ctx,
+rk_aiq_uapi2_sysctl_get3AStatsBlk(const rk_aiq_sys_ctx_t* ctx,
                               rk_aiq_isp_stats_t **stats, int timeout_ms);
 
+/*!
+ * \brief release 3a stats result ref
+ *
+ * \param[in] ctx             context
+ * \param[out] stats          stats ref
+ * \return void
+ * \note called with \ref rk_aiq_uapi_sysctl_get3AStatsBlk
+ */
 void
-rk_aiq_uapi_sysctl_release3AStatsRef(const rk_aiq_sys_ctx_t* ctx,
+rk_aiq_uapi2_sysctl_release3AStatsRef(const rk_aiq_sys_ctx_t* ctx,
                                      rk_aiq_isp_stats_t *stats);
 
-#endif
+/*!
+ * \brief prepare RK-raw-format data process environment
+ *
+ * \param[in] ctx             context
+ * \param[in] prop            prepare params
+ * \return return 0 if success
+ */
+XCamReturn
+rk_aiq_uapi2_sysctl_prepareRkRaw(const rk_aiq_sys_ctx_t* ctx, rk_aiq_raw_prop_t prop);
+
+/*!
+ * \brief queue RK-Raw-format buffer into aiq control system
+ *
+ * \param[in] ctx             context
+ * \param[in] rawdata         RK-Raw-format buffer
+ * \param[in] sync            sync flag, true means sync mode,calling process will be blocked,
+ *                            until the queued frame is processed. false means async mode, calling
+ *                            process is not blocked, if you want to free rawdata or reuse it, callback
+ *                            should be registered,after frame is processed, callback function would be called.
+ * \return return 0 if success
+ */
+XCamReturn
+rk_aiq_uapi2_sysctl_enqueueRkRawBuf(const rk_aiq_sys_ctx_t* ctx, void *rawdata, bool sync);
+
+/*!
+ * \brief queue RK-Raw-format file into aiq control system
+ *
+ * \param[in] ctx             context
+ * \param[in] path            RK-Raw-format file path
+ * calling process will be blocked until the queued frame is processed
+ * \return return 0 if success
+ */
+XCamReturn
+rk_aiq_uapi2_sysctl_enqueueRkRawFile(const rk_aiq_sys_ctx_t* ctx, const char *path);
+
+/*!
+ * \brief regist RK-Raw-format buffer callback into aiq control system
+ *
+ * \param[in] ctx             context
+ * \param[in] callback        callback function pointer
+ * if callback function is registered,  (when rk_aiq_uapi_sysctl_enqueueRkRawBuf used in sync mode)
+ * callback will be called in sync after the queued raw buffer is processed, raw buffer pointer
+ * which passed into aiq by rk_aiq_uapi_sysctl_enqueueRkRawBuf would be passed back into the callback
+ * function you registered.
+ * this function is not required.
+ *
+ * \return return 0 if success
+ */
+
+XCamReturn
+rk_aiq_uapi2_sysctl_registRkRawCb(const rk_aiq_sys_ctx_t* ctx, void (*callback)(void*));
+
+/*!
+ * \brief get working mode
+ *
+ * \param[in] ctx             context
+ * \param[out] working_mode   rk_aiq_working_mode_t
+ */
+XCamReturn
+rk_aiq_uapi2_sysctl_getWorkingMode(const rk_aiq_sys_ctx_t* ctx, rk_aiq_working_mode_t *mode);
 
 RKAIQ_END_DECLARE
 

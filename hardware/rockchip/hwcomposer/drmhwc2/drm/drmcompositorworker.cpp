@@ -18,7 +18,7 @@
 
 #include "drmdisplaycompositor.h"
 #include "drmcompositorworker.h"
-#include "worker.h"
+#include "utils/worker.h"
 
 #include <stdlib.h>
 
