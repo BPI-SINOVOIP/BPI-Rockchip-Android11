@@ -1,0 +1,87 @@
+cc_library_static {
+    name: "librkfactory_test",
+
+    defaults: [
+        "librecovery_defaults",
+	"librecovery_utils_defaults"
+    ],
+
+    srcs: [
+        "rkfactory_test.cpp",
+        "ddr_emmc_test.cpp",
+        "script.c",
+        "script_parser.c",
+        "wlan_test.cpp",
+        "rtc_test.cpp",
+        "gsensor_test.cpp",
+        "bt_test.cpp",
+        "udisk_test.cpp",
+        "sdcard_test.cpp",
+        "battery_test.cpp",
+        "rkhal3_camera/camera_test.cpp",
+        "audiodev_test/codec_test.cpp",
+        "audiodev_test/audio_hw.c",
+        "audiodev_test/alsa_route.c",
+        "audiodev_test/alsa_mixer.c",
+        "audiodev_test/tinyalsa/mixer.c",
+        "audiodev_test/tinyalsa/pcm.c",
+    ],
+
+    local_include_dirs: ["audiodev_test/tinyalsa/include"],
+    shared_libs: [
+        "android.hardware.health@2.0",
+        "libbase",
+        "libbootloader_message",
+        "libcrypto",
+        "libcutils",
+        "libfs_mgr",
+        "liblog",
+        "libziparchive", 
+    ],
+    cflags: [
+        "-Wno-error",
+    ],
+    static_libs: [
+        "libinstall",
+        "librecovery_fastboot",
+        "libminui",
+        "libotautil",
+        "libmtdutils",
+        "librkutility",
+        "librkupdate",
+        "librkwifi-ctrl-static",
+	"librecovery_utils",
+
+        // external dependencies
+        "libhealthhalutils",
+        "libfstab",
+    ],
+
+    recovery_available: true,
+}
+
+cc_binary {
+    name: "codec_test",
+    srcs: [
+        "audiodev_test/codec_main.cpp",
+        "audiodev_test/codec_test.cpp",
+        "audiodev_test/audio_hw.c",
+        "audiodev_test/alsa_route.c",
+        "audiodev_test/alsa_mixer.c",
+        "audiodev_test/tinyalsa/mixer.c",
+        "audiodev_test/tinyalsa/pcm.c",
+    ],
+    local_include_dirs: ["audiodev_test/tinyalsa/include"],
+    shared_libs: [
+        "android.hardware.health@2.0",
+        "libbase",
+        "libbootloader_message",
+        "libcrypto",
+        "libcutils",
+        "libfs_mgr",
+        "liblog",
+        "libziparchive",
+    ],
+    cflags: ["-Wno-error"],
+    recovery_available: true,
+}

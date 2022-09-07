@@ -1,0 +1,90 @@
+//
+// Copyright (C) 2017 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//prebuilt_stdcxx_PATH = ["prebuilts/ndk/current/sources/cxx-stl"]
+cc_defaults {
+    name: "librkupdate_defaults",
+
+    defaults: [
+        "recovery_defaults",
+    ],
+
+    static_libs: [
+        "libbootloader_message",
+        "libotautil",
+        "libext4_utils",
+        "libfs_mgr",
+        "liblog",
+        "liblp",
+        "libselinux",
+        "libsparse",
+        "libbrotli",
+        "libbz",
+        "libbase",
+        "libcrypto_utils",
+        "libcutils",
+        "libutils",
+
+        "libext2_com_err",
+        "libext2_blkid",
+        "libext2_quota",
+        "libext2_uuid",
+        "libext2_e2p",
+        "libext2fs",
+        "libmtdutils",
+        "librkutility",
+        "librecovery_ui_default",
+    ],
+}
+
+cc_library_static {
+    name: "librkupdate",
+
+    defaults: [
+        "recovery_defaults",
+        "librkupdate_defaults",
+    ],
+
+    shared_libs: [
+        "librecovery_ui",
+    ],
+
+    srcs: [
+        "CRC.cpp",
+        "MD5Checksum.cpp",
+        "RKBoot.cpp",
+        "RKImage.cpp",
+        "RKLog.cpp",
+        "RKComm.cpp",
+        "RKDevice.cpp",
+        "RKAndroidDevice.cpp",
+        "Upgrade.cpp",
+        "RKSparse.cpp",
+    ],
+
+    include_dirs: [
+        "external/e2fsprogs/misc",
+        "external/e2fsprogs/lib",
+        "system/extras/ext4_utils/include/ext4_utils",
+        "system/core/base/include",
+        "system/vold",
+        "system/core/fs_mgr/include/",
+    ],
+
+    export_include_dirs: [
+        "include",
+    ],
+    recovery_available: true,
+}

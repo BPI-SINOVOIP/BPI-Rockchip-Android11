@@ -1,0 +1,32 @@
+nuget {
+    nuspec {
+        id = rxcpp;
+        version : 4.0.0;
+        title: Reactive Extensions for C++;
+        authors: {Microsoft Open Technologies Inc.};
+        owners: {Microsoft Open Technologies Inc.};
+        licenseUrl: "https://github.com/Reactive-Extensions/RxCpp/blob/master/license.md";
+        projectUrl: "https://github.com/Reactive-Extensions/RxCpp";
+        iconUrl: "http://go.microsoft.com/fwlink/?LinkId=261274";
+        requireLicenseAcceptance:false;
+        summary: "The Reactive Extensions (Rx) asynchronous algorithm library";
+        description: @"The Reactive Extensions for C++ (RxCpp) is a library of algorithms for values-distributed-in-time. The Range-v3 library does the same for values-distributed-in-space.
+        Compiles for gcc, clang and VisualStudio on Linux, OSX and Windows.";
+        releaseNotes: "rx lite complete!, bug fixes, breaking changes to make repeat(0) and retry(0), VC2017 support, coroutines support, take_while, is_empty";
+        copyright: Copyright 2016;
+        tags: { RxCpp, RxC++, Rx, Reactive, Observable, Functional, native, nativepackage};
+    };
+
+    files {
+
+        #defines {
+            SDK_RX   = ..\..\;
+        }
+        include: { "${SDK_RX}Rx\v2\src\**\*" };
+        docs: {  ${SDK_RX}AUTHORS.txt, ${SDK_RX}Rx\v2\license.txt, ${SDK_RX}Rx\v2\examples\**\* };
+    }
+
+    targets {
+        Defines += HAS_RXCPP;
+    }
+}
