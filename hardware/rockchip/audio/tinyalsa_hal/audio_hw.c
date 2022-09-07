@@ -988,6 +988,13 @@ static int start_output_stream(struct stream_out *out)
     open_sound_card_policy(out);
 #endif
 
+#ifdef HDMI_SPEAKER_DUAL_OUTPUT
+    if(out->device & AUDIO_DEVICE_OUT_AUX_DIGITAL){
+        out->device |= AUDIO_DEVICE_OUT_SPEAKER;
+        ALOGE("out->device:0x%x,hdmi and spk working together!", out->device);
+    }
+#endif
+
     out_dump(out, 0);
 
 #if SUPPORT_MULTIAUDIO
