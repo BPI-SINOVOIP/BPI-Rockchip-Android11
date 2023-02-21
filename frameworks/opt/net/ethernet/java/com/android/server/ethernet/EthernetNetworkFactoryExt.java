@@ -322,8 +322,8 @@ class EthernetNetworkFactoryExt {
 
     private void startDhcpServer() {
         if (DBG) Log.d(TAG, "startDhcpServer");
-        String startIp = SystemProperties.get("persist.dhcpserver.start", "192.168.1.150");
-        String endIp = SystemProperties.get("persist.dhcpserver.end", "192.168.1.250");
+        String startIp = SystemProperties.get("persist.dhcpserver.start", "172.16.1.150");
+        String endIp = SystemProperties.get("persist.dhcpserver.end", "172.16.1.250");
         String[] dhcpRange = {startIp, endIp};
         try {
             mNMService.tetherInterface(mIface);

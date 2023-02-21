@@ -49,3 +49,5 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/Firmware/TV/rtl8852as_fw:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8852as_fw \
 	$(LOCAL_PATH)/Firmware/TV/rtl8852au_config:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8852au_config \
 	$(LOCAL_PATH)/Firmware/TV/rtl8852au_fw:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8852au_fw \
+	$(LOCAL_PATH)/Firmware/TV/rtl8852bu_config:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8852bu_config \
+        $(LOCAL_PATH)/Firmware/TV/rtl8852bu_fw:$(TARGET_COPY_OUT_VENDOR)/firmware/rtl8852bu_fw \

@@ -40,6 +40,7 @@
 #define MAX_PATCH_SIZE_24K            (1024*24)   //24K
 #define MAX_PATCH_SIZE_25K            (1024*25)   //25K for rtl8822b
 #define MAX_PATCH_SIZE_40K            (1024*40)   //40K
+#define MAX_PATCH_SIZE_65_2K          (0x104D0 + 529)   //65.2K 8852b
 
 #define MAX_ORG_CONFIG_SIZE     (0x100*14)
 #define MAX_ALT_CONFIG_SIZE     (0x100*2)

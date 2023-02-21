@@ -130,6 +130,8 @@ static patch_info fw_patch_table[] = {
 { 0x0BDA, 0xC822, 0x8822, 0, 0, "mp_rtl8822c_fw", "rtl8822c_fw", "rtl8822c_config", NULL, 0 ,CONFIG_MAC_OFFSET_GEN_4PLUS, MAX_PATCH_SIZE_40K}, /* RTL8822CE */
 { 0x0BDA, 0xB00C, 0x8822, 0, 0, "mp_rtl8822c_fw", "rtl8822c_fw", "rtl8822c_config", NULL, 0 ,CONFIG_MAC_OFFSET_GEN_4PLUS, MAX_PATCH_SIZE_40K}, /* RTL8822CE */
 { 0x0BDA, 0xC123, 0x8822, 0, 0, "mp_rtl8822c_fw", "rtl8822c_fw", "rtl8822c_config", NULL, 0 ,CONFIG_MAC_OFFSET_GEN_4PLUS, MAX_PATCH_SIZE_40K}, /* RTL8822CE */
+{ 0x0BDA, 0xB852, 0x8852, 0, 0, "mp_rtl8852bu_fw", "rtl8852bu_fw", "rtl8852bu_config", NULL, 0 ,CONFIG_MAC_OFFSET_GEN_4PLUS, MAX_PATCH_SIZE_40K}, /*RTL8852BU */
+{ 0x0BDA, 0xB85B, 0x8852, 0, 0, "mp_rtl8852bu_fw", "rtl8852bu_fw", "rtl8852bu_config", NULL, 0 ,CONFIG_MAC_OFFSET_GEN_4PLUS, MAX_PATCH_SIZE_40K}, /*RTL8852BE */
 /* NOTE: must append patch entries above the null entry */
 { 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0 }
 };
