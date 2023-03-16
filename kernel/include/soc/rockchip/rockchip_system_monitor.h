@@ -11,6 +11,14 @@ enum monitor_dev_type {
 	MONITOR_TPYE_DEV,	/* GPU, NPU, DMC, and so on */
 };
 
+enum system_monitor_event_type {
+	SYSTEM_MONITOR_CHANGE_TEMP = 0,
+};
+
+struct system_monitor_event_data {
+	int temp;
+};
+
 struct volt_adjust_table {
 	unsigned int min;	/* Minimum frequency in MHz */
 	unsigned int max;	/* Maximum frequency in MHz */
@@ -132,6 +140,8 @@ rockchip_system_monitor_adjust_cdev_state(struct thermal_cooling_device *cdev,
 					  int temp, unsigned long *state);
 int rockchip_monitor_opp_set_rate(struct monitor_dev_info *info,
 				  unsigned long target_freq);
+int rockchip_system_monitor_register_notifier(struct notifier_block *nb);
+void rockchip_system_monitor_unregister_notifier(struct notifier_block *nb);
 #else
 static inline struct monitor_dev_info *
 rockchip_system_monitor_register(struct device *dev,
@@ -188,6 +198,16 @@ static inline int rockchip_monitor_opp_set_rate(struct monitor_dev_info *info,
 {
 	return 0;
 }
+static inline int
+rockchip_system_monitor_register_notifier(struct notifier_block *nb)
+{
+	return 0;
+};
+
+static inline void
+rockchip_system_monitor_unregister_notifier(struct notifier_block *nb)
+{
+};
 #endif /* CONFIG_ROCKCHIP_SYSTEM_MONITOR */
 
 #endif
