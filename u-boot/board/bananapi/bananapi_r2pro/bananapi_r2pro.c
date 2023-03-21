@@ -127,7 +127,7 @@ char *get_board_variant(void)
 		case BANANAPI_R2PRO_LCD3:
 			return "r2pro-lcd3";
 		default:
-			return "r2pro";
+			return "r2pro-hdmi";
 	}
 }
 

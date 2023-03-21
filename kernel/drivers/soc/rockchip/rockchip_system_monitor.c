@@ -84,6 +84,7 @@ static LIST_HEAD(monitor_dev_list);
 static struct system_monitor *system_monitor;
 static atomic_t monitor_in_suspend;
 
+static BLOCKING_NOTIFIER_HEAD(system_monitor_notifier_list);
 static BLOCKING_NOTIFIER_HEAD(system_status_notifier_list);
 
 int rockchip_register_system_status_notifier(struct notifier_block *nb)
@@ -1167,6 +1168,30 @@ void rockchip_system_monitor_unregister(struct monitor_dev_info *info)
 }
 EXPORT_SYMBOL(rockchip_system_monitor_unregister);
 
+int rockchip_system_monitor_register_notifier(struct notifier_block *nb)
+{
+	return blocking_notifier_chain_register(&system_monitor_notifier_list, nb);
+}
+EXPORT_SYMBOL(rockchip_system_monitor_register_notifier);
+
+void rockchip_system_monitor_unregister_notifier(struct notifier_block *nb)
+{
+	blocking_notifier_chain_unregister(&system_monitor_notifier_list, nb);
+}
+EXPORT_SYMBOL(rockchip_system_monitor_unregister_notifier);
+
+static int rockchip_system_monitor_temp_notify(int temp)
+{
+	struct system_monitor_event_data event_data;
+	int ret;
+
+	event_data.temp = temp;
+	ret = blocking_notifier_call_chain(&system_monitor_notifier_list,
+					   SYSTEM_MONITOR_CHANGE_TEMP,
+					   (void *)&event_data);
+
+	return notifier_to_errno(ret);
+}
 static int rockchip_system_monitor_parse_dt(struct system_monitor *monitor)
 {
 	struct device_node *np = monitor->dev->of_node;
@@ -1277,6 +1302,8 @@ static void rockchip_system_monitor_thermal_update(void)
 	if (temp < last_temp && last_temp - temp <= 2000)
 		goto out;
 	last_temp = temp;
+
+	rockchip_system_monitor_temp_notify(temp);
 
 	down_read(&mdev_list_sem);
 	list_for_each_entry(info, &monitor_dev_list, node)

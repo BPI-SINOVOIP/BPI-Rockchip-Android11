@@ -332,10 +332,10 @@ Return<::rockchip::hardware::neuralnetworks::V1_0::ErrorStatus> RKNeuralnetworks
 
     if (mem != nullptr) {
         if (mem->flags & RKNN_TENSOR_MEMORY_FLAGS_ALLOC_INSIDE) {
-            rknn_destory_mem(context, mem);            
+            rknn_destroy_mem(context, mem);
             mem = nullptr;
         } else {
-            rknn_destory_mem(context, mem);
+            rknn_destroy_mem(context, mem);
             if (mem->fd >= 0) {
                 close(mem->fd);
             }

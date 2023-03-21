@@ -52,3 +52,6 @@ BOARD_HAVE_OPENGAPPS := false
 #ifeq ($(PRODUCT_USE_DYNAMIC_PARTITIONS), true)
 #    BOARD_SUPER_PARTITION_SIZE := 5169676288
 #endif
+
+# support emmc,sd boot
+PRODUCT_BOOT_DEVICE := fe310000.sdhci,fe2b0000.dwmmc

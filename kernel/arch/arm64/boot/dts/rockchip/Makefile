@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 
 ifeq ($(CONFIG_ARCH_BANANAPI_R2PRO),y)
-dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3568-bananapi-r2pro.dtb \
-	rk3568-bananapi-r2pro-hdmi.dtb \
+dtb-$(CONFIG_ARCH_ROCKCHIP) += 	rk3568-bananapi-r2pro-hdmi.dtb \
 	rk3568-bananapi-r2pro-lcd0.dtb \
 	rk3568-bananapi-r2pro-lcd1.dtb \
 	rk3568-bananapi-r2pro-lcd2.dtb \

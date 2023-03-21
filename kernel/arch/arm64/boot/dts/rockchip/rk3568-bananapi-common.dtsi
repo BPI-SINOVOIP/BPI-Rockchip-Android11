@@ -15,12 +15,18 @@
 	fan: pwm-fan {
 		compatible = "pwm-fan";
 		status = "disabled";
-		pwms = <&pwm8 0 10000 0>;
-		cooling-min-state = <0>;
-		cooling-max-state = <3>;
 		#cooling-cells = <2>;
-		cooling-levels = <0 102 170 230>;
-        };
+		pwms = <&pwm8 0 50000 0>;
+
+		cooling-levels = <0 50 100 150 200 255>;
+		rockchip,temp-trips = <
+			50000   1
+			55000   2
+			60000   3
+			65000   4
+			70000   5
+		>;
+	};
 
 	adc_keys: adc-keys {
 		compatible = "adc-keys";
@@ -1399,6 +1405,7 @@
 };
 
 &rkvdec {
+	vdec-supply = <&vdd_logic>;
 	status = "okay";
 };
 
