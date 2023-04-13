@@ -53,5 +53,7 @@ BOARD_HAVE_OPENGAPPS := false
 #    BOARD_SUPER_PARTITION_SIZE := 5169676288
 #endif
 
+BOARD_WITH_SPECIAL_PARTITIONS := baseparameter:1M,logo:16M
+
 # support emmc,sd boot
 PRODUCT_BOOT_DEVICE := fe310000.sdhci,fe2b0000.dwmmc
